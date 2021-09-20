@@ -16,13 +16,273 @@
         
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item dropdown">
-              <a class="navbar-brand" href="inicio.php"><img src="images/sighersa_logo.png" height="38" width="45"/></a>
+              <a class="navbar-brand" href="inicio.php"><img src="images/marca_logo.png" height="38" width="45"/></a>
             </li>
             <li class="nav-item dropdown">
               <a class="navbar-brand" href="inicio.php">'.$config->nombre.'</a>
             </li>';
             
 
+            $permisos_usuario=$usuario->usuario_ver+$usuario->usuario_agregar;
+            if($permisos_usuario>0){
+              echo '
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Reservaciones
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+                    if($usuario->usuario_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_usuarios()" >Ver Reservaciones</a>';
+                    }
+                    if($usuario->usuario_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_usuarios()">Agregar Reservacion</a>';
+                    }
+                    echo '
+                  </div>
+                </li>';
+            }
+
+            $permisos_usuario=$usuario->usuario_ver+$usuario->usuario_agregar;
+            if($permisos_usuario>0){
+              echo '
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Usuario
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+                    if($usuario->usuario_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_usuarios()" >Ver Usuarios</a>';
+                    }
+                    if($usuario->usuario_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_usuarios()">Agregar Usuario</a>';
+                    }
+                    echo '
+                  </div>
+                </li>';
+            }
+
+            $permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->desperdicio_entrada_ver+$usuario->desperdicio_entrada_agregar+$usuario->desperdicio_salida_ver+$usuario->desperdicio_salida_agregar+$usuario->requisicion_ver+$usuario->requisicion_agregar+$usuario->salida_ver+$usuario->salida_agregar+$usuario->regreso_ver+$usuario->regreso_agregar;
+            if($permisos_inventario>0){
+              echo '
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Inventario
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+                    if($usuario->inventario_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_inventario()">Ver Inventario</a>';
+                    }
+                    if($usuario->inventario_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_inventario()">Agregar Inventario</a>';
+                    }
+                    $permisos_productos=$usuario->inventario_ver+$usuario->inventario_agregar;
+                    $permisos_requisicion=$usuario->requisicion_ver+$usuario->requisicion_agregar;
+                    if($permisos_productos>0 AND $permisos_requisicion>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->requisicion_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_requisiciones()" >Ver Requisiciones</a>';
+                    }
+                    if($usuario->requisicion_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_requisiciones()">Agregar Requisicion</a>';
+                    }
+                    $permisos_salida=$usuario->salida_ver+$usuario->salida_agregar;
+                    if($permisos_requisicion>0 AND $permisos_salida>0 OR $permisos_productos>0 AND $permisos_salida>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->salida_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_salidas()" >Ver Salidas</a>';
+                    }
+                    if($usuario->salida_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_salidas()">Agregar Salida</a>';
+                    }
+                    if($usuario->salida_aprobar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="aprobar_salidas()">Aprobar Salida</a>';
+                    }
+                    $permisos_regreso=$usuario->regreso_ver+$usuario->regreso_agregar;
+                    if($permisos_salida>0 AND $permisos_regreso OR $permisos_requisicion>0 AND $permisos_regreso>0 OR $permisos_productos>0 AND $permisos_regreso>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->regreso_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_regresos()" >Ver Regresos</a>';
+                    }
+                    if($usuario->regreso_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_regresos(0)">Agregar Regreso</a>';
+                    }
+                    $permisos_herramienta=$usuario->herramienta_ver+$usuario->herramienta_agregar;
+                    if($permisos_regreso>0 AND $permisos_herramienta OR $permisos_salida>0 AND $permisos_herramienta>0 OR $permisos_requisicion>0 AND $permisos_herramienta>0 OR $permisos_productos>0 AND $permisos_herramienta>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->herramienta_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_herramientas()" >Ver Herramientas</a>';
+                    }
+                    if($usuario->herramienta_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_herramientas()">Agregar Herramienta</a>';
+                    }
+                    $permisos_desperdicios_entrada=$usuario->desperdicio_entrada_ver+$usuario->desperdicio_entrada_agregar;
+                    if($permisos_herramienta>0 AND $permisos_desperdicios_entrada>0 OR $permisos_regreso>0 AND $permisos_desperdicios_entrada>0 OR $permisos_salida>0 AND $permisos_desperdicios_entrada>0 OR $permisos_requisicion>0 AND $permisos_desperdicios_entrada>0 OR $permisos_productos>0 AND $permisos_desperdicios_entrada>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->desperdicio_entrada_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_desperdicios_entrada()">Ver Entrada Desperdicios</a>';
+                    }
+                    if($usuario->desperdicio_entrada_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_desperdicios_entrada()">Agregar Entrada Desperdicio</a>';
+                    }
+                    $permisos_desperdicios_salida=$usuario->desperdicio_salida_ver+$usuario->desperdicio_salida_agregar;
+                    if($permisos_desperdicios_entrada>0 AND $permisos_desperdicios_salida>0 OR $permisos_herramienta>0 AND $permisos_desperdicios_salida>0 OR $permisos_regreso>0 AND $permisos_desperdicios_salida>0 OR $permisos_salida>0 AND $permisos_desperdicios_salida>0 OR $permisos_requisicion>0 AND $permisos_desperdicios_salida>0 OR $permisos_productos>0 AND $permisos_desperdicios_salida>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->desperdicio_salida_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_desperdicios_salida()">Ver Salida Desperdicios</a>';
+                    }
+                    if($usuario->desperdicio_salida_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_desperdicios_salida()">Agregar Salida Desperdicio</a>';
+                    }
+                    echo '
+                  </div>
+                </li>';
+            }
+
+            $permisos_empresa=$usuario->cliente_ver+$usuario->cliente_agregar+$usuario->proveedor_ver+$usuario->proveedor_agregar+$usuario->necesidades_ver+$usuario->necesidades_agregar+$usuario->necesidades_ver+$usuario->necesidades_agregar;
+            if($permisos_empresa>0){
+              echo '
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cliente
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+                    if($usuario->cliente_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_clientes()" >Ver Clientes</a>';
+                    }
+                    if($usuario->cliente_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_clientes()">Agregar Cliente</a>';
+                    }
+                    $permisos_cliente=$usuario->cliente_ver+$usuario->cliente_agregar;
+                    $permisos_proveedor=$usuario->proveedor_ver+$usuario->proveedor_agregar;
+                    if($permisos_cliente>0 AND $permisos_proveedor>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->proveedor_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_proveedores()" >Ver Proveedores</a>';
+                    }
+                    if($usuario->proveedor_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_proveedores()">Agregar Proveedor</a>';
+                    }
+                    $permisos_necesidades=$usuario->necesidades_ver+$usuario->necesidades_agregar;
+                    if($permisos_proveedor>0 AND $permisos_necesidades>0 OR $permisos_cliente>0 AND $permisos_necesidades>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->necesidades_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_necesidades()" >Ver Requerimientos</a>';
+                    }
+                    if($usuario->necesidades_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_necesidades()">Agregar Requerimiento</a>';
+                    }
+                    $permisos_cotizaciones=$usuario->cotizaciones_ver+$usuario->cotizaciones_agregar;
+                    if($permisos_necesidades>0 AND $permisos_cotizaciones>0 OR $permisos_proveedor>0 AND $permisos_cotizaciones>0 OR $permisos_cliente>0 AND $permisos_cotizaciones>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->cotizaciones_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_cotizaciones()" >Ver Cotizaciones</a>';
+                    }
+                    if($usuario->cotizaciones_agregar==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="agregar_cotizaciones(0)">Agregar Cotizacion</a>';
+                    }
+                    echo '
+                  </div> 
+                </li>';
+            }
+
+            $permisos_reporte=$usuario->servicio_ver+$usuario->logs_ver;
+            if($permisos_reporte>0){
+              echo '
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Reportes
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+                    if($usuario->servicio_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_servicios()" >Ver Reportes</a>';
+                    }
+                    $permisos_servicio=$usuario->servicio_ver;
+                    $permisos_logs=$usuario->logs_ver;
+                    if($permisos_servicio>0 AND $permisos_logs>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->logs_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_logs()" >Ver Logs</a>';
+                    }
+                    echo '
+                  </div>
+                </li>';
+            }
+
+            $permisos_reporte=$usuario->servicio_ver+$usuario->logs_ver;
+            if($permisos_reporte>0){
+              echo '
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Informacion
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+                    if($usuario->servicio_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_servicios()" >Ultimo mes</a>';
+                    }
+                    $permisos_servicio=$usuario->servicio_ver;
+                    $permisos_logs=$usuario->logs_ver;
+                    if($permisos_servicio>0 AND $permisos_logs>0){
+                      echo '   
+                      <div class="dropdown-divider"></div>';
+                    }
+                    if($usuario->logs_ver==1){
+                      echo '
+                      <a class="dropdown-item" href="#" onclick="ver_logs()" >Empresa</a>';
+                    }
+                    echo '
+                  </div>
+                </li>';
+            }
             echo'</ul>';
 
             echo '
@@ -49,7 +309,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title"><p><a href="#" class="text-primary">Sighersa -> Salir</a></p></h3>
+                    <h3 class="modal-title"><p><a href="#" class="text-primary">Marca -> Salir</a></p></h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div><br>
 
