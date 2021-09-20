@@ -4,5 +4,5 @@
   $servidor="localhost";
   $usuario_servidor="root";
   $password="ORWare1986";
-  $base_datos="screw";
+  $base_datos="visit";
 ?>
