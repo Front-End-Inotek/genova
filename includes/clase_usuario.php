@@ -63,13 +63,22 @@
       public $desperdicio_salida_editar;
       public $desperdicio_salida_borrar;
       public $logs_ver;
+      public $proveedor_ver;
+      public $proveedor_agregar;
+      public $proveedor_editar;
+      public $proveedor_borrar;
+      public $herramienta_ver;
+      public $herramienta_agregar;
+      public $herramienta_editar;
+      public $herramienta_borrar;
+      public $servicio_login;
 
       /*function __construct(){
       }*/
       // Constructor
       function __construct($id_usuario)
       {
-          if($id_usuario==0){
+        if($id_usuario==0){
           $this->id= 0;
           $this->usuario= "Sin/Nombre";
           $this->pass= -1;
@@ -125,10 +134,19 @@
           $this->desperdicio_salida_editar= -1;
           $this->desperdicio_salida_borrar= -1;
           $this->logs_ver= -1;
+          $this->proveedor_ver= -1;
+          $this->proveedor_agregar= -1;
+          $this->proveedor_editar= -1;
+          $this->proveedor_borrar= -1;
+          $this->herramienta_ver= -1;
+          $this->herramienta_agregar= -1;
+          $this->herramienta_editar= -1;
+          $this->herramienta_borrar= -1;
+          $this->servicio_login= -1;
           
-          }else{
+        }else{
           $sentencia = "SELECT * FROM usuario WHERE id = $id_usuario LIMIT 1";
-          //echo $sentencia ;
+         // echo $sentencia ;
           $comentario="Asignación de usuarios a la clase usuario funcion constructor";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
@@ -138,7 +156,7 @@
               $this->usuario= $fila['usuario'];
               $this->pass= $fila['pass'];
               $this->nivel= $fila['nivel'];
-              switch ($fila['nivel']) {
+              switch ($fila['nivel']){
 
                   case 0:
                       $this->nivel_texto='Master';
@@ -219,10 +237,19 @@
               $this->desperdicio_salida_editar= $fila['desperdicio_salida_editar'];
               $this->desperdicio_salida_borrar= $fila['desperdicio_salida_borrar'];
               $this->logs_ver= $fila['logs_ver'];
+              $this->proveedor_ver= $fila['proveedor_ver'];
+              $this->proveedor_agregar= $fila['proveedor_agregar'];
+              $this->proveedor_editar= $fila['proveedor_editar'];
+              $this->proveedor_borrar= $fila['proveedor_borrar'];
+              $this->herramienta_ver= $fila['herramienta_ver'];
+              $this->herramienta_agregar= $fila['herramienta_agregar'];
+              $this->herramienta_editar= $fila['herramienta_editar'];
+              $this->herramienta_borrar= $fila['herramienta_borrar'];
+              $this->servicio_login= $fila['servicio_login'];
               
-              }
-          $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->cliente_ver+$this->cliente_agregar+$this->cliente_editar+$this->cliente_borrar+$this->inventario_ver+$this->inventario_agregar+$this->inventario_editar+$this->inventario_borrar+$this->requisicion_ver+$this->requisicion_agregar+$this->requisicion_editar+$this->requisicion_borrar+$this->salida_ver+$this->salida_agregar+$this->salida_editar+$this->salida_borrar+$this->salida_aprobar+$this->regreso_ver+$this->regreso_agregar+$this->regreso_editar+$this->regreso_borrar+$this->necesidades_ver+$this->necesidades_agregar+$this->necesidades_editar+$this->necesidades_borrar+$this->cotizaciones_ver+$this->cotizaciones_agregar+$this->cotizaciones_editar+$this->cotizaciones_borrar+$this->servicio_ver+$this->desperdicio_entrada_ver+$this->desperdicio_entrada_agregar+$this->desperdicio_entrada_editar+$this->desperdicio_entrada_borrar+$this->desperdicio_salida_ver+$this->desperdicio_salida_agregar+$this->desperdicio_salida_editar+$this->desperdicio_salida_borrar+$this->logs_ver;
           }
+          $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->cliente_ver+$this->cliente_agregar+$this->cliente_editar+$this->cliente_borrar+$this->inventario_ver+$this->inventario_agregar+$this->inventario_editar+$this->inventario_borrar+$this->requisicion_ver+$this->requisicion_agregar+$this->requisicion_editar+$this->requisicion_borrar+$this->salida_ver+$this->salida_agregar+$this->salida_editar+$this->salida_borrar+$this->salida_aprobar+$this->regreso_ver+$this->regreso_agregar+$this->regreso_editar+$this->regreso_borrar+$this->necesidades_ver+$this->necesidades_agregar+$this->necesidades_editar+$this->necesidades_borrar+$this->cotizaciones_ver+$this->cotizaciones_agregar+$this->cotizaciones_editar+$this->cotizaciones_borrar+$this->servicio_ver+$this->desperdicio_entrada_ver+$this->desperdicio_entrada_agregar+$this->desperdicio_entrada_editar+$this->desperdicio_entrada_borrar+$this->desperdicio_salida_ver+$this->desperdicio_salida_agregar+$this->desperdicio_salida_editar+$this->desperdicio_salida_borrar+$this->logs_ver+$this->proveedor_ver+$this->proveedor_agregar+$this->proveedor_editar+$this->proveedor_borrar+$this->herramienta_ver+$this->herramienta_agregar+$this->herramienta_editar+$this->herramienta_borrar+$this->servicio_login;
+        }  
       }
       // Datos inicio de sesion
       function datos($id){
@@ -284,53 +311,53 @@
       // Guardar un usuario
       function guardar_usuario($usuario,$pass,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion){
           switch ($nivel) {
-              case 0:// guarda nivel master
-                  echo "Este nivel corresponde al master";
-                  break;
+            case 0:// guarda nivel master
+                echo "Este nivel corresponde al master";
+                break;
 
-              case 1:// guarda nivel administrador
-                  $pass=md5($pass);
-                  $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`)
-                  VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
-                  $comentario="Guardamos el usuario en la base de datos";
-                  $consulta= $this->realizaConsulta($sentencia,$comentario);
-                  break;
+            case 1:// guarda nivel administrador
+                $pass=md5($pass);
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
+                $comentario="Guardamos el usuario en la base de datos";
+                $consulta= $this->realizaConsulta($sentencia,$comentario);
+                break;
 
-              case 2:// guarda nivel almacen
-                  $pass=md5($pass);
-                  $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`)
-                  VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1','1', '1', '1', '1', '1', '1', '0', '0', '1', '1', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0');";
-                  $comentario="Guardamos el usuario en la base de datos";
-                  $consulta= $this->realizaConsulta($sentencia,$comentario);
-                  break; 
-                  
-              case 3:// guarda nivel ventas 
-                  $pass=md5($pass);
-                  $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`)
-                  VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
-                  $comentario="Guardamos el usuario en la base de datos";
-                  $consulta= $this->realizaConsulta($sentencia,$comentario); 
-                  break; 
-                  
-              case 4:// guarda nivel compras 
-                  $pass=md5($pass);
-                  $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`)
-                  VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
-                  $comentario="Guardamos el usuario en la base de datos";
-                  $consulta= $this->realizaConsulta($sentencia,$comentario);
-                  break;        
-                  
-              case 5:// guarda nivel tecnico
-                  $pass=md5($pass);
-                  $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`,  `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`)
-                  VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
-                  $comentario="Guardamos el usuario en la base de datos";
-                  $consulta= $this->realizaConsulta($sentencia,$comentario);
-                  break;     
-                  
-              default:
-                  echo "Aun no se encuentra registrado ese nivel de usuario";
-          }                   
+            case 2:// guarda nivel almacen
+                $pass=md5($pass);
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '1', '1', '1', '1', '1', '1', '1', '1', '0');";
+                $comentario="Guardamos el usuario en la base de datos";
+                $consulta= $this->realizaConsulta($sentencia,$comentario);
+                break; 
+                
+            case 3:// guarda nivel ventas 
+                $pass=md5($pass);
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0');";
+                $comentario="Guardamos el usuario en la base de datos";
+                $consulta= $this->realizaConsulta($sentencia,$comentario); 
+                break; 
+                
+            case 4:// guarda nivel compras 
+                $pass=md5($pass);
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0');";
+                $comentario="Guardamos el usuario en la base de datos";
+                $consulta= $this->realizaConsulta($sentencia,$comentario);
+                break;        
+                
+            case 5:// guarda nivel tecnico
+                $pass=md5($pass);
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`,  `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
+                $comentario="Guardamos el usuario en la base de datos";
+                $consulta= $this->realizaConsulta($sentencia,$comentario);
+                break;     
+                
+            default:
+                echo "Aun no se encuentra registrado ese nivel de usuario";
+        }                 
       }
       // Mostramos el nivel del usuario
       function mostrar_nivel($id){
@@ -454,11 +481,10 @@
           echo ' </ul>';
       }
       // Editar un usuario
-      function editar_usuario($id,$usuario,$pass,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$cliente_ver,$cliente_agregar,$cliente_editar,$cliente_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$requisicion_ver,$requisicion_agregar,$requisicion_editar,$requisicion_borrar,$salida_ver,$salida_agregar,$salida_editar,$salida_borrar,$salida_aprobar,$regreso_ver,$regreso_agregar,$regreso_editar,$regreso_borrar,$necesidades_ver,$necesidades_agregar,$necesidades_editar,$necesidades_borrar,$cotizaciones_ver,$cotizaciones_agregar,$cotizaciones_editar,$cotizaciones_borrar,$servicio_ver,$desperdicio_entrada_ver,$desperdicio_entrada_agregar,$desperdicio_entrada_editar,$desperdicio_entrada_borrar,$desperdicio_salida_ver,$desperdicio_salida_agregar,$desperdicio_salida_editar,$desperdicio_salida_borrar,$logs_ver){
-        $pass=md5($pass);
+      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$cliente_ver,$cliente_agregar,$cliente_editar,$cliente_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$requisicion_ver,$requisicion_agregar,$requisicion_editar,$requisicion_borrar,$salida_ver,$salida_agregar,$salida_editar,$salida_borrar,$salida_aprobar,$regreso_ver,$regreso_agregar,$regreso_editar,$regreso_borrar,$necesidades_ver,$necesidades_agregar,$necesidades_editar,$necesidades_borrar,$cotizaciones_ver,$cotizaciones_agregar,$cotizaciones_editar,$cotizaciones_borrar,$servicio_ver,$desperdicio_entrada_ver,$desperdicio_entrada_agregar,$desperdicio_entrada_editar,$desperdicio_entrada_borrar,$desperdicio_salida_ver,$desperdicio_salida_agregar,$desperdicio_salida_editar,$desperdicio_salida_borrar,$logs_ver,$proveedor_ver,$proveedor_agregar,$proveedor_editar,$proveedor_borrar,$herramienta_ver,$herramienta_agregar,$herramienta_editar,$herramienta_borrar,$servicio_login){
+        //$pass=md5($pass);
         $sentencia = "UPDATE `usuario` SET
             `usuario` = '$usuario',
-            `pass` = '$pass',
             `nivel` = '$nivel',
             `nombre_completo` = '$nombre_completo',
             `puesto` = '$puesto',
@@ -507,7 +533,16 @@
             `desperdicio_salida_agregar` = '$desperdicio_salida_agregar',
             `desperdicio_salida_editar` = '$desperdicio_salida_editar',
             `desperdicio_salida_borrar` = '$desperdicio_salida_borrar',
-            `logs_ver` = '$logs_ver'
+            `logs_ver` = '$logs_ver',
+            `proveedor_ver` = '$proveedor_ver',
+            `proveedor_agregar` = '$proveedor_agregar',
+            `proveedor_editar` = '$proveedor_editar',
+            `proveedor_borrar` = '$proveedor_borrar',
+            `herramienta_ver` = '$herramienta_ver',
+            `herramienta_agregar` = '$herramienta_agregar',
+            `herramienta_editar` = '$herramienta_editar',
+            `herramienta_borrar` = '$herramienta_borrar',
+            `servicio_login` = '$servicio_login'
             WHERE `id` = '$id';";
         //echo $sentencia ;
         $comentario="Editar usuario dentro de la base de datos ";
@@ -541,11 +576,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          if($id==$fila['id']){
-              echo '  <option value="'.$fila['id'].'" selected>'.$fila['usuario'].'</option>';
-          }else{
-              echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
-          }
+          echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
         }
         return $consulta;
       }
@@ -557,11 +588,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          if($id==$fila['id']){
-              echo '  <option value="'.$fila['id'].'" selected>'.$fila['usuario'].'</option>';
-          }else{
-              echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
-          }
+          echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
         }
         return $consulta;
       }
@@ -588,11 +615,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          if($id==$fila['id']){
-              echo '  <option value="'.$fila['id'].'" selected>'.$fila['usuario'].'</option>';
-          }else{
-              echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
-          }
+          echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
         }
         return $consulta;
       }  
