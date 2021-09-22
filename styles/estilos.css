@@ -2,7 +2,7 @@
 /* The side navigation menu */
 .sidenav {
   height: 100%; /* 100% Full-height */
-  width: 11.5%; /* 0 width - change this with JavaScript */
+  width: 1%; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
   top: 0;
@@ -46,6 +46,7 @@
 }
 body {
 overflow-x: hidden;
+background-color: rgb(235, 235, 235);
 }
 
 /* Add a black background color to the top navigation */
@@ -82,4 +83,13 @@ overflow-x: hidden;
 }
 .nav-link[data-toggle]:not(.collapsed):after {
   content: " ▴";
+}
+
+.table-primary-encabezado {
+  color: white;
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: bolder;
+  background-color: rgb(40, 117, 240);
+  border-top-style: none;
 }

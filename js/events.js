@@ -139,30 +139,21 @@ function agregar_tipos(id){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_tipos.php?id="+id); 
-    $(".navbar-collapse").collapse('hide');
+	document.getElementById("sideNavigation").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
 }
 
-// Guardar una herramienta
-function guardar_herramienta(){
+// Guardar un tipo
+function guardar_tipo(){
     var id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
-    var marca= encodeURI(document.getElementById("marca").value);
-	var modelo= encodeURI(document.getElementById("modelo").value);
-	var descripcion= encodeURI(document.getElementById("descripcion").value);
-    var cantidad_almacen= document.getElementById("cantidad_almacen").value;
-    var cantidad_prestadas= document.getElementById("cantidad_prestadas").value;
 	
 
-	if(nombre.length >0 && marca.length >0 && modelo.length >0  && cantidad_almacen >=0 && cantidad_prestadas >=0){
-			//$('#boton_herramienta').hide();
-			$("#boton_herramienta").html('<div class="spinner-border text-primary"></div>');
+	if(nombre.length >0){
+			//$('#boton_tipo').hide();
+			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 				  "nombre": nombre,
-				  "marca": marca,
-                  "modelo": modelo,
-			      "descripcion": descripcion,
-                  "cantidad_almacen": cantidad_almacen,
-                  "cantidad_prestadas": cantidad_prestadas,
                   "id": id,
 				};
 			$.ajax({
@@ -170,10 +161,10 @@ function guardar_herramienta(){
 				  type: "POST",
 				  dataType: "html",
 				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_herramienta.php",
+				  url:"includes/guardar_tipo.php",
 				  data:datos,
 				  beforeSend:loaderbar,
-				  success:ver_herramientas,
+				  success:ver_tipos,
 				  timeout:5000,
 				  error:problemas_sistema
 				});
@@ -183,20 +174,19 @@ function guardar_herramienta(){
 			}
 }
 
-// Muestra las herramientas de la bd
-function ver_herramientas(){
+// Muestra las tipos de la bd
+function ver_tipos(){
     var id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_herramientas.php?id="+id);
+	$("#area_trabajo_menu").load("includes/ver_tipos.php?id="+id);
     $(".navbar-collapse").collapse('hide');
 }
 
-// Muestra la paginacion de las herramientas
-function ver_herramientas_paginacion(buton,posicion){
-    //alert(id);
+// Muestra la paginacion de las tipos
+function ver_tipos_paginacion(buton,posicion){
     var id=localStorage.getItem("id");
-    $("#paginacion_herramientas").load("includes/ver_herramientas_paginacion.php?posicion="+posicion+"&id="+id);   
+    $("#paginacion_tipos").load("includes/ver_tipos_paginacion.php?posicion="+posicion+"&id="+id);   
 }
 
 // Barra de diferentes busquedas en ver herramientas
