@@ -120,3 +120,22 @@ function problemas_sistema(datos){
 	alert("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
 }
 
+
+
+function openNav() {
+    document.getElementById("sideNavigation").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("sideNavigation").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
+
+// Agregar un usuario
+function agregar_usuarios(id){
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_usuarios.php?id="+id); 
+    $(".navbar-collapse").collapse('hide');
+}
