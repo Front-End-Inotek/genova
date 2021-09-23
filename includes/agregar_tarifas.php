@@ -9,7 +9,7 @@
           <div class="col-sm-3" >Nombre:</div>
           <div class="col-sm-9" >
           <div class="form-group">
-            <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el nombre de habitacion" maxlength="90">
+            <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el nombre de la habitacion" maxlength="90">
           </div>
           </div>
         </div>
