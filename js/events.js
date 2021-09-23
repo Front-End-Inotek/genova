@@ -174,29 +174,11 @@ function guardar_tipo(){
 
 // Muestra las tipos de habitaciones de la bd
 function ver_tipos(){
-    var usuario_id=localStorage.getItem("id");
+	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
 	closeNav();
-}
-
-// Muestra la paginacion de los tipos de habitaciones
-function ver_tipos_paginacion(buton,posicion){
-    var usuario_id=localStorage.getItem("id");
-    $("#paginacion_tipos").load("includes/ver_tipos_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
-}
-
-// Barra de diferentes busquedas en ver herramientas
-function buscar_herramienta(){
-    var a_buscar=encodeURIComponent($("#a_buscar").val());
-    var usuario_id=localStorage.getItem("id");
-    if(a_buscar.length >0){
-        $('.pagination').hide();
-    }else{
-        $('.pagination').show();
-    }
-	$("#tabla_herramienta").load("includes/buscar_herramienta.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
 
 // Editar un tipo de habitacion
@@ -237,12 +219,6 @@ function modificar_tipo(id){
     }    
 }
 
-// Generar reporte de un tipo de habitacion
-function reporte_herramienta(){
-	var id=localStorage.getItem("id");
-    window.open("includes/reporte_herramienta.php?id="+id);
-}
-
 // Borrar un tipo de habitacion
 function borrar_tipo(id){
     var usuario_id=localStorage.getItem("id");
@@ -279,4 +255,153 @@ function regresar_editar_tipo(){
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
+}
+
+// Agregar una tarifa de habitacion
+function agregar_tarifas(id){
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_tarifas.php?id="+id); 
+	closeNav();
+}
+
+// Guardar un tarifa de habitacion
+function guardar_tarifa(){
+    var usuario_id=localStorage.getItem("id");
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	
+
+	if(nombre.length >0){
+			//$('#boton_tarifa').hide();
+			$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
+			var datos = {
+				  "nombre": nombre,
+                  "usuario_id": usuario_id,
+				};
+			$.ajax({
+				  async:true,
+				  type: "POST",
+				  dataType: "html",
+				  contentType: "application/x-www-form-urlencoded",
+				  url:"includes/guardar_tarifa.php",
+				  data:datos,
+				  beforeSend:loaderbar,
+				  success:ver_tarifas,
+				  timeout:5000,
+				  error:problemas_sistema
+				});
+				return false;
+			}else{
+				alert("Campos incompletos");
+			}
+}
+
+// Muestra las tarifas de habitaciones de la bd
+function ver_tarifas(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_tarifas.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
+// Editar un tarifa de habitacion
+function editar_tarifa(id){
+    $("#area_trabajo_menu").load("includes/editar_tarifa.php?id="+id);
+}
+
+// Editar un tarifa de habitacion
+function modificar_tarifa(id){
+	var usuario_id=localStorage.getItem("id");
+    var nombre= encodeURI(document.getElementById("nombre").value);
+
+
+    if(id >0){
+        //$('#boton_tarifa').hide();
+			$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+              "id": id,
+              "nombre": nombre,
+              "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/aplicar_editar_tarifa.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:ver_tarifas,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }    
+}
+
+// Borrar un tarifa de habitacion
+function borrar_tarifa(id){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+    if (id >0) {
+        var datos = {
+                "id": id,
+                "usuario_id": usuario_id,
+            };
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/borrar_tarifa.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:ver_tarifas,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }
+}
+
+// Modal de borrar un tarifa de habitacion
+function aceptar_borrar_tarifa(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_tarifa.php?id="+id);
+}
+
+// Regresar a la pagina anterior de editar un tarifa de habitacion
+function regresar_editar_tarifa(){
+    var usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_tarifas.php?usuario_id="+usuario_id);
+}
+
+//
+// Muestra la paginacion de los tarifas de habitaciones
+function ver_tarifas_paginacion(buton,posicion){
+    var usuario_id=localStorage.getItem("id");
+    $("#paginacion_tarifas").load("includes/ver_tarifas_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+}
+
+// Generar reporte de un tarifa de habitacion
+function reporte_herramienta(){
+	var id=localStorage.getItem("id");
+    window.open("includes/reporte_herramienta.php?id="+id);
+}
+
+// Barra de diferentes busquedas en ver herramientas
+function buscar_herramienta(){
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var usuario_id=localStorage.getItem("id");
+    if(a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_herramienta").load("includes/buscar_herramienta.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }

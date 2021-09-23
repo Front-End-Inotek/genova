@@ -78,14 +78,14 @@
                                         if($usuario->tarifa_ver==1){
                                           echo '
                                           <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_tarifas()">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Tarifas</a>
                                           </li>';
                                         }
                                         if($usuario->tarifa_agregar==1){
                                           echo '
                                           <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_tarifas()">
                                                   <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Tarifa</a>
                                           </li>';
                                         }
@@ -105,14 +105,14 @@
                                         if($usuario->hab_ver==1){
                                           echo '
                                           <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_hab()">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Habitaciones</a>
                                           </li>';
                                         }
                                         if($usuario->hab_agregar==1){
                                           echo '
                                           <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_hab()">
                                                   <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Habitacion</a>
                                           </li>';
                                         }
