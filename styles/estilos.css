@@ -78,9 +78,11 @@ background-color: rgb(235, 235, 235);
   color: white;
 }
 
+/* Estilos fuera de sidebar */
 .nav-link[data-toggle].collapsed:after {
   content: " ▾";
 }
+
 .nav-link[data-toggle]:not(.collapsed):after {
   content: " ▴";
 }
@@ -90,7 +92,7 @@ background-color: rgb(235, 235, 235);
   font-size: 15px;
   font-family: sans-serif;
   font-weight: bolder;
-  background-color: rgb(40, 117, 240);
+  background-color: rgb(90, 145, 235);
   border-top-style: none;
 }
 

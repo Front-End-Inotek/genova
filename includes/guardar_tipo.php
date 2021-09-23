@@ -5,6 +5,6 @@
   $tipo= NEW Tipo(0);
   $logs = NEW Log(0);
   $tipo->guardar_tipo(urldecode($_POST['nombre']));
-  $logs->guardar_log($_POST['id'],"Agregar tipo de habitacion: ". urldecode($_POST['nombre']));
+  $logs->guardar_log($_POST['usuario_id'],"Agregar tipo de habitacion: ". urldecode($_POST['nombre']));
 ?>
 

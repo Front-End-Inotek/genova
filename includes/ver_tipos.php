@@ -8,12 +8,12 @@
           <div class="col-sm-12 text-center"><h2 class="text-dark">TIPOS DE HABITACIONES</h2></div>
           
           <div class="row">
-            <div class="col-sm-4 text-center"><input type="text" id="a_buscar" placeholder="Buscar en tiposs" onkeyup="buscar_tipo()" class="color_black form-control form-control-lg" autofocus="autofocus"/></div>
+            <div class="col-sm-4 text-center"><input type="text" id="a_buscar" placeholder="Buscar en tipos" onkeyup="buscar_tipo()" class="color_black form-control form-control-lg" autofocus="autofocus"/></div>
             <div class="col-sm-4 text-center"></div>
-            <div class="col-sm-4 text-center"><button onclick="reporte_tipo()" class="btn btn-primary btn-lg" >Reporte de Tipo</button></div>
+            <div class="col-sm-4 text-center"><button onclick="reporte_tipo()" class="btn btn-primary" >Reporte de Tipo</button></div>
           </div></br>
           <div id="paginacion_tipos">';
-          $cat_paginas = $tipo->mostrar(1,$_GET['id']);
+          $cat_paginas = $tipo->mostrar(1,$_GET['usuario_id']);
   echo '
           </div>
          </div>';

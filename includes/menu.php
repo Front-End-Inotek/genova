@@ -34,27 +34,28 @@
                 }
           }*/
      
-                  $permisos_habitaciones=1;
+                  $permisos_habitaciones=$usuario->tipo_ver+$usuario->tipo_agregar+$usuario->tarifa_ver+$usuario->tarifa_agregar+$usuario->hab_ver+$usuario->hab_agregar;
                   if($permisos_habitaciones>0){
                     echo '
                     <a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="fa fa-table"></i> <span class="d-none d-sm-inline">Habitaciones</span></a>
                       <div class="collapse" id="submenu1" aria-expanded="false">
                         <ul class="flex-column pl-2 nav">';
 
-                          if($permisos_habitaciones>0){
+                          $permisos_tipo=$usuario->tipo_ver+$usuario->tipo_agregar;
+                          if($permisos_tipo>0){
                             echo '
                             <li class="nav-item">
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1"><span>Tipo</span></a>
                                 <div class="collapse" id="submenu1sub1" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
-                                        if($usuario->usuario_ver==1){
+                                        if($usuario->tipo_ver==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="ver_tipos()">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Tipos</a>
                                           </li>';
                                         }
-                                        if($usuario->usuario_ver==1){
+                                        if($usuario->tipo_agregar==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_tipos()">
@@ -67,21 +68,21 @@
                             </li>'; 
                           }
 
-                          $permisos_habitaciones=1;
-                          if($permisos_habitaciones>0){
+                          $permisos_tarifa=$usuario->tarifa_ver+$usuario->tarifa_agregar;
+                          if($permisos_tarifa>0){
                             echo '
                             <li class="nav-item">
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu1sub2" data-toggle="collapse" data-target="#submenu1sub2"><span>Tarifa</span></a>
                                 <div class="collapse" id="submenu1sub2" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
-                                        if($usuario->usuario_ver==1){
+                                        if($usuario->tarifa_ver==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Tarifas</a>
                                           </li>';
                                         }
-                                        if($usuario->usuario_ver==1){
+                                        if($usuario->tarifa_agregar==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#">
@@ -94,21 +95,21 @@
                             </li>'; 
                           }
 
-                          $permisos_habitaciones=1;
-                          if($permisos_habitaciones>0){
+                          $permisos_hab=$usuario->hab_ver+$usuario->hab_agregar;
+                          if($permisos_hab>0){
                             echo '
                             <li class="nav-item">
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu1sub3" data-toggle="collapse" data-target="#submenu1sub3"><span>Habitacion</span></a>
                                 <div class="collapse" id="submenu1sub3" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
-                                        if($usuario->usuario_ver==1){
+                                        if($usuario->hab_ver==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Habitaciones</a>
                                           </li>';
                                         }
-                                        if($usuario->usuario_ver==1){
+                                        if($usuario->hab_agregar==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#">

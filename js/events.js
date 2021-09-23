@@ -64,7 +64,7 @@ function sabernosession(){
 		id=parseInt(id);
 		if(id>0){
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
-			$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);			
+			$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
 		}
 		else{
 			document.location.href='index.php';
@@ -93,7 +93,6 @@ function sabersession(){
 		id=parseInt(id);
 		if(id>0){
 			document.location.href='inicio.php'; 
-
 		}
 	}
 }
@@ -120,32 +119,31 @@ function problemas_sistema(datos){
 	alert("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
 }
 
-
-
-function openNav() {
+// Abre la sidebar
+function openNav(){
     document.getElementById("sideNavigation").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
 }
 
-function closeNav() {
+// Cierra la sidebar
+function closeNav(){
     document.getElementById("sideNavigation").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
 }
 
 //Habitaciones
 
-// Agregar un tipo
+// Agregar un tipo de habitacion
 function agregar_tipos(id){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_tipos.php?id="+id); 
-	document.getElementById("sideNavigation").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
+	closeNav();
 }
 
-// Guardar un tipo
+// Guardar un tipo de habitacion
 function guardar_tipo(){
-    var id=localStorage.getItem("id");
+    var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	
 
@@ -154,7 +152,7 @@ function guardar_tipo(){
 			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 				  "nombre": nombre,
-                  "id": id,
+                  "usuario_id": usuario_id,
 				};
 			$.ajax({
 				  async:true,
@@ -174,71 +172,61 @@ function guardar_tipo(){
 			}
 }
 
-// Muestra las tipos de la bd
+// Muestra las tipos de habitaciones de la bd
 function ver_tipos(){
-    var id=localStorage.getItem("id");
+    var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_tipos.php?id="+id);
-    $(".navbar-collapse").collapse('hide');
+	$("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
+	closeNav();
 }
 
-// Muestra la paginacion de las tipos
+// Muestra la paginacion de los tipos de habitaciones
 function ver_tipos_paginacion(buton,posicion){
-    var id=localStorage.getItem("id");
-    $("#paginacion_tipos").load("includes/ver_tipos_paginacion.php?posicion="+posicion+"&id="+id);   
+    var usuario_id=localStorage.getItem("id");
+    $("#paginacion_tipos").load("includes/ver_tipos_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
 // Barra de diferentes busquedas en ver herramientas
 function buscar_herramienta(){
     var a_buscar=encodeURIComponent($("#a_buscar").val());
-    var id=localStorage.getItem("id");
+    var usuario_id=localStorage.getItem("id");
     if(a_buscar.length >0){
         $('.pagination').hide();
     }else{
         $('.pagination').show();
     }
-	$("#tabla_herramienta").load("includes/buscar_herramienta.php?a_buscar="+a_buscar+"&id="+id);  
+	$("#tabla_herramienta").load("includes/buscar_herramienta.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
 
-// Editar una herramienta
-function editar_herramienta(id){
-    $("#area_trabajo_menu").load("includes/editar_herramienta.php?id="+id);
+// Editar un tipo de habitacion
+function editar_tipo(id){
+    $("#area_trabajo_menu").load("includes/editar_tipo.php?id="+id);
 }
 
-// Editar una herramienta
-function modificar_herramienta(id){
-    var herramienta_id=localStorage.getItem("id");
-	var nombre= encodeURI(document.getElementById("nombre").value);
-    var marca= encodeURI(document.getElementById("marca").value);
-    var modelo= encodeURI(document.getElementById("modelo").value);
-	var descripcion= encodeURI(document.getElementById("descripcion").value);
-    var cantidad_almacen= document.getElementById("cantidad_almacen").value;
-    var cantidad_prestadas= document.getElementById("cantidad_prestadas").value;
-   
+// Editar un tipo de habitacion
+function modificar_tipo(id){
+	var usuario_id=localStorage.getItem("id");
+    var nombre= encodeURI(document.getElementById("nombre").value);
+
 
     if(id >0){
-        //$('#boton_herramienta').hide();
-			$("#boton_herramienta").html('<div class="spinner-border text-primary"></div>');
+        //$('#boton_tipo').hide();
+			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "nombre": nombre,
-			  "marca": marca,
-              "modelo": modelo,
-			  "descripcion": descripcion,
-              "cantidad_almacen": cantidad_almacen,
-              "cantidad_prestadas": cantidad_prestadas,
-              "herramienta_id": herramienta_id,
+              "usuario_id": usuario_id,
             };
         $.ajax({
               async:true,
               type: "POST",
               dataType: "html",
               contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_herramienta.php",
+              url:"includes/aplicar_editar_tipo.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:ver_herramientas,
+              success:ver_tipos,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -249,30 +237,30 @@ function modificar_herramienta(id){
     }    
 }
 
-// Generar reporte de herramienta
+// Generar reporte de un tipo de habitacion
 function reporte_herramienta(){
 	var id=localStorage.getItem("id");
     window.open("includes/reporte_herramienta.php?id="+id);
 }
 
-// Borrar una herramienta
-function borrar_herramienta(id){
-    var herramienta_id=localStorage.getItem("id");
+// Borrar un tipo de habitacion
+function borrar_tipo(id){
+    var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     if (id >0) {
         var datos = {
                 "id": id,
-                "herramienta_id": herramienta_id,
+                "usuario_id": usuario_id,
             };
         $.ajax({
                 async:true,
                 type: "POST",
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_herramienta.php",
+                url:"includes/borrar_tipo.php",
                 data:datos,
                 beforeSend:loaderbar,
-                success:ver_herramientas,
+                success:ver_tipos,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -280,15 +268,15 @@ function borrar_herramienta(id){
     }
 }
 
-// Modal de borrar herramienta
-function aceptar_borrar_herramienta(id){
-	$("#mostrar_herramientas").load("includes/borrar_modal_herramienta.php?id="+id);
+// Modal de borrar un tipo de habitacion
+function aceptar_borrar_tipo(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
 
-// Regresar a la pagina anterior de editar herramienta
-function regresar_editar_herramienta(){
-    var id=localStorage.getItem("id");
+// Regresar a la pagina anterior de editar un tipo de habitacion
+function regresar_editar_tipo(){
+    var usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/ver_herramientas.php?id="+id);
+    $("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
 }

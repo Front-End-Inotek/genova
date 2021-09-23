@@ -4,7 +4,7 @@
   $tipo= NEW Tipo(0);
 
   echo ' <div class="container-fluid">';
-          $cat_paginas = $tipo->mostrar($_GET['posicion'],$_GET['id']);
+          $cat_paginas = $tipo->mostrar($_GET['posicion'],$_GET['usuario_id']);
   echo  '</div>';
  
   //comentario
