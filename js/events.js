@@ -257,7 +257,7 @@ function regresar_editar_tipo(){
     $("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
 }
 
-// Agregar una tarifa de habitacion
+// Agregar una tarifa hospedaje
 function agregar_tarifas(id){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
@@ -265,7 +265,7 @@ function agregar_tarifas(id){
 	closeNav();
 }
 
-// Guardar un tarifa de habitacion
+// Guardar una tarifa hospedaje
 function guardar_tarifa(){
     var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
@@ -296,7 +296,7 @@ function guardar_tarifa(){
 			}
 }
 
-// Muestra las tarifas de habitaciones de la bd
+// Muestra las tarifas hospedaje de la bd
 function ver_tarifas(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
@@ -305,12 +305,12 @@ function ver_tarifas(){
 	closeNav();
 }
 
-// Editar un tarifa de habitacion
+// Editar un tarifa hospedaje
 function editar_tarifa(id){
     $("#area_trabajo_menu").load("includes/editar_tarifa.php?id="+id);
 }
 
-// Editar un tarifa de habitacion
+// Editar un tarifa hospedaje
 function modificar_tarifa(id){
 	var usuario_id=localStorage.getItem("id");
     var nombre= encodeURI(document.getElementById("nombre").value);
@@ -343,7 +343,7 @@ function modificar_tarifa(id){
     }    
 }
 
-// Borrar un tarifa de habitacion
+// Borrar un tarifa hospedaje
 function borrar_tarifa(id){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
@@ -368,12 +368,12 @@ function borrar_tarifa(id){
     }
 }
 
-// Modal de borrar un tarifa de habitacion
+// Modal de borrar un tarifa hospedaje
 function aceptar_borrar_tarifa(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_tarifa.php?id="+id);
 }
 
-// Regresar a la pagina anterior de editar un tarifa de habitacion
+// Regresar a la pagina anterior de editar un tarifa hospedaje
 function regresar_editar_tarifa(){
     var usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
@@ -388,7 +388,7 @@ function ver_tarifas_paginacion(buton,posicion){
     $("#paginacion_tarifas").load("includes/ver_tarifas_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
-// Generar reporte de un tarifa de habitacion
+// Generar reporte de un tarifa hospedaje
 function reporte_herramienta(){
 	var id=localStorage.getItem("id");
     window.open("includes/reporte_herramienta.php?id="+id);
