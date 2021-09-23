@@ -28,50 +28,18 @@
       public $cliente_agregar;
       public $cliente_editar;
       public $cliente_borrar;
-      public $inventario_ver;
-      public $inventario_agregar;
-      public $inventario_editar;
-      public $inventario_borrar;
-      public $requisicion_ver;
-      public $requisicion_agregar;
-      public $requisicion_editar;
-      public $requisicion_borrar;
-      public $salida_ver;
-      public $salida_agregar;
-      public $salida_editar;
-      public $salida_borrar;
-      public $salida_aprobar;
-      public $regreso_ver;
-      public $regreso_agregar;
-      public $regreso_editar;
-      public $regreso_borrar;
-      public $necesidades_ver;
-      public $necesidades_agregar;
-      public $necesidades_editar;
-      public $necesidades_borrar;
-      public $cotizaciones_ver;
-      public $cotizaciones_agregar;
-      public $cotizaciones_editar;
-      public $cotizaciones_borrar;
-      public $servicio_ver;
-      public $desperdicio_entrada_ver;
-      public $desperdicio_entrada_agregar;
-      public $desperdicio_entrada_editar;
-      public $desperdicio_entrada_borrar;
-      public $desperdicio_salida_ver;
-      public $desperdicio_salida_agregar;
-      public $desperdicio_salida_editar;
-      public $desperdicio_salida_borrar;
-      public $logs_ver;
-      public $proveedor_ver;
-      public $proveedor_agregar;
-      public $proveedor_editar;
-      public $proveedor_borrar;
-      public $herramienta_ver;
-      public $herramienta_agregar;
-      public $herramienta_editar;
-      public $herramienta_borrar;
-      public $servicio_login;
+      public $tipo_ver;
+      public $tipo_agregar;
+      public $tipo_editar;
+      public $tipo_borrar;
+      public $tarifa_ver;
+      public $tarifa_agregar;
+      public $tarifa_editar;
+      public $tarifa_borrar;
+      public $hab_ver;
+      public $hab_agregar;
+      public $hab_editar;
+      public $hab_borrar;
 
       /*function __construct(){
       }*/
@@ -99,50 +67,18 @@
           $this->cliente_agregar= -1;
           $this->cliente_editar= -1;
           $this->cliente_borrar= -1;
-          $this->inventario_ver= -1;
-          $this->inventario_agregar= -1;
-          $this->inventario_editar= -1;
-          $this->inventario_borrar= -1;
-          $this->requisicion_ver= -1;
-          $this->requisicion_agregar= -1;
-          $this->requisicion_editar= -1;
-          $this->requisicion_borrar= -1;
-          $this->salida_ver= -1;
-          $this->salida_agregar= -1;
-          $this->salida_editar= -1;
-          $this->salida_borrar= -1;
-          $this->salida_aprobar= -1;
-          $this->regreso_ver= -1;
-          $this->regreso_agregar= -1;
-          $this->regreso_editar= -1;
-          $this->regreso_borrar= -1;
-          $this->necesidades_ver= -1;
-          $this->necesidades_agregar= -1;
-          $this->necesidades_editar= -1;
-          $this->necesidades_borrar= -1;
-          $this->cotizaciones_ver= -1;
-          $this->cotizaciones_agregar= -1;
-          $this->cotizaciones_editar= -1;
-          $this->cotizaciones_borrar= -1;
-          $this->servicio_ver= -1;
-          $this->desperdicio_entrada_ver= -1;
-          $this->desperdicio_entrada_agregar= -1;
-          $this->desperdicio_entrada_editar= -1;
-          $this->desperdicio_entrada_borrar= -1;
-          $this->desperdicio_salida_ver= -1;
-          $this->desperdicio_salida_agregar= -1;
-          $this->desperdicio_salida_editar= -1;
-          $this->desperdicio_salida_borrar= -1;
-          $this->logs_ver= -1;
-          $this->proveedor_ver= -1;
-          $this->proveedor_agregar= -1;
-          $this->proveedor_editar= -1;
-          $this->proveedor_borrar= -1;
-          $this->herramienta_ver= -1;
-          $this->herramienta_agregar= -1;
-          $this->herramienta_editar= -1;
-          $this->herramienta_borrar= -1;
-          $this->servicio_login= -1;
+          $this->tipo_ver= -1;
+          $this->tipo_agregar= -1;
+          $this->tipo_editar= -1;
+          $this->tipo_borrar= -1;
+          $this->tarifa_ver= -1;
+          $this->tarifa_agregar= -1;
+          $this->tarifa_editar= -1;
+          $this->tarifa_borrar= -1;
+          $this->hab_ver= -1;
+          $this->hab_agregar= -1;
+          $this->hab_editar= -1;
+          $this->hab_borrar= -1;
           
         }else{
           $sentencia = "SELECT * FROM usuario WHERE id = $id_usuario LIMIT 1";
@@ -165,20 +101,15 @@
                       $this->nivel_texto='Administrador';
                   break;
                   case 2:
-                      $this->nivel_texto='Almacen';
+                      $this->nivel_texto='Cajera';
                       ;
                   break;
                   case 3:
-                      $this->nivel_texto='Ventas';
+                      $this->nivel_texto='Reservaciones';
 
                   break;
                   case 4:
-                      $this->nivel_texto='Compras';
-
-                  break;
-
-                  case 5:
-                      $this->nivel_texto='Tecnico';
+                      $this->nivel_texto='Ama Llaves';
 
                   break;
                   default:
@@ -202,53 +133,21 @@
               $this->cliente_agregar= $fila['cliente_agregar'];
               $this->cliente_editar= $fila['cliente_editar'];
               $this->cliente_borrar= $fila['cliente_borrar'];
-              $this->inventario_ver= $fila['inventario_ver'];
-              $this->inventario_agregar= $fila['inventario_agregar'];
-              $this->inventario_editar= $fila['inventario_editar'];
-              $this->inventario_borrar= $fila['inventario_borrar'];
-              $this->requisicion_ver=  $fila['requisicion_ver'];
-              $this->requisicion_agregar= $fila['requisicion_agregar'];
-              $this->requisicion_editar= $fila['requisicion_editar'];
-              $this->requisicion_borrar= $fila['requisicion_borrar'];
-              $this->salida_ver= $fila['salida_ver'];
-              $this->salida_agregar= $fila['salida_agregar'];
-              $this->salida_editar= $fila['salida_editar'];
-              $this->salida_borrar= $fila['salida_borrar'];
-              $this->salida_aprobar= $fila['salida_aprobar'];
-              $this->regreso_ver= $fila['regreso_ver'];
-              $this->regreso_agregar= $fila['regreso_agregar'];
-              $this->regreso_editar= $fila['regreso_editar'];
-              $this->regreso_borrar= $fila['regreso_borrar'];
-              $this->necesidades_ver= $fila['necesidades_ver'];
-              $this->necesidades_agregar= $fila['necesidades_agregar'];
-              $this->necesidades_editar= $fila['necesidades_editar'];
-              $this->necesidades_borrar= $fila['necesidades_borrar'];
-              $this->cotizaciones_ver= $fila['cotizaciones_ver'];
-              $this->cotizaciones_agregar= $fila['cotizaciones_agregar'];
-              $this->cotizaciones_editar= $fila['cotizaciones_editar'];
-              $this->cotizaciones_borrar= $fila['cotizaciones_borrar'];
-              $this->servicio_ver= $fila['servicio_ver'];
-              $this->desperdicio_entrada_ver= $fila['desperdicio_entrada_ver'];
-              $this->desperdicio_entrada_agregar= $fila['desperdicio_entrada_agregar'];
-              $this->desperdicio_entrada_editar= $fila['desperdicio_entrada_editar'];
-              $this->desperdicio_entrada_borrar= $fila['desperdicio_entrada_borrar'];
-              $this->desperdicio_salida_ver= $fila['desperdicio_salida_ver'];
-              $this->desperdicio_salida_agregar= $fila['desperdicio_salida_agregar'];
-              $this->desperdicio_salida_editar= $fila['desperdicio_salida_editar'];
-              $this->desperdicio_salida_borrar= $fila['desperdicio_salida_borrar'];
-              $this->logs_ver= $fila['logs_ver'];
-              $this->proveedor_ver= $fila['proveedor_ver'];
-              $this->proveedor_agregar= $fila['proveedor_agregar'];
-              $this->proveedor_editar= $fila['proveedor_editar'];
-              $this->proveedor_borrar= $fila['proveedor_borrar'];
-              $this->herramienta_ver= $fila['herramienta_ver'];
-              $this->herramienta_agregar= $fila['herramienta_agregar'];
-              $this->herramienta_editar= $fila['herramienta_editar'];
-              $this->herramienta_borrar= $fila['herramienta_borrar'];
-              $this->servicio_login= $fila['servicio_login'];
+              $this->tipo_ver= $fila['tipo_ver'];
+              $this->tipo_agregar= $fila['tipo_agregar'];
+              $this->tipo_editar= $fila['tipo_editar'];
+              $this->tipo_borrar= $fila['tipo_borrar'];
+              $this->tarifa_ver=  $fila['tarifa_ver'];
+              $this->tarifa_agregar= $fila['tarifa_agregar'];
+              $this->tarifa_editar= $fila['tarifa_editar'];
+              $this->tarifa_borrar= $fila['tarifa_borrar'];
+              $this->hab_ver= $fila['hab_ver'];
+              $this->hab_agregar= $fila['hab_agregar'];
+              $this->hab_editar= $fila['hab_editar'];
+              $this->hab_borrar= $fila['hab_borrar'];
               
           }
-          $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->cliente_ver+$this->cliente_agregar+$this->cliente_editar+$this->cliente_borrar+$this->inventario_ver+$this->inventario_agregar+$this->inventario_editar+$this->inventario_borrar+$this->requisicion_ver+$this->requisicion_agregar+$this->requisicion_editar+$this->requisicion_borrar+$this->salida_ver+$this->salida_agregar+$this->salida_editar+$this->salida_borrar+$this->salida_aprobar+$this->regreso_ver+$this->regreso_agregar+$this->regreso_editar+$this->regreso_borrar+$this->necesidades_ver+$this->necesidades_agregar+$this->necesidades_editar+$this->necesidades_borrar+$this->cotizaciones_ver+$this->cotizaciones_agregar+$this->cotizaciones_editar+$this->cotizaciones_borrar+$this->servicio_ver+$this->desperdicio_entrada_ver+$this->desperdicio_entrada_agregar+$this->desperdicio_entrada_editar+$this->desperdicio_entrada_borrar+$this->desperdicio_salida_ver+$this->desperdicio_salida_agregar+$this->desperdicio_salida_editar+$this->desperdicio_salida_borrar+$this->logs_ver+$this->proveedor_ver+$this->proveedor_agregar+$this->proveedor_editar+$this->proveedor_borrar+$this->herramienta_ver+$this->herramienta_agregar+$this->herramienta_editar+$this->herramienta_borrar+$this->servicio_login;
+          $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->cliente_ver+$this->cliente_agregar+$this->cliente_editar+$this->cliente_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_ver+$this->tarifa_agregar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar;
         }  
       }
       // Datos inicio de sesion
@@ -273,12 +172,10 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           while ($fila = mysqli_fetch_array($consulta))
           {
-              
               $this->token=$fila['token'];
               $this->fecha_generado= $fila['fecha_generado'];
               $this->fecha_vencimiento= $fila['fecha_vencimiento'];
               $this->activo= $fila['activo'];
-              
           }
       }
       // Evaluar entrada de sesion
@@ -317,43 +214,35 @@
 
             case 1:// guarda nivel administrador
                 $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
                 $comentario="Guardamos el usuario en la base de datos";
                 $consulta= $this->realizaConsulta($sentencia,$comentario);
                 break;
 
-            case 2:// guarda nivel almacen
+            case 2:// guarda nivel cajera
                 $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '1', '1', '1', '1', '1', '1', '1', '1', '0');";
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
                 $comentario="Guardamos el usuario en la base de datos";
                 $consulta= $this->realizaConsulta($sentencia,$comentario);
                 break; 
                 
-            case 3:// guarda nivel ventas 
+            case 3:// guarda nivel reservaciones
                 $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0');";
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion',, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
                 $comentario="Guardamos el usuario en la base de datos";
                 $consulta= $this->realizaConsulta($sentencia,$comentario); 
                 break; 
                 
-            case 4:// guarda nivel compras 
+            case 4:// guarda nivel ama llaves
                 $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`, `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0');";
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`)
+                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0',  '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
                 $comentario="Guardamos el usuario en la base de datos";
                 $consulta= $this->realizaConsulta($sentencia,$comentario);
-                break;        
-                
-            case 5:// guarda nivel tecnico
-                $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `requisicion_ver`, `requisicion_agregar`, `requisicion_editar`, `requisicion_borrar`, `salida_ver`, `salida_agregar`, `salida_editar`, `salida_borrar`, `salida_aprobar`, `regreso_ver`, `regreso_agregar`, `regreso_editar`, `regreso_borrar`, `necesidades_ver`, `necesidades_agregar`, `necesidades_editar`, `necesidades_borrar`, `cotizaciones_ver`, `cotizaciones_agregar`, `cotizaciones_editar`, `cotizaciones_borrar`,  `servicio_ver`, `desperdicio_entrada_ver`, `desperdicio_entrada_agregar`, `desperdicio_entrada_editar`, `desperdicio_entrada_borrar`, `desperdicio_salida_ver`, `desperdicio_salida_agregar`, `desperdicio_salida_editar`, `desperdicio_salida_borrar`, `logs_ver`, `proveedor_ver`, `proveedor_agregar`, `proveedor_editar`, `proveedor_borrar`, `herramienta_ver`, `herramienta_agregar`, `herramienta_editar`, `herramienta_borrar`, `servicio_login`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
-                $comentario="Guardamos el usuario en la base de datos";
-                $consulta= $this->realizaConsulta($sentencia,$comentario);
-                break;     
+                break;            
                 
             default:
                 echo "Aun no se encuentra registrado ese nivel de usuario";
@@ -432,16 +321,13 @@
                   echo '<td class="texto_entrada">Administrador</td>';
                 break;
                case 2:
-                   echo '<td class="texto_entrada">Almacen</td>';
+                   echo '<td class="texto_entrada">Cajera</td>';
                 break;
                case 3:
-                  echo '<td class="texto_entrada">Ventas</td>';
+                  echo '<td class="texto_entrada">Reservaciones</td>';
                 break;
                case 4:
-                  echo '<td class="texto_entrada">Compras</td>';
-                break;
-               case 5:
-                  echo '<td class="texto_entrada">Tecnico</td>';
+                  echo '<td class="texto_entrada">Ama Llaves</td>';
                 break;
                default:
                   echo '<td class="texto_entrada">Indefinido</td>';
@@ -481,7 +367,7 @@
           echo ' </ul>';
       }
       // Editar un usuario
-      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$cliente_ver,$cliente_agregar,$cliente_editar,$cliente_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$requisicion_ver,$requisicion_agregar,$requisicion_editar,$requisicion_borrar,$salida_ver,$salida_agregar,$salida_editar,$salida_borrar,$salida_aprobar,$regreso_ver,$regreso_agregar,$regreso_editar,$regreso_borrar,$necesidades_ver,$necesidades_agregar,$necesidades_editar,$necesidades_borrar,$cotizaciones_ver,$cotizaciones_agregar,$cotizaciones_editar,$cotizaciones_borrar,$servicio_ver,$desperdicio_entrada_ver,$desperdicio_entrada_agregar,$desperdicio_entrada_editar,$desperdicio_entrada_borrar,$desperdicio_salida_ver,$desperdicio_salida_agregar,$desperdicio_salida_editar,$desperdicio_salida_borrar,$logs_ver,$proveedor_ver,$proveedor_agregar,$proveedor_editar,$proveedor_borrar,$herramienta_ver,$herramienta_agregar,$herramienta_editar,$herramienta_borrar,$servicio_login){
+      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$cliente_ver,$cliente_agregar,$cliente_editar,$cliente_borrar,$tipo_ver,$tipo_agregar,$tipo_editar,$tipo_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$hab_ver,$hab_agregar,$hab_editar,$hab_borrar,$hab_aprobar,$regreso_ver,$regreso_agregar,$regreso_editar,$regreso_borrar,$necesidades_ver,$necesidades_agregar,$necesidades_editar,$necesidades_borrar,$cotizaciones_ver,$cotizaciones_agregar,$cotizaciones_editar,$cotizaciones_borrar,$servicio_ver,$desperdicio_entrada_ver,$desperdicio_entrada_agregar,$desperdicio_entrada_editar,$desperdicio_entrada_borrar,$desperdicio_salida_ver,$desperdicio_salida_agregar,$desperdicio_salida_editar,$desperdicio_salida_borrar,$logs_ver,$proveedor_ver,$proveedor_agregar,$proveedor_editar,$proveedor_borrar,$herramienta_ver,$herramienta_agregar,$herramienta_editar,$herramienta_borrar,$servicio_login){
         //$pass=md5($pass);
         $sentencia = "UPDATE `usuario` SET
             `usuario` = '$usuario',
@@ -499,50 +385,18 @@
             `cliente_agregar` = '$cliente_agregar',
             `cliente_editar` = '$cliente_editar',
             `cliente_borrar` = '$cliente_borrar',
-            `inventario_ver` = '$inventario_ver',
-            `inventario_agregar` = '$inventario_agregar',
-            `inventario_editar` = '$inventario_editar',
-            `inventario_borrar` = '$inventario_borrar',
-            `requisicion_ver` = '$requisicion_ver',
-            `requisicion_agregar` = '$requisicion_agregar',
-            `requisicion_editar` = '$requisicion_editar',
-            `requisicion_borrar` = '$requisicion_borrar',
-            `salida_ver` = '$salida_ver',
-            `salida_agregar` = '$salida_agregar',
-            `salida_editar` = '$salida_editar',
-            `salida_borrar` = '$salida_borrar',
-            `salida_aprobar` = '$salida_aprobar',
-            `regreso_ver` = '$regreso_ver',
-            `regreso_agregar` = '$regreso_agregar',
-            `regreso_editar` = '$regreso_editar',
-            `regreso_borrar` = '$regreso_borrar',
-            `necesidades_ver` = '$necesidades_ver',
-            `necesidades_agregar` = '$necesidades_agregar',
-            `necesidades_editar` = '$necesidades_editar',
-            `necesidades_borrar` = '$necesidades_borrar',
-            `cotizaciones_ver` = '$cotizaciones_ver',
-            `cotizaciones_agregar` = '$cotizaciones_agregar',
-            `cotizaciones_editar` = '$cotizaciones_editar',
-            `cotizaciones_borrar` = '$cotizaciones_borrar',
-            `servicio_ver` = '$servicio_ver',
-            `desperdicio_entrada_ver` = '$desperdicio_entrada_ver',
-            `desperdicio_entrada_agregar` = '$desperdicio_entrada_agregar',
-            `desperdicio_entrada_editar` = '$desperdicio_entrada_editar',
-            `desperdicio_entrada_borrar` = '$desperdicio_entrada_borrar',
-            `desperdicio_salida_ver` = '$desperdicio_salida_ver',
-            `desperdicio_salida_agregar` = '$desperdicio_salida_agregar',
-            `desperdicio_salida_editar` = '$desperdicio_salida_editar',
-            `desperdicio_salida_borrar` = '$desperdicio_salida_borrar',
-            `logs_ver` = '$logs_ver',
-            `proveedor_ver` = '$proveedor_ver',
-            `proveedor_agregar` = '$proveedor_agregar',
-            `proveedor_editar` = '$proveedor_editar',
-            `proveedor_borrar` = '$proveedor_borrar',
-            `herramienta_ver` = '$herramienta_ver',
-            `herramienta_agregar` = '$herramienta_agregar',
-            `herramienta_editar` = '$herramienta_editar',
-            `herramienta_borrar` = '$herramienta_borrar',
-            `servicio_login` = '$servicio_login'
+            `tipo_ver` = '$tipo_ver',
+            `tipo_agregar` = '$tipo_agregar',
+            `tipo_editar` = '$tipo_editar',
+            `tipo_borrar` = '$tipo_borrar',
+            `tarifa_ver` = '$tarifa_ver',
+            `tarifa_agregar` = '$tarifa_agregar',
+            `tarifa_editar` = '$tarifa_editar',
+            `tarifa_borrar` = '$tarifa_borrar',
+            `hab_ver` = '$hab_ver',
+            `hab_agregar` = '$hab_agregar',
+            `hab_editar` = '$hab_editar',
+            `hab_borrar` = '$hab_borrar'
             WHERE `id` = '$id';";
         //echo $sentencia ;
         $comentario="Editar usuario dentro de la base de datos ";
@@ -650,16 +504,13 @@
                 $nivel = "Administrador";
               break;
             case 2:
-                $nivel = "Almacen";
+                $nivel = "Cajera";
               break;
             case 3:
-                $nivel = "Ventas";
+                $nivel = "Reservaciones";
               break;
             case 4:
-                $nivel = "Compras";
-              break;
-              case 5:
-                $nivel = "Tecnico";
+                $nivel = "Ama Llaves";
               break;
             default:
                 $nivel = "Indefinido";

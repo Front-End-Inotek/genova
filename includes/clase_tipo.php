@@ -96,7 +96,7 @@
                 echo '<tr class="text-center">
                 <td>'.$fila['nombre'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-info btn-lg" onclick="editar_herramienta('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning btn-lg" onclick="editar_herramienta('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_herramienta('.$fila['id'].')"> Borrar</button></td>';

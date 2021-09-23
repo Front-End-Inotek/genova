@@ -93,3 +93,17 @@ background-color: rgb(235, 235, 235);
   background-color: rgb(40, 117, 240);
   border-top-style: none;
 }
+
+.btn{
+  color:white;
+ }
+
+.blanco{
+  padding: 25px 25px;
+  background-color: white;
+}
+
+.margen-1{
+  margin-bottom: 40px;
+}
+
