@@ -134,10 +134,10 @@ function closeNav(){
 //Habitaciones
 
 // Agregar un tipo de habitacion
-function agregar_tipos(id){
+function agregar_tipos(){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_tipos.php?id="+id); 
+	$("#area_trabajo_menu").load("includes/agregar_tipos.php"); 
 	closeNav();
 }
 
@@ -258,10 +258,10 @@ function regresar_editar_tipo(){
 }
 
 // Agregar una tarifa hospedaje
-function agregar_tarifas(id){
+function agregar_tarifas(){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_tarifas.php?id="+id); 
+	$("#area_trabajo_menu").load("includes/agregar_tarifas.php"); 
 	closeNav();
 }
 
@@ -313,12 +313,12 @@ function ver_tarifas(){
 	closeNav();
 }
 
-// Editar un tarifa hospedaje
+// Editar una tarifa hospedaje
 function editar_tarifa(id){
     $("#area_trabajo_menu").load("includes/editar_tarifa.php?id="+id);
 }
 
-// Editar un tarifa hospedaje
+// Editar una tarifa hospedaje
 function modificar_tarifa(id){
 	var usuario_id=localStorage.getItem("id");
     var nombre= encodeURI(document.getElementById("nombre").value);
@@ -359,7 +359,7 @@ function modificar_tarifa(id){
     }    
 }
 
-// Borrar un tarifa hospedaje
+// Borrar una tarifa hospedaje
 function borrar_tarifa(id){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
@@ -384,7 +384,7 @@ function borrar_tarifa(id){
     }
 }
 
-// Modal de borrar un tarifa hospedaje
+// Modal de borrar una tarifa hospedaje
 function aceptar_borrar_tarifa(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_tarifa.php?id="+id);
 }
@@ -397,11 +397,151 @@ function regresar_editar_tarifa(){
     $("#area_trabajo_menu").load("includes/ver_tarifas.php?usuario_id="+usuario_id);
 }
 
-//
-// Muestra la paginacion de los tarifas de habitaciones
-function ver_tarifas_paginacion(buton,posicion){
+// Agregar una habitacion
+function agregar_hab(){
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_hab.php"); 
+	closeNav();
+}
+
+// Guardar una habitacion
+function guardar_hab(){
     var usuario_id=localStorage.getItem("id");
-    $("#paginacion_tarifas").load("includes/ver_tarifas_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var precio_hospedaje= document.getElementById("precio_hospedaje").value;
+	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
+	var precio_persona= document.getElementById("precio_persona").value;
+	var tipo= document.getElementById("tipo").value;
+	
+
+	if(nombre.length >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && precio_persona >0 && tipo >0){
+			//$('#boton_hab').hide();
+			$("#boton_hab").html('<div class="spinner-border text-primary"></div>');
+			var datos = {
+				  "nombre": nombre,
+				  "precio_hospedaje": precio_hospedaje,
+				  "cantidad_hospedaje": cantidad_hospedaje,
+				  "precio_persona": precio_persona,
+				  "tipo": tipo,
+                  "usuario_id": usuario_id,
+				};
+			$.ajax({
+				  async:true,
+				  type: "POST",
+				  dataType: "html",
+				  contentType: "application/x-www-form-urlencoded",
+				  url:"includes/guardar_hab.php",
+				  data:datos,
+				  beforeSend:loaderbar,
+				  success:ver_hab,
+				  timeout:5000,
+				  error:problemas_sistema
+				});
+				return false;
+			}else{
+				alert("Campos incompletos");
+			}
+}
+
+// Muestra las habitaciones de la bd
+function ver_hab(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_hab.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
+// Editar una habitacion
+function editar_hab(id){
+    $("#area_trabajo_menu").load("includes/editar_hab.php?id="+id);
+}
+
+// Editar una habitacion
+function modificar_hab(id){
+	var usuario_id=localStorage.getItem("id");
+    var nombre= encodeURI(document.getElementById("nombre").value);
+	var precio_hospedaje= document.getElementById("precio_hospedaje").value;
+	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
+	var precio_persona= document.getElementById("precio_persona").value;
+	var tipo= document.getElementById("tipo").value;
+
+
+    if(id >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && precio_persona >0 && tipo >0){
+        //$('#boton_hab').hide();
+			$("#boton_hab").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+              "id": id,
+              "nombre": nombre,
+			  "precio_hospedaje": precio_hospedaje,
+			  "cantidad_hospedaje": cantidad_hospedaje,
+			  "precio_persona": precio_persona,
+			  "tipo": tipo,
+              "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/aplicar_editar_hab.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:ver_hab,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }    
+}
+
+// Borrar una habitacion
+function borrar_hab(id){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+    if (id >0) {
+        var datos = {
+                "id": id,
+                "usuario_id": usuario_id,
+            };
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/borrar_hab.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:ver_hab,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }
+}
+
+// Modal de borrar una habitacion
+function aceptar_borrar_hab(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_hab.php?id="+id);
+}
+
+// Regresar a la pagina anterior de editar una habitacion
+function regresar_editar_hab(){
+    var usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_hab.php?usuario_id="+usuario_id);
+}
+
+//
+// Muestra la paginacion de los hab de habitaciones
+function ver_hab_paginacion(buton,posicion){
+    var usuario_id=localStorage.getItem("id");
+    $("#paginacion_hab").load("includes/ver_tarifas_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
 // Generar reporte de un tarifa hospedaje

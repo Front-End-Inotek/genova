@@ -1,7 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
-  include_once("clase_tarifa.php");
-  $tarifa= NEW Tarifa(0);
+  include_once("clase_hab.php");
+  $hab= NEW Hab(0);
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left "><h2 class="text-dark margen-1">AGREGAR TARIFAS HOSPEDAJE</h2></div>
@@ -10,6 +10,18 @@
           <div class="col-sm-9" >
           <div class="form-group">
             <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el nombre de habitacion" maxlength="90">
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3" >Tipo de habitacion:</div>
+          <div class="col-sm-9" >
+          <div class="form-group">
+            <select class="form-control" id="tipo" class="form-control">
+              <option value="0">Selecciona</option>';
+              $hab->mostrar_tipo();
+              echo '
+            </select>
           </div>
           </div>
         </div>
