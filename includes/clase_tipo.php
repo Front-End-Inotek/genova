@@ -90,7 +90,7 @@
         $sentencia = "UPDATE `tipo_hab` SET
         `estado` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de tipos de habitaciones como inactivo";
+        $comentario="Poner estado de un tipo de habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
              
