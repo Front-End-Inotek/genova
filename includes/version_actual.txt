@@ -4,4 +4,5 @@ VERSION 1.1
 -Colocar login
 -Generar menu lateral con rama vertical_nav
 -Generar permisos y tipos de usuarios
--Generar funciones basicas para tipo_habf
+-Generar funciones basicas para tipo_hab
+-Generar funciones basicas para tarifa_hospedaje
