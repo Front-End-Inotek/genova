@@ -7,3 +7,7 @@ VERSION 1.1
 -Generar funciones basicas para tipo_hab
 -Generar funciones basicas para tarifa_hospedaje
 -Generar funciones basicas para hab
+
+VERSION 1.2
+-Generar rama reservacion
+-Generar funciones basicas para reservacion
