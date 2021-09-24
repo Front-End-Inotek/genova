@@ -6,17 +6,20 @@
 
       public $id;
       public $fecha_entrada;
-      public $;
-      public $;
-      public $;
-      public $;
-      public $;
-      public $;
-      public $;
-      public $;
-      public $;
-      public $;
-      public $;
+      public $fecha_salida;
+      public $noches;
+      public $numero_hab;
+      public $precio_hospedaje;
+      public $cantidad_hospedaje;
+      public $extra_adulto;
+      public $extra_junior;
+      public $extra_infantil;
+      public $extra_menor;
+      public $tarifa;
+      public $suplementos;
+      public $total_hab;
+      public $forzar_tarifa;
+      public $total;
       public $estado;
       
       // Constructor
@@ -25,17 +28,20 @@
         if($id==0){
           $this->id= 0;
           $this->fecha_entrada= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
-          $this->= 0;
+          $this->fecha_salida= 0;
+          $this->noches= 0;
+          $this->numero_hab= 0;
+          $this->precio_hospedaje= 0;
+          $this->cantidad_hospedaje= 0;
+          $this->extra_adulto= 0;
+          $this->extra_junior= 0;
+          $this->extra_infantil= 0;
+          $this->extra_menor= 0;
+          $this->tarifa= 0;
+          $this->suplementos= 0;
+          $this->total_hab= 0;
+          $this->forzar_tarifa= 0;
+          $this->total= 0;
           $this->estado= 0;
         }else{
           $sentencia = "SELECT * FROM tipo_hab WHERE id = $id LIMIT 1 ";
@@ -45,25 +51,28 @@
           {
               $this->id= $fila['id'];
               $this->fecha_entrada= $fila['fecha_entrada'];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
-              $this->= $fila[''];
+              $this->fecha_salida= $fila['fecha_salida'];
+              $this->noches= $fila['noches'];
+              $this->numero_hab= $fila['numero_hab'];
+              $this->precio_hospedaje= $fila['precio_hospedaje'];
+              $this->cantidad_hospedaje= $fila['cantidad_hospedaje'];
+              $this->extra_adulto= $fila['extra_adulto'];
+              $this->extra_junior= $fila['extra_junior'];
+              $this->extra_infantil= $fila['extra_infantil'];
+              $this->extra_menor= $fila['extra_menor'];
+              $this->tarifa= $fila['tarifa'];
+              $this->suplementos= $fila['suplementos'];
+              $this->total_hab= $fila['total_hab'];
+              $this->forzar_tarifa= $fila['forzar_tarifa'];
+              $this->total= $fila['total'];
               $this->estado= $fila['estado'];
           }
         }
       }
       // Guardar en el tipo habitacion
-      function guardar_tipo($nombre,$fecha_entrada,$,$,$,$,$,$,$,$,$,$,$){
-        $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `fecha_entrada'`, ``, ``, ``, ``, ``, ``, ``, ``, ``, ``, ``, `estado`)
-        VALUES ('$nombre', '$fecha_entrada', '$', '$', '$', '$', '$', '$', '$', '$', '$', '$', '$', '1');";
+      function guardar_tipo($nombre,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_hab,$forzar_tarifa,$total){
+        $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `fecha_entrada'`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `suplementos`, `total_hab`, `forzar_tarifa`, `total`, `estado`)
+        VALUES ('$nombre', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$suplementos', '$total_hab', '$forzar_tarifa', '$total', '1');";
         $comentario="Guardamos el tipo habitacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
