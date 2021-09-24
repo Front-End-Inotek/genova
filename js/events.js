@@ -545,7 +545,7 @@ function regresar_editar_hab(){
 function agregar_reservaciones(){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_reservacions.php"); 
+	$("#area_trabajo_menu").load("includes/agregar_reservaciones.php"); 
 	closeNav();
 }
 
