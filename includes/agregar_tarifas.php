@@ -30,10 +30,26 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-3" >Precio por persona:</div>
+          <div class="col-sm-3" >Precio por adulto:</div>
           <div class="col-sm-9" >
           <div class="form-group">
-            <input class="form-control" type="number"  id="precio_persona" placeholder="Ingresa el precio por persona">
+            <input class="form-control" type="number"  id="precio_adulto" placeholder="Ingresa el precio por adulto">
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3" >Precio por junior:</div>
+          <div class="col-sm-9" >
+          <div class="form-group">
+            <input class="form-control" type="number"  id="precio_junior" placeholder="Ingresa el precio por junior(13-17 años)">
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3" >Precio por niño:</div>
+          <div class="col-sm-9" >
+          <div class="form-group">
+            <input class="form-control" type="number"  id="precio_infantil" placeholder="Ingresa el precio por niño(6-12 años)">
           </div>
           </div>
         </div>

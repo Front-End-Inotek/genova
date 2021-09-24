@@ -44,6 +44,7 @@
   overflow:hidden;
   width:100%;
 }
+
 body {
 overflow-x: hidden;
 background-color: rgb(241, 240, 241);
@@ -107,5 +108,10 @@ background-color: rgb(241, 240, 241);
 
 .margen-1{
   margin-bottom: 40px;
+}
+
+.svg-color
+{
+  fill: rgb(185, 185, 185);
 }
 

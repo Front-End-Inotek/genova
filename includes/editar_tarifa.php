@@ -33,7 +33,23 @@
           <div class="col-sm-3" >Precio por persona:</div>
           <div class="col-sm-9" >
           <div class="form-group">
-            <input class="form-control" type="number"  id="precio_persona" value="'.$tarifa->precio_persona.'">
+            <input class="form-control" type="number"  id="precio_adulto" value="'.$tarifa->precio_adulto.'">
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3" >Precio por junior:</div>
+          <div class="col-sm-9" >
+          <div class="form-group">
+            <input class="form-control" type="number"  id="precio_junior" value="'.$tarifa->precio_junior.'">
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3" >Precio por niño:</div>
+          <div class="col-sm-9" >
+          <div class="form-group">
+            <input class="form-control" type="number"  id="precio_infantil" value="'.$tarifa->precio_infantil.'">
           </div>
           </div>
         </div>

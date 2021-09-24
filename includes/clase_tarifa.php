@@ -8,7 +8,9 @@
       public $nombre;
       public $precio_hospedaje;
       public $cantidad_hospedaje;
-      public $precio_persona;
+      public $precio_adulto;
+      public $precio_junior;
+      public $precio_infantil;
       public $tipo;
       public $estado;
       
@@ -20,7 +22,9 @@
           $this->nombre= 0;
           $this->precio_hospedaje= 0;
           $this->cantidad_hospedaje= 0;
-          $this->precio_persona= 0;
+          $this->precio_adulto= 0;
+          $this->precio_junior= 0;
+          $this->precio_infantil= 0;
           $this->tipo= 0;
           $this->estado= 0;
         }else{
@@ -33,16 +37,18 @@
               $this->nombre= $fila['nombre'];
               $this->precio_hospedaje= $fila['precio_hospedaje'];
               $this->cantidad_hospedaje= $fila['cantidad_hospedaje'];
-              $this->precio_persona= $fila['precio_persona'];
+              $this->precio_adulto= $fila['precio_adulto'];
+              $this->precio_junior= $fila['precio_junior'];
+              $this->precio_infantil= $fila['precio_infantil'];
               $this->tipo= $fila['tipo'];
               $this->estado= $fila['estado'];
           }
         }
       }
       // Guardar la tarifa hospedaje
-      function guardar_tarifa($nombre,$precio_hospedaje,$cantidad_hospedaje,$precio_persona,$tipo){
-        $sentencia = "INSERT INTO `tarifa_hospedaje` (`nombre`, `precio_hospedaje`, `cantidad_hospedaje`, `precio_persona`, `tipo`, `estado`)
-        VALUES ('$nombre', '$precio_hospedaje', '$cantidad_hospedaje', '$precio_persona', '$tipo', '1');";
+      function guardar_tarifa($nombre,$precio_hospedaje,$cantidad_hospedaje,$precio_adulto,$precio_junior,$precio_infantil,$tipo){
+        $sentencia = "INSERT INTO `tarifa_hospedaje` (`nombre`, `precio_hospedaje`, `cantidad_hospedaje`, `precio_adulto`, `precio_junior`, `precio_infantil`, `tipo`, `estado`)
+        VALUES ('$nombre', '$precio_hospedaje', '$cantidad_hospedaje', '$precio_adulto', '$precio_junior', '$precio_infantil', '$tipo', '1');";
         $comentario="Guardamos la tarifa hospedaje en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
@@ -66,7 +72,9 @@
             <th>Nombre</th>
             <th>Precio</th>
             <th>Cantidad por hospedaje</th>
-            <th>Precio por persona</th>
+            <th>Precio adulto</th>
+            <th>Precio junior</th>
+            <th>Precio infantil</th>
             <th>Tipo de habitacion</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -83,7 +91,9 @@
                 <td>'.$fila['nom'].'</td>
                 <td>$'.$fila['precio_hospedaje'].'</td>
                 <td>'.$fila['cantidad_hospedaje'].'</td>
-                <td>$'.$fila['precio_persona'].'</td>
+                <td>$'.$fila['precio_adulto'].'</td>
+                <td>$'.$fila['precio_junior'].'</td>
+                <td>$'.$fila['precio_infantil'].'</td>
                 <td>'.$fila['habitacion'].'</td>';
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_tarifa('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
@@ -99,12 +109,14 @@
         </div>';
       }
       // Editar las tarifas hospedaje
-      function editar_tarifa($id,$nombre,$precio_hospedaje,$cantidad_hospedaje,$precio_persona,$tipo){
+      function editar_tarifa($id,$nombre,$precio_hospedaje,$cantidad_hospedaje,$precio_adulto,$precio_junior,$precio_infantil,$tipo){
         $sentencia = "UPDATE `tarifa_hospedaje` SET
             `nombre` = '$nombre',
             `precio_hospedaje` = '$precio_hospedaje',
             `cantidad_hospedaje` = '$cantidad_hospedaje',
-            `precio_persona` = '$precio_persona',
+            `precio_adulto` = '$precio_adulto',
+            `precio_junior` = '$precio_junior',
+            `precio_infantil` = '$precio_infantil',
             `tipo` = '$tipo'
             WHERE `id` = '$id';";
         //echo $sentencia ;

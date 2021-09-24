@@ -4,6 +4,6 @@
   include_once('clase_log.php');
   $tipo= NEW Tipo(0);
   $logs = NEW Log(0);
-  $tipo->editar_tipo($_POST['id'],urldecode($_POST['nombre']));
+  $tipo->editar_tipo($_POST['id'],urldecode($_POST['nombre']),urldecode($_POST['codigo']));
   $logs->guardar_log($_POST['usuario_id'],"Editar tipo de habitacion: ". $_POST['id']);
 ?>

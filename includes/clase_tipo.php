@@ -6,6 +6,7 @@
 
       public $id;
       public $nombre;
+      public $codigo;
       public $estado;
       
       // Constructor
@@ -14,6 +15,7 @@
         if($id==0){
           $this->id= 0;
           $this->nombre= 0;
+          $this->codigo= 0;
           $this->estado= 0;
         }else{
           $sentencia = "SELECT * FROM tipo_hab WHERE id = $id LIMIT 1 ";
@@ -23,14 +25,15 @@
           {
               $this->id= $fila['id'];
               $this->nombre= $fila['nombre'];
+              $this->codigo= $fila['codigo'];
               $this->estado= $fila['estado'];
           }
         }
       }
       // Guardar en el tipo habitacion
-      function guardar_tipo($nombre){
-        $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `estado`)
-        VALUES ('$nombre', '1');";
+      function guardar_tipo($nombre,$codigo){
+        $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `codigo`, `estado`)
+        VALUES ('$nombre', '$codigo', '1');";
         $comentario="Guardamos el tipo habitacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
@@ -49,7 +52,8 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Nombre</th>';
+            <th>Nombre</th>
+            <th>Codigo</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
@@ -62,7 +66,8 @@
             while ($fila = mysqli_fetch_array($consulta))
             {
                 echo '<tr class="text-center">
-                <td>'.$fila['nombre'].'</td>';
+                <td>'.$fila['nombre'].'</td>
+                <td>'.$fila['codigo'].'</td>';
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_tipo('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
@@ -77,9 +82,10 @@
         </div>';
       }
       // Editar los tipos habitaciones
-      function editar_tipo($id,$nombre){
+      function editar_tipo($id,$nombre,$codigo){
         $sentencia = "UPDATE `tipo_hab` SET
-            `nombre` = '$nombre'
+            `nombre` = '$nombre',
+            `codigo` = '$codigo'
             WHERE `id` = '$id';";
         //echo $sentencia ;
         $comentario="Editar los tipos de habitaciones dentro de la base de datos ";
