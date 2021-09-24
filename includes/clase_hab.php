@@ -50,7 +50,7 @@
         $editar = $usuario->tarifa_editar;
         $borrar = $usuario->tarifa_borrar;
 
-        $sentencia = "SELECT *,hab.nombre AS nom,tipo_hab.nombre AS habitacion
+        $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 1 ORDER BY hab.nombre";
         $comentario="Mostrar las habitaciones";
@@ -79,10 +79,10 @@
                 <td>'.$fila['habitacion'].'</td>
                 <td>'.$fila['comentario'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_tarifa('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_hab('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_tarifa('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_hab('.$fila['ID'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
             }

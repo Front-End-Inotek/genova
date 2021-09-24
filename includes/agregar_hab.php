@@ -29,7 +29,7 @@
           <div class="col-sm-3" >Comentario:</div>
           <div class="col-sm-9" >
           <div class="form-group">
-            <input class="form-control" type="text"  id="comentario" placeholder="Ingresa el comentario de la habitacion">
+            <input class="form-control" type="text"  id="comentario" placeholder="Ingresa el comentario de la habitacion" maxlength="250">
           </div>
           </div>
         </div>

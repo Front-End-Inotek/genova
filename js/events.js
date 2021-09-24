@@ -458,22 +458,18 @@ function editar_hab(id){
 function modificar_hab(id){
 	var usuario_id=localStorage.getItem("id");
     var nombre= encodeURI(document.getElementById("nombre").value);
-	var precio_hospedaje= document.getElementById("precio_hospedaje").value;
-	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
-	var precio_persona= document.getElementById("precio_persona").value;
 	var tipo= document.getElementById("tipo").value;
+	var comentario= encodeURI(document.getElementById("comentario").value);
 
 
-    if(id >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && precio_persona >0 && tipo >0){
+    if(id >0 && tipo >0){
         //$('#boton_hab').hide();
 			$("#boton_hab").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "nombre": nombre,
-			  "precio_hospedaje": precio_hospedaje,
-			  "cantidad_hospedaje": cantidad_hospedaje,
-			  "precio_persona": precio_persona,
 			  "tipo": tipo,
+			  "comentario": comentario,
               "usuario_id": usuario_id,
             };
         $.ajax({
