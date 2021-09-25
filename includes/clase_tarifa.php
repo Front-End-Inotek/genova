@@ -159,6 +159,31 @@
           }
         }
       }
+      // Muestra los nombres de las tarifas hospedaje
+      function mostrar_tarifas(){
+        $sentencia = "SELECT * FROM tarifa_hospedaje WHERE estado = 1 ORDER BY nombre";
+        $comentario="Mostrar los nombres de las tarifas hospedaje";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+        }
+        return $consulta;
+      }
+      // Muestra la cantidad hospedaje de la tarifa hospedaje
+      function mostrar_cantidad_hospedaje($id){
+        $sentencia = "SELECT * FROM tarifa_hospedaje WHERE id = $id AND estado = 1";
+        $cantidad_hospedaje= 0;
+        $comentario="Mostrar los nombres de las tarifas hospedaje";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad_hospedaje= $fila['cantidad_hospedaje'];
+        }
+        return $cantidad_hospedaje;
+      }
              
   }
 ?>

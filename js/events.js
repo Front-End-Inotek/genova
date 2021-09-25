@@ -592,6 +592,26 @@ function guardar_reservacion(){
 			}
 }
 
+// Calculamos la cantidad de noches de una reservacion
+function calcular_noches(){
+    var fecha_entrada= document.getElementById("fecha_entrada").value;
+	var fecha_salida= document.getElementById("fecha_salida").value;
+	var fecha_entrada = new Date(fecha_entrada);
+    var fecha_salida = new Date(fecha_salida);
+	var dias_en_milisegundos = 86400000;
+	var diff_en_milisegundos = fecha_salida - fecha_entrada;
+	var noches= diff_en_milisegundos / dias_en_milisegundos;
+    document.getElementById("noches").value =noches;
+}
+
+// Conseguimos la cantidad de adultos permitidos por tarifa hospedaje
+function cambiar_adultos(){
+    var tarifa= document.getElementById("tarifa").value;
+    $(".div_adultos").html('<div class="spinner-border text-primary"></div>');
+    $(".div_adultos").load("includes/cambiar_tarifa.php?tarifa="+tarifa);  
+    //alert("Cambiando tarifa "+tarifa);
+}
+
 // Muestra las reservaciones de la bd
 function ver_reservaciones(){
     var usuario_id=localStorage.getItem("id");
