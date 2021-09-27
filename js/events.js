@@ -596,12 +596,18 @@ function guardar_reservacion(){
 function calcular_noches(){
     var fecha_entrada= document.getElementById("fecha_entrada").value;
 	var fecha_salida= document.getElementById("fecha_salida").value;
+	var noches= calculo_noches(fecha_entrada,fecha_salida);
+    document.getElementById("noches").value =noches;
+}
+
+// Calculo para obtener la cantidad de noches de una reservacion
+function calculo_noches(fecha_entrada,fecha_salida){
 	var fecha_entrada = new Date(fecha_entrada);
     var fecha_salida = new Date(fecha_salida);
 	var dias_en_milisegundos = 86400000;
 	var diff_en_milisegundos = fecha_salida - fecha_entrada;
 	var noches= diff_en_milisegundos / dias_en_milisegundos;
-    document.getElementById("noches").value =noches;
+    return noches;
 }
 
 // Conseguimos la cantidad de adultos permitidos por tarifa hospedaje
@@ -610,6 +616,38 @@ function cambiar_adultos(){
     $(".div_adultos").html('<div class="spinner-border text-primary"></div>');
     $(".div_adultos").load("includes/cambiar_tarifa.php?tarifa="+tarifa);  
     //alert("Cambiando tarifa "+tarifa);
+}
+
+// Calculamos el total de una reservacion
+function calcular_total(precio_hospedaje,total_adulto,total_junior,total_menor){
+	var fecha_entrada= document.getElementById("fecha_entrada").value;
+	var fecha_salida= document.getElementById("fecha_salida").value;
+	var noches= calculo_noches(fecha_entrada,fecha_salida);
+	var numero_hab= document.getElementById("numero_hab").value;
+	var tarifa= document.getElementById("tarifa").value;
+	/*alert(fecha_entrada);
+	alert(fecha_salida);
+	alert(numero_hab);
+	alert(noches);
+	alert(tarifa);*/
+	alert(precio_hospedaje);
+	alert(total_adulto);
+	alert(total_junior);
+	alert(total_menor);
+    var extra_adulto= document.getElementById("extra_adulto").value;
+	var extra_junior= document.getElementById("extra_junior").value;
+	var extra_menor= document.getElementById("extra_menor").value;
+	var total_suplementos= document.getElementById("total_suplementos").value;
+    
+	var total_hospedaje=  precio_hospedaje * numero_hab;
+	var total_adulto=  5 * extra_adulto;
+
+	var total= total_hospedaje + total_adulto; 
+	//alert(extra_adulto);
+	//alert(total_adulto);
+	//alert(total);
+    document.getElementById("forzar_tarifa").value =total;
+	document.getElementById("total").value =total;
 }
 
 // Muestra las reservaciones de la bd

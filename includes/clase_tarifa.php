@@ -161,7 +161,7 @@
       }
       // Muestra los nombres de las tarifas hospedaje
       function mostrar_tarifas(){
-        $sentencia = "SELECT * FROM tarifa_hospedaje WHERE estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT id,nombre FROM tarifa_hospedaje WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar los nombres de las tarifas hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -183,6 +183,13 @@
           $cantidad_hospedaje= $fila['cantidad_hospedaje'];
         }
         return $cantidad_hospedaje;
+      }
+      // Obtengo los datos de la tarifa hospedaje
+      function datos_hospedaje($id){
+        $sentencia = "SELECT * FROM tarifa_hospedaje WHERE nombre = $id AND estado = 1";
+        $comentario="Mostrar los datos de la tarifa hospedaje";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
       }
              
   }

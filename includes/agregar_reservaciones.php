@@ -4,6 +4,10 @@
   $reservacion= NEW Reservacion(0);
   include_once("clase_tarifa.php");
   $tarifa= NEW Tarifa(0);
+  $precio_hospedaje= 0;
+  $precio_adulto= 0;
+  $precio_junior= 0;
+  $precio_infantil= 0;
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left "><h2 class="text-dark margen-1">AGREGAR HABITACIONES</h2></div>
@@ -31,7 +35,7 @@
           <div class="col-sm-2">No.Hab.:</div>
           <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="number"  id="noches" placeholder="0">
+            <input class="form-control" type="number"  id="numero_hab" placeholder="0">
           </div>
           </div>
           <div class="col-sm-1">Tarifa:</div>
@@ -44,67 +48,19 @@
             </select>
           </div>
           </div>
-          <div class="col-sm-2">Adultos:</div>
-          <div class="col-sm-2 div_adultos">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="adultos" placeholder="0">
-          </div>
-          </div>
+          <div class="col-sm-8"></div>
         </div>
-        <div class="row">
-          <div class="col-sm-2">Adultos Extra:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="extra_adulto" placeholder="0">
-          </div>
-          </div>
-          <div class="col-sm-2">Junior:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="extra_junior" placeholder="0">
-          </div>
-          </div>
-          <div class="col-sm-2">Niños:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="extra_infantil" placeholder="0">
-          </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3" >Nombre:</div>
-          <div class="col-sm-9" >
-          <div class="form-group">
-            <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el nombre de la habitacion" maxlength="90">
-          </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3" >Tipo de habitacion:</div>
-          <div class="col-sm-9" >
-          <div class="form-group">
-            <select class="form-control" id="tipo" class="form-control">
-              <option value="0">Selecciona</option>';
-              $hab->mostrar_hab();
-              echo '
-            </select>
-          </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3" >Comentario:</div>
-          <div class="col-sm-9" >
-          <div class="form-group">
-            <input class="form-control" type="text"  id="comentario" placeholder="Ingresa el comentario de la habitacion" maxlength="250">
-          </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-10" ></div>
-          <div class="col-sm-2" >
-          <div id="boton_tipo">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_hab()">
-          </div>
+        <div class="row div_adultos"></div>';
+          /*$consulta = $tarifa->datos_hospedaje($id_tarifa);
+          //$precio_hospedaje= $tarifa->mostrar_precio_hospedaje($id_tarifa);
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+              $precio_hospedaje = $fila['precio_hospedaje'];
+              $precio_adulto = $fila['precio_adulto'];
+              $precio_junior = $fila['precio_junior'];
+              $precio_infantil = $fila['precio_infantil'];
+          }*/
+          echo '
         </div>
       </div>';
 ?>
