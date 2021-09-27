@@ -17,6 +17,7 @@
       public $extra_menor;
       public $tarifa;
       public $suplementos;
+      public $total_suplementos;
       public $total_hab;
       public $forzar_tarifa;
       public $total;
@@ -39,6 +40,7 @@
           $this->extra_menor= 0;
           $this->tarifa= 0;
           $this->suplementos= 0;
+          $this->total_suplementos= 0;
           $this->total_hab= 0;
           $this->forzar_tarifa= 0;
           $this->total= 0;
@@ -62,6 +64,7 @@
               $this->extra_menor= $fila['extra_menor'];
               $this->tarifa= $fila['tarifa'];
               $this->suplementos= $fila['suplementos'];
+              $this->total_suplementos= $fila['total_suplementos'];
               $this->total_hab= $fila['total_hab'];
               $this->forzar_tarifa= $fila['forzar_tarifa'];
               $this->total= $fila['total'];
@@ -69,12 +72,62 @@
           }
         }
       }
-      // Guardar en el tipo habitacion
-      function guardar_tipo($nombre,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_hab,$forzar_tarifa,$total){
-        $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `fecha_entrada'`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `suplementos`, `total_hab`, `forzar_tarifa`, `total`, `estado`)
-        VALUES ('$nombre', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$suplementos', '$total_hab', '$forzar_tarifa', '$total', '1');";
-        $comentario="Guardamos el tipo habitacion en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);                 
+      // Guardar la reservacion
+      function guardar_reservacion($fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$total,$usuario_id){
+        // Checar si la variable esta vacia o no
+        if (empty($extra_adulto)){
+          //echo 'La variable esta vacia';
+        }else{
+          $extra_adulto= 0;
+        }
+
+        if (empty($extra_junior)){
+          //echo 'La variable esta vacia';
+        }else{
+          $extra_junior= 0;
+        }
+
+        if (empty($extra_infantil)){
+          //echo 'La variable esta vacia';
+        }else{
+          $extra_infantil= 0;
+        }
+
+        if (empty($extra_menor)){
+          //echo 'La variable esta vacia';
+        }else{
+          $extra_menor= 0;
+        }
+
+        if (empty($suplementos)){
+          //echo 'La variable esta vacia';
+        }else{
+          $suplementos= 0;
+        }
+
+        if (empty($total_suplementos)){
+          //echo 'La variable esta vacia';
+        }else{
+          $total_suplementos= 0;
+        }
+        
+        $fecha_entrada=strtotime($fecha_entrada);
+        $fecha_salida=strtotime($fecha_salida);
+        $sentencia = "INSERT INTO `reservacion` (`fecha_entrada'`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `total`, `estado`)
+        VALUES ('$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa',  `$suplementos`, `$total_suplementos`, '$total_hab', '$forzar_tarifa', '$total', '1');";
+        $comentario="Guardamos la reservacion en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);  
+        
+        include_once('clase_log.php');
+        $logs = NEW Log(0);
+        $sentencia = "SELECT id FROM reservacion ORDER BY id DESC LIMIT 1";
+        $comentario="Obtengo el id de la reservacion agregada";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+        }
+        $logs->guardar_log($usuario_id,"Agregar reservacion: ". $id);
       }
       // Obtengo los datos de una herramienta //
        function datos_herramienta(){

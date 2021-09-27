@@ -1,28 +1,23 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_tarifa.php");
-  $tarifa= NEW Tarifa(0);
+  $tarifa= NEW Tarifa($_GET['tarifa']);
   $adultos= $tarifa->mostrar_cantidad_hospedaje($_GET['tarifa']);
-  $precio_hospedaje= 2;
-  $precio_adulto= 2;
-  $precio_junior= 2;
-  $precio_infantil= 2;
-  $consulta = $tarifa->datos_hospedaje($_GET['tarifa']);
-  //$precio_hospedaje= $tarifa->mostrar_precio_hospedaje($id_tarifa);
-  while ($fila = mysqli_fetch_array($consulta))
-  {
-    $precio_hospedaje = $fila['precio_hospedaje'];
-    $precio_adulto = $fila['precio_adulto'];
-    $precio_junior = $fila['precio_junior'];
-    $precio_infantil = $fila['precio_infantil'];
-  }
+  $precio_hospedaje= 0;
+  $precio_adulto= 0;
+  $precio_junior= 0;
+  $precio_infantil= 0;
+  $precio_hospedaje = $tarifa->precio_hospedaje;
+  $precio_adulto = $tarifa->precio_adulto;
+  $precio_junior = $tarifa->precio_junior;
+  $precio_infantil = $tarifa->precio_infantil;
   echo '
       <div class="container blanco"> 
         <div class="row div_adultos">
           <div class="col-sm-2">Adultos:</div>
           <div class="col-sm-2 div_adultos">
           <div class="form-group">
-            <input class="form-control" type="number"  id="adultos" placeholder='.$adultos.' disabled/>
+            <input class="form-control" type="number"  id="cantidad_hospedaje" placeholder='.$adultos.' disabled/>
           </div>
           </div>
           <div class="col-sm-2">Adultos Extra:</div>
@@ -88,10 +83,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-10" ></div>
-          <div class="col-sm-2" >
+          <div class="col-sm-10"></div>
+          <div class="col-sm-2">
           <div id="boton_tipo">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_hab()">
+            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.')">
           </div>
         </div>
       </div>';

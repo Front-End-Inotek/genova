@@ -4,10 +4,6 @@
   $reservacion= NEW Reservacion(0);
   include_once("clase_tarifa.php");
   $tarifa= NEW Tarifa(0);
-  $precio_hospedaje= 0;
-  $precio_adulto= 0;
-  $precio_junior= 0;
-  $precio_infantil= 0;
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left "><h2 class="text-dark margen-1">AGREGAR HABITACIONES</h2></div>
@@ -51,15 +47,7 @@
           <div class="col-sm-8"></div>
         </div>
         <div class="row div_adultos"></div>';
-          /*$consulta = $tarifa->datos_hospedaje($id_tarifa);
-          //$precio_hospedaje= $tarifa->mostrar_precio_hospedaje($id_tarifa);
-          while ($fila = mysqli_fetch_array($consulta))
-          {
-              $precio_hospedaje = $fila['precio_hospedaje'];
-              $precio_adulto = $fila['precio_adulto'];
-              $precio_junior = $fila['precio_junior'];
-              $precio_infantil = $fila['precio_infantil'];
-          }*/
+          // Div adultos donde van resto de los datos para agregar una reservacion
           echo '
         </div>
       </div>';
