@@ -706,6 +706,17 @@ function editar_reservacion(id){
     $("#area_trabajo_menu").load("includes/editar_reservacion.php?id="+id);
 }
 
+// Conseguimos la cantidad de adultos permitidos por tarifa hospedaje
+function cambiar_adultos(){
+    var tarifa= document.getElementById("tarifa").value;
+	var fecha_entrada= document.getElementById("fecha_entrada").value;
+	var fecha_salida= document.getElementById("fecha_salida").value;
+	var noches= calculo_noches(fecha_entrada,fecha_salida);
+	var numero_hab= document.getElementById("numero_hab").value;
+    $(".div_adultos_editar").html('<div class="spinner-border text-primary"></div>');
+    $(".div_adultos_editar").load("includes/cambiar_tarifa_editar.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab);  
+}
+
 // Calculamos el total de una reservacion al editarla
 function calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_infantil){
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
