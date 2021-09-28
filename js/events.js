@@ -648,7 +648,7 @@ function calcular_total(precio_hospedaje,total_adulto,total_junior,total_infanti
 }
 
 // Guardar una reservacion
-function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_menor,cantidad_hospedaje){
+function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje){
     var usuario_id=localStorage.getItem("id");
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
 	var fecha_salida= document.getElementById("fecha_salida").value;
@@ -666,10 +666,10 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_me
 	var total_adulto= total_adulto * extra_adulto;
 	var total_junior= total_junior * extra_junior;
 	var total_infantil= total_infantil * extra_infantil;
-	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil;//total_hospedaje
+	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
 	var total= total_hab + total_suplementos;
 	//console.log(fecha_entrada);
-	/*alert(fecha_entrada);
+	/*lert(fecha_entrada);
 	alert(fecha_salida);
 	alert(noches);
 	alert(numero_hab);

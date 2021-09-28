@@ -74,42 +74,7 @@
       }
       // Guardar la reservacion
       function guardar_reservacion($fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$total,$usuario_id){
-        // Checar si la variable esta vacia o no
-        if(empty($extra_adulto)){
-          //echo 'La variable esta vacia';
-        }else{
-          $extra_adulto= 0;
-        }
-
-        if(empty($extra_junior)){
-          //echo 'La variable esta vacia';
-        }else{
-          $extra_junior= 0;
-        }
-
-        if(empty($extra_infantil)){
-          //echo 'La variable esta vacia';
-        }else{
-          $extra_infantil= 0;
-        }
-
-        if(empty($extra_menor)){
-          //echo 'La variable esta vacia';
-        }else{
-          $extra_menor= 0;
-        }
-
-        if(empty($suplementos)){
-          //echo 'La variable esta vacia';
-        }else{
-          $suplementos= '';
-        }
-
-        if(empty($total_suplementos)){
-          //echo 'La variable esta vacia';
-        }else{
-          $total_suplementos= 0;
-        }
+        
         
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
@@ -223,12 +188,12 @@
                 <td>'.$fila['suplementos'].'</td>  
                 <td>'.$fila['total_suplementos'].'</td> 
                 <td>'.$fila['total_hab'].'</td> 
-                <td>'.$fila['total'].'</td>'; 
+                <td>'.$fila['forzar_tarifa'].'</td>'; 
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_tipo('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_tipo('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['id'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
               }
@@ -306,12 +271,12 @@
         $comentario="Editar los tipos de habitaciones dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar los tipos habitaciones
-      function borrar_tipo($id){
-        $sentencia = "UPDATE `tipo_hab` SET
+      // Borrar las reservaciones
+      function borrar_reservacion($id){
+        $sentencia = "UPDATE `reservacion` SET
         `estado` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de tipos de habitaciones como inactivo";
+        $comentario="Poner estado de las reservaciones como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtengo el nombre de la herramienta//
