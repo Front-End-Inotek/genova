@@ -21,7 +21,7 @@
           <div class="col-sm-1">Noches:</div>
           <div class="col-sm-1">
           <div class="form-group">
-            <input class="form-control" type="number"  id="noches" placeholder="0" disabled/>
+            <input class="form-control" type="number"  id="noches" placeholder="0" onchange="cambiar_adultos()" disabled/>
           </div>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <div class="col-sm-2">No.Hab.:</div>
           <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="number"  id="numero_hab" placeholder="0">
+            <input class="form-control" type="number"  id="numero_hab" placeholder="0" onchange="cambiar_adultos()">
           </div>
           </div>
           <div class="col-sm-1">Tarifa:</div>

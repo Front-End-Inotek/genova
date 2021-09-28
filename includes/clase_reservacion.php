@@ -134,9 +134,9 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT *,reservacion .id AS ID,tipo_hab.nombre AS habitacion
+        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion
         FROM reservacion
-        INNER JOIN tipo_hab ON reservacion .tarifa = tipo_hab.id WHERE reservacion .estado = 1 ORDER BY reservacion.id DESC;";
+        INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id WHERE reservacion.estado = 1 ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -187,13 +187,17 @@
                 <td>'.$fila['extra_menor'].'</td>
                 <td>'.$fila['suplementos'].'</td>  
                 <td>'.$fila['total_suplementos'].'</td> 
-                <td>'.$fila['total_hab'].'</td> 
-                <td>'.$fila['forzar_tarifa'].'</td>'; 
+                <td>'.$fila['total_hab'].'</td>'; 
+                if($fila['forzar_tarifa']>0){
+                  echo '<td>'.$fila['forzar_tarifa'].'</td>'; 
+                }else{
+                  echo '<td>'.$fila['total'].'</td>'; 
+                } 
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
               }

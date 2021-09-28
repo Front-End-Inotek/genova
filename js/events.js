@@ -551,45 +551,6 @@ function agregar_reservaciones(){
 
 // Guardar una reservacion
 /*function guardar_reservacion(){
-    var usuario_id=localStorage.getItem("id");
-	var nombre= encodeURI(document.getElementById("nombre").value);
-	var precio_hospedaje= document.getElementById("precio_hospedaje").value;
-	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
-	var precio_adulto= document.getElementById("precio_adulto").value;
-	var precio_junior= document.getElementById("precio_junior").value;
-	var precio_infantil= document.getElementById("precio_infantil").value;
-	var tipo= document.getElementById("tipo").value;
-	
-
-	if(nombre.length >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && precio_adulto >0 && tipo >0){
-			//$('#boton_reservacion').hide();
-			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-				  "nombre": nombre,
-				  "precio_hospedaje": precio_hospedaje,
-				  "cantidad_hospedaje": cantidad_hospedaje,
-				  "precio_adulto": precio_adulto,
-				  "precio_junior": precio_junior,
-				  "precio_infantil": precio_infantil,
-				  "tipo": tipo,
-                  "usuario_id": usuario_id,
-				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_reservacion.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_reservaciones,
-				  timeout:5000,
-				  error:problemas_sistema
-				});
-				return false;
-			}else{
-				alert("Campos incompletos");
-			}
 }*/
 
 // Calculamos la cantidad de noches de una reservacion
@@ -642,9 +603,8 @@ function calcular_total(precio_hospedaje,total_adulto,total_junior,total_infanti
 
 	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
 	var total= total_hab + total_suplementos;
-	document.getElementById("total_hab").value =total_hab;
-    document.getElementById("forzar_tarifa").value =total;
-	document.getElementById("total").value =total;
+	document.getElementById("total_hab").value= total_hab;
+	document.getElementById("total").value= total;
 }
 
 // Guardar una reservacion
@@ -686,7 +646,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	alert(total);*/
 	
 
-	if(fecha_entrada.length >0 && fecha_salida.length >0 && numero_hab >0 && tarifa >0){
+	if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0){
 			//$('#boton_reservacion').hide();
 			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
@@ -744,6 +704,33 @@ function ver_hab_paginacion(buton,posicion){
 // Editar una reservacion
 function editar_reservacion(id){
     $("#area_trabajo_menu").load("includes/editar_reservacion.php?id="+id);
+}
+
+// Calculamos el total de una reservacion al editarla
+function calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_infantil){
+	var fecha_entrada= document.getElementById("fecha_entrada").value;
+	var fecha_salida= document.getElementById("fecha_salida").value;
+	var noches= calculo_noches(fecha_entrada,fecha_salida);
+	var numero_hab= document.getElementById("numero_hab").value;
+	var tarifa= document.getElementById("tarifa").value;
+    var extra_adulto= document.getElementById("extra_adulto").value;
+	var extra_junior= document.getElementById("extra_junior").value;
+	var extra_infantil= document.getElementById("extra_infantil").value;
+	var suplementos= encodeURI(document.getElementById("suplementos").value);
+	var total_suplementos= Number(document.getElementById("total_suplementos").value);
+    
+	var total_hospedaje= precio_hospedaje * noches * numero_hab;
+	var total_adulto= total_adulto * extra_adulto;
+	var total_junior= total_junior * extra_junior;
+	var total_infantil= total_infantil * extra_infantil;
+
+	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
+	var total= total_hab + total_suplementos;
+	document.getElementById("noches").value= noches;
+	document.getElementById("tarifa").value= tarifa;
+	document.getElementById("noches").value= noches;
+	document.getElementById("total_hab").value= total_hab;
+	document.getElementById("total").value= total;
 }
 
 // Editar una reservacion
