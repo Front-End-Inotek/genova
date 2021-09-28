@@ -118,7 +118,7 @@
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
-        include_once('clase_log.php');
+        include_once("clase_log.php");
         $logs = NEW Log(0);
         $sentencia = "SELECT id FROM reservacion ORDER BY id DESC LIMIT 1";
         $comentario="Obtengo el id de la reservacion agregada";
@@ -130,18 +130,18 @@
         $logs->guardar_log($usuario_id,"Agregar reservacion: ". $id);
       }
       // Obtengo los datos de una herramienta //
-      /* function datos_herramienta(){
+      function datos_herramienta(){
         $sentencia = "SELECT * FROM herramienta WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar los datos de tipos habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-      // Obtengo el total de tipos habitaciones
+      // Obtengo el total de las reservaciones
       function total_elementos(){
         $cantidad=0;
-        $sentencia = "SELECT count(id) AS cantidad  FROM tipo_hab WHERE estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT count(id) AS cantidad  FROM reservacion WHERE estado = 1 ORDER BY nombre";
         //echo $sentencia;
-        $comentario="Obtengo el total de tipos habitaciones";
+        $comentario="Obtengo el total de las reservaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
@@ -149,12 +149,12 @@
         }
         return $cantidad;
       }
-      // Mostramos los tipos habitaciones
+      // Mostramos las reservaciones
       function mostrar($posicion,$id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
-        $editar = $usuario->tipo_editar;
-        $borrar = $usuario->tipo_borrar;
+        $editar = $usuario->reservacion_editar;
+        $borrar = $usuario->reservacion_borrar;
 
         $cont = 1;
         //echo $posicion;
@@ -291,7 +291,7 @@
           $nombre= $fila['nombre'];
         }
         return $nombre;
-      } */
+      } 
              
   }
 ?>

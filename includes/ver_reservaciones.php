@@ -1,7 +1,7 @@
 <?php
 	date_default_timezone_set('America/Mexico_City');
-  include_once("clase_tipo.php");
-  $tipo= NEW Tipo(0);
+  include_once("clase_reservacion.php");
+  $reservacion= NEW Reservacion(0);
   
   echo ' <div class="container-fluid">
           <br>
@@ -13,7 +13,7 @@
             <div class="col-sm-4 text-center"><button onclick="reporte_tipo()" class="btn btn-primary" >Reporte de Tipo</button></div>
           </div></br>
           <div id="paginacion_tipos">';
-          $cat_paginas = $tipo->mostrar(1,$_GET['usuario_id']);
+          $cat_paginas = $reservacion->mostrar(1,$_GET['usuario_id']);
   echo '
           </div>
          </div>';

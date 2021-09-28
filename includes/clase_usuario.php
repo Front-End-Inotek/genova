@@ -192,7 +192,7 @@
       }
       // Evaluar entrada de sesion
       function evaluarEntrada($usuario_evaluar ,$password_evaluar){
-          include_once('clase_log.php');
+          include_once("clase_log.php");
           $logs = NEW Log(0);
           $id=0;
           $sentencia = "SELECT id FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$password_evaluar' AND estado = 1";
