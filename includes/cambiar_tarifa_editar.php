@@ -14,7 +14,7 @@
   $precio_hab= $precio_hospedaje * $_GET['noches'] * $_GET['numero_hab'];
   echo '
       <div class="container blanco"> 
-        <div class="row div_adultos">
+        <div class="row div_adultos_editar">
           <div class="col-sm-2">Adultos:</div>
           <div class="col-sm-2 div_adultos">
           <div class="form-group">

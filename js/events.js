@@ -706,8 +706,8 @@ function editar_reservacion(id){
     $("#area_trabajo_menu").load("includes/editar_reservacion.php?id="+id);
 }
 
-// Conseguimos la cantidad de adultos permitidos por tarifa hospedaje
-function cambiar_adultos(){
+// Conseguimos la cantidad de adultos permitidos por tarifa hospedaje al editarla
+function cambiar_adultos_editar(){
     var tarifa= document.getElementById("tarifa").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
 	var fecha_salida= document.getElementById("fecha_salida").value;

@@ -23,7 +23,7 @@
           <div class="col-sm-1">Noches:</div>
           <div class="col-sm-1">
           <div class="form-group">
-            <input class="form-control" type="number"  id="noches" value='.$noches.' disabled/>
+            <input class="form-control" type="number"  id="noches" value="'.$reservacion->noches.'" disabled/>
           </div>
           </div>
         </div>
