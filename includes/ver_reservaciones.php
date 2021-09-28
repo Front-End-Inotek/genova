@@ -3,7 +3,7 @@
   include_once("clase_reservacion.php");
   $reservacion= NEW Reservacion(0);
   
-  echo ' <div class="container-fluid">
+  echo ' <div class="container-fluid blanco"> 
           <br>
           <div class="col-sm-12 text-center"><h2 class="text-dark">RESERVACIONES</h2></div>
           

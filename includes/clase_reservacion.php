@@ -190,7 +190,7 @@
                 <td>'.$fila['total_hab'].'</td> 
                 <td>'.$fila['forzar_tarifa'].'</td>'; 
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_tipo('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['id'].')"> Borrar</button></td>';
