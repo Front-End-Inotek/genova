@@ -139,7 +139,9 @@
       // Obtengo el total de las reservaciones
       function total_elementos(){
         $cantidad=0;
-        $sentencia = "SELECT count(id) AS cantidad  FROM reservacion WHERE estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT *,count(reservacion.id) AS cantidad,reservacion.id AS ID,tipo_hab.nombre AS habitacion
+        FROM reservacion
+        INNER JOIN tipo_hab ON reservacion .tarifa = tipo_hab.id WHERE reservacion .estado = 1 ORDER BY reservacion.id DESC;";
         //echo $sentencia;
         $comentario="Obtengo el total de las reservaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -167,15 +169,32 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY nombre";
-        $comentario="Mostrar las herramientas";
+        $sentencia = "SELECT *,reservacion .id AS ID,tipo_hab.nombre AS habitacion
+        FROM reservacion
+        INNER JOIN tipo_hab ON reservacion .tarifa = tipo_hab.id WHERE reservacion .estado = 1 ORDER BY reservacion.id DESC;";
+        $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_tipo">
+        echo '<div class="table-responsive" id="tabla_reservacion">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Nombre</th>';
+            <th>Numero</th>
+            <th>Fecha Entrada</th>
+            <th>Fecha Salida</th>
+            <th>Noches</th>
+            <th>No. Habitaciones</th>
+            <th>Tarifa</th>
+            <th>Precio Hospedaje</th>
+            <th>Cantidad Hospedaje</th>
+            <th>Extra Adulto</th>
+            <th>Extra Junior</th>
+            <th>Extra Infantil</th>
+            <th>Extra Menor</th>
+            <th>Suplementos</th>
+            <th>Total Suplementos</th>
+            <th>Total Habitacion</th>
+            <th>Total Estancia</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
@@ -189,7 +208,22 @@
             {
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
-                <td>'.$fila['nombre'].'</td>';
+                <td>'.$fila['ID'].'</td> 
+                <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                <td>'.$fila['noches'].'</td> 
+                <td>'.$fila['numero_hab'].'</td> 
+                <td>'.$fila['habitacion'].'</td> 
+                <td>'.$fila['precio_hospedaje'].'</td>
+                <td>'.$fila['cantidad_hospedaje'].'</td>  
+                <td>'.$fila['extra_adulto'].'</td> 
+                <td>'.$fila['extra_junior'].'</td> 
+                <td>'.$fila['extra_infantil'].'</td> 
+                <td>'.$fila['extra_menor'].'</td>
+                <td>'.$fila['suplementos'].'</td>  
+                <td>'.$fila['total_suplementos'].'</td> 
+                <td>'.$fila['total_hab'].'</td> 
+                <td>'.$fila['total'].'</td>'; 
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_tipo('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
