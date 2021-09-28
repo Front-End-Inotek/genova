@@ -46,8 +46,8 @@
           $this->total= 0;
           $this->estado= 0;
         }else{
-          $sentencia = "SELECT * FROM tipo_hab WHERE id = $id LIMIT 1 ";
-          $comentario="Obtener todos los valores de tipo habitacion";
+          $sentencia = "SELECT * FROM reservacion WHERE id = $id LIMIT 1 ";
+          $comentario="Obtener todos los valores de una reservacion";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           while ($fila = mysqli_fetch_array($consulta))
           {
@@ -75,37 +75,37 @@
       // Guardar la reservacion
       function guardar_reservacion($fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$total,$usuario_id){
         // Checar si la variable esta vacia o no
-        if (empty($extra_adulto)){
+        if(empty($extra_adulto)){
           //echo 'La variable esta vacia';
         }else{
           $extra_adulto= 0;
         }
 
-        if (empty($extra_junior)){
+        if(empty($extra_junior)){
           //echo 'La variable esta vacia';
         }else{
           $extra_junior= 0;
         }
 
-        if (empty($extra_infantil)){
+        if(empty($extra_infantil)){
           //echo 'La variable esta vacia';
         }else{
           $extra_infantil= 0;
         }
 
-        if (empty($extra_menor)){
+        if(empty($extra_menor)){
           //echo 'La variable esta vacia';
         }else{
           $extra_menor= 0;
         }
 
-        if (empty($suplementos)){
+        if(empty($suplementos)){
           //echo 'La variable esta vacia';
         }else{
-          $suplementos= 0;
+          $suplementos= '';
         }
 
-        if (empty($total_suplementos)){
+        if(empty($total_suplementos)){
           //echo 'La variable esta vacia';
         }else{
           $total_suplementos= 0;
@@ -113,8 +113,8 @@
         
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
-        $sentencia = "INSERT INTO `reservacion` (`fecha_entrada'`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `total`, `estado`)
-        VALUES ('$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa',  `$suplementos`, `$total_suplementos`, '$total_hab', '$forzar_tarifa', '$total', '1');";
+        $sentencia = "INSERT INTO `reservacion` (`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `total`, `estado`)
+        VALUES ('$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa',  '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$total', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -130,7 +130,7 @@
         $logs->guardar_log($usuario_id,"Agregar reservacion: ". $id);
       }
       // Obtengo los datos de una herramienta //
-       function datos_herramienta(){
+      /* function datos_herramienta(){
         $sentencia = "SELECT * FROM herramienta WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar los datos de tipos habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -291,7 +291,7 @@
           $nombre= $fila['nombre'];
         }
         return $nombre;
-      } 
+      } */
              
   }
 ?>

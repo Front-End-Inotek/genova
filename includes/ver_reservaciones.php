@@ -5,7 +5,7 @@
   
   echo ' <div class="container-fluid">
           <br>
-          <div class="col-sm-12 text-center"><h2 class="text-dark">TIPOS DE HABITACIONES</h2></div>
+          <div class="col-sm-12 text-center"><h2 class="text-dark">RESERVACIONES</h2></div>
           
           <div class="row">
             <div class="col-sm-4 text-center"><input type="text" id="a_buscar" placeholder="Buscar en tipos" onkeyup="buscar_tipo()" class="color_black form-control form-control-lg" autofocus="autofocus"/></div>
