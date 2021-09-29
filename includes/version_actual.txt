@@ -11,3 +11,4 @@ VERSION 1.1
 VERSION 1.2
 -Generar rama reservacion
 -Generar funciones basicas para reservacion
+-Generar busquedas para reservacion
