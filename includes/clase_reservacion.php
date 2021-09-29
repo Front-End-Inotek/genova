@@ -212,31 +212,44 @@
         </div>';
         return $cat_paginas;
       }
-      // Barra de busqueda en ver los tipos habitaciones//
-      function buscar($a_buscar,$id){
+      // Barra de busqueda en ver reservaciones
+      function buscar_reservacion($a_buscar,$id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
-        $editar = $usuario->herramienta_editar;
-        $borrar = $usuario->herramienta_borrar;
+        $editar = $usuario->reservacion_editar;
+        $borrar = $usuario->reservacion_borrar;
         
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT * FROM herramienta WHERE (nombre LIKE '%$a_buscar%' || marca LIKE '%$a_buscar%' || modelo LIKE '%$a_buscar%' || descripcion LIKE '%$a_buscar%') AND estado = 1 ORDER BY nombre";
-          $comentario="Mostrar diferentes busquedas en ver clientes"; 
+          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion
+          FROM reservacion
+          INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id WHERE (reservacion.id LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND reservacion.estado = 1 ORDER BY reservacion.id DESC";
+          $comentario="Mostrar diferentes busquedas en ver reservaciones"; 
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
           echo ' 
-            <div class="table-responsive" id="tabla_inventario">
+            <div class="table-responsive" id="tabla_reservacion">
             <table class="table table-bordered table-hover">
               <thead>
                 <tr class="table-primary-encabezado text-center">
-                <th>Nombre</th> 
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Descripcion</th>
-                <th>Cantidad en Almacen</th>
-                <th>Cantidad Prestadas</th>';
+                <th>Numero</th>
+                <th>Fecha Entrada</th>
+                <th>Fecha Salida</th>
+                <th>Noches</th>
+                <th>No. Habitaciones</th>
+                <th>Tarifa</th>
+                <th>Precio Hospedaje</th>
+                <th>Cantidad Hospedaje</th>
+                <th>Extra Adulto</th>
+                <th>Extra Junior</th>
+                <th>Extra Infantil</th>
+                <th>Extra Menor</th>
+                <th>Suplementos</th>
+                <th>Total Suplementos</th>
+                <th>Total Habitacion</th>
+                <th>Descuento</th>
+                <th>Total Estancia</th>';
                 if($editar==1){
                   echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
                 }
@@ -249,25 +262,129 @@
                 while ($fila = mysqli_fetch_array($consulta))
                 {
                   echo '<tr class="text-center">
-                  <td>'.$fila['nombre'].'</td>  
-                  <td>'.$fila['marca'].'</td>
-                  <td>'.$fila['modelo'].'</td>
-                  <td>'.$fila['descripcion'].'</td>  
-                  <td>'.$fila['cantidad_almacen'].'</td>
-                  <td>'.$fila['cantidad_prestadas'].'</td>';
+                  <td>'.$fila['ID'].'</td> 
+                  <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                  <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                  <td>'.$fila['noches'].'</td> 
+                  <td>'.$fila['numero_hab'].'</td> 
+                  <td>'.$fila['habitacion'].'</td> 
+                  <td>'.$fila['precio_hospedaje'].'</td>
+                  <td>'.$fila['cantidad_hospedaje'].'</td>  
+                  <td>'.$fila['extra_adulto'].'</td> 
+                  <td>'.$fila['extra_junior'].'</td> 
+                  <td>'.$fila['extra_infantil'].'</td> 
+                  <td>'.$fila['extra_menor'].'</td>
+                  <td>'.$fila['suplementos'].'</td>  
+                  <td>'.$fila['total_suplementos'].'</td> 
+                  <td>'.$fila['total_hab'].'</td>
+                  <td>'.$fila['descuento'].'</td> '; 
+                  if($fila['forzar_tarifa']>0){
+                    echo '<td>'.$fila['forzar_tarifa'].'</td>'; 
+                  }else{
+                    echo '<td>'.$fila['total'].'</td>'; 
+                  } 
                   if($editar==1){
-                    echo '<td><button class="btn btn-outline-info btn-lg" onclick="editar_herramienta('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                    echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                   }
                   if($borrar==1){
-                    echo '<td><button class="btn btn-outline-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_herramienta('.$fila['id'].')"> Borrar</button></td>';
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
                   }
-                echo '</tr>';
+                  echo '</tr>';
                 }
         }
               echo '
               </tbody>
             </table>
             </div>';
+      }
+      // Busqueda por fecha en ver reservaciones
+      function mostrar_reservacion_fecha($fecha_ini_tiempo,$fecha_fin_tiempo,$id){
+        include_once('clase_usuario.php');
+        $usuario =  NEW Usuario($id);
+        $editar = $usuario->reservacion_editar;
+        $borrar = $usuario->reservacion_borrar;
+        date_default_timezone_set('America/Mexico_City');
+        $fecha_ini_tiempo =$fecha_ini_tiempo. " 0:00:00";
+        $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
+        $fecha_ini =strtotime($fecha_ini_tiempo);
+        $fecha_fin =strtotime($fecha_fin_tiempo);
+        
+        if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
+          $cat_paginas = $this->mostrar(1,$id);
+        }else{
+          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion
+          FROM reservacion
+          INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id WHERE reservacion.fecha_entrada >= $fecha_ini &&reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND reservacion.estado = 1 ORDER BY reservacion.fecha_entrada DESC;";
+          $comentario="Mostrar las rquisiciones";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //se recibe la consulta y se convierte a arreglo
+          echo '<div class="table-responsive" id="tabla_reservacion">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-primary-encabezado text-center">
+              <th>Numero</th>
+              <th>Fecha Entrada</th>
+              <th>Fecha Salida</th>
+              <th>Noches</th>
+              <th>No. Habitaciones</th>
+              <th>Tarifa</th>
+              <th>Precio Hospedaje</th>
+              <th>Cantidad Hospedaje</th>
+              <th>Extra Adulto</th>
+              <th>Extra Junior</th>
+              <th>Extra Infantil</th>
+              <th>Extra Menor</th>
+              <th>Suplementos</th>
+              <th>Total Suplementos</th>
+              <th>Total Habitacion</th>
+              <th>Descuento</th>
+              <th>Total Estancia</th>';
+              if($editar==1){
+                echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+              }
+              if($borrar==1){
+                echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
+              }
+              echo '</tr>
+            </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta)) 
+              {
+                echo '<tr class="text-center">
+                <td>'.$fila['ID'].'</td> 
+                <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                <td>'.$fila['noches'].'</td> 
+                <td>'.$fila['numero_hab'].'</td> 
+                <td>'.$fila['habitacion'].'</td> 
+                <td>'.$fila['precio_hospedaje'].'</td>
+                <td>'.$fila['cantidad_hospedaje'].'</td>  
+                <td>'.$fila['extra_adulto'].'</td> 
+                <td>'.$fila['extra_junior'].'</td> 
+                <td>'.$fila['extra_infantil'].'</td> 
+                <td>'.$fila['extra_menor'].'</td>
+                <td>'.$fila['suplementos'].'</td>  
+                <td>'.$fila['total_suplementos'].'</td> 
+                <td>'.$fila['total_hab'].'</td>
+                <td>'.$fila['descuento'].'</td> '; 
+                if($fila['forzar_tarifa']>0){
+                  echo '<td>'.$fila['forzar_tarifa'].'</td>'; 
+                }else{
+                  echo '<td>'.$fila['total'].'</td>'; 
+                } 
+                if($editar==1){
+                  echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                }
+                if($borrar==1){
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
+                }
+                echo '</tr>';
+              }
+        }
+            echo '
+          </tbody>
+        </table>
+        </div>';
       }
       // Editar una reservacion
       function editar_reservacion($id,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total){
