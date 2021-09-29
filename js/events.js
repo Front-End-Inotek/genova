@@ -82,6 +82,7 @@ function salida_automatica(){
 // Recarga automatica de pagina
 function recargar_pagina(){
     location.reload();
+	openNav();
 }
 
 // Evaluar si la session  
