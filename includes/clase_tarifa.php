@@ -108,7 +108,7 @@
         </table>
         </div>';
       }
-      // Editar las tarifas hospedaje
+      // Editar una tarifa hospedaje
       function editar_tarifa($id,$nombre,$precio_hospedaje,$cantidad_hospedaje,$precio_adulto,$precio_junior,$precio_infantil,$tipo){
         $sentencia = "UPDATE `tarifa_hospedaje` SET
             `nombre` = '$nombre',
@@ -120,10 +120,10 @@
             `tipo` = '$tipo'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar las tarifas hospedaje dentro de la base de datos ";
+        $comentario="Editar una tarifa hospedaje dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar las tarifas hospedaje
+      // Borrar una tarifa hospedaje
       function borrar_tarifa($id){
         $sentencia = "UPDATE `tarifa_hospedaje` SET
         `estado` = '0'

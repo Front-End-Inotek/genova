@@ -37,7 +37,7 @@
           <div class="col-sm-1">Tarifa:</div>
           <div class="col-sm-3">
           <div class="form-group">
-            <select class="form-control" id="tarifa" onchange="cambiar_adultos_editar()">';
+            <select class="form-control" id="tarifa" onchange="cambiar_adultos_editar('.$_GET['id'].')">';
               $tarifa->mostrar_tarifas_editar($reservacion->tarifa);
               echo '
             </select>

@@ -81,22 +81,22 @@
         </table>
         </div>';
       }
-      // Editar los tipos habitaciones
+      // Editar un tipo habitacion
       function editar_tipo($id,$nombre,$codigo){
         $sentencia = "UPDATE `tipo_hab` SET
             `nombre` = '$nombre',
             `codigo` = '$codigo'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar los tipos de habitaciones dentro de la base de datos ";
+        $comentario="Editar un tipo habitacion dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar los tipos habitaciones
+      // Borrar un tipo habitacion
       function borrar_tipo($id){
         $sentencia = "UPDATE `tipo_hab` SET
         `estado` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de un tipo de habitacion como inactivo";
+        $comentario="Poner estado de un tipo habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
              

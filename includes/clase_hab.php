@@ -91,7 +91,7 @@
         </table>
         </div>';
       }
-      // Editar las habitaciones
+      // Editar una habitacion
       function editar_hab($id,$nombre,$tipo,$comentario){
         $sentencia = "UPDATE `hab` SET
             `nombre` = '$nombre',
@@ -99,10 +99,10 @@
             `comentario` = '$comentario'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar las habitaciones dentro de la base de datos ";
+        $comentario="Editar una habitacion dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar las habitaciones
+      // Borrar una habitacion
       function borrar_hab($id){
         $sentencia = "UPDATE `hab` SET
         `estado` = '0'

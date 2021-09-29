@@ -76,15 +76,21 @@
             <input class="form-control" type="number"  id="forzar_tarifa" placeholder="0">
           </div>
           </div>
+          <div class="col-sm-2">Descuento:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="descuento" placeholder="0" onchange="calcular_total('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"></div>
           <div class="col-sm-2">Total Estancia:</div>
           <div class="col-sm-2">
           <div class="form-group">
             <input class="form-control" type="number"  id="total" placeholder='.$precio_hab.' disabled/>
           </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-10"></div>
           <div class="col-sm-2">
           <div id="boton_reservacion">
             <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.')">

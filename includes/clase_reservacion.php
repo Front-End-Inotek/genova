@@ -20,6 +20,7 @@
       public $total_suplementos;
       public $total_hab;
       public $forzar_tarifa;
+      public $descuento;
       public $total;
       public $estado;
       
@@ -43,6 +44,7 @@
           $this->total_suplementos= 0;
           $this->total_hab= 0;
           $this->forzar_tarifa= 0;
+          $this->descuento= 0;
           $this->total= 0;
           $this->estado= 0;
         }else{
@@ -67,19 +69,18 @@
               $this->total_suplementos= $fila['total_suplementos'];
               $this->total_hab= $fila['total_hab'];
               $this->forzar_tarifa= $fila['forzar_tarifa'];
+              $this->descuento= $fila['descuento'];
               $this->total= $fila['total'];
               $this->estado= $fila['estado'];
           }
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$total,$usuario_id){
-        
-        
+      function guardar_reservacion($fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$usuario_id){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
-        $sentencia = "INSERT INTO `reservacion` (`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `total`, `estado`)
-        VALUES ('$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa',  '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$total', '1');";
+        $sentencia = "INSERT INTO `reservacion` (`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `estado`)
+        VALUES ('$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa',  '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -159,6 +160,7 @@
             <th>Suplementos</th>
             <th>Total Suplementos</th>
             <th>Total Habitacion</th>
+            <th>Descuento</th>
             <th>Total Estancia</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -187,7 +189,8 @@
                 <td>'.$fila['extra_menor'].'</td>
                 <td>'.$fila['suplementos'].'</td>  
                 <td>'.$fila['total_suplementos'].'</td> 
-                <td>'.$fila['total_hab'].'</td>'; 
+                <td>'.$fila['total_hab'].'</td>
+                <td>'.$fila['descuento'].'</td> '; 
                 if($fila['forzar_tarifa']>0){
                   echo '<td>'.$fila['forzar_tarifa'].'</td>'; 
                 }else{
@@ -266,35 +269,41 @@
             </table>
             </div>';
       }
-      // Editar los tipos habitaciones
-      function editar_tipo($id,$nombre){
-        $sentencia = "UPDATE `tipo_hab` SET
-            `nombre` = '$nombre'
+      // Editar una reservacion
+      function editar_reservacion($id,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total){
+        $fecha_entrada=strtotime($fecha_entrada);
+        $fecha_salida=strtotime($fecha_salida);
+        $sentencia = "UPDATE `reservacion` SET
+            `fecha_entrada` = '$fecha_entrada',
+            `fecha_salida` = '$fecha_salida',
+            `noches` = '$noches',
+            `numero_hab` = '$numero_hab',
+            `precio_hospedaje` = '$precio_hospedaje',
+            `cantidad_hospedaje` = '$cantidad_hospedaje',
+            `extra_adulto` = '$extra_adulto',
+            `extra_junior` = '$extra_junior',
+            `extra_infantil` = '$extra_infantil',
+            `extra_menor` = '$extra_menor',
+            `tarifa` = '$tarifa',
+            `suplementos` = '$suplementos',
+            `total_suplementos` = '$total_suplementos',
+            `total_hab` = '$total_hab',
+            `forzar_tarifa` = '$forzar_tarifa',
+            `descuento` = '$descuento',
+            `total` = '$total'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar los tipos de habitaciones dentro de la base de datos ";
+        $comentario="Editar una reservacion dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar las reservaciones
+      // Borrar una reservacion
       function borrar_reservacion($id){
         $sentencia = "UPDATE `reservacion` SET
         `estado` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de las reservaciones como inactivo";
+        $comentario="Poner estado de una reservacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Obtengo el nombre de la herramienta//
-      function nombre_herramienta($id){
-        $sentencia = "SELECT nombre FROM herramienta WHERE id = $id AND estado = 1 LIMIT 1";
-        //echo $sentencia;
-        $comentario="Obtengo el nombre de la herramienta";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $nombre= $fila['nombre'];
-        }
-        return $nombre;
-      } 
              
   }
 ?>
