@@ -82,7 +82,6 @@ function salida_automatica(){
 // Recarga automatica de pagina
 function recargar_pagina(){
     location.reload();
-	openNav();
 }
 
 // Evaluar si la session  
@@ -722,10 +721,35 @@ function ver_reservaciones(){
 	closeNav();
 }
 
-// Muestra la paginacion de las reservaciones*
-function ver_hab_paginacion(buton,posicion){
+// Muestra la paginacion de las reservaciones
+function ver_reservaciones_paginacion(buton,posicion){
     var usuario_id=localStorage.getItem("id");
-    $("#paginacion_hab").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+}
+
+// Barra de diferentes busquedas en ver reservaciones*
+function buscar_reservacion(){
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var usuario_id=localStorage.getItem("id");
+    if(a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+}
+
+// Busqueda por fecha en ver reservaciones
+function busqueda_reservacion(){
+	var inicial=$("#inicial").val();
+	var final=$("#final").val();
+    var id=localStorage.getItem("id");
+    if(inicial.length >0 && final.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_reservacion").load("includes/busqueda_reservacion.php?inicial="+inicial+"&final="+final+"&id="+id);
 }
 
 // Editar una reservacion
@@ -895,14 +919,3 @@ function reporte_herramienta(){
     window.open("includes/reporte_herramienta.php?id="+id);
 }
 
-// Barra de diferentes busquedas en ver herramientas
-function buscar_herramienta(){
-    var a_buscar=encodeURIComponent($("#a_buscar").val());
-    var usuario_id=localStorage.getItem("id");
-    if(a_buscar.length >0){
-        $('.pagination').hide();
-    }else{
-        $('.pagination').show();
-    }
-	$("#tabla_herramienta").load("includes/buscar_herramienta.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
-}
