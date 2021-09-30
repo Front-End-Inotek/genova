@@ -137,12 +137,10 @@
         $comentario="Mostrar los nombres de tipos de habitaciones de tarifas hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-  
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
         }
-  
       }
       // Obtengo los nombres de los tipos de habitaciones de tarifas hospedaje a editar
       function mostrar_tipo_editar($id){

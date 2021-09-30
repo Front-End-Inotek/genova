@@ -164,113 +164,113 @@
       }
       // Datos inicio de sesion
       function datos($id){
-          $sentencia = "SELECT * FROM usuario WHERE id = $id LIMIT 1 ";
-          $comentario="Obtener todos los valores del usuario ";
-          $consulta= $this->realizaConsulta($sentencia,$comentario);
-          while ($fila = mysqli_fetch_array($consulta))
-          {
-              $this->usuario= $fila['usuario'];
-              $this->nivel= $fila['nivel'];
-              $this->estado= $fila['estado'];
-              $this->activo= $fila['activo'];
+        $sentencia = "SELECT * FROM usuario WHERE id = $id LIMIT 1 ";
+        $comentario="Obtener todos los valores del usuario ";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $this->usuario= $fila['usuario'];
+          $this->nivel= $fila['nivel'];
+          $this->estado= $fila['estado'];
+          $this->activo= $fila['activo'];
           
-          }
-          $this->obtener_token_activo($id);
+        }
+        $this->obtener_token_activo($id);
       }
       // Obtener token activo
       function obtener_token_activo($id){
-          $sentencia = "SELECT * FROM token  WHERE usuario = $id AND activo = 1 ORDER BY id DESC LIMIT 1 ";
-          $comentario="Obtener el token del usuario ";
-          $consulta= $this->realizaConsulta($sentencia,$comentario);
-          while ($fila = mysqli_fetch_array($consulta))
-          {
-              $this->token=$fila['token'];
-              $this->fecha_generado= $fila['fecha_generado'];
-              $this->fecha_vencimiento= $fila['fecha_vencimiento'];
-              $this->activo= $fila['activo'];
-          }
+        $sentencia = "SELECT * FROM token  WHERE usuario = $id AND activo = 1 ORDER BY id DESC LIMIT 1 ";
+        $comentario="Obtener el token del usuario ";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $this->token=$fila['token'];
+          $this->fecha_generado= $fila['fecha_generado'];
+          $this->fecha_vencimiento= $fila['fecha_vencimiento'];
+          $this->activo= $fila['activo'];
+        }
       }
       // Evaluar entrada de sesion
       function evaluarEntrada($usuario_evaluar ,$password_evaluar){
-          include_once("clase_log.php");
-          $logs = NEW Log(0);
-          $id=0;
-          $sentencia = "SELECT id FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$password_evaluar' AND estado = 1";
-          $comentario="Obtenemos el usuario y contraseña de la base de datos";
-          $consulta= $this->realizaConsulta($sentencia,$comentario);
-          //se recibe la consulta y se convierte a arreglo
-          while ($fila = mysqli_fetch_array($consulta))
-          {
-               $id= $fila['id'];
-               // Guardamos logs de inicio de session
-               $logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
-          }
-          return $id;
+        include_once("clase_log.php");
+        $logs = NEW Log(0);
+        $id=0;
+        $sentencia = "SELECT id FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$password_evaluar' AND estado = 1";
+        $comentario="Obtenemos el usuario y contraseña de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+          // Guardamos logs de inicio de session
+          $logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
         }
+        return $id;
+      }
       // Guardar el token
       function guardar_token($token,$usuario){
-          $fecha_generado= time();
-          $fecha_vencimiento= $fecha_generado+604800;
+        $fecha_generado= time();
+        $fecha_vencimiento= $fecha_generado+604800;
          
-          $sentencia = "INSERT INTO `token` (`token`, `usuario`, `fecha_generado`, `fecha_vencimiento` ,`activo`)
-          VALUES ('$token', '$usuario', '$fecha_generado', '$fecha_vencimiento', '1');";
-          $comentario="Guardamos el token con la fecha de inicio y la vigencia";
-          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $sentencia = "INSERT INTO `token` (`token`, `usuario`, `fecha_generado`, `fecha_vencimiento` ,`activo`)
+        VALUES ('$token', '$usuario', '$fecha_generado', '$fecha_vencimiento', '1');";
+        $comentario="Guardamos el token con la fecha de inicio y la vigencia";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Guardar un usuario
       function guardar_usuario($usuario,$pass,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion){
-          switch ($nivel) {
-            case 0:// guarda nivel master
-                echo "Este nivel corresponde al master";
-                break;
+        switch ($nivel) {
+          case 0:// guarda nivel master
+              echo "Este nivel corresponde al master";
+              break;
 
-            case 1:// guarda nivel administrador
-                $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
-                $comentario="Guardamos el usuario en la base de datos";
-                $consulta= $this->realizaConsulta($sentencia,$comentario);
-                break;
+          case 1:// guarda nivel administrador
+              $pass=md5($pass);
+              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
+              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
+              $comentario="Guardamos el usuario en la base de datos";
+              $consulta= $this->realizaConsulta($sentencia,$comentario);
+              break;
 
-            case 2:// guarda nivel cajera
-                $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
-                $comentario="Guardamos el usuario en la base de datos";
-                $consulta= $this->realizaConsulta($sentencia,$comentario);
-                break; 
+          case 2:// guarda nivel cajera
+              $pass=md5($pass);
+              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
+              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
+              $comentario="Guardamos el usuario en la base de datos";
+              $consulta= $this->realizaConsulta($sentencia,$comentario);
+              break; 
                 
-            case 3:// guarda nivel reservaciones
-                $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion',, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
-                $comentario="Guardamos el usuario en la base de datos";
-                $consulta= $this->realizaConsulta($sentencia,$comentario); 
-                break; 
+          case 3:// guarda nivel reservaciones
+              $pass=md5($pass);
+              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
+              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion',, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
+              $comentario="Guardamos el usuario en la base de datos";
+              $consulta= $this->realizaConsulta($sentencia,$comentario); 
+              break; 
                 
-            case 4:// guarda nivel ama llaves
-                $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
-                VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0',  '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
-                $comentario="Guardamos el usuario en la base de datos";
-                $consulta= $this->realizaConsulta($sentencia,$comentario);
-                break;            
+          case 4:// guarda nivel ama llaves
+              $pass=md5($pass);
+              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
+              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0',  '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
+              $comentario="Guardamos el usuario en la base de datos";
+              $consulta= $this->realizaConsulta($sentencia,$comentario);
+              break;            
                 
-            default:
-                echo "Aun no se encuentra registrado ese nivel de usuario";
+          default:
+              echo "Aun no se encuentra registrado ese nivel de usuario";
         }                 
       }
       // Mostramos el nivel del usuario
       function mostrar_nivel($id){
-          $sentencia = "SELECT nivel FROM usuario WHERE id = $id LIMIT 1 ";
-         //echo $sentencia;
-          $comentario="Inicio de nivel usuario";
-          $consulta= $this->realizaConsulta($sentencia,$comentario);
-          while ($fila = mysqli_fetch_array($consulta))
-          {
-            $nivel= $fila['nivel'];
-          }
-          return $nivel;
+        $sentencia = "SELECT nivel FROM usuario WHERE id = $id LIMIT 1 ";
+        //echo $sentencia;
+        $comentario="Inicio de nivel usuario";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $nivel= $fila['nivel'];
+        }
+        return $nivel;
       }
       // Obtengo el total de usuarios
       function total_elementos(){
@@ -437,46 +437,7 @@
           $usuario= $fila['usuario'];
         }
         return $usuario;
-      }
-      // Muestra los nombres de los usuarios en aprobar requisicion
-      function mostrar_usuario_aprobacion(){
-        $sentencia = "SELECT * FROM usuario WHERE usuario.nivel = 2 && estado = 1 ORDER BY usuario";
-        $comentario="Mostrar los nombres de los usuarios";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        //se recibe la consulta y se convierte a arreglo
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
-        }
-        return $consulta;
-      }
-      // Muestra los nombres de los tecnicos en recibir salida
-      function mostrar_usuario_recibe(){
-        $sentencia = "SELECT * FROM usuario WHERE usuario.nivel = 5 && estado = 1 ORDER BY usuario";
-        $comentario="Mostrar los nombres de los usuarios";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        //se recibe la consulta y se convierte a arreglo
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
-        }
-        return $consulta;
-      }
-      // Muestra los nombres de los usuarios a editar
-      function mostrar_usuario_recibe_editar($id){
-        $sentencia = "SELECT * FROM usuario WHERE usuario.nivel = 5 && estado = 1 ORDER BY usuario";
-        $comentario="Mostrar los nombres de los usuarios";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        //se recibe la consulta y se convierte a arreglo
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          if($id==$fila['id']){
-              echo '  <option value="'.$fila['id'].'" selected>'.$fila['usuario'].'</option>';
-          }else{
-              echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
-          }
-       }
-      }       
+      }     
       // Muestra los nombres de los usuarios
       function mostrar_usuario(){
         $sentencia = "SELECT * FROM usuario WHERE usuario.nivel > 0 && estado = 1 ORDER BY usuario";
@@ -502,7 +463,7 @@
           }else{
               echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
           }
-       }
+        }
       }  
       // Muestra el nivel de los usuarios
       function obtener_nivel($id){

@@ -95,13 +95,6 @@
         }
         $logs->guardar_log($usuario_id,"Agregar reservacion: ". $id);
       }
-      // Obtengo los datos de una herramienta //
-      function datos_herramienta(){
-        $sentencia = "SELECT * FROM herramienta WHERE estado = 1 ORDER BY nombre";
-        $comentario="Mostrar los datos de tipos habitaciones";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        return $consulta;
-      }
       // Obtengo el total de las reservaciones
       function total_elementos(){
         $cantidad=0;
