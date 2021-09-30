@@ -17,3 +17,5 @@ VERSION 1.3
 -Generar rama huesped
 -Generar funciones basicas para huesped
 -Generar busquedas para huesped
+-Agregar mas datos en huesped
+-Agregar elegir huesped en una reservacion
