@@ -921,8 +921,16 @@ function guardar_huesped(){
 	var codigo_postal= encodeURI(document.getElementById("codigo_postal").value);
 	var telefono= encodeURI(document.getElementById("telefono").value);
 	var correo= encodeURI(document.getElementById("correo").value);
+	var contrato= encodeURI(document.getElementById("contrato").value);
+	var cupon= encodeURI(document.getElementById("cupon").value);
 	var preferencias= encodeURI(document.getElementById("preferencias").value);
 	var comentarios= encodeURI(document.getElementById("comentarios").value);
+	var titular_tarjeta= encodeURI(document.getElementById("titular_tarjeta").value);
+	var tipo_tarjeta= encodeURI(document.getElementById("tipo_tarjeta").value);
+	var numero_tarjeta= encodeURI(document.getElementById("numero_tarjeta").value);
+	var vencimiento_mes= encodeURI(document.getElementById("vencimiento_mes").value);
+	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
+	var cvv= encodeURI(document.getElementById("cvv").value);
 	
 
 	if(nombre.length >0 && apellido.length >0 && direccion.length >0 && ciudad.length >0 && estado.length >0 && codigo_postal.length >0 && telefono.length >0 && correo.length >0 && preferencias.length >0 && comentarios.length >0){
@@ -937,8 +945,16 @@ function guardar_huesped(){
 				  "codigo_postal": codigo_postal,
 				  "telefono": telefono,
 				  "correo": correo,
+				  "contrato": contrato,
+				  "cupon": cupon,
 				  "preferencias": preferencias,
 				  "comentarios": comentarios,
+				  "titular_tarjeta": titular_tarjeta,
+				  "tipo_tarjeta": tipo_tarjeta,
+				  "numero_tarjeta": numero_tarjeta,
+				  "vencimiento_mes": vencimiento_mes,
+				  "vencimiento_ano": vencimiento_ano,
+				  "cvv": cvv,
                   "usuario_id": usuario_id,
 				};
 			$.ajax({
@@ -1015,8 +1031,16 @@ function modificar_huesped(id){
     var codigo_postal= encodeURI(document.getElementById("codigo_postal").value);
     var telefono= encodeURI(document.getElementById("telefono").value);
     var correo= encodeURI(document.getElementById("correo").value);
-    var preferencias= encodeURI(document.getElementById("preferencias").value);
-    var comentarios= encodeURI(document.getElementById("comentarios").value);
+    var contrato= encodeURI(document.getElementById("contrato").value);
+	var cupon= encodeURI(document.getElementById("cupon").value);
+	var preferencias= encodeURI(document.getElementById("preferencias").value);
+	var comentarios= encodeURI(document.getElementById("comentarios").value);
+	var titular_tarjeta= encodeURI(document.getElementById("titular_tarjeta").value);
+	var tipo_tarjeta= encodeURI(document.getElementById("tipo_tarjeta").value);
+	var numero_tarjeta= encodeURI(document.getElementById("numero_tarjeta").value);
+	var vencimiento_mes= encodeURI(document.getElementById("vencimiento_mes").value);
+	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
+	var cvv= encodeURI(document.getElementById("cvv").value);
 
 
 	if(id >0){
@@ -1032,8 +1056,16 @@ function modificar_huesped(id){
               "codigo_postal": codigo_postal,
               "telefono": telefono,
               "correo": correo,
-              "preferencias": preferencias,
-              "comentarios": comentarios,
+              "contrato": contrato,
+			  "cupon": cupon,
+			  "preferencias": preferencias,
+			  "comentarios": comentarios,
+			  "titular_tarjeta": titular_tarjeta,
+			  "tipo_tarjeta": tipo_tarjeta,
+			  "numero_tarjeta": numero_tarjeta,
+			  "vencimiento_mes": vencimiento_mes,
+			  "vencimiento_ano": vencimiento_ano,
+			  "cvv": cvv,
 			  "usuario_id": usuario_id,
             };
         $.ajax({

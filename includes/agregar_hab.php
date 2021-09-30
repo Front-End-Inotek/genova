@@ -4,7 +4,7 @@
   $hab= NEW Hab(0);
   echo '
       <div class="container blanco"> 
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR HABITACIONES</h2></div>
+        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR HABITACION</h2></div>
         <div class="row">
           <div class="col-sm-3">Nombre:</div>
           <div class="col-sm-9">
