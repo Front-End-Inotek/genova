@@ -6,15 +6,15 @@
 
       public $id;
       public $nombre;
-      public $nombre_comercial;
+      public $apellido;
       public $direccion;
       public $ciudad;
       public $estado;
       public $codigo_postal;
       public $telefono;
       public $correo;
-      public $rfc;
-      public $curp;
+      public $preferencias;
+      public $comentarios;
       public $estado_huesped;
       
       // Constructor
@@ -23,15 +23,15 @@
         if($id==0){
           $this->id= 0;
           $this->nombre= 0;
-          $this->nombre_comercial= 0;
+          $this->apellido= 0;
           $this->direccion= 0;
           $this->ciudad= 0;
           $this->estado= 0;
           $this->codigo_postal= 0;
           $this->telefono= 0;
           $this->correo= 0;
-          $this->rfc= 0;
-          $this->curp= 0;
+          $this->preferencias= 0;
+          $this->comentarios= 0;
           $this->estado_huesped= 0; 
         }else{
           $sentencia = "SELECT * FROM huesped WHERE id = $id LIMIT 1 ";
@@ -41,43 +41,43 @@
           {
               $this->id= $fila['id'];
               $this->nombre= $fila['nombre'];
-              $this->nombre_comercial= $fila['nombre_comercial'];
+              $this->apellido= $fila['apellido'];
               $this->direccion= $fila['direccion'];
               $this->ciudad= $fila['ciudad'];
               $this->estado= $fila['estado'];
               $this->codigo_postal= $fila['codigo_postal'];
               $this->telefono= $fila['telefono'];
               $this->correo= $fila['correo'];
-              $this->rfc= $fila['rfc'];
-              $this->curp= $fila['curp'];
+              $this->preferencias= $fila['preferencias'];
+              $this->comentarios= $fila['comentarios'];
               $this->estado_huesped= $fila['estado_huesped'];
           }
         }
       }
-      // Guardar la reservacion
-      function guardar_cliente($nombre,$nombre_comercial,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$rfc,$curp){
-        $sentencia = "INSERT INTO `cliente` (`nombre`, `nombre_comercial`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `rfc`, `curp`, `estado_cliente`)
-        VALUES ('$nombre', '$nombre_comercial', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$rfc', '$curp', '1');";
-        $comentario="Guardamos el cliente en la base de datos";
+      // Guardar el huesped
+      function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$preferencias,$comentarios){
+        $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `preferencias`, `comentarios`, `estado_huesped`)
+        VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$preferencias', '$comentarios', '1');";
+        $comentario="Guardamos el huesped en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);    
         
         include_once("clase_log.php");
         $logs = NEW Log(0);
-        $sentencia = "SELECT id FROM reservacion ORDER BY id DESC LIMIT 1";
-        $comentario="Obtengo el id de la reservacion agregada";
+        $sentencia = "SELECT id FROM huesped ORDER BY id DESC LIMIT 1";
+        $comentario="Obtengo el id del huesped agregado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
           $id= $fila['id'];
         }
-        $logs->guardar_log($usuario_id,"Agregar reservacion: ". $id);
+        $logs->guardar_log($usuario_id,"Agregar huesped: ". $id);
       }
-      // Obtengo el total de clientes
+      // Obtengo el total de huespedes
       function total_elementos(){
         $cantidad=0;
-        $sentencia = "SELECT count(id) AS cantidad  FROM cliente WHERE estado_cliente = 1 ORDER BY nombre";
+        $sentencia = "SELECT count(id) AS cantidad FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
         //echo $sentencia;
-        $comentario="Obtengo el total de clientes";
+        $comentario="Obtengo el total de huespedes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
@@ -85,13 +85,12 @@
         }
         return $cantidad;
       }
-      // Mostramos los clientes
+      // Mostramos los huespedes
       function mostrar($posicion,$id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
-        $agregar = $usuario->cliente_agregar;
-        $editar = $usuario->cliente_editar;
-        $borrar = $usuario->cliente_borrar;
+        $editar = $usuario->huesped_editar;
+        $borrar = $usuario->huesped_borrar;
     
         $cont = 1;
         //echo $posicion;
@@ -104,11 +103,11 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT * FROM cliente WHERE estado_cliente = 1 ORDER BY nombre";
-        $comentario="Mostrar los clientes";
+        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
+        $comentario="Mostrar los huespedes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_cliente">
+        echo '<div class="table-responsive" id="tabla_huesped">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
@@ -120,7 +119,7 @@
             <th>Codigo Postal</th>
             <th>Telefono</th>
             <th>Correo</th>
-            <th>RFC</th>';
+            <th>Preferencias</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
@@ -139,19 +138,19 @@
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
                 <td>'.$fila['nombre'].'</td>  
-                <td>'.$fila['nombre_comercial'].'</td>
+                <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>
                 <td>'.$fila['ciudad'].'</td>
                 <td>'.$fila['estado'].'</td>
                 <td>'.$fila['codigo_postal'].'</td>
                 <td>'.$fila['telefono'].'</td>
                 <td>'.$fila['correo'].'</td>
-                <td>'.$fila['rfc'].'</td>';
+                <td>'.$fila['preferencias'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-outline-info btn-lg" onclick="editar_cliente('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-outline-info btn-lg" onclick="editar_huesped('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-outline-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_cliente('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-outline-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
                 }
                 if($agregar==1){
                   echo '<td><button class="btn btn-outline-primary btn-lg" onclick="agregar_plantas('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Planta</button></td>';
@@ -167,22 +166,21 @@
           </div>';
           return $cat_paginas;
       }
-      // Barra de diferentes busquedas en ver clientes
-      function buscar_cliente($a_buscar,$id){
+      // Barra de diferentes busquedas en ver huespedes
+      function buscar_huesped($a_buscar,$id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
-        $agregar = $usuario->cliente_agregar;
-        $editar = $usuario->cliente_editar;
-        $borrar = $usuario->cliente_borrar;
+        $editar = $usuario->huesped_editar;
+        $borrar = $usuario->huesped_borrar;
 
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT * FROM cliente WHERE (nombre LIKE '%$a_buscar%' || nombre_comercial LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%') && estado_cliente = 1 ORDER BY nombre;";
-          $comentario="Mostrar diferentes busquedas en ver clientes";
+          $sentencia = "SELECT * FROM huesped WHERE (nombre LIKE '%$a_buscar%' || apellido LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%') && estado_huesped = 1 ORDER BY nombre;";
+          $comentario="Mostrar diferentes busquedas en ver huespedes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
-          echo '<div class="table-responsive" id="tabla_cliente">
+          echo '<div class="table-responsive" id="tabla_huesped">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -194,7 +192,7 @@
               <th>Codigo Postal</th>
               <th>Telefono</th>
               <th>Correo</th>
-              <th>RFC</th>';
+              <th>preferencias</th>';
               if($editar==1){
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
               }
@@ -212,19 +210,19 @@
               {
                 echo '<tr class="text-center">
                 <td>'.$fila['nombre'].'</td>  
-                <td>'.$fila['nombre_comercial'].'</td>
+                <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>
                 <td>'.$fila['ciudad'].'</td>
                 <td>'.$fila['estado'].'</td>
                 <td>'.$fila['codigo_postal'].'</td>
                 <td>'.$fila['telefono'].'</td>
                 <td>'.$fila['correo'].'</td>
-                <td>'.$fila['rfc'].'</td>';
+                <td>'.$fila['preferencias'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-outline-info btn-lg" onclick="editar_cliente('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-outline-info btn-lg" onclick="editar_huesped('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-outline-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_cliente('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-outline-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
                 }
                 if($agregar==1){
                   echo '<td><button class="btn btn-outline-primary btn-lg" onclick="agregar_plantas('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Planta</button></td>';
@@ -238,30 +236,30 @@
         </table>
         </div>';
       }
-      // Editar un cliente
-      function editar_cliente($id,$nombre,$nombre_comercial,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$rfc,$curp){
-        $sentencia = "UPDATE `cliente` SET
+      // Editar un huesped
+      function editar_huesped($id,$nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$preferencias,$comentarios){
+        $sentencia = "UPDATE `huesped` SET
             `nombre` = '$nombre',
-            `nombre_comercial` = '$nombre_comercial',
+            `apellido` = '$apellido',
             `direccion` = '$direccion',
             `ciudad` = '$ciudad',
             `estado` = '$estado',
             `codigo_postal` = '$codigo_postal',
             `telefono` = '$telefono',
             `correo` = '$correo',
-            `rfc` = '$rfc',
-            `curp` = '$curp'
+            `preferencias` = '$preferencias',
+            `comentarios` = '$comentarios'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar cliente dentro de la base de datos ";
+        $comentario="Editar huesped dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar un cliente
-      function borrar_cliente($id){
-        $sentencia = "UPDATE `cliente` SET
-        `estado_cliente` = '0'
+      // Borrar un huesped
+      function borrar_huesped($id){
+        $sentencia = "UPDATE `huesped` SET
+        `estado_huesped` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de cliente como inactivo";
+        $comentario="Poner estado de huesped como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
              
