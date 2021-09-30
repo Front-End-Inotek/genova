@@ -170,7 +170,7 @@
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT * FROM huesped WHERE (nombre LIKE '%$a_buscar%' || apellido LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%') && estado_huesped = 1 ORDER BY nombre;";
+          $sentencia = "SELECT * FROM huesped WHERE (nombre LIKE '%$a_buscar%' || apellido LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%' || telefono LIKE '%$a_buscar%') && estado_huesped = 1 ORDER BY nombre;";
           $comentario="Mostrar diferentes busquedas en ver huespedes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
@@ -249,6 +249,18 @@
         WHERE `id` = '$id';";
         $comentario="Poner estado de huesped como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Obtengo el nombre del huesped
+      function obtengo_nombre($id){
+        $sentencia = "SELECT nombre FROM huesped WHERE id = $id AND estado_huesped = 1 LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtengo el nombre del huesped";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $nombre= $fila['nombre'];
+        }
+        return $nombre;
       }
              
   }

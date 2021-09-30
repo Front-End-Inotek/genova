@@ -7,7 +7,7 @@
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR RESERVACION</h2></div>
-          <div class="row">
+        <div class="row">
           <div class="col-sm-2">Fecha entrada:</div>
           <div class="col-sm-3">
           <div class="form-group">

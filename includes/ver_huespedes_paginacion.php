@@ -4,7 +4,7 @@
   $huesped= NEW Huesped(0);
 
   echo ' <div class="container-fluid">';
-          $cat_paginas = $reservacion->mostrar($_GET['posicion'],$_GET['usuario_id']);
+          $cat_paginas = $huesped->mostrar($_GET['posicion'],$_GET['usuario_id']);
   echo  '</div>';
  
   //comentario
