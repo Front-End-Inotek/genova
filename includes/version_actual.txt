@@ -12,3 +12,8 @@ VERSION 1.2
 -Generar rama reservacion
 -Generar funciones basicas para reservacion
 -Generar busquedas para reservacion
+
+VERSION 1.3
+-Generar rama huesped
+-Generar funciones basicas para huesped
+-Generar busquedas para huesped
