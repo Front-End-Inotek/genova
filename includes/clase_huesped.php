@@ -2,7 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
 
-  class Reservacion extends ConexionMYSql{
+  class Huesped extends ConexionMYSql{
 
       public $id;
       public $fecha_entrada;
