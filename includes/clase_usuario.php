@@ -24,10 +24,10 @@
       public $usuario_agregar;
       public $usuario_editar;
       public $usuario_borrar;
-      public $cliente_ver;
-      public $cliente_agregar;
-      public $cliente_editar;
-      public $cliente_borrar;
+      public $huesped_ver;
+      public $huesped_agregar;
+      public $huesped_editar;
+      public $huesped_borrar;
       public $tipo_ver;
       public $tipo_agregar;
       public $tipo_editar;
@@ -67,10 +67,10 @@
           $this->usuario_agregar= -1;
           $this->usuario_editar= -1;
           $this->usuario_borrar= -1;
-          $this->cliente_ver= -1;
-          $this->cliente_agregar= -1;
-          $this->cliente_editar= -1;
-          $this->cliente_borrar= -1;
+          $this->huesped_ver= -1;
+          $this->huesped_agregar= -1;
+          $this->huesped_editar= -1;
+          $this->huesped_borrar= -1;
           $this->tipo_ver= -1;
           $this->tipo_agregar= -1;
           $this->tipo_editar= -1;
@@ -137,10 +137,10 @@
               $this->usuario_agregar= $fila['usuario_agregar'];
               $this->usuario_editar= $fila['usuario_editar'];
               $this->usuario_borrar= $fila['usuario_borrar'];
-              $this->cliente_ver= $fila['cliente_ver'];
-              $this->cliente_agregar= $fila['cliente_agregar'];
-              $this->cliente_editar= $fila['cliente_editar'];
-              $this->cliente_borrar= $fila['cliente_borrar'];
+              $this->huesped_ver= $fila['huesped_ver'];
+              $this->huesped_agregar= $fila['huesped_agregar'];
+              $this->huesped_editar= $fila['huesped_editar'];
+              $this->huesped_borrar= $fila['huesped_borrar'];
               $this->tipo_ver= $fila['tipo_ver'];
               $this->tipo_agregar= $fila['tipo_agregar'];
               $this->tipo_editar= $fila['tipo_editar'];
@@ -159,7 +159,7 @@
               $this->reservacion_borrar= $fila['reservacion_borrar'];
               
           }
-          $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->cliente_ver+$this->cliente_agregar+$this->cliente_editar+$this->cliente_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_ver+$this->tarifa_agregar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar+$this->reservacion_ver+$this->reservacion_agregar+$this->reservacion_editar+$this->reservacion_borrar;
+          $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->huesped_ver+$this->huesped_agregar+$this->huesped_editar+$this->huesped_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_ver+$this->tarifa_agregar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar+$this->reservacion_ver+$this->reservacion_agregar+$this->reservacion_editar+$this->reservacion_borrar;
         }  
       }
       // Datos inicio de sesion
@@ -226,7 +226,7 @@
 
             case 1:// guarda nivel administrador
                 $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
                 VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
                 $comentario="Guardamos el usuario en la base de datos";
                 $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -234,7 +234,7 @@
 
             case 2:// guarda nivel cajera
                 $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
                 VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
                 $comentario="Guardamos el usuario en la base de datos";
                 $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -242,7 +242,7 @@
                 
             case 3:// guarda nivel reservaciones
                 $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
                 VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion',, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
                 $comentario="Guardamos el usuario en la base de datos";
                 $consulta= $this->realizaConsulta($sentencia,$comentario); 
@@ -250,7 +250,7 @@
                 
             case 4:// guarda nivel ama llaves
                 $pass=md5($pass);
-                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `cliente_ver`, `cliente_agregar`, `cliente_editar`, `cliente_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
+                $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`)
                 VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0',  '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
                 $comentario="Guardamos el usuario en la base de datos";
                 $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -379,7 +379,7 @@
           echo ' </ul>';
       }
       // Editar un usuario
-      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$cliente_ver,$cliente_agregar,$cliente_editar,$cliente_borrar,$tipo_ver,$tipo_agregar,$tipo_editar,$tipo_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$hab_ver,$hab_agregar,$hab_editar,$hab_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar){
+      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tipo_ver,$tipo_agregar,$tipo_editar,$tipo_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$hab_ver,$hab_agregar,$hab_editar,$hab_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar){
         //$pass=md5($pass);
         $sentencia = "UPDATE `usuario` SET
             `usuario` = '$usuario',
@@ -393,10 +393,10 @@
             `usuario_agregar` = '$usuario_agregar',
             `usuario_editar` = '$usuario_editar',
             `usuario_borrar` = '$usuario_borrar',
-            `cliente_ver` = '$cliente_ver',
-            `cliente_agregar` = '$cliente_agregar',
-            `cliente_editar` = '$cliente_editar',
-            `cliente_borrar` = '$cliente_borrar',
+            `huesped_ver` = '$huesped_ver',
+            `huesped_agregar` = '$huesped_agregar',
+            `huesped_editar` = '$huesped_editar',
+            `huesped_borrar` = '$huesped_borrar',
             `tipo_ver` = '$tipo_ver',
             `tipo_agregar` = '$tipo_agregar',
             `tipo_editar` = '$tipo_editar',
