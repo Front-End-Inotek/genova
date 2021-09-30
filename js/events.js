@@ -902,62 +902,43 @@ function regresar_editar_reservacion(){
     $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
 }
 
-// Agregar una reservacion
-function agregar_reservaciones(){
+// Agregar un huesped
+function agregar_huespedes(){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_reservaciones.php"); 
+	$("#area_trabajo_menu").load("includes/agregar_huespedes.php"); 
 	closeNav();
 }
 
-// Guardar una reservacion
-function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje){
+// Guardar un huesped
+function guardar_huesped(){
     var usuario_id=localStorage.getItem("id");
-	var fecha_entrada= document.getElementById("fecha_entrada").value;
-	var fecha_salida= document.getElementById("fecha_salida").value;
-	var noches= calculo_noches(fecha_entrada,fecha_salida);
-	var numero_hab= Number(document.getElementById("numero_hab").value);
-	var tarifa= Number(document.getElementById("tarifa").value);
-    var extra_adulto= Number(document.getElementById("extra_adulto").value);
-	var extra_junior= Number(document.getElementById("extra_junior").value);
-	var extra_infantil=Number(document.getElementById("extra_infantil").value);
-	var extra_menor= Number(document.getElementById("extra_menor").value);
-	var suplementos= encodeURI(document.getElementById("suplementos").value);
-	var total_suplementos= Number(document.getElementById("total_suplementos").value);
-	var forzar_tarifa= Number(document.getElementById("forzar_tarifa").value);
-	var descuento= Number(document.getElementById("descuento").value);
-	var total_hospedaje= precio_hospedaje * noches * numero_hab;
-	var total_adulto= total_adulto * extra_adulto;
-	var total_junior= total_junior * extra_junior;
-	var total_infantil= total_infantil * extra_infantil;
-	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
-	var total= total_hab + total_suplementos;
-	var calculo_descuento= descuento_total(total,descuento);
-	calculo_descuento= redondearDecimales(calculo_descuento,2);
-	total= calculo_descuento;
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var apellido= encodeURI(document.getElementById("apellido").value);
+	var direccion= encodeURI(document.getElementById("direccion").value);
+	var ciudad= encodeURI(document.getElementById("ciudad").value);
+	var estado= encodeURI(document.getElementById("estado").value);
+	var codigo_postal= encodeURI(document.getElementById("codigo_postal").value);
+	var telefono= encodeURI(document.getElementById("telefono").value);
+	var correo= encodeURI(document.getElementById("correo").value);
+	var preferencias= encodeURI(document.getElementById("preferencias").value);
+	var comentarios= encodeURI(document.getElementById("comentarios").value);
 	
 
-	if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && descuento >-0.01 && descuento <100){
-			//$('#boton_reservacion').hide();
-			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
+	if(nombre.length >0 && apellido.length >0 && direccion.length >0 && ciudad.length >0 && estado.length >0 && codigo_postal.length >0 && telefono.length >0 && correo.length >0 && preferencias.length >0 && comentarios.length >0){
+			//$('#boton_huesped').hide();
+			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
-				  "fecha_entrada": fecha_entrada,
-				  "fecha_salida": fecha_salida,
-				  "noches": noches,
-				  "numero_hab": numero_hab,
-				  "precio_hospedaje": precio_hospedaje,
-				  "cantidad_hospedaje": cantidad_hospedaje,
-				  "extra_adulto": extra_adulto,
-				  "extra_junior": extra_junior,
-				  "extra_infantil": extra_infantil,
-				  "extra_menor": extra_menor,
-				  "tarifa": tarifa,
-				  "suplementos": suplementos,
-				  "total_suplementos": total_suplementos,
-				  "total_hab": total_hab,
-				  "forzar_tarifa": forzar_tarifa,
-				  "descuento": descuento,
-				  "total": total,
+			 	  "nombre": nombre,
+				  "apellido": apellido,
+				  "direccion": direccion,
+				  "ciudad": ciudad,
+				  "estado": estado,
+				  "codigo_postal": codigo_postal,
+				  "telefono": telefono,
+				  "correo": correo,
+				  "preferencias": preferencias,
+				  "comentarios": comentarios,
                   "usuario_id": usuario_id,
 				};
 			$.ajax({
@@ -965,10 +946,10 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 				  type: "POST",
 				  dataType: "html",
 				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_reservacion.php",
+				  url:"includes/guardar_huesped.php",
 				  data:datos,
 				  beforeSend:loaderbar,
-				  success:ver_reservaciones,
+				  success:ver_huespedes,
 				  timeout:5000,
 				  error:problemas_sistema
 				});
@@ -978,23 +959,23 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 			}
 }
 
-// Muestra las reservaciones de la bd
-function ver_reservaciones(){
+// Muestra los huespedes de la bd
+function ver_huespedes(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
+	$("#area_trabajo_menu").load("includes/ver_huespedes.php?usuario_id="+usuario_id);
 	closeNav();
 }
 
-// Muestra la paginacion de las reservaciones
-function ver_reservaciones_paginacion(buton,posicion){
+// Muestra la paginacion de los huespedes
+function ver_huespedes_paginacion(buton,posicion){
     var usuario_id=localStorage.getItem("id");
-    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+    $("#paginacion_huespedes").load("includes/ver_huespedes_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
-// Barra de diferentes busquedas en ver reservaciones*
-function buscar_reservacion(){
+// Barra de diferentes busquedas en ver huespedes
+function buscar_huesped(){
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var usuario_id=localStorage.getItem("id");
     if(a_buscar.length >0){
@@ -1002,11 +983,11 @@ function buscar_reservacion(){
     }else{
         $('.pagination').show();
     }
-	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+	$("#tabla_huesped").load("includes/buscar_huesped.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
 
-// Busqueda por fecha en ver reservaciones
-function busqueda_reservacion(){
+// Busqueda por fecha en ver huespedes
+function busqueda_huesped(){
 	var inicial=$("#inicial").val();
 	var final=$("#final").val();
     var id=localStorage.getItem("id");
@@ -1015,63 +996,44 @@ function busqueda_reservacion(){
     }else{
         $('.pagination').show();
     }
-	$("#tabla_reservacion").load("includes/busqueda_reservacion.php?inicial="+inicial+"&final="+final+"&id="+id);
+	$("#tabla_huesped").load("includes/busqueda_huesped.php?inicial="+inicial+"&final="+final+"&id="+id);
 }
 
-// Editar una reservacion
-function editar_reservacion(id){
-    $("#area_trabajo_menu").load("includes/editar_reservacion.php?id="+id);
+// Editar un huesped
+function editar_huesped(id){
+    $("#area_trabajo_menu").load("includes/editar_huesped.php?id="+id);
 }
 
-// Editar una reservacion
-function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje){
+// Editar un huesped
+function modificar_huesped(id){
 	var usuario_id=localStorage.getItem("id");
-	var fecha_entrada= document.getElementById("fecha_entrada").value;
-	var fecha_salida= document.getElementById("fecha_salida").value;
-	var noches= calculo_noches(fecha_entrada,fecha_salida);
-	var numero_hab= Number(document.getElementById("numero_hab").value);
-	var tarifa= Number(document.getElementById("tarifa").value);
-    var extra_adulto= Number(document.getElementById("extra_adulto").value);
-	var extra_junior= Number(document.getElementById("extra_junior").value);
-	var extra_infantil=Number(document.getElementById("extra_infantil").value);
-	var extra_menor= Number(document.getElementById("extra_menor").value);
-	var suplementos= encodeURI(document.getElementById("suplementos").value);
-	var total_suplementos= Number(document.getElementById("total_suplementos").value);
-	var forzar_tarifa= Number(document.getElementById("forzar_tarifa").value);
-	var descuento= Number(document.getElementById("descuento").value);
-	var total_hospedaje= precio_hospedaje * noches * numero_hab;
-	var total_adulto= total_adulto * extra_adulto;
-	var total_junior= total_junior * extra_junior;
-	var total_infantil= total_infantil * extra_infantil;
-	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
-	var total= total_hab + total_suplementos;
-	var calculo_descuento= descuento_total(total,descuento);
-	calculo_descuento= redondearDecimales(calculo_descuento,2);
-	total= calculo_descuento;
+	var nombre= encodeURI(document.getElementById("nombre").value);
+    var apellido= encodeURI(document.getElementById("apellido").value);
+    var direccion= encodeURI(document.getElementById("direccion").value);
+    var ciudad= encodeURI(document.getElementById("ciudad").value);
+    var estado= encodeURI(document.getElementById("estado").value);
+    var codigo_postal= encodeURI(document.getElementById("codigo_postal").value);
+    var telefono= encodeURI(document.getElementById("telefono").value);
+    var correo= encodeURI(document.getElementById("correo").value);
+    var preferencias= encodeURI(document.getElementById("preferencias").value);
+    var comentarios= encodeURI(document.getElementById("comentarios").value);
 
 
-	if(id >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && descuento >-0.01 && descuento <100){
-        //$('#boton_reservacion').hide();
-			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
+	if(id >0){
+        //$('#boton_huesped').hide();
+			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
         var datos = {
 			  "id": id,
-              "fecha_entrada": fecha_entrada,
-			  "fecha_salida": fecha_salida,
-			  "noches": noches,
-			  "numero_hab": numero_hab,
-			  "precio_hospedaje": precio_hospedaje,
-			  "cantidad_hospedaje": cantidad_hospedaje,
-			  "extra_adulto": extra_adulto,
-			  "extra_junior": extra_junior,
-			  "extra_infantil": extra_infantil,
-			  "extra_menor": extra_menor,
-			  "tarifa": tarifa,
-			  "suplementos": suplementos,
-			  "total_suplementos": total_suplementos,
-			  "total_hab": total_hab,
-			  "forzar_tarifa": forzar_tarifa,
-			  "descuento": descuento,
-			  "total": total,
+              "nombre": nombre,
+              "apellido": apellido,
+              "direccion": direccion,
+              "ciudad": ciudad,
+              "estado": estado,
+              "codigo_postal": codigo_postal,
+              "telefono": telefono,
+              "correo": correo,
+              "preferencias": preferencias,
+              "comentarios": comentarios,
 			  "usuario_id": usuario_id,
             };
         $.ajax({
@@ -1079,10 +1041,10 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
               type: "POST",
               dataType: "html",
               contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_reservacion.php",
+              url:"includes/aplicar_editar_huesped.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:ver_reservaciones,
+              success:ver_huespedes,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -1093,8 +1055,8 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
     }    
 }
 
-// Borrar una reservacion
-function borrar_reservacion(id){
+// Borrar un huesped
+function borrar_huesped(id){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     if (id >0) {
@@ -1107,10 +1069,10 @@ function borrar_reservacion(id){
                 type: "POST",
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_reservacion.php",
+                url:"includes/borrar_huesped.php",
                 data:datos,
                 beforeSend:loaderbar,
-                success:ver_reservaciones,
+                success:ver_huespedes,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -1118,17 +1080,17 @@ function borrar_reservacion(id){
     }
 }
 
-// Modal de borrar una reservacion
-function aceptar_borrar_reservacion(id){
-	$("#mostrar_herramientas").load("includes/borrar_modal_reservacion.php?id="+id);
+// Modal de borrar un huesped
+function aceptar_borrar_huesped(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_huesped.php?id="+id);
 }
 
-// Regresar a la pagina anterior de editar un reservacion
-function regresar_editar_reservacion(){
+// Regresar a la pagina anterior de editar un huesped
+function regresar_editar_huesped(){
     var usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
+    $("#area_trabajo_menu").load("includes/ver_huespedes.php?usuario_id="+usuario_id);
 }
 
 //*//
