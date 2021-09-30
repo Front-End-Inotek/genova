@@ -112,25 +112,22 @@
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
-            <th>Nombre Comercial</th>
+            <th>Apellido</th>
             <th>Direccion</th>
             <th>Ciudad</th>
             <th>Estado</th>
             <th>Codigo Postal</th>
             <th>Telefono</th>
             <th>Correo</th>
-            <th>Preferencias</th>';
+            <th>Preferencias</th>
+            <th>Comentarios</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
             if($borrar==1){
               echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
             }
-            if($agregar==1){
-              echo '<th><span class=" glyphicon glyphicon-cog"></span> Agregar</th>';
-            }
-            echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
-            </tr>
+            echo '</tr>
           </thead>
         <tbody>';
             while ($fila = mysqli_fetch_array($consulta))
@@ -145,18 +142,15 @@
                 <td>'.$fila['codigo_postal'].'</td>
                 <td>'.$fila['telefono'].'</td>
                 <td>'.$fila['correo'].'</td>
-                <td>'.$fila['preferencias'].'</td>';
+                <td>'.$fila['preferencias'].'</td>
+                <td>'.$fila['comentarios'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-outline-info btn-lg" onclick="editar_huesped('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-outline-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
                 }
-                if($agregar==1){
-                  echo '<td><button class="btn btn-outline-primary btn-lg" onclick="agregar_plantas('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Planta</button></td>';
-                }
-                echo '<td><button class="btn btn-outline-primary btn-lg" onclick="ver_plantas('.$fila['id'].','.$id.')"><span class="glyphicon glyphicon-edit"></span> Planta</button></td>
-                </tr>';
+                echo '</tr>';
               }
               $cont++;
             }
@@ -185,25 +179,22 @@
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th>Nombre</th>
-              <th>Nombre Comercial</th>
+              <th>Apellido</th>
               <th>Direccion</th>
               <th>Ciudad</th>
               <th>Estado</th>
               <th>Codigo Postal</th>
               <th>Telefono</th>
               <th>Correo</th>
-              <th>preferencias</th>';
+              <th>Preferencias</th>
+              <th>Comentarios</th>';
               if($editar==1){
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
               }
               if($borrar==1){
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
               }
-              if($agregar==1){
-                echo '<th><span class=" glyphicon glyphicon-cog"></span> Agregar</th>';
-              }
-              echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
-              </tr>
+              echo '</tr>
             </thead>
           <tbody>';
               while ($fila = mysqli_fetch_array($consulta)) 
@@ -217,18 +208,15 @@
                 <td>'.$fila['codigo_postal'].'</td>
                 <td>'.$fila['telefono'].'</td>
                 <td>'.$fila['correo'].'</td>
-                <td>'.$fila['preferencias'].'</td>';
+                <td>'.$fila['preferencias'].'</td>
+                <td>'.$fila['comentarios'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-outline-info btn-lg" onclick="editar_huesped('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-outline-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
                 }
-                if($agregar==1){
-                  echo '<td><button class="btn btn-outline-primary btn-lg" onclick="agregar_plantas('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Planta</button></td>';
-                }
-                echo '<td><button class="btn btn-outline-primary btn-lg" onclick="ver_plantas('.$fila['id'].','.$id.')"><span class="glyphicon glyphicon-edit"></span> Planta</button></td>
-                </tr>';
+                echo '</tr>';
               }
         }
             echo '
