@@ -186,22 +186,49 @@
                           $permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
                           if($permisos_reservar>0){
                             echo '
-                            <li class="nav-item" id="submenu2">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1"><span>Reservar</span></a>
-                                <div class="collapse" id="submenu1sub1" aria-expanded="false">
+                            <li class="nav-item">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu2sub1" data-toggle="collapse" data-target="#submenu2sub1"><span>Reservar</span></a>
+                                <div class="collapse" id="submenu2sub1" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         if($usuario->reservacion_ver==1){
                                           echo '
-                                          <li class="nav-item" id="submenu2">
+                                          <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="ver_reservaciones()">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Reservaciones</a>
                                           </li>';
                                         }
                                         if($usuario->reservacion_agregar==1){
                                           echo '
-                                          <li class="nav-item" id="submenu2">
+                                          <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_reservaciones()">
                                                   <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Reservación</a>
+                                          </li>';
+                                        }
+                                        echo '
+                                    </ul>
+                                </div>
+                            </li>'; 
+                          }
+
+                          $permisos_huesped=$usuario->huesped_ver+$usuario->huesped_agregar;
+                          if($permisos_huesped>0){
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu2sub2" data-toggle="collapse" data-target="#submenu2sub2"><span>Huéspedes</span></a>
+                                <div class="collapse" id="submenu2sub2" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">';
+                                        if($usuario->huesped_ver==1){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_huespedes()">
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Huéspedes</a>
+                                          </li>';
+                                        }
+                                        if($usuario->huesped_agregar==1){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_huespedes()">
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Huésped</a>
                                           </li>';
                                         }
                                         echo '
@@ -216,7 +243,7 @@
               </div>
           </li>
       <a href="#">Reportes</a>
-      <a href="#">Huespedes</a>
+      <a href="#">Otros</a>
          
       <a href="#">
         <svg class="svg-color" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 8 8">
