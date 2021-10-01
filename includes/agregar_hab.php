@@ -39,6 +39,7 @@
           <div id="boton_tipo">
             <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_hab()">
           </div>
+          </div>
         </div>
       </div>';
 ?>

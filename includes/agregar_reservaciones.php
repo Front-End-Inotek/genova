@@ -6,13 +6,13 @@
       <div class="container blanco"> 
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR HABITACION</h2></div>
         <div class="row">
-          <div class="col-sm-2">Fecha entrada:</div>
+          <div class="col-sm-2">Fecha Entrada:</div>
           <div class="col-sm-3">
           <div class="form-group">
             <input class="form-control" type="date"  id="fecha_entrada" placeholder="Ingresa la fecha de entrada" onchange="calcular_noches()">
           </div>
           </div>
-          <div class="col-sm-2">Fecha salida:</div>
+          <div class="col-sm-2">Fecha Salida:</div>
           <div class="col-sm-3">
           <div class="form-group">
             <input class="form-control" type="date"  id="fecha_salida" placeholder="Ingresa la fecha de salida" onchange="calcular_noches()">

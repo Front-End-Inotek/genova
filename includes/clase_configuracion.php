@@ -17,7 +17,6 @@
            
            $this->activacion= $fila['activacion'];
            $this->nombre= $fila['nombre'];
-           
       }
     }
     

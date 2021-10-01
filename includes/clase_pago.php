@@ -32,7 +32,7 @@
       //se recibe la consulta y se convierte a arreglo
       while ($fila = mysqli_fetch_array($consulta))
       {
-        echo '  <option value="'.$fila['id'].'">'.$fila['limite_pago'].'</option>';
+        echo '<option value="'.$fila['id'].'">'.$fila['limite_pago'].'</option>';
       }
       return $consulta;
     }
@@ -45,9 +45,9 @@
       while ($fila = mysqli_fetch_array($consulta))
       {
         if($id==$fila['id']){
-          echo '  <option value="'.$fila['id'].'" selected>'.$fila['limite_pago'].'</option>';
+          echo '<option value="'.$fila['id'].'" selected>'.$fila['limite_pago'].'</option>';
         }else{
-          echo '  <option value="'.$fila['id'].'">'.$fila['limite_pago'].'</option>';  
+          echo '<option value="'.$fila['id'].'">'.$fila['limite_pago'].'</option>';  
         }
       }
     }

@@ -302,6 +302,33 @@
         }
         return $nombre;
       }
+      // Muestra los nombres de los huespedes
+      function mostrar_huesped(){
+        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
+        $comentario="Mostrar los nombres de los huespedes";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<option value="'.$fila['id'].'">'.$fila['nombre'].' '.$fila['apellido'].'</option>';
+        }
+        return $consulta;
+      }
+      // Muestra los nombres de los huespedes a editar
+      function mostrar_huesped_editar($id){
+        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
+        $comentario="Mostrar los nombres de los huespedes";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          if($id==$fila['id']){
+            echo '<option value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
+          }else{
+            echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';  
+          }
+        }
+      }
              
   }
 ?>

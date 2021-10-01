@@ -5,6 +5,7 @@
   class Reservacion extends ConexionMYSql{
 
       public $id;
+      public $id_huesped;
       public $fecha_entrada;
       public $fecha_salida;
       public $noches;
@@ -16,6 +17,10 @@
       public $extra_infantil;
       public $extra_menor;
       public $tarifa;
+      public $nombre_reserva;
+      public $acompanante;
+      public $forma_pago;
+      public $limite_pago;
       public $suplementos;
       public $total_suplementos;
       public $total_hab;
@@ -29,6 +34,7 @@
       {
         if($id==0){
           $this->id= 0;
+          $this->id_huesped= 0;
           $this->fecha_entrada= 0;
           $this->fecha_salida= 0;
           $this->noches= 0;
@@ -40,6 +46,10 @@
           $this->extra_infantil= 0;
           $this->extra_menor= 0;
           $this->tarifa= 0;
+          $this->nombre_reserva= 0;
+          $this->acompanante= 0;
+          $this->forma_pago= 0;
+          $this->limite_pago= 0;
           $this->suplementos= 0;
           $this->total_suplementos= 0;
           $this->total_hab= 0;
@@ -54,6 +64,7 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
               $this->id= $fila['id'];
+              $this->id_huesped= $fila['id_huesped'];
               $this->fecha_entrada= $fila['fecha_entrada'];
               $this->fecha_salida= $fila['fecha_salida'];
               $this->noches= $fila['noches'];
@@ -65,6 +76,10 @@
               $this->extra_infantil= $fila['extra_infantil'];
               $this->extra_menor= $fila['extra_menor'];
               $this->tarifa= $fila['tarifa'];
+              $this->nombre_reserva= $fila['nombre_reserva'];
+              $this->acompanante= $fila['acompanante'];
+              $this->forma_pago= $fila['forma_pago'];
+              $this->limite_pago= $fila['limite_pago'];
               $this->suplementos= $fila['suplementos'];
               $this->total_suplementos= $fila['total_suplementos'];
               $this->total_hab= $fila['total_hab'];
@@ -76,11 +91,11 @@
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$usuario_id){
+      function guardar_reservacion($id_huesped,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$usuario_id){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
-        $sentencia = "INSERT INTO `reservacion` (`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `estado`)
-        VALUES ('$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa',  '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '1');";
+        $sentencia = "INSERT INTO `reservacion` (`id_huesped`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `estado`)
+        VALUES ('$id_huesped', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -380,10 +395,11 @@
         </div>';
       }
       // Editar una reservacion
-      function editar_reservacion($id,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total){
+      function editar_reservacion($id,$id_huesped,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         $sentencia = "UPDATE `reservacion` SET
+            `id_huesped` = '$id_huesped',
             `fecha_entrada` = '$fecha_entrada',
             `fecha_salida` = '$fecha_salida',
             `noches` = '$noches',
@@ -395,6 +411,10 @@
             `extra_infantil` = '$extra_infantil',
             `extra_menor` = '$extra_menor',
             `tarifa` = '$tarifa',
+            `nombre_reserva` = '$nombre_reserva',
+            `acompanante` = '$acompanante',
+            `forma_pago` = '$forma_pago',
+            `limite_pago` = '$limite_pago',
             `suplementos` = '$suplementos',
             `total_suplementos` = '$total_suplementos',
             `total_hab` = '$total_hab',
