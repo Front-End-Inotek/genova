@@ -143,6 +143,8 @@
             <th>Codigo Postal</th>
             <th>Telefono</th>
             <th>Correo</th>
+            <th>Contrato Socio</th>
+            <th>Cupón</th>
             <th>Preferencias</th>
             <th>Comentarios</th>';
             if($editar==1){
@@ -166,6 +168,8 @@
                 <td>'.$fila['codigo_postal'].'</td>
                 <td>'.$fila['telefono'].'</td>
                 <td>'.$fila['correo'].'</td>
+                <td>'.$fila['contrato'].'</td>
+                <td>'.$fila['cupon'].'</td>
                 <td>'.$fila['preferencias'].'</td>
                 <td>'.$fila['comentarios'].'</td>';
                 if($editar==1){
@@ -210,6 +214,8 @@
               <th>Codigo Postal</th>
               <th>Telefono</th>
               <th>Correo</th>
+              <th>Contrato Socio</th>
+              <th>Cupón</th>
               <th>Preferencias</th>
               <th>Comentarios</th>';
               if($editar==1){
@@ -232,6 +238,8 @@
                 <td>'.$fila['codigo_postal'].'</td>
                 <td>'.$fila['telefono'].'</td>
                 <td>'.$fila['correo'].'</td>
+                <td>'.$fila['contrato'].'</td>
+                <td>'.$fila['cupon'].'</td>
                 <td>'.$fila['preferencias'].'</td>
                 <td>'.$fila['comentarios'].'</td>';
                 if($editar==1){
