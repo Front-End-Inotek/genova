@@ -76,10 +76,18 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-6">
             <button type="button" class="btn btn-primary btn-block boton_opciones" onclick="mostrar_opciones()">Opciones avanzadas</button>
           </div>
-          <div class="col-sm-8"></div>
+          <div class="col-sm-6"></div>
+        </div>
+        <div class="form_oculto">
+          <div class="row">
+            <div class="col-sm-12 text-left"><h3 class="text-dark margen-1">DATOS HUÉSPED</h3></div>
+            <div class="col-sm-2">.</div>
+            
+
+          </div>
         </div>
         <div class="row">
           <div class="col-sm-2">Suplementos:</div>

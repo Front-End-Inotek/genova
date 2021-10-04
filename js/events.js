@@ -643,6 +643,11 @@ function aceptar_asignar_huesped(id,precio_hospedaje,total_adulto,total_junior,t
     calcular_total(precio_hospedaje,total_adulto,total_junior,total_infantil);
 }
 
+function mostrar_opciones(){
+	$('.boton_opciones').hide();
+	$('.form_oculto').show();
+}
+
 // Guardar una reservacion
 function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje){
     var usuario_id=localStorage.getItem("id");
