@@ -554,17 +554,18 @@ function calcular_noches(){
     var fecha_entrada= document.getElementById("fecha_entrada").value;
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
-    document.getElementById("noches").value =noches;
+    document.getElementById("noches").value = noches;
 }
 
 // Calculo para obtener la cantidad de noches de una reservacion
 function calculo_noches(fecha_entrada,fecha_salida){
+	var noches= 0;
 	var fecha_entrada = new Date(fecha_entrada);
     var fecha_salida = new Date(fecha_salida);
 	var dias_en_milisegundos = 86400000;
 	var diff_en_milisegundos = fecha_salida - fecha_entrada;
-	var noches= diff_en_milisegundos / dias_en_milisegundos;
-    return noches;
+	noches= diff_en_milisegundos / dias_en_milisegundos;
+    return Number(noches);
 }
 
 // Conseguimos la cantidad de adultos permitidos por tarifa hospedaje
@@ -621,6 +622,25 @@ function redondearDecimales(numero,decimales){
     }else{
 		return Number(numero.toFixed(decimales)) === 0 ? 0 : numero; // En valores muy bajos, se comprueba si el numero es 0 (con el redondeo deseado), si no lo es se devuelve el numero otra vez.
     }
+}
+
+// Modal para asignar huesped en una reservacion
+function asignar_huesped(precio_hospedaje,total_adulto,total_junior,total_infantil){
+    $("#mostrar_herramientas").load("includes/modal_asignar_huesped.php?precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil);
+}
+
+// Busco el huesped asignar a la reservacion
+function buscar_asignar_huesped(precio_hospedaje,total_adulto,total_junior,total_infantil){
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+	$("#tabla_huesped").load("includes/buscar_asignar_huesped.php?precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil+"&a_buscar="+a_buscar);
+}
+
+// Aceptar asignar un huesped en una reservacion
+function aceptar_asignar_huesped(id,precio_hospedaje,total_adulto,total_junior,total_infantil){
+    $('#caja_herramientas').modal('hide');
+	document.getElementById("id_huesped").value= id;
+	//document.getElementById("nombre_huesped").value= nombre;
+    calcular_total(precio_hospedaje,total_adulto,total_junior,total_infantil);
 }
 
 // Guardar una reservacion

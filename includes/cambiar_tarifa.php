@@ -54,20 +54,14 @@
           <div class="col-sm-4">1 menor de 9 años por habitación, excepto en SUITE, aplican restricciones</div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Huésped:</div>
+          <div class="col-sm-2">
+            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"><span class="glyphicon glyphicon-edit"></span> Asignar Huesped</button>
+          </div>
           <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="number"  id="forzar_tarifa" value="0">
+            <input class="form-control" type="number"  id="id_huesped" value="" disabled/>
           </div>
           </div>
-          <div class="col-sm-2">
-          <div id="boton_reservacion">
-            <input type="submit" class="btn btn-success btn-block" value="Buscar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.')">
-          </div>
-          </div>
-          <div class="col-sm-4"></div>
-        </div>
-        <div class="row">
           <div class="col-sm-2">Quién Reserva:</div>
           <div class="col-sm-2"> 
           <div class="form-group">
@@ -80,7 +74,12 @@
             <input class="form-control" type="text"  id="acompanante" placeholder="Ingresa nombre    acompañante"  maxlength="70">
           </div>
           </div>
-          <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-primary btn-block boton_opciones" onclick="mostrar_opciones()">Opciones avanzadas</button>
+          </div>
+          <div class="col-sm-8"></div>
         </div>
         <div class="row">
           <div class="col-sm-2">Suplementos:</div>

@@ -21,3 +21,4 @@ VERSION 1.3
 -Generar tabla pago para elegir el limite de pago en una reservacion
 -Agregar elegir huesped en una reservacion
 -Agregar mas datos en reservacion
+-Mostrar los datos de un huesped en una reservacion
