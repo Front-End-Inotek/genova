@@ -57,25 +57,30 @@
           <div class="col-sm-2">Huésped:</div>
           <div class="col-sm-2">
           <div class="form-group">
-            <select class="form-control" id="id_huesped">
-              <option value="0">Selecciona</option>';
-              $huesped->mostrar_huesped();
-              echo '
-            </select>
+            <input class="form-control" type="number"  id="forzar_tarifa" value="0">
           </div>
           </div>
-          <div class="col-sm-2">Quién Reserva:</div>
           <div class="col-sm-2">
+          <div id="boton_reservacion">
+            <input type="submit" class="btn btn-success btn-block" value="Buscar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.')">
+          </div>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">Quién Reserva:</div>
+          <div class="col-sm-2"> 
           <div class="form-group">
-            <input class="form-control" type="text"  id="nombre_reserva" placeholder="Ingresa nombre reservacion"  maxlength="70">
+            <input class="form-control" type="text"  id="nombre_reserva" placeholder="Ingresa nombre    reservacion"  maxlength="70">
           </div>
           </div>
           <div class="col-sm-2">Acompañante:</div>
           <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="text"  id="acompanante" placeholder="Ingresa nombre acompañante"  maxlength="70">
+            <input class="form-control" type="text"  id="acompanante" placeholder="Ingresa nombre    acompañante"  maxlength="70">
           </div>
           </div>
+          <div class="col-sm-4"></div>
         </div>
         <div class="row">
           <div class="col-sm-2">Suplementos:</div>

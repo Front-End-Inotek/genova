@@ -195,7 +195,7 @@
                 <td>'.$fila['noches'].'</td> 
                 <td>'.$fila['numero_hab'].'</td> 
                 <td>'.$fila['habitacion'].'</td> 
-                <td>'.$fila['precio_hospedaje'].'</td>
+                <td>$'.$fila['precio_hospedaje'].'</td>
                 <td>'.$fila['cantidad_hospedaje'].'</td>  
                 <td>'.$fila['extra_adulto'].'</td> 
                 <td>'.$fila['extra_junior'].'</td> 
@@ -205,16 +205,16 @@
                 <td>'.$fila['nombre_reserva'].'</td>
                 <td>'.$fila['acompanante'].'</td>
                 <td>'.$fila['suplementos'].'</td>  
-                <td>'.$fila['total_suplementos'].'</td> 
-                <td>'.$fila['total_hab'].'</td>
-                <td>'.$fila['descuento'].'</td>'; 
+                <td>$'.$fila['total_suplementos'].'</td> 
+                <td>$'.$fila['total_hab'].'</td>
+                <td>'.$fila['descuento'].'%</td>'; 
                 if($fila['forzar_tarifa']>0){
-                  echo '<td>'.$fila['forzar_tarifa'].'</td>'; 
+                  echo '<td>$'.$fila['forzar_tarifa'].'</td>'; 
                 }else{
-                  echo '<td>'.$fila['total'].'</td>'; 
+                  echo '<td>$'.$fila['total'].'</td>'; 
                 }
                 echo '<td>'.$fila['forma_pago'].'</td>';  
-                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
+                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';  
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }
@@ -303,21 +303,16 @@
                   <td>'.$fila['nombre_reserva'].'</td>
                   <td>'.$fila['acompanante'].'</td>
                   <td>'.$fila['suplementos'].'</td>  
-                  <td>'.$fila['total_suplementos'].'</td> 
-                  <td>'.$fila['total_hab'].'</td>
-                  <td>'.$fila['descuento'].'</td>'; 
+                  <td>$'.$fila['total_suplementos'].'</td> 
+                  <td>$'.$fila['total_hab'].'</td>
+                  <td>'.$fila['descuento'].'%</td>'; 
                   if($fila['forzar_tarifa']>0){
-                    echo '<td>'.$fila['forzar_tarifa'].'</td>'; 
+                    echo '<td>$'.$fila['forzar_tarifa'].'</td>'; 
                   }else{
-                    echo '<td>'.$fila['total'].'</td>'; 
+                    echo '<td>$'.$fila['total'].'</td>'; 
                   }
                   echo '<td>'.$fila['forma_pago'].'</td>';  
-                  echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
-                  if($fila['forzar_tarifa']>0){
-                    echo '<td>'.$fila['forzar_tarifa'].'</td>'; 
-                  }else{
-                    echo '<td>'.$fila['total'].'</td>'; 
-                  } 
+                  echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>'; 
                   if($editar==1){
                     echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                   }
@@ -408,16 +403,16 @@
                 <td>'.$fila['nombre_reserva'].'</td>
                 <td>'.$fila['acompanante'].'</td>
                 <td>'.$fila['suplementos'].'</td>  
-                <td>'.$fila['total_suplementos'].'</td> 
-                <td>'.$fila['total_hab'].'</td>
-                <td>'.$fila['descuento'].'</td>'; 
+                <td>$'.$fila['total_suplementos'].'</td> 
+                <td>$'.$fila['total_hab'].'</td>
+                <td>'.$fila['descuento'].'%</td>'; 
                 if($fila['forzar_tarifa']>0){
-                  echo '<td>'.$fila['forzar_tarifa'].'</td>'; 
+                  echo '<td>$'.$fila['forzar_tarifa'].'</td>'; 
                 }else{
-                  echo '<td>'.$fila['total'].'</td>'; 
+                  echo '<td>$'.$fila['total'].'</td>'; 
                 }
                 echo '<td>'.$fila['forma_pago'].'</td>';  
-                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
+                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
                 }

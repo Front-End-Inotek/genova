@@ -88,7 +88,7 @@
             <input class="form-control" type="text" id="comentarios" value="'.$huesped->comentarios.'">
           </div>
           </div>
-        </div>
+        </div><br>
         <div class="row">
           <div class="col-sm-6"><h4 class="text-dark  margen-1">DATOS TARJETA:</h4></div>
           <div class="col-sm-6"></div>
