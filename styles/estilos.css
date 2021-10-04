@@ -120,3 +120,7 @@ background-color: rgb(241, 240, 241);
   fill: rgb(185, 185, 185);
 }
 
+/* Mostrar o ocultar los datos de un huesped en una reservacion */
+.form_oculto{
+  display:none;
+}
