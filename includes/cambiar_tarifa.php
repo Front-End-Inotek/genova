@@ -7,6 +7,7 @@
   $pago= NEW Pago(0);
   $tarifa= NEW Tarifa($_GET['tarifa']);
   $adultos= $tarifa->mostrar_cantidad_hospedaje($_GET['tarifa']);
+  $agregar= 1;
   $precio_hospedaje= 0;
   $precio_adulto= 0;
   $precio_junior= 0;
@@ -55,7 +56,7 @@
         </div>
         <div class="row">
           <div class="col-sm-2">
-            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"><span class="glyphicon glyphicon-edit"></span> Asignar Huésped</button>
+            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$agregar.',,'.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"><span class="glyphicon glyphicon-edit"></span> Asignar Huésped</button>
           </div>
           <div class="col-sm-2">
           <div class="form-group">

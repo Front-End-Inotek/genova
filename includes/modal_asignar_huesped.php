@@ -13,7 +13,7 @@
     <div class="modal-body">
       <div class="row">
         <div class="col-sm-12">';
-        $huesped->mostrar_asignar_huesped($_GET['precio_hospedaje'],$_GET['total_adulto'],$_GET['total_junior'],$_GET['total_infantil']);
+        $huesped->mostrar_asignar_huesped($_GET['funcion'],$_GET['precio_hospedaje'],$_GET['total_adulto'],$_GET['total_junior'],$_GET['total_infantil']);
         echo '</div>
       </div><br>
     </div>  

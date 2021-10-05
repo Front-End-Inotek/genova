@@ -9,6 +9,7 @@
   $reservacion= NEW Reservacion($_GET['id']);
   $tarifa= NEW Tarifa($_GET['tarifa']);
   $adultos= $tarifa->mostrar_cantidad_hospedaje($_GET['tarifa']);
+  $editar= 1;
   $precio_hospedaje= 0;
   $precio_adulto= 0;
   $precio_junior= 0;
@@ -56,17 +57,16 @@
           <div class="col-sm-4">1 menor de 9 años por habitación, excepto en SUITE, aplican restricciones</div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Huésped:</div>
+          <div class="col-sm-2">
+            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$editar.','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"><span class="glyphicon glyphicon-edit"></span> Asignar Huésped</button>
+          </div>
           <div class="col-sm-2">
           <div class="form-group">
-            <select class="form-control" id="id_huesped">';
-              $huesped->mostrar_huesped_editar($reservacion->id_huesped);
-              echo '
-            </select>
+            <input class="form-control" type="number"  id="id_huesped" value="'.$reservacion->id_huesped.'" disabled/>
           </div>
           </div>
           <div class="col-sm-2">Quién Reserva:</div>
-          <div class="col-sm-2">
+          <div class="col-sm-2"> 
           <div class="form-group">
             <input class="form-control" type="text"  id="nombre_reserva" value="'.$reservacion->nombre_reserva.'"  maxlength="70">
           </div>
@@ -78,6 +78,17 @@
           </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-8 div_datos">Presiona este botón si deseas ver los datos del huésped previamente asignado:</div>
+          <div class="col-sm-3">
+            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos()">Ver Datos</button>
+          </div>
+          <div class="col-sm-1"></div>
+        </div>
+        <div class="row div_oculto">';
+          // Div oculto donde van los datos de el huésped asignado para agregar una reservacion, pudiendose editar
+          echo '
+        </div><hr> 
         <div class="row">
           <div class="col-sm-2">Suplementos:</div>
           <div class="col-sm-6">

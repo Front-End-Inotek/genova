@@ -3,7 +3,7 @@
   include_once("clase_huesped.php");
   $huesped= NEW Huesped($_GET['id']);
   echo '
-      <div class="container blanco"><hr> 
+      <div class="container div_container"><hr> 
         <div class="row div_oculto">
           <div class="col-sm-12 text-left"><h3 class="text-dark margen-1">DATOS HUÉSPED</h3></div>
           <div class="col-sm-2">Nombre:</div>

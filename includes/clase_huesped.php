@@ -302,37 +302,10 @@
         }
         return $nombre;
       }
-      // Muestra los nombres de los huespedes
-      function mostrar_huesped(){
-        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
-        $comentario="Mostrar los nombres de los huespedes";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        //se recibe la consulta y se convierte a arreglo
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          echo '<option value="'.$fila['id'].'">'.$fila['nombre'].' '.$fila['apellido'].'</option>';
-        }
-        return $consulta;
-      }
-      // Muestra los nombres de los huespedes a editar
-      function mostrar_huesped_editar($id){
-        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
-        $comentario="Mostrar los nombres de los huespedes";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        //se recibe la consulta y se convierte a arreglo
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          if($id==$fila['id']){
-            echo '<option value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
-          }else{
-            echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';  
-          }
-        }
-      }
       // Mostrar las huespedes para asignar en una reservacion
-      function mostrar_asignar_huesped($precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
+      function mostrar_asignar_huesped($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
         echo '<div class="row">
-              <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huesped('.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control-lg" autofocus="autofocus"/></div> 
+              <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huesped('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control-lg" autofocus="autofocus"/></div> 
         </div><br>';
         $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
         $comentario="Mostrar los huespedes para asignar en una reservacion";
@@ -361,7 +334,7 @@
               while ($fila = mysqli_fetch_array($consulta))
               {
                 echo '<tr class="text-center">
-                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped('.$fila['id'].','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')"> Agregar</button></td>
+                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped('.$fila['id'].','.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>  
                 <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>
@@ -382,7 +355,7 @@
         </div>';
       }
       // Busqueda de los huespedes para asignar en una reservacion
-      function buscar_asignar_huesped($precio_hospedaje,$total_adulto,$total_junior,$total_infantil,$a_buscar){
+      function buscar_asignar_huesped($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil,$a_buscar){
         $sentencia = "SELECT * FROM huesped WHERE (nombre LIKE '%$a_buscar%' || apellido LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%' || telefono LIKE '%$a_buscar%') && estado_huesped = 1 ORDER BY nombre;";
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -410,7 +383,7 @@
               while ($fila = mysqli_fetch_array($consulta))
               {
                 echo '<tr class="text-center">
-                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped('.$fila['id'].','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')"> Agregar</button></td>
+                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped('.$fila['id'].','.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>  
                 <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>

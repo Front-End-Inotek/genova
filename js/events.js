@@ -625,29 +625,36 @@ function redondearDecimales(numero,decimales){
 }
 
 // Modal para asignar huesped en una reservacion
-function asignar_huesped(precio_hospedaje,total_adulto,total_junior,total_infantil){
-    $("#mostrar_herramientas").load("includes/modal_asignar_huesped.php?precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil);
+function asignar_huesped(funcion,precio_hospedaje,total_adulto,total_junior,total_infantil){
+    $("#mostrar_herramientas").load("includes/modal_asignar_huesped.php?funcion="+funcion+"&precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil);
 }
 
 // Busco el huesped asignar a la reservacion
-function buscar_asignar_huesped(precio_hospedaje,total_adulto,total_junior,total_infantil){
+function buscar_asignar_huesped(funcion,precio_hospedaje,total_adulto,total_junior,total_infantil){
     var a_buscar=encodeURIComponent($("#a_buscar").val());
-	$("#tabla_huesped").load("includes/buscar_asignar_huesped.php?precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil+"&a_buscar="+a_buscar);
+	$("#tabla_huesped").load("includes/buscar_asignar_huesped.php?funcion="+funcion+"&precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil+"&a_buscar="+a_buscar);
 }
 
 // Aceptar asignar un huesped en una reservacion
-function aceptar_asignar_huesped(id,precio_hospedaje,total_adulto,total_junior,total_infantil){
-    $('#caja_herramientas').modal('hide');
+function aceptar_asignar_huesped(id,funcion,precio_hospedaje,total_adulto,total_junior,total_infantil){
+	$('#caja_herramientas').modal('hide');
 	document.getElementById("id_huesped").value= id;
 	//document.getElementById("nombre_huesped").value= nombre;
-    calcular_total(precio_hospedaje,total_adulto,total_junior,total_infantil);
+	if(funcion == 0){// Corresponde a agregar una reservacion
+		calcular_total(precio_hospedaje,total_adulto,total_junior,total_infantil);
+	}else{// Corresponde a editar una reservacion
+		calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_infantil);
+	}
+	$('.div_datos').show();
+	$('.boton_datos').show();
+	$('.div_container').hide()
 }
 
 // Mostrar u ocultar los datos de un huesped en una reservacion
 function mostrar_datos(){
 	$('.div_datos').hide();
 	$('.boton_datos').hide();
-	//$('.form_oculto').show();
+	//$('.div_oculto').show();
 	var id_huesped= document.getElementById("id_huesped").value;
 	var id= id_huesped;
 	$(".div_oculto").html('<div class="spinner-border text-primary"></div>');
