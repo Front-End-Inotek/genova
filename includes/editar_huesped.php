@@ -4,7 +4,7 @@
   $huesped= NEW Huesped($_GET['id']);
   echo '
       <div class="container blanco"> 
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR HUESPED</h2></div>
+        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR HUÉSPED</h2></div>
         <div class="row">
           <div class="col-sm-2">Nombre:</div>
           <div class="col-sm-4">

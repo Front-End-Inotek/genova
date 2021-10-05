@@ -55,7 +55,7 @@
         </div>
         <div class="row">
           <div class="col-sm-2">
-            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"><span class="glyphicon glyphicon-edit"></span> Asignar Huesped</button>
+            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"><span class="glyphicon glyphicon-edit"></span> Asignar Huésped</button>
           </div>
           <div class="col-sm-2">
           <div class="form-group">
@@ -76,22 +76,18 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-7 div_datos">Presiona este botón si deseas ver los datos del huésped previamente asignado:</div>
-          <div class="col-sm-4">
+          <div class="col-sm-8 div_datos">Presiona este botón si deseas ver los datos del huésped previamente asignado:</div>
+          <div class="col-sm-3">
             <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos()">Ver Datos</button>
           </div>
           <div class="col-sm-1"></div>
         </div>
-        <div class="form_oculto">
-          <div class="row">
-            <div class="col-sm-12 text-left"><h3 class="text-dark margen-1">DATOS HUÉSPED</h3></div>
-            <div class="col-sm-2">.</div>
-            
-            
-
-          </div>
-        </div>
+        <div class="row div_oculto">';
+          // Div oculto donde van los datos de el huésped asignado para agregar una reservacion, pudiendose editar
+          echo '
+        </div><hr> 
         <div class="row">
+          <div class="col-sm-12 text-left"><h3 class="text-dark margen-1">DATOS PAGO:</h3></div>
           <div class="col-sm-2">Suplementos:</div>
           <div class="col-sm-6">
           <div class="form-group">

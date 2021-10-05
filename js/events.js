@@ -650,10 +650,8 @@ function mostrar_datos(){
 	//$('.form_oculto').show();
 	var id_huesped= document.getElementById("id_huesped").value;
 	var id= id_huesped;
-	//$("#area_trabajo_menu").load("includes/editar_huesped.php?id="+id);
-
-	//$(".div_adultos").html('<div class="spinner-border text-primary"></div>');
-    $('.form_oculto').load("includes/editar_huesped_reservar.php?id="+id); 
+	$(".div_oculto").html('<div class="spinner-border text-primary"></div>');
+    $(".div_oculto").load("includes/editar_huesped_reservar.php?id="+id); 
 }
 
 // Guardar una reservacion

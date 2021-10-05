@@ -3,9 +3,9 @@
   include_once("clase_huesped.php");
   $huesped= NEW Huesped($_GET['id']);
   echo '
-      <div class="container blanco"> 
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR HUESPED</h2></div>
-        <div class="row">
+      <div class="container blanco"><hr> 
+        <div class="row div_oculto">
+          <div class="col-sm-12 text-left"><h3 class="text-dark margen-1">DATOS HUÉSPED</h3></div>
           <div class="col-sm-2">Nombre:</div>
           <div class="col-sm-4">
           <div class="form-group">
@@ -306,13 +306,12 @@
             <input class="form-control" type="text" id="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->cvv.'" maxlength="3">
           </div>
           </div>
-          <div class="col-sm-5"></div>
+          <div class="col-sm-6"></div>
           <div class="col-sm-2">
           <div id="boton_huesped">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_huesped('.$_GET['id'].')">
+            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].')">
           </div>
           </div>
-          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_huesped()"><span class="glyphicon glyphicon-edit"></span> ←</button></div>
-        </div>  
+        </div> 
       </div>';
 ?>
