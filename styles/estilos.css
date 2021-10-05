@@ -121,6 +121,621 @@ background-color: rgb(241, 240, 241);
 }
 
 /* Mostrar u ocultar los datos de un huesped en una reservacion */
-/*.form_oculto{
-  display:none;
+.rapida{
+  background-color: #222;
+  color: white;
+  font-size: 1.2em;
+}
+.mgrande{
+  font-size: 1.2em;;
+}
+#area_trabajo_cortina{
+ 
+  color: white;
+}
+.texto_entrada{
+  color: white;
+}
+a {
+  text-decoration: none;
+}
+a:link {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none!important;
+}
+a.forumtitle {
+  text-decoration: none;
+}
+a.forumtitle:hover {
+  text-decoration: none!important;
+}
+a.topictitle {
+  text-decoration: none;
+}
+a.topictitle:hover {
+  text-decoration: none!important;
+}
+.color_black{
+  color: black;
+}
+.espacio{
+  padding: .15em;
+  padding-bottom: .3em;
+}
+.btn-herramientas{
+  margin-bottom: 1em;
+}
+.titulo_hab{
+  width: 100%;
+  text-align: center;
+   font-weight: bold;
+}
+.titulo_estados{
+  width: 100%;
+  font-size: 1.3em;
+  text-align: center;
+  font-weight: bold;
+}
+.numero_hab{
+  text-align: right;
+  line-height: 2.7em;
+  width: 30%;
+  float: left;
+  height:2.7em;
+}
+.numero_hab_1{
+  text-align: right;
+  line-height: 2.7em;
+  width: 100%;
+  
+  height:2.7em;
+}
+.tama_num_hab{
+  font-size: 1.8em;
+}
+.imagen_hab{
+  width:100%;
+  text-align: center;
+  height:2.1em;
+  vertical-align:middle;
+ 
+}
+.pie{
+    font-size: .7em;
+}
+.timepo_hab{
+  width: 100%;
+  text-align: center;
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.asignar_reca{
+  text-align: center;
+  background-color: #C0C0C0;
+  font-size: 1.2em;
+  color: white;
+}
+.asignar_reca:hover{
+  background-color: #B2B2B2;
+  color: white;
+}
+
+
+.Alin-center{
+  text-align: center;
+}
+.boton-rest{
+  margin-top: .5em;
+  padding-left: .2em;
+}
+
+.color-boton-rest{
+  background-color: #1DA40A;
+}
+.pedido_restaurante{
+  font-size: 1.2em;
+  line-height:normal;
+  border-bottom: .25em solid #cc4607;
+}
+.boton_restaurante{
+  margin-top: .5em;
+  font-size: 2em;
+  line-height:normal;
+}
+.altura-rest{
+  height: 30em;
+  overflow-x: scroll;
+}
+.altura{
+  text-align: center;
+  font-size: 1,3em;
+  border:black 5px solid;
+}
+.alin_center_white{
+  text-align: center;
+  color: white;
+  font-size: 1.8em;
+}
+.asignar_reca_activa{
+  text-align: center;
+  background-color: green;
+  font-size: 1.2em;
+  color: white;
+}
+.asignar_reca_activa:hover{
+  text-align: center;
+  background-color: rgb(30, 172, 30);
+  font-size: 1.2em;
+  color: white;
+}
+.infor_asig_reca{
+  font-size: .8em;
+}
+.bloqueo{
+  text-align: center;
+  background-color: #B5D176;
+  font-size: 1.2em;
+  color: white;
+}
+.master_on{
+  text-align: center;
+  background-color: #A3D829;
+  font-size: 1.2em;
+  color: white;
+}
+.master_off{
+  text-align: center;
+  background-color: #5f5e00;
+  font-size: 1.2em;
+  color: white;
+}
+.mantenimiento{
+  text-align: center;
+  background-color: #D0D03D;
+  font-size: 1.2em;
+  color: white;
+}
+.supervision{
+  text-align: center;
+  background-color: #7dc086;
+  font-size: 1.2em;
+  color: white;
+}
+.lavar{
+  text-align: center;
+  background-color: #3C91E6;
+  font-size: 1.2em;
+  color: white;
+}
+.detallar{
+  text-align: center;
+  background-color: #D0E369;
+  font-size: 1.2em;
+  color: white;
+}
+.cortina{
+  text-align: center;
+  background-color: #FF30C0; 
+  font-size: 1.2em;
+  color: white;
+
+}
+.limpiar{
+  text-align: center;
+  background-color: #A98743;
+  font-size: 1.2em;
+  color: white;
+}
+.mostrarresta{
+  overflow: auto;
+}
+.asignar{
+  text-align: center;
+  background-color:#28C9C6; ;
+  font-size: 1.2em;
+  color: white;
+}
+.placas{
+  text-align: center;
+  background-color: #02CCCF;
+  font-size: 1.2em;
+  color: white;
+}
+.terminar{
+  text-align: center;
+  background-color: #9F9F9F;
+  font-size: 1.2em;
+  color: white;
+}
+.ocupada{
+  text-align: center;
+  background-color: #7B241C;
+  font-size: 1.2em;
+  color: #D98880;
+}
+.reporte{
+  text-align: center;
+  background-color: #d33628;
+  font-size: 1.2em;
+  color:#eb958d;
+}
+.personas{
+  text-align: center;
+  background-color: #337C99;
+  font-size: 1.2em;
+  color: white;
+}
+.horas{
+  text-align: center;
+  background-color: #33997D;
+  font-size: 1.2em;
+  color: white;
+}
+.alarmas{
+  text-align: center;
+  background-color: #939933;
+  font-size: 1.2em;
+  color:  white;
+}
+.sucia{
+  text-align: center;
+  background-color: #186A3B;
+  font-size: 1.2em;
+  color: white;
+}
+.paseo{
+
+  text-align: center;
+  background-color:#F1C665;
+  font-size: 1.2em;
+  color: white;
+
+}
+.restaurante{
+  text-align: center;
+  background-color: #cc4607;
+  font-size: 1.2em;
+  color: white;
+}
+
+.caja_mostrar_totales{
+  overflow-x: auto;
+}
+.caja_info{
+  overflow: scroll;
+}
+.limpieza{
+  text-align: center;
+  background-color:#741D56;
+  font-size: 1.2em;
+  color: white;
+}
+.estado0{
+  background-color: #9F9F9F;
+  color: #272727 ;
+}
+.estado0:hover{
+  background-color: #ACACAC;
+  color: #272727 ;
+}
+/*
+  .estado0{
+    background-color: #186A3B;
+    color: #82E0AA ;
+  }
+  .estado0:hover{
+    background-color: #28B463;
+    color: #82E0AA ;
+  }
+*/
+.estado{
+  background-color: #D0E369;
+  color: white;
+}
+.estado1{
+  background-color: #D0E369;
+  color: white;
+}
+.estado1:hover{
+  background-color:#e9f893;
+  color: white;
+}
+.estado2{
+  background-color: #3C91E6;
+  color: white;
+}
+.estado2:hover{
+  background-color: #60b0ff;
+  color: white;
+}
+.estado3{
+  background-color: #A98743;
+  color: white;
+}
+.estado3:hover{
+  background-color: #c7a35b;
+  color: white;
+}
+.estado4{
+  background-color:#D0D03D;
+  color: white;
+}
+.estado4:hover{
+  background-color:#ecec5f;
+  color: white;
+}
+.estado5{
+  background-color:#9F6BA0;
+  color: white;
+}
+/*
+.estado4:hover{
+  background-color:#2D3319;
+  color: white;
+}
+.estado5{
+  background-color:#9F6BA0;
+  color: white;
+}
+*/
+.estado5:hover{
+  background-color:#c98fca;
+  color: white;
+}
+.estado6{
+  background-color: #28C9C6;
+  color: #008783;
+}
+.estado6:hover{
+  background-color: #2FDCD8;
+  color: #008783;
+}
+/*.estado6{
+  background-color: #B9770E;
+  color: #F8C471;
+}
+.estado6:hover{
+  background-color: #F39C12;
+  color: #F8C471;
 }*/
+.estado8{
+  background-color: #186A3B;
+  color: #82E0AA ;
+}
+.estado8:hover{
+  background-color: #1c8047;
+  color: #82E0AA ;
+}
+
+/*.estado7{
+  background-color:#7B241C;
+  color: #D98880;
+}
+.estado7:hover{
+  background-color:#C0392B;
+  color: #D98880;
+}*/
+.estado7{
+  background-color:#7B241C;
+  color: #D98880;
+}
+.estado7:hover{
+  background-color:#C0392B;
+  color: #D98880;
+}
+/*.estado8{
+  background-color:#50109D;
+  color: white;
+}
+.estado8:hover{
+  background-color:#450D88;
+  color: white;
+}*/
+/*.estado9{
+  background-color:#832161;
+  color: white;
+}
+.estado9:hover{
+  background-color:#741D56;
+  color: white;
+}
+.estado11{
+  background-color:#00587A;
+  color: white;
+}
+.estado11:hover{
+  background-color:#1E487A;
+  color: white;
+}*/
+.estado11{
+  background-color:#D17C48;
+  color: white;
+}
+.estado11:hover{
+  background-color:#e6915d;
+  color: white;
+
+}.estado16{
+  background-color:#D17C48;
+  color: white;
+}
+.estado16:hover{
+  background-color:#e6915d;
+  color: white;
+}
+.estado9{
+  background-color:#00587A;
+  color: white;
+}
+.estado9:hover{
+  background-color:#045170;
+  color: white;
+}
+.estado12{
+  background-color:#7B241C;
+  color: #D98880;
+}
+.estado12:hover{
+  background-color:#C0392B;
+  color: #D98880;
+}
+.estado13{
+  background-color:#cc4607;
+  color: white;
+}
+.estado13:hover{
+  background-color:#f76d2e;
+  color: white;
+}
+.estado14{
+  background-color:#741D56;
+  color: white;
+}
+.estado14:hover{
+  background-color:#832161;
+  color: white;
+}
+.estado15{
+  background-color:#F1C665;
+  color: white;
+}
+
+.estado15:hover{
+  background-color:#F7D78F;
+  color: white;
+}
+.estado17{
+  background-color:#7dc086;
+  color: white;
+}
+.estado17:hover{
+  background-color:#83b8a3;
+  color: white;
+}
+
+.texto_doble{
+  font-size: 2 em;
+}
+.margen_inf{
+  margin-bottom:10px;
+}
+#boton_panico{
+  display:none;
+}
+#boton_racking{
+  display:none;
+}
+.estado_auto{
+  width: 50%;
+  float: left;
+  font-size: .6em;
+}
+.pedido_restaurante_cobro{
+  font-size: .9em;
+  line-height:normal;
+  border-bottom: .25em solid #cc4607;
+}
+.off_energia{
+  background-color: #959595;
+  color: #D3D3D3;
+  border-radius: 0px 15px 15px 0px;
+}
+.on_energia{
+  background-color: #D2CD3D;
+  color:#FFF702;
+  border-radius: 0px 15px 15px 0px;
+}
+.on_cortina{
+  background-color: #494949;
+  color: #D3D3D3;
+  border-radius: 15px 0px 0px 15px;
+}
+.off_cortina{
+  background-color: #A928A2;
+  color:#F7B9F2;
+  border-radius: 15px 0px 0px 15px;
+}
+.form_oculto{
+  display:none;
+}
+.derecha{
+    text-align: right;
+}
+.izquierda{
+    text-align: left;
+}
+.info_cobradas{
+  font-size: .7em;
+}
+.fuente2{
+    font-size: 1.5em;
+}
+/*Checkin--------------------------------------------------------------------------------------------------------------------------*/
+.box
+  {
+	  padding:20px;
+	  -webkit-box-shadow: 0px 0px 5px 0px rgba(209,202,209,1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(209,202,209,1);
+    box-shadow: 0px 0px 5px 0px rgba(209,202,209,1);
+  }
+  
+  .box input, .box input::placeholder, .box select option, .box select
+  {
+	  font-size:12px;
+	  font-weight:500;
+	  color:#000;
+  }
+  
+  .box .btn
+  {
+	  width:100%;
+	  color:#fff;
+  }
+  
+  .bg
+  {
+	  outline:0px;
+	  color:#fff;
+	  background:url(clender.png) no-repeat left ;
+	  background-position: 7px 7px;
+  }
+  
+  .bg::placeholder
+  {
+	  padding-left:15px;
+  }
+
+  .caja 
+  { 
+    font-family: sans-serif; 
+    font-size: 18px; 
+    font-weight: 400; 
+    width: 134%;
+    color: #000000; 
+    background:#BDBDBD; 
+  }
+
+  .caja2 
+  { 
+    font-family: sans-serif; 
+    font-size: 18px; 
+    font-weight: 400; 
+    width: 98%;
+    color: #FFFF; 
+    background:#C0392B; 
+  }
+
+  .caja3 
+  { 
+    font-family: sans-serif; 
+    font-size: 6px; 
+    font-weight: 100; 
+    width: 134%;
+    color: #FFF; 
+    background:rgb(22, 102, 221);
+  }
+
+
