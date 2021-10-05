@@ -647,7 +647,7 @@ function aceptar_asignar_huesped(id,funcion,precio_hospedaje,total_adulto,total_
 	}
 	$('.div_datos').show();
 	$('.boton_datos').show();
-	$('.div_container').hide()
+	$('.div_container').hide();
 }
 
 // Mostrar u ocultar los datos de un huesped en una reservacion
