@@ -643,9 +643,17 @@ function aceptar_asignar_huesped(id,precio_hospedaje,total_adulto,total_junior,t
     calcular_total(precio_hospedaje,total_adulto,total_junior,total_infantil);
 }
 
-function mostrar_opciones(){
-	$('.boton_opciones').hide();
-	$('.form_oculto').show();
+// Mostrar u ocultar los datos de un huesped en una reservacion
+function mostrar_datos(){
+	$('.div_datos').hide();
+	$('.boton_datos').hide();
+	//$('.form_oculto').show();
+	var id_huesped= document.getElementById("id_huesped").value;
+	var id= id_huesped;
+	//$("#area_trabajo_menu").load("includes/editar_huesped.php?id="+id);
+
+	//$(".div_adultos").html('<div class="spinner-border text-primary"></div>');
+    $('.form_oculto').load("includes/editar_huesped_reservar.php?id="+id); 
 }
 
 // Guardar una reservacion
