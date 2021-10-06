@@ -119,6 +119,12 @@ function problemas_sistema(datos){
 	alert("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
 }
 
+//
+function mostrar_herramientas(hab_id,estado,nombre){
+	var id=localStorage.getItem("id");
+	$("#mostrar_herramientas").load("includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id);
+}
+
 // Abre la sidebar
 function openNav(){
     document.getElementById("sideNavigation").style.width = "250px";

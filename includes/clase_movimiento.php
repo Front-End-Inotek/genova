@@ -9,7 +9,7 @@
     /**
      *
      */
-    class movimiento extends ConexionMYSql
+    class Movimiento extends ConexionMYSql
     {
       public $mov;
       public $rec_realiza;
@@ -427,6 +427,33 @@
           $detalle_fin= $fila['detalle_fin'];
         }
         return $detalle_fin;
+
+        /*$checkin=0;
+        $total=0;
+        $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
+        //echo  $sentencia;
+        $comentario="Obtener el numero de reservacion correspondiente de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+            $checkin= $fila['checkin']; 
+        }
+
+        $sentencia = "SELECT * FROM reservacion WHERE id = $checkin LIMIT 1;";
+        //echo  $sentencia;
+        $comentario="Obtener la cuenta total de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+            if($fila['forzar_tarifa']>0){
+              $total= $fila['forzar_tarifa']; 
+            }else{
+              $total= $fila['total']; 
+            }
+        }
+        return $total;*/
       }
       function saber_tiempo_ultima_renta($hab){
         $detalle_fin=0;

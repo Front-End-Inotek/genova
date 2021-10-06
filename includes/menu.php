@@ -287,6 +287,7 @@
             <path d="M0,23 30,23" stroke="#000" stroke-width="5"/>
         </svg>
       </a>
+      <a class="nav-item" href="inicio.php"><span class="glyphicon  glyphicon-cloud"></span> '.$config->nombre.' </a>
     </nav>
     
     <div id="main">

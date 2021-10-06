@@ -151,7 +151,7 @@
       return $persona;
     }
     function persona_limpio($id){
-      
+
       $persona=0;
       $sentencia = "SELECT * FROM movimiento WHERE habitacion = $id ORDER BY id DESC LIMIT 1;";
       //echo  $sentencia;
@@ -172,6 +172,62 @@
         $persona="----";
       }
       return $persona;
+    }
+    function cuenta_total($mov){//va con movimiento
+
+      //$mov=1;
+      $checkin=0;
+      $total=0;
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
+      //echo  $sentencia;
+      $comentario="Obtener el numero de reservacion correspondiente de la habitacion";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+           $checkin= $fila['checkin']; 
+      }
+
+      $sentencia = "SELECT * FROM reservacion WHERE id = $checkin LIMIT 1;";
+      //echo  $sentencia;
+      $comentario="Obtener la cuenta total de la habitacion";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+           if($fila['forzar_tarifa']>0){
+             $total= $fila['forzar_tarifa']; 
+           }else{
+             $total= $fila['total']; 
+           }
+      }
+      return $total;
+    }
+    function ver_fecha_salida($mov){//va con movimiento
+
+      //$mov=1;
+      $checkin=0;
+      $fecha_salida=0;
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
+      //echo  $sentencia;
+      $comentario="Obtener el numero de reservacion correspondiente de la habitacion";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+           $checkin= $fila['checkin']; 
+      }
+
+      $sentencia = "SELECT * FROM reservacion WHERE id = $checkin LIMIT 1;";
+      //echo  $sentencia;
+      $comentario="Obtener la fecha de salida de la habitacion";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+             $fecha_salida= date("d-m-Y",$fila['fecha_salida']);
+      }
+      return $fecha_salida;
     }
     function ver_cronometro($hab_id,$estado,$cronometro,$nivel){
      
@@ -493,11 +549,11 @@
       $cronometro=0;
       $persona='-';
       //$persona= $id;
-      if($token<=0){
-        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov  as moviemiento, hab.estado, hab.estado ,hab.comentario, tipo_hab.nombre AS tipo_monbre FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id ORDER BY id";
-      }else{
-        $sentencia = "SELECT hab.id,hab.respuesta_cortina,hab.nombre,hab.tipo,hab.mov  as moviemiento, hab.estado, hab.estado ,hab.comentario, tipo_hab.nombre AS tipo_monbre FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.tipo =$tipo ORDER BY id";
-      }
+      //if($token<=0){
+        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario, tipo_hab.nombre AS tipo_monbre FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id ORDER BY id";
+      /*}else{
+        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_monbre FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.tipo =$tipo ORDER BY id";
+      }*/
 
       $comentario="mostrar hab  archvivo areatrabajo.php funcion mostrarhab";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -513,10 +569,10 @@
               $cronometro=$mivi->saber_tiempo_ultima_renta($fila['id']);
             break;
             case 1:
-              $estado="Detallado";
+              $estado="Ocupado";//Detallado
               $persona=$mivi->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mivi->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$mivi->saber_tiempo_fin($fila['moviemiento']);//saber_tiempo_fin
             break;
             case 2:
               $estado="Lavar";
@@ -600,7 +656,7 @@
           break;
         }
           if($fila['tipo']>0){
-            echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio  clase'.$fila['id'].'">';
+            echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio clase'.$fila['id'].'">';
               echo '<a  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')"><div class="estado'.$fila['estado'].'">';
 
                 /*
@@ -654,7 +710,7 @@
                           
                       break;
                     case 1:
-                          echo '<img src="images/detallando.png"  class="espacio-imagen center-block img-responsive">';
+                          echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';//images/detallando.png
                       break;
                     case 2:
                           echo '<img src="images/lavando.png"  class="espacio-imagen center-block img-responsive">';
@@ -712,11 +768,18 @@
                 echo '</div>';
                 
                 echo '<div class="timepo_hab">';
-                        $this->ver_cronometro($fila['id'],$fila['estado'],$cronometro,$usuario->nivel);
+                        //$this->ver_cronometro($fila['id'],$fila['estado'],0,$usuario->nivel);// anterior de cantidad de segundos
+                        $fecha_salida= $this->ver_fecha_salida($fila['id']);
+                        echo $fecha_salida;
+
+                echo '</div>';
+                echo '<div class="timepo_hab">';//
+                        $total= $this->cuenta_total($fila['id']);
+                        echo '$'.number_format($total, 2);
 
                 echo '</div>';
                 echo '<div class="timepo_hab">';
-                          $this->ver_detalle($fila['id'],$fila['estado'],$fila['tipo_monbre'],$persona,$fila['moviemiento']);
+                          //$this->ver_detalle($fila['id'],$fila['estado'],$fila['tipo_monbre'],$persona,$fila['moviemiento']);// nombre usuario
                       //  $fila['tipo_monbre'];
                 echo '</div>';
                 echo '<div class="timepo_hab">';
