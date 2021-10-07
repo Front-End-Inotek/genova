@@ -159,7 +159,7 @@ switch ($_GET['estado']) {
             echo '</div>';
           echo '</div>';*/
 
-        if($user->nivel<=2 && $conf->motel ==1 && $hab->motel==0){
+        /*if($user->nivel<=2 && $conf->motel ==1){
           echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
             echo '<div class="asignar" onclick="hab_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
@@ -172,8 +172,8 @@ switch ($_GET['estado']) {
               echo '</br>';
             echo '</div>';
           echo '</div>';
-        }
-        if($user->nivel<=2 && $conf->hospedaje ==1 && $hab->hotel==0){
+        }*/
+        if($user->nivel<=2 && $conf->hospedaje ==1){
           echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
             echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
@@ -181,13 +181,13 @@ switch ($_GET['estado']) {
                   echo '<img src="images/cama.png"  class="center-block img-responsive">';
               echo '</div>';
               echo '<div>';
-                echo 'Checkin';
+                echo 'Asignar';
               echo '</div>';
               echo '</br>';
             echo '</div>';
           echo '</div>';
         }
-          if($user->nivel<=2){
+          /*if($user->nivel<=2){
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
               echo '<div class="detallar" onclick="hab_detallar('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
@@ -243,7 +243,7 @@ switch ($_GET['estado']) {
               echo '</div>';
             echo '</div>';
           }
-          /*if($user->nivel<=2){//
+          if($user->nivel<=2){//
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
               echo '<div class="supervision" onclick="hab_manteni('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
@@ -256,7 +256,7 @@ switch ($_GET['estado']) {
                 echo '</br>';
               echo '</div>';
             echo '</div>';
-          }*/
+          }
           if($user->nivel<=2){
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
               echo '<div class="supervision" onclick="hab_supervision('.$_GET['hab_id'].','.$_GET['estado'].')">';
@@ -298,7 +298,7 @@ switch ($_GET['estado']) {
                 echo '</br>';
               echo '</div>';
             echo '</div>';
-          }
+          }*/
 
     break;
       case 1 :

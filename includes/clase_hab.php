@@ -10,6 +10,7 @@
       public $mov;
       public $comentario;
       public $estado;
+      public $estado_hab;
       
       // Constructor
       function __construct($id)
@@ -21,6 +22,7 @@
           $this->mov= 0;
           $this->comentario= 0;
           $this->estado= 0;
+          $this->estado_hab= 0;
         }else{
           $sentencia = "SELECT * FROM hab WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores de habitacion";
@@ -33,13 +35,14 @@
               $this->mov= $fila['mov'];
               $this->comentario= $fila['comentario'];
               $this->estado= $fila['estado'];
+              $this->estado_hab= $fila['estado_hab'];
           }
         }
       }
       // Guardar la habitacion
       function guardar_hab($nombre,$tipo,$comentario){
-        $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`)
-        VALUES ('$nombre', '$tipo', '0', '$comentario', '1');";
+        $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`, `estado_hab`)
+        VALUES ('$nombre', '$tipo', '0', '$comentario', '1', '1');";
         $comentario="Guardamos la habitacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
@@ -105,7 +108,7 @@
       // Borrar una habitacion
       function borrar_hab($id){
         $sentencia = "UPDATE `hab` SET
-        `estado` = '0'
+        `estado_hab` = '0'
         WHERE `id` = '$id';";
         $comentario="Poner estado de una habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
