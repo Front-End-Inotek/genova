@@ -2,6 +2,13 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_tarifa.php");
   $tarifa= NEW Tarifa(0);
+  // Checar si hab_id esta vacia o no
+  if (empty($_GET['hab_id'])){
+    //echo 'La variable esta vacia';
+    $hab_id= 0;
+  }else{
+    $hab_id= $_GET['hab_id'];
+  }
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR RESERVACION</h2></div>
@@ -21,7 +28,7 @@
           <div class="col-sm-1">Noches:</div>
           <div class="col-sm-1">
           <div class="form-group">
-            <input class="form-control" type="number"  id="noches" placeholder="0" onchange="cambiar_adultos()" disabled/>
+            <input class="form-control" type="number"  id="noches" placeholder="0" onchange="cambiar_adultos('.$hab_id.')" disabled/>
           </div>
           </div>
         </div>
@@ -29,13 +36,13 @@
           <div class="col-sm-2">No.Hab.:</div>
           <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="number"  id="numero_hab" placeholder="0" onchange="cambiar_adultos()">
+            <input class="form-control" type="number"  id="numero_hab" placeholder="0" onchange="cambiar_adultos('.$hab_id.')">
           </div>
           </div>
           <div class="col-sm-1">Tarifa:</div>
           <div class="col-sm-3">
           <div class="form-group">
-            <select class="form-control" id="tarifa" onchange="cambiar_adultos()">
+            <select class="form-control" id="tarifa" onchange="cambiar_adultos('.$hab_id.')">
               <option value="0">Selecciona</option>';
               $tarifa->mostrar_tarifas();
               echo '

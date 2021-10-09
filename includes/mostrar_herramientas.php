@@ -175,7 +175,7 @@ switch ($_GET['estado']) {
         }*/
         if($user->nivel<=2 && $conf->hospedaje ==1){
           echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-            echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class="ocupada" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   echo '<img src="images/cama.png"  class="center-block img-responsive">';

@@ -575,14 +575,14 @@ function calculo_noches(fecha_entrada,fecha_salida){
 }
 
 // Conseguimos la cantidad de adultos permitidos por tarifa hospedaje
-function cambiar_adultos(){
+function cambiar_adultos(hab_id){
     var tarifa= document.getElementById("tarifa").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
 	var numero_hab= document.getElementById("numero_hab").value;
     $(".div_adultos").html('<div class="spinner-border text-primary"></div>');
-    $(".div_adultos").load("includes/cambiar_tarifa.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab);  
+    $(".div_adultos").load("includes/cambiar_tarifa.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id);  
     //alert("Cambiando tarifa "+tarifa);
 }
 
@@ -668,7 +668,7 @@ function mostrar_datos(){
 }
 
 // Guardar una reservacion
-function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje){
+function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id){
     var usuario_id=localStorage.getItem("id");
 	var id_huesped= document.getElementById("id_huesped").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
@@ -742,6 +742,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 				  "forzar_tarifa": forzar_tarifa,
 				  "descuento": descuento,
 				  "total": total,
+				  "hab_id": hab_id,
                   "usuario_id": usuario_id,
 				};
 			$.ajax({
@@ -1187,6 +1188,16 @@ function regresar_editar_huesped(){
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_huespedes.php?usuario_id="+usuario_id);
+}
+
+//***// ESTADOS DE RACKS //***//
+
+// Agregar una reservacion en la habitacion
+function disponible_asignar(hab_id,estado){
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_reservaciones.php?hab_id="+hab_id+"&estado="+estado); 
+	$('#caja_herramientas').modal('hide');
 }
 
 //*//

@@ -141,6 +141,15 @@
           }
         }
       }
+      // Cambiar estado de la habitacion
+      function cambiohab($hab,$mov,$estado){
+        $sentencia = "UPDATE `hab` SET
+        `mov` = '$mov',
+        `estado` = '$estado'
+        WHERE `id` = '$hab';";
+        $comentario="Cambiar estado de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }     
              
   }
 ?>

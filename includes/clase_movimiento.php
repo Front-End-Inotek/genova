@@ -685,30 +685,6 @@
         $comentario="terminar detalle movimiento en la clase movimiento";
         $this->realizaConsulta($sentencia,$comentario);
       }
-      function mov_aplicarcobro_checkin($mov,$tiempo,$cobro,$hab,$cliente,$dias){
-        $inicio=time();
-        $hora=date("G");
-        if($hora<7){
-          $horaactual=strtotime(date("Y/n/j")." 12:00");
-        }else{
-
-          $horaactual=strtotime(date("Y/n/j")." 12:00");
-          $horaactual=$horaactual+86400;
-
-        }
-        
-        //$fin=  $inicio+($tiempo*60*60);
-        if($dias>1){
-          $horaactual= $horaactual+($dias*86400);
-        }
-        //echo $fin;
-        $sentencia="INSERT INTO `movimiento` (`habitacion`, `inicio_hospedaje`, `inicio_cobro`, `fin_hospedaje`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`, `detalle_inicio`)
-        VALUES ('$hab', '$inicio', '$inicio', '$horaactual', '$cliente', '', '', '', '', '$inicio');";
-        $comentario="Inicial el checkin de la habitacion";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        $MYSql_id=$this->id_mysql();
-        return $MYSql_id;
-      }
       function terminar_mov_det($mov){
         $tiempo=time();
         $sentencia = "UPDATE `movimiento` SET
@@ -1426,6 +1402,32 @@
             </div>';
 
       }
+    }
+    ///
+    // Agregar una reservacion en la habitacion
+    function disponible_asignar($mov,$hab,$id_huesped,$noches){
+      $inicio=time();
+      $hora=date("G");
+      if($hora<7){
+        $horaactual=strtotime(date("Y/n/j")." 12:00");
+      }else{
+
+        $horaactual=strtotime(date("Y/n/j")." 12:00");
+        $horaactual=$horaactual+86400;
+
+      }
+      
+      //$fin=  $inicio+($tiempo*60*60);
+      if($noches>1){
+        $horaactual= $horaactual+($noches*86400);
+      }
+      //echo $fin;
+      $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `inicio_hospedaje`, `inicio_cobro`, `fin_hospedaje`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`)
+      VALUES ('$hab', '$inicio', '', '$inicio', '$inicio', '$horaactual', '$id_huesped', '', '', '', '', '$inicio');";
+      $comentario="Agregar una reservacion en la habitacion";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      $MYSql_id=$this->id_mysql();
+      return $MYSql_id;
     }
 
 ?>
