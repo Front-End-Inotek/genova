@@ -142,6 +142,7 @@
     function obtener_nombre($id){
       $sentencia = "SELECT usuario FROM usuario WHERE id = $id;";
       $comentario="Obtener la persona que realizo la ultima limpieza";
+      $persona=0;
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       while ($fila = mysqli_fetch_array($consulta))

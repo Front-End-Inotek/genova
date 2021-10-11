@@ -1402,7 +1402,6 @@
             </div>';
 
       }
-    }
     ///
     // Agregar una reservacion en la habitacion
     function disponible_asignar($mov,$hab,$id_huesped,$noches){
@@ -1422,12 +1421,13 @@
         $horaactual= $horaactual+($noches*86400);
       }
       //echo $fin;
-      $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `inicio_hospedaje`, `inicio_cobro`, `fin_hospedaje`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`)
-      VALUES ('$hab', '$inicio', '', '$inicio', '$inicio', '$horaactual', '$id_huesped', '', '', '', '', '$inicio');";
+      $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `inicio_hospedaje`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`, `checkin`)
+      VALUES ('$hab', '$inicio', '', '$inicio', '$inicio', '$horaactual', '$id_huesped', '', '', '', '$inicio','$hab');";
       $comentario="Agregar una reservacion en la habitacion";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      $MYSql_id=$this->id_mysql();
-      return $MYSql_id;
+      //$MYSql_id=$this->id_mysql();
+      //return $MYSql_id;
     }
-
+  
+  }
 ?>
