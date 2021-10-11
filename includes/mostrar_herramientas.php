@@ -1,13 +1,13 @@
 <?php
 date_default_timezone_set('America/Mexico_City');
-//include_once("clase_info.php");
+include_once("clase_info.php");
 include_once("clase_hab.php");
 include_once("clase_configuracion.php");
 include_once("clase_movimiento.php");
 $conf = NEW Configuracion();
-/*function mostar_info($hab_id,$estado,$mov,$id){
+function mostar_info($hab_id,$estado,$mov,$id){
     $info = NEW Informacion($hab_id,$estado,$mov,$id);
-}*/ 
+}
 function show_info($hab_id,$estado){
     $hab = NEW Hab($hab_id);
     
@@ -1177,7 +1177,7 @@ break;
 }
   echo '</div>';
   echo '<div class="row">';
-    //mostar_info($_GET['hab_id'],$_GET['estado'],$hab->mov,$_GET['id']);
+    mostar_info($_GET['hab_id'],$_GET['estado'],$hab->mov,$_GET['id']);
   echo '</div>';
   echo '</div>';
   echo '<div class="modal-footer">

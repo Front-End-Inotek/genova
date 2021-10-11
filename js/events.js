@@ -120,7 +120,7 @@ function problemas_sistema(datos){
 }
 
 //
-function mostrar_herramientas(hab_id,estado,nombre){
+function mostrar_herramientas(hab_id,estado,nombre){ 
 	var id=localStorage.getItem("id");
 	$("#mostrar_herramientas").load("includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id);
 }
