@@ -190,7 +190,7 @@
       function mov_detalle($hab_id,$id,$id_recam,$tiempo){
         $tiempo_inicio=time();
         $tiempo_fin=$tiempo_inicio+$tiempo;
-        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`)
+        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`)
         VALUES ('$hab_id','$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'detalle', '', '', '', '', '');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -202,7 +202,7 @@
       function mov_manteni_retorno($hab_id,$id,$id_recam,$comentario,$mov){
         $tiempo_inicio=time();
         $tiempo_fin=0;
-        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario` ,`cliente`, `matricula`, `modelo`, `color`, `anotacion`, `retorno`)
+        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario` ,`id_huesped`, `matricula`, `modelo`, `color`, `anotacion`, `retorno`)
         VALUES ('$hab_id', '$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'mantenimiento', '$comentario', '', '', '', '', '', '$mov');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -216,7 +216,7 @@
       function mov_super_retorno($hab_id,$id,$id_recam,$comentario,$mov){
         $tiempo_inicio=time();
         $tiempo_fin=0;
-        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario` ,`cliente`, `matricula`, `modelo`, `color`, `anotacion`, `retorno`)
+        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario` ,`id_huesped`, `matricula`, `modelo`, `color`, `anotacion`, `retorno`)
         VALUES ('$hab_id', '$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'supervision', '$comentario', '', '', '', '', '', '$mov');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -228,7 +228,7 @@
       function mov_manteni($hab_id,$id,$id_recam,$comentario){
         $tiempo_inicio=time();
         $tiempo_fin=0;
-        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario` ,`cliente`, `matricula`, `modelo`, `color`, `anotacion`)
+        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario` ,`id_huesped`, `matricula`, `modelo`, `color`, `anotacion`)
         VALUES ('$hab_id', '$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'mantenimiento', '$comentario', '', '', '', '', '');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -240,7 +240,7 @@
       function mov_super($hab_id,$id,$id_recam,$comentario){//
         $tiempo_inicio=time();
         $tiempo_fin=0;
-        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario` ,`cliente`, `matricula`, `modelo`, `color`, `anotacion`)
+        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario` ,`id_huesped`, `matricula`, `modelo`, `color`, `anotacion`)
         VALUES ('$hab_id', '$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'supervision', '$comentario', '', '', '', '', '');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -252,7 +252,7 @@
       function mov_bloqueo($hab_id,$id,$id_recam,$comentario){
         $tiempo_inicio=time();
         $tiempo_fin=0;
-        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`)
+        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`)
         VALUES ('$hab_id', '$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'bloqueo', '$comentario', '', '', '', '', '');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -264,7 +264,7 @@
       function mov_asignar($hab_id,$id,$id_recam){
         $tiempo_inicio=time();
         $tiempo_fin=0;
-        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`)
+        $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `comentario`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`)
         VALUES ('$hab_id', '$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'rentar', '', '', '', '', '', '');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -276,7 +276,7 @@
       function mov_lavado($hab_id,$id,$id_recam,$tiempo){
         $tiempo_inicio=time();
         $tiempo_fin=$tiempo_inicio+$tiempo;
-        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`)
+        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`)
         VALUES ('$hab_id','$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'lavado', '', '', '', '', '');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -288,7 +288,7 @@
       function mov_sucio($hab_id,$id){
         $tiempo_inicio=time();
         $tiempo_fin=$tiempo_inicio;
-        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`, `inicio_hospedaje`, `fin_hospedaje`, `finalizado`)
+        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`, `inicio_hospedaje`, `fin_hospedaje`, `finalizado`)
         VALUES ('$hab_id','$tiempo_inicio', '$tiempo_fin', '$id', '', 'sucio', '', '', '', '', '','$tiempo_inicio','$tiempo_inicio','$tiempo_inicio');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -311,7 +311,7 @@
       function mov_lavado_retorno($hab_id,$id,$id_recam,$tiempo,$mov){
         $tiempo_inicio=time();
         $tiempo_fin=$tiempo_inicio+$tiempo;
-        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`, `retorno`)
+        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`, `retorno`)
         VALUES ('$hab_id','$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'lavado', '', '', '', '', '', '$mov');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -323,7 +323,7 @@
       function mov_limpieza($hab_id,$id,$id_recam,$tiempo){
         $tiempo_inicio=time();
         $tiempo_fin=$tiempo_inicio+$tiempo;
-        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`)
+        $sentencia = "INSERT INTO `movimiento` (`habitacion`,`detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `motivo`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`)
         VALUES ('$hab_id','$tiempo_inicio', '$tiempo_fin', '$id', '$id_recam', 'limpieza', '', '', '', '', '');";
         $comentario="Inicio de movimiento para detalle en la clase movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -1066,7 +1066,7 @@
                 <th>Salida </th>
                
                 <th>Matricula</th>
-                <th>Cliente</th>
+                <th>id_huesped</th>
                 
               </tr>
             </thead>
@@ -1083,7 +1083,7 @@
           echo '<td>'.date("Y-m-d H:i",$fila['fin_hospedaje']).'</td>';
           
           echo '<td>'.$fila['matricula'].'</td>';
-          echo '<td>'.$fila['cliente'].'</td>';
+          echo '<td>'.$fila['id_huesped'].'</td>';
           echo '</tr>';
         }
 
@@ -1404,7 +1404,9 @@
       }
     ///
     // Agregar una reservacion en la habitacion
-    function disponible_asignar($mov,$hab,$id_huesped,$noches,$fecha_entrada,$fecha_salida){
+    function disponible_asignar($mov,$hab,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$total){
+      $fecha_entrada=strtotime($fecha_entrada);
+      $fecha_salida=strtotime($fecha_salida);
       //$inicio=time();
       $hora=date("G");
       if($hora<7){
@@ -1421,12 +1423,24 @@
         $horaactual= $horaactual+($noches*86400);
       }
       //echo $fin;
-      $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `inicio_hospedaje`, `cliente`, `matricula`, `modelo`, `color`, `anotacion`, `checkin`)
-      VALUES ('$hab', '$fecha_entrada', '$fecha_salida', '$fecha_entrada', '$fecha_entrada', '$horaactual', '$id_huesped', '', '', '', '$fecha_entrada','$hab');";
+      $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `inicio_hospedaje`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`, `checkin`, `total`)
+      VALUES ('$hab', '$fecha_entrada', '$fecha_salida', '$fecha_entrada', '$fecha_entrada', '$horaactual', '$id_huesped', '', '', '', '$fecha_entrada','$hab','$total');";
       $comentario="Agregar una reservacion en la habitacion";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$MYSql_id=$this->id_mysql();
       //return $MYSql_id;
+    }
+    // Obtner el ultimo movimiento ingresado 
+    function ultima_insercion(){
+      $sentencia= "SELECT id FROM movimiento ORDER BY id DESC LIMIT 1";
+      $id= 0;
+      $comentario="Obtner el ultimo movimiento ingresado";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $id= $fila['id'];
+      }
+      return $id;
     }
   
   }
