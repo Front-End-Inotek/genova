@@ -27,6 +27,7 @@
       public $forzar_tarifa;
       public $descuento;
       public $total;
+      public $total_pago;
       public $estado;
       
       // Constructor
@@ -56,6 +57,7 @@
           $this->forzar_tarifa= 0;
           $this->descuento= 0;
           $this->total= 0;
+          $this->total_pago= 0;
           $this->estado= 0;
         }else{
           $sentencia = "SELECT * FROM reservacion WHERE id = $id LIMIT 1 ";
@@ -86,16 +88,17 @@
               $this->forzar_tarifa= $fila['forzar_tarifa'];
               $this->descuento= $fila['descuento'];
               $this->total= $fila['total'];
+              $this->total_pago= $fila['total_pago'];
               $this->estado= $fila['estado'];
           }
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($id_huesped,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$usuario_id){
+      function guardar_reservacion($id_huesped,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago,$usuario_id){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
-        $sentencia = "INSERT INTO `reservacion` (`id_huesped`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `estado`)
-        VALUES ('$id_huesped', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '1');";
+        $sentencia = "INSERT INTO `reservacion` (`id_huesped`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
+        VALUES ('$id_huesped', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '$total_pago', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -174,6 +177,7 @@
             <th>Total Habitacion</th>
             <th>Descuento</th>
             <th>Total Estancia</th>
+            <th>Total Pago</th>
             <th>Forma Pago</th>
             <th>Limite Pago</th>';
             if($editar==1){
@@ -213,6 +217,7 @@
                 }else{
                   echo '<td>$'.$fila['total'].'</td>'; 
                 }
+                echo '<td>$'.$fila['total_pago'].'</td>'; 
                 echo '<td>'.$fila['forma_pago'].'</td>';  
                 echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';  
                 if($editar==1){
@@ -273,6 +278,7 @@
                 <th>Total Habitacion</th>
                 <th>Descuento</th>
                 <th>Total Estancia</th>
+                <th>Total Pago</th>
                 <th>Forma Pago</th>
                 <th>Limite Pago</th>';
                 if($editar==1){
@@ -311,6 +317,7 @@
                   }else{
                     echo '<td>$'.$fila['total'].'</td>'; 
                   }
+                  echo '<td>$'.$fila['total_pago'].'</td>'; 
                   echo '<td>'.$fila['forma_pago'].'</td>';  
                   echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>'; 
                   if($editar==1){
@@ -373,6 +380,7 @@
               <th>Total Habitacion</th>
               <th>Descuento</th>
               <th>Total Estancia</th>
+              <th>Total Pago</th>
               <th>Forma Pago</th>
               <th>Limite Pago</th>';
               if($editar==1){
@@ -411,6 +419,7 @@
                 }else{
                   echo '<td>$'.$fila['total'].'</td>'; 
                 }
+                echo '<td>$'.$fila['total_pago'].'</td>'; 
                 echo '<td>'.$fila['forma_pago'].'</td>';  
                 echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';
                 if($editar==1){
@@ -428,7 +437,7 @@
         </div>';
       }
       // Editar una reservacion
-      function editar_reservacion($id,$id_huesped,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total){
+      function editar_reservacion($id,$id_huesped,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         $sentencia = "UPDATE `reservacion` SET
