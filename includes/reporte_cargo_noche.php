@@ -1,18 +1,31 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('clase_log.php');
+  include_once("clase_hab.php");
   include_once("clase_huesped.php");
+  include_once("clase_movimiento.php");
   include_once("clase_reservacion.php");
 
   $logs = NEW Log(0);
   //$logs->guardar_log($_GET['id'],"Reporte cargo por noche");
+  $hab= NEW Hab(0);
   $huesped= NEW Huesped(0);
   $reservacion= NEW Reservacion(0);
+  $mov = NEW Movimiento(0);
   //86400
+
+  // Consulta para obtener las habitaciones del reporte
+  /*$hab_total= 0;
+  $consulta = $hab->datos_hab();
+  while ($fila = mysqli_fetch_array($consulta))
+  {
+      $hab_id = $fila['id'];
+      $hab_nombre = $fila['nombre'];   
+      $hab_total++;   
+  }*/
   
   require('../fpdf/fpdf.php');
-  //$pdf = new FPDF();
-  $pdf = new FPDF('L','mm','A4');
+  $pdf = new FPDF();
   // Primera pagina
   $pdf->AddPage();
   // Marco primera pagina
@@ -74,56 +87,98 @@
   // Datos y fecha
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
-  $pdf->Cell(277,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');
+  $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');
   $pdf->Ln(4);
 
   // Titulos tabla -277
-  $pdf->SetFont('Arial','B',9);
+  $pdf->SetFont('Arial','B',10);
   $pdf->SetTextColor(0, 102, 205);
-  $pdf->Cell(277,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE POR NOCHE'),0,1,'C');
-  $pdf->SetFont('Arial','B',9);
+  $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE POR NOCHE'),0,1,'C');
+  $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Ln(4);
   $pdf->SetFillColor(99, 155, 219);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'HABITACION'),0,0,'C',True);
-  $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(51,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
-  $pdf->Cell(51,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
-  $pdf->Cell(33,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
+  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
+  $pdf->Cell(24,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+  $pdf->Cell(38,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
+  $pdf->Cell(38,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
+  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
 
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'JUNIOR'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'INFANTIL'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
-  $pdf->Cell(51,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 
-  $pdf->Cell(51,4,iconv("UTF-8", "ISO-8859-1",'RESERVA'),0,0,'C',True); 
-  $pdf->Cell(33,4,iconv("UTF-8", "ISO-8859-1",''),0,1,'C',True);
+  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(24,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'JUNIOR'),0,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'INFANTIL'),0,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
+  $pdf->Cell(38,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 
+  $pdf->Cell(38,4,iconv("UTF-8", "ISO-8859-1",'RESERVA'),0,0,'C',True); 
+  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,1,'C',True);
 
   // Datos dentro de la tabla herramienta
- /*$y = 80.5;
+  /*$y = 80.5;
   $x = 10;
-  $pdf->SetXY($x,$y);
-  $pdf->SetFont('Arial','',7);
+  $pdf->SetXY($x,$y);*/
+  $pdf->SetFont('Arial','',8);
   $pdf->SetTextColor(0,0,0);
-  $consulta = $herramienta->datos_herramienta();
+  //$consulta_segunda = $mov->datos_cargo_noche();
   $part=0;
   $y_mayor = 0;
   // Revisamos si tiene registros la herramienta
+  $consulta = $hab->datos_hab();
   while ($fila = mysqli_fetch_array($consulta))
   {
-      $nombre = $fila['nombre'];
-      $marca = $fila['marca'];
-      $modelo = $fila['modelo'];
-      $descripcion = $fila['descripcion']; 
-      $cantidad_almacen = $fila['cantidad_almacen']; 
-      $cantidad_prestadas = $fila['cantidad_prestadas']; 
-      $estado = $fila['estado'];
+      $hab_id = $fila['id'];
+      $hab_nombre = $fila['nombre'];  
+
+      $consulta_segunda = $mov->datos_cargo_noche($hab_id);
+      while($fila = mysqli_fetch_array($consulta_segunda)){
+        $habitacion = $fila['habitacion'];
+        $fecha_entrada = $fila['fecha_entrada'];
+        $fecha_salida = $fila['fecha_salida'];
+        $extra_adulto = $fila['extra_adulto'];
+        $extra_junior = $fila['extra_junior'];
+        $extra_infantil = $fila['extra_infantil'];
+        $extra_menor = $fila['extra_menor'];
+        $tarifa = $fila['tarifa'];
+        $id_huesped = $fila['huesped_id'];
+        $nombre_reserva	= $fila['nombre_reserva'];
+        $total_hab = $fila['total_hab'];
+        $forzar_tarifa = $fila['forzar_tarifa']; 
+
+        $pdf->Cell(10,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
+        $pdf->Cell(24,5,iconv("UTF-8", "ISO-8859-1",$tarifa),1,0,'C');
+        $pdf->Cell(15,5,iconv("UTF-8", "ISO-8859-1",$extra_adulto),1,0,'C'); 
+        $pdf->Cell(15,5,iconv("UTF-8", "ISO-8859-1",$extra_junior),1,0,'C');
+        $pdf->Cell(15,5,iconv("UTF-8", "ISO-8859-1",$extra_infantil),1,0,'C');
+        $pdf->Cell(15,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
+        $pdf->Cell(38,5,iconv("UTF-8", "ISO-8859-1",$id_huesped),1,0,'C'); 
+        $pdf->Cell(38,5,iconv("UTF-8", "ISO-8859-1",$nombre_reserva),1,0,'C'); 
+        $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",'$'.$total_hab),1,1,'C');
+      }
+  }
+
+
+
+  /*
+  // Consulta para obtener las habitaciones que se reservaron este dia
+  while ($fila = mysqli_fetch_array($consulta))
+  {
+      $habitacion = $fila['habitacion'];
+      $fecha_entrada = $fila['fecha_entrada'];
+      $fecha_salida = $fila['fecha_salida'];
+      $extra_adulto = $fila['extra_adulto'];
+      $extra_junior = $fila['extra_junior'];
+      $extra_infantil	 = $fila['extra_infantil'];
+      $extra_menor	 = $fila['extra_menor'];
+      $tarifa = $fila['tarifa'];
+      $id_huesped = $fila['id_huesped'];
+      $nombre_reserva	 = $fila['nombre_reserva'];
+      $total_hab = $fila['total_hab'];
+      $forzar_tarifa = $fila['forzar_tarifa'];  
       
       $divisor=32;
       $divisor_nombre=32;

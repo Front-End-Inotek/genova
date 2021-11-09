@@ -94,7 +94,7 @@
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($id_huesped,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago,$usuario_id){
+      function guardar_reservacion($id_huesped,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago,$usuario_id){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         $sentencia = "INSERT INTO `reservacion` (`id_huesped`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
@@ -112,6 +112,13 @@
           $id= $fila['id'];
         }
         $logs->guardar_log($usuario_id,"Agregar reservacion: ". $id);
+
+        // Poner id reservacion al numero de movimiento que corresponde
+        $sentencia = "UPDATE `movimiento` SET
+        `id_reservacion` = '$id'
+        WHERE `id` = '$id_movimiento';";
+        $comentario="Cambiar id reservacion del movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtengo el total de las reservaciones
       function total_elementos(){

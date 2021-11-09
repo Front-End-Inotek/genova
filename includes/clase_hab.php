@@ -42,7 +42,7 @@
       // Guardar la habitacion
       function guardar_hab($nombre,$tipo,$comentario){
         $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`, `estado_hab`)
-        VALUES ('$nombre', '$tipo', '0', '$comentario', '1', '1');";
+        VALUES ('$nombre', '$tipo', '0', '0', '$comentario', '1', '1');";
         $comentario="Guardamos la habitacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
@@ -149,7 +149,14 @@
         WHERE `id` = '$hab';";
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-      }     
+      } 
+      // Obtengo los datos de todas las habitaciones
+      function datos_hab(){
+        $sentencia = "SELECT * FROM hab WHERE estado_hab = 1";
+        $comentario="Obtengo los datos de todas las habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }    
              
   }
 ?>

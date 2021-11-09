@@ -13,7 +13,7 @@
     {
       public $mov;
       public $rec_realiza;
-      public $checkin;
+      public $id_reservacion;
       function __construct($id)
       {
         if($id>0){
@@ -24,14 +24,24 @@
           {
     			     $this->mov= $fila['id'];
                $this->rec_realiza= $fila['detalle_realiza'];
-               $this->checkin= $fila['checkin'];
+               $this->id_reservacion= $fila['id_reservacion'];
     		  }
         }
         else{
           $this->mov= 0;
           $this->rec_realiza="";
-          $this->checkin= 0;
+          $this->id_reservacion= 0;
         }
+      }
+
+      // Obtengo los datos del cargo por noche de la habitacio 
+      function datos_cargo_noche($id_hab){
+        $sentencia = "SELECT *, reservacion.id_huesped AS huesped_id 
+        FROM reservacion
+        INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion WHERE movimiento.habitacion = $id_hab AND reservacion.estado = 1";
+        $comentario="Obtengo los datos del cargo por noche de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
       }
 
       function id_mysql(){
@@ -428,7 +438,7 @@
         }
         return $detalle_fin;
 
-        /*$checkin=0;
+        /*$id_reservacion=0;
         $total=0;
         $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
         //echo  $sentencia;
@@ -437,10 +447,10 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-            $checkin= $fila['checkin']; 
+            $id_reservacion= $fila['id_reservacion']; 
         }
 
-        $sentencia = "SELECT * FROM reservacion WHERE id = $checkin LIMIT 1;";
+        $sentencia = "SELECT * FROM reservacion WHERE id = $id_reservacion LIMIT 1;";
         //echo  $sentencia;
         $comentario="Obtener la cuenta total de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -572,7 +582,7 @@
         $this->realizaConsulta($sentencia,$comentario);
       }
       function reporte_checkin($hab_id){//
-        $checkin=0;
+        $id_reservacion=0;
         $sentencia = "SELECT mov FROM hab WHERE id =$hab_id LIMIT 1 ";
         $comentario="Obtenemos el movimiento de habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -581,14 +591,14 @@
             $mov=$fila['mov'];
         }
   
-        $sentencia2 = "SELECT checkin FROM  movimiento WHERE id = $mov LIMIT 1";
-        $comentario2="Obtener el checkin de movimiento de checkin";
+        $sentencia2 = "SELECT id_reservacion FROM  movimiento WHERE id = $mov LIMIT 1";
+        $comentario2="Obtener el id reservacion de movimiento de id reservacion";
         $consulta2= $this->realizaConsulta($sentencia2,$comentario2);
         while ($fila2 = mysqli_fetch_array($consulta2))
         {
-            $checkin= $fila2['checkin'];
+            $id_reservacion= $fila2['id_reservacion'];
         }
-        return $checkin;
+        return $id_reservacion;
       }
       function saber_tiempo_inicio($mov){
         $sentencia = "SELECT detalle_inicio FROM  movimiento WHERE id = $mov LIMIT 1";
@@ -1404,7 +1414,7 @@
       }
     ///
     // Agregar una reservacion en la habitacion
-    function disponible_asignar($mov,$hab,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$total){
+    function disponible_asignar($mov,$hab,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$total){
       $fecha_entrada=strtotime($fecha_entrada);
       $fecha_salida=strtotime($fecha_salida);
       //$inicio=time();
@@ -1412,10 +1422,8 @@
       if($hora<7){
         $horaactual=strtotime(date("Y/n/j")." 12:00");
       }else{
-
         $horaactual=strtotime(date("Y/n/j")." 12:00");
         $horaactual=$horaactual+86400;
-
       }
       
       //$fin=  $inicio+($tiempo*60*60);
@@ -1423,12 +1431,21 @@
         $horaactual= $horaactual+($noches*86400);
       }
       //echo $fin;
-      $sentencia="INSERT INTO `movimiento` (`habitacion`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `inicio_hospedaje`, `id_huesped`, `matricula`, `modelo`, `color`, `anotacion`, `checkin`, `total`)
-      VALUES ('$hab', '$fecha_entrada', '$fecha_salida', '$fecha_entrada', '$fecha_entrada', '$horaactual', '$id_huesped', '', '', '', '$fecha_entrada','$hab','$total');";
+      $sentencia="INSERT INTO `movimiento` (`habitacion`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`,  `detalle_inicio`, `detalle_manda`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `total`, `motivo`)
+      VALUES ('$hab', '$id_huesped', '$hab', '$fecha_entrada', '$fecha_salida', $horaactual', '$usuario_id', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$total', 'reservar');";
       $comentario="Agregar una reservacion en la habitacion";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$MYSql_id=$this->id_mysql();
       //return $MYSql_id;
+
+      $sentencia = "SELECT id FROM movimiento ORDER BY id DESC LIMIT 1";
+      $comentario="Obtengo el id del movimiento agregado";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $id= $fila['id'];
+      }
+      return $id;
     }
     // Obtner el ultimo movimiento ingresado 
     function ultima_insercion(){
