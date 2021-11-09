@@ -1213,3 +1213,13 @@ function reporte_herramienta(){
     window.open("includes/reporte_herramienta.php?id="+id);
 }
 
+// Generar reporte de cargo por noche
+function reporte_cargo_noche(id){
+	var usuario_id=localStorage.getItem("id");
+    window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
+
+
+

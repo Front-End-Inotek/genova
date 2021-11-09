@@ -28,3 +28,4 @@ VERSION 1.3
 
 VERSION 1.4
 -Agregar total de pago a una reservacion
+-Reporte de cargo por noche
