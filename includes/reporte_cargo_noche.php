@@ -5,25 +5,17 @@
   include_once("clase_huesped.php");
   include_once("clase_movimiento.php");
   include_once("clase_reservacion.php");
+  include_once('clase_tarifa.php');
 
   $logs = NEW Log(0);
   //$logs->guardar_log($_GET['id'],"Reporte cargo por noche");
   $hab= NEW Hab(0);
   $huesped= NEW Huesped(0);
   $reservacion= NEW Reservacion(0);
-  $mov = NEW Movimiento(0);
+  $movimiento = NEW Movimiento(0);
+  $tarifa= NEW Tarifa(0);
   //86400
 
-  // Consulta para obtener las habitaciones del reporte
-  /*$hab_total= 0;
-  $consulta = $hab->datos_hab();
-  while ($fila = mysqli_fetch_array($consulta))
-  {
-      $hab_id = $fila['id'];
-      $hab_nombre = $fila['nombre'];   
-      $hab_total++;   
-  }*/
-  
   require('../fpdf/fpdf.php');
   $pdf = new FPDF();
   // Primera pagina
@@ -94,303 +86,75 @@
   $pdf->SetFont('Arial','B',10);
   $pdf->SetTextColor(0, 102, 205);
   $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE POR NOCHE'),0,1,'C');
-  $pdf->SetFont('Arial','B',8);
+  $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Ln(4);
   $pdf->SetFillColor(99, 155, 219);
-  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
-  $pdf->Cell(24,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(38,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
-  $pdf->Cell(38,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
+  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
+  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+  $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
+  $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
+  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'%'),0,0,'C',True);
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
 
-  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(24,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'JUNIOR'),0,0,'C',True);
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'INFANTIL'),0,0,'C',True);
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
-  $pdf->Cell(38,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 
-  $pdf->Cell(38,4,iconv("UTF-8", "ISO-8859-1",'RESERVA'),0,0,'C',True); 
+  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'JUNIOR'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'INFANTIL'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
+  $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 
+  $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'RESERVA'),0,0,'C',True);
+  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True); 
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,1,'C',True);
 
   // Datos dentro de la tabla herramienta
-  /*$y = 80.5;
-  $x = 10;
-  $pdf->SetXY($x,$y);*/
-  $pdf->SetFont('Arial','',8);
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
-  //$consulta_segunda = $mov->datos_cargo_noche();
+  $consulta = $movimiento->datos_cargo_noche();
   $part=0;
   $y_mayor = 0;
-  // Revisamos si tiene registros la herramienta
-  $consulta = $hab->datos_hab();
+  // Revisamos el total de cargo por habitacion
   while ($fila = mysqli_fetch_array($consulta))
   {
       $hab_id = $fila['id'];
       $hab_nombre = $fila['nombre'];  
-
-      $consulta_segunda = $mov->datos_cargo_noche($hab_id);
-      while($fila = mysqli_fetch_array($consulta_segunda)){
-        $habitacion = $fila['habitacion'];
-        $fecha_entrada = $fila['fecha_entrada'];
-        $fecha_salida = $fila['fecha_salida'];
-        $extra_adulto = $fila['extra_adulto'];
-        $extra_junior = $fila['extra_junior'];
-        $extra_infantil = $fila['extra_infantil'];
-        $extra_menor = $fila['extra_menor'];
-        $tarifa = $fila['tarifa'];
-        $id_huesped = $fila['huesped_id'];
-        $nombre_reserva	= $fila['nombre_reserva'];
-        $total_hab = $fila['total_hab'];
-        $forzar_tarifa = $fila['forzar_tarifa']; 
-
-        $pdf->Cell(10,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
-        $pdf->Cell(24,5,iconv("UTF-8", "ISO-8859-1",$tarifa),1,0,'C');
-        $pdf->Cell(15,5,iconv("UTF-8", "ISO-8859-1",$extra_adulto),1,0,'C'); 
-        $pdf->Cell(15,5,iconv("UTF-8", "ISO-8859-1",$extra_junior),1,0,'C');
-        $pdf->Cell(15,5,iconv("UTF-8", "ISO-8859-1",$extra_infantil),1,0,'C');
-        $pdf->Cell(15,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
-        $pdf->Cell(38,5,iconv("UTF-8", "ISO-8859-1",$id_huesped),1,0,'C'); 
-        $pdf->Cell(38,5,iconv("UTF-8", "ISO-8859-1",$nombre_reserva),1,0,'C'); 
-        $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",'$'.$total_hab),1,1,'C');
-      }
-  }
-
-
-
-  /*
-  // Consulta para obtener las habitaciones que se reservaron este dia
-  while ($fila = mysqli_fetch_array($consulta))
-  {
       $habitacion = $fila['habitacion'];
-      $fecha_entrada = $fila['fecha_entrada'];
-      $fecha_salida = $fila['fecha_salida'];
+      $fecha_entrada = $fila['inicio_hospedaje'];
+      $fecha_salida = $fila['fin_hospedaje'];
       $extra_adulto = $fila['extra_adulto'];
       $extra_junior = $fila['extra_junior'];
-      $extra_infantil	 = $fila['extra_infantil'];
-      $extra_menor	 = $fila['extra_menor'];
-      $tarifa = $fila['tarifa'];
+      $extra_infantil = $fila['extra_infantil'];
+      $extra_menor = $fila['extra_menor'];
+      $id_tarifa = $fila['tarifa'];
       $id_huesped = $fila['id_huesped'];
-      $nombre_reserva	 = $fila['nombre_reserva'];
-      $total_hab = $fila['total_hab'];
-      $forzar_tarifa = $fila['forzar_tarifa'];  
-      
-      $divisor=32;
-      $divisor_nombre=32;
-      $divisor_marca=18;
-      $divisor_modelo=18;
-      $longitud = strlen($descripcion);
-      $longitud_nombre = strlen($nombre);
-      $longitud_marca = strlen($marca); 
-      $longitud_modelo = strlen($modelo); 
-
-      $cantidad = intval($longitud /$divisor);
-      if(($longitud%$divisor)>0){
-          $cantidad++;
-      }
-      if($cantidad>=$y_mayor){
-        $y_mayor = $cantidad;
-      }
-      $alto=$cantidad*6;
-
-      $cantidad_nombre= intval($longitud_nombre /$divisor_nombre);
-      if(($longitud_nombre%$divisor_nombre)>0){
-          $cantidad_nombre++;
-      }
-      if($cantidad_nombre>=$y_mayor){
-          $y_mayor = $cantidad_nombre;
-      }
-      $alto_nombre=$cantidad_nombre*6;
-      if($alto_nombre>=$alto)
-      {
-          $alto=$alto_nombre;
+      $quien_reserva	= $fila['nombre_reserva'];
+      $descuento = $fila['descuento'];
+      //$total = $fila['total'];
+      if (empty($descuento)){
+        //echo 'La variable esta vacia';
+        $descuento= 0; 
       }
 
-      $cantidad_marca= intval($longitud_marca /$divisor_marca);
-      if(($longitud_marca%$divisor_marca)>0){
-          $cantidad_marca++;
-      }
-      if($cantidad_marca>=$y_mayor){
-        $y_mayor = $cantidad_marca;
-      }
-      $alto_marca=$cantidad_marca*6;
-      if($alto_marca>=$alto)
-      {
-        $alto=$alto_marca;
-      }
+      $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
+      $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
+      $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_junior,$descuento);
 
-      $cantidad_modelo= intval($longitud_modelo /$divisor_modelo);
-      if(($longitud_modelo%$divisor_modelo)>0){
-          $cantidad_modelo++;
-      }
-      if($cantidad_modelo>=$y_mayor){
-        $y_mayor = $cantidad_modelo;
-      }
-      $alto_modelo=$cantidad_modelo*6;
-      if($alto_modelo>=$alto)
-      {
-        $alto=$alto_modelo;
-      }
-      $alto=$y_mayor*6 ;
-      if($longitud<=32 && $longitud_nombre<32 && $longitud_marca<18 && $longitud_modelo<18){
-        $alto=6;
-        $y_mayor=1;
-      }
-      $lineas =$y+ ($y_mayor*6);
-      $pdf->Line($x, $y, $x, $lineas); 
-      $pdf->Line($x+59, $y, $x+59, $lineas); 
-      $pdf->Line($x+87, $y, $x+87, $lineas); 
-      $pdf->Line($x+115, $y, $x+115, $lineas); 
-      $pdf->Line($x+192, $y, $x+192, $lineas); 
-      $pdf->Line($x, $lineas, $x+192, $lineas);
-      $pdf->SetXY($x,$y);
-      $part++;
-      $pdf->Cell(192,.1,"",1,1,"C",true);   
-
-      $pdf->Cell(12,$alto,iconv("UTF-8", "ISO-8859-1",$part),1,0,'C');
-      if($longitud_nombre<=$divisor_nombre){
-        $pdf->Cell(47,$alto,iconv("UTF-8", "ISO-8859-1",$nombre),1,0,'C');
-      }else{
-        $x=$pdf->GetX();
-        $y=$pdf->GetY();
-        $y_old=$pdf->GetY();
-        $inicio=0;
-        for($i=1;$i<=$cantidad_nombre;$i++){
-            $fin=$divisor_nombre;
-            $pdf->SetXY($x,$y);
-            if($i==1)
-            {   
-                $pdf->Cell(47,6,iconv("UTF-8", "ISO-8859-1",''.substr($nombre, $inicio, $fin)),0,0,'C');
-            }else{
-                $pdf->Cell(47,6,iconv("UTF-8", "ISO-8859-1",''.substr($nombre, $inicio, $fin)),0,0,'C');
-            }
-            $inicio = $inicio+$divisor_nombre;
-            $y=$y+6;
-        }
-        $x=$x+47;
-        $pdf->SetXY($x,$y_old);
-      }
-
-    if($longitud_marca<=$divisor_marca){
-      $pdf->Cell(28,$alto,iconv("UTF-8", "ISO-8859-1",$marca),1,0,'C');
-    }else{
-      $x=$pdf->GetX();
-      $y=$pdf->GetY();
-      $y_old=$pdf->GetY();
-      $inicio=0;
-      for($i=1;$i<=$cantidad_marca;$i++){
-          $fin=$divisor_marca;
-          $pdf->SetXY($x,$y);
-          if($i==1)
-          {   
-              $pdf->Cell(28,6,iconv("UTF-8", "ISO-8859-1",''.substr($marca, $inicio, $fin)),0,0,'C');
-          }else{
-              $pdf->Cell(28,6,iconv("UTF-8", "ISO-8859-1",''.substr($marca, $inicio, $fin)),0,0,'C');
-          }
-          $inicio = $inicio+$divisor_marca;
-          $y=$y+6;
-      }
-      $x=$x+28;
-      $pdf->SetXY($x,$y_old);
-    }
-    
-    if($longitud_modelo<=$divisor_modelo){
-      $pdf->Cell(28,$alto,iconv("UTF-8", "ISO-8859-1",$modelo),1,0,'C');
-    }else{
-      $x=$pdf->GetX();
-      $y=$pdf->GetY();
-      $y_old=$pdf->GetY();
-      $inicio=0;
-      for($i=1;$i<=$cantidad_modelo;$i++){
-          $fin=$divisor_modelo;
-          $pdf->SetXY($x,$y);
-          if($i==1)
-          {   
-              $pdf->Cell(28,6,iconv("UTF-8", "ISO-8859-1",''.substr($modelo, $inicio, $fin)),0,0,'C');
-          }else{
-              $pdf->Cell(28,6,iconv("UTF-8", "ISO-8859-1",''.substr($modelo, $inicio, $fin)),0,0,'C');
-          }
-          $inicio = $inicio+$divisor_modelo;
-          $y=$y+6;
-      }
-      $x=$x+28;
-      $pdf->SetXY($x,$y_old);
-    }
-
-   
-    if($longitud<=$divisor){
-      $pdf->Cell(47,$alto,iconv("UTF-8", "ISO-8859-1",$descripcion),1,0,'C');
-    }else{
-      $x=$pdf->GetX();
-      $y=$pdf->GetY();
-      $y_old=$pdf->GetY();
-      $inicio=0;
-      for($i=1;$i<=$cantidad;$i++){
-          $fin=$divisor;
-          $pdf->SetXY($x,$y);
-          if($i==1)
-          {   
-              $pdf->Cell(47,6,iconv("UTF-8", "ISO-8859-1",''.substr($descripcion, $inicio, $fin)),0,0,'C');
-          }else{
-              $pdf->Cell(47,6,iconv("UTF-8", "ISO-8859-1",''.substr($descripcion, $inicio, $fin)),0,0,'C');
-          }
-          $inicio = $inicio+$divisor;
-          $y=$y+6;
-      }
-      $x=$x+47;
-      $pdf->SetXY($x,$y_old);
-    }
-  
-    $pdf->Cell(15,$alto,iconv("UTF-8", "ISO-8859-1",$cantidad_almacen),1,0,'C'); 
-    $pdf->Cell(15,$alto,iconv("UTF-8", "ISO-8859-1",$cantidad_prestadas),1,1,'C');  
-    $y =$lineas;
-    $x =10;
-    $pdf->SetXY($x,$y);
-    
-    if($y >= 265){
-      $pdf->AddPage();
-      $y =26;
-      $x =10;
-      $pdf->SetFont('Arial','B',9);
-      $pdf->SetTextColor(255, 255, 255);
-      $pdf->Ln(4);
-      $pdf->SetFillColor(99, 155, 219);
-      $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-      $pdf->Cell(47,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-      $pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True); 
-      $pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-      $pdf->Cell(47,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-      $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'CANT.'),0,0,'C',True); 
-      $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'CANT.'),0,1,'C',True);
-
-      $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'PART.'),0,0,'C',True);
-      $pdf->Cell(47,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True);
-      $pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1",'MARCA'),0,0,'C',True); 
-      $pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1",'MODELO'),0,0,'C',True);
-      $pdf->Cell(47,4,iconv("UTF-8", "ISO-8859-1",'DESCRIPCION'),0,0,'C',True);
-      $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'ALMA-'),0,0,'C',True); 
-      $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'PRES-'),0,1,'C',True);
-      
-      $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-      $pdf->Cell(47,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-      $pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True); 
-      $pdf->Cell(28,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-      $pdf->Cell(47,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-      $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'CEN'),0,0,'C',True); 
-      $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'TADAS'),0,1,'C',True);
-
-      // Datos dentro de la tabla herramienta
-      $pdf->SetFont('Arial','',7);
-      $pdf->SetTextColor(0,0,0);
-      $pdf->SetXY($x,$y);
-    }          
+      $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
+      $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$nombre_tarifa),1,0,'C');
+      $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_adulto),1,0,'C'); 
+      $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_junior),1,0,'C');
+      $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_infantil),1,0,'C');
+      $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
+      $pdf->Cell(50,5,iconv("UTF-8", "ISO-8859-1",$nombre_huesped),1,0,'C'); 
+      $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1",$quien_reserva),1,0,'C'); 
+      $pdf->Cell(10,5,iconv("UTF-8", "ISO-8859-1",$descuento),1,0,'C'); 
+      $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_tarifa, 2)),1,1,'C');    
   }
- */
 
   $_GET['id']=1;
   //$pdf->Output("reporte_herramienta.pdf","I");

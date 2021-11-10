@@ -13,15 +13,16 @@
     $total=$_POST['forzar_tarifa']; 
   }else{// No se consideran los suplementos
     if($_POST['descuento']>0){
-      $total=$_POST['total_hab']; 
-    }else{
       $descuento= $_POST['descuento'] / 100;
+      $descuento= 1 - $descuento;
       $total=$_POST['total_hab'] * $descuento;
+    }else{
+      $total=$_POST['total_hab']; 
     }
   }
 
   if($_POST['hab_id']!=0){
-    $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['noches'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['extra_adulto'],$_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],$_POST['nombre_reserva'],$total);
+    $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['noches'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['extra_adulto'],$_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],$_POST['nombre_reserva'],$_POST['descuento'],$total);
     $mov_actual= $movimiento->ultima_insercion();
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
     $logs->guardar_log($_POST['usuario_id'],"Checkin en habitacion: ". $hab->nombre);

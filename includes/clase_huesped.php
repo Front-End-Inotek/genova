@@ -302,6 +302,20 @@
         }
         return $nombre;
       }
+      // Obtengo el nombre completo del huesped
+      function obtengo_nombre_completo($id){
+        $sentencia = "SELECT nombre,apellido FROM huesped WHERE id = $id AND estado_huesped = 1 LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtengo el nombre completo del huesped";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $nombre= $fila['nombre'];
+          $apellido= $fila['apellido'];
+          $nombre_completo= $nombre.' '.$apellido;
+        }
+        return $nombre_completo;
+      }
       // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huesped($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
         echo '<div class="row">

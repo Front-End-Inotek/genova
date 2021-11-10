@@ -177,7 +177,7 @@
     function cuenta_total($mov){//va con movimiento
 
       //$mov=1;
-      $checkin=0;
+      $id_reservacion=0;
       $total=0;
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
       //echo  $sentencia;
@@ -186,10 +186,10 @@
       //se recibe la consulta y se convierte a arreglo
       while ($fila = mysqli_fetch_array($consulta))
       {
-           $checkin= $fila['checkin']; 
+           $id_reservacion= $fila['id_reservacion']; 
       }
 
-      $sentencia = "SELECT * FROM reservacion WHERE id = $checkin LIMIT 1;";
+      $sentencia = "SELECT * FROM reservacion WHERE id = $id_reservacion LIMIT 1;";
       //echo  $sentencia;
       $comentario="Obtener la cuenta total de la habitacion";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -207,7 +207,7 @@
     function ver_fecha_salida($mov){//va con movimiento
 
       //$mov=1;
-      $checkin=0;
+      $id_reservacion=0;
       $fecha_salida=0;
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
       //echo  $sentencia;
@@ -216,10 +216,10 @@
       //se recibe la consulta y se convierte a arreglo
       while ($fila = mysqli_fetch_array($consulta))
       {
-           $checkin= $fila['checkin']; 
+           $id_reservacion= $fila['id_reservacion']; 
       }
 
-      $sentencia = "SELECT * FROM reservacion WHERE id = $checkin LIMIT 1;";
+      $sentencia = "SELECT * FROM reservacion WHERE id = $id_reservacion LIMIT 1;";
       //echo  $sentencia;
       $comentario="Obtener la fecha de salida de la habitacion";
       $consulta= $this->realizaConsulta($sentencia,$comentario);

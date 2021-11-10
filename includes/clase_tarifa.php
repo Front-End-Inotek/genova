@@ -204,6 +204,43 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
+      // Obtengo el nombre de la tarifa
+      function obtengo_nombre($id){
+        $sentencia = "SELECT nombre FROM tarifa_hospedaje WHERE id = $id AND estado = 1 LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtengo el nombre de la tarifa";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $nombre= $fila['nombre'];
+        }
+        return $nombre;
+      }
+      // Obtengo la tarifa por el dia de hospedaje
+      function obtengo_tarifa_dia($id,$extra_adulto,$extra_junior,$extra_infantil,$descuento){
+        $sentencia = "SELECT * FROM tarifa_hospedaje WHERE id = $id AND estado = 1 LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtengo la tarifa por el dia de hospedaje";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $precio_hospedaje= $fila['precio_hospedaje'];
+          $extra_adulto= $extra_adulto * $fila['precio_adulto'];
+          $extra_junior= $extra_junior * $fila['precio_junior'];
+          $extra_infantil= $extra_infantil * $fila['precio_infantil'];
+          $total_dia= $precio_hospedaje + $extra_adulto + $extra_junior + $extra_infantil;
+          
+          // Se obtine el calculo total considerando si existe o no descuento
+          if($descuento>0){
+            $descuento= $descuento / 100;
+            $descuento= 1 - $descuento;
+            $total_dia= $total_dia * $descuento;
+          }else{
+            // Permanece igual el total dia
+          }
+        }
+        return $total_dia;
+      }
              
   }
 ?>

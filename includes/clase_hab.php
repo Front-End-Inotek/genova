@@ -149,14 +149,7 @@
         WHERE `id` = '$hab';";
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-      } 
-      // Obtengo los datos de todas las habitaciones
-      function datos_hab(){
-        $sentencia = "SELECT * FROM hab WHERE estado_hab = 1";
-        $comentario="Obtengo los datos de todas las habitaciones";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        return $consulta;
-      }    
+      }     
              
   }
 ?>
