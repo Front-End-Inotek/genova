@@ -113,11 +113,10 @@
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,1,'C',True);
 
   // Datos dentro de la tabla herramienta
+  $total_final= 0;
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   $consulta = $movimiento->datos_cargo_noche();
-  $part=0;
-  $y_mayor = 0;
   // Revisamos el total de cargo por habitacion
   while ($fila = mysqli_fetch_array($consulta))
   {
@@ -135,7 +134,7 @@
       $quien_reserva	= $fila['nombre_reserva'];
       $descuento = $fila['descuento'];
       //$total = $fila['total'];
-      if (empty($descuento)){
+      if (empty($descuento)){// Checar si existe descuento en la reservacion
         //echo 'La variable esta vacia';
         $descuento= 0; 
       }
@@ -143,6 +142,7 @@
       $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
       $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
       $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_junior,$descuento);
+      $total_final= $total_final + $total_tarifa;
 
       $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
       $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$nombre_tarifa),1,0,'C');
@@ -156,10 +156,13 @@
       $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_tarifa, 2)),1,1,'C');    
   }
 
+  $pdf->SetFont('Arial','',10);
+  $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
+
   $_GET['id']=1;
-  //$pdf->Output("reporte_herramienta.pdf","I");
+  //$pdf->Output("reporte_cargo_noche.pdf","I");
   $pdf->Output("reporte_cargo_noche_".$_GET['id'].".pdf","I");
-  //$pdf->Output("../reportes/herramienta/reporte_herramienta.pdf","F");
-      //echo 'Reporte herramienta';*/
+  //$pdf->Output("../reportes/reservaciones/reporte_cargo_noche.pdf","F");
+      //echo 'Reporte cargo_noche';*/
 ?>
 

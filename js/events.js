@@ -682,7 +682,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	var tarifa= Number(document.getElementById("tarifa").value);
 	var nombre_reserva= encodeURI(document.getElementById("nombre_reserva").value);
 	var acompanante= encodeURI(document.getElementById("acompanante").value);
-	var forma_pago= encodeURI(document.getElementById("forma_pago").value);
+	var forma_pago= document.getElementById("forma_pago").value;
 	var limite_pago= document.getElementById("limite_pago").value;
 	var suplementos= encodeURI(document.getElementById("suplementos").value);
 	var total_suplementos= Number(document.getElementById("total_suplementos").value);
@@ -716,7 +716,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	alert(total);*/
 	
 
-	if(id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago.length >0 && limite_pago >0 && descuento >-0.01 && descuento <100){
+	if(id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago >0 && limite_pago >0 && descuento >-0.01 && descuento <100){
 			//$('#boton_reservacion').hide();
 			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
@@ -864,7 +864,7 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 	var tarifa= Number(document.getElementById("tarifa").value);
 	var nombre_reserva= encodeURI(document.getElementById("nombre_reserva").value);
 	var acompanante= encodeURI(document.getElementById("acompanante").value);
-	var forma_pago= encodeURI(document.getElementById("forma_pago").value);
+	var forma_pago= document.getElementById("forma_pago").value;
 	var limite_pago= document.getElementById("limite_pago").value;
 	var suplementos= encodeURI(document.getElementById("suplementos").value);
 	var total_suplementos= Number(document.getElementById("total_suplementos").value);

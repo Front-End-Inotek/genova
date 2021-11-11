@@ -26,7 +26,7 @@
     }
     // Muestra los pagos
     function mostrar_pago(){
-      $sentencia = "SELECT * FROM pago ORDER BY id";
+      $sentencia = "SELECT * FROM pago WHERE estado = 1 ORDER BY id";
       $comentario="Mostrar los pagos de servicios";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
@@ -38,7 +38,7 @@
     }
     // Muestra los pagos a editar
     function mostrar_pago_editar($id){
-      $sentencia = "SELECT * FROM pago ORDER BY id";
+      $sentencia = "SELECT * FROM pago WHERE estado = 1 ORDER BY id";
       $comentario="Mostrar los pagos";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
@@ -53,7 +53,7 @@
     }
     // Mostramos el pago*
     function mostrar_nombre_pago($id){ 
-      $sentencia = "SELECT limite_pago FROM pago WHERE id = $id LIMIT 1";
+      $sentencia = "SELECT limite_pago FROM pago WHERE id = $id AND estado = 1 LIMIT 1";
       //echo $sentencia;
       $limite_pago = 0;
       $comentario="Obtengo el pago";

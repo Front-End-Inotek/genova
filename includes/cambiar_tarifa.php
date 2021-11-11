@@ -1,9 +1,11 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_huesped.php");
+  include_once("clase_forma_pago.php");
   include_once("clase_pago.php");
   include_once("clase_tarifa.php");
   $huesped= NEW Huesped(0);
+  $forma_pago= NEW Forma_pago(0);
   $pago= NEW Pago(0);
   $tarifa= NEW Tarifa($_GET['tarifa']);
   $adultos= $tarifa->mostrar_cantidad_hospedaje($_GET['tarifa']);
@@ -133,9 +135,9 @@
           <div class="col-sm-2">
           <div class="form-group">
             <select class="form-control" id="forma_pago">
-              <option value="0">Selecciona</option>
-              <option value="Efectivo">Efectivo</option>
-              <option value="Tarjeta">Tarjeta</option>
+              <option value="0">Selecciona</option>';
+              $forma_pago->mostrar_forma_pago();
+              echo '
             </select>
           </div>
           </div>
