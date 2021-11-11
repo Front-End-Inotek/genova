@@ -29,5 +29,6 @@ VERSION 1.3
 VERSION 1.4
 -Agregar total de pago a una reservacion
 -Reporte de cargo por noche
+-Agregar funciones de usuario
 -Agregar tabla y funciones de forma de pago
 -Agregar tabla y funciones de cuenta
