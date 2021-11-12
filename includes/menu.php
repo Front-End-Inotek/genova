@@ -376,7 +376,7 @@
                           if($permisos_forma_pago>0){
                             echo '
                             <li class="nav-item">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub2" data-toggle="collapse" data-target="#submenu4sub2"><span>Diarios</span></a>
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub2" data-toggle="collapse" data-target="#submenu4sub2"><span>Formas Pago</span></a>
                                 <div class="collapse" id="submenu4sub2" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         if($usuario->forma_pago_ver==1){

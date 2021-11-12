@@ -1220,6 +1220,136 @@ function reporte_cargo_noche(id){
 	closeNav();
 }
 
+// * //
+
+// Agregar una forma de pago
+function agregar_formas_pago(){
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_formas_pago.php"); 
+	closeNav();
+}
+
+// Guardar una forma de pago
+function guardar_forma_pago(){
+    var usuario_id=localStorage.getItem("id");
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var codigo= encodeURI(document.getElementById("codigo").value);
+	
+
+	if(nombre.length >0){
+			//$('#boton_tipo').hide();
+			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
+			var datos = {
+				  "nombre": nombre,
+				  "codigo": codigo,
+                  "usuario_id": usuario_id,
+				};
+			$.ajax({
+				  async:true,
+				  type: "POST",
+				  dataType: "html",
+				  contentType: "application/x-www-form-urlencoded",
+				  url:"includes/guardar_forma_pago.php",
+				  data:datos,
+				  beforeSend:loaderbar,
+				  success:ver_tipos,
+				  timeout:5000,
+				  error:problemas_sistema
+				});
+				return false;
+			}else{
+				alert("Campos incompletos");
+			}
+}
+
+// Muestra las tipos de habitaciones de la bd
+function ver_tipos(){
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
+// Editar un tipo de habitacion
+function editar_tipo(id){
+    $("#area_trabajo_menu").load("includes/editar_tipo.php?id="+id);
+}
+
+// Editar un tipo de habitacion
+function modificar_tipo(id){
+	var usuario_id=localStorage.getItem("id");
+    var nombre= encodeURI(document.getElementById("nombre").value);
+	var codigo= encodeURI(document.getElementById("codigo").value);
+
+
+    if(id >0){
+        //$('#boton_tipo').hide();
+			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+              "id": id,
+              "nombre": nombre,
+			  "codigo": codigo,
+              "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/aplicar_editar_tipo.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:ver_tipos,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }    
+}
+
+// Borrar un tipo de habitacion
+function borrar_tipo(id){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+    if (id >0) {
+        var datos = {
+                "id": id,
+                "usuario_id": usuario_id,
+            };
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/borrar_tipo.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:ver_tipos,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }
+}
+
+// Modal de borrar un tipo de habitacion
+function aceptar_borrar_tipo(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
+}
+
+// Regresar a la pagina anterior de editar un tipo de habitacion
+function regresar_editar_tipo(){
+    var usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
+}
+
 
 
 
