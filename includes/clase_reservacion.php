@@ -486,19 +486,6 @@
         $comentario="Poner estado de una reservacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Mostramos el pago
-      function mostrar_nombre_pago($id){ 
-        $sentencia = "SELECT limite_pago FROM pago WHERE id = $id LIMIT 1";
-        //echo $sentencia;
-        $limite_pago = 0;
-        $comentario="Obtengo el pago";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $limite_pago= $fila['limite_pago'];
-        }
-        return $limite_pago;
-      }
              
   }
 ?>

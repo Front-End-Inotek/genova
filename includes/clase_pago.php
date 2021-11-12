@@ -52,7 +52,7 @@
       }
     }
     // Mostramos el pago*
-    function mostrar_nombre_pago($id){ 
+    /*function mostrar_nombre_pago($id){ 
       $sentencia = "SELECT limite_pago FROM pago WHERE id = $id AND estado = 1 LIMIT 1";
       //echo $sentencia;
       $limite_pago = 0;
@@ -63,7 +63,7 @@
         $limite_pago= $fila['limite_pago'];
       }
       return $limite_pago;
-    }
+    }*/
     
   }
 ?>
