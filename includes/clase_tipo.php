@@ -40,7 +40,7 @@
       // Mostramos los tipos habitaciones
       function mostrar($id){
         include_once('clase_usuario.php');
-        $usuario =  NEW Usuario($id);
+        $usuario = NEW Usuario($id);
         $editar = $usuario->tipo_editar;
         $borrar = $usuario->tipo_borrar;
 

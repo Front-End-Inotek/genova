@@ -7,7 +7,7 @@
           <div class="col-sm-2">Descripcion:</div>
           <div class="col-sm-7">
           <div class="form-group">
-            <input class="form-control" type="text"  id="descripcion" placeholder="Ingresa la descripcion de la forma de pago" maxlength="20">
+            <input class="form-control" type="text"  id="descripcion" placeholder="Ingresa la descripcion de la forma de pago" maxlength="50">
           </div>
           </div>
           <div class="col-sm-1"></div>

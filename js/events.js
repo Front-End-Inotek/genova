@@ -1261,34 +1261,32 @@ function guardar_forma_pago(){
 			}
 }
 
-// Muestra las tipos de habitaciones de la bd
+// Muestra las formas de pago de la bd
 function ver_formas_pago(){
 	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
+	$("#area_trabajo_menu").load("includes/ver_formas_pago.php?usuario_id="+usuario_id);
 	closeNav();
 }
 
-// Editar un tipo de habitacion
-function editar_tipo(id){
-    $("#area_trabajo_menu").load("includes/editar_tipo.php?id="+id);
+// Editar una forma de pago
+function editar_forma_pago(id){
+    $("#area_trabajo_menu").load("includes/editar_forma_pago.php?id="+id);
 }
 
-// Editar un tipo de habitacion
-function modificar_tipo(id){
+// Editar una forma de pago
+function modificar_forma_pago(id){
 	var usuario_id=localStorage.getItem("id");
-    var nombre= encodeURI(document.getElementById("nombre").value);
-	var codigo= encodeURI(document.getElementById("codigo").value);
+	var descripcion= encodeURI(document.getElementById("descripcion").value);
 
 
     if(id >0){
-        //$('#boton_tipo').hide();
-			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
+        //$('#boton_forma').hide();
+			$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
-              "nombre": nombre,
-			  "codigo": codigo,
+              "descripcion": descripcion,
               "usuario_id": usuario_id,
             };
         $.ajax({
@@ -1296,10 +1294,10 @@ function modificar_tipo(id){
               type: "POST",
               dataType: "html",
               contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_tipo.php",
+              url:"includes/aplicar_editar_forma_pago.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:ver_tipos,
+              success:ver_formas_pago,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -1310,8 +1308,8 @@ function modificar_tipo(id){
     }    
 }
 
-// Borrar un tipo de habitacion
-function borrar_tipo(id){
+// Borrar una forma de pago
+function borrar_forma_pago(id){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     if (id >0) {
@@ -1324,10 +1322,10 @@ function borrar_tipo(id){
                 type: "POST",
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_tipo.php",
+                url:"includes/borrar_forma_pago.php",
                 data:datos,
                 beforeSend:loaderbar,
-                success:ver_tipos,
+                success:ver_formas_pago,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -1335,17 +1333,17 @@ function borrar_tipo(id){
     }
 }
 
-// Modal de borrar un tipo de habitacion
-function aceptar_borrar_tipo(id){
-	$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
+// Modal de borrar una forma de pago
+function aceptar_borrar_forma_pago(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_forma_pago.php?id="+id);
 }
 
-// Regresar a la pagina anterior de editar un tipo de habitacion
-function regresar_editar_tipo(){
+// Regresar a la pagina anterior de editar una forma de pago
+function regresar_editar_forma_pago(){
     var usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
+    $("#area_trabajo_menu").load("includes/ver_formas_pago.php?usuario_id="+usuario_id);
 }
 
 
