@@ -1444,62 +1444,31 @@ function modificar_usuario(id){
     var usuario_agregar= document.getElementById("usuario_agregar").checked;
     var usuario_editar= document.getElementById("usuario_editar").checked;
     var usuario_borrar= document.getElementById("usuario_borrar").checked;
-    var cliente_ver= document.getElementById("cliente_ver").checked;
-    var cliente_agregar= document.getElementById("cliente_agregar").checked;
-    var cliente_editar= document.getElementById("cliente_editar").checked;
-    var cliente_borrar= document.getElementById("cliente_borrar").checked;
-    var inventario_ver= document.getElementById("inventario_ver").checked;
-    var inventario_agregar= document.getElementById("inventario_agregar").checked;
-    var inventario_editar= document.getElementById("inventario_editar").checked;
-    var inventario_borrar= document.getElementById("inventario_borrar").checked;
-    var requisicion_ver= document.getElementById("requisicion_ver").checked;
-    var requisicion_agregar= document.getElementById("requisicion_agregar").checked;
-    var requisicion_editar= document.getElementById("requisicion_editar").checked;
-    var requisicion_borrar= document.getElementById("requisicion_borrar").checked;
-    var salida_ver= document.getElementById("salida_ver").checked;
-    var salida_agregar= document.getElementById("salida_agregar").checked;
-    var salida_editar= document.getElementById("salida_editar").checked;
-    var salida_borrar= document.getElementById("salida_borrar").checked;
-    var salida_aprobar= document.getElementById("salida_aprobar").checked;
-    var regreso_ver= document.getElementById("regreso_ver").checked;
-    var regreso_agregar= document.getElementById("regreso_agregar").checked;
-    var regreso_editar= document.getElementById("regreso_editar").checked;
-    var regreso_borrar= document.getElementById("regreso_borrar").checked;
-    var necesidades_ver= document.getElementById("necesidades_ver").checked;
-    var necesidades_agregar= document.getElementById("necesidades_agregar").checked;
-    var necesidades_editar= document.getElementById("necesidades_editar").checked;
-    var necesidades_borrar= document.getElementById("necesidades_borrar").checked;
-    var cotizaciones_ver= document.getElementById("cotizaciones_ver").checked;
-    var cotizaciones_agregar= document.getElementById("cotizaciones_agregar").checked;
-    var cotizaciones_editar= document.getElementById("cotizaciones_editar").checked;
-    var cotizaciones_borrar= document.getElementById("cotizaciones_borrar").checked;
-    var servicio_ver= document.getElementById("servicio_ver").checked;
-    var desperdicio_entrada_ver= document.getElementById("desperdicio_entrada_ver").checked;
-    var desperdicio_entrada_agregar= document.getElementById("desperdicio_entrada_agregar").checked;
-    var desperdicio_entrada_editar= document.getElementById("desperdicio_entrada_editar").checked;
-    var desperdicio_entrada_borrar= document.getElementById("desperdicio_entrada_borrar").checked;
-    var desperdicio_salida_ver= document.getElementById("desperdicio_salida_ver").checked;
-    var desperdicio_salida_agregar= document.getElementById("desperdicio_salida_agregar").checked;
-    var desperdicio_salida_editar= document.getElementById("desperdicio_salida_editar").checked;
-    var desperdicio_salida_borrar= document.getElementById("desperdicio_salida_borrar").checked;
-    var logs_ver= document.getElementById("logs_ver").checked;
-    var proveedor_ver= document.getElementById("proveedor_ver").checked;
-    var proveedor_agregar= document.getElementById("proveedor_agregar").checked;
-    var proveedor_editar= document.getElementById("proveedor_editar").checked;
-    var proveedor_borrar= document.getElementById("proveedor_borrar").checked;
-    var herramienta_ver= document.getElementById("herramienta_ver").checked;
-    var herramienta_agregar= document.getElementById("herramienta_agregar").checked;
-    var herramienta_editar= document.getElementById("herramienta_editar").checked;
-    var herramienta_borrar= document.getElementById("herramienta_borrar").checked;
-    var servicio_login= document.getElementById("servicio_login").checked;
-    var factura_ver= document.getElementById("factura_ver").checked;
-    var factura_agregar= document.getElementById("factura_agregar").checked;
-    var factura_editar= document.getElementById("factura_editar").checked;
-    var factura_borrar= document.getElementById("factura_borrar").checked;
-    var orden_ver= document.getElementById("orden_ver").checked;
-    var orden_agregar= document.getElementById("orden_agregar").checked;
-    var orden_editar= document.getElementById("orden_editar").checked;
-    var orden_borrar= document.getElementById("orden_borrar").checked;
+    var huesped_ver= document.getElementById("huesped_ver").checked;
+    var huesped_agregar= document.getElementById("huesped_agregar").checked;
+    var huesped_editar= document.getElementById("huesped_editar").checked;
+    var huesped_borrar= document.getElementById("huesped_borrar").checked;
+    var tipo_ver= document.getElementById("tipo_ver").checked;
+    var tipo_agregar= document.getElementById("tipo_agregar").checked;
+    var tipo_editar= document.getElementById("tipo_editar").checked;
+    var tipo_borrar= document.getElementById("tipo_borrar").checked;
+    var tarifa_ver= document.getElementById("tarifa_ver").checked;
+    var tarifa_agregar= document.getElementById("tarifa_agregar").checked;
+    var tarifa_editar= document.getElementById("tarifa_editar").checked;
+    var tarifa_borrar= document.getElementById("tarifa_borrar").checked;
+    var hab_ver= document.getElementById("hab_ver").checked;
+    var hab_agregar= document.getElementById("hab_agregar").checked;
+    var hab_editar= document.getElementById("hab_editar").checked;
+    var hab_borrar= document.getElementById("hab_borrar").checked;
+    var reservacion_ver= document.getElementById("reservacion_ver").checked;
+    var reservacion_agregar= document.getElementById("reservacion_agregar").checked;
+    var reservacion_editar= document.getElementById("reservacion_editar").checked;
+    var reservacion_borrar= document.getElementById("reservacion_borrar").checked;
+    var reporte_ver= document.getElementById("reporte_ver").checked;
+    var forma_pago_ver= document.getElementById("forma_pago_ver").checked;
+    var forma_pago_agregar= document.getElementById("forma_pago_agregar").checked;
+    var forma_pago_editar= document.getElementById("forma_pago_editar").checked;
+    var forma_pago_borrar= document.getElementById("forma_pago_borrar").checked;
     // Convertir usuario permisos
     if(usuario_ver){
         usuario_ver=1;
@@ -1523,314 +1492,143 @@ function modificar_usuario(id){
         usuario_borrar = 0;
     }
 
-    // Convertir cliente permisos
-    if(cliente_ver){
-        cliente_ver = 1;
+    // Convertir huesped permisos
+    if(huesped_ver){
+        huesped_ver = 1;
     }else{
-        cliente_ver = 0;
+        huesped_ver = 0;
     }
-    if(cliente_agregar){
-        cliente_agregar = 1;
+    if(huesped_agregar){
+        huesped_agregar = 1;
     }else{
-        cliente_agregar = 0;
+        huesped_agregar = 0;
     }
-    if(cliente_editar){
-        cliente_editar = 1;
+    if(huesped_editar){
+        huesped_editar = 1;
     }else{
-        cliente_editar = 0;
+        huesped_editar = 0;
     }
-    if(cliente_borrar){
-        cliente_borrar = 1;
+    if(huesped_borrar){
+        huesped_borrar = 1;
     }else{
-        cliente_borrar = 0;
-    }
-
-    // Convertir inventario permisos
-    if(inventario_ver){
-        inventario_ver = 1;
-    }else{
-        inventario_ver = 0;
-    }
-    if(inventario_agregar){
-        inventario_agregar = 1;
-    }else{
-        inventario_agregar = 0;
-    }
-    if(inventario_editar){
-        inventario_editar = 1;
-    }else{
-        inventario_editar = 0;
-    }
-    if(inventario_borrar){
-        inventario_borrar = 1;
-    }else{
-        inventario_borrar = 0;
+        huesped_borrar = 0;
     }
 
-    // Convertir requisicion permisos
-    if(requisicion_ver){
-        requisicion_ver = 1;
+    // Convertir tipo permisos
+    if(tipo_ver){
+        tipo_ver = 1;
     }else{
-        requisicion_ver = 0;
+        tipo_ver = 0;
     }
-    if(requisicion_agregar){
-        requisicion_agregar = 1;
+    if(tipo_agregar){
+        tipo_agregar = 1;
     }else{
-        requisicion_agregar = 0;
+        tipo_agregar = 0;
     }
-    if(requisicion_editar){
-        requisicion_editar = 1;
+    if(tipo_editar){
+        tipo_editar = 1;
     }else{
-        requisicion_editar = 0;
+        tipo_editar = 0;
     }
-    if(requisicion_borrar){
-        requisicion_borrar = 1;
+    if(tipo_borrar){
+        tipo_borrar = 1;
     }else{
-        requisicion_borrar = 0;
-    }
-
-    // Convertir salida permisos
-    if(salida_ver){
-        salida_ver = 1;
-    }else{
-        salida_ver = 0;
-    }
-    if(salida_agregar){
-        salida_agregar = 1;
-    }else{
-        salida_agregar = 0;
-    }
-    if(salida_editar ){
-        salida_editar = 1;
-    }else{
-        salida_editar = 0;
-    }
-    if(salida_borrar){
-        salida_borrar = 1;
-    }else{
-        salida_borrar = 0;
-    }
-    if(salida_aprobar){
-        salida_aprobar = 1;
-    }else{
-        salida_aprobar = 0;
+        tipo_borrar = 0;
     }
 
-    // Convertir regreso permisos
-    if(regreso_ver){
-        regreso_ver = 1;
+    // Convertir tarifa permisos
+    if(tarifa_ver){
+        tarifa_ver = 1;
     }else{
-        regreso_ver = 0;
+        tarifa_ver = 0;
     }
-    if(regreso_agregar){
-        regreso_agregar = 1;
+    if(tarifa_agregar){
+        tarifa_agregar = 1;
     }else{
-        regreso_agregar = 0;
+        tarifa_agregar = 0;
     }
-    if(regreso_editar){
-        regreso_editar = 1;
+    if(tarifa_editar){
+        tarifa_editar = 1;
     }else{
-        regreso_editar = 0;
+        tarifa_editar = 0;
     }
-    if(regreso_borrar){
-        regreso_borrar = 1;
+    if(tarifa_borrar){
+        tarifa_borrar = 1;
     }else{
-        regreso_borrar = 0;
+        tarifa_borrar = 0;
     }
 
-    // Convertir necesidades permisos
-    if(necesidades_ver){
-        necesidades_ver = 1;
+    // Convertir hab permisos
+    if(hab_ver){
+        hab_ver = 1;
     }else{
-        necesidades_ver = 0;
+        hab_ver = 0;
     }
-    if(necesidades_agregar){
-        necesidades_agregar = 1;
+    if(hab_agregar){
+        hab_agregar = 1;
     }else{
-        necesidades_agregar = 0;
+        hab_agregar = 0;
     }
-    if(necesidades_editar){
-        necesidades_editar = 1;
+    if(hab_editar ){
+        hab_editar = 1;
     }else{
-        necesidades_editar = 0;
+        hab_editar = 0;
     }
-    if(necesidades_borrar){
-        necesidades_borrar = 1;
+    if(hab_borrar){
+        hab_borrar = 1;
     }else{
-        necesidades_borrar = 0;
+        hab_borrar = 0;
+    }
+
+    // Convertir reservacion permisos
+    if(reservacion_ver){
+        reservacion_ver = 1;
+    }else{
+        reservacion_ver = 0;
+    }
+    if(reservacion_agregar){
+        reservacion_agregar = 1;
+    }else{
+        reservacion_agregar = 0;
+    }
+    if(reservacion_editar){
+        reservacion_editar = 1;
+    }else{
+        reservacion_editar = 0;
+    }
+    if(reservacion_borrar){
+        reservacion_borrar = 1;
+    }else{
+        reservacion_borrar = 0;
+    }
+
+    // Convertir reporte permisos
+    if(reporte_ver){
+        reporte_ver = 1;
+    }else{
+        reporte_ver = 0;
     }
     
-    // Convertir cotizaciones permisos
-    if(cotizaciones_ver){
-        cotizaciones_ver = 1;
+    // Convertir forma_pago permisos
+    if(forma_pago_ver){
+        forma_pago_ver = 1;
     }else{
-        cotizaciones_ver = 0;
+        forma_pago_ver = 0;
     }
-    if(cotizaciones_agregar){
-        cotizaciones_agregar = 1;
+    if(forma_pago_agregar){
+        forma_pago_agregar = 1;
     }else{
-        cotizaciones_agregar = 0;
+        forma_pago_agregar = 0;
     }
-    if(cotizaciones_editar){
-        cotizaciones_editar = 1;
+    if(forma_pago_editar){
+        forma_pago_editar = 1;
     }else{
-        cotizaciones_editar = 0;
+        forma_pago_editar = 0;
     }
-    if(cotizaciones_borrar){
-        cotizaciones_borrar = 1;
+    if(forma_pago_borrar){
+        forma_pago_borrar = 1;
     }else{
-        cotizaciones_borrar = 0;
-    }
-
-    // Convertir servicio permisos
-    if(servicio_ver){
-        servicio_ver = 1;
-    }else{
-        servicio_ver = 0;
-    }
-    if(servicio_login){
-        servicio_login = 1;
-    }else{
-        servicio_login = 0;
-    }
-
-    // Convertir desperdicio entrada permisos
-    if(desperdicio_entrada_ver){
-        desperdicio_entrada_ver = 1;
-    }else{
-        desperdicio_entrada_ver = 0;
-    }
-    if(desperdicio_entrada_agregar){
-        desperdicio_entrada_agregar = 1;
-    }else{
-        desperdicio_entrada_agregar = 0;
-    }
-    if(desperdicio_entrada_editar){
-        desperdicio_entrada_editar = 1;
-    }else{
-        desperdicio_entrada_editar = 0;
-    }
-    if(desperdicio_entrada_borrar){
-        desperdicio_entrada_borrar = 1;
-    }else{
-        desperdicio_entrada_borrar = 0;
-    }
-
-    // Convertir desperdicio salida permisos
-    if(desperdicio_salida_ver){
-        desperdicio_salida_ver = 1;
-    }else{
-        desperdicio_salida_ver = 0;
-    }
-    if(desperdicio_salida_agregar){
-        desperdicio_salida_agregar = 1;
-    }else{
-        desperdicio_salida_agregar = 0;
-    }
-    if(desperdicio_salida_editar){
-        desperdicio_salida_editar = 1;
-    }else{
-        desperdicio_salida_editar = 0;
-    }
-    if(desperdicio_salida_borrar){
-        desperdicio_salida_borrar = 1;
-    }else{
-        desperdicio_salida_borrar = 0;
-    }
-
-    // Convertir logs permisos
-    if(logs_ver){
-        logs_ver = 1;
-    }else{
-        logs_ver = 0;
-    }
-
-    // Convertir proveedor permisos
-    if(proveedor_ver){
-        proveedor_ver = 1;
-    }else{
-        proveedor_ver = 0;
-    }
-    if(proveedor_agregar){
-        proveedor_agregar = 1;
-    }else{
-        proveedor_agregar = 0;
-    }
-    if(proveedor_editar){
-        proveedor_editar = 1;
-    }else{
-        proveedor_editar = 0;
-    }
-    if(proveedor_borrar){
-        proveedor_borrar = 1;
-    }else{
-        proveedor_borrar = 0;
-    }
-
-    // Convertir herramienta permisos
-    if(herramienta_ver){
-        herramienta_ver = 1;
-    }else{
-        herramienta_ver = 0;
-    }
-    if(herramienta_agregar){
-        herramienta_agregar = 1;
-    }else{
-        herramienta_agregar = 0;
-    }
-    if(herramienta_editar){
-        herramienta_editar = 1;
-    }else{
-        herramienta_editar = 0;
-    }
-    if(herramienta_borrar){
-        herramienta_borrar = 1;
-    }else{
-        herramienta_borrar = 0;
-    }
-
-    // Convertir factura permisos
-    if(factura_ver){
-        factura_ver = 1;
-    }else{
-        factura_ver = 0;
-    }
-    if(factura_agregar){
-        factura_agregar = 1;
-    }else{
-        factura_agregar = 0;
-    }
-    if(factura_editar ){
-        factura_editar = 1;
-    }else{
-        factura_editar = 0;
-    }
-    if(factura_borrar){
-        factura_borrar = 1;
-    }else{
-        factura_borrar = 0;
-    }
-
-    // Convertir orden de servicio permisos
-    if(orden_ver){
-        orden_ver = 1;
-    }else{
-        orden_ver = 0;
-    }
-    if(orden_agregar){
-        orden_agregar = 1;
-    }else{
-        orden_agregar = 0;
-    }
-    if(orden_editar){
-        orden_editar = 1;
-    }else{
-        orden_editar = 0;
-    }
-    if(orden_borrar){
-        orden_borrar = 1;
-    }else{
-        orden_borrar = 0;
+        forma_pago_borrar = 0;
     }
     
 
@@ -1853,62 +1651,31 @@ function modificar_usuario(id){
                   "usuario_agregar": usuario_agregar,
                   "usuario_editar": usuario_editar,
                   "usuario_borrar": usuario_borrar,
-                  "cliente_ver": cliente_ver,
-                  "cliente_agregar": cliente_agregar,
-                  "cliente_editar": cliente_editar,
-                  "cliente_borrar": cliente_borrar,
-                  "inventario_ver": inventario_ver,
-                  "inventario_agregar": inventario_agregar,
-                  "inventario_editar": inventario_editar,
-                  "inventario_borrar": inventario_borrar,
-                  "requisicion_ver": requisicion_ver,
-                  "requisicion_agregar": requisicion_agregar,
-                  "requisicion_editar": requisicion_editar,
-                  "requisicion_borrar": requisicion_borrar,
-                  "salida_ver": salida_ver,
-                  "salida_agregar": salida_agregar,
-                  "salida_editar": salida_editar,
-                  "salida_borrar": salida_borrar,
-                  "salida_aprobar": salida_aprobar,
-                  "regreso_ver": regreso_ver,
-                  "regreso_agregar": regreso_agregar,
-                  "regreso_editar": regreso_editar,
-                  "regreso_borrar": regreso_borrar,
-                  "necesidades_ver": necesidades_ver,
-                  "necesidades_agregar": necesidades_agregar,
-                  "necesidades_editar": necesidades_editar,
-                  "necesidades_borrar": necesidades_borrar,
-                  "cotizaciones_ver": cotizaciones_ver,
-                  "cotizaciones_agregar": cotizaciones_agregar,
-                  "cotizaciones_editar": cotizaciones_editar,
-                  "cotizaciones_borrar": cotizaciones_borrar,
-                  "servicio_ver": servicio_ver,
-                  "desperdicio_entrada_ver": desperdicio_entrada_ver,
-                  "desperdicio_entrada_agregar": desperdicio_entrada_agregar,
-                  "desperdicio_entrada_editar": desperdicio_entrada_editar,
-                  "desperdicio_entrada_borrar": desperdicio_entrada_borrar,
-                  "desperdicio_salida_ver": desperdicio_salida_ver,
-                  "desperdicio_salida_agregar": desperdicio_salida_agregar,
-                  "desperdicio_salida_editar": desperdicio_salida_editar,
-                  "desperdicio_salida_borrar": desperdicio_salida_borrar,
-                  "logs_ver": logs_ver,
-                  "proveedor_ver": proveedor_ver,
-                  "proveedor_agregar": proveedor_agregar,
-                  "proveedor_editar": proveedor_editar,
-                  "proveedor_borrar": proveedor_borrar,
-                  "herramienta_ver": herramienta_ver,
-                  "herramienta_agregar": herramienta_agregar,
-                  "herramienta_editar": herramienta_editar,
-                  "herramienta_borrar": herramienta_borrar,
-                  "servicio_login": servicio_login,
-                  "factura_ver": factura_ver,
-                  "factura_agregar": factura_agregar,
-                  "factura_editar": factura_editar,
-                  "factura_borrar": factura_borrar,
-                  "orden_ver": orden_ver,
-                  "orden_agregar": orden_agregar,
-                  "orden_editar": orden_editar,
-                  "orden_borrar": orden_borrar,
+                  "huesped_ver": huesped_ver,
+                  "huesped_agregar": huesped_agregar,
+                  "huesped_editar": huesped_editar,
+                  "huesped_borrar": huesped_borrar,
+                  "tipo_ver": tipo_ver,
+                  "tipo_agregar": tipo_agregar,
+                  "tipo_editar": tipo_editar,
+                  "tipo_borrar": tipo_borrar,
+                  "tarifa_ver": tarifa_ver,
+                  "tarifa_agregar": tarifa_agregar,
+                  "tarifa_editar": tarifa_editar,
+                  "tarifa_borrar": tarifa_borrar,
+                  "hab_ver": hab_ver,
+                  "hab_agregar": hab_agregar,
+                  "hab_editar": hab_editar,
+                  "hab_borrar": hab_borrar,
+                  "reservacion_ver": reservacion_ver,
+                  "reservacion_agregar": reservacion_agregar,
+                  "reservacion_editar": reservacion_editar,
+                  "reservacion_borrar": reservacion_borrar,
+                  "reporte_ver": reporte_ver,
+                  "forma_pago_ver": forma_pago_ver,
+                  "forma_pago_agregar": forma_pago_agregar,
+                  "forma_pago_editar": forma_pago_editar,
+                  "forma_pago_borrar": forma_pago_borrar,
                   "usuario_id": usuario_id,
                   
 			};

@@ -301,29 +301,31 @@
         return $cantidad;
       }
       // Mostramos los usuarios
-      function mostrar($id){
+      function mostrar($posicion,$id){
+        include_once('clase_usuario.php');
+        $usuario =  NEW Usuario($id);
+        $editar = $usuario->usuario_editar;
+        $borrar = $usuario->usuario_borrar;
+
+        $cont = 1;
+        //echo $posicion;
+        $final = $posicion+20;
         $cat_paginas=($this->total_elementos()/20);
         $extra=($this->total_elementos()%20);
         $cat_paginas=intval($cat_paginas);
         if($extra>0){
-           $cat_paginas++;
-         }
-         $ultimoid=0;
-
-        if($id==0){
-          $sentencia = "SELECT * FROM usuario WHERE nivel > 0 && estado = 1 ORDER BY nivel, usuario LIMIT 20";
-          $comentario="Mostrar los usuarios";
-         }
-        else{
-          $sentencia = "SELECT * FROM usuario WHERE nivel > 0 && estado = 1 && id >= '.$id.' ORDER BY nivel, usuario LIMIT 20;";
-          $comentario="Mostrar los usuarios";
+          $cat_paginas++;
         }
-         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $ultimoid=0;
+
+        $sentencia = "SELECT * FROM usuario WHERE nivel > 0 && estado = 1 ORDER BY nivel, usuario";
+        $comentario="Mostrar los usuarios";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
          echo '<div class="table-responsive" id="tabla_usuario">
            <table class="table table-bordered table-hover">
              <thead>
-               <tr class="table-primary text-center">
+               <tr class="table-primary-encabezado text-center">
                <th>Nombre</th>
                <th>Nivel</th>
                <th>Nombre</th>
@@ -338,60 +340,49 @@
            <tbody>';
         while ($fila = mysqli_fetch_array($consulta))
         {
-          if($fila['nivel']>0){
-            echo '<tr class="text-center">
-            <tr class="text-center">
-            <td class="texto_entrada">'.$fila['usuario'].'</td>';
-            switch ($fila['nivel']) {
-  
-               case 1:
-                  echo '<td class="texto_entrada">Administrador</td>';
-                break;
-               case 2:
-                   echo '<td class="texto_entrada">Cajera</td>';
-                break;
-               case 3:
-                  echo '<td class="texto_entrada">Reservaciones</td>';
-                break;
-               case 4:
-                  echo '<td class="texto_entrada">Ama Llaves</td>';
-                break;
-               default:
-                  echo '<td class="texto_entrada">Indefinido</td>';
-                break;
+          if($cont>=$posicion & $cont<$final ){
+            if($fila['nivel']>0){
+              echo '<tr class="text-center">
+              <td>'.$fila['usuario'].'</td>';
+              switch ($fila['nivel']) {
+    
+                case 1:
+                    echo '<td>Administrador</td>';
+                  break;
+                case 2:
+                    echo '<td>Cajera</td>';
+                  break;
+                case 3:
+                    echo '<td>Reservaciones</td>';
+                  break;
+                case 4:
+                    echo '<td>Ama Llaves</td>';
+                  break;
+                default:
+                    echo '<td>Indefinido</td>';
+                  break;
+              }
+              echo '<td>'.$fila['nombre_completo'].'</td>';
+              echo '<td>'.$fila['puesto'].'</td>';
+              echo '<td>'.$fila['celular'].'</td>';
+              echo '<td>'.$fila['correo'].'</td>';
+              echo '<td>'.$fila['direccion'].'</td>';
+              if($editar==1){
+                echo '<td><button class="btn btn-warning" onclick="editar_usuario('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+              }
+              if($borrar==1){
+                echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_usuario('.$fila['id'].')"> Borrar</button></td>';
+              }
+              echo '</tr>';
             }
-            echo '<td class="texto_entrada">'.$fila['nombre_completo'].'</td>';
-            echo '<td class="texto_entrada">'.$fila['puesto'].'</td>';
-            echo '<td class="texto_entrada">'.$fila['celular'].'</td>';
-            echo '<td class="texto_entrada">'.$fila['correo'].'</td>';
-            echo '<td class="texto_entrada">'.$fila['direccion'].'</td>';
-            echo '
-            <td><button class="btn btn-outline-info btn-lg" onclick="editar_usuario('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>
-            <td><button class="btn btn-outline-danger btn-lg" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_usuario('.$fila['id'].')"> Borrar</button></td>
-            </tr>';
           }
+          $cont++;
         }
           echo '
             </tbody>
           </table>
-          </div>
-          <ul class="pagination">';
-          $new_id=((($id-1)/20))+1;
-          $new_id_inicial=($new_id-4)-1;
-          $new_id_final=($new_id+4)-1;
-          for($i = 0; $i < $cat_paginas; $i++){
-            $pagina=($i+1);
-            if($i>=$new_id_inicial && $i <= $new_id_final ){
-              if($pagina== $new_id){
-                echo '
-                <li class="page-item active" onclick="ver_usuarios('.(($i*20)+1).')"><a class="page-link" href="#">'.($i+1).'</a></li>';
-              }else{
-                echo '
-                <li class="page-item" onclick="ver_usuarios('.(($i*20)+1).')"><a class="page-link" href="#">'.($i+1).'</a></li>';
-              }
-            }       
-          }
-          echo ' </ul>';
+          </div>';
+          return $cat_paginas;
       }
       // Editar un usuario
       function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tipo_ver,$tipo_agregar,$tipo_editar,$tipo_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$hab_ver,$hab_agregar,$hab_editar,$hab_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reporte_ver,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar){

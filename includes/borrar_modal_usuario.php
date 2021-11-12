@@ -16,8 +16,8 @@
     </div><br>
     
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-danger btn-lg" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-outline-info btn-lg" onclick="borrar_usuario('.$_GET['id'].')"><span class="glyphicon glyphicon-edit"></span> Aceptar</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+      <button type="button" class="btn btn-success" onclick="borrar_usuario('.$_GET['id'].')"><span class="glyphicon glyphicon-edit"></span> Aceptar</button>
     </div>
   </div>';
 ?>

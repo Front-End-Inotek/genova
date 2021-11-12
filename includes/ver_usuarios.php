@@ -3,9 +3,9 @@
   include_once("clase_usuario.php");
   $usuario= NEW Usuario(0);
   
-  echo ' <div class="container-fluid">
+  echo ' <div class="container-fluid blanco">
           <br>
-          <div class="col-sm-12 text-center"><h1 class="text-primary">Usuarios</h1></div><br>
+          <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">USUARIOS</h2></div>
           <div id="paginacion_usuarios">';
           $cat_paginas = $usuario->mostrar(1,$_GET['id']);
   echo '
