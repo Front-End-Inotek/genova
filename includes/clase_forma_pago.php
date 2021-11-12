@@ -30,7 +30,7 @@
     // Guardar una forma de pago
     function guardar_forma_pago($descripcion){
       $sentencia = "INSERT INTO `forma_pago` (`descripcion`, `estado`)
-      VALUES ('0', '1');";
+      VALUES ('$descripcion', '1');";
       $comentario="Guardamos la forma de pago en la base de datos";
       $consulta= $this->realizaConsulta($sentencia,$comentario);                 
     }

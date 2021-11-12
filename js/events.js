@@ -1233,16 +1233,14 @@ function agregar_formas_pago(){
 // Guardar una forma de pago
 function guardar_forma_pago(){
     var usuario_id=localStorage.getItem("id");
-	var nombre= encodeURI(document.getElementById("nombre").value);
-	var codigo= encodeURI(document.getElementById("codigo").value);
+	var descripcion= encodeURI(document.getElementById("descripcion").value);
 	
 
-	if(nombre.length >0){
-			//$('#boton_tipo').hide();
-			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
+	if(descripcion.length >0){
+			//$('#boton_forma').hide();
+			$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
-				  "nombre": nombre,
-				  "codigo": codigo,
+				  "descripcion": descripcion,
                   "usuario_id": usuario_id,
 				};
 			$.ajax({
@@ -1253,7 +1251,7 @@ function guardar_forma_pago(){
 				  url:"includes/guardar_forma_pago.php",
 				  data:datos,
 				  beforeSend:loaderbar,
-				  success:ver_tipos,
+				  success:ver_formas_pago,
 				  timeout:5000,
 				  error:problemas_sistema
 				});
@@ -1264,7 +1262,7 @@ function guardar_forma_pago(){
 }
 
 // Muestra las tipos de habitaciones de la bd
-function ver_tipos(){
+function ver_formas_pago(){
 	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
