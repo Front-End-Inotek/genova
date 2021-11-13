@@ -316,6 +316,12 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
+.abonar{/* */
+  text-align: center;
+  background-color: rgb(153, 49, 49);
+  font-size: 1.2em;
+  color: white;
+}
 .cortina{
   text-align: center;
   background-color: #FF30C0; 

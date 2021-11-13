@@ -1677,7 +1677,6 @@ function modificar_usuario(id){
                   "forma_pago_editar": forma_pago_editar,
                   "forma_pago_borrar": forma_pago_borrar,
                   "usuario_id": usuario_id,
-                  
 			};
 		$.ajax({
 			  async:true,
@@ -1739,6 +1738,11 @@ function regresar_editar_usuario(){
     $("#area_trabajo_menu").load("includes/ver_usuarios.php?id="+id);
 }
 
+// Realizar un abono al cargo por habitacion
+function agregar_abono(hab_id,hab_estado){
+	var usuario_id=localStorage.getItem("id");
+	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&hab_estado="+hab_estado+"&usuario_id="+usuario_id);
+}
 
 
 

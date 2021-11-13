@@ -1,10 +1,12 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_huesped.php");
+  include_once("clase_forma_pago.php");
   include_once("clase_pago.php");
   include_once("clase_reservacion.php");
   include_once("clase_tarifa.php");
   $huesped= NEW Huesped(0);
+  $forma_pago= NEW Forma_pago(0);
   $pago= NEW Pago(0);
   $reservacion= NEW Reservacion($_GET['id']);
   $tarifa= NEW Tarifa($_GET['tarifa']);
@@ -134,16 +136,8 @@
           <div class="col-sm-2">
           <div class="form-group">
             <select class="form-control" id="forma_pago">';
-              if($reservacion->forma_pago == "Efectivo"){echo '
-                <option value="Efectivo">'.$reservacion->forma_pago.'</option>
-                <option value="Tarjeta">Tarjeta</option>';
-              } elseif ($reservacion->forma_pago == "") {echo '
-                <option value="Efectivo">Efectivo</option>
-                <option value="Tarjeta">Tarjeta</option>';
-              }else{ echo '
-                <option value="Tarjeta">'.$reservacion->forma_pago.'</option>
-                <option value="Efectivo">Efectivo</option>';
-              }echo '
+              $forma_pago->mostrar_forma_pago_editar($reservacion->forma_pago);
+              echo '
             </select>
           </div>
           </div>

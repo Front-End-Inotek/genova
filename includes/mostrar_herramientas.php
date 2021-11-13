@@ -318,6 +318,21 @@ switch ($_GET['estado']) {
           }
           if($user->nivel<=2){
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="abonar" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              //echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                echo '</br>';
+                echo '<div>';
+                    echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+                echo '</div>';
+                echo '<div>';
+                  echo 'Abonar.';
+                echo '</div>';
+                echo '</br>';
+              echo '</div>';
+            echo '</div>';
+          }
+          if($user->nivel<=2){//* *//
+            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
               echo '<div class="detallar" onclick="hab_camb_per_etalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
