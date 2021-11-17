@@ -316,9 +316,9 @@ switch ($_GET['estado']) {
               echo '</div>';
             echo '</div>';
           }
-          if($user->nivel<=2){
+          /*if($user->nivel<=2){
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="abonar" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class="edo_cuenta" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].')">';
               //echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
@@ -330,16 +330,16 @@ switch ($_GET['estado']) {
                 echo '</br>';
               echo '</div>';
             echo '</div>';
-          }
+          }*/
           if($user->nivel<=2){//* *//
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="detallar" onclick="hab_camb_per_etalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class="edo_cuenta" onclick="estado_cuenta('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
-                    echo '<img src="images/persona.png"  class="center-block img-responsive">';
+                    echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
                 echo '</div>';
                 echo '<div>';
-                  echo 'Cambio Rec.';
+                  echo 'Edo. Cuenta';
                 echo '</div>';
                 echo '</br>';
               echo '</div>';

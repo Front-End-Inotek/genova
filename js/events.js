@@ -1738,12 +1738,19 @@ function regresar_editar_usuario(){
     $("#area_trabajo_menu").load("includes/ver_usuarios.php?id="+id);
 }
 
-// Realizar un abono al cargo por habitacion
+// Realizar un abono al cargo por habitacion //-- Abonar
 function agregar_abono(hab_id,hab_estado){
 	var usuario_id=localStorage.getItem("id");
 	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&hab_estado="+hab_estado+"&usuario_id="+usuario_id);
 }
 
+// Muestra el estado de cuenta de una habitacion
+function estado_cuenta(hab_id,estado){
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/estado_cuenta.php?hab_id="+hab_id+"&estado="+estado); 
+	$('#caja_herramientas').modal('hide');
+}
 
 
 
