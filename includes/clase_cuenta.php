@@ -46,9 +46,10 @@
         }
       }
       // Guardar la cuenta
-      function guardar_cuenta($nombre,$tipo,$comentario){
-        $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`,  `abono`, `estado`)
-        VALUES ('$', '$', '0', '0', '0', '0','0', '0', '1');";
+      function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono){
+        $fecha=time();
+        $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+        VALUES ('$usuario_id', '$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
         $comentario="Guardamos la cuenta en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }

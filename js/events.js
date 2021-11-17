@@ -1632,7 +1632,7 @@ function modificar_usuario(id){
     }
     
 
-	if(usuario.length >0  && nivel.length >0){
+	if(usuario.length >0 && nivel.length >0){
         //if(contrasena == recontrasena){
             //$('#boton_usuario').hide();
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
@@ -1738,11 +1738,7 @@ function regresar_editar_usuario(){
     $("#area_trabajo_menu").load("includes/ver_usuarios.php?id="+id);
 }
 
-// Realizar un abono al cargo por habitacion //-- Abonar
-function agregar_abono(hab_id,hab_estado){
-	var usuario_id=localStorage.getItem("id");
-	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&hab_estado="+hab_estado+"&usuario_id="+usuario_id);
-}
+//* Edo. Cuenta
 
 // Muestra el estado de cuenta de una habitacion
 function estado_cuenta(hab_id,estado){
@@ -1752,5 +1748,58 @@ function estado_cuenta(hab_id,estado){
 	$('#caja_herramientas').modal('hide');
 }
 
+// Agregar un abono al cargo por habitacion //-- Abonar
+function agregar_abono(hab_id,estado,faltante){
+	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante);
+}
+
+// Guardar un abono al cargo por habitacion
+function guardar_abono(hab_id,estado,faltante){
+    var usuario_id=localStorage.getItem("id");
+    var descripcion= encodeURI(document.getElementById("descripcion").value);
+    var forma_pago= document.getElementById("forma_pago").value;
+    var cargo= document.getElementById("cargo").value;
+    var abono= document.getElementById("abono").value;
+    
+
+    if(descripcion.length >0 && forma_pago >0 && abono >0){
+        //$('#boton_abono').hide();
+            $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+              "hab_id": hab_id,
+              "estado": estado,
+              "faltante": faltante,
+              "descripcion": descripcion,
+              "forma_pago": forma_pago,
+              "cargo": cargo,
+              "abono": abono,
+              "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/guardar_abono.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:recibe_datos_abono,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }    
+}
+
+// Recibe los datos para efectuar agregar un abono
+function recibe_datos_abono(datos){
+    //alert(datos);
+    var res = datos.split("/");
+    $('#caja_herramientas').modal('hide');
+    estado_cuenta(res[0] , res[1]);
+}
 
 

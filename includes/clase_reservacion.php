@@ -499,6 +499,17 @@
         }
         return $limite_pago;
       }
+      // Obtengo los datos de una reservacion
+      function datos_reservacion($id){
+        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona
+        FROM reservacion
+        INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND reservacion.estado = 1 ORDER BY reservacion.id DESC";
+        $comentario="Mostrar los datos de la reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
              
   }
 ?>
