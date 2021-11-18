@@ -53,7 +53,7 @@
         <div class="col-sm-3">Abono:</div>
         <div class="col-sm-7">
         <div class="form-group">
-          <input class="form-control" type="number" id="abono" placeholder="Ingresa la cantidad de abono">
+          <input class="form-control" type="number" id="abono" placeholder="Ingresa la cantidad del abono">
         </div>
         </div>
         <div class="col-sm-1"></div>

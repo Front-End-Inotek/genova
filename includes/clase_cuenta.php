@@ -101,7 +101,7 @@
         </table>
         </div>';
       }
-      // Editar una habitacion
+      // Editar una habitacion**
       function editar_hab($id,$nombre,$tipo,$comentario){
         $sentencia = "UPDATE `hab` SET
             `nombre` = '$nombre',
@@ -112,7 +112,7 @@
         $comentario="Editar una habitacion dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar una habitacion
+      // Borrar una habitacion**
       function borrar_hab($id){
         $sentencia = "UPDATE `hab` SET
         `estado_hab` = '0'
@@ -120,7 +120,7 @@
         $comentario="Poner estado de una habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Obtengo los nombres de las habitaciones
+      // Obtengo los nombres de las habitaciones**
       function mostrar_hab(){
         $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar los nombres de las habitaciones";
@@ -133,7 +133,7 @@
         }
   
       }
-      // Obtengo los nombres de las habitaciones a editar
+      // Obtengo los nombres de las habitaciones a editar**
       function mostrar_hab_editar($id){
         $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar los nombres de las habitaciones a editar";
@@ -148,7 +148,7 @@
           }
         }
       }
-      // Cambiar estado de la habitacion
+      // Cambiar estado de la habitacion**
       function cambiohab($hab,$mov,$estado){
         $sentencia = "UPDATE `hab` SET
         `mov` = '$mov',
@@ -157,6 +157,19 @@
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }     
+      // Obtenemos la suma de los abonos que tenemos por movimiento
+      function obtner_abonos($mov){ 
+        $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND estado = 1";
+        //echo $sentencia;
+        $suma_abonos = 0;
+        $comentario="Obtenemos la suma de los abonos que tenemos por movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $suma_abonos= $suma_abonos + $abono= $fila['abono'];
+        }
+        return $suma_abonos;
+      }
              
   }
 ?>

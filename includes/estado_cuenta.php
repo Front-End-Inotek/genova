@@ -1,7 +1,11 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  include_once("clase_cuenta.php");
+  include_once("clase_hab.php");
   include_once("clase_reservacion.php");
   include_once("clase_tarifa.php");
+  $cuenta= NEW Cuenta(0);
+  $hab= NEW Hab($_GET['hab_id']);
   $reservacion= NEW Reservacion($_GET['hab_id']);
   $tarifa= NEW Tarifa(0);
   $consulta = $reservacion->datos_reservacion($_GET['hab_id']);
@@ -47,12 +51,22 @@
       //$saldo_faltante= ;
       //$abono= ;
   }
-  $saldo_faltante= $total_estancia - $total_pago;
+
+  $mov= $hab->mov;
+  $suma_abonos= $cuenta->obtner_abonos($mov);
+  $saldo_pagado= $total_pago + $suma_abonos;
+  $saldo_faltante= $total_estancia - $saldo_pagado;
+  
   echo '
       <div class="container blanco"> 
         <div class="row">
-          <div class="col-sm-9 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$id_hab.'</h2></div>
-          <div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$saldo_faltante.')"><span class="glyphicon glyphicon-edit"></span>Abonar</button></div>
+          <div class="col-sm-9 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$id_hab.'</h2></div>';
+          if($saldo_faltante==0){
+            echo '<div class="col-sm-2"></div>';
+          }else{
+            echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$saldo_faltante.')"><span class="glyphicon glyphicon-edit"></span>Abonar</button></div>';
+          }
+          echo '<div class="col-sm-1"></div>
         </div>
         <div class="row">
           <div class="col-sm-4"><h6>Fecha Entrada: '.$fecha_entrada.'</h6></div>
@@ -118,7 +132,7 @@
             <td>'.$descuento.'</td>
             <td>$'.number_format($total_estancia, 2).'</td> 
             <td>$'.number_format($total_pago, 2).'</td> 
-            <td>$950.00</td> 
+            <td>$'.number_format($saldo_pagado, 2).'</td>  
             <td>$'.number_format($saldo_faltante, 2).'</td>  
           </tbody>
         </table>
