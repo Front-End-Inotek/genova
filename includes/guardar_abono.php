@@ -8,7 +8,9 @@
   $logs = NEW Log(0);
   $mov= $hab->mov;
   $nombre= $hab->nombre;
-  $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$_POST['faltante'],$_POST['abono']);
+  //$_POST['faltante']
+  $faltante= 0;
+  $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono']);
   $logs->guardar_log($_POST['usuario_id'],"Agregar abono a la habitacion: ". $nombre);
   echo $_POST['hab_id']."/".$_POST['estado'];
 ?>

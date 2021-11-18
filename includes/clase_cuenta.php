@@ -171,7 +171,8 @@
         return $suma_abonos;
       }
       // Mostrar los cargos que tenemos por movimiento en una habitacion
-      function mostrar_cargos($mov){
+      function mostrar_cargos($mov,$usuario_reservacion,$fecha,$total_suplementos,$forma_pago){
+        $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion concepto  
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
@@ -190,15 +191,27 @@
               <th>Forma Pago</th>
               <th><span class=" glyphicon glyphicon-cog"></span> Información</th>
               </tr>
-          </thead>
-          <tbody>';
+            </thead>
+            <tbody>';
+              if($total_suplementos > 0){
+                $total_cargos= $total_cargos + $total_suplementos;
+                echo '<tr class="text-center">
+                <td>'.$usuario_reservacion.'</td>  
+                <td>Total suplementos</td>
+                <td>'.$fecha.'</td>
+                <td>$'.number_format($total_suplementos, 2).'</td> 
+                <td>'.$forma_pago.'</td>
+                <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_agregar_producto_salida()"> Detalles</button></td>
+                </tr>';
+              }
               while ($fila = mysqli_fetch_array($consulta))
               {
+                $total_cargos= $total_cargos + $fila['cargo'];
                 echo '<tr class="text-center">
                 <td>'.$fila['usuario'].'</td>  
                 <td>'.$fila['concepto'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                <td>'.$fila['cargo'].'</td>
+                <td>$'.number_format($fila['cargo'], 2).'</td> 
                 <td>'.$fila['descripcion'].'</td>
                 <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_agregar_producto_salida('.$fila['id'].')"> Detalles</button></td>
                 </tr>';
@@ -207,9 +220,11 @@
             </tbody>
           </table>
         </div>';
+        return $total_cargos;
       }
       // Mostramos los abonos que tenemos por movimiento en una habitacion
-      function mostrar_abonos($mov){
+      function mostrar_abonos($mov,$usuario_reservacion,$fecha,$total_pago,$forma_pago){
+        $total_abonos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion concepto  
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
@@ -230,14 +245,26 @@
               <th>Forma Pago</th>
               </tr>
             </thead>
-          <tbody>';
+            <tbody>';
+              if($total_pago > 0){
+                $total_abonos= $total_abonos + $total_pago;
+                echo '
+                <tr class="text-center">
+                <td>'.$usuario_reservacion.'</td>
+                <td>Pago al reservar</td>
+                <td>'.$fecha.'</td>
+                <td>$'.number_format($total_pago, 2).'</td> 
+                <td>'.$forma_pago.'</td>
+                </tr>';
+              }
               while ($fila = mysqli_fetch_array($consulta))
               {
+                $total_abonos= $total_abonos + $fila['abono'];
                 echo '<tr class="text-center">
                 <td>'.$fila['usuario'].'</td>  
                 <td>'.$fila['concepto'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                <td>'.$fila['abono'].'</td>
+                <td>$'.number_format($fila['abono'], 2).'</td> 
                 <td>'.$fila['descripcion'].'</td>
                 </tr>';
               }
@@ -245,6 +272,7 @@
             </tbody>
           </table>
         </div>';
+        return $total_abonos;
       }
              
   }

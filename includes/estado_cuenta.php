@@ -12,6 +12,7 @@
   while ($fila = mysqli_fetch_array($consulta))
   {
       $id_hab= $fila['ID'];
+      $usuario_reservacion= $fila['usuario'];
       $fecha_entrada= date("d-m-Y",$fila['fecha_entrada']);
       $fecha_salida= date("d-m-Y",$fila['fecha_salida']);
       $noches= $fila['noches'];
@@ -47,26 +48,21 @@
       $total_pago= $fila['total_pago'];
       $forma_pago= $fila['descripcion'];
       $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
-      //$saldo_pagado= ;
-      //$saldo_faltante= ;
-      //$abono= ;
   }
 
+  $saldo_faltante= 0;
+  $total_faltante= 0;
   $mov= $hab->mov;
   $suma_abonos= $cuenta->obtner_abonos($mov);
   $saldo_pagado= $total_pago + $suma_abonos;
   $saldo_faltante= $total_estancia - $saldo_pagado;
+  $total_cargos= 0;
+  $total_abonos= 0;
   
   echo '
       <div class="container blanco"> 
         <div class="row">
-          <div class="col-sm-9 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$id_hab.'</h2></div>';
-          if($saldo_faltante==0){
-            echo '<div class="col-sm-2"></div>';
-          }else{
-            echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$saldo_faltante.')"><span class="glyphicon glyphicon-edit"></span>Abonar</button></div>';
-          }
-          echo '<div class="col-sm-1"></div>
+          <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$id_hab.'</h2></div>
         </div>
         <div class="row">
           <div class="col-sm-4"><h6>Fecha Entrada: '.$fecha_entrada.'</h6></div>
@@ -108,44 +104,27 @@
         echo '</div><br>
 
         <div class="row">
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$cuenta->mostrar_cargos($mov);echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:azure;">';$cuenta->mostrar_abonos($mov);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$total_cargos= $cuenta->mostrar_cargos($mov,$usuario_reservacion,$fecha_entrada,$total_suplementos,$forma_pago);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,$usuario_reservacion,$fecha_entrada,$total_pago,$forma_pago);echo '</div>
+        </div>'; 
+
+        $total_faltante= $total_cargos - $total_abonos;
+
+        echo '<div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2">Total $'.number_format($total_cargos, 2).'</div>
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2">Total $'.number_format($total_abonos, 2).'</div>
         </div>
 
-        
-        <! –– <div class="table-responsive" id="tabla_reservacion">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr class="table-primary-encabezado text-center">
-            <th>Habitación</th>
-            <th>Forma Pago</th>
-            <th>Limite Pago</th>
-            <th>Total Suplementos</th>
-            <th>Total Habitacion</th>
-            <th>Descuento</th>
-            <th>Total Estancia</th>
-            <th>Total Pago</th>
-            <th>Saldo Pagado</th>
-            <th>Saldo Faltante</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-            <td>'.$id_hab.'</td>  
-            <td>'.$forma_pago.'</td>
-            <td>'.$limite_pago.'</td>
-            <td>$'.number_format($total_suplementos, 2).'</td> 
-            <td>$'.number_format($total_habitacion, 2).'</td>
-            <td>'.$descuento.'</td>
-            <td>$'.number_format($total_estancia, 2).'</td> 
-            <td>$'.number_format($total_pago, 2).'</td> 
-            <td>$'.number_format($saldo_pagado, 2).'</td>  
-            <td>$'.number_format($saldo_faltante, 2).'</td>  
-          </tbody>
-        </table>
-        </div> ––>
-
-        
-       
+        <div class="row">';
+          if($total_faltante==0){
+            echo '<div class="col-sm-12"></div>';
+          }else{
+            echo '<div class="col-sm-10"></div>';
+            echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"><span class="glyphicon glyphicon-edit"></span>Abonar</button></div>';
+          }
+        echo '</div>
+   
       </div>';
 ?>

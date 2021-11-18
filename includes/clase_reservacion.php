@@ -5,6 +5,7 @@
   class Reservacion extends ConexionMYSql{
 
       public $id;
+      public $id_usuario;
       public $id_huesped;
       public $fecha_entrada;
       public $fecha_salida;
@@ -35,6 +36,7 @@
       {
         if($id==0){
           $this->id= 0;
+          $this->id_usuario= 0;
           $this->id_huesped= 0;
           $this->fecha_entrada= 0;
           $this->fecha_salida= 0;
@@ -66,6 +68,7 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
               $this->id= $fila['id'];
+              $this->id_usuario= $fila['id_usuario'];
               $this->id_huesped= $fila['id_huesped'];
               $this->fecha_entrada= $fila['fecha_entrada'];
               $this->fecha_salida= $fila['fecha_salida'];
@@ -97,8 +100,8 @@
       function guardar_reservacion($id_huesped,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago,$usuario_id){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
-        $sentencia = "INSERT INTO `reservacion` (`id_huesped`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
-        VALUES ('$id_huesped', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '$total_pago', '1');";
+        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
+        VALUES ('$usuario_id', '$id_huesped', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '$total_pago', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -501,9 +504,10 @@
       }
       // Obtengo los datos de una reservacion
       function datos_reservacion($id){
-        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido
+        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
         FROM reservacion
         INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND reservacion.estado = 1 ORDER BY reservacion.id DESC";
         $comentario="Mostrar los datos de la reservacion";
