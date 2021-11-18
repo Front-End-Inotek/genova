@@ -88,13 +88,23 @@ background-color: rgb(241, 240, 241);
   content: " ▴";
 }
 
-/* Color para tabla de encabezado */
+/* Color para tabla de encabezado primary */
 .table-primary-encabezado {
   color: white;
   font-size: 15px;
   font-family: sans-serif;
   font-weight: bolder;
   background-color: rgb(90, 145, 235);
+  border-top-style: none;
+}
+
+/* Color para tabla de encabezado info */
+.table-info-encabezado {
+  color: white;
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: bolder;
+  background-color: rgb(186, 228, 240);
   border-top-style: none;
 }
 

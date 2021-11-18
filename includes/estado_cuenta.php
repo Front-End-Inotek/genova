@@ -22,7 +22,7 @@
       $extra_junior= $fila['extra_junior'];
       $extra_infantil= $fila['extra_infantil'];
       $extra_menor= $fila['extra_menor'];
-      $nombre_huesped= $fila['persona'];
+      $nombre_huesped= $fila['persona'].' '.$fila['apellido'];
       $quien_reserva= $fila['nombre_reserva'];
       $acompanante= $fila['acompanante'];
       // Checar si suplementos esta vacio o no
@@ -77,7 +77,8 @@
         <div class="row">
           <div class="col-sm-4"><h6>Nombre Huesped: '.$nombre_huesped.'</h6></div>
           <div class="col-sm-4"><h6>Quién Reserva: '.$quien_reserva.'</h6></div>
-          <div class="col-sm-4"><h6>Acompañante: '.$acompanante.'</h6></div>
+          <div class="col-sm-2"><h6>Acompañante: '.$acompanante.'</h6></div>
+          <div class="col-sm-2"><h6>Forma Pago: '.$forma_pago.'</h6></div>
         </div>
         <div class="row">
           <div class="col-sm-4"><h6>Suplementos: '.$suplementos.'</h6></div>';
@@ -106,7 +107,13 @@
           }
         echo '</div><br>
 
-        <div class="table-responsive" id="tabla_reservacion">
+        <div class="row">
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$cuenta->mostrar_cargos($mov);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:azure;">';$cuenta->mostrar_abonos($mov);echo '</div>
+        </div>
+
+        
+        <! –– <div class="table-responsive" id="tabla_reservacion">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
@@ -136,7 +143,9 @@
             <td>$'.number_format($saldo_faltante, 2).'</td>  
           </tbody>
         </table>
-        </div>
+        </div> ––>
+
+        
        
       </div>';
 ?>

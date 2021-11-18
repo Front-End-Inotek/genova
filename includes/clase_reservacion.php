@@ -214,7 +214,7 @@
                 <td>'.$fila['extra_infantil'].'</td> 
                 <td>'.$fila['extra_menor'].'</td>
                 <td>'.$fila['persona'].'</td> 
-                <td>'.$fila['nombre_reserva'].'</td>
+                <td>'.$fila['nombre_reserva'].' '.$fila['apellido'].'</td>
                 <td>'.$fila['acompanante'].'</td>
                 <td>'.$fila['suplementos'].'</td>  
                 <td>$'.$fila['total_suplementos'].'</td> 
@@ -315,7 +315,7 @@
                   <td>'.$fila['extra_infantil'].'</td> 
                   <td>'.$fila['extra_menor'].'</td>
                   <td>'.$fila['persona'].'</td> 
-                  <td>'.$fila['nombre_reserva'].'</td>
+                  <td>'.$fila['nombre_reserva'].' '.$fila['apellido'].'</td>
                   <td>'.$fila['acompanante'].'</td>
                   <td>'.$fila['suplementos'].'</td>  
                   <td>$'.$fila['total_suplementos'].'</td> 
@@ -358,7 +358,7 @@
         if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona
+          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido
           FROM reservacion
           INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
           INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
@@ -418,7 +418,7 @@
                 <td>'.$fila['extra_infantil'].'</td> 
                 <td>'.$fila['extra_menor'].'</td>
                 <td>'.$fila['persona'].'</td> 
-                <td>'.$fila['nombre_reserva'].'</td>
+                <td>'.$fila['nombre_reserva'].' '.$fila['apellido'].'</td>
                 <td>'.$fila['acompanante'].'</td>
                 <td>'.$fila['suplementos'].'</td>  
                 <td>$'.$fila['total_suplementos'].'</td> 
@@ -501,7 +501,7 @@
       }
       // Obtengo los datos de una reservacion
       function datos_reservacion($id){
-        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona
+        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido
         FROM reservacion
         INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 

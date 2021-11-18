@@ -31,5 +31,7 @@ VERSION 1.4
 -Reporte de cargo por noche
 -Agregar tabla sql y funciones de forma de pago
 -Agregar funciones de usuario
--Generar estado de cuenta
 -Agregar tabla sql y funciones de cuenta
+-Generar estado de cuenta
+-Generar las dos tablas de estado de cuenta 
+

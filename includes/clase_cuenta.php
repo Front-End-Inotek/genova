@@ -157,18 +157,94 @@
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }     
-      // Obtenemos la suma de los abonos que tenemos por movimiento
+      // Obtenemos la suma de los abonos que tenemos por movimiento en una habitacion
       function obtner_abonos($mov){ 
         $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND estado = 1";
         //echo $sentencia;
         $suma_abonos = 0;
-        $comentario="Obtenemos la suma de los abonos que tenemos por movimiento";
+        $comentario="Obtenemos la suma de los abonos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
           $suma_abonos= $suma_abonos + $abono= $fila['abono'];
         }
         return $suma_abonos;
+      }
+      // Mostrar los cargos que tenemos por movimiento en una habitacion
+      function mostrar_cargos($mov){
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion concepto  
+        FROM cuenta 
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado = 1 ORDER BY cuenta.fecha";
+        $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo --id="tabla_material_ver"
+        echo '<div class="table-responsive" id="tabla_cargos">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-primary-encabezado text-center">
+              <th>Usuario</th>
+              <th>Descripción</th>
+              <th>Fecha</th>
+              <th>Cargo</th>
+              <th>Forma Pago</th>
+              <th><span class=" glyphicon glyphicon-cog"></span> Información</th>
+              </tr>
+          </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta))
+              {
+                echo '<tr class="text-center">
+                <td>'.$fila['usuario'].'</td>  
+                <td>'.$fila['concepto'].'</td>
+                <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                <td>'.$fila['cargo'].'</td>
+                <td>'.$fila['descripcion'].'</td>
+                <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_agregar_producto_salida('.$fila['id'].')"> Detalles</button></td>
+                </tr>';
+              }
+              echo '
+            </tbody>
+          </table>
+        </div>';
+      }
+      // Mostramos los abonos que tenemos por movimiento en una habitacion
+      function mostrar_abonos($mov){
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion concepto  
+        FROM cuenta 
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado = 1 ORDER BY cuenta.fecha";
+        $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
+        //echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $total=0;
+        echo '<div class="table-responsive" id="tabla_abonos">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-info-encabezado text-center">
+              <th>Usuario</th>
+              <th>Descripción</th>
+              <th>Fecha</th>
+              <th>Abono</th>
+              <th>Forma Pago</th>
+              </tr>
+            </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta))
+              {
+                echo '<tr class="text-center">
+                <td>'.$fila['usuario'].'</td>  
+                <td>'.$fila['concepto'].'</td>
+                <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                <td>'.$fila['abono'].'</td>
+                <td>'.$fila['descripcion'].'</td>
+                </tr>';
+              }
+              echo '
+            </tbody>
+          </table>
+        </div>';
       }
              
   }
