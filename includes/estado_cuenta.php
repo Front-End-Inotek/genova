@@ -65,39 +65,39 @@
           <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$id_hab.'</h2></div>
         </div>
         <div class="row">
-          <div class="col-sm-4"><h6>Fecha Entrada: '.$fecha_entrada.'</h6></div>
-          <div class="col-sm-4"><h6>Fecha Salida: '.$fecha_salida.'</h6></div>
-          <div class="col-sm-2"><h6>Noches: '.$noches.'</h6></div>
-          <div class="col-sm-2"><h6>Tarifa: '.$tarifa.'</h6></div>
+          <div class="col-sm-4">Fecha Entrada: '.$fecha_entrada.'</div>
+          <div class="col-sm-4">Fecha Salida: '.$fecha_salida.'</div>
+          <div class="col-sm-2">Noches: '.$noches.'</div>
+          <div class="col-sm-2">Tarifa: '.$tarifa.'</div>
         </div>
         <div class="row">
-          <div class="col-sm-4"><h6>Nombre Huesped: '.$nombre_huesped.'</h6></div>
-          <div class="col-sm-4"><h6>Quién Reserva: '.$quien_reserva.'</h6></div>
-          <div class="col-sm-2"><h6>Acompañante: '.$acompanante.'</h6></div>
-          <div class="col-sm-2"><h6>Forma Pago: '.$forma_pago.'</h6></div>
+          <div class="col-sm-4">Nombre Huesped: '.$nombre_huesped.'</div>
+          <div class="col-sm-4">Quién Reserva: '.$quien_reserva.'</div>
+          <div class="col-sm-2">Acompañante: '.$acompanante.'</div>
+          <div class="col-sm-2">Forma Pago: '.$forma_pago.'</div>
         </div>
         <div class="row">
-          <div class="col-sm-4"><h6>Suplementos: '.$suplementos.'</h6></div>';
+          <div class="col-sm-4">Suplementos: '.$suplementos.'</div>';
           if($extra_adulto>0){
-            echo '<div class="col-sm-2"><h6>Extra Adulto: '.$extra_adulto.'</h6></div>';
+            echo '<div class="col-sm-2">Extra Adulto: '.$extra_adulto.'</div>';
           }else{
             echo '<div class="col-sm-2"></div>'; 
           }
 
           if($extra_junior>0){
-            echo '<div class="col-sm-2"><h6>Extra Junior: '.$extra_junior.'</h6></div>';
+            echo '<div class="col-sm-2">Extra Junior: '.$extra_junior.'</div>';
           }else{
             echo '<div class="col-sm-2"></div>'; 
           }
 
           if($extra_infantil>0){
-            echo '<div class="col-sm-2"><h6>Extra Infantil: '.$extra_infantil.'</h6></div>';
+            echo '<div class="col-sm-2">Extra Infantil: '.$extra_infantil.'</div>';
           }else{
             echo '<div class="col-sm-2"></div>'; 
           }
 
           if($extra_menor>0){
-            echo '<div class="col-sm-2"><h6>Extra Menor: '.$extra_menor.'</h6></div>';
+            echo '<div class="col-sm-2">Extra Menor: '.$extra_menor.'></div>';
           }else{
             echo '<div class="col-sm-2"></div>'; 
           }

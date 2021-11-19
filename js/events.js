@@ -1802,4 +1802,8 @@ function recibe_datos_abono(datos){
     estado_cuenta(res[0] , res[1]);
 }
 
+// Modal de herramientas de cargos en estado de cuenta
+function herramientas_cargos(id,usuario,cargo){
+    $("#mostrar_herramientas").load("includes/modal_herramientas_cargos.php?id="+id+"&usuario="+usuario+"&cargo="+cargo);
+}
 

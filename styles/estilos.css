@@ -46,7 +46,7 @@
 
 body {
 overflow-x: hidden;
-background-color: rgb(241, 240, 241);
+background-color: rgb(200, 200, 200);
 }
 
 /* Agregue un color de fondo negro a la navegación superior */
@@ -88,24 +88,29 @@ background-color: rgb(241, 240, 241);
   content: " ▴";
 }
 
-/* Color para tabla de encabezado primary */
-.table-primary-encabezado {
+/* Color para tabla de encabezado primary **/
+.table-primary-encabezado{
   color: white;
-  font-size: 15px;
+  font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
   background-color: rgb(90, 145, 235);
   border-top-style: none;
 }
 
-/* Color para tabla de encabezado info */
-.table-info-encabezado {
+/* Color para tabla de encabezado info **/
+.table-info-encabezado{
   color: white;
-  font-size: 15px;
+  font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
   background-color: rgb(11, 168, 103);
   border-top-style: none;
+}
+
+/* Cambia el tamaño de la fuente a uno menor del estandar **/
+.fuente_menor{
+  font-size: 13px;
 }
 
 /* Color en las letras del boton */

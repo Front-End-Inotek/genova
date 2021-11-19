@@ -179,41 +179,38 @@
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado = 1 ORDER BY cuenta.fecha";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        //se recibe la consulta y se convierte a arreglo --id="tabla_material_ver"
+        //se recibe la consulta y se convierte a arreglo 
         echo '<div class="table-responsive" id="tabla_cargos">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
-              <th>Usuario</th>
               <th>Descripción</th>
               <th>Fecha</th>
               <th>Cargo</th>
               <th>Forma Pago</th>
-              <th><span class=" glyphicon glyphicon-cog"></span> Información</th>
+              <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
               </tr>
             </thead>
             <tbody>';
-              if($total_suplementos > 0){
+              if($total_suplementos > 0){//$usuario_reservacion
                 $total_cargos= $total_cargos + $total_suplementos;
-                echo '<tr class="text-center">
-                <td>'.$usuario_reservacion.'</td>  
+                echo '<tr class="fuente_menor text-center">
                 <td>Total suplementos</td>
                 <td>'.$fecha.'</td>
                 <td>$'.number_format($total_suplementos, 2).'</td> 
                 <td>'.$forma_pago.'</td>
-                <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_agregar_producto_salida()"> Detalles</button></td>
+                <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$mov.','.$usuario_reservacion.','.$total_suplementos.')"> 🔧</button></td>
                 </tr>';
               }
-              while ($fila = mysqli_fetch_array($consulta))
+              while ($fila = mysqli_fetch_array($consulta))//$fila['usuario']
               {
                 $total_cargos= $total_cargos + $fila['cargo'];
-                echo '<tr class="text-center">
-                <td>'.$fila['usuario'].'</td>  
+                echo '<tr class="fuente_menor text-center">
                 <td>'.$fila['concepto'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
                 <td>$'.number_format($fila['cargo'], 2).'</td> 
                 <td>'.$fila['descripcion'].'</td>
-                <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_agregar_producto_salida('.$fila['id'].')"> Detalles</button></td>
+                <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['id'].','.$fila['usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
                 </tr>';
               }
               echo '
@@ -238,34 +235,34 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-info-encabezado text-center">
-              <th>Usuario</th>
               <th>Descripción</th>
               <th>Fecha</th>
               <th>Abono</th>
               <th>Forma Pago</th>
+              <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
               </tr>
             </thead>
             <tbody>';
-              if($total_pago > 0){
+              if($total_pago > 0){//$usuario_reservacion
                 $total_abonos= $total_abonos + $total_pago;
                 echo '
-                <tr class="text-center">
-                <td>'.$usuario_reservacion.'</td>
+                <tr class="fuente_menor text-center">
                 <td>Pago al reservar</td>
                 <td>'.$fecha.'</td>
                 <td>$'.number_format($total_pago, 2).'</td> 
                 <td>'.$forma_pago.'</td>
+                <td><button type="button" class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_agregar_producto_salida()"> ⚙️</button></td>
                 </tr>';
               }
-              while ($fila = mysqli_fetch_array($consulta))
+              while ($fila = mysqli_fetch_array($consulta))//$fila['usuario']
               {
                 $total_abonos= $total_abonos + $fila['abono'];
-                echo '<tr class="text-center">
-                <td>'.$fila['usuario'].'</td>  
+                echo '<tr class="fuente_menor text-center">
                 <td>'.$fila['concepto'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
                 <td>$'.number_format($fila['abono'], 2).'</td> 
                 <td>'.$fila['descripcion'].'</td>
+                <td><button type="button" class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_agregar_producto_salida('.$fila['id'].')"> 🛠️</button></td>
                 </tr>';
               }
               echo '
