@@ -235,7 +235,7 @@
                 echo '<td>'.$fila['descripcion'].'</td>';  
                 echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';  
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
@@ -338,7 +338,7 @@
                   echo '<td>'.$fila['descripcion'].'</td>';  
                   echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>'; 
                   if($editar==1){
-                    echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                    echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
                   }
                   if($borrar==1){
                     echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
@@ -443,7 +443,7 @@
                 echo '<td>'.$fila['descripcion'].'</td>';  
                 echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
@@ -495,6 +495,15 @@
             WHERE `id` = '$id';";
         //echo $sentencia ;
         $comentario="Editar total suplementos en una reservacion dentro de la base de datos ";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Editar total pago en una reservacion
+      function editar_total_pago($id,$cargo){
+        $sentencia = "UPDATE `reservacion` SET
+            `total_pago` = '$cargo'
+            WHERE `id` = '$id';";
+        //echo $sentencia ;
+        $comentario="Editar total pago en una reservacion dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Borrar una reservacion

@@ -12,7 +12,6 @@
       <h2>-Abonar</h2>
       <button type="button" class="close" data-dismiss="modal" onclick="reiniciarintervalo()">&times;</button>
     </div><br>
-
     <div class="modal-body">
       <div class="row">
         <div class="col-sm-1"></div>
@@ -62,7 +61,7 @@
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['faltante'].')"><span class="glyphicon glyphicon-edit"></span> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['faltante'].')"> Aceptar</button>
     </div>
   </div>';
 ?>

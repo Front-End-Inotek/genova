@@ -312,7 +312,7 @@
             <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_huesped('.$_GET['id'].')">
           </div>
           </div>
-          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_huesped()"><span class="glyphicon glyphicon-edit"></span> ←</button></div>
+          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_huesped()"> ←</button></div>
         </div>  
       </div>';
 ?>

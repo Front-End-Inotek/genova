@@ -173,7 +173,7 @@
                 <td>'.$fila['preferencias'].'</td>
                 <td>'.$fila['comentarios'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
@@ -243,7 +243,7 @@
                 <td>'.$fila['preferencias'].'</td>
                 <td>'.$fila['comentarios'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';

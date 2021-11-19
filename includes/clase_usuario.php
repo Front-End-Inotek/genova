@@ -368,7 +368,7 @@
               echo '<td>'.$fila['correo'].'</td>';
               echo '<td>'.$fila['direccion'].'</td>';
               if($editar==1){
-                echo '<td><button class="btn btn-warning" onclick="editar_usuario('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                echo '<td><button class="btn btn-warning" onclick="editar_usuario('.$fila['id'].')"> Editar</button></td>';
               }
               if($borrar==1){
                 echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_usuario('.$fila['id'].')"> Borrar</button></td>';

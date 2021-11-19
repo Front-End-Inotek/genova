@@ -31,7 +31,7 @@
         </div>
         <div class="row">
           <div class="col-sm-11"></div>
-          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_tipo()"><span class="glyphicon glyphicon-edit"></span> ←</button></div>
+          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_tipo()"> ←</button></div>
         </div>
       </div>';
 ?>

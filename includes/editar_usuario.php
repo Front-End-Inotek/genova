@@ -499,7 +499,7 @@
                 <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_usuario('.$_GET['id'].')">
               </div>
               </div>
-              <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_usuario()"><span class="glyphicon glyphicon-edit"></span> ←</button></div>
+              <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_usuario()"> ←</button></div>
             </div>
       </div>';
 ?>

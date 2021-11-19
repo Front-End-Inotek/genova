@@ -17,7 +17,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="borrar_huesped('.$_GET['id'].')"><span class="glyphicon glyphicon-edit"></span> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="borrar_huesped('.$_GET['id'].')"> Aceptar</button>
     </div>
   </div>';
 ?>

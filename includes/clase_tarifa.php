@@ -96,7 +96,7 @@
                 <td>$'.number_format($fila['precio_infantil'], 2).'</td>
                 <td>'.$fila['habitacion'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_tarifa('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_tarifa('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_tarifa('.$fila['ID'].')"> Borrar</button></td>';

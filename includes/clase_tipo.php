@@ -69,7 +69,7 @@
                 <td>'.$fila['nombre'].'</td>
                 <td>'.$fila['codigo'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_tipo('.$fila['id'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_tipo('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_tipo('.$fila['id'].')"> Borrar</button></td>';

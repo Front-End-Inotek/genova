@@ -123,7 +123,7 @@
             echo '<div class="col-sm-12"></div>';
           }else{
             echo '<div class="col-sm-10"></div>';
-            echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"><span class="glyphicon glyphicon-edit"></span>Abonar</button></div>';
+            echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>';
           }
         echo '</div>
    

@@ -22,7 +22,7 @@
         </div>
         <div class="row">
           <div class="col-sm-11"></div>
-          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_forma_pago()"><span class="glyphicon glyphicon-edit"></span> ←</button></div>
+          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_forma_pago()"> ←</button></div>
         </div>
       </div>';
 ?>

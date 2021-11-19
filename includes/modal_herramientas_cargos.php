@@ -41,7 +41,7 @@
 
     </div>  
 
-    <div class="modal-footer" id="boton_asignar_agregar_producto_salida">
+    <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
     </div>
   </div>';

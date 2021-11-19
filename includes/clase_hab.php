@@ -82,7 +82,7 @@
                 <td>'.$fila['habitacion'].'</td>
                 <td>'.$fila['comentario'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_hab('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_hab('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_hab('.$fila['ID'].')"> Borrar</button></td>';
