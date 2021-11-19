@@ -113,7 +113,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar el cargo de una cuenta
-      function editar_total_suplementos($id,$cargo){
+      function editar_cargo($id,$cargo){
         $sentencia = "UPDATE `cuenta` SET
             `cargo` = '$cargo'
             WHERE `id` = '$id';";
@@ -121,12 +121,12 @@
         $comentario="Editar el cargo de una cuenta dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar una habitacion**
-      function borrar_hab($id){
-        $sentencia = "UPDATE `hab` SET
-        `estado_hab` = '0'
+      // Borrar una cuenta
+      function borrar_cuenta($id){
+        $sentencia = "UPDATE `cuenta` SET
+        `estado` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de una habitacion como inactivo";
+        $comentario="Poner estado de una cuenta como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtengo los nombres de las habitaciones**
@@ -182,7 +182,7 @@
       // Mostrar los cargos que tenemos por movimiento en una habitacion
       function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$usuario_reservacion,$fecha,$total_suplementos,$forma_pago){
         $total_cargos= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion concepto  
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion concepto,cuenta.id AS ID  
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado = 1 ORDER BY cuenta.fecha";
@@ -221,7 +221,7 @@
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
                 <td>$'.number_format($fila['cargo'], 2).'</td> 
                 <td>'.$fila['descripcion'].'</td>
-                <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$ciclo.','.$fila['id'].','.$hab_id.','.$estado.','.$fila['usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
+                <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$ciclo.','.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
                 </tr>';
               }
               echo '

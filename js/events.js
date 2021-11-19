@@ -1804,21 +1804,18 @@ function recibe_datos_abono(datos){
 
 // Modal de herramientas de cargos en estado de cuenta
 function herramientas_cargos(ciclo,id,hab_id,estado,usuario,cargo){
-    alert(cargo);
     $("#mostrar_herramientas").load("includes/modal_herramientas_cargos.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&cargo="+cargo);
 }
 
 // Modal de editar cargo en estado de cuenta
 function editar_herramientas_cargo(ciclo,id,hab_id,estado,cargo){
-    alert(cargo);
     $("#mostrar_herramientas").load("includes/modal_editar_herramientas_cargo.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
 }
 
 // Editar un cargo en estado de cuenta
 function modificar_herramientas_cargo(ciclo,id,hab_id,estado){
-    alert(cargo);
 	var usuario_id=localStorage.getItem("id");
-    var cargo= document.getElementById("nombre").value;
+    var cargo= document.getElementById("cargo").value;
 
 
     if(id >0){
@@ -1838,6 +1835,43 @@ function modificar_herramientas_cargo(ciclo,id,hab_id,estado){
               dataType: "html",
               contentType: "application/x-www-form-urlencoded",
               url:"includes/aplicar_editar_herramientas_cargo.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:recibe_datos_abono,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }    
+}
+
+// Modal de borrar cargo en estado de cuenta
+function aceptar_borrar_herramientas_cargo(ciclo,id,hab_id,estado,cargo){
+    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_cargo.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
+}
+
+// Borrar un cargo en estado de cuenta
+function borrar_herramientas_cargo(ciclo,id,hab_id,estado){
+	var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+
+    if(id >0){
+        var datos = {
+              "id": id,
+              "ciclo": ciclo,
+              "hab_id": hab_id,
+              "estado": estado,
+              "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/borrar_herramientas_cargo.php",
               data:datos,
               //beforeSend:loaderbar,
               success:recibe_datos_abono,

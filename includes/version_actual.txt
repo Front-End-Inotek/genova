@@ -34,4 +34,6 @@ VERSION 1.4
 -Agregar tabla sql y funciones de cuenta
 -Generar estado de cuenta
 -Generar las dos tablas de estado de cuenta 
+-Editar y borrar cargos en estado de cuenta
+
 

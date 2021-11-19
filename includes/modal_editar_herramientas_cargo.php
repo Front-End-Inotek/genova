@@ -4,6 +4,7 @@
   $reservacion = NEW Reservacion($_GET['id']);
   include_once("clase_cuenta.php");
   $cuenta= NEW Cuenta($_GET['id']);
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
