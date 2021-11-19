@@ -35,5 +35,6 @@ VERSION 1.4
 -Generar estado de cuenta
 -Generar las dos tablas de estado de cuenta 
 -Editar y borrar cargos en estado de cuenta
+-Editar y borrar abonos en estado de cuenta
 
 
