@@ -8,9 +8,9 @@
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" onclick="reiniciarintervalo()">&times;</button>
       <h3 class="modal-title">AHCloud>Panel>Habitacion '.$hab->nombre.'</h3>
       <h2>-Abonar</h2>
+      <button type="button" class="close" data-dismiss="modal" onclick="reiniciarintervalo()">&times;</button>
     </div><br>
 
     <div class="modal-body">

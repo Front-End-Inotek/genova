@@ -439,6 +439,7 @@
       }
       // Obtengo el nombre del usuario
       function obtengo_usuario($id){
+        $usuario= "";
         $sentencia = "SELECT usuario FROM usuario WHERE id = $id LIMIT 1";
         //echo $sentencia;
         $comentario="Obtengo el nombre del usuario";

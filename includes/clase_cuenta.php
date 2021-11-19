@@ -112,6 +112,15 @@
         $comentario="Editar una habitacion dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Editar el cargo de una cuenta
+      function editar_total_suplementos($id,$cargo){
+        $sentencia = "UPDATE `cuenta` SET
+            `cargo` = '$cargo'
+            WHERE `id` = '$id';";
+        //echo $sentencia ;
+        $comentario="Editar el cargo de una cuenta dentro de la base de datos ";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Borrar una habitacion**
       function borrar_hab($id){
         $sentencia = "UPDATE `hab` SET
@@ -171,7 +180,7 @@
         return $suma_abonos;
       }
       // Mostrar los cargos que tenemos por movimiento en una habitacion
-      function mostrar_cargos($mov,$usuario_reservacion,$fecha,$total_suplementos,$forma_pago){
+      function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$usuario_reservacion,$fecha,$total_suplementos,$forma_pago){
         $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion concepto  
         FROM cuenta 
@@ -192,25 +201,27 @@
               </tr>
             </thead>
             <tbody>';
-              if($total_suplementos > 0){//$usuario_reservacion
+              if($total_suplementos > 0){
+                $ciclo= 1;
                 $total_cargos= $total_cargos + $total_suplementos;
                 echo '<tr class="fuente_menor text-center">
                 <td>Total suplementos</td>
                 <td>'.$fecha.'</td>
                 <td>$'.number_format($total_suplementos, 2).'</td> 
                 <td>'.$forma_pago.'</td>
-                <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$mov.','.$usuario_reservacion.','.$total_suplementos.')"> 🔧</button></td>
+                <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$ciclo.','.$id_reservacion.','.$hab_id.','.$estado.','.$usuario_reservacion.','.$total_suplementos.')"><span class="glyphicon glyphicon-edit"></span> 🔧</button></td>
                 </tr>';
               }
-              while ($fila = mysqli_fetch_array($consulta))//$fila['usuario']
+              while ($fila = mysqli_fetch_array($consulta))
               {
+                $ciclo= 2;
                 $total_cargos= $total_cargos + $fila['cargo'];
                 echo '<tr class="fuente_menor text-center">
                 <td>'.$fila['concepto'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
                 <td>$'.number_format($fila['cargo'], 2).'</td> 
                 <td>'.$fila['descripcion'].'</td>
-                <td><button type="button" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['id'].','.$fila['usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
+                <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$ciclo.','.$fila['id'].','.$hab_id.','.$estado.','.$fila['usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
                 </tr>';
               }
               echo '
@@ -220,7 +231,7 @@
         return $total_cargos;
       }
       // Mostramos los abonos que tenemos por movimiento en una habitacion
-      function mostrar_abonos($mov,$usuario_reservacion,$fecha,$total_pago,$forma_pago){
+      function mostrar_abonos($mov,$id_reservacion,$hab_id,$estado,$usuario_reservacion,$fecha,$total_pago,$forma_pago){
         $total_abonos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion concepto  
         FROM cuenta 
