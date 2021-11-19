@@ -156,10 +156,11 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona
+        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
         FROM reservacion
         INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
-        INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.estado = 1 ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -169,6 +170,7 @@
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Numero</th>
+            <th>Usuario</th>
             <th>Fecha Entrada</th>
             <th>Fecha Salida</th>
             <th>Noches</th>
@@ -205,12 +207,13 @@
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
                 <td>'.$fila['ID'].'</td> 
+                <td>'.$fila['usuario'].'</td> 
                 <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
                 <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
                 <td>'.$fila['noches'].'</td> 
                 <td>'.$fila['numero_hab'].'</td> 
                 <td>'.$fila['habitacion'].'</td> 
-                <td>$'.$fila['precio_hospedaje'].'</td>
+                <td>$'.number_format($fila['precio_hospedaje'], 2).'</td>
                 <td>'.$fila['cantidad_hospedaje'].'</td>  
                 <td>'.$fila['extra_adulto'].'</td> 
                 <td>'.$fila['extra_junior'].'</td> 
@@ -220,15 +223,15 @@
                 <td>'.$fila['nombre_reserva'].' '.$fila['apellido'].'</td>
                 <td>'.$fila['acompanante'].'</td>
                 <td>'.$fila['suplementos'].'</td>  
-                <td>$'.$fila['total_suplementos'].'</td> 
-                <td>$'.$fila['total_hab'].'</td>
+                <td>$'.number_format($fila['total_suplementos'], 2).'</td> 
+                <td>$'.number_format($fila['total_hab'], 2).'</td>
                 <td>'.$fila['descuento'].'%</td>'; 
                 if($fila['forzar_tarifa']>0){
-                  echo '<td>$'.$fila['forzar_tarifa'].'</td>'; 
+                  echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
                 }else{
-                  echo '<td>$'.$fila['total'].'</td>'; 
+                  echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
                 }
-                echo '<td>$'.$fila['total_pago'].'</td>'; 
+                echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
                 echo '<td>'.$fila['descripcion'].'</td>';  
                 echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';  
                 if($editar==1){
@@ -257,10 +260,11 @@
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona
+          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
           FROM reservacion
           INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
-          INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
+          INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+          INNER JOIN huesped ON reservacion.id_huesped = huesped.id
           INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND reservacion.estado = 1 ORDER BY reservacion.id DESC";
           $comentario="Mostrar diferentes busquedas en ver reservaciones"; 
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -271,6 +275,7 @@
               <thead>
                 <tr class="table-primary-encabezado text-center">
                 <th>Numero</th>
+                <th>Usuario</th>
                 <th>Fecha Entrada</th>
                 <th>Fecha Salida</th>
                 <th>Noches</th>
@@ -311,7 +316,7 @@
                   <td>'.$fila['noches'].'</td> 
                   <td>'.$fila['numero_hab'].'</td> 
                   <td>'.$fila['habitacion'].'</td> 
-                  <td>'.$fila['precio_hospedaje'].'</td>
+                  <td>$'.number_format($fila['precio_hospedaje'], 2).'</td>
                   <td>'.$fila['cantidad_hospedaje'].'</td>  
                   <td>'.$fila['extra_adulto'].'</td> 
                   <td>'.$fila['extra_junior'].'</td> 
@@ -321,15 +326,15 @@
                   <td>'.$fila['nombre_reserva'].' '.$fila['apellido'].'</td>
                   <td>'.$fila['acompanante'].'</td>
                   <td>'.$fila['suplementos'].'</td>  
-                  <td>$'.$fila['total_suplementos'].'</td> 
-                  <td>$'.$fila['total_hab'].'</td>
+                  <td>$'.number_format($fila['total_suplementos'], 2).'</td> 
+                  <td>$'.number_format($fila['total_hab'], 2).'</td>
                   <td>'.$fila['descuento'].'%</td>'; 
                   if($fila['forzar_tarifa']>0){
-                    echo '<td>$'.$fila['forzar_tarifa'].'</td>'; 
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
                   }else{
-                    echo '<td>$'.$fila['total'].'</td>'; 
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
                   }
-                  echo '<td>$'.$fila['total_pago'].'</td>'; 
+                  echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
                   echo '<td>'.$fila['descripcion'].'</td>';  
                   echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>'; 
                   if($editar==1){
@@ -361,10 +366,11 @@
         if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido
+          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
           FROM reservacion
           INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
-          INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
+          INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+          INNER JOIN huesped ON reservacion.id_huesped = huesped.id
           INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini &&reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND reservacion.estado = 1 ORDER BY reservacion.fecha_entrada DESC;";
           $comentario="Mostrar las rquisiciones";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -374,6 +380,7 @@
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th>Numero</th>
+              <th>Usuario</th>
               <th>Fecha Entrada</th>
               <th>Fecha Salida</th>
               <th>Noches</th>
@@ -414,7 +421,7 @@
                 <td>'.$fila['noches'].'</td> 
                 <td>'.$fila['numero_hab'].'</td> 
                 <td>'.$fila['habitacion'].'</td> 
-                <td>'.$fila['precio_hospedaje'].'</td>
+                <td>$'.number_format($fila['precio_hospedaje'], 2).'</td>
                 <td>'.$fila['cantidad_hospedaje'].'</td>  
                 <td>'.$fila['extra_adulto'].'</td> 
                 <td>'.$fila['extra_junior'].'</td> 
@@ -424,15 +431,15 @@
                 <td>'.$fila['nombre_reserva'].' '.$fila['apellido'].'</td>
                 <td>'.$fila['acompanante'].'</td>
                 <td>'.$fila['suplementos'].'</td>  
-                <td>$'.$fila['total_suplementos'].'</td> 
-                <td>$'.$fila['total_hab'].'</td>
+                <td>$'.number_format($fila['total_suplementos'], 2).'</td> 
+                <td>$'.number_format($fila['total_hab'], 2).'</td>
                 <td>'.$fila['descuento'].'%</td>'; 
                 if($fila['forzar_tarifa']>0){
-                  echo '<td>$'.$fila['forzar_tarifa'].'</td>'; 
+                  echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
                 }else{
-                  echo '<td>$'.$fila['total'].'</td>'; 
+                  echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
                 }
-                echo '<td>$'.$fila['total_pago'].'</td>'; 
+                echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';  
                 echo '<td>'.$fila['descripcion'].'</td>';  
                 echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';
                 if($editar==1){

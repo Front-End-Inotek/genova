@@ -89,11 +89,11 @@
             {
                 echo '<tr class="text-center">
                 <td>'.$fila['nom'].'</td>
-                <td>$'.$fila['precio_hospedaje'].'</td>
+                <td>$'.number_format($fila['precio_hospedaje'], 2).'</td>
                 <td>'.$fila['cantidad_hospedaje'].'</td>
-                <td>$'.$fila['precio_adulto'].'</td>
-                <td>$'.$fila['precio_junior'].'</td>
-                <td>$'.$fila['precio_infantil'].'</td>
+                <td>$'.number_format($fila['precio_adulto'], 2).'</td>
+                <td>$'.number_format($fila['precio_junior'], 2).'</td>
+                <td>$'.number_format($fila['precio_infantil'], 2).'</td>
                 <td>'.$fila['habitacion'].'</td>';
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_tarifa('.$fila['ID'].')"><span class="glyphicon glyphicon-edit"></span> Editar</button></td>';
