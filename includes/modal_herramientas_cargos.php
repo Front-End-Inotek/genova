@@ -19,8 +19,10 @@
           <th>Usuario</th>
           <th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
           if($_GET['ciclo'] == 1){
+            // No se puede cambiar de habitacion el total suplementos
             // No se puede borrar el total suplementos
           }else{
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Habitacion</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Borrar</th>';
           }
           echo '</tr>
@@ -30,8 +32,10 @@
             <td>'.$nombre_usuario.'</td>
             <td><button class="btn btn-warning" onclick="editar_herramientas_cargo('.$_GET['ciclo'].','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].')"> Editar</button></td>';
             if($_GET['ciclo'] == 1){
+              // No se puede cambiar de habitacion el total suplementos
               // No se puede borrar el total suplementos
             }else{
+              echo '<td><button class="btn btn-success" onclick="cambiar_hab_herramientas_cargo('.$_GET['ciclo'].','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].')"> Cambiar</button></td>';
               echo '<td><button class="btn btn-danger" onclick="aceptar_borrar_herramientas_cargo('.$_GET['ciclo'].','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].')"> Borrar</button></td>';
             }
             echo '</tr>

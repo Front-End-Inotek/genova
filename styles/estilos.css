@@ -343,6 +343,12 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
+.hab_cambiar{/*  */
+  text-align: center;
+  background-color: green;
+  font-size: 1.2em;
+  color: white;
+}
 .limpiar{
   text-align: center;
   background-color: #A98743;

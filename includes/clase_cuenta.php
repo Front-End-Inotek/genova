@@ -293,6 +293,15 @@
         </div>';
         return $total_abonos;
       }
+      // Cambiar de habitacion el cargo en estado de cuenta
+      function cambiar_hab_cargo($mov,$id){
+        $sentencia = "UPDATE `cuenta` SET
+            `mov` = '$mov'
+            WHERE `id` = '$id';";
+        //echo $sentencia ;
+        $comentario="Cambiar de habitacion el cargo en estado de cuenta dentro de la base de datos ";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
              
   }
 ?>
