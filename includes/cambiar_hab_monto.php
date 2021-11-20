@@ -8,8 +8,12 @@
   $logs = NEW Log(0);
   $nombre= $hab->nombre;
 
-  $cuenta->cambiar_hab_cargo($_POST['mov'],$_POST['id']);
-  $logs->guardar_log($_POST['usuario_id'],"Cambiar de habitacion cargo de habitacion: ". $nombre." en cuenta ". $_POST['id']);
+  $cuenta->cambiar_hab_monto($_POST['mov'],$_POST['id']);
+  if($_POST['monto'] == 1){
+    $logs->guardar_log($_POST['usuario_id'],"Cambiar de habitacion cargo de habitacion: ". $nombre." en cuenta ". $_POST['id']);
+  }else{
+    $logs->guardar_log($_POST['usuario_id'],"Cambiar de habitacion abono de habitacion: ". $nombre." en cuenta ". $_POST['id']);
+  }
 
   echo $_POST['hab_id']."/".$_POST['estado'];
 ?>

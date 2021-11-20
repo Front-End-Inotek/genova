@@ -151,7 +151,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       } 
       // Nos permite seleccionar una habitacion ocupada 
-      function cambiar_hab_ocupada($id,$hab_id,$estado){
+      function cambiar_hab_ocupada($monto,$id,$hab_id,$estado){
         $sentencia = "SELECT * FROM hab WHERE id != $hab_id AND estado = 1";
         $comentario="Asignación de habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -159,7 +159,7 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-                echo '<div class="hab_cambiar" onclick="cambiar_hab_cargo('.$fila['id'].','.$fila['mov'].','.$id.','.$hab_id.','.$estado.')">';
+                echo '<div class="hab_cambiar" onclick="cambiar_hab_monto('.$fila['id'].','.$fila['mov'].','.$monto.','.$id.','.$hab_id.','.$estado.')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/home.png"  class="center-block img-responsive">';

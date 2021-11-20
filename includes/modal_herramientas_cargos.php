@@ -35,7 +35,8 @@
               // No se puede cambiar de habitacion el total suplementos
               // No se puede borrar el total suplementos
             }else{
-              echo '<td><button class="btn btn-success" onclick="cambiar_hab_herramientas_cargo('.$_GET['ciclo'].','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].')"> Cambiar</button></td>';
+              $monto= 1;
+              echo '<td><button class="btn btn-success" onclick="cambiar_hab_herramientas_monto('.$_GET['ciclo'].','.$monto.','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].')"> Cambiar</button></td>';
               echo '<td><button class="btn btn-danger" onclick="aceptar_borrar_herramientas_cargo('.$_GET['ciclo'].','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].')"> Borrar</button></td>';
             }
             echo '</tr>

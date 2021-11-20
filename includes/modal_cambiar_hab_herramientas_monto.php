@@ -6,20 +6,23 @@
   echo '
   <!-- Modal content-->
   <div class="modal-content">
-    <div class="modal-header">
-      Seleccionar cuarto para cambiar cargo $'.number_format($_GET['cargo'], 2).'
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-header">';
+      if($_GET['monto'] == 1){
+        echo 'Seleccionar cuarto para cambiar cargo $'.number_format($_GET['monto'], 2).'';
+      }else{
+        echo 'Seleccionar cuarto para cambiar abono $'.number_format($_GET['monto'], 2).'';
+      }
+      echo '<button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
 
     <div class="modal-body">';
       echo '<div class="row">';
-        $hab->cambiar_hab_ocupada($_GET['id'],$_GET['hab_id'],$_GET['estado']); 
+        $hab->cambiar_hab_ocupada($_GET['monto'],$_GET['id'],$_GET['hab_id'],$_GET['estado']); 
       echo '</div>
     <div>     
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="modificar_herramientas_cargo('.$_GET['ciclo'].','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].')"> Aceptar</button>
     </div>
   </div>';
 ?>

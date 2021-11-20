@@ -1970,18 +1970,19 @@ function borrar_herramientas_abono(ciclo,id,hab_id,estado){
 }
 
 //--Cambiar hab
-// Modal de cambiar de habitacion el cargo en estado de cuenta
-function cambiar_hab_herramientas_cargo(ciclo,id,hab_id,estado,cargo){
-    $("#mostrar_herramientas").load("includes/modal_cambiar_hab_herramientas_cargo.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
+// Modal de cambiar de habitacion el monto en estado de cuenta
+function cambiar_hab_herramientas_monto(ciclo,monto,id,hab_id,estado,monto){
+    $("#mostrar_herramientas").load("includes/modal_cambiar_hab_herramientas_monto.php?ciclo="+ciclo+"&monto="+monto+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&monto="+monto);
 }
-// Funcion para cambiar de habitacion el cargo en estado de cuenta
-function cambiar_hab_cargo(id_hab,mov,id,hab_id,estado){
+// Funcion para cambiar de habitacion el monto en estado de cuenta
+function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
 
 	var datos = {
           "id_hab": id_hab,
           "mov": mov,
+          "monto": monto,
           "id": id,
           "hab_id": hab_id,
           "estado": estado,
@@ -1992,7 +1993,7 @@ function cambiar_hab_cargo(id_hab,mov,id,hab_id,estado){
 		  type: "POST",
 		  dataType: "html",
 		  contentType: "application/x-www-form-urlencoded", 
-		  url:"includes/cambiar_hab_cargo.php",
+		  url:"includes/cambiar_hab_monto.php",
 		  data:datos,
 		  beforeSend:loaderbar,
 		  success:recibe_datos_abono,
