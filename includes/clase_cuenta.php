@@ -130,12 +130,66 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Borrar una cuenta
-      function borrar_cuenta($id){
-        $sentencia = "UPDATE `cuenta` SET
-        `estado` = '0'
-        WHERE `id` = '$id';";
-        $comentario="Poner estado de una cuenta como inactivo";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      function borrar_cuenta($id,$descripcion,$monto){
+        if($descripcion == 'Total reservacion'){
+          $sentencia = "SELECT * FROM cuenta WHERE id = $id AND estado = 1";
+          //echo $sentencia;
+          $id_usuario= 0;
+          $mov= 0;
+          $fecha= 0;
+          $forma_pago= 0;
+          $cargo= 0;
+          $abono= 0;
+          $comentario="Obtenemos los datos de la correspondiente cuenta";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            $id_usuario= $fila['id_usuario'];
+            $mov= $fila['mov'];
+            $fecha= $fila['fecha'];
+            $forma_pago= $fila['forma_pago'];
+            $cargo= $fila['cargo'];
+            $abono= $fila['abono'];
+          }
+
+          if($monto == 1){
+             // Para poder borrar el cargo o abono de una reservacion se divide en dos
+            $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+            VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '0', '0');";
+            $comentario="Guardamos la cuenta en la base de datos";
+            $consulta= $this->realizaConsulta($sentencia,$comentario); 
+
+            $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+            VALUES ('$id_usuario', '$mov', 'Pago al reservar', '$fecha', '$forma_pago', '0', '$abono', '1');";
+            $comentario="Guardamos la cuenta en la base de datos";
+            $consulta= $this->realizaConsulta($sentencia,$comentario);
+          }else{
+             // Para poder borrar el cargo o abono de una reservacion se divide en dos
+            $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+            VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '0', '1');";
+            $comentario="Guardamos la cuenta en la base de datos";
+            $consulta= $this->realizaConsulta($sentencia,$comentario); 
+
+            $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+            VALUES ('$id_usuario', '$mov', 'Pago al reservar', '$fecha', '$forma_pago', '0', '$abono', '0');";
+            $comentario="Guardamos la cuenta en la base de datos";
+            $consulta= $this->realizaConsulta($sentencia,$comentario);
+          } 
+
+          // Despues de dividir la cuenta se inactiva
+          $sentencia = "UPDATE `cuenta` SET
+            `estado` = '0'
+            WHERE `id` = '$id';";
+          //echo $sentencia ;
+          $comentario="Poner estado de una cuenta como inactivo";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }else{
+          $sentencia = "UPDATE `cuenta` SET
+          `estado` = '0'
+          WHERE `id` = '$id';";
+          $comentario="Poner estado de una cuenta como inactivo";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }
       }
       // Obtengo los nombres de las habitaciones**
       function mostrar_hab(){
@@ -190,10 +244,10 @@
       // Mostrar los cargos que tenemos por movimiento en una habitacion
       function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado){
         $total_cargos= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID  
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo    
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
-        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado = 1 ORDER BY cuenta.fecha";
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo 
@@ -211,23 +265,35 @@
             <tbody>';
               while ($fila = mysqli_fetch_array($consulta))
               {
-                $total_cargos= $total_cargos + $fila['cargo'];
-                if($fila['concepto'] == 'Total reservacion'){
-                  echo '<tr class="fuente_menor text-center">
-                  <td>Total suplementos</td>
-                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                  <td>$'.number_format($fila['cargo'], 2).'</td> 
-                  <td>'.$fila['descripcion'].'</td>
-                  <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
-                  </tr>';
+                if($fila['edo'] == 1){
+                  $total_cargos= $total_cargos + $fila['cargo'];
+                  if($fila['concepto'] == 'Total reservacion'){
+                    echo '<tr class="fuente_menor text-center">
+                    <td>Total suplementos</td>
+                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>$'.number_format($fila['cargo'], 2).'</td> 
+                    <td>'.$fila['descripcion'].'</td>
+                    <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🔧</button></td>
+                    </tr>';
+                  }else{
+                    echo '<tr class="fuente_menor text-center">
+                    <td>'.$fila['concepto'].'</td>
+                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>$'.number_format($fila['cargo'], 2).'</td> 
+                    <td>'.$fila['descripcion'].'</td>
+                    <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
+                    </tr>';
+                  }
                 }else{
-                  echo '<tr class="fuente_menor text-center">
-                  <td>'.$fila['concepto'].'</td>
-                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                  <td>$'.number_format($fila['cargo'], 2).'</td> 
-                  <td>'.$fila['descripcion'].'</td>
-                  <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
-                  </tr>';
+                  if($fila['concepto'] != 'Total reservacion'){
+                    echo '<tr class="fuente_menor table-secondary text-center">
+                    <td>'.$fila['concepto'].'</td>
+                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>$'.number_format($fila['cargo'], 2).'</td> 
+                    <td>'.$fila['descripcion'].'</td>
+                    <td></td>
+                    </tr>';
+                  }
                 }
               }
               echo '
@@ -239,10 +305,10 @@
       // Mostramos los abonos que tenemos por movimiento en una habitacion
       function mostrar_abonos($mov,$id_reservacion,$hab_id,$estado){
         $total_abonos= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID   
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
-        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado = 1 ORDER BY cuenta.fecha";
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
         //echo $sentencia;
         //echo $id;
@@ -260,25 +326,37 @@
               </tr>
             </thead>
             <tbody>';
-              while ($fila = mysqli_fetch_array($consulta))//$fila['usuario']
+              while ($fila = mysqli_fetch_array($consulta))
               {
-                $total_abonos= $total_abonos + $fila['abono'];
-                if($fila['concepto'] == 'Total reservacion'){
-                  echo '<tr class="fuente_menor text-center">
-                  <td>Pago al reservar</td>
-                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                  <td>$'.number_format($fila['abono'], 2).'</td> 
-                  <td>'.$fila['descripcion'].'</td>
-                  <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
-                  </tr>';
+                if($fila['edo'] == 1){
+                  $total_abonos= $total_abonos + $fila['abono'];
+                  if($fila['concepto'] == 'Total reservacion'){
+                    echo '<tr class="fuente_menor text-center">
+                    <td>Pago al reservar</td>
+                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>$'.number_format($fila['abono'], 2).'</td> 
+                    <td>'.$fila['descripcion'].'</td>
+                    <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> ⚙️</button></td>
+                    </tr>';
+                  }else{
+                    echo '<tr class="fuente_menor text-center">
+                    <td>'.$fila['concepto'].'</td>
+                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>$'.number_format($fila['abono'], 2).'</td> 
+                    <td>'.$fila['descripcion'].'</td>
+                    <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
+                    </tr>';
+                  }
                 }else{
-                  echo '<tr class="fuente_menor text-center">
-                  <td>'.$fila['concepto'].'</td>
-                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                  <td>$'.number_format($fila['abono'], 2).'</td> 
-                  <td>'.$fila['descripcion'].'</td>
-                  <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
-                  </tr>';
+                  if($fila['concepto'] != 'Total reservacion'){
+                    echo '<tr class="fuente_menor table-secondary text-center">
+                    <td>'.$fila['concepto'].'</td>
+                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>$'.number_format($fila['abono'], 2).'</td> 
+                    <td>'.$fila['descripcion'].'</td>
+                    <td></td>
+                    </tr>';
+                  }
                 }
               }
               echo '
