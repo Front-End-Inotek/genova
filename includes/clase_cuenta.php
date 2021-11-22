@@ -212,13 +212,23 @@
               while ($fila = mysqli_fetch_array($consulta))
               {
                 $total_cargos= $total_cargos + $fila['cargo'];
-                echo '<tr class="fuente_menor text-center">
-                <td>'.$fila['concepto'].'</td>
-                <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                <td>$'.number_format($fila['cargo'], 2).'</td> 
-                <td>'.$fila['descripcion'].'</td>
-                <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
-                </tr>';
+                if($fila['concepto'] == 'Total reservacion'){
+                  echo '<tr class="fuente_menor text-center">
+                  <td>Total suplementos</td>
+                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                  <td>$'.number_format($fila['cargo'], 2).'</td> 
+                  <td>'.$fila['descripcion'].'</td>
+                  <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
+                  </tr>';
+                }else{
+                  echo '<tr class="fuente_menor text-center">
+                  <td>'.$fila['concepto'].'</td>
+                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                  <td>$'.number_format($fila['cargo'], 2).'</td> 
+                  <td>'.$fila['descripcion'].'</td>
+                  <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
+                  </tr>';
+                }
               }
               echo '
             </tbody>
@@ -253,13 +263,23 @@
               while ($fila = mysqli_fetch_array($consulta))//$fila['usuario']
               {
                 $total_abonos= $total_abonos + $fila['abono'];
-                echo '<tr class="fuente_menor text-center">
-                <td>'.$fila['concepto'].'</td>
-                <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                <td>$'.number_format($fila['abono'], 2).'</td> 
-                <td>'.$fila['descripcion'].'</td>
-                <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
-                </tr>';
+                if($fila['concepto'] == 'Total reservacion'){
+                  echo '<tr class="fuente_menor text-center">
+                  <td>Pago al reservar</td>
+                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                  <td>$'.number_format($fila['abono'], 2).'</td> 
+                  <td>'.$fila['descripcion'].'</td>
+                  <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
+                  </tr>';
+                }else{
+                  echo '<tr class="fuente_menor text-center">
+                  <td>'.$fila['concepto'].'</td>
+                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                  <td>$'.number_format($fila['abono'], 2).'</td> 
+                  <td>'.$fila['descripcion'].'</td>
+                  <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
+                  </tr>';
+                }
               }
               echo '
             </tbody>

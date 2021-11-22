@@ -105,7 +105,7 @@
         $fecha_salida=strtotime($fecha_salida);
         //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
         $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-        VALUES ('$usuario_id', '$id_movimiento, 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_suplementos', '$total_pago', '1');";
+        VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_suplementos', '$total_pago', '1');";
         $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 
@@ -116,7 +116,7 @@
         {
           $id_cuenta= $fila['id'];
         }
-
+        
         $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
         VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '$total_pago', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
