@@ -10,13 +10,8 @@
   $logs = NEW Log(0);
   $nombre= $hab->nombre;
 
-  if($_POST['ciclo'] == 1){
-    $reservacion->editar_total_pago($_POST['id'],$_POST['abono']);
-    $logs->guardar_log($_POST['usuario_id'],"Editar total pago de habitacion: ". $nombre." en reservacion ". $_POST['id']);
-  }else{
-    $cuenta->editar_abono($_POST['id'],$_POST['abono']);
-    $logs->guardar_log($_POST['usuario_id'],"Editar abono de habitacion: ". $nombre." en cuenta ". $_POST['id']);
-  }
+  $cuenta->editar_abono($_POST['id'],$_POST['abono']);
+  $logs->guardar_log($_POST['usuario_id'],"Editar abono de habitacion: ". $nombre." en cuenta ". $_POST['id']);
   
   echo $_POST['hab_id']."/".$_POST['estado'];
 ?>

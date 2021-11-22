@@ -227,7 +227,7 @@
         return $total_cargos;
       }
       // Mostramos los abonos que tenemos por movimiento en una habitacion
-      function mostrar_abonos($mov,$id_reservacion,$hab_id,$estado,$usuario_reservacion,$fecha,$total_pago,$forma_pago){
+      function mostrar_abonos($mov,$id_reservacion,$hab_id,$estado){
         $total_abonos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID   
         FROM cuenta 
@@ -292,12 +292,12 @@
         if($descripcion == 'Total reservacion'){
           // Para poder cambiar de lugar el cargo o abono de una reservacion se divide en dos
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-          VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
+          VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '0', '1');";
           $comentario="Guardamos la cuenta en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario); 
 
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-          VALUES ('$id_usuario', '$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
+          VALUES ('$id_usuario', '$mov', 'Pago al reservar', '$fecha', '$forma_pago', '0', '$abono', '1');";
           $comentario="Guardamos la cuenta en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario); 
 

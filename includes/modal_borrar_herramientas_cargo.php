@@ -18,7 +18,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="borrar_herramientas_cargo('.$_GET['ciclo'].','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="borrar_herramientas_cargo('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].')"> Aceptar</button>
     </div>
   </div>';
 ?>

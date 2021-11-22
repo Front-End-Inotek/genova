@@ -514,15 +514,6 @@
         $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Editar total pago en una reservacion
-      function editar_total_pago($id,$cargo){
-        $sentencia = "UPDATE `reservacion` SET
-            `total_pago` = '$cargo'
-            WHERE `id` = '$id';";
-        //echo $sentencia ;
-        $comentario="Editar total pago en una reservacion dentro de la base de datos ";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-      }
       // Borrar una reservacion
       function borrar_reservacion($id){
         $sentencia = "UPDATE `reservacion` SET

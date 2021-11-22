@@ -1854,19 +1854,18 @@ function modificar_herramientas_cargo(id,hab_id,estado){
 }
 
 // Modal de borrar cargo en estado de cuenta
-function aceptar_borrar_herramientas_cargo(ciclo,id,hab_id,estado,cargo){
-    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_cargo.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
+function aceptar_borrar_herramientas_cargo(id,hab_id,estado,cargo){
+    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_cargo.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
 }
 
 // Borrar un cargo en estado de cuenta
-function borrar_herramientas_cargo(ciclo,id,hab_id,estado){
+function borrar_herramientas_cargo(id,hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
 
     if(id >0){
         var datos = {
               "id": id,
-              "ciclo": ciclo,
               "hab_id": hab_id,
               "estado": estado,
               "usuario_id": usuario_id,
@@ -1892,17 +1891,17 @@ function borrar_herramientas_cargo(ciclo,id,hab_id,estado){
 
 //--Borrar
 // Modal de herramientas de abonos en estado de cuenta
-function herramientas_abonos(ciclo,id,hab_id,estado,usuario,abono){
-    $("#mostrar_herramientas").load("includes/modal_herramientas_abonos.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&abono="+abono);
+function herramientas_abonos(id,hab_id,estado,usuario,abono){
+    $("#mostrar_herramientas").load("includes/modal_herramientas_abonos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&abono="+abono);
 }
 
 // Modal de editar abono en estado de cuenta
-function editar_herramientas_abono(ciclo,id,hab_id,estado,abono){
-    $("#mostrar_herramientas").load("includes/modal_editar_herramientas_abono.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono);
+function editar_herramientas_abono(id,hab_id,estado,abono){
+    $("#mostrar_herramientas").load("includes/modal_editar_herramientas_abono.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono);
 }
 
 // Editar un abono en estado de cuenta
-function modificar_herramientas_abono(ciclo,id,hab_id,estado){
+function modificar_herramientas_abono(id,hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
     var abono= document.getElementById("abono").value;
 
@@ -1912,7 +1911,6 @@ function modificar_herramientas_abono(ciclo,id,hab_id,estado){
 			$("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
-              "ciclo": ciclo,
               "hab_id": hab_id,
               "estado": estado,
 			  "abono": abono,
@@ -1938,19 +1936,18 @@ function modificar_herramientas_abono(ciclo,id,hab_id,estado){
 }
 
 // Modal de borrar abono en estado de cuenta
-function aceptar_borrar_herramientas_abono(ciclo,id,hab_id,estado,abono){
-    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_abono.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono);
+function aceptar_borrar_herramientas_abono(id,hab_id,estado,abono){
+    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_abono.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono);
 }
 
 // Borrar un abono en estado de cuenta
-function borrar_herramientas_abono(ciclo,id,hab_id,estado){
+function borrar_herramientas_abono(id,hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
 
     if(id >0){
         var datos = {
               "id": id,
-              "ciclo": ciclo,
               "hab_id": hab_id,
               "estado": estado,
               "usuario_id": usuario_id,
