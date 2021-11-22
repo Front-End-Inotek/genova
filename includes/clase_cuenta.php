@@ -101,15 +101,14 @@
         </table>
         </div>';
       }
-      // Editar una habitacion**
-      function editar_hab($id,$nombre,$tipo,$comentario){
-        $sentencia = "UPDATE `hab` SET
-            `nombre` = '$nombre',
-            `tipo` = '$tipo',
-            `comentario` = '$comentario'
+      // Editar una cuenta proveniente de una reservacion
+      function editar_cuenta_reservacion($id,$total_suplementos,$total_pago){
+        $sentencia = "UPDATE `cuenta` SET
+            `cargo` = '$total_suplementos',
+            `abono` = '$total_pago'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar una habitacion dentro de la base de datos ";
+        $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar el cargo de una cuenta
@@ -118,7 +117,7 @@
             `cargo` = '$cargo'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar el cargo de una cuenta dentro de la base de datos ";
+        $comentario="Editar el cargo de una cuenta dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar el abono de una cuenta
@@ -127,7 +126,7 @@
             `abono` = '$abono'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar el abono de una cuenta dentro de la base de datos ";
+        $comentario="Editar el abono de una cuenta dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Borrar una cuenta

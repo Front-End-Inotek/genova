@@ -7,6 +7,7 @@
       public $id;
       public $id_usuario;
       public $id_huesped;
+      public $id_cuenta;
       public $fecha_entrada;
       public $fecha_salida;
       public $noches;
@@ -38,6 +39,7 @@
           $this->id= 0;
           $this->id_usuario= 0;
           $this->id_huesped= 0;
+          $this->id_cuenta= 0;
           $this->fecha_entrada= 0;
           $this->fecha_salida= 0;
           $this->noches= 0;
@@ -70,6 +72,7 @@
               $this->id= $fila['id'];
               $this->id_usuario= $fila['id_usuario'];
               $this->id_huesped= $fila['id_huesped'];
+              $this->id_cuenta= $fila['id_cuenta'];
               $this->fecha_entrada= $fila['fecha_entrada'];
               $this->fecha_salida= $fila['fecha_salida'];
               $this->noches= $fila['noches'];
@@ -97,11 +100,25 @@
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($id_huesped,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago,$usuario_id){
+      function guardar_reservacion($id_huesped,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago,$hab_id,$usuario_id){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
-        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
-        VALUES ('$usuario_id', '$id_huesped', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '$total_pago', '1');";
+        //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
+        $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+        VALUES ('$usuario_id', '$id_movimiento, 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_suplementos', '$total_pago', '1');";
+        $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        $sentencia = "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
+        $comentario="Obtengo el id de la cuenta agregada";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_cuenta= $fila['id'];
+        }
+
+        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
+        VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '$total_pago', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -457,7 +474,7 @@
         </div>';
       }
       // Editar una reservacion
-      function editar_reservacion($id,$id_huesped,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago){
+      function editar_reservacion($id,$id_huesped,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         $sentencia = "UPDATE `reservacion` SET
@@ -482,10 +499,19 @@
             `total_hab` = '$total_hab',
             `forzar_tarifa` = '$forzar_tarifa',
             `descuento` = '$descuento',
-            `total` = '$total'
+            `total` = '$total',
+            `total_pago` = '$total_pago'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar una reservacion dentro de la base de datos ";
+        $comentario="Editar una reservacion dentro de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        $sentencia = "UPDATE `cuenta` SET
+            `cargo` = '$total_suplementos',
+            `abono` = '$total_pago'
+            WHERE `id` = '$id_cuenta';";
+        //echo $sentencia ;
+        $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar total suplementos en una reservacion

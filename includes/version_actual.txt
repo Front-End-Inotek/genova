@@ -37,5 +37,6 @@ VERSION 1.4
 -Editar y borrar cargos en estado de cuenta
 -Editar y borrar abonos en estado de cuenta
 -Cambiar de habitacion un cargo o abono de estado de cuenta
+-Al agregar una reservacion generar una cuenta con su total suplementos como cargo y su total pago como abono
 
 

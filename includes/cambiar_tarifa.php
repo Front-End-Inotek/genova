@@ -92,15 +92,21 @@
         <div class="row">
           <div class="col-sm-12 text-left"><h3 class="text-dark margen-1">DATOS PAGO:</h3></div>
           <div class="col-sm-2">Suplementos:</div>
-          <div class="col-sm-6">
+          <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="text"  id="suplementos" placeholder="Ingresa los suplementos de la reservacion" maxlength="90" onchange="calcular_total('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
+            <input class="form-control" type="text"  id="suplementos" placeholder="Detallar pedido/s  suplementos de la reservacion" maxlength="90" onchange="calcular_total('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
           </div>
           </div>
           <div class="col-sm-2">Total Suplementos:</div>
           <div class="col-sm-2">
           <div class="form-group">
           <input class="form-control" type="number"  id="total_suplementos" placeholder="0" onchange="calcular_total('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
+          </div>
+          </div>
+          <div class="col-sm-2">Abono al reservar:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+          <input class="form-control" type="number"  id="total_pago" placeholder="0" onchange="calcular_total('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
           </div>
           </div>
         </div>

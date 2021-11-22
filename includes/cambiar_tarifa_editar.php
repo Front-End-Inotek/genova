@@ -12,6 +12,7 @@
   $tarifa= NEW Tarifa($_GET['tarifa']);
   $adultos= $tarifa->mostrar_cantidad_hospedaje($_GET['tarifa']);
   $editar= 1;
+  $id_cuenta= $reservacion->id_cuenta;
   $precio_hospedaje= 0;
   $precio_adulto= 0;
   $precio_junior= 0;
@@ -93,7 +94,7 @@
         </div><hr> 
         <div class="row">
           <div class="col-sm-2">Suplementos:</div>
-          <div class="col-sm-6">
+          <div class="col-sm-2">
           <div class="form-group">
             <input class="form-control" type="text"  id="suplementos" value="'.$reservacion->suplementos.'" maxlength="90" onchange="calcular_total_editar('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
           </div>
@@ -102,6 +103,12 @@
           <div class="col-sm-2">
           <div class="form-group">
           <input class="form-control" type="number"  id="total_suplementos" value="'.$reservacion->total_suplementos.'" onchange="calcular_total_editar('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
+          </div>
+          </div>
+          <div class="col-sm-2">Abono al reservar:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+          <input class="form-control" type="number"  id="total_pago" value="'.$reservacion->total_pago.'" onchange="calcular_total_editar('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
           </div>
           </div>
         </div>
@@ -155,7 +162,7 @@
           <div class="col-sm-9"></div>
           <div class="col-sm-2">
           <div id="boton_tipo">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_reservacion('.$_GET['id'].','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.')">
+            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_reservacion('.$_GET['id'].','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$id_cuenta.')">
           </div>
           </div>
           <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_reservacion()"> ←</button></div>

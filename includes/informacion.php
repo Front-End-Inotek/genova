@@ -706,51 +706,51 @@
                   switch ($fila['estado']) {
                     case 0:
                       
-                        echo '<img src="images/home.png"  class="espacio-imagen center-block img-responsive">';
+                        //echo '<img src="images/home.png"  class="espacio-imagen center-block img-responsive">';
                       
                           
                       break;
                     case 1:
-                          echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';//images/detallando.png
+                          //echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';//images/detallando.png
                       break;
                     case 2:
-                          echo '<img src="images/lavando.png"  class="espacio-imagen center-block img-responsive">';
+                          //echo '<img src="images/lavando.png"  class="espacio-imagen center-block img-responsive">';
                       break;
                     case 3:
-                            echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 4:
-                            echo '<img src="images/mantenimiento.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/mantenimiento.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 5:
-                            echo '<img src="images/bloqueo.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/bloqueo.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 6:
-                            echo '<img src="images/cobrando.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/cobrando.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 7:
-                        echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
+                        //echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 8:
-                            echo '<img src="images/basura.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/basura.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 9:
-                            echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 11:
-                            echo '<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 12:
-                            echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     case 13:
-                            echo '<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
                         break;
                     default:
-                          echo '<img src="images/home.png"  class="espacio-imagen center-block img-responsive">';
+                          //echo '<img src="images/home.png"  class="espacio-imagen center-block img-responsive">';
                       break;
                     case 14:
-                            echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
+                            //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
                         break;
   
                   

@@ -7,7 +7,7 @@
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-      Herramientas de cargo
+      Herramientas de abono
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
 
