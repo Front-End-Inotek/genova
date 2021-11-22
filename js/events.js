@@ -1809,17 +1809,17 @@ function recibe_datos_abono(datos){
 }
 
 // Modal de herramientas de cargos en estado de cuenta
-function herramientas_cargos(ciclo,id,hab_id,estado,usuario,cargo){
-    $("#mostrar_herramientas").load("includes/modal_herramientas_cargos.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&cargo="+cargo);
+function herramientas_cargos(id,hab_id,estado,usuario,cargo){
+    $("#mostrar_herramientas").load("includes/modal_herramientas_cargos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&cargo="+cargo);
 }
 
 // Modal de editar cargo en estado de cuenta
-function editar_herramientas_cargo(ciclo,id,hab_id,estado,cargo){
-    $("#mostrar_herramientas").load("includes/modal_editar_herramientas_cargo.php?ciclo="+ciclo+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
+function editar_herramientas_cargo(id,hab_id,estado,cargo){
+    $("#mostrar_herramientas").load("includes/modal_editar_herramientas_cargo.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
 }
 
 // Editar un cargo en estado de cuenta
-function modificar_herramientas_cargo(ciclo,id,hab_id,estado){
+function modificar_herramientas_cargo(id,hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
     var cargo= document.getElementById("cargo").value;
 
@@ -1829,7 +1829,6 @@ function modificar_herramientas_cargo(ciclo,id,hab_id,estado){
 			$("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
-              "ciclo": ciclo,
               "hab_id": hab_id,
               "estado": estado,
 			  "cargo": cargo,
@@ -1977,8 +1976,8 @@ function borrar_herramientas_abono(ciclo,id,hab_id,estado){
 
 //--Cambiar hab
 // Modal de cambiar de habitacion el monto en estado de cuenta
-function cambiar_hab_herramientas_monto(ciclo,monto,id,hab_id,estado,cargo){
-    $("#mostrar_herramientas").load("includes/modal_cambiar_hab_herramientas_monto.php?ciclo="+ciclo+"&monto="+monto+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
+function cambiar_hab_herramientas_monto(monto,id,hab_id,estado,cargo){
+    $("#mostrar_herramientas").load("includes/modal_cambiar_hab_herramientas_monto.php?monto="+monto+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
 }
 // Funcion para cambiar de habitacion el monto en estado de cuenta
 function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){

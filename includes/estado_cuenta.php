@@ -105,8 +105,8 @@
         echo '</div><br>
 
         <div class="row">
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$total_cargos= $cuenta->mostrar_cargos($mov,$id_hab,$_GET['hab_id'],$_GET['estado'],$id_usuario,$fecha_entrada,$total_suplementos,$forma_pago);echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,$id_hab,$_GET['hab_id'],$_GET['estado'],$id_usuario,$fecha_entrada,$total_pago,$forma_pago);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$total_cargos= $cuenta->mostrar_cargos($mov,$id_hab,$_GET['hab_id'],$_GET['estado']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,$id_hab,$_GET['hab_id'],$_GET['estado']);echo '</div>
         </div>'; 
 
         $total_faltante= $total_cargos - $total_abonos;

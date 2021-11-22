@@ -183,12 +183,12 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $suma_abonos= $suma_abonos + $abono= $fila['abono'];
+          $suma_abonos= $suma_abonos + ($abono= $fila['abono']);
         }
         return $suma_abonos;
       }
       // Mostrar los cargos que tenemos por movimiento en una habitacion
-      function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$usuario_reservacion,$fecha,$total_suplementos,$forma_pago){
+      function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado){
         $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID  
         FROM cuenta 
@@ -209,27 +209,15 @@
               </tr>
             </thead>
             <tbody>';
-              if($total_suplementos > 0){
-                $ciclo= 1;
-                $total_cargos= $total_cargos + $total_suplementos;
-                echo '<tr class="fuente_menor text-center">
-                <td>Total suplementos</td>
-                <td>'.$fecha.'</td>
-                <td>$'.number_format($total_suplementos, 2).'</td> 
-                <td>'.$forma_pago.'</td>
-                <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$ciclo.','.$id_reservacion.','.$hab_id.','.$estado.','.$usuario_reservacion.','.$total_suplementos.')"> 🔧</button></td>
-                </tr>';
-              }
               while ($fila = mysqli_fetch_array($consulta))
               {
-                $ciclo= 2;
                 $total_cargos= $total_cargos + $fila['cargo'];
                 echo '<tr class="fuente_menor text-center">
                 <td>'.$fila['concepto'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
                 <td>$'.number_format($fila['cargo'], 2).'</td> 
                 <td>'.$fila['descripcion'].'</td>
-                <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$ciclo.','.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
+                <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
                 </tr>';
               }
               echo '
@@ -262,28 +250,15 @@
               </tr>
             </thead>
             <tbody>';
-              if($total_pago > 0){//$usuario_reservacion
-                $ciclo= 1;
-                $total_abonos= $total_abonos + $total_pago;
-                echo '
-                <tr class="fuente_menor text-center">
-                <td>Pago al reservar</td>
-                <td>'.$fecha.'</td>
-                <td>$'.number_format($total_pago, 2).'</td> 
-                <td>'.$forma_pago.'</td>
-                <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$ciclo.','.$id_reservacion.','.$hab_id.','.$estado.','.$usuario_reservacion.','.$total_abonos.')"> ⚙️</button></td>
-                </tr>';
-              }
               while ($fila = mysqli_fetch_array($consulta))//$fila['usuario']
               {
-                $ciclo= 2;
                 $total_abonos= $total_abonos + $fila['abono'];
                 echo '<tr class="fuente_menor text-center">
                 <td>'.$fila['concepto'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
                 <td>$'.number_format($fila['abono'], 2).'</td> 
                 <td>'.$fila['descripcion'].'</td>
-                <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$ciclo.','.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
+                <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
                 </tr>';
               }
               echo '
@@ -294,12 +269,53 @@
       }
       // Cambiar de habitacion el monto en estado de cuenta
       function cambiar_hab_monto($mov,$id){
-        $sentencia = "UPDATE `cuenta` SET
+        $sentencia = "SELECT * FROM cuenta WHERE id = $id AND estado = 1";
+        //echo $sentencia;
+        $id_usuario= 0;
+        $descripcion= '';
+        $fecha= 0;
+        $forma_pago= 0;
+        $cargo= 0;
+        $abono= 0;
+        $comentario="Obtenemos los datos de la correspondiente cuenta";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_usuario= $fila['id_usuario'];
+          $descripcion= $fila['descripcion'];
+          $fecha= $fila['fecha'];
+          $forma_pago= $fila['forma_pago'];
+          $cargo= $fila['cargo'];
+          $abono= $fila['abono'];
+        }
+ 
+        if($descripcion == 'Total reservacion'){
+          // Para poder cambiar de lugar el cargo o abono de una reservacion se divide en dos
+          $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+          VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
+          $comentario="Guardamos la cuenta en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario); 
+
+          $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+          VALUES ('$id_usuario', '$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
+          $comentario="Guardamos la cuenta en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario); 
+
+          // Despues de dividir la cuenta se inactiva
+          $sentencia = "UPDATE `cuenta` SET
+            `estado` = '0'
+            WHERE `id` = '$id';";
+          //echo $sentencia ;
+          $comentario="Poner estado de una cuenta como inactivo";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }else{
+          $sentencia = "UPDATE `cuenta` SET
             `mov` = '$mov'
             WHERE `id` = '$id';";
-        //echo $sentencia ;
-        $comentario="Cambiar de habitacion el monto en estado de cuenta dentro de la base de datos ";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //echo $sentencia ;
+          $comentario="Cambiar de habitacion el monto en estado de cuenta dentro de la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }
       }
              
   }
