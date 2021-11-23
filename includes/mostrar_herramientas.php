@@ -67,7 +67,7 @@ function show_info($hab_id,$estado){
 
       echo '</div>';
   echo '</div>';
-  echo '</br>'; 
+  //echo '</br>'; 
  
 }
   include_once("clase_usuario.php");

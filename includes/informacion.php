@@ -139,18 +139,7 @@
       }
 
     }
-    function obtener_nombre($id){
-      $sentencia = "SELECT usuario FROM usuario WHERE id = $id;";
-      $comentario="Obtener la persona que realizo la ultima limpieza";
-      $persona=0;
-      $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //se recibe la consulta y se convierte a arreglo
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-           $persona=$fila['usuario'];
-      }
-      return $persona;
-    }
+    
     function persona_limpio($id){
 
       $persona=0;
@@ -267,7 +256,7 @@
                  echo '-';
             }
             $mostrar=$this->conversorSegundosHoras($mostrar);
-             echo $mostrar;
+            echo $mostrar;
           break;
         case 3:
             $mostrar=$cronometro-$actual;
@@ -660,7 +649,7 @@
             echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio clase'.$fila['id'].'">';
               echo '<a  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')"><div class="estado'.$fila['estado'].'">';
 
-                /*
+                
                 if($config->automatizacion==1){
                   echo '<div class="titulo_estados" >';
 
@@ -694,13 +683,13 @@
                   }
 
                 echo '</div>';
-                }*/
+                }
 
                 echo '<div class="titulo_hab">';
                   echo $estado;
                 echo '</div>';
 
-                echo '<div class="numero_hab_1">';
+                /*echo '<div class="numero_hab_1">';
                
                 
                   switch ($fila['estado']) {
@@ -755,7 +744,7 @@
   
                   
                 }
-                echo '</div>';
+                echo '</div>';*/
                 
                 echo '<div class="imagen_hab">';
 
@@ -767,7 +756,7 @@
 
                  
                 echo '</div>';
-                
+      
                 echo '<div class="timepo_hab">';
                         //$this->ver_cronometro($fila['id'],$fila['estado'],0,$usuario->nivel);// anterior de cantidad de segundos
                         $fecha_salida= $this->ver_fecha_salida($fila['id']);
