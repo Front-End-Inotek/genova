@@ -267,12 +267,17 @@
               while ($fila = mysqli_fetch_array($consulta))
               {
                 $descripcion= substr($fila['concepto'], 0, 17);
+                $largo= strlen($fila['concepto']);
                 if($fila['edo'] == 1){
                   $total_cargos= $total_cargos + $fila['cargo'];
                   if($descripcion == 'Total reservacion'){
-                    echo '<tr class="fuente_menor text-center">
-                    <td>Total suplementos</td>
-                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    echo '<tr class="fuente_menor text-center">';
+                    if($largo > 17){
+                      echo '<td>Total suplementos*</td>';
+                    }else{
+                      echo '<td>Total suplementos</td>';
+                    }
+                    echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td> 
                     <td>'.$fila['descripcion'].'</td>
                     <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🔧</button></td>
@@ -331,12 +336,17 @@
               while ($fila = mysqli_fetch_array($consulta))
               {
                 $descripcion= substr($fila['concepto'], 0, 17);
+                $largo= strlen($fila['concepto']);
                 if($fila['edo'] == 1){
                   $total_abonos= $total_abonos + $fila['abono'];
                   if($descripcion == 'Total reservacion'){
-                    echo '<tr class="fuente_menor text-center">
-                    <td>Pago al reservar</td>
-                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    echo '<tr class="fuente_menor text-center">';
+                    if($largo > 17){
+                      echo '<td>Pago al reservar*</td>';
+                    }else{
+                      echo '<td>Pago al reservar</td>';
+                    }
+                    echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td> 
                     <td>'.$fila['descripcion'].'</td>
                     <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> ⚙️</button></td>
@@ -431,15 +441,18 @@
         {
           $id= $fila['id'];
           $descripcion= $fila['descripcion'].'*';// Total reservacion
-
-          $sentencia = "UPDATE `cuenta` SET
+          $this->cambiar_cuentas($id,$mov_hab,$descripcion);
+        }
+      }
+      // Editar una cuenta proveniente de una reservacion
+      function cambiar_cuentas($id,$mov_hab,$descripcion){
+        $sentencia = "UPDATE `cuenta` SET
             `mov` = '$mov_hab',
             `descripcion` = '$descripcion'
             WHERE `id` = '$id';";
           //echo $sentencia ;
           $comentario="Cambiar de habitacion el monto en estado de cuenta dentro de la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
-        }
       }
              
   }
