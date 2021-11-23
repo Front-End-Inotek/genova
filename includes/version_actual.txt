@@ -39,5 +39,6 @@ VERSION 1.4
 -Cambiar de habitacion un cargo o abono de estado de cuenta
 -Al agregar una reservacion generar una cuenta con su total suplementos como cargo y su total pago como abono
 -Poner en gris la cuenta eliminada, cambiar botones y funciones incesarias
+-Boton para unificar las cuentas al seleccionar una habitacion en especifico
 
 

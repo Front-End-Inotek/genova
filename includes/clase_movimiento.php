@@ -1417,7 +1417,7 @@
       }
     ///
     // Agregar una reservacion en la habitacion
-    function disponible_asignar($mov,$hab,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total){
+    function disponible_asignar($mov,$hab,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total,$total_pago){
       $fecha_entrada=strtotime($fecha_entrada);
       $fecha_salida=strtotime($fecha_salida);
       //$inicio=time();
@@ -1434,8 +1434,8 @@
         $horaactual= $horaactual+($noches*86400);
       }
       //echo $fin;
-      $sentencia="INSERT INTO `movimiento` (`habitacion`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_manda`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `motivo`)
-      VALUES ('$hab', '$id_huesped', '$hab', '$fecha_entrada', '$fecha_salida', '$fecha_entrada', '$usuario_id', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '$total', 'reservar');";
+      $sentencia="INSERT INTO `movimiento` (`habitacion`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_manda`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `motivo`)
+      VALUES ('$hab', '$id_huesped', '$hab', '$fecha_entrada', '$fecha_salida', '$fecha_entrada', '$usuario_id', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '$total', '$total_pago', 'reservar');";
       $comentario="Agregar una reservacion en la habitacion";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$MYSql_id=$this->id_mysql();

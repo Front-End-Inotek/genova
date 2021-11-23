@@ -1976,6 +1976,7 @@ function borrar_herramientas_abono(id,hab_id,estado){
 function cambiar_hab_herramientas_monto(monto,id,hab_id,estado,cargo){
     $("#mostrar_herramientas").load("includes/modal_cambiar_hab_herramientas_monto.php?monto="+monto+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
 }
+
 // Funcion para cambiar de habitacion el monto en estado de cuenta
 function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
@@ -2004,4 +2005,9 @@ function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
           error:problemas_sistema
 		});
 	return false;
+}
+
+// Modal para unificar cuentas en una habitacion seleccionada 
+function unificar_cuentas(hab_id,estado){
+    $("#mostrar_herramientas").load("includes/modal_unificar_cuentas.php?hab_id="+hab_id+"&estado="+estado);
 }

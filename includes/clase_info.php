@@ -88,17 +88,18 @@
       $total=0;
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $detalle_inicio=$fila['detalle_inicio'];
-        $detalle_fin=$fila['detalle_fin'];
-        $id_huesped=$fila['id_huesped'];
-        $total=$fila['total'];
+        $detalle_inicio= $fila['detalle_inicio'];
+        //$detalle_fin=$fila['detalle_fin'];
+        $fin_hospedaje= $fila['fin_hospedaje'];
+        $id_huesped= $fila['id_huesped'];
+        $total= $fila['total'];
       }
         $huesped = NEW Huesped($id_huesped);
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Fecha entrada: '.date("Y-m-d H:i:s",  $detalle_inicio);
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Fecha salida: '.date("Y-m-d H:i:s",  $detalle_fin);
+          echo 'Fecha salida: '.date("Y-m-d H:i:s",  $fin_hospedaje);
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Huésped: '.$huesped->nombre;
