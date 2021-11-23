@@ -26,7 +26,7 @@ VERSION 1.3
 -Comenzar hacer los racks en area de trabajo
 -Estado 0 y 1 de habitaciones
 
-VERSION 1.4
+VERSION 1.35
 -Agregar total de pago a una reservacion
 -Reporte de cargo por noche
 -Agregar tabla sql y funciones de forma de pago
@@ -41,4 +41,7 @@ VERSION 1.4
 -Poner en gris la cuenta eliminada, cambiar botones y funciones incesarias
 -Boton para unificar las cuentas al seleccionar una habitacion en especifico
 
+VERSION 1.4
+-Generar rama restaurante
+-Acomodo de javascript
 
