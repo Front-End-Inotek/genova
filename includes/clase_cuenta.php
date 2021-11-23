@@ -131,6 +131,7 @@
       }
       // Borrar una cuenta
       function borrar_cuenta($id,$descripcion,$monto){
+        $descripcion= substr($descripcion, 0, 17);
         if($descripcion == 'Total reservacion'){
           $sentencia = "SELECT * FROM cuenta WHERE id = $id AND estado = 1";
           //echo $sentencia;
@@ -265,9 +266,10 @@
             <tbody>';
               while ($fila = mysqli_fetch_array($consulta))
               {
+                $descripcion= substr($fila['concepto'], 0, 17);
                 if($fila['edo'] == 1){
                   $total_cargos= $total_cargos + $fila['cargo'];
-                  if($fila['concepto'] == 'Total reservacion'){
+                  if($descripcion == 'Total reservacion'){
                     echo '<tr class="fuente_menor text-center">
                     <td>Total suplementos</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -285,7 +287,7 @@
                     </tr>';
                   }
                 }else{
-                  if($fila['concepto'] != 'Total reservacion'){
+                  if($descripcion != 'Total reservacion'){
                     echo '<tr class="fuente_menor table-secondary text-center">
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -328,9 +330,10 @@
             <tbody>';
               while ($fila = mysqli_fetch_array($consulta))
               {
+                $descripcion= substr($fila['concepto'], 0, 17);
                 if($fila['edo'] == 1){
                   $total_abonos= $total_abonos + $fila['abono'];
-                  if($fila['concepto'] == 'Total reservacion'){
+                  if($descripcion == 'Total reservacion'){
                     echo '<tr class="fuente_menor text-center">
                     <td>Pago al reservar</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -348,7 +351,7 @@
                     </tr>';
                   }
                 }else{
-                  if($fila['concepto'] != 'Total reservacion'){
+                  if($descripcion != 'Total reservacion'){
                     echo '<tr class="fuente_menor table-secondary text-center">
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -387,6 +390,7 @@
           $abono= $fila['abono'];
         }
  
+        $descripcion= substr($descripcion, 0, 17);
         if($descripcion == 'Total reservacion'){
           // Para poder cambiar de lugar el cargo o abono de una reservacion se divide en dos
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
@@ -426,7 +430,7 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           $id= $fila['id'];
-          //$descripcion= $fila['descripcion'].'*';
+          $descripcion= $fila['descripcion'].'*';// Total reservacion
 
           $sentencia = "UPDATE `cuenta` SET
             `mov` = '$mov_hab',
