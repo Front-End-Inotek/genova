@@ -137,7 +137,7 @@ function closeNav(){
     document.getElementById("main").style.marginLeft = "0";
 }
 
-//Habitaciones
+//* Tipo hab *//
 
 // Agregar un tipo de habitacion
 function agregar_tipos(){
@@ -266,6 +266,8 @@ function regresar_editar_tipo(){
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
 }
+
+//* Tarifa hospedaje *//
 
 // Agregar una tarifa hospedaje
 function agregar_tarifas(){
@@ -415,6 +417,8 @@ function regresar_editar_tarifa(){
     $("#area_trabajo_menu").load("includes/ver_tarifas.php?usuario_id="+usuario_id);
 }
 
+//* Habitacion *//
+
 // Agregar una habitacion
 function agregar_hab(){
 	$('#area_trabajo').hide();
@@ -546,6 +550,8 @@ function regresar_editar_hab(){
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_hab.php?usuario_id="+usuario_id);
 }
+
+//* Reservacion *//
 
 // Agregar una reservacion
 function agregar_reservaciones(){
@@ -780,7 +786,7 @@ function ver_reservaciones_paginacion(buton,posicion){
     $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
-// Barra de diferentes busquedas en ver reservaciones*
+// Barra de diferentes busquedas en ver reservaciones
 function buscar_reservacion(){
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var usuario_id=localStorage.getItem("id");
@@ -972,6 +978,8 @@ function regresar_editar_reservacion(){
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
 }
+
+//* Huesped *//
 
 // Agregar un huesped
 function agregar_huespedes(){
@@ -1206,18 +1214,7 @@ function disponible_asignar(hab_id,estado){
 	$('#caja_herramientas').modal('hide');
 }
 
-//*//
-// Muestra la paginacion de los hab de habitaciones
-function ver_hab_paginacion(buton,posicion){
-    var usuario_id=localStorage.getItem("id");
-    $("#paginacion_hab").load("includes/ver_tarifas_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
-}
-
-// Generar reporte de un tarifa hospedaje
-function reporte_herramienta(){
-	var id=localStorage.getItem("id");
-    window.open("includes/reporte_herramienta.php?id="+id);
-}
+//* Reporte *//
 
 // Generar reporte de cargo por noche
 function reporte_cargo_noche(id){
@@ -1226,7 +1223,7 @@ function reporte_cargo_noche(id){
 	closeNav();
 }
 
-// * //
+//* Forma pago *//
 
 // Agregar una forma de pago
 function agregar_formas_pago(){
@@ -1351,6 +1348,8 @@ function regresar_editar_forma_pago(){
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_formas_pago.php?usuario_id="+usuario_id);
 }
+
+//* Usuario *//
 
 // Agregar un usuario
 function agregar_usuarios(id){
@@ -1744,7 +1743,7 @@ function regresar_editar_usuario(){
     $("#area_trabajo_menu").load("includes/ver_usuarios.php?id="+id);
 }
 
-//* Edo. Cuenta
+//* Edo. Cuenta *//
 
 // Muestra el estado de cuenta de una habitacion
 function estado_cuenta(hab_id,estado){
@@ -1754,7 +1753,7 @@ function estado_cuenta(hab_id,estado){
 	$('#caja_herramientas').modal('hide');
 }
 
-// Agregar un abono al cargo por habitacion //-- Abonar
+// Agregar un abono al cargo por habitacion //
 function agregar_abono(hab_id,estado,faltante){
 	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante);
 }
@@ -1889,7 +1888,6 @@ function borrar_herramientas_cargo(id,hab_id,estado){
     }    
 }
 
-//--Borrar
 // Modal de herramientas de abonos en estado de cuenta
 function herramientas_abonos(id,hab_id,estado,usuario,abono){
     $("#mostrar_herramientas").load("includes/modal_herramientas_abonos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&abono="+abono);
@@ -1971,7 +1969,8 @@ function borrar_herramientas_abono(id,hab_id,estado){
     }    
 }
 
-//--Cambiar hab
+//* Edo. Cuenta - Cambiar hab *// 
+
 // Modal de cambiar de habitacion el monto en estado de cuenta
 function cambiar_hab_herramientas_monto(monto,id,hab_id,estado,cargo){
     $("#mostrar_herramientas").load("includes/modal_cambiar_hab_herramientas_monto.php?monto="+monto+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
