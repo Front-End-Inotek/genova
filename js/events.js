@@ -1789,7 +1789,7 @@ function guardar_abono(hab_id,estado,faltante){
               url:"includes/guardar_abono.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_abono,
+              success:recibe_datos_monto,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -1800,8 +1800,8 @@ function guardar_abono(hab_id,estado,faltante){
     }    
 }
 
-// Recibe los datos para efectuar agregar un abono
-function recibe_datos_abono(datos){
+// Recibe los datos para efectuar agregar un monto
+function recibe_datos_monto(datos){
     //alert(datos);
     var res = datos.split("/");
     $('#caja_herramientas').modal('hide');
@@ -1842,7 +1842,7 @@ function modificar_herramientas_cargo(id,hab_id,estado){
               url:"includes/aplicar_editar_herramientas_cargo.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_abono,
+              success:recibe_datos_monto,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -1878,7 +1878,7 @@ function borrar_herramientas_cargo(id,hab_id,estado){
               url:"includes/borrar_herramientas_cargo.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_abono,
+              success:recibe_datos_monto,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -1924,7 +1924,7 @@ function modificar_herramientas_abono(id,hab_id,estado){
               url:"includes/aplicar_editar_herramientas_abono.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_abono,
+              success:recibe_datos_monto,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -1960,7 +1960,7 @@ function borrar_herramientas_abono(id,hab_id,estado){
               url:"includes/borrar_herramientas_abono.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_abono,
+              success:recibe_datos_monto,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -1999,7 +1999,7 @@ function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 		  url:"includes/cambiar_hab_monto.php",
 		  data:datos,
 		  beforeSend:loaderbar,
-		  success:recibe_datos_abono,
+		  success:recibe_datos_monto,
 		  //success:problemas_sistema,
           timeout:5000,
           error:problemas_sistema
@@ -2008,6 +2008,37 @@ function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 }
 
 // Modal para unificar cuentas en una habitacion seleccionada 
-function unificar_cuentas(hab_id,estado){
-    $("#mostrar_herramientas").load("includes/modal_unificar_cuentas.php?hab_id="+hab_id+"&estado="+estado);
+function unificar_cuentas(hab_id,estado,mov){
+    $("#mostrar_herramientas").load("includes/modal_unificar_cuentas.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
+}
+
+// Funcion para cambiar de habitacion las cuentas en estado de cuenta a otra habitacion
+function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
+	var usuario_id=localStorage.getItem("id");
+    var nombre_hab= encodeURI(nombre_hab);
+    $('#caja_herramientas').modal('hide');
+
+	var datos = {
+          "id_hab": id_hab,
+          "nombre_hab": nombre_hab,
+          "mov_hab": mov_hab,
+          "hab_id": hab_id,
+          "estado": estado,
+          "mov": mov,
+		  "usuario_id": usuario_id,
+		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded", 
+		  url:"includes/cambiar_hab_cuentas.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:recibe_datos_monto,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
+		});
+	return false;
 }

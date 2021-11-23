@@ -415,6 +415,28 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }
       }
+      // Cambiar de habitacion el monto en estado de cuenta
+      function cambiar_hab_cuentas($mov_hab,$mov){
+        $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND estado = 1 ORDER BY fecha";
+        //echo $sentencia;
+        $id= 0;
+        $descripcion= '';
+        $comentario="Obtenemos los datos de la correspondiente cuenta";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+          //$descripcion= $fila['descripcion'].'*';
+
+          $sentencia = "UPDATE `cuenta` SET
+            `mov` = '$mov_hab',
+            `descripcion` = '$descripcion'
+            WHERE `id` = '$id';";
+          //echo $sentencia ;
+          $comentario="Cambiar de habitacion el monto en estado de cuenta dentro de la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }
+      }
              
   }
 ?>

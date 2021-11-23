@@ -150,10 +150,23 @@
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       } 
+      // Mostramos el nombre de la habitacion
+      function mostrar_nombre_hab($id){ 
+        $sentencia = "SELECT nombre FROM hab WHERE id = $id LIMIT 1";
+        //echo $sentencia;
+        $nombre = 0;
+        $comentario="Obtengo el nombre de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $nombre= $fila['nombre'];
+        }
+        return $nombre;
+      } 
       // Nos permite seleccionar una habitacion ocupada 
       function cambiar_hab_ocupada($monto,$id,$hab_id,$estado){
         $sentencia = "SELECT * FROM hab WHERE id != $hab_id AND estado = 1";
-        $comentario="Asignación de habitaciones";
+        $comentario="Nos permite seleccionar una habitacion ocupada";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
@@ -172,6 +185,29 @@
           echo '</div>';
         }
       }   
+      // Nos permite seleccionar una habitacion ocupada para cambiar las cuentas
+      function cambiar_cuentas_hab_ocupada($hab_id,$estado,$mov){
+        $sentencia = "SELECT * FROM hab WHERE id != $hab_id AND estado = 1";
+        $comentario="Nos permite seleccionar una habitacion ocupada para cambiar las cuentas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+                echo '<div class="hab_cambiar" onclick="cambiar_hab_cuentas('.$fila['id'].','.$fila['nombre'].','.$fila['mov'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '</br>';
+              echo '<div>';
+                  //echo '<img src="images/home.png"  class="center-block img-responsive">';
+              echo '</div>';
+              echo '<div>';
+                  echo $fila['nombre'];
+              echo '</div>';
+              echo '</br>';
+            echo '</div>';
+          echo '</div>';
+        }
+      }
+      
              
   }
 ?>
