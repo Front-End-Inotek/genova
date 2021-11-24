@@ -533,8 +533,7 @@
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
       $comentario="obtener de la habitacion  por cobrar ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-
     }
-  }
 
+  }
 ?>
