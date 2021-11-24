@@ -1474,6 +1474,14 @@ function modificar_usuario(id){
     var forma_pago_agregar= document.getElementById("forma_pago_agregar").checked;
     var forma_pago_editar= document.getElementById("forma_pago_editar").checked;
     var forma_pago_borrar= document.getElementById("forma_pago_borrar").checked;
+    var inventario_ver= document.getElementById("inventario_ver").checked;
+    var inventario_agregar= document.getElementById("inventario_agregar").checked;
+    var inventario_editar= document.getElementById("inventario_editar").checked;
+    var inventario_borrar= document.getElementById("inventario_borrar").checked;
+    var restaurante_ver= document.getElementById("restaurante_ver").checked;
+    var restaurante_agregar= document.getElementById("restaurante_agregar").checked;
+    var restaurante_editar= document.getElementById("restaurante_editar").checked;
+    var restaurante_borrar= document.getElementById("restaurante_borrar").checked;
     // Convertir usuario permisos
     if(usuario_ver){
         usuario_ver=1;
@@ -1635,6 +1643,50 @@ function modificar_usuario(id){
     }else{
         forma_pago_borrar = 0;
     }
+
+    // Convertir hab permisos
+    if(inventario_ver){
+        inventario_ver = 1;
+    }else{
+        inventario_ver = 0;
+    }
+    if(inventario_agregar){
+        inventario_agregar = 1;
+    }else{
+        inventario_agregar = 0;
+    }
+    if(inventario_editar ){
+        inventario_editar = 1;
+    }else{
+        inventario_editar = 0;
+    }
+    if(inventario_borrar){
+        inventario_borrar = 1;
+    }else{
+        inventario_borrar = 0;
+    }
+
+    // Convertir hab permisos
+    if(restaurante_ver){
+        restaurante_ver = 1;
+    }else{
+        restaurante_ver = 0;
+    }
+    if(restaurante_agregar){
+        restaurante_agregar = 1;
+    }else{
+        restaurante_agregar = 0;
+    }
+    if(restaurante_editar ){
+        restaurante_editar = 1;
+    }else{
+        restaurante_editar = 0;
+    }
+    if(restaurante_borrar){
+        restaurante_borrar = 1;
+    }else{
+        restaurante_borrar = 0;
+    }
     
 
 	if(usuario.length >0 && nivel.length >0){
@@ -1681,6 +1733,14 @@ function modificar_usuario(id){
                   "forma_pago_agregar": forma_pago_agregar,
                   "forma_pago_editar": forma_pago_editar,
                   "forma_pago_borrar": forma_pago_borrar,
+                  "inventario_ver": inventario_ver,
+                  "inventario_agregar": inventario_agregar,
+                  "inventario_editar": inventario_editar,
+                  "inventario_borrar": inventario_borrar,
+                  "restaurante_ver": restaurante_ver,
+                  "restaurante_agregar": restaurante_agregar,
+                  "restaurante_editar": restaurante_editar,
+                  "restaurante_borrar": restaurante_borrar,
                   "usuario_id": usuario_id,
 			};
 		$.ajax({
@@ -2040,4 +2100,15 @@ function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
           error:problemas_sistema
 		});
 	return false;
+}
+
+//* Categoria *// 
+
+// Muestra las categorias de la bd
+function ver_categorias(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_categorias.php?usuario_id="+usuario_id);
+	closeNav();
 }

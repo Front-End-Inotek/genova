@@ -44,4 +44,5 @@ VERSION 1.35
 VERSION 1.4
 -Generar rama restaurante
 -Acomodo de javascript
+-Agregar permisos y tablas de categorias e inventario
 
