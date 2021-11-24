@@ -2198,18 +2198,18 @@ function aceptar_borrar_categoria(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_categoria.php?id="+id);
 }
 
-//* Huesped *//
+//* Inventario *//
 
-// Agregar un huesped
-function agregar_huespedes(){
+// Agregar en el inventario
+function agregar_inventario(){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_huespedes.php"); 
+	$("#area_trabajo_menu").load("includes/agregar_inventario.php"); 
 	closeNav();
 }
 
-// Guardar un huesped
-function guardar_huesped(){
+// Guardar en el inventario
+function guardar_inventario(){
     var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var apellido= encodeURI(document.getElementById("apellido").value);
@@ -2232,8 +2232,8 @@ function guardar_huesped(){
 	
 
 	if(nombre.length >0 && apellido.length >0 && direccion.length >0 && ciudad.length >0 && estado.length >0 && codigo_postal.length >0 && telefono.length >0 && correo.length >0 && preferencias.length >0 && comentarios.length >0){
-			//$('#boton_huesped').hide();
-			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
+			//$('#boton_inventario').hide();
+			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 			 	  "nombre": nombre,
 				  "apellido": apellido,
@@ -2260,10 +2260,10 @@ function guardar_huesped(){
 				  type: "POST",
 				  dataType: "html",
 				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_huesped.php",
+				  url:"includes/guardar_inventario.php",
 				  data:datos,
 				  beforeSend:loaderbar,
-				  success:ver_huespedes,
+				  success:ver_inventario,
 				  timeout:5000,
 				  error:problemas_sistema
 				});
@@ -2273,23 +2273,23 @@ function guardar_huesped(){
 			}
 }
 
-// Muestra los huespedes de la bd
-function ver_huespedes(){
+// Muestra los datos del inventario de la bd
+function ver_inventario(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_huespedes.php?usuario_id="+usuario_id);
+	$("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
 	closeNav();
 }
 
-// Muestra la paginacion de los huespedes
-function ver_huespedes_paginacion(buton,posicion){
+// Muestra la paginacion del inventario
+function ver_inventario_paginacion(buton,posicion){
     var usuario_id=localStorage.getItem("id");
-    $("#paginacion_huespedes").load("includes/ver_huespedes_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+    $("#paginacion_inventario").load("includes/ver_inventario_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
-// Barra de diferentes busquedas en ver huespedes
-function buscar_huesped(){
+// Barra de diferentes busquedas en ver inventario
+function buscar_inventario(){
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var usuario_id=localStorage.getItem("id");
     if(a_buscar.length >0){
@@ -2297,16 +2297,16 @@ function buscar_huesped(){
     }else{
         $('.pagination').show();
     }
-	$("#tabla_huesped").load("includes/buscar_huesped.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+	$("#tabla_inventario").load("includes/buscar_inventario.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
 
-// Editar un huesped
-function editar_huesped(id){
-    $("#area_trabajo_menu").load("includes/editar_huesped.php?id="+id);
+// Editar el inventario
+function editar_inventario(id){
+    $("#area_trabajo_menu").load("includes/editar_inventario.php?id="+id);
 }
 
-// Editar un huesped
-function modificar_huesped(id){
+// Editar el inventario
+function modificar_inventario(id){
 	var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
     var apellido= encodeURI(document.getElementById("apellido").value);
@@ -2329,8 +2329,8 @@ function modificar_huesped(id){
 
 
 	if(id >0){
-        //$('#boton_huesped').hide();
-			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
+        //$('#boton_inventario').hide();
+			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
         var datos = {
 			  "id": id,
               "nombre": nombre,
@@ -2358,10 +2358,10 @@ function modificar_huesped(id){
               type: "POST",
               dataType: "html",
               contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_huesped.php",
+              url:"includes/aplicar_editar_inventario.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:ver_huespedes,
+              success:ver_inventario,
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -2372,8 +2372,8 @@ function modificar_huesped(id){
     }    
 }
 
-// Borrar un huesped
-function borrar_huesped(id){
+// Borrar un inventario
+function borrar_inventario(id){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     if (id >0) {
@@ -2386,10 +2386,10 @@ function borrar_huesped(id){
                 type: "POST",
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_huesped.php",
+                url:"includes/borrar_inventario.php",
                 data:datos,
                 beforeSend:loaderbar,
-                success:ver_huespedes,
+                success:ver_inventario,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -2397,15 +2397,15 @@ function borrar_huesped(id){
     }
 }
 
-// Modal de borrar un huesped
-function aceptar_borrar_huesped(id){
-	$("#mostrar_herramientas").load("includes/borrar_modal_huesped.php?id="+id);
+// Modal de borrar inventario
+function aceptar_borrar_inventario(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_inventario.php?id="+id);
 }
 
-// Regresar a la pagina anterior de editar un huesped
-function regresar_editar_huesped(){
+// Regresar a la pagina anterior de editar inventario
+function regresar_editar_inventario(){
     var usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/ver_huespedes.php?usuario_id="+usuario_id);
+    $("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
 }
