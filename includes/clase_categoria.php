@@ -2,15 +2,11 @@
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
 
-  class Hab extends ConexionMYSql{
+  class Categoria extends ConexionMYSql{
 
       public $id;
       public $nombre;
-      public $tipo;
-      public $mov;
-      public $comentario;
       public $estado;
-      public $estado_hab;
       
       // Constructor
       function __construct($id)
@@ -18,35 +14,27 @@
         if($id==0){
           $this->id= 0;
           $this->nombre= 0;
-          $this->tipo= 0;
-          $this->mov= 0;
-          $this->comentario= 0;
           $this->estado= 0;
-          $this->estado_hab= 0;
         }else{
-          $sentencia = "SELECT * FROM hab WHERE id = $id LIMIT 1 ";
+          $sentencia = "SELECT * FROM categoria WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores de habitacion";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           while ($fila = mysqli_fetch_array($consulta))
           {
               $this->id= $fila['id'];
               $this->nombre= $fila['nombre'];
-              $this->tipo= $fila['tipo'];
-              $this->mov= $fila['mov'];
-              $this->comentario= $fila['comentario'];
               $this->estado= $fila['estado'];
-              $this->estado_hab= $fila['estado_hab'];
           }
         }
       }
-      // Guardar la habitacion
-      function guardar_hab($nombre,$tipo,$comentario){
-        $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`, `estado_hab`)
-        VALUES ('$nombre', '$tipo', '0', '0', '$comentario', '1', '1');";
-        $comentario="Guardamos la habitacion en la base de datos";
+      // Guardar la categoria
+      function guardar_hab($nombre){
+        $sentencia = "INSERT INTO `categoria` (`nombre`, `estado`)
+        VALUES ('$nombre', '1');";
+        $comentario="Guardamos la categoria en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
-      // Mostramos las habitaciones
+      // Mostramos las categorias
       function mostrar($id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
@@ -94,23 +82,21 @@
         </table>
         </div>';
       }
-      // Editar una habitacion
-      function editar_hab($id,$nombre,$tipo,$comentario){
-        $sentencia = "UPDATE `hab` SET
-            `nombre` = '$nombre',
-            `tipo` = '$tipo',
-            `comentario` = '$comentario'
+      // Editar una categoria
+      function editar_categoria($id,$nombre){
+        $sentencia = "UPDATE `categoria` SET
+            `nombre` = '$nombre'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar una habitacion dentro de la base de datos ";
+        $comentario="Editar una categoria dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar una habitacion
+      // Borrar una categoria
       function borrar_hab($id){
-        $sentencia = "UPDATE `hab` SET
-        `estado_hab` = '0'
+        $sentencia = "UPDATE `categoria` SET
+        `estado` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de una habitacion como inactivo";
+        $comentario="Poner estado de una categoria como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtengo los nombres de las habitaciones
