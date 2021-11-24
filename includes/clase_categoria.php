@@ -28,7 +28,7 @@
         }
       }
       // Guardar la categoria
-      function guardar_hab($nombre){
+      function guardar_categoria($nombre){
         $sentencia = "INSERT INTO `categoria` (`nombre`, `estado`)
         VALUES ('$nombre', '1');";
         $comentario="Guardamos la categoria en la base de datos";
@@ -38,22 +38,19 @@
       function mostrar($id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
-        $editar = $usuario->tarifa_editar;
-        $borrar = $usuario->tarifa_borrar;
+        $agregar = $usuario->categoria_editar;
+        $editar = $usuario->categoria_editar;
+        $borrar = $usuario->categoria_borrar;
 
-        $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
-        FROM hab 
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 1 ORDER BY hab.nombre";
-        $comentario="Mostrar las habitaciones";
+        $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
+        $comentario="Mostrar las categorias para el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_tipo">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Nombre</th>
-            <th>Tipo de habitacion</th>
-            <th>Comentario</th>';
+            <th>Nombre</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
@@ -63,20 +60,25 @@
             echo '</tr>
           </thead>
         <tbody>';
+            echo '<tr <tr class="text-center">
+              <td><input type="text" class ="color_black" id="nombre" placeholder="Ingresa el nombre" pattern="[a-z]{1,15}" ></td>';
+              if($agregar==1){
+                echo '<td><button class="btn btn-success" onclick="guardar_categoria()"> Guardar</button></td>';
+              }
+              echo '<td></td>       
+            </tr>';
             while ($fila = mysqli_fetch_array($consulta))
             {
                 echo '<tr class="text-center">
-                <td>'.$fila['nom'].'</td>
-                <td>'.$fila['habitacion'].'</td>
-                <td>'.$fila['comentario'].'</td>';
+                <td>'.$fila['nombre'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_hab('.$fila['ID'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_hab('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_hab('.$fila['ID'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_hab('.$fila['id'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
-            }
+            }  
             echo '
           </tbody>
         </table>
@@ -92,7 +94,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Borrar una categoria
-      function borrar_hab($id){
+      function borrar_categoria($id){
         $sentencia = "UPDATE `categoria` SET
         `estado` = '0'
         WHERE `id` = '$id';";

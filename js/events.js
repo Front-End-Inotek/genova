@@ -2104,6 +2104,36 @@ function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
 
 //* Categoria *// 
 
+// Guardar un categoria del inventario
+function guardar_categoria(){
+	var usuario_id=localStorage.getItem("id");
+    var nombre= encodeURI(document.getElementById("nombre").value);
+    $('#caja_herramientas').modal('hide');
+	
+    if(nombre.length >0){
+		var datos = {
+			"nombre": nombre,
+            "usuario_id": usuario_id,
+		};
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_categoria.php",
+            data:datos,
+            //beforeSend:loaderbar,
+            success:ver_categorias,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+            });
+        return false;
+	}else{
+		alert("Sin informacion a guardar");
+	}
+}
+
 // Muestra las categorias de la bd
 function ver_categorias(){
     var usuario_id=localStorage.getItem("id");
@@ -2111,4 +2141,72 @@ function ver_categorias(){
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_categorias.php?usuario_id="+usuario_id);
 	closeNav();
+}
+
+// Editar una categoria
+function editar_categoria(id){
+    $("#area_trabajo_menu").load("includes/editar_categoria.php?id="+id);
+}
+
+// Editar una categoria
+function modificar_categoria(id){
+	var usuario_id=localStorage.getItem("id");
+    var nombre= encodeURI(document.getElementById("nombre").value);
+
+
+    if(id >0 && nombre.length >0){
+        //$('#boton_categoria').hide();
+			$("#boton_categoria").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+              "id": id,
+              "nombre": nombre,
+              "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/aplicar_editar_categoria.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:ver_categorias,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }    
+}
+
+// Borrar una categoria
+function borrar_categoria(id){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+    if (id >0) {
+        var datos = {
+                "id": id,
+                "usuario_id": usuario_id,
+            };
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/borrar_categoria.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:ver_categorias,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }
+}
+
+// Modal de borrar una categoria
+function aceptar_borrar_categoria(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_categoria.php?id="+id);
 }
