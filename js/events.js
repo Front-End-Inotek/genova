@@ -2145,14 +2145,14 @@ function ver_categorias(){
 
 // Editar una categoria
 function editar_categoria(id){
-    $("#area_trabajo_menu").load("includes/editar_categoria.php?id="+id);
+    $("#mostrar_herramientas").load("includes/editar_categoria.php?id="+id);
 }
 
 // Editar una categoria
 function modificar_categoria(id){
 	var usuario_id=localStorage.getItem("id");
-    var nombre= encodeURI(document.getElementById("nombre").value);
-
+    var nombre = encodeURI(document.getElementById("nombre_categoria").value);
+    $('#caja_herramientas').modal('hide');
 
     if(id >0 && nombre.length >0){
         //$('#boton_categoria').hide();

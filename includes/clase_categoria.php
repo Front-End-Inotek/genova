@@ -61,7 +61,7 @@
           </thead>
         <tbody>';
             echo '<tr <tr class="text-center">
-              <td><input type="text" class ="color_black" id="nombre" placeholder="Ingresa el nombre" pattern="[a-z]{1,15}" ></td>';
+              <td><input type="text" class ="color_black" id="nombre" placeholder="Ingresa el nombre" pattern="[a-z]{1,15}" maxlength="50"></td>';
               if($agregar==1){
                 echo '<td><button class="btn btn-success" onclick="guardar_categoria()"> Guardar</button></td>';
               }
@@ -72,10 +72,10 @@
                 echo '<tr class="text-center">
                 <td>'.$fila['nombre'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_hab('.$fila['id'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_categoria('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_hab('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_categoria('.$fila['id'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
             }  
