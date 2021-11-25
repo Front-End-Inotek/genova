@@ -25,8 +25,7 @@
           <div class="col-sm-2">Categoria:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <select class="form-control" id="categoria" class="form-control">
-              <option value="0">Selecciona</option>';
+            <select class="form-control" id="categoria" class="form-control">';
               $categoria->mostrar_categoria_editar($inventario->categoria);
               echo '
             </select>

@@ -17,8 +17,7 @@
           <div class="col-sm-3">Tipo de habitacion:</div>
           <div class="col-sm-9">
           <div class="form-group">
-            <select class="form-control" id="tipo" class="form-control">
-              <option value="0">Selecciona</option>';
+            <select class="form-control" id="tipo" class="form-control">';
               $hab->mostrar_hab_editar($hab->tipo);
               echo '
             </select>
