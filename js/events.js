@@ -2293,23 +2293,15 @@ function editar_inventario(id){
 function modificar_inventario(id){
 	var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
-    var apellido= encodeURI(document.getElementById("apellido").value);
-    var direccion= encodeURI(document.getElementById("direccion").value);
-    var ciudad= encodeURI(document.getElementById("ciudad").value);
-    var estado= encodeURI(document.getElementById("estado").value);
-    var codigo_postal= encodeURI(document.getElementById("codigo_postal").value);
-    var telefono= encodeURI(document.getElementById("telefono").value);
-    var correo= encodeURI(document.getElementById("correo").value);
-    var contrato= encodeURI(document.getElementById("contrato").value);
-	var cupon= encodeURI(document.getElementById("cupon").value);
-	var preferencias= encodeURI(document.getElementById("preferencias").value);
-	var comentarios= encodeURI(document.getElementById("comentarios").value);
-	var titular_tarjeta= encodeURI(document.getElementById("titular_tarjeta").value);
-	var tipo_tarjeta= encodeURI(document.getElementById("tipo_tarjeta").value);
-	var numero_tarjeta= encodeURI(document.getElementById("numero_tarjeta").value);
-	var vencimiento_mes= encodeURI(document.getElementById("vencimiento_mes").value);
-	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
-	var cvv= encodeURI(document.getElementById("cvv").value);
+	var descripcion= encodeURI(document.getElementById("descripcion").value);
+	var categoria= document.getElementById("categoria").value;
+    var precio= document.getElementById("precio").value;
+    var precio_compra= document.getElementById("precio_compra").value;
+    var stock= document.getElementById("stock").value;
+    var inventario= document.getElementById("inventario").value;
+    var bodega_inventario= document.getElementById("bodega_inventario").value;
+    var bodega_stock= document.getElementById("bodega_stock").value;
+    var clave= document.getElementById("clave").value;
 
 
 	if(id >0){
@@ -2318,23 +2310,15 @@ function modificar_inventario(id){
         var datos = {
 			  "id": id,
               "nombre": nombre,
-              "apellido": apellido,
-              "direccion": direccion,
-              "ciudad": ciudad,
-              "estado": estado,
-              "codigo_postal": codigo_postal,
-              "telefono": telefono,
-              "correo": correo,
-              "contrato": contrato,
-			  "cupon": cupon,
-			  "preferencias": preferencias,
-			  "comentarios": comentarios,
-			  "titular_tarjeta": titular_tarjeta,
-			  "tipo_tarjeta": tipo_tarjeta,
-			  "numero_tarjeta": numero_tarjeta,
-			  "vencimiento_mes": vencimiento_mes,
-			  "vencimiento_ano": vencimiento_ano,
-			  "cvv": cvv,
+			  "descripcion": descripcion,
+			  "categoria": categoria,
+              "precio": precio,
+              "precio_compra": precio_compra,
+              "stock": stock,
+              "inventario": inventario,
+              "bodega_inventario": bodega_inventario,
+              "bodega_stock": bodega_stock,
+              "clave": clave,
 			  "usuario_id": usuario_id,
             };
         $.ajax({

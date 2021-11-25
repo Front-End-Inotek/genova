@@ -225,7 +225,7 @@
         </div>';
       }
       // Editar el inventario
-      function editar_inventario($id,$nombre,$descripcion,$categoria,$precio,$precio_compra,$inventario,$stock,$bodega_inventario,$bodega_stock,$clave,$historial){
+      function editar_inventario($id,$nombre,$descripcion,$categoria,$precio,$precio_compra,$inventario,$stock,$bodega_inventario,$bodega_stock,$clave){
         $sentencia = "UPDATE `inventario` SET
             `nombre` = '$nombre',
             `descripcion` = '$descripcion',
@@ -236,8 +236,7 @@
             `stock` = '$stock',
             `bodega_inventario` = '$bodega_inventario',
             `bodega_stock` = '$bodega_stock',
-            `clave` = '$clave',
-            `historial` = '$historial'
+            `clave` = '$clave'
             WHERE `id` = '$id';";
         //echo $sentencia ;
         $comentario="Editar inventario dentro de la base de datos ";
