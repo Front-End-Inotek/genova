@@ -101,6 +101,34 @@
         $comentario="Poner estado de una categoria como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Obtengo los nombres de las categorias
+      function mostrar_categoria(){
+        $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
+        $comentario="Mostrar los nombres de las categorias";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+  
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+        }
+  
+      }
+      // Obtengo los nombres de las categorias a editar
+      function mostrar_categoria_editar($id){
+        $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
+        $comentario="Mostrar los nombres de las categorias a editar";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          if($id==$fila['id']){
+            echo '  <option value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
+          }else{
+            echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';  
+          }
+        }
+      }
               
   }
 ?>

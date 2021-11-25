@@ -14,7 +14,7 @@
       public $stock;
       public $bodega_inventario;
       public $bodega_stock;
-      public $clabe;
+      public $clave;
       public $historial;
       public $estado;
       
@@ -32,7 +32,7 @@
           $this->stock= 0;
           $this->bodega_inventario= 0;
           $this->bodega_stock= 0;
-          $this->clabe= 0;
+          $this->clave= 0;
           $this->historial= 0;
           $this->estado= 0; 
         }else{
@@ -51,29 +51,18 @@
               $this->stock= $fila['stock'];
               $this->bodega_inventario= $fila['bodega_inventario'];
               $this->bodega_stock= $fila['bodega_stock'];
-              $this->clabe= $fila['clabe'];
+              $this->clave= $fila['clave'];
               $this->historial= $fila['historial'];
               $this->estado= $fila['estado'];
           }
         }
       }
       // Guardar en el inventario
-      function guardar_inventario($nombre,$descripcion,$categoria,$precio,$precio_compra,$inventario,$stock,$bodega_inventario,$bodega_stock,$clabe,$historial){
-        $sentencia = "INSERT INTO `inventario` (`nombre`, `descripcion`, `categoria`, `precio`, `precio_compra`, `inventario`, `stock`, `bodega_inventario`, `bodega_stock`, `clabe`, `historial`, `estado`)
-        VALUES ('$nombre', '$descripcion', '$categoria', '$precio', '$precio_compra','$inventario', '$stock', '$bodega_inventario', '$bodega_stock', '$clabe', '$historial', '1');";
+      function guardar_inventario($nombre,$descripcion,$categoria,$precio,$precio_compra,$stock,$inventario,$bodega_inventario,$bodega_stock,$clave){
+        $sentencia = "INSERT INTO `inventario` (`nombre`, `descripcion`, `categoria`, `precio`, `precio_compra`, `stock`, `inventario`, `bodega_inventario`, `bodega_stock`, `clave`, `historial`, `estado`)
+        VALUES ('$nombre', '$descripcion', '$categoria', '$precio', '$precio_compra', '$stock', '$inventario', '$bodega_inventario', '$bodega_stock', '$clave', '0', '1');";
         $comentario="Guardamos el inventario en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);    
-        
-        include_once("clase_log.php");//MALLL
-        $logs = NEW Log(0);
-        $sentencia = "SELECT id FROM inventario ORDER BY id DESC LIMIT 1";
-        $comentario="Obtengo el id del inventario agregado";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $id= $fila['id'];
-        }
-        $logs->guardar_log($usuario_id,"Agregar inventario: ". $id);
       }
       // Obtengo el total de inventario
       function total_elementos(){
@@ -106,7 +95,9 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT * FROM inventario WHERE estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
+        FROM inventario 
+        INNER JOIN categoria ON inventario.categoria = categoria.id WHERE inventario.estado = 1 ORDER BY inventario.nombre";
         $comentario="Mostrar el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -123,7 +114,7 @@
             <th>Stock</th>
             <th>Bodega Inventario</th>
             <th>Bodega Stock</th>
-            <th>Clabe</th>
+            <th>Clave SAT</th>
             <th>Historial</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -138,22 +129,22 @@
             {
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
-                <td>'.$fila['nombre'].'</td>  
+                <td>'.$fila['nom'].'</td>  
                 <td>'.$fila['descripcion'].'</td>
                 <td>'.$fila['categoria'].'</td>
-                <td>'.$fila['precio'].'</td>
-                <td>'.$fila['precio_compra'].'</td>
+                <td>$'.number_format($fila['precio'], 2).'</td>
+                <td>$'.number_format($fila['precio_compra'], 2).'</td>
                 <td>'.$fila['inventario'].'</td>
                 <td>'.$fila['stock'].'</td>
                 <td>'.$fila['bodega_inventario'].'</td>
                 <td>'.$fila['bodega_stock'].'</td>
-                <td>'.$fila['clabe'].'</td>
+                <td>'.$fila['clave'].'</td>
                 <td>'.$fila['historial'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_inventario('.$fila['id'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_inventario('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_inventario('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_inventario('.$fila['ID'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
               }
@@ -175,7 +166,9 @@
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT * FROM inventario WHERE (nombre LIKE '%$a_buscar%' || descripcion LIKE '%$a_buscar%' || categoria LIKE '%$a_buscar%' || stock LIKE '%$a_buscar%') && estado = 1 ORDER BY nombre;";
+          $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
+          FROM inventario 
+          INNER JOIN categoria ON inventario.categoria = categoria.id WHERE (inventario.nombre LIKE '%$a_buscar%' || inventario.descripcion LIKE '%$a_buscar%' || categoria.nombre LIKE '%$a_buscar%' || inventario.clave LIKE '%$a_buscar%') && inventario.estado = 1 ORDER BY inventario.nombre;";
           $comentario="Mostrar diferentes busquedas en ver inventario";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
@@ -192,7 +185,7 @@
               <th>Stock</th>
               <th>Bodega Inventario</th>
               <th>Bodega Stock</th>
-              <th>Clabe</th>
+              <th>Clave SAT</th>
               <th>Historial</th>';
               if($editar==1){
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -206,7 +199,7 @@
               while ($fila = mysqli_fetch_array($consulta)) 
               {
                 echo '<tr class="text-center">
-                <td>'.$fila['nombre'].'</td>  
+                <td>'.$fila['nom'].'</td>  
                 <td>'.$fila['descripcion'].'</td>
                 <td>'.$fila['categoria'].'</td>
                 <td>'.$fila['precio'].'</td>
@@ -215,13 +208,13 @@
                 <td>'.$fila['stock'].'</td>
                 <td>'.$fila['bodega_inventario'].'</td>
                 <td>'.$fila['bodega_stock'].'</td>
-                <td>'.$fila['clabe'].'</td>
+                <td>'.$fila['clave'].'</td>
                 <td>'.$fila['historial'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_inventario('.$fila['id'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_inventario('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_inventario('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_inventario('.$fila['ID'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
               }
@@ -232,7 +225,7 @@
         </div>';
       }
       // Editar el inventario
-      function editar_inventario($id,$nombre,$descripcion,$categoria,$precio,$precio_compra,$inventario,$stock,$bodega_inventario,$bodega_stock,$clabe,$historial){
+      function editar_inventario($id,$nombre,$descripcion,$categoria,$precio,$precio_compra,$inventario,$stock,$bodega_inventario,$bodega_stock,$clave,$historial){
         $sentencia = "UPDATE `inventario` SET
             `nombre` = '$nombre',
             `descripcion` = '$descripcion',
@@ -243,7 +236,7 @@
             `stock` = '$stock',
             `bodega_inventario` = '$bodega_inventario',
             `bodega_stock` = '$bodega_stock',
-            `clabe` = '$clabe',
+            `clave` = '$clave',
             `historial` = '$historial'
             WHERE `id` = '$id';";
         //echo $sentencia ;
