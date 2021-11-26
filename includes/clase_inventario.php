@@ -317,14 +317,14 @@
       function agregar_producto_apedido($mov,$producto,$hab){//2.5
         $pedido=$this->saber_pedido($mov,$producto);
         if($pedido==0){
-          $sentencia = "INSERT INTO `perdido_rest` (`estado`, `movimiento`, `producto`, `cantidad`)
+          $sentencia = "INSERT INTO `pedido_rest` (`estado`, `movimiento`, `producto`, `cantidad`)
           VALUES ('0', '$mov', '$producto', '1');";
           $comentario="Agregar producto a pedido de restaurante";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }else{
           $cantidad= $this->saber_cantidad_pedido($pedido);
           $cantidad++;
-          $sentencia = "UPDATE `perdido_rest` SET
+          $sentencia = "UPDATE `pedido_rest` SET
           `cantidad` = '$cantidad'
           WHERE `id` = '$pedido';";
           $comentario="Modificar la cantidad de productos en el pedido";
@@ -333,5 +333,159 @@
         }
       }
              
+  }
+  /**
+  *
+  */
+  class Pedido_rest extends ConexionMYSql
+  {    
+      public $id;
+      public $mov;
+      public $id_producto;
+      public $cantidad;
+      public $pagado;
+      public $pedido;
+      public $estado;
+
+      // Constructor
+      function __construct($id)
+      {
+        if($id==0){
+        $this->id= 0;
+        $this->mov= 0;
+        $this->id_producto= 0;
+        $this->cantidad= 0;
+        $this->pagado= 0;
+        $this->pedido= 0;
+        $this->estado= 0;
+        }else{
+        $sentencia = "SELECT * FROM pedido_rest WHERE id = $id LIMIT 1";
+        $comentario="Obtener todos los valores del pedido rest";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $this->id= $fila['id'];
+          $this->mov= $fila['mov'];
+          $this->id_producto= $fila['id_producto'];
+          $this->cantidad= $fila['cantidad'];
+          $this->pagado= $fila['pagado'];
+          $this->pedido= $fila['pedido'];
+          $this->estado= $fila['estado'];               
+        }
+        }
+      }
+      // Agregar un producto al pedido de restaurante
+      function agregar_producto_apedido($mov,$producto){
+        $pedido=$this->saber_pedido($mov,$producto);
+        if($pedido==0){
+          $sentencia = "INSERT INTO `pedido_rest` ( `mov`, `id_producto`, `cantidad`, `pagado`, `pedido`, `estado`)
+          VALUES ('$mov', '$producto', '1', '0', '0', '1');";
+          $comentario="Agregar un producto al pedido de restaurante";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }else{
+          $cantidad= $this->saber_cantidad_pedido($pedido);
+          $cantidad++;
+          $sentencia = "UPDATE `pedido_rest` SET
+          `cantidad` = '$cantidad'
+          WHERE `id` = '$pedido';";
+          $comentario="Modificar la cantidad de productos en el pedido de restaurante";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //echo "Es producto ya existe";
+        }
+      }
+      // Obtner el estado del producto del pedido de restaurante
+      function saber_pedido($mov,$producto){
+        $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND id_producto = $producto AND pagado = 0 AND estado = 1 LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtner el estado del producto del pedido de restaurante";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $pedido=0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $pedido=$fila['id'];
+        }
+        return $pedido;
+      }
+      // Obtner la cantidad de un producto de un pedido restaurante
+      function saber_cantidad_pedido($pedido){
+        $sentencia = "SELECT cantidad FROM pedido_rest WHERE id = $pedido AND estado = 1 LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtner la cantidad de un producto de un pedido restaurante";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cantidad=0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad=$fila['cantidad'];
+        }
+        return $cantidad;
+      }
+      // Mostrar los productos del pedido restaurente sin habitacion
+      function mostar_pedido_directo($mov,$hab){
+        $sentencia = "SELECT *, pedido_rest.id AS ID 
+        FROM pedido_rest 
+        INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
+        $comentario="Mostrar los productos del pedido restaurente sin habitacion";
+        //echo $sentencia;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cont=0;
+        $total=0;
+        //echo '<tr class="fuente_menor text-center">
+        echo '<table class="table">
+          <thead class="thead-light">
+            <tr class="text-center">
+            <th scope="col">Cant</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th>Subtotal</th>
+            <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
+            </tr>
+          </thead>
+          <tbody>';
+            while ($fila = mysqli_fetch_array($consulta))
+            {
+              $total=$total+($fila['precio']*$fila['cantidad']);
+              $cont++;
+              echo '<tr class="text-center">
+              <th cope="row">'.$fila['cantidad'].'</th>
+              <td>'.$fila['nombre'].'</td>
+              <td>'.$fila['precio'].'</td>
+              <td>'.$fila['precio']*$fila['cantidad'].'</td>';
+              echo '<td><button class="btn btn-outline-warning" onclick="eliminar_producto_pedido_cobro('.$mov.','.$fila['ID'].','.$hab.')"> 🗑️</button></td>';
+              echo '</tr>';
+            } 
+            echo '
+          </tbody>
+        </table>';
+        /*if($cont>0){
+          echo '<div class="row  color_black" >';
+  
+            echo '<div class="col-sm-1">';
+  
+            echo '</div>';
+            echo '<div class="col-sm-4">';
+  
+            echo '</div>';
+            echo '<div class="col-sm-2">';
+  
+            echo '</div>';
+            echo '<div class="col-sm-2">';
+              echo '$'.$total;
+            echo '</div>';
+            echo '<div class="col-sm-2">';
+  
+            echo '</div>';
+  
+          echo '</div>';
+          echo '<div class="row boton_restaurante" >';
+  
+              echo '<div class="form-group">';
+              echo '<input class="form-control" type="text" id="comentario_rest" placeholder="Comentario">';
+              echo '<a href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_directo()"><button  type="button" class="btn btn-success btn-block">Pedir</button></a>';
+  
+          echo '</div>';
+          echo '</div>';
+        }*/
+      }
+
   }
 ?>

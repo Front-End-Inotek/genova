@@ -2426,7 +2426,7 @@ function buscar_categoria_restaurente(categoria){
 // Mostrar productos de las categorias existentes en el inventario
 function cargar_producto_restaurante(producto){//2.5
 	var id=localStorage.getItem("id");
-	$("#caja_mostrar_busqueda").load("includes/agregar_producto_restaurante.php?producto="+producto+"&id="+id);
+	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&id="+id);
 }
 
 // Guardar en el inventario
