@@ -463,13 +463,13 @@
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu5sub2" data-toggle="collapse" data-target="#submenu5sub2"><span>Restaurante</span></a>
                                 <div class="collapse" id="submenu5sub2" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
-                                        if($usuario->restaurante_ver==1){
+                                        /*if($usuario->restaurante_ver==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="ver_restaurante()">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Restaurante</a>
                                           </li>';
-                                        }
+                                        }*/
                                         if($usuario->restaurante_agregar==1){
                                           echo '
                                           <li class="nav-item">

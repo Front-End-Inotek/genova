@@ -262,6 +262,61 @@
         }
         return $nombre;
       }
+      // Mostrar productos de las categorias existentes en el inventario
+      function mostrar_producto_restaurente($categoria){
+        $sentencia = "SELECT * FROM inventario WHERE categoria = $categoria ORDER BY nombre";
+        $comentario="Mostrar los productos por restaurente";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cunt=0;
+        echo '
+        <div class="row">
+        ';
+        $cont=0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<div class="col-sm-6"><button type="button" class="btn btn-primary btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
+          echo $fila['nombre'];
+          echo'</button></div>';
+          /*echo '<div class="row color_black">
+            <div class="col-sm-4">'.$fila['nombre'].'</div>
+            <div class="col-sm-3">$'.$fila['precio'].'</div>
+            <div class="col-sm-3"><button type="button" class="btn btn-primary btn-md" onclick="cargar_producto_rest_cobro('.$hab_id.','.$fila['id'].' )"><span class="glyphicon glyphicon-cutlery"></span> Seleccionar</button></div>
+  
+          </div>
+          </br>';*/
+  
+          if($cont==1){
+            $cont=0;
+            echo '</br></br>';
+  
+          }
+          else{
+            $cont++;
+          }
+        }
+        echo '</div>';
+        if ($cont==0){
+          $sentencia;
+        }
+      }
+      function agregar_producto_apedido($mov,$producto,$hab){//2.5
+        $pedido=$this->saber_pedido($mov,$producto);
+        if($pedido==0){
+          $sentencia = "INSERT INTO `perdido_rest` (`estado`, `movimiento`, `producto`, `cantidad`)
+          VALUES ('0', '$mov', '$producto', '1');";
+          $comentario="Agregar producto a pedido de restaurante";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }else{
+          $cantidad= $this->saber_cantidad_pedido($pedido);
+          $cantidad++;
+          $sentencia = "UPDATE `perdido_rest` SET
+          `cantidad` = '$cantidad'
+          WHERE `id` = '$pedido';";
+          $comentario="Modificar la cantidad de productos en el pedido";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //echo "Es producto ya existe";
+        }
+      }
              
   }
 ?>

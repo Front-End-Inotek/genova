@@ -260,8 +260,8 @@ a.topictitle:hover {
   font-size: 2em;
   line-height:normal;
 }
-.altura-rest{
-  height: 30em;
+.altura-rest{/*-*/
+  height: 40em;
   overflow-x: scroll;
 }
 .altura{

@@ -1465,6 +1465,10 @@ function modificar_usuario(id){
     var inventario_agregar= document.getElementById("inventario_agregar").checked;
     var inventario_editar= document.getElementById("inventario_editar").checked;
     var inventario_borrar= document.getElementById("inventario_borrar").checked;
+    var categoria_ver= document.getElementById("categoria_ver").checked;
+    var categoria_agregar= document.getElementById("categoria_agregar").checked;
+    var categoria_editar= document.getElementById("categoria_editar").checked;
+    var categoria_borrar= document.getElementById("categoria_borrar").checked;
     var restaurante_ver= document.getElementById("restaurante_ver").checked;
     var restaurante_agregar= document.getElementById("restaurante_agregar").checked;
     var restaurante_editar= document.getElementById("restaurante_editar").checked;
@@ -1631,7 +1635,7 @@ function modificar_usuario(id){
         forma_pago_borrar = 0;
     }
 
-    // Convertir hab permisos
+    // Convertir inventario permisos
     if(inventario_ver){
         inventario_ver = 1;
     }else{
@@ -1652,8 +1656,30 @@ function modificar_usuario(id){
     }else{
         inventario_borrar = 0;
     }
+    
+    // Convertir categoria permisos
+    if(categoria_ver){
+        categoria_ver = 1;
+    }else{
+        categoria_ver = 0;
+    }
+    if(categoria_agregar){
+        categoria_agregar = 1;
+    }else{
+        categoria_agregar = 0;
+    }
+    if(categoria_editar ){
+        categoria_editar = 1;
+    }else{
+        categoria_editar = 0;
+    }
+    if(categoria_borrar){
+        categoria_borrar = 1;
+    }else{
+        categoria_borrar = 0;
+    }
 
-    // Convertir hab permisos
+    // Convertir restaurante permisos
     if(restaurante_ver){
         restaurante_ver = 1;
     }else{
@@ -1724,6 +1750,10 @@ function modificar_usuario(id){
                   "inventario_agregar": inventario_agregar,
                   "inventario_editar": inventario_editar,
                   "inventario_borrar": inventario_borrar,
+                  "categoria_ver": categoria_ver,
+                  "categoria_agregar": categoria_agregar,
+                  "categoria_editar": categoria_editar,
+                  "categoria_borrar": categoria_borrar,
                   "restaurante_ver": restaurante_ver,
                   "restaurante_agregar": restaurante_agregar,
                   "restaurante_editar": restaurante_editar,
@@ -2376,4 +2406,83 @@ function regresar_editar_inventario(){
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
+}
+
+//* Restaurante *//
+
+// Agregar en el restaurante
+function agregar_restaurante(){
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_restaurante.php"); 
+	closeNav();
+}
+
+// Mostrar categorias existentes en el inventario
+function buscar_categoria_restaurente(categoria){
+	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria);
+}
+
+// Mostrar productos de las categorias existentes en el inventario
+function cargar_producto_restaurante(producto){//2.5
+	var id=localStorage.getItem("id");
+	$("#caja_mostrar_busqueda").load("includes/agregar_producto_restaurante.php?producto="+producto+"&id="+id);
+}
+
+// Guardar en el inventario
+function guardar_inventario(){
+    var usuario_id=localStorage.getItem("id");
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var descripcion= encodeURI(document.getElementById("descripcion").value);
+	var categoria= document.getElementById("categoria").value;
+    var precio= document.getElementById("precio").value;
+    var precio_compra= document.getElementById("precio_compra").value;
+    var stock= document.getElementById("stock").value;
+    var inventario= document.getElementById("inventario").value;
+    var bodega_inventario= document.getElementById("bodega_inventario").value;
+    var bodega_stock= document.getElementById("bodega_stock").value;
+    var clave= document.getElementById("clave").value;
+	
+
+	if(nombre.length >0 && categoria >0 && precio >0){
+			//$('#boton_inventario').hide();
+			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
+			var datos = {
+			 	  "nombre": nombre,
+				  "descripcion": descripcion,
+				  "categoria": categoria,
+                  "precio": precio,
+                  "precio_compra": precio_compra,
+                  "stock": stock,
+                  "inventario": inventario,
+                  "bodega_inventario": bodega_inventario,
+                  "bodega_stock": bodega_stock,
+                  "clave": clave,
+                  "usuario_id": usuario_id,
+				};
+			$.ajax({
+				  async:true,
+				  type: "POST",
+				  dataType: "html",
+				  contentType: "application/x-www-form-urlencoded",
+				  url:"includes/guardar_inventario.php",
+				  data:datos,
+				  beforeSend:loaderbar,
+				  success:ver_inventario,
+				  timeout:5000,
+				  error:problemas_sistema
+				});
+				return false;
+			}else{
+				alert("Campos incompletos");
+			}
+}
+
+// Muestra los datos del inventario de la bd
+function ver_inventario(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
+	closeNav();
 }
