@@ -264,6 +264,23 @@ a.topictitle:hover {
   height: 45em;
   overflow-x: scroll;
 }
+.altura-rest_total{/*-*/
+  height: 26em;
+  overflow-x: scroll;
+}
+.altura-rest_productos{/*-*/
+  height: 18em;
+  overflow-x: scroll;
+}
+.btn-square-md{/*-*/
+  width: 80px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 80px !important;
+  text-align: center;
+  padding: 0px;
+  font-size:12px;
+}
 .altura{
   text-align: center;
   font-size: 1,3em;

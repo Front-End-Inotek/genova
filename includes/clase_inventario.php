@@ -274,9 +274,9 @@
         $cont=0;
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<div class="col-sm-6"><button type="button" class="btn btn-primary btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
+          /*echo '<div class="col-sm-4"><button type="button" class="btn btn-primary btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
           echo $fila['nombre'];
-          echo'</button></div>';
+          echo'</button></div>';*/
           /*echo '<div class="row color_black">
             <div class="col-sm-4">'.$fila['nombre'].'</div>
             <div class="col-sm-3">$'.$fila['precio'].'</div>
@@ -284,6 +284,21 @@
   
           </div>
           </br>';*/
+          if($cunt%3==0){
+            echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
+            echo $fila['nombre'];
+            echo'</button></div>';
+            $cunt=0;
+          }elseif($cunt%2==0){
+            echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
+            echo $fila['nombre'];
+            echo'</button></div>';
+          }else{
+            echo '<div class="col-sm-4"><button type="button" class="btn btn-info btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
+            echo $fila['nombre'];
+            echo'</button></div>';
+          }
+          $cunt++;
   
           if($cont==1){
             $cont=0;
@@ -298,7 +313,7 @@
         if ($cont==0){
           $sentencia;
         }
-      }
+        }
       function agregar_producto_apedido($mov,$producto,$hab){//2.5
         $pedido=$this->saber_pedido($mov,$producto);
         if($pedido==0){

@@ -19,12 +19,16 @@
 
       <div class="modal-body">';
         echo '<div class="row">
-          <div class="col-sm-3 altura-rest" id="caja_mostrar_categoria" style="background-color:azure;">';$categoria->mostrar_categoria_restaurente();echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:lavender;">';//$inventario->mo();echo '</div>';
+          <div class="col-sm-12 altura-rest_total" id="caja_mostrar_totales" style="background-color:whitesmoke;">';//$inventario->mo();echo '</div>';
+          echo '</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 altura-rest_productos" id="caja_mostrar_categoria" style="background-color:aliceblue;">';$categoria->mostrar_categoria_restaurente();echo '</div>
+          <div class="col-sm-8 altura-rest_productos" id="caja_mostrar_busqueda" style="background-color:lightcyan;">';//$inventario->mo();echo '</div>';
             //$inv->mostar_pedido_mov_cobro_directo(0,0);
             //azure o white
-            echo '
-          <div class="col-sm-3 altura-rest" id="caja_mostrar_totales" style="background-color:lavenderblush;">';//$inventario->mo();echo '</div>';
+            echo '';
+          //<div class="col-sm-3 altura-rest_productos" id="caja_mostrar_totales" style="background-color:lavenderblush;">';//$inventario->mo();echo '</div>';
           echo '
         </div>
       </div>

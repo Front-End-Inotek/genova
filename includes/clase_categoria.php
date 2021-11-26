@@ -135,19 +135,21 @@
         $comentario="Mostrar las categorias en el restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cont=0;
+        echo '<div class="row">';
         while ($fila = mysqli_fetch_array($consulta))
         {
-          if($cont%2==0){
-            echo '<div class="col-sm-12 margen_inf">
-              <button type="button" class="btn btn-success btn-block" onclick="buscar_categoria_restaurente('.$fila['id'].')"><span class="glyphicon glyphicon-cutlery"></span>'.$fila['nombre'].'</button>
+          //if($cont%2==0){
+            echo '<div class="col-sm-3 margen_inf">
+              <button type="button" class="btn btn-secondary btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].')"><span class="glyphicon glyphicon-cutlery"></span>🍽️'.$fila['nombre'].'</button>
             </div>';
-          }else{
-            echo '<div class="col-sm-12 margen_inf">
+          /*}else{
+            echo '<div class="col-sm-6 margen_inf">
               <button type="button" class="btn btn-info btn-block" onclick="buscar_categoria_restaurente('.$fila['id'].')"><span class="glyphicon glyphicon-cutlery"></span>'.$fila['nombre'].'</button>
             </div>';
           }
-          $cont++;
+          $cont++;*/
         }
+        echo '</div>';
       }
               
   }
