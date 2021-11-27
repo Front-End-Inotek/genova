@@ -13,11 +13,8 @@
 
       <div class="modal-body">';
         echo '<div class="row">
-          <div class="col-sm-4 altura-rest_total" id="caja_mostrar_total" style="background-color:azure;">';//$inventario->mo();echo '</div>';
-          echo '</div>
-          <div class="col-sm-8 altura-rest_total" id="caja_mostrar_total" style="background-color:whitesmoke;">';//$inventario->mo();echo '</div>';
-            $pedido->mostar_pedido_directo(0,0);
-          echo '</div>
+          <div class="col-sm-4 altura-rest_total" id="caja_mostrar_funciones" style="background-color:azure;">';$pedido->mostar_pedido_directo_funciones(0,0);echo '</div>
+          <div class="col-sm-8 altura-rest_total" id="caja_mostrar_total" style="background-color:whitesmoke;">';$pedido->mostar_pedido_directo(0,0);echo '</div>
         </div>
         <div class="row">
           <div class="col-sm-4 altura-rest_productos" id="caja_mostrar_categoria" style="background-color:aliceblue;">';$categoria->mostrar_categoria_restaurente();echo '</div>

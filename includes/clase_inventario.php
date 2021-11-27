@@ -268,7 +268,7 @@
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        echo '
+        echo '<br>
         <div class="row">
         ';
         $cont=0;
@@ -312,24 +312,6 @@
         echo '</div>';
         if ($cont==0){
           $sentencia;
-        }
-        }
-      function agregar_producto_apedido($mov,$producto,$hab){//2.5
-        $pedido=$this->saber_pedido($mov,$producto);
-        if($pedido==0){
-          $sentencia = "INSERT INTO `pedido_rest` (`estado`, `movimiento`, `producto`, `cantidad`)
-          VALUES ('0', '$mov', '$producto', '1');";
-          $comentario="Agregar producto a pedido de restaurante";
-          $consulta= $this->realizaConsulta($sentencia,$comentario);
-        }else{
-          $cantidad= $this->saber_cantidad_pedido($pedido);
-          $cantidad++;
-          $sentencia = "UPDATE `pedido_rest` SET
-          `cantidad` = '$cantidad'
-          WHERE `id` = '$pedido';";
-          $comentario="Modificar la cantidad de productos en el pedido";
-          $consulta= $this->realizaConsulta($sentencia,$comentario);
-          //echo "Es producto ya existe";
         }
       }
              
@@ -430,14 +412,14 @@
         $cont=0;
         $total=0;
         //echo '<tr class="fuente_menor text-center">
-        echo '<table class="table">
+        echo '<table class="fuente_menor table">
           <thead class="thead-light">
             <tr class="text-center">
             <th scope="col">Cant</th>
             <th scope="col">Nombre</th>
             <th scope="col">Precio</th>
             <th>Subtotal</th>
-            <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
+            <th><span class=" glyphicon glyphicon-cog"></span> Quitar</th>
             </tr>
           </thead>
           <tbody>';
@@ -448,9 +430,9 @@
               echo '<tr class="text-center">
               <th cope="row">'.$fila['cantidad'].'</th>
               <td>'.$fila['nombre'].'</td>
-              <td>'.$fila['precio'].'</td>
-              <td>'.$fila['precio']*$fila['cantidad'].'</td>';
-              echo '<td><button class="btn btn-outline-warning" onclick="eliminar_producto_pedido_cobro('.$mov.','.$fila['ID'].','.$hab.')"> 🗑️</button></td>';
+              <td>$'.number_format($fila['precio'], 2).'</td>
+              <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
+              echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_pedido_cobro('.$mov.','.$fila['ID'].','.$hab.')"> 🗑️</button></td>';
               echo '</tr>';
             } 
             echo '
@@ -485,6 +467,43 @@
           echo '</div>';
           echo '</div>';
         }*/
+      }
+      // Mostrar los productos del pedido restaurente sin habitacion
+      function mostar_pedido_directo_funciones($mov,$hab){//$mov,$hab
+        //#Hab   Total   #Items    Comen   Pedir
+        $items= $this->total_productos(0);
+        echo '<div class="row">
+          <div class="col-sm-12">#Items: '.$items.'</div> 
+          <div class="col-sm-12">Total: '.$hab.'</div> 
+          <div class="col-sm-6">-</div> 
+          <div class="col-sm-6">.</div>                
+        </div><br>';
+
+
+          echo '';
+  
+              echo '<div class="form-group">';
+              echo '<input class="form-control" type="text" id="comentario_rest" placeholder="Comentario">';
+              echo '<a href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_directo()"><button  type="button" class="btn btn-success btn-block">Pedir</button></a>';
+  
+          echo '</div>';
+     
+      }
+      // Obtengo el total de productos del pedido restaurente
+      function total_productos($mov){
+        $cantidad=0;
+        $sentencia = "SELECT *, count(pedido_rest.id) AS cantidad, pedido_rest.id AS ID  
+        FROM pedido_rest 
+        INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
+        //echo $sentencia;
+        $comentario="Obtengo el total de productos del pedido restaurente";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+          //$cantidad= $cantidad+($fila['precio']*$fila['cantidad']);
+        }
+        return $cantidad;
       }
 
   }

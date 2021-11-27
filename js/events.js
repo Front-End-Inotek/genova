@@ -2424,9 +2424,17 @@ function buscar_categoria_restaurente(categoria){
 }
 
 // Mostrar productos de las categorias existentes en el inventario
-function cargar_producto_restaurante(producto){//2.5
+function cargar_producto_restaurante(producto){
 	var id=localStorage.getItem("id");
 	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&id="+id);
+    cargar_producto_restaurante_funciones();
+}
+
+// Mostrar productos de las categorias existentes en el inventario
+function cargar_producto_restaurante_funciones(){
+	var id=localStorage.getItem("id");
+    //alert(id);///FALTA///
+	$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?id="+id);
 }
 
 // Guardar en el inventario
