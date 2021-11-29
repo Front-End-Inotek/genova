@@ -70,7 +70,7 @@
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro('.$_GET['comentario'].')"> Cobrar</button>
+      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro('.$_GET['total'].','.$_GET['comentario'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Cobrar</button>
     </div>
   </div>';
 ?>

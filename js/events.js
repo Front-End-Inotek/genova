@@ -2419,21 +2419,21 @@ function agregar_restaurante(hab_id,estado){
 }
 
 // Mostrar categorias existentes en el inventario
-function buscar_categoria_restaurente(categoria,hab_id,estado){
-	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado);
+function buscar_categoria_restaurente(categoria,hab_id,estado,mov){
+	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
 }
 
 // Mostrar productos de las categorias existentes en el inventario
-function cargar_producto_restaurante(producto,hab_id,estado){///quiza aqui
+function cargar_producto_restaurante(producto,hab_id,estado,mov){///quiza aqui
 	var usuario_id=localStorage.getItem("id");
-	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado);
-    cargar_producto_restaurante_funciones(hab_id,estado);
+	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
+    cargar_producto_restaurante_funciones(hab_id,estado,mov);
 }
 
 // Mostrar productos de las categorias existentes en el inventario
-function cargar_producto_restaurante_funciones(hab_id,estado){
+function cargar_producto_restaurante_funciones(hab_id,estado,mov){
 	var usuario_id=localStorage.getItem("id");
-	$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado);
+	$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
 }
 
 // Borrar un producto del pedido del restaurante
@@ -2502,9 +2502,9 @@ function ver_inventario(){
 }
 
 // Pedir restaurante cobro 
-function pedir_rest_cobro(total,directo){
+function pedir_rest_cobro(total,hab_id,estado,mov){
     var comentario= encodeURI(document.getElementById("comentario").value);
-	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&directo="+directo+"&comentario="+comentario); 
+	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&comentario="+comentario+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
 }
 
 // Cambio en pedir restaurante 
@@ -2521,7 +2521,7 @@ function cambio_rest_cobro(total){
 }
 
 // Aplicar el cobro en pedido restaurante
-function aplicar_rest_cobro(total){
+function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
 	var efectivo=parseFloat($("#efectivo").val());
 	var tarjeta=parseFloat($("#tarjeta").val());
 	var descuento=parseFloat($("#descuento").val());

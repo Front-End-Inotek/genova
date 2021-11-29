@@ -263,7 +263,7 @@
         return $nombre;
       }
       // Mostrar productos de las categorias existentes en el inventario
-      function mostrar_producto_restaurente($categoria,$hab_id,$estado){
+      function mostrar_producto_restaurente($categoria,$hab_id,$estado,$mov){
         $sentencia = "SELECT * FROM inventario WHERE categoria = $categoria ORDER BY nombre";
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -273,16 +273,16 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($cunt%3==0){
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.')">';
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.')">';
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-info btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.')">';
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-info btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }
@@ -428,9 +428,8 @@
         </table>';
       }
       // Mostrar los productos del pedido restaurente sin habitacion
-      function mostar_pedido_funciones($mov,$hab){//$mov,$hab
-        //#Hab   Total   #Items    Comen   Pedir
-        $directo= 0;
+      function mostar_pedido_funciones($hab_id,$estado,$mov){
+        //#Hab   Total   #Items    Comen   Pedir//**///**//
         $cantidad= 0;
         $total= 0;
         $consulta= $this->total_productos(0);
@@ -447,7 +446,7 @@
           <div class="col-sm-4"></div> 
           <div class="col-sm-8"><input class="form-control" type="text" id="comentario" placeholder="Comentario" maxlength="200"></div> 
           <div class="col-sm-4"></div> 
-          <div class="col-sm-8"><button class="btn btn-success btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$directo.')">🧾Pedir</button></></div>                
+          <div class="col-sm-8"><button class="btn btn-success btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">🧾Pedir</button></></div>                
           <div class="col-sm-4"></div> 
         </div>'; 
       }
