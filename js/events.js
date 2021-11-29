@@ -2436,6 +2436,13 @@ function cargar_producto_restaurante_funciones(hab_id,estado){
 	$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado);
 }
 
+// Borrar un producto del pedido del restaurante
+function eliminar_producto_restaurante(producto,hab_id,estado,mov){
+    var usuario_id=localStorage.getItem("id");
+	$("#caja_mostrar_total").load("includes/eliminar_producto_restaurante.php?producto="+producto+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&usuario_id="+usuario_id);
+    cargar_producto_restaurante_funciones(hab_id,estado);
+}
+
 // Guardar en el inventario
 function guardar_inventario(){
     var usuario_id=localStorage.getItem("id");

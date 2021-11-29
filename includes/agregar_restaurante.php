@@ -1,8 +1,15 @@
 <?php
+  include_once("clase_hab.php");
   include_once("clase_categoria.php");
   include_once("clase_inventario.php");
+  $hab=NEW Hab(0);
   $categoria=NEW Categoria(0);
   $pedido=NEW Pedido_rest(0);
+  if($_GET['hab_id'] == 0){
+    $mov= 0;
+  }else{
+    $mov= $hab->mostrar_mov_hab($_GET['hab_id']);
+  }
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -19,7 +26,7 @@
       </div>
       <div class="row">
         <div class="col-sm-4 altura-rest_total" id="caja_mostrar_funciones" style="background-color:azure;">';$pedido->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado']);echo '</div>
-        <div class="col-sm-8 altura-rest_total" id="caja_mostrar_total" style="background-color:whitesmoke;">';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado']);echo '</div>
+        <div class="col-sm-8 altura-rest_total" id="caja_mostrar_total" style="background-color:whitesmoke;">';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
       </div>
     </div>
       

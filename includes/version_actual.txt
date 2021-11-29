@@ -47,4 +47,5 @@ VERSION 1.4
 -Agregar permisos y tablas de categorias e inventario
 -Interfaz de agregar restaurante
 -Agregar tabla y funciones de pedido rest
+-Generar pago de restaurante sin habitacion, agregar tabla y funciones de ticket
 

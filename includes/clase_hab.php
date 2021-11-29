@@ -207,6 +207,19 @@
           echo '</div>';
         }
       }
+      // Mostramos el movimiento de la habitacion
+      function mostrar_mov_hab($id){ 
+        $sentencia = "SELECT mov FROM hab WHERE id = $id LIMIT 1";
+        //echo $sentencia;
+        $mov = 0;
+        $comentario="Obtengo el movimiento de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $mov= $fila['mov'];
+        }
+        return $mov;
+      } 
               
   }
 ?>

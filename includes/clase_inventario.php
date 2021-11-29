@@ -345,7 +345,7 @@
         }
       }
       // Agregar un producto al pedido de restaurante
-      function agregar_producto_apedido($mov,$producto){
+      function agregar_producto_apedido($hab_id,$estado,$producto,$mov){
         $pedido=$this->saber_pedido($mov,$producto);
         if($pedido==0){
           $sentencia = "INSERT INTO `pedido_rest` ( `mov`, `id_producto`, `cantidad`, `pagado`, `pedido`, `estado`)
@@ -390,7 +390,7 @@
         return $cantidad;
       }
       // Mostrar los productos del pedido restaurente sin habitacion
-      function mostar_pedido($mov,$hab){
+      function mostar_pedido($hab_id,$estado,$mov){
         $sentencia = "SELECT *, pedido_rest.id AS ID 
         FROM pedido_rest 
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
@@ -420,7 +420,7 @@
               <td>'.$fila['nombre'].'</td>
               <td>$'.number_format($fila['precio'], 2).'</td>
               <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
-              echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_pedido_cobro('.$mov.','.$fila['ID'].','.$hab.')"> 🗑️</button></td>';
+              echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.')"> 🗑️</button></td>';
               echo '</tr>';
             } 
             echo '
@@ -461,6 +461,14 @@
         $comentario="Obtengo el total de productos del pedido restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
+      }
+      // Eliminar un producto al pedido de restaurante
+      function eliminar_producto_apedido($id){
+        $sentencia = "UPDATE `pedido_rest` SET
+        `estado` = '0'
+        WHERE `id` = '$id';";
+        $comentario="Eliminar un producto al pedido de restaurante";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
 
   }
