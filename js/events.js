@@ -2510,41 +2510,37 @@ function pedir_rest_cobro(total,hab_id,estado,mov){
 // Cambio en pedir restaurante 
 function cambio_rest_cobro(total){
 	var efectivo=$("#efectivo").val();
-	var cambio = efectivo-total;
+	var cambio= efectivo-total;
 	if(isNaN(cambio)){
-		cambio=0;
+		cambio= 0;
 	}
 	if(cambio<=0){
-		cambio=0;
+		cambio= 0;
 	}
 	document.getElementById("cambio").value =cambio;
 }
 
 // Aplicar el cobro en pedido restaurante
 function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
+    var usuario_id=localStorage.getItem("id");
 	var efectivo=parseFloat($("#efectivo").val());
-	var tarjeta=parseFloat($("#tarjeta").val());
+    var cambio=parseFloat($("#cambio").val());
+	var monto=parseFloat($("#monto").val());
+    var forma_pago= document.getElementById("forma_pago").value;
+    var folio= document.getElementById("folio").value;
 	var descuento=parseFloat($("#descuento").val());
-	var autoriza=$("#autoriza").val();
-	var id=localStorage.getItem("id");
-	var total_pago=0;
 	if(isNaN(efectivo)){
-		efectivo=0;
+		efectivo= 0;
 	}
-	if(isNaN(tarjeta)){
-		tarjeta=0;
+	if(isNaN(monto)){
+		monto= 0;
 	}
 	if(isNaN(descuento)){
-		descuento=0;
+		descuento= 0;
 	}
-	total_pago=efectivo+tarjeta+descuento;
-	cambio=efectivo-total;
-	if(cambio<=0){
-		cambio=0;
-	}
-	if(tarjeta<=total){
+	var total_pago= efectivo+monto;
+	if(monto<=total){
 		if(total_pago>=total){
-			$('#cobro_buttom').hide();
 			$('#caja_herramientas').modal('hide');
 			$("area_trabajo_menu").load("includes/blanco.php");
 			$('#area_trabajo').show();
@@ -2552,21 +2548,30 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
 			var datos = {
 				"id": id,
 				"efectivo":efectivo,
-				"tarjeta": tarjeta,
+                "cambio": cambio,
+				"monto": monto,
+                "forma_pago": forma_pago,
+                "folio": folio,
+                "total_pago": total_pago,
 				"descuento": descuento,
-				"autoriza": autoriza,
 				"total": total,
 				"cambio": cambio,
+                "total": total,
+                "comentario": comentario,
+                "hab_id": hab_id,
+                "estado": estado,
+                "mov": mov,
+                "usuario_id": usuario_id,
 					};
 					$.ajax({
 						  async:true,
 						  type: "POST",
 						  dataType: "html",
 						  contentType: "application/x-www-form-urlencoded",
-						  url:"includes/hab_aplicar_cobro_rest_directo.php",
+						  url:"includes/aplicar_rest_cobro.php",
 						  data:datos,
 						  beforeSend:loaderbar,
-						  success:aplicado,
+						  success:recargar_pagina,///
 						  //success:problemas_hab,
 						  timeout:5000
 						});
@@ -2576,6 +2581,6 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
 			alert("¡Aun falta dinero!"+total_pago);
 		}
 	}else{
-		alert("La cantidad pagada con tarjeta  es demasiada");
+		alert("La cantidad pagada con tarjeta es demasiada");
 	}
 }
