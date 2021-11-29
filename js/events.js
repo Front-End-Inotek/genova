@@ -2411,30 +2411,29 @@ function regresar_editar_inventario(){
 //* Restaurante *//
 
 // Agregar en el restaurante
-function agregar_restaurante(){
+function agregar_restaurante(hab_id,estado){
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante.php"); 
+	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
 	closeNav();
 }
 
 // Mostrar categorias existentes en el inventario
-function buscar_categoria_restaurente(categoria){
-	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria);
+function buscar_categoria_restaurente(categoria,hab_id,estado){
+	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado);
 }
 
 // Mostrar productos de las categorias existentes en el inventario
-function cargar_producto_restaurante(producto){
-	var id=localStorage.getItem("id");
-	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&id="+id);
-    cargar_producto_restaurante_funciones();
+function cargar_producto_restaurante(producto,hab_id,estado){///quiza aqui
+	var usuario_id=localStorage.getItem("id");
+	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado);
+    cargar_producto_restaurante_funciones(hab_id,estado);
 }
 
 // Mostrar productos de las categorias existentes en el inventario
-function cargar_producto_restaurante_funciones(){
-	var id=localStorage.getItem("id");
-    //alert(id);///FALTA///
-	$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?id="+id);
+function cargar_producto_restaurante_funciones(hab_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado);
 }
 
 // Guardar en el inventario
@@ -2493,4 +2492,83 @@ function ver_inventario(){
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
 	closeNav();
+}
+
+// Pedir restaurante cobro 
+function pedir_rest_cobro(total,directo){
+    var comentario= encodeURI(document.getElementById("comentario").value);
+	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&directo="+directo+"&comentario="+comentario); 
+}
+
+// Cambio en pedir restaurante 
+function cambio_rest_cobro(total){
+	var efectivo=$("#efectivo").val();
+	var cambio = efectivo-total;
+	if(isNaN(cambio)){
+		cambio=0;
+	}
+	if(cambio<=0){
+		cambio=0;
+	}
+	document.getElementById("cambio").value =cambio;
+}
+
+// Aplicar el cobro en pedido restaurante
+function aplicar_rest_cobro(total){
+	var efectivo=parseFloat($("#efectivo").val());
+	var tarjeta=parseFloat($("#tarjeta").val());
+	var descuento=parseFloat($("#descuento").val());
+	var autoriza=$("#autoriza").val();
+	var id=localStorage.getItem("id");
+	var total_pago=0;
+	if(isNaN(efectivo)){
+		efectivo=0;
+	}
+	if(isNaN(tarjeta)){
+		tarjeta=0;
+	}
+	if(isNaN(descuento)){
+		descuento=0;
+	}
+	total_pago=efectivo+tarjeta+descuento;
+	cambio=efectivo-total;
+	if(cambio<=0){
+		cambio=0;
+	}
+	if(tarjeta<=total){
+		if(total_pago>=total){
+			$('#cobro_buttom').hide();
+			$('#caja_herramientas').modal('hide');
+			$("area_trabajo_menu").load("includes/blanco.php");
+			$('#area_trabajo').show();
+			$('#area_trabajo_menu').hide();
+			var datos = {
+				"id": id,
+				"efectivo":efectivo,
+				"tarjeta": tarjeta,
+				"descuento": descuento,
+				"autoriza": autoriza,
+				"total": total,
+				"cambio": cambio,
+					};
+					$.ajax({
+						  async:true,
+						  type: "POST",
+						  dataType: "html",
+						  contentType: "application/x-www-form-urlencoded",
+						  url:"includes/hab_aplicar_cobro_rest_directo.php",
+						  data:datos,
+						  beforeSend:loaderbar,
+						  success:aplicado,
+						  //success:problemas_hab,
+						  timeout:5000
+						});
+					return false;
+
+		}else{
+			alert("¡Aun falta dinero!"+total_pago);
+		}
+	}else{
+		alert("La cantidad pagada con tarjeta  es demasiada");
+	}
 }

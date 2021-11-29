@@ -3,7 +3,6 @@
   include_once("clase_hab.php");
   $hab= NEW Hab($_GET['hab_id']);
   $nombre= $hab->nombre;
-
   echo '
   <!-- Modal content-->
   <div class="modal-content">

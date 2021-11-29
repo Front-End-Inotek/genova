@@ -263,52 +263,40 @@
         return $nombre;
       }
       // Mostrar productos de las categorias existentes en el inventario
-      function mostrar_producto_restaurente($categoria){
+      function mostrar_producto_restaurente($categoria,$hab_id,$estado){
         $sentencia = "SELECT * FROM inventario WHERE categoria = $categoria ORDER BY nombre";
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        echo '<br>
-        <div class="row">
-        ';
-        $cont=0;
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          /*echo '<div class="col-sm-4"><button type="button" class="btn btn-primary btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
-          echo $fila['nombre'];
-          echo'</button></div>';*/
-          /*echo '<div class="row color_black">
-            <div class="col-sm-4">'.$fila['nombre'].'</div>
-            <div class="col-sm-3">$'.$fila['precio'].'</div>
-            <div class="col-sm-3"><button type="button" class="btn btn-primary btn-md" onclick="cargar_producto_rest_cobro('.$hab_id.','.$fila['id'].' )"><span class="glyphicon glyphicon-cutlery"></span> Seleccionar</button></div>
-  
-          </div>
-          </br>';*/
-          if($cunt%3==0){
-            echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
-            echo $fila['nombre'];
-            echo'</button></div>';
-            $cunt=0;
-          }elseif($cunt%2==0){
-            echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
-            echo $fila['nombre'];
-            echo'</button></div>';
-          }else{
-            echo '<div class="col-sm-4"><button type="button" class="btn btn-info btn-block" onclick="cargar_producto_restaurante('.$fila['id'].')">';
-            echo $fila['nombre'];
-            echo'</button></div>';
+        echo '<div class="row">';
+          $cont=0;
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            if($cunt%3==0){
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.')">';
+              echo $fila['nombre'];
+              echo'</button></div>';
+              $cunt=0;
+            }elseif($cunt%2==0){
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.')">';
+              echo $fila['nombre'];
+              echo'</button></div>';
+            }else{
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-info btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.')">';
+              echo $fila['nombre'];
+              echo'</button></div>';
+            }
+            $cunt++;
+    
+            if($cont==1){
+              $cont=0;
+              echo '</br></br>';
+    
+            }
+            else{
+              $cont++;
+            }
           }
-          $cunt++;
-  
-          if($cont==1){
-            $cont=0;
-            echo '</br></br>';
-  
-          }
-          else{
-            $cont++;
-          }
-        }
         echo '</div>';
         if ($cont==0){
           $sentencia;
@@ -402,7 +390,7 @@
         return $cantidad;
       }
       // Mostrar los productos del pedido restaurente sin habitacion
-      function mostar_pedido_directo($mov,$hab){
+      function mostar_pedido($mov,$hab){
         $sentencia = "SELECT *, pedido_rest.id AS ID 
         FROM pedido_rest 
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
@@ -438,72 +426,41 @@
             echo '
           </tbody>
         </table>';
-        /*if($cont>0){
-          echo '<div class="row  color_black" >';
-  
-            echo '<div class="col-sm-1">';
-  
-            echo '</div>';
-            echo '<div class="col-sm-4">';
-  
-            echo '</div>';
-            echo '<div class="col-sm-2">';
-  
-            echo '</div>';
-            echo '<div class="col-sm-2">';
-              echo '$'.$total;
-            echo '</div>';
-            echo '<div class="col-sm-2">';
-  
-            echo '</div>';
-  
-          echo '</div>';
-          echo '<div class="row boton_restaurante" >';
-  
-              echo '<div class="form-group">';
-              echo '<input class="form-control" type="text" id="comentario_rest" placeholder="Comentario">';
-              echo '<a href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_directo()"><button  type="button" class="btn btn-success btn-block">Pedir</button></a>';
-  
-          echo '</div>';
-          echo '</div>';
-        }*/
       }
       // Mostrar los productos del pedido restaurente sin habitacion
-      function mostar_pedido_directo_funciones($mov,$hab){//$mov,$hab
+      function mostar_pedido_funciones($mov,$hab){//$mov,$hab
         //#Hab   Total   #Items    Comen   Pedir
-        $items= $this->total_productos(0);
+        $directo= 0;
+        $cantidad= 0;
+        $total= 0;
+        $consulta= $this->total_productos(0);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $cantidad+$fila['cantidad'];
+          $total= $total+($fila['precio']*$fila['cantidad']);
+        }
+
         echo '<div class="row">
-          <div class="col-sm-12">#Items: '.$items.'</div> 
-          <div class="col-sm-12">Total: '.$hab.'</div> 
-          <div class="col-sm-6">-</div> 
-          <div class="col-sm-6">.</div>                
-        </div><br>';
-
-
-          echo '';
-  
-              echo '<div class="form-group">';
-              echo '<input class="form-control" type="text" id="comentario_rest" placeholder="Comentario">';
-              echo '<a href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_directo()"><button  type="button" class="btn btn-success btn-block">Pedir</button></a>';
-  
-          echo '</div>';
-     
+          <div class="col-sm-8">#Items: '.$cantidad.'</div> 
+          <div class="col-sm-4"></div> 
+          <div class="col-sm-8">Total: $'.number_format($total, 2).'</div> 
+          <div class="col-sm-4"></div> 
+          <div class="col-sm-8"><input class="form-control" type="text" id="comentario" placeholder="Comentario" maxlength="200"></div> 
+          <div class="col-sm-4"></div> 
+          <div class="col-sm-8"><button class="btn btn-success btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$directo.')">🧾Pedir</button></></div>                
+          <div class="col-sm-4"></div> 
+        </div>'; 
       }
       // Obtengo el total de productos del pedido restaurente
       function total_productos($mov){
         $cantidad=0;
-        $sentencia = "SELECT *, count(pedido_rest.id) AS cantidad, pedido_rest.id AS ID  
+        $sentencia = "SELECT *, pedido_rest.id AS ID  
         FROM pedido_rest 
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
         //echo $sentencia;
         $comentario="Obtengo el total de productos del pedido restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $cantidad= $fila['cantidad'];
-          //$cantidad= $cantidad+($fila['precio']*$fila['cantidad']);
-        }
-        return $cantidad;
+        return $consulta;
       }
 
   }

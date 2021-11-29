@@ -120,6 +120,18 @@
         }
       }
     }
+    // Muestra las formas de pago
+    function mostrar_forma_pago_restaurante(){
+      $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 AND id != 1 ORDER BY id";
+      $comentario="Mostrar las formas de pago";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        echo '<option value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';
+      }
+      return $consulta;
+    }
     
   }
 ?>
