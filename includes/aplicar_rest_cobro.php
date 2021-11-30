@@ -9,6 +9,7 @@
   $hab= NEW Hab($_POST['hab_id']);
   $inventario= NEW Inventario(0);
   $pedido= NEW Pedido_rest(0);
+  $concepto= NEW Concepto(0);
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
@@ -18,7 +19,13 @@
           //echo 'La variable esta vacia';
           $comentario= '';
   }else{
-          $comentario= $_POST['comentario'];
+          $comentario= urldecode($_POST['comentario']);
+  }
+  if(empty($_POST['folio'])){
+        //echo 'La variable esta vacia';
+        $folio= '';
+  }else{
+        $folio= urldecode($_POST['folio']);
   }
   if(is_numeric($_POST['total_final'])){
           $total_final=$_POST['total_final'];
@@ -59,29 +66,28 @@
   // Guardamos el ticket del pedido del restaurante
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
-  $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
-  $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],0,$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,urldecode($_POST['folio']),urldecode($_POST['comentario'])$nueva_etiqueta);
-  /*
+  $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],0,$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta);
+  
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
-  $consulta= $inventario->saber_pedido_rest_cobro($_POST['mov']);
-  while ($fila = mysqli_fetch_array($consulta))
+  $consulta= $pedido->saber_pedido_rest_cobro($_POST['mov']);
+  while($fila = mysqli_fetch_array($consulta))
   {
-      $nombre= $inventario->obtengo_nombre($fila['producto']);
-      $precio= $inventario->obtengo_precio($fila['producto']);
-      $categoria= $inventario->obtengo_categoria($fila['producto']);
-      $cantidad= $inventario->cantidad_inventario($fila['producto']);
-      $historial= $inventario->cantidad_historial($fila['producto']);
+      $nombre= $inventario->obtengo_nombre($fila['id_producto']);
+      $precio= $inventario->obtengo_precio($fila['id_producto']);
+      $categoria= $inventario->obtengo_categoria($fila['id_producto']);
+      $cantidad= $inventario->cantidad_inventario($fila['id_producto']);
+      $historial= $inventario->cantidad_historial($fila['id_producto']);
       $cantidad_nueva= $cantidad - $fila['cantidad'];
       $historial_nuevo= $historial + $fila['cantidad'];
-      $inventario->editar_cantidad_inventario($fila['producto'],$cantidad_nueva);
-      $inventario->editar_cantidad_historial($fila['producto'],$historial_nuevo);
-      $ticket->guardar_concepto($ticket_id,$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),2,$categoria);
+      $inventario->editar_cantidad_inventario($fila['id_producto'],$cantidad_nueva);
+      $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
+      $concepto->guardar_concepto($ticket_id,$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),2,$categoria);
   }
   
   $pedido->cambiar_estado_pedido_cobro($_POST['mov']);
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
-  }*/
+  }
 
   // Se guarda dependiendo si se hace el pedido de forma directa o desde una habitacion
   if($_POST['mov'] == 0){

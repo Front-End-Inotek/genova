@@ -158,7 +158,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $etiqueta=$fila["ticket"];
+          $etiqueta=$fila["etiqueta"];
         }
         return $etiqueta;
       }
