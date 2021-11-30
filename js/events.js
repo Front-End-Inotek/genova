@@ -2520,6 +2520,14 @@ function cambio_rest_cobro(total){
 	document.getElementById("cambio").value =cambio;
 }
 
+// Descuento en pedir restaurante 
+function cambio_rest_descuento(total){
+	var descuento= Number(document.getElementById("descuento").value);
+    var calculo_descuento= descuento_total(total,descuento);
+	calculo_descuento= redondearDecimales(calculo_descuento,2);
+	document.getElementById("total").value= calculo_descuento;
+}
+
 // Aplicar el cobro en pedido restaurante
 function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
     var usuario_id=localStorage.getItem("id");
@@ -2529,6 +2537,7 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
     var forma_pago= document.getElementById("forma_pago").value;
     var folio= document.getElementById("folio").value;
 	var descuento=parseFloat($("#descuento").val());
+    var total_descuento=parseFloat($("#total").val());
 	if(isNaN(efectivo)){
 		efectivo= 0;
 	}
@@ -2538,9 +2547,10 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
 	if(isNaN(descuento)){
 		descuento= 0;
 	}
+    total= parseFloat(total);
 	var total_pago= efectivo+monto;
-	if(monto<=total){
-		if(total_pago>=total){
+	if(monto<total_descuento){
+		if(total_pago>total_descuento){
 			$('#caja_herramientas').modal('hide');
 			$("area_trabajo_menu").load("includes/blanco.php");
 			$('#area_trabajo').show();
@@ -2554,7 +2564,8 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
                 "folio": folio,
                 "total_pago": total_pago,
 				"descuento": descuento,
-				"total": total,
+                "total_descuento": total_descuento,
+				"tota_pago": total_pago,
 				"cambio": cambio,
                 "total": total,
                 "comentario": comentario,

@@ -6,6 +6,12 @@
   $pedido=NEW Pedido_rest(0);
   $forma_pago= NEW Forma_pago(0);
   $total= $_GET['total'];
+  if (empty($_GET['comentario'])){
+    //echo 'La variable esta vacia';
+    $comentario= '0';
+  }else{
+    $comentario= $_GET['comentario'];
+  }
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -57,20 +63,25 @@
         <div class="col-sm-2">Descuento:</div>
         <div class="col-sm-4">
         <div class="form-group">
-          <input class="form-control" type="number" id="descuento" placeholder="Ingresa el descuento">
+          <input class="form-control" type="number" id="descuento" placeholder="Ingresa el descuento" onKeyUp="cambio_rest_descuento('.$total.')">
         </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-10"></div>
-        <div class="col-sm-2">Total: $'.number_format($total, 2).'</div>
+        <div class="col-sm-6"></div>
+        <div class="col-sm-2">Total:</div>
+        <div class="col-sm-4">
+        <div class="form-group">
+          <input class="form-control" type="number" id="total"  placeholder="'.$total.'" disabled>
+        </div>
+        </div>
       </div>
       <br>
     <div>     
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro('.$_GET['total'].','.$_GET['comentario'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Cobrar</button>
+      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro('.$_GET['total'].','.$comentario.','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Cobrar</button>
     </div>
   </div>';
 ?>
