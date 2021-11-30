@@ -254,6 +254,7 @@
       function obtengo_nombre($id){
         $sentencia = "SELECT nombre FROM inventario WHERE id = $id AND estado = 1 LIMIT 1";
         //echo $sentencia;
+        $nombre= '';
         $comentario="Obtengo el nombre en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -261,6 +262,74 @@
           $nombre= $fila['nombre'];
         }
         return $nombre;
+      }
+      // Obtengo el precio en el inventario
+      function obtengo_precio($id){
+        $sentencia = "SELECT precio FROM inventario WHERE id = $id AND estado = 1 LIMIT 1";
+        //echo $sentencia;
+        $precio= 0;
+        $comentario="Obtengo el precio en el inventario";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $precio= $fila['precio'];
+        }
+        return $precio;
+      }
+      // Obtengo la categoria en el inventario
+      function obtengo_categoria($id){
+        $sentencia = "SELECT categoria FROM inventario WHERE id = $id AND estado = 1 LIMIT 1";
+        //echo $sentencia;
+        $categoria= 0;
+        $comentario="Obtengo la categoria en el inventario";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $categoria= $fila['categoria'];
+        }
+        return $categoria;
+      }
+      // Mostrar la cantidad de inventario de un producto
+      function cantidad_inventario($id){
+        $sentencia = "SELECT inventario FROM inventario WHERE id = $id LIMIT 1";
+        //echo $sentencia;
+        $inventario= 0;
+        $comentario="Mostrar la cantidad de inventario de un producto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $inventario=$fila['inventario'];
+        }
+        return $inventario;
+      }
+      // Mostrar el historial de inventario de un producto
+      function cantidad_inventario($id){
+        $sentencia = "SELECT historial FROM inventario WHERE id = $id LIMIT 1";
+        //echo $sentencia;
+        $historial= 0;
+        $comentario="Mostrar el historial de inventario de un producto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $historial=$fila['historial'];
+        }
+        return $historial;
+      }
+      // Editar la cantidad de inventario de un producto
+      function editar_cantidad_inventario($id,$cantidad){
+        $sentencia = "UPDATE `inventario` SET
+          `inventario` = '$cantidad'
+          WHERE `id` = '$id';";
+        $comentario="Editar la cantidad de inventario de un producto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Editar el historial de inventario de un producto
+      function editar_cantidad_historial($id,$cantidad){
+        $sentencia = "UPDATE `producto` SET
+          `historial` = '$cantidad'
+          WHERE `id` = '$id';";
+        $comentario="Editar el historial de inventario de un producto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Mostrar productos de las categorias existentes en el inventario
       function mostrar_producto_restaurente($categoria,$hab_id,$estado,$mov){
@@ -470,6 +539,23 @@
         `estado_pedido` = '0'
         WHERE `id` = '$id';";
         $comentario="Eliminar un producto al pedido de restaurante";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Obtener los datos del pedido restaurante cobrado
+      function saber_pedido_rest_cobro($mov){
+        $sentencia = "SELECT * FROM perdido_rest WHERE mov = $mov AND estado = 0 AND estado_pedido = 1";
+        //echo $sentencia;
+        $comentario="Obtener los datos del pedido restaurante cobrado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      // Cambiar el estado del pedido restaurante cobrado
+      function cambiar_estado_pedido_cobro($mov){
+        $sentencia = "UPDATE `perdido_rest` SET
+        `estado` = '1'
+        WHERE `mov` = $mov;";
+        echo $sentencia;
+        $comentario="Cambiar el estado del pedido restaurante cobrado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
 

@@ -57,7 +57,7 @@
         <div class="col-sm-2">Folio de Autorización:</div>
         <div class="col-sm-4">
         <div class="form-group">
-          <input class="form-control" type="number" id="folio" placeholder="Folio autorización tarjeta">
+          <input class="form-control" type="text" id="folio" placeholder="Folio autorización tarjeta" maxlength="40">
         </div>
         </div>
         <div class="col-sm-2">Descuento:</div>

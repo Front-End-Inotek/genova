@@ -2535,7 +2535,7 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
     var cambio=parseFloat($("#cambio").val());
 	var monto=parseFloat($("#monto").val());
     var forma_pago= document.getElementById("forma_pago").value;
-    var folio= document.getElementById("folio").value;
+    var folio= encodeURI(document.getElementById("folio").value);
 	var descuento=parseFloat($("#descuento").val());
     var total_descuento=parseFloat($("#total").val());
 	if(isNaN(efectivo)){
