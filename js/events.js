@@ -2503,8 +2503,7 @@ function ver_inventario(){
 
 // Pedir restaurante cobro 
 function pedir_rest_cobro(total,hab_id,estado,mov){
-    var comentario= encodeURI(document.getElementById("comentario").value);
-	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&comentario="+comentario+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
 }
 
 // Cambio en pedir restaurante 
@@ -2529,7 +2528,7 @@ function cambio_rest_descuento(total){
 }
 
 // Aplicar el cobro en pedido restaurante
-function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
+function aplicar_rest_cobro(total,hab_id,estado,mov){
     var usuario_id=localStorage.getItem("id");
 	var efectivo=parseFloat($("#efectivo").val());
     var cambio=parseFloat($("#cambio").val());
@@ -2537,6 +2536,7 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
     var forma_pago= document.getElementById("forma_pago").value;
     var folio= encodeURI(document.getElementById("folio").value);
 	var descuento=parseFloat($("#descuento").val());
+    var comentario= encodeURI(document.getElementById("comentario").value);
     var total_descuento=parseFloat($("#total").val());
 	if(isNaN(efectivo)){
 		efectivo= 0;

@@ -6,12 +6,6 @@
   $pedido=NEW Pedido_rest(0);
   $forma_pago= NEW Forma_pago(0);
   $total= $_GET['total'];
-  if (empty($_GET['comentario'])){
-    //echo 'La variable esta vacia';
-    $comentario= '0';
-  }else{
-    $comentario= $_GET['comentario'];
-  }
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -68,7 +62,12 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6"></div>
+        <div class="col-sm-2">Comentario:</div>
+        <div class="col-sm-4">
+        <div class="form-group">
+          <input class="form-control" type="text" id="comentario" placeholder="Comentario del pedido" maxlength="200">
+        </div>
+        </div>
         <div class="col-sm-2">Total:</div>
         <div class="col-sm-4">
         <div class="form-group">
@@ -81,7 +80,7 @@
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro('.$_GET['total'].','.$comentario.','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Cobrar</button>
+      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Cobrar</button>
     </div>
   </div>';
 ?>

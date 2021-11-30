@@ -303,7 +303,7 @@
         return $inventario;
       }
       // Mostrar el historial de inventario de un producto
-      function cantidad_inventario($id){
+      function cantidad_historial($id){
         $sentencia = "SELECT historial FROM inventario WHERE id = $id LIMIT 1";
         //echo $sentencia;
         $historial= 0;
@@ -515,8 +515,6 @@
           <div class="col-sm-8">#Items: '.$cantidad.'</div> 
           <div class="col-sm-4"></div> 
           <div class="col-sm-8">Total: $'.number_format($total, 2).'</div> 
-          <div class="col-sm-4"></div> 
-          <div class="col-sm-8"><input class="form-control" type="text" id="comentario" placeholder="Comentario" maxlength="200"></div> 
           <div class="col-sm-4"></div> 
           <div class="col-sm-8"><button class="btn btn-success btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">🧾Pedir</button></></div>                
           <div class="col-sm-4"></div> 

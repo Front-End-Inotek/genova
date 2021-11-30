@@ -2,7 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
 
-  class Tipo extends ConexionMYSql{
+  class Ticket extends ConexionMYSql{
 
       public $id;
       public $etiqueta;
