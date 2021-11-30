@@ -316,6 +316,7 @@
       public $pagado;
       public $pedido;
       public $estado;
+      public $estado_pedido;
 
       // Constructor
       function __construct($id)
@@ -328,6 +329,7 @@
         $this->pagado= 0;
         $this->pedido= 0;
         $this->estado= 0;
+        $this->estado_pedido= 0;
         }else{
         $sentencia = "SELECT * FROM pedido_rest WHERE id = $id LIMIT 1";
         $comentario="Obtener todos los valores del pedido rest";
@@ -340,7 +342,8 @@
           $this->cantidad= $fila['cantidad'];
           $this->pagado= $fila['pagado'];
           $this->pedido= $fila['pedido'];
-          $this->estado= $fila['estado'];               
+          $this->estado= $fila['estado']; 
+          $this->estado_pedido= $fila['estado_pedido'];               
         }
         }
       }
@@ -348,8 +351,8 @@
       function agregar_producto_apedido($hab_id,$estado,$producto,$mov){
         $pedido=$this->saber_pedido($mov,$producto);
         if($pedido==0){
-          $sentencia = "INSERT INTO `pedido_rest` ( `mov`, `id_producto`, `cantidad`, `pagado`, `pedido`, `estado`)
-          VALUES ('$mov', '$producto', '1', '0', '0', '1');";
+          $sentencia = "INSERT INTO `pedido_rest` ( `estado`, `mov`, `id_producto`, `cantidad`, `pagado`, `pedido`, `estado`, `estado_pedido`)
+          VALUES ('$mov', '$producto', '1', '0', '0', '0', '1');";
           $comentario="Agregar un producto al pedido de restaurante";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }else{
@@ -365,7 +368,7 @@
       }
       // Obtner el estado del producto del pedido de restaurante
       function saber_pedido($mov,$producto){
-        $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND id_producto = $producto AND pagado = 0 AND estado = 1 LIMIT 1";
+        $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND id_producto = $producto AND pagado = 0 AND estado_pedido = 1 LIMIT 1";
         //echo $sentencia;
         $comentario="Obtner el estado del producto del pedido de restaurante";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -378,7 +381,7 @@
       }
       // Obtner la cantidad de un producto de un pedido restaurante
       function saber_cantidad_pedido($pedido){
-        $sentencia = "SELECT cantidad FROM pedido_rest WHERE id = $pedido AND estado = 1 LIMIT 1";
+        $sentencia = "SELECT cantidad FROM pedido_rest WHERE id = $pedido AND estado_pedido = 1 LIMIT 1";
         //echo $sentencia;
         $comentario="Obtner la cantidad de un producto de un pedido restaurante";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -393,7 +396,7 @@
       function mostar_pedido($hab_id,$estado,$mov){
         $sentencia = "SELECT *, pedido_rest.id AS ID 
         FROM pedido_rest 
-        INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
+        INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado_pedido = 1";
         $comentario="Mostrar los productos del pedido restaurente sin habitacion";
         //echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -455,7 +458,7 @@
         $cantidad=0;
         $sentencia = "SELECT *, pedido_rest.id AS ID  
         FROM pedido_rest 
-        INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
+        INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pedido = 0 AND pedido_rest.estado_pedido = 1";
         //echo $sentencia;
         $comentario="Obtengo el total de productos del pedido restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -464,7 +467,7 @@
       // Eliminar un producto al pedido de restaurante
       function eliminar_producto_apedido($id){
         $sentencia = "UPDATE `pedido_rest` SET
-        `estado` = '0'
+        `estado_pedido` = '0'
         WHERE `id` = '$id';";
         $comentario="Eliminar un producto al pedido de restaurante";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
