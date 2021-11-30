@@ -2556,38 +2556,42 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
 	var total_pago= efectivo+monto;
 	if(monto<=total_final){
 		if(total_pago>=total_final){
-			var datos = {
-				"efectivo":efectivo,
-                "cambio": cambio,
-				"monto": monto,
-                "forma_pago": forma_pago,
-                "folio": folio,
-                "total_pago": total_pago,
-				"descuento": descuento,
-                "total_descuento": total_descuento,
-                "total_final": total_final,
-				"tota_pago": total_pago,
-				"cambio": cambio,
-                "total": total,
-                "comentario": comentario,
-                "hab_id": hab_id,
-                "estado": estado,
-                "mov": mov,
-                "usuario_id": usuario_id,
-					};
-					$.ajax({
-						  async:true,
-						  type: "POST",
-						  dataType: "html",
-						  contentType: "application/x-www-form-urlencoded",
-						  url:"includes/aplicar_rest_cobro.php",
-						  data:datos,
-						  beforeSend:loaderbar,
-						  success:principal,
-						  //success:problemas_hab,
-						  timeout:5000
-						});
-					return false;
+            if(monto>0 && forma_pago>0){
+                var datos = {
+                    "efectivo":efectivo,
+                    "cambio": cambio,
+                    "monto": monto,
+                    "forma_pago": forma_pago,
+                    "folio": folio,
+                    "total_pago": total_pago,
+                    "descuento": descuento,
+                    "total_descuento": total_descuento,
+                    "total_final": total_final,
+                    "tota_pago": total_pago,
+                    "cambio": cambio,
+                    "total": total,
+                    "comentario": comentario,
+                    "hab_id": hab_id,
+                    "estado": estado,
+                    "mov": mov,
+                    "usuario_id": usuario_id,
+                        };
+                        $.ajax({
+                            async:true,
+                            type: "POST",
+                            dataType: "html",
+                            contentType: "application/x-www-form-urlencoded",
+                            url:"includes/aplicar_rest_cobro.php",
+                            data:datos,
+                            beforeSend:loaderbar,
+                            success:principal,
+                            //success:problemas_hab,
+                            timeout:5000
+                            });
+                        return false;
+            }else{
+                alert("Agrega la forma de pago del moton agregado");
+            }
 		}else{
 			alert("¡Aun falta dinero!");
 		}
