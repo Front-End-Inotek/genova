@@ -2548,15 +2548,15 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
 		descuento= 0;
 	}
     total= parseFloat(total);
+    if(total>total_descuento){
+        total_final= total_descuento;
+    }else{
+        total_final= total;
+    }
 	var total_pago= efectivo+monto;
-	if(monto<total_descuento){
-		if(total_pago>total_descuento){
-			$('#caja_herramientas').modal('hide');
-			$("area_trabajo_menu").load("includes/blanco.php");
-			$('#area_trabajo').show();
-			$('#area_trabajo_menu').hide();
+	if(monto<=total_final){
+		if(total_pago>=total_final){
 			var datos = {
-				"id": id,
 				"efectivo":efectivo,
                 "cambio": cambio,
 				"monto": monto,
@@ -2565,6 +2565,7 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
                 "total_pago": total_pago,
 				"descuento": descuento,
                 "total_descuento": total_descuento,
+                "total_final": total_final,
 				"tota_pago": total_pago,
 				"cambio": cambio,
                 "total": total,
@@ -2582,16 +2583,24 @@ function aplicar_rest_cobro(total,comentario,hab_id,estado,mov){
 						  url:"includes/aplicar_rest_cobro.php",
 						  data:datos,
 						  beforeSend:loaderbar,
-						  success:recargar_pagina,///
+						  success:principal,
 						  //success:problemas_hab,
 						  timeout:5000
 						});
 					return false;
-
 		}else{
-			alert("¡Aun falta dinero!"+total_pago);
+			alert("¡Aun falta dinero!");
 		}
 	}else{
 		alert("La cantidad pagada con tarjeta es demasiada");
 	}
+}
+
+// Regresa al inicio
+function principal(){
+    $('#caja_herramientas').modal('hide');
+	$('area_trabajo_menu').load("includes/blanco.php");
+	$('#area_trabajo').show();
+	$('#area_trabajo_menu').hide();
+    recargar_pagina();
 }
