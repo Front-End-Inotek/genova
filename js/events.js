@@ -2412,6 +2412,7 @@ function regresar_editar_inventario(){
 
 // Agregar en el restaurante
 function agregar_restaurante(hab_id,estado){
+    $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
@@ -2424,7 +2425,7 @@ function buscar_categoria_restaurente(categoria,hab_id,estado,mov){
 }
 
 // Mostrar productos de las categorias existentes en el inventario
-function cargar_producto_restaurante(producto,hab_id,estado,mov){///quiza aqui
+function cargar_producto_restaurante(producto,hab_id,estado,mov){
 	var usuario_id=localStorage.getItem("id");
 	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
     cargar_producto_restaurante_funciones(hab_id,estado,mov);
@@ -2436,11 +2437,17 @@ function cargar_producto_restaurante_funciones(hab_id,estado,mov){
 	$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
 }
 
+// Buscar cualquier producto en el inventario
+function buscar_producto_restaurante(hab_id,estado,mov){
+	var a_buscar= encodeURI(document.getElementById("a_buscar").value);
+	$("#caja_mostrar_busqueda").load("includes/buscar_producto_restaurante.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&a_buscar="+a_buscar);
+}
+
 // Borrar un producto del pedido del restaurante
 function eliminar_producto_restaurante(producto,hab_id,estado,mov){
     var usuario_id=localStorage.getItem("id");
 	$("#caja_mostrar_total").load("includes/eliminar_producto_restaurante.php?producto="+producto+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&usuario_id="+usuario_id);
-    cargar_producto_restaurante_funciones(hab_id,estado);
+    cargar_producto_restaurante_funciones(hab_id,estado,mov);
 }
 
 // Guardar en el inventario
@@ -2557,38 +2564,42 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
 	if(monto<=total_final){
 		if(total_pago>=total_final){
             if(monto>0 && forma_pago>0){
-                var datos = {
-                    "efectivo":efectivo,
-                    "cambio": cambio,
-                    "monto": monto,
-                    "forma_pago": forma_pago,
-                    "folio": folio,
-                    "total_pago": total_pago,
-                    "descuento": descuento,
-                    "total_descuento": total_descuento,
-                    "total_final": total_final,
-                    "tota_pago": total_pago,
-                    "cambio": cambio,
-                    "total": total,
-                    "comentario": comentario,
-                    "hab_id": hab_id,
-                    "estado": estado,
-                    "mov": mov,
-                    "usuario_id": usuario_id,
-                        };
-                        $.ajax({
-                            async:true,
-                            type: "POST",
-                            dataType: "html",
-                            contentType: "application/x-www-form-urlencoded",
-                            url:"includes/aplicar_rest_cobro.php",
-                            data:datos,
-                            beforeSend:loaderbar,
-                            success:principal,
-                            //success:problemas_hab,
-                            timeout:5000
-                            });
-                        return false;
+                if(forma_pago==2 && folio.length >0 || forma_pago>2){
+                    var datos = {
+                        "efectivo":efectivo,
+                        "cambio": cambio,
+                        "monto": monto,
+                        "forma_pago": forma_pago,
+                        "folio": folio,
+                        "total_pago": total_pago,
+                        "descuento": descuento,
+                        "total_descuento": total_descuento,
+                        "total_final": total_final,
+                        "tota_pago": total_pago,
+                        "cambio": cambio,
+                        "total": total,
+                        "comentario": comentario,
+                        "hab_id": hab_id,
+                        "estado": estado,
+                        "mov": mov,
+                        "usuario_id": usuario_id,
+                            };
+                            $.ajax({
+                                async:true,
+                                type: "POST",
+                                dataType: "html",
+                                contentType: "application/x-www-form-urlencoded",
+                                url:"includes/aplicar_rest_cobro.php",
+                                data:datos,
+                                beforeSend:loaderbar,
+                                success:principal,
+                                //success:problemas_hab,
+                                timeout:5000
+                                });
+                            return false;
+                }else{
+                    alert("Falta agregar el folio del pago de la tarjeta");
+                }
             }else{
                 alert("Agrega la forma de pago del moton agregado");
             }

@@ -11,7 +11,6 @@
       public $fecha;
       public $tiempo;
       public $id_usuario;
-      public $id_recam;
       public $forma_pago;
       public $total;
       public $pago;
@@ -38,7 +37,6 @@
           $this->fecha= 0;
           $this->tiempo= 0;
           $this->id_usuario= 0;
-          $this->id_recam= 0;
           $this->forma_pago= 0;
           $this->total= 0;
           $this->pago= 0;
@@ -66,7 +64,6 @@
               $this->fecha= $fila['fecha'];
               $this->tiempo= $fila['tiempo'];
               $this->id_usuario= $fila['id_usuario'];
-              $this->id_recam= $fila['id_recam'];
               $this->forma_pago= $fila['forma_pago'];
               $this->total= $fila['total'];
               $this->pago= $fila['pago'];
@@ -85,11 +82,11 @@
         }
       }
       // Guardar el ticket
-      function guardar_ticket($mov,$hab_id,$id_usuario,$id_recam,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta){
+      function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta){
         $fecha=date("Y-m-d H:i");
         $tiempo=time();
-        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `fecha`, `tiempo`, `id_usuario`, `id_recam`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
-        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '$fecha', '$tiempo', '$id_usuario', '$id_recam', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '1', '1', '0', '1');";
+        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
+        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '1', '1', '0', '1');";
         $comentario="Guardamos el ticket en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         
@@ -158,7 +155,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $etiqueta=$fila["etiqueta"];
+          $etiqueta=$fila["ticket"];
         }
         return $etiqueta;
       }

@@ -86,8 +86,8 @@ function show_info($hab_id,$estado){
   echo '</br>';
   echo '<div class="row">';
     if($conf->automatizacion==1 && $user->nivel<2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-        echo '<div class="cortina" onclick="abrir_cortina_2('.$_GET['hab_id'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+        echo '<div class="cortina btn-square-lg" onclick="abrir_cortina_2('.$_GET['hab_id'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/cortina.png"  class="center-block img-responsive">';
@@ -100,8 +100,8 @@ function show_info($hab_id,$estado){
       echo '</div>';
 
       if($conf->luz==1){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-          echo '<div class="master_on" onclick="master_on_directo('.$_GET['hab_id'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+          echo '<div class="master_on btn-square-lg" onclick="master_on_directo('.$_GET['hab_id'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/master_on.png"  class="center-block img-responsive">';
@@ -114,8 +114,8 @@ function show_info($hab_id,$estado){
         echo '</div>';
 
 
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-          echo '<div class="master_off" onclick="master_off('.$_GET['hab_id'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+          echo '<div class="master_off btn-square-lg" onclick="master_off('.$_GET['hab_id'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/master_off.png"  class="center-block img-responsive">';
@@ -132,8 +132,8 @@ switch ($_GET['estado']) {
   case 0:
 
 
-          /*echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-            echo '<div class="detallar" onclick="master_on('.$_GET['hab_id'].')">';
+          /*echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+            echo '<div class="detallar btn-square-lg" onclick="master_on('.$_GET['hab_id'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/detallando.png"  class="center-block img-responsive">';
@@ -146,8 +146,8 @@ switch ($_GET['estado']) {
           echo '</div>';
 
 
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-            echo '<div class="detallar" onclick="master_off('.$_GET['hab_id'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+            echo '<div class="detallar btn-square-lg" onclick="master_off('.$_GET['hab_id'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/detallando.png"  class="center-block img-responsive">';
@@ -160,8 +160,8 @@ switch ($_GET['estado']) {
           echo '</div>';*/
 
         /*if($user->nivel<=2 && $conf->motel ==1){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-            echo '<div class="asignar" onclick="hab_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+            echo '<div class="asignar btn-square-lg" onclick="hab_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
@@ -174,8 +174,8 @@ switch ($_GET['estado']) {
           echo '</div>';
         }*/
         if($user->nivel<=2 && $conf->hospedaje ==1){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-            echo '<div class="ocupada" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+            echo '<div class="ocupada btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -188,8 +188,8 @@ switch ($_GET['estado']) {
           echo '</div>';
         }
           /*if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-              echo '<div class="detallar" onclick="hab_detallar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+              echo '<div class="detallar btn-square-lg" onclick="hab_detallar('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/detallando.png"  class="center-block img-responsive">';
@@ -202,8 +202,8 @@ switch ($_GET['estado']) {
             echo '</div>';
           }
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-              echo '<div class="lavar" onclick="hab_lavar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+              echo '<div class="lavar btn-square-lg" onclick="hab_lavar('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/lavando.png"  class="center-block img-responsive">';
@@ -216,8 +216,8 @@ switch ($_GET['estado']) {
             echo '</div>';
           }
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-              echo '<div class="limpiar" onclick="hab_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+              echo '<div class="limpiar btn-square-lg" onclick="hab_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/limpieza.png"  class="center-block img-responsive">';
@@ -230,8 +230,8 @@ switch ($_GET['estado']) {
             echo '</div>';
           }
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-              echo '<div class="mantenimiento" onclick="hab_manteni('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+              echo '<div class="mantenimiento btn-square-lg" onclick="hab_manteni('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/mantenimiento.png"  class="center-block img-responsive">';
@@ -244,8 +244,8 @@ switch ($_GET['estado']) {
             echo '</div>';
           }
           if($user->nivel<=2){//
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-              echo '<div class="supervision" onclick="hab_manteni('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+              echo '<div class="supervision btn-square-lg" onclick="hab_manteni('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/supervision.png"  class="center-block img-responsive">';
@@ -258,8 +258,8 @@ switch ($_GET['estado']) {
             echo '</div>';
           }
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-              echo '<div class="supervision" onclick="hab_supervision('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+              echo '<div class="supervision btn-square-lg" onclick="hab_supervision('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/supervision.png"  class="center-block img-responsive">';
@@ -272,8 +272,8 @@ switch ($_GET['estado']) {
             echo '</div>';
           }
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="bloqueo" onclick="hab_bloqueo('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="bloqueo btn-square-lg" onclick="hab_bloqueo('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/bloqueo.png"  class="center-block img-responsive">';
@@ -286,8 +286,8 @@ switch ($_GET['estado']) {
             echo '</div>';
           }
           if($user->nivel<=1){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="sucia" onclick="hab_sucia('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="sucia btn-square-lg" onclick="hab_sucia('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/basura.png"  class="center-block img-responsive">';
@@ -304,7 +304,7 @@ switch ($_GET['estado']) {
       case 1 :
           if($user->nivel<=2){
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-              echo '<div class="terminar" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class="terminar btn-square-lg" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -316,24 +316,9 @@ switch ($_GET['estado']) {
               echo '</div>';
             echo '</div>';
           }
-          /*if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="edo_cuenta" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].')">';
-              //echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
-                echo '</br>';
-                echo '<div>';
-                    //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
-                echo '</div>';
-                echo '<div>';
-                  echo 'Abonar.';
-                echo '</div>';
-                echo '</br>';
-              echo '</div>';
-            echo '</div>';
-          }*/
           if($user->nivel<=2){//* *//
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="edo_cuenta" onclick="estado_cuenta('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class="edo_cuenta btn-square-lg" onclick="estado_cuenta('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
@@ -345,13 +330,43 @@ switch ($_GET['estado']) {
               echo '</div>';
             echo '</div>';
           }
+          if($user->nivel<=2){
+            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="restaurante btn-square-lg" onclick="agregar_restaurante('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              //echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                echo '</br>';
+                echo '<div>';
+                    //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+                echo '</div>';
+                echo '<div>';
+                  echo 'Restaurante';
+                echo '</div>';
+                echo '</br>';
+              echo '</div>';
+            echo '</div>';
+          }
+          /*if($user->nivel<=2){
+            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="restaurante btn-square-lg" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              //echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                echo '</br>';
+                echo '<div>';
+                    //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+                echo '</div>';
+                echo '<div>';
+                  echo 'Restaurante';
+                echo '</div>';
+                echo '</br>';
+              echo '</div>';
+            echo '</div>';
+          }*/
     break;
       case 2 :
           $mov=$hab->saber_retorno($hab->mov);
           if($mov==0){
             if($user->nivel<=2){
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                echo '<div class="terminar" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                echo '<div class="terminar btn-square-lg" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
                   echo '</br>';
                   echo '<div>';
                       //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -365,8 +380,8 @@ switch ($_GET['estado']) {
             }
           }else{
             if($user->nivel<=2){
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                echo '<div class="terminar" onclick="hab_terminar_detalle_retorno('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')">';
+              echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                echo '<div class="terminar btn-square-lg" onclick="hab_terminar_detalle_retorno('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')">';
                   echo '</br>';
                   echo '<div>';
                       //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -380,8 +395,8 @@ switch ($_GET['estado']) {
             }
           }
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="lavar" onclick="hab_camb_per_etalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="lavar btn-square-lg" onclick="hab_camb_per_etalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/persona.png"  class="center-block img-responsive">';
@@ -396,8 +411,8 @@ switch ($_GET['estado']) {
     break;
 case 3 :
         if($user->nivel<=2){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-            echo '<div class="terminar" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+            echo '<div class="terminar btn-square-lg" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -410,8 +425,8 @@ case 3 :
           echo '</div>';
         }
         if($user->nivel<=2){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-            echo '<div class="limpiar" onclick="hab_camb_per_etalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+            echo '<div class="limpiar btn-square-lg" onclick="hab_camb_per_etalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/persona.png"  class="center-block img-responsive">';
@@ -428,8 +443,8 @@ case 3 :
   $mov=$hab->saber_retorno($hab->mov);
   if($mov==0){
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-        echo '<div class="terminar" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+        echo '<div class="terminar btn-square-lg" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -442,8 +457,8 @@ case 3 :
       echo '</div>';
     }
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-        echo '<div class="detallar" onclick="hab_detallar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+        echo '<div class="detallar btn-square-lg" onclick="hab_detallar('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/detallando.png"  class="center-block img-responsive">';
@@ -456,8 +471,8 @@ case 3 :
       echo '</div>';
     }
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-        echo '<div class="limpiar" onclick="hab_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+        echo '<div class="limpiar btn-square-lg" onclick="hab_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/limpieza.png"  class="center-block img-responsive">';
@@ -471,8 +486,8 @@ case 3 :
     }
   }else{
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-        echo '<div class="terminar" onclick="hab_terminar_detalle_retorno('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+        echo '<div class="terminar btn-square-lg" onclick="hab_terminar_detalle_retorno('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -486,8 +501,8 @@ case 3 :
     }
   }
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="mantenimiento" onclick="hab_camb_per_mantto('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="mantenimiento btn-square-lg" onclick="hab_camb_per_mantto('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/persona.png"  class="center-block img-responsive">';
@@ -503,8 +518,8 @@ case 3 :
 break;
     case 5 :
         if($user->nivel<=2){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-            echo '<div class="terminar" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+            echo '<div class="terminar btn-square-lg" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -517,8 +532,8 @@ break;
           echo '</div>';
         }
         if($user->nivel<=2){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-            echo '<div class="limpiar" onclick="hab_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+            echo '<div class="limpiar btn-square-lg" onclick="hab_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/limpieza.png"  class="center-block img-responsive">';
@@ -533,8 +548,8 @@ break;
   break;
   case 6 :
   if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-        echo '<div class="ocupada" onclick="hab_cobrar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+        echo '<div class="ocupada btn-square-lg" onclick="hab_cobrar('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -547,7 +562,7 @@ break;
       echo '</div>';
 
       echo '<div class="col-xs-6 col-sm-4 col-md-4 btn-herramientas" >';
-        echo '<div class="ocupada" onclick="hab_cobrar_con_resta('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class="ocupada btn-square-lg" onclick="hab_cobrar_con_resta('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -562,8 +577,8 @@ break;
       if($conf->cancelado==1){
 
         if($user->nivel<=1){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-            echo '<div class="terminar" onclick="cancelar_hab('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+            echo '<div class="terminar btn-square-lg" onclick="cancelar_hab('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -575,8 +590,8 @@ break;
             echo '</div>'; 
           echo '</div>';
         }else{
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-            echo '<div class="terminar" onclick="cancelar_hab_espera('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+            echo '<div class="terminar btn-square-lg" onclick="cancelar_hab_espera('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -591,8 +606,8 @@ break;
         
       }else{
         if($user->nivel<=1){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-            echo '<div class="terminar" onclick="cancelar_hab('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+            echo '<div class="terminar btn-square-lg" onclick="cancelar_hab('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -606,8 +621,8 @@ break;
         }
       }
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="asignar" onclick="hab_camb_per_etalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="asignar btn-square-lg" onclick="hab_camb_per_etalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/persona.png"  class="center-block img-responsive">';
@@ -620,8 +635,8 @@ break;
         echo '</div>';
       }
     /*  if($conf->placas>0){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="placas" onclick="hab_asignar_placa('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="placas btn-square-lg" onclick="hab_asignar_placa('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/mantenimiento.png"  class="center-block img-responsive">';
@@ -636,8 +651,8 @@ break;
       break;
       case 7 :
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="sucia" onclick="hab_terminar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="sucia btn-square-lg" onclick="hab_terminar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/basura.png"  class="center-block img-responsive">';
@@ -650,8 +665,8 @@ break;
             echo '</div>';
           }
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="restaurante" onclick="hab_mostrar_rest('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="restaurante btn-square-lg" onclick="hab_mostrar_rest('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/restaurant.png"  class="center-block img-responsive">';
@@ -666,8 +681,8 @@ break;
           }
           if($conf->horas_extra==1){
             if($user->nivel<=2){
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                echo '<div class="horas" onclick="hab_agregar_horas('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                echo '<div class="horas btn-square-lg" onclick="hab_agregar_horas('.$_GET['hab_id'].','.$_GET['estado'].')">';
                   echo '</br>';
                   echo '<div>';
                       //echo '<img src="images/clock.png"  class="center-block img-responsive">';
@@ -682,8 +697,8 @@ break;
           }
           if($conf->medio_tiempo==1){
             if($user->nivel<=2){
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                echo '<div class="horas" onclick="hab_agregar_medio_turno('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                echo '<div class="horas btn-square-lg" onclick="hab_agregar_medio_turno('.$_GET['hab_id'].','.$_GET['estado'].')">';
                   echo '</br>';
                   echo '<div>';
                       //echo '<img src="images/clock.png"  class="center-block img-responsive">';
@@ -698,8 +713,8 @@ break;
           }
           
           if($user->nivel<=2){
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                echo '<div class="ocupada" onclick="hab_renovar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                echo '<div class="ocupada btn-square-lg" onclick="hab_renovar('.$_GET['hab_id'].','.$_GET['estado'].')">';
                   echo '</br>';
                   echo '<div>';
                       //echo '<img src="images/cama.png"  class="center-block img-responsive">'; 
@@ -712,8 +727,8 @@ break;
               echo '</div>';
             }
           if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="personas" onclick="hab_agregar_personas('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="personas btn-square-lg" onclick="hab_agregar_personas('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/persona.png"  class="center-block img-responsive">';
@@ -726,8 +741,8 @@ break;
             echo '</div>';
           }
         /*  if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="alarmas" onclick="hab_guardar_alarma('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="alarmas btn-square-lg" onclick="hab_guardar_alarma('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/alarma.png"  class="center-block img-responsive">';
@@ -742,8 +757,8 @@ break;
           if($conf->canc_despues==1){
             //secho "Configuracion de cancelacion";
             
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                echo '<div class="terminar" onclick="hab_terminar_hab_cobrada('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                echo '<div class="terminar btn-square-lg" onclick="hab_terminar_hab_cobrada('.$_GET['hab_id'].','.$_GET['estado'].')">';
                   echo '</br>';
                   echo '<div>';
                       //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -756,8 +771,8 @@ break;
               echo '</div>';
           }else{
             if($user->nivel<=1){
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                echo '<div class="terminar" onclick="hab_terminar_hab_cobrada('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                echo '<div class="terminar btn-square-lg" onclick="hab_terminar_hab_cobrada('.$_GET['hab_id'].','.$_GET['estado'].')">';
                   echo '</br>';
                   echo '<div>';
                       //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -771,8 +786,8 @@ break;
             }
           }
           if($conf->placas>0){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="paseo" onclick="hab_paseo('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="paseo btn-square-lg" onclick="hab_paseo('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/clock.png"  class="center-block img-responsive">';
@@ -785,8 +800,8 @@ break;
             echo '</div>';
           }
           if($user->nivel<2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="paseo" onclick="cambio_placa('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="paseo btn-square-lg" onclick="cambio_placa('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/placa.png"  class="center-block img-responsive">';
@@ -801,8 +816,8 @@ break;
     break;
     case 8 :
         if($user->nivel<=2){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-            echo '<div class="limpieza" onclick="hab_limpiar_sucia('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+            echo '<div class="limpieza btn-square-lg" onclick="hab_limpiar_sucia('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/limpieza.png"  class="center-block img-responsive">'; 
@@ -816,8 +831,8 @@ break;
         }
         //$tipo= $mov->2($hab->mov); fallo sucia
         if($user->nivel<=2){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-            echo '<div class="ocupada" onclick="hab_re_ocupar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+            echo '<div class="ocupada btn-square-lg" onclick="hab_re_ocupar('.$_GET['hab_id'].','.$_GET['estado'].')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -830,8 +845,8 @@ break;
           echo '</div>';
         }
         if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-              echo '<div class="lavar" onclick="hab_lavar_sucia('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+              echo '<div class="lavar btn-square-lg" onclick="hab_lavar_sucia('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/lavando.png"  class="center-block img-responsive">';
@@ -844,8 +859,8 @@ break;
             echo '</div>';
           }
         if($user->nivel<=2){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-            echo '<div class="mantenimiento" onclick="hab_manteni('.$_GET['hab_id'].','.$_GET['estado'].','.$hab->mov.')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+            echo '<div class="mantenimiento btn-square-lg" onclick="hab_manteni('.$_GET['hab_id'].','.$_GET['estado'].','.$hab->mov.')">';
             echo '</br>';
               echo '<div>';
                   //echo '<img src="images/mantenimiento.png"  class="center-block img-responsive">';
@@ -858,8 +873,8 @@ break;
           echo '</div>';
         }
         if($user->nivel<=2){
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-            echo '<div class="supervision" onclick="hab_supervision('.$_GET['hab_id'].','.$_GET['estado'].','.$hab->mov.')">';
+          echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+            echo '<div class="supervision btn-square-lg" onclick="hab_supervision('.$_GET['hab_id'].','.$_GET['estado'].','.$hab->mov.')">';
             echo '</br>';
               echo '<div>';
                   //echo '<img src="images/mantenimiento.png"  class="center-block img-responsive">';
@@ -874,8 +889,8 @@ break;
   break;
   case 9 :
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="terminar" onclick="hab_liberar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="terminar btn-square-lg" onclick="hab_liberar('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -887,8 +902,8 @@ break;
           echo '</div>';
         echo '</div>';
       }
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-        echo '<div class="asignar" onclick="hab_asignar_de_limpieza('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+        echo '<div class="asignar btn-square-lg" onclick="hab_asignar_de_limpieza('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
@@ -900,8 +915,8 @@ break;
         echo '</div>';
       echo '</div>';
       if($user->nivel<=1){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="ocupada" onclick="hab_re_ocupar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="ocupada btn-square-lg" onclick="hab_re_ocupar('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -914,8 +929,8 @@ break;
         echo '</div>';
       }
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="detallar" onclick="hab_camb_per_limpieza_hab('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="detallar btn-square-lg" onclick="hab_camb_per_limpieza_hab('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/persona.png"  class="center-block img-responsive">';
@@ -930,8 +945,8 @@ break;
   break;
   case 10 :
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="terminar" onclick="hab_liberar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="terminar btn-square-lg" onclick="hab_liberar('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -947,8 +962,8 @@ break;
   break;
   case 11 :
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >'; 
-        echo '<div class="asignar" onclick="hab_cobrar_rest('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >'; 
+        echo '<div class="asignar btn-square-lg" onclick="hab_cobrar_rest('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
@@ -961,8 +976,8 @@ break;
       echo '</div>';
       }
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="ocupada" onclick="hab_cancelar_rest('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="ocupada btn-square-lg" onclick="hab_cancelar_rest('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -974,8 +989,8 @@ break;
           echo '</div>';
         echo '</div>';
       }
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="restaurante" onclick="hab_agregar_rest('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="restaurante btn-square-lg" onclick="hab_agregar_rest('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/restaurant.png"  class="center-block img-responsive">';
@@ -989,8 +1004,8 @@ break;
   break;
   case 12:
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-        echo '<div class="sucia" onclick="hab_terminar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+        echo '<div class="sucia btn-square-lg" onclick="hab_terminar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/basura.png"  class="center-block img-responsive">';
@@ -1003,8 +1018,8 @@ break;
       echo '</div>';
     }
     if($user->nivel<=2){
-            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-              echo '<div class="restaurante" onclick="hab_mostrar_rest_hospe('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="restaurante btn-square-lg" onclick="hab_mostrar_rest_hospe('.$_GET['hab_id'].','.$_GET['estado'].')">';
                 echo '</br>';
                 echo '<div>';
                     //echo '<img src="images/restaurant.png"  class="center-block img-responsive">';
@@ -1017,8 +1032,8 @@ break;
             echo '</div>';
           }
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-          echo '<div class="limpiar" onclick="hab_limpiar_hospedada('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
+          echo '<div class="limpiar btn-square-lg" onclick="hab_limpiar_hospedada('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/limpieza.png"  class="center-block img-responsive">';
@@ -1032,8 +1047,8 @@ break;
             }
 
             if($user->nivel<=2){
-                echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                  echo '<div class="ocupada" onclick="hab_renovar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                  echo '<div class="ocupada btn-square-lg" onclick="hab_renovar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
                     echo '</br>';
                     echo '<div>';
                         //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -1046,8 +1061,8 @@ break;
                 echo '</div>';
               }
               if($user->nivel<=2){
-                echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                  echo '<div class="ocupada" onclick="cambio_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                  echo '<div class="ocupada btn-square-lg" onclick="cambio_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
                     echo '</br>';
                     echo '<div>';
                         //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -1063,8 +1078,8 @@ break;
               if($conf->checkin ==1){ 
                 if($checkin==0){
                 if($user->nivel<2){ 
-                  echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                      echo '<div class="reporte" onclick="hab_registro_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                  echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                      echo '<div class="reporte btn-square-lg" onclick="hab_registro_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
                         echo '</br>';
                         echo '<div>';
                             //echo '<img src="images/reporte.png"  class="center-block img-responsive">'; 
@@ -1078,8 +1093,8 @@ break;
                 }
               }else{
                 if($user->nivel<2){
-                  echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-                      echo '<div class="reporte" onclick="hab_registro_reportes('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                  echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+                      echo '<div class="reporte btn-square-lg" onclick="hab_registro_reportes('.$_GET['hab_id'].','.$_GET['estado'].')">';
                         echo '</br>';
                         echo '<div>';
                             //echo '<img src="images/reporte.png"  class="center-block img-responsive">'; 
@@ -1096,8 +1111,8 @@ break;
   break;
   case 13:
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-        echo '<div class="asignar" onclick="hab_cobrar_rest_hospe('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+        echo '<div class="asignar btn-square-lg" onclick="hab_cobrar_rest_hospe('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
@@ -1110,8 +1125,8 @@ break;
       echo '</div>';
       }
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="ocupada" onclick="hab_cancelar_rest_hospe('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="ocupada btn-square-lg" onclick="hab_cancelar_rest_hospe('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -1126,8 +1141,8 @@ break;
   break;
   case 14 :
       if($user->nivel<=2){//
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="terminar" onclick="hab_liberar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+          echo '<div class="terminar btn-square-lg" onclick="hab_liberar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -1143,8 +1158,8 @@ break;
   break;
   case 15:
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-        echo '<div class="ocupada" onclick="hab_re_ocupar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+        echo '<div class="ocupada btn-square-lg" onclick="hab_re_ocupar('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -1159,8 +1174,8 @@ break;
   break;
   case 16:
     if($user->nivel<=2){
-      echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-        echo '<div class="ocupada" onclick="hab_re_ocupar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+        echo '<div class="ocupada btn-square-lg" onclick="hab_re_ocupar('.$_GET['hab_id'].','.$_GET['estado'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -1175,8 +1190,8 @@ break;
   break;
   case 17:
   if($user->nivel<=2){
-    echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-      echo '<div class="terminar" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
+    echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+      echo '<div class="terminar btn-square-lg" onclick="hab_terminar_detalle('.$_GET['hab_id'].','.$_GET['estado'].')">';
         echo '</br>';
         echo '<div>';
             //echo '<img src="images/home.png"  class="center-block img-responsive">';

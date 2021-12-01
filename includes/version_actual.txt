@@ -48,4 +48,4 @@ VERSION 1.4
 -Interfaz de agregar restaurante
 -Agregar tabla y funciones de pedido rest
 -Generar pago de restaurante sin habitacion, agregar tabla y funciones de ticket
-
+-Vistas cuadradas de todos los botones junto con rendondear sus bordes

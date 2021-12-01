@@ -331,6 +331,46 @@
         $comentario="Editar el historial de inventario de un producto";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Busqueda de cualquier producto en el inventario
+      function mostar_producto_busqueda($busqueda,$hab_id,$estado,$mov){
+        $sentencia = "SELECT * FROM inventario WHERE nombre LIKE '%$busqueda%' ORDER BY categoria, nombre";
+        $comentario="Busqueda de cualquier producto en el inventario";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cunt=0;
+        echo '<div class="row">';
+          $cont=0;
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            if($cunt%3==0){
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo $fila['nombre'];
+              echo'</button></div>';
+              $cunt=0;
+            }elseif($cunt%2==0){
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo $fila['nombre'];
+              echo'</button></div>';
+            }else{
+              echo '<div class="col-sm-4"><button type="button" class="btn btn-info btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo $fila['nombre'];
+              echo'</button></div>';
+            }
+            $cunt++;
+    
+            if($cont==1){
+              $cont=0;
+              echo '</br></br>';
+    
+            }
+            else{
+              $cont++;
+          }
+        }
+        echo '</div>';
+        if ($cont==0){
+          $sentencia;
+        }
+      }
       // Mostrar productos de las categorias existentes en el inventario
       function mostrar_producto_restaurente($categoria,$hab_id,$estado,$mov){
         $sentencia = "SELECT * FROM inventario WHERE categoria = $categoria ORDER BY nombre";
@@ -501,7 +541,7 @@
         //#Hab   Total   #Items    Comen   Pedir//**///**//
         $cantidad= 0;
         $total= 0;
-        $consulta= $this->total_productos(0);
+        $consulta= $this->total_productos($mov);
         while ($fila = mysqli_fetch_array($consulta))
         {
           $cantidad= $cantidad+$fila['cantidad'];
@@ -531,7 +571,7 @@
       // Eliminar un producto al pedido de restaurante
       function eliminar_producto_apedido($id){
         $sentencia = "UPDATE `pedido_rest` SET
-        `estado_pedido` = '0'
+        `estado` = '0'
         WHERE `id` = '$id';";
         $comentario="Eliminar un producto al pedido de restaurante";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

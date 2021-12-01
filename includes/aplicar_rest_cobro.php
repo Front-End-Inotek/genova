@@ -14,6 +14,7 @@
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
   $hab_nombre= $hab->nombre;
+  $hab_nombre= $hab->nombre;
 
   if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';
@@ -66,7 +67,7 @@
   // Guardamos el ticket del pedido del restaurante
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
-  $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],0,$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta);
+  $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta);
   
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
   $consulta= $pedido->saber_pedido_rest_cobro($_POST['mov']);

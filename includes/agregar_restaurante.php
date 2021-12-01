@@ -20,7 +20,7 @@
         <!-- <input type="text" placeholder="Buscar" onkeyup="buscar_libre_producto_cobro(0)" id="a_buscar" class="color_black" autofocus="autofocus"/> -->
         </h4>
         </div>
-        <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_libre_producto_restaurante('.$_GET['hab_id'].')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
+        <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
       </div>
     </div>
 
