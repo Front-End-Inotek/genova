@@ -2555,16 +2555,19 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
 		descuento= 0;
 	}
     total= parseFloat(total);
-    if(total>total_descuento){
+    if(total > total_descuento){
         total_final= total_descuento;
     }else{
         total_final= total;
     }
+    if(forma_pago == 0){
+        forma_pago=1;
+    }
 	var total_pago= efectivo+monto;
-	if(monto<=total_final){
-		if(total_pago>=total_final){
-            if(monto>0 && forma_pago>0){
-                if(forma_pago==2 && folio.length >0 || forma_pago>2){
+	if(monto <= total_final){
+		if(total_pago >= total_final){
+            if(monto>0 && forma_pago>1 || efectivo> 0 && forma_pago==1){
+                if(forma_pago==2 && folio.length >0 || forma_pago>2 || efectivo>=total_final){
                     var datos = {
                         "efectivo":efectivo,
                         "cambio": cambio,
@@ -2598,16 +2601,16 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
                                 });
                             return false;
                 }else{
-                    alert("Falta agregar el folio del pago de la tarjeta");
+                    alert("¡Falta agregar el folio del pago de la tarjeta!");
                 }
             }else{
-                alert("Agrega la forma de pago del moton agregado");
+                alert("Agrega la forma de pago del moto agregado");
             }
 		}else{
 			alert("¡Aun falta dinero!");
 		}
 	}else{
-		alert("La cantidad pagada con tarjeta es demasiada");
+		alert("La cantidad pagada con tarjeta u otro metodo es demasiada");
 	}
 }
 

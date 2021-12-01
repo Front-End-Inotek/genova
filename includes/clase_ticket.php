@@ -149,13 +149,13 @@
       // Obtener la etiqueta del ticket
       function obtener_etiqueta(){
         $sentencia = "SELECT ticket FROM labels LIMIT 1";
-        $etiqueta= 0;
+        $etiqueta ="";
         $comentario="Obtener la etiqueta del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $etiqueta= $fila['ticket'];
+          $etiqueta=$fila["ticket"];
         }
         return $etiqueta;
       }
@@ -196,7 +196,7 @@
           $this->precio= 0;
           $this->total= 0;
           $this->efectivo_pago= 0;
-          $this->tipo_pago= 0
+          $this->tipo_pago= 0;
           $this->categoria= 0;
         }else{
           $sentencia = "SELECT * FROM concepto WHERE id = $id LIMIT 1";

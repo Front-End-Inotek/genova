@@ -31,37 +31,42 @@
   if(is_numeric($_POST['total_final'])){
           $total_final=$_POST['total_final'];
   }else{
-          $total_final=0;
+          $total_final= 0;
   }
   if(is_numeric($_POST['total_pago'])){
           $total_pago=$_POST['total_pago'];
   }else{
-          $total_pago=0;
+          $total_pago= 0;
   }
   if(is_numeric($_POST['cambio'])){
           $cambio=$_POST['cambio'];
   }else{
-          $cambio=0;
+          $cambio= 0;
   }
   if(is_numeric($_POST['monto'])){
           $monto=$_POST['monto'];
   }else{
-          $monto=0;
+          $monto= 0;
   }
   if(is_numeric($_POST['descuento'])){
           $descuento=$_POST['descuento'];
   }else{
-          $descuento=0;
+          $descuento= 0;
   }
   if(is_numeric($_POST['total_descuento'])){
           $total_descuento=$_POST['total_descuento'];
   }else{
-          $total_descuento=0;
+          $total_descuento= 0;
   }
   if($_POST['forma_pago'] == 2){
-          $factuar=1;
+          $factuar= 1;
   }else{
-          $factuar=0;
+          $factuar= 0;
+  }
+  if($_POST['efectivo']>0){
+          $efectivo_pago= 1;
+  }else{
+          $efectivo_pago= 0;
   }
   
   // Guardamos el ticket del pedido del restaurante
@@ -82,7 +87,7 @@
       $historial_nuevo= $historial + $fila['cantidad'];
       $inventario->editar_cantidad_inventario($fila['id_producto'],$cantidad_nueva);
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
-      $concepto->guardar_concepto($ticket_id,$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),2,$categoria);
+      $concepto->guardar_concepto($ticket_id,$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$categoria);
   }
   
   $pedido->cambiar_estado_pedido_cobro($_POST['mov']);
