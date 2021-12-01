@@ -2560,14 +2560,11 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
     }else{
         total_final= total;
     }
-    if(forma_pago==0){
-        forma_pago= 1; 
-    }
 	var total_pago= efectivo+monto;
 	if(monto<=total_final){
 		if(total_pago>=total_final){
-            if(monto>0 && forma_pago>0 || efectivo>0){
-                if(forma_pago==2 && folio.length >0 || forma_pago>2 || efectivo>=total_final){
+            if(monto>0 && forma_pago>0){
+                if(forma_pago==2 && folio.length >0 || forma_pago>2){
                     var datos = {
                         "efectivo":efectivo,
                         "cambio": cambio,
@@ -2604,7 +2601,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
                     alert("Falta agregar el folio del pago de la tarjeta");
                 }
             }else{
-                alert("Agrega la forma de pago del moto agregado");
+                alert("Agrega la forma de pago del moton agregado");
             }
 		}else{
 			alert("¡Aun falta dinero!");

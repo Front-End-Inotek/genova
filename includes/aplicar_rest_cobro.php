@@ -14,9 +14,8 @@
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
   $hab_nombre= $hab->nombre;
+  $hab_nombre= $hab->nombre;
 
-  $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
-/*
   if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';
           $comentario= '';
@@ -96,5 +95,5 @@
           $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
   }else{
           $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab_nombre);
-  }*/
+  }
 ?>

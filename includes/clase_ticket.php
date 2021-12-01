@@ -81,7 +81,38 @@
           }
         }
       }
-      
+      // Guardar el ticket
+      function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta){
+        $fecha=date("Y-m-d H:i");
+        $tiempo=time();
+        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
+        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '1', '1', '0', '1');";
+        $comentario="Guardamos el ticket en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        
+        $MYSql_id=$this->id_mysql();
+        return $MYSql_id;
+      }
+      // Recoger el id del ticket anterior
+      function id_mysql(){
+        $id=0;
+        $sentencia = "SELECT id FROM ticket ORDER BY id DESC LIMIT 1";
+        $comentario="Recoger el id del ticket anterior";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+             $id= $fila['id'];
+        }
+        return $id;
+      }
+      // Cambiar estado de impreso del ticket
+      function cambiar_estado($id_ticket){
+        $sentencia = "UPDATE `ticket` SET
+        `impreso` = '0'
+        WHERE `id` = '$id_ticket';";
+        $comentario="Cambiar estado de impreso del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
              
   }
   /**
