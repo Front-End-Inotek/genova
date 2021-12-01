@@ -81,38 +81,7 @@
           }
         }
       }
-      // Guardar el ticket
-      function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta){
-        $fecha=date("Y-m-d H:i");
-        $tiempo=time();
-        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
-        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '1', '1', '0', '1');";
-        $comentario="Guardamos el ticket en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        
-        $MYSql_id=$this->id_mysql();
-        return $MYSql_id;
-      }
-      // Recoger el id del ticket anterior
-      function id_mysql(){
-        $id=0;
-        $sentencia = "SELECT id FROM ticket ORDER BY id DESC LIMIT 1";
-        $comentario="Recoger el id del ticket anterior";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-             $id= $fila['id'];
-        }
-        return $id;
-      }
-      // Cambiar estado de impreso del ticket
-      function cambiar_estado($id_ticket){
-        $sentencia = "UPDATE `ticket` SET
-        `impreso` = '0'
-        WHERE `id` = '$id_ticket';";
-        $comentario="Cambiar estado de impreso del ticket";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-      }
+      
              
   }
   /**
@@ -149,13 +118,13 @@
       // Obtener la etiqueta del ticket
       function obtener_etiqueta(){
         $sentencia = "SELECT ticket FROM labels LIMIT 1";
-        $etiqueta ="";
+        $etiqueta= 0;
         $comentario="Obtener la etiqueta del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $etiqueta=$fila["ticket"];
+          $etiqueta= $fila['ticket'];
         }
         return $etiqueta;
       }
@@ -181,7 +150,8 @@
       public $cantidad;
       public $precio;
       public $total;
-      public $tipocargo;
+      public $efectivo_pago;
+      public $tipo_pago;
       public $categoria;
 
       // Constructor
@@ -194,7 +164,8 @@
           $this->cantidad= 0;
           $this->precio= 0;
           $this->total= 0;
-          $this->tipocargo= 0;
+          $this->efectivo_pago= 0;
+          $this->tipo_pago= 0
           $this->categoria= 0;
         }else{
           $sentencia = "SELECT * FROM concepto WHERE id = $id LIMIT 1";
@@ -208,15 +179,16 @@
             $this->cantidad= $fila['cantidad'];
             $this->precio= $fila['precio'];
             $this->total= $fila['total'];
-            $this->tipocargo= $fila['tipocargo'];
+            $this->efectivo_pago= $fila['efectivo_pago'];
+            $this->tipo_pago= $fila['tipo_pago'];
             $this->categoria= $fila['categoria'];               
           }
         }
       }
       // Obtener la etiqueta del ticket
-      function guardar_concepto($id_ticket,$nombre,$cantidad,$precio,$total,$tipocargo,$categoria){
-        $sentencia = "INSERT INTO `concepto` (`id_ticket`, `nombre`, `cantidad`, `precio`, `total`, `tipocargo`, `categoria`)
-        VALUES ('$id_ticket', '$nombre', '$cantidad', '$precio', '$total', '$tipocargo', '$categoria');";
+      function guardar_concepto($id_ticket,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$categoria){
+        $sentencia = "INSERT INTO `concepto` (`id_ticket`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `categoria`)
+        VALUES ('$id_ticket', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$categoria');";
         $comentario="Guardamos el concepto en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
