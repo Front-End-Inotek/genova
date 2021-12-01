@@ -14,9 +14,14 @@
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title">Agregar Restaurante 
-      <!-- <input type="text" placeholder="Buscar" onkeyup="buscar_libre_producto_cobro(0)" id="a_buscar" class="color_black" autofocus="autofocus"/> -->
-      </h4>
+      <div class="row">
+        <div class="col-sm-10">
+        <h4 class="modal-title">Agregar Restaurante 
+        <!-- <input type="text" placeholder="Buscar" onkeyup="buscar_libre_producto_cobro(0)" id="a_buscar" class="color_black" autofocus="autofocus"/> -->
+        </h4>
+        </div>
+        <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_libre_producto_restaurante('.$_GET['hab_id'].')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
+      </div>
     </div>
 
     <div class="modal-body">
