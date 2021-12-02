@@ -14,7 +14,6 @@
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
   $hab_nombre= $hab->nombre;
-  $hab_nombre= $hab->nombre;
 
   if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';

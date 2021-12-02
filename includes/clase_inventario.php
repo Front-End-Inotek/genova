@@ -538,7 +538,11 @@
       }
       // Mostrar los productos del pedido restaurente sin habitacion
       function mostar_pedido_funciones($hab_id,$estado,$mov){
-        //#Hab   Total   #Items    Comen   Pedir//**///**//
+        if($hab_id != 0){
+          include_once("clase_hab.php");
+          $hab= NEW Hab($hab_id);
+          $hab_nombre= $hab->nombre;
+        }
         $cantidad= 0;
         $total= 0;
         $consulta= $this->total_productos($mov);
@@ -548,14 +552,22 @@
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
 
-        echo '<div class="row">
-          <div class="col-sm-8">#Items: '.$cantidad.'</div> 
-          <div class="col-sm-4"></div> 
-          <div class="col-sm-8">Total: $'.number_format($total, 2).'</div> 
-          <div class="col-sm-4"></div> 
-          <div class="col-sm-8"><button class="btn btn-success btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">🧾Pedir</button></></div>                
-          <div class="col-sm-4"></div> 
-        </div>'; 
+        echo '<div class="row">'; 
+          if($cantidad > 0){
+            echo '<div class="col-sm-8">#Items: '.$cantidad.'</div> 
+            <div class="col-sm-4"></div>';
+            if($hab_id != 0){
+              echo '<div class="col-sm-8">Habitación: '.$hab_nombre.'</div> 
+              <div class="col-sm-4"></div>';
+            } 
+            echo '<div class="col-sm-8">Total: $'.number_format($total, 2).'</div> 
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8"><button class="btn btn-success btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">🧾Pedir</button></></div>
+            <div class="col-sm-4"></div>';                 
+          }else{
+            echo '<div class="col-sm-12"></div>'; 
+          }
+        echo '</div>'; 
       }
       // Obtengo el total de productos del pedido restaurente
       function total_productos($mov){
