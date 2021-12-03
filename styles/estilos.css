@@ -521,20 +521,20 @@ a.topictitle:hover {
   background-color: #186A3B;
   color: #82E0AA ;
   /*color: white;*/
-  padding: 0em 10px 10px 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado0:hover{
   background-color: #28B463;
   color: #82E0AA ;
   /*color: white;*/
-  padding: 0em 10px 10px 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado{
   background-color: #D0E369;
   color: white;
-  padding: 0em 10px 10px 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }/*
 .estado1{
@@ -553,14 +553,14 @@ a.topictitle:hover {
   background-color:#7B241C;
   color: #D98880;
   /*color: white;*/
-  padding: 0em 10px 10px 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado1:hover{
   background-color:#C0392B;
   color: #D98880;
   /*color: white;*/
-  padding: 0em 10px 10px 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado2{
