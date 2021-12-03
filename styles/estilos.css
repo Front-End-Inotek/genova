@@ -198,26 +198,27 @@ a.topictitle:hover {
   margin-bottom: 1em;
   font-size:14px;
 }
-.titulo_hab{/* p */
+.titulo_hab{/* estado */
   width: 100%;
-  text-align: center;
+  text-align: left;
   font-weight: bold;
+  padding-top: 8px;
 }
 .titulo_estados{
   width: 100%;
   font-size: 1.3em;
-  text-align: center;
+  text-align: left;
   font-weight: bold;
 }
 .numero_hab{
-  text-align: right;
+  text-align: left;
   line-height: 2.7em;
   width: 30%;
   float: left;
   height:2.7em;
 }
-.numero_hab_1{/* icono*/
-  text-align: center;
+.numero_hab_1{/* icono */
+  text-align: left;
   line-height: 2.7em;
   width: 100%;
   
@@ -226,25 +227,24 @@ a.topictitle:hover {
 .tama_num_hab{/* p */
   font-size: 1.8em;
 }
-.imagen_hab{/* p */
+.imagen_hab{/* numero */
   width:100%;
-  text-align: center;
+  text-align: right;
   height:2.1em;
   vertical-align:middle;
- 
 }
 .pie{
     font-size: .7em;
 }
-.timepo_hab{/* p */
+.timepo_hab{/* fecha */
   width: 100%;
-  text-align: center;
+  text-align: left;
   font-size: .9em;
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 
 .asignar_reca{
-  text-align: center;
+  text-align: left;
   background-color: #C0C0C0;
   font-size: 1.2em;
   color: white;
@@ -518,20 +518,20 @@ a.topictitle:hover {
   background-color: #186A3B;
   /*color: #82E0AA ;*/
   color: white;
-  padding: 10px;
+  padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }
 .estado0:hover{
   background-color: #28B463;
   /*color: #82E0AA ;*/
   color: white;
-  padding: 10px;
+  padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }
 .estado{
   background-color: #D0E369;
   color: white;
-  padding: 10px;
+  padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }/*
 .estado1{
@@ -550,14 +550,14 @@ a.topictitle:hover {
   background-color:#7B241C;
   /*color: #D98880;*/
   color: white;
-  padding: 10px;
+  padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }
 .estado1:hover{
   background-color:#C0392B;
   /*color: #D98880;*/
   color: white;
-  padding: 10px;
+  padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }
 .estado2{

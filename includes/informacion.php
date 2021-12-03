@@ -685,9 +685,27 @@
                 echo '</div>';
                 }
 
-                echo '<div class="titulo_hab">';
-                  echo $estado;
-                echo '</div>';
+                echo '<div class="row">
+
+                  <div class="col-sm-6">
+                  <div class="titulo_hab">';
+                    echo $estado;
+                  echo '</div>
+                  </div>
+
+                  <div class="col-sm-6">
+                  <div class="imagen_hab">';
+
+                    if($fila['id']<100){
+                        echo '<span class="badge tama_num_hab">'.$fila['nombre'].'</span>';
+                    }else{
+                        echo '<span class="badge tama_num_hab">'.$fila['comentario'].'</span>';
+                    }
+ 
+                  echo '</div>
+                  </div>
+                
+                </div>';
 
                 /*echo '<div class="numero_hab_1">';
                
@@ -745,8 +763,11 @@
                   
                 }
                 echo '</div>';*/
-                
-                echo '<div class="imagen_hab">';
+                /*echo '<div class="col-sm-6">
+              
+                 
+
+                <div class="imagen_hab">';
 
                 if($fila['id']<100){
                     echo '<span class="badge tama_num_hab">'.$fila['nombre'].'</span>';
@@ -755,7 +776,7 @@
                 }
 
                  
-                echo '</div>';
+                echo '</div></div></div>';*/
       
                 echo '<div class="timepo_hab">';
                         //$this->ver_cronometro($fila['id'],$fila['estado'],0,$usuario->nivel);// anterior de cantidad de segundos
