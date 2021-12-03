@@ -650,7 +650,7 @@
               echo '<a href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')"><div class="estado'.$fila['estado'].'">';
 
                 
-                if($config->automatizacion==1){
+                if($config->automatizacion==1){///
                   echo '<div class="titulo_estados" >';
 
                   if($fila['respuesta_energia']==0){

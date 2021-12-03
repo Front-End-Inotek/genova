@@ -17,7 +17,7 @@
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 16px;
-  color: #818181;
+  color: #3B83BD;
   display: block;
   transition: 0.3s
 }
@@ -25,6 +25,7 @@
 /* Cuando pasas el mouse sobre los enlaces de navegación, cambia su color */
 .sidenav a:hover, .offcanvas a:focus{
   color: #f1f1f1;
+  /*background-color: #4882b4;*/
 }
 
 /* Coloque y aplique estilo al botón de cierre (esquina superior derecha) */
@@ -46,12 +47,12 @@
 
 body {
 overflow-x: hidden;
-background-color: rgb(220, 220, 220);
+background-color: #040C14;
 }/*200 */
 
 /* Agregue un color de fondo negro a la navegación superior */
 .topnav {
-  background-color: #333;
+  background-color: #242C34;
   overflow: hidden;
 }
 
@@ -203,6 +204,7 @@ a.topictitle:hover {
   text-align: left;
   font-weight: bold;
   padding-top: 8px;
+  color: white;
 }
 .titulo_estados{
   width: 100%;
@@ -232,6 +234,7 @@ a.topictitle:hover {
   text-align: right;
   height:2.1em;
   vertical-align:middle;
+  color: white;
 }
 .pie{
     font-size: .7em;
@@ -516,15 +519,15 @@ a.topictitle:hover {
 */
 .estado0{
   background-color: #186A3B;
-  /*color: #82E0AA ;*/
-  color: white;
+  color: #82E0AA ;
+  /*color: white;*/
   padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }
 .estado0:hover{
   background-color: #28B463;
-  /*color: #82E0AA ;*/
-  color: white;
+  color: #82E0AA ;
+  /*color: white;*/
   padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }
@@ -548,15 +551,15 @@ a.topictitle:hover {
 }*/
 .estado1{
   background-color:#7B241C;
-  /*color: #D98880;*/
-  color: white;
+  color: #D98880;
+  /*color: white;*/
   padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }
 .estado1:hover{
   background-color:#C0392B;
-  /*color: #D98880;*/
-  color: white;
+  color: #D98880;
+  /*color: white;*/
   padding: 0em 10px 10px 10px;
   border-radius: 10px;
 }
