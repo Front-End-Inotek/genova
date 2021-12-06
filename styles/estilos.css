@@ -40,7 +40,7 @@
 /* Estilo del contenido de la página: utilícelo si desea empujar el contenido de la página hacia la derecha cuando abre la navegación lateral */
 #main {
   transition: margin-left .5s;
-  padding: 20px;
+  padding: 10px;
   overflow:hidden;
   width:100%;
 }
@@ -176,23 +176,11 @@ a.topictitle:hover {
 .color_black{
   color: black;
 }
-.espacio_anterior{/* p */
-  padding: .15em;
-  padding-bottom: .3em;
-  width: 155px !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  height: 155px !important;
-  font-size:14px;
-  border-radius: 10px;
-}
 .espacio{/* p */
-  padding: .15em;
-  padding-bottom: .3em;
   width: 155px !important;
   max-width: 100% !important;
   max-height: 100% !important;
-  height: 155px !important;
+  height: 110px !important;
   font-size:14px;
 }
 .btn-herramientas{
@@ -206,35 +194,15 @@ a.topictitle:hover {
   padding-top: 8px;
   color: white;
 }
-.titulo_estados{
-  width: 100%;
-  font-size: 1.3em;
-  text-align: left;
-  font-weight: bold;
-}
-.numero_hab{
-  text-align: left;
-  line-height: 2.7em;
-  width: 30%;
-  float: left;
-  height:2.7em;
-}
-.numero_hab_1{/* icono */
-  text-align: left;
-  line-height: 2.7em;
-  width: 100%;
-  
-  height:2.7em;
-}
-.tama_num_hab{/* p */
-  font-size: 1.8em;
-}
 .imagen_hab{/* numero */
   width:100%;
   text-align: right;
   height:2.1em;
   vertical-align:middle;
   color: white;
+}
+.tama_num_hab{/* p */
+  font-size: 1.8em;
 }
 .pie{
     font-size: .7em;
@@ -245,6 +213,22 @@ a.topictitle:hover {
   font-size: .9em;
   /*font-weight: bold;*/
 }
+.icono_hab{/* icono */
+  width:100%;
+  text-align: right;
+  font-size: .9em;
+  color: white;
+  padding: 0em 0px 8px 0px;
+}
+#icono_r{/* icono medidas*/
+  width: 24px;
+  height: 16px;
+}
+#icono_c{/* icono medidas*/
+  width: 18px;
+  height: 18px;
+}
+
 
 .asignar_reca{
   text-align: left;
@@ -518,15 +502,15 @@ a.topictitle:hover {
   }
 */
 .estado0{
-  background-color: #186A3B;
-  color: #82E0AA ;
+  background-color: #1c2229;
+  color: #555555;
   /*color: white;*/
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado0:hover{
-  background-color: #28B463;
-  color: #82E0AA ;
+  background-color: #3d4249;
+  color: #555555;
   /*color: white;*/
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
@@ -550,14 +534,14 @@ a.topictitle:hover {
   border-radius: 10px;
 }*/
 .estado1{
-  background-color:#7B241C;
+  background-color:#7b241ca6;
   color: #D98880;
-  /*color: white;*/
+  /*color: white;#7B241C;*/
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado1:hover{
-  background-color:#C0392B;
+  background-color:#c03a2baf;
   color: #D98880;
   /*color: white;*/
   padding: 0em 10px 0px 10px;
@@ -830,36 +814,13 @@ a.topictitle:hover {
 #boton_racking{
   display:none;
 }
-.estado_auto{
-  width: 50%;
-  float: left;
-  font-size: .6em;
-}
+
 .pedido_restaurante_cobro{
   font-size: .9em;
   line-height:normal;
   border-bottom: .25em solid #cc4607;
 }
-.off_energia{
-  background-color: #959595;
-  color: #D3D3D3;
-  border-radius: 0px 15px 15px 0px;
-}
-.on_energia{
-  background-color: #D2CD3D;
-  color:#FFF702;
-  border-radius: 0px 15px 15px 0px;
-}
-.on_cortina{
-  background-color: #494949;
-  color: #D3D3D3;
-  border-radius: 15px 0px 0px 15px;
-}
-.off_cortina{
-  background-color: #A928A2;
-  color:#F7B9F2;
-  border-radius: 15px 0px 0px 15px;
-}
+
 .form_oculto{
   display:none;
 }

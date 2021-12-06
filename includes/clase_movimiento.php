@@ -406,16 +406,18 @@
         }
         return $detalle_realiza;
       }
-      function saber_motivo($mov){
-        $sentencia = "SELECT comentario FROM  movimiento WHERE id = $mov LIMIT 1";
+      function saber_motivo($mov){// LO VOY A MODIFICAR PARA SUCIA O LIMPIANDO //
+        $sentencia = "SELECT motivo FROM movimiento WHERE id = $mov LIMIT 1";
         $comentario="Asignación de usuarios a la clase usuario funcion constructor";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $motivo= '...';
+         //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $comentario= $fila['comentario'];
+          $motivo= $fila['motivo'];
         }
-        return $comentario;
+        return $motivo;
       }
       function saber_per_limpia($mov){
         $sentencia = "SELECT persona_limpio FROM  movimiento WHERE id = $mov LIMIT 1";
@@ -607,6 +609,7 @@
         $sentencia = "SELECT detalle_inicio FROM  movimiento WHERE id = $mov LIMIT 1";
         $comentario="Obtener el tiempo de inicio de hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $detalle_inicio= '';
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
