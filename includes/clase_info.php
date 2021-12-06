@@ -1,6 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
+  include_once("clase_cuenta.php");
   include_once('clase_huesped.php');
 
   /**
@@ -82,6 +83,7 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //echo $sentencia ;
       //se recibe la consulta y se convierte a arreglo
+      $total_faltante= 0.0;
       $detalle_inicio=0;
       $detalle_fin=0;
       $id_huesped=0;
@@ -94,7 +96,9 @@
         $id_huesped= $fila['id_huesped'];
         $total= $fila['total'];
       }
+        $cuenta= NEW Cuenta(0);
         $huesped = NEW Huesped($id_huesped);
+        $total_faltante= $cuenta->mostrar_faltante($mov);
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Fecha entrada: '.date("Y-m-d H:i:s",  $detalle_inicio);
         echo '</div>';
@@ -105,7 +109,13 @@
           echo 'Huésped: '.$huesped->nombre;
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Saldo: $'.$total= number_format($total, 2);
+          //echo 'Saldo: $'.$total= number_format($total, 2);
+          if($total_faltante >= 0){
+            echo 'Saldo: $'.number_format($total_faltante, 2);
+          }else{
+            $total_faltante= substr($total_faltante, 1);
+            echo 'Saldo: -$'.number_format($total_faltante, 2);
+          }
         echo '</div>';
     }
     function detllado($hab_id,$estado,$mov){

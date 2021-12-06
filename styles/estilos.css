@@ -24,7 +24,7 @@
 
 /* Cuando pasas el mouse sobre los enlaces de navegación, cambia su color */
 .sidenav a:hover, .offcanvas a:focus{
-  color: #f1f1f1;
+  color: #94ccfa;
   /*background-color: #4882b4;*/
 }
 
@@ -36,6 +36,11 @@
   font-size: 36px;
   margin-left: 50px;
 }
+
+#icono_sidenav{/* color del icono de sidenav*/
+  fill:#3B83BD;
+}
+
 
 /* Estilo del contenido de la página: utilícelo si desea empujar el contenido de la página hacia la derecha cuando abre la navegación lateral */
 #main {
@@ -520,19 +525,7 @@ a.topictitle:hover {
   color: white;
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
-}/*
-.estado1{
-  background-color: #D0E369;
-  color: white;
-  padding: 10px;
-  border-radius: 10px;
 }
-.estado1:hover{
-  background-color:#e9f893;
-  color: white;
-  padding: 10px;
-  border-radius: 10px;
-}*/
 .estado1{
   background-color:#7b241ca6;
   color: #D98880;

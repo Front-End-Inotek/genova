@@ -59,12 +59,25 @@
   $saldo_faltante= $total_estancia - $saldo_pagado;
   $total_cargos= 0;
   $total_abonos= 0;
-  
+  $faltante= 0;
+  $faltante= $cuenta->mostrar_faltante($mov);
+  if($faltante >= 0){
+    $faltante_mostrar= '$'.number_format($faltante, 2);
+  }else{
+    $faltante_mostrar= substr($faltante, 1);
+    $faltante_mostrar= '-$'.number_format($faltante_mostrar, 2);
+  }
+
   echo '
       <div class="container blanco"> 
         <div class="row">
-          <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$id_hab.'</h2></div>
-        </div>
+          <div class="col-sm-6 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$id_hab.'</h2></div>';
+          if($faltante == 0){
+            echo '<div class="col-sm-6 text-right"></div>';
+          }else{
+            echo '<div class="col-sm-6 text-right"><h5 class="text-dark margen-1">Saldo Total '.$faltante_mostrar.'</h5></div>';
+          }
+        echo '</div>
         <div class="row">
           <div class="col-sm-4">Fecha Entrada: '.$fecha_entrada.'</div>
           <div class="col-sm-4">Fecha Salida: '.$fecha_salida.'</div>
@@ -109,7 +122,7 @@
           <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,$id_hab,$_GET['hab_id'],$_GET['estado']);echo '</div>
         </div>'; 
 
-        $total_faltante= $total_cargos - $total_abonos;
+        $total_faltante= $total_abonos - $total_cargos;
 
         echo '<div class="row">
           <div class="col-sm-4"></div>

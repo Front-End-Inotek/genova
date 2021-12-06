@@ -152,15 +152,18 @@
   
     function mostrarhab($id,$token){
       $tipo= 1;
+      include_once("clase_cuenta.php");
+      include_once('clase_configuracion.php');
       include('clase_movimiento.php');
       include('clase_usuario.php');
-      include_once('clase_configuracion.php');
+      $cuenta= NEW Cuenta(0);
       $config = NEW Configuracion();
       $mivi =NEW movimiento(0);
       $usuario = NEW Usuario($id);
       $cronometro=0;
       $persona='-';
       //$persona= $id;
+      $total_faltante= 0.0;
       $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario, tipo_hab.nombre AS tipo_monbre FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id ORDER BY id";
      
       $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
@@ -168,6 +171,7 @@
       //se recibe la consulta y se convierte a arreglo
       while ($fila = mysqli_fetch_array($consulta))
       {
+        $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
         $estado="no definido";
         switch ($fila['estado']) {
             case 0:
@@ -292,7 +296,12 @@
 
               echo '<div class="timepo_hab">';
                       $total= $this->cuenta_total($fila['id']);
-                      echo '$'.number_format($total, 2);
+                      if($total_faltante >= 0){
+                        echo '$'.number_format($total_faltante, 2);
+                      }else{
+                        $total_faltante= substr($total_faltante, 1);
+                        echo '-$'.number_format($total_faltante, 2);
+                      }
               echo '</div>';
 
               echo '<div class="icono_hab">';

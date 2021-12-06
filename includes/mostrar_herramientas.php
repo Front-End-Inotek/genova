@@ -85,52 +85,8 @@ function show_info($hab_id,$estado){
   show_info($_GET['hab_id'],$_GET['estado']);
   echo '</br>';
   echo '<div class="row">';
-    if($conf->automatizacion==1 && $user->nivel<2){
-      echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-        echo '<div class="cortina btn-square-lg" onclick="abrir_cortina_2('.$_GET['hab_id'].')">';
-          echo '</br>';
-          echo '<div>';
-              //echo '<img src="images/cortina.png"  class="center-block img-responsive">';
-          echo '</div>';
-          echo '<div>';
-            echo 'Pulso Cortina';
-          echo '</div>';
-          echo '</br>';
-        echo '</div>';
-      echo '</div>';
-
-      if($conf->luz==1){
-        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-          echo '<div class="master_on btn-square-lg" onclick="master_on_directo('.$_GET['hab_id'].')">';
-            echo '</br>';
-            echo '<div>';
-                //echo '<img src="images/master_on.png"  class="center-block img-responsive">';
-            echo '</div>';
-            echo '<div>';
-              echo 'On';
-            echo '</div>';
-            echo '</br>';
-          echo '</div>';
-        echo '</div>';
-
-
-        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
-          echo '<div class="master_off btn-square-lg" onclick="master_off('.$_GET['hab_id'].')">';
-            echo '</br>';
-            echo '<div>';
-                //echo '<img src="images/master_off.png"  class="center-block img-responsive">';
-            echo '</div>';
-            echo '<div>';
-              echo 'OFF';
-            echo '</div>';
-            echo '</br>';
-          echo '</div>';
-        echo '</div>';
-      }
-    }
 switch ($_GET['estado']) {
   case 0:
-
 
           /*echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
             echo '<div class="detallar btn-square-lg" onclick="master_on('.$_GET['hab_id'].')">';
@@ -144,7 +100,6 @@ switch ($_GET['estado']) {
               echo '</br>';
             echo '</div>';
           echo '</div>';
-
 
           echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas"  >';
             echo '<div class="detallar btn-square-lg" onclick="master_off('.$_GET['hab_id'].')">';

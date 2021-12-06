@@ -320,7 +320,6 @@
         //echo $sentencia;
         //echo $id;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        $total=0;
         echo '<div class="table-responsive" id="tabla_abonos">
           <table class="table table-bordered table-hover">
             <thead>
@@ -377,6 +376,42 @@
           </table>
         </div>';
         return $total_abonos;
+      }
+      // Mostrar la diferencia existente entre los cargos y los abonos que tenemos por movimiento en una habitacion
+      function mostrar_faltante($mov){
+        $total_cargos= 0;
+        $total_abonos= 0;
+        $total_faltante= 0;
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo    
+        FROM cuenta 
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 ORDER BY cuenta.fecha";
+        $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          if($fila['edo'] == 1){
+            $total_cargos= $total_cargos + $fila['cargo'];
+          }
+        }
+
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
+        FROM cuenta 
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 ORDER BY cuenta.fecha";
+        $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          if($fila['edo'] == 1){
+            $total_abonos= $total_abonos + $fila['abono'];
+          }
+        }
+
+        // Obtenemos la diferencia existente entre los cargos y los abonos
+        //$total_faltante= $total_cargos - $total_abonos;
+        $total_faltante= $total_abonos - $total_cargos;
+        return $total_faltante;
       }
       // Cambiar de habitacion el monto en estado de cuenta
       function cambiar_hab_monto($mov,$id){
