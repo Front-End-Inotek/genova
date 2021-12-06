@@ -300,6 +300,36 @@ switch ($_GET['estado']) {
               echo '</div>';
             echo '</div>';
           }
+          if($user->nivel<=2){
+            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="sucia btn-square-lg" onclick="hab_ocupada_sucia('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              //echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                echo '</br>';
+                echo '<div>';
+                    //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+                echo '</div>';
+                echo '<div>';
+                  echo 'Sucia';
+                echo '</div>';
+                echo '</br>';
+              echo '</div>';
+            echo '</div>';
+          }
+          if($user->nivel<=2){
+            echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+              echo '<div class="limpieza btn-square-lg" onclick="hab_ocupada_limpieza('.$_GET['hab_id'].','.$_GET['estado'].')">';
+              //echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
+                echo '</br>';
+                echo '<div>';
+                    //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+                echo '</div>';
+                echo '<div>';
+                  echo 'Limpieza';
+                echo '</div>';
+                echo '</br>';
+              echo '</div>';
+            echo '</div>';
+          }
           /*if($user->nivel<=2){
             echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
               echo '<div class="restaurante btn-square-lg" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].')">';

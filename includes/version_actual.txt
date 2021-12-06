@@ -53,3 +53,4 @@ VERSION 1.4
 VERSION 1.5
 -Generar rama Vistas
 -Cambios en los cuadritos de racks de estados
+-Agregar icono como estado interno de la habitacion

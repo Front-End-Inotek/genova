@@ -50,10 +50,10 @@
   width:100%;
 }
 
-body {
+body {/* Body info*/
 overflow-x: hidden;
 background-color: #040C14;
-}/*200 */
+}
 
 /* Agregue un color de fondo negro a la navegación superior */
 .topnav {
@@ -151,7 +151,6 @@ background-color: #040C14;
   font-size: 1.2em;;
 }
 #area_trabajo_cortina{
- 
   color: white;
 }
 .texto_entrada{
@@ -181,14 +180,14 @@ a.topictitle:hover {
 .color_black{
   color: black;
 }
-.espacio{/* p */
+.espacio{/* */
   width: 155px !important;
   max-width: 100% !important;
   max-height: 100% !important;
   height: 110px !important;
   font-size:14px;
 }
-.btn-herramientas{
+.btn-herramientas{/* */
   margin-bottom: 1em;
   font-size:14px;
 }
@@ -206,7 +205,7 @@ a.topictitle:hover {
   vertical-align:middle;
   color: white;
 }
-.tama_num_hab{/* p */
+.tama_num_hab{/* */
   font-size: 1.8em;
 }
 .pie{
@@ -246,7 +245,6 @@ a.topictitle:hover {
   color: white;
 }
 
-
 .Alin-center{
   text-align: center;
 }
@@ -268,19 +266,19 @@ a.topictitle:hover {
   font-size: 2em;
   line-height:normal;
 }
-.altura-rest{/*-*/
+.altura-rest{/* */
   height: 45em;
   overflow-x: scroll;
 }
-.altura-rest_total{/*-*/
+.altura-rest_total{/* */
   height: 26em;
   overflow-x: scroll;
 }
-.altura-rest_productos{/*-*/
+.altura-rest_productos{/* */
   height: 18em;
   overflow-x: scroll;
 }
-.btn-square-md{/*-*/
+.btn-square-md{/* */
   width: 80px !important;
   max-width: 100% !important;
   max-height: 100% !important;
@@ -289,7 +287,7 @@ a.topictitle:hover {
   padding: 0px;
   font-size:12px;
 }
-.btn-square-lg{/*-*/
+.btn-square-lg{/* */
   width: 100px !important;
   max-width: 100% !important;
   max-height: 100% !important;
@@ -299,7 +297,7 @@ a.topictitle:hover {
   font-size:12px;
   border-radius: 10px;
 }
-.btn-square-xl{/*-*/
+.btn-square-xl{/* */
   width: 120px !important;
   max-width: 100% !important;
   max-height: 100% !important;
@@ -339,18 +337,6 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
-.master_on{
-  text-align: center;
-  background-color: #A3D829;
-  font-size: 1.2em;
-  color: white;
-}
-.master_off{
-  text-align: center;
-  background-color: #5f5e00;
-  font-size: 1.2em;
-  color: white;
-}
 .mantenimiento{
   text-align: center;
   background-color: #D0D03D;
@@ -377,7 +363,7 @@ a.topictitle:hover {
 }
 .edo_cuenta{/* */
   text-align: center;
-  background-color: rgb(153, 49, 49);
+  background-color: #6b1f18e8;
   font-size: 1.2em;
   color: white;
 }
@@ -414,17 +400,18 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
-.terminar{
+.terminar{/* */
   text-align: center;
   background-color: #9F9F9F;
+  /*background-color: #242C34*/
   font-size: 1.2em;
   color: white;
 }
-.ocupada{
+.ocupada{/* */
   text-align: center;
-  background-color: #7B241C;
+  background-color: #6b1f18e8;
   font-size: 1.2em;
-  color: #D98880;
+  color: white;
 }
 .reporte{
   text-align: center;
@@ -450,9 +437,9 @@ a.topictitle:hover {
   font-size: 1.2em;
   color:  white;
 }
-.sucia{
+.sucia{/* */
   text-align: center;
-  background-color: #186A3B;
+  background-color: #385c48;
   font-size: 1.2em;
   color: white;
 }
@@ -462,9 +449,9 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
-.restaurante{
+.restaurante{/* */
   text-align: center;
-  background-color: #cc4607;
+  background-color: #ce9b26;
   font-size: 1.2em;
   color: white;
 }
@@ -475,9 +462,9 @@ a.topictitle:hover {
 .caja_info{
   overflow: scroll;
 }
-.limpieza{
+.limpieza{/* */
   text-align: center;
-  background-color:#741D56;
+  background-color:#28294e;
   font-size: 1.2em;
   color: white;
 }
@@ -862,37 +849,7 @@ a.topictitle:hover {
   .bg::placeholder
   {
 	  padding-left:15px;
-  }
-
-  .caja 
-  { 
-    font-family: sans-serif; 
-    font-size: 18px; 
-    font-weight: 400; 
-    width: 134%;
-    color: #000000; 
-    background:#BDBDBD; 
-  }
-
-  .caja2 
-  { 
-    font-family: sans-serif; 
-    font-size: 18px; 
-    font-weight: 400; 
-    width: 98%;
-    color: #FFFF; 
-    background:#C0392B; 
-  }
-
-  .caja3 
-  { 
-    font-family: sans-serif; 
-    font-size: 6px; 
-    font-weight: 100; 
-    width: 134%;
-    color: #FFF; 
-    background:rgb(22, 102, 221);
-  }
+  } 
 
   @media (min-width: 768px) {
     .container {

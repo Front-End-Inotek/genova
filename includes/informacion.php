@@ -164,7 +164,7 @@
       $persona='-';
       //$persona= $id;
       $total_faltante= 0.0;
-      $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario, tipo_hab.nombre AS tipo_monbre FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id ORDER BY id";
+      $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario, tipo_hab.nombre AS tipo_monbre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id ORDER BY id";
      
       $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -306,18 +306,18 @@
 
               echo '<div class="icono_hab">';
                   //echo $motivo;
-                  switch ($fila['estado']) {
-                    case 0:
+                  switch ($fila['interno']) {
+                    case 'Sin estado':
+                      echo '<img id="icono_r" src="images/cama.png"';  
+                      break;
+                    case 'Sucia':
+                      echo '<img id="icono_c" src="images/basura.png">';
+                      break;
+                    case 'Limpieza':
+                      echo '<img id="icono_c" src="images/lavando.png">';
+                      break;
+                    case 'Disponible':
                       echo '<img id="icono_c" src="images/home.png"';  
-                      break;
-                    case 1:
-                      echo '<img id="icono_r" src="images/cama.png">';//images/detallando.png
-                      break;
-                    case 2:
-                      //echo '<img src="images/lavando.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 3:
-                      //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
                       break;
                     case 4:
                       //echo '<img src="images/mantenimiento.png"  class="espacio-imagen center-block img-responsive">';

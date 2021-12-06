@@ -106,7 +106,8 @@
           echo 'Fecha salida: '.date("Y-m-d H:i:s",  $fin_hospedaje);
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Huésped: '.$huesped->nombre;
+           $nombre_huesped= $huesped->nombre.' '.$huesped->apellido;
+          echo 'Huésped: '.$nombre_huesped;
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           //echo 'Saldo: $'.$total= number_format($total, 2);

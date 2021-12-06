@@ -2622,3 +2622,58 @@ function principal(){
 	$('#area_trabajo_menu').hide();
     recargar_pagina();
 }
+
+//* Estados de Edo.Ocupado *//
+
+// Notifica un error en el proceso de una habitacion
+function problemas_hab(datos){
+	alert("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
+}
+
+// Mandar al estado interno sucia una habitacion ocupada
+function hab_ocupada_sucia(hab_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		  "hab_id": hab_id,
+		  "estado": estado,
+          "usuario_id": usuario_id,
+		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded",
+		  url:"includes/hab_ocupada_sucia.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:principal,
+		  //success:problemas_hab,
+		  timeout:5000,
+		});
+	return false;
+}
+
+// Mandar al estado interno sucia una habitacion ocupada
+function hab_ocupada_limpieza(hab_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		  "hab_id": hab_id,
+		  "estado": estado,
+          "usuario_id": usuario_id,
+		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded",
+		  url:"includes/hab_ocupada_limpieza.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:principal,
+		  //success:problemas_hab,
+		  timeout:5000,
+		});
+	return false;
+}
