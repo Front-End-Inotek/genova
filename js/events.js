@@ -2623,7 +2623,7 @@ function principal(){
     recargar_pagina();
 }
 
-//* Estados de Edo.Ocupado *//
+//* Estados  Internos de Edo.Ocupado *//
 
 // Notifica un error en el proceso de una habitacion
 function problemas_hab(datos){
