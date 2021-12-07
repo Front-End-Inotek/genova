@@ -554,7 +554,77 @@
               break;
             }   
         return $nivel;
-      }    
+      }
+      // Seleccionar recamarera    
+      function select_reca($hab_id,$estado,$hab_estado){
+        $sentencia = "SELECT * FROM usuario WHERE activo = 1 AND nivel = 4 AND estado = 1 ORDER BY usuario";
+        $comentario="Asignación de usuarios a la clase usuario funcion constructor";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          switch ($hab_estado) {
+            case 1:
+              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+                  echo '<div class="select_reca btn-square-lg" onclick="hab_ocupada_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
+                  echo '</br>';
+                  echo '<div>';
+                      //echo '<img src="images/persona.png"  class="center-block img-responsive">';
+                  echo '</div>';
+                  echo '<div>';
+                    echo $fila['usuario'];
+                  echo '</div>';
+                  /*echo '<div>Limpiadas: ';
+                    $fecha= $this->ultima_fecha();
+                    echo $this->cantidad_limpieza($fecha,$fila['id']);
+                  echo '</div>';*/
+                  //echo '</br>';
+                echo '</div>';
+              echo '</div>';
+              break;
+            //case 2:
+            default:
+                echo "Sin Información que mostrar";
+              break;
+          }
+        }
+      }
+      // Obtener la cantidad de habitaciones limpiadas
+      function cantidad_limpieza($fecha,$id){
+        $cantidad = 0;
+        $sentencia ="SELECT count(*) AS cantidad FROM movimiento WHERE persona_limpio = $id AND inicio_limpieza >= $fecha;";
+        //echo $sentencia.'</br>';
+        $comentario="Obtener el ultimo movimento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+             $cantidad= $fila['cantidad'];
+        }
+
+        $sentencia ="SELECT count(*) AS cantidad FROM movimiento WHERE detalle_inicio >= $fecha AND (motivo = 'limpieza' OR motivo = 'lavado' OR motivo = 'detalle') AND detalle_realiza = $id;";
+        //echo $sentencia.'</br>';
+        $comentario="Obtener el ultimo movimento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+             $cantidad= $cantidad+$fila['cantidad'];
+        }
+        return $cantidad;
+      }
+      // Obtner la fecha del ultimo movimiento
+      function ultima_fecha(){
+        $fecha = 0;
+        //$sentencia = 'SELECT fecha FROM corte ORDER BY id DESC LIMIT 1 ;';
+        $sentencia = 'SELECT detalle_inicio FROM movimiento ORDER BY id DESC LIMIT 1 ;';
+        //echo $sentencia ;
+        $comentario="Obtner la fecha del ultimo movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+             $fecha= $fila['detalle_inicio'];
+        }
+        return $fecha;
+      }
        
   }       
 ?>

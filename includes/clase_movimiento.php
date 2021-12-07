@@ -234,6 +234,14 @@
         $comentario="Modificar el detalle fin del movimiento";
         $this->realizaConsulta($sentencia,$comentario);
       }
+      // Modificar la persona limpio del movimiento
+      function editar_persona_limpio($mov,$usuario){
+        $sentencia = "UPDATE `movimiento` SET
+        `persona_limpio` = '$usuario'
+        WHERE `id` = '$mov';";
+        $comentario="Modificar la persona limpio del movimiento";
+        $this->realizaConsulta($sentencia,$comentario);
+      }
       // Modificar el estado interno del movimiento
       function editar_estado_interno($mov,$opcion){
         $estado_interno= '';

@@ -437,6 +437,14 @@ a.topictitle:hover {
   font-size: 1.2em;
   color:  white;
 }
+
+.select_reca{/* */
+  text-align: center;
+  background-color: #440f37dc;
+  font-size: 1.2em;
+  color: white;
+}
+
 .sucia{/* */
   text-align: center;
   background-color: #385c48;

@@ -2654,13 +2654,19 @@ function hab_ocupada_sucia(hab_id,estado){
 	return false;
 }
 
-// Mandar al estado interno sucia una habitacion ocupada
-function hab_ocupada_limpieza(hab_id,estado){
+// Mandar a limpiar una habitacion ocupada
+function hab_ocupada_limpiar(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_ocupada_limpiar.php?hab_id="+hab_id+"&estado="+estado);
+}
+
+// Mandar al estado interno limpieza una habitacion ocupada
+function hab_ocupada_limpieza(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
 		  "hab_id": hab_id,
 		  "estado": estado,
+          "usuario": usuario,
           "usuario_id": usuario_id,
 		};
 	$.ajax({
