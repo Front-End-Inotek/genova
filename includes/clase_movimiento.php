@@ -275,6 +275,15 @@
         }
         return $estado_interno;
       }
+      // Poner tiempo en campo finalizado en la clase movimiento
+      function terminar_mov($mov){
+        $tiempo=time();
+        $sentencia = "UPDATE `movimiento` SET
+        `finalizado` = '$tiempo'
+        WHERE `id` = '$mov';";
+        $comentario="Poner tiempo en campo finalizado en la clase movimiento";
+        $this->realizaConsulta($sentencia,$comentario);
+      }
   
   }
 ?>

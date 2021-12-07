@@ -114,7 +114,7 @@ function loaderbar_menu(){
 	$("#area_trabajo_menu").load("includes/barra_progreso.php");
 }
 
-// Si existe un problema en el proceso
+// Notifica un error o problema en el proceso
 function problemas_sistema(datos){
 	alert("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
 }
@@ -171,8 +171,9 @@ function guardar_tipo(){
 				  data:datos,
 				  beforeSend:loaderbar,
 				  success:ver_tipos,
-				  timeout:5000,
-				  error:problemas_sistema
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -247,6 +248,7 @@ function borrar_tipo(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_tipos,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -311,8 +313,9 @@ function guardar_tarifa(){
 				  data:datos,
 				  beforeSend:loaderbar,
 				  success:ver_tarifas,
-				  timeout:5000,
-				  error:problemas_sistema
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -397,6 +400,7 @@ function borrar_tarifa(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_tarifas,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -453,8 +457,9 @@ function guardar_hab(){
 				  data:datos,
 				  beforeSend:loaderbar,
 				  success:ver_hab,
-				  timeout:5000,
-				  error:problemas_sistema
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -531,6 +536,7 @@ function borrar_hab(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_hab,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -762,8 +768,9 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 				  data:datos,
 				  beforeSend:loaderbar,
 				  success:ver_reservaciones,
-				  timeout:5000,
-				  error:problemas_sistema
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -959,6 +966,7 @@ function borrar_reservacion(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_reservaciones,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -1045,8 +1053,9 @@ function guardar_huesped(){
 				  data:datos,
 				  beforeSend:loaderbar,
 				  success:ver_huespedes,
-				  timeout:5000,
-				  error:problemas_sistema
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -1171,6 +1180,7 @@ function borrar_huesped(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_huespedes,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -1242,8 +1252,9 @@ function guardar_forma_pago(){
 				  data:datos,
 				  beforeSend:loaderbar,
 				  success:ver_formas_pago,
-				  timeout:5000,
-				  error:problemas_sistema
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -1316,6 +1327,7 @@ function borrar_forma_pago(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_formas_pago,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -1386,6 +1398,7 @@ function guardar_usuario(){
                   data:datos,
                   beforeSend:loaderbar,
                   success:ver_usuarios,
+                  //success:problemas_sistema,
                   timeout:5000,
                   error:problemas_sistema
                 });
@@ -1800,6 +1813,7 @@ function borrar_usuario(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_usuarios,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -2216,6 +2230,7 @@ function borrar_categoria(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_categorias,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -2278,8 +2293,9 @@ function guardar_inventario(){
 				  data:datos,
 				  beforeSend:loaderbar,
 				  success:ver_inventario,
-				  timeout:5000,
-				  error:problemas_sistema
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -2388,6 +2404,7 @@ function borrar_inventario(id){
                 data:datos,
                 beforeSend:loaderbar,
                 success:ver_inventario,
+                //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
             });
@@ -2490,8 +2507,9 @@ function guardar_inventario(){
 				  data:datos,
 				  beforeSend:loaderbar,
 				  success:ver_inventario,
-				  timeout:5000,
-				  error:problemas_sistema
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -2588,18 +2606,19 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
                         "usuario_id": usuario_id,
                             };
                             $.ajax({
-                                async:true,
-                                type: "POST",
-                                dataType: "html",
-                                contentType: "application/x-www-form-urlencoded",
-                                url:"includes/aplicar_rest_cobro.php",
-                                data:datos,
-                                beforeSend:loaderbar,
-                                success:principal,
-                                //success:problemas_hab,
-                                timeout:5000
+                                  async:true,
+                                  type: "POST",
+                                  dataType: "html",
+                                  contentType: "application/x-www-form-urlencoded",
+                                  url:"includes/aplicar_rest_cobro.php",
+                                  data:datos,
+                                  beforeSend:loaderbar,
+                                  success:principal,
+                                  //success:problemas_sistema,
+                                  timeout:5000,
+                                  error:problemas_sistema
                                 });
-                            return false;
+                                return false;
                 }else{
                     alert("¡Falta agregar el folio del pago de la tarjeta!");
                 }
@@ -2625,11 +2644,6 @@ function principal(){
 
 //* Estados  Internos de Edo.Ocupado *//
 
-// Notifica un error en el proceso de una habitacion
-function problemas_hab(datos){
-	alert("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
-}
-
 // Mandar al estado interno sucia una habitacion ocupada
 function hab_ocupada_sucia(hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
@@ -2648,8 +2662,9 @@ function hab_ocupada_sucia(hab_id,estado){
 		  data:datos,
 		  beforeSend:loaderbar,
 		  success:principal,
-		  //success:problemas_hab,
-		  timeout:5000,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
 		});
 	return false;
 }
@@ -2678,8 +2693,39 @@ function hab_ocupada_limpieza(hab_id,estado,usuario){
 		  data:datos,
 		  beforeSend:loaderbar,
 		  success:principal,
-		  //success:problemas_hab,
-		  timeout:5000,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
 		});
 	return false;
+}
+
+// Modal de mandar a terminar una habitacion ocupada
+function hab_terminar_hospedaje(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_terminar_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
+}
+
+// Mandar a terminar una habitacion ocupada
+function hab_terminar(hab_id,estado){
+    var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		  "hab_id": hab_id,
+		  "estado": estado,
+          "usuario_id": usuario_id,
+		};
+    $.ajax({
+          async:true,
+          type: "POST",
+          dataType: "html",
+          contentType: "application/x-www-form-urlencoded",
+          url:"includes/hab_terminar.php",
+          data:datos,
+          beforeSend:loaderbar,
+          success:principal,
+          //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
+        });
+    return false;
 }

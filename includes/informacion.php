@@ -34,10 +34,10 @@
         case 1:
             echo $persona;
           break;
-        /*case 2:
+        case 2:
             echo $persona;
           break;
-        case 3:
+        /*case 3:
             echo $persona;
           break;
         case 4:

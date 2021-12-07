@@ -8,5 +8,5 @@
   $movimiento->editar_detalle_fin($hab->mov);
   $movimiento->editar_persona_limpio($hab->mov,$_POST['usuario']);
   $movimiento->editar_estado_interno($hab->mov,1.2);
-  $logs->guardar_log($_POST['id'],"Habitacion ocupada limpieza: ". $hab->nombre);
+  $logs->guardar_log($_POST['usuario_id'],"Habitacion ocupada limpieza: ". $hab->nombre);
 ?>
