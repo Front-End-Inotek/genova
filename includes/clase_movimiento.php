@@ -1,6 +1,6 @@
 <?php
-  error_reporting(E_ALL);
-  ini_set('display_errors', '1');
+ /* error_reporting(E_ALL);
+  ini_set('display_errors', '1');*/
   date_default_timezone_set('America/Mexico_City');
 
   include_once('consulta.php');
@@ -11,12 +11,12 @@
      */
     class Movimiento extends ConexionMYSql
     {
-      public $mov;
+      /*public $mov;
       public $rec_realiza;
-      public $id_reservacion;
+      public $id_reservacion;*/
       function __construct($id)
       {
-        if($id>0){
+        /*if($id>0){
           $sentencia = "SELECT * FROM movimiento WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores del movimiento";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -31,7 +31,7 @@
           $this->mov= 0;
           $this->rec_realiza="";
           $this->id_reservacion= 0;
-        }
+        }*/
       }
 
       // Obtengo los datos del cargo por noche de la habitacio 
@@ -68,99 +68,6 @@
           $tipo_hab= $fila['nombre'];
   		  }
         return $tipo_hab;
-      }
-      function estado_hab($est){
-        $estado	=array();
-  
-        switch ($est) {
-          case 0:
-            $estado[0]="Disponible";
-            $estado[1]='<img src="images/home.png"  class="espacio-imagen center-block img-responsive">';
-          break;
-          case 1:
-            $estado[0]="Detallado";
-            $estado[1]='<img src="images/detallando.png"  class="espacio-imagen center-block img-responsive">';
-            
-          break;
-          case 2:
-            $estado[0]="Lavar";
-            $estado[1]='<img src="images/lavando.png"  class="espacio-imagen center-block img-responsive">';
-            
-          break;
-          case 3:
-              $estado[0]="Limpiar";
-              $estado[1]='<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
-              
-          break;
-          case 4:
-              $estado[0]="Mantto.";
-              $estado[1]='<img src="images/mantenimiento.png"  class="espacio-imagen center-block img-responsive">';
-             
-          break;
-          case 5:
-              $estado[0]="Cancelado";
-              $estado[1]='<img src="images/bloqueo.png"  class="espacio-imagen center-block img-responsive">';
-              
-          break;
-          case 6:
-              $estado[0]="Espera";
-              $estado[1]='<img src="images/cobrando.png"  class="espacio-imagen center-block img-responsive">';
-              
-          break;
-          case 7:
-              $estado[0]="Ocupada";
-              $estado[1]='<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
-              
-          break;
-          case 8:
-              $estado[0]="Sucia";
-              $estado[1]='<img src="images/basura.png"  class="espacio-imagen center-block img-responsive">';
-              
-          break;
-          case 9:
-            $estado[0]="Limpieza";
-            $estado[1]='<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
-            
-          break;
-          case 10:
-              # code...
-           
-          break;
-          case 11:
-          
-            $estado[0]="Restaurante";
-            $estado[1]='<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
-          break;
-          case 12:
-              $estado[0]="Hospedada";
-              $estado[1]='<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
-              
-          break;
-          case 13:
-            $estado[1]='<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
-            
-            $estado[0]="Restaurante";
-          break;
-          case 14:
-            $estado[0]="Limpieza";
-            $estado[1]= '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
-            
-          case 15:
-              $estado[0]="Paseo";
-              $estado[1]='<img src="images/home.png"  class="espacio-imagen center-block img-responsive">';
-              
-          break;
-          case 16:
-            $estado[0]="Restaurante";
-            $estado[1]='<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
-          break;
-
-          case 17:
-             $estado[0]="Supervision";
-             $estado[1]='<img src="images/supervision.png"  class="espacio-imagen center-block img-responsive">';
-          break;
-      }
-        return $estado;
       }
       function obtener_estado($hab){
         $sentencia = "SELECT estado FROM hab WHERE nombre = $hab";
@@ -337,7 +244,7 @@
         }
         return $fin_hospedaje;
       }
-      function saber_inicio_sucia($mov){
+      function saber_inicio_sucia($mov){/* */
         $sentencia = "SELECT finalizado FROM  movimiento WHERE id = $mov LIMIT 1";
         $comentario="Asignación de usuarios a la clase usuario funcion constructor";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

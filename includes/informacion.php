@@ -9,7 +9,7 @@
     function __construct()
     {
 
-    }
+    } 
 
     /*function evaluarEntrada($usuario_evaluar ,$password_evaluar){
       include_once('clase_log.php');
@@ -151,119 +151,110 @@
     }
   
     function mostrarhab($id,$token){
-      $tipo= 1;
       include_once("clase_cuenta.php");
-      include_once('clase_configuracion.php');
       include('clase_movimiento.php');
-      include('clase_usuario.php');
       $cuenta= NEW Cuenta(0);
-      $config = NEW Configuracion();
-      $mivi =NEW movimiento(0);
-      $usuario = NEW Usuario($id);
+      $mov= NEW movimiento(0);
+      $tipo= 1;
       $cronometro=0;
-      $persona='-';
-      //$persona= $id;
       $total_faltante= 0.0;
       $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario, tipo_hab.nombre AS tipo_monbre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id ORDER BY id";
-     
       $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
         $estado="no definido";
         switch ($fila['estado']) {
             case 0:
               $estado="Disponible";
-              $cronometro=$mivi->saber_tiempo_ultima_renta($fila['id']);
+              $cronometro=$mov->saber_tiempo_ultima_renta($fila['id']);
             break;
             case 1:
-              $estado="Ocupado";//Detallado
-              $persona=$mivi->saber_per_deta($fila['moviemiento']);
-              $cronometro=$mivi->saber_tiempo_fin($fila['moviemiento']);//saber_tiempo_fin
+              $estado="Ocupado";
+              //$persona=$mov->saber_per_deta($fila['moviemiento']);
+              $cronometro=$mov->saber_tiempo_fin($fila['moviemiento']);
+              $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
-            /*case 2:
-              $estado="Lavar";
-              $persona=$mivi->saber_per_deta($fila['moviemiento']);
-              $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mivi->saber_tiempo_fin($fila['moviemiento']);
-              //$sub_motivo=$mivi->saber_motivo($fila['moviemiento']);
-              //$motivo=substr($sub_motivo, 0, 15);
+            case 2:
+              $estado="Sucia";
+              $cronometro=$mov->saber_inicio_sucia($fila['moviemiento']);
             break;
-            case 3:
+            /*case 3:
               $estado="Limpiar";
-              $persona=$mivi->saber_per_deta($fila['moviemiento']);
+              $persona=$mov->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mivi->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$mov->saber_tiempo_fin($fila['moviemiento']);
             break;
             case 4:
               $estado="Mantto.";
-              $persona=$mivi->saber_per_deta($fila['moviemiento']);
+              $persona=$mov->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mivi->saber_tiempo_inicio($fila['moviemiento']);
-              $sub_motivo=$mivi->saber_motivo($fila['moviemiento']);
-              $motivo=substr($sub_motivo, 0, 15);
+              $cronometro=$mov->saber_tiempo_inicio($fila['moviemiento']);
+              //$sub_motivo=$mov->saber_motivo($fila['moviemiento']);
+              //$motivo=substr($sub_motivo, 0, 15);
             break;
             case 5:
               $estado="Cancelado";
-              $cronometro=$mivi->saber_tiempo_inicio($fila['moviemiento']);
+              $cronometro=$mov->saber_tiempo_inicio($fila['moviemiento']);
             break;
             case 6:
               $estado="Espera";
-              $persona=$mivi->saber_per_deta($fila['moviemiento']);
+              $persona=$mov->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mivi->saber_tiempo_inicio($fila['moviemiento']);
+              $cronometro=$mov->saber_tiempo_inicio($fila['moviemiento']);
             break;
             case 7:
               $estado="Ocupada";
-              $cronometro=$mivi->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
             break;
             case 8:
-              $estado="Sucia";
-              $cronometro=$mivi->saber_inicio_sucia($fila['moviemiento']);
+              $estado="Lavar";
+              $persona=$mov->saber_per_deta($fila['moviemiento']);
+              $persona=$usuario->obtengo_usuario($id);
+              $cronometro=$mov->saber_tiempo_fin($fila['moviemiento']);
             break;
             case 9:
               $estado="Limpieza";
-              $persona=$mivi->saber_per_limpia($fila['moviemiento']);
+              $persona=$mov->saber_per_limpia($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mivi->saber_tiempo_fin_limpieza($fila['moviemiento']);
+              $cronometro=$mov->saber_tiempo_fin_limpieza($fila['moviemiento']);
             break;
             case 10:
                 # code...
             break;
             case 11:
-              $cronometro=$mivi->saber_cobro_rest($fila['moviemiento']);
+              $cronometro=$mov->saber_cobro_rest($fila['moviemiento']);
               $estado="Restaurante";
             break;
             case 12:
               $estado="Hospedada";
-              $cronometro=$mivi->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
             break;
             case 13:
-              $cronometro=$mivi->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
               $estado="Restaurante";
             break;
             case 14:
               $estado="Limpieza";
-              $persona=$mivi->saber_per_limpia($fila['moviemiento']);
+              $persona=$mov->saber_per_limpia($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mivi->saber_tiempo_fin_limpieza($fila['moviemiento']);
+              $cronometro=$mov->saber_tiempo_fin_limpieza($fila['moviemiento']);
             break;
             case 15:
               $estado="Paseo";
-              $cronometro=$mivi->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
             break;
             case 16:
-              $cronometro=$mivi->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
               $estado="Restaurante";
             break;
             case 17:
               $estado="Superv.";
-              $persona=$mivi->saber_per_deta($fila['moviemiento']);
+              $persona=$mov->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $motivo=$mivi->saber_motivo($fila['moviemiento']);
-              $cronometro=$mivi->saber_tiempo_inicio($fila['moviemiento']);*/
+              $motivo=$mov->saber_motivo($fila['moviemiento']);
+              $cronometro=$mov->saber_tiempo_inicio($fila['moviemiento']);*/
           break;
         }
 
