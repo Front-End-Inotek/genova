@@ -90,11 +90,11 @@
         $comentario="Guardamos el ticket en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         
-        $MYSql_id=$this->id_mysql();
-        return $MYSql_id;
+        $id= $this->ultima_insercion();
+        return $id;
       }
       // Recoger el id del ticket anterior
-      function id_mysql(){
+      function ultima_insercion(){
         $id=0;
         $sentencia = "SELECT id FROM ticket ORDER BY id DESC LIMIT 1";
         $comentario="Recoger el id del ticket anterior";

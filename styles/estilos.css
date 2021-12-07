@@ -494,15 +494,15 @@ a.topictitle:hover {
   }
 */
 .estado0{
-  background-color: #1c2229;
-  color: #555555;
+  background-color: #3d4249;
+  color: #8a93a0;
   /*color: white;*/
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado0:hover{
-  background-color: #3d4249;
-  color: #555555;
+  background-color: #67707c;
+  color: #8a93a0;
   /*color: white;*/
   padding: 0em 10px 0px 10px;
   border-radius: 10px;

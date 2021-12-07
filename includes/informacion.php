@@ -5,12 +5,11 @@
  
   class Informacion extends ConexionMYSql
   {
-
+    // Constructor
     function __construct()
     {
 
     } 
-
     /*function evaluarEntrada($usuario_evaluar ,$password_evaluar){
       include_once('clase_log.php');
       $logs = NEW Log();
@@ -27,16 +26,6 @@
       }
       return $id;
     }*/
-    function conversorSegundosHoras($tiempo_en_segundos){//?
-      $horas = floor($tiempo_en_segundos / 3600);
-      $minutos = floor(($tiempo_en_segundos - ($horas * 3600)) / 60);
-      $segundos = $tiempo_en_segundos - ($horas * 3600) - ($minutos * 60);
-      if($minutos<10){
-        $minutos="0".$minutos;
-      }
-      return $horas . ':' . $minutos ;
-    }
-
     function ver_detalle($hab_id,$estado,$nombre,$persona,$mov){
       switch ($estado) {
         case 0:
@@ -96,165 +85,111 @@
       }
     }
     
-    function cuenta_total($mov){//va con movimiento
-      $id_reservacion=0;
-      $total=0;
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
-      //echo  $sentencia;
-      $comentario="Obtener el numero de reservacion correspondiente de la habitacion";
-      $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //se recibe la consulta y se convierte a arreglo
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-           $id_reservacion= $fila['id_reservacion']; 
-      }
-
-      $sentencia = "SELECT * FROM reservacion WHERE id = $id_reservacion LIMIT 1;";
-      //echo  $sentencia;
-      $comentario="Obtener la cuenta total de la habitacion";
-      $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //se recibe la consulta y se convierte a arreglo
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-           if($fila['forzar_tarifa']>0){
-             $total= $fila['forzar_tarifa']; 
-           }else{
-             $total= $fila['total']; 
-           }
-      }
-      return $total;
-    }
-    
-    function ver_fecha_salida($mov){//va con movimiento
-      $id_reservacion=0;
-      $fecha_salida=0;
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
-      //echo  $sentencia;
-      $comentario="Obtener el numero de reservacion correspondiente de la habitacion";
-      $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //se recibe la consulta y se convierte a arreglo
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-           $id_reservacion= $fila['id_reservacion']; 
-      }
-
-      $sentencia = "SELECT * FROM reservacion WHERE id = $id_reservacion LIMIT 1;";
-      //echo  $sentencia;
-      $comentario="Obtener la fecha de salida de la habitacion";
-      $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //se recibe la consulta y se convierte a arreglo
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-             $fecha_salida= date("d-m-Y",$fila['fecha_salida']);
-      }
-      return $fecha_salida;
-    }
-  
     function mostrarhab($id,$token){
       include_once("clase_cuenta.php");
       include('clase_movimiento.php');
       $cuenta= NEW Cuenta(0);
-      $mov= NEW movimiento(0);
+      $movimiento= NEW movimiento(0);
       $tipo= 1;
       $cronometro=0;
-      $total_faltante= 0.0;
-      $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario, tipo_hab.nombre AS tipo_monbre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id ORDER BY id";
+      $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_monbre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id ORDER BY id";
       $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       while ($fila = mysqli_fetch_array($consulta))
       {
+        $total_faltante= 0.0;
         $estado="no definido";
         switch ($fila['estado']) {
             case 0:
               $estado="Disponible";
-              $cronometro=$mov->saber_tiempo_ultima_renta($fila['id']);
+              $cronometro=$movimiento->saber_tiempo_ultima_renta($fila['id']);
             break;
             case 1:
               $estado="Ocupado";
               //$persona=$mov->saber_per_deta($fila['moviemiento']);
-              $cronometro=$mov->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
               $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
             case 2:
               $estado="Sucia";
-              $cronometro=$mov->saber_inicio_sucia($fila['moviemiento']);
+              $cronometro=$movimiento->saber_inicio_sucia($fila['moviemiento']);
             break;
             /*case 3:
               $estado="Limpiar";
-              $persona=$mov->saber_per_deta($fila['moviemiento']);
+              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mov->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
             break;
             case 4:
               $estado="Mantto.";
-              $persona=$mov->saber_per_deta($fila['moviemiento']);
+              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mov->saber_tiempo_inicio($fila['moviemiento']);
-              //$sub_motivo=$mov->saber_motivo($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
+              //$sub_motivo=$movimiento->saber_motivo($fila['moviemiento']);
               //$motivo=substr($sub_motivo, 0, 15);
             break;
             case 5:
               $estado="Cancelado";
-              $cronometro=$mov->saber_tiempo_inicio($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
             break;
             case 6:
               $estado="Espera";
-              $persona=$mov->saber_per_deta($fila['moviemiento']);
+              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mov->saber_tiempo_inicio($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
             break;
             case 7:
               $estado="Ocupada";
-              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
             break;
             case 8:
               $estado="Lavar";
-              $persona=$mov->saber_per_deta($fila['moviemiento']);
+              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mov->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
             break;
             case 9:
               $estado="Limpieza";
-              $persona=$mov->saber_per_limpia($fila['moviemiento']);
+              $persona=$movimiento->saber_per_limpia($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mov->saber_tiempo_fin_limpieza($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_fin_limpieza($fila['moviemiento']);
             break;
             case 10:
                 # code...
             break;
             case 11:
-              $cronometro=$mov->saber_cobro_rest($fila['moviemiento']);
+              $cronometro=$movimiento->saber_cobro_rest($fila['moviemiento']);
               $estado="Restaurante";
             break;
             case 12:
               $estado="Hospedada";
-              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
             break;
             case 13:
-              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $estado="Restaurante";
             break;
             case 14:
               $estado="Limpieza";
-              $persona=$mov->saber_per_limpia($fila['moviemiento']);
+              $persona=$movimiento->saber_per_limpia($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$mov->saber_tiempo_fin_limpieza($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_fin_limpieza($fila['moviemiento']);
             break;
             case 15:
               $estado="Paseo";
-              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
             break;
             case 16:
-              $cronometro=$mov->saber_fin_hospedaje($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $estado="Restaurante";
             break;
             case 17:
               $estado="Superv.";
-              $persona=$mov->saber_per_deta($fila['moviemiento']);
+              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $motivo=$mov->saber_motivo($fila['moviemiento']);
-              $cronometro=$mov->saber_tiempo_inicio($fila['moviemiento']);*/
+              $motivo=$movimiento->saber_motivo($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);*/
           break;
         }
 
@@ -281,12 +216,12 @@
               </div>';
 
               echo '<div class="timepo_hab">';
-                      $fecha_salida= $this->ver_fecha_salida($fila['id']);
+                      $fecha_salida= $movimiento->ver_fecha_salida($fila['id']);
                       echo $fecha_salida;
               echo '</div>';
 
               echo '<div class="timepo_hab">';
-                      $total= $this->cuenta_total($fila['id']);
+                      //$total= $movimiento->cuenta_total($fila['id']);
                       if($total_faltante >= 0){
                         echo '$'.number_format($total_faltante, 2);
                       }else{
@@ -297,18 +232,21 @@
 
               echo '<div class="icono_hab">';
                   //echo $motivo;
-                  switch ($fila['interno']) {
+                  switch ($fila['interno']){
+                    case '':
+                      echo '<img id="icono_r" src="."';  
+                      break;
+                    case 'Disponible':
+                      echo '<img id="icono_r" src="."';  
+                      break;
                     case 'Sin estado':
-                      echo '<img id="icono_r" src="images/cama.png"';  
+                      echo '<img id="icono_r" src="."';  
                       break;
                     case 'Sucia':
                       echo '<img id="icono_c" src="images/basura.png">';
                       break;
                     case 'Limpieza':
                       echo '<img id="icono_c" src="images/lavando.png">';
-                      break;
-                    case 'Disponible':
-                      echo '<img id="icono_c" src="images/home.png"';  
                       break;
                     case 4:
                       //echo '<img src="images/mantenimiento.png"  class="espacio-imagen center-block img-responsive">';
