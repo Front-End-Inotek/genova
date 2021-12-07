@@ -20,17 +20,16 @@
               $this->ocupada($hab_id,$estado,$mov);
           break;
         case 2:
-              $this->detllado($hab_id,$estado,$mov);
+              $this->sucia($hab_id,$estado,$mov);
           break;
         case 3:
-              $this->detllado($hab_id,$estado,$mov);
+              $this->limpieza($hab_id,$estado,$mov);
           break;
         case 4:
               $this->mantenimiento($hab_id,$estado,$mov);
           break;
         case 5:
               $this->bloqueo($hab_id,$estado,$mov);
-
           break;
         case 6:
               $this->por_cobrar($hab_id,$estado,$mov);
@@ -39,11 +38,10 @@
               //$this->ocupada($hab_id,$estado,$mov,$id);
           break;
         case 8:
-            $this->sucia($hab_id,$estado,$mov);
+              $this->detllado($hab_id,$estado,$mov);
           break;
         case 9:
-
-              $this->limpieza($hab_id,$estado,$mov);
+              $this->detllado($hab_id,$estado,$mov);
           break;
         case 10:
               echo '<div class="col-xs-2 col-sm-2 col-md-2">';
@@ -100,10 +98,10 @@
         $huesped = NEW Huesped($id_huesped);
         $total_faltante= $cuenta->mostrar_faltante($mov);
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Fecha entrada: '.date("Y-m-d H:i:s",  $detalle_inicio);
+          echo 'Fecha entrada: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Fecha salida: '.date("Y-m-d H:i:s",  $fin_hospedaje);
+          echo 'Fecha salida: '.date("d-m-Y H:i:s",  $fin_hospedaje);
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
            $nombre_huesped= $huesped->nombre.' '.$huesped->apellido;
@@ -119,32 +117,24 @@
           }
         echo '</div>';
     }
-    function detllado($hab_id,$estado,$mov){
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
-      $comentario="obtener informacion de la ultima vez que se rento ";
+    function sucia($hab_id,$estado,$mov){
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
+      $comentario="Obtener de la habitacion  por cobrar";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //echo $sentencia ;
       //se recibe la consulta y se convierte a arreglo
       $detalle_inicio=0;
-      $detalle_fin=0;
-      $detalle_realizo=0;
+      $termina_hospe=0;
       while ($fila = mysqli_fetch_array($consulta))
       {
         $detalle_inicio=$fila['detalle_inicio'];
-        $detalle_fin=$fila['detalle_fin'];
-        $detalle_realizo=$fila['detalle_realiza'];
-
+        $termina_hospe=$fila['finalizado'];
       }
-        $usuario = NEW Usuario($detalle_realizo);
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Inicio: '.date("Y-m-d H:i:s",  $detalle_inicio);
-        echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Realiza: '.$usuario->usuario;
-        echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Fin : '.date("Y-m-d H:i:s",  $detalle_fin);
-        echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Ocupada: '.date("d-m-Y H:i:s",  $detalle_inicio);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Termino: '. date("d-m-Y H:i:s",$termina_hospe);
+      echo '</div>';
     }
     function mantenimiento($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
@@ -164,7 +154,7 @@
       }
         $usuario = NEW Usuario($detalle_realizo);
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Inicio: '.date("Y-m-d H:i:s",  $detalle_inicio);
+          echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Realiza: '.$usuario->usuario;
@@ -190,7 +180,7 @@
 
       }
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Inicio: '.date("Y-m-d H:i:s",  $detalle_inicio);
+          echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
 
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
@@ -211,7 +201,7 @@
       }
       if($fin_hospedaje>0){
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Ultima renta: '.date("Y-m-d H:i:s",  $fin_hospedaje);
+          echo 'Ultima renta: '.date("d-m-Y H:i:s",  $fin_hospedaje);
         echo '</div>';
       }else{
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
@@ -235,7 +225,7 @@
       }
       $usuario = NEW Usuario($cobara);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Ocupada: '.date("Y-m-d H:i:s",  $detalle_inicio);
+        echo 'Ocupada: '.date("d-m-Y H:i:s",  $detalle_inicio);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Cobrara: '. $usuario->usuario;
@@ -271,10 +261,10 @@
           <div class="row">
                 <div class="col-sm-3">
                   <div>
-                    Ocupada:'.date("Y-m-d H:i:s",  $detalle_inicio).'
+                    Ocupada:'.date("d-m-Y H:i:s",  $detalle_inicio).'
                   </div>
                   <div>
-                    Termina: '.date("Y-m-d H:i:s",$termina_hospe).'
+                    Termina: '.date("d-m-Y H:i:s",$termina_hospe).'
                   </div>
                   <div>
                     Matricula '.$matricula.'
@@ -371,10 +361,10 @@
           <div class="row">
                 <div class="col-sm-3">
                   <div>
-                    Ocupada:'.date("Y-m-d H:i:s",  $detalle_inicio).'
+                    Ocupada:'.date("d-m-Y H:i:s",  $detalle_inicio).'
                   </div>
                   <div>
-                    Termina: '.date("Y-m-d H:i:s",$termina_hospe).'
+                    Termina: '.date("d-m-Y H:i:s",$termina_hospe).'
                   </div>
                   <div>
                     Cliente '.$cliente.'
@@ -434,57 +424,32 @@
     }*/
 
 
-    function sucia($hab_id,$estado,$mov){
-
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
-      $comentario="obtener de la habitacion  por cobrar ";
+    function detllado($hab_id,$estado,$mov){
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
+      $comentario="obtener informacion de la ultima vez que se rento ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //echo $sentencia ;
       //se recibe la consulta y se convierte a arreglo
       $detalle_inicio=0;
-      $cobara=0;
-      $termina_hospe=0;
-      $persona_extra=0;
-      $matricula=0;
-      $modelo=0;
-      $modelo=0;
-      $anotacion=0;
+      $detalle_fin=0;
+      $detalle_realizo=0;
       while ($fila = mysqli_fetch_array($consulta))
       {
         $detalle_inicio=$fila['detalle_inicio'];
-        $cobara=$fila['detalle_realiza'];
-        $termina_hospe=$fila['finalizado'];
-        $persona_extra=$fila['persona_extra'];
-        $matricula=$fila['matricula'];
-        $modelo=$fila['modelo'];
-        $anotacion=$fila['anotacion'];
+        $detalle_fin=$fila['detalle_fin'];
+        $detalle_realizo=$fila['detalle_realiza'];
+
       }
-      $usuario = NEW Usuario($cobara);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Ocupada: '.date("Y-m-d H:i:s",  $detalle_inicio);
-      echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Cobro: '. $usuario->usuario;
-      echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Termino :   '. date("Y-m-d H:i:s",$termina_hospe);
-      echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Personas Extras: '. $persona_extra;
-      echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Matricula: '. $matricula;
-      echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Modelo: '. $modelo;
-      echo '</div>';
-
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Anotacion: '. $anotacion;
-      echo '</div>';
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
-      $comentario="obtener de la habitacion  por cobrar ";
-      $consulta= $this->realizaConsulta($sentencia,$comentario);
-
+        $usuario = NEW Usuario($detalle_realizo);
+        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+          echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
+        echo '</div>';
+        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+          echo 'Realiza: '.$usuario->usuario;
+        echo '</div>';
+        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+          echo 'Fin : '.date("d-m-Y H:i:s",  $detalle_fin);
+        echo '</div>';
     }
     function limpieza($hab_id,$estado,$mov){
 
@@ -516,7 +481,7 @@
       }
       $usuario = NEW Usuario($cobara);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Ocupada: '.date("Y-m-d H:i:s",  $detalle_inicio);
+        echo 'Ocupada: '.date("d-m-Y H:i:s",  $detalle_inicio);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Cobro: '. $usuario->usuario;
@@ -524,10 +489,10 @@
 
 
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Inicio Limpieza :   '. date("Y-m-d H:i:s",$inicio_limpieza);
+        echo 'Inicio Limpieza :   '. date("d-m-Y H:i:s",$inicio_limpieza);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Fin Limpieza:   '. date("Y-m-d H:i:s",$fin_limpieza);
+        echo 'Fin Limpieza:   '. date("d-m-Y H:i:s",$fin_limpieza);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Personas Extras: '. $persona_extra;

@@ -536,15 +536,15 @@ a.topictitle:hover {
   border-radius: 10px;
 }
 .estado2{
-  background-color: #3C91E6;
-  color: white;
-  padding: 10px;
+  background-color: #273f31;
+  color: #7e9b8b;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado2:hover{
-  background-color: #60b0ff;
-  color: white;
-  padding: 10px;
+  background-color: #326949;
+  color: #7e9b8b;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado3{

@@ -5,7 +5,7 @@
   $movimiento = NEW Movimiento(0);
   $hab = NEW Hab($_POST['hab_id']);
   $logs = NEW Log(0);
-  $mov->terminar_mov($hab->mov);
+  $movimiento->terminar_mov($hab->mov);
   $hab->cambiohab($_POST['hab_id'],$hab->mov,2);
   $logs->guardar_log($_POST['usuario_id'],"Terminar hospedaje en habitaciona: ". $hab->nombre);
 ?>

@@ -20,10 +20,10 @@ function show_info($hab_id,$estado){
               echo 'Disponible';
             break;
             case 1:
-              echo 'Ocupado';//Detallando
+              echo 'Ocupado';
             break;
             case 2:
-              echo 'Lavando';
+              echo 'Sucia';
             break;
             case 3:
               echo 'Limpiando';
@@ -35,13 +35,13 @@ function show_info($hab_id,$estado){
               echo 'Cancelado';
             break;
             case 6:
-              echo 'Espera';
+              echo 'Espera';//Detallando
             break;
             case 7:
               echo 'Ocupada';
             break;
             case 8:
-              echo 'Sucia';
+              echo 'Lavando';
             break;
             case 9:
               echo 'Limpieza';
@@ -77,8 +77,8 @@ function show_info($hab_id,$estado){
   $movimiento = NEW Movimiento(0);
   //$cliente = NEW Cliente($_GET['hab_id']);
   echo '<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h3 class="modal-title">Habitacion '.$_GET['nombre'].' </h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>';
   $user = NEW Usuario($_GET['id']);
   echo '<div class="container-fluid">';
@@ -117,7 +117,7 @@ function show_info($hab_id,$estado){
           echo '</div>';
         echo '</div>';
       }
-      if($user->nivel<=2){//* *//
+      if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
           echo '<div class="edo_cuenta btn-square-lg" onclick="estado_cuenta('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
