@@ -535,14 +535,14 @@ a.topictitle:hover {
   border-radius: 10px;
 }
 .estado3{
-  background-color: #1e172f;/**/
-  color: #47498d;
+  background-color: #242646;
+  color: #7072be;
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado3:hover{
   background-color: #28294e;
-  color: white;
+  color: #7072be;
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }

@@ -91,7 +91,7 @@
       function datos_cargo_noche(){
         /*$sentencia = "SELECT *, reservacion.id_huesped AS huesped_id 
         FROM reservacion
-        INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion WHERE movimiento.habitacion = $id_hab AND reservacion.estado = 1";*/
+        INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion WHERE movimiento.id_hab = $id_hab AND reservacion.estado = 1";*/
         $sentencia = "SELECT * 
         FROM hab
         INNER JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1";
@@ -141,7 +141,7 @@
       // Obener el tiempo de utlima rente de fin hospedaje
       function saber_tiempo_ultima_renta($hab){
         $detalle_fin=0;
-        $sentencia = "SELECT * FROM movimiento WHERE habitacion = $hab  ORDER BY id DESC LIMIT 1 ";
+        $sentencia = "SELECT * FROM movimiento WHERE id_hab = $hab  ORDER BY id DESC LIMIT 1 ";
         $comentario="Obtener el tiempo de fin de hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -200,9 +200,9 @@
         return $detalle_inicio;
       }
       // Agregar una reservacion en la habitacion
-      function disponible_asignar($mov,$hab,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total,$total_pago){
-        $fecha_entrada=strtotime($fecha_entrada);
-        $fecha_salida=strtotime($fecha_salida);
+      function disponible_asignar($mov,$hab_id,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total,$total_pago){
+        $fecha_entrada= strtotime($fecha_entrada);
+        $fecha_salida= strtotime($fecha_salida);
         //$inicio=time();
         $hora=date("G");
         if($hora<7){
@@ -217,11 +217,22 @@
           $horaactual= $horaactual+($noches*86400);
         }
         //echo $fin;
-        $sentencia="INSERT INTO `movimiento` (`habitacion`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_manda`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `motivo`)
-        VALUES ('$hab', '$id_huesped', '$hab', '$fecha_entrada', '$fecha_salida', '$fecha_entrada', '$usuario_id', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '$total', '$total_pago', 'reservar');";
+        $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `estado_interno`)
+        VALUES ('$hab_id', '$id_huesped', '$hab_id', '$fecha_entrada', '$fecha_salida', '0', '0', '$usuario_id', '0', '0', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '$total', '$total_pago', '0', '0', '0', '0', 'Reservar', '');";
         $comentario="Agregar una reservacion en la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       
+        $id= $this->ultima_insercion();
+        return $id;
+      }
+      // Agregar una habitacion en estado limpieza
+      function guardar_limpieza($hab_id,$usuario_id,$usuario){
+        $fecha_entrada= time();
+        $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `estado_interno`)
+        VALUES ('$hab_id', '0', '0', '0', '0', '0', '0', '$usuario_id', '0', '0', '0', '0', '0', '0', '0', '', '0', '0', '0', '$fecha_entrada', '0', '$usuario', '0', 'Limpiar', '');";
+        $comentario="Agregar limpieza en la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
         $id= $this->ultima_insercion();
         return $id;
       }
@@ -262,6 +273,30 @@
         WHERE `id` = '$mov';";
         $comentario="Modificar el estado interno del movimiento";
         $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Modificar movimiento por estado limpieza
+      function editar_estado_limpieza($mov,$usuario_id,$usuario,$motivo){
+        $tiempo= time();
+        if($motivo == 0){
+          $sentencia = "UPDATE `movimiento` SET
+          `detalle_manda` = '$usuario_id',
+          `inicio_limpieza` = '$tiempo',
+          `fin_limpieza` = '0',
+          `persona_limpio` = '$usuario'
+          WHERE `id` = '$mov';";
+          $comentario="Modificar la persona limpio del movimiento";
+          $this->realizaConsulta($sentencia,$comentario);
+        }else{
+          $sentencia = "UPDATE `movimiento` SET
+          `detalle_manda` = '$usuario_id',
+          `inicio_limpieza` = '$tiempo',
+          `fin_limpieza` = '0',
+          `persona_limpio` = '$usuario',
+          `motivo` = 'Limpiar'
+          WHERE `id` = '$mov';";
+          $comentario="Modificar la persona limpio del movimiento";
+          $this->realizaConsulta($sentencia,$comentario);
+        }
       }
       // Obtner el estado interno del movimiento de una habitacion 
       function mostrar_estado_interno($mov){

@@ -76,7 +76,7 @@
 
     }
     function disponible($hab_id,$estado){
-      $sentencia = "SELECT liberacion FROM movimiento WHERE habitacion = $hab_id ORDER BY id DESC LIMIT 1";
+      $sentencia = "SELECT liberacion FROM movimiento WHERE id_hab = $hab_id ORDER BY id DESC LIMIT 1";
       $comentario="obtener informacion de la ultima vez que se rento ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //echo $sentencia ;

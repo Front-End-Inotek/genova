@@ -566,7 +566,7 @@
           switch ($hab_estado) {
             case 1:
               echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-                  echo '<div class="select_reca btn-square-lg" onclick="hab_ocupada_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
+                  echo '<div class="select_reca btn-square-lg" onclick="hab_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
                   echo '</br>';
                   echo '<div>';
                       //echo '<img src="images/persona.png"  class="center-block img-responsive">';

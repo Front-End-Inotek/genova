@@ -2675,7 +2675,7 @@ function hab_ocupada_limpiar(hab_id,estado){
 }
 
 // Mandar al estado interno limpieza una habitacion ocupada
-function hab_ocupada_limpieza(hab_id,estado,usuario){
+function hab_limpieza(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -2689,7 +2689,7 @@ function hab_ocupada_limpieza(hab_id,estado,usuario){
 		  type: "POST",
 		  dataType: "html",
 		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_ocupada_limpieza.php",
+		  url:"includes/hab_limpieza.php",
 		  data:datos,
 		  beforeSend:loaderbar,
 		  success:principal,

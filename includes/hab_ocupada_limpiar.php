@@ -13,7 +13,7 @@
           <h3>LIMPIEZA - Habitación '.$hab->nombre.'</h3>
           </div>
           <div class="col-sm-12">
-          Selecciona las recamareras que hara la limpieza:
+          Selecciona la recamarera que hara la limpieza:
           </div>
         </div>
         <button type="button" class="close" data-dismiss="modal">&times;</button>

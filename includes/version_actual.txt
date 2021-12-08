@@ -55,3 +55,4 @@ VERSION 1.5
 -Cambios en los cuadritos de racks de estados
 -Agregar icono como estado interno de la habitacion
 -Generar estado 2 de sucio y mandar a terminar en una habitacion
+-Subestados en estado 0 disponible
