@@ -2648,7 +2648,7 @@ function principal(){
 
 // Mandar a limpiar una habitacion ocupada
 function hab_ocupada_limpiar(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_ocupada_limpiar.php?hab_id="+hab_id+"&estado="+estado);
+	$("#mostrar_herramientas").load("includes/hab_modal_ocupada_limpiar.php?hab_id="+hab_id+"&estado="+estado);
 }
 
 // Mandar al estado interno limpieza una habitacion ocupada
@@ -2681,7 +2681,7 @@ function hab_limpieza(hab_id,estado,usuario){
 
 // Modal de mandar a desocupar una habitacion ocupada
 function hab_desocupar_hospedaje(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_desocupar_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
+	$("#mostrar_herramientas").load("includes/hab_modal_desocupar_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
 }
 
 // Mandar a desocupar una habitacion ocupada
@@ -2711,7 +2711,7 @@ function hab_desocupar(hab_id,estado){
 
 // Modal de mandar a sucia una habitacion ocupada
 function hab_sucia_hospedaje(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_sucia_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
+	$("#mostrar_herramientas").load("includes/hab_modal_sucia_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
 }
 
 // Mandar al estado interno sucia una habitacion ocupada
@@ -2740,12 +2740,12 @@ function hab_ocupada_sucia(hab_id,estado){
 }
 
 // Modal de terminar el estado interno de una habitacion ocupada
-function hab_ocupada_terminar(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_ocupada_terminar.php?hab_id="+hab_id+"&estado="+estado);//Modal
+function hab_ocupada_terminar_interno(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_modal_ocupada_terminar.php?hab_id="+hab_id+"&estado="+estado);//Modal
 }
 
 // Terminar el estado interno de una habitacion ocupada
-function hab_ocupada_terminar_interno(hab_id,estado){
+function hab_ocupada_terminar(hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -2758,7 +2758,7 @@ function hab_ocupada_terminar_interno(hab_id,estado){
 		  type: "POST",
 		  dataType: "html",
 		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_ocupada_terminar_interno.php",
+		  url:"includes/hab_ocupada_terminar.php",
 		  data:datos,
 		  beforeSend:loaderbar,
 		  success:principal,
