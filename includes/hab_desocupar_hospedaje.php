@@ -16,9 +16,9 @@
     <div class="modal-body">';
       if($total_faltante < 0){
         $total= substr($total_faltante, 1);
-        echo '¡No se puede terminar la habitación '.$hab->nombre.', tiene un saldo pendiente de -$'.number_format($total, 2).'!';
+        echo '¡No se puede desocupar la habitación '.$hab->nombre.', tiene un saldo pendiente de -$'.number_format($total, 2).'!';
       }else{
-        echo 'Confirmar terminar habitación '.$hab->nombre.':';
+        echo 'Confirmar desocupar habitación '.$hab->nombre.':';
       }
     echo '</div><br>
     

@@ -2644,30 +2644,7 @@ function principal(){
 
 //* Estados  Internos de Edo.Ocupado *//
 
-// Mandar al estado interno sucia una habitacion ocupada
-function hab_ocupada_sucia(hab_id,estado){
-	var usuario_id=localStorage.getItem("id");
-	$('#caja_herramientas').modal('hide');
-	var datos = {
-		  "hab_id": hab_id,
-		  "estado": estado,
-          "usuario_id": usuario_id,
-		};
-	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_ocupada_sucia.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:principal,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
-		});
-	return false;
-}
+//Edo. 0-Disponible//
 
 // Mandar a limpiar una habitacion ocupada
 function hab_ocupada_limpiar(hab_id,estado){
@@ -2700,13 +2677,15 @@ function hab_limpieza(hab_id,estado,usuario){
 	return false;
 }
 
-// Modal de mandar a terminar una habitacion ocupada
-function hab_terminar_hospedaje(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_terminar_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
+//Edo. 1-Ocupado//
+
+// Modal de mandar a desocupar una habitacion ocupada
+function hab_desocupar_hospedaje(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_desocupar_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
 }
 
-// Mandar a terminar una habitacion ocupada
-function hab_terminar(hab_id,estado){
+// Mandar a desocupar una habitacion ocupada
+function hab_desocupar(hab_id,estado){
     var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -2719,7 +2698,7 @@ function hab_terminar(hab_id,estado){
           type: "POST",
           dataType: "html",
           contentType: "application/x-www-form-urlencoded",
-          url:"includes/hab_terminar.php",
+          url:"includes/hab_desocupar.php",
           data:datos,
           beforeSend:loaderbar,
           success:principal,
@@ -2728,4 +2707,95 @@ function hab_terminar(hab_id,estado){
           error:problemas_sistema
         });
     return false;
+}
+
+// Modal de mandar a sucia una habitacion ocupada
+function hab_sucia_hospedaje(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_sucia_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
+}
+
+// Mandar al estado interno sucia una habitacion ocupada
+function hab_ocupada_sucia(hab_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		  "hab_id": hab_id,
+		  "estado": estado,
+          "usuario_id": usuario_id,
+		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded",
+		  url:"includes/hab_ocupada_sucia.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:principal,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
+		});
+	return false;
+}
+
+// Modal de terminar el estado interno de una habitacion ocupada
+function hab_ocupada_terminar(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_ocupada_terminar.php?hab_id="+hab_id+"&estado="+estado);//Modal
+}
+
+// Terminar el estado interno de una habitacion ocupada
+function hab_ocupada_terminar_interno(hab_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		  "hab_id": hab_id,
+		  "estado": estado,
+          "usuario_id": usuario_id,
+		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded",
+		  url:"includes/hab_ocupada_terminar_interno.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:principal,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
+		});
+	return false;
+}
+
+////
+// Modal de mandar a sucia una habitacion ocupada
+function hab_terminar_estado(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_terminar_estado.php?hab_id="+hab_id+"&estado="+estado);
+}
+
+// Terminar el estado interno de una habitacion ocupada
+function hab_terminar_estado_interno(hab_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		  "hab_id": hab_id,
+		  "estado": estado,
+          "usuario_id": usuario_id,
+		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded",
+		  url:"includes/hab_ocupada_sucia.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:principal,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
+		});
+	return false;
 }

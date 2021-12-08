@@ -311,10 +311,11 @@
         return $estado_interno;
       }
       // Poner tiempo en campo finalizado en la clase movimiento
-      function terminar_mov($mov){
+      function desocupar_mov($mov){//
         $tiempo=time();
         $sentencia = "UPDATE `movimiento` SET
-        `finalizado` = '$tiempo'
+        `finalizado` = '$tiempo',
+        `estado_interno` = 'Sin estado'
         WHERE `id` = '$mov';";
         $comentario="Poner tiempo en campo finalizado en la clase movimiento";
         $this->realizaConsulta($sentencia,$comentario);
