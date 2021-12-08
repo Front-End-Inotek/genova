@@ -37,10 +37,10 @@
         case 2:
             echo $persona;
           break;
-        /*case 3:
+        case 3:
             echo $persona;
           break;
-        case 4:
+        /*case 4:
             echo $persona;
           break;
         case 5:
@@ -115,13 +115,14 @@
               $estado="Sucia";
               $cronometro=$movimiento->saber_inicio_sucia($fila['moviemiento']);
             break;
-            /*case 3:
-              $estado="Limpiar";
-              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
-              $persona=$usuario->obtengo_usuario($id);
+            case 3:
+              $estado="Limpieza";
+              //$persona=$movimiento->saber_per_limpia($fila['moviemiento']);
+              //$persona=$usuario->obtengo_usuario($id);
               $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
+              //$cronometro=$movimiento->saber_tiempo_fin_limpieza($fila['moviemiento']);
             break;
-            case 4:
+            /*case 4:
               $estado="Mantto.";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
@@ -150,10 +151,10 @@
               $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
             break;
             case 9:
-              $estado="Limpieza";
-              $persona=$movimiento->saber_per_limpia($fila['moviemiento']);
+              $estado="Limpiar";
+              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$movimiento->saber_tiempo_fin_limpieza($fila['moviemiento']);
+              $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
             break;
             case 10:
                 # code...

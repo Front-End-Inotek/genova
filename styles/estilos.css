@@ -150,9 +150,6 @@ background-color: #040C14;
 .mgrande{
   font-size: 1.2em;;
 }
-#area_trabajo_cortina{
-  color: white;
-}
 .texto_entrada{
   color: white;
 }
@@ -244,22 +241,12 @@ a.topictitle:hover {
   background-color: #B2B2B2;
   color: white;
 }
-
 .Alin-center{
   text-align: center;
 }
 .boton-rest{
   margin-top: .5em;
   padding-left: .2em;
-}
-
-.color-boton-rest{
-  background-color: #1DA40A;
-}
-.pedido_restaurante{
-  font-size: 1.2em;
-  line-height:normal;
-  border-bottom: .25em solid #cc4607;
 }
 .boton_restaurante{
   margin-top: .5em;
@@ -548,27 +535,27 @@ a.topictitle:hover {
   border-radius: 10px;
 }
 .estado3{
-  background-color: #A98743;
-  color: white;
-  padding: 10px;
+  background-color: #1e172f;/**/
+  color: #47498d;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado3:hover{
-  background-color: #c7a35b;
+  background-color: #28294e;
   color: white;
-  padding: 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado4{
   background-color:#D0D03D;
   color: white;
-  padding: 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado4:hover{
   background-color:#ecec5f;
   color: white;
-  padding: 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado5{
@@ -802,13 +789,6 @@ a.topictitle:hover {
 #boton_racking{
   display:none;
 }
-
-.pedido_restaurante_cobro{
-  font-size: .9em;
-  line-height:normal;
-  border-bottom: .25em solid #cc4607;
-}
-
 .form_oculto{
   display:none;
 }
