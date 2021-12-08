@@ -108,7 +108,7 @@
             case 1:
               $estado="Ocupado";
               //$persona=$mov->saber_per_deta($fila['moviemiento']);
-              $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
             case 2:
@@ -119,7 +119,7 @@
               $estado="Limpieza";
               //$persona=$movimiento->saber_per_limpia($fila['moviemiento']);
               //$persona=$usuario->obtengo_usuario($id);
-              $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               //$cronometro=$movimiento->saber_tiempo_fin_limpieza($fila['moviemiento']);
             break;
             /*case 4:
@@ -148,13 +148,13 @@
               $estado="Lavar";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
             break;
             case 9:
               $estado="Limpiar";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$movimiento->saber_tiempo_fin($fila['moviemiento']);
+              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
             break;
             case 10:
                 # code...

@@ -73,7 +73,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-            $id_reservacion= $fila['id_reservacion']; 
+          $id_reservacion= $fila['id_reservacion']; 
         }
 
         $sentencia = "SELECT * FROM reservacion WHERE id = $id_reservacion LIMIT 1;";
@@ -83,7 +83,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-              $fecha_salida= date("d-m-Y",$fila['fecha_salida']);
+          $fecha_salida= date("d-m-Y",$fila['fecha_salida']);
         }
         return $fecha_salida;
       }
@@ -125,36 +125,35 @@
         return $motivo;
       }
       // Obtener el tiempo de fin de hospedaje
-      function saber_tiempo_fin($mov){
-        $detalle_fin= 0;
-        $sentencia = "SELECT detalle_fin FROM  movimiento WHERE id = $mov LIMIT 1";
+      function saber_fin_hospedaje($mov){
+        $fin_hospedaje= 0;
+        $sentencia = "SELECT fin_hospedaje FROM  movimiento WHERE id = $mov LIMIT 1";
         //echo $sentencia;
         $comentario="Obtener el tiempo de fin de hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $detalle_fin= $fila['detalle_fin'];
+          $fin_hospedaje= $fila['fin_hospedaje'];
         }
-        return $detalle_fin;
+        return $fin_hospedaje;
       }
       // Obener el tiempo de utlima rente de fin hospedaje
       function saber_tiempo_ultima_renta($hab){
-        $detalle_fin=0;
+        $finalizado= 0;
         $sentencia = "SELECT * FROM movimiento WHERE id_hab = $hab  ORDER BY id DESC LIMIT 1 ";
         $comentario="Obtener el tiempo de fin de hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          if($fila['motivo']=="rentar"){
-            $detalle_fin= $fila['liberacion'];
+          if($fila['motivo'] == "reservar"){
+            $finalizado= $fila['liberacion'];
           }else{
-            $detalle_fin= $fila['finalizado'];
+            $finalizado= $fila['finalizado'];
           }
-          
         }
-        return $detalle_fin;
+        return $finalizado;
       }
       // Realiza el reporte de las habitaciones por noche
       function reporte_checkin($hab_id){
@@ -167,7 +166,7 @@
             $mov=$fila['mov'];
         }
   
-        $sentencia2 = "SELECT id_reservacion FROM  movimiento WHERE id = $mov LIMIT 1";
+        $sentencia2 = "SELECT id_reservacion FROM movimiento WHERE id = $mov LIMIT 1";
         $comentario2="Obtener el id reservacion de movimiento de id reservacion";
         $consulta2= $this->realizaConsulta($sentencia2,$comentario2);
         while ($fila2 = mysqli_fetch_array($consulta2))
@@ -176,10 +175,11 @@
         }
         return $id_reservacion;
       }
-      // Obtener en que momento comento a estar sucio una habitacion
+      // Obtener en que momento comenzo a estar sucio una habitacion
       function saber_inicio_sucia($mov){
-        $sentencia = "SELECT finalizado FROM  movimiento WHERE id = $mov LIMIT 1";
-        $comentario="Obtener en que momento comento a estar sucio una habitacion";
+        $finalizado= 0;
+        $sentencia = "SELECT finalizado FROM movimiento WHERE id = $mov LIMIT 1";
+        $comentario="Obtener en que momento comenzo a estar sucio una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
@@ -188,9 +188,10 @@
         }
         return $finalizado;
       }
-      function timepo_entrada($id){//-
+      // Obtener el detalle inicio de un movimiento
+      function saber_detalle_inicio($id){
         $sentencia = "SELECT detalle_inicio FROM movimiento WHERE id = $id LIMIT 1 ";
-        $comentario="Obtener el inicio de la habitacion";
+        $comentario="Obtener el detalle inicio de un movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
@@ -218,7 +219,7 @@
         }
         //echo $fin;
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `estado_interno`)
-        VALUES ('$hab_id', '$id_huesped', '$hab_id', '$fecha_entrada', '$fecha_salida', '0', '0', '$usuario_id', '0', '0', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '$total', '$total_pago', '0', '0', '0', '0', 'Reservar', 'Sin estado');";
+        VALUES ('$hab_id', '$id_huesped', '$hab_id', '$fecha_entrada', '$fecha_salida', '0', '0', '$usuario_id', '0', '0', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '$total', '$total_pago', '0', '0', '0', '0', 'reservar', 'sin estado');";
         $comentario="Agregar una reservacion en la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       
@@ -229,7 +230,7 @@
       function guardar_limpieza($hab_id,$usuario_id,$usuario){
         $fecha_entrada= time();
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `estado_interno`)
-        VALUES ('$hab_id', '0', '0', '0', '0', '0', '0', '$usuario_id', '0', '0', '0', '0', '0', '0', '0', '', '0', '0', '0', '$fecha_entrada', '0', '$usuario', '0', 'Limpiar', 'Sin estado');";
+        VALUES ('$hab_id', '0', '0', '0', '0', '0', '0', '$usuario_id', '0', '0', '0', '0', '0', '0', '0', '', '0', '0', '0', '$fecha_entrada', '0', '$usuario', '0', 'limpiar', 'sin estado');";
         $comentario="Agregar limpieza en la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 
@@ -267,13 +268,13 @@
         $estado_interno= '';
         switch($opcion){
           case 0:
-              $estado_interno= 'Sin estado';
+              $estado_interno= 'sin estado';
               break;
           case 1.1:
-              $estado_interno= 'Sucia';
+              $estado_interno= 'sucia';
               break;
           case 1.2:
-              $estado_interno= 'Limpieza';
+              $estado_interno= 'limpieza';
               break;
         }
 
@@ -301,7 +302,7 @@
           `inicio_limpieza` = '$tiempo',
           `fin_limpieza` = '0',
           `persona_limpio` = '$usuario',
-          `motivo` = 'Limpiar'
+          `motivo` = 'limpiar'
           WHERE `id` = '$mov';";
           $comentario="Modificar la persona limpio del movimiento";
           $this->realizaConsulta($sentencia,$comentario);
@@ -319,14 +320,14 @@
         }
         return $estado_interno;
       }
-      // Poner tiempo en campo finalizado en la clase movimiento
-      function desocupar_mov($mov){//
+      // Poner tiempo en campo finalizado al desocupar una habitacion
+      function desocupar_mov($mov){
         $tiempo=time();
         $sentencia = "UPDATE `movimiento` SET
         `finalizado` = '$tiempo',
-        `estado_interno` = 'Sin estado'
+        `estado_interno` = 'sin estado'
         WHERE `id` = '$mov';";
-        $comentario="Poner tiempo en campo finalizado en la clase movimiento";
+        $comentario="Poner tiempo en campo finalizado al desocupar una habitacion";
         $this->realizaConsulta($sentencia,$comentario);
       }
   

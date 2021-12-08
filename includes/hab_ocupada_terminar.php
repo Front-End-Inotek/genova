@@ -7,7 +7,6 @@
   $logs = NEW Log(0);
   $estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
   $movimiento->editar_detalle_fin($hab->mov);
-  $movimiento->editar_estado_interno($hab->mov,1.1);
-  $logs->guardar_log($_POST['usuario_id'],"Habitacion ocupada sucia: ". $hab->nombre);
-  $logs->guardar_log($_POST['usuario_id'],"Terminar estado interno .$estado_interno. de la habitación: ". $hab->nombre);
+  $movimiento->editar_estado_interno($hab->mov,0);
+  $logs->guardar_log($_POST['usuario_id'],"Terminar estado interno $estado_interno de la habitacion: ". $hab->nombre);
 ?>
