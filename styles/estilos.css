@@ -387,9 +387,17 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
-.terminar{/* */
+.desocupar{/* */
+  /*#5c646e;*/
   text-align: center;
   background-color: #9F9F9F;
+  /*background-color: #242C34*/
+  font-size: 1.2em;
+  color: white;
+}
+.terminar{/*#1E487A; #337C99; */
+  text-align: center;
+  background-color: #77A2AD;
   /*background-color: #242C34*/
   font-size: 1.2em;
   color: white;

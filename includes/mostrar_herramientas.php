@@ -35,7 +35,7 @@ function show_info($hab_id,$estado){
               echo 'Cancelado';
             break;
             case 6:
-              echo 'Espera';//Detallando
+              echo 'Espera';
             break;
             case 7:
               echo 'Ocupada';
@@ -76,11 +76,12 @@ function show_info($hab_id,$estado){
   $nombre_habitacion = $hab->nombre;
   $movimiento = NEW Movimiento(0);
   //$cliente = NEW Cliente($_GET['hab_id']);
+  $user = NEW Usuario($_GET['id']);
+  $estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
   echo '<div class="modal-header">
         <h3 class="modal-title">Habitacion '.$_GET['nombre'].' </h3>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>';
-  $user = NEW Usuario($_GET['id']);
   echo '<div class="container-fluid">';
   show_info($_GET['hab_id'],$_GET['estado']);
   echo '</br>';
@@ -119,7 +120,7 @@ function show_info($hab_id,$estado){
     case 1 :
       if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="terminar btn-square-lg" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class="desocupar btn-square-lg" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -159,8 +160,8 @@ function show_info($hab_id,$estado){
           echo '</div>';
         echo '</div>';
       }
-      if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+      if($user->nivel<=2 && $estado_interno != 'sucia'){
+        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
           echo '<div class="sucia btn-square-lg" onclick="hab_sucia_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
@@ -173,7 +174,7 @@ function show_info($hab_id,$estado){
           echo '</div>';
         echo '</div>';
       }
-      if($user->nivel<=2){
+      if($user->nivel<=2 && $estado_interno != 'limpieza'){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
           echo '<div class="limpieza btn-square-lg" onclick="hab_ocupada_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
 
@@ -188,7 +189,7 @@ function show_info($hab_id,$estado){
           echo '</div>';
         echo '</div>';
       }
-      if($user->nivel<=2){//
+      if($user->nivel<=2 && $estado_interno != 'sin estado'){//
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
           echo '<div class="terminar btn-square-lg" onclick="hab_ocupada_terminar_interno('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';

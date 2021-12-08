@@ -237,16 +237,16 @@
                     case '':
                       echo '<img id="icono_r" src="."';  
                       break;
-                    case 'Disponible':
+                    case 'disponible':
                       echo '<img id="icono_r" src="."';  
                       break;
-                    case 'Sin estado':
+                    case 'sin estado':
                       echo '<img id="icono_r" src="."';  
                       break;
-                    case 'Sucia':
+                    case 'sucia':
                       echo '<img id="icono_c" src="images/basura.png">';
                       break;
-                    case 'Limpieza':
+                    case 'limpieza':
                       echo '<img id="icono_c" src="images/lavando.png">';
                       break;
                     case 4:
