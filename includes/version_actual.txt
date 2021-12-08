@@ -56,3 +56,4 @@ VERSION 1.5
 -Agregar icono como estado interno de la habitacion
 -Generar estado 2 de sucio y mandar a terminar en una habitacion
 -Subestados en estado 0 disponible
+-Subestados en estado 1 ocupado
