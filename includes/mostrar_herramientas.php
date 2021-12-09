@@ -1,75 +1,76 @@
 <?php
-date_default_timezone_set('America/Mexico_City');
-include_once("clase_info.php");
-include_once("clase_hab.php");
-include_once("clase_configuracion.php");
-include_once("clase_movimiento.php");
-$conf = NEW Configuracion();
-function mostar_info($hab_id,$estado,$mov,$id){
-    $info = NEW Informacion($hab_id,$estado,$mov,$id);
-}
-function show_info($hab_id,$estado){
-    $hab = NEW Hab($hab_id);
-    
-  echo '<div class="row">'; 
-    echo '<div class="col-xs-12 col-sm-12 col-md-12">';
-      echo '<div>';
-        echo '<h3>';
-          switch ($estado) {
-            case 0:
-              echo 'Disponible';
-            break;
-            case 1:
-              echo 'Ocupado';
-            break;
-            case 2:
-              echo 'Sucia';
-            break;
-            case 3:
-              echo 'Limpiando';
-            break;
-            case 4:
-              echo 'En Mantenimiento';
-            break;
-            case 5:
-              echo 'Cancelado';
-            break;
-            case 6:
-              echo 'Espera';
-            break;
-            case 7:
-              echo 'Ocupada';
-            break;
-            case 8:
-              echo 'Lavando';
-            break;
-            case 9:
-              echo 'Limpieza';
-            break;
-            case 10:
-              echo 'Restaurante';
-            break;
-            case 14:
-              echo 'Limpieza';
-            break;
-            case 15:
-              echo 'Paseo';
-            break;
-            case 17:
-              echo 'Superv.';
-            break;
-          }
-        echo '</h3>';
-      echo '</div>';
-      echo '<div>';
-        echo '<h4>Información:</h4>';
-      echo '</div>';
+  date_default_timezone_set('America/Mexico_City');
+  include_once("clase_info.php");
+  include_once("clase_hab.php");
+  include_once("clase_configuracion.php");
+  include_once("clase_movimiento.php");
+  $conf = NEW Configuracion();
+  function mostar_info($hab_id,$estado,$mov,$id){
+      $info = NEW Informacion($hab_id,$estado,$mov,$id);
+  }
+  function show_info($hab_id,$estado){
+      $hab = NEW Hab($hab_id);
+      
+    echo '<div class="row">'; 
+      echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+        echo '<div>';
+          echo '<h3>';
+            switch ($estado) {
+              case 0:
+                echo 'Disponible';
+              break;
+              case 1:
+                echo 'Ocupado';
+              break;
+              case 2:
+                echo 'Sucia';
+              break;
+              case 3:
+                echo 'Limpiando';
+              break;
+              case 4:
+                echo 'En Mantenimiento';
+              break;
+              case 5:
+                echo 'Cancelado';
+              break;
+              case 6:
+                echo 'Espera';
+              break;
+              case 7:
+                echo 'Ocupada';
+              break;
+              case 8:
+                echo 'Lavando';
+              break;
+              case 9:
+                echo 'Limpieza';
+              break;
+              case 10:
+                echo 'Restaurante';
+              break;
+              case 14:
+                echo 'Limpieza';
+              break;
+              case 15:
+                echo 'Paseo';
+              break;
+              case 17:
+                echo 'Superv.';
+              break;
+            }
+          echo '</h3>';
+        echo '</div>';
+        echo '<div>';
+          echo '<h4>Información:</h4>';
+        echo '</div>';
 
-      echo '</div>';
-  echo '</div>';
-  //echo '</br>'; 
- 
-}
+        echo '</div>';
+    echo '</div>';
+    //echo '</br>'; 
+  
+  }
+  
   include_once("clase_usuario.php");
   //include_once("clase_cliente.php");
   $hab = NEW Hab($_GET['hab_id']);

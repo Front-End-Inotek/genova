@@ -35,8 +35,8 @@
       }
       // Obtener cuenta total de la habitacion
       function cuenta_total($mov){
-        $id_reservacion=0;
-        $total=0;
+        $id_reservacion= 0;
+        $total= 0;
         $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
         //echo  $sentencia;
         $comentario="Obtener el numero de reservacion correspondiente de la habitacion";
@@ -64,8 +64,8 @@
       }
       // Obtener la fecha de salida de la habitacion
       function ver_fecha_salida($mov){
-        $id_reservacion=0;
-        $fecha_salida=0;
+        $id_reservacion= 0;
+        $fecha_salida= 0;
         $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
         //echo  $sentencia;
         $comentario="Obtener el numero de reservacion correspondiente de la habitacion";
@@ -190,6 +190,7 @@
       }
       // Obtener el detalle inicio de un movimiento
       function saber_detalle_inicio($id){
+        $detalle_inicio= 0;
         $sentencia = "SELECT detalle_inicio FROM movimiento WHERE id = $id LIMIT 1 ";
         $comentario="Obtener el detalle inicio de un movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -199,6 +200,19 @@
           $detalle_inicio= $fila['detalle_inicio'];
         }
         return $detalle_inicio;
+      }
+      // Obtener la persona limpio de un movimiento
+      function saber_persona_limpio($id){
+        $persona_limpio= 0;
+        $sentencia = "SELECT persona_limpio FROM movimiento WHERE id = $id LIMIT 1 ";
+        $comentario="Obtener la persona limpio de un movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $persona_limpio= $fila['persona_limpio'];
+        }
+        return $persona_limpio;
       }
       // Agregar una reservacion en la habitacion
       function disponible_asignar($mov,$hab_id,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total,$total_pago){
@@ -347,15 +361,6 @@
         WHERE `id` = '$mov';";
         $comentario="Poner tiempo en campo finalizado al desocupar una habitacion";
         $this->realizaConsulta($sentencia,$comentario);
-      }
-      // Cambiar la persona que esta realizando estado de una habitacion
-      function mov_cambio_persona_hab($mov,$usuario){
-        $sentencia = "UPDATE `movimiento` SET
-        `persona_limpio` = '$usuario
-        WHERE `id` = '$mov';";
-        echo $sentencia;
-        $comentario="Cambiar la persona que esta realizando estado de una habitacion";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
   
   }

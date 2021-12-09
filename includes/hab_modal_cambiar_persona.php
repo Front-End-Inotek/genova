@@ -2,8 +2,10 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_usuario.php");
   include_once("clase_hab.php");
+  include_once("clase_movimiento.php");
   $usuario = NEW Usuario(0);
-  $hab= NEW  hab($_GET['hab_id']);
+  $hab= NEW hab($_GET['hab_id']);
+  $movimiento = NEW Movimiento(0);
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -22,7 +24,7 @@
             }
           echo '</div>
           <div class="col-sm-12">
-          Selecciona la recamarera que hara la limpieza:
+          Cambiar la recamarera que hara la limpieza:
           </div>
         </div>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -30,7 +32,8 @@
 
       <div class="modal-body">';
         echo '<div class="row">';
-          $usuario->select_reca($_GET['hab_id'],$_GET['estado'],2);
+          $usuario_actual= $movimiento->saber_persona_limpio($hab->mov);
+          $usuario->select_cambiar_reca($_GET['hab_id'],$_GET['estado'],$usuario_actual);
         echo '</div>';
       echo '</div>
 

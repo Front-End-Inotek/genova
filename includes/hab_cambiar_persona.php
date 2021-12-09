@@ -8,11 +8,11 @@
 
   switch($_POST['estado']){
     case 3:// En habitacion limpieza-edo.3
-        $movimiento->cambiar_persona($hab->mov,$_POST['usuario']);
+        $movimiento->editar_persona_limpio($hab->mov,$_POST['usuario']);
         $logs->guardar_log($_POST['usuario_id'],"Cambiar persona que realiza la limpieza por: ". $hab->nombre);
         break;
     case 4:// En habitacion limpieza-edo.3 ////
-        $movimiento->cambiar_persona($hab->mov,$_POST['usuario']);
+        $movimiento->editar_persona_limpio($hab->mov,$_POST['usuario']);
         $logs->guardar_log($_POST['usuario_id'],"Cambiar persona que realiza la limpieza por: ". $hab->nombre);
         break;
     default:

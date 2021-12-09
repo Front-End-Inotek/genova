@@ -645,7 +645,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          switch ($hab_estado) {
+          switch($hab_estado){
             case 1:
               echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
                   echo '<div class="select_reca btn-square-lg" onclick="hab_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
@@ -664,7 +664,7 @@
                 echo '</div>';
               echo '</div>';
               break;
-            case 2:
+            /*case 2: antes cambiar considerando el mismo usuario
               echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
                   echo '<div class="select_reca btn-square-lg" onclick="hab_cambiar_persona('.$hab_id.','.$estado.','.$fila['id'].')">';
                   echo '</br>';
@@ -677,11 +677,32 @@
                   echo '</br>';
                 echo '</div>';
               echo '</div>';
-              break;
+              break;*/
             default:
                 echo "Sin Información que mostrar";
               break;
           }
+        }
+      }
+      // Seleccionar recamarera a cambiar   
+      function select_cambiar_reca($hab_id,$estado,$usuario){
+        $sentencia = "SELECT * FROM usuario WHERE id != $usuario AND activo = 1 AND nivel = 3 AND estado = 1 ORDER BY usuario";
+        $comentario="Seleccionar recamarera a cambiar ";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+              echo '<div class="select_reca btn-square-lg" onclick="hab_cambiar_persona('.$hab_id.','.$estado.','.$fila['id'].')">';
+              echo '</br>';
+              echo '<div>';
+                  //echo '<img src="images/persona.png"  class="center-block img-responsive">';
+              echo '</div>';
+              echo '<div>';
+                echo $fila['usuario'];
+              echo '</div>';
+            echo '</div>';
+          echo '</div>';
         }
       }
       // Obtener la cantidad de habitaciones limpiadas
@@ -705,20 +726,6 @@
              $cantidad= $cantidad+$fila['cantidad'];
         }
         return $cantidad;
-      }
-      // Obtner la fecha del ultimo movimiento
-      function ultima_fecha(){
-        $fecha = 0;
-        //$sentencia = 'SELECT fecha FROM corte ORDER BY id DESC LIMIT 1 ;';
-        $sentencia = 'SELECT detalle_inicio FROM movimiento ORDER BY id DESC LIMIT 1 ;';
-        //echo $sentencia ;
-        $comentario="Obtner la fecha del ultimo movimiento";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-             $fecha= $fila['detalle_inicio'];
-        }
-        return $fecha;
       }
        
   }       
