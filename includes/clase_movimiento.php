@@ -255,6 +255,15 @@
         $comentario="Modificar el detalle fin del movimiento";
         $this->realizaConsulta($sentencia,$comentario);
       }
+      // Modificar la liberacion del movimiento
+      function editar_liberacion($mov){
+        $tiempo=time();
+        $sentencia = "UPDATE `movimiento` SET
+        `liberacion` = '$tiempo'
+        WHERE `id` = '$mov';";
+        $comentario="Modificar la liberacion del movimiento";
+        $this->realizaConsulta($sentencia,$comentario);
+      }
       // Modificar la persona limpio del movimiento
       function editar_persona_limpio($mov,$usuario){
         $sentencia = "UPDATE `movimiento` SET

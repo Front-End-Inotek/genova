@@ -10,7 +10,7 @@
     $movimiento->editar_persona_limpio($hab->mov,$_POST['usuario']);
   }*/
 
-  switch ($_POST['estado']) {
+  switch($_POST['estado']){
     case 0:// En habitacion disponible-edo.0 
         $id = $movimiento->guardar_limpieza($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario']);
         $hab->cambiohab($_POST['hab_id'],$id,3);

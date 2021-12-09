@@ -10,7 +10,7 @@
     </div><br>
 
     <div class="modal-body">';
-        switch ($_GET['estado']) {
+        switch($_GET['estado']){
           case 2:// En habitacion sucia-edo.2 
               echo '¿Terminar estado sucia de la habitación '.$hab->nombre.'?';
               break;
