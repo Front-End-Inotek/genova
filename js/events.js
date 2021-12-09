@@ -2741,7 +2741,7 @@ function hab_ocupada_sucia(hab_id,estado){
 
 // Modal de terminar el estado interno de una habitacion ocupada
 function hab_ocupada_terminar_interno(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_modal_ocupada_terminar.php?hab_id="+hab_id+"&estado="+estado);//Modal
+	$("#mostrar_herramientas").load("includes/hab_modal_ocupada_terminar.php?hab_id="+hab_id+"&estado="+estado);
 }
 
 // Terminar el estado interno de una habitacion ocupada
@@ -2769,14 +2769,15 @@ function hab_ocupada_terminar(hab_id,estado){
 	return false;
 }
 
-////
-// Modal de mandar a sucia una habitacion ocupada
+//Edo. 2-Sucia//
+
+// Modal de terminar el estado de una habitacion
 function hab_terminar_estado(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_terminar_estado.php?hab_id="+hab_id+"&estado="+estado);
+	$("#mostrar_herramientas").load("includes/hab_modal_terminar_estado.php?hab_id="+hab_id+"&estado="+estado);
 }
 
-// Terminar el estado interno de una habitacion ocupada
-function hab_terminar_estado_interno(hab_id,estado){
+// Terminar el estado de una habitacion
+function hab_terminar(hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -2789,7 +2790,7 @@ function hab_terminar_estado_interno(hab_id,estado){
 		  type: "POST",
 		  dataType: "html",
 		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_ocupada_sucia.php",
+		  url:"includes/hab_terminar.php",
 		  data:datos,
 		  beforeSend:loaderbar,
 		  success:principal,

@@ -177,7 +177,6 @@ function show_info($hab_id,$estado){
       if($user->nivel<=2 && $estado_interno != 'limpieza'){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
           echo '<div class="limpieza btn-square-lg" onclick="hab_ocupada_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
-
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
@@ -189,7 +188,7 @@ function show_info($hab_id,$estado){
           echo '</div>';
         echo '</div>';
       }
-      if($user->nivel<=2 && $estado_interno != 'sin estado'){//
+      if($user->nivel<=2 && $estado_interno != 'sin estado'){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
           echo '<div class="terminar btn-square-lg" onclick="hab_ocupada_terminar_interno('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
@@ -230,6 +229,20 @@ function show_info($hab_id,$estado){
             echo '</div>';
             echo '<div>';
               echo 'Limpieza';
+            echo '</div>';
+            echo '</br>';
+          echo '</div>';
+        echo '</div>';
+      }
+      if($user->nivel<=2){
+        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '</br>';
+            echo '<div>';
+                //echo '<img src="images/home.png"  class="center-block img-responsive">';
+            echo '</div>';
+            echo '<div>';
+              echo 'Terminar';
             echo '</div>';
             echo '</br>';
           echo '</div>';

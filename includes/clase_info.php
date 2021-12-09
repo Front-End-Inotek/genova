@@ -143,15 +143,15 @@
       $comentario="Obtener de la habitacion  por cobrar";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
-      $detalle_inicio=0;
-      $termina_hospe=0;
-      while ($fila = mysqli_fetch_array($consulta))
+      $inicio_hospedaje= 0;
+      $termina_hospe= 0;
+      while($fila = mysqli_fetch_array($consulta))
       {
-        $detalle_inicio=$fila['detalle_inicio'];
-        $termina_hospe=$fila['finalizado'];
+        $inicio_hospedaje= $fila['inicio_hospedaje'];
+        $termina_hospe= $fila['finalizado'];
       }
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Ocupada: '.date("d-m-Y H:i:s",  $detalle_inicio);
+        echo 'Ocupada: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Termino: '. date("d-m-Y H:i:s",$termina_hospe);
