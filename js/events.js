@@ -2646,12 +2646,12 @@ function principal(){
 
 //Edo. 0-Disponible//
 
-// Mandar a limpiar una habitacion ocupada
-function hab_ocupada_limpiar(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_modal_ocupada_limpiar.php?hab_id="+hab_id+"&estado="+estado);
+// Modal de mandar una habitacion a estado limpieza
+function hab_estado_limpiar(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_modal_estado_limpiar.php?hab_id="+hab_id+"&estado="+estado);
 }
 
-// Mandar al estado interno limpieza una habitacion ocupada
+// Mandar una habitacion a estado limpieza
 function hab_limpieza(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
