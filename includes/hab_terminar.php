@@ -9,9 +9,8 @@
   switch ($_POST['estado']) {
     case 2:// En habitacion sucia-edo.2 
         $movimiento->editar_detalle_fin($hab->mov);
-        $movimiento->editar_motivo($hab->mov,MOTIVO);///**AQUI */
         $hab->cambiohab($_POST['hab_id'],$hab->mov,0);
-        $logs->guardar_log($_POST['usuario_id'],"Terminar estado sucio de la habitación: ". $hab->nombre);
+        $logs->guardar_log($_POST['usuario_id'],"Terminar estado sucio de la habitacion: ". $hab->nombre);
         break;
     default:
         //echo "Estado indefinido";

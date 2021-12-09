@@ -5,10 +5,10 @@
   $movimiento = NEW Movimiento(0);
   $hab = NEW Hab($_POST['hab_id']);
   $logs = NEW Log(0);
-  if($_POST['estado']>0){
+  /*if($_POST['estado']>0){
     $movimiento->editar_detalle_fin($hab->mov);
     $movimiento->editar_persona_limpio($hab->mov,$_POST['usuario']);
-  }
+  }*/
 
   switch ($_POST['estado']) {
     case 0:// En habitacion disponible-edo.0 
@@ -23,7 +23,7 @@
         $logs->guardar_log($_POST['usuario_id'],"Habitacion ocupada limpieza: ". $hab->nombre);
         break;
     case 2:// En habitacion sucia-edo.2 
-        $motivo= 1;
+        $motivo= 0;
         $movimiento->editar_estado_limpieza($hab->mov,$_POST['usuario_id'],$_POST['usuario'],$motivo);
         $hab->cambiohab($_POST['hab_id'],$hab->mov,3);
         $logs->guardar_log($_POST['usuario_id'],"Limpiar en habitacion: ". $hab->nombre);

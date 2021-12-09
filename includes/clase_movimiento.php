@@ -263,27 +263,6 @@
         $comentario="Modificar la persona limpio del movimiento";
         $this->realizaConsulta($sentencia,$comentario);
       }
-      // Modificar el motivo del movimiento
-      function editar_motivo($mov,$opcion){///**AQUI */
-        $estado= '';
-        switch($opcion){
-          case 0:
-              $estado= 'sin estado';
-              break;
-          case 1.1:
-              $estado= 'sucia';
-              break;
-          case 1.2:
-              $estado= 'limpieza';
-              break;
-        }
-
-        $sentencia = "UPDATE `movimiento` SET
-        `motivo` = '$estado'
-        WHERE `id` = '$mov';";
-        $comentario="Modificar el motivo del movimiento";
-        $this->realizaConsulta($sentencia,$comentario);
-      }
       // Modificar el estado interno del movimiento
       function editar_estado_interno($mov,$opcion){
         $estado_interno= '';
