@@ -20,8 +20,15 @@
           case 4:// En habitacion mantenimiento-edo.4 
               echo '¿Terminar estado mantenimiento de la habitación '.$hab->nombre.'?';
               break;
+          case 5:// En habitacion supervision-edo.5 
+              echo '¿Terminar estado supervision de la habitación '.$hab->nombre.'?';
+              break;
+          case 6:// En habitacion cancelada-edo.6 
+              echo '¿Terminar de estar cancelada la habitación '.$hab->nombre.'?';
+              break;    
           default:
               //echo "Estado indefinido";
+              break; 
         }
     echo '</div><br>
     
