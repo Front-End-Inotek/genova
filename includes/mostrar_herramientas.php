@@ -250,15 +250,28 @@ function show_info($hab_id,$estado){
       break;
     case 3 :
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="limpieza btn-square-lg" onclick="hab_estado_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
-          //echo '<div class="ocupada" onclick="hab_checkin('.$_GET['hab_id'].','.$_GET['estado'].')">';
+        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
-                //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+                //echo '<img src="images/home.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
-              echo 'Limpieza';
+              echo 'Terminar';
+            echo '</div>';
+            echo '</br>';
+          echo '</div>';
+        echo '</div>';
+      }
+      if($user->nivel<=2){
+        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '</br>';
+            echo '<div>';
+                //echo '<img src="images/home.png"  class="center-block img-responsive">';
+            echo '</div>';
+            echo '<div>';
+              echo 'Cambio Rec.';
             echo '</div>';
             echo '</br>';
           echo '</div>';

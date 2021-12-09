@@ -14,6 +14,9 @@
           case 2:// En habitacion sucia-edo.2 
               echo '¿Terminar estado sucia de la habitación '.$hab->nombre.'?';
               break;
+          case 3:// En habitacion limpieza-edo.3 
+              echo '¿Terminar estado limpieza de la habitación '.$hab->nombre.'?';
+              break;
           default:
               //echo "Estado indefinido";
         }
