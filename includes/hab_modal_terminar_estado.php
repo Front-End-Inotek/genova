@@ -17,6 +17,9 @@
           case 3:// En habitacion limpieza-edo.3 
               echo '¿Terminar estado limpieza de la habitación '.$hab->nombre.'?';
               break;
+          case 4:// En habitacion mantenimiento-edo.4 
+              echo '¿Terminar estado mantenimiento de la habitación '.$hab->nombre.'?';
+              break;
           default:
               //echo "Estado indefinido";
         }

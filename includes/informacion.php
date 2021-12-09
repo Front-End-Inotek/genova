@@ -40,10 +40,10 @@
         case 3:
             echo $persona;
           break;
-        /*case 4:
+        case 4:
             echo $persona;
           break;
-        case 5:
+        /*case 5:
             echo "-";
           break;
         case 6:
@@ -107,7 +107,6 @@
             break;
             case 1:
               $estado="Ocupado";
-              //$persona=$mov->saber_per_deta($fila['moviemiento']);
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
@@ -117,27 +116,22 @@
             break;
             case 3:
               $estado="Limpieza";
-              //$persona=$movimiento->saber_per_limpia($fila['moviemiento']);
-              //$persona=$usuario->obtengo_usuario($id);
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-              //$cronometro=$movimiento->saber_tiempo_fin_limpieza($fila['moviemiento']);
             break;
-            /*case 4:
-              $estado="Mantto.";
-              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
-              $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
-              //$sub_motivo=$movimiento->saber_motivo($fila['moviemiento']);
-              //$motivo=substr($sub_motivo, 0, 15);
+            case 4:
+              $estado="Mant.";
+              $cronometro=$movimiento->saber_detalle_inicio($fila['moviemiento']);
+              /*$sub_motivo=$movimiento->saber_motivo($fila['moviemiento']);
+              $motivo=substr($sub_motivo, 0, 15);*/
             break;
-            case 5:
+            /*case 5:
               $estado="Cancelado";
               $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
             break;
             case 6:
               $estado="Espera";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
-              $persona=$usuario->obtengo_usuario($id);
+              $persona=$usuario->obtengo_usuario($id);"no existe"
               $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
             break;
             case 7:
@@ -223,11 +217,16 @@
 
               echo '<div class="timepo_hab">';
                       //$total= $movimiento->cuenta_total($fila['id']);
-                      if($total_faltante >= 0){
-                        echo '$'.number_format($total_faltante, 2);
+                      if($fila['estado'] == 1){
+                        if($total_faltante >= 0){
+                          echo '$'.number_format($total_faltante, 2);
+                        }else{
+                          $total_faltante= substr($total_faltante, 1);
+                          echo '-$'.number_format($total_faltante, 2);
+                        }
                       }else{
-                        $total_faltante= substr($total_faltante, 1);
-                        echo '-$'.number_format($total_faltante, 2);
+                        $total_faltante= '&nbsp';
+                        echo $total_faltante;
                       }
               echo '</div>';
 

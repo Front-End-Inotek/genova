@@ -78,14 +78,14 @@
     // Estado 0
     function disponible($hab_id,$estado){
       $sentencia = "SELECT liberacion FROM movimiento WHERE id_hab = $hab_id ORDER BY id DESC LIMIT 1";
-      $comentario="Obtener informacion para la habitacion con el estado disponible";
+      $comentario= "Obtener informacion para la habitacion con el estado disponible";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //echo $sentencia ;
       //se recibe la consulta y se convierte a arreglo
-      $fin_hospedaje=0;
+      $fin_hospedaje= 0;
       while($fila = mysqli_fetch_array($consulta))
       {
-        $fin_hospedaje=$fila['liberacion'];
+        $fin_hospedaje= $fila['liberacion'];
       }
       if($fin_hospedaje>0){
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
@@ -100,15 +100,15 @@
     // Estado 1
     function ocupada($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
-      $comentario="Obtener informacion para la habitacion con el estado ocupada";
+      $comentario= "Obtener informacion para la habitacion con el estado ocupada";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //echo $sentencia ;
       //se recibe la consulta y se convierte a arreglo
       $total_faltante= 0.0;
-      $detalle_inicio=0;
-      $detalle_fin=0;
-      $id_huesped=0;
-      $total=0;
+      $detalle_inicio= 0;
+      $detalle_fin= 0;
+      $id_huesped= 0;
+      $total= 0;
       while($fila = mysqli_fetch_array($consulta))
       {
         $detalle_inicio= $fila['detalle_inicio'];
@@ -118,7 +118,7 @@
         $total= $fila['total'];
       }
         $cuenta= NEW Cuenta(0);
-        $huesped = NEW Huesped($id_huesped);
+        $huesped= NEW Huesped($id_huesped);
         $total_faltante= $cuenta->mostrar_faltante($mov);
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Fecha entrada: '.date("d-m-Y H:i:s",  $detalle_inicio);
@@ -143,7 +143,7 @@
     // Estado 2
     function sucia($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
-      $comentario="Obtener informacion para la habitacion con el estado sucia";
+      $comentario= "Obtener informacion para la habitacion con el estado sucia";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       $inicio_hospedaje= 0;
@@ -163,7 +163,7 @@
     // Estado 3
     function limpieza($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
-      $comentario="Obtener informacion para la habitacion con el estado limpieza";
+      $comentario= "Obtener informacion para la habitacion con el estado limpieza";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       $inicio_limpieza= 0;
@@ -171,10 +171,10 @@
       $persona_limpio= 0;
       while($fila = mysqli_fetch_array($consulta))
       {
-        $inicio_limpieza=$fila['inicio_limpieza'];
-        //$fin_limpieza=$fila['fin_limpieza'];
+        $inicio_limpieza= $fila['inicio_limpieza'];
+        //$fin_limpieza= $fila['fin_limpieza'];
         $termina_hospe= $fila['finalizado'];
-        $persona_limpio=$fila['persona_limpio'];
+        $persona_limpio= $fila['persona_limpio'];
       }
       $usuario = NEW Usuario($persona_limpio);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
@@ -187,33 +187,26 @@
         echo 'Persona Limpiando: '. $usuario->usuario;
       echo '</div>';
     }
+    // Estado 4
     function mantenimiento($hab_id,$estado,$mov){
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
-      $comentario="obtener informacion de la ultima vez que se rento ";
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
+      $comentario= "Obtener informacion para la habitacion con el estado mantenimiento";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //echo $sentencia ;
       //se recibe la consulta y se convierte a arreglo
-      $detalle_inicio=0;
-      $detalle=0;
-      $detalle_realizo=0;
-      while ($fila = mysqli_fetch_array($consulta))
+      $detalle_inicio= 0;
+      $detalle_realiza= 0;
+      while($fila = mysqli_fetch_array($consulta))
       {
-        $detalle_inicio=$fila['detalle_inicio'];
-        $detalle=$fila['comentario'];
-        $detalle_realizo=$fila['detalle_realiza'];
-
+        $detalle_inicio= $fila['detalle_inicio'];
+        $detalle_realiza= $fila['detalle_realiza'];
       }
-        $usuario = NEW Usuario($detalle_realizo);
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
-        echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Realiza: '.$usuario->usuario;
-        echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Motivo: '.$detalle;
-        echo '</div>';
-
+      $usuario = NEW Usuario($detalle_realiza);
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Realiza: '.$usuario->usuario;
+      echo '</div>';
     }
     function bloqueo($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
