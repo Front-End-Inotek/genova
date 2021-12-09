@@ -348,6 +348,15 @@
         $comentario="Poner tiempo en campo finalizado al desocupar una habitacion";
         $this->realizaConsulta($sentencia,$comentario);
       }
+      // Cambiar la persona que esta realizando estado de una habitacion
+      function mov_cambio_persona_hab($mov,$usuario){
+        $sentencia = "UPDATE `movimiento` SET
+        `persona_limpio` = '$usuario
+        WHERE `id` = '$mov';";
+        echo $sentencia;
+        $comentario="Cambiar la persona que esta realizando estado de una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
   
   }
 ?>

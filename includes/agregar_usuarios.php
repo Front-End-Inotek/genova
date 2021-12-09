@@ -31,9 +31,13 @@
               <option value="0">Selecciona</option>
               <option value="1">Administrador</option>
               <option value="2">Cajera</option>
-              <option value="3">Reservaciones</option>
-              <option value="4">Ama Llaves</option>
-              <option value="5">Indefinido</option>
+              <option value="3">Recamarera</option>
+              <option value="4">Mantenimiento</option>
+              <option value="5">Supervision</option>
+              <option value="6">Restaurante</option>
+              <option value="7">Reservaciones</option>
+              <option value="8">Ama Llaves</option>
+              <option value="9">Indefinido</option>
             </select>
           </div>
           </div>

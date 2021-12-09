@@ -13,7 +13,7 @@
         $hab->cambiohab($_POST['hab_id'],$hab->mov,0);
         $logs->guardar_log($_POST['usuario_id'],"Terminar estado sucio de la habitacion: ". $hab->nombre);
         break;
-    case 2:// En habitacion limpieza-edo.3 
+    case 3:// En habitacion limpieza-edo.3 
         $movimiento->ditar_fin_limpieza($hab->mov);
         $movimiento->editar_liberacion($hab->mov);
         $hab->cambiohab($_POST['hab_id'],$hab->mov,0);

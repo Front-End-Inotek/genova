@@ -2800,3 +2800,36 @@ function hab_terminar(hab_id,estado){
 		});
 	return false;
 }
+
+//Edo. 3-Limpieza//
+
+// Modal de cambiar persona que realiza estado de una habitacion
+function hab_cambiar_persona_estado(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_modal_cambiar_persona.php?hab_id="+hab_id+"&estado="+estado);
+}
+
+// Cambiar persona que realiza estado de una habitacion
+function hab_cambiar_persona(hab_id,estado,usuario){
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		  "hab_id": hab_id,
+		  "estado": estado,
+          "usuario": usuario,
+          "usuario_id": usuario_id,
+		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded",
+		  url:"includes/hab_cambiar_persona.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:principal,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
+		});
+	return false;
+}

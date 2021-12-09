@@ -184,7 +184,7 @@
         echo 'Termino ocupada: '. date("d-m-Y H:i:s",$termina_hospe);
       echo '</div>';
       echo '<div class="col-xs-12 col-sm-12 col-md-12">';
-        echo 'Personas Limpiando: '. $usuario->usuario;
+        echo 'Persona Limpiando: '. $usuario->usuario;
       echo '</div>';
     }
     function mantenimiento($hab_id,$estado,$mov){
