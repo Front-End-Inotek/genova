@@ -408,6 +408,12 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
+.cambiar_usuario{
+  text-align: center;
+  background-color: #A19A92;
+  font-size: 1.2em;
+  color: white;
+}
 .reporte{
   text-align: center;
   background-color: #d33628;

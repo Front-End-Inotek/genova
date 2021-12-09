@@ -70,7 +70,7 @@
     //echo '</br>'; 
   
   }
-  
+
   include_once("clase_usuario.php");
   //include_once("clase_cliente.php");
   $hab = NEW Hab($_GET['hab_id']);
@@ -266,7 +266,7 @@
       }
       if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="terminar btn-square-lg" onclick="hab_cambiar_persona_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class="cambiar_usuario btn-square-lg" onclick="hab_cambiar_persona_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/home.png"  class="center-block img-responsive">';
