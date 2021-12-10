@@ -282,6 +282,14 @@
         $comentario="Modificar el detalle fin del movimiento";
         $this->realizaConsulta($sentencia,$comentario);
       }
+      // Modificar persona del detalle realiza del movimiento
+      function editar_detalle_realiza($mov,$usuario){
+        $sentencia = "UPDATE `movimiento` SET
+        `detalle_realiza` = '$usuario'
+        WHERE `id` = '$mov';";
+        $comentario="Modificar persona del detalle realiza del movimiento";
+        $this->realizaConsulta($sentencia,$comentario);
+      }
       // Modificar el fin limpieza del movimiento
       function editar_fin_limpieza($mov){
         $tiempo=time();
