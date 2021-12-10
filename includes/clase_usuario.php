@@ -684,10 +684,23 @@
           }
         }
       }
-      // Seleccionar recamarera a cambiar   
-      function select_cambiar_reca($hab_id,$estado,$usuario){
-        $sentencia = "SELECT * FROM usuario WHERE id != $usuario AND activo = 1 AND nivel = 3 AND estado = 1 ORDER BY usuario";
-        $comentario="Seleccionar recamarera a cambiar ";
+      // Seleccionar usuario a cambiar   
+      function select_cambiar_usuario($hab_id,$estado,$usuario){
+        switch($estado){
+          case 3:// Cambiar recamarera limpieza-edo.3
+              $sentencia = "SELECT * FROM usuario WHERE id != $usuario AND activo = 1 AND nivel = 3 AND estado = 1 ORDER BY usuario";
+              break;
+          case 4:// Cambiar usuario mantenimiento-edo.4
+              $sentencia = "SELECT * FROM usuario WHERE id != $usuario AND activo = 1 AND nivel = 4 AND estado = 1 ORDER BY usuario";
+              break;
+          case 5:// Cambiar usuario supervision-edo.5
+              $sentencia = "SELECT * FROM usuario WHERE id != $usuario AND activo = 1 AND nivel = 5 AND estado = 1 ORDER BY usuario";
+              break;
+          default:
+              //echo "Estado indefinido";
+              break;
+        }
+        $comentario="Seleccionar usuario a cambiar ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))

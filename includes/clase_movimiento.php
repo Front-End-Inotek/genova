@@ -214,6 +214,19 @@
         }
         return $persona_limpio;
       }
+      // Obtener la persona detalle realiza de un movimiento
+      function saber_detalle_realiza($id){
+        $detalle_realiza= 0;
+        $sentencia = "SELECT detalle_realiza FROM movimiento WHERE id = $id LIMIT 1 ";
+        $comentario="Obtener la persona detalle realiza de un movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $detalle_realiza= $fila['detalle_realiza'];
+        }
+        return $detalle_realiza;
+      }
       // Agregar una reservacion en la habitacion
       function disponible_asignar($mov,$hab_id,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total,$total_pago){
         $fecha_entrada= strtotime($fecha_entrada);
