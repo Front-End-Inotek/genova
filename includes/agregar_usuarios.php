@@ -52,7 +52,7 @@
           <div class="col-sm-2">Puesto:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="puesto" placeholder="Ingresa el puesto del usuario" maxlength="20">
+            <input class="form-control" type="text" id="puesto" placeholder="Ingresa el puesto del usuario" maxlength="40">
           </div>
           </div>
         </div>

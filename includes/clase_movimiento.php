@@ -217,7 +217,7 @@
       // Obtener la persona detalle realiza de un movimiento
       function saber_detalle_realiza($id){
         $detalle_realiza= 0;
-        $sentencia = "SELECT detalle_realiza FROM movimiento WHERE id = $id LIMIT 1 ";
+        $sentencia = "SELECT detalle_realiza FROM movimiento WHERE id = $id LIMIT 1";
         $comentario="Obtener la persona detalle realiza de un movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo

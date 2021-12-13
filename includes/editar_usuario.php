@@ -160,7 +160,7 @@
           <div class="col-sm-2">Puesto:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="puesto" value="'.$usuario->puesto.'" maxlength="20">
+            <input class="form-control" type="text" id="puesto" value="'.$usuario->puesto.'" maxlength="40">
           </div>
           </div>
         </div>

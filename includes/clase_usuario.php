@@ -686,6 +686,7 @@
       }
       // Seleccionar usuario a cambiar   
       function select_cambiar_usuario($hab_id,$estado,$usuario){
+        $cambio= 0;
         switch($estado){
           case 3:// Cambiar recamarera limpieza-edo.3
               $sentencia = "SELECT * FROM usuario WHERE id != $usuario AND activo = 1 AND nivel = 3 AND estado = 1 ORDER BY usuario";
@@ -700,7 +701,7 @@
               //echo "Estado indefinido";
               break;
         }
-        $comentario="Seleccionar usuario a cambiar ";
+        $comentario="Seleccionar usuario a cambiar";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
@@ -716,7 +717,16 @@
               echo '</div>';
             echo '</div>';
           echo '</div>';
+          $cambio= $fila['usuario'];
         }
+
+        if($cambio == 0){// Checar si la consulta de sql esta vacia o no
+          echo '<div class="col-sm-12 text-left">
+            <div class="text-dark margen-1">
+              ¡No existe otro usuario disponible!
+            </div>
+          </div>';  
+        }   
       }
       // Obtener la cantidad de habitaciones limpiadas
       function cantidad_limpieza($fecha,$id){
