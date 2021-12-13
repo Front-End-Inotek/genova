@@ -32,32 +32,14 @@
                 echo 'En Mantenimiento';
               break;
               case 5:
-                echo 'Cancelado';
+                echo 'En Supervision';
               break;
               case 6:
-                echo 'Espera';
+                echo 'Cancelado';
               break;
-              case 7:
-                echo 'Ocupada';
-              break;
-              case 8:
-                echo 'Lavando';
-              break;
-              case 9:
-                echo 'Limpieza';
-              break;
-              case 10:
-                echo 'Restaurante';
-              break;
-              case 14:
-                echo 'Limpieza';
-              break;
-              case 15:
-                echo 'Paseo';
-              break;
-              case 17:
-                echo 'Superv.';
-              break;
+              default:
+                //echo "Estado indefinido";
+              break; 
             }
           echo '</h3>';
         echo '</div>';

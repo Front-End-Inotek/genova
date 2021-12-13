@@ -43,13 +43,13 @@
         case 4:
             echo $persona;
           break;
-        /*case 5:
-            echo "-";
-          break;
-        case 6:
+        case 5:
             echo $persona;
           break;
-        case 7:
+        case 6:
+            echo "-";
+          break;
+        /*case 7:
             echo $nombre;
           break;
         case 8:
@@ -124,17 +124,17 @@
               /*$sub_motivo=$movimiento->saber_motivo($fila['moviemiento']);
               $motivo=substr($sub_motivo, 0, 15);*/
             break;
-            /*case 5:
-              $estado="Cancelado";
-              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
+            case 5:
+              $estado="Super.";
+              //$cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
             break;
             case 6:
-              $estado="Espera";
-              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
-              $persona=$usuario->obtengo_usuario($id);"no existe"
-              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
+              $estado="Cancelada";
+              //$persona=$movimiento->saber_per_deta($fila['moviemiento']);
+              //$persona=$usuario->obtengo_usuario($id);"no existe"
+              //$cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
             break;
-            case 7:
+            /*case 7:
               $estado="Ocupada";
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
             break;

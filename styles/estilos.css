@@ -575,25 +575,25 @@ a.topictitle:hover {
 .estado5{
   background-color:#9F6BA0;
   color: white;
-  padding: 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado5:hover{
   background-color:#c98fca;
   color: white;
-  padding: 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado6{
   background-color: #28C9C6;
   color: #008783;
-  padding: 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado6:hover{
   background-color: #2FDCD8;
   color: #008783;
-  padding: 10px;
+  padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 /*.estado{

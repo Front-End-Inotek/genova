@@ -29,12 +29,13 @@
               $this->mantenimiento($hab_id,$estado,$mov);
           break;
         case 5:
-              $this->bloqueo($hab_id,$estado,$mov);
+              $this->supervision($hab_id,$estado,$mov);
           break;
         case 6:
-              $this->por_cobrar($hab_id,$estado,$mov);
+              $this->cancelada($hab_id,$estado,$mov);
+              //$this->por_cobrar($hab_id,$estado,$mov);
           break;
-        case 7:
+        /*case 7:
               //$this->ocupada($hab_id,$estado,$mov,$id);
           break;
         case 8:
@@ -66,7 +67,7 @@
           break;
         case 16:
               //$this->ocupada($hab_id,$estado,$mov,$id);
-          break;
+          break;*/
         default:
             echo '<div class="col-xs-2 col-sm-2 col-md-2">';
               echo 'No definido';
