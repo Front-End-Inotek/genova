@@ -119,7 +119,7 @@ function problemas_sistema(datos){
 	alert("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
 }
 
-//
+// Muestra los subestados de las habitaciones
 function mostrar_herramientas(hab_id,estado,nombre){ 
 	var id=localStorage.getItem("id");
 	$("#mostrar_herramientas").load("includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id);
@@ -2646,8 +2646,8 @@ function principal(){
 
 //Edo. 0-Disponible//
 
-// Modal de mandar una habitacion a estado limpieza
-function hab_estado_limpiar(hab_id,estado){
+// Modal de mandar una habitacion a un nuevo estado
+function hab_estado_inicial(hab_id,estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_estado_limpiar.php?hab_id="+hab_id+"&estado="+estado);
 }
 

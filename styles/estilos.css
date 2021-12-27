@@ -326,13 +326,19 @@ a.topictitle:hover {
 }
 .mantenimiento{
   text-align: center;
-  background-color: #D0D03D;
+  background-color: #8d8d31ef;
   font-size: 1.2em;
   color: white;
 }
 .supervision{
   text-align: center;
-  background-color: #7dc086;
+  background-color: rgba(27, 79, 109, 0.849);
+  font-size: 1.2em;
+  color: white;
+}
+.cancelada{
+  text-align: center;
+  background-color: #5c456bea;
   font-size: 1.2em;
   color: white;
 }
@@ -516,12 +522,6 @@ a.topictitle:hover {
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
-.estado{
-  background-color: #D0E369;
-  color: white;
-  padding: 0em 10px 0px 10px;
-  border-radius: 10px;
-}
 .estado1{
   background-color:#7b241ca6;
   color: #D98880;
@@ -573,26 +573,26 @@ a.topictitle:hover {
   border-radius: 10px;
 }
 .estado5{
-  background-color:#9F6BA0;
-  color: white;
+  background-color: #275669de;
+  color: #72acc3de;
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado5:hover{
-  background-color:#c98fca;
-  color: white;
+  background-color: #1588b6c2;
+  color: #72acc3de;
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado6{
-  background-color: #28C9C6;
-  color: #008783;
+  background-color:#5f496edc;
+  color: #b69ec5ea;
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado6:hover{
-  background-color: #2FDCD8;
-  color: #008783;
+  background-color:#9d6e9ee5;
+  color: #b69ec5ea;
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
@@ -603,6 +603,9 @@ a.topictitle:hover {
   color: #82E0AA ;
   background-color:#C0392B;
   color: #D98880;
+  #2d7573de;
+  #28C9C6;
+  #744f79dc;
   background-color:#50109D;
   background-color:#832161;
   background-color:#741D56;

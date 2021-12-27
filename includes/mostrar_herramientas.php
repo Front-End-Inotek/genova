@@ -86,14 +86,59 @@
         echo '</div>';
       }
       if($user->nivel<=2 && $conf->hospedaje ==1){
+        $nuevo_estado= 3;
         echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="limpieza btn-square-lg" onclick="hab_estado_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+          echo '<div class="limpieza btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
               echo 'Limpieza';
+            echo '</div>';
+            echo '</br>';
+          echo '</div>';
+        echo '</div>';
+      }
+      if($user->nivel<=2 && $conf->hospedaje ==1){
+        $nuevo_estado= 4;
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="mantenimiento btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
+            echo '</br>';
+            echo '<div>';
+                //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+            echo '</div>';
+            echo '<div>';
+              echo 'Mant.';
+            echo '</div>';
+            echo '</br>';
+          echo '</div>';
+        echo '</div>';
+      }
+      if($user->nivel<=2 && $conf->hospedaje ==1){
+        $nuevo_estado= 5;
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="supervision btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
+            echo '</br>';
+            echo '<div>';
+                //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+            echo '</div>';
+            echo '<div>';
+              echo 'Supervision';
+            echo '</div>';
+            echo '</br>';
+          echo '</div>';
+        echo '</div>';
+      }
+      if($user->nivel<=2 && $conf->hospedaje ==1){
+        echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="cancelada btn-square-lg" onclick="hab_estado_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '</br>';
+            echo '<div>';
+                //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+            echo '</div>';
+            echo '<div>';
+              echo 'Cancelada';
             echo '</div>';
             echo '</br>';
           echo '</div>';
@@ -291,6 +336,36 @@
         echo '</div>';
       }
       break;
+    case 5 :
+      if($user->nivel<=2){
+        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '</br>';
+            echo '<div>';
+                //echo '<img src="images/home.png"  class="center-block img-responsive">';
+            echo '</div>';
+            echo '<div>';
+              echo 'Terminar';
+            echo '</div>';
+            echo '</br>';
+          echo '</div>';
+        echo '</div>';
+      }
+      if($user->nivel<=2){
+        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="cambiar_usuario btn-square-lg" onclick="hab_cambiar_persona_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
+            echo '</br>';
+            echo '<div>';
+                //echo '<img src="images/home.png"  class="center-block img-responsive">';
+            echo '</div>';
+            echo '<div>';
+              echo 'Cambio Sup.';
+            echo '</div>';
+            echo '</br>';
+          echo '</div>';
+        echo '</div>';
+      }
+      break;  
   }
   echo '</div>';
   echo '<div class="row">';

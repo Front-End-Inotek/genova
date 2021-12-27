@@ -196,6 +196,34 @@
       //se recibe la consulta y se convierte a arreglo
       $detalle_inicio= 0;
       $detalle_realiza= 0;
+      $motivo= '';
+      while($fila = mysqli_fetch_array($consulta))
+      {
+        $detalle_inicio= $fila['detalle_inicio'];
+        $detalle_realiza= $fila['detalle_realiza'];
+        $motivo= $fila['comentario'];
+      }
+      $usuario = NEW Usuario($detalle_realiza);
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Realiza: '.$usuario->usuario;
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        if($motivo != ''){
+          echo 'Motivo: '.$motivo;
+        }
+      echo '</div>';
+    }
+    // Estado 5
+    function supervision($hab_id,$estado,$mov){
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
+      $comentario= "Obtener informacion para la habitacion con el estado supervision";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      $detalle_inicio= 0;
+      $detalle_realiza= 0;
       while($fila = mysqli_fetch_array($consulta))
       {
         $detalle_inicio= $fila['detalle_inicio'];
@@ -209,29 +237,27 @@
         echo 'Realiza: '.$usuario->usuario;
       echo '</div>';
     }
-    function bloqueo($hab_id,$estado,$mov){
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
-      $comentario="obtener informacion de la ultima vez que se rento ";
+    // Estado 6
+    function cancelada($hab_id,$estado,$mov){
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
+      $comentario="Obtener informacion para la habitacion con el estado cancelada";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //echo $sentencia ;
       //se recibe la consulta y se convierte a arreglo
       $detalle_inicio=0;
-      $detalle=0;
-
+      $motivo= '';
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $detalle_inicio=$fila['detalle_inicio'];
-        $detalle=$fila['comentario'];
-
+        $detalle_inicio= $fila['detalle_inicio'];
+        $motivo= $fila['comentario'];
       }
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
-
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Motivo: '.$detalle;
+          if($motivo != ''){
+            echo 'Motivo: '.$motivo;
+          }
         echo '</div>';
-
     }
     function por_cobrar($hab_id,$estado,$mov){
 
