@@ -61,3 +61,4 @@ VERSION 1.5
 -Agregar otros niveles de usuarios
 -Subestados en estado 3 limpieza
 -Subestados en estado 4 mantenimiento
+-Estados iniciales en habitacion disponible

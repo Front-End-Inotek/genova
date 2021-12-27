@@ -2647,12 +2647,12 @@ function principal(){
 //Edo. 0-Disponible//
 
 // Modal de mandar una habitacion a un nuevo estado
-function hab_estado_inicial(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_modal_estado_limpiar.php?hab_id="+hab_id+"&estado="+estado);
+function hab_estado_inicial(hab_id,estado,nuevo_estado){
+	$("#mostrar_herramientas").load("includes/hab_modal_estado_inicial.php?hab_id="+hab_id+"&estado="+estado+"&nuevo_estado="+nuevo_estado);
 }
 
-// Mandar una habitacion a estado limpieza
-function hab_limpieza(hab_id,estado,usuario){
+// Mandar una habitacion a estado inicial
+function hab_inicial(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -2666,7 +2666,7 @@ function hab_limpieza(hab_id,estado,usuario){
 		  type: "POST",
 		  dataType: "html",
 		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_limpieza.php",
+		  url:"includes/hab_inicial.php",
 		  data:datos,
 		  beforeSend:loaderbar,
 		  success:principal,
