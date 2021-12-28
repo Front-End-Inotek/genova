@@ -43,7 +43,7 @@
       </div><br>
 
       <div class="modal-body">';
-        echo '<div class="row">';
+        echo '<div class="row">';-
           switch($_GET['estado']){
             case 3:// En habitacion limpieza-edo.3
                 $usuario_actual= $movimiento->saber_persona_limpio($hab->mov);
