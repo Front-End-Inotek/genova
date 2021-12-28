@@ -24,7 +24,7 @@
               echo '¿Terminar estado supervision de la habitación '.$hab->nombre.'?';
               break;
           case 6:// En habitacion cancelada-edo.6 
-              echo '¿Terminar de estar cancelada la habitación '.$hab->nombre.'?';
+              echo '¿Terminar estado cancelada la habitación '.$hab->nombre.'?';
               break;    
           default:
               //echo "Estado indefinido";

@@ -102,37 +102,35 @@
         $estado="no definido";
         switch ($fila['estado']) {
             case 0:
-              $estado="Disponible";
-              $cronometro=$movimiento->saber_tiempo_ultima_renta($fila['id']);
+              $estado= "Disponible";
+              $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
             break;
             case 1:
-              $estado="Ocupado";
-              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
+              $estado= "Ocupado";
+              $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
             case 2:
-              $estado="Sucia";
-              $cronometro=$movimiento->saber_inicio_sucia($fila['moviemiento']);
+              $estado= "Sucia";
+              $cronometro= $movimiento->saber_inicio_sucia($fila['moviemiento']);
             break;
             case 3:
-              $estado="Limpieza";
-              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
+              $estado= "Limpieza";
+              $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
             break;
             case 4:
-              $estado="Mant.";
-              $cronometro=$movimiento->saber_detalle_inicio($fila['moviemiento']);
-              /*$sub_motivo=$movimiento->saber_motivo($fila['moviemiento']);
-              $motivo=substr($sub_motivo, 0, 15);*/
+              $estado= "Mant.";
+              $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
+              /*$sub_motivo= $movimiento->saber_motivo($fila['moviemiento']);
+              $motivo= substr($sub_motivo, 0, 15);*/
             break;
             case 5:
               $estado="Super.";
-              //$cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
+              $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
             case 6:
               $estado="Cancelada";
-              //$persona=$movimiento->saber_per_deta($fila['moviemiento']);
-              //$persona=$usuario->obtengo_usuario($id);"no existe"
-              //$cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
+              $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
             /*case 7:
               $estado="Ocupada";
@@ -212,7 +210,16 @@
 
               echo '<div class="timepo_hab">';
                       $fecha_salida= $movimiento->ver_fecha_salida($fila['id']);
-                      echo $fecha_salida;
+                      if($fila['estado'] == 1){
+                        echo $fecha_salida;
+                      }else{
+                        if($cronometro == 0){
+                          $fecha_inicio= '&nbsp';
+                        }else{
+                          $fecha_inicio= date("d-m-Y",$cronometro);
+                        }
+                        echo $fecha_inicio;
+                      }
               echo '</div>';
 
               echo '<div class="timepo_hab">';

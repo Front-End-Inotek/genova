@@ -260,7 +260,6 @@
         echo '</div>';
     }
     function por_cobrar($hab_id,$estado,$mov){
-
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
       $comentario="obtener de la habitacion  por cobrar ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -280,9 +279,7 @@
         echo 'Cobrara: '. $usuario->usuario;
       echo '</div>';
     }
-    
     function ocupada_rest($hab_id,$estado,$mov){
-
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
       $comentario="obtener de la habitacion  por cobrar ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);

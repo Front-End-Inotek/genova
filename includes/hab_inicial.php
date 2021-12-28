@@ -24,7 +24,7 @@
         break;
     case 6:// Enviar a
         $id = $movimiento->guardar_comentario($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario_id'],$_POST['estado'],urldecode($_POST['motivo']));
-        $hab->cambiohab($_POST['hab_id'],$hab->mov,6);
+        $hab->cambiohab($_POST['hab_id'],$id,6);
         $logs->guardar_log($_POST['usuario_id'],"Cancelar la habitacion: ". $hab->nombre);
         break;
     default:

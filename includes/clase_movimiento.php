@@ -141,7 +141,7 @@
       // Obener el tiempo de utlima rente de fin hospedaje
       function saber_tiempo_ultima_renta($hab){
         $finalizado= 0;
-        $sentencia = "SELECT * FROM movimiento WHERE id_hab = $hab  ORDER BY id DESC LIMIT 1 ";
+        $sentencia = "SELECT * FROM movimiento WHERE id_hab = $hab ORDER BY id DESC LIMIT 1 ";
         $comentario="Obtener el tiempo de fin de hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -200,6 +200,19 @@
           $detalle_inicio= $fila['detalle_inicio'];
         }
         return $detalle_inicio;
+      }
+      // Obtener el inicio limpieza de un movimiento
+      function saber_inicio_limpieza($id){
+        $inicio_limpieza= 0;
+        $sentencia = "SELECT inicio_limpieza FROM movimiento WHERE id = $id LIMIT 1 ";
+        $comentario="Obtener el inicio limpieza de un movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $inicio_limpieza= $fila['inicio_limpieza'];
+        }
+        return $inicio_limpieza;
       }
       // Obtener la persona limpio de un movimiento
       function saber_persona_limpio($id){
