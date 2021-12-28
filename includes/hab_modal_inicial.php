@@ -41,8 +41,8 @@
           </div><br>
           </div>';
           echo '<div class="modal-footer">
-            <button type="button" class=" btn btn-success" onclick="hab_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['usuario'].')">Aceptar</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+            <button type="button" class=" btn btn-success" onclick="hab_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['usuario'].')">Aceptar</button>
           </div>
       </div>';
         break;
@@ -74,8 +74,8 @@
             </div><br>
             </div>';
             echo '<div class="modal-footer">
-              <button type="button" class=" btn btn-success" onclick="hab_inicial('.$_GET['hab_id'].','.$estado.','.$_GET['usuario'].')">Aceptar</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+              <button type="button" class=" btn btn-success" onclick="hab_inicial('.$_GET['hab_id'].','.$estado.','.$_GET['usuario'].')">Aceptar</button>
             </div>
         </div>';
         break;

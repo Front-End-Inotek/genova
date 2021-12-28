@@ -731,7 +731,7 @@
               echo '</div>';
             echo '</div>';
           echo '</div>';
-          $cambio= $fila['usuario'];
+          $cambio= $fila['id'];
         }
 
         if($cambio == 0){// Checar si la consulta de sql esta vacia o no
