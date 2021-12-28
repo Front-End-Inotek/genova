@@ -264,6 +264,31 @@
         $id= $this->ultima_insercion();
         return $id;
       }
+      // Agregar una habitacion en estado seleccionado con un comentario especifico
+      function guardar_comentario($hab_id,$usuario_id,$usuario,$estado,$comentario){
+        $fecha_entrada= time();
+        switch($estado){
+          case 4:// Enviar a mantenimiento 
+              $motivo= 'mantenimiento';
+              break;
+          case 5:// Enviar a supervision
+              $motivo= 'supervisar';
+              break;
+          case 6:// Enviar a
+              $motivo= 'cancelar';
+              break;
+          default:
+              //echo "Estado indefinido";
+              break;
+        }
+        $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
+        VALUES ('$hab_id', '0', '0', '0', '0', '$fecha_entrada', '0', '$usuario_id', '$usuario', '0', '0', '0', '0', '0', '0', '', '0', '0', '0', '0', '0', '0', '0', '$motivo', '$comentario', 'sin estado');";
+        $comentario="Agregar una habitacion en estado seleccionado con un comentario especifico";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        $id= $this->ultima_insercion();
+        return $id;
+      }
       // Modificar el detalle inicio del movimiento
       function editar_detalle_inicio($mov){
         $tiempo=time();

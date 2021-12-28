@@ -15,7 +15,7 @@
                 echo '<h3>LIMPIEZA - Habitación '.$hab->nombre.'</h3>
                     </div>
                     <div class="col-sm-12">
-                    Selecciona la recamarera que realizara la limpieza:
+                      Selecciona la recamarera que realizara la limpieza:
                     </div>
                   </div>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -31,7 +31,7 @@
                 echo '<h3>MANTENIMIENTO - Habitación '.$hab->nombre.'</h3>
                     </div>
                     <div class="col-sm-12">
-                    Selecciona quien realizara el mantenimiento:
+                      Selecciona quien realizara el mantenimiento:
                     </div>
                   </div>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -47,7 +47,7 @@
                 echo '<h3>SUPERVISION - Habitación '.$hab->nombre.'</h3>
                     </div>
                     <div class="col-sm-12">
-                    Selecciona quien realizara la supervision:
+                      Selecciona quien realizara la supervision:
                     </div>
                   </div>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>

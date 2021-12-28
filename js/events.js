@@ -2651,8 +2651,8 @@ function hab_estado_inicial(hab_id,estado,nuevo_estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_estado_inicial.php?hab_id="+hab_id+"&estado="+estado+"&nuevo_estado="+nuevo_estado);
 }
 
-// Mandar una habitacion a estado inicial
-function hab_inicial(hab_id,estado,usuario){
+// Mandar una habitacion a estado limpieza
+function hab_limpieza(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -2661,6 +2661,49 @@ function hab_inicial(hab_id,estado,usuario){
           "usuario": usuario,
           "usuario_id": usuario_id,
 		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded",
+		  url:"includes/hab_limpieza.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:principal,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
+		});
+	return false;
+}
+
+// Mandar una habitacion a un nuevo estado
+function hab_modal_inicial(hab_id,estado,usuario){
+    $("#mostrar_herramientas").load("includes/hab_modal_inicial.php?hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario);
+}
+
+// Mandar una habitacion a estado inicial
+function hab_inicial(hab_id,estado,usuario){
+	var usuario_id=localStorage.getItem("id");
+    if(estado!=5){
+        var motivo= encodeURI(document.getElementById("motivo").value);
+        $('#caja_herramientas').modal('hide');
+        var datos = {
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario": usuario,
+            "motivo": motivo,
+            "usuario_id": usuario_id,
+            };
+    }else{
+        $('#caja_herramientas').modal('hide');
+        var datos = {
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario": usuario,
+            "usuario_id": usuario_id,
+            };
+    }
 	$.ajax({
 		  async:true,
 		  type: "POST",

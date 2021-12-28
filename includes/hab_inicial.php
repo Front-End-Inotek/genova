@@ -11,24 +11,24 @@
   }*/
 
   switch($_POST['estado']){
-    case 0:// En habitacion disponible-edo.0 
-        $id = $movimiento->guardar_limpieza($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario']);
-        $hab->cambiohab($_POST['hab_id'],$id,3);
-        $logs->guardar_log($_POST['usuario_id'],"Limpieza en habitacion: ". $hab->nombre);
+    case 4:// Enviar a mantenimiento 
+        $id = $movimiento->guardar_comentario($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario'],$_POST['estado'],urldecode($_POST['motivo']));
+        $hab->cambiohab($_POST['hab_id'],$id,4);
+        $logs->guardar_log($_POST['usuario_id'],"Mantenimiento en habitacion: ". $hab->nombre);
         break;
-    case 1:// En habitacion ocupada-edo.1 
-        $motivo= 0;// No se cambia el motivo, manteniendo el motivo de reservar
-        $movimiento->editar_estado_interno($hab->mov,1.2);
-        $movimiento->editar_estado_limpieza($hab->mov,$_POST['usuario_id'],$_POST['usuario'],$motivo);
-        $logs->guardar_log($_POST['usuario_id'],"Habitacion ocupada limpieza: ". $hab->nombre);
+    case 5:// Enviar a supervision
+        $motivo= '';
+        $id = $movimiento->guardar_comentario($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario'],$_POST['estado'],$motivo);
+        $hab->cambiohab($_POST['hab_id'],$id,5);
+        $logs->guardar_log($_POST['usuario_id'],"Supervision en habitacion: ". $hab->nombre);
         break;
-    case 2:// En habitacion sucia-edo.2 
-        $motivo= 0;
-        $movimiento->editar_estado_limpieza($hab->mov,$_POST['usuario_id'],$_POST['usuario'],$motivo);
-        $hab->cambiohab($_POST['hab_id'],$hab->mov,3);
-        $logs->guardar_log($_POST['usuario_id'],"Limpiar en habitacion: ". $hab->nombre);
+    case 6:// Enviar a
+        $id = $movimiento->guardar_comentario($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario_id'],$_POST['estado'],urldecode($_POST['motivo']));
+        $hab->cambiohab($_POST['hab_id'],$hab->mov,6);
+        $logs->guardar_log($_POST['usuario_id'],"Cancelar la habitacion: ". $hab->nombre);
         break;
     default:
         //echo "Estado indefinido";
+        break;
   }
 ?>
