@@ -51,7 +51,7 @@ VERSION 1.4
 -Vistas cuadradas de todos los botones junto con rendondear sus bordes
 
 VERSION 1.5
--Generar rama Vistas
+-Generar rama vistas
 -Cambios en los cuadritos de racks de estados
 -Agregar icono como estado interno de la habitacion
 -Generar estado 2 de sucio y mandar a terminar en una habitacion
@@ -61,6 +61,10 @@ VERSION 1.5
 -Agregar otros niveles de usuarios
 -Subestados en estado 3 limpieza
 -Subestados en estado 4 mantenimiento
+
+VERSION 1.6
+-Generar rama estados
 -Estados iniciales en habitacion disponible
 -Subestados en estado 5 supervision
 -Subestados en estado 6 cancelada
+-Cambiar vista en restaurante

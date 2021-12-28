@@ -382,16 +382,16 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($cunt%3==0){
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_sup"><button type="button" class="btn btn-success btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_sup"><button type="button" class="btn btn-success btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-info btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_sup"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }

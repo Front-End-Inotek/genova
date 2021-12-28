@@ -139,12 +139,12 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           //if($cont%2==0){
-            echo '<div class="col-sm-3 margen_inf">
-              <button type="button" class="btn btn-secondary btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')"><span class="glyphicon glyphicon-cutlery"></span> 🍽️'.$fila['nombre'].'</button>
+            echo '<div class="col-sm-2 margen_sup">
+              <button type="button" class="btn btn-secondary btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')"> 🍽️<br>'.$fila['nombre'].'</button>
             </div>';
           /*}else{
-            echo '<div class="col-sm-3 margen_inf">
-              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].')"><span class="glyphicon glyphicon-cutlery"></span> 🍽️'.$fila['nombre'].'</button>
+            echo '<div class="col-sm-2 margen_sup">
+              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].')"> 🍽️<br>'.$fila['nombre'].'</button>
             </div>';
           }
           $cont++;*/

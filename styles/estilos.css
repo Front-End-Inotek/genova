@@ -177,6 +177,22 @@ a.topictitle:hover {
 .color_black{
   color: black;
 }
+.fondo_blanco{
+  background-color: white; 
+  border-radius: 5px;
+  padding: .0em 5px 0px 5px;
+}
+.fondo{
+  background-color: #e9e9e9;
+  border-radius: 5px;
+}
+.alinear_centro{
+  /*color: white;*/
+  background-color: #e9e9e9;
+  text-align: center;
+  border-radius: 5px;
+  padding: .35em 0px 7px 0px;
+}
 .espacio{/* */
   width: 155px !important;
   max-width: 100% !important;
@@ -258,12 +274,14 @@ a.topictitle:hover {
   overflow-x: scroll;
 }
 .altura-rest_total{/* */
-  height: 26em;
-  overflow-x: scroll;
+  /*height: 26em;*/
+  height: 12em;
+  overflow-y: scroll;
 }
 .altura-rest_productos{/* */
-  height: 18em;
-  overflow-x: scroll;
+  /*height: 18em;*/
+  height: 39.5em;
+  overflow-y: scroll;
 }
 .btn-square-md{/* */
   width: 80px !important;
@@ -614,13 +632,16 @@ a.topictitle:hover {
   background-color:#e6915d;
   background-color:#00587A;
   background-color:#045170;
-}
+}*/
 
 .texto_doble{
   font-size: 2 em;
 }
 .margen_inf{
   margin-bottom:10px;
+}
+.margen_sup{
+  margin-top:10px;
 }
 #boton_panico{
   display:none;
