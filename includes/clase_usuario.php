@@ -639,13 +639,36 @@
       }
       // Seleccionar recamarera    
       function select_reca($hab_id,$estado,$nuevo_estado){
-        $sentencia = "SELECT * FROM usuario WHERE activo = 1 AND nivel = $nuevo_estado AND estado = 1 ORDER BY usuario";
+        if($nuevo_estado == 1){
+          $nivel= 3;
+        }else{
+          $nivel= $nuevo_estado;
+        }
+        $sentencia = "SELECT * FROM usuario WHERE activo = 1 AND nivel = $nivel AND estado = 1 ORDER BY usuario";
         $comentario="Asignación de usuarios a la clase usuario funcion constructor";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
           switch($nuevo_estado){
+            case 1:
+              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+                  echo '<div class="select_reca btn-square-lg" onclick="hab_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
+                  echo '</br>';
+                  echo '<div>';
+                      //echo '<img src="images/persona.png"  class="center-block img-responsive">';
+                  echo '</div>';
+                  echo '<div>';
+                    echo $fila['usuario'];
+                  echo '</div>';
+                  /*echo '<div>Limpiadas: ';
+                    $fecha= $this->ultima_fecha();
+                    echo $this->cantidad_limpieza($fecha,$fila['id']);
+                  echo '</div>';*/
+                  //echo '</br>';
+                echo '</div>';
+              echo '</div>';
+              break;
             case 3:// Enviar a limpieza
               echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
                   echo '<div class="select_reca btn-square-lg" onclick="hab_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';

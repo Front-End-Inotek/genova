@@ -2651,6 +2651,11 @@ function hab_estado_inicial(hab_id,estado,nuevo_estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_estado_inicial.php?hab_id="+hab_id+"&estado="+estado+"&nuevo_estado="+nuevo_estado);
 }
 
+// Modal de mandar una habitacion a estado limpieza
+function hab_estado_limpiar(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_modal_estado_limpiar.php?hab_id="+hab_id+"&estado="+estado);
+}
+
 // Mandar una habitacion a estado limpieza
 function hab_limpieza(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");

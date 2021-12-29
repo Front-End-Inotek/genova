@@ -326,6 +326,15 @@ a.topictitle:hover {
   padding-top: 0px;
   font-size:12px;
 }
+.btn-rectangle-md{/* */
+  width: 80px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 110px !important;
+  text-align: center;
+  padding: 0px;
+  font-size:13px;
+}
 .altura{
   text-align: center;
   font-size: 1,3em;
@@ -658,14 +667,17 @@ a.topictitle:hover {
 .margen_sup{
   margin-top:10px;
 }
-.margen_supa{
+.margen_sup_pedir{
+  margin-top:40px;
+}
+.margen_sup_rest{
   margin-top:13px;
   text-align: center;
   width:726px;
   height:110px;
   border:3px solid white;
   border-radius:10px;
-  padding:35px;
+  padding:24px;
 }
 #boton_panico{
   display:none;

@@ -555,18 +555,17 @@
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
 
-        echo '<div class="row margen_supa">'; 
+        echo '<div class="row margen_sup_rest">'; 
           if($cantidad > 0){
-            echo '<div class="col-sm-3">#Items: '.$cantidad.'</div> 
+            echo '<div class="col-sm-3 margen_sup_pedir">#Items: '.$cantidad.'</div> 
             <div class="col-sm-0"></div>';
             if($hab_id != 0){
-              echo '<div class="col-sm-3">Habitación: '.$hab_nombre.'</div> 
+              echo '<div class="col-sm-3 margen_sup_pedir">Habitación: '.$hab_nombre.'</div> 
               <div class="col-sm-0"></div>';
             } 
-            echo '<div class="col-sm-3">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-0"></div>
-            <div class="col-sm-3"><button class="btn btn-danger btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')"> Pedir</button></></div>
-            <div class="col-sm-0"></div>';                 
+            echo '<div class="col-sm-3 margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-md"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
           }else{
             echo '<div class="col-sm-12"></div>'; 
           }
