@@ -512,7 +512,7 @@
         $cont=0;
         $total=0;
         //echo '<tr class="fuente_menor text-center"> thead-light
-        echo '<table class="fuente_menor table">
+        echo '<table class="fuente_menor margen_sup table">
           <thead class="encabezado_gris">
             <tr class="text-center">
             <th scope="col">Cant</th>
