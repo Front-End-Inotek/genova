@@ -122,7 +122,7 @@ background-color: #040C14;
 /* Color en las letras del boton */
 .btn{
   color:white;
- }
+}
 
  /* Contenedor con fondo blanco y bordes */
 .blanco{
@@ -136,8 +136,7 @@ background-color: #040C14;
 }
 
 /* Color en los iconos svg */
-.svg-color
-{
+.svg-color{
   fill: rgb(185, 185, 185);
 }
 
@@ -177,21 +176,27 @@ a.topictitle:hover {
 .color_black{
   color: black;
 }
-.fondo_blanco{
-  background-color: white; 
-  border-radius: 5px;
-  padding: .0em 5px 0px 5px;
-}
-.fondo{
-  background-color: #e9e9e9;
+.fondo_rest{
+  background-color: #E9E9E9;
   border-radius: 5px;
 }
 .alinear_centro{
   /*color: white;*/
-  background-color: #e9e9e9;
+  background-color: #E9E9E9;
   text-align: center;
   border-radius: 5px;
   padding: .35em 0px 7px 0px;
+}
+.alinear_centro_categorias{
+  /*color: white;*/
+  background-color: #E9E9E9;
+  text-align: center;
+  border-radius: 5px;
+  padding: .35em 0px 7px 0px;
+  margin-top:10px;
+}
+.encabezado_gris {
+  background-color: #E9E9E9;
 }
 .espacio{/* */
   width: 155px !important;
@@ -275,13 +280,23 @@ a.topictitle:hover {
 }
 .altura-rest_total{/* */
   /*height: 26em;*/
-  height: 12em;
+  height: 14em;
   overflow-y: scroll;
 }
 .altura-rest_productos{/* */
   /*height: 18em;*/
-  height: 39.5em;
+  height: 37.5em;
   overflow-y: scroll;
+}
+.btn-square-md-rest{/* */
+  background-color: #71db94;
+  width: 80px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 80px !important;
+  text-align: center;
+  padding: 0px;
+  font-size:12px;
 }
 .btn-square-md{/* */
   width: 80px !important;
@@ -642,6 +657,15 @@ a.topictitle:hover {
 }
 .margen_sup{
   margin-top:10px;
+}
+.margen_supa{
+  margin-top:13px;
+  text-align: center;
+  width:726px;
+  height:110px;
+  border:3px solid white;
+  border-radius:10px;
+  padding:35px;
 }
 #boton_panico{
   display:none;

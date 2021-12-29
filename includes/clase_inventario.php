@@ -337,21 +337,23 @@
         $comentario="Busqueda de cualquier producto en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        echo '<div class="row">';
+        echo '<h6 class="alinear_centro_categorias"> Productos</h6>
+        <div class="row">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($cunt%3==0){
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              //echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-4"><button type="button" class="btn btn-info btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }
@@ -377,21 +379,22 @@
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        echo '<div class="row">';
+        echo '<h6 class="alinear_centro_categorias"> Productos</h6>
+        <div class="row">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($cunt%3==0){
-              echo '<div class="col-sm-2 margen_sup"><button type="button" class="btn btn-success btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-2 margen_sup"><button type="button" class="btn btn-success btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-2 margen_sup"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }
@@ -508,9 +511,9 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cont=0;
         $total=0;
-        //echo '<tr class="fuente_menor text-center">
+        //echo '<tr class="fuente_menor text-center"> thead-light
         echo '<table class="fuente_menor table">
-          <thead class="thead-light">
+          <thead class="encabezado_gris">
             <tr class="text-center">
             <th scope="col">Cant</th>
             <th scope="col">Nombre</th>
@@ -552,18 +555,18 @@
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
 
-        echo '<div class="row">'; 
+        echo '<div class="row margen_supa">'; 
           if($cantidad > 0){
-            echo '<div class="col-sm-8">#Items: '.$cantidad.'</div> 
-            <div class="col-sm-4"></div>';
+            echo '<div class="col-sm-3">#Items: '.$cantidad.'</div> 
+            <div class="col-sm-0"></div>';
             if($hab_id != 0){
-              echo '<div class="col-sm-8">Habitación: '.$hab_nombre.'</div> 
-              <div class="col-sm-4"></div>';
+              echo '<div class="col-sm-3">Habitación: '.$hab_nombre.'</div> 
+              <div class="col-sm-0"></div>';
             } 
-            echo '<div class="col-sm-8">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-4"></div>
-            <div class="col-sm-8"><button class="btn btn-success btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">🧾Pedir</button></></div>
-            <div class="col-sm-4"></div>';                 
+            echo '<div class="col-sm-3">Total: $'.number_format($total, 2).'</div> 
+            <div class="col-sm-0"></div>
+            <div class="col-sm-3"><button class="btn btn-danger btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')"> Pedir</button></></div>
+            <div class="col-sm-0"></div>';                 
           }else{
             echo '<div class="col-sm-12"></div>'; 
           }
