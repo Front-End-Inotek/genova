@@ -118,12 +118,12 @@
   if($extra_adulto>0){
       $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Adulto: '.$extra_adulto),0,0,'L');
   }else{
-      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'L');
+      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Adulto: 0'),0,0,'L');
   }
   if($extra_junior>0){
     $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Junior: '.$extra_junior),0,1,'L');
   }else{
-    $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",''),0,1,'L'); 
+    $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Junior: 0'),0,1,'L'); 
   }
 
   $x= 20;
@@ -131,12 +131,12 @@
   if($extra_infantil>0){
       $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Infantil: '.$extra_infantil),0,0,'L');
   }else{
-      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'L');
+      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Infantil: 0'),0,0,'L');
   }
   if($extra_menor>0){
     $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Menor: '.$extra_menor),0,1,'L');
   }else{
-    $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",''),0,1,'L'); 
+    $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Menor: 0'),0,1,'L'); 
   }
 
   $x= 20;

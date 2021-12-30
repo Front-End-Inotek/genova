@@ -504,7 +504,7 @@
             `total` = '$total',
             `total_pago` = '$total_pago'
             WHERE `id` = '$id';";
-        //echo $sentencia ;
+        //echo $sentencia;
         $comentario="Editar una reservacion dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 
@@ -512,7 +512,7 @@
             `cargo` = '$total_suplementos',
             `abono` = '$total_pago'
             WHERE `id` = '$id_cuenta';";
-        //echo $sentencia ;
+        //echo $sentencia;
         $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
