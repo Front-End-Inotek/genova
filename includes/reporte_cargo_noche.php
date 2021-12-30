@@ -8,7 +8,7 @@
   include_once('clase_tarifa.php');
 
   $logs = NEW Log(0);
-  //$logs->guardar_log($_GET['id'],"Reporte cargo por noche");
+  $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche");
   $hab= NEW Hab(0);
   $huesped= NEW Huesped(0);
   $reservacion= NEW Reservacion(0);

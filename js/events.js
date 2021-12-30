@@ -957,7 +957,7 @@ function ver_reporte_reservacion(id){
 	closeNav();
 }
 
-// Generar reporte de reservacion ////////////
+// Generar reporte de reservacion
 function reporte_reservacion(id){
     var usuario_id=localStorage.getItem("id");
     window.open("includes/reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id);
