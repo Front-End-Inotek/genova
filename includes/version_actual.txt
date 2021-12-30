@@ -68,3 +68,4 @@ VERSION 1.6
 -Subestados en estado 5 supervision
 -Subestados en estado 6 cancelada
 -Cambiar vista en restaurante
+-Ver todos los datos de una reservacion en su tabla

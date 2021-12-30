@@ -208,6 +208,7 @@
       function obtengo_nombre($id){
         $sentencia = "SELECT nombre FROM tarifa_hospedaje WHERE id = $id AND estado = 1 LIMIT 1";
         //echo $sentencia;
+        $nombre= '';
         $comentario="Obtengo el nombre de la tarifa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -220,6 +221,7 @@
       function obtengo_tarifa_dia($id,$extra_adulto,$extra_junior,$extra_infantil,$descuento){
         $sentencia = "SELECT * FROM tarifa_hospedaje WHERE id = $id AND estado = 1 LIMIT 1";
         //echo $sentencia;
+        $total_dia= 0;
         $comentario="Obtengo la tarifa por el dia de hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))

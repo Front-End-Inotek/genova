@@ -209,7 +209,8 @@
             <th>Total Estancia</th>
             <th>Total Pago</th>
             <th>Forma Pago</th>
-            <th>Limite Pago</th>';
+            <th>Limite Pago</th>
+            <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
@@ -250,7 +251,8 @@
                 }
                 echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
                 echo '<td>'.$fila['descripcion'].'</td>';  
-                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';  
+                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>
+                <td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';  
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
                 }

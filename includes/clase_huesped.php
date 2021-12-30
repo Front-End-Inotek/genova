@@ -306,6 +306,7 @@
       function obtengo_nombre_completo($id){
         $sentencia = "SELECT nombre,apellido FROM huesped WHERE id = $id AND estado_huesped = 1 LIMIT 1";
         //echo $sentencia;
+        $nombre_completo= '';
         $comentario="Obtengo el nombre completo del huesped";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))

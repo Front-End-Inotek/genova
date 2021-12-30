@@ -122,7 +122,7 @@
   {
       $hab_id = $fila['id'];
       $hab_nombre = $fila['nombre'];  
-      $habitacion = $fila['habitacion'];
+      $habitacion = $fila['id_hab'];
       $fecha_entrada = $fila['inicio_hospedaje'];
       $fecha_salida = $fila['fin_hospedaje'];
       $extra_adulto = $fila['extra_adulto'];

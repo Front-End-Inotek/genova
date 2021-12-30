@@ -948,6 +948,21 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
     }    
 }
 
+// Muestra las reservaciones de la bd
+function ver_reporte_reservacion(id){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id);
+	closeNav();
+}
+
+// Generar reporte de reservacion ////////////
+function reporte_reservacion(id){
+    var usuario_id=localStorage.getItem("id");
+    window.open("includes/reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id);
+}
+
 // Borrar una reservacion
 function borrar_reservacion(id){
     var usuario_id=localStorage.getItem("id");
