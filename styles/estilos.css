@@ -124,10 +124,19 @@ background-color: #040C14;
   color:white;
 }
 
- /* Contenedor con fondo blanco y bordes */
-.blanco{
+/* Contenedor con fondo blanco y bordes */
+ .blanco{
   padding: 25px 25px;
   background-color: white;
+}
+
+/* Contenedor con fondo blanco y margen */
+.blanco_margen{
+  padding: 35px 35px;
+  margin-bottom:30px;
+  margin-top:30px;
+  margin-left:45px;
+  border:3px solid rgb(98, 4, 4);
 }
 
 /* Margen de uno en escritura */
