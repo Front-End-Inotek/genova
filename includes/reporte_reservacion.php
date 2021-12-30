@@ -30,7 +30,7 @@
   $pdf->SetXY($x,$y);
   $pdf->SetFont('Arial','B',15);
   $pdf->SetTextColor(0,0,0);
-  $pdf->Cell(192,7,iconv("UTF-8", "ISO-8859-1",'REPORTE RESERVACIÓN '.$_GET['id']),0,1,'C');
+  $pdf->Cell(192,7,iconv("UTF-8", "ISO-8859-1",'RESERVACIÓN '.$_GET['id']),0,1,'C');
   $pdf->Ln(4);
 
   // Datos dentro de la reservacion
@@ -213,9 +213,9 @@
   $pdf->SetXY($x,$y_final);
   $pdf->MultiCell(80,5,iconv("UTF-8", "ISO-8859-1",'Comentarios adicionales: '.$huesped->comentarios),0,'J');
 
-  //$pdf->Output("reporte_cargo_noche.pdf","I");
+  //$pdf->Output("reporte_reservacion.pdf","I");
   $pdf->Output("reporte_cargo_noche_".$_GET['id'].".pdf","I");
-  //$pdf->Output("../reportes/reservaciones/reporte_cargo_noche.pdf","F");
-      //echo 'Reporte cargo_noche';*/
+  //$pdf->Output("../reportes/reservaciones/reporte_reservacion.pdf","F");
+      //echo 'Reporte reservacion';*/
 ?>
 
