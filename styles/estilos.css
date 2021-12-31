@@ -139,6 +139,10 @@ background-color: #040C14;
   border:3px solid rgb(98, 4, 4);
 }
 
+.pie{/***************/
+  font-size: .7em;
+}
+
 /* Margen de uno en escritura */
 .margen-1{
   margin-bottom: 40px;

@@ -70,3 +70,4 @@ VERSION 1.6
 -Cambiar vista en restaurante
 -Ver todos los datos de una reservacion en su tabla
 -Reporte de una reservacion
+-Pie con el resumen de la informacion de todas las reservaciones
