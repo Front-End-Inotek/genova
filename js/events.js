@@ -65,13 +65,13 @@ function sabernosession(){
 		if(id>0){
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
 			$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-            //$("#pie").load("includes/pie.php");
+            $("#pie").load("includes/pie.php");
 		}
 		else{
 			document.location.href='index.php';
 		}
 	}
-    $("#pie").load("includes/pie.php");
+    //$("#pie").load("includes/pie.php");
 }
 
 // Salida automatica cuando terminan credenciales

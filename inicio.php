@@ -22,6 +22,7 @@
           </head>
     <body onload="sabernosession()">
       <div class="menu"></div>
+      <div id="pie" class="footer"></div>
       <div id="area_trabajo" class="container-fluid"></div>
       <div id="area_trabajo_menu" class="container-fluid"></div>
       

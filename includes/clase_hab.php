@@ -220,6 +220,32 @@
         }
         return $mov;
       } 
+      // Obtengo el total de habitaciones ocupadas
+      function obtener_ocupadas(){ 
+        $sentencia = "SELECT count(hab.id) AS cantidad,hab.estado,hab.estado_hab FROM hab WHERE hab.estado = 1 AND hab.estado_hab = 1";
+        //echo $sentencia;
+        $cantidad=0;
+        $comentario="Obtengo el total de habitaciones ocupadas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+        return $cantidad;
+      }
+      // Obtengo el total de habitaciones disponibles
+      function obtener_disponibles(){ 
+        $sentencia = "SELECT count(hab.id) AS cantidad,hab.estado,hab.estado_hab FROM hab WHERE hab.estado = 0 AND hab.estado_hab = 1";
+        //echo $sentencia;
+        $cantidad=0;
+        $comentario="Obtengo el total de habitaciones disponibles";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+        return $cantidad;
+      }
               
   }
 ?>

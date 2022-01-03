@@ -489,6 +489,62 @@
           $comentario="Cambiar de habitacion el monto en estado de cuenta dentro de la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Resumen del dia actual
+      function resumen_actual($ocupadas,$disponibles,$salidas){
+        $preasignados= 0;
+        $total_adultos= 4;
+        $total_niños= 0;
+        $total_cargos= $this->saber_total_cargos();
+        $total_abonos= $this->saber_total_abonos();
+        $total_cargos= number_format($total_cargos, 2);
+        $total_abonos= number_format($total_abonos, 2);
+        echo '<div class="margen_inf_pie">
+          <div class="card">
+            <div class="card-header fondo_dark">
+              <div class="row">
+                <div class="col-xs-6 col-sm-4 col-md-2">Total Ocupadas: '.$ocupadas.'</div>
+                <div class="col-xs-6 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
+                <div class="col-xs-6 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
+                <div class="col-xs-6 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
+                <div class="col-xs-6 col-sm-4 col-md-2">Total Cargos: $'.$total_cargos.'</div>
+                <div class="col-xs-6 col-sm-4 col-md-2">Total Abonos: $'.$total_abonos.'</div>
+              </div>
+            </div>
+          </div>
+        </div>';
+      }
+      // Obtener el total de cargos del dia actual
+      function saber_total_cargos(){
+        $cargos=0;
+        $fecha_actual= time();
+        $dia_actual= date("d-m-Y",$fecha_actual);
+        $dia_actual= strtotime($dia_actual);
+        
+        $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual";
+        $comentario="Obtener el total de cargos del dia actual";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cargos= $cargos + $fila['cargo'];
+        }
+        return $cargos;
+      }
+      // Obtener el total de abonos del dia actual
+      function saber_total_abonos(){
+        $abonos=0;
+        $fecha_actual= time();
+        $dia_actual= date("d-m-Y",$fecha_actual);
+        $dia_actual= strtotime($dia_actual);
+        
+        $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual";
+        $comentario="Obtener el total de abonos del dia actual";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $abonos= $abonos + $fila['abono'];
+        }
+        return $abonos;
+      }
              
   }
 ?>

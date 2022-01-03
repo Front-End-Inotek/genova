@@ -139,10 +139,6 @@ background-color: #040C14;
   border:3px solid rgb(98, 4, 4);
 }
 
-.pie{/***************/
-  font-size: .7em;
-}
-
 /* Margen de uno en escritura */
 .margen-1{
   margin-bottom: 40px;
@@ -240,7 +236,29 @@ a.topictitle:hover {
   font-size: 1.8em;
 }
 .pie{
-    font-size: .7em;
+  font-size: .7em;
+}
+.card{
+  font-size: .7em;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  padding: 0em 0px 0px 0px;
+}
+.card_cuenta{
+  font-size: .7em;
+  width: 180px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  padding: 0em 0px 0px 0px;
+}
+.fondo_dark{
+  background-color: #111; 
+  color: white;
+}
+.fondo_gris{
+  background-color: #3d4249;
+  width: 178px !important;
+  color: white;
 }
 .timepo_hab{/* fecha */
   width: 100%;
@@ -675,6 +693,11 @@ a.topictitle:hover {
 .margen_inf{
   margin-bottom:10px;
 }
+.margen_inf_pie{
+  margin-bottom:20px;
+  padding-left:16px;
+  padding-right:45px;
+}
 .margen_sup{
   margin-top:10px;
 }
@@ -700,7 +723,7 @@ a.topictitle:hover {
   display:none;
 }
 .derecha{
-    text-align: right;
+  text-align: right;
 }
 .izquierda{
     text-align: left;

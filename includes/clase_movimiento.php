@@ -138,7 +138,7 @@
         }
         return $fin_hospedaje;
       }
-      // Obener el tiempo de utlima rente de fin hospedaje
+      // Obtener el tiempo de utlima rente de fin hospedaje
       function saber_tiempo_ultima_renta($hab){
         $finalizado= 0;
         $sentencia = "SELECT * FROM movimiento WHERE id_hab = $hab ORDER BY id DESC LIMIT 1 ";
@@ -420,6 +420,22 @@
         WHERE `id` = '$mov';";
         $comentario="Poner tiempo en campo finalizado al desocupar una habitacion";
         $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Obtener las habitaciones que han salido
+      function saber_salidas(){
+        $cantidad=0;
+        $fecha_actual= time();
+        $dia_actual= date("d-m-Y",$fecha_actual);
+        $dia_actual= strtotime($dia_actual);
+        
+        $sentencia = "SELECT count(movimiento.id) AS cantidad,movimiento.finalizado FROM movimiento WHERE finalizado >= $dia_actual";
+        $comentario="Obtener las habitaciones que han salido";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+        return $cantidad;
       }
   
   }

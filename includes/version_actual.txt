@@ -71,3 +71,4 @@ VERSION 1.6
 -Ver todos los datos de una reservacion en su tabla
 -Reporte de una reservacion
 -Pie con el resumen de la informacion de todas las reservaciones
+-Acomodar vista de pie en una sola linea
