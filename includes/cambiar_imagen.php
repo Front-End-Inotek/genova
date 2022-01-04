@@ -6,7 +6,7 @@
   echo ' <div class="container blanco"> 
           <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">CAMBIAR IMAGEN</h2></div>';
           echo '
-                <form enctype="multipart/form-data" action="includes/guardar_foto.php?id='.$_GET['usuario_id'].'&foto_id='.$_GET['usuario_id'].'" method="POST">  
+                <form enctype="multipart/form-data" action="includes/guardar_imagen.php?usuario_id='.$_GET['usuario_id'].'" method="POST">  
                         <div class="row">
                                 <div class="col-sm-2" >Foto:</div>
                                 <div class="col-sm-4" >
@@ -32,7 +32,7 @@
                 <br><br>
                         <div class="col-sm-12 text-center">';
                         echo '&nbsp;&nbsp;';
-                        echo '<a href="/visit/images/login/'.$config->imagen.'" target="_blank"><img src="/visit/images/login/'.$config->imagen.'" alt="Imagen de la cotizacion" height="120" width="120"/></a>';
+                        echo '<a href="/visit/images/login/'.$config->imagen.'" target="_blank"><img src="/visit/images/login/'.$config->imagen.'" alt="Imagen de la cotizacion" height="160" width="180"/></a>';
                         echo '&nbsp;&nbsp;
                         </div>
                 </div>

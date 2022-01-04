@@ -28,7 +28,7 @@
       <header class="titulo">
         <div class="container">
           <br>
-          <center><img src="images/'.$config->imagen.'" height="160" width="180"/></center>';
+          <center><img src="images/login/'.$config->imagen.'" height="160" width="180"/></center>';
           //<center><h1 class="text-primary">'.$config->nombre.'</h1></center>
         echo '</div>
       </header>

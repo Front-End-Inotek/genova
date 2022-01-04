@@ -87,6 +87,14 @@
            $this->checkin= $fila['checkin'];
       }
     }
+    // Guardar la foto de inicio
+    function guardar_foto($nombre){
+      $sentencia = "UPDATE `configuracion` SET
+      `imagen` = '$nombre'
+      WHERE `id` = '1';";
+      $comentario="Modificar la foto de inicio";
+      $this->realizaConsulta($sentencia,$comentario);
+    }
     
   }
 ?>
