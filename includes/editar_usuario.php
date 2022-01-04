@@ -289,8 +289,8 @@
                 </label>
               </div>
             </div>
-            </div><br><hr>
-            <div class="form-group row">
+            </div><br><hr>';
+            /*<div class="form-group row">
             <div class="col-sm-3">Tipo habitacion:</div>
             <div class="col-sm-1">
               <div class="form-check">';
@@ -340,8 +340,8 @@
                 </label>
               </div>
             </div>
-            </div><br><hr>  
-            <div class="form-group row">
+            </div><br><hr>*/  
+            echo '<div class="form-group row">
             <div class="col-sm-3">Tarifa Hospedaje:</div>
             <div class="col-sm-1">
               <div class="form-check">';
@@ -391,8 +391,8 @@
                 </label>
               </div>
             </div>
-            </div><br><hr> 
-            <div class="form-group row">
+            </div><br><hr>';
+            /*<div class="form-group row">
             <div class="col-sm-3">Habitacion:</div>
             <div class="col-sm-1">
               <div class="form-check">';
@@ -442,8 +442,8 @@
                 </label>
               </div>
             </div>
-            </div><br><hr> 
-            <div class="form-group row">
+            </div><br><hr>*/  
+            echo '<div class="form-group row">
             <div class="col-sm-3">Reservacion:</div>
             <div class="col-sm-1">
               <div class="form-check">';

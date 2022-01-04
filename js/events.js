@@ -144,6 +144,7 @@ function closeNav(){
 // Agregar un tipo de habitacion
 function agregar_tipos(){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_tipos.php"); 
 	closeNav();
@@ -187,6 +188,7 @@ function guardar_tipo(){
 function ver_tipos(){
 	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
 	closeNav();
@@ -276,6 +278,7 @@ function regresar_editar_tipo(){
 // Agregar una tarifa hospedaje
 function agregar_tarifas(){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_tarifas.php"); 
 	closeNav();
@@ -329,6 +332,7 @@ function guardar_tarifa(){
 function ver_tarifas(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_tarifas.php?usuario_id="+usuario_id);
 	closeNav();
@@ -428,6 +432,7 @@ function regresar_editar_tarifa(){
 // Agregar una habitacion
 function agregar_hab(){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_hab.php"); 
 	closeNav();
@@ -473,6 +478,7 @@ function guardar_hab(){
 function ver_hab(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_hab.php?usuario_id="+usuario_id);
 	closeNav();
@@ -564,6 +570,7 @@ function regresar_editar_hab(){
 // Agregar una reservacion
 function agregar_reservaciones(){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_reservaciones.php"); 
 	closeNav();
@@ -784,6 +791,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 function ver_reservaciones(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
 	closeNav();
@@ -954,6 +962,7 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 function ver_reporte_reservacion(id){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id);
 	closeNav();
@@ -1009,6 +1018,7 @@ function regresar_editar_reservacion(){
 // Agregar un huesped
 function agregar_huespedes(){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_huespedes.php"); 
 	closeNav();
@@ -1084,6 +1094,7 @@ function guardar_huesped(){
 function ver_huespedes(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_huespedes.php?usuario_id="+usuario_id);
 	closeNav();
@@ -1242,6 +1253,7 @@ function reporte_cargo_noche(id){
 // Agregar una forma de pago
 function agregar_formas_pago(){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_formas_pago.php"); 
 	closeNav();
@@ -1283,6 +1295,7 @@ function guardar_forma_pago(){
 function ver_formas_pago(){
 	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_formas_pago.php?usuario_id="+usuario_id);
 	closeNav();
@@ -1370,6 +1383,7 @@ function regresar_editar_forma_pago(){
 // Agregar un usuario
 function agregar_usuarios(id){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_usuarios.php?id="+id); 
     $(".navbar-collapse").collapse('hide');
@@ -1432,6 +1446,7 @@ function guardar_usuario(){
 function ver_usuarios(){
     var id=localStorage.getItem("id");
     $('#area_trabajo').hide();
+    $('#pie').hide();
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_usuarios.php?id="+id);
     $(".navbar-collapse").collapse('hide');
@@ -2186,6 +2201,7 @@ function guardar_categoria(){
 function ver_categorias(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_categorias.php?usuario_id="+usuario_id);
 	closeNav();
@@ -2265,6 +2281,7 @@ function aceptar_borrar_categoria(id){
 // Agregar en el inventario
 function agregar_inventario(){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_inventario.php"); 
 	closeNav();
@@ -2324,6 +2341,7 @@ function guardar_inventario(){
 function ver_inventario(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
 	closeNav();
@@ -2448,6 +2466,7 @@ function regresar_editar_inventario(){
 function agregar_restaurante(hab_id,estado){
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
 	closeNav();
@@ -2532,15 +2551,6 @@ function guardar_inventario(){
 			}else{
 				alert("Campos incompletos");
 			}
-}
-
-// Muestra los datos del inventario de la bd
-function ver_inventario(){
-    var usuario_id=localStorage.getItem("id");
-	$('#area_trabajo').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
-	closeNav();
 }
 
 // Pedir restaurante cobro 
@@ -2657,6 +2667,18 @@ function principal(){
 	$('#area_trabajo').show();
 	$('#area_trabajo_menu').hide();
     recargar_pagina();
+}
+
+//* Configuracion *//
+
+// Cambiar la imagen de login del sistema
+function cambiar_imagen(){
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/cambiar_imagen.php?usuario_id="+usuario_id);
+	closeNav();
 }
 
 //* Estados  Internos de Edo.Ocupado *//

@@ -21,6 +21,7 @@
     }*/
     public $corte;
     public $nombre;
+    public $imagen;
     public $pre_ver_corte;
     public $activacion;//
     public $motel;
@@ -57,6 +58,7 @@
       {
            $this->corte= $fila['corte'];
            $this->nombre= $fila['nombre'];
+           $this->imagen= $fila['imagen'];
            $this->pre_ver_corte= $fila['pre_ver_corte'];
            $this->activacion= $fila['activacion'];
            $this->motel= $fila['motel'];

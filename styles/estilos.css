@@ -244,20 +244,12 @@ a.topictitle:hover {
   max-height: 100% !important;
   padding: 0em 0px 0px 0px;
 }
-.card_cuenta{
-  font-size: .7em;
-  width: 180px !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  padding: 0em 0px 0px 0px;
-}
 .fondo_dark{
   background-color: #111; 
   color: white;
 }
 .fondo_gris{
   background-color: #3d4249;
-  width: 178px !important;
   color: white;
 }
 .timepo_hab{/* fecha */

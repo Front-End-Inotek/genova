@@ -398,6 +398,33 @@
                                 </div>
                             </li>'; 
                           }
+
+                          $permisos_configuracion=$usuario->nivel;
+                          if($permisos_configuracion==0){
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub3" data-toggle="collapse" data-target="#submenu4sub3"><span>Configuración</span></a>
+                                <div class="collapse" id="submenu4sub3" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">';
+                                        if($permisos_configuracion==0){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="cambiar_imagen()">
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Cambiar Configuración</a>
+                                          </li>';
+                                        }
+                                        /*if($permisos_configuracion==0){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_formas_pago()">
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Forma Pago</a>
+                                          </li>';
+                                        }*/
+                                        echo '
+                                    </ul>
+                                </div>
+                            </li>'; 
+                          }
                   }
                   
                 echo ' 
