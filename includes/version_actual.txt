@@ -74,3 +74,4 @@ VERSION 1.6
 -Acomodar vista de pie en una sola linea
 -Cambiar derechos de superusuario y administrador
 -Cambiar imagen de login
+-Cambiar los colores de los estados de los racks
