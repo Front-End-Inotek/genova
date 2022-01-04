@@ -106,7 +106,7 @@
               $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
             break;
             case 1:
-              $estado= "Ocupado";
+              $estado= "Ocupada";
               $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;

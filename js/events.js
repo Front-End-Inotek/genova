@@ -2681,6 +2681,16 @@ function cambiar_imagen(){
 	closeNav();
 }
 
+// Guardar un archivo en el servidor
+function agregar_archivo(){
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_archivo.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
 //* Estados  Internos de Edo.Ocupado *//
 
 //Edo. 0-Disponible//

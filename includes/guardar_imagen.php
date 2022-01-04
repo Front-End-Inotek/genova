@@ -2,9 +2,9 @@
   date_default_timezone_set('America/Mexico_City');
   include_once('clase_configuracion.php');
   include_once("clase_movimiento.php");
-  //include_once('clase_log.php');
+  include_once('clase_log.php');
   $config = NEW Configuracion();
-  //$logs = NEW Log(0);
+  $logs = NEW Log(0);
   $movimiento= NEW Movimiento(0);
   
   $target_path = "../images/login/";
@@ -20,9 +20,9 @@
   if(((strpos($tipo_foto, "jpeg") || strpos($tipo_foto, "jpg")) || strpos($tipo_foto, "png")))
   {
     // Ruta de la carpeta destino en servidor
-    if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
+    if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)){
       chmod($target_path, 0777);
-      //$logs->guardar_log($_GET['usuario_id'],"Cambiar foto de inicio");
+      $logs->guardar_log($_GET['usuario_id'],"Cambiar foto de inicio");
       $config->guardar_foto($nombre);
       //header("location:../includes/cambiar_imagen.php"); 
       header("location:../inicio.php");

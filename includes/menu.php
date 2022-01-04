@@ -413,13 +413,13 @@
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Cambiar Configuración</a>
                                           </li>';
                                         }
-                                        /*if($permisos_configuracion==0){
+                                        if($permisos_configuracion==0){
                                           echo '
                                           <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_formas_pago()">
-                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Forma Pago</a>
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_archivo()">
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Guardar Archivo</a>
                                           </li>';
-                                        }*/
+                                        }
                                         echo '
                                     </ul>
                                 </div>

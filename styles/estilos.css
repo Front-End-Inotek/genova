@@ -571,20 +571,19 @@ a.topictitle:hover {
     border-radius: 10px;
   }
 */
-.estado0{
+/*.estado0{
   background-color: #3d4249;
   color: #8a93a0;
-  /*color: white;*/
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
 }
 .estado0:hover{
   background-color: #67707c;
   color: #8a93a0;
-  /*color: white;*/
+  color: white;
   padding: 0em 10px 0px 10px;
   border-radius: 10px;
-}
+}*/
 .estado1{
   background-color:#7b241ca6;
   color: #D98880;
