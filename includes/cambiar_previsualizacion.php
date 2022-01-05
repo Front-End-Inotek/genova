@@ -5,7 +5,7 @@
   $principal= '#'.urldecode($_GET['principal']);
   $fondo= '#'.urldecode($_GET['fondo']);
   $letra= '#'.urldecode($_GET['letra']);
-  /*$eestado= 'estado1';
+  /*$estado= 'estado1';
   $principal= '#186A3B';
   $fondo= '#28B463';
   $letra= '#82E0AA';*/
@@ -137,7 +137,7 @@
                     echo '<img id="icono_c" src="images/lavando.png">';
                     break;
                   default:
-                    //echo "Estado indefinido";
+                    //echo "Estado interno indefinido";
                     break;
                 }         
               echo '</div>';

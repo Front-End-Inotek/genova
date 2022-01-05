@@ -292,7 +292,7 @@
                       //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
                       break;
                     /*default:
-                      //echo "Estado indefinido";
+                      //echo "Estado interno indefinido";
                       break;*/
                 }         
               echo '</div>';
