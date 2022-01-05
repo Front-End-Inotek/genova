@@ -3,17 +3,18 @@
   $contador= urldecode($_GET['contador']);
   
   if($contador == 0){
-  /*$eestado= urldecode($_GET['estado']);
+  $eestado= urldecode($_GET['estado']);
   $principal= urldecode($_GET['principal']);
   $fondo= urldecode($_GET['fondo']);
   $letra= urldecode($_GET['letra']);
-  echo $contador.'1';
-  echo $eestado.'2';
-  echo $principal.'3';*/
-  $eestado= 'estado1';
-  $principal= '#152679';
-  $fondo= '#2f75c1';
-  $letra= '#8197d9';
+  echo $eestado.'---';
+  echo $principal.'---';
+  echo $fondo.'---';
+  echo $letra.'---';
+  /*$eestado= 'estado1';
+  $principal= '#186A3B';
+  $fondo= '#28B463';
+  $letra= '#82E0AA';*/
   /*
   // Se comprueba si existe el archivo previamente antes de generarlo
   if(!file_exists('../styles/'.$nombre.'.css')){
