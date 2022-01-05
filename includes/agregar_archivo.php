@@ -11,7 +11,7 @@
                         <div class="col-sm-2"><label for="principal">Selecciona estado</label>:</div>
                         <div class="col-sm-2">
                                 <div class="form-group">
-                                        <select class="form-control" id="estado" name="estado">
+                                        <select class="form-control" id="estado" name="estado" onchange="previsualizar_estado()">
                                         <option value="estado0">Disponible</option>
                                         <option value="estado1">Ocupada</option>
                                         <option value="estado2">Sucia</option>
@@ -25,18 +25,18 @@
                         <div class="col-sm-2"></div>
                         <div class="col-sm-2"><label for="principal">Color Principal:</label></div>
                         <div class="col-sm-4">
-                                <input type="color" value="#7b2416" id="principal" name="principal">
+                                <input type="color" value="#7b2416" id="principal" name="principal" onchange="previsualizar_estado()">
                         </div>
                 </div>
 
                 <div class="row"> 
                         <div class="col-sm-2"><label for="fondo">Color Fondo:</label></div>
                         <div class="col-sm-4">
-                                <input type="color" value="#c03a2f" id="fondo" name="fondo">
+                                <input type="color" value="#c03a2f" id="fondo" name="fondo" onchange="previsualizar_estado()">
                         </div>
                         <div class="col-sm-2"><label for="letra">Color Letra:</label></div>
                         <div class="col-sm-2">
-                                <input type="color" value="#D98880" id="letra" name="letra">
+                                <input type="color" value="#D98880" id="letra" name="letra" onchange="previsualizar_estado()">
                         </div>
                         <div class="col-sm-2">
                         <div id="boton_tipo">
@@ -44,7 +44,12 @@
                         </div>
                         </div>
                 </div>
-          </form>
+          </form><br><br>
+
+          <div class="row div_previsualizar"></div>';
+                // Div previsualizar donde se ve el cambio de los colores del estado del rack antes de ser guardado
+                echo '
+          </div>
   </div>';
   //#ff0000
 ?>

@@ -2691,6 +2691,17 @@ function agregar_archivo(){
 	closeNav();
 }
 
+// Conseguimos la previsualizacion donde se ve el cambio de los colores del estado del rack
+function previsualizar_estado(){
+    var estado= document.getElementById("estado").value;
+	var principal= document.querySelector("principal");
+	var fondo= document.querySelector("fondo");
+	var letra= document.querySelector("letra");
+    $(".div_previsualizar").html('<div class="spinner-border text-primary"></div>');
+    $(".div_previsualizar").load("includes/cambiar_previsualizacion.php?estado="+estado+"&principal="+principal+"&fondo="+fondo+"&letra="+letra);  
+    //alert("Cambiando color en "+estado);
+}
+
 //* Estados  Internos de Edo.Ocupado *//
 
 //Edo. 0-Disponible//

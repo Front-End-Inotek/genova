@@ -59,7 +59,6 @@
               //$this->ocupada_rest($hab_id,$estado,$mov);
           break;
         case 14:
-
               $this->limpieza($hab_id,$estado,$mov);
           break;
         case 15:
@@ -74,7 +73,6 @@
             echo '</div>';
           break;
       }
-
     }
     // Estado 0
     function disponible($hab_id,$estado){

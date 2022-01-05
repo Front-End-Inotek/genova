@@ -30,58 +30,58 @@
       switch ($estado) {
         case 0:
             echo $nombre;
-          break;
+            break;
         case 1:
             echo $persona;
-          break;
+            break;
         case 2:
             echo $persona;
-          break;
+            break;
         case 3:
             echo $persona;
-          break;
+            break;
         case 4:
             echo $persona;
-          break;
+            break;
         case 5:
             echo $persona;
-          break;
+            break;
         case 6:
             echo "-";
-          break;
+            break;
         /*case 7:
             echo $nombre;
-          break;
+            break;
         case 8:
             echo $nombre;
-          break;
+            break;
         case 9:
             echo $persona;
-          break;
+            break;
         case 11:
            echo $nombre;
-          break;
+            break;
         case 12:
             echo $nombre;
-          break;
+            break;
         case 13:
             echo $nombre;
-          break;
+            break;
         case 14:
             echo $persona;
-          break;
+            break;
         case 15:
             echo $nombre;
-          break;
+            break;
         case 16:
             echo $nombre; 
-          break;
-          case 17:
+            break;
+        case 17:
             echo $persona;
-          break;*/
+            break;*/
         default:
-          echo "-";
-          break;
+            echo "-";
+            break;
       }
     }
     
@@ -100,90 +100,93 @@
       {
         $total_faltante= 0.0;
         $estado="no definido";
-        switch ($fila['estado']) {
+        switch($fila['estado']) {
             case 0:
               $estado= "Disponible";
               $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
-            break;
+              break;
             case 1:
               $estado= "Ocupada";
               $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
-            break;
+              break;
             case 2:
               $estado= "Sucia";
               $cronometro= $movimiento->saber_inicio_sucia($fila['moviemiento']);
-            break;
+              break;
             case 3:
               $estado= "Limpieza";
               $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
-            break;
+              break;
             case 4:
               $estado= "Mant.";
               $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
               /*$sub_motivo= $movimiento->saber_motivo($fila['moviemiento']);
               $motivo= substr($sub_motivo, 0, 15);*/
-            break;
+              break;
             case 5:
               $estado="Super.";
               $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
-            break;
+              break;
             case 6:
               $estado="Cancelada";
               $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
-            break;
+              break;
             /*case 7:
               $estado="Ocupada";
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-            break;
+              break;
             case 8:
               $estado="Lavar";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-            break;
+              break;
             case 9:
               $estado="Limpiar";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-            break;
+              break;
             case 10:
-                # code...
-            break;
+              # code...
+              break;
             case 11:
               $cronometro=$movimiento->saber_cobro_rest($fila['moviemiento']);
               $estado="Restaurante";
-            break;
+              break;
             case 12:
               $estado="Hospedada";
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-            break;
+              break;
             case 13:
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $estado="Restaurante";
-            break;
+              break;
             case 14:
               $estado="Limpieza";
               $persona=$movimiento->saber_per_limpia($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
               $cronometro=$movimiento->saber_tiempo_fin_limpieza($fila['moviemiento']);
-            break;
+              break;
             case 15:
               $estado="Paseo";
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-            break;
+              break;
             case 16:
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               $estado="Restaurante";
-            break;
+              break;
             case 17:
               $estado="Superv.";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
               $motivo=$movimiento->saber_motivo($fila['moviemiento']);
-              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);*/
-          break;
+              $cronometro=$movimiento->saber_tiempo_inicio($fila['moviemiento']);
+              break;*/
+            default:
+              //echo "Estado indefinido";
+              break;
         }
 
         if($fila['tipo']>0){
@@ -288,6 +291,9 @@
                     case 14:
                       //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
                       break;
+                    /*default:
+                      //echo "Estado indefinido";
+                      break;*/
                 }         
               echo '</div>';
 
