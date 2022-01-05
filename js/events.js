@@ -2687,7 +2687,6 @@ function cambiar_archivo(){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-    //+"&estado="+estado+"&principal="+principal+"&fondo="+fondo+"&letra="+letra
 	$("#area_trabajo_menu").load("includes/cambiar_archivo.php?usuario_id="+usuario_id);
 	closeNav();
 }
@@ -2704,12 +2703,6 @@ function previsualizar_estado(contador){
     $(".div_previsualizar").html('<div class="spinner-border text-primary"></div>');
     $(".div_previsualizar").load("includes/cambiar_previsualizacion.php?estado="+estado+"&principal="+principal+"&fondo="+fondo+"&letra="+letra+"&contador="+contador);  
     //alert("Cambiando color en "+estado);  
-}
-
-// Redireccionar por styles
-function redireccionar(){
-    //document.location.href='inicio.php';
-    previsualizar_estado(1);
 }
 
 //* Estados  Internos de Edo.Ocupado *//

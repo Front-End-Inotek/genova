@@ -3,7 +3,6 @@
   $logs = NEW Log(0);
 
   // Se cargan los datos necesarios
-  //$asu=$_REQUEST['asunto'];
   $estado=$_REQUEST['estado'];
   $principal=$_REQUEST['principal'];
   $fondo=$_REQUEST['fondo'];
