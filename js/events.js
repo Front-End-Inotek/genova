@@ -2692,6 +2692,19 @@ function cambiar_archivo(){
 	closeNav();
 }
 
+// Conseguimos la previsualizacion donde se ve el cambio de los colores del estado del rack
+function previsualizar_estado(contador){
+    var estado= encodeURI(document.getElementById("estado").value);
+	var principal= encodeURI($("#principal").val());
+	var fondo= encodeURI($("#fondo").val());
+	var letra= encodeURI($("#letra").val());
+    principal= principal.substr(1);
+    fondo= fondo.substr(1);
+    letra= letra.substr(1);
+    $(".div_previsualizar").html('<div class="spinner-border text-primary"></div>');
+    $(".div_previsualizar").load("includes/cambiar_previsualizacion.php?estado="+estado+"&principal="+principal+"&fondo="+fondo+"&letra="+letra+"&contador="+contador);  
+    //alert("Cambiando color en "+estado);  
+}
 
 // Redireccionar por styles
 function redireccionar(){

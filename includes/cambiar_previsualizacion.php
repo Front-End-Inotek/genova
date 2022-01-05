@@ -4,13 +4,9 @@
   
   if($contador == 0){
   $eestado= urldecode($_GET['estado']);
-  $principal= urldecode($_GET['principal']);
-  $fondo= urldecode($_GET['fondo']);
-  $letra= urldecode($_GET['letra']);
-  echo $eestado.'---';
-  echo $principal.'---';
-  echo $fondo.'---';
-  echo $letra.'---';
+  $principal= '#'.urldecode($_GET['principal']);
+  $fondo= '#'.urldecode($_GET['fondo']);
+  $letra= '#'.urldecode($_GET['letra']);
   /*$eestado= 'estado1';
   $principal= '#186A3B';
   $fondo= '#28B463';
