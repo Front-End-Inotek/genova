@@ -2681,25 +2681,36 @@ function cambiar_imagen(){
 	closeNav();
 }
 
-// Guardar un archivo en el servidor
-function agregar_archivo(){
+// Cambiar el archivo seleccionado en el servidor
+function cambiar_archivo(){
 	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_archivo.php?usuario_id="+usuario_id);
+    //+"&estado="+estado+"&principal="+principal+"&fondo="+fondo+"&letra="+letra
+	$("#area_trabajo_menu").load("includes/cambiar_archivo.php?usuario_id="+usuario_id);
 	closeNav();
 }
 
 // Conseguimos la previsualizacion donde se ve el cambio de los colores del estado del rack
-function previsualizar_estado(){
-    var estado= document.getElementById("estado").value;
-	var principal= document.querySelector("principal");
-	var fondo= document.querySelector("fondo");
-	var letra= document.querySelector("letra");
+function previsualizar_estado(contador){
+    var estado= encodeURI(document.getElementById("estado").value);
+	var principal= encodeURI($("#principal").val());
+	var fondo= encodeURI($("#fondo").val());
+	var letra= encodeURI($("#letra").val());
+    /*alert(principal);
+    alert(fondo);
+    alert(letra);*/
     $(".div_previsualizar").html('<div class="spinner-border text-primary"></div>');
-    $(".div_previsualizar").load("includes/cambiar_previsualizacion.php?estado="+estado+"&principal="+principal+"&fondo="+fondo+"&letra="+letra);  
-    //alert("Cambiando color en "+estado);
+    $(".div_previsualizar").load("includes/cambiar_previsualizacion.php?estado="+estado+"&contador="+contador);  
+    //+"&principal="+principal+"&fondo="+fondo+"&letra="+letra
+    //alert("Cambiando color en "+estado);  
+}
+
+// Redireccionar por styles
+function redireccionar(){
+    //document.location.href='inicio.php';
+    previsualizar_estado(1);
 }
 
 //* Estados  Internos de Edo.Ocupado *//

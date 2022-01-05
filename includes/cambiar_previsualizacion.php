@@ -1,9 +1,19 @@
 <?php
-  $eestado= $_GET['estado'];
-  $principal= $_GET['principal'];
-  $fondo= $_GET['fondo'];
-  $letra= $_GET['letra'];
   $nombre= 'estados';
+  $contador= urldecode($_GET['contador']);
+  
+  if($contador == 0){
+  /*$eestado= urldecode($_GET['estado']);
+  $principal= urldecode($_GET['principal']);
+  $fondo= urldecode($_GET['fondo']);
+  $letra= urldecode($_GET['letra']);
+  echo $contador.'1';
+  echo $eestado.'2';
+  echo $principal.'3';*/
+  $eestado= 'estado1';
+  $principal= '#152679';
+  $fondo= '#2f75c1';
+  $letra= '#8197d9';
   /*
   // Se comprueba si existe el archivo previamente antes de generarlo
   if(!file_exists('../styles/'.$nombre.'.css')){
@@ -39,10 +49,32 @@
   fwrite($archivo,'border-radius: 10px;');
   fwrite($archivo,"\n");
   fwrite($archivo,'}');
-  header("location:../includes/cambiar_previsualizacion.php");*/
-  echo "<script>";
-    echo "cambiar_previsualizacion();";//'3','2','1'
-  echo "</script>";
+  //header("location:../includes/cambiar_previsualizacion.php");
+  //header("location:../inicio.php");
+
+    $contador= 1;
+    echo "<script>";
+      echo "previsualizar_estado('.$contador.');";//'3','2','1'
+    echo "</script>";*/
+  }else{
+    // No se repite mas de una vez
+  }
+
+  echo '
+  <style>
+    .estados{
+      background-color:'.$principal.';
+      color:'.$letra.';
+      padding: 0em 10px 0px 10px;
+      border-radius: 10px;
+    }
+    .estados:hover{
+      background-color:'.$fondo.';
+      color:'.$letra.';
+      padding: 0em 10px 0px 10px;
+      border-radius: 10px;
+    }
+  </style>';
   
   echo '
       <div class="container blanco"> 
