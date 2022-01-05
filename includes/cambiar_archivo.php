@@ -25,18 +25,18 @@
                         <div class="col-sm-2"></div>
                         <div class="col-sm-2"><label for="principal">Color Principal:</label></div>
                         <div class="col-sm-4">
-                                <input type="color" value="#7b2416" id="principal" name="principal" onchange="previsualizar_estado()">
+                                <input type="color" value="#67707c" id="principal" name="principal" onchange="previsualizar_estado()">
                         </div>
                 </div>
 
                 <div class="row"> 
                         <div class="col-sm-2"><label for="fondo">Color Fondo:</label></div>
                         <div class="col-sm-4">
-                                <input type="color" value="#c03a2f" id="fondo" name="fondo" onchange="previsualizar_estado()">
+                                <input type="color" value="#8d97a5" id="fondo" name="fondo" onchange="previsualizar_estado()">
                         </div>
                         <div class="col-sm-2"><label for="letra">Color Letra:</label></div>
                         <div class="col-sm-2">
-                                <input type="color" value="#D98880" id="letra" name="letra" onchange="previsualizar_estado()">
+                                <input type="color" value="#c5cedd" id="letra" name="letra" onchange="previsualizar_estado()">
                         </div>
                         <div class="col-sm-2">
                         <div id="boton_tipo">

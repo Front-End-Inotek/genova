@@ -20,26 +20,26 @@
 
   fwrite($archivo,'.'.$estado.'{');
   fwrite($archivo,"\n");
-  fwrite($archivo,'background-color:'.$principal.';');
+  fwrite($archivo,' background-color:'.$principal.';');
   fwrite($archivo,"\n");
-  fwrite($archivo,'color:'.$letra.';');
+  fwrite($archivo,' color:'.$letra.';');
   fwrite($archivo,"\n");
-  fwrite($archivo,'padding: 0em 10px 0px 10px;');
+  fwrite($archivo,' padding: 0em 10px 0px 10px;');
   fwrite($archivo,"\n");
-  fwrite($archivo,'border-radius: 10px;');
+  fwrite($archivo,' border-radius: 10px;');
   fwrite($archivo,"\n");
   fwrite($archivo,'}');
   fwrite($archivo,"\n");
 
   fwrite($archivo,'.'.$estado.':hover{');
   fwrite($archivo,"\n");
-  fwrite($archivo,'background-color:'.$fondo.';');
+  fwrite($archivo,' background-color:'.$fondo.';');
   fwrite($archivo,"\n");
-  fwrite($archivo,'color:'.$letra.';');
+  fwrite($archivo,' color:'.$letra.';');
   fwrite($archivo,"\n");
-  fwrite($archivo,'padding: 0em 10px 0px 10px;');
+  fwrite($archivo,' padding: 0em 10px 0px 10px;');
   fwrite($archivo,"\n");
-  fwrite($archivo,'border-radius: 10px;');
+  fwrite($archivo,' border-radius: 10px;');
   fwrite($archivo,"\n");
   fwrite($archivo,'}');
 

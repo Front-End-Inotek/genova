@@ -6,9 +6,9 @@
   $fondo= '#'.urldecode($_GET['fondo']);
   $letra= '#'.urldecode($_GET['letra']);
   /*$estado= 'estado1';
-  $principal= '#186A3B';
-  $fondo= '#28B463';
-  $letra= '#82E0AA';*/
+  $principal= '#186A3B';// '#152679';
+  $fondo= '#28B463';// '#2f75c1';
+  $letra= '#82E0AA';// '#8197d9';;*/
 
   echo '
   <style>

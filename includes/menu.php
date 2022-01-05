@@ -414,15 +414,10 @@
                                           </li>';
                                         }
                                         if($permisos_configuracion==0){
-                                          /*$estado= urlencode('estado0');
-                                          $principal= '#7b2416';
-                                          $fondo= '#c03a2f';
-                                          $letra= '#D98880';*/
-                                          //urldecode($_POST['nombre'])//urlencode '.$estado.','.$principal.','.$fondo.','.$letra.'
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="cambiar_archivo()">
-                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Guardar Archivo</a>
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Cambiar Color</a>
                                           </li>';
                                         }
                                         echo '
