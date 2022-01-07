@@ -8,6 +8,16 @@
   $fondo=$_REQUEST['fondo'];
   $letra=$_REQUEST['letra'];
 
+  // Se transforma el color hexadecimal a rgb en el estado 1 de ocupada
+  if($estado == "estado1"){
+    $t= 1;// Para que no tenga transparencia
+    list($r, $g, $b) = sscanf($principal, "#%02x%02x%02x");
+    $principal= "rgb(" . $r . ", " . $g . ", " . $b . ", " . $t . ")";
+
+    list($r, $g, $b) = sscanf($fondo, "#%02x%02x%02x");
+    $fondo= "rgb(" . $r . ", " . $g . ", " . $b . ", " . $t . ")";
+  }
+
   // Se comprueba si existe el archivo previamente antes de generarlo
   if(!file_exists('../styles/'.$estado.'.css')){
     //echo "Existio un problema borrando el archivo";
@@ -24,9 +34,13 @@
   fwrite($archivo,"\n");
   fwrite($archivo,' color:'.$letra.';');
   fwrite($archivo,"\n");
-  fwrite($archivo,' padding: 0em 10px 0px 10px;');
+  fwrite($archivo,' padding: 0em 0px 0px 10px;');
   fwrite($archivo,"\n");
-  fwrite($archivo,' border-radius: 10px;');
+  if($estado != "estado1"){
+    fwrite($archivo,' border-radius: 10px;');
+  }else{
+    fwrite($archivo,' border-radius: 10px 10px 100px 10px;');
+  }
   fwrite($archivo,"\n");
   fwrite($archivo,'}');
   fwrite($archivo,"\n");
@@ -37,9 +51,13 @@
   fwrite($archivo,"\n");
   fwrite($archivo,' color:'.$letra.';');
   fwrite($archivo,"\n");
-  fwrite($archivo,' padding: 0em 10px 0px 10px;');
+  fwrite($archivo,' padding: 0em 0px 0px 10px;');
   fwrite($archivo,"\n");
-  fwrite($archivo,' border-radius: 10px;');
+  if($estado != "estado1"){
+    fwrite($archivo,' border-radius: 10px;');
+  }else{
+    fwrite($archivo,' border-radius: 10px 10px 100px 10px;');
+  }
   fwrite($archivo,"\n");
   fwrite($archivo,'}');
 

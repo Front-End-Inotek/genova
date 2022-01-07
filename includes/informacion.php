@@ -191,6 +191,27 @@
 
         if($fila['tipo']>0){
           echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio">';
+            //echo $motivo;
+            switch ($fila['interno']){
+              case '':
+                echo '<div class="sub_estado_sin">';  
+                break;
+              case 'disponible':
+                echo '<div class="sub_estado_sin">';  
+                break;
+              case 'sin estado':
+                echo '<div class="sub_estado_sin">';  
+                break;
+              case 'sucia':
+                echo '<div class="sub_estado_sucia">';
+                break;
+              case 'limpieza':
+                echo '<div class="sub_estado_limpieza">';
+                break;
+              /*default:
+                //echo "Estado interno indefinido";
+                break;*/
+            }     
             echo '<a href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')"><div class="estado'.$fila['estado'].'">';
 
               echo '<div class="row">
@@ -244,52 +265,19 @@
                   //echo $motivo;
                   switch ($fila['interno']){
                     case '':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<div id="icono_r"><br></div>';  
                       break;
                     case 'disponible':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<div id="icono_r"><br></div>';  
                       break;
                     case 'sin estado':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<div id="icono_r"><br></div>';  
                       break;
                     case 'sucia':
-                      echo '<img id="icono_c" src="images/basura.png">';
+                      echo '<div id="icono_c"><br></div>';
                       break;
                     case 'limpieza':
-                      echo '<img id="icono_c" src="images/lavando.png">';
-                      break;
-                    case 4:
-                      //echo '<img src="images/mantenimiento.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 5:
-                      //echo '<img src="images/bloqueo.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 6:
-                      //echo '<img src="images/cobrando.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 7:
-                      //echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 8:
-                      //echo '<img src="images/basura.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 9:
-                      //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 11:
-                      //echo '<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 12:
-                      //echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 13:
-                      //echo '<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    default:
-                      //echo '<img src="images/home.png"  class="espacio-imagen center-block img-responsive">';
-                      break;
-                    case 14:
-                      //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
+                      echo '<div id="icono_c"><br></div>';
                       break;
                     /*default:
                       //echo "Estado interno indefinido";
@@ -300,7 +288,7 @@
               echo '</div>';
               echo '</div>';
             echo '</a>';
-          echo '</div>';
+          echo '</div>';echo '</div>';
         }else{
           echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';   
           echo '</div>';

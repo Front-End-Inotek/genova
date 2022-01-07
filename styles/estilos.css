@@ -230,6 +230,7 @@ a.topictitle:hover {
   text-align: right;
   height:2.1em;
   vertical-align:middle;
+  padding-right: 15px;
   color: white;
 }
 .tama_num_hab{/* */
@@ -258,12 +259,27 @@ a.topictitle:hover {
   font-size: .9em;
   /*font-weight: bold;*/
 }
+.sub_estado_sin{
+  background-color:hsla(5, 63%, 30%, 1);
+  padding: 0em 0px 0px 0px;
+  border-radius: 10px;
+}
+.sub_estado_sucia{
+  background-color:#095314a6;
+  padding: 0em 0px 0px 0px;
+  border-radius: 10px;
+}
+.sub_estado_limpieza{
+  background-color:#2214e4a6;
+  padding: 0em 0px 0px 0px;
+  border-radius: 10px;
+}
 .icono_hab{/* icono */
   width:100%;
   text-align: right;
   font-size: .9em;
   color: white;
-  padding: 0em 0px 8px 0px;
+  padding: 0em 0px 0px 0px;
 }
 #icono_r{/* icono medidas*/
   width: 24px;
@@ -574,86 +590,86 @@ a.topictitle:hover {
 /*.estado0{
   background-color: #3d4249;
   color: #8a93a0;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado0:hover{
   background-color: #67707c;
   color: #8a93a0;
   /*color: white;*/
-  /*padding: 0em 10px 0px 10px;
+  /*padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado1{
   background-color:#7b241ca6;
   color: #D98880;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado1:hover{
   background-color:#c03a2baf;
   color: #D98880;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado2{
   background-color: #273f31;
   color: #7e9b8b;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado2:hover{
   background-color: #326949;
   color: #7e9b8b;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado3{
   background-color: #242646;
   color: #7072be;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado3:hover{
   background-color: #3b3d70;
   color: #7072be;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado4{
   background-color:#cfcf5bb0;
   color: #f6f6bfc7;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado4:hover{
   background-color:#cece55e5;
   color: #f6f6bfc7;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado5{
   background-color: #275669de;
   color: #72acc3de;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado5:hover{
   background-color: #1588b6c2;
   color: #72acc3de;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado6{
   background-color:#5f496edc;
   color: #b69ec5ea;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }
 .estado6:hover{
   background-color:#9d6e9ee5;
   color: #b69ec5ea;
-  padding: 0em 10px 0px 10px;
+  padding: 0em 0px 0px 10px;
   border-radius: 10px;
 }*/
 /*.estado{
