@@ -79,4 +79,4 @@ VERSION 1.6
 VERSION 1.6
 -Generar rama configuracion
 -Generar chaflan en subestados
--Cambiar color de chaflan en subestadod
+-Cambiar color de chaflan en subestado
