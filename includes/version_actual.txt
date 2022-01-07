@@ -75,3 +75,7 @@ VERSION 1.6
 -Cambiar derechos de superusuario y administrador
 -Cambiar imagen de login
 -Cambiar los colores de los estados de los racks
+
+VERSION 1.6
+-Generar rama configuracion
+-Generar chaflan en subestados
