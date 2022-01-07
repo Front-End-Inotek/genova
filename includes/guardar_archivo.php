@@ -8,7 +8,7 @@
   $hover=$_REQUEST['hover'];
   $letra=$_REQUEST['letra'];
   $subestado=$_REQUEST['subestado'];
-  $subestado=$_REQUEST['subestado'];
+  $subcolor=$_REQUEST['subcolor'];
 
   // Se transforma el color hexadecimal a rgb en el estado 1 de ocupada
   if($estado == "estado1"){
