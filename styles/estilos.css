@@ -144,6 +144,11 @@ background-color: #040C14;
   margin-bottom: 40px;
 }
 
+/* Margen de dos en escritura */
+.margen-2{
+  margin-bottom: 80px;
+}
+
 /* Color en los iconos svg */
 .svg-color{
   fill: rgb(185, 185, 185);
@@ -260,7 +265,7 @@ a.topictitle:hover {
   /*font-weight: bold;*/
 }
 .sub_estado_sin{
-  background-color:hsla(5, 63%, 30%, 1);
+  background-color:rgb(109, 38, 38, 1);
   padding: 0em 0px 0px 0px;
   border-radius: 10px;
 }

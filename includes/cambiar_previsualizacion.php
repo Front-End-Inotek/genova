@@ -2,18 +2,18 @@
   $nombre= 'estados';
   $contador= urldecode($_GET['contador']);
   $estado= urldecode($_GET['estado']);
-  $principal= '#'.urldecode($_GET['principal']);
+  $rack= '#'.urldecode($_GET['rack']);
   $fondo= '#'.urldecode($_GET['fondo']);
   $letra= '#'.urldecode($_GET['letra']);
   /*$estado= 'estado1';
-  $principal= '#186A3B';// '#152679';
+  $rack= '#186A3B';// '#152679';
   $fondo= '#28B463';// '#2f75c1';
   $letra= '#82E0AA';// '#8197d9';;*/
 
   echo '
   <style>
     .estados{
-      background-color:'.$principal.';
+      background-color:'.$rack.';
       color:'.$letra.';
       padding: 0em 10px 0px 10px;
       border-radius: 10px;

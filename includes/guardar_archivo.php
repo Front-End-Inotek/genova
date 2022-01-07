@@ -4,18 +4,20 @@
 
   // Se cargan los datos necesarios
   $estado=$_REQUEST['estado'];
-  $principal=$_REQUEST['principal'];
-  $fondo=$_REQUEST['fondo'];
+  $rack=$_REQUEST['rack'];
+  $hover=$_REQUEST['hover'];
   $letra=$_REQUEST['letra'];
+  $subestado=$_REQUEST['subestado'];
+  $subestado=$_REQUEST['subestado'];
 
   // Se transforma el color hexadecimal a rgb en el estado 1 de ocupada
   if($estado == "estado1"){
     $t= 1;// Para que no tenga transparencia
-    list($r, $g, $b) = sscanf($principal, "#%02x%02x%02x");
-    $principal= "rgb(" . $r . ", " . $g . ", " . $b . ", " . $t . ")";
+    list($r, $g, $b) = sscanf($rack, "#%02x%02x%02x");
+    $rack= "rgb(" . $r . ", " . $g . ", " . $b . ", " . $t . ")";
 
-    list($r, $g, $b) = sscanf($fondo, "#%02x%02x%02x");
-    $fondo= "rgb(" . $r . ", " . $g . ", " . $b . ", " . $t . ")";
+    list($r, $g, $b) = sscanf($hover, "#%02x%02x%02x");
+    $hover= "rgb(" . $r . ", " . $g . ", " . $b . ", " . $t . ")";
   }
 
   // Se comprueba si existe el archivo previamente antes de generarlo
@@ -30,7 +32,7 @@
 
   fwrite($archivo,'.'.$estado.'{');
   fwrite($archivo,"\n");
-  fwrite($archivo,' background-color:'.$principal.';');
+  fwrite($archivo,' background-color:'.$rack.';');
   fwrite($archivo,"\n");
   fwrite($archivo,' color:'.$letra.';');
   fwrite($archivo,"\n");
@@ -47,7 +49,7 @@
 
   fwrite($archivo,'.'.$estado.':hover{');
   fwrite($archivo,"\n");
-  fwrite($archivo,' background-color:'.$fondo.';');
+  fwrite($archivo,' background-color:'.$hover.';');
   fwrite($archivo,"\n");
   fwrite($archivo,' color:'.$letra.';');
   fwrite($archivo,"\n");

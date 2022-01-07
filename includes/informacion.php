@@ -265,28 +265,43 @@
                   //echo $motivo;
                   switch ($fila['interno']){
                     case '':
-                      echo '<div id="icono_r"><br></div>';  
+                      echo '<div><br></div>';  
                       break;
                     case 'disponible':
-                      echo '<div id="icono_r"><br></div>';  
+                      echo '<div><br></div>';  
                       break;
                     case 'sin estado':
-                      echo '<div id="icono_r"><br></div>';  
+                      echo '<div><br></div>';  
                       break;
                     case 'sucia':
-                      echo '<div id="icono_c"><br></div>';
+                      echo '<div><br></div>';
                       break;
                     case 'limpieza':
-                      echo '<div id="icono_c"><br></div>';
+                      echo '<div><br></div>';
                       break;
+                    /*case '':
+                      echo '<img id="icono_r" src="."';  
+                      break;
+                    case 'disponible':
+                      echo '<img id="icono_r" src="."';  
+                      break;
+                    case 'sin estado':
+                      echo '<img id="icono_r" src="."';  
+                      break;
+                    case 'sucia':
+                      echo '<img id="icono_c" src="images/basura.png">';
+                      break;
+                    case 'limpieza':
+                      echo '<img id="icono_c" src="images/lavando.png">';
+                      break;*/    
                     /*default:
                       //echo "Estado interno indefinido";
                       break;*/
                 }         
               echo '</div>';
 
-              echo '</div>';
-              echo '</div>';
+            echo '</div>';
+            echo '</div>';
             echo '</a>';
           echo '</div>';echo '</div>';
         }else{

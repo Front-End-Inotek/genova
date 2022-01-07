@@ -1,12 +1,12 @@
 .estado1{
- background-color:hsla(5, 63%, 30%, 1);
- color: #D98880;
+ background-color:rgb(109, 38, 38, 1);
+ color:#dd9292;
  padding: 0em 0px 0px 10px;
  border-radius: 10px 10px 100px 10px;
 }
 .estado1:hover{
- background-color:hsla(6, 63%, 46%, 1);
- color: #D98880;
+ background-color:rgb(168, 93, 93, 1);
+ color:#dd9292;
  padding: 0em 0px 0px 10px;
  border-radius: 10px 10px 100px 10px;
 }
