@@ -43,32 +43,24 @@
                 
                 <hr class="row margen-1">
 
+                <h5 class="text-dark margen-1">Colores Subestados de Estado Ocupada</h5>
+
                 <div class="row"> 
-                        <div class="col-sm-2"><label for="subestado">Selecciona Subestado</label>:</div>
+                        <div class="col-sm-2"><label for="sub_sucia">Subestado Sucia:</label></div>
                         <div class="col-sm-2">
-                                <div class="form-group">
-                                        <select class="form-control" id="subestado" name="subestado" onchange="previsualizar_estado()">
-                                        <option value="estado0">Disponible</option>
-                                        <option value="estado1">Ocupada</option>
-                                        <option value="estado2">Sucia</option>
-                                        <option value="estado3">Limpieza</option>
-                                        <option value="estado4">Mant.</option>
-                                        <option value="estado5">Super.</option>
-                                        <option value="estado6">Cancelada</option>
-                                        </select>
-                                </div>
+                                <input type="color" value="#186A3B" id="sub_sucia" name="sub_sucia" onchange="previsualizar_estado()">
                         </div>
                         <div class="col-sm-2"></div>
-                        <div class="col-sm-2"><label for="subcolor">Color Subestado:</label></div>
+                        <div class="col-sm-2"><label for="sub_limpieza">Subestado Limpieza:</label></div>
                         <div class="col-sm-2">
-                                <input type="color" value="#67707c" id="subcolor" name="subcolor" onchange="previsualizar_estado()">
+                                <input type="color" value="#8197d9" id="sub_limpieza" name="sub_limpieza" onchange="previsualizar_estado()">
                         </div>
                         <div class="col-sm-2">
                         <div id="boton_tipo">
                                 <input type="submit" class="btn btn-success btn-block" value="Guardar">
                         </div>
                         </div>
-                </div>
+                </div
           </form><br><br>
 
           <div class="row div_previsualizar"></div>';

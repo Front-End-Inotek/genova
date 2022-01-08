@@ -2692,16 +2692,20 @@ function cambiar_archivo(){
 }
 
 // Conseguimos la previsualizacion donde se ve el cambio de los colores del estado del rack
-function previsualizar_estado(contador){
+function previsualizar_estado(){
     var estado= encodeURI(document.getElementById("estado").value);
 	var rack= encodeURI($("#rack").val());
 	var hover= encodeURI($("#hover").val());
 	var letra= encodeURI($("#letra").val());
+	var sub_sucia= encodeURI($("#sub_sucia").val());
+    var sub_limpieza= encodeURI($("#sub_limpieza").val());
     rack= rack.substr(1);
     hover= hover.substr(1);
     letra= letra.substr(1);
+    sub_sucia= sub_sucia.substr(1);
+    sub_limpieza= sub_limpieza.substr(1);
     $(".div_previsualizar").html('<div class="spinner-border text-primary"></div>');
-    $(".div_previsualizar").load("includes/cambiar_previsualizacion.php?estado="+estado+"&rack="+rack+"&hover="+hover+"&letra="+letra+"&contador="+contador);  
+    $(".div_previsualizar").load("includes/cambiar_previsualizacion.php?estado="+estado+"&rack="+rack+"&hover="+hover+"&letra="+letra+"&sub_sucia="+sub_sucia+"&sub_limpieza="+sub_limpieza);  
     //alert("Cambiando color en "+estado);  
 }
 
