@@ -1,12 +1,12 @@
 .estado1{
- background-color:rgb(109, 38, 38, 1);
- color:#dd9292;
+ background-color:rgb(89, 13, 13, 1);
+ color:#ba6969;
  padding: 0em 0px 0px 10px;
  border-radius: 10px 10px 100px 10px;
 }
 .estado1:hover{
- background-color:rgb(168, 93, 93, 1);
- color:#dd9292;
+ background-color:rgb(156, 28, 28, 1);
+ color:#ba6969;
  padding: 0em 0px 0px 10px;
  border-radius: 10px 10px 100px 10px;
 }

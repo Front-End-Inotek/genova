@@ -7,11 +7,15 @@
   $rack=$_REQUEST['rack'];
   $hover=$_REQUEST['hover'];
   $letra=$_REQUEST['letra'];
-  $subestado=$_REQUEST['subestado'];
-  $subcolor=$_REQUEST['subcolor'];
 
   // Se transforma el color hexadecimal a rgb en el estado 1 de ocupada
   if($estado == "estado1"){
+    $sub_sucia=$_REQUEST['sub_sucia'];
+    $sub_limpieza=$_REQUEST['sub_limpieza'];
+    $subestados= 'subestados';
+    $sin= 'sub_estado_sin';
+    $sucia= 'sub_estado_sucia';
+    $limpieza= 'sub_estado_limpieza';
     $t= 1;// Para que no tenga transparencia
     list($r, $g, $b) = sscanf($rack, "#%02x%02x%02x");
     $rack= "rgb(" . $r . ", " . $g . ", " . $b . ", " . $t . ")";
@@ -62,6 +66,51 @@
   }
   fwrite($archivo,"\n");
   fwrite($archivo,'}');
+
+  if($estado == "estado1"){
+    // Se comprueba si existe el archivo previamente antes de generarlo
+    if(!file_exists('../styles/'.$subestados.'.css')){
+      //echo "Existio un problema borrando el archivo";
+    }else{
+      //echo "Archivo borrado con exito";
+      unlink('../styles/'.$subestados.'.css');
+    }
+    // Se genera el archivo de css
+    $archivo=fopen('../styles/'.$subestados.'.css','a') or die ('Error al crear');
+
+    fwrite($archivo,'.'.$sin.'{');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' background-color:'.$rack.';');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' padding: 0em 0px 0px 0px;');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' border-radius: 10px;');
+    fwrite($archivo,"\n");
+    fwrite($archivo,'}');
+    fwrite($archivo,"\n");
+
+    fwrite($archivo,'.'.$sucia.'{');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' background-color:'.$sub_sucia.';');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' padding: 0em 0px 0px 0px;');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' border-radius: 10px;');
+    fwrite($archivo,"\n");
+    fwrite($archivo,'}');
+    fwrite($archivo,"\n");
+
+    fwrite($archivo,'.'.$limpieza.'{');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' background-color:'.$sub_limpieza.';');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' padding: 0em 0px 0px 0px;');
+    fwrite($archivo,"\n");
+    fwrite($archivo,' border-radius: 10px;');
+    fwrite($archivo,"\n");
+    fwrite($archivo,'}');
+    fwrite($archivo,"\n");
+  }
 
   //echo "Se creo correctamente el archivo";
   $logs->guardar_log($_GET['usuario_id'],"Cambiar los colores del ". $estado);
