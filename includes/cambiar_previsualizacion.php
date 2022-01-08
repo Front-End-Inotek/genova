@@ -92,186 +92,227 @@
     default:
       //echo "Estado indefinido";
       break; 
-  }                    
+  }  
+  /*<div class="row">
+                        <div class="col-sm-6" id="caja_mostrar_sucia" style="background-color:aliceblue;"></div>
+                        <div class="col-sm-6" id="caja_mostrar_limpieza" style="background-color:lightcyan;"></div>
+                </div>      */            
   echo '
       <div class="container blanco"> 
-        <div class="row div_previsualizar">';
-        while($subestados <= 2){
-          if($estado != "estado1"){
-            $subestados= 3;
-            echo '<div class="col-sm-5"></div>';
-            echo '<div class="col-sm-2">';
-          }else{
-            $subestados++;
-            echo '<div class="col-sm-1"></div>';
-            echo '<div class="col-sm-2">';
-            if($subestados == 1){
-              echo '<div class="sub_estado_sucia">';
-            }else{
-              echo '<div class="sub_estado_limpieza">';
-            }
-          }
-              //echo '<div class="col-sm-2">';
-                  echo '<div class="estados">';
-              
-                    echo '<div class="row">
-                      <div class="col-sm-6">
-                        <div class="titulo_hab">';
-                          echo $estado_nombre;
-                        echo '</div>
-                      </div>
-            
-                      <div class="col-sm-6">
-                        <div class="imagen_hab">';
-                          if(2<100){
-                            echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
-                          }else{
-                            echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
-                          }
-                      echo '</div>
-                      </div>
-                    </div>';
-            
-                    echo '<div class="timepo_hab">';
-                      $fecha_salida= $cronometro;
-                      if($estado_num == 1){
-                        echo $fecha_salida;
-                      }else{
-                        if($cronometro == 0){
-                          $fecha_inicio= '&nbsp';
-                        }else{
-                          $fecha_inicio= $cronometro;
-                        }
-                        echo $fecha_inicio;
-                      }
-                    echo '</div>';
-            
-                    echo '<div class="timepo_hab">';
-                      if($estado_num == 1){
-                        if($total_faltante >= 0){
-                          echo '$'.number_format($total_faltante, 2);
-                        }else{
-                          $total_faltante= substr($total_faltante, 1);
-                          echo '-$'.number_format($total_faltante, 2);
-                        }
-                      }else{
-                          $total_faltante= '&nbsp';
-                          echo $total_faltante;
-                      }
-                    echo '</div>';
-            
-                    echo '<div class="icono_hab">';
-                      $interno= 'sin estado';
-                      switch($interno){
-                        case '':
-                          echo '<img id="icono_r" src="."';  
-                          break;
-                        case 'disponible':
-                          echo '<img id="icono_r" src="."';  
-                          break;
-                        case 'sin estado':
-                          echo '<img id="icono_r" src="."';  
-                          break;
-                        case 'sucia':
-                          echo '<img id="icono_c" src="images/basura.png">';
-                          break;
-                        case 'limpieza':
-                          echo '<img id="icono_c" src="images/lavando.png">';
-                          break;
-                        default:
-                          //echo "Estado interno indefinido";
-                          break;
-                      }         
-                    echo '</div>';
-                  echo '</div>';
-                  if($estado != "estado1"){
-                    echo '<div class="col-sm-5"></div>';
-                  }else{
-                    echo '</div>';
-                    echo '<div class="col-sm-1"></div>';
-                    echo '<div class="col-sm-2">';
-        
-              echo '<div class="sub_estado_limpieza">';
-           
-          }
-              //echo '<div class="col-sm-2">';
-                  echo '<div class="estados">';
-              
-                    echo '<div class="row">
-                      <div class="col-sm-6">
-                        <div class="titulo_hab">';
-                          echo $estado_nombre;
-                        echo '</div>
-                      </div>
-            
-                      <div class="col-sm-6">
-                        <div class="imagen_hab">';
-                          if(2<100){
-                            echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
-                          }else{
-                            echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
-                          }
-                      echo '</div>
-                      </div>
-                    </div>';
-            
-                    echo '<div class="timepo_hab">';
-                      $fecha_salida= $cronometro;
-                      if($estado_num == 1){
-                        echo $fecha_salida;
-                      }else{
-                        if($cronometro == 0){
-                          $fecha_inicio= '&nbsp';
-                        }else{
-                          $fecha_inicio= $cronometro;
-                        }
-                        echo $fecha_inicio;
-                      }
-                    echo '</div>';
-            
-                    echo '<div class="timepo_hab">';
-                      if($estado_num == 1){
-                        if($total_faltante >= 0){
-                          echo '$'.number_format($total_faltante, 2);
-                        }else{
-                          $total_faltante= substr($total_faltante, 1);
-                          echo '-$'.number_format($total_faltante, 2);
-                        }
-                      }else{
-                          $total_faltante= '&nbsp';
-                          echo $total_faltante;
-                      }
-                    echo '</div>';
-            
-                    echo '<div class="icono_hab">';
-                      $interno= 'sin estado';
-                      switch($interno){
-                        case '':
-                          echo '<img id="icono_r" src="."';  
-                          break;
-                        case 'disponible':
-                          echo '<img id="icono_r" src="."';  
-                          break;
-                        case 'sin estado':
-                          echo '<img id="icono_r" src="."';  
-                          break;
-                        case 'sucia':
-                          echo '<img id="icono_c" src="images/basura.png">';
-                          break;
-                        case 'limpieza':
-                          echo '<img id="icono_c" src="images/lavando.png">';
-                          break;
-                        default:
-                          //echo "Estado interno indefinido";
-                          break;
-                      }         
-                    echo '</div>';
-                  echo '</div>';
-                  }
-                  
+        <div class="div_previsualizar">';
+        if($estado != 'estado1'){
+          echo '<div class="row">
+          <div class="col-sm-5"></div>
 
-            //echo '<div class="col-sm-5"></div>';
+          <div class="col-sm-2">';
+            echo '<div class="estados">';
+          
+                  echo '<div class="row">
+                    <div class="col-sm-6">
+                      <div class="titulo_hab">';
+                        echo $estado_nombre;
+                      echo '</div>
+                    </div>
+          
+                    <div class="col-sm-6">
+                      <div class="imagen_hab">';
+                        if(2<100){
+                          echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
+                        }else{
+                          echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
+                        }
+                    echo '</div>
+                    </div>
+                  </div>';
+          
+                  echo '<div class="timepo_hab">';
+                    $fecha_salida= $cronometro;
+                    if($estado_num == 1){
+                      echo $fecha_salida;
+                    }else{
+                      if($cronometro == 0){
+                        $fecha_inicio= '&nbsp';
+                      }else{
+                        $fecha_inicio= $cronometro;
+                      }
+                      echo $fecha_inicio;
                     }
+                  echo '</div>';
+          
+                  echo '<div class="timepo_hab">';
+                    if($estado_num == 1){
+                      if($total_faltante >= 0){
+                        echo '$'.number_format($total_faltante, 2);
+                      }else{
+                        $total_faltante= substr($total_faltante, 1);
+                        echo '-$'.number_format($total_faltante, 2);
+                      }
+                    }else{
+                        $total_faltante= '&nbsp';
+                        echo $total_faltante;
+                    }
+                  echo '</div>';
+          
+                  echo '<div class="icono_hab">';
+                    $interno= 'sin estado';
+                    switch($interno){
+                      case 'sin estado':
+                        echo '<div><br>';  
+                        break;
+                      default:
+                        //echo "Estado interno indefinido";
+                        break;
+                    }         
+                  echo '</div>';
+                echo '</div>';
+          echo '</div>
+
+          <div class="col-sm-5"></div>
+          </div>';
+        }else{
+          // Primer rack
+          echo '<div class="row">
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-2">';
+              echo '<div class="sub_estado_sucia">';
+              echo '<div class="estados">';
+            
+                    echo '<div class="row">
+                      <div class="col-sm-6">
+                        <div class="titulo_hab">';
+                          echo $estado_nombre;
+                        echo '</div>
+                      </div>
+            
+                      <div class="col-sm-6">
+                        <div class="imagen_hab">';
+                          if(2<100){
+                            echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
+                          }else{
+                            echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
+                          }
+                      echo '</div>
+                      </div>
+                    </div>';
+            
+                    echo '<div class="timepo_hab">';
+                      $fecha_salida= $cronometro;
+                      if($estado_num == 1){
+                        echo $fecha_salida;
+                      }else{
+                        if($cronometro == 0){
+                          $fecha_inicio= '&nbsp';
+                        }else{
+                          $fecha_inicio= $cronometro;
+                        }
+                        echo $fecha_inicio;
+                      }
+                    echo '</div>';
+            
+                    echo '<div class="timepo_hab">';
+                      if($estado_num == 1){
+                        if($total_faltante >= 0){
+                          echo '$'.number_format($total_faltante, 2);
+                        }else{
+                          $total_faltante= substr($total_faltante, 1);
+                          echo '-$'.number_format($total_faltante, 2);
+                        }
+                      }else{
+                          $total_faltante= '&nbsp';
+                          echo $total_faltante;
+                      }
+                    echo '</div>';
+            
+                    echo '<div class="icono_hab">';
+                      $interno= 'sin estado';
+                      switch($interno){
+                        case 'sin estado':
+                          echo '<div><br>';  
+                          break;
+                        default:
+                          //echo "Estado interno indefinido";
+                          break;
+                      }         
+                    echo '</div>';
+                  echo '</div>';
+            echo '</div>
+
+            <div class="col-sm-3"></div></div>
+            </div>';
+
+            // Segundo rack
+
+            echo '<div 
+            <div class="col-sm-4"></div>
+
+            <div class="col-sm-2">';
+              echo '<div class="sub_estado_limpieza">';
+              echo '<div class="estados">';
+            
+                    echo '<div class="row">
+                      <div class="col-sm-6">
+                        <div class="titulo_hab">';
+                          echo $estado_nombre;
+                        echo '</div>
+                      </div>
+            
+                      <div class="col-sm-6">
+                        <div class="imagen_hab">';
+                          if(2<100){
+                            echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
+                          }else{
+                            echo '<span class="badge tama_num_hab">'.$tipo.'</span>';
+                          }
+                      echo '</div>
+                      </div>
+                    </div>';
+            
+                    echo '<div class="timepo_hab">';
+                      $fecha_salida= $cronometro;
+                      if($estado_num == 1){
+                        echo $fecha_salida;
+                      }else{
+                        if($cronometro == 0){
+                          $fecha_inicio= '&nbsp';
+                        }else{
+                          $fecha_inicio= $cronometro;
+                        }
+                        echo $fecha_inicio;
+                      }
+                    echo '</div>';
+            
+                    echo '<div class="timepo_hab">';
+                      if($estado_num == 1){
+                        if($total_faltante >= 0){
+                          echo '$'.number_format($total_faltante, 2);
+                        }else{
+                          $total_faltante= substr($total_faltante, 1);
+                          echo '-$'.number_format($total_faltante, 2);
+                        }
+                      }else{
+                          $total_faltante= '&nbsp';
+                          echo $total_faltante;
+                      }
+                    echo '</div>';
+            
+                    echo '<div class="icono_hab">';
+                      $interno= 'sin estado';
+                      switch($interno){
+                        case 'sin estado':
+                          echo '<div><br>';
+                          break;
+                        default:
+                          //echo "Estado interno indefinido";
+                          break;
+                      }         
+                    echo '</div>';
+                  echo '</div>';
+            echo '</div>
+
+            <div class="col-sm-5"></div></div>
+          </div>';
+        }
         echo '</div>
       </div>';
 ?>
