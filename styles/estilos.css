@@ -264,7 +264,7 @@ a.topictitle:hover {
   font-size: .9em;
   /*font-weight: bold;*/
 }
-.sub_estado_sin{
+/*.sub_estado_sin{
   background-color:rgb(109, 38, 38, 1);
   padding: 0em 0px 0px 0px;
   border-radius: 10px;
@@ -278,7 +278,7 @@ a.topictitle:hover {
   background-color:#2214e4a6;
   padding: 0em 0px 0px 0px;
   border-radius: 10px;
-}
+}*/
 .icono_hab{/* icono */
   width:100%;
   text-align: right;
