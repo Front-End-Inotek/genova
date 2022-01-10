@@ -1234,6 +1234,7 @@ function regresar_editar_huesped(){
 // Agregar una reservacion en la habitacion
 function disponible_asignar(hab_id,estado){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_reservaciones.php?hab_id="+hab_id+"&estado="+estado); 
 	$('#caja_herramientas').modal('hide');
@@ -1871,6 +1872,7 @@ function regresar_editar_usuario(){
 // Muestra el estado de cuenta de una habitacion
 function estado_cuenta(hab_id,estado){
 	$('#area_trabajo').hide();
+    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/estado_cuenta.php?hab_id="+hab_id+"&estado="+estado); 
 	$('#caja_herramientas').modal('hide');
