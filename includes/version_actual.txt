@@ -80,3 +80,4 @@ VERSION 1.6
 -Generar rama configuracion
 -Generar chaflan en subestados
 -Cambiar color de chaflan en subestado
+-Cambiar los colores de fondo y nombre del sistema

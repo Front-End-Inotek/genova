@@ -108,6 +108,9 @@
       $detalle_fin= 0;
       $id_huesped= 0;
       $total= 0;
+      $estado_interno= '';
+      $inicio_limpieza= 0;
+      $persona_limpio= 0;
       while($fila = mysqli_fetch_array($consulta))
       {
         $detalle_inicio= $fila['detalle_inicio'];
@@ -115,6 +118,9 @@
         $fin_hospedaje= $fila['fin_hospedaje'];
         $id_huesped= $fila['id_huesped'];
         $total= $fila['total'];
+        $estado_interno= $fila['estado_interno'];
+        $inicio_limpieza= $fila['inicio_limpieza'];
+        $persona_limpio= $fila['persona_limpio'];
       }
         $cuenta= NEW Cuenta(0);
         $huesped= NEW Huesped($id_huesped);
@@ -138,6 +144,20 @@
             echo 'Saldo: -$'.number_format($total_faltante, 2);
           }
         echo '</div>';
+        if($estado_interno == 'sucia'){
+          echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+            echo 'Inicio sucia: '.date("d-m-Y H:i:s",  $detalle_inicio);
+          echo '</div>';
+        }
+        if($estado_interno == 'limpieza'){
+          $usuario = NEW Usuario($persona_limpio);
+          echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+            echo 'Inicio Limpieza: '.date("d-m-Y H:i:s",  $detalle_inicio);
+          echo '</div>';
+          echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+            echo 'Persona Limpiando: '. $usuario->usuario;
+          echo '</div>';
+        }
     }
     // Estado 2
     function sucia($hab_id,$estado,$mov){
@@ -153,10 +173,10 @@
         $termina_hospe= $fila['finalizado'];
       }
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Ocupada: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
+        echo 'Última recervación: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        echo 'Termino: '. date("d-m-Y H:i:s",$termina_hospe);
+        echo 'Termino ocupada: '. date("d-m-Y H:i:s",$termina_hospe);
       echo '</div>';
     }
     // Estado 3
