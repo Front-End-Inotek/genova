@@ -420,6 +420,13 @@
                                                   <i class="fa fa-fw fa-dashboard"></i> &nbsp; Cambiar Color</a>
                                           </li>';
                                         }
+                                        if($permisos_configuracion==0){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="cambiar_fondo()">
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Cambiar Fondo</a>
+                                          </li>';
+                                        }
                                         echo '
                                     </ul>
                                 </div>

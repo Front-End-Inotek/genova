@@ -95,6 +95,14 @@
       $comentario="Modificar la foto de inicio";
       $this->realizaConsulta($sentencia,$comentario);
     }
+    // Guardar el nombre del sistema
+    function guardar_nombre($nombre){
+      $sentencia = "UPDATE `configuracion` SET
+      `nombre` = '$nombre'
+      WHERE `id` = '1';";
+      $comentario="Modificar el nombre del sistema";
+      $this->realizaConsulta($sentencia,$comentario);
+    }
     
   }
 ?>

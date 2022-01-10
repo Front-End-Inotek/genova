@@ -11,6 +11,7 @@
             <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
             <link rel="icon" href="favicon.ico" type="image/x-icon">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <link rel=stylesheet href="styles/fondo.css" type="text/css">
             <link rel=stylesheet href="styles/estilos.css" type="text/css">
             <link rel=stylesheet href="styles/estado0.css" type="text/css">
             <link rel=stylesheet href="styles/estado1.css" type="text/css">

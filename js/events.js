@@ -2693,6 +2693,16 @@ function cambiar_archivo(){
 	closeNav();
 }
 
+// Cambiar los colores y nombre del sistema del sistema
+function cambiar_fondo(){
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/cambiar_fondo.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
 // Conseguimos la previsualizacion donde se ve el cambio de los colores del estado del rack
 function previsualizar_estado(){
     var estado= encodeURI(document.getElementById("estado").value);

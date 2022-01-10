@@ -50,16 +50,16 @@
   width:100%;
 }
 
-body {/* Body info*/
-overflow-x: hidden;
-background-color: #040C14;
-}
+/*body {/* Body info*/
+/*overflow-x: hidden; 
+ background-color: #14040B;
+}*/
 
 /* Agregue un color de fondo negro a la navegación superior */
-.topnav {
+/*.topnav {
   background-color: #242C34;
   overflow: hidden;
-}
+}*/
 
 /* Aplicar estilo a los enlaces dentro de la barra de navegación */
 .topnav a {

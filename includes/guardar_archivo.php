@@ -3,10 +3,10 @@
   $logs = NEW Log(0);
 
   // Se cargan los datos necesarios
-  $estado=$_REQUEST['estado'];
-  $rack=$_REQUEST['rack'];
-  $hover=$_REQUEST['hover'];
-  $letra=$_REQUEST['letra'];
+  $estado= $_REQUEST['estado'];
+  $rack= $_REQUEST['rack'];
+  $hover= $_REQUEST['hover'];
+  $letra= $_REQUEST['letra'];
 
   // Se transforma el color hexadecimal a rgb en el estado 1 de ocupada
   if($estado == "estado1"){

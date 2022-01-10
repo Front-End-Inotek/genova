@@ -8,7 +8,7 @@
           echo '
           <form enctype="multipart/form-data" action="includes/guardar_archivo.php?usuario_id='.$_GET['usuario_id'].'" method="POST"> 
                 <div class="row"> 
-                        <div class="col-sm-2"><label for="rack">Selecciona Estado</label>:</div>
+                        <div class="col-sm-2"><label for="estado">Selecciona Estado</label>:</div>
                         <div class="col-sm-2">
                                 <div class="form-group">
                                         <select class="form-control" id="estado" name="estado" onchange="previsualizar_estado()">

@@ -1,40 +1,40 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('clase_configuracion.php');
-  $config = NEW Configuracion();
+  $config = NEW Configuracion(1);
   
   echo ' <div class="container blanco"> 
-          <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">CAMBIAR IMAGEN</h2></div>';
+          <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">CAMBIAR FONDO</h2></div>';
           echo '
-                <form enctype="multipart/form-data" action="includes/guardar_imagen.php?usuario_id='.$_GET['usuario_id'].'" method="POST">  
-                        <div class="row">
-                                <div class="col-sm-2" >Foto:</div>
-                                <div class="col-sm-4" >
+                <form enctype="multipart/form-data" action="includes/guardar_fondo.php?usuario_id='.$_GET['usuario_id'].'" method="POST">  
+                        <div class="row"> 
+                                <div class="col-sm-2"><label for="nombre">Nombre del Sistema:</label></div>
+                                <div class="col-sm-3">
                                 <div class="form-group">
-                                        <input name="uploadedfile" type="file">
+                                        <input class="form-control" type="text" id="nombre" name="nombre" value="'.$config->nombre.'" maxlength="40">
+                                </div>        
                                 </div>
+                                <div class="col-sm-5"></div>
+                                <div class="col-sm-2"></div>
+                        </div><br>
+
+                        <div class="row margen-1"> 
+                                <div class="col-sm-2"><label for="fondo">Color Fondo:</label></div>
+                                <div class="col-sm-2">
+                                        <input type="color" value="#14040B" id="fondo" name="fondo">
                                 </div>
-                       
-                                <div class="col-sm-4"></div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="encabezado">Color Encabezado:</label></div>
+                                <div class="col-sm-2">
+                                        <input type="color" value="#242C34" id="encabezado" name="encabezado">
+                                </div>
+                                
                                 <div class="col-sm-2">
                                 <div id="boton_tipo">
                                         <input type="submit" class="btn btn-success btn-block" value="Guardar">
                                 </div>
                                 </div>
-                                
-                        </div>
-                </form><br>';
-                //<div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_tarifa()"> ←</button></div>
-                        
-                echo '
-                <div class="row">
-                <div class="col-sm-12 text-left"><h4 class="text-dark margen-1">Presione imagen actual para verla en tamaño original</h4></div>
-                <br><br>
-                        <div class="col-sm-12 text-center">';
-                        echo '&nbsp;&nbsp;';
-                        echo '<a href="/visit/images/login/'.$config->imagen.'" target="_blank"><img src="/visit/images/login/'.$config->imagen.'" alt="Imagen de la cotizacion" height="160" width="180"/></a>';
-                        echo '&nbsp;&nbsp;
-                        </div>
-                </div>
+                        </div
+                </form>
   </div>';
 ?>
