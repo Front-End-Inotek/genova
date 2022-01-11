@@ -63,7 +63,7 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Nombre</th>
+            <th>Numero</th>
             <th>Tipo de habitacion</th>
             <th>Comentario</th>';
             if($editar==1){

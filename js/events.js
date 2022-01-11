@@ -1251,15 +1251,6 @@ function reporte_cargo_noche(id){
 
 //* Forma pago *//
 
-// Agregar una forma de pago
-function agregar_formas_pago(){
-	$('#area_trabajo').hide();
-    $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_formas_pago.php"); 
-	closeNav();
-}
-
 // Guardar una forma de pago
 function guardar_forma_pago(){
     var usuario_id=localStorage.getItem("id");

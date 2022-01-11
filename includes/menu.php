@@ -372,7 +372,7 @@
                             </li>'; 
                           } 
                                         
-                          $permisos_forma_pago=$usuario->forma_pago_ver+$usuario->forma_pago_agregar;
+                          $permisos_forma_pago=$usuario->forma_pago_ver;
                           if($permisos_forma_pago>0){
                             echo '
                             <li class="nav-item">
@@ -383,14 +383,7 @@
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="ver_formas_pago()">
-                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Formas Pago</a>
-                                          </li>';
-                                        }
-                                        if($usuario->forma_pago_agregar==1){
-                                          echo '
-                                          <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_formas_pago()">
-                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Forma Pago</a>
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Ver Forma Pago</a>
                                           </li>';
                                         }
                                         echo '
