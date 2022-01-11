@@ -23,6 +23,7 @@
       public $vencimiento_mes;
       public $vencimiento_ano;
       public $cvv;
+      public $visitas;
       public $estado_huesped;
       
       // Constructor
@@ -48,6 +49,7 @@
           $this->vencimiento_mes= 0;
           $this->vencimiento_ano= 0;
           $this->cvv= 0;
+          $this->visitas= 0;
           $this->estado_huesped= 0; 
         }else{
           $sentencia = "SELECT * FROM huesped WHERE id = $id LIMIT 1 ";
@@ -74,14 +76,15 @@
               $this->vencimiento_mes= $fila['vencimiento_mes'];
               $this->vencimiento_ano= $fila['vencimiento_ano'];
               $this->cvv= $fila['cvv'];
+              $this->visitas= $fila['visitas'];
               $this->estado_huesped= $fila['estado_huesped'];
           }
         }
       }
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv){
-        $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `estado_huesped`)
-        VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', '$cvv', '1');";
+        $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, `estado_huesped`)
+        VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', '0', '1');";
         $comentario="Guardamos el huesped en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);    
         

@@ -686,18 +686,24 @@ function aceptar_asignar_huesped(id,funcion,precio_hospedaje,total_adulto,total_
 }
 
 // Mostrar u ocultar los datos de un huesped en una reservacion
-function mostrar_datos(){
+function mostrar_datos(hab_id){
 	$('.div_datos').hide();
 	$('.boton_datos').hide();
 	//$('.div_oculto').show();
 	var id_huesped= document.getElementById("id_huesped").value;
 	var id= id_huesped;
 	$(".div_oculto").html('<div class="spinner-border text-primary"></div>');
-    $(".div_oculto").load("includes/editar_huesped_reservar.php?id="+id); 
+    $(".div_oculto").load("includes/editar_huesped_reservar.php?id="+id+"&hab_id="+hab_id);  
+}
+
+// Ocultar los datos de un huesped en una reservacion
+function ocultar_datos(hab_id){
+	//$('.div_oculto').hide();
+    cambiar_adultos(hab_id);
 }
 
 // Guardar una reservacion
-function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id){
+function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id,cantidad_maxima){
     var usuario_id=localStorage.getItem("id");
 	var id_huesped= document.getElementById("id_huesped").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
@@ -708,6 +714,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	var extra_junior= Number(document.getElementById("extra_junior").value);
 	var extra_infantil=Number(document.getElementById("extra_infantil").value);
 	var extra_menor= Number(document.getElementById("extra_menor").value);
+    var cantidad_ocupacion= extra_adulto + extra_junior + extra_infantil + extra_menor;
 	var tarifa= Number(document.getElementById("tarifa").value);
 	var nombre_reserva= encodeURI(document.getElementById("nombre_reserva").value);
 	var acompanante= encodeURI(document.getElementById("acompanante").value);
@@ -747,52 +754,56 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	
 
 	if(id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
-			//$('#boton_reservacion').hide();
-			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-			      "id_huesped": id_huesped,
-				  "fecha_entrada": fecha_entrada,
-				  "fecha_salida": fecha_salida,
-				  "noches": noches,
-				  "numero_hab": numero_hab,
-				  "precio_hospedaje": precio_hospedaje,
-				  "cantidad_hospedaje": cantidad_hospedaje,
-				  "extra_adulto": extra_adulto,
-				  "extra_junior": extra_junior,
-				  "extra_infantil": extra_infantil,
-				  "extra_menor": extra_menor,
-				  "tarifa": tarifa,
-				  "nombre_reserva": nombre_reserva,
-				  "acompanante": acompanante,
-				  "forma_pago": forma_pago,
-				  "limite_pago": limite_pago,
-				  "suplementos": suplementos,
-				  "total_suplementos": total_suplementos,
-				  "total_hab": total_hab,
-				  "forzar_tarifa": forzar_tarifa,
-				  "descuento": descuento,
-				  "total": total,
-                  "total_pago": total_pago,
-				  "hab_id": hab_id,
-                  "usuario_id": usuario_id,
-				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_reservacion.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_reservaciones,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-				});
-				return false;
-			}else{
-				alert("Campos incompletos o descuento no permitido");
-			}
+            if(cantidad_ocupacion <= cantidad_maxima){
+                //$('#boton_reservacion').hide();
+			    $("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
+                var datos = {
+                    "id_huesped": id_huesped,
+                    "fecha_entrada": fecha_entrada,
+                    "fecha_salida": fecha_salida, 
+                    "noches": noches,
+                    "numero_hab": numero_hab,
+                    "precio_hospedaje": precio_hospedaje,
+                    "cantidad_hospedaje": cantidad_hospedaje,
+                    "extra_adulto": extra_adulto,
+                    "extra_junior": extra_junior,
+                    "extra_infantil": extra_infantil,
+                    "extra_menor": extra_menor,
+                    "tarifa": tarifa,
+                    "nombre_reserva": nombre_reserva,
+                    "acompanante": acompanante,
+                    "forma_pago": forma_pago,
+                    "limite_pago": limite_pago,
+                    "suplementos": suplementos,
+                    "total_suplementos": total_suplementos,
+                    "total_hab": total_hab,
+                    "forzar_tarifa": forzar_tarifa,
+                    "descuento": descuento,
+                    "total": total,
+                    "total_pago": total_pago,
+                    "hab_id": hab_id,
+                    "usuario_id": usuario_id,
+                    };
+                $.ajax({
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/guardar_reservacion.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                    success:ver_reservaciones,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
+                    });
+                    return false;
+                }else{
+                    alert("¡Cantidad máxima excedida de personas permitidas por el tipo de habitación!");
+                }
+            }else{
+                alert("Campos incompletos o descuento no permitido");
+            }
 }
 
 // Muestra las reservaciones de la bd
@@ -1132,7 +1143,7 @@ function editar_huesped(id){
 }
 
 // Editar un huesped
-function modificar_huesped(id){
+function modificar_huesped(id,hab_id){
 	var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
     var apellido= encodeURI(document.getElementById("apellido").value);
@@ -1179,20 +1190,37 @@ function modificar_huesped(id){
 			  "cvv": cvv,
 			  "usuario_id": usuario_id,
             };
-        $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_huesped.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:ver_huespedes,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
-            });
-        return false;
+        if(hab_id == 0){
+            $.ajax({
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/aplicar_editar_huesped.php",
+                    data:datos,
+                    //beforeSend:loaderbar,
+                    success:ver_huespedes,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
+                });
+            return false;      
+        }else{
+            $.ajax({
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/aplicar_editar_huesped.php",
+                    data:datos,
+                    //beforeSend:loaderbar,
+                    success:cambiar_adultos,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
+                });
+            return false; 
+        }    
     }else{
         alert("Campos incompletos o descuento no permitido");
     }    

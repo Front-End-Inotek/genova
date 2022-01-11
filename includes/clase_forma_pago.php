@@ -61,7 +61,7 @@
         </thead>
       <tbody>';
           echo '<tr <tr class="text-center">
-            <td><input type="text" class ="color_black" id="descripcion" placeholder="Ingresa la descripcion" pattern="[a-z]{1,15}" maxlength="50"></td>';
+            <td><input type="text" class ="color_black" id="descripcion" placeholder="Ingresa la descripción" pattern="[a-z]{1,15}" maxlength="50"></td>';
             if($agregar==1){
               echo '<td><button class="btn btn-success" onclick="guardar_forma_pago()"> Guardar</button></td>';
             }

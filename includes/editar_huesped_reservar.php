@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Direccion:</div>
+          <div class="col-sm-2">Dirección:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <input class="form-control" type="text" id="direccion" value="'.$huesped->direccion.'" maxlength="60">
@@ -40,7 +40,7 @@
             <input class="form-control" type="text" id="estado" value="'.$huesped->estado.'" maxlength="30">
           </div>
           </div>
-          <div class="col-sm-2">Codigo postal:</div>
+          <div class="col-sm-2">Código postal:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <input class="form-control" type="text" id="codigo_postal" value="'.$huesped->codigo_postal.'" maxlength="20">
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Telefono:</div>
+          <div class="col-sm-2">Teléfono:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <input class="form-control" type="text" id="telefono" value="'.$huesped->telefono.'" maxlength="50">
@@ -119,7 +119,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Numero de la tarjeta:</div>
+          <div class="col-sm-2">Número de la tarjeta:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <input class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->numero_tarjeta.'" maxlength="16">
@@ -300,16 +300,21 @@
           <div class="col-sm-1">mes/año</div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Codigo Seguridad:</div>
+          <div class="col-sm-2">Código Seguridad:</div>
           <div class="col-sm-2">
           <div class="form-group">
             <input class="form-control" type="text" id="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->cvv.'" maxlength="3">
           </div>
           </div>
-          <div class="col-sm-6"></div>
+          <div class="col-sm-4"></div>
           <div class="col-sm-2">
           <div id="boton_huesped">
-            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].')">
+            <input type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].')">
+          </div>
+          </div>
+          <div class="col-sm-2">
+          <div id="boton_huesped">
+            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].','.$_GET['hab_id'].')">
           </div>
           </div>
         </div> 

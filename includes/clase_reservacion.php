@@ -199,7 +199,7 @@
             <th>Extra Junior</th>
             <th>Extra Infantil</th>
             <th>Extra Menor</th>
-            <th>Nombre Huesped</th>
+            <th>Nombre Huésped</th>
             <th>Quién Reserva</th>
             <th>Acompañante</th>
             <th>Suplementos</th>
@@ -209,7 +209,7 @@
             <th>Total Estancia</th>
             <th>Total Pago</th>
             <th>Forma Pago</th>
-            <th>Limite Pago</th>
+            <th>Límite Pago</th>
             <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -306,7 +306,7 @@
                 <th>Extra Junior</th>
                 <th>Extra Infantil</th>
                 <th>Extra Menor</th>
-                <th>Nombre Huesped</th>
+                <th>Nombre Huésped</th>
                 <th>Quién Reserva</th>
                 <th>Acompañante</th>
                 <th>Suplementos</th>
@@ -316,7 +316,7 @@
                 <th>Total Estancia</th>
                 <th>Total Pago</th>
                 <th>Forma Pago</th>
-                <th>Limite Pago</th>';
+                <th>Límite Pago</th>';
                 if($editar==1){
                   echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
                 }
@@ -412,7 +412,7 @@
               <th>Extra Junior</th>
               <th>Extra Infantil</th>
               <th>Extra Menor</th>
-              <th>Nombre Huesped</th>
+              <th>Nombre Huésped</th>
               <th>Quién Reserva</th>
               <th>Acompañante</th>
               <th>Suplementos</th>
@@ -422,7 +422,7 @@
               <th>Total Estancia</th>
               <th>Total Pago</th>
               <th>Forma Pago</th>
-              <th>Limite Pago</th>';
+              <th>Límite Pago</th>';
               if($editar==1){
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
               }

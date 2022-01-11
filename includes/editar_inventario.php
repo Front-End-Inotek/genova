@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Categoria:</div>
+          <div class="col-sm-2">Categoría:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <select class="form-control" id="categoria" class="form-control">';
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Descripcion:</div>
+          <div class="col-sm-2">Descripción:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <input class="form-control" type="text" id="descripcion" value="'.$inventario->descripcion.'" maxlength="200">

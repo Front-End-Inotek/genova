@@ -81,3 +81,4 @@ VERSION 1.6
 -Generar chaflan en subestados
 -Cambiar color de chaflan en subestado
 -Cambiar los colores de fondo y nombre del sistema
+-Cambiar menu y funcion agregar reservacion

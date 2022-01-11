@@ -106,8 +106,8 @@
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Categoria</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
             <th>Precio</th>
             <th>Precio Compra</th>
             <th>Inventario</th>
@@ -177,8 +177,8 @@
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th>Nombre</th>
-              <th>Descripcion</th>
-              <th>Categoria</th>
+              <th>Descripción</th>
+              <th>Categoría</th>
               <th>Precio</th>
               <th>Precio Compra</th>
               <th>Inventario</th>

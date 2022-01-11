@@ -19,6 +19,8 @@
   $precio_junior= $tarifa->precio_junior;
   $precio_infantil= $tarifa->precio_infantil;
   $precio_hab= $precio_hospedaje * $_GET['noches'] * $_GET['numero_hab'];
+  $cantidad_maxima= $tarifa->cantidad_maxima;
+  $leyenda= $tarifa->leyenda;
   echo '
       <div class="container blanco"> 
         <div class="row div_adultos">
@@ -81,7 +83,7 @@
         <div class="row">
           <div class="col-sm-8 div_datos">Presiona este botón si deseas ver los datos del huésped previamente asignado:</div>
           <div class="col-sm-3">
-            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos()">Ver Datos</button>
+            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos('.$_GET['hab_id'].')">Ver Datos</button>
           </div>
           <div class="col-sm-1"></div>
         </div>
@@ -147,7 +149,7 @@
             </select>
           </div>
           </div>
-          <div class="col-sm-2">Fecha limite de pago:</div>
+          <div class="col-sm-2">Fecha límite de pago:</div>
           <div class="col-sm-2">
           <div class="form-group">
             <select class="form-control" id="limite_pago">
@@ -162,7 +164,7 @@
           <div class="col-sm-10"></div>
           <div class="col-sm-2">
           <div id="boton_reservacion">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].')">
+            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].','.$cantidad_maxima.')">
           </div>
           </div>
         </div>
