@@ -38,6 +38,7 @@
     function mostrar($id){
       include_once('clase_usuario.php');
       $usuario = NEW Usuario($id);
+      $agregar = $usuario->categoria_editar;
       $editar = $usuario->forma_pago_editar;
       $borrar = $usuario->forma_pago_borrar;
 
@@ -59,6 +60,13 @@
           echo '</tr>
         </thead>
       <tbody>';
+          echo '<tr <tr class="text-center">
+            <td><input type="text" class ="color_black" id="descripcion" placeholder="Ingresa la descripcion" pattern="[a-z]{1,15}" maxlength="50"></td>';
+            if($agregar==1){
+              echo '<td><button class="btn btn-success" onclick="guardar_forma_pago()"> Guardar</button></td>';
+            }
+            echo '<td></td>       
+          </tr>';
           while ($fila = mysqli_fetch_array($consulta))
           {
               echo '<tr class="text-center">
