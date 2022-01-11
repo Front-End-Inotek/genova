@@ -7,16 +7,16 @@
           <div class="col-sm-2">Nombre:</div>
           <div class="col-sm-7">
           <div class="form-group">
-            <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el nombre del tipo de habitacion" maxlength="90">
+            <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el nombre del tipo de habitación" maxlength="90">
           </div>
           </div>
           <div class="col-sm-3"></div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Codigo:</div>
+          <div class="col-sm-2">Código:</div>
           <div class="col-sm-7">
           <div class="form-group">
-            <input class="form-control" type="text"  id="codigo" placeholder="Ingresa el codigo del tipo de habitacion" maxlength="20">
+            <input class="form-control" type="text"  id="codigo" placeholder="Ingresa el código del tipo de habitación" maxlength="20">
           </div>
           </div>
           <div class="col-sm-1"></div>

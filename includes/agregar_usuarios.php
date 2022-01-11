@@ -24,7 +24,7 @@
             <input class="form-control" type="password" id="contrasena" placeholder="Ingresa la contraseña del usuario" maxlength="50">
           </div>
           </div>
-          <div class="col-sm-2">Categoria:</div>
+          <div class="col-sm-2">Categoría:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <select class="form-control" id="nivel">
@@ -46,7 +46,7 @@
           <div class="col-sm-2">Contraseña:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="password" id="recontrasena" placeholder="Ingresa nuevamente la contraseña del usuario" maxlength="50">
+            <input class="form-control" type="password" id="recontrasena" placeholder="Ingresa nuevamente la contraseña" maxlength="50">
           </div>
           </div>
           <div class="col-sm-2">Puesto:</div>
@@ -71,10 +71,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Direccion:</div>
+          <div class="col-sm-2">Dirección:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="direccion" placeholder="Ingresa la direccion del usuario">
+            <input class="form-control" type="text" id="direccion" placeholder="Ingresa la dirección del usuario">
           </div>
           </div>
           <div class="col-sm-4"></div>

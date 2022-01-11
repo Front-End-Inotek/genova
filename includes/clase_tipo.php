@@ -53,7 +53,7 @@
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
-            <th>Codigo</th>';
+            <th>Código</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }

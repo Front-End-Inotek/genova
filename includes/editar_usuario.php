@@ -35,7 +35,7 @@
             </div>
         </div><br> -->
         <div class="row">
-          <div class="col-sm-2" >Categoria:</div>
+          <div class="col-sm-2" >Categoría:</div>
           <div class="col-sm-4" >
           <div class="form-group">
             <select class="form-control" id="nivel">
@@ -179,7 +179,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Direccion:</div>
+          <div class="col-sm-2">Dirección:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <input class="form-control" type="text" id="direccion" value="'.$usuario->direccion.'">
@@ -240,7 +240,7 @@
             </div>
             </div><br><hr> 
             <div class="form-group row">
-            <div class="col-sm-3">Huesped:</div>
+            <div class="col-sm-3">Huésped:</div>
             <div class="col-sm-1">
               <div class="form-check">';
               if($usuario->huesped_ver==0){
@@ -444,7 +444,7 @@
             </div>
             </div><br><hr>*/  
             echo '<div class="form-group row">
-            <div class="col-sm-3">Reservacion:</div>
+            <div class="col-sm-3">Reservación:</div>
             <div class="col-sm-1">
               <div class="form-check">';
               if($usuario->reservacion_ver==0){
@@ -612,7 +612,7 @@
             </div>
             </div><br><hr> 
             <div class="form-group row">
-            <div class="col-sm-3">Categoria:</div>
+            <div class="col-sm-3">Categoría:</div>
             <div class="col-sm-1">
               <div class="form-check">';
               if($usuario->categoria_ver==0){

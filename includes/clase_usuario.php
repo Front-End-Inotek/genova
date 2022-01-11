@@ -418,9 +418,9 @@
                <th>Nivel</th>
                <th>Nombre</th>
                <th>Puesto</th>
-               <th>Celular o telefono</th>
+               <th>Celular o teléfono</th>
                <th>Correo</th>
-               <th>Direccion</th>
+               <th>Dirección</th>
                <th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>
                <th><span class="glyphicon glyphicon-cog"></span> Borrar</th>
                </tr>

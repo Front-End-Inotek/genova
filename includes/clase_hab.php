@@ -63,8 +63,8 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Numero</th>
-            <th>Tipo de habitacion</th>
+            <th>Número</th>
+            <th>Tipo de habitación</th>
             <th>Comentario</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';

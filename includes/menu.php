@@ -109,7 +109,7 @@
                           if($permisos_hab>0){
                             echo '
                             <li class="nav-item">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu1sub3" data-toggle="collapse" data-target="#submenu1sub3"><span>Habitacion</span></a>
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu1sub3" data-toggle="collapse" data-target="#submenu1sub3"><span>Habitación</span></a>
                                 <div class="collapse" id="submenu1sub3" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         if($usuario->hab_ver==1){

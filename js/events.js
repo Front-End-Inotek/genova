@@ -290,23 +290,27 @@ function guardar_tarifa(){
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var precio_hospedaje= document.getElementById("precio_hospedaje").value;
 	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
+    var cantidad_maxima= document.getElementById("cantidad_maxima").value;
 	var precio_adulto= document.getElementById("precio_adulto").value;
 	var precio_junior= document.getElementById("precio_junior").value;
 	var precio_infantil= document.getElementById("precio_infantil").value;
 	var tipo= document.getElementById("tipo").value;
+    var leyenda= encodeURI(document.getElementById("leyenda").value);
 	
 
-	if(nombre.length >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && precio_adulto >0 && tipo >0){
+	if(nombre.length >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && cantidad_maxima >0 && precio_adulto >0 && tipo >0){
 			//$('#boton_tarifa').hide();
 			$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 				  "nombre": nombre,
 				  "precio_hospedaje": precio_hospedaje,
 				  "cantidad_hospedaje": cantidad_hospedaje,
+                  "cantidad_maxima": cantidad_maxima,
 				  "precio_adulto": precio_adulto,
 				  "precio_junior": precio_junior,
 				  "precio_infantil": precio_infantil,
 				  "tipo": tipo,
+                  "leyenda": leyenda,
                   "usuario_id": usuario_id,
 				};
 			$.ajax({
@@ -349,13 +353,15 @@ function modificar_tarifa(id){
     var nombre= encodeURI(document.getElementById("nombre").value);
 	var precio_hospedaje= document.getElementById("precio_hospedaje").value;
 	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
+    var cantidad_maxima= document.getElementById("cantidad_maxima").value;
 	var precio_adulto= document.getElementById("precio_adulto").value;
 	var precio_junior= document.getElementById("precio_junior").value;
 	var precio_infantil= document.getElementById("precio_infantil").value;
-	var tipo= document.getElementById("tipo").value;
+    var tipo= document.getElementById("tipo").value;
+    var leyenda= encodeURI(document.getElementById("leyenda").value);
 
 
-    if(id >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && precio_adulto >0 && tipo >0){
+    if(id >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && cantidad_maxima >0 && precio_adulto >0 && tipo >0){
         //$('#boton_tarifa').hide();
 			$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -363,10 +369,12 @@ function modificar_tarifa(id){
               "nombre": nombre,
 			  "precio_hospedaje": precio_hospedaje,
 			  "cantidad_hospedaje": cantidad_hospedaje,
+              "cantidad_maxima": cantidad_maxima,
 			  "precio_adulto": precio_adulto,
 			  "precio_junior": precio_junior,
 			  "precio_infantil": precio_infantil,
 			  "tipo": tipo,
+              "leyenda": leyenda,
               "usuario_id": usuario_id,
             };
         $.ajax({
@@ -1295,16 +1303,17 @@ function ver_formas_pago(){
 
 // Editar una forma de pago
 function editar_forma_pago(id){
-    $("#area_trabajo_menu").load("includes/editar_forma_pago.php?id="+id);
+    $("#mostrar_herramientas").load("includes/editar_forma_pago.php?id="+id);
 }
 
 // Editar una forma de pago
 function modificar_forma_pago(id){
 	var usuario_id=localStorage.getItem("id");
-	var descripcion= encodeURI(document.getElementById("descripcion").value);
+    var descripcion= encodeURI(document.getElementById("descripcion_nueva").value);
+    $('#caja_herramientas').modal('hide');
 
 
-    if(id >0){
+    if(id >0 && descripcion.length >0){
         //$('#boton_forma').hide();
 			$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -1360,14 +1369,6 @@ function borrar_forma_pago(id){
 // Modal de borrar una forma de pago
 function aceptar_borrar_forma_pago(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_forma_pago.php?id="+id);
-}
-
-// Regresar a la pagina anterior de editar una forma de pago
-function regresar_editar_forma_pago(){
-    var usuario_id=localStorage.getItem("id");
-    $('#area_trabajo').hide();
-	$('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/ver_formas_pago.php?usuario_id="+usuario_id);
 }
 
 //* Usuario *//
@@ -2210,6 +2211,7 @@ function modificar_categoria(id){
 	var usuario_id=localStorage.getItem("id");
     var nombre = encodeURI(document.getElementById("nombre_categoria").value);
     $('#caja_herramientas').modal('hide');
+
 
     if(id >0 && nombre.length >0){
         //$('#boton_categoria').hide();

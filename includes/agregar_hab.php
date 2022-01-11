@@ -6,15 +6,15 @@
       <div class="container blanco"> 
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR HABITACION</h2></div>
         <div class="row">
-          <div class="col-sm-3">Numero:</div>
+          <div class="col-sm-3">Número:</div>
           <div class="col-sm-9">
           <div class="form-group">
-            <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el numero de la habitacion" maxlength="90">
+            <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el numero de la habitación" maxlength="90">
           </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-3">Tipo de habitacion:</div>
+          <div class="col-sm-3">Tipo de habitación:</div>
           <div class="col-sm-9">
           <div class="form-group">
             <select class="form-control" id="tipo" class="form-control">
@@ -29,7 +29,7 @@
           <div class="col-sm-3">Comentario:</div>
           <div class="col-sm-9">
           <div class="form-group">
-            <input class="form-control" type="text"  id="comentario" placeholder="Ingresa el comentario de la habitacion" maxlength="250">
+            <input class="form-control" type="text"  id="comentario" placeholder="Ingresa el comentario de la habitación" maxlength="250">
           </div>
           </div>
         </div>

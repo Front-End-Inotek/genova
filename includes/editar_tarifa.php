@@ -22,10 +22,18 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-3">Cantidad por hospedaje:</div>
+          <div class="col-sm-3">Cantidad por habitación:</div>
           <div class="col-sm-9">
           <div class="form-group">
             <input class="form-control" type="number"  id="cantidad_hospedaje" value="'.$tarifa->cantidad_hospedaje.'">
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">Cantidad máxima:</div>
+          <div class="col-sm-9">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="cantidad_maxima" value="'.$tarifa->cantidad_maxima.'">
           </div>
           </div>
         </div>
@@ -54,7 +62,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-3">Tipo de habitacion:</div>
+          <div class="col-sm-3">Tipo de habitación:</div>
           <div class="col-sm-9">
           <div class="form-group">
             <select class="form-control" id="tipo" class="form-control">
@@ -62,6 +70,14 @@
               $tarifa->mostrar_tipo_editar($tarifa->tipo);
               echo '
             </select>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">Leyenda de habitación:</div>
+          <div class="col-sm-9">
+          <div class="form-group">
+            <input class="form-control" type="text"  id="leyenda" value="'.$tarifa->leyenda.'" maxlength="90">
           </div>
           </div>
         </div>

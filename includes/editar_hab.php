@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-3">Tipo de habitacion:</div>
+          <div class="col-sm-3">Tipo de habitación:</div>
           <div class="col-sm-9">
           <div class="form-group">
             <select class="form-control" id="tipo" class="form-control">';

@@ -186,7 +186,7 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Numero</th>
+            <th>Número</th>
             <th>Usuario</th>
             <th>Fecha Entrada</th>
             <th>Fecha Salida</th>
@@ -204,7 +204,7 @@
             <th>Acompañante</th>
             <th>Suplementos</th>
             <th>Total Suplementos</th>
-            <th>Total Habitacion</th>
+            <th>Total Habitación</th>
             <th>Descuento</th>
             <th>Total Estancia</th>
             <th>Total Pago</th>
@@ -293,7 +293,7 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr class="table-primary-encabezado text-center">
-                <th>Numero</th>
+                <th>Número</th>
                 <th>Usuario</th>
                 <th>Fecha Entrada</th>
                 <th>Fecha Salida</th>
@@ -311,7 +311,7 @@
                 <th>Acompañante</th>
                 <th>Suplementos</th>
                 <th>Total Suplementos</th>
-                <th>Total Habitacion</th>
+                <th>Total Habitación</th>
                 <th>Descuento</th>
                 <th>Total Estancia</th>
                 <th>Total Pago</th>
@@ -330,6 +330,7 @@
                 {
                   echo '<tr class="text-center">
                   <td>'.$fila['ID'].'</td> 
+                  <td>'.$fila['usuario'].'</td> 
                   <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
                   <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
                   <td>'.$fila['noches'].'</td> 
@@ -398,7 +399,7 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
-              <th>Numero</th>
+              <th>Número</th>
               <th>Usuario</th>
               <th>Fecha Entrada</th>
               <th>Fecha Salida</th>
@@ -416,7 +417,7 @@
               <th>Acompañante</th>
               <th>Suplementos</th>
               <th>Total Suplementos</th>
-              <th>Total Habitacion</th>
+              <th>Total Habitación</th>
               <th>Descuento</th>
               <th>Total Estancia</th>
               <th>Total Pago</th>
@@ -435,6 +436,7 @@
               {
                 echo '<tr class="text-center">
                 <td>'.$fila['ID'].'</td> 
+                <td>'.$fila['usuario'].'</td> 
                 <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
                 <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
                 <td>'.$fila['noches'].'</td> 

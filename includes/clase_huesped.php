@@ -137,11 +137,11 @@
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
             <th>Apellido</th>
-            <th>Direccion</th>
+            <th>Dirección</th>
             <th>Ciudad</th>
             <th>Estado</th>
-            <th>Codigo Postal</th>
-            <th>Telefono</th>
+            <th>Código Postal</th>
+            <th>Teléfono</th>
             <th>Correo</th>
             <th>Contrato Socio</th>
             <th>Cupón</th>
@@ -208,11 +208,11 @@
               <tr class="table-primary-encabezado text-center">
               <th>Nombre</th>
               <th>Apellido</th>
-              <th>Direccion</th>
+              <th>Dirección</th>
               <th>Ciudad</th>
               <th>Estado</th>
-              <th>Codigo Postal</th>
-              <th>Telefono</th>
+              <th>Código Postal</th>
+              <th>Teléfono</th>
               <th>Correo</th>
               <th>Contrato Socio</th>
               <th>Cupón</th>

@@ -50,7 +50,7 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr class="table-primary-encabezado text-center">
-          <th>Descripcion</th>';
+          <th>Descripción</th>';
           if($editar==1){
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
           }
@@ -72,7 +72,7 @@
               echo '<tr class="text-center">
               <td>'.$fila['descripcion'].'</td>';
               if($editar==1){
-                echo '<td><button class="btn btn-warning" onclick="editar_forma_pago('.$fila['id'].')"> Editar</button></td>';
+                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_forma_pago('.$fila['id'].')"> Editar</button></td>';
               }
               if($borrar==1){
                 echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_forma_pago('.$fila['id'].')"> Borrar</button></td>';

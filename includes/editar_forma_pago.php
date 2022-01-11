@@ -3,26 +3,28 @@
   include_once("clase_forma_pago.php");
   $forma_pago= NEW Forma_pago($_GET['id']);
   echo '
-      <div class="container blanco"> 
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR FORMA DE PAGO</h2></div>
-        <div class="row">
-          <div class="col-sm-2">Descripcion:</div>
-          <div class="col-sm-7">
-          <div class="form-group">
-            <input class="form-control" type="text"  id="descripcion" value="'.$forma_pago->descripcion.'" maxlength="50">
-          </div>
-          </div>
-          <div class="col-sm-1"></div>
-          <div class="col-sm-2">
-          <div id="boton_tipo">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_forma_pago('.$_GET['id'].')">
-          </div>
-          </div>
-          <div class="col-sm-11"></div>
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      Editar Forma de Pago
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div><br>
+
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-2">Descripción:</div>
+        <div class="col-sm-9">
+        <div class="form-group">
+          <input class="form-control" type="text" id="descripcion_nueva" value="'.$forma_pago->descripcion.'" maxlength="50">
         </div>
-        <div class="row">
-          <div class="col-sm-11"></div>
-          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_forma_pago()"> ←</button></div>
         </div>
-      </div>';
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    
+    <div class="modal-footer" id="boton_forma">
+      <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+      <button type="button" class="btn btn-success" onclick="modificar_forma_pago('.$_GET['id'].')"> Aceptar</button>
+    </div>
+  </div>';
 ?>

@@ -7,27 +7,27 @@
           <div class="col-sm-2">Nombre:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="nombre" placeholder="Ingresa el nombre del huesped" maxlength="70">
+            <input class="form-control" type="text" id="nombre" placeholder="Ingresa el nombre del huésped" maxlength="70">
           </div>
           </div>
           <div class="col-sm-2">Apellido:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="apellido" placeholder="Ingresa el apellido del huesped" maxlength="70">
+            <input class="form-control" type="text" id="apellido" placeholder="Ingresa el apellido del huésped" maxlength="70">
           </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Direccion:</div>
+          <div class="col-sm-2">Dirección:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="direccion" placeholder="Ingresa la direccion del huesped" maxlength="60">
+            <input class="form-control" type="text" id="direccion" placeholder="Ingresa la dirección del huésped" maxlength="60">
           </div>
           </div>
           <div class="col-sm-2">Ciudad:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="ciudad" placeholder="Ingresa la ciudad del huesped" maxlength="30">
+            <input class="form-control" type="text" id="ciudad" placeholder="Ingresa la ciudad del huésped" maxlength="30">
           </div>
           </div>
         </div>
@@ -35,27 +35,27 @@
           <div class="col-sm-2">Estado:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="estado" placeholder="Ingresa el estado del huesped" maxlength="30">
+            <input class="form-control" type="text" id="estado" placeholder="Ingresa el estado del huésped" maxlength="30">
           </div>
           </div>
-          <div class="col-sm-2">Codigo postal:</div>
+          <div class="col-sm-2">Código postal:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="codigo_postal" placeholder="Ingresa el codigo postal del huesped" maxlength="20">
+            <input class="form-control" type="text" id="codigo_postal" placeholder="Ingresa el código postal del huésped" maxlength="20">
           </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Telefono:</div>
+          <div class="col-sm-2">Teléfono:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="telefono" placeholder="Ingresa el telefono del huesped" maxlength="50">
+            <input class="form-control" type="text" id="telefono" placeholder="Ingresa el teléfono del huésped" maxlength="50">
           </div>
           </div>
           <div class="col-sm-2">Correo:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="correo" placeholder="Ingresa el correo del huesped" maxlength="200">
+            <input class="form-control" type="text" id="correo" placeholder="Ingresa el correo del huésped" maxlength="200">
           </div>
           </div>
         </div>
@@ -63,13 +63,13 @@
           <div class="col-sm-2">Contrato Socio:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="contrato" placeholder="Ingresa el contrato del socio del huesped" maxlength="40">
+            <input class="form-control" type="text" id="contrato" placeholder="Ingresa el contrato del socio del huésped" maxlength="40">
           </div>
           </div>
           <div class="col-sm-2">Cupón:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="cupon" placeholder="Ingresa el cupon del huesped" maxlength="40">
+            <input class="form-control" type="text" id="cupon" placeholder="Ingresa el cupón del huésped" maxlength="40">
           </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
           <div class="col-sm-2">Preferencias del huésped:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="preferencias" placeholder="Ingresa las preferencias del huesped">
+            <input class="form-control" type="text" id="preferencias" placeholder="Ingresa las preferencias del huésped">
           </div>
           </div>
           <div class="col-sm-2">Comentarios adicionales:</div>
@@ -95,7 +95,7 @@
           <div class="col-sm-2">Titular de la tarjeta:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="titular_tarjeta" placeholder="Ingresa el titular de la tarjeta del huesped" maxlength="70">
+            <input class="form-control" type="text" id="titular_tarjeta" placeholder="Ingresa el titular de la tarjeta del huésped" maxlength="70">
           </div>
           </div>
           <div class="col-sm-2">Tipo de la tarjeta:</div>
@@ -110,10 +110,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Numero de la tarjeta:</div>
+          <div class="col-sm-2">Número de la tarjeta:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" placeholder="Ingresa el numero de la tarjeta del huesped" maxlength="16">
+            <input class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" placeholder="Ingresa el número de la tarjeta del huésped" maxlength="16">
           </div>
           </div>
           <div class="col-sm-2">Fecha de vencimiento:</div>
@@ -144,7 +144,7 @@
           <div class="col-sm-1">mes/año</div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Codigo Seguridad:</div>
+          <div class="col-sm-2">Código Seguridad:</div>
           <div class="col-sm-2">
           <div class="form-group">
             <input class="form-control" type="text" id="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" placeholder="Ingresa el CVV" maxlength="3">
