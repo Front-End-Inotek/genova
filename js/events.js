@@ -1049,13 +1049,12 @@ function select_asignar_reservacion(id){
 }
 
 // Mandar una habitacion a estado limpieza
-function asignar_reservacion(hab_id,estado,usuario){
+function asignar_reservacion(hab_id,id_reservacion){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
-		  "hab_id": hab_id,
-		  "estado": estado,
-          "usuario": usuario,
+          "hab_id": hab_id,
+		  "id_reservacion": id_reservacion,
           "usuario_id": usuario_id,
 		};
 	$.ajax({

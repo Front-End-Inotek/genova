@@ -247,7 +247,7 @@
         return $cantidad;
       }
       // Seleccionar habitacion a asignar reservacion para checkin
-      function select_asignar_reservacion($tipo_hab){
+      function select_asignar_reservacion($tipo_hab,$id_reservacion){
         $disponible= 0;
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
@@ -257,8 +257,8 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<div class="col-xs-6 col-sm-4 col-md-3 btn-herramientas estado estado" onclick="asignar_reservacion('.$tipo_hab.')">';//col-xs-4 col-sm-2 col-md-1
-            echo '<div class="estado estado0" onclick="asignar_reservacion('.$tipo_hab.')">';
+          echo '<div class="col-xs-6 col-sm-4 col-md-3 btn-herramientas estado estado">';
+            echo '<div class="estado estado0" onclick="asignar_reservacion('.$fila['id'].','.$id_reservacion.')">';
               echo '<div class="row">
                 <div class="col-sm-6">
                   <div class="titulo_hab">';

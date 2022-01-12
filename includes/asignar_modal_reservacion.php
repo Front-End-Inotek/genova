@@ -22,7 +22,7 @@
 
       <div class="modal-body">';
         echo '<div class="row">';
-          $hab->select_asignar_reservacion($tipo_hab);
+          $hab->select_asignar_reservacion($tipo_hab,$_GET['id']);
         echo '</div>';
       echo '</div>
 
