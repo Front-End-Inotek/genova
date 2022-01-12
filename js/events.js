@@ -707,7 +707,7 @@ function ocultar_datos(hab_id){
 }
 
 // Guardar una reservacion
-function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id,cantidad_maxima){
+function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id,cantidad_maxima,tipo_hab){
     var usuario_id=localStorage.getItem("id");
 	var id_huesped= document.getElementById("id_huesped").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
@@ -786,6 +786,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
                   "total": total,
                   "total_pago": total_pago,
                   "hab_id": hab_id,
+                  "tipo_hab": tipo_hab,
                   "usuario_id": usuario_id,
                 };
             $.ajax({
@@ -899,7 +900,7 @@ function calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_
 }
 
 // Editar una reservacion
-function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,id_cuenta,cantidad_maxima){
+function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,id_cuenta,cantidad_maxima,tipo_hab){
 	var usuario_id=localStorage.getItem("id");
 	var id_huesped= document.getElementById("id_huesped").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
@@ -962,6 +963,7 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
                 "descuento": descuento,
                 "total": total,
                 "total_pago": total_pago,
+                "tipo_hab": tipo_hab,
                 "usuario_id": usuario_id,
                 };
             $.ajax({
@@ -1042,9 +1044,34 @@ function regresar_editar_reservacion(){
 }
 
 // Modal de asignar una reservacion a una habitacion en estado disponible
-function asignar_reservacion(id){
-    var usuario_id=localStorage.getItem("id");
-	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&usuario_id="+usuario_id);
+function select_asignar_reservacion(id){
+	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id);
+}
+
+// Mandar una habitacion a estado limpieza
+function asignar_reservacion(hab_id,estado,usuario){
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		  "hab_id": hab_id,
+		  "estado": estado,
+          "usuario": usuario,
+          "usuario_id": usuario_id,
+		};
+	$.ajax({
+		  async:true,
+		  type: "POST",
+		  dataType: "html",
+		  contentType: "application/x-www-form-urlencoded",
+		  url:"includes/asignar_reservacion.php",
+		  data:datos,
+		  beforeSend:loaderbar,
+		  success:principal,
+		  //success:problemas_sistema,
+          timeout:5000,
+          error:problemas_sistema
+		});
+	return false;
 }
 
 //* Huesped *//

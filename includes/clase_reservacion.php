@@ -103,7 +103,7 @@
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($id_huesped,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago,$hab_id,$usuario_id){
+      function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago,$hab_id,$usuario_id){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
@@ -120,8 +120,8 @@
           $id_cuenta= $fila['id'];
         }
         
-        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
-        VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '$total_pago', '1');";
+        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `descuento`, `total`, `total_pago`, `estado`)
+        VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$descuento', '$total', '$total_pago', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -177,9 +177,9 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
+        $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
         FROM reservacion
-        INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
+        INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.estado = 1 ORDER BY reservacion.id DESC;";
@@ -260,7 +260,7 @@
                 echo '<td>'.$fila['descripcion'].'</td>';  
                 echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';  
                 if($agregar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="asignar_reservacion('.$fila['ID'].')"> Asignar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].')"> Asignar</button></td>';
                 }
                 echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';  
                 if($editar==1){
@@ -289,9 +289,9 @@
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
+          $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
           FROM reservacion
-          INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
+          INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
           INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
           INNER JOIN huesped ON reservacion.id_huesped = huesped.id
           INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND reservacion.estado = 1 ORDER BY reservacion.id DESC";
@@ -396,9 +396,9 @@
         if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
+          $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
           FROM reservacion
-          INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
+          INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
           INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
           INNER JOIN huesped ON reservacion.id_huesped = huesped.id
           INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini &&reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND reservacion.estado = 1 ORDER BY reservacion.fecha_entrada DESC;";
@@ -488,11 +488,12 @@
         </div>';
       }
       // Editar una reservacion
-      function editar_reservacion($id,$id_huesped,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago){
+      function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         $sentencia = "UPDATE `reservacion` SET
             `id_huesped` = '$id_huesped',
+            `tipo_hab` = '$tipo_hab',
             `fecha_entrada` = '$fecha_entrada',
             `fecha_salida` = '$fecha_salida',
             `noches` = '$noches',

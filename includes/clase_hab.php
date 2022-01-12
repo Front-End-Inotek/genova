@@ -246,6 +246,55 @@
         }
         return $cantidad;
       }
+      // Seleccionar habitacion a asignar reservacion para checkin
+      function select_asignar_reservacion($tipo_hab){
+        $disponible= 0;
+        $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
+        FROM hab 
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.nombre";
+        $comentario="Seleccionar habitacion a asignar reservacion para checkin";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<div class="col-xs-6 col-sm-4 col-md-3 btn-herramientas estado estado" onclick="asignar_reservacion('.$tipo_hab.')">';//col-xs-4 col-sm-2 col-md-1
+            echo '<div class="estado estado0" onclick="asignar_reservacion('.$tipo_hab.')">';
+              echo '<div class="row">
+                <div class="col-sm-6">
+                  <div class="titulo_hab">';
+                    echo "Disponible";
+                  echo '</div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="imagen_hab">';
+                   echo '<span class="badge tama_num_hab">'.$fila['nom'].'</span>';
+                  echo '</div>
+                </div>
+              </div>';
+
+              echo '<div class="timepo_hab">';
+                echo '&nbsp';
+              echo '</div>';
+
+              echo '<div class="timepo_hab">';
+                echo '&nbsp';
+              echo '</div>';
+
+              echo '<div class="icono_hab">';
+                echo '<div><br></div>';    
+              echo '</div>';
+              
+            echo '</div>';
+          echo '</div>';
+          $disponible= 1;
+        }
+        if($disponible== 0){
+          echo '<div class="col-xs-12 col-sm-12 col-md-12 margen-1">';
+            echo "¡No existe disponibilidad en ese tipo de habitación!";
+          echo '</div>';
+        }
+      }
               
   }
 ?>

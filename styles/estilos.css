@@ -567,6 +567,18 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
+.estados{
+  background-color: #4d5255;
+  color: #272727;
+  padding: 20px;
+  border-radius: 10px;
+}
+.estados:hover{
+  background-color: #818e95;
+  color: #272727;
+  padding: 20px;
+  border-radius: 10px;
+}
 /*.estado0{
   background-color: #9F9F9F;
   color: #272727;
