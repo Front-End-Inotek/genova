@@ -325,7 +325,9 @@
         echo '<div class="row">
               <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huesped('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control-lg" autofocus="autofocus"/></div> 
         </div><br>';
-        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
+        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";
+        //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY id DESC LIMIT 15";
+        //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC LIMIT 15";
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo

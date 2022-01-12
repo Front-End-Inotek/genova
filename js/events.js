@@ -754,56 +754,56 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	
 
 	if(id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
-            if(cantidad_ocupacion <= cantidad_maxima){
-                //$('#boton_reservacion').hide();
+        if(cantidad_ocupacion <= cantidad_maxima){
+            //$('#boton_reservacion').hide();
 			    $("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
-                var datos = {
-                    "id_huesped": id_huesped,
-                    "fecha_entrada": fecha_entrada,
-                    "fecha_salida": fecha_salida, 
-                    "noches": noches,
-                    "numero_hab": numero_hab,
-                    "precio_hospedaje": precio_hospedaje,
-                    "cantidad_hospedaje": cantidad_hospedaje,
-                    "extra_adulto": extra_adulto,
-                    "extra_junior": extra_junior,
-                    "extra_infantil": extra_infantil,
-                    "extra_menor": extra_menor,
-                    "tarifa": tarifa,
-                    "nombre_reserva": nombre_reserva,
-                    "acompanante": acompanante,
-                    "forma_pago": forma_pago,
-                    "limite_pago": limite_pago,
-                    "suplementos": suplementos,
-                    "total_suplementos": total_suplementos,
-                    "total_hab": total_hab,
-                    "forzar_tarifa": forzar_tarifa,
-                    "descuento": descuento,
-                    "total": total,
-                    "total_pago": total_pago,
-                    "hab_id": hab_id,
-                    "usuario_id": usuario_id,
-                    };
-                $.ajax({
-                    async:true,
-                    type: "POST",
-                    dataType: "html",
-                    contentType: "application/x-www-form-urlencoded",
-                    url:"includes/guardar_reservacion.php",
-                    data:datos,
-                    beforeSend:loaderbar,
-                    success:ver_reservaciones,
-                    //success:problemas_sistema,
-                    timeout:5000,
-                    error:problemas_sistema
-                    });
-                    return false;
-                }else{
-                    alert("¡Cantidad máxima excedida de personas permitidas por el tipo de habitación!");
-                }
-            }else{
-                alert("Campos incompletos o descuento no permitido");
-            }
+            var datos = {
+                  "id_huesped": id_huesped,
+                  "fecha_entrada": fecha_entrada,
+                  "fecha_salida": fecha_salida, 
+                  "noches": noches,
+                  "numero_hab": numero_hab,
+                  "precio_hospedaje": precio_hospedaje,
+                  "cantidad_hospedaje": cantidad_hospedaje,
+                  "extra_adulto": extra_adulto,
+                  "extra_junior": extra_junior,
+                  "extra_infantil": extra_infantil,
+                  "extra_menor": extra_menor,
+                  "tarifa": tarifa,
+                  "nombre_reserva": nombre_reserva,
+                  "acompanante": acompanante,
+                  "forma_pago": forma_pago,
+                  "limite_pago": limite_pago,
+                  "suplementos": suplementos,
+                  "total_suplementos": total_suplementos,
+                  "total_hab": total_hab,
+                  "forzar_tarifa": forzar_tarifa,
+                  "descuento": descuento,
+                  "total": total,
+                  "total_pago": total_pago,
+                  "hab_id": hab_id,
+                  "usuario_id": usuario_id,
+                };
+            $.ajax({
+                  async:true,
+                  type: "POST",
+                  dataType: "html",
+                  contentType: "application/x-www-form-urlencoded",
+                  url:"includes/guardar_reservacion.php",
+                  data:datos,
+                  beforeSend:loaderbar,
+                  success:ver_reservaciones,
+                  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
+                });
+            return false;
+        }else{
+            alert("¡Cantidad máxima excedida de personas permitidas por el tipo de habitación!");
+        }
+    }else{
+        alert("Campos incompletos o descuento no permitido");
+    }
 }
 
 // Muestra las reservaciones de la bd
@@ -895,7 +895,7 @@ function calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_
 }
 
 // Editar una reservacion
-function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,id_cuenta){
+function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,id_cuenta,cantidad_maxima){
 	var usuario_id=localStorage.getItem("id");
 	var id_huesped= document.getElementById("id_huesped").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
@@ -906,6 +906,7 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 	var extra_junior= Number(document.getElementById("extra_junior").value);
 	var extra_infantil=Number(document.getElementById("extra_infantil").value);
 	var extra_menor= Number(document.getElementById("extra_menor").value);
+    var cantidad_ocupacion= extra_adulto + extra_junior + extra_infantil + extra_menor;
 	var tarifa= Number(document.getElementById("tarifa").value);
 	var nombre_reserva= encodeURI(document.getElementById("nombre_reserva").value);
 	var acompanante= encodeURI(document.getElementById("acompanante").value);
@@ -928,50 +929,54 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 
 
 	if(id >0 && id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago.length >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
-        //$('#boton_reservacion').hide();
-			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
-        var datos = {
-			  "id": id,
-			  "id_huesped": id_huesped,
-              "id_cuenta": id_cuenta,
-              "fecha_entrada": fecha_entrada,
-			  "fecha_salida": fecha_salida,
-			  "noches": noches,
-			  "numero_hab": numero_hab,
-			  "precio_hospedaje": precio_hospedaje,
-			  "cantidad_hospedaje": cantidad_hospedaje,
-			  "extra_adulto": extra_adulto,
-			  "extra_junior": extra_junior,
-			  "extra_infantil": extra_infantil,
-			  "extra_menor": extra_menor,
-			  "tarifa": tarifa,
-			  "nombre_reserva": nombre_reserva,
-			  "acompanante": acompanante,
-			  "forma_pago": forma_pago,
-			  "limite_pago": limite_pago,
-			  "suplementos": suplementos,
-			  "total_suplementos": total_suplementos,
-			  "total_hab": total_hab,
-			  "forzar_tarifa": forzar_tarifa,
-			  "descuento": descuento,
-			  "total": total,
-              "total_pago": total_pago,
-			  "usuario_id": usuario_id,
-            };
-        $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_reservacion.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:ver_reservaciones,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
-            });
-        return false;
+        if(cantidad_ocupacion <= cantidad_maxima){
+            //$('#boton_reservacion').hide();
+                $("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
+            var datos = {
+                "id": id,
+                "id_huesped": id_huesped,
+                "id_cuenta": id_cuenta,
+                "fecha_entrada": fecha_entrada,
+                "fecha_salida": fecha_salida,
+                "noches": noches,
+                "numero_hab": numero_hab,
+                "precio_hospedaje": precio_hospedaje,
+                "cantidad_hospedaje": cantidad_hospedaje,
+                "extra_adulto": extra_adulto,
+                "extra_junior": extra_junior,
+                "extra_infantil": extra_infantil,
+                "extra_menor": extra_menor,
+                "tarifa": tarifa,
+                "nombre_reserva": nombre_reserva,
+                "acompanante": acompanante,
+                "forma_pago": forma_pago,
+                "limite_pago": limite_pago,
+                "suplementos": suplementos,
+                "total_suplementos": total_suplementos,
+                "total_hab": total_hab,
+                "forzar_tarifa": forzar_tarifa,
+                "descuento": descuento,
+                "total": total,
+                "total_pago": total_pago,
+                "usuario_id": usuario_id,
+                };
+            $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/aplicar_editar_reservacion.php",
+                data:datos,
+                //beforeSend:loaderbar,
+                success:ver_reservaciones,
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
+                });
+            return false;
+        }else{
+            alert("¡Cantidad máxima excedida de personas permitidas por el tipo de habitación!");
+        }
     }else{
         alert("Campos incompletos o descuento no permitido");
     }    

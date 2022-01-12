@@ -56,7 +56,7 @@
             <input class="form-control" type="number"  id="extra_menor" placeholder="[0-5 años]" onchange="calcular_total('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
           </div>
           </div>
-          <div class="col-sm-4">1 menor de 9 años por habitación, excepto en SUITE, aplican restricciones</div>
+          <div class="col-sm-4">'.$leyenda.'</div>
         </div>
         <div class="row">
           <div class="col-sm-2">

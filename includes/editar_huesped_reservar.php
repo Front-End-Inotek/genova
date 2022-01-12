@@ -3,7 +3,7 @@
   include_once("clase_huesped.php");
   $huesped= NEW Huesped($_GET['id']);
   echo '
-      <div class="container div_container"><hr> 
+      <div class="div_container"><hr> 
         <div class="row div_oculto">
           <div class="col-sm-12 text-left"><h3 class="text-dark margen-1">DATOS HUÉSPED</h3></div>
           <div class="col-sm-2">Nombre:</div>
@@ -314,7 +314,7 @@
           </div>
           <div class="col-sm-2">
           <div id="boton_huesped">
-            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].','.$_GET['hab_id'].')">
+            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].')">
           </div>
           </div>
         </div> 
