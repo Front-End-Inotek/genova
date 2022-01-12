@@ -305,16 +305,20 @@
           <div class="form-group">
             <input class="form-control" type="text" id="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->cvv.'" maxlength="3">
           </div>
-          </div>
-          <div class="col-sm-4"></div>
-          <div class="col-sm-2">
+          </div>';
+          if($_GET['hab_id'] != -1){
+            echo '<div class="col-sm-4"></div>
+            <div class="col-sm-2">
+            <div id="boton_huesped">
+              <input type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].')">
+            </div>
+            </div>';
+          }else{
+            echo '<div class="col-sm-6"></div>';
+          }
+          echo '<div class="col-sm-2">
           <div id="boton_huesped">
-            <input type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].')">
-          </div>
-          </div>
-          <div class="col-sm-2">
-          <div id="boton_huesped">
-            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].')">
+            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].','.$_GET['hab_id'].')">
           </div>
           </div>
         </div> 

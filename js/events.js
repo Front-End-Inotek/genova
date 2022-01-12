@@ -699,7 +699,11 @@ function mostrar_datos(hab_id){
 // Ocultar los datos de un huesped en una reservacion
 function ocultar_datos(hab_id){
 	//$('.div_oculto').hide();
-    cambiar_adultos(hab_id);
+    if(hab_id != -1){
+        cambiar_adultos(hab_id);
+    }else{
+        cambiar_adultos_editar(hab_id);
+    }
 }
 
 // Guardar una reservacion
@@ -1037,6 +1041,12 @@ function regresar_editar_reservacion(){
     $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
 }
 
+// Modal de asignar una reservacion a una habitacion en estado disponible
+function asignar_reservacion(id){
+    var usuario_id=localStorage.getItem("id");
+	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&usuario_id="+usuario_id);
+}
+
 //* Huesped *//
 
 // Agregar un huesped
@@ -1219,7 +1229,7 @@ function modificar_huesped(id,hab_id){
                     url:"includes/aplicar_editar_huesped.php",
                     data:datos,
                     //beforeSend:loaderbar,
-                    success:cambiar_adultos,
+                    success:cambiar_adultos,//editar
                     //success:problemas_sistema,
                     timeout:5000,
                     error:problemas_sistema

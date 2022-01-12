@@ -8,6 +8,7 @@
       public $id_usuario;
       public $id_huesped;
       public $id_cuenta;
+      public $tipo_hab;
       public $fecha_entrada;
       public $fecha_salida;
       public $noches;
@@ -40,6 +41,7 @@
           $this->id_usuario= 0;
           $this->id_huesped= 0;
           $this->id_cuenta= 0;
+          $this->tipo_hab= 0;
           $this->fecha_entrada= 0;
           $this->fecha_salida= 0;
           $this->noches= 0;
@@ -73,6 +75,7 @@
               $this->id_usuario= $fila['id_usuario'];
               $this->id_huesped= $fila['id_huesped'];
               $this->id_cuenta= $fila['id_cuenta'];
+              $this->tipo_hab= $fila['tipo_hab'];
               $this->fecha_entrada= $fila['fecha_entrada'];
               $this->fecha_salida= $fila['fecha_salida'];
               $this->noches= $fila['noches'];
@@ -159,6 +162,7 @@
       function mostrar($posicion,$id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
+        $agregar = $usuario->reservacion_agregar;
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
 
@@ -209,8 +213,11 @@
             <th>Total Estancia</th>
             <th>Total Pago</th>
             <th>Forma Pago</th>
-            <th>Límite Pago</th>
-            <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
+            <th>Límite Pago</th>';
+            if($agregar==1){
+              echo '<th><span class=" glyphicon glyphicon-cog"></span> Checkin</th>';
+            }
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
@@ -251,8 +258,11 @@
                 }
                 echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
                 echo '<td>'.$fila['descripcion'].'</td>';  
-                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>
-                <td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';  
+                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';  
+                if($agregar==1){
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="asignar_reservacion('.$fila['ID'].')"> Asignar</button></td>';
+                }
+                echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';  
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
                 }

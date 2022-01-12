@@ -82,3 +82,4 @@ VERSION 1.6
 -Cambiar color de chaflan en subestado
 -Cambiar los colores de fondo y nombre del sistema
 -Cambiar menu y funcion agregar reservacion
+-Agregar boton asignar para realizar checkin con una reservacion previa

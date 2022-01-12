@@ -21,6 +21,7 @@
   $precio_hab= $precio_hospedaje * $_GET['noches'] * $_GET['numero_hab'];
   $cantidad_maxima= $tarifa->cantidad_maxima;
   $leyenda= $tarifa->leyenda;
+  $tipo_hab= $_GET['tarifa'];
   echo '
       <div class="container blanco"> 
         <div class="row div_adultos">
@@ -164,7 +165,7 @@
           <div class="col-sm-10"></div>
           <div class="col-sm-2">
           <div id="boton_reservacion">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].','.$cantidad_maxima.')">
+            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].','.$cantidad_maxima.','.$tipo_hab.')">
           </div>
           </div>
         </div>

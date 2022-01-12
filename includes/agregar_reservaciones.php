@@ -10,9 +10,13 @@
     $hab_id= $_GET['hab_id'];
   }
   echo '
-      <div class="container blanco"> 
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR RESERVACION</h2></div>
-        <div class="row">
+      <div class="container blanco">';
+        if($hab_id != 0){
+          echo '<div class="col-sm-12 text-left"><h2 class="text-dark margen-1">HACER CHECKIN</h2></div>';
+        }else{
+          echo '<div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR RESERVACION</h2></div>';
+        }
+        echo '<div class="row">
           <div class="col-sm-2">Fecha Entrada:</div>
           <div class="col-sm-3">
           <div class="form-group">

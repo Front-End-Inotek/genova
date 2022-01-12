@@ -24,6 +24,7 @@
   $precio_hab= $precio_hospedaje * $_GET['noches'] * $_GET['numero_hab'];
   $cantidad_maxima= $tarifa->cantidad_maxima;
   $leyenda= $tarifa->leyenda;
+  $tipo_hab= $_GET['tarifa'];
   echo '
       <div class="container blanco"> 
         <div class="row div_adultos_editar">
@@ -86,7 +87,7 @@
         <div class="row">
           <div class="col-sm-8 div_datos">Presiona este botón si deseas ver los datos del huésped previamente asignado:</div>
           <div class="col-sm-3">
-            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos(0)">Ver Datos</button>
+            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos(-1)">Ver Datos</button>
           </div>
           <div class="col-sm-1"></div>
         </div>
@@ -164,7 +165,7 @@
           <div class="col-sm-9"></div>
           <div class="col-sm-2">
           <div id="boton_tipo">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_reservacion('.$_GET['id'].','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$id_cuenta.','.$cantidad_maxima.')">
+            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_reservacion('.$_GET['id'].','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$id_cuenta.','.$cantidad_maxima.','.$tipo_hab.')">
           </div>
           </div>
           <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_reservacion()"> ←</button></div>

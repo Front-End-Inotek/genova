@@ -3,7 +3,7 @@
   include_once("clase_usuario.php");
   include_once("clase_hab.php");
   $usuario = NEW Usuario(0);
-  $hab= NEW  hab($_GET['hab_id']);
+  $hab= NEW Hab($_GET['hab_id']);
   echo '
   <!-- Modal content-->
   <div class="modal-content">
