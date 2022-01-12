@@ -83,3 +83,7 @@ VERSION 1.6
 -Cambiar los colores de fondo y nombre del sistema
 -Cambiar menu y funcion agregar reservacion
 -Agregar boton asignar para realizar checkin con una reservacion previa
+
+VERSION 1.7
+-Generar rama asignar_checkin
+-Cambios por forzar tarifa en una reservacion
