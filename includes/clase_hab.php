@@ -246,9 +246,23 @@
         }
         return $cantidad;
       }
+      // Consultar disponibilidad de un tipo de habitacion para hacer checkin
+      function consultar_disponibilidad($tipo_hab){
+        $cantidad=0;
+        $sentencia = "SELECT *,count(hab.id) AS cantidad,hab.nombre AS nom,tipo_hab.nombre AS habitacion
+        FROM hab 
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.nombre";
+        $comentario="Consultar disponibilidad de un tipo de habitacion para hacer checkin";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+        return $cantidad;
+      }
       // Seleccionar habitacion a asignar reservacion para checkin
-      function select_asignar_reservacion($tipo_hab,$id_reservacion,$numero_hab){
-        $disponible= 0;
+      function select_asignar_reservacion($tipo_hab,$id_reservacion){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.nombre";
@@ -286,17 +300,6 @@
               echo '</div>';
               
             echo '</div>';
-          echo '</div>';
-          $disponible++;
-        }
-        if($disponible == 0){
-          echo '<div class="col-xs-12 col-sm-12 col-md-12 margen-1">';
-            echo "¡No existe disponibilidad en ese tipo de habitación!";
-          echo '</div>';
-        }
-        if($disponible < $numero_hab && $disponible > 1){
-          echo '<div class="col-xs-12 col-sm-12 col-md-12 margen-1">';
-            echo "¡No existen ".$numero_hab." habitaciones disponibles en ese tipo de habitación!";
           echo '</div>';
         }
       }

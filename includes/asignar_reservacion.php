@@ -35,4 +35,11 @@
   $cantidad_visitas= $visitas_actuales + $visitas;
   $huesped->modificar_visitas($reservacion->id_huesped,$cantidad_visitas);
   $logs->guardar_log($_POST['usuario_id'],"Asignar reservacion ". $_POST['id_reservacion']. " para hacer checkin en habitacion: ". $hab->nombre); 
+
+  if($_POST['hab_id'] > 1){
+    $habitaciones= $_POST['hab_id'] - 1;
+    echo "<script>";
+      echo "select_asignar_reservacion_multiple('$_POST['id_reservacion']','$habitaciones);";
+    echo "</script>";
+  }
 ?>

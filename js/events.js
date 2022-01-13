@@ -1084,6 +1084,11 @@ function asignar_reservacion(hab_id,id_reservacion){
 	return false;
 }
 
+// Modal de asignar mas de una habitacion a una reservacion
+function select_asignar_reservacion_multiple(id,numero_hab){
+	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
+}
+
 //* Huesped *//
 
 // Agregar un huesped
