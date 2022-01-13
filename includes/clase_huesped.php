@@ -423,6 +423,14 @@
           </table>
         </div>';
       }
+      // Agregamos las visitas correspondientes al checkin realizado
+      function modificar_visitas($id,$cantidad_visitas){
+        $sentencia = "UPDATE `huesped` SET
+        `visitas` = '$cantidad_visitas'
+        WHERE `id` = '$id';";
+        $comentario="Agregamos las visitas correspondientes al checkin realizado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
              
   }
 ?>

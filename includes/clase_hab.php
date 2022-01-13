@@ -258,7 +258,7 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '<div class="col-xs-6 col-sm-4 col-md-3 btn-herramientas estado estado">';
-            echo '<div class="estado estado0" onclick="asignar_reservacion('.$fila['id'].','.$id_reservacion.')">';
+            echo '<div class="estado estado0" onclick="asignar_reservacion('.$fila['ID'].','.$id_reservacion.')">';
               echo '<div class="row">
                 <div class="col-sm-6">
                   <div class="titulo_hab">';

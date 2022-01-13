@@ -8,7 +8,6 @@
   $hab = NEW Hab($_POST['hab_id']);
   $movimiento = NEW Movimiento($hab->mov);
   $logs = NEW Log(0);
-  $cambio_id= 0;
   // No se consideran los suplementos
   if($_POST['descuento']>0){
     $descuento= $_POST['descuento'] / 100;

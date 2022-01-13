@@ -310,11 +310,17 @@
             echo '<div class="col-sm-4"></div>
             <div class="col-sm-2">
             <div id="boton_huesped">
-              <input type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].')">
+              <input type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].','.$_GET['id_reservacion'].')">
             </div>
             </div>';
           }else{
-            echo '<div class="col-sm-6"></div>';
+            //echo '<div class="col-sm-6"></div>'; Para ocultar en editar
+            echo '<div class="col-sm-4"></div>
+            <div class="col-sm-2">
+            <div id="boton_huesped">
+              <input type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].','.$_GET['id_reservacion'].')">
+            </div>
+            </div>';
           }
           echo '<div class="col-sm-2">
           <div id="boton_huesped">

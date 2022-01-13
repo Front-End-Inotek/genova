@@ -2,10 +2,12 @@
 	date_default_timezone_set('America/Mexico_City');
   include_once("clase_reservacion.php");
   include_once("clase_hab.php");
+  include_once("clase_huesped.php");
   include_once("clase_movimiento.php");
   include_once('clase_log.php');
   $reservacion= NEW Reservacion($_POST['id_reservacion']);
   $hab = NEW Hab($_POST['hab_id']);
+  $huesped = NEW Huesped($reservacion->id_huesped);
   $movimiento = NEW Movimiento($hab->mov);
   $logs = NEW Log(0);
   $cambio_id= 0;
@@ -22,9 +24,15 @@
     }
   }
  
-  $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$reservacion->id_huesped,$reservacion->noches,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->extra_adulto,$reservacion->extra_junior,$reservacion->extra_infantil,$reservacion->extra_menor,$reservacion->tarifa,$reservacion->nombre_reserva,$reservacion->descuento,$total,$reservacion->total_pago);
+  $id_movimiento= $movimiento->disponible_asignar($_POST['id_reservacion'],$_POST['hab_id'],$reservacion->id_huesped,$reservacion->noches,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->extra_adulto,$reservacion->extra_junior,$reservacion->extra_infantil,$reservacion->extra_menor,$reservacion->tarifa,$reservacion->nombre_reserva,$reservacion->descuento,$total,$reservacion->total_pago);
   $mov_actual= $movimiento->ultima_insercion();
   $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
-  $logs->guardar_log($_GET['usuario_id'],"Asignar reservación ". $_POST['id_reservacion']. " para hacer checkin en habitacion: ". $hab->nombre);  
-  //++visita
+  $reservacion->modificar_estado($_POST['id_reservacion'],2); 
+  $noches= $reservacion->noches;
+  $cantidad_hab= $reservacion->numero_hab;
+  $visitas_actuales= $huesped->visitas;
+  $visitas= $noches * $cantidad_hab;
+  $cantidad_visitas= $visitas_actuales + $visitas;
+  $huesped->modificar_visitas($reservacion->id_huesped,$cantidad_visitas);
+  $logs->guardar_log($_POST['usuario_id'],"Asignar reservacion ". $_POST['id_reservacion']. " para hacer checkin en habitacion: ". $hab->nombre); 
 ?>

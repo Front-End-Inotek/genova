@@ -700,12 +700,12 @@ function mostrar_datos(hab_id,id_reservacion){
 }
 
 // Ocultar los datos de un huesped en una reservacion
-function ocultar_datos(hab_id){
+function ocultar_datos(hab_id,id_reservacion){
 	//$('.div_oculto').hide();
     if(hab_id != -1){
         cambiar_adultos(hab_id);
     }else{
-        cambiar_adultos_editar(hab_id);
+        cambiar_adultos_editar(id_reservacion);
     }
 }
 

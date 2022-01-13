@@ -2,13 +2,16 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_cuenta.php");
   include_once("clase_hab.php");
-  include_once("clase_reservacion.php");
   include_once("clase_tarifa.php");
+  include_once("clase_movimiento.php");
+  include_once("clase_reservacion.php");
   $cuenta= NEW Cuenta(0);
   $hab= NEW Hab($_GET['hab_id']);
-  $reservacion= NEW Reservacion($_GET['hab_id']);
   $tarifa= NEW Tarifa(0);
-  $consulta = $reservacion->datos_reservacion($_GET['hab_id']);
+  $movimiento= NEW Movimiento($hab->mov);
+  $id_reservacion= $movimiento->saber_id_reservacion($hab->mov);
+  $reservacion= NEW Reservacion($id_reservacion);
+  $consulta = $reservacion->datos_reservacion($id_reservacion);
   while ($fila = mysqli_fetch_array($consulta))
   {
       $id_hab= $fila['ID'];
@@ -41,11 +44,8 @@
       }else{
         $descuento= 'Ninguno'; 
       }
-      if($fila['forzar_tarifa']>0){
-        $total_estancia= $fila['forzar_tarifa']; 
-      }else{
-        $total_estancia= $fila['total']; 
-      }
+      // Total provisional
+      $total_estancia= $fila['total']; 
       $total_pago= $fila['total_pago'];
       $forma_pago= $fila['descripcion'];
       $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
@@ -71,11 +71,15 @@
   echo '
       <div class="container blanco"> 
         <div class="row">
-          <div class="col-sm-6 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$id_hab.'</h2></div>';
+          <div class="col-sm-6 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$hab->nombre.'</h2></div>';
           if($faltante == 0){
             echo '<div class="col-sm-6 text-right"></div>';
           }else{
-            echo '<div class="col-sm-6 text-right"><h5 class="text-dark margen-1">Saldo Total '.$faltante_mostrar.'</h5></div>';
+            if($faltante > 0){
+              echo '<div class="col-sm-6 text-right"><h5 class="text-dark margen-1">Saldo Total '.$faltante_mostrar.'</h5></div>';
+            }else{
+              echo '<div class="col-sm-6 text-right"><h5 class="text-danger margen-1">Saldo Total '.$faltante_mostrar.'</h5></div>';
+            }
           }
         echo '</div>
         <div class="row">
@@ -118,8 +122,8 @@
         echo '</div><br>
 
         <div class="row">
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$total_cargos= $cuenta->mostrar_cargos($mov,$id_hab,$_GET['hab_id'],$_GET['estado']);echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,$id_hab,$_GET['hab_id'],$_GET['estado']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado']);echo '</div>
         </div>'; 
 
         $total_faltante= $total_abonos - $total_cargos;

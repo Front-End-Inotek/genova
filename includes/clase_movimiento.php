@@ -240,26 +240,27 @@
         }
         return $detalle_realiza;
       }
+      // Obtener el id de reservacion de un movimiento
+      function saber_id_reservacion($id){
+        $id_reservacion= 0;
+        $sentencia = "SELECT id_reservacion FROM movimiento WHERE id = $id LIMIT 1";
+        $comentario="Obtener el id de reservacion de un movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_reservacion= $fila['id_reservacion'];
+        }
+        return $id_reservacion;
+      }
       // Agregar una reservacion en la habitacion
       function disponible_asignar($mov,$hab_id,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total,$total_pago){
-        $fecha_entrada= strtotime($fecha_entrada);
-        $fecha_salida= strtotime($fecha_salida);
+        //$fecha_entrada= strtotime($fecha_entrada);
+        //$fecha_salida= strtotime($fecha_salida);
         //$inicio=time();
-        $hora=date("G");
-        if($hora<7){
-          $horaactual=strtotime(date("Y/n/j")." 12:00");
-        }else{
-          $horaactual=strtotime(date("Y/n/j")." 12:00");
-          $horaactual=$horaactual+86400;
-        }
         
-        //$fin=  $inicio+($tiempo*60*60);
-        if($noches>1){
-          $horaactual= $horaactual+($noches*86400);
-        }
-        //echo $fin;
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
-        VALUES ('$hab_id', '$id_huesped', '$hab_id', '$fecha_entrada', '$fecha_salida', '0', '0', '$usuario_id', '0', '0', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '$total', '$total_pago', '0', '0', '0', '0', 'reservar', '', 'sin estado');";
+        VALUES ('$hab_id', '$id_huesped', '$mov', '$fecha_entrada', '$fecha_salida', '0', '0', '$usuario_id', '0', '0', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '0', '$total_pago', '0', '0', '0', '0', 'reservar', '', 'sin estado');";
         $comentario="Agregar una reservacion en la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       

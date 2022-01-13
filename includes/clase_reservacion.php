@@ -491,14 +491,13 @@
         </div>';
       }
       // Editar una reservacion
-      function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$descuento,$total,$total_pago){
+      function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$forzar_extra,$descuento,$total,$total_pago){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         $sentencia = "UPDATE `reservacion` SET
             `id_huesped` = '$id_huesped',
             `tipo_hab` = '$tipo_hab',
             `fecha_entrada` = '$fecha_entrada',
-            `fecha_salida` = '$fecha_salida',
             `noches` = '$noches',
             `numero_hab` = '$numero_hab',
             `precio_hospedaje` = '$precio_hospedaje',
@@ -516,6 +515,7 @@
             `total_suplementos` = '$total_suplementos',
             `total_hab` = '$total_hab',
             `forzar_tarifa` = '$forzar_tarifa',
+            `forzar_extra` = '$forzar_extra',
             `descuento` = '$descuento',
             `total` = '$total',
             `total_pago` = '$total_pago'
@@ -540,6 +540,14 @@
         $comentario="Poner estado de una reservacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Modificar estado de una reservacion
+      function modificar_estado($id,$estado){
+        $sentencia = "UPDATE `reservacion` SET
+        `estado` = '$estado'
+        WHERE `id` = '$id';";
+        $comentario="Poner nuevo estado de una reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Mostramos el pago
       function mostrar_nombre_pago($id){ 
         $sentencia = "SELECT limite_pago FROM pago WHERE id = $id LIMIT 1";
@@ -560,7 +568,7 @@
         INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
-        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND reservacion.estado = 1 ORDER BY reservacion.id DESC";
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND reservacion.estado = 2 ORDER BY reservacion.id DESC";
         $comentario="Mostrar los datos de la reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

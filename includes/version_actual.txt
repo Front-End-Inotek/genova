@@ -87,3 +87,4 @@ VERSION 1.6
 VERSION 1.7
 -Generar rama asignar_checkin
 -Cambios por forzar tarifa en una reservacion
+-Cambios para poder hacer checkin con una reservacion

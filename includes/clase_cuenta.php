@@ -280,7 +280,7 @@
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td> 
                     <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🔧</button></td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
@@ -288,7 +288,7 @@
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td> 
                     <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-outline-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> 🛠️</button></td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> ✏️ Editar</button></td>
                     </tr>';
                   }
                 }else{
@@ -348,7 +348,7 @@
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td> 
                     <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> ⚙️</button></td>
+                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
@@ -356,7 +356,7 @@
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td> 
                     <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-outline-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> 🛠️</button></td>
+                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> ✏️ Editar</button></td>
                     </tr>';
                   }
                 }else{
