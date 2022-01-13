@@ -263,7 +263,7 @@
                 echo '<td>'.$fila['descripcion'].'</td>';  
                 echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</.$fila>';  
                 if($agregar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].')"> Asignar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
                 }
                 echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';  
                 if($editar==1){

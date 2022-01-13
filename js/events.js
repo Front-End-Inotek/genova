@@ -889,6 +889,7 @@ function calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_
 	var suplementos= encodeURI(document.getElementById("suplementos").value);
 	var total_suplementos= Number(document.getElementById("total_suplementos").value);
 	var descuento= Number(document.getElementById("descuento").value);
+    //var total_pago= Number(document.getElementById("total_pago").value);
     
 	var total_hospedaje= precio_hospedaje * noches * numero_hab;
 	var total_adulto= total_adulto * extra_adulto;
@@ -1054,8 +1055,8 @@ function regresar_editar_reservacion(){
 }
 
 // Modal de asignar una reservacion a una habitacion en estado disponible
-function select_asignar_reservacion(id){
-	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id);
+function select_asignar_reservacion(id,numero_hab){
+	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
 }
 
 // Mandar una habitacion a estado limpieza

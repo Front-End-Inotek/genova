@@ -247,7 +247,7 @@
         return $cantidad;
       }
       // Seleccionar habitacion a asignar reservacion para checkin
-      function select_asignar_reservacion($tipo_hab,$id_reservacion){
+      function select_asignar_reservacion($tipo_hab,$id_reservacion,$numero_hab){
         $disponible= 0;
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
@@ -287,11 +287,16 @@
               
             echo '</div>';
           echo '</div>';
-          $disponible= 1;
+          $disponible++;
         }
-        if($disponible== 0){
+        if($disponible == 0){
           echo '<div class="col-xs-12 col-sm-12 col-md-12 margen-1">';
             echo "¡No existe disponibilidad en ese tipo de habitación!";
+          echo '</div>';
+        }
+        if($disponible < $numero_hab && $disponible > 1){
+          echo '<div class="col-xs-12 col-sm-12 col-md-12 margen-1">';
+            echo "¡No existen ".$numero_hab." habitaciones disponibles en ese tipo de habitación!";
           echo '</div>';
         }
       }
