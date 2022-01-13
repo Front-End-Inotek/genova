@@ -28,6 +28,7 @@
       public $total_suplementos;
       public $total_hab;
       public $forzar_tarifa;
+      public $forzar_extra;
       public $descuento;
       public $total;
       public $total_pago;
@@ -61,6 +62,7 @@
           $this->total_suplementos= 0;
           $this->total_hab= 0;
           $this->forzar_tarifa= 0;
+          $this->forzar_extra= 0;
           $this->descuento= 0;
           $this->total= 0;
           $this->total_pago= 0;
@@ -95,6 +97,7 @@
               $this->total_suplementos= $fila['total_suplementos'];
               $this->total_hab= $fila['total_hab'];
               $this->forzar_tarifa= $fila['forzar_tarifa'];
+              $this->forzar_extra= $fila['forzar_extra'];
               $this->descuento= $fila['descuento'];
               $this->total= $fila['total'];
               $this->total_pago= $fila['total_pago'];
