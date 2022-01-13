@@ -318,7 +318,7 @@
           }
           echo '<div class="col-sm-2">
           <div id="boton_huesped">
-            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].','.$_GET['hab_id'].')">
+            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['id_reservacion'].')">
           </div>
           </div>
         </div> 

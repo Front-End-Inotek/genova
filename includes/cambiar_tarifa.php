@@ -116,7 +116,7 @@
         <div class="row">
           <div class="col-sm-8 div_datos">Presiona este botón si deseas ver los datos del huésped previamente asignado:</div>
           <div class="col-sm-3">
-            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos('.$_GET['hab_id'].')">Ver Datos</button>
+            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos('.$_GET['hab_id'].',0)">Ver Datos</button>
           </div>
           <div class="col-sm-1"></div>
         </div>

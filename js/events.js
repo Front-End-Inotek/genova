@@ -689,14 +689,14 @@ function aceptar_asignar_huesped(id,funcion,precio_hospedaje,total_adulto,total_
 }
 
 // Mostrar u ocultar los datos de un huesped en una reservacion
-function mostrar_datos(hab_id){
+function mostrar_datos(hab_id,id_reservacion){
 	$('.div_datos').hide();
 	$('.boton_datos').hide();
 	//$('.div_oculto').show();
 	var id_huesped= document.getElementById("id_huesped").value;
 	var id= id_huesped;
 	$(".div_oculto").html('<div class="spinner-border text-primary"></div>');
-    $(".div_oculto").load("includes/editar_huesped_reservar.php?id="+id+"&hab_id="+hab_id);  
+    $(".div_oculto").load("includes/editar_huesped_reservar.php?id="+id+"&hab_id="+hab_id+"&id_reservacion="+id_reservacion);  
 }
 
 // Ocultar los datos de un huesped en una reservacion
@@ -865,7 +865,7 @@ function editar_reservacion(id){
 
 // Conseguimos la cantidad de adultos permitidos por tarifa hospedaje al editarla
 function cambiar_adultos_editar(id){
-    var tarifa= document.getElementById("tarifa").value;
+    var tarifa= document.getElementById("tarifa").value; 
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
@@ -1194,7 +1194,7 @@ function editar_huesped(id){
 }
 
 // Editar un huesped
-function modificar_huesped(id,hab_id){
+function modificar_huesped(id,hab_id,id_reservacion){
 	var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
     var apellido= encodeURI(document.getElementById("apellido").value);
@@ -1221,6 +1221,8 @@ function modificar_huesped(id,hab_id){
 			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
         var datos = {
 			  "id": id,
+              "hab_id": hab_id,
+              "id_reservacion": id_reservacion,
               "nombre": nombre,
               "apellido": apellido,
               "direccion": direccion,
@@ -1257,20 +1259,37 @@ function modificar_huesped(id,hab_id){
                 });
             return false;      
         }else{
-            $.ajax({
-                    async:true,
-                    type: "POST",
-                    dataType: "html",
-                    contentType: "application/x-www-form-urlencoded",
-                    url:"includes/aplicar_editar_huesped.php",
-                    data:datos,
-                    //beforeSend:loaderbar,
-                    success:cambiar_adultos,//editar
-                    //success:problemas_sistema,
-                    timeout:5000,
-                    error:problemas_sistema
-                });
-            return false; 
+            if(id_reservacion == 0){
+                $.ajax({
+                        async:true,
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/x-www-form-urlencoded",
+                        url:"includes/aplicar_editar_huesped.php",
+                        data:datos,
+                        //beforeSend:loaderbar,
+                        success:cambiar_adultos,
+                        //success:problemas_sistema,
+                        timeout:5000,
+                        error:problemas_sistema
+                    });
+                return false; 
+            }else{
+                $.ajax({
+                        async:true,
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/x-www-form-urlencoded",
+                        url:"includes/aplicar_editar_huesped.php",
+                        data:datos,
+                        //beforeSend:loaderbar,
+                        success:cambiar_adultos_editar,
+                        //success:problemas_sistema,
+                        timeout:5000,
+                        error:problemas_sistema
+                    });
+                return false; 
+            }
         }    
     }else{
         alert("Campos incompletos o descuento no permitido");
