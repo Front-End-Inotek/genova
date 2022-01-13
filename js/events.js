@@ -610,8 +610,10 @@ function cambiar_adultos(hab_id){
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
 	var numero_hab= document.getElementById("numero_hab").value;
+    var forzar_tarifa= document.getElementById("forzar_tarifa").value;
+    var forzar_extra= document.getElementById("forzar_extra").value;
     $(".div_adultos").html('<div class="spinner-border text-primary"></div>');
-    $(".div_adultos").load("includes/cambiar_tarifa.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id);  
+    $(".div_adultos").load("includes/cambiar_tarifa.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id+"&forzar_tarifa="+forzar_tarifa+"&forzar_extra="+forzar_extra);  
     //alert("Cambiando tarifa "+tarifa);
 }
 
@@ -635,11 +637,12 @@ function calcular_total(precio_hospedaje,total_adulto,total_junior,total_infanti
 	var total_infantil= total_infantil * extra_infantil;
 
 	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
-	var total= total_hab + total_suplementos;
+	//var total= total_hab + total_suplementos;
+    var total= total_hab;
 	var calculo_descuento= descuento_total(total,descuento);
 	calculo_descuento= redondearDecimales(calculo_descuento,2);
 	document.getElementById("total_hab").value= total_hab;
-	document.getElementById("total").value= calculo_descuento;
+	document.getElementById("total").value= calculo_descuento + total_suplementos;
 }
 
 // Realiza un descuento de nuestros calculos
@@ -727,6 +730,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	var suplementos= encodeURI(document.getElementById("suplementos").value);
 	var total_suplementos= Number(document.getElementById("total_suplementos").value);
 	var forzar_tarifa= Number(document.getElementById("forzar_tarifa").value);
+    var forzar_extra= Number(document.getElementById("forzar_extra").value);
 	var descuento= Number(document.getElementById("descuento").value);
     var total_pago= Number(document.getElementById("total_pago").value);
 	var total_hospedaje= precio_hospedaje * noches * numero_hab;
@@ -734,7 +738,8 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	var total_junior= total_junior * extra_junior;
 	var total_infantil= total_infantil * extra_infantil;
 	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
-	var total= total_hab + total_suplementos;
+	//var total= total_hab + total_suplementos;
+    var total= total_hab;
 	var calculo_descuento= descuento_total(total,descuento);
 	calculo_descuento= redondearDecimales(calculo_descuento,2);
 	total= calculo_descuento;
@@ -782,6 +787,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
                   "total_suplementos": total_suplementos,
                   "total_hab": total_hab,
                   "forzar_tarifa": forzar_tarifa,
+                  "forzar_extra": forzar_extra,
                   "descuento": descuento,
                   "total": total,
                   "total_pago": total_pago,

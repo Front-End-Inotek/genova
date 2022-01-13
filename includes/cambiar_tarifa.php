@@ -14,10 +14,42 @@
   $precio_adulto= 0;
   $precio_junior= 0;
   $precio_infantil= 0;
-  $precio_hospedaje= $tarifa->precio_hospedaje;
-  $precio_adulto= $tarifa->precio_adulto;
-  $precio_junior= $tarifa->precio_junior;
-  $precio_infantil= $tarifa->precio_infantil;
+
+  // Checar si forzar tarifa esta vacia o no
+  if (empty($_GET['forzar_tarifa'])){
+    //echo 'La variable esta vacia';
+    $forzar_tarifa= 0;
+  }else{
+    $forzar_tarifa= $_GET['forzar_tarifa'];
+  }
+  // Checar si forzar extra esta vacia o no
+  if (empty($_GET['forzar_extra'])){
+    //echo 'La variable esta vacia';
+    $forzar_extra= 0;
+  }else{
+    $forzar_extra= $_GET['forzar_extra'];
+  }
+
+  // Reajuste al forzar tarifa
+  if($forzar_tarifa <= 0){
+    $precio_hospedaje= $tarifa->precio_hospedaje;
+  }else{
+    $precio_hospedaje= $forzar_tarifa;
+  }
+  // Reajuste al forzar extra
+  if($forzar_extra <= 0){
+    $precio_adulto= $tarifa->precio_adulto;
+    $precio_junior= $tarifa->precio_junior;
+    $precio_infantil= $tarifa->precio_infantil;
+  }else{
+    $precio_adulto= $forzar_extra;
+    $precio_junior= $forzar_extra;
+    $precio_infantil= $forzar_extra;
+  }
+ 
+  $precio_adulto= $precio_adulto * $_GET['noches'];
+  $precio_junior= $precio_junior * $_GET['noches'];
+  $precio_infantil= $precio_infantil * $_GET['noches'];
   $precio_hab= $precio_hospedaje * $_GET['noches'] * $_GET['numero_hab'];
   $cantidad_maxima= $tarifa->cantidad_maxima;
   $leyenda= $tarifa->leyenda;

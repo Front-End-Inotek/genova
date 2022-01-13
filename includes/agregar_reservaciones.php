@@ -53,7 +53,22 @@
             </select>
           </div>
           </div>
-          <div class="col-sm-8"></div>
+          <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">Forzar Tarifa:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="forzar_tarifa" placeholder="0" onchange="cambiar_adultos('.$hab_id.')">
+          </div>
+          </div>
+          <div class="col-sm-2">Forzar Extra:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="forzar_extra" placeholder="0" onchange="cambiar_adultos('.$hab_id.')">
+          </div>
+          </div>
+          <div class="col-sm-4"></div>
         </div>
         <div class="row div_adultos"></div>';
           // Div adultos donde van resto de los datos para agregar una reservacion
