@@ -1041,6 +1041,37 @@ function borrar_reservacion(id){
     }
 }
 
+// Modal de cancelar una reservacion
+function aceptar_cancelar_reservacion(id){
+	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id);
+}
+
+// Cancelar una reservacion
+function cancelar_reservacion(id){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+    if (id >0) {
+        var datos = {
+                "id": id,
+                "usuario_id": usuario_id,
+            };
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/cancelar_reservacion.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:ver_reservaciones,
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }
+}
+
 // Modal de borrar una reservacion
 function aceptar_borrar_reservacion(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_reservacion.php?id="+id);

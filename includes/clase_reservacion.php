@@ -222,6 +222,7 @@
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
             if($borrar==1 && $fila['edo'] != 0){
+              echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
               echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
             }
             echo '</tr>
@@ -261,6 +262,7 @@
                   echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1 && $fila['edo'] != 0){
+                  echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
@@ -324,6 +326,7 @@
                   echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
                 }
                 if($borrar==1 && $fila['edo'] != 0){
+                  echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
                   echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
                 }
                 echo '</tr>
@@ -427,6 +430,7 @@
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
               }
               if($borrar==1 && $fila['edo'] != 0){
+                echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
               }
               echo '</tr>

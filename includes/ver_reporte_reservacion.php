@@ -14,10 +14,10 @@
               <div class="col-sm-1"></div>
               <div class="col-sm-2">
               <div id="boton_reservacion">
-                <input type="submit" class="btn btn-primary btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">
+                <input type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">
               </div>
               </div>
-              <div class="col-sm-1"></div>
+              <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_reservacion()"> ←</button></div>
             </div>';
             $consulta= $reservacion->datos_reservacion($_GET['id']);
             while ($fila = mysqli_fetch_array($consulta))
