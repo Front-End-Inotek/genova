@@ -106,21 +106,24 @@
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$forzar_extra,$descuento,$total,$total_pago,$hab_id,$usuario_id){
+      function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$forzar_extra,$descuento,$total,$total_pago,$hab_id,$usuario_id,$cuenta){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
-        //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
-        $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-        VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_suplementos', '$total_pago', '1');";
-        $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $id_cuenta= 0;
+        if($cuenta== 1){
+          //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
+          $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+          VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_suplementos', '$total_pago', '1');";
+          $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
 
-        $sentencia = "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
-        $comentario="Obtengo el id de la cuenta agregada";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $id_cuenta= $fila['id'];
+          $sentencia = "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
+          $comentario="Obtengo el id de la cuenta agregada";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            $id_cuenta= $fila['id'];
+          }
         }
         
         $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `forzar_extra`, `descuento`, `total`, `total_pago`, `estado`)
@@ -546,6 +549,14 @@
         `estado` = '$estado'
         WHERE `id` = '$id';";
         $comentario="Poner nuevo estado de una reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Modificar id_cuenta de una reservacion
+      function modificar_id_cuenta($id,$id_cuenta){
+        $sentencia = "UPDATE `reservacion` SET
+        `id_cuenta` = '$id_cuenta'
+        WHERE `id` = '$id';";
+        $comentario="Poner nuevo id cuenta de una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Mostramos el pago

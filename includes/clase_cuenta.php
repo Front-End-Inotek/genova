@@ -545,6 +545,30 @@
         }
         return $abonos;
       }
+      function reservacion_cuenta($usuario_id,$id_movimiento,$forma_pago,$total_suplementos,$total_pago){
+        $fecha=time();
+        $id_cuenta= 0;
+        //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
+        $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+        VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha', '$forma_pago', '$total_suplementos', '$total_pago', '1');";
+        $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        $id_cuenta= $this->ultima_insercion();
+        return $id_cuenta;
+      }
+      // Obtener la ultima cuenta ingresada 
+      function ultima_insercion(){
+        $sentencia= "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
+        $id= 0;
+        $comentario="Obtener el ultimo movimiento ingresado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+        }
+        return $id;
+      }
              
   }
 ?>

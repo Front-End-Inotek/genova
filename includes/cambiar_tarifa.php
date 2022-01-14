@@ -1,4 +1,5 @@
 <?php
+  error_reporting(0);
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_huesped.php");
   include_once("clase_forma_pago.php");
@@ -14,6 +15,14 @@
   $precio_adulto= 0;
   $precio_junior= 0;
   $precio_infantil= 0;
+
+  // Checar si numero hab esta vacia o no
+  if (empty($_GET['numero_hab'])){
+    //echo 'La variable esta vacia';
+    $numero_hab= 1;
+  }else{
+    $numero_hab= $_GET['numero_hab'];
+  }
 
   // Checar si forzar tarifa esta vacia o no
   if (empty($_GET['forzar_tarifa'])){
@@ -50,7 +59,7 @@
   $precio_adulto= $precio_adulto * $_GET['noches'];
   $precio_junior= $precio_junior * $_GET['noches'];
   $precio_infantil= $precio_infantil * $_GET['noches'];
-  $precio_hab= $precio_hospedaje * $_GET['noches'] * $_GET['numero_hab'];
+  $precio_hab= $precio_hospedaje * $_GET['noches'] * $numero_hab;
   $cantidad_maxima= $tarifa->cantidad_maxima;
   $leyenda= $tarifa->leyenda;
   $tipo_hab= $_GET['tarifa'];

@@ -2,11 +2,13 @@
 	date_default_timezone_set('America/Mexico_City');
   include_once("clase_reservacion.php");
   include_once("clase_hab.php");
+  include_once("clase_cuenta.php");
   include_once("clase_huesped.php");
   include_once("clase_movimiento.php");
   include_once('clase_log.php');
   $reservacion= NEW Reservacion($_POST['id_reservacion']);
   $hab = NEW Hab($_POST['hab_id']);
+  $cuenta = NEW Cuenta(0);
   $huesped = NEW Huesped($reservacion->id_huesped);
   $movimiento = NEW Movimiento($hab->mov);
   $logs = NEW Log(0);
@@ -28,6 +30,8 @@
   $mov_actual= $movimiento->ultima_insercion();
   $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
   $reservacion->modificar_estado($_POST['id_reservacion'],2); 
+  $id_cuenta= $cuenta->reservacion_cuenta($_POST['usuario_id'],$mov_actual,$reservacion->forma_pago,$reservacion->total_suplementos,$reservacion->total_pago);
+  $reservacion->modificar_id_cuenta($_POST['id_reservacion'],$id_cuenta);
   $noches= $reservacion->noches;
   $cantidad_hab= $reservacion->numero_hab;
   $visitas_actuales= $huesped->visitas;

@@ -255,8 +255,8 @@
       }
       // Agregar una reservacion en la habitacion
       function disponible_asignar($mov,$hab_id,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total,$total_pago){
-        //$fecha_entrada= strtotime($fecha_entrada);
-        //$fecha_salida= strtotime($fecha_salida);
+        $fecha_entrada= strtotime($fecha_entrada);
+        $fecha_salida= strtotime($fecha_salida);
         $inicio=time();
         
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
