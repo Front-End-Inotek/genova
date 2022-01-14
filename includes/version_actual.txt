@@ -89,3 +89,4 @@ VERSION 1.7
 -Cambios por forzar tarifa en una reservacion
 -Cambios para poder hacer checkin con una reservacion
 -Hacer checkin con mas de una habitacion
+-Quitar datos de la tabla reservacion y agregar telefono del huesped
