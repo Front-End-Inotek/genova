@@ -233,7 +233,8 @@
               </div>';
 
               echo '<div class="timepo_hab">';
-                      $fecha_salida= $movimiento->ver_fecha_salida($fila['id']);
+                      $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
+                      //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
                       if($fila['estado'] == 1){
                         echo $fecha_salida;
                       }else{

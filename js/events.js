@@ -1059,34 +1059,119 @@ function select_asignar_reservacion(id,numero_hab){
 	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
 }
 
-// Mandar una habitacion a estado limpieza
-function asignar_reservacion(hab_id,id_reservacion){
-	var usuario_id=localStorage.getItem("id");
-	$('#caja_herramientas').modal('hide');
-	var datos = {
-          "hab_id": hab_id,
-		  "id_reservacion": id_reservacion,
-          "usuario_id": usuario_id,
-		};
-	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/asignar_reservacion.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:principal,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
-		});
-	return false;
+// Asignar una reservacion a una habitacion en estado disponible
+function asignar_reservacion(hab_id,id_reservacion,habitaciones){
+    if(habitaciones == 1){
+        var usuario_id=localStorage.getItem("id");
+        $('#caja_herramientas').modal('hide');
+        var datos = {
+            "hab_id": hab_id,
+            "id_reservacion": id_reservacion,
+            "habitaciones": habitaciones,
+            "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/asignar_reservacion.php",
+              data:datos,
+              beforeSend:loaderbar,
+              success:principal,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        var usuario_id=localStorage.getItem("id");
+        habitaciones= habitaciones - 1;
+        var datos = {
+            "hab_id": hab_id,
+            "id_reservacion": id_reservacion,
+            "habitaciones": habitaciones,
+            "usuario_id": usuario_id,
+            };
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/asignar_reservacion.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:recibe_datos_multiple,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+          });
+      return false;
+    }    
+}
+
+// Recibe los datos para realizar checkin multiple
+function recibe_datos_multiple(datos){
+    //alert(datos);
+    var res = datos.split("/");
+    //$('#caja_herramientas').modal('hide');
+    select_asignar_reservacion_multiple(res[0], res[1]);
 }
 
 // Modal de asignar mas de una habitacion a una reservacion
 function select_asignar_reservacion_multiple(id,numero_hab){
-	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
+	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion_multiple.php?id="+id+"&numero_hab="+numero_hab);
+}
+
+// Asignar mas de una habitacion a una reservacion
+function asignar_reservacion_multiple(hab_id,id_reservacion,habitaciones){
+    if(habitaciones == 1){
+        var usuario_id=localStorage.getItem("id");
+        $('#caja_herramientas').modal('hide');
+        var datos = {
+            "hab_id": hab_id,
+            "id_reservacion": id_reservacion,
+            "habitaciones": habitaciones,
+            "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/asignar_reservacion_multiple.php",
+              data:datos,
+              beforeSend:loaderbar,
+              success:principal,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        var usuario_id=localStorage.getItem("id");
+        habitaciones= habitaciones - 1;
+        var datos = {
+            "hab_id": hab_id,
+            "id_reservacion": id_reservacion,
+            "habitaciones": habitaciones,
+            "usuario_id": usuario_id,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/asignar_reservacion_multiple.php",
+              data:datos,
+              beforeSend:loaderbar,
+              success:recibe_datos_multiple,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }  
 }
 
 //* Huesped *//

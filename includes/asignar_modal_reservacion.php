@@ -32,7 +32,7 @@
               echo "¡No existen ".$_GET['numero_hab']." habitaciones disponibles en ese tipo de habitación!";
             echo '</div>';
           }else{
-            $hab->select_asignar_reservacion($tipo_hab,$_GET['id']);
+            $hab->select_asignar_reservacion($tipo_hab,$_GET['id'],$_GET['numero_hab'],0);
           }
         echo '</div>';
       echo '</div>

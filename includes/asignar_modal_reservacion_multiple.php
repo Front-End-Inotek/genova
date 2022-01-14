@@ -32,17 +32,13 @@
               echo "¡No existen ".$_GET['numero_hab']." habitaciones disponibles en ese tipo de habitación!";
             echo '</div>';
           }else{
-            $habitacion = 1;
-            while($habitacion <= $_GET['numero_hab']){
-              $hab->select_asignar_reservacion($tipo_hab,$_GET['id'],$habitacion);
-              $habitacion++;
-            }
+            $hab->select_asignar_reservacion($tipo_hab,$_GET['id'],$_GET['numero_hab'],1);
           }
         echo '</div>';
       echo '</div>
 
-      <div class="modal-footer" id="boton_asignar_huesped">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      </div>
+      <div class="modal-footer margen-1" id="boton_asignar_huesped">';
+        //<button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+      echo '</div>
   </div>';
 ?>

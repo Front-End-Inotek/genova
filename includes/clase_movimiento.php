@@ -127,7 +127,7 @@
       // Obtener el tiempo de fin de hospedaje
       function saber_fin_hospedaje($mov){
         $fin_hospedaje= 0;
-        $sentencia = "SELECT fin_hospedaje FROM  movimiento WHERE id = $mov LIMIT 1";
+        $sentencia = "SELECT fin_hospedaje FROM movimiento WHERE id = $mov LIMIT 1";
         //echo $sentencia;
         $comentario="Obtener el tiempo de fin de hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -257,10 +257,10 @@
       function disponible_asignar($mov,$hab_id,$id_huesped,$noches,$fecha_entrada,$fecha_salida,$usuario_id,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$descuento,$total,$total_pago){
         //$fecha_entrada= strtotime($fecha_entrada);
         //$fecha_salida= strtotime($fecha_salida);
-        //$inicio=time();
+        $inicio=time();
         
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `descuento`, `total`, `total_pago`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
-        VALUES ('$hab_id', '$id_huesped', '$mov', '$fecha_entrada', '$fecha_salida', '0', '0', '$usuario_id', '0', '0', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '0', '$total_pago', '0', '0', '0', '0', 'reservar', '', 'sin estado');";
+        VALUES ('$hab_id', '$id_huesped', '$mov', '$fecha_entrada', '$fecha_salida', '$inicio', '0', '$usuario_id', '0', '0', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$descuento', '0', '$total_pago', '0', '0', '0', '0', 'reservar', '', 'sin estado');";
         $comentario="Agregar una reservacion en la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       
