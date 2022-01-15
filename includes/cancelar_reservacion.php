@@ -4,6 +4,6 @@
   include_once("clase_log.php");
   $reservacion= NEW Reservacion(0);
   $logs = NEW Log(0);
-  $reservacion->borrar_reservacion($_POST['id']);
-  $logs->guardar_log($_POST['usuario_id'],"Borrar reservacion: ". $_POST['id']);
+  $reservacion->modificar_estado($_POST['id'],3);
+  $logs->guardar_log($_POST['usuario_id'],"Cancelar reservacion: ". $_POST['id']);
 ?>

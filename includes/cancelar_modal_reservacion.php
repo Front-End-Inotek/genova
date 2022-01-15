@@ -10,13 +10,13 @@
     </div><br>
 
     <div class="modal-body">';
-      echo '¿Borrar reservacion '.$_GET['id'].'?';
+      echo '¿Cancelar reservacion '.$_GET['id'].'?';
       echo '
     </div><br>
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="borrar_reservacion('.$_GET['id'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="cancelar_reservacion('.$_GET['id'].')"> Aceptar</button>
     </div>
   </div>';
 ?>
