@@ -858,6 +858,47 @@ function busqueda_reservacion(){
 	$("#tabla_reservacion").load("includes/busqueda_reservacion.php?inicial="+inicial+"&final="+final+"&id="+id);
 }
 
+// Muestra las reservaciones por dia de la bd
+function ver_reservaciones_por_dia(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_reservaciones_por_dia.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
+// Muestra la paginacion de las reservaciones por dia
+function ver_reservaciones_paginacion_por_dia(buton,posicion){
+    var usuario_id=localStorage.getItem("id");
+    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion_por_dia.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+}
+
+// Barra de diferentes busquedas en ver reservaciones por dia
+function buscar_reservacion_por_dia(){
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var usuario_id=localStorage.getItem("id");
+    if(a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_reservacion").load("includes/buscar_reservacion_por_dia.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+}
+
+// Busqueda por fecha en ver reservaciones por dia
+function busqueda_reservacion_por_dia(){
+	var inicial=$("#inicial").val();
+	var final=$("#final").val();
+    var id=localStorage.getItem("id");
+    if(inicial.length >0 && final.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_reservacion").load("includes/busqueda_reservacion_por_dia.php?inicial="+inicial+"&final="+final+"&id="+id);
+}
+
 // Editar una reservacion
 function editar_reservacion(id){
     $("#area_trabajo_menu").load("includes/editar_reservacion.php?id="+id);
@@ -1078,7 +1119,7 @@ function aceptar_borrar_reservacion(id){
 }
 
 // Regresar a la pagina anterior de editar un reservacion
-function regresar_editar_reservacion(){
+function regresar_reservacion(){
     var usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();

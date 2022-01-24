@@ -4,7 +4,7 @@
   $reservacion= NEW Reservacion(0);
 
   echo ' <div class="container-fluid">';
-          $cat_paginas = $reservacion->mostrar($_GET['posicion'],$_GET['usuario_id']);
+          $cat_paginas = $reservacion->mostrar_por_dia($_GET['posicion'],$_GET['usuario_id']);
   echo  '</div>';
  
   //comentario
