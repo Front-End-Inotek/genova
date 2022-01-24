@@ -888,15 +888,14 @@ function buscar_reservacion_por_dia(){
 
 // Busqueda por fecha en ver reservaciones por dia
 function busqueda_reservacion_por_dia(){
-	var inicial=$("#inicial").val();
-	var final=$("#final").val();
+	var dia=$("#dia").val();
     var id=localStorage.getItem("id");
-    if(inicial.length >0 && final.length >0){
+    if(dia.length >0){
         $('.pagination').hide();
     }else{
         $('.pagination').show();
     }
-	$("#tabla_reservacion").load("includes/busqueda_reservacion_por_dia.php?inicial="+inicial+"&final="+final+"&id="+id);
+	$("#tabla_reservacion").load("includes/busqueda_reservacion_por_dia.php?dia="+dia+"&id="+id);
 }
 
 // Editar una reservacion

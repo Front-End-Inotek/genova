@@ -566,8 +566,8 @@
           INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
           INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
           INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-          INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini &&reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
-          $comentario="Mostrar las rquisiciones";
+          INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_salida <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+          $comentario="Mostrar por fecha en ver reservaciones";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
           echo '<div class="table-responsive" id="tabla_reservacion">
@@ -730,6 +730,68 @@
         </table>
         </div>';
       }
+      // Obtengo el total del porcentaje de ocupacion de las reservaciones por dia
+      function porcentaje_ocupacion($dia){
+        $numero_hab= 0;
+        $cantidad= 0;
+        $porcentaje= 0;
+        $salida= $dia + 86399;
+       
+        $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        FROM reservacion
+        INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+        //(reservacion.fecha_entrada = $dia || reservacion.fecha_salida <= $salida)
+        //echo $sentencia;
+        $comentario="Obtengo el total del porcentaje de ocupacion de las reservaciones por dia";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $numero_hab= $numero_hab + $fila['numero_hab'];
+        }
+
+        $sentencia = "SELECT *,count(hab.id) AS cantidad,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
+        FROM hab 
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab = 1 ORDER BY hab.nombre;";
+        //echo $sentencia;
+        $comentario="Obtengo el total de las reservaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+
+        $porcentaje= ($cantidad / 100) * $numero_hab;
+        $porcentaje= round($porcentaje, 1, PHP_ROUND_HALF_UP); 
+        return $porcentaje;
+      }
+      // Mostramos los datos de reservaciones por dia
+      function datos_por_dia($dia){
+        $dia_actual= date("Y-m-d",$dia);
+        $fecha_dia_dia = substr($dia_actual, 8, 2);
+        $fecha_dia_mes = substr($dia_actual, 5, 2); 
+        $fecha_dia_anio = substr($dia_actual, 0, 4);  
+        $porcentaje= $this->porcentaje_ocupacion($dia);
+        echo '<div class="row">
+          <div class="col-sm-3"><h4><p><a href="#" class="text-dark">Buscar dia '.$fecha_dia_dia.'-'.$fecha_dia_mes.'-'.$fecha_dia_anio.'</a></p></h4></div>
+          <div class="col-sm-2">
+            <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_reservacion_por_dia()" class="color_black form-control form-control" autofocus="autofocus"/>
+          </div>
+          <div class="col-sm-1">Dia:</div>
+          <div class="col-sm-2">
+            <input class="form-control form-control" type="date"  id="dia"  placeholder="Reservacion dia" autofocus="autofocus"/>
+          </div>
+          <div class="col-sm-2">% de Ocupación: '.$porcentaje.'</div>
+          <div class="col-sm-1">
+            <button class="btn btn-success btn-block btn-default" onclick="busqueda_reservacion_por_dia()">
+              Buscar 
+            </button>
+          </div>
+          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button></div>
+        </div><br>';
+      }
       // Mostramos las reservaciones por dia
       function mostrar_por_dia($posicion,$id){
         date_default_timezone_set('America/Mexico_City');
@@ -754,11 +816,13 @@
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 || reservacion.estado = 2)  AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia) ORDER BY reservacion.id DESC;";
-        $comentario="Mostrar las reservaciones";
+        $comentario="Mostrar las reservaciones por dia";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_reservacion">
-        <table class="table table-bordered table-hover">
+        echo '<div class="table-responsive" id="tabla_reservacion">';
+        $this->datos_por_dia($inicio_dia);
+       
+        echo '<table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Número</th>
@@ -875,6 +939,283 @@
         </table>
         </div>';
         return $cat_paginas;
+      }
+      // Barra de busqueda en ver reservaciones por dia
+      function buscar_reservacion_por_dia($a_buscar,$id){
+        /*date_default_timezone_set('America/Mexico_City');
+        $inicio_dia = date("d-m-Y");   
+        $inicio_dia= strtotime($inicio_dia);
+        $fin_dia= $inicio_dia + 86399;*/
+        // AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia)
+        $inicio_dia = date("d-m-Y");   
+        $inicio_dia= strtotime($inicio_dia);
+        
+        if(strlen ($a_buscar) == 0){
+          $cat_paginas = $this->mostrar_por_dia(1,$id);
+        }else{
+          $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+          FROM reservacion
+          INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+          INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+          INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+          INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.id DESC";
+          $comentario="Mostrar diferentes busquedas en ver reservaciones por dia"; 
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //se recibe la consulta y se convierte a arreglo
+          echo ' 
+            <div class="table-responsive" id="tabla_reservacion">';
+            $this->datos_por_dia($inicio_dia);
+  
+            echo '<table class="table table-bordered table-hover">
+              <thead>
+                <tr class="table-primary-encabezado text-center">
+                <th>Número</th>
+                <th>Fecha Entrada</th>
+                <th>Fecha Salida</th>
+                <th>Noches</th>
+                <th>No. Habitaciones</th>
+                <th>Tarifa</th>
+                <th>Precio Hospedaje</th>
+                <th>Cantidad Hospedaje</th>
+                <th>Extra Adulto</th>
+                <th>Extra Junior</th>
+                <th>Extra Infantil</th>
+                <th>Extra Menor</th>
+                <th>Nombre Huésped</th>
+                <th>Teléfono Huésped</th>
+                <th>Total Estancia</th>
+                <th>Total Pago</th>
+                <th>Forma Pago</th>
+                <th>Límite Pago</th>
+                <th>Status</th>';
+                echo '</tr>
+              </thead>
+            <tbody>';
+                while ($fila = mysqli_fetch_array($consulta))
+                {
+                  if($fila['edo'] == 1){
+                    if($fila['total_pago'] <= 0){
+                      echo '<tr class="text-center">
+                      <td>'.$fila['ID'].'</td> 
+                      <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                      <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                      <td>'.$fila['noches'].'</td> 
+                      <td>'.$fila['numero_hab'].'</td> 
+                      <td>'.$fila['habitacion'].'</td>';    
+                      if($fila['forzar_tarifa']>0){
+                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                      }else{
+                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
+                      }
+                      echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                      <td>'.$fila['extra_adulto'].'</td> 
+                      <td>'.$fila['extra_junior'].'</td> 
+                      <td>'.$fila['extra_infantil'].'</td> 
+                      <td>'.$fila['extra_menor'].'</td>
+                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                      <td>'.$fila['tel'].'</td>';
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                      echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
+                      echo '<td>'.$fila['descripcion'].'</td>';  
+                      echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
+                      echo '<td>Abierta</td>'; 
+                      echo '</tr>';
+                    }else{
+                      echo '<tr class="table-success text-center">
+                      <td>'.$fila['ID'].'</td> 
+                      <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                      <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                      <td>'.$fila['noches'].'</td> 
+                      <td>'.$fila['numero_hab'].'</td> 
+                      <td>'.$fila['habitacion'].'</td>';    
+                      if($fila['forzar_tarifa']>0){
+                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                      }else{
+                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
+                      }
+                      echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                      <td>'.$fila['extra_adulto'].'</td> 
+                      <td>'.$fila['extra_junior'].'</td> 
+                      <td>'.$fila['extra_infantil'].'</td> 
+                      <td>'.$fila['extra_menor'].'</td>
+                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                      <td>'.$fila['tel'].'</td>';
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                      echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
+                      echo '<td>'.$fila['descripcion'].'</td>';  
+                      echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
+                      echo '<td>Garantizada</td>';
+                      echo '</tr>';
+                    }
+                  }else{
+                    echo '<tr class="table-secondary text-center">
+                    <td>'.$fila['ID'].'</td> 
+                    <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                    <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                    <td>'.$fila['noches'].'</td> 
+                    <td>'.$fila['numero_hab'].'</td> 
+                    <td>'.$fila['habitacion'].'</td>';    
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
+                    }
+                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                    <td>'.$fila['extra_adulto'].'</td> 
+                    <td>'.$fila['extra_junior'].'</td> 
+                    <td>'.$fila['extra_infantil'].'</td> 
+                    <td>'.$fila['extra_menor'].'</td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['tel'].'</td>';
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
+                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
+                    echo '<td>Activa</td>';
+                    echo '</tr>';
+                  }
+                }
+        }
+              echo '
+              </tbody>
+            </table>
+            </div>';
+      }
+      // Busqueda por fecha en ver reservaciones por dia
+      function mostrar_reservacion_por_dia($fecha_dia_tiempo,$id){
+        date_default_timezone_set('America/Mexico_City');
+        $fecha_dia_tiempo =$fecha_dia_tiempo. " 0:00:00";
+        $fecha_dia =strtotime($fecha_dia_tiempo);
+        
+        if(strlen ($fecha_dia) == 0){
+          $cat_paginas = $this->mostrar_por_dia(1,$id);
+        }else{
+          $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+          FROM reservacion
+          INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+          INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+          INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+          INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_dia && reservacion.fecha_entrada <= $fecha_dia && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+          $comentario="Mostrar por fecha en ver reservaciones por dia";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //se recibe la consulta y se convierte a arreglo
+          echo '<div class="table-responsive" id="tabla_reservacion">';
+          $this->datos_por_dia($fecha_dia);
+
+          echo '<table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-primary-encabezado text-center">
+              <th>Número</th>
+              <th>Fecha Entrada</th>
+              <th>Fecha Salida</th>
+              <th>Noches</th>
+              <th>No. Habitaciones</th>
+              <th>Tarifa</th>
+              <th>Precio Hospedaje</th>
+              <th>Cantidad Hospedaje</th>
+              <th>Extra Adulto</th>
+              <th>Extra Junior</th>
+              <th>Extra Infantil</th>
+              <th>Extra Menor</th>
+              <th>Nombre Huésped</th>
+              <th>Teléfono Huésped</th>
+              <th>Total Estancia</th>
+              <th>Total Pago</th>
+              <th>Forma Pago</th>
+              <th>Límite Pago</th>
+              <th>Status</th>';
+              echo '</tr>
+            </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta)) 
+              {
+                if($fila['edo'] == 1){
+                  if($fila['total_pago'] <= 0){
+                    echo '<tr class="text-center">
+                    <td>'.$fila['ID'].'</td> 
+                    <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                    <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                    <td>'.$fila['noches'].'</td> 
+                    <td>'.$fila['numero_hab'].'</td> 
+                    <td>'.$fila['habitacion'].'</td>';    
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
+                    }
+                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                    <td>'.$fila['extra_adulto'].'</td> 
+                    <td>'.$fila['extra_junior'].'</td> 
+                    <td>'.$fila['extra_infantil'].'</td> 
+                    <td>'.$fila['extra_menor'].'</td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['tel'].'</td>';
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
+                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
+                    echo '<td>Abierta</td>'; 
+                    echo '</tr>';
+                  }else{
+                    echo '<tr class="table-success text-center">
+                    <td>'.$fila['ID'].'</td> 
+                    <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                    <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                    <td>'.$fila['noches'].'</td> 
+                    <td>'.$fila['numero_hab'].'</td> 
+                    <td>'.$fila['habitacion'].'</td>';    
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
+                    }
+                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                    <td>'.$fila['extra_adulto'].'</td> 
+                    <td>'.$fila['extra_junior'].'</td> 
+                    <td>'.$fila['extra_infantil'].'</td> 
+                    <td>'.$fila['extra_menor'].'</td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['tel'].'</td>';
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
+                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
+                    echo '<td>Garantizada</td>';
+                    echo '</tr>';
+                  }
+                }else{
+                  echo '<tr class="table-secondary text-center">
+                  <td>'.$fila['ID'].'</td> 
+                  <td>'.date("d-m-Y",$fila['fecha_entrada']).'</td>
+                  <td>'.date("d-m-Y",$fila['fecha_salida']).'</td>
+                  <td>'.$fila['noches'].'</td> 
+                  <td>'.$fila['numero_hab'].'</td> 
+                  <td>'.$fila['habitacion'].'</td>';    
+                  if($fila['forzar_tarifa']>0){
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                  }else{
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
+                  }
+                  echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                  <td>'.$fila['extra_adulto'].'</td> 
+                  <td>'.$fila['extra_junior'].'</td> 
+                  <td>'.$fila['extra_infantil'].'</td> 
+                  <td>'.$fila['extra_menor'].'</td>
+                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                  <td>'.$fila['tel'].'</td>';
+                  echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                  echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
+                  echo '<td>'.$fila['descripcion'].'</td>';  
+                  echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
+                  echo '<td>Activa</td>';
+                  echo '</tr>';
+                }
+              }
+        }
+            echo '
+          </tbody>
+        </table>
+        </div>';
       }
       // Editar una reservacion
       function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$forzar_extra,$descuento,$total,$total_pago){

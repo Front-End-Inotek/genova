@@ -7,23 +7,6 @@
           <br>
           <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">RESERVACIONES POR DIA</h2></div>
     
-          <div class="row">
-            <div class="col-sm-2">
-              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_reservacion_por_dia()" class="color_black form-control form-control" autofocus="autofocus"/>
-            </div>
-            <div class="col-sm-2"></div>
-            <div class="col-sm-2">Fecha Dia:</div>
-            <div class="col-sm-2">
-              <input class="form-control form-control" type="date"  id="dia"  placeholder="Reservacion dia" autofocus="autofocus"/>
-            </div>
-            <div class="col-sm-2"></div>
-            <div class="col-sm-1">
-              <button class="btn btn-success btn-block btn-default" onclick="busqueda_reservacion_por_dia()">
-                Buscar 
-              </button>
-            </div>
-            <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button></div>
-          </div><br>
           <div id="paginacion_reservaciones">';
           $cat_paginas = $reservacion->mostrar_por_dia(1,$_GET['usuario_id']);
   echo '
