@@ -92,3 +92,4 @@ VERSION 1.7
 -Quitar datos de la tabla reservacion y agregar telefono del huesped
 -Agregar funcion y estado cancelar una reservacion 
 -Boton de ver por dia las reservaciones
+-Reporte de reservaciones por dia
