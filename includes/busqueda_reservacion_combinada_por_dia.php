@@ -2,7 +2,7 @@
 	date_default_timezone_set('America/Mexico_City');
   include_once("clase_reservacion.php");
   $reservacion= NEW Reservacion(0);
-  // Checar si la nota esta vacia o no
+  // Checar si la busqueda esta vacia o no
   if(empty($_GET['a_buscar'])){
     //echo 'La variable esta vacia';
     $a_buscar= ' ';

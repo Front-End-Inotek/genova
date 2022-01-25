@@ -858,6 +858,20 @@ function busqueda_reservacion(){
 	$("#tabla_reservacion").load("includes/busqueda_reservacion.php?inicial="+inicial+"&final="+final+"&id="+id);
 }
 
+// Busqueda combinada en ver reservaciones
+function busqueda_reservacion_combinada(){
+	var inicial=$("#inicial").val();
+	var final=$("#final").val();
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var id=localStorage.getItem("id");
+    if((inicial.length >0 && final.length >0) || a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada.php?inicial="+inicial+"&final="+final+"&id="+id+"&a_buscar="+a_buscar);
+}
+
 // Muestra las reservaciones por dia de la bd
 function ver_reservaciones_por_dia(){
     var usuario_id=localStorage.getItem("id");

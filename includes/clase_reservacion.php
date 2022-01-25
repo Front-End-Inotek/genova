@@ -546,7 +546,7 @@
             </div>';
       }
       // Busqueda por fecha en ver reservaciones
-      function mostrar_reservacion_fecha($fecha_ini_tiempo,$fecha_fin_tiempo,$id){
+      function mostrar_reservacion_fecha($fecha_ini_tiempo,$fecha_fin_tiempo,$a_buscar,$combinada,$id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
         $agregar = $usuario->reservacion_agregar;
@@ -558,15 +558,31 @@
         $fecha_ini =strtotime($fecha_ini_tiempo);
         $fecha_fin =strtotime($fecha_fin_tiempo);
         
-        if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
+        if($a_buscar == ' ' && strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-          FROM reservacion
-          INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
-          INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-          INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-          INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_salida <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+          if($a_buscar != ' '){
+            $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            FROM reservacion
+            INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+            INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+            INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.id DESC";
+          }elseif($a_buscar != ' ' && strlen ($fecha_ini) > 0 && strlen ($fecha_fin) > 0 && $combinada == 1){
+            $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            FROM reservacion
+            INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+            INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+            INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+          }else{
+            $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            FROM reservacion
+            INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+            INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+            INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+          }
           $comentario="Mostrar por fecha en ver reservaciones";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
@@ -786,12 +802,12 @@
         echo '<div class="row">
           <div class="col-sm-2">';
             //<input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_reservacion_por_dia()" class="color_black form-control form-control" autofocus="autofocus"/>
-            echo '<input type="text" id="a_buscar" placeholder="Buscar"  class="color_black form-control form-control" autofocus="autofocus"/>
+            echo '<input type="text" id="a_buscar" placeholder="Buscar" class="color_black form-control form-control" autofocus="autofocus"/>
           </div>
           <div class="col-sm-1">Dia:</div>
           <div class="col-sm-2">';
             //<input class="form-control form-control" type="date"  id="dia"  placeholder="Reservacion dia" onchange="busqueda_reservacion_por_dia()" autofocus="autofocus"/>
-            echo '<input class="form-control form-control" type="date"  id="dia"  placeholder="Reservacion dia" autofocus="autofocus"/>
+            echo '<input class="form-control form-control" type="date" id="dia" placeholder="Reservacion dia" autofocus="autofocus"/>
           </div>
           <div class="col-sm-1"><button class="btn btn-success btn-block btn-default" onclick="busqueda_reservacion_combinada_por_dia()"> Buscar</button></div>
           <div class="col-sm-1"><button class="btn btn-primary btn-block" onclick="reporte_reservacion_por_dia('.$dia.')"> Reporte</button></div>
