@@ -8,7 +8,6 @@
   include_once('clase_tarifa.php');
 
   $logs = NEW Log(0);
-  $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche");
   $hab= NEW Hab(0);
   $huesped= NEW Huesped(0);
   $reservacion= NEW Reservacion(0);
@@ -80,6 +79,7 @@
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
   $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');
+  $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche ".$dia.' de '.$mes.' de '.$anio);
   $pdf->Ln(4);
 
   // Titulos tabla -277
@@ -159,10 +159,9 @@
   $pdf->SetFont('Arial','',10);
   $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
 
-  $_GET['id']=1;
   //$pdf->Output("reporte_cargo_noche.pdf","I");
-  $pdf->Output("reporte_cargo_noche_".$_GET['id'].".pdf","I");
-  //$pdf->Output("../reportes/reservaciones/reporte_cargo_noche.pdf","F");
+  $pdf->Output("reporte_cargo_noche_".$dia.' de '.$mes.' de '.$anio.".pdf","I");
+  //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","F");
       //echo 'Reporte cargo noche';*/
 ?>
 
