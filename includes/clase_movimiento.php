@@ -87,7 +87,7 @@
         }
         return $fecha_salida;
       }
-      // Obtengo los datos del cargo por noche de la habitacio 
+      // Obtengo los datos del cargo por noche de la habitacioN 
       function datos_cargo_noche(){
         /*$sentencia = "SELECT *, reservacion.id_huesped AS huesped_id 
         FROM reservacion

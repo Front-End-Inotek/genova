@@ -898,6 +898,29 @@ function busqueda_reservacion_por_dia(){
 	$("#tabla_reservacion").load("includes/busqueda_reservacion_por_dia.php?dia="+dia+"&id="+id);
 }
 
+// Busqueda combinada en ver reservaciones por dia
+function busqueda_reservacion_combinada_por_dia(){
+	var dia=$("#dia").val();
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var id=localStorage.getItem("id");
+    if(dia.length >0 || a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada_por_dia.php?dia="+dia+"&id="+id+"&a_buscar="+a_buscar);
+}
+
+// Generar reporte en ver reservaciones por dia
+function reporte_reservacion_por_dia(dia){
+    /*var a_buscar= encodeURI(a_buscar);
+    var a_buscar= json_encode(a_buscar);
+    var a_buscar=encodeURIComponent(a_buscar);
+    window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id+"&a_buscar="+a_buscar);*/
+    var usuario_id=localStorage.getItem("id");
+    window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id);
+}
+
 // Editar una reservacion
 function editar_reservacion(id){
     $("#area_trabajo_menu").load("includes/editar_reservacion.php?id="+id);

@@ -731,19 +731,27 @@
         </div>';
       }
       // Obtengo el total del porcentaje de ocupacion de las reservaciones por dia
-      function porcentaje_ocupacion($dia){
+      function porcentaje_ocupacion($dia,$a_buscar){
         $numero_hab= 0;
         $cantidad= 0;
         $porcentaje= 0;
         $salida= $dia + 86399;
        
-        $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-        FROM reservacion
-        INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
-        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
-        //(reservacion.fecha_entrada = $dia || reservacion.fecha_salida <= $salida)
+        if($a_buscar != ' '){
+          $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+          FROM reservacion
+          INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+          INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+          INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+          INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+        }else{
+          $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+          FROM reservacion
+          INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+          INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+          INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+          INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+        } //(reservacion.fecha_entrada = $dia || reservacion.fecha_salida <= $salida)
         //echo $sentencia;
         $comentario="Obtengo el total del porcentaje de ocupacion de las reservaciones por dia";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -768,28 +776,32 @@
         return $porcentaje;
       }
       // Mostramos los datos de reservaciones por dia
-      function datos_por_dia($dia){
+      function datos_por_dia($dia,$a_buscar){
         $dia_actual= date("Y-m-d",$dia);
         $fecha_dia_dia = substr($dia_actual, 8, 2);
         $fecha_dia_mes = substr($dia_actual, 5, 2); 
         $fecha_dia_anio = substr($dia_actual, 0, 4);  
-        $porcentaje= $this->porcentaje_ocupacion($dia);
+        $porcentaje= $this->porcentaje_ocupacion($dia,$a_buscar);
+        //$a_buscar= rawurlencode($a_buscar);
         echo '<div class="row">
-          <div class="col-sm-3"><h4><p><a href="#" class="text-dark">Buscar dia '.$fecha_dia_dia.'-'.$fecha_dia_mes.'-'.$fecha_dia_anio.'</a></p></h4></div>
-          <div class="col-sm-2">
-            <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_reservacion_por_dia()" class="color_black form-control form-control" autofocus="autofocus"/>
+          <div class="col-sm-2">';
+            //<input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_reservacion_por_dia()" class="color_black form-control form-control" autofocus="autofocus"/>
+            echo '<input type="text" id="a_buscar" placeholder="Buscar"  class="color_black form-control form-control" autofocus="autofocus"/>
           </div>
           <div class="col-sm-1">Dia:</div>
-          <div class="col-sm-2">
-            <input class="form-control form-control" type="date"  id="dia"  placeholder="Reservacion dia" autofocus="autofocus"/>
+          <div class="col-sm-2">';
+            //<input class="form-control form-control" type="date"  id="dia"  placeholder="Reservacion dia" onchange="busqueda_reservacion_por_dia()" autofocus="autofocus"/>
+            echo '<input class="form-control form-control" type="date"  id="dia"  placeholder="Reservacion dia" autofocus="autofocus"/>
           </div>
-          <div class="col-sm-2">% de Ocupación: '.$porcentaje.'</div>
           <div class="col-sm-1">
-            <button class="btn btn-success btn-block btn-default" onclick="busqueda_reservacion_por_dia()">
+            <button class="btn btn-success btn-block btn-default" onclick="busqueda_reservacion_combinada_por_dia()">
               Buscar 
             </button>
           </div>
+          <div class="col-sm-1"><button class="btn btn-primary btn-block" onclick="reporte_reservacion_por_dia('.$dia.')"> Reporte</button></div>
           <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button></div>
+          <div class="col-sm-1"></div>
+          <div class="col-sm-3"><h4><p><a href="#" class="text-dark">Dia '.$fecha_dia_dia.'-'.$fecha_dia_mes.'-'.$fecha_dia_anio.' - '.$porcentaje.'% de Ocupación</a></p></h4></div>
         </div><br>';
       }
       // Mostramos las reservaciones por dia
@@ -798,6 +810,7 @@
         $inicio_dia = date("d-m-Y");   
         $inicio_dia= strtotime($inicio_dia);
         $fin_dia= $inicio_dia + 86399;
+        $a_buscar= ' ';
 
         $cont = 1;
         //echo $posicion;
@@ -820,7 +833,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_reservacion">';
-        $this->datos_por_dia($inicio_dia);
+        $this->datos_por_dia($inicio_dia,$a_buscar);
        
         echo '<table class="table table-bordered table-hover">
           <thead>
@@ -1082,7 +1095,7 @@
             </div>';
       }
       // Busqueda por fecha en ver reservaciones por dia
-      function mostrar_reservacion_por_dia($fecha_dia_tiempo,$id){
+      function mostrar_reservacion_por_dia($fecha_dia_tiempo,$a_buscar,$combinada,$id){
         date_default_timezone_set('America/Mexico_City');
         $fecha_dia_tiempo =$fecha_dia_tiempo. " 0:00:00";
         $fecha_dia =strtotime($fecha_dia_tiempo);
@@ -1090,17 +1103,26 @@
         if(strlen ($fecha_dia) == 0){
           $cat_paginas = $this->mostrar_por_dia(1,$id);
         }else{
-          $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-          FROM reservacion
-          INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
-          INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-          INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-          INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_dia && reservacion.fecha_entrada <= $fecha_dia && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+          if($a_buscar != ' ' || $combinada == 1){
+            $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            FROM reservacion
+            INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+            INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+            INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_dia && reservacion.fecha_entrada <= $fecha_dia && reservacion.fecha_entrada > 0 AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+          }else{
+            $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            FROM reservacion
+            INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+            INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+            INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_dia && reservacion.fecha_entrada <= $fecha_dia && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+          }
           $comentario="Mostrar por fecha en ver reservaciones por dia";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
           echo '<div class="table-responsive" id="tabla_reservacion">';
-          $this->datos_por_dia($fecha_dia);
+          $this->datos_por_dia($fecha_dia,$a_buscar);
 
           echo '<table class="table table-bordered table-hover">
             <thead>
@@ -1306,6 +1328,19 @@
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND reservacion.estado = 2 ORDER BY reservacion.id DESC";
         $comentario="Mostrar los datos de la reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      // Obtengo los datos del cargo por noche de la habitacio 
+      function datos_reservacion_por_dia($dia){
+        $salida= $dia + 86399;
+        $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        FROM reservacion
+        INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+        $comentario="Obtengo los datos del cargo por noche de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }

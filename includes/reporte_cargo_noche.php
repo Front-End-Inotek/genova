@@ -163,6 +163,6 @@
   //$pdf->Output("reporte_cargo_noche.pdf","I");
   $pdf->Output("reporte_cargo_noche_".$_GET['id'].".pdf","I");
   //$pdf->Output("../reportes/reservaciones/reporte_cargo_noche.pdf","F");
-      //echo 'Reporte cargo_noche';*/
+      //echo 'Reporte cargo noche';*/
 ?>
 
