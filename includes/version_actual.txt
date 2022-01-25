@@ -93,3 +93,4 @@ VERSION 1.7
 -Agregar funcion y estado cancelar una reservacion 
 -Boton de ver por dia las reservaciones
 -Reporte de reservaciones por dia
+-Acomodo de busquedas en reservaciones general y en por dia
