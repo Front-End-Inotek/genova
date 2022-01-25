@@ -94,3 +94,5 @@ VERSION 1.7
 -Boton de ver por dia las reservaciones
 -Reporte de reservaciones por dia
 -Acomodo de busquedas en reservaciones general y en por dia
+-Quitar datos innecesarios de movimiento
+-Agregar fecha cancelacion, quien cancela y codigo descuento a reservacion

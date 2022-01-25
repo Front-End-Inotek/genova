@@ -28,10 +28,12 @@
       public $total_suplementos;
       public $total_hab;
       public $forzar_tarifa;
-      public $forzar_extra;
+      public $codigo_descuento;
       public $descuento;
       public $total;
       public $total_pago;
+      public $fecha_cancelacion;
+      public $nombre_cancela;
       public $estado;
       
       // Constructor
@@ -62,10 +64,12 @@
           $this->total_suplementos= 0;
           $this->total_hab= 0;
           $this->forzar_tarifa= 0;
-          $this->forzar_extra= 0;
+          $this->codigo_descuento= 0;
           $this->descuento= 0;
           $this->total= 0;
           $this->total_pago= 0;
+          $this->fecha_cancelacion= 0;
+          $this->nombre_cancela= 0;
           $this->estado= 0;
         }else{
           $sentencia = "SELECT * FROM reservacion WHERE id = $id LIMIT 1 ";
@@ -97,16 +101,18 @@
               $this->total_suplementos= $fila['total_suplementos'];
               $this->total_hab= $fila['total_hab'];
               $this->forzar_tarifa= $fila['forzar_tarifa'];
-              $this->forzar_extra= $fila['forzar_extra'];
+              $this->codigo_descuento= $fila['codigo_descuento'];
               $this->descuento= $fila['descuento'];
               $this->total= $fila['total'];
               $this->total_pago= $fila['total_pago'];
+              $this->fecha_cancelacion= $fila['fecha_cancelacion'];
+              $this->nombre_cancela= $fila['nombre_cancela'];
               $this->estado= $fila['estado'];
           }
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$forzar_extra,$descuento,$total,$total_pago,$hab_id,$usuario_id,$cuenta){
+      function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago,$hab_id,$usuario_id,$cuenta){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         $id_cuenta= 0;
@@ -126,8 +132,8 @@
           }
         }
         
-        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `forzar_extra`, `descuento`, `total`, `total_pago`, `estado`)
-        VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$forzar_extra', '$descuento', '$total', '$total_pago', '1');";
+        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `estado`)
+        VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -172,7 +178,7 @@
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
         date_default_timezone_set('America/Mexico_City');
-        $inicio_dia = date("d-m-Y");   
+        $inicio_dia= date("d-m-Y");   
         $inicio_dia= strtotime($inicio_dia);
         $fin_dia= $inicio_dia + 86399;
 
@@ -553,10 +559,10 @@
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
         date_default_timezone_set('America/Mexico_City');
-        $fecha_ini_tiempo =$fecha_ini_tiempo. " 0:00:00";
-        $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
-        $fecha_ini =strtotime($fecha_ini_tiempo);
-        $fecha_fin =strtotime($fecha_fin_tiempo);
+        $fecha_ini_tiempo= $fecha_ini_tiempo. " 0:00:00";
+        $fecha_fin_tiempo= $fecha_fin_tiempo . " 23:59:59";
+        $fecha_ini= strtotime($fecha_ini_tiempo);
+        $fecha_fin= strtotime($fecha_fin_tiempo);
         
         if($a_buscar == ' ' && strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar(1,$id);
@@ -819,7 +825,7 @@
       // Mostramos las reservaciones por dia
       function mostrar_por_dia($posicion,$id){
         date_default_timezone_set('America/Mexico_City');
-        $inicio_dia = date("d-m-Y");   
+        $inicio_dia= date("d-m-Y");   
         $inicio_dia= strtotime($inicio_dia);
         $fin_dia= $inicio_dia + 86399;
         $a_buscar= ' ';
@@ -967,7 +973,7 @@
       }
       // Barra de busqueda en ver reservaciones por dia
       function buscar_reservacion_por_dia($a_buscar,$id){
-        $inicio_dia = date("d-m-Y");   
+        $inicio_dia= date("d-m-Y");   
         $inicio_dia= strtotime($inicio_dia);
         
         if(strlen ($a_buscar) == 0){
@@ -1104,8 +1110,8 @@
       // Busqueda por fecha en ver reservaciones por dia
       function mostrar_reservacion_por_dia($fecha_dia_tiempo,$a_buscar,$combinada,$id){
         date_default_timezone_set('America/Mexico_City');
-        $fecha_dia_tiempo =$fecha_dia_tiempo. " 0:00:00";
-        $fecha_dia =strtotime($fecha_dia_tiempo);
+        $fecha_dia_tiempo= $fecha_dia_tiempo. " 0:00:00";
+        $fecha_dia= strtotime($fecha_dia_tiempo);
         
         if($a_buscar != ' ' && strlen ($fecha_dia) == 0){
           $cat_paginas = $this->mostrar_por_dia(1,$id);
@@ -1256,7 +1262,7 @@
         </div>';
       }
       // Editar una reservacion
-      function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$forzar_extra,$descuento,$total,$total_pago){
+      function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         $sentencia = "UPDATE `reservacion` SET
@@ -1280,7 +1286,7 @@
             `total_suplementos` = '$total_suplementos',
             `total_hab` = '$total_hab',
             `forzar_tarifa` = '$forzar_tarifa',
-            `forzar_extra` = '$forzar_extra',
+            `codigo_descuento` = '$codigo_descuento',
             `descuento` = '$descuento',
             `total` = '$total',
             `total_pago` = '$total_pago'
@@ -1320,6 +1326,17 @@
         `id_cuenta` = '$id_cuenta'
         WHERE `id` = '$id';";
         $comentario="Poner nuevo id cuenta de una reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Modificar datos por realizar una cancelacion de una reservacion
+      function modificar_cancelada($id,$nombre_cancela){
+        $fecha_cancelacion= date("d-m-Y");   
+        $fecha_cancelacion= strtotime($fecha_cancelacion);
+        $sentencia = "UPDATE `reservacion` SET
+        `fecha_cancelacion` = '$fecha_cancelacion',
+        `nombre_cancela` = '$nombre_cancela'
+        WHERE `id` = '$id';";
+        $comentario="Poner datos por realizar una cancelacion de una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Mostramos el pago

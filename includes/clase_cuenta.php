@@ -379,21 +379,9 @@
       }
       // Mostrar la diferencia existente entre los cargos y los abonos que tenemos por movimiento en una habitacion
       function mostrar_faltante($mov){
-        $total_cargos= 0;
         $total_abonos= 0;
         $total_faltante= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo    
-        FROM cuenta 
-        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
-        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 ORDER BY cuenta.fecha";
-        $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          if($fila['edo'] == 1){
-            $total_cargos= $total_cargos + $fila['cargo'];
-          }
-        }
+        $total_cargos= $this->mostrar_total_cargos($mov);
 
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
         FROM cuenta 
@@ -412,6 +400,23 @@
         //$total_faltante= $total_cargos - $total_abonos;
         $total_faltante= $total_abonos - $total_cargos;
         return $total_faltante;
+      }
+      // Mostrar la cantidad total de cargos que tenemos por movimiento en una habitacion
+      function mostrar_total_cargos($mov){
+        $total_cargos= 0;
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo    
+        FROM cuenta 
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 ORDER BY cuenta.fecha";
+        $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          if($fila['edo'] == 1){
+            $total_cargos= $total_cargos + $fila['cargo'];
+          }
+        }
+        return $total_cargos;
       }
       // Cambiar de habitacion el monto en estado de cuenta
       function cambiar_hab_monto($mov,$id){

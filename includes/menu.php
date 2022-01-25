@@ -392,12 +392,40 @@
                             </li>'; 
                           }
 
+                          //$permisos_cupon=$usuario->cupon_ver+$usuario->cupon_agregar;
+                          $permisos_configuracion=$usuario->nivel;
+                          if($permisos_configuracion==0){//$permisos_cupon>0
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub3" data-toggle="collapse" data-target="#submenu4sub3"><span>Cupones</span></a>
+                                <div class="collapse" id="submenu4sub3" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">';
+                                        if($permisos_configuracion==0){//$usuario->cupon_ver==1
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="cambiar_imagen()">
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Cupones</a>
+                                          </li>';
+                                        }
+                                        if($permisos_configuracion==0){//$usuario->cupon_agregar==1
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="cambiar_archivo()">
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Cupón</a>
+                                          </li>';
+                                        }
+                                        echo '
+                                    </ul>
+                                </div>
+                            </li>'; 
+                          }
+
                           $permisos_configuracion=$usuario->nivel;
                           if($permisos_configuracion==0){
                             echo '
                             <li class="nav-item">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub3" data-toggle="collapse" data-target="#submenu4sub3"><span>Configuración</span></a>
-                                <div class="collapse" id="submenu4sub3" aria-expanded="false">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub4" data-toggle="collapse" data-target="#submenu4sub4"><span>Configuración</span></a>
+                                <div class="collapse" id="submenu4sub4" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         if($permisos_configuracion==0){
                                           echo '

@@ -26,7 +26,7 @@
     }
   }
  
-  $id_movimiento= $movimiento->disponible_asignar($_POST['id_reservacion'],$_POST['hab_id'],$reservacion->id_huesped,$reservacion->noches,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->extra_adulto,$reservacion->extra_junior,$reservacion->extra_infantil,$reservacion->extra_menor,$reservacion->tarifa,$reservacion->nombre_reserva,$reservacion->descuento,$total,$reservacion->total_pago);
+  $id_movimiento= $movimiento->disponible_asignar($_POST['id_reservacion'],$_POST['hab_id'],$reservacion->id_huesped,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->tarifa);
   $mov_actual= $movimiento->ultima_insercion();
   $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
   $reservacion->modificar_estado($_POST['id_reservacion'],2); 

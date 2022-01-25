@@ -117,13 +117,13 @@
         //$detalle_fin=$fila['detalle_fin'];
         $fin_hospedaje= $fila['fin_hospedaje'];
         $id_huesped= $fila['id_huesped'];
-        $total= $fila['total'];
         $estado_interno= $fila['estado_interno'];
         $inicio_limpieza= $fila['inicio_limpieza'];
         $persona_limpio= $fila['persona_limpio'];
       }
         $cuenta= NEW Cuenta(0);
         $huesped= NEW Huesped($id_huesped);
+        $total= $cuenta->mostrar_total_cargos($mov);
         $total_faltante= $cuenta->mostrar_faltante($mov);
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Fecha entrada: '.date("d-m-Y H:i:s",  $detalle_inicio);
@@ -283,11 +283,11 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       $detalle_inicio=0;
-      $cobara=0;
+      $cobrara=0;
       while ($fila = mysqli_fetch_array($consulta))
       {
         $detalle_inicio=$fila['detalle_inicio'];
-        $cobara=$fila['detalle_realiza'];
+        $cobrara=$fila['detalle_realiza'];
       }
       $usuario = NEW Usuario($cobara);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
@@ -391,103 +391,6 @@
       }
       return $cantidad;
     }
-    /*function ocupada($hab_id,$estado,$mov,$id){
-
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
-      //echo $sentencia;
-      $comentario="obtener de la habitacion  por cobrar ";
-      $consulta= $this->realizaConsulta($sentencia,$comentario);
-      //se recibe la consulta y se convierte a arreglo
-      $detalle_inicio=0;
-      $cobara=0;
-      $termina_hospe=0;
-      $persona_extra=0;
-      $matricula=0;
-      $modelo=0;
-      $modelo=0;
-      $anotacion=0;
-      $ventas = 0;
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-        $detalle_inicio=$fila['detalle_inicio'];
-        $cobara=$fila['detalle_realiza'];
-        $termina_hospe=$fila['fin_hospedaje'];
-        $persona_extra=$fila['persona_extra'];
-        $matricula=$fila['matricula'];
-        $modelo=$fila['modelo'] ;
-        $cliente=$fila['cliente'] ;
-        $anotacion=$fila['anotacion'];
-        $ventas = $this->saber_ventas($fila['matricula']);
-      }
-      $usuario = NEW Usuario($cobara);
-      $nivel_usuario = NEW Usuario($id);
-        echo '<div class="container">
-          <div class="row">
-                <div class="col-sm-3">
-                  <div>
-                    Ocupada:'.date("d-m-Y H:i:s",  $detalle_inicio).'
-                  </div>
-                  <div>
-                    Termina: '.date("d-m-Y H:i:s",$termina_hospe).'
-                  </div>
-                  <div>
-                    Cliente '.$cliente.'
-                  </div>
-                  <div>
-                    Matricula '.$matricula.'
-                  </div>
-                  <div>
-                    Anotacion: '.$anotacion.'
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div>
-                    Cobro: '.$usuario->usuario.'
-                  </div>
-                  <div>
-                    Personas Extras: '.$persona_extra.'
-                  </div>
-                  <div>
-                    Modelo: '.$modelo.'
-                  </div>
-                  <div>
-                    Visitas: '.$ventas.'
-                  </div>
-                </div>
-                <div class="col-sm-6 izquierda">
-                  <div>
-                    Restaurante
-                  </div>';
-                  $sentencia = "SELECT id FROM ticket WHERE mov = $mov ";
-                // echo $sentencia ;
-                  $comentario="obtener los productos vendidos";
-                  $consulta= $this->realizaConsulta($sentencia,$comentario);
-                  while ($fila = mysqli_fetch_array($consulta))
-                  {
-                    $sentencia1 = "SELECT * FROM concepto WHERE ticket=".$fila['id'] ;
-                    $comentario1="obtener los productos vendidos";
-                    $consulta1= $this->realizaConsulta($sentencia1,$comentario1);
-                    while ($filas = mysqli_fetch_array($consulta1)){
-                        echo '<div>';
-                        if($nivel_usuario->nivel<=1){
-                          
-                         // echo '<button type="button" class="btn btn-danger" onclick="borrar_desde_hab('.$filas['id'].')">Borrar</button>';
-                        }
-                      echo $filas['cantidad'].' -  '.$filas['nombre'].' -  $'.$filas['total'];
-                    }
-                    //echo  $sentencia1;
-                    /**/
-                  /*  echo ' </div>';
-                  }
-                echo '</div>
-
-          </div>
-            </div>';
-
-
-    }*/
-
-
     function detllado($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
       $comentario="obtener informacion de la ultima vez que se rento ";

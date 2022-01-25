@@ -1126,10 +1126,15 @@ function aceptar_cancelar_reservacion(id){
 // Cancelar una reservacion
 function cancelar_reservacion(id){
     var usuario_id=localStorage.getItem("id");
-    $('#caja_herramientas').modal('hide');
-    if (id >0) {
+    var nombre_cancela= encodeURI(document.getElementById("nombre_cancela").value);
+
+    if (id >0 && nombre_cancela.length >0) {
+        $('#caja_herramientas').modal('hide');
+        //$("#boton_cancelar_reservacion").hide();
+        $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
         var datos = {
                 "id": id,
+                "nombre_cancela": nombre_cancela,
                 "usuario_id": usuario_id,
             };
         $.ajax({
@@ -1146,6 +1151,8 @@ function cancelar_reservacion(id){
                 error:problemas_sistema
             });
         return false;
+    }else{
+        alert("Campos incompletos");
     }
 }
 
