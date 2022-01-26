@@ -1362,7 +1362,7 @@ function guardar_huesped(){
 				});
 				return false;
 			}else{
-				alert("Campos incompletos o descuento no permitido");
+				alert("Campos incompletos");
 			}
 }
 
@@ -1498,7 +1498,7 @@ function modificar_huesped(id,hab_id,id_reservacion){
             }
         }    
     }else{
-        alert("Campos incompletos o descuento no permitido");
+        alert("Campos incompletos");
     }    
 }
 
@@ -2746,7 +2746,7 @@ function modificar_inventario(id){
             });
         return false;
     }else{
-        alert("Campos incompletos o descuento no permitido");
+        alert("Campos incompletos");
     }    
 }
 
@@ -3009,51 +3009,35 @@ function agregar_cupones(){
 	closeNav();
 }
 
-// Guardar un huesped
-function guardar_huesped(){
+// Guardar un cupon
+function guardar_cupon(){
     var usuario_id=localStorage.getItem("id");
-	var nombre= encodeURI(document.getElementById("nombre").value);
-	var apellido= encodeURI(document.getElementById("apellido").value);
-	var direccion= encodeURI(document.getElementById("direccion").value);
-	var ciudad= encodeURI(document.getElementById("ciudad").value);
-	var estado= encodeURI(document.getElementById("estado").value);
-	var codigo_postal= encodeURI(document.getElementById("codigo_postal").value);
-	var telefono= encodeURI(document.getElementById("telefono").value);
-	var correo= encodeURI(document.getElementById("correo").value);
-	var contrato= encodeURI(document.getElementById("contrato").value);
-	var cupon= encodeURI(document.getElementById("cupon").value);
-	var preferencias= encodeURI(document.getElementById("preferencias").value);
-	var comentarios= encodeURI(document.getElementById("comentarios").value);
-	var titular_tarjeta= encodeURI(document.getElementById("titular_tarjeta").value);
-	var tipo_tarjeta= encodeURI(document.getElementById("tipo_tarjeta").value);
-	var numero_tarjeta= encodeURI(document.getElementById("numero_tarjeta").value);
-	var vencimiento_mes= encodeURI(document.getElementById("vencimiento_mes").value);
-	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
-	var cvv= encodeURI(document.getElementById("cvv").value);
+    var vigencia_inicio= document.getElementById("vigencia_inicio").value;
+	var vigencia_fin= document.getElementById("vigencia_fin").value;
+	var codigo= encodeURI(document.getElementById("codigo").value);
+	var descripcion= encodeURI(document.getElementById("descripcion").value);
+    var cantidad= document.getElementById("cantidad").value;
+    var porcentaje_tipo= document.getElementById("porcentaje_tipo").checked;
+    var dinero_tipo= document.getElementById("dinero_tipo").checked;
+    if(porcentaje_tipo){
+        tipo=0;
+    }
+    if(dinero_tipo){
+        tipo=1;
+    }
 	
 
-	if(nombre.length >0 && apellido.length >0 && direccion.length >0 && ciudad.length >0 && estado.length >0 && codigo_postal.length >0 && telefono.length >0 && correo.length >0 && preferencias.length >0 && comentarios.length >0){
-			//$('#boton_huesped').hide();
-			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
+	if(vigencia_inicio.length >0 && vigencia_fin.length >0 && codigo.length >0 && cantidad >0){
+        if((cantidad >-0.01 && cantidad <100 && tipo == 0) || (cantidad >-0.01 && tipo == 1)){
+            //$('#boton_cupon').hide();
+			$("#boton_cupon").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
-			 	  "nombre": nombre,
-				  "apellido": apellido,
-				  "direccion": direccion,
-				  "ciudad": ciudad,
-				  "estado": estado,
-				  "codigo_postal": codigo_postal,
-				  "telefono": telefono,
-				  "correo": correo,
-				  "contrato": contrato,
-				  "cupon": cupon,
-				  "preferencias": preferencias,
-				  "comentarios": comentarios,
-				  "titular_tarjeta": titular_tarjeta,
-				  "tipo_tarjeta": tipo_tarjeta,
-				  "numero_tarjeta": numero_tarjeta,
-				  "vencimiento_mes": vencimiento_mes,
-				  "vencimiento_ano": vencimiento_ano,
-				  "cvv": cvv,
+			 	  "vigencia_inicio": vigencia_inicio,
+				  "vigencia_fin": vigencia_fin,
+				  "codigo": codigo,
+				  "descripcion": descripcion,
+                  "cantidad": cantidad,
+                  "tipo": tipo,
                   "usuario_id": usuario_id,
 				};
 			$.ajax({
@@ -3064,15 +3048,18 @@ function guardar_huesped(){
 				  url:"includes/guardar_cupon.php",
 				  data:datos,
 				  beforeSend:loaderbar,
-				  success:ver_huespedes,
+				  success:ver_cupones,
 				  //success:problemas_sistema,
                   timeout:5000,
                   error:problemas_sistema
 				});
 				return false;
-			}else{
-				alert("Campos incompletos o descuento no permitido");
-			}
+            }else{
+                alert("Cantidad de descuento no permitida");
+            }
+	}else{
+        alert("Campos incompletos");
+	}
 }
 
 // Muestra los huespedes de la bd
