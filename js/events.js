@@ -2998,6 +2998,258 @@ function principal(){
     recargar_pagina();
 }
 
+//* Cupon *//
+
+// Agregar un cupon
+function agregar_cupones(){
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_cupones.php"); 
+	closeNav();
+}
+
+// Guardar un huesped
+function guardar_huesped(){
+    var usuario_id=localStorage.getItem("id");
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var apellido= encodeURI(document.getElementById("apellido").value);
+	var direccion= encodeURI(document.getElementById("direccion").value);
+	var ciudad= encodeURI(document.getElementById("ciudad").value);
+	var estado= encodeURI(document.getElementById("estado").value);
+	var codigo_postal= encodeURI(document.getElementById("codigo_postal").value);
+	var telefono= encodeURI(document.getElementById("telefono").value);
+	var correo= encodeURI(document.getElementById("correo").value);
+	var contrato= encodeURI(document.getElementById("contrato").value);
+	var cupon= encodeURI(document.getElementById("cupon").value);
+	var preferencias= encodeURI(document.getElementById("preferencias").value);
+	var comentarios= encodeURI(document.getElementById("comentarios").value);
+	var titular_tarjeta= encodeURI(document.getElementById("titular_tarjeta").value);
+	var tipo_tarjeta= encodeURI(document.getElementById("tipo_tarjeta").value);
+	var numero_tarjeta= encodeURI(document.getElementById("numero_tarjeta").value);
+	var vencimiento_mes= encodeURI(document.getElementById("vencimiento_mes").value);
+	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
+	var cvv= encodeURI(document.getElementById("cvv").value);
+	
+
+	if(nombre.length >0 && apellido.length >0 && direccion.length >0 && ciudad.length >0 && estado.length >0 && codigo_postal.length >0 && telefono.length >0 && correo.length >0 && preferencias.length >0 && comentarios.length >0){
+			//$('#boton_huesped').hide();
+			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
+			var datos = {
+			 	  "nombre": nombre,
+				  "apellido": apellido,
+				  "direccion": direccion,
+				  "ciudad": ciudad,
+				  "estado": estado,
+				  "codigo_postal": codigo_postal,
+				  "telefono": telefono,
+				  "correo": correo,
+				  "contrato": contrato,
+				  "cupon": cupon,
+				  "preferencias": preferencias,
+				  "comentarios": comentarios,
+				  "titular_tarjeta": titular_tarjeta,
+				  "tipo_tarjeta": tipo_tarjeta,
+				  "numero_tarjeta": numero_tarjeta,
+				  "vencimiento_mes": vencimiento_mes,
+				  "vencimiento_ano": vencimiento_ano,
+				  "cvv": cvv,
+                  "usuario_id": usuario_id,
+				};
+			$.ajax({
+				  async:true,
+				  type: "POST",
+				  dataType: "html",
+				  contentType: "application/x-www-form-urlencoded",
+				  url:"includes/guardar_cupon.php",
+				  data:datos,
+				  beforeSend:loaderbar,
+				  success:ver_huespedes,
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
+				});
+				return false;
+			}else{
+				alert("Campos incompletos o descuento no permitido");
+			}
+}
+
+// Muestra los huespedes de la bd
+function ver_huespedes(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_cupones.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
+// Muestra la paginacion de los huespedes
+function ver_huespedes_paginacion(buton,posicion){
+    var usuario_id=localStorage.getItem("id");
+    $("#paginacion_huespedes").load("includes/ver_cupones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+}
+
+// Barra de diferentes busquedas en ver huespedes
+function buscar_huesped(){
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var usuario_id=localStorage.getItem("id");
+    if(a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_huesped").load("includes/buscar_cupon.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+}
+
+// Editar un huesped
+function editar_huesped(id){
+    $("#area_trabajo_menu").load("includes/editar_cupon.php?id="+id);
+}
+
+// Editar un huesped
+function modificar_huesped(id,hab_id,id_reservacion){
+	var usuario_id=localStorage.getItem("id");
+	var nombre= encodeURI(document.getElementById("nombre").value);
+    var apellido= encodeURI(document.getElementById("apellido").value);
+    var direccion= encodeURI(document.getElementById("direccion").value);
+    var ciudad= encodeURI(document.getElementById("ciudad").value);
+    var estado= encodeURI(document.getElementById("estado").value);
+    var codigo_postal= encodeURI(document.getElementById("codigo_postal").value);
+    var telefono= encodeURI(document.getElementById("telefono").value);
+    var correo= encodeURI(document.getElementById("correo").value);
+    var contrato= encodeURI(document.getElementById("contrato").value);
+	var cupon= encodeURI(document.getElementById("cupon").value);
+	var preferencias= encodeURI(document.getElementById("preferencias").value);
+	var comentarios= encodeURI(document.getElementById("comentarios").value);
+	var titular_tarjeta= encodeURI(document.getElementById("titular_tarjeta").value);
+	var tipo_tarjeta= encodeURI(document.getElementById("tipo_tarjeta").value);
+	var numero_tarjeta= encodeURI(document.getElementById("numero_tarjeta").value);
+	var vencimiento_mes= encodeURI(document.getElementById("vencimiento_mes").value);
+	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
+	var cvv= encodeURI(document.getElementById("cvv").value);
+
+
+	if(id >0){
+        //$('#boton_huesped').hide();
+			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+			  "id": id,
+              "hab_id": hab_id,
+              "id_reservacion": id_reservacion,
+              "nombre": nombre,
+              "apellido": apellido,
+              "direccion": direccion,
+              "ciudad": ciudad,
+              "estado": estado,
+              "codigo_postal": codigo_postal,
+              "telefono": telefono,
+              "correo": correo,
+              "contrato": contrato,
+			  "cupon": cupon,
+			  "preferencias": preferencias,
+			  "comentarios": comentarios,
+			  "titular_tarjeta": titular_tarjeta,
+			  "tipo_tarjeta": tipo_tarjeta,
+			  "numero_tarjeta": numero_tarjeta,
+			  "vencimiento_mes": vencimiento_mes,
+			  "vencimiento_ano": vencimiento_ano,
+			  "cvv": cvv,
+			  "usuario_id": usuario_id,
+            };
+        if(hab_id == 0){
+            $.ajax({
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/aplicar_editar_cupon.php",
+                    data:datos,
+                    //beforeSend:loaderbar,
+                    success:ver_huespedes,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
+                });
+            return false;      
+        }else{
+            if(id_reservacion == 0){
+                $.ajax({
+                        async:true,
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/x-www-form-urlencoded",
+                        url:"includes/aplicar_editar_huesped.php",
+                        data:datos,
+                        //beforeSend:loaderbar,
+                        success:cambiar_adultos,
+                        //success:problemas_sistema,
+                        timeout:5000,
+                        error:problemas_sistema
+                    });
+                return false; 
+            }else{
+                $.ajax({
+                        async:true,
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/x-www-form-urlencoded",
+                        url:"includes/aplicar_editar_huesped.php",
+                        data:datos,
+                        //beforeSend:loaderbar,
+                        success:cambiar_adultos_editar,
+                        //success:problemas_sistema,
+                        timeout:5000,
+                        error:problemas_sistema
+                    });
+                return false; 
+            }
+        }    
+    }else{
+        alert("Campos incompletos o descuento no permitido");
+    }    
+}
+
+// Borrar un huesped
+function borrar_huesped(id){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+    if (id >0) {
+        var datos = {
+                "id": id,
+                "usuario_id": usuario_id,
+            };
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/borrar_cupon.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:ver_huespedes,
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }
+}
+
+// Modal de borrar un huesped
+function aceptar_borrar_huesped(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_cupon.php?id="+id);
+}
+
+// Regresar a la pagina anterior de editar un huesped
+function regresar_editar_huesped(){
+    var usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_cupones.php?usuario_id="+usuario_id);
+}
+
 //* Configuracion *//
 
 // Cambiar la imagen de login del sistema
