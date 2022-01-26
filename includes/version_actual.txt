@@ -96,3 +96,5 @@ VERSION 1.7
 -Acomodo de busquedas en reservaciones general y en por dia
 -Quitar datos innecesarios de movimiento
 -Agregar fecha cancelacion, quien cancela y codigo descuento a reservacion
+-Poner derechos de cupon en usuario
+-Agregar tabla cupon con sus respectivas funciones
