@@ -392,7 +392,7 @@
                             </li>'; 
                           }
 
-                          //$permisos_cupon=$usuario->cupon_ver+$usuario->cupon_agregar;//
+                          //$permisos_cupon=$usuario->cupon_ver+$usuario->cupon_agregar;
                           $permisos_configuracion=$usuario->nivel;
                           if($permisos_configuracion==0){//$permisos_cupon>0
                             echo '
