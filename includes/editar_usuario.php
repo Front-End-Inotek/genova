@@ -712,6 +712,57 @@
                 </label>
               </div>
             </div>
+            </div><br><hr>
+            <div class="form-group row">
+            <div class="col-sm-3">Cupón:</div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->cupon_ver==0){
+              echo '<input class="form-check-input" type="checkbox" id="cupon_ver">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="cupon_ver" checked>';
+              }
+              echo '   <label class="form-check-label">
+                  Ver
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->cupon_agregar==0){
+              echo '<input class="form-check-input" type="checkbox" id="cupon_agregar">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="cupon_agregar" checked>';
+              }
+              echo '   <label class="form-check-label">
+                  Agregar
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->cupon_editar==0){
+              echo '<input class="form-check-input" type="checkbox" id="cupon_editar">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="cupon_editar" checked>';
+              }
+              echo '   <label class="form-check-label">
+                  Editar
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->cupon_borrar==0){
+              echo '<input class="form-check-input" type="checkbox" id="cupon_borrar">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="cupon_borrar" checked>';
+              }
+              echo '   <label class="form-check-label">
+                  Borrar
+                </label>
+              </div>
+            </div>
             </div><br><hr> 
             <div class="row">
               <div class="col-sm-9"></div>

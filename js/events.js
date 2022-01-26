@@ -1782,18 +1782,18 @@ function modificar_usuario(id){
     var huesped_agregar= document.getElementById("huesped_agregar").checked;
     var huesped_editar= document.getElementById("huesped_editar").checked;
     var huesped_borrar= document.getElementById("huesped_borrar").checked;
-    var tipo_ver= document.getElementById("tipo_ver").checked;
+    /*var tipo_ver= document.getElementById("tipo_ver").checked;
     var tipo_agregar= document.getElementById("tipo_agregar").checked;
     var tipo_editar= document.getElementById("tipo_editar").checked;
-    var tipo_borrar= document.getElementById("tipo_borrar").checked;
+    var tipo_borrar= document.getElementById("tipo_borrar").checked;*/
     var tarifa_ver= document.getElementById("tarifa_ver").checked;
     var tarifa_agregar= document.getElementById("tarifa_agregar").checked;
     var tarifa_editar= document.getElementById("tarifa_editar").checked;
     var tarifa_borrar= document.getElementById("tarifa_borrar").checked;
-    var hab_ver= document.getElementById("hab_ver").checked;
+    /*var hab_ver= document.getElementById("hab_ver").checked;
     var hab_agregar= document.getElementById("hab_agregar").checked;
     var hab_editar= document.getElementById("hab_editar").checked;
-    var hab_borrar= document.getElementById("hab_borrar").checked;
+    var hab_borrar= document.getElementById("hab_borrar").checked;*/
     var reservacion_ver= document.getElementById("reservacion_ver").checked;
     var reservacion_agregar= document.getElementById("reservacion_agregar").checked;
     var reservacion_editar= document.getElementById("reservacion_editar").checked;
@@ -1815,6 +1815,10 @@ function modificar_usuario(id){
     var restaurante_agregar= document.getElementById("restaurante_agregar").checked;
     var restaurante_editar= document.getElementById("restaurante_editar").checked;
     var restaurante_borrar= document.getElementById("restaurante_borrar").checked;
+    var cupon_ver= document.getElementById("cupon_ver").checked;
+    var cupon_agregar= document.getElementById("cupon_agregar").checked;
+    var cupon_editar= document.getElementById("cupon_editar").checked;
+    var cupon_borrar= document.getElementById("cupon_borrar").checked;
     // Convertir usuario permisos
     if(usuario_ver){
         usuario_ver=1;
@@ -1861,7 +1865,7 @@ function modificar_usuario(id){
     }
 
     // Convertir tipo permisos
-    if(tipo_ver){
+    /*if(tipo_ver){
         tipo_ver = 1;
     }else{
         tipo_ver = 0;
@@ -1880,7 +1884,7 @@ function modificar_usuario(id){
         tipo_borrar = 1;
     }else{
         tipo_borrar = 0;
-    }
+    }*/
 
     // Convertir tarifa permisos
     if(tarifa_ver){
@@ -1905,7 +1909,7 @@ function modificar_usuario(id){
     }
 
     // Convertir hab permisos
-    if(hab_ver){
+    /*if(hab_ver){
         hab_ver = 1;
     }else{
         hab_ver = 0;
@@ -1924,7 +1928,7 @@ function modificar_usuario(id){
         hab_borrar = 1;
     }else{
         hab_borrar = 0;
-    }
+    }*/
 
     // Convertir reservacion permisos
     if(reservacion_ver){
@@ -2042,6 +2046,28 @@ function modificar_usuario(id){
     }else{
         restaurante_borrar = 0;
     }
+
+    // Convertir cupon permisos
+    if(cupon_ver){
+        cupon_ver = 1;
+    }else{
+        cupon_ver = 0;
+    }
+    if(cupon_agregar){
+        cupon_agregar = 1;
+    }else{
+        cupon_agregar = 0;
+    }
+    if(cupon_editar ){
+        cupon_editar = 1;
+    }else{
+        cupon_editar = 0;
+    }
+    if(cupon_borrar){
+        cupon_borrar = 1;
+    }else{
+        cupon_borrar = 0;
+    }
     
 
 	if(usuario.length >0 && nivel.length >0){
@@ -2067,18 +2093,18 @@ function modificar_usuario(id){
                   "huesped_agregar": huesped_agregar,
                   "huesped_editar": huesped_editar,
                   "huesped_borrar": huesped_borrar,
-                  "tipo_ver": tipo_ver,
+                  /*"tipo_ver": tipo_ver,
                   "tipo_agregar": tipo_agregar,
                   "tipo_editar": tipo_editar,
                   "tipo_borrar": tipo_borrar,
-                  "tarifa_ver": tarifa_ver,
+                  "tarifa_ver": tarifa_ver,*/
                   "tarifa_agregar": tarifa_agregar,
                   "tarifa_editar": tarifa_editar,
                   "tarifa_borrar": tarifa_borrar,
-                  "hab_ver": hab_ver,
+                  /*"hab_ver": hab_ver,
                   "hab_agregar": hab_agregar,
                   "hab_editar": hab_editar,
-                  "hab_borrar": hab_borrar,
+                  "hab_borrar": hab_borrar,*/
                   "reservacion_ver": reservacion_ver,
                   "reservacion_agregar": reservacion_agregar,
                   "reservacion_editar": reservacion_editar,
@@ -2100,6 +2126,10 @@ function modificar_usuario(id){
                   "restaurante_agregar": restaurante_agregar,
                   "restaurante_editar": restaurante_editar,
                   "restaurante_borrar": restaurante_borrar,
+                  "cupon_ver": cupon_ver,
+                  "cupon_agregar": cupon_agregar,
+                  "cupon_editar": cupon_editar,
+                  "cupon_borrar": cupon_borrar,
                   "usuario_id": usuario_id,
 			};
 		$.ajax({
