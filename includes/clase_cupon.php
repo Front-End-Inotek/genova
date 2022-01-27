@@ -2,109 +2,76 @@
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
 
-  class Huesped extends ConexionMYSql{
+  class Cupon extends ConexionMYSql{
 
       public $id;
-      public $nombre;
-      public $apellido;
-      public $direccion;
-      public $ciudad;
+      public $codigo;
+      public $descripcion;
+      public $fecha;
+      public $vigencia_inicio;
+      public $vigencia_fin;
+      public $cantidad;
+      public $tipo;
       public $estado;
-      public $codigo_postal;
-      public $telefono;
-      public $correo;
-      public $contrato;
-      public $cupon;
-      public $preferencias;
-      public $comentarios;
-      public $titular_tarjeta;
-      public $tipo_tarjeta;
-      public $numero_tarjeta;
-      public $vencimiento_mes;
-      public $vencimiento_ano;
-      public $cvv;
-      public $visitas;
-      public $estado_huesped;
       
       // Constructor
       function __construct($id)
       {
         if($id==0){
           $this->id= 0;
-          $this->nombre= 0;
-          $this->apellido= 0;
-          $this->direccion= 0;
-          $this->ciudad= 0;
+          $this->codigo= 0;
+          $this->descripcion= 0;
+          $this->fecha= 0;
+          $this->vigencia_inicio= 0;
+          $this->vigencia_fin= 0;
+          $this->cantidad= 0;
+          $this->tipo= 0;
           $this->estado= 0;
-          $this->codigo_postal= 0;
-          $this->telefono= 0;
-          $this->correo= 0;
-          $this->contrato= 0;
-          $this->cupon= 0;
-          $this->preferencias= 0;
-          $this->comentarios= 0;
-          $this->titular_tarjeta= 0;
-          $this->tipo_tarjeta= 0;
-          $this->numero_tarjeta= 0;
-          $this->vencimiento_mes= 0;
-          $this->vencimiento_ano= 0;
-          $this->cvv= 0;
-          $this->visitas= 0;
-          $this->estado_huesped= 0; 
         }else{
-          $sentencia = "SELECT * FROM huesped WHERE id = $id LIMIT 1 ";
-          $comentario="Obtener todos los valores de un huesped";
+          $sentencia = "SELECT * FROM cupon WHERE id = $id LIMIT 1";
+          $comentario="Obtener todos los valores de un cupon";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           while ($fila = mysqli_fetch_array($consulta))
           {
               $this->id= $fila['id'];
-              $this->nombre= $fila['nombre'];
-              $this->apellido= $fila['apellido'];
-              $this->direccion= $fila['direccion'];
-              $this->ciudad= $fila['ciudad'];
+              $this->codigo= $fila['codigo'];
+              $this->descripcion= $fila['descripcion'];
+              $this->fecha= $fila['fecha'];
+              $this->vigencia_inicio= $fila['vigencia_inicio'];
+              $this->vigencia_fin= $fila['vigencia_fin'];
+              $this->cantidad= $fila['cantidad'];
+              $this->tipo= $fila['tipo'];
               $this->estado= $fila['estado'];
-              $this->codigo_postal= $fila['codigo_postal'];
-              $this->telefono= $fila['telefono'];
-              $this->correo= $fila['correo'];
-              $this->contrato= $fila['contrato'];
-              $this->cupon= $fila['cupon'];
-              $this->preferencias= $fila['preferencias'];
-              $this->comentarios= $fila['comentarios'];
-              $this->titular_tarjeta= $fila['titular_tarjeta'];
-              $this->tipo_tarjeta= $fila['tipo_tarjeta'];
-              $this->numero_tarjeta= $fila['numero_tarjeta'];
-              $this->vencimiento_mes= $fila['vencimiento_mes'];
-              $this->vencimiento_ano= $fila['vencimiento_ano'];
-              $this->cvv= $fila['cvv'];
-              $this->visitas= $fila['visitas'];
-              $this->estado_huesped= $fila['estado_huesped'];
           }
         }
       }
-      // Guardar el huesped
-      function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv){
-        $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, `estado_huesped`)
-        VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', '0', '1');";
-        $comentario="Guardamos el huesped en la base de datos";
+      // Guardar el cupon
+      function guardar_cupon($vigencia_inicio,$vigencia_fin,$codigo,$descripcion,$cantidad,$tipo,$usuario_id){
+        $fecha= time();
+        $vigencia_inicio= strtotime($vigencia_inicio);
+        $vigencia_fin= strtotime($vigencia_fin);
+        $sentencia = "INSERT INTO `cupon` (`codigo`, `descripcion`, `fecha`, `vigencia_inicio`, `vigencia_fin`, `cantidad`, `tipo`, `estado`)
+        VALUES ('$codigo', '$descripcion', '$fecha', '$vigencia_inicio', '$vigencia_fin', '$cantidad', '$tipo', '1');";
+        $comentario="Guardamos el cupon en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);    
         
         include_once("clase_log.php");
         $logs = NEW Log(0);
-        $sentencia = "SELECT id FROM huesped ORDER BY id DESC LIMIT 1";
-        $comentario="Obtengo el id del huesped agregado";
+        $sentencia = "SELECT id FROM cupon ORDER BY id DESC LIMIT 1";
+        $comentario="Obtengo el id del cupon agregado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
           $id= $fila['id'];
         }
-        $logs->guardar_log($usuario_id,"Agregar huesped: ". $id);
+        $logs->guardar_log($usuario_id,"Agregar cupon: ". $id);
       }
-      // Obtengo el total de huespedes
+      // Obtengo el total de cupones
       function total_elementos(){
         $cantidad=0;
-        $sentencia = "SELECT count(id) AS cantidad FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
+        $sentencia = "SELECT count(id) AS cantidad FROM cupon WHERE estado = 1 ORDER BY id";
         //echo $sentencia;
-        $comentario="Obtengo el total de huespedes";
+        $comentario="Obtengo el total de cupones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
@@ -112,12 +79,12 @@
         }
         return $cantidad;
       }
-      // Mostramos los huespedes
+      // Mostramos los cupones
       function mostrar($posicion,$id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
-        $editar = $usuario->huesped_editar;
-        $borrar = $usuario->huesped_borrar;
+        $editar = $usuario->cupon_editar;
+        $borrar = $usuario->cupon_borrar;
     
         $cont = 1;
         //echo $posicion;
@@ -130,26 +97,22 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
-        $comentario="Mostrar los huespedes";
+        $sentencia = "SELECT * FROM cupon WHERE estado = 1 ORDER BY id";
+        $comentario="Mostrar los cupones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped">
+        echo '<div class="table-responsive" id="tabla_cupon">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Dirección</th>
-            <th>Ciudad</th>
-            <th>Estado</th>
-            <th>Código Postal</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Contrato Socio</th>
-            <th>Cupón</th>
-            <th>Preferencias</th>
-            <th>Comentarios</th>';
+            <th>Número</th>
+            <th>Código</th>
+            <th>Descripción</th>
+            <th>Creación</th>
+            <th>Vigencia Inicio</th>
+            <th>Vigencia Fin</th>
+            <th>Cantidad</th>
+            <th>Tipo Descuento</th>';
             if($editar==1){
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
@@ -163,18 +126,19 @@
             {
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
-                <td>'.$fila['nombre'].'</td>  
-                <td>'.$fila['apellido'].'</td>
-                <td>'.$fila['direccion'].'</td>
-                <td>'.$fila['ciudad'].'</td>
-                <td>'.$fila['estado'].'</td>
-                <td>'.$fila['codigo_postal'].'</td>
-                <td>'.$fila['telefono'].'</td>
-                <td>'.$fila['correo'].'</td>
-                <td>'.$fila['contrato'].'</td>
-                <td>'.$fila['cupon'].'</td>
-                <td>'.$fila['preferencias'].'</td>
-                <td>'.$fila['comentarios'].'</td>';
+                <td>'.$fila['id'].'</td>  
+                <td>'.$fila['codigo'].'</td>
+                <td>'.$fila['descripcion'].'</td>
+                <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                <td>'.date("d-m-Y",$fila['vigencia_inicio']).'</td>
+                <td>'.date("d-m-Y",$fila['vigencia_fin']).'</td>';
+                if($fila['tipo'] == 0){
+                  echo '<td>'.$fila['cantidad'].'%</td>';
+                  echo '<td>Porcentaje</td>';
+                }else{
+                  echo '<td>$'.number_format($fila['cantidad'], 2).'</td>';
+                  echo '<td>Dinero</td>';
+                }
                 if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"> Editar</button></td>';
                 }
@@ -259,38 +223,26 @@
         </table>
         </div>';
       }
-      // Editar un huesped
-      function editar_huesped($id,$nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv){
-        $sentencia = "UPDATE `huesped` SET
-            `nombre` = '$nombre',
-            `apellido` = '$apellido',
-            `direccion` = '$direccion',
-            `ciudad` = '$ciudad',
-            `estado` = '$estado',
-            `codigo_postal` = '$codigo_postal',
-            `telefono` = '$telefono',
-            `correo` = '$correo',
-            `contrato` = '$contrato',
-            `cupon` = '$cupon',
-            `preferencias` = '$preferencias',
-            `comentarios` = '$comentarios',
-            `titular_tarjeta` = '$titular_tarjeta',
-            `tipo_tarjeta` = '$tipo_tarjeta',
-            `numero_tarjeta` = '$numero_tarjeta',
-            `vencimiento_mes` = '$vencimiento_mes',
-            `vencimiento_ano` = '$vencimiento_ano',
-            `cvv` = '$cvv'
+      // Editar un cupon
+      function editar_cupon($id,$codigo,$descripcion,$vigencia_inicio,$vigencia_fin,$cantidad,$tipo){
+        $sentencia = "UPDATE `cupon` SET
+            `codigo` = '$codigo',
+            `descripcion` = '$descripcion',
+            `vigencia_inicio` = '$vigencia_inicio',
+            `vigencia_fin` = '$vigencia_fin',
+            `cantidad` = '$cantidad',
+            `tipo` = '$tipo'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar huesped dentro de la base de datos ";
+        $comentario="Editar cupon dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar un huesped
-      function borrar_huesped($id){
-        $sentencia = "UPDATE `huesped` SET
-        `estado_huesped` = '0'
+      // Borrar un cupon
+      function borrar_cupon($id){
+        $sentencia = "UPDATE `cupon` SET
+        `estado` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de huesped como inactivo";
+        $comentario="Poner estado de cupon como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtengo el nombre del huesped

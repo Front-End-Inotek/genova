@@ -3062,8 +3062,8 @@ function guardar_cupon(){
 	}
 }
 
-// Muestra los huespedes de la bd
-function ver_huespedes(){
+// Muestra los cupones de la bd
+function ver_cupones(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
@@ -3072,10 +3072,10 @@ function ver_huespedes(){
 	closeNav();
 }
 
-// Muestra la paginacion de los huespedes
-function ver_huespedes_paginacion(buton,posicion){
+// Muestra la paginacion de los cupones
+function ver_cupones_paginacion(buton,posicion){
     var usuario_id=localStorage.getItem("id");
-    $("#paginacion_huespedes").load("includes/ver_cupones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+    $("#paginacion_cupones").load("includes/ver_cupones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
 // Barra de diferentes busquedas en ver huespedes

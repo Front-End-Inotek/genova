@@ -113,8 +113,8 @@
       }
       // Guardar la reservacion
       function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago,$hab_id,$usuario_id,$cuenta){
-        $fecha_entrada=strtotime($fecha_entrada);
-        $fecha_salida=strtotime($fecha_salida);
+        $fecha_entrada= strtotime($fecha_entrada);
+        $fecha_salida= strtotime($fecha_salida);
         $id_cuenta= 0;
         if($cuenta== 1){
           //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
@@ -1330,8 +1330,7 @@
       }
       // Modificar datos por realizar una cancelacion de una reservacion
       function modificar_cancelada($id,$nombre_cancela){
-        $fecha_cancelacion= date("d-m-Y");   
-        $fecha_cancelacion= strtotime($fecha_cancelacion);
+        $fecha_cancelacion= time();
         $sentencia = "UPDATE `reservacion` SET
         `fecha_cancelacion` = '$fecha_cancelacion',
         `nombre_cancela` = '$nombre_cancela'

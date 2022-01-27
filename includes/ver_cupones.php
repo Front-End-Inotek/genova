@@ -1,11 +1,11 @@
 <?php
 	date_default_timezone_set('America/Mexico_City');
-  include_once("clase_huesped.php");
-  $huesped= NEW Huesped(0);
+  include_once("clase_cupon.php");
+  $cupon= NEW Cupon(0);
   
   echo ' <div class="container-fluid blanco"> 
           <br>
-          <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">HUESPEDES</h2></div>
+          <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">CUPONES</h2></div>
           
           <div class="row">
             <div class="col-sm-2">
@@ -14,7 +14,7 @@
             <div class="col-sm-10"></div>
           </div><br>
           <div id="paginacion_huespedes">';
-          $cat_paginas = $huesped->mostrar(1,$_GET['usuario_id']);
+          $cat_paginas = $cupon->mostrar(1,$_GET['usuario_id']);
   echo '
           </div>
          </div>';
