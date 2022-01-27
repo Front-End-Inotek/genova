@@ -10,7 +10,7 @@
     </div><br>
 
     <div class="modal-body">';
-      echo '¿Borrar reservacion '.$_GET['id'].'?';
+      echo '¿Borrar reservación '.$_GET['id'].'?';
       echo '
     </div><br>
     

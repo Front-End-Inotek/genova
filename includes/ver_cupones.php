@@ -9,11 +9,11 @@
           
           <div class="row">
             <div class="col-sm-2">
-              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_huesped()" class="color_black form-control form-control" autofocus="autofocus"/>
+              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_cupon()" class="color_black form-control form-control" autofocus="autofocus"/>
             </div>
             <div class="col-sm-10"></div>
           </div><br>
-          <div id="paginacion_huespedes">';
+          <div id="paginacion_cupones">';
           $cat_paginas = $cupon->mostrar(1,$_GET['usuario_id']);
   echo '
           </div>
@@ -23,7 +23,7 @@
   
   <ul class="pagination">';
   for($i = 1; $i <= $cat_paginas; $i++){
-    echo '<li class="page-item"><a class="page-link" href="#" onclick="ver_huespedes_paginacion('.$i.','.$id_paginacion.')">'.$i.'</a></li>';
+    echo '<li class="page-item"><a class="page-link" href="#" onclick="ver_cupones_paginacion('.$i.','.$id_paginacion.')">'.$i.'</a></li>';
     $id_paginacion=$id_paginacion+20;
   }  
   echo ' </ul>';

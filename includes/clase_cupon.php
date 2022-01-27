@@ -140,10 +140,10 @@
                   echo '<td>Dinero</td>';
                 }
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_cupon('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_cupon('.$fila['id'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
               }
@@ -224,7 +224,9 @@
         </div>';
       }
       // Editar un cupon
-      function editar_cupon($id,$codigo,$descripcion,$vigencia_inicio,$vigencia_fin,$cantidad,$tipo){
+      function editar_cupon($id,$vigencia_inicio,$vigencia_fin,$codigo,$descripcion,$cantidad,$tipo){
+        $vigencia_inicio= strtotime($vigencia_inicio);
+        $vigencia_fin= strtotime($vigencia_fin);
         $sentencia = "UPDATE `cupon` SET
             `codigo` = '$codigo',
             `descripcion` = '$descripcion',
