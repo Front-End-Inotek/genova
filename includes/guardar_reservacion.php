@@ -9,10 +9,10 @@
   $movimiento = NEW Movimiento($hab->mov);
   $logs = NEW Log(0);
   // No se consideran los suplementos
-  /*if($_POST['forzar_tarifa']>0){
+  /*if($_POST['forzar_tarifa'] > 0){
     $total=$_POST['forzar_tarifa']; 
   }else{*/
-    if($_POST['descuento']>0){
+    if($_POST['descuento'] > 0){
       $descuento= $_POST['descuento'] / 100;
       $descuento= 1 - $descuento;
       $total=$_POST['total_hab'] * $descuento;
@@ -21,8 +21,11 @@
     }
   //}
   $cuenta= 0;
+  if($_POST['forzar_tarifa'] > 0 || $_POST['total_suplementos'] > 0 || $_POST['total_pago'] > 0){
+    $cuenta= 1;
+  }
   
-  if($_POST['hab_id']!=0){
+  if($_POST['hab_id'] != 0){
     $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa']);
     $mov_actual= $movimiento->ultima_insercion();
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);

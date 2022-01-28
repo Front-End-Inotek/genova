@@ -116,10 +116,13 @@
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
         $id_cuenta= 0;
-        if($cuenta== 1){
+        if($forzar_tarifa > 0){
+          $total_cargo= $total_suplementos + $forzar_tarifa;
+        }
+        if($cuenta == 1){
           //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-          VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_suplementos', '$total_pago', '1');";
+          VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$total_pago', '1');";
           $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
 
@@ -1265,6 +1268,9 @@
       function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
+        if($forzar_tarifa > 0){
+          $total_cargo= $total_suplementos + $forzar_tarifa;
+        }
         $sentencia = "UPDATE `reservacion` SET
             `id_huesped` = '$id_huesped',
             `tipo_hab` = '$tipo_hab',
@@ -1296,7 +1302,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 
         $sentencia = "UPDATE `cuenta` SET
-            `cargo` = '$total_suplementos',
+            `cargo` = '$total_cargo',
             `abono` = '$total_pago'
             WHERE `id` = '$id_cuenta';";
         //echo $sentencia;
