@@ -11,10 +11,14 @@
   $tarifa= NEW Tarifa($_GET['tarifa']);
   $adultos= $tarifa->mostrar_cantidad_hospedaje($_GET['tarifa']);
   $agregar= 1;
-  $precio_hospedaje= $tarifa->precio_hospedaje;
+  $precio_hospedaje= 0;
   $precio_adulto= 0;
   $precio_junior= 0;
   $precio_infantil= 0;
+  $precio_hospedaje= $tarifa->precio_hospedaje;
+  $precio_adulto= $tarifa->precio_adulto;
+  $precio_junior= $tarifa->precio_junior;
+  $precio_infantil= $tarifa->precio_infantil;
 
   // Checar si numero hab esta vacia o no
   if (empty($_GET['numero_hab'])){
@@ -132,7 +136,7 @@
           <div class="col-sm-2">Código Promocional:</div>
           <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="number"  id="total_hab" placeholder='.$precio_hab.'>
+            <input class="form-control" type="text"  id="codigo_descuento" placeholder="Ingresa tu cupón" maxlength="20">
           </div>
           </div>
           <div class="col-sm-4"></div>
@@ -147,7 +151,7 @@
           <div class="col-sm-2">Forzar Tarifa:</div>
           <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="number"  id="forzar_tarifa" placeholder="0" onchange="calcular_total('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
+            <input class="form-control" type="number"  id="forzar_tarifa" placeholder="0">
           </div>
           </div>
           <div class="col-sm-4"></div>
