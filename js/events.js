@@ -610,10 +610,8 @@ function cambiar_adultos(hab_id){
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
     var numero_hab= Number(document.getElementById("numero_hab").value);
-    var forzar_tarifa= Number(document.getElementById("forzar_tarifa").value);
-    var forzar_extra= Number(document.getElementById("forzar_extra").value);
     $(".div_adultos").html('<div class="spinner-border text-primary"></div>');
-    $(".div_adultos").load("includes/cambiar_tarifa.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id+"&forzar_tarifa="+forzar_tarifa+"&forzar_extra="+forzar_extra);  
+    $(".div_adultos").load("includes/cambiar_tarifa.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id);  
     //alert("Cambiando tarifa "+tarifa);
 }
 

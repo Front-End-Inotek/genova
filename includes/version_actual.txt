@@ -98,3 +98,4 @@ VERSION 1.7
 -Agregar fecha cancelacion, quien cancela y codigo descuento a reservacion
 -Poner derechos de cupon en usuario
 -Agregar tabla cupon con sus respectivas funciones
+-Acomodar descuento manual y codigo promocional en reservacion
