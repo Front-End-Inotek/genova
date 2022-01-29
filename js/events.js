@@ -946,10 +946,8 @@ function cambiar_adultos_editar(id){
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
     var numero_hab= Number(document.getElementById("numero_hab").value);
-    var forzar_tarifa= Number(document.getElementById("forzar_tarifa").value);
-    var forzar_extra= Number(document.getElementById("forzar_extra").value);
     $(".div_adultos_editar").html('<div class="spinner-border text-primary"></div>');
-    $(".div_adultos_editar").load("includes/cambiar_tarifa_editar.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&id="+id+"&forzar_tarifa="+forzar_tarifa+"&forzar_extra="+forzar_extra);  
+    $(".div_adultos_editar").load("includes/cambiar_tarifa_editar.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&id="+id);  
 }
 
 // Calculamos el total de una reservacion al editarla
@@ -1006,6 +1004,8 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 	var total_suplementos= Number(document.getElementById("total_suplementos").value);
 	var forzar_tarifa= Number(document.getElementById("forzar_tarifa").value);
 	var descuento= Number(document.getElementById("descuento").value);
+    var codigo_descuento= document.getElementById("codigo_descuento").value;
+    //var codigo_descuento= Number(document.getElementById("codigo_descuento").value);
     var total_pago= Number(document.getElementById("total_pago").value);
 	var total_hospedaje= precio_hospedaje * noches * numero_hab;
 	var total_adulto= total_adulto * extra_adulto;
@@ -1046,8 +1046,8 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
                 "total_suplementos": total_suplementos,
                 "total_hab": total_hab,
                 "forzar_tarifa": forzar_tarifa,
-                "forzar_extra": forzar_extra,
                 "descuento": descuento,
+                "codigo_descuento": codigo_descuento,
                 "total": total,
                 "total_pago": total_pago,
                 "tipo_hab": tipo_hab,

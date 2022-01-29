@@ -45,21 +45,6 @@
           </div>
           <div class="col-sm-4"></div>
         </div>
-        <div class="row">
-          <div class="col-sm-2">Forzar Tarifa:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="forzar_tarifa" value="'.$reservacion->forzar_tarifa.'" onchange="cambiar_adultos_editar('.$_GET['id'].')">
-          </div>
-          </div>
-          <div class="col-sm-2">Forzar Extra:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="forzar_extra" value="'.$reservacion->forzar_extra.'" onchange="cambiar_adultos_editar('.$_GET['id'].')">
-          </div>
-          </div>
-          <div class="col-sm-4"></div>
-        </div>
         <div class="row div_adultos_editar"></div>';
           // Div adultos donde van resto de los datos para agregar una reservacion
           echo '

@@ -27,7 +27,14 @@
   }else{
     $numero_hab= $_GET['numero_hab'];
   }
- 
+  // Checar si forzar tarifa esta vacia o no
+  if (empty($_GET['forzar_tarifa'])){
+    //echo 'La variable esta vacia';
+    $forzar_tarifa= 0;
+  }else{
+    $forzar_tarifa= $_GET['forzar_tarifa'];
+  }
+
   $precio_adulto= $precio_adulto * $_GET['noches'];
   $precio_junior= $precio_junior * $_GET['noches'];
   $precio_infantil= $precio_infantil * $_GET['noches'];

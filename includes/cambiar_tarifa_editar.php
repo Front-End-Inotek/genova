@@ -17,6 +17,10 @@
   $precio_adulto= 0;
   $precio_junior= 0;
   $precio_infantil= 0;
+  $precio_hospedaje= $tarifa->precio_hospedaje;
+  $precio_adulto= $tarifa->precio_adulto;
+  $precio_junior= $tarifa->precio_junior;
+  $precio_infantil= $tarifa->precio_infantil;
 
    // Checar si forzar tarifa esta vacia o no
    if (empty($_GET['forzar_tarifa'])){
@@ -24,30 +28,6 @@
     $forzar_tarifa= 0;
   }else{
     $forzar_tarifa= $_GET['forzar_tarifa'];
-  }
-  // Checar si forzar extra esta vacia o no
-  if (empty($_GET['forzar_extra'])){
-    //echo 'La variable esta vacia';
-    $forzar_extra= 0;
-  }else{
-    $forzar_extra= $_GET['forzar_extra'];
-  }
-
-  // Reajuste al forzar tarifa
-  if($forzar_tarifa <= 0){
-    $precio_hospedaje= $tarifa->precio_hospedaje;
-  }else{
-    $precio_hospedaje= $forzar_tarifa;
-  }
-  // Reajuste al forzar extra
-  if($forzar_extra <= 0){
-    $precio_adulto= $tarifa->precio_adulto;
-    $precio_junior= $tarifa->precio_junior;
-    $precio_infantil= $tarifa->precio_infantil;
-  }else{
-    $precio_adulto= $forzar_extra;
-    $precio_junior= $forzar_extra;
-    $precio_infantil= $forzar_extra;
   }
 
   $precio_adulto= $precio_adulto * $_GET['noches'];
@@ -148,16 +128,31 @@
           </div>
         </div>
         <div class="row">
+          <div class="col-sm-2">Descuento Manual:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="descuento" value="'.$reservacion->descuento.'" onchange="calcular_total_editar('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
+          </div>
+          </div>
+          <div class="col-sm-2">Código Promocional:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="text"  id="codigo_descuento" value="'.$reservacion->codigo_descuento.'" maxlength="20">
+          </div>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+        <div class="row">
           <div class="col-sm-2">Total Habitación:</div>
           <div class="col-sm-2">
           <div class="form-group">
             <input class="form-control" type="number"  id="total_hab" value="'.$reservacion->total_hab.'" disabled/>
           </div>
           </div>
-          <div class="col-sm-2">Descuento:</div>
+          <div class="col-sm-2">Forzar Tarifa:</div>
           <div class="col-sm-2">
           <div class="form-group">
-            <input class="form-control" type="number"  id="descuento" value="'.$reservacion->descuento.'" onchange="calcular_total_editar('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
+            <input class="form-control" type="number"  id="forzar_tarifa" value="'.$reservacion->forzar_tarifa.'">
           </div>
           </div>
           <div class="col-sm-4"></div>
