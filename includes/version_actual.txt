@@ -100,3 +100,4 @@ VERSION 1.7
 -Agregar tabla cupon con sus respectivas funciones
 -Acomodar descuento manual y codigo promocional en reservacion
 -Aplicar cupon y mostrar datos de cupon en la reservacion
+-Precargar sistema cada 3 segundos

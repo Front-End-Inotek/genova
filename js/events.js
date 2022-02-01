@@ -66,12 +66,23 @@ function sabernosession(){
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
 			$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
             $("#pie").load("includes/pie.php");
+            cargar_area_trabajo();
 		}
 		else{
 			document.location.href='index.php';
 		}
 	}
-    //$("#pie").load("includes/pie.php");
+}
+
+// Se carga el area de trabajo
+function cargar_area_trabajo(){
+	var id=localStorage.getItem("id");
+	var token=localStorage.getItem("tocken");
+
+	$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+    $("#pie").load("includes/pie.php");
+
+    setTimeout('cargar_area_trabajo()',3000);//5500
 }
 
 // Salida automatica cuando terminan credenciales
