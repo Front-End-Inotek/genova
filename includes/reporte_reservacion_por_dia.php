@@ -121,9 +121,15 @@
       $numero_habitaciones= $fila['numero_hab']; 
       $tipo_habitacion= $fila['habitacion'];    
       $huesped= $fila['persona'].' '.$fila['apellido'];
-      $total_estancia= '$'.number_format($fila['total'], 2);
+      if($fila['forzar_tarifa']>0){
+        $total= $fila['forzar_tarifa'];
+        $total_estancia= '$'.number_format($fila['forzar_tarifa'], 2); 
+      }else{
+        $total= $fila['total'];
+        $total_estancia= '$'.number_format($fila['total'], 2);  
+      }
       $total_pago='$'.number_format($fila['total_pago'], 2);
-      $total_estancia_final= $total_estancia_final + $fila['total'];
+      $total_estancia_final= $total_estancia_final + $total;
       $total_pago_final= $total_pago_final + $fila['total_pago'];
     
       if($fila['edo'] == 1){
