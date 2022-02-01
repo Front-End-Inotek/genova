@@ -99,3 +99,4 @@ VERSION 1.7
 -Poner derechos de cupon en usuario
 -Agregar tabla cupon con sus respectivas funciones
 -Acomodar descuento manual y codigo promocional en reservacion
+-Aplicar cupon y mostrar datos de cupon en la reservacion

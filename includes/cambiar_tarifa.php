@@ -1,10 +1,12 @@
 <?php
   error_reporting(0);
   date_default_timezone_set('America/Mexico_City');
+  include_once("clase_cupon.php");
   include_once("clase_huesped.php");
   include_once("clase_forma_pago.php");
   include_once("clase_pago.php");
   include_once("clase_tarifa.php");
+  $Cupon= NEW Cupon(0);//
   $huesped= NEW Huesped(0);
   $forma_pago= NEW Forma_pago(0);
   $pago= NEW Pago(0);
@@ -109,7 +111,7 @@
           <div class="col-sm-1"></div>
         </div>
         <div class="row div_oculto">';
-          // Div oculto donde van los datos de el huésped asignado para agregar una reservacion, pudiendose editar
+          // Div oculto donde van los datos de el huésped asignado para agregar una reservación, pudiendose editar
           echo '
         </div><hr> 
         <div class="row">
@@ -146,28 +148,22 @@
             <input class="form-control" type="text"  id="codigo_descuento" placeholder="Ingresa tu cupón" maxlength="20">
           </div>
           </div>
-          <div class="col-sm-4"></div>
+          <div class="col-sm-2">
+            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aplicar_cupon('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"> Aplicar</button>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="datos_cupon()"> Datos Cupón</button>
+          </div>
+        </div>
+        <div class="row div_cupon">';
+          // Div oculto donde van los datos de un cupón el cual es verificado para agregar una reservación
+          echo '
         </div>
         <div class="row">
           <div class="col-sm-2">Total Habitación:</div>
           <div class="col-sm-2">
           <div class="form-group">
             <input class="form-control" type="number"  id="total_hab" placeholder='.$precio_hab.' disabled/>
-          </div>
-          </div>
-          <div class="col-sm-2">Forzar Tarifa:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="forzar_tarifa" placeholder="0">
-          </div>
-          </div>
-          <div class="col-sm-4"></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Total Estancia:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="total" placeholder='.$precio_hab.' disabled/>
           </div>
           </div>
           <div class="col-sm-2">Forma de Pago:</div>
@@ -192,7 +188,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-10"></div>
+          <div class="col-sm-2">Total Estancia:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="total" placeholder='.$precio_hab.' disabled/>
+          </div>
+          </div>
+          <div class="col-sm-2">Forzar Tarifa:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="forzar_tarifa" placeholder="0">
+          </div>
+          </div>
+          <div class="col-sm-2"></div>
           <div class="col-sm-2">
           <div id="boton_reservacion">
             <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].','.$cantidad_maxima.','.$tipo_hab.')">

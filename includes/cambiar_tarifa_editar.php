@@ -140,28 +140,22 @@
             <input class="form-control" type="text"  id="codigo_descuento" value="'.$reservacion->codigo_descuento.'" maxlength="20">
           </div>
           </div>
-          <div class="col-sm-4"></div>
+          <div class="col-sm-2">
+            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aplicar_cupon('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"> Aplicar</button>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="datos_cupon()"> Datos Cupón</button>
+          </div>
+        </div>
+        <div class="row div_cupon">';
+          // Div oculto donde van los datos de un cupón el cual es verificado para agregar una reservación
+          echo '
         </div>
         <div class="row">
           <div class="col-sm-2">Total Habitación:</div>
           <div class="col-sm-2">
           <div class="form-group">
             <input class="form-control" type="number"  id="total_hab" value="'.$reservacion->total_hab.'" disabled/>
-          </div>
-          </div>
-          <div class="col-sm-2">Forzar Tarifa:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="forzar_tarifa" value="'.$reservacion->forzar_tarifa.'">
-          </div>
-          </div>
-          <div class="col-sm-4"></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Total Estancia:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="total" placeholder='.$reservacion->total.' disabled/>
           </div>
           </div>
           <div class="col-sm-2">Forma de Pago:</div>
@@ -184,7 +178,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-9"></div>
+          <div class="col-sm-2">Total Estancia:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="total" placeholder='.$reservacion->total.' disabled/>
+          </div>
+          </div>
+          <div class="col-sm-2">Forzar Tarifa:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="forzar_tarifa" value="'.$reservacion->forzar_tarifa.'">
+          </div>
+          </div>
+          <div class="col-sm-1"></div>
           <div class="col-sm-2">
           <div id="boton_tipo">
             <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_reservacion('.$_GET['id'].','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$id_cuenta.','.$cantidad_maxima.','.$tipo_hab.')">

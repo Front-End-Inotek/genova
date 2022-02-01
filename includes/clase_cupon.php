@@ -247,17 +247,19 @@
         $comentario="Poner estado de cupon como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Obtengo el nombre del huesped
-      function obtengo_nombre($id){
-        $sentencia = "SELECT nombre FROM huesped WHERE id = $id AND estado_huesped = 1 LIMIT 1";
+      // Obtengo el id del cupon
+      function obtengo_id($codigo){
+        $id= 0;
+        $codigo= urldecode($_GET['codigo_descuento']);
+        $sentencia = "SELECT id FROM cupon WHERE codigo = $codigo AND estado = 1 LIMIT 1";
         //echo $sentencia;
-        $comentario="Obtengo el nombre del huesped";
+        $comentario="Obtengo el id del cupon";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $nombre= $fila['nombre'];
+          $id= $fila['id'];
         }
-        return $nombre;
+        return $id;
       }
       // Obtengo el nombre completo del huesped
       function obtengo_nombre_completo($id){
