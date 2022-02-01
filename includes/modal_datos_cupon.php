@@ -11,6 +11,7 @@
   }
   $id_cupon= $cupon->obtengo_id($codigo);
   $cupon= NEW Cupon($id_cupon);
+  
   echo '
   <!-- Modal content-->
   <div class="modal-content">

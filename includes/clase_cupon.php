@@ -250,8 +250,7 @@
       // Obtengo el id del cupon
       function obtengo_id($codigo){
         $id= 0;
-        $codigo= urldecode($_GET['codigo_descuento']);
-        $sentencia = "SELECT id FROM cupon WHERE codigo = $codigo AND estado = 1 LIMIT 1";
+        $sentencia = "SELECT id FROM cupon WHERE codigo = '$codigo' AND estado = 1 LIMIT 1";
         //echo $sentencia;
         $comentario="Obtengo el id del cupon";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

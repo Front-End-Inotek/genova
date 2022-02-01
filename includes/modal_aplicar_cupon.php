@@ -13,12 +13,14 @@
     $total_junior= $_GET['total_junior'];
     $total_infantil= $_GET['total_infantil'];
   }
-  $id_cupon= $cupon->obtengo_id($_GET['codigo_descuento']);///AQUI
+  $id_cupon= $cupon->obtengo_id($codigo);
   $cupon= NEW Cupon($id_cupon);
-  $vigencia_inicio= strtotime($cupon->vigencia_inicio);
-  $vigencia_fin= strtotime($cupon->vigencia_fin);
+  $vigencia_inicio= $cupon->vigencia_inicio;
+  $vigencia_fin= $cupon->vigencia_fin;
   $fecha_actual= time();
   $fecha_actual= date("d-m-Y",$fecha_actual);
+  $fecha_actual= strtotime($fecha_actual);
+  
   echo '
   <!-- Modal content-->
   <div class="modal-content">

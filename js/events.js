@@ -685,7 +685,7 @@ function calcular_total_cupon(precio_hospedaje,total_adulto,total_junior,total_i
 	var extra_infantil= Number(document.getElementById("extra_infantil").value);
 	var suplementos= encodeURI(document.getElementById("suplementos").value);
 	var total_suplementos= Number(document.getElementById("total_suplementos").value);
-	var descuento= cantidad;
+	var descuento_cupon= cantidad;
     
 	var total_hospedaje= precio_hospedaje * noches * numero_hab;
 	var total_adulto= total_adulto * extra_adulto;
@@ -696,9 +696,9 @@ function calcular_total_cupon(precio_hospedaje,total_adulto,total_junior,total_i
 	//var total= total_hab + total_suplementos;
     var total= total_hab;
     if(tipo == 0){
-        var calculo_descuento= descuento_total(total,descuento);
+        var calculo_descuento= descuento_total(total,descuento_cupon);
     }else{
-        var calculo_descuento= total - descuento;
+        var calculo_descuento= total - descuento_cupon;
     }
 	calculo_descuento= redondearDecimales(calculo_descuento,2);
 	document.getElementById("total_hab").value= total_hab;
@@ -785,7 +785,8 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	var total_infantil= total_infantil * extra_infantil;
 	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
 	//var total= total_hab + total_suplementos;
-    var total= total_hab;
+    //var total= total_hab; ANTERIOR
+    var total= Number(document.getElementById("total").value);
 	var calculo_descuento= descuento_total(total,descuento);
 	calculo_descuento= redondearDecimales(calculo_descuento,2);
 	total= calculo_descuento;
@@ -1060,7 +1061,8 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 	var total_infantil= total_infantil * extra_infantil;
 	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
 	//var total= total_hab + total_suplementos;
-    var total= total_hab;
+    //var total= total_hab; ANTERIOR
+    var total= Number(document.getElementById("total").value);
 	var calculo_descuento= descuento_total(total,descuento);
 	calculo_descuento= redondearDecimales(calculo_descuento,2);
 	total= calculo_descuento;

@@ -1275,6 +1275,7 @@
             `id_huesped` = '$id_huesped',
             `tipo_hab` = '$tipo_hab',
             `fecha_entrada` = '$fecha_entrada',
+            `fecha_salida` = '$fecha_salida',
             `noches` = '$noches',
             `numero_hab` = '$numero_hab',
             `precio_hospedaje` = '$precio_hospedaje',
