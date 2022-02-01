@@ -155,36 +155,32 @@
           </div>';
           return $cat_paginas;
       }
-      // Barra de diferentes busquedas en ver huespedes
-      function buscar_huesped($a_buscar,$id){
+      // Barra de diferentes busquedas en ver cupones
+      function buscar_cupon($a_buscar,$id){
         include_once('clase_usuario.php');
         $usuario =  NEW Usuario($id);
-        $editar = $usuario->huesped_editar;
-        $borrar = $usuario->huesped_borrar;
+        $editar = $usuario->cupon_editar;
+        $borrar = $usuario->cupon_borrar;
 
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
-          $sentencia = "SELECT * FROM huesped WHERE (nombre LIKE '%$a_buscar%' || apellido LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%' || telefono LIKE '%$a_buscar%') && estado_huesped = 1 ORDER BY nombre;";
-          $comentario="Mostrar diferentes busquedas en ver huespedes";
+          $sentencia = "SELECT * FROM cupon WHERE (id LIKE '%$a_buscar%' || codigo LIKE '%$a_buscar%' || descripcion LIKE '%$a_buscar%') && estado = 1 ORDER BY id DESC;";
+          $comentario="Mostrar diferentes busquedas en ver cupones";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
-          echo '<div class="table-responsive" id="tabla_huesped">
+          echo '<div class="table-responsive" id="tabla_cupon">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Dirección</th>
-              <th>Ciudad</th>
-              <th>Estado</th>
-              <th>Código Postal</th>
-              <th>Teléfono</th>
-              <th>Correo</th>
-              <th>Contrato Socio</th>
-              <th>Cupón</th>
-              <th>Preferencias</th>
-              <th>Comentarios</th>';
+              <th>Número</th>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Creación</th>
+              <th>Vigencia Inicio</th>
+              <th>Vigencia Fin</th>
+              <th>Cantidad</th>
+              <th>Tipo Descuento</th>';
               if($editar==1){
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
               }
@@ -197,23 +193,94 @@
               while ($fila = mysqli_fetch_array($consulta)) 
               {
                 echo '<tr class="text-center">
-                <td>'.$fila['nombre'].'</td>  
-                <td>'.$fila['apellido'].'</td>
-                <td>'.$fila['direccion'].'</td>
-                <td>'.$fila['ciudad'].'</td>
-                <td>'.$fila['estado'].'</td>
-                <td>'.$fila['codigo_postal'].'</td>
-                <td>'.$fila['telefono'].'</td>
-                <td>'.$fila['correo'].'</td>
-                <td>'.$fila['contrato'].'</td>
-                <td>'.$fila['cupon'].'</td>
-                <td>'.$fila['preferencias'].'</td>
-                <td>'.$fila['comentarios'].'</td>';
+                <td>'.$fila['id'].'</td>  
+                <td>'.$fila['codigo'].'</td>
+                <td>'.$fila['descripcion'].'</td>
+                <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                <td>'.date("d-m-Y",$fila['vigencia_inicio']).'</td>
+                <td>'.date("d-m-Y",$fila['vigencia_fin']).'</td>';
+                if($fila['tipo'] == 0){
+                  echo '<td>'.$fila['cantidad'].'%</td>';
+                  echo '<td>Porcentaje</td>';
+                }else{
+                  echo '<td>$'.number_format($fila['cantidad'], 2).'</td>';
+                  echo '<td>Dinero</td>';
+                }
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" onclick="editar_cupon('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_cupon('.$fila['id'].')"> Borrar</button></td>';
+                }
+                echo '</tr>';
+              }
+        }
+            echo '
+          </tbody>
+        </table>
+        </div>';
+      }
+      // Busqueda por fecha en ver cupones
+      function mostrar_cupon_fecha($fecha_ini_tiempo,$fecha_fin_tiempo,$id){
+        include_once('clase_usuario.php');
+        $usuario =  NEW Usuario($id);
+        $editar = $usuario->cupon_editar;
+        $borrar = $usuario->cupon_borrar;
+        date_default_timezone_set('America/Mexico_City');
+        $fecha_ini_tiempo =$fecha_ini_tiempo. " 0:00:00";
+        $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
+        $fecha_ini =strtotime($fecha_ini_tiempo);
+        $fecha_fin =strtotime($fecha_fin_tiempo);
+
+        if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
+          $cat_paginas = $this->mostrar(1,$id);
+        }else{
+          $sentencia = "SELECT * FROM cupon WHERE vigencia_inicio >= $fecha_ini && vigencia_inicio <= $fecha_fin && vigencia_inicio > 0 && estado = 1 ORDER BY id DESC;";
+          $comentario="Mostrar por fecha en ver cupones";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //se recibe la consulta y se convierte a arreglo
+          echo '<div class="table-responsive" id="tabla_cupon">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-primary-encabezado text-center">
+              <th>Número</th>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Creación</th>
+              <th>Vigencia Inicio</th>
+              <th>Vigencia Fin</th>
+              <th>Cantidad</th>
+              <th>Tipo Descuento</th>';
+              if($editar==1){
+                echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+              }
+              if($borrar==1){
+                echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
+              }
+              echo '</tr>
+            </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta)) 
+              {
+                echo '<tr class="text-center">
+                <td>'.$fila['id'].'</td>  
+                <td>'.$fila['codigo'].'</td>
+                <td>'.$fila['descripcion'].'</td>
+                <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                <td>'.date("d-m-Y",$fila['vigencia_inicio']).'</td>
+                <td>'.date("d-m-Y",$fila['vigencia_fin']).'</td>';
+                if($fila['tipo'] == 0){
+                  echo '<td>'.$fila['cantidad'].'%</td>';
+                  echo '<td>Porcentaje</td>';
+                }else{
+                  echo '<td>$'.number_format($fila['cantidad'], 2).'</td>';
+                  echo '<td>Dinero</td>';
+                }
+                if($editar==1){
+                  echo '<td><button class="btn btn-warning" onclick="editar_cupon('.$fila['id'].')"> Editar</button></td>';
+                }
+                if($borrar==1){
+                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_cupon('.$fila['id'].')"> Borrar</button></td>';
                 }
                 echo '</tr>';
               }

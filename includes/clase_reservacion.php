@@ -254,11 +254,7 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
@@ -266,7 +262,11 @@
                     <td>'.$fila['extra_menor'].'</td>
                     <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
                     echo '<td>'.$fila['descripcion'].'</td>';  
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
@@ -291,21 +291,21 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
                     <td>'.$fila['extra_infantil'].'</td> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';   
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                     echo '<td>Garantizada</td>';
                     if($agregar==1 && $fila['edo'] = 1){
@@ -329,19 +329,19 @@
                   <td>'.$fila['noches'].'</td> 
                   <td>'.$fila['numero_hab'].'</td> 
                   <td>'.$fila['habitacion'].'</td>';    
-                  if($fila['forzar_tarifa']>0){
-                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                  }else{
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                  }
+                  echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                   echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                   <td>'.$fila['extra_adulto'].'</td> 
                   <td>'.$fila['extra_junior'].'</td> 
                   <td>'.$fila['extra_infantil'].'</td> 
                   <td>'.$fila['extra_menor'].'</td>
-                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                   <td>'.$fila['tel'].'</td>';
-                  echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                  if($fila['forzar_tarifa']>0){
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                  }else{
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                  }
                   echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
                   echo '<td>'.$fila['descripcion'].'</td>';  
                   echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
@@ -442,21 +442,21 @@
                       <td>'.$fila['noches'].'</td> 
                       <td>'.$fila['numero_hab'].'</td> 
                       <td>'.$fila['habitacion'].'</td>';    
-                      if($fila['forzar_tarifa']>0){
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                      }else{
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                      }
+                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                       echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                       <td>'.$fila['extra_adulto'].'</td> 
                       <td>'.$fila['extra_junior'].'</td> 
                       <td>'.$fila['extra_infantil'].'</td> 
                       <td>'.$fila['extra_menor'].'</td>
-                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                       <td>'.$fila['tel'].'</td>';
-                      echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                      if($fila['forzar_tarifa']>0){
+                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                      }else{
+                        echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                      }
                       echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                      echo '<td>'.$fila['descripcion'].'</td>';  
+                      echo '<td>'.$fila['descripcion'].'</td>';     
                       echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
                       echo '<td>Abierta</td>'; 
                       if($agregar==1 && $fila['edo'] = 1){
@@ -479,21 +479,21 @@
                       <td>'.$fila['noches'].'</td> 
                       <td>'.$fila['numero_hab'].'</td> 
                       <td>'.$fila['habitacion'].'</td>';    
-                      if($fila['forzar_tarifa']>0){
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                      }else{
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                      }
+                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                       echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                       <td>'.$fila['extra_adulto'].'</td> 
                       <td>'.$fila['extra_junior'].'</td> 
                       <td>'.$fila['extra_infantil'].'</td> 
                       <td>'.$fila['extra_menor'].'</td>
-                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                       <td>'.$fila['tel'].'</td>';
-                      echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                      if($fila['forzar_tarifa']>0){
+                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                      }else{
+                        echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                      }
                       echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                      echo '<td>'.$fila['descripcion'].'</td>';  
+                      echo '<td>'.$fila['descripcion'].'</td>';   
                       echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                       echo '<td>Garantizada</td>';
                       if($agregar==1 && $fila['edo'] = 1){
@@ -517,21 +517,21 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
                     <td>'.$fila['extra_infantil'].'</td> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';    
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                     echo '<td>Activa</td>';
                     if($agregar==1 && $fila['edo'] = 1){
@@ -643,21 +643,21 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
                     <td>'.$fila['extra_infantil'].'</td> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';    
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
                     echo '<td>Abierta</td>'; 
                     if($agregar==1 && $fila['edo'] = 1){
@@ -680,21 +680,21 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
                     <td>'.$fila['extra_infantil'].'</td> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';   
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                     echo '<td>Garantizada</td>';
                     if($agregar==1 && $fila['edo'] = 1){
@@ -718,21 +718,21 @@
                   <td>'.$fila['noches'].'</td> 
                   <td>'.$fila['numero_hab'].'</td> 
                   <td>'.$fila['habitacion'].'</td>';    
-                  if($fila['forzar_tarifa']>0){
-                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                  }else{
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                  }
+                  echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                   echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                   <td>'.$fila['extra_adulto'].'</td> 
                   <td>'.$fila['extra_junior'].'</td> 
                   <td>'.$fila['extra_infantil'].'</td> 
                   <td>'.$fila['extra_menor'].'</td>
-                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                   <td>'.$fila['tel'].'</td>';
-                  echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                  if($fila['forzar_tarifa']>0){
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                  }else{
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                  }
                   echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                  echo '<td>'.$fila['descripcion'].'</td>';  
+                  echo '<td>'.$fila['descripcion'].'</td>';    
                   echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                   echo '<td>Activa</td>';
                   if($agregar==1 && $fila['edo'] = 1){
@@ -893,11 +893,7 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
@@ -905,9 +901,13 @@
                     <td>'.$fila['extra_menor'].'</td>
                     <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';   
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
                     echo '<td>Abierta</td>'; 
                     echo '</tr>';
@@ -919,21 +919,21 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
                     <td>'.$fila['extra_infantil'].'</td> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';   
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                     echo '<td>Garantizada</td>';
                     echo '</tr>';
@@ -946,19 +946,19 @@
                   <td>'.$fila['noches'].'</td> 
                   <td>'.$fila['numero_hab'].'</td> 
                   <td>'.$fila['habitacion'].'</td>';    
-                  if($fila['forzar_tarifa']>0){
-                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                  }else{
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                  }
+                  echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                   echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                   <td>'.$fila['extra_adulto'].'</td> 
                   <td>'.$fila['extra_junior'].'</td> 
                   <td>'.$fila['extra_infantil'].'</td> 
                   <td>'.$fila['extra_menor'].'</td>
-                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                   <td>'.$fila['tel'].'</td>';
-                  echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                  if($fila['forzar_tarifa']>0){
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                  }else{
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                  }
                   echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
                   echo '<td>'.$fila['descripcion'].'</td>';  
                   echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
@@ -1031,21 +1031,21 @@
                       <td>'.$fila['noches'].'</td> 
                       <td>'.$fila['numero_hab'].'</td> 
                       <td>'.$fila['habitacion'].'</td>';    
-                      if($fila['forzar_tarifa']>0){
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                      }else{
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                      }
+                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                       echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                       <td>'.$fila['extra_adulto'].'</td> 
                       <td>'.$fila['extra_junior'].'</td> 
                       <td>'.$fila['extra_infantil'].'</td> 
                       <td>'.$fila['extra_menor'].'</td>
-                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                       <td>'.$fila['tel'].'</td>';
-                      echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                      if($fila['forzar_tarifa']>0){
+                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                      }else{
+                        echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                      }
                       echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                      echo '<td>'.$fila['descripcion'].'</td>';  
+                      echo '<td>'.$fila['descripcion'].'</td>';    
                       echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
                       echo '<td>Abierta</td>'; 
                       echo '</tr>';
@@ -1057,21 +1057,21 @@
                       <td>'.$fila['noches'].'</td> 
                       <td>'.$fila['numero_hab'].'</td> 
                       <td>'.$fila['habitacion'].'</td>';    
-                      if($fila['forzar_tarifa']>0){
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                      }else{
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                      }
+                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                       echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                       <td>'.$fila['extra_adulto'].'</td> 
                       <td>'.$fila['extra_junior'].'</td> 
                       <td>'.$fila['extra_infantil'].'</td> 
                       <td>'.$fila['extra_menor'].'</td>
-                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                      <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                       <td>'.$fila['tel'].'</td>';
-                      echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                      if($fila['forzar_tarifa']>0){
+                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                      }else{
+                        echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                      }
                       echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                      echo '<td>'.$fila['descripcion'].'</td>';  
+                      echo '<td>'.$fila['descripcion'].'</td>';   
                       echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                       echo '<td>Garantizada</td>';
                       echo '</tr>';
@@ -1084,21 +1084,21 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
                     <td>'.$fila['extra_infantil'].'</td> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';   
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                     echo '<td>Activa</td>';
                     echo '</tr>';
@@ -1185,21 +1185,21 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
                     <td>'.$fila['extra_infantil'].'</td> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';    
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>'; 
                     echo '<td>Abierta</td>'; 
                     echo '</tr>';
@@ -1211,21 +1211,21 @@
                     <td>'.$fila['noches'].'</td> 
                     <td>'.$fila['numero_hab'].'</td> 
                     <td>'.$fila['habitacion'].'</td>';    
-                    if($fila['forzar_tarifa']>0){
-                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                    }else{
-                      echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                    }
+                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                     echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                     <td>'.$fila['extra_junior'].'</td> 
                     <td>'.$fila['extra_infantil'].'</td> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['tel'].'</td>';
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                    if($fila['forzar_tarifa']>0){
+                      echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                    }else{
+                      echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                    }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                    echo '<td>'.$fila['descripcion'].'</td>';  
+                    echo '<td>'.$fila['descripcion'].'</td>';   
                     echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                     echo '<td>Garantizada</td>';
                     echo '</tr>';
@@ -1238,21 +1238,21 @@
                   <td>'.$fila['noches'].'</td> 
                   <td>'.$fila['numero_hab'].'</td> 
                   <td>'.$fila['habitacion'].'</td>';    
-                  if($fila['forzar_tarifa']>0){
-                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
-                  }else{
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
-                  }
+                  echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>'; 
                   echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
                   <td>'.$fila['extra_adulto'].'</td> 
                   <td>'.$fila['extra_junior'].'</td> 
                   <td>'.$fila['extra_infantil'].'</td> 
                   <td>'.$fila['extra_menor'].'</td>
-                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td></td>
+                  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                   <td>'.$fila['tel'].'</td>';
-                  echo '<td>$'.number_format($fila['total'], 2).'</td>'; 
+                  if($fila['forzar_tarifa']>0){
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>'; 
+                  }else{
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';  
+                  }
                   echo '<td>$'.number_format($fila['total_pago'], 2).'</td>'; 
-                  echo '<td>'.$fila['descripcion'].'</td>';  
+                  echo '<td>'.$fila['descripcion'].'</td>';    
                   echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';  
                   echo '<td>Activa</td>';
                   echo '</tr>';

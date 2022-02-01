@@ -3138,6 +3138,19 @@ function buscar_cupon(){
 	$("#tabla_cupon").load("includes/buscar_cupon.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
 
+// Busqueda por fecha en ver cupones
+function busqueda_cupon(){
+	var inicial=$("#inicial").val();
+	var final=$("#final").val();
+    var id=localStorage.getItem("id");
+    if(inicial.length >0 && final.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_cupon").load("includes/busqueda_cupon.php?inicial="+inicial+"&final="+final+"&id="+id);
+}
+
 // Editar un cupon
 function editar_cupon(id){
     $("#area_trabajo_menu").load("includes/editar_cupon.php?id="+id);
