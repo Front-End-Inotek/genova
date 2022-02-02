@@ -1562,7 +1562,7 @@ function modificar_huesped(id,hab_id,id_reservacion){
 function borrar_huesped(id){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
-    if (id >0) {
+    if(id >0){
         var datos = {
                 "id": id,
                 "usuario_id": usuario_id,
@@ -1618,6 +1618,43 @@ function aceptar_cargo_noche(){
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/aceptar_cargo_noche.php?usuario_id="+usuario_id);
 	closeNav();
+}
+
+// Cambiar el estado de cargo noche en una habitacion
+function cambiar_cargo_noche(id){
+    var usuario_id=localStorage.getItem("id");
+    var cargo_noche= document.getElementById("cargo_noche").checked;
+    // Convertir cargo noche valor
+    if(cargo_noche){
+        cargo_noche=1;
+    }else{
+        cargo_noche=0;
+    }
+   
+	if(id >0){
+        var datos = {
+                "id": id,
+                "cargo_noche": cargo_noche,
+                "usuario_id": usuario_id,
+			};
+		$.ajax({
+			  async:true,
+			  type: "POST",
+			  dataType: "html",
+			  contentType: "application/x-www-form-urlencoded",
+			  url:"includes/cambiar_cargo_noche.php",
+			  data:datos,
+			  //beforeSend:loaderbar,
+              success:aceptar_cargo_noche,
+              //success:problemas_sistema,
+			  timeout:5000,
+			  error:problemas_sistema
+			});
+            return false;
+    
+    }else{ 
+        alert("Campos incompletos");
+    }
 }
 
 // Generar reporte de cargo por noche

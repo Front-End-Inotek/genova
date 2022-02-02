@@ -87,19 +87,6 @@
         }
         return $fecha_salida;
       }
-      // Obtengo los datos del cargo por noche de la habitacioN 
-      function datos_cargo_noche(){
-        /*$sentencia = "SELECT *, reservacion.id_huesped AS huesped_id 
-        FROM reservacion
-        INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion WHERE movimiento.id_hab = $id_hab AND reservacion.estado = 1";*/
-        $sentencia = "SELECT * 
-        FROM hab
-        INNER JOIN movimiento ON hab.mov = movimiento.id 
-        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.estado_hab = 1";
-        $comentario="Obtengo los datos del cargo por noche de la habitacion";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        return $consulta;
-      }
       // Obtener el ultimo movimiento ingresado 
       function ultima_insercion(){
         $sentencia= "SELECT id FROM movimiento ORDER BY id DESC LIMIT 1";

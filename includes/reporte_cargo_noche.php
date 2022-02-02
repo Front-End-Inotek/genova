@@ -85,7 +85,7 @@
   // Titulos tabla -277
   $pdf->SetFont('Arial','B',10);
   $pdf->SetTextColor(0, 102, 205);
-  $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE POR NOCHE'),0,1,'C');
+  $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE CARGO POR NOCHE'),0,1,'C');
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Ln(4);
@@ -116,7 +116,7 @@
   $total_final= 0;
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
-  $consulta = $movimiento->datos_cargo_noche();
+  $consulta = $hab->datos_cargo_noche();
   // Revisamos el total de cargo por habitacion
   while ($fila = mysqli_fetch_array($consulta))
   {
@@ -134,10 +134,6 @@
       $quien_reserva	= $fila['nombre_reserva'];
       $descuento = $fila['descuento'];
       //$total = $fila['total'];
-      if (empty($descuento)){// Checar si existe descuento en la reservacion
-        //echo 'La variable esta vacia';
-        $descuento= 0; 
-      }
 
       $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
       $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);

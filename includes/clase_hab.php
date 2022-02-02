@@ -10,6 +10,7 @@
       public $mov;
       public $comentario;
       public $estado;
+      public $cargo_noche;
       public $estado_hab;
       
       // Constructor
@@ -22,6 +23,7 @@
           $this->mov= 0;
           $this->comentario= 0;
           $this->estado= 0;
+          $this->cargo_noche= 0;
           $this->estado_hab= 0;
         }else{
           $sentencia = "SELECT * FROM hab WHERE id = $id LIMIT 1 ";
@@ -35,14 +37,15 @@
               $this->mov= $fila['mov'];
               $this->comentario= $fila['comentario'];
               $this->estado= $fila['estado'];
+              $this->cargo_noche= $fila['cargo_noche'];
               $this->estado_hab= $fila['estado_hab'];
           }
         }
       }
       // Guardar la habitacion
       function guardar_hab($nombre,$tipo,$comentario){
-        $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`, `estado_hab`)
-        VALUES ('$nombre', '$tipo', '0', '0', '$comentario', '1', '1');";
+        $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`, `cargo_noche`, `estado_hab`)
+        VALUES ('$nombre', '$tipo', '0', '0', '$comentario', '1', '0', '1');";
         $comentario="Guardamos la habitacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
@@ -119,12 +122,10 @@
         $comentario="Mostrar los nombres de las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-  
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
         }
-  
       }
       // Obtengo los nombres de las habitaciones a editar
       function mostrar_hab_editar($id){
@@ -306,6 +307,106 @@
             echo '</div>';
           echo '</div>';
         }
+      }
+      // Obtengo los datos del cargo por noche de la habitacioN 
+      function datos_cargo_noche(){
+        $sentencia = "SELECT * 
+        FROM hab
+        INNER JOIN movimiento ON hab.mov = movimiento.id 
+        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.cargo_noche = 1 AND hab.estado_hab = 1";
+        $comentario="Obtengo los datos del cargo por noche de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      // Obtengo los datos del cargo por noche de la habitacioN 
+      function mostrar_cargo_noche(){
+        $total_final= 0;
+        include_once("clase_huesped.php");
+        include_once('clase_tarifa.php');
+        $huesped= NEW Huesped(0);
+        $tarifa= NEW Tarifa(0);
+
+        $sentencia = "SELECT *,hab.id AS ID 
+        FROM hab
+        INNER JOIN movimiento ON hab.mov = movimiento.id 
+        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.estado_hab = 1";
+        $comentario="Mostrar los datos del cargo por noche de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        echo '<div class="table-responsive" id="tabla_cargo_noche">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="table-primary-encabezado text-center">
+            <th>Seleccionar</th>
+            <th>Hab</th>
+            <th>Tarifa</th>
+            <th>Extra Adulto</th>
+            <th>Extra Junior</th>
+            <th>Extra Infantil</th>
+            <th>Extra Menor</th>
+            <th>Nombre Huésped</th>
+            <th>Quien Reserva</th>
+            <th>Descuento</th>
+            <th>Total</th>
+            </tr>
+          </thead>
+        <tbody>';
+            while ($fila = mysqli_fetch_array($consulta))
+            {
+                $hab_id = $fila['ID'];
+                $hab_nombre = $fila['nombre'];  
+                $habitacion = $fila['id_hab'];
+                $fecha_entrada = $fila['inicio_hospedaje'];
+                $fecha_salida = $fila['fin_hospedaje'];
+                $extra_adulto = $fila['extra_adulto'];
+                $extra_junior = $fila['extra_junior'];
+                $extra_infantil = $fila['extra_infantil'];
+                $extra_menor = $fila['extra_menor'];
+                $id_tarifa = $fila['tarifa'];
+                $id_huesped = $fila['id_huesped'];
+                $quien_reserva	= $fila['nombre_reserva'];
+                $descuento = $fila['descuento'];
+                $cargo_noche = $fila['cargo_noche'];
+
+                $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
+                $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
+                $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
+                $total_final= $total_final + $total_tarifa;
+                echo '<tr class="text-center">
+                <td><div class="form-check">';
+                  if($cargo_noche == 0){
+                  echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onchange="cambiar_cargo_noche('.$hab_id.')">';
+                  }else{
+                  echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onchange="cambiar_cargo_noche('.$hab_id.')" checked>';
+                  }
+                echo '</div></td>
+                <td>'.$hab_nombre.'</td>
+                <td>'.$nombre_tarifa.'</td>
+                <td>'.$extra_adulto.'</td>
+                <td>'.$extra_junior.'</td>
+                <td>'.$extra_infantil.'</td>
+                <td>'.$extra_menor.'</td>
+                <td>'.$nombre_huesped.'</td>
+                <td>'.$quien_reserva.'</td>
+                <td>'.$descuento.'%</td>
+                <td>$'.number_format($total_tarifa, 2).'</td>';
+          
+                //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_tipo('.$fila['id'].')"> Borrar</button></td>';
+                echo '</tr>';
+            }
+            echo '
+          </tbody>
+        </table>
+        </div>';
+        return $total_final;
+      }
+      // Cambiar el estado cargo noche de una habitacion
+      function cambiar_cargo_noche($id,$cargo_noche){
+        $sentencia = "UPDATE `hab` SET
+        `cargo_noche` = '$cargo_noche'
+        WHERE `id` = '$id';";
+        $comentario="Cambiar el estado cargo noche de una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
               
   }

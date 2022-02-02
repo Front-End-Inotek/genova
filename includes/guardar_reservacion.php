@@ -10,7 +10,13 @@
   $hab = NEW Hab($_POST['hab_id']);
   $movimiento = NEW Movimiento($hab->mov);
   $logs = NEW Log(0);
-  $descuento= $_POST['descuento'];
+  // Checar si descuento esta vacio o no
+  if (empty($_POST['descuento'])){
+    //echo 'La variable esta vacia';
+    $descuento= 0;
+  }else{
+    $descuento= $_POST['descuento'];
+  }
   $tipo_descuento= 0;
   $cantidad_cupon= 0;
 
@@ -18,7 +24,7 @@
   // Checar si codigo descuento esta vacio o no
   if (empty($_POST['codigo_descuento'])){
     //echo 'La variable esta vacia';
-    $id_cupon=0;
+    $id_cupon= 0;
   }else{
     $codigo= urldecode($_POST['codigo_descuento']);
     $id_cupon= $cupon->obtengo_id($codigo);
