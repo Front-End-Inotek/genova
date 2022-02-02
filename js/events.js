@@ -1610,9 +1610,14 @@ function disponible_asignar(hab_id,estado){
 
 //* Reporte *//
 
-// Modal de confirmar habitaciones que se les realizara el cargo por noche
+// Aceptar realizara el cargo por noche de las habitaciones ocupadas
 function aceptar_cargo_noche(){
-	$("#mostrar_herramientas").load("includes/aceptar_modal_cargo_noche.php?id="+id);
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/aceptar_cargo_noche.php?usuario_id="+usuario_id);
+	closeNav();
 }
 
 // Generar reporte de cargo por noche
