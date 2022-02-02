@@ -94,7 +94,8 @@
         INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion WHERE movimiento.id_hab = $id_hab AND reservacion.estado = 1";*/
         $sentencia = "SELECT * 
         FROM hab
-        INNER JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1";
+        INNER JOIN movimiento ON hab.mov = movimiento.id 
+        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.estado_hab = 1";
         $comentario="Obtengo los datos del cargo por noche de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

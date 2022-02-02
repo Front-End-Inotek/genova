@@ -46,7 +46,7 @@
           <div class="col-sm-2">
           <div class="form-group">';
             if($hab_id != 0){
-              echo '<input class="form-control" type="number"  id="numero_hab" placeholder="1" onchange="cambiar_adultos('.$hab_id.')" disabled/>';
+              echo '<input class="form-control" type="number"  id="numero_hab" value="1" onchange="cambiar_adultos('.$hab_id.')" disabled/>';
             }else{
               echo '<input class="form-control" type="number"  id="numero_hab" placeholder="0" onchange="cambiar_adultos('.$hab_id.')">';
             }

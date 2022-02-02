@@ -141,7 +141,7 @@
 
       $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
       $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
-      $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_junior,$descuento);
+      $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
       $total_final= $total_final + $total_tarifa;
 
       $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');

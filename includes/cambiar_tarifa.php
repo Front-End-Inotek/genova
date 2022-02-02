@@ -1,12 +1,10 @@
 <?php
   error_reporting(0);
   date_default_timezone_set('America/Mexico_City');
-  include_once("clase_cupon.php");
   include_once("clase_huesped.php");
   include_once("clase_forma_pago.php");
   include_once("clase_pago.php");
   include_once("clase_tarifa.php");
-  $Cupon= NEW Cupon(0);//
   $huesped= NEW Huesped(0);
   $forma_pago= NEW Forma_pago(0);
   $pago= NEW Pago(0);

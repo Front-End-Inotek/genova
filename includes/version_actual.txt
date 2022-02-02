@@ -101,3 +101,4 @@ VERSION 1.7
 -Acomodar descuento manual y codigo promocional en reservacion
 -Aplicar cupon y mostrar datos de cupon en la reservacion
 -Precargar sistema cada 3 segundos
+-Ajustar como abono cuando un cupon en reservacion es de tipo 1-dinero

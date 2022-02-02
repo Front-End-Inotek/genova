@@ -34,6 +34,7 @@
       public $total_pago;
       public $fecha_cancelacion;
       public $nombre_cancela;
+      public $tipo_descuento;
       public $estado;
       
       // Constructor
@@ -70,6 +71,7 @@
           $this->total_pago= 0;
           $this->fecha_cancelacion= 0;
           $this->nombre_cancela= 0;
+          $this->tipo_descuento= 0;
           $this->estado= 0;
         }else{
           $sentencia = "SELECT * FROM reservacion WHERE id = $id LIMIT 1 ";
@@ -107,12 +109,13 @@
               $this->total_pago= $fila['total_pago'];
               $this->fecha_cancelacion= $fila['fecha_cancelacion'];
               $this->nombre_cancela= $fila['nombre_cancela'];
+              $this->tipo_descuento= $fila['tipo_descuento'];
               $this->estado= $fila['estado'];
           }
         }
       }
       // Guardar la reservacion
-      function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago,$hab_id,$usuario_id,$cuenta){
+      function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago,$hab_id,$usuario_id,$cuenta,$cantidad_cupon,$tipo_descuento){
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
         $id_cuenta= 0;
@@ -120,9 +123,10 @@
           $total_cargo= $total_suplementos + $forzar_tarifa;
         }
         if($cuenta == 1){
+          $pago_total= $total_pago + $cantidad_cupon;
           //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-          VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$total_pago', '1');";
+          VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
           $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
 
@@ -135,8 +139,8 @@
           }
         }
         
-        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `estado`)
-        VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '1');";
+        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, `estado`)
+        VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', '1');";
         $comentario="Guardamos la reservacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);  
         
@@ -1265,11 +1269,16 @@
         </div>';
       }
       // Editar una reservacion
-      function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago){
+      function editar_reservacion($id,$id_huesped,$tipo_hab,$id_cuenta,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago,$cantidad_cupon,$tipo_descuento){
         $fecha_entrada=strtotime($fecha_entrada);
         $fecha_salida=strtotime($fecha_salida);
         if($forzar_tarifa > 0){
           $total_cargo= $total_suplementos + $forzar_tarifa;
+        }
+        if($cantidad_cupon > 0){
+          $pago_total= $total_pago + $cantidad_cupon;
+        }else{
+          $pago_total= $total_pago;
         }
         $sentencia = "UPDATE `reservacion` SET
             `id_huesped` = '$id_huesped',
@@ -1296,7 +1305,8 @@
             `codigo_descuento` = '$codigo_descuento',
             `descuento` = '$descuento',
             `total` = '$total',
-            `total_pago` = '$total_pago'
+            `total_pago` = '$total_pago',
+            `tipo_descuento` = '$tipo_descuento'
             WHERE `id` = '$id';";
         //echo $sentencia;
         $comentario="Editar una reservacion dentro de la base de datos";
@@ -1304,7 +1314,7 @@
 
         $sentencia = "UPDATE `cuenta` SET
             `cargo` = '$total_cargo',
-            `abono` = '$total_pago'
+            `abono` = '$pago_total'
             WHERE `id` = '$id_cuenta';";
         //echo $sentencia;
         $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
