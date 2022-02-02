@@ -102,3 +102,4 @@ VERSION 1.7
 -Aplicar cupon y mostrar datos de cupon en la reservacion
 -Precargar sistema cada 3 segundos
 -Ajustar como abono cuando un cupon en reservacion es de tipo 1-dinero
+-Ajustar todos los cambios en reporte de cargo por noche
