@@ -279,7 +279,7 @@
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="mostrar_cargo_noche()">
-                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Cargo por noche</a>
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Aplicar Cargo por noche</a>
                                           </li>';
                                         }
                                         /*if($usuario->reservacion_agregar==1){

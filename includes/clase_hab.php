@@ -389,9 +389,9 @@
                 echo '<tr class="text-center">
                 <td><div class="form-check">';
                   if($cargo_noche == 0){
-                  echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onchange="cambiar_cargo_noche('.$hab_id.')">';
+                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onchange="cambiar_cargo_noche('.$hab_id.')">';
                   }else{
-                  echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onchange="cambiar_cargo_noche('.$hab_id.')" checked>';
+                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onchange="cambiar_cargo_noche('.$hab_id.')" checked>';
                   }
                 echo '</div></td>
                 <td>'.$hab_nombre.'</td>
@@ -404,7 +404,6 @@
                 <td>'.$quien_reserva.'</td>
                 <td>'.$descuento.'%</td>
                 <td>$'.number_format($total_tarifa, 2).'</td>';
-          
                 //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_tipo('.$fila['id'].')"> Borrar</button></td>';
                 echo '</tr>';
             }
@@ -422,6 +421,13 @@
         $comentario="Cambiar el estado cargo noche de una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Cambiar estado cargo noche en todas las habitaciones
+      function estado_cargo_noche($estado){
+        $sentencia = "UPDATE `hab` SET
+        `cargo_noche` = '$estado';";
+        $comentario="Cambiar estado cargo noche en todas las habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      } 
               
   }
 ?>

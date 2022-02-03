@@ -1,11 +1,13 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('clase_log.php');
+  include_once('clase_cargo_noche.php');
   include_once("clase_hab.php");
   include_once("clase_huesped.php");
   include_once('clase_tarifa.php');
 
   $logs = NEW Log(0);
+  $cargo_noche = NEW Cargo_noche(0);
   $hab= NEW Hab(0);
   $huesped= NEW Huesped(0);
   $tarifa= NEW Tarifa(0);
@@ -110,12 +112,14 @@
 
   // Datos dentro de la tabla herramienta
   $total_final= 0;
+  $cantidad_hab= 0;
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   $consulta = $hab->datos_cargo_noche();
   // Revisamos el total de cargo por habitacion
   while ($fila = mysqli_fetch_array($consulta))
   {
+      $cantidad_hab++;
       $hab_id = $fila['ID'];
       $hab_nombre = $fila['nombre'];  
       $habitacion = $fila['id_hab'];
@@ -149,11 +153,16 @@
   }
 
   $pdf->SetFont('Arial','',10);
+  $numero_actual= $cargo_noche->ultima_insercion();
+  $numero_actual++;
   $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
 
-  //$pdf->Output("reporte_cargo_noche.pdf","I");
-  $pdf->Output("reporte_cargo_noche_".$dia.' de '.$mes.' de '.$anio.".pdf","I");
-  //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","F");
+  //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
+  $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_".$numero_actual.'_cargo_noche_'.$dia.' de '.$mes.' de '.$anio.".pdf","F");
+  //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
       //echo 'Reporte cargo noche';*/
+  // Luego de guardar el reporte se cambia el estado cargo noche de todas las habitaciones a 0
+  $hab->estado_cargo_noche(0);
+  $cargo_noche->guardar_cargo_noche($_GET['usuario_id'],$total_final,$cantidad_hab);
 ?>
 

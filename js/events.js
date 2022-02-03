@@ -1624,11 +1624,11 @@ function cambiar_cargo_noche(id){
     var cargo_noche= document.getElementById("cargo_noche").checked;
     // Convertir cargo noche valor
     if(cargo_noche){
-        cargo_noche=1;
+        cargo_noche= 1;
     }else{
-        cargo_noche=0;
+        cargo_noche= 0;
     }
-   
+   alert(cargo_noche);
 	if(id >0){
         var datos = {
                 "id": id,

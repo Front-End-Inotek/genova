@@ -28,7 +28,7 @@
     $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
     $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
     $total_final= $total_final + $total_tarifa;
-    $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,$descripcion,0,$total_tarifa,0);
+    $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,$descripcion,1,$total_tarifa,0);
   }
 
   $logs->guardar_log($_POST['usuario_id'],"Aplicar cargo por noche en las habitaciones");

@@ -258,7 +258,6 @@
               <th>Descripción</th>
               <th>Fecha</th>
               <th>Cargo</th>
-              <th>Forma Pago</th>
               <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
               </tr>
             </thead>
@@ -277,27 +276,15 @@
                       echo '<td>Total suplementos</td>';
                     }
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['cargo'], 2).'</td>';
-                    if($fila['forma'] == 0){
-                      echo '<td></td>';
-                    }else{
-                      $forma_pago= $this->obtener_forma_pago($fila['forma']);
-                      echo '<td>'.$forma_pago.'</td>';
-                    }
-                    echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> ✏️ Editar</button></td>
+                    <td>$'.number_format($fila['cargo'], 2).'</td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['cargo'], 2).'</td>';
-                    if($fila['forma'] == 0){
-                      echo '<td></td>';
-                    }else{
-                      $forma_pago= $this->obtener_forma_pago($fila['forma']);
-                      echo '<td>'.$forma_pago.'</td>';
-                    }
-                    echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> ✏️ Editar</button></td>
+                    <td>$'.number_format($fila['cargo'], 2).'</td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> ✏️ Editar</button></td>
                     </tr>';
                   }
                 }else{
@@ -305,14 +292,8 @@
                     echo '<tr class="fuente_menor table-secondary text-center">
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['cargo'], 2).'</td>';
-                    if($fila['forma'] == 0){
-                      echo '<td></td>';
-                    }else{
-                      $forma_pago= $this->obtener_forma_pago($fila['forma']);
-                      echo '<td>'.$forma_pago.'</td>';
-                    }
-                    echo '<td></td>
+                    <td>$'.number_format($fila['cargo'], 2).'</td>
+                    <td></td>
                     </tr>';
                   }
                 }
@@ -587,18 +568,6 @@
           $id= $fila['id'];
         }
         return $id;
-      }
-      // Obtener la forma de pago 
-      function obtener_forma_pago($id){
-        $descripcion= "";
-        $sentencia= "SELECT descripcion FROM forma_pago WHERE id = $id ORDER BY id DESC LIMIT 1";
-        $comentario="Obtener el ultimo movimiento ingresado";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $descripcion= $fila['descripcion'];
-        }
-        return $descripcion;
       }
              
   }
