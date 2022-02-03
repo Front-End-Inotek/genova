@@ -103,3 +103,5 @@ VERSION 1.7
 -Precargar sistema cada 3 segundos
 -Ajustar como abono cuando un cupon en reservacion es de tipo 1-dinero
 -Ajustar todos los cambios en reporte de cargo por noche
+-Generar cargo por noche en las habitaciones seleccionadas
+-Crear derechos y vista para poder ver reportes de cargos por noche
