@@ -508,6 +508,18 @@
                 </label>
               </div>
             </div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->reporte_agregar==0){
+              echo '<input class="form-check-input" type="checkbox" id="reporte_agregar">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="reporte_agregar" checked>';
+              }
+              echo '   <label class="form-check-label">
+                  Agregar
+                </label>
+              </div>
+            </div>
             </div><br><hr> 
             <div class="form-group row">
             <div class="col-sm-3">Forma Pago:</div>
