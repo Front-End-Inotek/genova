@@ -310,16 +310,28 @@
       }
       // Obtengo los datos del cargo por noche de la habitacioN 
       function datos_cargo_noche(){
-        $sentencia = "SELECT * 
+        $sentencia = "SELECT *,hab.id AS ID 
         FROM hab
         INNER JOIN movimiento ON hab.mov = movimiento.id 
-        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.cargo_noche = 1 AND hab.estado_hab = 1";
+        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.cargo_noche = 1 AND reservacion.forzar_tarifa = 0 AND hab.estado_hab = 1";
         $comentario="Obtengo los datos del cargo por noche de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
       // Obtengo los datos del cargo por noche de la habitacioN 
       function mostrar_cargo_noche(){
+        //<div class="col-sm-12 text-center"><h2 class="text-dark margen-1">CARGO POR NOCHE</h2></div>';
+        echo '<div class="row">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4"><h2 class="text-dark">CARGO POR NOCHE</h2></div>
+              <div class="col-sm-2"></div>
+              <div class="col-sm-2">
+              <div id="boton_reservacion">
+                <input type="submit" class="btn btn-success btn-block margen-1" value="Aplicar" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cargo_noche()">
+              </div>
+              </div>
+        </div>';
+
         $total_final= 0;
         include_once("clase_huesped.php");
         include_once('clase_tarifa.php');
@@ -329,7 +341,7 @@
         $sentencia = "SELECT *,hab.id AS ID 
         FROM hab
         INNER JOIN movimiento ON hab.mov = movimiento.id 
-        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.estado_hab = 1";
+        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE reservacion.forzar_tarifa = 0 AND hab.estado_hab = 1";
         $comentario="Mostrar los datos del cargo por noche de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -355,9 +367,6 @@
             {
                 $hab_id = $fila['ID'];
                 $hab_nombre = $fila['nombre'];  
-                $habitacion = $fila['id_hab'];
-                $fecha_entrada = $fila['inicio_hospedaje'];
-                $fecha_salida = $fila['fin_hospedaje'];
                 $extra_adulto = $fila['extra_adulto'];
                 $extra_junior = $fila['extra_junior'];
                 $extra_infantil = $fila['extra_infantil'];
@@ -371,7 +380,12 @@
                 $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
                 $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
                 $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
-                $total_final= $total_final + $total_tarifa;
+                if($cargo_noche == 1){
+                  $total_tarifa_seleccionada= $total_tarifa;
+                }else{
+                  $total_tarifa_seleccionada= 0;
+                }
+                $total_final= $total_final + $total_tarifa_seleccionada;
                 echo '<tr class="text-center">
                 <td><div class="form-check">';
                   if($cargo_noche == 0){

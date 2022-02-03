@@ -3,15 +3,11 @@
   include_once('clase_log.php');
   include_once("clase_hab.php");
   include_once("clase_huesped.php");
-  include_once("clase_movimiento.php");
-  include_once("clase_reservacion.php");
   include_once('clase_tarifa.php');
 
   $logs = NEW Log(0);
   $hab= NEW Hab(0);
   $huesped= NEW Huesped(0);
-  $reservacion= NEW Reservacion(0);
-  $movimiento = NEW Movimiento(0);
   $tarifa= NEW Tarifa(0);
   //86400
 
@@ -120,7 +116,7 @@
   // Revisamos el total de cargo por habitacion
   while ($fila = mysqli_fetch_array($consulta))
   {
-      $hab_id = $fila['id'];
+      $hab_id = $fila['ID'];
       $hab_nombre = $fila['nombre'];  
       $habitacion = $fila['id_hab'];
       $fecha_entrada = $fila['inicio_hospedaje'];

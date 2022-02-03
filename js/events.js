@@ -1611,18 +1611,16 @@ function disponible_asignar(hab_id,estado){
 //* Reporte *//
 
 // Aceptar realizara el cargo por noche de las habitaciones ocupadas
-function aceptar_cargo_noche(){
-    var usuario_id=localStorage.getItem("id");
+function mostrar_cargo_noche(){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/aceptar_cargo_noche.php?usuario_id="+usuario_id);
+	$("#area_trabajo_menu").load("includes/mostrar_cargo_noche.php");
 	closeNav();
 }
 
 // Cambiar el estado de cargo noche en una habitacion
 function cambiar_cargo_noche(id){
-    var usuario_id=localStorage.getItem("id");
     var cargo_noche= document.getElementById("cargo_noche").checked;
     // Convertir cargo noche valor
     if(cargo_noche){
@@ -1635,7 +1633,6 @@ function cambiar_cargo_noche(id){
         var datos = {
                 "id": id,
                 "cargo_noche": cargo_noche,
-                "usuario_id": usuario_id,
 			};
 		$.ajax({
 			  async:true,
@@ -1645,7 +1642,7 @@ function cambiar_cargo_noche(id){
 			  url:"includes/cambiar_cargo_noche.php",
 			  data:datos,
 			  //beforeSend:loaderbar,
-              success:aceptar_cargo_noche,
+              success:mostrar_cargo_noche,
               //success:problemas_sistema,
 			  timeout:5000,
 			  error:problemas_sistema
@@ -1657,11 +1654,40 @@ function cambiar_cargo_noche(id){
     }
 }
 
+// Modal de aceptar el cargo noche de las habitaciones seleccionadas
+function aceptar_cargo_noche(){
+	$("#mostrar_herramientas").load("includes/aceptar_modal_cargo_noche.php");
+}
+
+// Aceptar el cargo noche de las habitaciones seleccionadas
+function cargo_noche(){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+
+    var datos = {
+            "usuario_id": usuario_id,
+        };
+    $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/cargo_noche.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+        });
+    reporte_cargo_noche();
+    return false;
+}
+
 // Generar reporte de cargo por noche
 function reporte_cargo_noche(){
 	var usuario_id=localStorage.getItem("id");
     window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
-	closeNav();
 }
 
 //* Forma pago *//
