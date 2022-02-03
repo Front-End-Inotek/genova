@@ -1928,6 +1928,7 @@ function modificar_usuario(id){
     var reservacion_editar= document.getElementById("reservacion_editar").checked;
     var reservacion_borrar= document.getElementById("reservacion_borrar").checked;
     var reporte_ver= document.getElementById("reporte_ver").checked;
+    var reporte_agregar= document.getElementById("reporte_agregar").checked;
     var forma_pago_ver= document.getElementById("forma_pago_ver").checked;
     var forma_pago_agregar= document.getElementById("forma_pago_agregar").checked;
     var forma_pago_editar= document.getElementById("forma_pago_editar").checked;
@@ -2087,6 +2088,11 @@ function modificar_usuario(id){
     }else{
         reporte_ver = 0;
     }
+    if(reporte_agregar){
+        reporte_agregar = 1;
+    }else{
+        reporte_agregar = 0;
+    }
     
     // Convertir forma_pago permisos
     if(forma_pago_ver){
@@ -2239,6 +2245,7 @@ function modificar_usuario(id){
                   "reservacion_editar": reservacion_editar,
                   "reservacion_borrar": reservacion_borrar,
                   "reporte_ver": reporte_ver,
+                  "reporte_agregar": reporte_agregar,
                   "forma_pago_ver": forma_pago_ver,
                   "forma_pago_agregar": forma_pago_agregar,
                   "forma_pago_editar": forma_pago_editar,

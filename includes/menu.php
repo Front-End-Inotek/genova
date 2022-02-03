@@ -268,7 +268,7 @@
                       <div class="collapse" id="submenu3" aria-expanded="false">
                         <ul class="flex-column pl-2 nav">';
 
-                          $permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reservacion_agregar;
+                          $permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
                           if($permisos_reportes_diarios>0){
                             echo '
                             <li class="nav-item">
@@ -279,16 +279,16 @@
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="mostrar_cargo_noche()">
-                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Aplicar Cargo por noche</a>
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Cargo por noche</a>
                                           </li>';
                                         }
-                                        /*if($usuario->reservacion_agregar==1){
+                                        if($usuario->reporte_agregar==1){
                                           echo '
                                           <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_reservaciones()">
-                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Reservación</a>
+                                          <a class="nav-link p-1 text-truncate" href="#" onclick="mostrar_cargo_noche()">
+                                              <i class="fa fa-fw fa-clock-o"></i> &nbsp; Aplicar Cargo por noche</a>
                                           </li>';
-                                        }*/
+                                        }
                                         echo '
                                     </ul>
                                 </div>
