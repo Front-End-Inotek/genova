@@ -45,7 +45,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
       // Mostramos los reportes de cargos de noche
-      function mostrar($id){
+      function mostrar(){
         date_default_timezone_set('America/Mexico_City');
         $inicio_dia= date("d-m-Y");   
         $inicio_dia= strtotime($inicio_dia);
@@ -86,7 +86,7 @@
         </div>';
       }
       // Busqueda por fecha en ver reportes de cargos de noche
-      function mostrar_cargo_noche_fecha($fecha_ini_tiempo,$fecha_fin_tiempo,$id){
+      function mostrar_cargo_noche_fecha($fecha_ini_tiempo,$fecha_fin_tiempo){
         date_default_timezone_set('America/Mexico_City');
         $fecha_ini_tiempo =$fecha_ini_tiempo. " 0:00:00";
         $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";

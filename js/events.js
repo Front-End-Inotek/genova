@@ -1692,11 +1692,10 @@ function reporte_cargo_noche(){
 
 // Muestra los reportes de los cargos por noche de la bd
 function ver_cargo_noche(){
-	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_cargo_noche.php?usuario_id="+usuario_id);
+	$("#area_trabajo_menu").load("includes/ver_cargo_noche.php");
 	closeNav();
 }
 
@@ -1709,13 +1708,12 @@ function mostrar_reporte_cargo_noche(id){
 function busqueda_cargo_noche(){
 	var inicial=$("#inicial").val();
 	var final=$("#final").val();
-    var id=localStorage.getItem("id");
     if(inicial.length >0 && final.length >0){
         $('.pagination').hide();
     }else{
         $('.pagination').show();
     }
-	$("#tabla_cargo_noche").load("includes/busqueda_cargo_noche.php?inicial="+inicial+"&final="+final+"&id="+id);
+	$("#tabla_cargo_noche").load("includes/busqueda_cargo_noche.php?inicial="+inicial+"&final="+final);
 }
 
 //* Forma pago *//
@@ -2951,6 +2949,32 @@ function regresar_editar_inventario(){
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
+}
+
+// Muestra los productos para poder surtir inventario
+function surtir_inventario(){
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_inventario_surtir.php");
+	closeNav();
+}
+
+// Barra de diferentes busquedas para poder surtir inventario
+function buscar_surtir_inventario(){
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var usuario_id=localStorage.getItem("id");
+	$("#tabla_surtir_inventario").load("includes/buscar_surtir_inventario.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+}
+
+function mostrar_surtir_categoria(){
+    var categoria = document.getElementById("categoria").value;
+    if(categoria==0){
+        $("#area_trabajo_menu").load("includes/surtir_inventario.php");
+    }else{
+        $("#area_trabajo_menu").load("includes/surtir_inventario_categoria.php?categoria="+categoria);
+    }
+    alert("algo cambio "+categoria);
 }
 
 //* Restaurante *//

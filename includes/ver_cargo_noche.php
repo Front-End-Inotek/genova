@@ -20,7 +20,7 @@
               </button>
             </div>
           </div><br>';
-          $cargo_noche->mostrar($_GET['usuario_id']);
+          $cargo_noche->mostrar();
   echo '
          </div>';
 ?>

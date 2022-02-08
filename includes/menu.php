@@ -483,6 +483,13 @@
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu5sub1" data-toggle="collapse" data-target="#submenu5sub1"><span>Inventario</span></a>
                                 <div class="collapse" id="submenu5sub1" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
+                                        if($usuario->inventario_agregar==1){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_inventario()">
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Inventario</a>
+                                          </li>';
+                                        }
                                         if($usuario->inventario_ver==1){
                                           echo '
                                           <li class="nav-item">
@@ -490,11 +497,11 @@
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Inventario</a>
                                           </li>';
                                         }
-                                        if($usuario->inventario_agregar==1){
+                                        if($usuario->inventario_ver==1 && $usuario->inventario_editar==1){
                                           echo '
                                           <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_inventario()">
-                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Inventario</a>
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="surtir_inventario()">
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Surtir Inventario</a>
                                           </li>';
                                         }
                                         if($usuario->categoria_ver==1){
