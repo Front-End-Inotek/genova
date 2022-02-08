@@ -106,4 +106,4 @@ VERSION 1.7
 -Generar cargo por noche en las habitaciones seleccionadas
 -Crear derechos y vista para poder ver reportes de cargos por noche
 -Funcion de ver reportes de cargos por noche y por fecha
--Resurtir inventario9
+-Resurtir inventario
