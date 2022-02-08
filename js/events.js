@@ -2967,6 +2967,7 @@ function buscar_surtir_inventario(){
 	$("#tabla_surtir_inventario").load("includes/buscar_surtir_inventario.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
 
+// Mostrar diferentes categorias en ver inventario surtir
 function mostrar_surtir_categoria(){
     var categoria = document.getElementById("categoria").value;
     if(categoria==0){
@@ -2974,7 +2975,6 @@ function mostrar_surtir_categoria(){
     }else{
         $("#area_trabajo_menu").load("includes/surtir_inventario_categoria.php?categoria="+categoria);
     }
-    alert("algo cambio "+categoria);
 }
 
 //* Restaurante *//

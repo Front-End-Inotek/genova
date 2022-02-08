@@ -269,13 +269,58 @@
           </table>
           </div>';
       }
-      // Barra de diferentes busquedas en ver inventario
+      // Barra de diferentes busquedas en ver inventario surtir
       function buscar_surtir_inventario($a_buscar){
         $cantidad=0;
         $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
         FROM inventario 
         INNER JOIN categoria ON inventario.categoria = categoria.id WHERE (inventario.nombre LIKE '%$a_buscar%' || inventario.descripcion LIKE '%$a_buscar%' || categoria.nombre LIKE '%$a_buscar%' || inventario.clave LIKE '%$a_buscar%') && inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
-        $comentario="Mostramos los productos para poder surtir inventario";
+        $comentario="Mostrar diferentes busquedas en ver inventario surtir";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        echo '<div class="table-responsive" id="tabla_surtir_inventario">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="table-primary-encabezado text-center">
+            <th>Nombre</th>
+            <th>Categoria</th>
+            <th>Stock</th>
+            <th>Inventario</th>
+            <th>Faltante</th>
+            <th>Faltante</th>
+            <th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>
+            </tr>
+          </thead>
+        <tbody>';
+            while ($fila = mysqli_fetch_array($consulta))
+            {
+              $faltante=$fila['stock']-$fila['inventario'];
+              if($faltante<=0){
+                $faltante=0;
+              }
+              $cantidad++;
+              echo '<tr class="text-center">
+              <td>'.$fila['nom'].'</td>
+              <td>'.$fila['categoria'].'</td>
+              <td>'.$fila['stock'].'</td>
+              <td>'.$fila['inventario'].'</td>
+              <td>'.$faltante.'</td>
+              <td><input type="nombre" class="color_black" value = "'.$faltante.'" id="cantidad'.$fila['id'].'"></td>
+              <td><button class="btn btn-success" onclick="inventario_surtir('.$fila['id'].')"> Guardar</button></td>
+              </tr>';
+            }
+            echo '
+            </tbody>
+          </table>
+          </div>';
+      }
+      // Mostrar diferentes categorias en ver inventario surtir
+      function mostrar_surtir_categoria($categoria){
+        $cantidad=0;
+        $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
+        FROM inventario 
+        INNER JOIN categoria ON inventario.categoria = categoria.id WHERE categoria.id = $categoria && inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
+        $comentario="Mostrar diferentes categorias en ver inventario surtir";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_surtir_inventario">
