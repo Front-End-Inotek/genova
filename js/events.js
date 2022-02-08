@@ -1690,6 +1690,23 @@ function reporte_cargo_noche(){
     window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
 }
 
+// Muestra los reportes de los cargos por noche de la bd
+function ver_cargo_noche(){
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_cargo_noche.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
+// Muestra los reportes guardados de los cargos por noche de la bd
+function mostrar_reporte_cargo_noche(id){
+    alert(id);
+	//window.open("reportes/reservaciones/reporte_"+id+".pdf");
+    window.open("reportes/reservaciones/cargo_noche/reporte_1.pdf");
+}
+
 //* Forma pago *//
 
 // Guardar una forma de pago

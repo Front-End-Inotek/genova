@@ -44,51 +44,34 @@
         $comentario="Guardamos el cargo noche en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
-      // Mostramos las categorias
+      // Mostramos los reportes de cargos de noche
       function mostrar($id){
-        include_once('clase_usuario.php');
-        $usuario =  NEW Usuario($id);
-        $agregar = $usuario->categoria_editar;
-        $editar = $usuario->categoria_editar;
-        $borrar = $usuario->categoria_borrar;
-
-        $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
-        $comentario="Mostrar las categorias para el inventario";
+        $sentencia = "SELECT * FROM cargo_noche WHERE estado = 1 ORDER BY id DESC";
+        $comentario="Mostrar los reportes de cargos de noche";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_tipo">
+        echo '<div class="table-responsive" id="tabla_cargo_noche">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Nombre</th>';
-            if($editar==1){
-              echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
-            }
-            if($borrar==1){
-              echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-            }
-            echo '</tr>
+            <th>Número</th>
+            <th>Usuario</th>
+            <th>Total</th>
+            <th>Fecha</th>
+            <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
+            </tr>
           </thead>
         <tbody>';
-            echo '<tr <tr class="text-center">
-              <td><input type="text" class ="color_black" id="nombre" placeholder="Ingresa el nombre" pattern="[a-z]{1,15}" maxlength="50"></td>';
-              if($agregar==1){
-                echo '<td><button class="btn btn-success" onclick="guardar_categoria()"> Guardar</button></td>';
-              }
-              echo '<td></td>       
-            </tr>';
             while ($fila = mysqli_fetch_array($consulta))
             {
                 echo '<tr class="text-center">
-                <td>'.$fila['nombre'].'</td>';
-                if($editar==1){
-                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_categoria('.$fila['id'].')"> Editar</button></td>';
-                }
-                if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_categoria('.$fila['id'].')"> Borrar</button></td>';
-                }
-                echo '</tr>';
-            }  
+                <td>'.$fila['id'].'</td> 
+                <td>'.$fila['id_usuario'].'</td>
+                <td>$'.number_format($fila['total'], 2).'</td>
+                <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                <td><button class="btn btn-success" onclick="mostrar_reporte_cargo_noche('.$fila['id'].')"> Reporte</button></td>
+                </tr>';
+            }
             echo '
           </tbody>
         </table>

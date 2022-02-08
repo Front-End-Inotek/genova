@@ -278,7 +278,7 @@
                                         if($usuario->reporte_ver==1){
                                           echo '
                                           <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#" onclick="mostrar_cargo_noche()">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_cargo_noche()">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Cargo por noche</a>
                                           </li>';
                                         }
