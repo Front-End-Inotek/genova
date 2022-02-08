@@ -1628,7 +1628,7 @@ function cambiar_cargo_noche(id){
     }else{
         cargo_noche= 0;
     }
-   alert(cargo_noche);
+    //alert(cargo_noche);
 	if(id >0){
         var datos = {
                 "id": id,
@@ -1702,9 +1702,20 @@ function ver_cargo_noche(){
 
 // Muestra los reportes guardados de los cargos por noche de la bd
 function mostrar_reporte_cargo_noche(id){
-    alert(id);
-	//window.open("reportes/reservaciones/reporte_"+id+".pdf");
-    window.open("reportes/reservaciones/cargo_noche/reporte_1.pdf");
+	window.open("reportes/reservaciones/cargo_noche/reporte_cargo_noche_"+id+".pdf");
+}
+
+// Busqueda por fecha en ver reportes guardados de los cargos por noche de la bd
+function busqueda_cargo_noche(){
+	var inicial=$("#inicial").val();
+	var final=$("#final").val();
+    var id=localStorage.getItem("id");
+    if(inicial.length >0 && final.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_cargo_noche").load("includes/busqueda_cargo_noche.php?inicial="+inicial+"&final="+final+"&id="+id);
 }
 
 //* Forma pago *//

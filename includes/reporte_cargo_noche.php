@@ -158,7 +158,7 @@
   $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
 
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
-  $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_".$numero_actual.'_cargo_noche_'.$dia.' de '.$mes.' de '.$anio.".pdf","F");
+  $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche_".$numero_actual.".pdf","F");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
       //echo 'Reporte cargo noche';*/
   // Luego de guardar el reporte se cambia el estado cargo noche de todas las habitaciones a 0
