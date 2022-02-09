@@ -389,46 +389,6 @@
         </div>
         </div>';
       }
-      // Mostrar productos que seran en el inventario surtidos
-      function mostrar_a_surtir(){
-        $contador= 0;
-        $sentencia = "SELECT *,surtir.id AS ID,inventario.nombre AS nom
-        FROM surtir
-        INNER JOIN inventario ON surtir.producto = inventario.id WHERE surtir.estado =0 ORDER BY surtir.producto";
-        $comentario="Mostrar productos que seran en el inventario surtidos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_surtir">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr class="table-primary-encabezado text-center">
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th><span class=" glyphicon glyphicon-cog"></span> Borrar</th>
-            </tr>
-          </thead>
-        <tbody>';
-            while ($fila = mysqli_fetch_array($consulta))
-            {
-              $contador++;
-              echo '<tr class="text-center">
-              <td>'.$fila['nombre'].'</td>
-              <td>'.$fila['cantidad'].'</td>
-              <td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_surtir_inventario('.$fila['ID'].')"> Borrar</button></td>
-              </tr>';
-            }
-            if($contador>0){
-              echo '<tr class="text-center">
-              <td></td>
-              <td></td>
-              <td><button class="btn btn-primary btn-lg" onclick="aplicar_inventario_surtir()"> Surtir</button></td>
-            </tr>';
-            }
-            echo '
-            </tbody>
-          </table>
-          </div>';
-      }
       // Mostrar las categorias del inventario
       function categoria_surtir(){
         $sentencia = "SELECT * FROM categoria ORDER BY nombre";

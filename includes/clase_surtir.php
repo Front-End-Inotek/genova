@@ -66,7 +66,7 @@
               echo '<tr class="text-center">
               <td>'.$fila['nombre'].'</td>
               <td>'.$fila['cantidad'].'</td>
-              <td><button class="btn btn-danger" onclick="inventario_surtir('.$fila['ID'].')"> Borrar</button></td>
+              <td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_surtir_inventario('.$fila['ID'].')"> Borrar</button></td>
               </tr>';
             }
             if($contador>0){
