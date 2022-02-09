@@ -1,16 +1,13 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_inventario.php");
+  include_once("clase_surtir.php");
   $inventario = NEW Inventario(0);
-  echo ' <div class="container-fluid blanco">
-
-          <div class="row">
-          <h2>Surtir Inventario</h2>
-          <div class="col-sm-8">';
-            $inventario->mostrar_surtir_categoria($_GET['categoria']);
-          echo  '</div>
-          <div class="col-sm-4 " id="a_surtir">';
-            $inventario->mostrar_a_surtir();
-          echo  '</div>
-          </div>';
+  $surtir = NEW Surtir(0);
+  
+  echo ' <div class="container-fluid blanco"> 
+          <br>
+          <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">SURTIR INVENTARIO</h2></div>';
+          $inventario->mostrar_surtir_categoria($_GET['categoria']);
+         echo  '</div>';
 ?>

@@ -2969,12 +2969,45 @@ function buscar_surtir_inventario(){
 
 // Mostrar diferentes categorias en ver inventario surtir
 function mostrar_surtir_categoria(){
-    var categoria = document.getElementById("categoria").value;
-    if(categoria==0){
+    //var categoria = document.getElementById("categoria").value;
+    var categoria=$("#categoria").val();
+    if(categoria == 0){
         $("#area_trabajo_menu").load("includes/surtir_inventario.php");
     }else{
         $("#area_trabajo_menu").load("includes/surtir_inventario_categoria.php?categoria="+categoria);
     }
+}
+
+// Guardar producto a surtir en el inventario
+function inventario_surtir_producto(producto){
+    var cant= "cantidad"+producto;
+    var cantidad_producto= document.getElementById(cant).value;
+	if(cantidad_producto>0){
+		var datos = {
+				"producto": producto,
+			    "cantidad_producto": cantidad_producto,
+			};
+		$.ajax({
+			  async:true,
+			  type: "POST",
+			  dataType: "html",
+			  contentType: "application/x-www-form-urlencoded",
+			  url:"includes/inventario_surtir.php",
+			  data:datos,
+			  beforeSend:loaderbar,
+			  success:cargar_surtir,
+			  //success:problemas_hab,
+			  timeout:5000,
+			  error:problemas_sistema
+			});
+		return false;
+	}else{
+		alert("Cantidad insuficiente");
+	}
+}
+
+function cargar_surtir(){
+	$("#a_surtir").load("includes/mostrar_surtir.php");
 }
 
 //* Restaurante *//

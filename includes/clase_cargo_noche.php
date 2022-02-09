@@ -22,7 +22,7 @@
           $this->cantidad_hab= 0;
           $this->estado= 0;
         }else{
-          $sentencia = "SELECT * FROM cargo_noche WHERE id = $id LIMIT 1 ";
+          $sentencia = "SELECT * FROM cargo_noche WHERE id = $id LIMIT 1";
           $comentario="Obtener todos los valores de habitacion";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           while ($fila = mysqli_fetch_array($consulta))
@@ -130,23 +130,6 @@
           </table>
           </div>';
         }
-      }
-      // Editar una categoria
-      function editar_categoria($id,$nombre){
-        $sentencia = "UPDATE `categoria` SET
-            `nombre` = '$nombre'
-            WHERE `id` = '$id';";
-        //echo $sentencia ;
-        $comentario="Editar una categoria dentro de la base de datos ";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-      }
-      // Borrar una categoria
-      function borrar_categoria($id){
-        $sentencia = "UPDATE `categoria` SET
-        `estado` = '0'
-        WHERE `id` = '$id';";
-        $comentario="Poner estado de una categoria como inactivo";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtener el ultimo cargo noche ingresado 
       function ultima_insercion(){

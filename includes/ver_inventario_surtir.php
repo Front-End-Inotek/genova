@@ -12,19 +12,17 @@
               <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_surtir_inventario()" class="color_black form-control form-control" autofocus="autofocus"/>
             </div>
             <div class="col-sm-2">
-              <select class="color_black" onchange="mostrar_surtir_categoria()" id="categoria">';
-              echo '<option value="0">Todos</option>';
-                $inventario->categoria_surtir();
-              echo '</select>
+              <div class="form-group">
+                <select class="form-control-lg" id="categoria" onchange="mostrar_surtir_categoria()">
+                  <option value="-1">Selecciona</option>
+                  <option value="0">Todos</option>';
+                  $inventario->categoria_surtir();
+                echo '</select>
+              </div>
             </div>
             <div class="col-sm-8"></div>
           </div><br>';
           $inventario->mostrar_surtir_inventario();
   echo '  
          </div>';
-        /*echo '<input type="text" id="busqueda" onkeyup="buscar_surtir()" class="color_black"><span class="color_black">----</span>';
-        echo '<select class="color_black" onchange="mostrar_surtir_categoria()" id="categoria_inv">';
-        echo '<option value="0">Todos</option>';
-        //$this->categoria_surtir();
-        echo '</select>';*/
 ?>
