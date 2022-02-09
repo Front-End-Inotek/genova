@@ -56,6 +56,7 @@
             <tr class="table-primary-encabezado text-center">
             <th>Producto</th>
             <th>Cantidad</th>
+            <th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>
             <th><span class=" glyphicon glyphicon-cog"></span> Borrar</th>
             </tr>
           </thead>
@@ -66,25 +67,25 @@
               echo '<tr class="text-center">
               <td>'.$fila['nombre'].'</td>
               <td>'.$fila['cantidad'].'</td>
+              <td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_editar_surtir_inventario('.$fila['ID'].')"> Editar</button></td>
               <td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_surtir_inventario('.$fila['ID'].')"> Borrar</button></td>
               </tr>';
-            }
-            if($contador>0){
-              echo '<tr class="text-center">
-              <td></td>
-              <td></td>
-              <td><button class="btn btn-primary btn-lg" onclick="aplicar_inventario_surtir()"> Surtir</button></td>
-            </tr>';
             }
             echo '
             </tbody>
           </table>
           </div>';
+          if($contador>0){
+            echo '<div class="row">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-3"><button class="btn btn-primary btn-block" onclick="aplicar_inventario_surtir()"> Surtir</button></div>';
+            echo '</div>';
+          }
       }
       // Editar una surtir
-      function editar_surtir($id,$nombre){
+      function editar_surtir($id,$cantidad){
         $sentencia = "UPDATE `surtir` SET
-            `nombre` = '$nombre'
+            `cantidad` = '$cantidad'
             WHERE `id` = '$id';";
         //echo $sentencia ;
         $comentario="Editar una surtir dentro de la base de datos ";

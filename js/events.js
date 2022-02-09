@@ -3011,6 +3011,43 @@ function cargar_surtir(){
 	$("#a_surtir").load("includes/mostrar_surtir.php");
 }
 
+// Modal de editar un producto de surtir inventario 
+function aceptar_editar_surtir_inventario(id){
+	$("#mostrar_herramientas").load("includes/editar_modal_surtir_inventario.php?id="+id);
+}
+
+// Editar un producto de surtir inventario 
+function editar_surtir_inventario(id){
+	var cantidad= document.getElementById("cantidad").value;
+
+
+	if(cantidad >0){
+        $('#caja_herramientas').modal('hide');
+        //$('#boton_surtir').hide();
+			$("#boton_surtir").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+			  "id": id,
+              "cantidad": cantidad,
+            };
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/editar_surtir_inventario.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:cargar_surtir,
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("¡La cantidad debe ser mayor a 0!");
+    }    
+}
+
 // Borrar un producto de surtir inventario 
 function borrar_surtir_inventario(id){
     $('#caja_herramientas').modal('hide');
