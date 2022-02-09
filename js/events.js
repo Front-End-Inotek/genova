@@ -2767,7 +2767,7 @@ function aceptar_borrar_categoria(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_categoria.php?id="+id);
 }
 
-//* Inventario *//
+//* Inventario y Sutir*//
 
 // Agregar en el inventario
 function agregar_inventario(){
@@ -3006,8 +3006,38 @@ function inventario_surtir_producto(producto){
 	}
 }
 
+// Muestra los datos de surtir de la bd 
 function cargar_surtir(){
 	$("#a_surtir").load("includes/mostrar_surtir.php");
+}
+
+// Borrar un producto de surtir inventario 
+function borrar_surtir_inventario(id){
+    $('#caja_herramientas').modal('hide');
+    if (id >0) {
+        var datos = {
+                "id": id,
+            };
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/borrar_surtir_inventario.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:cargar_surtir,
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }
+}
+
+// Modal de borrar un producto de surtir inventario 
+function aceptar_borrar_surtir_inventario(id){
+	$("#mostrar_herramientas").load("includes/borrar_modal_surtir_inventario.php?id="+id);
 }
 
 //* Restaurante *//

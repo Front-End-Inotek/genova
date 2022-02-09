@@ -248,9 +248,9 @@
         <tbody>';
             while ($fila = mysqli_fetch_array($consulta))
             {
-              $faltante=$fila['stock']-$fila['inventario'];
-              if($faltante<=0){
-                $faltante=0;
+              $faltante= $fila['stock'] - $fila['inventario'];
+              if($faltante <= 0){
+                $faltante= 0;
               }
               $cantidad++;
               echo '<tr class="text-center">
@@ -293,9 +293,9 @@
         <tbody>';
             while ($fila = mysqli_fetch_array($consulta))
             {
-              $faltante=$fila['stock']-$fila['inventario'];
-              if($faltante<=0){
-                $faltante=0;
+              $faltante= $fila['stock'] - $fila['inventario'];
+              if($faltante <= 0){
+                $faltante= 0;
               }
               $cantidad++;
               echo '<tr class="text-center">
@@ -362,9 +362,9 @@
             <tbody>';
                 while ($fila = mysqli_fetch_array($consulta))
                 {
-                  $faltante=$fila['stock']-$fila['inventario'];
-                  if($faltante<=0){
-                    $faltante=0;
+                  $faltante= $fila['stock'] - $fila['inventario'];
+                  if($faltante <= 0){
+                    $faltante= 0;
                   }
                   $cantidad++;
                   echo '<tr class="text-center">
@@ -384,7 +384,7 @@
           </div>
           
           <div class="col-sm-4" id="a_surtir">';
-              $surtir->mostrar_a_surtir();
+            $surtir->mostrar_a_surtir();
           echo  '</div>
         </div>
         </div>';
@@ -414,7 +414,7 @@
               echo '<tr class="text-center">
               <td>'.$fila['nombre'].'</td>
               <td>'.$fila['cantidad'].'</td>
-              <td><button class="btn btn-danger" onclick="inventario_surtir('.$fila['ID'].')"> Borrar</button></td>
+              <td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_surtir_inventario('.$fila['ID'].')"> Borrar</button></td>
               </tr>';
             }
             if($contador>0){
@@ -439,20 +439,18 @@
           echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
         }
       }
+      // Obtengo el valor de las categoria seleccionada
       function categoria_surtir_valor($categoria){
         $sentencia = "SELECT * FROM categoria ORDER BY nombre";
-        $comentario="Mostrar las categorias";
+        $comentario="Obtengo el valor de las categoria seleccionada";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
-  
         {
           if($fila['id']==$categoria){
             echo '<option value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
           }else{
             echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
           }
-  
-  
         }
       }
       // Editar el inventario
