@@ -70,7 +70,7 @@
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
   $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');
-  $logs->guardar_log($_GET['usuario_id'],"Reporte surtir inventario ".$dia.' de '.$mes.' de '.$anio);
+  //$logs->guardar_log($_GET['usuario_id'],"Reporte surtir inventario ".$dia.' de '.$mes.' de '.$anio);
   $pdf->Ln(4);
 
   // Titulos tabla -277
@@ -81,30 +81,11 @@
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Ln(4);
   $pdf->SetFillColor(99, 155, 219);
-  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-  $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
-  $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
-  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'%'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
-
-  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'JUNIOR'),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'INFANTIL'),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
-  $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 
-  $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'RESERVA'),0,0,'C',True);
-  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True); 
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,1,'C',True);
+  $pdf->Cell(100,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True);
+  $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'CANTIDAD'),0,1,'C',True);
 
   // Datos dentro de la tabla herramienta
-  $total_final= 0;
+  /*$total_final= 0;
   $cantidad_hab= 0;
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
@@ -148,14 +129,15 @@
   $pdf->SetFont('Arial','',10);
   $numero_actual= $cargo_noche->ultima_insercion();
   $numero_actual++;
-  $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
+  $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');*/
 
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
-  $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche_".$numero_actual.".pdf","F");
+  $numero_actual= 1;
+  $pdf->Output("../reportes/inventario/reporte_surtir_inventario".$numero_actual.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
       //echo 'Reporte cargo noche';*/
   // Luego de guardar el reporte se cambia el estado cargo noche de todas las habitaciones a 0
-  $hab->estado_cargo_noche(0);
-  $cargo_noche->guardar_cargo_noche($_GET['usuario_id'],$total_final,$cantidad_hab);
+  /*$hab->estado_cargo_noche(0);
+  $cargo_noche->guardar_cargo_noche($_GET['usuario_id'],$total_final,$cantidad_hab);*/
 ?>
 
