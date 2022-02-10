@@ -38,7 +38,7 @@
         $fecha=time();
         $sentencia = "INSERT INTO `surtir` (`fecha`, `producto`, `cantidad`, `estado`)
         VALUES ('$fecha', '$producto', '$cantidad', '1');";
-        $comentario="Guardamos el cargo noche en la base de datos";
+        $comentario="Guardamos el surtir en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
       // Mostrar productos que seran en el inventario surtidos
@@ -46,7 +46,7 @@
         $contador= 0;
         $sentencia = "SELECT *,surtir.id AS ID,inventario.nombre AS nom
         FROM surtir
-        INNER JOIN inventario ON surtir.producto = inventario.id WHERE surtir.estado = 1 ORDER BY surtir.producto";
+        INNER JOIN inventario ON surtir.producto = inventario.id WHERE surtir.estado = 1 ORDER BY surtir.producto DESC";
         $comentario="Mostrar productos que seran en el inventario surtidos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -78,26 +78,32 @@
           if($contador>0){
             echo '<div class="row">
             <div class="col-sm-9"></div>
-            <div class="col-sm-3"><button class="btn btn-primary btn-block" onclick="aplicar_inventario_surtir()"> Surtir</button></div>';
+            <div class="col-sm-3"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_aplicar_surtir_inventario()"> Surtir</button></div>';
             echo '</div>';
           }
       }
-      // Editar una surtir
+      // Editar el surtir
       function editar_surtir($id,$cantidad){
         $sentencia = "UPDATE `surtir` SET
             `cantidad` = '$cantidad'
             WHERE `id` = '$id';";
         //echo $sentencia ;
-        $comentario="Editar una surtir dentro de la base de datos ";
+        $comentario="Editar el surtir dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Borrar una surtir
+      // Borrar el surtir
       function borrar_surtir($id){
         $sentencia = "UPDATE `surtir` SET
         `estado` = '0'
         WHERE `id` = '$id';";
-        $comentario="Poner estado de una surtir como inactivo";
+        $comentario="Poner estado de surtir como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      function mostrar_a_surtir_pdf(){
+        $sentencia = "SELECT * ,surtir.id AS ID FROM surtir LEFT JOIN inventario ON surtir.producto = inventario.id  WHERE surtir.estado =1 ORDER BY surtir.producto";
+        $comentario="Mostrar los productos a surtir";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
       }
       // Obtener el ultimo surtir ingresado 
       function ultima_insercion(){

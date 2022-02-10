@@ -3077,6 +3077,46 @@ function aceptar_borrar_surtir_inventario(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_surtir_inventario.php?id="+id);
 }
 
+// Modal de aplicar surtir inventario 
+function aceptar_aplicar_surtir_inventario(id){
+	$("#mostrar_herramientas").load("includes/aplicar_modal_surtir_inventario.php?id="+id);
+}
+
+// Aplicar surtir inventario 
+function aplicar_surtir_inventario(){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+
+    /*var datos = {
+            "usuario_id": usuario_id,
+        };
+    $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/aplicar_surtir_inventario.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+        });
+    //reporte_cargo_noche();
+    return false;*/
+
+	/*$("#area_trabajo_menu").load("includes/aplicar_surtir_inventario.php?usuario_id="+usuario_id);
+    principal();*/
+    reporte_surtir_inventario(); 
+}
+
+// Generar reporte de surtir inventario
+function reporte_surtir_inventario(){
+	var usuario_id=localStorage.getItem("id");
+    window.open("includes/reporte_surtir_inventario.php?usuario_id="+usuario_id);
+}
+
 //* Restaurante *//
 
 // Agregar en el restaurante
