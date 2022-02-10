@@ -81,55 +81,32 @@
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Ln(4);
   $pdf->SetFillColor(99, 155, 219);
-  $pdf->Cell(100,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True);
+  $pdf->Cell(45,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+  $pdf->Cell(80,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'CANTIDAD'),0,1,'C',True);
 
-  // Datos dentro de la tabla herramienta
-  /*$total_final= 0;
-  $cantidad_hab= 0;
+  // Datos dentro de la tabla surtir
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
-  $consulta = $hab->datos_cargo_noche();
-  // Revisamos el total de cargo por habitacion
+  $consulta = $surtir->datos_surtir_inventario();
   while ($fila = mysqli_fetch_array($consulta))
   {
-      $cantidad_hab++;
-      $hab_id = $fila['ID'];
-      $hab_nombre = $fila['nombre'];  
-      $habitacion = $fila['id_hab'];
-      $fecha_entrada = $fila['inicio_hospedaje'];
-      $fecha_salida = $fila['fin_hospedaje'];
-      $extra_adulto = $fila['extra_adulto'];
-      $extra_junior = $fila['extra_junior'];
-      $extra_infantil = $fila['extra_infantil'];
-      $extra_menor = $fila['extra_menor'];
-      $id_tarifa = $fila['tarifa'];
-      $id_huesped = $fila['id_huesped'];
-      $quien_reserva	= $fila['nombre_reserva'];
-      $descuento = $fila['descuento'];
-      //$total = $fila['total'];
+      $surtir_id = $fila['ID'];
+      $nombre = $fila['nombre'];  
+      $cantidad = $fila['cantidad'];
 
-      $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
+      /*$nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
       $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
       $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
-      $total_final= $total_final + $total_tarifa;
-
-      $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
-      $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$nombre_tarifa),1,0,'C');
-      $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_adulto),1,0,'C'); 
-      $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_junior),1,0,'C');
-      $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_infantil),1,0,'C');
-      $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
-      $pdf->Cell(50,5,iconv("UTF-8", "ISO-8859-1",$nombre_huesped),1,0,'C'); 
-      $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1",$quien_reserva),1,0,'C'); 
-      $pdf->Cell(10,5,iconv("UTF-8", "ISO-8859-1",$descuento),1,0,'C'); 
-      $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_tarifa, 2)),1,1,'C');    
+      $total_final= $total_final + $total_tarifa;*/
+      $pdf->Cell(45,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+      $pdf->Cell(80,5,iconv("UTF-8", "ISO-8859-1",$nombre),1,0,'C'); 
+      $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$cantidad),1,1,'C');    
   }
 
   $pdf->SetFont('Arial','',10);
-  $numero_actual= $cargo_noche->ultima_insercion();
-  $numero_actual++;
-  $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');*/
+  //$numero_actual= $cargo_noche->ultima_insercion();
+  //$numero_actual++;
 
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $numero_actual= 1;

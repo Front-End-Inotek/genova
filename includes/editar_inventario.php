@@ -11,7 +11,7 @@
           <div class="col-sm-2">Nombre:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="text" id="nombre" value="'.$inventario->nombre.'" maxlength="90">
+            <input class="form-control" type="text" id="nombre" value="'.$inventario->nombre.'" maxlength="60">
           </div>
           </div>
           <div class="col-sm-2">Stock:</div>

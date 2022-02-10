@@ -5,6 +5,7 @@
   class Surtir extends ConexionMYSql{
 
       public $id;
+      public $id_reporte;
       public $fecha;
       public $producto;
       public $cantidad;
@@ -15,6 +16,7 @@
       {
         if($id==0){
           $this->id= 0;
+          $this->id_reporte= 0;
           $this->fecha= 0;
           $this->producto= 0;
           $this->cantidad= 0;
@@ -26,6 +28,7 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
               $this->id= $fila['id'];
+              $this->id_reporte= $fila['id_reporte'];
               $this->fecha= $fila['fecha'];
               $this->producto= $fila['producto'];
               $this->cantidad= $fila['cantidad'];
@@ -36,8 +39,8 @@
       // Guardar el surtir
       function guardar_surtir($producto,$cantidad){
         $fecha=time();
-        $sentencia = "INSERT INTO `surtir` (`fecha`, `producto`, `cantidad`, `estado`)
-        VALUES ('$fecha', '$producto', '$cantidad', '1');";
+        $sentencia = "INSERT INTO `surtir` (`id_reporte`, `fecha`, `producto`, `cantidad`, `estado`)
+        VALUES ('0', '$fecha', '$producto', '$cantidad', '1');";
         $comentario="Guardamos el surtir en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
@@ -99,7 +102,8 @@
         $comentario="Poner estado de surtir como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      function mostrar_a_surtir_pdf(){
+      // Obtengo los datos de surtir inventario para realizar su reporte
+      function datos_surtir_inventario(){
         $sentencia = "SELECT * ,surtir.id AS ID FROM surtir LEFT JOIN inventario ON surtir.producto = inventario.id  WHERE surtir.estado =1 ORDER BY surtir.producto";
         $comentario="Mostrar los productos a surtir";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

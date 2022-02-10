@@ -308,7 +308,7 @@
           echo '</div>';
         }
       }
-      // Obtengo los datos del cargo por noche de la habitacioN 
+      // Obtengo los datos del cargo por noche de la habitacion para realizar su reporte
       function datos_cargo_noche(){
         $sentencia = "SELECT *,hab.id AS ID 
         FROM hab
@@ -318,7 +318,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-      // Obtengo los datos del cargo por noche de la habitacioN 
+      // Obtengo los datos del cargo por noche de la habitacion 
       function mostrar_cargo_noche(){
         //<div class="col-sm-12 text-center"><h2 class="text-dark margen-1">CARGO POR NOCHE</h2></div>';
         echo '<div class="row">
