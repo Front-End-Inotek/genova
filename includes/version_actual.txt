@@ -108,3 +108,4 @@ VERSION 1.7
 -Funcion de ver reportes de cargos por noche y por fecha
 -Resurtir inventario
 -Generar tabla y funciones de surtir para poder generar el cargo de surtir inventario
+-Reporte y ajustes de surtir inventario
