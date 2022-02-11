@@ -102,6 +102,15 @@
         $comentario="Poner estado de surtir como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Poner numero de reporte de surtir y estado inativo
+      function ajustes_surtir($id,$id_repote){
+        $sentencia = "UPDATE `surtir` SET
+        `id_reporte` = '$id_reporte',
+        `estado` = '0'
+        WHERE `id` = '$id';";
+        $comentario="Poner numero de reporte de surtir y estado inativo";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Obtengo los datos de surtir inventario para realizar su reporte
       function datos_surtir_inventario(){
         $sentencia = "SELECT * ,surtir.id AS ID FROM surtir LEFT JOIN inventario ON surtir.producto = inventario.id  WHERE surtir.estado =1 ORDER BY surtir.producto";
@@ -109,17 +118,17 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-      // Obtener el ultimo surtir ingresado 
-      function ultima_insercion(){
-        $sentencia= "SELECT id FROM surtir ORDER BY id DESC LIMIT 1";
-        $id= 0;
-        $comentario="Obtener el ultimo surtir ingresado";
+      // Obtener el ultimo reporte surtir ingresado 
+      function ultima_insercion_reporte(){
+        $sentencia= "SELECT id,id_reporte FROM surtir WHERE id_reporte = 0 ORDER BY id DESC LIMIT 1";
+        $id_reporte= 0;
+        $comentario="Obtener el ultimo reporte surtir ingresado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $id= $fila['id'];
+          $id_reporte= $fila['id_reporte'];
         }
-        return $id;
+        return $id_reporte;
       }
               
   }

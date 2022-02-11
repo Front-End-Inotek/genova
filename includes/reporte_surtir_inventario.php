@@ -1,9 +1,11 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('clase_log.php');
+  include_once("clase_inventario.php");
   include_once("clase_surtir.php");
-
+  
   $logs = NEW Log(0);
+  $inventario = NEW Inventario(0);
   $surtir = NEW Surtir(0);
 
   require('../fpdf/fpdf.php');
@@ -86,8 +88,8 @@
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'CANTIDAD'),0,1,'C',True);
 
   // Datos dentro de la tabla surtir
-  $pdf->SetFont('Arial','',7);
-  $pdf->SetTextColor(0,0,0);
+  $id_reporte= $surtir->ultima_insercion_reporte();
+  $id_reporte++;
   $consulta = $surtir->datos_surtir_inventario();
   while ($fila = mysqli_fetch_array($consulta))
   {
@@ -101,15 +103,14 @@
       $total_final= $total_final + $total_tarifa;*/
       $pdf->Cell(45,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
       $pdf->Cell(80,5,iconv("UTF-8", "ISO-8859-1",$nombre),1,0,'C'); 
-      $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$cantidad),1,1,'C');    
+      $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$cantidad),1,1,'C');
+      $cantidad_inventario= $inventario->cantidad_inventario($fila['id']);
+      $cantidad_final= $cantidad_inventario + $fila['cantidad'];
+      $inventario->editar_cantidad_inventario($fila['id'],$cantidad_final);
+      $surtir->ajustes_surtir($fila['ID'],$id_reporte);    
   }
 
-  $pdf->SetFont('Arial','',10);
-  //$numero_actual= $cargo_noche->ultima_insercion();
-  //$numero_actual++;
-
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
-  $numero_actual= 1;
   $pdf->Output("../reportes/inventario/reporte_surtir_inventario".$numero_actual.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
       //echo 'Reporte cargo noche';*/
