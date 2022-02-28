@@ -103,9 +103,11 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Poner numero de reporte de surtir y estado inativo
-      function ajustes_surtir($id,$id_repote){
+      function ajustes_surtir($id,$id_reporte){
+        $fecha_surtido= time();
         $sentencia = "UPDATE `surtir` SET
         `id_reporte` = '$id_reporte',
+        `fecha_surtido` = '$fecha_surtido',
         `estado` = '0'
         WHERE `id` = '$id';";
         $comentario="Poner numero de reporte de surtir y estado inativo";
@@ -120,7 +122,7 @@
       }
       // Obtener el ultimo reporte surtir ingresado 
       function ultima_insercion_reporte(){
-        $sentencia= "SELECT id,id_reporte FROM surtir WHERE id_reporte = 0 ORDER BY id DESC LIMIT 1";
+        $sentencia= "SELECT id,id_reporte FROM surtir WHERE estado = 0 ORDER BY id DESC LIMIT 1";
         $id_reporte= 0;
         $comentario="Obtener el ultimo reporte surtir ingresado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
