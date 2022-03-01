@@ -510,24 +510,25 @@
                             </li>'; 
                           } 
 
-                          if($permisos_inventario>0){
+                          $permisos_surtir=$usuario->inventario_surtir;
+                          if($permisos_surtir>0){
                             echo '
                             <li class="nav-item">
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu5sub2" data-toggle="collapse" data-target="#submenu5sub2"><span>Surtir</span></a>
                                 <div class="collapse" id="submenu5sub2" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
-                                        if($usuario->inventario_ver==1 && $usuario->inventario_editar==1){
+                                        if($usuario->inventario_surtir==1){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_surtir()">
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Surtir Reportes</a>
+                                          </li>';
+                                        }
+                                        if($usuario->inventario_surtir==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="surtir_inventario()">
                                                   <i class="fa fa-fw fa-dashboard"></i> &nbsp; Surtir Inventario</a>
-                                          </li>';
-                                        }
-                                        if($usuario->categoria_ver==1){
-                                          echo '
-                                          <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_categorias()">
-                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Categorias</a>
                                           </li>';
                                         }
                                         echo '

@@ -2958,6 +2958,8 @@ function regresar_editar_inventario(){
     $("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
 }
 
+//* Surtir *//
+
 // Muestra los productos para poder surtir inventario
 function surtir_inventario(){
 	$('#area_trabajo').hide();
@@ -2965,6 +2967,22 @@ function surtir_inventario(){
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_inventario_surtir.php");
 	closeNav();
+}
+
+// Muestra los datos de los reportes de surtir inventario de la bd***
+function ver_surtir_inventario(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_surtir.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
+// Muestra la paginacion de los reportes de surtir inventario***
+function ver_surtir_inventario_paginacion(buton,posicion){
+    var usuario_id=localStorage.getItem("id");
+    $("#paginacion_surtir_inventario").load("includes/ver_surtir_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
 // Barra de diferentes busquedas para poder surtir inventario
