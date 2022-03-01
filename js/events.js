@@ -2970,7 +2970,7 @@ function surtir_inventario(){
 }
 
 // Muestra los datos de los reportes de surtir inventario de la bd***
-function ver_surtir_inventario(){
+function ver_surtir(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
@@ -2980,7 +2980,7 @@ function ver_surtir_inventario(){
 }
 
 // Muestra la paginacion de los reportes de surtir inventario***
-function ver_surtir_inventario_paginacion(buton,posicion){
+function ver_surtir_paginacion(buton,posicion){
     var usuario_id=localStorage.getItem("id");
     $("#paginacion_surtir_inventario").load("includes/ver_surtir_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }

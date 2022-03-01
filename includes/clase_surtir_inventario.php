@@ -49,7 +49,7 @@
         $cantidad=0;
         $sentencia = "SELECT count(id) AS cantidad FROM surtir_inventario WHERE estado = 1 ORDER BY nombre";
         //echo $sentencia;
-        $comentario="Obtengo el total de surtir";
+        $comentario="Obtengo el total de reportes de surtir inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
@@ -59,11 +59,6 @@
       }
       // Mostramos los reportes de surtir inventario
       function mostrar($posicion,$id){
-        include_once('clase_usuario.php');
-        $usuario =  NEW Usuario($id);
-        $editar = $usuario->surtir_editar;
-        $borrar = $usuario->surtir_borrar;
-
         $cont = 1;
         //echo $posicion;
         $final = $posicion+20;
@@ -75,58 +70,34 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
-        FROM inventario 
-        INNER JOIN categoria ON inventario.categoria = categoria.id WHERE inventario.estado = 1 ORDER BY inventario.nombre";
-        $comentario="Mostrar el inventario";
+        $sentencia = "SELECT *,cargo_noche.id AS ID 
+        FROM cargo_noche 
+        INNER JOIN usuario ON cargo_noche.id_usuario = usuario.id WHERE (cargo_noche.fecha >= $fin_dia && cargo_noche.fecha <= $inicio_dia) AND cargo_noche.estado = 1 ORDER BY cargo_noche.id DESC";
+        $comentario="Mostrar los reportes de cargos de noche";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_inventario">
+        echo '<div class="table-responsive" id="tabla_cargo_noche">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Precio Compra</th>
-            <th>Inventario</th>
-            <th>Stock</th>
-            <th>Bodega Inventario</th>
-            <th>Bodega Stock</th>
-            <th>Clave SAT</th>
-            <th>Historial</th>';
-            if($editar==1){
-              echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
-            }
-            if($borrar==1){
-              echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-            }
-            echo '</tr>
+            <th>Número</th>
+            <th>Usuario</th>
+            <th>Total</th>
+            <th>Fecha</th>
+            <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
+            </tr>
           </thead>
         <tbody>';
             while ($fila = mysqli_fetch_array($consulta))
             {
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
-                <td>'.$fila['nom'].'</td>  
-                <td>'.$fila['descripcion'].'</td>
-                <td>'.$fila['categoria'].'</td>
-                <td>$'.number_format($fila['precio'], 2).'</td>
-                <td>$'.number_format($fila['precio_compra'], 2).'</td>
-                <td>'.$fila['inventario'].'</td>
-                <td>'.$fila['stock'].'</td>
-                <td>'.$fila['bodega_inventario'].'</td>
-                <td>'.$fila['bodega_stock'].'</td>
-                <td>'.$fila['clave'].'</td>
-                <td>'.$fila['historial'].'</td>';
-                if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_inventario('.$fila['ID'].')"> Editar</button></td>';
-                }
-                if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_inventario('.$fila['ID'].')"> Borrar</button></td>';
-                }
-                echo '</tr>';
+                <td>'.$fila['ID'].'</td> 
+                <td>'.$fila['usuario'].'</td>
+                <td>$'.number_format($fila['total'], 2).'</td>
+                <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                <td><button class="btn btn-success" onclick="mostrar_reporte_cargo_noche('.$fila['ID'].')"> Reporte</button></td>
+                </tr>';
               }
               $cont++;
             }
@@ -136,7 +107,6 @@
           </div>';
           return $cat_paginas;
       }
-
       // Busqueda por fecha en ver reportes de cargos de noche
       function mostrar_cargo_noche_fecha($fecha_ini_tiempo,$fecha_fin_tiempo){
         date_default_timezone_set('America/Mexico_City');
