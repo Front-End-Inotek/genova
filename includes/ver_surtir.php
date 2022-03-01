@@ -8,10 +8,19 @@
           <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">SURTIR INVENTARIO</h2></div>
           
           <div class="row">
-            <div class="col-sm-2">
-              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_surtir()" class="color_black form-control form-control" autofocus="autofocus"/>
+            <div class="col-sm-2">Fecha Inicial:</div>
+            <div class="col-sm-3">
+              <input class="form-control form-control" type="date"  id="inicial"  placeholder="Surtir inventario inicial" autofocus="autofocus"/>
             </div>
-            <div class="col-sm-10"></div>
+            <div class="col-sm-2">Fecha Final:</div>
+            <div class="col-sm-3">
+              <input class="form-control form-control" type="date" id="final" placeholder="Surtir inventario final" autofocus="autofocus"/>
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-success btn-block btn-default" onclick="busqueda_surtir()">
+                Buscar 
+              </button>
+            </div>
           </div><br>
           <div id="paginacion_surtir_inventario">';
           $cat_paginas = $surtir_inventario->mostrar(1,$_GET['usuario_id']);

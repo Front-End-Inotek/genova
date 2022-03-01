@@ -2985,6 +2985,18 @@ function ver_surtir_paginacion(buton,posicion){
     $("#paginacion_surtir_inventario").load("includes/ver_surtir_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
+// Busqueda por fecha en ver reportes de surtir inventario
+function busqueda_surtir(){
+	var inicial=$("#inicial").val();
+	var final=$("#final").val();
+    if(inicial.length >0 && final.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_surtir_inventario").load("includes/busqueda_surtir.php?inicial="+inicial+"&final="+final);
+}
+
 // Barra de diferentes busquedas para poder surtir inventario
 function buscar_surtir_inventario(){
     var a_buscar=encodeURIComponent($("#a_buscar").val());

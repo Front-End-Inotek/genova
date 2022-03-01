@@ -92,7 +92,6 @@
         $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
         $fecha_ini =strtotime($fecha_ini_tiempo);
         $fecha_fin =strtotime($fecha_fin_tiempo);
-        $fecha_cargo_noche=time();
 
         if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar();
@@ -100,7 +99,7 @@
           $sentencia = "SELECT *,cargo_noche.id AS ID 
           FROM cargo_noche 
           INNER JOIN usuario ON cargo_noche.id_usuario = usuario.id WHERE cargo_noche.fecha >= $fecha_ini && cargo_noche.fecha <= $fecha_fin && cargo_noche.fecha > 0 && cargo_noche.estado = 1 ORDER BY cargo_noche.id DESC";
-          $comentario="Mostrar los reportes de cargos de noche";
+          $comentario="Mostrar por fecha los reportes de cargos de noche";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
           echo '<div class="table-responsive" id="tabla_cargo_noche">

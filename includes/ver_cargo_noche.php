@@ -8,11 +8,11 @@
           <div class="row">
             <div class="col-sm-2">Fecha Inicial:</div>
             <div class="col-sm-3">
-              <input class="form-control form-control" type="date"  id="inicial"  placeholder="Reservacion inicial" autofocus="autofocus"/>
+              <input class="form-control form-control" type="date"  id="inicial"  placeholder="Cargo noche inicial" autofocus="autofocus"/>
             </div>
             <div class="col-sm-2">Fecha Final:</div>
             <div class="col-sm-3">
-              <input class="form-control form-control" type="date" id="final" placeholder="Reservacion final" autofocus="autofocus"/>
+              <input class="form-control form-control" type="date" id="final" placeholder="Cargo noche final" autofocus="autofocus"/>
             </div>
             <div class="col-sm-2">
               <button class="btn btn-success btn-block btn-default" onclick="busqueda_cargo_noche()">
