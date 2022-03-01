@@ -3,7 +3,7 @@
   include_once("clase_surtir_inventario.php");
   $surtir_inventario = NEW Surtir_inventario(0);
   
-  echo ' <div class="container-fluid blanco"> 
+  echo ' <div class="container blanco"> 
           <br>
           <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">SURTIR INVENTARIO</h2></div>
           
@@ -13,11 +13,10 @@
             </div>
             <div class="col-sm-10"></div>
           </div><br>
-          <div id="paginacion_surtir">';
+          <div id="paginacion_surtir_inventario">';
           $cat_paginas = $surtir_inventario->mostrar(1,$_GET['usuario_id']);
   echo '
-          </div>
-         </div>';
+          </div>';
   $id_paginacion=1;
   echo '
   
@@ -26,6 +25,7 @@
     echo '<li class="page-item"><a class="page-link" href="#" onclick="ver_surtir_paginacion('.$i.','.$id_paginacion.')">'.$i.'</a></li>';
     $id_paginacion=$id_paginacion+20;
   }  
-  echo ' </ul>';
+  echo ' </ul>
+  </div>';
   //comentario
 ?>

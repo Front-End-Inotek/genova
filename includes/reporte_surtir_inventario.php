@@ -87,8 +87,11 @@
 
   // Datos dentro de la tabla surtir
   $pdf->SetTextColor(0,0,0);
-  $id_reporte= $surtir->ultima_insercion_reporte();
-  // CUIDADO AL ELEGIR REPORTE POR FECHA CAMBIAR
+  if($_GET['id'] == 0){
+      $id_reporte= $surtir->ultima_insercion_reporte();
+  }else{
+      $id_reporte= $_GET['id'];
+  }
   $logs->guardar_log($_GET['usuario_id'],"Reporte surtir inventario ".$id_reporte.' del '.$dia.' de '.$mes.' de '.$anio);
   $consulta = $surtir->datos_surtir_inventario_reporte($id_reporte);
   while ($fila = mysqli_fetch_array($consulta))

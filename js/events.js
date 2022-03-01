@@ -2969,7 +2969,7 @@ function surtir_inventario(){
 	closeNav();
 }
 
-// Muestra los datos de los reportes de surtir inventario de la bd***
+// Muestra los datos de los reportes de surtir inventario de la bd
 function ver_surtir(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
@@ -2979,7 +2979,7 @@ function ver_surtir(){
 	closeNav();
 }
 
-// Muestra la paginacion de los reportes de surtir inventario***
+// Muestra la paginacion de los reportes de surtir inventario
 function ver_surtir_paginacion(buton,posicion){
     var usuario_id=localStorage.getItem("id");
     $("#paginacion_surtir_inventario").load("includes/ver_surtir_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
@@ -3112,14 +3112,14 @@ function aplicar_surtir_inventario(){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     $("#area_trabajo_menu").load("includes/aplicar_surtir_inventario.php?usuario_id="+usuario_id);
-    reporte_surtir_inventario(); 
+    reporte_surtir_inventario(0); 
     principal();
 }
 
 // Generar reporte de surtir inventario
-function reporte_surtir_inventario(){
+function reporte_surtir_inventario(id){
 	var usuario_id=localStorage.getItem("id");
-    window.open("includes/reporte_surtir_inventario.php?usuario_id="+usuario_id);
+    window.open("includes/reporte_surtir_inventario.php?id="+id+"&usuario_id="+usuario_id);
 }
 
 //* Restaurante *//

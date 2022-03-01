@@ -47,7 +47,7 @@
       // Obtengo el total de reportes de surtir inventario
       function total_elementos(){
         $cantidad=0;
-        $sentencia = "SELECT count(id) AS cantidad FROM surtir_inventario WHERE estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT count(id) AS cantidad FROM surtir_inventario WHERE estado = 1 ORDER BY id";
         //echo $sentencia;
         $comentario="Obtengo el total de reportes de surtir inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -70,19 +70,18 @@
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT *,cargo_noche.id AS ID 
-        FROM cargo_noche 
-        INNER JOIN usuario ON cargo_noche.id_usuario = usuario.id WHERE (cargo_noche.fecha >= $fin_dia && cargo_noche.fecha <= $inicio_dia) AND cargo_noche.estado = 1 ORDER BY cargo_noche.id DESC";
+        $sentencia = "SELECT *,surtir_inventario.id AS ID
+        FROM surtir_inventario 
+        INNER JOIN usuario ON surtir_inventario.id_usuario = usuario.id WHERE surtir_inventario.estado = 1 ORDER BY surtir_inventario.id DESC";
         $comentario="Mostrar los reportes de cargos de noche";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_cargo_noche">
+        echo '<div class="table-responsive" id="tabla_surtir_inventario">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Número</th>
             <th>Usuario</th>
-            <th>Total</th>
             <th>Fecha</th>
             <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
             </tr>
@@ -94,9 +93,8 @@
                 echo '<tr class="text-center">
                 <td>'.$fila['ID'].'</td> 
                 <td>'.$fila['usuario'].'</td>
-                <td>$'.number_format($fila['total'], 2).'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                <td><button class="btn btn-success" onclick="mostrar_reporte_cargo_noche('.$fila['ID'].')"> Reporte</button></td>
+                <td><button class="btn btn-success" onclick="reporte_surtir_inventario('.$fila['ID'].')"> Reporte</button></td>
                 </tr>';
               }
               $cont++;
