@@ -497,6 +497,25 @@
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Inventario</a>
                                           </li>';
                                         }
+                                        if($usuario->categoria_ver==1){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_categorias()">
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Categorias</a>
+                                          </li>';
+                                        }
+                                        echo '
+                                    </ul>
+                                </div>
+                            </li>'; 
+                          } 
+
+                          if($permisos_inventario>0){
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu5sub2" data-toggle="collapse" data-target="#submenu5sub2"><span>Surtir</span></a>
+                                <div class="collapse" id="submenu5sub2" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">';
                                         if($usuario->inventario_ver==1 && $usuario->inventario_editar==1){
                                           echo '
                                           <li class="nav-item">
@@ -521,8 +540,8 @@
                           if($permisos_restaurante>0){
                             echo '
                             <li class="nav-item">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu5sub2" data-toggle="collapse" data-target="#submenu5sub2"><span>Restaurante</span></a>
-                                <div class="collapse" id="submenu5sub2" aria-expanded="false">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu5sub3" data-toggle="collapse" data-target="#submenu5sub3"><span>Restaurante</span></a>
+                                <div class="collapse" id="submenu5sub3" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         /*if($usuario->restaurante_ver==1){
                                           echo '
