@@ -1963,6 +1963,7 @@ function modificar_usuario(id){
     var inventario_agregar= document.getElementById("inventario_agregar").checked;
     var inventario_editar= document.getElementById("inventario_editar").checked;
     var inventario_borrar= document.getElementById("inventario_borrar").checked;
+    var inventario_surtir= document.getElementById("inventario_surtir").checked;
     var categoria_ver= document.getElementById("categoria_ver").checked;
     var categoria_agregar= document.getElementById("categoria_agregar").checked;
     var categoria_editar= document.getElementById("categoria_editar").checked;
@@ -2163,6 +2164,11 @@ function modificar_usuario(id){
     }else{
         inventario_borrar = 0;
     }
+    if(inventario_surtir){
+        inventario_surtir = 1;
+    }else{
+        inventario_surtir = 0;
+    }
     
     // Convertir categoria permisos
     if(categoria_ver){
@@ -2280,6 +2286,7 @@ function modificar_usuario(id){
                   "inventario_agregar": inventario_agregar,
                   "inventario_editar": inventario_editar,
                   "inventario_borrar": inventario_borrar,
+                  "inventario_surtir": inventario_surtir,
                   "categoria_ver": categoria_ver,
                   "categoria_agregar": categoria_agregar,
                   "categoria_editar": categoria_editar,
@@ -3086,29 +3093,9 @@ function aceptar_aplicar_surtir_inventario(id){
 function aplicar_surtir_inventario(){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
-
-    /*var datos = {
-            "usuario_id": usuario_id,
-        };
-    $.ajax({
-            async:true,
-            type: "POST",
-            dataType: "html",
-            contentType: "application/x-www-form-urlencoded",
-            url:"includes/aplicar_surtir_inventario.php",
-            data:datos,
-            beforeSend:loaderbar,
-            success:principal,
-            //success:problemas_sistema,
-            timeout:5000,
-            error:problemas_sistema
-        });
-    //reporte_cargo_noche();
-    return false;*/
-
-	/*$("#area_trabajo_menu").load("includes/aplicar_surtir_inventario.php?usuario_id="+usuario_id);
-    principal();*/
+    $("#area_trabajo_menu").load("includes/aplicar_surtir_inventario.php?usuario_id="+usuario_id);
     reporte_surtir_inventario(); 
+    principal();
 }
 
 // Generar reporte de surtir inventario

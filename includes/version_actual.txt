@@ -109,4 +109,5 @@ VERSION 1.7
 -Resurtir inventario
 -Generar tabla y funciones de surtir para poder generar el cargo de surtir inventario
 -Reporte y ajustes de surtir inventario
+-Cambio de sql y derechos de usuario por inventario_surtir
 -Tabla para poder visualizar los surtidos de inventario

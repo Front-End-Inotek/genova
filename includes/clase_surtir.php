@@ -113,16 +113,35 @@
         $comentario="Poner numero de reporte de surtir y estado inativo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Obtengo los datos de surtir inventario para realizar su reporte
+      // Obtengo los datos de surtir inventario para realizar el ajuste de inventario
       function datos_surtir_inventario(){
-        $sentencia = "SELECT * ,surtir.id AS ID FROM surtir LEFT JOIN inventario ON surtir.producto = inventario.id  WHERE surtir.estado =1 ORDER BY surtir.producto";
+        $sentencia = "SELECT * ,surtir.id AS ID FROM surtir LEFT JOIN inventario ON surtir.producto = inventario.id  WHERE surtir.estado = 1 ORDER BY surtir.producto";
+        $comentario="Mostrar los productos a surtir";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      // Obtengo los datos de surtir inventario para realizar su reporte
+      function datos_surtir_inventario_reporte($id_reporte){
+        $sentencia = "SELECT * ,surtir.id AS ID FROM surtir LEFT JOIN inventario ON surtir.producto = inventario.id  WHERE surtir.id_reporte = $id_reporte ORDER BY surtir.producto";
         $comentario="Mostrar los productos a surtir";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
       // Obtener el ultimo reporte surtir ingresado 
-      function ultima_insercion_reporte(){
+      function ultima_insercion(){
         $sentencia= "SELECT id,id_reporte FROM surtir WHERE estado = 0 ORDER BY id DESC LIMIT 1";
+        $id_reporte= 0;
+        $comentario="Obtener el ultimo reporte surtir ingresado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_reporte= $fila['id_reporte'];
+        }
+        return $id_reporte;
+      }
+      // Obtener el ultimo id ingresado 
+      function ultima_insercion_reporte(){
+        $sentencia= "SELECT id,id_reporte FROM surtir ORDER BY id DESC LIMIT 1";
         $id_reporte= 0;
         $comentario="Obtener el ultimo reporte surtir ingresado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

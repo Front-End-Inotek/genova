@@ -622,6 +622,18 @@
                 </label>
               </div>
             </div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->inventario_surtir==0){
+              echo '<input class="form-check-input" type="checkbox" id="inventario_surtir">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="inventario_surtir" checked>';
+              }
+              echo '   <label class="form-check-label">
+                  Surtir
+                </label>
+              </div>
+            </div>
             </div><br><hr> 
             <div class="form-group row">
             <div class="col-sm-3">Categoría:</div>

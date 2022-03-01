@@ -77,7 +77,6 @@
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
   $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');
-  $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche ".$dia.' de '.$mes.' de '.$anio);
   $pdf->Ln(4);
 
   // Titulos tabla -277
@@ -155,6 +154,7 @@
   $pdf->SetFont('Arial','',10);
   $numero_actual= $cargo_noche->ultima_insercion();
   $numero_actual++;
+  $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche ".$numero_actual.' del '.$dia.' de '.$mes.' de '.$anio);
   $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
 
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas

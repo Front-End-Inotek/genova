@@ -3,7 +3,6 @@
   include_once('clase_log.php');
   include_once("clase_inventario.php");
   include_once("clase_surtir.php");
-  
   $logs = NEW Log(0);
   $inventario = NEW Inventario(0);
   $surtir = NEW Surtir(0);
@@ -72,7 +71,6 @@
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
   $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');
-  //$logs->guardar_log($_GET['usuario_id'],"Reporte surtir inventario ".$dia.' de '.$mes.' de '.$anio);
   $pdf->Ln(4);
 
   // Titulos tabla -277
@@ -90,8 +88,9 @@
   // Datos dentro de la tabla surtir
   $pdf->SetTextColor(0,0,0);
   $id_reporte= $surtir->ultima_insercion_reporte();
-  $id_reporte++;
-  $consulta = $surtir->datos_surtir_inventario();
+  // CUIDADO AL ELEGIR REPORTE POR FECHA CAMBIAR
+  $logs->guardar_log($_GET['usuario_id'],"Reporte surtir inventario ".$id_reporte.' del '.$dia.' de '.$mes.' de '.$anio);
+  $consulta = $surtir->datos_surtir_inventario_reporte($id_reporte);
   while ($fila = mysqli_fetch_array($consulta))
   {
       $id_producto= $fila['id'];
@@ -101,20 +100,11 @@
       $pdf->Cell(45,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
       $pdf->Cell(80,5,iconv("UTF-8", "ISO-8859-1",$nombre),1,0,'C'); 
       $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$cantidad),1,1,'C');    
-      $cantidad_inventario= $inventario->cantidad_inventario($id_producto);
-      $cantidad_final= $cantidad_inventario + $cantidad;
-      $nuevo_inventario= $inventario->editar_cantidad_inventario($id_producto,$cantidad_final);
-      $ajustes= $surtir->ajustes_surtir($surtir_id,$id_reporte);
   }
 
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/inventario/reporte_surtir_inventario".$id_reporte.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
       //echo 'Reporte cargo noche';*/
-  // Luego de guardar el reporte se cambia el estado cargo noche de todas las habitaciones a 0
-  /*$hab->estado_cargo_noche(0);
-  $cargo_noche->guardar_cargo_noche($_GET['usuario_id'],$total_final,$cantidad_hab);*/
-
-  //$logs->guardar_log($_POST['usuario_id'],"Aplicar surtir inventario");
 ?>
 
