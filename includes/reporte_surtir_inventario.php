@@ -3,9 +3,11 @@
   include_once('clase_log.php');
   include_once("clase_inventario.php");
   include_once("clase_surtir.php");
+  include_once("clase_surtir_inventario.php");
   $logs = NEW Log(0);
   $inventario = NEW Inventario(0);
   $surtir = NEW Surtir(0);
+  $surtir_inventario = NEW Surtir_inventario($_GET['id']);
 
   require('../fpdf/fpdf.php');
   $pdf = new FPDF();
@@ -21,7 +23,11 @@
   // Fecha y datos generales 
   $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(0,0,0);
-  $fecha_actual = time();
+  if($_GET['id'] == 0){
+      $fecha_actual = time();
+  }else{
+      $fecha_actual = $surtir_inventario->fecha;
+  }
   $fecha = date("d-m-Y",$fecha_actual);
   $dia = substr($fecha, 0, 2);
   $mes = substr($fecha, 3, 2);
