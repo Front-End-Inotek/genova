@@ -84,7 +84,6 @@
             break;
       }
     }
-    
     function mostrarhab($id,$token){
       include_once("clase_cuenta.php");
       include('clase_movimiento.php');
@@ -301,7 +300,7 @@
                 }         
               echo '</div>';
 
-            echo '</div>';//
+            echo '</div>';
             echo '</div>';
             echo '</a>';
           echo '</div>';echo '</div>';

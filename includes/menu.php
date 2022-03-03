@@ -295,12 +295,32 @@
                             </li>'; 
                           }
 
+                          $permisos_surtir=$usuario->inventario_surtir;
+                          if($permisos_surtir>0){
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu3sub2" data-toggle="collapse" data-target="#submenu3sub2"><span>Surtir</span></a>
+                                <div class="collapse" id="submenu3sub2" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">';
+                                        if($usuario->inventario_surtir==1){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_surtir()">
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Surtir Reportes</a>
+                                          </li>';
+                                        }
+                                        echo '
+                                    </ul>
+                                </div>
+                            </li>'; 
+                          } 
+
                           /*$permisos_huesped=$usuario->huesped_ver+$usuario->huesped_agregar;
                           if($permisos_huesped>0){
                             echo '
                             <li class="nav-item">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu3sub2" data-toggle="collapse" data-target="#submenu3sub2"><span>Huéspedes</span></a>
-                                <div class="collapse" id="submenu3sub2" aria-expanded="false">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu3sub3" data-toggle="collapse" data-target="#submenu3sub3"><span>Huéspedes</span></a>
+                                <div class="collapse" id="submenu3sub3" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         if($usuario->huesped_ver==1){
                                           echo '
@@ -517,13 +537,13 @@
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu5sub2" data-toggle="collapse" data-target="#submenu5sub2"><span>Surtir</span></a>
                                 <div class="collapse" id="submenu5sub2" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
-                                        if($usuario->inventario_surtir==1){
+                                        /*if($usuario->inventario_surtir==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="ver_surtir()">
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Surtir Reportes</a>
                                           </li>';
-                                        }
+                                        }*/
                                         if($usuario->inventario_surtir==1){
                                           echo '
                                           <li class="nav-item">
