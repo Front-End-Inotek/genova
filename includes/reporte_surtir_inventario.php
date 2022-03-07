@@ -73,7 +73,7 @@
   }
   $anio = substr($fecha, 6, 4);
   
-  // Datos y fecha//
+  // Datos y fecha
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
   $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');

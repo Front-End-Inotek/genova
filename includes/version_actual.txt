@@ -111,3 +111,4 @@ VERSION 1.7
 -Reporte y ajustes de surtir inventario
 -Cambio de sql y derechos de usuario por inventario_surtir
 -Tabla para poder visualizar los surtidos de inventario
+-Ajustes en surtir inventario

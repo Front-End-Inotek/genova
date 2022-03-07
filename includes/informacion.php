@@ -49,36 +49,6 @@
         case 6:
             echo "-";
             break;
-        /*case 7:
-            echo $nombre;
-            break;
-        case 8:
-            echo $nombre;
-            break;
-        case 9:
-            echo $persona;
-            break;
-        case 11:
-           echo $nombre;
-            break;
-        case 12:
-            echo $nombre;
-            break;
-        case 13:
-            echo $nombre;
-            break;
-        case 14:
-            echo $persona;
-            break;
-        case 15:
-            echo $nombre;
-            break;
-        case 16:
-            echo $nombre; 
-            break;
-        case 17:
-            echo $persona;
-            break;*/
         default:
             echo "-";
             break;
@@ -132,51 +102,24 @@
               $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
               break;
             /*case 7:
-              $estado="Ocupada";
-              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-              break;
-            case 8:
               $estado="Lavar";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               break;
-            case 9:
-              $estado="Limpiar";
-              $persona=$movimiento->saber_per_deta($fila['moviemiento']);
-              $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-              break;
-            case 10:
-              # code...
-              break;
-            case 11:
+            case 8:
               $cronometro=$movimiento->saber_cobro_rest($fila['moviemiento']);
               $estado="Restaurante";
               break;
-            case 12:
+            case 9:
               $estado="Hospedada";
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               break;
-            case 13:
-              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-              $estado="Restaurante";
-              break;
-            case 14:
-              $estado="Limpieza";
-              $persona=$movimiento->saber_per_limpia($fila['moviemiento']);
-              $persona=$usuario->obtengo_usuario($id);
-              $cronometro=$movimiento->saber_tiempo_fin_limpieza($fila['moviemiento']);
-              break;
-            case 15:
+            case 10:
               $estado="Paseo";
               $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
               break;
-            case 16:
-              $cronometro=$movimiento->saber_fin_hospedaje($fila['moviemiento']);
-              $estado="Restaurante";
-              break;
-            case 17:
+            case 11:
               $estado="Superv.";
               $persona=$movimiento->saber_per_deta($fila['moviemiento']);
               $persona=$usuario->obtengo_usuario($id);

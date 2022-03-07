@@ -37,35 +37,6 @@
           break;
         /*case 7:
               //$this->ocupada($hab_id,$estado,$mov,$id);
-          break;
-        case 8:
-              $this->detllado($hab_id,$estado,$mov);
-          break;
-        case 9:
-              $this->detllado($hab_id,$estado,$mov);
-          break;
-        case 10:
-              echo '<div class="col-xs-2 col-sm-2 col-md-2">';
-                echo 'Ultima renta:';
-              echo '</div>';
-          break;
-        case 11:
-              //$this->ocupada_rest($hab_id,$estado,$mov);
-          break;
-        case 12:
-                //$this->ocupada($hab_id,$estado,$mov,$id);
-          break;
-        case 13:
-              //$this->ocupada_rest($hab_id,$estado,$mov);
-          break;
-        case 14:
-              $this->limpieza($hab_id,$estado,$mov);
-          break;
-        case 15:
-              //$this->ocupada($hab_id,$estado,$mov,$id);
-          break;
-        case 16:
-              //$this->ocupada($hab_id,$estado,$mov,$id);
           break;*/
         default:
             echo '<div class="col-xs-2 col-sm-2 col-md-2">';
@@ -132,7 +103,7 @@
           echo 'Fecha salida: '.date("d-m-Y H:i:s",  $fin_hospedaje);
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-           $nombre_huesped= $huesped->nombre.' '.$huesped->apellido;
+          $nombre_huesped= $huesped->nombre.' '.$huesped->apellido;
           echo 'Huésped: '.$nombre_huesped;
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
@@ -268,14 +239,14 @@
         $detalle_inicio= $fila['detalle_inicio'];
         $motivo= $fila['comentario'];
       }
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
-        echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          if($motivo != ''){
-            echo 'Motivo: '.$motivo;
-          }
-        echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        if($motivo != ''){
+          echo 'Motivo: '.$motivo;
+        }
+      echo '</div>';
     }
     function por_cobrar($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
@@ -338,16 +309,15 @@
                   </div>
                 </div>
                 <div class="col-sm-3">
-                <div>
-                  Cobro: '.$usuario->usuario.'
-                </div>
-                <div>
-                  Personas Extras: '.$persona_extra.'
-                </div>
-                <div>
-                  Modelo: '.$modelo.'
-                </div>
-
+                  <div>
+                    Cobro: '.$usuario->usuario.'
+                  </div>
+                  <div>
+                    Personas Extras: '.$persona_extra.'
+                  </div>
+                  <div>
+                    Modelo: '.$modelo.'
+                  </div>
                 </div>
                 <div class="col-sm-6 izquierda">
                   <div>
@@ -365,8 +335,7 @@
                   }
                 echo '</div>
           </div>
-            </div>';
-
+        </div>';
 
     }
     function nombre_producto($id){
@@ -376,7 +345,7 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       while ($fila = mysqli_fetch_array($consulta))
       {
-          $nombre = $fila['nombre'];
+        $nombre = $fila['nombre'];
       }
       return $nombre;
     }
@@ -387,7 +356,7 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       while ($fila = mysqli_fetch_array($consulta))
       {
-          $cantidad = $fila['cantidad'];
+        $cantidad = $fila['cantidad'];
       }
       return $cantidad;
     }
@@ -405,18 +374,17 @@
         $detalle_inicio=$fila['detalle_inicio'];
         $detalle_fin=$fila['detalle_fin'];
         $detalle_realizo=$fila['detalle_realiza'];
-
       }
-        $usuario = NEW Usuario($detalle_realizo);
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
-        echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Realiza: '.$usuario->usuario;
-        echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-          echo 'Fin : '.date("d-m-Y H:i:s",  $detalle_fin);
-        echo '</div>';
+      $usuario = NEW Usuario($detalle_realizo);
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Realiza: '.$usuario->usuario;
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Fin : '.date("d-m-Y H:i:s",  $detalle_fin);
+      echo '</div>';
     }
 
   }

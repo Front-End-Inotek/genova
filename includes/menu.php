@@ -439,8 +439,8 @@
                             </li>'; 
                           }
 
-                          $permisos_configuracion=$usuario->nivel;
-                          if($permisos_configuracion==0){//Checar si tambien nivel 1
+                          $permisos_configuracion= $usuario->nivel;
+                          if($permisos_configuracion==0){
                             echo '
                             <li class="nav-item">
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub4" data-toggle="collapse" data-target="#submenu4sub4"><span>Configuración</span></a>

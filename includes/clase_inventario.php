@@ -319,9 +319,15 @@
         $surtir = NEW Surtir(0);
         $cantidad= 0;
 
-        $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
-        FROM inventario 
-        INNER JOIN categoria ON inventario.categoria = categoria.id WHERE categoria.id = $categoria && inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
+        if($categoria==0){
+          $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
+          FROM inventario 
+          INNER JOIN categoria ON inventario.categoria = categoria.id WHERE inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
+        }else{
+          $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
+          FROM inventario 
+          INNER JOIN categoria ON inventario.categoria = categoria.id WHERE categoria.id = $categoria && inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
+        }
         $comentario="Mostrar diferentes categorias en ver inventario surtir";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -335,9 +341,9 @@
                 if($categoria==0){
                   echo '<option value="0" selected>Todos</option>';
                 }else{
-                  echo '<option value="0">Todos</option>';
+                  echo '<option value="0" selected>Todos</option>';
+                  $this->categoria_surtir_valor($categoria);
                 }
-                $this->categoria_surtir_valor($categoria);
               echo '</select>
             </div>
           </div>
