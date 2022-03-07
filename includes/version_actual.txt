@@ -112,3 +112,11 @@ VERSION 1.7
 -Cambio de sql y derechos de usuario por inventario_surtir
 -Tabla para poder visualizar los surtidos de inventario
 -Ajustes en surtir inventario
+
+***********************************************************************************************
+
+VERSION 2.0
+
+VERSION 2.1
+-Generar rama ticket
+-Revisar los tickets de restaurante por su estado
