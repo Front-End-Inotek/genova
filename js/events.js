@@ -3597,6 +3597,61 @@ function previsualizar_estado(){
     //alert("Cambiando color en "+estado);  
 }
 
+//* Cortes *//
+
+// Hacer un corte
+function hacer_cortes(){
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/hacer_cortes.php"); 
+	closeNav();
+}
+
+// Guardar un corte
+function guardar_corte(){
+    var usuario_id=localStorage.getItem("id");
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var codigo= encodeURI(document.getElementById("codigo").value);
+	
+
+	if(nombre.length >0){
+			//$('#boton_tipo').hide();
+			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
+			var datos = {
+				  "nombre": nombre,
+				  "codigo": codigo,
+                  "usuario_id": usuario_id,
+				};
+			$.ajax({
+				  async:true,
+				  type: "POST",
+				  dataType: "html",
+				  contentType: "application/x-www-form-urlencoded",
+				  url:"includes/guardar_corte.php",
+				  data:datos,
+				  beforeSend:loaderbar,
+				  success:ver_tipos,
+				  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
+				});
+				return false;
+			}else{
+				alert("Campos incompletos");
+			}
+}
+
+// Muestra las cortes de habitaciones de la bd
+function ver_cortes(){
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_cortes.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
 //* Estados  Internos de Edo.Ocupado *//
 
 //Edo. 0-Disponible//

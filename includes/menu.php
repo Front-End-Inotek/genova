@@ -315,6 +315,33 @@
                             </li>'; 
                           } 
 
+                          $permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
+                          if($permisos_reportes_diarios>0){
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu3sub3" data-toggle="collapse" data-target="#submenu3sub3"><span>Corte</span></a>
+                                <div class="collapse" id="submenu3sub3" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">';
+                                        if($usuario->reporte_ver==1){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_cargo_noche()">
+                                                  <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Cortes</a>
+                                          </li>';
+                                        }
+                                        if($usuario->reporte_agregar==1){
+                                          echo '
+                                          <li class="nav-item">
+                                          <a class="nav-link p-1 text-truncate" href="#" onclick="hacer_cortes()">
+                                              <i class="fa fa-fw fa-clock-o"></i> &nbsp; Hacer Corte</a>
+                                          </li>';
+                                        }
+                                        echo '
+                                    </ul>
+                                </div>
+                            </li>'; 
+                          }
+
                           /*$permisos_huesped=$usuario->huesped_ver+$usuario->huesped_agregar;
                           if($permisos_huesped>0){
                             echo '

@@ -15,7 +15,7 @@
   if($_POST['forma_pago'] == 2){
     $factuar= 1;
   }else{
-      $factuar= 0;
+    $factuar= 0;
   }
   $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono']);
   

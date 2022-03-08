@@ -113,6 +113,42 @@
         $comentario="Cambiar estado de impreso del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Seleccionar ticket inicial para hacer corte
+      function ticket_ini(){
+        $id= 0;
+        $sentencia = "SELECT id FROM ticket WHERE estado = 1 ORDER BY id LIMIT 1";
+        $comentario="Seleccionar ticket inicial para hacer corte";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+             $id= $fila['id'];
+        }
+        return $id;
+      }
+      // Seleccionar ticket final para hacer corte
+      function ticket_fin(){
+        $id= 0;
+        $sentencia = "SELECT id FROM ticket WHERE estado = 1 ORDER BY id DESC LIMIT 1 ";
+        $comentario="Seleccionar ticket final para hacer corte";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+             $id= $fila['id'];
+        }
+        return $id;
+      }
+      // Obtener la etiqueta del ticket
+      function obtener_etiqueta($id){
+        $etiqueta= 0;
+        $sentencia = "SELECT etiqueta FROM ticket WHERE id = $id LIMIT 1";
+        $comentario="Obtener la etiqueta del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+             $etiqueta=$fila['etiqueta'];
+        }
+        return $etiqueta;
+      }
              
   }
   /**
