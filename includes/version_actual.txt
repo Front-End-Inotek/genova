@@ -120,3 +120,4 @@ VERSION 2.0
 VERSION 2.1
 -Generar rama ticket
 -Revisar los tickets de restaurante por su estado
+-Agregar ticket al hacer un abono
