@@ -6,10 +6,10 @@
   include_once("clase_movimiento.php");
   $conf = NEW Configuracion();
   function mostar_info($hab_id,$estado,$mov,$id){
-      $info = NEW Informacion($hab_id,$estado,$mov,$id);
+    $info = NEW Informacion($hab_id,$estado,$mov,$id);
   }
   function show_info($hab_id,$estado){
-      $hab = NEW Hab($hab_id);
+    $hab = NEW Hab($hab_id);
       
     echo '<div class="row">'; 
       echo '<div class="col-xs-12 col-sm-12 col-md-12">';

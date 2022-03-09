@@ -212,6 +212,7 @@
   class Concepto extends ConexionMYSql
   {    
       public $id;
+      public $activo;
       public $id_ticket;
       public $nombre;
       public $cantidad;
@@ -219,6 +220,7 @@
       public $total;
       public $efectivo_pago;
       public $tipo_pago;
+      public $tipo_cargo;
       public $categoria;
 
       // Constructor
@@ -226,6 +228,7 @@
       {
         if($id==0){
           $this->id= 0;
+          $this->activo= 0;
           $this->id_ticket= 0;
           $this->nombre= 0;
           $this->cantidad= 0;
@@ -233,6 +236,7 @@
           $this->total= 0;
           $this->efectivo_pago= 0;
           $this->tipo_pago= 0;
+          $this->tipo_cargo= 0;
           $this->categoria= 0;
         }else{
           $sentencia = "SELECT * FROM concepto WHERE id = $id LIMIT 1";
@@ -241,6 +245,7 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
             $this->id= $fila['id'];
+            $this->activo= $fila['activo'];
             $this->id_ticket= $fila['id_ticket'];
             $this->nombre= $fila['nombre'];
             $this->cantidad= $fila['cantidad'];
@@ -248,14 +253,15 @@
             $this->total= $fila['total'];
             $this->efectivo_pago= $fila['efectivo_pago'];
             $this->tipo_pago= $fila['tipo_pago'];
+            $this->tipo_cargo= $fila['tipo_cargo'];
             $this->categoria= $fila['categoria'];               
           }
         }
       }
       // Obtener la etiqueta del ticket
-      function guardar_concepto($id_ticket,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$categoria){
-        $sentencia = "INSERT INTO `concepto` (`id_ticket`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `categoria`)
-        VALUES ('$id_ticket', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$categoria');";
+      function guardar_concepto($id_ticket,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria){
+        $sentencia = "INSERT INTO `concepto` (`activo`, `id_ticket`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `tipo_cargo`, `categoria`)
+        VALUES ('1', '$id_ticket', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria');";
         $comentario="Guardamos el concepto en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }

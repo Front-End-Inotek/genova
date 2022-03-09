@@ -45,29 +45,22 @@
                       if(($z%2)==0){
                         echo '<tr class="info">';
                       }else{
-                          echo '<tr class="active">';
+                        echo '<tr class="active">';
                       }
-                      echo '
-      
-                        <td>'.$inf->hab_tipo_hospedaje[$z].'</td>
-                        <td>$'.$inf->hab_precio_hospedaje[$z].'</td>
-                        <td>'.$inf->hab_cantidad_hospedaje[$z].'</td>
-      
-                        <td>$'.$inf->hab_total_hospedaje[$z].'</td>
-                      </tr>
-                      ';
-                      $total_cuartos_hospedaje=$total_cuartos_hospedaje+$inf->hab_total_hospedaje[$z];
-                      $suma_cuartos_hospedaje=$suma_cuartos_hospedaje+$inf->hab_cantidad_hospedaje[$z];
-                    
-                    
+                      echo '<td>'.$inf->hab_tipo_hospedaje[$z].'</td>
+                      <td>$'.$inf->hab_precio_hospedaje[$z].'</td>
+                      <td>'.$inf->hab_cantidad_hospedaje[$z].'</td>
+                      <td>$'.$inf->hab_total_hospedaje[$z].'</td>
+                    </tr>';
+                    $total_cuartos_hospedaje=$total_cuartos_hospedaje+$inf->hab_total_hospedaje[$z];
+                    $suma_cuartos_hospedaje=$suma_cuartos_hospedaje+$inf->hab_cantidad_hospedaje[$z];
                 }
-                echo '
-                      <tr class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>'.$suma_cuartos_hospedaje.'</td>
-                        <td>$'.$total_cuartos_hospedaje.'</td>
-                      </tr>';
+                echo '<tr class="warning">
+                  <td></td>
+                  <td></td>
+                  <td>'.$suma_cuartos_hospedaje.'</td>
+                  <td>$'.$total_cuartos_hospedaje.'</td>
+                </tr>';
                 echo '
               </tbody>
             </table>

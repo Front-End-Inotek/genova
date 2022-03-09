@@ -69,6 +69,7 @@
   }
   
   // Guardamos el ticket del pedido del restaurante
+  $tipo_cargo= 2; // Corresponde al cargo de restaurante
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
   $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta);
@@ -86,7 +87,7 @@
       $historial_nuevo= $historial + $fila['cantidad'];
       $inventario->editar_cantidad_inventario($fila['id_producto'],$cantidad_nueva);
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
-      $concepto->guardar_concepto($ticket_id,$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$categoria);
+      $concepto->guardar_concepto($ticket_id,$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   }
   
   $pedido->cambiar_estado_pedido_cobro($_POST['mov']);
