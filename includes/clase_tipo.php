@@ -37,6 +37,19 @@
         $comentario="Guardamos el tipo habitacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
+      // Obtengo el total de los tipos de habitaciones
+      function total_elementos(){
+        $cantidad=0;
+        $sentencia = "SELECT *,count(tipo_hab.id) AS cantidad,tipo_hab.id AS ID,tipo_hab.nombre FROM tipo_hab WHERE tipo_hab.estado = 1 ORDER BY tipo_hab.id;";
+        //echo $sentencia;
+        $comentario="Obtengo el total de los tipos de habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+        return $cantidad;
+      }
       // Mostramos los tipos habitaciones
       function mostrar($id){
         include_once('clase_usuario.php');
