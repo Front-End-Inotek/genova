@@ -2,10 +2,12 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_ticket.php");
   include_once("clase_tipo.php");
+  include_once("clase_corte_info.php");
   $ticket= NEW Ticket(0);
   $tipo= NEW Tipo(0);
   $ticket_inicial= $ticket->ticket_ini();
   $ticket_final= $ticket->ticket_fin();
+  $inf= NEW Corte_info($ticket_inicial,$ticket_final);
   echo '
       <div class="container-fluid blanco">
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">HACER CORTE</h2></div>
@@ -39,7 +41,7 @@
                 </tr>
               </thead>
             <tbody>';
-                for($z =0 ; $z<$cantidad; $z++)
+                for($z=0 ; $z<$cantidad; $z++)
                 {
                     echo '<tr class="text-center">';
                       if(($z%2)==0){
@@ -47,10 +49,10 @@
                       }else{
                         echo '<tr class="active">';
                       }
-                      echo '<td>'.$inf->hab_tipo_hospedaje[$z].'</td>
-                      <td>$'.$inf->hab_precio_hospedaje[$z].'</td>
-                      <td>'.$inf->hab_cantidad_hospedaje[$z].'</td>
-                      <td>$'.$inf->hab_total_hospedaje[$z].'</td>
+                      echo '<td>'.$inf->hab_tipo[$z].'</td>
+                      <td>$'.$inf->hab_precio_hospedaje[$z].'</td> 
+                      <td>'.$inf->hab_cantidad_hospedaje[$z].'</td> 
+                      <td>$'.$inf->hab_total_hospedaje[$z].'</td> 
                     </tr>';
                     $total_cuartos_hospedaje=$total_cuartos_hospedaje+$inf->hab_total_hospedaje[$z];
                     $suma_cuartos_hospedaje=$suma_cuartos_hospedaje+$inf->hab_cantidad_hospedaje[$z];

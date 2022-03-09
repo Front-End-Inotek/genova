@@ -112,6 +112,19 @@
         $comentario="Poner estado de un tipo habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Obtengo el nombre de un tipo habitacion
+      function obtener_nombre($id){ 
+        $sentencia = "SELECT nombre FROM tipo_hab WHERE id = $id AND estado = 1";
+        //echo $sentencia;
+        $nombre= '';
+        $comentario="Obtengo el nombre de un tipo habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $nombre= $fila['nombre'];
+        }
+        return $nombre;
+      }
              
   }
 ?>
