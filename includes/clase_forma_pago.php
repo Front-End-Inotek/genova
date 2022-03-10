@@ -34,6 +34,19 @@
       $comentario="Guardamos la forma de pago en la base de datos";
       $consulta= $this->realizaConsulta($sentencia,$comentario);                 
     }
+    // Obtengo el total de formas de pago
+    function total_elementos(){
+      $cantidad=0;
+      $sentencia = "SELECT count(id) AS cantidad,descripcion FROM forma_pago WHERE estado = 1  ORDER BY id";
+      //echo $sentencia;
+      $comentario="Obtengo el total de formas de pago";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $cantidad= $fila['cantidad'];
+      }
+      return $cantidad;
+    }
     // Mostramos las formas de pago
     function mostrar($id){
       include_once('clase_usuario.php');

@@ -32,7 +32,11 @@
   $categoria= $hab->id;
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
-  $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],$_POST['abono'],0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta);
+  if($_POST['forma_pago'] == 1){
+    $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],$_POST['abono'],0,0,0,0,$factuar,'','',$nueva_etiqueta);
+  }else{
+    $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],0,0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta);
+  }
   $concepto->guardar_concepto($ticket_id,$nombre,$cantidad,$_POST['abono'],($_POST['abono']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   $logs->guardar_log($_POST['usuario_id'],"Agregar abono a la habitacion: ". $nombre);
   echo $_POST['hab_id']."/".$_POST['estado'];

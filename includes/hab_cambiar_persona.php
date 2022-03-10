@@ -1,5 +1,5 @@
 <?php
-	include_once("clase_movimiento.php");
+  include_once("clase_movimiento.php");
   include_once("clase_hab.php");
   include_once('clase_log.php');
   $movimiento = NEW Movimiento(0);

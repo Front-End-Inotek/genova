@@ -49,7 +49,7 @@
                       }else{
                         echo '<tr class="active">';
                       }
-                      echo '<td>'.$inf->hab_tipo[$z].'</td>
+                      echo '<td>'.$inf->hab_tipo_hospedaje[$z].'</td>
                       <td>$'.$inf->hab_precio_hospedaje[$z].'</td> 
                       <td>'.$inf->hab_cantidad_hospedaje[$z].'</td> 
                       <td>$'.$inf->hab_total_hospedaje[$z].'</td> 
