@@ -61,7 +61,7 @@
                         $total_cuartos_hospedaje= $total_cuartos_hospedaje+$inf->hab_total_hospedaje[$z];
                         $suma_cuartos_hospedaje= $suma_cuartos_hospedaje+$inf->hab_cantidad_hospedaje[$z];
                     }
-                    echo '<tr class="warning">
+                    echo '<tr class="table-primary  text-center">
                       <td></td>
                       <td></td>
                       <td>'.$suma_cuartos_hospedaje.'</td>
@@ -70,13 +70,12 @@
                     echo '
                   </tbody>
                 </table>
+                </div>
               </div>
               
             </div>
           </div>
 
-          <div class="col-sm-4"></div>
-          </div>
           
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
@@ -97,6 +96,45 @@
               echo '<div class="card-header">Totales</div>
               
               <div class="card-body">
+                <div class="table-responsive" id="tabla_tipo">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr class="table-primary-encabezado text-center">
+                    <th>Concepto</th>
+                    <th>Total</th>
+                    </tr>
+                  </thead>
+                <tbody>';
+                    $concepto= array();
+                    $concepto[0]= 'Habitaciones';
+                    $concepto[1]= 'Restaurante';
+                    $concepto[2]= 'Personas Extras';
+                    $concepto[3]= 'Total';
+                    $total= array();
+                    $total[0]= 0;
+                    $total[1]= 0;
+                    $total[2]= 0;
+                    $total[3]= 0;
+                    $cantidad= 3;
+                    for($z=0 ; $z<$cantidad; $z++)
+                    {
+                        if(($z%2) == 0){
+                          echo '<tr class="table-white text-center">';
+                        }else{
+                          echo '<tr class="table-secondary text-center">';
+                        }
+                          echo '<td>'.$concepto[$z].'</td>
+                          <td>$'.$total[$z].'</td>
+                        </tr>';
+                    }
+                    echo '<tr class="table-primary  text-center">
+                      <td>Total</td>
+                      <td>$'.$total[3].'</td>
+                    </tr>';
+                    echo '
+                  </tbody>
+                </table>
+                </div>
               </div>
               
             </div>
