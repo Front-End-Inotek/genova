@@ -8,111 +8,221 @@
 	public $hab_cantidad_hospedaje=array();
 	public $hab_total_hospedaje=array();
 
+	public $total_personas;
+
 	public $total_pago=array();
 	public $total_numero_descuento;
 	public $total_dinero_descuento;
 
+	public $producto_nombre=array();
+	public $producto_venta=array();
+	public $producto_precio=array();
+
 	// Constructor
 	function __construct($id_ini,$id_fin)
 	{
-	  
+	  // Obtenemos el total del hospedaje
+	  $contador=0;
+	  $sentencia = "SELECT *,tarifa_hospedaje.id AS ID,tipo_hab.nombre AS titulo 
+	  FROM  tarifa_hospedaje 
+	  INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id WHERE tipo_hab.estado = 1;";
+	  $comentario="Obtener las tarifas de hospedaje";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		  $this->hab_tipo_hospedaje[$contador]= $fila['titulo'];
+		  $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
+		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($id_ini,$id_fin,1);
+		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($id_ini,$id_fin,$fila['id']);
+		  $contador++;
+	  }
 
-		//function obtenemos el total del hospedaje
-		$contador=0;
-		$sentencia = "SELECT *,tipo_hab.nombre AS titulo 
-		FROM  tarifa_hospedaje 
-		INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id WHERE tipo_hab.estado = 1;";
-		$comentario="Obtener las tarifas de hospedaje";
-		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
-			$this->hab_tipo_hospedaje[$contador]=$fila['titulo'];
-			$this->hab_precio_hospedaje[$contador]=$fila['precio_hospedaje'];
-			//$this->hab_cantidad_hospedaje[$contador]=$this->cantida_hospedaje($id_ini,$id_fin,$fila['id']);
-			//$this->hab_total_hospedaje[$contador]=$this->total_hospe($id_ini,$id_fin,$fila['id']);
+	  // Obtenemos el total de personas extra
+	  $this->total_personas=$this->cantidad_personas($id_ini,$id_fin);// No correcto
 
-			$contador++;
-			//echo $this->hab_tipo[$contador];
-		}
-		function cantidad_dinero($id_ini, $id_fin){//
-				include_once('clase_forma_pago.php');
-				$forma_pago = NEW Forma_pago(0);
-				$cantidad= $forma_pago->total_elementos();
-			    $pago_uno= 0;
-				$pago_dos= 0;
-				$pago_tres= 0;
-				$pago_cuatro= 0;
-				$pago_cinco= 0;
-				$pago_seis= 0;
-				$pago_siete= 0;
-				$pago_ocho= 0;
-				$pago_nueve= 0;
-				$pago_diez= 0;
-				$numero_descuento= 0;
-				$dinero_descuento= 0;
-				$pago= array();
-				$pago[0]= 0;
-				$contador= 0;
-				$sentencia = "SELECT * FROM ticket WHERE id >= $id_ini AND id <= $id_fin";
-				//echo $sentencia;
-				$comentario="Obtener el total de dinero ingresado";
-				$consulta= $this->realizaConsulta($sentencia,$comentario);
-				while ($fila = mysqli_fetch_array($consulta))
-				{
-					// Se va sumando el monto de las diferentes formas de pago
-					switch($fila['forma_pago']) {
-						case 1:
-							$pago[1]= $pago_uno + $fila['monto'];
-							break;
-						case 2:
-							$pago[2]= $pago_dos + $fila['monto'];
-							break;
-						case 3:
-							$pago[3]= $pago_tres + $fila['monto'];
-							break;
-						case 4:
-							$pago[4]= $pago_cuatro + $fila['monto'];
-							break;
-						case 5:
-							$pago[5]= $pago_cinco + $fila['monto'];
-							break;
-						case 6:
-							$pago[6]= $pago_seis + $fila['monto'];
-							break;
-						case 7:
-							$pago[7]= $pago_siete + $fila['monto'];
-							break;
-						case 8:
-							$pago[8]= $pago_ocho + $fila['monto'];
-							break;
-						case 9:
-							$pago[9]= $pago_nueve + $fila['monto'];
-							break;
-						case 10:
-							$pago[10]= $pago_diez + $fila['monto'];
-							break;
-						default:
-							// No sucede nada
-					}
-					
-					if($fila['descuento'] > 0){
-						$numero_descuento++;
-					}
-					if($fila['total_descuento'] > 0){
-						$dinero_descuento= $dinero_descuento + $fila['total_descuento'];
-					}
-				}
-				for($z=1 ; $z<=$cantidad; $z++){
-					$this->total_pago[$contador]= $pago[$z];
-					$contador++;
-				}
-				$this->total_numero_descuento= $numero_descuento;
-				$this->total_dinero_descuento= $dinero_descuento;
-			}
-	
+	  // Obtenemos la informacion de ventas restaurante
+	  $contador= 0;
+      $sentencia = "SELECT * FROM inventario WHERE estado = 1 ORDER BY categoria,nombre";
+	  $comentario="Obtener el inventario";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		  $venta= $this->producto_venta[$contador]= $this->venta_producto($id_ini,$id_fin,$fila['nombre']);
+		  if($venta > 0){
+			  $this->producto_nombre[$contador]= $fila['nombre'];
+			  $this->producto_precio[$contador]= $fila['precio'];
+			  $this->producto_tipo_venta[$contador]= $this->venta_sin_hab($id_ini,$id_fin,$fila['nombre']);
+			  //$this->producto_cortesia[$contador]= $this->producto_de_cortresia($id_ini, $id_fin,$fila['nombre']);
+			  //$this->producto_inventario[$contador]= $fila['inventario'];
+			  $contador++;	  
+		  }
+	  }
 	}
+	// Obtenemos la cantidad del hospedaje
+	function cantidad_hospedaje($id_ini,$id_fin,$tarifa){
+	  $total=0;
+	  $sentencia = "SELECT SUM(cantidad) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <= $id_fin AND tipo_cargo = 1 AND categoria = $tarifa";
+	  $comentario="Obtener el total del  de hospedaje";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		  $total=$fila['total'];
+	  }
+	  if($total>0){
 
-  }
+	  }else{
+		  $total=0;
+	  }
+	  return $total;
+	}
+	// Obtenemos el total del hospedaje
+	function total_hospe($id_ini, $id_fin,$tarifa){
+	  $total=0;
+	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 1 AND categoria = $tarifa";
+	  $comentario="Obtener el total del  de hospedaje";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		  $total=$fila['total'];
+	  }
+	  if($total>0){
+
+	  }else{
+		  $total=0;
+	  }
+	  return $total;
+	}
+	// Obtenemos la cantidad del hospedaje
+	function cantidad_personas($id_ini, $id_fin){ // No correcto
+	  $total=0;
+	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 4";
+	  $comentario="Obtener el total del  de hospedaje";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		  $total=$fila['total'];
+	  }
+	  if($total>0){
+
+	  }else{
+		  $total=0;
+	  }
+	  return $total;
+	}
+	// Obtener el total del producto vendido
+	function venta_producto($id_ini,$id_fin,$nombre){
+      $total=0;
+	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <= $id_fin AND nombre  = '$nombre'";
+	  $comentario="Obtener el total del  producto vendido";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		  $total=$fila['cantidad'];
+	  }
+	  if($total>0){
+
+	  }else{
+		  $total=0;
+	  }
+	  return $total;
+    }
+	// Obtener el total del  producto vendido
+	function venta_sin_hab($id_ini,$id_fin,$nombre){
+      $total=0;
+	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE ticket.id >= $id_ini AND ticket.id <= $id_fin AND concepto.nombre = '$nombre' AND ticket.mov > 0;";
+	  //echo $sentencia;
+	  $comentario="Obtener el total del  producto vendido";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		  $total=$fila['cantidad'];
+	  }
+	  if($total>0){
+
+	  }else{
+		  $total=0;
+	  }
+	  return $total;
+    }
+	// Obtenemos la cantidad del hospedaje
+	function cantidad_dinero($id_ini, $id_fin){
+	  include_once('clase_forma_pago.php');
+	  $forma_pago = NEW Forma_pago(0);
+	  $cantidad= $forma_pago->total_elementos();
+	  $pago_uno= 0;
+	  $pago_dos= 0;
+	  $pago_tres= 0;
+	  $pago_cuatro= 0;
+	  $pago_cinco= 0;
+	  $pago_seis= 0;
+	  $pago_siete= 0;
+	  $pago_ocho= 0;
+	  $pago_nueve= 0;
+	  $pago_diez= 0;
+	  $numero_descuento= 0;
+	  $dinero_descuento= 0;
+	  $pago= array();
+	  $pago[0]= 0;
+	  $contador= 0;
+	  $sentencia = "SELECT * FROM ticket WHERE id >= $id_ini AND id <= $id_fin";
+	  //echo $sentencia;
+	  $comentario="Obtener el total de dinero ingresado";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		  // Se va sumando el monto de las diferentes formas de pago
+		  switch($fila['forma_pago']) {
+			  case 1:
+				  $pago[1]= $pago_uno + $fila['monto'];
+				  break;
+			  case 2:
+				  $pago[2]= $pago_dos + $fila['monto'];
+				  break;
+			  case 3:
+			  	  $pago[3]= $pago_tres + $fila['monto'];
+				  break;
+			  case 4:
+				  $pago[4]= $pago_cuatro + $fila['monto'];
+				  break;
+			  case 5:
+				  $pago[5]= $pago_cinco + $fila['monto'];
+				  break;
+			  case 6:
+				  $pago[6]= $pago_seis + $fila['monto'];
+				  break;
+			  case 7:
+				  $pago[7]= $pago_siete + $fila['monto'];
+				  break;
+			  case 8:
+				  $pago[8]= $pago_ocho + $fila['monto'];
+				  break;
+			  case 9:
+				  $pago[9]= $pago_nueve + $fila['monto'];
+				  break;
+			  case 10:
+				  $pago[10]= $pago_diez + $fila['monto'];
+				  break;
+			  default:
+				  // No sucede nada		
+		  }				
+					
+		  if($fila['descuento'] > 0){
+			  $numero_descuento++;
+		  }
+		  if($fila['total_descuento'] > 0){
+			  $dinero_descuento= $dinero_descuento + $fila['total_descuento'];
+		  }
+		  for($z=1 ; $z<=$cantidad; $z++){
+			  $this->total_pago[$contador]= $pago[$z];
+			  $contador++;
+		  }
+		  $this->total_numero_descuento= $numero_descuento;
+		  $this->total_dinero_descuento= $dinero_descuento;
+	  }
+    }
+
+
+  }// Fin	
 ///////////
 class Cortes_limpieza_manual extends ConexionMYSql{
 	public $corte_inicial_id;
