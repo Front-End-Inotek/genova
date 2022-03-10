@@ -4,11 +4,15 @@
   include_once("clase_cupon.php");
   include_once("clase_hab.php");
   include_once("clase_movimiento.php");
+  include_once("clase_ticket.php");
   include_once('clase_log.php');
   $reservacion= NEW Reservacion(0);
+  $concepto= NEW Concepto(0);
   $cupon= NEW Cupon(0);
   $hab = NEW Hab($_POST['hab_id']);
   $movimiento = NEW Movimiento($hab->mov);
+  $labels= NEW Labels(0);
+  $ticket= NEW Ticket(0);
   $logs = NEW Log(0);
   // Checar si descuento esta vacio o no
   if (empty($_POST['descuento'])){
@@ -72,5 +76,37 @@
     $cuenta= 1;
   }
   $reservacion->guardar_reservacion($_POST['id_huesped'],$_POST['tipo_hab'],$id_movimiento,$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],$_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],$_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$_POST['total_pago'],$_POST['hab_id'],$_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento);
+
+  if($_POST['total_pago'] > 0){
+    if($_POST['forma_pago'] == 2){
+      $factuar= 1;
+    }else{
+      $factuar= 0;
+    }
+    if($_POST['forma_pago'] == 1){
+      $efectivo_pago= 1;
+    }else{
+      $efectivo_pago= 0;
+    }
+
+    $nueva_etiqueta= $labels->obtener_etiqueta();
+    $labels->actualizar_etiqueta();
+
+    if($_POST['forma_pago'] == 1){
+      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],$_POST['total_pago'],0,0,0,$descuento,$factuar,'','',$nueva_etiqueta);
+    }else{
+      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],0,0,$_POST['total_pago'],0,$descuento,$factuar,'','',$nueva_etiqueta);
+    }
+
+    $cantidad= 1;
+    $tipo_cargo= 1; // Corresponde al cargo de hospedaje
+    $categoria= $hab->id;
+    $nombre= $hab->nombre;
+    $nombre_concepto= 'Primer abono de habitacion '.$nombre;
+    $concepto->guardar_concepto($ticket_id,$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+    $logs->guardar_log($_POST['usuario_id'],"Agregar primer abono a la habitacion: ". $nombre);
+    $logs->guardar_log($_POST['usuario_id'],"Agregar ticket: ". $ticket_id);
+    // Cupon, extra, suplementos, hab_tipo
+  }
 ?>
 
