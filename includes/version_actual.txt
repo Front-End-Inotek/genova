@@ -124,3 +124,8 @@ VERSION 2.1
 -Agregar ticket al hacer una reservacion
 -Hacer corte vista y contenido
 -Generar clase corte info para poder obtener toda la informacion del corte
+
+VERSION 2.2
+-Generar rama corte
+-Agregar tabla sql corte, con su insert y ajustes al realizar el corte
+-Reporte de corte con su respectiva vista de ver cortes
