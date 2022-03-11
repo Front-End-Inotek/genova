@@ -153,6 +153,19 @@
       }
       return $consulta;
     }
+    // Obtengo el descripcion de una forma de pago
+    function obtener_descripcion($id){
+      $descripcion= '';
+      $sentencia = "SELECT descripcion FROM forma_pago WHERE id = $id AND estado = 1";
+      //echo $sentencia;
+      $comentario="Obtengo el descripcion de una forma de pago";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $descripcion= $fila['descripcion'];
+      }
+      return $descripcion;
+    }
     
   }
 ?>

@@ -27,15 +27,16 @@
   
   // Guardamos el ticket del abono correspondiente y el log
   $tipo_cargo= 1; // Corresponde al cargo de hospedaje
+  $resta= 0;
   $nombre_concepto= 'Abono de hospedaje';
   $cantidad= 1;
   $categoria= $hab->id;
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
   if($_POST['forma_pago'] == 1){
-    $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],$_POST['abono'],0,0,0,0,$factuar,'','',$nueva_etiqueta);
+    $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],$_POST['abono'],0,0,0,0,$factuar,'','',$nueva_etiqueta,$resta;
   }else{
-    $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],0,0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta);
+    $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],0,0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta,$resta);
   }
   $concepto->guardar_concepto($ticket_id,$nombre_concepto,$cantidad,$_POST['abono'],($_POST['abono']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   $logs->guardar_log($_POST['usuario_id'],"Agregar abono a la habitacion: ". $nombre);

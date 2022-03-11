@@ -2,14 +2,18 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_ticket.php");
   include_once("clase_tipo.php");
+  include_once("clase_forma_pago.php");
   include_once("clase_corte_info.php");
   $ticket= NEW Ticket(0);
   $tipo= NEW Tipo(0);
   $ticket_inicial= $ticket->ticket_ini();
   $ticket_final= $ticket->ticket_fin();
+  $forma_pago= NEW Forma_pago(0);
   $inf= NEW Corte_info($ticket_inicial,$ticket_final);
-  $total_cuartos_hospedaje=0;
-  $suma_cuartos_hospedaje=0; 
+  $total_cuartos_hospedaje= 0;
+  $suma_cuartos_hospedaje= 0; 
+  $total_cuartos= 0;
+  $total_restaurante= 0;
   echo '
       <div class="container-fluid blanco">
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">HACER CORTE</h2></div>
@@ -111,10 +115,10 @@
                     $concepto[2]= 'Personas Extras';
                     $concepto[3]= 'Total';
                     $total= array();
-                    $total[0]= 0;
-                    $total[1]= 0;
+                    $total[0]= $inf->total_hab;
+                    $total[1]= $inf->total_restaurante;
                     $total[2]= 0;
-                    $total[3]= 0;
+                    $total[3]= $inf->total_global;
                     $cantidad= 3;
                     for($z=0 ; $z<$cantidad; $z++)
                     {
@@ -204,11 +208,36 @@
 
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
-              $cantidad= $tipo->total_elementos();
+              $cantidad= $forma_pago->total_elementos();
               
               echo '<div class="card-header">Desgloce en Sistema</div>
               
               <div class="card-body">
+                <div class="table-responsive" id="tabla_tipo">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr class="table-primary-encabezado text-center">
+                    <th>Forma de Pago</th>
+                    <th>Total</th>
+                    </tr>
+                  </thead>
+                <tbody>';
+                    $cantidad= $cantidad + 1;
+                    for($z=1 ; $z<$cantidad; $z++)
+                    {
+                        if(($z%2) == 0){
+                          echo '<tr class="table-white text-center">';
+                        }else{
+                          echo '<tr class="table-secondary text-center">';
+                        }
+                          echo '<td>'.$forma_pago->obtener_descripcion($z).'</td>
+                          <td>$'.$inf->total_pago[$z-1].'</td>
+                        </tr>';
+                    }
+                    echo '
+                  </tbody>
+                </table>
+                </div>
               </div>
               
             </div>

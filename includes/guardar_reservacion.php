@@ -100,13 +100,14 @@
 
     $cantidad= 1;
     $tipo_cargo= 1; // Corresponde al cargo de hospedaje
+    $resta= 0;
     $categoria= $hab->id;
     $nombre= $hab->nombre;
     $nombre_concepto= 'Primer abono de habitacion '.$nombre;
-    $concepto->guardar_concepto($ticket_id,$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+    $concepto->guardar_concepto($ticket_id,$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria,$resta);
     $logs->guardar_log($_POST['usuario_id'],"Agregar primer abono a la habitacion: ". $nombre);
     $logs->guardar_log($_POST['usuario_id'],"Agregar ticket: ". $ticket_id);
-    // Cupon, extra, suplementos, hab_tipo
+    // Cupon, extra_persona, suplementos, hab_tipo
   }
 ?>
 
