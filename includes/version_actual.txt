@@ -121,4 +121,6 @@ VERSION 2.1
 -Generar rama ticket
 -Revisar los tickets de restaurante por su estado
 -Agregar ticket al hacer un abono
+-Agregar ticket al hacer una reservacion
 -Hacer corte vista y contenido
+-Generar clase corte info para poder obtener toda la informacion del corte
