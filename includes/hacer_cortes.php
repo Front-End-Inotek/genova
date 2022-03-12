@@ -24,7 +24,7 @@
           </div>
           <div class="col-sm-2">
           <div id="boton_usuario">
-            <input type="submit" class="btn btn-danger btn-block" value="Hacer Corte" onclick="realiza_corte_sin_caja('. $ticket_inicial.','. $ticket_final.')">
+            <input type="submit" class="btn btn-danger btn-block" value="Hacer Corte" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte('. $ticket_inicial.','. $ticket_final.')">
           </div>
           </div>
         </div>
