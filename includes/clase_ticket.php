@@ -212,7 +212,7 @@
         $comentario="Actualizar la etiqueta del ticket";
         $this->realizaConsulta($sentencia,$comentario);
       }
-      // Obtener la etiqueta del corte y actualizarla
+      // Obtener la etiqueta del corte 
       function obtener_corte(){
         $sentencia = "SELECT corte FROM labels LIMIT 1";
         $etiqueta= "";
@@ -223,14 +223,16 @@
         {
           $etiqueta=$fila["corte"];
         }
-
+        return $etiqueta;
+      }
+      // Actualizar la etiqueta del corte
+      function actualizar_etiqueta_corte(){
         $nueva_etiqueta= $etiqueta + 1;
         $sentencia = "UPDATE `labels` SET
         `corte` = '$nueva_etiqueta'
         WHERE `id` = '1';";
-        $comentario="Actualizar la etiqueta delcorte";
+        $comentario="Actualizar la etiqueta del corte";
         $this->realizaConsulta($sentencia,$comentario);
-        return $etiqueta;
       }
   
   }

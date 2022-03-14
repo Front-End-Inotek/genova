@@ -25,7 +25,7 @@
 	function __construct($id_ini,$id_fin)
 	{
 	  // Obtenemos el total del hospedaje
-	  $contador=0;
+	  $contador= 0;
 	  $total_hab= 0;
 	  $sentencia = "SELECT *,tarifa_hospedaje.id AS ID,tipo_hab.nombre AS titulo 
 	  FROM  tarifa_hospedaje 

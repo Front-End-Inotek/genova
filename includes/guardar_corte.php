@@ -2,16 +2,19 @@
 	date_default_timezone_set('America/Mexico_City');
   include_once("clase_ticket.php");
   include_once("clase_forma_pago.php");
+  include_once("clase_corte.php");
   include_once("clase_corte_info.php");
   include_once("clase_log.php");
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
   $concepto= NEW Concepto(0);
   $forma_pago= NEW Forma_pago(0);
+  $corte= NEW Corte(0);
   $inf= NEW Corte_info($_POST['ticket_ini'],$_POST['ticket_fin']);
   $logs = NEW Log(0);
 
   // Guardar corte
+  $logs->guardar_log($_POST['usuario_id'],"Hacer0 corte");
   $habitaciones= $inf->total_hab;
   $restaurante= $inf->total_restaurante;
   $total= $inf->total_global;
@@ -22,8 +25,10 @@
   {
     $pago[$z-1]= $inf->total_pago[$z-1];
   }
+  $logs->guardar_log($_POST['usuario_id'],"Hacer cort/e");
   $nueva_etiqueta= $labels->obtener_corte();
-  $corte_id= $corte->guardar_corte($_POST['usuario_id'],$nueva_etiqueta,$total,$pago[0],$pago[1],$pago[2],$pago[3],$pago[4],$pago[5],$pago[6],$pago[7],$pago[8],$pago[9],$habitaciones,$restaurante$_POST['ticket_ini'],$_POST['ticket_fin']);
+  $labels->actualizar_etiqueta_corte();
+  $corte_id= $corte->guardar_corte($_POST['usuario_id'],$nueva_etiqueta,$total,$pago[0],$pago[1],$pago[2],$pago[3],$pago[4],$pago[5],$pago[6],$pago[7],$pago[8],$pago[9],$habitaciones,$restaurante,$_POST['ticket_ini'],$_POST['ticket_fin']);
 
   // Cambiar concepto a inactivo
   $concepto->cambiar_activo($_POST['ticket_ini'],$_POST['ticket_fin']);

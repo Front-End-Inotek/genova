@@ -3618,7 +3618,7 @@ function guardar_corte(ticket_ini,ticket_fin){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
 
-    var datos = {
+    /*var datos = {
             "usuario_id": usuario_id,
             "ticket_ini": ticket_ini,
             "ticket_fin": ticket_fin,
@@ -3635,7 +3635,7 @@ function guardar_corte(ticket_ini,ticket_fin){
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
-        });
+        });*/
     guardar_reporte_corte(ticket_ini,ticket_fin);
     return false;
 }
@@ -3643,25 +3643,49 @@ function guardar_corte(ticket_ini,ticket_fin){
 // Generar reporte de corte y guardarlo
 function guardar_reporte_corte(ticket_ini,ticket_fin){
     var usuario_id=localStorage.getItem("id");
-	var tam =tamVentana();
-	var alto=tam[1];
-	var ancho=tam[0];
+	var tam= tam_ventana();
+	var alto= tam[1];
+	var ancho= tam[0];
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/reporte_corte.php?usuario_id="+usuario_id+"&ticket_ini="+ticket_ini+"&ticket_fin="+ticket_fin, "Diseño Web", "width="+ancho+", height="+alto);
-	setTimeout(mostrar_corte, 7000);
+	//setTimeout(mostrar_corte, 7000);
 }
 
 // Mostrar el reporte de corte
 function mostrar_corte(){
-	var tam =tamVentana();
-	var alto=tam[1];
-	var ancho=tam[0];
+	var tam= tam_ventana();
+	var alto= tam[1];
+	var ancho= tam[0];
 
 	salirsession();
 	window.open("includes/mostraruitimocorte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 
+// Obtenemos el tamaño de la ventana
+function tam_ventana() {
+    var tam = [0, 0];
+    if (typeof window.innerWidth != 'undefined')
+    {
+      tam = [window.innerWidth,window.innerHeight];
+    }
+    else if (typeof document.documentElement != 'undefined'
+        && typeof document.documentElement.clientWidth !=
+        'undefined' && document.documentElement.clientWidth != 0)
+    {
+      tam = [
+          document.documentElement.clientWidth,
+          document.documentElement.clientHeight
+      ];
+    }
+    else   {
+      tam = [
+          document.getElementsByTagName('body')[0].clientWidth,
+          document.getElementsByTagName('body')[0].clientHeight
+      ];
+    }
+    return tam;
+}
 // Muestra las cortes de habitaciones de la bd
 function ver_cortes(){
 	var usuario_id=localStorage.getItem("id");

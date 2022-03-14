@@ -83,7 +83,7 @@
         }
       }
       // Guardar el corte
-      function guardar_corte($id_usuario,$nueva_etiqueta,$total,$efectivo,$tarjeta,$pago_tres,$pago_cuatro,$pago_cinco,$pago_seis,$pago_siete,$pago_ocho,$pago_nueve,$pago_diez,$habitaciones,$restaurante,$ticket_inicial,$ticket_final){
+      function guardar_corte($id_usuario,$nueva_etiqueta,$total,$efectivo,$tarjeta,$forma_pago_tres,$forma_pago_cuatro,$forma_pago_cinco,$forma_pago_seis,$forma_pago_siete,$forma_pago_ocho,$forma_pago_nueve,$forma_pago_diez,$habitaciones,$restaurante,$ticket_inicial,$ticket_final){
         $fecha=time();
         $sentencia = "INSERT INTO `corte` (`id_usuario`, `fecha`, `etiqueta`, `total`, `efectivo`, `tarjeta`, `forma_pago_tres`, `forma_pago_cuatro`, `forma_pago_cinco`, `forma_pago_seis`, `forma_pago_siete`, `forma_pago_ocho`, `forma_pago_nueve`, `forma_pago_diez`, `descuento`, `habitaciones`, `restaurante`, `tiket_ini`, `tiket_fin`, `estado`)
         VALUES ('$id_usuario', '$fecha', '$nueva_etiqueta', '$total', '$efectivo', '$tarjeta', '$forma_pago_tres', '$forma_pago_cuatro', '$forma_pago_cinco', '$forma_pago_seis', '$forma_pago_siete', '$forma_pago_ocho', '$forma_pago_nueve', '$forma_pago_diez', '0', '$habitaciones', '$restaurante', '$ticket_inicial', '$ticket_final', '1');";
