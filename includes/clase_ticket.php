@@ -113,6 +113,14 @@
         $comentario="Cambiar estado de impreso del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Editar el estado del ticket
+      function editar_estado($id_ini,$id_fin,$estado){
+        $sentencia = "UPDATE `ticket` SET
+        `estado` = '$estado'
+        WHERE `id` >= '$id_ini' AND `id` <= '$id_fin';";
+        $comentario="Editar el estado del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Seleccionar ticket inicial para hacer corte
       function ticket_ini(){
         $id= 0;
@@ -185,7 +193,7 @@
       // Obtener la etiqueta del ticket
       function obtener_etiqueta(){
         $sentencia = "SELECT ticket FROM labels LIMIT 1";
-        $etiqueta ="";
+        $etiqueta= "";
         $comentario="Obtener la etiqueta del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -203,6 +211,26 @@
         WHERE `id` = '1';";
         $comentario="Actualizar la etiqueta del ticket";
         $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Obtener la etiqueta del corte y actualizarla
+      function obtener_corte(){
+        $sentencia = "SELECT corte FROM labels LIMIT 1";
+        $etiqueta= "";
+        $comentario="Obtener la etiqueta del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $etiqueta=$fila["corte"];
+        }
+
+        $nueva_etiqueta= $etiqueta + 1;
+        $sentencia = "UPDATE `labels` SET
+        `corte` = '$nueva_etiqueta'
+        WHERE `id` = '1';";
+        $comentario="Actualizar la etiqueta delcorte";
+        $this->realizaConsulta($sentencia,$comentario);
+        return $etiqueta;
       }
   
   }

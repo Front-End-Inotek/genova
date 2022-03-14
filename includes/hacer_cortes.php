@@ -112,14 +112,14 @@
                     $concepto= array();
                     $concepto[0]= 'Habitaciones';
                     $concepto[1]= 'Restaurante';
-                    $concepto[2]= 'Personas Extras';
-                    $concepto[3]= 'Total';
+                    //$concepto[2]= 'Personas Extras';
+                    $concepto[2]= 'Total';
                     $total= array();
                     $total[0]= $inf->total_hab;
                     $total[1]= $inf->total_restaurante;
-                    $total[2]= 0;
-                    $total[3]= $inf->total_global;
-                    $cantidad= 3;
+                    //$total[2]= 0;
+                    $total[2]= $inf->total_global;
+                    $cantidad= 2;
                     for($z=0 ; $z<$cantidad; $z++)
                     {
                         if(($z%2) == 0){
@@ -133,7 +133,7 @@
                     }
                     echo '<tr class="table-primary  text-center">
                       <td>Total</td>
-                      <td>$'.$total[3].'</td>
+                      <td>$'.$total[2].'</td>
                     </tr>';
                     echo '
                   </tbody>

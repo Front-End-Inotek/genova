@@ -110,9 +110,9 @@
     if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
     }
-    
+
     $logs->guardar_log($_POST['usuario_id'],"Agregar primer abono a la habitacion: ". $nombre);
-    $logs->guardar_log($_POST['usuario_id'],"Agregar ticket: ". $ticket_id);
+    $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
     // Cupon, extra_persona, suplementos, hab_tipo
   }
 ?>

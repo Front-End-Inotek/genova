@@ -46,6 +46,6 @@
   }
   
   $logs->guardar_log($_POST['usuario_id'],"Agregar abono a la habitacion: ". $nombre);
-  $logs->guardar_log($_POST['usuario_id'],"Agregar ticket: ". $ticket_id);
+  $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   echo $_POST['hab_id']."/".$_POST['estado'];
 ?>

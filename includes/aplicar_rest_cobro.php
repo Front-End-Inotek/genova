@@ -74,7 +74,7 @@
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
   $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta,$resta);
-  $logs->guardar_log($_POST['usuario_id'],"Agregar ticket: ". $ticket_id);
+  $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
   $consulta= $pedido->saber_pedido_rest_cobro($_POST['mov']);
@@ -91,7 +91,6 @@
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
       $concepto->guardar_concepto($ticket_id,$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   }
-  
 
   $pedido->cambiar_estado_pedido_cobro($_POST['mov']);
   // Imprimir ticket
