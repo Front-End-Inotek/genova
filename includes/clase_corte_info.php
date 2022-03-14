@@ -154,7 +154,7 @@
 	  return $total;
 	}
 	// Obtenemos el total del hospedaje
-	function total_hospe($id_ini, $id_fin,$tarifa){
+	function total_hospe($id_ini,$id_fin,$tarifa){
 	  $total=0;
 	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 1 AND categoria = $tarifa AND activo = 1";
 	  $comentario="Obtener el total del  de hospedaje";
@@ -171,7 +171,7 @@
 	  return $total;
 	}
 	// Obtenemos la cantidad del hospedaje
-	function cantidad_personas($id_ini, $id_fin){ // No correcto
+	function cantidad_personas($id_ini,$id_fin){ // No correcto
 	  $total=0;
 	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 4 AND activo = 1";
 	  $comentario="Obtener el total del  de hospedaje";

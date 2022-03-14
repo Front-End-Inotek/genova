@@ -105,6 +105,12 @@
     $nombre= $hab->nombre;
     $nombre_concepto= 'Primer abono de habitacion '.$nombre;
     $concepto->guardar_concepto($ticket_id,$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria,$resta);
+    
+    // Imprimir ticket
+    if($confi->ticket_restaurante == 0){
+      $ticket->cambiar_estado($ticket_id);
+    }
+    
     $logs->guardar_log($_POST['usuario_id'],"Agregar primer abono a la habitacion: ". $nombre);
     $logs->guardar_log($_POST['usuario_id'],"Agregar ticket: ". $ticket_id);
     // Cupon, extra_persona, suplementos, hab_tipo

@@ -39,6 +39,12 @@
     $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],0,0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta,$resta);
   }
   $concepto->guardar_concepto($ticket_id,$nombre_concepto,$cantidad,$_POST['abono'],($_POST['abono']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+  
+  // Imprimir ticket
+  if($confi->ticket_restaurante == 0){
+    $ticket->cambiar_estado($ticket_id);
+  }
+  
   $logs->guardar_log($_POST['usuario_id'],"Agregar abono a la habitacion: ". $nombre);
   $logs->guardar_log($_POST['usuario_id'],"Agregar ticket: ". $ticket_id);
   echo $_POST['hab_id']."/".$_POST['estado'];

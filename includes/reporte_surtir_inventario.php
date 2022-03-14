@@ -112,7 +112,7 @@
   }
 
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
-  $pdf->Output("../reportes/inventario/reporte_surtir_inventario".$id_reporte.".pdf","I");
+  $pdf->Output("../reportes/inventario/reporte_surtir_inventario_".$id_reporte.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
       //echo 'Reporte cargo noche';*/
 ?>

@@ -92,7 +92,9 @@
       $concepto->guardar_concepto($ticket_id,$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   }
   
+
   $pedido->cambiar_estado_pedido_cobro($_POST['mov']);
+  // Imprimir ticket
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }

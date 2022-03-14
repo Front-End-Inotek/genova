@@ -3614,75 +3614,52 @@ function aceptar_guardar_corte(ticket_ini,ticket_fin){
 }
 
 // Guardar un corte
-function guarda_corte(){
+function guardar_corte(ticket_ini,ticket_fin){
     var usuario_id=localStorage.getItem("id");
-	var nombre= encodeURI(document.getElementById("nombre").value);
-	var codigo= encodeURI(document.getElementById("codigo").value);
-	
+    $('#caja_herramientas').modal('hide');
 
-	if(nombre.length >0){
-			//$('#boton_tipo').hide();
-			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-				  "nombre": nombre,
-				  "codigo": codigo,
-                  "usuario_id": usuario_id,
-				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_corte.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_tipos,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-				});
-				return false;
-			}else{
-				alert("Campos incompletos");
-			}
+    var datos = {
+            "usuario_id": usuario_id,
+            "ticket_ini": ticket_ini,
+            "ticket_fin": ticket_fin,
+        };
+    $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_corte.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+        });
+    guardar_reporte_corte(ticket_ini,ticket_fin);
+    return false;
 }
 
-// Guardar un corte
-function guardar_corte(ticket_ini,ticket_fin){
-	var usuario_id=localStorage.getItem("id");
+// Generar reporte de corte y guardarlo
+function guardar_reporte_corte(ticket_ini,ticket_fin){
+    var usuario_id=localStorage.getItem("id");
 	var tam =tamVentana();
 	var alto=tam[1];
 	var ancho=tam[0];
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
-	window.open("includes/guardar_corte.php?usuario_id="+usuario_id+"&ticket_ini="+ticket_ini+"&ticket_fin="+ticket_fin, "Diseño Web", "width="+ancho+", height="+alto);
+	window.open("includes/reporte_corte.php?usuario_id="+usuario_id+"&ticket_ini="+ticket_ini+"&ticket_fin="+ticket_fin, "Diseño Web", "width="+ancho+", height="+alto);
 	setTimeout(mostrar_corte, 7000);
 }
 
-// Borrar una forma de pago
-function borrar_forma_pago(id){
-    var usuario_id=localStorage.getItem("id");
-    $('#caja_herramientas').modal('hide');
-    if (id >0) {
-        var datos = {
-                "id": id,
-                "usuario_id": usuario_id,
-            };
-        $.ajax({
-                async:true,
-                type: "POST",
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_forma_pago.php",
-                data:datos,
-                beforeSend:loaderbar,
-                success:ver_formas_pago,
-                //success:problemas_sistema,
-                timeout:5000,
-                error:problemas_sistema
-            });
-        return false;
-    }
+// Mostrar el reporte de corte
+function mostrar_corte(){
+	var tam =tamVentana();
+	var alto=tam[1];
+	var ancho=tam[0];
+
+	salirsession();
+	window.open("includes/mostraruitimocorte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 
 // Muestra las cortes de habitaciones de la bd

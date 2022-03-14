@@ -265,6 +265,14 @@
         $comentario="Guardamos el concepto en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Cambiar estado activo del concepto
+      function cambiar_activo($id_ini,$id_fin){
+        $sentencia = "UPDATE `concepto` SET
+        `activo` = '0'
+        WHERE `id_ticket` >= '$id_ini' AND `id_ticket` <= '$id_fin';";
+        $comentario="Poner estado activo como inactivo del concepto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
     
   }
 ?>

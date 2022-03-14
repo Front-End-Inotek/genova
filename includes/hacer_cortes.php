@@ -81,8 +81,8 @@
           </div>
 
           
-          <div class="col-sm-4">
-            <div  class="card bg-light text-dark">';
+          <div class="col-sm-4">';
+            /*<div  class="card bg-light text-dark">';
               $cantidad= $tipo->total_elementos();
               
               echo '<div class="card-header">Extras</div>
@@ -90,8 +90,8 @@
               <div class="card-body">
               </div>
               
-            </div>
-          </div>
+            </div>*/
+          echo '</div>
 
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
