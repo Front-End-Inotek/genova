@@ -244,6 +244,7 @@
       public $id;
       public $activo;
       public $id_ticket;
+      public $id_usuario;
       public $nombre;
       public $cantidad;
       public $precio;
@@ -260,6 +261,7 @@
           $this->id= 0;
           $this->activo= 0;
           $this->id_ticket= 0;
+          $this->id_usuario= 0;
           $this->nombre= 0;
           $this->cantidad= 0;
           $this->precio= 0;
@@ -277,6 +279,7 @@
             $this->id= $fila['id'];
             $this->activo= $fila['activo'];
             $this->id_ticket= $fila['id_ticket'];
+            $this->id_usuario= $fila['id_usuario'];
             $this->nombre= $fila['nombre'];
             $this->cantidad= $fila['cantidad'];
             $this->precio= $fila['precio'];
@@ -289,9 +292,9 @@
         }
       }
       // Obtener la etiqueta del ticket
-      function guardar_concepto($id_ticket,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria){
-        $sentencia = "INSERT INTO `concepto` (`activo`, `id_ticket`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `tipo_cargo`, `categoria`)
-        VALUES ('1', '$id_ticket', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria');";
+      function guardar_concepto($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria){
+        $sentencia = "INSERT INTO `concepto` (`activo`, `id_ticket`, `id_usuario`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `tipo_cargo`, `categoria`)
+        VALUES ('1', '$id_ticket', '$id_usuario', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria');";
         $comentario="Guardamos el concepto en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }

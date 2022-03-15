@@ -23,7 +23,7 @@
 	public $producto_precio=array();
 
 	// Constructor
-	function __construct($id_ini,$id_fin)
+	function __construct($id_usuario)
 	{
 	  // Obtenemos el total del hospedaje
 	  $contador= 0;
@@ -38,15 +38,15 @@
 	  {
 		  $this->hab_tipo_hospedaje[$contador]= $fila['titulo'];
 		  $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
-		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($id_ini,$id_fin,$fila['ID']);
-		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($id_ini,$id_fin,$fila['ID']);
+		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($id_usuario,$fila['ID']);
+		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($id_usuario,$fila['ID']);
 		  $contador++;
 	  }
-	  $cantidad_hab= $this->total_hab= $this->cantidad_habitaciones($id_ini,$id_fin);
-	  $total_hab= $this->total_hab= $this->total_habitaciones($id_ini,$id_fin);
+	  $cantidad_hab= $this->total_hab= $this->cantidad_habitaciones($id_usuario);
+	  $total_hab= $this->total_hab= $this->total_habitaciones($id_usuario);
 
 	  // Obtenemos el total de personas extra
-	  $this->total_personas=$this->cantidad_personas($id_ini,$id_fin);// No correcto
+	  $this->total_personas=$this->cantidad_personas($id_usuario);// No correcto
 
 	  // Obtenemos la informacion de ventas restaurante
 	  $contador= 0;
@@ -56,12 +56,12 @@
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
-		  $venta= $this->producto_venta[$contador]= $this->venta_producto($id_ini,$id_fin,$fila['nombre']);
+		  $venta= $this->producto_venta[$contador]= $this->venta_producto($id_usuario,$fila['nombre']);
 		  if($venta > 0){
 			  $this->producto_nombre[$contador]= $fila['nombre'];
 			  $precio= $this->producto_precio[$contador]= $fila['precio'];
-			  $this->producto_tipo_venta[$contador]= $this->venta_sin_hab($id_ini,$id_fin,$fila['nombre']);
-			  //$this->producto_cortesia[$contador]= $this->producto_de_cortresia($id_ini, $id_fin,$fila['nombre']);
+			  $this->producto_tipo_venta[$contador]= $this->venta_sin_hab($id_usuario,$fila['nombre']);
+			  //$this->producto_cortesia[$contador]= $this->producto_de_cortresia($id_ini,$id_fin,$fila['nombre']);
 			  //$this->producto_inventario[$contador]= $fila['inventario'];
 			  $total_restaurante= $total_restaurante + ($venta * $precio);
 			  $contador++;	  
@@ -81,8 +81,8 @@
 	  }
 	  $numero_descuento= 0;
 	  $dinero_descuento= 0;
-	  $sentencia = "SELECT * FROM ticket WHERE id >= $id_ini AND id <= $id_fin AND estado = 1";
-	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <= $id_fin AND activo = 1";
+	  $sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario AND estado = 1";
+	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
 	  //echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -140,9 +140,9 @@
 
 	}
 	// Obtenemos la cantidad del hospedaje
-	function cantidad_hospedaje($id_ini,$id_fin,$categoria){
+	function cantidad_hospedaje($id_usuario,$categoria){
 	  $total=0;
-	  $sentencia = "SELECT SUM(cantidad) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <= $id_fin AND tipo_cargo = 1 AND categoria = $categoria AND activo = 1";
+	  $sentencia = "SELECT SUM(cantidad) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 1 AND categoria = $categoria AND activo = 1";
 	  $comentario="Obtener el total del  de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -157,9 +157,9 @@
 	  return $total;
 	}
 	// Obtenemos el total del hospedaje
-	function total_hospe($id_ini,$id_fin,$tarifa){
+	function total_hospe($id_usuario,$tarifa){
 	  $total=0;
-	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 1 AND categoria = $tarifa AND activo = 1";
+	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 1 AND categoria = $tarifa AND activo = 1";
 	  $comentario="Obtener el total del  de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -174,9 +174,9 @@
 	  return $total;
 	}
 	// Obtenemos la cantidad del hospedaje
-	function cantidad_personas($id_ini,$id_fin){ // No correcto
+	function cantidad_personas($id_usuario){ // No correcto
 	  $total=0;
-	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 4 AND activo = 1";
+	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 4 AND activo = 1";
 	  $comentario="Obtener el total del  de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -191,9 +191,9 @@
 	  return $total;
 	}
 	// Obtener el total del producto vendido
-	function venta_producto($id_ini,$id_fin,$nombre){
+	function venta_producto($id_usuario,$nombre){
       $total=0;
-	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <= $id_fin AND nombre = '$nombre' AND activo = 1";
+	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto WHERE id_usuario = $id_usuario AND nombre = '$nombre' AND activo = 1";
 	  $comentario="Obtener el total del  producto vendido";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -208,9 +208,9 @@
 	  return $total;
     }
 	// Obtener el total del  producto vendido
-	function venta_sin_hab($id_ini,$id_fin,$nombre){
+	function venta_sin_hab($id_usuario,$nombre){
       $total=0;
-	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE ticket.id >= $id_ini AND ticket.id <= $id_fin AND concepto.nombre = '$nombre' AND ticket.mov > 0;";
+	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE concepto.id_usuario = $id_usuario AND concepto.nombre = '$nombre' AND ticket.mov > 0;";
 	  //echo $sentencia;
 	  $comentario="Obtener el total del  producto vendido";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -226,9 +226,9 @@
 	  return $total;
     }
 	// Obtener la cantidad de habitaciones del hospedaje
-	function cantidad_habitaciones($id_ini,$id_fin){
+	function cantidad_habitaciones($id_usuario){
 	  $cantidad=0;
-	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 1 AND activo = 1";
+	  $sentencia = "SELECT count(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 1 AND activo = 1";
 	  $comentario="Obtener la cantidad de habitaciones del hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -243,9 +243,9 @@
 	  return $cantidad;
 	}
 	// Obtener el total del  de hospedaje
-	function total_habitaciones($id_ini,$id_fin){
+	function total_habitaciones($id_usuario){
 		$total=0;
-		$sentencia = "SELECT count(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 1 AND activo = 1";
+		$sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 1 AND activo = 1";
 		$comentario="Obtener el total del de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))

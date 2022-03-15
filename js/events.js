@@ -3615,10 +3615,11 @@ function previsualizar_estado(){
 
 // Hacer un corte
 function hacer_cortes(){
+    var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/hacer_cortes.php"); 
+	$("#area_trabajo_menu").load("includes/hacer_cortes.php?usuario_id="+usuario_id);
 	closeNav();
 }
 

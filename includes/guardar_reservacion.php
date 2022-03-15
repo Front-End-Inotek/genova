@@ -104,7 +104,7 @@
     $categoria= $hab->id;
     $nombre= $hab->nombre;
     $nombre_concepto= 'Primer abono de habitacion '.$nombre;
-    $concepto->guardar_concepto($ticket_id,$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria,$resta);
+    $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria,$resta);
     
     // Imprimir ticket
     if($confi->ticket_restaurante == 0){
