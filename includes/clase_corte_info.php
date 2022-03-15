@@ -9,6 +9,7 @@
 	public $hab_total_hospedaje=array();
 
 	public $total_personas;
+	public $cantidad_hab;
 	public $total_hab;
 	public $total_restaurante;
 	public $total_global;
@@ -26,6 +27,7 @@
 	{
 	  // Obtenemos el total del hospedaje
 	  $contador= 0;
+	  $cantidad_hab= 0;
 	  $total_hab= 0;
 	  $sentencia = "SELECT *,tarifa_hospedaje.id AS ID,tipo_hab.nombre AS titulo 
 	  FROM  tarifa_hospedaje 
@@ -38,9 +40,10 @@
 		  $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
 		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($id_ini,$id_fin,$fila['ID']);
 		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($id_ini,$id_fin,$fila['ID']);
-		  $total_hab= $this->total_hab= $this->total_cuartos($id_ini,$id_fin);
 		  $contador++;
 	  }
+	  $cantidad_hab= $this->total_hab= $this->cantidad_habitaciones($id_ini,$id_fin);
+	  $total_hab= $this->total_hab= $this->total_habitaciones($id_ini,$id_fin);
 
 	  // Obtenemos el total de personas extra
 	  $this->total_personas=$this->cantidad_personas($id_ini,$id_fin);// No correcto
@@ -222,22 +225,39 @@
 	  }
 	  return $total;
     }
-	// Obtener el total del  de hospedaje
-	function total_cuartos($id_ini,$id_fin){
-	  $total=0;
+	// Obtener la cantidad de habitaciones del hospedaje
+	function cantidad_habitaciones($id_ini,$id_fin){
+	  $cantidad=0;
 	  $sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 1 AND activo = 1";
-	  $comentario="Obtener el total del de hospedaje";
+	  $comentario="Obtener la cantidad de habitaciones del hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
-		  $total=$fila['total'];
+		  $cantidad=$fila['total'];
 	  }
-	  if($total>0){
+	  if($cantidad>0){
 
 	  }else{ 
-		  $total=0;
+		  $cantidad=0;
 	  }
-	  return $total;
+	  return $cantidad;
+	}
+	// Obtener el total del  de hospedaje
+	function total_habitaciones($id_ini,$id_fin){
+		$total=0;
+		$sentencia = "SELECT count(total) AS total FROM concepto WHERE id_ticket >= $id_ini AND id_ticket <=$id_fin AND tipo_cargo = 1 AND activo = 1";
+		$comentario="Obtener el total del de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta))
+		{
+			$total=$fila['total'];
+		}
+		if($total>0){
+  
+		}else{ 
+			$total=0;
+		}
+		return $total;
 	}
 
 

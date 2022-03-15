@@ -20,7 +20,8 @@
       public $forma_pago_nueve;
       public $forma_pago_diez;
       public $descuento;
-      public $habitaciones;
+      public $cantidad_habitaciones;
+      public $total_habitaciones;
       public $restaurante;
       //public $personas;
       public $tiket_ini;
@@ -47,7 +48,8 @@
           $this->forma_pago_nueve= 0;
           $this->forma_pago_diez= 0;
           $this->descuento= 0;
-          $this->habitaciones= 0;
+          $this->cantidad_habitaciones= 0;
+          $this->total_habitaciones= 0;
           $this->restaurante= 0;
           $this->tiket_ini= 0;
           $this->tiket_fin= 0;
@@ -74,7 +76,8 @@
               $this->forma_pago_nueve= $fila['forma_pago_nueve'];
               $this->forma_pago_diez= $fila['forma_pago_diez'];
               $this->descuento= $fila['descuento'];
-              $this->habitaciones= $fila['habitaciones'];
+              $this->cantidad_habitaciones= $fila['cantidad_habitaciones'];
+              $this->total_habitaciones= $fila['total_habitaciones'];
               $this->restaurante= $fila['restaurante'];
               $this->tiket_ini= $fila['tiket_ini'];
               $this->tiket_fin= $fila['tiket_fin'];
@@ -83,10 +86,10 @@
         }
       }
       // Guardar el corte
-      function guardar_corte($id_usuario,$nueva_etiqueta,$total,$efectivo,$tarjeta,$forma_pago_tres,$forma_pago_cuatro,$forma_pago_cinco,$forma_pago_seis,$forma_pago_siete,$forma_pago_ocho,$forma_pago_nueve,$forma_pago_diez,$habitaciones,$restaurante,$ticket_inicial,$ticket_final){
+      function guardar_corte($id_usuario,$nueva_etiqueta,$total,$efectivo,$tarjeta,$forma_pago_tres,$forma_pago_cuatro,$forma_pago_cinco,$forma_pago_seis,$forma_pago_siete,$forma_pago_ocho,$forma_pago_nueve,$forma_pago_diez,$cantidad_habitaciones,$total_habitaciones,$restaurante,$ticket_inicial,$ticket_final){
         $fecha=time();
-        $sentencia = "INSERT INTO `corte` (`id_usuario`, `fecha`, `etiqueta`, `total`, `efectivo`, `tarjeta`, `forma_pago_tres`, `forma_pago_cuatro`, `forma_pago_cinco`, `forma_pago_seis`, `forma_pago_siete`, `forma_pago_ocho`, `forma_pago_nueve`, `forma_pago_diez`, `descuento`, `habitaciones`, `restaurante`, `tiket_ini`, `tiket_fin`, `estado`)
-        VALUES ('$id_usuario', '$fecha', '$nueva_etiqueta', '$total', '$efectivo', '$tarjeta', '$forma_pago_tres', '$forma_pago_cuatro', '$forma_pago_cinco', '$forma_pago_seis', '$forma_pago_siete', '$forma_pago_ocho', '$forma_pago_nueve', '$forma_pago_diez', '0', '$habitaciones', '$restaurante', '$ticket_inicial', '$ticket_final', '1');";
+        $sentencia = "INSERT INTO `corte` (`id_usuario`, `fecha`, `etiqueta`, `total`, `efectivo`, `tarjeta`, `forma_pago_tres`, `forma_pago_cuatro`, `forma_pago_cinco`, `forma_pago_seis`, `forma_pago_siete`, `forma_pago_ocho`, `forma_pago_nueve`, `forma_pago_diez`, `descuento`, `cantidad_habitaciones`, `total_habitaciones`, `restaurante`, `tiket_ini`, `tiket_fin`, `estado`)
+        VALUES ('$id_usuario', '$fecha', '$nueva_etiqueta', '$total', '$efectivo', '$tarjeta', '$forma_pago_tres', '$forma_pago_cuatro', '$forma_pago_cinco', '$forma_pago_seis', '$forma_pago_siete', '$forma_pago_ocho', '$forma_pago_nueve', '$forma_pago_diez', '0', '$cantidad_habitaciones', '$total_habitaciones', '$restaurante', '$ticket_inicial', '$ticket_final', '1');";
         $comentario="Guardamos el surtir_inventario en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);     
         

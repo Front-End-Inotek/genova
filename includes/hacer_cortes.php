@@ -62,8 +62,8 @@
                           <td>'.$inf->hab_cantidad_hospedaje[$z].'</td> 
                           <td>$'.$inf->hab_total_hospedaje[$z].'</td> 
                         </tr>';
-                        $total_cuartos_hospedaje= $total_cuartos_hospedaje+$inf->hab_total_hospedaje[$z];
-                        $suma_cuartos_hospedaje= $suma_cuartos_hospedaje+$inf->hab_cantidad_hospedaje[$z];
+                        $total_cuartos_hospedaje= $total_cuartos_hospedaje + $inf->hab_total_hospedaje[$z];
+                        $suma_cuartos_hospedaje= $suma_cuartos_hospedaje + $inf->hab_cantidad_hospedaje[$z];
                     }
                     echo '<tr class="table-primary  text-center">
                       <td></td>
@@ -95,7 +95,7 @@
 
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
-              $cantidad= $tipo->total_elementos();
+              //$cantidad= $tipo->total_elementos();
               
               echo '<div class="card-header">Totales</div>
               

@@ -14,8 +14,8 @@
   $logs = NEW Log(0);
 
   // Guardar corte
-  $logs->guardar_log($_POST['usuario_id'],"Hacer0 corte");
-  $habitaciones= $inf->total_hab;
+  $cantidad_habitaciones= $inf->total_hab;
+  $total_habitaciones= $inf->total_hab;
   $restaurante= $inf->total_restaurante;
   $total= $inf->total_global;
   $cantidad= $forma_pago->total_elementos();
@@ -25,10 +25,9 @@
   {
     $pago[$z-1]= $inf->total_pago[$z-1];
   }
-  $logs->guardar_log($_POST['usuario_id'],"Hacer cort/e");
   $nueva_etiqueta= $labels->obtener_corte();
   $labels->actualizar_etiqueta_corte();
-  $corte_id= $corte->guardar_corte($_POST['usuario_id'],$nueva_etiqueta,$total,$pago[0],$pago[1],$pago[2],$pago[3],$pago[4],$pago[5],$pago[6],$pago[7],$pago[8],$pago[9],$habitaciones,$restaurante,$_POST['ticket_ini'],$_POST['ticket_fin']);
+  $corte_id= $corte->guardar_corte($_POST['usuario_id'],$nueva_etiqueta,$total,$pago[0],$pago[1],$pago[2],$pago[3],$pago[4],$pago[5],$pago[6],$pago[7],$pago[8],$pago[9],$cantidad_habitaciones,$total_habitaciones,$restaurante,$_POST['ticket_ini'],$_POST['ticket_fin']);
 
   // Cambiar concepto a inactivo
   $concepto->cambiar_activo($_POST['ticket_ini'],$_POST['ticket_fin']);

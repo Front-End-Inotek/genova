@@ -1,9 +1,22 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_ticket.php");
+  include_once("clase_tipo.php");
+  include_once("clase_usuario.php");
+  include_once("clase_forma_pago.php");
+  include_once("clase_corte_info.php");
   include_once('clase_log.php');
+  $ticket= NEW Ticket(0);
+  $tipo= NEW Tipo(0);
   $labels= NEW Labels(0);
+  $usuario= NEW Usuario(0);
+  $forma_pago= NEW Forma_pago(0);
+  $inf= NEW Corte_info($_GET['ticket_ini'],$_GET['ticket_fin']);
   $logs = NEW Log(0);
+  $total_cuartos_hospedaje= 0;
+  $suma_cuartos_hospedaje= 0; 
+  $total_cuartos= 0;
+  $total_restaurante= 0;
 
   require('../fpdf/fpdf.php');
   $pdf = new FPDF();
@@ -20,7 +33,7 @@
   $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(0,0,0);
   $fecha_actual = time();
-  $fecha = date("d-m-Y",$fecha_actual);
+  $fecha = date("d-m-Y h:i A",$fecha_actual);
   $dia = substr($fecha, 0, 2);
   $mes = substr($fecha, 3, 2);
   switch ($mes) {
@@ -63,46 +76,144 @@
       default:
           echo "No existe este mes";
   }
-  $anio = substr($fecha, 6, 4);
+  $anio = substr($fecha, 6, 13);
   
   // Datos y fecha
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
-  $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');
+  $realizo_usuario= $usuario->obtengo_usuario($_GET['usuario_id']);
+  $pdf->Cell(132,5,iconv("UTF-8", "ISO-8859-1",'Realizo '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,0,'L');
+  $pdf->Cell(60,5,iconv("UTF-8", "ISO-8859-1",'Tickets '.$ticket->obtener_etiqueta($_GET['ticket_ini']).' - '.$ticket->obtener_etiqueta($_GET['ticket_fin'])),0,1,'R');  
   $pdf->Ln(4);
 
-  // Titulos tabla -277
+  // Titulo
   $pdf->SetFont('Arial','B',10);
   $pdf->SetTextColor(0, 102, 205);
   $nueva_etiqueta= $labels->obtener_corte();
-  $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'CORTE: '.$nueva_etiqueta),0,1,'C');
+  $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,1,'C');
+  $pdf->Ln(8);
+  $pdf->SetFillColor(99, 155, 219);
+
+  // Datos dentro de la tabla hospedaje
+  $x_inicial=$pdf->GetX();
+  $y_inicial=$pdf->GetY();
+  $pdf->SetFont('Arial','B',8);
+  $pdf->SetTextColor(24, 31, 102);
+  $pdf->Cell(100,8,iconv("UTF-8", "ISO-8859-1",'Hospedaje'),0,1,'C');
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
-  $pdf->Ln(4);
-  $pdf->SetFillColor(99, 155, 219);
-  /*$pdf->Cell(45,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-  $pdf->Cell(80,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True);
-  $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'CANTIDAD'),0,1,'C',True);
-
-  // Datos dentro de la tabla surtir
+  $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'Tipo'),0,0,'C',True);
+  $pdf->Cell(18,4,iconv("UTF-8", "ISO-8859-1",'Precio'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'Cant.'),0,0,'C',True);
+  $pdf->Cell(24,4,iconv("UTF-8", "ISO-8859-1",'Total'),0,1,'C',True);
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
-  if($_GET['id'] == 0){
-      $id_reporte= $surtir->ultima_insercion_reporte();
-  }else{
-      $id_reporte= $_GET['id'];
-  }
-  $logs->guardar_log($_GET['usuario_id'],"Reporte surtir inventario ".$id_reporte.' del '.$dia.' de '.$mes.' de '.$anio);
-  $consulta = $surtir->datos_surtir_inventario_reporte($id_reporte);
-  while ($fila = mysqli_fetch_array($consulta))
+  $cantidad= $tipo->total_elementos();
+  for($z=0 ; $z<$cantidad; $z++)
   {
-      $id_producto= $fila['id'];
-      $surtir_id = $fila['ID'];
-      $nombre = $fila['nombre'];  
-      $cantidad = $fila['cantidad'];
-      $pdf->Cell(45,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-      $pdf->Cell(80,5,iconv("UTF-8", "ISO-8859-1",$nombre),1,0,'C'); 
-      $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$cantidad),1,1,'C');    
-  }*/
+      //if(($z%2) == 0){
+          $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_tipo_hospedaje[$z]),1,0,'C');
+          $pdf->Cell(18,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->hab_precio_hospedaje[$z], 2)),1,0,'C');
+          $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_cantidad_hospedaje[$z]),1,0,'C');
+          $pdf->Cell(24,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->hab_total_hospedaje[$z], 2)),1,1,'C');
+      /*}else{
+          $pdf->SetFillColor(185, 185, 185);
+          $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_tipo_hospedaje[$z]),1,0,'C',True);
+          $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_precio_hospedaje[$z]),1,0,'C',True);
+          $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_cantidad_hospedaje[$z]),1,0,'C',True);
+          $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_total_hospedaje[$z]),1,1,'C',True);
+      }*/
+    
+      $total_cuartos_hospedaje= $total_cuartos_hospedaje + $inf->hab_total_hospedaje[$z];
+      $suma_cuartos_hospedaje= $suma_cuartos_hospedaje + $inf->hab_cantidad_hospedaje[$z];
+  }
+  $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",''),1,0,'C');
+  $pdf->Cell(18,4,iconv("UTF-8", "ISO-8859-1",''),1,0,'C');
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$suma_cuartos_hospedaje),1,0,'C');
+  $pdf->Cell(24,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_cuartos_hospedaje, 2)),1,1,'C');
+ 
+  // Datos dentro de la tabla totales
+  $pdf->SetXY($x_inicial,$y_inicial);
+  $pdf->SetFont('Arial','B',8);
+  $pdf->SetTextColor(20, 31, 102);
+  $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+  $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Totales'),0,1,'C');
+  $pdf->SetFont('Arial','B',7);
+  $pdf->SetTextColor(255, 255, 255);
+  $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),0,0,'C',True);
+  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),0,1,'C',True);
+  $pdf->SetFont('Arial','',7);
+  $pdf->SetTextColor(0,0,0);
+  //$cantidad= $tipo->total_elementos();
+  $concepto= array();
+  $concepto[0]= 'Habitaciones';
+  $concepto[1]= 'Restaurante';
+  $concepto[2]= 'Total';
+  $total= array(); 
+  $total[0]= $inf->total_hab;
+  $total[1]= $inf->total_restaurante;
+  $total[2]= $inf->total_global;
+  $cantidad= 2;
+  for($z=0 ; $z<$cantidad; $z++)
+  {
+      $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+      $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$concepto[$z]),1,0,'C');
+      $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total[$z], 2)),1,1,'C');
+  }
+  $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$concepto[2]),1,0,'C');
+  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_global, 2)),1,1,'C');
+  $pdf->Ln(6);
+
+  // Datos dentro de la tabla ventas restaurante
+  $x_final=$pdf->GetX();
+  $y_final=$pdf->GetY();
+  $pdf->SetFont('Arial','B',8);
+  $pdf->SetTextColor(20, 31, 102);
+  $pdf->Cell(100,8,iconv("UTF-8", "ISO-8859-1",'Ventas Restaurante'),0,1,'C');
+  $pdf->SetFont('Arial','B',7);
+  $pdf->SetTextColor(255, 255, 255);
+  $pdf->Cell(44,4,iconv("UTF-8", "ISO-8859-1",'Producto'),0,0,'C',True);
+  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'Venta'),0,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Precio'),0,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Total'),0,0,'C',True);
+  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'En Hab.'),0,0,'C',True);
+  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'En Rest.'),0,1,'C',True);
+  $pdf->SetFont('Arial','',7);
+  $pdf->SetTextColor(0,0,0);
+  $cantidad= count($inf->producto_nombre);
+  for($z=0 ; $z<$cantidad; $z++)
+  {
+      $pdf->Cell(44,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_nombre[$z]),1,0,'C');
+      $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_venta[$z]),1,0,'C');
+      $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->producto_precio[$z], 2)),1,0,'C');
+      $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format(($inf->producto_venta[$z] * $inf->producto_precio[$z]), 2)),1,0,'C');
+      $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_tipo_venta[$z]),1,0,'C');
+      $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z])),1,1,'C');
+  }
+ 
+  // Datos dentro de la tabla desgloce en sistema
+  $pdf->SetXY($x_final,$y_final);
+  $pdf->SetFont('Arial','B',8);
+  $pdf->SetTextColor(20, 31, 102);
+  $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+  $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Desgloce en Sistema'),0,1,'C');
+  $pdf->SetFont('Arial','B',7);
+  $pdf->SetTextColor(255, 255, 255);
+  $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),0,0,'C',True);
+  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),0,1,'C',True);
+  $pdf->SetFont('Arial','',7);
+  $pdf->SetTextColor(0,0,0);
+  $cantidad= $forma_pago->total_elementos();
+  $cantidad= $cantidad + 1;
+  for($z=1; $z<$cantidad; $z++)
+  {
+      $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+      $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$forma_pago->obtener_descripcion($z)),1,0,'C');
+      $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_pago[$z-1], 2)),1,1,'C');
+  }
 
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
