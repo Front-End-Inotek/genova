@@ -219,5 +219,11 @@
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
       //echo 'Reporte cargo noche';*/
+
+
+      // cambiar concepto a inactivo, cambiar ticket estado 2, guardar corte reporte
+// hacer reporte, 
+//  $logs->guardar_log($_GET['usuario_id'],"Reporte corte ".$id_reporte.' del '.$dia.' de '.$mes.' de '.$anio); 
+// ver reporte y sacar del sistema
 ?>
 
