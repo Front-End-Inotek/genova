@@ -4,6 +4,7 @@
   include_once("clase_tipo.php");
   include_once("clase_usuario.php");
   include_once("clase_forma_pago.php");
+  include_once("clase_corte.php");
   include_once("clase_corte_info.php");
   include_once('clase_log.php');
   $ticket= NEW Ticket(0);
@@ -11,6 +12,7 @@
   $labels= NEW Labels(0);
   $usuario= NEW Usuario(0);
   $forma_pago= NEW Forma_pago(0);
+  $corte= NEW Corte(0);
   $inf= NEW Corte_info($_GET['ticket_ini'],$_GET['ticket_fin']);
   $logs = NEW Log(0);
   $total_cuartos_hospedaje= 0;
@@ -90,6 +92,7 @@
   $pdf->SetFont('Arial','B',10);
   $pdf->SetTextColor(0, 102, 205);
   $nueva_etiqueta= $labels->obtener_corte();
+  $nueva_etiqueta= $nueva_etiqueta - 1;
   $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,1,'C');
   $pdf->Ln(8);
   $pdf->SetFillColor(99, 155, 219);
@@ -215,15 +218,11 @@
       $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_pago[$z-1], 2)),1,1,'C');
   }
 
-  //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
+  $corte_id= $corte->ultima_insercion();
+  $logs->guardar_log($_GET['usuario_id'],"Reporte corte con etiqueta:".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
+  //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
-  //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
-      //echo 'Reporte cargo noche';*/
-
-
-      // cambiar concepto a inactivo, cambiar ticket estado 2, guardar corte reporte
-// hacer reporte, 
-//  $logs->guardar_log($_GET['usuario_id'],"Reporte corte ".$id_reporte.' del '.$dia.' de '.$mes.' de '.$anio); 
-// ver reporte y sacar del sistema
+  //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_corte.pdf","I");
+      //echo 'Reporte corte';*/
 ?>
 

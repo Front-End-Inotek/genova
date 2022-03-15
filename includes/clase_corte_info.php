@@ -897,21 +897,21 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 			}
 	}
 	function ticket_inicial($id){
-		$sentencia = "SELECT tiket_ini FROM  corte WHERE id = $id LIMIT 1 ";
+		$sentencia = "SELECT ticket_ini FROM  corte WHERE id = $id LIMIT 1 ";
 		$comentario="Seleccionar el primer ticket";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))
 		{
-			$this->ticket_inicial_id=$fila['tiket_ini'];
+			$this->ticket_inicial_id=$fila['ticket_ini'];
 		}
 	}
 	function ticket_final($id){
-		$sentencia = "SELECT tiket_fin FROM  corte WHERE id = $id LIMIT 1 ";
+		$sentencia = "SELECT ticket_fin FROM  corte WHERE id = $id LIMIT 1 ";
 		$comentario="Seleccionar el ultimo ticket";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))
 		{
-			$this->ticket_final_id=$fila['tiket_fin'];
+			$this->ticket_final_id=$fila['ticket_fin'];
 		}
    }
    function cambiar_estado_todos_0(){
@@ -1444,21 +1444,21 @@ class Cortes_limpieza_info extends ConexionMYSql
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 	}
 	function ticket_inicial($id){
-		$sentencia = "SELECT tiket_ini FROM  corte WHERE id = $id LIMIT 1 ";
+		$sentencia = "SELECT ticket_ini FROM  corte WHERE id = $id LIMIT 1 ";
 		$comentario="Seleccionar el primer ticket";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))
 		{
-			$this->ticket_inicial_id=$fila['tiket_ini'];
+			$this->ticket_inicial_id=$fila['ticket_ini'];
 		}
 	}
 	function ticket_final($id){
-		$sentencia = "SELECT tiket_fin FROM  corte WHERE id = $id LIMIT 1 ";
+		$sentencia = "SELECT ticket_fin FROM  corte WHERE id = $id LIMIT 1 ";
 		$comentario="Seleccionar el ultimo ticket";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))
 		{
-			$this->ticket_final_id=$fila['tiket_fin'];
+			$this->ticket_final_id=$fila['ticket_fin'];
 		}
 	}
    function cantida_renta($id_ini, $id_fin,$tarifa){
@@ -1727,21 +1727,21 @@ class Cortes_limpieza extends ConexionMYSql
 		   }
    }
    function ticket_inicial($id){
-	   $sentencia = "SELECT tiket_ini FROM  corte WHERE id = $id LIMIT 1 ";
+	   $sentencia = "SELECT ticket_ini FROM  corte WHERE id = $id LIMIT 1 ";
 	   $comentario="Seleccionar el primer ticket";
 	   $consulta= $this->realizaConsulta($sentencia,$comentario);
 	   while ($fila = mysqli_fetch_array($consulta))
 	   {
-		   $this->ticket_inicial_id=$fila['tiket_ini'];
+		   $this->ticket_inicial_id=$fila['ticket_ini'];
 	   }
    }
    function ticket_final($id){
-	   $sentencia = "SELECT tiket_fin FROM  corte WHERE id = $id LIMIT 1 ";
+	   $sentencia = "SELECT ticket_fin FROM  corte WHERE id = $id LIMIT 1 ";
 	   $comentario="Seleccionar el primer ticket";
 	   $consulta= $this->realizaConsulta($sentencia,$comentario);
 	   while ($fila = mysqli_fetch_array($consulta))
 	   {
-		   $this->ticket_final_id=$fila['tiket_fin'];
+		   $this->ticket_final_id=$fila['ticket_fin'];
 	   }
    }
    function cantidad_tickes($id_ini,$id_fin){
