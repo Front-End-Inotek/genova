@@ -3649,17 +3649,17 @@ function guardar_reporte_corte(ticket_ini,ticket_fin){
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/reporte_corte.php?usuario_id="+usuario_id+"&ticket_ini="+ticket_ini+"&ticket_fin="+ticket_fin, "Diseño Web", "width="+ancho+", height="+alto);
-	setTimeout(mostrar_corte(ticket_ini,ticket_fin), 7000);
+	setTimeout(mostrar_corte, 7000);
 }
 
 // Mostrar el reporte de corte
-function mostrar_corte(ticket_ini,ticket_fin){
+function mostrar_corte(){
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
 
 	salirsession();
-	window.open("includes/mostrar_reporte_corte.php?ancho="+ancho+"&alto="+alto+"&ticket_ini="+ticket_ini+"&ticket_fin="+ticket_fin, "Diseño Web", "width="+ancho+", height="+alto);
+	window.open("includes/mostrar_reporte_corte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 
 // Obtenemos el tamaño de la ventana
@@ -3686,6 +3686,7 @@ function tam_ventana() {
     }
     return tam;
 }
+
 // Muestra las cortes de habitaciones de la bd
 function ver_cortes(){
 	var usuario_id=localStorage.getItem("id");

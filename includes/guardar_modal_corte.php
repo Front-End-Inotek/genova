@@ -1,5 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  include_once("clase_corte.php");
+  $corte= NEW Corte(0);
   echo '
   <!-- Modal content-->
   <div class="modal-content">

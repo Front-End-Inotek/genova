@@ -224,6 +224,18 @@
         }
         return $etiqueta;
       }
+      // Obtener la ultima etiqueta ingresada 
+      function ultima_etiqueta(){
+        $sentencia= "SELECT etiqueta FROM corte ORDER BY id DESC LIMIT 1";
+        $etiqueta= 0;
+        $comentario="Obtener la ultima etiqueta ingresada";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $etiqueta= $fila['etiqueta'];
+        }
+        return $etiqueta;
+      }
               
   }
 ?>
