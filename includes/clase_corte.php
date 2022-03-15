@@ -96,69 +96,49 @@
         $id= $this->ultima_insercion();
         return $id;
       }
-      // Obtengo el total de reportes de surtir inventario
-      function total_elementos(){
-        $cantidad=0;
-        $sentencia = "SELECT count(id) AS cantidad FROM surtir_inventario WHERE estado = 1 ORDER BY id";
-        //echo $sentencia;
-        $comentario="Obtengo el total de reportes de surtir inventario";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $cantidad= $fila['cantidad'];
-        }
-        return $cantidad;
-      }
-      // Mostramos los reportes de surtir inventario
-      function mostrar($posicion,$id){
-        $cont = 1;
-        //echo $posicion;
-        $final = $posicion+20;
-        $cat_paginas=($this->total_elementos()/20);
-        $extra=($this->total_elementos()%20);
-        $cat_paginas=intval($cat_paginas);
-        if($extra>0){
-          $cat_paginas++;
-        }
-        $ultimoid=0;
+      // Mostramos los reportes de cortes
+      function mostrar(){
+        date_default_timezone_set('America/Mexico_City');
+        $inicio_dia= date("d-m-Y");   
+        $inicio_dia= strtotime($inicio_dia);
+        $inicio_dia= $inicio_dia + 86399;
+        $fin_dia= $inicio_dia - 604799;
 
-        $sentencia = "SELECT *,surtir_inventario.id AS ID
-        FROM surtir_inventario 
-        INNER JOIN usuario ON surtir_inventario.id_usuario = usuario.id WHERE surtir_inventario.estado = 1 ORDER BY surtir_inventario.id DESC";
-        $comentario="Mostrar los reportes de surtir inventario";
+        $sentencia = "SELECT *,corte.etiqueta AS ID 
+        FROM corte 
+        INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE (corte.fecha >= $fin_dia && corte.fecha <= $inicio_dia) AND corte.estado = 1 ORDER BY corte.etiqueta DESC";
+        $comentario="Mostrar los reportes de cortes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_surtir_inventario">
+        echo '<div class="table-responsive" id="tabla_corte">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Número</th>
-            <th>Nombre Surtió</th>
+            <th>Usuario</th>
             <th>Fecha</th>
+            <th>Total</th>
             <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
             </tr>
           </thead>
         <tbody>';
             while ($fila = mysqli_fetch_array($consulta))
             {
-              if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
                 <td>'.$fila['ID'].'</td> 
                 <td>'.$fila['usuario'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                <td><button class="btn btn-success" onclick="reporte_surtir_inventario('.$fila['ID'].')"> Reporte</button></td>
+                <td>$'.number_format($fila['total'], 2).'</td>
+                <td><button class="btn btn-success" onclick="mostrar_reporte_corte('.$fila['ID'].')"> Reporte</button></td>
                 </tr>';
-              }
-              $cont++;
             }
             echo '
-            </tbody>
-          </table>
-          </div>';
-          return $cat_paginas;
+          </tbody>
+        </table>
+        </div>';
       }
-      // Busqueda por fecha en ver reportes de surtir inventario
-      function mostrar_surtir_fecha($fecha_ini_tiempo,$fecha_fin_tiempo){
+      // Busqueda por fecha en ver reportes de cortes
+      function mostrar_corte_fecha($fecha_ini_tiempo,$fecha_fin_tiempo){
         date_default_timezone_set('America/Mexico_City');
         $fecha_ini_tiempo =$fecha_ini_tiempo. " 0:00:00";
         $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
@@ -168,19 +148,20 @@
         if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar();
         }else{
-          $sentencia = "SELECT *,surtir_inventario.id AS ID
-          FROM surtir_inventario 
-          INNER JOIN usuario ON surtir_inventario.id_usuario = usuario.id WHERE surtir_inventario.fecha >= $fecha_ini && surtir_inventario.fecha <= $fecha_fin && surtir_inventario.fecha > 0 && surtir_inventario.estado = 1 ORDER BY surtir_inventario.id DESC";
-          $comentario="Mostrar por fecha los reportes de surtir inventario";
+          $sentencia = "SELECT *,corte.etiqueta AS ID 
+          FROM corte 
+          INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE corte.fecha >= $fecha_ini && corte.fecha <= $fecha_fin && corte.fecha > 0 && corte.estado = 1 ORDER BY corte.etiqueta DESC";
+          $comentario="Mostrar por fecha los reportes de cortes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
-          echo '<div class="table-responsive" id="tabla_surtir_inventario">
+          echo '<div class="table-responsive" id="tabla_cargo_noche">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th>Número</th>
-              <th>Nombre Surtió</th>
+              <th>Usuario</th>
               <th>Fecha</th>
+              <th>Total</th>
               <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
               </tr>
             </thead>
@@ -191,7 +172,8 @@
                   <td>'.$fila['ID'].'</td> 
                   <td>'.$fila['usuario'].'</td>
                   <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                  <td><button class="btn btn-success" onclick="reporte_surtir_inventario('.$fila['ID'].')"> Reporte</button></td>
+                  <td>$'.number_format($fila['total'], 2).'</td>
+                  <td><button class="btn btn-success" onclick="mostrar_reporte_corte('.$fila['ID'].')"> Reporte</button></td>
                   </tr>';
               }
               echo '
@@ -211,18 +193,6 @@
           $id= $fila['id'];
         }
         return $id;
-      }
-      // Obtener la etiqueta del corte 
-      function obtener_etiqueta($ticket_inicial,$ticket_final){
-        $sentencia= "SELECT etiqueta FROM corte WHERE ticket_ini = $ticket_inicial AND ticket_fin = $ticket_final LIMIT 1";
-        $etiqueta= 0;
-        $comentario="Obtener la etiqueta del corte";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $etiqueta= $fila['etiqueta'];
-        }
-        return $etiqueta;
       }
       // Obtener la ultima etiqueta ingresada 
       function ultima_etiqueta(){

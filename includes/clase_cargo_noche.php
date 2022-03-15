@@ -64,8 +64,8 @@
             <tr class="table-primary-encabezado text-center">
             <th>Número</th>
             <th>Usuario</th>
-            <th>Total</th>
             <th>Fecha</th>
+            <th>Total</th>
             <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
             </tr>
           </thead>
@@ -75,8 +75,8 @@
                 echo '<tr class="text-center">
                 <td>'.$fila['ID'].'</td> 
                 <td>'.$fila['usuario'].'</td>
-                <td>$'.number_format($fila['total'], 2).'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                <td>$'.number_format($fila['total'], 2).'</td>
                 <td><button class="btn btn-success" onclick="mostrar_reporte_cargo_noche('.$fila['ID'].')"> Reporte</button></td>
                 </tr>';
             }
@@ -108,8 +108,8 @@
               <tr class="table-primary-encabezado text-center">
               <th>Número</th>
               <th>Usuario</th>
-              <th>Total</th>
               <th>Fecha</th>
+              <th>Total</th>
               <th><span class=" glyphicon glyphicon-cog"></span> Ver</th>
               </tr>
             </thead>
@@ -119,8 +119,8 @@
                   echo '<tr class="text-center">
                   <td>'.$fila['ID'].'</td> 
                   <td>'.$fila['usuario'].'</td>
-                  <td>$'.number_format($fila['total'], 2).'</td>
                   <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                  <td>$'.number_format($fila['total'], 2).'</td>
                   <td><button class="btn btn-success" onclick="mostrar_reporte_cargo_noche('.$fila['ID'].')"> Reporte</button></td>
                   </tr>';
               }

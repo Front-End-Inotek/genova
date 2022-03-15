@@ -3711,13 +3711,13 @@ function ver_cortes(){
 	closeNav();
 }
 
-// Muestra los reportes guardados de los cargos por noche de la bd
-function mostrar_reporte_cargo_noche(id){
-	window.open("reportes/reservaciones/cargo_noche/reporte_cargo_noche_"+id+".pdf");
+// Muestra los reportes guardados de los cortes de la bd
+function mostrar_reporte_corte(id){
+	window.open("reportes/corte/reporte_corte_"+id+".pdf");
 }
 
-// Busqueda por fecha en ver reportes guardados de los cargos por noche de la bd
-function busqueda_cargo_noche(){
+// Busqueda por fecha en ver cortes de la bd
+function busqueda_corte(){
 	var inicial=$("#inicial").val();
 	var final=$("#final").val();
     if(inicial.length >0 && final.length >0){
@@ -3725,7 +3725,7 @@ function busqueda_cargo_noche(){
     }else{
         $('.pagination').show();
     }
-	$("#tabla_cargo_noche").load("includes/busqueda_cargo_noche.php?inicial="+inicial+"&final="+final);
+	$("#tabla_corte").load("includes/busqueda_corte.php?inicial="+inicial+"&final="+final);
 }
 
 //* Estados  Internos de Edo.Ocupado *//
