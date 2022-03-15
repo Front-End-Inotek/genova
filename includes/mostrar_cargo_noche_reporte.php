@@ -4,7 +4,6 @@
   $cargo_noche = NEW Cargo_noche(0);
 	
   $numero_actual= $cargo_noche->ultima_insercion();
-  //$numero_actual= 19;
   $ancho= $_GET['ancho']-50;
   $alto= $_GET['alto']-50;
   if($numero_actual > 0){

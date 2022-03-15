@@ -3711,6 +3711,23 @@ function ver_cortes(){
 	closeNav();
 }
 
+// Muestra los reportes guardados de los cargos por noche de la bd
+function mostrar_reporte_cargo_noche(id){
+	window.open("reportes/reservaciones/cargo_noche/reporte_cargo_noche_"+id+".pdf");
+}
+
+// Busqueda por fecha en ver reportes guardados de los cargos por noche de la bd
+function busqueda_cargo_noche(){
+	var inicial=$("#inicial").val();
+	var final=$("#final").val();
+    if(inicial.length >0 && final.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_cargo_noche").load("includes/busqueda_cargo_noche.php?inicial="+inicial+"&final="+final);
+}
+
 //* Estados  Internos de Edo.Ocupado *//
 
 //Edo. 0-Disponible//
