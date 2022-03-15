@@ -1680,14 +1680,28 @@ function cargo_noche(){
             timeout:5000,
             error:problemas_sistema
         });
-    reporte_cargo_noche();
+    mostrar_cargo_noche_reporte();
     return false;
 }
 
-// Generar reporte de cargo por noche
-function reporte_cargo_noche(){
-	var usuario_id=localStorage.getItem("id");
-    window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+// Generar reporte de cargo noche y guardarlo
+function guardar_reporte_cargo_noche(){
+    var usuario_id=localStorage.getItem("id");
+	var tam= tam_ventana();
+	var alto= tam[1];
+	var ancho= tam[0];
+    
+    $("#area_trabajo_menu").load("includes/barra_progreso.php");
+	window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
+    setTimeout(mostrar_cargo_noche_reporte, 5000);
+}
+
+// Mostrar el reporte de cargo noche
+function mostrar_cargo_noche_reporte(){
+	var tam= tam_ventana();
+	var alto= tam[1];
+	var ancho= tam[0];
+	window.open("includes/mostrar_cargo_noche_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 
 // Muestra los reportes de los cargos por noche de la bd
@@ -3649,17 +3663,17 @@ function guardar_reporte_corte(ticket_ini,ticket_fin){
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/reporte_corte.php?usuario_id="+usuario_id+"&ticket_ini="+ticket_ini+"&ticket_fin="+ticket_fin, "Diseño Web", "width="+ancho+", height="+alto);
-	setTimeout(mostrar_corte, 7000);
+	setTimeout(mostrar_corte_reporte, 5000);
 }
 
 // Mostrar el reporte de corte
-function mostrar_corte(){
+function mostrar_corte_reporte(){
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
 
 	salirsession();
-	window.open("includes/mostrar_reporte_corte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
+	window.open("includes/mostrar_corte_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 
 // Obtenemos el tamaño de la ventana
