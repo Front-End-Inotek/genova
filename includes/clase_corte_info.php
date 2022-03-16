@@ -81,7 +81,7 @@
 	  }
 	  $numero_descuento= 0;
 	  $dinero_descuento= 0;
-	  $sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario AND estado = 1";
+	  $sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario AND estado = 0";
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
 	  //echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";

@@ -16,7 +16,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="guardar_corte('.$_GET['ticket_ini'].','.$_GET['ticket_fin'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="guardar_corte()"> Aceptar</button>
     </div>
   </div>';
 ?>

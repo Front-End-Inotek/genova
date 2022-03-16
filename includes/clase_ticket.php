@@ -8,6 +8,7 @@
       public $etiqueta;
       public $mov;
       public $id_hab;
+      public $corte;
       public $fecha;
       public $tiempo;
       public $id_usuario;
@@ -34,6 +35,7 @@
           $this->etiqueta= 0;
           $this->mov= 0;
           $this->id_hab= 0;
+          $this->corte= 0;
           $this->fecha= 0;
           $this->tiempo= 0;
           $this->id_usuario= 0;
@@ -61,6 +63,7 @@
               $this->etiqueta= $fila['etiqueta'];
               $this->mov= $fila['mov'];
               $this->id_hab= $fila['id_hab'];
+              $this->corte= $fila['corte'];
               $this->fecha= $fila['fecha'];
               $this->tiempo= $fila['tiempo'];
               $this->id_usuario= $fila['id_usuario'];
@@ -85,8 +88,8 @@
       function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta,$resta){
         $fecha=date("Y-m-d H:i");
         $tiempo=time();
-        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
-        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '0', '1');";
+        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `corte`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
+        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '0', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '0', '1');";
         $comentario="Guardamos el ticket en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         
@@ -114,10 +117,11 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar el estado del ticket
-      function editar_estado($id_ini,$id_fin,$estado){
+      function editar_estado($id_usuario,$corte,$estado){
         $sentencia = "UPDATE `ticket` SET
+        `corte` = '$corte',
         `estado` = '$estado'
-        WHERE `id` >= '$id_ini' AND `id` <= '$id_fin';";
+        WHERE `id_usuario` = '$id_usuario' AND `estado` = '0';";
         $comentario="Editar el estado del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
@@ -299,10 +303,10 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Cambiar estado activo del concepto
-      function cambiar_activo($id_ini,$id_fin){
+      function cambiar_activo($id_usuario){
         $sentencia = "UPDATE `concepto` SET
         `activo` = '0'
-        WHERE `id_ticket` >= '$id_ini' AND `id_ticket` <= '$id_fin';";
+        WHERE `id_usuario` = '$id_usuario';";
         $comentario="Poner estado activo como inactivo del concepto";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }

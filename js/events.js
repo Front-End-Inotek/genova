@@ -3624,19 +3624,17 @@ function hacer_cortes(){
 }
 
 // Modal de guardar corte
-function aceptar_guardar_corte(ticket_ini,ticket_fin){
-	$("#mostrar_herramientas").load("includes/guardar_modal_corte.php?ticket_ini="+ticket_ini+"&ticket_fin="+ticket_fin);
+function aceptar_guardar_corte(){
+	$("#mostrar_herramientas").load("includes/guardar_modal_corte.php");
 }
 
 // Guardar un corte
-function guardar_corte(ticket_ini,ticket_fin){
+function guardar_corte(){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
 
     /*var datos = {
             "usuario_id": usuario_id,
-            "ticket_ini": ticket_ini,
-            "ticket_fin": ticket_fin,
         };
     $.ajax({
             async:true,

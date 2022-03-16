@@ -85,8 +85,8 @@
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
   $realizo_usuario= $usuario->obtengo_usuario($_GET['usuario_id']);
-  $pdf->Cell(132,5,iconv("UTF-8", "ISO-8859-1",'Realizo '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,0,'L');
-  $pdf->Cell(60,5,iconv("UTF-8", "ISO-8859-1",'Tickets '.$ticket->obtener_etiqueta($_GET['ticket_ini']).' - '.$ticket->obtener_etiqueta($_GET['ticket_fin'])),0,1,'R');  
+  $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",'Realizo '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,0,'L');
+  //$pdf->Cell(60,5,iconv("UTF-8", "ISO-8859-1",'Tickets '.$ticket->obtener_etiqueta($_GET['ticket_ini']).' - '.$ticket->obtener_etiqueta($_GET['ticket_fin'])),0,1,'R');  
   $pdf->Ln(4);
 
   // Titulo
