@@ -3615,8 +3615,7 @@ function previsualizar_estado(){
 
 // Hacer un corte
 function hacer_cortes(){
-    //var usuario_id=localStorage.getItem("id");
-    var usuario_id= 4;
+    var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
@@ -3631,8 +3630,7 @@ function aceptar_guardar_corte(){
 
 // Guardar un corte
 function guardar_corte(){
-    //var usuario_id=localStorage.getItem("id");
-    var usuario_id= 4;
+    var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
 
     var datos = {
@@ -3658,8 +3656,7 @@ function guardar_corte(){
 
 // Generar reporte de corte y guardarlo
 function guardar_reporte_corte(){
-    //var usuario_id=localStorage.getItem("id");
-    var usuario_id= 4;
+    var usuario_id=localStorage.getItem("id");
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
