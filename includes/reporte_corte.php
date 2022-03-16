@@ -8,8 +8,9 @@
   include_once("clase_corte_info.php");
   include_once('clase_log.php');
   $ticket= NEW Ticket(0);
-  $tipo= NEW Tipo(0);
+  $concepto= NEW Concepto(0);
   $labels= NEW Labels(0);
+  $tipo= NEW Tipo(0);
   $usuario= NEW Usuario(0);
   $forma_pago= NEW Forma_pago(0);
   $corte= NEW Corte(0);
@@ -183,10 +184,10 @@
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   //$cantidad= $tipo->total_elementos();
-  $concepto= array();
-  $concepto[0]= 'Habitaciones';
-  $concepto[1]= 'Restaurante';
-  $concepto[2]= 'Total';
+  $conceptos= array();
+  $conceptos[0]= 'Habitaciones';
+  $conceptos[1]= 'Restaurante';
+  $conceptos[2]= 'Total';
   $total= array(); 
   $total[0]= $inf->total_hab;
   $total[1]= $inf->total_restaurante;
@@ -195,12 +196,12 @@
   for($z=0 ; $z<$cantidad; $z++)
   {
       $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-      $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$concepto[$z]),1,0,'C');
+      $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$conceptos[$z]),1,0,'C');
       $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total[$z], 2)),1,1,'C');
   }
   $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
   $pdf->SetFillColor(193, 229, 255);
-  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$concepto[2]),1,0,'C',True);
+  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$conceptos[2]),1,0,'C',True);
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_global, 2)),1,1,'C',True);
   $pdf->SetFillColor(99, 155, 219);
   $pdf->Ln(6);
@@ -227,10 +228,17 @@
   }
 
   $corte_id= $corte->ultima_insercion();
+  // Cambiar concepto a inactivo
+  $concepto->cambiar_activo($_GET['usuario_id']);
+  // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
+  $ticket->editar_estado($_GET['usuario_id'],$corte_id,1);
+  
   $logs->guardar_log($_GET['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
-  $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
+  $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","F");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_corte.pdf","I");
       //echo 'Reporte corte';*/
+
+  
 ?>
 

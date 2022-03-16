@@ -3615,7 +3615,8 @@ function previsualizar_estado(){
 
 // Hacer un corte
 function hacer_cortes(){
-    var usuario_id=localStorage.getItem("id");
+    //var usuario_id=localStorage.getItem("id");
+    var usuario_id= 4;
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
@@ -3630,10 +3631,11 @@ function aceptar_guardar_corte(){
 
 // Guardar un corte
 function guardar_corte(){
-    var usuario_id=localStorage.getItem("id");
+    //var usuario_id=localStorage.getItem("id");
+    var usuario_id= 4;
     $('#caja_herramientas').modal('hide');
 
-    /*var datos = {
+    var datos = {
             "usuario_id": usuario_id,
         };
     $.ajax({
@@ -3648,22 +3650,24 @@ function guardar_corte(){
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
-        });*/    
-    window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
-    //guardar_reporte_corte(ticket_ini,ticket_fin);
+        });    
+    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
+    guardar_reporte_corte();
     return false;
 }
 
 // Generar reporte de corte y guardarlo
-function guardar_reporte_corte(ticket_ini,ticket_fin){
-    var usuario_id=localStorage.getItem("id");
+function guardar_reporte_corte(){
+    //var usuario_id=localStorage.getItem("id");
+    var usuario_id= 4;
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
-	window.open("includes/reporte_corte.php?usuario_id="+usuario_id+"&ticket_ini="+ticket_ini+"&ticket_fin="+ticket_fin, "Diseño Web", "width="+ancho+", height="+alto);
-	setTimeout(mostrar_corte_reporte, 5000);
+	window.open("includes/reporte_corte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
+    //setTimeout(mostrar_corte_reporte, 7000);
+    mostrar_corte_reporte();
 }
 
 // Mostrar el reporte de corte

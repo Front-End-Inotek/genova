@@ -209,7 +209,7 @@
       }
       // Actualizar la etiqueta del ticket
       function actualizar_etiqueta(){
-        $nueva_etiqueta=$this->obtener_etiqueta()+1;
+        $nueva_etiqueta= $this->obtener_etiqueta()+1;
         $sentencia = "UPDATE `labels` SET
         `ticket` = '$nueva_etiqueta'
         WHERE `id` = '1';";
@@ -231,7 +231,7 @@
       }
       // Actualizar la etiqueta del corte
       function actualizar_etiqueta_corte(){
-        $nueva_etiqueta= $etiqueta + 1;
+        $nueva_etiqueta= $this->obtener_corte()+1;
         $sentencia = "UPDATE `labels` SET
         `corte` = '$nueva_etiqueta'
         WHERE `id` = '1';";

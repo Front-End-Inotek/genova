@@ -564,7 +564,7 @@ a.topictitle:hover {
   text-align: center;
   background-color:#28294e;
   font-size: 1.2em;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 .estados{
   background-color: #4d5255;
