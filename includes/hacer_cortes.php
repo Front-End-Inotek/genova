@@ -214,11 +214,11 @@
 
           </div>
 
-        </div>
-        
-        <div class="text-dark margen-1"></div>
+        </div>';
 
-        <div class="row">
+        //<div class="text-dark margen-1"></div>
+
+        echo '<div class="row">
              
           <div class="col-sm-4">';
             /*<div  class="card bg-light text-dark">';

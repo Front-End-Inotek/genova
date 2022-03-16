@@ -3648,8 +3648,9 @@ function guardar_corte(){
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
-        });*/
-    guardar_reporte_corte(ticket_ini,ticket_fin);
+        });*/    
+    window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
+    //guardar_reporte_corte(ticket_ini,ticket_fin);
     return false;
 }
 
