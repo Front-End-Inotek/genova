@@ -11,7 +11,10 @@
 	public $total_personas;
 	public $cantidad_hab;
 	public $total_hab;
+	public $total_productos;
 	public $total_restaurante;
+	public $total_productos_hab;
+	public $total_productos_rest;
 	public $total_global;
 
 	public $total_pago=array();
@@ -50,7 +53,10 @@
 
 	  // Obtenemos la informacion de ventas restaurante
 	  $contador= 0;
+	  $total_productos= 0;
 	  $total_restaurante= 0;
+	  $total_productos_hab= 0;
+	  $total_productos_rest= 0;
       $sentencia = "SELECT * FROM inventario WHERE estado = 1 ORDER BY categoria,nombre";
 	  $comentario="Obtener el inventario";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -60,14 +66,20 @@
 		  if($venta > 0){
 			  $this->producto_nombre[$contador]= $fila['nombre'];
 			  $precio= $this->producto_precio[$contador]= $fila['precio'];
-			  $this->producto_tipo_venta[$contador]= $this->venta_sin_hab($id_usuario,$fila['nombre']);
+			  $rest= $this->producto_tipo_venta[$contador]= $this->venta_sin_hab($id_usuario,$fila['nombre']);
 			  //$this->producto_cortesia[$contador]= $this->producto_de_cortresia($id_ini,$id_fin,$fila['nombre']);
 			  //$this->producto_inventario[$contador]= $fila['inventario'];
+			  $total_productos= $total_productos + $venta;
 			  $total_restaurante= $total_restaurante + ($venta * $precio);
+			  $total_productos_hab= $total_productos_hab + $rest;
+	          $total_productos_rest= $total_productos_rest + ($venta - $rest);
 			  $contador++;	  
 		  }
 	  }
+	  $this->total_productos= $total_productos; 
 	  $this->total_restaurante= $total_restaurante;
+	  $this->total_productos_hab= $total_productos_hab; 
+	  $this->total_productos_rest= $total_productos_rest; 
 
 	  // Obtenemos el total global
 	  $this->total_global= $total_hab + $total_restaurante;

@@ -14,7 +14,10 @@
   $total_cuartos_hospedaje= 0;
   $suma_cuartos_hospedaje= 0; 
   $total_cuartos= 0;
+  $total_productos= 0;
   $total_restaurante= 0;
+  $total_productos_hab= 0;
+  $total_productos_rest= 0;
   echo '
       <div class="container-fluid blanco">
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">HACER CORTE</h2></div>
@@ -45,8 +48,8 @@
                   <thead>
                     <tr class="table-primary-encabezado text-center">
                     <th>Producto</th>
-                    <th>Venta</th>
                     <th>Precio</th>
+                    <th>Venta</th>
                     <th>Total</th>
                     <th>En Hab.</th>
                     <th>En Rest.</th>
@@ -62,13 +65,24 @@
                           echo '<tr class="table-secondary text-center">';
                         }
                           echo '<td>'.$inf->producto_nombre[$z].'</td>
+                          <td>$'.number_format($inf->producto_precio[$z], 2).'</td>
                           <td>'.$inf->producto_venta[$z].'</td>
-                          <td>$'.$inf->producto_precio[$z].'</td>
-                          <td>$'.($inf->producto_venta[$z] * $inf->producto_precio[$z]).'</td>
+                          <td>$'.number_format(($inf->producto_venta[$z] * $inf->producto_precio[$z]), 2).'</td>
                           <td>'.$inf->producto_tipo_venta[$z].'</td>
-                          <td>'.($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]).'</td>
-                        </tr>';
-                    }
+                          <td>'.($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]).'</td>';
+                          $total_restaurante= $total_restaurante + ($inf->producto_venta[$z] * $inf->producto_precio[$z]);
+                          $total_productos= $total_productos + $inf->producto_venta[$z];
+                          $total_productos_hab= $total_productos_hab + $inf->producto_tipo_venta[$z];
+                          $total_productos_rest= $total_productos_rest + ($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]);
+                      }
+                      echo '<tr class="table-primary  text-center">
+                        <td></td>
+                        <td></td>
+                        <td>'.$total_productos.'</td>
+                        <td>$'.number_format($total_restaurante, 2).'</td>
+                        <td>'.$total_productos_hab.'</td>
+                        <td>'.$total_productos_rest.'</td>
+                      </tr>';
                     echo '
                   </tbody>
                 </table>
@@ -104,9 +118,9 @@
                           echo '<tr class="table-secondary text-center">';
                         }
                           echo '<td>'.$inf->hab_tipo_hospedaje[$z].'</td>';
-                          //<td>$'.$inf->hab_precio_hospedaje[$z].'</td> 
+                          //<td>$'.number_format($inf->hab_precio_hospedaje[$z], 2).'</td> 
                           echo '<td>'.$inf->hab_cantidad_hospedaje[$z].'</td> 
-                          <td>$'.$inf->hab_total_hospedaje[$z].'</td> 
+                          <td>$'.number_format($inf->hab_total_hospedaje[$z], 2).'</td> 
                         </tr>';
                         $total_cuartos_hospedaje= $total_cuartos_hospedaje + $inf->hab_total_hospedaje[$z];
                         $suma_cuartos_hospedaje= $suma_cuartos_hospedaje + $inf->hab_cantidad_hospedaje[$z];
@@ -114,7 +128,7 @@
                     echo '<tr class="table-primary  text-center">
                       <td></td>
                       <td>'.$suma_cuartos_hospedaje.'</td>
-                      <td>$'.$total_cuartos_hospedaje.'</td>
+                      <td>$'.number_format($total_cuartos_hospedaje, 2).'</td>
                     </tr>';
                     echo '
                   </tbody>
@@ -160,12 +174,12 @@
                           echo '<tr class="table-secondary text-center">';
                         }
                           echo '<td>'.$concepto[$z].'</td>
-                          <td>$'.$total[$z].'</td>
+                          <td>$'.number_format($total[$z], 2).'</td>
                         </tr>';
                     }
                     echo '<tr class="table-primary  text-center">
                       <td>Total</td>
-                      <td>$'.$total[2].'</td>
+                      <td>$'.number_format($total[2], 2).'</td>
                     </tr>';
                     echo '
                   </tbody>
@@ -201,7 +215,7 @@
                           echo '<tr class="table-secondary text-center">';
                         }
                           echo '<td>'.$forma_pago->obtener_descripcion($z).'</td>
-                          <td>$'.$inf->total_pago[$z-1].'</td>
+                          <td>$'.number_format($inf->total_pago[$z-1], 2).'</td>
                         </tr>';
                     }
                     echo '
