@@ -131,3 +131,4 @@ VERSION 2.2
 -Reporte de corte con su respectiva vista de ver cortes
 -Ajustes para hacer solo corte con un usuario en especifico
 -Actualizar el campo comanda en labels al guardar el numero de comanda al ingresar un nuevo ticket 
+-Agregar marcos en reporte de corte

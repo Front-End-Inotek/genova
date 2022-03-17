@@ -13,10 +13,4 @@
 		<p>No PDF available</p>
 		</object>';
   }
-  /*
-  agua
-vitamina c
-algo con urea o vitamina e
-arnica
-compresivo*/
 ?>

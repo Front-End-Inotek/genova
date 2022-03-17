@@ -527,14 +527,12 @@ a.topictitle:hover {
   font-size: 1.2em;
   color:  white;
 }
-
 .select_reca{/* */
   text-align: center;
   background-color: #440f37dc;
   font-size: 1.2em;
   color: white;
 }
-
 .sucia{/* */
   text-align: center;
   background-color: #385c48;
@@ -553,7 +551,6 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
-
 .caja_mostrar_totales{
   overflow-x: auto;
 }
@@ -707,7 +704,6 @@ a.topictitle:hover {
   background-color:#00587A;
   background-color:#045170;
 }*/
-
 .texto_doble{
   font-size: 2 em;
 }
