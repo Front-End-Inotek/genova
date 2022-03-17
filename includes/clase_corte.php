@@ -96,7 +96,7 @@
         $inicio_dia= date("d-m-Y");   
         $inicio_dia= strtotime($inicio_dia);
         $inicio_dia= $inicio_dia + 86399;
-        $fin_dia= $inicio_dia - 604799;
+        $fin_dia= $inicio_dia - 863989;// 7 - 604799
 
         $sentencia = "SELECT *,corte.etiqueta AS ID 
         FROM corte 
