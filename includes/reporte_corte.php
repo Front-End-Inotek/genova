@@ -26,11 +26,11 @@
   // Primera pagina
   $pdf->AddPage();
   // Marco primera pagina
-  //$pdf->Image($fondo_uno,4.8,9,205);
+  $pdf->Image("../images/hoja_margen.png",1.5,-2,211,295);
   // Logo
   //$pdf->Image($imagen,10,8,45);
   // Salto de línea
-  //$pdf->Ln(1);
+  $pdf->Ln(1);
 
   // Fecha y datos generales 
   $pdf->SetFont('Arial','B',8);
@@ -108,12 +108,12 @@
   $pdf->Cell(100,8,iconv("UTF-8", "ISO-8859-1",'Ventas Restaurante'),0,1,'C');
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
-  $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",'Producto'),0,0,'C',True);
-  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'Venta'),0,0,'C',True);
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Precio'),0,0,'C',True);
-  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Total'),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'En Hab.'),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'En Rest.'),0,1,'C',True);
+  $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",'Producto'),1,0,'C',True);
+  $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'Venta'),1,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Precio'),1,0,'C',True);
+  $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Total'),1,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'En Hab.'),1,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'En Rest.'),1,1,'C',True);
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   $cantidad= count($inf->producto_nombre);
@@ -138,9 +138,9 @@
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-  $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'Tipo'),0,0,'C',True);
-  $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'Cant.'),0,0,'C',True);
-  $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'Total'),0,1,'C',True);
+  $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'Tipo'),1,0,'C',True);
+  $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'Cant.'),1,0,'C',True);
+  $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'Total'),1,1,'C',True);
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   $cantidad= $tipo->total_elementos();
@@ -179,8 +179,8 @@
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),0,0,'C',True);
-  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),0,1,'C',True);
+  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),1,0,'C',True);
+  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),1,1,'C',True);
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   //$cantidad= $tipo->total_elementos();
@@ -214,8 +214,8 @@
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),0,0,'C',True);
-  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),0,1,'C',True);
+  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),1,0,'C',True);
+  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),1,1,'C',True);
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   $cantidad= $forma_pago->total_elementos();
@@ -229,13 +229,13 @@
 
   $corte_id= $corte->ultima_insercion();
   // Cambiar concepto a inactivo
-  $concepto->cambiar_activo($_GET['usuario_id']);
+  //$concepto->cambiar_activo($_GET['usuario_id']);
   // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
-  $ticket->editar_estado($_GET['usuario_id'],$corte_id,1);
+  //$ticket->editar_estado($_GET['usuario_id'],$corte_id,1);
   
   $logs->guardar_log($_GET['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
-  $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","F");
+  $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_corte.pdf","I");
       //echo 'Reporte corte';*/
 
