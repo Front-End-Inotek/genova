@@ -561,7 +561,7 @@
       function ultima_insercion(){
         $sentencia= "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
         $id= 0;
-        $comentario="Obtener el ultimo movimiento ingresado";
+        $comentario="Obtener la ultima cuenta ingresada";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {

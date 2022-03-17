@@ -655,10 +655,16 @@
       function agregar_producto_apedido($hab_id,$estado,$producto,$mov){
         $pedido=$this->saber_pedido($mov,$producto);
         if($pedido==0){
+          include_once("clase_ticket.php");
+          $labels= NEW Labels(0);
+
           $sentencia = "INSERT INTO `pedido_rest` ( `mov`, `id_producto`, `cantidad`, `pagado`, `pedido`, `estado`)
           VALUES ('$mov', '$producto', '1', '0', '0', '1');";
           $comentario="Agregar un producto al pedido de restaurante";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+          $comanda= $this->ultima_insercion();
+          $labels->actualizar_comanda($comanda);
         }else{
           $cantidad= $this->saber_cantidad_pedido($pedido);
           $cantidad++;
@@ -670,11 +676,11 @@
           //echo "Es producto ya existe";
         }
       }
-      // Obtner el estado del producto del pedido de restaurante
+      // Obtener el estado del producto del pedido de restaurante
       function saber_pedido($mov,$producto){
         $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND id_producto = $producto AND pagado = 0 AND pedido = 0 AND estado = 1 LIMIT 1";
         //echo $sentencia;
-        $comentario="Obtner el estado del producto del pedido de restaurante";
+        $comentario="Obtener el estado del producto del pedido de restaurante";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $pedido=0;
         while ($fila = mysqli_fetch_array($consulta))
@@ -683,11 +689,11 @@
         }
         return $pedido;
       }
-      // Obtner la cantidad de un producto de un pedido restaurante
+      // Obtener la cantidad de un producto de un pedido restaurante
       function saber_cantidad_pedido($pedido){
         $sentencia = "SELECT cantidad FROM pedido_rest WHERE id = $pedido AND pagado = 0 AND pedido = 0 AND estado = 1 LIMIT 1";
         //echo $sentencia;
-        $comentario="Obtner la cantidad de un producto de un pedido restaurante";
+        $comentario="Obtener la cantidad de un producto de un pedido restaurante";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cantidad=0;
         while ($fila = mysqli_fetch_array($consulta))
@@ -801,6 +807,31 @@
         WHERE `mov` = $mov;";
         $comentario="Cambiar el estado del pedido restaurante cobrado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Obtener la ultimo pedido restaurante ingresado 
+      function ultima_insercion(){
+        $sentencia= "SELECT id FROM pedido_rest ORDER BY id DESC LIMIT 1";
+        $id= 0;
+        $comentario="Obtener el ultimo pedido restaurante ingresado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+        }
+        return $id;
+      }
+      // Obtener el pedido restaurante para guardarlo en el ticket
+      function saber_comanda($mov){
+        $sentencia = "SELECT id FROM pedido_rest WHERE mov = $mov AND estado = 1 ORDER BY id DESC LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtener el pedido restaurante para guardarlo en el ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $comanda= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $comanda=$fila['id'];
+        }
+        return $comanda;
       }
 
   }

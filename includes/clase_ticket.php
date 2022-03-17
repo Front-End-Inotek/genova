@@ -85,11 +85,11 @@
         }
       }
       // Guardar el ticket
-      function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta,$resta){
+      function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda){
         $fecha=date("Y-m-d H:i");
         $tiempo=time();
         $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `corte`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
-        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '0', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '0', '1');";
+        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '0', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '$comanda', '0');";
         $comentario="Guardamos el ticket en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         
@@ -128,7 +128,7 @@
       // Seleccionar ticket inicial para hacer corte
       function ticket_ini(){
         $id= 0;
-        $sentencia = "SELECT id FROM ticket WHERE estado = 1 ORDER BY id LIMIT 1";
+        $sentencia = "SELECT id FROM ticket WHERE estado = 0 ORDER BY id LIMIT 1";
         $comentario="Seleccionar ticket inicial para hacer corte";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -140,7 +140,7 @@
       // Seleccionar ticket final para hacer corte
       function ticket_fin(){
         $id= 0;
-        $sentencia = "SELECT id FROM ticket WHERE estado = 1 ORDER BY id DESC LIMIT 1 ";
+        $sentencia = "SELECT id FROM ticket WHERE estado = 0 ORDER BY id DESC LIMIT 1 ";
         $comentario="Seleccionar ticket final para hacer corte";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -209,7 +209,7 @@
       }
       // Actualizar la etiqueta del ticket
       function actualizar_etiqueta(){
-        $nueva_etiqueta= $this->obtener_etiqueta()+1;
+        $nueva_etiqueta= $this->obtener_etiqueta() + 1;
         $sentencia = "UPDATE `labels` SET
         `ticket` = '$nueva_etiqueta'
         WHERE `id` = '1';";
@@ -231,11 +231,33 @@
       }
       // Actualizar la etiqueta del corte
       function actualizar_etiqueta_corte(){
-        $nueva_etiqueta= $this->obtener_corte()+1;
+        $nueva_etiqueta= $this->obtener_corte() + 1;
         $sentencia = "UPDATE `labels` SET
         `corte` = '$nueva_etiqueta'
         WHERE `id` = '1';";
         $comentario="Actualizar la etiqueta del corte";
+        $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Obtener la comanda que es el id de la tabla sql pedido_rest
+      function obtener_comanda(){
+        $sentencia = "SELECT comanda FROM labels LIMIT 1";
+        $comanda= "";
+        $comentario="Obtener la comanda";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $comanda=$fila["comanda"];
+        }
+        return $comanda;
+      }
+      // Actualizar la comanda que es el id de la tabla sql pedido_rest
+      function actualizar_comanda($comanda){
+        //$comanda= $this->obtener_comanda() + 1;
+        $sentencia = "UPDATE `labels` SET
+        `comanda` = '$comanda'
+        WHERE `id` = '1';";
+        $comentario="Actualizar la comanda";
         $this->realizaConsulta($sentencia,$comentario);
       }
   
@@ -295,7 +317,7 @@
           }
         }
       }
-      // Obtener la etiqueta del ticket
+      // Guardar el concepto del ticket
       function guardar_concepto($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria){
         $sentencia = "INSERT INTO `concepto` (`activo`, `id_ticket`, `id_usuario`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `tipo_cargo`, `categoria`)
         VALUES ('1', '$id_ticket', '$id_usuario', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria');";

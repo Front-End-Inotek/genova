@@ -3,6 +3,7 @@
   include_once("clase_reservacion.php");
   include_once("clase_cupon.php");
   include_once("clase_hab.php");
+  include_once("clase_inventario.php");
   include_once("clase_movimiento.php");
   include_once("clase_ticket.php");
   include_once('clase_log.php');
@@ -10,6 +11,7 @@
   $concepto= NEW Concepto(0);
   $cupon= NEW Cupon(0);
   $hab = NEW Hab($_POST['hab_id']);
+  $pedido= NEW Pedido_rest(0);
   $movimiento = NEW Movimiento($hab->mov);
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
@@ -89,22 +91,23 @@
       $efectivo_pago= 0;
     }
 
+    $tipo_cargo= 1; // Corresponde al cargo de hospedaje
+    $resta= 0;
     $nueva_etiqueta= $labels->obtener_etiqueta();
     $labels->actualizar_etiqueta();
+    $comanda= $pedido->saber_comanda($mov);
 
     if($_POST['forma_pago'] == 1){
-      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],$_POST['total_pago'],0,0,0,$descuento,$factuar,'','',$nueva_etiqueta);
+      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],$_POST['total_pago'],0,0,0,$descuento,$factuar,'','',$nueva_etiqueta,$resta,$comanda);
     }else{
-      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],0,0,$_POST['total_pago'],0,$descuento,$factuar,'','',$nueva_etiqueta);
+      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],0,0,$_POST['total_pago'],0,$descuento,$factuar,'','',$nueva_etiqueta,$resta,$comanda);
     }
 
     $cantidad= 1;
-    $tipo_cargo= 1; // Corresponde al cargo de hospedaje
-    $resta= 0;
     $categoria= $hab->id;
     $nombre= $hab->nombre;
     $nombre_concepto= 'Primer abono de habitacion '.$nombre;
-    $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria,$resta);
+    $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
     
     // Imprimir ticket
     if($confi->ticket_restaurante == 0){
