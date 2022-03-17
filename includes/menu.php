@@ -315,8 +315,8 @@
                             </li>'; 
                           } 
 
-                          $permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
-                          if($permisos_reportes_diarios>0){
+                          $permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
+                          if($permisos_reportes_diarios>0 || $usuario->nivel==2){
                             echo '
                             <li class="nav-item">
                                 <a class="nav-link  text-truncate collapsed py-1" href="#submenu3sub3" data-toggle="collapse" data-target="#submenu3sub3"><span>Corte</span></a>
@@ -329,7 +329,7 @@
                                                   <i class="fa fa-fw fa-clock-o"></i> &nbsp; Ver Cortes</a>
                                           </li>';
                                         }
-                                        if($usuario->reporte_agregar==1){
+                                        if($usuario->nivel==2 || $usuario->nivel==0){// quitar usuario 0
                                           echo '
                                           <li class="nav-item">
                                           <a class="nav-link p-1 text-truncate" href="#" onclick="hacer_cortes()">

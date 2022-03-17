@@ -83,7 +83,7 @@
       function guardar_corte($id_usuario,$nueva_etiqueta,$total,$efectivo,$tarjeta,$forma_pago_tres,$forma_pago_cuatro,$forma_pago_cinco,$forma_pago_seis,$forma_pago_siete,$forma_pago_ocho,$forma_pago_nueve,$forma_pago_diez,$cantidad_habitaciones,$total_habitaciones,$restaurante){
         $fecha=time();
         $sentencia = "INSERT INTO `corte` (`id_usuario`, `fecha`, `etiqueta`, `total`, `efectivo`, `tarjeta`, `forma_pago_tres`, `forma_pago_cuatro`, `forma_pago_cinco`, `forma_pago_seis`, `forma_pago_siete`, `forma_pago_ocho`, `forma_pago_nueve`, `forma_pago_diez`, `descuento`, `cantidad_habitaciones`, `total_habitaciones`, `restaurante`, `estado`)
-        VALUES ('$id_usuario', '$fecha', '$nueva_etiqueta', '$total', '$efectivo', '$tarjeta', '$forma_pago_tres', '$forma_pago_cuatro', '$forma_pago_cinco', '$forma_pago_seis', '$forma_pago_siete', '$forma_pago_ocho', '$forma_pago_nueve', '$forma_pago_diez', '0', '$cantidad_habitaciones', '$total_habitaciones', '$restaurante', '1');";
+        VALUES ('$id_usuario', '$fecha', '$nueva_etiqueta', '$total', '$efectivo', '$tarjeta', '$forma_pago_tres', '$forma_pago_cuatro', '$forma_pago_cinco', '$forma_pago_seis', '$forma_pago_siete', '$forma_pago_ocho', '$forma_pago_nueve', '$forma_pago_diez', '0', '$cantidad_habitaciones', '$total_habitaciones', '$restaurante', '0');";
         $comentario="Guardamos el surtir_inventario en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);     
         
@@ -100,7 +100,7 @@
 
         $sentencia = "SELECT *,corte.etiqueta AS ID 
         FROM corte 
-        INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE (corte.fecha >= $fin_dia && corte.fecha <= $inicio_dia) AND corte.estado = 1 ORDER BY corte.etiqueta DESC";
+        INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE (corte.fecha >= $fin_dia && corte.fecha <= $inicio_dia) ORDER BY corte.etiqueta DESC";
         $comentario="Mostrar los reportes de cortes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -144,7 +144,7 @@
         }else{
           $sentencia = "SELECT *,corte.etiqueta AS ID 
           FROM corte 
-          INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE corte.fecha >= $fecha_ini && corte.fecha <= $fecha_fin && corte.fecha > 0 && corte.estado = 1 ORDER BY corte.etiqueta DESC";
+          INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE corte.fecha >= $fecha_ini && corte.fecha <= $fecha_fin && corte.fecha > 0 ORDER BY corte.etiqueta DESC";
           $comentario="Mostrar por fecha los reportes de cortes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo

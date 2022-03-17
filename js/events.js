@@ -3645,7 +3645,7 @@ function guardar_corte(){
             data:datos,
             beforeSend:loaderbar,
             success:principal,
-            //success:problemas_sistema,//
+            //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
         });    

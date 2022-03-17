@@ -204,7 +204,7 @@
   $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$conceptos[2]),1,0,'C',True);
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_global, 2)),1,1,'C',True);
   $pdf->SetFillColor(99, 155, 219);
-  $pdf->Ln(6);//
+  $pdf->Ln(6);
  
   // Datos dentro de la tabla desgloce en sistema
   $pdf->SetFont('Arial','B',8);
