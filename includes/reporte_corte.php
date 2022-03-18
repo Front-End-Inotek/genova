@@ -25,17 +25,50 @@
   $total_productos_rest= 0;//$inf->total_productos_rest;
 
   require('../fpdf/fpdf.php');
-  $pdf = new FPDF();
-  // Primera pagina
-  $pdf->AddPage();
-  // Marco primera pagina
-  $pdf->Image("../images/hoja_margen.png",1.5,-2,211,295);
-  // Logo
-  //$pdf->Image($imagen,10,8,45);
-  // Salto de línea
-  $pdf->Ln(1);
+
+  class PDF extends FPDF
+  {
+      // Cabecera de página
+      function Header()
+      {
+          $ticket= NEW Ticket(0);
+          $labels= NEW Labels(0);
+          $nueva_etiqueta= $labels->obtener_corte();
+          $nueva_etiqueta= $nueva_etiqueta - 1;
+          // Marco primera pagina
+          $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+          // Logo
+          $this->Image("../images/simbolo.png",10,10,25,25);
+          // Arial bold 15
+          $this->SetFont('Arial','B',10);
+          // Salto de línea
+          $this->Ln(16);
+          // Movernos a la derecha
+          $this->Cell(80);
+          // Color de letra
+          $this->SetTextColor(0, 102, 205);
+          // Título
+          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,0,'C');
+          // Salto de línea
+          $this->Ln(14);
+      }
+      
+      // Pie de página
+      function Footer()
+      {
+          // Posición: a 1,5 cm del final
+          $this->SetY(-15);
+          // Arial italic 8
+          $this->SetFont('Arial','I',8);
+          // Número de página
+          $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
+      }
+  }
 
   // Fecha y datos generales 
+  $pdf = new PDF();
+  $pdf->AliasNbPages();
+  $pdf->AddPage();
   $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(0,0,0);
   $fecha_actual = time();
@@ -88,19 +121,22 @@
   // Datos y fecha
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0,0,0);
-  $realizo_usuario= $usuario->obtengo_usuario($_GET['usuario_id']);
-  $pdf->Cell(96,5,iconv("UTF-8", "ISO-8859-1",'Realizo '.$realizo_usuario),0,0,'L');
-  $pdf->Cell(96,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
+  $pdf->Ln(-28);
+  //$realizo_usuario= $usuario->obtengo_usuario($_GET['usuario_id']);
+  $realizo_usuario= $usuario->obtengo_nombre_completo($_GET['usuario_id']);
+  //$pdf->Cell(96,5,iconv("UTF-8", "ISO-8859-1",'Realizo '.$realizo_usuario),0,0,'L');
+  //$pdf->Cell(96,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
+  $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",'Realizo '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
   //$pdf->Cell(60,5,iconv("UTF-8", "ISO-8859-1",'Tickets '.$ticket->obtener_etiqueta($_GET['ticket_ini']).' - '.$ticket->obtener_etiqueta($_GET['ticket_fin'])),0,1,'R');  
-  $pdf->Ln(4);
+  $pdf->Ln(18);
 
   // Titulo
   $pdf->SetFont('Arial','B',10);
   $pdf->SetTextColor(0, 102, 205);
   $nueva_etiqueta= $labels->obtener_corte();
   $nueva_etiqueta= $nueva_etiqueta - 1;
-  $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,1,'C');
-  $pdf->Ln(8);
+  //$pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,1,'C');
+  $pdf->Ln(6);
   $pdf->SetFillColor(99, 155, 219);
 
   // Datos dentro de la tabla ventas restaurante
@@ -122,6 +158,7 @@
   $cantidad= count($inf->producto_nombre);
   for($z=0 ; $z<$cantidad; $z++)
   {
+      $y_hoja= $pdf->GetY();
       $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_nombre[$z]),1,0,'C');
       $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->producto_precio[$z], 2)),1,0,'C');
       $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_venta[$z]),1,0,'C');
@@ -132,6 +169,9 @@
       $total_productos= $total_productos + $inf->producto_venta[$z];
       $total_productos_hab= $total_productos_hab + $inf->producto_tipo_venta[$z];
       $total_productos_rest= $total_productos_rest + ($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]);
+      if($y_hoja > 250){
+        //$pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_nombre[$z]),1,0,'C');
+      }
   }
   $pdf->SetFillColor(193, 229, 255);
   $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",''),1,0,'C',True);
@@ -247,13 +287,19 @@
   //$concepto->cambiar_activo($_GET['usuario_id']);
   // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
   //$ticket->editar_estado($_GET['usuario_id'],$corte_id,1);
+  for($i=1;$i<=37;$i++)
+    $pdf->Cell(0,10,'Imprimiendo linea numero '.$i,0,1);
   
   $logs->guardar_log($_GET['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_corte.pdf","I");
       //echo 'Reporte corte';*/
-
-  
+       /*
+  agua
+  vitamina c
+  algo con urea o vitamina e
+  arnica
+  compresivo*/
 ?>
 

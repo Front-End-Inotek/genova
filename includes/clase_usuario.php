@@ -589,7 +589,20 @@
           $usuario= $fila['usuario'];
         }
         return $usuario;
-      }     
+      }  
+      // Obtengo el nombre completo del usuario
+      function obtengo_nombre_completo($id){
+        $nombre_completo= "";
+        $sentencia = "SELECT nombre_completo FROM usuario WHERE id = $id LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtengo el nombre completo del usuario";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $nombre_completo= $fila['nombre_completo'];
+        }
+        return $nombre_completo;
+      }    
       // Muestra los nombres de los usuarios
       function mostrar_usuario(){
         $sentencia = "SELECT * FROM usuario WHERE usuario.nivel > 0 && estado = 1 ORDER BY usuario";
