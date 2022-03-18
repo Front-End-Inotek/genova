@@ -124,8 +124,6 @@
   $pdf->Ln(-28);
   //$realizo_usuario= $usuario->obtengo_usuario($_GET['usuario_id']);
   $realizo_usuario= $usuario->obtengo_nombre_completo($_GET['usuario_id']);
-  //$pdf->Cell(96,5,iconv("UTF-8", "ISO-8859-1",'Realizo '.$realizo_usuario),0,0,'L');
-  //$pdf->Cell(96,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
   $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",'Realizo '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
   //$pdf->Cell(60,5,iconv("UTF-8", "ISO-8859-1",'Tickets '.$ticket->obtener_etiqueta($_GET['ticket_ini']).' - '.$ticket->obtener_etiqueta($_GET['ticket_fin'])),0,1,'R');  
   $pdf->Ln(18);
@@ -144,7 +142,7 @@
   $y_final=$pdf->GetY();
   $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(20, 31, 102);
-  $pdf->Cell(100,8,iconv("UTF-8", "ISO-8859-1",'Ventas Restaurante'),0,1,'C');
+  $pdf->Cell(100,8,iconv("UTF-8", "ISO-8859-1",'Ventas Restaurante'),0,1,'C');// NO OLVIDAR SI ESTA EN 0 NO PONER TITULOS
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",'Producto'),1,0,'C',True);
@@ -158,7 +156,6 @@
   $cantidad= count($inf->producto_nombre);
   for($z=0 ; $z<$cantidad; $z++)
   {
-      $y_hoja= $pdf->GetY();
       $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_nombre[$z]),1,0,'C');
       $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->producto_precio[$z], 2)),1,0,'C');
       $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_venta[$z]),1,0,'C');
@@ -169,9 +166,6 @@
       $total_productos= $total_productos + $inf->producto_venta[$z];
       $total_productos_hab= $total_productos_hab + $inf->producto_tipo_venta[$z];
       $total_productos_rest= $total_productos_rest + ($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]);
-      if($y_hoja > 250){
-        //$pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_nombre[$z]),1,0,'C');
-      }
   }
   $pdf->SetFillColor(193, 229, 255);
   $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",''),1,0,'C',True);
@@ -201,19 +195,10 @@
   $cantidad= $tipo->total_elementos();
   for($z=0 ; $z<$cantidad; $z++)
   {
-      //if(($z%2) == 0){
-          $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-          $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_tipo_hospedaje[$z]),1,0,'C');
-          $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_cantidad_hospedaje[$z]),1,0,'C');
-          $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->hab_total_hospedaje[$z], 2)),1,1,'C');
-      /*}else{
-          $pdf->SetFillColor(185, 185, 185);
-          $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_tipo_hospedaje[$z]),1,0,'C',True);
-          $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_precio_hospedaje[$z]),1,0,'C',True);
-          $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_cantidad_hospedaje[$z]),1,0,'C',True);
-          $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_total_hospedaje[$z]),1,1,'C',True);
-      }*/
-    
+      $pdf->Cell(120,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+      $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_tipo_hospedaje[$z]),1,0,'C');
+      $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_cantidad_hospedaje[$z]),1,0,'C');
+      $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->hab_total_hospedaje[$z], 2)),1,1,'C');
       $total_cuartos_hospedaje= $total_cuartos_hospedaje + $inf->hab_total_hospedaje[$z];
       $suma_cuartos_hospedaje= $suma_cuartos_hospedaje + $inf->hab_cantidad_hospedaje[$z];
   }
