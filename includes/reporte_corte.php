@@ -59,7 +59,7 @@
           // Posición: a 1,5 cm del final
           $this->SetY(-15);
           // Arial italic 8
-          $this->SetFont('Arial','I',8);
+          $this->SetFont('Arial','',8);
           // Número de página
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
