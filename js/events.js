@@ -3630,11 +3630,11 @@ function aceptar_guardar_corte(){
 
 // Guardar un corte
 function guardar_corte(){
-    //var usuario_id=localStorage.getItem("id");
-    var usuario_id= 4;
+    var usuario_id=localStorage.getItem("id");
+    //var usuario_id= 4;
     $('#caja_herramientas').modal('hide');
 
-    /*var datos = {
+    var datos = {
             "usuario_id": usuario_id,
         };
     $.ajax({
@@ -3649,9 +3649,9 @@ function guardar_corte(){
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
-        });    */
-    window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
-    //guardar_reporte_corte();
+        });    
+    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
+    guardar_reporte_corte();
     return false;
 }
 

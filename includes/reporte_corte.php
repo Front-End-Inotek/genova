@@ -168,7 +168,6 @@
   $pdf->Ln(6);
  
   // Datos dentro de la tabla totales
-  //$pdf->SetXY($x_final,$y_final);
   $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(20, 31, 102);
   $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Totales'),0,1,'C');
@@ -225,7 +224,7 @@
       $pdf->SetFont('Arial','B',8);
       $pdf->SetTextColor(20, 31, 102);
       $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-      $pdf->Cell(106,8,iconv("UTF-8", "ISO-8859-1",'Ventas Restaurante'),0,1,'C');// NO OLVIDAR SI ESTA EN 0 NO PONER TITULOS
+      $pdf->Cell(106,8,iconv("UTF-8", "ISO-8859-1",'Ventas Restaurante'),0,1,'C');
       $pdf->SetFont('Arial','B',7);
       $pdf->SetTextColor(255, 255, 255);
       $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
@@ -277,11 +276,5 @@
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_corte.pdf","I");
       //echo 'Reporte corte';*/
-       /*
-  agua
-  vitamina c
-  algo con urea o vitamina e
-  arnica
-  compresivo*/
 ?>
 
