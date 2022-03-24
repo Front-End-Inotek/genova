@@ -3360,13 +3360,12 @@ function principal(){
 //* Mesas *//
 
 // Mesas en el restaurante
-function mesas_restaurante(hab_id,estado){
+function mesas_restaurante(){
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/area_mesas.php?hab_id="+hab_id+"&estado="+estado);
-    //$("#area_trabajo").load("includes/area_de_trabajo.php?id="+id);
+	$("#area_trabajo_menu").load("includes/area_mesas.php");
 	closeNav();
 }
 
@@ -3374,6 +3373,43 @@ function mesas_restaurante(hab_id,estado){
 function mostrar_herramientas_mesas(mesa_id,estado,nombre){ 
 	var id=localStorage.getItem("id");
 	$("#mostrar_herramientas").load("includes/mostrar_herramientas_mesas.php?mesa_id="+mesa_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id);
+}
+
+// Modal de asignar una mesa disponible
+function mesa_disponible_asignar(mesa_id,estado){
+	$("#mostrar_herramientas").load("includes/mesa_disponible_asignar.php?mesa_id="+mesa_id+"&estado="+estado);
+}
+
+// Asignar una mesa disponible
+function disponible_asignar(mesa_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	var personas= document.getElementById("personas").value;
+	
+	if(personas >0){
+		$('#caja_herramientas').modal('hide');
+		var datos = {
+			"mesa_id": mesa_id,
+			"estado": estado,
+			"personas": personas,
+			"usuario_id": usuario_id,
+			};
+		$.ajax({
+			async:true,
+			type: "POST",
+			dataType: "html",
+			contentType: "application/x-www-form-urlencoded",
+			url:"includes/disponible_asignar.php",
+			data:datos,
+			beforeSend:loaderbar,
+			success:principal,
+			//success:problemas,
+			timeout:5000,
+			error:problemas
+			});
+		return false;
+	}else{
+        alert("Campos incompletos");
+    }
 }
 
 //* Cupon *//

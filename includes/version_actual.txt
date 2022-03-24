@@ -138,3 +138,4 @@ VERSION 2.2
 VERSION 2.3
 -Generar rama mesas
 -Generar espacio para las mesas del comedor del restaurante
+-Funciones de estado disponible y ocupada de una mesa

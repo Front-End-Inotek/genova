@@ -352,6 +352,7 @@
         $comentario="obtener el total del pedido";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $total=0;
+        $subtotal=0;
         while ($fila = mysqli_fetch_array($consulta))
         {
           $subtotal= $fila['total'];

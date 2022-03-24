@@ -266,6 +266,17 @@
         $id= $this->ultima_insercion();
         return $id;
       }
+      // Asignar una mesa en estado ocupado
+      function mesa_asignar($mesa_id,$usuario_id,$personas){
+        $fecha_inicio= time();
+        $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `id_mesa`, `personas`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `tarifa`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
+        VALUES ('0', '0', '0', '$mesa_id', '$personas', '0', '0', '$fecha_inicio', '0', '$usuario_id', '$usuario_id', '0', '0', '0', '0', '0', '0', 'asignar mesa', '', 'sin estado');";
+        $comentario="Asignar una mesa en estado ocupado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        $id= $this->ultima_insercion();
+        return $id;
+      }
       // Agregar una habitacion en estado seleccionado con un comentario especifico
       function guardar_comentario($hab_id,$usuario_id,$usuario,$estado,$comentario){
         $fecha_entrada= time();

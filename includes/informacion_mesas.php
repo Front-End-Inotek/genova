@@ -98,7 +98,7 @@
           break;
       }
     }
-    function mostrar_mesas($id){
+    function mostrar_mesas(){
       include('clase_movimiento.php');
       $movimiento= NEW Movimiento(0);
       $tipo= 1;
@@ -148,7 +148,7 @@
         }
 
         if($fila['tipo']>0){
-          echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio ">';
+          echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio_mesa">';
             echo '<a href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas_mesas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')"><div class="estado_mesa'.$fila['estado'].'">';
 
               echo '<div class="row">
@@ -215,37 +215,37 @@
                       echo '<img id="icono_c" src="images/lavando.png">';
                       break;
                     case 4:
-                      //echo '<img src="images/mantenimiento.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/mantenimiento.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 5:
-                      //echo '<img src="images/bloqueo.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/bloqueo.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 6:
-                      //echo '<img src="images/cobrando.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/cobrando.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 7:
-                      //echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/cama.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 8:
-                      //echo '<img src="images/basura.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/basura.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 9:
-                      //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/limpieza.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 11:
-                      //echo '<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/restaurant.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 12:
-                      //echo '<img src="images/cama.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/cama.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 13:
-                      //echo '<img src="images/restaurant.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/restaurant.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     default:
-                      //echo '<img src="images/home.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/home.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                     case 14:
-                      //echo '<img src="images/limpieza.png"  class="espacio-imagen center-block img-responsive">';
+                      //echo '<img src="images/limpieza.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
                 }   */      
               echo '</div>';
@@ -255,7 +255,7 @@
             echo '</a>';
           echo '</div>';
         }else{
-          echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';   
+          echo '<div class="hidden-xs hidden-sm col-md-1 espacio_mesa">';   
           echo '</div>';
         }
       }
