@@ -60,9 +60,10 @@
   $movimiento = NEW Movimiento(0);
   //$cliente = NEW Cliente($_GET['mesa_id']);
   $user = NEW Usuario($_GET['id']);
-  $ticket= NEW Ticket();
+  $ticket= NEW Ticket(0);
+  $concepto= NEW Concepto(0);
   $ticket_id= $ticket->saber_id_ticket($mesa->mov);
-  $precio= $ticket->saber_total_mesa($ticket_id);
+  $precio= $concepto->saber_total_mesa($ticket_id);
   //$estado_interno= $movimiento->mostrar_estado_interno($mesa->mov);
   echo '<div class="modal-header">
           <h3 class="modal-title">Mesa '.$_GET['nombre'].'</h3>

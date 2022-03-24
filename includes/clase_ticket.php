@@ -161,6 +161,19 @@
         }
         return $etiqueta;
       }
+      // Mostrar el id de un ticket
+      function saber_id_ticket($mov){
+        $sentencia = "SELECT * FROM ticket WHERE mov = $mov LIMIT 1";
+        $comentario="Mostrar el id de un ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //echo $sentencia."</br>";
+        $id_ticket= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_ticket= $fila['id'];
+        }
+        return $id_ticket;
+      }
              
   }
   /**
@@ -331,6 +344,20 @@
         WHERE `id_usuario` = '$id_usuario';";
         $comentario="Poner estado activo como inactivo del concepto";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Saber el total de la cuenta en la mesa
+      function saber_total_mesa($ticket){
+        $sentencia = "SELECT * FROM concepto WHERE id_ticket = $ticket";
+        //echo $sentencia;
+        $comentario="obtener el total del pedido";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $total=0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $subtotal= $fila['total'];
+          $total= $total+$subtotal;
+        }
+        return  $total;
       }
     
   }
