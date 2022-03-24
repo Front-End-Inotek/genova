@@ -751,6 +751,84 @@ a.topictitle:hover {
 .fuente2{
     font-size: 1.5em;
 }
+/*Mesas----------------------------------------------------------------------------------------------------------------------------*/
+.titulo_mesa{/* estado */
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 8px;
+  color: white;
+}
+.imagen_mesa{/* numero */
+  width:100%;
+  text-align: center;
+  font-weight: bold;
+  height:2.1em;
+  vertical-align:middle;
+  padding-top: 2px;
+  color: white;
+}
+.tama_num_mesa{/* */
+  font-size: 2.6em;
+}
+.capacidad_mesa{/* fecha */
+  width: 100%;
+  text-align: right;
+  font-size: 1.1em;
+  /*font-weight: bold;*/
+  padding-top: 14px;
+}
+.icono_mesa{/* icono */
+  width:100%;
+  text-align: center;
+  font-size: .9em;
+  color: white;
+  padding: 0em 0px 8px 0px;
+}
+.estado_mesa0{
+  background-color: #115d2a;
+  color: #5aa875;
+  /*color: white;*/
+  padding: .5em 10px 0px 10px;
+  border-radius: 20px;
+  width: 100px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 100px !important;
+}
+.estado_mesa0:hover{
+  background-color: #1ea049;
+  color: #5aa875;
+  /*color: white;*/
+  padding: .5em 10px 0px 10px;
+  border-radius: 20px;
+  width: 100px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 100px !important;
+}
+.estado_mesa1{
+  background-color:#7b241ca6;
+  color: #D98880;
+  /*color: white;#7B241C;*/
+  padding: .5em 10px 0px 10px;
+  border-radius: 20px;
+  width: 100px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 100px !important;
+}
+.estado_mesa1:hover{
+  background-color:rgba(212, 60, 43, 0.726);
+  color: #D98880;
+  /*color: white;*/
+  padding: .5em 10px 0px 10px;
+  border-radius: 20px;
+  width: 100px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 100px !important;
+}
 /*Checkin--------------------------------------------------------------------------------------------------------------------------*/
   .box
   {

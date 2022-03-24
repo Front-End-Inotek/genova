@@ -3357,16 +3357,23 @@ function principal(){
     recargar_pagina();
 }
 
-////* Mesas *////
+//* Mesas *//
 
-// Mesas en el restaurante/
+// Mesas en el restaurante
 function mesas_restaurante(hab_id,estado){
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
+	$("#area_trabajo_menu").load("includes/area_mesas.php?hab_id="+hab_id+"&estado="+estado);
+    //$("#area_trabajo").load("includes/area_de_trabajo.php?id="+id);
 	closeNav();
+}
+
+// Muestra o carga los productos por mesa
+function mostrar_herramientas_mesas(mesa_id,estado,nombre){ 
+	var id=localStorage.getItem("id");
+	$("#mostrar_herramientas").load("includes/mostrar_herramientas_mesas.php?mesa_id="+mesa_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id);
 }
 
 //* Cupon *//
