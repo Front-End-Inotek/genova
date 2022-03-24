@@ -134,3 +134,7 @@ VERSION 2.2
 -Agregar marcos en reporte de corte
 -Poner logo en reporte de corte
 -Cambio de orden y ajustes en reporte de corte
+
+VERSION 2.3
+-Generar rama mesas
+-Generar espacio para las mesas del comedor del restaurante
