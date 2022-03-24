@@ -3357,6 +3357,18 @@ function principal(){
     recargar_pagina();
 }
 
+////* Mesas *////
+
+// Mesas en el restaurante/
+function mesas_restaurante(hab_id,estado){
+    $('#caja_herramientas').modal('hide');
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
+	closeNav();
+}
+
 //* Cupon *//
 
 // Agregar un cupon
