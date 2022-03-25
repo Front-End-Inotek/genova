@@ -3461,6 +3461,37 @@ function cambiar_personas(mesa_id,estado){
     }
 }
 
+// Modal de imprimir el ticket de la mesa
+function mesa_imprimir_ticket(mesa_id,estado){
+	$("#mostrar_herramientas").load("includes/mesa_imprimir_ticket.php?mesa_id="+mesa_id+"&estado="+estado);
+}
+
+// Imprimir el ticket de la mesa
+function imprimir_ticket(mesa_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+		"mesa_id": mesa_id,
+		"estado": estado,
+		"usuario_id": usuario_id,
+		};
+	$.ajax({
+		async:true,
+		type: "POST",
+		dataType: "html",
+		contentType: "application/x-www-form-urlencoded",
+		url:"includes/imprimir_ticket.php",
+		data:datos,
+		beforeSend:loaderbar,
+		success:principal,
+		//success:problemas,
+		timeout:5000,
+		error:problemas
+		});
+	return false;
+}
+
 //* Cupon *//
 
 // Agregar un cupon
