@@ -201,16 +201,9 @@ a.topictitle:hover {
   border-radius: 5px;
   padding: 10px 0px 3px 0px;
 }
-.alinear_centro_categorias{
-  /*color: white;*/
-  background-color: #E9E9E9;
-  text-align: center;
-  border-radius: 5px;
-  padding: .35em 0px 7px 0px;
-  margin-top:10px;
-}
 .encabezado_gris {
   background-color: #E9E9E9;
+  border-radius: 5px;
 }
 .espacio{/* */
   width: 155px !important;

@@ -47,7 +47,11 @@
             </div>
 
             <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">
-              <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black margen_sup">
+              <div class="row">
+                <div class="col-sm-2">
+                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black">
+                </div>
+              </div>
               ';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);
             echo '</div>
           </div>

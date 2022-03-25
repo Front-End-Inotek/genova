@@ -574,7 +574,7 @@
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        
+
         echo '<div class="row">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
