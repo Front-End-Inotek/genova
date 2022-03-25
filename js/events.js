@@ -3401,7 +3401,56 @@ function disponible_asignar(mesa_id,estado){
 			url:"includes/disponible_asignar.php",
 			data:datos,
 			beforeSend:loaderbar,
-			success:principal,
+			success:mesas_restaurante,
+			//success:problemas,
+			timeout:5000,
+			error:problemas
+			});
+		return false;
+	}else{
+        alert("Campos incompletos");
+    }
+}
+
+// Ver caja de restaurante
+function ver_caja_rest(mesa_id,estado){
+    /*$('#caja_herramientas').modal('hide');
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();*/
+	$('#caja_herramientas').modal('hide');
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_caja_rest.php?mesa_id="+mesa_id+"&estado="+estado);
+	//$("#mostrar_herramientas").load("includes/mesa_cobrar_rest.php?mesa_id="+mesa_id+"&estado="+estado);
+}
+
+// Modal de cambiar la cantidad de personas en la mesa
+function mesa_cambiar_personas(mesa_id,estado){
+	$("#mostrar_herramientas").load("includes/mesa_cambiar_personas.php?mesa_id="+mesa_id+"&estado="+estado);
+}
+
+// Cambiar la cantidad de personas en la mesa
+function cambiar_personas(mesa_id,estado){
+	var usuario_id=localStorage.getItem("id");
+	var personas= document.getElementById("personas").value;
+	
+	if(personas > 0){
+		$('#caja_herramientas').modal('hide');
+		var datos = {
+			"mesa_id": mesa_id,
+			"estado": estado,
+			"personas": personas,
+			"usuario_id": usuario_id,
+			};
+		$.ajax({
+			async:true,
+			type: "POST",
+			dataType: "html",
+			contentType: "application/x-www-form-urlencoded",
+			url:"includes/cambiar_personas.php",
+			data:datos,
+			beforeSend:loaderbar,
+			success:mesas_restaurante,
 			//success:problemas,
 			timeout:5000,
 			error:problemas

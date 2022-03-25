@@ -241,6 +241,19 @@
         }
         return $id_reservacion;
       }
+      // Obtener la cantidad de personas de un movimiento
+      function saber_personas($id){
+        $personas= 0;
+        $sentencia = "SELECT personas FROM movimiento WHERE id = $id LIMIT 1";
+        $comentario="Obtener la cantidad de personas de un movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $personas= $fila['personas'];
+        }
+        return $personas;
+      }
       // Agregar una reservacion en la habitacion
       function disponible_asignar($mov,$hab_id,$id_huesped,$fecha_entrada,$fecha_salida,$usuario_id,$tarifa){
         $fecha_entrada= strtotime($fecha_entrada);
@@ -436,6 +449,14 @@
           $cantidad= $fila['cantidad'];
         }
         return $cantidad;
+      }
+      // Cambiar la cantidad de personas en la mesa
+      function cambiar_personas($mov,$personas){
+        $sentencia = "UPDATE `movimiento` SET
+        `personas` = '$personas'
+        WHERE `id` = '$mov';";
+        $comentario="Cambiar la cantidad de personas en la mesa";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
   
   }
