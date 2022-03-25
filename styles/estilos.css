@@ -190,7 +190,8 @@ a.topictitle:hover {
   color: black;
 }
 .fondo_rest{
-  background-color: #E9E9E9;
+  /*background-color: #E9E9E9;*/
+  background-color: white;
   border-radius: 5px;
 }
 .alinear_centro{
@@ -198,7 +199,7 @@ a.topictitle:hover {
   background-color: #E9E9E9;
   text-align: center;
   border-radius: 5px;
-  padding: .35em 0px 7px 0px;
+  padding: 10px 0px 3px 0px;
 }
 .alinear_centro_categorias{
   /*color: white;*/
@@ -319,14 +320,24 @@ a.topictitle:hover {
   height: 45em;
   overflow-x: scroll;
 }
-.altura-rest_total{/* */
+.altura-rest_categorias{/* */
   /*height: 26em;*/
-  height: 14em;
+  height: 18.5em;
   overflow-y: scroll;
 }
 .altura-rest_productos{/* */
   /*height: 18em;*/
   height: 37.5em;
+  overflow-y: scroll;
+}
+.altura-rest_pedido{/* */
+  /*height: 26em;*/
+  height: 54.3em;
+  overflow-y: scroll;
+}
+.altura-rest_total{/* */
+  /*height: 26em;*/
+  height: 8em;
   overflow-y: scroll;
 }
 .btn-square-md-rest{/* */

@@ -574,8 +574,8 @@
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        echo '<h6 class="alinear_centro_categorias"> Productos</h6>
-        <div class="row">';
+        
+        echo '<div class="row">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
           {
