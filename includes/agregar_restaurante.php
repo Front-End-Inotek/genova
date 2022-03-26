@@ -11,14 +11,14 @@
     $mov= $hab->mostrar_mov_hab($_GET['hab_id']);
   }
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
-  // style="background-color:LightSlateGray;"       
+  // style="background-color:LightSlateGray,aliceblue;"       
   echo '
   <div class="modal-content alinear_centro">
     <h5>Agregar Restaurante </h5>
     <div class="col-sm-12 fondo_rest" style="background-color:white;"><br>  
 
       <div class="row">
-        <div class="col-sm-6" style="background-color:aliceblue;">
+        <div class="col-sm-6" style="background-color:white;">
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Categorias</h5>
@@ -40,7 +40,7 @@
  
         </div>
 
-        <div class="col-sm-6" style="background-color:aliceblue;">
+        <div class="col-sm-6" style="background-color:white;">
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Pedido</h5>
@@ -48,8 +48,8 @@
 
             <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">
               <div class="row">
-                <div class="col-sm-2">
-                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black">
+                <div class="col-sm-4">
+                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="form-control color_black">
                 </div>
               </div>
               ';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);
@@ -57,7 +57,7 @@
           </div>
 
           <div class="card">
-            <div class="card-body altura-rest_total" id="caja_mostrar_total">
+            <div class="card-body " id="caja_mostrar_total">
               ';$pedido->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);
             echo '</div>
           </div><br>

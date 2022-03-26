@@ -140,7 +140,7 @@
         {
           //if($cont%2==0){
             echo '<div class="col-sm-2 margen_inf">
-              <button type="button" class="btn btn-success btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')"> '.$fila['nombre'].'</button>
+              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')"> '.$fila['nombre'].'</button>
             </div>';
           /*}else{
             echo '<div class="col-sm-2 margen_inf">

@@ -118,6 +118,12 @@
   font-size: 13px;
 }
 
+/* Cambia el tamaño de la fuente a uno menor del estandar **/
+.fuente_menor_bolder{
+  font-size: 13px;
+  font-weight: bolder;
+}
+
 /* Color en las letras del boton */
 .btn{
   color:white;
@@ -314,23 +320,15 @@ a.topictitle:hover {
   overflow-x: scroll;
 }
 .altura-rest_categorias{/* */
-  /*height: 26em;*/
-  height: 18.5em;
+  height: 19.6em;
   overflow-y: scroll;
 }
 .altura-rest_productos{/* */
-  /*height: 18em;*/
-  height: 37.5em;
+  height: 42.6em;
   overflow-y: scroll;
 }
 .altura-rest_pedido{/* */
-  /*height: 26em;*/
-  height: 54.3em;
-  overflow-y: scroll;
-}
-.altura-rest_total{/* */
-  /*height: 26em;*/
-  height: 8em;
+  height: 60.3em;
   overflow-y: scroll;
 }
 .btn-square-md-rest{/* */
@@ -371,11 +369,11 @@ a.topictitle:hover {
   padding-top: 0px;
   font-size:12px;
 }
-.btn-rectangle-md{/* */
-  width: 80px !important;
+.btn-rectangle-sm{/* */
+  width: 100px !important;
   max-width: 100% !important;
   max-height: 100% !important;
-  height: 110px !important;
+  height: 50px !important;
   text-align: center;
   padding: 0px;
   font-size:13px;
@@ -723,16 +721,7 @@ a.topictitle:hover {
   margin-top:10px;
 }
 .margen_sup_pedir{
-  margin-top:40px;
-}
-.margen_sup_rest{
-  margin-top:13px;
-  text-align: center;
-  width:726px;
-  height:110px;
-  border:3px solid white;
-  border-radius:10px;
-  padding:24px;
+  margin-top:18px;
 }
 #boton_panico{
   display:none;

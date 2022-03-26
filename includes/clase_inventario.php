@@ -532,8 +532,7 @@
         $comentario="Busqueda de cualquier producto en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        echo '<h6 class="alinear_centro_categorias"> Productos</h6>
-        <div class="row">';
+        echo '<div class="row">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
           {
@@ -729,7 +728,7 @@
               $total=$total+($fila['precio']*$fila['cantidad']);
               $cont++;
               echo '<tr class="text-center">
-              <th cope="row">'.$fila['cantidad'].'</th>
+              <td>'.$fila['cantidad'].'</td>
               <td>'.$fila['nombre'].'</td>
               <td>$'.number_format($fila['precio'], 2).'</td>
               <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
@@ -756,17 +755,17 @@
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
 
-        echo '<div class="row margen_sup_rest">'; 
+        echo '<div class="row">'; 
           if($cantidad > 0){
-            echo '<div class="col-sm-3 margen_sup_pedir">#Items: '.$cantidad.'</div> 
-            <div class="col-sm-0"></div>';
             if($hab_id != 0){
-              echo '<div class="col-sm-3 margen_sup_pedir">Habitación: '.$hab_nombre.'</div> 
-              <div class="col-sm-0"></div>';
+              echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
+              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Habitación: '.$hab_nombre.'</div>';
+            }else{
+              echo '<div class="col-sm-3"></div>
+              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
             } 
-            echo '<div class="col-sm-3 margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-md"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
+            echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
+            <div class="col-sm-3"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
           }else{
             echo '<div class="col-sm-12"></div>'; 
           }
