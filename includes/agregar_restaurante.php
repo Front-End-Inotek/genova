@@ -67,4 +67,24 @@
 
     </div>
   </div>';
+
+  /*
+  <div class="modal-content">
+    <div class="col-sm-12 fondo_rest" >
+       
+          <h5 class="alinear_centro">Agregar Restaurante </h5>
+        
+
+          <div class="row">
+            <div class="col-sm-6 altura-rest_total" id="caja_mostrar_funciones" style="background-color:white;"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black margen_sup">';$pedido->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
+            <div class="col-sm-6 altura-rest_total" id="caja_mostrar_categoria" style="background-color:aliceblue;"><h6 class="alinear_centro_categorias"> Categorias</h6>';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 altura-rest_productos" id="caja_mostrar_total" style="background-color:white;">';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
+            <div class="col-sm-6 altura-rest_productos" id="caja_mostrar_busqueda" style="background-color:aliceblue;"></div>
+          </div>
+ 
+    </div>
+  </div>';
+  */
 ?>
