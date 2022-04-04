@@ -3160,6 +3160,16 @@ function agregar_restaurante(hab_id,estado){
 	closeNav();
 }
 
+// Agregar en el restaurante en mesa
+function agregar_restaurante_mesa(mesa_id,estado){
+    $('#caja_herramientas').modal('hide');
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_restaurante_mesa.php?mesa_id="+mesa_id+"&estado="+estado);
+	closeNav();
+}
+
 // Mostrar categorias existentes en el inventario
 function buscar_categoria_restaurente(categoria,hab_id,estado,mov){
 	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
@@ -3381,7 +3391,7 @@ function mesa_disponible_asignar(mesa_id,estado){
 }
 
 // Asignar una mesa disponible
-function disponible_asignar(mesa_id,estado){
+function disponible_asignar_mesa(mesa_id,estado){
 	var usuario_id=localStorage.getItem("id");
 	var personas= document.getElementById("personas").value;
 	

@@ -617,6 +617,7 @@
   {    
       public $id;
       public $mov;
+      public $id_mesa;
       public $id_producto;
       public $cantidad;
       public $pagado;
@@ -629,6 +630,7 @@
         if($id==0){
           $this->id= 0;
           $this->mov= 0;
+          $this->id_mesa= 0;
           $this->id_producto= 0;
           $this->cantidad= 0;
           $this->pagado= 0;
@@ -642,6 +644,7 @@
           {
             $this->id= $fila['id'];
             $this->mov= $fila['mov'];
+            $this->id_mesa= $fila['id_mesa'];
             $this->id_producto= $fila['id_producto'];
             $this->cantidad= $fila['cantidad'];
             $this->pagado= $fila['pagado'];
@@ -654,11 +657,18 @@
       function agregar_producto_apedido($hab_id,$estado,$producto,$mov){
         $pedido=$this->saber_pedido($mov,$producto);
         if($pedido==0){
+          include_once("clase_movimiento.php");
           include_once("clase_ticket.php");
+          $movimiento= NEW Movimiento(0);
           $labels= NEW Labels(0);
 
-          $sentencia = "INSERT INTO `pedido_rest` ( `mov`, `id_producto`, `cantidad`, `pagado`, `pedido`, `estado`)
-          VALUES ('$mov', '$producto', '1', '0', '0', '1');";
+          if($mov != 0){
+            $id_mesa= $movimiento->saber_id_mesa($mov);
+          }else{
+            $id_mesa= 0;
+          }
+          $sentencia = "INSERT INTO `pedido_rest` ( `mov`, `id_mesa`, `id_producto`, `cantidad`, `pagado`, `pedido`, `estado`)
+          VALUES ('$mov', '$id_mesa', '$producto', '1', '0', '0', '1');";
           $comentario="Agregar un producto al pedido de restaurante";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
 

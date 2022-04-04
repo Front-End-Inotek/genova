@@ -8,6 +8,7 @@
       public $etiqueta;
       public $mov;
       public $id_hab;
+      public $id_mesa;
       public $corte;
       public $fecha;
       public $tiempo;
@@ -35,6 +36,7 @@
           $this->etiqueta= 0;
           $this->mov= 0;
           $this->id_hab= 0;
+          $this->id_mesa= 0;
           $this->corte= 0;
           $this->fecha= 0;
           $this->tiempo= 0;
@@ -63,6 +65,7 @@
               $this->etiqueta= $fila['etiqueta'];
               $this->mov= $fila['mov'];
               $this->id_hab= $fila['id_hab'];
+              $this->id_mesa= $fila['id_mesa'];
               $this->corte= $fila['corte'];
               $this->fecha= $fila['fecha'];
               $this->tiempo= $fila['tiempo'];
@@ -88,8 +91,8 @@
       function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda){
         $fecha=date("Y-m-d H:i");
         $tiempo=time();
-        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `corte`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
-        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '0', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '$comanda', '0');";
+        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `id_mesa`, `corte`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
+        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '0', '0', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '$comanda', '0');";
         $comentario="Guardamos el ticket en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         

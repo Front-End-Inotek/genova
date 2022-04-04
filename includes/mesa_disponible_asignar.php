@@ -24,7 +24,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="disponible_asignar('.$_GET['mesa_id'].','.$_GET['estado'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="disponible_asignar_mesa('.$_GET['mesa_id'].','.$_GET['estado'].')"> Aceptar</button>
     </div>
   </div>';
 ?>

@@ -241,6 +241,19 @@
         }
         return $id_reservacion;
       }
+      // Obtener el id de mesa de un movimiento
+      function saber_id_mesa($id){
+        $id_mesa= 0;
+        $sentencia = "SELECT id_mesa FROM movimiento WHERE id = $id LIMIT 1";
+        $comentario="Obtener el id de mesa de un movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_mesa= $fila['id_mesa'];
+        }
+        return $id_mesa;
+      }
       // Obtener la cantidad de personas de un movimiento
       function saber_personas($id){
         $personas= 0;
@@ -280,10 +293,10 @@
         return $id;
       }
       // Asignar una mesa en estado ocupado
-      function mesa_asignar($mesa_id,$usuario_id,$personas){
+      function mesa_asignar($id_mesa,$usuario_id,$personas){
         $fecha_inicio= time();
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `id_mesa`, `personas`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `tarifa`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
-        VALUES ('0', '0', '0', '$mesa_id', '$personas', '0', '0', '$fecha_inicio', '0', '$usuario_id', '$usuario_id', '0', '0', '0', '0', '0', '0', 'asignar mesa', '', 'sin estado');";
+        VALUES ('0', '0', '0', '$id_mesa', '$personas', '0', '0', '$fecha_inicio', '0', '$usuario_id', '$usuario_id', '0', '0', '0', '0', '0', '0', 'asignar mesa', '', 'sin estado');";
         $comentario="Asignar una mesa en estado ocupado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 

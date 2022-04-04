@@ -59,7 +59,7 @@
     }
     function saber_retorno($mov){
       $retorno=0;
-      $sentencia = "SELECT retorno FROM movimiento WHERE id =$mov LIMIT 1 ";
+      $sentencia = "SELECT retorno FROM movimiento WHERE id =$mov LIMIT 1";
       $comentario="Obtenemos los tipos de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       while ($fila = mysqli_fetch_array($consulta))
@@ -68,8 +68,8 @@
       }
       return $retorno;
     }
-    function saber_mov($mesa_id){
-      $sentencia = "SELECT mov FROM mesa WHERE id =$mesa_id LIMIT 1 ";
+    function saber_mov($mesa_id){//
+      $sentencia = "SELECT mov FROM mesa WHERE id =$mesa_id LIMIT 1";
       $comentario="Obtenemos el movimiento de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       while ($fila = mysqli_fetch_array($consulta))
@@ -79,7 +79,7 @@
       return $mov;
     }
     function saber_nombre_mesa($mesa_id){//
-      $sentencia = "SELECT nombre FROM mesa WHERE id =$mesa_id LIMIT 1 ";
+      $sentencia = "SELECT nombre FROM mesa WHERE id =$mesa_id LIMIT 1";
       $comentario="Obtenemos el nombre de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       while ($fila = mysqli_fetch_array($consulta))
@@ -89,7 +89,7 @@
       return $nombre;
     }
     function saber_cliente_mesa($mesa_id){//
-      $sentencia = "SELECT mov FROM mesa WHERE id =$mesa_id LIMIT 1 ";
+      $sentencia = "SELECT mov FROM mesa WHERE id =$mesa_id LIMIT 1";
       $comentario="Obtenemos el movimiento de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       while ($fila = mysqli_fetch_array($consulta))

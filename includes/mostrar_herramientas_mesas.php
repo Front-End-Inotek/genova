@@ -135,7 +135,7 @@
       }*/
       if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="restaurante btn-square-mesa-lg" onclick="agregar_restaurante('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          echo '<div class="restaurante btn-square-mesa-lg" onclick="agregar_restaurante_mesa('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 echo '<img src="images/restaurant.png"  class="center-block img-responsive">';
