@@ -141,3 +141,4 @@ VERSION 2.3
 -Funciones de estado disponible y ocupada de una mesa
 -Mejorar la vista de agregar restaurante
 -Agrega id_mesa en tablas ticket y pedido_rest
+-Generar 3 tipos de restaurante en hab, directo y en mesa
