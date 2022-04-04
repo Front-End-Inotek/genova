@@ -749,7 +749,7 @@
           </tbody>
         </table>';
       }
-      // Mostrar los productos del pedido restaurente sin habitacion
+      // Mostrar los productos del pedido restaurente habitacion
       function mostar_pedido_funciones($hab_id,$estado,$mov){
         if($hab_id != 0){
           include_once("clase_hab.php");
@@ -776,6 +776,38 @@
             } 
             echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
             <div class="col-sm-3"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
+          }else{
+            echo '<div class="col-sm-12"></div>'; 
+          }
+        echo '</div>'; 
+      }
+      // Mostrar los productos del pedido restaurente mesa
+      function mostar_pedido_funciones_mesa($mesa_id,$estado,$mov){
+        if($mesa_id != 0){
+          include_once("clase_mesa.php");
+          $mesa= NEW Mesa($mesa_id);
+          $mesa_nombre= $mesa->nombre;
+        }
+        $cantidad= 0;
+        $total= 0;
+        $consulta= $this->total_productos($mov);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $cantidad+$fila['cantidad'];
+          $total= $total+($fila['precio']*$fila['cantidad']);
+        }
+
+        echo '<div class="row">'; 
+          if($cantidad > 0){
+            if($mesa_id != 0){
+              echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
+              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Mesa: '.$mesa_nombre.'</div>';
+            }else{
+              echo '<div class="col-sm-3"></div>
+              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
+            } 
+            echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
+            <div class="col-sm-3"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
           }else{
             echo '<div class="col-sm-12"></div>'; 
           }

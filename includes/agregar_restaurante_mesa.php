@@ -10,6 +10,7 @@
   }else{
     $mov= $mesa->saber_mov($_GET['mesa_id']);
   }
+  $mesa_id= $_GET['mesa_id'];
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['mesa_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '
@@ -58,7 +59,7 @@
 
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">
-              ';$pedido->mostar_pedido_funciones($_GET['mesa_id'],$_GET['estado'],$mov);
+              ';$pedido->mostar_pedido_funciones_mesa($_GET['mesa_id'],$_GET['estado'],$mov);
             echo '</div>
           </div><br>
         

@@ -3179,7 +3179,9 @@ function buscar_categoria_restaurente(categoria,hab_id,estado,mov){
 function cargar_producto_restaurante(producto,hab_id,estado,mov){
 	var usuario_id=localStorage.getItem("id");
 	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
-    cargar_producto_restaurante_funciones(hab_id,estado,mov);
+    //cargar_producto_restaurante_funciones(hab_id,estado,mov);
+    //$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
 }
 
 // Mostrar productos de las categorias existentes en el inventario
