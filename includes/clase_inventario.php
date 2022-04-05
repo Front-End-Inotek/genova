@@ -531,23 +531,24 @@
         $sentencia = "SELECT * FROM inventario WHERE nombre LIKE '%$busqueda%' ORDER BY categoria, nombre";
         $comentario="Busqueda de cualquier producto en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        $cunt=0;
+        $categoria= 0;
+        $cunt= 0;
         echo '<div class="row">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($cunt%3==0){
-              //echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              //echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }
@@ -579,16 +580,16 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($cunt%3==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }

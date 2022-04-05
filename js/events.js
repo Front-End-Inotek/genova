@@ -3176,12 +3176,60 @@ function buscar_categoria_restaurente(categoria,hab_id,estado,mov){
 }
 
 // Mostrar productos de las categorias existentes en el inventario/////////***********///////
-function cargar_producto_restaurante(producto,hab_id,estado,mov){
+function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov){
 	var usuario_id=localStorage.getItem("id");
-	$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
+    //$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
+	///**$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
     //cargar_producto_restaurante_funciones(hab_id,estado,mov);
     //$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
+	//$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
+    //agregar_restaurante(hab_id,estado);
+
+    var datos = {
+		"producto": producto,
+        "categoria": categoria,
+        "hab_id": hab_id,
+		"estado": estado,
+        "mov": mov,
+		"usuario_id": usuario_id,
+		};
+	$.ajax({
+		async:true,
+		type: "POST",
+		dataType: "html",
+		contentType: "application/x-www-form-urlencoded",
+		url:"includes/agregar_producto_restaurante.php",
+		data:datos,
+		beforeSend:loaderbar,
+		success:recibe_datos_restaurante,
+		//success:problemas,
+		timeout:5000,
+		error:problemas_cargar_producto
+		});
+	return false;
+}
+
+// Recibe los datos para efectuar aregar producto de restaurante
+function recibe_datos_restaurante(datos){
+    //alert(datos);
+    var res = datos.split("/");
+    //$('#caja_herramientas').modal('hide');
+    agregar_restaurante_cat(res[0] , res[1] , res[2]);
+}
+
+// Agregar en el restaurante
+function agregar_restaurante_cat(categoria,hab_id,estado){
+    $('#caja_herramientas').modal('hide');
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_restaurante_cat.php?hab_id="+hab_id+"&estado="+estado+"&categoria="+categoria);
+	closeNav();
+}
+
+// Si existe un problema en el proceso
+function problemas_cargar_producto(datos){
+	alert("El producto ya fue agregado.  Inf: "+datos.toString());
 }
 
 // Mostrar productos de las categorias existentes en el inventario
@@ -3200,7 +3248,9 @@ function buscar_producto_restaurante(hab_id,estado,mov){
 function eliminar_producto_restaurante(producto,hab_id,estado,mov){
     var usuario_id=localStorage.getItem("id");
 	$("#caja_mostrar_total").load("includes/eliminar_producto_restaurante.php?producto="+producto+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&usuario_id="+usuario_id);
-    cargar_producto_restaurante_funciones(hab_id,estado,mov);
+    //cargar_producto_restaurante_funciones(hab_id,estado,mov);
+    $('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
 }
 
 // Guardar en el inventario
