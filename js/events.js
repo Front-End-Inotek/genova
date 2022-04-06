@@ -3213,17 +3213,24 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov){
 function recibe_datos_restaurante(datos){
     //alert(datos);
     var res = datos.split("/");
-    //$('#caja_herramientas').modal('hide');
-    agregar_restaurante_cat(res[0] , res[1] , res[2]);
+    alert(res[0]);
+    alert(res[1]);
+    alert(res[2]);
+    alert(res[3]);
+    agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3]);
 }
 
 // Agregar en el restaurante
-function agregar_restaurante_cat(categoria,hab_id,estado){
+function agregar_restaurante_cat(categoria,hab_id,estado,mesa){
+    alert(categoria);
+    alert(hab_id);
+    alert(estado);
+    alert(mesa);
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante_cat.php?hab_id="+hab_id+"&estado="+estado+"&categoria="+categoria);
+	$("#area_trabajo_menu").load("includes/agregar_restaurante_cat.php?hab_id="+hab_id+"&estado="+estado+"&categoria="+categoria+"&categoria="+categoria+"&mesa="+mesa);
 	closeNav();
 }
 
@@ -3245,12 +3252,32 @@ function buscar_producto_restaurante(hab_id,estado,mov){
 }
 
 // Borrar un producto del pedido del restaurante
-function eliminar_producto_restaurante(producto,hab_id,estado,mov){
+function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa){
     var usuario_id=localStorage.getItem("id");
-	$("#caja_mostrar_total").load("includes/eliminar_producto_restaurante.php?producto="+producto+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&usuario_id="+usuario_id);
-    //cargar_producto_restaurante_funciones(hab_id,estado,mov);
-    $('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
+
+    var datos = {
+		"producto": producto,
+        "hab_id": hab_id,
+		"estado": estado,
+        "mov": mov,
+        "mesa": mesa,
+		"usuario_id": usuario_id,
+		};
+
+	$.ajax({
+		async:true,
+		type: "POST",
+		dataType: "html",
+		contentType: "application/x-www-form-urlencoded",
+		url:"includes/eliminar_producto_restaurante.php",
+		data:datos,
+		beforeSend:loaderbar,
+		success:recibe_datos_restaurante,
+		//success:problemas,
+		timeout:5000,
+		error:problemas_cargar_producto
+		});
+	return false;
 }
 
 // Guardar en el inventario

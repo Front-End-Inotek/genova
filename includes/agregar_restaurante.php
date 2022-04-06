@@ -10,6 +10,7 @@
   }else{
     $mov= $hab->mostrar_mov_hab($_GET['hab_id']);
   }
+  $mesa= 0;
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '
@@ -52,7 +53,7 @@
                   <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="form-control color_black">
                 </div>
               </div>
-              ';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);
+              ';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
             echo '</div>
           </div>
 

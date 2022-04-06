@@ -4,7 +4,8 @@
   include_once('clase_log.php');
   $pedido=NEW Pedido_rest(0);
   $logs = NEW Log(0);
-  $pedido->eliminar_producto_apedido($_GET['producto']);
-  $pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$_GET['mov']);
-  //$logs->guardar_log($_GET['usuario_id'],"Eliminar el producto a restaurante: ". $_GET['producto']);
+  $pedido->eliminar_producto_apedido($_POST['producto']);
+  //$pedido->mostar_pedido($_POST['hab_id'],$_POST['estado'],$_POST['mov']);
+  //$logs->guardar_log($_POST['usuario_id'],"Eliminar el producto a restaurante: ". $_POST['producto']);
+  echo $_POST['categoria']."/".$_POST['hab_id']."/".$_POST['estado']."/".$_POST['mesa'];
 ?>

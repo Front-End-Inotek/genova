@@ -713,7 +713,7 @@
         return $cantidad;
       }
       // Mostrar los productos del pedido restaurente sin habitacion
-      function mostar_pedido($hab_id,$estado,$mov){
+      function mostar_pedido($hab_id,$estado,$mov,$mesa){
         $sentencia = "SELECT *, pedido_rest.id AS ID 
         FROM pedido_rest 
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pagado = 0 AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
@@ -743,7 +743,7 @@
               <td>'.$fila['nombre'].'</td>
               <td>$'.number_format($fila['precio'], 2).'</td>
               <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
-              echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.')"> 🗑️</button></td>';
+              echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🗑️</button></td>';
               echo '</tr>';
             } 
             echo '
