@@ -3171,12 +3171,12 @@ function agregar_restaurante_mesa(mesa_id,estado){
 }
 
 // Mostrar categorias existentes en el inventario
-function buscar_categoria_restaurente(categoria,hab_id,estado,mov){
-	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
+function buscar_categoria_restaurente(categoria,hab_id,estado,mov,mesa){
+	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa);
 }
 
 // Mostrar productos de las categorias existentes en el inventario/////////***********///////
-function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov){
+function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
 	var usuario_id=localStorage.getItem("id");
     //$("#caja_mostrar_funciones").load("includes/cargar_producto_restaurante_funciones.php?usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
 	///**$("#caja_mostrar_total").load("includes/agregar_producto_restaurante.php?producto="+producto+"&usuario_id="+usuario_id+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
@@ -3191,6 +3191,7 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov){
         "hab_id": hab_id,
 		"estado": estado,
         "mov": mov,
+        "mesa": mesa,
 		"usuario_id": usuario_id,
 		};
 	$.ajax({
@@ -3213,19 +3214,13 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov){
 function recibe_datos_restaurante(datos){
     //alert(datos);
     var res = datos.split("/");
-    alert(res[0]);
-    alert(res[1]);
-    alert(res[2]);
-    alert(res[3]);
     agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3]);
 }
 
 // Agregar en el restaurante
 function agregar_restaurante_cat(categoria,hab_id,estado,mesa){
-    alert(categoria);
-    alert(hab_id);
-    alert(estado);
     alert(mesa);
+    alert(hab_id);
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
@@ -3246,17 +3241,19 @@ function cargar_producto_restaurante_funciones(hab_id,estado,mov){
 }
 
 // Buscar cualquier producto en el inventario
-function buscar_producto_restaurante(hab_id,estado,mov){
+function buscar_producto_restaurante(hab_id,estado,mov,mesa){
 	var a_buscar= encodeURI(document.getElementById("a_buscar").value);
-	$("#caja_mostrar_busqueda").load("includes/buscar_producto_restaurante.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&a_buscar="+a_buscar);
+	$("#caja_mostrar_busqueda").load("includes/buscar_producto_restaurante.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&a_buscar="+a_buscar+"&mesa="+mesa);
 }
 
 // Borrar un producto del pedido del restaurante
 function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa){
     var usuario_id=localStorage.getItem("id");
+    var categoria= 0;
 
     var datos = {
 		"producto": producto,
+        "categoria": categoria,
         "hab_id": hab_id,
 		"estado": estado,
         "mov": mov,

@@ -26,7 +26,7 @@
             </div>
 
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
-              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov);
+              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
             echo '</div>
           </div><br>
 
@@ -50,7 +50,7 @@
             <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">
               <div class="row">
                 <div class="col-sm-4">
-                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="form-control color_black">
+                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.','.$mesa.')" id="a_buscar" class="form-control color_black">
                 </div>
               </div>
               ';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa);

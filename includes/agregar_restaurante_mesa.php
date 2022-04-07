@@ -22,17 +22,17 @@
         <div class="col-sm-6" style="background-color:white;">
           <div class="card">
             <div class="card-header alinear_centro">
-              <h5>Categorias</h5>
+              <h5>CategoriasS</h5>
             </div>
 
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
-              ';$categoria->mostrar_categoria_restaurente($_GET['mesa_id'],$_GET['estado'],$mov);
+              ';$categoria->mostrar_categoria_restaurente($_GET['mesa_id'],$_GET['estado'],$mov,$mesa);
             echo '</div>
           </div><br>
 
           <div class="card">
             <div class="card-header alinear_centro">
-              <h5>Productos</h5>
+              <h5>ProductosS</h5>
             </div>
 
             <div class="card-body altura-rest_productos" id="caja_mostrar_busqueda">
@@ -44,13 +44,13 @@
         <div class="col-sm-6" style="background-color:white;">
           <div class="card">
             <div class="card-header alinear_centro">
-              <h5>Pedido</h5>
+              <h5>PedidoS</h5>
             </div>
 
             <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">
               <div class="row">
                 <div class="col-sm-4">
-                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['mesa_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="form-control color_black">
+                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['mesa_id'].','.$_GET['estado'].','.$mov.','.$mesa.')" id="a_buscar" class="form-control color_black">
                 </div>
               </div>
               ';$pedido->mostar_pedido($_GET['mesa_id'],$_GET['estado'],$mov,$mesa);

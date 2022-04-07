@@ -130,7 +130,7 @@
         }
       }
       // Mostrar categorias existentes en el inventario
-      function mostrar_categoria_restaurente($hab_id,$estado,$mov){
+      function mostrar_categoria_restaurente($hab_id,$estado,$mov,$mesa){
         $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar las categorias en el restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -140,11 +140,11 @@
         {
           //if($cont%2==0){
             echo '<div class="col-sm-2 margen_inf">
-              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.')"> '.$fila['nombre'].'</button>
+              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> '.$fila['nombre'].'</button>
             </div>';
           /*}else{
             echo '<div class="col-sm-2 margen_inf">
-              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].')"> 🍽️<br>'.$fila['nombre'].'</button>
+              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🍽️<br>'.$fila['nombre'].'</button>
             </div>';
           }
           $cont++;*/

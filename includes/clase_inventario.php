@@ -527,7 +527,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Busqueda de cualquier producto en el inventario
-      function mostar_producto_busqueda($busqueda,$hab_id,$estado,$mov){
+      function mostar_producto_busqueda($busqueda,$hab_id,$estado,$mov,$mesa){
         $sentencia = "SELECT * FROM inventario WHERE nombre LIKE '%$busqueda%' ORDER BY categoria, nombre";
         $comentario="Busqueda de cualquier producto en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -538,17 +538,17 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($cunt%3==0){
-              //echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
+              //echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }
@@ -569,7 +569,7 @@
         }
       }
       // Mostrar productos de las categorias existentes en el inventario
-      function mostrar_producto_restaurente($categoria,$hab_id,$estado,$mov){
+      function mostrar_producto_restaurente($categoria,$hab_id,$estado,$mov,$mesa){
         $sentencia = "SELECT * FROM inventario WHERE categoria = $categoria ORDER BY nombre";
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -580,16 +580,16 @@
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($cunt%3==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }
