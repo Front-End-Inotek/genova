@@ -3219,8 +3219,6 @@ function recibe_datos_restaurante(datos){
 
 // Agregar en el restaurante
 function agregar_restaurante_cat(categoria,hab_id,estado,mesa){
-    alert(mesa);
-    alert(hab_id);
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
