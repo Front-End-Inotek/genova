@@ -808,7 +808,7 @@
               <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
             } 
             echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-3"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
+            <div class="col-sm-3"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
           }else{
             echo '<div class="col-sm-12"></div>'; 
           }

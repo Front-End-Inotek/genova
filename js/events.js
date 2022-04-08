@@ -3318,6 +3318,11 @@ function pedir_rest_cobro(total,hab_id,estado,mov){
 	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
 }
 
+// Pedir restaurante cobro en mesa 
+function pedir_rest_cobro_mesa(total,hab_id,estado,mov){
+	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro_mesa.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+}
+
 // Cambio en pedir restaurante 
 function cambio_rest_cobro(total){
 	var efectivo=$("#efectivo").val();
