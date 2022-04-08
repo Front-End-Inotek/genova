@@ -143,3 +143,4 @@ VERSION 2.3
 -Agrega id_mesa en tablas ticket y pedido_rest
 -Generar 3 tipos de restaurante en hab, directo y en mesa
 -Agregar funciones en restaurante de mesas
+-Agregar tabla y bd de pedido

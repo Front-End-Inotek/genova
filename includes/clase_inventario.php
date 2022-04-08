@@ -877,4 +877,57 @@
       }
 
   }
+  /**
+  *
+  */
+  class Pedido extends ConexionMYSql
+  {    
+      public $id;
+      public $mov;
+      public $id_hab;
+      public $id_mesa;
+      public $tiempo;
+      public $comentarios;
+      public $impreso;
+      public $recepcion;
+      public $estado;
+
+      // Constructor
+      function __construct($id)
+      {
+        if($id==0){
+          $this->id= 0;
+          $this->mov= 0;
+          $this->id_hab= 0;
+          $this->id_mesa= 0;
+          $this->tiempo= 0;
+          $this->comentarios= 0;
+          $this->impreso= 0;
+          $this->recepcion= 0;
+          $this->estado= 0;
+        }else{
+          $sentencia = "SELECT * FROM pedido WHERE id = $id LIMIT 1";
+          $comentario="Obtener todos los valores del pedido";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            $this->id= $fila['id'];
+            $this->mov= $fila['mov'];
+            $this->id_hab= $fila['id_hab'];
+            $this->id_mesa= $fila['id_mesa'];
+            $this->tiempo= $fila['tiempo'];
+            $this->comentarios= $fila['comentarios'];
+            $this->impreso= $fila['impreso'];
+            $this->recepcion= $fila['recepcion'];
+            $this->estado= $fila['estado'];             
+          }
+        }
+      }
+      // Agregar un producto al pedido de restaurante
+      function agregar_producto_apedido($hab_id,$estado,$producto,$mov){
+        $pedido=$this->saber_pedido($mov,$producto);
+        //
+      }
+
+  }
 ?>

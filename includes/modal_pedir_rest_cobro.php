@@ -1,9 +1,5 @@
 <?php
-  include_once("clase_categoria.php");
-  include_once("clase_inventario.php");
   include_once("clase_forma_pago.php");
-  $categoria=NEW Categoria(0);
-  $pedido=NEW Pedido_rest(0);
   $forma_pago= NEW Forma_pago(0);
   $total= $_GET['total'];
   echo '

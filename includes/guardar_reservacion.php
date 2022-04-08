@@ -11,7 +11,7 @@
   $concepto= NEW Concepto(0);
   $cupon= NEW Cupon(0);
   $hab = NEW Hab($_POST['hab_id']);
-  $pedido= NEW Pedido_rest(0);
+  $pedido_rest= NEW Pedido_rest(0);
   $movimiento = NEW Movimiento($hab->mov);
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
@@ -95,7 +95,7 @@
     $resta= 0;
     $nueva_etiqueta= $labels->obtener_etiqueta();
     $labels->actualizar_etiqueta();
-    $comanda= $pedido->saber_comanda($mov);
+    $comanda= $pedido_rest->saber_comanda($mov);
 
     if($_POST['forma_pago'] == 1){
       $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],$_POST['total_pago'],0,0,0,$descuento,$factuar,'','',$nueva_etiqueta,$resta,$comanda);

@@ -4,7 +4,7 @@
   include_once("clase_inventario.php");
   $hab=NEW Hab(0);
   $categoria=NEW Categoria(0);
-  $pedido=NEW Pedido_rest(0);
+  $pedido_rest=NEW Pedido_rest(0);
   if($_GET['hab_id'] == 0){
     $mov= 0;
   }else{
@@ -30,8 +30,8 @@
         <div class="col-sm-8 altura-rest_productos" id="caja_mostrar_busqueda" style="background-color:lightcyan;"></div>
       </div>
       <div class="row">
-        <div class="col-sm-4 altura-rest_total" id="caja_mostrar_funciones" style="background-color:azure;">';$pedido->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
-        <div class="col-sm-8 altura-rest_total" id="caja_mostrar_total" style="background-color:whitesmoke;">';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
+        <div class="col-sm-4 altura-rest_total" id="caja_mostrar_funciones" style="background-color:azure;">';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
+        <div class="col-sm-8 altura-rest_total" id="caja_mostrar_total" style="background-color:whitesmoke;">';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
       </div>
     </div>
       

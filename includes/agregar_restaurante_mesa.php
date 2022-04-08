@@ -4,7 +4,7 @@
   include_once("clase_inventario.php");
   $mesa=NEW Mesa(0);
   $categoria=NEW Categoria(0);
-  $pedido=NEW Pedido_rest(0);
+  $pedido_rest=NEW Pedido_rest(0);
   if($_GET['mesa_id'] == 0){
     $mov= 0;
   }else{
@@ -53,13 +53,13 @@
                   <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['mesa_id'].','.$_GET['estado'].','.$mov.','.$mesa.')" id="a_buscar" class="form-control color_black">
                 </div>
               </div>
-              ';$pedido->mostar_pedido($_GET['mesa_id'],$_GET['estado'],$mov,$mesa);
+              ';$pedido_rest->mostar_pedido($_GET['mesa_id'],$_GET['estado'],$mov,$mesa);
             echo '</div>
           </div>
 
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">
-              ';$pedido->mostar_pedido_funciones_mesa($_GET['mesa_id'],$_GET['estado'],$mov);
+              ';$pedido_rest->mostar_pedido_funciones_mesa($_GET['mesa_id'],$_GET['estado'],$mov);
             echo '</div>
           </div><br>
         

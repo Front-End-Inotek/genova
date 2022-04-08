@@ -8,7 +8,7 @@
   $confi= NEW Configuracion();
   $hab= NEW Hab($_POST['hab_id']);
   $inventario= NEW Inventario(0);
-  $pedido= NEW Pedido_rest(0);
+  $pedido_rest= NEW Pedido_rest(0);
   $concepto= NEW Concepto(0);
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
@@ -68,17 +68,17 @@
           $efectivo_pago= 0;
   }
   
-  // Guardamos el ticket del pedido del restaurante
+  // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante
   $resta= 1;
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
-  $comanda= $pedido->saber_comanda($_POST['mov']);
+  $comanda= $pedido_rest->saber_comanda($_POST['mov']);
   $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda);
   $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
-  $consulta= $pedido->saber_pedido_rest_cobro($_POST['mov']);
+  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov']);
   while($fila = mysqli_fetch_array($consulta))
   {
       $nombre= $inventario->obtengo_nombre($fila['id_producto']);
@@ -93,13 +93,13 @@
       $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   }
 
-  $pedido->cambiar_estado_pedido_cobro($_POST['mov']);
+  $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov']);
   // Imprimir ticket
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }
 
-  // Se guarda dependiendo si se hace el pedido de forma directa o desde una habitacion
+  // Se guarda dependiendo si se hace el pedido_rest de forma directa o desde una habitacion
   if($_POST['mov'] == 0){
           $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
   }else{

@@ -4,7 +4,7 @@
   include_once("clase_inventario.php");
   $hab=NEW Hab(0);
   $categoria=NEW Categoria(0);
-  $pedido=NEW Pedido_rest(0);
+  $pedido_rest=NEW Pedido_rest(0);
   if($_GET['hab_id'] == 0){
     $mov= 0;
   }else{
@@ -53,13 +53,13 @@
                   <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.','.$mesa.')" id="a_buscar" class="form-control color_black">
                 </div>
               </div>
-              ';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
+              ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
             echo '</div>
           </div>
 
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">
-              ';$pedido->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);
+              ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);
             echo '</div>
           </div><br>
         
@@ -77,11 +77,11 @@
         
 
           <div class="row">
-            <div class="col-sm-6 altura-rest_total" id="caja_mostrar_funciones" style="background-color:white;"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black margen_sup">';$pedido->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
+            <div class="col-sm-6 altura-rest_total" id="caja_mostrar_funciones" style="background-color:white;"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black margen_sup">';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
             <div class="col-sm-6 altura-rest_total" id="caja_mostrar_categoria" style="background-color:aliceblue;"><h6 class="alinear_centro_categorias"> Categorias</h6>';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
           </div>
           <div class="row">
-            <div class="col-sm-6 altura-rest_productos" id="caja_mostrar_total" style="background-color:white;">';$pedido->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
+            <div class="col-sm-6 altura-rest_productos" id="caja_mostrar_total" style="background-color:white;">';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov);echo '</div>
             <div class="col-sm-6 altura-rest_productos" id="caja_mostrar_busqueda" style="background-color:aliceblue;"></div>
           </div>
  

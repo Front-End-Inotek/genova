@@ -8,7 +8,7 @@
   $cuenta= NEW Cuenta(0);
   $concepto= NEW Concepto(0);
   $hab= NEW Hab($_POST['hab_id']);
-  $pedido= NEW Pedido_rest(0);
+  $pedido_rest= NEW Pedido_rest(0);
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
   $logs = NEW Log(0);
@@ -36,7 +36,7 @@
   $categoria= $hab->id;
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
-  $comanda= $pedido->saber_comanda($mov);
+  $comanda= $pedido_rest->saber_comanda($mov);
   if($_POST['forma_pago'] == 1){
     $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],$_POST['abono'],0,0,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda);
   }else{
