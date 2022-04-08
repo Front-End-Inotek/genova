@@ -177,6 +177,18 @@
         }
         return $id_ticket;
       }
+      // Buscar el id de un ticket
+      function buscar_id_ticket($mov,$id_mesa){
+        $sentencia = "SELECT * FROM ticket WHERE mov = $mov AND id_mesa = $id_mesa LIMIT 1";
+        $comentario="Buscar el id de un ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $id_ticket= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_ticket= $fila['id'];
+        }
+        return $id_ticket;
+      }
              
   }
   /**
@@ -339,6 +351,49 @@
         VALUES ('1', '$id_ticket', '$id_usuario', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria');";
         $comentario="Guardamos el concepto en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Saber cual es el numero del concepto
+      function saber_pedido($id_ticket,$nombre){
+        $sentencia = "SELECT * FROM concepto WHERE id_ticket = $id_ticket AND nombre = '$nombre' AND activo = 1 LIMIT 1";
+        //echo $sentencia;
+        $comentario="Buscar si existe el id del concepto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $pedido= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $pedido= $fila['id'];
+        }
+        return $pedido;
+      }
+      // Saber cual es la cantidad del concepto
+      function saber_cantidad_pedido($id){
+        $sentencia = "SELECT cantidad FROM concepto WHERE id = $id LIMIT 1";
+        //echo $sentencia;
+        $comentario="Mostrar la cantidad del concepto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cantidad= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+        return $cantidad;
+      }
+      function agregar_concepto_ticket($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria){
+        $pedido= $this->saber_pedido($id_ticket,$nombre);
+        if($pedido == 0){
+          $this->guardar_concepto($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria);
+        }else{
+          $cant= $this->saber_cantidad_pedido($pedido);
+          $cant= $cant + $cantidad;
+          $total_final= $precio * $cantidad;
+          $sentencia = "UPDATE `concepto` SET
+          `cantidad` = '$cant',
+          `total` = '$total_final'
+          WHERE `id` = '$pedido';";
+          $comentario="Modificar la cantidad de productos en el concepto";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //echo "Es producto ya existe";
+        }
       }
       // Cambiar estado activo del concepto
       function cambiar_activo($id_usuario){

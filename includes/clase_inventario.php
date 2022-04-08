@@ -834,17 +834,17 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtener los datos del pedido restaurante cobrado
-      function saber_pedido_rest_cobro($mov){
-        $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND pagado = 0 AND pedido = 0 AND estado = 1";
+      function saber_pedido_rest_cobro($mov,$mesa){
+        $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND id_mesa = $id_mesa AND pagado = 0 AND pedido = 0 AND estado = 1";
         //echo $sentencia;
         $comentario="Obtener los datos del pedido restaurante cobrado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
       // Cambiar el estado del pedido restaurante cobrado
-      function cambiar_estado_pedido_cobro($mov){
+      function cambiar_estado_pedido_cobro($mov,$pagado){
         $sentencia = "UPDATE `pedido_rest` SET
-        `pagado` = '1',
+        `pagado` = '$pagado',
         `pedido` = '1'
         WHERE `mov` = $mov;";
         $comentario="Cambiar el estado del pedido restaurante cobrado";
@@ -874,6 +874,14 @@
           $comanda=$fila['id'];
         }
         return $comanda;
+      }
+      // Agregar pedido
+      function agregar_pedido($pedido,$mov){
+        $sentencia = "UPDATE `perdido_rest` SET
+        `pedido` = '$pedido'
+        WHERE `movimiento` = '$mov' AND `estado` = '0';";
+        $comentario="Editar los conceptos del pedido del restaurante";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
 
   }
@@ -923,10 +931,46 @@
           }
         }
       }
-      // Agregar un producto al pedido de restaurante
-      function agregar_producto_apedido($hab_id,$estado,$producto,$mov){
-        $pedido=$this->saber_pedido($mov,$producto);
-        //
+      // Agregar un pedido al restaurante
+      function pedir_rest($recepcion,$mov,$comentario,$nombre){
+        $tiempo=date("Y-m-d H:i");
+        $sentencia = "INSERT INTO `pedido` (`estado`, `impreso`, `recepcion`, `tiempo`, `mov`, `comentarios`, `mesa`)
+          VALUES ('0', '1','$recepcion', '$tiempo', '$mov', '$comentario', '$nombre');";
+        $comentario="Mostrar las categorias en el restaurente";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        
+        $id= $this->ultima_insercion();
+        return $id;
+      }
+      // Obtener el ultimo pedido ingresado 
+      function ultima_insercion(){
+        $sentencia= "SELECT id FROM pedido ORDER BY id DESC LIMIT 1";
+        $id= 0;
+        $comentario="Obtener el ultimo pedido ingresado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+        }
+        return $id;
+      }
+      // Cambiar el estado del pedido a ya pedido
+      function cambiar_estado_pedido($id){
+        $sentencia = "UPDATE `pedido` SET
+        `estado` = '2'
+        WHERE `id` = '$id';";
+        echo $sentencia;
+        $comentario="Cambiar el estado del pedido a ya pedido";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+       // Cambiar el estado del pedido para imprimir la comanda
+      function cambiar_estado($id_pedido){
+        $sentencia = "UPDATE `pedido` SET
+        `impreso` = '0' 
+        WHERE `id` = '$id_pedido';";
+        $comentario="Cambiar el estado del pedido para imprimir la comanda";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
 
   }

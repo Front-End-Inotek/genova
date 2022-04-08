@@ -103,6 +103,6 @@
   if($_POST['mov'] == 0){
           $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
   }else{
-          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab_nombre);
+          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab_nombre);$hab->nombre
   }
 ?>

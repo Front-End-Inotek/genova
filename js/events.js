@@ -3425,6 +3425,35 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
 	}
 }
 
+// Aplicar el cobro en pedido restaurante
+function aplicar_rest_cobro_mesa(total,hab_id,estado,mov){
+    var usuario_id=localStorage.getItem("id");
+    var comentario= encodeURI(document.getElementById("comentario").value);
+	
+    var datos = {
+           "total": total,
+           "comentario": comentario,
+           "hab_id": hab_id,
+           "estado": estado,
+           "mov": mov,
+           "usuario_id": usuario_id,
+            };
+            $.ajax({
+                  async:true,
+                  type: "POST",
+                  dataType: "html",
+                  contentType: "application/x-www-form-urlencoded",
+                  url:"includes/aplicar_rest_cobro_mesa.php",
+                  data:datos,
+                  beforeSend:loaderbar,
+                  success:principal,
+                  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
+                });
+                return false;
+}
+
 // Regresa al inicio
 function principal(){
     $('#caja_herramientas').modal('hide');

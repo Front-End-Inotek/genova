@@ -144,3 +144,4 @@ VERSION 2.3
 -Generar 3 tipos de restaurante en hab, directo y en mesa
 -Agregar funciones en restaurante de mesas
 -Agregar tabla y bd de pedido
+-Acomodo en hacer pedido en mesa
