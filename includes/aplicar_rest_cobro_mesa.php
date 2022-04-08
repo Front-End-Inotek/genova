@@ -1,14 +1,12 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_configuracion.php");
-  //include_once("clase_hab.php");
   include_once("clase_inventario.php");
   include_once("clase_mesa.php");
   include_once("clase_usuario.php");
   include_once("clase_ticket.php");
   include_once("clase_log.php");
   $confi= NEW Configuracion();
-  $hab= NEW Hab($_POST['hab_id']);
   $inventario= NEW Inventario(0);
   $pedido_rest= NEW Pedido_rest(0);
   $pedido= NEW Pedido(0);
@@ -19,7 +17,6 @@
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
   ////total,hab_id,estado,mov
-  //total_final,
 
   if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';
@@ -67,16 +64,12 @@
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
   $pedido->cambiar_estado_pedido($id_pedido);
   $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
+  
   // Imprimir ticket
   /*if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }*/ //Checar
 
-  // Se guarda dependiendo si se hace el pedido de forma directa, desde una habitacion o desde una mesa
-  /*if($_POST['mov'] == 0){
-          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");// CHECAR EN DIRECTO
-  }else{
-          $logs->guardar_log($_POST['usuario_id'],"Pedir restaurante en mesa: ". $mesa->nombre);
-          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);
-  }*/
+  // Se guarda dependiendo si se hace el pedido de forma directa o desde una mesa
+  //$logs->guardar_log($_POST['usuario_id'],"Pedir restaurante en mesa: ". $mesa->nombre);
 ?>

@@ -3446,10 +3446,10 @@ function aplicar_rest_cobro_mesa(total,hab_id,estado,mov){
                   url:"includes/aplicar_rest_cobro_mesa.php",
                   data:datos,
                   beforeSend:loaderbar,
-                  success:principal,
-                  //success:problemas_sistema,
+                  success:mesas_restaurante,
+                  //success:problemas,
                   timeout:5000,
-                  error:problemas_sistema
+                  error:problemas
                 });
                 return false;
 }
