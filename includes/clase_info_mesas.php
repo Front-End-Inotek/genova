@@ -134,8 +134,8 @@
                   while ($fila = mysqli_fetch_array($consulta))
                   {
                     $id_ticket= $fila['id'];
-                    $sentencia1 = "SELECT * FROM concepto WHERE ticket = $id_ticket AND estado = 0";
-                    //$sentencia1 = "SELECT * FROM perdido_rest WHERE movimiento = $mov AND estado =1";
+                    $sentencia1 = "SELECT * FROM concepto WHERE id_ticket = $id_ticket AND activo = 0";
+                    //$sentencia1 = "SELECT * FROM perdido_rest WHERE movimiento = $mov AND activo =1";
                     $comentario1="Obtener los productos vendidos";
                     $consulta1= $this->realizaConsulta($sentencia1,$comentario1);
                     while ($filas = mysqli_fetch_array($consulta1)){
@@ -460,7 +460,7 @@
                   $consulta= $this->realizaConsulta($sentencia,$comentario);
                   while ($fila = mysqli_fetch_array($consulta))
                   {
-                    $sentencia1 = "SELECT * FROM concepto WHERE ticket=".$fila['id'] ;
+                    $sentencia1 = "SELECT * FROM concepto WHERE id_ticket=".$fila['id'] ;
                     $comentario1="obtener los productos vendidos";
                     $consulta1= $this->realizaConsulta($sentencia1,$comentario1);
                     while ($filas = mysqli_fetch_array($consulta1)){
