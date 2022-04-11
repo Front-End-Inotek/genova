@@ -67,7 +67,7 @@
         <div class="col-sm-2">Total:</div>
         <div class="col-sm-4">
         <div class="form-group">
-          <input class="form-control" type="number" id="total"  placeholder="'.$total.'" disabled>
+          <input class="form-control" type="number" id="total"  placeholder="'.number_format($total, 2).'" disabled>
         </div>
         </div>
       </div>

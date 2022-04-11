@@ -462,7 +462,7 @@
               <h6 class="list-group-item-text"> Total: $'.$fila['total'].' </h6>
             </div>';
           }
-          $total=$total+$fila['total'];
+          $total= $total+$fila['total'];
           $cantidad++;
           /*echo ' <a href="#" class="list-group-item list-group-item-info" onclick="herramienta_comanda('.$fila['id'].')">
               <div class="row">
@@ -486,7 +486,9 @@
           }
         }*/
         echo '</ul>';
-        if($cantidad>0){
+        
+        return $total;
+        /*if($cantidad>0){
           echo '<div class="row">
             <div class="col-sm-6 fuente_menor_bolder margen_sup_pedir">
             </div>
@@ -499,7 +501,7 @@
             <div class="col-sm-1 fuente_menor_bolder margen_sup_pedir">
             </div>
           </div><br>';
-        }
+        }*/
   
       }
     

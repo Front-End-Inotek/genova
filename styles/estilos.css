@@ -214,6 +214,13 @@ a.topictitle:hover {
   border-radius: 0px;
   padding: 0px 0px 0px 0px;
 }
+.alinear_der{
+  /*color: white;*/
+  background-color: #E9E9E9;
+  text-align: right;
+  border-radius: 0px;
+  padding: 0px 0px 0px 0px;
+}
 .encabezado_gris {
   background-color: #E9E9E9;
   border-radius: 5px;

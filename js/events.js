@@ -3599,7 +3599,7 @@ function imprimir_ticket(mesa_id,estado){
 	return false;
 }
 
-// Mostrar teclado en caja
+// Mostrar teclado en caja//
 function mostrarteclado_rest(ident,total){
 	$("#tecaldo").load("includes/teclado_rest.php?ident="+ident+"&total="+total);
 	//alert("Mostrar teclado");
@@ -3609,6 +3609,9 @@ function mostrarteclado_rest(ident,total){
 function agregar_text_rest(ident,carac,total){
 	var entrada= document.getElementById(teclado[ident]).value;
 	var resultado;
+    if(total == 0){
+        var total=$("#total").val();
+    }
 	if(carac=='*'){
 		resultado = entrada.slice(0, -1);
 	}else{
@@ -3620,6 +3623,12 @@ function agregar_text_rest(ident,carac,total){
 
 // Sumar cobro de dinero de restaurante en caja
 function suma_cobro_rest_caja(precio){
+    var total=$("#total").val();
+    if(total < precio && total >0){
+        precio = total;
+    }
+    //alert(total);
+    //alert(precio);
 	var efectivo=$("#efectivo").val();
 	var cambio = efectivo-precio;
 	if(isNaN(cambio)){
@@ -3629,6 +3638,15 @@ function suma_cobro_rest_caja(precio){
 		cambio=0;
 	}
 	document.getElementById("cambio").value =cambio;
+}
+
+// Descuento en pedir restaurante en mesa
+function cambio_rest_descuento_mesa(){
+    var total=$("#total").val();
+	var descuento= Number(document.getElementById("descuento").value);
+    var calculo_descuento= descuento_total(total,descuento);
+	calculo_descuento= redondearDecimales(calculo_descuento,2);
+	document.getElementById("total").value= calculo_descuento;
 }
 
 //* Cupon *//
