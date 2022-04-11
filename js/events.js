@@ -3421,6 +3421,9 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                                     });
                                     return false;
                     }else{
+                        // lun-juev 7mil
+                        // vier-dom 11mil
+                        // QUITAR ICONOS
                         var datos = {
                             "efectivo":efectivo,
                             "cambio": cambio,
