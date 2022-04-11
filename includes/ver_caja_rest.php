@@ -65,18 +65,17 @@
                   </div>
                   <div class="col-sm-8">
                   </div>
-                </div>
-                    
+                </div>  
                 
-              </div>
-              <div class="row" id="tecaldo">
               </div>';
 
             echo '</div>
-          </div>
+          </div><br>
           
+          <div class="row" id="tecaldo">
+          </div>
+
         </div>
-        
 
       </div><br>
 

@@ -3,7 +3,7 @@
               <div class="card-header alinear_centro">
                 <h5>Teclado</h5>
               </div>
-                <div class="panel-body">
+              <div class="card-body alinear_izq" style="background-color:white;">';
                   <div class="row">
                     <div class="col-sm-2 margen_inf">
                       <button type="button" class="btn btn-warning btn-lg btn-block" onclick="agregar_text_rest(<?php echo $_GET['ident']?> , 7,<?php echo $_GET['total']?>)">7</button>
