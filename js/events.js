@@ -3346,7 +3346,7 @@ function cambio_rest_descuento(total){
 }
 
 // Aplicar el cobro en pedido restaurante
-function aplicar_rest_cobro(total,hab_id,estado,mov){
+function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
     var usuario_id=localStorage.getItem("id");
 	var efectivo=parseFloat($("#efectivo").val());
     var cambio=parseFloat($("#cambio").val());
@@ -3365,6 +3365,11 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
 	if(isNaN(descuento)){
 		descuento= 0;
 	}
+    var precio=$("#total").val();
+    if(precio < total && precio >0){
+        total = precio;
+    }
+    alert(total);
     total= parseFloat(total);
     if(total > total_descuento){
         total_final= total_descuento;
@@ -3379,39 +3384,78 @@ function aplicar_rest_cobro(total,hab_id,estado,mov){
 		if(total_pago >= total_final){
             if(monto>0 && forma_pago>1 || efectivo> 0 && forma_pago==1){
                 if(forma_pago==2 && folio.length >0 || forma_pago>2 || efectivo>=total_final){
-                    var datos = {
-                        "efectivo":efectivo,
-                        "cambio": cambio,
-                        "monto": monto,
-                        "forma_pago": forma_pago,
-                        "folio": folio,
-                        "total_pago": total_pago,
-                        "descuento": descuento,
-                        "total_descuento": total_descuento,
-                        "total_final": total_final,
-                        "tota_pago": total_pago,
-                        "cambio": cambio,
-                        "total": total,
-                        "comentario": comentario,
-                        "hab_id": hab_id,
-                        "estado": estado,
-                        "mov": mov,
-                        "usuario_id": usuario_id,
-                            };
-                            $.ajax({
-                                  async:true,
-                                  type: "POST",
-                                  dataType: "html",
-                                  contentType: "application/x-www-form-urlencoded",
-                                  url:"includes/aplicar_rest_cobro.php",
-                                  data:datos,
-                                  beforeSend:loaderbar,
-                                  success:principal,
-                                  //success:problemas_sistema,
-                                  timeout:5000,
-                                  error:problemas_sistema
-                                });
-                                return false;
+                    // Checar si el cobro es en mesa o no
+                    if($mesa == 0){
+                        var datos = {
+                            "efectivo":efectivo,
+                            "cambio": cambio,
+                            "monto": monto,
+                            "forma_pago": forma_pago,
+                            "folio": folio,
+                            "total_pago": total_pago,
+                            "descuento": descuento,
+                            "total_descuento": total_descuento,
+                            "total_final": total_final,
+                            "tota_pago": total_pago,
+                            "cambio": cambio,
+                            "total": total,
+                            "comentario": comentario,
+                            "hab_id": hab_id,
+                            "mesa": mesa,
+                            "estado": estado,
+                            "mov": mov,
+                            "usuario_id": usuario_id,
+                                };
+                                $.ajax({
+                                      async:true,
+                                      type: "POST",
+                                      dataType: "html",
+                                      contentType: "application/x-www-form-urlencoded",
+                                      //url:"includes/aplicar_rest_cobro.php",
+                                      data:datos,
+                                      beforeSend:loaderbar,
+                                      success:principal,
+                                      //success:problemas_sistema,
+                                      timeout:5000,
+                                      error:problemas_sistema
+                                    });
+                                    return false;
+                    }else{
+                        var datos = {
+                            "efectivo":efectivo,
+                            "cambio": cambio,
+                            "monto": monto,
+                            "forma_pago": forma_pago,
+                            "folio": folio,
+                            "total_pago": total_pago,
+                            "descuento": descuento,
+                            "total_descuento": total_descuento,
+                            "total_final": total_final,
+                            "tota_pago": total_pago,
+                            "cambio": cambio,
+                            "total": total,
+                            "comentario": comentario,
+                            "hab_id": hab_id,
+                            "mesa": mesa,
+                            "estado": estado,
+                            "mov": mov,
+                            "usuario_id": usuario_id,
+                                };
+                                $.ajax({
+                                      async:true,
+                                      type: "POST",
+                                      dataType: "html",
+                                      contentType: "application/x-www-form-urlencoded",
+                                      //url:"includes/aplicar_rest_cobro.php",
+                                      data:datos,
+                                      beforeSend:loaderbar,
+                                      success:mesas_restaurante,
+                                      //success:problemas,
+                                      timeout:5000,
+                                      error:problemas
+                                    });
+                                    return false;
+                    }
                 }else{
                     alert("¡Falta agregar el folio del pago de la tarjeta!");
                 }

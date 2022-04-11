@@ -38,7 +38,7 @@
                     <h6 for="sel1"><input class="form-control alinear_centro" type="number" id="total"  placeholder="'.number_format($precio, 2).'" disabled></h6>
                   </div>
                   <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">
-                    <button type="button" id="boton_cobrar" class="btn btn-danger btn-block" onclick="cobrar_rest('.$_GET['mesa_id'].','.$precio.')">Cobrar</button>
+                    <button type="button" id="boton_cobrar" class="btn btn-danger btn-block" onclick="aplicar_rest_cobro('.$precio.','.$_GET['mesa_id'].','.$_GET['estado'].','.$mesa->mov.',1)"> Cobrar</button>
                   </div>
                   <div class="col-sm-1 fuente_menor_bolder margen_sup_pedir">
                   </div>
@@ -81,7 +81,7 @@
                     </select>
                   </div>
                   <div class="col-sm-4">
-                    <input type="number" class="form-control" id="autoriza" placeholder="Folio de autorización" onclick="mostrarteclado_rest(18,'.$precio.')"  maxlength="40">
+                    <input type="number" class="form-control" id="folio" placeholder="Folio de autorización" onclick="mostrarteclado_rest(18,'.$precio.')"  maxlength="40">
                   </div>
                 </div>
                     
