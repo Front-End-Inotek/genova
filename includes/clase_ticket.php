@@ -437,6 +437,71 @@
         }
         return  $total;
       }
+      // Mostrar los conceptos del ticket
+      function mostrar_comanda($mesa_id,$ticket){
+        include_once("clase_inventario.php");
+        $inventario= NEW Inventario(0);
+
+        $sentencia = "SELECT * FROM concepto WHERE id_ticket = $ticket AND activo = 1";
+        $comentario="Mostrar los conceptos del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cantidad=0;
+        $total=0;
+        echo '<ul class="list-group altura_comanda">';//
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $producto= $inventario->obtener_id($fila['nombre']);
+          if(($cantidad%2)==0){
+            echo '<div href="#" class="list-group-item list-group-item-success" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
+              <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h6>
+              <h6 class="list-group-item-text"> Total: $'.$fila['total'].' </h6>
+            </div>';
+          }else{
+            echo '<div href="#" class="list-group-item list-group-item-info" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
+              <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h6>
+              <h6 class="list-group-item-text"> Total: $'.$fila['total'].' </h6>
+            </div>';
+          }
+          $total=$total+$fila['total'];
+          $cantidad++;
+          /*echo ' <a href="#" class="list-group-item list-group-item-info" onclick="herramienta_comanda('.$fila['id'].')">
+              <div class="row">
+                <div class="col-sm-5">
+                  <h5 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h5>
+                </div>
+                <div class="col-sm-3">
+                  <p class="list-group-item-text">Total: $'.$fila['total'].' </p>
+                </div>
+                <div class="col-sm-4">
+                  <button class="btn btn-success btn" href="#caja_herramientas" data-toggle="modal" onclick="editar_modal_producto_mesa('.$mesa_id.','.$fila['id'].')"> Editar</button>
+                  <button class="btn btn-primary btn" href="#caja_herramientas" data-toggle="modal" onclick="borrar_modal_producto_mesa('.$mesa_id.','.$fila['id'].')"> Quitar</button>
+                </div>
+              </div>
+            </a>';*/
+        }
+  
+        /*if($cantidad<12){
+          for ($i = $cantidad; $i <= 13; $i++) {
+              echo '<div class="panel-body"></div>';
+          }
+        }*/
+        echo '</ul>';
+        if($cantidad>0){
+          echo '<div class="row">
+            <div class="col-sm-6 fuente_menor_bolder margen_sup_pedir">
+            </div>
+            <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">
+              <h6 for="sel1">Total: $'.$total.'</h6>
+            </div>
+            <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">
+              <button type="button" id="boton_cobrar" class="btn btn-danger btn-block" onclick="cobrar_rest('.$mesa_id.','.$total.')">Cobrar</button>
+            </div>
+            <div class="col-sm-1 fuente_menor_bolder margen_sup_pedir">
+            </div>
+          </div><br>';
+        }
+  
+      }
     
   }
 ?>

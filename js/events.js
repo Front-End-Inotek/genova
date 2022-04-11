@@ -1,3 +1,4 @@
+var teclado = ['user', 'pass','matricula','comentario','matricula','personas','gasto_nombre','gasto_total','efectivo','cortesia','reporte','descuento','motivo','cantidad','modelo','color','recorte_total','tarjeta','autoriza'];
 x=$(document);
 x.ready(inicio);
 
@@ -3596,6 +3597,38 @@ function imprimir_ticket(mesa_id,estado){
 		error:problemas
 		});
 	return false;
+}
+
+// Mostrar teclado en caja
+function mostrarteclado_rest(ident,total){
+	$("#tecaldo").load("includes/teclado_rest.php?ident="+ident+"&total="+total);
+	//alert("Mostrar teclado");
+}
+
+// Agregar texto en el teclado emergente en caja//*
+function agregar_text_rest(ident,carac,total){
+	var entrada= document.getElementById(teclado[ident]).value;
+	var resultado;
+	if(carac=='*'){
+		resultado = entrada.slice(0, -1);
+	}else{
+		resultado = entrada.concat(carac);
+	}
+	document.getElementById(teclado[ident]).value =resultado;
+	suma_cobro_rest_caja(total);
+}
+
+// Sumar cobro de dinero de restaurante en caja
+function suma_cobro_rest_caja(precio){
+	var efectivo=$("#efectivo").val();
+	var cambio = efectivo-precio;
+	if(isNaN(cambio)){
+		cambio=0;
+	}
+	if(cambio<=0){
+		cambio=0;
+	}
+	document.getElementById("cambio").value =cambio;
 }
 
 //* Cupon *//

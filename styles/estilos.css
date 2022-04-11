@@ -207,6 +207,13 @@ a.topictitle:hover {
   border-radius: 5px;
   padding: 10px 0px 3px 0px;
 }
+.alinear_izq{
+  /*color: white;*/
+  background-color: #E9E9E9;
+  text-align: left;
+  border-radius: 0px;
+  padding: 0px 0px 0px 0px;
+}
 .encabezado_gris {
   background-color: #E9E9E9;
   border-radius: 5px;
@@ -330,6 +337,10 @@ a.topictitle:hover {
 .altura-rest_pedido{/* */
   height: 60.3em;
   overflow-y: scroll;
+}
+.altura_comanda{
+  height: 62.2em;
+  overflow-x: scroll;
 }
 .btn-square-md-rest{/* */
   background-color: #71db94;

@@ -609,6 +609,18 @@
           $sentencia;
         }
       }
+      // Obtener el id de un producto por medio de su nombre
+      function obtener_id($nombre){
+        $sentencia = "SELECT * FROM inventario WHERE nombre LIKE '%$nombre%' LIMIT 1";
+        $comentario="Obtener el id de un producto por medio de su nombre";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $id= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+        }
+        return $id;
+      }
              
   }
   /**
@@ -965,7 +977,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-       // Cambiar el estado del pedido para imprimir la comanda
+      // Cambiar el estado del pedido para imprimir la comanda
       function cambiar_estado($id_pedido){
         $sentencia = "UPDATE `pedido` SET
         `impreso` = '0' 
