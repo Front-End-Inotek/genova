@@ -3590,7 +3590,7 @@ function imprimir_ticket(mesa_id,estado){
 		url:"includes/imprimir_ticket.php",
 		data:datos,
 		beforeSend:loaderbar,
-		success:principal,
+		success:mesas_restaurante,
 		//success:problemas,
 		timeout:5000,
 		error:problemas

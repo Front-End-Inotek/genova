@@ -196,6 +196,18 @@
         }
         return $id_ticket;
       }
+      // Cambiar datos del ticket para imprimir el ticket una mesa
+      function cambiar_imprimir_ticket($id_ticket,$total){
+        $fecha= date("Y-m-d H:i");
+        $tiempo= time();
+        $sentencia = "UPDATE `ticket` SET
+        `fecha` = '$fecha',
+        `tiempo` = '$tiempo',
+        `total` = '$total'
+        WHERE `id` = '$id_ticket';";
+        $comentario="Cambiar datos del ticket para imprimir el ticket una mesa";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
              
   }
   /**
@@ -421,7 +433,7 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           $subtotal= $fila['total'];
-          $total= $total+$subtotal;
+          $total= $total + $subtotal;
         }
         return  $total;
       }

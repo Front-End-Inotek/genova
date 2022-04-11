@@ -5,9 +5,10 @@
   include_once("clase_ticket.php");
   $mesa= NEW  Mesa($_GET['mesa_id']);
   $inventario= NEW Inventario(0);
+  $concepto= NEW Concepto(0);
   $ticket= NEW Ticket(0);
   $ticket_id= $ticket->saber_id_ticket($mesa->mov);
-  $precio= $ticket->saber_total_mesa($ticket_id);
+  $precio= $concepto->saber_total_mesa($ticket_id);
   echo '
     <div class="row">
       <div class="col-sm-12" >
