@@ -98,9 +98,9 @@
     $comanda= $pedido_rest->saber_comanda($mov);
 
     if($_POST['forma_pago'] == 1){
-      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],$_POST['total_pago'],0,0,0,$descuento,$factuar,'','',$nueva_etiqueta,$resta,$comanda);
+      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],$_POST['total_pago'],0,0,0,$descuento,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
     }else{
-      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],0,0,$_POST['total_pago'],0,$descuento,$factuar,'','',$nueva_etiqueta,$resta,$comanda);
+      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],0,0,$_POST['total_pago'],0,$descuento,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
     }
 
     $cantidad= 1;

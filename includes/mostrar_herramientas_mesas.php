@@ -182,7 +182,7 @@
           echo '<div class="recibo btn-square-mesa-lg" onclick="mesa_imprimir_ticket('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
-                echo '<img src="images/recibo2.png"  class="center-block img-responsive">';
+                echo '<img src="images/recibo.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
               echo 'Imprimir Ticket';

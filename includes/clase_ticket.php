@@ -88,13 +88,20 @@
         }
       }
       // Guardar el ticket
-      function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda){
+      function guardar_ticket($mov,$hab_id,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda,$mesa){
         $fecha=date("Y-m-d H:i");
         $tiempo=time();
-        $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `id_mesa`, `corte`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
-        VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '0', '0', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '$comanda', '0');";
-        $comentario="Guardamos el ticket en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($mesa == 0){
+          $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `id_mesa`, `corte`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
+          VALUES ('$nueva_etiqueta', '$mov', '$hab_id', '0', '0', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '$comanda', '0');";
+          $comentario="Guardamos el ticket en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }else{
+          $sentencia = "INSERT INTO `ticket` (`etiqueta`, `mov`, `id_hab`, `id_mesa`, `corte`, `fecha`, `tiempo`, `id_usuario`, `forma_pago`, `total`, `pago`, `cambio`, `monto`, `descuento`, `total_descuento`, `facturado`, `baucher`, `comentario`, `impreso`, `resta`, `comanda`, `estado`)
+          VALUES ('$nueva_etiqueta', '$mov', '0', '$hab_id', '0', '$fecha', '$tiempo', '$id_usuario', '$forma_pago', '$total', '$pago', '$cambio', '$monto', '$descuento', '$total_descuento', '$facturar', '$folio', '$comentario', '$resta', '1', '$comanda', '0');";
+          $comentario="Guardamos el ticket en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }
         
         $id= $this->ultima_insercion();
         return $id;
@@ -407,7 +414,7 @@
       function saber_total_mesa($ticket){
         $sentencia = "SELECT * FROM concepto WHERE id_ticket = $ticket";
         //echo $sentencia;
-        $comentario="obtener el total del pedido";
+        $comentario="Obtener el total del pedido";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $total=0;
         $subtotal=0;

@@ -26,7 +26,7 @@
   }
 
   // Se agrega el pedido
-  $id_pedido= $pedido->pedir_rest($usuario->nombre,$_POST['mov'],$comentario,$mesa->nombre);
+  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
   $pedido_rest->agregar_pedido($id_pedido,$_POST['mov']);
 
   // Guardamos el ticket del pedido_rest del restaurante
@@ -38,7 +38,7 @@
           $labels->actualizar_etiqueta();
           $comanda= $pedido_rest->saber_comanda($_POST['mov']);
           // $_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario
-          $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],1,0,0,0,0,0,0,0,'',$comentario,$nueva_etiqueta,$resta,$comanda);
+          $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],1,0,0,0,0,0,0,0,'',$comentario,$nueva_etiqueta,$resta,$comanda,1);
           $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   }
   

@@ -129,27 +129,24 @@
                   //$sentencia = "SELECT id FROM ticket WHERE mov = $mov";
                   $sentencia = "SELECT id FROM ticket WHERE mov = $mov";
                   //echo $sentencia ;
-                  $comentario="obtener los productos vendidos";
+                  $comentario="Obtener los productos vendidos";
                   $consulta= $this->realizaConsulta($sentencia,$comentario);
                   while ($fila = mysqli_fetch_array($consulta))
                   {
                     $id_ticket= $fila['id'];
-                    $sentencia1 = "SELECT * FROM concepto WHERE id_ticket = $id_ticket AND activo = 0";
-                    //$sentencia1 = "SELECT * FROM perdido_rest WHERE movimiento = $mov AND activo =1";
+                    $sentencia1 = "SELECT * FROM concepto WHERE id_ticket = $id_ticket AND activo = 1";
+                    //$sentencia1 = "SELECT * FROM pedido_rest WHERE mov = $mov AND activo = 0";
                     $comentario1="Obtener los productos vendidos";
                     $consulta1= $this->realizaConsulta($sentencia1,$comentario1);
-                    while ($filas = mysqli_fetch_array($consulta1)){
-                        echo '<div>';
-                        if($usuario->nivel<=1){
-                          
-                         // echo '<button type="button" class="btn btn-danger" onclick="borrar_desde_hab('.$filas['id'].')">Borrar</button>';
-                        }
+                    while ($filas1 = mysqli_fetch_array($consulta1)){
+                      echo '<div>';
+                      if($usuario->nivel <= 1){
+                        // echo '<button type="button" class="btn btn-danger" onclick="borrar_desde_hab('.$filas1['id'].')">Borrar</button>';
+                      }
                       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-                      echo $filas['cantidad'].' -  '.$filas['nombre'].' -  $'.$filas['total'];
+                      echo $filas1['cantidad'].' -  '.$filas1['nombre'].' -  $'.$filas1['total'];
                       echo '</div>';
                     }
-                    //echo  $sentencia1;
-                    /**/
                     echo ' </div>';
                   }
                 echo '</div>

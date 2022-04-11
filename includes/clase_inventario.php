@@ -834,7 +834,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtener los datos del pedido restaurante cobrado
-      function saber_pedido_rest_cobro($mov,$mesa){
+      function saber_pedido_rest_cobro($mov,$id_mesa){
         $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND id_mesa = $id_mesa AND pagado = 0 AND pedido = 0 AND estado = 1";
         //echo $sentencia;
         $comentario="Obtener los datos del pedido restaurante cobrado";
@@ -895,7 +895,7 @@
       public $id_hab;
       public $id_mesa;
       public $tiempo;
-      public $comentarios;
+      public $comentario;
       public $impreso;
       public $recepcion;
       public $estado;
@@ -909,7 +909,7 @@
           $this->id_hab= 0;
           $this->id_mesa= 0;
           $this->tiempo= 0;
-          $this->comentarios= 0;
+          $this->comentario= 0;
           $this->impreso= 0;
           $this->recepcion= 0;
           $this->estado= 0;
@@ -924,7 +924,7 @@
             $this->id_hab= $fila['id_hab'];
             $this->id_mesa= $fila['id_mesa'];
             $this->tiempo= $fila['tiempo'];
-            $this->comentarios= $fila['comentarios'];
+            $this->comentario= $fila['comentario'];
             $this->impreso= $fila['impreso'];
             $this->recepcion= $fila['recepcion'];
             $this->estado= $fila['estado'];             
@@ -932,10 +932,11 @@
         }
       }
       // Agregar un pedido al restaurante
-      function pedir_rest($recepcion,$mov,$comentario,$nombre){
-        $tiempo=date("Y-m-d H:i");
-        $sentencia = "INSERT INTO `pedido` (`estado`, `impreso`, `recepcion`, `tiempo`, `mov`, `comentarios`, `mesa`)
-          VALUES ('0', '1','$recepcion', '$tiempo', '$mov', '$comentario', '$nombre');";
+      function pedir_rest($recepcion,$mov,$comentario,$id_mesa){
+        $tiempo= date("Y-m-d H:i");
+        $id= 0;
+        $sentencia = "INSERT INTO `pedido` (`mov`, `id_hab`, `id_mesa`, `tiempo`, `comentario`, `impreso`, `recepcion`, `estado`)
+        VALUES ('$mov', '0', '$id_mesa', '$tiempo', '$comentario', '1', '$recepcion', '0');";
         $comentario="Mostrar las categorias en el restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         

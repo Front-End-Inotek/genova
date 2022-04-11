@@ -145,3 +145,4 @@ VERSION 2.3
 -Agregar funciones en restaurante de mesas
 -Agregar tabla y bd de pedido
 -Acomodo en hacer pedido en mesa
+-Funciones en mesa ocupada

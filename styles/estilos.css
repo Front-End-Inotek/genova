@@ -553,6 +553,24 @@ a.topictitle:hover {
   font-size: 1.2em;
   color: white;
 }
+.cobrar{
+  text-align: center;
+  background-color: #02CCCF;
+  font-size: 1.2em;
+  color: white;
+}
+.personas{
+  text-align: center;
+  background-color: #00622c;
+  font-size: 1.2em;
+  color: white;
+}
+.recibo{
+  text-align: center;
+  background-color: #2f27a1;
+  font-size: 1.2em;
+  color: white;
+}
 .caja_mostrar_totales{
   overflow-x: auto;
 }
