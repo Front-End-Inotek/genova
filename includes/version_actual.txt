@@ -146,3 +146,4 @@ VERSION 2.3
 -Agregar tabla y bd de pedido
 -Acomodo en hacer pedido en mesa
 -Funciones en mesa ocupada
+-Poner nombre del hotel en corte
