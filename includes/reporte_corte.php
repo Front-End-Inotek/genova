@@ -1,5 +1,6 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  include_once("clase_configuracion.php");
   include_once("clase_ticket.php");
   include_once("clase_tipo.php");
   include_once("clase_usuario.php");
@@ -32,22 +33,28 @@
       // Cabecera de página
       function Header()
       {
+          $conf = NEW Configuracion(0);
           $ticket= NEW Ticket(0);
           $labels= NEW Labels(0);
+          $nombre= $conf->obtener_nombre();
           $nueva_etiqueta= $labels->obtener_corte();
           $nueva_etiqueta= $nueva_etiqueta - 1;
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
-          // Logo
-          $this->Image("../images/simbolo.png",10,10,25,25);
           // Arial bold 15
           $this->SetFont('Arial','B',10);
+          // Color de letra
+          $this->SetTextColor(0, 102, 205);
+          // Movernos a la derecha
+          $this->Cell(2);
+          // Nombre del Hotel
+          $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+          // Logo
+          $this->Image("../images/simbolo.png",10,18,25,25);
           // Salto de línea
           $this->Ln(16);
           // Movernos a la derecha
           $this->Cell(80);
-          // Color de letra
-          $this->SetTextColor(0, 102, 205);
           // Título
           $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,0,'C');
           // Salto de línea
@@ -135,7 +142,7 @@
   $nueva_etiqueta= $labels->obtener_corte();
   $nueva_etiqueta= $nueva_etiqueta - 1;
   //$pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,1,'C');
-  $pdf->Ln(6);
+  $pdf->Ln(12);
   $pdf->SetFillColor(99, 155, 219);
 
   // Datos dentro de la tabla hospedaje

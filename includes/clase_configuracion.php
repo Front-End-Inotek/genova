@@ -103,6 +103,19 @@
       $comentario="Modificar el nombre del sistema";
       $this->realizaConsulta($sentencia,$comentario);
     }
+    // Obtener el nombre del sistema
+    function obtener_nombre(){
+      $sentencia = "SELECT nombre FROM configuracion LIMIT 1";
+      $nombre= "";
+      $comentario="Obtener el nombre del sistema";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $nombre=$fila["nombre"];
+      }
+      return $nombre;
+    }
     
   }
 ?>
