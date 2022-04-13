@@ -77,10 +77,10 @@
     case 0:
       if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="ocupada btn-square-mesa-lg" onclick="mesa_disponible_asignar('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          echo '<div class="ocupada btn-square-lg" onclick="mesa_disponible_asignar('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
-                echo '<img src="images/reporte.png"  class="center-block img-responsive">';
+                //echo '<img src="images/reporte.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
               echo 'Asignar';
@@ -107,7 +107,7 @@
     case 1 :
       /*if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="desocupar btn-square-mesa-lg" onclick="mesa_desocupar_hospedaje('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          echo '<div class="desocupar btn-square-lg" onclick="mesa_desocupar_hospedaje('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/home.png"  class="center-block img-responsive">';
@@ -121,7 +121,7 @@
       }
       if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
-          echo '<div class="edo_cuenta btn-square-mesa-lg" onclick="estado_cuenta('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          echo '<div class="edo_cuenta btn-square-lg" onclick="estado_cuenta('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
@@ -135,10 +135,10 @@
       }*/
       if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="restaurante btn-square-mesa-lg" onclick="agregar_restaurante_mesa('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          echo '<div class="restaurante btn-square-lg" onclick="agregar_restaurante_mesa('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
-                echo '<img src="images/restaurant.png"  class="center-block img-responsive">';
+                //echo '<img src="images/restaurant.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
               echo 'Restaurante';
@@ -150,11 +150,11 @@
       if($user->nivel<=2 && $precio>0){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
           // Caja para cobrar anterior
-          //echo '<div class="cobrar btn-square-mesa-lg" onclick="mesa_cobrar_rest('.$_GET['mesa_id'].','.$_GET['estado'].')">';
-          echo '<div class="cobrar btn-square-mesa-lg" onclick="ver_caja_rest('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          //echo '<div class="cobrar btn-square-lg" onclick="mesa_cobrar_rest('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          echo '<div class="cobrar btn-square-lg" onclick="ver_caja_rest('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
-                echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+                //echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
               echo 'Cobrar';
@@ -165,10 +165,10 @@
       }
       if($user->nivel<=2){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="personas btn-square-mesa-lg" onclick="mesa_cambiar_personas('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          echo '<div class="personas btn-square-lg-doble" onclick="mesa_cambiar_personas('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
-                echo '<img src="images/persona.png"  class="center-block img-responsive">';
+                //echo '<img src="images/persona.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
               echo 'Cantidad Comensales';
@@ -179,10 +179,10 @@
       }
       if($user->nivel<=2 && $precio>0){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="recibo btn-square-mesa-lg" onclick="mesa_imprimir_ticket('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+          echo '<div class="recibo btn-square-lg-doble" onclick="mesa_imprimir_ticket('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
-                echo '<img src="images/recibo.png"  class="center-block img-responsive">';
+                //echo '<img src="images/recibo.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
               echo 'Imprimir Ticket';
