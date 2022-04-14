@@ -157,13 +157,18 @@
   $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche ".$numero_actual.' del '.$dia.' de '.$mes.' de '.$anio);
   $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
 
+  $pdf->Ln(4);
+  for ($i = 1; $i <= 40; $i++) {
+    $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
+  }
+
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
-  $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche_".$numero_actual.".pdf","F");
+  $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche_".$numero_actual.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
       //echo 'Reporte cargo noche';*/
       
   // Luego de guardar el reporte se cambia el estado cargo noche de todas las habitaciones a 0
-  $hab->estado_cargo_noche(0);
-  $cargo_noche->guardar_cargo_noche($_GET['usuario_id'],$total_final,$cantidad_hab);
+  //$hab->estado_cargo_noche(0);
+  //$cargo_noche->guardar_cargo_noche($_GET['usuario_id'],$total_final,$cantidad_hab);
 ?>
 

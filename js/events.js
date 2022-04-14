@@ -1673,7 +1673,7 @@ function cargo_noche(){
             type: "POST",
             dataType: "html",
             contentType: "application/x-www-form-urlencoded",
-            url:"includes/cargo_noche.php",
+            //url:"includes/cargo_noche.php",
             data:datos,
             beforeSend:loaderbar,
             success:principal,
@@ -1681,7 +1681,8 @@ function cargo_noche(){
             timeout:5000,
             error:problemas_sistema
         });
-    mostrar_cargo_noche_reporte();
+    window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+    //mostrar_cargo_noche_reporte();
     return false;
 }
 
@@ -3979,7 +3980,7 @@ function guardar_corte(){
             type: "POST",
             dataType: "html",
             contentType: "application/x-www-form-urlencoded",
-            url:"includes/guardar_corte.php",
+            //url:"includes/guardar_corte.php",
             data:datos,
             beforeSend:loaderbar,
             success:principal,
@@ -3987,8 +3988,8 @@ function guardar_corte(){
             timeout:5000,
             error:problemas_sistema
         });    
-    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
-    guardar_reporte_corte();
+    window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
+    //guardar_reporte_corte();
     return false;
 }
 

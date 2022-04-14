@@ -269,15 +269,20 @@
       $pdf->SetFillColor(99, 155, 219);
   }
 
+  $pdf->Ln(4);
+  for ($i = 1; $i <= 40; $i++) {
+    $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
+  }
+  
   $corte_id= $corte->ultima_insercion();
   // Cambiar concepto a inactivo
-  $concepto->cambiar_activo($_GET['usuario_id']);
+  //$concepto->cambiar_activo($_GET['usuario_id']);
   // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
-  $ticket->editar_estado($_GET['usuario_id'],$corte_id,1);
+  //$ticket->editar_estado($_GET['usuario_id'],$corte_id,1);
   
   $logs->guardar_log($_GET['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
-  $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","F");
+  $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_corte.pdf","I");
       //echo 'Reporte corte';*/
 ?>
