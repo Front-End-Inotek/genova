@@ -147,3 +147,4 @@ VERSION 2.3
 -Acomodo en hacer pedido en mesa
 -Funciones en mesa ocupada
 -Poner nombre del hotel en corte
+-Acomodo de todos los reportes con estilos nuevos

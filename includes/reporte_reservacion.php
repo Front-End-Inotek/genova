@@ -1,39 +1,59 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
-  date_default_timezone_set('America/Mexico_City');
+  include_once("clase_configuracion.php");
   include_once("clase_huesped.php");
   include_once("clase_reservacion.php");
   include_once('clase_log.php');
   $reservacion= NEW Reservacion(0);
   $logs = NEW Log(0);
-  //$logs->guardar_log($_GET['usuario_id'],"Reporte reservacion: ". $_GET['id']);
  
   require('../fpdf/fpdf.php');
-  // Colocar hoja con su logo y pie de página
+  
   class PDF extends FPDF
   {
       // Cabecera de página
       function Header()
       {
-          // Logo y pie de página
-          $this->Image("../images/hoja_margen.png",4.8,0,205);
-          $this->Ln(22);
+          $conf = NEW Configuracion(0);
+          $nombre= $conf->obtener_nombre();
+          // Marco primera pagina
+          $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+          // Arial bold 15
+          $this->SetFont('Arial','B',10);
+          // Color de letra
+          $this->SetTextColor(0, 102, 205);
+          // Movernos a la derecha
+          $this->Cell(2);
+          // Nombre del Hotel
+          $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+          // Logo
+          $this->Image("../images/simbolo.png",10,18,25,25);
+          // Salto de línea
+          $this->Ln(24);
+          // Movernos a la derecha
+          $this->Cell(80);
+          // Título
+          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'RESERVACIÓN '.$_GET['id']),0,0,'C');
+          // Salto de línea
+          $this->Ln(18);
+      }
+      
+      // Pie de página
+      function Footer()
+      {
+          // Posición: a 1,5 cm del final
+          $this->SetY(-15);
+          // Arial italic 8
+          $this->SetFont('Arial','',8);
+          // Número de página
+          $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
   }
-
-  $pdf = new PDF();
-  $pdf->AddPage();
   
-  // Titulos y datos
-  $y = 16;
-  $x = 10;
-  $pdf->SetXY($x,$y);
-  $pdf->SetFont('Arial','B',15);
-  $pdf->SetTextColor(0,0,0);
-  $pdf->Cell(192,7,iconv("UTF-8", "ISO-8859-1",'RESERVACIÓN '.$_GET['id']),0,1,'C');
-  $pdf->Ln(4);
-
   // Datos dentro de la reservacion
+  $pdf = new PDF();
+  $pdf->AliasNbPages();
+  $pdf->AddPage();
   $pdf->SetFont('Arial','',9);
   $consulta= $reservacion->datos_reservacion($_GET['id']);
   while ($fila = mysqli_fetch_array($consulta))
@@ -88,7 +108,7 @@
   // Datos de reservacion
   $huesped= NEW Huesped($id_huesped);  
   $x= 20;
-  $y=$pdf->GetY() + 7;
+  $y=$pdf->GetY() + 0;
   $pdf->SetXY($x,$y);
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Fecha Entrada: '.$fecha_entrada),0,0,'L');
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Fecha Salida: '.$fecha_salida),0,1,'L');
@@ -169,8 +189,9 @@
   $x = 20;
   $pdf->SetXY($x,$y);
   $pdf->SetFont('Arial','B',13);
-  $pdf->SetTextColor(0,0,0);
+  $pdf->SetTextColor(0, 102, 205);
   $pdf->Cell(192,7,iconv("UTF-8", "ISO-8859-1",'DATOS HUÉSPED'),0,1,'L');
+  $pdf->SetTextColor(0,0,0);
   $pdf->SetFont('Arial','',9);
   $pdf->Ln(2);
   
@@ -212,9 +233,29 @@
   $pdf->SetX($x);
   $pdf->SetXY($x,$y_final);
   $pdf->MultiCell(80,5,iconv("UTF-8", "ISO-8859-1",'Comentarios adicionales: '.$huesped->comentarios),0,'J');
+  
+  $pdf->Ln(4);
+  for ($i = 1; $i <= 40; $i++) {
+    $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
+    if($i == 13){
+        $pdf->Ln(4);
+        $pdf->SetFillColor(99, 155, 219);
+        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
+        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+        $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
+        $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
+        $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'%'),0,0,'C',True);
+        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
+    }
+  }
 
+  $logs->guardar_log($_GET['usuario_id'],"Reporte reservacion: ". $_GET['id']);
   //$pdf->Output("reporte_reservacion.pdf","I");
-  $pdf->Output("reporte_cargo_noche_".$_GET['id'].".pdf","I");
+  $pdf->Output("reporte_reservacion_".$_GET['id'].".pdf","I");
   //$pdf->Output("../reportes/reservaciones/reporte_reservacion.pdf","F");
       //echo 'Reporte reservacion';*/
 ?>

@@ -1,91 +1,94 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
-  include_once('clase_log.php');
+  include_once("clase_configuracion.php");
   include_once('clase_cargo_noche.php');
   include_once("clase_hab.php");
   include_once("clase_huesped.php");
   include_once('clase_tarifa.php');
-
-  $logs = NEW Log(0);
+  include_once("clase_usuario.php");
+  include_once('clase_log.php');
   $cargo_noche = NEW Cargo_noche(0);
   $hab= NEW Hab(0);
   $huesped= NEW Huesped(0);
   $tarifa= NEW Tarifa(0);
-  //86400
+  $logs = NEW Log(0);
 
   require('../fpdf/fpdf.php');
-  $pdf = new FPDF();
-  // Primera pagina
-  $pdf->AddPage();
-  // Marco primera pagina
-  //$pdf->Image($fondo_uno,4.8,9,205);
-  // Logo
-  //$pdf->Image($imagen,10,8,45);
-  // Salto de línea
-  //$pdf->Ln(1);
+  
+  class PDF extends FPDF
+  {
+      // Cabecera de página
+      function Header()
+      {
+          $conf = NEW Configuracion(0);
+          $usuario= NEW Usuario(0);
+          $logs = NEW Log(0);
+
+          $this->SetFont('Arial','B',8);
+          $this->SetTextColor(0,0,0);
+          $fecha_actual = time();
+          $fecha = date("d-m-Y",$fecha_actual);
+          $dia = substr($fecha, 0, 2);
+          $mes = substr($fecha, 3, 2);
+          $mes= $logs->formato_fecha($mes);
+          $anio = substr($fecha, 6, 4);
+          $nombre= $conf->obtener_nombre();
+          $realizo_usuario= $usuario->obtengo_nombre_completo($_GET['usuario_id']);
+
+          // Marco primera pagina
+          $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+          // Arial bold 15
+          $this->SetFont('Arial','B',10);
+          // Color de letra
+          $this->SetTextColor(0, 102, 205);
+          // Movernos a la derecha
+          $this->Cell(2);
+          // Nombre del Hotel
+          $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+          // Datos y fecha
+          $this->SetFont('Arial','',10);
+          $this->SetTextColor(0,0,0);
+          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
+          // Logo
+          $this->Image("../images/simbolo.png",10,18,25,25);
+          // Salto de línea
+          $this->Ln(14);
+          // Movernos a la derecha
+          $this->Cell(80);
+          // Título
+          $this->SetFont('Arial','B',10);
+          $this->SetTextColor(0, 102, 205);
+          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CARGO POR NOCHE'),0,0,'C');
+          // Salto de línea
+          $this->Ln(18);
+      }
+      
+      // Pie de página
+      function Footer()
+      {
+          // Posición: a 1,5 cm del final
+          $this->SetY(-15);
+          // Arial italic 8
+          $this->SetFont('Arial','',8);
+          // Número de página
+          $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
+      }
+  }
 
   // Fecha y datos generales 
-  $pdf->SetFont('Arial','B',8);
-  $pdf->SetTextColor(0,0,0);
+  $pdf = new PDF();
+  $pdf->AliasNbPages();
+  $pdf->AddPage();
   $fecha_actual = time();
   $fecha = date("d-m-Y",$fecha_actual);
   $dia = substr($fecha, 0, 2);
   $mes = substr($fecha, 3, 2);
-  switch ($mes) {
-      case "01":
-          $mes = "enero";
-          break;
-      case "02":
-          $mes = "febrero";
-          break;
-      case "03":
-          $mes = "marzo";
-          break;
-      case "04":
-          $mes = "abril";
-          break;
-      case "05":
-          $mes = "mayo";
-          break;
-      case "06":
-          $mes = "junio";
-          break;
-      case "07":
-          $mes = "julio";
-          break;
-      case "08":
-          $mes = "agosto";
-          break;
-      case "09":
-          $mes = "septiembre";
-          break;
-      case "10":
-          $mes = "octubre";
-          break;
-      case "11":
-          $mes = "noviembre";
-          break;
-      case "12":
-          $mes = "diciembre";
-          break;            
-      default:
-          echo "No existe este mes";
-  }
+  $mes= $logs->formato_fecha($mes);
   $anio = substr($fecha, 6, 4);
-  
-  // Datos y fecha
-  $pdf->SetFont('Arial','',10);
-  $pdf->SetTextColor(0,0,0);
-  $pdf->Cell(192,5,iconv("UTF-8", "ISO-8859-1",$dia.' de '.$mes.' de '.$anio),0,1,'R');
-  $pdf->Ln(4);
 
   // Titulos tabla -277
-  $pdf->SetFont('Arial','B',10);
-  $pdf->SetTextColor(0, 102, 205);
-  $pdf->Cell(192,6.5,iconv("UTF-8", "ISO-8859-1",'REPORTE CARGO POR NOCHE'),0,1,'C');
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
-  $pdf->Ln(4);
   $pdf->SetFillColor(99, 155, 219);
   $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
@@ -154,18 +157,32 @@
   $pdf->SetFont('Arial','',10);
   $numero_actual= $cargo_noche->ultima_insercion();
   $numero_actual++;
-  $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche ".$numero_actual.' del '.$dia.' de '.$mes.' de '.$anio);
   $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
 
   $pdf->Ln(4);
   for ($i = 1; $i <= 40; $i++) {
     $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
+    if($i == 24){
+        $pdf->Ln(4);
+        $pdf->SetFillColor(99, 155, 219);
+        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
+        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+        $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
+        $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
+        $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'%'),0,0,'C',True);
+        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
+    }
   }
 
+  $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche: ".$numero_actual.' del '.$dia.' de '.$mes.' de '.$anio);
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche_".$numero_actual.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");
-      //echo 'Reporte cargo noche';*/
+      //echo 'Reporte cargo noche';*/ I
       
   // Luego de guardar el reporte se cambia el estado cargo noche de todas las habitaciones a 0
   //$hab->estado_cargo_noche(0);

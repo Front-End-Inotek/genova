@@ -826,7 +826,7 @@
           <div class="col-sm-1"><button class="btn btn-primary btn-block" onclick="reporte_reservacion_por_dia('.$dia.')"> Reporte</button></div>
           <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button></div>
           <div class="col-sm-1"></div>
-          <div class="col-sm-3"><h4><p><a href="#" class="text-dark">Dia '.$fecha_dia_dia.'-'.$fecha_dia_mes.'-'.$fecha_dia_anio.' - '.$porcentaje.'% de Ocupación</a></p></h4></div>
+          <div class="col-sm-3"><h4><p><a href="#" class="text-dark">Día '.$fecha_dia_dia.'-'.$fecha_dia_mes.'-'.$fecha_dia_anio.' - '.$porcentaje.'% de Ocupación</a></p></h4></div>
         </div><br>';
       }
       // Mostramos las reservaciones por dia
@@ -1375,7 +1375,7 @@
         INNER JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
-        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND reservacion.estado = 2 ORDER BY reservacion.id DESC";
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND (reservacion.estado = 2 OR reservacion.estado = 1) ORDER BY reservacion.id DESC";
         $comentario="Mostrar los datos de la reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

@@ -983,10 +983,6 @@ function busqueda_reservacion_combinada_por_dia(){
 
 // Generar reporte en ver reservaciones por dia
 function reporte_reservacion_por_dia(dia){
-    /*var a_buscar= encodeURI(a_buscar);
-    var a_buscar= json_encode(a_buscar);
-    var a_buscar=encodeURIComponent(a_buscar);
-    window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id+"&a_buscar="+a_buscar);*/
     var usuario_id=localStorage.getItem("id");
     window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id);
 }
