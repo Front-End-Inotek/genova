@@ -3325,6 +3325,11 @@ function pedir_rest_cobro_directo(total,hab_id,estado,mov){
    $("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
 }
 
+// Pedir restaurante el cobro se carga a la habitacion
+function pedir_rest_cobro_hab(total,hab_id,estado,mov){
+    $("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro_hab.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+ }
+
 // Pedir restaurante cobro en mesa 
 function pedir_rest_cobro_mesa(total,hab_id,estado,mov){
 	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro_mesa.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
@@ -3427,7 +3432,6 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                                     });
                                     return false;
                     }else{
-                        // QUITAR ICONOS
                         var datos = {
                             "efectivo":efectivo,
                             "cambio": cambio,

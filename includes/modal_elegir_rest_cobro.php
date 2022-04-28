@@ -25,13 +25,13 @@
           echo '</div>';
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-            echo '<div class="edo_cuenta btn-square-lg-doble" onclick="detalletiempo('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].',0)">';
+            echo '<div class="edo_cuenta btn-square-lg-doble" onclick="pedir_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/persona.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
-              echo 'Agregar Cargo';
+              echo 'Cargo Habitación';
             echo '</div>';
             echo '</br>';
           echo '</div>';
