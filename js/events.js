@@ -3313,7 +3313,16 @@ function guardar_inventario(){
 
 // Pedir restaurante cobro 
 function pedir_rest_cobro(total,hab_id,estado,mov){
-	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+    if(mov == 0){
+        $("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+    }else{
+        $("#mostrar_herramientas").load("includes/modal_elegir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+    }
+}
+
+// Pedir restaurante cobro directo
+function pedir_rest_cobro_directo(total,hab_id,estado,mov){
+   $("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
 }
 
 // Pedir restaurante cobro en mesa 
@@ -3408,7 +3417,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                                       type: "POST",
                                       dataType: "html",
                                       contentType: "application/x-www-form-urlencoded",
-                                      //url:"includes/aplicar_rest_cobro.php",
+                                      //url:"includes/aplicar_rest_cobro.php",// BIEN
                                       data:datos,
                                       beforeSend:loaderbar,
                                       success:principal,
