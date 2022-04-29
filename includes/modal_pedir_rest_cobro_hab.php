@@ -1,6 +1,11 @@
 <?php
   include_once("clase_hab.php");
+  include_once("clase_huesped.php");
+  include_once("clase_movimiento.php");
   $hab= NEW Hab($_GET['hab_id']);
+  $movimiento = NEW Movimiento(0);
+  $id_huesped= $movimiento->saber_id_huesped($_GET['mov']);
+  $huesped= NEW Huesped($id_huesped);  
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -10,8 +15,11 @@
     </div><br>
 
     <div class="modal-body">';
-      //$mostrar = $huesped->obtengo_nombre($_GET['id']);
-      echo '¿Realizar el cargo de $'.number_format($_GET['total'], 2).' a la habitación '.$hab->nombre.'?';
+      if($id_huesped != 0){
+        echo '¿Realizar el cargo de $'.number_format($_GET['total'], 2).' a '.$huesped->nombre.' '.$huesped->apellido.' a la habitación '.$hab->nombre.'?';
+      }else{
+        echo '¿Realizar el cargo de $'.number_format($_GET['total'], 2).' a la habitación '.$hab->nombre.'?';
+      }
       echo '
     </div><br>   
 

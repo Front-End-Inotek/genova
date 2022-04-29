@@ -3380,7 +3380,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
     if(precio < total && precio >0){
         total = precio;
     }
-    alert(total);
+    //alert(total);
     total= parseFloat(total);
     if(total > total_descuento){
         total_final= total_descuento;
@@ -3479,6 +3479,59 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
 	}else{
 		alert("La cantidad pagada con tarjeta u otro metodo es demasiada");
 	}
+}
+
+// Aplicar el cobro en pedido restaurante enviado a una hab
+function aplicar_rest_cobro_hab(total,hab_id,estado,mov,mesa){
+    var usuario_id=localStorage.getItem("id");
+
+    //total - hab_id - estado - mov - mesa
+    efectivo= 0;
+    cambio= 0;
+	monto= 0;
+    forma_pago= 1;
+    folio= "";
+    descuento= 0;
+    comentario= "";
+    total_descuento= 0;
+	total= 0;
+    total_final= 0;
+	total_pago= efectivo+monto;
+
+    var datos = {
+        "efectivo":efectivo,
+        "cambio": cambio,
+        "monto": monto,
+        "forma_pago": forma_pago,
+        "folio": folio,
+        "total_pago": total_pago,
+        "descuento": descuento,
+        "total_descuento": total_descuento,
+        "total_final": total_final,
+        "tota_pago": total_pago,
+        "cambio": cambio,
+        "total": total,
+        "comentario": comentario,
+        "hab_id": hab_id,
+        "mesa": mesa,
+        "estado": estado,
+        "mov": mov,
+        "usuario_id": usuario_id,
+            };
+            $.ajax({
+                  async:true,
+                  type: "POST",
+                  dataType: "html",
+                  contentType: "application/x-www-form-urlencoded",
+                  url:"includes/aplicar_rest_cobro_hab.php",
+                  data:datos,
+                  beforeSend:loaderbar,
+                  success:principal,
+                  //success:problemas_sistema,
+                  timeout:5000,
+                  error:problemas_sistema
+                });
+                return false;
 }
 
 // Aplicar el cobro en pedido restaurante
