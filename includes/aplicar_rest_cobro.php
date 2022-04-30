@@ -81,16 +81,11 @@
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
   $comanda= $pedido_rest->saber_comanda($_POST['mov']);
-  // Se guarda ticket de forma directa
-  if($_POST['mov'] == 0){
-          $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda,0);
-  }else{// Se guarda ticket desde una habitacion
-          $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda,0);
-  }
+  $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda,0);
   $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
-  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov']);
+  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],0);
   while($fila = mysqli_fetch_array($consulta))
   {
       $nombre= $inventario->obtengo_nombre($fila['id_producto']);
@@ -120,6 +115,6 @@
   if($_POST['mov'] == 0){
           $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
   }else{
-          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);
+          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);// DUDA CON MESA
   }
 ?>

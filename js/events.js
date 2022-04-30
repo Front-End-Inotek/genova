@@ -3482,38 +3482,12 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
 }
 
 // Aplicar el cobro en pedido restaurante enviado a una hab
-function aplicar_rest_cobro_hab(total,hab_id,estado,mov,mesa){
+function aplicar_rest_cobro_hab(total,hab_id,estado,mov){
     var usuario_id=localStorage.getItem("id");
 
-    //total - hab_id - estado - mov - mesa
-    efectivo= 0;
-    cambio= 0;
-	monto= 0;
-    forma_pago= 1;
-    folio= "";
-    descuento= 0;
-    comentario= "";
-    total_descuento= 0;
-	total= 0;
-    total_final= 0;
-	total_pago= efectivo+monto;
-
     var datos = {
-        "efectivo":efectivo,
-        "cambio": cambio,
-        "monto": monto,
-        "forma_pago": forma_pago,
-        "folio": folio,
-        "total_pago": total_pago,
-        "descuento": descuento,
-        "total_descuento": total_descuento,
-        "total_final": total_final,
-        "tota_pago": total_pago,
-        "cambio": cambio,
         "total": total,
-        "comentario": comentario,
         "hab_id": hab_id,
-        "mesa": mesa,
         "estado": estado,
         "mov": mov,
         "usuario_id": usuario_id,
