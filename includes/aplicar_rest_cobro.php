@@ -85,7 +85,7 @@
   $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
-  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov']);
+  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],0);
   while($fila = mysqli_fetch_array($consulta))
   {
       $nombre= $inventario->obtengo_nombre($fila['id_producto']);
@@ -115,6 +115,6 @@
   if($_POST['mov'] == 0){
           $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
   }else{
-          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);
+          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);// DUDA CON MESA
   }
 ?>

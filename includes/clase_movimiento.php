@@ -228,6 +228,19 @@
         }
         return $detalle_realiza;
       }
+      // Obtener el id de huesped de un movimiento
+      function saber_id_huesped($id){
+        $id_huesped= 0;
+        $sentencia = "SELECT id_huesped FROM movimiento WHERE id = $id LIMIT 1";
+        $comentario="Obtener el id de huesped de un movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_huesped= $fila['id_huesped'];
+        }
+        return $id_huesped;
+      }
       // Obtener el id de reservacion de un movimiento
       function saber_id_reservacion($id){
         $id_reservacion= 0;
