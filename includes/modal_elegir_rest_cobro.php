@@ -43,5 +43,5 @@
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
     </div>
-  </div>';//
+  </div>';
 ?>
