@@ -3457,7 +3457,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                                       type: "POST",
                                       dataType: "html",
                                       contentType: "application/x-www-form-urlencoded",
-                                      //url:"includes/aplicar_rest_cobro.php",
+                                      //url:"includes/cobrar_rest_cobro_mesa.php",
                                       data:datos,
                                       beforeSend:loaderbar,
                                       success:mesas_restaurante,
