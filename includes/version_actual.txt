@@ -148,4 +148,5 @@ VERSION 2.3
 -Funciones en mesa ocupada
 -Poner nombre del hotel en corte
 -Acomodo de todos los reportes con estilos nuevos
--Acomodo de pagar directo o agregar cargo a la habitacion en restaurante hab y en mesa
+-Acomodo de pagar directo o agregar cargo a la habitacion en restaurante hab
+-Acomodo de pagar directo o agregar cargo a la habitacion en restaurante mesa
