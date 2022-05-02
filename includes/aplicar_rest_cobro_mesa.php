@@ -32,7 +32,7 @@
   // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante
   $resta= 1;
-  $ticket_id= $ticket->buscar_id_ticket($_POST['mov'],$_POST['hab_id']);// aun no se si poner k este en estado 0 u 1 el ticket CHECAR
+  $ticket_id= $ticket->buscar_id_ticket($_POST['mov'],$_POST['hab_id']);// aun no se si poner k este en estado 0(creo) u 1 el ticket CHECAR
   if($ticket_id == 0){
           $nueva_etiqueta= $labels->obtener_etiqueta();
           $labels->actualizar_etiqueta();
@@ -71,5 +71,5 @@
   }*/ //Checar
 
   // Se guarda dependiendo si se hace el pedido de forma directa o desde una mesa
-  //$logs->guardar_log($_POST['usuario_id'],"Pedir restaurante en mesa: ". $mesa->nombre);
+  $logs->guardar_log($_POST['usuario_id'],"Pedir restaurante en mesa: ". $mesa->nombre);
 ?>
