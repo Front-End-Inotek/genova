@@ -13,7 +13,6 @@
   $pedido_rest= NEW Pedido_rest(0);
   $pedido= NEW Pedido(0);
   $concepto= NEW Concepto(0);
-  $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
 
@@ -25,10 +24,10 @@
           $comentario= urldecode($_POST['comentario']);
   }
   if(empty($_POST['folio'])){
-        //echo 'La variable esta vacia';
-        $folio= '';
+          //echo 'La variable esta vacia';
+          $folio= '';
   }else{
-        $folio= urldecode($_POST['folio']);
+          $folio= urldecode($_POST['folio']);
   }
   if(is_numeric($_POST['total_final'])){
           $total_final=$_POST['total_final'];
@@ -60,6 +59,11 @@
   }else{
           $total_descuento= 0;
   }
+  if($_POST['forma_pago'] == 1){
+          $forma_pago= 1;
+  }else{
+          $forma_pago= $_POST['forma_pago'];
+  }
   if($_POST['forma_pago'] == 2){
           $factuar= 1;
   }else{
@@ -74,7 +78,7 @@
   // Actualizamos datos del ticket del pedido_rest del restaurante
   $ticket_id= $ticket->saber_id_ticket($mesa->mov);
   //$total_calculo= $concepto->saber_total_mesa($ticket_id);
-  $ticket->cambiar_imprimir_ticket($ticket_id,$total_final);
+  $ticket->actualizar_ticket($ticket_id,$_POST['usuario_id'],$forma_pago,$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario);
 
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
   $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],0);
@@ -102,7 +106,7 @@
   // Se guarda el cobro del pedido de restaurante al momento en la mesa
   $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en mesa: ". $mesa->nombre);
 
-  /// FINAL A HAB
+  /// FINAL A HAB ///
   // Se guarda el cargo del pedido de restaurante a una habitacion desde una mesa
   $logs->guardar_log($_POST['usuario_id'],"Cargo de cobro restaurante en habitacion: ". $hab->nombre." de la mesa ". $mesa->nombre);
 ?>
