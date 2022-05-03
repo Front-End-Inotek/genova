@@ -17,6 +17,7 @@
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
 
+  // Cobro de restaurante al momento en la mesa
   if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';
           $comentario= '';
@@ -69,11 +70,6 @@
   }else{
           $efectivo_pago= 0;
   }
-
-  // Se agrega el pedido
-  //$id_pedido= $pedido->pedir_rest($usuario->nombre,$_POST['mov'],$comentario,$hab->nombre);
-  //$pedido_rest->agregar_pedido($id_pedido,$_POST['mov']);
-  // SABER PEDIDO??
   
   // Actualizamos datos del ticket del pedido_rest del restaurante
   $ticket_id= $ticket->saber_id_ticket($mesa->mov);
@@ -93,23 +89,20 @@
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
   }
 
-  // Se editan estados y se imprime
+  // Se sabe el pedido, editan estados y se imprime
+  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['hab_id'])
   $pagado= 1;
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-  $pedido->cambiar_estado_pedido($id_pedido);
-  $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
   
   // Imprimir ticket
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }
 
-  // Se guarda dependiendo si se hace el pedido_rest de forma directa o desde una habitacion
-  if($_POST['mov'] == 0){
-          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
-  }else{
-          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);// DUDA CON MESA
-  }
+  // Se guarda el cobro del pedido de restaurante al momento en la mesa
+  $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en mesa: ". $mesa->nombre);
 
-  //if($mesa == 0){
+  /// FINAL A HAB
+  // Se guarda el cargo del pedido de restaurante a una habitacion desde una mesa
+  $logs->guardar_log($_POST['usuario_id'],"Cargo de cobro restaurante en habitacion: ". $hab->nombre." de la mesa ". $mesa->nombre);
 ?>

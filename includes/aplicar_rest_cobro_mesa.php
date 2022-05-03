@@ -16,9 +16,8 @@
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
-  ////total,hab_id,estado,mov
-
-  if(empty($_POST['comentario'])){
+  
+  // Pedido de restaurante en mesa que luego se cobrara al final
           //echo 'La variable esta vacia';
           $comentario= '';
   }else{
@@ -70,6 +69,6 @@
       $ticket->cambiar_estado($ticket_id);
   }*/ //Checar
 
-  // Se guarda dependiendo si se hace el pedido de forma directa o desde una mesa
+  // Se guarda el pedido de restaurante en mesa que luego se cobrara al final
   $logs->guardar_log($_POST['usuario_id'],"Pedir restaurante en mesa: ". $mesa->nombre);
 ?>

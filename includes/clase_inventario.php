@@ -985,6 +985,18 @@
         $comentario="Cambiar el estado del pedido para imprimir la comanda";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Obtener el id del pedido de la mesa actual
+      function obtener_pedido($mov,$id_mesa){
+        $sentencia= "SELECT id FROM pedido WHERE mov = $mov AND id_mesa = $id_mesa AND estado = 0 ORDER BY id DESC LIMIT 1";
+        $id= 0;
+        $comentario="Obtener el id del pedido de la mesa actual";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+        }
+        return $id;
+      }
 
   }
 ?>

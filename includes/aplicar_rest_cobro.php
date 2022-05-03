@@ -15,7 +15,7 @@
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
 
-  // Cobro de restaurante pago directo al momento y directo en la hab
+  // Cobro de restaurante pago al momento de forma directa y directa en la habitacion
   if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';
           $comentario= '';
@@ -112,13 +112,11 @@
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }
-
-  // Se guarda dependiendo si se hace el pedido_rest de forma directa o desde una habitacion
+ 
+  // Se guarda dependiendo si se hace el cobro de restaurante al momento de forma directa o directa en la habitacion
   if($_POST['mov'] == 0){
           $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante directo");
   }else{
-          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);// DUDA CON MESA
+          $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);
   }
-
-  //if($mesa == 0){
 ?>
