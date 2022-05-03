@@ -15,6 +15,7 @@
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
 
+  // Cobro de restaurante pago directo al momento y directo en la hab
   if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';
           $comentario= '';
@@ -92,6 +93,7 @@
       $precio= $inventario->obtengo_precio($fila['id_producto']);
       $categoria= $inventario->obtengo_categoria($fila['id_producto']);
       $cantidad= $inventario->cantidad_inventario($fila['id_producto']);
+      // Acomodar el inventario en cantidad e historial
       $historial= $inventario->cantidad_historial($fila['id_producto']);
       $cantidad_nueva= $cantidad - $fila['cantidad'];
       $historial_nuevo= $historial + $fila['cantidad'];
