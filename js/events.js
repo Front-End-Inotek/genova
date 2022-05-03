@@ -3481,6 +3481,11 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
     }
 }
 
+// Datos del modal de confirmacion de cargar restaurante cobro 
+function modal_cargar_rest_cobro(total,hab_id,estado,mov){
+    $("#mostrar_herramientas").load("includes/modal_cargar_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+}
+
 // Aplicar el cobro en pedido restaurante enviado a una hab
 function aplicar_rest_cobro_hab(total,hab_id,estado,mov){
     var usuario_id=localStorage.getItem("id");
