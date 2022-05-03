@@ -3244,7 +3244,6 @@ function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa){
         "mesa": mesa,
 		"usuario_id": usuario_id,
 		};
-
 	$.ajax({
 		async:true,
 		type: "POST",
@@ -3280,17 +3279,17 @@ function guardar_inventario(){
 			//$('#boton_inventario').hide();
 			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
-			 	  "nombre": nombre,
-				  "descripcion": descripcion,
-				  "categoria": categoria,
-                  "precio": precio,
-                  "precio_compra": precio_compra,
-                  "stock": stock,
-                  "inventario": inventario,
-                  "bodega_inventario": bodega_inventario,
-                  "bodega_stock": bodega_stock,
-                  "clave": clave,
-                  "usuario_id": usuario_id,
+			 	"nombre": nombre,
+				"descripcion": descripcion,
+				"categoria": categoria,
+                "precio": precio,
+                "precio_compra": precio_compra,
+                "stock": stock,
+                "inventario": inventario,
+                "bodega_inventario": bodega_inventario,
+                "bodega_stock": bodega_stock,
+                "clave": clave,
+                "usuario_id": usuario_id,
 				};
 			$.ajax({
 				  async:true,
@@ -3305,7 +3304,7 @@ function guardar_inventario(){
                   timeout:5000,
                   error:problemas_sistema
 				});
-				return false;
+			return false;
 			}else{
 				alert("Campos incompletos");
 			}
@@ -3376,6 +3375,9 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
 	if(isNaN(descuento)){
 		descuento= 0;
 	}
+    if(monto <= 0){
+        forma_pago= 1;
+    }
     var precio=$("#total").val();
     if(precio < total && precio >0){
         total = precio;
@@ -3387,16 +3389,14 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
     }else{
         total_final= total;
     }
-    if(forma_pago == 0){
-        forma_pago=1;
-    }
-	var total_pago= efectivo+monto;
-	if(monto <= total_final){
-		if(total_pago >= total_final){
+	var total_pago= efectivo + monto;
+
+    // Checar si el cobro es en mesa o no
+    if(monto <= total_final){
+        if(total_pago >= total_final){
             if(monto>0 && forma_pago>1 || efectivo> 0 && forma_pago==1){
                 if(forma_pago==2 && folio.length >0 || forma_pago>2 || efectivo>=total_final){
-                    // Checar si el cobro es en mesa o no
-                    if($mesa == 0){
+                    if(mesa == 0){
                         var datos = {
                             "efectivo":efectivo,
                             "cambio": cambio,
@@ -3416,21 +3416,21 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             "estado": estado,
                             "mov": mov,
                             "usuario_id": usuario_id,
-                                };
-                                $.ajax({
-                                      async:true,
-                                      type: "POST",
-                                      dataType: "html",
-                                      contentType: "application/x-www-form-urlencoded",
-                                      //url:"includes/aplicar_rest_cobro.php",// BIEN
-                                      data:datos,
-                                      beforeSend:loaderbar,
-                                      success:principal,
-                                      //success:problemas_sistema,
-                                      timeout:5000,
-                                      error:problemas_sistema
-                                    });
-                                    return false;
+                            };
+                        $.ajax({
+                            async:true,
+                            type: "POST",
+                            dataType: "html",
+                            contentType: "application/x-www-form-urlencoded",
+                            //url:"includes/aplicar_rest_cobro.php",
+                            data:datos,
+                            beforeSend:loaderbar,
+                             success:principal,
+                            //success:problemas_sistema,
+                            timeout:5000,
+                            error:problemas_sistema
+                            });
+                        return false;
                     }else{
                         var datos = {
                             "efectivo":efectivo,
@@ -3451,34 +3451,39 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             "estado": estado,
                             "mov": mov,
                             "usuario_id": usuario_id,
-                                };
-                                $.ajax({
-                                      async:true,
-                                      type: "POST",
-                                      dataType: "html",
-                                      contentType: "application/x-www-form-urlencoded",
-                                      //url:"includes/cobrar_rest_cobro_mesa.php",
-                                      data:datos,
-                                      beforeSend:loaderbar,
-                                      success:mesas_restaurante,
-                                      //success:problemas,
-                                      timeout:5000,
-                                      error:problemas
-                                    });
-                                    return false;
-                    }
+                            };
+                        $.ajax({
+                            async:true,
+                            type: "POST",
+                            dataType: "html",
+                            contentType: "application/x-www-form-urlencoded",
+                            //url:"includes/cobrar_rest_cobro_mesa.php",
+                            data:datos,
+                            beforeSend:loaderbar,
+                            success:mesas_restaurante,
+                            //success:problemas,
+                            timeout:5000,
+                            error:problemas
+                            });
+                        return false;                        
+                    }             
                 }else{
-                    alert("¡Falta agregar el folio del pago de la tarjeta!");
-                }
+                        alert("¡Falta agregar el folio del pago de la tarjeta!");
+                    }
             }else{
                 alert("Agrega la forma de pago del moto agregado");
             }
-		}else{
-			alert("¡Aun falta dinero!");
-		}
-	}else{
-		alert("La cantidad pagada con tarjeta u otro metodo es demasiada");
-	}
+        }else{
+            alert("¡Aun falta dinero!");
+        }
+    }else{
+        alert("La cantidad pagada con tarjeta u otro metodo es demasiada");
+    }
+}
+
+// Datos del modal de confirmacion de cargar restaurante cobro 
+function modal_cargar_rest_cobro(total,hab_id,estado,mov){
+    $("#mostrar_herramientas").load("includes/modal_cargar_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
 }
 
 // Aplicar el cobro en pedido restaurante enviado a una hab

@@ -16,7 +16,8 @@
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
-        
+  
+  // Cobro de restaurante en hab con el total como cargo a la habitacion
   $comentario= '';
   $folio= '';
   $total_final= $_POST['total'];
@@ -53,6 +54,7 @@
       $precio= $inventario->obtengo_precio($fila['id_producto']);
       $categoria= $inventario->obtengo_categoria($fila['id_producto']);
       $cantidad= $inventario->cantidad_inventario($fila['id_producto']);
+      // Acomodar el inventario en cantidad e historial
       $historial= $inventario->cantidad_historial($fila['id_producto']);
       $cantidad_nueva= $cantidad - $fila['cantidad'];
       $historial_nuevo= $historial + $fila['cantidad'];
@@ -77,6 +79,6 @@
       $ticket->cambiar_estado($ticket_id);
   }
 
-  // Se guarda el pedido_rest desde una habitacion
-  $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en habitacion: ". $hab->nombre);
+  // Se guarda el cargo del pedido de restaurante desde una habitacion
+  $logs->guardar_log($_POST['usuario_id'],"Cargo de cobro restaurante en habitacion: ". $hab->nombre);
 ?>

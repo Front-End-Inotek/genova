@@ -208,6 +208,28 @@
         $comentario="Cambiar datos del ticket para imprimir el ticket una mesa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Actualizar datos del ticket para imprimir el ticket una mesa a su termino
+      function actualizar_ticket($id_ticket,$id_usuario,$forma_pago,$total,$pago,$cambio,$monto,$descuento,$total_descuento,$facturar,$folio,$comentario){
+        $fecha= date("Y-m-d H:i");
+        $tiempo= time();
+        $sentencia = "UPDATE `ticket` SET
+        `fecha` = '$fecha',
+        `tiempo` = '$tiempo',
+        `id_usuario` = '$id_usuario',
+        `forma_pago` = '$forma_pago',
+        `total` = '$total',
+        `pago` = '$pago',
+        `cambio` = '$cambio',
+        `monto` = '$monto',
+        `descuento` = '$descuento',
+        `total_descuento` = '$total_descuento',
+        `facturado` = '$facturar',
+        `baucher` = '$folio',
+        `comentario` = '$comentario'
+        WHERE `id` = '$id_ticket';";
+        $comentario="Actualizar datos del ticket para imprimir el ticket una mesa a su termino";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
              
   }
   /**
