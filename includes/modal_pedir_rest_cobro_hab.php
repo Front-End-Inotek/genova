@@ -10,7 +10,7 @@
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-      Pago del Restaurante
+      Cargar pago del Restaurante
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
 
@@ -23,7 +23,7 @@
       echo '
     </div><br>   
 
-    <div class="modal-footer" id="boton_abono">
+    <div class="modal-footer" id="boton_cargo">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Aceptar</button>
     </div>
