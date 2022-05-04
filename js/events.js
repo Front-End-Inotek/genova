@@ -3481,6 +3481,9 @@ function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_i
     var descuento=parseFloat($("#descuento").val());
     var comentario= encodeURI(document.getElementById("comentario").value);
     var total_descuento=parseFloat($("#total").val());
+    var revision_nombre= document.getElementById("nombre").value;
+    var revision_apellido= document.getElementById("apellido").value;
+    var revision_hab= 'Habitación errónea';
     if(isNaN(descuento)){
 		descuento= 0;
 	}
@@ -3488,7 +3491,6 @@ function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_i
     if(precio < total && precio >0){
         total = precio;
     }
-    //alert(total);
     total= parseFloat(total);
     if(total > total_descuento){
         total_final= total_descuento;
@@ -3501,39 +3503,42 @@ function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_i
     alert(total_descuento);
     alert(total_final);*/
 
-    // if de credencial
     if(hab.length >0){
-        if(credencial.length >4){
-            $("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
-            var datos = {
-                "hab": hab,
-                "credencial": credencial,
-                "descuento": descuento,
-                "total_descuento": total_descuento,
-                "total_final": total_final,
-                "comentario": comentario,       
-                "total_inicial": total_inicial,
-                "mesa_id": mesa_id,
-                "estado": estado,
-                "mov": mov,
-                "usuario_id": usuario_id,
-                    };
-                    $.ajax({
-                        async:true,
-                        type: "POST",
-                        dataType: "html",
-                        contentType: "application/x-www-form-urlencoded",
-                        //url:"includes/cargar_rest_cobro_mesa.php",
-                        data:datos,
-                        beforeSend:loaderbar,
-                        success:mesas_restaurante,
-                        //success:problemas,
-                        timeout:5000,
-                        error:problemas
-                        });
-                    return false;
+        if((revision_nombre != revision_hab) || (revision_apellido != revision_hab)){
+            if(credencial.length >4){
+                $("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
+                var datos = {
+                    "hab": hab,
+                    "credencial": credencial,
+                    "descuento": descuento,
+                    "total_descuento": total_descuento,
+                    "total_final": total_final,
+                    "comentario": comentario,       
+                    "total_inicial": total_inicial,
+                    "mesa_id": mesa_id,
+                    "estado": estado,
+                    "mov": mov,
+                    "usuario_id": usuario_id,
+                        };
+                        $.ajax({
+                            async:true,
+                            type: "POST",
+                            dataType: "html",
+                            contentType: "application/x-www-form-urlencoded",
+                            //url:"includes/cargar_rest_cobro_mesa.php",
+                            data:datos,
+                            beforeSend:loaderbar,
+                            success:mesas_restaurante,
+                            //success:problemas,
+                            timeout:5000,
+                            error:problemas
+                            });
+                        return false;
+            }else{
+                alert("¡Falta agregar el numero de credencial para votar!");
+            }
         }else{
-            alert("¡Falta agregar el numero de credencial para votar!");
+            alert("¡Habitación errónea, favor de ingresar otra!");
         }
     }else{
         alert("¡Falta agregar la habitacion!");
