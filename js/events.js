@@ -1,4 +1,4 @@
-var teclado = ['user', 'pass','matricula','comentario','matricula','personas','gasto_nombre','gasto_total','efectivo','cortesia','reporte','descuento','motivo','cantidad','modelo','color','recorte_total','tarjeta','autoriza'];
+var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario'];
 x=$(document);
 x.ready(inicio);
 
@@ -3410,6 +3410,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             });
                         return false;
                     }else{
+                        var mesa_id= hab_id;
                         var datos = {
                             "efectivo":efectivo,
                             "cambio": cambio,
@@ -3424,7 +3425,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             "cambio": cambio,
                             "total": total,
                             "comentario": comentario,
-                            "hab_id": hab_id,
+                            "mesa_id": mesa_id,
                             "mesa": mesa,
                             "estado": estado,
                             "mov": mov,
@@ -3460,23 +3461,88 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
 }
 
 // Datos del modal de confirmacion de cargar restaurante cobro 
-function modal_cargar_rest_cobro(total,hab_id,estado,mov){
-    $("#mostrar_herramientas").load("includes/modal_cargar_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+function modal_cargar_rest_cobro(total,mesa_id,estado,mov){
+    $("#mostrar_herramientas").load("includes/modal_cargar_rest_cobro.php?total="+total+"&mesa_id="+mesa_id+"&estado="+estado+"&mov="+mov); 
 }
-
-// Obtener el huesped de la habitacion
-/*function calcular_iva_inventario(){
-    var costo_unitario= Number(document.getElementById("costo_unitario").value);
-    var costo_unitario_iva=redondearDecimales(costo_unitario+(costo_unitario *.16),2);
-    document.getElementById("costo_unitario_iva").value =costo_unitario_iva;
-    //alert(costo_unitario);
-}*/
 
 // Filtra el nombre y apellido del huesped de la habitacion
 function filtrar_huesped(){
     var hab= document.getElementById("hab").value;
     $(".div_huesped").load("includes/div_filtrar_huesped.php?hab="+hab);
-    //$("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
+}
+
+// Aplicar el cobro en pedido restaurante enviado a una habitacion desde una mesa
+function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_id,estado,mov
+    var usuario_id=localStorage.getItem("id");
+    var hab= encodeURI(document.getElementById("hab").value);
+    var nombre= encodeURI(document.getElementById("nombre").value);
+    var apellido= encodeURI(document.getElementById("apellido").value);
+    var credencial= encodeURI(document.getElementById("credencial").value);
+    var descuento=parseFloat($("#descuento").val());
+    var comentario= encodeURI(document.getElementById("comentario").value);
+    var total_descuento=parseFloat($("#total").val());
+    var revision_nombre= document.getElementById("nombre").value;
+    var revision_apellido= document.getElementById("apellido").value;
+    var revision_hab= 'Habitación errónea';
+    if(isNaN(descuento)){
+		descuento= 0;
+	}
+    var precio=$("#total").val();
+    if(precio < total && precio >0){
+        total = precio;
+    }
+    total= parseFloat(total);
+    if(total > total_descuento){
+        total_final= total_descuento;
+    }else{
+        total_final= total;
+    }
+    /*alert(descuento);
+    alert(total_inicial);
+    alert(total);
+    alert(total_descuento);
+    alert(total_final);*/
+
+    if(hab.length >0){
+        if((revision_nombre != revision_hab) || (revision_apellido != revision_hab)){
+            if(credencial.length >4){
+                $("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
+                var datos = {
+                    "hab": hab,
+                    "credencial": credencial,
+                    "descuento": descuento,
+                    "total_descuento": total_descuento,
+                    "total_final": total_final,
+                    "comentario": comentario,       
+                    "total_inicial": total_inicial,
+                    "mesa_id": mesa_id,
+                    "estado": estado,
+                    "mov": mov,
+                    "usuario_id": usuario_id,
+                        };
+                        $.ajax({
+                            async:true,
+                            type: "POST",
+                            dataType: "html",
+                            contentType: "application/x-www-form-urlencoded",
+                            //url:"includes/cargar_rest_cobro_mesa.php",
+                            data:datos,
+                            beforeSend:loaderbar,
+                            success:mesas_restaurante,
+                            //success:problemas,
+                            timeout:5000,
+                            error:problemas
+                            });
+                        return false;
+            }else{
+                alert("¡Falta agregar el numero de credencial para votar!");
+            }
+        }else{
+            alert("¡Habitación errónea, favor de ingresar otra!");
+        }
+    }else{
+        alert("¡Falta agregar la habitacion!");
+    }
 }
 
 // Aplicar el cobro en pedido restaurante enviado a una hab

@@ -1,7 +1,5 @@
 <?php
   include_once("clase_forma_pago.php");
-  $forma_pago= NEW Forma_pago(0);
-  $total= $_GET['total'];
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -10,9 +8,8 @@
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
 
-    <div class="modal-body">';
-      //echo '<div class="edo_cuenta btn-square-lg-doble" onclick="pedir_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')">';
-      echo '<div class="row">
+    <div class="modal-body">
+      <div class="row">
         <div class="col-sm-3">Habitación:</div>
         <div class="col-sm-9">
         <div class="form-group">
@@ -50,10 +47,7 @@
 
     <div class="modal-footer" id="boton_cargo">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="cargar_rest_cobro_mesa('.$_GET['total'].','.$_GET['mesa_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Aceptar</button>
     </div>
   </div>';
-  // Codigo de identificacion
-  //aplicar_rest_cobro_hab
-  //modal_cargar_rest_cobro
 ?>

@@ -23,6 +23,7 @@
   }else{
           $comentario= urldecode($_POST['comentario']);
   }
+  $efectivo_pago= 0;
 
   // Se agrega el pedido
   $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
