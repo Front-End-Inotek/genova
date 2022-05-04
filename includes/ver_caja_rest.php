@@ -38,11 +38,9 @@
                     <h6 for="sel1"><input class="form-control alinear_centro" type="number" id="total"  placeholder="'.number_format($precio, 2).'" disabled></h6>
                   </div>
                   <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">';
-                    // original bn
                     echo '<button type="button" id="boton_cobrar" class="btn btn-danger btn-block" onclick="aplicar_rest_cobro('.$precio.','.$_GET['mesa_id'].','.$_GET['estado'].','.$mesa->mov.',1)"> Cobrar</button>';                                                                                                                                               //('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';    
                   echo '</div>
-                  <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">';//
-                    // CAMBIAR
+                  <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">';
                     echo '<button class="btn btn-success btn-block"  href="#caja_herramientas" data-toggle="modal" onclick="modal_cargar_rest_cobro('.$precio.','.$_GET['mesa_id'].','.$_GET['estado'].','.$mesa->mov.')">Cargar</button></>';                                                                                                                                                 //('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';    
                   echo '</div>
                   <div class="col-sm-1 fuente_menor_bolder margen_sup_pedir">

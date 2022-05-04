@@ -170,7 +170,6 @@ function guardar_tipo(){
 	
 
 	if(nombre.length >0){
-			//$('#boton_tipo').hide();
 			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 				  "nombre": nombre,
@@ -219,8 +218,7 @@ function modificar_tipo(id){
 
 
     if(id >0){
-        //$('#boton_tipo').hide();
-			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "nombre": nombre,
@@ -311,7 +309,6 @@ function guardar_tarifa(){
 	
 
 	if(nombre.length >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && cantidad_maxima >0 && precio_adulto >0 && tipo >0){
-			//$('#boton_tarifa').hide();
 			$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 				  "nombre": nombre,
@@ -374,8 +371,7 @@ function modificar_tarifa(id){
 
 
     if(id >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && cantidad_maxima >0 && precio_adulto >0 && tipo >0){
-        //$('#boton_tarifa').hide();
-			$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "nombre": nombre,
@@ -467,7 +463,6 @@ function guardar_hab(){
 	
 
 	if(nombre.length >0 && tipo >0){
-			//$('#boton_hab').hide();
 			$("#boton_hab").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 				  "nombre": nombre,
@@ -518,8 +513,7 @@ function modificar_hab(id){
 
 
     if(id >0 && tipo >0){
-        //$('#boton_hab').hide();
-			$("#boton_hab").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_hab").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "nombre": nombre,
@@ -820,8 +814,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 
 	if(id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
         if(cantidad_ocupacion <= cantidad_maxima){
-            //$('#boton_reservacion').hide();
-			    $("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
+			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
             var datos = {
                   "id_huesped": id_huesped,
                   "fecha_entrada": fecha_entrada,
@@ -1075,8 +1068,7 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 
 	if(id >0 && id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago.length >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
         if(cantidad_ocupacion <= cantidad_maxima){
-            //$('#boton_reservacion').hide();
-                $("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
+            $("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
             var datos = {
                 "id": id,
                 "id_huesped": id_huesped,
@@ -1183,7 +1175,6 @@ function cancelar_reservacion(id){
 
     if (id >0 && nombre_cancela.length >0) {
         $('#caja_herramientas').modal('hide');
-        //$("#boton_cancelar_reservacion").hide();
         $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
         var datos = {
                 "id": id,
@@ -1377,7 +1368,6 @@ function guardar_huesped(){
 	
 
 	if(nombre.length >0 && apellido.length >0 && direccion.length >0 && ciudad.length >0 && estado.length >0 && codigo_postal.length >0 && telefono.length >0 && correo.length >0 && preferencias.length >0 && comentarios.length >0){
-			//$('#boton_huesped').hide();
 			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 			 	  "nombre": nombre,
@@ -1476,8 +1466,7 @@ function modificar_huesped(id,hab_id,id_reservacion){
 
 
 	if(id >0){
-        //$('#boton_huesped').hide();
-			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
         var datos = {
 			  "id": id,
               "hab_id": hab_id,
@@ -1737,7 +1726,6 @@ function guardar_forma_pago(){
 	
 
 	if(descripcion.length >0){
-			//$('#boton_forma').hide();
 			$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 				  "descripcion": descripcion,
@@ -1785,8 +1773,7 @@ function modificar_forma_pago(id){
 
 
     if(id >0 && descripcion.length >0){
-        //$('#boton_forma').hide();
-			$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "descripcion": descripcion,
@@ -1870,7 +1857,6 @@ function guardar_usuario(){
 
     if(usuario.length >0 && contrasena.length >0 && nivel >0){
         if(contrasena == recontrasena){
-            //$('#boton_usuario').hide();
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
             var datos = {
                   "usuario": usuario,
@@ -2251,7 +2237,6 @@ function modificar_usuario(id){
 
 	if(usuario.length >0 && nivel.length >0){
         //if(contrasena == recontrasena){
-            //$('#boton_usuario').hide();
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
             var datos = {
                   "id": id,
@@ -2400,8 +2385,7 @@ function guardar_abono(hab_id,estado,faltante){
     
 
     if(descripcion.length >0 && forma_pago >0 && abono >0){
-        //$('#boton_abono').hide();
-            $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
+        $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "hab_id": hab_id,
               "estado": estado,
@@ -2456,8 +2440,7 @@ function modificar_herramientas_cargo(id,hab_id,estado){
 
 
     if(id >0){
-        //$('#boton_cargo').hide();
-			$("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "hab_id": hab_id,
@@ -2537,8 +2520,7 @@ function modificar_herramientas_abono(id,hab_id,estado){
 
 
     if(id >0){
-        //$('#boton_abono').hide();
-			$("#boton_abono").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "hab_id": hab_id,
@@ -2729,8 +2711,7 @@ function modificar_categoria(id){
 
 
     if(id >0 && nombre.length >0){
-        //$('#boton_categoria').hide();
-			$("#boton_categoria").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_categoria").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "id": id,
               "nombre": nombre,
@@ -2813,7 +2794,6 @@ function guardar_inventario(){
 	
 
 	if(nombre.length >0 && categoria >0 && precio >0){
-			//$('#boton_inventario').hide();
 			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 			 	  "nombre": nombre,
@@ -2896,8 +2876,7 @@ function modificar_inventario(id){
 
 
 	if(id >0){
-        //$('#boton_inventario').hide();
-			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
         var datos = {
 			  "id": id,
               "nombre": nombre,
@@ -3072,8 +3051,7 @@ function editar_surtir_inventario(id){
 
 	if(cantidad >0){
         $('#caja_herramientas').modal('hide');
-        //$('#boton_surtir').hide();
-			$("#boton_surtir").html('<div class="spinner-border text-primary"></div>');
+		$("#boton_surtir").html('<div class="spinner-border text-primary"></div>');
         var datos = {
 			  "id": id,
               "cantidad": cantidad,
@@ -3276,7 +3254,6 @@ function guardar_inventario(){
 	
 
 	if(nombre.length >0 && categoria >0 && precio >0){
-			//$('#boton_inventario').hide();
 			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 			 	"nombre": nombre,
@@ -3396,6 +3373,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
         if(total_pago >= total_final){
             if(monto>0 && forma_pago>1 || efectivo> 0 && forma_pago==1){
                 if(forma_pago==2 && folio.length >0 || forma_pago>2 || efectivo>=total_final){
+                    $("#boton_pago").html('<div class="spinner-border text-primary"></div>');
                     if(mesa == 0){
                         var datos = {
                             "efectivo":efectivo,
@@ -3484,6 +3462,21 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
 // Datos del modal de confirmacion de cargar restaurante cobro 
 function modal_cargar_rest_cobro(total,hab_id,estado,mov){
     $("#mostrar_herramientas").load("includes/modal_cargar_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+}
+
+// Obtener el huesped de la habitacion
+/*function calcular_iva_inventario(){
+    var costo_unitario= Number(document.getElementById("costo_unitario").value);
+    var costo_unitario_iva=redondearDecimales(costo_unitario+(costo_unitario *.16),2);
+    document.getElementById("costo_unitario_iva").value =costo_unitario_iva;
+    //alert(costo_unitario);
+}*/
+
+// Filtra el nombre y apellido del huesped de la habitacion
+function filtrar_huesped(){
+    var hab= document.getElementById("hab").value;
+    $(".div_huesped").load("includes/div_filtrar_huesped.php?hab="+hab);
+    //$("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
 }
 
 // Aplicar el cobro en pedido restaurante enviado a una hab
@@ -3767,7 +3760,6 @@ function guardar_cupon(){
 
 	if(vigencia_inicio.length >0 && vigencia_fin.length >0 && codigo.length >0 && cantidad >0){
         if((cantidad >-0.01 && cantidad <100 && tipo == 0) || (cantidad >-0.01 && tipo == 1)){
-            //$('#boton_cupon').hide();
 			$("#boton_cupon").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
 			 	  "vigencia_inicio": vigencia_inicio,
@@ -3866,7 +3858,6 @@ function modificar_cupon(id,hab_id,id_reservacion){
 
 	if(vigencia_inicio.length >0 && vigencia_fin.length >0 && codigo.length >0 && cantidad >0){
         if((cantidad >-0.01 && cantidad <100 && tipo == 0) || (cantidad >-0.01 && tipo == 1)){
-            //$('#boton_cupon').hide();
             $("#boton_cupon").html('<div class="spinner-border text-primary"></div>');
             var datos = {
                   "id": id,

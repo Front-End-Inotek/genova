@@ -16,27 +16,33 @@
         <div class="col-sm-3">Habitación:</div>
         <div class="col-sm-9">
         <div class="form-group">
-          <input class="form-control" type="text"  id="filtrar_planta" placeholder="Ingresa la habitación que tendra el cargo" onkeyup="filtrar_plantas()">
+          <input class="form-control" type="text"  id="hab" placeholder="Ingresa la habitación que tendra el cargo" onkeyup="filtrar_huesped()" maxlength="20">
         </div>
         </div>
       </div><br>
-      <div class="row div_planta">
-        <div class="col-sm-3" >Nombre y apellido del cliente:</div>
-        <div class="col-sm-9" >
-        <div class="form-group">
-          <select class="form-control" id="id_planta">';
-            echo '<option value="0">Favor de seleccionar cliente primero</option>';
-            //$planta->mostrar_nombre($cliente_id);
-            echo '
-          </select>
-        </div>
+      <div class="div_huesped">
+        <div class="row">
+          <div class="col-sm-3" >Nombre del  huesped:</div>
+          <div class="col-sm-9" >
+          <div class="form-group">
+            <input class="form-control" type="text"  id="nombre" value="Nombre del huesped" disabled/>
+          </div>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-sm-3" >Apellido del huesped:</div>
+          <div class="col-sm-9" >
+          <div class="form-group">
+            <input class="form-control" type="text"  id="apellido" value="Apellido del huesped" disabled/>
+          </div>
+          </div>
         </div>
       </div><br>
       <div class="row">
-        <div class="col-sm-3">Numero de INE/IFE:</div>
+        <div class="col-sm-3">Número de INE/IFE:</div>
         <div class="col-sm-9">
         <div class="form-group">
-          <input class="form-control" type="text"  id="filtrar_planta" placeholder="Ingresa el numero de la credencia para votar" onkeyup="filtrar_plantas()">
+          <input class="form-control" type="text"  id="credencial" placeholder="Ingresa el numero de la credencia para votar" maxlength="40">
         </div>
         </div>
       </div><br>

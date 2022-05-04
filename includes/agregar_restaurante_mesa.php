@@ -22,7 +22,7 @@
         <div class="col-sm-6" style="background-color:white;">
           <div class="card">
             <div class="card-header alinear_centro">
-              <h5>CategoriasS</h5>
+              <h5>Categorias</h5>
             </div>
 
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
@@ -32,7 +32,7 @@
 
           <div class="card">
             <div class="card-header alinear_centro">
-              <h5>ProductosS</h5>
+              <h5>Productos</h5>
             </div>
 
             <div class="card-body altura-rest_productos" id="caja_mostrar_busqueda">
@@ -44,7 +44,7 @@
         <div class="col-sm-6" style="background-color:white;">
           <div class="card">
             <div class="card-header alinear_centro">
-              <h5>PedidoS</h5>
+              <h5>Pedido</h5>
             </div>
 
             <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">

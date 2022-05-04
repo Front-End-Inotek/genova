@@ -297,6 +297,7 @@
       function obtengo_nombre($id){
         $sentencia = "SELECT nombre FROM huesped WHERE id = $id AND estado_huesped = 1 LIMIT 1";
         //echo $sentencia;
+        $nombre= '';
         $comentario="Obtengo el nombre del huesped";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
