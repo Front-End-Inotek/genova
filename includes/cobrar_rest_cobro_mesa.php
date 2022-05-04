@@ -7,9 +7,9 @@
   include_once("clase_ticket.php");
   include_once("clase_log.php");
   $confi= NEW Configuracion();
-  $hab= NEW Hab($_POST['hab_id']);
+  $hab= NEW Hab($_POST['mesa_id']);
   $inventario= NEW Inventario(0);
-  $mesa= NEW Mesa($_POST['hab_id']);
+  $mesa= NEW Mesa($_POST['mesa_id']);
   $pedido_rest= NEW Pedido_rest(0);
   $pedido= NEW Pedido(0);
   $concepto= NEW Concepto(0);
@@ -94,7 +94,7 @@
   }
 
   // Se sabe el pedido, editan estados y se imprime
-  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['hab_id'])
+  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id'])
   $pagado= 1;
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
   
