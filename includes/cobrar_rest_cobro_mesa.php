@@ -69,11 +69,6 @@
   }else{
           $factuar= 0;
   }
-  if($_POST['efectivo']>0){
-          $efectivo_pago= 1;
-  }else{
-          $efectivo_pago= 0;
-  }
   
   // Actualizamos datos del ticket del pedido_rest del restaurante
   $ticket_id= $ticket->saber_id_ticket($mesa->mov);
@@ -93,7 +88,7 @@
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
   }
 
-  // Se sabe el pedido, editan estados y se imprime
+  // Se obtiene el pedido, editan estados y se imprime
   $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id'])
   $pagado= 1;
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);

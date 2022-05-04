@@ -16,39 +16,22 @@
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
 
-  // Cobro de restaurante al momento en la mesa
+  // Cobro de restaurante en hab con el total como cargo a la habitacion desde una mesa
   if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';
           $comentario= '';
   }else{
           $comentario= urldecode($_POST['comentario']);
   }
-  if(empty($_POST['folio'])){
-          //echo 'La variable esta vacia';
-          $folio= '';
-  }else{
-          $folio= urldecode($_POST['folio']);
-  }
+  $folio= '';
   if(is_numeric($_POST['total_final'])){
           $total_final=$_POST['total_final'];
   }else{
           $total_final= 0;
   }
-  if(is_numeric($_POST['total_pago'])){
-          $total_pago=$_POST['total_pago'];
-  }else{
-          $total_pago= 0;
-  }
-  if(is_numeric($_POST['cambio'])){
-          $cambio=$_POST['cambio'];
-  }else{
-          $cambio= 0;
-  }
-  if(is_numeric($_POST['monto'])){
-          $monto=$_POST['monto'];
-  }else{
-          $monto= 0;
-  }
+  $total_pago= 0;
+  $cambio= 0;
+  $monto= 0;
   if(is_numeric($_POST['descuento'])){
           $descuento=$_POST['descuento'];
   }else{
@@ -59,21 +42,15 @@
   }else{
           $total_descuento= 0;
   }
-  if($_POST['forma_pago'] == 1){
-          $forma_pago= 1;
+  $forma_pago= 1;
+  $factuar= 0;
+  if(empty($_POST['credencial'])){
+          //echo 'La variable esta vacia';
+          $credencial= '';
   }else{
-          $forma_pago= $_POST['forma_pago'];
+          $credencial= urldecode($_POST['credencial']);
   }
-  if($_POST['forma_pago'] == 2){
-          $factuar= 1;
-  }else{
-          $factuar= 0;
-  }
-  if($_POST['efectivo']>0){
-          $efectivo_pago= 1;
-  }else{
-          $efectivo_pago= 0;
-  }
+  $comentario= $comentario.'  con credencial '.$credencial;
   
   // Actualizamos datos del ticket del pedido_rest del restaurante
   $ticket_id= $ticket->saber_id_ticket($mesa->mov);
@@ -93,20 +70,21 @@
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
   }
 
-  // Se sabe el pedido, editan estados y se imprime
+  // Se obtiene el pedido, editan estados y se imprime
   $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id'])
-  $pagado= 1;
+  $pagado= 1;// SE CAMBIA A PAGAR O NO O SE PONE 0
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
   
+  // Guardar el cargo total del restaurante de la habitacion desde una mesa
+  $descripcion= 'Restaurante mesa: '. $mesa->nombre.'  con credencial '.$credencial;
+  $cargo= $total_final;
+  $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);
+
   // Imprimir ticket
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }
 
-  // Se guarda el cobro del pedido de restaurante al momento en la mesa
-  $logs->guardar_log($_POST['usuario_id'],"Cobro restaurante en mesa: ". $mesa->nombre);
-
-  /// FINAL A HAB ///
   // Se guarda el cargo del pedido de restaurante a una habitacion desde una mesa
   $logs->guardar_log($_POST['usuario_id'],"Cargo de cobro restaurante en habitacion: ". $hab->nombre." de la mesa ". $mesa->nombre);
 ?>

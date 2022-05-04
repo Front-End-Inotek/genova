@@ -3471,7 +3471,7 @@ function filtrar_huesped(){
     $(".div_huesped").load("includes/div_filtrar_huesped.php?hab="+hab);
 }
 
-// Aplicar el cobro en pedido restaurante enviado a una hab desde una mesa
+// Aplicar el cobro en pedido restaurante enviado a una habitacion desde una mesa
 function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_id,estado,mov
     var usuario_id=localStorage.getItem("id");
     var hab= encodeURI(document.getElementById("hab").value);
