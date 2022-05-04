@@ -221,6 +221,19 @@
         }
         return $mov;
       } 
+      // Mostramos el movimiento de la habitacion por medio del nombre
+      function mostrar_movimiento_hab($nombre){ 
+        $sentencia = "SELECT mov FROM hab WHERE nombre LIKE '%$nombre%' LIMIT 1";
+        //echo $sentencia;
+        $mov = 0;
+        $comentario="Obtengo el movimiento de la habitacion por medio del nombre";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $mov= $fila['mov'];
+        }
+        return $mov;
+      } 
       // Obtengo el total de habitaciones ocupadas
       function obtener_ocupadas(){ 
         $sentencia = "SELECT count(hab.id) AS cantidad,hab.estado,hab.estado_hab FROM hab WHERE hab.estado = 1 AND hab.estado_hab = 1";

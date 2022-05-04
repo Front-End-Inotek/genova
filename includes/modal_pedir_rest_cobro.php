@@ -74,7 +74,7 @@
       <br>
     <div>     
 
-    <div class="modal-footer" id="boton_abono">
+    <div class="modal-footer" id="boton_pago">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].',0)"> Cobrar</button>
     </div>
