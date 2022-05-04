@@ -1,4 +1,4 @@
-var teclado = ['user', 'pass','matricula','comentario','matricula','personas','gasto_nombre','gasto_total','efectivo','cortesia','reporte','descuento','motivo','cantidad','modelo','color','recorte_total','tarjeta','autoriza'];
+var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario'];
 x=$(document);
 x.ready(inicio);
 

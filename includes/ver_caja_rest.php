@@ -63,7 +63,7 @@
               
                 <div class="row margen_inf">
                   <div class="col-sm-4">
-                    <input type="number" class="form-control" id="efectivo" placeholder="Efectivo" onclick="mostrarteclado_rest(8,'.$precio.')" placeholder="Efectivo" onKeyUp="suma_cobro_rest_caja('.$precio.')">
+                    <input type="number" class="form-control" id="efectivo" placeholder="Efectivo" onclick="mostrarteclado_rest(2,'.$precio.')" placeholder="Efectivo" onKeyUp="suma_cobro_rest_caja('.$precio.')">
                   </div>
                   <div class="col-sm-4">
                     <input class="form-control" type="number" id="cambio" placeholder="Cambio" disabled>
@@ -74,7 +74,7 @@
                     
                 <div class="row margen_inf">
                   <div class="col-sm-4">
-                    <input type="number" class="form-control" id="monto" placeholder="Monto" onclick="mostrarteclado_rest(17,'.$precio.')">
+                    <input type="number" class="form-control" id="monto" placeholder="Monto" onclick="mostrarteclado_rest(3,'.$precio.')">
                   </div>
                   <div class="col-sm-4">
                     <select class="form-control" id="forma_pago">
@@ -84,16 +84,16 @@
                     </select>
                   </div>
                   <div class="col-sm-4">
-                    <input type="number" class="form-control" id="folio" placeholder="Folio de autorización" onclick="mostrarteclado_rest(18,'.$precio.')"  maxlength="40">
+                    <input type="number" class="form-control" id="folio" placeholder="Folio de autorización" onclick="mostrarteclado_rest(4,'.$precio.')"  maxlength="40">
                   </div>
                 </div>
                     
                 <div class="row margen_inf">
                   <div class="col-sm-4">
-                    <input type="number" class="form-control" id="descuento" placeholder="Descuento" onclick="mostrarteclado_rest(9,'.$precio.')" onKeyUp="cambio_rest_descuento('.$total.')">
+                    <input type="number" class="form-control" id="descuento" placeholder="Descuento" onclick="mostrarteclado_rest(5,'.$precio.')" onKeyUp="cambio_rest_descuento('.$total.')">
                   </div>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" id="comentario" placeholder="Comentario del pedido" maxlength="200">
+                    <input type="text" class="form-control" id="comentario" placeholder="Comentario del pedido" onclick="mostrarteclado_rest(6,'.$precio.')" maxlength="200">
                   </div>
                 </div>  
                 
