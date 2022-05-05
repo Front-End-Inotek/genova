@@ -150,3 +150,4 @@ VERSION 2.3
 -Acomodo de todos los reportes con estilos nuevos
 -Acomodo de pagar directo o agregar cargo a la habitacion en restaurante hab
 -Acomodo de pagar directo o agregar cargo a la habitacion en restaurante mesa
+-Revision de todas las formas de pago de restaurante en sus 5 modalidades

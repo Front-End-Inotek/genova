@@ -3,6 +3,7 @@
   include_once("clase_configuracion.php");
   include_once("clase_hab.php");
   include_once("clase_inventario.php");
+  include_once("clase_usuario.php");
   include_once("clase_ticket.php");
   include_once("clase_log.php");
   $confi= NEW Configuracion();
@@ -10,6 +11,7 @@
   $inventario= NEW Inventario(0);
   $pedido_rest= NEW Pedido_rest(0);
   $pedido= NEW Pedido(0);
+  $usuario=NEW Usuario($_POST['usuario_id']); 
   $concepto= NEW Concepto(0);
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
@@ -70,15 +72,12 @@
   }
 
   // Se agrega el pedido
-  $id_pedido= $pedido->pedir_rest($usuario->nombre,$_POST['mov'],$comentario,$hab->nombre);
-  $pedido_rest->agregar_pedido($id_pedido,$_POST['mov']);
+  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$hab->nombre);
   
   // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante
   $resta= 1;
-  /*$ticket_id= $ticket->buscar_id_ticket($_POST['mov'],$_POST['hab_id']);// aun no se si poner k este en estado 0 u 1 el ticket CHECAR
-  if($ticket_id == 0){
-  }*/ // DUDA DE SI SE VA GUARDAR TICKET NUEVO O NO EN HAB
+  //$ticket_id= $ticket->buscar_id_ticket($_POST['mov'],$_POST['hab_id']);// aun no se si poner k este en estado 0 u 1 el ticket CHECAR
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
   $comanda= $pedido_rest->saber_comanda($_POST['mov']);

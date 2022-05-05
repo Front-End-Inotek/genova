@@ -887,14 +887,6 @@
         }
         return $comanda;
       }
-      // Agregar pedido
-      function agregar_pedido($pedido,$mov){
-        $sentencia = "UPDATE `perdido_rest` SET
-        `pedido` = '$pedido'
-        WHERE `movimiento` = '$mov' AND `estado` = '0';";
-        $comentario="Editar los conceptos del pedido del restaurante";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-      }
 
   }
   /**
@@ -948,7 +940,7 @@
         $tiempo= date("Y-m-d H:i");
         $id= 0;
         $sentencia = "INSERT INTO `pedido` (`mov`, `id_hab`, `id_mesa`, `tiempo`, `comentario`, `impreso`, `recepcion`, `estado`)
-        VALUES ('$mov', '0', '$id_mesa', '$tiempo', '$comentario', '1', '$recepcion', '0');";
+        VALUES ('$mov', '0', '$id_mesa', '$tiempo', '$comentario', '1', '$recepcion', '1');";
         $comentario="Mostrar las categorias en el restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         
@@ -987,7 +979,7 @@
       }
       // Obtener el id del pedido de la mesa actual
       function obtener_pedido($mov,$id_mesa){
-        $sentencia= "SELECT id FROM pedido WHERE mov = $mov AND id_mesa = $id_mesa AND estado = 0 ORDER BY id DESC LIMIT 1";
+        $sentencia= "SELECT id FROM pedido WHERE mov = $mov AND id_mesa = $id_mesa AND estado = 1 ORDER BY id DESC LIMIT 1";
         $id= 0;
         $comentario="Obtener el id del pedido de la mesa actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
