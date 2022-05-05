@@ -4,6 +4,7 @@
   include_once("clase_cuenta.php");
   include_once("clase_hab.php");
   include_once("clase_inventario.php");
+  include_once("clase_usuario.php");
   include_once("clase_ticket.php");
   include_once("clase_log.php");
   $confi= NEW Configuracion(0);//? o vacio
@@ -12,6 +13,7 @@
   $inventario= NEW Inventario(0);
   $pedido_rest= NEW Pedido_rest(0);
   $pedido= NEW Pedido(0);
+  $usuario=NEW Usuario($_POST['usuario_id']); 
   $concepto= NEW Concepto(0);
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
@@ -31,8 +33,7 @@
   $efectivo_pago= 0;
 
   // Se agrega el pedido
-  $id_pedido= $pedido->pedir_rest($usuario->nombre,$_POST['mov'],$comentario,$hab->nombre);
-  $pedido_rest->agregar_pedido($id_pedido,$_POST['mov']);
+  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$hab->nombre);
   
   // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante
