@@ -85,7 +85,7 @@
   $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
-  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],0);
+  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],0,0);
   while($fila = mysqli_fetch_array($consulta))
   {
       $nombre= $inventario->obtengo_nombre($fila['id_producto']);

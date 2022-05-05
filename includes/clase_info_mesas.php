@@ -144,7 +144,7 @@
                         // echo '<button type="button" class="btn btn-danger" onclick="borrar_desde_hab('.$filas1['id'].')">Borrar</button>';
                       }
                       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-                      echo $filas1['cantidad'].' -  '.$filas1['nombre'].' -  $'.$filas1['total'];
+                      echo $filas1['cantidad'].' -  '.$filas1['nombre'].' -  $'.number_format($filas1['total'], 2);
                       echo '</div>';
                     }
                     echo ' </div>';
