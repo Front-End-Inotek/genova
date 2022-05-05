@@ -3334,6 +3334,7 @@ function cambio_rest_descuento(total){
 
 // Aplicar el cobro en pedido restaurante
 function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
+    var mesa_id= hab_id;
     var total_inicial= total;
     var usuario_id=localStorage.getItem("id");
 	var efectivo=parseFloat($("#efectivo").val());
@@ -3369,6 +3370,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
     }
 	var total_pago= efectivo + monto;
     total_descuento= total_inicial - total_final;
+    total_descuento= redondearDecimales(total_descuento,2);
 
     // Checar si el cobro es en mesa o no
     if(monto <= total_final){
@@ -3412,7 +3414,6 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             });
                         return false;
                     }else{
-                        var mesa_id= hab_id;
                         var datos = {
                             "efectivo":efectivo,
                             "cambio": cambio,

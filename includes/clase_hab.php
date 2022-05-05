@@ -221,6 +221,19 @@
         }
         return $mov;
       } 
+      // Mostramos el id de la habitacion
+      function mostrar_id_hab($nombre){ 
+        $sentencia = "SELECT id FROM hab WHERE id = $nombre LIMIT 1";
+        //echo $sentencia;
+        $id = 0;
+        $comentario="Obtengo el id de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+        }
+        return $id;
+      } 
       // Mostramos el movimiento de la habitacion por medio del nombre
       function mostrar_movimiento_hab($nombre){ 
         $sentencia = "SELECT mov FROM hab WHERE nombre LIKE '%$nombre%' LIMIT 1";

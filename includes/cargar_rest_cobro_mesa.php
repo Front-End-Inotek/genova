@@ -1,13 +1,11 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_configuracion.php");
-  include_once("clase_hab.php");
   include_once("clase_inventario.php");
   include_once("clase_mesa.php");
   include_once("clase_ticket.php");
   include_once("clase_log.php");
   $confi= NEW Configuracion();
-  $hab= NEW Hab($_POST['mesa_id']);
   $inventario= NEW Inventario(0);
   $mesa= NEW Mesa($_POST['mesa_id']);
   $pedido_rest= NEW Pedido_rest(0);
@@ -53,12 +51,12 @@
   $comentario= $comentario.'  con credencial '.$credencial;
   
   // Actualizamos datos del ticket del pedido_rest del restaurante
-  $ticket_id= $ticket->saber_id_ticket($mesa->mov);
+  $ticket_id= $ticket->saber_id_ticket($_POST['mov']);
   //$total_calculo= $concepto->saber_total_mesa($ticket_id);
   $ticket->actualizar_ticket($ticket_id,$_POST['usuario_id'],$forma_pago,$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario);
 
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
-  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],0);
+  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],$mesa_id,1);
   while($fila = mysqli_fetch_array($consulta))
   {
       $cantidad= $inventario->cantidad_inventario($fila['id_producto']);
@@ -74,11 +72,15 @@
   $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id'])
   $pagado= 1;// SE CAMBIA A PAGAR O NO O SE PONE 0
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
+  $pedido->cambiar_estado_pedido($id_pedido);
   
   // Guardar el cargo total del restaurante de la habitacion desde una mesa
   $descripcion= 'Restaurante mesa: '. $mesa->nombre.'  con credencial '.$credencial;
   $cargo= $total_final;
   $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);
+
+  // Cambiar estado de la mesa a disponible
+  $mesa->cambiomesa($_POST['mesa_id'],$_POST['mov'],0);
 
   // Imprimir ticket
   if($confi->ticket_restaurante == 0){
@@ -86,5 +88,5 @@
   }
 
   // Se guarda el cargo del pedido de restaurante a una habitacion desde una mesa
-  $logs->guardar_log($_POST['usuario_id'],"Cargo de cobro restaurante en habitacion: ". $hab->nombre." de la mesa ". $mesa->nombre);
+  $logs->guardar_log($_POST['usuario_id'],"Cargo de cobro restaurante en habitacion: ". $_POST['hab']." de la mesa ". $mesa->nombre);
 ?>

@@ -426,7 +426,7 @@
         }else{
           $cant= $this->saber_cantidad_pedido($pedido);
           $cant= $cant + $cantidad;
-          $total_final= $precio * $cantidad;
+          $total_final= $precio * $cant;
           $sentencia = "UPDATE `concepto` SET
           `cantidad` = '$cant',
           `total` = '$total_final'
@@ -454,7 +454,8 @@
         $subtotal=0;
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $subtotal= $fila['total'];
+          //$subtotal= $fila['total'];
+          $subtotal= $fila['cantidad'] * $fila['precio'];
           $total= $total + $subtotal;
         }
         return  $total;
@@ -469,20 +470,20 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cantidad=0;
         $total=0;
-        echo '<ul class="list-group altura_comanda">';//
+        echo '<ul class="list-group altura_comanda">';
         while ($fila = mysqli_fetch_array($consulta))
         {
           $producto= $inventario->obtener_id($fila['nombre']);
           $total_fila= $fila['cantidad'] * $fila['precio'];
           if(($cantidad%2)==0){
             echo '<div href="#" class="list-group-item list-group-item-success" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
-              <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h6>
-              <h6 class="list-group-item-text"> Total: $'.$total_fila.' </h6>
+              <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.number_format($fila['precio'], 2).' </h6>
+              <h6 class="list-group-item-text"> Total: $'.number_format($total_fila, 2).' </h6>
             </div>';
           }else{
             echo '<div href="#" class="list-group-item list-group-item-info" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
-              <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h6>
-              <h6 class="list-group-item-text"> Total: $'.$total_fila.' </h6>
+              <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.number_format($fila['precio'], 2).' </h6>
+              <h6 class="list-group-item-text"> Total: $'.number_format($total_fila, 2).' </h6>
             </div>';
           }
           $total= $total + $total_fila;

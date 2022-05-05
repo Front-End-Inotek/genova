@@ -846,8 +846,8 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtener los datos del pedido restaurante cobrado
-      function saber_pedido_rest_cobro($mov,$id_mesa){
-        $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND id_mesa = $id_mesa AND pagado = 0 AND pedido = 0 AND estado = 1";
+      function saber_pedido_rest_cobro($mov,$id_mesa,$pedido){
+        $sentencia = "SELECT * FROM pedido_rest WHERE mov = $mov AND id_mesa = $id_mesa AND pagado = 0 AND pedido = $pedido AND estado = 1";
         //echo $sentencia;
         $comentario="Obtener los datos del pedido restaurante cobrado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

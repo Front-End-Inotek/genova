@@ -25,6 +25,7 @@
           $comentario= urldecode($_POST['comentario']);
   }
   $efectivo_pago= 0;
+  $forma_pago= 1;
 
   // Se agrega el pedido
   $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['hab_id']);
@@ -46,7 +47,7 @@
   }
   
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
-  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],$_POST['hab_id']);
+  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],$_POST['hab_id'],0);
   while($fila = mysqli_fetch_array($consulta))
   {
       $nombre= $inventario->obtengo_nombre($fila['id_producto']);
@@ -59,7 +60,7 @@
       $historial_nuevo= $historial + $fila['cantidad'];
       $inventario->editar_cantidad_inventario($fila['id_producto'],$cantidad_nueva);
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);*/
-      $concepto->agregar_concepto_ticket($ticket_id,$_POST['usuario_id'],$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+      $concepto->agregar_concepto_ticket($ticket_id,$_POST['usuario_id'],$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$forma_pago,$tipo_cargo,$categoria);
   }
 
   // Se editan estados y se imprime
