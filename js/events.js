@@ -3334,6 +3334,7 @@ function cambio_rest_descuento(total){
 
 // Aplicar el cobro en pedido restaurante
 function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
+    var total_inicial= total;
     var usuario_id=localStorage.getItem("id");
 	var efectivo=parseFloat($("#efectivo").val());
     var cambio=parseFloat($("#cambio").val());
@@ -3367,6 +3368,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
         total_final= total;
     }
 	var total_pago= efectivo + monto;
+    total_descuento= total_inicial - total_final;
 
     // Checar si el cobro es en mesa o no
     if(monto <= total_final){
@@ -3400,7 +3402,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             type: "POST",
                             dataType: "html",
                             contentType: "application/x-www-form-urlencoded",
-                            //url:"includes/aplicar_rest_cobro.php",
+                            url:"includes/aplicar_rest_cobro.php",
                             data:datos,
                             beforeSend:loaderbar,
                              success:principal,
@@ -3436,7 +3438,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             type: "POST",
                             dataType: "html",
                             contentType: "application/x-www-form-urlencoded",
-                            //url:"includes/cobrar_rest_cobro_mesa.php",
+                            url:"includes/cobrar_rest_cobro_mesa.php",
                             data:datos,
                             beforeSend:loaderbar,
                             success:mesas_restaurante,
@@ -3525,7 +3527,7 @@ function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_i
                             type: "POST",
                             dataType: "html",
                             contentType: "application/x-www-form-urlencoded",
-                            //url:"includes/cargar_rest_cobro_mesa.php",
+                            url:"includes/cargar_rest_cobro_mesa.php",
                             data:datos,
                             beforeSend:loaderbar,
                             success:mesas_restaurante,

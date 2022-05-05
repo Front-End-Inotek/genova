@@ -18,6 +18,7 @@
   $logs= NEW Log(0);
   
   // Pedido de restaurante en mesa que luego se cobrara al final
+  if(empty($_POST['comentario'])){
           //echo 'La variable esta vacia';
           $comentario= '';
   }else{
@@ -26,8 +27,10 @@
   $efectivo_pago= 0;
 
   // Se agrega el pedido
-  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
-  $pedido_rest->agregar_pedido($id_pedido,$_POST['mov']);
+  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['hab_id']);
+  if($id_pedido == 0){
+          $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
+  }
 
   // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante
@@ -62,13 +65,7 @@
   // Se editan estados y se imprime
   $pagado= 0;
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-  $pedido->cambiar_estado_pedido($id_pedido);
   $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
-  
-  // Imprimir ticket
-  /*if($confi->ticket_restaurante == 0){
-      $ticket->cambiar_estado($ticket_id);
-  }*/ //Checar
 
   // Se guarda el pedido de restaurante en mesa que luego se cobrara al final
   $logs->guardar_log($_POST['usuario_id'],"Pedir restaurante en mesa: ". $mesa->nombre);

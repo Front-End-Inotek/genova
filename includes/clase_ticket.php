@@ -473,18 +473,19 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           $producto= $inventario->obtener_id($fila['nombre']);
+          $total_fila= $fila['cantidad'] * $fila['precio'];
           if(($cantidad%2)==0){
             echo '<div href="#" class="list-group-item list-group-item-success" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
               <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h6>
-              <h6 class="list-group-item-text"> Total: $'.$fila['total'].' </h6>
+              <h6 class="list-group-item-text"> Total: $'.$total_fila.' </h6>
             </div>';
           }else{
             echo '<div href="#" class="list-group-item list-group-item-info" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
               <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h6>
-              <h6 class="list-group-item-text"> Total: $'.$fila['total'].' </h6>
+              <h6 class="list-group-item-text"> Total: $'.$total_fila.' </h6>
             </div>';
           }
-          $total= $total+$fila['total'];
+          $total= $total + $total_fila;
           $cantidad++;
           /*echo ' <a href="#" class="list-group-item list-group-item-info" onclick="herramienta_comanda('.$fila['id'].')">
               <div class="row">
