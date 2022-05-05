@@ -84,7 +84,7 @@
                     </select>
                   </div>
                   <div class="col-sm-4">
-                    <input type="number" class="form-control" id="folio" placeholder="Folio de autorización" onclick="mostrarteclado_rest(4,'.$precio.')"  maxlength="40">
+                    <input type="text" class="form-control" id="folio" placeholder="Folio de autorización" onclick="mostrarteclado_rest(4,'.$precio.')"  maxlength="40">
                   </div>
                 </div>
                     
