@@ -1,11 +1,13 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_configuracion.php");
+  include_once("clase_cuenta.php");
   include_once("clase_inventario.php");
   include_once("clase_mesa.php");
   include_once("clase_ticket.php");
   include_once("clase_log.php");
-  $confi= NEW Configuracion();
+  $confi= NEW Configuracion(0);
+  $cuenta= NEW Cuenta(0);
   $inventario= NEW Inventario(0);
   $mesa= NEW Mesa($_POST['mesa_id']);
   $pedido_rest= NEW Pedido_rest(0);
@@ -49,7 +51,7 @@
           $credencial= urldecode($_POST['credencial']);
   }
   $comentario= $comentario.'  con credencial '.$credencial;
-  
+
   // Actualizamos datos del ticket del pedido_rest del restaurante
   $ticket_id= $ticket->saber_id_ticket($_POST['mov']);
   //$total_calculo= $concepto->saber_total_mesa($ticket_id);
@@ -66,23 +68,25 @@
       $historial_nuevo= $historial + $fila['cantidad'];
       $inventario->editar_cantidad_inventario($fila['id_producto'],$cantidad_nueva);
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
-  }
+  }$logs->guardar_log($_POST['usuario_id'],"Cargo a");
 
   // Se obtiene el pedido, editan estados y se imprime
-  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id'])
+  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);
   $pagado= 1;// SE CAMBIA A PAGAR O NO O SE PONE 0
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
   $pedido->cambiar_estado_pedido($id_pedido);
   
   // Guardar el cargo total del restaurante de la habitacion desde una mesa
-  $descripcion= 'Restaurante mesa: '. $mesa->nombre.'  con credencial '.$credencial;
+  $descripcion= 'Restaurante mesa: '.$mesa->nombre.'  con credencial '.$credencial;
   $cargo= $total_final;
   $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);
+  $logs->guardar_log($_POST['usuario_id'],"Cargo c");
 
   // Cambiar estado de la mesa a disponible
   $mesa->cambiomesa($_POST['mesa_id'],$_POST['mov'],0);
 
-  // Imprimir ticket
+  // Imprimir ticket y cambiar estado a pagado
+  $ticket->cambiar_estado_especifico($ticket_id,1);
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }

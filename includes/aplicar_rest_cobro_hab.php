@@ -75,7 +75,8 @@
   $cargo= $_POST['total'];
   $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);
   
-  // Imprimir ticket
+  // Imprimir ticket y cambiar estado a pagado
+  $ticket->cambiar_estado_especifico($ticket_id,1);
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }

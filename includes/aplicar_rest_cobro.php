@@ -107,7 +107,8 @@
   $pedido->cambiar_estado_pedido($id_pedido);
   $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
   
-  // Imprimir ticket
+  // Imprimir ticket y cambiar estado a pagado
+  $ticket->cambiar_estado_especifico($ticket_id,1);
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }
