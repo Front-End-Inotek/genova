@@ -95,7 +95,8 @@
   // Cambiar estado de la mesa a disponible
   $mesa->cambiomesa($_POST['mesa_id'],$_POST['mov'],0);
   
-  // Imprimir ticket
+  // Imprimir ticket y cambiar estado a pagado
+  $ticket->cambiar_estado_especifico($ticket_id,1);
   if($confi->ticket_restaurante == 0){
       $ticket->cambiar_estado($ticket_id);
   }

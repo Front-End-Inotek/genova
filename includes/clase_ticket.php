@@ -126,6 +126,14 @@
         $comentario="Cambiar estado de impreso del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Cambiar a un estado en especifico del ticket
+      function cambiar_estado_especifico($id_ticket,$estado){
+        $sentencia = "UPDATE `ticket` SET
+        `estado` = '$estado'
+        WHERE `id` = '$id_ticket';";
+        $comentario="Cambiar a un estado en especifico del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Editar el estado del ticket
       function editar_estado($id_usuario,$corte,$estado){
         $sentencia = "UPDATE `ticket` SET
