@@ -874,9 +874,22 @@
         }
         return $id;
       }
-      // Obtener el pedido restaurante para guardarlo en el ticket
+      // Obtener el concepto del pedido restaurante para guardarlo en el ticket
       function saber_comanda($mov){
         $sentencia = "SELECT id FROM pedido_rest WHERE mov = $mov AND estado = 1 ORDER BY id DESC LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtener el concepto del pedido restaurante para guardarlo en el ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $comanda= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $comanda=$fila['id'];
+        }
+        return $comanda;
+      }
+      /*// Obtener el pedido restaurante para guardarlo en el ticket
+      function saber_comanda($mov){
+        $sentencia = "SELECT id FROM pedido WHERE mov = $mov AND estado = 1 ORDER BY id DESC LIMIT 1";
         //echo $sentencia;
         $comentario="Obtener el pedido restaurante para guardarlo en el ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -886,7 +899,7 @@
           $comanda=$fila['id'];
         }
         return $comanda;
-      }
+      }*/
 
   }
   /**
