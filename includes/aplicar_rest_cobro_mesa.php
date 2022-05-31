@@ -27,11 +27,13 @@
   $efectivo_pago= 0;
   $forma_pago= 1;
 
-  // Se agrega el pedido
-  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['hab_id']);
+  // Se agrega el pedido solo uno
+  /*$id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['hab_id']);
   if($id_pedido == 0){
           $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
-  }
+  }*/
+  // Se agrega el pedido varios
+  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
 
   // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante
@@ -40,7 +42,8 @@
   if($ticket_id == 0){
           $nueva_etiqueta= $labels->obtener_etiqueta();
           $labels->actualizar_etiqueta();
-          $comanda= $pedido_rest->saber_comanda($_POST['mov']);
+          //$comanda= $pedido_rest->saber_comanda($_POST['mov']);
+          $comanda= $id_pedido;
           // $_POST['forma_pago'],$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario
           $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],1,0,0,0,0,0,0,0,'',$comentario,$nueva_etiqueta,$resta,$comanda,1);
           $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);

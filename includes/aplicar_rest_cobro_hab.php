@@ -33,7 +33,7 @@
   $efectivo_pago= 0;
 
   // Se agrega el pedido
-  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$hab->nombre);
+  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
   
   // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante
