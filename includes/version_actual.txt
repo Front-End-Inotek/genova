@@ -152,11 +152,11 @@ VERSION 2.3
 -Acomodo de pagar directo o agregar cargo a la habitacion en restaurante mesa
 -Revision de todas las formas de pago de restaurante en sus 5 modalidades
 -Revision de rest.libre con pago al momento 
-
-
-
-
 -Revision de rest.hab con pago al momento
+
+
+
+
 -Revision de rest.hab con envio de cargo a la hab
 -Revision de rest.mesa pedir multiples pedidos(comandas)
 -Revision de rest.mesa cobrar con pago al momento y multiples pedidos(comandas)
