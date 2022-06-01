@@ -874,9 +874,22 @@
         }
         return $id;
       }
-      // Obtener el pedido restaurante para guardarlo en el ticket
+      // Obtener el concepto del pedido restaurante para guardarlo en el ticket
       function saber_comanda($mov){
         $sentencia = "SELECT id FROM pedido_rest WHERE mov = $mov AND estado = 1 ORDER BY id DESC LIMIT 1";
+        //echo $sentencia;
+        $comentario="Obtener el concepto del pedido restaurante para guardarlo en el ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $comanda= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $comanda=$fila['id'];
+        }
+        return $comanda;
+      }
+      /*// Obtener el pedido restaurante para guardarlo en el ticket
+      function saber_comanda($mov){
+        $sentencia = "SELECT id FROM pedido WHERE mov = $mov AND estado = 1 ORDER BY id DESC LIMIT 1";
         //echo $sentencia;
         $comentario="Obtener el pedido restaurante para guardarlo en el ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -886,7 +899,7 @@
           $comanda=$fila['id'];
         }
         return $comanda;
-      }
+      }*/
 
   }
   /**
@@ -960,11 +973,11 @@
         return $id;
       }
       // Cambiar el estado del pedido a ya pedido
-      function cambiar_estado_pedido($id){
+      function cambiar_estado_pedido($mov){
         $sentencia = "UPDATE `pedido` SET
         `estado` = '2'
-        WHERE `id` = '$id';";
-        echo $sentencia;
+        WHERE `mov` = '$mov' AND `estado` = '1';";
+        //echo $sentencia;
         $comentario="Cambiar el estado del pedido a ya pedido";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
@@ -979,7 +992,7 @@
       }
       // Obtener el id del pedido de la mesa actual
       function obtener_pedido($mov,$id_mesa){
-        $sentencia= "SELECT id FROM pedido WHERE mov = $mov AND id_mesa = $id_mesa AND estado = 1 ORDER BY id DESC LIMIT 1";
+        $sentencia= "SELECT id FROM pedido WHERE mov = $mov AND id_mesa = $id_mesa AND estado = 1 ORDER BY id DESC";
         $id= 0;
         $comentario="Obtener el id del pedido de la mesa actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

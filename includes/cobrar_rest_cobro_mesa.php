@@ -87,10 +87,11 @@
   }
 
   // Se obtiene el pedido, editan estados y se imprime
-  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);
+  //$id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);
   $pagado= 1;
+  // Se ponen como pagados y ya pedidos los pedidos hechos
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-  $pedido->cambiar_estado_pedido($id_pedido);
+  $pedido->cambiar_estado_pedido($_POST['mov']);
   
   // Cambiar estado de la mesa a disponible
   $mesa->cambiomesa($_POST['mesa_id'],$_POST['mov'],0);

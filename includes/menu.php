@@ -602,21 +602,14 @@
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_restaurante(0,0)">
-                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Restaurante</a>
-                                          </li>';
-                                        }
-                                        if($usuario->restaurante_agregar==1){
-                                          echo '
-                                          <li class="nav-item">
-                                              <a class="nav-link p-1 text-truncate" href="#" onclick="agregar_restaurante(0,0)">
-                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Directo</a>
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Directo</a>
                                           </li>';
                                         }
                                         if($usuario->restaurante_agregar==1){
                                           echo '
                                           <li class="nav-item">
                                               <a class="nav-link p-1 text-truncate" href="#" onclick="mesas_restaurante()">
-                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Mesas</a>
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Agregar Mesas</a>
                                           </li>';
                                         }
                                         echo '

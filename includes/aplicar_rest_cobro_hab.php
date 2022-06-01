@@ -20,7 +20,7 @@
   $logs= NEW Log(0);
   
   // Cobro de restaurante en hab con el total como cargo a la habitacion
-  $comentario= '';
+  $comentario= "Cargo de cobro restaurante en habitacion: ". $hab->nombre;
   $folio= '';
   $total_final= $_POST['total'];
   $total_pago= 0;
@@ -33,7 +33,7 @@
   $efectivo_pago= 0;
 
   // Se agrega el pedido
-  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$hab->nombre);
+  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
   
   // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante
@@ -43,7 +43,8 @@
   }*/ // DUDA DE SI SE VA GUARDAR TICKET NUEVO O NO EN HAB
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
-  $comanda= $pedido_rest->saber_comanda($_POST['mov']);
+  //$comanda= $pedido_rest->saber_comanda($_POST['mov']);
+  $comanda= $id_pedido;
   $ticket_id= $ticket->guardar_ticket($_POST['mov'],$_POST['hab_id'],$_POST['usuario_id'],$forma_pago,$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario,$nueva_etiqueta,$resta,$comanda,0);
   $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   

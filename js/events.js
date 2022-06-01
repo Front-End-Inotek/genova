@@ -3475,7 +3475,8 @@ function filtrar_huesped(){
 }
 
 // Aplicar el cobro en pedido restaurante enviado a una habitacion desde una mesa
-function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_id,estado,mov
+function cargar_rest_cobro_mesa(total,mesa_id,estado,mov){
+    var total_inicial= total;
     var usuario_id=localStorage.getItem("id");
     var hab= encodeURI(document.getElementById("hab").value);
     var nombre= encodeURI(document.getElementById("nombre").value);
@@ -3500,11 +3501,15 @@ function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_i
     }else{
         total_final= total;
     }
-    /*alert(descuento);
-    alert(total_inicial);
-    alert(total);
-    alert(total_descuento);
-    alert(total_final);*/
+    //alert(total);
+    total= parseFloat(total);
+    if(total > total_descuento){
+        total_final= total_descuento;
+    }else{
+        total_final= total;
+    }
+    total_descuento= total_inicial - total_final;
+    total_descuento= redondearDecimales(total_descuento,2);
 
     if(hab.length >0){
         if((revision_nombre != revision_hab) || (revision_apellido != revision_hab)){
@@ -3528,7 +3533,7 @@ function cargar_rest_cobro_mesa(total_inicial,mesa_id,estado,mov){//total,mesa_i
                             type: "POST",
                             dataType: "html",
                             contentType: "application/x-www-form-urlencoded",
-                            url:"includes/cargar_rest_cobro_mesa.php",
+                            //url:"includes/cargar_rest_cobro_mesa.php",
                             data:datos,
                             beforeSend:loaderbar,
                             success:mesas_restaurante,
@@ -3657,7 +3662,7 @@ function disponible_asignar_mesa(mesa_id,estado){
 			url:"includes/disponible_asignar.php",
 			data:datos,
 			beforeSend:loaderbar,
-			success:mesas_restaurante,
+			success:mesas_restaurante,//
 			//success:problemas,
 			timeout:5000,
 			error:problemas
