@@ -10,7 +10,7 @@
   $concepto= NEW Concepto(0);
   $ticket= NEW Ticket(0);
   $ticket_id= $ticket->saber_id_ticket($mesa->mov);
-  $precio= $concepto->saber_total_mesa($ticket_id);
+  $precio= $concepto->saber_total_mesa($ticket_id);//
   $total= 0;
 
   echo '

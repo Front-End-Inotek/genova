@@ -3657,7 +3657,7 @@ function disponible_asignar_mesa(mesa_id,estado){
 			url:"includes/disponible_asignar.php",
 			data:datos,
 			beforeSend:loaderbar,
-			success:mesas_restaurante,
+			success:mesas_restaurante,//
 			//success:problemas,
 			timeout:5000,
 			error:problemas
