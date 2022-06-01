@@ -59,7 +59,7 @@
 
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
   $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],$mesa_id,1);
-  while($fila = mysqli_fetch_array($consulta))
+  while($fila = mysqli_fetch_array($consulta))// FALTA TOTAL EN TICKET Y CAMBIAR TOTALES INVENTARIO
   {
       $cantidad= $inventario->cantidad_inventario($fila['id_producto']);
       // Acomodar el inventario en cantidad e historial
@@ -68,19 +68,20 @@
       $historial_nuevo= $historial + $fila['cantidad'];
       $inventario->editar_cantidad_inventario($fila['id_producto'],$cantidad_nueva);
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
-  }$logs->guardar_log($_POST['usuario_id'],"Cargo a");
+  }$logs->guardar_log($_POST['usuario_id'],"Cargo a");////
 
   // Se obtiene el pedido, editan estados y se imprime
-  $id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);
+  //$id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);
   $pagado= 1;// SE CAMBIA A PAGAR O NO O SE PONE 0
+  // Se ponen como pagados y ya pedidos los pedidos hechos
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-  $pedido->cambiar_estado_pedido($id_pedido);
+  $pedido->cambiar_estado_pedido($_POST['mov']);
   
   // Guardar el cargo total del restaurante de la habitacion desde una mesa
   $descripcion= 'Restaurante mesa: '.$mesa->nombre.'  con credencial '.$credencial;
-  $cargo= $total_final;
+  $cargo= $total_final;// NO HAY CARGO Y ESTA MAL EL MOV DEBE SER DE LA HAB
   $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);
-  $logs->guardar_log($_POST['usuario_id'],"Cargo c");
+  $logs->guardar_log($_POST['usuario_id'],"Cargo b");
 
   // Cambiar estado de la mesa a disponible
   $mesa->cambiomesa($_POST['mesa_id'],$_POST['mov'],0);

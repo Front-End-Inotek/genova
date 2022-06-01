@@ -86,7 +86,7 @@
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
   }
 
-  // Se obtiene el pedido, editan estados y se imprime/////
+  // Se obtiene el pedido, editan estados y se imprime
   //$id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);
   $pagado= 1;
   // Se ponen como pagados y ya pedidos los pedidos hechos
