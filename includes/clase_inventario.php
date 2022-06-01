@@ -982,6 +982,17 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
+      // Cambiar el estado del pedido a ya pedido con numero de hab
+      function cambiar_estado_pedido_hab($hab_id,$mov){
+        $sentencia = "UPDATE `pedido` SET
+        `id_hab` = '$hab_id',
+        `estado` = '2'
+        WHERE `mov` = '$mov' AND `estado` = '1';";
+        //echo $sentencia;
+        $comentario="Cambiar el estado del pedido a ya pedido con numero de hab";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
       // Cambiar el estado del pedido para imprimir la comanda
       function cambiar_estado($id_pedido){
         $sentencia = "UPDATE `pedido` SET

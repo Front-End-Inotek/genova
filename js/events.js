@@ -3533,7 +3533,7 @@ function cargar_rest_cobro_mesa(total,mesa_id,estado,mov){
                             type: "POST",
                             dataType: "html",
                             contentType: "application/x-www-form-urlencoded",
-                            //url:"includes/cargar_rest_cobro_mesa.php",
+                            url:"includes/cargar_rest_cobro_mesa.php",
                             data:datos,
                             beforeSend:loaderbar,
                             success:mesas_restaurante,

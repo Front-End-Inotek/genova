@@ -66,9 +66,9 @@
   }
 
   // Se editan estados y se imprime
-  $pagado= 0;
+  $pagado= 3;// Se cambia a 3 que indica que el estado pagado paso a deuda en habitacion
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-  $pedido->cambiar_estado_pedido($id_pedido);
+  $pedido->cambiar_estado_pedido_hab($_POST['hab'],$_POST['mov']);
   $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
   
   // Guardar el cargo total del restaurante de la habitacion

@@ -105,7 +105,7 @@
   // Se editan estados y se imprime
   $pagado= 1;
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-  $pedido->cambiar_estado_pedido($id_pedido);
+  $pedido->cambiar_estado_pedido($_POST['mov']);
   $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
   
   // Imprimir ticket y cambiar estado a pagado

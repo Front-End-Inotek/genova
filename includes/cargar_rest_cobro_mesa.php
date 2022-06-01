@@ -2,12 +2,14 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_configuracion.php");
   include_once("clase_cuenta.php");
+  include_once("clase_hab.php");
   include_once("clase_inventario.php");
   include_once("clase_mesa.php");
   include_once("clase_ticket.php");
   include_once("clase_log.php");
   $confi= NEW Configuracion(0);
   $cuenta= NEW Cuenta(0);
+  $hab= NEW Hab($_POST['hab']);
   $inventario= NEW Inventario(0);
   $mesa= NEW Mesa($_POST['mesa_id']);
   $pedido_rest= NEW Pedido_rest(0);
@@ -58,8 +60,8 @@
   $ticket->actualizar_ticket($ticket_id,$_POST['usuario_id'],$forma_pago,$total_final,$total_pago,$cambio,$monto,$descuento,$total_descuento,$factuar,$folio,$comentario);
 
   // Ajustes luego de guardar un ticket y pagarse pedido del restaurante
-  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],$mesa_id,1);
-  while($fila = mysqli_fetch_array($consulta))// FALTA TOTAL EN TICKET Y CAMBIAR TOTALES INVENTARIO
+  $consulta= $pedido_rest->saber_pedido_rest_cobro($_POST['mov'],$_POST['mesa_id'],1);
+  while($fila = mysqli_fetch_array($consulta))
   {
       $cantidad= $inventario->cantidad_inventario($fila['id_producto']);
       // Acomodar el inventario en cantidad e historial
@@ -68,20 +70,19 @@
       $historial_nuevo= $historial + $fila['cantidad'];
       $inventario->editar_cantidad_inventario($fila['id_producto'],$cantidad_nueva);
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
-  }$logs->guardar_log($_POST['usuario_id'],"Cargo a");////
+  }
 
   // Se obtiene el pedido, editan estados y se imprime
   //$id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);
-  $pagado= 1;// SE CAMBIA A PAGAR O NO O SE PONE 0
+  $pagado= 3;// Se cambia a 3 que indica que el estado pagado paso a deuda en habitacion
   // Se ponen como pagados y ya pedidos los pedidos hechos
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-  $pedido->cambiar_estado_pedido($_POST['mov']);
+  $pedido->cambiar_estado_pedido_hab($_POST['hab'],$_POST['mov']);
   
   // Guardar el cargo total del restaurante de la habitacion desde una mesa
   $descripcion= 'Restaurante mesa: '.$mesa->nombre.'  con credencial '.$credencial;
-  $cargo= $total_final;// NO HAY CARGO Y ESTA MAL EL MOV DEBE SER DE LA HAB
-  $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);
-  $logs->guardar_log($_POST['usuario_id'],"Cargo b");
+  $cargo= $total_final;
+  $cuenta->guardar_cuenta($_POST['usuario_id'],$hab->mov,$descripcion,$forma_pago,$cargo,0);
 
   // Cambiar estado de la mesa a disponible
   $mesa->cambiomesa($_POST['mesa_id'],$_POST['mov'],0);
