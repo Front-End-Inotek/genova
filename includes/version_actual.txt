@@ -157,3 +157,8 @@ VERSION 2.3
 -Revision de rest.mesa pedir multiples pedidos(comandas)
 -Revision de rest.mesa cobrar con pago al momento y multiples pedidos(comandas)
 -Revision de rest.mesa cobrar con envio de cargo a la hab y multiples pedidos(comandas)
+
+VERSION 2.4
+-Generar rama linea
+-Acomodar interfaz grafica de linea en restaurante directo
+en pedidos de mesa
