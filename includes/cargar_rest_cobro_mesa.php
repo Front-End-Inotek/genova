@@ -73,7 +73,7 @@
   }
 
   // Se obtiene el pedido, editan estados y se imprime
-  //$id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);
+  //$id_pedido= $pedido->obtener_pedido($_POST['mov'],$_POST['mesa_id']);  
   $pagado= 3;// Se cambia a 3 que indica que el estado pagado paso a deuda en habitacion
   // Se ponen como pagados y ya pedidos los pedidos hechos
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
