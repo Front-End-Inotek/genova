@@ -52,6 +52,7 @@
                 <div class="col-sm-4">
                   <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.','.$mesa.')" id="a_buscar" class="form-control color_black">
                 </div>
+                <div class="col-sm-8"></div>
               </div>
               ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
             echo '</div>

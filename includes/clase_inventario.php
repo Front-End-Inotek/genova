@@ -579,19 +579,21 @@
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
           {
-            if($cunt%3==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
-              echo $fila['nombre'];
-              echo'</button></div>';
-              $cunt=0;
-            }elseif($cunt%2==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
-              echo $fila['nombre'];
-              echo'</button></div>';
-            }else{
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
-              echo $fila['nombre'];
-              echo'</button></div>';
+            if($fila['id'] != -1){
+              if($cunt%3==0){
+                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+                echo $fila['nombre'];
+                echo'</button></div>';
+                $cunt=0;
+              }elseif($cunt%2==0){
+                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+                echo $fila['nombre'];
+                echo'</button></div>';
+              }else{
+                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+                echo $fila['nombre'];
+                echo'</button></div>';
+              }
             }
             $cunt++;
     
@@ -769,6 +771,7 @@
           $hab= NEW Hab($hab_id);
           $hab_nombre= $hab->nombre;
         }
+        $linea= -1;
         $cantidad= 0;
         $total= 0;
         $consulta= $this->total_productos($mov);
@@ -785,10 +788,12 @@
               <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Habitación: '.$hab_nombre.'</div>';
             }else{
               echo '<div class="col-sm-3"></div>
-              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
+              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
             } 
-            echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-3"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
+            echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
+            <div class="col-sm-2"><input type="submit" class="btn btn-success btn-rectangle-sm" value="Linea" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0)"></div>
+            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>
+            <div class="col-sm-1"></div>';                 
           }else{
             echo '<div class="col-sm-12"></div>'; 
           }
