@@ -670,8 +670,8 @@
       }
       // Agregar un producto al pedido de restaurante
       function agregar_producto_apedido($hab_id,$estado,$producto,$mov){
-        $pedido=$this->saber_pedido($mov,$producto);
-        if($pedido==0){
+        //$pedido=$this->saber_pedido($mov,$producto);
+        //if($pedido==0){
           include_once("clase_movimiento.php");
           include_once("clase_ticket.php");
           $movimiento= NEW Movimiento(0);
@@ -689,7 +689,7 @@
 
           $comanda= $this->ultima_insercion();
           $labels->actualizar_comanda($comanda);
-        }else{
+        /*}else{
           $cantidad= $this->saber_cantidad_pedido($pedido);
           $cantidad++;
           $sentencia = "UPDATE `pedido_rest` SET
@@ -698,7 +698,7 @@
           $comentario="Modificar la cantidad de productos en el pedido de restaurante";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //echo "Es producto ya existe";
-        }
+        }*/
       }
       // Obtener el estado del producto del pedido de restaurante
       function saber_pedido($mov,$producto){
@@ -791,7 +791,7 @@
               <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
             } 
             echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-2"><input type="submit" class="btn btn-success btn-rectangle-sm" value="Linea" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0)"></div>
+            <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0)">Linea</button></></div>
             <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>
             <div class="col-sm-1"></div>';                 
           }else{
@@ -806,6 +806,7 @@
           $mesa= NEW Mesa($mesa_id);
           $mesa_nombre= $mesa->nombre;
         }
+        $linea= -1;
         $cantidad= 0;
         $total= 0;
         $consulta= $this->total_productos($mov);
@@ -816,16 +817,19 @@
         }
 
         echo '<div class="row">'; 
-          if($cantidad > 0){
+          if($cantidad > 0){//
             if($mesa_id != 0){
-              echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
-              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Mesa: '.$mesa_nombre.'</div>';
+              echo '<div class="col-sm-1"></div>
+              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
+              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Mesa: '.$mesa_nombre.'</div>';
             }else{
               echo '<div class="col-sm-3"></div>
-              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
+              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
             } 
-            echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-3"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>';                 
+            echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
+            <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$mesa_id.','.$estado.','.$mov.',0)">Linea</button></></div>
+            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>   
+            <div class="col-sm-1"></div>';             
           }else{
             echo '<div class="col-sm-12"></div>'; 
           }
