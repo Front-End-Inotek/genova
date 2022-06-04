@@ -349,6 +349,11 @@ a.topictitle:hover {
   height: 62.2em;
   overflow-x: scroll;
 }
+.linea_restaurante{
+  font-size: 1.8em;
+  line-height:normal;
+  border-bottom: .30em solid #2d3139;
+}
 .btn-square-md-rest{/* */
   background-color: #71db94;
   width: 80px !important;

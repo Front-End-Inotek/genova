@@ -752,13 +752,19 @@
             {
               $total=$total+($fila['precio']*$fila['cantidad']);
               $cont++;
-              echo '<tr class="text-center">
-              <td>'.$fila['cantidad'].'</td>
-              <td>'.$fila['nombre'].'</td>
-              <td>$'.number_format($fila['precio'], 2).'</td>
-              <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
-              echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🗑️</button></td>';
-              echo '</tr>';
+              if($fila['id_producto'] == -1){
+                echo '<tr class="linea_restaurante color_black text-center">';
+                  //<td class="linea_restaurante color_black">L I N E A</td>';
+                echo '</tr>';
+              }else{
+                echo '<tr class="text-center">
+                <td>'.$fila['cantidad'].'</td>
+                <td>'.$fila['nombre'].'</td>
+                <td>$'.number_format($fila['precio'], 2).'</td>
+                <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
+                echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🗑️</button></td>';
+                echo '</tr>';
+              }
             } 
             echo '
           </tbody>

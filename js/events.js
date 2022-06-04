@@ -3209,7 +3209,11 @@ function recibe_datos_restaurante(datos){
 function recibe_datos_restaurante_directo(datos){
     //alert(datos);
     var res = datos.split("/");
-    agregar_restaurante_mesa(res[0] , res[1]);
+    if(res[2] == 0){
+        agregar_restaurante(res[0] , res[1]);
+    }else{
+        agregar_restaurante_mesa(res[0] , res[1]);
+    }
 }
 
 // Agregar en el restaurante

@@ -162,7 +162,7 @@ VERSION 2.4
 -Generar rama linea
 -Acomodar interfaz grafica de linea en restaurante directo, hab y mesas
 -Separar productos en pedido siempre de restaurante directo, hab y mesas
-
+-Al pedir un concepto en un pedido(comanda) poder editarlo
 
 -Poner linea en restaurante directo
 en pedidos de mesa

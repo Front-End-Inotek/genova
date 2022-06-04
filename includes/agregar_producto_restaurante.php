@@ -15,7 +15,7 @@
       echo $categoria."/".$_POST['hab_id']."/".$_POST['estado']."/".$_POST['mesa'];
     }
   }else{
-    echo $_POST['hab_id']."/".$_POST['estado'];
+    echo $_POST['hab_id']."/".$_POST['estado']."/".$_POST['mesa'];
   }
 ?>
 
