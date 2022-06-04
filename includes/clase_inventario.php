@@ -744,6 +744,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Precio</th>
             <th>Subtotal</th>
+            <th><span class=" glyphicon glyphicon-cog"></span> Editar</th>
             <th><span class=" glyphicon glyphicon-cog"></span> Quitar</th>
             </tr>
           </thead>
@@ -762,7 +763,8 @@
                 <td>'.$fila['nombre'].'</td>
                 <td>$'.number_format($fila['precio'], 2).'</td>
                 <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
-                echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🗑️</button></td>';
+                echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> ✎</button></td>';
+                echo '<td><button class="btn btn-outline-danger btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🗑️</button></td>';
                 echo '</tr>';
               }
             } 

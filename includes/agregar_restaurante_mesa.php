@@ -44,7 +44,7 @@
         <div class="col-sm-6" style="background-color:white;">
           <div class="card">
             <div class="card-header alinear_centro">
-              <h5>Pedido</h5>
+              <h5>Pedi88do</h5>
             </div>
 
             <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">
@@ -59,7 +59,7 @@
 
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">
-              ';$pedido_rest->mostar_pedido_funciones_mesa($_GET['mesa_id'],$_GET['estado'],$mov);
+              ';//$pedido_rest->mostar_pedido_funciones_mesa($_GET['mesa_id'],$_GET['estado'],$mov);
             echo '</div>
           </div><br>
         
