@@ -3164,37 +3164,20 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
         "mesa": mesa,
 		"usuario_id": usuario_id,
 		};
-        //if(mov == 0){
-            $.ajax({
-                async:true,
-                type: "POST",
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                url:"includes/agregar_producto_restaurante.php",
-                data:datos,
-                beforeSend:loaderbar,
-                success:recibe_datos_restaurante,
-                //success:problemas,
-                timeout:5000,
-                error:problemas_cargar_producto
-                });
-            return false;
-        /*}else{
-            $.ajax({
-                async:true,
-                type: "POST",
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                url:"includes/agregar_producto_restaurante.php",
-                data:datos,
-                beforeSend:loaderbar,
-                success:recibe_datos_restaurante_directo,
-                //success:problemas,
-                timeout:5000,
-                error:problemas_cargar_producto
-                });
-            return false;
-        }*/
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/agregar_producto_restaurante.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:recibe_datos_restaurante,
+            //success:problemas,
+            timeout:5000,
+            error:problemas_cargar_producto
+            });
+        return false;
 }
 
 // Recibe los datos para efectuar aregar producto de restaurante
@@ -3202,18 +3185,6 @@ function recibe_datos_restaurante(datos){
     //alert(datos);
     var res = datos.split("/");
     agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3]);
-}
-
-
-// Recibe los datos para efectuar aregar producto de restaurante
-function recibe_datos_restaurante_directo(datos){
-    //alert(datos);
-    var res = datos.split("/");
-    if(res[2] == 0){
-        agregar_restaurante(res[0] , res[1]);
-    }else{
-        agregar_restaurante_mesa(res[0] , res[1]);
-    }
 }
 
 // Agregar en el restaurante

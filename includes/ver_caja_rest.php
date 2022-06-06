@@ -93,7 +93,7 @@
                     <input type="number" class="form-control" id="descuento" placeholder="Descuento" onclick="mostrarteclado_rest(5,'.$precio.')" onKeyUp="cambio_rest_descuento('.$total.')">
                   </div>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" id="comentario" placeholder="Comentario del pedido" onclick="mostrarteclado_rest(6,'.$precio.')" maxlength="200">
+                    <input type="text" class="form-control" id="comentario" placeholder="Comentario de la cuenta" onclick="mostrarteclado_rest(6,'.$precio.')" maxlength="200">
                   </div>
                 </div>  
                 

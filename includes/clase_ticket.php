@@ -396,10 +396,13 @@
       }
       // Guardar el concepto del ticket
       function guardar_concepto($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria){
-        $sentencia = "INSERT INTO `concepto` (`activo`, `id_ticket`, `id_usuario`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `tipo_cargo`, `categoria`)
-        VALUES ('1', '$id_ticket', '$id_usuario', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria');";
-        $comentario="Guardamos el concepto en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $nombre_mayuscula= strtoupper($nombre);
+        if($nombre_mayuscula != 'LINEA'){
+          $sentencia = "INSERT INTO `concepto` (`activo`, `id_ticket`, `id_usuario`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `tipo_cargo`, `categoria`)
+          VALUES ('1', '$id_ticket', '$id_usuario', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria');";
+          $comentario="Guardamos el concepto en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }
       }
       // Saber cual es el numero del concepto
       function saber_pedido($id_ticket,$nombre){
@@ -429,19 +432,22 @@
       }
       function agregar_concepto_ticket($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria){
         $pedido= $this->saber_pedido($id_ticket,$nombre);
+        $nombre_mayuscula= strtoupper($nombre);
         if($pedido == 0){
           $this->guardar_concepto($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria);
         }else{
-          $cant= $this->saber_cantidad_pedido($pedido);
-          $cant= $cant + $cantidad;
-          $total_final= $precio * $cant;
-          $sentencia = "UPDATE `concepto` SET
-          `cantidad` = '$cant',
-          `total` = '$total_final'
-          WHERE `id` = '$pedido';";
-          $comentario="Modificar la cantidad de productos en el concepto";
-          $consulta= $this->realizaConsulta($sentencia,$comentario);
-          //echo "Es producto ya existe";
+          if($nombre_mayuscula != 'LINEA'){
+            $cant= $this->saber_cantidad_pedido($pedido);
+            $cant= $cant + $cantidad;
+            $total_final= $precio * $cant;
+            $sentencia = "UPDATE `concepto` SET
+            `cantidad` = '$cant',
+            `total` = '$total_final'
+            WHERE `id` = '$pedido';";
+            $comentario="Modificar la cantidad de productos en el concepto";
+            $consulta= $this->realizaConsulta($sentencia,$comentario);
+            //echo "Es producto ya existe";
+          }
         }
       }
       // Cambiar estado activo del concepto
