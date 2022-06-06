@@ -560,6 +560,14 @@
         $comentario="Editar la cantidad del concepto seleccionado del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Borrar un concepto
+      function borrar_concepto($id){
+        $sentencia = "UPDATE `concepto` SET
+        `activo` = '0'
+        WHERE `id` = '$id';";
+        $comentario="Poner estado de concepto como inactivo";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
     
   }
 ?>

@@ -2,7 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_ticket.php");
   include_once ("clase_usuario.php");
-  include_once('clase_log.php');
+  include_once("clase_log.php");
   $concepto = NEW Concepto(0);
   $usuario = NEW Usuario(0);
   $logs = NEW Log(0);

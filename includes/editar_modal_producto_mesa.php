@@ -38,7 +38,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger btn" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-primary btn" onclick="modificar_producto_mesa('.$_GET['mesa_id'].','.$_GET['producto'].','.$_GET['precio'].','.$_GET['id_producto'].','.$_GET['cantidad'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success btn" onclick="modificar_producto_mesa('.$_GET['mesa_id'].','.$_GET['producto'].','.$_GET['precio'].','.$_GET['id_producto'].','.$_GET['cantidad'].')"> Aceptar</button>
     </div>
   </div>';
 ?>

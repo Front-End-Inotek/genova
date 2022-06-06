@@ -25,8 +25,8 @@
       </div>
     </div></br>';
 
-    echo '<div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    echo ' <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
     </div>
   </div>';
 ?>
