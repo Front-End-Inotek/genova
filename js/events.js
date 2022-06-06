@@ -3714,6 +3714,138 @@ function ver_caja_rest(mesa_id,estado){
 	//$("#mostrar_herramientas").load("includes/mesa_cobrar_rest.php?mesa_id="+mesa_id+"&estado="+estado);
 }
 
+// Herramientas para modificar un concepto del ticket de una mesa
+function herramienta_comanda(mesa_id,comanda,cantidad,precio,producto){
+	//$("#caja_herramientas").modal();
+	$("#mostrar_herramientas").load("includes/herramienta_comanda.php?mesa_id="+mesa_id+"&comanda="+comanda+"&cantidad="+cantidad+"&precio="+precio+"&producto="+producto);
+}
+
+// Modal de editar producto del concepto de una mesa
+function editar_modal_producto_mesa(mesa_id,producto,cantidad,precio,id_producto){
+    $("#mostrar_herramientas").load("includes/editar_modal_producto_mesa.php?mesa_id="+mesa_id+"&producto="+producto+"&cantidad="+cantidad+"&precio="+precio+"&id_producto="+id_producto);
+}
+
+// Editar producto del concepto de una mesa 
+function modificar_producto_mesa(mesa_id,producto,precio,id_producto,cantidad_antes){
+	var estado= 1;
+	var id=localStorage.getItem("id");
+    var cantidad= document.getElementById("cantidad").value;
+	var usuario= encodeURI(document.getElementById("usuario").value);
+    var contrasena= document.getElementById("contrasena").value;
+    
+
+	if(cantidad>0 && usuario.length>0 && contrasena.length>0){
+        var datos = {
+            "id": id,
+			"cantidad": cantidad,
+			"usuario": usuario,
+            "contrasena": contrasena,
+            "mesa_id": mesa_id,
+			"estado": estado,
+            "producto": producto,
+            "precio": precio,
+			"id_producto": id_producto,
+			"cantidad_antes": cantidad_antes,
+            };
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/modificar_producto_mesa.php",
+            data:datos,
+            //beforeSend:loaderbar,
+            success:recibe_datos_editar_mesa,
+            //success:problemas,
+			timeout:5000,
+			error:problemas
+            });
+        return false;
+    }else{
+        alert("Campos incompletos"); 
+    }        
+}
+
+// Mensaje de usuario o contrasena mal al editar
+function recibe_datos_editar_mesa(datos){
+	var res= datos.split("/");
+	var id= parseInt(res[2]);
+	if(id >= 1){
+		localStorage.setItem("id",id);
+    	$('#caja_herramientas').modal('hide');
+		if(res[0] != 0){
+			ver_caja_rest(res[0],res[1]);
+		}else{
+			ver_caja(res[0],res[1]);
+		}
+	}else{
+		alert("¡Creo que has escrito mal tu usuario o contraseña!"); 
+		editar_modal_producto_mesa(res[0],res[3],res[4],res[5]);
+		//$("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-warning"><span class="glyphicon glyphicon-remove"></span> Creo que has escrito mal tu usuario o contraseña </strong>');
+	}
+}
+
+// Modal de borrar producto del concepto de una mesa
+function borrar_modal_producto_mesa(mesa_id,producto,id_producto){
+	$("#mostrar_herramientas").load("includes/borrar_modal_producto_mesa.php?mesa_id="+mesa_id+"&producto="+producto+"&id_producto="+id_producto);
+}
+
+// Eliminar producto del concepto de una mesa
+function eliminar_producto_mesa(mesa_id,producto,id_producto){
+	var estado= 1;
+	var id=localStorage.getItem("id");
+	var usuario= encodeURI(document.getElementById("usuario").value);
+    var contrasena= document.getElementById("contrasena").value;
+    
+
+	if(usuario.length>0 && contrasena.length>0){
+        var datos = {
+            "id": id,
+			"usuario": usuario,
+            "contrasena": contrasena,
+            "mesa_id": mesa_id,
+			"estado": estado,
+            "producto": producto,
+			"id_producto": id_producto,
+            };
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/eliminar_producto_mesa.php",
+            data:datos,
+            //beforeSend:loaderbar,
+            success:recibe_datos_borrar_mesa,
+            //success:problemas,
+			timeout:5000,
+			error:problemas
+            });
+        return false;
+    }else{
+        alert("Campos incompletos"); 
+    }        
+}
+
+// Mensaje de usuario o contrasena mal al borrar
+function recibe_datos_borrar_mesa(datos){
+	var res= datos.split("/");
+	var id= parseInt(res[2]);
+	if(id >= 1){
+		localStorage.setItem("id",id);
+    	$('#caja_herramientas').modal('hide');
+		if(res[0] != 0){
+			ver_caja_rest(res[0],res[1]);
+		}else{
+			ver_caja(res[0],res[1]);
+		}
+	}else{
+		alert("¡Creo que has escrito mal tu usuario o contraseña!"); 
+		borrar_modal_producto_mesa(res[0],res[3],res[4]);
+		//$("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-warning"><span class="glyphicon glyphicon-remove"></span> Creo que has escrito mal tu usuario o contraseña </strong>');
+	}
+}
+
 // Modal de cambiar la cantidad de personas en la mesa
 function mesa_cambiar_personas(mesa_id,estado){
 	$("#mostrar_herramientas").load("includes/mesa_cambiar_personas.php?mesa_id="+mesa_id+"&estado="+estado);

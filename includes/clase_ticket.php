@@ -536,6 +536,19 @@
         }*/
   
       }
+      // Mostrar la informacion del concepto seleccionado del ticket
+      function mostar_info_comanda($id){
+        $sentencia = "SELECT  * FROM concepto WHERE id = $id LIMIT  1";
+        $comentario="Mostrar la informacion del concepto seleccionado del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo ' <a href="#" class="list-group-item">
+            <h5 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h5>
+            <p class="list-group-item-text"> Total: $'.$fila['total'].' </p>
+          </a>';
+        }
+      }
     
   }
 ?>
