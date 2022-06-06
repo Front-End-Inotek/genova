@@ -3164,7 +3164,7 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
         "mesa": mesa,
 		"usuario_id": usuario_id,
 		};
-        if(mov == 0){
+        //if(mov == 0){
             $.ajax({
                 async:true,
                 type: "POST",
@@ -3179,7 +3179,7 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
                 error:problemas_cargar_producto
                 });
             return false;
-        }else{
+        /*}else{
             $.ajax({
                 async:true,
                 type: "POST",
@@ -3194,7 +3194,7 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
                 error:problemas_cargar_producto
                 });
             return false;
-        }
+        }*/
 }
 
 // Recibe los datos para efectuar aregar producto de restaurante
@@ -3210,7 +3210,6 @@ function recibe_datos_restaurante_directo(datos){
     //alert(datos);
     var res = datos.split("/");
     if(res[2] == 0){
-        alert(res[2]);
         agregar_restaurante(res[0] , res[1]);
     }else{
         agregar_restaurante_mesa(res[0] , res[1]);
