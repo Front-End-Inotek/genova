@@ -728,7 +728,7 @@
       }
       // Mostrar los productos del pedido restaurente sin habitacion
       function mostar_pedido($hab_id,$estado,$mov,$mesa){
-        $sentencia = "SELECT *, pedido_rest.id AS ID 
+        $sentencia = "SELECT *,pedido_rest.id AS ID,pedido_rest.cantidad AS cant 
         FROM pedido_rest 
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pagado = 0 AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
         $comentario="Mostrar los productos del pedido restaurente sin habitacion";
@@ -763,7 +763,7 @@
                 <td>'.$fila['nombre'].'</td>
                 <td>$'.number_format($fila['precio'], 2).'</td>
                 <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
-                echo '<td><button class="btn btn-outline-warning btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> ✎</button></td>';
+                echo '<td><button class="btn btn-outline-warning btn-sm" href="#caja_herramientas" data-toggle="modal"  onclick="editar_modal_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$fila['cant'].')"> ✎</button></td>';
                 echo '<td><button class="btn btn-outline-danger btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🗑️</button></td>';
                 echo '</tr>';
               }
@@ -853,6 +853,14 @@
         $comentario="Obtengo el total de productos del pedido restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
+      }
+      // Editar un producto al pedido de restaurante
+      function editar_producto_apedido($id,$cantidad){
+        $sentencia = "UPDATE `pedido_rest` SET
+        `cantidad` = '$cantidad'
+        WHERE `id` = '$id';";
+        $comentario="Editar un producto al pedido de restaurante";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Eliminar un producto al pedido de restaurante
       function eliminar_producto_apedido($id){

@@ -3237,6 +3237,49 @@ function buscar_producto_restaurante(hab_id,estado,mov,mesa){
 	$("#caja_mostrar_busqueda").load("includes/buscar_producto_restaurante.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&a_buscar="+a_buscar+"&mesa="+mesa);
 }
 
+// Modal de editar producto del pedido del restaurante
+function editar_modal_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad){
+    $("#mostrar_herramientas").load("includes/editar_modal_producto_restaurante.php?producto="+producto+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa+"&cantidad="+cantidad);
+}
+
+// Editar producto del pedido del restaurante
+function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad_antes){
+	var usuario_id=localStorage.getItem("id");
+    var categoria= 0;
+    var cantidad= document.getElementById("cantidad").value;
+    
+
+	if(cantidad>0){
+        var datos = {
+            "producto": producto,
+            "categoria": categoria,
+            "hab_id": hab_id,
+            "estado": estado,
+            "mov": mov,
+            "mesa": mesa,
+            "cantidad": cantidad,
+            "cantidad_antes": cantidad_antes,
+            "usuario_id": usuario_id,
+            };
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/modificar_producto_restaurante.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:recibe_datos_restaurante,
+            //success:problemas,
+            timeout:5000,
+            error:problemas_cargar_producto
+            });
+        return false;
+    }else{
+        alert("Campos incompletos"); 
+    }        
+}
+
 // Borrar un producto del pedido del restaurante
 function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa){
     var usuario_id=localStorage.getItem("id");
@@ -3773,11 +3816,7 @@ function recibe_datos_editar_mesa(datos){
 	if(id >= 1){
 		localStorage.setItem("id",id);
     	$('#caja_herramientas').modal('hide');
-		if(res[0] != 0){
-			ver_caja_rest(res[0],res[1]);
-		}else{
-			ver_caja(res[0],res[1]);
-		}
+		ver_caja_rest(res[0],res[1]);
 	}else{
 		alert("¡Creo que has escrito mal tu usuario o contraseña!"); 
 		editar_modal_producto_mesa(res[0],res[3],res[4],res[5]);
@@ -3834,11 +3873,8 @@ function recibe_datos_borrar_mesa(datos){
 	if(id >= 1){
 		localStorage.setItem("id",id);
     	$('#caja_herramientas').modal('hide');
-		if(res[0] != 0){
-			ver_caja_rest(res[0],res[1]);
-		}else{
-			ver_caja(res[0],res[1]);
-		}
+		ver_caja_rest(res[0],res[1]);
+	
 	}else{
 		alert("¡Creo que has escrito mal tu usuario o contraseña!"); 
 		borrar_modal_producto_mesa(res[0],res[3],res[4]);
