@@ -1,13 +1,11 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
-  include_once("clase_inventario.php");
-  $inventario = NEW Inventario();
   echo '
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
+      Editar Producto
       <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h2 class="modal-title">Editar</h2>
     </div><br>
 
     <div class="modal-body">
@@ -19,7 +17,7 @@
         </div>
         </div>
       </div><br>
-      <h4>Introduzca los datos de autorización:</h4></br>
+      <h5>Introduzca los datos de autorización:</h5></br>
       <div class="row">
         <div class="col-sm-2" >Usuario:</div>
         <div class="col-sm-10" >

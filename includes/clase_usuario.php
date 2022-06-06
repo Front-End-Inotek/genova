@@ -381,6 +381,19 @@
               break; 
         }                 
       }
+      // Evaluar los datos de un usuario para autorizar un cambio
+      function evaluar_datos($usuario_evaluar,$contrasena_evaluar){
+        $id= 0;
+        $sentencia= "SELECT id FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$contrasena_evaluar' AND nivel <= 1 AND estado = 1";
+        $comentario= "Evaluar los datos de un usuario para autorizar un cambio";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //echo $sentencia;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+            $id= $fila['id'];
+        }
+        return $id;
+      }
       // Mostramos el nivel del usuario
       function mostrar_nivel($id){
         $sentencia = "SELECT nivel FROM usuario WHERE id = $id LIMIT 1 ";

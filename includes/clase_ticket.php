@@ -543,11 +543,22 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo ' <a href="#" class="list-group-item">
-            <h5 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.$fila['precio'].' </h5>
-            <p class="list-group-item-text"> Total: $'.$fila['total'].' </p>
-          </a>';
+          $total_fila= $fila['cantidad'] * $fila['precio'];
+          echo '<div href="#" class="list-group-item list-group-item">
+              <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.number_format($fila['precio'], 2).' </h6>
+              <h6 class="list-group-item-text"> Total: $'.number_format($total_fila, 2).' </h6>
+          </div>';//$fila['total']
         }
+      }
+      // Editar la cantidad del concepto seleccionado del ticket
+      function editar_concepto($id,$cantidad,$precio){
+        $total= $cantidad * $precio;
+        $sentencia = "UPDATE `concepto` SET
+        `cantidad` = '$cantidad',
+        `total` = '$total'
+        WHERE `id` = '$id';";
+        $comentario="Editar la cantidad del concepto seleccionado del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
     
   }

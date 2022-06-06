@@ -3716,7 +3716,7 @@ function ver_caja_rest(mesa_id,estado){
 
 // Herramientas para modificar un concepto del ticket de una mesa
 function herramienta_comanda(mesa_id,comanda,cantidad,precio,producto){
-	//$("#caja_herramientas").modal();
+	$("#caja_herramientas").modal();
 	$("#mostrar_herramientas").load("includes/herramienta_comanda.php?mesa_id="+mesa_id+"&comanda="+comanda+"&cantidad="+cantidad+"&precio="+precio+"&producto="+producto);
 }
 
