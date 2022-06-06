@@ -6,7 +6,7 @@
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-      Herraminetas
+      Herramientas
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div></br>
       

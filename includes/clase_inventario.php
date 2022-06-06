@@ -785,7 +785,9 @@
         $consulta= $this->total_productos($mov);
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $cantidad= $cantidad+$fila['cantidad'];
+          if($fila['id_producto'] != -1){
+            $cantidad= $cantidad+$fila['cantidad'];
+          }
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
 
@@ -820,7 +822,9 @@
         $consulta= $this->total_productos($mov);
         while ($fila = mysqli_fetch_array($consulta))
         {
-          $cantidad= $cantidad+$fila['cantidad'];
+          if($fila['id_producto'] != -1){
+            $cantidad= $cantidad+$fila['cantidad'];
+          }
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
 
@@ -835,7 +839,7 @@
               <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
             } 
             echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$mesa_id.','.$estado.','.$mov.',0)">Linea</button></></div>
+            <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$mesa_id.','.$estado.','.$mov.',1)">Linea</button></></div>
             <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>   
             <div class="col-sm-1"></div>';             
           }else{

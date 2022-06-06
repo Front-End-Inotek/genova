@@ -3210,6 +3210,7 @@ function recibe_datos_restaurante_directo(datos){
     //alert(datos);
     var res = datos.split("/");
     if(res[2] == 0){
+        alert(res[2]);
         agregar_restaurante(res[0] , res[1]);
     }else{
         agregar_restaurante_mesa(res[0] , res[1]);
