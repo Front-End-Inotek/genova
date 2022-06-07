@@ -72,7 +72,11 @@
   }
 
   // Se agrega el pedido
-  $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
+  if($_POST['mov'] == 0){
+          $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
+  }else{
+          $id_pedido= $pedido->pedir_rest_hab($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
+  }
   
   // Guardamos el ticket del pedido_rest del restaurante
   $tipo_cargo= 2; // Corresponde al cargo de restaurante

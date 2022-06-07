@@ -163,6 +163,4 @@ VERSION 2.4
 -Acomodar interfaz grafica de linea en restaurante directo, hab y mesas
 -Separar productos en pedido siempre de restaurante directo, hab y mesas
 -Al pedir un concepto en un pedido(comanda) poder editarlo o borrarlo
-
--Poner linea en restaurante directo
-en pedidos de mesa
+-Revision de funcionamiento correcto de linea y de productos separados en restaurante directo, hab y mesas

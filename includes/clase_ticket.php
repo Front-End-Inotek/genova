@@ -556,6 +556,15 @@
           </div>';//$fila['total']
         }
       }
+      // Editar forma de pago en los conceptos de un ticket 
+      function editar_pago_concepto($id_ticket,$efectivo_pago,$tipo_pago){
+        $sentencia = "UPDATE `concepto` SET
+        `efectivo_pago` = '$efectivo_pago',
+        `tipo_pago` = '$tipo_pago'
+        WHERE `id_ticket` = '$id_ticket';";
+        $comentario="Editar forma de pago en los conceptos de un ticket ";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Editar la cantidad del concepto seleccionado del ticket
       function editar_concepto($id,$cantidad,$precio){
         $total= $cantidad * $precio;

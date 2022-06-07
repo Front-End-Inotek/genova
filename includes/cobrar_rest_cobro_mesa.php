@@ -67,6 +67,11 @@
   }else{
           $factuar= 0;
   }
+  if($_POST['forma_pago'] == 1){
+          $efectivo_pago= 1;
+  }else{
+          $efectivo_pago= 0;
+  }
   
   // Actualizamos datos del ticket del pedido_rest del restaurante
   $ticket_id= $ticket->saber_id_ticket($_POST['mov']);
@@ -93,6 +98,9 @@
   $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
   $pedido->cambiar_estado_pedido($_POST['mov']);
   
+  // Editar forma de pago en los conceptos de un ticket 
+  $concepto->editar_pago_concepto($ticket_id,$efectivo_pago,$forma_pago);
+
   // Cambiar estado de la mesa a disponible
   $mesa->cambiomesa($_POST['mesa_id'],$_POST['mov'],0);
   

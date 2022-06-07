@@ -989,6 +989,18 @@
         $id= $this->ultima_insercion();
         return $id;
       }
+      // Agregar un pedido al restaurante desde una habitacion
+      function pedir_rest_hab($recepcion,$mov,$comentario,$id_hab){
+        $tiempo= date("Y-m-d H:i");
+        $id= 0;
+        $sentencia = "INSERT INTO `pedido` (`mov`, `id_hab`, `id_mesa`, `tiempo`, `comentario`, `impreso`, `recepcion`, `estado`)
+        VALUES ('$mov', '$id_hab', '0', '$tiempo', '$comentario', '1', '$recepcion', '1');";
+        $comentario="Mostrar las categorias en el restaurente";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        
+        $id= $this->ultima_insercion();
+        return $id;
+      }
       // Obtener el ultimo pedido ingresado 
       function ultima_insercion(){
         $sentencia= "SELECT id FROM pedido ORDER BY id DESC LIMIT 1";
