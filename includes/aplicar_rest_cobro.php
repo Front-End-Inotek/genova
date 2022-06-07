@@ -99,7 +99,7 @@
       $historial_nuevo= $historial + $fila['cantidad'];
       $inventario->editar_cantidad_inventario($fila['id_producto'],$cantidad_nueva);
       $inventario->editar_cantidad_historial($fila['id_producto'],$historial_nuevo);
-      $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+      $concepto->agregar_concepto_ticket($ticket_id,$_POST['usuario_id'],$nombre,$fila['cantidad'],$precio,($precio*$fila['cantidad']),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   }
 
   // Se editan estados y se imprime
