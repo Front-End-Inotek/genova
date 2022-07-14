@@ -45,7 +45,7 @@
       // Guardar la habitacion
       function guardar_hab($nombre,$tipo,$comentario){
         $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`, `cargo_noche`, `estado_hab`)
-        VALUES ('$nombre', '$tipo', '0', '0', '$comentario', '1', '0', '1');";
+        VALUES ('$nombre', '$tipo', '0', '$comentario', '0', '0', '1');";
         $comentario="Guardamos la habitacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }
@@ -118,7 +118,7 @@
       }
       // Obtengo los nombres de las habitaciones
       function mostrar_hab(){
-        $sentencia = "SELECT * FROM tipo_hab WHERE estado_hab = 1 ORDER BY id";
+        $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY id";
         $comentario="Mostrar los nombres de las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -129,7 +129,7 @@
       }
       // Obtengo los nombres de las habitaciones a editar
       function mostrar_hab_editar($id){
-        $sentencia = "SELECT * FROM tipo_hab WHERE estado_hab = 1 ORDER BY id";
+        $sentencia = "SELECT * FROM tipo_hab WHERE estad = 1 ORDER BY id";
         $comentario="Mostrar los nombres de las habitaciones a editar";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
