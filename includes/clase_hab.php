@@ -129,7 +129,7 @@
       }
       // Obtengo los nombres de las habitaciones a editar
       function mostrar_hab_editar($id){
-        $sentencia = "SELECT * FROM tipo_hab WHERE estad = 1 ORDER BY id";
+        $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY id";
         $comentario="Mostrar los nombres de las habitaciones a editar";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
