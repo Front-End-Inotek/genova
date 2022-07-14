@@ -164,3 +164,4 @@ VERSION 2.4
 -Separar productos en pedido siempre de restaurante directo, hab y mesas
 -Al pedir un concepto en un pedido(comanda) poder editarlo o borrarlo
 -Revision de funcionamiento correcto de linea y de productos separados en restaurante directo, hab y mesas
+-Retoques globales

@@ -58,7 +58,7 @@
 
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 1 ORDER BY hab.nombre";
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab = 1 ORDER BY hab.id";// nombre
         $comentario="Mostrar las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -118,7 +118,7 @@
       }
       // Obtengo los nombres de las habitaciones
       function mostrar_hab(){
-        $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT * FROM tipo_hab WHERE estado_hab = 1 ORDER BY id";
         $comentario="Mostrar los nombres de las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -129,7 +129,7 @@
       }
       // Obtengo los nombres de las habitaciones a editar
       function mostrar_hab_editar($id){
-        $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT * FROM tipo_hab WHERE estado_hab = 1 ORDER BY id";
         $comentario="Mostrar los nombres de las habitaciones a editar";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -278,7 +278,7 @@
         $cantidad=0;
         $sentencia = "SELECT *,count(hab.id) AS cantidad,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.nombre";
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.id";
         $comentario="Consultar disponibilidad de un tipo de habitacion para hacer checkin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -292,7 +292,7 @@
       function select_asignar_reservacion($tipo_hab,$id_reservacion,$habitaciones,$multiple){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.nombre";
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.id";
         $comentario="Seleccionar habitacion a asignar reservacion para checkin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
