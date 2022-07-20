@@ -1491,7 +1491,7 @@ function modificar_huesped(id,hab_id,id_reservacion){
 			  "cvv": cvv,
 			  "usuario_id": usuario_id,
             };
-        if(hab_id == 0){
+        if(hab_id == -1){
             $.ajax({
                     async:true,
                     type: "POST",
