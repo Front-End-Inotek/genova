@@ -2260,8 +2260,8 @@ function modificar_usuario(id){
                   /*"tipo_ver": tipo_ver,
                   "tipo_agregar": tipo_agregar,
                   "tipo_editar": tipo_editar,
-                  "tipo_borrar": tipo_borrar,
-                  "tarifa_ver": tarifa_ver,*/
+                  "tipo_borrar": tipo_borrar,*/
+                  "tarifa_ver": tarifa_ver,
                   "tarifa_agregar": tarifa_agregar,
                   "tarifa_editar": tarifa_editar,
                   "tarifa_borrar": tarifa_borrar,
