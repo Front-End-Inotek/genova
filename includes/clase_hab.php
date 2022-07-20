@@ -292,7 +292,7 @@
       function select_asignar_reservacion($tipo_hab,$id_reservacion,$habitaciones,$multiple){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.id";
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.estado_hab = 1 AND hab.tipo = $tipo_hab ORDER BY hab.id";
         $comentario="Seleccionar habitacion a asignar reservacion para checkin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo

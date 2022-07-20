@@ -758,7 +758,7 @@ function calcular_total_cupon(precio_hospedaje,total_adulto,total_junior,total_i
 }
 
 // Guardar una reservacion
-function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id,cantidad_maxima,tipo_hab){
+function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id,cantidad_maxima,tipo_hab,estado){
     var usuario_id=localStorage.getItem("id");
 	var id_huesped= document.getElementById("id_huesped").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
@@ -842,6 +842,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
                   "total_pago": total_pago,
                   "hab_id": hab_id,
                   "tipo_hab": tipo_hab,
+                  "estado": estado,
                   "usuario_id": usuario_id,
                 };
             $.ajax({
