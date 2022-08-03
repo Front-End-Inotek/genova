@@ -233,25 +233,6 @@
   $pdf->SetX($x);
   $pdf->SetXY($x,$y_final);
   $pdf->MultiCell(80,5,iconv("UTF-8", "ISO-8859-1",'Comentarios adicionales: '.$huesped->comentarios),0,'J');
-  
-  $pdf->Ln(4);
-  for ($i = 1; $i <= 40; $i++) {
-    $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
-    if($i == 13){
-        $pdf->Ln(4);
-        $pdf->SetFillColor(99, 155, 219);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
-        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
-        $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
-        $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'%'),0,0,'C',True);
-        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
-    }
-  }
 
   $logs->guardar_log($_GET['usuario_id'],"Reporte reservacion: ". $_GET['id']);
   //$pdf->Output("reporte_reservacion.pdf","I");
