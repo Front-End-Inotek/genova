@@ -100,6 +100,7 @@
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'CANTIDAD'),0,1,'C',True);
 
   // Datos dentro de la tabla surtir
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   if($_GET['id'] == 0){
       $id_reporte= $surtir->ultima_insercion_reporte();
@@ -115,26 +116,25 @@
       $cantidad = $fila['cantidad'];
       $pdf->Cell(45,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
       $pdf->Cell(80,5,iconv("UTF-8", "ISO-8859-1",$nombre),1,0,'C'); 
-      $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$cantidad),1,1,'C');    
-  }
-
-  $pdf->Ln(4);
-  for ($i = 1; $i <= 40; $i++) {
-    $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
-    if($i == 25){
-        $pdf->Ln(4);
+      $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$cantidad),1,1,'C'); 
+      
+      /*for ($i = 1; $i <= 26; $i++) {
+        $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
+      }*/
+    
+      $x=$pdf->GetX();
+      $y=$pdf->GetY();
+      if($y >= 265){
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',7);
+        $pdf->SetTextColor(255, 255, 255);
         $pdf->SetFillColor(99, 155, 219);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
-        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
-        $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
-        $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'%'),0,0,'C',True);
-        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
-    }
+        $pdf->Cell(45,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+        $pdf->Cell(80,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True);
+        $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'CANTIDAD'),0,1,'C',True);
+        $pdf->SetFont('Arial','',7);
+        $pdf->SetTextColor(0,0,0);
+      }
   }
 
   $logs->guardar_log($_GET['usuario_id'],"Reporte surtir inventario: ".$id_reporte.' del '.$dia.' de '.$mes.' de '.$anio);

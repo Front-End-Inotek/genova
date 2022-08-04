@@ -1667,9 +1667,7 @@ function cargo_noche(){
             timeout:5000,
             error:problemas_sistema
         });
-    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
-    //mostrar_cargo_noche_reporte();
-    cargo_noche();
+    window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
     return false;
 }
 
@@ -1681,7 +1679,7 @@ function guardar_reporte_cargo_noche(){
 	var ancho= tam[0];
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
-	window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
+	window.open("includes/mostrar_cargo_noche_reporte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
     setTimeout(mostrar_cargo_noche_reporte, 5000);
 }
 

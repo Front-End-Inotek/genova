@@ -7,6 +7,7 @@
       public $id;
       public $id_reporte;
       public $fecha;
+      public $fecha_surtido;
       public $producto;
       public $cantidad;
       public $estado;
@@ -18,6 +19,7 @@
           $this->id= 0;
           $this->id_reporte= 0;
           $this->fecha= 0;
+          $this->fecha_surtido= 0;
           $this->producto= 0;
           $this->cantidad= 0;
           $this->estado= 0;
@@ -30,6 +32,7 @@
               $this->id= $fila['id'];
               $this->id_reporte= $fila['id_reporte'];
               $this->fecha= $fila['fecha'];
+              $this->fecha_surtido= $fila['fecha_surtido'];
               $this->producto= $fila['producto'];
               $this->cantidad= $fila['cantidad'];
               $this->estado= $fila['estado'];
@@ -39,8 +42,8 @@
       // Guardar el surtir
       function guardar_surtir($producto,$cantidad){
         $fecha=time();
-        $sentencia = "INSERT INTO `surtir` (`id_reporte`, `fecha`, `producto`, `cantidad`, `estado`)
-        VALUES ('0', '$fecha', '$producto', '$cantidad', '1');";
+        $sentencia = "INSERT INTO `surtir` (`id_reporte`, `fecha`, `fecha_surtido`, `producto`, `cantidad`, `estado`)
+        VALUES ('0', '$fecha', '0', '$producto', '$cantidad', '1');";
         $comentario="Guardamos el surtir en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);                 
       }

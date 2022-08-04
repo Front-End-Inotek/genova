@@ -397,7 +397,7 @@
       }
       // Mostrar las categorias del inventario
       function categoria_surtir(){
-        $sentencia = "SELECT * FROM categoria ORDER BY nombre";
+        $sentencia = "SELECT * FROM categoria  AND estado = 1 ORDER BY nombre";
         $comentario="Mostrar las categorias del inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
