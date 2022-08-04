@@ -1,7 +1,11 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  include_once('clase_cargo_noche.php');
   include_once("clase_hab.php");
+  $cargo_noche = NEW Cargo_noche(0);
   $hab= NEW Hab(0);
+  $numero_actual= $cargo_noche->ultima_insercion();
+  $numero_actual++;//'.$numero_actual.'
   echo '
   <!-- Modal content-->
   <div class="modal-content">

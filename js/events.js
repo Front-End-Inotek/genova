@@ -1659,7 +1659,7 @@ function cargo_noche(){
             type: "POST",
             dataType: "html",
             contentType: "application/x-www-form-urlencoded",
-            //url:"includes/cargo_noche.php",
+            url:"includes/cargo_noche.php",
             data:datos,
             beforeSend:loaderbar,
             success:principal,
@@ -1667,8 +1667,9 @@ function cargo_noche(){
             timeout:5000,
             error:problemas_sistema
         });
-    window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
     //mostrar_cargo_noche_reporte();
+    cargo_noche();
     return false;
 }
 
