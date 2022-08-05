@@ -119,6 +119,7 @@
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
         $id_cuenta= 0;
+        $total_cargo= $total_suplementos;
         if($forzar_tarifa > 0){
           $total_cargo= $total_suplementos + $forzar_tarifa;
         }
