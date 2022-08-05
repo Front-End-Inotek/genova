@@ -45,7 +45,7 @@
 		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($id_usuario,$fila['ID']);
 		  $contador++;
 	  }
-	  $cantidad_hab= $this->total_hab= $this->cantidad_habitaciones($id_usuario);
+	  $cantidad_hab= $this->cantidad_hab= $this->cantidad_habitaciones($id_usuario);
 	  $total_hab= $this->total_hab= $this->total_habitaciones($id_usuario);
 
 	  // Obtenemos el total de personas extra
