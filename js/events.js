@@ -1635,7 +1635,6 @@ function cambiar_cargo_noche(id){
 			  error:problemas_sistema
 			});
             return false;
-    
     }else{ 
         alert("Campos incompletos");
     }
