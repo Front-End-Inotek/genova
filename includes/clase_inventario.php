@@ -528,7 +528,7 @@
       }
       // Busqueda de cualquier producto en el inventario
       function mostar_producto_busqueda($busqueda,$hab_id,$estado,$mov,$mesa){
-        $sentencia = "SELECT * FROM inventario WHERE nombre LIKE '%$busqueda%' ORDER BY categoria, nombre";
+        $sentencia = "SELECT * FROM inventario WHERE nombre LIKE '%$busqueda%' AND estado = 1 ORDER BY categoria, nombre";
         $comentario="Busqueda de cualquier producto en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $categoria= 0;
@@ -570,7 +570,7 @@
       }
       // Mostrar productos de las categorias existentes en el inventario
       function mostrar_producto_restaurente($categoria,$hab_id,$estado,$mov,$mesa){
-        $sentencia = "SELECT * FROM inventario WHERE categoria = $categoria ORDER BY nombre";
+        $sentencia = "SELECT * FROM inventario WHERE categoria = $categoria AND estado = 1 ORDER BY nombre";
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;

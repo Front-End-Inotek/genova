@@ -57,7 +57,7 @@
 	  $total_restaurante= 0;
 	  $total_productos_hab= 0;
 	  $total_productos_rest= 0;
-      $sentencia = "SELECT * FROM inventario WHERE estado = 1 ORDER BY categoria,nombre";
+      $sentencia = "SELECT * FROM inventario ORDER BY categoria,nombre";
 	  $comentario="Obtener el inventario";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
