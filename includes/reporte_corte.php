@@ -49,7 +49,7 @@
           $anio_hora = substr($fecha, 6, 13);
           $nombre= $conf->obtener_nombre();
           $nueva_etiqueta= $labels->obtener_corte();
-          $nueva_etiqueta= $nueva_etiqueta - 1;
+          //$nueva_etiqueta= $nueva_etiqueta - 1;
           $realizo_usuario= $usuario->obtengo_nombre_completo($_GET['usuario_id']);
 
           // Marco primera pagina
@@ -217,6 +217,29 @@
           $total_productos= $total_productos + $inf->producto_venta[$z];
           $total_productos_hab= $total_productos_hab + $inf->producto_tipo_venta[$z];
           $total_productos_rest= $total_productos_rest + ($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]);
+          
+          /*if($z == 4){
+            for ($i = 1; $i <= 24; $i++) {
+                $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
+            }
+          }*/
+          $x=$pdf->GetX();
+          $y=$pdf->GetY();
+          if($y >= 265){
+            $pdf->AddPage();
+            $pdf->SetFont('Arial','B',7);
+            $pdf->SetTextColor(255, 255, 255);
+            $pdf->SetFillColor(99, 155, 219);
+            $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+            $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",'Producto'),1,0,'C',True);
+            $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Precio'),1,0,'C',True);
+            $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'Venta'),1,0,'C',True);
+            $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Total'),1,0,'C',True);
+            $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'En Hab.'),1,0,'C',True);
+            $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'En Rest.'),1,1,'C',True);
+            $pdf->SetFont('Arial','',7);
+            $pdf->SetTextColor(0,0,0);
+          }
       }
       $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
       $pdf->SetFillColor(193, 229, 255);
@@ -228,38 +251,22 @@
       $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$total_productos_rest),1,1,'C',True);
       $pdf->SetFillColor(99, 155, 219);
   }
-
-  $pdf->Ln(4);
-  for ($i = 1; $i <= 40; $i++) {
-    $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
-    if($i == 22){
-        $pdf->Ln(4);
-        $pdf->SetFillColor(99, 155, 219);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
-        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
-        $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
-        $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
-        $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'%'),0,0,'C',True);
-        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
-    }
-  }
   
   $nueva_etiqueta= $labels->obtener_corte();
-  $nueva_etiqueta= $nueva_etiqueta - 1;
+  //$nueva_etiqueta= $nueva_etiqueta - 1;
   $corte_id= $corte->ultima_insercion();
-  // Cambiar concepto a inactivo
-  //$concepto->cambiar_activo($_GET['usuario_id']);
-  // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
-  //$ticket->editar_estado($_GET['usuario_id'],$corte_id,1);
   
   $logs->guardar_log($_GET['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
+  $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","F");
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
   //$pdf->Output("../reportes/corte/reporte_corte.pdf","I");
       //echo 'Reporte corte';*/ I
+
+  // Cambiar concepto a inactivo
+  $concepto->cambiar_activo($_GET['usuario_id']);
+  // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
+  $ticket->editar_estado($_GET['usuario_id'],$corte_id,2);
+  $labels->actualizar_etiqueta_corte();
 ?>
 

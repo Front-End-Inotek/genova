@@ -364,7 +364,7 @@
         $huesped= NEW Huesped(0);
         $tarifa= NEW Tarifa(0);
 
-        $sentencia = "SELECT *,hab.id AS ID 
+        $sentencia = "SELECT *,hab.id AS ID,hab.cargo_noche AS cargo 
         FROM hab
         INNER JOIN movimiento ON hab.mov = movimiento.id 
         INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE reservacion.forzar_tarifa = 0 AND hab.estado_hab = 1";
@@ -401,7 +401,8 @@
                 $id_huesped = $fila['id_huesped'];
                 $quien_reserva	= $fila['nombre_reserva'];
                 $descuento = $fila['descuento'];
-                $cargo_noche = $fila['cargo_noche'];
+                //$cargo_noche = $fila['cargo'];
+                $cargo_noche = $this->consultar_cargo($hab_id);
 
                 $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
                 $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
@@ -415,9 +416,9 @@
                 echo '<tr class="text-center">
                 <td><div class="form-check">';
                   if($cargo_noche == 0){
-                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onchange="cambiar_cargo_noche('.$hab_id.')">';
+                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onclick="cambiar_cargo_noche('.$hab_id.')">';
                   }else{
-                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onchange="cambiar_cargo_noche('.$hab_id.')" checked>';
+                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onclick="cambiar_cargo_noche('.$hab_id.')" checked>';
                   }
                 echo '</div></td>
                 <td>'.$hab_nombre.'</td>
@@ -454,6 +455,19 @@
         $comentario="Cambiar estado cargo noche en todas las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       } 
+      // Consultar cargo noche de una habitacion
+      function consultar_cargo($hab_id){
+        $cargo_noche= 0;
+        $sentencia = "SELECT cargo_noche FROM hab WHERE id = $hab_id LIMIT 1";
+        $comentario="Consultar cargo noche de una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cargo_noche= $fila['cargo_noche'];
+        }
+        return $cargo_noche;
+      }
               
   }
 ?>

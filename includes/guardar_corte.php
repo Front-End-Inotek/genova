@@ -24,7 +24,7 @@
     $pago[$z-1]= $inf->total_pago[$z-1];
   }
   $nueva_etiqueta= $labels->obtener_corte();
-  $labels->actualizar_etiqueta_corte();
+  //$labels->actualizar_etiqueta_corte();
   $corte->guardar_corte($_POST['usuario_id'],$nueva_etiqueta,$total,$pago[0],$pago[1],$pago[2],$pago[3],$pago[4],$pago[5],$pago[6],$pago[7],$pago[8],$pago[9],$cantidad_habitaciones,$total_habitaciones,$restaurante);
 
   // Guardar log

@@ -206,4 +206,4 @@
   $hab->estado_cargo_noche(0);
   $cargo_noche->guardar_cargo_noche($_GET['usuario_id'],$total_final,$cantidad_hab);
 ?>
-
+   
