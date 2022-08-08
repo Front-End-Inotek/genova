@@ -79,7 +79,11 @@
   }
   
   // Guardamos el ticket del pedido_rest del restaurante
-  $tipo_cargo= 2; // Corresponde al cargo de restaurante
+  if($_POST['mov'] == 0){
+        $tipo_cargo= 2; // Corresponde al cargo de restaurante
+  }else{
+        $tipo_cargo= 1; // Corresponde al cargo de hospedaje
+  }
   $resta= 1;
   //$ticket_id= $ticket->buscar_id_ticket($_POST['mov'],$_POST['hab_id']);// aun no se si poner k este en estado 0 u 1 el ticket CHECAR
   $nueva_etiqueta= $labels->obtener_etiqueta();

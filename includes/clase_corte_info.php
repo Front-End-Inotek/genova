@@ -227,7 +227,7 @@
 	// Obtener el total del  producto vendido
 	function venta_sin_hab($id_usuario,$nombre){
       $total=0;
-	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE concepto.id_usuario = $id_usuario AND concepto.nombre = '$nombre' AND ticket.mov > 0;";
+	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE concepto.id_usuario = $id_usuario AND concepto.nombre = '$nombre' AND ticket.mov > 0 AND concepto.tipo_cargo = 1;";//mov > 0 ?
 	  //echo $sentencia;
 	  $comentario="Obtener el total del  producto vendido";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
