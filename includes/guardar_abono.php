@@ -29,7 +29,7 @@
   $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono']);
   
   // Guardamos el ticket del abono correspondiente y el log
-  $tipo_cargo= 1; // Corresponde al cargo de hospedaje
+  $tipo_cargo= 3; // Corresponde al cargo de hospedaje sin comida
   $resta= 0;
   $nombre_concepto= 'Abono de hospedaje';
   $cantidad= 1;

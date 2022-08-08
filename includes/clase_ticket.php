@@ -139,7 +139,7 @@
         $sentencia = "UPDATE `ticket` SET
         `corte` = '$corte',
         `estado` = '$estado'
-        WHERE `id_usuario` = '$id_usuario' AND `estado` = '0';";
+        WHERE `id_usuario` = '$id_usuario' AND `estado` = '1';";
         $comentario="Editar el estado del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }

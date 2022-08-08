@@ -91,7 +91,7 @@
       $efectivo_pago= 0;
     }
 
-    $tipo_cargo= 1; // Corresponde al cargo de hospedaje
+    $tipo_cargo= 3; // Corresponde al cargo de hospedaje sin comida
     $resta= 0;
     $nueva_etiqueta= $labels->obtener_etiqueta();
     $labels->actualizar_etiqueta();

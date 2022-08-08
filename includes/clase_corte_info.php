@@ -13,6 +13,7 @@
 	public $total_hab;
 	public $total_productos;
 	public $total_restaurante;
+	public $total_restaurante_entrada;
 	public $total_productos_hab;
 	public $total_productos_rest;
 	public $total_global;
@@ -47,6 +48,7 @@
 	  }
 	  $cantidad_hab= $this->cantidad_hab= $this->cantidad_habitaciones($id_usuario);
 	  $total_hab= $this->total_hab= $this->total_habitaciones($id_usuario);
+	  $total_restaurante_entrada= $this->total_restaurante_entrada= $this->total_restaurante_entrada($id_usuario);
 
 	  // Obtenemos el total de personas extra
 	  $this->total_personas=$this->cantidad_personas($id_usuario);// No correcto
@@ -82,7 +84,7 @@
 	  $this->total_productos_rest= $total_productos_rest; 
 
 	  // Obtenemos el total global
-	  $this->total_global= $total_hab + $total_restaurante;
+	  $this->total_global= $total_hab + $total_restaurante_entrada;
 
 	  include_once('clase_forma_pago.php');
 	  $forma_pago = NEW Forma_pago(0);
@@ -93,7 +95,7 @@
 	  }
 	  $numero_descuento= 0;
 	  $dinero_descuento= 0;
-	  $sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario AND estado = 1";//0 
+	  $sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario AND pago > 0 AND estado = 0";//0 
 	  //$sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario";
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
 	  //echo $sentencia;
@@ -157,7 +159,7 @@
 	  $total=0;
 	  $sentencia = "SELECT *,SUM(cantidad) AS total 
 	  FROM concepto 
-	  INNER JOIN hab ON concepto.categoria = hab.id WHERE concepto.id_usuario = $id_usuario AND hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 1";
+	  INNER JOIN hab ON concepto.categoria = hab.id WHERE concepto.id_usuario = $id_usuario AND hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3";
 	  $comentario="Obtener el total del hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -176,7 +178,7 @@
 	  $total=0;
 	  $sentencia = "SELECT SUM(total) AS total 
 	  FROM concepto 
-	  INNER JOIN hab ON concepto.categoria = hab.id WHERE concepto.id_usuario = $id_usuario AND hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 1";
+	  INNER JOIN hab ON concepto.categoria = hab.id WHERE concepto.id_usuario = $id_usuario AND hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3";
 	  $comentario="Obtener el total del  de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -259,11 +261,30 @@
 	  }
 	  return $cantidad;
 	}
-	// Obtener el total del  de hospedaje
+	// Obtener el total del hospedaje
 	function total_habitaciones($id_usuario){
 		$total=0;
-		$sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 1 AND activo = 1";
+		$sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 3 AND activo = 1";
 		$comentario="Obtener el total del de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta))
+		{
+			$total=$fila['total'];
+		}
+		if($total>0){
+  
+		}else{ 
+			$total=0;
+		}
+		return $total;
+	}
+	// Obtener el total del restaurante entrado en el turno
+	function total_restaurante_entrada($id_usuario){
+		$total=0;
+		$sentencia = "SELECT *,SUM(concepto.total) AS total 
+		FROM concepto 
+		INNER JOIN ticket ON concepto.id_ticket = ticket.id WHERE concepto.id_usuario = 2 AND concepto.tipo_cargo != 3 AND concepto.activo = 1 AND ticket.pago > 0";
+		$comentario="Obtener el total del restaurante entrado en el turno";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))
 		{
