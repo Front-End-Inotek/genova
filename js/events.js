@@ -4263,6 +4263,7 @@ function guardar_corte(){
         });    
     window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     //guardar_reporte_corte();
+    salirsession();
     return false;
 }
 
@@ -4275,8 +4276,8 @@ function guardar_reporte_corte(){
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/reporte_corte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
-    //setTimeout(mostrar_corte_reporte, 7000);
-    mostrar_corte_reporte();
+    setTimeout(mostrar_corte_reporte, 7000);
+    //mostrar_corte_reporte();
 }
 
 // Mostrar el reporte de corte

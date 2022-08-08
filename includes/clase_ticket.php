@@ -274,7 +274,7 @@
       // Obtener la etiqueta del ticket
       function obtener_etiqueta(){
         $sentencia = "SELECT ticket FROM labels LIMIT 1";
-        $etiqueta= "";
+        $etiqueta= 0;
         $comentario="Obtener la etiqueta del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -296,7 +296,7 @@
       // Obtener la etiqueta del corte 
       function obtener_corte(){
         $sentencia = "SELECT corte FROM labels LIMIT 1";
-        $etiqueta= "";
+        $etiqueta= 0;
         $comentario="Obtener la etiqueta del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
