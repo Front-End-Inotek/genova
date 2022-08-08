@@ -4253,7 +4253,7 @@ function guardar_corte(){
             type: "POST",
             dataType: "html",
             contentType: "application/x-www-form-urlencoded",
-            //url:"includes/guardar_corte.php",
+            url:"includes/guardar_corte.php",
             data:datos,
             beforeSend:loaderbar,
             success:principal,
