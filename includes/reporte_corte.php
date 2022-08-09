@@ -1,6 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_configuracion.php");
+  include_once("clase_cuenta.php");
   include_once("clase_ticket.php");
   include_once("clase_tipo.php");
   include_once("clase_usuario.php");
@@ -8,6 +9,7 @@
   include_once("clase_corte.php");
   include_once("clase_corte_info.php");
   include_once('clase_log.php');
+  $cuenta= NEW Cuenta(0);
   $ticket= NEW Ticket(0);
   $concepto= NEW Concepto(0);
   $labels= NEW Labels(0);
@@ -269,5 +271,6 @@
   $ticket->editar_estado_corte($_GET['usuario_id'],$corte_id,2);
   $ticket->editar_estado($_GET['usuario_id'],$corte_id,2);
   $labels->actualizar_etiqueta_corte();
+  $cuenta->editar_estado($_GET['usuario_id']);
 ?>
 
