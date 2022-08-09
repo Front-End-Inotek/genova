@@ -3,6 +3,7 @@
   include_once("clase_corte.php");
   $corte= NEW Corte(0);
 	
+  sleep(1);
   $etiqueta= $corte->ultima_etiqueta();
   $ancho= $_GET['ancho']-50;
   $alto= $_GET['alto']-50;

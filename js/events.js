@@ -1666,6 +1666,8 @@ function cargo_noche(){
             error:problemas_sistema
         });
     window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+    //guardar_reporte_cargo_noche();
+    mostrar_cargo_noche_reporte();
     return false;
 }
 
@@ -1678,6 +1680,7 @@ function guardar_reporte_cargo_noche(){
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_cargo_noche_reporte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
+    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
     setTimeout(mostrar_cargo_noche_reporte, 5000);
 }
 
@@ -1686,6 +1689,10 @@ function mostrar_cargo_noche_reporte(){
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
+    //var alto= 1000;
+	//var ancho= 500;
+    
+    $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_cargo_noche_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 
@@ -4265,7 +4272,7 @@ function guardar_corte(){
         });    
     window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     //guardar_reporte_corte();
-    salirsession();
+    mostrar_corte_reporte();
     return false;
 }
 
@@ -4278,8 +4285,8 @@ function guardar_reporte_corte(){
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/reporte_corte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
+    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     setTimeout(mostrar_corte_reporte, 7000);
-    //mostrar_corte_reporte();
 }
 
 // Mostrar el reporte de corte
@@ -4289,6 +4296,7 @@ function mostrar_corte_reporte(){
 	var ancho= tam[0];
 
 	salirsession();
+    $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_corte_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 

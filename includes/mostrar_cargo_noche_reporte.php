@@ -3,6 +3,7 @@
   include_once('clase_cargo_noche.php');
   $cargo_noche = NEW Cargo_noche(0);
 	
+  sleep(1);
   $numero_actual= $cargo_noche->ultima_insercion();
   $ancho= $_GET['ancho']-50;
   $alto= $_GET['alto']-50;
