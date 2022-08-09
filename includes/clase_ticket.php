@@ -143,6 +143,15 @@
         $comentario="Editar el estado del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Editar el estado del ticket faltantes en corte
+      function editar_estado_corte($id_usuario,$corte,$estado){
+        $sentencia = "UPDATE `ticket` SET
+        `corte` = '$corte',
+        `estado` = '$estado'
+        WHERE `id_usuario` = '$id_usuario' AND `corte` = '0' AND `estado` != '2';";
+        $comentario="Editar el estado del ticket faltantes en corte";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Seleccionar ticket inicial para hacer corte
       function ticket_ini(){
         $id= 0;

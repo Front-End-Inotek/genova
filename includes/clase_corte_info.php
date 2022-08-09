@@ -95,8 +95,7 @@
 	  }
 	  $numero_descuento= 0;
 	  $dinero_descuento= 0;
-	  $sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario AND pago > 0 AND estado = 0";//0 
-	  //$sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario";
+	  $sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario AND (pago > 0  OR monto > 0) AND estado = 0 OR estado != 2";//1 
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
 	  //echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";
@@ -106,34 +105,70 @@
 		  // Se va sumando el monto de las diferentes formas de pago
 		  switch($fila['forma_pago']){
 			  case 1:
-				  $pago[0]= $pago[0] + $fila['total'];// pago
+				  $pago[0]= $pago[0] + ($fila['pago'] - $fila['cambio']);// pago
 				  break;
 			  case 2:
-				  $pago[1]= $pago[1] + $fila['total'];// monto
+				  $pago[1]= $pago[1] + $fila['monto'];// total
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  case 3:
-			  	  $pago[2]= $pago[2] + $fila['total'];
+			  	  $pago[2]= $pago[2] + $fila['monto'];
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  case 4:
-				  $pago[3]= $pago[3] + $fila['total'];
+				  $pago[3]= $pago[3] + $fila['monto'];
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  case 5:
-				  $pago[4]= $pago[4] + $fila['total'];
+				  $pago[4]= $pago[4] + $fila['monto'];
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  case 6:
-				  $pago[5]= $pago[5] + $fila['total'];
+				  $pago[5]= $pago[5] + $fila['monto'];
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  case 7:
-				  $pago[6]= $pago[6] + $fila['total'];
+				  $pago[6]= $pago[6] + $fila['monto'];
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  case 8:
-				  $pago[7]= $pago[7] + $fila['total'];
+				  $pago[7]= $pago[7] + $fila['monto'];
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  case 9:
-				  $pago[8]= $pago[8] + $fila['total'];
+				  $pago[8]= $pago[8] + $fila['monto'];
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  case 10:
-				  $pago[9]= $pago[9] + $fila['total'];
+				  $pago[9]= $pago[9] + $fila['monto'];
+				  if($fila['pago'] != $fila['monto']){
+					$efectivo= $fila['pago'] - $fila['monto'];
+					$pago[0]= $pago[0] + $efectivo;
+				  }
 				  break;
 			  default:
 				  // No sucede nada	
@@ -283,7 +318,7 @@
 		$total=0;
 		$sentencia = "SELECT *,SUM(concepto.total) AS total 
 		FROM concepto 
-		INNER JOIN ticket ON concepto.id_ticket = ticket.id WHERE concepto.id_usuario = 2 AND concepto.tipo_cargo != 3 AND concepto.activo = 1 AND ticket.pago > 0";
+		INNER JOIN ticket ON concepto.id_ticket = ticket.id WHERE concepto.id_usuario = $id_usuario AND concepto.tipo_cargo != 3 AND concepto.activo = 1 AND ticket.pago > 0";
 		$comentario="Obtener el total del restaurante entrado en el turno";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))

@@ -266,6 +266,7 @@
   // Cambiar concepto a inactivo
   $concepto->cambiar_activo($_GET['usuario_id']);
   // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
+  $ticket->editar_estado_corte($_GET['usuario_id'],$corte_id,2);
   $ticket->editar_estado($_GET['usuario_id'],$corte_id,2);
   $labels->actualizar_etiqueta_corte();
 ?>
