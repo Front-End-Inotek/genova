@@ -2376,6 +2376,9 @@ function agregar_abono(hab_id,estado,faltante){
 
 // Guardar un abono al cargo por habitacion
 function guardar_abono(hab_id,estado,faltante){
+    /*alert(hab_id);
+    alert(estado);
+    alert(faltante);*/
     var usuario_id=localStorage.getItem("id");
     var descripcion= encodeURI(document.getElementById("descripcion").value);
     var forma_pago= document.getElementById("forma_pago").value;

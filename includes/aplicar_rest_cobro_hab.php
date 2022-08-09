@@ -36,7 +36,8 @@
   $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
   
   // Guardamos el ticket del pedido_rest del restaurante
-  $tipo_cargo= 2; // Corresponde al cargo de restaurante
+  //$tipo_cargo= 2; // Corresponde al cargo de restaurante
+  $tipo_cargo= 1; // Corresponde al cargo de hospedaje
   $resta= 1;
   /*$ticket_id= $ticket->buscar_id_ticket($_POST['mov'],$_POST['hab_id']);// aun no se si poner k este en estado 0 u 1 el ticket CHECAR
   if($ticket_id == 0){

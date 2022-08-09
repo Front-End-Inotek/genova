@@ -162,7 +162,7 @@
                     $concepto[2]= 'Total';
                     $total= array();
                     $total[0]= $inf->total_hab;
-                    $total[1]= $inf->total_restaurante;
+                    $total[1]= $inf->total_restaurante_entrada;
                     //$total[2]= 0;
                     $total[2]= $inf->total_global;
                     $cantidad= 2;

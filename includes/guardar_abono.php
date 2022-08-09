@@ -1,10 +1,12 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  include_once('clase_configuracion.php');
   include_once("clase_cuenta.php");
   include_once("clase_hab.php");
   include_once("clase_inventario.php");
   include_once("clase_ticket.php");
   include_once("clase_log.php");
+  $config = NEW Configuracion();
   $cuenta= NEW Cuenta(0);
   $concepto= NEW Concepto(0);
   $hab= NEW Hab($_POST['hab_id']);
@@ -29,7 +31,7 @@
   $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono']);
   
   // Guardamos el ticket del abono correspondiente y el log
-  $tipo_cargo= 1; // Corresponde al cargo de hospedaje
+  $tipo_cargo= 3; // Corresponde al cargo de hospedaje sin comida
   $resta= 0;
   $nombre_concepto= 'Abono de hospedaje';
   $cantidad= 1;
@@ -45,7 +47,7 @@
   $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['abono'],($_POST['abono']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   
   // Imprimir ticket
-  if($confi->ticket_restaurante == 0){
+  if($config->ticket_restaurante == 0){
     $ticket->cambiar_estado($ticket_id);
   }
   

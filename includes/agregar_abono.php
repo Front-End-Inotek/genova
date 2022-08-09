@@ -10,7 +10,7 @@
     <div class="modal-header">
       <h3 class="modal-title">AHCloud>Panel>Habitacion '.$hab->nombre.'</h3>
       <h2>-Abonar</h2>
-      <button type="button" class="close" data-dismiss="modal" onclick="reiniciarintervalo()">&times;</button>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
     <div class="modal-body">
       <div class="row">
