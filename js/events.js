@@ -66,7 +66,7 @@ function sabernosession(){
 		if(id>0){
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
 			$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-            $("#pie").load("includes/pie.php");
+            $("#pie").load("includes/pie.php?id="+id);
             cargar_area_trabajo();
 		}
 		else{
@@ -81,7 +81,7 @@ function cargar_area_trabajo(){
 	var token=localStorage.getItem("tocken");
 
 	$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-    $("#pie").load("includes/pie.php");
+    $("#pie").load("includes/pie.php?id="+id);
 
     setTimeout('cargar_area_trabajo()',3000);//5500
 }
@@ -810,7 +810,6 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	alert(forzar_tarifa);
 	alert(descuento);
 	alert(total);*/
-	alert(forzar_tarifa);alert(total_suplementos);alert(total_pago);
 
 	if(id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
         if(cantidad_ocupacion <= cantidad_maxima){
@@ -1667,6 +1666,8 @@ function cargo_noche(){
             error:problemas_sistema
         });
     window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+    //guardar_reporte_cargo_noche();
+    mostrar_cargo_noche_reporte();
     return false;
 }
 
@@ -1679,6 +1680,7 @@ function guardar_reporte_cargo_noche(){
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_cargo_noche_reporte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
+    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
     setTimeout(mostrar_cargo_noche_reporte, 5000);
 }
 
@@ -1687,6 +1689,10 @@ function mostrar_cargo_noche_reporte(){
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
+    //var alto= 1000;
+	//var ancho= 500;
+    
+    $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_cargo_noche_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 
@@ -4266,7 +4272,7 @@ function guardar_corte(){
         });    
     window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     //guardar_reporte_corte();
-    salirsession();
+    mostrar_corte_reporte();
     return false;
 }
 
@@ -4279,8 +4285,8 @@ function guardar_reporte_corte(){
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/reporte_corte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
+    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     setTimeout(mostrar_corte_reporte, 7000);
-    //mostrar_corte_reporte();
 }
 
 // Mostrar el reporte de corte
@@ -4290,6 +4296,7 @@ function mostrar_corte_reporte(){
 	var ancho= tam[0];
 
 	salirsession();
+    $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_corte_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
 }
 

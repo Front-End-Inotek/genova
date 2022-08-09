@@ -198,7 +198,7 @@
   $logs->guardar_log($_GET['usuario_id'],"Reporte cargo por noche: ".$numero_actual.' del '.$dia.' de '.$mes.' de '.$anio);
   //$pdf->Output("reporte_cargo_noche.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche_".$numero_actual.".pdf","F");
-  $pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche_".$numero_actual.".pdf","I");
+  //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche_".$numero_actual.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/cargo_noche/reporte_cargo_noche.pdf","I");//I
       //echo 'Reporte cargo noche';*/ I
       

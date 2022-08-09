@@ -10,7 +10,7 @@
     $salidas= $movimiento->saber_salidas();
     echo '
     <div class="container-fluid Alin-center">';
-        $cuenta->resumen_actual($ocupadas,$disponibles,$salidas);
+        $cuenta->resumen_actual($ocupadas,$disponibles,$salidas,$_GET['id']);
         
         /*echo '<p>Este ejemplo demuestra la utilización del control <code>&lt;input type="color"&gt;</code>.</p>
         <label for="muestrario">Color:</label>

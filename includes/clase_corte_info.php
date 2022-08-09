@@ -105,67 +105,68 @@
 		  // Se va sumando el monto de las diferentes formas de pago
 		  switch($fila['forma_pago']){
 			  case 1:
+				  //if($fila['pago'] > 0)
 				  $pago[0]= $pago[0] + ($fila['pago'] - $fila['cambio']);// pago
 				  break;
 			  case 2:
 				  $pago[1]= $pago[1] + $fila['monto'];// total
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }
 				  break;
 			  case 3:
 			  	  $pago[2]= $pago[2] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }
 				  break;
 			  case 4:
 				  $pago[3]= $pago[3] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }
 				  break;
 			  case 5:
 				  $pago[4]= $pago[4] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }
 				  break;
 			  case 6:
 				  $pago[5]= $pago[5] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }
 				  break;
 			  case 7:
 				  $pago[6]= $pago[6] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }
 				  break;
 			  case 8:
 				  $pago[7]= $pago[7] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }
 				  break;
 			  case 9:
 				  $pago[8]= $pago[8] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }
 				  break;
 			  case 10:
 				  $pago[9]= $pago[9] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto']){
+				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
 					$efectivo= $fila['pago'] - $fila['monto'];
 					$pago[0]= $pago[0] + $efectivo;
 				  }

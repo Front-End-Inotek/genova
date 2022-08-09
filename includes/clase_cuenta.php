@@ -62,7 +62,7 @@
 
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 1 ORDER BY hab.nombre";
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado != 0 ORDER BY hab.nombre";
         $comentario="Mostrar las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -129,11 +129,20 @@
         $comentario="Editar el abono de una cuenta dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Editar el estado de una cuenta luego de un corte
+      function editar_estado($id_usuario){
+        $sentencia = "UPDATE `cuenta` SET
+            `estado` = '2'
+            WHERE `id_usuario` = '$id_usuario' AND `estado` = '1';";
+        //echo $sentencia ;
+        $comentario="Editar el estado de una cuenta luego de un corte dentro de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Borrar una cuenta
       function borrar_cuenta($id,$descripcion,$monto){
         $descripcion= substr($descripcion, 0, 17);
         if($descripcion == 'Total reservacion'){
-          $sentencia = "SELECT * FROM cuenta WHERE id = $id AND estado = 1";
+          $sentencia = "SELECT * FROM cuenta WHERE id = $id AND estado != 0";
           //echo $sentencia;
           $id_usuario= 0;
           $mov= 0;
@@ -231,7 +240,7 @@
       }     
       // Obtenemos la suma de los abonos que tenemos por movimiento en una habitacion
       function obtner_abonos($mov){ 
-        $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND estado = 1";
+        $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND estado != 0";
         //echo $sentencia;
         $suma_abonos = 0;
         $comentario="Obtenemos la suma de los abonos que tenemos por movimiento en una habitacion";
@@ -247,7 +256,7 @@
         $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
         FROM cuenta 
-        INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 ORDER BY cuenta.fecha";
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo 
@@ -310,7 +319,7 @@
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
-        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 ORDER BY cuenta.fecha";
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
         //echo $sentencia;
         //echo $id;
@@ -381,7 +390,7 @@
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
-        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 ORDER BY cuenta.fecha";
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -402,7 +411,7 @@
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo    
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
-        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 ORDER BY cuenta.fecha";
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -415,7 +424,7 @@
       }
       // Cambiar de habitacion el monto en estado de cuenta
       function cambiar_hab_monto($mov,$id){
-        $sentencia = "SELECT * FROM cuenta WHERE id = $id AND estado = 1";
+        $sentencia = "SELECT * FROM cuenta WHERE id = $id AND cuenta.estado != 0 ";
         //echo $sentencia;
         $id_usuario= 0;
         $descripcion= '';
@@ -466,7 +475,7 @@
       }
       // Cambiar de habitacion el monto en estado de cuenta
       function cambiar_hab_cuentas($mov_hab,$mov){
-        $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND estado = 1 ORDER BY fecha";
+        $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND cuenta.estado != 0  ORDER BY fecha";
         //echo $sentencia;
         $id= 0;
         $descripcion= '';
@@ -490,12 +499,12 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Resumen del dia actual
-      function resumen_actual($ocupadas,$disponibles,$salidas){
+      function resumen_actual($ocupadas,$disponibles,$salidas,$usuario_id){
         $preasignados= 0;
         $total_adultos= 4;
         $total_niños= 0;
-        $total_cargos= $this->saber_total_cargos();
-        $total_abonos= $this->saber_total_abonos();
+        $total_cargos= $this->saber_total_cargos($usuario_id);
+        $total_abonos= $this->saber_total_abonos($usuario_id);
         $total_cargos= number_format($total_cargos, 2);
         $total_abonos= number_format($total_abonos, 2);
         echo '<div class="margen_inf_pie">
@@ -514,13 +523,13 @@
         </div>';
       }
       // Obtener el total de cargos del dia actual
-      function saber_total_cargos(){
+      function saber_total_cargos($usuario_id){
         $cargos=0;
         $fecha_actual= time();
         $dia_actual= date("d-m-Y",$fecha_actual);
         $dia_actual= strtotime($dia_actual);
         
-        $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual";
+        $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual AND id_usuario = $usuario_id AND estado = 1";
         $comentario="Obtener el total de cargos del dia actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -530,13 +539,13 @@
         return $cargos;
       }
       // Obtener el total de abonos del dia actual
-      function saber_total_abonos(){
+      function saber_total_abonos($usuario_id){
         $abonos=0;
         $fecha_actual= time();
         $dia_actual= date("d-m-Y",$fecha_actual);
         $dia_actual= strtotime($dia_actual);
         
-        $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual";
+        $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual AND id_usuario = $usuario_id AND estado = 1";
         $comentario="Obtener el total de abonos del dia actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
