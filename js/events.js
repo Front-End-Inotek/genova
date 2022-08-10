@@ -4360,6 +4360,73 @@ function busqueda_corte(){
 	$("#tabla_corte").load("includes/busqueda_corte.php?inicial="+inicial+"&final="+final);
 }
 
+//* Logs *//
+
+// Muestra los logs de la bd
+function ver_logs(){
+    var usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_logs.php?usuario_id="+usuario_id)
+    closeNav();
+}
+
+// Muestra la paginacion de los logs
+function ver_logs_paginacion(buton,id,inicial,final){//
+    //alert(id);
+    //alert(inicial);
+    //alert(final);
+    $("#paginacion_logs").load("includes/ver_logs_paginacion.php?id="+id+"&inicial="+inicial+"&final="+final);   
+}
+
+// Busqueda por fecha en ver logs
+function busqueda_logs(usuario_id){
+    $("#boton_log").html('<div class="spinner-border text-primary"></div>');
+    var inicial=$("#inicial").val();
+    var final=$("#final").val();
+    $("#area_trabajo_menu").load("includes/busqueda_logs.php?inicial="+inicial+"&final="+final+"&usuario_id="+usuario_id);
+}
+
+// Barra de busqueda de usuarios en logs
+function buscar_logs_usuario(){
+	var usuario=$("#usuario").val();
+    /*if(usuario >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }*/
+	$("#tabla_logs").load("includes/buscar_logs_usuario.php?usuario="+usuario);
+}
+
+// Barra de busqueda de actividad en logs
+function buscar_logs_actividad(){
+    var buscar=encodeURIComponent($("#buscar").val());
+	$("#tabla_logs").load("includes/buscar_logs_actividad.php?buscar="+buscar);
+}
+
+// Boton de busqueda de usuarios y actividad en logs
+function buscar_usuario_logs(){
+	var usuario=$("#usuario").val();
+	var buscar=encodeURIComponent($("#buscar").val());
+	$("#tabla_logs").load("includes/buscar_usuario_logs.php?buscar="+buscar+"&usuario="+usuario);
+}
+
+// Generar reporte de logs
+function reporte_logs(fecha_ini,fecha_fin){
+	var logs_id=localStorage.getItem("id");
+    //alert(fecha_ini);
+    //alert(fecha_fin);
+	window.open("includes/reporte_logs.php?fecha_ini="+fecha_ini+"&fecha_fin="+fecha_fin+"&logs_id="+logs_id);
+}
+
+// Regresar a la pagina anterior de ver logs
+function regresar_logs(){
+    $('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_logs.php");
+}
+
 //* Estados  Internos de Edo.Ocupado *//
 
 //Edo. 0-Disponible//
