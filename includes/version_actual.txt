@@ -167,3 +167,8 @@ VERSION 2.4
 -Correcciones al realizar una reservacion
 -Retoques globales en navbar
 -Retoques globales de reportes y corte
+
+VERSION 2.5
+-Generar rama logs
+-Agregar permisos de ver logs con su sql
+-Vista y agregar al menu 
