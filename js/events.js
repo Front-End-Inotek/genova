@@ -1660,8 +1660,8 @@ function cargo_noche(){
             url:"includes/cargo_noche.php",
             data:datos,
             beforeSend:loaderbar,
-            //success:principal,
-            success:problemas_sistema,
+            success:principal,
+            //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
         });
@@ -1980,6 +1980,7 @@ function modificar_usuario(id){
     var cupon_agregar= document.getElementById("cupon_agregar").checked;
     var cupon_editar= document.getElementById("cupon_editar").checked;
     var cupon_borrar= document.getElementById("cupon_borrar").checked;
+    var logs_ver= document.getElementById("logs_ver").checked;
     // Convertir usuario permisos
     if(usuario_ver){
         usuario_ver=1;
@@ -2239,6 +2240,13 @@ function modificar_usuario(id){
     }else{
         cupon_borrar = 0;
     }
+
+    // Convertir logs permisos
+    if(logs_ver){
+        logs_ver = 1;
+    }else{
+        logs_ver = 0;
+    }
     
 
 	if(usuario.length >0 && nivel.length >0){
@@ -2302,6 +2310,7 @@ function modificar_usuario(id){
                   "cupon_agregar": cupon_agregar,
                   "cupon_editar": cupon_editar,
                   "cupon_borrar": cupon_borrar,
+                  "logs_ver": logs_ver,
                   "usuario_id": usuario_id,
 			};
 		$.ajax({

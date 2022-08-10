@@ -787,6 +787,21 @@
                 </label>
               </div>
             </div>
+            </div><br><hr>
+            <div class="form-group row">
+            <div class="col-sm-3">Logs:</div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->logs_ver==0){
+              echo '<input class="form-check-input" type="checkbox" id="logs_ver">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="logs_ver" checked>';
+              }
+              echo '   <label class="form-check-label">
+                  Ver
+                </label>
+              </div>
+            </div>
             </div><br><hr> 
             <div class="row">
               <div class="col-sm-9"></div>
