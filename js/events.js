@@ -1660,12 +1660,12 @@ function cargo_noche(){
             url:"includes/cargo_noche.php",
             data:datos,
             beforeSend:loaderbar,
-            success:principal,
-            //success:problemas_sistema,
+            //success:principal,
+            success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
         });
-    window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
     //guardar_reporte_cargo_noche();
     mostrar_cargo_noche_reporte();
     return false;
@@ -1679,8 +1679,8 @@ function guardar_reporte_cargo_noche(){
 	var ancho= tam[0];
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
-	window.open("includes/mostrar_cargo_noche_reporte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
-    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+	//window.open("includes/mostrar_cargo_noche_reporte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
+    window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
     setTimeout(mostrar_cargo_noche_reporte, 5000);
 }
 
@@ -1692,8 +1692,9 @@ function mostrar_cargo_noche_reporte(){
     //var alto= 1000;
 	//var ancho= 500;
     
-    $("#area_trabajo_menu").load("includes/barra_progreso.php");
+    //$("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_cargo_noche_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
+    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
 }
 
 // Muestra los reportes de los cargos por noche de la bd
@@ -4270,7 +4271,7 @@ function guardar_corte(){
             timeout:5000,
             error:problemas_sistema
         });    
-    window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
+    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     //guardar_reporte_corte();
     mostrar_corte_reporte();
     return false;
@@ -4285,7 +4286,6 @@ function guardar_reporte_corte(){
     
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/reporte_corte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
-    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     setTimeout(mostrar_corte_reporte, 7000);
 }
 
@@ -4295,9 +4295,8 @@ function mostrar_corte_reporte(){
 	var alto= tam[1];
 	var ancho= tam[0];
 
-	salirsession();
-    $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_corte_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
+    salirsession();
 }
 
 // Obtenemos el tamaño de la ventana
