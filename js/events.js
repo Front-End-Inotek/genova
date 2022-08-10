@@ -1660,8 +1660,8 @@ function cargo_noche(){
             url:"includes/cargo_noche.php",
             data:datos,
             beforeSend:loaderbar,
-            //success:principal,
-            success:problemas_sistema,
+            success:principal,
+            //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
         });
