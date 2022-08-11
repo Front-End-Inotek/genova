@@ -118,7 +118,7 @@
       $pdf->Cell(80,5,iconv("UTF-8", "ISO-8859-1",$nombre),1,0,'C'); 
       $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$cantidad),1,1,'C'); 
       
-      /*for ($i = 1; $i <= 26; $i++) {
+      /*for($i = 1; $i <= 26; $i++){
         $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
       }*/
     

@@ -221,7 +221,7 @@
           $total_productos_rest= $total_productos_rest + ($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]);
           
           /*if($z == 4){
-            for ($i = 1; $i <= 24; $i++) {
+            for($i = 1; $i <= 24; $i++){
                 $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
             }
           }*/

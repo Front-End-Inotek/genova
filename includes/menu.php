@@ -376,7 +376,7 @@
           </li>
 
           <li class="nav-item">';
-                  $permisos_herramientas=$usuario->usuario_ver+$usuario->usuario_agregar+$usuario->forma_pago_ver+$usuario->forma_pago_agregar;
+                  $permisos_herramientas=$usuario->usuario_ver+$usuario->usuario_agregar+$usuario->logs_ver+$usuario->forma_pago_ver+$usuario->forma_pago_agregar+$usuario->cupon_ver+$usuario->cupon_agregar;
                   if($permisos_herramientas>0){
                     echo '
                     <a class="nav-link collapsed text-truncate" href="#submenu4" data-toggle="collapse" data-target="#submenu4"><i class="fa fa-table"></i> <span class="d-none d-sm-inline">
@@ -419,12 +419,32 @@
                             </li>'; 
                           } 
                                         
+                          $permisos_logs=$usuario->logs_ver;
+                          if($permisos_logs>0){
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub2" data-toggle="collapse" data-target="#submenu4sub2"><span>Logs</span></a>
+                                <div class="collapse" id="submenu4sub2" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">';
+                                        if($usuario->logs_ver==1){
+                                          echo '
+                                          <li class="nav-item">
+                                              <a class="nav-link p-1 text-truncate" href="#" onclick="ver_logs()">
+                                                  <i class="fa fa-fw fa-dashboard"></i> &nbsp; Ver Logs</a>
+                                          </li>';
+                                        }
+                                        echo '
+                                    </ul>
+                                </div>
+                            </li>'; 
+                          }
+
                           $permisos_forma_pago=$usuario->forma_pago_ver;
                           if($permisos_forma_pago>0){
                             echo '
                             <li class="nav-item">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub2" data-toggle="collapse" data-target="#submenu4sub2"><span>Formas Pago</span></a>
-                                <div class="collapse" id="submenu4sub2" aria-expanded="false">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub3" data-toggle="collapse" data-target="#submenu4sub3"><span>Formas Pago</span></a>
+                                <div class="collapse" id="submenu4sub3" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         if($usuario->forma_pago_ver==1){
                                           echo '
@@ -443,8 +463,8 @@
                           if($permisos_cupon>0){
                             echo '
                             <li class="nav-item">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub3" data-toggle="collapse" data-target="#submenu4sub3"><span>Cupones</span></a>
-                                <div class="collapse" id="submenu4sub3" aria-expanded="false">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub4" data-toggle="collapse" data-target="#submenu4sub4"><span>Cupones</span></a>
+                                <div class="collapse" id="submenu4sub4" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         if($usuario->cupon_ver==1){
                                           echo '
@@ -470,8 +490,8 @@
                           if($permisos_configuracion==0){
                             echo '
                             <li class="nav-item">
-                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub4" data-toggle="collapse" data-target="#submenu4sub4"><span>Configuración</span></a>
-                                <div class="collapse" id="submenu4sub4" aria-expanded="false">
+                                <a class="nav-link  text-truncate collapsed py-1" href="#submenu4sub5" data-toggle="collapse" data-target="#submenu4sub5"><span>Configuración</span></a>
+                                <div class="collapse" id="submenu4sub5" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">';
                                         if($permisos_configuracion==0){
                                           echo '
