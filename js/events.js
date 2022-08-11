@@ -4415,9 +4415,9 @@ function buscar_usuario_logs(){
 // Generar reporte de logs
 function reporte_logs(fecha_ini,fecha_fin){
 	var usuario_id=localStorage.getItem("id");
-    //alert(fecha_ini);
-    //alert(fecha_fin);
-	window.open("includes/reporte_logs.php?fecha_ini="+fecha_ini+"&fecha_fin="+fecha_fin+"&usuario_id="+usuario_id);
+    var usuario=$("#usuario").val();
+	var buscar=encodeURIComponent($("#buscar").val());
+	window.open("includes/reporte_logs.php?fecha_ini="+fecha_ini+"&fecha_fin="+fecha_fin+"&usuario_id="+usuario_id+"&usuario="+usuario+"&buscar="+buscar);
 }
 
 // Regresar a la pagina anterior de ver logs
