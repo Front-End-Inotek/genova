@@ -153,7 +153,7 @@
       $pdf->Cell(10,5,iconv("UTF-8", "ISO-8859-1",$descuento),1,0,'C'); 
       $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_tarifa, 2)),1,1,'C');    
 
-      /*for ($i = 1; $i <= 26; $i++) {
+      /*for($i = 1; $i <= 26; $i++){
         $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
       }*/
     

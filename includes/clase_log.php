@@ -34,7 +34,7 @@
         }
     }
     // Mostramos los logs
-    function ver_log(){ //
+    function ver_log(){ 
       $sentencia = "SELECT logs.hora, logs.ip, logs.actividad, usuario.usuario  AS usuario FROM logs LEFT JOIN  usuario ON logs.usuario = usuario.id DESC";
       $comentario="Mostrar las diferentes actividades del usuario";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -122,16 +122,16 @@
     }
     // Obtengo los datos de logs
     function obtener_logs($id,$fecha_ini,$fecha_fin,$actividad){ 
-      if($id == 0 && $actividad == '*'){
-        $sentencia = "SELECT * FROM logs WHERE logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 ORDER BY logs.hora DESC";
-      }elseif($id != 0 && $actividad == '*'){
-        $sentencia = "SELECT * FROM logs WHERE usuario = $id AND logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 ORDER BY logs.hora DESC";
-      }elseif($id == 0 && $actividad != '*'){
-        $sentencia = "SELECT * FROM logs WHERE logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 AND logs.actividad LIKE '%$actividad%' ORDER BY logs.hora DESC";
-      }elseif($id != 0 && $actividad != '*'){
-        $sentencia = "SELECT * FROM logs WHERE usuario = $id AND logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 AND logs.actividad LIKE '%$actividad%' ORDER BY logs.hora DESC";
+      if($id == 0 && strlen($actividad) == 0){
+        $sentencia = "SELECT * FROM logs WHERE hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 ORDER BY hora DESC";
+      }elseif($id != 0 && strlen($actividad) == 0){
+        $sentencia = "SELECT * FROM logs WHERE usuario = $id AND hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 ORDER BY hora DESC";
+      }elseif($id == 0 && strlen($actividad) > 0){
+        $sentencia = "SELECT * FROM logs WHERE hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 AND actividad LIKE '%$actividad%' ORDER BY hora DESC";
+      }elseif($id != 0 && strlen($actividad) > 0){
+        $sentencia = "SELECT * FROM logs WHERE usuario = $id AND hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 AND actividad LIKE '%$actividad%' ORDER BY hora DESC";
       }else{
-        $sentencia = "SELECT * FROM logs WHERE usuario = $id AND logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 AND logs.actividad LIKE '%$actividad%' ORDER BY logs.hora DESC";
+        $sentencia = "SELECT * FROM logs WHERE usuario = $id AND hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 AND actividad LIKE '%$actividad%' ORDER BY hora DESC";
       }
       $comentario="Obtengo los logs dentro de la base de datos ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -178,12 +178,11 @@
       }
       $ultimoid=0;
       if($id==0){
-        $sentencia = "SELECT * FROM logs WHERE logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 ORDER BY logs.hora DESC;";
+        $sentencia = "SELECT * FROM logs WHERE hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 ORDER BY hora DESC;";
         //LIMIT 40;";
         $comentario="Seleccionar los datos de logs";
-      }
-      else{
-        $sentencia = "SELECT * FROM logs WHERE logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 AND logs.id >= '.$id.' ORDER BY logs.hora DESC;";
+      }else{
+        $sentencia = "SELECT * FROM logs WHERE hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 AND id >= '.$id.' ORDER BY hora DESC;";
         $comentario="Seleccionar los datos de logs";
       } 
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -264,7 +263,7 @@
       $fecha_ini =strtotime($fecha_ini_tiempo);
       $fecha_fin =strtotime($fecha_fin_tiempo);
   
-      $sentencia = "SELECT * FROM logs WHERE logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 ORDER BY logs.hora DESC;";
+      $sentencia = "SELECT * FROM logs WHERE hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 ORDER BY hora DESC;";
       $comentario="Seleccionar los datos de logs";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
@@ -296,7 +295,7 @@
     }
     // Barra de busqueda de usuarios en logs
     function buscar_usuario($a_usuario){ 
-      $sentencia = "SELECT * FROM logs WHERE logs.usuario = $a_usuario ORDER BY logs.actividad;";
+      $sentencia = "SELECT * FROM logs WHERE usuario = $a_usuario ORDER BY actividad;";
       $comentario="Mostrar los logs usuario";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
@@ -327,7 +326,7 @@
     }
     // Barra de busqueda de actividad en logs
     function buscar_actividad($a_buscar){ 
-      $sentencia = "SELECT * FROM logs WHERE logs.actividad LIKE '%$a_buscar%' ORDER BY logs.actividad;";
+      $sentencia = "SELECT * FROM logs WHERE actividad LIKE '%$a_buscar%' ORDER BY actividad;";
       $comentario="Mostrar los logs actividad";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
@@ -358,7 +357,11 @@
     }
     // Boton de busqueda de usuarios y actividad en logs
     function buscar_usuarios_logs($a_buscar,$usuario){
-      $sentencia = "SELECT * FROM logs WHERE logs.actividad LIKE '%$a_buscar%' AND logs.usuario LIKE '%$usuario%' ORDER BY logs.hora DESC;";
+      if(strlen($a_buscar) == 0){
+        $sentencia = "SELECT * FROM logs WHERE usuario = $usuario ORDER BY hora DESC;";
+      }else{
+        $sentencia = "SELECT * FROM logs WHERE actividad LIKE '%$a_buscar%' AND usuario = $usuario ORDER BY hora DESC;";
+      }
       $comentario="Mostrar los logs";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
