@@ -4389,14 +4389,14 @@ function busqueda_logs(usuario_id){
 }
 
 // Barra de busqueda de usuarios en logs
-function buscar_logs_usuario(){
+function buscar_logs_usuario(inicial,final,id){
 	var usuario=$("#usuario").val();
     /*if(usuario >0){
         $('.pagination').hide();
     }else{
         $('.pagination').show();
     }*/
-	$("#tabla_logs").load("includes/buscar_logs_usuario.php?usuario="+usuario);
+	$("#tabla_logs").load("includes/buscar_logs_usuario.php?usuario="+usuario+"&inicial="+inicial+"&final="+final+"&id="+id);
 }
 
 // Barra de busqueda de actividad en logs
@@ -4414,17 +4414,18 @@ function buscar_usuario_logs(){
 
 // Generar reporte de logs
 function reporte_logs(fecha_ini,fecha_fin){
-	var logs_id=localStorage.getItem("id");
+	var usuario_id=localStorage.getItem("id");
     //alert(fecha_ini);
     //alert(fecha_fin);
-	window.open("includes/reporte_logs.php?fecha_ini="+fecha_ini+"&fecha_fin="+fecha_fin+"&logs_id="+logs_id);
+	window.open("includes/reporte_logs.php?fecha_ini="+fecha_ini+"&fecha_fin="+fecha_fin+"&usuario_id="+usuario_id);
 }
 
 // Regresar a la pagina anterior de ver logs
 function regresar_logs(){
+    var usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/ver_logs.php");
+    $("#area_trabajo_menu").load("includes/ver_logs.php?usuario_id="+usuario_id)
 }
 
 //* Estados  Internos de Edo.Ocupado *//

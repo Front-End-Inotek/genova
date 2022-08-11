@@ -43,7 +43,7 @@
       <div class="table-responsive" id="tabla_logs">
       <table class="table table-bordered table-hover">
           <thead>
-            <tr class="table-primary text-center">
+            <tr class="table-primary-encabezado text-center">
             <th>Usuario</th>
             <th>Fecha</th>
             <th>Ip</th>
@@ -129,7 +129,7 @@
     }
     // Mostrar los usuarios de logs
     function mostrar_usuario(){ 
-      $sentencia = "SELECT * FROM usuario ORDER BY usuario";
+      $sentencia = "SELECT * FROM usuario WHERE estado = 1 ORDER BY usuario";
       $comentario="Mostrar los usuarios de logs";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
@@ -181,25 +181,24 @@
       //se recibe la consulta y se convierte a arreglo
       echo '<div class="row">
       <div class="col-sm-1">Usuario:</div>
-          <div class="col-sm-2">
-            <select type="text" id="usuario" class="color_black form-control form-control-lg"  onchange="buscar_logs_usuario(0)" autofocus="autofocus">';
+          <div class="col-sm-3">
+            <select type="text" id="usuario" class="color_black form-control form-control-lg" onchange="buscar_logs_usuario('.$fecha_ini.','.$fecha_fin.','.$id.')" autofocus="autofocus">
+              <option value="0">Selecciona</option>';
               $this->mostrar_usuario(); 
             echo '</select>
           </div>
           <div class="col-sm-1">Actividad:</div>
-          <div class="col-sm-2">
-            <input class="form-control form-control-lg" type="text"  id="buscar"  onkeyup="buscar_logs_actividad(0)" placeholder="Buscar por actividad" autofocus="autofocus"/>
+          <div class="col-sm-3">
+            <input class="form-control form-control-lg" type="text" id="buscar" onkeyup="buscar_logs_actividad()" placeholder="Buscar por actividad" autofocus="autofocus"/>
           </div>
-          <div class="col-sm-1"></div>
           <div class="col-sm-2">
-            <button class="btn btn-outline-primary btn-block btn-default btn-lg" type="button" value="Buscar" onclick="buscar_usuario_logs(0)">
+            <button class="btn btn-secondary btn-block btn-default btn-lg" type="button" value="Buscar" onclick="buscar_usuario_logs()">
               Buscar 
             </button>
           </div>
-          <div class="col-sm-1"></div>
           <div class="col-sm-2">
-            <button class="btn btn-outline-info btn-block btn-default btn-lg" onclick="reporte_logs('.$fecha_ini.','.$fecha_fin.')">
-              Reporte de Logs
+            <button class="btn btn-success btn-block btn-default btn-lg" onclick="reporte_logs('.$fecha_ini.','.$fecha_fin.')">
+              Reporte
             </button>
           </div>
       </div><br>
@@ -207,7 +206,7 @@
       <div class="table-responsive" id="tabla_logs">
       <table class="table table-bordered table-hover">
         <thead>
-          <tr class="table-primary text-center">
+          <tr class="table-primary-encabezado text-center">
           <th>Usuario</th>
           <th>Fecha</th>
           <th>Ip</th>
@@ -247,9 +246,47 @@
         echo ' </ul>';
         //echo $sentencia;
     }
+    // Mostramos los logs ya filtrados por fecha
+    function mostrar_logs_tabla($fecha_ini_tiempo,$fecha_fin_tiempo,$id){ 
+      date_default_timezone_set('America/Mexico_City');
+      $fecha_ini_tiempo =$fecha_ini_tiempo. " 0:00:00";
+      $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
+      $fecha_ini =strtotime($fecha_ini_tiempo);
+      $fecha_fin =strtotime($fecha_fin_tiempo);
+  
+      $sentencia = "SELECT * FROM logs WHERE logs.hora >= $fecha_ini AND logs.hora <= $fecha_fin AND logs.hora > 0 ORDER BY logs.hora DESC;";
+      $comentario="Seleccionar los datos de logs";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      echo '
+      <div class="table-responsive" id="tabla_logs">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="table-primary-encabezado text-center">
+          <th>Usuario</th>
+          <th>Fecha</th>
+          <th>Ip</th>
+          <th>Actividad Realizada</th>
+          </tr>
+        </thead>
+      <tbody>';
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            //echo '<tr>';
+            echo '<td>'.$this->saber_nombre($fila['usuario']).'</td>';
+            echo '<td>'.date("d-m-y",$fila['hora']).'</td>';
+            echo '<td>'.$fila['ip'].'</td>';
+            echo '<td>'.$fila['actividad'].'</td>';
+            echo '</tr>';
+          }
+          echo '
+        </tbody>
+      </table>
+      </div>';
+    }
     // Barra de busqueda de usuarios en logs
-    function buscar_usuario($a_usuario,$id){ 
-      $sentencia = "SELECT * FROM logs WHERE logs.usuario LIKE '%$a_usuario%' ORDER BY logs.actividad;";
+    function buscar_usuario($a_usuario){ 
+      $sentencia = "SELECT * FROM logs WHERE logs.usuario = $a_usuario ORDER BY logs.actividad;";
       $comentario="Mostrar los logs usuario";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
@@ -257,7 +294,7 @@
       <div class="table-responsive" id="tabla_logs">
       <table class="table table-bordered table-hover">
           <thead>
-            <tr class="table-primary text-center">
+            <tr class="table-primary-encabezado text-center">
             <th>Usuario</th>
             <th>Fecha</th>
             <th>Ip</th>
@@ -279,7 +316,7 @@
       </div>';
     }
     // Barra de busqueda de actividad en logs
-    function buscar_actividad($a_buscar,$id){ 
+    function buscar_actividad($a_buscar){ 
       $sentencia = "SELECT * FROM logs WHERE logs.actividad LIKE '%$a_buscar%' ORDER BY logs.actividad;";
       $comentario="Mostrar los logs actividad";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -288,7 +325,7 @@
       <div class="table-responsive" id="tabla_logs">
       <table class="table table-bordered table-hover">
           <thead>
-            <tr class="table-primary text-center">
+            <tr class="table-primary-encabezado text-center">
             <th>Usuario</th>
             <th>Fecha</th>
             <th>Ip</th>
@@ -310,7 +347,7 @@
       </div>';
     }
     // Boton de busqueda de usuarios y actividad en logs
-    function buscar_usuarios_logs($a_buscar,$usuario,$id){
+    function buscar_usuarios_logs($a_buscar,$usuario){
       $sentencia = "SELECT * FROM logs WHERE logs.actividad LIKE '%$a_buscar%' AND logs.usuario LIKE '%$usuario%' ORDER BY logs.hora DESC;";
       $comentario="Mostrar los logs";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -319,7 +356,7 @@
       <div class="table-responsive" id="tabla_logs">
       <table class="table table-bordered table-hover">
           <thead>
-            <tr class="table-primary text-center">
+            <tr class="table-primary-encabezado text-center">
             <th>Usuario</th>
             <th>Fecha</th>
             <th>Ip</th>
