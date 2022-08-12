@@ -1,9 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_hab.php");
-  include_once('clase_log.php');
   $hab = NEW Hab(0);
-  $logs = NEW Log(0);
   
   echo ' <div class="container blanco">';
           $total_final= $hab->mostrar_cargo_noche();

@@ -173,3 +173,4 @@ VERSION 2.5
 -Agregar permisos de ver logs con su sql
 -Vista y agregar al menu ver logs
 -Funcionalidad y reporte de ver logs
+-Correcion de check-input de cargo noche por habitacion
