@@ -415,10 +415,13 @@
                 $total_final= $total_final + $total_tarifa_seleccionada;
                 echo '<tr class="text-center">
                 <td><div class="form-check">';
+                  //sleep(2);
                   if($cargo_noche == 0){
-                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onclick="cambiar_cargo_noche('.$hab_id.')">';
+                    $cargo= 0;
+                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onclick="cambiar_cargo_noche('.$hab_id.','.$cargo.')">';
                   }else{
-                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onclick="cambiar_cargo_noche('.$hab_id.')" checked>';
+                    $cargo= 1;
+                    echo '<input class="form-check-input" type="checkbox" id="cargo_noche" onclick="cambiar_cargo_noche('.$hab_id.','.$cargo.')" checked>';
                   }
                 echo '</div></td>
                 <td>'.$hab_nombre.'</td>
