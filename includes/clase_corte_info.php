@@ -25,6 +25,8 @@
 	public $producto_nombre=array();
 	public $producto_venta=array();
 	public $producto_precio=array();
+	public $producto_tipo_hab=array();
+	public $producto_tipo_rest=array();
 
 	// Constructor
 	function __construct($id_usuario)
@@ -68,7 +70,8 @@
 		  if($venta > 0){
 			  $this->producto_nombre[$contador]= $fila['nombre'];
 			  $precio= $this->producto_precio[$contador]= $fila['precio'];
-			  $rest= $this->producto_tipo_venta[$contador]= $this->venta_sin_hab($id_usuario,$fila['nombre']);
+			  $rest= $this->producto_tipo_hab[$contador]= $this->venta_hab($id_usuario,$fila['nombre']);
+			  $rest= $this->producto_tipo_rest[$contador]= $this->venta_rest($id_usuario,$fila['nombre']);
 			  //$this->producto_cortesia[$contador]= $this->producto_de_cortresia($id_ini,$id_fin,$fila['nombre']);
 			  //$this->producto_inventario[$contador]= $fila['inventario'];
 			  $total_productos= $total_productos + $venta;
@@ -88,7 +91,8 @@
 
 	  include_once('clase_forma_pago.php');
 	  $forma_pago = NEW Forma_pago(0);
-	  $cantidad= $forma_pago->total_elementos();
+	  //$cantidad= $forma_pago->total_elementos();
+	  $cantidad= 10;
 	  $pago= array();
 	  for($z=0 ; $z<$cantidad; $z++){
 		$pago[$z]= 0;
@@ -262,12 +266,12 @@
 	  }
 	  return $total;
     }
-	// Obtener el total del  producto vendido
-	function venta_sin_hab($id_usuario,$nombre){
+	// Obtener el total del producto vendido en una habitacion
+	function venta_hab($id_usuario,$nombre){
       $total=0;
-	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE concepto.id_usuario = $id_usuario AND concepto.nombre = '$nombre' AND ticket.mov > 0 AND concepto.tipo_cargo = 1;";//mov > 0 ?
+	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE concepto.id_usuario = $id_usuario AND concepto.nombre = '$nombre' AND ticket.mov > 0 AND concepto.tipo_cargo = 1 AND concepto.activo = 1;";
 	  //echo $sentencia;
-	  $comentario="Obtener el total del  producto vendido";
+	  $comentario="Obtener el total del  producto vendido en una habitacion";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
@@ -280,6 +284,24 @@
 	  }
 	  return $total;
     }
+	// Obtener el total del producto vendido en el restaurante
+	function venta_rest($id_usuario,$nombre){
+		$total=0;
+		$sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE concepto.id_usuario = $id_usuario AND concepto.nombre = '$nombre' AND concepto.tipo_cargo = 2 AND concepto.activo = 1;";
+		//echo $sentencia;
+		$comentario="Obtener el total del  producto vendido en una el restaurante";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta))
+		{
+			$total=$fila['cantidad'];
+		}
+		if($total>0){
+
+		}else{
+			$total=0;
+		}
+		return $total;
+	}
 	// Obtener la cantidad de habitaciones del hospedaje
 	function cantidad_habitaciones($id_usuario){
 	  $cantidad=0;

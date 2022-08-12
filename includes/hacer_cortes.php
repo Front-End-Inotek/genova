@@ -59,22 +59,22 @@
                     $cantidad= count($inf->producto_nombre);
                     for($z=0 ; $z<$cantidad; $z++)
                     {
-                        if(($z%2) == 0){
-                          echo '<tr class="table-white text-center">';
-                        }else{
-                          echo '<tr class="table-secondary text-center">';
-                        }
-                          echo '<td>'.$inf->producto_nombre[$z].'</td>
-                          <td>$'.number_format($inf->producto_precio[$z], 2).'</td>
-                          <td>'.$inf->producto_venta[$z].'</td>
-                          <td>$'.number_format(($inf->producto_venta[$z] * $inf->producto_precio[$z]), 2).'</td>
-                          <td>'.$inf->producto_tipo_venta[$z].'</td>
-                          <td>'.($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]).'</td>';
-                          $total_restaurante= $total_restaurante + ($inf->producto_venta[$z] * $inf->producto_precio[$z]);
-                          $total_productos= $total_productos + $inf->producto_venta[$z];
-                          $total_productos_hab= $total_productos_hab + $inf->producto_tipo_venta[$z];
-                          $total_productos_rest= $total_productos_rest + ($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]);
+                      if(($z%2) == 0){
+                        echo '<tr class="table-white text-center">';
+                      }else{
+                        echo '<tr class="table-secondary text-center">';
                       }
+                        echo '<td>'.$inf->producto_nombre[$z].'</td>
+                        <td>$'.number_format($inf->producto_precio[$z], 2).'</td>
+                        <td>'.$inf->producto_venta[$z].'</td>
+                        <td>$'.number_format(($inf->producto_venta[$z] * $inf->producto_precio[$z]), 2).'</td>
+                        <td>'.$inf->producto_tipo_hab[$z].'</td>
+                        <td>'.$inf->producto_tipo_rest[$z].'</td>';
+                        $total_restaurante= $total_restaurante + ($inf->producto_venta[$z] * $inf->producto_precio[$z]);
+                        $total_productos= $total_productos + $inf->producto_venta[$z];
+                        $total_productos_hab= $total_productos_hab + $inf->producto_tipo_hab[$z];
+                        $total_productos_rest= $total_productos_rest + $inf->producto_tipo_rest[$z];
+                    }
                       echo '<tr class="table-primary  text-center">
                         <td></td>
                         <td></td>
