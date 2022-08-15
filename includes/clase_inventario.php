@@ -339,10 +339,12 @@
             <div class="form-group">
               <select class="form-control-lg" id="categoria" onchange="mostrar_surtir_categoria()">';
                 if($categoria==0){
-                  echo '<option value="0" selected>Todos</option>';
+                  echo '<option value="-1">Selecciona</option>
+                    <option value="0">Todos</option>';
                 }else{
-                  echo '<option value="0" selected>Todos</option>';
-                  $this->categoria_surtir_valor($categoria);
+                  echo '<option value="-1">Selecciona</option>
+                    <option value="0">Todos</option>';
+                    $this->categoria_surtir_valor($categoria);
                 }
               echo '</select>
             </div>
@@ -397,7 +399,7 @@
       }
       // Mostrar las categorias del inventario
       function categoria_surtir(){
-        $sentencia = "SELECT * FROM categoria  AND estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar las categorias del inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -407,7 +409,7 @@
       }
       // Obtengo el valor de las categoria seleccionada
       function categoria_surtir_valor($categoria){
-        $sentencia = "SELECT * FROM categoria ORDER BY nombre";
+        $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
         $comentario="Obtengo el valor de las categoria seleccionada";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
