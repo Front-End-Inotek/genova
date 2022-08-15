@@ -236,12 +236,12 @@
           $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->producto_precio[$z], 2)),1,0,'C');
           $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_venta[$z]),1,0,'C');
           $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format(($inf->producto_venta[$z] * $inf->producto_precio[$z]), 2)),1,0,'C');
-          $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_tipo_venta[$z]),1,0,'C');
-          $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z])),1,1,'C');
+          $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_tipo_hab[$z]),1,0,'C');
+          $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$inf->producto_tipo_rest[$z]),1,1,'C');
           $total_restaurante= $total_restaurante + ($inf->producto_venta[$z] * $inf->producto_precio[$z]);
           $total_productos= $total_productos + $inf->producto_venta[$z];
-          $total_productos_hab= $total_productos_hab + $inf->producto_tipo_venta[$z];
-          $total_productos_rest= $total_productos_rest + ($inf->producto_venta[$z] - $inf->producto_tipo_venta[$z]);
+          $total_productos_hab= $total_productos_hab + $inf->producto_tipo_hab[$z];
+          $total_productos_rest= $total_productos_rest + $inf->producto_tipo_rest[$z];
           
           /*if($z == 4){
             for ($i = 1; $i <= 24; $i++) {
