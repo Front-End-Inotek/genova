@@ -16,6 +16,7 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <select class="form-control-lg" id="categoria" onchange="mostrar_surtir_categoria()">
+                  <option value="-1">Selecciona</option>
                   <option value="0">Todos</option>';
                   $inventario->categoria_surtir();
                 echo '</select>
