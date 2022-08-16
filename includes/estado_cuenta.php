@@ -136,14 +136,14 @@
         </div>
 
         <div class="row">';
-          if($total_faltante==0){
+          /*if($total_faltante==0){
             echo '<div class="col-sm-12"></div>';
-          }else{
+          }else{*/
             echo '<div class="col-sm-4"></div>';
             echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
             echo '<div class="col-sm-4"></div>';
             echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>';
-          }
+          //}
         echo '</div>
    
       </div>';
