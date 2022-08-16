@@ -25,7 +25,7 @@
   $total_restaurante= 0;//$inf->total_restaurante;
   $total_productos_hab= 0;//$inf->total_productos_hab;
   $total_productos_rest= 0;//$inf->total_productos_rest;
-  $total_restaurante_vericacion= $inf->total_restaurante;
+  $total_restaurante_verificacion= $inf->total_restaurante;
 
   require('../fpdf/fpdf.php');
 
@@ -153,7 +153,7 @@
   $conceptos[2]= 'Total';
   $total= array(); 
   $total[0]= $inf->total_hab;
-  $total[1]= $inf->total_restaurante;
+  $total[1]= $inf->total_restaurante_entrada;
   $total[2]= $inf->total_global;
   $cantidad= 2;
   for($z=0 ; $z<$cantidad; $z++)
@@ -186,7 +186,7 @@
   }
 
   // Datos dentro de la tabla ventas restaurante
-  if($total_restaurante_vericacion > 0){
+  if($total_restaurante_verificacion > 0){
       $x_final=$pdf->GetX();
       $y_final=$pdf->GetY();
       $pdf->SetXY($x_inicial,$y_inicial);

@@ -118,7 +118,7 @@
             echo '<div class="col-sm-2">Extra Menor: '.$extra_menor.'></div>';
           }else{
             echo '<div class="col-sm-2"></div>'; 
-          }
+          }          
         echo '</div><br>
 
         <div class="row">
