@@ -14,6 +14,8 @@
     $hab = NEW Hab($hab_id);
     $hab_tipo= $hab->tipo;
   }
+  $dia= time();
+  $dia_actual= date("Y-m-d",$dia);
   echo '
       <div class="container blanco">';
         if($hab_id != 0){
@@ -25,13 +27,13 @@
           <div class="col-sm-2">Fecha Entrada:</div>
           <div class="col-sm-3">
           <div class="form-group">
-            <input class="form-control" type="date"  id="fecha_entrada" placeholder="Ingresa la fecha de entrada" onchange="calcular_noches()">
+            <input class="form-control" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches()">
           </div>
           </div>
           <div class="col-sm-2">Fecha Salida:</div>
           <div class="col-sm-3">
           <div class="form-group">
-            <input class="form-control" type="date"  id="fecha_salida" placeholder="Ingresa la fecha de salida" onchange="calcular_noches()">
+            <input class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' placeholder="Ingresa la fecha de salida" onchange="calcular_noches()">
           </div>
           </div>
           <div class="col-sm-1">Noches:</div>

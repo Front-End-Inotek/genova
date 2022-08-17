@@ -176,3 +176,4 @@ VERSION 2.5
 -Correcion de check-input de cargo noche por habitacion
 -Correcciones de corte y su reporte
 -Cambiar palabra checkin por che-ckin en todo el sistema
+-Limitar date al dia actual en agregar reservaciones y cupones
