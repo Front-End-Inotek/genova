@@ -177,7 +177,16 @@
               echo '<div class="tiempo_hab">';
                       $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
                       //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
-                      if($fila['estado'] == 1){
+                      if($fila['estado'] == 0){
+                        if($cronometro == 0){
+                          echo $tipo_habitacion;
+                        }else{
+                          $fecha_inicio= date("d-m-Y",$cronometro);
+                          echo $fecha_inicio;
+                          echo '<br>';
+                          echo $tipo_habitacion;
+                        }
+                      }elseif($fila['estado'] == 1){
                         echo $fecha_salida;
                       }else{
                         if($cronometro == 0){
@@ -191,7 +200,11 @@
 
               echo '<div class="tiempo_hab">';
                       //$total= $movimiento->cuenta_total($fila['id']);
-                      if($fila['estado'] == 1){
+                      if($fila['estado'] == 0){
+                        if($cronometro == 0){
+                          echo '<br>';
+                        }
+                      }elseif($fila['estado'] == 1){
                         if($total_faltante >= 0){
                           echo '$'.number_format($total_faltante, 2);
                         }else{
@@ -203,17 +216,6 @@
                         echo $total_faltante;
                       }
               echo '</div>';
-
-              /*echo '<div class="tiempo_hab">';
-                      if($fila['estado'] == 0){
-                        if($tipo_habitacion == ''){
-                          echo '$';
-                        }else{
-                          //echo ''.$tipo_habitacion;
-                          echo $tipo_habitacion;
-                        }
-                      }
-              echo '</div>';*/
 
               echo '<div class="icono_hab">';
                   //echo $motivo;

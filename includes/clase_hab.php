@@ -470,6 +470,21 @@
         }
         return $cargo_noche;
       }
+      // Consultar el nombre del tipo de una habitacion
+      function consultar_tipo($hab_id){
+        $nombre= '';
+        $sentencia = "SELECT hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
+        FROM hab 
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.id = $hab_id AND hab.estado_hab = 1 ORDER BY hab.id";
+        $comentario="Consultar el nombre del tipo de una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $nombre= $fila['habitacion'];
+        }
+        return $nombre;
+      }
               
   }
 ?>
