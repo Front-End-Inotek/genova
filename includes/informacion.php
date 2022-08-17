@@ -59,9 +59,8 @@
       include('clase_movimiento.php');
       $cuenta= NEW Cuenta(0);
       $movimiento= NEW movimiento(0);
-      $tipo= 1;
       $cronometro=0;
-      $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_monbre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 ORDER BY id";
+      $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 ORDER BY id";
       $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
@@ -73,6 +72,7 @@
             case 0:
               $estado= "Disponible";
               $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
+              $tipo_habitacion= $fila['tipo_nombre'];
               break;
             case 1:
               $estado= "Ocupada";
@@ -174,7 +174,7 @@
                 </div>
               </div>';
 
-              echo '<div class="timepo_hab">';
+              echo '<div class="tiempo_hab">';
                       $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
                       //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
                       if($fila['estado'] == 1){
@@ -189,7 +189,7 @@
                       }
               echo '</div>';
 
-              echo '<div class="timepo_hab">';
+              echo '<div class="tiempo_hab">';
                       //$total= $movimiento->cuenta_total($fila['id']);
                       if($fila['estado'] == 1){
                         if($total_faltante >= 0){
@@ -203,6 +203,17 @@
                         echo $total_faltante;
                       }
               echo '</div>';
+
+              /*echo '<div class="tiempo_hab">';
+                      if($fila['estado'] == 0){
+                        if($tipo_habitacion == ''){
+                          echo '$';
+                        }else{
+                          //echo ''.$tipo_habitacion;
+                          echo $tipo_habitacion;
+                        }
+                      }
+              echo '</div>';*/
 
               echo '<div class="icono_hab">';
                   //echo $motivo;
