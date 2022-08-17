@@ -175,3 +175,4 @@ VERSION 2.5
 -Funcionalidad y reporte de ver logs
 -Correcion de check-input de cargo noche por habitacion
 -Correcciones de corte y su reporte
+-Cambiar palabra checkin por che-ckin en todo el sistema

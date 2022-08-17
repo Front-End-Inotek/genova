@@ -273,13 +273,13 @@
         }
         return $cantidad;
       }
-      // Consultar disponibilidad de un tipo de habitacion para hacer checkin
+      // Consultar disponibilidad de un tipo de habitacion para hacer che-ckin
       function consultar_disponibilidad($tipo_hab){
         $cantidad=0;
         $sentencia = "SELECT *,count(hab.id) AS cantidad,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.id";
-        $comentario="Consultar disponibilidad de un tipo de habitacion para hacer checkin";
+        $comentario="Consultar disponibilidad de un tipo de habitacion para hacer che-ckin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
@@ -288,12 +288,12 @@
         }
         return $cantidad;
       }
-      // Seleccionar habitacion a asignar reservacion para checkin
+      // Seleccionar habitacion a asignar reservacion para che-ckin
       function select_asignar_reservacion($tipo_hab,$id_reservacion,$habitaciones,$multiple){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.estado_hab = 1 AND hab.tipo = $tipo_hab ORDER BY hab.id";
-        $comentario="Seleccionar habitacion a asignar reservacion para checkin";
+        $comentario="Seleccionar habitacion a asignar reservacion para che-ckin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))

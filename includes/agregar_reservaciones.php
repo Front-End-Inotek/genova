@@ -17,7 +17,7 @@
   echo '
       <div class="container blanco">';
         if($hab_id != 0){
-          echo '<div class="col-sm-12 text-left"><h2 class="text-dark margen-1">HACER CHECKIN</h2></div>';
+          echo '<div class="col-sm-12 text-left"><h2 class="text-dark margen-1">CHE-CKIN</h2></div>';
         }else{
           echo '<div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR RESERVACION</h2></div>';
         }
