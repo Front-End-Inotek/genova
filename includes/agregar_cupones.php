@@ -1,5 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  $dia= time();
+  $dia_actual= date("Y-m-d",$dia);
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR CUPÓN</h2></div>
@@ -7,13 +9,13 @@
           <div class="col-sm-2">Vigencia Inicio:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="date"  id="vigencia_inicio" placeholder="Ingresa la vigencia de inicio">
+            <input class="form-control" type="date"  id="vigencia_inicio" min='.$dia_actual.' placeholder="Ingresa la vigencia de inicio">
           </div>
           </div>
           <div class="col-sm-2">Vigencia Fin:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input class="form-control" type="date"  id="vigencia_fin" placeholder="Ingresa la vigencia de fin">
+            <input class="form-control" type="date"  id="vigencia_fin" min='.$dia_actual.' placeholder="Ingresa la vigencia de fin">
           </div>
           </div>
         </div>

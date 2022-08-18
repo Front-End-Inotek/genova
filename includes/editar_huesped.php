@@ -2,6 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_huesped.php");
   $huesped= NEW Huesped($_GET['id']);
+  $reservacion= 0;
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR HUÉSPED</h2></div>

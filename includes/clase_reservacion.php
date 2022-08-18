@@ -234,7 +234,7 @@
             <th>Límite Pago</th>
             <th>Status</th>';
             if($agregar==1 && $fila['edo'] = 1){
-              echo '<th><span class=" glyphicon glyphicon-cog"></span> Checkin</th>';
+              echo '<th><span class=" glyphicon glyphicon-cog"></span> Che-ckin</th>';
             }
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
             if($editar==1 && $fila['edo'] = 1){
@@ -424,7 +424,7 @@
                 <th>Límite Pago</th>
                 <th>Status</th>';
                 if($agregar==1 && $fila['edo'] = 1){
-                  echo '<th><span class=" glyphicon glyphicon-cog"></span> Checkin</th>';
+                  echo '<th><span class=" glyphicon glyphicon-cog"></span> Che-ckin</th>';
                 }
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
                 if($editar==1 && $fila['edo'] = 1){
@@ -626,7 +626,7 @@
               <th>Límite Pago</th>
               <th>Status</th>';
               if($agregar==1 && $fila['edo'] = 1){
-                echo '<th><span class=" glyphicon glyphicon-cog"></span> Checkin</th>';
+                echo '<th><span class=" glyphicon glyphicon-cog"></span> Che-ckin</th>';
               }
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
               if($editar==1 && $fila['edo'] = 1){

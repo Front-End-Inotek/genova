@@ -3,6 +3,7 @@
   include_once('consulta.php');
   include_once("clase_cuenta.php");
   include_once('clase_huesped.php');
+  include_once('clase_hab.php');
 
   /**
    *
@@ -57,6 +58,8 @@
       {
         $fin_hospedaje= $fila['liberacion'];
       }
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
       if($fin_hospedaje>0){
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Ultima renta: '.date("d-m-Y H:i:s",  $fin_hospedaje);
@@ -66,6 +69,9 @@
           echo 'Ultima renta: INFORMACION NO DISPONIBLE';
         echo '</div>';
       }
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
+      echo '</div>';
     }
     // Estado 1
     function ocupada($hab_id,$estado,$mov){
@@ -94,8 +100,10 @@
       }
         $cuenta= NEW Cuenta(0);
         $huesped= NEW Huesped($id_huesped);
+        $hab= NEW Hab(0);
         $total= $cuenta->mostrar_total_cargos($mov);
         $total_faltante= $cuenta->mostrar_faltante($mov);
+        $tipo_habitacion= $hab->consultar_tipo($hab_id);
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Fecha entrada: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
@@ -129,6 +137,9 @@
             echo 'Persona Limpiando: '. $usuario->usuario;
           echo '</div>';
         }
+        echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+          echo 'Tipo Habitación: '.$tipo_habitacion;
+        echo '</div>';
     }
     // Estado 2
     function sucia($hab_id,$estado,$mov){
@@ -143,11 +154,16 @@
         $inicio_hospedaje= $fila['inicio_hospedaje'];
         $termina_hospe= $fila['finalizado'];
       }
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Última recervación: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Termino ocupada: '. date("d-m-Y H:i:s",$termina_hospe);
+      echo '</div>';
+      echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
     // Estado 3
@@ -167,14 +183,19 @@
         $persona_limpio= $fila['persona_limpio'];
       }
       $usuario = NEW Usuario($persona_limpio);
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Inicio Limpieza :   '. date("d-m-Y H:i:s",$inicio_limpieza);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Termino ocupada: '. date("d-m-Y H:i:s",$termina_hospe);
       echo '</div>';
-      echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Persona Limpiando: '. $usuario->usuario;
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
     // Estado 4
@@ -193,6 +214,8 @@
         $motivo= $fila['comentario'];
       }
       $usuario = NEW Usuario($detalle_realiza);
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
       echo '</div>';
@@ -203,6 +226,9 @@
         if($motivo != ''){
           echo 'Motivo: '.$motivo;
         }
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
     // Estado 5
@@ -219,11 +245,16 @@
         $detalle_realiza= $fila['detalle_realiza'];
       }
       $usuario = NEW Usuario($detalle_realiza);
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Realiza: '.$usuario->usuario;
+      echo '</div>';
+      echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
     // Estado 6
@@ -239,6 +270,8 @@
         $detalle_inicio= $fila['detalle_inicio'];
         $motivo= $fila['comentario'];
       }
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
       echo '</div>';
@@ -247,10 +280,13 @@
           echo 'Motivo: '.$motivo;
         }
       echo '</div>';
+      echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
+      echo '</div>';
     }
     function por_cobrar($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
-      $comentario="obtener de la habitacion  por cobrar ";
+      $comentario="Obtener de la habitacion  por cobrar ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       $detalle_inicio=0;

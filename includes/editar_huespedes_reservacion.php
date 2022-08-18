@@ -4,6 +4,7 @@
   include_once("clase_tarifa.php");
   $reservacion= NEW Reservacion($_GET['id']);
   $tarifa= NEW Tarifa(0);
+  $reservacion= 1;
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR RESERVACION</h2></div>
@@ -44,7 +45,7 @@
           </div>
           </div>
           <div class="col-sm-3">
-            <button class="btn btn-secondary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes_reservacion('.$_GET['id'].')"> Agregar Huésped</button>
+            <button class="btn btn-secondary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="editar_huespedes_reservacion('.$_GET['id'].')"> Agregar Huésped</button>
           </div>
           <div class="col-sm-1"></div>
         </div>

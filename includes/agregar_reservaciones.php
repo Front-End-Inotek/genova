@@ -14,10 +14,12 @@
     $hab = NEW Hab($hab_id);
     $hab_tipo= $hab->tipo;
   }
+  $dia= time();
+  $dia_actual= date("Y-m-d",$dia);
   echo '
       <div class="container blanco">';
         if($hab_id != 0){
-          echo '<div class="col-sm-12 text-left"><h2 class="text-dark margen-1">HACER CHECKIN</h2></div>';
+          echo '<div class="col-sm-12 text-left"><h2 class="text-dark margen-1">CHE-CKIN</h2></div>';
         }else{
           echo '<div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR RESERVACION</h2></div>';
         }
@@ -25,13 +27,13 @@
           <div class="col-sm-2">Fecha Entrada:</div>
           <div class="col-sm-3">
           <div class="form-group">
-            <input class="form-control" type="date"  id="fecha_entrada" placeholder="Ingresa la fecha de entrada" onchange="calcular_noches()">
+            <input class="form-control" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches()">
           </div>
           </div>
           <div class="col-sm-2">Fecha Salida:</div>
           <div class="col-sm-3">
           <div class="form-group">
-            <input class="form-control" type="date"  id="fecha_salida" placeholder="Ingresa la fecha de salida" onchange="calcular_noches()">
+            <input class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' placeholder="Ingresa la fecha de salida" onchange="calcular_noches()">
           </div>
           </div>
           <div class="col-sm-1">Noches:</div>
@@ -62,7 +64,10 @@
             </select>
           </div>
           </div>
-          <div class="col-sm-4"></div>
+          <div class="col-sm-3">
+            <button class="btn btn-secondary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes_reservacion('.$hab_id.')"> Agregar Huésped</button>
+          </div>
+          <div class="col-sm-1"></div>
         </div>
         <div class="row div_adultos"></div>';
           // Div adultos donde van resto de los datos para agregar una reservacion

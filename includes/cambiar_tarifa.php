@@ -147,7 +147,7 @@
           </div>
           </div>
           <div class="col-sm-2">
-            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aplicar_cupon('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"> Aplicar</button>
+            <button class="btn btn-secondary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aplicar_cupon('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"> Aplicar</button>
           </div>
           <div class="col-sm-2">
             <button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="datos_cupon()"> Datos Cupón</button>
