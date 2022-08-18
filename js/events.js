@@ -1340,12 +1340,17 @@ function agregar_huespedes(){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_huespedes.php"); 
+	$("#area_trabajo_menu").load("includes/agregar_huespedes.php");
 	closeNav();
 }
 
+// Modal para agregar un huesped en una reservacion
+function agregar_huespedes_reservacion(){//
+    $("#mostrar_herramientas").load("includes/agregar_huespedes_reservacion.php");
+}
+
 // Guardar un huesped
-function guardar_huesped(){
+function guardar_huesped(reservacion){
     var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var apellido= encodeURI(document.getElementById("apellido").value);
@@ -1390,23 +1395,45 @@ function guardar_huesped(){
 				  "cvv": cvv,
                   "usuario_id": usuario_id,
 				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_huesped.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_huespedes,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-				});
-				return false;
+            if(reservacion == 0){
+                $.ajax({
+                      async:true,
+                      type: "POST",
+                      dataType: "html",
+                      contentType: "application/x-www-form-urlencoded",
+                      url:"includes/guardar_huesped.php",
+                      data:datos,
+                      beforeSend:loaderbar,
+                      success:ver_huespedes,
+                      //success:problemas_sistema,
+                      timeout:5000,
+                      error:problemas_sistema
+                    });
+                    return false;
+            }else{
+                $.ajax({
+                      async:true,
+                      type: "POST",
+                      dataType: "html",
+                      contentType: "application/x-www-form-urlencoded",
+                      url:"includes/guardar_huesped.php",
+                      data:datos,
+                      beforeSend:loaderbar,
+                      success:guardar_modal,
+                      //success:problemas_sistema,
+                      timeout:5000,
+                      error:problemas_sistema
+                    });
+                    return false;
+            }
 			}else{
 				alert("Campos incompletos");
 			}
+}
+
+// Guarda el modal luego de su uso
+function guardar_modal(){
+    $('#caja_herramientas').modal('hide');
 }
 
 // Muestra los huespedes de la bd

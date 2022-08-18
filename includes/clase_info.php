@@ -58,6 +58,8 @@
       {
         $fin_hospedaje= $fila['liberacion'];
       }
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
       if($fin_hospedaje>0){
         echo '<div class="col-xs-6 col-sm-6 col-md-6">';
           echo 'Ultima renta: '.date("d-m-Y H:i:s",  $fin_hospedaje);
@@ -67,6 +69,9 @@
           echo 'Ultima renta: INFORMACION NO DISPONIBLE';
         echo '</div>';
       }
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
+      echo '</div>';
     }
     // Estado 1
     function ocupada($hab_id,$estado,$mov){

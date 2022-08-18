@@ -1,5 +1,6 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  $reservacion= 0;
   echo '
       <div class="container blanco"> 
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR HUÉSPED</h2></div>
@@ -153,7 +154,7 @@
           <div class="col-sm-6"></div>
           <div class="col-sm-2">
           <div id="boton_huesped">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_huesped()">
+            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_huesped('.$reservacion.')">
           </div>
           </div>
         </div>
