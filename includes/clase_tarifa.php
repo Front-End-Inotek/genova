@@ -233,19 +233,6 @@
         }
         return $nombre;
       }
-      // Obtengo la leyenda de la tarifa
-      function obtengo_leyenda($id){
-        $sentencia = "SELECT leyenda FROM tarifa_hospedaje WHERE id = $id AND estado = 1 LIMIT 1";
-        //echo $sentencia;
-        $leyenda= '';
-        $comentario="Obtengo la leyenda de la tarifa";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $leyenda= $fila['leyenda'];
-        }
-        return $leyenda;
-      }
       // Obtengo la tarifa por el dia de hospedaje
       function obtengo_tarifa_dia($id,$extra_adulto,$extra_junior,$extra_infantil,$descuento){
         $sentencia = "SELECT * FROM tarifa_hospedaje WHERE id = $id AND estado = 1 LIMIT 1";

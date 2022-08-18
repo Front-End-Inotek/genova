@@ -43,7 +43,10 @@
             </select>
           </div>
           </div>
-          <div class="col-sm-4"></div>
+          <div class="col-sm-3">
+            <button class="btn btn-secondary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes_reservacion('.$_GET['id'].')"> Agregar Huésped</button>
+          </div>
+          <div class="col-sm-1"></div>
         </div>
         <div class="row div_adultos_editar"></div>';
           // Div adultos donde van resto de los datos para agregar una reservacion

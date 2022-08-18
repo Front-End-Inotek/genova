@@ -1345,7 +1345,7 @@ function agregar_huespedes(){
 }
 
 // Modal para agregar un huesped en una reservacion
-function agregar_huespedes_reservacion(){//
+function agregar_huespedes_reservacion(){
     $("#mostrar_herramientas").load("includes/agregar_huespedes_reservacion.php");
 }
 
