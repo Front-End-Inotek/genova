@@ -4,7 +4,7 @@
 
   class Reservacion extends ConexionMYSql{
 
-      public $id;
+      public $id;//
       public $id_usuario;
       public $id_huesped;
       public $id_cuenta;

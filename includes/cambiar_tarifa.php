@@ -5,7 +5,7 @@
   include_once("clase_forma_pago.php");
   include_once("clase_pago.php");
   include_once("clase_tarifa.php");
-  $huesped= NEW Huesped(0);
+  $huesped= NEW Huesped(0);//
   $forma_pago= NEW Forma_pago(0);
   $pago= NEW Pago(0);
   $tarifa= NEW Tarifa($_GET['tarifa']);
