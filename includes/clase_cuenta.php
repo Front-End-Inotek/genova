@@ -395,9 +395,9 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-          if($fila['edo'] == 1){
+          //if($fila['edo'] == 1){
             $total_abonos= $total_abonos + $fila['abono'];
-          }
+          //}
         }
 
         // Obtenemos la diferencia existente entre los cargos y los abonos
@@ -416,9 +416,9 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-          if($fila['edo'] == 1){
+          //if($fila['edo'] == 1){
             $total_cargos= $total_cargos + $fila['cargo'];
-          }
+          //}
         }
         return $total_cargos;
       }

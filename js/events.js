@@ -844,20 +844,37 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
                   "estado": estado,
                   "usuario_id": usuario_id,
                 };
-            $.ajax({
-                  async:true,
-                  type: "POST",
-                  dataType: "html",
-                  contentType: "application/x-www-form-urlencoded",
-                  url:"includes/guardar_reservacion.php",
-                  data:datos,
-                  beforeSend:loaderbar,
-                  success:ver_reservaciones,
-                  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-                });
-            return false;
+            if(hab_id != 0){
+                $.ajax({
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/guardar_reservacion.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                    success:principal,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
+                  });
+              return false;
+            }else{
+                $.ajax({
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/guardar_reservacion.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                    success:ver_reservaciones,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
+                  });
+              return false;
+            }
         }else{
             alert("¡Cantidad máxima excedida de personas permitidas por el tipo de habitación!");
         }

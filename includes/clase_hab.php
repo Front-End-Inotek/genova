@@ -367,7 +367,7 @@
         $sentencia = "SELECT *,hab.id AS ID,hab.cargo_noche AS cargo 
         FROM hab
         INNER JOIN movimiento ON hab.mov = movimiento.id 
-        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE reservacion.forzar_tarifa = 0 AND hab.estado_hab = 1";
+        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE reservacion.forzar_tarifa = 0 AND hab.estado = 1 AND hab.estado_hab = 1";
         $comentario="Mostrar los datos del cargo por noche de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
