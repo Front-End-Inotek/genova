@@ -297,14 +297,12 @@
                     </tr>';
                   }
                 }else{
-                  if($descripcion != 'Total reservacion'){
-                    echo '<tr class="fuente_menor table-secondary text-center">
-                    <td>'.$fila['concepto'].'</td>
-                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['cargo'], 2).'</td>
-                    <td></td>
-                    </tr>';
-                  }
+                  echo '<tr class="fuente_menor table-secondary text-center">
+                  <td>'.$fila['concepto'].'</td>
+                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                  <td>$'.number_format($fila['cargo'], 2).'</td>
+                  <td></td>
+                  </tr>';
                 }
               }
               echo '
@@ -364,15 +362,13 @@
                     </tr>';
                   }
                 }else{
-                  if($descripcion != 'Total reservacion'){
-                    echo '<tr class="fuente_menor table-secondary text-center">
-                    <td>'.$fila['concepto'].'</td>
-                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['abono'], 2).'</td> 
-                    <td>'.$fila['descripcion'].'</td>
-                    <td></td>
-                    </tr>';
-                  }
+                  echo '<tr class="fuente_menor table-secondary text-center">
+                  <td>'.$fila['concepto'].'</td>
+                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                  <td>$'.number_format($fila['abono'], 2).'</td> 
+                  <td>'.$fila['descripcion'].'</td>
+                  <td></td>
+                  </tr>';
                 }
               }
               echo '

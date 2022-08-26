@@ -179,4 +179,5 @@ VERSION 2.5
 -Limitar date al dia actual en agregar reservaciones y cupones
 -En rack poner el tipo de habitacion en estado disponible
 -Boton para poder agregar huesped nuevo al agregar una reservacion
--Ajustes en estado de cuenta y cargo por noche
+-Ajustes generales en cargo por noche
+-Ajustes de cargos y abonos en estado de cuenta
