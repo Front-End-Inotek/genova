@@ -60,7 +60,7 @@
   $total_cargos= 0;
   $total_abonos= 0;
   $faltante= 0;
-  $faltante= $cuenta->mostrar_faltante($mov);//
+  $faltante= $cuenta->mostrar_faltante($mov);
   if($faltante >= 0){
     $faltante_mostrar= '$'.number_format($faltante, 2);
   }else{
