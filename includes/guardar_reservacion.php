@@ -104,9 +104,13 @@
     }
 
     $cantidad= 1;
-    $categoria= $hab->id;
+    $categoria= $_POST['tipo_hab'];
     $nombre= $hab->nombre;
-    $nombre_concepto= 'Primer abono de habitacion '.$nombre;
+    if($nombre == 0){
+      $nombre_concepto= 'Primer abono de habitacion ';
+    }else{
+      $nombre_concepto= 'Primer abono de habitacion '.$nombre;
+    }
     $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
     
     // Imprimir ticket
