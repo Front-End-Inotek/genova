@@ -25,6 +25,7 @@
   }
   $tipo_descuento= 0;
   $cantidad_cupon= 0;
+  $id_movimiento= 0;
 
   //Revisar la existencia de un cupon de descuento
   // Checar si codigo descuento esta vacio o no
@@ -70,9 +71,10 @@
     $cuenta= 1;
   }
   
-  if($_POST['hab_id'] != 0){
+  //if($_POST['hab_id'] != 0){
     $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa']);
     $mov_actual= $movimiento->ultima_insercion();
+  if($_POST['hab_id'] != 0){
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
     $logs->guardar_log($_POST['usuario_id'],"Che-ckin en habitacion: ". $hab->nombre);
     $cuenta= 1;
@@ -104,9 +106,13 @@
     }
 
     $cantidad= 1;
-    $categoria= $hab->id;
+    $categoria= $_POST['tipo_hab'];
     $nombre= $hab->nombre;
-    $nombre_concepto= 'Primer abono de habitacion '.$nombre;
+    if($nombre == 0){
+      $nombre_concepto= 'Primer abono de habitacion ';
+    }else{
+      $nombre_concepto= 'Primer abono de habitacion '.$nombre;
+    }
     $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
     
     // Imprimir ticket

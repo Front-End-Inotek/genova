@@ -123,7 +123,7 @@
         if($forzar_tarifa > 0){
           $total_cargo= $total_suplementos + $forzar_tarifa;
         }
-        if($cuenta == 1){
+        if($cuenta == 1 && $id_movimiento != 0){
           $pago_total= $total_pago + $cantidad_cupon;
           //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
