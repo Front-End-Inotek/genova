@@ -25,6 +25,7 @@
   }
   $tipo_descuento= 0;
   $cantidad_cupon= 0;
+  $id_movimiento= 0;
 
   //Revisar la existencia de un cupon de descuento
   // Checar si codigo descuento esta vacio o no
@@ -70,9 +71,10 @@
     $cuenta= 1;
   }
   
-  if($_POST['hab_id'] != 0){
+  //if($_POST['hab_id'] != 0){
     $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa']);
     $mov_actual= $movimiento->ultima_insercion();
+  if($_POST['hab_id'] != 0){
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
     $logs->guardar_log($_POST['usuario_id'],"Che-ckin en habitacion: ". $hab->nombre);
     $cuenta= 1;
