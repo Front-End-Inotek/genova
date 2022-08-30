@@ -181,3 +181,4 @@ VERSION 2.5
 -Boton para poder agregar huesped nuevo al agregar una reservacion
 -Ajustes generales en cargo por noche
 -Ajustes de cargos y abonos en estado de cuenta
+-Cambios de estilos en el area de trabajo
