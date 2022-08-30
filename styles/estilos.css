@@ -231,6 +231,7 @@ a.topictitle:hover {
   max-height: 100% !important;
   height: 110px !important;
   font-size:14px;
+  margin: .6em;
 }
 .btn-herramientas{/* */
   margin-bottom: 1em;
