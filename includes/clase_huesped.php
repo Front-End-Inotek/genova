@@ -424,12 +424,12 @@
           </table>
         </div>';
       }
-      // Agregamos las visitas correspondientes al che-ckin realizado
+      // Agregamos las visitas correspondientes al check-in realizado
       function modificar_visitas($id,$cantidad_visitas){
         $sentencia = "UPDATE `huesped` SET
         `visitas` = '$cantidad_visitas'
         WHERE `id` = '$id';";
-        $comentario="Agregamos las visitas correspondientes al che-ckin realizado";
+        $comentario="Agregamos las visitas correspondientes al check-in realizado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
              

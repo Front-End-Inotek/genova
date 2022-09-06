@@ -14,8 +14,8 @@
   $id_movimiento= $movimiento->disponible_asignar($_POST['id_reservacion'],$_POST['hab_id'],$reservacion->id_huesped,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->tarifa);
   $mov_actual= $movimiento->ultima_insercion();
   $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
-  //$logs->guardar_log($_POST['usuario_id'],"Asignar reservacion ". $_POST['id_reservacion']. " para hacer che-ckin ".$_POST['hab_id']." en habitacion: ". $hab->nombre); 
-  $logs->guardar_log($_POST['usuario_id'],"Asignar reservacion ". $_POST['id_reservacion']. " para hacer che-ckin en habitacion: ". $hab->nombre); 
+  //$logs->guardar_log($_POST['usuario_id'],"Asignar reservacion ". $_POST['id_reservacion']. " para hacer check-in ".$_POST['hab_id']." en habitacion: ". $hab->nombre); 
+  $logs->guardar_log($_POST['usuario_id'],"Asignar reservacion ". $_POST['id_reservacion']. " para hacer check-in en habitacion: ". $hab->nombre); 
   echo $_POST['id_reservacion']."/".$_POST['habitaciones'];
 
   /*if($_POST['habitaciones'] > 1){

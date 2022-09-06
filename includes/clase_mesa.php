@@ -98,7 +98,7 @@
       }
   
       $sentencia2 = "SELECT cliente FROM  movimiento WHERE id = $mov LIMIT 1";
-      $comentario2="Obtener el cliente de movimiento de che-ckin";
+      $comentario2="Obtener el cliente de movimiento de check-in";
       $consulta2= $this->realizaConsulta($sentencia2,$comentario2);
       //se recibe la consulta y se convierte a arreglo
       while ($fila2 = mysqli_fetch_array($consulta2))
