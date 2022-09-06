@@ -299,7 +299,7 @@
           </div>
           <div class="col-sm-1">mes/año</div>
         </div>
-        <div class="row">
+        <div class="row"> 
           <div class="col-sm-2">Código Seguridad:</div>
           <div class="col-sm-2">
           <div class="form-group">

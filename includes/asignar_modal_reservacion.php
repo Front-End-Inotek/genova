@@ -12,7 +12,7 @@
       <div class="modal-header">
         <div class="row">
           <div class="col-sm-12">
-          <h3>CHE-CKIN</h3>
+          <h3>CHECK-IN</h3>
           </div>
           <div class="col-sm-12">
           Selecciona la habitación disponible para asignar la reservación '.$_GET['id'].':

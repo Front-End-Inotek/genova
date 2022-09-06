@@ -175,10 +175,11 @@ VERSION 2.5
 -Funcionalidad y reporte de ver logs
 -Correcion de check-input de cargo noche por habitacion
 -Correcciones de corte y su reporte
--Cambiar palabra checkin por che-ckin en todo el sistema
+-Cambiar palabra checkin por check-in en todo el sistema
 -Limitar date al dia actual en agregar reservaciones y cupones
 -En rack poner el tipo de habitacion en estado disponible
 -Boton para poder agregar huesped nuevo al agregar una reservacion
 -Ajustes generales en cargo por noche
 -Ajustes de cargos y abonos en estado de cuenta
 -Cambios de estilos en el area de trabajo
+-Cambiar a palabra Check-in
