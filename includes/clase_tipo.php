@@ -61,7 +61,11 @@
         $comentario="Mostrar los tipos habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_tipo">
+        echo '
+        <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_tipos('.$id.')"> Agregar </button>
+        <br>
+        <br>
+        <div class="table-responsive" id="tabla_tipo">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">

@@ -155,15 +155,13 @@ function closeNav(){
 
 // Agregar un tipo de habitacion
 function agregar_tipos(){
-	$('#area_trabajo').hide();
-    $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_tipos.php"); 
-	closeNav();
+	$("#mostrar_herramientas").load("includes/agregar_tipos.php");
+    //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
 
 // Guardar un tipo de habitacion
 function guardar_tipo(){
+    $('#caja_herramientas').modal('hide');
     var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var codigo= encodeURI(document.getElementById("codigo").value);
