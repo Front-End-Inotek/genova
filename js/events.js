@@ -159,39 +159,98 @@ function agregar_tipos(){
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
 
+function guardar_tipo() {
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var codigo= encodeURI(document.getElementById("codigo").value);
+
+    /*const expresiones = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; // Letras, numeros, guion y guion_bajo*/
+
+    if(nombre === null || nombre === ''){
+        swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    /*if(!expresiones.test(nombre)){
+        swal("Los caracteres especiales no son aceptados en el campo nombre!", "Verifique los datos correctamente por favor!", "error");
+        return false;
+    }*/
+
+    if(codigo === null || codigo === ''){
+        swal("Campo codigo vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    guardar_tipo_habitacion()
+}
+
+
 // Guardar un tipo de habitacion
-function guardar_tipo(){
-    $('#caja_herramientas').modal('hide');
+function guardar_tipo_habitacion(){
+    //debugger
+   // $('#caja_herramientas').modal('hide');
     var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var codigo= encodeURI(document.getElementById("codigo").value);
-	
 
-	if(nombre.length >0){
-			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-				  "nombre": nombre,
-				  "codigo": codigo,
-                  "usuario_id": usuario_id,
-				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_tipo.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_tipos,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-				});
-				return false;
-			}else{
-				alert("Campos incompletos");
-			}
+    var datos = {
+        "nombre": nombre,
+        "codigo": codigo,
+        "usuario_id": usuario_id,
+    };
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/guardar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response = 'novalido') {
+                $('#caja_herramientas').modal('hide');
+                ver_tipos()
+                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+            }else{
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
+
+/*function guardar_tipo_habitacion(){
+    debugger
+    var usuario_id=localStorage.getItem("id");
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var codigo= encodeURI(document.getElementById("codigo").value);
+
+    var datos = {
+        "nombre": nombre,
+        "codigo": codigo,
+        "usuario_id": usuario_id,
+    };
+
+    var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(this.responseText);
+            if (this.responseText == 'NO') {
+                console.log('entra if')
+                $('#caja_herramientas').modal('hide');
+                ver_tipos()
+                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+            }else if(this.responseText == 'novalido'){
+                swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+            }
+        }
+      };
+      xhttp.open("GET","includes/guardar_tipo.php?noTmbre="+nombre+"&codigo="+codigo+"&usuario_id="+usuario_id,true);
+      xhttp.send();
+  }*/
 
 // Muestra las tipos de habitaciones de la bd
 function ver_tipos(){
@@ -205,11 +264,13 @@ function ver_tipos(){
 
 // Editar un tipo de habitacion
 function editar_tipo(id){
-    $("#area_trabajo_menu").load("includes/editar_tipo.php?id="+id);
+    $("#mostrar_herramientas").load("includes/editar_tipo.php?id="+id);
+    //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
 
 // Editar un tipo de habitacion
 function modificar_tipo(id){
+    $('#caja_herramientas').modal('hide');
 	var usuario_id=localStorage.getItem("id");
     var nombre= encodeURI(document.getElementById("nombre").value);
 	var codigo= encodeURI(document.getElementById("codigo").value);
@@ -241,9 +302,56 @@ function modificar_tipo(id){
         alert("Campos incompletos");
     }    
 }
+function borrar_tipo(id,nombre ){
+    //debugger
+    console.log(nombre);
+    var nombre_tipo = nombre;
+    var id_tipo = id;
+    var usuario_id=localStorage.getItem("id");
+    console.log (id_tipo);
+
+    var datos = {
+        "id_tipo": id_tipo,
+        "usuario_id": usuario_id
+    };
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    swal({
+        title: "¿Antes de continuar por favor verifique datos de la habitacion a eliminar?",
+        text: "Antes de continuar por favor verifique datos de la habitacion a eliminar "+ nombre_tipo,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+    xhttp.open("GET","includes/borrar_tipo.php?id_tipo="+id_tipo+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response = 'novalido') {
+                $('#caja_herramientas').modal('hide');
+                ver_tipos()
+                swal("Se elimino tipo de habitacion!", "Excelente trabajo!", "success");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
+                } else {
+        swal("Se cancelo eliminar tipo de habitacion!", "Por favor verifique los datos antes de eliminarlos!", "success")
+        }
+    });
+}
 
 // Borrar un tipo de habitacion
-function borrar_tipo(id){
+/*function borrar_tipo(id){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     if (id >0) {
@@ -266,7 +374,7 @@ function borrar_tipo(id){
             });
         return false;
     }
-}
+}*/
 
 // Modal de borrar un tipo de habitacion
 function aceptar_borrar_tipo(id){

@@ -4,6 +4,6 @@
   include_once("clase_log.php");
   $tipo= NEW Tipo(0);
   $logs = NEW Log(0);
-  $tipo->borrar_tipo($_POST['id']);
-  $logs->guardar_log($_POST['usuario_id'],"Borrar tipo de habitacion: ". $_POST['id']);
+  $tipo->borrar_tipo($_GET['id_tipo']);
+  $logs->guardar_log($_GET['usuario_id'],"Borrar tipo de habitacion: ". $_GET['id_tipo']);
 ?>

@@ -2,7 +2,6 @@
   date_default_timezone_set('America/Mexico_City');
   echo '
   <!-- Modal -->
-
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Agregra tipo de habitacion </h5>
