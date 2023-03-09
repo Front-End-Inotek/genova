@@ -3,9 +3,8 @@
   include_once("clase_tipo.php");
   include_once("clase_log.php");
 
-
-  if(empty($_GET['nombre'])){
-    echo('novalido');
+  if(empty($_GET['nombre']) or empty($_GET['usuario_id']) or empty($_GET['codigo'])){
+    echo 'NO_valido';
 
   }else{
     $tipo= NEW Tipo(0);
@@ -16,4 +15,3 @@
 
 
 ?>
-

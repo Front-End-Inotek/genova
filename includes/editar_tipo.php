@@ -17,19 +17,19 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 12px;"> Nombre </span>
                 </div>
-                  <input type="text" id="nombre" name ="nombre" value="'.$tipo->nombre.'" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="font-size: 12px;" >
+                  <input type="text" id="nombre" name ="nombre" value="'.$tipo->nombre.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 12px;" >
             </div>
     
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 12px;"> Codigo </span>
                 </div>
-                  <input type="text" id="codigo" name ="codigo" value="'.$tipo->codigo.'" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="font-size: 12px;" >
+                  <input type="text" id="codigo" name ="codigo" value="'.$tipo->codigo.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 12px;" >
             </div>
     
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
               <div id="boton_tipo">
               <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_tipo('.$_GET['id'].')">
             </div>
