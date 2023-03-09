@@ -62,7 +62,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_tipo">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover mi-tabla">
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>

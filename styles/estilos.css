@@ -1,3 +1,11 @@
+/*personalizacion de color tabla*/
+.table-primary-encabezado{
+  background-color: #f6f6f6;
+}
+.mi-tabla {
+  background-color: #f6f6f6; /* color de fondo de la tabla */
+  color: #333; /* color del texto de la tabla */
+}
 /* El menú de navegación lateral */
 .sidenav {
   height: 100%; /* 100% altura */
@@ -6,7 +14,7 @@
   z-index: 1; /* Permanecer en la cima */
   top: 0;
   left: 0;
-  background-color: #111; 
+  background-color: #163172;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Coloque el contenido a 60 px de la parte superior */
   transition: 0.5s; /* 0.5 segundo efecto de transición para deslizar la sidenav */
@@ -17,14 +25,14 @@
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 16px;
-  color: #3B83BD;
+  color: #CAF5FF;
   display: block;
   transition: 0.3s
 }
 
 /* Cuando pasas el mouse sobre los enlaces de navegación, cambia su color */
 .sidenav a:hover, .offcanvas a:focus{
-  color: #94ccfa;
+  color: #2e1709;
   /*background-color: #4882b4;*/
 }
 
@@ -95,17 +103,17 @@
 
 /* Color para tabla de encabezado primary **/
 .table-primary-encabezado{
-  color: white;
+  color: #d6e4f0;
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
-  background-color: rgb(90, 145, 235);
+  background-color: #14274e;
   border-top-style: none;
 }
 
 /* Color para tabla de encabezado info **/
 .table-info-encabezado{
-  color: white;
+  color: #4e6c50;
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
@@ -132,7 +140,7 @@
 /* Contenedor con fondo blanco y bordes */
  .blanco{
   padding: 25px 25px;
-  background-color: white;
+  background-color: #f6f6f6;
 }
 
 /* Contenedor con fondo blanco y margen */
@@ -232,6 +240,7 @@ a.topictitle:hover {
   height: 110px !important;
   font-size:14px;
   margin: .6em;
+  
 }
 .btn-herramientas{/* */
   margin-bottom: 1em;
@@ -946,6 +955,7 @@ a.topictitle:hover {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+   
   }
   .row {
     margin-right: -15px;
@@ -956,6 +966,7 @@ a.topictitle:hover {
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
+
   }
   .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
     float: left;
@@ -996,5 +1007,5 @@ a.topictitle:hover {
   .col-xs-1 {
     width: 8.33333333%;
   }
-  
+ 
   
