@@ -28,7 +28,7 @@ body {
     transition: 0.4s ease-out;
     position: relative;
     left: 0px;
-    border-radius: 150px;
+    
     }
 
     .card:hover {

@@ -1,0 +1,89 @@
+body {
+    background-color: #4e6c50;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 280px;
+    width: 200px;
+    margin: 10px;
+    background-color: #08291A;image.png
+    border-radius: 10px;
+    box-shadow: -1rem 0 2rem #000;
+    transition: 0.4s ease-out;
+    position: relative;
+    left: 0px;
+    }
+
+    .card:hover {
+    transform: translateY(-20px);
+    transition: 0.7s ease-out;
+    }
+
+    .titulo {
+    color: white;
+    font-weight: 300;
+    margin: 20px;
+    }
+
+
+
+    .circulo {
+    margin: 20px auto;
+    }
+
+    .stroke {
+    stroke: white;
+    stroke-dasharray: 360;
+    stroke-dashoffset: 360;
+    transition: 0.6s ease-out;
+    }
+
+    svg {
+    fill: #209836;
+    stroke-width: 2px;
+    }
+
+    .card:hover .stroke {
+    stroke-dashoffset: 100;
+    transition: 1s ease-out;
+    }
+    /*
+.barra {
+    height: 5px;
+    width: 160px;
+    margin: 20px;
+    }
+
+    .barVacia {
+    background-color: #46484a;
+    width: 100%;
+    height: 100%;
+    }
+/*
+.barLlena {
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+    width: 0px;
+    height: 100%;
+    background: rgb(226, 230, 232);
+    background: linear-gradient(90deg, rgb(54, 217, 0) 0%, rgb(38, 142, 4) 65%, rgb(15, 55, 1) 100%);
+    transition: 0.6s ease-out;
+}*/
+
+/*
+.card:hover .filledbar {
+    width: 120px;
+    transition: 0.4s ease-out;
+}*/
