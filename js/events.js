@@ -299,7 +299,7 @@ function borrar_tipo(id, nombre, codigo ){
     var xhttp;
     xhttp = new XMLHttpRequest();
     swal({
-        title: "¿Antes de continuar por favor verifique datos de la habitacion a eliminar?",
+        title: "Antes de continuar por favor verifique datos de la habitacion a eliminar",
         text: "Antes de continuar por favor verifique datos de la habitacion a eliminar ",
         content: tabla,
         icon: "warning",
@@ -351,17 +351,14 @@ function regresar_editar_tipo(){
 
 // Agregar una tarifa hospedaje
 function agregar_tarifas(){
-	$('#area_trabajo').hide();
-    $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_tarifas.php"); 
-	closeNav();
+	$("#mostrar_herramientas").load("includes/agregar_tarifas.php"); 
 }
 
 // Guardar una tarifa hospedaje
 function guardar_tarifa(){
+    debugger
     var usuario_id=localStorage.getItem("id");
-	var nombre= encodeURI(document.getElementById("nombre").value);
+    var nombre= encodeURI(document.getElementById("nombre").value);
 	var precio_hospedaje= document.getElementById("precio_hospedaje").value;
 	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
     var cantidad_maxima= document.getElementById("cantidad_maxima").value;
@@ -370,39 +367,44 @@ function guardar_tarifa(){
 	var precio_infantil= document.getElementById("precio_infantil").value;
 	var tipo= document.getElementById("tipo").value;
     var leyenda= encodeURI(document.getElementById("leyenda").value);
-	
 
-	if(nombre.length >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && cantidad_maxima >0 && precio_adulto >0 && tipo >0){
-			$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-				  "nombre": nombre,
-				  "precio_hospedaje": precio_hospedaje,
-				  "cantidad_hospedaje": cantidad_hospedaje,
-                  "cantidad_maxima": cantidad_maxima,
-				  "precio_adulto": precio_adulto,
-				  "precio_junior": precio_junior,
-				  "precio_infantil": precio_infantil,
-				  "tipo": tipo,
-                  "leyenda": leyenda,
-                  "usuario_id": usuario_id,
-				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_tarifa.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_tarifas,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-				});
-				return false;
-			}else{
-				alert("Campos incompletos");
-			}
+    var datos = {
+        "nombre": nombre,
+        "precio_hospedaje": precio_hospedaje,
+        "cantidad_hospedaje": cantidad_hospedaje,
+        "cantidad_maxima": cantidad_maxima,
+        "precio_adulto": precio_adulto,
+        "precio_junior": precio_junior,
+        "precio_infantil": precio_infantil,
+        "tipo": tipo,
+        "leyenda": leyenda,
+        "usuario_id": usuario_id
+    };
+
+
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/guardar_tarifa.php?nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response == 'NO') {
+                console.log(e.target.response);
+                $('#caja_herramientas').modal('hide');
+                ver_tarifas()
+                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+            }else if(e.target.response == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
 // Muestra las tarifas hospedaje de la bd
@@ -417,7 +419,7 @@ function ver_tarifas(){
 
 // Editar una tarifa hospedaje
 function editar_tarifa(id){
-    $("#area_trabajo_menu").load("includes/editar_tarifa.php?id="+id);
+    $("#mostrar_herramientas").load("includes/editar_tarifa.php?id="+id);
 }
 
 // Editar una tarifa hospedaje
@@ -433,65 +435,113 @@ function modificar_tarifa(id){
     var tipo= document.getElementById("tipo").value;
     var leyenda= encodeURI(document.getElementById("leyenda").value);
 
+    var datos = {
+        "id": id,
+        "usuario_id": usuario_id,
+        "nombre": nombre,
+        "precio_hospedaje": precio_hospedaje,
+        "cantidad_hospedaje": cantidad_hospedaje,
+        "cantidad_maxima": cantidad_maxima,
+        "precio_adulto": precio_adulto,
+        "precio_junior": precio_junior,
+        "precio_infantil": precio_infantil,
+        "tipo": tipo,
+        "leyenda": leyenda
+    };
 
-    if(id >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && cantidad_maxima >0 && precio_adulto >0 && tipo >0){
-		$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
-        var datos = {
-              "id": id,
-              "nombre": nombre,
-			  "precio_hospedaje": precio_hospedaje,
-			  "cantidad_hospedaje": cantidad_hospedaje,
-              "cantidad_maxima": cantidad_maxima,
-			  "precio_adulto": precio_adulto,
-			  "precio_junior": precio_junior,
-			  "precio_infantil": precio_infantil,
-			  "tipo": tipo,
-              "leyenda": leyenda,
-              "usuario_id": usuario_id,
-            };
-        $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_tarifa.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:ver_tarifas,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
-            });
-        return false;
-    }else{
-        alert("Campos incompletos");
-    }    
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/aplicar_editar_tarifa.php?id="+id+"&nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tarifas()
+                swal("Actualizo tarifas de hospedaje!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
 // Borrar una tarifa hospedaje
-function borrar_tarifa(id){
-    var usuario_id=localStorage.getItem("id");
-    $('#caja_herramientas').modal('hide');
-    if (id >0) {
-        var datos = {
-                "id": id,
-                "usuario_id": usuario_id,
-            };
-        $.ajax({
-                async:true,
-                type: "POST",
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_tarifa.php",
-                data:datos,
-                beforeSend:loaderbar,
-                success:ver_tarifas,
-                //success:problemas_sistema,
-                timeout:5000,
-                error:problemas_sistema
-            });
-        return false;
-    }
+function borrar_tarifa(id, nom, precio_hospedaje, cantidad_hospedaje, cantidad_maxima, precio_adulto, precio_junior, precio_infantil, habitacion, leyenda ){
+    let usuario_id=localStorage.getItem("id");
+    let nombre = nom;
+    let precio = precio_hospedaje;
+    let habitaciones = habitacion;
+    let leyendas = leyenda;
+
+    let datos = {
+        "id": id,
+        "usuario_id": usuario_id,
+    };
+
+    let tabla = document.createElement("div");
+    tabla.innerHTML += `
+    <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
+        <tr>
+        <td>Id</td>
+        <td>Nombre</td>
+        <td>Precio</td>
+        <td>Tipo Habitacion</td>
+        <td>Leyenda Habitacion</td>
+        </tr>
+        <tr>
+        <td>${id}</td>
+        <td>${nombre}</td>
+        <td>${precio}</td>
+        <td>${habitaciones}</td>
+        <td>${leyendas}</td>
+        </tr>
+    </table> <br>`;
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    swal({
+        title: "Antes de continuar por favor verifique datos de la tarifa a eliminar",
+        text: "Antes de continuar por favor verifique datos de la tarifa a eliminar ",
+        content: tabla,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+    xhttp.open("GET","includes/borrar_tarifa.php?id="+id+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tarifas()
+                swal("Se elimino tipo de habitacion!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Accion no realizada!", "Error de transferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
+                } else {
+                    $('#caja_herramientas').modal('hide');
+        swal("Se cancelo eliminar tipo de habitacion!", "Por favor verifique los datos antes de eliminarlos!", "success")
+        }
+    });
 }
 
 // Modal de borrar una tarifa hospedaje
