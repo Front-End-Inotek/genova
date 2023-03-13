@@ -355,8 +355,63 @@ function agregar_tarifas(){
 	$("#mostrar_herramientas").load("includes/agregar_tarifas.php"); 
 }
 
-// Guardar una tarifa hospedaje
 function guardar_tarifa(){
+    let nombre= encodeURI(document.getElementById("nombre").value);
+	let precio_hospedaje= document.getElementById("precio_hospedaje").value;
+	let cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
+    let cantidad_maxima= document.getElementById("cantidad_maxima").value;
+	let precio_adulto= document.getElementById("precio_adulto").value;
+	let precio_junior= document.getElementById("precio_junior").value;
+	let precio_infantil= document.getElementById("precio_infantil").value;
+    let tipo= document.getElementById("tipo").value;
+    let leyenda= encodeURI(document.getElementById("leyenda").value);
+
+    if(nombre === null || nombre === ''){
+        swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    if(precio_hospedaje === null || precio_hospedaje === ''){
+        swal("Campo precio_hospedaje vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+    if(cantidad_hospedaje === null || cantidad_hospedaje === ''){
+        swal("Campo cantidad_hospedaje vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    if(cantidad_maxima === null || cantidad_maxima === ''){
+        swal("Campo cantidad_maxima vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+    if(precio_adulto === null || precio_adulto === ''){
+        swal("Campo precio_adulto vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    if(precio_junior === null || precio_junior === ''){
+        swal("Campo precio_junior vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+    if(precio_infantil === null || precio_infantil === ''){
+        swal("Campo precio_infantil vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    if(tipo === null || tipo === ''){
+        swal("Campo tipo vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+    if(leyenda === null || leyenda === ''){
+        swal("Campo leyenda vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+    guardar_tarifa_nueva()
+}
+
+
+// Guardar una tarifa hospedaje
+function guardar_tarifa_nueva(){
     //debugger
 	let usuario_id=localStorage.getItem("id");
     let nombre= encodeURI(document.getElementById("nombre").value);
@@ -379,7 +434,7 @@ function guardar_tarifa(){
         "precio_junior": precio_junior,
         "precio_infantil": precio_infantil,
         "tipo": tipo,
-        "leyenda": leyenda
+        "leyenda": leyenda,
     };
 
     let xhttp;
@@ -390,14 +445,15 @@ function guardar_tarifa(){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             console.log(e.target.responseText);
-            if (e.target.responseText === 'NO') {
+            if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_tarifas()
-                swal("Actualizo tarifas de hospedaje!", "Excelente trabajo!", "success");
-            }else if (e.target.responseText == 'NO_valido'){
+                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+                return false;
+            }else if(e.target.responseText == 'NO_valido'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
-                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
             }
         }else{
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
@@ -1509,11 +1565,7 @@ function asignar_reservacion_multiple(hab_id,id_reservacion,habitaciones){
 
 // Agregar un huesped
 function agregar_huespedes(){
-	$('#area_trabajo').hide();
-    $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_huespedes.php");
-	closeNav();
+	$("#mostrar_herramientas").load("includes/agregar_huespedes.php");
 }
 
 // Modal para agregar un huesped en una reservacion
@@ -1522,7 +1574,29 @@ function agregar_huespedes_reservacion(){
 }
 
 // Guardar un huesped
-function guardar_huesped(reservacion){
+  /*function guardar_huesped(){
+    //Declaramos una variable que contendra nuestro formulario
+    var form = document.getElementById('formulario_agregarhuesped');
+    //Declaramos una constante que contendra XMLHttpRequest(); intercambia datos detras de escena
+    const xhr = new XMLHttpRequest();
+    console.log(form);
+    //open recive informacion son 3 parametro
+    xhr.open('POST', 'includes/guardar_huesped.php', true);
+    //FormData interpretara los datos del formulario
+    var formData = new FormData(form);
+    //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor
+    xhr.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            ver_huespedes();
+        }
+    })
+    //Enviamos nuestro la respuesta de nuestro formulario
+    xhr.send(formData);
+}*/
+function guardar_huesped(){
     var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var apellido= encodeURI(document.getElementById("apellido").value);
@@ -1542,65 +1616,55 @@ function guardar_huesped(reservacion){
 	var vencimiento_mes= encodeURI(document.getElementById("vencimiento_mes").value);
 	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
 	var cvv= encodeURI(document.getElementById("cvv").value);
-	
 
-	if(nombre.length >0 && apellido.length >0 && direccion.length >0 && ciudad.length >0 && estado.length >0 && codigo_postal.length >0 && telefono.length >0 && correo.length >0 && preferencias.length >0 && comentarios.length >0){
-			$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-			 	  "nombre": nombre,
-				  "apellido": apellido,
-				  "direccion": direccion,
-				  "ciudad": ciudad,
-				  "estado": estado,
-				  "codigo_postal": codigo_postal,
-				  "telefono": telefono,
-				  "correo": correo,
-				  "contrato": contrato,
-				  "cupon": cupon,
-				  "preferencias": preferencias,
-				  "comentarios": comentarios,
-				  "titular_tarjeta": titular_tarjeta,
-				  "tipo_tarjeta": tipo_tarjeta,
-				  "numero_tarjeta": numero_tarjeta,
-				  "vencimiento_mes": vencimiento_mes,
-				  "vencimiento_ano": vencimiento_ano,
-				  "cvv": cvv,
-                  "usuario_id": usuario_id,
-				};
-            if(reservacion == 0){
-                $.ajax({
-                      async:true,
-                      type: "POST",
-                      dataType: "html",
-                      contentType: "application/x-www-form-urlencoded",
-                      url:"includes/guardar_huesped.php",
-                      data:datos,
-                      beforeSend:loaderbar,
-                      success:ver_huespedes,
-                      //success:problemas_sistema,
-                      timeout:5000,
-                      error:problemas_sistema
-                    });
-                    return false;
+    var datos = {
+        "nombre": nombre,
+       "apellido": apellido,
+       "direccion": direccion,
+       "ciudad": ciudad,
+       "estado": estado,
+       "codigo_postal": codigo_postal,
+       "telefono": telefono,
+       "correo": correo,
+       "contrato": contrato,
+       "cupon": cupon,
+       "preferencias": preferencias,
+       "comentarios": comentarios,
+       "titular_tarjeta": titular_tarjeta,
+       "tipo_tarjeta": tipo_tarjeta,
+       "numero_tarjeta": numero_tarjeta,
+       "vencimiento_mes": vencimiento_mes,
+       "vencimiento_ano": vencimiento_ano,
+       "cvv": cvv,
+       "usuario_id": usuario_id,
+     };
+
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre+"&apellido="+apellido+"&direccion="+direccion+"&ciudad="+ciudad+
+    "&estado="+estado+"&codigo_postal="+codigo_postal+"&telefono="+telefono+"&correo="+correo+"&contrato="+contrato+"&cupon="+cupon+
+    "&preferencias="+preferencias+"&comentarios="+comentarios+"&titular_tarjeta="+titular_tarjeta+"&tipo_tarjeta="+tipo_tarjeta+"&numero_tarjeta="+numero_tarjeta+
+    "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id,true);
+
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.responseText);
+            if (e.target.responseText == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_huespedes()
+                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+            }else if(e.target.responseText == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
-                $.ajax({
-                      async:true,
-                      type: "POST",
-                      dataType: "html",
-                      contentType: "application/x-www-form-urlencoded",
-                      url:"includes/guardar_huesped.php",
-                      data:datos,
-                      beforeSend:loaderbar,
-                      success:guardar_modal,
-                      //success:problemas_sistema,
-                      timeout:5000,
-                      error:problemas_sistema
-                    });
-                    return false;
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
             }
-			}else{
-				alert("Campos incompletos");
-			}
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
 // Guarda el modal luego de su uso

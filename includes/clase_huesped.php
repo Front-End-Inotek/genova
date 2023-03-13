@@ -86,8 +86,13 @@
         $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, `estado_huesped`)
         VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', '$cvv', '0', '1');";
         $comentario="Guardamos el huesped en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);    
-        
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ("NO");
+        }else{
+          echo ("cosulta_no_valida");
+        }
+
         include_once("clase_log.php");
         $logs = NEW Log(0);
         $sentencia = "SELECT id FROM huesped ORDER BY id DESC LIMIT 1";
@@ -134,7 +139,12 @@
         $comentario="Mostrar los huespedes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped">
+        echo '
+        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()"> Agregar huesped </button>
+        <br>
+        <br>
+
+        <div class="table-responsive" id="tabla_huesped" style="max-height:560px; ">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
@@ -163,7 +173,7 @@
             {
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
-                <td>'.$fila['nombre'].'</td>  
+                <td>'.$fila['nombre'].'</td>
                 <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>
                 <td>'.$fila['ciudad'].'</td>

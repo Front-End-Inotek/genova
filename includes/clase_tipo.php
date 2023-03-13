@@ -71,7 +71,7 @@
         <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_tipos('.$id.')"> Agregar </button>
         <br>
         <br>
-        <div class="table-responsive" id="tabla_tipo">
+        <div class="table-responsive" id="tabla_tipo" style="max-height:560px; overflow-y: scroll;">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
