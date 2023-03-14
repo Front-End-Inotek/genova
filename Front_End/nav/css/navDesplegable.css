@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    min-height: 100vh;
+    background-color: #fff;
+  }
+  
+  .side-navbar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    margin-left: -300px;
+    background: linear-gradient(to left, #563f26, #21180f);
+    transition: 0.5s;
+  }
+  
+  .nav-link:active,
+  .nav-link:focus,
+  .nav-link:hover {
+    background-color: #ffffff26;
+  }
+  
+  .my-container {
+    transition: 0.4s;
+  }
+  
+  .active-nav {
+    margin-left: 0;
+  }
+  
+  /*  section principal */
+  .active-cont {
+    margin-left: 250px;
+  }
+  
+  #menu-btn {
+    background-color: #100901;
+    color: #fff;
+    margin-left: -62px;
+    
+    border-radius: 50px;
+  }
+  
+  .my-container input {
+    border-radius: 2rem;
+    padding: 2px 20px;
+  }
+.navbar{
+    height: 0px;
+}
+
+
+
+
+  /*Cards*/
+
+
+  
+  .card {
+    display: flex;
+    flex-wrap: wrap;
+    height: 105px;
+    width: 150px;
+    margin-left: 50px;
+    background-color: #08291A;
+    box-shadow: -1rem 0 3rem #000;
+    left: 0px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    
+    }
+
+    #tarjeta {
+        margin-right: 15px;
+      }
+
+    .cards2{
+      background-color: bisque;
+      height: 105px;
+      width: 150px;
+      border-radius: 15px;
+      box-shadow: -1rem 0 51rem #000;
+
+    }
+
+    .titulo {
+    color: white;
+    font-weight: 300;
+    margin: 20px;
+    }
+  
+    .titulo2 {
+      color: rgb(5, 5, 5);
+      font-weight: 300;
+      margin: 20px;
+      }
+    

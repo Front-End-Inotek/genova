@@ -24,6 +24,7 @@ body{
   background-color: #769fcd;
   -webkit-tap-highlight-color: transparent;
   transition: background-color var(--duration);
+  
 
 }
 
@@ -184,13 +185,14 @@ body{
     background-color: bisque;
     z-index: 1;
     position: relative;
+    
   }
 
   .card:nth-child(2) {
     position: absolute;
     top: 30px;
     left: 10px;
-    z-index: 1; /* asegura que esta tarjeta esté por encima de la anterior */
+    z-index: 0; /* asegura que esta tarjeta esté por encima de la anterior */
   }
 
 
@@ -200,6 +202,12 @@ body{
   font-weight: 300;
   margin: 20px;
   }
+
+  .titulo2 {
+    color: rgb(5, 5, 5);
+    font-weight: 300;
+    margin: 20px;
+    }
 
 
 
