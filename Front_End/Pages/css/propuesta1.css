@@ -1,0 +1,458 @@
+
+
+body {
+    background-color: white;
+    background-image: radial-gradient(
+      rgba(var(--theme-color), 0.4) 9%, 
+      transparent 9%);
+    background-position: 0% 0%;
+    background-size: 50px 70px;
+    background-attachment: fixed;
+    margin: 0px;
+  }
+  
+  input,
+  label {  
+    color: white;
+    font-family: "Rubik", sans-serif;
+    font-size: 1em;
+  }
+  
+  
+/*----------------------------*/
+/*side navbar*/
+/*----------------------------*/
+
+
+  .side-navbar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    margin-left: -300px;
+    background: linear-gradient(to left, #9999, #191919);
+    transition: 0.5s;
+  }
+  
+  .nav-link:active,
+  .nav-link:focus,
+  .nav-link:hover {
+    background-color: #ffffff26;
+  }
+  
+  .my-container {
+    transition: 0.4s;
+  }
+  
+  .active-nav {
+    margin-left: 0;
+  }
+  
+  /*  section principal */
+  .active-cont {
+    margin-left: 250px;
+  }
+  
+  #menu-btn {
+    background-color: #100901;
+    color: #fff;
+    margin-left: -52px;
+    margin-top: 500px;
+    border-radius: 50px;
+  }
+  
+  .my-container input {
+    border-radius: 2rem;
+    padding: 2px 20px;
+  }
+.navbar{
+    height: 0px;
+}
+
+
+
+/*----------------------------*/
+/* cambio de color de detalles*/
+/*----------------------------*/
+
+
+
+:root {
+  --white: 244, 244, 244;
+  --red: 128, 0, 0;
+  --orange: 33, 24, 15;
+  --yellow: 139, 108, 61;
+  --green: 67, 160, 71;
+  --blue: 30, 136, 229;
+  --indigo: 57, 73, 171;
+  --violet: 191, 172, 226;
+  
+  --theme-color: var(--white);
+}
+
+.example-section {
+  background-color: rgba(50, 50, 50, 0.2);
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+
+#theme-picker-section {  
+  grid-area: 🎨;
+  justify-content: space-between;
+}
+
+#theme-picker-section > input {
+  height: 1.8rem;
+  width: 1.8rem;
+  margin: 0px;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+#theme-picker-section > input:before,
+#theme-picker-section > input:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  z-index: 2;
+}
+
+#theme-picker-section > input:after {
+  height: 104%;
+  width: 104%;
+}
+
+
+
+
+#theme-picker-section > input:checked:before {
+  display: block;
+}
+
+#theme-picker-section > input[value="white"]:after {
+  background-color: rgb(var(--white));
+}
+
+#theme-picker-section > input[value="red"]:after {
+  background-color: rgb(var(--red));
+}
+
+#theme-picker-section > input[value="orange"]:after {
+  background-color: rgb(var(--orange));
+}
+
+#theme-picker-section > input[value="yellow"]:after {
+  background-color: rgb(var(--yellow));
+}
+
+#theme-picker-section > input[value="green"]:after {
+  background-color: rgb(var(--green));
+}
+
+#theme-picker-section > input[value="blue"]:after {
+  background-color: rgb(var(--blue));
+}
+
+#theme-picker-section > input[value="indigo"]:after {
+  background-color: rgb(var(--indigo));
+}
+
+#theme-picker-section > input[value="violet"]:after {
+  background-color: rgb(var(--violet));
+}
+
+/*efectos para las cards*/
+
+  .efectos{
+    color:#f8fbf8;
+    display:inline-block;
+    font-size:21px;
+    text-align: center;
+    margin:10px 20px;
+    padding:14px 10px;
+    width: 150px;
+    height: 105px;
+    position:relative;
+    overflow:hidden;
+    text-decoration:none;
+    transition:.5s;
+    -webkit-box-reflect: below 2px linear-gradient(transparent,rgba(240, 240, 240, 0.05));
+    background: linear-gradient(to left, #186128, #02240a);
+    border-bottom: 10px solid rgba(57, 55, 55, 0.53);
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+
+    
+    border-radius: 10px;
+    
+  }
+  
+  .efectos:nth-child(1){
+    filter:hue-rotate(290deg);
+  }
+  
+  .efectos:nth-child(3){
+    filter:hue-rotate(110deg);
+  }
+  
+  .efectos:hover{
+    background: #6ed58a;
+    box-shadow:0 0 5px #3eea31, 0 0 25px #13f403, 0 0 30px #13f403, 0 0 50px #13f403;
+    color:black;
+    transform: translateY(-5px);
+    transition: 0.7s ease-out;
+  }
+  
+
+
+   .efectos span{
+    display:block;
+    position:absolute;
+    
+  }
+  
+  
+  .efectos span:nth-child(1){
+    animation:animate1 3s linear infinite;
+    background: linear-gradient(90deg,transparent,#f138f1cb);
+    height:100%;
+    left:-100px;
+    top:0px;
+    width:100%;
+    
+  }
+
+  
+  
+  @keyframes animate1{
+    0%{
+      left:-100%;
+    }
+    50%,100%{
+      left:100%;
+    }
+  }
+  
+  .efectos span:nth-child(2){
+    animation:animate2 1.5s linear infinite;
+    animation-delay:0.25s;
+    background:linear-gradient(180deg,transparent,#f138f1cb);
+    height:100%;
+    top:-100%;
+    width:2px;
+    right:0;
+    
+    
+    
+  }
+  
+  @keyframes animate2{
+    0%{
+      top:-100%;
+    }
+    50%,100%{
+      top:100%;
+    }
+  }
+  
+  .efectos span:nth-child(3){
+    animation:animate3 1.5s linear infinite;
+    animation-delay:0.5s;
+    background:linear-gradient(180deg,transparent,#f138f1cb);
+    height:2px;
+    right:-100%;
+    width:100%;
+    bottom:0;
+    
+    
+    
+  }
+  
+  @keyframes animate3{
+    0%{
+      right:-100%;
+    }
+    50%,100%{
+      right:100%;
+    }
+  }
+  
+  .efectos span:nth-child(4){
+    animation:animate4 1.5s linear infinite;
+    animation-delay:0.75s;
+    background:linear-gradient(270deg,transparent,#f138f1cb);
+    height:100%;
+    left:0;
+    width:2px;
+    bottom:100%;
+    
+    
+    
+  }
+  
+  @keyframes animate4{
+    0%{
+      bottom:-100%;
+    }
+    50%,100%{
+      bottom:100%;
+    }
+  }
+  
+
+  .efectos box-icon {
+    font-size: 30px;
+
+  }
+  
+
+/***************************/
+/***botones transparentes***/
+/***************************/
+
+
+.scanner span{
+    display:block;
+    position:absolute;
+    
+  } 
+   .scanner span:nth-child(1){
+    animation:animate1 3s linear infinite;
+    background: linear-gradient(180deg,transparent,#eab9268f);
+    height:100%;
+    left:-100px;
+    top:0px;
+    width:100%;
+    
+    
+  }
+
+
+
+.container .btn {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 150px;
+	height: 100px;
+	margin: 0px;
+}
+.container .btn a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.05);
+	box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+	border-bottom: 10px solid rgba(57, 55, 55, 0.53);
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 30px;
+	padding: 10px;
+	letter-spacing: 1px;
+	text-decoration: none;
+	overflow: hidden;
+	color: #100901;
+	font-weight: 400px;
+	z-index: 1;
+	transition: 0.5s;
+	backdrop-filter: blur(35px);
+}
+.container .btn:hover a {
+	letter-spacing: 3px;
+    transform: translateY(-10px);
+    transition: 0.7s ease-out;
+}
+.container .btn a::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(to left, rgba(255, 255, 255, 0.15), transparent);
+	transform: skewX(45deg) translate(0);
+	transition: 0.5s;
+	filter: blur(0px);
+}
+.container .btn:hover a::before {
+	transform: skewX(45deg) translate(200px);
+    
+}
+.container .btn::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+	bottom: -5px;
+	width: 50px;
+	height: 10px;
+	background: rgb(255, 25, 0);
+	border-radius: 10px;
+	transition: 0.5s;
+	transition-delay: 0.5;
+}
+.container .btn:hover::before /*lightup button*/ {
+	bottom: 0;
+	height: 50%;
+	width: 80%;
+	border-radius: 30px;
+}
+
+.container .btn::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+	top: -5px;
+	width: 50px;
+	height: 10px;
+	background: rgb(255, 251, 0);
+	border-radius: 10px;
+	transition: 0.5s;
+	transition-delay: 0.5;
+    
+}
+.container .btn:hover::after /*lightup button*/ {
+	top: 0;
+	height: 50%;
+	width: 80%;
+	border-radius: 30px;
+    
+}
+.container .btn:nth-child(1)::before, /*cambia el numero para cambiar el color*/
+.container .btn:nth-child(1)::after {
+	background: #ff231f;
+	box-shadow: 0 0 5px #ff231f, 0 0 15px #ff231f, 0 0 30px #ff231f,
+		0 0 60px #ff231f;
+}
+.container .btn:nth-child(2)::before, /* 2*/
+.container .btn:nth-child(2)::after {
+	background: #2db2ff;
+	box-shadow: 0 0 5px #2db2ff, 0 0 15px #2db2ff, 0 0 30px #2db2ff,
+		0 0 60px #2db2ff;
+}
+.container .btn:nth-child(3)::before, /* 3*/
+.container .btn:nth-child(3)::after {
+	background: #1eff45;
+	box-shadow: 0 0 5px #1eff45, 0 0 15px #1eff45, 0 0 30px #1eff45,
+		0 0 60px #1eff45;
+}
+.container .btn:nth-child(4)::before, /* 3*/
+.container .btn:nth-child(4)::after {
+	background: #1eff45;
+	box-shadow: 0 0 5px #1eff45, 0 0 15px #1eff45, 0 0 30px #1eff45,
+		0 0 60px #1eff45;
+}
+
+
+
