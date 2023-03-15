@@ -4,7 +4,7 @@
   include_once("clase_log.php");
   $hab= NEW Hab(0);
   $logs = NEW Log(0);
-  $hab->guardar_hab(urldecode($_POST['nombre']),$_POST['tipo'],urldecode($_POST['comentario']));
-  $logs->guardar_log($_POST['usuario_id'],"Agregar habitacion: ". urldecode($_POST['nombre']));
+  $hab->guardar_hab(urldecode($_GET['nombre']),$_GET['tipo'],urldecode($_GET['comentario']));
+  $logs->guardar_log($_GET['usuario_id'],"Agregar habitacion: ". urldecode($_GET['nombre']));
 ?>
 

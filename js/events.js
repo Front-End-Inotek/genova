@@ -155,44 +155,65 @@ function closeNav(){
 
 // Agregar un tipo de habitacion
 function agregar_tipos(){
-	$('#area_trabajo').hide();
-    $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_tipos.php"); 
-	closeNav();
+	$("#mostrar_herramientas").load("includes/agregar_tipos.php");
+    //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
 
-// Guardar un tipo de habitacion
-function guardar_tipo(){
-    var usuario_id=localStorage.getItem("id");
+function guardar_tipo() {
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var codigo= encodeURI(document.getElementById("codigo").value);
-	
 
-	if(nombre.length >0){
-			$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-				  "nombre": nombre,
-				  "codigo": codigo,
-                  "usuario_id": usuario_id,
-				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_tipo.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_tipos,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-				});
-				return false;
-			}else{
-				alert("Campos incompletos");
-			}
+    if(nombre === null || nombre === ''){
+        swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    if(codigo === null || codigo === ''){
+        swal("Campo codigo vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    guardar_habitacion()
+}
+
+
+// Guardar un tipo de habitacion
+function guardar_habitacion(){
+    //debugger
+   // $('#caja_herramientas').modal('hide');
+    let usuario_id=localStorage.getItem("id");
+	let nombre= encodeURI(document.getElementById("nombre").value);
+	let codigo= encodeURI(document.getElementById("codigo").value);
+
+    let datos = {
+        "nombre": nombre,
+        "codigo": codigo,
+        "usuario_id": usuario_id,
+    };
+
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/guardar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.responseText);
+            if (e.target.responseText == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tipos()
+                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+                return false;
+            }else if(e.target.responseText == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
 // Muestra las tipos de habitaciones de la bd
@@ -207,67 +228,111 @@ function ver_tipos(){
 
 // Editar un tipo de habitacion
 function editar_tipo(id){
-    $("#area_trabajo_menu").load("includes/editar_tipo.php?id="+id);
+    $("#mostrar_herramientas").load("includes/editar_tipo.php?id="+id);
+    //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
 
 // Editar un tipo de habitacion
 function modificar_tipo(id){
-	var usuario_id=localStorage.getItem("id");
-    var nombre= encodeURI(document.getElementById("nombre").value);
-	var codigo= encodeURI(document.getElementById("codigo").value);
+    //$('#caja_herramientas').modal('hide');
+	let usuario_id = localStorage.getItem("id");
+    let id_tipo = id;
+    let nombre = encodeURI(document.getElementById("nombre").value);
+	let codigo = encodeURI(document.getElementById("codigo").value);
 
+        let datos = {
+            "id_tipo": id_tipo,
+            "nombre": nombre,
+			"codigo": codigo,
+            "usuario_id": usuario_id,
+        };
 
-    if(id >0){
-		$("#boton_tipo").html('<div class="spinner-border text-primary"></div>');
-        var datos = {
-              "id": id,
-              "nombre": nombre,
-			  "codigo": codigo,
-              "usuario_id": usuario_id,
-            };
-        $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_tipo.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:ver_tipos,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
-            });
-        return false;
-    }else{
-        alert("Campos incompletos");
-    }    
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/aplicar_editar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&id_tipo="+id_tipo+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tipos()
+                swal("Actualizo tipo de habitacion!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
-// Borrar un tipo de habitacion
-function borrar_tipo(id){
-    var usuario_id=localStorage.getItem("id");
-    $('#caja_herramientas').modal('hide');
-    if (id >0) {
-        var datos = {
-                "id": id,
-                "usuario_id": usuario_id,
-            };
-        $.ajax({
-                async:true,
-                type: "POST",
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_tipo.php",
-                data:datos,
-                beforeSend:loaderbar,
-                success:ver_tipos,
-                //success:problemas_sistema,
-                timeout:5000,
-                error:problemas_sistema
-            });
-        return false;
-    }
+function borrar_tipo(id, nombre, codigo ){
+    let nombre_tipo = nombre;
+    let id_tipo = id;
+    let codigo_tipo = codigo;
+    let usuario_id=localStorage.getItem("id");
+
+    let datos = {
+        "id_tipo": id_tipo,
+        "usuario_id": usuario_id
+    };
+
+    let tabla = document.createElement("div");
+    tabla.innerHTML += `
+    <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
+        <tr>
+        <td>Id tipo</td>
+        <td>Nombre de habitacion</td>
+        <td>Codigo</td>
+        </tr>
+        <tr>
+        <td>${id_tipo}</td>
+        <td>${nombre_tipo}</td>
+        <td>${codigo_tipo}</td>
+        </tr>
+    </table> <br>`;
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    swal({
+        title: "Antes de continuar por favor verifique datos de la habitacion a eliminar",
+        text: "Antes de continuar por favor verifique datos de la habitacion a eliminar ",
+        content: tabla,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+    xhttp.open("GET","includes/borrar_tipo.php?id_tipo="+id_tipo+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tipos()
+                swal("Se elimino tipo de habitacion!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Accion no realizada!", "Error de transferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
+                } else {
+        swal("Se cancelo eliminar tipo de habitacion!", "Por favor verifique los datos antes de eliminarlos!", "success")
+        }
+    });
 }
 
 // Modal de borrar un tipo de habitacion
@@ -287,58 +352,58 @@ function regresar_editar_tipo(){
 
 // Agregar una tarifa hospedaje
 function agregar_tarifas(){
-	$('#area_trabajo').hide();
-    $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_tarifas.php"); 
-	closeNav();
+	$("#mostrar_herramientas").load("includes/agregar_tarifas.php"); 
 }
 
 // Guardar una tarifa hospedaje
 function guardar_tarifa(){
-    var usuario_id=localStorage.getItem("id");
-	var nombre= encodeURI(document.getElementById("nombre").value);
-	var precio_hospedaje= document.getElementById("precio_hospedaje").value;
-	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
-    var cantidad_maxima= document.getElementById("cantidad_maxima").value;
-	var precio_adulto= document.getElementById("precio_adulto").value;
-	var precio_junior= document.getElementById("precio_junior").value;
-	var precio_infantil= document.getElementById("precio_infantil").value;
-	var tipo= document.getElementById("tipo").value;
-    var leyenda= encodeURI(document.getElementById("leyenda").value);
-	
+    //debugger
+	let usuario_id=localStorage.getItem("id");
+    let nombre= encodeURI(document.getElementById("nombre").value);
+	let precio_hospedaje= document.getElementById("precio_hospedaje").value;
+	let cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
+    let cantidad_maxima= document.getElementById("cantidad_maxima").value;
+	let precio_adulto= document.getElementById("precio_adulto").value;
+	let precio_junior= document.getElementById("precio_junior").value;
+	let precio_infantil= document.getElementById("precio_infantil").value;
+    let tipo= document.getElementById("tipo").value;
+    let leyenda= encodeURI(document.getElementById("leyenda").value);
 
-	if(nombre.length >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && cantidad_maxima >0 && precio_adulto >0 && tipo >0){
-			$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-				  "nombre": nombre,
-				  "precio_hospedaje": precio_hospedaje,
-				  "cantidad_hospedaje": cantidad_hospedaje,
-                  "cantidad_maxima": cantidad_maxima,
-				  "precio_adulto": precio_adulto,
-				  "precio_junior": precio_junior,
-				  "precio_infantil": precio_infantil,
-				  "tipo": tipo,
-                  "leyenda": leyenda,
-                  "usuario_id": usuario_id,
-				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_tarifa.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_tarifas,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-				});
-				return false;
-			}else{
-				alert("Campos incompletos");
-			}
+    let datos = {
+        "usuario_id": usuario_id,
+        "nombre": nombre,
+        "precio_hospedaje": precio_hospedaje,
+        "cantidad_hospedaje": cantidad_hospedaje,
+        "cantidad_maxima": cantidad_maxima,
+        "precio_adulto": precio_adulto,
+        "precio_junior": precio_junior,
+        "precio_infantil": precio_infantil,
+        "tipo": tipo,
+        "leyenda": leyenda
+    };
+
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/guardar_tarifa.php?nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.responseText);
+            if (e.target.responseText === 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tarifas()
+                swal("Actualizo tarifas de hospedaje!", "Excelente trabajo!", "success");
+            }else if (e.target.responseText == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
 // Muestra las tarifas hospedaje de la bd
@@ -353,7 +418,7 @@ function ver_tarifas(){
 
 // Editar una tarifa hospedaje
 function editar_tarifa(id){
-    $("#area_trabajo_menu").load("includes/editar_tarifa.php?id="+id);
+    $("#mostrar_herramientas").load("includes/editar_tarifa.php?id="+id);
 }
 
 // Editar una tarifa hospedaje
@@ -369,65 +434,113 @@ function modificar_tarifa(id){
     var tipo= document.getElementById("tipo").value;
     var leyenda= encodeURI(document.getElementById("leyenda").value);
 
+    var datos = {
+        "id": id,
+        "usuario_id": usuario_id,
+        "nombre": nombre,
+        "precio_hospedaje": precio_hospedaje,
+        "cantidad_hospedaje": cantidad_hospedaje,
+        "cantidad_maxima": cantidad_maxima,
+        "precio_adulto": precio_adulto,
+        "precio_junior": precio_junior,
+        "precio_infantil": precio_infantil,
+        "tipo": tipo,
+        "leyenda": leyenda
+    };
 
-    if(id >0 && precio_hospedaje >0 && cantidad_hospedaje >0 && cantidad_maxima >0 && precio_adulto >0 && tipo >0){
-		$("#boton_tarifa").html('<div class="spinner-border text-primary"></div>');
-        var datos = {
-              "id": id,
-              "nombre": nombre,
-			  "precio_hospedaje": precio_hospedaje,
-			  "cantidad_hospedaje": cantidad_hospedaje,
-              "cantidad_maxima": cantidad_maxima,
-			  "precio_adulto": precio_adulto,
-			  "precio_junior": precio_junior,
-			  "precio_infantil": precio_infantil,
-			  "tipo": tipo,
-              "leyenda": leyenda,
-              "usuario_id": usuario_id,
-            };
-        $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_tarifa.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:ver_tarifas,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
-            });
-        return false;
-    }else{
-        alert("Campos incompletos");
-    }    
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/aplicar_editar_tarifa.php?id="+id+"&nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tarifas()
+                swal("Actualizo tarifas de hospedaje!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
 // Borrar una tarifa hospedaje
-function borrar_tarifa(id){
-    var usuario_id=localStorage.getItem("id");
-    $('#caja_herramientas').modal('hide');
-    if (id >0) {
-        var datos = {
-                "id": id,
-                "usuario_id": usuario_id,
-            };
-        $.ajax({
-                async:true,
-                type: "POST",
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_tarifa.php",
-                data:datos,
-                beforeSend:loaderbar,
-                success:ver_tarifas,
-                //success:problemas_sistema,
-                timeout:5000,
-                error:problemas_sistema
-            });
-        return false;
-    }
+function borrar_tarifa(id, nom, precio_hospedaje, cantidad_hospedaje, cantidad_maxima, precio_adulto, precio_junior, precio_infantil, habitacion, leyenda ){
+    let usuario_id=localStorage.getItem("id");
+    let nombre = nom;
+    let precio = precio_hospedaje;
+    let habitaciones = habitacion;
+    let leyendas = leyenda;
+
+    let datos = {
+        "id": id,
+        "usuario_id": usuario_id,
+    };
+
+    let tabla = document.createElement("div");
+    tabla.innerHTML += `
+    <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
+        <tr>
+        <td>Id</td>
+        <td>Nombre</td>
+        <td>Precio</td>
+        <td>Tipo Habitacion</td>
+        <td>Leyenda Habitacion</td>
+        </tr>
+        <tr>
+        <td>${id}</td>
+        <td>${nombre}</td>
+        <td>${precio}</td>
+        <td>${habitaciones}</td>
+        <td>${leyendas}</td>
+        </tr>
+    </table> <br>`;
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    swal({
+        title: "Antes de continuar por favor verifique datos de la tarifa a eliminar",
+        text: "Antes de continuar por favor verifique datos de la tarifa a eliminar ",
+        content: tabla,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+    xhttp.open("GET","includes/borrar_tarifa.php?id="+id+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tarifas()
+                swal("Se elimino tipo de habitacion!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Accion no realizada!", "Error de transferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
+                } else {
+                    $('#caja_herramientas').modal('hide');
+        swal("Se cancelo eliminar tipo de habitacion!", "Por favor verifique los datos antes de eliminarlos!", "success")
+        }
+    });
 }
 
 // Modal de borrar una tarifa hospedaje
@@ -447,11 +560,7 @@ function regresar_editar_tarifa(){
 
 // Agregar una habitacion
 function agregar_hab(){
-	$('#area_trabajo').hide();
-    $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_hab.php"); 
-	closeNav();
+	$("#mostrar_herramientas").load("includes/agregar_hab.php"); 
 }
 
 // Guardar una habitacion
@@ -460,33 +569,37 @@ function guardar_hab(){
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var tipo= document.getElementById("tipo").value;
 	var comentario= encodeURI(document.getElementById("comentario").value);
-	
 
-	if(nombre.length >0 && tipo >0){
-			$("#boton_hab").html('<div class="spinner-border text-primary"></div>');
-			var datos = {
-				  "nombre": nombre,
-				  "tipo": tipo,
-				  "comentario": comentario,
-                  "usuario_id": usuario_id,
-				};
-			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_hab.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_hab,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-				});
-				return false;
-			}else{
-				alert("Campos incompletos");
-			}
+    var datos = {
+        "nombre": nombre,
+        "tipo": tipo,
+        "comentario": comentario,
+        "usuario_id": usuario_id,
+    };
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/guardar_hab.php?nombre="+nombre+"&tipo="+tipo+"&comentario="+comentario+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.responseText);
+            if (e.target.responseText == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_hab()
+                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+                return false;
+            }else if(e.target.responseText == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
 // Muestra las habitaciones de la bd
@@ -501,7 +614,7 @@ function ver_hab(){
 
 // Editar una habitacion
 function editar_hab(id){
-    $("#area_trabajo_menu").load("includes/editar_hab.php?id="+id);
+    $("#mostrar_herramientas").load("includes/editar_hab.php?id="+id);
 }
 
 // Editar una habitacion
@@ -511,59 +624,101 @@ function modificar_hab(id){
 	var tipo= document.getElementById("tipo").value;
 	var comentario= encodeURI(document.getElementById("comentario").value);
 
+    var datos = {
+        "id": id,
+        "nombre": nombre,
+        "tipo": tipo,
+        "comentario": comentario,
+        "usuario_id": usuario_id,
+    };
 
-    if(id >0 && tipo >0){
-		$("#boton_hab").html('<div class="spinner-border text-primary"></div>');
-        var datos = {
-              "id": id,
-              "nombre": nombre,
-			  "tipo": tipo,
-			  "comentario": comentario,
-              "usuario_id": usuario_id,
-            };
-        $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_hab.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:ver_hab,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
-            });
-        return false;
-    }else{
-        alert("Campos incompletos");
-    }    
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/aplicar_editar_hab.php?id="+id+"&nombre="+nombre+"&tipo="+tipo+"&comentario="+comentario+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.responseText);
+            if (e.target.responseText == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_hab()
+                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+                return false;
+            }else if(e.target.responseText == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
 }
 
 // Borrar una habitacion
-function borrar_hab(id){
-    var usuario_id=localStorage.getItem("id");
-    $('#caja_herramientas').modal('hide');
-    if (id >0) {
-        var datos = {
-                "id": id,
-                "usuario_id": usuario_id,
-            };
-        $.ajax({
-                async:true,
-                type: "POST",
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                url:"includes/borrar_hab.php",
-                data:datos,
-                beforeSend:loaderbar,
-                success:ver_hab,
-                //success:problemas_sistema,
-                timeout:5000,
-                error:problemas_sistema
-            });
-        return false;
-    }
+function borrar_hab(ID, nom, habitacion, comentario){
+    let usuario_id=localStorage.getItem("id");
+    let datos = {
+        "ID": ID,
+        "usuario_id": usuario_id,
+    };
+
+    let tabla = document.createElement("div");
+    tabla.innerHTML += `
+    <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
+        <tr>
+        <td>Id</td>
+        <td>Nombre</td>
+        <td>Precio</td>
+        <td>Tipo Habitacion</td>
+        </tr>
+        <tr>
+        <td>${ID}</td>
+        <td>${nom}</td>
+        <td>${habitacion}</td>
+        <td>${comentario}</td>
+        </tr>
+    </table> <br>`;
+
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    swal({
+        title: "Antes de continuar por favor verifique datos de la tarifa a eliminar",
+        text: "Antes de continuar por favor verifique datos de la tarifa a eliminar ",
+        content: tabla,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+    xhttp.open("GET","includes/borrar_hab.php?ID="+ID+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response);
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_hab()
+                swal("Se elimino tipo de habitacion!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Accion no realizada!", "Error de transferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
+                } else {
+                    $('#caja_herramientas').modal('hide');
+        swal("Se cancelo eliminar tipo de habitacion!", "Por favor verifique los datos antes de eliminarlos!", "success")
+        }
+    });
 }
 
 // Modal de borrar una habitacion

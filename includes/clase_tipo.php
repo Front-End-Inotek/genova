@@ -35,7 +35,13 @@
         $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `codigo`, `estado`)
         VALUES ('$nombre', '$codigo', '1');";
         $comentario="Guardamos el tipo habitacion en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);                 
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ('NO');
+        }else{
+          echo ("error en la consulta");
+        }
+
       }
       // Obtengo el total de los tipos de habitaciones
       function total_elementos(){
@@ -61,7 +67,11 @@
         $comentario="Mostrar los tipos habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_tipo">
+        echo '
+        <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_tipos('.$id.')"> Agregar </button>
+        <br>
+        <br>
+        <div class="table-responsive" id="tabla_tipo">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
@@ -80,12 +90,14 @@
             {
                 echo '<tr class="text-center">
                 <td>'.$fila['nombre'].'</td>
-                <td>'.$fila['codigo'].'</td>';
+                <td>'.$fila['codigo'].'</td>
+
+                ';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_tipo('.$fila['id'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_tipo('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_tipo('.$fila['id'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" onclick="borrar_tipo(' . $fila['id'] . ', \'' . addslashes($fila['nombre']) . '\', \'' . addslashes($fila['codigo']) . '\')">Borrar</button></td>';
                 }
                 echo '</tr>';
             }
@@ -103,6 +115,11 @@
         //echo $sentencia ;
         $comentario="Editar un tipo habitacion dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ("NO");
+        }else{
+          echo ("error en la consulta");
+        }
       }
       // Borrar un tipo habitacion
       function borrar_tipo($id){
@@ -111,6 +128,11 @@
         WHERE `id` = '$id';";
         $comentario="Poner estado de un tipo habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ("NO");
+        }else{
+          echo ("error en la consulta");
+        }
       }
       // Obtengo el nombre de un tipo habitacion
       function obtener_nombre($id){ 
