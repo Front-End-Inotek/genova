@@ -1,7 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
-
-/*  $nombre = $_POST['nombre'];
+/*
+  $nombre = $_POST['nombre'];
   $apellido = $_POST['apellido'];
   $direccion = $_POST['direccion'];
   $ciudad = $_POST['ciudad'];
@@ -49,11 +49,11 @@
   include_once("clase_huesped.php");
   $huesped= NEW Huesped(0);
   $huesped->guardar_huesped(urldecode($_POST['nombre']),urldecode($_POST['apellido']),urldecode($_POST['direccion']),urldecode($_POST['ciudad']),urldecode($_POST['estado']),urldecode($_POST['codigo_postal']),urldecode($_POST['telefono']),urldecode($_POST['correo']),urldecode($_POST['contrato']),urldecode($_POST['cupon']),urldecode($_POST['preferencias']),urldecode($_POST['comentarios']),urldecode($_POST['titular_tarjeta']),urldecode($_POST['tipo_tarjeta']),urldecode($_POST['numero_tarjeta']),urldecode($_POST['vencimiento_mes']),urldecode($_POST['vencimiento_ano']),urldecode($_POST['cvv']),$_POST['usuario_id']);
-  */
-
+*/
 
   include_once("clase_huesped.php");
   $huesped= NEW Huesped(0);
   $huesped->guardar_huesped(urldecode($_GET['nombre']),urldecode($_GET['apellido']),urldecode($_GET['direccion']),urldecode($_GET['ciudad']),urldecode($_GET['estado']),urldecode($_GET['codigo_postal']),urldecode($_GET['telefono']),urldecode($_GET['correo']),urldecode($_GET['contrato']),urldecode($_GET['cupon']),urldecode($_GET['preferencias']),urldecode($_GET['comentarios']),urldecode($_GET['titular_tarjeta']),urldecode($_GET['tipo_tarjeta']),urldecode($_GET['numero_tarjeta']),urldecode($_GET['vencimiento_mes']),urldecode($_GET['vencimiento_ano']),urldecode($_GET['cvv']),$_GET['usuario_id']);
-?>
+  
+  ?>
 

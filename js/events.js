@@ -1573,30 +1573,15 @@ function agregar_huespedes_reservacion(){
     $("#mostrar_herramientas").load("includes/agregar_huespedes_reservacion.php");
 }
 
-// Guardar un huesped
-  /*function guardar_huesped(){
-    //Declaramos una variable que contendra nuestro formulario
-    var form = document.getElementById('formulario_agregarhuesped');
-    //Declaramos una constante que contendra XMLHttpRequest(); intercambia datos detras de escena
-    const xhr = new XMLHttpRequest();
-    console.log(form);
-    //open recive informacion son 3 parametro
-    xhr.open('POST', 'includes/guardar_huesped.php', true);
-    //FormData interpretara los datos del formulario
-    var formData = new FormData(form);
-    //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor
-    xhr.addEventListener('load', e =>{
-        //Si el servidor responde 4  y esta todo ok 200
-        if (e.target.readyState == 4 && e.target.status == 200) {
-            //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.response);
-            ver_huespedes();
+    function validar_guardar_huesped(reservacion){
+        if(reservacion == 0){
+            guardar_huesped()
+        }else{
+            swal("El huesped que intenta agregar ya tiene una reservacion!", "Excelente trabajo!", "warning");
         }
-    })
-    //Enviamos nuestro la respuesta de nuestro formulario
-    xhr.send(formData);
-}*/
-function guardar_huesped(){
+    }
+
+    function guardar_huesped(){
     var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var apellido= encodeURI(document.getElementById("apellido").value);
@@ -1619,25 +1604,25 @@ function guardar_huesped(){
 
     var datos = {
         "nombre": nombre,
-       "apellido": apellido,
-       "direccion": direccion,
-       "ciudad": ciudad,
-       "estado": estado,
-       "codigo_postal": codigo_postal,
-       "telefono": telefono,
-       "correo": correo,
-       "contrato": contrato,
-       "cupon": cupon,
-       "preferencias": preferencias,
-       "comentarios": comentarios,
-       "titular_tarjeta": titular_tarjeta,
-       "tipo_tarjeta": tipo_tarjeta,
-       "numero_tarjeta": numero_tarjeta,
-       "vencimiento_mes": vencimiento_mes,
-       "vencimiento_ano": vencimiento_ano,
-       "cvv": cvv,
-       "usuario_id": usuario_id,
-     };
+        "apellido": apellido,
+        "direccion": direccion,
+        "ciudad": ciudad,
+        "estado": estado,
+        "codigo_postal": codigo_postal,
+        "telefono": telefono,
+        "correo": correo,
+        "contrato": contrato,
+        "cupon": cupon,
+        "preferencias": preferencias,
+        "comentarios": comentarios,
+        "titular_tarjeta": titular_tarjeta,
+        "tipo_tarjeta": tipo_tarjeta,
+        "numero_tarjeta": numero_tarjeta,
+        "vencimiento_mes": vencimiento_mes,
+        "vencimiento_ano": vencimiento_ano,
+        "cvv": cvv,
+        "usuario_id": usuario_id,
+    };
 
     let xhttp;
     xhttp = new XMLHttpRequest();
@@ -1651,7 +1636,7 @@ function guardar_huesped(){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             console.log(e.target.responseText);
-            if (e.target.responseText == 'NO') {
+            if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_huespedes()
                 swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");

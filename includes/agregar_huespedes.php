@@ -2,9 +2,17 @@
   date_default_timezone_set('America/Mexico_City');
   $reservacion= 0;
   echo '
-    <form id = "formulario_agregarhuesped">
-      <div class="container blanco"> 
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR HUÉSPED</h2></div>
+  <!-- Modal -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregra tipo de habitacion </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
         <div class="row">
           <div class="col-sm-2">Nombre:</div>
           <div class="col-sm-4">
@@ -19,6 +27,7 @@
           </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-sm-2">Dirección:</div>
           <div class="col-sm-4">
@@ -158,7 +167,232 @@
             <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_huesped('.$reservacion.')">
           </div>
           </div>
+
+          <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <div id="boton_tipo">
+          <input type="button" class="btn btn-success btn-block" value="Guardar" onclick="guardar_huesped('.$reservacion.')">
         </div>
-      </div>
-      </form>';
+        </div>';
+?>
+<?php
+  date_default_timezone_set('America/Mexico_City');
+  $reservacion= 0;
+  echo '
+  <!-- Modal -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Agregra huesped </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Nombre </span>
+            </div>
+              <input type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Apellido </span>
+            </div>
+              <input type="text" id="apellido" name="apellido" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Dirección </span>
+            </div>
+              <input type="text" id="direccion" name="direccion" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Ciudad </span>
+            </div>
+              <input type="text" id="ciudad" name="ciudad" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Estado </span>
+            </div>
+              <input type="text" id="estado" name="estado" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Código postal </span>
+            </div>
+              <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Teléfono </span>
+            </div>
+              <input type="text" id="telefono" name="telefono" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Correo </span>
+            </div>
+              <input type="text" id="correo" name="correo" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Contrato Socio </span>
+            </div>
+              <input type="text" id="contrato" name="contrato" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Cupón </span>
+            </div>
+              <input type="text" id="cupon" name="cupon" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Preferencias huésped </span>
+            </div>
+              <input type="text" id="preferencias" name="preferencias" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Comentarios </span>
+            </div>
+              <input type="text" id="comentarios" name="comentarios" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+        </div>
+
+        <h4 class="text-dark  margen-1">Datos tarjeta:</h4>
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Titular de la tarjeta </span>
+            </div>
+              <input type="text" id="titular_tarjeta" name="titular_tarjeta" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Tipo de la tarjeta </span>
+            </div>
+              <input type="text" id="tipo_tarjeta" name="tipo_tarjeta" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Número de la tarjeta </span>
+            </div>
+              <input type="text" id="numero_tarjeta" name="numero_tarjeta" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px; text-align: justify;"> Fecha de vencimiento </span>
+            </div>
+            <select id="vencimiento_mes" name="vencimiento_mes" class="form-control">
+            <option value="0">Selecciona mes</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            </select>
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> mes/año </span>
+            </div>
+              <input type="text" id="vencimiento_ano" name="vencimiento_ano" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+
+        <div class="col-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px; text-align: justify;"> CCV </span>
+            </div>
+              <input type="text" id="cvv" name="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="3" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+        </div>
+        </div>
+        </div>
+
+
+        </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <div id="boton_tipo">
+          <input type="button" class="btn btn-success btn-block" value="Guardar" onclick="guardar_huesped('.$reservacion.')">
+        </div>
+        </div>
+      </div>';
 ?>
