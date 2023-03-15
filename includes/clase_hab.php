@@ -71,8 +71,8 @@
         <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_hab('.$id.')"> Agregar </button>
         <br>
         <br>
-        <div class="table-responsive" id="tabla_tipo">
-        <table class="table table-bordered table-hover">
+        <div class="table-responsive" id="tabla_tipo" style="max-height:560px; overflow-y: scroll;">
+        <table class="table table-bordered table-hover" >
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Número</th>

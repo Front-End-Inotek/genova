@@ -58,10 +58,11 @@
         $comentario="Guardamos la tarifa hospedaje en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if($consulta){
-          echo 'NO';
+          echo ("NO");
         }else{
-          echo ('Consulta_no_realizada');
+          echo ("error en la consulta");
         }
+
       }
       // Mostramos las tarifas hospedaje
       function mostrar($id){
@@ -77,12 +78,12 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '
-        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_tarifas()"> Agregar</button>
+        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_tarifas('.$id.')"> Agregar</button>
         <br>
         <br>
 
-        <div class="table-responsive" id="tabla_tipo">
-        <table class="table table-bordered table-hover">
+        <div class="table-responsive" id="tabla_tipo" style="max-height:560px; overflow-y: scroll;">
+        <table class="table table-bordered table-hover" >
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
