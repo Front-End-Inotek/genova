@@ -10,13 +10,14 @@ body {
   width: 250px;
   height: 100%;
   position: absolute;
-  margin-left: -15.6em;
+  margin-left: -13%;
   background-color: #30349f;
   transition: 0.5s;
+  font-size: large;
 }
 
 /***********************************/
-/*color de los links dentro del nav*/
+/*color hover de los links dentro del nav*/
 /***********************************/
 
 .nav-link:active,
@@ -72,4 +73,5 @@ body {
   height: 0;
   visibility: hidden;
 }
+
 

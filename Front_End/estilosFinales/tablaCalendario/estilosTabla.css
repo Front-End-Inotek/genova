@@ -5,9 +5,9 @@
 .calendar {
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(7, minmax(120px, 1fr));
+    grid-template-columns: repeat(10, minmax(120px, 1fr));
     grid-template-rows: 50px;
-    grid-auto-rows: 120px;
+    grid-auto-rows: 50px;
     overflow: auto;
   }
   .calendar-container {
@@ -21,6 +21,7 @@
     background: #fff;
     width: 1700px;
   }
+
   .calendar-header {
     text-align: center;
     padding: 20px 0;
@@ -45,6 +46,7 @@
     cursor: pointer;
     outline: 0;
   }
+
   .day {
     border-bottom: 1px solid rgba(166, 168, 179, 0.12);
     border-right: 1px solid rgba(166, 168, 179, 0.12);
@@ -57,46 +59,6 @@
     position: relative;
     pointer-events: none;
     z-index: 1;
-  }
-  
-  .day:nth-of-type(7n + 7) {
-    border-right: 0;
-  }
-  .day:nth-of-type(n + 1):nth-of-type(-n + 7) {
-    grid-row: 2;
-  }
-  .day:nth-of-type(n + 8):nth-of-type(-n + 14) {
-    grid-row: 3;
-  }
-  .day:nth-of-type(n + 15):nth-of-type(-n + 21) {
-    grid-row: 4;
-  }
-  .day:nth-of-type(n + 22):nth-of-type(-n + 28) {
-    grid-row: 5;
-  }
-  .day:nth-of-type(n + 29):nth-of-type(-n + 35) {
-    grid-row: 6;
-  }
-  .day:nth-of-type(7n + 1) {
-    grid-column: 1/1;
-  }
-  .day:nth-of-type(7n + 2) {
-    grid-column: 2/2;
-  }
-  .day:nth-of-type(7n + 3) {
-    grid-column: 3/3;
-  }
-  .day:nth-of-type(7n + 4) {
-    grid-column: 4/4;
-  }
-  .day:nth-of-type(7n + 5) {
-    grid-column: 5/5;
-  }
-  .day:nth-of-type(7n + 6) {
-    grid-column: 6/6;
-  }
-  .day:nth-of-type(7n + 7) {
-    grid-column: 7/7;
   }
   .day-name {
     font-size: 12px;
@@ -133,7 +95,7 @@
   }
   .task--danger {
     border-left-color: #fa607e;
-    grid-column: 2 / span 3;
+    grid-column: 2 / span 2;
     grid-row: 3;
     margin-top: 15px;
     background: rgba(253, 197, 208, 0.7);
@@ -142,8 +104,10 @@
   }
   .task--info {
     border-left-color: #4786ff;
+    /*aqui puedes seleccioanr donde estara por filas y columnas*/
     grid-column: 6 / span 2;
     grid-row: 5;
+    /**/
     margin-top: 15px;
     background: rgba(218, 231, 255, 0.7);
     align-self: end;
@@ -153,7 +117,7 @@
     background: #4786ff;
     border: 0;
     border-radius: 4px;
-    grid-column: 3 / span 3;
+    grid-column: 2 / span 3;
     grid-row: 4;
     align-self: end;
     color: #fff;
@@ -205,5 +169,8 @@
     color: rgba(81, 86, 93, 0.7);
   }
   
-  
-  
+  .room-number
+ {
+    display: table-row;
+    grid-template-columns: repeat
+  }
