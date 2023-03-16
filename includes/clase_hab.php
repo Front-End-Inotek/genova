@@ -47,7 +47,12 @@
         $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`, `cargo_noche`, `estado_hab`)
         VALUES ('$nombre', '$tipo', '0', '$comentario', '0', '0', '1');";
         $comentario="Guardamos la habitacion en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);                 
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ('NO');
+        }else{
+          echo ('consulta_no_realizada');
+        }
       }
       // Mostramos las habitaciones
       function mostrar($id){
@@ -57,13 +62,17 @@
         $borrar = $usuario->tarifa_borrar;
 
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
-        FROM hab 
+        FROM hab
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab = 1 ORDER BY hab.id";// nombre
         $comentario="Mostrar las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_tipo">
-        <table class="table table-bordered table-hover">
+        echo '
+        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_hab('.$id.')"> Agregar </button>
+        <br>
+        <br>
+        <div class="table-responsive" id="tabla_tipo" style="max-height:560px; overflow-y: scroll;">
+        <table class="table table-bordered table-hover" >
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Número</th>
@@ -85,10 +94,10 @@
                 <td>'.$fila['habitacion'].'</td>
                 <td>'.$fila['comentario'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_hab('.$fila['ID'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_hab('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_hab('.$fila['ID'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" onclick="borrar_hab('.$fila['ID'].', \'' . addslashes($fila['nom']) . '\', \'' . addslashes($fila['habitacion']) . '\', \'' . addslashes($fila['comentario']) . '\')"> Borrar</button></td>';
                 }
                 echo '</tr>';
             }
@@ -107,6 +116,11 @@
         //echo $sentencia ;
         $comentario="Editar una habitacion dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ('NO');
+        }else{
+          echo ('consulta_no_realizada');
+        }
       }
       // Borrar una habitacion
       function borrar_hab($id){
@@ -115,6 +129,11 @@
         WHERE `id` = '$id';";
         $comentario="Poner estado de una habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ('NO');
+        }else{
+          echo ('consulta_no_realizada');
+        }
       }
       // Obtengo los nombres de las habitaciones
       function mostrar_hab(){

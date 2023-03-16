@@ -91,3 +91,29 @@ document.addEventListener('DOMContentLoaded', function() {
   scrolly();
 });
 
+
+  // Selecciona cada botón por su ID y agrega un evento de clic a cada uno
+  var habitacion1 = document.getElementById("habitacion1");
+  habitacion1.addEventListener("click", function() {
+    swal("Habitación 1", "Esta habitación está ocupada", "warning");
+  });
+
+  var habitacion2 = document.getElementById("habitacion2");
+  habitacion2.addEventListener("click", function() {
+    swal("Habitación 2", "Esta habitación está en limpieza", "info");
+  });
+
+  var habitacion3 = document.getElementById("habitacion3");
+  habitacion3.addEventListener("click", function() {
+    swal("Habitación 3", "Esta habitación está disponible", "success");
+  });
+
+  var habitacion4 = document.getElementById("habitacion4");
+  habitacion4.addEventListener("click", function() {
+    swal("Habitación 4", "Esta habitación está disponible por $1520", "success");
+  });
+  var habitacion5 = document.getElementById("habitacion5");
+  habitacion5.addEventListener("click", function() {
+    swal("Habitación 5", "Esta habitación está disponible pero en mantenimiento por 1 hora", "warning");
+  });
+

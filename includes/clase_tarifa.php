@@ -56,7 +56,13 @@
         $sentencia = "INSERT INTO `tarifa_hospedaje` (`nombre`, `precio_hospedaje`, `cantidad_hospedaje`, `cantidad_maxima`, `precio_adulto`, `precio_junior`, `precio_infantil`, `leyenda`, `tipo`, `estado`)
         VALUES ('$nombre', '$precio_hospedaje', '$cantidad_hospedaje', '$cantidad_maxima', '$precio_adulto', '$precio_junior', '$precio_infantil', '$leyenda', '$tipo', '1');";
         $comentario="Guardamos la tarifa hospedaje en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);                 
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ("NO");
+        }else{
+          echo ("error en la consulta");
+        }
+
       }
       // Mostramos las tarifas hospedaje
       function mostrar($id){
@@ -66,13 +72,18 @@
         $borrar = $usuario->tarifa_borrar;
 
         $sentencia = "SELECT *,tarifa_hospedaje.id AS ID,tarifa_hospedaje.nombre AS nom,tipo_hab.nombre AS habitacion
-        FROM tarifa_hospedaje 
+        FROM tarifa_hospedaje
         INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id WHERE tarifa_hospedaje.estado = 1 ORDER BY tarifa_hospedaje.nombre";
         $comentario="Mostrar las tarifas hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_tipo">
-        <table class="table table-bordered table-hover">
+        echo '
+        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_tarifas('.$id.')"> Agregar</button>
+        <br>
+        <br>
+
+        <div class="table-responsive" id="tabla_tipo" style="max-height:560px; overflow-y: scroll;">
+        <table class="table table-bordered table-hover" >
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
@@ -106,10 +117,10 @@
                 <td>'.$fila['habitacion'].'</td>
                 <td>'.$fila['leyenda'].'</td>';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_tarifa('.$fila['ID'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_tarifa('.$fila['ID'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_tarifa('.$fila['ID'].')"> Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" onclick="borrar_tarifa('.$fila['ID'].',\'' . addslashes($fila['nom']) . '\',\'' . addslashes($fila['precio_hospedaje']) . '\',\'' . addslashes($fila['cantidad_hospedaje']) . '\',\'' . addslashes($fila['cantidad_maxima']) . '\',\'' . addslashes($fila['precio_adulto']) . '\',\'' . addslashes($fila['precio_junior']) . '\',\'' . addslashes($fila['precio_infantil']) . '\',\'' . addslashes($fila['habitacion']) . '\',\'' . addslashes($fila['leyenda']) . '\')"> Borrar</button></td>';
                 }
                 echo '</tr>';
             }
@@ -134,6 +145,11 @@
         //echo $sentencia ;
         $comentario="Editar una tarifa hospedaje dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ('NO');
+        }else{
+          echo ('Consulta_no_realizada');
+        }
       }
       // Borrar una tarifa hospedaje
       function borrar_tarifa($id){
@@ -142,6 +158,11 @@
         WHERE `id` = '$id';";
         $comentario="Poner estado de una tarifa hospedaje como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo ('NO');
+        }else{
+          echo ('Consulta_no_realizada');
+        }
       }
       // Obtengo los nombres de los tipos de habitaciones de tarifas hospedaje
       function mostrar_tipo(){

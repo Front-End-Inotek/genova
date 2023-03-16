@@ -2,36 +2,37 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_tipo.php");
   $tipo= NEW Tipo($_GET['id']);
-  echo '
-      <div class="container blanco"> 
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR TIPO DE HABITACION</h2></div>
-        <div class="row">
-          <div class="col-sm-2">Nombre:</div>
-          <div class="col-sm-7">
-          <div class="form-group">
-            <input class="form-control" type="text"  id="nombre" value="'.$tipo->nombre.'" maxlength="90">
-          </div>
-          </div>
-          <div class="col-sm-3"></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Código:</div>
-          <div class="col-sm-7">
-          <div class="form-group">
-            <input class="form-control" type="text"  id="codigo" value="'.$tipo->codigo.'" maxlength="20">
-          </div>
-          </div>
-          <div class="col-sm-1"></div>
-          <div class="col-sm-2">
-          <div id="boton_tipo">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_tipo('.$_GET['id'].')">
-          </div>
-          </div>
-          <div class="col-sm-11"></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-11"></div>
-          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_tipo()"> ←</button></div>
-        </div>
-      </div>';
+      echo '
+      <!-- Modal -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2">Editar tipo de habitacion </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+    
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;"> Nombre </span>
+                </div>
+                  <input type="text" id="nombre" name ="nombre" value="'.$tipo->nombre.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+            </div>
+    
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;"> Codigo </span>
+                </div>
+                  <input type="text" id="codigo" name ="codigo" value="'.$tipo->codigo.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+            </div>
+    
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+              <div id="boton_tipo">
+              <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_tipo('.$_GET['id'].')">
+            </div>
+            </div>
+          </div>';
 ?>

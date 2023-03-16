@@ -17,8 +17,8 @@ body {
     font-family: "Rubik", sans-serif;
     font-size: 1em;
   }
-  
-  
+
+
 /*----------------------------*/
 /*side navbar*/
 /*----------------------------*/
@@ -31,6 +31,7 @@ body {
     margin-left: -300px;
     background: linear-gradient(to left, #9999, #191919);
     transition: 0.5s;
+
   }
   
   .nav-link:active,
@@ -58,6 +59,7 @@ body {
     margin-left: -52px;
     margin-top: 500px;
     border-radius: 50px;
+    font-size: 30px;
   }
   
   .my-container input {
@@ -204,13 +206,15 @@ body {
     filter:hue-rotate(110deg);
   }
   
-  .efectos:hover{
+  .efectos:hover,
+  .efectos:focus{
     background: #6ed58a;
     box-shadow:0 0 5px #3eea31, 0 0 25px #13f403, 0 0 30px #13f403, 0 0 50px #13f403;
     color:black;
     transform: translateY(-5px);
     transition: 0.7s ease-out;
-  }
+    
+}
   
 
 
@@ -248,11 +252,9 @@ body {
     background:linear-gradient(180deg,transparent,#f138f1cb);
     height:100%;
     top:-100%;
-    width:2px;
     right:0;
-    
-    
-    
+
+
   }
   
   @keyframes animate2{
@@ -265,12 +267,13 @@ body {
   }
   
   .efectos span:nth-child(3){
-    animation:animate3 1.5s linear infinite;
+    animation:animate3 4s linear infinite;
     animation-delay:0.5s;
     background:linear-gradient(180deg,transparent,#f138f1cb);
     height:2px;
     right:-100%;
     width:100%;
+    width: 20px;
     bottom:0;
     
     
@@ -324,7 +327,8 @@ body {
     display:block;
     position:absolute;
     
-  } 
+  }
+
    .scanner span:nth-child(1){
     animation:animate1 3s linear infinite;
     background: linear-gradient(180deg,transparent,#eab9268f);
@@ -332,8 +336,6 @@ body {
     left:-100px;
     top:0px;
     width:100%;
-    
-    
   }
 
 
