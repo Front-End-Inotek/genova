@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel</title>
+    <link rel="stylesheet" href="/Front_End/Formulario/css/formulario.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <br>
+    <form action="" method="get">
+		<h2>Encuesta del Hotel</h2>
+		<div class="mb-3">
+		  <label for="text-dark" class="form-label">Nombre Completo</label>
+		  <input type="text" class="form-control">
+		</div>
+		<div class="mb-3">
+		  <label for="text-dark" class="form-label">Correo Electrónico</label>
+		  <input type="email" class="form-control">
+		</div>
+		<div class="mb-3">
+		  <label for="fechaEnt" class="form-label">Fecha de Entrada</label>
+		  <input type="date" class="form-control" id="fechaEnt">
+		</div>
+		<div class="mb-3">
+		  <label for="fechaSal" class="form-label">Fecha de Salida</label>
+		  <input type="date" class="form-control" id="fechaSal">
+		</div>
+		<div class="mb-3 form-check">
+		  <input type="checkbox" class="form-check-input" id="recomendar">
+		  <label class="form-check-label" for="recomendar">¿Recomendaría a algún conocido nuestro hotel?</label>
+		</div>
+		<div class="mb-3">
+		  <label for="Num" class="form-label">Número de Huéspedes</label>
+		  <input type="number" class="form-control" id="Num" min="0" max="4">
+		</div>
+		<div class="mb-3 form-check">
+		  <input type="checkbox" class="form-check-input" id="nin">
+		  <label class="form-check-label" for="nin">Viajamos con niños</label>
+		</div>
+		<h3>Actividades que más disfrutaste</h3>
+		<div class="mb-3 form-check">
+		  <input type="checkbox" class="form-check-input" id="act1">
+		  <label class="form-check-label" for="act1">Ejemplo 1</label>
+		</div>
+		<div class="mb-3 form-check">
+		  <input type="checkbox" class="form-check-input" id="act2">
+		  <label class="form-check-label" for="act2">Ejemplo 2</label>
+		</div>
+		<div class="mb-3 form-check">
+		  <input type="checkbox" class="form-check-input" id="act3">
+		  <label class="form-check-label" for="act3">Ejemplo 3</label>
+		</div>
+		<div class="mb-3">
+		  <label for="pres" class="form-label">¿Cómo calificaría la limpieza de su Habitación?</label>
+		  <select class="form-select" id="pres">
+			<option value=""></option>
+			<option value="excelente">Excelente</option>
+			<option value="regular">Regular</option>
+			<option value="malo">Malo</option>
+		  </select>
+		</div>
+		<br>
+		<button type="submit" class="btn btn-primary">Enviar</button>
+	  </form>
+</body>
+
+</html>

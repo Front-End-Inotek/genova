@@ -3,6 +3,17 @@
   include_once("clase_hab.php");
   $hab= NEW Hab(0);
   echo '
+<<<<<<< HEAD
+      <div class="container blanco"> 
+        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1 ">AGREGAR HABITACION</h2></div>
+        <div class="row">
+          <div class="col-sm-3">Número:</div>
+          <div class="col-sm-9">
+          <div class="form-group">
+            <input class="form-control" type="text"  id="nombre" placeholder="Ingresa el numero de la habitación" maxlength="90">
+          </div>
+          </div>
+=======
    <!-- Modal -->
       <div class="modal-content">
         <div class="modal-header">
@@ -10,6 +21,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+>>>>>>> a233a8b204c7f3ee7bf5bf9a9aeb06fd47bcf04a
         </div>
         <div class="modal-body">
 

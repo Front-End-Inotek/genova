@@ -1,0 +1,75 @@
+
+body {
+  min-height: 100vh;
+  background-color: #ecf2ff;
+}
+/******************************/
+/*tamaño y ocultar la side nav*/
+/******************************/
+.side-navbar {
+  width: 250px;
+  height: 100%;
+  position: absolute;
+  margin-left: -15.6em;
+  background-color: #30349f;
+  transition: 0.5s;
+}
+
+/***********************************/
+/*color de los links dentro del nav*/
+/***********************************/
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  background-color: #ffffff26;
+}
+/*********************************/
+/*tiempo y posiconamiento visible*/
+/*********************************/
+.my-container {
+  transition: 0.5s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+.active-cont {
+  margin-left: 250px;
+}
+/*******************************/
+/*configuacion de botones color*/
+/* tamaño y posicionamiento ****/
+/*******************************/
+.menu-btn {
+  background-color: #3f51b5;
+  color: #ecf2ff;
+  position: absolute;
+  top: 1%;
+  left: 101%;
+  font-size: 30px;
+}
+#menu-btn-fecha{
+  left: 125%;
+}
+
+#menu-btn-filtrar{
+  left: 150%;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #736bc6;
+}
+
+.my-container input {
+  border-radius: 2rem;
+  padding: 2px 20px;
+}
+
+.top-navbar {
+  height: 0;
+  visibility: hidden;
+}
+
