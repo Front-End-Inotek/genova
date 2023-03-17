@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nav desplegable</title>
+    
+    <!-- bootstrap 5  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+    <!-- BOX ICONS CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet"/>
+    <!--link css-->
+    <link rel="stylesheet" href="css/navDesplegable.css">
+    
+</head>
+
+    <!----------------------->
+        <!-- Side-Nav -->
+    <!----------------------->
+<div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+    <ul class="nav flex-column text-white w-100">
+      <a href="#" class="nav-link h3 text-white my-2">
+        Marca Logo</br>Titulo<br><br>
+      </a>
+      <li href="#" class="nav-link">
+        <i class='bx bx-bed'></i>
+        <span class="mx-2">Habitaciones</span>
+      </li>
+      <li href="#" class="nav-link">
+        <i class='bx bx-calendar' ></i>
+        <span class="mx-2">Reservaciones</span>
+      </li>
+      <li href="#" class="nav-link">
+        <i class='bx bxs-report' ></i>
+        <span class="mx-2">Reportes</span>
+      </li>
+      <li href="#" class="nav-link">
+        <i class='bx bxs-wrench'></i>
+        <span class="mx-2">Herramientas</span>
+      </li>
+      <li href="#" class="nav-link">
+        <i class="bx bx-user-check"></i>
+        <span class="mx-2">Restaurante</span>
+      </li>
+
+      <li href="#" class="nav-link">
+        <i class='bx bx-coin'></i>
+        <span class="mx-2">Otros</span>
+      </li>
+      <li href="#" class="nav-link">
+        <i class='bx bxs-user' ></i>
+        <span class="mx-2">Desarrollo</span>
+      </li>
+      <li href="#" class="nav-link">
+        <i class='bx bx-exit'></i>
+        <span class="mx-2">Salir</span>
+      </li>
+    </ul>
+        <!--ajustado con bootstrap---->
+    <a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="menu-btn-desplegar">
+        <!--icono extraido con la clase desde box icons---->
+      <i class="bx bx-menu"></i>
+    </a>
+    <a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="menu-btn-fecha">
+        <i class="bx bx-calendar-star"></i>
+      </a>
+      <a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="menu-btn-filtrar">
+        <!--bx-tada da el efecto de movimiento---->
+        <i class='bx bx-search-alt-2' ></i>
+      </a>
+  </div>
+  
+  <!-- Main Wrapper -->
+  <div class="p-1 my-container active-cont">
+    <!-- Top Nav -->
+    <nav class="navbar top-navbar navbar-light bg-light px-5"></nav>
+    <!--Final Top Nav -->
+    <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
+    
+  </div>
+
+  <script src="js/navDesplegable.js"></script>
+</body>
+</html>

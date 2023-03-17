@@ -1,41 +1,42 @@
 /*calendario*/
 
-
-
 .calendar {
     display: grid;
     width: 100%;
     /* el numero de repeat es el numero maximo de largo de la tabla*/
-    grid-template-columns: repeat(10, minmax(120px, 2fr));
+    grid-template-columns: repeat(32, minmax(120px, 2fr));
     grid-template-rows: 50px;
     grid-auto-rows: 50px;
     overflow: auto;
+    min-height: 800px;
   }
   .calendar-container {
-    width: 90%;
     margin: auto;
     overflow: hidden;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.401);
     border-radius: 10px;
     background: #fff;
-    max-width: 1700px;
+    width: 2500px;
+
   }
 
   .calendar-header {
     text-align: center;
     padding: 20px 0;
-    background-color:#e5e9fa;
+    background-color:#30349f;
     border-bottom: 1px solid rgba(166, 168, 179, 0.12);
   }
   .calendar-header h1 {
     margin: 0;
     font-size: 18px;
+    color: #fff;
   }
   .calendar-header p {
     margin: 5px 0 0 0;
     font-size: 20px;
     font-weight: 600;
-    color: rgba(81, 86, 93, 0.4);
+    color: rgb(176, 179, 184);
+    text-align: center;
   }
   .calendar-header button {
     background: 0;
@@ -59,6 +60,26 @@
     pointer-events: none;
     z-index: 1;
   }
+
+  .day-container {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0;
+
+  }
+  .day1-divicion1, .day2-divicion2 {
+    flex-basis: 50%; /* para dividir el ancho del contenedor en dos partes iguales */
+    box-sizing: border-box;
+  }
+  .day1-divicion1{
+    border-right: 1px solid rgba(166, 168, 179, 0.12);
+    background-color: #03ae11;
+  }
+  .day2-divicion2{
+    border-right: 1px solid rgba(166, 168, 179, 0.12);
+    background-color: #3b0286;
+  }
+
   .day-name {
     font-size: 12px;
     text-transform: uppercase;
@@ -70,66 +91,93 @@
     background-color: #726bc620;
     position: relative;
   }
-  .task--bloqueado {
 
+  .task--bloqueado {
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-    cursor: not-allowed;
+  
     border-left-color: #0b0b0b;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 4 / span 2;
     grid-row: 9;
     margin-top: 15px;
     align-self: end;
-  
   }
+
+  .task--uso-casa {
+
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    border-left-color: #05d1ca;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    grid-column: 4 / span 2;
+  background-color: #05d1ca;
+    grid-row: 8;
+    margin-top: 15px;
+    align-self: end;
+  }
+
   .task {
     border-left-width: 3px;
     padding: 8px 12px;
     margin: 10px;
+    /*margin: auto;  si prefieres que quede a la mitad de ambos dias*/
     border-left-style: solid;
     font-size: 14px;
     position: relative;
   }
+
   .task--mantenimiento {
     border-left-color: #fdb44d;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     /* no poner en posiciones 1 en row o column ya que alli se alojan habitaciones y fechas*/
-
     grid-column: 4 / span 3;
     grid-row: 3;
     background: #ffdaa2;
     align-self: center;
     color: #fc9b10  ;
-    margin-top: -5px;
 
+  }
+
+  .task--mantenimiento:hover{
+    background-color: #fdb44d;
+    color: #fff;
   }
 
 
   .task--ocupada-limpia {
     border-left-color: #fa607e;
-    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    /*aqui puedes seleccioanr donde y con span cuantos dias requiere */
     grid-column: 2 / span 2;
     grid-row: 3;
     margin-top: 15px;
     background: rgba(253, 197, 208, 0.7);
     align-self: end;
     color: #f8254e;
-
   }
+
+  .task--ocupada-limpia:hover{
+    background-color: #fa607f71;
+  }
+
   .task--ocupada-sucia {
-    border-left-color: #660000;
+    border-left-color: #bd0202;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
-    grid-column: 2 / span 1;
+    grid-column: 2 / span 2;
     grid-row: 7;
     margin-top: 15px;
     background: #BB6464;
     align-self: end;
-    color: #4a2828;
+    color: #f8f3f3;
+
+  }
+
+  .task--ocupada-sucia:hover{
+    background-color: #990404;
+    color: #fff;
 
   }
 
 
-  .task--disponible {
+  .task--disponible-sucia {
     border-left-color: #c8c8c8;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
@@ -141,6 +189,11 @@
 
   }
 
+  .task--disponible-sucia:hover{
+    background-color: #c8c8c8;
+
+  }
+
   .task--disponible-limpia {
     border-left-color: #03ae11;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
@@ -149,15 +202,51 @@
     margin-top: 15px;
     background: #d3eed381;
     align-self: end;
-    color: #057410;
+    color: #057410e8;
 
   }
-  .task--ocupada-limpia{
-  background-color: #fa607f68;
-}
+
+  .task--disponible-limpia:hover{
+    background-color: #05741088;
+    color: #fff;
+    
+  }
+
+  .task--reserva-pagada {
+    border-left-color: #4d03ae;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    grid-column: 2 / span 2;
+    grid-row: 10;
+    margin-top: 15px;
+    background: #6b0fe3af;
+    align-self: end;
+    color: #FFF;
+
+  }
+  .task--reserva-pagada:hover{
+    background-color: #8f44f16f;
+    color: #fff;
+    
+  }
+
+  .task--reserva-pendiente-pago {
+    border-left-color: #bababa;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    grid-column: 2 / span 2;
+    grid-row: 11;
+    margin-top: 15px;
+    background: #3b0286;
+    align-self: end;
+    color: #FFF;
+  }
+  .task--reserva-pendiente-pago:hover{
+    background-color: #66089c;
+    color: #fff;
+  }
 
 
-  .task--limpieza-disponible {
+
+  .task--limpieza-vacia {
     border-left-color: #4786ff;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 6 / span 2;
@@ -169,20 +258,30 @@
     color: #0a5eff;
   }
 
-  .task--info:hover{
+  .task--limpieza-disponible:hover{
     background-color: #6398fb80;
   }
+
+
+
   .task--limpieza-ocupada {
+    border-left-color: #052d76;
     background: #6398fb;
     border: 0;
-    border-left-color: #052d76;
-    border-radius: 4px;
     grid-column: 2 / span 3;
     grid-row: 4;
     align-self: end;
     color: #fff;
     box-shadow: 0 10px 14px rgba(71, 134, 255, 0.4);
   }
+
+  .task--limpieza-ocupada:hover{
+    background: #206bf6e7;
+    border-left-color: #052d76;
+    box-shadow: 0 10px 14px rgba(71, 135, 255, 0.619);
+  }
+
+
   .task__detail {
     position: absolute;
     left: 0;
@@ -228,7 +327,8 @@
     font-weight: 500;
     color: rgba(81, 86, 93, 0.7);
   }
-  
+
+
   .rooms{
     border-bottom: 1px solid rgba(166, 168, 179, 0.12);
     border-right: 1px solid rgba(166, 168, 179, 0.12);
@@ -253,5 +353,5 @@
     background-color: #726bc620;
       display: flex;
       flex-direction: column;
-position:relative;
+    position:relative;
   }
