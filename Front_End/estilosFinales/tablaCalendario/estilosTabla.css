@@ -5,27 +5,26 @@
 .calendar {
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(10, minmax(120px, 1fr));
+    /* el numero de repeat es el numero maximo de largo de la tabla*/
+    grid-template-columns: repeat(10, minmax(120px, 2fr));
     grid-template-rows: 50px;
     grid-auto-rows: 50px;
     overflow: auto;
   }
   .calendar-container {
     width: 90%;
-    /*margin: auto;*/
-    margin-left: 15px;
-    margin-top: 10px;
+    margin: auto;
     overflow: hidden;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.401);
     border-radius: 10px;
     background: #fff;
-    width: 1700px;
+    max-width: 1700px;
   }
 
   .calendar-header {
     text-align: center;
     padding: 20px 0;
-    background: linear-gradient(to bottom, #fafbfd 0%, rgba(255, 255, 255, 0) 100%);
+    background-color:#e5e9fa;
     border-bottom: 1px solid rgba(166, 168, 179, 0.12);
   }
   .calendar-header h1 {
@@ -69,12 +68,19 @@
     line-height: 50px;
     font-weight: 500;
     background-color: #726bc620;
+    position: relative;
   }
-  .day--disabled {
-    color: rgba(152, 160, 166, 0.6);
-    background-color: #ffffff;
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  .task--bloqueado {
+
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
     cursor: not-allowed;
+    border-left-color: #0b0b0b;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    grid-column: 4 / span 2;
+    grid-row: 9;
+    margin-top: 15px;
+    align-self: end;
+  
   }
   .task {
     border-left-width: 3px;
@@ -84,27 +90,76 @@
     font-size: 14px;
     position: relative;
   }
-  .task--warning {
+  .task--mantenimiento {
     border-left-color: #fdb44d;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    /* no poner en posiciones 1 en row o column ya que alli se alojan habitaciones y fechas*/
+
     grid-column: 4 / span 3;
     grid-row: 3;
-    background: #fef0db;
+    background: #ffdaa2;
     align-self: center;
-    color: #fc9b10;
+    color: #fc9b10  ;
     margin-top: -5px;
+
   }
-  .task--danger {
+
+
+  .task--ocupada-limpia {
     border-left-color: #fa607e;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 3;
     margin-top: 15px;
     background: rgba(253, 197, 208, 0.7);
     align-self: end;
     color: #f8254e;
+
   }
-  .task--info {
+  .task--ocupada-sucia {
+    border-left-color: #660000;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    grid-column: 2 / span 1;
+    grid-row: 7;
+    margin-top: 15px;
+    background: #BB6464;
+    align-self: end;
+    color: #4a2828;
+
+  }
+
+
+  .task--disponible {
+    border-left-color: #c8c8c8;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    grid-column: 2 / span 2;
+    grid-row: 9;
+    margin-top: 15px;
+    background: rgba(235, 235, 235, 0.7);
+    align-self: end;
+    color: #030303;
+
+  }
+
+  .task--disponible-limpia {
+    border-left-color: #03ae11;
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+    grid-column: 2 / span 2;
+    grid-row: 8;
+    margin-top: 15px;
+    background: #d3eed381;
+    align-self: end;
+    color: #057410;
+
+  }
+  .task--ocupada-limpia{
+  background-color: #fa607f68;
+}
+
+
+  .task--limpieza-disponible {
     border-left-color: #4786ff;
-    /*aqui puedes seleccioanr donde estara por filas y columnas*/
+    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 6 / span 2;
     grid-row: 5;
     /**/
@@ -113,9 +168,14 @@
     align-self: end;
     color: #0a5eff;
   }
-  .task--primary {
-    background: #4786ff;
+
+  .task--info:hover{
+    background-color: #6398fb80;
+  }
+  .task--limpieza-ocupada {
+    background: #6398fb;
     border: 0;
+    border-left-color: #052d76;
     border-radius: 4px;
     grid-column: 2 / span 3;
     grid-row: 4;
@@ -169,8 +229,29 @@
     color: rgba(81, 86, 93, 0.7);
   }
   
-  .room-number
- {
-    display: table-row;
-    grid-template-columns: repeat
+  .rooms{
+    border-bottom: 1px solid rgba(166, 168, 179, 0.12);
+    border-right: 1px solid rgba(166, 168, 179, 0.12);
+    text-align: right;
+    letter-spacing: 1px;
+    font-size: 12px;
+    box-sizing: border-box;
+    color: #98a0a6;
+    position: relative;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .room{
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #99a1a7;
+    text-align: center;
+    border-bottom: 1px solid rgba(166, 168, 179, 0.12);
+    line-height: 50px;
+    font-weight: 500;
+    background-color: #726bc620;
+      display: flex;
+      flex-direction: column;
+position:relative;
   }
