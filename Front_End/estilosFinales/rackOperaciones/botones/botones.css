@@ -87,19 +87,52 @@
 /***************************/
 
 
-.scanner span{
+.scannerRojo span{
     display:block;
     position:absolute;
-    
-  }
-
-   .scanner span:nth-child(1){
-    animation:animate1 3s linear infinite;
+	animation:animate1 3s linear infinite;
     background: linear-gradient(180deg,transparent,#ea36268f);
     height:100%;
     left:-100px;
     top:0px;
     width:100%;
+    
+  }
+
+  .scannerVerde span{
+    display:block;
+    position:absolute;
+	animation:animate1 3s linear infinite;
+    background: linear-gradient(180deg,transparent,#03ae11);
+    height:100%;
+    left:-100px;
+    top:0px;
+    width:100%;
+    
+  }
+
+  .scannerDisponible span{
+    display:block;
+    position:absolute;
+	animation:animate1 3s linear infinite;
+    background: linear-gradient(180deg,transparent,#c8c8c8);
+    height:100%;
+    left:-100px;
+    top:0px;
+    width:100%;
+    
+  }
+
+  .scannerLimpio span{
+	display:block;
+    position:absolute;
+	animation:animate1 3s linear infinite;
+    background: linear-gradient(180deg,transparent,#0a5eff);
+    height:100%;
+    left:-100px;
+    top:0px;
+    width:100%;
+
   }
 
 
@@ -111,19 +144,16 @@
 	width: 150px;
 	height: 100px;
 	margin: 0px;
+
 }
 .container .btn a {
-  margin-top: 50px;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(253, 197, 208, 0.7);
 	box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
-
 	border-top: 1px solid rgba(255, 255, 255, 0.1);
-
 	padding: 10px;
 	letter-spacing: 1px;
 	text-decoration: none;
@@ -134,8 +164,36 @@
 	transition: 0.5s;
 	backdrop-filter: blur(35px);
 }
+
+.sucia-vacia{
+	background-color: #fa607f59;
+}
+
+.sucia-ocupada{
+	background-color: #BB6464;
+
+}
+
+.vacia-sucia{
+
+	background-color: #cefccefd;
+}
+
+.disponible-limpia{
+	background-color: rgba(235, 235, 235, 0.7);
+}
+
+.vacia-limpia{
+	background-color: rgb(203, 221, 255);
+}
+
+.ocupada-limpieza{
+	background-color: #6398fb;
+	color: #fff;
+}
+
+
 .container .btn:hover a {
-	
     transform: translateY(-10px);
     transition: 0.7s ease-out;
 }
@@ -147,10 +205,7 @@
 	/*tamaño de la cortina*/
 	width: 10%;
 	height: 100%;
-	background: linear-gradient(to left, rgba(255, 255, 255, 0.15), transparent);
-	background-color: #fa607e;
 	/*transform: skewX(15deg) translate(0); para posicionar el efecto cortina*/
 	transition: 0.5s;
 	/*visibilidad de efecto cortina*/
-	
 }

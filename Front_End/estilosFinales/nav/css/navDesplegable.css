@@ -17,6 +17,10 @@ body {
   z-index: 9999;
 }
 
+#navbarDropdown{
+  color: #fff;
+}
+
 /***********************************/
 /*color hover de los links dentro del nav*/
 /***********************************/
