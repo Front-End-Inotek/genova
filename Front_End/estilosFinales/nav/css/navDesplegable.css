@@ -3,6 +3,10 @@ body {
   min-height: 100vh;
   background-color: #ecf2ff;
 }
+
+.submenu {
+  display: none;
+}
 /******************************/
 /*tamaño y ocultar la side nav*/
 /******************************/
@@ -19,6 +23,20 @@ body {
 
 #navbarDropdown{
   color: #fff;
+}
+
+.subitem{
+  color: #ecf2ff;
+  font-size: 18px;
+  border: #bface2;
+  background-color: #bface249;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+a:hover{
+  color: #ecf2ff47;
 }
 
 /***********************************/

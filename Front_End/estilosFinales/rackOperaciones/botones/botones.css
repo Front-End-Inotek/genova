@@ -1,3 +1,6 @@
+
+
+
 /*efectos para las cards*/
 
 
@@ -136,6 +139,16 @@
   }
 
 
+  .scannerReservas span{
+    display:block;
+      position:absolute;
+    animation:animate1 3s linear infinite;
+      background: linear-gradient(180deg,transparent,#4521c4);
+      height:100%;
+      left:-100px;
+      top:0px;
+      width:100%;
+    }
 
 .container .btn {
 	position: relative;
@@ -144,6 +157,7 @@
 	width: 150px;
 	height: 100px;
 	margin: 0px;
+
 
 }
 .container .btn a {
@@ -158,7 +172,6 @@
 	letter-spacing: 1px;
 	text-decoration: none;
 	overflow: hidden;
-	color: #100901;
 	font-weight: 400px;
 	z-index: 1;
 	transition: 0.5s;
@@ -167,29 +180,44 @@
 
 .sucia-vacia{
 	background-color: #fa607f59;
+  color: #000;
 }
 
 .sucia-ocupada{
 	background-color: #BB6464;
-
+  color: #000;
 }
 
 .vacia-sucia{
 
 	background-color: #cefccefd;
+  color: #000;
 }
 
 .disponible-limpia{
 	background-color: rgba(235, 235, 235, 0.7);
+  color: #000;
 }
 
 .vacia-limpia{
 	background-color: rgb(203, 221, 255);
+  color: #000;
 }
 
 .ocupada-limpieza{
 	background-color: #6398fb;
-	color: #fff;
+	color: #fffcfc;
+
+}
+
+.reserva-pagada{
+background-color: #6b0fe37e;
+color: #fff;
+}
+
+.reserva-pendiente{
+  background-color: #4d08a9;
+  color: #Fff;
 }
 
 
