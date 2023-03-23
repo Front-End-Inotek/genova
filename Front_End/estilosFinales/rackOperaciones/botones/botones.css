@@ -1,11 +1,101 @@
-
-
+*{
+  text-transform: uppercase;
+}
 
 /*efectos para las cards*/
+.scannerRojo span{
+  display:block;
+  position:absolute;
+animation:animate1 3s linear infinite;
+  background: linear-gradient(180deg,transparent,#ea36268f);
+  height:100%;
+  left:-100px;
+  top:0px;
+  width:100%;
 
+}
 
-
+.scannerVerde span{
+  display:block;
+  position:absolute;
+animation:animate1 3s linear infinite;
+  background: linear-gradient(180deg,transparent,#03ae11);
+  height:100%;
+  left:-100px;
+  top:0px;
+  width:100%;
   
+}
+
+.scannerDisponible span{
+  display:block;
+  position:absolute;
+animation:animate1 3s linear infinite;
+  background: linear-gradient(180deg,transparent,#c8c8c8);
+  height:100%;
+  left:-100px;
+  top:0px;
+  width:100%;
+  
+}
+
+.scannerLimpio span{
+display:block;
+  position:absolute;
+animation:animate1 3s linear infinite;
+  background: linear-gradient(180deg,transparent,#0a5eff);
+  height:100%;
+  left:-100px;
+  top:0px;
+  width:100%;
+
+}
+
+
+  .scannerReservas span{
+  display:block;
+    position:absolute;
+  animation:animate1 3s linear infinite;
+    background: linear-gradient(180deg,transparent,#4521c4);
+    height:100%;
+    left:-100px;
+    top:0px;
+    width:100%;
+  }
+
+  .scannerBloqueo span{
+    display:block;
+      position:absolute;
+    animation:animate1 3s linear infinite;
+      background: linear-gradient(180deg,transparent,#e7e5e8);
+      height:100%;
+      left:-100px;
+      top:0px;
+      width:100%;
+    }
+
+
+    .scannerUsoCasa span{
+      display:block;
+        position:absolute;
+      animation:animate1 3s linear infinite;
+        background: linear-gradient(180deg,transparent,#05d1ca);
+        height:100%;
+        left:-100px;
+        top:0px;
+        width:100%;
+      }
+
+      .scannerMantenimiento span{
+      display:block;
+        position:absolute;
+      animation:animate1 3s linear infinite;
+        background: linear-gradient(180deg,transparent,#fdb44d);
+        height:100%;
+        left:-100px;
+        top:0px;
+        width:100%;
+      }
   
 @keyframes animate1{
     0%{
@@ -15,69 +105,6 @@
       left:100%;
     }
   }
-  
-  .efectos span:nth-child(2){
-    animation:animate2 1.5s linear infinite;
-    animation-delay:0.25s;
-    background:linear-gradient(180deg,transparent,#f138f1cb);
-    height:100%;
-    top:-100%;
-    right:0;
-
-
-  }
-  
-  @keyframes animate2{
-    0%{
-      top:-100%;
-    }
-    50%,100%{
-      top:100%;
-    }
-  }
-  
-  .efectos span:nth-child(3){
-    animation:animate3 4s linear infinite;
-    animation-delay:0.5s;
-    background:linear-gradient(180deg,transparent,#f138f1cb);
-    height:2px;
-    right:-100%;
-    width:100%;
-    width: 20px;
-    bottom:0;
-  }
-  
-  @keyframes animate3{
-    0%{
-      right:-100%;
-    }
-    50%,100%{
-      right:100%;
-    }
-  }
-  
-  .efectos span:nth-child(4){
-    animation:animate4 1.5s linear infinite;
-    animation-delay:0.75s;
-    background:linear-gradient(270deg,transparent,#f138f1cb);
-    height:100%;
-    left:0;
-    width:2px;
-    bottom:100%;
-    
-    
-    
-  }
-  
-  @keyframes animate4{
-    0%{
-      bottom:-100%;
-    }
-    50%,100%{
-      bottom:100%;
-    }
-  }
-  
 
   .efectos box-icon {
     font-size: 30px;
@@ -88,78 +115,34 @@
 /***************************/
 /***botones transparentes***/
 /***************************/
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px;
+  margin: 20px;
+  
+}
 
 
-.scannerRojo span{
-    display:block;
-    position:absolute;
-	animation:animate1 3s linear infinite;
-    background: linear-gradient(180deg,transparent,#ea36268f);
-    height:100%;
-    left:-100px;
-    top:0px;
-    width:100%;
-    
-  }
-
-  .scannerVerde span{
-    display:block;
-    position:absolute;
-	animation:animate1 3s linear infinite;
-    background: linear-gradient(180deg,transparent,#03ae11);
-    height:100%;
-    left:-100px;
-    top:0px;
-    width:100%;
-    
-  }
-
-  .scannerDisponible span{
-    display:block;
-    position:absolute;
-	animation:animate1 3s linear infinite;
-    background: linear-gradient(180deg,transparent,#c8c8c8);
-    height:100%;
-    left:-100px;
-    top:0px;
-    width:100%;
-    
-  }
-
-  .scannerLimpio span{
-	display:block;
-    position:absolute;
-	animation:animate1 3s linear infinite;
-    background: linear-gradient(180deg,transparent,#0a5eff);
-    height:100%;
-    left:-100px;
-    top:0px;
-    width:100%;
-
-  }
-
-
-  .scannerReservas span{
-    display:block;
-      position:absolute;
-    animation:animate1 3s linear infinite;
-      background: linear-gradient(180deg,transparent,#4521c4);
-      height:100%;
-      left:-100px;
-      top:0px;
-      width:100%;
-    }
 
 .container .btn {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 150px;
+	width: 250px;
 	height: 100px;
-	margin: 0px;
+	margin: 10px;
 
 
 }
+
 .container .btn a {
 	position: absolute;
 	top: 0;
@@ -176,64 +159,89 @@
 	z-index: 1;
 	transition: 0.5s;
 	backdrop-filter: blur(35px);
+
 }
 
-.sucia-vacia{
-	background-color: #fa607f59;
-  color: #000;
+.bloqueo{
+	background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #333;
+  color: #fff;
+  border-left: 7px solid #0b0b0b;
+}
+
+.usoCasa{
+	background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #05d1ca;
+  color: #333;
+  border-left: 7px solid #05d1ca;
 }
 
 .sucia-ocupada{
 	background-color: #BB6464;
-  color: #000;
+  color: #fff;
+  border-left: 7px solid #bd0202;
 }
 
 .vacia-sucia{
 
-	background-color: #cefccefd;
-  color: #000;
+	background-color: #bff1bf81;
+  color: #057410e8;
+  border-left: 7px solid #03ae11;
 }
 
 .disponible-limpia{
 	background-color: rgba(235, 235, 235, 0.7);
   color: #000;
+  border-left: 7px solid #9b9a9a;
 }
 
 .vacia-limpia{
 	background-color: rgb(203, 221, 255);
-  color: #000;
+  color: #0a5eff;
+  border-left: 7px solid #0a5eff;
 }
 
 .ocupada-limpieza{
 	background-color: #6398fb;
 	color: #fffcfc;
-
+  border-left: 7px solid #052d76;
 }
 
 .reserva-pagada{
-background-color: #6b0fe37e;
+background-color: #6b0fe3af;
 color: #fff;
+border-left: 7px solid #4d03ae;
 }
 
 .reserva-pendiente{
-  background-color: #4d08a9;
+  background-color: #3b0286;
   color: #Fff;
+  border-left: 7px solid #bc88ff;
+
+}
+.mantenimiento{
+  background-color: #ffdaa2;
+  color: #ff7700;
+  border-left: 7px solid #fdb44d;
+
 }
 
 
 .container .btn:hover a {
     transform: translateY(-10px);
     transition: 0.7s ease-out;
+    color: #ffffff;
+    
 }
 .container .btn a::before {
 	content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
-	/*tamaño de la cortina*/
 	width: 10%;
 	height: 100%;
-	/*transform: skewX(15deg) translate(0); para posicionar el efecto cortina*/
 	transition: 0.5s;
-	/*visibilidad de efecto cortina*/
+
 }
+
+

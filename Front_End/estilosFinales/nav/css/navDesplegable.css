@@ -102,12 +102,10 @@ a:hover{
   visibility: hidden;
 }
 
-@media (max-width: 768px) { /* Agregamos un media query para dispositivos móviles */
+@media (max-width: 668px) { /* Agregamos un media query para dispositivos móviles */
   .side-navbar {
-    width: 100%; /* Cambiamos el valor de width a 100% para que ocupe todo el ancho */
-    height: auto; /* Cambiamos el valor de height a auto para que se adapte al contenido */
-    position: static; /* Usamos position: static en lugar de fixed */
-    margin: 0; /* Agregamos margin: 0 para eliminar cualquier margen */
+    margin-left: -53%;
+
   }
 
   .active-nav {
