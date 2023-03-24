@@ -4,6 +4,18 @@ body {
   background-color: #ecf2ff;
 }
 
+a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+a:hover{
+  color: #ecf2ff47;
+}
+span{
+  cursor: pointer;
+}
 .submenu {
   display: none;
 }
@@ -35,9 +47,7 @@ body {
   cursor: pointer;
 }
 
-a:hover{
-  color: #ecf2ff47;
-}
+
 
 /***********************************/
 /*color hover de los links dentro del nav*/
@@ -130,3 +140,78 @@ a:hover{
     left: 130%; /* Cambiamos el valor de left a 70% para que el botón de filtrar esté más cerca del borde */
   }
 }/*
+
+/* Para pantallas de tamaño pequeño, menores a 576px */
+@media (max-width: 575.98px) {
+  .side-navbar {
+    margin-left: -90%;
+    width: 90%;
+  }
+  .active-nav {
+    margin-left: 0;
+  }
+  .active-cont {
+    margin-left: 0;
+    width: 100%;
+    left: 0;
+  }
+  .menu-btn {
+    left: 100%;
+  }
+  #menu-btn-fecha {
+    left: 80%;
+  }
+  #menu-btn-filtrar {
+    left: 70%;
+  }
+}
+
+/* Para pantallas de tamaño mediano, entre 576px y 991.98px */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .side-navbar {
+    margin-left: -70%;
+    width: 70%;
+  }
+  .active-nav {
+    margin-left: 0;
+  }
+  .active-cont {
+    margin-left: 0;
+    width: 100%;
+    left: 0;
+  }
+  .menu-btn {
+    left: 100%;
+  }
+  #menu-btn-fecha {
+    left: 110%;
+  }
+  #menu-btn-filtrar {
+    left: 120%;
+  }
+}
+
+/* Para pantallas de tamaño grande, entre 992px y 1199.98px */
+@media (min-width: 992px) and (max-width: 1280px) {
+  .side-navbar {
+    margin-left: -40%;
+    width: 40%;
+  }
+  .active-nav {
+    margin-left: 0;
+  }
+  .active-cont {
+    margin-left: 40%;
+    width: 60%;
+    left: 0;
+  }
+  .menu-btn {
+    left: 100%;
+  }
+  #menu-btn-fecha {
+    left: 110%;
+  }
+  #menu-btn-filtrar {
+    left: 120%;
+  }
+}

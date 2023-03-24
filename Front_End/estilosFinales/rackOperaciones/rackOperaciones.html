@@ -27,9 +27,9 @@
       <a href="#" class="nav-link h3 text-white my-2">
         Marca Logo</br>Titulo<br><br>
       </a>
-      <li id="habitaciones" class="nav-link">
+      <li id="#" class="nav-link">
         <i class='bx bx-bed'></i>
-        <span class="mx-2">Habitaciones</span>
+        <span class="mx-2 habitaciones">Habitaciones</span>
         <ul id="habitaciones_submenu" class="submenu">
           <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
           <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
@@ -38,7 +38,7 @@
       </li>
       <li href="#" class="nav-link">
         <i class='bx bx-calendar' ></i>
-        <span class="mx-2">Reservaciones</span>
+        <span class="mx-2 reservaciones">Reservaciones</span>
         <ul id="reservaciones_submenu" class="submenu">
           <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
           <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
@@ -47,7 +47,7 @@
       </li>
       <li href="#" class="nav-link">
         <i class='bx bxs-report' ></i>
-        <span class="mx-2">Reportes</span>
+        <span class="mx-2 reportes">Reportes</span>
         <ul id="reportes_submenu" class="submenu">
           <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
           <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
@@ -113,38 +113,184 @@
     <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
     
   </div>
-  <div class="container">
-    <div class="btn">
-      <a href="#" id="habitacion-1" class="scannerBloqueo bloqueo">Habitación 1 bloqueo <span></span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-2" class="scannerRojo sucia-ocupada">Habitación 2 Sucia ocupada<span></span> </a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-3" class="scannerVerde vacia-sucia">Habitación 3 Vacia Sucia<span></span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-4" class="scannerDisponible disponible-limpia">Habitación 4 Disponible<span></span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-5" class="scannerLimpio vacia-limpia">Habitacion 5 vacia limpia<span></span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-6" class="scannerLimpio ocupada-limpieza">Habitacion 5 Limpieza Ocupada<span></span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-7" class="scannerReservas reserva-pagada">Habitacion 5 Reserva pagada<span></span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-8" class="scannerReservas reserva-pendiente">Habitacion 5 resv. pendiente de pago<span></span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-9" class="scannerDisponible mantenimiento">Habitacion 5 mantenimiento<span></span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-1" class="scannerUsoCasa usoCasa">Habitación 10 Uso  <span></span></a>
-    </div>
+
+
+
+
+
+  <!--tabla de colores-->
+  <div class="floating-box">
+   
+    <button id="mostrar-todas">Todas</button>
+    <button id="mostrar-disponibles"> Disponibles</button>
+    <button id="mostrar-vacias-sucias"> Vacia Sucias</button>
+    <button id="mostrar-ocupada-sucias">Sucia Ocupada</button>
+    <button id="mostrar-reservadas"> Reservaciones</button>
+    <button id="mostrar-vacia-limpieza"> Limpieza Vacia </button>
+    <button id="mostrar-ocupada-limpieza"> Limpieza Ocupada</button>
+    <button id="mostrar-mantenimiento"> Mantenimiento</button>
+    <button id="mostrar-uso-casa"> Uso Casa</button>
+    <button id="mostrar-bloqueo"> Bloqueo</button>
   </div>
+
+  <!--rack operativo-->
+  <div class="container">
+    <!--10 botones-->
+    <div class="btn">
+      <a href="#" id="habitacion-1" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N1"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-2" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N2"> nombre </span> </a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-3" class="vacia-sucia">Habitación 3 <br>Vacia Sucia<br><span class="nombre" id="N3"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-4" class="disponible-limpia">Habitación 4 Disponible<br><span class="nombre" id="N4"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-5" class="vacia-limpia">Habitacion 5 <br> vacia limpia<br><span class="nombre" id="N5"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-6" class="ocupada-limpieza">Habitacion 6 Limpieza Ocupada<br><span class="nombre" id="N6"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-7" class="reserva-pagada">Habitacion 7 Reserva pagada<br><span class="nombre" id="N7"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-8" class="reserva-pendiente">Habitacion 8 resv. pendiente de pago<br><span class="nombre" id="N8"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-9" class="mantenimiento">Habitacion 9 mantenimiento<br><span class="nombre" id="N9"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-10" class="usoCasa">Habitación 10 <br> Uso Casa<br><span class="nombre" id="N10"> nombre </span></a>
+    </div>
+
+    <!--10 botones-->
+    <div class="btn">
+      <a href="#" id="habitacion-11" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N11"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-12" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N12"> nombre </span> </a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-13" class="vacia-sucia">Habitación 3 <br>Vacia Sucia<br><span class="nombre" id="N13"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-14" class="disponible-limpia">Habitación 4 Disponible<br><span class="nombre" id="N14"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-15" class="vacia-limpia">Habitacion 5 <br> vacia limpia<br><span class="nombre" id="N15"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-16" class="ocupada-limpieza">Habitacion 6 Limpieza Ocupada<br><span class="nombre" id="N16"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-17" class="reserva-pagada">Habitacion 7 Reserva pagada<br><span class="nombre" id="N17"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-18" class="reserva-pendiente">Habitacion 8 resv. pendiente de pago<br><span class="nombre" id="N18"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-19" class="mantenimiento">Habitacion 9 mantenimiento<br><span class="nombre" id="N19"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-20" class="usoCasa">Habitación 10 <br> Uso Casa<br><span class="nombre" id="N20"> nombre </span></a>
+    </div>
+    <!--10 botones-->
+    <div class="btn">
+      <a href="#" id="habitacion-21" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N21"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-22" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N22"> nombre </span> </a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-23" class="vacia-sucia">Habitación 3 <br>Vacia Sucia<br><span class="nombre" id="N23"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-24" class="disponible-limpia">Habitación 4 Disponible<br><span class="nombre" id="N24"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-25" class="vacia-limpia">Habitacion 5 <br> vacia limpia<br><span class="nombre" id="N25"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-26" class="ocupada-limpieza">Habitacion 6 Limpieza Ocupada<br><span class="nombre" id="N26"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-27" class="reserva-pagada">Habitacion 7 Reserva pagada<br><span class="nombre" id="N27"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-28" class="reserva-pendiente">Habitacion 8 resv. pendiente de pago<br><span class="nombre" id="N28"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-29" class="mantenimiento">Habitacion 9 mantenimiento<br><span class="nombre" id="N29"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-30" class="usoCasa">Habitación 10 <br> Uso Casa<br><span class="nombre" id="N30"> nombre </span></a>
+    </div>
+    <!--10 botones-->
+    <div class="btn">
+      <a href="#" id="habitacion-31" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N31"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-32" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N32"> nombre </span> </a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-33" class="vacia-sucia">Habitación 3 <br>Vacia Sucia<br><span class="nombre" id="N33"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-34" class="disponible-limpia">Habitación 4 Disponible<br><span class="nombre" id="N34"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-35" class="vacia-limpia">Habitacion 5 <br> vacia limpia<br><span class="nombre" id="N35"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-36" class="ocupada-limpieza">Habitacion 6 Limpieza Ocupada<br><span class="nombre" id="N36"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-37" class="reserva-pagada">Habitacion 7 Reserva pagada<br><span class="nombre" id="N37"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-38" class="reserva-pendiente">Habitacion 8 resv. pendiente de pago<br><span class="nombre" id="N38"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-39" class="mantenimiento">Habitacion 9 mantenimiento<br><span class="nombre" id="N39"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-40" class="usoCasa">Habitación 10 <br> Uso Casa<br><span class="nombre" id="N40"> nombre </span></a>
+    </div>
+    <!--10 botones-->
+    <div class="btn">
+      <a href="#" id="habitacion-41" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N41"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-42" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N42"> nombre </span> </a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-43" class="vacia-sucia">Habitación 3 <br>Vacia Sucia<br><span class="nombre" id="N43"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-44" class="disponible-limpia">Habitación 4 Disponible<br><span class="nombre" id="N44"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-45" class="vacia-limpia">Habitacion 5 <br> vacia limpia<br><span class="nombre" id="N45"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-46" class="ocupada-limpieza">Habitacion 6 Limpieza Ocupada<br><span class="nombre" id="N46"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-47" class="reserva-pagada">Habitacion 7 Reserva pagada<br><span class="nombre" id="N47"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-48" class="reserva-pendiente">Habitacion 8 resv. pendiente de pago<br><span class="nombre" id="N48"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-49" class="mantenimiento">Habitacion 9 mantenimiento<br><span class="nombre" id="N49"> nombre </span></a>
+    </div>
+    <div class="btn">
+      <a href="#" id="habitacion-50" class="usoCasa">Habitación 10 <br> Uso Casa<br><span class="nombre" id="N50"> nombre </span></a>
+    </div>
 
   <script src="../nav/js/navDesplegable.js"></script>
   <script src="./botones/botones.js"></script>

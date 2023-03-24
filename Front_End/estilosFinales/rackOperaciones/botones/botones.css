@@ -1,120 +1,6 @@
 *{
   text-transform: uppercase;
 }
-
-/*efectos para las cards*/
-.scannerRojo span{
-  display:block;
-  position:absolute;
-animation:animate1 3s linear infinite;
-  background: linear-gradient(180deg,transparent,#ea36268f);
-  height:100%;
-  left:-100px;
-  top:0px;
-  width:100%;
-
-}
-
-.scannerVerde span{
-  display:block;
-  position:absolute;
-animation:animate1 3s linear infinite;
-  background: linear-gradient(180deg,transparent,#03ae11);
-  height:100%;
-  left:-100px;
-  top:0px;
-  width:100%;
-  
-}
-
-.scannerDisponible span{
-  display:block;
-  position:absolute;
-animation:animate1 3s linear infinite;
-  background: linear-gradient(180deg,transparent,#c8c8c8);
-  height:100%;
-  left:-100px;
-  top:0px;
-  width:100%;
-  
-}
-
-.scannerLimpio span{
-display:block;
-  position:absolute;
-animation:animate1 3s linear infinite;
-  background: linear-gradient(180deg,transparent,#0a5eff);
-  height:100%;
-  left:-100px;
-  top:0px;
-  width:100%;
-
-}
-
-
-  .scannerReservas span{
-  display:block;
-    position:absolute;
-  animation:animate1 3s linear infinite;
-    background: linear-gradient(180deg,transparent,#4521c4);
-    height:100%;
-    left:-100px;
-    top:0px;
-    width:100%;
-  }
-
-  .scannerBloqueo span{
-    display:block;
-      position:absolute;
-    animation:animate1 3s linear infinite;
-      background: linear-gradient(180deg,transparent,#e7e5e8);
-      height:100%;
-      left:-100px;
-      top:0px;
-      width:100%;
-    }
-
-
-    .scannerUsoCasa span{
-      display:block;
-        position:absolute;
-      animation:animate1 3s linear infinite;
-        background: linear-gradient(180deg,transparent,#05d1ca);
-        height:100%;
-        left:-100px;
-        top:0px;
-        width:100%;
-      }
-
-      .scannerMantenimiento span{
-      display:block;
-        position:absolute;
-      animation:animate1 3s linear infinite;
-        background: linear-gradient(180deg,transparent,#fdb44d);
-        height:100%;
-        left:-100px;
-        top:0px;
-        width:100%;
-      }
-  
-@keyframes animate1{
-    0%{
-      left:-100%;
-    }
-    50%,100%{
-      left:100%;
-    }
-  }
-
-  .efectos box-icon {
-    font-size: 30px;
-
-  }
-  
-
-/***************************/
-/***botones transparentes***/
-/***************************/
 body {
   margin: 0;
   height: 100vh;
@@ -122,11 +8,146 @@ body {
   flex-direction: column;
 }
 
+/*tabla de estados*/
+.floating-box {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  width: 1200px;
+  border: none;
+}
+
+.floating-box{
+  display:inline-block;
+  left: 60%;
+  width: 1700px;
+  height: 30px;
+  border: none;
+  border: none;
+  position:fixed;
+}
+
+
+
+#mostrar-vacias-sucias {
+  width: 150px; 
+	background-color: #bff1bf81;
+  color: #057410e8;
+  border-left: 5px solid #03ae11;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+  margin-left: 10px;
+}
+
+#mostrar-reservadas{
+  width: 150px;
+  background-color: #4d03ae;
+  color: #fff;
+  border-left: 5px solid #bc88ff;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+
+#mostrar-disponibles{
+  width: 150px;
+  background-color: rgba(235, 235, 235, 0.7);
+  color: #000;
+  border-left: 5px solid #9b9a9a;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+#mostrar-ocupada-sucias{
+  width: 150px;
+  background-color: #BB6464;
+  color: #fff;
+  border-left: 5px solid #bd0202;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+#mostrar-vacia-limpieza{
+  width: 150px;
+  background-color: rgb(203, 221, 255);
+  color: #0a5eff;
+  border-left: 5px solid #0a5eff;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+
+ #mostrar-ocupada-limpieza{
+  width: 150px;
+  height: 40px;
+  background-color: #6398fb;
+	color: #fffcfc;
+  border-left: 5px solid #052d76;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+ }
+
+ #mostrar-mantenimiento{
+  width: 150px;
+  background-color: #ffdaa2;
+  color: #ff7700;
+  border-left: 5px solid #fdb44d;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+ }
+
+ #mostrar-uso-casa{
+  width: 150px;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #05d1ca;
+  color: #333;
+  border-left: 7px solid #05d1ca;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+ }
+ #mostrar-bloqueo{
+  width: 150px;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #333;
+  color: #fff;
+  border-left: 7px solid #0b0b0b;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+ }
+
+
+#mostrar-todas{
+  width: 150px;
+  background-color: #3f51b5;
+  color: #ecf2ff;
+  border: none;
+
+}
+
+span {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+
+/***************************/
+/***botones transparentes***/
+/***************************/
+
+
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(8, minmax(220px, 1fr));
   grid-gap: 10px;
   margin: 20px;
+  margin-top: 50px;
   
 }
 
@@ -136,7 +157,7 @@ body {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 250px;
+	width: 200px;
 	height: 100px;
 	margin: 10px;
 
@@ -149,7 +170,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 	border-top: 1px solid rgba(255, 255, 255, 0.1);
 	padding: 10px;
 	letter-spacing: 1px;
@@ -157,20 +178,20 @@ body {
 	overflow: hidden;
 	font-weight: 400px;
 	z-index: 1;
-	transition: 0.5s;
-	backdrop-filter: blur(35px);
-
+  border-radius: 2px;
+  text-align: end;
 }
 
 .bloqueo{
-	background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+
   background-color: #333;
   color: #fff;
   border-left: 7px solid #0b0b0b;
 }
 
 .usoCasa{
-	background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #05d1ca;
   color: #333;
   border-left: 7px solid #05d1ca;
@@ -244,4 +265,45 @@ border-left: 7px solid #4d03ae;
 
 }
 
+  /* Para pantallas de tamaño pequeño, menores a 576px */
+@media (max-width: 575.98px) {
+  .container {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-gap: 5px;
+    margin: 10px;
+  }
+  }
+/* para pantallas más pequeñas que 768px */
+@media (max-width: 767px) {
+  .container {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    grid-gap: 5px;
+    margin: 10px;
+  }
+}
 
+/* para pantallas de tamaño medio, entre 768px y 1023px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    grid-gap: 7px;
+    margin: 15px;
+  }
+}
+
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .container {
+    grid-template-columns: repeat(6, minmax(200px, 1fr));
+    grid-gap: 5px;
+    margin: 20px;
+  }
+  .container .btn {
+    position: relative;
+    width: 170px;
+    height: 100px;
+
+  
+  
+  }
+}
