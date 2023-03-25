@@ -28,21 +28,83 @@ function mostrarTodasLasHabitaciones(boton) {
   boton.style.display = 'none';
 }
 
-// Muestra habitaciones vacías y sucias
-var botonMostrarVaciasSucias = document.getElementById('mostrar-vacias-sucias');
-botonMostrarVaciasSucias.addEventListener('click', function() {
-  mostrarHabitaciones('.vacia-sucia', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones reservadas y pagadas
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-reservadas');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.reserva-pagada', botonMostrarTodasLasHabitaciones);
-});
-
 // Botón "Mostrar todas las habitaciones"
 var botonMostrarTodasLasHabitaciones = document.getElementById('mostrar-todas');
 botonMostrarTodasLasHabitaciones.addEventListener('click', function() {
   mostrarTodasLasHabitaciones(botonMostrarTodasLasHabitaciones);
 
 });
+
+// Muestra habitaciones disponibles
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-disponibles');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.disponible-limpia', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones sucias vacias
+var botonMostrarVaciasSucias = document.getElementById('mostrar-vacias-sucias');
+botonMostrarVaciasSucias.addEventListener('click', function() {
+  mostrarHabitaciones('.vacia-sucia', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones sucias ocupadas
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-ocupada-sucias');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.sucia-ocupada', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones vacias en limpieza
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-vacia-limpieza');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.vacia-limpia', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones ocupadas en limpieza
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-ocupada-limpieza');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.ocupada-limpieza', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones reservadas y pagadas
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-reservada-pendiente');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.reserva-pendiente', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones reservadas y pendientes de pago
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-reservada-pagada');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.reserva-pagada', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones en mantenimiento
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-mantenimiento');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.mantenimiento', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones en Uso por Casa
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-uso-casa');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.usoCasa', botonMostrarTodasLasHabitaciones);
+});
+
+// Muestra habitaciones en Bloqueo
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-bloqueo');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.bloqueo', botonMostrarTodasLasHabitaciones);
+});
+
+
+//botones de estado para ocultarlos o mostrarlos
+function toggleBotones() {
+  var botones = document.getElementById("botones");
+  if (botones.classList.contains("botones-mostrados")) {
+      botones.classList.remove("botones-mostrados");
+      botones.classList.add("botones-ocultos");
+  } else {
+      botones.classList.remove("botones-ocultos");
+      botones.classList.add("botones-mostrados");
+  }
+}
+

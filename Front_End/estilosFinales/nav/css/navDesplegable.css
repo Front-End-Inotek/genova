@@ -31,10 +31,12 @@ span{
   transition: 0.5s;
   font-size: large;
   z-index: 9999;
+
 }
 
 #navbarDropdown{
   color: #fff;
+  
 }
 
 .subitem{
@@ -45,18 +47,24 @@ span{
   border: none;
   border-radius: 50px;
   cursor: pointer;
+  
 }
 
 
+/*informacion sobre la empresa */
 
+.informacion{
+  justify-content: center;
+  text-align: center;
+}
 /***********************************/
 /*color hover de los links dentro del nav*/
 /***********************************/
-
 .nav-link:active,
 .nav-link:focus,
 .nav-link:hover {
   background-color: #ffffff26;
+  
 }
 /*********************************/
 /*tiempo y posiconamiento visible*/
@@ -94,6 +102,11 @@ span{
 
 #menu-btn-filtrar{
   left: 150%;
+}
+
+#mostrar-botones{
+  left: 175%;
+
 }
 
 .btn-primary:hover,
@@ -139,6 +152,9 @@ span{
   #menu-btn-filtrar {
     left: 130%; /* Cambiamos el valor de left a 70% para que el botón de filtrar esté más cerca del borde */
   }
+  #mostrar-botones{
+    left: 140%;
+  }
 }/*
 
 /* Para pantallas de tamaño pequeño, menores a 576px */
@@ -159,10 +175,13 @@ span{
     left: 100%;
   }
   #menu-btn-fecha {
-    left: 80%;
+    left: 85%;
   }
   #menu-btn-filtrar {
     left: 70%;
+  }
+  #mostrar-botones{
+    left: 55%;
   }
 }
 
@@ -184,10 +203,13 @@ span{
     left: 100%;
   }
   #menu-btn-fecha {
-    left: 110%;
+    left: 115%;
   }
   #menu-btn-filtrar {
-    left: 120%;
+    left: 125%;
+  }
+  #mostrar-botones{
+    left: 135%;
   }
 }
 
@@ -206,12 +228,44 @@ span{
     left: 0;
   }
   .menu-btn {
-    left: 100%;
+    left: 101%;
   }
   #menu-btn-fecha {
-    left: 110%;
+    left: 113%;
   }
   #menu-btn-filtrar {
-    left: 120%;
+    left: 125%;
   }
+  #mostrar-botones{
+  left: 137%;
+}
+}
+
+
+/* Para pantallas de tamaño extra grande */
+@media (min-width: 2001px) {
+  .side-navbar {
+    margin-left: -23%;
+    width: 23%;
+  }
+  .active-nav {
+    margin-left: 0;
+  }
+  .active-cont {
+    margin-left: 40%;
+    width: 60%;
+    left: 0;
+  }
+  .menu-btn {
+    left: 102%;
+  }
+  #menu-btn-fecha {
+    left: 115%;
+  }
+  #menu-btn-filtrar {
+    left: 128%;
+  }
+  #mostrar-botones{
+  left: 141%;
+}
 }

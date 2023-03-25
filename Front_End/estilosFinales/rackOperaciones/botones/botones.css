@@ -9,44 +9,51 @@ body {
 }
 
 /*tabla de estados*/
-.floating-box {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px;
-  width: 1200px;
-  border: none;
+.botones-ocultos {
+  display: none;
 }
 
-.floating-box{
-  display:inline-block;
-  left: 60%;
-  width: 1700px;
-  height: 30px;
-  border: none;
-  border: none;
-  position:fixed;
+#botones{
+  margin-bottom: 0px;
+  margin-top: 40px;
 }
 
+.botones-mostrados {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 16px;
+  grid-gap: 10px;
+  row-gap: 10px;
+
+}
 
 
 #mostrar-vacias-sucias {
-  width: 150px; 
+  width: 150px;
 	background-color: #bff1bf81;
   color: #057410e8;
   border-left: 5px solid #03ae11;
   border-bottom: none;
   border-right: none;
   border-top: none;
-  margin-left: 10px;
 }
 
-#mostrar-reservadas{
+#mostrar-reservada-pendiente{
   width: 150px;
   background-color: #4d03ae;
   color: #fff;
   border-left: 5px solid #bc88ff;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+
+#mostrar-reservada-pagada{
+  width: 150px;
+  background-color: #6b0fe3af;
+  color: #fff;
+  border-left: 5px solid #4d03ae;
   border-bottom: none;
   border-right: none;
   border-top: none;
@@ -82,7 +89,6 @@ body {
 
  #mostrar-ocupada-limpieza{
   width: 150px;
-  height: 40px;
   background-color: #6398fb;
 	color: #fffcfc;
   border-left: 5px solid #052d76;
@@ -128,6 +134,7 @@ body {
   background-color: #3f51b5;
   color: #ecf2ff;
   border: none;
+  display: none;
 
 }
 
@@ -138,7 +145,7 @@ span {
 
 
 /***************************/
-/***botones transparentes***/
+/***rack operaciones***/
 /***************************/
 
 
@@ -147,9 +154,11 @@ span {
   grid-template-columns: repeat(8, minmax(220px, 1fr));
   grid-gap: 10px;
   margin: 20px;
-  margin-top: 50px;
+  margin-top: 30px;
   
 }
+
+
 
 
 
@@ -182,6 +191,11 @@ span {
   text-align: end;
 }
 
+a:hover {
+
+  color: black;
+}
+
 .bloqueo{
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
 
@@ -193,8 +207,9 @@ span {
 .usoCasa{
 	background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #05d1ca;
-  color: #333;
+  color: #fff;
   border-left: 7px solid #05d1ca;
+
 }
 
 .sucia-ocupada{
@@ -221,6 +236,7 @@ span {
   color: #0a5eff;
   border-left: 7px solid #0a5eff;
 }
+
 
 .ocupada-limpieza{
 	background-color: #6398fb;
@@ -249,7 +265,7 @@ border-left: 7px solid #4d03ae;
 
 
 .container .btn:hover a {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     transition: 0.7s ease-out;
     color: #ffffff;
     
@@ -264,6 +280,8 @@ border-left: 7px solid #4d03ae;
 	transition: 0.5s;
 
 }
+
+
 
   /* Para pantallas de tamaño pequeño, menores a 576px */
 @media (max-width: 575.98px) {

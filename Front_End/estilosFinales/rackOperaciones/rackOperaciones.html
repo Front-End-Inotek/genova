@@ -24,9 +24,11 @@
     <!----------------------->
 <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
     <ul class="nav flex-column text-white w-100">
+      <div class="informacion">
       <a href="#" class="nav-link h3 text-white my-2">
-        Marca Logo</br>Titulo<br><br>
-      </a>
+        <img src="" alt="logo">
+        <h3>Marca Titulo<br><br></h6>
+      </a></div>
       <li id="#" class="nav-link">
         <i class='bx bx-bed'></i>
         <span class="mx-2 habitaciones">Habitaciones</span>
@@ -103,6 +105,10 @@
         <!--bx-tada da el efecto de movimiento---->
         <i class='bx bx-search-alt-2' ></i>
       </a>
+      <button class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="mostrar-botones" onclick="toggleBotones()">
+        <i class='bx bxl-stack-overflow' ></i>
+      </button>
+
   </div>
   
   <!-- Main Wrapper -->
@@ -112,26 +118,37 @@
     <!--Final Top Nav -->
     <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
     
-  </div>
-
-
-
-
-
-  <!--tabla de colores-->
-  <div class="floating-box">
-   
+<div class="botones-ocultos" id="botones">
     <button id="mostrar-todas">Todas</button>
     <button id="mostrar-disponibles"> Disponibles</button>
     <button id="mostrar-vacias-sucias"> Vacia Sucias</button>
     <button id="mostrar-ocupada-sucias">Sucia Ocupada</button>
-    <button id="mostrar-reservadas"> Reservaciones</button>
     <button id="mostrar-vacia-limpieza"> Limpieza Vacia </button>
     <button id="mostrar-ocupada-limpieza"> Limpieza Ocupada</button>
+    <button id="mostrar-reservada-pagada"> Reservacion pagada</button>
+    <button id="mostrar-reservada-pendiente"> Reservacion deuda</button>
     <button id="mostrar-mantenimiento"> Mantenimiento</button>
     <button id="mostrar-uso-casa"> Uso Casa</button>
     <button id="mostrar-bloqueo"> Bloqueo</button>
+</div>
   </div>
+
+
+
+
+  <div class="botones-ocultos" id="botones">
+    <button class="botones-estado" id="mostrar-todas">Todas</button>
+    <button class="botones-estado" id="mostrar-disponibles"> Disponibles</button>
+    <button class="botones-estado" id="mostrar-vacias-sucias"> Vacia Sucias</button>
+    <button class="botones-estado" id="mostrar-ocupada-sucias">Sucia Ocupada</button>
+    <button class="botones-estado" id="mostrar-vacia-limpieza"> Limpieza Vacia </button>
+    <button class="botones-estado" id="mostrar-ocupada-limpieza"> Limpieza Ocupada</button>
+    <button class="botones-estado" id="mostrar-reservadas"> Reservaciones</button>
+    <button class="botones-estado" id="mostrar-mantenimiento"> Mantenimiento</button>
+    <button class="botones-estado" id="mostrar-uso-casa"> Uso Casa</button>
+    <button class="botones-estado" id="mostrar-bloqueo"> Bloqueo</button>
+  </div>
+
 
   <!--rack operativo-->
   <div class="container">
@@ -140,7 +157,7 @@
       <a href="#" id="habitacion-1" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N1"> nombre </span></a>
     </div>
     <div class="btn">
-      <a href="#" id="habitacion-2" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N2"> nombre </span> </a>
+      <a href="#" id="habitacion-2" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N2"> nombre  </span> </a>
     </div>
     <div class="btn">
       <a href="#" id="habitacion-3" class="vacia-sucia">Habitación 3 <br>Vacia Sucia<br><span class="nombre" id="N3"> nombre </span></a>
@@ -262,7 +279,8 @@
     </div>
     <!--10 botones-->
     <div class="btn">
-      <a href="#" id="habitacion-41" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N41"> nombre </span></a>
+      <a href="#" id="habitacion-41" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N41"> nombre </span>
+        </a>
     </div>
     <div class="btn">
       <a href="#" id="habitacion-42" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N42"> nombre </span> </a>
