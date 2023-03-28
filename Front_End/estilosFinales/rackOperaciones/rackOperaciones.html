@@ -42,36 +42,36 @@
         <i class='bx bx-calendar' ></i>
         <span class="mx-2 reservaciones">Reservaciones</span>
         <ul id="reservaciones_submenu" class="submenu">
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 3</a></i></ul>
+          <ul><i class='bx bx-calendar'><a class="subitem">Habitación 1</a></i></ul>
+          <ul><i class='bx bx-calendar'><a class="subitem">Habitación 2</a></i></ul>
+          <ul><i class='bx bx-calendar'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
       <li href="#" class="nav-link">
         <i class='bx bxs-report' ></i>
         <span class="mx-2 reportes">Reportes</span>
         <ul id="reportes_submenu" class="submenu">
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 3</a></i></ul>
+          <ul><i class='bx bxs-report'><a class="subitem">Habitación 1</a></i></ul>
+          <ul><i class='bx bxs-report'><a class="subitem">Habitación 2</a></i></ul>
+          <ul><i class='bx bxs-report'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
       <li href="#" class="nav-link">
         <i class='bx bxs-wrench'></i>
         <span class="mx-2">Herramientas</span>
         <ul id="herramientas_submenu" class="submenu">
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 3</a></i></ul>
+          <ul><i class='bx bxs-wrench'><a class="subitem">Habitación 1</a></i></ul>
+          <ul><i class='bx bxs-wrench'><a class="subitem">Habitación 2</a></i></ul>
+          <ul><i class='bx bxs-wrench'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
       <li href="#" class="nav-link">
         <i class="bx bx-user-check"></i>
         <span class="mx-2">Restaurante</span>
         <ul id="restaurante_submenu" class="submenu">
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 3</a></i></ul>
+          <ul><i class='bx bx-user-check'><a class="subitem">Habitación 1</a></i></ul>
+          <ul><i class='bx bx-user-check'><a class="subitem">Habitación 2</a></i></ul>
+          <ul><i class='bx bx-user-check'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
 
@@ -79,9 +79,9 @@
         <i class='bx bx-coin'></i>
         <span class="mx-2">Otros</span>
         <ul id="otros_submenu" class="submenu">
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
-          <ul><i class='bx bx-bed'><a class="subitem">Habitación 3</a></i></ul>
+          <ul><i class='bx bx-coin'><a class="subitem">Habitación 1</a></i></ul>
+          <ul><i class='bx bx-coin'><a class="subitem">Habitación 2</a></i></ul>
+          <ul><i class='bx bx-coin'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
       <li href="#" class="nav-link">
@@ -114,10 +114,11 @@
   <!-- Main Wrapper -->
   <div class="p-1 my-container active-cont">
     <!-- Top Nav -->
-    <nav class="navbar top-navbar navbar-light bg-light px-5"></nav>
+    <nav class="navbar top-navbar navbar-light bg-light px-5" ></nav>
     <!--Final Top Nav -->
     <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
     
+
 <div class="botones-ocultos" id="botones">
     <button id="mostrar-todas">Todas</button>
     <button id="mostrar-disponibles"> Disponibles</button>
@@ -132,6 +133,7 @@
     <button id="mostrar-bloqueo"> Bloqueo</button>
 </div>
   </div>
+  
 
 
 
@@ -151,7 +153,7 @@
 
 
   <!--rack operativo-->
-  <div class="container">
+  <div class="container" id="contenido-boton">
     <!--10 botones-->
     <div class="btn">
       <a href="#" id="habitacion-1" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N1"> nombre </span></a>

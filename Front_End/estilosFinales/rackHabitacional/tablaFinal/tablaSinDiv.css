@@ -5,16 +5,29 @@
 
 
 *{
-  font-size: 17px;
-  font-family: Arial, Helvetica, sans-serif
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
+.table {
+  table-layout: auto;
+}
+
+#tablaTotal{
+  border: 1px solid #201bb6;
+  /*6a67ef*/
+}
 
   .table td,
   .table th {
-    padding: 5px !important;
+    /*adaptaciones para ajustar de 3 a X dias adaptando el % de ancho de entre 70 a 85%*/
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  /*opcion 2 adaptaciones para 2 a 3 dias
+  padding: 5px !important;
     align-items: center;
-    min-width: 220px;
+    min-width: 220px;*/
 
   }
 
@@ -50,7 +63,7 @@
   thead th {
     position: sticky;
     top: 0;
-    z-index: 1020;
+    z-index: 1040;
     text-align: center;
 
   }
@@ -80,7 +93,9 @@
   .cal-thead {
     top: 0px;
     background-color: #ecf2ff;
-    
+    position: sticky;
+    z-index: 1010;
+
   }
   
   .cal-viewmonth {
@@ -88,6 +103,7 @@
     background-color: #080808;
     width: 150px;
     height: 50px;
+
     
   }
   .cal-toprow {
@@ -109,7 +125,6 @@
     height: 80px;
     box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
     text-align: center;
-    
   }
   
   .cal-tbody .cal-userinfo {
@@ -121,7 +136,7 @@
     letter-spacing: 0.03em;
     background: #ecf2ff;
     padding: 0.3em;
-    border: 1px solid #807979;
+
   }
   
   .cal-usersheader {
@@ -177,14 +192,16 @@
     border-left-style: solid;
     font-size: 14px;
     position: relative;
-    min-width: 30%;
+    min-width: 9em;
+    /*
+    min-width: 20%;*/
   }
 
   .task--mantenimiento {
     border-left-color: #fdb44d;
     background: #ffdaa2;
     margin-top: 15px;
-    width: 200px;
+    min-width: 200px;
     color: #fa7705  ;
 
   }
@@ -192,6 +209,7 @@
   .task--mantenimiento:hover{
     background-color: #fdb44d;
     color: #fff;
+    border-left-color: #ffdaa2;
   }
 
 
@@ -276,6 +294,8 @@
     background: #3b0286;
     align-self: end;
     color: #FFF;
+    align-self: end;
+    
   }
   .task--reserva-pendiente-pago:hover{
     background-color: #66089c;
@@ -325,4 +345,7 @@
     border-radius: 4px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     z-index: 2;
+
   }
+
+

@@ -158,10 +158,6 @@ span {
   
 }
 
-
-
-
-
 .container .btn {
 	position: relative;
 	top: 0;
@@ -170,10 +166,10 @@ span {
 	height: 100px;
 	margin: 10px;
 
-
 }
 
 .container .btn a {
+  font-size: 14px;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -191,10 +187,7 @@ span {
   text-align: end;
 }
 
-a:hover {
 
-  color: black;
-}
 
 .bloqueo{
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
@@ -266,9 +259,8 @@ border-left: 7px solid #4d03ae;
 
 .container .btn:hover a {
     transform: translateY(-5px);
-    transition: 0.7s ease-out;
-    color: #ffffff;
-    
+    transition: 0.2s ease-out;
+    color: #f78929;
 }
 .container .btn a::before {
 	content: "";
@@ -321,7 +313,46 @@ border-left: 7px solid #4d03ae;
     width: 170px;
     height: 100px;
 
-  
-  
+  }
+}
+
+/* Para pantallas de tamaño grande, entre 1281px y 1600px */
+@media (min-width: 1281px) and (max-width: 1600px) {
+  .container {
+    grid-template-columns: repeat(7, minmax(200px, 1fr));
+    grid-gap: 5px;
+    margin: 25px;
+  }
+  .container .btn {
+    position: relative;
+    width: 170px;
+    height: 100px;
+  }
+}
+
+/* Para pantallas de tamaño grande, entre 1281px y 100px */
+@media (min-width: 1601px) and (max-width: 1800px) {
+  .container {
+    grid-template-columns: repeat(8, minmax(200px, 1fr));
+    grid-gap: 5px;
+    margin: 25px;
+  }
+  .container .btn {
+    position: relative;
+    width: 170px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 1801px) {
+  .container {
+    grid-template-columns: repeat(9, minmax(200px, 1fr));
+    grid-gap: 5px;
+    margin: 25px;
+  }
+  .container .btn {
+    position: relative;
+    width: 170px;
+    height: 100px;
   }
 }

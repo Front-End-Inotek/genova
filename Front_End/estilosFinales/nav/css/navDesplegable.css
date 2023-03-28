@@ -7,12 +7,15 @@ body {
 a{
   text-decoration: none;
   cursor: pointer;
-}
 
+}
 
 a:hover{
-  color: #ecf2ff47;
+  color: inherit;
 }
+
+
+
 span{
   cursor: pointer;
 }
@@ -213,8 +216,8 @@ span{
   }
 }
 
-/* Para pantallas de tamaño grande, entre 992px y 1199.98px */
-@media (min-width: 992px) and (max-width: 1280px) {
+/* Para pantallas de tamaño grande, entre 992px y 1980px */
+@media (min-width: 992px) and (max-width: 1825px) {
   .side-navbar {
     margin-left: -40%;
     width: 40%;
@@ -242,8 +245,10 @@ span{
 }
 
 
+
+
 /* Para pantallas de tamaño extra grande */
-@media (min-width: 2001px) {
+@media (min-width: 2082px)  {
   .side-navbar {
     margin-left: -23%;
     width: 23%;
