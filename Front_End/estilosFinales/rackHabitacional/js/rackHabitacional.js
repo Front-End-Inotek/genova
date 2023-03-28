@@ -10,16 +10,19 @@ botonMostrar.addEventListener("click", function() {
 });
 
 
- // Obtener el elemento de sección por ID
- var sectionElement = document.querySelector(".task");
 
- // Agregar un controlador de eventos de clic al elemento de sección
- sectionElement.addEventListener("click", function() {
-   // Mostrar una alerta SweetAlert con información
+ function mostrarInformacion() {
+
    swal({
      title: "Información",
-     text: "Informacon del Huesped",
+     text: "Informacion del Huesped",
      icon: "info",
      button: "OK",
    });
- });
+ };
+
+ const tasks = document.querySelectorAll(".task");
+
+ tasks.forEach(task => {
+  task.addEventListener("click", mostrarInformacion);
+});
