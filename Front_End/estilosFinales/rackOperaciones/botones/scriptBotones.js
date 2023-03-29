@@ -41,16 +41,16 @@ var botonMostrarTodasLasHabitaciones = document.getElementById('mostrar-todas');
 agregarEventoDeMostrarHabitaciones(botonMostrarTodasLasHabitaciones, '');
 
 var botonMostrarReservadasPagadas = document.getElementById('mostrar-disponibles');
-<<<<<<<< HEAD:js/scriptBotones.js
+
 agregarEventoDeMostrarHabitaciones(botonMostrarReservadasPagadas, '.disponible-limpiaVisible');
-========
+
 botonMostrarReservadasPagadas.addEventListener('click', function() {
   mostrarHabitaciones('.disponible-limpiaVisible', botonMostrarTodasLasHabitaciones);
 });
->>>>>>>> f54b30910099b9891f984f7c6290cd188bdbb759:Front_End/estilosFinales/rackOperaciones/botones/scriptBotones.js
+
 
 var botonMostrarVaciasSucias = document.getElementById('mostrar-vacias-sucias');
-<<<<<<<< HEAD:js/scriptBotones.js
+
 agregarEventoDeMostrarHabitaciones(botonMostrarVaciasSucias, '.vacia-suciaVisible');
 
 var botonMostrarReservadasPagadasSucias = document.getElementById('mostrar-ocupada-sucias');
@@ -73,7 +73,7 @@ agregarEventoDeMostrarHabitaciones(botonMostrarMantenimiento, '.mantenimientoVis
 
 var botonMostrarUsoCasa = document.getElementById('mostrar-uso-casa');
 agregarEventoDeMostrarHabitaciones(botonMostrarUsoCasa, '.usoCasaVisible');
-========
+
 botonMostrarVaciasSucias.addEventListener('click', function() {
   mostrarHabitaciones('.vacia-suciaVisible', botonMostrarTodasLasHabitaciones);
 });
@@ -125,7 +125,7 @@ var botonMostrarReservadasPagadas = document.getElementById('mostrar-bloqueo');
 botonMostrarReservadasPagadas.addEventListener('click', function() {
   mostrarHabitaciones('.bloqueoVisible', botonMostrarTodasLasHabitaciones);
 });
->>>>>>>> f54b30910099b9891f984f7c6290cd188bdbb759:Front_End/estilosFinales/rackOperaciones/botones/scriptBotones.js
+
 
 var botonMostrarBloqueo = document.getElementById('mostrar-bloqueo');
 agregarEventoDeMostrarHabitaciones(botonMostrarBloqueo, '.bloqueoVisible');
