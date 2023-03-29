@@ -51,7 +51,7 @@ class Informacion extends ConexionMYSql
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);
     //se recibe la consulta y se convierte a arreglo
-    echo'<div class="container" id="contenido-boton" >';
+    echo ' <div class="container" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {
         $total_faltante= 0.0;
@@ -97,6 +97,7 @@ class Informacion extends ConexionMYSql
         }
 
         if($fila['tipo']>0){
+
             echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
             switch($estado) {
                 case "Disponible":
@@ -176,7 +177,7 @@ class Informacion extends ConexionMYSql
         echo '</div>';
         }
     }
-    echo '</div>';
+    echo ' </div>';
     }
 }
 ?>
