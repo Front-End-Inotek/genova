@@ -35,6 +35,7 @@ botonMostrarTodasLasHabitaciones.addEventListener('click', function() {
 
 });
 
+
 // Muestra habitaciones disponibles
 var botonMostrarReservadasPagadas = document.getElementById('mostrar-disponibles');
 botonMostrarReservadasPagadas.addEventListener('click', function() {
@@ -95,7 +96,6 @@ botonMostrarReservadasPagadas.addEventListener('click', function() {
   mostrarHabitaciones('.bloqueoVisible', botonMostrarTodasLasHabitaciones);
 });
 
-
 //botones de estado para ocultarlos o mostrarlos
 function toggleBotones() {
   var botones = document.getElementById("botones");
@@ -107,4 +107,51 @@ function toggleBotones() {
       botones.classList.add("botones-mostrados");
   }
 }
+
+/*********************************/
+/*variante de la funcion de arriba*/
+/****/
+
+/*
+function agregarEventoDeMostrarHabitaciones(boton, selector) {
+  boton.onclick = function() {
+    mostrarHabitaciones(selector, botonMostrarTodasLasHabitaciones);
+  };
+
+}
+
+var botonMostrarTodasLasHabitaciones = document.getElementById('mostrar-todas');
+agregarEventoDeMostrarHabitaciones(botonMostrarTodasLasHabitaciones, '');
+
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-disponibles');
+agregarEventoDeMostrarHabitaciones(botonMostrarReservadasPagadas, '.disponible-limpiaVisible');
+
+var botonMostrarVaciasSucias = document.getElementById('mostrar-vacias-sucias');
+agregarEventoDeMostrarHabitaciones(botonMostrarVaciasSucias, '.vacia-suciaVisible');
+
+var botonMostrarReservadasPagadasSucias = document.getElementById('mostrar-ocupada-sucias');
+agregarEventoDeMostrarHabitaciones(botonMostrarReservadasPagadasSucias, '.sucia-ocupadaVisible');
+
+var botonMostrarVaciasLimpieza = document.getElementById('mostrar-vacia-limpieza');
+agregarEventoDeMostrarHabitaciones(botonMostrarVaciasLimpieza, '.vacia-limpiaVisible');
+
+var botonMostrarOcupadasLimpieza = document.getElementById('mostrar-ocupada-limpieza');
+agregarEventoDeMostrarHabitaciones(botonMostrarOcupadasLimpieza, '.ocupada-limpiezaVisible');
+
+var botonMostrarReservasPendientes = document.getElementById('mostrar-reservada-pendiente');
+agregarEventoDeMostrarHabitaciones(botonMostrarReservasPendientes, '.reserva-pendienteVisible');
+
+var botonMostrarReservasPagadas = document.getElementById('mostrar-reservada-pagada');
+agregarEventoDeMostrarHabitaciones(botonMostrarReservasPagadas, '.reserva-pagadaVisible');
+
+var botonMostrarMantenimiento = document.getElementById('mostrar-mantenimiento');
+agregarEventoDeMostrarHabitaciones(botonMostrarMantenimiento, '.mantenimientoVisible');
+
+var botonMostrarUsoCasa = document.getElementById('mostrar-uso-casa');
+agregarEventoDeMostrarHabitaciones(botonMostrarUsoCasa, '.usoCasaVisible');
+
+var botonMostrarBloqueo = document.getElementById('mostrar-bloqueo');
+agregarEventoDeMostrarHabitaciones(botonMostrarBloqueo, '.bloqueoVisible');
+
+*/
 

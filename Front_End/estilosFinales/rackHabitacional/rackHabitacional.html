@@ -7,36 +7,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rack Habitacional</title>
   <!-- bootstrap 5  -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!--iconos-->
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
   <!--css-->
-  <link rel="stylesheet" href="/Front_End/estilosFinales/rackHabitacional/style/rackHabitacional.css">
-  <link rel="stylesheet" href="/Front_End/estilosFinales/nav/css/navDesplegable.css">
+  <link rel="stylesheet" href="./style/rackHabitacional.css">
+  <link rel="stylesheet" href="../nav/css/navDesplegable.css">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <!----------------------->
 <!-- Side-Nav -->
 <!----------------------->
 <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
-  <ul class="nav flex-column text-white w-100">
+  <ul class="nav flex-column text-white w-100 ">
     <div class="informacion">
-      <a href="#" class="nav-link h3 text-white my-2">
+      <a href="#" class="nav-link h3 text-align text-white my-2 ">
         <img src="" alt="logo">
         <h3>Marca Titulo<br><br></h6>
       </a>
     </div>
-    <li id="#" class="nav-link">
+    <li id="#" class="nav-link text-white">
       <i class='bx bx-bed'></i>
-      <span class="mx-2 habitaciones">Habitaciones</span>
-      <ul id="habitaciones_submenu" class="submenu">
+      <span class="mx-2 habitaciones text-white">Habitaciones</span>
+      <ul id="habitaciones_submenu" class="submenu text-white">
         <ul><i class='bx bx-bed'><a class="subitem">Habitación 1</a></i></ul>
         <ul><i class='bx bx-bed'><a class="subitem">Habitación 2</a></i></ul>
         <ul><i class='bx bx-bed'><a class="subitem">Habitación 3</a></i></ul>
       </ul>
     </li>
-    <li href="#" class="nav-link">
+    <li href="#" class="nav-link text-white">
       <i class='bx bx-calendar'></i>
       <span class="mx-2 reservaciones">Reservaciones</span>
       <ul id="reservaciones_submenu" class="submenu">
@@ -45,7 +44,7 @@
         <ul><i class='bx bx-calendar'><a class="subitem">Habitación 3</a></i></ul>
       </ul>
     </li>
-    <li href="#" class="nav-link">
+    <li href="#" class="nav-link text-white">
       <i class='bx bxs-report'></i>
       <span class="mx-2 reportes">Reportes</span>
       <ul id="reportes_submenu" class="submenu">
@@ -54,7 +53,7 @@
         <ul><i class='bx bxs-report'><a class="subitem">Habitación 3</a></i></ul>
       </ul>
     </li>
-    <li href="#" class="nav-link">
+    <li href="#" class="nav-link text-white">
       <i class='bx bxs-wrench'></i>
       <span class="mx-2">Herramientas</span>
       <ul id="herramientas_submenu" class="submenu">
@@ -63,7 +62,7 @@
         <ul><i class='bx bxs-wrench'><a class="subitem">Habitación 3</a></i></ul>
       </ul>
     </li>
-    <li href="#" class="nav-link">
+    <li href="#" class="nav-link text-white">
       <i class="bx bx-user-check"></i>
       <span class="mx-2">Restaurante</span>
       <ul id="restaurante_submenu" class="submenu">
@@ -73,7 +72,7 @@
       </ul>
     </li>
 
-    <li href="#" class="nav-link">
+    <li href="#" class="nav-link text-white">
       <i class='bx bx-coin'></i>
       <span class="mx-2">Otros</span>
       <ul id="otros_submenu" class="submenu">
@@ -82,11 +81,11 @@
         <ul><i class='bx bx-coin'><a class="subitem">Habitación 3</a></i></ul>
       </ul>
     </li>
-    <li href="#" class="nav-link">
+    <li href="#" class="nav-link text-white">
       <i class='bx bxs-user'></i>
       <span class="mx-2">Desarrollo</span>
     </li>
-    <li href="#" class="nav-link">
+    <li href="#" class="nav-link text-white">
       <i class='bx bx-exit'></i>
       <span class="mx-2">Salir</span>
     </li>
@@ -173,27 +172,26 @@
             </tr>
 
           </thead>
-          <tbody class="cal-tbody">
+          <tbody class="cal-tbody text-wrap">
 
             <tr id="u1">
               <td class="cal-userinfo">
                 Habitacion #1
               </td>
               <!---colspan para agregar 2 o mas estados a una misma celda-->
-              <td class="celda" data-date="1/7/2020" colspan="4">
-                <!---agregar un div task-container para agregar 2 estados en un mismo dia y con colspan alargar el restante 
-                    el numero de dias de su reservacion-->
-                <div class="task-container">
-                  <section class="task task--limpieza-vacia">Limpieza Vacia</section>
-                  <section class="task task--reserva-pendiente-pago ajuste">Reserva pendiente de pago</section>
-                  <section class="task task task--mantenimiento ajuste-2dias">Mantenimiento</section>
+              <td class="celda" data-date="1/7/2020" colspan="3">
+                <div class="task-container text-wrap"><!---agregar un div task-container para agregar 2 o mas estados en un mismo dia y con colspan alargar
+                     el restante el numero de dias de su reservacion-->
+                  <section class="task task--limpieza-vacia " onclick="mostrarInformacion()">Limpieza Vacia Limpieza Vacia</section>
+                  <section class="task task--reserva-pendiente-pago ajuste" onclick="mostrarInformacion()">Reserva pendiente de pago pendiente de pago</section>
+                  <section class="task task--reserva-pendiente-pago ajuste" onclick="mostrarInformacion()">Reserva pendiente de pago pendiente de pago</section>
                 </div>
               </td>
               <td class="celdaCompleta" data-date="2/7/2020">
                 <section class="task task--vacia-sucia" title="aqui mas informacion">Vacia sucia</section>
               </td>
               <td class="celdaCompleta" data-date="3/7/2020">
-                <section class="task task--limpieza-ocupada">Limpieza Ocupada</section>
+                <section class="task task--limpieza-ocupada">Limpieza Ocupada </section>
               </td>
               <td class="celdaCompleta" data-date="4/7/2020">
                 <section class="task task--vacia-sucia" onclick="mostrarInformacion()">Vacia sucia</section>
@@ -309,8 +307,8 @@
       </div>
     </div>
   </div>
-  <script src="/Front_End/estilosFinales/nav/js/navDesplegable.js"></script>
-  <script src="/Front_End/estilosFinales/rackHabitacional/js/rackHabitacional.js"></script>
+  <script src="./js/rackHabitacional.js"></script>
+  <script src="../nav/js/navDesplegable.js"></script>
   </body>
 
 </html>
