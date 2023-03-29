@@ -210,7 +210,12 @@
 		$comentario="Mostrar las reservaciones";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		//se recibe la consulta y se convierte a arreglo
-		echo '<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+		echo '
+		<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
+		<br>
+		<br>
+
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
 		<table class="table table-bordered table-hover">
 		  <thead>
 			<tr class="table-primary-encabezado text-center">

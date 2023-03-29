@@ -334,7 +334,7 @@
       // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huesped($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
         echo '<div class="row">
-              <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huesped('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control-lg" autofocus="autofocus"/></div> 
+              <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huesped('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control-lg" /></div> 
         </div><br>';
         $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";
         //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY id DESC LIMIT 15";
@@ -351,7 +351,7 @@
               <th>Apellido</th>
               <th>Direccion</th>
               <th>Ciudad</th>
-              <th>Estado</th>
+              <th>Estafghfdo</th>
               <th>Codigo Postal</th>
               <th>Telefono</th>
               <th>Correo</th>

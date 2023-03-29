@@ -86,6 +86,26 @@ function cargar_area_trabajo(){
     setTimeout('cargar_area_trabajo()',3000);//5500
 }
 
+    function pregunta_salir(){
+    swal({
+        title: "Estas deacuerdo en cerrar la sesion?",
+        text: "Podras iniciar sesion siempre que quieras y tus credenciales sean correctas!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            swal("Tu sesion esta a punto de cerrar!", "Visit te desea un excelente día!", "success");
+            setTimeout(function(){
+                salirsession();
+            }, 3000);
+        } else {
+            swal("Tu sesion sigue activo!", "!", "success");
+        }
+        });
+    }
+
 // Salida automatica cuando terminan credenciales
 function salida_automatica(){
     salirsession();

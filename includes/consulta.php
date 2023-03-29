@@ -13,7 +13,6 @@
           echo "Error: " . mysqli_connect_error() . $comentario;
       	exit();
       }
-     
       // Some Query
       if(!($query 	= mysqli_query($con, $sentencia))){
         printf("Mensaje de Error: %s\n",mysqli_error($con));

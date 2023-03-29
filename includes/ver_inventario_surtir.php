@@ -9,7 +9,7 @@
           
           <div class="row">
             <div class="col-sm-2">
-              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_surtir_inventario()" class="color_black form-control form-control" autofocus="autofocus"/>
+              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_surtir_inventario()" class="color_black form-control form-control"/>
             </div>
             <div class="col-sm-2">
               <div class="form-group">

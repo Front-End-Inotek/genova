@@ -41,16 +41,9 @@ var botonMostrarTodasLasHabitaciones = document.getElementById('mostrar-todas');
 agregarEventoDeMostrarHabitaciones(botonMostrarTodasLasHabitaciones, '');
 
 var botonMostrarReservadasPagadas = document.getElementById('mostrar-disponibles');
-<<<<<<<< HEAD:js/scriptBotones.js
 agregarEventoDeMostrarHabitaciones(botonMostrarReservadasPagadas, '.disponible-limpiaVisible');
-========
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.disponible-limpiaVisible', botonMostrarTodasLasHabitaciones);
-});
->>>>>>>> f54b30910099b9891f984f7c6290cd188bdbb759:Front_End/estilosFinales/rackOperaciones/botones/scriptBotones.js
 
 var botonMostrarVaciasSucias = document.getElementById('mostrar-vacias-sucias');
-<<<<<<<< HEAD:js/scriptBotones.js
 agregarEventoDeMostrarHabitaciones(botonMostrarVaciasSucias, '.vacia-suciaVisible');
 
 var botonMostrarReservadasPagadasSucias = document.getElementById('mostrar-ocupada-sucias');
@@ -73,59 +66,6 @@ agregarEventoDeMostrarHabitaciones(botonMostrarMantenimiento, '.mantenimientoVis
 
 var botonMostrarUsoCasa = document.getElementById('mostrar-uso-casa');
 agregarEventoDeMostrarHabitaciones(botonMostrarUsoCasa, '.usoCasaVisible');
-========
-botonMostrarVaciasSucias.addEventListener('click', function() {
-  mostrarHabitaciones('.vacia-suciaVisible', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones sucias ocupadas
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-ocupada-sucias');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.sucia-ocupadaVisible', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones vacias en limpieza
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-vacia-limpieza');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.vacia-limpiaVisible', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones ocupadas en limpieza
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-ocupada-limpieza');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.ocupada-limpiezaVisible', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones reservadas y pagadas
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-reservada-pendiente');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.reserva-pendienteVisible', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones reservadas y pendientes de pago
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-reservada-pagada');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.reserva-pagadaVisible', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones en mantenimiento
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-mantenimiento');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.mantenimientoVisible', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones en Uso por Casa
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-uso-casa');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.usoCasaVisible', botonMostrarTodasLasHabitaciones);
-});
-
-// Muestra habitaciones en Bloqueo
-var botonMostrarReservadasPagadas = document.getElementById('mostrar-bloqueo');
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.bloqueoVisible', botonMostrarTodasLasHabitaciones);
-});
->>>>>>>> f54b30910099b9891f984f7c6290cd188bdbb759:Front_End/estilosFinales/rackOperaciones/botones/scriptBotones.js
 
 var botonMostrarBloqueo = document.getElementById('mostrar-bloqueo');
 agregarEventoDeMostrarHabitaciones(botonMostrarBloqueo, '.bloqueoVisible');
