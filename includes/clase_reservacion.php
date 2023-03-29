@@ -1006,7 +1006,7 @@
 		  //se recibe la consulta y se convierte a arreglo
 		  echo ' 
 			<div class="table-responsive" id="tabla_reservacion">';
-			$this->datos_por_dia($inicio_dia);
+			$this->datos_por_dia($inicio_dia,$a_buscar);
   
 			echo '<table class="table table-bordered table-hover">
 			  <thead>
