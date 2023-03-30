@@ -22,7 +22,7 @@
     <!----------------------->
         <!-- Side-Nav -->
     <!----------------------->
-<div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+<div class="side-navbar d-flex justify-content-between flex-wrap flex-column" id="sidebar">
     <ul class="nav flex-column text-white w-100">
       <div class="informacion">
       <a href="#" class="nav-link h3 text-white my-2">
@@ -127,6 +127,7 @@
     <button class="botones-estado" id="mostrar-disponibles"> Disponibles</button>
     <button class="botones-estado" id="mostrar-vacias-sucias"> Vacia Sucias</button>
     <button class="botones-estado" id="mostrar-ocupada-sucias">Sucia Ocupada</button>
+    <button class="botones-estado" id="mostrar-ocupadas"> Ocupadas</button>
     <button class="botones-estado" id="mostrar-vacia-limpieza"> Limpieza Vacia </button>
     <button class="botones-estado" id="mostrar-ocupada-limpieza"> Limpieza Ocupada</button>
     <button class="botones-estado" id="mostrar-reservada-pagada"> Reservacion pagada</button>
@@ -172,7 +173,7 @@
       <a href="#" class="usoCasaVisible" id="habitacion-10" >Habitación 10 <br> Uso Casa<br><span class="nombre" id="N10"> nombre </span></a>
     </div>
     <div class="btn ocupado">
-      <a href="#" class="usoCasaVisible" id="habitacion-10" >Habitación 11 <br> Ocupado<br><span class="nombre" id="N10"> nombre </span></a>
+      <a href="#" class="ocupadaVisible" id="habitacion-10" >Habitación 11 <br> Ocupado<br><span class="nombre" id="N10"> nombre </span></a>
     </div>
 <!--
    
@@ -215,22 +216,23 @@
 
     </div>
     <footer>
-      <div class="margen_inf_pie   ">
+      <div class="margen_inf_pie">
         <div class="card">
           <div class="card-header">
             <div class="row">
-              <div class="col-xs-6 col-sm-4 col-md-2">Total Ocupadas: '.$ocupadas.'</div>
-              <div class="col-xs-6 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
-              <div class="col-xs-6 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
-              <div class="col-xs-6 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
-              <div class="col-xs-6 col-sm-4 col-md-2">Total Cargos: $'.$total_cargos.'</div>
-              <div class="col-xs-6 col-sm-4 col-md-2">Total Abonos: $'.$total_abonos.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Ocupadas: '.$ocupadas.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Cargos: $'.$total_cargos.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Abonos: $'.$total_abonos.'</div>
             </div>
           </div>
         </div>
       </div>
 
     </footer>
+    
   <script src="/Front_End/estilosFinales/nav/js/navDesplegable.js"></script>
   <script src="/Front_End/estilosFinales/rackOperaciones/botones/scriptBotones.js"></script>
 </body>

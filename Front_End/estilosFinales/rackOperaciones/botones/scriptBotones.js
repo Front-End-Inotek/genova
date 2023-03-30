@@ -84,6 +84,12 @@ botonMostrarReservadasPagadas.addEventListener('click', function() {
   mostrarHabitaciones('.sucia-ocupadaVisible', botonMostrarTodasLasHabitaciones);
 });
 
+// Muestra habitaciones sucias ocupadas
+var botonMostrarReservadasPagadas = document.getElementById('mostrar-ocupadas');
+botonMostrarReservadasPagadas.addEventListener('click', function() {
+  mostrarHabitaciones('.ocupadaVisible', botonMostrarTodasLasHabitaciones);
+});
+
 // Muestra habitaciones vacias en limpieza
 var botonMostrarReservadasPagadas = document.getElementById('mostrar-vacia-limpieza');
 botonMostrarReservadasPagadas.addEventListener('click', function() {
