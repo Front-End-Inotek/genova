@@ -14,7 +14,26 @@ a {
   color: #fff;
 }
 
+span {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+#habitacion-1[title] {
+  color: red;
+  font-size: 14px;
+}
+
+
 /*tabla de estados de filtro*/
+
+
+.titulo-filtro{
+  position: fixed;
+  top: 10px;
+  color: #3f51b5;
+}
+
 .botones-ocultos {
   display: none;
 }
@@ -33,6 +52,7 @@ a {
   row-gap: 10px;
 }
 
+
 #mostrar-vacias-sucias {
   width: 150px;
   background-color: #bff1bf81;
@@ -41,6 +61,7 @@ a {
   border-right: none;
   border-top: none;
   color: #057410e8;
+  min-height: 50px;
 }
 
 #mostrar-reservada-pendiente {
@@ -51,6 +72,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 
 #mostrar-reservada-pagada {
@@ -61,6 +83,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 
 #mostrar-disponibles {
@@ -71,6 +94,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 #mostrar-ocupada-sucias {
   width: 150px;
@@ -80,6 +104,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 #mostrar-ocupadas {
   width: 150px;
@@ -89,6 +114,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 #mostrar-vacia-limpieza {
   width: 150px;
@@ -98,6 +124,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 
 #mostrar-ocupada-limpieza {
@@ -108,6 +135,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 
 #mostrar-mantenimiento {
@@ -118,6 +146,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 
 #mostrar-uso-casa {
@@ -129,6 +158,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 #mostrar-bloqueo {
   width: 150px;
@@ -139,6 +169,7 @@ a {
   border-bottom: none;
   border-right: none;
   border-top: none;
+  min-height: 50px;
 }
 
 #mostrar-todas {
@@ -147,12 +178,10 @@ a {
   color: #ecf2ff;
   border: none;
   display: none;
+  min-height: 50px;
 }
 
-span {
-  display: inline-block;
-  margin-left: 5px;
-}
+
 
 /***************************/
 /***rack operaciones***/
@@ -165,52 +194,32 @@ span {
   margin: 20px;
 }
 
-.container .btn {
-  top: 0;
-  left: 0;
-  margin: 10px;
-  margin-top: 30px;
-  position: absolute;
-
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  letter-spacing: 1px;
-  text-decoration: none;
-  overflow: hidden;
-  font-weight: 400px;
-  z-index: 1;
-  border-radius: 2px;
-  text-align: end;
-}
 
 .container .btn {
   font-size: 14px;
-  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 10px;
   letter-spacing: 1px;
   text-decoration: none;
   overflow: hidden;
-  font-weight: 400px;
   z-index: 1;
   border-radius: 2px;
   text-align: end;
+  margin-top: 30px;
 }
 
 .bloqueo {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-
   background-color: #333;
   color: #fff;
   border-left: 7px solid #0b0b0b;
+
+    display: inline-block;
+    height: auto;
+
 }
 
 .usoCasa {
@@ -285,6 +294,7 @@ span {
   width: 10%;
   height: 100%;
   transition: 0.5s;
+  font-size: large;
 }
 
 .container .btn a {
@@ -317,6 +327,9 @@ footer {
     position: relative;
     width: 140px;
     height: 70px;
+  }
+  .informacion{
+    margin-top: 70px;
   }
 }
 /* para pantallas más pequeñas que 768px */
