@@ -22,14 +22,14 @@
     <!----------------------->
         <!-- Side-Nav -->
     <!----------------------->
-<div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+<div class="side-navbar d-flex justify-content-between flex-wrap flex-column" id="sidebar">
     <ul class="nav flex-column text-white w-100">
       <div class="informacion">
       <a href="#" class="nav-link h3 text-white my-2">
         <img src="" alt="logo">
         <h3>Marca Titulo<br><br></h6>
       </a></div>
-      <li id="#" class="nav-link">
+      <li id="#" class="nav-link text-white">
         <i class='bx bx-bed'></i>
         <span class="mx-2 habitaciones">Habitaciones</span>
         <ul id="habitaciones_submenu" class="submenu">
@@ -38,7 +38,7 @@
           <ul><i class='bx bx-bed'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
-      <li href="#" class="nav-link">
+      <li href="#" class="nav-link text-white">
         <i class='bx bx-calendar' ></i>
         <span class="mx-2 reservaciones">Reservaciones</span>
         <ul id="reservaciones_submenu" class="submenu">
@@ -47,7 +47,7 @@
           <ul><i class='bx bx-calendar'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
-      <li href="#" class="nav-link">
+      <li href="#" class="nav-link text-white">
         <i class='bx bxs-report' ></i>
         <span class="mx-2 reportes">Reportes</span>
         <ul id="reportes_submenu" class="submenu">
@@ -56,7 +56,7 @@
           <ul><i class='bx bxs-report'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
-      <li href="#" class="nav-link">
+      <li href="#" class="nav-link text-white">
         <i class='bx bxs-wrench'></i>
         <span class="mx-2">Herramientas</span>
         <ul id="herramientas_submenu" class="submenu">
@@ -65,7 +65,7 @@
           <ul><i class='bx bxs-wrench'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
-      <li href="#" class="nav-link">
+      <li href="#" class="nav-link text-white">
         <i class="bx bx-user-check"></i>
         <span class="mx-2">Restaurante</span>
         <ul id="restaurante_submenu" class="submenu">
@@ -75,7 +75,7 @@
         </ul>
       </li>
 
-      <li href="#" class="nav-link">
+      <li href="#" class="nav-link text-white">
         <i class='bx bx-coin'></i>
         <span class="mx-2">Otros</span>
         <ul id="otros_submenu" class="submenu">
@@ -84,11 +84,11 @@
           <ul><i class='bx bx-coin'><a class="subitem">Habitación 3</a></i></ul>
         </ul>
       </li>
-      <li href="#" class="nav-link">
+      <li href="#" class="nav-link text-white">
         <i class='bx bxs-user' ></i>
         <span class="mx-2">Desarrollo</span>
       </li>
-      <li href="#" class="nav-link">
+      <li href="#" class="nav-link text-white">
         <i class='bx bx-exit'></i>
         <span class="mx-2">Salir</span>
       </li>
@@ -122,10 +122,13 @@
     
   </div>
 
+<!---filtro de cards de estado---->
   <div class="botones-ocultos" id="botones">
+    <h3 class="titulo-filtro">Filtrar por:</h3>
     <button class="botones-estado" id="mostrar-todas">Todas</button>
     <button class="botones-estado" id="mostrar-disponibles"> Disponibles</button>
-    <button class="botones-estado" id="mostrar-vacias-sucias"> Vacia Sucias</button>
+    <button class="botones-estado" id="mostrar-ocupadas"> Ocupadas</button>
+    <button class="botones-estado" id="mostrar-vacias-sucias">Sucia Vacia </button>
     <button class="botones-estado" id="mostrar-ocupada-sucias">Sucia Ocupada</button>
     <button class="botones-estado" id="mostrar-vacia-limpieza"> Limpieza Vacia </button>
     <button class="botones-estado" id="mostrar-ocupada-limpieza"> Limpieza Ocupada</button>
@@ -140,11 +143,10 @@
   <!--rack operativo-->
   <div class="container" id="contenido-boton">
     <!--10 botones-->
-    <div class="btn bloqueo">
-      <a href="#" class="bloqueoVisible" id="habitacion-1" >Habitación 1 bloqueo <br><span class="nombre" id="N1"> nombre </span></a>
+    <div class="btn bloqueo" title="informacion adicional">
+      <a href="#" class="bloqueoVisible" id="habitacion-1">Habitación 1 bloqueo<br><span class="nombre" id="N1"> nombre </span></a>
     </div>
     <div class="btn sucia-ocupada">
-      
       <a href="#" class="sucia-ocupadaVisible" id="habitacion-2">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N2"> nombre  </span> </a>
     </div>
     <div class="btn vacia-sucia">
@@ -172,58 +174,25 @@
       <a href="#" class="usoCasaVisible" id="habitacion-10" >Habitación 10 <br> Uso Casa<br><span class="nombre" id="N10"> nombre </span></a>
     </div>
     <div class="btn ocupado">
-      <a href="#" class="usoCasaVisible" id="habitacion-10" >Habitación 11 <br> Ocupado<br><span class="nombre" id="N10"> nombre </span></a>
+      <a href="#" class="ocupadaVisible" id="habitacion-10" >Habitación 11 <br> Ocupado<br><span class="nombre" id="N10"> nombre </span></a>
     </div>
-<!--
-   
+</div>
 
-    <div class="btn">
-      <a href="#" id="habitacion-40" class="usoCasa">Habitación 10 <br> Uso Casa<br><span class="nombre" id="N40"> nombre </span></a>
-    </div>
+
+
+
+<!---footer--->
     
-    <div class="btn">
-      <a href="#" id="habitacion-41" class="bloqueo">Habitación 1 bloqueo <br><span class="nombre" id="N41"> nombre </span>
-        </a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-42" class="sucia-ocupada">Habitación 2<br>Sucia ocupada<br><span class="nombre" id="N42"> nombre </span> </a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-43" class="vacia-sucia">Habitación 3 <br>Vacia Sucia<br><span class="nombre" id="N43"> nombre </span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-44" class="disponible-limpia">Habitación 4 Disponible<br><span class="nombre" id="N44"> nombre </span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-45" class="vacia-limpia">Habitacion 5 <br> vacia limpia<br><span class="nombre" id="N45"> nombre </span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-46" class="ocupada-limpieza">Habitacion 6 Limpieza Ocupada<br><span class="nombre" id="N46"> nombre </span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-47" class="reserva-pagada">Habitacion 7 Reserva pagada<br><span class="nombre" id="N47"> nombre </span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-48" class="reserva-pendiente">Habitacion 8 resv. pendiente de pago<br><span class="nombre" id="N48"> nombre </span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-49" class="mantenimiento">Habitacion 9 mantenimiento<br><span class="nombre" id="N49"> nombre </span></a>
-    </div>
-    <div class="btn">
-      <a href="#" id="habitacion-50" class="usoCasa">Habitación 10 <br> Uso Casa<br><span class="nombre" id="N50"> nombre </span></a>
-    </div>-->
-
-    </div>
     <footer>
-      <div class="margen_inf_pie   ">
+      <div class="margen_inf_pie">
         <div class="card">
           <div class="card-header">
             <div class="row">
-              <div class="col-xs-3 col-sm-4 col-md-2">Total Ocupadas: '.$ocupadas.'</div>
-              <div class="col-xs-3 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
-              <div class="col-xs-3 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
-              <div class="col-xs-3 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
-              <div class="col-xs-3 col-sm-4 col-md-2">Total Cargos: $'.$total_cargos.'</div>
+              <div class="col-xs-6 col-sm-4 col-md-2">Total Ocupadas: '.$ocupadas.'</div>
+              <div class="col-xs-6 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
+              <div class="col-xs-6 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
+              <div class="col-xs-6 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
+              <div class="col-xs-6 col-sm-4 col-md-2">Total Cargos: $'.$total_cargos.'</div>
               <div class="col-xs-6 col-sm-4 col-md-2">Total Abonos: $'.$total_abonos.'</div>
             </div>
           </div>
@@ -231,6 +200,7 @@
       </div>
 
     </footer>
+    
   <script src="/Front_End/estilosFinales/nav/js/navDesplegable.js"></script>
   <script src="/Front_End/estilosFinales/rackOperaciones/botones/scriptBotones.js"></script>
 </body>
