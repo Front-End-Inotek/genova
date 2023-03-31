@@ -15,9 +15,8 @@
 		<div class="side-navbar d-flex justify-content-between flex-wrap flex-column" id="sidebar">
 		<ul class="nav flex-column text-white w-100">
 		<div class="informacion">
-		<a href="inicio.php" class="nav-link h3 text-white my-2">
+		<a href="inicio.php" class="nav-link text-white my-2">
 			<img src="images/InotekLogotipo.png" alt="logo" width="200" height="200" ">
-			<h3><br><br></h6>
 		</a>
 		<div class="texto-check"><p>Cambiar a rack Habitacion</p></div>
         <div class="form-check form-switch ocultar">

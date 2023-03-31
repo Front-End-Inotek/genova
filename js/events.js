@@ -3141,10 +3141,24 @@ function switch_rack(){
         closeNav();
     }else{
 
+        //location.href = 'inicio.php';
+        var id=localStorage.getItem("id");
+        var token=localStorage.getItem("tocken");
+        if(id==null){
+            document.location.href='index.php';
+        }else{
+            id=parseInt(id);
+            if(id>0){
                 $(".menu").load("includes/menu.php?id="+id+"&token="+token);
                 $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
                 $("#pie").load("includes/pie.php?id="+id);
                 cargar_area_trabajo();
+            }
+            else{
+                document.location.href='index.php';
+            }
+        }
+
     }
 }
 
