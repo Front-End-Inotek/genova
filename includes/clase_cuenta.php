@@ -503,6 +503,7 @@
         $total_abonos= $this->saber_total_abonos($usuario_id);
         $total_cargos= number_format($total_cargos, 2);
         $total_abonos= number_format($total_abonos, 2);
+
         echo '
         <div class="containerFooter">
         <div class="margen_inf_pie">

@@ -1,6 +1,7 @@
 <?php
 include_once('consulta.php');
 date_default_timezone_set('America/Mexico_City');
+setlocale(LC_ALL, "es_ES");
 
 class RackHabitacional extends ConexionMYSql{
 function mostrar($id){
@@ -43,18 +44,89 @@ echo '
             $fecha_final = date('Y-m-d', strtotime('+32 days')); // Obtiene la fecha actual más 32 días en formato YYYY-MM-DD
             $fecha = $fecha_actual;
             $contador = 0;
-            
-                    while ($fecha <= $fecha_final) {
-            
-                    echo "<th class='cal-dia'>" . date('l', strtotime($fecha)) ."". date('j', strtotime($fecha)) . "</th>";
-            
-                    $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));
-                    $contador++;
-            
-                    if ($contador > 32) {
-                        break;
-                    }
-                    }
+            $yesterday =  date('j', strtotime('-1 day'));
+
+            $dia = date('N', strtotime($fecha));
+
+            $diaanterior = date('N', strtotime('-1 day'));
+
+            switch ($diaanterior) {
+                case 1:
+                    echo "<th class='cal-dia'> LUNES ". $yesterday ."</th>";
+                break;
+
+                case 2:
+                    echo "<th class='cal-dia'> MARTES ". $yesterday ."</th>";
+                break;
+
+                case 3:
+                    echo "<th class='cal-dia'> MIERCOLES ". $yesterday ."</th>";
+                break;
+
+                case 4:
+                    echo "<th class='cal-dia'> JUEVES ". $yesterday ."</th>";
+                break;
+
+                case 5:
+                    echo "<th class='cal-dia'> VIERNES ". $yesterday ."</th>";
+                break;
+
+                case 6:
+                    echo "<th class='cal-dia'> SABADO ". $yesterday ."</th>";
+                break;
+
+                case 7:
+                    echo "<th class='cal-dia'> DOMINGO ". $yesterday ."</th>";
+                break;
+
+                default:
+                    # code...
+                    break;
+            }
+
+            while ($fecha <= $fecha_final) {
+            $dia = date('N', strtotime($fecha));
+            switch ($dia) {
+                case 1:
+                    echo "<th class='cal-dia'> LUNES ". date('j', strtotime($fecha)) ."</th>";
+                break;
+
+                case 2:
+                    echo "<th class='cal-dia'> MARTES ". date('j', strtotime($fecha)) ."</th>";
+                break;
+
+                case 3:
+                    echo "<th class='cal-dia'> MIERCOLES ". date('j', strtotime($fecha)) ."</th>";
+                break;
+
+                case 4:
+                    echo "<th class='cal-dia'> JUEVES ". date('j', strtotime($fecha)) ."</th>";
+                break;
+
+                case 5:
+                    echo "<th class='cal-dia'> VIERNES ". date('j', strtotime($fecha)) ."</th>";
+                break;
+
+                case 6:
+                    echo "<th class='cal-dia'> SABADO ". date('j', strtotime($fecha)) ."</th>";
+                break;
+
+                case 7:
+                    echo "<th class='cal-dia'> DOMINGO ". date('j', strtotime($fecha)) ."</th>";
+                break;
+
+                default:
+                    # code...
+                    break;
+            }
+
+            $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));
+            $contador++;
+
+            if ($contador > 31) {
+                break;
+            }
+            }
             echo'
             </tr>
         </thead>';

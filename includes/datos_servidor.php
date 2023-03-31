@@ -5,5 +5,5 @@
   $usuario_servidor="root";
   $password="123";
   $base_datos="visit";
-  //gitignore
+  //.gitignore 
 ?>

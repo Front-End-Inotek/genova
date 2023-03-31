@@ -6,6 +6,22 @@
         container.classList.toggle("active-cont");
         });*/
 
+        function switch_rack(){
+
+            var checkfactura = document.getElementById("flexSwitchCheckDefault");
+            if(checkfactura.checked == true){
+
+                console.log("rack de operaciones");
+                alert('si');
+
+            }else{
+
+                console.log("rack de habitaciones");
+                alert('si');
+
+            }
+        }
+
         function boton_menu() {
         let sidebar = document.querySelector("#sidebar");
         let container = document.querySelector(".my-container");
