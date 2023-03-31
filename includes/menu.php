@@ -183,14 +183,14 @@
 		}
 			echo '
 			</ul>
-		</li>
+		</li>';
 
 
-		<li href="" onclick="ver_rack_habitacional()" class="nav-link">
+		/*<li href="" onclick="ver_rack_habitacional()" class="nav-link">
 			<i class="bx bxs-user" ></i>
 			<span class="mx-2">Rack Habitacional</span>
-		</li>
-
+		</li>*/
+		echo '
 		<li href="#" class="nav-link">
 			<i class="bx bxs-user" ></i>
 			<span class="mx-2">Desarrollo</span>
