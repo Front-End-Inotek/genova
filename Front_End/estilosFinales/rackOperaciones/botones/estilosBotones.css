@@ -19,17 +19,13 @@ span {
   margin-left: 5px;
 }
 
-#habitacion-1[title] {
-  color: red;
-  font-size: 14px;
-}
 
 
 /*tabla de estados de filtro*/
 
 
 .titulo-filtro{
-  position: fixed;
+  position: absolute;
   top: 10px;
   color: #3f51b5;
 }
@@ -192,6 +188,7 @@ span {
   grid-template-columns: repeat(8, minmax(220px, 1fr));
   grid-gap: 10px;
   margin: 20px;
+  padding-bottom: 5.5rem;
 }
 
 
