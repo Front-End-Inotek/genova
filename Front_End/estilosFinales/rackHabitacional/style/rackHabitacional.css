@@ -17,7 +17,7 @@
   /*6a67ef*/
 }
 #cal-largo{
-  height: 750px; 
+  height: auto; 
   margin-bottom: 0; 
 }
 
@@ -40,6 +40,7 @@
     background-color: #30349f;
     color: #fff;
     padding-bottom:25px;
+    margin-top: 33px;
   }
   #btn-mes {
     font-size: 25px;
