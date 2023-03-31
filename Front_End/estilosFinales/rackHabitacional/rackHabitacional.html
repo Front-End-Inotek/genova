@@ -12,8 +12,8 @@
   <!--iconos-->
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
   <!--css-->
-  <link rel="stylesheet" href="/Front_End/estilosFinales/rackHabitacional/style/rackHabitacional.css">
-  <link rel="stylesheet" href="/Front_End/estilosFinales/nav/css/navDesplegable.css">
+  <link rel="stylesheet" href="./style/rackHabitacional.css">
+  <link rel="stylesheet" href="../nav/css/navDesplegable.css">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
     <!----------------------->
@@ -132,8 +132,6 @@
         <h3>Marzo 2023<button id="btn-mes">▾</button></h3>
       </div>
     </div>
-    
-
   </div>
 
   <!-- DISPLAY USER-->
@@ -203,9 +201,14 @@
               <td class="celdaCompleta" data-date="4/7/2020">
                 <section class="task task--vacia-sucia" onclick="mostrarInformacion()">Vacia sucia</section>
               </td>
+
               <td class="celdaCompleta" data-date="5/7/2020" data-userid="1">
-                <section class="task task--disponible-limpia">Disponible Limpia</section>
+                <div class="task task--disponible-limpia">
+                  <section class="task task--disponible-limpia" >Disponible Limpia</section>
+                </div>
+
               </td>
+
               <td class="celdaCompleta" data-date="6/7/2020" data-userid="1">
                 <section class="task task--ocupada-sucia">Ocupada Sucia </section>
               </td>
@@ -314,8 +317,8 @@
       </div>
     </div>
   </div>
-  <script src="/Front_End/estilosFinales/nav/js/navDesplegable.js"></script>
-  <script src="/Front_End/estilosFinales/rackHabitacional/js/rackHabitacional.js"></script>
+  <script src="../nav/js/navDesplegable.js"></script>
+  <script src="./js/rackHabitacional.js"></script>
   </body>
 
 </html>

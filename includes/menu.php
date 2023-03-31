@@ -16,7 +16,7 @@
 		<ul class="nav flex-column text-white w-100">
 		<div class="informacion">
 		<a href="inicio.php" class="nav-link h3 text-white my-2">
-			<img src="" alt="logo">
+			<img src="images/InotekLogotipo_1.png" alt="logo" style=" width: 200px">
 			<h3>Marca Titulo<br><br></h6>
 		</a></div>';
 
@@ -181,6 +181,10 @@
 		</li>
 
 
+		<li href="" onclick="ver_rack_habitacional()" class="nav-link">
+			<i class="bx bxs-user" ></i>
+			<span class="mx-2">Rack Habitacional</span>
+		</li>
 
 		<li href="#" class="nav-link">
 			<i class="bx bxs-user" ></i>
@@ -213,22 +217,7 @@
 			<i class="bx bxl-stack-overflow" ></i>
 		</button>
 
-	</div>
-
-	<!-- Main Wrapper -->
-	<div class="p-1 my-container active-cont">
-		<!-- Top Nav -->
-		<nav class="navbar top-navbar navbar-light bg-light px-5" ></nav>
-		<!--Final Top Nav -->
-		<!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
-		
-
-		<!-- Main Wrapper -->
-		<div class="p-1 my-container active-cont">
-		<!-- Top Nav -->
-		<nav class="navbar top-navbar navbar-light bg-light px-5" ></nav>
-		<!--Final Top Nav -->
-		<!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->';
+	</div>';
 
 		echo'
 		<div class="modal fade" id="ventanasalir">
