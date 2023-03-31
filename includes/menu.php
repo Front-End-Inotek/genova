@@ -18,7 +18,13 @@
 		<a href="inicio.php" class="nav-link h3 text-white my-2">
 			<img src="images/InotekLogotipo_1.png" alt="logo" style=" width: 200px">
 			<h3>Marca Titulo<br><br></h6>
-		</a></div>';
+		</a>
+		<div class="texto-check"><p>Cambiar a rack Habitacion</p></div>
+        <div class="form-check form-switch ocultar">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+        </div>
+		</div>';
 
 		$permisos_habitaciones=$usuario->tipo_ver+$usuario->tipo_agregar+$usuario->tarifa_ver+$usuario->tarifa_agregar+$usuario->hab_ver+$usuario->hab_agregar;
 		if($permisos_habitaciones>0){

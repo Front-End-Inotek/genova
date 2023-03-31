@@ -503,6 +503,7 @@
         $total_abonos= $this->saber_total_abonos($usuario_id);
         $total_cargos= number_format($total_cargos, 2);
         $total_abonos= number_format($total_abonos, 2);
+
         echo '
         <footer>
         <div class="margen_inf_pie">
@@ -520,6 +521,7 @@
           </div>
         </div>
         </footer>';
+
       }
       // Obtener el total de cargos del dia actual
       function saber_total_cargos($usuario_id){
