@@ -504,12 +504,12 @@
         $total_cargos= number_format($total_cargos, 2);
         $total_abonos= number_format($total_abonos, 2);
         echo '
-        <footer>
+        <div class="containerFooter">
         <div class="margen_inf_pie">
           <div class="card">
             <div class="card-header">
               <div class="row">
-              <div class="col-xs-2 col-sm-4 col-md-2">Total Ocupadas: '.$ocupadas.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Ocupadass: '.$ocupadas.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
@@ -519,7 +519,7 @@
             </div>
           </div>
         </div>
-        </footer>';
+        <div>';
       }
       // Obtener el total de cargos del dia actual
       function saber_total_cargos($usuario_id){
