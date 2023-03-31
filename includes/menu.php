@@ -16,12 +16,12 @@
 		<ul class="nav flex-column text-white w-100">
 		<div class="informacion">
 		<a href="inicio.php" class="nav-link h3 text-white my-2">
-			<img src="images/InotekLogotipo_1.png" alt="logo" style=" width: 200px">
-			<h3>Marca Titulo<br><br></h6>
+			<img src="images/InotekLogotipo.png" alt="logo" width="200" height="200" ">
+			<h3><br><br></h6>
 		</a>
 		<div class="texto-check"><p>Cambiar a rack Habitacion</p></div>
         <div class="form-check form-switch ocultar">
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="switch_rack()">
           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
         </div>
 		</div>';

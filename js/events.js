@@ -3128,6 +3128,26 @@ function ver_inventario(){
 	closeNav();
 }
 
+function switch_rack(){
+
+    var checkfactura = document.getElementById("flexSwitchCheckDefault");
+    if(checkfactura.checked == true){
+        console.log("rack de operaciones");
+        var usuario_id=localStorage.getItem("id");
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        closeNav();
+    }else{
+
+                $(".menu").load("includes/menu.php?id="+id+"&token="+token);
+                $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+                $("#pie").load("includes/pie.php?id="+id);
+                cargar_area_trabajo();
+    }
+}
+
 function ver_rack_habitacional(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
