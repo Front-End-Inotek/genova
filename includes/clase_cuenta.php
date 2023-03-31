@@ -503,20 +503,23 @@
         $total_abonos= $this->saber_total_abonos($usuario_id);
         $total_cargos= number_format($total_cargos, 2);
         $total_abonos= number_format($total_abonos, 2);
-        echo '<div class="margen_inf_pie">
+        echo '
+        <footer>
+        <div class="margen_inf_pie">
           <div class="card">
-            <div class="card-header fondo_dark">
+            <div class="card-header">
               <div class="row">
-                <div class="col-xs-6 col-sm-4 col-md-2">Total Ocupadas: '.$ocupadas.'</div>
-                <div class="col-xs-6 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
-                <div class="col-xs-6 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
-                <div class="col-xs-6 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
-                <div class="col-xs-6 col-sm-4 col-md-2">Total Cargos: $'.$total_cargos.'</div>
-                <div class="col-xs-6 col-sm-4 col-md-2">Total Abonos: $'.$total_abonos.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Ocupadas: '.$ocupadas.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Cargos: $'.$total_cargos.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Abonos: $'.$total_abonos.'</div>
               </div>
             </div>
           </div>
-        </div>';
+        </div>
+        </footer>';
       }
       // Obtener el total de cargos del dia actual
       function saber_total_cargos($usuario_id){

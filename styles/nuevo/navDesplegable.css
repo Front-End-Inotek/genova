@@ -128,7 +128,40 @@ span{
   visibility: hidden;
 }
 
-@media (max-width: 699.98px) {
+@media (max-width: 668px) { /* Agregamos un media query para dispositivos móviles */
+  .side-navbar {
+    margin-left: -53%;
+
+  }
+
+  .active-nav {
+    margin-left: -250px; /* Cambiamos el valor de margin-left a -250px para que la barra salga de la pantalla */
+  }
+
+  .active-cont {
+    margin-left: 0; /* Cambiamos el valor de margin-left a 0 para que el contenido ocupe toda la pantalla */
+    width: 50px;
+    left: 90%;
+  }
+
+  .menu-btn {
+    left: 110%; /* Cambiamos el valor de left a 90% para que los botones estén más cerca del borde */
+  }
+
+  #menu-btn-fecha {
+    left: 80%; /* Cambiamos el valor de left a 80% para que el botón de fecha esté más cerca del borde */
+  }
+
+  #menu-btn-filtrar {
+    left: 130%; /* Cambiamos el valor de left a 70% para que el botón de filtrar esté más cerca del borde */
+  }
+  #mostrar-botones{
+    left: 140%;
+  }
+}/*
+
+/* Para pantallas de tamaño pequeño, menores a 576px */
+@media (max-width: 575.98px) {
   .side-navbar {
     margin-left: -90%;
     width: 90%;
@@ -153,44 +186,13 @@ span{
   #mostrar-botones{
     left: 55%;
   }
-  .informacion{
-    margin-top: 5em;
-  }
 }
-
 
 /* Para pantallas de tamaño mediano, entre 576px y 991.98px */
-@media (min-width: 700px) and (max-width: 991.98px) {
+@media (min-width: 576px) and (max-width: 991.98px) {
   .side-navbar {
-    margin-left: -30%;
-    width: 30%;
-  }
-  .active-nav {
-    margin-left: 0;
-  }
-  .active-cont {
-    margin-left: 0;
-    width: 100%;
-    left: 0;
-  }
-  .menu-btn {
-    left: 100%;
-  }
-  #menu-btn-fecha {
-    left: 125%;
-  }
-  #menu-btn-filtrar {
-    left: 150%;
-  }
-  #mostrar-botones{
-    left: 175%;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1349.98px) {
-  .side-navbar {
-    margin-left: -30%;
-    width: 30%;
+    margin-left: -70%;
+    width: 70%;
   }
   .active-nav {
     margin-left: 0;
@@ -207,38 +209,38 @@ span{
     left: 115%;
   }
   #menu-btn-filtrar {
-    left: 130%;
+    left: 125%;
   }
   #mostrar-botones{
-    left: 145%;
+    left: 135%;
   }
 }
 
-/* Para pantallas de tamaño grande */
-@media (min-width: 1350px) and (max-width: 1825px) {
+/* Para pantallas de tamaño grande, entre 992px y 1980px */
+@media (min-width: 992px) and (max-width: 1825px) {
   .side-navbar {
-    margin-left: -20%;
-    width: 20%;
+    margin-left: -40%;
+    width: 40%;
   }
   .active-nav {
     margin-left: 0;
   }
   .active-cont {
     margin-left: 40%;
-    width: 0%;
+    width: 60%;
     left: 0;
   }
   .menu-btn {
-    left: 103%;
+    left: 101%;
   }
   #menu-btn-fecha {
-    left: 123%;
+    left: 113%;
   }
   #menu-btn-filtrar {
-    left: 143%;
+    left: 125%;
   }
   #mostrar-botones{
-  left: 163%;
+  left: 137%;
 }
 }
 

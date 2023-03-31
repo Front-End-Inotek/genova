@@ -19,7 +19,9 @@
 
             <link rel=stylesheet href="styles/nuevo/estilosBotones.css" type="text/css">
             <link rel=stylesheet href="styles/nuevo/navDesplegable.css" type="text/css">
+            <link rel=stylesheet href="styles/nuevo/rackHabitacional.css" type="text/css">
 
+            <script src="js/rackHabitacional.js"></script>
             <script src="js/navDesplegable.js"></script>
             <script src="js/scriptBotones.js"></script>
 

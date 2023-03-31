@@ -44,13 +44,14 @@ var botonMostrarReservadasPagadas = document.getElementById('mostrar-disponibles
 
 agregarEventoDeMostrarHabitaciones(botonMostrarReservadasPagadas, '.disponible-limpiaVisible');
 
-botonMostrarReservadasPagadas.addEventListener('click', function() {
-  mostrarHabitaciones('.disponible-limpiaVisible', botonMostrarTodasLasHabitaciones);
-});
+// Botón "Mostrar todas las habitaciones"
+var botonMostrarTodasLasHabitaciones = document.getElementById('mostrar-todas');
 
+botonMostrarTodasLasHabitaciones.onclick = function() {
+  mostrarTodasLasHabitaciones(botonMostrarTodasLasHabitaciones);
+};
 
 var botonMostrarVaciasSucias = document.getElementById('mostrar-vacias-sucias');
-
 agregarEventoDeMostrarHabitaciones(botonMostrarVaciasSucias, '.vacia-suciaVisible');
 
 var botonMostrarReservadasPagadasSucias = document.getElementById('mostrar-ocupada-sucias');
@@ -74,10 +75,31 @@ agregarEventoDeMostrarHabitaciones(botonMostrarMantenimiento, '.mantenimientoVis
 var botonMostrarUsoCasa = document.getElementById('mostrar-uso-casa');
 agregarEventoDeMostrarHabitaciones(botonMostrarUsoCasa, '.usoCasaVisible');
 
+var botonMostrarUsoCasa = document.getElementById('mostrar-bloqueo');
+agregarEventoDeMostrarHabitaciones(botonMostrarUsoCasa, '.bloqueoVisible');
+
+var botonMostrarUsoCasa = document.getElementById('mostrar-ocupadas');
+agregarEventoDeMostrarHabitaciones(botonMostrarUsoCasa, '.ocupadaVisible');
+
+
 botonMostrarVaciasSucias.addEventListener('click', function() {
   mostrarHabitaciones('.vacia-suciaVisible', botonMostrarTodasLasHabitaciones);
 });
 
+//botones de estado para ocultarlos o mostrarlos
+function toggleBotones() {
+  var botones = document.getElementById("botones");
+  if (botones.classList.contains("botones-mostrados")) {
+      botones.classList.remove("botones-mostrados");
+      botones.classList.add("botones-ocultos");
+  } else {
+      botones.classList.remove("botones-ocultos");
+      botones.classList.add("botones-mostrados");
+  }
+}
+
+
+/*
 // Muestra habitaciones sucias ocupadas
 var botonMostrarReservadasPagadas = document.getElementById('mostrar-ocupada-sucias');
 botonMostrarReservadasPagadas.addEventListener('click', function() {
@@ -135,21 +157,7 @@ botonMostrarReservadasPagadas.addEventListener('click', function() {
 
 var botonMostrarBloqueo = document.getElementById('mostrar-bloqueo');
 agregarEventoDeMostrarHabitaciones(botonMostrarBloqueo, '.bloqueoVisible');
-
-//botones de estado para ocultarlos o mostrarlos
-function toggleBotones() {
-  var botones = document.getElementById("botones");
-  if (botones.classList.contains("botones-mostrados")) {
-      botones.classList.remove("botones-mostrados");
-      botones.classList.add("botones-ocultos");
-  } else {
-      botones.classList.remove("botones-ocultos");
-      botones.classList.add("botones-mostrados");
-  }
-}
-
-
-
+*/
 
 /*
 // Botón "Mostrar todas las habitaciones"

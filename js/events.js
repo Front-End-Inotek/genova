@@ -3128,6 +3128,15 @@ function ver_inventario(){
 	closeNav();
 }
 
+function ver_rack_habitacional(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+	closeNav();
+}
+
 // Muestra la paginacion del inventario
 function ver_inventario_paginacion(buton,posicion){
     var usuario_id=localStorage.getItem("id");

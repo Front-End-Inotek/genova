@@ -11,12 +11,30 @@ menu_btn.addEventListener("click", () => {
 });
 
 
+
 /*************************************************************/
-/* aqui termina la funcion para desplegar y ocultar el navbar*/
+/* al hacer click en un subitem se cierra la navbar solo es***
+**** agregar la clase ocultar al elemento que se requiera ***/
 /*************************************************************/
 
 
-/*para despleglar los sub menus*/ 
+
+
+// Seleccione todos los elementos con la clase "ocultar"
+let ocultar_btns = document.querySelectorAll(".ocultar");
+
+// Agregar un evento de clic a cada elemento
+ocultar_btns.forEach(function(ocultar_btn) {
+  ocultar_btn.addEventListener("click", function() {
+    // Acción que deseas realizar
+    sidebar.classList.remove("active-nav");
+    container.classList.remove("active-cont");
+  });
+});
+
+
+
+/*para despleglar los sub menus*/
 
 // Obtener todos los elementos del menú con clase "nav-link"
 var menuItems = document.querySelectorAll(".nav-link");

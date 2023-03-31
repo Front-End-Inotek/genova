@@ -58,19 +58,19 @@ class Informacion extends ConexionMYSql
         $estado="no definido";
         switch($fila['estado']) {
             case 0:
-            $estado= "Disponible";
+            $estado= "Disponible limpia";
             $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
             $tipo_habitacion= $fila['tipo_nombre'];
             break;
 
             case 1:
-            $estado= "Ocupada";
+            $estado= "Vacia limpia";
             $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
 
             case 2:
-            $estado= "Sucia";
+            $estado= "Vacia sucia";
             $cronometro= $movimiento->saber_inicio_sucia($fila['moviemiento']);
             break;
 
@@ -80,17 +80,40 @@ class Informacion extends ConexionMYSql
             break;
 
             case 4:
-            $estado= "Mant.";
+            $estado= "Sucia ocupada";
             $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
+
             case 5:
-            $estado="Super.";
+            $estado="Ocupada limpieza";
             $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
+
             case 6:
-            $estado="Cancelada";
+            $estado="Reserva pagada";
             $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
+
+            case 7:
+            $estado= "Reserva pendiente";
+            $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
+            break;
+
+            case 8:
+            $estado= "Uso casa";
+            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
+            break;
+
+            case 9:
+            $estado="Mantenimiento";
+            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
+            break;
+
+            case 10:
+            $estado="Bloqueo";
+            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
+            break;
+
             default:
             //echo "Estado indefinido";
             break;
@@ -98,25 +121,17 @@ class Informacion extends ConexionMYSql
 
         if($fila['tipo']>0){
 
-           
-
-            echo ' <div class="btn bloqueo">
-                        <a href="#" class="bloqueoVisible" id="habitacion-1" >Habitación 1 bloqueo <br><span class="nombre" id="N1"> nombre </span></a>
-                    </div>';
-
-
-           
-            /*echo'<div class="container" id="contenido-boton" href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
+            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
             switch($estado) {
-                case "Disponible":
+                case "Disponible limpia":
                 echo'<div class="btn disponible-limpia">';
                 break;
 
-                case "Ocupada":
-                echo'<div class="btn sucia-ocupada">';
+                case "Vacia limpia":
+                echo'<div class="btn vacia-limpia">';
                 break;
 
-                case "Sucia":
+                case "Vacia sucia":
                 echo'<div class="btn vacia-sucia">';
                 break;
 
@@ -124,16 +139,32 @@ class Informacion extends ConexionMYSql
                 echo'<div class="btn ocupada-limpieza">';
                 break;
 
-                case "Mant.":
+                case "Sucia ocupada":
+                echo'<div class="btn sucia-ocupada">';
+                break;
+
+                case "Ocupada limpieza":
+                echo'<div class="btn ocupada-limpieza">';
+                break;
+
+                case "Reserva pagada":
+                echo'<div class="btn reserva-pagada">';
+                break;
+
+                case "Reserva pendiente":
+                echo'<div class="btn reserva-pendiente">';
+                break;
+
+                case "Uso casa":
+                echo'<div class="btn usoCasa">';
+                break;
+
+                case "Mantenimiento":
                 echo'<div class="btn mantenimiento">';
                 break;
 
-                case "Super.":
+                case "Bloqueo":
                 echo'<div class="btn bloqueo">';
-                break;
-
-                case "Cancelada":
-                echo'<div class="btn reserva-pendiente">';
                 break;
 
                 default:
@@ -178,7 +209,7 @@ class Informacion extends ConexionMYSql
             echo '
                 </a>
             </div>
-            </div>';*/
+            </div>';
 
         }else{
         echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
