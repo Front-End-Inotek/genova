@@ -1,27 +1,33 @@
 <?php
 include_once('consulta.php');
+
 class RackHabitacional extends ConexionMYSql{
-    function mostrar($id){
-        include_once("clase_cuenta.php");
-        include('clase_movimiento.php');
-        $cuenta= NEW Cuenta(0);
-        $movimiento= NEW movimiento(0);
-        $cronometro=0;
-        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 ORDER BY id";
-        $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
+function mostrar($id){
+include_once("clase_cuenta.php");
+include('clase_movimiento.php');
+
+$cuenta= NEW Cuenta(0);
+$movimiento= NEW movimiento(0);
+$cronometro=0;
+
+//Se utiliza la misma consulta para el rack de operaciones
+$sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 ORDER BY id";
+$comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
+$consulta= $this->realizaConsulta($sentencia,$comentario);
 
 
 echo '
 <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
 <!--tabla operativa--->
-<div class="row justify-content-center align-items-center">
-    <div style="text-align:center;">
-    <div>
-        <h3>Marzo 2023<button id="btn-mes">▾</button></h3>
+
+    <div class="row justify-content-center align-items-center">
+        <div style="text-align:center;">
+        <div>
+            <h3>Marzo 2023<button id="btn-mes">▾</button></h3>
+        </div>
+        </div>
     </div>
-    </div>
-</div>
+
 
 <!-- DISPLAY USER-->
 <div class="table-responsive">
@@ -66,9 +72,10 @@ echo '
             </tr>
         </thead>';
 
+        //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta))
         {
-
+        //Se definen los estados de las habitaciones
         $total_faltante= 0.0;
         $estado="no definido";
         switch($fila['estado']) {
@@ -133,6 +140,8 @@ echo '
             //echo "Estado indefinido";
             break;
         }
+
+        //Se añade en el cuerpo de la tabla la numeracion de las habitaciones
         if($fila['tipo']>0){
         echo'
         <tbody class="cal-tbody">
@@ -146,19 +155,73 @@ echo '
                     }
         echo'
                 </td>
-                <td class="cal-userinfo">';
-                echo'Habitación ';
-                if($fila['id']<100){
-                    echo $fila['nombre'];
-                }else{
-                    echo $fila['comentario'];
+
+                <td class="celdaCompleta">';
+                //Segunda columna que muesta los estados de las habitaciones
+                //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
+                echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
+                //Con esta estructura de control definimos los estados y los estilos correspondientes a los estados
+                switch($estado) {
+                    case "Disponible limpia":
+                    echo'<section class="task task--disponible-limpia" >';
+                    break;
+
+                    case "Vacia limpia":
+                    echo'<section class="task task--limpieza-vacia">';
+                    break;
+
+                    case "Vacia sucia":
+                    echo'<section class="task task--vacia-sucia" title="aqui mas informacion">';
+                    break;
+
+                    case "Limpieza":
+                    echo'<div class="btn ocupada-limpieza">';
+                    break;
+
+                    case "Sucia ocupada":
+                    echo'<section class="task task--ocupada-sucia">';
+                    break;
+
+                    case "Ocupada limpieza":
+                    echo'<section class="task task--limpieza-ocupada">';
+                    break;
+
+                    case "Reserva pagada":
+                    echo'<section class="task task--reserva-pagada">';
+                    break;
+
+                    case "Reserva pendiente":
+                    echo'<section class="task task--reserva-pendiente-pago ajuste">';
+                    break;
+
+                    case "Uso casa":
+                    echo'<section class="task task--uso-casa">';
+                    break;
+
+                    case "Mantenimiento":
+                    echo'<section class="task task task--mantenimiento ajuste-2dias">';
+                    break;
+
+                    case "Bloqueo":
+                    echo'<section class="task task--bloqueado">';
+                    break;
+
+                    default:
+                    //echo "Estado indefinido";
+                    break;
                 }
-        echo'
-            </td>
+
+                //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
+                echo '
+                <a> '. $estado .'<br> </a>
+                        </section>
+                    </div>
+                </td>
+
             </tr>
         </tbody>';
         }else{
-            echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
+            //echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
         }
             }
         echo'</table>
