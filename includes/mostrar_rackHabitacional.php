@@ -1,5 +1,6 @@
 <?php
 include_once('consulta.php');
+date_default_timezone_set('America/Mexico_City');
 
 class RackHabitacional extends ConexionMYSql{
 function mostrar($id){
@@ -37,38 +38,24 @@ echo '
         <table class="table table-striped table-bordered" id="tablaTotal">
         <thead class="cal-thead">
             <tr>
-            <th class="cal-viewmonth" id="changemonth"></th>
-            <th class="cal-dia" id="ayer">Miercoles 1</th>
-            <th class="cal-dia" id="hoy">Jueves 2</th>
-            <th class="cal-dia" id="dia1">Viernes 3</th>
-            <th class="cal-dia" id="dia2">Sabado 4</th>
-            <th class="cal-dia" id="dia3">Domingo 5</th>
-            <th class="cal-dia" id="dia4">Lunes 6</th>
-            <th class="cal-dia" id="dia5">Martes 7</th>
-            <th class="cal-dia" id="dia6">Miercoles 8</th>
-            <th class="cal-dia" id="dia7">Jueves 9</th>
-            <th class="cal-dia" id="dia8">Viernes 10</th>
-            <th class="cal-dia" id="dia9">Sabado 11</th>
-            <th class="cal-dia" id="dia10">Domingo 12</th>
-            <th class="cal-dia" id="dia11">Lunes 13</th>
-            <th class="cal-dia" id="dia12">Martes 14</th>
-            <th class="cal-dia" id="dia13">Miercoles 15</th>
-            <th class="cal-dia" id="dia14">Jueves 16</th>
-            <th class="cal-dia" id="dia15">Viernes 17</th>
-            <th class="cal-dia" id="dia16">Sabado 18</th>
-            <th class="cal-dia" id="dia17">Domingo 19</th>
-            <th class="cal-dia" id="dia18">Lunes 20</th>
-            <th class="cal-dia" id="dia19">Martes 21</th>
-            <th class="cal-dia" id="dia20">Miercoles 22</th>
-            <th class="cal-dia" id="dia21">Jueves 23</th>
-            <th class="cal-dia" id="dia22">Viernes 24</th>
-            <th class="cal-dia" id="dia23">Sabado 25</th>
-            <th class="cal-dia" id="dia24">Domingo 26</th>
-            <th class="cal-dia" id="dia25">Lunes 27</th>
-            <th class="cal-dia" id="dia26">Martes 28</th>
-            <th class="cal-dia" id="dia27">Miercoles 29</th>
-            <th class="cal-dia" id="dia28">Jueves 30</th>
-            <th class="cal-dia" id="dia29">Viernes 31</th>
+            <th class="cal-viewmonth" id="changemonth"></th>';
+            $fecha_actual = date('Y-m-d'); // Obtiene la fecha actual en formato YYYY-MM-DD
+            $fecha_final = date('Y-m-d', strtotime('+32 days')); // Obtiene la fecha actual más 32 días en formato YYYY-MM-DD
+            $fecha = $fecha_actual;
+            $contador = 0;
+            
+                    while ($fecha <= $fecha_final) {
+            
+                    echo "<th class='cal-dia'>" . date('l', strtotime($fecha)) ."". date('j', strtotime($fecha)) . "</th>";
+            
+                    $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));
+                    $contador++;
+            
+                    if ($contador > 32) {
+                        break;
+                    }
+                    }
+            echo'
             </tr>
         </thead>';
 
