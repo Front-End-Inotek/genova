@@ -17,8 +17,7 @@
   /*6a67ef*/
 }
 #cal-largo{
-  height: auto; 
-  margin-bottom: 0; 
+  height: 800px;
 }
 
 
@@ -30,12 +29,6 @@
     white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
-  /*opcion 2 adaptaciones para 2 a 3 dias
-  padding: 5px !important;
-    align-items: center;
-    min-width: 220px;*/
-
   }
 
   .mes{
@@ -45,7 +38,7 @@
     margin-top: 33px;
   }
 
-  .row{
+  .headTable{
     background-color: #30349f;
     margin-top: 50px;
     color: #fff;
@@ -152,7 +145,7 @@
     letter-spacing: 0.03em;
     background: #ecf2ff;
     padding: 0.3em;
-    padding-top: 1.7rem;
+    padding-top: 1.9rem;
   }
   
   .cal-usersheader {
