@@ -12,7 +12,7 @@
 			<!----------------------->
 			<!-- Side-Nav -->
 			<!----------------------->
-		<div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+		<div class="side-navbar d-flex justify-content-between flex-wrap flex-column" id="sidebar">
 		<ul class="nav flex-column text-white w-100">
 		<div class="informacion">
 		<a href="inicio.php" class="nav-link h3 text-white my-2">
@@ -32,25 +32,25 @@
 				<li id="#" onclick="sub_menu()" class="nav-link">
 				<i class="bx bx-bed"></i>
 				<span class="mx-2 habitaciones">Habitaciones</span>
-				<ul id="habitaciones_submenu" class="submenu">
+				<ul id="habitaciones_submenu" class="submenu ocultar">
 				';
 
 			$permisos_tipo=$usuario->tipo_ver+$usuario->tipo_agregar;
 			if($permisos_tipo>0){
 				echo '
-				<ul><i class="bx bx-bed"><a class="subitem" onclick="ver_tipos()">Ver tipos de habitación</a></i></ul>';
+				<ul class="contenedor-sub"><a class="subitem" onclick="ver_tipos()">Ver tipos de habitación</a></i></ul>';
 			}
 
 			$permisos_tarifa=$usuario->tarifa_ver+$usuario->tarifa_agregar;
 			if($permisos_tarifa>0){
 				echo '
-				<ul><i class="bx bx-bed"><a class="subitem" onclick="ver_tarifas()"> Ver tipos de tarifa </a></i></ul>';
+				<ul class="contenedor-sub"><a class="subitem" onclick="ver_tarifas()"> Ver tipos de tarifa </a></i></ul>';
 			}
 
 			$permisos_hab=$usuario->hab_ver+$usuario->hab_agregar;
 			if($permisos_hab>0){
 				echo '
-				<ul><i class="bx bx-bed"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones </a></i></ul>';
+				<ul class="contenedor-sub"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones </a></i></ul>';
 			}
 		}
 			echo '
@@ -69,13 +69,13 @@
 			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
 			if($permisos_reservar>0){
 			echo '
-			<ul><i class="bx bx-calendar"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>';
 			}
 
 			$permisos_huesped=$usuario->huesped_ver+$usuario->huesped_agregar;
 			if($permisos_huesped>0){
 			echo '
-			<ul><i class="bx bx-calendar"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
 			}
 		}
 			echo'
@@ -94,18 +94,18 @@
 			$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
 			if($permisos_reportes_diarios>0){
 			echo '
-			<ul><i class="bx bxs-report"><a class="subitem" onclick="ver_cargo_noche()"> Diarios </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_cargo_noche()"> Diarios </a></i></ul>';
 			}
 			$permisos_surtir=$usuario->inventario_surtir;
 			if($permisos_surtir>0){
 			echo '
-			<ul><i class="bx bxs-report"><a class="subitem" onclick="ver_surtir()"> Surtir </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_surtir()"> Surtir </a></i></ul>';
 			}
 
 			$permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
 			if($permisos_reportes_diarios>0 || $usuario->nivel==2){
 			echo'
-			<ul><i class="bx bxs-report"><a class="subitem" onclick="ver_cortes()"> Corte </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_cortes()"> Corte </a></i></ul>';
 			}
 		}
 		echo'
@@ -124,31 +124,31 @@
 			$permisos_usuario=$usuario->usuario_ver+$usuario->usuario_agregar;
 			if($permisos_usuario>0){
 			echo '
-			<ul><i class="bx bxs-wrench"><a class="subitem" onclick="ver_usuarios()"> Usuarios </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_usuarios()"> Usuarios </a></i></ul>';
 			}
 
 			$permisos_logs=$usuario->logs_ver;
 			if($permisos_logs>0){
 			echo '
-			<ul><i class="bx bxs-wrench"><a class="subitem" onclick="ver_logs()"> Logs </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_logs()"> Logs </a></i></ul>';
 			}
 
 			$permisos_forma_pago=$usuario->forma_pago_ver;
 			if($permisos_forma_pago>0){
 			echo '
-			<ul><i class="bx bxs-wrench"><a class="subitem" onclick="ver_formas_pago()"> Formas de pago </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_formas_pago()"> Formas de pago </a></i></ul>';
 			}
 
 			$permisos_cupon=$usuario->cupon_ver+$usuario->cupon_agregar;
 			if($permisos_cupon>0){
 			echo '
-			<ul><i class="bx bxs-wrench"><a class="subitem" onclick="ver_cupones()"> Cupones </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_cupones()"> Cupones </a></i></ul>';
 			}
 
 			$permisos_configuracion= $usuario->nivel;
 			if($permisos_configuracion==0){
 			echo '
-			<ul><i class="bx bxs-wrench"><a class="subitem" onclick="ver_tipos()"> Configuracion </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_tipos()"> Configuracion </a></i></ul>';
 			}
 		}
 			echo '
@@ -168,18 +168,18 @@
 			$permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->categoria_ver;
 			if($permisos_inventario>0){
 			echo '
-			<ul><i class="bx bx-user-check"><a class="subitem" onclick="ver_inventario()"> Inventario </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="ver_inventario()"> Inventario </a></i></ul>';
 			}
 
 			$permisos_surtir=$usuario->inventario_surtir;
 			if($permisos_surtir>0){
 			echo '
-			<ul><i class="bx bx-user-check"><a class="subitem" onclick="surtir_inventario()"> Surtir </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="surtir_inventario()"> Surtir </a></i></ul>';
 			}
 			$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
 			if($permisos_restaurante>0){
 			echo '
-			<ul><i class="bx bx-user-check"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
+			<ul class="contenedor-sub"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
 			}
 		}
 			echo '

@@ -18,6 +18,11 @@ span {
   display: inline-block;
   margin-left: 5px;
 }
+.contenedor-sub{
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-left: 10px;
+}
 
 
 
@@ -300,7 +305,7 @@ span {
 }
 
 /**********************footer********************/
-footer {
+.containerFooter {
   position: fixed;
   bottom: 0;
   width: 100%;
