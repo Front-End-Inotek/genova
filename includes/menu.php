@@ -16,7 +16,7 @@
 		<ul class="nav flex-column text-white w-100">
 		<div class="informacion">
 		<a href="inicio.php" class="nav-link text-white my-2">
-			<img src="images/InotekLogotipo.png" alt="logo" width="200" height="200" ">
+			<img src="images/InotekLogotipoRec.png" alt="logo" width="215" height="50" style= "margin-top: 25px; margin-bottom:10px;">
 		</a>
 		<div class="texto-check"><p>Cambiar a rack Habitacion</p></div>
         <div class="form-check form-switch ocultar">
@@ -43,13 +43,13 @@
 			$permisos_tarifa=$usuario->tarifa_ver+$usuario->tarifa_agregar;
 			if($permisos_tarifa>0){
 				echo '
-				<ul class="contenedor-sub"><a class="subitem" onclick="ver_tarifas()"> Ver tipos de tarifa </a></i></ul>';
+				<ul class="contenedor-sub"><a class="subitem" onclick="ver_tarifas()"> Ver tipos de tarifa</a></i></ul>';
 			}
 
 			$permisos_hab=$usuario->hab_ver+$usuario->hab_agregar;
 			if($permisos_hab>0){
 				echo '
-				<ul class="contenedor-sub"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones </a></i></ul>';
+				<ul class="contenedor-sub"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones</a></i></ul>';
 			}
 		}
 			echo '

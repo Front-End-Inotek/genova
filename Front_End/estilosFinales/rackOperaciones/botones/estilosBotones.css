@@ -317,7 +317,6 @@ span {
   color: #fff;
   height: auto;
 }
-
 /* Para pantallas de tamaño pequeño, menores a 576px */
 @media (max-width: 575.98px) {
   .container {

@@ -17,8 +17,11 @@
   /*6a67ef*/
 }
 #cal-largo{
-  height: 750px; 
-  margin-bottom: 0; 
+  height: 850px;
+}
+
+.my-container{
+  display: none;
 }
 
 
@@ -28,19 +31,22 @@
     white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
-  /*opcion 2 adaptaciones para 2 a 3 dias
-  padding: 5px !important;
-    align-items: center;
-    min-width: 220px;*/
-
   }
 
   .mes{
     background-color: #30349f;
     color: #fff;
     padding-bottom:25px;
+    margin-top: 33px;
   }
+
+  .headTable{
+    background-color: #30349f;
+    color: #fff;
+    padding-bottom:25px;
+    padding-top: 30px;
+  }
+
   #btn-mes {
     font-size: 25px;
     height: 20px;
@@ -128,7 +134,7 @@
   .cal-userinfo {
     height: 80px;
     box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
-
+    padding-top: 50px;
   }
   
   .cal-tbody .cal-userinfo {
@@ -140,7 +146,7 @@
     letter-spacing: 0.03em;
     background: #ecf2ff;
     padding: 0.3em;
-
+    padding-top: 1.9rem;
   }
   
   .cal-usersheader {

@@ -21,7 +21,7 @@ echo '
 <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
 <!--tabla operativa--->
 
-    <div class="row justify-content-center align-items-center">
+    <div class="headTable justify-content-center align-items-center">
         <div style="text-align:center;">
         <div>
             <h3>Marzo 2023<button id="btn-mes">▾</button></h3>
