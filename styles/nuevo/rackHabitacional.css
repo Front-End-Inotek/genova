@@ -17,10 +17,12 @@
   /*6a67ef*/
 }
 #cal-largo{
-  height: 800px;
+  height: 850px;
 }
 
-
+.my-container{
+  display: none;
+}
 
 
   .table td,
@@ -40,7 +42,6 @@
 
   .headTable{
     background-color: #30349f;
-    margin-top: 50px;
     color: #fff;
     padding-bottom:25px;
     padding-top: 30px;

@@ -7,7 +7,7 @@ body {
 a{
   text-decoration: none;
   cursor: pointer;
-
+  color: #000;
 }
 
 a:hover{
@@ -80,16 +80,18 @@ display: none;
 /*tamaño y ocultar la side nav*/
 /******************************/
 .side-navbar {
-  min-width: 250px;
+  min-width: 300px;
   height: 120%;
   position: absolute;
-  margin-left: -13%;
+  margin-left: -15.7%;
   background-color: #30349f;
   transition: 0.5s;
   font-size: large;
   z-index: 9999;
 
 }
+
+
 
 #navbarDropdown{
   color: #fff;
@@ -103,6 +105,7 @@ display: none;
   border: none;
   border-radius: 50px;
   cursor: pointer;
+  font-size: medium;
 }
 
 
@@ -179,6 +182,9 @@ display: none;
   height: 0;
   visibility: hidden;
 }
+
+
+
 
 @media (max-width: 668px) { /* Agregamos un media query para dispositivos móviles */
   .side-navbar {

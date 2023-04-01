@@ -952,7 +952,7 @@ a.topictitle:hover {
   }
   .container-fluid {
     padding-right: 15px;
-    padding-left: 15px;
+    padding-left: 0px;
     margin-right: auto;
     margin-left: auto;
    
