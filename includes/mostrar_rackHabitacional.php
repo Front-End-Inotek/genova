@@ -17,6 +17,7 @@ $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estad
 $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
 $consulta= $this->realizaConsulta($sentencia,$comentario);
 
+
 echo '
 <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
 <!--tabla operativa--->
@@ -35,7 +36,7 @@ echo '
     <div id="cal-largo">
     <div class="cal-sectionDiv">
 
-        <table class="table table-striped table-bordered" id="tablaTotal">
+        <table class="tableRack table-striped table-bordered" id="tablaTotal">
         <thead class="cal-thead">
             <tr>
             <th class="cal-viewmonth" id="changemonth"></th>';
@@ -44,7 +45,6 @@ echo '
             $fecha = $fecha_actual;
             $contador = 0;
             $yesterday =  date('j', strtotime('-1 day'));
-            $total_dias = 32;
 
             $dia = date('N', strtotime($fecha));
 
@@ -123,7 +123,7 @@ echo '
             $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));
             $contador++;
 
-            if ($contador > $total_dias) {
+            if ($contador > 31) {
                 break;
             }
             }
@@ -131,10 +131,7 @@ echo '
             </tr>
         </thead>';
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
         while ($fila = mysqli_fetch_array($consulta))
         {
         //Se definen los estados de las habitaciones
@@ -207,110 +204,17 @@ echo '
         if($fila['tipo']>0){
         echo'
         <tbody class="cal-tbody">
-            <tr><td class="cal-userinfo">
-                    Habitación ';
+            <tr id="u1">
+                <td class="cal-userinfo">';
+                    echo'Habitación ';
                     if($fila['id']<100){
                         echo $fila['nombre'];
                     }else{
                         echo $fila['comentario'];
                     }
-        echo'</td>';
+        echo'
+                </td>
 
-/////////////////////// Inicia la columna de los estados de las habitaciones
-                    if($estado == "Disponible limpia" ){
-                        echo'
-                        <td class="celdaCompleta">';
-                        //Segunda columna que muesta los estados de las habitaciones
-                        //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
-                        echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
-                        //Con esta estructura de control definimos los estados y los estilos correspondientes a los estados
-                        switch($estado) {
-                            case "Disponible limpia":
-                            echo'<section class="task task--disponible-limpia" > <a> '. $estado .'<br> </a>';
-                            break;
-
-                            default:
-                            //echo "Estado indefinido";
-                            break;
-
-                        //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
-                        echo '
-                        <a> '. $estado .'<br> </a>
-                                </section>
-                            </div>
-                        </td>';
-                    }
-
-                    }else{
-                        for ($i=0; $i < $total_dias+2; $i++) {
-                            echo'
-                            <td class="celdaCompleta">';
-                            //Segunda columna que muesta los estados de las habitaciones
-                            //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
-                            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
-                            //Con esta estructura de control definimos los estados y los estilos correspondientes a los estados
-                            switch($estado) {
-                                case "Disponible limpia":
-                                echo'<section class="task task--disponible-limpia" > <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Vacia limpia":
-                                echo'<section class="task task--limpieza-vacia"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Vacia sucia":
-                                echo'<section class="task task--vacia-sucia" title="aqui mas informacion"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Limpieza":
-                                echo'<div class="btn ocupada-limpieza"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Sucia ocupada":
-                                echo'<section class="task task--ocupada-sucia"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Ocupada limpieza":
-                                echo'<section class="task task--limpieza-ocupada"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Reserva pagada":
-                                echo'<section class="task task--reserva-pagada"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Reserva pendiente":
-                                echo'<section class="task task--reserva-pendiente-pago ajuste"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Uso casa":
-                                echo'<section class="task task--uso-casa"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Mantenimiento":
-                                echo'<section class="task task task--mantenimiento ajuste-2dias"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                case "Bloqueo":
-                                echo'<section class="task task--bloqueado"> <a> '. $estado .'<br> </a>';
-                                break;
-    
-                                default:
-                                //echo "Estado indefinido";
-                                break;
-    
-                            //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
-                            echo '
-                            <a> '. $estado .'<br> </a>
-                                    </section>
-                                </div>
-                            </td>';
-                        }
-                    }
-                    }
-
-
-
-            /*echo'
                 <td class="celdaCompleta">';
                 //Segunda columna que muesta los estados de las habitaciones
                 //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
@@ -371,14 +275,10 @@ echo '
                 <a> '. $estado .'<br> </a>
                         </section>
                     </div>
-                </td>';*/
+                </td>
 
-/////////////////////// Finaliza la columna de los estados de las habitaciones
-
-            echo '
             </tr>
         </tbody>';
-
         }else{
             //echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
         }
