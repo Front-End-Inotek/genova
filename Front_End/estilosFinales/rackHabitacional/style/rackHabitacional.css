@@ -4,9 +4,6 @@
   /* header y columnas */
 
 
-  *{
-    text-transform: uppercase;
-  }
 
 .table {
   table-layout: auto;
@@ -14,6 +11,7 @@
 
 #tablaTotal{
   border: 1px solid #c6c4fc;
+  
   /*6a67ef*/
 }
 #cal-largo{

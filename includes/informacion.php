@@ -51,7 +51,7 @@ class Informacion extends ConexionMYSql
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);
     //se recibe la consulta y se convierte a arreglo
-    echo ' <div class="container" id="contenido-boton">';
+    echo ' <div class="container containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {
         $total_faltante= 0.0;

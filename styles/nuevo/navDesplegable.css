@@ -35,7 +35,7 @@ display: none;
 
 
 .texto-check{
-  font-size: 13px;
+  font-size: 15px;
   text-align:left;
   margin-left: 10px;
   cursor:default;
@@ -46,7 +46,7 @@ display: none;
 .form-check-label {
   cursor: pointer;
   text-indent: -9999px;
-  left: 153px;
+  left: 177px;
   bottom: 35px;
   width: 40px;
   height: 15px;

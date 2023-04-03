@@ -4,11 +4,7 @@
   /* header y columnas */
 
 
-  *{
-    text-transform: uppercase;
-  }
-
-.table {
+.tableRack {
   table-layout: auto;
 }
 
@@ -24,10 +20,8 @@
   display: none;
 }
 
-
-  .table td,
-  .table th {
-    /*adaptaciones para ajustar de 3 a X dias adaptando el % de ancho de entre 70 a 85%*/
+  .tableRack td,
+  .tableRack th {
     white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -59,18 +53,18 @@
     color: #fff;
   }
 
-
-  th:first-child {
+/*modificar para que no afecte a todas*/
+  .tableRack th:first-child {
     position: sticky;
     left: 0;
     z-index: 1030;
   }
-  td:first-child {
+  .tableRack td:first-child {
     position: sticky;
     left: 0;
     z-index: 1010;
   }
-  thead th {
+  .tableRack thead th {
     position: sticky;
     top: 0;
     z-index: 1040;

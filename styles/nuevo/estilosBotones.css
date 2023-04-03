@@ -1,6 +1,4 @@
-* {
-  text-transform: uppercase;
-}
+
 body {
   margin: 0;
   height: 100vh;
@@ -47,6 +45,7 @@ span {
   grid-gap: 10px;
   row-gap: 10px;
 }
+
 
 
 #mostrar-vacias-sucias {
@@ -183,7 +182,7 @@ span {
 /***rack operaciones***/
 /***************************/
 
-.container {
+.containerRackOp {
   display: grid;
   grid-template-columns: repeat(8, minmax(220px, 1fr));
   grid-gap: 10px;
@@ -192,7 +191,7 @@ span {
 }
 
 
-.container .btn {
+.containerRackOp .btn {
   font-size: 14px;
   top: 0;
   left: 0;
@@ -238,6 +237,10 @@ span {
   border-left: 7px solid #03ae11;
 }
 
+.vacia-sucia a{
+  color: #057410e8 !important;
+}
+
 
 .disponible-limpia {
   background-color: rgba(235, 235, 235, 0.7);
@@ -245,15 +248,23 @@ span {
   border-left: 7px solid #9b9a9a;
 }
 
+.disponible-limpia a{
+  color: #000 !important;
+}
+
 .vacia-limpia {
   background-color: rgb(203, 221, 255);
-  color: #0a5eff;
+  color: #0a5eff ;
   border-left: 7px solid #0a5eff;
+}
+
+.vacia-limpia a{
+  color: #0a5eff !important;
 }
 
 .ocupada-limpieza {
   background-color: #6398fb;
-  color: #fffcfc;
+  color: #fff;
   border-left: 7px solid #052d76;
 }
 
@@ -274,17 +285,21 @@ span {
   border-left: 7px solid #fdb44d;
 }
 
+.mantenimiento a{
+  color: #ff7700 !important;
+}
+/*
 .btn .ocupado {
   background-color: #780202f8;
   color: #fff;
   border-left: 7px solid #2f010b;
-}
+}*/
 
-.container .btn:hover {
+.containerRackOp .btn:hover {
   transform: translateY(-5px);
   transition: 0.2s ease-out;
 }
-.container .btn::before {
+.containerRackOp .btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -295,43 +310,56 @@ span {
   font-size: large;
 }
 
-.container .btn  a {
-  color: #000;
+.containerRackOp .btn  a {
+  color: #fff;
   /*text-shadow:  1px 0px 0px rgb(0, 0, 0);*/
   font-weight: 400;
-
-
 }
 
 
 
 /**********************footer********************/
 
-.footer {
-  position: absolute;
+
+
+.containerFooter {
+  position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 20000;
-  margin: 0px;
-  padding: 0px;
-
+  
 }
 
-.card {
+.rowFooter{
+  position: absolute;
+  bottom: 0 ;
+  width: 100% ;
+  z-index: 20000;
+  margin-bottom: 15px;
+  font-size: medium !important;
+}
+
+
+.cardFooter {
   background-color: #30349f;
   color: #fff;
-  height: auto;
+
 }
+
+.card-header{
+  padding-bottom: 50px !important;
+}
+
 
 
 /* Para pantallas de tamaño pequeño, menores a 576px */
 @media (max-width: 575.98px) {
-  .container {
+  .containerRackOp {
     grid-template-columns: repeat(2, minmax(100px, 1fr));
     grid-gap: 5px;
     margin: 10px;
   }
-  .container .btn {
+  .containerRackOp .btn {
     position: relative;
     width: 140px;
     height: 70px;
@@ -342,12 +370,12 @@ span {
 }
 /* para pantallas más pequeñas que 768px */
 @media (max-width: 767px) {
-  .container {
+  .containerRackOp {
     grid-template-columns: repeat(2, minmax(240px, 1fr));
     grid-gap: 5px;
     margin: 10px;
   }
-  .container .btn {
+  .containerRackOp .btn {
     position: relative;
     width: 150px;
     height: 80px;
@@ -356,12 +384,12 @@ span {
 
 /* para pantallas de tamaño medio, entre 768px y 1023px */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .container {
+  .containerRackOp {
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     grid-gap: 7px;
     margin: 15px;
   }
-  .container .btn {
+  .containerRackOp .btn {
     position: relative;
     width: 170px;
     height: 100px;
@@ -369,12 +397,12 @@ span {
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-  .container {
+  .containerRackOp {
     grid-template-columns: repeat(5, minmax(200px, 1fr));
     grid-gap: 5px;
     margin: 20px;
   }
-  .container .btn {
+  .containerRackOp .btn {
     position: relative;
     width: 170px;
     height: 100px;
@@ -383,12 +411,12 @@ span {
 
 /* Para pantallas de tamaño grande, entre 1281px y 1600px */
 @media (min-width: 1281px) and (max-width: 1600px) {
-  .container {
+  .containerRackOp {
     grid-template-columns: repeat(7, minmax(200px, 1fr));
     grid-gap: 5px;
     margin: 25px;
   }
-  .container .btn {
+  .containerRackOp .btn {
     position: relative;
     width: 170px;
     height: 100px;
@@ -397,12 +425,12 @@ span {
 
 /* Para pantallas de tamaño grande, entre 1281px y 100px */
 @media (min-width: 1601px) and (max-width: 1800px) {
-  .container {
+  .containerRackOp {
     grid-template-columns: repeat(8, minmax(200px, 1fr));
     grid-gap: 5px;
     margin: 25px;
   }
-  .container .btn {
+  .containerRackOp .btn {
     position: relative;
     width: 170px;
     height: 100px;
@@ -410,12 +438,12 @@ span {
 }
 
 @media (min-width: 1801px) {
-  .container {
+  .containerRackOp {
     grid-template-columns: repeat(9, minmax(200px, 1fr));
     grid-gap: 5px;
     margin: 25px;
   }
-  .container .btn {
+  .containerRackOp .btn {
     position: relative;
     width: 170px;
     height: 100px;
