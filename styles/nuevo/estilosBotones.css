@@ -192,7 +192,7 @@ span {
 
 
 .containerRackOp .btn {
-  font-size: 14px;
+  font-size: 0.9rem;
   top: 0;
   left: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -209,9 +209,9 @@ span {
 
 .bloqueo {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-  background-color: #333;
-  color: #fff;
-  border-left: 7px solid #0b0b0b;
+  background-color: #333 !important;
+  color: #fff !important;
+  border-left: 7px solid #0b0b0b !important;
 
     display: inline-block;
     height: auto;
@@ -220,21 +220,26 @@ span {
 
 .usoCasa {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-  background-color: #05d1ca;
-  color: #fff;
-  border-left: 7px solid #05d1ca;
+  background-color: #05d1ca !important;
+  color: #fff !important;
+  border-left: 7px solid #05d1ca !important;
+}
+.ocupadoH {
+  background-color: #780202f8 !important;
+  color: #fff !important;
+  border-left: 7px solid #2f010b !important;
 }
 
 .sucia-ocupada {
-  background-color: #bb6464;
-  color: #fff;
-  border-left: 7px solid #bd0202;
+  background-color: #bb6464 !important;
+  color: #fff !important;
+  border-left: 7px solid #bd0202 !important;
 }
 
 .vacia-sucia {
-  background-color: #bff1bf81;
-  color: #057410e8;
-  border-left: 7px solid #03ae11;
+  background-color: #bff1bf81 !important;
+  color: #057410e8 !important;
+  border-left: 7px solid #03ae11 !important;
 }
 
 .vacia-sucia a{
@@ -243,9 +248,9 @@ span {
 
 
 .disponible-limpia {
-  background-color: rgba(235, 235, 235, 0.7);
-  color: #000;
-  border-left: 7px solid #9b9a9a;
+  background-color: rgba(235, 235, 235, 0.7) !important;
+  color: #000 !important;
+  border-left: 7px solid #9b9a9a !important;
 }
 
 .disponible-limpia a{
@@ -253,9 +258,9 @@ span {
 }
 
 .vacia-limpia {
-  background-color: rgb(203, 221, 255);
-  color: #0a5eff ;
-  border-left: 7px solid #0a5eff;
+  background-color: rgb(203, 221, 255) !important;
+  color: #0a5eff !important ;
+  border-left: 7px solid #0a5eff !important;
 }
 
 .vacia-limpia a{
@@ -263,26 +268,26 @@ span {
 }
 
 .ocupada-limpieza {
-  background-color: #6398fb;
-  color: #fff;
-  border-left: 7px solid #052d76;
+  background-color: #6398fb !important;
+  color: #fff !important;
+  border-left: 7px solid #052d76 !important;
 }
 
 .reserva-pagada {
-  background-color: #6b0fe3af;
-  color: #fff;
-  border-left: 7px solid #4d03ae;
+  background-color: #6b0fe3af !important;
+  color: #fff !important;
+  border-left: 7px solid #4d03ae !important;
 }
 
 .reserva-pendiente {
-  background-color: #3b0286;
-  color: #fff;
-  border-left: 7px solid #bc88ff;
+  background-color: #3b0286 !important;
+  color: #fff !important;
+  border-left: 7px solid #bc88ff !important;
 }
 .mantenimiento {
-  background-color: #ffdaa2;
-  color: #ff7700;
-  border-left: 7px solid #fdb44d;
+  background-color: #ffdaa2 !important;
+  color: #ff7700 !important;
+  border-left: 7px solid #fdb44d !important;
 }
 
 .mantenimiento a{
@@ -318,6 +323,7 @@ span {
 
 
 
+
 /**********************footer********************/
 
 
@@ -336,12 +342,13 @@ span {
   width: 100% ;
   z-index: 20000;
   margin-bottom: 15px;
-  font-size: medium !important;
+  font-size: calc(0.4rem + .6vw) !important;
 }
 
 
 .cardFooter {
-  background-color: #30349f;
+ /* background-color: #1b1d5d;*/
+background-color: #26297f;
   color: #fff;
 
 }

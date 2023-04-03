@@ -1,4 +1,4 @@
-const botonMostrar = document.getElementById("mostrar");
+/*const botonMostrar = document.getElementById("mostrar");
 const panel = document.getElementById("panel");
 
 botonMostrar.addEventListener("click", function() {
@@ -7,7 +7,20 @@ botonMostrar.addEventListener("click", function() {
   } else {
     panel.style.display = "none";
   }
-});
+});*/
+
+function togglePanel() {
+  const botonMostrar = document.getElementById("mostrar");
+  const panel = document.getElementById("panel");
+
+  botonMostrar.onclick = function() {
+    if (panel.style.display === "none") {
+      panel.style.display = "block";
+    } else {
+      panel.style.display = "none";
+    }
+  };
+}
 
 
 
