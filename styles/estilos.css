@@ -388,11 +388,11 @@ a.topictitle:hover {
   max-width: 100% !important;
   max-height: 100% !important;
   height: 100px !important;
-  text-align: center;
-  padding-top: 12px;
+  text-align: center !important;
+  padding-top: -12px;
   font-size:12px;
   border-radius: 2px;
-  margin: auto;
+
 }
 .btn-square-lg-doble{/* */
   width: 100px !important;
