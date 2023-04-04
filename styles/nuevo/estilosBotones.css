@@ -224,10 +224,24 @@ span {
   color: #fff !important;
   border-left: 7px solid #05d1ca !important;
 }
+
+.usoCasa:hover {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #21d1cb !important;
+  color: #fff !important;
+  border-left: 7px solid #079994 !important;
+}
+
 .ocupadoH {
   background-color: #780202f8 !important;
   color: #fff !important;
-  border-left: 7px solid #2f010b !important;
+  border-left: 7px solid #460211 !important;
+}
+
+.ocupadoH:hover {
+  background-color: #530214 !important;
+  color: #fff !important;
+  border-left: 7px solid  #780202f8 !important;
 }
 
 .sucia-ocupada {
@@ -236,16 +250,31 @@ span {
   border-left: 7px solid #bd0202 !important;
 }
 
+.sucia-ocupada:hover {
+  background-color: #bd0202e8 !important;
+  color: #fff !important;
+  border-left: 7px solid  #bb6464 !important;
+}
+
 .vacia-sucia {
-  background-color: #bff1bf81 !important;
+  background-color: #bff1bf9f !important;
   color: #057410e8 !important;
   border-left: 7px solid #03ae11 !important;
+}
+
+.vacia-sucia:hover {
+  background-color:  #26e036 !important;
+  color: #fff !important;
+  border-left: 7px solid #bff1bfa1 !important;
 }
 
 .vacia-sucia a{
   color: #057410e8 !important;
 }
 
+.vacia-sucia a:hover{
+  color: #fff !important;
+}
 
 .disponible-limpia {
   background-color: rgba(235, 235, 235, 0.7) !important;

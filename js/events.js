@@ -465,12 +465,12 @@ function guardar_tarifa_nueva(){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             console.log(e.target.responseText);
-            if (e.target.responseText == 'NO') {
+            if (e.target.response == "NO") {
                 $('#caja_herramientas').modal('hide');
                 ver_tarifas()
                 swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
                 return false;
-            }else if(e.target.responseText == 'NO_valido'){
+            }else if(e.target.response == 'NO_valido'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
                 swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
