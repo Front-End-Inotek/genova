@@ -261,6 +261,11 @@ span {
   color: #057410e8 !important;
   border-left: 7px solid #03ae11 !important;
 }
+.vacia-sucia:hover {
+  background-color: #35da42 !important;
+  color: #057410e8 !important;
+  border-left: 7px solid  #bff1bfd6 !important;
+}
 
 .vacia-sucia:hover {
   background-color:  #26e036 !important;
@@ -281,7 +286,11 @@ span {
   color: #000 !important;
   border-left: 7px solid #9b9a9a !important;
 }
-
+.disponible-limpia:hover {
+  background-color:  #9b9a9a !important;
+  color: #ffffff !important;
+  border-left: 7px solid rgba(235, 235, 235, 0.7) !important;
+}
 .disponible-limpia a{
   color: #000 !important;
 }
@@ -290,6 +299,12 @@ span {
   background-color: rgb(203, 221, 255) !important;
   color: #0a5eff !important ;
   border-left: 7px solid #0a5eff !important;
+}
+
+.vacia-limpia:hover {
+  background-color:  #0a60ff6d !important;
+  color: #0a5eff !important ;
+  border-left: 7px solid rgb(203, 221, 255) !important;
 }
 
 .vacia-limpia a{
@@ -302,21 +317,36 @@ span {
   border-left: 7px solid #052d76 !important;
 }
 
+.ocupada-limpieza:hover {
+  background-color:  #052d76 !important;
+  color: #fff !important;
+  border-left: 7px solid #6398fb !important;
+}
+
+
 .reserva-pagada {
   background-color: #6b0fe3af !important;
   color: #fff !important;
   border-left: 7px solid #4d03ae !important;
 }
 
+
 .reserva-pendiente {
   background-color: #3b0286 !important;
   color: #fff !important;
   border-left: 7px solid #bc88ff !important;
 }
+
 .mantenimiento {
   background-color: #ffdaa2 !important;
   color: #ff7700 !important;
   border-left: 7px solid #fdb44d !important;
+}
+
+.mantenimiento:hover {
+  background-color: #fdb44d !important;
+  color: #ff7700 !important;
+  border-left: 7px solid  #ffdaa2 !important;
 }
 
 .mantenimiento a{
