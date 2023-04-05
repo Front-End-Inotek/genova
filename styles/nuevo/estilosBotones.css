@@ -227,19 +227,10 @@ span {
   color: #fff !important;
   border-left: 7px solid #05d1ca !important;
 }
-<<<<<<< HEAD
 .usoCasa:hover{
   background-color: #05d1cac7 !important;
   color: #fff;
   box-shadow: 0 10px 14px #05d1cabe;
-=======
-
-.usoCasa:hover {
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-  background-color: #21d1cb !important;
-  color: #fff !important;
-  border-left: 7px solid #079994 !important;
->>>>>>> b5429c1116e07d28049722c2cb5b4b61aa264074
 }
 
 .ocupadoH {
@@ -391,6 +382,18 @@ span {
 .mantenimiento a{
   color: #ff7700 !important;
 }
+
+.btn-dark{
+  background-color: #21368cec !important;
+  border-color: #6398fb !important;
+  color: #fff !important;
+}
+
+.btn-dark:hover{
+  background-color: #2646c5c9 !important;
+  border-color: #84aefd !important;
+  color: #fff !important;
+}
 /*
 .btn .ocupado {
   background-color: #780202f8;
@@ -453,7 +456,7 @@ background-color: #26297f;
 
 .card-header{
   padding-bottom: 50px !important;
-  background-color: #26297f !important;
+  background-color: #3e54ac !important;
   color: #fff;
 }
 
