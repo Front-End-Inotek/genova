@@ -44,6 +44,7 @@ echo '
             $fecha_final = date('Y-m-d', strtotime('+32 days')); // Obtiene la fecha actual más 32 días en formato YYYY-MM-DD
             $fecha = $fecha_actual;
             $contador = 0;
+            $total_dias = 32;
             $yesterday =  date('j', strtotime('-1 day'));
 
             $dia = date('N', strtotime($fecha));
@@ -123,7 +124,7 @@ echo '
             $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));
             $contador++;
 
-            if ($contador > 31) {
+            if ($contador > $total_dias) {
                 break;
             }
             }
@@ -213,70 +214,92 @@ echo '
                         echo $fila['comentario'];
                     }
         echo'
-                </td>
+                </td>';
 
-                <td class="celdaCompleta">';
-                //Segunda columna que muesta los estados de las habitaciones
-                //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
-                echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
-                //Con esta estructura de control definimos los estados y los estilos correspondientes a los estados
-                switch($estado) {
-                    case "Disponible limpia":
-                    echo'<section class="task task--disponible-limpia" >';
-                    break;
+        if ($estado == "Disponible limpia") {
+            echo'
+            <td class="celdaCompleta">
+                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
+                    <section class="task task--disponible-limpia" >
+                        <a> '. $estado .'<br> </a>
+                    </td>
+                </div>
+            </section>';
+        }
 
-                    case "Vacia limpia":
-                    echo'<section class="task task--limpieza-vacia">';
-                    break;
+        for ($i=0; $i < $total_dias+2; $i++) {
+            # code...
+            echo'
+            <td class="celdaCompleta">';
+            //Segunda columna que muesta los estados de las habitaciones
+            //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
+            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
+            //Con esta estructura de control definimos los estados y los estilos correspondientes a los estados
+            switch($estado) {
+                case "Vacia limpia":
+                echo'<section class="task task--limpieza-vacia">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Vacia sucia":
-                    echo'<section class="task task--vacia-sucia" title="aqui mas informacion">';
-                    break;
+                case "Vacia sucia":
+                echo'<section class="task task--vacia-sucia" title="aqui mas informacion">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Limpieza":
-                    echo'<div class="btn ocupada-limpieza">';
-                    break;
+                case "Limpieza":
+                echo'<div class="btn ocupada-limpieza">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Sucia ocupada":
-                    echo'<section class="task task--ocupada-sucia">';
-                    break;
+                case "Sucia ocupada":
+                echo'<section class="task task--ocupada-sucia">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Ocupada limpieza":
-                    echo'<section class="task task--limpieza-ocupada">';
-                    break;
+                case "Ocupada limpieza":
+                echo'<section class="task task--limpieza-ocupada">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Reserva pagada":
-                    echo'<section class="task task--reserva-pagada">';
-                    break;
+                case "Reserva pagada":
+                echo'<section class="task task--reserva-pagada">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Reserva pendiente":
-                    echo'<section class="task task--reserva-pendiente-pago ajuste">';
-                    break;
+                case "Reserva pendiente":
+                echo'<section class="task task--reserva-pendiente-pago ajuste">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Uso casa":
-                    echo'<section class="task task--uso-casa">';
-                    break;
+                case "Uso casa":
+                echo'<section class="task task--uso-casa">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Mantenimiento":
-                    echo'<section class="task task task--mantenimiento ajuste-2dias">';
-                    break;
+                case "Mantenimiento":
+                echo'<section class="task task task--mantenimiento ajuste-2dias">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    case "Bloqueo":
-                    echo'<section class="task task--bloqueado">';
-                    break;
+                case "Bloqueo":
+                echo'<section class="task task--bloqueado">
+                <a> '. $estado .'<br> </a>';
+                break;
 
-                    default:
-                    //echo "Estado indefinido";
-                    break;
-                }
+                default:
+                //echo "Estado indefinido";
+                break;
+            }
 
-                //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
+            //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
+            echo '
+                    </section>
+                </div>
+            </td>';
+        }
+
+
                 echo '
-                <a> '. $estado .'<br> </a>
-                        </section>
-                    </div>
-                </td>
-
             </tr>
         </tbody>';
         }else{

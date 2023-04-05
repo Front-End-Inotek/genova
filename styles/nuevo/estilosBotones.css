@@ -227,16 +227,31 @@ span {
   color: #fff !important;
   border-left: 7px solid #05d1ca !important;
 }
+<<<<<<< HEAD
 .usoCasa:hover{
   background-color: #05d1cac7 !important;
   color: #fff;
   box-shadow: 0 10px 14px #05d1cabe;
+=======
+
+.usoCasa:hover {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #21d1cb !important;
+  color: #fff !important;
+  border-left: 7px solid #079994 !important;
+>>>>>>> b5429c1116e07d28049722c2cb5b4b61aa264074
 }
 
 .ocupadoH {
   background-color: #780202f8 !important;
   color: #fff !important;
-  border-left: 7px solid #2f010b !important;
+  border-left: 7px solid #460211 !important;
+}
+
+.ocupadoH:hover {
+  background-color: #530214 !important;
+  color: #fff !important;
+  border-left: 7px solid  #780202f8 !important;
 }
 .ocupadoH:hover{
   background-color: #9f0404fb !important;
@@ -255,8 +270,14 @@ span {
   box-shadow: 0 10px 14px #bd020289;
 }
 
+.sucia-ocupada:hover {
+  background-color: #bd0202e8 !important;
+  color: #fff !important;
+  border-left: 7px solid  #bb6464 !important;
+}
+
 .vacia-sucia {
-  background-color: #bff1bf81 !important;
+  background-color: #bff1bf9f !important;
   color: #057410e8 !important;
   border-left: 7px solid #03ae11 !important;
 }
@@ -267,10 +288,19 @@ span {
   box-shadow: 0 10px 14px #35da43cb;
 }
 
+.vacia-sucia:hover {
+  background-color:  #26e036 !important;
+  color: #fff !important;
+  border-left: 7px solid #bff1bfa1 !important;
+}
+
 .vacia-sucia a{
   color: #057410e8 !important;
 }
 
+.vacia-sucia a:hover{
+  color: #fff !important;
+}
 
 .disponible-limpia {
   background-color: rgba(235, 235, 235, 0.7) !important;

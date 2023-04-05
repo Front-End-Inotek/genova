@@ -465,7 +465,7 @@ function guardar_tarifa_nueva(){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             console.log(e.target.responseText);
-            if (e.target.responseText == 'NO') {
+            if (e.target.responseText == "NO") {
                 $('#caja_herramientas').modal('hide');
                 ver_tarifas()
                 swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
