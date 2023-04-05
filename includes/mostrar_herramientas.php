@@ -17,26 +17,49 @@ function show_info($hab_id,$estado){
 		echo '<h3>';
 			switch ($estado) {
 			case 0:
-				echo 'Disponible';
+				echo 'Disponible limpia';
 			break;
+
 			case 1:
+				echo 'Vacia limpia';
+			break;
+
+			case 2:
+				echo 'Vacia sucia';
+			break;
+
+			case 3:
 				echo 'Ocupado';
 			break;
-			case 2:
-				echo 'Sucia';
-			break;
-			case 3:
-				echo 'Limpiando';
-			break;
+
 			case 4:
-				echo 'En Mantenimiento';
+				echo 'Sucia ocupada';
 			break;
+
 			case 5:
-				echo 'En Supervision';
+				echo 'Ocupada limpieza';
 			break;
+
 			case 6:
-				echo 'Cancelada';
+				echo 'Reserva pagada';
 			break;
+
+			case 7:
+				echo 'Reserva pendiente';
+			break;
+
+			case 8:
+				echo 'Uso casa';
+			break;
+
+			case 9:
+				echo 'Mantenimiento';
+			break;
+
+			case 10:
+				echo 'Bloqueo';
+			break;
+
 			default:
 				//echo "Estado indefinido";
 			break; 
@@ -74,13 +97,13 @@ switch ($_GET['estado']) {
 	case 0:
 	if($user->nivel<=2 && $conf->hospedaje ==1){
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada disponible-limpia btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="supervision ocupadoH  btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
 				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
 			echo '</div>';
 			echo '<div>';
-			echo 'Disponible /Asiersegnar';
+			echo 'Asignar / ocupar';
 			echo '</div>';
 			echo '</br>';
 		echo '</div>';
@@ -88,7 +111,7 @@ switch ($_GET['estado']) {
 	}
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
-		$nuevo_estado= 3;
+		$nuevo_estado= 1;
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
 		echo '<div class="limpieza ocupada-limpieza btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
 			echo '</br>';
@@ -104,87 +127,9 @@ switch ($_GET['estado']) {
 	}
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
-		$nuevo_estado= 4;
+		$nuevo_estado= 8;
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="limpieza vacia-sucia btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
-			echo '</br>';
-			echo '<div>';
-				//echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
-			echo '</div>';
-			echo '<div>';
-			echo 'vacia sucia';
-			echo '</div>';
-			echo '</br>';
-		echo '</div>';
-		echo '</div>';
-	}
-
-	if($user->nivel<=2 && $conf->hospedaje ==1){
-		$nuevo_estado= 5;
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="supervision ocupadoH  btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
-			echo '</br>';
-			echo '<div>';
-				//echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
-			echo '</div>';
-			echo '<div>';
-			echo 'Supervision /ocupado';
-			echo '</div>';
-			echo '</br>';
-		echo '</div>';
-		echo '</div>';
-	}
-
-	if($user->nivel<=2 && $conf->hospedaje ==1){
-		$nuevo_estado= 0;
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="cancelada sucia-ocupada btn-square-lg" onclick="hab_modal_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
-			echo '</br>';
-			echo '<div>';
-				//echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
-			echo '</div>';
-			echo '<div>';
-			echo 'Sucia Ocupada / cancelar';
-			echo '</div>';
-			echo '</br>';
-		echo '</div>';
-		echo '</div>';
-	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	if($user->nivel<=2 && $conf->hospedaje ==1){
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada reserva-pagada btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
-			echo '</br>';
-			echo '<div>';
-				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
-			echo '</div>';
-			echo '<div>';
-			echo 'Reserva pagada';
-			echo '</div>';
-			echo '</br>';
-		echo '</div>';
-		echo '</div>';
-	}
-
-	if($user->nivel<=2 && $conf->hospedaje ==1){
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada reserva-pendiente btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
-			echo '</br>';
-			echo '<div>';
-				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
-			echo '</div>';
-			echo '<div>';
-			echo 'Reserva pendiente';
-			echo '</div>';
-			echo '</br>';
-		echo '</div>';
-		echo '</div>';
-	}
-
-	if($user->nivel<=2 && $conf->hospedaje ==1){
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada usoCasa uso btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="ocupada usoCasa uso btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
 				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -198,14 +143,14 @@ switch ($_GET['estado']) {
 	}
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
+		$nuevo_estado= 9;
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada mantenimiento btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="ocupada mantenimiento btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
-				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
 			echo '</div>';
 			echo '<div>';
-			echo 'Mantenimien';
+			echo 'Mantenimieno';
 			echo '</div>';
 			echo '</br>';
 		echo '</div>';
@@ -213,11 +158,11 @@ switch ($_GET['estado']) {
 	}
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
+		$nuevo_estado= 10;
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada bloqueo btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="ocupada bloqueo btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
-				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
 			echo '</div>';
 			echo '<div>';
 			echo 'Bloqueo';
