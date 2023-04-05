@@ -113,7 +113,7 @@
 
 /* Color para tabla de encabezado info **/
 .table-info-encabezado{
-  color: #4e6c50;
+  color: #fff;
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
@@ -141,6 +141,7 @@
  .blanco{
   padding: 25px 25px;
   background-color: #f1f5ff;
+  margin-top: 35px;
 }
 
 /* Contenedor con fondo blanco y margen */
@@ -384,15 +385,14 @@ a.topictitle:hover {
   font-size:12px;
 }
 .btn-square-lg{/* */
-  width: 100px !important;
-  max-width: 100% !important;
+  width: 150px !important;
+  max-width: 113% !important;
   max-height: 100% !important;
-  height: 100px !important;
+  height: 80px !important;
   text-align: center !important;
   padding-top: -12px;
-  font-size:12px;
+  font-size:1rem !important;
   border-radius: 2px;
-
 }
 .btn-square-lg-doble{/* */
   width: 100px !important;
@@ -768,6 +768,9 @@ a.topictitle:hover {
   background-color:#00587A;
   background-color:#045170;
 }*/
+#area_trabajo_menu{
+  
+}
 .texto_doble{
   font-size: 2 em;
 }

@@ -25,6 +25,7 @@
     white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
   }
 
   .mes{
@@ -64,7 +65,7 @@
     left: 0;
     z-index: 1010;
   }
-  .tableRack thead th {
+  .tableRack thead > th {
     position: sticky;
     top: 0;
     z-index: 1040;
@@ -241,6 +242,18 @@
     box-shadow: 0 10px 14px #bd020289;
   }
 
+  .task--ocupadoH{
+    background-color: #780202f8;
+    color: #fff;
+    border-left: 7px solid #2f010b;
+  }
+
+  .task-ocupadoH:hover{
+    background-color: #780202f8;
+    color: #fff;
+    border-left: 7px solid #2f010b;
+  }
+
 
   .task--vacia-sucia {
     border-left-color: #03ae11;
@@ -373,9 +386,4 @@
 
   .ajuste-2dias {
     width: calc(150% - 1px); /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
-  }
-
-  /*
-  .task--vacia-sucia{
-    flex-grow: 1;
   }

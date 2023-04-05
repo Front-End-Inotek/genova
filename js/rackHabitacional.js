@@ -39,3 +39,26 @@ function togglePanel() {
  tasks.forEach(task => {
   task.addEventListener("click", mostrarInformacion);
 });
+
+
+
+
+/************************************* */
+/* ***funcion par sobre poner ***********/
+/***** 2 estados en un mismo dia*********
+/* ****tener en cuenta el tamaño con span */
+function estadoMismoDia() {
+  const taskContainer = document.querySelector('.task-container');
+  const ajusteElementos = taskContainer.querySelectorAll('.ajuste');
+
+  ajusteElementos.forEach((ajusteElement) => {
+    const siguiente = ajusteElement.siguiente;
+    const anterior = ajusteElement.anterior;
+
+    if (siguiente && anterior &&
+        siguiente.classList.contains('ajuste') &&
+        anterior.classList.contains('ajuste')) {
+      ajusteElement.classList.add('ajuste-2dias');
+    }
+  });
+}

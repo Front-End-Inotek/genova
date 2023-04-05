@@ -218,22 +218,41 @@ span {
 
 }
 
+.bloqueo:hover{
+  box-shadow: 0 10px 14px #090909be;
+}
 .usoCasa {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #05d1ca !important;
   color: #fff !important;
   border-left: 7px solid #05d1ca !important;
 }
+.usoCasa:hover{
+  background-color: #05d1cac7 !important;
+  color: #fff;
+  box-shadow: 0 10px 14px #05d1cabe;
+}
+
 .ocupadoH {
   background-color: #780202f8 !important;
   color: #fff !important;
   border-left: 7px solid #2f010b !important;
+}
+.ocupadoH:hover{
+  background-color: #9f0404fb !important;
+  color: #fff;
+  box-shadow: 0 10px 14px #780202af;
 }
 
 .sucia-ocupada {
   background-color: #bb6464 !important;
   color: #fff !important;
   border-left: 7px solid #bd0202 !important;
+}
+.sucia-ocupada:hover{
+  background-color: #bd4949 !important;
+  color: #fff;
+  box-shadow: 0 10px 14px #bd020289;
 }
 
 .vacia-sucia {
@@ -242,9 +261,10 @@ span {
   border-left: 7px solid #03ae11 !important;
 }
 .vacia-sucia:hover {
-  background-color: #35da42 !important;
+  background-color: #6bf376 !important;
   color: #057410e8 !important;
   border-left: 7px solid  #bff1bfd6 !important;
+  box-shadow: 0 10px 14px #35da43cb;
 }
 
 .vacia-sucia a{
@@ -258,10 +278,12 @@ span {
   border-left: 7px solid #9b9a9a !important;
 }
 .disponible-limpia:hover {
-  background-color:  #9b9a9a !important;
-  color: #ffffff !important;
-  border-left: 7px solid rgba(235, 235, 235, 0.7) !important;
+  background-color: rgba(235, 235, 235, 0.7) !important;
+  color: #000 !important;
+  border-left: 7px solid #9b9a9a !important;
+  box-shadow: 0 10px 14px #9b9a9a;
 }
+
 .disponible-limpia a{
   color: #000 !important;
 }
@@ -276,6 +298,7 @@ span {
   background-color:  #0a60ff6d !important;
   color: #0a5eff !important ;
   border-left: 7px solid rgb(203, 221, 255) !important;
+  box-shadow: 0 10px 14px #0a60ff9d;
 }
 
 .vacia-limpia a{
@@ -292,6 +315,7 @@ span {
   background-color:  #052d76 !important;
   color: #fff !important;
   border-left: 7px solid #6398fb !important;
+  box-shadow: 0 10px 14px #6398fbdd;
 }
 
 
@@ -300,12 +324,25 @@ span {
   color: #fff !important;
   border-left: 7px solid #4d03ae !important;
 }
+.reserva-pagada:hover {
+  background-color: #6b0fe3af !important;
+  color: #fff !important;
+  border-left: 7px solid #4d03ae !important;
+  box-shadow: 0 10px 14px #6b0fe396;
+}
 
 
 .reserva-pendiente {
   background-color: #3b0286 !important;
   color: #fff !important;
   border-left: 7px solid #bc88ff !important;
+}
+
+.reserva-pendiente:hover {
+  background-color: #3b0286 !important;
+  color: #fff !important;
+  border-left: 7px solid #bc88ff !important;
+  box-shadow: 0 10px 14px #3b0286cb;
 }
 
 .mantenimiento {
@@ -318,6 +355,7 @@ span {
   background-color: #fdb44d !important;
   color: #ff7700 !important;
   border-left: 7px solid  #ffdaa2 !important;
+  box-shadow: 0 10px 14px #ff7700c9;
 }
 
 .mantenimiento a{
@@ -385,6 +423,8 @@ background-color: #26297f;
 
 .card-header{
   padding-bottom: 50px !important;
+  background-color: #26297f !important;
+  color: #fff;
 }
 
 

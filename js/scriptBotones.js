@@ -157,3 +157,4 @@ botonMostrarReservadasPagadas.addEventListener('click', function() {
 /*********************************/
 /*variante de la funcion de arriba*/
 /****/
+
