@@ -250,7 +250,7 @@ echo '
                     break;
 
                     case "Ocupado":
-                    echo'<section class="btn supervision ocupadoH">
+                    echo'<section class="task task--ocupadoH">
                     <a> '. $estado .'<br> </a>';
                     break;
 

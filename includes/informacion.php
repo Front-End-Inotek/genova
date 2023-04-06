@@ -65,8 +65,7 @@ class Informacion extends ConexionMYSql
 
             case 1:
             $estado= "Vacia limpia";
-            $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
-            $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
+            $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
             break;
 
             case 2:
@@ -75,33 +74,37 @@ class Informacion extends ConexionMYSql
             break;
 
             case 3:
-            $estado= "Limpieza";
-            $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
+            $estado= "Ocupado";
+            $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
+            $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
 
             case 4:
             $estado= "Sucia ocupada";
-            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
+            $cronometro= $movimiento->saber_inicio_sucia($fila['moviemiento']);
             break;
 
             case 5:
             $estado="Ocupada limpieza";
-            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
+            $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
             break;
 
             case 6:
             $estado="Reserva pagada";
-            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
+            $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
+            $tipo_habitacion= $fila['tipo_nombre'];
             break;
 
             case 7:
             $estado= "Reserva pendiente";
-            $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
+            $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
+            $tipo_habitacion= $fila['tipo_nombre'];
             break;
 
             case 8:
             $estado= "Uso casa";
-            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
+            $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
+            $tipo_habitacion= $fila['tipo_nombre'];
             break;
 
             case 9:
@@ -135,8 +138,8 @@ class Informacion extends ConexionMYSql
                 echo'<div class="btn vacia-sucia">';
                 break;
 
-                case "Limpieza":
-                echo'<div class="btn ocupada-limpieza">';
+                case "Ocupado":
+                echo'<section class="btn supervision ocupadoH">';
                 break;
 
                 case "Sucia ocupada":
