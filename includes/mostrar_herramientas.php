@@ -84,7 +84,7 @@ $movimiento = NEW Movimiento(0);
 //$cliente = NEW Cliente($_GET['hab_id']);
 $user = NEW Usuario($_GET['id']);
 $estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
-echo '<div class="modal-header" style="background-color: #26297f; color: #ffff;">
+echo '<div class="modal-header" style="background-color: #97b2f9ee; color: #000;">
 		<h3 class="modal-title">Habitacion '.$_GET['nombre'].' </h3>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	</div>';
@@ -431,7 +431,7 @@ echo '<div class="row">';
 	mostar_info($_GET['hab_id'],$_GET['estado'],$hab->mov,$_GET['id']);
 echo '</div>';
 echo '</div>';
-echo '<div class="modal-footer" style="background-color: #26297f; color: #fff;">
+echo '<div class="modal-footer" style="background-color: #97b2f9ee; color: #000;">
 		<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 		</div>';
 ?>

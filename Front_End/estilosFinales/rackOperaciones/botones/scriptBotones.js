@@ -1,5 +1,4 @@
-
-
+/* opcion 1 para mostrar filtro de hab*/ 
 function mostrarHabitaciones(selector, boton) {
   // Oculta todas las habitaciones
   var habitaciones = document.querySelectorAll('.btn');
@@ -17,6 +16,34 @@ function mostrarHabitaciones(selector, boton) {
   boton.style.display = 'inline-block';
 }
 
+/*opcion 2 para mostrar filtro de hab con onclick*/
+function mostrarHabitaciones(selector, boton) {
+  // Oculta todas las habitaciones
+  var habitaciones = document.querySelectorAll('.btn');
+  for (var i = 0; i < habitaciones.length; i++) {
+    habitaciones[i].style.display = 'none';
+  }
+
+  // Muestra solo las habitaciones seleccionadas
+  var habitacionesSeleccionadas = document.querySelectorAll(selector);
+  for (var i = 0; i < habitacionesSeleccionadas.length; i++) {
+    habitacionesSeleccionadas[i].parentNode.style.display = 'inline-block';
+  }
+  
+  // Muestra el botón "Mostrar todas las habitaciones"
+  boton.style.display = 'inline-block';
+
+  // Agrega el evento onclick al botón "Mostrar todas las habitaciones"
+  boton.onclick = function() {
+    for (var i = 0; i < habitaciones.length; i++) {
+      habitaciones[i].style.display = 'inline-block';
+    }
+    boton.style.display = 'none';
+  };
+}
+/* opcion 1*/ 
+/*funcion para filtrar todas las habitaciones*/ 
+
 function mostrarTodasLasHabitaciones(boton) {
   // Muestra todas las habitaciones
   var habitaciones = document.querySelectorAll('.btn');
@@ -28,6 +55,23 @@ function mostrarTodasLasHabitaciones(boton) {
   boton.style.display = 'none';
 }
 
+/* opcion 2*/ 
+/* funcion para filtrar todas las habitaciones y se puede utilizar para cualquier habitacion*/ 
+function mostrarTodasLasHabitaciones(boton) {
+  // Muestra todas las habitaciones
+  var habitaciones = document.querySelectorAll('.btn');
+  for (var i = 0; i < habitaciones.length; i++) {
+    habitaciones[i].style.display = 'inline-block';
+  }
+  
+  // Oculta el botón "Mostrar todas las habitaciones"
+  boton.style.display = 'none';
+}
+
+// Llamada a la función mediante onclick
+document.getElementById("botonMostrarTodasLasHabitaciones").onclick = function() {
+  mostrarTodasLasHabitaciones(this);
+};
 
 
 function agregarEventoDeMostrarHabitaciones(boton, selector) {

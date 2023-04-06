@@ -297,10 +297,12 @@ span {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
   border-left: 7px solid #9b9a9a !important;
+
 }
 .disponible-limpia:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
+  border: 2px solid #9b9a9a !important;
   border-left: 7px solid #9b9a9a !important;
   box-shadow: 0 10px 14px #9b9a9a;
 }
@@ -318,6 +320,7 @@ span {
 .vacia-limpia:hover {
   background-color:  #0a60ff6d !important;
   color: #0a5eff !important ;
+  border: 1px solid rgb(203, 221, 255) !important;
   border-left: 7px solid rgb(203, 221, 255) !important;
   box-shadow: 0 10px 14px #0a60ff9d;
 }
@@ -335,6 +338,8 @@ span {
 .ocupada-limpieza:hover {
   background-color:  #052d76 !important;
   color: #fff !important;
+  border: 1px solid #6398fb !important;
+  border-bottom: 4px solid #6398fb !important;
   border-left: 7px solid #6398fb !important;
   box-shadow: 0 10px 14px #6398fbdd;
 }
@@ -369,6 +374,7 @@ span {
 .mantenimiento {
   background-color: #ffdaa2 !important;
   color: #ff7700 !important;
+  border-bottom: 3px solid #fdb44d !important;
   border-left: 7px solid #fdb44d !important;
 }
 
@@ -384,15 +390,74 @@ span {
 }
 
 .btn-dark{
-  background-color: #21368cec !important;
-  border-color: #6398fb !important;
-  color: #fff !important;
+  background-color: #97b2f96e !important;
+  border-color: #3f51b5 !important;
+  color: #3f51b5 !important;
 }
 
 .btn-dark:hover{
-  background-color: #2646c5c9 !important;
-  border-color: #84aefd !important;
+  background-color: #97b2f9ee !important;
+  border-color: #0b258c !important;
   color: #fff !important;
+}
+
+.btn-outline-warning{
+  color: #ffc107 !important;
+  border-color: #ffc107;
+  background-color: #fdf0b778;
+}
+
+.btn-outline-warning:hover{
+  color: #fff !important;
+}
+.btn-outline-danger{
+  background-color: rgba(255, 0, 0, 0.145);
+}
+
+.btn-info{
+  background-color: #97b2f96e !important;
+  border-color: #3f51b5 !important;
+  color: #3f51b5 !important;
+}
+
+.btn-info:hover{
+  background-color: #2646c5c9 !important;
+  border-color: #3f51b5 !important;
+}
+
+.modal-header{
+  background-color: #97b2f96e !important;
+  border-color: #3f51b5 !important;
+  color: #3f51b5 !important;
+}
+
+.modal-footer{
+  background-color: #97b2f96e !important;
+  border-color: #3f51b5 !important;
+  color: #3f51b5 !important;
+}
+
+.modal-content{
+  border: 2px solid #3f51b5!important;
+}
+
+.close{
+  text-transform: uppercase !important;
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 15px;
+  border-radius: 100px;
+  color: red;
+  border: 2px solid #3f51b5 !important;
+}
+
+.close:hover{
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 100px;
+  background-color: #e7e5e569;
+  color: red;
+  border: 2px solid #3f51b5 !important;
 }
 /*
 .btn .ocupado {
@@ -449,14 +514,14 @@ span {
 
 .cardFooter {
  /* background-color: #1b1d5d;*/
-background-color: #26297f;
+background-color: #3f51b5;
   color: #fff;
 
 }
 
 .card-header{
   padding-bottom: 50px !important;
-  background-color: #3e54ac !important;
+  background-color: #30349f !important;
   color: #fff;
 }
 
