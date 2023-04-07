@@ -42,9 +42,9 @@ echo '
             <th class="cal-viewmonth" id="changemonth"></th>';
             $fecha_actual = date('Y-m-d'); // Obtiene la fecha actual en formato YYYY-MM-DD
             $fecha_final = date('Y-m-d', strtotime('+32 days')); // Obtiene la fecha actual más 32 días en formato YYYY-MM-DD
-            $fecha = $fecha_actual;
+            $fecha = $fecha_actual; // Se guarda la fecha acutal en una nueva variable
             $contador = 0;
-            $total_dias = 32;
+            $total_dias = 32;   //En una nueva variable guardamos el total de dias
             $yesterday =  date('j', strtotime('-1 day'));
 
             $dia = date('N', strtotime($fecha));
@@ -86,7 +86,6 @@ echo '
             }
 
             while ($fecha <= $fecha_final) {
-            $dia = date('N', strtotime($fecha));
             switch ($dia) {
                 case 1:
                     echo "<th class='cal-dia'> LUNES ". date('j', strtotime($fecha)) ."</th>";
@@ -124,9 +123,6 @@ echo '
             $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));
             $contador++;
 
-            if ($contador > $total_dias) {
-                break;
-            }
             }
             echo'
             </tr>
@@ -146,7 +142,7 @@ echo '
             break;
 
             case 1:
-            $estado= "Vacia limpia";
+            $estado= "Ocupado";
             $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
             break;
 
@@ -156,7 +152,7 @@ echo '
             break;
 
             case 3:
-            $estado= "Ocupado";
+            $estado= "Vacia limpia";
             $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
@@ -220,16 +216,25 @@ echo '
                 </td>';
 
 // Se decide por las habitaciones vacias
-        if ($estado == "Disponible limpia") {
+    $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
+        if ($fila['estado'] == 0) {
             echo'
             <td class="celdaCompleta">
                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
                     <section class="task task--disponible-limpia" >
-                        <a> '. $estado .'<br> </a>
-                    </td>
+                        <a> '. $estado . '<br> </a>
+                    </section>
                 </div>
-            </section>';
-        }else{
+            </td>
+            ';
+        }elseif($fecha_salida < 0){
+            echo'
+            <td class="celdaCompleta">
+
+            </td>
+            ';
+        }
+        elseif($fecha_salida > 0){
             for ($i=0; $i < $total_dias+2; $i++) {
                 # code...
                 echo'
@@ -240,60 +245,53 @@ echo '
                 //Con esta estructura de control definimos los estados y los estilos correspondientes a los estados
                 switch($estado) {
                     case "Vacia limpia":
-                    echo'<section class="task task--limpieza-vacia">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--limpieza-vacia">';
                     break;
 
                     case "Vacia sucia":
-                    echo'<section class="task task--vacia-sucia" title="aqui mas informacion">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--vacia-sucia" title="aqui mas informacion">';
                     break;
 
                     case "Ocupado":
-                    echo'<section class="task task--ocupadoH">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--ocupadoH">';
                     break;
 
                     case "Sucia ocupada":
-                    echo'<section class="task task--ocupada-sucia">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--ocupada-sucia">';
                     break;
 
                     case "Ocupada limpieza":
-                    echo'<section class="task task--limpieza-ocupada">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--limpieza-ocupada">';
                     break;
 
                     case "Reserva pagada":
-                    echo'<section class="task task--reserva-pagada">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--reserva-pagada">';
                     break;
 
                     case "Reserva pendiente":
-                    echo'<section class="task task--reserva-pendiente-pago ajuste">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--reserva-pendiente-pago ajuste">';
                     break;
 
                     case "Uso casa":
-                    echo'<section class="task task--uso-casa">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--uso-casa">';
                     break;
 
                     case "Mantenimiento":
-                    echo'<section class="task task task--mantenimiento ajuste-2dias">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task task--mantenimiento ajuste-2dias">';
                     break;
 
                     case "Bloqueo":
-                    echo'<section class="task task--bloqueado">
-                    <a> '. $estado .'<br> </a>';
+                    echo'<section class="task task--bloqueado">';
                     break;
 
                     default:
                     //echo "Estado indefinido";
                     break;
                 }
-                    echo '<div class="tiempo_hab">';
+                echo '<a> '. $estado .'<br> </a>';
+                echo '<a> '. substr($fecha_salida, 0, -8) .'<br> </a>';
+                    /*echo '<a> '. $estado .'<br> </a>
+                    <div class="tiempo_hab">';
                     $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
                     //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
                     if($fila['estado'] == 0){
@@ -315,11 +313,10 @@ echo '
                         }
                         echo $fecha_inicio;
                     }
-            echo '</div>';
+            echo '</div>';*/
 
                 //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
-                echo '
-                        </section>
+                echo '</section>
                     </div>
                 </td>';
             }

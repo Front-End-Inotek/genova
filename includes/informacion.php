@@ -64,7 +64,7 @@ class Informacion extends ConexionMYSql
             break;
 
             case 1:
-            $estado= "Vacia limpia";
+            $estado= "Ocupado";
             $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
             break;
 
@@ -74,7 +74,7 @@ class Informacion extends ConexionMYSql
             break;
 
             case 3:
-            $estado= "Ocupado";
+                $estado= "Vacia limpia";
             $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
@@ -139,7 +139,7 @@ class Informacion extends ConexionMYSql
                 break;
 
                 case "Ocupado":
-                echo'<section class="btn supervision ocupadoH">';
+                echo'<div class="btn supervision ocupadoH">';
                 break;
 
                 case "Sucia ocupada":

@@ -21,7 +21,8 @@ function show_info($hab_id,$estado){
 			break;
 
 			case 1:
-				echo 'Vacia limpia';
+				echo 'Ocupado';
+				
 			break;
 
 			case 2:
@@ -29,7 +30,7 @@ function show_info($hab_id,$estado){
 			break;
 
 			case 3:
-				echo 'Ocupado';
+				echo 'Vacia limpia';
 			break;
 
 			case 4:
@@ -103,7 +104,7 @@ switch ($_GET['estado']) {
 				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
 			echo '</div>';
 			echo '<div>';
-			echo 'Asignar / ocupar';
+			echo 'Asignaaaar / ocupar';
 			echo '</div>';
 			echo '</br>';
 		echo '</div>';
@@ -111,7 +112,7 @@ switch ($_GET['estado']) {
 	}
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
-		$nuevo_estado= 1;
+		$nuevo_estado= 2;
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
 		echo '<div class="limpieza ocupada-limpieza btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
 			echo '</br>';
@@ -127,9 +128,8 @@ switch ($_GET['estado']) {
 	}
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
-		$nuevo_estado= 8;
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada usoCasa uso btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="ocupada usoCasa uso btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
 				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -145,7 +145,7 @@ switch ($_GET['estado']) {
 	if($user->nivel<=2 && $conf->hospedaje ==1){
 		$nuevo_estado= 9;
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada mantenimiento btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="ocupada mantenimiento btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
 			echo '</br>';
 			echo '<div>';
 			echo '</div>';
@@ -160,7 +160,7 @@ switch ($_GET['estado']) {
 	if($user->nivel<=2 && $conf->hospedaje ==1){
 		$nuevo_estado= 10;
 		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupada bloqueo btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="ocupada bloqueo btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
 			echo '</br>';
 			echo '<div>';
 			echo '</div>';
