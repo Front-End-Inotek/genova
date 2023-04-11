@@ -142,11 +142,11 @@
   padding: 25px 25px;
   background-color: #f1f5ff;
   margin-top: 35px;
-  border: 2px solid #3e54ac;
+  border: 1px solid #c6c4fc;
 }
 
 .table-responsive tr{
-  border: 2px solid #3e54ac !important;
+  border: 2px solid #c6c4fc !important;
 }
 
 /* Contenedor con fondo blanco y margen */
@@ -773,9 +773,6 @@ a.topictitle:hover {
   background-color:#00587A;
   background-color:#045170;
 }*/
-#area_trabajo_menu{
-  
-}
 .texto_doble{
   font-size: 2 em;
 }

@@ -18,7 +18,6 @@ span {
   padding-left: 10px;
 }
 
-
 /*tabla de estados de filtro*/
 
 
@@ -176,8 +175,6 @@ span {
   min-height: 50px;
 }
 
-
-
 /***************************/
 /***rack operaciones***/
 /***************************/
@@ -224,13 +221,12 @@ span {
 .usoCasa {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #05d1ca !important;
-  color: #fff !important;
+  color: #000 !important;
   border-left: 7px solid #05d1ca !important;
 }
 .usoCasa:hover{
-  background-color: #05d1cac7 !important;
-  color: #fff;
-  box-shadow: 0 10px 14px #05d1cabe;
+  background-color: #05d1ca79 !important;
+  box-shadow: 0 10px 14px #05d1ca8b;
 }
 
 .ocupadoH {
@@ -261,22 +257,10 @@ span {
   box-shadow: 0 10px 14px #bd020289;
 }
 
-.sucia-ocupada:hover {
-  background-color: #bd0202e8 !important;
-  color: #fff !important;
-  border-left: 7px solid  #bb6464 !important;
-}
-
 .vacia-sucia {
   background-color: #bff1bf9f !important;
   color: #057410e8 !important;
   border-left: 7px solid #03ae11 !important;
-}
-.vacia-sucia:hover {
-  background-color: #6bf376 !important;
-  color: #057410e8 !important;
-  border-left: 7px solid  #bff1bfd6 !important;
-  box-shadow: 0 10px 14px #35da43cb;
 }
 
 .vacia-sucia:hover {
@@ -443,18 +427,19 @@ span {
 
 .close{
   text-transform: uppercase !important;
+
   width: 30px !important;
   height: 30px !important;
   font-size: 15px;
-  border-radius: 100px;
   color: red;
+  border-radius: 5px;
   border: 2px solid #3f51b5 !important;
 }
 
 .close:hover{
   width: 30px !important;
   height: 30px !important;
-  border-radius: 100px;
+  border-radius: 10px;
   background-color: #e7e5e569;
   color: red;
   border: 2px solid #3f51b5 !important;
