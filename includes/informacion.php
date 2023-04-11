@@ -51,6 +51,23 @@ class Informacion extends ConexionMYSql
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);
     //se recibe la consulta y se convierte a arreglo
+    echo'
+    <div class="botones-ocultos" id="botones">
+    <h3 class="titulo-filtro">Filtrar por:</h3>
+    <button class="botones-estado" id="mostrar-todas">Todas</button>
+    <button class="botones-estado" id="mostrar-disponibles"> Disponibles</button>
+    <button class="botones-estado" id="mostrar-ocupadas"> Ocupadas</button>
+    <button class="botones-estado" id="mostrar-vacias-sucias">Sucia Vacia </button>
+    <button class="botones-estado" id="mostrar-ocupada-sucias">Sucia Ocupada</button>
+    <button class="botones-estado" id="mostrar-vacia-limpieza"> Limpieza Vacia </button>
+    <button class="botones-estado" id="mostrar-ocupada-limpieza"> Limpieza Ocupada</button>
+    <button class="botones-estado" id="mostrar-reservada-pagada"> Reservacion pagada</button>
+    <button class="botones-estado" id="mostrar-reservada-pendiente"> Reservacion deuda</button>
+    <button class="botones-estado" id="mostrar-mantenimiento"> Mantenimiento</button>
+    <button class="botones-estado" id="mostrar-uso-casa"> Uso Casa</button>
+    <button class="botones-estado" id="mostrar-bloqueo"> Bloqueo</button>
+    </div>';
+
     echo ' <div class="container containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {

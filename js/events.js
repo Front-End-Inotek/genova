@@ -8,6 +8,19 @@ function inicio(){
 	x.click(evaluar);
 }
 
+function toggleBotones() {
+    var botones = document.getElementById("botones");
+  
+    if (botones.classList.contains("botones-mostrados")) {
+        botones.classList.remove("botones-mostrados");
+        botones.classList.add("botones-ocultos");
+    } else {
+        botones.classList.remove("botones-ocultos");
+        botones.classList.add("botones-mostrados");
+    }
+  }
+
+
 // Evaluamos las credenciales para generar el acceso
 function evaluar(){
 	var user=$("#user").val();

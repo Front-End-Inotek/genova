@@ -290,30 +290,6 @@ echo '
                 }
                 echo '<a> '. $estado .'<br> </a>';
                 echo '<a> '. substr($fecha_salida, 0, -8) .'<br> </a>';
-                    /*echo '<a> '. $estado .'<br> </a>
-                    <div class="tiempo_hab">';
-                    $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
-                    //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
-                    if($fila['estado'] == 0){
-                        if($cronometro == 0){
-                        echo $tipo_habitacion;
-                        }else{
-                        $fecha_inicio= date("d-m-Y",$cronometro);
-                        echo $fecha_inicio;
-                        echo '<br>';
-                        echo $tipo_habitacion;
-                        }
-                    }elseif($fila['estado'] == 1){
-                        echo $fecha_salida;
-                    }else{
-                        if($cronometro == 0){
-                        $fecha_inicio= '&nbsp';
-                        }else{
-                        $fecha_inicio= date("d-m-Y",$cronometro);
-                        }
-                        echo $fecha_inicio;
-                    }
-            echo '</div>';*/
 
                 //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
                 echo '</section>
@@ -321,10 +297,6 @@ echo '
                 </td>';
             }
         }
-
-
-
-
                 echo '
             </tr>
         </tbody>';

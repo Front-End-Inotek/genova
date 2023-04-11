@@ -24,6 +24,7 @@
             <script src="js/rackHabitacional.js"></script>
             <script src="js/navDesplegable.js"></script>
             <script src="js/scriptBotones.js"></script>
+            <script src="js/sweetalert.min.js"></script>
 
             <!--link css-->
             <link rel=stylesheet href="styles/estilos.css" type="text/css">
@@ -47,8 +48,6 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-
-            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
           </head>
     <body onload="sabernosession()">
