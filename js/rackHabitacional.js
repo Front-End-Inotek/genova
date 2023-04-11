@@ -47,18 +47,25 @@ function togglePanel() {
 /* ***funcion par sobre poner ***********/
 /***** 2 estados en un mismo dia*********
 /* ****tener en cuenta el tamaño con span */
-function estadoMismoDia() {
-  const taskContainer = document.querySelector('.task-container');
-  const ajusteElementos = taskContainer.querySelectorAll('.ajuste');
 
-  ajusteElementos.forEach((ajusteElement) => {
-    const siguiente = ajusteElement.siguiente;
-    const anterior = ajusteElement.anterior;
 
-    if (siguiente && anterior &&
-        siguiente.classList.contains('ajuste') &&
-        anterior.classList.contains('ajuste')) {
-      ajusteElement.classList.add('ajuste-2dias');
+
+//tamaño adaptable de 2 o mas espados dependiendo el colspan (duracion)
+function ajusteDeAncho(tableId) {
+  const table = document.getElementById(tableId);
+  const cells = table.getElementsByTagName("td");
+
+  // Recorrer todas las celdas
+  for (let i = 0; i < cells.length; i++) {
+    const cell = cells[i];
+
+    // Si la celda tiene un colspan mayor a 1
+    if (cell.colSpan > 1) {
+      // Calcular el ancho de la celda
+      const width = (cell.colSpan * 75) - 1;
+
+      // Agregar la regla CSS a la celda
+      cell.style.width = `calc(${width}% - 1px)`;
     }
-  });
+  }
 }

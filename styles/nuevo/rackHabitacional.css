@@ -140,7 +140,6 @@
     letter-spacing: 0.03em;
     background: #ecf2ff;
     padding: 0.3em;
-    padding-top: 1.9rem;
   }
   
   .cal-usersheader {
@@ -164,36 +163,36 @@
 
   .task {
     border-left-width: 3px;
-    padding: 12px 12px;
-    margin-top: 15px;
+    padding: 6px 6px;
     /*margin: auto;  si prefieres que quede a la mitad de ambos dias*/
     border-left-style: solid;
     font-size: 14px;
     position: relative;
     min-width: 9em;
-    /*
-    min-width: 20%;*/
   }
 
 
   .task--bloqueado {
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #333;
-    border-left-color: #0b0b0b;
+    border-left: 7px solid #0b0b0b;
     color: #fff;
     margin-top: 15px;
     align-self: end;
     
   }
   .task--bloqueado:hover{
-    background-color: #000;
-    box-shadow: 0 10px 14px #0b0b0b;
+    background-color: rgba(235, 235, 235, 0.7) !important;
+  color: #000 !important;
+  border: 2px solid #9b9a9a !important;
+  border-left: 7px solid #9b9a9a !important;
+  box-shadow: 0 10px 14px #9b9a9a;
   }
 
   .task--uso-casa {
 
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-    border-left-color: #05d1ca;
+    border-left: 7px solid #05d1ca;
     margin-top: 15px;
   background-color: #05d1ca;
     grid-row: 8;
@@ -207,7 +206,7 @@
 
 
   .task--mantenimiento {
-    border-left-color: #fdb44d;
+    border-left: 7px solid #fdb44d;
     background: #ffdaa2;
     margin-top: 15px;
     min-width: 200px;
@@ -216,16 +215,17 @@
   }
 
   .task--mantenimiento:hover{
-    background-color: #fdb44d;
-    color: #fff;
-    border-left-color: #ffdaa2;
+  background-color: #fdb44d !important;
+  color: #ff7700 !important;
+  border-left: 7px solid  #ffdaa2 !important;
+  box-shadow: 0 10px 14px #ff7700c9;
     box-shadow: 0 10px 14px #fdb44d84;
   }
 
 
 
   .task--ocupada-sucia {
-    border-left-color: #bd0202;
+    border-left: 7px solid #bd0202;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 7;
@@ -237,9 +237,9 @@
   }
 
   .task--ocupada-sucia:hover{
-    background-color: #990404;
-    color: #fff;
-    box-shadow: 0 10px 14px #bd020289;
+    background-color: #bd0202e8 !important;
+  color: #fff !important;
+  border-left: 7px solid  #bb6464 !important;
   }
 
   .task--ocupadoH{
@@ -248,15 +248,15 @@
     border-left: 7px solid #2f010b;
   }
 
-  .task-ocupadoH:hover{
-    background-color: #780202f8;
-    color: #fff;
-    border-left: 7px solid #2f010b;
+  .task--ocupadoH:hover{
+  background-color: #9f0404fb !important;
+  color: #fff;
+  box-shadow: 0 10px 14px #780202af;
   }
 
 
   .task--vacia-sucia {
-    border-left-color: #03ae11;
+    border-left: 7px solid #03ae11;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 9;
@@ -268,12 +268,14 @@
   }
 
   .task--vacia-sucia:hover{
-    background-color: #adefadb0;
-    box-shadow: 0 10px 14px #03ae117e;
+  background-color:  #26e036 !important;
+  color: #fff !important;
+  border-left: 7px solid #bff1bfa1 !important;
+  box-shadow: 0 10px 14px #35da43cb;
   }
 
   .task--disponible-limpia {
-    border-left-color: #9b9a9a;
+    border-left: 7px solid #9b9a9a;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 8;
@@ -285,13 +287,19 @@
   }
 
   .task--disponible-limpia:hover{
-    background-color:  #c8c8c8;
-    color: #fff;
-    box-shadow: 0 10px 14px #9b9a9aa6;
+  background-color: rgba(235, 235, 235, 0.7) !important;
+  color: #000 !important;
+  border: 2px solid #9b9a9a !important;
+  border-left: 7px solid #9b9a9a !important;
+  box-shadow: 0 10px 14px #9b9a9a;
   }
 
+  .task--disponible-limpia a{
+  color: #000 !important;
+}
+
   .task--reserva-pagada {
-    border-left-color: #4d03ae;
+    border-left: 7px solid #4d03ae;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 10;
@@ -302,13 +310,14 @@
     
   }
   .task--reserva-pagada:hover{
-    background-color: #5814b0d6;
-    color: #fff;
-    box-shadow: 0 10px 14px #6b0fe384;
+    background-color: #6b0fe3af !important;
+    color: #fff !important;
+    border-left: 7px solid #4d03ae !important;
+    box-shadow: 0 10px 14px #6b0fe396;
   }
 
   .task--reserva-pendiente-pago {
-    border-left-color: #bc88ff;
+    border-left: 7px solid #bc88ff;
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 11;
@@ -321,15 +330,16 @@
     
   }
   .task--reserva-pendiente-pago:hover{
-    background-color: #66089c;
-    color: #fff;
-    box-shadow: 0 10px 14px #3b028681;
+    background-color: #3b0286 !important;
+    color: #fff !important;
+    border-left: 7px solid #bc88ff !important;
+    box-shadow: 0 10px 14px #3b0286cb;
   }
 
 
 
   .task--limpieza-vacia {
-    border-left-color: #4786ff;
+    border-left: 7px solid #4786ff;
     margin-top: 15px;
     background: rgb(205, 222, 252);
     color: #0a5eff;
@@ -337,14 +347,20 @@
   }
 
   .task--limpieza-vacia:hover{
-    background-color: #6398fb80;
+  background-color:  #0a60ff6d !important;
+  color: #0a5eff !important ;
+  border: 1px solid rgb(203, 221, 255) !important;
+  border-left: 7px solid rgb(203, 221, 255) !important;
     box-shadow: 0 10px 14px #4787ff8d;
   }
 
+  .task--limpieza-vacia a{
+  color: #0a5eff !important;
+}
 
 
   .task--limpieza-ocupada {
-    border-left-color: #052d76;
+    border-left: 7px solid #052d76;
     background: #6398fb;
     align-self: end;
     margin-top: 15px;
@@ -353,9 +369,12 @@
   }
 
   .task--limpieza-ocupada:hover{
-    background: #206bf6e7;
-    border-left-color: #052d76;
-    box-shadow: 0 10px 14px rgba(71, 135, 255, 0.619);
+    background-color:  #052d76 !important;
+    color: #fff !important;
+    border: 1px solid #6398fb !important;
+    border-bottom: 4px solid #6398fb !important;
+    border-left: 7px solid #6398fb !important;
+    box-shadow: 0 10px 14px #6398fbdd;
   }
 
 
