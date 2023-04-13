@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('America/Mexico_City');
+
 $estatus_hab = $_GET['estatus_hab'];
 
 echo var_dump($estatus_hab);
