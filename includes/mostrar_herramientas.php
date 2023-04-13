@@ -104,7 +104,7 @@ switch ($_GET['estado']) {
 				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
 			echo '</div>';
 			echo '<div>';
-			echo 'Asignaaaar / ocupar';
+			echo 'Asignar / ocupar';
 			echo '</div>';
 			echo '</br>';
 		echo '</div>';
