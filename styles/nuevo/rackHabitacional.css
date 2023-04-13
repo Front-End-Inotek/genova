@@ -174,15 +174,15 @@
 
   .task--bloqueado {
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-  background-color: #333;
+    background-color: #333;
     border-left: 7px solid #0b0b0b;
     color: #fff;
-    margin-top: 15px;
+
     align-self: end;
     
   }
   .task--bloqueado:hover{
-    background-color: rgba(235, 235, 235, 0.7) !important;
+  background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
   border: 2px solid #9b9a9a !important;
   border-left: 7px solid #9b9a9a !important;
@@ -193,10 +193,8 @@
 
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
     border-left: 7px solid #05d1ca;
-    margin-top: 15px;
   background-color: #05d1ca;
     grid-row: 8;
-    margin-top: 15px;
   }
   .task--uso-casa:hover{
     background-color: #05d1ca79;
@@ -208,10 +206,8 @@
   .task--mantenimiento {
     border-left: 7px solid #fdb44d;
     background: #ffdaa2;
-    margin-top: 15px;
     min-width: 200px;
-    color: #fa7705  ;
-
+    color: #fa7705;
   }
 
   .task--mantenimiento:hover{
@@ -219,7 +215,7 @@
   color: #ff7700 !important;
   border-left: 7px solid  #ffdaa2 !important;
   box-shadow: 0 10px 14px #ff7700c9;
-    box-shadow: 0 10px 14px #fdb44d84;
+  box-shadow: 0 10px 14px #fdb44d84;
   }
 
 
@@ -229,7 +225,6 @@
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 7;
-    margin-top: 15px;
     background: #BB6464;
     align-self: end;
     color: #f8f3f3;
@@ -243,9 +238,9 @@
   }
 
   .task--ocupadoH{
-    background-color: #780202f8;
+    background-color: #b12e3b;
     color: #fff;
-    border-left: 7px solid #2f010b;
+    border-left: 7px solid #6a0319;
   }
 
   .task--ocupadoH:hover{
@@ -260,7 +255,6 @@
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 9;
-    margin-top: 15px;
     background: #bff1bf81;
     align-self: end;
     color: #057410e8;
@@ -268,10 +262,11 @@
   }
 
   .task--vacia-sucia:hover{
-  background-color:  #26e036 !important;
+  background-color:  #81e389 !important;
   color: #fff !important;
+  border: 2px solid #bff1bfa1 !important;
   border-left: 7px solid #bff1bfa1 !important;
-  box-shadow: 0 10px 14px #35da43cb;
+  box-shadow: 0 10px 14px #35da435d;
   }
 
   .task--disponible-limpia {
@@ -279,7 +274,6 @@
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 8;
-    margin-top: 15px;
     background: #e5e4e4;
     align-self: end;
     color:  #030303;
@@ -303,7 +297,6 @@
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 10;
-    margin-top: 15px;
     background: #6b0fe3af;
     align-self: end;
     color: #FFF;
@@ -321,7 +314,6 @@
     /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
     grid-column: 2 / span 2;
     grid-row: 11;
-    margin-top: 15px;
     background: #3b0286;
     align-self: end;
     color: #FFF;
@@ -340,7 +332,6 @@
 
   .task--limpieza-vacia {
     border-left: 7px solid #4786ff;
-    margin-top: 15px;
     background: rgb(205, 222, 252);
     color: #0a5eff;
     
@@ -363,7 +354,6 @@
     border-left: 7px solid #052d76;
     background: #6398fb;
     align-self: end;
-    margin-top: 15px;
     color: #fff;
 
   }
