@@ -5,12 +5,11 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-
+/*
 span {
   display: inline-block;
   margin-left: 5px;
-}
+}*/
 
 .contenedor-sub{
   padding-left: 20px;
@@ -33,7 +32,7 @@ span {
 
 #botones {
   margin-bottom: 0px;
-  margin-top: 40px;
+  margin-top: 70px !important;
 }
 
 .botones-mostrados {
@@ -184,6 +183,7 @@ span {
   grid-template-columns: repeat(8, minmax(220px, 1fr));
   grid-gap: 10px;
   margin: 20px;
+  margin-top: 50px !important;
   padding-bottom: 5.5rem;
 }
 
@@ -201,7 +201,7 @@ span {
   z-index: 1;
   border-radius: 2px;
   text-align: end;
-  margin-top: 45px;
+  margin-top: 5px;
 }
 
 .bloqueo {
@@ -230,20 +230,18 @@ span {
 }
 
 .ocupadoH {
-  background-color: #780202f8 !important;
+  background-color: #b12e3b !important;
   color: #fff !important;
-  border-left: 7px solid #460211 !important;
+  border-left: 7px solid #6a0319 !important;
 }
 
-.ocupadoH:hover {
-  background-color: #530214 !important;
-  color: #fff !important;
-  border-left: 7px solid  #780202f8 !important;
-}
+
 .ocupadoH:hover{
-  background-color: #9f0404fb !important;
+  background-color: #c70404d3 !important;
   color: #fff;
-  box-shadow: 0 10px 14px #780202af;
+  border: 2px solid #9f0404fb !important;
+  border-left: 7px solid #ad0328 !important;
+  box-shadow: 0 10px 14px #780202af !important;
 }
 
 .sucia-ocupada {
@@ -254,7 +252,9 @@ span {
 .sucia-ocupada:hover{
   background-color: #bd4949 !important;
   color: #fff;
-  box-shadow: 0 10px 14px #bd020289;
+  border: 1px solid #fd02024f !important;
+  border-left: 7px solid #fd0202b9 !important;
+  box-shadow: 0 10px 14px #bd0202b8 !important;
 }
 
 .vacia-sucia {
@@ -264,9 +264,11 @@ span {
 }
 
 .vacia-sucia:hover {
-  background-color:  #26e036 !important;
+  background-color:  #81e389 !important;
   color: #fff !important;
+  border: 3px solid #bff1bfa1 !important;
   border-left: 7px solid #bff1bfa1 !important;
+  box-shadow: 0 10px 14px #60e96c;
 }
 
 .vacia-sucia a{
@@ -286,7 +288,7 @@ span {
 .disponible-limpia:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
-  border: 2px solid #9b9a9a !important;
+  border: 1px solid #9b9a9a !important;
   border-left: 7px solid #9b9a9a !important;
   box-shadow: 0 10px 14px #9b9a9a;
 }
@@ -335,9 +337,9 @@ span {
   border-left: 7px solid #4d03ae !important;
 }
 .reserva-pagada:hover {
-  background-color: #6b0fe3af !important;
+  background-color: #7622e6af !important;
   color: #fff !important;
-  border-left: 7px solid #4d03ae !important;
+  border-left: 7px solid #7223da !important;
   box-shadow: 0 10px 14px #6b0fe396;
 }
 
@@ -349,9 +351,9 @@ span {
 }
 
 .reserva-pendiente:hover {
-  background-color: #3b0286 !important;
+  background-color: #5901cc !important;
   color: #fff !important;
-  border-left: 7px solid #bc88ff !important;
+  border-left: 7px solid #cdabfa !important;
   box-shadow: 0 10px 14px #3b0286cb;
 }
 
@@ -422,24 +424,22 @@ span {
 }
 
 .modal-content{
-  border: 2px solid #3f51b5!important;
+  border: 1px solid #3f51b5!important;
 }
 
 .close{
   text-transform: uppercase !important;
-
   width: 30px !important;
   height: 30px !important;
-  font-size: 15px;
+  font-size: 18px;
   color: red;
   border-radius: 5px;
-  border: 2px solid #3f51b5 !important;
+  border: 1px solid #3f51b5 !important;
 }
 
 .close:hover{
   width: 30px !important;
   height: 30px !important;
-  border-radius: 10px;
   background-color: #e7e5e569;
   color: red;
   border: 2px solid #3f51b5 !important;

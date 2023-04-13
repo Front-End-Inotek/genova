@@ -42,7 +42,6 @@ display: none;
   margin-top: 30px;
 }
 
-
 .form-check-label {
   cursor: pointer;
   text-indent: -9999px;
@@ -221,7 +220,7 @@ display: none;
 }/*
 
 /* Para pantallas de tamaño pequeño, menores a 576px */
-@media (max-width: 575.98px) {
+@media (min-width: 426px) and (max-width: 767px) {
   .side-navbar {
     margin-left: -90%;
     width: 90%;
@@ -249,10 +248,10 @@ display: none;
 }
 
 /* Para pantallas de tamaño mediano, entre 576px y 991.98px */
-@media (min-width: 576px) and (max-width: 991.98px) {
+@media (min-width: 768px) and (max-width: 991.98px) {
   .side-navbar {
-    margin-left: -70%;
-    width: 70%;
+    margin-left: -40%;
+    width: 40%;
   }
   .active-nav {
     margin-left: 0;
@@ -266,18 +265,45 @@ display: none;
     left: 100%;
   }
   #menu-btn-fecha {
-    left: 115%;
+    left: 120%;
   }
   #menu-btn-filtrar {
-    left: 125%;
+    left: 140%;
   }
   #mostrar-botones{
-    left: 135%;
+    left: 160%;
   }
 }
+@media (min-width: 992px) and (max-width: 1514px){
+  .side-navbar {
+    margin-left: -30%;
+    width: 30%;
+  }
+  .active-nav {
+    margin-left: 0;
+  }
+  .active-cont {
+    margin-left: 20%;
+    width: 60%;
+    left: 0;
+  }
+  .menu-btn {
+    left: 101%;
+  }
+  #menu-btn-fecha {
+    left: 120%;
+  }
+  #menu-btn-filtrar {
+    left: 140%;
+  }
+  #mostrar-botones{
+  left: 160%;
+}
+}
+
 
 /* Para pantallas de tamaño grande, entre 992px y 1980px */
-@media (min-width: 992px) and (max-width: 1825px) {
+@media (min-width: 1515px) and (max-width: 1825px) {
   .side-navbar {
     margin-left: -20%;
     width: 20%;
