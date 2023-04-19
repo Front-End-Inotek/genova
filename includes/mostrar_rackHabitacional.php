@@ -32,7 +32,7 @@ echo '
 
 
 <!-- DISPLAY USER-->
-<div class="table-responsive">
+<div class="table-responsive" style="margin-left: -10px !important;">
     <div id="cal-largo">
     <div class="cal-sectionDiv">
 
@@ -42,7 +42,7 @@ echo '
             <th class="cal-viewmonth" id="changemonth"></th>';
             $fecha_actual = date('Y-m-d'); // Obtiene la fecha actual en formato YYYY-MM-DD
             $fecha_final = date('Y-m-d', strtotime('+32 days')); // Obtiene la fecha actual más 32 días en formato YYYY-MM-DD
-            $fecha = $fecha_actual; // Se guarda la fecha acutal en una nueva variable
+            $fecha = $fecha_actual; // Se guarda la fecha actual en una nueva variable
             $contador = 0;
             $total_dias = 32;   //En una nueva variable guardamos el total de dias
             $yesterday =  date('j', strtotime('-1 day'));

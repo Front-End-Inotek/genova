@@ -7,6 +7,7 @@ body {
 a{
   text-decoration: none;
   cursor: pointer;
+
   color: #000;
 }
 
@@ -25,14 +26,14 @@ span{
 
 
 
+
 /*boton cambio de rack*/
 
 input[type=checkbox] {
   height: 0;
   width: 0;
-display: none;
+  display: none;
 }
-
 
 .texto-check{
   font-size: 18px;
@@ -42,23 +43,24 @@ display: none;
   margin-top: 30px;
 }
 
-.form-check-label {
+.form-check-label2 {
   cursor: pointer;
-  text-indent: -9999px;
   left: 198px;
-  bottom: 32px;
-  width: 40px;
-  height: 5px;
-  background: grey;
+  bottom: 40px;
+  width: 50px;
+  height: 25px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: #8e91f9;
   display: block;
-  border-radius: 100px;
   position: relative;
   align-items: center;
   text-align: center;
-  border: 2px solid #8e91f9;
+  border: 2px solid #FFF;
 }
+/*
 .form-check-label:after {
-  content: '';
+  content: ' ▾';
   position: absolute;
   top: -12px;
   left: -2px;
@@ -69,11 +71,12 @@ display: none;
   transition: 0.3s;
   border: 1px solid #333;
 }
-.form-check-input:checked + .form-check-label {
-  background-color: #fff !important;
+*/
 
+.form-check-input2:checked + .form-check-label2 {
+  background-color: #fff ;
 }
-.form-check-input:checked + .form-check-label:after {
+.form-check-input2:checked + .form-check-label2:after {
   left: calc(120% - 5px);
   transform: translateX(-100%);
   background-color: #8e97f9;
@@ -88,6 +91,7 @@ display: none;
   height: 120%;
   position: absolute;
   margin-left: -15.7%;
+
   background-color: #30349f;
   transition: 0.5s;
   font-size: large;

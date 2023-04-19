@@ -144,6 +144,9 @@
   margin-top: 35px;
   border: 1px solid #c6c4fc;
 }
+.table-responsive{
+  margin-left: 10px !important;
+}
 
 .table-responsive tr{
   border: 2px solid #c6c4fc !important;

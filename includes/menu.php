@@ -19,9 +19,9 @@
 			<img src="images/InotekLogotipoRec.png" alt="logo" width="215" height="50" style= "margin-top: 25px; margin-bottom:10px;">
 		</a>
 		<div class="texto-check"><p>Cambiar a vista Habitacional</p></div>
-        <div class="form-check form-switch ocultar">
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="switch_rack();">
-          <label class="form-check-label" for="flexSwitchCheckDefault" onclick="sub_menu(); boton_menu();"></label>
+        <div class="form-check2 form-switch ocultar">
+        <input class="form-check-input2" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="switch_rack();">
+        <label class="form-check-label2" for="flexSwitchCheckDefault" onclick="sub_menu(); boton_menu();"></label>
         </div>
 		</div>';
 
