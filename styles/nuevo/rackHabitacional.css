@@ -1,398 +1,460 @@
-
-
 /*tabla operativa*/
-  /* header y columnas */
+/* header y columnas */
 
 
 .tableRack {
   table-layout: auto;
 }
 
-#tablaTotal{
+#tablaTotal {
   border: 1px solid #c6c4fc;
   /*6a67ef*/
 }
-#cal-largo{
+
+#cal-largo {
   height: 850px;
 }
 
-.my-container{
+.my-container {
   display: none;
 }
 
-  .tableRack td,
-  .tableRack th {
-    white-space: nowrap;
+.tableRack td,
+.tableRack th {
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
-  }
+}
 
-  .mes{
-    background-color: #30349f;
-    color: #fff;
-    padding-bottom:25px;
-    margin-top: 33px;
-  }
+.mes {
+  background-color: #30349f;
+  color: #fff;
+  padding-bottom: 25px;
+  margin-top: 33px;
+}
 
-  .headTable{
-    background-color: #30349f;
-    color: #fff;
-    padding-bottom:25px;
-    padding-top: 30px;
-  }
+.headTable {
+  background-color: #30349f;
+  color: #fff;
+  padding-bottom: 25px;
+  padding-top: 30px;
+}
 
-  #btn-mes {
-    font-size: 25px;
-    height: 20px;
-    width: 20px;
-    line-height: 20px;
-    text-align: center;
-    padding: 0;
-    border: none;
-    background: none;
-    color: #fff;
-  }
+#btn-mes {
+  font-size: 25px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #fff;
+}
 
 /*modificar para que no afecte a todas*/
-  .tableRack th:first-child {
-    position: sticky;
-    left: 0;
-    z-index: 1030;
-  }
-  .tableRack td:first-child {
-    position: sticky;
-    left: 0;
-    z-index: 1010;
-  }
-  .tableRack thead > th {
-    position: sticky;
-    top: 0;
-    z-index: 1040;
-    text-align: center;
+.tableRack th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1030;
+}
 
-  }
+.tableRack td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1010;
+}
 
+.tableRack thead>th {
+  position: sticky;
+  top: 0;
+  z-index: 1040;
+  text-align: center;
 
-  /*---------calendario------*/
-  .cal-container {
-    max-width: 900px;
-    max-height: 500px;
-    overflow: auto;
-    margin: auto;
-    
-
-  }
-
-  .cal-dia{
-    min-width: 200px;
-  }
-  .cal-table {
-    position: relative;
-    border: solid #ebebeb;
-    border-width: 0 1px 0 0;
-    overscroll-behavior: contain;
-    
-
-  }
-  .cal-thead {
-    top: 0px;
-    background-color: #ecf2ff;
-    position: sticky;
-    z-index: 1010;
-
-  }
-  
-  .cal-viewmonth {
-    font-size: 16px;
-    width: 150px;
-    height: 50px;
-
-    
-  }
-  .cal-toprow {
-    width: 182px;
-    min-width: 182px;
-    color: #333;
-    background-color: #ebebeb !important;
-    border: 1px solid #ebebeb !important;
-  }
-  
-  .cal-viewmonth,
-  .cal-toprow {
-    font-weight: 700 !important;
-    text-align: center;
-    vertical-align: middle !important;
-  }
-  
-  .cal-userinfo {
-    height: 80px;
-    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
-    padding-top: 50px;
-  }
-  
-  .cal-tbody .cal-userinfo {
-    min-width: 150px !important;
-    text-align: center;
-    color: rgb(57, 57, 57);
-    font-weight: 600;
-    font-size: 18px;
-    letter-spacing: 0.03em;
-    background: #ecf2ff;
-    padding: 0.3em;
-  }
-  
-  .cal-usersheader {
-    height: 20px;
-    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
-    min-width: 150px !important;
-    text-align: center;
-    font-size: 15px;
-    letter-spacing: 0.03em;
-    padding: 0.3em;
-  }
-  
-  
-  .cal-userbadge {
-    border-radius: 0;
-    font-weight: 600;
-    font-size: 11px;
-  }
-  
- /* ------------task de estado de habitacion -------*/
-
-  .task {
-    border-left-width: 3px;
-    padding: 6px 6px;
-    /*margin: auto;  si prefieres que quede a la mitad de ambos dias*/
-    border-left-style: solid;
-    font-size: 14px;
-    position: relative;
-    min-width: 9em;
-  }
+}
 
 
-  .task--bloqueado {
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-    background-color: #333;
-    border-left: 7px solid #0b0b0b;
-    color: #fff;
+/*---------calendario------*/
+.cal-container {
+  max-width: 900px;
+  max-height: 500px;
+  overflow: auto;
+  margin: auto;
 
-    align-self: end;
-    
-  }
-  .task--bloqueado:hover{
+
+}
+
+.cal-dia {
+  min-width: 200px;
+}
+
+.cal-table {
+  position: relative;
+  border: solid #ebebeb;
+  border-width: 0 1px 0 0;
+  overscroll-behavior: contain;
+
+
+}
+
+.cal-thead {
+  top: 0px;
+  background-color: #ecf2ff;
+  position: sticky;
+  z-index: 1010;
+
+}
+
+.cal-viewmonth {
+  font-size: 16px;
+  width: 150px;
+  height: 50px;
+
+
+}
+
+.cal-toprow {
+  width: 182px;
+  min-width: 182px;
+  color: #333;
+  background-color: #ebebeb !important;
+  border: 1px solid #ebebeb !important;
+}
+
+.cal-viewmonth,
+.cal-toprow {
+  font-weight: 700 !important;
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.cal-userinfo {
+  height: 80px;
+  box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
+  padding-top: 50px;
+}
+
+.cal-tbody .cal-userinfo {
+  min-width: 150px !important;
+  text-align: center;
+  color: rgb(57, 57, 57);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.03em;
+  background: #ecf2ff;
+  padding: 0.3em;
+}
+
+.cal-usersheader {
+  height: 20px;
+  box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
+  min-width: 150px !important;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  padding: 0.3em;
+}
+
+
+.cal-userbadge {
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+/* ------------task de estado de habitacion -------*/
+
+.task {
+  border-left-width: 3px;
+  max-padding: 12px 6px;
+  /*margin: auto;  si prefieres que quede a la mitad de ambos dias*/
+  border-left-style: solid;
+  font-size: 14px;
+  position: relative;
+  min-width: 9em;
+}
+
+
+
+.task--bloqueado {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #333;
+  border-left: 7px solid #0b0b0b;
+  color: #fff;
+
+  align-self: end;
+
+}
+
+.task--bloqueado:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
   border: 2px solid #9b9a9a !important;
   border-left: 7px solid #9b9a9a !important;
   box-shadow: 0 10px 14px #9b9a9a;
-  }
+}
 
-  .task--uso-casa {
+.task--uso-casa {
 
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-    border-left: 7px solid #05d1ca;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  border-left: 7px solid #05d1ca;
   background-color: #05d1ca;
-    grid-row: 8;
-  }
-  .task--uso-casa:hover{
-    background-color: #05d1ca79;
-    box-shadow: 0 10px 14px #05d1ca8b;
-  }
+  grid-row: 8;
+}
+
+.task--uso-casa:hover {
+  background-color: #05d1ca79;
+  box-shadow: 0 10px 14px #05d1ca8b;
+}
 
 
 
-  .task--mantenimiento {
-    border-left: 7px solid #fdb44d;
-    background: #ffdaa2;
-    min-width: 200px;
-    color: #fa7705;
-  }
+.task--mantenimiento {
+  border-left: 7px solid #fdb44d;
+  background: #ffdaa2;
+  min-width: 200px;
+  color: #fa7705;
+}
 
-  .task--mantenimiento:hover{
+.task--mantenimiento:hover {
   background-color: #fdb44d !important;
   color: #ff7700 !important;
-  border-left: 7px solid  #ffdaa2 !important;
+  border-left: 7px solid #ffdaa2 !important;
   box-shadow: 0 10px 14px #ff7700c9;
   box-shadow: 0 10px 14px #fdb44d84;
-  }
+}
 
 
 
-  .task--ocupada-sucia {
-    border-left: 7px solid #bd0202;
-    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
-    grid-column: 2 / span 2;
-    grid-row: 7;
-    background: #BB6464;
-    align-self: end;
-    color: #f8f3f3;
+.task--ocupada-sucia {
+  border-left: 7px solid #bd0202;
+  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+  grid-column: 2 / span 2;
+  grid-row: 7;
+  background: #BB6464;
+  align-self: end;
+  color: #f8f3f3;
 
-  }
+}
 
-  .task--ocupada-sucia:hover{
-    background-color: #bd0202e8 !important;
+.task--ocupada-sucia:hover {
+  background-color: #bd0202e8 !important;
   color: #fff !important;
-  border-left: 7px solid  #bb6464 !important;
-  }
+  border-left: 7px solid #bb6464 !important;
+}
 
-  .task--ocupadoH{
-    background-color: #b12e3b;
-    color: #fff;
-    border-left: 7px solid #6a0319;
-  }
+.task--ocupadoH {
+  background-color: #b12e3b;
+  color: #fff;
+  border-left: 7px solid #6a0319;
+}
 
-  .task--ocupadoH:hover{
+.task--ocupadoH:hover {
   background-color: #9f0404fb !important;
   color: #fff;
   box-shadow: 0 10px 14px #780202af;
-  }
+}
 
 
-  .task--vacia-sucia {
-    border-left: 7px solid #03ae11;
-    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
-    grid-column: 2 / span 2;
-    grid-row: 9;
-    background: #bff1bf81;
-    align-self: end;
-    color: #057410e8;
-    
-  }
+.task--vacia-sucia {
+  border-left: 7px solid #03ae11;
+  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+  grid-column: 2 / span 2;
+  grid-row: 9;
+  background: #bff1bf81;
+  align-self: end;
+  color: #057410e8;
 
-  .task--vacia-sucia:hover{
-  background-color:  #81e389 !important;
+}
+
+.task--vacia-sucia:hover {
+  background-color: #81e389 !important;
   color: #fff !important;
   border: 2px solid #bff1bfa1 !important;
   border-left: 7px solid #bff1bfa1 !important;
   box-shadow: 0 10px 14px #35da435d;
-  }
+}
 
-  .task--disponible-limpia {
-    border-left: 7px solid #9b9a9a;
-    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
-    grid-column: 2 / span 2;
-    grid-row: 8;
-    background: #e5e4e4;
-    align-self: end;
-    color:  #030303;
-    
-  }
+.task--disponible-limpia {
+  border-left: 7px solid #9b9a9a;
+  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+  grid-column: 2 / span 2;
+  grid-row: 8;
+  background: #e5e4e4;
+  align-self: end;
+  color: #030303;
 
-  .task--disponible-limpia:hover{
+}
+
+.task--disponible-limpia:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
   border: 2px solid #9b9a9a !important;
   border-left: 7px solid #9b9a9a !important;
   box-shadow: 0 10px 14px #9b9a9a;
-  }
+}
 
-  .task--disponible-limpia a{
+.task--disponible-limpia a {
   color: #000 !important;
 }
 
-  .task--reserva-pagada {
-    border-left: 7px solid #4d03ae;
-    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
-    grid-column: 2 / span 2;
-    grid-row: 10;
-    background: #6b0fe3af;
-    align-self: end;
-    color: #FFF;
-    
-  }
-  .task--reserva-pagada:hover{
-    background-color: #6b0fe3af !important;
-    color: #fff !important;
-    border-left: 7px solid #4d03ae !important;
-    box-shadow: 0 10px 14px #6b0fe396;
-  }
+.task--reserva-pagada {
+  border-left: 7px solid #4d03ae;
+  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+  grid-column: 2 / span 2;
+  grid-row: 10;
+  background: #6b0fe3af;
+  align-self: end;
+  color: #FFF;
 
-  .task--reserva-pendiente-pago {
-    border-left: 7px solid #bc88ff;
-    /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
-    grid-column: 2 / span 2;
-    grid-row: 11;
-    background: #3b0286;
-    align-self: end;
-    color: #FFF;
-    align-self: end;
-    
-    
-  }
-  .task--reserva-pendiente-pago:hover{
-    background-color: #3b0286 !important;
-    color: #fff !important;
-    border-left: 7px solid #bc88ff !important;
-    box-shadow: 0 10px 14px #3b0286cb;
-  }
+}
+
+.task--reserva-pagada:hover {
+  background-color: #6b0fe3af !important;
+  color: #fff !important;
+  border-left: 7px solid #4d03ae !important;
+  box-shadow: 0 10px 14px #6b0fe396;
+}
+
+.task--reserva-pendiente-pago {
+  border-left: 7px solid #bc88ff;
+  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+  grid-column: 2 / span 2;
+  grid-row: 11;
+  background: #3b0286;
+  align-self: end;
+  color: #FFF;
+  align-self: end;
 
 
+}
 
-  .task--limpieza-vacia {
-    border-left: 7px solid #4786ff;
-    background: rgb(205, 222, 252);
-    color: #0a5eff;
-    
-  }
+.task--reserva-pendiente-pago:hover {
+  background-color: #3b0286 !important;
+  color: #fff !important;
+  border-left: 7px solid #bc88ff !important;
+  box-shadow: 0 10px 14px #3b0286cb;
+}
 
-  .task--limpieza-vacia:hover{
-  background-color:  #0a60ff6d !important;
-  color: #0a5eff !important ;
+
+
+.task--limpieza-vacia {
+  border-left: 7px solid #4786ff;
+  background: rgb(205, 222, 252);
+  color: #0a5eff;
+
+}
+
+.task--limpieza-vacia:hover {
+  background-color: #0a60ff6d !important;
+  color: #0a5eff !important;
   border: 1px solid rgb(203, 221, 255) !important;
   border-left: 7px solid rgb(203, 221, 255) !important;
-    box-shadow: 0 10px 14px #4787ff8d;
-  }
+  box-shadow: 0 10px 14px #4787ff8d;
+}
 
-  .task--limpieza-vacia a{
+.task--limpieza-vacia a {
   color: #0a5eff !important;
 }
 
 
-  .task--limpieza-ocupada {
-    border-left: 7px solid #052d76;
-    background: #6398fb;
-    align-self: end;
-    color: #fff;
+.task--limpieza-ocupada {
+  border-left: 7px solid #052d76;
+  background: #6398fb;
+  align-self: end;
+  color: #fff;
 
-  }
+}
 
-  .task--limpieza-ocupada:hover{
-    background-color:  #052d76 !important;
-    color: #fff !important;
-    border: 1px solid #6398fb !important;
-    border-bottom: 4px solid #6398fb !important;
-    border-left: 7px solid #6398fb !important;
-    box-shadow: 0 10px 14px #6398fbdd;
-  }
+.task--limpieza-ocupada:hover {
+  background-color: #052d76 !important;
+  color: #fff !important;
+  border: 1px solid #6398fb !important;
+  border-bottom: 4px solid #6398fb !important;
+  border-left: 7px solid #6398fb !important;
+  box-shadow: 0 10px 14px #6398fbdd;
+}
 
 
-  .task__detail {
-    position: absolute;
-    left: 0;
-    top: calc(100% + 10px);
-    background: #fff;
-    border: 1px solid rgba(166, 168, 179, 0.2);
-    color: #000;
-    padding: 20px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    z-index: 2;
+.task__detail {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  background: #fff;
+  border: 1px solid rgba(166, 168, 179, 0.2);
+  color: #000;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  z-index: 2;
 
-  }
-  /* -----------agregar estados 2 estados en el mismo dia---------*/
+}
+
+
+.task:after {
+  position: absolute;
+  content: " ";
+  font-size: 4em;
+  text-align: end;
+  color: #ffffff4c;
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #ffffff29;
+  border-radius: 5px;
+  box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  transition: all 0.5s ease;
+}
+
+.task:hover {
+  color: #FFf;
+}
+
+.task:hover:after {
+  right: auto;
+  right: 0;
+  width: 100%;
+}
+
+.my-input:checked+.task {
+  background-color: #fff;
+  color: #30349f;
+  border-color: #8e97f9;
+  font-weight: 500;
+}
+
+.my-input:checked+.task:after {
+  right: calc(102% - 8px);
+  transform: translateX(100%);
+  border: 2px solid #fff;
+  box-shadow:
+    -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+
+/* -----------agregar estados 2 estados en el mismo dia---------*/
 
 /*para agregar un estado donde el estado anterior y el siguiente inician el mismo dia */
-  .task-container {
-    display: flex;
-  }
-/*se agrega la clase ajuste al estado que se necesita ajustar*/
-  .ajuste {
-    width: calc(75% - 1px); /*el ajuste es 75% por cada dia que la tarea estara*/
-  }
+.task-container {
+  display: flex;
+}
 
-  .ajuste-2dias {
-    width: calc(150% - 1px); /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
-  }
+/*se agrega la clase ajuste al estado que se necesita ajustar*/
+.ajuste {
+  width: calc(75% - 1px);
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+
+.ajuste-2dias {
+  width: calc(150% - 1px);
+  /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
+}

@@ -18,10 +18,12 @@
 		<a href="inicio.php" class="nav-link text-white my-2">
 			<img src="images/InotekLogotipoRec.png" alt="logo" width="215" height="50" style= "margin-top: 25px; margin-bottom:10px;">
 		</a>
-		<div class="texto-check"><p>Cambiar a vista Habitacional</p></div>
+		<div class="texto-check"><p></p></div>
         <div class="form-check2 form-switch ocultar">
-        <input class="form-check-input2" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="switch_rack();">
-        <label class="form-check-label2" for="flexSwitchCheckDefault" onclick="sub_menu(); boton_menu();"></label>
+        <input class="form-check-input2" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="cambiarVista(); switch_rack();">
+		<label class="form-check-label2" for="flexSwitchCheckDefault" onclick="sub_menu(); boton_menu();">
+		<span id="vista" class="toggle-text vista-habitacional">Vista Habitacional</span>
+		</label>
         </div>
 		</div>';
 
