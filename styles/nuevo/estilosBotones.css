@@ -229,11 +229,20 @@ span {
   border-left: 7px solid #05d1ca !important;
 }
 
+.usoCasa:hover{
+  background-color: #4ee8e3 !important;
+  box-shadow: 0 10px 14px #069894 !important;
+  color: #000;
+}
+
+.usoCasa a{
+  color: #000 !important;
+}
+
 
 .ocupadoH {
   background-color: #c70404d3 !important;
   color: #fff;
-  border: 2px solid #9f0404fb !important;
   border-left: 7px solid #ad0328 !important;
   box-shadow: 0 10px 14px #780202af !important;
 }
@@ -355,14 +364,13 @@ span {
 .mantenimiento {
   background-color: #ffdaa2 !important;
   color: #ff7700 !important;
-  border-bottom: 3px solid #fdb44d !important;
   border-left: 7px solid #fdb44d !important;
 }
 
 .mantenimiento:hover {
   background-color: #fdb44d !important;
   color: #fff !important;
-  border-left: 7px solid  #ffdaa2 !important;
+  border-left: 7px solid  #ffdaa2 ;
   box-shadow: 0 10px 14px #ff7700c9;
 }
 
@@ -526,6 +534,32 @@ span {
   4px 4px 5px 0px #0001;
   transition: all 0.3s ease;
 }
+
+.terminar{
+  background-color: #77a5ad !important;
+  border-top-right-radius: 15px !important;
+  border-bottom-left-radius: 15px !important;
+  border: 1px solid #26565f;
+}
+
+.cambiar_usuario{
+  background: linear-gradient(to right, #553e32 50%, rgb(65, 47, 37)) !important;
+  border: 1px solid #553e32;
+  border-top-right-radius: 15px !important;
+  border-bottom-left-radius: 15px !important;
+}
+
+.btn-square-lg{
+  border-top-right-radius: 15px !important;
+  border-bottom-left-radius: 15px !important;
+  transition:  0.3s ease-out;
+}
+
+.btn-square-lg:hover{
+  box-shadow: 0 10px 14px #292929dd;
+}
+
+
 /*
 .btn .ocupado {
   background-color: #780202f8;
