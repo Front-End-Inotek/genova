@@ -216,6 +216,15 @@ input[type=checkbox] {
 
 }
 
+#filtro-noche{
+  position: fixed;
+  font-size: 25px;
+  left: 96.5%;
+  border-radius: 150px;
+  background-color: #adadfe;
+  border: 2px solid #30349f !important;
+}
+
 .btn-primary:hover,
 .btn-primary:focus {
   background-color: #736bc6;
