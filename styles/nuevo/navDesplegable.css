@@ -1,6 +1,7 @@
 body {
   min-height: 100vh;
   background-color: #ecf2ff;
+  overflow: hidden;
 }
 
 a {
@@ -15,7 +16,6 @@ a:hover {
 }
 
 
-
 span {
   cursor: pointer;
 }
@@ -23,7 +23,6 @@ span {
 .submenu {
   display: none;
 }
-
 
 
 
@@ -219,10 +218,28 @@ input[type=checkbox] {
 #filtro-noche{
   position: fixed;
   font-size: 25px;
-  left: 96.5%;
+  left: 92.5%;
   border-radius: 150px;
-  background-color: #adadfe;
+  color: #30349f;
+  background: radial-gradient(circle at center,  #ffffff, #adadfe 70%) ;
   border: 2px solid #30349f !important;
+}
+
+.icono-luna {
+  display: inline-block;
+  font-size: 1.5rem;
+  transform: rotate(15deg);
+}
+
+.icono-sol {
+  display: inline-block;
+  font-size: 1.5rem;
+  transform: rotate(-15deg);
+}
+
+.btn-sol {
+  color: #ff931f !important;
+  background: radial-gradient(circle at center, #ffffff, #ff9f1a 70% ) !important;
 }
 
 .btn-primary:hover,
@@ -318,6 +335,9 @@ input[type=checkbox] {
   #mostrar-botones {
     left: 55%;
   }
+  #filtro-noche{
+    left: 85.5%;
+  }
 }
 
 /* Para pantallas de tamaño mediano, entre 576px y 991.98px */
@@ -352,6 +372,9 @@ input[type=checkbox] {
   #mostrar-botones {
     left: 160%;
   }
+  #filtro-noche{
+    left: 85.5%;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1514px) {
@@ -385,8 +408,10 @@ input[type=checkbox] {
   #mostrar-botones {
     left: 160%;
   }
+    #filtro-noche{
+  left: 90.5%;
 }
-
+}
 
 /* Para pantallas de tamaño grande, entre 992px y 1980px */
 @media (min-width: 1515px) and (max-width: 1825px) {

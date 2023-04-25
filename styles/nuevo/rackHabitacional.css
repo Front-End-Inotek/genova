@@ -53,25 +53,76 @@
   color: #fff;
 }
 
-/*modificar para que no afecte a todas*/
 .tableRack th:first-child {
-  position: sticky;
+  position: sticky !important;
   left: 0;
   z-index: 1030;
 }
 
 .tableRack td:first-child {
-  position: sticky;
+  position: sticky !important;
   left: 0;
   z-index: 1010;
 }
 
 .tableRack thead>th {
-  position: sticky;
+  position: sticky !important;
   top: 0;
   z-index: 1040;
   text-align: center;
 
+}
+
+.tableRack td {
+  font-weight: normal;
+  font-size: 1em;
+-webkit-box-shadow: 0 2px 2px -2px #0E1119;
+   -moz-box-shadow: 0 2px 2px -2px #0E1119;
+        box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.tableRack th {
+  background:#adadfe!important;
+  color: #30349f;
+}
+.tableRack th:hover {
+  background-color: #adadfe;
+  color: #30349f;
+  font-weight: bold;
+  
+  box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
+  transform: translate3d(0px, 6px, 0);
+  transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+  transition-timing-function: line;
+  }
+
+.tableRack td:first-child {
+  color: #FFF;
+  background-color: #30349f;
+
+}
+
+.tableRack tr:hover {
+ background-color: #30349f3d;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+        box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.tableRack td:hover {
+background-color: #adadfe;
+color: #30349f;
+font-weight: bold;
+
+box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
+transform: translate3d(3px, -6px, 0);
+
+transition-delay: 0s;
+  transition-duration: 0.4s;
+  transition-property: all;
+transition-timing-function: line;
 }
 
 
@@ -111,7 +162,6 @@
   font-size: 16px;
   width: 150px;
   height: 50px;
-
 
 }
 
@@ -164,6 +214,7 @@
   font-size: 11px;
 }
 
+
 /* ------------task de estado de habitacion -------*/
 
 .task {
@@ -174,6 +225,7 @@
   font-size: 14px;
   position: relative;
   min-width: 9em;
+  min-height: 5em;
 }
 
 

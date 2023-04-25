@@ -223,8 +223,8 @@
 		<button class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="mostrar-botones" onclick="toggleBotones()">
 			<i class="bx bxl-stack-overflow" ></i>
 		</button>
-		<button class="btn btn-primary border-0  menu-btn" id="filtro-noche" onclick="toggleBotones()">
-		<i class="bx bx-moon" ></i></i>
+		<button class="btn btn-primary border-0 menu-btn" id="filtro-noche" onclick="modoNocturno()">
+ 		<i class="bx bx-moon icono-luna"></i>
 		</button>
 
 

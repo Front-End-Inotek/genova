@@ -75,4 +75,30 @@ function cambiarVista() {
   }
 }
 
+//funcion para cambiar a modo nocturno
+
+function modoNocturno() {
+  var body = document.body;
+  var currentColor = body.style.backgroundColor;
+  var boton = document.getElementById("filtro-noche");
+
+  if (currentColor === "rgb(7, 7, 26)" || currentColor === "#07071A") {
+    // si el color actual es azul oscuro, cambiar de vuelta al color original y al icono de sol
+    body.style.backgroundColor = "";
+    boton.classList.remove("btn-sol");
+    boton.querySelector("i").classList.remove("bx-sun");
+    boton.querySelector("i").classList.add("icono-sol");
+    body.classList.remove("modo-nocturno"); // eliminar la clase modo-nocturno del body
+  } else {
+    // si el color actual es diferente a azul oscuro, cambiar a azul oscuro y al icono de luna
+    body.style.backgroundColor = "#07071A";
+    boton.classList.add("btn-sol");
+    boton.querySelector("i").classList.add("bx-sun");
+    boton.querySelector("i").classList.remove("icono-sol");
+    boton.querySelector("i").classList.add("icono-luna");
+    body.classList.add("modo-nocturno"); // agregar la clase modo-nocturno al body
+  }
+}
+
+
 
