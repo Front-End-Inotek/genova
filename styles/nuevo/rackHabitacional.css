@@ -4,10 +4,11 @@
 
 .tableRack {
   table-layout: auto;
+  
 }
 
 #tablaTotal {
-  border: 1px solid #c6c4fc;
+  border: 1px solid #6a67ef !important;
   /*6a67ef*/
 }
 
@@ -133,8 +134,6 @@ transition-timing-function: line;
   max-height: 500px;
   overflow: auto;
   margin: auto;
-
-
 }
 
 .cal-dia {

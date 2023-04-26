@@ -50,14 +50,34 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
           </head>
-    <body onload="sabernosession()">
+    <body class="context" onload="sabernosession()">
+      <ul class="circles">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+      </ul>
+</div >
+    
       <div class="menu"></div>
+      
       <div id="pie" class="footer"></div>
       <div id="area_trabajo" class="container-fluid"></div>
-      <div id="area_trabajo_menu" class="container-fluid"></div>
+      <div id="area_trabajo_menu" class="container-fluid">
+      </div>
+      
+
+      
 
 
     </div>
+    
       <!-- Modal -->
               <div id="caja_herramientas" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-lg">

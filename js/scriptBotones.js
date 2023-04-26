@@ -126,3 +126,5 @@ var botonMostrarBloqueo = document.getElementById('mostrar-bloqueo');
 agregarEventoDeMostrarHabitaciones(botonMostrarBloqueo, '.bloqueoVisible');
 
 
+
+
