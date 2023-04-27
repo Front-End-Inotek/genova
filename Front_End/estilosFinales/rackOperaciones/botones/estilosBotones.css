@@ -188,7 +188,7 @@ span {
 /***rack operaciones***/
 /***************************/
 
-.container {
+.containerRack {
   display: grid;
   grid-template-columns: repeat(8, minmax(220px, 1fr));
   grid-gap: 10px;
@@ -197,7 +197,7 @@ span {
 }
 
 
-.container .btn {
+.containerRack .btn {
   font-size: 14px;
   top: 0;
   left: 0;
@@ -284,11 +284,11 @@ span {
   border-left: 7px solid #2f010b;
 }
 
-.container .btn:hover {
+.containerRack .btn:hover {
   transform: translateY(-5px);
   transition: 0.2s ease-out;
 }
-.container .btn::before {
+.containerRack .btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -297,12 +297,14 @@ span {
   height: 100%;
   transition: 0.5s;
   font-size: large;
+  
 }
 
-.container .btn a {
+.containerRack .btn a {
   color: #fff;
   text-shadow: 1px 1px 2px rgba(4, 4, 4, 0.926);
 }
+
 
 /**********************footer********************/
 .containerFooter {
@@ -317,7 +319,6 @@ span {
   color: #fff;
   height: auto;
 }
-
 /* Para pantallas de tamaño pequeño, menores a 576px */
 @media (max-width: 575.98px) {
   .container {

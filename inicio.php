@@ -24,6 +24,7 @@
             <script src="js/rackHabitacional.js"></script>
             <script src="js/navDesplegable.js"></script>
             <script src="js/scriptBotones.js"></script>
+            <script src="js/sweetalert.min.js"></script>
 
             <!--link css-->
             <link rel=stylesheet href="styles/estilos.css" type="text/css">
@@ -48,17 +49,35 @@
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
           </head>
-    <body onload="sabernosession()">
+    <body class="context" onload="sabernosession()">
+      <ul class="circles">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+      </ul>
+</div >
+    
       <div class="menu"></div>
+      
       <div id="pie" class="footer"></div>
       <div id="area_trabajo" class="container-fluid"></div>
-      <div id="area_trabajo_menu" class="container-fluid"></div>
+      <div id="area_trabajo_menu" class="container-fluid">
+      </div>
+      
+
+      
 
 
     </div>
+    
       <!-- Modal -->
               <div id="caja_herramientas" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-lg">

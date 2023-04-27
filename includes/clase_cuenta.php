@@ -506,10 +506,10 @@
 
         echo '
         <div class="containerFooter">
-        <div class="margen_inf_pie">
-          <div class="card">
+        <div>
+          <div class="card cardFooter">
             <div class="card-header">
-              <div class="row">
+              <div class="row rowFooter">
               <div class="col-xs-2 col-sm-4 col-md-2">Total Ocupadass: '.$ocupadas.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>

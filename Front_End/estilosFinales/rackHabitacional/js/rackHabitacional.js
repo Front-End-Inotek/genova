@@ -26,3 +26,19 @@ botonMostrar.addEventListener("click", function() {
  tasks.forEach(task => {
   task.addEventListener("click", mostrarInformacion);
 });
+
+
+// Creamos una función para agregar la regla CSS
+function agregarReglasCSS(elemento) {
+  var elementosHijos = elemento.children;
+  
+  for (var i = 0; i < elementosHijos.length; i++) {
+    var hijo = elementosHijos[i];
+    var colspan = hijo.getAttribute('colspan');
+    
+    if (colspan) {
+      var reglaCSS = "width: calc(" + (75/colspan) + "% - 1px);";
+      hijo.style.cssText += reglaCSS;
+    }
+  }
+}

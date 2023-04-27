@@ -4,21 +4,23 @@ body {
   background-color: #ecf2ff;
 }
 
-a{
+
+a {
   text-decoration: none;
   cursor: pointer;
 
+  color: #000;
 }
 
-a:hover{
+a:hover {
   color: inherit;
 }
 
 
-
-span{
+span {
   cursor: pointer;
 }
+
 .submenu {
   display: none;
 }
@@ -30,88 +32,138 @@ span{
 input[type=checkbox] {
   height: 0;
   width: 0;
-display: none;
+  display: none;
 }
 
-
-.texto-check{
-  font-size: 13px;
-  text-align:left;
+.texto-check {
+  font-size: 18px;
+  text-align: left;
   margin-left: 10px;
-  cursor:default;
+  cursor: default;
   margin-top: 30px;
 }
 
-
-.form-check-label {
+.form-check-label2 {
   cursor: pointer;
-  text-indent: -9999px;
-  left: 153px;
-  bottom: 35px;
-  width: 40px;
-  height: 15px;
-  background: grey;
+  left: -26px;
+  bottom: 16px;
+  height: 29px;
+  border-radius: 1px;
   display: block;
-  border-radius: 100px;
   position: relative;
   align-items: center;
   text-align: center;
+  border: 2px solid #FFF;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 500;
+  background: #ffffff2b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  outline: none;
 }
-.form-check-label:after {
-  content: '';
+
+.form-check-label2 {
+  border: none;
+  color: #fff;
+}
+
+.form-check-label2:after {
   position: absolute;
-  top: 1px;
-  left: 5px;
-  width: 15px;
-  height: 15px;
-  background: #fff;
-  border-radius: 90px;
-  transition: 0.3s;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background-color: #663dff;
+  border-radius: 5px;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  transition: all 0.3s ease;
 }
-.form-check-input:checked + .form-check-label {
-  background: #bface2;
+
+.form-check-label2:hover {
+  color: #FFf;
 }
-.form-check-input:checked + .form-check-label:after {
-  left: calc(100% - 5px);
+
+.form-check-label2:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+.form-check-input2:checked+.form-check-label2 {
+  background-color: #fff;
+  color: #30349f;
+  border-color: #8e97f9;
+  font-weight: 500;
+}
+
+.form-check-input2:checked+.form-check-label2:after {
+  left: calc(102% - 8px);
   transform: translateX(-100%);
+  border: 2px solid #fff;
+  box-shadow:
+  -7px -7px 20px 0px #fff9,
+  -4px -4px 5px 0px #fff9,
+  7px 7px 20px 0px #0002,
+  4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
 }
+.contenedor-sub:hover {
+  background-color: #ffffff6e;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 105%;
+  }
+
+  
 
 /******************************/
 /*tamaño y ocultar la side nav*/
 /******************************/
 .side-navbar {
-  min-width: 250px;
+  min-width: 300px;
   height: 120%;
   position: absolute;
-  margin-left: -13%;
+  margin-left: -15.7%;
+
   background-color: #30349f;
   transition: 0.5s;
   font-size: large;
   z-index: 9999;
-
 }
 
-#navbarDropdown{
+
+
+#navbarDropdown {
   color: #fff;
 
 }
 
-.subitem{
+.subitem {
   color: #ecf2ff;
   font-size: 18px;
   border: #bface2;
   border: none;
   border-radius: 50px;
   cursor: pointer;
+  font-size: medium;
 }
 
 
 /*informacion sobre la empresa */
 
-.informacion{
+.informacion {
   justify-content: center;
   text-align: center;
 }
+
 /***********************************/
 /*color hover de los links dentro del nav*/
 /***********************************/
@@ -119,8 +171,9 @@ display: none;
 .nav-link:focus,
 .nav-link:hover {
   background-color: #ffffff26;
-  
+
 }
+
 /*********************************/
 /*tiempo y posiconamiento visible*/
 /*********************************/
@@ -135,6 +188,7 @@ display: none;
 .active-cont {
   margin-left: 250px;
 }
+
 /*******************************/
 /*configuacion de botones color*/
 /* tamaño y posicionamiento ****/
@@ -148,20 +202,45 @@ display: none;
   font-size: 30px;
 }
 
-#menu-btn-desplegar{
 
-}
-#menu-btn-fecha{
+#menu-btn-fecha {
   left: 125%;
 }
 
-#menu-btn-filtrar{
+#menu-btn-filtrar {
   left: 150%;
 }
 
-#mostrar-botones{
+#mostrar-botones {
   left: 175%;
 
+}
+
+#filtro-noche{
+  position: fixed;
+  font-size: 25px;
+  left: 92.5%;
+  border-radius: 150px;
+  color: #30349f;
+  background: radial-gradient(circle at center,  #ffffff, #adadfe 70%) ;
+  border: 2px solid #30349f !important;
+}
+
+.icono-luna {
+  display: inline-block;
+  font-size: 1.5rem;
+  transform: rotate(15deg);
+}
+
+.icono-sol {
+  display: inline-block;
+  font-size: 1.5rem;
+  transform: rotate(-15deg);
+}
+
+.btn-sol {
+  color: #ff931f !important;
+  background: radial-gradient(circle at center, #ffffff, #ff9f1a 70% ) !important;
 }
 
 .btn-primary:hover,
@@ -180,149 +259,228 @@ display: none;
   visibility: hidden;
 }
 
-@media (max-width: 668px) { /* Agregamos un media query para dispositivos móviles */
+
+
+
+@media (max-width: 668px) {
+
+  /* Agregamos un media query para dispositivos móviles */
   .side-navbar {
     margin-left: -53%;
 
   }
 
   .active-nav {
-    margin-left: -250px; /* Cambiamos el valor de margin-left a -250px para que la barra salga de la pantalla */
+    margin-left: -250px;
+    /* Cambiamos el valor de margin-left a -250px para que la barra salga de la pantalla */
   }
 
   .active-cont {
-    margin-left: 0; /* Cambiamos el valor de margin-left a 0 para que el contenido ocupe toda la pantalla */
+    margin-left: 0;
+    /* Cambiamos el valor de margin-left a 0 para que el contenido ocupe toda la pantalla */
     width: 50px;
     left: 90%;
   }
 
   .menu-btn {
-    left: 110%; /* Cambiamos el valor de left a 90% para que los botones estén más cerca del borde */
+    left: 110%;
+    /* Cambiamos el valor de left a 90% para que los botones estén más cerca del borde */
   }
 
   #menu-btn-fecha {
-    left: 80%; /* Cambiamos el valor de left a 80% para que el botón de fecha esté más cerca del borde */
+    left: 80%;
+    /* Cambiamos el valor de left a 80% para que el botón de fecha esté más cerca del borde */
   }
 
   #menu-btn-filtrar {
-    left: 130%; /* Cambiamos el valor de left a 70% para que el botón de filtrar esté más cerca del borde */
+    left: 130%;
+    /* Cambiamos el valor de left a 70% para que el botón de filtrar esté más cerca del borde */
   }
-  #mostrar-botones{
+
+  #mostrar-botones {
     left: 140%;
   }
-}/*
+}
+
+/*
 
 /* Para pantallas de tamaño pequeño, menores a 576px */
-@media (max-width: 575.98px) {
+@media (min-width: 426px) and (max-width: 767px) {
   .side-navbar {
     margin-left: -90%;
     width: 90%;
   }
+
   .active-nav {
     margin-left: 0;
   }
+
   .active-cont {
     margin-left: 0;
     width: 100%;
     left: 0;
   }
+
   .menu-btn {
     left: 100%;
   }
+
   #menu-btn-fecha {
     left: 85%;
   }
+
   #menu-btn-filtrar {
     left: 70%;
   }
-  #mostrar-botones{
+
+  #mostrar-botones {
     left: 55%;
+  }
+  #filtro-noche{
+    left: 85.5%;
   }
 }
 
 /* Para pantallas de tamaño mediano, entre 576px y 991.98px */
-@media (min-width: 576px) and (max-width: 991.98px) {
+@media (min-width: 768px) and (max-width: 991.98px) {
   .side-navbar {
-    margin-left: -70%;
-    width: 70%;
+    margin-left: -40%;
+    width: 40%;
   }
+
   .active-nav {
     margin-left: 0;
   }
+
   .active-cont {
     margin-left: 0;
     width: 100%;
     left: 0;
   }
+
   .menu-btn {
     left: 100%;
   }
+
   #menu-btn-fecha {
-    left: 115%;
+    left: 120%;
   }
+
   #menu-btn-filtrar {
-    left: 125%;
+    left: 140%;
   }
-  #mostrar-botones{
-    left: 135%;
+
+  #mostrar-botones {
+    left: 160%;
+  }
+  #filtro-noche{
+    left: 85.5%;
   }
 }
 
-/* Para pantallas de tamaño grande, entre 992px y 1980px */
-@media (min-width: 992px) and (max-width: 1825px) {
+@media (min-width: 992px) and (max-width: 1514px) {
   .side-navbar {
-    margin-left: -40%;
-    width: 40%;
+    margin-left: -30%;
+    width: 30%;
   }
+
   .active-nav {
     margin-left: 0;
   }
+
   .active-cont {
-    margin-left: 40%;
+    margin-left: 20%;
     width: 60%;
     left: 0;
   }
+
   .menu-btn {
     left: 101%;
   }
+
   #menu-btn-fecha {
-    left: 113%;
+    left: 120%;
   }
+
   #menu-btn-filtrar {
-    left: 125%;
+    left: 140%;
   }
-  #mostrar-botones{
-  left: 137%;
+
+  #mostrar-botones {
+    left: 160%;
+  }
+    #filtro-noche{
+  left: 90.5%;
 }
+}
+
+/* Para pantallas de tamaño grande, entre 992px y 1980px */
+@media (min-width: 1515px) and (max-width: 1825px) {
+  .side-navbar {
+    margin-left: -20%;
+    width: 20%;
+  }
+
+  .active-nav {
+    margin-left: 0;
+  }
+
+  .active-cont {
+    margin-left: 20%;
+    width: 60%;
+    left: 0;
+  }
+
+  .menu-btn {
+    left: 101%;
+  }
+
+  #menu-btn-fecha {
+    left: 120%;
+  }
+
+  #menu-btn-filtrar {
+    left: 140%;
+  }
+
+  #mostrar-botones {
+    left: 160%;
+  }
 }
 
 
 
 
 /* Para pantallas de tamaño extra grande */
-@media (min-width: 2082px)  {
+@media (min-width: 2082px) {
   .side-navbar {
     margin-left: -23%;
     width: 23%;
   }
+
   .active-nav {
     margin-left: 0;
   }
+
   .active-cont {
     margin-left: 40%;
     width: 60%;
     left: 0;
   }
+
   .menu-btn {
     left: 102%;
   }
+
   #menu-btn-fecha {
     left: 115%;
   }
+
   #menu-btn-filtrar {
     left: 128%;
   }
-  #mostrar-botones{
-  left: 141%;
-}
+
+  #mostrar-botones {
+    left: 141%;
+  }
 }

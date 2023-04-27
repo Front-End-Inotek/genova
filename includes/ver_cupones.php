@@ -3,7 +3,7 @@
   include_once("clase_cupon.php");
   $cupon= NEW Cupon(0);
   
-  echo ' <div class="container-fluid blanco"> 
+  echo ' <div class="container-fluid blanco">
           <br>
           <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">CUPONES</h2></div>
           
@@ -21,7 +21,7 @@
             </div>
             <div class="col-sm-2">
               <button class="btn btn-success btn-block btn-default" onclick="busqueda_cupon()">
-                Buscar 
+                Buscar
               </button>
             </div>
           </div><br>

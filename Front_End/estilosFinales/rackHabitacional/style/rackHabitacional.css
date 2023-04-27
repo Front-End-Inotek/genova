@@ -4,21 +4,24 @@
   /* header y columnas */
 
 
-  *{
-    text-transform: uppercase;
-  }
 
 .table {
   table-layout: auto;
 }
 
+
 #tablaTotal{
   border: 1px solid #c6c4fc;
+  
   /*6a67ef*/
 }
 #cal-largo{
-  height: auto; 
+  height: 52rem; 
   margin-bottom: 0; 
+}
+
+.my-container{
+  display: none;
 }
 
 
@@ -40,7 +43,7 @@
     background-color: #30349f;
     color: #fff;
     padding-bottom:25px;
-    margin-top: 33px;
+    margin-top: 3px;
   }
   #btn-mes {
     font-size: 25px;
@@ -74,18 +77,22 @@
   }
 
 
+
   /*---------calendario------*/
   .cal-container {
     max-width: 900px;
     max-height: 500px;
     overflow: auto;
     margin: auto;
-    
+
 
   }
 
   .cal-dia{
     min-width: 200px;
+  }
+  .cal-dia:hover{
+    height: 150%;
   }
   .cal-table {
     position: relative;
@@ -376,6 +383,8 @@
   .ajuste-2dias {
     width: calc(150% - 1px); /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
   }
+
+  
 
   /*
   .task--vacia-sucia{

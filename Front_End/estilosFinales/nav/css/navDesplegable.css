@@ -19,10 +19,6 @@ a:hover{
 span{
   cursor: pointer;
 }
-.submenu {
-  display: none;
-}
-
 
 
 /*boton cambio de rack*/
@@ -91,6 +87,7 @@ display: none;
 
 }
 
+
 #navbarDropdown{
   color: #fff;
 
@@ -106,7 +103,6 @@ display: none;
   cursor: pointer;
   
 }
-
 
 /*informacion sobre la empresa */
 

@@ -16,19 +16,21 @@
 		<ul class="nav flex-column text-white w-100">
 		<div class="informacion">
 		<a href="inicio.php" class="nav-link text-white my-2">
-			<img src="images/InotekLogotipo.png" alt="logo" width="200" height="200" ">
+			<img src="images/InotekLogotipoRec.png" alt="logo" width="215" height="50" style= "margin-top: 25px; margin-bottom:10px;">
 		</a>
-		<div class="texto-check"><p>Cambiar a rack Habitacion</p></div>
-        <div class="form-check form-switch ocultar">
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="switch_rack()">
-          <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		<div class="texto-check"><p></p></div>
+        <div class="form-check2 form-switch ocultar">
+        <input class="form-check-input2" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="cambiarVista(); switch_rack();">
+		<label class="form-check-label2" for="flexSwitchCheckDefault" onclick="sub_menu(); boton_menu();">
+		<span id="vista" class="toggle-text vista-habitacional">Vista Habitacional</span>
+		</label>
         </div>
 		</div>';
 
 		$permisos_habitaciones=$usuario->tipo_ver+$usuario->tipo_agregar+$usuario->tarifa_ver+$usuario->tarifa_agregar+$usuario->hab_ver+$usuario->hab_agregar;
 		if($permisos_habitaciones>0){
 				echo '
-				<li id="#" onclick="sub_menu()" class="nav-link">
+				<li id="#" onclick="sub_menu();" class="nav-link">
 				<i class="bx bx-bed"></i>
 				<span class="mx-2 habitaciones">Habitaciones</span>
 				<ul id="habitaciones_submenu" class="submenu ocultar">
@@ -37,19 +39,19 @@
 			$permisos_tipo=$usuario->tipo_ver+$usuario->tipo_agregar;
 			if($permisos_tipo>0){
 				echo '
-				<ul class="contenedor-sub"><a class="subitem" onclick="ver_tipos()">Ver tipos de habitación</a></i></ul>';
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tipos();">Ver tipos de habitación</a></i></ul>';
 			}
 
 			$permisos_tarifa=$usuario->tarifa_ver+$usuario->tarifa_agregar;
 			if($permisos_tarifa>0){
 				echo '
-				<ul class="contenedor-sub"><a class="subitem" onclick="ver_tarifas()"> Ver tipos de tarifa </a></i></ul>';
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tarifas()"> Ver tipos de tarifa</a></i></ul>';
 			}
 
 			$permisos_hab=$usuario->hab_ver+$usuario->hab_agregar;
 			if($permisos_hab>0){
 				echo '
-				<ul class="contenedor-sub"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones </a></i></ul>';
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones</a></i></ul>';
 			}
 		}
 			echo '
@@ -68,13 +70,13 @@
 			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
 			if($permisos_reservar>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>';
 			}
 
 			$permisos_huesped=$usuario->huesped_ver+$usuario->huesped_agregar;
 			if($permisos_huesped>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
 			}
 		}
 			echo'
@@ -93,18 +95,18 @@
 			$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
 			if($permisos_reportes_diarios>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_cargo_noche()"> Diarios </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cargo_noche()"> Diarios </a></i></ul>';
 			}
 			$permisos_surtir=$usuario->inventario_surtir;
 			if($permisos_surtir>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_surtir()"> Surtir </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_surtir()"> Surtir </a></i></ul>';
 			}
 
 			$permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
 			if($permisos_reportes_diarios>0 || $usuario->nivel==2){
 			echo'
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_cortes()"> Corte </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Corte </a></i></ul>';
 			}
 		}
 		echo'
@@ -123,31 +125,31 @@
 			$permisos_usuario=$usuario->usuario_ver+$usuario->usuario_agregar;
 			if($permisos_usuario>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_usuarios()"> Usuarios </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_usuarios()"> Usuarios </a></i></ul>';
 			}
 
 			$permisos_logs=$usuario->logs_ver;
 			if($permisos_logs>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_logs()"> Logs </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_logs()"> Logs </a></i></ul>';
 			}
 
 			$permisos_forma_pago=$usuario->forma_pago_ver;
 			if($permisos_forma_pago>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_formas_pago()"> Formas de pago </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_formas_pago()"> Formas de pago </a></i></ul>';
 			}
 
 			$permisos_cupon=$usuario->cupon_ver+$usuario->cupon_agregar;
 			if($permisos_cupon>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_cupones()"> Cupones </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cupones()"> Cupones </a></i></ul>';
 			}
 
 			$permisos_configuracion= $usuario->nivel;
 			if($permisos_configuracion==0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_tipos()"> Configuracion </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tipos()"> Configuracion </a></i></ul>';
 			}
 		}
 			echo '
@@ -167,29 +169,29 @@
 			$permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->categoria_ver;
 			if($permisos_inventario>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="ver_inventario()"> Inventario </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_inventario()"> Inventario </a></i></ul>';
 			}
 
 			$permisos_surtir=$usuario->inventario_surtir;
 			if($permisos_surtir>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="surtir_inventario()"> Surtir </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="surtir_inventario()"> Surtir </a></i></ul>';
 			}
 			$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
 			if($permisos_restaurante>0){
 			echo '
-			<ul class="contenedor-sub"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
 			}
 		}
 			echo '
 			</ul>
 		</li>';
 
-
 		/*<li href="" onclick="ver_rack_habitacional()" class="nav-link">
 			<i class="bx bxs-user" ></i>
 			<span class="mx-2">Rack Habitacional</span>
 		</li>*/
+
 		echo '
 		<li href="#" class="nav-link">
 			<i class="bx bxs-user" ></i>
@@ -221,6 +223,10 @@
 		<button class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="mostrar-botones" onclick="toggleBotones()">
 			<i class="bx bxl-stack-overflow" ></i>
 		</button>
+		<button class="btn btn-primary border-0 menu-btn" id="filtro-noche" onclick="modoNocturno()">
+ 		<i class="bx bx-moon icono-luna"></i>
+		</button>
+
 
 	</div>';
 
