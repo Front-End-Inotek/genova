@@ -80,6 +80,7 @@
 -webkit-box-shadow: 0 2px 2px -2px #0E1119;
    -moz-box-shadow: 0 2px 2px -2px #0E1119;
         box-shadow: 0 2px 2px -2px #0E1119;
+        
 }
 
 .tableRack th {
@@ -89,10 +90,6 @@
 .tableRack th:hover {
   background-color: #adadfe;
   color: #30349f;
-  font-weight: bold;
-  
-  box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
-  transform: translate3d(0px, 6px, 0);
   transition-delay: 0s;
     transition-duration: 0.4s;
     transition-property: all;
@@ -106,7 +103,7 @@
 }
 
 .tableRack tr:hover {
- background-color: #30349f3d;
+ background-color: #adadfe;
 -webkit-box-shadow: 0 6px 6px -6px #0E1119;
    -moz-box-shadow: 0 6px 6px -6px #0E1119;
         box-shadow: 0 6px 6px -6px #0E1119;
@@ -115,18 +112,26 @@
 .tableRack td:hover {
 background-color: #adadfe;
 color: #30349f;
-font-weight: bold;
-
 box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
-transform: translate3d(3px, -6px, 0);
-
 transition-delay: 0s;
   transition-duration: 0.4s;
   transition-property: all;
 transition-timing-function: line;
 }
 
-
+/*dividir la celda en 2*/
+.celdaCompleta {
+  width: 50%;
+  position: relative;
+}
+.medioDia {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+.medioDia section {
+  text-align: center;
+}
 
 /*---------calendario------*/
 .cal-container {
@@ -219,12 +224,12 @@ transition-timing-function: line;
 .task {
   border-left-width: 3px;
   padding: 8px 6px;
-  /*margin: auto;  si prefieres que quede a la mitad de ambos dias*/
   border-left-style: solid;
   font-size: 14px;
   position: relative;
   min-width: 9em;
-  min-height: 5em;
+  min-height: 4em;
+  max-height: 4em;
 }
 
 

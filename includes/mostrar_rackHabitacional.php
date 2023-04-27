@@ -221,9 +221,16 @@ echo '
             echo'
             <td class="celdaCompleta">
                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
+                    <div class="medioDia">
                     <section class="task task--disponible-limpia" >
                         <a> '. $estado . '<br> </a>
                     </section>
+                    </div>
+                    <div class="medioDia">
+                    <section class="task task--disponible-limpia" >
+                        <a> '. $estado . '<br> </a>
+                    </section>
+                    </div>
                 </div>
             </td>
             ';

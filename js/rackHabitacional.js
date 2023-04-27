@@ -50,21 +50,21 @@ function togglePanel() {
 
 
 
-//tamaño adaptable de 2 o mas espados dependiendo el colspan (duracion)
-function ajusteDeAncho(tableId) {
-  const table = document.getElementById(tableId);
+//tamaño adaptable de 2 o mas espados dependiendo el colspan
+function ajusteDeAncho(tablaTotal) {
+  const table = document.getElementById(tablaTotal);
   const cells = table.getElementsByTagName("td");
 
-  // Recorrer todas las celdas
   for (let i = 0; i < cells.length; i++) {
     const cell = cells[i];
 
     // Si la celda tiene un colspan mayor a 1
     if (cell.colSpan > 1) {
-      // Calcular el ancho de la celda
-      const width = (cell.colSpan * 75) - 1;
-
-      // Agregar la regla CSS a la celda
+      let width = 0;
+      for (let i = 0; i < cell.colSpan; i++) {
+        width += 75;
+      }
+      width -= 1; // restar 1px para evitar problemas de desbordamiento
       cell.style.width = `calc(${width}% - 1px)`;
     }
   }

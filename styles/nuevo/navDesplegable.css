@@ -1,8 +1,9 @@
+
 body {
   min-height: 100vh;
   background-color: #ecf2ff;
-  overflow: hidden;
 }
+
 
 a {
   text-decoration: none;

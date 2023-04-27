@@ -133,19 +133,22 @@
 }
 
 /* Color en las letras del boton */
-.btn{
+.btn-primary{
   color:white;
+  border: 1px solid #ecf2ff !important;
 }
 
 /* Contenedor con fondo blanco y bordes */
 .blanco{
   padding: 25px 25px;
-  background-color: #fafcff;
+  background-color: #D2DAFF;
   margin-top: 35px;
   border: 1px solid #c6c4fc;
+  
 }
 .table-responsive{
   margin-left: 10px !important;
+  background-color: #f5f5f51f !important;
 }
 
 .table-responsive tr{

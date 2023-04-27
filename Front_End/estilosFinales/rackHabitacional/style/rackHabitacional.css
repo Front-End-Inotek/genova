@@ -77,6 +77,7 @@
   }
 
 
+
   /*---------calendario------*/
   .cal-container {
     max-width: 900px;
@@ -89,6 +90,9 @@
 
   .cal-dia{
     min-width: 200px;
+  }
+  .cal-dia:hover{
+    height: 150%;
   }
   .cal-table {
     position: relative;
@@ -379,6 +383,8 @@
   .ajuste-2dias {
     width: calc(150% - 1px); /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
   }
+
+  
 
   /*
   .task--vacia-sucia{
