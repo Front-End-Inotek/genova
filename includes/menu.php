@@ -226,6 +226,9 @@
 		<button class="btn btn-primary border-0 menu-btn" id="filtro-noche" onclick="modoNocturno()">
  		<i class="bx bx-moon icono-luna"></i>
 		</button>
+		<button class="btn btn-primary border-0 menu-btn btn-cubo" id="cubo" onclick="ocultarMostrar()">
+		<i class="bx bx-cube-alt"></i>
+		</button>
 
 
 	</div>';

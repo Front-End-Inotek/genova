@@ -211,7 +211,7 @@
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		//se recibe la consulta y se convierte a arreglo
 		echo '
-		<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
+		<button class="btn btn-success" href="" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
 		<br>
 		<br>
 

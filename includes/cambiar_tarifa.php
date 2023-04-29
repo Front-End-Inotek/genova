@@ -44,6 +44,22 @@
   $tipo_hab= $_GET['tarifa'];
   echo '
       <div class="container blanco"> 
+      <div class="row">
+      <div class="col-sm-2">
+            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$agregar.','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"> Buscar Huésped</button>
+          </div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="id_huesped" value="" disabled/>
+          </div>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos('.$_GET['hab_id'].',0)">Ver Datos</button>
+          </div>
+          <div class="col-sm-6 div_datos">Presiona si deseas ver los datos del huésped previamente cargado:</div>
+          
+          <div class="col-sm-1"></div>
+        </div>
         <div class="row div_adultos">
           <div class="col-sm-2">Adultos:</div>
           <div class="col-sm-2 div_adultos">
@@ -65,6 +81,26 @@
           </div>
         </div>
         <div class="row">
+          <div class="col-sm-2">Quién Reserva:</div>
+          <div class="col-sm-2"> 
+          <div class="form-group">
+            <input class="form-control" type="text"  id="nombre_reserva" placeholder="Ingresa nombre "  maxlength="70">
+          </div>
+          </div>
+          <div class="col-sm-2">Acompañante:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="text"  id="acompanante" placeholder="Ingresa nombre    acompañante"  maxlength="70">
+          </div>
+          </div>
+          <div class="col-sm-2">Niños:</div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="extra_infantil" placeholder="[6-12 años]" onchange="calcular_total('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')">
+          </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-sm-2">Niños:</div>
           <div class="col-sm-2">
           <div class="form-group">
@@ -78,36 +114,12 @@
           </div>
           </div>
           <div class="col-sm-4">'.$leyenda.'</div>
+
+          
         </div>
-        <div class="row">
-          <div class="col-sm-2">
-            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$agregar.','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"> Asignar Huésped</button>
-          </div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="id_huesped" value="" disabled/>
-          </div>
-          </div>
-          <div class="col-sm-2">Quién Reserva:</div>
-          <div class="col-sm-2"> 
-          <div class="form-group">
-            <input class="form-control" type="text"  id="nombre_reserva" placeholder="Ingresa nombre    reservacion"  maxlength="70">
-          </div>
-          </div>
-          <div class="col-sm-2">Acompañante:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="text"  id="acompanante" placeholder="Ingresa nombre    acompañante"  maxlength="70">
-          </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-8 div_datos">Presiona este botón si deseas ver los datos del huésped previamente asignado:</div>
-          <div class="col-sm-3">
-            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos('.$_GET['hab_id'].',0)">Ver Datos</button>
-          </div>
-          <div class="col-sm-1"></div>
-        </div>
+        
+        
+        
         <div class="row div_oculto">';
           // Div oculto donde van los datos de el huésped asignado para agregar una reservación, pudiendose editar
           echo '
