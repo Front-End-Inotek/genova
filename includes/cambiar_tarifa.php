@@ -44,22 +44,6 @@
   $tipo_hab= $_GET['tarifa'];
   echo '
       <div class="container blanco"> 
-      <div class="row">
-      <div class="col-sm-2">
-            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$agregar.','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"> Buscar Huésped</button>
-          </div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="number"  id="id_huesped" value="" disabled/>
-          </div>
-          </div>
-          <div class="col-sm-2">
-            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos('.$_GET['hab_id'].',0)">Ver Datos</button>
-          </div>
-          <div class="col-sm-6 div_datos">Presiona si deseas ver los datos del huésped previamente cargado:</div>
-          
-          <div class="col-sm-1"></div>
-        </div>
         <div class="row div_adultos">
           <div class="col-sm-2">Adultos:</div>
           <div class="col-sm-2 div_adultos">
@@ -114,7 +98,26 @@
           </div>
           </div>
           <div class="col-sm-4">'.$leyenda.'</div>
+          <br>
+          
+          <hr>
+          <br>
+          <br>
+          <div class="row">
+      <div class="col-sm-2">
+            <button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped('.$agregar.','.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.')"> Buscar Huésped</button>
+          </div>
+          <div class="col-sm-2">
+          <div class="form-group">
+            <input class="form-control" type="number"  id="id_huesped" value="" disabled/>
+          </div>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos('.$_GET['hab_id'].',0)">Ver Datos</button>
+          </div>
+          <div class="col-sm-6 div_datos">Presiona si deseas ver los datos del huésped previamente cargado:</div>
 
+        </div>
           
         </div>
         
