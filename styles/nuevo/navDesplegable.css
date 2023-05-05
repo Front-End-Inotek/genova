@@ -10,6 +10,7 @@ a {
   cursor: pointer;
 }
 
+
 a:hover {
   color: inherit;
 }
@@ -19,15 +20,89 @@ span {
   cursor: pointer;
 }
 
+
 .submenu {
   display: none;
 }
 
 
 
+/*checkbox*/
+.form-check-label {
+  width: fit-content;
+  height: 29px;
+  border-radius: 1px;
+  display: block;
+  position: relative;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #FFF;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 500;
+  background: #ffffff2b; cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  outline: none;
+}
+
+.form-check-label {
+  border: none;
+  color: #663dff;
+  font-weight: 600;
+}
+
+.form-check-label:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background-color: #663dff;
+  border-radius: 5px;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  transition: all 0.3s ease;
+}
+
+.form-check-label:hover {
+  color: #FFf;
+}
+
+.form-check-label:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+.form-check-input:checked+.form-check-label {
+  background-color: #fff;
+  color: #30349f;
+  border-color: #8e97f9;
+  font-weight: 500;
+}
+
+.form-check-input:checked+.form-check-label:after {
+  left: calc(102% - 8px);
+  transform: translateX(-100%);
+  border: 2px solid #fff;
+  box-shadow:
+  -7px -7px 20px 0px #fff9,
+  -4px -4px 5px 0px #fff9,
+  7px 7px 20px 0px #0002,
+  4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+
 /*boton cambio de rack*/
 
-input[type=checkbox] {
+
+.form-check-input2[type=checkbox] {
   height: 0;
   width: 0;
   display: none;
@@ -216,12 +291,14 @@ input[type=checkbox] {
 
 #filtro-noche{
   position: fixed;
-  font-size: 25px;
+  font-size: 28px;
   left: 91.5%;
-  border-radius: 150px;
+  top: 12px;
+  border-radius: 5px;
   color: #30349f;
   background: radial-gradient(circle at center,  #ffffff, #adadfe 70%) ;
   border: 2px solid #30349f !important;
+  line-height: 1;
 }
 
 .icono-luna {
@@ -234,6 +311,7 @@ input[type=checkbox] {
   display: inline-block;
   font-size: 1.5rem;
   transform: rotate(-15deg);
+  line-height: 1;
 }
 
 .btn-sol {
@@ -243,12 +321,14 @@ input[type=checkbox] {
 
 #cubo{
     position: fixed ;
-  font-size: 25px !important;
+  font-size: 28px !important;
   left: 95.5% !important;
+  top: 12px;
   color: #000 !important;
   background: radial-gradient(circle at center,  #ffffff, #adadfe 70%) ;
   border: 2px solid #30349f !important;
-  border-radius: 150px;
+  border-radius: 5px;
+  line-height: 1;
 }
 
 .btn-primary:hover,

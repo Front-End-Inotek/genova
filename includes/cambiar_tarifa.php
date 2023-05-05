@@ -112,10 +112,11 @@
             <input class="form-control" type="number"  id="id_huesped" value="" disabled/>
           </div>
           </div>
+          
+          <div class="col-sm-6 div_datos">Presiona si deseas ver los datos del huésped previamente cargado:</div>
           <div class="col-sm-2">
             <button type="button" class="btn btn-primary btn-block boton_datos" onclick="mostrar_datos('.$_GET['hab_id'].',0)">Ver Datos</button>
           </div>
-          <div class="col-sm-6 div_datos">Presiona si deseas ver los datos del huésped previamente cargado:</div>
 
         </div>
           
