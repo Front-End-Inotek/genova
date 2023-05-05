@@ -87,6 +87,38 @@
         }
         return $fecha_salida;
       }
+      function ver_fecha_entrada($mov){
+        $id_reservacion= 0;
+        $fecha_salida= 0;
+        $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1;";
+        //echo  $sentencia;
+        $comentario="Obtener el numero de reservacion correspondiente de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_reservacion= $fila['id_reservacion']; 
+        }
+
+        $sentencia = "SELECT * FROM reservacion WHERE id = $id_reservacion LIMIT 1;";
+        //echo  $sentencia;
+        $comentario="Obtener la fecha de salida de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $fecha_salida= date("d-m-Y",$fila['fecha_entrada']);
+        }
+        return $fecha_salida;
+      }
+
+      function saberMovimientosHabiles($fechaAnterior, $fechaLimite){
+        // $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 $filtro ORDER BY id";
+        // $comentario="Mostrar los movimientos habiles para una habitacion (futuro) ";
+        // $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+
+
       // Obtener el ultimo movimiento ingresado 
       function ultima_insercion(){
         $sentencia= "SELECT id FROM movimiento ORDER BY id DESC LIMIT 1";

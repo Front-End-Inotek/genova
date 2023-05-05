@@ -193,10 +193,12 @@
 		</li>*/
 
 		echo '
-		<li href="#" class="nav-link">
-			<i class="bx bxs-user" ></i>
-			<span class="mx-2">Desarrollo</span>
-		</li>
+		
+		<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();">
+		<i class="bx bxs-user mx-2" ></i>
+		<a class="subitem" onclick="vista_desarrollo(0,0)"> Desarrollo </a>
+	
+		</ul>
 
 
 

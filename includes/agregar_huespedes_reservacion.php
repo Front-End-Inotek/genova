@@ -1,20 +1,22 @@
-<?php
-  date_default_timezone_set('America/Mexico_City');
-  $reservacion= 1;
-  echo '
-      <!-- Modal content-->
-      <div class="modal-content"> 
+<?php date_default_timezone_set('America/Mexico_City');$reservacion= 1;?>
+
+
+<!-- Modal content-->
+<div class="modal-content"> 
+<form onsubmit="event.preventDefault(); guardar_huesped('<?php echo $reservacion; ?>');">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div><br>
-
+        
         <div class="modal-body">  
+        
           <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR HUÉSPED</h2></div>
+
           <div class="row">
             <div class="col-sm-2">Nombre:</div>
             <div class="col-sm-4">
             <div class="form-group">
-              <input class="form-control" type="text" id="nombre" placeholder="Ingresa el nombre" maxlength="70">
+              <input required class="form-control" type="text" id="nombre" placeholder="Ingresa el nombre" maxlength="70">
             </div>
             </div>
             <div class="col-sm-2">Apellido:</div>
@@ -28,7 +30,7 @@
             <div class="col-sm-2">Dirección:</div>
             <div class="col-sm-4">
             <div class="form-group">
-              <input class="form-control" type="text" id="direccion" placeholder="Ingresa la dirección" maxlength="60">
+              <input required class="form-control" type="text" id="direccion" placeholder="Ingresa la dirección" maxlength="60">
             </div>
             </div>
             <div class="col-sm-2">Ciudad:</div>
@@ -162,7 +164,8 @@
 
         <div class="modal-footer" id="boton_huesped">
           <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-          <button type="button" class="btn btn-success" onclick="guardar_huesped('.$reservacion.')"><span class="glyphicon glyphicon-edit"></span> Guardar</button>
+          <button type="submit" class="btn btn-success" onclick=""><span class="glyphicon glyphicon-edit"></span> Guardar</button>
+         
         </div>
-      </div>';
-?>
+      </form>
+      </div>

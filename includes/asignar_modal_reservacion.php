@@ -5,6 +5,10 @@
   $hab= NEW Hab(0);
   $reservaciones = NEW Reservacion($_GET['id']);
   $tipo_hab= $reservaciones->tipo_hab;
+  //new
+  $tipo_hab = $reservaciones->obtenerTipoDesdeTarifa($tipo_hab);
+
+
   $disponible= $hab->consultar_disponibilidad($tipo_hab);
   echo '
   <!-- Modal content-->

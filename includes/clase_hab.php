@@ -54,6 +54,22 @@
           echo ('consulta_no_realizada');
         }
       }
+
+      function mostrar_hab_option(){
+        $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
+        FROM hab
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab = 1 ORDER BY hab.id";// nombre
+        $comentario="Mostrar las habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<option data-habid="'.$fila['ID'].'" value="'.$fila['nom'].'">'.$fila['nom'].'</option>';
+         
+        }
+      }
+    
+
       // Mostramos las habitaciones
       function mostrar($id){
         include_once('clase_usuario.php');
@@ -143,7 +159,8 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+          echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+         
         }
       }
       // Obtengo los nombres de las habitaciones a editar
@@ -163,6 +180,17 @@
       }
       // Cambiar estado de la habitacion
       function cambiohab($hab,$mov,$estado){
+        $habitaciones=[43,44,45];
+
+        // foreach ($habitaciones as $key => $habitacion) {
+          $sentencia = "UPDATE `hab` SET
+          `mov` = '$mov',
+          `estado` = '$estado'
+          WHERE `id` = '$hab';";
+          $comentario="Cambiar estado de la habitacion";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        // }
+
         $sentencia = "UPDATE `hab` SET
         `mov` = '$mov',
         `estado` = '$estado'
@@ -294,17 +322,22 @@
       }
       // Consultar disponibilidad de un tipo de habitacion para hacer check-in
       function consultar_disponibilidad($tipo_hab){
+
+        //consultar el el tipo de habitación en base a la tarifa dada.
+       
         $cantidad=0;
         $sentencia = "SELECT *,count(hab.id) AS cantidad,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.id";
         $comentario="Consultar disponibilidad de un tipo de habitacion para hacer check-in";
+    
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
           $cantidad= $fila['cantidad'];
         }
+   
         return $cantidad;
       }
       // Seleccionar habitacion a asignar reservacion para check-in

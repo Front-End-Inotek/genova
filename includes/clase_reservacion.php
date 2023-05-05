@@ -114,6 +114,145 @@
 		  }
 		}
 	  }
+
+
+	  function obtenerTipoDesdeTarifa($tipo_hab){
+		$real_tipo_hab =0;
+        $sentencia_tarifa = "SELECT tipo FROM tarifa_hospedaje WHERE id = $tipo_hab";
+        $comentario="Consultar el el tipo de habitación en base a la tarifa dada.";
+        $consulta = $this->realizaConsulta($sentencia_tarifa,$comentario);
+
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $real_tipo_hab= $fila['tipo'];
+        }
+        return $real_tipo_hab;
+	  }
+
+
+	  //función para obtener las fechas en un rango de fechas.
+	  function date_range($first, $last, $step = '+1 day', $output_format = 'Y-m-d' ) {
+
+		$dates = array();
+		$current = $first;
+		$last = $last;
+	
+		while( $current < $last ) {
+	
+			$dates[] = date($output_format, $current);
+			$current = strtotime($step, $current);
+		}
+	
+		return $dates;
+	}
+
+
+	  function comprobarFechaReserva($fecha_entrada,$fecha_salida,$hab_id)
+{
+		//  echo "fe:".$fecha_entrada."fs".$fecha_salida;
+
+		// echo "fe:" . $fecha_entrada . "fs:".$fecha_salida."ls:".$ultima_fecha;
+
+		$agregar_id="";
+		//se agrega filtro para el id de la habitación.
+		if($hab_id!=0){
+			$agregar_id ="AND m.id_hab=".$hab_id;	
+		}
+
+		// $ultima_fecha = strtotime($ultima_fecha);
+		$fecha_entrada = strtotime($fecha_entrada);
+		//se toma en cuenta un 'dia antes' porque puede salir el dia que otro entra.
+		$fecha_salida=strtotime($fecha_salida);
+		$no_disponibles=[];
+		$disponibles=[];
+
+		// if($fecha_entrada== $ultima_fecha){
+		// 	$fecha_entrada = $fecha_salida;
+		// }
+
+
+		// foreach ($fechaUser as $key => $arrayFechas) {
+		// 	# code...
+
+		// 	$sentencia ="SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r 
+		// 	INNER JOIN tarifa_hospedaje ON r.tipo_hab = tarifa_hospedaje.id 
+		// 	INNER JOIN usuario ON r.id_usuario = usuario.id 
+		// 	INNER JOIN huesped ON r.id_huesped = huesped.id 
+		// 	INNER JOIN movimiento AS m ON m.id_reservacion= r.id 
+		// 	WHERE '$fechaUser' BETWEEN r.fecha_entrada AND r.fecha_salida 
+		// 	AND '$fechaUser' != r.fecha_salida
+		// 	";
+		// }
+
+		$sentencia ="SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r 
+		INNER JOIN tarifa_hospedaje ON r.tipo_hab = tarifa_hospedaje.id 
+		INNER JOIN usuario ON r.id_usuario = usuario.id 
+		INNER JOIN huesped ON r.id_huesped = huesped.id 
+		INNER JOIN movimiento AS m ON m.id_reservacion= r.id 
+		WHERE ('$fecha_salida' > r.fecha_entrada AND '$fecha_entrada' <  r.fecha_salida)
+		AND r.estado = 2
+		"
+		.$agregar_id;
+		// print_r($sentencia);
+		
+		// die();
+
+		
+
+		//se toman todas la habitaciones que no están disponibles (si están en el rango de fechas dadas)
+		// $sentencia = "SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r 
+		// -- INNER JOIN tipo_hab ON r.tipo_hab = tipo_hab.id 
+		// INNER JOIN  movimiento AS m ON m.id_reservacion= r.id 
+		// WHERE ('$fecha_entrada' BETWEEN r.fecha_entrada AND r.fecha_salida OR '$fecha_salida' BETWEEN r.fecha_entrada AND r.fecha_salida)".$agregar_id;
+		// $sentencia="SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r 
+		// INNER JOIN tarifa_hospedaje ON r.tipo_hab = tarifa_hospedaje.id 
+		// INNER JOIN usuario ON r.id_usuario = usuario.id 
+		// INNER JOIN huesped ON r.id_huesped = huesped.id 
+		// INNER JOIN movimiento AS m ON m.id_reservacion= r.id 
+		// WHERE (r.fecha_entrada BETWEEN '$fecha_entrada'  AND '$fecha_salida' OR r.fecha_salida BETWEEN '$fecha_entrada' AND '$fecha_salida') OR
+		// ('$fecha_entrada' BETWEEN r.fecha_entrada AND r.fecha_salida OR '$fecha_salida' BETWEEN r.fecha_entrada AND r.fecha_salida ) 
+		// ";
+	
+		// print_r($sentencia);
+
+		$consulta = $this->realizaConsulta($sentencia,"");
+		while($fila=mysqli_fetch_array($consulta)){
+			$no_disponibles [] = $fila['hab_id'];
+		}
+
+		// print_r($no_disponibles);
+	
+
+		//cuando hay  id de habitación y si la fecha conciide con otra fecha (de la misma habitación) entonces el array $no disponibles es mayor a 0.
+		if($hab_id!=0){
+			if(sizeof($no_disponibles)<=0){
+				//Si hay disponibilidad
+				// echo "\n". "si";
+				return true;
+			}else{
+				//No hay disponibilidad
+				// echo "\n". "no";
+				return false;
+			}
+			
+		}else{
+			//cuando se trata de una reservación se retornan todas las habitaciones disponibles.
+			$arraySQL = implode("','",$no_disponibles);
+			$sentencia = "SELECT * FROM hab  WHERE id NOT IN ('".$arraySQL."') AND estado_hab=1";
+			$consulta = $this->realizaConsulta($sentencia,"");
+		
+			while($fila=mysqli_fetch_array($consulta)){
+				$disponibles [] = $fila['id'];
+			}
+			print_r($disponibles);
+		}
+		
+		//fechas en timestamp
+		echo ($fecha_entrada) . "\n" . ($fecha_salida) ."||".strtotime($fecha_salida);
+	  die();
+
+	
+}
 	  // Guardar la reservacion
 	  function guardar_reservacion($id_huesped,$tipo_hab,$id_movimiento,$fecha_entrada,$fecha_salida,$noches,$numero_hab,$precio_hospedaje,$cantidad_hospedaje,$extra_adulto,$extra_junior,$extra_infantil,$extra_menor,$tarifa,$nombre_reserva,$acompanante,$forma_pago,$limite_pago,$suplementos,$total_suplementos,$total_hab,$forzar_tarifa,$codigo_descuento,$descuento,$total,$total_pago,$hab_id,$usuario_id,$cuenta,$cantidad_cupon,$tipo_descuento,$estado){
 		$fecha_entrada= strtotime($fecha_entrada);
@@ -139,7 +278,9 @@
 			$id_cuenta= $fila['id'];
 		  }
 		}
-		
+	
+
+
 		$sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, `estado`)
 		VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', '$estado');";
 		$comentario="Guardamos la reservacion en la base de datos";
@@ -210,8 +351,9 @@
 		$comentario="Mostrar las reservaciones";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		//se recibe la consulta y se convierte a arreglo
+		//<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
 		echo '
-		<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
+		<button class="btn btn-success" href="#caja_herramientas" onclick="agregar_reservaciones()">Agregar reservaciones</button>
 		<br>
 		<br>
 
@@ -397,7 +539,9 @@
 		}else{
 		  $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		  FROM reservacion
-		  INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+		--   INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+		  INNER JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+		  INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		  INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 		  INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 		  INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || huesped.telefono LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.id DESC";//|| reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%'
@@ -578,6 +722,8 @@
 		$fecha_fin_tiempo= $fecha_fin_tiempo . " 23:59:59";
 		$fecha_ini= strtotime($fecha_ini_tiempo);
 		$fecha_fin= strtotime($fecha_fin_tiempo);
+
+	
 		
 		if($a_buscar == ' ' && strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
 		  $cat_paginas = $this->mostrar(1,$id);
@@ -597,13 +743,23 @@
 			INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 			INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
 		  }else{
-			$sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+			
+			//old
+			// $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+			// FROM reservacion
+			// INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+			// INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+			// INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+			// INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+			
+			$sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 			FROM reservacion
-			INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+			INNER JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
 			INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 			INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 			INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
-		  }
+		
+		}
 		  $comentario="Mostrar por fecha en ver reservaciones";
 		  $consulta= $this->realizaConsulta($sentencia,$comentario);
 		  //se recibe la consulta y se convierte a arreglo

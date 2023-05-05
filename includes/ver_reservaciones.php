@@ -9,7 +9,7 @@
     
           <div class="row">
             <div class="col-sm-2">';
-              echo '<input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_reservacion()" class="color_black form-control form-control" autofocus="autofocus"/>
+              echo '<input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_reservacion(event)" class="color_black form-control form-control" autofocus="autofocus"/>
             </div>
             <div class="col-sm-2">Fecha Inicial:</div>
             <div class="col-sm-2">
