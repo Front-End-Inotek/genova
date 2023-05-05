@@ -5,6 +5,10 @@ include_once('consulta.php');
 
 class Informacion extends ConexionMYSql
 {
+
+    const INTERNO_SUCIA ="sucia";
+   
+
     // Constructor
     function __construct()
     {
@@ -41,18 +45,33 @@ class Informacion extends ConexionMYSql
     }
     
 
-    function mostrarhab($id,$token){
+    function mostrarhab($id,$token, $estatus_hab=null){
     include_once("clase_cuenta.php");
     include('clase_movimiento.php');
     $cuenta= NEW Cuenta(0);
     $movimiento= NEW movimiento(0);
     $cronometro=0;
 
+    $filtro="";
+
+   
+
+    // if($estatus_hab!=null){
+    //     $filtro ="AND hab.estado = " . $estatus_hab;
+    //     echo "si";
+    //     die();
+    // }else{
+    //     print_r("si");
+    //     die();
+    // }
+
+    //????
     if (true) {
-    $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 ORDER BY id";
+    $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 $filtro ORDER BY id";
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
+
 
 /*
     $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado = 1 ORDER BY id";
@@ -91,6 +110,9 @@ echo'
             case 1:
             $estado= "Ocupado";
             $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
+            if($fila['interno'] == self::INTERNO_SUCIA){
+                $estado = "Sucia ocupada";
+            }
             break;
 
             case 2:
@@ -99,7 +121,7 @@ echo'
             break;
 
             case 3:
-                $estado= "Vacia limpia";
+            $estado= "Vacia limpia";
             $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
@@ -215,6 +237,7 @@ echo'
             //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             if($fila['estado'] == 0){
             if($cronometro == 0){
+            
                 echo $tipo_habitacion;
             }else{
                 $fecha_inicio= date("d-m-Y",$cronometro);
@@ -227,6 +250,7 @@ echo'
             }else{
             if($cronometro == 0){
                 $fecha_inicio= '&nbsp';
+              
             }else{
                 $fecha_inicio= date("d-m-Y",$cronometro);
             }

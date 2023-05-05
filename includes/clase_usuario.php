@@ -715,6 +715,7 @@
                   echo '</div>';
                   echo '<div>';
                     echo $fila['usuario'];
+                    
                   echo '</div>';
                   /*echo '<div>Limpiadas: ';
                     $fecha= $this->ultima_fecha();

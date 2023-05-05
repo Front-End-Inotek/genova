@@ -165,6 +165,7 @@ function problemas_sistema(datos){
 function mostrar_herramientas(hab_id,estado,nombre){ 
 	var id=localStorage.getItem("id");
 	$("#mostrar_herramientas").load("includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id);
+   
 }
 
 // Abre la sidebar
@@ -263,6 +264,13 @@ function editar_tipo(id){
 
 function mostrar_estadorack(estatus_hab) {
     console.log(estatus_hab);
+
+    $("#area_trabajo").load("includes/area_trabajo.php?id="+0+"&token="+0+"&estatus_hab="+estatus_hab);
+    
+
+
+    return;
+
     var datos = {"estatus_hab":estatus_hab}
 
     //Declaramos una variable con nuestra perticion xmlhttprequest
@@ -417,7 +425,7 @@ function regresar_editar_tipo(){
 
 // Agregar una tarifa hospedaje
 function agregar_tarifas(){
-	$("#mostrar_herramientas").load("includes/agregar_tarifas.php"); 
+	$("#mostrar_herramientas").load("includes/agregar_tarifas.php");
 }
 
 function guardar_tarifa(){
@@ -865,13 +873,84 @@ function agregar_reservaciones(){
 	$("#area_trabajo_menu").load("includes/agregar_reservaciones.php"); 
 	closeNav();
 }
+//Función que calcula las fechas entre 2 fechas.
+function getDatesInRange(date, endDate) {
+  
+    const dates = [];
+  
+    // dates.push(date)
+    inicioDate = new Date(date)
+   
+    while (inicioDate < endDate) {
+      fecha_rango = new Date(inicioDate)
+      fecha_rango = fecha_rango.toISOString().split('T')[0];
+      dates.push(fecha_rango);
+      inicioDate.setDate(inicioDate.getDate() + 1);
+    }
+  
+    return dates;
+  }
+
+ function manejarReservacion(control){
+
+    if(control == 0){
+        document.getElementById('numero_hab').disabled=true;
+        document.getElementById('tarifa').disabled=true;
+     
+    }else{
+        document.getElementById('tarifa').disabled=false;
+        document.getElementById('numero_hab').disabled=false;
+    }
+
+ }
 
 // Calculamos la cantidad de noches de una reservacion
-function calcular_noches(){
-    var fecha_entrada= document.getElementById("fecha_entrada").value;
-	var fecha_salida= document.getElementById("fecha_salida").value;
-	var noches= calculo_noches(fecha_entrada,fecha_salida);
-    document.getElementById("noches").value = noches;
+function calcular_noches(hab_id=0){
+
+ 
+    var fecha_salida= document.getElementById("fecha_salida")
+    var fecha_entrada= document.getElementById("fecha_entrada");
+
+    fecha_entrada_value = fecha_entrada.value
+    fecha_salida_value = fecha_salida.value
+
+    selectedDate = new Date(fecha_entrada_value)
+    auxSelectedDate = selectedDate.toISOString().split('T')[0];
+
+    min_salida = selectedDate.setDate(selectedDate.getDate()+1)
+
+    min_salida = selectedDate.toISOString().split('T')[0];
+
+    
+    fecha_salida.setAttribute('min', min_salida)
+   
+    const dateSalida = new Date(fecha_salida_value);
+
+	var noches= calculo_noches(fecha_entrada_value,fecha_salida_value)
+    document.getElementById("noches").value = noches
+
+    if(fecha_entrada_value!="" && fecha_salida_value!=""){
+      
+      
+    if( fecha_entrada_value >= fecha_salida_value ){
+      
+       fecha_salida.value=""
+      
+        
+    }else{
+        fechas = (getDatesInRange(auxSelectedDate,dateSalida))
+        ultima_fecha = fechas[fechas.length-1]
+        // console.log(ultima_fecha)
+        
+        // $(".div_adultos").load("includes/consultar_reservacion_disponible.php?fechas="+JSON.stringify(fechas)+"&hab_id="+hab_id);
+        include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id;
+        $(".div_adultos").load(include);    
+     
+    }
+  
+
+  
+    }
 }
 
 // Calculo para obtener la cantidad de noches de una reservacion
@@ -887,6 +966,9 @@ function calculo_noches(fecha_entrada,fecha_salida){
 
 // Conseguimos la cantidad de adultos permitidos por tarifa hospedaje
 function cambiar_adultos(hab_id){
+    //si hay un select entonces se lee el evento del select para extraer el hab_id, desde reservaciones.
+
+
     var tarifa= document.getElementById("tarifa").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
 	var fecha_salida= document.getElementById("fecha_salida").value;
@@ -1087,6 +1169,43 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	alert(descuento);
 	alert(total);*/
 
+    // var datos = {
+    //     "id_huesped": id_huesped,
+    //     "fecha_entrada": fecha_entrada,
+    //     "fecha_salida": fecha_salida, 
+    //     "noches": noches,
+    //     "numero_hab": numero_hab,
+    //     "precio_hospedaje": precio_hospedaje,
+    //     "cantidad_hospedaje": cantidad_hospedaje,
+    //     "extra_adulto": extra_adulto,
+    //     "extra_junior": extra_junior,
+    //     "extra_infantil": extra_infantil,
+    //     "extra_menor": extra_menor,
+    //     "tarifa": tarifa,
+    //     "nombre_reserva": nombre_reserva,
+    //     "acompanante": acompanante,
+    //     "forma_pago": forma_pago,
+    //     "limite_pago": limite_pago,
+    //     "suplementos": suplementos,
+    //     "total_suplementos": total_suplementos,
+    //     "total_hab": total_hab,
+    //     "forzar_tarifa": forzar_tarifa,
+    //     "descuento": descuento,
+    //     "codigo_descuento": codigo_descuento,
+    //     "total": total,
+    //     "total_pago": total_pago,
+    //     "hab_id": hab_id,
+    //     "tipo_hab": tipo_hab,
+    //     "estado": estado,
+    //     "usuario_id": usuario_id,
+    //   };
+
+
+    //   console.log(datos)
+    //   return ;
+
+
+
 	if(id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
         if(cantidad_ocupacion <= cantidad_maxima){
 			$("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
@@ -1176,13 +1295,14 @@ function ver_reservaciones_paginacion(buton,posicion){
 }
 
 // Barra de diferentes busquedas en ver reservaciones
-function buscar_reservacion(){
+function buscar_reservacion(e){
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var usuario_id=localStorage.getItem("id");
     if(a_buscar.length >0){
         $('.pagination').hide();
     }else{
         $('.pagination').show();
+        if( e.which === 8 ){ return false; }
     }
 	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
@@ -1689,6 +1809,9 @@ function agregar_huespedes_reservacion(){
         "usuario_id": usuario_id,
     };
 
+    // console.log(datos)
+    // return;
+
     let xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre+"&apellido="+apellido+"&direccion="+direccion+"&ciudad="+ciudad+
@@ -1700,12 +1823,20 @@ function agregar_huespedes_reservacion(){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.responseText);
-            if (e.target.response == 'NO') {
+            // console.log(e.target.responseText);
+            // console.log(xhttp.responseText)
+            const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+           
+            if(response_msj == "NO_DATA"){
+                swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
+                return
+            }
+            
+            if (response_msj == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_huespedes()
                 swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
-            }else if(e.target.responseText == 'NO_valido'){
+            }else if(response_msj == 'NO_VALIDO'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
                 swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
@@ -1739,13 +1870,14 @@ function ver_huespedes_paginacion(buton,posicion){
 }
 
 // Barra de diferentes busquedas en ver huespedes
-function buscar_huesped(){
+function buscar_huesped(e){
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var usuario_id=localStorage.getItem("id");
     if(a_buscar.length >0){
         $('.pagination').hide();
     }else{
         $('.pagination').show();
+        if( e.which === 8 ){ return false; }
     }
 	$("#tabla_huesped").load("includes/buscar_huesped.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
@@ -3503,6 +3635,16 @@ function agregar_restaurante(hab_id,estado){
 	closeNav();
 }
 
+function vista_desarrollo(hab_id,estado){
+
+    $('#caja_herramientas').modal('hide');
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	// $("#area_trabajo_menu").load("includes/vista_desarrollo.php?hab_id="+hab_id+"&estado="+estado);
+	closeNav();
+}
+
 // Agregar en el restaurante en mesa
 function agregar_restaurante_mesa(mesa_id,estado){
     $('#caja_herramientas').modal('hide');
@@ -3517,6 +3659,11 @@ function agregar_restaurante_mesa(mesa_id,estado){
 function buscar_categoria_restaurente(categoria,hab_id,estado,mov,mesa){
 	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa);
 }
+
+function buscarCategoriaRestaurante(categoria,hab_id,estado,mov,mesa){
+    $("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa);
+}
+
 
 // Mostrar productos de las categorias existentes en el inventario
 function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
@@ -5016,3 +5163,5 @@ function hab_cambiar_persona(hab_id,estado,usuario){
 		});
 	return false;
 }
+
+

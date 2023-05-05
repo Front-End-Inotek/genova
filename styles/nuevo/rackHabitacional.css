@@ -80,15 +80,15 @@
 -webkit-box-shadow: 0 2px 2px -2px #0E1119;
    -moz-box-shadow: 0 2px 2px -2px #0E1119;
         box-shadow: 0 2px 2px -2px #0E1119;
-        
 }
 
 .tableRack th {
-  background:#adadfe!important;
+  background:#adadfe;
   color: #30349f;
 }
+
 .tableRack th:hover {
-  background-color: #adadfe;
+  background-color: #fff;
   color: #30349f;
   transition-delay: 0s;
     transition-duration: 0.4s;
@@ -96,19 +96,19 @@
   transition-timing-function: line;
   }
 
+
 .tableRack td:first-child {
   color: #FFF;
   background-color: #30349f;
-
 }
 
 .tableRack tr:hover {
- background-color: #adadfe;
--webkit-box-shadow: 0 6px 6px -6px #0E1119;
-   -moz-box-shadow: 0 6px 6px -6px #0E1119;
-        box-shadow: 0 6px 6px -6px #0E1119;
-}
-
+  background-color: #adadfe;
+ -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+    -moz-box-shadow: 0 6px 6px -6px #0E1119;
+         box-shadow: 0 6px 6px -6px #0E1119;
+ }
+ 
 .tableRack td:hover {
 background-color: #adadfe;
 color: #30349f;
@@ -119,6 +119,15 @@ transition-delay: 0s;
 transition-timing-function: line;
 }
 
+.tableRack th:hover + tr td {
+  background-color: #adadfe;
+  color: #30349f;
+  box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
+  transition-delay: 0s;
+  transition-duration: 0.4s;
+  transition-property: all;
+  transition-timing-function: line;
+}
 /*dividir la celda en 2*/
 .celdaCompleta {
   width: 50%;
@@ -129,9 +138,9 @@ transition-timing-function: line;
   vertical-align: top;
   width: 50%;
 }
-.medioDia section {
-  text-align: center;
-}
+
+
+
 
 /*---------calendario------*/
 .cal-container {
@@ -150,8 +159,6 @@ transition-timing-function: line;
   border: solid #ebebeb;
   border-width: 0 1px 0 0;
   overscroll-behavior: contain;
-
-
 }
 
 .cal-thead {
@@ -246,7 +253,6 @@ transition-timing-function: line;
 .task--bloqueado:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
-  border: 2px solid #9b9a9a !important;
   border-left: 7px solid #9b9a9a !important;
   box-shadow: 0 10px 14px #9b9a9a;
 }
@@ -314,9 +320,9 @@ transition-timing-function: line;
 
 .task--vacia-sucia {
   border-left: 7px solid #03ae11;
-  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere 
   grid-column: 2 / span 2;
-  grid-row: 9;
+  grid-row: 9;*/
   background: #bff1bf81;
   align-self: end;
   color: #057410e8;
@@ -326,18 +332,16 @@ transition-timing-function: line;
 .task--vacia-sucia:hover {
   background-color: #81e389 !important;
   color: #fff !important;
-  border: 2px solid #bff1bfa1 !important;
   border-left: 7px solid #bff1bfa1 !important;
   box-shadow: 0 10px 14px #35da435d;
 }
 
 .task--disponible-limpia {
   border-left: 7px solid #9b9a9a;
-  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere 
   grid-column: 2 / span 2;
-  grid-row: 8;
+  grid-row: 8;*/
   background: #e5e4e4;
-  align-self: end;
   color: #030303;
 
 }
@@ -345,7 +349,6 @@ transition-timing-function: line;
 .task--disponible-limpia:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
-  border: 2px solid #9b9a9a !important;
   border-left: 7px solid #9b9a9a !important;
   box-shadow: 0 10px 14px #9b9a9a;
 }
@@ -356,11 +359,10 @@ transition-timing-function: line;
 
 .task--reserva-pagada {
   border-left: 7px solid #4d03ae;
-  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
+  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere 
   grid-column: 2 / span 2;
-  grid-row: 10;
+  grid-row: 10;*/
   background: #6b0fe3af;
-  align-self: end;
   color: #FFF;
 
 }
@@ -378,9 +380,7 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 11;
   background: #3b0286;
-  align-self: end;
   color: #FFF;
-  align-self: end;
 
 
 }
@@ -422,8 +422,6 @@ transition-timing-function: line;
 .task--limpieza-ocupada:hover {
   background-color: #052d76 !important;
   color: #fff !important;
-  border: 1px solid #6398fb !important;
-  border-bottom: 4px solid #6398fb !important;
   border-left: 7px solid #6398fb !important;
   box-shadow: 0 10px 14px #6398fbdd;
 }
@@ -455,7 +453,7 @@ transition-timing-function: line;
   top: 0;
   left: 0;
   z-index: 1;
-  background-color: #eceaf9;
+  background-color: #fefefe;
   box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
     7px 7px 20px 0px rgba(0, 0, 0, .1),
     4px 4px 5px 0px rgba(0, 0, 0, .1);

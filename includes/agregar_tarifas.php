@@ -25,42 +25,42 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio </span>
                 </div>
-                  <input type="number" id="precio_hospedaje" name ="precio_hospedaje" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input type="number"  onkeypress="return event.charCode != 45" min="0"  id="precio_hospedaje" name ="precio_hospedaje" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Cantidad habitación </span>
                 </div>
-                  <input type="number" id="cantidad_hospedaje" name ="cantidad_hospedaje" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input type="number" onkeypress="return event.charCode != 45" min="0" id="cantidad_hospedaje" name ="cantidad_hospedaje" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Cantidad máxima </span>
                 </div>
-                  <input type="number" id="cantidad_maxima" name ="cantidad_maxima" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input type="number" onkeypress="return event.charCode != 45" min="0" id="cantidad_maxima" name ="cantidad_maxima" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio adulto</span>
                 </div>
-                  <input type="number" id="precio_adulto" name ="precio_adulto" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input type="number" onkeypress="return event.charCode != 45" min="0" id="precio_adulto" name ="precio_adulto" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio junior </span>
                 </div>
-                  <input type="number" id="precio_junior" name ="precio_junior" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input type="number" id="precio_junior" onkeypress="return event.charCode != 45" min="0" name ="precio_junior" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio infantil </span>
                 </div>
-                  <input type="number" id="precio_infantil" name ="precio_infantil" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input type="number" id="precio_infantil" onkeypress="return event.charCode != 45" min="0" name ="precio_infantil" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">

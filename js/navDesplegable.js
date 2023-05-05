@@ -100,5 +100,20 @@ function modoNocturno() {
   }
 }
 
+//desactivar la animacion de background
 
-
+function ocultarMostrar() {
+  var ul = document.querySelector(".circles");
+  var lis = document.querySelectorAll(".circles li");
+  if (ul.style.display === "none") {
+    ul.style.display = "block";
+    lis.forEach(function(li) {
+      li.style.display = "block";
+    });
+  } else {
+    ul.style.display = "none";
+    lis.forEach(function(li) {
+      li.style.display = "none";
+    });
+  }
+}

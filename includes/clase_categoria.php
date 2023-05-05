@@ -151,6 +151,14 @@
         }
         echo '</div>';
       }
+
+      function mostrarCategoriaRestaurante($hab_id,$estado,$mov,$mesa){
+        $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
+        $comentario="Mostrar las categorias en el restaurente";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+
+      }
               
   }
 ?>

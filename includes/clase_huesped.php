@@ -83,14 +83,20 @@
       }
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,$usuario_id){
+
+        if(empty($nombre)){
+          echo "NO_DATA";
+          die();
+        }
+        
         $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, `estado_huesped`)
         VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', '$cvv', '0', '1');";
         $comentario="Guardamos el huesped en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if($consulta){
-          echo ("NO");
+          echo "NO";
         }else{
-          echo ("cosulta_no_valida");
+          echo ("NO_VALIDO");
         }
 
         include_once("clase_log.php");

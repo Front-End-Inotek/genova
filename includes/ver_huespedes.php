@@ -9,7 +9,7 @@
           
           <div class="row">
             <div class="col-sm-2">
-              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_huesped()" class="color_black form-control form-control" />
+              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_huesped(event)" class="color_black form-control form-control" />
             </div>
             <div class="col-sm-10"></div>
           </div><br>
