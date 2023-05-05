@@ -122,12 +122,17 @@
 			<span class="mx-2">Herramientas</span>
 			<ul id="herramientas_submenu" class="submenu">';
 
-			$permisos_usuario=$usuario->usuario_ver+$usuario->usuario_agregar;
+			$permisos_usuario=$usuario->usuario_ver;
 			if($permisos_usuario>0){
 			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_usuarios()"> Usuarios </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_usuarios()">Ver Usuarios </a></i></ul>';
 			}
-
+			$permisos_usuario=$usuario->usuario_agregar;
+			if($permisos_usuario>0){
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_usuarios('.$_GET['id'].')">Agregar Usuarios </a></i></ul>';
+			}
+			
 			$permisos_logs=$usuario->logs_ver;
 			if($permisos_logs>0){
 			echo '
@@ -227,6 +232,9 @@
 		</button>
 		<button class="btn btn-primary border-0 menu-btn" id="filtro-noche" onclick="modoNocturno()">
  		<i class="bx bx-moon icono-luna"></i>
+		</button>
+		<button class="btn btn-primary border-0 menu-btn btn-cubo" id="cubo" onclick="ocultarMostrar()">
+		<i class="bx bx-cube-alt"></i>
 		</button>
 
 
