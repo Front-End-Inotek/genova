@@ -11,7 +11,7 @@
 			echo '
 			<!----------------------->
 			<!-- Side-Nav -->
-			<!----------------------->
+			<!-----------------------> 
 			<div class="side-navbar d-flex justify-content-between flex-wrap flex-column" id="sidebar">
 			<ul class="nav flex-column text-white w-100">
 			<div class="informacion">

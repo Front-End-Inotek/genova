@@ -6,48 +6,238 @@ setlocale(LC_ALL, "es_ES");
 
 class RackHabitacional extends ConexionMYSql
 {
-    public function mostrar($id)
+    private function estado_habitacion($estado,$turno){
+        switch($estado){
+            case 0:
+                $estado_texto[0] ='task--limpieza-vacia';
+                $estado_texto[1] ='Disponible';
+            break;
+            case 1:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+            case 2:
+                $estado_texto[0] ='task--vacia-sucia';
+                $estado_texto[1] ='Vacia Sucia';
+            break;
+            case 3:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+            case 4:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+            case 5:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+            case 6:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+            case 7:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+            case 8:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+            case 9:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+            case 10:
+                $estado_texto[0] ='task--ocupadoH';
+                $estado_texto[1] ='Ocupada';
+            break;
+        }
+        
+        return $estado_texto;
+    }
+    private function convertir_mes($mes){
+        // comvertir el mes de formato numero a texto
+        $mes_texto="";
+        switch($mes){
+            case 1: 
+                $mes_texto="Enero";
+            break;
+            case 2: 
+                $mes_texto="Febrero";
+            break;
+            case 3: 
+                $mes_texto="Marzo";
+            break;
+            case 4: 
+                $mes_texto="Abril";
+            break;
+            case 5: 
+                $mes_texto="Mayo";
+            break;
+            case 6: 
+                $mes_texto="Junio";
+            break;
+            case 7: 
+                $mes_texto="Julio";
+            break;
+            case 8: 
+                $mes_texto="Agosto";
+            break;
+            case 9: 
+                $mes_texto="Septiembre";
+            break;
+            case 10: 
+                $mes_texto="Octubre";
+            break;
+            case 11: 
+                $mes_texto="Noviembre";
+            break;
+            default:
+                $mes_texto="Diciembre";
+            break;
+        }
+
+        return $mes_texto;
+    }
+    public function mostrar($id,$tiempo_inicial)
     {
         include_once("clase_cuenta.php");
         include('clase_movimiento.php');
+        //variable para alamcenar mes de rack
+        $mes_rack = $this->convertir_mes(date('m'));
+        //variable para alamcenar año de rack
+        $anio_rack = date('Y');
+       
 
         $cuenta= new Cuenta(0);
         $movimiento= new movimiento(0);
+
         $cronometro=0;
 
         //Se utiliza la misma consulta para el rack de operaciones
-        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre 
-AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
-LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 
-
-ORDER BY id";
-        $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
+        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
+        FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
+        WHERE hab.estado_hab = 1 ORDER BY id";
+        $comentario="Optenemos las habitaciones para el rack de habitaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
 
 
         echo '
-<!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
-<!--tabla operativa--->
+            <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
+            <!--tabla operativa--->
 
-    <div class="headTable justify-content-center align-items-center">
-        <div style="text-align:center;">
-        <div>
-            <h3>Marzo 2023<button id="btn-mes">▾</button></h3>
-        </div>
-        </div>
-    </div>
+                <div class="headTable justify-content-center align-items-center">
+                    <div style="text-align:center;">
+                    <div>
+                        <h3>'.$mes_rack.' '.$anio_rack.'</h3>
+                    </div>
+                    </div>
+                </div>
+        ';
 
+        echo '
+            <!-- DISPLAY USER-->
+            <div class="table-responsive">
+                <div id="cal-largo">
+                    <div class="cal-sectionDiv">
+                        <table class="tableRack table-striped table-bordered" id="tablaTotal">
+                            <thead class="cal-thead">
+                                <tr>
+                                    <th class="cal-viewmonth" id="changemonth"></th>
+        ';
+        $tiempo=$tiempo_inicial-86400;
+        //for para cargar los 31  dias
+        for ($i = 1; $i <= 31; $i++) {
+            $mes=$this->convertir_mes(date('n',$tiempo));
+            $dia=date('d',$tiempo);
+            $tiempo+=86400;
+            echo "
+                <th class='cal-dia'> $dia - $mes</th>
+            ";
+        }
+        echo'
+                </tr>
+            </thead>
+            <tbody class="cal-tbody">
+        ';
+        //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
+        while ($fila = mysqli_fetch_array($consulta)) {
+            echo'
+                <tr id="u1">
+                    <td class="cal-userinfo">
+            ';
+                echo'Habitación ';
+                if($fila['id']<100) {
+                    echo $fila['nombre'];
+                } else {
+                    echo $fila['comentario'];
+                }
+            echo'
+                </td>
+            ';
+            $tiempo=$tiempo_inicial-86400;
+            //for para cargar los 31  dias dentro de las habitaciones
+            for ($i = 1; $i <= 31; $i++) {
+                if($i==1){
+                    echo '
+                        <td class="celdaCompleta tdCheck " >
+                        </td>
+                    ';
+                    
+                }else{
+                    
+                    $mes=$this->convertir_mes(date('n',$tiempo));
+                    
+                    $dia=date('d',$tiempo);
+                    $tiempo+=86400;
+                    $estado_habitacion_matutino=$this->estado_habitacion($fila['estado'],1);
+                    $estado_habitacion_vespertino=$this->estado_habitacion($fila['estado'],2);
+                    
+                    if($i==2 && $fila['estado']!=1){
+                        echo '
+                        <td class="celdaCompleta tdCheck " >
+                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
+                                <div>
+                    ';
+                                    echo '<section class="task '.$estado_habitacion_matutino[0].'"> '.$estado_habitacion_matutino[1].'</section>';
+                                    echo '</div>';
+                    echo '            
+                            </div>
+                        </td>
+                    ';
+                    }else{
+                        $noches= ($fila['fin']-$fila['inicio'])/86400;
+                        echo '<div class="medioDia"></div>';
+                        echo '
+                        <td class="celdaCompleta tdCheck " colspan="'.$noches.'">
+                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
+                        ';
+                                        echo '<section class="task '.$estado_habitacion_matutino[0].'"> '.$estado_habitacion_matutino[1].' '.$noches.'</section>';
+                        echo '            </div>
+                                   
+                                
+                            </td>
+                        ';
+                        $i=32;
+                    }
 
-<!-- DISPLAY USER-->
-<div class="table-responsive">
-    <div id="cal-largo">
-    <div class="cal-sectionDiv">
+                    if($i==2 && $fila['estado']!=1){
+                        $i=32;
+                    }
+                }
+                
+            }
 
-        <table class="tableRack table-striped table-bordered" id="tablaTotal">
-        <thead class="cal-thead">
-            <tr>
-            <th class="cal-viewmonth" id="changemonth"></th>';
-        $fecha_actual = date('Y-m-d'); // Obtiene la fecha actual en formato YYYY-MM-DD
+            echo '</tr>';
+        }
+        /*for($x=1;$x++;$x>=31){
+            $tiempo_de_ayer+=86400;
+            echo "
+                <th class='cal-dia'> LUNES ".$x ."</th>
+            ";
+        }*/
+       /*$fecha_actual = date('Y-m-d'); // Obtiene la fecha actual en formato YYYY-MM-DD
         $fecha_final = date('Y-m-d', strtotime('+32 days')); // Obtiene la fecha actual más 32 días en formato YYYY-MM-DD
         $fecha = $fecha_actual; // Se guarda la fecha acutal en una nueva variable
         $contador = 0;
@@ -62,87 +252,13 @@ ORDER BY id";
 
         $diaanterior = date('N', strtotime('-1 day'));
 
-        switch ($diaanterior) {
-            case 1:
-                echo "<th class='cal-dia'> LUNES ". $yesterday ."</th>";
-                break;
-
-            case 2:
-                echo "<th class='cal-dia'> MARTES ". $yesterday ."</th>";
-                break;
-
-            case 3:
-                echo "<th class='cal-dia'> MIERCOLES ". $yesterday ."</th>";
-                break;
-
-            case 4:
-                echo "<th class='cal-dia'> JUEVES ". $yesterday ."</th>";
-                break;
-
-            case 5:
-                echo "<th class='cal-dia'> VIERNES ". $yesterday ."</th>";
-                break;
-
-            case 6:
-                echo "<th class='cal-dia'> SABADO ". $yesterday ."</th>";
-                break;
-
-            case 7:
-                echo "<th class='cal-dia'> DOMINGO ". $yesterday ."</th>";
-                break;
-
-            default:
-                # code...medioDia
-                break;
-        }
-        $todas_fechas =[];
-        $aux_fecha_final = date('Y-m-d', strtotime($fecha_final . '+1 day'));
-        while ($fecha <= $aux_fecha_final) {
-            switch ($dia) {
-                case 1:
-                    echo "<th class='cal-dia'> LUNES ". date('j', strtotime($fecha)) ."</th>";
-                    break;
-
-                case 2:
-                    echo "<th class='cal-dia'> MARTES ". date('j', strtotime($fecha)) ."</th>";
-                    break;
-
-                case 3:
-                    echo "<th class='cal-dia'> MIERCOLES ". date('j', strtotime($fecha)) ."</th>";
-                    break;
-
-                case 4:
-                    echo "<th class='cal-dia'> JUEVES ". date('j', strtotime($fecha)) ."</th>";
-                    break;
-
-                case 5:
-                    echo "<th class='cal-dia'> VIERNES ". date('j', strtotime($fecha)) ."</th>";
-                    break;
-
-                case 6:
-                    echo "<th class='cal-dia'> SABADO ". date('j', strtotime($fecha)) ."</th>";
-                    break;
-
-                case 7:
-                    echo "<th class='cal-dia'> DOMINGO ". date('j', strtotime($fecha)) ."</th>";
-                    break;
-
-                default:
-                    # code...
-                    break;
-            }
-            $todas_fechas[] = $fecha;
-
-            $fecha = date('Y-m-d', strtotime($fecha . ' +1 day'));
-            $dia = date('N', strtotime($fecha));
-            $contador++;
-
-        }
+       
+        
 
         echo'
             </tr>
         </thead>';
-        $contador_row=0;
+       /* $contador_row=0;
         $empezar_reservas="";
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
@@ -222,8 +338,8 @@ ORDER BY id";
             //Se añade en el cuerpo de la tabla la numeracion de las habitaciones
             if($fila['tipo']>0) {
                 echo'
-        <tbody class="cal-tbody">
-            <tr id="u1">
+                <tbody class="cal-tbody">
+                <tr id="u1">
                 <td class="cal-userinfo">';
                 echo'Habitación ';
                 if($fila['id']<100) {
@@ -257,7 +373,7 @@ ORDER BY id";
 
 
 
-                if ($fila['estado'] == 0) {
+                /*if ($fila['estado'] == 0) {
                     // echo $daybefore;
                     $aux_fecha_actual = date('d-m-Y', strtotime($fecha_actual));
                     // echo $aux_fecha_actual;
@@ -287,10 +403,10 @@ ORDER BY id";
 
                 } elseif($fecha_salida < 0) {
                     echo'
-            <td class="celdaCompleta">
+                <td class="celdaCompleta">
 
-            </td>
-            ';
+             </td>
+                ';
                 } elseif($fecha_salida > 0) {
                     $empezar_reservas = $fecha_salida;
                     // print_r($fecha_entrada);
@@ -329,7 +445,7 @@ ORDER BY id";
                                 // for ($i=0; $i < $total_dias+2; $i++) {
                                 # code...
                                 echo'
-                <td class="celdaCompleta tdCheck medioDia" >';
+                        <td class="celdaCompleta tdCheck medioDia" >';
                                 //Segunda columna que muesta los estados de las habitaciones
                                 //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
                                 echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
@@ -663,6 +779,6 @@ ORDER BY id";
         echo'</table>
         </div>
     </div>
-</div>';
+</div>';*/
     }
 }

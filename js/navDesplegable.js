@@ -66,7 +66,7 @@ function cambiarVista() {
 
   if (checkbox.checked == true) {
     vista.classList.remove("vista-habitacional");
-    vista.classList.add("rack-operaciones");
+    vista.classList.add("rack-operaciones"); 
     vista.innerHTML = "Vista Operaciones";
   } else {
     vista.classList.remove("rack-operaciones");
