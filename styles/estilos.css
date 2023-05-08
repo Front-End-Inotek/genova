@@ -161,6 +161,15 @@
   margin-right: 5px;
 }
 
+.input-group-text{
+  background-color:#749afc61  !important;
+  color: #3f51b5 !important;
+}
+
+input:hover{
+  background-color: #e5e5e5 !important;
+}
+
 /*sombras 3d box shadow*/
 .btn{
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .3),

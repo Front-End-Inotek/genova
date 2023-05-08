@@ -65,7 +65,7 @@
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01" style="width: 215px; font-size: 16px;">Tipo de habitación</label>
+                <label class="input-group-text" for="inputGroupSelect01" style="width: 200px; font-size: 16px;">Tipo de habitación</label>
                 </div>
             <select class="form-control" id="tipo" name = "tipo" class="form-control">
               <option value="0">Selecciona</option>';

@@ -377,11 +377,11 @@
   }
 /*se agrega la clase ajuste al estado que se necesita ajustar*/
   .ajuste {
-    width: calc(75% - 1px); /*el ajuste es 75% por cada dia que la tarea estara*/
+    width: calc(50% - 1px); /*el ajuste es 75% por cada dia que la tarea estara*/
   }
 
   .ajuste-2dias {
-    width: calc(150% - 1px); /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
+    width: calc(100% - 1px); /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
   }
 
   

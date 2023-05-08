@@ -96,9 +96,8 @@ display: none;
 .subitem{
   color: #ecf2ff;
   font-size: 18px;
-  border: #bface2;
   background-color: #bface21f;
-  border: none;
+  width: 50px;
   border-radius: 50px;
   cursor: pointer;
   

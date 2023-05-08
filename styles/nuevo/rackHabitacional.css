@@ -4,7 +4,6 @@
 
 .tableRack {
   table-layout: auto;
-  
 }
 
 #tablaTotal {
@@ -39,7 +38,8 @@
   background-color: #30349f;
   color: #fff;
   padding-bottom: 25px;
-  padding-top: 30px;
+  padding-top: 50px;
+  margin-right: -15px;
 }
 
 #btn-mes {
@@ -268,7 +268,6 @@ transition-timing-function: line;
   background-color: #05d1ca79;
   box-shadow: 0 10px 14px #05d1ca8b;
 }
-
 
 
 .task--mantenimiento {

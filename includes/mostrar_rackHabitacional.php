@@ -130,7 +130,7 @@ class RackHabitacional extends ConexionMYSql
                 <div class="headTable justify-content-center align-items-center">
                     <div style="text-align:center;">
                     <div>
-                        <h3>'.$mes_rack.' '.$anio_rack.'</h3>
+                        <h2>'.$mes_rack.' '.$anio_rack.'</h2>
                     </div>
                     </div>
                 </div>
@@ -138,7 +138,7 @@ class RackHabitacional extends ConexionMYSql
 
         echo '
             <!-- DISPLAY USER-->
-            <div class="table-responsive">
+            <div class="tableRack">
                 <div id="cal-largo">
                     <div class="cal-sectionDiv">
                         <table class="tableRack table-striped table-bordered" id="tablaTotal">
@@ -198,7 +198,7 @@ class RackHabitacional extends ConexionMYSql
                         echo '
                         <td class="celdaCompleta tdCheck " >
                             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
-                                <div>
+                                <div >
                     ';
                                     echo '<section class="task '.$estado_habitacion_matutino[0].'"> '.$estado_habitacion_matutino[1].'</section>';
                                     echo '</div>';
@@ -208,12 +208,12 @@ class RackHabitacional extends ConexionMYSql
                     ';
                     }else{
                         $noches= ($fila['fin']-$fila['inicio'])/86400;
-                        echo '<div class="medioDia"></div>';
+                        echo '';
                         echo '
                         <td class="celdaCompleta tdCheck " colspan="'.$noches.'">
                             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
                         ';
-                                        echo '<section class="task '.$estado_habitacion_matutino[0].'"> '.$estado_habitacion_matutino[1].' '.$noches.'</section>';
+                                        echo '<section class="task '.$estado_habitacion_matutino[0].'"> '.$estado_habitacion_matutino[1].' '.$noches.' </section>';
                         echo '            </div>
                                    
                                 

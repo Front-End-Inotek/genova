@@ -12,7 +12,6 @@ function switch_rack() {
 
     console.log("rack de habitaciones");
     alert('si');
-    c
 
   }
 }
