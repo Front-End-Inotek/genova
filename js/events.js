@@ -1,6 +1,9 @@
 var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario'];
+var vista=0;
 x=$(document);
 x.ready(inicio);
+
+
 
 //Evaluamos el inicio de sesion
 function inicio(){
@@ -73,7 +76,20 @@ function sabernosession(){
 		id=parseInt(id);
 		if(id>0){
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
-			$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+
+            if(vista==0){
+                console.log("rack de habitaciones "+vista);
+                var usuario_id=localStorage.getItem("id");
+                $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+                //closeNav();
+            }else{
+                console.log("rack de operaciones "+vista);
+                var id=localStorage.getItem("id");
+                var token=localStorage.getItem("tocken");
+                $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+            }
+
+			//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
             $("#pie").load("includes/pie.php?id="+id);
             cargar_area_trabajo();
 		}
@@ -85,10 +101,29 @@ function sabernosession(){
 
 // Se carga el area de trabajo
 function cargar_area_trabajo(){
+    console.log(vista);
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
 
-	$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+
+
+    if(vista==0){
+        console.log("rack de habitaciones "+vista);
+        var usuario_id=localStorage.getItem("id");
+        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        //closeNav();
+    }else{
+        console.log("rack de operaciones "+vista);
+        var id=localStorage.getItem("id");
+        var token=localStorage.getItem("tocken");
+        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+    }
+
+
+
+
+
+	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
 
     setTimeout('cargar_area_trabajo()',3000);//5500
@@ -3306,25 +3341,19 @@ function ver_inventario(){
 }
 
 function switch_rack(){
-
-    var checkfactura = document.getElementById("flexSwitchCheckDefault");
-    if(checkfactura.checked == true){
-        console.log("rack de operaciones");
+    console.log(vista);
+    if(vista==0){
+        console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
-        $('#area_trabajo').hide();
-        $('#pie').hide();
-        $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-        closeNav();
+        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        vista=1;
     }else{
-
+        console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
-                $('#area_trabajo').hide();
-                $('#pie').hide();
-                $('#area_trabajo_menu').show();
-                $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token);
-            }
+        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+        vista=0;
+    }
 }
 
 function ver_rack_habitacional(){
