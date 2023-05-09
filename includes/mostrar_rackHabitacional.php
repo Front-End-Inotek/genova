@@ -6,101 +6,103 @@ setlocale(LC_ALL, "es_ES");
 
 class RackHabitacional extends ConexionMYSql
 {
-    private function estado_habitacion($estado,$turno){
-        switch($estado){
+    private function estado_habitacion($estado, $turno)
+    {
+        switch ($estado) {
             case 0:
-                $estado_texto[0] ='task--limpieza-vacia';
-                $estado_texto[1] ='Disponible';
-            break;
+                $estado_texto[0] = 'task--limpieza-vacia';
+                $estado_texto[1] = 'Disponible';
+                break;
             case 1:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
             case 2:
-                $estado_texto[0] ='task--vacia-sucia';
-                $estado_texto[1] ='Vacia Sucia';
-            break;
+                $estado_texto[0] = 'task--vacia-sucia';
+                $estado_texto[1] = 'Vacia Sucia';
+                break;
             case 3:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
             case 4:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
             case 5:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
             case 6:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
             case 7:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
             case 8:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
             case 9:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
             case 10:
-                $estado_texto[0] ='task--ocupadoH';
-                $estado_texto[1] ='Ocupada';
-            break;
+                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[1] = 'Ocupada';
+                break;
         }
-        
+
         return $estado_texto;
     }
-    private function convertir_mes($mes){
+    private function convertir_mes($mes)
+    {
         // comvertir el mes de formato numero a texto
-        $mes_texto="";
-        switch($mes){
-            case 1: 
-                $mes_texto="Enero";
-            break;
-            case 2: 
-                $mes_texto="Febrero";
-            break;
-            case 3: 
-                $mes_texto="Marzo";
-            break;
-            case 4: 
-                $mes_texto="Abril";
-            break;
-            case 5: 
-                $mes_texto="Mayo";
-            break;
-            case 6: 
-                $mes_texto="Junio";
-            break;
-            case 7: 
-                $mes_texto="Julio";
-            break;
-            case 8: 
-                $mes_texto="Agosto";
-            break;
-            case 9: 
-                $mes_texto="Septiembre";
-            break;
-            case 10: 
-                $mes_texto="Octubre";
-            break;
-            case 11: 
-                $mes_texto="Noviembre";
-            break;
+        $mes_texto = "";
+        switch ($mes) {
+            case 1:
+                $mes_texto = "Enero";
+                break;
+            case 2:
+                $mes_texto = "Febrero";
+                break;
+            case 3:
+                $mes_texto = "Marzo";
+                break;
+            case 4:
+                $mes_texto = "Abril";
+                break;
+            case 5:
+                $mes_texto = "Mayo";
+                break;
+            case 6:
+                $mes_texto = "Junio";
+                break;
+            case 7:
+                $mes_texto = "Julio";
+                break;
+            case 8:
+                $mes_texto = "Agosto";
+                break;
+            case 9:
+                $mes_texto = "Septiembre";
+                break;
+            case 10:
+                $mes_texto = "Octubre";
+                break;
+            case 11:
+                $mes_texto = "Noviembre";
+                break;
             default:
-                $mes_texto="Diciembre";
-            break;
+                $mes_texto = "Diciembre";
+                break;
         }
 
         return $mes_texto;
     }
-    public function mostrar($id,$tiempo_inicial)
+    public function mostrar($id, $tiempo_inicial)
     {
         include_once("clase_cuenta.php");
         include('clase_movimiento.php');
@@ -108,19 +110,19 @@ class RackHabitacional extends ConexionMYSql
         $mes_rack = $this->convertir_mes(date('m'));
         //variable para alamcenar año de rack
         $anio_rack = date('Y');
-       
 
-        $cuenta= new Cuenta(0);
-        $movimiento= new movimiento(0);
 
-        $cronometro=0;
+        $cuenta = new Cuenta(0);
+        $movimiento = new movimiento(0);
+
+        $cronometro = 0;
 
         //Se utiliza la misma consulta para el rack de operaciones
         $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         WHERE hab.estado_hab = 1 ORDER BY id";
-        $comentario="Optenemos las habitaciones para el rack de habitaciones";
-        $consulta= $this->realizaConsulta($sentencia, $comentario);
+        $comentario = "Optenemos las habitaciones para el rack de habitaciones";
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
 
 
         echo '
@@ -130,7 +132,7 @@ class RackHabitacional extends ConexionMYSql
                 <div class="headTable justify-content-center align-items-center">
                     <div style="text-align:center;">
                     <div>
-                        <h2>'.$mes_rack.' '.$anio_rack.'</h2>
+                        <h2>' . $mes_rack . ' ' . $anio_rack . '</h2>
                     </div>
                     </div>
                 </div>
@@ -138,95 +140,93 @@ class RackHabitacional extends ConexionMYSql
 
         echo '
             <!-- DISPLAY USER-->
-            <div class="tableRack">
+            <div class="table-responsive" style="margin-left: -10px !important;">
                 <div id="cal-largo">
                     <div class="cal-sectionDiv">
                         <table class="tableRack table-striped table-bordered" id="tablaTotal">
                             <thead class="cal-thead">
                                 <tr>
-                                    <th class="cal-viewmonth" id="changemonth"></th>
+                                <th class="cal-viewmonth" id="changemonth"></th>
         ';
-        $tiempo=$tiempo_inicial-86400;
+        $tiempo = $tiempo_inicial - 86400;
         //for para cargar los 31  dias
         for ($i = 1; $i <= 31; $i++) {
-            $mes=$this->convertir_mes(date('n',$tiempo));
-            $dia=date('d',$tiempo);
-            $tiempo+=86400;
+            $mes = $this->convertir_mes(date('n', $tiempo));
+            $dia = date('d', $tiempo);
+            $tiempo += 86400;
             echo "
                 <th class='cal-dia'> $dia - $mes</th>
             ";
         }
-        echo'
+        echo '
                 </tr>
             </thead>
             <tbody class="cal-tbody">
         ';
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
-            echo'
+            echo '
                 <tr id="u1">
                     <td class="cal-userinfo">
             ';
-                echo'Habitación ';
-                if($fila['id']<100) {
-                    echo $fila['nombre'];
-                } else {
-                    echo $fila['comentario'];
-                }
-            echo'
+            echo 'Habitación ';
+            if ($fila['id'] < 100) {
+                echo $fila['nombre'];
+            } else {
+                echo $fila['comentario'];
+            }
+            echo '
                 </td>
             ';
-            $tiempo=$tiempo_inicial-86400;
+            $tiempo = $tiempo_inicial - 86400;
             //for para cargar los 31  dias dentro de las habitaciones
             for ($i = 1; $i <= 31; $i++) {
-                if($i==1){
+                if ($i == 1) {
                     echo '
                         <td class="celdaCompleta tdCheck " >
                         </td>
                     ';
-                    
-                }else{
-                    
-                    $mes=$this->convertir_mes(date('n',$tiempo));
-                    
-                    $dia=date('d',$tiempo);
-                    $tiempo+=86400;
-                    $estado_habitacion_matutino=$this->estado_habitacion($fila['estado'],1);
-                    $estado_habitacion_vespertino=$this->estado_habitacion($fila['estado'],2);
-                    
-                    if($i==2 && $fila['estado']!=1){
+                } else {
+
+                    $mes = $this->convertir_mes(date('n', $tiempo));
+
+                    $dia = date('d', $tiempo);
+                    $tiempo += 86400;
+                    $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1);
+                    $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2);
+
+                    if ($i == 2 && $fila['estado'] != 1) {
                         echo '
                         <td class="celdaCompleta tdCheck " >
-                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
+                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                                 <div >
                     ';
-                                    echo '<section class="task '.$estado_habitacion_matutino[0].'"> '.$estado_habitacion_matutino[1].'</section>';
-                                    echo '</div>';
-                    echo '            
+                        echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                        echo '</div>';
+                        echo '            
                             </div>
                         </td>
                     ';
-                    }else{
-                        $noches= ($fila['fin']-$fila['inicio'])/86400;
+                    } else {
+                        $noches = ($fila['fin'] - $fila['inicio']) / 86400;
                         echo '';
                         echo '
-                        <td class="celdaCompleta tdCheck " colspan="'.$noches.'">
-                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
+                        <td class="celdaCompleta tdCheck " colspan="' . $noches . '">
+                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                         ';
-                                        echo '<section class="task '.$estado_habitacion_matutino[0].'"> '.$estado_habitacion_matutino[1].' '.$noches.' </section>';
+                        echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . ' </section>';
                         echo '            </div>
                                    
                                 
                             </td>
                         ';
-                        $i=32;
+                        $i = 32;
                     }
 
-                    if($i==2 && $fila['estado']!=1){
-                        $i=32;
+                    if ($i == 2 && $fila['estado'] != 1) {
+                        $i = 32;
                     }
                 }
-                
             }
 
             echo '</tr>';
@@ -237,7 +237,7 @@ class RackHabitacional extends ConexionMYSql
                 <th class='cal-dia'> LUNES ".$x ."</th>
             ";
         }*/
-       /*$fecha_actual = date('Y-m-d'); // Obtiene la fecha actual en formato YYYY-MM-DD
+        /*$fecha_actual = date('Y-m-d'); // Obtiene la fecha actual en formato YYYY-MM-DD
         $fecha_final = date('Y-m-d', strtotime('+32 days')); // Obtiene la fecha actual más 32 días en formato YYYY-MM-DD
         $fecha = $fecha_actual; // Se guarda la fecha acutal en una nueva variable
         $contador = 0;
