@@ -55,6 +55,20 @@
         }
       }
 
+      function mostrar_tipo(){
+        $sentencia = "SELECT *
+        FROM tipo_hab
+        WHERE estado = 1 ORDER BY id";// nombre
+        $comentario="Mostrar los tipos de habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+         
+        }
+      }
+
       function mostrar_hab_option(){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab

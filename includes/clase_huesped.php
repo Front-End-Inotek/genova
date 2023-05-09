@@ -82,33 +82,70 @@
         }
       }
       // Guardar el huesped
-      function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,$usuario_id){
-
+      function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
+      $usuario_id,$pais,$empresa){
+        
+      
+        //validaciones del huesped.
         if(empty($nombre)){
           echo "NO_DATA";
-          die();
-        }
-        
-        $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, `estado_huesped`)
-        VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', '$cvv', '0', '1');";
-        $comentario="Guardamos el huesped en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        if($consulta){
-          echo "NO";
-        }else{
-          echo ("NO_VALIDO");
+          exit();
         }
 
-        include_once("clase_log.php");
-        $logs = NEW Log(0);
-        $sentencia = "SELECT id FROM huesped ORDER BY id DESC LIMIT 1";
-        $comentario="Obtengo el id del huesped agregado";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
+        //verififca si el cliente/huesped ya existe.
+
+        $existe = "SELECT id FROM huesped where nombre = '$nombre' and apellido='$apellido'";
+        $comentario = "Verificar si existe el nombre del huesped";
+        $consulta_existe = $this->realizaConsulta($existe,$comentario); 
+
+    
+
+        if(mysqli_num_rows($consulta_existe)==0){
+          //ya existe.
+          $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, 
+          `estado_huesped`,`pais`,`empresa`)
+          VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', 
+          '$cvv', '0', '1','$pais','$empresa');";
+          $comentario="Guardamos el huesped en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          if(!$consulta){
+        
+            echo "NO_VALIDO";
+            exit();
+          }
+          
+          include_once("clase_log.php");
+          $logs = NEW Log(0);
+          $sentencia = "SELECT id FROM huesped ORDER BY id DESC LIMIT 1";
+          $comentario="Obtengo el id del huesped agregado";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            $id= $fila['id'];
+          }
+          //retornamos el id del nuevo husped para usarlo en la reservación.
+          echo $id;
+          $logs->guardar_log($usuario_id,"Agregar huesped: ". $id);
+        }else{
+          //actualizar el cliente existente con los datos 'nuevos' del formulario.
+          while ($fila = mysqli_fetch_array($consulta_existe))
         {
-          $id= $fila['id'];
+          $huesped_id= $fila['id'];
         }
-        $logs->guardar_log($usuario_id,"Agregar huesped: ". $id);
+        $sentencia = "UPDATE  `huesped` 
+        SET nombre ='$nombre', apellido='$apellido', empresa = '$empresa',telefono='$telefono',pais='$pais',estado='$estado',ciudad='$ciudad',direccion='$direccion'
+        ,comentarios ='$comentarios' WHERE id='$huesped_id'";
+        $comentario="acutalizamos el huesped en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if(!$consulta){
+      
+          echo "NO_VALIDO";
+          exit();
+        }
+        echo $huesped_id;
+        }
+        
+        
       }
       // Obtengo el total de huespedes
       function total_elementos(){
@@ -337,6 +374,63 @@
         }
         return $nombre_completo;
       }
+
+       // Mostrar las huespedes para asignar en una reservacion
+       function mostrar_asignar_huespedNew($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
+        echo '<div class="row">
+              <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huesped('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control-lg" /></div> 
+        </div><br>';
+        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";
+        //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY id DESC LIMIT 15";
+        //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC LIMIT 15";
+        $comentario="Mostrar los huespedes para asignar en una reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        echo '<div class="table-responsive" id="tabla_huesped">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-primary-encabezado text-center">
+              <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Direccion</th>
+              <th>Ciudad</th>
+              <th>Estafghfdo</th>
+              <th>Codigo Postal</th>
+              <th>Telefono</th>
+              <th>Correo</th>
+              <th>Contrato Socio</th>
+              <th>Cupón</th>
+              <th>Preferencias</th>
+              <th>Comentarios</th>
+              </tr>
+          </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta))
+              {
+               
+                echo '<tr class="text-center">
+                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\')"> Agregar</button></td>
+                <td>'.$fila['nombre'].'</td>  
+                <td>'.$fila['apellido'].'</td>
+                <td>'.$fila['direccion'].'</td>
+                <td>'.$fila['ciudad'].'</td>
+                <td>'.$fila['estado'].'</td>
+                <td>'.$fila['codigo_postal'].'</td>
+                <td>'.$fila['telefono'].'</td>
+                <td>'.$fila['correo'].'</td>
+                <td>'.$fila['contrato'].'</td>
+                <td>'.$fila['cupon'].'</td>
+                <td>'.$fila['preferencias'].'</td>
+                <td>'.$fila['comentarios'].'</td>
+                </tr>';
+              }
+              echo '
+            </tbody>
+          </table>
+        </div>';
+      }
+
       // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huesped($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
         echo '<div class="row">
