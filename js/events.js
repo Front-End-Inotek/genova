@@ -1181,6 +1181,17 @@ function calcular_total(precio_hospedaje,total_adulto,total_junior,total_infanti
 	document.getElementById("total").value= calculo_descuento + total_suplementos;
 }
 
+function obtener_garantia(){
+    garantia_id = $("#forma-garantia").val()
+    if(garantia_id==1 || garantia_id==0){
+        $("#btngarantia").attr("disabled",true)
+    }else{
+        $("#btngarantia").removeAttr("disabled");
+    }
+
+    console.log(garantia_id)
+}
+
 // Realiza un descuento de nuestros calculos
 function descuento_total(total,descuento){
     var calculo_descuento= (descuento*total) / 100;
@@ -1197,6 +1208,22 @@ function redondearDecimales(numero,decimales){
 		return Number(numero.toFixed(decimales)) === 0 ? 0 : numero; // En valores muy bajos, se comprueba si el numero es 0 (con el redondeo deseado), si no lo es se devuelve el numero otra vez.
     }
 }
+
+
+
+//modal para mostrar la información de la tarjeta del husped
+function mostrar_modal_garantia(){
+    id_huesped = $("#tomahuespedantes").val()
+    estado_tarjeta=$("#estadotarjeta").val()
+    $("#mostrar_herramientas").load('includes/modal_mostrar_garantia.php?huesped='+id_huesped+"&estadotarjeta="+estado_tarjeta,function(){
+        if(estado_tarjeta!=""){
+            $(":checkbox[value="+estado_tarjeta+"]").prop("checked","true");
+        }
+        
+    })
+   
+}
+
 
 // Modal para asignar huesped en una reservacion nueva
 function asignar_huespedNew(funcion,precio_hospedaje,total_adulto,total_junior,total_infantil){
@@ -1215,9 +1242,9 @@ function buscar_asignar_huesped(funcion,precio_hospedaje,total_adulto,total_juni
 	$("#tabla_huesped").load("includes/buscar_asignar_huesped.php?funcion="+funcion+"&precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil+"&a_buscar="+a_buscar);
 }
 
-function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion){
+function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv){
     
-    console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion)
+    console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv)
     $("#nombre").val(nombre)
     $("#apellido").val(apellido)
     $("#empresa").val(empresa)
@@ -1226,6 +1253,30 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
     $("#estado").val(estado)
     $("#ciudad").val(ciudad)
     $("#direccion").val(direccion)
+
+    $("#estadotarjeta").val(estado_tarjeta)
+    $("#nut").val(numero_tarjeta)
+    $("#nt").val(titular_tarjeta)
+    $("#mes").val(vencimiento_mes)
+    $("#year").val(vencimiento_ano)
+    $("#ccv").val(ccv)
+    
+
+
+    
+
+    if(tipo_tarjeta=="Debito" || tipo_tarjeta=="Credito"){
+        $("#forma-garantia option[value=2]").prop("selected", true);
+    }
+    if(tipo_tarjeta=="Transferencia"){
+        $("#forma-garantia option[value=3]").prop("selected", true);
+    }
+
+    $("#tomahuespedantes").val(id)
+    $("#btngarantia").text("Ver tarjeta")
+    $("#btngarantia").removeAttr("disabled");
+
+    //cargar los datos de la tarjeta igualmente.
 
 	$('#caja_herramientas').modal('hide');
 
@@ -1313,6 +1364,112 @@ function calcular_total_cupon(precio_hospedaje,total_adulto,total_junior,total_i
 	document.getElementById("total").value= calculo_descuento + total_suplementos;
 }
 
+function guardarReservacion(id_huesped){
+    var usuario_id=localStorage.getItem("id");
+    var numero_hab= Number(document.getElementById("numero_hab").value);
+    var noches= Number(document.getElementById("noches").value);
+    var tarifa= Number(document.getElementById("tarifa").value);
+    var extra_adulto= Number(document.getElementById("extra_adulto").value);
+    var extra_infantil= Number(document.getElementById("extra_infantil").value);
+
+    var pax_extra= Number(document.getElementById("extra_infantil").value);
+    var persona_reserva= (document.getElementById("persona-reserva").value);
+
+    var tipo_hab= (document.getElementById("tipo-habitacion").value);
+
+    var total= (document.getElementById("total").value);
+    var preasignada= (document.getElementById("preasignada").value);
+    var canal_reserva = (document.getElementById("canal-reserva").value);
+    var plan_alimentos = (document.getElementById("plan-alimentos").value);
+    var tipo_reservacion = (document.getElementById("tipo-reservacion").value);
+
+    var estado = preasignada!="" ? 4 : 2;
+
+
+    var forma_pago= (document.getElementById("forma-garantia").value);
+
+    var fecha_entrada= (document.getElementById("fecha_entrada").value);
+    var fecha_salida= (document.getElementById("fecha_salida").value);
+    var noches = (document.getElementById("noches").value);
+    var numero_hab = (document.getElementById("numero_hab").value);
+
+    var precio_hospedaje = (document.getElementById("tarifa").value);
+    var total_hospedaje= precio_hospedaje * noches * numero_hab;
+    var total_hab= total_hospedaje + extra_adulto  + extra_infantil + pax_extra;  
+
+    var precio_hospedaje = document.getElementById('aux_total').value
+    var total_hospedaje = document.getElementById('total').value
+
+    var datos = {
+        "id_huesped": id_huesped,
+        "fecha_entrada": fecha_entrada,
+        "fecha_salida": fecha_salida, 
+        "noches": noches,
+        "numero_hab": numero_hab,
+        "precio_hospedaje": precio_hospedaje,
+        "cantidad_hospedaje": extra_adulto,
+        "pax_extra":pax_extra,
+        "extra_adulto": extra_adulto,
+        "extra_junior": 0,
+        "extra_infantil": extra_infantil,
+        "extra_menor": 0,
+        "tarifa": tarifa,
+        "nombre_reserva": persona_reserva,
+        "acompanante": '',
+        "forma_pago": forma_pago,
+        "limite_pago": 0,
+        "suplementos": 0,
+        "total_suplementos": 0,
+        "total_hab": total,
+        "forzar_tarifa": 0,
+        "descuento": 0,
+        "codigo_descuento": 0,
+        "total": total_hospedaje,
+        "total_pago": 0,
+        "hab_id": Number(preasignada),
+        "tipo_hab": tarifa,
+        "estado": estado,
+        "usuario_id": usuario_id,
+        "plan_alimentos" : plan_alimentos,
+        "canal_reserva" : canal_reserva,
+        "tipo_reservacion":tipo_reservacion,
+      };
+        console.log(datos)
+    //   console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
+    //   return ;
+      if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_reservacionNew.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:ver_reservaciones,
+            // success:function(res){
+            //     console.log(res)
+            // },
+        
+            timeout:5000,
+            error:problemas_sistema
+          });
+      return false;
+    
+    }else{
+        alert("Campos incompletos o descuento no permitido");
+    }
+}
+
+function asignarValorTarjeta(){
+    $("#nut").val($("#cardnumber").val())
+    $("#nt").val($("#cardholder").val())
+    $("#mes").val($("#expires-month").val())
+    $("#year").val($("#expires-year").val())
+    $("#ccv").val($("#tccv").val())
+    $("#estadotarjeta").val($("input[name=estado]:checked").val())
+}
+
 function guardarNuevaReservacion(){
 
     var usuario_id=localStorage.getItem("id");
@@ -1330,23 +1487,27 @@ function guardarNuevaReservacion(){
 
     var tipo_tarjeta= document.getElementById("forma-garantia").value;
 
+    huesped = $("#tomahuespedantes").val()
 
-    // var datos_huesped = {
-    //     "nombre_huesped":nombre_huesped,
-    //     "apellido_huesped":apellido_huesped,
-    //     "empresa_huesped":empresa_huesped,
-    //     "telefono_huesped":telefono_huesped,
-    //     "pais_huesped":pais_huesped,
-    //     "estado_huesped":estado_huesped,
-    //     "ciudad_huesped":ciudad_huesped,
-    //     "direccion_huesped":direccion_huesped,
+    // if(huesped!=""){
+    //     guardar_reservacion(response_mj)
     // }
+    titular_tarjeta=$("#nt").val()
+    numero_tarjeta=$("#nut").val()
+    vencimiento_mes=$("#mes").val()
+    vencimiento_ano=$("#year").val()
+    cvv=$("#ccv").val()
+    
 
-    //guardar asyncronicamente el "husped" para obtener su id.
+
+
+    //guardar asyncronicamente el "husped" para obtener su id; si ya existe retorna su id..
     let xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre_huesped+"&apellido="+apellido_huesped+"&direccion="+direccion_huesped+"&pais="+pais_huesped+"&empresa="+empresa_huesped+
-    "&ciudad="+ciudad_huesped+"&estado="+estado_huesped+"&telefono="+telefono_huesped+"&comentarios="+comentarios_huesped+"&tipo_tarjeta="+tipo_tarjeta+"&usuario_id="+usuario_id,true);
+    "&ciudad="+ciudad_huesped+"&estado="+estado_huesped+"&telefono="+telefono_huesped+"&comentarios="+comentarios_huesped+"&tipo_tarjeta="+tipo_tarjeta+"&usuario_id="+usuario_id+
+    "&titular_tarjeta="+titular_tarjeta+"&numero_tarjeta="+numero_tarjeta+
+    "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv,true);
 
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
@@ -1364,114 +1525,20 @@ function guardarNuevaReservacion(){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
                 return
             }else{
+                guardarReservacion(response_msj)
                 //todo ocurre correctamente.
-                var numero_hab= Number(document.getElementById("numero_hab").value);
-                var noches= Number(document.getElementById("noches").value);
-                var tarifa= Number(document.getElementById("tarifa").value);
-                var extra_adulto= Number(document.getElementById("extra_adulto").value);
-                var extra_infantil= Number(document.getElementById("extra_infantil").value);
-
-                var pax_extra= Number(document.getElementById("extra_infantil").value);
-                var persona_reserva= (document.getElementById("persona-reserva").value);
-
-                var tipo_hab= (document.getElementById("tipo-habitacion").value);
-
-                var total= (document.getElementById("total").value);
                 
-                var preasignada= (document.getElementById("preasignada").value);
-                var canal_reserva = (document.getElementById("canal-reserva").value);
-                var plan_alimentos = (document.getElementById("plan-alimentos").value);
-                var tipo_reservacion = (document.getElementById("tipo-reservacion").value);
-
-                var estado = preasignada!="" ? 4 : 2;
-
-            
-                var forma_pago= (document.getElementById("forma-garantia").value);
-
-                var fecha_entrada= (document.getElementById("fecha_entrada").value);
-                var fecha_salida= (document.getElementById("fecha_salida").value);
-                var noches = (document.getElementById("noches").value);
-                var numero_hab = (document.getElementById("numero_hab").value);
-
-                var precio_hospedaje = (document.getElementById("tarifa").value);
-                var total_hospedaje= precio_hospedaje * noches * numero_hab;
-                var total_hab= total_hospedaje + extra_adulto  + extra_infantil + pax_extra;  
-
-                var precio_hospedaje = document.getElementById('aux_total').value
-                var total_hospedaje = document.getElementById('total').value
-
-                var datos = {
-                    "id_huesped": response_msj,
-                    "fecha_entrada": fecha_entrada,
-                    "fecha_salida": fecha_salida, 
-                    "noches": noches,
-                    "numero_hab": numero_hab,
-                    "precio_hospedaje": precio_hospedaje,
-                    "cantidad_hospedaje": extra_adulto,
-                    "pax_extra":pax_extra,
-                    "extra_adulto": extra_adulto,
-                    "extra_junior": 0,
-                    "extra_infantil": extra_infantil,
-                    "extra_menor": 0,
-                    "tarifa": tarifa,
-                    "nombre_reserva": persona_reserva,
-                    "acompanante": '',
-                    "forma_pago": forma_pago,
-                    "limite_pago": 0,
-                    "suplementos": 0,
-                    "total_suplementos": 0,
-                    "total_hab": total,
-                    "forzar_tarifa": 0,
-                    "descuento": 0,
-                    "codigo_descuento": 0,
-                    "total": total_hospedaje,
-                    "total_pago": 0,
-                    "hab_id": Number(preasignada),
-                    "tipo_hab": tarifa,
-                    "estado": estado,
-                    "usuario_id": usuario_id,
-                    "plan_alimentos" : plan_alimentos,
-                    "canal_reserva" : canal_reserva,
-                    "tipo_reservacion":tipo_reservacion,
-                  };
-
-                
-            
-            
-                    console.log(datos)
-                //   console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
-                //   return ;
-                  if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
-                    $.ajax({
-                        async:true,
-                        type: "POST",
-                        dataType: "html",
-                        contentType: "application/x-www-form-urlencoded",
-                        url:"includes/guardar_reservacionNew.php",
-                        data:datos,
-                        beforeSend:loaderbar,
-                        success:ver_reservaciones,
-                        // success:function(res){
-                        //     console.log(res)
-                        // },
-                    
-                        timeout:5000,
-                        error:problemas_sistema
-                      });
-                  return false;
-                
-                }else{
-                    alert("Campos incompletos o descuento no permitido");
-                }
             }
-            
         
         }else{
             swal("Error del servidor!", "Intentelo de nuevo o contacte con soporte tecnico", "error");
         }
     })
     xhttp.send();
+
+    
  }
+
 
 
 // Guardar una reservacion

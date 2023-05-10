@@ -37,8 +37,12 @@
             <link rel=stylesheet href="styles/estado6.css" type="text/css">
             <link rel=stylesheet href="styles/subestados.css" type="text/css">
 
+            <link rel="stylesheet" href="styles/credito.css">
+           
 
             <script src="js/events.js"></script>
+
+           
 
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

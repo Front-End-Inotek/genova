@@ -1,25 +1,32 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_huesped.php");
-  $huesped= NEW Huesped(0);
+
+
+  $id = !empty($_GET['huesped']) ? $_GET['huesped'] : 0;
+
+  $estado_tarjeta =  !empty($_GET['estadotarjeta']) ? $_GET['estadotarjeta'] : 0;
+
+  $huesped= NEW Huesped($id);
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-      Asignar Huesped
+    Metodo de pago / Metodo de garantia
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
 
     <div class="modal-body">
       <div class="row">
-        <div class="col-sm-12"> ';
-        
-        $huesped->mostrar_asignar_huesped($_GET['funcion'],$_GET['precio_hospedaje'],$_GET['total_adulto'],$_GET['total_junior'],$_GET['total_infantil']);
+        <div class="col-sm-12" id="datos_garantia">';
+        $huesped->mostrar_garantia($estado_tarjeta);
         echo '</div>
       </div><br>
     </div>  
 
     <div class="modal-footer" id="boton_asignar_huesped">
+      <button class="btn btn-success" onclick="asignarValorTarjeta()" data-dismiss="modal"><span>Listo</span></button>
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
     </div>
   </div>';
