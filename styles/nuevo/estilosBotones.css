@@ -41,9 +41,9 @@ body {
   position: absolute;
   display: block;
   list-style: none;
-  width: 20px;
-  height: 20px;
-  background: rgba(126, 87, 245, 0.596);
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(180deg, #a0a9f697 0%, #cdd2fc9a 40%, rgba(169, 176, 255, 0.555) 100%);
   animation: animate 25s linear infinite;
   bottom: -150px;
   border: 5px solid #8e97f9;
@@ -113,8 +113,8 @@ body {
 
 .circles li:nth-child(8){
   left: 50%;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   animation-delay: 15s;
   animation-duration: 45s;
   z-index: -9999999999;
@@ -122,8 +122,8 @@ body {
 
 .circles li:nth-child(9){
   left: 20%;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   animation-delay: 2s;
   animation-duration: 35s;
   z-index: -9999999999;
@@ -162,7 +162,7 @@ body {
   100%{
       transform: translateY(-1000px) rotate(120deg);
       opacity: 0;
-      border-radius: 50%;
+      border-radius: 100%;
   }
 
 }
@@ -432,6 +432,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .ocupadoH {
   background-color: #a80000fc !important;
+  background: linear-gradient(180deg, #a80000fc 0%, rgb(253, 87, 87) 40%, #a80000fc 100%);
   color: #fff;
   border-left: 7px solid #650208 !important;
 }
@@ -443,6 +444,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .sucia-ocupada {
   background-color: #bb6464 !important;
+  background: linear-gradient(180deg, #ed6a6a 0%, #fb9595 40%, #bc3f3f 100%);
   color: #fff !important;
   border-left: 7px solid #bd0202 !important;
 }
@@ -453,7 +455,9 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .vacia-sucia {
+  
   background-color: #DDFFBB !important;
+  background: linear-gradient(180deg, #d3ffa7 0%, #e6fad2 40%, #d1faa7 100%);
   color: #0e2804 !important;
   border-left: 7px solid #A4BC92 !important;
 }
@@ -475,7 +479,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .disponible-limpia {
-  background-color: rgb(255, 255, 255) !important;
+  background: linear-gradient(180deg, #e9e9e9ee 0%, #ffffff 40%, rgb(170, 170, 170) 100%);
   color: #000 !important;
   border-left: 7px solid #9b9a9a !important;
 }
@@ -492,6 +496,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .vacia-limpia {
   background-color: rgb(203, 221, 255) !important;
+  background: linear-gradient(180deg, #b4ceff 0%, rgb(206, 223, 255) 40%, #80acff 100%);
   color: #0a5eff !important ;
   border-left: 7px solid #0a5eff !important;
 }
@@ -509,6 +514,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .ocupada-limpieza {
   background-color: #6398fb !important;
+  background: linear-gradient(180deg, #1c53ba 0%, #6398fb 40%, #082e73 100%);
   color: #fff !important;
   border-left: 7px solid #052d76 !important;
 }
@@ -523,7 +529,9 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .reserva-pagada {
   background-color: #6b0fe3af !important;
-  color: #fff !important;
+  background: linear-gradient(180deg, #be8cff 0%, #c199f6af 40%, #7439c3 100%);
+  color: #000 !important;
+
   border-left: 7px solid #4d03ae !important;
 }
 .reserva-pagada:hover {
@@ -536,6 +544,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .reserva-pendiente {
   background-color: #3b0286 !important;
+  background: linear-gradient(180deg, #4f0ba8 0%, #8c4ddf 40%, #1e0243 100%);
   color: #fff !important;
   border-left: 7px solid #bc88ff !important;
 }
@@ -548,8 +557,9 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .mantenimiento {
-  background-color: #ffdaa2 !important;
-  color: #ff7700 !important;
+  background-color: #ffdaa2 ;
+  background: linear-gradient(180deg, #ffbe5b 0%, #f9d7a5 40%, #ffb546 100%);
+  color: #fa5f05 !important;
   border-left: 7px solid #fdb44d !important;
 }
 
@@ -557,11 +567,11 @@ body.modo-nocturno .containerRackOp .btn:focus {
   background-color: #fdb44d !important;
   color: #fff !important;
   border-left: 7px solid #ffdaa2 !important;
-  box-shadow: 0 10px 14px #ff7700c9;
+  box-shadow: 0 10px 14px #fa5f05;
 }
 
 .mantenimiento a {
-  color: #ff6a00 !important;
+  color: #fa5f05 !important;
 }
 
 .btn-dark {
@@ -602,19 +612,17 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .modal-header {
-  background-color: #97b2f9ee !important;
+  background-color: #97a2f9ee !important;
+  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
   border-color: #3f51b5 !important;
-  color: #3f51b5 !important;
+  color: #fff !important;
 }
 
 .modal-footer {
-  background-color: #97b2f9ee !important;
+  background-color: #97a2f9ee !important;
+  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
   border-color: #3f51b5 !important;
   color: #3f51b5 !important;
-}
-
-.modal-content {
-  border: 1px solid #3f51b5 !important;
 }
 
 .close {
@@ -652,7 +660,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
   top: 0;
   left: 0;
   z-index: -1;
-  background-color: #ffffff4f;
+  background-color: #ffffff13;
   border-radius: 5px;
   box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
@@ -872,6 +880,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 .card-header {
   padding-bottom: 50px !important;
   background-color: #30349f !important;
+  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
   color: #fff;
 }
 

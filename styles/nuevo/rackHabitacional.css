@@ -35,7 +35,7 @@
 }
 
 .headTable {
-  background-color: #30349f;
+  background: linear-gradient(180deg, #2d32ae 0%, #4e4ef0 50%, #171a6e 100%);
   color: #fff;
   padding-bottom: 25px;
   padding-top: 50px;
@@ -80,11 +80,11 @@
 -webkit-box-shadow: 0 2px 2px -2px #0E1119;
    -moz-box-shadow: 0 2px 2px -2px #0E1119;
         box-shadow: 0 2px 2px -2px #0E1119;
+        background: #ffffff50 !important;
 }
 
 .tableRack th {
-  background:#adadfe;
-  color: #30349f;
+  background: linear-gradient(180deg, #b3b3fe 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%);
 }
 
 .tableRack th:hover {
@@ -98,19 +98,19 @@
 
 
 .tableRack td:first-child {
-  color: #FFF;
-  background-color: #30349f;
+  color: #30349f;
+  background: linear-gradient(85deg, #97a2f9ee 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%) !important;
 }
 
 .tableRack tr:hover {
-  background-color: #adadfe;
+ background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);;
  -webkit-box-shadow: 0 6px 6px -6px #0E1119;
     -moz-box-shadow: 0 6px 6px -6px #0E1119;
          box-shadow: 0 6px 6px -6px #0E1119;
  }
  
 .tableRack td:hover {
-background-color: #adadfe;
+  background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
 color: #30349f;
 box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
 transition-delay: 0s;
@@ -120,7 +120,7 @@ transition-timing-function: line;
 }
 
 .tableRack th:hover + tr td {
-  background-color: #adadfe;
+  background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
   color: #30349f;
   box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
   transition-delay: 0s;
@@ -134,6 +134,12 @@ transition-timing-function: line;
   position: relative;
 }
 .medioDia {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+
+.cajaHerramienta{
   display: inline-block;
   vertical-align: top;
   width: 50%;
@@ -229,9 +235,7 @@ transition-timing-function: line;
 /* ------------task de estado de habitacion -------*/
 
 .task {
-  border-left-width: 3px;
   padding: 8px 6px;
-  border-left-style: solid;
   font-size: 14px;
   position: relative;
   min-width: 9em;
@@ -273,8 +277,9 @@ transition-timing-function: line;
 .task--mantenimiento {
   border-left: 7px solid #fdb44d;
   background: #ffdaa2;
+  background: linear-gradient(180deg, #ffbe5b 0%, #f9d7a5 40%, #ffb546 100%);
   min-width: 200px;
-  color: #fa7705;
+  color: #fa5f05;
 }
 
 .task--mantenimiento:hover {
@@ -293,6 +298,7 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 7;
   background: #BB6464;
+  background: linear-gradient(180deg, #ed6a6a 0%, #fb9595 40%, #bc3f3f 100%);
   align-self: end;
   color: #f8f3f3;
 
@@ -306,6 +312,7 @@ transition-timing-function: line;
 
 .task--ocupadoH {
   background-color: #b12e3b;
+  background: linear-gradient(180deg, #a80000fc 0%, rgb(253, 87, 87) 40%, #a80000fc 100%);
   color: #fff;
   border-left: 7px solid #6a0319;
 }
@@ -319,10 +326,8 @@ transition-timing-function: line;
 
 .task--vacia-sucia {
   border-left: 7px solid #03ae11;
-  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere 
-  grid-column: 2 / span 2;
-  grid-row: 9;*/
   background: #bff1bf81;
+  background: linear-gradient(180deg, #c6fe8f 0%, #f0fee1 40%, #ccfe98 100%);
   align-self: end;
   color: #057410e8;
 
@@ -330,6 +335,7 @@ transition-timing-function: line;
 
 .task--vacia-sucia:hover {
   background-color: #81e389 !important;
+  
   color: #fff !important;
   border-left: 7px solid #bff1bfa1 !important;
   box-shadow: 0 10px 14px #35da435d;
@@ -337,10 +343,8 @@ transition-timing-function: line;
 
 .task--disponible-limpia {
   border-left: 7px solid #9b9a9a;
-  /*aqui puedes seleccioanr donde y con span cuanto espacio requiere 
-  grid-column: 2 / span 2;
-  grid-row: 8;*/
   background: #e5e4e4;
+  background: linear-gradient(180deg, #e9e9e9ee 0%, #ffffff 40%, rgb(170, 170, 170) 100%);
   color: #030303;
 
 }
@@ -362,12 +366,15 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 10;*/
   background: #6b0fe3af;
-  color: #FFF;
+  background: linear-gradient(180deg, #be8cff 0%, #c199f6af 40%, #7439c3 100%);
+  color: #000;
+
 
 }
 
 .task--reserva-pagada:hover {
   background-color: #6b0fe3af !important;
+  
   color: #fff !important;
   border-left: 7px solid #4d03ae !important;
   box-shadow: 0 10px 14px #6b0fe396;
@@ -379,6 +386,7 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 11;
   background: #3b0286;
+  background: linear-gradient(180deg, #4f0ba8 0%, #8c4ddf 40%, #1e0243 100%);
   color: #FFF;
 
 
@@ -396,6 +404,7 @@ transition-timing-function: line;
 .task--limpieza-vacia {
   border-left: 7px solid #4786ff;
   background: rgb(205, 222, 252);
+  background: linear-gradient(180deg, #b4ceff 0%, rgb(206, 223, 255) 40%, #80acff 100%);
   color: #0a5eff;
 
 }
@@ -413,6 +422,7 @@ transition-timing-function: line;
 .task--limpieza-ocupada {
   border-left: 7px solid #052d76;
   background: #6398fb;
+  background: linear-gradient(180deg, #1c53ba 0%, #6398fb 40%, #0b3c96 100%);
   align-self: end;
   color: #fff;
 
@@ -423,6 +433,20 @@ transition-timing-function: line;
   color: #fff !important;
   border-left: 7px solid #6398fb !important;
   box-shadow: 0 10px 14px #6398fbdd;
+}
+
+.task--transparente{
+  border-left-width: 3px;
+  padding: 8px 6px;
+  border-left-style: solid;
+  font-size: 14px;
+  position: relative;
+  min-width: 9em;
+  min-height: 4em;
+  max-height: 4em;
+  background-color: transparent !important;
+  color: transparent !important;
+  border-left: 7px solid transparent !important;
 }
 
 
@@ -452,7 +476,7 @@ transition-timing-function: line;
   top: 0;
   left: 0;
   z-index: 1;
-  background-color: #fefefe;
+  background:#fff;
   box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
     7px 7px 20px 0px rgba(0, 0, 0, .1),
     4px 4px 5px 0px rgba(0, 0, 0, .1);
@@ -505,11 +529,11 @@ transition-timing-function: line;
 
 /*se agrega la clase ajuste al estado que se necesita ajustar*/
 .ajuste {
-  width: calc(75% - 1px);
+  width: calc(50% - 1px);
   /*el ajuste es 75% por cada dia que la tarea estara*/
 }
 
 .ajuste-2dias {
-  width: calc(150% - 1px);
+  width: calc(100% - 1px);
   /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
 }

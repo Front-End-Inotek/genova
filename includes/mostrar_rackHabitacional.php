@@ -140,7 +140,7 @@ class RackHabitacional extends ConexionMYSql
 
         echo '
             <!-- DISPLAY USER-->
-            <div class="table-responsive" style="margin-left: -10px !important;">
+            <div class="table-responsive tableRack" style="margin-left: -10px !important;">
                 <div id="cal-largo">
                     <div class="cal-sectionDiv">
                         <table class="tableRack table-striped table-bordered" id="tablaTotal">
