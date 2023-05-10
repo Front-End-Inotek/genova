@@ -264,7 +264,7 @@ class Reservacion extends ConexionMYSql
 		INNER JOIN huesped ON r.id_huesped = huesped.id
 		INNER JOIN movimiento AS m ON m.id_reservacion= r.id
 		WHERE ('$fecha_salida' > r.fecha_entrada AND '$fecha_entrada' <  r.fecha_salida)
-		AND r.estado = 4
+		AND m.motivo = 'preasignar'
 		"
         .$agregar_id;
 

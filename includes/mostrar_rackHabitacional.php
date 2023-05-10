@@ -22,36 +22,36 @@ class RackHabitacional extends ConexionMYSql
                 $estado_texto[1] = 'Vacia Sucia';
                 break;
             case 3:
-                $estado_texto[0] = 'task--ocupadoH';
-                $estado_texto[1] = 'Ocupada';
+                $estado_texto[0] = 'task--limpieza-vacia';
+                $estado_texto[1] = 'Vacia limpia';
                 break;
             case 4:
-                $estado_texto[0] = 'task--ocupadoH';
-                $estado_texto[1] = 'Ocupada';
+                $estado_texto[0] = 'task--ocupada-sucia';
+                $estado_texto[1] = 'Sucia ocupada';
                 break;
             case 5:
-                $estado_texto[0] = 'task--ocupadoH';
-                $estado_texto[1] = 'Ocupada';
+                $estado_texto[0] = 'task--limpieza-ocupada';
+                $estado_texto[1] = 'Ocupada limpieza';
                 break;
             case 6:
-                $estado_texto[0] = 'task--ocupadoH';
-                $estado_texto[1] = 'Ocupada';
+                $estado_texto[0] = 'task--reserva-pagada';
+                $estado_texto[1] = 'Reserva pagada';
                 break;
             case 7:
-                $estado_texto[0] = 'task--ocupadoH';
-                $estado_texto[1] = 'Ocupada';
+                $estado_texto[0] = 'task--reserva-pendiente-pago';
+                $estado_texto[1] = 'Reserva pendiente';
                 break;
             case 8:
-                $estado_texto[0] = 'task--ocupadoH';
-                $estado_texto[1] = 'Ocupada';
+                $estado_texto[0] = 'task--uso-casa';
+                $estado_texto[1] = 'Uso casa';
                 break;
             case 9:
-                $estado_texto[0] = 'task--ocupadoH';
-                $estado_texto[1] = 'Ocupada';
+                $estado_texto[0] = 'task--mantenimiento';
+                $estado_texto[1] = 'Mantenimiento';
                 break;
             case 10:
-                $estado_texto[0] = 'task--ocupadoH';
-                $estado_texto[1] = 'Ocupada';
+                $estado_texto[0] = 'task--bloqueado';
+                $estado_texto[1] = 'Bloqueo';
                 break;
         }
 
@@ -179,6 +179,20 @@ class RackHabitacional extends ConexionMYSql
                 </td>
             ';
             $tiempo = $tiempo_inicial - 86400;
+            $tiempo_aux = $tiempo;
+            $hab = $fila['id'];
+            //por cada hab, se tiene que consultar las preasignaciones existentes
+            $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado ,movimiento.estado_interno AS interno
+            FROM movimiento 
+            left join reservacion on movimiento.id_reservacion = reservacion.id
+            LEFT JOIN hab on movimiento.id_hab = hab.id 
+            where reservacion.estado =2
+            and movimiento.motivo='preasignar'
+            and movimiento.id_hab=$hab";
+            $comentario = "Optenemos las habitaciones para el rack de habitaciones";
+            $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
+          
+
             //for para cargar los 31  dias dentro de las habitaciones
             for ($i = 1; $i <= 31; $i++) {
                 if ($i == 1) {
@@ -192,6 +206,8 @@ class RackHabitacional extends ConexionMYSql
 
                     $dia = date('d', $tiempo);
                     $tiempo += 86400;
+                    $tiempo_aux += 86400;
+                    
                     $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1);
                     $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2);
 
@@ -207,6 +223,7 @@ class RackHabitacional extends ConexionMYSql
                             </div>
                         </td>
                     ';
+                   
                     } else {
                         $noches = ($fila['fin'] - $fila['inicio']) / 86400;
                         echo '';
@@ -220,10 +237,24 @@ class RackHabitacional extends ConexionMYSql
                                 
                             </td>
                         ';
+                       
+                       
+
+                        //el ciclo actual debe terminarse si no hay reservaciones para la habitación actual.
                         $i = 32;
                     }
+                    //aqui van las reservas
+                    while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
+                       
+                        //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias), 
+                        //con el tiempo de la reservacion
+                        if($tiempo_aux == $fila_r['fecha_entrada']){
 
-                    if ($i == 2 && $fila['estado'] != 1) {
+                        }
+                        
+                    }
+
+                    if ($i == 2 && $fila['estado'] != 1  && $fila['estado'] != 0) {
                         $i = 32;
                     }
                 }
