@@ -64,13 +64,14 @@ function cambiarVista() {
   var vista = document.getElementById("vista");
 
   if (checkbox.checked == true) {
-    vista.classList.remove("vista-habitacional");
-    vista.classList.add("rack-operaciones"); 
-    vista.innerHTML = "Rack Operaciones";
-  } else {
     vista.classList.remove("rack-operaciones");
     vista.classList.add("vista-habitacional");
     vista.innerHTML = "Rack Habitacional";
+  } else {
+    vista.classList.remove("vista-habitacional");
+    vista.classList.add("rack-operaciones"); 
+    vista.innerHTML = "Rack Operaciones";
+    
   }
 }
 
