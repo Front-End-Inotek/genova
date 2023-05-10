@@ -83,8 +83,7 @@
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
 
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_planes_alimentos()">Plan de alimentos</a></i></ul>';
+			
 			}
 		}
 			echo'
@@ -163,7 +162,10 @@
 			if($permisos_configuracion==0){
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tipos()"> Configuracion </a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_planes_alimentos()">Plan de alimentos</a></i></ul>';
 			}
+			
 		}
 			echo '
 			</ul>
