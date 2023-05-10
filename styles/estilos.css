@@ -103,11 +103,12 @@
 
 /* Color para tabla de encabezado primary **/
 .table-primary-encabezado{
-  color: #d6e4f0;
+  color: #fff;
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
-  background-color: #3e54ac;
+  background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 45%, rgb(166, 179, 248) 100%);
+  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
   border-top-style: none;
 }
 
@@ -141,7 +142,7 @@
 /* Contenedor con fondo blanco y bordes */
 .blanco{
   padding: 25px 25px;
-  background-color: #D2DAFF;
+  background-color: #ecf2ff!important;
   margin-top: 35px;
   border: 1px solid #c6c4fc;
 }
@@ -176,7 +177,6 @@ input:hover{
     7px 7px 20px 0px rgba(0, 0, 0, .1),
     4px 4px 5px 0px rgba(0, 0, 0, .1) !important;
     outline: none;
-    border: none;
 }
 .blanco{
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
@@ -225,10 +225,13 @@ select{
 
 .table-responsive td{
    box-shadow: inset 1px 1px 1px 0px rgba(255, 255, 255, .5),
-    1px 2px 3px 1px #a29fff74,
-    1px 2px 3px 2px #a29fff74,
-    1px 2px 3px 2px #a29fff74;
-  background-color: #f5f5f51f;
+    1px 2px 3px 1px #4646d791;
+
+    background: linear-gradient(180deg, #c3cafd 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
+}
+
+.table-responsive td:hover{
+  background: linear-gradient(180deg, #a2acfdee 0%, #c5d8ff 40%, rgb(142, 158, 245) 100%);
 }
 
 .text-dark{
@@ -297,12 +300,12 @@ a.topictitle:hover {
 }
 .fondo_rest{
   /*background-color: #E9E9E9;*/
-  background-color: white;
+  background-color: transparent !important;
   border-radius: 5px;
 }
 .alinear_centro{
-  color: white;
-  background-color: #2646c5c9 ;
+  color: #2646c5c9;
+  background: linear-gradient(180deg, rgb(182, 194, 253) 0%, #ecf2ff 50%,  #b3b3fe 100%);
   text-align: center;
   border-radius: 5px;
   padding: 25px 2px 3px 2px;

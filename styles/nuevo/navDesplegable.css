@@ -207,6 +207,9 @@ span {
   margin-left: -15.7%;
 
   background-color: #30349f;
+  background:linear-gradient(90deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+  /*
+  background: linear-gradient(90deg, #30349f 0%, #595dd5 50%, #181b63 100%);*/
   transition: 0.5s;
   font-size: large;
   z-index: 9999;
@@ -267,7 +270,9 @@ span {
 /* tamaño y posicionamiento ****/
 /*******************************/
 .menu-btn {
-  background-color: #3f51b5;
+  background-color: #30349f;
+  background:linear-gradient(90deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+
   color: #ecf2ff;
   position: absolute;
   top: 1%;
