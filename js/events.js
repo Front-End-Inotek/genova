@@ -1159,7 +1159,7 @@ function calcular_noches(hab_id=0){
         // $(".div_adultos").load("includes/consultar_reservacion_disponible.php?fechas="+JSON.stringify(fechas)+"&hab_id="+hab_id);
         include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id;
         console.log(include);
-        // $(".div_adultos").load(include);    
+        $(".div_adultos").load(include);    
         $("#preasignada").load(include);    
      
     }

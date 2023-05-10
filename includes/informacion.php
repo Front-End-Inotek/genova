@@ -254,6 +254,8 @@ echo'
             }else{
                 $fecha_inicio= date("d-m-Y",$cronometro);
             }
+           
+
             echo $fecha_inicio;
             }
             echo '</span>';
@@ -267,8 +269,11 @@ echo'
         echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
         echo '</div>';
         }
+       
     }
     echo ' </div>';
+  
     }
+    
 }
 ?>

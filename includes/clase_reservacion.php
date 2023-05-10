@@ -281,16 +281,14 @@ class Reservacion extends ConexionMYSql
 
         //cuando hay  id de habitación y si la fecha conciide con otra fecha (de la misma habitación) entonces el array $no disponibles es mayor a 0.
         if($hab_id!=0) {
+            // echo ($fecha_entrada) . "\n" . ($fecha_salida) ."||".strtotime($fecha_salida);
             if(sizeof($no_disponibles)<=0) {
                 //Si hay disponibilidad
-                // echo "\n". "si";
                 return true;
             } else {
                 //No hay disponibilidad
-                // echo "\n". "no";
                 return false;
             }
-
         } else {
             //cuando se trata de una reservación se retornan todas las habitaciones disponibles.
             $arraySQL = implode("','", $no_disponibles);
@@ -312,8 +310,8 @@ class Reservacion extends ConexionMYSql
         }
 
         //fechas en timestamp
-        // 	echo ($fecha_entrada) . "\n" . ($fecha_salida) ."||".strtotime($fecha_salida);
-        //   die();
+        // echo ($fecha_entrada) . "\n" . ($fecha_salida) ."||".strtotime($fecha_salida);
+       
 
     }
     // Guardar la reservacion
