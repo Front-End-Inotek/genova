@@ -361,8 +361,9 @@ function ver_tipos(){
 
 // Editar un plan de alimentos
 function editar_plan_alimentos(id,nombre,costo){
+    nombre = encodeURIComponent(nombre)
     include = "includes/editar_plan_alimentos.php?id="+id+"&nombre="+nombre+"&costo="+costo
-    console.log(include)
+  
     $("#mostrar_herramientas").load(include);
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
@@ -417,6 +418,41 @@ function mostrar_estadorack(estatus_hab) {
         xhttp.send();
 }
 
+
+function modificar_plan_alimentos(id){
+    // Editar un tipo de plan de alimentación
+	let usuario_id = localStorage.getItem("id");
+    let id_plan = id;
+    let nombre = encodeURI(document.getElementById("nombre").value);
+	let costo = encodeURI(document.getElementById("codigo").value);
+
+    include = "includes/aplicar_editar_plan_alimentacion.php?nombre="+nombre+"&costo="+costo+"&id_tipo="+id_plan+"&usuario_id="+usuario_id;
+    $.ajax({
+        async:true,
+        type: "GET",
+        dataType: "HTML",
+        contentType: "application/json",
+        url:include,
+        beforeSend:loaderbar,
+        success:function(res){
+            if(res=="NO"){
+                $('#caja_herramientas').modal('hide');
+                ver_planes_alimentos()
+                swal("Actualizo el plan de alimentación!", "Excelente trabajo!", "success");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+          
+        },
+        //success:problemas_sistema,
+        timeout:5000,
+        error:function(err){
+            console.log(err)
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+      });
+}
+
 // Editar un tipo de habitacion
 function modificar_tipo(id){
     //$('#caja_herramientas').modal('hide');
@@ -454,6 +490,71 @@ function modificar_tipo(id){
         }
     })
     xhttp.send();
+}
+
+
+function borrar_plan_alimentacion(id, nombre, codigo ){
+    let nombre_tipo = nombre;
+    let id_tipo = id;
+    let codigo_tipo = codigo;
+    let usuario_id=localStorage.getItem("id");
+
+
+    let tabla = document.createElement("div");
+    tabla.innerHTML += `
+    <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
+        <tr>
+        <td>Id plan</td>
+        <td>Nombre del plan</td>
+        <td>Costo</td>
+        </tr>
+        <tr>
+        <td>${id_tipo}</td>
+        <td>${nombre_tipo}</td>
+        <td>${codigo_tipo}</td>
+        </tr>
+    </table> <br>`;
+
+    swal({
+        title: "Antes de continuar por favor verifique los datos del plan de alimentación a eliminar",
+        text: "Antes de continuar por favor verifique los datos del plan de alimentación a eliminar ",
+        content: tabla,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+        include="includes/borrar_plan_alimentacion.php?id_tipo="+id_tipo+"&usuario_id="+usuario_id
+        $.ajax({
+            async:true,
+            type: "GET",
+            dataType: "HTML",
+            contentType: "application/json",
+            url:include,
+            beforeSend:loaderbar,
+            success:function(res){
+                if(res=="NO"){
+                    $('#caja_herramientas').modal('hide');
+                    ver_planes_alimentos()
+                    swal("Se elimino el plan de alimentación!", "Excelente trabajo!", "success");
+                }else{
+                    swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+                }
+            },
+            //success:problemas_sistema,
+            timeout:5000,
+            error:function(err){
+                console.log(err)
+                swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+            }
+          });
+   
+        
+    } else {
+        swal("Se cancelo eliminar el plan de alimentación!", "Por favor verifique los datos antes de eliminarlos!", "success")
+    }
+    });
 }
 
 function borrar_tipo(id, nombre, codigo ){

@@ -117,81 +117,81 @@ class Reservacion extends ConexionMYSql
         }
     }
 
-    function mostrar_planes_select(){
-        $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
-        $comentario = "Consulta todos los planes de alimentos disponibles";
-        $consulta = $this->realizaConsulta($sentencia, $comentario);
+    // function mostrar_planes_select(){
+    //     $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
+    //     $comentario = "Consulta todos los planes de alimentos disponibles";
+    //     $consulta = $this->realizaConsulta($sentencia, $comentario);
 
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          echo '<option data-costoplan='.$fila['costo_plan'].' value="'.$fila['id'].'">'.$fila['nombre_plan'].' $'.$fila['costo_plan'].'</option>';
+    //     while ($fila = mysqli_fetch_array($consulta))
+    //     {
+    //       echo '<option data-costoplan='.$fila['costo_plan'].' value="'.$fila['id'].'">'.$fila['nombre_plan'].' $'.$fila['costo_plan'].'</option>';
          
-        }
-      }
+    //     }
+    //   }
 
-    function guardar_plan_alimentos($nombre,$costo){
-        $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`)
-        VALUES ('$nombre', '$costo', '1');";
-        $comentario="Guardamos el plan de alimentos en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        if($consulta){
-          echo ('NO');
-        }else{
-          echo ("error en la consulta");
-        }
-      }
+    // function guardar_plan_alimentos($nombre,$costo){
+    //     $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`)
+    //     VALUES ('$nombre', '$costo', '1');";
+    //     $comentario="Guardamos el plan de alimentos en la base de datos";
+    //     $consulta= $this->realizaConsulta($sentencia,$comentario);
+    //     if($consulta){
+    //       echo ('NO');
+    //     }else{
+    //       echo ("error en la consulta");
+    //     }
+    //   }
 
-    public function mostrar_planes_alimentos($id){
-        include_once('clase_usuario.php');
-        $usuario = NEW Usuario($id);
-        $editar = $usuario->tipo_editar;
-        $borrar = $usuario->tipo_borrar;
+    // public function mostrar_planes_alimentos($id){
+    //     include_once('clase_usuario.php');
+    //     $usuario = NEW Usuario($id);
+    //     $editar = $usuario->tipo_editar;
+    //     $borrar = $usuario->tipo_borrar;
 
-        $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
-        $comentario = "Consulta todos los planes de alimentos disponibles";
+    //     $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
+    //     $comentario = "Consulta todos los planes de alimentos disponibles";
 
-        $consulta = $this->realizaConsulta($sentencia, $comentario);
-        //se recibe la consulta y se convierte a arreglo
-        echo '
-        <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_planes_alimentos('.$id.')"> Agregar </button>
-        <br>
-        <br>
-        <div class="table-responsive" id="tabla_tipo"  style="max-height:860px; overflow-x: scroll; ">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr class="table-primary-encabezado text-center">
-            <th>Nombre</th>
-            <th>Costo</th>';
-            if($editar==1){
-              echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
-            }
-            if($borrar==1){
-              echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-            }
-            echo '</tr>
-          </thead>
-        <tbody>';
-            while ($fila = mysqli_fetch_array($consulta))
-            {
-                echo '<tr class="text-center">
-                <td>'.$fila['nombre_plan'].'</td>
-                <td>'.$fila['costo_plan'].'</td>
+    //     $consulta = $this->realizaConsulta($sentencia, $comentario);
+    //     //se recibe la consulta y se convierte a arreglo
+    //     echo '
+    //     <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_planes_alimentos('.$id.')"> Agregar </button>
+    //     <br>
+    //     <br>
+    //     <div class="table-responsive" id="tabla_tipo"  style="max-height:860px; overflow-x: scroll; ">
+    //     <table class="table table-bordered table-hover">
+    //       <thead>
+    //         <tr class="table-primary-encabezado text-center">
+    //         <th>Nombre</th>
+    //         <th>Costo</th>';
+    //         if($editar==1){
+    //           echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+    //         }
+    //         if($borrar==1){
+    //           echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
+    //         }
+    //         echo '</tr>
+    //       </thead>
+    //     <tbody>';
+    //         while ($fila = mysqli_fetch_array($consulta))
+    //         {
+    //             echo '<tr class="text-center">
+    //             <td>'.$fila['nombre_plan'].'</td>
+    //             <td>'.$fila['costo_plan'].'</td>
 
-                ';
-                if($editar==1){
-                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ', \'' . addslashes($fila['nombre_plan']) . '\', '.$fila['costo_plan'].')"> Editar</button></td>';
-                }
-                if($borrar==1){
-                  echo '<td><button class="btn btn-danger" onclick="borrar_tipo(' . $fila['id'] . ', \'' . addslashes($fila['nombre_plan']) . '\', \'' . addslashes($fila['costo_plan']) . '\')">Borrar</button></td>';
-                }
-                echo '</tr>';
-            }
-            echo '
-          </tbody>
-        </table>
-        </div>';
+    //             ';
+    //             if($editar==1){
+    //               echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ',  \'' . $fila['nombre_plan'] . '\', '.$fila['costo_plan'].')"> Editar</button></td>';
+    //             }
+    //             if($borrar==1){
+    //               echo '<td><button class="btn btn-danger" onclick="borrar_tipo(' . $fila['id'] . ', \'' . addslashes($fila['nombre_plan']) . '\', \'' . addslashes($fila['costo_plan']) . '\')">Borrar</button></td>';
+    //             }
+    //             echo '</tr>';
+    //         }
+    //         echo '
+    //       </tbody>
+    //     </table>
+    //     </div>';
 
-    }
+    // }
 
     public function obtener_ultimo_id(){
         $sentencia = "SELECT reservacion.id

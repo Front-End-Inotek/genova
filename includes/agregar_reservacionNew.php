@@ -5,8 +5,10 @@ error_reporting(0);
   include_once("clase_tarifa.php");
   include_once("clase_hab.php");
   include_once("clase_reservacion.php");
+  include_once("clase_configuracion.php");
   $tarifa= NEW Tarifa(0);
   $reservacion = new Reservacion(0);
+  $config= new Configuracion();
   $inputFechaEn="";
   $inputValueFecha="";
   $dia= time();
@@ -119,7 +121,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <label for="plan-alimentos">Plan de alimentos</label>
                     <select class="form-control" id="plan-alimentos"  onchange="nuevo_calculo_total(event)">
                     <option value="">Seleccione una opción</option>';
-                    $reservacion->mostrar_planes_select();
+                    $config->mostrar_planes_select();
                   echo'
                   </select>
                   <input type="number" id="costoplan" hidden>

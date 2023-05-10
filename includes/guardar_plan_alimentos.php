@@ -1,6 +1,6 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
-  include_once("clase_reservacion.php");
+  include_once("clase_configuracion.php");
   include_once("clase_log.php");
 
 
@@ -10,9 +10,9 @@
     echo 'NO_valido';
 
   }else{
-    $reservacion= NEW Reservacion(0);
+    $config= NEW Configuracion(0);
     $logs = NEW Log(0);
-    $reservacion->guardar_plan_alimentos(urldecode($_GET['nombre']),urldecode($_GET['costo']));
+    $config->guardar_plan_alimentos(urldecode($_GET['nombre']),urldecode($_GET['costo']));
     $logs->guardar_log($_GET['usuario_id'],"Agregar tipo de habitacion: ". urldecode($_GET['nombre']));
   }
 
