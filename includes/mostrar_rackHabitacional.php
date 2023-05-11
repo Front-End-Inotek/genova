@@ -16,6 +16,7 @@ class RackHabitacional extends ConexionMYSql
             case 1:
                 $estado_texto[0] = 'task--ocupadoH';
                 $estado_texto[1] = 'Ocupada';
+                
                 break;
             case 2:
                 $estado_texto[0] = 'task--vacia-sucia';
@@ -120,7 +121,7 @@ class RackHabitacional extends ConexionMYSql
         //Se utiliza la misma consulta para el rack de operaciones
         $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
-        WHERE hab.estado_hab = 1 ORDER BY id";
+        WHERE hab.estado_hab = 1  ORDER BY id";
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta = $this->realizaConsulta($sentencia, $comentario);
 

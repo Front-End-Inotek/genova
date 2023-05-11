@@ -117,82 +117,21 @@ class Reservacion extends ConexionMYSql
         }
     }
 
-    // function mostrar_planes_select(){
-    //     $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
-    //     $comentario = "Consulta todos los planes de alimentos disponibles";
-    //     $consulta = $this->realizaConsulta($sentencia, $comentario);
+    public function preasignar_hab($id,$preasignada){
+        $sentencia = "UPDATE movimiento
+		INNER JOIN reservacion ON reservacion.id = movimiento.id_reservacion
+        SET movimiento.id_hab = '$preasignada', movimiento.motivio ='preasignar'
+	    WHERE reservacion.id = '$id' ";
+        $comentario="Preasignar una habitacion a una reservacion";
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
+        if($consulta){
+            echo "BIEN";
+        }else{
+            echo "MAL";
+        }
+        
 
-    //     while ($fila = mysqli_fetch_array($consulta))
-    //     {
-    //       echo '<option data-costoplan='.$fila['costo_plan'].' value="'.$fila['id'].'">'.$fila['nombre_plan'].' $'.$fila['costo_plan'].'</option>';
-         
-    //     }
-    //   }
-
-    // function guardar_plan_alimentos($nombre,$costo){
-    //     $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`)
-    //     VALUES ('$nombre', '$costo', '1');";
-    //     $comentario="Guardamos el plan de alimentos en la base de datos";
-    //     $consulta= $this->realizaConsulta($sentencia,$comentario);
-    //     if($consulta){
-    //       echo ('NO');
-    //     }else{
-    //       echo ("error en la consulta");
-    //     }
-    //   }
-
-    // public function mostrar_planes_alimentos($id){
-    //     include_once('clase_usuario.php');
-    //     $usuario = NEW Usuario($id);
-    //     $editar = $usuario->tipo_editar;
-    //     $borrar = $usuario->tipo_borrar;
-
-    //     $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
-    //     $comentario = "Consulta todos los planes de alimentos disponibles";
-
-    //     $consulta = $this->realizaConsulta($sentencia, $comentario);
-    //     //se recibe la consulta y se convierte a arreglo
-    //     echo '
-    //     <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_planes_alimentos('.$id.')"> Agregar </button>
-    //     <br>
-    //     <br>
-    //     <div class="table-responsive" id="tabla_tipo"  style="max-height:860px; overflow-x: scroll; ">
-    //     <table class="table table-bordered table-hover">
-    //       <thead>
-    //         <tr class="table-primary-encabezado text-center">
-    //         <th>Nombre</th>
-    //         <th>Costo</th>';
-    //         if($editar==1){
-    //           echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
-    //         }
-    //         if($borrar==1){
-    //           echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-    //         }
-    //         echo '</tr>
-    //       </thead>
-    //     <tbody>';
-    //         while ($fila = mysqli_fetch_array($consulta))
-    //         {
-    //             echo '<tr class="text-center">
-    //             <td>'.$fila['nombre_plan'].'</td>
-    //             <td>'.$fila['costo_plan'].'</td>
-
-    //             ';
-    //             if($editar==1){
-    //               echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ',  \'' . $fila['nombre_plan'] . '\', '.$fila['costo_plan'].')"> Editar</button></td>';
-    //             }
-    //             if($borrar==1){
-    //               echo '<td><button class="btn btn-danger" onclick="borrar_tipo(' . $fila['id'] . ', \'' . addslashes($fila['nombre_plan']) . '\', \'' . addslashes($fila['costo_plan']) . '\')">Borrar</button></td>';
-    //             }
-    //             echo '</tr>';
-    //         }
-    //         echo '
-    //       </tbody>
-    //     </table>
-    //     </div>';
-
-    // }
-
+    }
     public function obtener_ultimo_id(){
         $sentencia = "SELECT reservacion.id
 		FROM reservacion
@@ -257,12 +196,28 @@ class Reservacion extends ConexionMYSql
         $no_disponibles=[];
         $disponibles=[];
 
+        //hacer otra sentencia para comprobar las ocupadas y que la reservacion no intervenga con estas
+        $ocupadas = "SELECT * 
+        FROM hab
+        INNER JOIN movimiento as m on hab.mov = m.id
+        INNER JOIN reservacion on m.id_reservacion = reservacion.id
+        WHERE hab.estado = 1 
+        AND ('$fecha_salida' > reservacion.fecha_entrada AND '$fecha_entrada' <  reservacion.fecha_salida)
+        " .$agregar_id;;
+
+        
+        $consulta = $this->realizaConsulta($ocupadas, "");
+        while($fila=mysqli_fetch_array($consulta)) {
+            $no_disponibles [] = $fila['id_hab'];
+        }
+
 
         $sentencia ="SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r
 		INNER JOIN tarifa_hospedaje ON r.tipo_hab = tarifa_hospedaje.id
 		INNER JOIN usuario ON r.id_usuario = usuario.id
 		INNER JOIN huesped ON r.id_huesped = huesped.id
 		INNER JOIN movimiento AS m ON m.id_reservacion= r.id
+        RIGHT JOIN hab on m.id_hab = hab.id
 		WHERE ('$fecha_salida' > r.fecha_entrada AND '$fecha_entrada' <  r.fecha_salida)
 		AND m.motivo = 'preasignar'
 		"
@@ -440,7 +395,8 @@ class Reservacion extends ConexionMYSql
         date_default_timezone_set('America/Mexico_City');
         $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
-        $fin_dia= $inicio_dia + 86399;
+        //cantidad de dias a visualizar. (se añaden 15 dias)
+        $fin_dia= $inicio_dia + 1.296e+6;
 
         $cont = 1;
         //echo $posicion;
@@ -453,14 +409,18 @@ class Reservacion extends ConexionMYSql
         }
         $ultimoid=0;
 
-        $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        $sentencia = "SELECT *,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
-		INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id
+        INNER JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
+        INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 || reservacion.estado = 2)  AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia) ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
+        // echo $sentencia;
+     
         //se recibe la consulta y se convierte a arreglo
         //<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
         echo '
@@ -494,6 +454,10 @@ class Reservacion extends ConexionMYSql
         if($agregar==1 && $fila['edo'] = 1) {
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         }
+        //preasignar.
+        echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
+        
+
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
         if($editar==1 && $fila['edo'] = 1) {
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -502,6 +466,7 @@ class Reservacion extends ConexionMYSql
             echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
             echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
         }
+        
         echo '</tr>
 		</thead>
 		<tbody>';
@@ -536,6 +501,7 @@ class Reservacion extends ConexionMYSql
                         if($agregar==1 && $fila['edo'] = 1) {
                             echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
                         }
+                        
                         echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
                         if($editar==1 && $fila['edo'] = 1) {
                             echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
@@ -573,6 +539,7 @@ class Reservacion extends ConexionMYSql
                         if($agregar==1 && $fila['edo'] = 1) {
                             echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
                         }
+                        
                         echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
                         if($editar==1 && $fila['edo'] = 1) {
                             echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
@@ -610,6 +577,12 @@ class Reservacion extends ConexionMYSql
                     echo '<td>Activa</td>';
                     if($agregar==1 && $fila['edo'] = 1) {
                         //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
+                        echo '<td></td>';
+                    }
+                    //botón para preasignar una habitación.
+                    if($fila['id_hab']==0){
+                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
+                    }else{
                         echo '<td></td>';
                     }
                     echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
@@ -830,10 +803,10 @@ class Reservacion extends ConexionMYSql
         $borrar = $usuario->reservacion_borrar;
         date_default_timezone_set('America/Mexico_City');
         $fecha_ini_tiempo= $fecha_ini_tiempo. " 0:00:00";
-        $fecha_fin_tiempo= $fecha_fin_tiempo . " 23:59:59";
+        $fecha_fin_tiempo= $fecha_fin_tiempo  . " 23:59:59";
         $fecha_ini= strtotime($fecha_ini_tiempo);
         $fecha_fin= strtotime($fecha_fin_tiempo);
-
+     
 
 
         if($a_buscar == ' ' && strlen($fecha_ini) == 0 && strlen($fecha_fin) == 0) {
@@ -864,12 +837,13 @@ class Reservacion extends ConexionMYSql
                 // INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
 
                 $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-			FROM reservacion
-			INNER JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
-			INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-			INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-			INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
-
+			    FROM reservacion
+                INNER JOIN tarifa_hospedaje ON reservacion.tipo_hab = tarifa_hospedaje.id 
+                INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
+			    INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+			    INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+			    INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin  && reservacion.fecha_entrada > 0  AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+            
             }
             $comentario="Mostrar por fecha en ver reservaciones";
             $consulta= $this->realizaConsulta($sentencia, $comentario);
@@ -1126,7 +1100,8 @@ class Reservacion extends ConexionMYSql
 
         $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
-		INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+		INNER JOIN tarifa_hospedaje ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 || reservacion.estado = 2)  AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia) ORDER BY reservacion.id DESC;";

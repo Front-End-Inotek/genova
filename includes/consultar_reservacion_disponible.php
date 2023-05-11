@@ -15,7 +15,7 @@ $hab_id = $_GET['hab_id'];
 $resultado = $reservacion->comprobarFechaReserva($fecha_entrada,$fecha_salida,$hab_id);
 
 
-echo $resultado;
+// echo $resultado;
 
 if($hab_id!=0){
     if($resultado <1){

@@ -1370,7 +1370,11 @@ function asignar_huespedNew(funcion,precio_hospedaje,total_adulto,total_junior,t
 function asignar_huesped(funcion,precio_hospedaje,total_adulto,total_junior,total_infantil){
     $("#mostrar_herramientas").load("includes/modal_asignar_huesped.php?funcion="+funcion+"&precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil);
 }
-
+// Busco el huesped asignar a la reservacion
+function buscar_asignar_huespedNew(funcion,precio_hospedaje,total_adulto,total_junior,total_infantil){
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+	$("#tabla_huesped").load("includes/buscar_asignar_huespedNew.php?funcion="+funcion+"&precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil+"&a_buscar="+a_buscar);
+}
 
 // Busco el huesped asignar a la reservacion
 function buscar_asignar_huesped(funcion,precio_hospedaje,total_adulto,total_junior,total_infantil){
@@ -1865,7 +1869,7 @@ function buscar_reservacion(e){
         $('.pagination').hide();
     }else{
         $('.pagination').show();
-        if( e.which === 8 ){ return false; }
+        if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
     }
 	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
 }
@@ -1887,6 +1891,7 @@ function busqueda_reservacion(){
 function busqueda_reservacion_combinada(){
 	var inicial=$("#inicial").val();
 	var final=$("#final").val();
+    console.log(final)
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var id=localStorage.getItem("id");
     if((inicial.length >0 && final.length >0) || a_buscar.length >0){
@@ -2137,6 +2142,47 @@ function borrar_reservacion(id){
             });
         return false;
     }
+}
+
+//funcion para agregar la habitacion seleccionada a la reservacion.
+function guardar_preasignar_reservacion(id)
+{
+    var usuario_id=localStorage.getItem("id");
+    preasignada = $("#preasignada").val();
+    console.log(preasignada,id)
+   
+
+
+    if (id >0 && preasignada.length >0) {
+        $('#caja_herramientas').modal('hide');
+        $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+                "id": id,
+                "preasignada": preasignada,
+                "usuario_id": usuario_id,
+            };
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/preasignar_reservacion.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:ver_reservaciones,
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }
+
+}
+// Modal de preasignar reservacion
+function preasignar_reservacion(id){
+	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id);
 }
 
 // Modal de cancelar una reservacion

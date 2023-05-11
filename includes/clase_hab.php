@@ -155,7 +155,8 @@
       // Borrar una habitacion
       function borrar_hab($id){
         $sentencia = "UPDATE `hab` SET
-        `estado_hab` = '0'
+        `estado_hab` = '0',
+        ultimo_mov = UNIX_TIMESTAMP()
         WHERE `id` = '$id';";
         $comentario="Poner estado de una habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -199,7 +200,8 @@
         // foreach ($habitaciones as $key => $habitacion) {
           $sentencia = "UPDATE `hab` SET
           `mov` = '$mov',
-          `estado` = '$estado'
+          `estado` = '$estado',
+          ultimo_mov = UNIX_TIMESTAMP()
           WHERE `id` = '$hab';";
           $comentario="Cambiar estado de la habitacion";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -207,7 +209,8 @@
 
         $sentencia = "UPDATE `hab` SET
         `mov` = '$mov',
-        `estado` = '$estado'
+        `estado` = '$estado',
+        ultimo_mov = UNIX_TIMESTAMP()
         WHERE `id` = '$hab';";
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

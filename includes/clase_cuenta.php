@@ -233,7 +233,8 @@
       function cambiohab($hab,$mov,$estado){
         $sentencia = "UPDATE `hab` SET
         `mov` = '$mov',
-        `estado` = '$estado'
+        `estado` = '$estado',
+        ultimo_mov = UNIX_TIMESTAMP()
         WHERE `id` = '$hab';";
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

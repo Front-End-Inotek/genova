@@ -71,6 +71,7 @@
     $cuenta= 1;
   }
   $motivo = empty($_POST['hab_id']) ? "reservar" : "preasignar";
+ 
 
   
   //if($_POST['hab_id'] != 0){
