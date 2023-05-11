@@ -58,9 +58,9 @@
         $comentario="Guardamos la tarifa hospedaje en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if($consulta){
-          echo ("NO");
+          echo "NO";
         }else{
-          echo ("error en la consulta");
+          echo "error en la consulta";
         }
 
       }

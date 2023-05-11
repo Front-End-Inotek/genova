@@ -120,7 +120,7 @@ class Reservacion extends ConexionMYSql
     public function preasignar_hab($id,$preasignada){
         $sentencia = "UPDATE movimiento
 		INNER JOIN reservacion ON reservacion.id = movimiento.id_reservacion
-        SET movimiento.id_hab = '$preasignada', movimiento.motivio ='preasignar'
+        SET movimiento.id_hab = '$preasignada', movimiento.motivo ='preasignar'
 	    WHERE reservacion.id = '$id' ";
         $comentario="Preasignar una habitacion a una reservacion";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
@@ -284,7 +284,7 @@ class Reservacion extends ConexionMYSql
               $pago_total= $total_pago + $cantidad_cupon;
               //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
               $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-          VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
+              VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
               $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
               $consulta= $this->realizaConsulta($sentencia, $comentario);
   
@@ -302,6 +302,10 @@ class Reservacion extends ConexionMYSql
           $comentario="Guardamos la reservacion en la base de datos";
          
           $consulta= $this->realizaConsulta($sentencia, $comentario);
+
+
+
+
           include_once("clase_log.php");
           $logs = new Log(0);
           $sentencia = "SELECT id FROM reservacion ORDER BY id DESC LIMIT 1";
@@ -311,6 +315,8 @@ class Reservacion extends ConexionMYSql
               $id= $fila['id'];
           }
           $logs->guardar_log($usuario_id, "Agregar reservacion: ". $id);
+
+          
   
           // Poner id reservacion al numero de movimiento que corresponde
           $sentencia = "UPDATE `movimiento` SET
@@ -318,6 +324,10 @@ class Reservacion extends ConexionMYSql
           WHERE `id` = '$id_movimiento';";
           $comentario="Cambiar id reservacion del movimiento";
           $consulta= $this->realizaConsulta($sentencia, $comentario);
+
+          //retornamos el id de la reservacion para comprobar y guardar un log de preasignada
+          return $id;
+
       }
     // Guardar la reservacion
     public function guardar_reservacion($id_huesped, $tipo_hab, $id_movimiento, $fecha_entrada, $fecha_salida, $noches, $numero_hab, $precio_hospedaje, $cantidad_hospedaje, $extra_adulto, $extra_junior, $extra_infantil, $extra_menor, $tarifa, $nombre_reserva, $acompanante, $forma_pago, $limite_pago, $suplementos, $total_suplementos, $total_hab, $forzar_tarifa, $codigo_descuento, $descuento, $total, $total_pago, $hab_id, $usuario_id, $cuenta, $cantidad_cupon, $tipo_descuento, 

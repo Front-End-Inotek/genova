@@ -325,13 +325,13 @@ function guardar_habitacion(){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.responseText);
-            if (e.target.responseText == 'NO') {
+            response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+            if (response == 'NO') {
                 $('#caja_herramientas').modal('hide');
-                ver_tipos()
                 swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+                ver_tipos()
                 return false;
-            }else if(e.target.responseText == 'NO_valido'){
+            }else if(response== 'NO_valido'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
                 swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
@@ -737,13 +737,13 @@ function guardar_tarifa_nueva(){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.responseText);
-            if (e.target.responseText == "NO") {
+            response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+            if (response == "NO") {
                 $('#caja_herramientas').modal('hide');
+                swal("Nuevo tipo de tarifa agregada!", "Excelente trabajo!", "success");
                 ver_tarifas()
-                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
                 return false;
-            }else if(e.target.responseText == 'NO_valido'){
+            }else if(response == 'NO_valido'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
                 swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
@@ -934,13 +934,13 @@ function guardar_hab(){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.responseText);
-            if (e.target.responseText == 'NO') {
+            response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+            if (response == 'NO') {
                 $('#caja_herramientas').modal('hide');
-                ver_hab()
                 swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+                ver_hab()
                 return false;
-            }else if(e.target.responseText == 'NO_valido'){
+            }else if(response == 'NO_valido'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
                 swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
@@ -1667,7 +1667,7 @@ function guardarNuevaReservacion(){
             // console.log(e.target.responseText);
             // console.log(xhttp.responseText)
             const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-            // console.log(response_msj)
+           
            
             if(response_msj == "NO_DATA"){
                 swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
@@ -2445,21 +2445,17 @@ function agregar_huespedes_reservacion(){
             //Entrara la contidicion que valida la respuesta del formulario
             // console.log(e.target.responseText);
             // console.log(xhttp.responseText)
-            const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-           
-            if(response_msj == "NO_DATA"){
+            const  response =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+            if (response == 'NO_DATA') {
                 swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
                 return
-            }
-            
-            if (response_msj == 'NO') {
-                $('#caja_herramientas').modal('hide');
-                ver_huespedes()
-                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
-            }else if(response_msj == 'NO_VALIDO'){
+            }else if(response == 'NO_VALIDO'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
-                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+                $('#caja_herramientas').modal('hide');
+                swal("Nuevo huesped agregado!", "Excelente trabajo!", "success");
+                ver_huespedes()
+                
             }
         }else{
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");

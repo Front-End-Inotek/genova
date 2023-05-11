@@ -113,6 +113,9 @@ echo'
             if($fila['interno'] == self::INTERNO_SUCIA){
                 $estado = "Sucia ocupada";
             }
+            if($fila['interno'] == "limpieza"){
+                $estado = "Ocupada limpieza";
+            }
             break;
 
             case 2:

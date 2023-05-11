@@ -6,7 +6,7 @@ setlocale(LC_ALL, "es_ES");
 
 class RackHabitacional extends ConexionMYSql
 {
-    private function estado_habitacion($estado, $turno)
+    private function estado_habitacion($estado, $turno,$interno="")
     {
         switch ($estado) {
             case 0:
@@ -16,6 +16,15 @@ class RackHabitacional extends ConexionMYSql
             case 1:
                 $estado_texto[0] = 'task--ocupadoH';
                 $estado_texto[1] = 'Ocupada';
+                if($interno == "sucia"){
+                    $estado_texto[0] = 'task--ocupada-sucia';
+                    $estado_texto[1] = 'Sucia ocupada';
+                }
+                if($interno== "limpieza"){
+                    $estado_texto[0] = 'task--limpieza-ocupada';
+                    $estado_texto[1] = 'Ocupada limpieza';
+                    
+                }
                 
                 break;
             case 2:
@@ -209,8 +218,8 @@ class RackHabitacional extends ConexionMYSql
 
                     $dia = date('d', $tiempo);
                     $tiempo += 86400;
-                    $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1);
-                    $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2);
+                    $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1,$fila['interno']);
+                    $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2,$fila['interno']);
 
                     if ($i == 2 && $fila['estado'] != 1 ) {
                         echo '

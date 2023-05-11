@@ -36,7 +36,7 @@ error_reporting(0);
   }
 
   //obtener el ultimo id de reserva.
-  $ultimo_id = $reservacion->obtener_ultimo_id();
+  $ultimo_id = $reservacion->obtener_ultimo_id() + 1;
 
 
 echo '<div class="container-fluid blanco" style="width: 1200px;">
@@ -47,7 +47,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <div class="d-flex justify-content-end">
                 <div class="form-group col-md-8 mb-3">
                     <label for="clave-reserva" class="text-right">Clave de reserva</label>
-                    <input type="text" value="'.$ultimo_id.'" class="form-control" id="clave-reserva">
+                    <input type="text" value="'.$ultimo_id.'" class="form-control" id="clave-reserva" readonly>
                 </div>
 
                 <div class="form-group col-md-4">
