@@ -203,6 +203,11 @@ function mostrar_herramientas(hab_id,estado,nombre){
    
 }
 
+//cerrar el modal cuando se navega a otra 'vista'
+function closeModal(){
+    $('#caja_herramientas').modal('hide');
+}
+
 // Abre la sidebar
 function openNav(){
     document.getElementById("sideNavigation").style.width = "250px";
@@ -345,6 +350,7 @@ function ver_planes_alimentos(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_planes_alimentos.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -356,6 +362,7 @@ function ver_tipos(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_tipos.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -755,6 +762,7 @@ function ver_tarifas(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_tarifas.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -951,6 +959,7 @@ function ver_hab(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_hab.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -1084,6 +1093,7 @@ function agregar_reservaciones(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_reservacionNew.php"); 
+    closeModal();
 	closeNav();
 }
 //Función que calcula las fechas entre 2 fechas.
@@ -1852,6 +1862,7 @@ function ver_reservaciones(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -2469,6 +2480,7 @@ function ver_huespedes(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_huespedes.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -2762,6 +2774,7 @@ function ver_cargo_noche(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_cargo_noche.php");
+    closeModal();
 	closeNav();
 }
 
@@ -2822,6 +2835,7 @@ function ver_formas_pago(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_formas_pago.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -2903,6 +2917,7 @@ function agregar_usuarios(id){
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_usuarios.php?id="+id); 
     $(".navbar-collapse").collapse('hide');
+    closeModal();
 	closeNav();
 }
 
@@ -2965,6 +2980,7 @@ function ver_usuarios(){
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_usuarios.php?id="+id);
     $(".navbar-collapse").collapse('hide');
+    closeModal();
 	closeNav();
 }
 
@@ -3911,6 +3927,7 @@ function ver_inventario(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_inventario.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -4059,6 +4076,7 @@ function surtir_inventario(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_inventario_surtir.php");
+    closeModal();
 	closeNav();
 }
 
@@ -4069,6 +4087,7 @@ function ver_surtir(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_surtir.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -4235,6 +4254,7 @@ function agregar_restaurante(hab_id,estado){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
+    closeModal();
 	closeNav();
 }
 
@@ -5158,6 +5178,7 @@ function ver_cupones(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_cupones.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -5439,6 +5460,7 @@ function ver_cortes(){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/ver_cortes.php?usuario_id="+usuario_id);
+    closeModal();
 	closeNav();
 }
 
@@ -5468,6 +5490,7 @@ function ver_logs(){
     $('#pie').hide();
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_logs.php?usuario_id="+usuario_id)
+    closeModal();
     closeNav();
 }
 
