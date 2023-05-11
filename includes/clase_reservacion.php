@@ -314,9 +314,59 @@ class Reservacion extends ConexionMYSql
        
 
     }
+      // Guardar la reservacion (nuevo)
+      public function guardar_reservacionNew($id_huesped, $tipo_hab, $id_movimiento, $fecha_entrada, $fecha_salida, $noches, $numero_hab, $precio_hospedaje, $cantidad_hospedaje, $extra_adulto, $extra_junior, $extra_infantil, $extra_menor, $tarifa, $nombre_reserva, $acompanante, $forma_pago, $limite_pago, $suplementos, $total_suplementos, $total_hab, $forzar_tarifa, $codigo_descuento, $descuento, $total, $total_pago, $hab_id, $usuario_id, $cuenta, $cantidad_cupon, $tipo_descuento, 
+      $estado,$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion)
+      {
+          $fecha_entrada= strtotime($fecha_entrada);
+          $fecha_salida= strtotime($fecha_salida);
+          $id_cuenta= 0;
+          $total_cargo= $total_suplementos;
+          if($forzar_tarifa > 0) {
+              $total_cargo= $total_suplementos + $forzar_tarifa;
+          }
+          if($cuenta == 1 && $id_movimiento != 0) {
+              $pago_total= $total_pago + $cantidad_cupon;
+              //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
+              $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+          VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
+              $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
+              $consulta= $this->realizaConsulta($sentencia, $comentario);
+  
+              $sentencia = "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
+              $comentario="Obtengo el id de la cuenta agregada";
+              $consulta= $this->realizaConsulta($sentencia, $comentario);
+              while ($fila = mysqli_fetch_array($consulta)) {
+                  $id_cuenta= $fila['id'];
+              }
+          }
+          $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, 
+          `estado`,`pax_extra`,`canal_reserva`,`plan_alimentos`,`tipo_reservacion`)
+          VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', 
+          '$estado','$pax_extra','$canal_reserva','$plan_alimentos','$tipo_reservacion');";
+          $comentario="Guardamos la reservacion en la base de datos";
+         
+          $consulta= $this->realizaConsulta($sentencia, $comentario);
+          include_once("clase_log.php");
+          $logs = new Log(0);
+          $sentencia = "SELECT id FROM reservacion ORDER BY id DESC LIMIT 1";
+          $comentario="Obtengo el id de la reservacion agregada";
+          $consulta= $this->realizaConsulta($sentencia, $comentario);
+          while ($fila = mysqli_fetch_array($consulta)) {
+              $id= $fila['id'];
+          }
+          $logs->guardar_log($usuario_id, "Agregar reservacion: ". $id);
+  
+          // Poner id reservacion al numero de movimiento que corresponde
+          $sentencia = "UPDATE `movimiento` SET
+          `id_reservacion` = '$id'
+          WHERE `id` = '$id_movimiento';";
+          $comentario="Cambiar id reservacion del movimiento";
+          $consulta= $this->realizaConsulta($sentencia, $comentario);
+      }
     // Guardar la reservacion
     public function guardar_reservacion($id_huesped, $tipo_hab, $id_movimiento, $fecha_entrada, $fecha_salida, $noches, $numero_hab, $precio_hospedaje, $cantidad_hospedaje, $extra_adulto, $extra_junior, $extra_infantil, $extra_menor, $tarifa, $nombre_reserva, $acompanante, $forma_pago, $limite_pago, $suplementos, $total_suplementos, $total_hab, $forzar_tarifa, $codigo_descuento, $descuento, $total, $total_pago, $hab_id, $usuario_id, $cuenta, $cantidad_cupon, $tipo_descuento, 
-    $estado,$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion)
+    $estado)
     {
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
@@ -329,7 +379,7 @@ class Reservacion extends ConexionMYSql
             $pago_total= $total_pago + $cantidad_cupon;
             //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
             $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-		VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
+		    VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
             $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
             $consulta= $this->realizaConsulta($sentencia, $comentario);
 
@@ -341,9 +391,9 @@ class Reservacion extends ConexionMYSql
             }
         }
         $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, 
-        `estado`,`pax_extra`,`canal_reserva`,`plan_alimentos`,`tipo_reservacion`)
+        `estado`)
 		VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', 
-        '$estado','$pax_extra','$canal_reserva','$plan_alimentos','$tipo_reservacion');";
+        '$estado');";
         $comentario="Guardamos la reservacion en la base de datos";
        
         $consulta= $this->realizaConsulta($sentencia, $comentario);

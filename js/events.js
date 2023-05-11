@@ -1520,6 +1520,7 @@ function guardarReservacion(id_huesped){
     var tipo_reservacion = (document.getElementById("tipo-reservacion").value);
 
     var estado = preasignada!="" ? 4 : 2;
+    estado = 2;
 
 
     var forma_pago= (document.getElementById("forma-garantia").value);
