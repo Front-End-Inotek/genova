@@ -197,7 +197,7 @@ class RackHabitacional extends ConexionMYSql
 
                     if ($i == 2 && $fila['estado'] != 1) {
                         echo '
-                        <td class="celdaCompleta tdCheck " >
+                        <td class="celdaCompleta tdCheck " title="nombre huesped">
                             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                                 <div >
                     ';
@@ -211,7 +211,7 @@ class RackHabitacional extends ConexionMYSql
                         $noches = ($fila['fin'] - $fila['inicio']) / 86400;
                         echo '';
                         echo '
-                        <td class="celdaCompleta tdCheck " colspan="' . $noches . '">
+                        <td class="celdaCompleta tdCheck " colspan="' . $noches . '" title="nombre huesped | Habitacion #' . $fila['id'] . ' | informacion adicional">
                             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                         ';
                         echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . ' </section>';
@@ -383,9 +383,16 @@ class RackHabitacional extends ConexionMYSql
                             echo'
                     <td class="celdaCompleta ">
                         <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
+                            <div class="medioDia">
                             <section class="task task--disponible-limpia" >
                                 <a> '. $estado . '<br></a>
                             </section>
+                            </div>
+                            <div class="medioDia">
+                            <section class="task task--disponible-limpia" >
+                                <a> '. $estado . '<br></a>
+                            </section>
+                            </div>
                         </div>
                     </td>
                     ';

@@ -119,6 +119,7 @@
   font-family: sans-serif;
   font-weight: bolder;
   background-color: #3e54ac;
+  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
   border-top-style: none;
 }
 
@@ -304,8 +305,7 @@ a.topictitle:hover {
   border-radius: 5px;
 }
 .alinear_centro{
-  color: #2646c5c9;
-  background: linear-gradient(180deg, rgb(182, 194, 253) 0%, #ecf2ff 50%,  #b3b3fe 100%);
+  color: #fff;
   text-align: center;
   border-radius: 5px;
   padding: 25px 2px 3px 2px;
@@ -340,6 +340,10 @@ a.topictitle:hover {
 .btn-herramientas{/* */
   margin-bottom: 1em;
   font-size:13px;
+}
+.modal-content{
+  background: linear-gradient(180deg, #ccd2ff 0%, #ecf2ff 40%, rgb(187, 197, 251) 100%);
+  color: #2d31ae;
 }
 .titulo_hab{/* estado */
   width: 100%;
@@ -592,6 +596,7 @@ a.topictitle:hover {
 .hab_cambiar{/*  */
   text-align: center;
   background-color: green;
+  background: linear-gradient(145deg, rgb(15, 40, 15) 0%, rgb(32, 89, 32) 40%, rgb(6, 24, 6) 100%);
   font-size: 1.2em;
   color: white;
 }
@@ -620,16 +625,18 @@ a.topictitle:hover {
   /*#5c646e;*/
   text-align: center;
   background-color: #9F9F9F;
+  background: linear-gradient(145deg, #9F9F9F 0%, #ecf2ff 40%, #848181 100%);
   /*background-color: #242C34*/
   font-size: 1.2em;
-  color: white;
+  color: #333;
 }
 .terminar{/*#1E487A; #337C99; */
   text-align: center;
   background-color: #77A2AD;
+  background: linear-gradient(145deg, #77A2AD 0%, #c4f4ff 50%, #548793 100%);
   /*background-color: #242C34*/
   font-size: 1.2em;
-  color: white;
+  color: #0a414f;
 }
 .ocupada{/* */
   text-align: center;

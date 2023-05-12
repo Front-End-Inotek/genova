@@ -271,13 +271,18 @@ span {
 /*******************************/
 .menu-btn {
   background-color: #30349f;
-  background:linear-gradient(90deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+  background:linear-gradient(34deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
 
   color: #ecf2ff;
   position: absolute;
   top: 1%;
   left: 101%;
   font-size: 30px;
+}
+
+.menu-btn:hover{
+  background:radial-gradient( circle at center , #7275e4 0%, #3939c6 50%, #1b1f89 100%);
+  border: none !important;
 }
 
 
