@@ -43,12 +43,12 @@
           $this->cupon= 0;
           $this->preferencias= 0;
           $this->comentarios= 0;
-          $this->titular_tarjeta= 0;
+          $this->titular_tarjeta= "";
           $this->tipo_tarjeta= 0;
-          $this->numero_tarjeta= 0;
-          $this->vencimiento_mes= 0;
-          $this->vencimiento_ano= 0;
-          $this->cvv= 0;
+          $this->numero_tarjeta= "";
+          $this->vencimiento_mes= "";
+          $this->vencimiento_ano= "";
+          $this->cvv= "";
           $this->visitas= 0;
           $this->estado_huesped= 0; 
         }else{
@@ -81,34 +81,241 @@
           }
         }
       }
-      // Guardar el huesped
-      function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,$usuario_id){
 
+      public function mostrar_garantia($estado_tarjeta){
+        echo ' 
+        
+        <p id="choosen-paymenttype">tarjeta de credito</p>
+      
+            <!--Principal-->
+           
+                <div class="container-fluid blanco " style="width: 550px;">
+                    <h1>Tarjeta Credito</h1>
+                    <h2></h2>
+                    <header class="tarjeta">
+                        <div class="card" id="cc-card">
+                            <div class="flipper">
+                                <div class="front">
+                                    <div class="shine"></div>
+                                    <div class="shadow"></div>
+                                    <div class="card-bg">
+                                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/513985/cc-front-bg.png" />
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="credit-card-type"></div>
+                                        <div class="card-number">
+                                            <span>1234 1234 1234 1234</span>
+                                            <span>1234 1234 1234 1234</span>
+                                        </div>
+                                        <div class="card-holder">
+                                            <span>Tu nombre</span>
+                                            <span>Tu nombre</span>
+                                        </div>
+                                        <div class="validuntil">
+                                            <em>Expira</em>
+                                            <div class="e-month">
+                                                <span>
+                                                    MM
+                                                </span>
+                                                <span>
+                                                    MM
+                                                </span>
+                                            </div>
+                                            <div class="e-divider">
+                                                <span>
+                                                    /
+                                                </span>
+                                                <span>
+                                                    /
+                                                </span>
+                                            </div>
+                                            <div class="e-year">
+                                                <span>
+                                                    YY
+                                                </span>
+                                                <span>
+                                                    YY
+                                                </span>
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="back">
+                                    <div class="shine"></div>
+                                    <div class="shadow"></div>
+                                    <div class="card-bg">
+                                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/513985/cc-back-bg-new.png" />
+                                    </div>
+                                    <div class="ccv">
+                                        <em>Numero CCV</em>
+                                        <strong></strong>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-number">
+                                            <span>4111 1111 1111 1111</span>
+                                            <span>4111 1111 1111 1111</span>
+                                        </div>
+                                        <div class="card-holder">
+                                            <span>Tu Nombre</span>
+                                            <span>Tu Nombre</span>
+                                        </div>
+                                        <div class="validuntil">
+                                            <span>
+                                                <strong class="e-month">MM</strong> / <strong class="e-year">YY</strong>
+                                            </span>
+                                            <span>
+                                                <strong class="e-month">MM</strong> /
+                                                <strong class="e-year">YY</strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+        
+                    <form class="tarjeta-form">
+                        <div class="form-content">
+                            <div class="form-group">
+                              <label for="cardnumber">Numero de tarjeta</label>
+                              <div class="input-group">
+                                <input onchange="" type="tel" class="form-control" id="cardnumber" maxlength="20" value="'.$this->numero_tarjeta.'">
+                                <div class="input-group-append">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="cardholder">Nombre en Tarjeta</label>
+                              <div class="input-group">
+                                <input  type="text" class="form-control" id="cardholder" maxlength="25" autocorrect="off" spellcheck="false" value="'.$this->titular_tarjeta.'">
+                                <div class="input-group-append">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-4">
+                                  <label for="expires-month">Expira</label>
+                                  <div class="input-group expire-date">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="tel" class="form-control" id="expires-month" placeholder="MM" allowed-pattern="[0-9]" maxlength="2" value="'.$this->vencimiento_mes.'">
+                                    <div class="input-group-prepend divider">
+                                    </div>
+                                    <input type="tel" class="form-control" id="expires-year" placeholder="YY" allowed-pattern="[0-9]" maxlength="2"  value="'.$this->vencimiento_ano.'">
+                                    <div class="input-group-append">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-4">
+                                  <label for="ccv">CCV</label>
+                                  <div class="input-group ccv">
+                                    <input type="tel" class="form-control" id="tccv" autocomplete="off" maxlength="3" value="'.$this->cvv.'">
+                                    <div class="input-group-append">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                            <br>
+                            <div class="d-flex justify-content-between col-md-12">
+                                <div class="form-check form-check-inline col-md-6">
+                                  <input class="form-check-input" type="checkbox" name="estado" value="1" id="check1">
+                                  <label class="form-check-label" for="check1">Pendiente de preautorizar</label>
+                                </div>
+                              
+                                <div class="form-check form-check-inline col-3">
+                                  <input class="form-check-input" type="checkbox" name="estado" value="2" id="check2">
+                                  <label class="form-check-label" for="check2">Garantizada</label>
+                                </div>
+                              
+                                <div class="form-check form-check-inline col-3 mb-5">
+                                  <input class="form-check-input" type="checkbox" name="estado" value="3" id="check3">
+                                  <label class="form-check-label" for="check3">Sin garantía</label>
+                                </div>
+                              </div>
+                            
+                        </div>
+                        
+                    </form>
+                </div>
+                
+            </li>
+           
+               
+                </div>
+           
+       ';
+      }
+
+      // Guardar el huesped
+      function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
+      $usuario_id,$pais,$empresa){
+        
+      
+        //validaciones del huesped.
         if(empty($nombre)){
           echo "NO_DATA";
-          die();
-        }
-        
-        $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, `estado_huesped`)
-        VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', '$cvv', '0', '1');";
-        $comentario="Guardamos el huesped en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        if($consulta){
-          echo "NO";
-        }else{
-          echo ("NO_VALIDO");
+          exit();
         }
 
-        include_once("clase_log.php");
-        $logs = NEW Log(0);
-        $sentencia = "SELECT id FROM huesped ORDER BY id DESC LIMIT 1";
-        $comentario="Obtengo el id del huesped agregado";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
+        //verififca si el cliente/huesped ya existe.
+
+        $existe = "SELECT id FROM huesped where nombre = '$nombre' and apellido='$apellido'";
+        $comentario = "Verificar si existe el nombre del huesped";
+        $consulta_existe = $this->realizaConsulta($existe,$comentario); 
+
+    
+
+        if(mysqli_num_rows($consulta_existe)==0){
+          //ya existe.
+          $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, 
+          `estado_huesped`,`pais`,`empresa`)
+          VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', 
+          '$cvv', '0', '1','$pais','$empresa');";
+          $comentario="Guardamos el huesped en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          if(!$consulta){
+        
+            echo "NO_VALIDO";
+            exit();
+          }
+          
+          include_once("clase_log.php");
+          $logs = NEW Log(0);
+          $sentencia = "SELECT id FROM huesped ORDER BY id DESC LIMIT 1";
+          $comentario="Obtengo el id del huesped agregado";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            $id= $fila['id'];
+          }
+          //retornamos el id del nuevo husped para usarlo en la reservación.
+          echo $id;
+          $logs->guardar_log($usuario_id,"Agregar huesped: ". $id);
+        }else{
+          //actualizar el cliente existente con los datos 'nuevos' del formulario.
+          while ($fila = mysqli_fetch_array($consulta_existe))
         {
-          $id= $fila['id'];
+          $huesped_id= $fila['id'];
         }
-        $logs->guardar_log($usuario_id,"Agregar huesped: ". $id);
+        $sentencia = "UPDATE  `huesped` 
+        SET nombre ='$nombre', apellido='$apellido', empresa = '$empresa',telefono='$telefono',pais='$pais',estado='$estado',ciudad='$ciudad',direccion='$direccion'
+        ,comentarios ='$comentarios' WHERE id='$huesped_id'";
+        $comentario="acutalizamos el huesped en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if(!$consulta){
+      
+          echo "NO_VALIDO";
+          exit();
+        }
+        echo $huesped_id;
+        }
+        
+        
       }
       // Obtengo el total de huespedes
       function total_elementos(){
@@ -337,6 +544,63 @@
         }
         return $nombre_completo;
       }
+
+       // Mostrar las huespedes para asignar en una reservacion
+       function mostrar_asignar_huespedNew($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
+        echo '<div class="row">
+              <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huespedNew('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control-lg" /></div> 
+        </div><br>';
+        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";
+        //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY id DESC LIMIT 15";
+        //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC LIMIT 15";
+        $comentario="Mostrar los huespedes para asignar en una reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        echo '<div class="table-responsive" id="tabla_huesped">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-primary-encabezado text-center">
+              <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Direccion</th>
+              <th>Ciudad</th>
+              <th>Estafghfdo</th>
+              <th>Codigo Postal</th>
+              <th>Telefono</th>
+              <th>Correo</th>
+              <th>Contrato Socio</th>
+              <th>Cupón</th>
+              <th>Preferencias</th>
+              <th>Comentarios</th>
+              </tr>
+          </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta))
+              {
+               
+                echo '<tr class="text-center">
+                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $fila['numero_tarjeta'] . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\')"> Agregar</button></td>
+                <td>'.$fila['nombre'].'</td>  
+                <td>'.$fila['apellido'].'</td>
+                <td>'.$fila['direccion'].'</td>
+                <td>'.$fila['ciudad'].'</td>
+                <td>'.$fila['estado'].'</td>
+                <td>'.$fila['codigo_postal'].'</td>
+                <td>'.$fila['telefono'].'</td>
+                <td>'.$fila['correo'].'</td>
+                <td>'.$fila['contrato'].'</td>
+                <td>'.$fila['cupon'].'</td>
+                <td>'.$fila['preferencias'].'</td>
+                <td>'.$fila['comentarios'].'</td>
+                </tr>';
+              }
+              echo '
+            </tbody>
+          </table>
+        </div>';
+      }
+
       // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huesped($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
         echo '<div class="row">
@@ -421,6 +685,56 @@
               {
                 echo '<tr class="text-center">
                 <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped('.$fila['id'].','.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')"> Agregar</button></td>
+                <td>'.$fila['nombre'].'</td>  
+                <td>'.$fila['apellido'].'</td>
+                <td>'.$fila['direccion'].'</td>
+                <td>'.$fila['ciudad'].'</td>
+                <td>'.$fila['estado'].'</td>
+                <td>'.$fila['codigo_postal'].'</td>
+                <td>'.$fila['telefono'].'</td>
+                <td>'.$fila['correo'].'</td>
+                <td>'.$fila['contrato'].'</td>
+                <td>'.$fila['cupon'].'</td>
+                <td>'.$fila['preferencias'].'</td>
+                <td>'.$fila['comentarios'].'</td>
+                </tr>';
+              }
+              echo '
+            </tbody>
+          </table>
+        </div>';
+      }
+
+      // Busqueda de los huespedes para asignar en una reservacion
+      function buscar_asignar_huespedNew($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil,$a_buscar){
+        $sentencia = "SELECT * FROM huesped WHERE (nombre LIKE '%$a_buscar%' || apellido LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%' || telefono LIKE '%$a_buscar%') && estado_huesped = 1 ORDER BY nombre;";
+        $comentario="Mostrar los huespedes para asignar en una reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        echo '<div class="table-responsive" id="tabla_huesped">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-primary-encabezado text-center">
+              <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Direccion</th>
+              <th>Ciudad</th>
+              <th>Estado</th>
+              <th>Codigo Postal</th>
+              <th>Telefono</th>
+              <th>Correo</th>
+              <th>Contrato Socio</th>
+              <th>Cupón</th>
+              <th>Preferencias</th>
+              <th>Comentarios</th>
+              </tr>
+          </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta))
+              {
+                echo '<tr class="text-center">
+                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $fila['numero_tarjeta'] . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>  
                 <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>

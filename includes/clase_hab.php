@@ -55,6 +55,20 @@
         }
       }
 
+      function mostrar_tipo(){
+        $sentencia = "SELECT *
+        FROM tipo_hab
+        WHERE estado = 1 ORDER BY id";// nombre
+        $comentario="Mostrar los tipos de habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+         
+        }
+      }
+
       function mostrar_hab_option(){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab
@@ -141,7 +155,8 @@
       // Borrar una habitacion
       function borrar_hab($id){
         $sentencia = "UPDATE `hab` SET
-        `estado_hab` = '0'
+        `estado_hab` = '0',
+        ultimo_mov = UNIX_TIMESTAMP()
         WHERE `id` = '$id';";
         $comentario="Poner estado de una habitacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -185,7 +200,8 @@
         // foreach ($habitaciones as $key => $habitacion) {
           $sentencia = "UPDATE `hab` SET
           `mov` = '$mov',
-          `estado` = '$estado'
+          `estado` = '$estado',
+          ultimo_mov = UNIX_TIMESTAMP()
           WHERE `id` = '$hab';";
           $comentario="Cambiar estado de la habitacion";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -193,7 +209,8 @@
 
         $sentencia = "UPDATE `hab` SET
         `mov` = '$mov',
-        `estado` = '$estado'
+        `estado` = '$estado',
+        ultimo_mov = UNIX_TIMESTAMP()
         WHERE `id` = '$hab';";
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

@@ -113,6 +113,9 @@ echo'
             if($fila['interno'] == self::INTERNO_SUCIA){
                 $estado = "Sucia ocupada";
             }
+            if($fila['interno'] == "limpieza"){
+                $estado = "Ocupada limpieza";
+            }
             break;
 
             case 2:
@@ -254,6 +257,8 @@ echo'
             }else{
                 $fecha_inicio= date("d-m-Y",$cronometro);
             }
+           
+
             echo $fecha_inicio;
             }
             echo '</span>';
@@ -267,8 +272,11 @@ echo'
         echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
         echo '</div>';
         }
+       
     }
     echo ' </div>';
+  
     }
+    
 }
 ?>

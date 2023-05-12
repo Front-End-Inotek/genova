@@ -313,13 +313,13 @@
         return $personas;
       }
       // Agregar una reservacion en la habitacion
-      function disponible_asignar($mov,$hab_id,$id_huesped,$fecha_entrada,$fecha_salida,$usuario_id,$tarifa){
+      function disponible_asignar($mov,$hab_id,$id_huesped,$fecha_entrada,$fecha_salida,$usuario_id,$tarifa,$motivo="reservar"){
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
         $inicio=time();
         
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `id_mesa`, `personas`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `tarifa`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
-        VALUES ('$hab_id', '$id_huesped', '$mov', '0', '0', '$fecha_entrada', '$fecha_salida', '$inicio', '0', '$usuario_id', '0', '0', '$tarifa', '0', '0', '0', '0', 'reservar', '', 'sin estado');";
+        VALUES ('$hab_id', '$id_huesped', '$mov', '0', '0', '$fecha_entrada', '$fecha_salida', '$inicio', '0', '$usuario_id', '0', '0', '$tarifa', '0', '0', '0', '0', '$motivo', '', 'sin estado');";
         $comentario="Agregar una reservacion en la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       

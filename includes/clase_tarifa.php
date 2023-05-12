@@ -58,9 +58,9 @@
         $comentario="Guardamos la tarifa hospedaje en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if($consulta){
-          echo ("NO");
+          echo "NO";
         }else{
-          echo ("error en la consulta");
+          echo "error en la consulta";
         }
 
       }
@@ -193,16 +193,16 @@
       // Muestra los nombres de las tarifas hospedaje
       function mostrar_tarifas($hab_tipo){
         if($hab_tipo == 0){
-          $sentencia = "SELECT id,nombre FROM tarifa_hospedaje WHERE estado = 1 ORDER BY nombre";
+          $sentencia = "SELECT th.id,th.nombre,th.tipo FROM tarifa_hospedaje as th INNER JOIN tipo_hab ON th.tipo = tipo_hab.id WHERE th.estado = 1 ORDER BY nombre";
         }else{
-          $sentencia = "SELECT id,nombre,tipo FROM tarifa_hospedaje WHERE estado = 1 AND tipo = $hab_tipo ORDER BY nombre";
+          $sentencia = "SELECT th.id,th.nombre,th.tipo FROM tarifa_hospedaje as th INNER JOIN tipo_hab ON th.tipo = tipo_hab.id WHERE th.estado = 1 AND tipo = $hab_tipo ORDER BY nombre";
         }
         $comentario="Mostrar los nombres de las tarifas hospedaje";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+          echo '  <option data-tipo="'.$fila['tipo'].'" value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
         }
         return $consulta;
       }
