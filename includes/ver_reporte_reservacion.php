@@ -3,6 +3,8 @@
   include_once("clase_huesped.php");
   include_once("clase_reservacion.php");
   $reservacion= NEW Reservacion(0);
+
+  $ruta = $_GET['ruta'];
   
   echo ' <div class="container blanco">
          <div class="row">
@@ -17,7 +19,7 @@
                 <input type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">
               </div>
               </div>
-              <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button></div>
+              <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="'.$ruta.'"> ←</button></div>
             </div>';
             $consulta= $reservacion->datos_reservacion($_GET['id']);
             while ($fila = mysqli_fetch_array($consulta))
