@@ -93,7 +93,10 @@ echo'
 <button class="botones-estado" id="mostrar-ocupada-limpieza" onclick="mostrar_estadorack(9)"> Limpieza Ocupada</button>
 <button class="botones-estado" id="mostrar-reservada-pagada" onclick="mostrar_estadorack(10)"> Reservacion pagada</button>
 <button class="botones-estado" id="mostrar-reservada-pendiente" onclick="mostrar_estadorack(11)"> Reservacion deuda</button>
-</div>';
+</div>
+<div class="arealight"></div>
+
+';
 
     echo ' <div class="container containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))

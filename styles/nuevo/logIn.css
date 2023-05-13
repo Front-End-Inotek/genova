@@ -1,0 +1,188 @@
+body {
+    background-color: #fff !important;
+    color: #1f238a !important;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.user{
+    padding-top: 15px;
+}
+
+.inicio {
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 10px 8px 10px 8px;
+    color: #4e4ef0;
+}
+.color .circles{
+    background: linear-gradient(35deg, #b6beffee 0%, #ecf2ff 50%, rgb(161, 174, 250) 100%);
+}
+/* Estructura */
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    height: 100vh;
+}
+
+
+#form {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 10px 30px 0 #2f33a7c7;
+    box-shadow: 0 10px 30px 0 #1f238aaf;
+    text-align: center;
+    background: linear-gradient(145deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
+}
+
+#formFooter {
+    background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+    padding: 25px;
+    margin-top: 40px;
+    text-align: center;
+    -webkit-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+    
+}
+
+#icon {
+    width: 60%;
+    margin: 10px 0 15px;
+}
+
+
+#login{
+    margin-bottom: 20px !important;
+}
+
+
+/* Formulario */
+
+input[type="button"],
+input[type="submit"] {
+    background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    -webkit-box-shadow: 0 10px 30px 0 #4e4ef09f;
+    box-shadow: 0 10px 30px 0 #4e4ef061;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 20px 20px 20px 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: #4e4ef0;
+}
+
+input[type="text"],
+input[type="password"] {
+    background-color: #ededfb;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 1px solid #4e4ef0;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+input[type="text"]:focus {
+    background-color: #fff;
+    border-bottom: 1px solid #4e4ef0;
+}
+
+input[type="text"]:placeholder {
+    color: #4e4ef0 !important;
+}
+
+/*animacion*/
+
+.efecto {
+    -webkit-animation-name: efecto;
+    animation-name: efecto;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes efecto {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes efecto {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .container {
+      padding: 10px;
+    }
+    #form {
+      max-width: 70%;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="button"],
+    input[type="submit"] {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }

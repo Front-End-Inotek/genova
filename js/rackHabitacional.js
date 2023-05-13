@@ -69,3 +69,32 @@ function ajusteDeAncho(tablaTotal) {
     }
   }
 }
+
+// Seleccionar todas las celdas de la tabla
+var celdas = document.querySelectorAll("td.celdaCompleta");
+
+// Recorrer cada celda
+for (var i = 0; i < celdas.length; i++) {
+  // Seleccionar los divs "medioDia" dentro de la celda
+  var medioDiaDivs = celdas[i].querySelectorAll("div.medioDia");
+
+  // Recorrer cada div "medioDia" y asignarle un ID único
+  for (var j = 0; j < medioDiaDivs.length; j++) {
+    medioDiaDivs[j].id = (i + 1) + "." + (j + 1);
+  }
+}
+
+
+// Se seleccionan todas las clase medioDia
+const medioDias = celda.querySelectorAll('.medioDia');
+
+// define una función anónima que recibe dos parámetros, medioDia  y indiceMedioDia.
+medioDias.forEach((medioDia, indiceMedioDia) => {
+
+    //crea una constante llamada "idMedioDia" que contiene el id separado por un .
+    const idMedioDia = `${indiceCelda + 1}.${indiceMedioDia + 1}`;
+
+    //agrega un atributo "id" con el valor de "idMedioDia" al elemento actual de la iteración "medioDia".
+    medioDia.setAttribute('id', idMedioDia);
+});
+
