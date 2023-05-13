@@ -188,10 +188,13 @@ span {
   4px 4px 5px 0px #0001;
   transition: all 0.3s ease;
 }
+
 .contenedor-sub:hover {
+  /*
   background-color: #ffffff6e;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
+  */
   width: 105%;
   }
 

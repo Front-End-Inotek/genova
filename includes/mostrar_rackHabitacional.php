@@ -232,16 +232,6 @@ class RackHabitacional extends ConexionMYSql
                         echo '
                             </div>
                         </td>
-<<<<<<< HEAD
-                    ';
-                    } else {
-                        $noches = ($fila['fin'] - $fila['inicio']) / 86400;
-                        echo '';
-                        echo '
-                        <td class="celdaCompleta tdCheck " colspan="' . $noches . '" title="nombre huesped | Habitacion #' . $fila['id'] . ' | informacion adicional">
-                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
-=======
->>>>>>> ecc4907b54366baac54227dcedef725797eca9e8
                         ';
                     //mismo caso 
                     //se le suma 1 día para ignorar el día actual.

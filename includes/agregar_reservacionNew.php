@@ -43,7 +43,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
         <form onsubmit="event.preventDefault();">
-            <h1>Reservacion de habitación</h1> <br>
+            <h1 class="titulo">Reservacion de habitación</h1> <br>
             <div class="d-flex justify-content-end">
                 <div class="form-group col-md-8 mb-3">
                     <label for="clave-reserva" class="text-right">Clave de reserva</label>
