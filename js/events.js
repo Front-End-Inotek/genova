@@ -98,7 +98,9 @@ function sabernosession(){
 		}
 	}
 }
-
+let obtener_datos = () => {
+    return "Hello World!";
+}
 // Se carga el area de trabajo
 function cargar_area_trabajo(){
     console.log(vista);
