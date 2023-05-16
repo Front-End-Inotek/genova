@@ -1,0 +1,5 @@
+15/05
+Se terminaron los reportes para el apartado de recepción (Reporte de llegadas/salidas)
+Se terminaron los reportes de Llegadas y Salidas (llegadas/salidas probables/efectivas)
+Se agregó que después de agregar una reservación te rediriga al reporte de está (con el diseño previo que había de este reporte)
+Se agregó que despúes de salir, se elimine el token acutal del  usuario.

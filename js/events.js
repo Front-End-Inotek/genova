@@ -158,7 +158,7 @@ function salida_automatica(){
 
 // Recarga automatica de pagina
 function recargar_pagina(){
-    location.reload();
+    //location.reload();
 }
 
 // Evaluar si la session  
@@ -180,9 +180,27 @@ function salirsession(){
     
     localStorage.removeItem('id');
     localStorage.removeItem('tocken');
-	document.location.href='index.php';
+	
     //remover el token de la db?
-
+    include="includes/remover_token.php?usuario="+usuario_id
+    $.ajax({
+        async:true,
+        type: "GET",
+        dataType: "HTML",
+        contentType: "application/json",
+        url:include,
+        beforeSend:loaderbar,
+        //una vez eliminado el token de la bd, se redirecciona.
+        success:function(res){
+            document.location.href='index.php';
+        },
+        //success:problemas_sistema,
+        timeout:5000,
+        error:function(err){
+            console.log(err)
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+      });
 
     
 }
@@ -1658,10 +1676,12 @@ function guardarReservacion(id_huesped){
             url:"includes/guardar_reservacionNew.php",
             data:datos,
             beforeSend:loaderbar,
-            success:ver_reservaciones,
-            // success:function(res){
-            //     console.log(res)
-            // },
+            //success:ver_reservaciones,
+            success:function(res){
+                //recibo el id de la reservacion creada.
+                console.log(res)
+                ver_reporte_reservacion(res)
+            },
         
             timeout:5000,
             error:problemas_sistema
@@ -1684,6 +1704,7 @@ function asignarValorTarjeta(){
 
 function guardarNuevaReservacion(){
 
+ 
     var usuario_id=localStorage.getItem("id");
 
     var nombre_huesped= document.getElementById("nombre").value;
@@ -2039,6 +2060,20 @@ function busqueda_reservacion_por_dia(){
     }
 	$("#tabla_reservacion").load("includes/busqueda_reservacion_por_dia.php?dia="+dia+"&id="+id);
 }
+
+// Busqueda dentro de los reportes de entrada/salida.
+function busqueda_reservacion_combinada_por_dia(){
+	var dia=$("#dia").val();
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var id=localStorage.getItem("id");
+    if(dia.length >0 || a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada_por_dia.php?dia="+dia+"&id="+id+"&a_buscar="+a_buscar);
+}
+
 
 // Busqueda combinada en ver reservaciones por dia
 function busqueda_reservacion_combinada_por_dia(){
@@ -5617,7 +5652,7 @@ function ver_reportes_reservaciones(opcion){
 
     titulo=""
     ruta=""
-
+   
 
     switch (opcion ) {
         case 1:
@@ -5639,16 +5674,22 @@ function ver_reportes_reservaciones(opcion){
     titulo = encodeURIComponent(titulo)
 
     var usuario_id=localStorage.getItem("id");
-    inicial = $("#inicial").val()
+    inicial = $("#dia").val()
     if(inicial==undefined){
         inicial="";
     }
+    buscar = $("#a_buscar").val()
+    if(buscar==undefined){
+        buscar="";
+    }
+    inicial = encodeURIComponent(inicial)
+    console.log("fecha: " + buscar)
 
 	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-    include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion
+    include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial+"&buscar="+buscar
 	$("#area_trabajo_menu").load(include);
 
     // var usuario_id=localStorage.getItem("id");

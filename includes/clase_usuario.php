@@ -248,9 +248,14 @@
 
       function remover_token($usuario){
         include_once('clase_log.php');
-        $sentencia="DELETE FROM usuario where usuario=$usuario";
+        $sentencia="DELETE FROM token WHERE usuario=$usuario";
         $comentario ="Eliminando token del usuario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo "SI";
+        }else{
+          echo "NO";
+        }
       }
 
       // Datos inicio de sesion

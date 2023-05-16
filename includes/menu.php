@@ -32,10 +32,14 @@
 			<i class="bx bx-desktop"></i>
 			<span class="mx-2">Recepcion</span>
 			<ul id="reportes_submenu" class="submenu">
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Check In </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="disponible_asignar(0,0)"> Check In </a></i></ul>
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Cuenta Maestra </a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cargo_noche()">Reporte Diarios </a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_llegadas()">Reporte de llegadas</a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
 		
 		echo'
 			</ul>
@@ -74,10 +78,7 @@
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
 
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_llegadas()">Reporte de llegadas</a></i></ul>';
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
+			
 			
 			}
 		}
@@ -90,8 +91,13 @@
 			<i class="bx bxs-arrow-to-right"></i>
 			<span class="mx-2">Llegadas y Salidas</span>
 			<ul id="reportes_submenu" class="submenu">
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Probables </a></i></ul>
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Efectivas </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(1)"> Llegadas probables </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(2)"> Llegadas efectivas </a></i></ul>
+			
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(3)"> Salidas probables </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(4)"> Salidas efectivas </a></i></ul>
+			';
+			
 		
 		echo'
 			</ul>

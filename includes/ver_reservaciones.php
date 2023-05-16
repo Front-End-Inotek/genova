@@ -26,30 +26,9 @@
             </div>
             <div class="col-sm-1">
               <button class="btn btn-primary btn-block btn-default" onclick="ver_reservaciones_por_dia()">
-                Por día 
+                Por día
               </button>
             </div>
-
-            <div class="col-sm-3 mt-2">
-            <button class="btn btn-primary btn-block btn-default" onclick="ver_reportes_reservaciones(1)">
-              Llegadas probables
-            </button>
-          </div>
-          <div class="col-sm-3 mt-2">
-            <button class="btn btn-primary btn-block btn-default" onclick="ver_reportes_reservaciones(2)">
-              Llegadas efectivas
-            </button>
-          </div>
-          <div class="col-sm-3 mt-2">
-            <button class="btn btn-primary btn-block btn-default" onclick="ver_reportes_reservaciones(3)">
-              Salidas probables
-            </button>
-          </div>
-          <div class="col-sm-3 mt-2">
-            <button class="btn btn-primary btn-block btn-default" onclick="ver_reportes_reservaciones(4)">
-              Salidas efectivas
-            </button>
-          </div>
 
           </div><br>
           <div id="paginacion_reservaciones">';
