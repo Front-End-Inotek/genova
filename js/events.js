@@ -158,7 +158,7 @@ function salida_automatica(){
 
 // Recarga automatica de pagina
 function recargar_pagina(){
-    location.reload();
+    //location.reload();
 }
 
 // Evaluar si la session  
@@ -176,9 +176,33 @@ function sabersession(){
 
 // Salir de la session 
 function salirsession(){
-	localStorage.removeItem('id');
+	let usuario_id = localStorage.getItem("id");
+    
+    localStorage.removeItem('id');
     localStorage.removeItem('tocken');
-	document.location.href='index.php';
+	
+    //remover el token de la db?
+    include="includes/remover_token.php?usuario="+usuario_id
+    $.ajax({
+        async:true,
+        type: "GET",
+        dataType: "HTML",
+        contentType: "application/json",
+        url:include,
+        beforeSend:loaderbar,
+        //una vez eliminado el token de la bd, se redirecciona.
+        success:function(res){
+            document.location.href='index.php';
+        },
+        //success:problemas_sistema,
+        timeout:5000,
+        error:function(err){
+            console.log(err)
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+      });
+
+    
 }
 
 // Barra de progreso
@@ -1200,9 +1224,11 @@ function cambiar_adultosNew(event=null,hab_id){
         var tipo_hab = event.target.options[event.target.selectedIndex].dataset.tipo;
         if(tipo_hab!=undefined){
             $("#tipo-habitacion").val(tipo_hab)
+            $("#tipo-habitacion").attr("disabled",true);
         }
        
     }
+    var forzar_tarifa = $("#forzar-tarifa").val()
 
     var tarifa= document.getElementById("tarifa").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
@@ -1213,7 +1239,8 @@ function cambiar_adultosNew(event=null,hab_id){
     // $(".div_adultos").load("includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id);  
     url_data ="includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id
    
-    if(!isNaN(noches)){
+    if(!isNaN(noches) && forzar_tarifa==""){
+        $("#tarifa").attr('required',true);
         $.ajax({
             async:true,
             type: "GET",
@@ -1227,6 +1254,10 @@ function cambiar_adultosNew(event=null,hab_id){
                $("#aux_total").val(res.precio_hab)
                $("#tarifa_menores").val(res.precio_infantil)
                $("#tarifa_adultos").val(res.precio_adulto)
+               //al seleccionar una nueva tarifa los extras se "reinician"
+               $("#extra_adulto").val("")
+               $("#extra_infantil").val("")
+               $("#pax-extra").val("")
             },
             //success:problemas_sistema,
             timeout:5000,
@@ -1234,6 +1265,21 @@ function cambiar_adultosNew(event=null,hab_id){
                 console.log(err)
             }
           });
+    }else{
+        //no consulta la tarifa de la bd.
+        //  console.log("forzando:" + noches +" t:"+forzar_tarifa)
+        if(forzar_tarifa!=""){
+            numero_hab = numero_hab == 0 ? 1 : numero_hab
+            tarifa = noches * forzar_tarifa * numero_hab
+            $("#total").val(tarifa)
+            $("#aux_total").val(tarifa)
+            $("#tipo-habitacion").removeAttr("disabled");
+            $("#tarifa_menores").val("")
+            $("#tarifa_adultos").val("")
+            $("#tarifa").removeAttr('required');
+        }
+      
+        
     }
     
 
@@ -1262,6 +1308,8 @@ function nuevo_calculo_total(event=null){
     var noches= Number(document.getElementById("noches").value);
     var tarifa= Number(document.getElementById("tarifa").value);
     
+    //extra los campos de las tarifas consultadas de la db.
+
     var extra_adulto= Number(document.getElementById("extra_adulto").value);
 
 	var extra_infantil= Number(document.getElementById("extra_infantil").value);
@@ -1269,11 +1317,11 @@ function nuevo_calculo_total(event=null){
     var tarifa_infantil = Number(document.getElementById("tarifa_menores").value);
     
     var tarifa_adulto = Number(document.getElementById("tarifa_adultos").value);
-    
+
 	var pax_extra= Number(document.getElementById("pax-extra").value);
 
     var costo_plan=Number(document.getElementById('costoplan').value); 
-  
+    //si  se elige un plan de alimentación desde el select.
     if(event!=null){
         var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
         if(costoplan!=undefined){
@@ -1283,14 +1331,33 @@ function nuevo_calculo_total(event=null){
         
         }
     }
+    //se guarda el total generado por las fechas seleccionadas (no se altera), para despues sumarlo al total (alterable)
     var aux_total=Number(document.getElementById('aux_total').value)
 	
 	var total_infantil= tarifa_infantil * extra_infantil;
     var total_adulto = tarifa_adulto * extra_adulto;
-
     var adicionales =  total_infantil  + total_adulto + pax_extra + costo_plan;  
-
     var total = aux_total + adicionales;
+
+    console.log(total_adulto)
+    fadulto = 0;
+    finfantil =0;
+
+    //si el total del adulto o del infante son 0, no se seleccionó una tarifa de la db, se realiza otro calculo.
+    if(total_adulto==0){
+        console.log(total,extra_adulto)
+        fadulto = $("#forzar-tarifa").val() * extra_adulto
+    }
+    if(total_infantil==0){
+        finfantil = $("#forzar-tarifa").val() * extra_infantil
+    }
+    aux_total = total + fadulto + finfantil
+    if(aux_total==0){
+        total= total
+    }else{
+        total = aux_total
+    }
+
     document.getElementById("total").value= total;
    
 
@@ -1519,6 +1586,10 @@ function guardarReservacion(id_huesped){
     var numero_hab= Number(document.getElementById("numero_hab").value);
     var noches= Number(document.getElementById("noches").value);
     var tarifa= Number(document.getElementById("tarifa").value);
+
+    var forzar_tarifa = $("#forzar-tarifa").val()
+    
+
     var extra_adulto= Number(document.getElementById("extra_adulto").value);
     var extra_infantil= Number(document.getElementById("extra_infantil").value);
 
@@ -1534,7 +1605,7 @@ function guardarReservacion(id_huesped){
     var tipo_reservacion = (document.getElementById("tipo-reservacion").value);
 
     var estado = preasignada!="" ? 4 : 2;
-    estado = 2;
+    estado = 1;
 
 
     var forma_pago= (document.getElementById("forma-garantia").value);
@@ -1550,6 +1621,14 @@ function guardarReservacion(id_huesped){
 
     var precio_hospedaje = document.getElementById('aux_total').value
     var total_hospedaje = document.getElementById('total').value
+
+    //verifica si hay una tarifa (forzada o no)
+    var tarifa_existe = 0;
+    if($("#forzar-tarifa").val()==""){
+        tarifa_existe = tarifa;
+    }else{
+        tarifa_existe=forzar_tarifa;
+    }
 
     var datos = {
         "id_huesped": id_huesped,
@@ -1572,7 +1651,7 @@ function guardarReservacion(id_huesped){
         "suplementos": 0,
         "total_suplementos": 0,
         "total_hab": total,
-        "forzar_tarifa": 0,
+        "forzar_tarifa":forzar_tarifa,
         "descuento": 0,
         "codigo_descuento": 0,
         "total": total_hospedaje,
@@ -1588,7 +1667,7 @@ function guardarReservacion(id_huesped){
         console.log(datos)
     //   console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
     //   return ;
-      if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
+      if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa_existe >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
         $.ajax({
             async:true,
             type: "POST",
@@ -1597,10 +1676,12 @@ function guardarReservacion(id_huesped){
             url:"includes/guardar_reservacionNew.php",
             data:datos,
             beforeSend:loaderbar,
-            success:ver_reservaciones,
-            // success:function(res){
-            //     console.log(res)
-            // },
+            //success:ver_reservaciones,
+            success:function(res){
+                //recibo el id de la reservacion creada.
+                console.log(res)
+                ver_reporte_reservacion(res)
+            },
         
             timeout:5000,
             error:problemas_sistema
@@ -1623,6 +1704,7 @@ function asignarValorTarjeta(){
 
 function guardarNuevaReservacion(){
 
+ 
     var usuario_id=localStorage.getItem("id");
 
     var nombre_huesped= document.getElementById("nombre").value;
@@ -1872,6 +1954,32 @@ function ver_reservaciones_paginacion(buton,posicion){
     $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
 }
 
+// Barra de diferentes busquedas en ver llegadas
+function buscar_llegadas_salidas(e,opcion){
+   
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var usuario_id=localStorage.getItem("id");
+    var inicial = $("#inicial").val()
+    funcion_php="";
+    funcion_buscar="";
+    if(opcion==1){
+        funcion_php="ver_llegadas.php"
+        funcion_buscar = "buscar_llegadas.php"
+    }else{
+        funcion_php ="ver_salidas.php"
+        funcion_buscar = "buscar_salidas.php"
+    }
+
+
+    if(a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+        if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial); return false; }
+    }
+	$("#tabla_reservacion").load("includes/buscar_entradas_salidas.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion);  
+}
+
 // Barra de diferentes busquedas en ver reservaciones
 function buscar_reservacion(e){
     var a_buscar=encodeURIComponent($("#a_buscar").val());
@@ -1952,6 +2060,20 @@ function busqueda_reservacion_por_dia(){
     }
 	$("#tabla_reservacion").load("includes/busqueda_reservacion_por_dia.php?dia="+dia+"&id="+id);
 }
+
+// Busqueda dentro de los reportes de entrada/salida.
+function busqueda_reservacion_combinada_por_dia(){
+	var dia=$("#dia").val();
+    var a_buscar=encodeURIComponent($("#a_buscar").val());
+    var id=localStorage.getItem("id");
+    if(dia.length >0 || a_buscar.length >0){
+        $('.pagination').hide();
+    }else{
+        $('.pagination').show();
+    }
+	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada_por_dia.php?dia="+dia+"&id="+id+"&a_buscar="+a_buscar);
+}
+
 
 // Busqueda combinada en ver reservaciones por dia
 function busqueda_reservacion_combinada_por_dia(){
@@ -2114,12 +2236,12 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 }
 
 // Muestra las reservaciones de la bd
-function ver_reporte_reservacion(id){
+function ver_reporte_reservacion(id,ruta="regresar_reservacion()"){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id);
+	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id+"&ruta="+ruta);
 	closeNav();
 }
 
@@ -2156,7 +2278,7 @@ function borrar_reservacion(id){
 }
 
 //funcion para agregar la habitacion seleccionada a la reservacion.
-function guardar_preasignar_reservacion(id)
+function guardar_preasignar_reservacion(id,opcion="")
 {
     var usuario_id=localStorage.getItem("id");
     preasignada = $("#preasignada").val();
@@ -2180,7 +2302,13 @@ function guardar_preasignar_reservacion(id)
                 url:"includes/preasignar_reservacion.php",
                 data:datos,
                 beforeSend:loaderbar,
-                success:ver_reservaciones,
+                success:function(res){
+                    if(opcion==""){
+                        ver_reservaciones();
+                    }else{
+                        ver_reportes_llegadas();
+                    }
+                },
                 //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
@@ -2192,8 +2320,8 @@ function guardar_preasignar_reservacion(id)
 
 }
 // Modal de preasignar reservacion
-function preasignar_reservacion(id){
-	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id);
+function preasignar_reservacion(id,opcion=""){
+	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id+"&opcion="+opcion);
 }
 
 // Modal de cancelar una reservacion
@@ -2244,6 +2372,42 @@ function regresar_reservacion(){
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
+}
+
+// Modal de asignar una reservacion a una habitacion en estado disponible
+function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
+    console.log(hab_id, id,movimiento )
+    //si ya tiene una habitación preasignada, hará "checkin" automaticamente.
+    if(hab_id!=""){
+        var usuario_id=localStorage.getItem("id");
+        $('#caja_herramientas').modal('hide');
+        var datos = {
+            "hab_id": hab_id,
+            "id_reservacion": id,
+            "habitaciones": 0,
+            "usuario_id": usuario_id,
+            "movimiento":movimiento
+            };
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/asignar_reservacion.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+          });
+    }else{
+        $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
+    }
+
+    //si no, tendrá que seleccionar una de las habitaciones disponibles.
+
+	
 }
 
 // Modal de asignar una reservacion a una habitacion en estado disponible
@@ -5463,6 +5627,95 @@ function ver_cortes(){
 // Muestra los reportes guardados de los cortes de la bd
 function mostrar_reporte_corte(id){
 	window.open("reportes/corte/reporte_corte_"+id+".pdf");
+}
+
+
+
+//funcion para ver los reportes de salida
+
+function ver_reportes_salidas(){
+    var usuario_id=localStorage.getItem("id");
+    inicial = $("#inicial").val()
+    if(inicial==undefined){
+        inicial="";ver_reportes_salidas
+    }
+
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_salidas.php?usuario_id="+usuario_id+"&inicial="+inicial);
+    closeModal();
+	closeNav();
+}
+
+function ver_reportes_reservaciones(opcion){
+
+    titulo=""
+    ruta=""
+   
+
+    switch (opcion ) {
+        case 1:
+            titulo="LLEGADAS PROBABLES"
+            break;
+        case 2:
+            titulo="LLEGADAS EFECTIVAS"
+            break;
+        case 3:
+            titulo="SALIDAS PROBABLES"
+            break;
+        case 4:
+            titulo="SALIDAS EFECTIVAS"
+            break;
+        default:
+            break;
+    }
+
+    titulo = encodeURIComponent(titulo)
+
+    var usuario_id=localStorage.getItem("id");
+    inicial = $("#dia").val()
+    if(inicial==undefined){
+        inicial="";
+    }
+    buscar = $("#a_buscar").val()
+    if(buscar==undefined){
+        buscar="";
+    }
+    inicial = encodeURIComponent(inicial)
+    console.log("fecha: " + buscar)
+
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+    include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial+"&buscar="+buscar
+	$("#area_trabajo_menu").load(include);
+
+    // var usuario_id=localStorage.getItem("id");
+	// $('#area_trabajo').hide();
+    // $('#pie').hide();
+	// $('#area_trabajo_menu').show();
+	// $("#area_trabajo_menu").load("includes/ver_reservaciones_por_dia.php?usuario_id="+usuario_id);
+	// closeNav();
+
+}
+
+//funcion para ver los reportes de llegada
+
+function ver_reportes_llegadas(){
+    var usuario_id=localStorage.getItem("id");
+    inicial = $("#inicial").val()
+    if(inicial==undefined){
+        inicial="";
+    }
+
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_llegadas.php?usuario_id="+usuario_id+"&inicial="+inicial);
+    closeModal();
+	closeNav();
 }
 
 // Busqueda por fecha en ver cortes de la bd

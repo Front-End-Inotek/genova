@@ -245,6 +245,19 @@
           $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->huesped_ver+$this->huesped_agregar+$this->huesped_editar+$this->huesped_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_ver+$this->tarifa_agregar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar+$this->reservacion_ver+$this->reservacion_agregar+$this->reservacion_editar+$this->reservacion_borrar+$this->reporte_ver+$this->reporte_agregar+$this->forma_pago_ver+$this->forma_pago_agregar+$this->forma_pago_editar+$this->forma_pago_borrar+$this->inventario_ver+$this->inventario_agregar+$this->inventario_editar+$this->inventario_borrar+$this->inventario_surtir+$this->categoria_ver+$this->categoria_agregar+$this->categoria_editar+$this->categoria_borrar+$this->restaurante_ver+$this->restaurante_agregar+$this->restaurante_editar+$this->restaurante_borrar+$this->cupon_ver+$this->cupon_agregar+$this->cupon_editar+$this->cupon_borrar+$this->logs_ver;
         }  
       }
+
+      function remover_token($usuario){
+        include_once('clase_log.php');
+        $sentencia="DELETE FROM token WHERE usuario=$usuario";
+        $comentario ="Eliminando token del usuario";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo "SI";
+        }else{
+          echo "NO";
+        }
+      }
+
       // Datos inicio de sesion
       function datos($id){
         $sentencia = "SELECT * FROM usuario WHERE id = $id LIMIT 1 ";

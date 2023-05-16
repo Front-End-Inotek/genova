@@ -27,6 +27,9 @@
   $cantidad_cupon= 0;
   $id_movimiento= 0;
 
+
+
+
   //Revisar la existencia de un cupon de descuento
   // Checar si codigo descuento esta vacio o no
   if (empty($_POST['codigo_descuento'])){
@@ -144,6 +147,12 @@
     $logs->guardar_log($_POST['usuario_id'],"Agregar primer abono a la habitacion: ". $nombre);
     $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
     // Cupon, extra_persona, suplementos, hab_tipo
+
+    //todo salió bien en teoría, retornar el id de la reservacion creada.
+    //echo $id_reservacion;
+    
   }
+  echo $id_reservacion;
+
 ?>
 

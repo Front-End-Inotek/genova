@@ -314,12 +314,29 @@
       }
       // Agregar una reservacion en la habitacion
       function disponible_asignar($mov,$hab_id,$id_huesped,$fecha_entrada,$fecha_salida,$usuario_id,$tarifa,$motivo="reservar"){
-        $fecha_entrada= strtotime($fecha_entrada);
-        $fecha_salida= strtotime($fecha_salida);
+
+        //codigo que verifica si las fechas  ya son tiempo 'unix', si ya lo son, las guarda tal cual, sino, las convierte a tiempo 'unix'
+        $fecha_entradaF="";
+        $fecha_salidaF="";
+
+        $fecha_entradaP= strtotime($fecha_entrada);
+        $fecha_salidaP= strtotime($fecha_salida);
+        
+        if(empty($fecha_entradaP)){
+            $fecha_entradaF = $fecha_entrada;
+        }else{
+          $fecha_entradaF = $fecha_entradaP;
+        }
+        if(empty($fecha_salidaP)){
+          $fecha_salidaF = $fecha_salida;
+        }else{
+          $fecha_salidaF = $fecha_salidaP;
+        }
+       
         $inicio=time();
         
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `id_mesa`, `personas`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `tarifa`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
-        VALUES ('$hab_id', '$id_huesped', '$mov', '0', '0', '$fecha_entrada', '$fecha_salida', '$inicio', '0', '$usuario_id', '0', '0', '$tarifa', '0', '0', '0', '0', '$motivo', '', 'sin estado');";
+        VALUES ('$hab_id', '$id_huesped', '$mov', '0', '0', '$fecha_entradaF', '$fecha_salidaF', '$inicio', '0', '$usuario_id', '0', '0', '$tarifa', '0', '0', '0', '0', '$motivo', '', 'sin estado');";
         $comentario="Agregar una reservacion en la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       

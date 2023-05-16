@@ -42,8 +42,10 @@ error_reporting(0);
 echo '<div class="container-fluid blanco" style="width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
-        <form onsubmit="event.preventDefault();">
-            <h1 class="titulo">Reservacion de habitación</h1> <br>
+        <form onsubmit="event.preventDefault(); guardarNuevaReservacion()">
+           
+
+        <h1>Reservacion de habitación</h1> <br>
             <div class="d-flex justify-content-end">
                 <div class="form-group col-md-8 mb-3">
                     <label for="clave-reserva" class="text-right">Clave de reserva</label>
@@ -82,19 +84,23 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
             </div>
             <div class="d-flex justify-content-between">
-                <div class="form-group col-md-4 mb-3">
+            <div class="form-group col-md-3 mb-3">
+                    <label for="tipo-habitacion">Forzar tarifa</label>
+                    <input type="number" class="form-control" id="forzar-tarifa" min="0" step="0.01" onchange="cambiar_adultosNew('.$hab_id.')">
+                </div>
+                <div class="form-group col-md-3 mb-3">
                     <label for="tipo-habitacion">Tipo de habitación</label>
                     <select class="form-control" id="tipo-habitacion" disabled>
-                    <option value=""></option>';
+                    ';
                     $hab->mostrar_tipo();
                     echo '
                   </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="no-habitaciones">Número de habitaciones</label>
                     <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew('.$hab_id.')">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="total-estancia">Total de la estancia</label>
                     <input type="number" class="form-control" id="total" min="0" step="0.01" readonly>
                     <input type="number" class="form-control" id="aux_total" min="0" step="0.01" readonly hidden>
@@ -178,7 +184,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="pais">País</label>
-                    <input type="text" class="form-control" id="pais" required>
+                    <input type="text" class="form-control" id="pais">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="estado">Estado</label>
@@ -221,7 +227,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             </div>
             <br>
             <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary" onclick="guardarNuevaReservacion()">Enviar</button>
+              <button type="submit" class="btn btn-primary" onclick="">Enviar</button>
             </div>
         </form>
 
