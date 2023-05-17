@@ -175,11 +175,11 @@
 
 /* Contenedor con fondo blanco y bordes */
 .blanco {
-  padding: 25px 25px;
-  background: url('../images/vista_back.jpg') !important;
+  padding: 25px 25px;/*
+  background: url('../images/vista_back.jpg') !important;*/
   background-attachment: fixed;
   background-size: cover;
-background-color: rgba(255, 255, 255, 0.1); /* Ajusta el último valor (0.5) para controlar la transparencia */
+background-color: #e5e5ffe5;
   margin-top: 55px;
   border: 1px solid #c6c4fc;
 }
@@ -226,8 +226,45 @@ td {
 .blanco {
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgb(255 255 255 / 20%),
-    4px 4px 24px 0px #c4cbffce !important;
+    4px 4px 24px 0px #c4cbffce !important;/*
     background: linear-gradient(180deg, rgba(250, 250, 255, 0.777) 95%, transparent 100%);
+
+    background: linear-gradient(90deg, #aab7f6e0 5%,#ffffffe2 );*/
+    
+
+/*
+	--sz: 10px;	 /* tamaño */
+  /*--alpha: 0.1; /* valor de transparencia  */
+	/*--cd: 0deg; /* color */
+	/*--c1: hsl(var(--cd), 0%, 100%, var(--alpha));
+    --c2: hsl(var(--cd), 3%, 68%, var(--alpha));
+    --c3: hsl(var(--cd), 5%, 65%, var(--alpha));
+    --c4: hsl(var(--cd), 18%, 27%, var(--alpha));
+	--ts: 50%/ calc(var(--sz) * 18) calc(var(--sz) * 18);
+	--cg: var(--c1) 22.5deg, var(--c2) 45deg, var(--c3) 67.5deg, var(--c4) 90deg, #fff0 0 100%;
+	--hd: conic-gradient(from -45deg at 50% 50%, var(--cg)) var(--ts);
+	--bt: var(--c2) calc(var(--sz) * 0.5), var(--c3) calc(var(--sz) * 0.6) calc(var(--sz) * 0.65), var(--c4) calc(calc(var(--sz) * 0.65) + 1px) calc(var(--sz) * 0.75), #0002 calc(var(--sz) * 0.85) calc(var(--sz) * 1), #fff0 calc(var(--sz) * 8.5) 100%;
+	--bts: #fdfdfd73 calc(var(--sz) * 0.05), #fff0 calc(var(--sz) * 0.65) 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: 
+		radial-gradient(circle at 49.25% 50.5%, var(--bts)) var(--ts),
+		radial-gradient(circle at 99.25% 0.5%, var(--bts)) var(--ts),
+		radial-gradient(circle at 99.25% 100.5%, var(--bts)) var(--ts),
+		radial-gradient(circle at -0.75% 0.5%, var(--bts)) var(--ts),
+		radial-gradient(circle at -0.75% 100.5%, var(--bts)) var(--ts),
+		radial-gradient(circle at 50% 50%, var(--bt)) var(--ts),
+		radial-gradient(circle at 100% 100%, var(--bt)) var(--ts),
+		radial-gradient(circle at 100% 0%, var(--bt)) var(--ts),
+		radial-gradient(circle at 0% 100%, var(--bt)) var(--ts),
+		radial-gradient(circle at 0% 0%, var(--bt)) var(--ts),
+		linear-gradient(45deg, #fff0 49%, var(--c1), var(--c2), var(--c3), #fff0 51%) var(--ts),
+		linear-gradient(135deg, #fff0 49%, var(--c1), var(--c2), var(--c3), #fff0 51%) var(--ts),
+		var(--hd), var(--hd), var(--hd), var(--hd),
+		conic-gradient(from -45deg at 100% 100%, var(--cg)) var(--ts),
+		conic-gradient(from -45deg at 0% 100%, var(--cg)) var(--ts),
+		conic-gradient(from -45deg at 50% 150%, var(--cg)) var(--ts);*/
 }
 button {
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),

@@ -390,6 +390,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
   box-shadow: 0 15px 0 3px rgba(74, 40, 143, 0.205);
 }
 
+
 .context {
   display: block;
 }
@@ -415,6 +416,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 .usoCasa {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.25' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #05d1ca !important;
+  
   color: #000 !important;
   border-left: 7px solid #03ada8 !important;
 }
@@ -613,14 +615,14 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .modal-header {
   background-color: #97a2f9ee !important;
-  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+  background: linear-gradient(180deg, #b3b3fe 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%);
   border-color: #3f51b5 !important;
-  color: #fff !important;
+  color: #3f51b5 !important;
 }
 
 .modal-footer {
   background-color: #97a2f9ee !important;
-  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+  background: linear-gradient(180deg, #b3b3fe 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%);
   border-color: #3f51b5 !important;
   color: #3f51b5 !important;
 }
