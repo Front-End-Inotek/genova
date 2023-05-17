@@ -251,7 +251,11 @@ function agregar_planes_alimentos(){
 	$("#mostrar_herramientas").load("includes/agregar_planes_alimentos.php");
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
-
+// Agregar un tipo de habitacion
+function agregar_cuentas_maestras(){
+	$("#mostrar_herramientas").load("includes/agregar_cuentas_maestras.php");
+    //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
+}
 
 // Agregar un tipo de habitacion
 function agregar_tipos(){
@@ -326,6 +330,49 @@ function guardar_tipo() {
     guardar_habitacion()
 }
 
+function guardar_cuenta_maestra() {
+	var nombre= encodeURI(document.getElementById("nombre").value);
+	var codigo= encodeURI(document.getElementById("codigo").value);
+
+    if(nombre === null || nombre === ''){
+        swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+
+    if(codigo === null || codigo === ''){
+        swal("Campo codigo vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+    guardar_cuenta_m(nombre,codigo)
+}
+
+function guardar_cuenta_m(nombre,codigo){
+    let usuario_id=localStorage.getItem("id");
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET","includes/guardar_cuenta_maestra.php?nombre="+nombre+"&codigo="+codigo+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.responseText);
+          
+            if (e.target.responseText == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_cuenta_maestra()
+                swal("Nuevo plan de alimentos agregado!", "Excelente trabajo!", "success");
+                return false;
+            }else if(e.target.responseText == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
+}
 
 
 // Guardar un tipo de habitacion
@@ -1622,6 +1669,13 @@ function guardarReservacion(id_huesped){
     var precio_hospedaje = document.getElementById('aux_total').value
     var total_hospedaje = document.getElementById('total').value
 
+    var sobrevender = document.getElementById('sobrevender').checked
+
+    sobrevender = sobrevender ? 1 : 0 ;
+
+    console.log(sobrevender)
+
+
     //verifica si hay una tarifa (forzada o no)
     var tarifa_existe = 0;
     if($("#forzar-tarifa").val()==""){
@@ -1663,6 +1717,7 @@ function guardarReservacion(id_huesped){
         "plan_alimentos" : plan_alimentos,
         "canal_reserva" : canal_reserva,
         "tipo_reservacion":tipo_reservacion,
+        "sobrevender":sobrevender
       };
         console.log(datos)
     //   console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
@@ -1679,7 +1734,7 @@ function guardarReservacion(id_huesped){
             //success:ver_reservaciones,
             success:function(res){
                 //recibo el id de la reservacion creada.
-                console.log(res)
+                // console.log(res)
                 ver_reporte_reservacion(res)
             },
         
@@ -1977,7 +2032,7 @@ function buscar_llegadas_salidas(e,opcion){
         $('.pagination').show();
         if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial); return false; }
     }
-	$("#tabla_reservacion").load("includes/buscar_entradas_salidas.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion);  
+	$("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion);  
 }
 
 // Barra de diferentes busquedas en ver reservaciones
@@ -4408,12 +4463,12 @@ function reporte_surtir_inventario(id){
 //* Restaurante *//
 
 // Agregar en el restaurante
-function agregar_restaurante(hab_id,estado){
+function agregar_restaurante(hab_id,estado,maestra=0){
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado);
+	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado+"&maestra="+maestra);
     closeModal();
 	closeNav();
 }
@@ -4891,6 +4946,18 @@ function cargar_rest_cobro_mesa(total,mesa_id,estado,mov){
     }else{
         alert("¡Falta agregar la habitacion!");
     }
+}
+
+//ver cuenta maestra
+
+function ver_cuenta_maestra(){
+    var usuario_id = localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_cuenta_maestra.php?usuario_id="+usuario_id);
+    closeModal();
+	closeNav();
 }
 
 // Aplicar el cobro en pedido restaurante enviado a una hab
@@ -5648,12 +5715,31 @@ function ver_reportes_salidas(){
 	closeNav();
 }
 
+function buscador_reportes_reservas(opcion){
+    var usuario_id=localStorage.getItem("id");
+    inicial = $("#dia").val()
+    if(inicial==undefined){
+        inicial="";
+    }
+    inicial = encodeURIComponent(inicial)
+    a_buscar = $("#a_buscar").val()
+    if(a_buscar==undefined){
+        a_buscar="";
+    }
+    a_buscar = encodeURIComponent(a_buscar)
+
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+    include = "includes/buscar_entradas_salidas.php?usuario_id="+usuario_id+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
+    $("#tabla_reservacion").load(include);
+}
+
 function ver_reportes_reservaciones(opcion){
 
     titulo=""
     ruta=""
-   
-
     switch (opcion ) {
         case 1:
             titulo="LLEGADAS PROBABLES"
@@ -5678,26 +5764,14 @@ function ver_reportes_reservaciones(opcion){
     if(inicial==undefined){
         inicial="";
     }
-    buscar = $("#a_buscar").val()
-    if(buscar==undefined){
-        buscar="";
-    }
     inicial = encodeURIComponent(inicial)
-    console.log("fecha: " + buscar)
 
 	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-    include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial+"&buscar="+buscar
-	$("#area_trabajo_menu").load(include);
-
-    // var usuario_id=localStorage.getItem("id");
-	// $('#area_trabajo').hide();
-    // $('#pie').hide();
-	// $('#area_trabajo_menu').show();
-	// $("#area_trabajo_menu").load("includes/ver_reservaciones_por_dia.php?usuario_id="+usuario_id);
-	// closeNav();
+    include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial
+    $("#area_trabajo_menu").load(include);
 
 }
 

@@ -123,7 +123,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
             </div>
             <div class="d-flex justify-content-between">
-                <div class="form-group col-md-4 mb-3">
+                <div class="form-group col-md-3 mb-3">
                     <label for="plan-alimentos">Plan de alimentos</label>
                     <select class="form-control" id="plan-alimentos"  onchange="nuevo_calculo_total(event)">
                     <option value="">Seleccione una opción</option>';
@@ -137,7 +137,12 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <select class="form-control" id="preasignada">
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
+                <label for="hab-preasignada">Sobrevender</label>
+                <input type="checkbox" id="sobrevender" disabled class="form-check"/>
+                </select>
+            </div>
+                <div class="form-group col-md-3">
                     <label for="canal-reserva">Canal de reserva</label>
                     <select class="form-control" id="canal-reserva" required>
                         <option value="">Seleccione una opción</option>

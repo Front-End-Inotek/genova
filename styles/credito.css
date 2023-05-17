@@ -93,7 +93,7 @@ ul.payment-types li.paymenttype {
     position: relative;
     height: 200px;
 }
-.card {
+.cardCredito {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
