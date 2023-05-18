@@ -57,20 +57,11 @@
 			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
 			if($permisos_reservar>0){
 			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_reservaciones()"> Nueva Reservacion </a></i></ul>';
-			}
-
-			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
-			if($permisos_reservar>0){
-			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>';
 				echo '
 					<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_reservaciones()"> Agregar reservaciones </a></i></ul>
 				';
 
-				echo '
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>
-				';
 			}
 
 			$permisos_huesped=$usuario->huesped_ver+$usuario->huesped_agregar;
@@ -244,6 +235,8 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tipos()"> Configuracion </a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_planes_alimentos()">Plan de alimentos</a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_politicas_reservacion()">Políticas de reservación</a></i></ul>';
 			}
 			
 		}

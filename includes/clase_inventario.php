@@ -734,7 +734,7 @@
         FROM pedido_rest 
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pagado = 0 AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
         $comentario="Mostrar los productos del pedido restaurente sin habitacion";
-        //echo $sentencia;
+        // echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cont=0;
         $total=0;
@@ -775,12 +775,20 @@
         </table>';
       }
       // Mostrar los productos del pedido restaurente habitacion
-      function mostar_pedido_funciones($hab_id,$estado,$mov){
+      function mostar_pedido_funciones($hab_id,$estado,$mov,$id_maestra=0){
         if($hab_id != 0){
           include_once("clase_hab.php");
           $hab= NEW Hab($hab_id);
           $hab_nombre= $hab->nombre;
         }
+        $cuenta_nombre="";
+        //Para visualizar el nombre de la cuenta maestra dentro de agregar restaurante
+        if($id_maestra!=0){
+          include_once('clase_cuenta_maestra.php');
+          $cm = new CuentaMaestra($id_maestra);
+          $cuenta_nombre = $cm->nombre;
+        }
+
         $linea= -1;
         $cantidad= 0;
         $total= 0;
@@ -799,8 +807,8 @@
               echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
               <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Habitación: '.$hab_nombre.'</div>';
             }else{
-              echo '<div class="col-sm-3"></div>
-              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
+              echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
+              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Cuenta Maestra: '.$cuenta_nombre.'</div>';
             } 
             echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
             <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0)">Linea</button></></div>
@@ -818,6 +826,7 @@
           $mesa= NEW Mesa($mesa_id);
           $mesa_nombre= $mesa->nombre;
         }
+        
         $linea= -1;
         $cantidad= 0;
         $total= 0;
@@ -845,6 +854,7 @@
             <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>   
             <div class="col-sm-1"></div>';             
           }else{
+           
             echo '<div class="col-sm-12"></div>'; 
           }
         echo '</div>'; 
@@ -855,7 +865,7 @@
         $sentencia = "SELECT *, pedido_rest.id AS ID  
         FROM pedido_rest 
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pagado = 0 AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
-        //echo $sentencia;
+        // echo $sentencia;
         $comentario="Obtengo el total de productos del pedido restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

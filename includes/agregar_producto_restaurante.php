@@ -9,9 +9,9 @@
   //$pedido->mostar_pedido($_POST['hab_id'],$_POST['estado'],$_POST['mov']);// mov y hab son 0 al ser sin hab
   //$logs->guardar_log($_POST['usuario_id'],"Asignar el producto a restaurante: ". $_POST['producto']);
   if($_POST['producto'] != -1){
-    echo $_POST['categoria']."/".$_POST['hab_id']."/".$_POST['estado']."/".$_POST['mesa'];
+    echo $_POST['categoria']."/".$_POST['hab_id']."/".$_POST['estado']."/".$_POST['mesa']."/".$_POST['mov'];
   }else{
-    echo $categoria."/".$_POST['hab_id']."/".$_POST['estado']."/".$_POST['mesa'];
+    echo $categoria."/".$_POST['hab_id']."/".$_POST['estado']."/".$_POST['mesa']."/".$_POST['mov'];
   }
 ?>
 

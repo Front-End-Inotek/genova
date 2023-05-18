@@ -9,7 +9,7 @@
   }else{
     $cm= new CuentaMaestra(0);
     $logs = new Log(0);
-    $cm->guardar_cuenta_maestra(urldecode($_GET['nombre']),urldecode($_GET['codigo'],urldecode($_GET['usuario_id'])));
+    $cm->guardar_cuenta_maestra(urldecode($_GET['nombre']),urldecode($_GET['codigo']),urldecode($_GET['usuario_id']));
     $logs->guardar_log($_GET['usuario_id'],"Agregar cuenta maestra: ". urldecode($_GET['nombre']));
   }
 

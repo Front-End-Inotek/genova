@@ -21,6 +21,12 @@
       $mov= $mesa->saber_mov($_GET['hab_id']);
     }
   }
+  if(isset($_GET['mov'])){
+    if($_GET['mov']!=0){
+      $mov = $_GET['mov'];
+    }
+  }
+
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '

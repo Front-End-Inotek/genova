@@ -54,10 +54,11 @@ $("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert aler
 
 // Recibimos la info
 function recibir(datos){
+    
 	//alert(datos);
 	//var id=parseInt(datos);
 	var res = datos.split("-");
-	if(res[0]>0){
+	if(res[1]!="0"){
 		localStorage.setItem("id",res[0]);
 		localStorage.setItem("tocken",res[1]);
 		document.location.href='inicio.php';
@@ -158,7 +159,7 @@ function salida_automatica(){
 
 // Recarga automatica de pagina
 function recargar_pagina(){
-    //location.reload();
+    location.reload();
 }
 
 // Evaluar si la session  
@@ -244,6 +245,8 @@ function closeNav(){
     document.getElementById("main").style.marginLeft = "0";
 }
 
+
+
 //* Tipo hab *//
 
 // Agregar un tipo de habitacion
@@ -251,7 +254,22 @@ function agregar_planes_alimentos(){
 	$("#mostrar_herramientas").load("includes/agregar_planes_alimentos.php");
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
-// Agregar un tipo de habitacion
+
+//Guardar el cargo adicional
+
+function guardar_cargo_adicional(id,mov){
+    nombre = $("#nombre").val()
+    monto = $("#monto").val()
+
+    console.log(nombre,monto)
+    aplicar_rest_cobro_hab(monto, 0,0,mov,nombre)
+}
+
+//Agregar un cargo adicional.
+function agregar_cargo_adicional(id,mov){
+	$("#mostrar_herramientas").load("includes/agregar_cargo_adicional.php?id="+id+"&mov="+mov);
+}
+// Agregar una cuenta maestra
 function agregar_cuentas_maestras(){
 	$("#mostrar_herramientas").load("includes/agregar_cuentas_maestras.php");
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
@@ -1484,6 +1502,46 @@ function mostrar_modal_garantia(){
    
 }
 
+function aceptar_asignar_huesped_maestra(id_huesped,id_maestra,mov){
+    //se debe actualizar el movimiento y la cuenta maestra.
+    var usuario_id=localStorage.getItem("id");
+    console.log("asignando husped a cuenta maestra", id_huesped)
+    datos ={
+        "usuario_id":usuario_id,
+        "huesped":id_huesped,
+        "id_maestra":id_maestra,
+        "mov":mov,
+    }
+    $.ajax({
+        async:true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url:"includes/guardar_huesped_maestra.php",
+        data:datos,
+        beforeSend:loaderbar,
+        success:function(res){
+            console.log(res)
+          if(res=="SI"){
+            swal("Húesped asignado correctamente a cuenta maestra", "El húesped seleccionado se ha agregado correctamente a la cuenta maestra elegida", "success");
+            ver_cuenta_maestra()
+          }else{
+            swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
+          }
+        },
+    
+        timeout:5000,
+        error:problemas_sistema
+      });
+
+}
+
+// Modal para asignar huesped desde cuenta maestra
+function asignar_huesped_maestra(maestra=0,mov){
+ 
+    $("#mostrar_herramientas").load("includes/modal_asignar_huespedNew.php?maestra="+maestra+"&mov="+mov);
+}
+
 
 // Modal para asignar huesped en una reservacion nueva
 function asignar_huespedNew(funcion,precio_hospedaje,total_adulto,total_junior,total_infantil){
@@ -1545,6 +1603,7 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
 	$('#caja_herramientas').modal('hide');
 
 }
+
 
 
 // Aceptar asignar un huesped en una reservacion
@@ -3667,7 +3726,16 @@ function regresar_editar_usuario(){
 //* Edo. Cuenta *//
 
 // Muestra el estado de cuenta de una habitacion
-function estado_cuenta(hab_id,estado){
+function estado_cuenta_maestra(hab_id,estado,mov,id){
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/estado_cuenta_maestra.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&id="+id); 
+	$('#caja_herramientas').modal('hide');
+}
+
+// Muestra el estado de cuenta de una habitacion
+function estado_cuenta(hab_id,estado,mov=0){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
@@ -3676,12 +3744,12 @@ function estado_cuenta(hab_id,estado){
 }
 
 // Agregar un abono al cargo por habitacion //
-function agregar_abono(hab_id,estado,faltante){
-	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante);
+function agregar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
+	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante+"&mov="+mov+"&id_maestra="+id_maestra);
 }
 
 // Guardar un abono al cargo por habitacion
-function guardar_abono(hab_id,estado,faltante){
+function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
     /*alert(hab_id);
     alert(estado);
     alert(faltante);*/
@@ -3691,7 +3759,6 @@ function guardar_abono(hab_id,estado,faltante){
     var cargo= document.getElementById("cargo").value;
     var abono= document.getElementById("abono").value;
     
-
     if(descripcion.length >0 && forma_pago >0 && abono >0){
         $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -3703,6 +3770,8 @@ function guardar_abono(hab_id,estado,faltante){
               "cargo": cargo,
               "abono": abono,
               "usuario_id": usuario_id,
+              "mov":mov,
+              "id_maestra":id_maestra,
             };
         $.ajax({
               async:true,
@@ -3712,7 +3781,14 @@ function guardar_abono(hab_id,estado,faltante){
               url:"includes/guardar_abono.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_monto,
+              success:function(res){
+                
+                if(id_maestra==0){
+                    recibe_datos_monto(res)
+                }else{
+                    recibe_datos_monto_maestra(res)
+                }
+              },
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -3721,6 +3797,15 @@ function guardar_abono(hab_id,estado,faltante){
     }else{
         alert("Campos incompletos");
     }    
+}
+
+// Recibe los datos para efectuar agregar un monto
+function recibe_datos_monto_maestra(datos){
+    //alert(datos);
+    var res = datos.split("/");
+    $('#caja_herramientas').modal('hide');
+    
+    estado_cuenta_maestra(res[0] , res[1], res[2], res[3]);
 }
 
 // Recibe los datos para efectuar agregar un monto
@@ -4463,12 +4548,12 @@ function reporte_surtir_inventario(id){
 //* Restaurante *//
 
 // Agregar en el restaurante
-function agregar_restaurante(hab_id,estado,maestra=0){
+function agregar_restaurante(hab_id,estado,maestra=0,mov=0){
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado+"&maestra="+maestra);
+	$("#area_trabajo_menu").load("includes/agregar_restaurante.php?hab_id="+hab_id+"&estado="+estado+"&maestra="+maestra+"&mov="+mov);
     closeModal();
 	closeNav();
 }
@@ -4506,7 +4591,6 @@ function buscarCategoriaRestaurante(categoria,hab_id,estado,mov,mesa){
 // Mostrar productos de las categorias existentes en el inventario
 function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
 	var usuario_id=localStorage.getItem("id");
-
     var datos = {
 		"producto": producto,
         "categoria": categoria,
@@ -4536,16 +4620,16 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
 function recibe_datos_restaurante(datos){
     //alert(datos);
     var res = datos.split("/");
-    agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3]);
+    agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3], res[4]);
 }
 
 // Agregar en el restaurante
-function agregar_restaurante_cat(categoria,hab_id,estado,mesa){
+function agregar_restaurante_cat(categoria,hab_id,estado,mesa,mov){
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante_cat.php?hab_id="+hab_id+"&estado="+estado+"&categoria="+categoria+"&categoria="+categoria+"&mesa="+mesa);
+	$("#area_trabajo_menu").load("includes/agregar_restaurante_cat.php?hab_id="+hab_id+"&estado="+estado+"&categoria="+categoria+"&categoria="+categoria+"&mesa="+mesa+"&mov="+mov);
 	closeNav();
 }
 
@@ -4961,7 +5045,7 @@ function ver_cuenta_maestra(){
 }
 
 // Aplicar el cobro en pedido restaurante enviado a una hab
-function aplicar_rest_cobro_hab(total,hab_id,estado,mov){
+function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo=""){
     var usuario_id=localStorage.getItem("id");
 
     var datos = {
@@ -4970,6 +5054,7 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov){
         "estado": estado,
         "mov": mov,
         "usuario_id": usuario_id,
+        "motivo":motivo,
             };
             $.ajax({
                   async:true,

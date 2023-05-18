@@ -5,11 +5,25 @@
   $hab=NEW Hab(0);
   $categoria=NEW Categoria(0);
   $pedido_rest=NEW Pedido_rest(0);
+
+  
   if($_GET['hab_id'] == 0){
     $mov= 0;
   }else{
     $mov= $hab->mostrar_mov_hab($_GET['hab_id']);
   }
+  if(isset($_GET['mov'])){
+    if($_GET['mov']!=0){
+      $mov = $_GET['mov'];
+    }
+  }
+  $maestra=0;
+  if(isset($_GET['maestra'])){
+    if($_GET['maestra']!=0){
+      $maestra = $_GET['maestra'];
+    }
+  }
+  
   $mesa= 0;
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
@@ -60,7 +74,7 @@
 
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">
-              ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);
+              ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov,$maestra);
             echo '</div>
           </div><br>
         

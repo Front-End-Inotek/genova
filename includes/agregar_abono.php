@@ -4,6 +4,19 @@
   include_once("clase_hab.php");
   $forma_pago= NEW Forma_pago(0);
   $hab = NEW Hab($_GET['hab_id']);//$_GET['hab_estado'] es mov
+  $mov=0;
+  $id_maestra=0;
+  if(isset($_GET['mov'])){
+    if($_GET['mov']!=0){
+      $mov = $_GET['mov'];
+    }
+  }
+  if(isset($_GET['id_maestra'])){
+    if($_GET['id_maestra']!=0){
+      $id_maestra = $_GET['id_maestra'];
+    }
+  }
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -61,7 +74,7 @@
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['faltante'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['faltante'].','.$mov.','.$id_maestra.')"> Aceptar</button>
     </div>
   </div>';
 ?>
