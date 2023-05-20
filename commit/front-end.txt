@@ -12,4 +12,10 @@
 --se agrego estilos al background universales
 --se corrigio error de visualizacion en restaurante
 --se modifico y agrego apartado garantia con tarjeta
----
+----16/05
+--se agrego clase para poner informacion adicional por medio de un span
+--se ajustaron las tablas
+--se ajusto el contenedor principal 
+--se ajusto el contenido para fondos luminosos
+--se corrijio error visual en restaurante
+--se esta trabajando con una animacion de color dinamica
