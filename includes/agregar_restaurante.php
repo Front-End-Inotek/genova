@@ -17,10 +17,10 @@
       $mov = $_GET['mov'];
     }
   }
-  $maestra=0;
+  $id_maestra=0;
   if(isset($_GET['maestra'])){
     if($_GET['maestra']!=0){
-      $maestra = $_GET['maestra'];
+      $id_maestra = $_GET['maestra'];
     }
   }
   
@@ -40,7 +40,7 @@
             </div>
 
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
-              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
+              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
             echo '</div>
           </div><br>
 
@@ -68,13 +68,13 @@
                 </div>
                 <div class="col-sm-8"></div>
               </div>
-              ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
+              ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
             echo '</div>
           </div>
 
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">
-              ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov,$maestra);
+              ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov,$id_maestra);
             echo '</div>
           </div><br>
         

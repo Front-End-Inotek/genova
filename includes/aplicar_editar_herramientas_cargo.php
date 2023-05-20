@@ -13,5 +13,5 @@
   $cuenta->editar_cargo($_POST['id'],$_POST['cargo']);
   $logs->guardar_log($_POST['usuario_id'],"Editar cargo de habitacion: ". $nombre." en cuenta ". $_POST['id']);
   
-  echo $_POST['hab_id']."/".$_POST['estado'];
+  echo $_POST['hab_id']."/".$_POST['estado']."/".$_POST['mov']."/".$_POST['id_maestra'];
 ?>

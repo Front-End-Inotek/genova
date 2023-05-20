@@ -30,6 +30,20 @@ class CuentaMaestra extends ConexionMYSql{
 
     }
 
+    // Borrar un tipo habitacion
+    function borrar_cuenta_maestra($id){
+      $sentencia = "UPDATE `cuenta_maestra` SET
+      `estado` = '0'
+      WHERE `id` = '$id';";
+      $comentario="Poner estado de cuenta maestra como inactivo";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      if($consulta){
+        echo ("NO");
+      }else{
+        echo ("error en la consulta");
+      }
+    }
+
     function guardar_huesped_maestra($huesped, $maestra,$mov){
       //actualizamos el movimiento, para asignarle el huesped
       $update_movimiento = "UPDATE movimiento SET id_huesped='$huesped' WHERE id='$mov'"; 
@@ -126,7 +140,7 @@ class CuentaMaestra extends ConexionMYSql{
                   echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_tipo('.$fila['id_maestra'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
-                  echo '<td><button class="btn btn-danger" onclick="borrar_tipo(' . $fila['id_maestra'] . ', \'' . addslashes($fila['nombre']) . '\', \'' . addslashes($fila['codigo']) . '\')">Borrar</button></td>';
+                  echo '<td><button class="btn btn-danger" onclick="borrar_cuenta_maestra(' . $fila['id_maestra'] . ', \'' . addslashes($fila['nombre_maestra']) . '\', \'' . addslashes($fila['codigo']) . '\')">Borrar</button></td>';
                 }
                 echo '</tr>';
             }

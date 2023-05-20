@@ -97,7 +97,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                   </select>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="no-habitaciones">Número de habitaciones</label>
+                    <label for="no-habitaciones">No. de habitaciones</label>
                     <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew('.$hab_id.')">
                 </div>
                 <div class="form-group col-md-3">
@@ -157,7 +157,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             
 
             <h2>Datos Personales</h2>
-            <button class="btn btn-success btn-block"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
+            <button class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
             <input type="text" id="tomahuespedantes" hidden>
             <input type="text" id="estadotarjeta" hidden>
             <input type="text" id="nut" hidden>

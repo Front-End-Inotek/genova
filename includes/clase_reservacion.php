@@ -505,7 +505,7 @@ class Reservacion extends ConexionMYSql
             $cat_paginas++;
         }
         $ultimoid=0;
-
+        //Consulta para traer la información de habitaciones ocupadas, con fecha de salida dada por el usuario.
         $sentencia ="SELECT *,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
         FROM hab 
         LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
@@ -516,7 +516,7 @@ class Reservacion extends ConexionMYSql
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
         WHERE  reservacion.fecha_salida = '$inicio_dia' AND hab.estado_hab = 1 ORDER BY hab.id";
-        // echo $sentencia;
+        echo $sentencia;
         $comentario="Mostrar las reservaciones que llegan hoy";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
 
@@ -1064,7 +1064,9 @@ class Reservacion extends ConexionMYSql
                         echo '<td>'.$fila['descripcion'].'</td>';
                         echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Abierta</td>';
-                        if($agregar==1 && $fila['fecha_entrada'] == $inicio_dia && $fila['edo'] == 1) {
+                        // echo $fila['fecha_entrada'] . "/" . $inicio_dia;
+                        // die();
+                        if($agregar==1 && date('Y-m-d',$fila['fecha_entrada']) == date('Y-m-d',$inicio_dia) && $fila['edo'] == 1) {
                             echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
                         }else{
                             echo '<td></td>';

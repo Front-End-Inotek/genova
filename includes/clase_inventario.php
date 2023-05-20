@@ -571,28 +571,27 @@
         }
       }
       // Mostrar productos de las categorias existentes en el inventario
-      function mostrar_producto_restaurente($categoria,$hab_id,$estado,$mov,$mesa){
+      function mostrar_producto_restaurente($categoria,$hab_id,$estado,$mov,$mesa,$maestra=0){
         $sentencia = "SELECT * FROM inventario WHERE categoria = $categoria AND estado = 1 ORDER BY nombre";
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-
         echo '<div class="row">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
           {
             if($fila['id'] != -1){
               if($cunt%3==0){
-                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
                 echo $fila['nombre'];
                 echo'</button></div>';
                 $cunt=0;
               }elseif($cunt%2==0){
-                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
                 echo $fila['nombre'];
                 echo'</button></div>';
               }else{
-                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
                 echo $fila['nombre'];
                 echo'</button></div>';
               }
@@ -729,7 +728,7 @@
         return $cantidad;
       }
       // Mostrar los productos del pedido restaurente sin habitacion
-      function mostar_pedido($hab_id,$estado,$mov,$mesa){
+      function mostar_pedido($hab_id,$estado,$mov,$mesa,$id_maestra=0){
         $sentencia = "SELECT *,pedido_rest.id AS ID,pedido_rest.cantidad AS cant 
         FROM pedido_rest 
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pagado = 0 AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
@@ -765,8 +764,8 @@
                 <td>'.$fila['nombre'].'</td>
                 <td>$'.number_format($fila['precio'], 2).'</td>
                 <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
-                echo '<td><button class="btn btn-outline-warning btn-sm" href="#caja_herramientas" data-toggle="modal"  onclick="editar_modal_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$fila['cant'].')"> ✎</button></td>';
-                echo '<td><button class="btn btn-outline-danger btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🗑️</button></td>';
+                echo '<td><button class="btn btn-outline-warning btn-sm" href="#caja_herramientas" data-toggle="modal"  onclick="editar_modal_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$fila['cant'].','.$id_maestra.')"> ✎</button></td>';
+                echo '<td><button class="btn btn-outline-danger btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')"> 🗑️</button></td>';
                 echo '</tr>';
               }
             } 
@@ -807,8 +806,14 @@
               echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
               <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Habitación: '.$hab_nombre.'</div>';
             }else{
-              echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
-              <div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Cuenta Maestra: '.$cuenta_nombre.'</div>';
+
+              echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
+              if($id_maestra!=0){
+                echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir">Cuenta Maestra: '.$cuenta_nombre.'</div>';
+              }else{
+                echo '<div class="col-sm-3 fuente_menor_bolder margen_sup_pedir"></div>';
+              }
+             
             } 
             echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
             <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0)">Linea</button></></div>

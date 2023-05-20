@@ -1,5 +1,10 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  $id_maestra=0;
+  if(isset($_GET['id_maestra'])){
+    $id_maestra=$_GET['id_maestra'];
+  }
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -21,7 +26,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger btn" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success btn" onclick="modificar_producto_restaurante('.$_GET['producto'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].','.$_GET['mesa'].','.$_GET['cantidad'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success btn" onclick="modificar_producto_restaurante('.$_GET['producto'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].','.$_GET['mesa'].','.$_GET['cantidad'].','.$id_maestra.')"> Aceptar</button>
     </div>
   </div>';
 ?>

@@ -262,7 +262,7 @@ function guardar_cargo_adicional(id,mov){
     monto = $("#monto").val()
 
     console.log(nombre,monto)
-    aplicar_rest_cobro_hab(monto, 0,0,mov,nombre)
+    aplicar_rest_cobro_hab(monto, 0,0,mov,nombre,id)
 }
 
 //Agregar un cargo adicional.
@@ -650,6 +650,71 @@ function borrar_plan_alimentacion(id, nombre, codigo ){
     } else {
         swal("Se cancelo eliminar el plan de alimentación!", "Por favor verifique los datos antes de eliminarlos!", "success")
     }
+    });
+}
+
+function borrar_cuenta_maestra(id, nombre, codigo ){
+    let nombre_tipo = nombre;
+    let id_tipo = id;
+    let codigo_tipo = codigo;
+    let usuario_id=localStorage.getItem("id");
+
+    let datos = {
+        "id_tipo": id_tipo,
+        "usuario_id": usuario_id
+    };
+
+    let tabla = document.createElement("div");
+    tabla.innerHTML += `
+    <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
+        <tr>
+        <td>Id</td>
+        <td>Nombre Cuenta Maestra</td>
+        <td>Codigo</td>
+        </tr>
+        <tr>
+        <td>${id_tipo}</td>
+        <td>${nombre_tipo}</td>
+        <td>${codigo_tipo}</td>
+        </tr>
+    </table> <br>`;
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    swal({
+        title: "Antes de continuar por favor verifique los datos de la cuenta maestra a eliminar",
+        text: "Antes de continuar por favor verifique los datos de la cuenta maestra a eliminar ",
+        content: tabla,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+    xhttp.open("GET","includes/borrar_cuenta_maestra.php?id_tipo="+id_tipo+"&usuario_id="+usuario_id,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            // console.log(e.target.response);
+            // return 
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_cuenta_maestra()
+                swal("Se elimino la cuenta maestra!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Accion no realizada!", "Error de transferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
+                } else {
+        swal("Se cancelo eliminar la cuenta maestra!", "Por favor verifique los datos antes de eliminarlos!", "success")
+        }
     });
 }
 
@@ -3773,6 +3838,7 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
               "mov":mov,
               "id_maestra":id_maestra,
             };
+         
         $.ajax({
               async:true,
               type: "POST",
@@ -3817,17 +3883,19 @@ function recibe_datos_monto(datos){
 }
 
 // Modal de herramientas de cargos en estado de cuenta
-function herramientas_cargos(id,hab_id,estado,usuario,cargo){
-    $("#mostrar_herramientas").load("includes/modal_herramientas_cargos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&cargo="+cargo);
+function herramientas_cargos(id,hab_id,estado,usuario,cargo,id_maestra=0,mov=0){
+   
+    $("#mostrar_herramientas").load("includes/modal_herramientas_cargos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&cargo="+cargo+"&id_maestra="+id_maestra+"&mov="+mov);
 }
 
 // Modal de editar cargo en estado de cuenta
-function editar_herramientas_cargo(id,hab_id,estado,cargo){
-    $("#mostrar_herramientas").load("includes/modal_editar_herramientas_cargo.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
+function editar_herramientas_cargo(id,hab_id,estado,cargo,id_maestra=0,mov=0){
+    
+    $("#mostrar_herramientas").load("includes/modal_editar_herramientas_cargo.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo+"&id_maestra="+id_maestra+"&mov="+mov);
 }
 
 // Editar un cargo en estado de cuenta
-function modificar_herramientas_cargo(id,hab_id,estado){
+function modificar_herramientas_cargo(id,hab_id,estado,id_maestra=0,mov=0){
 	var usuario_id=localStorage.getItem("id");
     var cargo= document.getElementById("cargo").value;
 
@@ -3840,7 +3908,11 @@ function modificar_herramientas_cargo(id,hab_id,estado){
               "estado": estado,
 			  "cargo": cargo,
               "usuario_id": usuario_id,
+              "id_maestra": id_maestra,
+              "mov":mov,
             };
+        // console.log(datos)
+        // return
         $.ajax({
               async:true,
               type: "POST",
@@ -3849,7 +3921,13 @@ function modificar_herramientas_cargo(id,hab_id,estado){
               url:"includes/aplicar_editar_herramientas_cargo.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_monto,
+              success:function(res){
+                if(id_maestra==0){
+                    recibe_datos_monto(res)
+                }else{
+                    recibe_datos_monto_maestra(res)
+                }
+              },
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -3861,12 +3939,12 @@ function modificar_herramientas_cargo(id,hab_id,estado){
 }
 
 // Modal de borrar cargo en estado de cuenta
-function aceptar_borrar_herramientas_cargo(id,hab_id,estado,cargo){
-    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_cargo.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
+function aceptar_borrar_herramientas_cargo(id,hab_id,estado,cargo,id_maestra,mov){
+    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_cargo.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo+"&id_maestra="+id_maestra+"&mov="+mov);
 }
 
 // Borrar un cargo en estado de cuenta
-function borrar_herramientas_cargo(id,hab_id,estado){
+function borrar_herramientas_cargo(id,hab_id,estado,id_maestra,mov){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
 
@@ -3876,7 +3954,10 @@ function borrar_herramientas_cargo(id,hab_id,estado){
               "hab_id": hab_id,
               "estado": estado,
               "usuario_id": usuario_id,
+              "id_maestra":id_maestra,
+              "mov":mov
             };
+       
         $.ajax({
               async:true,
               type: "POST",
@@ -3885,7 +3966,13 @@ function borrar_herramientas_cargo(id,hab_id,estado){
               url:"includes/borrar_herramientas_cargo.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_monto,
+              success:function(res){
+                if(id_maestra==0){
+                    recibe_datos_monto(res)
+                }else{
+                    recibe_datos_monto_maestra(res)
+                }
+              },
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -3897,17 +3984,17 @@ function borrar_herramientas_cargo(id,hab_id,estado){
 }
 
 // Modal de herramientas de abonos en estado de cuenta
-function herramientas_abonos(id,hab_id,estado,usuario,abono){
-    $("#mostrar_herramientas").load("includes/modal_herramientas_abonos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&abono="+abono);
+function herramientas_abonos(id,hab_id,estado,usuario,abono,id_maestra=0,mov=0){
+    $("#mostrar_herramientas").load("includes/modal_herramientas_abonos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&abono="+abono+"&mov="+mov+"&id_maestra="+id_maestra);
 }
 
 // Modal de editar abono en estado de cuenta
-function editar_herramientas_abono(id,hab_id,estado,abono){
-    $("#mostrar_herramientas").load("includes/modal_editar_herramientas_abono.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono);
+function editar_herramientas_abono(id,hab_id,estado,abono,id_maestra=0,mov=0){
+    $("#mostrar_herramientas").load("includes/modal_editar_herramientas_abono.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono+"&mov="+mov+"&id_maestra="+id_maestra);
 }
 
 // Editar un abono en estado de cuenta
-function modificar_herramientas_abono(id,hab_id,estado){
+function modificar_herramientas_abono(id,hab_id,estado,id_maestra=0,mov=0){
 	var usuario_id=localStorage.getItem("id");
     var abono= document.getElementById("abono").value;
 
@@ -3920,7 +4007,10 @@ function modificar_herramientas_abono(id,hab_id,estado){
               "estado": estado,
 			  "abono": abono,
               "usuario_id": usuario_id,
+              "id_maestra":id_maestra,
+              "mov":mov,
             };
+       
         $.ajax({
               async:true,
               type: "POST",
@@ -3929,7 +4019,13 @@ function modificar_herramientas_abono(id,hab_id,estado){
               url:"includes/aplicar_editar_herramientas_abono.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_monto,
+              success:function(res){
+                if(id_maestra==0){
+                    recibe_datos_monto(res)
+                }else{
+                    recibe_datos_monto_maestra(res)
+                }
+              },
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -3941,12 +4037,12 @@ function modificar_herramientas_abono(id,hab_id,estado){
 }
 
 // Modal de borrar abono en estado de cuenta
-function aceptar_borrar_herramientas_abono(id,hab_id,estado,abono){
-    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_abono.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono);
+function aceptar_borrar_herramientas_abono(id,hab_id,estado,abono,mov=0,id_maestra=0){
+    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_abono.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono+"&mov="+mov+"&id_maestra="+id_maestra);
 }
 
 // Borrar un abono en estado de cuenta
-function borrar_herramientas_abono(id,hab_id,estado){
+function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
 
@@ -3956,6 +4052,8 @@ function borrar_herramientas_abono(id,hab_id,estado){
               "hab_id": hab_id,
               "estado": estado,
               "usuario_id": usuario_id,
+              "mov":mov,
+              "id_maestra":id_maestra,
             };
         $.ajax({
               async:true,
@@ -3965,7 +4063,13 @@ function borrar_herramientas_abono(id,hab_id,estado){
               url:"includes/borrar_herramientas_abono.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:recibe_datos_monto,
+              success:function(res){
+                if(id_maestra==0){
+                    recibe_datos_monto(res)
+                }else{
+                    recibe_datos_monto_maestra(res)
+                }
+              },
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -4579,8 +4683,9 @@ function agregar_restaurante_mesa(mesa_id,estado){
 }
 
 // Mostrar categorias existentes en el inventario
-function buscar_categoria_restaurente(categoria,hab_id,estado,mov,mesa){
-	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa);
+function buscar_categoria_restaurente(categoria,hab_id,estado,mov,mesa,maestra=0){
+    
+	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa+"&maestra="+maestra);
 }
 
 function buscarCategoriaRestaurante(categoria,hab_id,estado,mov,mesa){
@@ -4589,7 +4694,7 @@ function buscarCategoriaRestaurante(categoria,hab_id,estado,mov,mesa){
 
 
 // Mostrar productos de las categorias existentes en el inventario
-function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
+function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa,maestra=0){
 	var usuario_id=localStorage.getItem("id");
     var datos = {
 		"producto": producto,
@@ -4599,6 +4704,7 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
         "mov": mov,
         "mesa": mesa,
 		"usuario_id": usuario_id,
+        "id_maestra":maestra,
 		};
         $.ajax({
             async:true,
@@ -4620,16 +4726,18 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa){
 function recibe_datos_restaurante(datos){
     //alert(datos);
     var res = datos.split("/");
-    agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3], res[4]);
+   console.log(res[5]);
+    agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3], res[4], res[5]);
 }
 
 // Agregar en el restaurante
-function agregar_restaurante_cat(categoria,hab_id,estado,mesa,mov){
+function agregar_restaurante_cat(categoria,hab_id,estado,mesa,mov,maestra){
+    console.log(maestra)
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_restaurante_cat.php?hab_id="+hab_id+"&estado="+estado+"&categoria="+categoria+"&categoria="+categoria+"&mesa="+mesa+"&mov="+mov);
+	$("#area_trabajo_menu").load("includes/agregar_restaurante_cat.php?hab_id="+hab_id+"&estado="+estado+"&categoria="+categoria+"&categoria="+categoria+"&mesa="+mesa+"&mov="+mov+"&id_maestra="+maestra);
 	closeNav();
 }
 
@@ -4645,12 +4753,12 @@ function buscar_producto_restaurante(hab_id,estado,mov,mesa){
 }
 
 // Modal de editar producto del pedido del restaurante
-function editar_modal_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad){
-    $("#mostrar_herramientas").load("includes/editar_modal_producto_restaurante.php?producto="+producto+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa+"&cantidad="+cantidad);
+function editar_modal_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad,id_maestra){
+    $("#mostrar_herramientas").load("includes/editar_modal_producto_restaurante.php?producto="+producto+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa+"&cantidad="+cantidad+"&id_maestra="+id_maestra);
 }
 
 // Editar producto del pedido del restaurante
-function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad_antes){
+function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad_antes,id_maestra=0){
 	var usuario_id=localStorage.getItem("id");
     var categoria= 0;
     var cantidad= document.getElementById("cantidad").value;
@@ -4667,6 +4775,7 @@ function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad
             "cantidad": cantidad,
             "cantidad_antes": cantidad_antes,
             "usuario_id": usuario_id,
+            "id_maestra":id_maestra
             };
         $.ajax({
             async:true,
@@ -4688,10 +4797,12 @@ function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad
 }
 
 // Borrar un producto del pedido del restaurante
-function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa){
+function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa,id_maestra=0){
     var usuario_id=localStorage.getItem("id");
     var categoria= 0;
 
+    console.log(id_maestra);
+    
     var datos = {
 		"producto": producto,
         "categoria": categoria,
@@ -4700,6 +4811,7 @@ function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa){
         "mov": mov,
         "mesa": mesa,
 		"usuario_id": usuario_id,
+        "id_maestra":id_maestra,
 		};
 	$.ajax({
 		async:true,
@@ -5045,7 +5157,7 @@ function ver_cuenta_maestra(){
 }
 
 // Aplicar el cobro en pedido restaurante enviado a una hab
-function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo=""){
+function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
     var usuario_id=localStorage.getItem("id");
 
     var datos = {
@@ -5055,21 +5167,22 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo=""){
         "mov": mov,
         "usuario_id": usuario_id,
         "motivo":motivo,
-            };
-            $.ajax({
-                  async:true,
-                  type: "POST",
-                  dataType: "html",
-                  contentType: "application/x-www-form-urlencoded",
-                  url:"includes/aplicar_rest_cobro_hab.php",
-                  data:datos,
-                  beforeSend:loaderbar,
-                  success:principal,
-                  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
-                });
-                return false;
+        "id_maestra":id_maestra,
+    };
+    $.ajax({
+        async:true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url:"includes/aplicar_rest_cobro_hab.php",
+        data:datos,
+        beforeSend:loaderbar,
+        success:principal,
+        //success:problemas_sistema,
+        timeout:5000,
+        error:problemas_sistema
+    });
+    return false;
 }
 
 // Aplicar el cobro en pedido restaurante
@@ -5789,7 +5902,8 @@ function ver_reportes_salidas(){
     var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()
     if(inicial==undefined){
-        inicial="";ver_reportes_salidas
+        inicial="";
+        //ver_reportes_salidas
     }
 
 	$('#area_trabajo').hide();

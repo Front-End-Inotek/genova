@@ -63,8 +63,8 @@
       
 
         <div class="row">
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$total_cargos= $cuenta->mostrar_cargos($mov,0,$_GET['hab_id'],$_GET['estado']);echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,0,$_GET['hab_id'],$_GET['estado']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$total_cargos= $cuenta->mostrar_cargos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id']);echo '</div>
         </div>'; 
 
         $total_faltante= $total_abonos - $total_cargos;
@@ -82,7 +82,7 @@
           }else{*/
           
             echo '<div class="col-sm-4"></div>';
-            echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
+            // echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
             echo '<div class="col-sm-4"></div>';
             echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.','.$mov.','.$_GET['id'].')"> Abonar</button></div>';
           //}

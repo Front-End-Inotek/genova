@@ -28,7 +28,7 @@
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="modificar_herramientas_cargo('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="modificar_herramientas_cargo('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['id_maestra'].','.$_GET['mov'].')"> Aceptar</button>
     </div>
   </div>';
 ?>
