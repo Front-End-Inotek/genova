@@ -26,10 +26,17 @@
     }
   }
  
- 
-  $id_movimiento= $movimiento->disponible_asignar($_POST['id_reservacion'],$_POST['hab_id'],$reservacion->id_huesped,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->tarifa);
-  $mov_actual= $movimiento->ultima_insercion();
-  $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
+  //proceso para asignar reservacion a hab si es 'preasignada'
+  if(isset($_POST['movimiento'])){
+    $mov_actual= $_POST['movimiento'];
+    $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
+   
+  }else{
+    $id_movimiento= $movimiento->disponible_asignar($_POST['id_reservacion'],$_POST['hab_id'],$reservacion->id_huesped,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->tarifa);
+    $mov_actual= $movimiento->ultima_insercion();
+    $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
+  }
+
   $reservacion->modificar_estado($_POST['id_reservacion'],2); 
   $id_cuenta= $cuenta->reservacion_cuenta($_POST['usuario_id'],$mov_actual,$reservacion->forma_pago,$reservacion->total_suplementos,$reservacion->total_pago);
   $reservacion->modificar_id_cuenta($_POST['id_reservacion'],$id_cuenta);

@@ -630,6 +630,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
   width: 30px !important;
   height: 30px !important;
   font-size: 18px;
+  background: linear-gradient(180deg, #d6d6d6 0%, #fefefe 50%, #b3b4c3 100%);
   color: red;
   border-radius: 5px;
   border: 1px solid #3f51b5 !important;
@@ -728,36 +729,32 @@ body.modo-nocturno .containerRackOp .btn:focus {
   background-color: #77a5ad !important;
   border-top-right-radius: 15px !important;
   border-bottom-left-radius: 15px !important;
-  border-left: 7px solid #4795a3 !important;
+  border: 1px solid #4795a3 !important;
   border: 1px solid #26565f;
 }
 
 .terminar:hover {
   background-color: #83b4bd !important;
   border: 1px solid #26565f;
-  border-right: 7px solid #4795a3 !important;
-  border-left: 0px solid !important;
 }
 
 .cambiar_usuario {
   background: #614739 !important;
-  border-left: 7px solid #3c2c23;
+  border: 1px solid #3c2c23;
 }
 
 .cambiar_usuario:hover {
   background: #805e4d !important;
   border: 1px solid #553e32;
-  border-right: 7px solid #3c2c23;
 }
 
 .desocupar{
   border: 1px solid #676767 !important;
-  border-left: 7px solid #818181 !important;
+  border: 1px solid #818181 !important;
 
 }
 .desocupar:hover{
   border: 1px solid #676767 !important;
-  border-right: 7px solid #676767 !important;
   background-color: #cccccc !important;
   color: #333;
 
@@ -765,67 +762,63 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .sucia{
   border:1px solid #9cb887;
-  border-left: 7px solid #A4BC92 !important;
   background-color: #DDFFBB !important;
+  background: linear-gradient(145deg, #b8df91 0%, #ecffda 50%, #96bc71 100%);
   color: #0e2804 !important;
 }
 
 .sucia:hover{
-  border-right: 7px solid #A4BC92 !important;
   border-left: 0px !important;
   background-color: #d2fea6 !important;
 }
 
 .restaurante{
   background-color: #c08a58 !important;
-  color: #fff !important;
+  background: linear-gradient(145deg, #c08a58 0%, #f8ca9f 50%, #a26832 100%);
+  color: #2c1a07 !important;
   border: 1px solid #634120;
-  border-left: 7px solid #634120;
 }
 
 .restaurante:hover{
     background-color: #c4874e !important;
     color: #fff !important;
     border: 1px solid #4b3832;
-    border-right: 7px solid #715336;
 
 }
 
 .edo_cuenta{
   background-color: #064420 !important;
+  background: linear-gradient(145deg, #064420 0%, #2d804f 50%, #011c0c 100%);
   color: #E4EFE7 !important;
   border: 1px solid #3d815b !important;
-  border-left: 7px solid #3d815b !important;
 }
 
 .edo_cuenta:hover{
   background-color: #0a612e !important;
   border: 1px solid #3d815b !important;
-  border-right: 7px solid #3d815b !important;
 }
 
 .select_reca{
-  background-color: #8f91ee !important;
+  background-color: #8f91ee ;
+  background: linear-gradient(145deg, #8f91ee 0%, #acaefc 50%, #5d5fc5 100%);
   color: #fff !important;
   border: 1px solid #393ca2 !important;
-  border-left: 7px solid #393ca2 !important;
 }
 
 .select_reca:hover{
   background-color: #7f81f1 !important;
-  border-right: 7px solid #393ca2 !important;
 }
 
 .btn-square-lg {
-  border-top-right-radius: 15px !important;
-  border-bottom-left-radius: 15px !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
   transition: 0.3s ease-out;
 }
 
 .btn-square-lg:hover {
   box-shadow: 0 10px 14px #292929dd;
-  border-top-left-radius: 15px !important;
-  border-bottom-right-radius: 15px !important;
+  border-top-left-radius: 3px !important;
+  border-bottom-right-radius: 3px !important;
   border-top-right-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
   border-left: 0px;
@@ -874,6 +867,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 .cardFooter {
   /* background-color: #1b1d5d;*/
   background-color: #3f51b5;
+  background: linear-gradient(180deg, #2d32ae 0%, #4e4ef0 50%, #171a6e 100%);
   color: #fff;
 }
 

@@ -195,7 +195,7 @@ class RackHabitacional extends ConexionMYSql
             FROM movimiento
             left join reservacion on movimiento.id_reservacion = reservacion.id
             LEFT JOIN hab on movimiento.id_hab = hab.id
-            where reservacion.estado =2
+            where reservacion.estado =1
             and movimiento.motivo='preasignar'
             and movimiento.id_hab=$hab
             order by reservacion.fecha_entrada asc;
@@ -223,7 +223,7 @@ class RackHabitacional extends ConexionMYSql
 
                     if ($i == 2 && $fila['estado'] != 1 ) {
                         echo '
-                        <td class="celdaCompleta tdCheck " >
+                        <td class="celdaCompleta tdCheck " title="nombre huesped">
                             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                                 <div >
                         ';
@@ -477,9 +477,16 @@ class RackHabitacional extends ConexionMYSql
                             echo'
                     <td class="celdaCompleta ">
                         <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
+                            <div class="medioDia">
                             <section class="task task--disponible-limpia" >
                                 <a> '. $estado . '<br></a>
                             </section>
+                            </div>
+                            <div class="medioDia">
+                            <section class="task task--disponible-limpia" >
+                                <a> '. $estado . '<br></a>
+                            </section>
+                            </div>
                         </div>
                     </td>
                     ';

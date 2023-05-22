@@ -1,0 +1,9 @@
+--12/05
+---Se retiro el degradado a las tablas y se agrego un color solido
+---Se cambio el fondo y diseño a todos los contenedores universales
+---Se cambiaron colores de botones
+---se cambio modales tanto la distribucion como colores
+---se soluciono hitbox al dar click a sub items del nav y cambio de color para mayor visibilidad
+---se ajustaron los footer de los modales
+---se esta trabajando en el fondo para los contenedores 
+---se ajusto los label y seccion de reservaciones

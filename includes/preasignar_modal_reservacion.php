@@ -29,7 +29,7 @@
     
     <div class="modal-footer" id="boton_cancelar_reservacion">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button id="boton_cancelar_reservacion" type="button" class="btn btn-success" onclick="guardar_preasignar_reservacion('.$_GET['id'].')"> Aceptar</button>
+      <button id="boton_cancelar_reservacion" type="button" class="btn btn-success" onclick="guardar_preasignar_reservacion('.$_GET['id'].','.$_GET['opcion'].')"> Aceptar</button>
     </div>
   </div>';
 ?>

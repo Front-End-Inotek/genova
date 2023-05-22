@@ -61,7 +61,7 @@
         WHERE estado = 1 ORDER BY id";// nombre
         $comentario="Mostrar los tipos de habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-
+        echo '<option value="">Seleccionar</option>';
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';

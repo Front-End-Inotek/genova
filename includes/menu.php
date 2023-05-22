@@ -27,36 +27,19 @@
 			</div>
 			</div>';
 
-		$permisos_habitaciones=$usuario->tipo_ver+$usuario->tipo_agregar+$usuario->tarifa_ver+$usuario->tarifa_agregar+$usuario->hab_ver+$usuario->hab_agregar;
-		if($permisos_habitaciones>0){
-				echo '
-				<li id="#" onclick="sub_menu();" class="nav-link">
-				<i class="bx bx-bed"></i>
-				<span class="mx-2 habitaciones">Habitaciones</span>
-				<ul id="habitaciones_submenu" class="submenu ocultar">
-				';
-
-			$permisos_tipo=$usuario->tipo_ver+$usuario->tipo_agregar;
-			if($permisos_tipo>0){
-				echo '
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tipos();">Ver tipos de habitación</a></i></ul>';
-			}
-
-			$permisos_tarifa=$usuario->tarifa_ver+$usuario->tarifa_agregar;
-			if($permisos_tarifa>0){
-				echo '
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tarifas()"> Ver tipos de tarifa</a></i></ul>';
-			}
-
-			$permisos_hab=$usuario->hab_ver+$usuario->hab_agregar;
-			if($permisos_hab>0){
-				echo '
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones</a></i></ul>';
-			}
-		}
 			echo '
+			<li href="#" onclick="sub_menu()" class="nav-link">
+			<i class="bx bx-desktop"></i>
+			<span class="mx-2">Recepcion</span>
+			<ul id="reportes_submenu" class="submenu">
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Check In </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Cuenta Maestra </a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cargo_noche()">Reporte Diarios </a></i></ul>';
+		
+		echo'
 			</ul>
-		</li>';
+			</li>';
 
 
 		$permisos_reservaciones=$usuario->reservacion_ver+$usuario->reservacion_agregar+$usuario->huesped_ver+$usuario->huesped_agregar;
@@ -69,6 +52,14 @@
 
 			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
 			if($permisos_reservar>0){
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_reservaciones()"> Nueva Reservacion </a></i></ul>';
+			}
+
+			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
+			if($permisos_reservar>0){
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>';
 				echo '
 					<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_reservaciones()"> Agregar reservaciones </a></i></ul>
 				';
@@ -83,12 +74,28 @@
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
 
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_llegadas()">Reporte de llegadas</a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
 			
 			}
 		}
 			echo'
 			</ul>
 		</li>';
+
+		echo '
+			<li href="#" onclick="sub_menu()" class="nav-link">
+			<i class="bx bxs-arrow-to-right"></i>
+			<span class="mx-2">Llegadas y Salidas</span>
+			<ul id="reportes_submenu" class="submenu">
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Probables </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Efectivas </a></i></ul>';
+		
+		echo'
+			</ul>
+			</li>';
 
 
 		$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
@@ -115,12 +122,79 @@
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Corte </a></i></ul>';
 			}
+			
 		}
 		echo'
 			</ul>
 		</li>';
 
 
+
+		
+
+
+		$permisos_restaurantes=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->restaurante_ver+$usuario->restaurante_agregar;
+		if($permisos_restaurantes>0){
+		echo '
+		<li href="#" onclick="sub_menu()" class="nav-link">
+			<i class="bx bx-user-check"></i>
+			<span class="mx-2">Restaurante</span>
+			<ul id="restaurante_submenu" class="submenu">';
+
+			$permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->categoria_ver;
+			if($permisos_inventario>0){
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_inventario()"> Inventario </a></i></ul>';
+			}
+
+			$permisos_surtir=$usuario->inventario_surtir;
+			if($permisos_surtir>0){
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="surtir_inventario()"> Surtir </a></i></ul>';
+			}
+			$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
+			if($permisos_restaurante>0){
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
+			}
+		}
+			echo '
+			</ul>
+		</li>';
+
+
+		$permisos_habitaciones=$usuario->tipo_ver+$usuario->tipo_agregar+$usuario->tarifa_ver+$usuario->tarifa_agregar+$usuario->hab_ver+$usuario->hab_agregar;
+		if($permisos_habitaciones>0){
+				echo '
+				<li id="#" onclick="sub_menu();" class="nav-link">
+				<i class="bx bx-bed"></i>
+				<span class="mx-2 habitaciones">Configuracion Hab.</span>
+				<ul id="habitaciones_submenu" class="submenu ocultar">
+				';
+
+			$permisos_tipo=$usuario->tipo_ver+$usuario->tipo_agregar;
+			if($permisos_tipo>0){
+				echo '
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tipos();">Ver tipos de habitación</a></i></ul>';
+			}
+
+			$permisos_tarifa=$usuario->tarifa_ver+$usuario->tarifa_agregar;
+			if($permisos_tarifa>0){
+				echo '
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tarifas()"> Ver tipos de tarifa</a></i></ul>';
+			}
+
+			$permisos_hab=$usuario->hab_ver+$usuario->hab_agregar;
+			if($permisos_hab>0){
+				echo '
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones</a></i></ul>';
+			}
+		}
+			echo '
+			</ul>
+		</li>';
+
+		
 		$permisos_herramientas=$usuario->usuario_ver+$usuario->usuario_agregar+$usuario->logs_ver+$usuario->forma_pago_ver+$usuario->forma_pago_agregar+$usuario->cupon_ver+$usuario->cupon_agregar;
 		if($permisos_herramientas>0){
 		  echo '
@@ -171,37 +245,6 @@
 			</ul>
 		</li>';
 
-
-
-		$permisos_restaurantes=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->restaurante_ver+$usuario->restaurante_agregar;
-		if($permisos_restaurantes>0){
-		echo '
-		<li href="#" onclick="sub_menu()" class="nav-link">
-			<i class="bx bx-user-check"></i>
-			<span class="mx-2">Restaurante</span>
-			<ul id="restaurante_submenu" class="submenu">';
-
-			$permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->categoria_ver;
-			if($permisos_inventario>0){
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_inventario()"> Inventario </a></i></ul>';
-			}
-
-			$permisos_surtir=$usuario->inventario_surtir;
-			if($permisos_surtir>0){
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="surtir_inventario()"> Surtir </a></i></ul>';
-			}
-			$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
-			if($permisos_restaurante>0){
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
-			}
-		}
-			echo '
-			</ul>
-		</li>';
-
 		/*<li href="" onclick="ver_rack_habitacional()" class="nav-link">
 			<i class="bx bxs-user" ></i>
 			<span class="mx-2">Rack Habitacional</span>
@@ -209,11 +252,10 @@
 
 		echo '
 		
-		<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();">
-		<i class="bx bxs-user mx-2" ></i>
-		<a class="subitem" onclick="vista_desarrollo(0,0)"> Desarrollo </a>
-	
-		</ul>
+		<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
+			<i class="bx bxs-user mx-2" ></i>
+			<span onclick="vista_desarrollo(0,0)"> Desarrollo </span>
+		</li>
 
 
 
