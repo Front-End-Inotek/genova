@@ -55,6 +55,7 @@
 
           </head>
     <body class="context" id="animacion" onload="sabernosession()">
+        
       <ul class="circles">
               <li></li>
               <li></li>
@@ -94,6 +95,8 @@
 
                 </div>
               </div>
+              </div>
+    </div>
     </body>
   ';
 

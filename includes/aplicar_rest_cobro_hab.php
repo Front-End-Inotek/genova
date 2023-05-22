@@ -69,15 +69,26 @@
 
   // Se editan estados y se imprime
   $pagado= 3;// Se cambia a 3 que indica que el estado pagado paso a deuda en habitacion
-  $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-  $pedido->cambiar_estado_pedido_hab($_POST['hab'],$_POST['mov']);
-  $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
-  
+  //el estado del pedido solo se cambia cuando no es de cuenta maestra
+
+  if($_POST['id_maestra']==0){
+    $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
+    $pedido->cambiar_estado_pedido_hab($_POST['hab'],$_POST['mov']);
+    $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
+  }
   // Guardar el cargo total del restaurante de la habitacion
+  //El cargo adicional debe asignar a la descripción el nombre del cargo adicional.
+
+
   $descripcion= 'Restaurante';
+  if(isset($_POST['motivo'])){
+    if($_POST['motivo']!=""){
+      $descripcion=$_POST['motivo'];
+    }
+  }
   $cargo= $_POST['total'];
   $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);
-  
+
   // Imprimir ticket y cambiar estado a pagado
   $ticket->cambiar_estado_especifico($ticket_id,1);
   if($confi->ticket_restaurante == 0){

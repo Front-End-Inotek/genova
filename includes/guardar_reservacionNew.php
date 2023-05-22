@@ -27,6 +27,9 @@
   $cantidad_cupon= 0;
   $id_movimiento= 0;
 
+
+
+
   //Revisar la existencia de un cupon de descuento
   // Checar si codigo descuento esta vacio o no
   if (empty($_POST['codigo_descuento'])){
@@ -72,11 +75,13 @@
   }
   $motivo = empty($_POST['hab_id']) ? "reservar" : "preasignar";
  
+  $sobrevender = isset($_POST['sobrevender']) ? $_POST['sobrevender'] : "";
 
-  
+
+
   //if($_POST['hab_id'] != 0){
-    $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa'],$motivo);
-    $mov_actual= $movimiento->ultima_insercion();
+  $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa'],$motivo);
+  $mov_actual= $movimiento->ultima_insercion();
 //   if($_POST['hab_id'] != 0){
 //     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
 //     $logs->guardar_log($_POST['usuario_id'],"Check-in en habitacion: ". $hab->nombre);
@@ -94,7 +99,7 @@
   $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
   urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
   $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$_POST['total_pago'],$_POST['hab_id'],
-  $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion);
+  $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender);
 
 
   //si hay hab_id 
@@ -144,6 +149,12 @@
     $logs->guardar_log($_POST['usuario_id'],"Agregar primer abono a la habitacion: ". $nombre);
     $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
     // Cupon, extra_persona, suplementos, hab_tipo
+
+    //todo salió bien en teoría, retornar el id de la reservacion creada.
+    //echo $id_reservacion;
+    
   }
+  echo $id_reservacion;
+
 ?>
 

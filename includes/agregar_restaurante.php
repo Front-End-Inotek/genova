@@ -5,11 +5,25 @@
   $hab=NEW Hab(0);
   $categoria=NEW Categoria(0);
   $pedido_rest=NEW Pedido_rest(0);
+
+  
   if($_GET['hab_id'] == 0){
     $mov= 0;
   }else{
     $mov= $hab->mostrar_mov_hab($_GET['hab_id']);
   }
+  if(isset($_GET['mov'])){
+    if($_GET['mov']!=0){
+      $mov = $_GET['mov'];
+    }
+  }
+  $id_maestra=0;
+  if(isset($_GET['maestra'])){
+    if($_GET['maestra']!=0){
+      $id_maestra = $_GET['maestra'];
+    }
+  }
+  
   $mesa= 0;
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
@@ -26,7 +40,7 @@
             </div>
 
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
-              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
+              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
             echo '</div>
           </div><br>
 
@@ -34,7 +48,6 @@
             <div class="card-header alinear_centro">
               <h5>Productos</h5>
             </div>
-
             <div class="card-body altura-rest_productos" id="caja_mostrar_busqueda">
             </div>
           </div><br>
@@ -54,13 +67,13 @@
                 </div>
                 <div class="col-sm-8"></div>
               </div>
-              ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa);
+              ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
             echo '</div>
           </div>
 
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">
-              ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);
+              ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov,$id_maestra);
             echo '</div>
           </div><br>
         

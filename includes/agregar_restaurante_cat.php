@@ -8,6 +8,7 @@
   $inventario=NEW Inventario(0);
   $categoria=NEW Categoria(0);
   $pedido_rest=NEW Pedido_rest(0);
+  $id_maestra=0;
   if($_GET['mesa'] == 0){
     if($_GET['hab_id'] == 0){
       $mov= 0;
@@ -21,12 +22,21 @@
       $mov= $mesa->saber_mov($_GET['hab_id']);
     }
   }
+  if(isset($_GET['mov'])){
+    if($_GET['mov']!=0){
+      $mov = $_GET['mov'];
+    }
+  }
+  if(isset($_GET['id_maestra'])){
+    $id_maestra=$_GET['id_maestra'];
+  }
+  // echo $id_maestra;
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '
   <div class="modal-content alinear_centro">
     <h5>Agregar Restaurante</h5>
-    <div class="col-sm-12 fondo_rest" style="background-color:white;"><br>  
+    <div class="col-sm-12 fondo_rest" style="backdrop-filter: blur(15px); background-color: #ede4ffc5;"><br>  
 
       <div class="row">
         <div class="col-sm-6" style="background-color:white;">
@@ -36,7 +46,7 @@
             </div>
 
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
-              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa']);
+              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa'],$id_maestra);
             echo '</div>
           </div><br>
 
@@ -47,7 +57,7 @@
 
             <div class="card-body altura-rest_productos" id="caja_mostrar_busqueda">
               ';if($_GET['categoria'] != 0){
-                $inventario->mostrar_producto_restaurente($_GET['categoria'],$_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa']);
+                $inventario->mostrar_producto_restaurente($_GET['categoria'],$_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa'],$id_maestra);
               }
             echo '</div>
           </div><br>
@@ -63,19 +73,19 @@
             <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">
               <div class="row">
                 <div class="col-sm-4">
-                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.','.$_GET['mesa'].')" id="a_buscar" class="form-control color_black">
+                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.','.$_GET['mesa'].','.$id_maestra.')" id="a_buscar" class="form-control color_black">
                 </div>
               </div>
-              ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa']);
+              ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa'],$id_maestra);
             echo '</div>
           </div>
 
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">';
               if($_GET['mesa'] == 0){
-                $pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov);
+                $pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov,$id_maestra);
               }else{
-                $pedido_rest->mostar_pedido_funciones_mesa($_GET['hab_id'],$_GET['estado'],$mov);
+                $pedido_rest->mostar_pedido_funciones_mesa($_GET['hab_id'],$_GET['estado'],$mov,$id_maestra);
               } 
             echo '</div>
           </div><br>

@@ -32,10 +32,14 @@
 			<i class="bx bx-desktop"></i>
 			<span class="mx-2">Recepcion</span>
 			<ul id="reportes_submenu" class="submenu">
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Check In </a></i></ul>
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Cuenta Maestra </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="disponible_asignar(0,0)"> Check In </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cuenta_maestra()"> Cuenta Maestra </a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cargo_noche()">Reporte Diarios </a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_llegadas()">Reporte de llegadas</a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
 		
 		echo'
 			</ul>
@@ -53,20 +57,11 @@
 			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
 			if($permisos_reservar>0){
 			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_reservaciones()"> Nueva Reservacion </a></i></ul>';
-			}
-
-			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
-			if($permisos_reservar>0){
-			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>';
 				echo '
 					<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_reservaciones()"> Agregar reservaciones </a></i></ul>
 				';
 
-				echo '
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reservaciones()"> Ver reservaciones </a></i></ul>
-				';
 			}
 
 			$permisos_huesped=$usuario->huesped_ver+$usuario->huesped_agregar;
@@ -74,10 +69,7 @@
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
 
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_llegadas()">Reporte de llegadas</a></i></ul>';
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
+			
 			
 			}
 		}
@@ -90,8 +82,13 @@
 			<i class="bx bxs-arrow-to-right"></i>
 			<span class="mx-2">Llegadas y Salidas</span>
 			<ul id="reportes_submenu" class="submenu">
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Probables </a></i></ul>
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick=""> Efectivas </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(1)"> Llegadas probables </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(2)"> Llegadas efectivas </a></i></ul>
+			
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(3)"> Salidas probables </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(4)"> Salidas efectivas </a></i></ul>
+			';
+			
 		
 		echo'
 			</ul>
@@ -238,6 +235,8 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tipos()"> Configuracion </a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_planes_alimentos()">Plan de alimentos</a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_politicas_reservacion()">Políticas de reservación</a></i></ul>';
 			}
 			
 		}
@@ -268,26 +267,35 @@
 
 		</ul>
 			<!--ajustado con bootstrap---->
-		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" onclick="boton_menu()" id="menu-btn-desplegar">
+			<div class="informacion">
+		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--verde menu-btn" onclick="boton_menu()" id="menu-btn-desplegar">
 			<!--icono extraido con la clase desde box icons---->
-		<i class="bx bx-menu"></i>
+            <i class="bx bx-menu"></i>
+            <span class="label">Menu</span>
 		</a>
-		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="menu-btn-fecha">
+		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--amarillo menu-btn" id="menu-btn-fecha">
 			<i class="bx bx-calendar-star"></i>
+            <span class="label">Fechas</span>
 		</a>
-		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="menu-btn-filtrar">
-			<!--bx-tada da el efecto de movimiento---->
-			<i class="bx bx-search-alt-2" ></i>
+		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--rojo menu-btn" id="menu-btn-filtrar">
+		<i class="bx bx-search-alt-2" ></i>
+		<span class="label">Buscar</span>
+
 		</a>
-		<button class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="mostrar-botones" onclick="toggleBotones()">
-			<i class="bx bxl-stack-overflow" ></i>
-		</button>
-		<button class="btn btn-primary border-0 menu-btn" id="filtro-noche" onclick="modoNocturno()">
+		
+		<a class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn icon-btn icon-btn--morado" id="mostrar-botones" onclick="toggleBotones()">
+            <i class="bx bxl-stack-overflow" ></i>
+            <span class="label">Filtro</span>
+        </a>
+		<button class="btn btn-primary border-0 menu-btn icon-btn" id="filtro-noche" onclick="modoNocturno()">
  		<i class="bx bx-moon icono-luna"></i>
+		 <span class="label">Color</span>
 		</button>
-		<button class="btn btn-primary border-0 menu-btn btn-cubo" id="cubo" onclick="ocultarMostrar()">
+		<button class="btn btn-primary border-0 menu-btn btn-cubo icon-btn" id="cubo" onclick="ocultarMostrar()">
 		<i class="bx bx-cube-alt"></i>
+		<span class="label">Efecto</span>
 		</button>
+	</div>
 
 
 	</div>';

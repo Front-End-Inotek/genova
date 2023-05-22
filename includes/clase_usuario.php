@@ -248,9 +248,14 @@
 
       function remover_token($usuario){
         include_once('clase_log.php');
-        $sentencia="DELETE FROM usuario where usuario=$usuario";
+        $sentencia="DELETE FROM token WHERE usuario=$usuario";
         $comentario ="Eliminando token del usuario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if($consulta){
+          echo "SI";
+        }else{
+          echo "NO";
+        }
       }
 
       // Datos inicio de sesion
@@ -281,6 +286,27 @@
           $this->activo= $fila['activo'];
         }
       }
+
+      //Se evalua la existencia del token del usuario dado.
+       
+        function evaluarToken($usuario_evaluar){
+          include_once("clase_log.php");
+          $logs = NEW Log(0);
+          $id=0;
+          $sentencia = "SELECT id FROM token WHERE usuario = '$usuario_evaluar'";
+         
+          $comentario="Obtenemos el token del usuario dado en la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          //se recibe la consulta y se convierte a arreglo
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            $id= $fila['id'];
+            // Guardamos logs de inicio de session
+            $logs->guardar_log($fila['id'],"Intento de inicio session el usuario: ".$id . "en otro dispositivo");
+          }
+          return $id;
+        }
+
       // Evaluar entrada de sesion
       function evaluarEntrada($usuario_evaluar ,$password_evaluar){
         include_once("clase_log.php");

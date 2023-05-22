@@ -321,6 +321,7 @@
 
         $fecha_entradaP= strtotime($fecha_entrada);
         $fecha_salidaP= strtotime($fecha_salida);
+       
         
         if(empty($fecha_entradaP)){
             $fecha_entradaF = $fecha_entrada;
@@ -339,7 +340,7 @@
         VALUES ('$hab_id', '$id_huesped', '$mov', '0', '0', '$fecha_entradaF', '$fecha_salidaF', '$inicio', '0', '$usuario_id', '0', '0', '$tarifa', '0', '0', '0', '0', '$motivo', '', 'sin estado');";
         $comentario="Agregar una reservacion en la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-      
+
         $id= $this->ultima_insercion();
         return $id;
       }

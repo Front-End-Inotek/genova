@@ -130,17 +130,18 @@
         }
       }
       // Mostrar categorias existentes en el inventario
-      function mostrar_categoria_restaurente($hab_id,$estado,$mov,$mesa){
+      function mostrar_categoria_restaurente($hab_id,$estado,$mov,$mesa,$maestra=0){
         $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar las categorias en el restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cont=0;
+       
         echo '<div class="row">';
         while ($fila = mysqli_fetch_array($consulta))
         {
           //if($cont%2==0){
             echo '<div class="col-sm-2 margen_inf">
-              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> '.$fila['nombre'].'</button>
+              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')"> '.$fila['nombre'].'</button>
             </div>';
           /*}else{
             echo '<div class="col-sm-2 margen_inf">
