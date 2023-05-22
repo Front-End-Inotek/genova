@@ -13,5 +13,5 @@
   $cuenta->editar_abono($_POST['id'],$_POST['abono']);
   $logs->guardar_log($_POST['usuario_id'],"Editar abono de habitacion: ". $nombre." en cuenta ". $_POST['id']);
   
-  echo $_POST['hab_id']."/".$_POST['estado'];
+  echo $_POST['hab_id']."/".$_POST['estado']."/".$_POST['mov']."/".$_POST['id_maestra'];
 ?>

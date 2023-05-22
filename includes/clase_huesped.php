@@ -545,6 +545,63 @@
         return $nombre_completo;
       }
 
+            // Mostrar las huespedes para asignar en una reservacion
+       function mostrar_asignar_huesped_maestra($id_maestra,$mov){
+        echo '<div class="row">
+              <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="" id="a_buscar" class="color_black form-control-lg" /></div> 
+        </div><br>';
+        $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";
+        //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY id DESC LIMIT 15";
+        //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC LIMIT 15";
+        $comentario="Mostrar los huespedes para asignar en una reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        echo '<div class="table-responsive" id="tabla_huesped">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="table-primary-encabezado text-center">
+              <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Direccion</th>
+              <th>Ciudad</th>
+              <th>Estafghfdo</th>
+              <th>Codigo Postal</th>
+              <th>Telefono</th>
+              <th>Correo</th>
+              <th>Contrato Socio</th>
+              <th>Cupón</th>
+              <th>Preferencias</th>
+              <th>Comentarios</th>
+              </tr>
+          </thead>
+          <tbody>';
+              while ($fila = mysqli_fetch_array($consulta))
+              {
+               
+                echo '<tr class="text-center">
+                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped_maestra('.$fila['id'] .','.$id_maestra .','.$mov.')"> Agregar</button></td>
+                <td>'.$fila['nombre'].'</td>  
+                <td>'.$fila['apellido'].'</td>
+                <td>'.$fila['direccion'].'</td>
+                <td>'.$fila['ciudad'].'</td>
+                <td>'.$fila['estado'].'</td>
+                <td>'.$fila['codigo_postal'].'</td>
+                <td>'.$fila['telefono'].'</td>
+                <td>'.$fila['correo'].'</td>
+                <td>'.$fila['contrato'].'</td>
+                <td>'.$fila['cupon'].'</td>
+                <td>'.$fila['preferencias'].'</td>
+                <td>'.$fila['comentarios'].'</td>
+                </tr>';
+              }
+              echo '
+            </tbody>
+          </table>
+        </div>';
+      }
+
+
        // Mostrar las huespedes para asignar en una reservacion
        function mostrar_asignar_huespedNew($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
         echo '<div class="row">

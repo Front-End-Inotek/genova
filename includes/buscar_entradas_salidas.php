@@ -3,7 +3,11 @@
   include_once("clase_reservacion.php");
   $reservacion= NEW Reservacion(0);
   $a_buscar =urldecode($_GET['a_buscar']);
-  $inicial =urldecode($_GET['inicial']);
-  $opcion =urldecode($_GET['opcion']);
-  $reservacion->buscar_entradas_salidas($a_buscar,$_GET['usuario_id'],$inicial,$opcion);
+  $usuario_id =urldecode($_GET['usuario_id']);
+  $opcion = urldecode($_GET['opcion']);
+  $inicial= urldecode($_GET['inicial']);
+
+
+  
+  $reservacion->buscar_entradas_salidas(0,$usuario_id,$opcion, $inicial, $a_buscar);
 ?>

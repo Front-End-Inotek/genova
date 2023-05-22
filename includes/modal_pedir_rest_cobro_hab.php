@@ -18,7 +18,12 @@
       if($id_huesped != 0){
         echo '¿Realizar el cargo de $'.number_format($_GET['total'], 2).' a '.$huesped->nombre.' '.$huesped->apellido.' a la habitación '.$hab->nombre.'?';
       }else{
-        echo '¿Realizar el cargo de $'.number_format($_GET['total'], 2).' a la habitación '.$hab->nombre.'?';
+        if($hab->nombre!=0){
+          echo '¿Realizar el cargo de $'.number_format($_GET['total'], 2).' a la habitación '.$hab->nombre.'?';
+        }else{
+          echo '¿Realizar el cargo de $'.number_format($_GET['total'], 2).' a la cuenta?';
+        }
+        
       }
       echo '
     </div><br>   

@@ -45,6 +45,59 @@
           }
         }
       }
+
+      function mostrar_cuenta_maestra(){
+        include_once('clase_usuario.php');
+        $usuario =  NEW Usuario($id);
+        $editar = $usuario->tarifa_editar;
+        $borrar = $usuario->tarifa_borrar;
+
+        $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
+        FROM hab
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab = 1 ORDER BY hab.id";// nombre
+        $comentario="Mostrar las habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        echo '
+        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_hab('.$id.')"> Agregar </button>
+        <br>
+        <br>
+        <div class="table-responsive" id="tabla_tipo" style="max-height:860px; overflow-y: scroll;">
+        <table class="table table-bordered table-hover" >
+          <thead>
+            <tr class="table-primary-encabezado text-center">
+            <th>Número</th>
+            <th>Tipo de habitación</th>
+            <th>Comentario</th>';
+            if($editar==1){
+              echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+            }
+            if($borrar==1){
+              echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
+            }
+            echo '</tr>
+          </thead>
+        <tbody>';
+            while ($fila = mysqli_fetch_array($consulta))
+            {
+                echo '<tr class="text-center">
+                <td>'.$fila['nom'].'</td>
+                <td>'.$fila['habitacion'].'</td>
+                <td>'.$fila['comentario'].'</td>';
+                if($editar==1){
+                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_hab('.$fila['ID'].')"> Editar</button></td>';
+                }
+                if($borrar==1){
+                  echo '<td><button class="btn btn-danger" onclick="borrar_hab('.$fila['ID'].', \'' . addslashes($fila['nom']) . '\', \'' . addslashes($fila['habitacion']) . '\', \'' . addslashes($fila['comentario']) . '\')"> Borrar</button></td>';
+                }
+                echo '</tr>';
+            }
+            echo '
+          </tbody>
+        </table>
+        </div>';
+      }
+
       // Guardar la cuenta
       function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono){
         $fecha=time();
@@ -253,7 +306,7 @@
         return $suma_abonos;
       }
       // Mostrar los cargos que tenemos por movimiento en una habitacion
-      function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado){
+      function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
         $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
         FROM cuenta 
@@ -287,14 +340,14 @@
                     }
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
-                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> ✏️ Editar</button></td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
-                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].')"> ✏️ Editar</button></td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
                     </tr>';
                   }
                 }else{
@@ -313,7 +366,7 @@
         return $total_cargos;
       }
       // Mostramos los abonos que tenemos por movimiento en una habitacion
-      function mostrar_abonos($mov,$id_reservacion,$hab_id,$estado){
+      function mostrar_abonos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
         $total_abonos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
         FROM cuenta 
@@ -351,7 +404,7 @@
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td> 
                     <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> ✏️ Editar</button></td>
+                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
@@ -359,7 +412,7 @@
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td> 
                     <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].')"> ✏️ Editar</button></td>
+                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
                     </tr>';
                   }
                 }else{

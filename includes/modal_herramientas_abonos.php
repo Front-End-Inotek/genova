@@ -25,10 +25,10 @@
         <tbody>
           <tr class="fuente_menor text-center">
             <td>'.$nombre_usuario.'</td>
-            <td><button class="btn btn-warning" onclick="editar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].')"> Editar</button></td>';
+            <td><button class="btn btn-warning" onclick="editar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].','.$_GET['mov'].','.$_GET['id_maestra'].')"> Editar</button></td>';
             $monto= 2;
             echo '<td><button class="btn btn-success" onclick="cambiar_hab_herramientas_monto('.$monto.','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].')"> Cambiar</button></td>';
-            echo '<td><button class="btn btn-danger" onclick="aceptar_borrar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].')"> Borrar</button></td>
+            echo '<td><button class="btn btn-danger" onclick="aceptar_borrar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].','.$_GET['mov'].','.$_GET['id_maestra'].')"> Borrar</button></td>
             </tr>
         </tbody>
       </table>

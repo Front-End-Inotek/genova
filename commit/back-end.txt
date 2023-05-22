@@ -3,3 +3,21 @@ Se terminaron los reportes para el apartado de recepción (Reporte de llegadas/s
 Se terminaron los reportes de Llegadas y Salidas (llegadas/salidas probables/efectivas)
 Se agregó que después de agregar una reservación te rediriga al reporte de está (con el diseño previo que había de este reporte)
 Se agregó que despúes de salir, se elimine el token acutal del  usuario.
+16/05
+Se cambió el filtro de busqueda para los reportes de llegadas/salidas, para que funcionara como los demás buscadores con 'onkeyup'
+Se agregó y programó el nuevo campo de reservaciones en sobrevender.
+Se está trabajando sobre la 'lógica' y programación del apartado 'cuenta maestra'.
+17/05
+Se sigue trabajando sobre el apartado de cuenta maestra
+Se agregó que se puedan crear "varias" cuentas maestras, con nombre y código, posterior a esto, se puede asignar ya sea 
+un huesped, un cargo de tipo de restaurante, un "cargo adicional" que son cargos fuera del restaurante, también que 
+se puede visualizar un estado de cuenta para esa cuenta maestra, en donde se ven los cargos de restaurante o "adicionales".
+Se agregó un nuevo apartado dentro del menú, de "polticias de reservacion", falta programar.
+-------
+19/05
+Se sigue trabajando sobre el apartado de cuenta maestra.
+Queda funcionando que se pueda agregar cargo de restaurante y adicional, que se puedan editar y quitar los pedidos de restaurante,
+corrigiendo errores que presentaba el hecho de compartir la "misma vista" entre cuentas "normales" y cuentas "maestras".
+Se corrieron bugs de direccionamiento a la hora de hacer operaciones dentro del "estado de cuenta maestra".
+Se agregó que se pueda eliminar una "cuenta maestra" previamente creada, queda pendiente que se puedan editar (campos: nombre y código)
+Se corrigió un bug visual que no estaba mostrando la opción de asignar (checkin) en las reservaciones (fecha por defecto actual)

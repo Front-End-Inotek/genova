@@ -2,6 +2,11 @@
   include_once("clase_forma_pago.php");
   $forma_pago= NEW Forma_pago(0);
   $total= $_GET['total'];
+
+  $mensaje ="";
+
+  $mensaje = $_GET['hab_id'] ==0 ? "Cargo a cuenta" : "Cargo Habitación";
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -31,7 +36,7 @@
                 //echo '<img src="images/persona.png"  class="center-block img-responsive">';
             echo '</div>';
             echo '<div>';
-              echo 'Cargo Habitación';
+              echo $mensaje;
             echo '</div>';
             echo '</br>';
           echo '</div>';

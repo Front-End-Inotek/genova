@@ -97,6 +97,15 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     echo '
                   </select>
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="no-habitaciones">No. de habitaciones</label>
+                    <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew('.$hab_id.')">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="total-estancia">Total de la estancia</label>
+                    <input type="number" class="form-control" id="total" min="0" step="0.01" readonly>
+                    <input type="number" class="form-control" id="aux_total" min="0" step="0.01" readonly hidden>
+                </div>
             </div>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4 mb-3">
@@ -125,7 +134,9 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <label for="pax-extra">Pax extra</label>
                     <input type="number" class="form-control" id="pax-extra" min="0"   onchange="nuevo_calculo_total()">
                 </div>
-                <div class="form-group col-md-4 mb-3">
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="form-group col-md-3 mb-3">
                     <label for="plan-alimentos">Plan de alimentos</label>
                     <select class="form-control" id="plan-alimentos"  onchange="nuevo_calculo_total(event)">
                     <option value="">Seleccione una opción</option>';
@@ -139,7 +150,12 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <select class="form-control" id="preasignada">
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
+                <label for="hab-preasignada">Sobrevender</label>
+                <input type="checkbox" id="sobrevender" disabled class="form-check"/>
+                </select>
+            </div>
+                <div class="form-group col-md-3">
                     <label for="canal-reserva">Canal de reserva</label>
                     <select class="form-control" id="canal-reserva" required>
                         <option value="">Seleccione una opción</option>
@@ -154,7 +170,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             
 
             <h2>Datos Personales</h2>
-            <button class="btn btn-success btn-block"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
+            <button class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
             <input type="text" id="tomahuespedantes" hidden>
             <input type="text" id="estadotarjeta" hidden>
             <input type="text" id="nut" hidden>

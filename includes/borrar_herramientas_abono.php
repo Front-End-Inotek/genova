@@ -13,5 +13,5 @@
   $cuenta->borrar_cuenta($_POST['id'],$descripcion,$monto);
   $logs->guardar_log($_POST['usuario_id'],"Borrar abono de habitacion: ". $nombre." en cuenta ". $_POST['id']);
   
-  echo $_POST['hab_id']."/".$_POST['estado'];
+  echo $_POST['hab_id']."/".$_POST['estado']."/".$_POST['mov']."/".$_POST['id_maestra'];
 ?>
