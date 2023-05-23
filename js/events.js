@@ -5393,6 +5393,7 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
         "motivo":motivo,
         "id_maestra":id_maestra,
     };
+    //console.log(datos)
     $.ajax({
         async:true,
         type: "POST",
@@ -5403,7 +5404,11 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
         beforeSend:loaderbar,
         success:function(res){
             console.log(res)
-            principal()
+            if(id_maestra==0){
+                principal()
+            }else{
+                estado_cuenta_maestra(0,1,mov,id_maestra)
+            }
         },
         //success:problemas_sistema,
         timeout:5000,

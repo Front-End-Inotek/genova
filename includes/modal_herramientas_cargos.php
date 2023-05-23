@@ -17,8 +17,11 @@
         <thead>
           <tr class="table-primary-encabezado text-center">
           <th>Usuario</th>
-          <th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>
-          <th><span class=" glyphicon glyphicon-cog"></span> Habitacion</th>
+          <th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+          if($_GET['id_maestra']==0){
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Habitacion</th>';
+          }
+          echo'
           <th><span class=" glyphicon glyphicon-cog"></span> Borrar</th>
           </tr>
         </thead>
@@ -27,7 +30,9 @@
             <td>'.$nombre_usuario.'</td>
             <td><button class="btn btn-warning" onclick="editar_herramientas_cargo('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].','.$_GET['id_maestra'].','.$_GET['mov'].')"> Editar</button></td>';
             $monto= 1;
-            echo '<td><button class="btn btn-success" onclick="cambiar_hab_herramientas_monto('.$monto.','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].')"> Cambiar</button></td>';
+            if($_GET['id_maestra']==0){
+              echo '<td><button class="btn btn-success" onclick="cambiar_hab_herramientas_monto('.$monto.','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].')"> Cambiar</button></td>';
+            }
             echo '<td><button class="btn btn-danger" onclick="aceptar_borrar_herramientas_cargo('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['cargo'].','.$_GET['id_maestra'].','.$_GET['mov'].')"> Borrar</button></td>
             </tr>
         </tbody>
