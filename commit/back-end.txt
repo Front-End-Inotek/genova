@@ -21,3 +21,10 @@ corrigiendo errores que presentaba el hecho de compartir la "misma vista" entre 
 Se corrieron bugs de direccionamiento a la hora de hacer operaciones dentro del "estado de cuenta maestra".
 Se agregó que se pueda eliminar una "cuenta maestra" previamente creada, queda pendiente que se puedan editar (campos: nombre y código)
 Se corrigió un bug visual que no estaba mostrando la opción de asignar (checkin) en las reservaciones (fecha por defecto actual)
+22/05
+Se continúa trabajando en el apartado de cuenta maestra.
+Ya funciona el buscador dentro del botón "huesped" (para asignar huesped)
+También se puede cambiar el huesped asignado a la cuenta maestra desde el apartado "cuenta maestra".
+Ya funciona el buscador de pedidos (sí funcionaba al seleccionar un producto resultado de la busqueda pero el nombre de la cuenta maestra desaparecía)
+Se agregó y programó el apartado de políticas de reservacion, se pueden agregar, editar y eliminar nuevas políticas; falta ver en qué parte 
+se estarían "integrando" dichas políticas.

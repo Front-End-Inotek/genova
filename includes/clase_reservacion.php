@@ -135,12 +135,18 @@ class Reservacion extends ConexionMYSql
     }
     public function obtener_ultimo_id()
     {
-        $sentencia = "SELECT reservacion.id
-		FROM reservacion
-		INNER JOIN usuario ON reservacion.id_usuario = usuario.id
-		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 || reservacion.estado = 2)  ORDER BY reservacion.id DESC LIMIT 1;";
-        $comentario="Mostrar las reservaciones";
+        //esta sentencia trae el ultimo valor registrado.
+        // $sentencia = "SELECT reservacion.id
+		// FROM reservacion
+		// INNER JOIN usuario ON reservacion.id_usuario = usuario.id
+		// INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+		// INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 || reservacion.estado = 2)  ORDER BY reservacion.id DESC LIMIT 1;";
+        // $comentario="Mostrar las reservaciones";
+        //esta sentencia trae el valor "actual" del autoincrement de la tabla.
+        $sentencia="SELECT `AUTO_INCREMENT` as id
+        FROM  INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_SCHEMA = 'visit'
+        AND   TABLE_NAME   = 'reservacion';";
         $ultimo_id=0;
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         while ($fila = mysqli_fetch_array($consulta)) {
@@ -516,7 +522,7 @@ class Reservacion extends ConexionMYSql
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
         WHERE  reservacion.fecha_salida = '$inicio_dia' AND hab.estado_hab = 1 ORDER BY hab.id";
-        echo $sentencia;
+        // echo $sentencia;
         $comentario="Mostrar las reservaciones que llegan hoy";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
 
@@ -1072,9 +1078,9 @@ class Reservacion extends ConexionMYSql
                             echo '<td></td>';
                         }
                         if($fila['id_hab']==0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',1)"> Preasignar</button></td>';
+                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
                         } else {
-                            echo '<td></td>';
+                            echo '<td>Preasignada</td>';
                         }
 
                         echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';

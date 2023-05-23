@@ -6,6 +6,11 @@
   $movimiento = NEW Movimiento(0);
   $id_huesped= $movimiento->saber_id_huesped($_GET['mov']);
   $huesped= NEW Huesped($id_huesped);  
+  $id_maestra=0;
+  if(isset($_GET['id_maestra'])){
+    $id_maestra=$_GET['id_maestra'];
+  }
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -30,7 +35,7 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].',0,'.$id_maestra.')"> Aceptar</button>
     </div>
   </div>';
 ?>

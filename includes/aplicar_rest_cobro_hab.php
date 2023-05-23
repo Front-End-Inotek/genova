@@ -18,7 +18,8 @@
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
   $logs= NEW Log(0);
-  
+
+
   // Cobro de restaurante en hab con el total como cargo a la habitacion
   $comentario= "Cargo de cobro restaurante en habitacion: ". $hab->nombre;
   $folio= '';
@@ -31,6 +32,8 @@
   $factuar= 0;
   $forma_pago= 1;
   $efectivo_pago= 0;
+
+  
 
   // Se agrega el pedido
   $id_pedido= $pedido->pedir_rest($usuario->usuario,$_POST['mov'],$comentario,$_POST['hab_id']);
@@ -70,22 +73,30 @@
   // Se editan estados y se imprime
   $pagado= 3;// Se cambia a 3 que indica que el estado pagado paso a deuda en habitacion
   //el estado del pedido solo se cambia cuando no es de cuenta maestra
-
-  if($_POST['id_maestra']==0){
-    $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-    $pedido->cambiar_estado_pedido_hab($_POST['hab'],$_POST['mov']);
-    $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
-  }
-  // Guardar el cargo total del restaurante de la habitacion
+  $hab_nombre=$hab->nombre;
+  $mensaje_log="Cargo de cobro restaurante en habitacion: ". $hab_nombre;
+   // Guardar el cargo total del restaurante de la habitacion
   //El cargo adicional debe asignar a la descripción el nombre del cargo adicional.
-
-
   $descripcion= 'Restaurante';
+
   if(isset($_POST['motivo'])){
     if($_POST['motivo']!=""){
       $descripcion=$_POST['motivo'];
     }
   }
+
+  if($_POST['id_maestra']==0){
+    $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
+    $pedido->cambiar_estado_pedido_hab($_POST['hab'],$_POST['mov']);
+    $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
+  }else{
+    require_once('clase_cuenta_maestra.php');
+    $cm = new CuentaMaestra($_POST['id_maestra']);
+    $hab_nombre = $cm->nombre;
+    $mensaje_log = "Cargo de cobro ".$descripcion." en cuenta maestra: ". $hab_nombre;
+    
+  }
+ 
   $cargo= $_POST['total'];
   $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);
 
@@ -96,5 +107,5 @@
   }
 
   // Se guarda el cargo del pedido de restaurante desde una habitacion
-  $logs->guardar_log($_POST['usuario_id'],"Cargo de cobro restaurante en habitacion: ". $hab->nombre);
+  $logs->guardar_log($_POST['usuario_id'],$mensaje_log);
 ?>

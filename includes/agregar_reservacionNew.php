@@ -36,7 +36,7 @@ error_reporting(0);
   }
 
   //obtener el ultimo id de reserva.
-  $ultimo_id = $reservacion->obtener_ultimo_id() + 1;
+  $ultimo_id = $reservacion->obtener_ultimo_id() /*+ 1*/;
 
 
 echo '<div class="container-fluid blanco" style="width: 1200px;">
