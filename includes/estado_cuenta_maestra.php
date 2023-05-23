@@ -57,7 +57,7 @@
         echo '</div>
         <div class="row">
          <div class="col-sm-4">Nombre Huesped: '.$nombre_huesped.'
-         <button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="cambiar_huesped('.$mov.','.$_GET['id'].','.$id_huesped.')"> Cambiar huesped</button>
+         <button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$_GET['id'].','.$mov.')"> Cambiar huesped</button>
          </div>
         </div>
         <div class="row">
