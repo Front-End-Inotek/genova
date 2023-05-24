@@ -28,3 +28,11 @@ También se puede cambiar el huesped asignado a la cuenta maestra desde el apart
 Ya funciona el buscador de pedidos (sí funcionaba al seleccionar un producto resultado de la busqueda pero el nombre de la cuenta maestra desaparecía)
 Se agregó y programó el apartado de políticas de reservacion, se pueden agregar, editar y eliminar nuevas políticas; falta ver en qué parte 
 se estarían "integrando" dichas políticas.
+23/05
+Parece que ya está "terminado" el apartado de cuenta maestra.
+Se verificaron y añadieron los logs pertinentes para las operaciones de este apartado que reflejen realemente las operaciones que se estén realizando.
+Se corrigieron las consultas de los reportes, para que también muestre aquellos que tengan tarifa "forzada"
+Se agregó un nuevo archivo para "limpiar" la entrada de texto en ciertos apartados donde se hacen insercciones en la bd; falta agregar a los restantes 
+en caso de que lo amerite.
+Se está trabajando con las paginaciones de los apartados de los reportes de recepción y los "probables/efectivos".
+

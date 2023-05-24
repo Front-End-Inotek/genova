@@ -40,22 +40,28 @@ class PoliticasReservacion extends ConexionMYSql{
 
     // Editar un tipo habitacion
     function editar_politica($id,$nombre,$codigo,$descripcion){
-        $sentencia = "UPDATE `politicas_reservacion` SET
-            `nombre` = '$nombre',
-            `codigo` = '$codigo',
-            `descripcion` = '$descripcion'
-            WHERE `id` = '$id';";
-        //echo $sentencia ;
-        $comentario="Editar una politica de reservacion en la  base de datos ";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        if($consulta){
-          echo ("NO");
-        }else{
-          echo ("error en la consulta");
-        }
+      $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+      $codigo = htmlspecialchars($codigo, ENT_QUOTES, 'UTF-8');
+      $descripcion = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
+      $sentencia = "UPDATE `politicas_reservacion` SET
+      `nombre` = '$nombre',
+      `codigo` = '$codigo',
+      `descripcion` = '$descripcion'
+      WHERE `id` = '$id';";
+      //echo $sentencia ;
+      $comentario="Editar una politica de reservacion en la  base de datos ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      if($consulta){
+        echo ("NO");
+      }else{
+        echo ("error en la consulta");
+      }
     }
 
     function guardar_politica_reservacion($nombre,$codigo,$descripcion){
+        $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+        $codigo = htmlspecialchars($codigo, ENT_QUOTES, 'UTF-8');
+        $descripcion = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
         $sentencia = "INSERT INTO `politicas_reservacion` (`nombre`, `codigo`, `estado`,`descripcion`)
         VALUES ('$nombre', '$codigo', '1','$descripcion');";
         $comentario="Guardamos la politica de reservacion en la base de datos";

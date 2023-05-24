@@ -117,7 +117,12 @@ function cargar_area_trabajo(){
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
-        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+        if(localStorage.getItem('estatus_hab') !=""  && localStorage.getItem('estatus_hab') !=null){
+            estatus_hab=localStorage.getItem('estatus_hab')
+        }else{
+            estatus_hab=""
+        }
+        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
     }
 
 
@@ -265,6 +270,14 @@ function agregar_planes_alimentos(){
 function guardar_cargo_adicional(id,mov){
     nombre = $("#nombre").val()
     monto = $("#monto").val()
+    if(nombre === null || nombre === ''){
+        swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+    if(monto === null || monto === ''){
+        swal("Campo monto vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
 
     console.log(nombre,monto)
     aplicar_rest_cobro_hab(monto, 0,0,mov,nombre,id)
@@ -555,6 +568,12 @@ function editar_tipo(id){
 function mostrar_estadorack(estatus_hab) {
     console.log(estatus_hab);
 
+    if(estatus_hab!="99"){
+        localStorage.setItem('estatus_hab',estatus_hab)
+    }else{
+        localStorage.removeItem('estatus_hab')
+    }
+    estatus_hab=localStorage.getItem('estatus_hab')
     $("#area_trabajo").load("includes/area_trabajo.php?id="+0+"&token="+0+"&estatus_hab="+estatus_hab);
     
 
@@ -2352,9 +2371,9 @@ function ver_reservaciones(){
 }
 
 // Muestra la paginacion de las reservaciones
-function ver_reservaciones_paginacion(buton,posicion){
+function ver_reservaciones_paginacion(buton,posicion,caso=0){
     var usuario_id=localStorage.getItem("id");
-    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id+"&caso="+caso);   
 }
 
 // Barra de diferentes busquedas en ver llegadas
@@ -4570,7 +4589,10 @@ function switch_rack(){
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
-        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+        localStorage.removeItem('estatus_hab')
+        estatus_hab=""
+
+        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
         vista=0;
     }
 }

@@ -34,7 +34,7 @@
   
   <ul class="pagination">';
   for($i = 1; $i <= $cat_paginas; $i++){
-    echo '<li class="page-item"><a class="page-link" href="#" onclick="ver_reservaciones_paginacion('.$i.','.$id_paginacion.')">'.$i.'</a></li>';
+    echo '<li class="page-item"><a class="page-link" href="#" onclick="ver_reservaciones_paginacion('.$i.','.$id_paginacion.',2)">'.$i.'</a></li>';
     $id_paginacion=$id_paginacion+20;
   }  
   echo ' </ul>';

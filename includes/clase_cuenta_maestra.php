@@ -29,8 +29,10 @@ class CuentaMaestra extends ConexionMYSql{
       }
 
     }
-     // Editar un tipo habitacion
+     // Editar una cuenta maestra
     function editar_cuenta_maestra($id,$nombre,$codigo){
+      $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+      $codigo = htmlspecialchars($codigo, ENT_QUOTES, 'UTF-8');
       $sentencia = "UPDATE `cuenta_maestra` SET
           `nombre` = '$nombre',
           `codigo` = '$codigo'
@@ -80,6 +82,9 @@ class CuentaMaestra extends ConexionMYSql{
         //Se debe crear un movimiento 'vacio', el cual estará asociada a la cuenta maestra, y se estará utilizando como movimiento 'principal' de esa cuenta.
         require_once('clase_movimiento.php');   
         $fecha_entrada = time();
+
+        $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+        $codigo = htmlspecialchars($codigo, ENT_QUOTES, 'UTF-8');
 
         $movimiento = new Movimiento(0);
         $mov = $movimiento->disponible_asignar(0,0,0,$fecha_entrada,'',$usuario_id,'',"maestra");
