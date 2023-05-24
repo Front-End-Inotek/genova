@@ -47,7 +47,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
 
         <h1 class="titulo">Reservacion de habitación</h1> <br>
             <div class="d-flex justify-content-end">
-                <div class="form-group col-md-8 mb-3">
+                <div class="form-group col-md-4 mb-3">
                     <label for="clave-reserva" class="text-right">Clave de reserva</label>
                     <input type="text" value="'.$ultimo_id.'" class="form-control" id="clave-reserva" readonly>
                 </div>
@@ -59,6 +59,11 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                         <option value="grupo">Grupo</option>
                         <option value="evento">Evento</option>
                     </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="total-estancia">Total de la estancia</label>
+                    <input type="number" class="form-control" id="total" min="0" step="0.01" readonly>
+                    <input type="number" class="form-control" id="aux_total" min="0" step="0.01" readonly hidden>
                 </div>
             </div>
             <div class="d-flex justify-content-between">
@@ -97,15 +102,12 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     echo '
                   </select>
                 </div>
+                <!---
                 <div class="form-group col-md-3">
                     <label for="no-habitaciones">No. de habitaciones</label>
                     <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew('.$hab_id.')">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="total-estancia">Total de la estancia</label>
-                    <input type="number" class="form-control" id="total" min="0" step="0.01" readonly>
-                    <input type="number" class="form-control" id="aux_total" min="0" step="0.01" readonly hidden>
-                </div>
+                -->
             </div>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4 mb-3">
@@ -134,9 +136,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <label for="pax-extra">Pax extra</label>
                     <input type="number" class="form-control" id="pax-extra" min="0"   onchange="nuevo_calculo_total()">
                 </div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div class="form-group col-md-3 mb-3">
+                <div class="form-group col-md-4 mb-3">
                     <label for="plan-alimentos">Plan de alimentos</label>
                     <select class="form-control" id="plan-alimentos"  onchange="nuevo_calculo_total(event)">
                     <option value="">Seleccione una opción</option>';
@@ -145,17 +145,19 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                   </select>
                   <input type="number" id="costoplan" hidden>
                 </div>
+            </div>
+            <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
                     <label for="hab-preasignada">Habitación preasignada</label>
                     <select class="form-control" id="preasignada">
                     </select>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                 <label for="hab-preasignada">Sobrevender</label>
                 <input type="checkbox" id="sobrevender" disabled class="form-check"/>
                 </select>
             </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="canal-reserva">Canal de reserva</label>
                     <select class="form-control" id="canal-reserva" required>
                         <option value="">Seleccione una opción</option>

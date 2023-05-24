@@ -120,13 +120,14 @@
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
+  /*
   background: linear-gradient(
     180deg,
     #c3cafdee 0%,
     #ecf2ff 45%,
     rgb(166, 179, 248) 100%
-  );
-  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+  );*/
+  background-color: #1f238a !important;
   border-top-style: none;
 }
 
@@ -301,15 +302,11 @@ select {
 .table-responsive td {
   /*
   background: linear-gradient(180deg, #c3cafd 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);*/
+  
 }
 
 .table-responsive td:hover {
-  background: linear-gradient(
-    180deg,
-    #d5daffee 0%,
-    #f8faff 40%,
-    rgb(215, 221, 255) 100%
-  );
+  background-color: #fff;
 }
 
 .text-dark {
@@ -326,7 +323,7 @@ select {
 
 /* primera fila  */
 tr:nth-child(odd) {
-  background-color: #fbfbfbc0;
+  background-color: #fbfbfbcf;
   border-radius: 50px;
 }
 
@@ -339,7 +336,7 @@ th {
 }
 
 tr:hover {
-  background-color: #5b58f814;
+  background-color: #efefefe1;
   -webkit-box-shadow: 0 6px 6px -6px #0e1119;
   -moz-box-shadow: 0 6px 6px -6px #0e1119;
   box-shadow: 0 6px 6px -6px #0e1119;
@@ -470,7 +467,7 @@ a.topictitle:hover {
   backdrop-filter: blur(15px);
   /*
   background-color: #ede4ff6b;*/
-  background-color: #ffffffd9 !important;
+  background-color: #fff;
   color: #2d31ae;
 }
 

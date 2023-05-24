@@ -1607,7 +1607,7 @@ pre code {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
-  margin-left: 4px;
+  margin-left: auto;
 }
 .row {
   margin-right: -15px;
@@ -3286,8 +3286,8 @@ fieldset[disabled] .btn-info.focus {
   background-color: #fff;
 }
 .btn-warning {
-  color: #fff !important;
-  background-color: #f0ad4e !important;
+  color: #000 !important;
+  background: linear-gradient(180deg, #ffc107 0%, #ffe595 50%, #dfa804 100%) !important;
   border-color: #fa960b !important;
 }
 .btn-warning:focus,
@@ -5906,7 +5906,6 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-color: #fff;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
   border: 1px solid #999;
