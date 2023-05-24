@@ -34,5 +34,6 @@ Se verificaron y añadieron los logs pertinentes para las operaciones de este ap
 Se corrigieron las consultas de los reportes, para que también muestre aquellos que tengan tarifa "forzada"
 Se agregó un nuevo archivo para "limpiar" la entrada de texto en ciertos apartados donde se hacen insercciones en la bd; falta agregar a los restantes 
 en caso de que lo amerite.
+Se agregó una pequeño fragmento de código para los filtros del "rack de operaciones".
 Se está trabajando con las paginaciones de los apartados de los reportes de recepción y los "probables/efectivos".
 
