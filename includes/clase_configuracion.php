@@ -49,6 +49,8 @@
     public $autocobro;
     public $checkin;
 
+    public $domicilio;
+
     function __construct()
     {
       $sentencia = "SELECT * FROM configuracion WHERE id = 1 LIMIT 1";
@@ -85,6 +87,7 @@
            $this->puntos= $fila['puntos'];
            $this->autocobro= $fila['autocobro'];
            $this->checkin= $fila['checkin'];
+           $this->domicilio= $fila['domicilio'];
       }
     }
 

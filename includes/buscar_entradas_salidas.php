@@ -6,8 +6,5 @@
   $usuario_id =urldecode($_GET['usuario_id']);
   $opcion = urldecode($_GET['opcion']);
   $inicial= urldecode($_GET['inicial']);
-
-
-  
   $reservacion->buscar_entradas_salidas(0,$usuario_id,$opcion, $inicial, $a_buscar);
 ?>

@@ -154,6 +154,7 @@
     //echo $id_reservacion;
     
   }
+  //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
   echo $id_reservacion;
 
 ?>

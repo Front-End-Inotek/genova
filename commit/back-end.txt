@@ -36,4 +36,6 @@ Se agregó un nuevo archivo para "limpiar" la entrada de texto en ciertos aparta
 en caso de que lo amerite.
 Se agregó una pequeño fragmento de código para los filtros del "rack de operaciones".
 Se está trabajando con las paginaciones de los apartados de los reportes de recepción y los "probables/efectivos".
-
+24/05
+Se estuvieron modificando los filtros de los reportes de recepción y llegadas/salidas así como  en las paginaciones.
+Se estuvo trabajando en el formato de confirmación de recepción.

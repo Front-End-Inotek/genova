@@ -165,6 +165,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <input type="text" id="mes" hidden>
             <input type="text" id="year" hidden>
             <input type="text" id="ccv" hidden>
+            <input type="text" id="nombre_tarjeta" hidden>
           
            
             <br>
@@ -200,10 +201,15 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <input type="text" class="form-control" id="ciudad" required>
                 </div>
             </div>
-
-            <div class="form-group col-md-12">
-                <label for="direccion">Dirección</label>
-                <input type="text" class="form-control" id="direccion">
+            <div class="d-flex justify-content-between">
+                <div class="form-group col-md-8">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" class="form-control" id="direccion">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="email">Correo electrónico </label>
+                    <input type="text" class="form-control" id="correo">
+                </div>
             </div>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-3">

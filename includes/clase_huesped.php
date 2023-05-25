@@ -25,7 +25,9 @@
       public $cvv;
       public $visitas;
       public $estado_huesped;
-      
+      public $estado_tarjeta;
+      public $nombre_tarjeta;
+      public $empresa;
       // Constructor
       function __construct($id)
       {
@@ -51,6 +53,9 @@
           $this->cvv= "";
           $this->visitas= 0;
           $this->estado_huesped= 0; 
+          $this->estado_tarjeta=0;
+          $this->nombre_tarjeta="";
+          $this->empresa="";
         }else{
           $sentencia = "SELECT * FROM huesped WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores de un huesped";
@@ -78,6 +83,9 @@
               $this->cvv= $fila['cvv'];
               $this->visitas= $fila['visitas'];
               $this->estado_huesped= $fila['estado_huesped'];
+              $this->estado_tarjeta = $fila['estado_tarjeta'];
+              $this->nombre_tarjeta=$fila['nombre_tarjeta'];
+              $this->empresa=$fila['empresa'];
           }
         }
       }
@@ -195,6 +203,14 @@
                               </div>
                             </div>
                             <div class="form-group">
+                            <label for="cardnumber">Tipo de tarjeta</label>
+                            <div class="input-group">
+                              <input onchange="" placeholder="Mastercard, Visa, American Express, etc..." type="text" class="form-control" id="tipo" maxlength="20" value="'.$this->nombre_tarjeta.'">
+                              <div class="input-group-append">
+                              </div>
+                            </div>
+                          </div>
+                            <div class="form-group">
                               <div class="row">
                                 <div class="col-4">
                                   <label for="expires-month">Expira</label>
@@ -253,7 +269,7 @@
 
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
-      $usuario_id,$pais,$empresa){
+      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta){
         
       
         //validaciones del huesped.
@@ -273,9 +289,9 @@
         if(mysqli_num_rows($consulta_existe)==0){
           //ya existe.
           $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, 
-          `estado_huesped`,`pais`,`empresa`)
+          `estado_huesped`,`pais`,`empresa`,`nombre_tarjeta`,`estado_tarjeta`)
           VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', 
-          '$cvv', '0', '1','$pais','$empresa');";
+          '$cvv', '0', '1','$pais','$empresa','$nombre_tarjeta','$estado_tarjeta');";
           $comentario="Guardamos el huesped en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           if(!$consulta){
@@ -304,8 +320,12 @@
         }
         $sentencia = "UPDATE  `huesped` 
         SET nombre ='$nombre', apellido='$apellido', empresa = '$empresa',telefono='$telefono',pais='$pais',estado='$estado',ciudad='$ciudad',direccion='$direccion'
-        ,comentarios ='$comentarios' WHERE id='$huesped_id'";
-        $comentario="acutalizamos el huesped en la base de datos";
+        ,comentarios ='$comentarios' 
+        , codigo_postal = '$codigo_postal', correo = '$correo', titular_tarjeta = '$titular_tarjeta', estado_tarjeta = '$estado_tarjeta', nombre_tarjeta = '$nombre_tarjeta'
+        , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = '$numero_tarjeta', vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
+        , cvv = '$cvv'
+        WHERE id='$huesped_id'";
+        $comentario="actualizamos el huesped en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if(!$consulta){
       
@@ -637,7 +657,7 @@
               {
                
                 echo '<tr class="text-center">
-                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $fila['numero_tarjeta'] . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\')"> Agregar</button></td>
+                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $fila['numero_tarjeta'] . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>  
                 <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>
