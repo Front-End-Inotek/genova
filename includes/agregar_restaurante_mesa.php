@@ -34,6 +34,7 @@
             <div class="card-header alinear_centro">
               <h5>Productos</h5>
             </div>
+            
 
             <div class="card-body altura-rest_productos" id="caja_mostrar_busqueda">
             </div>

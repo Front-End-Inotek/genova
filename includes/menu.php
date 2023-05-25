@@ -267,26 +267,35 @@
 
 		</ul>
 			<!--ajustado con bootstrap---->
-		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" onclick="boton_menu()" id="menu-btn-desplegar">
+			<div class="informacion">
+		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--verde menu-btn" onclick="boton_menu()" id="menu-btn-desplegar">
 			<!--icono extraido con la clase desde box icons---->
-		<i class="bx bx-menu"></i>
+            <i class="bx bx-menu"></i>
+            <span class="label">Menu</span>
 		</a>
-		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="menu-btn-fecha">
+		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--amarillo menu-btn" id="menu-btn-fecha">
 			<i class="bx bx-calendar-star"></i>
+            <span class="label">Fechas</span>
 		</a>
-		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="menu-btn-filtrar">
-			<!--bx-tada da el efecto de movimiento---->
-			<i class="bx bx-search-alt-2" ></i>
+		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--rojo menu-btn" id="menu-btn-filtrar">
+		<i class="bx bx-search-alt-2" ></i>
+		<span class="label">Buscar</span>
+
 		</a>
-		<button class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn" id="mostrar-botones" onclick="toggleBotones()">
-			<i class="bx bxl-stack-overflow" ></i>
-		</button>
-		<button class="btn btn-primary border-0 menu-btn" id="filtro-noche" onclick="modoNocturno()">
+		
+		<a class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn icon-btn icon-btn--morado" id="mostrar-botones" onclick="toggleBotones()">
+            <i class="bx bxl-stack-overflow" ></i>
+            <span class="label">Filtro</span>
+        </a>
+		<button class="btn btn-primary border-0 menu-btn icon-btn" id="filtro-noche" onclick="modoNocturno()">
  		<i class="bx bx-moon icono-luna"></i>
+		 <span class="label">Color</span>
 		</button>
-		<button class="btn btn-primary border-0 menu-btn btn-cubo" id="cubo" onclick="ocultarMostrar()">
+		<button class="btn btn-primary border-0 menu-btn btn-cubo icon-btn" id="cubo" onclick="ocultarMostrar()">
 		<i class="bx bx-cube-alt"></i>
+		<span class="label">Efecto</span>
 		</button>
+	</div>
 
 
 	</div>';

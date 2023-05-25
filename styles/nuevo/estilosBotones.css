@@ -167,6 +167,72 @@ body {
 
 }
 /*termina background*/
+/*botones de bootstrap*/
+.btn-warning{
+ 
+  font-weight: 500;
+    border-color: #ffc107;
+    background-color: #ffc107;
+    background: linear-gradient(21deg, #ffed9e 0%, #fcf7e9 50%, #ffe368 100%);
+    color: #ffc107 !important;
+}
+
+.btn-warning:hover{
+
+   
+    font-weight: 500;
+      border-color: #ffc107;
+      background-color: #fdeca188;
+      
+       background: linear-gradient(21deg, #ffc107 0%, #ffd557 50%, #e6ad02 100%); 
+       color: #fff  !important;
+}
+
+.btn-success{
+  
+   color: #198754 !important;
+  font-weight: 500;
+    border-color: #198754;
+    background-color: #198754;
+    
+    background: linear-gradient(21deg, #89cfae 0%, #c7ffe5 50%, #4fbb89 100%);
+}
+.btn-success:hover{
+
+  color: #fff  !important;
+  font-weight: 500;
+    border-color: #198754;
+    background-color: #24c47960;
+    background: linear-gradient(21deg, #198754 0%, #25c3799d 50%, #0b5a35 100%);
+}
+
+.btn-danger{
+  
+  background: linear-gradient(21deg, #f88792 0%, #fcd3d7 50%, #fe6c7b 100%);
+  color: #dc3545 !important;
+  font-weight: 500;
+    border-color: #dc3545;
+    background-color: #dc3545;
+}
+
+.btn-danger:hover{
+  background: linear-gradient(21deg, #dc3545 0%, #fb5f6e 50%, #bb1929 100%);
+  color: #fff  !important;
+    font-weight: 500;
+      border-color: #dc3545;
+      background-color: #fa758284 !important;
+}
+
+
+.btn-primary{
+  background: linear-gradient(21deg, #5c8affc6 0%, #8aabffc9 50%, #4479ffbd 100%);
+  border-color: #3f51b5 ;
+    color: #3f51b5 ;
+}
+
+.btn-primary:hover{
+  background: linear-gradient(21deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+}
 
 .contenedor-sub {
   padding-left: 20px;
@@ -614,15 +680,14 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .modal-header {
+  backdrop-filter: blur(15px);
   background-color: #97a2f9ee !important;
-  background: linear-gradient(180deg, #b3b3fe 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%);
   border-color: #3f51b5 !important;
   color: #3f51b5 !important;
 }
 
 .modal-footer {
   background-color: #97a2f9ee !important;
-  background: linear-gradient(180deg, #b3b3fe 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%);
   border-color: #3f51b5 !important;
   color: #3f51b5 !important;
 }
@@ -647,6 +712,33 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 
+body {
+  /*
+  background-image: url("https://wallpapershome.com/images/wallpapers/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg");
+  background-size: cover !important;
+  background-position: center !important;*/
+  
+  background-image: linear-gradient(
+      62deg,
+      rgba(1, 95, 183, 0.9732216701223994) 13%,
+      rgba(255, 122, 151, 0.5) 4%
+    ),
+    linear-gradient(
+      44deg,
+      rgba(0, 43, 99, 0.07922090238615942) 39%,
+      rgba(242, 140, 143, 0.5) 18%
+    ),
+    linear-gradient(
+      118deg,
+      rgba(84, 202, 242, 0.03152997265339608) 40%,
+      rgba(247, 155, 187, 0.5) 54%
+    ),
+    linear-gradient(
+      58deg,
+      rgba(90, 90, 237, 0.16144443572260592) 83%,
+      rgba(249, 156, 142, 0.5) 23%
+    ) !important;
+ }
 
 .btn {
   color: #fff;
@@ -725,6 +817,8 @@ body.modo-nocturno .containerRackOp .btn:focus {
   box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
     7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
   transition: all 0.3s ease;
+
+
 }
 
 .terminar {

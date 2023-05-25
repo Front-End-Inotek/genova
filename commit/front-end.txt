@@ -5,11 +5,23 @@
 --se cambio modales tanto la distribucion como colores
 --se soluciono hitbox al dar click a sub items del nav y cambio de color para mayor visibilidad
 --se ajustaron los footer de los modales
---se esta trabajando en el fondo para los contenedores 
+--se esta trabajando en el fondo para los contenedores
 --se ajusto los label y seccion de reservaciones
 ----15/05
 --se cambio de fondo a los modales
 --se agrego estilos al background universales
 --se corrigio error de visualizacion en restaurante
 --se modifico y agrego apartado garantia con tarjeta
----
+----16/05
+--se agrego clase para poner informacion adicional por medio de un span
+--se ajustaron las tablas
+--se ajusto el contenedor principal
+--se ajusto el contenido para fondos luminosos
+--se corrijio error visual en restaurante
+--se esta trabajando con una animacion de color dinamica
+----22/05
+--se modificaro los botones generales que vienen por defecto
+--se modifico los contenedores con un efecto difuminado transparente
+--se agrego y reacomodo varios formularios
+--se organizaron modales que no tenian bien puesto el header y footer
+--se cambiaron colores en tablas generales
