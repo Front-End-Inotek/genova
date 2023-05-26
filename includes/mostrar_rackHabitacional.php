@@ -128,7 +128,7 @@ class RackHabitacional extends ConexionMYSql
         $cronometro = 0;
 
         //Se utiliza la misma consulta para el rack de operaciones
-        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
+        $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         WHERE hab.estado_hab = 1  ORDER BY id";
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -176,7 +176,7 @@ class RackHabitacional extends ConexionMYSql
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
             echo '
-                <tr id="u1">
+                <tr id="hab_'.$fila['id'].'" >
                     <td class="cal-userinfo">
             ';
             echo 'Habitación ';
@@ -208,10 +208,10 @@ class RackHabitacional extends ConexionMYSql
             //for para cargar los 31  dias dentro de las habitaciones
             for ($i = 1; $i <= 31; $i++) {
                 if ($i == 1) {
-                    echo '
+                    /*echo '
                         <td class="celdaCompleta tdCheck " >
                         </td>
-                    ';
+                    ';*/
                 } else {
 
                     $mes = $this->convertir_mes(date('n', $tiempo));
