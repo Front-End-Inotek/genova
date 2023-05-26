@@ -6,6 +6,10 @@
   $mensaje ="";
 
   $mensaje = $_GET['hab_id'] ==0 ? "Cargo a cuenta" : "Cargo Habitación";
+  $id_maestra=0;
+  if(isset($_GET['id_maestra'])){
+      $id_maestra=$_GET['id_maestra'];
+  }
 
   echo '
   <!-- Modal content-->
@@ -30,7 +34,7 @@
           echo '</div>';
         echo '</div>';
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-            echo '<div class="edo_cuenta btn-square-lg-doble" onclick="pedir_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')">';
+            echo '<div class="edo_cuenta btn-square-lg-doble" onclick="pedir_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].','.$_GET['id_maestra'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/persona.png"  class="center-block img-responsive">';

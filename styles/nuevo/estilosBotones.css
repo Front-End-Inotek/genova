@@ -170,68 +170,72 @@ body {
 /*botones de bootstrap*/
 .btn-warning{
  
+
   font-weight: 500;
-    border-color: #ffc107;
-    background-color: #ffc107;
-    background: linear-gradient(21deg, #ffed9e 0%, #fcf7e9 50%, #ffe368 100%);
-    color: #ffc107 !important;
+  border-color: #ffc107;
+  background-color: #fdeca188;
+  background: linear-gradient(21deg, #ffbf00 0%, #ffcf41 50%, #d9a507 100%);
+   color: #fff  !important;
+   text-decoration: solid #000;
 }
 
 .btn-warning:hover{
 
-   
-    font-weight: 500;
-      border-color: #ffc107;
-      background-color: #fdeca188;
-      
-       background: linear-gradient(21deg, #ffc107 0%, #ffd557 50%, #e6ad02 100%); 
-       color: #fff  !important;
+
+         font-weight: 500;
+    border-color: #ffc107;
+    background-color: #ffc107;
+    background: linear-gradient(21deg, #fff174 0%, #feecba 50%, #ffe46a 100%);
+    color: #ffc107 !important;
 }
 
 .btn-success{
   
-   color: #198754 !important;
+  color: #fff  !important;
   font-weight: 500;
-    border-color: #198754;
-    background-color: #198754;
-    
-    background: linear-gradient(21deg, #89cfae 0%, #c7ffe5 50%, #4fbb89 100%);
+  background-color: #3f51b5 !important;
+  border-color: #3f51b5 !important;
+
 }
 .btn-success:hover{
 
-  color: #fff  !important;
-  font-weight: 500;
-    border-color: #198754;
-    background-color: #24c47960;
-    background: linear-gradient(21deg, #198754 0%, #25c3799d 50%, #0b5a35 100%);
+
+
+    background-color: #c8d7ff !important;
+  border-color: #3f51b5 !important;
+  color: #3f51b5 !important;
 }
 
 .btn-danger{
-  
-  background: linear-gradient(21deg, #f88792 0%, #fcd3d7 50%, #fe6c7b 100%);
-  color: #dc3545 !important;
-  font-weight: 500;
-    border-color: #dc3545;
-    background-color: #dc3545;
-}
-
-.btn-danger:hover{
   background: linear-gradient(21deg, #dc3545 0%, #fb5f6e 50%, #bb1929 100%);
   color: #fff  !important;
     font-weight: 500;
       border-color: #dc3545;
       background-color: #fa758284 !important;
+
+}
+
+.btn-danger:hover{
+
+
+      background: linear-gradient(21deg, #ff6675 0%, #ffb9c0 50%, #ff5263 100%);
+      color: #dc3545 !important;
+      font-weight: 500;
+        border-color: #dc3545;
+        background-color: #dc3545;
 }
 
 
 .btn-primary{
-  background: linear-gradient(21deg, #5c8affc6 0%, #8aabffc9 50%, #4479ffbd 100%);
-  border-color: #3f51b5 ;
-    color: #3f51b5 ;
+  /*
+  background: linear-gradient(21deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);*/
+  background-color: #3f51b5;
+  border-color: #3f51b5;
+    color: #fff;
 }
 
 .btn-primary:hover{
-  background: linear-gradient(21deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+  background: linear-gradient(21deg, #5c8affc6 0%, #8aabffc9 50%, #4479ffbd 100%);
 }
 
 .contenedor-sub {
@@ -412,7 +416,7 @@ body {
   grid-template-columns: repeat(10, minmax(180px, 1fr));
   grid-gap: 10px;
   margin: 20px;
-  margin-top: 40px !important;
+  margin-top: 50px !important;
 }
 
 .containerRackOp .btn {
@@ -681,13 +685,13 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .modal-header {
   backdrop-filter: blur(15px);
-  background-color: #97a2f9ee !important;
+  background-color: #c8d7ff !important;
   border-color: #3f51b5 !important;
   color: #3f51b5 !important;
 }
 
 .modal-footer {
-  background-color: #97a2f9ee !important;
+  background-color: #c8d7ff !important;
   border-color: #3f51b5 !important;
   color: #3f51b5 !important;
 }

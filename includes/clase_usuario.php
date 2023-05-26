@@ -315,6 +315,7 @@
         $sentencia = "SELECT id FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$password_evaluar' AND estado = 1";
         $comentario="Obtenemos el usuario y contraseña de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
+      
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {

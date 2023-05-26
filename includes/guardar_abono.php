@@ -65,8 +65,13 @@
   if($config->ticket_restaurante == 0){
     $ticket->cambiar_estado($ticket_id);
   }
-  
-  $logs->guardar_log($_POST['usuario_id'],"Agregar abono a la habitacion: ". $nombre);
+  if($id_maestra==0){
+    $logs->guardar_log($_POST['usuario_id'],"Agregar abono a la habitacion: ". $nombre);
+  }else{
+    require_once('clase_cuenta_maestra.php');
+    $cm = new CuentaMaestra($id_maestra);
+    $logs->guardar_log($_POST['usuario_id'],"Agregar abono a la cuenta maestra : ". $cm->nombre);
+  }
   $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
   echo $_POST['hab_id']."/".$_POST['estado']."/".$mov."/".$id_maestra;
 ?>

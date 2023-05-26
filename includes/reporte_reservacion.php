@@ -237,6 +237,7 @@
   $logs->guardar_log($_GET['usuario_id'],"Reporte reservacion: ". $_GET['id']);
   //$pdf->Output("reporte_reservacion.pdf","I");
   $pdf->Output("reporte_reservacion_".$_GET['id'].".pdf","I");
+  
   //$pdf->Output("../reportes/reservaciones/reporte_reservacion.pdf","F");
       //echo 'Reporte reservacion';*/
 ?>

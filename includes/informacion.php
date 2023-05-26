@@ -43,9 +43,8 @@ class Informacion extends ConexionMYSql
             break;
     }
     }
-    
 
-    function mostrarhab($id,$token, $estatus_hab=null){
+    function mostrarhab($id,$token, $estatus_hab=""){
     include_once("clase_cuenta.php");
     include('clase_movimiento.php');
     $cuenta= NEW Cuenta(0);
@@ -53,23 +52,14 @@ class Informacion extends ConexionMYSql
     $cronometro=0;
 
     $filtro="";
-
-   
-
-    // if($estatus_hab!=null){
-    //     $filtro ="AND hab.estado = " . $estatus_hab;
-    //     echo "si";
-    //     die();
-    // }else{
-    //     print_r("si");
-    //     die();
-    // }
-
-    //????
+    if($estatus_hab!=null){
+        $filtro ="AND hab.estado = " . $estatus_hab;
+    }
     if (true) {
     $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 $filtro ORDER BY id";
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);
+    // echo $sentencia;
     }
 
 
@@ -79,13 +69,14 @@ class Informacion extends ConexionMYSql
     $consulta= $this->realizaConsulta($sentencia,$comentario);*/
 
 echo'
+<!--
 <div class="botones-mostrados" id="botones">
 <h3 class="titulo-filtro">Filtrar por:</h3>
 <button class="botones-estado" id="mostrar-todas" onclick="mostrar_estadorack()">Todas</button>
-<button class="botones-estado" id="mostrar-bloqueo" onclick="mostrar_estadorack(1)"> Bloqueo</button>
+<button class="botones-estado" id="mostrar-bloqueo" onclick="mostrar_estadorack(99)"> Bloqueo</button>
 <button class="botones-estado" id="mostrar-uso-casa" onclick="mostrar_estadorack(2)"> Uso Casa</button>
-<button class="botones-estado" id="mostrar-ocupadas" onclick="mostrar_estadorack(3)"> Ocupadas</button>
-<button class="botones-estado" id="mostrar-disponibles" onclick="mostrar_estadorack(4)"> Disponibles</button>
+<button class="botones-estado" id="mostrar-ocupadas" onclick="mostrar_estadorack(1)"> Ocupadas</button>
+<button class="botones-estado" id="mostrar-disponibles" onclick="mostrar_estadorack(0)"> Disponibles</button>
 <button class="botones-estado" id="mostrar-vacias-sucias" onclick="mostrar_estadorack(5)">Sucia Vacia </button>
 <button class="botones-estado" id="mostrar-mantenimiento" onclick="mostrar_estadorack(6)"> Mantenimiento</button>
 <button class="botones-estado" id="mostrar-ocupada-sucias" onclick="mostrar_estadorack(7)">Sucia Ocupada</button>
@@ -93,7 +84,7 @@ echo'
 <button class="botones-estado" id="mostrar-ocupada-limpieza" onclick="mostrar_estadorack(9)"> Limpieza Ocupada</button>
 <button class="botones-estado" id="mostrar-reservada-pagada" onclick="mostrar_estadorack(10)"> Reservacion pagada</button>
 <button class="botones-estado" id="mostrar-reservada-pendiente" onclick="mostrar_estadorack(11)"> Reservacion deuda</button>
-</div>
+</div>--->
 <div class="arealight"></div>
 
 ';

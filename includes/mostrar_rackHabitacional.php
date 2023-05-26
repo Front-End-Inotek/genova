@@ -10,7 +10,7 @@ class RackHabitacional extends ConexionMYSql
     {
         switch ($estado) {
             case 0:
-                $estado_texto[0] = 'task--limpieza-vacia';
+                $estado_texto[0] = 'task--disponible-limpia';
                 $estado_texto[1] = 'Disponible';
                 break;
             case 1:
@@ -142,7 +142,7 @@ class RackHabitacional extends ConexionMYSql
                 <div class="headTable justify-content-center align-items-center">
                     <div style="text-align:center;">
                     <div>
-                        <h2>' . $mes_rack . ' ' . $anio_rack . '</h2>
+                        <h2>' . $mes_rack . ' ' . $anio_rack . '</h2> 
                     </div>
                     </div>
                 </div>

@@ -14,11 +14,12 @@
 
   //revisar si existe un huesped asignado a la cuenta maestra para mostrar 'cierta'  info de ese huesped
 
-
+  $id_huesped=0;
   $nombre_huesped="";
   if($cm->huesped!=""){
     require_once('clase_huesped.php');
     $huesped = new Huesped($cm->huesped);
+    $id_huesped=$huesped->id;
     $nombre_huesped = $huesped->nombre ." ".$huesped->apellido;
   }
  
@@ -55,7 +56,9 @@
           }
         echo '</div>
         <div class="row">
-         <div class="col-sm-4">Nombre Huesped: '.$nombre_huesped.'</div>
+         <div class="col-sm-4">Nombre Huesped: '.$nombre_huesped.'
+         <button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$_GET['id'].','.$mov.')"> Cambiar huesped</button>
+         </div>
         </div>
         <div class="row">
          

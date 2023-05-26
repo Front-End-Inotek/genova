@@ -529,7 +529,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Busqueda de cualquier producto en el inventario
-      function mostar_producto_busqueda($busqueda,$hab_id,$estado,$mov,$mesa){
+      function mostar_producto_busqueda($busqueda,$hab_id,$estado,$mov,$mesa,$id_maestra=0){
         $sentencia = "SELECT * FROM inventario WHERE nombre LIKE '%$busqueda%' AND estado = 1 ORDER BY categoria, nombre";
         $comentario="Busqueda de cualquier producto en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -541,16 +541,16 @@
           {
             if($cunt%3==0){
               //echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
               echo $fila['nombre'];
               echo'</button></div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }else{
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
+              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
               echo $fila['nombre'];
               echo'</button></div>';
             }
@@ -816,8 +816,8 @@
              
             } 
             echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
-            <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0)">Linea</button></></div>
-            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>
+            <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0,'.$id_maestra.')">Linea</button></></div>
+            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.','.$id_maestra.')">Pedir</button></></div>
             <div class="col-sm-1"></div>';                 
           }else{
             echo '<div class="col-sm-12"></div>'; 

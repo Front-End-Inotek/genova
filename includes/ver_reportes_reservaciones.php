@@ -26,7 +26,7 @@
   
   <ul class="pagination">';
   for($i = 1; $i <= $cat_paginas; $i++){
-    echo '<li class="page-item"><a class="page-link" href="#" onclick="ver_reservaciones_paginacion_por_dia('.$i.','.$id_paginacion.','.$inicial.')">'.$i.'</a></li>';
+    echo '<li class="page-item"><a class="page-link" href="#" onclick="ver_reservaciones_paginacion('.$i.','.$id_paginacion.','.$opcion.')">'.$i.'</a></li>';
     $id_paginacion=$id_paginacion+20;
   }  
   echo ' </ul>';

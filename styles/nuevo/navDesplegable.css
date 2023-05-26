@@ -310,7 +310,7 @@ span {
   top: 12px;
   border-radius: 5px;
   color: #30349f;
-  background: radial-gradient(circle at center,  #ffffff, #adadfe 70%) ;
+  background: radial-gradient(circle at center,  #ffffff, #b4c9ff 70%) ;
   border: 2px solid #30349f !important;
   line-height: 1;
 }
@@ -338,8 +338,8 @@ span {
   font-size: 28px !important;
   left: 95.5% !important;
   top: 12px;
-  color: #000 !important;
-  background: radial-gradient(circle at center,  #ffffff, #adadfe 70%) ;
+  color: #30349f !important;
+  background: radial-gradient(circle at center,  #ffffff, #b4c9ff 70%) ;
   border: 2px solid #30349f !important;
   border-radius: 5px;
   line-height: 1;
