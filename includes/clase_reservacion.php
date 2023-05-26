@@ -37,6 +37,10 @@ class Reservacion extends ConexionMYSql
     public $nombre_cancela;
     public $tipo_descuento;
     public $estado;
+    public $pax_extra;
+    public $plan_alimentos;
+    public $sobrevender;
+    public $canal_reserva;
     //mejor poner el autoincrement de la tabla con ese valor inicial
     //public const INIT_ID=10000;
 
@@ -76,6 +80,10 @@ class Reservacion extends ConexionMYSql
             $this->nombre_cancela= 0;
             $this->tipo_descuento= 0;
             $this->estado= 0;
+            $this->pax_extra= 0;
+            $this->plan_alimentos= 0;
+            $this->sobrevender= 0;
+            $this->canal_reserva=0;
         } else {
             $sentencia = "SELECT * FROM reservacion WHERE id = $id LIMIT 1 ";
             $comentario="Obtener todos los valores de una reservacion";
@@ -113,6 +121,10 @@ class Reservacion extends ConexionMYSql
                 $this->nombre_cancela= $fila['nombre_cancela'];
                 $this->tipo_descuento= $fila['tipo_descuento'];
                 $this->estado= $fila['estado'];
+                $this->pax_extra= $fila['pax_extra'];
+                $this->plan_alimentos=$fila['plan_alimentos'];
+                $this->sobrevender=$fila['sobrevender'];
+                $this->canal_reserva=$fila['canal_reserva'];
             }
         }
     }
@@ -224,7 +236,7 @@ class Reservacion extends ConexionMYSql
 
 
         $sentencia ="SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r
-		INNER JOIN tarifa_hospedaje ON r.tipo_hab = tarifa_hospedaje.id
+		LEFT JOIN tarifa_hospedaje ON r.tipo_hab = tarifa_hospedaje.id
 		INNER JOIN usuario ON r.id_usuario = usuario.id
 		INNER JOIN huesped ON r.id_huesped = huesped.id
 		INNER JOIN movimiento AS m ON m.id_reservacion= r.id
@@ -361,10 +373,6 @@ class Reservacion extends ConexionMYSql
           $comentario="Guardamos la reservacion en la base de datos";
 
           $consulta= $this->realizaConsulta($sentencia, $comentario);
-
-
-
-
           include_once("clase_log.php");
           $logs = new Log(0);
           $sentencia = "SELECT id FROM reservacion ORDER BY id DESC LIMIT 1";
@@ -1290,7 +1298,7 @@ class Reservacion extends ConexionMYSql
 
                         echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
                         if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
+                            echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
                         }
                         if($borrar==1 && $fila['edo'] != 0) {
                             echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
@@ -1328,7 +1336,7 @@ class Reservacion extends ConexionMYSql
 
                         echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
                         if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
+                            echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
                         }
                         if($borrar==1 && $fila['edo'] != 0) {
                             echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
@@ -1376,7 +1384,7 @@ class Reservacion extends ConexionMYSql
                     }
                     echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
                     if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
+                        echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
                     }
                     if($borrar==1 && $fila['edo'] != 0) {
                         echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
@@ -2760,6 +2768,99 @@ class Reservacion extends ConexionMYSql
 		</table>
 		</div>';
     }
+
+    //editar una reservacion "nueva"
+
+        // Guardar la reservacion (nuevo)
+        public function editar_reservacionNew(
+            $id_huesped,
+            $tipo_hab,
+            $id_movimiento,
+            $fecha_entrada,
+            $fecha_salida,
+            $noches,
+            $numero_hab,
+            $precio_hospedaje,
+            $cantidad_hospedaje,
+            $extra_adulto,
+            $extra_junior,
+            $extra_infantil,
+            $extra_menor,
+            $tarifa,
+            $nombre_reserva,
+            $acompanante,
+            $forma_pago,
+            $limite_pago,
+            $suplementos,
+            $total_suplementos,
+            $total_hab,
+            $forzar_tarifa,
+            $codigo_descuento,
+            $descuento,
+            $total,
+            $total_pago,
+            $hab_id,
+            $usuario_id,
+            $cantidad_cupon,
+            $tipo_descuento,
+            $estado,
+            $pax_extra,
+            $canal_reserva,
+            $plan_alimentos,
+            $tipo_reservacion,
+            $sobrevender,
+            $id_cuenta,
+            
+        ) {
+            $fecha_entrada= strtotime($fecha_entrada);
+            $fecha_salida= strtotime($fecha_salida);
+          
+            $sentencia = "UPDATE `reservacion` SET
+			`id_huesped` = '$id_huesped',
+			`tipo_hab` = '$tipo_hab',
+			`fecha_entrada` = '$fecha_entrada',
+			`fecha_salida` = '$fecha_salida',
+			`noches` = '$noches',
+			`numero_hab` = '$numero_hab',
+			`precio_hospedaje` = '$precio_hospedaje',
+			`cantidad_hospedaje` = '$cantidad_hospedaje',
+			`extra_adulto` = '$extra_adulto',
+			`extra_junior` = '$extra_junior',
+			`extra_infantil` = '$extra_infantil',
+			`extra_menor` = '$extra_menor',
+			`tarifa` = '$tarifa',
+			`nombre_reserva` = '$nombre_reserva',
+			`acompanante` = '$acompanante',
+			`forma_pago` = '$forma_pago',
+			`limite_pago` = '$limite_pago',
+			`suplementos` = '$suplementos',
+			`total_suplementos` = '$total_suplementos',
+			`total_hab` = '$total_hab',
+			`forzar_tarifa` = '$forzar_tarifa',
+			`codigo_descuento` = '$codigo_descuento',
+			`descuento` = '$descuento',
+			`total` = '$total',
+			`total_pago` = '$total_pago',
+			`tipo_descuento` = '$tipo_descuento',
+            `id_usuario` = '$usuario_id',
+            `pax_extra` = '$pax_extra',
+            `canal_reserva` = '$canal_reserva',
+            `plan_alimentos` = '$plan_alimentos',
+            `tipo_reservacion` = '$tipo_reservacion',
+            `sobrevender` = '$sobrevender'
+			WHERE `id` = '$id_cuenta'";
+            //echo $sentencia;
+            $comentario="Editar una reservacion dentro de la base de datos";
+            $consulta= $this->realizaConsulta($sentencia, $comentario);
+
+  
+           
+  
+            //retornamos el id de la reservacion para comprobar y guardar un log de preasignada
+            return $id;
+  
+        }
+
     // Editar una reservacion
     public function editar_reservacion($id, $id_huesped, $tipo_hab, $id_cuenta, $fecha_entrada, $fecha_salida, $noches, $numero_hab, $precio_hospedaje, $cantidad_hospedaje, $extra_adulto, $extra_junior, $extra_infantil, $extra_menor, $tarifa, $nombre_reserva, $acompanante, $forma_pago, $limite_pago, $suplementos, $total_suplementos, $total_hab, $forzar_tarifa, $codigo_descuento, $descuento, $total, $total_pago, $cantidad_cupon, $tipo_descuento)
     {

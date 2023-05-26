@@ -2010,7 +2010,7 @@ function calcular_total_cupon(precio_hospedaje,total_adulto,total_junior,total_i
 	document.getElementById("total").value= calculo_descuento + total_suplementos;
 }
 
-function guardarReservacion(id_huesped,hab_id=0){
+function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var usuario_id=localStorage.getItem("id");
     var numero_hab= Number(document.getElementById("numero_hab").value);
     var noches= Number(document.getElementById("noches").value);
@@ -2080,9 +2080,28 @@ function guardarReservacion(id_huesped,hab_id=0){
         tarifa_existe = tarifa;
     }else{
         tarifa_existe=forzar_tarifa;
+        $("#tarifa").removeAttr('required');
     }
 
+    ruta="includes/guardar_reservacionNew.php";
+
+    if(id_cuenta!=0){
+        ruta="includes/aplicar_editar_reservacionNew.php";
+    }
+
+    // if(forzar_tarifa!=""){
+    //     numero_hab = numero_hab == 0 ? 1 : numero_hab
+    //     tarifa = noches * forzar_tarifa * numero_hab
+    //     $("#total").val(tarifa)
+    //     $("#aux_total").val(tarifa)
+    //     $("#tipo-habitacion").removeAttr("disabled");
+    //     $("#tarifa_menores").val("")
+    //     $("#tarifa_adultos").val("")
+    //     $("#tarifa").removeAttr('required');
+    // }
+
     var datos = {
+        "id":id_reservacion,
         "id_huesped": id_huesped,
         "fecha_entrada": fecha_entrada,
         "fecha_salida": fecha_salida, 
@@ -2120,18 +2139,20 @@ function guardarReservacion(id_huesped,hab_id=0){
       };
         console.log(datos)
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
-        //return ;
+        // return ;
       if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa_existe >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
         $.ajax({
             async:true,
             type: "POST",
             dataType: "html",
             contentType: "application/x-www-form-urlencoded",
-            url:"includes/guardar_reservacionNew.php",
+            url:ruta,
             data:datos,
             beforeSend:loaderbar,
             //success:ver_reservaciones,
             success:function(res){
+                console.log(res)
+                return
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
                 ver_reporte_reservacion(res,"ver_reservaciones()",titulo)
@@ -2157,7 +2178,7 @@ function asignarValorTarjeta(){
     $("#estadotarjeta").val($("input[name=estado]:checked").val())
 }
 
-function guardarNuevaReservacion(hab_id){
+function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
 
 
     var usuario_id=localStorage.getItem("id");
@@ -2180,9 +2201,7 @@ function guardarNuevaReservacion(hab_id){
 
     var voucher =document.getElementById('voucher').value
 
-    // if(huesped!=""){
-    //     guardar_reservacion(response_mj)
-    // }
+  
     titular_tarjeta=$("#nt").val()
     numero_tarjeta=$("#nut").val()
     vencimiento_mes=$("#mes").val()
@@ -2222,7 +2241,7 @@ function guardarNuevaReservacion(hab_id){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
                 return
             }else{
-                guardarReservacion(response_msj,hab_id)
+                guardarReservacion(response_msj,hab_id,id_cuenta,id_reservacion)
                 //todo ocurre correctamente.
                 
             }
@@ -2562,6 +2581,10 @@ function busqueda_reservacion_combinada_por_dia(){
 function reporte_reservacion_por_dia(dia){
     var usuario_id=localStorage.getItem("id");
     window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id);
+}
+// Editar una reservacion
+function editar_reservacionNew(id){
+    $("#area_trabajo_menu").load("includes/editar_reservacionNew.php?id="+id);
 }
 
 // Editar una reservacion

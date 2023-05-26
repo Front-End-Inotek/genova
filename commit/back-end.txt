@@ -39,3 +39,7 @@ Se está trabajando con las paginaciones de los apartados de los reportes de rec
 24/05
 Se estuvieron modificando los filtros de los reportes de recepción y llegadas/salidas así como  en las paginaciones.
 Se estuvo trabajando en el formato de confirmación de recepción.
+25/05
+Se agregan nuevos campos a la reservación
+La vista para checkin se cambia a la "nueva" vista de reservación
+Se agrega un campo "garantía" en las formas de pago
