@@ -1,6 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
+  require_once('sanitize.php');
 
   class Tipo extends ConexionMYSql{
 
@@ -30,8 +31,16 @@
           }
         }
       }
+
+      // function sanitize($param){
+      //   return htmlspecialchars($param, ENT_QUOTES, 'UTF-8');
+      // }
+
       // Guardar en el tipo habitacion
       function guardar_tipo($nombre,$codigo){
+        $nombre = sanitize($nombre);
+        $codigo = sanitize($codigo);
+
         $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `codigo`, `estado`)
         VALUES ('$nombre', '$codigo', '1');";
         $comentario="Guardamos el tipo habitacion en la base de datos";

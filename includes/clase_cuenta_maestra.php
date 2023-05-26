@@ -29,8 +29,25 @@ class CuentaMaestra extends ConexionMYSql{
       }
 
     }
+     // Editar una cuenta maestra
+    function editar_cuenta_maestra($id,$nombre,$codigo){
+      $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+      $codigo = htmlspecialchars($codigo, ENT_QUOTES, 'UTF-8');
+      $sentencia = "UPDATE `cuenta_maestra` SET
+          `nombre` = '$nombre',
+          `codigo` = '$codigo'
+          WHERE `id` = '$id';";
+      //echo $sentencia ;
+      $comentario="Editar una cuenta maestra dentro de la base de datos ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      if($consulta){
+        echo ("NO");
+      }else{
+        echo ("error en la consulta");
+      }
+    }
 
-    // Borrar un tipo habitacion
+    // Borrar una cuenta maestra
     function borrar_cuenta_maestra($id){
       $sentencia = "UPDATE `cuenta_maestra` SET
       `estado` = '0'
@@ -65,6 +82,9 @@ class CuentaMaestra extends ConexionMYSql{
         //Se debe crear un movimiento 'vacio', el cual estará asociada a la cuenta maestra, y se estará utilizando como movimiento 'principal' de esa cuenta.
         require_once('clase_movimiento.php');   
         $fecha_entrada = time();
+
+        $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+        $codigo = htmlspecialchars($codigo, ENT_QUOTES, 'UTF-8');
 
         $movimiento = new Movimiento(0);
         $mov = $movimiento->disponible_asignar(0,0,0,$fecha_entrada,'',$usuario_id,'',"maestra");
@@ -123,21 +143,21 @@ class CuentaMaestra extends ConexionMYSql{
                 <td>'.$fila['nombre_maestra'].'</td>
                 <td>'.$fila['codigo'].'</td>';
                 if(empty($fila['huesped'])){
-                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$fila['id_maestra'].','.$fila['mov'].')">Húesped</button></td>';
+                  echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$fila['id_maestra'].','.$fila['mov'].')">Húesped</button></td>';
                 }else{
                   echo '<td>'.$fila['nombre'].' '.$fila['apellido'].' </td>';
                 }
               
-                echo '<td><button class="btn btn-warning"  onclick="agregar_restaurante(0,0,'.$fila['id_maestra'].','.$fila['mov'].')">Restaurante</button></td>';
-                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo_adicional('.$fila['id_maestra'].','.$fila['mov'].')">Adicionales</button></td>';
-                echo '<td><button class="btn btn-warning"  onclick="estado_cuenta_maestra(0,1,'.$fila['mov'].','.$fila['id_maestra'].')">Cuenta</button></td>';
+                echo '<td><button class="btn btn-primary"  onclick="agregar_restaurante(0,0,'.$fila['id_maestra'].','.$fila['mov'].')">Restaurante</button></td>';
+                echo '<td><button class="btn btn-info" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo_adicional('.$fila['id_maestra'].','.$fila['mov'].')">Adicionales</button></td>';
+                echo '<td><button class="btn btn-primary"  onclick="estado_cuenta_maestra(0,1,'.$fila['mov'].','.$fila['id_maestra'].')">Cuenta</button></td>';
                 
                 '<td></td>
                 <td></td>
 
                 ';
                 if($editar==1){
-                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_tipo('.$fila['id_maestra'].')"> Editar</button></td>';
+                  echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_cuenta_maestra('.$fila['id_maestra'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" onclick="borrar_cuenta_maestra(' . $fila['id_maestra'] . ', \'' . addslashes($fila['nombre_maestra']) . '\', \'' . addslashes($fila['codigo']) . '\')">Borrar</button></td>';

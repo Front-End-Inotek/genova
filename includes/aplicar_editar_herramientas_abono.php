@@ -10,8 +10,15 @@
   $logs = NEW Log(0);
   $nombre= $hab->nombre;
 
+  $mensaje_log="Editar abono de habitacion: ". $nombre." en cuenta ". $_POST['id'];
+  if(isset($_POST['id_maestra'])){
+    require_once('clase_cuenta_maestra.php');
+    $cm = new CuentaMaestra($_POST['id_maestra']);
+    $mensaje_log="Editar abono de cuenta maestra: ". $cm->nombre." en cuenta ". $_POST['id'];
+  }
+
   $cuenta->editar_abono($_POST['id'],$_POST['abono']);
-  $logs->guardar_log($_POST['usuario_id'],"Editar abono de habitacion: ". $nombre." en cuenta ". $_POST['id']);
+  $logs->guardar_log($_POST['usuario_id'],$mensaje_log);
   
   echo $_POST['hab_id']."/".$_POST['estado']."/".$_POST['mov']."/".$_POST['id_maestra'];
 ?>

@@ -73,7 +73,7 @@
   if($_POST['forzar_tarifa'] > 0 || $_POST['total_suplementos'] > 0 || $_POST['total_pago'] > 0 || $cantidad_cupon > 0){
     $cuenta= 1;
   }
-  $motivo = empty($_POST['hab_id']) ? "reservar" : "preasignar";
+  $motivo = empty($_POST['preasignada']) ? "reservar" : "preasignar";
  
   $sobrevender = isset($_POST['sobrevender']) ? $_POST['sobrevender'] : "";
 
@@ -82,11 +82,11 @@
   //if($_POST['hab_id'] != 0){
   $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa'],$motivo);
   $mov_actual= $movimiento->ultima_insercion();
-//   if($_POST['hab_id'] != 0){
-//     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
-//     $logs->guardar_log($_POST['usuario_id'],"Check-in en habitacion: ". $hab->nombre);
-//     $cuenta= 1;
-//   }
+  if($_POST['hab_id'] != 0){
+    $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
+    $logs->guardar_log($_POST['usuario_id'],"Check-in en habitacion: ". $hab->nombre);
+    $cuenta= 1;
+  }
 
   $pax_extra = isset($_POST['pax_extra']) ? $_POST['pax_extra'] : "";
   $canal_reserva = isset($_POST['canal_reserva']) ? $_POST['canal_reserva'] : "";
@@ -102,8 +102,8 @@
   $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender);
 
 
-  //si hay hab_id 
-  if($_POST['hab_id']!=0){
+  //si hay preasignada 
+  if($_POST['preasignada']!=0){
     $logs->guardar_log($_POST['usuario_id'],"Preasginar reservacion: ". $id_reservacion . " Hab: " . $_POST['hab_id']);
   }
 
@@ -154,6 +154,7 @@
     //echo $id_reservacion;
     
   }
+  //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
   echo $id_reservacion;
 
 ?>

@@ -18,7 +18,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;">Cargo</span>
             </div>
-              <input type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+              <input required type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
         </div>
 
         <div class="input-group mb-3">

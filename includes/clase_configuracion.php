@@ -49,6 +49,8 @@
     public $autocobro;
     public $checkin;
 
+    public $domicilio;
+
     function __construct()
     {
       $sentencia = "SELECT * FROM configuracion WHERE id = 1 LIMIT 1";
@@ -85,6 +87,7 @@
            $this->puntos= $fila['puntos'];
            $this->autocobro= $fila['autocobro'];
            $this->checkin= $fila['checkin'];
+           $this->domicilio= $fila['domicilio'];
       }
     }
 
@@ -101,18 +104,19 @@
       }
     }
     function editar_plan($plan_id,$nombre,$costo){
-        $sentencia = "UPDATE `planes_alimentos` SET
-            `nombre_plan` = '$nombre',
-            `costo_plan` = '$costo'
-            WHERE `id` = '$plan_id';";
-        //echo $sentencia ;
-        $comentario="Editar un tipo habitacion dentro de la base de datos ";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        if($consulta){
-          echo ("NO");
-        }else{
-          echo ("error en la consulta");
-        }
+      $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+      $sentencia = "UPDATE `planes_alimentos` SET
+      `nombre_plan` = '$nombre',
+      `costo_plan` = '$costo'
+      WHERE `id` = '$plan_id';";
+      //echo $sentencia ;
+      $comentario="Editar un tipo habitacion dentro de la base de datos ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      if($consulta){
+        echo ("NO");
+      }else{
+        echo ("error en la consulta");
+      }
     }
 
     function mostrar_planes_select(){
@@ -128,6 +132,8 @@
     }
 
   function guardar_plan_alimentos($nombre,$costo){
+
+      $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
       $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`)
       VALUES ('$nombre', '$costo', '1');";
       $comentario="Guardamos el plan de alimentos en la base de datos";

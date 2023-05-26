@@ -98,9 +98,11 @@
         </div>';
       }
 
+
       // Guardar la cuenta
       function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono){
         $fecha=time();
+        $descripcion = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
         $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
         VALUES ('$usuario_id', '$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
         $comentario="Guardamos la cuenta en la base de datos";
