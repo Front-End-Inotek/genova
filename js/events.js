@@ -1,4 +1,6 @@
 var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario'];
+var hab = [];
+var hab_ultimo_mov = [];
 var vista=0;
 x=$(document);
 x.ready(inicio);
@@ -76,6 +78,7 @@ function sabernosession(){
 	}else{
 		id=parseInt(id);
 		if(id>0){
+            obtener_datos_hab_inicial ();
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
 
             if(vista==0){
@@ -99,18 +102,78 @@ function sabernosession(){
 		}
 	}
 }
-let obtener_datos = () => {
-    return "Hello World!";
+function obtener_datos_hab () {
+    //código de la función
+    var id=localStorage.getItem("id_knife");
+    var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //console.log(this.responseText);
+          const hab_info =JSON.parse(this.responseText);
+          //console.log(hab_info);
+          var i;
+            for(i in hab_info){
+                if(hab_info[i]instanceof Object){
+                    /*console.log(hab_info[i]);
+                    /*console.log(hab_info[i]['id']+"-"+hab_info[i]['ultimo_mov']);*/
+                    if(hab[hab_info[i]['id']]<hab_info[i]['ultimo_mov']){
+                        console.log('hab_'+hab_info[i]['id']);
+                        hab[hab_info[i]['id']]=hab_info[i]['ultimo_mov'];
+                        hab_ultimo_mov[hab_info[i]['id']]=hab_info[i]['mov'];
+                        $("#hab_"+hab_info[i]['id']).load("includes/mostrar_cambios_hab.php?hab_id="+hab_info[i]['id']);
+                        /*const collection = document.getElementById("hab_"+hab_info[i]['id']);
+                        collection.innerHTML = '<button id="submit">Submit</button>';*/
+
+                        //console.log(hab_info[i]['id']+"-"+hab[hab_info[i]['id']]+"-"+hab_ultimo_mov[hab_info[i]['id']]);
+                    }
+                    else{
+                        //console.log("sin cambio en la habitacion con id "+hab_info[i]['id']);
+                    }
+                    
+                }
+            }
+         // console.log(hab_info.length);
+        }
+      };
+      xhttp.open("GET", "includes/api_info_hab.php", true);
+      xhttp.send();
+}
+
+function obtener_datos_hab_inicial () {
+    //código de la función
+    var id=localStorage.getItem("id_knife");
+    var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //console.log(this.responseText);
+          const hab_info =JSON.parse(this.responseText);
+          //console.log(hab_info);
+          var i;
+            for(i in hab_info){
+                if(hab_info[i]instanceof Object){
+                    /*console.log(hab_info[i]);
+                    /*console.log(hab_info[i]['id']+"-"+hab_info[i]['ultimo_mov']);*/
+                    hab[hab_info[i]['id']]=hab_info[i]['ultimo_mov'];
+                    hab_ultimo_mov[hab_info[i]['id']]=hab_info[i]['mov'];
+                   // console.log(hab_info[i]['id']+"-"+hab[hab_info[i]['id']]+"-"+hab_ultimo_mov[hab_info[i]['id']]);
+                }
+            }
+         // console.log(hab_info.length);
+        }
+      };
+      xhttp.open("GET", "includes/api_info_hab.php", true);
+      xhttp.send();
 }
 // Se carga el area de trabajo
 function cargar_area_trabajo(){
-    console.log(vista);
+    //console.log(vista);
+    obtener_datos_hab();
+
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
-
-
-
-    if(vista==0){
+   /* if(vista==0){
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
@@ -120,12 +183,7 @@ function cargar_area_trabajo(){
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-    }
-
-
-
-
-
+    }*/
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
 
