@@ -79,6 +79,7 @@ class Informacion extends ConexionMYSql
     $consulta= $this->realizaConsulta($sentencia,$comentario);*/
 
 echo'
+<!--
 <div class="botones-mostrados" id="botones">
 <h3 class="titulo-filtro">Filtrar por:</h3>
 <button class="botones-estado" id="mostrar-todas" onclick="mostrar_estadorack()">Todas</button>
@@ -93,7 +94,7 @@ echo'
 <button class="botones-estado" id="mostrar-ocupada-limpieza" onclick="mostrar_estadorack(9)"> Limpieza Ocupada</button>
 <button class="botones-estado" id="mostrar-reservada-pagada" onclick="mostrar_estadorack(10)"> Reservacion pagada</button>
 <button class="botones-estado" id="mostrar-reservada-pendiente" onclick="mostrar_estadorack(11)"> Reservacion deuda</button>
-</div>
+</div>--->
 <div class="arealight"></div>
 
 ';

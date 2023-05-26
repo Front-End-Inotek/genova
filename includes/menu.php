@@ -273,6 +273,7 @@
             <i class="bx bx-menu"></i>
             <span class="label">Menu</span>
 		</a>
+		<!---
 		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--amarillo menu-btn" id="menu-btn-fecha">
 			<i class="bx bx-calendar-star"></i>
             <span class="label">Fechas</span>
@@ -286,7 +287,7 @@
 		<a class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn icon-btn icon-btn--morado" id="mostrar-botones" onclick="toggleBotones()">
             <i class="bx bxl-stack-overflow" ></i>
             <span class="label">Filtro</span>
-        </a>
+        </a>-->
 		<button class="btn btn-primary border-0 menu-btn icon-btn" id="filtro-noche" onclick="modoNocturno()">
  		<i class="bx bx-moon icono-luna"></i>
 		 <span class="label">Color</span>

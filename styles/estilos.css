@@ -192,10 +192,13 @@ label {
   background-attachment: fixed;
   background-size: cover;
   color: #3f51b5 !important;
-  background-color: #5b58f814 !important;
+  /*
+  background-color: #5b58f814 !important;*/
+  background-color: #dde6ff !important;
   margin-top: 60px !important;
   padding-top: 20px !important;
-  border: 2px solid #ede4ff;
+  border: 2px solid #3f51b5;
+  border-radius: 5px;
   
 }
 
@@ -204,8 +207,9 @@ label {
   background-color: #f5f5f51f !important;
 }
 
-.table-responsive tr {
-  border: 2px solid #a39fff !important;
+.table-responsive tr {/*
+  border: 2px solid #a39fff !important;*/
+  border: 2px solid #3f51b5 !important;
   
 }
 
@@ -217,8 +221,9 @@ label {
   margin-right: 5px;
 }
 
+
 .input-group-text {
-  background-color: #f5f5f5;
+  background-color: #e9ecef;
   color: #3f51b5 !important;
 }
 
@@ -340,6 +345,11 @@ tr:hover {
   -webkit-box-shadow: 0 6px 6px -6px #0e1119;
   -moz-box-shadow: 0 6px 6px -6px #0e1119;
   box-shadow: 0 6px 6px -6px #0e1119;
+}
+
+.card-body{
+  background-color: #f1f2ff;
+  border-radius: 12px;
 }
 
 /* Contenedor con fondo blanco y margen */
@@ -1372,6 +1382,7 @@ a.topictitle:hover {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  font-size: 20px;
 }
 
 .col-xs-1,

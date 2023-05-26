@@ -25,3 +25,20 @@
 --se agrego y reacomodo varios formularios
 --se organizaron modales que no tenian bien puesto el header y footer
 --se cambiaron colores en tablas generales
+----23/05
+--se ajustaron los labels
+--se hizo modificacion a los checkbox
+--se cambiaron de color los botones
+----24/05
+--se modificaron los header
+--se ajusto las sombras de todos los elementos
+--se modificaron los footer de modales
+--se ajusto la trasparencia de contenedores
+--se ajusto el color de modo nocturno
+--se modifico el apartado de tarjeta de credito
+----25/05
+--se ajusto los tamaños de letras de todo el proyecto
+--se ajustaron los contenedores
+--se cambio el color de botones
+--se agrego nuevo color a los contenedores y bordes
+--se cambio el color base de varias secciones
