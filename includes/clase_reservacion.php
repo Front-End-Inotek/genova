@@ -330,6 +330,7 @@ class Reservacion extends ConexionMYSql
           $plan_alimentos,
           $tipo_reservacion,
           $sobrevender,
+          
       ) {
           $fecha_entrada= strtotime($fecha_entrada);
           $fecha_salida= strtotime($fecha_salida);

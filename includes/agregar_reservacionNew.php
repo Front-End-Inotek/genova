@@ -6,6 +6,7 @@ error_reporting(0);
   include_once("clase_hab.php");
   include_once("clase_reservacion.php");
   include_once("clase_configuracion.php");
+  include_once("clase_forma_pago.php");
   $tarifa= NEW Tarifa(0);
   $reservacion = new Reservacion(0);
   $config= new Configuracion();
@@ -14,6 +15,10 @@ error_reporting(0);
   $dia= time();
   $dia_actual= date("Y-m-d",$dia);
 
+  $forma_pago = new Forma_pago(0);
+
+  $titulo_="";
+  $clv="";
   
 
   // Checar si hab_id esta vacia o no
@@ -21,10 +26,14 @@ error_reporting(0);
  
     $hab_id= 0;
     $hab_tipo= 0;
+    $titulo_="Reservación de habitación";
+    $clv="Clave de reserva";
 
     $hab = NEW Hab(0);
     $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
   }else{
+    $titulo_="CHECK-IN";
+    $clv="Clave check-in";
     $hab_id= $_GET['hab_id'];
     $hab = NEW Hab($hab_id);
     $hab_tipo= $hab->tipo;
@@ -42,24 +51,27 @@ error_reporting(0);
 echo '<div class="container-fluid blanco" style="width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
-        <form onsubmit="event.preventDefault(); guardarNuevaReservacion()">
-           
-
-        <h1 class="titulo">Reservacion de habitación</h1> <br>
+        <form onsubmit="event.preventDefault(); guardarNuevaReservacion('.$_GET['hab_id'].')">
+        <div class="div_adultos"></div>
+        <h2 class="titulo">'.$titulo_.'</h2> <br>
             <div class="d-flex justify-content-end">
                 <div class="form-group col-md-4 mb-3">
-                    <label for="clave-reserva" class="text-right">Clave de reserva</label>
+                    <label for="clave-reserva" class="text-right">'.$clv.'</label>
                     <input type="text" value="'.$ultimo_id.'" class="form-control" id="clave-reserva" readonly>
-                </div>
-
-                <div class="form-group col-md-4">
+                </div>';
+                if (empty($_GET['hab_id'])) {
+                    echo ' <div class="form-group col-md-4">
                     <label for="tipo-reservacion" class="text-right">Tipo de reservación</label>
                     <select class="form-control" id="tipo-reservacion">
                         <option value="individual">Individual</option>
                         <option value="grupo">Grupo</option>
                         <option value="evento">Evento</option>
                     </select>
-                </div>
+                </div>';
+                }
+                
+                echo'
+               
                 <div class="form-group col-md-4">
                     <label for="total-estancia">Total de la estancia</label>
                     <input type="number" class="form-control" id="total" min="0" step="0.01" readonly>
@@ -77,7 +89,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="noches">Noches</label>
-                    <input class="form-control" type="number"  id="noches" placeholder="0" onchange="cambiar_adultosNew('.$hab_id.');" disabled/>
+                    <input class="form-control" type="number"  id="noches" placeholder="0" onchange="cambiar_adultosNew("",'.$hab_id.');" disabled/>
                 </div>
                 
             </div>
@@ -92,7 +104,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
             <div class="form-group col-md-4 mb-3">
                     <label for="tipo-habitacion">Forzar tarifa</label>
-                    <input type="number" class="form-control" id="forzar-tarifa" min="0" step="0.01" onchange="cambiar_adultosNew('.$hab_id.')">
+                    <input type="number" class="form-control" id="forzar-tarifa" min="0" step="0.01" onchange="cambiar_adultosNew(0,'.$hab_id.')">
                 </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="tipo-habitacion">Tipo de habitación</label>
@@ -105,7 +117,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <!---
                 <div class="form-group col-md-3">
                     <label for="no-habitaciones">No. de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew('.$hab_id.')">
+                    <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew("",'.$hab_id.')">
                 </div>
                 -->
             </div>
@@ -130,7 +142,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <div class="d-flex justify-content-between">
             <div class="form-group col-md-4">
                     <label for="no-habitaciones">Número de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew('.$hab_id.')">
+                    <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew(0,'.$hab_id.')">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="pax-extra">Pax extra</label>
@@ -145,18 +157,21 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                   </select>
                   <input type="number" id="costoplan" hidden>
                 </div>
-            </div>
-            <div class="d-flex justify-content-between">
+            </div>';
+          
+            if (empty($_GET['hab_id'])) {
+                echo'
+                <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
                     <label for="hab-preasignada">Habitación preasignada</label>
                     <select class="form-control" id="preasignada">
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                <label for="hab-preasignada">Sobrevender</label>
-                <input type="checkbox" id="sobrevender" disabled class="form-check"/>
-                </select>
-            </div>
+                    <label for="hab-preasignada">Sobrevender</label>
+                    <input type="checkbox" id="sobrevender" disabled class="form-check"/>
+                    </select>
+                </div>
                 <div class="form-group col-md-4">
                     <label for="canal-reserva">Canal de reserva</label>
                     <select class="form-control" id="canal-reserva" required>
@@ -167,10 +182,10 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                         <option value="agencia">Agencia de viajes</option>
                     </select>
                 </div>
-            </div>
+            </div>';
+            }
+        echo'
             <br>
-            
-
             <h2>Datos Personales</h2>
             <button class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
             <input type="text" id="tomahuespedantes" hidden>
@@ -217,7 +232,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
             </div>
             <div class="d-flex justify-content-between">
-                <div class="form-group col-md-8">
+                <div class="form-group col-md-6">
                     <label for="direccion">Dirección</label>
                     <input type="text" class="form-control" id="direccion">
                 </div>
@@ -225,27 +240,41 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <label for="email">Correo electrónico </label>
                     <input type="text" class="form-control" id="correo">
                 </div>
+                <div class="form-group col-md-2">
+                <label for="confirmacion">Confirmación</label>
+                <input type="checkbox" id="confirmacion"  class="form-check"/>
+                </select>
+            </div>
             </div>
             <div class="d-flex justify-content-between">
+                
                 <div class="form-group col-md-3">
                     <label for="forma-garantia">Forma de Garantía</label>
-                    <select class="form-control" id="forma-garantia" required onchange="obtener_garantia()">
-                        <option value="">Seleccione una opción</option>
-                        <option value="2">Tarjeta de crédito</option>
-                        <option value="1">Efectivo</option>
-                        <option value="3">Transferencia bancaria</option>
+                    <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)">
+                    <option value="">Seleccione una opción </option>
+                    ';
+                
+                    $forma_pago->mostrar_forma_pago();
+                    echo'
                     </select>
-                  
-                    
+                </div>
+                <div class="form-group col-md-3" id="div_voucher" style="display:none">
+                    <label for="voucher">Voucher</label>
+                    <textarea id="voucher" class="form-control" rows="1"></textarea>
                 </div>
                 <div class="form-group col-md-3">
                 <label for="forma-garantia">Forma de Garantía</label>
                 <button id="btngarantia" disabled class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="persona-reserva">Persona que reserva</label>
-                    <input type="text" class="form-control" id="persona-reserva" required>
-                </div>
+                </div>';
+
+                if (empty($_GET['hab_id'])) {
+                echo ' <div class="form-group col-md-3">
+                <label for="persona-reserva">Persona que reserva</label>
+                <input type="text" class="form-control" id="persona-reserva" required>
+                </div>';
+                }
+
+                echo '
             </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
@@ -253,7 +282,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             </div>
             <br>
             <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary" onclick="">Enviar</button>
+                <button type="submit" class="btn btn-primary" onclick="">Enviar</button>
             </div>
         </form>
 

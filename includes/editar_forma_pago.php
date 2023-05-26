@@ -2,6 +2,10 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_forma_pago.php");
   $forma_pago= NEW Forma_pago($_GET['id']);
+  $c="";
+  if($forma_pago->garantia){
+    $c="checked";
+  }
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -17,9 +21,20 @@
         <div class="form-group">
           <input class="form-control" type="text" id="descripcion_nueva" value="'.$forma_pago->descripcion.'" maxlength="50">
         </div>
+        
         </div>
         <div class="col-sm-1"></div>
       </div>
+      <div class="row">
+      <div class="col-sm-2">Garantía:</div>
+      <div class="col-sm-9">
+      <div class="form-group">
+        <input class="form-check-input" type="checkbox" id="garantia_nueva" value="'.$forma_pago->garantia.'"  '.$c.'>
+      </div>
+      
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
     </div>
     
     <div class="modal-footer" id="boton_forma">
