@@ -41,4 +41,6 @@
 --se ajustaron los contenedores
 --se cambio el color de botones
 --se agrego nuevo color a los contenedores y bordes
+--se ocultaron los botones del nav
 --se cambio el color base de varias secciones
+--se oculto la seccion de filtros
