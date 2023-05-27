@@ -73,6 +73,15 @@
   if($_POST['forzar_tarifa'] > 0 || $_POST['total_suplementos'] > 0 || $_POST['total_pago'] > 0 || $cantidad_cupon > 0){
     $cuenta= 1;
   }
+  $actual_hab=$_POST['hab_id'];
+
+  if(empty($_POST['preasignada'])){
+    $motivo ="reservar";
+  }else{
+    $motivo="preasignar";
+    $actual_hab = $_POST['preasignada'];
+  }
+
   $motivo = empty($_POST['preasignada']) ? "reservar" : "preasignar";
  
   $sobrevender = isset($_POST['sobrevender']) ? $_POST['sobrevender'] : "";
@@ -80,7 +89,7 @@
 
 
   //if($_POST['hab_id'] != 0){
-  $id_movimiento= $movimiento->disponible_asignar($hab->mov,$_POST['hab_id'],$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa'],$motivo);
+  $id_movimiento= $movimiento->disponible_asignar($hab->mov,$actual_hab,$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa'],$motivo);
   $mov_actual= $movimiento->ultima_insercion();
   if($_POST['hab_id'] != 0){
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
@@ -98,7 +107,7 @@
   $_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],
   $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
   urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
-  $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$_POST['total_pago'],$_POST['hab_id'],
+  $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$_POST['total_pago'],$actual_hab,
   $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender);
 
 

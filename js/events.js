@@ -102,7 +102,7 @@ function sabernosession(){
 		}
 	}
 }
-function obtener_datos_hab () {
+function obtener_datos_hab() {
     //código de la función
     var id=localStorage.getItem("id_knife");
     var xhttp;
@@ -128,7 +128,7 @@ function obtener_datos_hab () {
                         //console.log(hab_info[i]['id']+"-"+hab[hab_info[i]['id']]+"-"+hab_ultimo_mov[hab_info[i]['id']]);
                     }
                     else{
-                        //console.log("sin cambio en la habitacion con id "+hab_info[i]['id']);
+                        console.log("sin cambio en la habitacion con id "+hab_info[i]['id']);
                     }
                     
                 }
@@ -2206,8 +2206,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
             beforeSend:loaderbar,
             //success:ver_reservaciones,
             success:function(res){
-                console.log(res)
-                return
+                // console.log(res)
+                // return
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
                 ver_reporte_reservacion(res,"ver_reservaciones()",titulo)

@@ -1,10 +1,6 @@
 <?php
-    //echo 'Hab'. $_GET['hab_id'];
-    echo ' <td class="cal-userinfo">
-    ';
-    echo 'Habitación ------';
-        echo $_GET['hab_id'];
-    echo '
-        </td>
-    ';
-?>
+
+include_once('enviar_rack.php');
+$rack = new Rack();
+$tiempo_inicial=time();
+$rack->mostrar($_GET['hab_id'],$tiempo_inicial);

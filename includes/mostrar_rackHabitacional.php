@@ -158,7 +158,7 @@ class RackHabitacional extends ConexionMYSql
                                 <tr>
                                 <th class="cal-viewmonth" id="changemonth"></th>
         ';
-        $tiempo = $tiempo_inicial - 86400;
+        $tiempo = $tiempo_inicial;
         //for para cargar los 31  dias
         for ($i = 1; $i <= 31; $i++) {
             $mes = $this->convertir_mes(date('n', $tiempo));
@@ -188,7 +188,7 @@ class RackHabitacional extends ConexionMYSql
             echo '
                 </td>
             ';
-            $tiempo = $tiempo_inicial - 86400;
+            $tiempo = $tiempo_inicial;
             $hab = $fila['id'];
             //por cada hab, se tiene que consultar las preasignaciones existentes
             $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado ,movimiento.estado_interno AS interno
@@ -235,7 +235,7 @@ class RackHabitacional extends ConexionMYSql
                         ';
                     //mismo caso 
                     //se le suma 1 día para ignorar el día actual.
-                    $tiempo_aux = time()+86400;
+                    $tiempo_aux = time();
                     while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
                         $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                         while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
@@ -255,7 +255,7 @@ class RackHabitacional extends ConexionMYSql
                             ';
                         }else{
                             echo '
-                            <td   td class="celdaCompleta tdCheck " >
+                            <td class="celdaCompleta tdCheck " >
                             </td>
                             ';
                         }
@@ -271,12 +271,17 @@ class RackHabitacional extends ConexionMYSql
                         if($imprimi_ocupadas==false){
                             echo '';
                             echo '
-                            <td class="celdaCompleta tdCheck " colspan="' . $noches . '">
+                            <td class="celdaCompleta tdCheck " colspan="' . $noches. '">
                                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                             ';
                             echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . ' </section>';
-                            echo '            </div>
-                                </td>
+                            echo '</div>';
+                            echo '
+                            <td class="celdaCompleta tdCheck ">
+                            </td>
+                            ';
+                            echo'
+                            </td>
                             ';
                             $imprimi_ocupadas=true;
                         }
@@ -295,7 +300,7 @@ class RackHabitacional extends ConexionMYSql
                                     $estado=7;
                                     echo '';
                                     echo '
-                                    <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
+                                    <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva  . '">
                                         <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',' . $fila['nombre'] . ')" >
                                     ';
                                     echo '<section class="task task--reserva-pendiente-pago"> Reserva pendiente ' . $noches_reserva . ' </section>';
@@ -305,7 +310,7 @@ class RackHabitacional extends ConexionMYSql
                                     ';
                                 }else{
                                     echo '
-                                    <td   td class="celdaCompleta tdCheck " >
+                                    <td class="celdaCompleta tdCheck " >
                                     </td>
                                     ';
                                 }
