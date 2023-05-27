@@ -167,10 +167,14 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <select class="form-control" id="preasignada">
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4 sobrevender">
                     <label for="hab-preasignada">Sobrevender</label>
-                    <input type="checkbox" id="sobrevender" disabled class="form-check"/>
-                    </select>
+                    <div class="checkbox-container">
+                    
+                        <input type="checkbox" id="sobrevender" disabled class="form-check"/>
+                        
+                    </div>
+                    
                 </div>
                 <div class="form-group col-md-4">
                     <label for="canal-reserva">Canal de reserva</label>
@@ -242,7 +246,16 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
                 <div class="form-group col-md-2">
                 <label for="confirmacion">Confirmación</label>
+                <div class="checkbox-container">
+                <input type="radio" name="rdo" id="yes" checked />
+  <input type="radio" name="rdo" id="no"/>
+  <div class="switch">
+    <label for="yes">Si</label>
+    <label for="no">No</label>
+    <span></span>
+  </div>
                 <input type="checkbox" id="confirmacion"  class="form-check"/>
+                </div>
                 </select>
             </div>
             </div>

@@ -167,6 +167,7 @@ body {
 
 }
 /*termina background*/
+
 /*botones de bootstrap*/
 .btn-warning{
  
@@ -174,7 +175,7 @@ body {
   font-weight: 500;
   border-color: #ffc107;
   background-color: #fdeca188;
-  background: linear-gradient(21deg, #ffbf00 0%, #ffcf41 50%, #d9a507 100%);
+  background: linear-gradient(180deg, #ffbf00 0%, #ffda69 50%, #d9a507 100%);
    color: #fff  !important;
    text-decoration: solid #000;
 }
@@ -185,7 +186,7 @@ body {
          font-weight: 500;
     border-color: #ffc107;
     background-color: #ffc107;
-    background: linear-gradient(21deg, #fff174 0%, #feecba 50%, #ffe46a 100%);
+    background: linear-gradient(180deg, #fff174 0%, #feecba 50%, #ffe46a 100%);
     color: #ffc107 !important;
 }
 
@@ -193,21 +194,25 @@ body {
   
   color: #fff  !important;
   font-weight: 500;
-  background-color: #3f51b5 !important;
-  border-color: #3f51b5 !important;
+  /*
+  background-color: #3f51b5 !important;*/
+  border-color: #198754 !important;
+
+  background: linear-gradient(180deg,#11834e 0%, #37c784 50%, #105636 100% );
 
 }
 .btn-success:hover{
 
 
 
-    background-color: #c8d7ff !important;
-  border-color: #3f51b5 !important;
-  color: #3f51b5 !important;
+    /*background-color: #c8d7ff !important;*/
+    border-color: #198754 !important;
+  color: #fff !important;
+  background: linear-gradient(180deg,#06351f 0%, #1f754d 50%, #072719 100% );
 }
 
 .btn-danger{
-  background: linear-gradient(21deg, #dc3545 0%, #fb5f6e 50%, #bb1929 100%);
+  background: linear-gradient(180deg, #dc3545 0%, #fb7583 50%, #bb1929 100%);
   color: #fff  !important;
     font-weight: 500;
       border-color: #dc3545;
@@ -218,7 +223,7 @@ body {
 .btn-danger:hover{
 
 
-      background: linear-gradient(21deg, #ff6675 0%, #ffb9c0 50%, #ff5263 100%);
+      background: linear-gradient(180deg, #ff6675 0%, #ffb9c0 50%, #ff5263 100%);
       color: #dc3545 !important;
       font-weight: 500;
         border-color: #dc3545;
@@ -227,21 +232,113 @@ body {
 
 
 .btn-primary{
-  /*
-  background: linear-gradient(21deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);*/
+  
+  background: linear-gradient(180deg, #2d31ae 0%, #6666fa 50%, #10135c 100%);
   background-color: #3f51b5;
   border-color: #3f51b5;
     color: #fff;
 }
 
 .btn-primary:hover{
-  background: linear-gradient(21deg, #5c8affc6 0%, #8aabffc9 50%, #4479ffbd 100%);
+  background: linear-gradient(180deg, #5c8affc6 0%, #8aabffc9 50%, #4479ffbd 100%);
+}
+
+.btn-secondary{
+  background: linear-gradient(180deg, #f4f4f4c6 0%, #fffffff7 50%, #bababbbd 100%);
+  color: #000 !important;
+
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+.switch {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  margin: -30px 0 0 -75px;
+  background: #4cd964;
+  transition: all 0.2s ease;
+  border-radius: 25px;
+}
+.switch span {
+  position: absolute;
+  width: 20px;
+  height: 4px;
+  top: 50%;
+  left: 50%;
+  margin: -2px 0px 0px -4px;
+  background: #fff;
+  display: block;
+  transform: rotate(-45deg);
+  transition: all 0.2s ease;
+  border-radius: 2px;
+}
+.switch span:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 12px;
+  margin-top: -8px;
+  background: #fff;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+}
+input[type=radio] {
+  display: none;
+}
+
+
+.switch label {
+  cursor: pointer;
+  color: rgba(0,0,0,0.2);
+  width: 60px;
+  line-height: 50px;
+  transition: all 0.2s ease;
+}
+label[for=yes] {
+  position: absolute;
+  left: 0px;
+  height: 20px;
+}
+label[for=no] {
+  position: absolute;
+  right: 0px;
+}
+#no:checked ~ .switch {
+  background: #ff3b30;
+}
+#no:checked ~ .switch span {
+  background: #fff;
+  margin-left: -8px;
+}
+#no:checked ~ .switch span:after {
+  background: #fff;
+  height: 20px;
+  margin-top: -8px;
+  margin-left: 8px;
+}
+#yes:checked ~ .switch label[for=yes] {
+  color: #fff;
+}
+#no:checked ~ .switch label[for=no] {
+  color: #fff;
 }
 
 .contenedor-sub {
   padding-left: 20px;
   padding-top: 3px;
   padding-left: 10px;
+
 }
 
 /*tabla de estados de filtro*/
@@ -743,6 +840,7 @@ body {
       rgba(249, 156, 142, 0.5) 23%
     ) !important;
  }
+ 
 
 .btn {
   color: #fff;
@@ -765,6 +863,7 @@ body {
     7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
 }
+
 
 .mantenimiento:after {
   position: absolute;
@@ -945,6 +1044,7 @@ body {
   /*text-shadow:  1px 0px 0px rgb(0, 0, 0);*/
   font-weight: 400;
 }
+
 
 /**********************footer********************/
 

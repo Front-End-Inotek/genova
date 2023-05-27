@@ -328,7 +328,7 @@ transition-timing-function: line;
 .task--vacia-sucia {
   border-left: 7px solid #03ae11;
   background: #bff1bf81;
-  background: linear-gradient(180deg, #c6fe8f 0%, #f0fee1 40%, #ccfe98 100%);
+  background: linear-gradient(180deg, #b9ed84 0%, #d6f6b5 40%, #98cb62 100%);
   align-self: end;
   color: #057410e8;
 

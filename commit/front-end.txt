@@ -44,3 +44,10 @@
 --se ocultaron los botones del nav
 --se cambio el color base de varias secciones
 --se oculto la seccion de filtros
+----26/05
+--se esta trabajando en diseños personalizables de checkbox
+--se esta trabajando en animacion de formularios
+--se esta trabajando en diseños y animaciones para labels
+--se ajustaron los nuevos inputs de reservaciones
+--se ajustaron bugs visuales en generales
+--se agrego animacion de checkbox y radio
