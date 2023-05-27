@@ -98,6 +98,12 @@
           {
               echo '<tr class="text-center">
               <td>'.$fila['descripcion'].'</td>';
+              if($fila['garantia']){
+                echo '<td><i style="font-size:2em;" class="bx bx-check-circle"></i></td>';
+              }else{
+                echo '<td><i style="font-size:2em;" class="bx bx-x-circle"></i></td>'; 
+              }
+
               if($editar==1){
                 echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_forma_pago('.$fila['id'].')"> Editar</button></td>';
               }
@@ -130,14 +136,19 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
     // Muestra las formas de pago
-    function mostrar_forma_pago(){
+    function mostrar_forma_pago($forma=0){
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
       $comentario="Mostrar las formas de pago";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       while ($fila = mysqli_fetch_array($consulta))
       {
-        echo '<option data-garantia="'.$fila['garantia'].'" value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';
+        if($forma == $fila['id']){
+          echo '<option selected data-garantia="'.$fila['garantia'].'" value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';
+        }else{
+          echo '<option data-garantia="'.$fila['garantia'].'" value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';
+        }
+        
       }
       return $consulta;
     }

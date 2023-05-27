@@ -1,4 +1,6 @@
 var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario'];
+var hab = [];
+var hab_ultimo_mov = [];
 var vista=0;
 x=$(document);
 x.ready(inicio);
@@ -76,6 +78,7 @@ function sabernosession(){
 	}else{
 		id=parseInt(id);
 		if(id>0){
+            obtener_datos_hab_inicial ();
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
 
             if(vista==0){
@@ -99,16 +102,78 @@ function sabernosession(){
 		}
 	}
 }
+function obtener_datos_hab() {
+    //código de la función
+    var id=localStorage.getItem("id_knife");
+    var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //console.log(this.responseText);
+          const hab_info =JSON.parse(this.responseText);
+          //console.log(hab_info);
+          var i;
+            for(i in hab_info){
+                if(hab_info[i]instanceof Object){
+                    /*console.log(hab_info[i]);
+                    /*console.log(hab_info[i]['id']+"-"+hab_info[i]['ultimo_mov']);*/
+                    if(hab[hab_info[i]['id']]<hab_info[i]['ultimo_mov']){
+                        console.log('hab_'+hab_info[i]['id']);
+                        hab[hab_info[i]['id']]=hab_info[i]['ultimo_mov'];
+                        hab_ultimo_mov[hab_info[i]['id']]=hab_info[i]['mov'];
+                        $("#hab_"+hab_info[i]['id']).load("includes/mostrar_cambios_hab.php?hab_id="+hab_info[i]['id']);
+                        /*const collection = document.getElementById("hab_"+hab_info[i]['id']);
+                        collection.innerHTML = '<button id="submit">Submit</button>';*/
 
+                        //console.log(hab_info[i]['id']+"-"+hab[hab_info[i]['id']]+"-"+hab_ultimo_mov[hab_info[i]['id']]);
+                    }
+                    else{
+                        console.log("sin cambio en la habitacion con id "+hab_info[i]['id']);
+                    }
+                    
+                }
+            }
+         // console.log(hab_info.length);
+        }
+      };
+      xhttp.open("GET", "includes/api_info_hab.php", true);
+      xhttp.send();
+}
+
+function obtener_datos_hab_inicial () {
+    //código de la función
+    var id=localStorage.getItem("id_knife");
+    var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //console.log(this.responseText);
+          const hab_info =JSON.parse(this.responseText);
+          //console.log(hab_info);
+          var i;
+            for(i in hab_info){
+                if(hab_info[i]instanceof Object){
+                    /*console.log(hab_info[i]);
+                    /*console.log(hab_info[i]['id']+"-"+hab_info[i]['ultimo_mov']);*/
+                    hab[hab_info[i]['id']]=hab_info[i]['ultimo_mov'];
+                    hab_ultimo_mov[hab_info[i]['id']]=hab_info[i]['mov'];
+                   // console.log(hab_info[i]['id']+"-"+hab[hab_info[i]['id']]+"-"+hab_ultimo_mov[hab_info[i]['id']]);
+                }
+            }
+         // console.log(hab_info.length);
+        }
+      };
+      xhttp.open("GET", "includes/api_info_hab.php", true);
+      xhttp.send();
+}
 // Se carga el area de trabajo
 function cargar_area_trabajo(){
-    console.log(vista);
+    //console.log(vista);
+    obtener_datos_hab();
+
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
-
-
-
-    if(vista==0){
+   /* if(vista==0){
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
@@ -117,18 +182,8 @@ function cargar_area_trabajo(){
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
-        if(localStorage.getItem('estatus_hab') !=""  && localStorage.getItem('estatus_hab') !=null){
-            estatus_hab=localStorage.getItem('estatus_hab')
-        }else{
-            estatus_hab=""
-        }
-        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
-    }
-
-
-
-
-
+        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+    }*/
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
 
@@ -2010,7 +2065,7 @@ function calcular_total_cupon(precio_hospedaje,total_adulto,total_junior,total_i
 	document.getElementById("total").value= calculo_descuento + total_suplementos;
 }
 
-function guardarReservacion(id_huesped,hab_id=0){
+function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var usuario_id=localStorage.getItem("id");
     var numero_hab= Number(document.getElementById("numero_hab").value);
     var noches= Number(document.getElementById("noches").value);
@@ -2080,9 +2135,28 @@ function guardarReservacion(id_huesped,hab_id=0){
         tarifa_existe = tarifa;
     }else{
         tarifa_existe=forzar_tarifa;
+        $("#tarifa").removeAttr('required');
     }
 
+    ruta="includes/guardar_reservacionNew.php";
+
+    if(id_cuenta!=0){
+        ruta="includes/aplicar_editar_reservacionNew.php";
+    }
+
+    // if(forzar_tarifa!=""){
+    //     numero_hab = numero_hab == 0 ? 1 : numero_hab
+    //     tarifa = noches * forzar_tarifa * numero_hab
+    //     $("#total").val(tarifa)
+    //     $("#aux_total").val(tarifa)
+    //     $("#tipo-habitacion").removeAttr("disabled");
+    //     $("#tarifa_menores").val("")
+    //     $("#tarifa_adultos").val("")
+    //     $("#tarifa").removeAttr('required');
+    // }
+
     var datos = {
+        "id":id_reservacion,
         "id_huesped": id_huesped,
         "fecha_entrada": fecha_entrada,
         "fecha_salida": fecha_salida, 
@@ -2120,18 +2194,20 @@ function guardarReservacion(id_huesped,hab_id=0){
       };
         console.log(datos)
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
-        //return ;
+        // return ;
       if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa_existe >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
         $.ajax({
             async:true,
             type: "POST",
             dataType: "html",
             contentType: "application/x-www-form-urlencoded",
-            url:"includes/guardar_reservacionNew.php",
+            url:ruta,
             data:datos,
             beforeSend:loaderbar,
             //success:ver_reservaciones,
             success:function(res){
+                // console.log(res)
+                // return
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
                 ver_reporte_reservacion(res,"ver_reservaciones()",titulo)
@@ -2157,7 +2233,7 @@ function asignarValorTarjeta(){
     $("#estadotarjeta").val($("input[name=estado]:checked").val())
 }
 
-function guardarNuevaReservacion(hab_id){
+function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
 
 
     var usuario_id=localStorage.getItem("id");
@@ -2180,9 +2256,7 @@ function guardarNuevaReservacion(hab_id){
 
     var voucher =document.getElementById('voucher').value
 
-    // if(huesped!=""){
-    //     guardar_reservacion(response_mj)
-    // }
+  
     titular_tarjeta=$("#nt").val()
     numero_tarjeta=$("#nut").val()
     vencimiento_mes=$("#mes").val()
@@ -2222,7 +2296,7 @@ function guardarNuevaReservacion(hab_id){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
                 return
             }else{
-                guardarReservacion(response_msj,hab_id)
+                guardarReservacion(response_msj,hab_id,id_cuenta,id_reservacion)
                 //todo ocurre correctamente.
                 
             }
@@ -2562,6 +2636,10 @@ function busqueda_reservacion_combinada_por_dia(){
 function reporte_reservacion_por_dia(dia){
     var usuario_id=localStorage.getItem("id");
     window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id);
+}
+// Editar una reservacion
+function editar_reservacionNew(id){
+    $("#area_trabajo_menu").load("includes/editar_reservacionNew.php?id="+id);
 }
 
 // Editar una reservacion

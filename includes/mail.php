@@ -87,6 +87,8 @@
       $acompanante= $fila['acompanante'];
       $tarifa_noche = $fila['precio_hospedaje'];
 
+      $habitaciones=$fila['numero_hab'];
+
       $tipohab=$fila['tipohab'];
       $nombre_alimentos=$fila['nombre_alimentos'];
       if($tarifa_noche>0){
@@ -145,6 +147,8 @@
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Fecha de salida: '.$fecha_salida),0,0,'L');
   $pdf->Ln();
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Número de noches: ' .$noches),0,0,'L');
+  $pdf->Ln();
+  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Número de habitaciones: ' .$habitaciones),0,0,'L');
   $pdf->Ln();
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Adultos: '.$extra_adulto),0,0,'L');
   $pdf->Ln();

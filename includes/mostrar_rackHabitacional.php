@@ -128,7 +128,7 @@ class RackHabitacional extends ConexionMYSql
         $cronometro = 0;
 
         //Se utiliza la misma consulta para el rack de operaciones
-        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
+        $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         WHERE hab.estado_hab = 1  ORDER BY id";
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -158,7 +158,7 @@ class RackHabitacional extends ConexionMYSql
                                 <tr>
                                 <th class="cal-viewmonth" id="changemonth"></th>
         ';
-        $tiempo = $tiempo_inicial - 86400;
+        $tiempo = $tiempo_inicial;
         //for para cargar los 31  dias
         for ($i = 1; $i <= 31; $i++) {
             $mes = $this->convertir_mes(date('n', $tiempo));
@@ -176,7 +176,7 @@ class RackHabitacional extends ConexionMYSql
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
             echo '
-                <tr id="u1">
+                <tr id="hab_'.$fila['id'].'" >
                     <td class="cal-userinfo">
             ';
             echo 'Habitación ';
@@ -188,7 +188,7 @@ class RackHabitacional extends ConexionMYSql
             echo '
                 </td>
             ';
-            $tiempo = $tiempo_inicial - 86400;
+            $tiempo = $tiempo_inicial;
             $hab = $fila['id'];
             //por cada hab, se tiene que consultar las preasignaciones existentes
             $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado ,movimiento.estado_interno AS interno
@@ -208,10 +208,10 @@ class RackHabitacional extends ConexionMYSql
             //for para cargar los 31  dias dentro de las habitaciones
             for ($i = 1; $i <= 31; $i++) {
                 if ($i == 1) {
-                    echo '
+                    /*echo '
                         <td class="celdaCompleta tdCheck " >
                         </td>
-                    ';
+                    ';*/
                 } else {
 
                     $mes = $this->convertir_mes(date('n', $tiempo));
@@ -235,7 +235,7 @@ class RackHabitacional extends ConexionMYSql
                         ';
                     //mismo caso 
                     //se le suma 1 día para ignorar el día actual.
-                    $tiempo_aux = time()+86400;
+                    $tiempo_aux = time();
                     while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
                         $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                         while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
@@ -255,7 +255,7 @@ class RackHabitacional extends ConexionMYSql
                             ';
                         }else{
                             echo '
-                            <td   td class="celdaCompleta tdCheck " >
+                            <td class="celdaCompleta tdCheck " >
                             </td>
                             ';
                         }
@@ -271,12 +271,17 @@ class RackHabitacional extends ConexionMYSql
                         if($imprimi_ocupadas==false){
                             echo '';
                             echo '
-                            <td class="celdaCompleta tdCheck " colspan="' . $noches . '">
+                            <td class="celdaCompleta tdCheck " colspan="' . $noches. '">
                                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                             ';
                             echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . ' </section>';
-                            echo '            </div>
-                                </td>
+                            echo '</div>';
+                            echo '
+                            <td class="celdaCompleta tdCheck ">
+                            </td>
+                            ';
+                            echo'
+                            </td>
                             ';
                             $imprimi_ocupadas=true;
                         }
@@ -295,7 +300,7 @@ class RackHabitacional extends ConexionMYSql
                                     $estado=7;
                                     echo '';
                                     echo '
-                                    <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
+                                    <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva  . '">
                                         <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',' . $fila['nombre'] . ')" >
                                     ';
                                     echo '<section class="task task--reserva-pendiente-pago"> Reserva pendiente ' . $noches_reserva . ' </section>';
@@ -305,7 +310,7 @@ class RackHabitacional extends ConexionMYSql
                                     ';
                                 }else{
                                     echo '
-                                    <td   td class="celdaCompleta tdCheck " >
+                                    <td class="celdaCompleta tdCheck " >
                                     </td>
                                     ';
                                 }

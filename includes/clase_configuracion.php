@@ -119,15 +119,18 @@
       }
     }
 
-    function mostrar_planes_select(){
+    function mostrar_planes_select($id=0){
       $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
       $comentario = "Consulta todos los planes de alimentos disponibles";
       $consulta = $this->realizaConsulta($sentencia, $comentario);
 
       while ($fila = mysqli_fetch_array($consulta))
       {
-        echo '<option data-costoplan='.$fila['costo_plan'].' value="'.$fila['id'].'">'.$fila['nombre_plan'].' $'.$fila['costo_plan'].'</option>';
-       
+        if($id==$fila['id']){
+          echo '<option selected data-costoplan='.$fila['costo_plan'].' value="'.$fila['id'].'">'.$fila['nombre_plan'].' $'.$fila['costo_plan'].'</option>';
+        }else{
+          echo '<option data-costoplan='.$fila['costo_plan'].' value="'.$fila['id'].'">'.$fila['nombre_plan'].' $'.$fila['costo_plan'].'</option>';
+        }
       }
     }
 

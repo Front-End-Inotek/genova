@@ -178,6 +178,36 @@
          
         }
       }
+
+      // Obtengo los nombres de las habitaciones a editar en base a una tarifa
+      function mostrar_hab_editarTarifa($tarifa){
+        $tipo_hab=0;
+        $sentencia = "SELECT tipo FROM tarifa_hospedaje
+        WHERE id=$tarifa
+        AND estado = 1 ORDER BY id";
+        $comentario="Mostrar los nombres de las habitaciones a editar";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $tipo_hab = $fila['tipo'];
+        }
+        $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY id";
+        $comentario="Mostrar los nombres de las habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          if($tipo_hab == $fila['id']){
+            echo '<option selected value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+          }else{
+            echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+          }
+         
+         
+        }
+      }
+
       // Obtengo los nombres de las habitaciones a editar
       function mostrar_hab_editar($id){
         $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY id";
