@@ -43,3 +43,8 @@ Se estuvo trabajando en el formato de confirmación de recepción.
 Se agregan nuevos campos a la reservación
 La vista para checkin se cambia a la "nueva" vista de reservación
 Se agrega un campo "garantía" en las formas de pago
+26/05
+se agrega cambios de rack habitacional, se agrega apartado de editar reservacion (vista nueva)
+-----
+29/05
+Cambios en rack habitacional
