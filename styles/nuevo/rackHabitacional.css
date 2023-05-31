@@ -533,11 +533,65 @@ transition-timing-function: line;
 
 /*se agrega la clase ajuste al estado que se necesita ajustar*/
 .ajuste {
-  width: calc(50% - 1px);
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
   /*el ajuste es 75% por cada dia que la tarea estara*/
 }
 
-.ajuste-2dias {
+.ajuste1 {
+  display: inline-block;
+  vertical-align: top;
+  width: 10%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+.ajuste2 {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+
+.ajuste3 {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+
+.ajuste4 {
+  display: inline-block;
+  vertical-align: top;
+  width: 40%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+.ajuste5 {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+.ajuste6 {
+  display: inline-block;
+  vertical-align: top;
+  width: 60%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+.ajuste7 {
+  display: inline-block;
+  vertical-align: top;
+  width: 70%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+
+.ajuste8{
+  display: inline-block;
+  vertical-align: top;
+  width: 80%;
+}
+
+.ajusteDias {
+  display: inline-block;
   width: calc(100% - 1px);
   /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
 }
