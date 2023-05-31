@@ -16,10 +16,10 @@
   echo '
   <div class="modal-content alinear_centro">
     <h5>Agregar Restaurante</h5>
-    <div class="col-sm-12 fondo_rest" style="background-color:white;"><br>  
+    <div class="col-sm-12 fondo_rest"><br>  
 
       <div class="row">
-        <div class="col-sm-6" style="background-color:white;">
+        <div class="col-sm-6">
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Categorias</h5>
@@ -42,7 +42,7 @@
  
         </div>
 
-        <div class="col-sm-6" style="background-color:white;">
+        <div class="col-sm-6">
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Pedido</h5>

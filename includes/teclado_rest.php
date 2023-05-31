@@ -4,7 +4,7 @@
                   <h5>Teclado</h5>
                 </div>
 
-                <div class="card-body alinear_izq" style="background-color:white;">
+                <div class="card-body alinear_izq" >
                   <div class="col-sm-12"></br>
                     <div class="row">
                       <div class="col-sm-2 margen_inf">

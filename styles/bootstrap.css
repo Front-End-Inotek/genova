@@ -1811,6 +1811,7 @@ pre code {
   }
   .col-sm-2 {
     width: 16.66666667%;
+    background-color: #fff !important;
   }
   .col-sm-1 {
     width: 8.33333333%;

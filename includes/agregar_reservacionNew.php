@@ -163,6 +163,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
                 <div class="form-group col-md-4 sobrevender">
                     <label for="hab-preasignada">Sobrevender</label>
+                    
                     <div class="checkbox-container">
                     
                         <input type="checkbox" id="sobrevender" disabled class="form-check"/>
@@ -241,7 +242,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <div class="form-group col-md-2">
                 <label for="confirmacion">Confirmación</label>
                 <div class="checkbox-container">
-                <input type="radio" name="rdo" id="yes" checked />
+                <input type="radio" name="rdo" id="yes" checked onchange="seleccionarCheckbox()"/>
   <input type="radio" name="rdo" id="no"/>
   <div class="switch">
     <label for="yes">Si</label>

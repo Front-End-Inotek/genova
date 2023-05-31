@@ -79,24 +79,21 @@ function cambiarVista() {
 
 function modoNocturno() {
   var body = document.body;
-  var currentColor = body.style.backgroundColor;
   var boton = document.getElementById("filtro-noche");
 
-  if (currentColor === "rgb(34, 34, 82)" || currentColor === "#222252") {
-    // si el color actual es azul oscuro, cambiar de vuelta al color original y al icono de sol
-    body.style.backgroundColor = "";
+  if (body.classList.contains("modo-nocturno")) {
+    // Si la clase modo-nocturno está presente, cambiar al modo diurno
+    body.classList.remove("modo-nocturno");
     boton.classList.remove("btn-sol");
     boton.querySelector("i").classList.remove("bx-sun");
     boton.querySelector("i").classList.add("icono-sol");
-    body.classList.remove("modo-nocturno"); // eliminar la clase modo-nocturno del body
   } else {
-    // si el color actual es diferente a azul oscuro, cambiar a azul oscuro y al icono de luna
-    body.style.backgroundColor = "#222252";
+    // Si la clase modo-nocturno no está presente, cambiar al modo nocturno
+    body.classList.add("modo-nocturno");
     boton.classList.add("btn-sol");
     boton.querySelector("i").classList.add("bx-sun");
     boton.querySelector("i").classList.remove("icono-sol");
     boton.querySelector("i").classList.add("icono-luna");
-    body.classList.add("modo-nocturno"); // agregar la clase modo-nocturno al body
   }
 }
 
