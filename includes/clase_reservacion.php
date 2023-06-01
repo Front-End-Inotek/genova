@@ -342,6 +342,7 @@ class Reservacion extends ConexionMYSql
           $plan_alimentos,
           $tipo_reservacion,
           $sobrevender,
+          $estado_interno,
           
       ) {
           $fecha_entrada= strtotime($fecha_entrada);
@@ -367,9 +368,9 @@ class Reservacion extends ConexionMYSql
               }
           }
           $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, 
-          `estado`,`pax_extra`,`canal_reserva`,`plan_alimentos`,`tipo_reservacion`,`sobrevender`)
+          `estado`,`pax_extra`,`canal_reserva`,`plan_alimentos`,`tipo_reservacion`,`sobrevender`,`estado_interno`)
           VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', 
-          '$estado','$pax_extra','$canal_reserva','$plan_alimentos','$tipo_reservacion',$sobrevender);";
+          '$estado','$pax_extra','$canal_reserva','$plan_alimentos','$tipo_reservacion',$sobrevender,'$estado_interno');";
           $comentario="Guardamos la reservacion en la base de datos";
 
           $consulta= $this->realizaConsulta($sentencia, $comentario);
@@ -2810,11 +2811,19 @@ class Reservacion extends ConexionMYSql
             $tipo_reservacion,
             $sobrevender,
             $id_cuenta,
+            $estado_interno,
             
         ) {
             $fecha_entrada= strtotime($fecha_entrada);
             $fecha_salida= strtotime($fecha_salida);
-          
+            if($forzar_tarifa > 0) {
+                $total_cargo= $total_suplementos + $forzar_tarifa;
+            }
+            if($cantidad_cupon > 0) {
+                $pago_total= $total_pago + $cantidad_cupon;
+            } else {
+                $pago_total= $total_pago;
+            }
             $sentencia = "UPDATE `reservacion` SET
 			`id_huesped` = '$id_huesped',
 			`tipo_hab` = '$tipo_hab',
@@ -2847,15 +2856,21 @@ class Reservacion extends ConexionMYSql
             `canal_reserva` = '$canal_reserva',
             `plan_alimentos` = '$plan_alimentos',
             `tipo_reservacion` = '$tipo_reservacion',
-            `sobrevender` = '$sobrevender'
+            `sobrevender` = '$sobrevender',
+            `estado_interno` = '$estado_interno'
 			WHERE `id` = '$id_cuenta'";
             //echo $sentencia;
             $comentario="Editar una reservacion dentro de la base de datos";
             $consulta= $this->realizaConsulta($sentencia, $comentario);
 
-  
-           
-  
+            $sentencia = "UPDATE `cuenta` SET
+			`cargo` = '$total_cargo',
+			`abono` = '$pago_total'
+			WHERE `id` = '$id_cuenta';";
+            //echo $sentencia;
+            $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
+            $consulta= $this->realizaConsulta($sentencia, $comentario);
+
             //retornamos el id de la reservacion para comprobar y guardar un log de preasignada
             return $id;
   

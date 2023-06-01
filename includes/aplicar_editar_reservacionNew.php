@@ -56,12 +56,18 @@
   $tipo_reservacion = isset($_POST['tipo_reservacion']) ? $_POST['tipo_reservacion'] : "";
   $sobrevender = isset($_POST['sobrevender']) ? $_POST['sobrevender'] : "";
   
+  //logica para saber si una reservación estará o no garantizada.
+  $estado_interno="pendiente";
+  if($_POST['estado_tarjeta'] == 2 || !empty($_POST['voucher'] )){
+    $estado_interno = "garantizada";
+  }
+
   $id_reservacion = $reservacion->editar_reservacionNew($_POST['id_huesped'],$_POST['tipo_hab'],0,$_POST['fecha_entrada'],$_POST['fecha_salida'],
   $_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],
   $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
   urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
   $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$_POST['total_pago'],$_POST['hab_id'],
-  $_POST['usuario_id'],$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$_POST['id']);
+  $_POST['usuario_id'],$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$_POST['id'],$estado_interno);
 
 
   

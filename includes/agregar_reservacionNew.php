@@ -51,6 +51,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
         <h2 class="titulo">'.$titulo_.'</h2> <br>
             <div class="d-flex justify-content-end">
                 <div class="form-group col-md-4 mb-3">
+              
                     <label for="clave-reserva" class="text-right">'.$clv.'</label>
                     <input type="text" value="'.$ultimo_id.'" class="form-control" id="clave-reserva" readonly>
                 </div>';
@@ -63,10 +64,13 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                         <option value="evento">Evento</option>
                     </select>
                 </div>';
+                }else{
+                    echo ' <div class="form-group col-md-4">
+                    <label for="clave-reserva" class="text-right">Habitación</label>
+                    <input type="text" value="'.$hab->nombre.'" class="form-control"  readonly>
+                    </div>';
                 }
-                
                 echo'
-               
                 <div class="form-group col-md-4">
                     <label for="total-estancia">Total de la estancia</label>
                     <input type="number" class="form-control" id="total" min="0" step="0.01" readonly>
@@ -136,7 +140,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <div class="d-flex justify-content-between">
             <div class="form-group col-md-4">
                     <label for="no-habitaciones">Número de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew(0,'.$hab_id.')">
+                    <input type="number" class="form-control" id="numero_hab" min="1" value="1" required  onchange="cambiar_adultosNew(0,'.$hab_id.')">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="pax-extra">Pax extra</label>
@@ -187,7 +191,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <h2>Datos Personales</h2>
             <button class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
             <input type="text" id="tomahuespedantes" hidden>
-            <input type="text" id="estadotarjeta" hidden>
+            <input type="text" id="estadotarjeta" >
             <input type="text" id="nut" hidden>
             <input type="text" id="nt" hidden>
             <input type="text" id="mes" hidden>
