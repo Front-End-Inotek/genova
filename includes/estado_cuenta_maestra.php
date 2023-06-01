@@ -66,8 +66,8 @@
       
 
         <div class="row">
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" style="background-color:white;">';$total_cargos= $cuenta->mostrar_cargos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id']);echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" style="background-color:white;">';$total_abonos= $cuenta->mostrar_abonos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id']);echo '</div>
         </div>'; 
 
         $total_faltante= $total_abonos - $total_cargos;

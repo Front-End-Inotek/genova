@@ -144,7 +144,8 @@
 
 label {
   border-radius: 10px;
-  background-color: #ffffff4c;
+  /*
+  background-color: #ffffff4c;*/
   box-shadow: 0 12px 35px 0 rgba(255, 235, 167, 0.15);
   font-weight: bold;
 }
@@ -225,6 +226,7 @@ label {
 .input-group-text {
   background-color: #e9ecef;
   color: #3f51b5 !important;
+  margin-top: 10px;
 }
 
 input:hover {
@@ -240,13 +242,13 @@ td {
   color: #3f51b5;
   font-weight: bold;
 }
-
+/*
 .btn {
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.3),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1) !important;
   outline: none;
 }
-
+*/
 
 button {
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
@@ -279,6 +281,10 @@ input {
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   outline: none;
+}
+
+.d-flex{
+  margin-bottom: 15px;
 }
 
 .color_black {
@@ -349,7 +355,7 @@ tr:hover {
 
 .card-body{
   background-color: #f1f2ff;
-  border-radius: 12px;
+  border: 2px solid;
 }
 
 /* Contenedor con fondo blanco y margen */
@@ -358,7 +364,8 @@ tr:hover {
   margin-bottom: 30px;
   margin-top: 30px;
   margin-left: 45px;
-  border: 3px solid rgb(98, 4, 4);
+  background-color: #ecf2ff;
+  border: 2px solid #3f51b5;
 }
 
 /* Margen de uno en escritura */
@@ -532,6 +539,10 @@ a.topictitle:hover {
   text-align: left;
   font-size: 0.9em;
   /*font-weight: bold;*/
+}
+.modo-nocturno {
+  background: linear-gradient(356deg, rgb(2, 10, 58), rgb(170, 171, 177));
+  /* Otros estilos para el modo nocturno */
 }
 
 /*.sub_estado_sin{
@@ -931,9 +942,6 @@ a.topictitle:hover {
   color: white;
 }
 
-.btn-secondary {
-  background-color: #3f51b5 !important;
-}
 
 .recibo {
   text-align: center;
@@ -944,6 +952,7 @@ a.topictitle:hover {
 
 .caja_mostrar_totales {
   overflow-x: auto;
+  background-color: transparent;
 }
 
 .caja_info {
@@ -1382,7 +1391,6 @@ a.topictitle:hover {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
-  font-size: 20px;
 }
 
 .col-xs-1,

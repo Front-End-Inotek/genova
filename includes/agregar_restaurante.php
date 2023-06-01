@@ -28,7 +28,7 @@
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '
-  <div class="modal-content alinear_centro" style="background-color:#d0cfdf57 !important;">
+  <div class="modal-content alinear_centro" style="background: linear-gradient(121deg, #6098ff42, #cc60f945); !important; backdrop-filter: blur(0px);">
     <h5 style="padding-bottom: 25px;">Agregar Restaurante </h5>
     <div class="col-sm-12 fondo_rest"><br>  
 

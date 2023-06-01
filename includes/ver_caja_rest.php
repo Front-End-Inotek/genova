@@ -16,16 +16,16 @@
   echo '
   <div class="modal-content alinear_centro">
     <h5>Caja</h5>
-    <div class="col-sm-12 fondo_rest" style="background-color:white;"><br>  
+    <div class="col-sm-12 fondo_rest" ><br>  
 
       <div class="row">
-        <div class="col-sm-6" style="background-color:white;">
+        <div class="col-sm-6">
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Pedido</h5>
             </div>
 
-            <div class="card-body alinear_izq" style="background-color:white;">';
+            <div class="card-body alinear_izq">';
               $total= $concepto->mostrar_comanda($_GET['mesa_id'],$ticket_id);
               if($total > 0){
                 echo '<div class="row">
@@ -51,13 +51,13 @@
           </div>
         </div>
         
-        <div class="col-sm-6" style="background-color:white;">
+        <div class="col-sm-6" >
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Pagos</h5>
             </div>
 
-            <div class="card-body alinear_centro" style="background-color:white;">';
+            <div class="card-body alinear_centro">';
              
               echo '<div class="col-sm-12">
               
