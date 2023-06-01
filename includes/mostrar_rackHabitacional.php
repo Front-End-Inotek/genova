@@ -269,7 +269,7 @@ class RackHabitacional extends ConexionMYSql
 
                             echo '
                             <td class="celdaCompleta tdCheck " >';
-                            echo date('Y-m-d',$tiempo_aux);
+                            // echo date('Y-m-d',$tiempo_aux);
                             echo'
                             </td>
                             ';
@@ -376,8 +376,8 @@ class RackHabitacional extends ConexionMYSql
                                     $total_noches = 0;
                                     // $noches+=1;
                                     if($noches_reserva>1){
-                                        echo $noches;
-                                        echo $noches_reserva;
+                                        // echo $noches;
+                                        // echo $noches_reserva;
                                         // $noches=10;
                                         $total_noches = $noches+$noches_reserva;
                                         $t1 = 100 * $noches;
@@ -422,7 +422,7 @@ class RackHabitacional extends ConexionMYSql
                                         $estado = 7;
                                     }
                                     $estado_habitacion_reserva = $this->estado_habitacion($estado, "","");
-                                    echo $estado;
+                                    // echo $estado;
                                     
                                   
                                   
@@ -442,7 +442,7 @@ class RackHabitacional extends ConexionMYSql
                                     ';
                                     $existetd=true;
                                 }elseif($current==0) {
-                                echo $current;
+                                // echo $current;
                                 $noches +=1;
                                 echo '';
                                 echo '
@@ -451,7 +451,7 @@ class RackHabitacional extends ConexionMYSql
                                 ';
                                 echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . ' </section>';
                                 echo '</div>';
-                                echo $eltd;
+                                // echo $eltd;
                                 
                                 echo'
                                 </td>
