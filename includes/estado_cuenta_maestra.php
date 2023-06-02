@@ -42,7 +42,7 @@
   }
 
   echo '
-      <div class="container blanco"> 
+      <div class="container blanco" id="ec"> 
         <div class="row">
           <div class="col-sm-6 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA MAESTRA - Nombre: '.$cm->nombre.' - Código: '.$cm->codigo.'</h2></div>';
           if($faltante == 0){
