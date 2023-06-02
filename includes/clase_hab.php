@@ -223,6 +223,16 @@
           }
         }
       }
+      //Cambiar el ultimo movimiento (Fecha)  de una habitacion (Reserva)
+
+      function cambiohabUltimo($hab){
+        $sentencia = "UPDATE `hab` SET
+        ultimo_mov = UNIX_TIMESTAMP()
+        WHERE `id` = '$hab';";
+        $comentario="Cambiar estado de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+
       // Cambiar estado de la habitacion
       function cambiohab($hab,$mov,$estado){
         $habitaciones=[43,44,45];
@@ -237,13 +247,6 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         // }
 
-        $sentencia = "UPDATE `hab` SET
-        `mov` = '$mov',
-        `estado` = '$estado',
-        ultimo_mov = UNIX_TIMESTAMP()
-        WHERE `id` = '$hab';";
-        $comentario="Cambiar estado de la habitacion";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
       } 
       // Mostramos el nombre de la habitacion
       function mostrar_nombre_hab($id){ 

@@ -2143,6 +2143,9 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     if(id_cuenta!=0){
         ruta="includes/aplicar_editar_reservacionNew.php";
     }
+    var voucher =document.getElementById('voucher').value
+    var estado_tarjeta=document.getElementById('estadotarjeta').value
+
 
     // if(forzar_tarifa!=""){
     //     numero_hab = numero_hab == 0 ? 1 : numero_hab
@@ -2191,6 +2194,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "tipo_reservacion":tipo_reservacion,
         "sobrevender":sobrevender,
         "preasignada" : Number(preasignada),
+        "voucher":voucher,
+        "estado_tarjeta":estado_tarjeta,
       };
         console.log(datos)
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)

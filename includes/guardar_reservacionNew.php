@@ -80,15 +80,12 @@
   }else{
     $motivo="preasignar";
     $actual_hab = $_POST['preasignada'];
+    
   }
 
   $motivo = empty($_POST['preasignada']) ? "reservar" : "preasignar";
  
   $sobrevender = isset($_POST['sobrevender']) ? $_POST['sobrevender'] : "";
-
-
-
-  //if($_POST['hab_id'] != 0){
   $id_movimiento= $movimiento->disponible_asignar($hab->mov,$actual_hab,$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa'],$motivo);
   $mov_actual= $movimiento->ultima_insercion();
   if($_POST['hab_id'] != 0){
@@ -102,18 +99,27 @@
   $plan_alimentos = isset($_POST['plan_alimentos']) ? $_POST['plan_alimentos'] : "";
   $tipo_reservacion = isset($_POST['tipo_reservacion']) ? $_POST['tipo_reservacion'] : "";
 
-  
+  //logica para saber si una reservación estará o no garantizada.
+  $estado_interno="pendiente";
+  if($_POST['estado_tarjeta'] == 2 || !empty($_POST['voucher'] )){
+    $estado_interno = "garantizada";
+  }
+
   $id_reservacion = $reservacion->guardar_reservacionNew($_POST['id_huesped'],$_POST['tipo_hab'],$id_movimiento,$_POST['fecha_entrada'],$_POST['fecha_salida'],
   $_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],
   $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
   urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
   $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$_POST['total_pago'],$actual_hab,
-  $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender);
+  $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno);
 
+  
 
   //si hay preasignada 
   if($_POST['preasignada']!=0){
     $logs->guardar_log($_POST['usuario_id'],"Preasginar reservacion: ". $id_reservacion . " Hab: " . $_POST['hab_id']);
+
+    //Para cambiar el ultimo_mov siendo una reservacion.
+    $hab->cambiohabUltimo($actual_hab);
   }
 
   if($_POST['total_pago'] > 0){
