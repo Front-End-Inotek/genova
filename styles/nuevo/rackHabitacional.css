@@ -81,7 +81,7 @@
 -webkit-box-shadow: 0 2px 2px -2px #0E1119;
    -moz-box-shadow: 0 2px 2px -2px #0E1119;
         box-shadow: 0 2px 2px -2px #0E1119;
-        background: #ffffff50 !important;
+        background: #00000000 !important;
 }
 
 .tableRack th {
@@ -504,6 +504,7 @@ transition-timing-function: line;
   color: #30349f;
   border-color: #8e97f9;
   font-weight: 500;
+  
 }
 
 .my-input:checked+.task:after {
