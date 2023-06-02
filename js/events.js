@@ -4190,6 +4190,7 @@ function estado_cuenta(hab_id,estado,mov=0){
 
 // Agregar un abono al cargo por habitacion //
 function agregar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
+
 	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante+"&mov="+mov+"&id_maestra="+id_maestra);
 }
 

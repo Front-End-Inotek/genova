@@ -633,7 +633,7 @@ class RackHabitacional extends ConexionMYSql
                                             $tiempo_aux += $n;
                                             $noches_reserva=1;
                                         }
-                                        echo date('Y-m-d',$tiempo_aux);
+                                        // echo date('Y-m-d',$tiempo_aux);
                                         // if($yasume==false){
                                         //     echo "a";
                                         //     $tiempo_aux += 86400;
@@ -652,7 +652,7 @@ class RackHabitacional extends ConexionMYSql
                      
                                     $filaL = $fila_r;
                                    
-                                    $current+=1;
+                                    $current++;
                                     
                                     $noches_reserva=0;
                                     $existetd=false;

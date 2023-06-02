@@ -192,7 +192,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <h2>Datos Personales</h2>
             <button class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
             <input type="text" id="tomahuespedantes" hidden>
-            <input type="text" id="estadotarjeta" >
+            <input type="text" id="estadotarjeta" hidden>
             <input type="text" id="nut" hidden>
             <input type="text" id="nt" hidden>
             <input type="text" id="mes" hidden>
