@@ -65,3 +65,13 @@
 --se agrego un cambio al fondo
 --se cambio colores en generales
 --se solucioino problema seccion de restaurante
+----01/06
+--se agrego nuevo efecto de animacion al fondo
+--se cambio todos los contenedores por efecto de carpeta
+--se cambio los diseños de inputs
+--se cambio y agrego margenes a contenedores
+--se agrego degradado a la animacion
+----02/06
+--se agregaron margenes y espacios
+--
+

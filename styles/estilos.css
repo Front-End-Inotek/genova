@@ -116,7 +116,7 @@
 
 /* Color para tabla de encabezado primary **/
 .table-primary-encabezado {
-  color: #fff;
+  color: #3f51b5;
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
@@ -126,8 +126,9 @@
     #c3cafdee 0%,
     #ecf2ff 45%,
     rgb(166, 179, 248) 100%
-  );*/
-  background-color: #1f238a !important;
+  );
+  background-color: #1f238a !important;*/
+  background-color: #e5fcffdd !important;
   border-top-style: none;
 }
 
@@ -191,12 +192,12 @@ label {
   /*
   background: url('../images/vista_back.jpg') !important;*/
   background-attachment: fixed;
-  background-size: cover;
+  background-size:contain;
   color: #3f51b5 !important;
   /*
   background-color: #5b58f814 !important;
   background-color: #dde6ff !important;*/
-  background-color: #fdf8e2;
+  background-color: #fdf8e2 !important;
   margin-top: 60px !important;
   padding-top: 20px !important;
   border: 2px solid #fceca8;
@@ -224,7 +225,10 @@ label {
   background-color: #ffffff;
   transform: rotate(-2deg);
   padding: 35px 35px;
+  background-image: url(../images/hoja-c.png);
+  background-size: cover;
 }
+
 .blanco:after {
   transform: rotate(2deg);
   z-index: -2;
@@ -241,6 +245,10 @@ label {
   transform: rotate(0deg);
   transition: 1s;
   width: 99%;
+}
+.blanco{
+  border-radius: 15px;
+  
 }
 
 
@@ -381,7 +389,7 @@ tr:nth-child(odd) {
 }
 
 tr:nth-child(even) {
-  background-color: #ebeeffd5;
+  background-color: #e5fcffdd;
 }
 
 th {
@@ -399,6 +407,7 @@ tr:hover {
   background-color: #f1f2ff;
   border: 2px solid;
 }
+
 
 /* Contenedor con fondo blanco y margen */
 .blanco_margen {
@@ -586,8 +595,8 @@ a.topictitle:hover {
   /*font-weight: bold;*/
 }
 .modo-nocturno {
-  background: linear-gradient(356deg, rgb(2, 10, 58), rgb(170, 171, 177));
-  /* Otros estilos para el modo nocturno */
+  background-image: linear-gradient(356deg, #fff, #000);
+  background-color: #252954;
 }
 
 /*.sub_estado_sin{
@@ -1436,6 +1445,7 @@ a.topictitle:hover {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  padding-top: 10px;
 }
 
 .col-xs-1,
