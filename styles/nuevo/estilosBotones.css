@@ -1,6 +1,9 @@
+html{
+  max-height: 80% !important;
+}
 body {
   margin: 0;
-  height: 100vh;
+  height: 80% !important;
   display: flex;
   flex-direction: column;
 }
@@ -31,11 +34,26 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   z-index: -9999999999;
-  background: linear-gradient(356deg, #ffd6d6, #3f51b5);
+  border: 2px solid white;
+  background: 
+  radial-gradient(18% 28% at 24% 50%,#cefAFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),radial-gradient(70% 53% at 36% 76%,#73f2FFFF 0,#073AFF00 100%),radial-gradient(42% 53% at 15% 94%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(42% 53% at 34% 72%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 35% 87%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(31% 43% at 7% 98%,#fffFFFFF 24%,#073AFF00 100%),radial-gradient(21% 37% at 72% 23%,#d3fF6D9C 24%,#073AFF00 100%),radial-gradient(35% 56% at 91% 74%,#8a4FFFF5 9%,#073AFF00 100%),radial-gradient(74% 86% at 67% 38%,#6dfFAEF5 24%,#073AFF00 100%),linear-gradient(125deg,#4eb5FFFF 1%,#4c00FCFF 100%);
+  animation: infinite 10s infinite cubic-bezier(0.26, 0.62, 1, 1);
 }
+
+.circles{
+  border-radius: 15px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  translate:-50% -50%;
+  z-index:-1;
+  border:none;
+  opacity: 0.7;
+}
+
 
 .circles li {
   position: absolute;
@@ -43,12 +61,9 @@ body {
   list-style: none;
   width: 40px;
   height: 40px;
-  background: linear-gradient(
-    180deg,
-    #a0a9f697 0%,
-    #cdd2fc9a 40%,
-    rgba(169, 176, 255, 0.555) 100%
-  );
+  background: 
+  radial-gradient(18% 28% at 24% 50%,#cefAFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),radial-gradient(70% 53% at 36% 76%,#73f2FFFF 0,#073AFF00 100%),radial-gradient(42% 53% at 15% 94%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(42% 53% at 34% 72%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 35% 87%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(31% 43% at 7% 98%,#fffFFFFF 24%,#073AFF00 100%),radial-gradient(21% 37% at 72% 23%,#d3fF6D9C 24%,#073AFF00 100%),radial-gradient(35% 56% at 91% 74%,#8a4FFFF5 9%,#073AFF00 100%),radial-gradient(74% 86% at 67% 38%,#6dfFAEF5 24%,#073AFF00 100%),linear-gradient(125deg,#4eb5FFFF 1%,#4c00FCFF 100%);
+  animation: rotate 10s infinite linear; 
   animation: animate 25s linear infinite;
   bottom: -150px;
   border: 5px solid #8e97f9;
@@ -169,8 +184,9 @@ body {
 .btn-warning {
   font-weight: 500;
   border:2px solid  #ffc107 !important;
-  background: #ffc107!important;
-
+  background: linear-gradient(0deg, rgba(255,107,39,1) 0%, rgba(251,253,45,1) 100%);
+  box-shadow: inset 1px 2px 2px 0px rgba(222, 222, 222, 0.5), 
+  0px 0px 0px 0px rgba(194, 194, 194, 0.475), 10px 4px 5px 0px rgba(127, 127, 127, 0.456) !important;
   color: #fff !important;
 }
 
@@ -183,28 +199,30 @@ body {
 
 .btn-success {
   font-weight: 700;
-  background-color: transparent;
-  box-shadow: inset 1px 2px 2px 0px rgba(185, 196, 252, 0.5),
-  0px 0px 0px 0px rgba(128, 128, 239, 0.475), 10px 4px 5px 0px rgba(58, 73, 242, 0.456) !important;
-  color: #3f51b5 !important;
-  border: 2px solid #3f51b5 !important;
+  background-image: linear-gradient( rgb(182, 244, 146), rgb(51, 139, 147));
+  color: #fff !important;
+  box-shadow: inset 1px 2px 2px 0px rgba(222, 222, 222, 0.5), 
+  0px 0px 0px 0px rgba(194, 194, 194, 0.475), 10px 4px 5px 0px rgba(127, 127, 127, 0.456) !important;
+  
+  border:2px solid rgb(62 133 84) !important;
 }
 
 .btn-success:hover {
   /*background-color: #c8d7ff !important;*/
-  border-color: #3f51b5 !important;
-  color: #fff !important;
-
-  background: linear-gradient(65deg, #737dfe, #8b92ff);
+  border: 2px solid #fff !important;
+  border: 2px solid #066415 !important;
+  color: #06541d !important;
+  background-color: transparent !important;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #fff;
 }
 
 
 
 .btn-danger {
   border:2px solid  #dc3545;
-  background: #dc3545;
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 49, 8, 0.3),
-    7px 7px 20px 0px rgba(246, 8, 4, 0.1), 4px 4px 5px 0px rgba(243, 9, 1, 0.352) !important;
+  background: linear-gradient(0deg, rgba(195,34,126,1) 0%, rgba(253,45,49,1) 100%);
+  box-shadow: inset 1px 2px 2px 0px rgba(222, 222, 222, 0.5), 
+  0px 0px 0px 0px rgba(194, 194, 194, 0.475), 10px 4px 5px 0px rgba(127, 127, 127, 0.456) !important;
   font-weight: 500;
   color: #fff !important;
 }
@@ -220,17 +238,20 @@ body {
 
 .btn-primary {
   background-color: #3f51b5;
- 
-  color: #98a7ff ;
-  border: 2px solid #3f51b5;
+  color: #fff ;
+  border: 2px solid #3f51b5 !important;
+  box-shadow: inset 1px 2px 2px 0px rgba(222, 222, 222, 0.5), 
+  0px 0px 0px 0px rgba(194, 194, 194, 0.475), 10px 4px 5px 0px rgba(127, 127, 127, 0.456) !important;
+  background-image: linear-gradient( #98a7ff, #3f51b5);
 }
 
 
 .btn-secondary {
-  background-color: transparent;
+  background-image: linear-gradient( #98a7ff, #3f51b5);
+  
   box-shadow: inset 1px 2px 2px 0px rgba(185, 196, 252, 0.5),
   0px 0px 0px 0px rgba(128, 128, 239, 0.475), 10px 4px 5px 0px rgba(58, 73, 242, 0.456) !important;
-  color: #3f51b5 !important;
+  color: #fff !important;
   border: 2px solid #3f51b5;
 }
 
@@ -241,6 +262,9 @@ body {
   height: 100%;
 }
 
+.form-control{
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #fff;
+}
 /*boton si o no*/
 .switch {
   position: absolute;
@@ -251,6 +275,7 @@ body {
   background: #4cd964;
   transition: all 0.2s ease;
   border-radius: 5px;
+  box-shadow: 6px 7px 11px #9b9b9b;
 }
 
 .switch span {
@@ -357,6 +382,7 @@ label[for="no"] {
   font-size: 16px;
   grid-gap: 10px;
   row-gap: 10px;
+  
 }
 
 .botones-estado {
@@ -541,16 +567,16 @@ label[for="no"] {
 .containerRackOp .btn:hover a {
   font-weight: 500;
 }
-
-/* Estilo del botón en modo noche */
+/*
+/* Estilo del botón en modo noche *//*
 body.modo-nocturno .containerRackOp .btn {
   box-shadow: 10px 5px 10px rgba(86, 58, 142, 0.491);
-}
+}*/
 
-/* Estilo de la sombra del borde blanco del botón en modo noche */
+/* Estilo de la sombra del borde blanco del botón en modo noche *//*
 body.modo-nocturno .containerRackOp .btn:focus {
   box-shadow: 0 15px 0 3px rgba(74, 40, 143, 0.205);
-}
+}*/
 
 .context {
   display: block;
@@ -757,7 +783,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .btn-dark {
   background-color: #97b2f96e !important;
-  border-color: #3f51b5 !important;
+  border-color: #fff !important;
   color: #3f51b5 !important;
 }
 
@@ -782,10 +808,10 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .btn-info {
-  background-color: transparent;
+  background-image: linear-gradient( #98a7ff, #3f51b5);
   box-shadow: inset 1px 2px 2px 0px rgba(185, 196, 252, 0.5),
   0px 0px 0px 0px rgba(128, 128, 239, 0.475), 10px 4px 5px 0px rgba(58, 73, 242, 0.456) !important;
-  color: #3f51b5 !important;
+  color: #fff !important;
   border: 2px solid #3f51b5;
 }
 
@@ -831,7 +857,7 @@ body {
   /*
   background-image: url("https://wallpapershome.com/images/wallpapers/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg");
   background-size: cover !important;
-  background-position: center !important;*/
+  background-position: center !important;
 
   background-image: linear-gradient(
       62deg,
@@ -852,7 +878,7 @@ body {
       58deg,
       rgba(90, 90, 237, 0.16144443572260592) 83%,
       rgba(249, 156, 142, 0.5) 23%
-    ) !important;
+    ) !important;*/
 }
 
 .btn {
@@ -930,8 +956,7 @@ body {
   right: calc(102% - 8px);
   transform: translateX(100%);
   border: 2px solid #fff;
-  box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
-    7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #fff;
   transition: all 0.3s ease;
 }
 

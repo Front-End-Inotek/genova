@@ -116,7 +116,7 @@
 
 /* Color para tabla de encabezado primary **/
 .table-primary-encabezado {
-  color: #fff;
+  color: #3f51b5;
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
@@ -126,8 +126,9 @@
     #c3cafdee 0%,
     #ecf2ff 45%,
     rgb(166, 179, 248) 100%
-  );*/
-  background-color: #1f238a !important;
+  );
+  background-color: #1f238a !important;*/
+  background-color: #e5fcffdd !important;
   border-top-style: none;
 }
 
@@ -191,17 +192,67 @@ label {
   /*
   background: url('../images/vista_back.jpg') !important;*/
   background-attachment: fixed;
-  background-size: cover;
+  background-size:contain;
   color: #3f51b5 !important;
   /*
-  background-color: #5b58f814 !important;*/
-  background-color: #dde6ff !important;
+  background-color: #5b58f814 !important;
+  background-color: #dde6ff !important;*/
+  background-color: #fdf8e2 !important;
   margin-top: 60px !important;
   padding-top: 20px !important;
-  border: 2px solid #3f51b5;
+  border: 2px solid #fceca8;
   border-radius: 5px;
   
 }
+.blanco {
+  position: relative;
+  box-shadow: -0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+.blanco:before, .blanco:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow:inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+  7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+  4px 4px 5px 0px rgba(0, 0, 0, 0.1) !important;
+  border: 2px solid #b5b2b2;
+}
+.blanco:before {
+  z-index: -1;
+  background-color: #ffffff;
+  transform: rotate(-2deg);
+  padding: 35px 35px;
+  background-image: url(../images/hoja-c.png);
+  background-size: cover;
+}
+
+.blanco:after {
+  transform: rotate(2deg);
+  z-index: -2;
+  background-color: #ffffff;
+}
+
+.blanco:hover::after{
+  transform: rotate(0deg);
+  transition: 1s;
+  width: 99.7%;
+}
+
+.blanco:hover::before{
+  transform: rotate(0deg);
+  transition: 1s;
+  width: 99%;
+}
+.blanco{
+  border-radius: 15px;
+  
+}
+
+
+
 
 .table-responsive {
   margin-left: 10px !important;
@@ -226,7 +277,6 @@ label {
 .input-group-text {
   background-color: #e9ecef;
   color: #3f51b5 !important;
-  margin-top: 10px;
 }
 
 input:hover {
@@ -249,6 +299,7 @@ td {
   outline: none;
 }
 */
+
 
 button {
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
@@ -278,8 +329,7 @@ button {
 }
 
 input {
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #fff;
   outline: none;
 }
 
@@ -339,7 +389,7 @@ tr:nth-child(odd) {
 }
 
 tr:nth-child(even) {
-  background-color: #ebeeffd5;
+  background-color: #e5fcffdd;
 }
 
 th {
@@ -358,15 +408,19 @@ tr:hover {
   border: 2px solid;
 }
 
+
 /* Contenedor con fondo blanco y margen */
 .blanco_margen {
   padding: 35px 35px;
   margin-bottom: 30px;
   margin-top: 30px;
   margin-left: 45px;
+  text-align: initial;
+    margin-left: 40px;
   background-color: #ecf2ff;
   border: 2px solid #3f51b5;
 }
+
 
 /* Margen de uno en escritura */
 .margen-1 {
@@ -541,8 +595,8 @@ a.topictitle:hover {
   /*font-weight: bold;*/
 }
 .modo-nocturno {
-  background: linear-gradient(356deg, rgb(2, 10, 58), rgb(170, 171, 177));
-  /* Otros estilos para el modo nocturno */
+  background-image: linear-gradient(356deg, #fff, #000);
+  background-color: #252954;
 }
 
 /*.sub_estado_sin{
@@ -1391,6 +1445,7 @@ a.topictitle:hover {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  padding-top: 10px;
 }
 
 .col-xs-1,

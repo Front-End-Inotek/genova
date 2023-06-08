@@ -28,8 +28,8 @@
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '
-  <div class="modal-content alinear_centro" style="background: linear-gradient(121deg, #6098ff42, #cc60f945); !important; backdrop-filter: blur(0px);">
-    <h5 style="padding-bottom: 25px;">Agregar Restaurante </h5>
+  <div class="modal-content alinear_centro" style="background: transparent; !important; backdrop-filter: blur(0px);">
+    <h5 style="padding-bottom: 25px; color= white !important";>Agregar Restaurante </h5>
     <div class="col-sm-12 fondo_rest"><br>  
 
       <div class="row">
@@ -38,7 +38,7 @@
             <div class="card-header alinear_centro">
               <h5>Categorias</h5>
             </div>
-
+            
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
               ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
             echo '</div>
