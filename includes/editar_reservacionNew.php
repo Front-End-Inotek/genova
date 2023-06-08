@@ -100,7 +100,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <div class="form-group col-md-4">
                     <label for="total-estancia">Total de la estancia</label>
                     <input type="number" class="form-control" id="total" min="0" step="0.01" value='.$reservacion->total.' readonly>
-                    <input type="number" class="form-control" id="aux_total" min="0" value='.$reservacion->total.' step="0.01" readonly hidden>
+                    <input type="number" class="form-control" id="tarifa_base" min="0"  value="'.$tarifa->precio_hospedaje.'" step="0.01" readonly hidden>
                 </div>
             </div>
             <div class="d-flex justify-content-between">
@@ -167,15 +167,15 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <div class="d-flex justify-content-between">
             <div class="form-group col-md-4">
                     <label for="no-habitaciones">Número de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="'.$reservacion->numero_hab.'" required  onchange="cambiar_adultosNew(0,'.$hab_id.')">
+                    <input type="number" class="form-control" id="numero_hab" min="1" value="'.$reservacion->numero_hab.'" required onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="pax-extra">Pax extra</label>
-                    <input type="number" class="form-control" id="pax-extra" min="0" value="'.$reservacion->pax_extra.'"  onchange="editarTotalEstancia('.$tarifa->precio_hospedaje.')">
+                    <input type="number" class="form-control" id="pax-extra" min="0" value="'.$reservacion->pax_extra.'"  onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="plan-alimentos">Plan de alimentos</label>
-                    <select class="form-control" id="plan-alimentos"  onchange="editarTotalEstancia('.$tarifa->precio_hospedaje.',event)">
+                    <select class="form-control" id="plan-alimentos"  onchange="editarTotalEstancia(event)">
                     <option value="">Seleccione una opción</option>';
                     $config->mostrar_planes_select($reservacion->plan_alimentos);
                   echo'

@@ -1592,13 +1592,14 @@ function calcular_nochesChek(){
     if(hab_id!=0 && hab_id!=undefined){
         calcular_noches(hab_id)
     }else{
-        swal("Seleccione al menos una habitación",'Debe seleccionar una habitación para continuar con el checkin','error')
+        calcular_noches(hab_id)
+        //swal("Seleccione al menos una habitación",'Debe seleccionar una habitación para continuar con el checkin','error')
     }
 }
 
-function editarTotalEstancia(tarifa_base,event){
+function editarTotalEstancia(event){
 
-    console.log(tarifa_base)
+
 
     forzar_tarifa = $("#forzar-tarifa").val()
     extra_adultos = $("#extra_adulto").val();
@@ -1610,6 +1611,8 @@ function editarTotalEstancia(tarifa_base,event){
     noches = $("#noches").val();
 
     numero_hab = $("#numero_hab").val();
+
+    tarifa_base = $("#tarifa_base").val()
 
     console.log(forzar_tarifa)
     if(forzar_tarifa!="" || forzar_tarifa!=0  ){
@@ -1641,7 +1644,7 @@ function editarTotalEstancia(tarifa_base,event){
             $('#costoplan').val(costo_plan)
         }
     }else{
-        costo_plan = $("#costoplan").val()
+        costo_plan = Number($("#costoplan").val())
     }
 
     total = aux_total + adicional_adulto + adicional_infantil + pax_extra + costo_plan
@@ -1692,7 +1695,7 @@ function calcular_noches(hab_id=0){
         ultima_fecha = fechas[fechas.length-1]
 
         if(tarifa_base!=0 || tarifa_base!=""){
-            editarTotalEstancia(tarifa_base)
+            editarTotalEstancia()
         }else{
             cambiar_adultosNew("",hab_id)
         }
@@ -1774,11 +1777,11 @@ function cambiar_adultosNew(event=null,hab_id){
             success:function(res){
                console.log(res)
                $("#total").val(res.precio_hab)
-               $("#aux_total").val(res.precio_hab)
+               $("#tarifa_base").val(res.precio_hospedaje)
                $("#tarifa_menores").val(res.precio_infantil)
                $("#tarifa_adultos").val(res.precio_adulto)
 
-               editarTotalEstancia(res.precio_hab)
+               editarTotalEstancia()
 
                //al seleccionar una nueva tarifa los extras se "reinician"
             //    $("#extra_adulto").val("")
@@ -1795,7 +1798,7 @@ function cambiar_adultosNew(event=null,hab_id){
         //no consulta la tarifa de la bd.
         //  console.log("forzando:" + noches +" t:"+forzar_tarifa)
         if(forzar_tarifa!=""){
-            editarTotalEstancia(forzar_tarifa)
+            editarTotalEstancia()
             // console.log("??")
 
             // adicional=0;
@@ -1845,64 +1848,114 @@ function cambiar_adultos(hab_id){
 }
 
 function nuevo_calculo_total(event=null){
-    var numero_hab= Number(document.getElementById("numero_hab").value);
-    var noches= Number(document.getElementById("noches").value);
-    var tarifa= Number(document.getElementById("tarifa").value);
-    var forzar_tarifa= Number(document.getElementById("forzar-tarifa").value);
+    // var numero_hab= Number(document.getElementById("numero_hab").value);
+    // var noches= Number(document.getElementById("noches").value);
+    // var tarifa= Number(document.getElementById("tarifa").value);
+    // var forzar_tarifa= Number(document.getElementById("forzar-tarifa").value);
     
-    //extra los campos de las tarifas consultadas de la db.
+    // //extra los campos de las tarifas consultadas de la db.
 
-    var extra_adulto= Number(document.getElementById("extra_adulto").value);
+    // var extra_adulto= Number(document.getElementById("extra_adulto").value);
 
-	var extra_infantil= Number(document.getElementById("extra_infantil").value);
+	// var extra_infantil= Number(document.getElementById("extra_infantil").value);
 
-    var tarifa_infantil = Number(document.getElementById("tarifa_menores").value);
+    // var tarifa_infantil = Number(document.getElementById("tarifa_menores").value);
     
-    var tarifa_adulto = Number(document.getElementById("tarifa_adultos").value);
+    // var tarifa_adulto = Number(document.getElementById("tarifa_adultos").value);
 
-	var pax_extra= Number(document.getElementById("pax-extra").value);
+	// var pax_extra= Number(document.getElementById("pax-extra").value);
 
-    var costo_plan=Number(document.getElementById('costoplan').value); 
-    //si  se elige un plan de alimentación desde el select.
+    // var costo_plan=Number(document.getElementById('costoplan').value); 
+    // //si  se elige un plan de alimentación desde el select.
+    // if(event!=null){
+    //     var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
+    //     if(costoplan!=undefined){
+           
+    //         costo_plan=Number(costoplan)
+    //         $('#costoplan').val(costo_plan)
+        
+    //     }
+    // }
+    // //se guarda el total generado por las fechas seleccionadas (no se altera), para despues sumarlo al total (alterable)
+    // var aux_total=Number(document.getElementById('aux_total').value)
+	
+	// var total_infantil= tarifa_infantil * extra_infantil * noches;
+    // var total_adulto = tarifa_adulto * extra_adulto * noches;
+    // var adicionales =  total_infantil  + total_adulto + pax_extra + costo_plan;  
+    // var total = aux_total + adicionales;
+
+    // console.log(total_adulto)
+    // fadulto = 0;
+    // finfantil =0;
+
+    // //si el total del adulto o del infante son 0, no se seleccionó una tarifa de la db, se realiza otro calculo.
+    // if(total_adulto==0){
+    //     console.log(total,extra_adulto)
+    //     fadulto = $("#forzar-tarifa").val() * extra_adulto * noches
+    // }else{}
+    // if(total_infantil==0){
+    //     finfantil = $("#forzar-tarifa").val() * extra_infantil * noches
+    // }
+    // aux_total = total + fadulto + finfantil
+    // if(aux_total==0){
+    //     total= total
+    // }else{
+    //     total = aux_total
+    // }
+
+
+
+    // document.getElementById("total").value= total;
+
+    tarifa_base = $("#aux_total").val()
+
+    forzar_tarifa = $("#forzar-tarifa").val()
+    extra_adultos = $("#extra_adulto").val();
+    extra_infantil =  $("#extra_infantil").val();
+
+    tarifa_adultos = $("#tarifa_adultos").val();
+
+    tarifa_infantil = $("#tarifa_menores").val();
+    noches = $("#noches").val();
+
+    numero_hab = $("#numero_hab").val();
+
+    console.log(forzar_tarifa)
+    if(forzar_tarifa!="" || forzar_tarifa!=0  ){
+        tarifa_base=forzar_tarifa
+        tarifa_adultos  = tarifa_base
+        tarifa_infantil=tarifa_base
+    }
+    // tarifa_base =123;
+
+    adicional_adulto=0;
+    adicional_infantil=0;
+
+    if(extra_adultos!=0){
+       adicional_adulto = extra_adultos * tarifa_adultos *  noches;
+    }
+    if(extra_infantil!=0){
+        adicional_infantil = extra_infantil * tarifa_infantil*  noches;
+    }
+    console.log(tarifa_base,noches, numero_hab)
+    aux_total = tarifa_base * noches * numero_hab
+
+    //Adicionales
+
+    var pax_extra= Number(document.getElementById("pax-extra").value);
     if(event!=null){
         var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
         if(costoplan!=undefined){
-           
             costo_plan=Number(costoplan)
             $('#costoplan').val(costo_plan)
-        
         }
-    }
-    //se guarda el total generado por las fechas seleccionadas (no se altera), para despues sumarlo al total (alterable)
-    var aux_total=Number(document.getElementById('aux_total').value)
-	
-	var total_infantil= tarifa_infantil * extra_infantil * noches;
-    var total_adulto = tarifa_adulto * extra_adulto * noches;
-    var adicionales =  total_infantil  + total_adulto + pax_extra + costo_plan;  
-    var total = aux_total + adicionales;
-
-    console.log(total_adulto)
-    fadulto = 0;
-    finfantil =0;
-
-    //si el total del adulto o del infante son 0, no se seleccionó una tarifa de la db, se realiza otro calculo.
-    if(total_adulto==0){
-        console.log(total,extra_adulto)
-        fadulto = $("#forzar-tarifa").val() * extra_adulto * noches
-    }
-    if(total_infantil==0){
-        finfantil = $("#forzar-tarifa").val() * extra_infantil * noches
-    }
-    aux_total = total + fadulto + finfantil
-    if(aux_total==0){
-        total= total
     }else{
-        total = aux_total
+        costo_plan = $("#costoplan").val()
     }
 
+    total = aux_total + adicional_adulto + adicional_infantil + pax_extra + costo_plan
 
-
-    document.getElementById("total").value= total;
+    $("#total").val(total);
    
 
    
@@ -2239,7 +2292,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var total_hospedaje= precio_hospedaje * noches * numero_hab;
     var total_hab= total_hospedaje + extra_adulto  + extra_infantil + pax_extra;  
 
-    var precio_hospedaje = document.getElementById('aux_total').value
+    var precio_hospedaje = document.getElementById('tarifa_base').value
     var total_hospedaje = document.getElementById('total').value
 
     sobrevender = sobrevender ? 1 : 0 ;
@@ -6509,6 +6562,36 @@ function buscador_reportes_reservas(opcion){
     $("#tabla_reservacion").load(include);
 }
 
+
+function imprimir_reportes(opcion){
+    var usuario_id=localStorage.getItem("id");
+    titulo=""
+    ruta=""
+    inicial = $("#dia").val()
+    if(inicial==undefined){
+        inicial="";
+    }
+    inicial = encodeURIComponent(inicial)
+    switch (opcion ) {
+        case 1:
+            titulo="LLEGADAS PROBABLES"
+            break;
+        case 2:
+            titulo="LLEGADAS EFECTIVAS"
+            break;
+        case 3:
+            titulo="SALIDAS PROBABLES"
+            break;
+        case 4:
+            titulo="SALIDAS EFECTIVAS"
+            break;
+        default:
+            break;
+    }
+    include = "includes/reporte_reservacion_general.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial
+    window.open(include);
+}
+
 function ver_reportes_reservaciones(opcion,btn=0){
 
     titulo=""
@@ -6774,7 +6857,10 @@ function hab_desocupar(hab_id,estado){
           url:"includes/hab_desocupar.php",
           data:datos,
           beforeSend:loaderbar,
-          success:principal,
+          success:function(){
+            window.open("includes/imprimir_estado_cuenta.php?id="+hab_id);
+            principal()
+          },
           //success:problemas_sistema,
           timeout:5000,
           error:problemas_sistema

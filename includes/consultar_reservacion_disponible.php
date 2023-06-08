@@ -28,7 +28,7 @@ if($hab_id!=0){
     if($resultado <1){
         echo "<script>alert('Fecha de asignación inválida'); manejarReservacion(0);</script>";
     }else{
-        // echo "<script>alert('Fecha de asignación válida'); manejarReservacion(1);</script>";
+        echo "<script>manejarReservacion(1);</script>";
     }
     
     

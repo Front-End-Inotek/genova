@@ -117,7 +117,7 @@
 
   //si hay preasignada 
   if($_POST['preasignada']!=0){
-    $logs->guardar_log($_POST['usuario_id'],"Preasginar reservacion: ". $id_reservacion . " Hab: " . $_POST['hab_id']);
+    $logs->guardar_log($_POST['usuario_id'],"Preasignar reservacion: ". $id_reservacion . " Hab: " . $actual_hab);
 
     //Para cambiar el ultimo_mov siendo una reservacion.
     $hab->cambiohabUltimo($actual_hab);

@@ -35,13 +35,14 @@
     $forzar_tarifa= $_GET['forzar_tarifa'];
   }
 
-  $precio_adulto= $precio_adulto * $_GET['noches'];
+  $precio_adulto= $precio_adulto /** $_GET['noches']*/;
   $precio_junior= $precio_junior * $_GET['noches'];
-  $precio_infantil= $precio_infantil * $_GET['noches'];
+  $precio_infantil= $precio_infantil /* * $_GET['noches']*/;
   $precio_hab= $precio_hospedaje * $_GET['noches'] * $numero_hab;
   $cantidad_maxima= $tarifa->cantidad_maxima;
   $leyenda= $tarifa->leyenda;
   $tipo_hab= $_GET['tarifa'];
+  
 
   $datos_interes = array(
 
@@ -49,6 +50,7 @@
     "precio_adulto"=>$precio_adulto,
     "precio_infantil"=>$precio_infantil,
     "precio_hospedaje"=>$precio_hospedaje,
+
 
   );
 
