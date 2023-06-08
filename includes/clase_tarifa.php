@@ -202,7 +202,7 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '  <option data-tipo="'.$fila['tipo'].'" value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+          echo '<option data-tipo="'.$fila['tipo'].'" value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
         }
         return $consulta;
       }

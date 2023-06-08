@@ -382,6 +382,9 @@ transition-timing-function: line;
   box-shadow: 0 10px 14px #6b0fe396;
 }
 
+
+
+
 .task--reserva-pendiente-pago {
   border-left: 7px solid #bc88ff;
   /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
@@ -400,6 +403,8 @@ transition-timing-function: line;
   border-left: 7px solid #bc88ff !important;
   box-shadow: 0 10px 14px #3b0286cb;
 }
+
+#yo:hover ~  #hh {color: yellow; }
 
 
 
@@ -480,6 +485,16 @@ transition-timing-function: line;
   top: 0;
   left: 0;
   z-index: 1;
+  background:#fff;
+  box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  transition: all 0.5s ease;
+  border-radius: 3px;
+}
+
+.elhover {
+
   background:#fff;
   box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
     7px 7px 20px 0px rgba(0, 0, 0, .1),

@@ -72,13 +72,13 @@
       function mostrar_hab_option(){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab = 1 ORDER BY hab.id";// nombre
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab  = 1 AND hab.estado=0 ORDER BY hab.id";// nombre
         $comentario="Mostrar las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<option data-habid="'.$fila['ID'].'" value="'.$fila['nom'].'">'.$fila['nom'].'</option>';
+          echo '<option data-habid="'.$fila['ID'].'" data-habtipo="'.$fila['tipo'].'" value="'.$fila['nom'].'">'.$fila['nom'].'</option>';
          
         }
       }

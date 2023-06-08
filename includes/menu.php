@@ -32,7 +32,7 @@
 			<i class="bx bx-desktop"></i>
 			<span class="mx-2">Recepcion</span>
 			<ul id="reportes_submenu" class="submenu">
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="disponible_asignar(0,0)"> Check In </a></i></ul>
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_check()"> Check In </a></i></ul>
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cuenta_maestra()"> Cuenta Maestra </a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cargo_noche()">Reporte Diarios </a></i></ul>';

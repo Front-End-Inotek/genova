@@ -51,7 +51,6 @@
     "precio_hospedaje"=>$precio_hospedaje,
 
   );
-  
 
   echo json_encode($datos_interes);
 ?>

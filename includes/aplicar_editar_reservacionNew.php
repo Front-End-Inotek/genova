@@ -72,4 +72,5 @@
 
   
   $logs->guardar_log($_POST['usuario_id'],"Editar reservacion: ". $_POST['id']);
+  echo $_POST['id'];
 ?>

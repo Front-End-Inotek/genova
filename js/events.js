@@ -128,7 +128,7 @@ function obtener_datos_hab() {
                         //console.log(hab_info[i]['id']+"-"+hab[hab_info[i]['id']]+"-"+hab_ultimo_mov[hab_info[i]['id']]);
                     }
                     else{
-                        console.log("sin cambio en la habitacion con id "+hab_info[i]['id']);
+                        // console.log("sin cambio en la habitacion con id "+hab_info[i]['id']);
                     }
                     
                 }
@@ -1535,6 +1535,17 @@ function regresar_editar_hab(){
 
 //* Reservacion *//
 
+
+// Agregar una reservacion
+function agregar_check(){
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/agregarCheck.php?"); 
+    closeModal();
+	closeNav();
+}
+
 // Agregar una reservacion
 function agregar_reservaciones(hab_id=0){
 	$('#area_trabajo').hide();
@@ -1575,10 +1586,75 @@ function getDatesInRange(date, endDate) {
 
  }
 
+function calcular_nochesChek(){
+    hab_id = $("#habitacion_check :selected").data("habid")
+    console.log(hab_id)
+    if(hab_id!=0 && hab_id!=undefined){
+        calcular_noches(hab_id)
+    }else{
+        swal("Seleccione al menos una habitación",'Debe seleccionar una habitación para continuar con el checkin','error')
+    }
+}
+
+function editarTotalEstancia(tarifa_base,event){
+
+    console.log(tarifa_base)
+
+    forzar_tarifa = $("#forzar-tarifa").val()
+    extra_adultos = $("#extra_adulto").val();
+    extra_infantil =  $("#extra_infantil").val();
+
+    tarifa_adultos = $("#tarifa_adultos").val();
+
+    tarifa_infantil = $("#tarifa_menores").val();
+    noches = $("#noches").val();
+
+    numero_hab = $("#numero_hab").val();
+
+    console.log(forzar_tarifa)
+    if(forzar_tarifa!="" || forzar_tarifa!=0  ){
+        tarifa_base=forzar_tarifa
+        tarifa_adultos  = tarifa_base
+        tarifa_infantil=tarifa_base
+    }
+    // tarifa_base =123;
+
+    adicional_adulto=0;
+    adicional_infantil=0;
+
+    if(extra_adultos!=0){
+       adicional_adulto = extra_adultos * tarifa_adultos *  noches;
+    }
+    if(extra_infantil!=0){
+        adicional_infantil = extra_infantil * tarifa_infantil*  noches;
+    }
+    console.log(tarifa_base,noches, numero_hab)
+    aux_total = tarifa_base * noches * numero_hab
+
+    //Adicionales
+
+    var pax_extra= Number(document.getElementById("pax-extra").value);
+    if(event!=null){
+        var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
+        if(costoplan!=undefined){
+            costo_plan=Number(costoplan)
+            $('#costoplan').val(costo_plan)
+        }
+    }else{
+        costo_plan = $("#costoplan").val()
+    }
+
+    total = aux_total + adicional_adulto + adicional_infantil + pax_extra + costo_plan
+
+    $("#total").val(total);
+
+    
+
+}
+
 // Calculamos la cantidad de noches de una reservacion
 function calcular_noches(hab_id=0){
 
- 
     var fecha_salida= document.getElementById("fecha_salida")
     var fecha_entrada= document.getElementById("fecha_entrada");
 
@@ -1592,25 +1668,35 @@ function calcular_noches(hab_id=0){
 
     min_salida = selectedDate.toISOString().split('T')[0];
 
-    
     fecha_salida.setAttribute('min', min_salida)
-   
     const dateSalida = new Date(fecha_salida_value);
 
 	var noches= calculo_noches(fecha_entrada_value,fecha_salida_value)
-    document.getElementById("noches").value = noches
+    if(isNaN(noches)){
+        document.getElementById("noches").value = 0
+    }else{
+        document.getElementById("noches").value = noches
+    }
+
+    //Si cambia el numero de noches y ya existen tarifas se calcula el total de la instancia.
+
+    tarifa_base = $("#tarifa_base").val()
+
+
 
     if(fecha_entrada_value!="" && fecha_salida_value!=""){
-      
-      
     if( fecha_entrada_value >= fecha_salida_value ){
-      
        fecha_salida.value=""
-      
-        
     }else{
         fechas = (getDatesInRange(auxSelectedDate,dateSalida))
         ultima_fecha = fechas[fechas.length-1]
+
+        if(tarifa_base!=0 || tarifa_base!=""){
+            editarTotalEstancia(tarifa_base)
+        }else{
+            cambiar_adultosNew("",hab_id)
+        }
+       
      
     
 
@@ -1620,7 +1706,7 @@ function calcular_noches(hab_id=0){
         if(hab_id!=0){
             $(".div_adultos").load(include);    
         }
-        
+        // $(".div_adultos").load(include);    
         $("#preasignada").load(include);    
      
     }
@@ -1628,6 +1714,15 @@ function calcular_noches(hab_id=0){
 
   
     }
+}
+
+function sobreVenderHab(e){
+    //Si se sobrevende todas la habitaciones están disponibles.
+    if (e.currentTarget.checked) {
+        // alert('checked');
+      } else {
+        // alert('not checked');
+      }
 }
 
 // Calculo para obtener la cantidad de noches de una reservacion
@@ -1667,6 +1762,7 @@ function cambiar_adultosNew(event=null,hab_id){
     url_data ="includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id
    
     if(!isNaN(noches) && forzar_tarifa==""){
+        console.log("no here")
         $("#tarifa").attr('required',true);
         $.ajax({
             async:true,
@@ -1681,10 +1777,13 @@ function cambiar_adultosNew(event=null,hab_id){
                $("#aux_total").val(res.precio_hab)
                $("#tarifa_menores").val(res.precio_infantil)
                $("#tarifa_adultos").val(res.precio_adulto)
+
+               editarTotalEstancia(res.precio_hab)
+
                //al seleccionar una nueva tarifa los extras se "reinician"
-               $("#extra_adulto").val("")
-               $("#extra_infantil").val("")
-               $("#pax-extra").val("")
+            //    $("#extra_adulto").val("")
+            //    $("#extra_infantil").val("")
+            //    $("#pax-extra").val("")
             },
             //success:problemas_sistema,
             timeout:5000,
@@ -1696,14 +1795,29 @@ function cambiar_adultosNew(event=null,hab_id){
         //no consulta la tarifa de la bd.
         //  console.log("forzando:" + noches +" t:"+forzar_tarifa)
         if(forzar_tarifa!=""){
-            numero_hab = numero_hab == 0 ? 1 : numero_hab
-            tarifa = noches * forzar_tarifa * numero_hab
-            $("#total").val(tarifa)
-            $("#aux_total").val(tarifa)
-            $("#tipo-habitacion").removeAttr("disabled");
-            $("#tarifa_menores").val("")
-            $("#tarifa_adultos").val("")
-            $("#tarifa").removeAttr('required');
+            editarTotalEstancia(forzar_tarifa)
+            // console.log("??")
+
+            // adicional=0;
+            // numero_hab = numero_hab == 0 ? 1 : numero_hab
+            // tarifaOld = noches * forzar_tarifa * numero_hab
+
+            // if($("#tarifa_adultos").val()=="" && $("#forzar-tarifa").val()!=""){
+            //  adicional+= $("#forzar-tarifa").val() * $("#extra_adulto").val() * noches
+            // }
+
+            // if($("#tarifa_menores").val()=="" && $("#forzar-tarifa").val()!=""){
+            //     adicional+= $("#forzar-tarifa").val() * $("#extra_infantil").val() * noches
+            // }
+
+            // tarifaNew=tarifaOld+ adicional
+
+            // $("#total").val(tarifaNew)
+            // $("#aux_total").val(tarifaOld)
+            // $("#tipo-habitacion").removeAttr("disabled");
+            // $("#tarifa_menores").val("")
+            // $("#tarifa_adultos").val("")
+            // $("#tarifa").removeAttr('required');
         }
       
         
@@ -1734,6 +1848,7 @@ function nuevo_calculo_total(event=null){
     var numero_hab= Number(document.getElementById("numero_hab").value);
     var noches= Number(document.getElementById("noches").value);
     var tarifa= Number(document.getElementById("tarifa").value);
+    var forzar_tarifa= Number(document.getElementById("forzar-tarifa").value);
     
     //extra los campos de las tarifas consultadas de la db.
 
@@ -1761,8 +1876,8 @@ function nuevo_calculo_total(event=null){
     //se guarda el total generado por las fechas seleccionadas (no se altera), para despues sumarlo al total (alterable)
     var aux_total=Number(document.getElementById('aux_total').value)
 	
-	var total_infantil= tarifa_infantil * extra_infantil;
-    var total_adulto = tarifa_adulto * extra_adulto;
+	var total_infantil= tarifa_infantil * extra_infantil * noches;
+    var total_adulto = tarifa_adulto * extra_adulto * noches;
     var adicionales =  total_infantil  + total_adulto + pax_extra + costo_plan;  
     var total = aux_total + adicionales;
 
@@ -1773,10 +1888,10 @@ function nuevo_calculo_total(event=null){
     //si el total del adulto o del infante son 0, no se seleccionó una tarifa de la db, se realiza otro calculo.
     if(total_adulto==0){
         console.log(total,extra_adulto)
-        fadulto = $("#forzar-tarifa").val() * extra_adulto
+        fadulto = $("#forzar-tarifa").val() * extra_adulto * noches
     }
     if(total_infantil==0){
-        finfantil = $("#forzar-tarifa").val() * extra_infantil
+        finfantil = $("#forzar-tarifa").val() * extra_infantil * noches
     }
     aux_total = total + fadulto + finfantil
     if(aux_total==0){
@@ -1784,6 +1899,8 @@ function nuevo_calculo_total(event=null){
     }else{
         total = aux_total
     }
+
+
 
     document.getElementById("total").value= total;
    
@@ -2200,6 +2317,31 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         console.log(datos)
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
         // return ;
+    //   errores_reserva="";
+      var correo = $("#correo").val()
+      if(tarifa_existe==0){
+       
+        swal("Debe seleccionar una tarifa", "Verifique que los campos no estén vacíos", "error");
+      }
+    //   if(fecha_entrada.length ==0 || fecha_salida.length ==0){
+    //     errores_reserva+="Debe seleccionar fecha válida, ";
+    //   }
+    //   if(fecha_entrada.length ==0 || fecha_salida.length ==0){
+    //     errores_reserva+="El número de noches no es válido, ";
+    //   }
+    //   if(persona_reserva.length ==0){
+    //     errores_reserva+="Debe llenar el campo persona que reserva, ";
+    //   }
+    //   if(total_hab ==0){
+    //     errores_reserva+="Debe seleccionar el número de habitaciones, ";
+    //   }
+    //   if(forma_pago ==""){
+    //     errores_reserva+="Debe seleccionar una forma de pago";
+    //   }
+    //   if(errores_reserva.length>0){
+    //     swal((errores_reserva), "Verifique que los campos no estén vacíos", "error");
+    //   }
+      console.log(ruta)
       if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa_existe >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
         $.ajax({
             async:true,
@@ -2215,6 +2357,14 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
                 // return
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
+                confirarmNo = document.getElementById('no')
+                if(confirarmNo!=null){
+                    confirarmNo = confirarmNo.checked
+                    if(!confirarmNo && correo!=""){
+                        alert("enviar correo")
+                    }
+                }
+               
                 ver_reporte_reservacion(res,"ver_reservaciones()",titulo)
             },
         
@@ -2238,9 +2388,18 @@ function asignarValorTarjeta(){
     $("#estadotarjeta").val($("input[name=estado]:checked").val())
 }
 
+
+function guardarCheck(){
+    hab_id = $("#habitacion_check :selected").data("habid")
+
+    if(hab_id!=0){
+        guardarNuevaReservacion(hab_id)
+    }else{
+        alert("Debe seleccionar al menos una habitación")
+    }
+}
+
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
-
-
     var usuario_id=localStorage.getItem("id");
     var nombre_huesped= document.getElementById("nombre").value;
     var apellido_huesped= document.getElementById("apellido").value;
@@ -2537,6 +2696,7 @@ function buscar_reservacion(e){
         $('.pagination').hide();
     }else{
         $('.pagination').show();
+        return false;
         if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
     }
 	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
@@ -3363,6 +3523,21 @@ function regresar_editar_huesped(){
 }
 
 //***// ESTADOS DE RACKS //***//
+
+function habSeleccionada(event){
+
+    if(event!=0){
+        var tipo_hab = event.target.options[event.target.selectedIndex].dataset.habtipo;
+        if(tipo_hab!=undefined){
+          console.log(tipo_hab)
+        }
+       
+    }
+    // console.log($("#habitacion_check").val())
+    // hab_id = $("#habitacion_check").val()
+    include = "includes/consultar_tarifa_hab.php?tipo_hab="+tipo_hab;
+    $("#tarifa").load(include);
+}
 
 // Agregar una reservacion en la habitacion
 function disponible_asignar(hab_id,estado){

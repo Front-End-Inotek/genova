@@ -10,11 +10,21 @@
 
 
   $reservacion = new Reservacion($_GET['id']);
-  $tarifa= NEW Tarifa(0);
+
+  if($reservacion->forzar_tarifa==0 && $reservacion->tarifa!=0){
+    $tarifa= NEW Tarifa($reservacion->tarifa);
+  }else{
+    $tarifa= NEW Tarifa(0);
+  }
+
   $huesped = new Huesped($reservacion->id_huesped);
 //   if($reservacion->tarifa!=0){
 //     $tarifa= NEW Tarifa($reservacion->tarifa);
 //   }
+
+
+  $forzar_tarifa = $reservacion->forzar_tarifa == 0 ? "" : $reservacion->forzar_tarifa;
+  $estado_reserva = $reservacion->estado;
   $id_cuenta = $reservacion->id_cuenta;
 
   $config= new Configuracion();
@@ -116,10 +126,11 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     $tarifa->mostrar_tarifas_editar($reservacion->tarifa);
                     echo '
                   </select>
+                  <input type="text" id="tarifa_base" value="'.$tarifa->precio_hospedaje.'" hidden>
                 </div>
             <div class="form-group col-md-4 mb-3">
                     <label for="tipo-habitacion">Forzar tarifa</label>
-                    <input type="number" class="form-control" value="'.$reservacion->forzar_tarifa.'" id="forzar-tarifa" min="0" step="0.01" onchange="cambiar_adultosNew(0,'.$hab_id.')">
+                    <input type="number" class="form-control" value="'.$forzar_tarifa.'" id="forzar-tarifa" min="0" step="0.01" onchange="cambiar_adultosNew(0,'.$hab_id.')">
                 </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="tipo-habitacion">Tipo de habitación</label>
@@ -142,13 +153,13 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="adultos">Adultos</label>
-                    <input type="number" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->extra_adulto.'"  onchange="nuevo_calculo_total()">
-                    <input type="number" id="tarifa_adultos" hidden>
+                    <input type="number" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->extra_adulto.'"  onchange="editarTotalEstancia()">
+                    <input type="number" id="tarifa_adultos" value="'.$tarifa->precio_adulto.'" hidden>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="menores">Menores</label>
-                    <input type="number" class="form-control" id="extra_infantil" min="0"  value="'.$reservacion->extra_infantil.'" onchange="nuevo_calculo_total()">
-                    <input type="number" id="tarifa_menores" hidden>
+                    <input type="number" class="form-control" id="extra_infantil" min="0"  value="'.$reservacion->extra_infantil.'" onchange="editarTotalEstancia()">
+                    <input type="number" id="tarifa_menores" value="'.$tarifa->precio_infantil.'" hidden>
                 </div>
              
                 
@@ -160,11 +171,11 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="pax-extra">Pax extra</label>
-                    <input type="number" class="form-control" id="pax-extra" min="0" value="'.$reservacion->pax_.'"  onchange="nuevo_calculo_total()">
+                    <input type="number" class="form-control" id="pax-extra" min="0" value="'.$reservacion->pax_extra.'"  onchange="editarTotalEstancia('.$tarifa->precio_hospedaje.')">
                 </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="plan-alimentos">Plan de alimentos</label>
-                    <select class="form-control" id="plan-alimentos"  onchange="nuevo_calculo_total(event)">
+                    <select class="form-control" id="plan-alimentos"  onchange="editarTotalEstancia('.$tarifa->precio_hospedaje.',event)">
                     <option value="">Seleccione una opción</option>';
                     $config->mostrar_planes_select($reservacion->plan_alimentos);
                   echo'
@@ -177,13 +188,18 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
                     <label for="hab-preasignada">Habitación preasignada</label>
-                    <select class="form-control" id="preasignada">
+                    <select disabled class="form-control" id="preasignada">
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4 sobrevender">
                     <label for="hab-preasignada">Sobrevender</label>
-                    <input type="checkbox" id="sobrevender" '.$sobreventa.' disabled class="form-check"/>
-                    </select>
+                    
+                    <div class="checkbox-container">
+                    
+                        <input type="checkbox" id="sobrevender" disabled class="form-check" onchange="sobreVenderHab(event)"/>
+                        
+                    </div>
+                    
                 </div>
                 <div class="form-group col-md-4">
                     <label for="canal-reserva">Canal de reserva</label>

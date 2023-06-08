@@ -48,3 +48,11 @@ se agrega cambios de rack habitacional, se agrega apartado de editar reservacion
 -----
 29/05
 Cambios en rack habitacional
+30/05
+Se está trabajando en el rack_habitacional
+31/05
+Se está trabajando en el rack_habitacional
+01/06
+Se está trabajando en el rack_habitacional
+Se agregó la validación para formas de garantía que sí sean una garantía de pago para manejar el estado "interno" de la reservación
+y en base a eso mostrar el estado de 'reserva pendiente' o 'reserva pagada'.

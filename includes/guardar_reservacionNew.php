@@ -69,10 +69,11 @@
       $total=$_POST['total_hab']; 
     }
   //}
-  $cuenta= 0;
+  $cuenta= 1;
   if($_POST['forzar_tarifa'] > 0 || $_POST['total_suplementos'] > 0 || $_POST['total_pago'] > 0 || $cantidad_cupon > 0){
     $cuenta= 1;
   }
+
   $actual_hab=$_POST['hab_id'];
 
   if(empty($_POST['preasignada'])){

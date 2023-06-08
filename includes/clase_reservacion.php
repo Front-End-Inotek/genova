@@ -246,7 +246,7 @@ class Reservacion extends ConexionMYSql
 		"
         .$agregar_id;
 
-        // print_r($sentencia);
+        print_r($sentencia);
         // die();
 
 
@@ -1294,7 +1294,7 @@ class Reservacion extends ConexionMYSql
                         if($fila['id_hab']==0) {
                             echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
                         } else {
-                            echo '<td>Preasignada</td>';
+                            echo '<td>Preasignada '.$fila['id_hab'].'</td>';
                         }
 
                         echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
@@ -2818,6 +2818,8 @@ class Reservacion extends ConexionMYSql
             $fecha_salida= strtotime($fecha_salida);
             if($forzar_tarifa > 0) {
                 $total_cargo= $total_suplementos + $forzar_tarifa;
+            }else{
+                $total_cargo=$total_pago;
             }
             if($cantidad_cupon > 0) {
                 $pago_total= $total_pago + $cantidad_cupon;
@@ -2863,17 +2865,15 @@ class Reservacion extends ConexionMYSql
             $comentario="Editar una reservacion dentro de la base de datos";
             $consulta= $this->realizaConsulta($sentencia, $comentario);
 
-            $sentencia = "UPDATE `cuenta` SET
-			`cargo` = '$total_cargo',
-			`abono` = '$pago_total'
-			WHERE `id` = '$id_cuenta';";
-            //echo $sentencia;
-            $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
-            $consulta= $this->realizaConsulta($sentencia, $comentario);
+            // $sentencia = "UPDATE `cuenta` SET
+			// `cargo` = '$total_cargo',
+			// `abono` = '$pago_total'
+			// WHERE `id` = '$id_cuenta';";
+            // //echo $sentencia;
+            // $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
+            // $consulta= $this->realizaConsulta($sentencia, $comentario);
 
-            //retornamos el id de la reservacion para comprobar y guardar un log de preasignada
-            return $id;
-  
+
         }
 
     // Editar una reservacion
