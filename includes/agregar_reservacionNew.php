@@ -46,7 +46,7 @@ $ultimo_id = $reservacion->obtener_ultimo_id() /*+ 1*/;
 echo '<div class="container-fluid blanco" style="width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
-        <form onsubmit="event.preventDefault(); guardarNuevaReservacion('.$_GET['hab_id'].')">
+        <form onsubmit="" id="form-reserva">
         <div class="div_adultos"></div>
         <h2 class="titulo">'.$titulo_.'</h2> <br>
             <div class="d-flex justify-content-end">
@@ -80,11 +80,12 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4 mb-3">
                     <label for="llegada">Llegada</label>
-                    <input required '.$inputFechaEn.' value="'.$inputValueFecha.'" class="form-control" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.')">
+                    <input aria-required="true" required '.$inputFechaEn.' value="'.$inputValueFecha.'" class="form-control" type="date"  id="fecha_entrada" name="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.')"/>
+                    <span> </span>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="salida">Salida</label>
-                    <input required class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.');">
+                    <input required class="form-control" type="date"  id="fecha_salida" name="fecha_salida" min='.$dia_actual.' placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.');" />
                 </div>
                 <div class="form-group col-md-4">
                     <label for="noches">Noches</label>
@@ -113,16 +114,11 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     echo '
                   </select>
                 </div>
-                <!---
-                <div class="form-group col-md-3">
-                    <label for="no-habitaciones">No. de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew("",'.$hab_id.')">
-                </div>
-                -->
+               
             </div>
             <div class="d-flex justify-content-between">
             <div class="form-group col-md-4">
-                    
+                
             </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="adultos">Adultos</label>
@@ -190,7 +186,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
         echo'
             <br>
             <h2>Datos Personales</h2>
-            <button class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
+            <button type="button" class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
             <input type="text" id="tomahuespedantes" hidden>
             <input type="text" id="estadotarjeta" hidden>
             <input type="text" id="nut" hidden>
@@ -273,7 +269,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
               
                 <div class="form-group col-md-4">
                 <label for="forma-garantia">Forma de Garantía</label>
-                <button id="btngarantia" disabled class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
+                <button type="button" id="btngarantia" disabled class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
                 </div>';
 
                 if (empty($_GET['hab_id'])) {
@@ -285,17 +281,18 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
 
                 echo '
             </div>
+            
             <div class="form-group col-md-6" id="div_voucher" style="display:none">
             <label for="voucher">Voucher</label>
             <textarea id="voucher" class="form-control" rows="1"></textarea>
-        </div>
+            </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
                 <textarea class="form-control" id="observaciones" rows="3"></textarea>
             </div>
             <br>
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary" onclick="">Enviar</button>
+                <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); guardarNuevaReservacion('.$_GET['hab_id'].')">Enviar</button>
             </div>
         </form>
 

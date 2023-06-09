@@ -171,11 +171,20 @@
   $pdf->Ln(10);
   //Esto es solo si la tarjeta está garantizada.
   if($huesped->estado_tarjeta==2){
-    $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Garantía:'),0,0,'L');
-    $pdf->Ln(8);
-    $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",$huesped->nombre_tarjeta),0,0,'L');
-    $pdf->Ln();
-    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Esta reserva está confirmada y garantizada por la tarjeta con el número '$huesped->numero_tarjeta', que caduca el '$vencimiento_tarjeta'. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos."),0,'J');
+    if($huesped->voucher!=""){
+      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Garantía:'),0,0,'L');
+      $pdf->Ln(8);
+      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Voucher '),0,0,'L');
+      $pdf->Ln();
+      $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Esta reserva está confirmada y garantizada con un voucher con el  código: '$huesped->voucher'. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos."),0,'J');
+    }else{
+      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Garantía:'),0,0,'L');
+      $pdf->Ln(8);
+      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",$huesped->nombre_tarjeta),0,0,'L');
+      $pdf->Ln();
+      $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Esta reserva está confirmada y garantizada por la tarjeta con el número '$huesped->numero_tarjeta', que caduca el '$vencimiento_tarjeta'. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos."),0,'J');
+    }
+   
   }
   if($huesped->tipo_tarjeta==1 || $huesped->tipo_tarjeta=="Efectivo"){
     $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Garantía:'),0,0,'L');

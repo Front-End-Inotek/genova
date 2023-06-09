@@ -1587,7 +1587,7 @@ function getDatesInRange(date, endDate) {
  }
 
 function calcular_nochesChek(){
-    hab_id = $("#habitacion_check :selected").data("habid")
+    hab_id = $("#habitacion_checkin :selected").data("habid")
     console.log(hab_id)
     if(hab_id!=0 && hab_id!=undefined){
         calcular_noches(hab_id)
@@ -1598,8 +1598,6 @@ function calcular_nochesChek(){
 }
 
 function editarTotalEstancia(event){
-
-
 
     forzar_tarifa = $("#forzar-tarifa").val()
     extra_adultos = $("#extra_adulto").val();
@@ -1613,8 +1611,6 @@ function editarTotalEstancia(event){
     numero_hab = $("#numero_hab").val();
 
     tarifa_base = $("#tarifa_base").val()
-
-    console.log(forzar_tarifa)
     if(forzar_tarifa!="" || forzar_tarifa!=0  ){
         tarifa_base=forzar_tarifa
         tarifa_adultos  = tarifa_base
@@ -1631,7 +1627,7 @@ function editarTotalEstancia(event){
     if(extra_infantil!=0){
         adicional_infantil = extra_infantil * tarifa_infantil*  noches;
     }
-    console.log(tarifa_base,noches, numero_hab)
+    // console.log(tarifa_base,noches, numero_hab)
     aux_total = tarifa_base * noches * numero_hab
 
     //Adicionales
@@ -1684,9 +1680,6 @@ function calcular_noches(hab_id=0){
     //Si cambia el numero de noches y ya existen tarifas se calcula el total de la instancia.
 
     tarifa_base = $("#tarifa_base").val()
-
-
-
     if(fecha_entrada_value!="" && fecha_salida_value!=""){
     if( fecha_entrada_value >= fecha_salida_value ){
        fecha_salida.value=""
@@ -1699,10 +1692,6 @@ function calcular_noches(hab_id=0){
         }else{
             cambiar_adultosNew("",hab_id)
         }
-       
-     
-    
-
         // $(".div_adultos").load("includes/consultar_reservacion_disponible.php?fechas="+JSON.stringify(fechas)+"&hab_id="+hab_id);
         include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id;
         console.log(include);
@@ -1764,8 +1753,8 @@ function cambiar_adultosNew(event=null,hab_id){
     // $(".div_adultos").load("includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id);  
     url_data ="includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id
    
-    if(!isNaN(noches) && forzar_tarifa==""){
-        console.log("no here")
+    if(!isNaN(noches) && forzar_tarifa=="" && tarifa!=""){
+       
         $("#tarifa").attr('required',true);
         $.ajax({
             async:true,
@@ -1775,7 +1764,7 @@ function cambiar_adultosNew(event=null,hab_id){
             url:url_data,
             beforeSend:loaderbar,
             success:function(res){
-               console.log(res)
+            //    console.log(res)
                $("#total").val(res.precio_hab)
                $("#tarifa_base").val(res.precio_hospedaje)
                $("#tarifa_menores").val(res.precio_infantil)
@@ -1798,6 +1787,8 @@ function cambiar_adultosNew(event=null,hab_id){
         //no consulta la tarifa de la bd.
         //  console.log("forzando:" + noches +" t:"+forzar_tarifa)
         if(forzar_tarifa!=""){
+            $("#tipo-habitacion").removeAttr("disabled");
+            $("#tarifa").attr('required',false);
             editarTotalEstancia()
             // console.log("??")
 
@@ -1847,120 +1838,6 @@ function cambiar_adultos(hab_id){
     //alert("Cambiando tarifa "+tarifa);
 }
 
-function nuevo_calculo_total(event=null){
-    // var numero_hab= Number(document.getElementById("numero_hab").value);
-    // var noches= Number(document.getElementById("noches").value);
-    // var tarifa= Number(document.getElementById("tarifa").value);
-    // var forzar_tarifa= Number(document.getElementById("forzar-tarifa").value);
-    
-    // //extra los campos de las tarifas consultadas de la db.
-
-    // var extra_adulto= Number(document.getElementById("extra_adulto").value);
-
-	// var extra_infantil= Number(document.getElementById("extra_infantil").value);
-
-    // var tarifa_infantil = Number(document.getElementById("tarifa_menores").value);
-    
-    // var tarifa_adulto = Number(document.getElementById("tarifa_adultos").value);
-
-	// var pax_extra= Number(document.getElementById("pax-extra").value);
-
-    // var costo_plan=Number(document.getElementById('costoplan').value); 
-    // //si  se elige un plan de alimentación desde el select.
-    // if(event!=null){
-    //     var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
-    //     if(costoplan!=undefined){
-           
-    //         costo_plan=Number(costoplan)
-    //         $('#costoplan').val(costo_plan)
-        
-    //     }
-    // }
-    // //se guarda el total generado por las fechas seleccionadas (no se altera), para despues sumarlo al total (alterable)
-    // var aux_total=Number(document.getElementById('aux_total').value)
-	
-	// var total_infantil= tarifa_infantil * extra_infantil * noches;
-    // var total_adulto = tarifa_adulto * extra_adulto * noches;
-    // var adicionales =  total_infantil  + total_adulto + pax_extra + costo_plan;  
-    // var total = aux_total + adicionales;
-
-    // console.log(total_adulto)
-    // fadulto = 0;
-    // finfantil =0;
-
-    // //si el total del adulto o del infante son 0, no se seleccionó una tarifa de la db, se realiza otro calculo.
-    // if(total_adulto==0){
-    //     console.log(total,extra_adulto)
-    //     fadulto = $("#forzar-tarifa").val() * extra_adulto * noches
-    // }else{}
-    // if(total_infantil==0){
-    //     finfantil = $("#forzar-tarifa").val() * extra_infantil * noches
-    // }
-    // aux_total = total + fadulto + finfantil
-    // if(aux_total==0){
-    //     total= total
-    // }else{
-    //     total = aux_total
-    // }
-
-
-
-    // document.getElementById("total").value= total;
-
-    tarifa_base = $("#aux_total").val()
-
-    forzar_tarifa = $("#forzar-tarifa").val()
-    extra_adultos = $("#extra_adulto").val();
-    extra_infantil =  $("#extra_infantil").val();
-
-    tarifa_adultos = $("#tarifa_adultos").val();
-
-    tarifa_infantil = $("#tarifa_menores").val();
-    noches = $("#noches").val();
-
-    numero_hab = $("#numero_hab").val();
-
-    console.log(forzar_tarifa)
-    if(forzar_tarifa!="" || forzar_tarifa!=0  ){
-        tarifa_base=forzar_tarifa
-        tarifa_adultos  = tarifa_base
-        tarifa_infantil=tarifa_base
-    }
-    // tarifa_base =123;
-
-    adicional_adulto=0;
-    adicional_infantil=0;
-
-    if(extra_adultos!=0){
-       adicional_adulto = extra_adultos * tarifa_adultos *  noches;
-    }
-    if(extra_infantil!=0){
-        adicional_infantil = extra_infantil * tarifa_infantil*  noches;
-    }
-    console.log(tarifa_base,noches, numero_hab)
-    aux_total = tarifa_base * noches * numero_hab
-
-    //Adicionales
-
-    var pax_extra= Number(document.getElementById("pax-extra").value);
-    if(event!=null){
-        var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
-        if(costoplan!=undefined){
-            costo_plan=Number(costoplan)
-            $('#costoplan').val(costo_plan)
-        }
-    }else{
-        costo_plan = $("#costoplan").val()
-    }
-
-    total = aux_total + adicional_adulto + adicional_infantil + pax_extra + costo_plan
-
-    $("#total").val(total);
-   
-
-   
-}
-
 // Calculamos el total de una reservacion
 function calcular_total(precio_hospedaje,total_adulto,total_junior,total_infantil){
 
@@ -2008,7 +1885,7 @@ function obtener_garantia(event=null){
         $("#btngarantia").removeAttr("disabled");
     }
 
-    console.log(garantia_id)
+    // console.log(garantia_id)
 }
 
 // Realiza un descuento de nuestros calculos
@@ -2255,10 +2132,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         canal_reserva = (document.getElementById("canal-reserva").value);
         tipo_reservacion = (document.getElementById("tipo-reservacion").value);
         titulo="RESERVACION"
-       
         var persona_reserva= (document.getElementById("persona-reserva").value);
-        
-
     }else{
         estado=2;
         persona_reserva="checkin"
@@ -2272,12 +2146,11 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var extra_infantil= Number(document.getElementById("extra_infantil").value);
 
     var pax_extra= Number(document.getElementById("extra_infantil").value);
-    
+
     var tipo_hab= (document.getElementById("tipo-habitacion").value);
 
     var total= (document.getElementById("total").value);
-   
- 
+
     var plan_alimentos = (document.getElementById("plan-alimentos").value);
     // var estado = preasignada!="" ? 4 : 2;
     // estado = 1;
@@ -2297,7 +2170,6 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
 
     sobrevender = sobrevender ? 1 : 0 ;
 
-    console.log(sobrevender)
 
     //verifica si hay una tarifa (forzada o no)
     var tarifa_existe = 0;
@@ -2315,19 +2187,6 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     }
     var voucher =document.getElementById('voucher').value
     var estado_tarjeta=document.getElementById('estadotarjeta').value
-
-
-    // if(forzar_tarifa!=""){
-    //     numero_hab = numero_hab == 0 ? 1 : numero_hab
-    //     tarifa = noches * forzar_tarifa * numero_hab
-    //     $("#total").val(tarifa)
-    //     $("#aux_total").val(tarifa)
-    //     $("#tipo-habitacion").removeAttr("disabled");
-    //     $("#tarifa_menores").val("")
-    //     $("#tarifa_adultos").val("")
-    //     $("#tarifa").removeAttr('required');
-    // }
-
     var datos = {
         "id":id_reservacion,
         "id_huesped": id_huesped,
@@ -2367,35 +2226,14 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "voucher":voucher,
         "estado_tarjeta":estado_tarjeta,
       };
-        console.log(datos)
+    console.log(datos)
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
         // return ;
     //   errores_reserva="";
-      var correo = $("#correo").val()
-      if(tarifa_existe==0){
-       
-        swal("Debe seleccionar una tarifa", "Verifique que los campos no estén vacíos", "error");
-      }
-    //   if(fecha_entrada.length ==0 || fecha_salida.length ==0){
-    //     errores_reserva+="Debe seleccionar fecha válida, ";
-    //   }
-    //   if(fecha_entrada.length ==0 || fecha_salida.length ==0){
-    //     errores_reserva+="El número de noches no es válido, ";
-    //   }
-    //   if(persona_reserva.length ==0){
-    //     errores_reserva+="Debe llenar el campo persona que reserva, ";
-    //   }
-    //   if(total_hab ==0){
-    //     errores_reserva+="Debe seleccionar el número de habitaciones, ";
-    //   }
-    //   if(forma_pago ==""){
-    //     errores_reserva+="Debe seleccionar una forma de pago";
-    //   }
-    //   if(errores_reserva.length>0){
-    //     swal((errores_reserva), "Verifique que los campos no estén vacíos", "error");
-    //   }
-      console.log(ruta)
-      if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa_existe >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
+    var correo = $("#correo").val()
+
+    console.log(ruta)
+    if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa_existe >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
         $.ajax({
             async:true,
             type: "POST",
@@ -2406,8 +2244,6 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
             beforeSend:loaderbar,
             //success:ver_reservaciones,
             success:function(res){
-                // console.log(res)
-                // return
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
                 confirarmNo = document.getElementById('no')
@@ -2417,15 +2253,12 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
                         alert("enviar correo")
                     }
                 }
-               
                 ver_reporte_reservacion(res,"ver_reservaciones()",titulo)
             },
-        
             timeout:5000,
             error:problemas_sistema
-          });
-      return false;
-    
+        });
+        return false;
     }else{
         alert("Campos incompletos o descuento no permitido");
     }
@@ -2443,7 +2276,7 @@ function asignarValorTarjeta(){
 
 
 function guardarCheck(){
-    hab_id = $("#habitacion_check :selected").data("habid")
+    hab_id = $("#habitacion_checkin :selected").data("habid")
 
     if(hab_id!=0){
         guardarNuevaReservacion(hab_id)
@@ -2452,82 +2285,99 @@ function guardarCheck(){
     }
 }
 
-function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
-    var usuario_id=localStorage.getItem("id");
-    var nombre_huesped= document.getElementById("nombre").value;
-    var apellido_huesped= document.getElementById("apellido").value;
-    var empresa_huesped= document.getElementById("empresa").value;
-    var telefono_huesped= document.getElementById("telefono").value;
-    var pais_huesped= document.getElementById("pais").value;
-    var estado_huesped= document.getElementById("estado").value;
-    var ciudad_huesped= document.getElementById("ciudad").value;
-    var direccion_huesped= document.getElementById("direccion").value;
-
-    var comentarios_huesped= document.getElementById("observaciones").value;
-
-    var tipo_tarjeta= document.getElementById("forma-garantia").value;
-
-    var correo = $("#correo").val()
-
-    huesped = $("#tomahuespedantes").val()
-
-    var voucher =document.getElementById('voucher').value
-
+function verificarFormulario() {
+    var form = document.getElementById("form-reserva");
+    var camposNoValidados = [];
   
-    titular_tarjeta=$("#nt").val()
-    numero_tarjeta=$("#nut").val()
-    vencimiento_mes=$("#mes").val()
-    vencimiento_ano=$("#year").val()
-    cvv=$("#ccv").val()
-    nombre_tarjeta = $("#nombre_tarjeta").val()
-    estado_tarjeta=$("#estadotarjeta").val()
+    // Recorre todos los elementos del formulario
+    for (var i = 0; i < form.elements.length; i++) {
+      var elemento = form.elements[i];
+  
+      // Verifica si el elemento es un campo requerido y si está vacío
+      if (elemento.required && elemento.value === "") {
+        camposNoValidados.push(elemento.id);
+      }
+    }
+  
+    // Si hay campos no validados, muestra una alerta con sus identificadores
+    if (camposNoValidados.length > 0) {
+      //var mensaje="";
+      var mensaje = "Los siguientes campos son requeridos pero están vacíos:\n";
+      for (var j = 0; j < camposNoValidados.length; j++) {
+        mensaje += "- " + camposNoValidados[j] + "\n";
+      }
+      alert(mensaje);
+      //swal("Los siguientes campos son requeridos pero están vacíos",mensaje,'error');
+      return true
+    }else{
+        return false
+    }
+}
 
-    // console.log(nombre_tarjeta)
-    // return
+function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
 
+    if(!verificarFormulario()){
+        var usuario_id=localStorage.getItem("id");
+        var nombre_huesped= document.getElementById("nombre").value;
+        var apellido_huesped= document.getElementById("apellido").value;
+        var empresa_huesped= document.getElementById("empresa").value;
+        var telefono_huesped= document.getElementById("telefono").value;
+        var pais_huesped= document.getElementById("pais").value;
+        var estado_huesped= document.getElementById("estado").value;
+        var ciudad_huesped= document.getElementById("ciudad").value;
+        var direccion_huesped= document.getElementById("direccion").value;
 
+        var comentarios_huesped= document.getElementById("observaciones").value;
+        var tipo_tarjeta= document.getElementById("forma-garantia").value;
+        var correo = $("#correo").val()
+        huesped = $("#tomahuespedantes").val()
 
-    //guardar asyncronicamente el "husped" para obtener su id; si ya existe retorna su id..
-    let xhttp;
-    xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre_huesped+"&apellido="+apellido_huesped+"&direccion="+direccion_huesped+"&pais="+pais_huesped+"&empresa="+empresa_huesped+
-    "&ciudad="+ciudad_huesped+"&estado="+estado_huesped+"&telefono="+telefono_huesped+"&comentarios="+comentarios_huesped+"&tipo_tarjeta="+tipo_tarjeta+"&usuario_id="+usuario_id+
-    "&titular_tarjeta="+titular_tarjeta+"&numero_tarjeta="+numero_tarjeta+
-    "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&nombre_tarjeta="+nombre_tarjeta
-    +"&estado_tarjeta="+estado_tarjeta+"&correo="+correo+"&voucher="+voucher
-    ,true);
+        var voucher =document.getElementById('voucher').value
+        titular_tarjeta=$("#nt").val()
+        numero_tarjeta=$("#nut").val()
+        vencimiento_mes=$("#mes").val()
+        vencimiento_ano=$("#year").val()
+        cvv=$("#ccv").val()
+        nombre_tarjeta = $("#nombre_tarjeta").val()
+        estado_tarjeta=$("#estadotarjeta").val()
 
-    xhttp.addEventListener('load', e =>{
-        //Si el servidor responde 4  y esta todo ok 200
-        if (e.target.readyState == 4 && e.target.status == 200) {
-            //Entrara la contidicion que valida la respuesta del formulario
-            // console.log(e.target.responseText);
-            // console.log(xhttp.responseText)
-            const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-           
-           
-            if(response_msj == "NO_DATA"){
-                swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
-                return
-            }else if(response_msj=="NO_VALIDO"){
-                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
-                return
+        // console.log(nombre_tarjeta)
+        // return
+
+        //guardar asyncronicamente el "husped" para obtener su id; si ya existe retorna su id..
+        let xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre_huesped+"&apellido="+apellido_huesped+"&direccion="+direccion_huesped+"&pais="+pais_huesped+"&empresa="+empresa_huesped+
+        "&ciudad="+ciudad_huesped+"&estado="+estado_huesped+"&telefono="+telefono_huesped+"&comentarios="+comentarios_huesped+"&tipo_tarjeta="+tipo_tarjeta+"&usuario_id="+usuario_id+
+        "&titular_tarjeta="+titular_tarjeta+"&numero_tarjeta="+numero_tarjeta+
+        "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&nombre_tarjeta="+nombre_tarjeta
+        +"&estado_tarjeta="+estado_tarjeta+"&correo="+correo+"&voucher="+voucher
+        ,true);
+        xhttp.addEventListener('load', e =>{
+            //Si el servidor responde 4  y esta todo ok 200
+            if (e.target.readyState == 4 && e.target.status == 200) {
+                //Entrara la contidicion que valida la respuesta del formulario
+                // console.log(e.target.responseText);
+                // console.log(xhttp.responseText)
+                const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+                if(response_msj == "NO_DATA"){
+                    swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
+                    return
+                }else if(response_msj=="NO_VALIDO"){
+                    swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+                    return
+                }else{
+                    guardarReservacion(response_msj,hab_id,id_cuenta,id_reservacion)
+                    //todo ocurre correctamente.
+                }
             }else{
-                guardarReservacion(response_msj,hab_id,id_cuenta,id_reservacion)
-                //todo ocurre correctamente.
-                
+                swal("Error del servidor!", "Intentelo de nuevo o contacte con soporte tecnico", "error");
             }
-        
-        }else{
-            swal("Error del servidor!", "Intentelo de nuevo o contacte con soporte tecnico", "error");
-        }
-    })
-    xhttp.send();
+        })
+        xhttp.send();
+    }
 
-    
- }
-
-
+}
 
 // Guardar una reservacion
 function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id,cantidad_maxima,tipo_hab,estado){
@@ -3598,8 +3448,8 @@ function disponible_asignar(hab_id,estado){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	//checkin 
-    $("#area_trabajo_menu").load("includes/agregar_reservaciones.php?hab_id="+hab_id+"&estado="+estado); 
-    //$("#area_trabajo_menu").load("includes/agregar_reservacionNew.php?hab_id="+hab_id); 
+    //$("#area_trabajo_menu").load("includes/agregar_reservaciones.php?hab_id="+hab_id+"&estado="+estado); 
+    $("#area_trabajo_menu").load("includes/agregar_reservacionNew.php?hab_id="+hab_id); 
 	$('#caja_herramientas').modal('hide');
 }
 
@@ -5275,7 +5125,7 @@ function agregar_restaurante(hab_id,estado,maestra=0,mov=0){
 }
 
 function vista_desarrollo(hab_id,estado){
-    window.open("includes/mail.php");
+    window.open("includes/mail.php?id="+hab_id);
     return
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();

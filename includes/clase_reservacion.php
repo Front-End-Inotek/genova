@@ -2704,11 +2704,13 @@ class Reservacion extends ConexionMYSql
             } else {
                 $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 			FROM reservacion
-			INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+            LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+		    LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 			INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 			INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 			INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_dia && reservacion.fecha_entrada <= $fecha_dia && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
             }
+            
             $comentario="Mostrar por fecha en ver reservaciones por dia";
             $consulta= $this->realizaConsulta($sentencia, $comentario);
             //se recibe la consulta y se convierte a arreglo

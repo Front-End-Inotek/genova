@@ -30,7 +30,7 @@ $ultimo_id = $reservacion->obtener_ultimo_id() /*+ 1*/;
 echo '<div class="container-fluid blanco" style="width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
-        <form onsubmit="event.preventDefault(); guardarCheck()">
+        <form onsubmit="event.preventDefault(); " id="form-reserva">
         <div class="div_adultos"></div>
         <h2 class="titulo">'.$titulo_.'</h2> <br>
             <div class="d-flex justify-content-end">
@@ -42,7 +42,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
               
                     echo ' <div class="form-group col-md-4">
                     <label for="clave-reserva" class="text-right">Habitación</label>
-                    <select class="form-control" id="habitacion_check" name="habitacion_check" onchange="habSeleccionada(event)" required>
+                    <select class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event)" required>
                     <option value="">Seleccionar una habitación</option>
                     ';
                     
@@ -242,7 +242,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             </div>
             <br>
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary" onclick="">Enviar</button>
+                <button type="submit" class="btn btn-primary" onclick="guardarCheck()">Enviar</button>
             </div>
         </form>
 

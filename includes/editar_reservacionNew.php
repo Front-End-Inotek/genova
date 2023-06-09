@@ -76,7 +76,7 @@ $canales_reserva = array("telefono"=>"Telefono","email"=>"Email","web"=>"Web","a
 echo '<div class="container-fluid blanco" style="width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
-        <form onsubmit="event.preventDefault(); guardarNuevaReservacion('.$hab_id.','.$id_cuenta.','.$reservacion->id.')">
+        <form onsubmit="" id="form-reserva">
         <div class="div_adultos"></div>
         <h2 class="titulo">'.$titulo_.'</h2> <br>
             <div class="d-flex justify-content-end">
@@ -316,7 +316,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             </div>
             <br>
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary" onclick="">Actualizar</button>
+                <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); guardarNuevaReservacion('.$hab_id.','.$id_cuenta.','.$reservacion->id.')">Actualizar</button>
             </div>
         </form>
         <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button></div>

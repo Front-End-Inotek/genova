@@ -184,7 +184,7 @@
 			$permisos_hab=$usuario->hab_ver+$usuario->hab_agregar;
 			if($permisos_hab>0){
 				echo '
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_hab()">Ver tipos de habitaciones</a></i></ul>';
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_hab()">Ver habitaciones</a></i></ul>';
 			}
 		}
 			echo '

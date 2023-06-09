@@ -28,6 +28,7 @@
       public $estado_tarjeta;
       public $nombre_tarjeta;
       public $empresa;
+      public $voucher;
       // Constructor
       function __construct($id)
       {
@@ -56,6 +57,7 @@
           $this->estado_tarjeta=0;
           $this->nombre_tarjeta="";
           $this->empresa="";
+          $this->voucher="";
         }else{
           $sentencia = "SELECT * FROM huesped WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores de un huesped";
@@ -86,6 +88,7 @@
               $this->estado_tarjeta = $fila['estado_tarjeta'];
               $this->nombre_tarjeta=$fila['nombre_tarjeta'];
               $this->empresa=$fila['empresa'];
+              $this->voucher=$fila['voucher'];
           }
         }
       }
@@ -276,6 +279,17 @@
         if(empty($nombre)){
           echo "NO_DATA";
           exit();
+        }
+
+
+        //Revisar si el tipo de pago/tipo_tarjeta/garantia es realmente una garantía.
+        if($tipo_tarjeta!=""){
+          include_once('clase_forma_pago.php');
+          $forma_pago = new Forma_pago($tipo_tarjeta);
+
+          if($forma_pago!=null && $forma_pago->garantia == 1){
+            $estado_tarjeta = 2; //Garantizada.
+          }
         }
 
         //verififca si el cliente/huesped ya existe.

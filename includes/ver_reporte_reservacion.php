@@ -9,17 +9,22 @@
   echo ' <div class="container blanco">
          <div class="row">
          <div class="col-sm-11 blanco_margen">
-      
+
             <div class="row">
-              <div class="col-sm-4"></div>
-              <div class="col-sm-4"><h2 class="text-dark">'.$_GET['titulo'].' '.$_GET['id'].'</h2></div>
-              <div class="col-sm-1"></div>
-              <div class="col-sm-2">
-              <div id="boton_reservacion">
-                <input type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">
+
+              <div class="col-sm-8 d-flex justify-content-end "><h2 class="text-dark">'.$_GET['titulo'].' '.$_GET['id'].'</h2></div>
+
+              <div class="col-sm-4  ">
+              <div class=" d-flex justify-content-between">
+                <div  id="boton_reservacion">
+                  <input type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">
+                </div>
+                <div  id="boton_reservacion">
+                <input type="submit" class="btn btn-success btn-block margen-1" value="Reenviar" onclick="vista_desarrollo('.$_GET['id'].',0)">
+                </div>
+                <div ><button class="btn btn-info btn-block" onclick="'.$ruta.'"> ←</button></div>
               </div>
               </div>
-              <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="'.$ruta.'"> ←</button></div>
             </div>';
             $consulta= $reservacion->datos_reservacion($_GET['id']);
             while ($fila = mysqli_fetch_array($consulta))
@@ -59,6 +64,7 @@
                     }
                     if($fila['forzar_tarifa']>0){
                             $total_estancia= '$'.number_format($fila['forzar_tarifa'], 2);
+                            $precio_hospedaje = "tarifa forzada:" . $fila['forzar_tarifa'];
                     }else{
                             $total_estancia= '$'.number_format($fila['total'], 2);
                     }
