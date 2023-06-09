@@ -56,3 +56,6 @@ Se está trabajando en el rack_habitacional
 Se está trabajando en el rack_habitacional
 Se agregó la validación para formas de garantía que sí sean una garantía de pago para manejar el estado "interno" de la reservación
 y en base a eso mostrar el estado de 'reserva pendiente' o 'reserva pagada'.
+05/06 -- 08/06
+Se estuvo trabajando en el rack habitacional, se agregaron cambios para poder editar reservaciones
+Se agregó dentro del apartado de checkin en recepción que desde ahí se pueda seleccionar la habitación a la que se le hará checkin

@@ -227,6 +227,9 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <label for="forma-garantia">Forma de Garantía</label>
                 <button id="btngarantia" disabled class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
                 </div>';
+                echo ' <div class="form-group col-md-4">
+              
+                </div>';
                 echo '
             </div>
             <div class="form-group col-md-6" id="div_voucher" style="display:none">

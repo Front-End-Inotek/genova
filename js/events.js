@@ -3598,8 +3598,8 @@ function disponible_asignar(hab_id,estado){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	//checkin 
-    //$("#area_trabajo_menu").load("includes/agregar_reservaciones.php?hab_id="+hab_id+"&estado="+estado); 
-    $("#area_trabajo_menu").load("includes/agregar_reservacionNew.php?hab_id="+hab_id); 
+    $("#area_trabajo_menu").load("includes/agregar_reservaciones.php?hab_id="+hab_id+"&estado="+estado); 
+    //$("#area_trabajo_menu").load("includes/agregar_reservacionNew.php?hab_id="+hab_id); 
 	$('#caja_herramientas').modal('hide');
 }
 
