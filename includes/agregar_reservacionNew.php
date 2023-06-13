@@ -237,7 +237,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="email">Correo electrónico </label>
-                    <input type="text" class="form-control" id="correo">
+                    <input type="email" class="form-control" id="correo" onblur="comprobarEmail()">
                 </div>
                 <div class="form-group col-md-2">
                 <label for="confirmacion">Confirmación</label>
@@ -273,10 +273,13 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>';
 
                 if (empty($_GET['hab_id'])) {
-                echo ' <div class="form-group col-md-4">
-                <label for="persona-reserva">Persona que reserva</label>
-                <input type="text" class="form-control" id="persona-reserva" required>
-                </div>';
+                    echo ' <div class="form-group col-md-4">
+                    <label for="persona-reserva">Persona que reserva</label>
+                    <input type="text" class="form-control" id="persona-reserva" required>
+                    </div>';
+                }else{
+                    echo ' <div class="form-group col-md-4">
+                    </div>';  
                 }
 
                 echo '

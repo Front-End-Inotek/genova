@@ -4,7 +4,7 @@
   include_once("clase_tarifa.php");
   include_once("clase_hab.php");
   include_once("clase_reservacion.php");
-  include_once("clase_configuracion.php");
+  include_once("clase_planes_alimentos.php");
   include_once("clase_forma_pago.php");
   include_once("clase_huesped.php");
 
@@ -27,7 +27,7 @@
   $estado_reserva = $reservacion->estado;
   $id_cuenta = $reservacion->id_cuenta;
 
-  $config= new Configuracion();
+ 
   $inputFechaEn="";
   $inputValueFecha="";
   $dia= time();
@@ -71,6 +71,25 @@ if($reservacion->sobrevender){
     $sobreventa="checked";
 }
 
+if($reservacion->plan_alimentos!=0 && $reservacion->plan_alimentos!=null){
+    
+    $planes_alimentos = new PlanesAlimentos($reservacion->plan_alimentos);
+}else{
+    $planes_alimentos = new PlanesAlimentos(0);
+}
+$preasignada=0;
+
+if($reservacion->estado==1){
+    include_once('clase_movimiento.php');
+    $datos_mov = $reservacion->saber_id_movimiento($reservacion->id);
+    if($datos_mov!=null && $datos_mov['motivo'] == "preasignar" && $datos_mov['id_hab']!=0){
+        $preasignada=$datos_mov['id_hab'];
+    }
+}
+
+$resultado = $reservacion->comprobarFechaReserva(date('Y-m-d',$reservacion->fecha_entrada),date('Y-m-d',$reservacion->fecha_salida),$hab_id,$preasignada);
+
+
 $canales_reserva = array("telefono"=>"Telefono","email"=>"Email","web"=>"Web","agencia"=>"Agencia de viajes");
 
 echo '<div class="container-fluid blanco" style="width: 1200px;">
@@ -106,11 +125,11 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4 mb-3">
                     <label for="llegada">Llegada</label>
-                    <input required '.$inputFechaEn.' value="'.date("Y-m-d",$reservacion->fecha_entrada).'" class="form-control" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.')">
+                    <input required '.$inputFechaEn.' value="'.date("Y-m-d",$reservacion->fecha_entrada).'" class="form-control" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.','.$preasignada.')">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="salida">Salida</label>
-                    <input required class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' value="'.date("Y-m-d",$reservacion->fecha_salida).'" placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.');">
+                    <input required class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' value="'.date("Y-m-d",$reservacion->fecha_salida).'" placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.','.$preasignada.');">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="noches">Noches</label>
@@ -177,10 +196,10 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <label for="plan-alimentos">Plan de alimentos</label>
                     <select class="form-control" id="plan-alimentos"  onchange="editarTotalEstancia(event)">
                     <option value="">Seleccione una opción</option>';
-                    $config->mostrar_planes_select($reservacion->plan_alimentos);
+                    $planes_alimentos->mostrar_planes_select($reservacion->plan_alimentos);
                   echo'
                   </select>
-                  <input type="number" id="costoplan" hidden>
+                  <input type="number" id="costoplan" hidden value="'.$planes_alimentos->costo.'">
                 </div>
             </div>';
             if (empty($_GET['hab_id'])) {
@@ -188,11 +207,13 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
                     <label for="hab-preasignada">Habitación preasignada</label>
-                    <select disabled class="form-control" id="preasignada">
+                    <select  class="form-control" id="preasignada">';
+                    echo $resultado[1];
+                    echo '
                     </select>
                 </div>
                 <div class="form-group col-md-4 sobrevender">
-                    <label for="hab-preasignada">Sobrevender</label>
+                    <label for="sobrevender">Sobrevender</label>
                     
                     <div class="checkbox-container">
                     
@@ -286,7 +307,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)">
                     <option value="">Seleccione una opción </option>
                     ';
-                
+
                     $forma_pago->mostrar_forma_pago($huesped->tipo_tarjeta);
                     echo'
                     </select>
@@ -294,7 +315,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                
                 <div class="form-group col-md-4">
                 <label for="forma-garantia">Forma de Garantía</label>
-                <button id="btngarantia" disabled class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
+                <button id="btngarantia"  class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
                 </div>';
 
                 if (empty($_GET['hab_id'])) {

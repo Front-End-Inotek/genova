@@ -57,6 +57,8 @@
         $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
   }
+
+
   
   // Datos dentro de la reservacion
   $pdf = new PDF();
@@ -85,15 +87,21 @@
       $nombre_huesped= $fila['persona'].' '.$fila['apellido'];
       $quien_reserva= $fila['nombre_reserva'];
       $acompanante= $fila['acompanante'];
-      $tarifa_noche = $fila['precio_hospedaje'];
-
+      $tarifa_noche = $fila['precio_hospe'];
+      
+      
       $habitaciones=$fila['numero_hab'];
 
       $tipohab=$fila['tipohab'];
       $nombre_alimentos=$fila['nombre_alimentos'];
+
+      $costo_plan = $fila['costo_plan'];
+      $costo_plan= '$'.number_format($costo_plan, 2);
       if($tarifa_noche>0){
         $tarifa_noche= '$'.number_format($tarifa_noche, 2);
       }
+      
+     
       // Checar si suplementos esta vacio o no
       if (empty($fila['suplementos'])){
           //echo 'La variable esta vacia';
@@ -113,6 +121,8 @@
       }else{
           $total_estancia= '$'.number_format($fila['total'], 2);
       }
+
+      $total_estancia= '$'.number_format($fila['total'], 2);
       if($fila['total_pago']>0){
           $total_pago= '$'.number_format($fila['total_pago'], 2);
       }else{
@@ -125,6 +135,10 @@
   // Datos de reservacion
   $huesped= NEW Huesped($id_huesped);  
   $vencimiento_tarjeta = $huesped->vencimiento_mes . "/" . $huesped->vencimiento_ano;
+  //
+  include_once('clase_forma_pago.php');
+
+  $forma_pago = new Forma_pago($huesped->estado_tarjeta);
 
   $x= 20;
   $pdf->SetFont('Arial','B',10);
@@ -156,7 +170,7 @@
   $pdf->Ln();
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Tipo de habitación: '.$tipohab),0,0,'L');
   $pdf->Ln();
-  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Plan de alimentos: '.$nombre_alimentos),0,0,'L');
+  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Plan de alimentos: '.$nombre_alimentos . " ". $costo_plan ),0,0,'L');
   $pdf->Ln();
   $pdf->Ln();
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Clave de confirmación: '),0,0,'L');
@@ -186,7 +200,7 @@
     }
    
   }
-  if($huesped->tipo_tarjeta==1 || $huesped->tipo_tarjeta=="Efectivo"){
+  if(strtoupper($forma_pago->descripcion=="EFECTIVO") || strtoupper($huesped->tipo_tarjeta)=="EFECTVIO"){
     $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Garantía:'),0,0,'L');
     $pdf->Ln();
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Esta reserva está confirmada y garantizada por un pago en efectivo. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos."),0,'J');

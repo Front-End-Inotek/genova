@@ -42,7 +42,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
               
                     echo ' <div class="form-group col-md-4">
                     <label for="clave-reserva" class="text-right">Habitación</label>
-                    <select class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event)" required>
+                    <select class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event); calcular_nochesChek()" required>
                     <option value="">Seleccionar una habitación</option>
                     ';
                     

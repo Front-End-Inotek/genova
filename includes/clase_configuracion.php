@@ -1,6 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
+  include_once('clase_validar_usuario.php');
 
   class Configuracion extends ConexionMYSql{
     
@@ -147,6 +148,8 @@
         echo ("error en la consulta");
       }
     }
+
+
 
   public function mostrar_planes_alimentos($id){
       include_once('clase_usuario.php');

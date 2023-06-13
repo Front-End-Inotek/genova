@@ -8,8 +8,9 @@ $fecha_entrada = $_GET['fecha_entrada'];
 $fecha_salida = $_GET['fecha_salida'];
 // $ultima_fecha = $_GET['ultima_fecha'];
 $hab_id = $_GET['hab_id'];
+$preasignada =$_GET['preasignada'];
 
-$resultado = $reservacion->comprobarFechaReserva($fecha_entrada,$fecha_salida,$hab_id);
+$resultado = $reservacion->comprobarFechaReserva($fecha_entrada,$fecha_salida,$hab_id,$preasignada);
 
 
 //Lógica para reservaciones
@@ -26,9 +27,10 @@ if(is_array($resultado)){
 // echo $resultado;
 if($hab_id!=0){
     if($resultado <1){
-        echo "<script>alert('Fecha de asignación inválida'); manejarReservacion(0);</script>";
+        echo "<script>var fecha_valida=false; alert('Fecha de asignación inválida'); manejarReservacion(0);</script>";
     }else{
-        echo "<script>manejarReservacion(1);</script>";
+
+        echo "<script>var fecha_valida=true; manejarReservacion(1);</script>";
     }
     
     

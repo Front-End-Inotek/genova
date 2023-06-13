@@ -534,6 +534,16 @@
         $comentario="Cambiar la cantidad de personas en la mesa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      
+      function actualizarHab($mov,$preasignada){
+        // echo $mov . "|" . $preasignada;
+        // die();
+        $sentencia = "UPDATE `movimiento` SET
+        `id_hab` = '$preasignada'
+        WHERE `id` = '$mov';";
+        $comentario="Cambiar la habitacion preasignada de una reservacion/movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
   
   }
 ?>

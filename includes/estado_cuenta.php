@@ -12,6 +12,11 @@
   $id_reservacion= $movimiento->saber_id_reservacion($hab->mov);
   $reservacion= NEW Reservacion($id_reservacion);
   $consulta = $reservacion->datos_reservacion($id_reservacion);
+  if($consulta->num_rows==0){
+    echo "nada";
+    die();
+  }
+
   while ($fila = mysqli_fetch_array($consulta))
   {
       $id_hab= $fila['ID'];

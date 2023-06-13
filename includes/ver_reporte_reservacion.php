@@ -12,7 +12,7 @@
 
             <div class="row">
 
-              <div class="col-sm-8 d-flex justify-content-end "><h2 class="text-dark">'.$_GET['titulo'].' '.$_GET['id'].'</h2></div>
+              <div class="col-sm-7 d-flex justify-content-end "><h2 class="text-dark">'.$_GET['titulo'].' '.$_GET['id'].'</h2></div>
 
               <div class="col-sm-4  ">
               <div class=" d-flex justify-content-between">

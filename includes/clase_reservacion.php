@@ -131,6 +131,9 @@ class Reservacion extends ConexionMYSql
 
     public function preasignar_hab($id, $preasignada)
     {
+
+      
+
         $sentencia = "UPDATE movimiento
 		INNER JOIN reservacion ON reservacion.id = movimiento.id_reservacion
         SET movimiento.id_hab = '$preasignada', movimiento.motivo ='preasignar'
@@ -138,9 +141,10 @@ class Reservacion extends ConexionMYSql
         $comentario="Preasignar una habitacion a una reservacion";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         if($consulta) {
-            echo "BIEN";
+            return "BIEN";
+
         } else {
-            echo "MAL";
+            return "MAL";
         }
 
 
@@ -200,8 +204,28 @@ class Reservacion extends ConexionMYSql
     }
 
 
-    public function comprobarFechaReserva($fecha_entrada, $fecha_salida, $hab_id)
+     // Obtener el id de reservacion de un movimiento
+     function saber_id_movimiento($id){
+        $id_mov= 0;
+        $sentencia = "SELECT id, id_hab,motivo  FROM movimiento WHERE id_reservacion = $id LIMIT 1";
+        $comentario="Obtener el id de movimiento desde una reservacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $datos=[];
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+            $datos=$fila;
+        }
+        return $datos;
+      }
+
+    public function comprobarFechaReserva($fecha_entrada, $fecha_salida, $hab_id,$preasignada)
     {
+
+        $agregar_editar ="";
+        if($preasignada!=0){
+            $agregar_editar ="AND m.id_hab !=$preasignada";
+        }
 
         $agregar_id="";
         //se agrega filtro para el id de la habitación.
@@ -244,6 +268,7 @@ class Reservacion extends ConexionMYSql
 		AND m.motivo = 'preasignar'
         AND r.estado = 1
 		"
+        .$agregar_editar
         .$agregar_id;
         // print_r($sentencia);
         // die();
@@ -283,7 +308,12 @@ class Reservacion extends ConexionMYSql
                 // echo '
                 // <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>
                 // ';
-                $opciones .= '<option value="'.$fila['id'].'">Habitación: '.$fila['nombre'].'</option>';
+                if($preasignada == $fila['id']){
+                    $opciones .= '<option selected value="'.$fila['id'].'">Habitación: '.$fila['nombre'].'</option>';
+                }else{
+                    $opciones .= '<option value="'.$fila['id'].'">Habitación: '.$fila['nombre'].'</option>';
+                }
+                
             }
             $opciones = '<option value="">Seleccionar una habitación
                 '.$opciones.'
@@ -1443,7 +1473,7 @@ class Reservacion extends ConexionMYSql
                     } else {
                         echo '<td></td>';
                     }
-                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
+                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'regresar_reservacion()\', \'CHECK-IN\')"> Reporte</button></td>';
                     if($editar==1 && $fila['edo'] = 1) {
                         echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
                     }
@@ -3047,7 +3077,9 @@ class Reservacion extends ConexionMYSql
     public function datos_reservacion($id)
     {
         //cambié a left join por el hecho de que una reservacion "forzada" no tiene tarifa_hospedaje asignada como tal.
-        $sentencia = "SELECT *,tipo_hab.nombre as tipohab,planes_alimentos.nombre_plan as nombre_alimentos ,  reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
+        $sentencia = "SELECT *,tipo_hab.nombre as tipohab,reservacion.precio_hospedaje as precio_hospe, planes_alimentos.nombre_plan as nombre_alimentos ,  
+        planes_alimentos.costo_plan as costo_plan,
+        reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
 		FROM reservacion
 		LEFT JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id

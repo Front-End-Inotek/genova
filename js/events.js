@@ -1652,7 +1652,7 @@ function editarTotalEstancia(event){
 }
 
 // Calculamos la cantidad de noches de una reservacion
-function calcular_noches(hab_id=0){
+function calcular_noches(hab_id=0,preasignada=0){
 
     var fecha_salida= document.getElementById("fecha_salida")
     var fecha_entrada= document.getElementById("fecha_entrada");
@@ -1692,14 +1692,17 @@ function calcular_noches(hab_id=0){
         }else{
             cambiar_adultosNew("",hab_id)
         }
+        console.log(preasignada)
         // $(".div_adultos").load("includes/consultar_reservacion_disponible.php?fechas="+JSON.stringify(fechas)+"&hab_id="+hab_id);
-        include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id;
+        include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id+"&preasignada="+preasignada;
         console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include);    
         }
         // $(".div_adultos").load(include);    
-        $("#preasignada").load(include);    
+        $("#preasignada").load(include,function(res){
+            //console.log(res)
+        });    
      
     }
   
@@ -1789,6 +1792,7 @@ function cambiar_adultosNew(event=null,hab_id){
         if(forzar_tarifa!=""){
             $("#tipo-habitacion").removeAttr("disabled");
             $("#tarifa").attr('required',false);
+            $("#tarifa_base").val(forzar_tarifa)
             editarTotalEstancia()
             // console.log("??")
 
@@ -1875,8 +1879,10 @@ function obtener_garantia(event=null){
         console.log(garantia)
         if(garantia!=undefined && garantia == 1){
             $("#div_voucher").show();
+            $("#voucher").attr("required",true)
         }else{
             $("#div_voucher").hide();
+            $("#voucher").removeAttr("required")
         }
     }
     if(garantia_id==1 || garantia_id==0){
@@ -2246,6 +2252,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
             success:function(res){
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
+                // console.log(res)
+                // return
                 confirarmNo = document.getElementById('no')
                 if(confirarmNo!=null){
                     confirarmNo = confirarmNo.checked
@@ -2315,8 +2323,15 @@ function verificarFormulario() {
 }
 
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
+    if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
+        
+        alert("Fecha de asignación inválida")
+        return false
+    }
+    console.log("no here")
+    
 
-    if(!verificarFormulario()){
+    if(!verificarFormulario() ){
         var usuario_id=localStorage.getItem("id");
         var nombre_huesped= document.getElementById("nombre").value;
         var apellido_huesped= document.getElementById("apellido").value;
@@ -4262,7 +4277,12 @@ function estado_cuenta(hab_id,estado,mov=0){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/estado_cuenta.php?hab_id="+hab_id+"&estado="+estado); 
+	$("#area_trabajo_menu").load("includes/estado_cuenta.php?hab_id="+hab_id+"&estado="+estado,function(res){
+        
+        if(res=="nada"){
+            document.location.href='inicio.php'; 
+        }
+    }); 
 	$('#caja_herramientas').modal('hide');
 }
 
@@ -5094,6 +5114,19 @@ function aceptar_borrar_surtir_inventario(id){
 // Modal de aplicar surtir inventario 
 function aceptar_aplicar_surtir_inventario(id){
 	$("#mostrar_herramientas").load("includes/aplicar_modal_surtir_inventario.php?id="+id);
+}
+
+function validarEmail(email){
+    return email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+}
+
+function comprobarEmail(){
+    email = $("#correo").val()
+    if(!validarEmail(email) && email!=""){
+        alert("Escribe una dirección de correo válida")
+    }
 }
 
 // Aplicar surtir inventario 

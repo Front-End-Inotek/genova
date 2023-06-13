@@ -70,6 +70,27 @@
   $_POST['usuario_id'],$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$_POST['id'],$estado_interno);
 
 
+  if(isset($_POST['preasignada']) && $_POST['preasignada']!=0){
+    include_once('clase_movimiento.php');
+    include_once('clase_hab.php');
+    $id_mov = 0;
+    $hab = new Hab(0);
+
+    $datos_mov = $reservacion->saber_id_movimiento($_POST['id']);
+    if($datos_mov!=null && $datos_mov['motivo'] == "preasignar" && $datos_mov['id_hab']!=0){
+        $id_mov=$datos_mov['id'];
+        $old_hab = $datos_mov['id_hab'];
+        $mov = new Movimiento($id_mov);
+        $mov->actualizarHab($id_mov,$_POST['preasignada']);
+    }
+
+    $hab->cambiohabUltimo($old_hab);
+    $hab->cambiohabUltimo($_POST['preasignada']);
+
+   
+    
+  }
+
   
   $logs->guardar_log($_POST['usuario_id'],"Editar reservacion: ". $_POST['id']);
   echo $_POST['id'];
