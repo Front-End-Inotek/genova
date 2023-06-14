@@ -3,9 +3,12 @@
   include_once("clase_reservacion.php");
   include_once("clase_cupon.php");
   include_once("clase_log.php");
+  include_once('clase_movimiento.php');
+  include_once('clase_hab.php');
   $reservacion= NEW Reservacion(0);
   $cupon= NEW Cupon(0);
   $logs = NEW Log(0);
+  $hab = new Hab(0);
   $descuento= $_POST['descuento'];
   $tipo_descuento= 0;
   $cantidad_cupon= 0;
@@ -69,27 +72,28 @@
   $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$_POST['total_pago'],$_POST['hab_id'],
   $_POST['usuario_id'],$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$_POST['id'],$estado_interno);
 
+  $datos_mov = $reservacion->saber_id_movimiento($_POST['id']);
 
   if(isset($_POST['preasignada']) && $_POST['preasignada']!=0){
-    include_once('clase_movimiento.php');
-    include_once('clase_hab.php');
     $id_mov = 0;
-    $hab = new Hab(0);
-
-    $datos_mov = $reservacion->saber_id_movimiento($_POST['id']);
     if($datos_mov!=null && $datos_mov['motivo'] == "preasignar" && $datos_mov['id_hab']!=0){
         $id_mov=$datos_mov['id'];
         $old_hab = $datos_mov['id_hab'];
         $mov = new Movimiento($id_mov);
         $mov->actualizarHab($id_mov,$_POST['preasignada']);
+        $mov->actualizarFechasMov($id_mov, $_POST['fecha_entrada'],$_POST['fecha_salida']);
     }
 
     $hab->cambiohabUltimo($old_hab);
     $hab->cambiohabUltimo($_POST['preasignada']);
-
-   
-    
   }
+  if($datos_mov!=null && $datos_mov['motivo'] == "reservar" && $datos_mov['id_hab']!=0){
+    $id_mov=$datos_mov['id'];
+    $old_hab = $datos_mov['id_hab'];
+    $mov = new Movimiento($id_mov);
+    $mov->actualizarFechasMov($id_mov, strtotime($_POST['fecha_entrada']),strtotime($_POST['fecha_salida']));
+    $hab->cambiohabUltimo($old_hab);
+}
 
   
   $logs->guardar_log($_POST['usuario_id'],"Editar reservacion: ". $_POST['id']);

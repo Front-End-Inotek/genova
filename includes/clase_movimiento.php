@@ -544,6 +544,14 @@
         $comentario="Cambiar la habitacion preasignada de una reservacion/movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      function actualizarFechasMov($mov,$fecha_entrada,$fecha_salida){
+        $sentencia = "UPDATE `movimiento` SET
+        `inicio_hospedaje` = '$fecha_entrada',
+        `fin_hospedaje` = '$fecha_salida'
+        WHERE `id` = '$mov';";
+        $comentario="Actualizando las fechas de hospedaje del movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
   
   }
 ?>

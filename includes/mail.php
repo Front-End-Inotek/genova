@@ -138,8 +138,11 @@
   //
   include_once('clase_forma_pago.php');
 
-  $forma_pago = new Forma_pago($huesped->estado_tarjeta);
-
+  if($huesped->estado_tarjeta==0 || $huesped->estado_tarjeta==null ){
+    $forma_pago = new Forma_pago(0);
+  }else{
+    $forma_pago = new Forma_pago($huesped->estado_tarjeta);
+  }
   $x= 20;
   $pdf->SetFont('Arial','B',10);
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Confirmación de reservación'),0,0,'L');

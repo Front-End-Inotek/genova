@@ -223,15 +223,28 @@ class Reservacion extends ConexionMYSql
     {
 
         $agregar_editar ="";
+        $agregar_="";
         if($preasignada!=0){
             $agregar_editar ="AND m.id_hab !=$preasignada";
         }
 
         $agregar_id="";
         //se agrega filtro para el id de la habitación.
+       
+        if($preasignada!=0 && $hab_id!=0){
+            $agregar_="AND m.id_hab=".$hab_id." AND m.motivo!='reservar'";
+            $agregar_editar="";
+        }else{
+            $agregar_ ="AND m.id_hab=".$hab_id;
+           
+        }
+
         if($hab_id!=0) {
             $agregar_id ="AND m.id_hab=".$hab_id;
+        }else{
+            $agregar_="";
         }
+
 
 
         $fecha_entrada = strtotime($fecha_entrada);
@@ -247,7 +260,7 @@ class Reservacion extends ConexionMYSql
         INNER JOIN reservacion on m.id_reservacion = reservacion.id
         WHERE hab.estado = 1 
         AND ('$fecha_salida' > reservacion.fecha_entrada AND '$fecha_entrada' <  reservacion.fecha_salida)
-        " .$agregar_id;
+        " .$agregar_;
         ;
 
         // print_r($ocupadas);
@@ -530,13 +543,14 @@ class Reservacion extends ConexionMYSql
         $where="";
         $where_fecha ="";
 
-        $inicio_normal=$inicio_dia;
+        $inicio_normal= date("Y-m-d");
 
         if($fecha_inicio!="") {
 
             $inicio_normal=$fecha_inicio;
             $inicio_dia  = strtotime($fecha_inicio);
         }
+
         switch ($opcion) {
             case 1:
                 //llegadas probables
@@ -591,7 +605,7 @@ class Reservacion extends ConexionMYSql
     {
         date_default_timezone_set('America/Mexico_City');
         $inicio_dia= date("Y-m-d");
-        $inicio_normal=$inicio_dia;
+       
         $inicio_dia= strtotime($inicio_dia);
         $fin_dia= $inicio_dia + 86399;
         $cont = 1;
@@ -609,62 +623,9 @@ class Reservacion extends ConexionMYSql
         $where="";
         $where_fecha ="";
 
+
+
         $consulta = $this->seleccion_reporte($fecha_inicio,$inicio_dia,$opcion);
-
-        // if($fecha_inicio!="") {
-
-        //     $inicio_normal=$fecha_inicio;
-        //     $inicio_dia  = strtotime($fecha_inicio);
-        // }
-        // //según la opción proporcionada, será una consulta distinta para cada caso.
-
-        // switch ($opcion) {
-        //     case 1:
-        //         //llegadas probables
-        //         //reservaciones con estado 1, del día seleccionado.
-        //         $where="WHERE (reservacion.estado = 1)";
-        //         $where_fecha ="AND (reservacion.fecha_entrada = '$inicio_dia')";
-        //         $comentario="Mostrar las llegas probables (reservaciones)";
-
-        //         break;
-        //     case 2:
-        //         //llegadas efectivas
-        //         $where ="WHERE (reservacion.estado = 2)";
-        //         $where_fecha ="AND (reservacion.fecha_entrada = '$inicio_dia')";
-        //         $comentario="Mostrar las llegas efectivas (reservaciones)";
-        //         break;
-        //     case 3:
-        //         //salidas probables
-        //         $where="
-        //         LEFT JOIN hab on movimiento.id_hab = hab.id
-        //         WHERE (reservacion.estado = 1 || reservacion.estado=2)";
-        //         $where_fecha="AND (reservacion.fecha_salida = '$inicio_dia')";
-
-        //         $comentario="Mostrar las salidas probables (reservaciones y ocupadas)";
-        //         break;
-        //     case 4:
-        //         //salidas efectivas
-        //         $where="WHERE (reservacion.estado=2)";
-        //         $where_fecha=" AND (from_unixtime(movimiento.finalizado,'%Y-%m-%d') =('$inicio_normal'))";
-        //         $comentario="Mostrar las salidas efectivas";
-        //         break;
-        //     default:
-        //         # code...
-        //         break;
-        // }
-        // $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-        // FROM reservacion
-        // LEFT JOIN tarifa_hospedaje ON reservacion.tipo_hab = tarifa_hospedaje.id 
-        // LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
-        // INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-        // INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-        // INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id 
-        // INNER JOIN movimiento on reservacion.id = movimiento.id_reservacion
-        // ".$where."
-        // ".$where_fecha."
-        // ORDER BY reservacion.id DESC;";
-        // print_r($sentencia);
-        //die();
         //se recibe la consulta y se convierte a arreglo
         $this->buscador_reportes($inicio_dia, $opcion);
         echo '<div class="table-responsive" id="tabla_reservacion">';
@@ -1392,8 +1353,8 @@ class Reservacion extends ConexionMYSql
                             echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
                         }
                         if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
+                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Cancelar</button></td>';
+                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrarx</button></td>';
                         }
                         echo '</tr>';
                     } else {
@@ -1475,7 +1436,7 @@ class Reservacion extends ConexionMYSql
                     }
                     echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'regresar_reservacion()\', \'CHECK-IN\')"> Reporte</button></td>';
                     if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
+                        echo '<td><button class="btn btn-warning" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].')"> Editara</button></td>';
                     }
                     if($borrar==1 && $fila['edo'] != 0) {
                         echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
@@ -3029,6 +2990,7 @@ class Reservacion extends ConexionMYSql
 		WHERE `id` = '$id';";
         $comentario="Poner estado de una reservacion como inactivo";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
+
     }
     // Modificar estado de una reservacion
     public function modificar_estado($id, $estado)

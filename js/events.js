@@ -1697,11 +1697,13 @@ function calcular_noches(hab_id=0,preasignada=0){
         include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id+"&preasignada="+preasignada;
         console.log(include);
         if(hab_id!=0){
-            $(".div_adultos").load(include);    
+            $(".div_adultos").load(include,function(res){
+                // console.log(res)
+            });       
         }
         // $(".div_adultos").load(include);    
         $("#preasignada").load(include,function(res){
-            //console.log(res)
+            console.log(res)
         });    
      
     }
@@ -2190,6 +2192,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
 
     if(id_cuenta!=0){
         ruta="includes/aplicar_editar_reservacionNew.php";
+      
     }
     var voucher =document.getElementById('voucher').value
     var estado_tarjeta=document.getElementById('estadotarjeta').value
@@ -2724,6 +2727,10 @@ function reporte_reservacion_por_dia(dia){
 function editar_reservacionNew(id){
     $("#area_trabajo_menu").load("includes/editar_reservacionNew.php?id="+id);
 }
+// Editar un checkin
+function editar_checkin(id,hab_id){
+    $("#area_trabajo_menu").load("includes/editar_checkin.php?id="+id+"&hab_id="+hab_id);
+}
 
 // Editar una reservacion
 function editar_reservacion(id){
@@ -2883,13 +2890,15 @@ function reporte_reservacion(id){
 }
 
 // Borrar una reservacion
-function borrar_reservacion(id){
+function borrar_reservacion(id,preasignada=0){
+    
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     if (id >0) {
         var datos = {
                 "id": id,
                 "usuario_id": usuario_id,
+                "preasignada":preasignada
             };
         $.ajax({
                 async:true,
@@ -2956,12 +2965,13 @@ function preasignar_reservacion(id,opcion=""){
 }
 
 // Modal de cancelar una reservacion
-function aceptar_cancelar_reservacion(id){
-	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id);
+function aceptar_cancelar_reservacion(id,preasignada=0){
+	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id+"&preasignada="+preasignada);
 }
 
 // Cancelar una reservacion
-function cancelar_reservacion(id){
+function cancelar_reservacion(id,preasignada=0){
+  
     var usuario_id=localStorage.getItem("id");
     var nombre_cancela= encodeURI(document.getElementById("nombre_cancela").value);
 
@@ -2972,6 +2982,7 @@ function cancelar_reservacion(id){
                 "id": id,
                 "nombre_cancela": nombre_cancela,
                 "usuario_id": usuario_id,
+                "preasignada":preasignada,
             };
         $.ajax({
                 async:true,
@@ -2993,8 +3004,8 @@ function cancelar_reservacion(id){
 }
 
 // Modal de borrar una reservacion
-function aceptar_borrar_reservacion(id){
-	$("#mostrar_herramientas").load("includes/borrar_modal_reservacion.php?id="+id);
+function aceptar_borrar_reservacion(id,preasignada=0){
+	$("#mostrar_herramientas").load("includes/borrar_modal_reservacion.php?id="+id+"&preasignada="+preasignada);
 }
 
 // Regresar a la pagina anterior de editar un reservacion
