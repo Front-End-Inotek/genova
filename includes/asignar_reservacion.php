@@ -8,6 +8,12 @@
   include_once('clase_log.php');
   $reservacion= NEW Reservacion($_POST['id_reservacion']);
   $hab = NEW Hab($_POST['hab_id']);
+
+  //verificar que la habitación no está ocupada desde una preasignada.
+  if($hab->estado!=0){
+    echo "OCUPADA";
+    die();
+  }
   $cuenta = NEW Cuenta(0);
   $huesped = NEW Huesped($reservacion->id_huesped);
   $movimiento = NEW Movimiento($hab->mov);

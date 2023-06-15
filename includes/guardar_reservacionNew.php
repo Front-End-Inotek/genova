@@ -27,8 +27,29 @@
   $cantidad_cupon= 0;
   $id_movimiento= 0;
 
+    // No se consideran los suplementos
+  /*if($_POST['forzar_tarifa'] > 0){
+    $total=$_POST['forzar_tarifa']; 
+  }else{*/
+    if($_POST['descuento'] > 0){
+      $descuento_calculo= $_POST['descuento'] / 100;
+      $descuento_calculo= 1 - $descuento_calculo;
+      $total=$_POST['total_hab'] * $descuento_calculo;
+    }else{
+      $total=$_POST['total_hab']; 
+    }
+  //}
 
+  //logica para saber si una reservación estará o no garantizada.
+  $estado_interno="pendiente";
+  if($_POST['estado_tarjeta'] == 2 || !empty($_POST['voucher'] )){
+    $estado_interno = "garantizada";
+  }
 
+  $total_pago=$_POST['total_pago'];
+  if($estado_interno=="garantizada"){
+    $total_pago=$total;
+  }
 
   //Revisar la existencia de un cupon de descuento
   // Checar si codigo descuento esta vacio o no
@@ -57,20 +78,9 @@
     }
   }
 
-  // No se consideran los suplementos
-  /*if($_POST['forzar_tarifa'] > 0){
-    $total=$_POST['forzar_tarifa']; 
-  }else{*/
-    if($_POST['descuento'] > 0){
-      $descuento_calculo= $_POST['descuento'] / 100;
-      $descuento_calculo= 1 - $descuento_calculo;
-      $total=$_POST['total_hab'] * $descuento_calculo;
-    }else{
-      $total=$_POST['total_hab']; 
-    }
-  //}
+
   $cuenta= 1;
-  if($_POST['forzar_tarifa'] > 0 || $_POST['total_suplementos'] > 0 || $_POST['total_pago'] > 0 || $cantidad_cupon > 0){
+  if($_POST['forzar_tarifa'] > 0 || $_POST['total_suplementos'] > 0 || $total_pago > 0 || $cantidad_cupon > 0){
     $cuenta= 1;
   }
 
@@ -100,17 +110,14 @@
   $plan_alimentos = isset($_POST['plan_alimentos']) ? $_POST['plan_alimentos'] : "";
   $tipo_reservacion = isset($_POST['tipo_reservacion']) ? $_POST['tipo_reservacion'] : "";
 
-  //logica para saber si una reservación estará o no garantizada.
-  $estado_interno="pendiente";
-  if($_POST['estado_tarjeta'] == 2 || !empty($_POST['voucher'] )){
-    $estado_interno = "garantizada";
-  }
+
+
 
   $id_reservacion = $reservacion->guardar_reservacionNew($_POST['id_huesped'],$_POST['tipo_hab'],$id_movimiento,$_POST['fecha_entrada'],$_POST['fecha_salida'],
   $_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],
   $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
   urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
-  $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$_POST['total_pago'],$actual_hab,
+  $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$total_pago,$actual_hab,
   $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno);
 
   
@@ -123,7 +130,7 @@
     $hab->cambiohabUltimo($actual_hab);
   }
 
-  if($_POST['total_pago'] > 0){
+  if($total_pago > 0){
     if($_POST['forma_pago'] == 2){
       $factuar= 1;
     }else{
@@ -139,12 +146,12 @@
     $resta= 0;
     $nueva_etiqueta= $labels->obtener_etiqueta();
     $labels->actualizar_etiqueta();
-    $comanda= $pedido_rest->saber_comanda($mov);
+    $comanda= $pedido_rest->saber_comanda($id_movimiento);
 
     if($_POST['forma_pago'] == 1){
-      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],$_POST['total_pago'],0,0,0,$descuento,$factuar,'','Pago al reservar',$nueva_etiqueta,$resta,$comanda,0);
+      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,$total_pago,0,0,0,$descuento,$factuar,'','Pago al reservar',$nueva_etiqueta,$resta,$comanda,0);
     }else{
-      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['total_pago'],0,0,$_POST['total_pago'],0,$descuento,$factuar,'','Pago al reservar',$nueva_etiqueta,$resta,$comanda,0);
+      $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,0,0,$total_pago,0,$descuento,$factuar,'','Pago al reservar',$nueva_etiqueta,$resta,$comanda,0);
     }
 
     $cantidad= 1;
@@ -155,12 +162,12 @@
     }else{
       $nombre_concepto= 'Primer abono de habitacion '.$nombre;
     }
-    $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['total_pago'],($_POST['total_pago']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+    $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$total_pago,($total_pago*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
     
     // Imprimir ticket
-    if($confi->ticket_restaurante == 0){
-      $ticket->cambiar_estado($ticket_id);
-    }
+    // if($confi->ticket_restaurante == 0){
+    //   $ticket->cambiar_estado($ticket_id);
+    // }
 
     $logs->guardar_log($_POST['usuario_id'],"Agregar primer abono a la habitacion: ". $nombre);
     $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);

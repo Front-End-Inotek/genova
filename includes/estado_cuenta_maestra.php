@@ -15,7 +15,7 @@
   //revisar si existe un huesped asignado a la cuenta maestra para mostrar 'cierta'  info de ese huesped
 
   $id_huesped=0;
-  $nombre_huesped="";
+  $nombre_huesped="Sin huésped asignado";
   if($cm->huesped!=""){
     require_once('clase_huesped.php');
     $huesped = new Huesped($cm->huesped);

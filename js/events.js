@@ -1698,7 +1698,7 @@ function calcular_noches(hab_id=0,preasignada=0){
         console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
-                // console.log(res)
+                console.log(res)
             });       
         }
         // $(".div_adultos").load(include);    
@@ -1796,28 +1796,7 @@ function cambiar_adultosNew(event=null,hab_id){
             $("#tarifa").attr('required',false);
             $("#tarifa_base").val(forzar_tarifa)
             editarTotalEstancia()
-            // console.log("??")
-
-            // adicional=0;
-            // numero_hab = numero_hab == 0 ? 1 : numero_hab
-            // tarifaOld = noches * forzar_tarifa * numero_hab
-
-            // if($("#tarifa_adultos").val()=="" && $("#forzar-tarifa").val()!=""){
-            //  adicional+= $("#forzar-tarifa").val() * $("#extra_adulto").val() * noches
-            // }
-
-            // if($("#tarifa_menores").val()=="" && $("#forzar-tarifa").val()!=""){
-            //     adicional+= $("#forzar-tarifa").val() * $("#extra_infantil").val() * noches
-            // }
-
-            // tarifaNew=tarifaOld+ adicional
-
-            // $("#total").val(tarifaNew)
-            // $("#aux_total").val(tarifaOld)
-            // $("#tipo-habitacion").removeAttr("disabled");
-            // $("#tarifa_menores").val("")
-            // $("#tarifa_adultos").val("")
-            // $("#tarifa").removeAttr('required');
+            
         }
       
         
@@ -3038,7 +3017,14 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             url:"includes/asignar_reservacion.php",
             data:datos,
             beforeSend:loaderbar,
-            success:principal,
+            success:function(res){
+                console.log(res)
+                if(res=="OCUPADA"){
+                    $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
+                }else{
+                    principal()
+                }
+            },
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
@@ -3054,6 +3040,8 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
 
 // Modal de asignar una reservacion a una habitacion en estado disponible
 function select_asignar_reservacion(id,numero_hab){
+    console.log(id)
+    return
 	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
 }
 
@@ -5169,7 +5157,7 @@ function agregar_restaurante(hab_id,estado,maestra=0,mov=0){
 }
 
 function vista_desarrollo(hab_id,estado){
-    window.open("includes/mail.php?id="+hab_id);
+    //window.open("includes/mail.php?id="+hab_id);
     return
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();

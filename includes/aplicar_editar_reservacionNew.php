@@ -74,6 +74,8 @@
 
   $datos_mov = $reservacion->saber_id_movimiento($_POST['id']);
 
+
+
   if(isset($_POST['preasignada']) && $_POST['preasignada']!=0){
     $id_mov = 0;
     if($datos_mov!=null && $datos_mov['motivo'] == "preasignar" && $datos_mov['id_hab']!=0){
@@ -81,7 +83,7 @@
         $old_hab = $datos_mov['id_hab'];
         $mov = new Movimiento($id_mov);
         $mov->actualizarHab($id_mov,$_POST['preasignada']);
-        $mov->actualizarFechasMov($id_mov, $_POST['fecha_entrada'],$_POST['fecha_salida']);
+        $mov->actualizarFechasMov($id_mov, strtotime($_POST['fecha_entrada']),strtotime($_POST['fecha_salida']));
     }
 
     $hab->cambiohabUltimo($old_hab);
@@ -91,6 +93,7 @@
     $id_mov=$datos_mov['id'];
     $old_hab = $datos_mov['id_hab'];
     $mov = new Movimiento($id_mov);
+   
     $mov->actualizarFechasMov($id_mov, strtotime($_POST['fecha_entrada']),strtotime($_POST['fecha_salida']));
     $hab->cambiohabUltimo($old_hab);
 }

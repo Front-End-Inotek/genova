@@ -19,7 +19,7 @@
       function Header()
       {
           $conf = NEW Configuracion(0);
-          $hab= NEW Hab(43);
+          $hab= NEW Hab($_GET['id']);
           $nombre= $conf->obtener_nombre();
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);

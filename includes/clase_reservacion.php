@@ -219,7 +219,7 @@ class Reservacion extends ConexionMYSql
         return $datos;
       }
 
-    public function comprobarFechaReserva($fecha_entrada, $fecha_salida, $hab_id,$preasignada)
+    public function comprobarFechaReserva($fecha_entrada, $fecha_salida, $hab_id ,$preasignada)
     {
 
         $agregar_editar ="";
@@ -235,7 +235,7 @@ class Reservacion extends ConexionMYSql
             $agregar_="AND m.id_hab=".$hab_id." AND m.motivo!='reservar'";
             $agregar_editar="";
         }else{
-            $agregar_ ="AND m.id_hab=".$hab_id;
+            $agregar_ ="AND m.id_hab=".$hab_id."  AND m.motivo!='preasignar'";
            
         }
 
@@ -263,7 +263,7 @@ class Reservacion extends ConexionMYSql
         " .$agregar_;
         ;
 
-        // print_r($ocupadas);
+        print_r($ocupadas);
 
 
         $consulta = $this->realizaConsulta($ocupadas, "");
@@ -283,7 +283,7 @@ class Reservacion extends ConexionMYSql
 		"
         .$agregar_editar
         .$agregar_id;
-        // print_r($sentencia);
+        print_r($sentencia);
         // die();
         $consulta = $this->realizaConsulta($sentencia, "");
         while($fila=mysqli_fetch_array($consulta)) {
@@ -1383,7 +1383,12 @@ class Reservacion extends ConexionMYSql
                         echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Garantizada</td>';
                         if($agregar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
+                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignarx</button></td>';
+                        }
+                        if($fila['id_hab']==0) {
+                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
+                        } else {
+                            echo '<td>Preasignada '.$fila['id_hab'].'</td>';
                         }
 
                         echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
