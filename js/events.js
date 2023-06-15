@@ -5157,7 +5157,7 @@ function agregar_restaurante(hab_id,estado,maestra=0,mov=0){
 }
 
 function vista_desarrollo(hab_id,estado){
-    //window.open("includes/mail.php?id="+hab_id);
+    window.open("includes/mail.php?id="+hab_id);
     return
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
