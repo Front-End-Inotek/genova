@@ -121,7 +121,8 @@ function obtener_datos_hab() {
                         console.log('hab_'+hab_info[i]['id']);
                         hab[hab_info[i]['id']]=hab_info[i]['ultimo_mov'];
                         hab_ultimo_mov[hab_info[i]['id']]=hab_info[i]['mov'];
-                        $("#hab_"+hab_info[i]['id']).load("includes/mostrar_cambios_hab.php?hab_id="+hab_info[i]['id']);
+                        $("#hab_"+hab_info[i]['id']).load("includes/mostrar_cambios_hab.php?hab_id="+hab_info[i]['id'],function(res){
+                        });
                         /*const collection = document.getElementById("hab_"+hab_info[i]['id']);
                         collection.innerHTML = '<button id="submit">Submit</button>';*/
 
@@ -2963,6 +2964,8 @@ function cancelar_reservacion(id,preasignada=0){
                 "usuario_id": usuario_id,
                 "preasignada":preasignada,
             };
+        // console.log(datos)
+        // return
         $.ajax({
                 async:true,
                 type: "POST",

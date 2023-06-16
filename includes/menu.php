@@ -253,7 +253,7 @@
 		
 		<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 			<i class="bx bxs-user mx-2" ></i>
-			<span onclick="vista_desarrollo(0,0)"> Desarrollo </span>
+			<span onclick=""> Desarrollo </span>
 		</li>
 
 
