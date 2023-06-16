@@ -316,8 +316,12 @@ span {
 
 .card {
   background-color: #30349f;
-  color: #fff;
-  height: auto;
+  color: transparent !important;
+  /*
+  height: auto;*/
+  background-color: #333;
+  border: 12px solid #333;
+  color: #333;
 }
 
 /* Para pantallas de tamaño pequeño, menores a 576px */

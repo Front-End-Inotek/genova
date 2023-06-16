@@ -1,31 +1,23 @@
-html{
-  max-height: 80% !important;
-}
+
 body {
   margin: 0;
-  height: 80% !important;
+  height: 100% !important;
   display: flex;
   flex-direction: column;
+
 }
 
 .context {
   width: 100%;
   position: absolute;
   top: 0vh;
-  z-index: -9999999999;
+  z-index: -9999999999; 
 }
 
-.context h1 {
-  text-align: center;
-  color: #fff;
-  font-size: 50px;
-  z-index: -9999999999;
-}
 
 .area {
   background: #ecf2ff;
   width: 100%;
-  height: 100vh;
   z-index: -9999999999;
 }
 
@@ -38,8 +30,6 @@ body {
   overflow: hidden;
   z-index: -9999999999;
   border: 2px solid white;
-  background: 
-  radial-gradient(18% 28% at 24% 50%,#cefAFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),radial-gradient(70% 53% at 36% 76%,#73f2FFFF 0,#073AFF00 100%),radial-gradient(42% 53% at 15% 94%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(42% 53% at 34% 72%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 35% 87%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(31% 43% at 7% 98%,#fffFFFFF 24%,#073AFF00 100%),radial-gradient(21% 37% at 72% 23%,#d3fF6D9C 24%,#073AFF00 100%),radial-gradient(35% 56% at 91% 74%,#8a4FFFF5 9%,#073AFF00 100%),radial-gradient(74% 86% at 67% 38%,#6dfFAEF5 24%,#073AFF00 100%),linear-gradient(125deg,#4eb5FFFF 1%,#4c00FCFF 100%);
   animation: infinite 10s infinite cubic-bezier(0.26, 0.62, 1, 1);
 }
 
@@ -783,7 +773,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .btn-dark {
   background-color: #97b2f96e !important;
-  border-color: #fff !important;
+  border-color: #3f51b5 !important;
   color: #3f51b5 !important;
 }
 
@@ -822,7 +812,8 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .modal-header {
-  backdrop-filter: blur(15px);
+  /*
+  backdrop-filter: blur(15px);*/
   background-color: #c8d7ff !important;
   border-color: #3f51b5 !important;
   color: #3f51b5 !important;
@@ -852,9 +843,9 @@ body.modo-nocturno .containerRackOp .btn:focus {
   color: red;
   border: 2px solid #3f51b5 !important;
 }
-
+/*
 body {
-  /*
+  
   background-image: url("https://wallpapershome.com/images/wallpapers/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg");
   background-size: cover !important;
   background-position: center !important;
@@ -878,8 +869,8 @@ body {
       58deg,
       rgba(90, 90, 237, 0.16144443572260592) 83%,
       rgba(249, 156, 142, 0.5) 23%
-    ) !important;*/
-}
+    ) !important;
+}*/
 
 .btn {
   color: #fff;
@@ -905,7 +896,7 @@ body {
 
 .mantenimiento:after {
   position: absolute;
-  content: " ⟩";
+  content: "";
   font-size: 4em;
   text-align: end;
   width: 0;
@@ -922,7 +913,7 @@ body {
 
 .ocupada-limpieza:after {
   position: absolute;
-  content: "⟩";
+  content: "";
   width: 0;
   height: 100%;
   top: 0;
@@ -1096,21 +1087,38 @@ body {
   margin-bottom: 15px;
   font-size: calc(0.4rem + 0.6vw) !important;
 }
-
+/*
 .cardFooter {
-  /* background-color: #1b1d5d;*/
+   background-color: #1b1d5d;
   background-color: #3f51b5;
-  background: linear-gradient(180deg, #2d32ae 0%, #4e4ef0 50%, #171a6e 100%);
-  color: #fff;
-}
+  background: linear-gradient(180deg, #2d32ae 0%, #4e4ef0 50%, #171a6e 100%) ;
+  color: #fff !important;
+  
+}*/
 
 .card-header {
-  padding-bottom: 50px !important;
+  
   background-color: #30349f !important;
-  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+  /*
+  background: 
+  radial-gradient(18% 28% at 24% 50%,#cefAFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),radial-gradient(70% 53% at 36% 76%,#73f2FFFF 0,#073AFF00 100%),radial-gradient(42% 53% at 15% 94%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(42% 53% at 34% 72%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 35% 87%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(31% 43% at 7% 98%,#fffFFFFF 24%,#073AFF00 100%),radial-gradient(21% 37% at 72% 23%,#d3fF6D9C 24%,#073AFF00 100%),radial-gradient(35% 56% at 91% 74%,#8a4FFFF5 9%,#073AFF00 100%),radial-gradient(74% 86% at 67% 38%,#6dfFAEF5 24%,#073AFF00 100%),linear-gradient(125deg,#4eb5FFFF 1%,#4c00FCFF 100%) !important;
+  */border: 1px solid #2d31ae;
+  background: linear-gradient(180deg, #2d32ae 0%, #4e4ef0 50%, #171a6e 100%) ;
   color: #fff;
+  
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
 }
 
+/*
+.cardFooter{
+  padding-bottom: 50px !important;
+  margin: 15px;
+  background-color: #30349f !important;
+  color: #fff;
+  position: relative;
+
+}*/
 /* Para pantallas de tamaño pequeño, menores a 576px */
 @media (max-width: 575.98px) {
   .containerRackOp {

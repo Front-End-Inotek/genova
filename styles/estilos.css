@@ -128,7 +128,7 @@
     rgb(166, 179, 248) 100%
   );
   background-color: #1f238a !important;*/
-  background-color: #e5fcffdd !important;
+  background-color: #caebffdd !important;
   border-top-style: none;
 }
 
@@ -187,7 +187,8 @@ label {
 
 /* Contenedor con fondo blanco y bordes */
 .blanco {
-  backdrop-filter: blur(15px);
+  /*
+  backdrop-filter: blur(15px);*/
   padding: 25px 25px;
   /*
   background: url('../images/vista_back.jpg') !important;*/
@@ -196,18 +197,63 @@ label {
   color: #3f51b5 !important;
   /*
   background-color: #5b58f814 !important;
-  background-color: #dde6ff !important;*/
-  background-color: #fdf8e2 !important;
+  background-color: #dde6ff !important;
+
+  background-color: #fdf8e2 !important;*/
+  background-color: rgba(254, 254, 254, 0.4) !important;
   margin-top: 60px !important;
   padding-top: 20px !important;
-  border: 2px solid #fceca8;
+  border: 2px solid #3f51b5;
   border-radius: 5px;
-  
+  -webkit-animation-name: efecto;
+  animation-name: efecto;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
+
+
+@-webkit-keyframes efecto {
+  0% {
+      opacity: 0;
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+  }
+}
+
+@keyframes efecto {
+  0% {
+      opacity: 0;
+      -webkit-transform: translate3d(100%, 0, 0);
+      transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+  }
+}
+
+.modal-dialog{
+  min-width: 950px;
+}
+
 .blanco {
   position: relative;
   box-shadow: -0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  overflow-y: scroll;
+  max-height: 822px;
+  
 }
+/*
 .blanco:before, .blanco:after {
   content: "";
   position: absolute;
@@ -223,14 +269,19 @@ label {
 .blanco:before {
   z-index: -1;
   background-color: #ffffff;
-  transform: rotate(-2deg);
-  padding: 35px 35px;
-  background-image: url(../images/hoja-c.png);
+
   background-size: cover;
+    width: 100%;
+    background-image: repeating-linear-gradient(white -17px, white 24px, steelblue 25px);
 }
 
 .blanco:after {
   transform: rotate(2deg);
+  z-index: -2;
+  background-color: #ffffff;
+}
+.blanco:after {
+  transform: rotate(-2deg);
   z-index: -2;
   background-color: #ffffff;
 }
@@ -245,7 +296,7 @@ label {
   transform: rotate(0deg);
   transition: 1s;
   width: 99%;
-}
+}*/
 .blanco{
   border-radius: 15px;
   
@@ -267,7 +318,7 @@ label {
 
 /*color check box*/
 .form-check-input:checked {
-  background-color: #a39fff;
+  background-color: #4f3cfb;
   border: 1px solid #3f51b5;
   font-size: 20px;
   margin-right: 5px;
@@ -333,6 +384,10 @@ input {
   outline: none;
 }
 
+input:hover{
+  box-shadow: inset 2px 2px 25px 0px rgba(255, 255, 255, 0.796), 7px 7px 20px 0px #c8d0e779, 4px 4px 5px 0px #c8d0e782 !important;
+}
+
 .d-flex{
   margin-bottom: 15px;
 }
@@ -384,12 +439,12 @@ select {
 
 /* primera fila  */
 tr:nth-child(odd) {
-  background-color: #fbfbfbcf;
+  background-color: #eef8ffc1;
   border-radius: 50px;
 }
 
 tr:nth-child(even) {
-  background-color: #e5fcffdd;
+  background-color: #d9f0ffc1;
 }
 
 th {
@@ -404,7 +459,7 @@ tr:hover {
 }
 
 .card-body{
-  background-color: #f1f2ff;
+  background-color: #5bc3ff26 !important;
   border: 2px solid;
 }
 
@@ -534,13 +589,16 @@ a.topictitle:hover {
   font-size: 13px;
 }
 
-.modal-content {
-  backdrop-filter: blur(15px);
+.modal-content {/*
+  backdrop-filter: blur(15px);*/
   /*
   background-color: #ede4ff6b;*/
   background-color: #fff;
   color: #2d31ae;
+  background-image: repeating-linear-gradient(white -17px, white 24px, steelblue 25px);
 }
+
+
 
 .titulo_hab {
   /* estado */
@@ -595,7 +653,19 @@ a.topictitle:hover {
   /*font-weight: bold;*/
 }
 .modo-nocturno {
-  background-image: linear-gradient(356deg, #fff, #000);
+  background-image: linear-gradient(356deg, #ffffff, #ecf2ff);
+  background: 
+  radial-gradient(18% 28% at 24% 50%,rgb(233, 249, 251) 7%,#073AFF00 100%),
+  radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),
+  radial-gradient(70% 53% at 36% 76%,rgb(228, 252, 254) 0,#073AFF00 100%),
+  radial-gradient(42% 53% at 15% 94%,rgb(233, 248, 241) 7%,#073AFF00 100%),
+  radial-gradient(42% 53% at 34% 72%,rgb(233, 242, 247) 7%,#073AFF00 100%),
+  radial-gradient(18% 28% at 35% 87%,rgb(226, 236, 253) 7%,#073AFF00 100%),
+  radial-gradient(31% 43% at 7% 98%,rgb(245, 238, 255) 24%,#073AFF00 100%),
+  radial-gradient(21% 37% at 72% 23%,#f4edfd9c 24%,#073AFF00 100%),
+  radial-gradient(35% 56% at 91% 74%,#f4effdf5 9%,#073AFF00 100%),
+  radial-gradient(74% 86% at 67% 38%,#f4fff9f5 24%,#073AFF00 100%),
+  linear-gradient(125deg,rgb(234, 246, 255) 1%,rgb(237, 232, 251) 100%);
   background-color: #252954;
 }
 

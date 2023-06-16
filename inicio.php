@@ -69,7 +69,6 @@
               <li></li>
               <li></li>
       </ul>
-</div >
     
       <div class="menu"></div>
       
@@ -82,7 +81,6 @@
       
 
 
-    </div>
     
       <!-- Modal -->
               <div id="caja_herramientas" class="modal fade" role="dialog">
