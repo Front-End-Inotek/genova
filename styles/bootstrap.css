@@ -5656,7 +5656,7 @@ button.list-group-item-danger.active:focus {
 .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > th {
   border-bottom: 0;
 }
-
+/*bordes tabla*/
 .table-bordered>:not(caption)>*>* {
   border-width: 0px 0px !important;
 }

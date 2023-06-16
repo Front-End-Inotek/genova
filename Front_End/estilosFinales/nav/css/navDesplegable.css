@@ -65,7 +65,7 @@ display: none;
   transition: 0.3s;
 }
 .form-check-input:checked + .form-check-label {
-  background: #bface2;
+  background: #8340ff;
 }
 .form-check-input:checked + .form-check-label:after {
   left: calc(100% - 5px);
