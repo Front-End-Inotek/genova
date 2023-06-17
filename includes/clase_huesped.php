@@ -187,12 +187,12 @@
                         </div>
                     </header>
         
-                    <form class="tarjeta-form">
+                    <form class="tarjeta-form" id="form-garantia">
                         <div class="form-content">
                             <div class="form-group">
                               <label for="cardnumber">Numero de tarjeta</label>
                               <div class="input-group">
-                                <input onchange="" type="tel" class="form-control" id="cardnumber" maxlength="20" value="'.$this->numero_tarjeta.'">
+                                <input onchange="" type="number" name="número de tarjeta" class="form-control" id="cardnumber" maxlength="20" value="'.$this->numero_tarjeta.'" required>
                                 <div class="input-group-append">
                                 </div>
                               </div>
@@ -200,7 +200,7 @@
                             <div class="form-group">
                               <label for="cardholder">Nombre en Tarjeta</label>
                               <div class="input-group">
-                                <input  type="text" class="form-control" id="cardholder" maxlength="25" autocorrect="off" spellcheck="false" value="'.$this->titular_tarjeta.'">
+                                <input  type="text" class="form-control" name="nombre en tarjeta" id="cardholder" maxlength="25" autocorrect="off" spellcheck="false" value="'.$this->titular_tarjeta.'" required>
                                 <div class="input-group-append">
                                 </div>
                               </div>
@@ -208,7 +208,7 @@
                             <div class="form-group">
                             <label for="cardnumber">Tipo de tarjeta</label>
                             <div class="input-group">
-                              <input onchange="" placeholder="Mastercard, Visa, American Express, etc..." type="text" class="form-control" id="tipo" maxlength="20" value="'.$this->nombre_tarjeta.'">
+                              <input onchange="" name="tipo de tarjeta" placeholder="Mastercard, Visa, American Express, etc..." type="text" class="form-control" id="tipo" maxlength="20" value="'.$this->nombre_tarjeta.'" required>
                               <div class="input-group-append">
                               </div>
                             </div>
@@ -220,10 +220,10 @@
                                   <div class="input-group expire-date">
                                     <div class="input-group-prepend">
                                     </div>
-                                    <input type="tel" class="form-control" id="expires-month" placeholder="MM" allowed-pattern="[0-9]" maxlength="2" value="'.$this->vencimiento_mes.'">
+                                    <input name="expira (mes)" type="tel" class="form-control" id="expires-month" placeholder="MM" allowed-pattern="[0-9]" maxlength="2" value="'.$this->vencimiento_mes.'" required>
                                     <div class="input-group-prepend divider">
                                     </div>
-                                    <input type="tel" class="form-control" id="expires-year" placeholder="YY" allowed-pattern="[0-9]" maxlength="2"  value="'.$this->vencimiento_ano.'">
+                                    <input name="expira (año)" type="tel" class="form-control" id="expires-year" placeholder="YY" allowed-pattern="[0-9]" maxlength="2"  value="'.$this->vencimiento_ano.'" required>
                                     <div class="input-group-append">
                                     </div>
                                   </div>

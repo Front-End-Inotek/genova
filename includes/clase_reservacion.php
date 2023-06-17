@@ -777,7 +777,7 @@ class Reservacion extends ConexionMYSql
         LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
         INNER JOIN movimiento ON hab.mov = movimiento.id 
         INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id 
-        INNER JOIN tarifa_hospedaje ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
@@ -841,136 +841,8 @@ class Reservacion extends ConexionMYSql
 		<tbody>';
         while ($fila = mysqli_fetch_array($consulta)) {
             if($cont>=$posicion & $cont<$final) {
-                if($fila['edo'] == 1) {
-                    if($fila['total_pago'] <= 0) {
-                        echo '<tr class="text-center">
-					<td>'.$fila['ID'].'</td>
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td>
-					<td>'.$fila['numero_hab'].'</td>
-					<td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>
-					<td>'.$fila['extra_adulto'].'</td>
-					<td>'.$fila['extra_junior'].'</td>
-					<td>'.$fila['extra_infantil'].'</td>
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Abierta</td>';
-
-                        if($agregar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        }
-
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'' . $ruta . '\')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    } else {
-                        echo '<tr class="table-success text-center">
-					<td>'.$fila['ID'].'</td> 
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td> 
-					<td>'.$fila['numero_hab'].'</td> 
-					<td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					<td>'.$fila['extra_adulto'].'</td> 
-					<td>'.$fila['extra_junior'].'</td> 
-					<td>'.$fila['extra_infantil'].'</td> 
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Garantizada</td>';
-                        if($agregar==1 && $fila['edo'] = 1) {
-
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        }
-
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'' . $ruta . '\')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    }
-                } else {
-                    echo '<tr class="table-secondary text-center">
-				  <td>'.$fila['ID'].'</td> 
-				  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-				  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-				  <td>'.$fila['noches'].'</td> 
-				  <td>'.$fila['numero_hab'].'</td> 
-				  <td>'.$fila['habitacion'].'</td>';
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-				  <td>'.$fila['extra_adulto'].'</td> 
-				  <td>'.$fila['extra_junior'].'</td> 
-				  <td>'.$fila['extra_infantil'].'</td> 
-				  <td>'.$fila['extra_menor'].'</td>
-				  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-				  <td>'.$fila['tel'].'</td>';
-                    if($fila['forzar_tarifa']>0) {
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                    } else {
-                        echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                    }
-                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                    echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                    echo '<td>Activa</td>';
-
-                    if($agregar==1 && $fila['fecha_entrada'] == $inicio_dia && $fila['edo'] = 2) {
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].')"> Asignar</button></td>';
-                    }
-
-                    if($agregar==1 && $fila['edo'] = 1) {
-                        //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        echo '<td></td>';
-                    }
-                    //botón para preasignar una habitación.
-                    if($fila['id_hab']==0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
-                    } else {
-                        echo '<td></td>';
-                    }
-                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion(' . $fila['ID'] . ', \'' . $ruta . '\')"> Reporte</button></td>';
-                    if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                    }
-                    if($borrar==1 && $fila['edo'] != 0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                    }
-                    echo '</tr>';
-                }
+              //ddddd
+              $this->construirTabla($fila,$agregar,$editar,$borrar,$inicio_dia);
             }
             $cont++;
         }
@@ -1074,143 +946,7 @@ class Reservacion extends ConexionMYSql
         while ($fila = mysqli_fetch_array($consulta)) {
 
             if($cont>=$posicion & $cont<$final) {
-                if($fila['edo'] == 1) {
-                    if($fila['total_pago'] <= 0) {
-                        echo '<tr class="text-center">
-					<td>'.$fila['ID'].'</td>
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td>
-					<td>'.$fila['numero_hab'].'</td>
-					<td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>
-					<td>'.$fila['extra_adulto'].'</td>
-					<td>'.$fila['extra_junior'].'</td>
-					<td>'.$fila['extra_infantil'].'</td>
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Abierta</td>';
-                        if($agregar==1 && $fila['fecha_entrada'] == $inicio_dia && $fila['edo'] == 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
-                        }
-                        //este abre modal para hacer checkin sin habitacion
-                        // if($agregar==1 && $fila['edo'] == 1) {
-                        //     echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id'].')"> Asignar</button></td>';
-                        // }
-                        if($fila['id_hab']==0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',1)"> Preasignar</button></td>';
-                        } else {
-                            echo '<td></td>';
-                        }
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'' . $ruta . '\')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] == 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    } else {
-                        echo '<tr class="table-success text-center">
-					<td>'.$fila['ID'].'</td> 
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td> 
-					<td>'.$fila['numero_hab'].'</td> 
-					<td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					<td>'.$fila['extra_adulto'].'</td> 
-					<td>'.$fila['extra_junior'].'</td> 
-					<td>'.$fila['extra_infantil'].'</td> 
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Garantizada</td>';
-                        if($agregar==1 && $fila['edo'] = 1) {
-
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        }
-
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'' . $ruta . '\')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    }
-                } else {
-                    echo '<tr class="table-secondary text-center">
-				  <td>'.$fila['ID'].'</td> 
-				  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-				  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-				  <td>'.$fila['noches'].'</td> 
-				  <td>'.$fila['numero_hab'].'</td> 
-				  <td>'.$fila['habitacion'].'</td>';
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-				  <td>'.$fila['extra_adulto'].'</td> 
-				  <td>'.$fila['extra_junior'].'</td> 
-				  <td>'.$fila['extra_infantil'].'</td> 
-				  <td>'.$fila['extra_menor'].'</td>
-				  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-				  <td>'.$fila['tel'].'</td>';
-                    if($fila['forzar_tarifa']>0) {
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                    } else {
-                        echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                    }
-                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                    echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                    echo '<td>Activa</td>';
-
-                    //no se puede hacer chekin en estado 2.
-                    echo '<td></td>';
-
-                    if($agregar==1 && $fila['edo'] == 1) {
-                        //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        echo '<td></td>';
-                    }
-                    //botón para preasignar una habitación.
-                    if($fila['id_hab']==0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
-                    } else {
-                        echo '<td></td>';
-                    }
-                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion(' . $fila['ID'] . ', \'' . $ruta . '\')"> Reporte</button></td>';
-
-                    if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                    }
-                    if($borrar==1 && $fila['edo'] != 0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                    }
-                    echo '</tr>';
-                }
+                $this->construirTabla($fila,$agregar,$editar,$borrar,$inicio_dia);
             }
             $cont++;
         }
@@ -1219,6 +955,150 @@ class Reservacion extends ConexionMYSql
 		</table>
 		</div>';
         return $cat_paginas;
+    }
+
+    public function construirTabla($fila,$agregar,$editar,$borrar,$inicio_dia){
+
+        if($fila['edo'] == 1) {
+            if($fila['total_pago'] <= 0) {
+                echo '<tr class="text-center">
+            <td>'.$fila['ID'].'</td>
+            <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
+            <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+            <td>'.$fila['noches'].'</td>
+            <td>'.$fila['numero_hab'].'</td>
+            <td>'.$fila['habitacion'].'</td>';
+                echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
+                echo '<td>'.$fila['cantidad_hospedaje'].'</td>
+            <td>'.$fila['extra_adulto'].'</td>
+            <td>'.$fila['extra_junior'].'</td>
+            <td>'.$fila['extra_infantil'].'</td>
+            <td>'.$fila['extra_menor'].'</td>
+            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+            <td>'.$fila['tel'].'</td>';
+                if($fila['forzar_tarifa']>0) {
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
+                } else {
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';
+                }
+                echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
+                echo '<td>'.$fila['descripcion'].'</td>';
+                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                echo '<td>Abierta</td>';
+                // echo $fila['fecha_entrada'] . "/" . $inicio_dia;
+                // die();
+                if($agregar==1 && date('Y-m-d', $fila['fecha_entrada']) == date('Y-m-d', $inicio_dia) && $fila['edo'] == 1) {
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
+                } else {
+                    echo '<td></td>';
+                }
+                if($fila['id_hab']==0) {
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
+                } else {
+                    echo '<td>Preasignada '.$fila['id_hab'].'</td>';
+                }
+
+                echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
+                if($editar==1 && $fila['edo'] = 1) {
+                    echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
+                }
+                if($borrar==1 && $fila['edo'] != 0) {
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Cancelar</button></td>';
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrar</button></td>';
+                }
+                echo '</tr>';
+            } else {
+                echo '<tr class="table-success text-center">
+            <td>'.$fila['ID'].'</td> 
+            <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
+            <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+            <td>'.$fila['noches'].'</td> 
+            <td>'.$fila['numero_hab'].'</td> 
+            <td>'.$fila['habitacion'].'</td>';
+                echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
+                echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+            <td>'.$fila['extra_adulto'].'</td> 
+            <td>'.$fila['extra_junior'].'</td> 
+            <td>'.$fila['extra_infantil'].'</td> 
+            <td>'.$fila['extra_menor'].'</td>
+            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+            <td>'.$fila['tel'].'</td>';
+                if($fila['forzar_tarifa']>0) {
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
+                } else {
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';
+                }
+                echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
+                echo '<td>'.$fila['descripcion'].'</td>';
+                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                echo '<td>Garantizada</td>';
+                if($agregar==1 && $fila['edo'] = 1) {
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
+                }
+                if($fila['id_hab']==0) {
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
+                } else {
+                    echo '<td>Preasignada '.$fila['id_hab'].'</td>';
+                }
+
+                echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
+                if($editar==1 && $fila['edo'] = 1) {
+                    echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
+                }
+                if($borrar==1 && $fila['edo'] != 0) {
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Cancelar</button></td>';
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrar</button></td>';
+                }
+                echo '</tr>';
+            }
+        } else {
+            echo '<tr class="table-secondary text-center">
+          <td>'.$fila['ID'].'</td> 
+          <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
+          <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+          <td>'.$fila['noches'].'</td> 
+          <td>'.$fila['numero_hab'].'</td> 
+          <td>'.$fila['habitacion'].'</td>';
+            echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
+            echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+          <td>'.$fila['extra_adulto'].'</td> 
+          <td>'.$fila['extra_junior'].'</td> 
+          <td>'.$fila['extra_infantil'].'</td> 
+          <td>'.$fila['extra_menor'].'</td>
+          <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+          <td>'.$fila['tel'].'</td>';
+            if($fila['forzar_tarifa']>0) {
+                echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
+            } else {
+                echo '<td>$'.number_format($fila['total'], 2).'</td>';
+            }
+            echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
+            echo '<td>'.$fila['descripcion'].'</td>';
+            echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+            echo '<td>Activa</td>';
+            //no se puede hacer chekin en estado 2.
+            echo '<td></td>';
+
+            // if($agregar==1 && $fila['edo'] = 1) {
+            //     //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
+            //     echo '<td></td>';
+            // }
+            //botón para preasignar una habitación.
+            if($fila['id_hab']==0) {
+                echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
+            } else {
+                echo '<td></td>';
+            }
+            echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'regresar_reservacion()\', \'CHECK-IN\')"> Reporte</button></td>';
+            if($editar==1 && $fila['edo'] = 1) {
+                echo '<td><button class="btn btn-warning" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].')"> Editar</button></td>';
+            }
+            if($borrar==1 && $fila['edo'] != 0) {
+                echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
+                echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
+            }
+            echo '</tr>';
+        }
     }
 
     // Mostramos las reservaciones
@@ -1258,6 +1138,8 @@ class Reservacion extends ConexionMYSql
         if($extra>0) {
             $cat_paginas++;
         }
+
+      
 
         //se recibe la consulta y se convierte a arreglo
         //<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
@@ -1310,146 +1192,8 @@ class Reservacion extends ConexionMYSql
 		<tbody>';
         while ($fila = mysqli_fetch_array($consulta)) {
             if($cont>=$posicion & $cont<$final) {
-                if($fila['edo'] == 1) {
-                    if($fila['total_pago'] <= 0) {
-                        echo '<tr class="text-center">
-					<td>'.$fila['ID'].'</td>
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td>
-					<td>'.$fila['numero_hab'].'</td>
-					<td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>
-					<td>'.$fila['extra_adulto'].'</td>
-					<td>'.$fila['extra_junior'].'</td>
-					<td>'.$fila['extra_infantil'].'</td>
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Abierta</td>';
-                        // echo $fila['fecha_entrada'] . "/" . $inicio_dia;
-                        // die();
-                        if($agregar==1 && date('Y-m-d', $fila['fecha_entrada']) == date('Y-m-d', $inicio_dia) && $fila['edo'] == 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
-                        } else {
-                            echo '<td></td>';
-                        }
-                        if($fila['id_hab']==0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
-                        } else {
-                            echo '<td>Preasignada '.$fila['id_hab'].'</td>';
-                        }
 
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    } else {
-                        echo '<tr class="table-success text-center">
-					<td>'.$fila['ID'].'</td> 
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td> 
-					<td>'.$fila['numero_hab'].'</td> 
-					<td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					<td>'.$fila['extra_adulto'].'</td> 
-					<td>'.$fila['extra_junior'].'</td> 
-					<td>'.$fila['extra_infantil'].'</td> 
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Garantizada</td>';
-                        if($agregar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignarx</button></td>';
-                        }
-                        if($fila['id_hab']==0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
-                        } else {
-                            echo '<td>Preasignada '.$fila['id_hab'].'</td>';
-                        }
-
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    }
-                } else {
-                    echo '<tr class="table-secondary text-center">
-				  <td>'.$fila['ID'].'</td> 
-				  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-				  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-				  <td>'.$fila['noches'].'</td> 
-				  <td>'.$fila['numero_hab'].'</td> 
-				  <td>'.$fila['habitacion'].'</td>';
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-				  <td>'.$fila['extra_adulto'].'</td> 
-				  <td>'.$fila['extra_junior'].'</td> 
-				  <td>'.$fila['extra_infantil'].'</td> 
-				  <td>'.$fila['extra_menor'].'</td>
-				  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-				  <td>'.$fila['tel'].'</td>';
-                    if($fila['forzar_tarifa']>0) {
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                    } else {
-                        echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                    }
-                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                    echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                    echo '<td>Activa</td>';
-                    //no se puede hacer chekin en estado 2.
-                    echo '<td></td>';
-
-                    // if($agregar==1 && $fila['edo'] = 1) {
-                    //     //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                    //     echo '<td></td>';
-                    // }
-                    //botón para preasignar una habitación.
-                    if($fila['id_hab']==0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
-                    } else {
-                        echo '<td></td>';
-                    }
-                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'regresar_reservacion()\', \'CHECK-IN\')"> Reporte</button></td>';
-                    if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].')"> Editar</button></td>';
-                    }
-                    if($borrar==1 && $fila['edo'] != 0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                    }
-                    echo '</tr>';
-                }
+                $this->construirTabla($fila,$agregar,$editar,$borrar,$inicio_dia);
             }
             $cont++;
         }
@@ -1484,7 +1228,7 @@ class Reservacion extends ConexionMYSql
         $ruta="";
         if($opcion == 1) {
             $ruta="ver_reportes_llegadas()";
-            $sentencia="SELECT *,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            $sentencia="SELECT *, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM reservacion
             LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
             INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
@@ -1497,7 +1241,7 @@ class Reservacion extends ConexionMYSql
 
         } else {
             $ruta="ver_reportes_salidas()";
-            $sentencia="SELECT *,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            $sentencia="SELECT *, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM hab 
             LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
             INNER JOIN movimiento ON hab.mov = movimiento.id 
@@ -1552,121 +1296,8 @@ class Reservacion extends ConexionMYSql
 			  </thead>
 			<tbody>';
         while ($fila = mysqli_fetch_array($consulta)) {
-            if($fila['edo'] == 1) {
-                if($fila['total_pago'] <= 0) {
-                    echo '<tr class="text-center">
-					  <td>'.$fila['ID'].'</td> 
-					  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					  <td>'.$fila['noches'].'</td> 
-					  <td>'.$fila['numero_hab'].'</td> 
-					  <td>'.$fila['habitacion'].'</td>';
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					  <td>'.$fila['extra_adulto'].'</td> 
-					  <td>'.$fila['extra_junior'].'</td> 
-					  <td>'.$fila['extra_infantil'].'</td> 
-					  <td>'.$fila['extra_menor'].'</td>
-					  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					  <td>'.$fila['tel'].'</td>';
-                    if($fila['forzar_tarifa']>0) {
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                    } else {
-                        echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                    }
-                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                    echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                    echo '<td>Abierta</td>';
-                    if($agregar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                    }
-                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'' . $ruta . '\')"> Reporte</button></td>';
-                    if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                    }
-                    if($borrar==1 && $fila['edo'] != 0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                    }
-                    echo '</tr>';
-                } else {
-                    echo '<tr class="table-success text-center">
-					  <td>'.$fila['ID'].'</td> 
-					  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					  <td>'.$fila['noches'].'</td> 
-					  <td>'.$fila['numero_hab'].'</td> 
-					  <td>'.$fila['habitacion'].'</td>';
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					  <td>'.$fila['extra_adulto'].'</td> 
-					  <td>'.$fila['extra_junior'].'</td> 
-					  <td>'.$fila['extra_infantil'].'</td> 
-					  <td>'.$fila['extra_menor'].'</td>
-					  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					  <td>'.$fila['tel'].'</td>';
-                    if($fila['forzar_tarifa']>0) {
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                    } else {
-                        echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                    }
-                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                    echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                    echo '<td>Garantizada</td>';
-                    if($agregar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                    }
-                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'' . $ruta . '\')"> Reporte</button></td>';
-                    if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                    }
-                    if($borrar==1 && $fila['edo'] != 0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                    }
-                    echo '</tr>';
-                }
-            } else {
-                echo '<tr class="table-secondary text-center">
-					<td>'.$fila['ID'].'</td> 
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td> 
-					<td>'.$fila['numero_hab'].'</td> 
-					<td>'.$fila['habitacion'].'</td>';
-                echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					<td>'.$fila['extra_adulto'].'</td> 
-					<td>'.$fila['extra_junior'].'</td> 
-					<td>'.$fila['extra_infantil'].'</td> 
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                if($fila['forzar_tarifa']>0) {
-                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                } else {
-                    echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                }
-                echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                echo '<td>'.$fila['descripcion'].'</td>';
-                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                echo '<td>Activa</td>';
-                if($agregar==1 && $fila['edo'] = 1) {
-                    //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                    echo '<td></td>';
-                }
-                echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \'' . $ruta . '\')"> Reporte</button></td>';
-                if($editar==1 && $fila['edo'] = 1) {
-                    echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                }
-                if($borrar==1 && $fila['edo'] != 0) {
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                }
-                echo '</tr>';
-            }
+            //kkkk
+            $this->construirTabla($fila,$agregar,$editar,$borrar,$inicio_dia);
         }
 
         echo '
@@ -1684,6 +1315,9 @@ class Reservacion extends ConexionMYSql
         $agregar = $usuario->reservacion_agregar;
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
+        date_default_timezone_set('America/Mexico_City');
+        $inicio_dia= date("d-m-Y");
+        $inicio_dia= strtotime($inicio_dia);
         /*date_default_timezone_set('America/Mexico_City');
         $inicio_dia = date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
@@ -1693,14 +1327,14 @@ class Reservacion extends ConexionMYSql
         if(strlen($a_buscar) == 0) {
             $cat_paginas = $this->mostrar(1, $id);
         } else {
-            $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-		  FROM reservacion
-		--   INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
-		  INNER JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
-		  INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
-		  INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-		  INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-		  INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || huesped.telefono LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.id DESC";//|| reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%'
+            $sentencia = "SELECT *, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            FROM reservacion
+            LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+            INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
+            LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+            INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+            INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || huesped.telefono LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.id DESC";//|| reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%'
             $comentario="Mostrar diferentes busquedas en ver reservaciones";
             $consulta= $this->realizaConsulta($sentencia, $comentario);
             //se recibe la consulta y se convierte a arreglo
@@ -1743,121 +1377,7 @@ class Reservacion extends ConexionMYSql
 			  </thead>
 			<tbody>';
             while ($fila = mysqli_fetch_array($consulta)) {
-                if($fila['edo'] == 1) {
-                    if($fila['total_pago'] <= 0) {
-                        echo '<tr class="text-center">
-					  <td>'.$fila['ID'].'</td> 
-					  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					  <td>'.$fila['noches'].'</td> 
-					  <td>'.$fila['numero_hab'].'</td> 
-					  <td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					  <td>'.$fila['extra_adulto'].'</td> 
-					  <td>'.$fila['extra_junior'].'</td> 
-					  <td>'.$fila['extra_infantil'].'</td> 
-					  <td>'.$fila['extra_menor'].'</td>
-					  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					  <td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Abierta</td>';
-                        if($agregar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        }
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    } else {
-                        echo '<tr class="table-success text-center">
-					  <td>'.$fila['ID'].'</td> 
-					  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					  <td>'.$fila['noches'].'</td> 
-					  <td>'.$fila['numero_hab'].'</td> 
-					  <td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					  <td>'.$fila['extra_adulto'].'</td> 
-					  <td>'.$fila['extra_junior'].'</td> 
-					  <td>'.$fila['extra_infantil'].'</td> 
-					  <td>'.$fila['extra_menor'].'</td>
-					  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					  <td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Garantizada</td>';
-                        if($agregar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        }
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    }
-                } else {
-                    echo '<tr class="table-secondary text-center">
-					<td>'.$fila['ID'].'</td> 
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td> 
-					<td>'.$fila['numero_hab'].'</td> 
-					<td>'.$fila['habitacion'].'</td>';
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					<td>'.$fila['extra_adulto'].'</td> 
-					<td>'.$fila['extra_junior'].'</td> 
-					<td>'.$fila['extra_infantil'].'</td> 
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                    if($fila['forzar_tarifa']>0) {
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                    } else {
-                        echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                    }
-                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                    echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                    echo '<td>Activa</td>';
-                    if($agregar==1 && $fila['edo'] = 1) {
-                        //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        echo '<td></td>';
-                    }
-                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
-                    if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                    }
-                    if($borrar==1 && $fila['edo'] != 0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                    }
-                    echo '</tr>';
-                }
+                $this->construirTabla($fila,$agregar,$editar,$borrar,$inicio_dia);
             }
         }
         echo '
@@ -1879,25 +1399,31 @@ class Reservacion extends ConexionMYSql
         $fecha_ini= strtotime($fecha_ini_tiempo);
         $fecha_fin= strtotime($fecha_fin_tiempo);
 
+        $inicio_dia= date("d-m-Y");
+        $inicio_dia= strtotime($inicio_dia);
 
 
         if($a_buscar == ' ' && strlen($fecha_ini) == 0 && strlen($fecha_fin) == 0) {
             $cat_paginas = $this->mostrar(1, $id);
         } else {
             if($a_buscar != ' ') {
-                $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-			FROM reservacion
-			INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
-			INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-			INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-			INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.id DESC";
+                $sentencia = "SELECT *, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                FROM reservacion
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+                INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
+                LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+                INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.id DESC";
             } elseif($a_buscar != ' ' && strlen($fecha_ini) > 0 && strlen($fecha_fin) > 0 && $combinada == 1) {
-                $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-			FROM reservacion
-			INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
-			INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-			INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-			INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+                $sentencia = "SELECT *, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                FROM reservacion
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+                INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
+                LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+                INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
             } else {
 
                 //old
@@ -1908,10 +1434,11 @@ class Reservacion extends ConexionMYSql
                 // INNER JOIN huesped ON reservacion.id_huesped = huesped.id
                 // INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
 
-                $sentencia = "SELECT *,reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-			    FROM reservacion
-                INNER JOIN tarifa_hospedaje ON reservacion.tipo_hab = tarifa_hospedaje.id 
-                INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
+                $sentencia = "SELECT *, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                FROM reservacion
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+                INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
+                LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 			    INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 			    INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 			    INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin  && reservacion.fecha_entrada > 0  AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
@@ -1958,121 +1485,7 @@ class Reservacion extends ConexionMYSql
 			</thead>
 		  <tbody>';
             while ($fila = mysqli_fetch_array($consulta)) {
-                if($fila['edo'] == 1) {
-                    if($fila['total_pago'] <= 0) {
-                        echo '<tr class="text-center">
-					<td>'.$fila['ID'].'</td> 
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td> 
-					<td>'.$fila['numero_hab'].'</td> 
-					<td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					<td>'.$fila['extra_adulto'].'</td> 
-					<td>'.$fila['extra_junior'].'</td> 
-					<td>'.$fila['extra_infantil'].'</td> 
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Abierta</td>';
-                        if($agregar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        }
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    } else {
-                        echo '<tr class="table-success text-center">
-					<td>'.$fila['ID'].'</td> 
-					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-					<td>'.$fila['noches'].'</td> 
-					<td>'.$fila['numero_hab'].'</td> 
-					<td>'.$fila['habitacion'].'</td>';
-                        echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-					<td>'.$fila['extra_adulto'].'</td> 
-					<td>'.$fila['extra_junior'].'</td> 
-					<td>'.$fila['extra_infantil'].'</td> 
-					<td>'.$fila['extra_menor'].'</td>
-					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
-                        if($fila['forzar_tarifa']>0) {
-                            echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                        } else {
-                            echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                        }
-                        echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                        echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                        echo '<td>Garantizada</td>';
-                        if($agregar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        }
-                        echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
-                        if($editar==1 && $fila['edo'] = 1) {
-                            echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                        }
-                        if($borrar==1 && $fila['edo'] != 0) {
-                            echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                            echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                        }
-                        echo '</tr>';
-                    }
-                } else {
-                    echo '<tr class="table-secondary text-center">
-				  <td>'.$fila['ID'].'</td> 
-				  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
-				  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
-				  <td>'.$fila['noches'].'</td> 
-				  <td>'.$fila['numero_hab'].'</td> 
-				  <td>'.$fila['habitacion'].'</td>';
-                    echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
-				  <td>'.$fila['extra_adulto'].'</td> 
-				  <td>'.$fila['extra_junior'].'</td> 
-				  <td>'.$fila['extra_infantil'].'</td> 
-				  <td>'.$fila['extra_menor'].'</td>
-				  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-				  <td>'.$fila['tel'].'</td>';
-                    if($fila['forzar_tarifa']>0) {
-                        echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
-                    } else {
-                        echo '<td>$'.number_format($fila['total'], 2).'</td>';
-                    }
-                    echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
-                    echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-                    echo '<td>Activa</td>';
-                    if($agregar==1 && $fila['edo'] = 1) {
-                        //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
-                        echo '<td></td>';
-                    }
-                    echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].')"> Reporte</button></td>';
-                    if($editar==1 && $fila['edo'] = 1) {
-                        echo '<td><button class="btn btn-warning" onclick="editar_reservacion('.$fila['ID'].')"> Editar</button></td>';
-                    }
-                    if($borrar==1 && $fila['edo'] != 0) {
-                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].')"> Cancelar</button></td>';
-                        echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
-                    }
-                    echo '</tr>';
-                }
+                $this->construirTabla($fila,$agregar,$editar,$borrar,$inicio_dia);
             }
         }
         echo '
@@ -2091,19 +1504,21 @@ class Reservacion extends ConexionMYSql
         if($a_buscar != ' ') {
             $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		  FROM reservacion
-		  INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+          LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+          LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		  INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 		  INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 		  INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
         } else {
             $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		  FROM reservacion
-		  INNER JOIN tipo_hab ON reservacion.tipo_hab = tipo_hab.id 
+		  LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+          LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		  INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 		  INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 		  INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
         } //(reservacion.fecha_entrada = $dia || reservacion.fecha_salida <= $salida)
-        //echo $sentencia;
+       
         $comentario="Obtengo el total del porcentaje de ocupacion de las reservaciones por dia";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         while ($fila = mysqli_fetch_array($consulta)) {
@@ -2112,7 +1527,8 @@ class Reservacion extends ConexionMYSql
 
         $sentencia = "SELECT *,count(hab.id) AS cantidad,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
 		FROM hab 
-		INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab = 1 ORDER BY hab.nombre;";
+		INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id 
+        WHERE hab.estado_hab = 1 ORDER BY hab.nombre;";
         //echo $sentencia;
         $comentario="Obtengo el total de las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
@@ -2122,6 +1538,7 @@ class Reservacion extends ConexionMYSql
 
         $porcentaje= ($cantidad / 100) * $numero_hab;
         $porcentaje= round($porcentaje, 1, PHP_ROUND_HALF_UP);
+       
         return $porcentaje;
     }
 

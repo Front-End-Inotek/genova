@@ -296,14 +296,20 @@ function closeModal(){
 
 // Abre la sidebar
 function openNav(){
-    document.getElementById("sideNavigation").style.width = "250px";
+    if( document.getElementById("sideNavigation") != null){
+        document.getElementById("sideNavigation").style.width = "250px";
+    }
     document.getElementById("main").style.marginLeft = "250px";
 }
 
 // Cierra la sidebar
 function closeNav(){
-    document.getElementById("sideNavigation").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
+    if(document.getElementById("sideNavigation") != null){
+        document.getElementById("sideNavigation").style.width = "0";
+    }
+    if(document.getElementById("main") != null){
+        document.getElementById("main").style.marginLeft = "0";
+    }
 }
 
 
@@ -1699,12 +1705,12 @@ function calcular_noches(hab_id=0,preasignada=0){
         console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
-                console.log(res)
+                // console.log(res)
             });       
         }
         // $(".div_adultos").load(include);    
         $("#preasignada").load(include,function(res){
-            console.log(res)
+            // console.log(res)
         });    
      
     }
@@ -2256,6 +2262,10 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
 }
 
 function asignarValorTarjeta(){
+
+    if(!verificarFormulario('form-garantia',"name")){
+        closeModal();
+    }
     $("#nut").val($("#cardnumber").val())
     $("#nt").val($("#cardholder").val())
     $("#nombre_tarjeta").val($("#tipo").val())
@@ -2276,8 +2286,9 @@ function guardarCheck(){
     }
 }
 
-function verificarFormulario() {
-    var form = document.getElementById("form-reserva");
+function verificarFormulario(id_form,field) {
+    
+    var form = document.getElementById(id_form);
     var camposNoValidados = [];
   
     // Recorre todos los elementos del formulario
@@ -2286,7 +2297,12 @@ function verificarFormulario() {
   
       // Verifica si el elemento es un campo requerido y si está vacío
       if (elemento.required && elemento.value === "") {
-        camposNoValidados.push(elemento.id);
+        if(field=="id"){
+            camposNoValidados.push(elemento.id);
+        }else{
+            camposNoValidados.push(elemento.name);
+        }
+        
       }
     }
   
@@ -2311,10 +2327,8 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         alert("Fecha de asignación inválida")
         return false
     }
-    console.log("no here")
-    
 
-    if(!verificarFormulario() ){
+    if(!verificarFormulario("form-reserva","id") ){
         var usuario_id=localStorage.getItem("id");
         var nombre_huesped= document.getElementById("nombre").value;
         var apellido_huesped= document.getElementById("apellido").value;

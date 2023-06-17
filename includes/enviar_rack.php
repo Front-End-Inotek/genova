@@ -207,7 +207,10 @@ setlocale(LC_ALL, "es_ES");
     
                         //Si la habitación actual no está ocupada entra aqui.
                         if ($i == 2 && $fila['estado'] != 1 ) {
-                            echo '
+                              //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
+                            if($contador_row==0){
+                                $adicional=86400;
+                                echo '
                             <td class="celdaCompleta tdCheck " title="nombre huesped">
                                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                                     <div >
@@ -218,8 +221,12 @@ setlocale(LC_ALL, "es_ES");
                                 </div>
                             </td>
                             ';
+                            }
+
+                            
                         //se le suma 1 día para que no tome el dia 'actual'.
-                        $tiempo_aux = time() + 86400;
+                        $tiempo_aux = time() + $adicional;
+                        $c=0;
                         while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
                             $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                             while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
@@ -246,14 +253,32 @@ setlocale(LC_ALL, "es_ES");
                                 ';
                             }else{
     
-                                echo '
-                                <td class="celdaCompleta tdCheck " >';
-                                // echo date('Y-m-d',$tiempo_aux);
-                                echo'
-                                </td>
-                                ';
+                                if ($c == 0 && $fila['estado'] != 1 ) {
+                                    //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
+                                   
+                                        $adicional=86400;
+                                        echo '
+                                    <td class="celdaCompleta tdCheck " title="nombre huesped">
+                                        <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                            <div >
+                                    ';
+                                    echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                    echo '</div>';
+                                    echo '
+                                        </div>
+                                    </td>
+                                    ';
+                                }else{
+                                    echo '
+                                    <td class="celdaCompleta tdCheck " >';
+                                    // echo date('Y-m-d',$tiempo_aux);
+                                    echo'
+                                    </td>
+                                    ';
+                                }
                             }
                                 $tiempo_aux += 86400;
+                                $c++;
                             }
                         }
                         $i=32;

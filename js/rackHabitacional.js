@@ -86,17 +86,17 @@ for (var i = 0; i < celdas.length; i++) {
 
 
 // Se seleccionan todas las clase medioDia
-const medioDias = celda.querySelectorAll('.medioDia');
+// const medioDias = celda.querySelectorAll('.medioDia');
 
-// define una función anónima que recibe dos parámetros, medioDia  y indiceMedioDia.
-medioDias.forEach((medioDia, indiceMedioDia) => {
+// // define una función anónima que recibe dos parámetros, medioDia  y indiceMedioDia.
+// medioDias.forEach((medioDia, indiceMedioDia) => {
 
-    //crea una constante llamada "idMedioDia" que contiene el id separado por un .
-    const idMedioDia = `${indiceCelda + 1}.${indiceMedioDia + 1}`;
+//     //crea una constante llamada "idMedioDia" que contiene el id separado por un .
+//     const idMedioDia = `${indiceCelda + 1}.${indiceMedioDia + 1}`;
 
-    //agrega un atributo "id" con el valor de "idMedioDia" al elemento actual de la iteración "medioDia".
-    medioDia.setAttribute('id', idMedioDia);
-});
+//     //agrega un atributo "id" con el valor de "idMedioDia" al elemento actual de la iteración "medioDia".
+//     medioDia.setAttribute('id', idMedioDia);
+// });
 
 var elementos = document.querySelectorAll(".blanco");
 for (var i = 0; i < elementos.length; i++) {
