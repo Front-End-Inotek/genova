@@ -2605,6 +2605,7 @@ function buscar_llegadas_salidas(e,opcion){
 
 // Barra de diferentes busquedas en ver reservaciones
 function buscar_reservacion(e){
+   
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var usuario_id=localStorage.getItem("id");
     if(a_buscar.length >0){
@@ -2614,7 +2615,10 @@ function buscar_reservacion(e){
         return false;
         if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
     }
-	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+  
+	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
+       
+    });  
 }
 
 // Busqueda por fecha en ver reservaciones
@@ -2710,6 +2714,16 @@ function busqueda_reservacion_combinada_por_dia(){
         $('.pagination').show();
     }
 	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada_por_dia.php?dia="+dia+"&id="+id+"&a_buscar="+a_buscar);
+}
+
+
+//Generar reporte de todas las reservaciones (rango de fechas)
+
+function ver_reservaciones_reporte(){
+    inicial = $("#inicial").val()
+    final = $("#final").val()
+
+    window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final);
 }
 
 // Generar reporte en ver reservaciones por dia

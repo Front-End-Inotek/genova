@@ -114,6 +114,9 @@ class RackHabitacional extends ConexionMYSql
     }
 
     public function calcularWidths($noches_reserva,$noches){
+
+        // echo $noches_reserva ."|". $noches;
+        // die();
         $total_noches = 0;
         $width="";
         $width2="";
@@ -161,7 +164,7 @@ class RackHabitacional extends ConexionMYSql
         $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         WHERE hab.estado_hab = 1  
-        /*AND hab.id=60*/
+        /*AND hab.id=52*/
         ORDER BY id";
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta = $this->realizaConsulta($sentencia, $comentario);
@@ -238,7 +241,6 @@ class RackHabitacional extends ConexionMYSql
             $comentario = "Optenemos las habitaciones para el rack de habitaciones";
             $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
             $contador_row = mysqli_num_rows($consulta_reservaciones);
-           
             $imprimi_ocupadas=false;
 
             //for para cargar los 31  dias dentro de las habitaciones
@@ -277,7 +279,6 @@ class RackHabitacional extends ConexionMYSql
                         ';
                         }
 
-                        
                     //se le suma 1 día para que no tome el dia 'actual'.
                     $tiempo_aux = time() + $adicional;
                     $c=0;
@@ -308,17 +309,16 @@ class RackHabitacional extends ConexionMYSql
                         }else{
                             if ($c == 0 && $fila['estado'] != 1 ) {
                                 //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
-                               
-                                    $adicional=86400;
-                                    echo '
+                                $adicional=86400;
+                                echo '
                                 <td class="celdaCompleta tdCheck " title="nombre huesped">
-                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
-                                        <div >
+                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                <div >
                                 ';
                                 echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
                                 echo '</div>';
                                 echo '
-                                    </div>
+                                </div>
                                 </td>
                                 ';
                             }else{
@@ -329,8 +329,6 @@ class RackHabitacional extends ConexionMYSql
                                 </td>
                                 ';
                             }
-
-                          
                         }
                             $tiempo_aux += 86400;
                             $c++;
@@ -348,26 +346,43 @@ class RackHabitacional extends ConexionMYSql
                         $contador = 0;
                         $imprimi_ocupadas=true;
                         $ocupada=true;
+                        $tiempo_actual = time();
                         //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
                         if($contador_row==0){
-                            $noches++;
-                            $noches_reserva=1;
-                            $widths = $this->calcularWidths($noches_reserva,$noches);
-                            $width = $widths[0];
-                            $width2 = $widths[1];
-                            echo '';
-                            echo '
-                            <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
-                            echo '<div class="ajuste7" style="'.$width.'" href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
-                            ';
-                            echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
-                            echo '</div>';
-                            echo '<div class="ajuste3" style="'.$width2.';">';
-
-                            echo '</div>';
-                            echo'
-                            </td>
-                            ';
+                            //Condición que válida si la fecha actual concide con la ocupada actual.
+                            // if(date('Y-m-d',$tiempo_actual) == date('Y-m-d',$fila['inicio'])){
+                                $noches++;
+                                $noches_reserva=1;
+                                $widths = $this->calcularWidths($noches_reserva,$noches);
+                                $width = $widths[0];
+                                $width2 = $widths[1];
+                                echo '';
+                                echo '
+                                <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
+                                echo '<div class="ajuste7" style="'.$width.'" href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                ';
+                                echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
+                                echo '</div>';
+                                echo '<div class="ajuste3" style="'.$width2.';">';
+    
+                                echo '</div>';
+                                echo'
+                                </td>
+                                ';
+                            // }else{
+                            //     echo '
+                            //     <td class="celdaCompleta tdCheck " title="nombre huesped">
+                            //     <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                            //     <div >
+                            //     ';
+                            //     echo '<section class="task task--disponible-limpia">Disponible</section>';
+                            //     echo '</div>';
+                            //     echo '
+                            //     </div>
+                            //     </td>
+                            //     ';
+                            // }
+                           
                             $i = 32;
                         }else{
                             //aqui van las reservas, fila_r contiene las reservas
@@ -424,9 +439,10 @@ class RackHabitacional extends ConexionMYSql
                                     echo'
                                     </td>
                                     ';
+                                  
 
                                     $existetd=true;
-                                }elseif($current==0) {
+                                }elseif($current==0 ) {
                                     //Este td es para cuando no coicide la fecha de reservación con la ocupada.
                                     //Cuando está ocupada, pero no tiene reserva que conicida.
                                     $noches +=1;
@@ -449,6 +465,11 @@ class RackHabitacional extends ConexionMYSql
                                     </td>
                                     ';
                                     $show=true;
+                                    echo "here";
+                                    die();
+                                   
+                                }else{
+                                 
                                 }
                                 //Si la fecha 'actual' ($tiempo_aux) es igual a la fecha de entrada de la reservación.
                                 //Aqui es para cuando la fecha actual coincide con la fecha de entrada de la reservación.
