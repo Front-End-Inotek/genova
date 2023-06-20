@@ -102,4 +102,3 @@ var elementos = document.querySelectorAll(".blanco");
 for (var i = 0; i < elementos.length; i++) {
   elementos[i].classList.add("efecto");
 }
-
