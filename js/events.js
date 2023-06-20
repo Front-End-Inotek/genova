@@ -121,7 +121,8 @@ function obtener_datos_hab() {
                         console.log('hab_'+hab_info[i]['id']);
                         hab[hab_info[i]['id']]=hab_info[i]['ultimo_mov'];
                         hab_ultimo_mov[hab_info[i]['id']]=hab_info[i]['mov'];
-                        $("#hab_"+hab_info[i]['id']).load("includes/mostrar_cambios_hab.php?hab_id="+hab_info[i]['id']);
+                        $("#hab_"+hab_info[i]['id']).load("includes/mostrar_cambios_hab.php?hab_id="+hab_info[i]['id'],function(res){
+                        });
                         /*const collection = document.getElementById("hab_"+hab_info[i]['id']);
                         collection.innerHTML = '<button id="submit">Submit</button>';*/
 
@@ -295,14 +296,20 @@ function closeModal(){
 
 // Abre la sidebar
 function openNav(){
-    document.getElementById("sideNavigation").style.width = "250px";
+    if( document.getElementById("sideNavigation") != null){
+        document.getElementById("sideNavigation").style.width = "250px";
+    }
     document.getElementById("main").style.marginLeft = "250px";
 }
 
 // Cierra la sidebar
 function closeNav(){
-    document.getElementById("sideNavigation").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
+    if(document.getElementById("sideNavigation") != null){
+        document.getElementById("sideNavigation").style.width = "0";
+    }
+    if(document.getElementById("main") != null){
+        document.getElementById("main").style.marginLeft = "0";
+    }
 }
 
 
@@ -1698,12 +1705,12 @@ function calcular_noches(hab_id=0,preasignada=0){
         console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
-                console.log(res)
+                // console.log(res)
             });       
         }
         // $(".div_adultos").load(include);    
         $("#preasignada").load(include,function(res){
-            console.log(res)
+            // console.log(res)
         });    
      
     }
@@ -2255,6 +2262,10 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
 }
 
 function asignarValorTarjeta(){
+
+    if(!verificarFormulario('form-garantia',"name")){
+        closeModal();
+    }
     $("#nut").val($("#cardnumber").val())
     $("#nt").val($("#cardholder").val())
     $("#nombre_tarjeta").val($("#tipo").val())
@@ -2275,8 +2286,9 @@ function guardarCheck(){
     }
 }
 
-function verificarFormulario() {
-    var form = document.getElementById("form-reserva");
+function verificarFormulario(id_form,field) {
+    
+    var form = document.getElementById(id_form);
     var camposNoValidados = [];
   
     // Recorre todos los elementos del formulario
@@ -2285,7 +2297,12 @@ function verificarFormulario() {
   
       // Verifica si el elemento es un campo requerido y si está vacío
       if (elemento.required && elemento.value === "") {
-        camposNoValidados.push(elemento.id);
+        if(field=="id"){
+            camposNoValidados.push(elemento.id);
+        }else{
+            camposNoValidados.push(elemento.name);
+        }
+        
       }
     }
   
@@ -2310,10 +2327,8 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         alert("Fecha de asignación inválida")
         return false
     }
-    console.log("no here")
-    
 
-    if(!verificarFormulario() ){
+    if(!verificarFormulario("form-reserva","id") ){
         var usuario_id=localStorage.getItem("id");
         var nombre_huesped= document.getElementById("nombre").value;
         var apellido_huesped= document.getElementById("apellido").value;
@@ -2590,6 +2605,7 @@ function buscar_llegadas_salidas(e,opcion){
 
 // Barra de diferentes busquedas en ver reservaciones
 function buscar_reservacion(e){
+   
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var usuario_id=localStorage.getItem("id");
     if(a_buscar.length >0){
@@ -2599,7 +2615,10 @@ function buscar_reservacion(e){
         return false;
         if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
     }
-	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+  
+	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
+       
+    });  
 }
 
 // Busqueda por fecha en ver reservaciones
@@ -2695,6 +2714,16 @@ function busqueda_reservacion_combinada_por_dia(){
         $('.pagination').show();
     }
 	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada_por_dia.php?dia="+dia+"&id="+id+"&a_buscar="+a_buscar);
+}
+
+
+//Generar reporte de todas las reservaciones (rango de fechas)
+
+function ver_reservaciones_reporte(){
+    inicial = $("#inicial").val()
+    final = $("#final").val()
+
+    window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final);
 }
 
 // Generar reporte en ver reservaciones por dia
@@ -2963,6 +2992,8 @@ function cancelar_reservacion(id,preasignada=0){
                 "usuario_id": usuario_id,
                 "preasignada":preasignada,
             };
+        // console.log(datos)
+        // return
         $.ajax({
                 async:true,
                 type: "POST",

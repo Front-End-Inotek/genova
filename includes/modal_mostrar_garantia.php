@@ -26,7 +26,7 @@
     </div>  
 
     <div class="modal-footer" id="boton_asignar_huesped">
-      <button class="btn btn-success" onclick="asignarValorTarjeta()" data-dismiss="modal"><span>Listo</span></button>
+      <button class="btn btn-success" onclick="asignarValorTarjeta()" ><span>Listo</span></button>
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
     </div>
   </div>';

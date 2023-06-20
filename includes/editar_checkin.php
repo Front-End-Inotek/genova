@@ -312,7 +312,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     echo'
                     </select>
                 </div>
-               
                 <div class="form-group col-md-4">
                 <label for="forma-garantia">Forma de Garantía</label>
                 <button id="btngarantia"  class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
@@ -323,8 +322,9 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <label for="persona-reserva">Persona que reserva</label>
                 <input type="text" class="form-control" id="persona-reserva" required value="'.$reservacion->nombre_reserva.'">
                 </div>';
+                }else{
+                    echo ' <div class="form-group col-md-4"></div>';
                 }
-
                 echo '
             </div>
             <div class="form-group col-md-6" id="div_voucher" style="display:none">

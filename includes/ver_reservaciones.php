@@ -29,6 +29,11 @@
                 Por día
               </button>
             </div>
+            <div class="col-sm-1">
+              <button class="btn btn-primary btn-block btn-default" onclick="ver_reservaciones_reporte()">
+                Reporte
+              </button>
+            </div>
 
           </div><br>
           <div id="paginacion_reservaciones">';

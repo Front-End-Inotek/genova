@@ -30,7 +30,7 @@ $ultimo_id = $reservacion->obtener_ultimo_id() /*+ 1*/;
 echo '<div class="container-fluid blanco" style="width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
-        <form onsubmit="event.preventDefault(); " id="form-reserva">
+        <form onsubmit="event.preventDefault();" id="form-reserva">
         <div class="div_adultos"></div>
         <h2 class="titulo">'.$titulo_.'</h2> <br>
             <div class="d-flex justify-content-end">

@@ -37,7 +37,7 @@ date_default_timezone_set('America/Mexico_City');
 $habitaciones = array(
     array('id' => 1, 'estado' => 'ocupada', 'fecha_entrada' => '2023-06-08', 'fecha_salida' => '2023-06-10'),
     array('id' => 2, 'estado' => 'reservada', 'fecha_entrada' => '2023-06-10', 'fecha_salida' => '2023-06-12'),
-    array('id' => 3, 'estado' => 'ocupada', 'fecha_entrada' => '2023-06-08', 'fecha_salida' => '2023-06-12'),
+    array('id' => 3, 'estado' => 'ocupada', 'fecha_entrada' => '2023-06-16', 'fecha_salida' => '2023-06-17'),
     array('id' => 4, 'estado' => 'reservada', 'fecha_entrada' => '2023-06-16', 'fecha_salida' => '2023-06-17'),
     // array('id_habitacion' => 4, 'estado' => 'reservada', 'fecha_reservacion' => '2023-06-17', 'fecha_entrada' => '2023-06-15'),
 );
@@ -92,13 +92,17 @@ foreach ($habitaciones as $idHabitacion => $reservacion) {
     for ($i = 0; $i <= 29; $i++) {
     while(date('Y-m-d', $tiempo_aux) < $reservacion['fecha_salida']) {
         if(date('Y-m-d', $tiempo_aux) == $reservacion['fecha_entrada']){
-            echo '<div class="grid-item ocupada" style="border:0px;">' . date('Y-m-d', $tiempo_aux) . '</div>';
+            echo '<div class="grid-item ocupada" style="border:0px; border-bottom:1px solid black">' . date('Y-m-d', $tiempo_aux) . '</div>';
             if(true){
-                echo '<div class="grid-item ocupada" style="border:0px; width:12%;">' . date('Y-m-d', $tiempo_aux) . '
+                echo '<div class="grid-item ocupada" style="border:0px; border-bottom:1px solid black; width:12%;">' . date('Y-m-d', $tiempo_aux) . '
                 </div>';
 
            
             }else{
+                // if(true){
+                //     echo '<div class="grid-item ocupada" style="border:0px; width:12%;">' . date('Y-m-d', $tiempo_aux) . '
+                //     </div>';
+                // }
                 echo '<div class="grid-item ocupada" style="border:0px;">' . date('Y-m-d', $tiempo_aux) . '</div>';
             }
            

@@ -114,6 +114,9 @@ class RackHabitacional extends ConexionMYSql
     }
 
     public function calcularWidths($noches_reserva,$noches){
+
+        // echo $noches_reserva ."|". $noches;
+        // die();
         $total_noches = 0;
         $width="";
         $width2="";
@@ -161,7 +164,7 @@ class RackHabitacional extends ConexionMYSql
         $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         WHERE hab.estado_hab = 1  
-        /*AND hab.id=60*/
+        /*AND hab.id=52*/
         ORDER BY id";
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta = $this->realizaConsulta($sentencia, $comentario);
@@ -270,7 +273,6 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
             $comentario = "Optenemos las habitaciones para el rack de habitaciones";
             $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
             $contador_row = mysqli_num_rows($consulta_reservaciones);
-           
             $imprimi_ocupadas=false;
 
             //for para cargar los 31  dias dentro de las habitaciones
@@ -289,10 +291,14 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
                     $tiempo += 86400;
                     $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1,$fila['interno']);
                     $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2,$fila['interno']);
+                    $adicional =0;
 
                     //Si la habitación actual no está ocupada entra aqui.
                     if ($i == 2 && $fila['estado'] != 1 ) {
-                        echo '
+                        //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
+                        if($contador_row==0){
+                            $adicional=86400;
+                            echo '
                         <td class="celdaCompleta tdCheck " title="nombre huesped">
                             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                                 <div >
@@ -303,8 +309,11 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
                             </div>
                         </td>
                         ';
+                        }
+
                     //se le suma 1 día para que no tome el dia 'actual'.
-                    $tiempo_aux = time() + 86400;
+                    $tiempo_aux = time() + $adicional;
+                    $c=0;
                     while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
                         $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                         while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
@@ -330,19 +339,35 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
                                 </td>
                             ';
                         }else{
-
-                            echo '
-                            <td class="celdaCompleta tdCheck " >';
-                            // echo date('Y-m-d',$tiempo_aux);
-                            echo'
-                            </td>
-                            ';
+                            if ($c == 0 && $fila['estado'] != 1 ) {
+                                //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
+                                $adicional=86400;
+                                echo '
+                                <td class="celdaCompleta tdCheck " title="nombre huesped">
+                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                <div >
+                                ';
+                                echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                echo '</div>';
+                                echo '
+                                </div>
+                                </td>
+                                ';
+                            }else{
+                                echo '
+                                <td class="celdaCompleta tdCheck " >';
+                                // echo date('Y-m-d',$tiempo_aux);
+                                echo'
+                                </td>
+                                ';
+                            }
                         }
                             $tiempo_aux += 86400;
+                            $c++;
                         }
                     }
                     $i=32;
-
+                    // die();
                     } else {
                         //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
                         $earlier = new DateTime(date('Y-m-d'));
@@ -353,26 +378,43 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
                         $contador = 0;
                         $imprimi_ocupadas=true;
                         $ocupada=true;
+                        $tiempo_actual = time();
                         //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
                         if($contador_row==0){
-                            $noches++;
-                            $noches_reserva=1;
-                            $widths = $this->calcularWidths($noches_reserva,$noches);
-                            $width = $widths[0];
-                            $width2 = $widths[1];
-                            echo '';
-                            echo '
-                            <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
-                            echo '<div class="ajuste7" style="'.$width.'" href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
-                            ';
-                            echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
-                            echo '</div>';
-                            echo '<div class="ajuste3" style="'.$width2.';">';
-
-                            echo '</div>';
-                            echo'
-                            </td>
-                            ';
+                            //Condición que válida si la fecha actual concide con la ocupada actual.
+                            // if(date('Y-m-d',$tiempo_actual) == date('Y-m-d',$fila['inicio'])){
+                                $noches++;
+                                $noches_reserva=1;
+                                $widths = $this->calcularWidths($noches_reserva,$noches);
+                                $width = $widths[0];
+                                $width2 = $widths[1];
+                                echo '';
+                                echo '
+                                <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
+                                echo '<div class="ajuste7" style="'.$width.'" href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                ';
+                                echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
+                                echo '</div>';
+                                echo '<div class="ajuste3" style="'.$width2.';">';
+    
+                                echo '</div>';
+                                echo'
+                                </td>
+                                ';
+                            // }else{
+                            //     echo '
+                            //     <td class="celdaCompleta tdCheck " title="nombre huesped">
+                            //     <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                            //     <div >
+                            //     ';
+                            //     echo '<section class="task task--disponible-limpia">Disponible</section>';
+                            //     echo '</div>';
+                            //     echo '
+                            //     </div>
+                            //     </td>
+                            //     ';
+                            // }
+                           
                             $i = 32;
                         }else{
                             //aqui van las reservas, fila_r contiene las reservas
@@ -429,9 +471,10 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
                                     echo'
                                     </td>
                                     ';
+                                  
 
                                     $existetd=true;
-                                }elseif($current==0) {
+                                }elseif($current==0 ) {
                                     //Este td es para cuando no coicide la fecha de reservación con la ocupada.
                                     //Cuando está ocupada, pero no tiene reserva que conicida.
                                     $noches +=1;
@@ -454,6 +497,11 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
                                     </td>
                                     ';
                                     $show=true;
+                                    echo "here";
+                                    die();
+                                   
+                                }else{
+                                 
                                 }
                                 //Si la fecha 'actual' ($tiempo_aux) es igual a la fecha de entrada de la reservación.
                                 //Aqui es para cuando la fecha actual coincide con la fecha de entrada de la reservación.
@@ -552,8 +600,8 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
                                         echo '<div class="ajuste8" onclick="" >
                                         ';
                                         echo '<section class="" style="border-left:0px;"></section>';
-                                        echo date('Y-m-d',$tiempo_aux);
-                                        echo $noches_reserva;
+                                        // echo date('Y-m-d',$tiempo_aux);
+                                        // echo $noches_reserva;
                                         echo '</div>';
                                         // $tiempo_aux+=86400;
                                         // $existetd=false;
@@ -590,7 +638,7 @@ viewBox="0 24 200 8" preserveAspectRatio="none" shape-rendering="auto">
                                             //Como no existe el existe el td y la fecha de entrada de la reserva no es igual al tiempo actual, imprime un td vacío.
                                             echo '
                                             <td class="celdaCompleta tdCheck ">';
-                                            echo date('Y-m-d',$tiempo_aux);
+                                            // echo date('Y-m-d',$tiempo_aux);
 
                                             echo'
                                             </td>

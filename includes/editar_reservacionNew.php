@@ -295,10 +295,19 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <input type="text" class="form-control" id="correo" value="'.$huesped->correo.'">
                 </div>
                 <div class="form-group col-md-2">
-                <label for="confirmacion">Confirmación</label>
-                <input type="checkbox" id="confirmacion"  class="form-check"/>
-                </select>
-            </div>
+                    <label for="confirmacion">Confirmación</label>
+                    <div class="checkbox-container">
+                    <input type="radio" name="rdo" id="yes" checked/>
+                    <input type="radio" name="rdo" id="no" />
+                    <div class="switch">
+                        <label for="yes">Si</label>
+                        <label for="no">No</label>
+                        <span></span>
+                    </div>
+                    <input type="checkbox" id="confirmacion"  class="form-check"/>
+                    </div>
+                  
+                </div>
             </div>
             <div class="d-flex justify-content-between">
                 
