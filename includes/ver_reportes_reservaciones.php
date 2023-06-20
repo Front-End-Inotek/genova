@@ -9,6 +9,8 @@
 
   $inicial = urldecode($inicial);
 
+  $a_buscar = urldecode($_GET['a_buscar']);
+
 
   // print_r($inicial);
 
@@ -17,7 +19,7 @@
           <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">'.$titulo.'</h2></div>
     
           <div id="paginacion_reservaciones">';
-          $cat_paginas = $reservacion->mostrar_reportes_reservas(1,$_GET['usuario_id'],$opcion,$inicial);
+          $cat_paginas = $reservacion->mostrar_reportes_reservas(1,$_GET['usuario_id'],$opcion,$inicial,$a_buscar);
   echo '
           </div>
          </div>';

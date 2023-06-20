@@ -116,7 +116,7 @@
 
   $inicio_dia= strtotime($inicio_dia);
 
-  $consulta = $reservacion->seleccion_reporte($_GET['inicial'],$inicio_dia,$_GET['opcion']);
+  $consulta = $reservacion->seleccion_reporte($_GET['inicial'],$inicio_dia,$_GET['opcion'],$_GET['a_buscar']);
   // Revisamos las reservaciones por dia
   while ($fila = mysqli_fetch_array($consulta))
   {

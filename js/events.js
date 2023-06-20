@@ -2580,45 +2580,58 @@ function ver_reservaciones_paginacion(buton,posicion,caso=0){
 
 // Barra de diferentes busquedas en ver llegadas
 function buscar_llegadas_salidas(e,opcion){
+    setTimeout(() => {
+        var a_buscar=encodeURIComponent($("#a_buscar").val());
+        var usuario_id=localStorage.getItem("id");
+        var inicial = $("#inicial").val()
+        var final = $("#final").val()
+    
+        if(inicial==undefined){
+            inicial="";
+        }
+        final = $("#final").val()
+        if(final==undefined){
+            final="";
+        }
+        funcion_php="";
+        funcion_buscar="";
+        if(opcion==1){
+            funcion_php="ver_llegadas.php"
+            funcion_buscar = "buscar_llegadas.php"
+        }else{
+            funcion_php ="ver_salidas.php"
+            funcion_buscar = "buscar_salidas.php"
+        }
+        if(a_buscar.length >0){
+            $('.pagination').hide();
+        }else{
+            //$('.pagination').show();
+            // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+0); return false; }
+        }
+     
+        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion+"&final="+final);  
+    }, "1000");
    
-    var a_buscar=encodeURIComponent($("#a_buscar").val());
-    var usuario_id=localStorage.getItem("id");
-    var inicial = $("#inicial").val()
-    funcion_php="";
-    funcion_buscar="";
-    if(opcion==1){
-        funcion_php="ver_llegadas.php"
-        funcion_buscar = "buscar_llegadas.php"
-    }else{
-        funcion_php ="ver_salidas.php"
-        funcion_buscar = "buscar_salidas.php"
-    }
-    if(a_buscar.length >0){
-        $('.pagination').hide();
-    }else{
-        //$('.pagination').show();
-        if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+0); return false; }
-    }
- 
-	$("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion);  
 }
 
 // Barra de diferentes busquedas en ver reservaciones
 function buscar_reservacion(e){
+    setTimeout(() => {
+        var a_buscar=encodeURIComponent($("#a_buscar").val());
+        var usuario_id=localStorage.getItem("id");
+        if(a_buscar.length >0){
+            $('.pagination').hide();
+        }else{
+            $('.pagination').show();
+            // return false;
+            // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
+        }
+        console.log(a_buscar)
+        $("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
+           
+        });  
+      }, "1000");
    
-    var a_buscar=encodeURIComponent($("#a_buscar").val());
-    var usuario_id=localStorage.getItem("id");
-    if(a_buscar.length >0){
-        $('.pagination').hide();
-    }else{
-        $('.pagination').show();
-        return false;
-        if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
-    }
-  
-	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
-       
-    });  
 }
 
 // Busqueda por fecha en ver reservaciones
@@ -2720,10 +2733,11 @@ function busqueda_reservacion_combinada_por_dia(){
 //Generar reporte de todas las reservaciones (rango de fechas)
 
 function ver_reservaciones_reporte(){
+    var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()
     final = $("#final").val()
 
-    window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final);
+    window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final+"&usuario_id="+usuario_id);
 }
 
 // Generar reporte en ver reservaciones por dia
@@ -6437,20 +6451,22 @@ function ver_reportes_salidas(btn=0){
     inicial = $("#inicial").val()
     if(inicial==undefined){
         inicial="";
-        //ver_reportes_salidas
+    }
+    final = $("#final").val()
+    if(final==undefined){
+        final="";
     }
     if(btn==0){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/ver_salidas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn);
+        $("#area_trabajo_menu").load("includes/ver_salidas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
         closeModal();
         closeNav();
     }else{
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
-        var inicial = $("#inicial").val()
-        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2);  
+        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final);  
     }
 }
 
@@ -6485,6 +6501,11 @@ function imprimir_reportes(opcion){
         inicial="";
     }
     inicial = encodeURIComponent(inicial)
+    a_buscar = $("#a_buscar").val()
+    if(a_buscar==undefined){
+        a_buscar="";
+    }
+    a_buscar = encodeURIComponent(a_buscar)
     switch (opcion ) {
         case 1:
             titulo="LLEGADAS PROBABLES"
@@ -6501,12 +6522,13 @@ function imprimir_reportes(opcion){
         default:
             break;
     }
-    include = "includes/reporte_reservacion_general.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial
+    include = "includes/reporte_reservacion_general.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
     window.open(include);
 }
 
 function ver_reportes_reservaciones(opcion,btn=0){
-
+   
+   
     titulo=""
     ruta=""
     switch (opcion ) {
@@ -6533,13 +6555,23 @@ function ver_reportes_reservaciones(opcion,btn=0){
     if(inicial==undefined){
         inicial="";
     }
-    inicial = encodeURIComponent(inicial)
+    a_buscar = $("#a_buscar").val()
+    if(a_buscar==undefined){
+        a_buscar="";
+    }
+    a_buscar = encodeURIComponent(a_buscar)
 	var usuario_id=localStorage.getItem("id");
     if(btn==0){
+        if(inicial!=""){
+            $("#dia").val("")
+            inicial=""
+        }
+        
+    
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial
+        include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
         $("#area_trabajo_menu").load(include);
     }else{
     a_buscar = $("#a_buscar").val()
@@ -6561,25 +6593,28 @@ function ver_reportes_reservaciones(opcion,btn=0){
 //funcion para ver los reportes de llegada
 function ver_reportes_llegadas(btn=0){
     var usuario_id=localStorage.getItem("id");
-    inicial = $("#inicial").val()
-    if(inicial==undefined){
-        inicial="";
+    inicial = $("#inicial_llegada").val()
+    console.log(inicial)
+    if(inicial==undefined || inicial==""){
+        inicial=0;
+    }
+    final = $("#final_llegada").val()
+    if(final==undefined || inicial==""){
+        final=0;
     }
     if(btn==0){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/ver_llegadas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn);
+        $("#area_trabajo_menu").load("includes/ver_llegadas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
         closeModal();
         closeNav();
     }else{
-        
+        console.log('v ' +inicial)
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
-        var inicial = $("#inicial").val()
-        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+1);  
+        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+1+"&final="+final);  
     }
-	
 }
 
 // Busqueda por fecha en ver cortes de la bd

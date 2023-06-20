@@ -24,6 +24,14 @@
           $this->SetTextColor(0,0,0);
           $fechas = $this->fechas($_GET['inicial'],$_GET['final']);
           $fecha_actual = $fechas[0];
+          $fecha_final =$fechas[1];
+
+          $fecha_final = date("d-m-Y",$fecha_final);
+          $dia_final = substr($fecha_final, 0, 2);
+          $mes_final = substr($fecha_final, 3, 2);
+          $mes_final= $logs->formato_fecha($mes_final);
+          $anio_final = substr($fecha_final, 6, 4);
+
           $fecha = date("d-m-Y",$fecha_actual);
           $dia = substr($fecha, 0, 2);
           $mes = substr($fecha, 3, 2);
@@ -46,7 +54,7 @@
           // Datos y fecha
           $this->SetFont('Arial','',10);
           $this->SetTextColor(0,0,0);
-          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Día '.$dia.' de '.$mes.' de '.$anio.' - % de Ocupación'),0,1,'R');
+          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Del '.$dia.' de '.$mes.' de '.$anio.' - '.'Al '.$dia_final.' de '.$mes_final.' de '.$anio_final.' -'),0,1,'R');
           // Logo
           $this->Image("../images/simbolo.png",10,18,25,25);
           // Salto de línea
@@ -56,7 +64,7 @@
           // Título
           $this->SetFont('Arial','B',10);
           $this->SetTextColor(0, 102, 205);
-          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'RESERVACIONES POR DIA'),0,0,'C');
+          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'RESERVACIONES'),0,0,'C');
           // Salto de línea
           $this->Ln(18);
       }
@@ -71,12 +79,12 @@
           // Número de página
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
-      function fechas(){
-        if(empty($incial)){
+      function fechas($inicial,$final){
+        if(empty($inicial)){
             $inicio_dia= date("d-m-Y");
             $inicio_dia= strtotime($inicio_dia);
         }else{
-            $inicio_dia = strtotime($incial);
+            $inicio_dia = strtotime($inicial);
         }
 
         if(empty($final)){
@@ -92,7 +100,9 @@
   $pdf = new PDF();
   $pdf->AliasNbPages();
   $pdf->AddPage();
-  $fecha_actual = $_GET['inicial'];
+  $fechas = $pdf->fechas($_GET['inicial'],$_GET['final']);
+  $fecha_actual = $fechas[0];
+  $fecha_final = $fechas[1];
   $fecha = date("d-m-Y",$fecha_actual);
   $dia = substr($fecha, 0, 2);
   $mes = substr($fecha, 3, 2);
@@ -130,7 +140,7 @@
   $pdf->SetTextColor(0,0,0);
   $total_estancia_final= 0;
   $total_pago_final= 0;
-  $consulta = $reservacion->ver_reservaciones($_GET['incial'],$_GET['final']);
+  $consulta = $reservacion->ver_reservaciones($fecha_actual,$fecha_final);
   // Revisamos las reservaciones por dia
   while ($fila = mysqli_fetch_array($consulta))
   {
@@ -232,7 +242,7 @@
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'$ '.number_format($total_pago_final, 2)),1,0,'C');
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'TOTAL SUMA'),1,1,'C');
 
-  $logs->guardar_log($_GET['usuario_id'],"Reporte reservaciones por dia: ".$dia.' de '.$mes.' de '.$anio);
+  $logs->guardar_log($_GET['usuario_id'],"Reporte reservaciones: ".$dia.' de '.$mes.' de '.$anio);
   //$pdf->Output("reporte_reservacion_por_dia.pdf","I");
   $pdf->Output("reporte_reservacion_por_dia_".$dia.' de '.$mes.' de '.$anio.".pdf","I");
   //$pdf->Output("../reportes/reservaciones/por_dia/reporte_reservacion_por_dia.pdf","F");

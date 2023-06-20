@@ -465,9 +465,7 @@ class RackHabitacional extends ConexionMYSql
                                     </td>
                                     ';
                                     $show=true;
-                                    echo "here";
-                                    die();
-                                   
+
                                 }else{
                                  
                                 }

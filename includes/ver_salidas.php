@@ -4,6 +4,7 @@
   $reservacion= NEW Reservacion(0);
   $opcion=2;
   $incial = $_GET['inicial'];
+  $final = $_GET['final'];
   if($_GET['btn']==0) {
     echo ' <div class="container-fluid blanco"> 
           <br>
@@ -17,6 +18,10 @@
             <div class="col-sm-2">
               <input class="form-control form-control" type="date"  id="inicial"  placeholder="Reservacion inicial" autofocus="autofocus"/>
             </div>
+            <div class="col-sm-2">Fecha Final:</div>
+            <div class="col-sm-2">
+              <input class="form-control form-control" type="date"  id="final"  placeholder="Reservacion final" autofocus="autofocus"/>
+            </div>
             
             <div class="col-sm-1">
               <button class="btn btn-success btn-block btn-default" onclick="ver_reportes_salidas(1)">
@@ -26,7 +31,7 @@
            
           </div><br>
           <div id="paginacion_reservaciones">';
-    $cat_paginas = $reservacion->mostrar_salidas(1, $_GET['usuario_id'], $incial);
+    $cat_paginas = $reservacion->mostrar_salidas(1, $_GET['usuario_id'], $incial,$final);
     echo '
           </div>
          </div>';
