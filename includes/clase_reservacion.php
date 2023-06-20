@@ -157,7 +157,7 @@ class Reservacion extends ConexionMYSql
         // INNER JOIN usuario ON reservacion.id_usuario = usuario.id
         // INNER JOIN huesped ON reservacion.id_huesped = huesped.id
         // INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 || reservacion.estado = 2)  ORDER BY reservacion.id DESC LIMIT 1;";
-        // $comentario="Mostrar las reservaciones";
+        $comentario="Mostrar las reservaciones";
         //esta sentencia trae el valor "actual" del autoincrement de la tabla.
         $sentencia="SELECT `AUTO_INCREMENT` as id
         FROM  INFORMATION_SCHEMA.TABLES
@@ -382,7 +382,7 @@ class Reservacion extends ConexionMYSql
           $plan_alimentos,
           $tipo_reservacion,
           $sobrevender,
-          $estado_interno,
+          $estado_interno
       ) 
       {
           $fecha_entrada= strtotime($fecha_entrada);
@@ -2294,7 +2294,7 @@ class Reservacion extends ConexionMYSql
         $tipo_reservacion,
         $sobrevender,
         $id_cuenta,
-        $estado_interno,
+        $estado_interno
     ) 
     {
         $fecha_entrada= strtotime($fecha_entrada);

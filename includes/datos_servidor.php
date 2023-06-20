@@ -4,7 +4,7 @@
   $servidor="localhost";
   $usuario_servidor="root";
   //$password="123";
-  $password="123";
+  $password="ORWare1986";
   $base_datos="visit";
   //.gitignore 
 ?>
