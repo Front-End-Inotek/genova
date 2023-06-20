@@ -187,8 +187,8 @@ label {
 
 /* Contenedor con fondo blanco y bordes */
 .blanco {
-  /*
-  backdrop-filter: blur(15px);*/
+  
+  backdrop-filter: blur(10px);
   padding: 25px 25px;
   /*
   background: url('../images/vista_back.jpg') !important;*/
@@ -201,9 +201,9 @@ label {
 
   background-color: #fdf8e2 !important;*/
   background-color: rgba(254, 254, 254, 0.4) !important;
+  background-image: repeating-linear-gradient(#ffffff -17px, rgb(255, 255, 255) 24px, steelblue 25px);
   margin-top: 60px !important;
   padding-top: 20px !important;
-  border: 2px solid #3f51b5;
   border-radius: 5px;
   -webkit-animation-name: efecto;
   animation-name: efecto;
@@ -268,10 +268,10 @@ label {
 }
 .blanco:before {
   z-index: -1;
-  background-color: #ffffff;
 
   background-size: cover;
     width: 100%;
+    
     background-image: repeating-linear-gradient(white -17px, white 24px, steelblue 25px);
 }
 
@@ -299,15 +299,15 @@ label {
 }*/
 .blanco{
   border-radius: 15px;
-  
 }
-
 
 
 
 .table-responsive {
   margin-left: 10px !important;
   background-color: #f5f5f51f !important;
+  max-height: 900px;
+  height: 850px;
 }
 
 .table-responsive tr {/*
@@ -386,6 +386,7 @@ input {
 
 input:hover{
   box-shadow: inset 2px 2px 25px 0px rgba(255, 255, 255, 0.796), 7px 7px 20px 0px #c8d0e779, 4px 4px 5px 0px #c8d0e782 !important;
+
 }
 
 .d-flex{
@@ -459,7 +460,7 @@ tr:hover {
 }
 
 .card-body{
-  background-color: #5bc3ff26 !important;
+  background-color: #a5c1ff57 !important;
   border: 2px solid;
 }
 
@@ -591,11 +592,14 @@ a.topictitle:hover {
 
 .modal-content {/*
   backdrop-filter: blur(15px);*/
-  /*
+  /* background-image: repeating-linear-gradient(white -17px, white 24px, rgba(180, 79, 70, 0.771) 25px);
   background-color: #ede4ff6b;*/
   background-color: #fff;
   color: #2d31ae;
-  background-image: repeating-linear-gradient(white -17px, white 24px, steelblue 25px);
+}
+
+hr{
+  display: none;
 }
 
 
@@ -655,17 +659,17 @@ a.topictitle:hover {
 .modo-nocturno {
   background-image: linear-gradient(356deg, #ffffff, #ecf2ff);
   background: 
-  radial-gradient(18% 28% at 24% 50%,rgb(233, 249, 251) 7%,#073AFF00 100%),
-  radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),
-  radial-gradient(70% 53% at 36% 76%,rgb(228, 252, 254) 0,#073AFF00 100%),
-  radial-gradient(42% 53% at 15% 94%,rgb(233, 248, 241) 7%,#073AFF00 100%),
-  radial-gradient(42% 53% at 34% 72%,rgb(233, 242, 247) 7%,#073AFF00 100%),
-  radial-gradient(18% 28% at 35% 87%,rgb(226, 236, 253) 7%,#073AFF00 100%),
-  radial-gradient(31% 43% at 7% 98%,rgb(245, 238, 255) 24%,#073AFF00 100%),
-  radial-gradient(21% 37% at 72% 23%,#f4edfd9c 24%,#073AFF00 100%),
-  radial-gradient(35% 56% at 91% 74%,#f4effdf5 9%,#073AFF00 100%),
-  radial-gradient(74% 86% at 67% 38%,#f4fff9f5 24%,#073AFF00 100%),
-  linear-gradient(125deg,rgb(234, 246, 255) 1%,rgb(237, 232, 251) 100%);
+  radial-gradient(18% 28% at 24% 50%,#3f4587 7%,#073AFF00 100%),
+  radial-gradient(18% 28% at 18% 71%,#5f65a7 6%,#073AFF00 100%),
+  radial-gradient(70% 53% at 36% 76%,#434a95 0,#073AFF00 100%),
+  radial-gradient(42% 53% at 15% 94%,#373d74 7%,#073AFF00 100%),
+  radial-gradient(42% 53% at 34% 72%,#282e70 7%,#073AFF00 100%),
+  radial-gradient(18% 28% at 35% 87%,#3a3f7a 7%,#073AFF00 100%),
+  radial-gradient(31% 43% at 7% 98%,#32376e 24%,#073AFF00 100%),
+  radial-gradient(21% 37% at 72% 23%,#393f89 24%,#073AFF00 100%),
+  radial-gradient(35% 56% at 91% 74%,#474d8d 9%,#073AFF00 100%),
+  radial-gradient(74% 86% at 67% 38%,#272d60 24%,#073AFF00 100%),
+  linear-gradient(125deg,#2f3262 1%,#353b6f 100%);
   background-color: #252954;
 }
 

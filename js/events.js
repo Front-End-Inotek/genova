@@ -2247,7 +2247,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
                 if(confirarmNo!=null){
                     confirarmNo = confirarmNo.checked
                     if(!confirarmNo && correo!=""){
-                        alert("enviar correo")
+                        //alert("enviar correo")
+                        enviar_reserva_correo(res);
                     }
                 }
                 ver_reporte_reservacion(res,"ver_reservaciones()",titulo)
@@ -2260,7 +2261,28 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         alert("Campos incompletos o descuento no permitido");
     }
 }
+function enviar_reserva_correo(info){
+    var datos = {
+        "info": info
+      };
+   $.ajax({
+        async:true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url:"includes/enviar_correo_reserva.php",
+        data:datos,
+        beforeSend:inicioEnvio,
+        success:respuesta_correo_reserva,
+        timeout:5000,
+        error:problemas
+      });
+  return false;
 
+}
+function respuesta_correo_reserva(info){
+    console.log(info);
+}
 function asignarValorTarjeta(){
 
     if(!verificarFormulario('form-garantia',"name")){

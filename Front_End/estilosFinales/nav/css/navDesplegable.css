@@ -67,6 +67,7 @@ display: none;
 .form-check-input:checked + .form-check-label {
   background: #8340ff;
 }
+
 .form-check-input:checked + .form-check-label:after {
   left: calc(100% - 5px);
   transform: translateX(-100%);
