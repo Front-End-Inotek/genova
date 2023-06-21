@@ -3,9 +3,8 @@
   include_once("clase_huesped.php");
   include_once("clase_reservacion.php");
   $reservacion= NEW Reservacion(0);
-
+  $correo = $_GET['correo'];
   $ruta = $_GET['ruta'];
-  
   echo ' <div class="container blanco">
          <div class="row">
          <div class="col-sm-11 blanco_margen">
@@ -20,7 +19,7 @@
                   <input type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">
                 </div>
                 <div  id="boton_reservacion">
-                <input type="submit" class="btn btn-success btn-block margen-1" value="Reenviar" onclick="vista_desarrollo('.$_GET['id'].',0)">
+                <input type="submit" class="btn btn-success btn-block margen-1" value="Reenviar" onclick="enviar_reserva_correo('.$_GET['id'].',\''.$correo.'\',true)">
                 </div>
                 <div ><button class="btn btn-info btn-block" onclick="'.$ruta.'"> ←</button></div>
               </div>

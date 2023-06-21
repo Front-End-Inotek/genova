@@ -3,8 +3,8 @@
   date_default_timezone_set('America/Mexico_City');
   $servidor="localhost";
   $usuario_servidor="root";
-  //$password="123";
-  $password="ORWare1986";
+  $password="123";
+  //$password="ORWare1986";
   $base_datos="visit";
   //.gitignore 
 ?>

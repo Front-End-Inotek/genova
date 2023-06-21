@@ -2248,10 +2248,10 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
                     confirarmNo = confirarmNo.checked
                     if(!confirarmNo && correo!=""){
                         //alert("enviar correo")
-                        enviar_reserva_correo(res);
+                        enviar_reserva_correo(res,correo,false);
                     }
                 }
-                ver_reporte_reservacion(res,"ver_reservaciones()",titulo)
+                ver_reporte_reservacion(res,"ver_reservaciones()",titulo,correo)
             },
             timeout:5000,
             error:problemas_sistema
@@ -2261,27 +2261,39 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         alert("Campos incompletos o descuento no permitido");
     }
 }
-function enviar_reserva_correo(info){
-    var datos = {
-        "info": info
-      };
-   $.ajax({
-        async:true,
-        type: "POST",
-        dataType: "html",
-        contentType: "application/x-www-form-urlencoded",
-        url:"includes/enviar_correo_reserva.php",
-        data:datos,
-        beforeSend:inicioEnvio,
-        success:respuesta_correo_reserva,
-        timeout:5000,
-        error:problemas
-      });
-  return false;
-
+function enviar_reserva_correo(info,correo,reenviar){
+    if(correo!=""){
+        var usuario_id=localStorage.getItem("id");
+        var datos = {
+            "info": info,
+            "usuario_id":usuario_id,
+            "correo":correo,
+          };
+       $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/enviar_correo_reserva.php",
+            data:datos,
+            beforeSend:inicioEnvio,
+            success:function(res){
+                respuesta_correo_reserva(res,reenviar)
+            },
+            timeout:5000,
+            error:problemas
+          });
+    }else{
+        swal("No hay un correo asociado para enviar la confirmación","No hay un correo asociado para enviar la confirmación",'error');
+    }
+    return false;
 }
-function respuesta_correo_reserva(info){
+function respuesta_correo_reserva(info,reenviar){
     console.log(info);
+    if(reenviar){
+        swal("Correo de confirmación reenviado correctamente","Correo de confirmación reenviado correctamente",'success');
+    }
+    
 }
 function asignarValorTarjeta(){
 
@@ -2673,7 +2685,6 @@ function busqueda_reservacion(){
 function busqueda_reservacion_combinada(){
 	var inicial=$("#inicial").val();
 	var final=$("#final").val();
-    console.log(final)
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var id=localStorage.getItem("id");
     if((inicial.length >0 && final.length >0) || a_buscar.length >0){
@@ -2918,12 +2929,14 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 }
 
 // Muestra las reservaciones de la bd
-function ver_reporte_reservacion(id,ruta="regresar_reservacion()",titulo="RESERVACION"){
+function ver_reporte_reservacion(id,ruta="regresar_reservacion()",titulo="RESERVACION",correo=""){
+
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id+"&ruta="+ruta+"&titulo="+titulo);
+    console.log(ruta)
+	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id+"&ruta="+ruta+"&titulo="+titulo+"&correo="+correo);
 	closeNav();
 }
 
@@ -6588,8 +6601,6 @@ function ver_reportes_reservaciones(opcion,btn=0){
             $("#dia").val("")
             inicial=""
         }
-        
-    
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
@@ -6607,7 +6618,6 @@ function ver_reportes_reservaciones(opcion,btn=0){
     include = "includes/buscar_entradas_salidas.php?usuario_id="+usuario_id+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
     $("#tabla_reservacion").load(include);
     }
-	
 
 }
 
