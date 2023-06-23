@@ -3,8 +3,9 @@
   include_once("clase_reservacion.php");
   $reservacion= NEW Reservacion(0);
   $cat_paginas=0;
-  $inicial="";
+  $inicial=$_GET['inicial'];
   $a_buscar="";
+  $final =$_GET['final'];
   switch($_GET['caso']){
     case "1":
     case "2":

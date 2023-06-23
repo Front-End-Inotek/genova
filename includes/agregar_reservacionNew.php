@@ -239,19 +239,22 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <label for="email">Correo electrónico </label>
                     <input type="email" class="form-control" id="correo" onblur="comprobarEmail()">
                 </div>
-                <div class="form-group col-md-2">
-                <label for="confirmacion">Confirmación</label>
-                <div class="checkbox-container">
-                <input type="radio" name="rdo" id="yes" checked/>
-                <input type="radio" name="rdo" id="no" />
-                <div class="switch">
-                    <label for="yes">Si</label>
-                    <label for="no">No</label>
-                    <span></span>
-                </div>
-                <input type="checkbox" id="confirmacion"  class="form-check"/>
-                </div>
-             
+                <div class="form-group col-md-2">';
+                if (empty($_GET['hab_id'])) {
+                    echo '<label for="confirmacion">Confirmación</label>
+                    <div class="checkbox-container">
+                    <input type="radio" name="rdo" id="yes" checked/>
+                    <input type="radio" name="rdo" id="no" />
+                    <div class="switch">
+                        <label for="yes">Si</label>
+                        <label for="no">No</label>
+                        <span></span>
+                    </div>
+                    <input type="checkbox" id="confirmacion"  class="form-check"/>
+                    </div>';
+                }
+
+                echo '
             </div>
             </div>
             <div class="d-flex justify-content-between">

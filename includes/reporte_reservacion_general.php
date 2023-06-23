@@ -20,12 +20,15 @@
           $this->SetFont('Arial','B',8);
           $this->SetTextColor(0,0,0);
           $fecha_actual = $_GET['inicial'];
-        //   $fecha = date("d-m-Y",$fecha_actual);
-        //   $fecha = $fecha_actual;
-        //   $dia = substr($fecha, 0, 2);
-        //   $mes = substr($fecha, 3, 2);
-        //   $mes= $logs->formato_fecha($mes);
-        //   $anio = substr($fecha, 6, 4);
+         
+          if(empty($fecha_actual)){
+            $fecha_actual = date('d-m-Y');
+          }
+          $fecha = date("d-m-Y",strtotime($fecha_actual));
+          $dia = substr($fecha, 0, 2);
+          $mes = substr($fecha, 3, 2);
+          $mes= $logs->formato_fecha($mes);
+          $anio = substr($fecha, 6, 4);
           $nombre= $conf->obtener_nombre();
           $a_buscar= ' ';
         //   $porcentaje= $reservacion->porcentaje_ocupacion($_GET['inicial'],$a_buscar);
@@ -43,7 +46,7 @@
           // Datos y fecha
           $this->SetFont('Arial','',10);
           $this->SetTextColor(0,0,0);
-        //   $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Día '.$dia.' de '.$mes.' de '.$anio.' - '.$porcentaje.'% de Ocupación'),0,1,'R');
+          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Día '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
           // Logo
           $this->Image("../images/simbolo.png",10,18,25,25);
           // Salto de línea

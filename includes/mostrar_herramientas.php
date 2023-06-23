@@ -150,7 +150,7 @@ switch ($_GET['estado']) {
 			echo '<div>';
 			echo '</div>';
 			echo '<div>';
-			echo 'Mantenimieno';
+			echo 'Mantenimiento';
 			echo '</div>';
 			echo '</br>';
 		echo '</div>';

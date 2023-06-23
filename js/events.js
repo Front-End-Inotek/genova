@@ -2125,7 +2125,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         sobrevender = document.getElementById('sobrevender').checked
         canal_reserva = (document.getElementById("canal-reserva").value);
         tipo_reservacion = (document.getElementById("tipo-reservacion").value);
-        titulo="RESERVACION"
+        titulo="RESERVACIÓN"
         var persona_reserva= (document.getElementById("persona-reserva").value);
     }else{
         estado=2;
@@ -2294,6 +2294,35 @@ function respuesta_correo_reserva(info,reenviar){
         swal("Correo de confirmación reenviado correctamente","Correo de confirmación reenviado correctamente",'success');
     }
     
+}
+
+function enviar_cancela_correo(info,correo,reenviar){
+    if(correo!=""){
+        var usuario_id=localStorage.getItem("id");
+        var datos = {
+            "info": info,
+            "usuario_id":usuario_id,
+            "correo":correo,
+          };
+        console.log(datos)
+       $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/enviar_correo_cancela.php",
+            data:datos,
+            beforeSend:inicioEnvio,
+            success:function(res){
+                respuesta_correo_reserva(res,reenviar)
+            },
+            timeout:5000,
+            error:problemas
+          });
+    }else{
+        // swal("No hay un correo asociado para enviar la confirmación","No hay un correo asociado para enviar la confirmación",'error');
+    }
+    return false;
 }
 function asignarValorTarjeta(){
 
@@ -2602,14 +2631,13 @@ function ver_reservaciones(){
 // Muestra la paginacion de las reservaciones
 function ver_reservaciones_paginacion(buton,posicion,caso=0){
     var usuario_id=localStorage.getItem("id");
-    inicial = 0;
-    a_buscar=0;
-     //se ocupa 'mantener' los filtros que están seleccionados para mandarselos a la paginación y que no se 'pierda' dicho filtro (?)
-    // if(caso!=0){
-    //     inicial = $('#inicial').value
-    //     a_buscar = $('#a_buscar').value
-    // }
-    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id+"&caso="+caso);   
+    inicial = $('#inicial').value
+    final =$('#final').value
+
+    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id+"&caso="+caso+"&inicial="+inicial+"&final="+final,
+    function(res){
+       
+    });
 }
 
 // Barra de diferentes busquedas en ver llegadas
@@ -2655,15 +2683,16 @@ function buscar_reservacion(e){
         var usuario_id=localStorage.getItem("id");
         if(a_buscar.length >0){
             $('.pagination').hide();
+            console.log(a_buscar)
+            $("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
+               
+            });  
         }else{
             $('.pagination').show();
             // return false;
             // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
         }
-        console.log(a_buscar)
-        $("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
-           
-        });  
+       
       }, "1000");
    
 }
@@ -2769,8 +2798,9 @@ function ver_reservaciones_reporte(){
     var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()
     final = $("#final").val()
+    a_buscar = $("#a_buscar").val()
 
-    window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final+"&usuario_id="+usuario_id);
+    window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final+"&usuario_id="+usuario_id+"&a_buscar="+a_buscar);
 }
 
 // Generar reporte en ver reservaciones por dia
@@ -2779,12 +2809,15 @@ function reporte_reservacion_por_dia(dia){
     window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id);
 }
 // Editar una reservacion
-function editar_reservacionNew(id){
-    $("#area_trabajo_menu").load("includes/editar_reservacionNew.php?id="+id);
+function editar_reservacionNew(id,ruta_regreso){
+    if(ruta_regreso==""){
+        ruta_regreso="regresar_reservacion()";
+    }
+    $("#area_trabajo_menu").load("includes/editar_reservacionNew.php?id="+id+"&ruta_regreso="+ruta_regreso);
 }
 // Editar un checkin
-function editar_checkin(id,hab_id){
-    $("#area_trabajo_menu").load("includes/editar_checkin.php?id="+id+"&hab_id="+hab_id);
+function editar_checkin(id,hab_id,ruta_regreso){
+    $("#area_trabajo_menu").load("includes/editar_checkin.php?id="+id+"&hab_id="+hab_id+"&ruta_regreso="+ruta_regreso);
 }
 
 // Editar una reservacion
@@ -3022,27 +3055,31 @@ function preasignar_reservacion(id,opcion=""){
 }
 
 // Modal de cancelar una reservacion
-function aceptar_cancelar_reservacion(id,preasignada=0){
-	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id+"&preasignada="+preasignada);
+function aceptar_cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
+    
+	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada);
 }
 
 // Cancelar una reservacion
-function cancelar_reservacion(id,preasignada=0){
-  
+function cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
+
     var usuario_id=localStorage.getItem("id");
     var nombre_cancela= encodeURI(document.getElementById("nombre_cancela").value);
+    var motivo_cancela= encodeURI(document.getElementById("motivo_cancela").value);
 
-    if (id >0 && nombre_cancela.length >0) {
+    // console.log(motivo_cancela)
+    // return 
+
+    if (id >0 && nombre_cancela.length >0 && motivo_cancela.length>0) {
         $('#caja_herramientas').modal('hide');
         $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
         var datos = {
                 "id": id,
                 "nombre_cancela": nombre_cancela,
+                "motivo_cancela": motivo_cancela,
                 "usuario_id": usuario_id,
                 "preasignada":preasignada,
-            };
-        // console.log(datos)
-        // return
+            };  
         $.ajax({
                 async:true,
                 type: "POST",
@@ -3051,7 +3088,13 @@ function cancelar_reservacion(id,preasignada=0){
                 url:"includes/cancelar_reservacion.php",
                 data:datos,
                 beforeSend:loaderbar,
-                success:ver_reservaciones,
+                success:function(res){
+                    console.log(res)
+                    if(correo!="" && garantizada!=1){
+                        enviar_cancela_correo(id,correo,false)
+                    }
+                    ver_reservaciones()
+                },
                 //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
@@ -3303,39 +3346,39 @@ function agregar_huespedes_reservacion(){
         "usuario_id": usuario_id,
     };
 
-    // console.log(datos)
-    // return;
+    if(!verificarFormulario("form-huesped","id")){
+        let xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre+"&apellido="+apellido+"&direccion="+direccion+"&ciudad="+ciudad+
+        "&estado="+estado+"&codigo_postal="+codigo_postal+"&telefono="+telefono+"&correo="+correo+"&contrato="+contrato+"&cupon="+cupon+
+        "&preferencias="+preferencias+"&comentarios="+comentarios+"&titular_tarjeta="+titular_tarjeta+"&tipo_tarjeta="+tipo_tarjeta+"&numero_tarjeta="+numero_tarjeta+
+        "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id,true);
+    
+        xhttp.addEventListener('load', e =>{
+            //Si el servidor responde 4  y esta todo ok 200
+            if (e.target.readyState == 4 && e.target.status == 200) {
+                //Entrara la contidicion que valida la respuesta del formulario
+                // console.log(e.target.responseText);
+                // console.log(xhttp.responseText)
+                const  response =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+                if (response == 'NO_DATA') {
+                    swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
+                    return
+                }else if(response == 'NO_VALIDO'){
+                    swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+                }else{
+                    $('#caja_herramientas').modal('hide');
+                    swal("Nuevo huesped agregado!", "Excelente trabajo!", "success");
+                    ver_huespedes()
 
-    let xhttp;
-    xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre+"&apellido="+apellido+"&direccion="+direccion+"&ciudad="+ciudad+
-    "&estado="+estado+"&codigo_postal="+codigo_postal+"&telefono="+telefono+"&correo="+correo+"&contrato="+contrato+"&cupon="+cupon+
-    "&preferencias="+preferencias+"&comentarios="+comentarios+"&titular_tarjeta="+titular_tarjeta+"&tipo_tarjeta="+tipo_tarjeta+"&numero_tarjeta="+numero_tarjeta+
-    "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id,true);
-
-    xhttp.addEventListener('load', e =>{
-        //Si el servidor responde 4  y esta todo ok 200
-        if (e.target.readyState == 4 && e.target.status == 200) {
-            //Entrara la contidicion que valida la respuesta del formulario
-            // console.log(e.target.responseText);
-            // console.log(xhttp.responseText)
-            const  response =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-            if (response == 'NO_DATA') {
-                swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
-                return
-            }else if(response == 'NO_VALIDO'){
-                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+                }
             }else{
-                $('#caja_herramientas').modal('hide');
-                swal("Nuevo huesped agregado!", "Excelente trabajo!", "success");
-                ver_huespedes()
-                
+                swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
-        }else{
-            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
-        }
-    })
-    xhttp.send();
+        })
+        xhttp.send();        
+    }
+
 }
 
 // Guarda el modal luego de su uso
@@ -4896,18 +4939,17 @@ function ver_inventario(){
 function switch_rack(){
     console.log(vista);
     if(vista==0){
-        console.log("rack de habitaciones "+vista);
-        var usuario_id=localStorage.getItem("id");
-        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-        vista=1;
-    }else{
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         localStorage.removeItem('estatus_hab')
         estatus_hab=""
-
         $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
+        vista=1;
+    }else{
+        console.log("rack de habitaciones "+vista);
+        var usuario_id=localStorage.getItem("id");
+        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         vista=0;
     }
 }
@@ -6601,6 +6643,10 @@ function ver_reportes_reservaciones(opcion,btn=0){
             $("#dia").val("")
             inicial=""
         }
+        if(a_buscar!=""){
+            $("#a_buscar").val("")
+            a_buscar=""
+        }
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
@@ -6625,12 +6671,11 @@ function ver_reportes_reservaciones(opcion,btn=0){
 //funcion para ver los reportes de llegada
 function ver_reportes_llegadas(btn=0){
     var usuario_id=localStorage.getItem("id");
-    inicial = $("#inicial_llegada").val()
-    console.log(inicial)
+    inicial = $("#inicial").val()
     if(inicial==undefined || inicial==""){
         inicial=0;
     }
-    final = $("#final_llegada").val()
+    final = $("#final").val()
     if(final==undefined || inicial==""){
         final=0;
     }
@@ -6642,7 +6687,6 @@ function ver_reportes_llegadas(btn=0){
         closeModal();
         closeNav();
     }else{
-        console.log('v ' +inicial)
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
         $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+1+"&final="+final);  

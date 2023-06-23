@@ -6,7 +6,7 @@
     include_once('clase_politicas_reservacion.php');
     include_once("clase_configuracion.php");
     include_once('clase_log.php');
-
+    date_default_timezone_set('America/Mexico_City');
     $reservacion= NEW Reservacion(0);
     $conf = NEW Configuracion(0);
     $logs = NEW Log(0);
@@ -14,9 +14,11 @@
     $mail = new PHPMailer(true); // Declaramos un nuevo correo, el parametro true significa que mostrara excepciones y errores.
     //Consulta datos de la reserva
 
-    $consulta= $reservacion->datos_reservacion($_POST['info']);
+    $consulta= $reservacion->datos_cancelacion($_POST['info']);
+
     while ($fila = mysqli_fetch_array($consulta))
     {
+       
         $id_hab= $fila['ID'];
         $id_usuario= $fila['id_usuario'];
         $usuario_reservacion= $fila['usuario'];
@@ -37,8 +39,11 @@
         $quien_reserva= $fila['nombre_reserva'];
         $acompanante= $fila['acompanante'];
         $tarifa_noche = $fila['precio_hospe'];
-        
-        
+
+        $nombre_cancela=$fila['nombre_cancela'];
+        $motivo_cancela=$fila['motivo_cancela'];
+        $fecha_cancelacion = $fila['fecha_cancelacion'];
+
         $habitaciones=$fila['numero_hab'];
   
         $tipohab=$fila['tipohab'];
@@ -108,6 +113,8 @@
     <p>$descripcion</p>
     ";
   }
+  
+  
     $mail->IsSMTP(); // Se especifica a la clase que se utilizará SMTP
     try {
         //Server settings
@@ -158,7 +165,7 @@
             <p>Esta reserva está confirmada y garantizada por un pago en efectivo. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos.</p>";
         }
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = utf8_decode('Reserva Visit');
+        $mail->Subject = utf8_decode('Cancelacion Visit');
         $mail->msgHTML('
         <div style="padding: 35px 35px;
         margin-bottom: 30px;
@@ -169,11 +176,20 @@
         border: 2px solid #3f51b5;
         font-family:Arial">
 
-        <h2 style="font-weight: bold;"> Confirmación de reservación </h2>
+        <p style="font-weight: bold;"> Confirmación de cancelación </p>
 
         <p>Estimado(A) Sr (Srita) <span style="text-decoration:underline;">'. str_repeat('&nbsp;', 5). $nombre_huesped. str_repeat('&nbsp;', 5).' </span> </p>
 
-        <p>Su reservación ha sido procesada con éxito el (día) de (mes) del (año), de acuerdo con los siguientes datos:</p>
+        <p>Su reservación ha sido cancelada con éxito  de acuerdo con los siguientes datos:</p>
+
+        <p style="font-weight: bold;">Datos de cancelación:</p>
+        <span style="font-weight: bold;">Usuario que cancela: </span> <span>'.$nombre_cancela.'</span><br>
+
+        <span style="font-weight: bold;">Motivo de cancelación: </span> <span>'.$motivo_cancela.'</span><br>
+
+        <span style="font-weight: bold;">Fecha de cancelación: </span> <span>'.date('Y-m-d H:m:s',$fecha_cancelacion).'</span><br><br>
+
+       
 
         <span style="font-weight: bold;">Nombre: </span> <span>'.$nombre_huesped.'</span><br>
         <span style="font-weight: bold;">Empresa/agencia: </span><span>'.$huesped->empresa.' </span><br>

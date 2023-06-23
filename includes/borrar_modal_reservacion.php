@@ -3,6 +3,7 @@
   include_once("clase_reservacion.php");
   $reservacion= NEW Reservacion($_GET['id']);
   $preasignada = 0;
+  $correo= $_GET['correo'];
 
   if(isset($_GET['preasignada']) && $_GET['preasignada']!=0){
     $preasignada=$_GET['preasignada'];
@@ -22,7 +23,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="borrar_reservacion('.$_GET['id'].','.$preasignada.')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="borrar_reservacion('.$_GET['id'].','.$preasignada.','.$correo.')"> Aceptar</button>
     </div>
   </div>';
 ?>

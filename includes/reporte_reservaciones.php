@@ -8,7 +8,7 @@
 
   $incial="";
   $final="";
-
+  $a_buscar="";
   require('../fpdf/fpdf.php');
   
   class PDF extends FPDF
@@ -22,23 +22,36 @@
 
           $this->SetFont('Arial','B',8);
           $this->SetTextColor(0,0,0);
-          $fechas = $this->fechas($_GET['inicial'],$_GET['final']);
+          $fechas = $this->fechas($_GET['inicial'],$_GET['final'],$_GET['a_buscar']);
           $fecha_actual = $fechas[0];
           $fecha_final =$fechas[1];
 
-          $fecha_final = date("d-m-Y",$fecha_final);
-          $dia_final = substr($fecha_final, 0, 2);
-          $mes_final = substr($fecha_final, 3, 2);
-          $mes_final= $logs->formato_fecha($mes_final);
-          $anio_final = substr($fecha_final, 6, 4);
+          $final_titulo="";
+          $final="";
+          $buscando="";
 
-          $fecha = date("d-m-Y",$fecha_actual);
-          $dia = substr($fecha, 0, 2);
-          $mes = substr($fecha, 3, 2);
-          $mes= $logs->formato_fecha($mes);
-          $anio = substr($fecha, 6, 4);
+          if(!empty($fecha_final)){
+            $fecha_final = date("d-m-Y",$fecha_final);
+            $dia_final = substr($fecha_final, 0, 2);
+            $mes_final = substr($fecha_final, 3, 2);
+            $mes_final= $logs->formato_fecha($mes_final);
+            $anio_final = substr($fecha_final, 6, 4);
+
+            $final_titulo ="Al ".$dia_final." de ".$mes_final." de ".$anio_final;
+          }
+          if(!empty($fecha_actual)){
+            $fecha = date("d-m-Y",$fecha_actual);
+            $dia = substr($fecha, 0, 2);
+            $mes = substr($fecha, 3, 2);
+            $mes= $logs->formato_fecha($mes);
+            $anio = substr($fecha, 6, 4);
+            $final ="Del ".$dia." de ".$mes." de ".$anio;
+          }
+          if(!empty($_GET['a_buscar'])){
+            $b=$_GET['a_buscar'];
+            $buscando="Buscando: ". "'$b'";
+          }
           $nombre= $conf->obtener_nombre();
-          $a_buscar= ' ';
         //   $porcentaje= $reservacion->porcentaje_ocupacion($_GET['dia'],$a_buscar);
 
           // Marco primera pagina
@@ -54,7 +67,8 @@
           // Datos y fecha
           $this->SetFont('Arial','',10);
           $this->SetTextColor(0,0,0);
-          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Del '.$dia.' de '.$mes.' de '.$anio.' - '.'Al '.$dia_final.' de '.$mes_final.' de '.$anio_final.' -'),0,1,'R');
+          
+          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",$final.' - '.$final_titulo." - ".$buscando),0,1,'R');
           // Logo
           $this->Image("../images/simbolo.png",10,18,25,25);
           // Salto de línea
@@ -79,16 +93,27 @@
           // Número de página
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
-      function fechas($inicial,$final){
+      function fechas($inicial,$final,$a_buscar){
         if(empty($inicial)){
-            $inicio_dia= date("d-m-Y");
-            $inicio_dia= strtotime($inicio_dia);
+
+            if(!empty($a_buscar)){
+              $inicio_dia="";
+            }else{
+              $inicio_dia= date("d-m-Y");
+              $inicio_dia= strtotime($inicio_dia);
+            }
+            
         }else{
             $inicio_dia = strtotime($inicial);
         }
 
         if(empty($final)){
-            $fin_dia= $inicio_dia + 1.296e+6;
+            if(!empty($a_buscar)){
+              $fin_dia="";
+            }else{
+              $fin_dia= $inicio_dia + 1.296e+6;
+            }
+            
         }else{
             $fin_dia = strtotime($final);
         }
@@ -100,15 +125,8 @@
   $pdf = new PDF();
   $pdf->AliasNbPages();
   $pdf->AddPage();
-  $fechas = $pdf->fechas($_GET['inicial'],$_GET['final']);
-  $fecha_actual = $fechas[0];
-  $fecha_final = $fechas[1];
-  $fecha = date("d-m-Y",$fecha_actual);
-  $dia = substr($fecha, 0, 2);
-  $mes = substr($fecha, 3, 2);
-  $mes= $logs->formato_fecha($mes);
-  $anio = substr($fecha, 6, 4);
 
+ 
   // Titulos tabla 
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
@@ -140,7 +158,22 @@
   $pdf->SetTextColor(0,0,0);
   $total_estancia_final= 0;
   $total_pago_final= 0;
-  $consulta = $reservacion->ver_reservaciones($fecha_actual,$fecha_final);
+
+  $fechas = $pdf->fechas($_GET['inicial'],$_GET['final'],$_GET['a_buscar']);
+  $fecha_actual = $fechas[0];
+  $fecha_final = $fechas[1];
+
+  if(!empty($fecha_actual)){
+    $fecha = date("d-m-Y",$fecha_actual);
+    $dia = substr($fecha, 0, 2);
+    $mes = substr($fecha, 3, 2);
+    $mes= $logs->formato_fecha($mes);
+    $anio = substr($fecha, 6, 4);
+    $final ="Del ".$dia." de ".$mes." de ".$anio;
+  }  
+ 
+  $consulta = $reservacion->ver_reservaciones($fecha_actual,$fecha_final,$_GET['a_buscar']);
+ 
   // Revisamos las reservaciones por dia
   while ($fila = mysqli_fetch_array($consulta))
   {
@@ -242,9 +275,16 @@
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'$ '.number_format($total_pago_final, 2)),1,0,'C');
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'TOTAL SUMA'),1,1,'C');
 
-  $logs->guardar_log($_GET['usuario_id'],"Reporte reservaciones: ".$dia.' de '.$mes.' de '.$anio);
-  //$pdf->Output("reporte_reservacion_por_dia.pdf","I");
-  $pdf->Output("reporte_reservacion_por_dia_".$dia.' de '.$mes.' de '.$anio.".pdf","I");
+  if(!empty($fecha_actual)){
+    $logs->guardar_log($_GET['usuario_id'],"Reporte reservaciones: ".$dia.' de '.$mes.' de '.$anio);
+    //$pdf->Output("reporte_reservacion_por_dia.pdf","I");
+    $pdf->Output("reporte_reservacion_por_dia_".$dia.' de '.$mes.' de '.$anio.".pdf","I");
+  }elseif(!empty($_GET['a_buscar']) && empty($fecha_actual) && empty($fecha_final)){
+    $logs->guardar_log($_GET['usuario_id'],"Reporte reservaciones buscando: " . $_GET['a_buscar']);
+    //$pdf->Output("reporte_reservacion_por_dia.pdf","I");
+    $pdf->Output("reporte_reservaciones_buscando:" . $_GET['a_buscar'],"I");
+  }
+
   //$pdf->Output("../reportes/reservaciones/por_dia/reporte_reservacion_por_dia.pdf","F");
       //echo 'Reporte reservacion por dia';*/
 ?>
