@@ -308,6 +308,8 @@
         return $suma_abonos;
       }
 
+   
+
       function mostrar_abonosPDF($mov){
         $total_abonos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
@@ -321,11 +323,18 @@
         return $consulta;
       }
 
-      function mostrar_cargosPDF($mov){
+      function mostrar_cargosPDF($mov,$init,$base){
+        $limite="";
+        if($init!=0 && $base!=0){
+          $limite="LIMIT $init, $base";
+        }
+
         $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
         FROM cuenta 
-        INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha
+        ".$limite."
+        ";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
