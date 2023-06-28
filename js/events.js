@@ -1981,7 +1981,7 @@ function buscar_asignar_huesped(funcion,precio_hospedaje,total_adulto,total_juni
 }
 
 function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv,correo,voucher){
-    console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv)
+    // console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv, voucher)
     $("#nombre").val(nombre)
     $("#apellido").val(apellido)
     $("#empresa").val(empresa)
@@ -2018,6 +2018,10 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
     if(voucher!=""){
         $("#div_voucher").show();
         $('#voucher').val(voucher)
+    }else{
+        $('#voucher').val("") 
+        $("#div_voucher").hide();
+
     }
     $("#tomahuespedantes").val(id)
     //cargar los datos de la tarjeta igualmente.

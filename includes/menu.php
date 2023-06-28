@@ -12,7 +12,7 @@
 			<!----------------------->
 			<!-- Side-Nav -->
 			<!-----------------------> 
-			<div class="side-navbar d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+			<div class="side-navbar  d-flex justify-content-between flex-wrap flex-column" id="sidebar">
 			<ul class="nav flex-column text-white w-100">
 			<div class="informacion">
 			<a href="inicio.php" class="nav-link text-white my-2">
@@ -253,7 +253,7 @@
 		
 		<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 			<i class="bx bxs-user mx-2" ></i>
-			<span onclick=""> Desarrollo </span>
+			<span onclick="hacer_cortes()"> Desarrollo </span>
 		</li>
 
 

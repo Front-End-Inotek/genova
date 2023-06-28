@@ -1054,7 +1054,7 @@ class Reservacion extends ConexionMYSql
                 }
                 if($borrar==1 && $fila['edo'] != 0) {
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Cancelar</button></td>';
-                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrar</button></td>';
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Borrar</button></td>';
                 }
                 echo '</tr>';
             } else {
@@ -1421,7 +1421,7 @@ class Reservacion extends ConexionMYSql
             LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
             INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
             INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || huesped.telefono LIKE '%$a_buscar%') AND (reservacion.estado = 1 || reservacion.estado = 2) 
+            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || huesped.telefono LIKE '%$a_buscar%') AND (reservacion.estado = 1 )
             ".$where_fechas."
             ORDER BY reservacion.id DESC";//|| reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%'
             $comentario="Mostrar diferentes busquedas en ver reservaciones";

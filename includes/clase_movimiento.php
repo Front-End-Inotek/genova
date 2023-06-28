@@ -33,6 +33,28 @@
           $this->id_reservacion= 0;
         }*/
       }
+      function obtener_preasignadas(){
+        $preasignadas=0;
+        $sentencia="SELECT count(hab.id) as preasignadas
+        FROM movimiento
+        left join reservacion on movimiento.id_reservacion = reservacion.id
+        LEFT JOIN hab on movimiento.id_hab = hab.id
+        where reservacion.estado =1
+        and movimiento.motivo='preasignar'
+        and from_unixtime(fecha_entrada + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') 
+        order by reservacion.fecha_entrada asc";
+
+        $comentario ="Obtner el numero de preasignadas";
+
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+            $preasignadas= $fila['preasignadas']; 
+        }
+        return $preasignadas;
+      }
+
       // Obtener cuenta total de la habitacion
       function cuenta_total($mov){
         $id_reservacion= 0;

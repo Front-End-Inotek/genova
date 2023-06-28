@@ -207,6 +207,7 @@
          
         }
       }
+      
 
       // Obtengo los nombres de las habitaciones a editar
       function mostrar_hab_editar($id){

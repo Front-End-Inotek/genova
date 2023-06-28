@@ -92,7 +92,7 @@ $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Arial', '', 9);
-$pdf->SetAutoPageBreak(false);
+
 date_default_timezone_set('America/Mexico_City');
 include_once("clase_cuenta.php");
 include_once("clase_tarifa.php");
@@ -166,6 +166,7 @@ if($faltante >= 0) {
 }
 
 
+
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Fecha Entrada: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
@@ -190,9 +191,14 @@ $pdf->MultiCell(80, 5, iconv("UTF-8", "ISO-8859-1", $nombre_huesped), 0, 'J');
 $pdf->SetXY($pdf->GetX()+80, $pdf->GetY()-5);
 
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Quién reserva: '), 0, 0, 'L');
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $quien_reserva), 0, 0, 'L');
+
+if($quien_reserva!="checkin"){
+    $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Quién reserva: '), 0, 0, 'L');
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $quien_reserva), 0, 0, 'L');
+    
+}
+
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Forma Pago: '), 0, 0, 'L');
@@ -220,184 +226,109 @@ if($extra_infantil>0) {
 }
 $pdf->SetFont('Arial', '', 15);
 
-$pdf->Ln(15);
+$pdf->Ln(10);
 
+$pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
 // $pdf->Cell(22, 4, iconv("UTF-8", "ISO-8859-1", 'Cargos'), 0, 0, 'L');
 // $pdf->Ln(10);
+$pdf->Ln();
 
+
+$consulta_cargos = $cuenta->mostrar_cargosPDF($hab->mov);
+$consulta_abonos = $cuenta->mostrar_abonosPDF($hab->mov);
 
 // Titulos tabla cargos
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->SetTextColor(255, 255, 255);
-$pdf->SetFillColor(99, 155, 219);
-$pdf->Cell(25, 4, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 0, 0, 'C', true);
-$pdf->Cell(25, 4, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 0, 0, 'C', true);
-$pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", 'Cargo'), 0, 0, 'C', true);
 
-// Titulos tabla abonos
-$pdf->SetX(98);
-
-
-$pdf->SetTextColor(255, 255, 255);
-$pdf->SetFillColor(63, 81, 181);
-$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 0, 0, 'C', true);
-$pdf->Cell(22, 4, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 0, 0, 'C', true);
-$pdf->Cell(22, 4, iconv("UTF-8", "ISO-8859-1", 'Abono'), 0, 0, 'C', true);
-$pdf->Cell(22, 4, iconv("UTF-8", "ISO-8859-1", 'Forma Pago'), 0, 0, 'C', true);
-
+$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Concepto'), 0, 0, 'C');
+$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Descripcion'), 0, 0, 'C');
+$pdf->Cell(35, 4, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 0, 0, 'C');
+$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Forma pago'), 0, 0, 'C');
+$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Monto'), 0, 0, 'C');
 $pdf->Ln();
 
-$init=0;
-$base=30;
-$break_abono=false;
-$break_cargo=false;
+$pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
+$pdf->Ln(10);
+$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", '>> Cargos'), 0, 1, 'C');
 
-$pdf->SetFont('Arial', '', 10);
-$consulta_cargos = $cuenta->mostrar_cargosPDF($hab->mov);
-$consulta_abonos = $cuenta->mostrar_abonosPDF($hab->mov);
-$cantidad_cargos= mysqli_num_rows($consulta_cargos);
-$cantidad_abonos= mysqli_num_rows($consulta_abonos);
+while($fila=mysqli_fetch_array($consulta_cargos)) {
+   
+    $pdf->Cell(40, 5, '', 0, 0, 'C');
+    $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 0, 0, 'C');
+    $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $fila['fecha'])), 0, 0, 'C');
+    $pdf->Cell(40, 5,'', 0, 0, 'C');
+    $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($fila['cargo'], 2)), 0, 1, 'C');
+    $total_cargos+=$fila['cargo'];
 
-$contador_abonos=0;
-$contador_cargos=0;
-
-
-
-$arr_c = mysqli_fetch_all($consulta_cargos, MYSQLI_ASSOC);
-$arr_a = mysqli_fetch_all($consulta_abonos, MYSQLI_ASSOC);
-
-$control=true;
-
-$pdf->SetTextColor(0, 0, 0);
-$tableY= $pdf->GetY();
-while(sizeof($arr_c) !=0 ||  sizeof($arr_a)!=0) {
-
-
-    $arr_c= imprimirCargos($arr_c, $total_cargos, $pdf, $contador_cargos);
-    $arr_a= imprimirAbonos($arr_a, $total_abonos, $pdf, $contador_abonos, $tableY);
-
-    if(sizeof($arr_c)>0 || sizeof($arr_a)>0) {
-        $pdf->AddPage();
-        $tableY= $pdf->GetY();
-    }
 }
 
+$pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
+$pdf->Ln();
+$pdf->Cell(40, 5, 'Total:', 0, 0, 'C');
+$pdf->Cell(40, 5,'', 0, 0, 'C');
+$pdf->Cell(35, 5, '', 0, 0, 'C');
+$pdf->Cell(40, 5,'', 0, 0, 'C');
+$pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($total_cargos, 2)), 0, 1, 'C');
 
+//abonos
+$pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
+$pdf->Ln(10);
+$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", '>> Abonos'), 0, 1, 'C');
 
+while($fila=mysqli_fetch_array($consulta_abonos)) {
 
-function imprimirCargos($fila, $total_cargos, $pdf, $c)
-{
-    $new_page = false;
-
-    foreach ($fila as $key => $value) {
-        $descripcion= substr($value['concepto'], 0, 17);
-        $largo= strlen($value['concepto']);
-        if($value['edo'] == 1) {
-            $total_cargos= $total_cargos + $value['cargo'];
-            if($descripcion == 'Total reservacion') {
-                if($largo > 17) {
-                    $pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", "Total suplementos*"), 1, 0, 'C');
-                } else {
-                    $pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", "Total suplementos"), 1, 0, 'C');
-                }
-                $pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $value['fecha'])), 1, 0, 'C');
-                $pdf->Cell(26, 5, iconv("UTF-8", "ISO-8859-1", number_format($value['cargo'], 2)), 1, 1, 'C');
+    $descripcion= substr($fila['concepto'], 0, 17);
+    $largo= strlen($fila['concepto']);
+    if($fila['edo'] == 1) {
+        $total_abonos= $total_abonos + $fila['abono'];
+        if($descripcion == 'Total reservacion') {
+            $pdf->Cell(40, 5, '', 0, 0, 'C');
+            if($largo > 17) {
+                $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", "Pago al reservar*"), 1, 0, 'C');
             } else {
-                $pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", $value['concepto']), 1, 0, 'C');
-                $pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $value['fecha'])), 1, 0, 'C');
-                $pdf->Cell(26, 5, iconv("UTF-8", "ISO-8859-1", number_format($value['cargo'], 2)), 1, 1, 'C');
+                $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", "Pago al reservar"), 1, 0, 'C');
             }
+
+            $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $fila['fecha'])), 0, 0, 'C');
+            $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 0, 0, 'C');
+            $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($fila['abono'], 2)), 0, 1, 'C');
         } else {
-            $pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", $value['concepto']), 1, 0, 'C');
-            $pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $value['fecha'])), 1, 0, 'C');
-            $pdf->Cell(26, 5, iconv("UTF-8", "ISO-8859-1", number_format($value['cargo'], 2)), 1, 1, 'C');
-
+            $pdf->Cell(40, 5, '', 0, 0, 'C');
+            $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", $fila['concepto']), 0, 0, 'C');
+            $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $fila['fecha'])), 0, 0, 'C');
+            $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 0, 0, 'C');
+            $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($fila['abono'], 2)), 0, 1, 'C');
         }
-        if($pdf->GetY() >=270) {
-            $new_arr = array_slice($fila, $key + 1);
-            $new_page=true;
-            break;
-
-        }
-
+    }else{
+        $pdf->Cell(40, 5, '', 0, 0, 'C');
+        $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", $fila['concepto']), 0, 0, 'C');
+        $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $fila['fecha'])), 0, 0, 'C');
+        $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 0, 0, 'C');
+        $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($fila['abono'], 2)), 0, 1, 'C');
     }
-    if($new_page) {
-        return $new_arr;
-    } else {
-        return [];
-    }
-
+    $total_abonos+=$fila['abono'];
 }
 
+$pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
+$pdf->Ln();
+$pdf->Cell(40, 5, 'Total:', 0, 0, 'C');
+$pdf->Cell(40, 5,'', 0, 0, 'C');
+$pdf->Cell(35, 5, '', 0, 0, 'C');
+$pdf->Cell(40, 5,'', 0, 0, 'C');
+$pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($total_abonos, 2)), 0, 1, 'C');
 
-function imprimirAbonos($fila, $total_abonos, $pdf, $contador_abonos, $tableY)
-{
-    $pdf->SetXY(98, $tableY);
-    $new_page=false;
-    foreach ($fila as $key => $value) {
-        $descripcion= substr($value['concepto'], 0, 17);
-        $largo= strlen($value['concepto']);
-        if($value['edo'] == 1) {
-            $total_abonos= $total_abonos + $value['abono'];
-            if($descripcion == 'Total reservacion') {
 
-                if($largo > 17) {
-                    $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", "Pago al reservar*"), 1, 0, 'C');
-                } else {
-                    $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", "Pago al reservar"), 1, 0, 'C');
-                }
+$pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
+$pdf->Ln();
+$pdf->Cell(40, 5, 'Saldo Total:', 0, 0, 'C');
+$pdf->Cell(40, 5,'', 0, 0, 'C');
+$pdf->Cell(35, 5, '', 0, 0, 'C');
+$pdf->Cell(40, 5,'', 0, 0, 'C');
+$pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($total_abonos - $total_cargos, 2)), 0, 1, 'C');
 
-                $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $value['fecha'])), 1, 0, 'C');
-                $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", number_format($value['abono'], 2)), 1, 0, 'C');
-                $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $value['descripcion']), 1, 0, 'C');
-            } else {
-                // if($pdf->GetStringWidth($value['concepto'])>20){
-                //     $tableY= $pdf->GetY();
-                //     $tableX= $pdf->GetX();
-                //     $pdf->SetXY($tableX,$tableY);
-                //     $pdf->MultiCell(22, 5, iconv("UTF-8", "ISO-8859-1", $value['concepto']), 1, 'J');
-                //     $H = $pdf->GetY();
-                //     $height= $H-$tableY ;
-                //     $X = $pdf->GetX();
-                //     $pdf->SetXY(132,$tableY);
-                // }else{
-                //     $height=5;
-                //     $pdf->Cell(22, $height, iconv("UTF-8", "ISO-8859-1",$value['concepto']), 1, 0, 'C');
-                // }
-                $height=5;
-                $pdf->Cell(40, $height, iconv("UTF-8", "ISO-8859-1", $value['concepto'])  , 1, 0, 'C');
-
-                $pdf->Cell(22, $height, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $value['fecha'])), 1, 0, 'C');
-                $pdf->Cell(22, $height, iconv("UTF-8", "ISO-8859-1", $value['abono']), 1, 0, 'C');
-                $pdf->Cell(22, $height, iconv("UTF-8", "ISO-8859-1", $value['descripcion']), 1, 1, 'C');
-            }
-        } else {
-            $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", $value['concepto']), 1, 0, 'C');
-            $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $value['fecha'])), 1, 0, 'C');
-            $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $value['abono']), 1, 0, 'C');
-            $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $value['descripcion']), 1, 1, 'C');
-
-        }
-        $pdf->SetXY(98, $pdf->GetY());
-        if($pdf->GetY() >=270) {
-
-            $pdf->SetXY(98, 0);
-            $new_arr = array_slice($fila, $key + 1);
-            $new_page=true;
-
-            break;
-
-        }
-    }
-    if($new_page) {
-        return $new_arr;
-    } else {
-        return [];
-    }
-}
 
 $pdf->Output("reporte_estado_cuenta_".$hab->nombre.".pdf", "I");
-$logs->guardar_log($_GET['usuario_id'], "Reporte reservacion: ". $_GET['id']);
+//$logs->guardar_log($_GET['usuario_id'], "Reporte reservacion: ". $_GET['id']);
 
 ?>
 
