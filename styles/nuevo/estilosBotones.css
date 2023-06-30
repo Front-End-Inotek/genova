@@ -1,4 +1,4 @@
-
+@import '../colors.css';
 body {
   margin: 0;
   height: 100% !important;
@@ -10,8 +10,12 @@ body {
 /* Animation */
 
 .fondoWaves{
-  background-color: #7f81f1;
-  color: #fff;
+  background-color: #ffffffdf;
+  color: var(--titulos);
+  width: 100vw;
+  height: 60px;
+  min-height: 40px;
+  min-width: 40px;
 }
 
 .parallax > use {
@@ -43,6 +47,7 @@ body {
   top: 15px;
   left: 45%;
   z-index: 1;
+
 }
 @keyframes move-forever {
   0% {

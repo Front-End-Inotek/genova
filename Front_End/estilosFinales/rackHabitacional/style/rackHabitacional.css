@@ -90,7 +90,8 @@
   }
 
   .cal-dia{
-    min-width: 200px;
+    width: 150px;
+    height: 50px;
   }
   .cal-dia:hover{
     height: 150%;
@@ -137,9 +138,11 @@
   .cal-userinfo {
     height: 80px;
     box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
-
+    background-color: red;
   }
-  
+  .cal-userinfo:hover{
+    background-color: var(--subtitulos);
+  }
   .cal-tbody .cal-userinfo {
     min-width: 150px !important;
     text-align: center;
