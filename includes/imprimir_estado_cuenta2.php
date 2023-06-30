@@ -324,7 +324,7 @@ $pdf->Cell(40, 5, 'Saldo Total:', 0, 0, 'C');
 $pdf->Cell(40, 5,'', 0, 0, 'C');
 $pdf->Cell(35, 5, '', 0, 0, 'C');
 $pdf->Cell(40, 5,'', 0, 0, 'C');
-$pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($total_abonos - $total_cargos, 2)), 0, 1, 'C');
+$pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1",$faltante_mostrar), 0, 1, 'C');
 
 
 $pdf->Output("reporte_estado_cuenta_".$hab->nombre.".pdf", "I");

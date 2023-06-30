@@ -3,14 +3,14 @@
   include_once("clase_ticket.php");
   include_once("clase_tipo.php");
   include_once("clase_forma_pago.php");
-  include_once("clase_corte_info.php");
+  include_once("clase_corte_info2.php");
   $ticket= NEW Ticket(0);
   $tipo= NEW Tipo(0);
   $forma_pago= NEW Forma_pago(0);
   /*$ticket_inicial= $ticket->ticket_ini();
   $ticket_final= $ticket->ticket_fin();
   $inf= NEW Corte_info($ticket_inicial,$ticket_final);*/
-  $inf= NEW Corte_info($_GET['usuario_id']);
+  $inf= NEW Corte_info();
   $total_cuartos_hospedaje= 0;
   $suma_cuartos_hospedaje= 0; 
   $total_cuartos= 0;
@@ -20,7 +20,7 @@
   $total_productos_rest= 0;
   echo '
       <div class="container-fluid blanco">
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">HACER CORTE</h2></div>
+        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">HACER CORTE DIARIO</h2></div>
         <div class="row">
           <div class="col-sm-8"></div>
           <div class="col-sm-2">';
@@ -28,7 +28,7 @@
           echo '</div>
           <div class="col-sm-2">
           <div id="boton_usuario">
-            <input type="submit" class="btn btn-danger btn-block" value="Hacer Corte" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte()">
+            <input type="submit" class="btn btn-danger btn-block" value="Hacer Corte" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte_global()">
           </div>
           </div>
         </div>

@@ -4412,6 +4412,64 @@ function estado_cuenta(hab_id,estado,mov=0){
 	$('#caja_herramientas').modal('hide');
 }
 
+
+// Agregar un cargo al cargo por habitacion //
+function agregar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
+
+	$("#mostrar_herramientas").load("includes/agregar_cargo.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante+"&mov="+mov+"&id_maestra="+id_maestra);
+}
+
+// Guardar un abono al cargo por habitacion
+function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
+  
+    var usuario_id=localStorage.getItem("id");
+    var descripcion= encodeURI(document.getElementById("descripcion").value);
+   
+    var cargo= document.getElementById("cargo").value;
+   
+    
+    if(descripcion.length >0 && cargo >0){
+        $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+              "hab_id": hab_id,
+              "estado": estado,
+              "faltante": faltante,
+              "descripcion": descripcion,
+              "cargo": cargo,
+              "abono": 0,
+              "usuario_id": usuario_id,
+              "mov":mov,
+              "id_maestra":id_maestra,
+            };
+         
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/guardar_cargo.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:function(res){
+                console.log(res)
+                if(id_maestra==0){
+                    recibe_datos_monto(res)
+                }else{
+                    recibe_datos_monto_maestra(res)
+                }
+              },
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }    
+}
+
+
+
 // Agregar un abono al cargo por habitacion //
 function agregar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
 
@@ -6417,19 +6475,76 @@ function previsualizar_estado(){
 
 //* Cortes *//
 
-// Hacer un corte
-function hacer_cortes(){
-    var usuario_id=localStorage.getItem("id");
-	$('#area_trabajo').hide();
+
+function hacer_corte(){
+    usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
     $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/hacer_cortes.php?usuario_id="+usuario_id);
-	closeNav();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_corte.php?usuario_id="+usuario_id);
+    closeNav();
+}
+
+
+// Hacer un corte
+function hacer_cortes(usuario){
+    var usuario_id=0;
+    if(usuario==0){
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/hacer_cortes2.php");
+        closeNav();
+        
+    }else{
+        usuario_id=localStorage.getItem("id");
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/hacer_cortes.php?usuario_id="+usuario_id);
+        closeNav();
+    }
+   
 }
 
 // Modal de guardar corte
 function aceptar_guardar_corte(){
 	$("#mostrar_herramientas").load("includes/guardar_modal_corte.php");
+}
+
+
+// Modal de guardar corte
+function aceptar_guardar_corte_global(){
+	$("#mostrar_herramientas").load("includes/guardar_modal_corte_global.php");
+}
+
+
+// Guardar un corte global
+function guardar_corte_global(){
+    var usuario_id=localStorage.getItem("id");
+    //var usuario_id= 4;
+    $('#caja_herramientas').modal('hide');
+
+    var datos = {
+        "usuario_id": usuario_id,
+    };
+    $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_corte_global.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+        });    
+    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
+    //guardar_reporte_corte();
+    mostrar_corte_reporte();
+    return false;
 }
 
 // Guardar un corte

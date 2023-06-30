@@ -185,6 +185,18 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar el estado de una cuenta luego de un corte
+      function editar_estadoGlobal(){
+        $hoy = date('Y-m-d');
+        $sentencia = "UPDATE `cuenta` SET
+            `estado` = '2'
+            where from_unixtime(cuenta.fecha + 3600,'%Y-%m-%d') = '$hoy' AND `estado` = '1';";
+        //echo $sentencia ;
+        $comentario="Editar el estado de una cuenta luego de un corte dentro de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      
+
+      // Editar el estado de una cuenta luego de un corte
       function editar_estado($id_usuario){
         $sentencia = "UPDATE `cuenta` SET
             `estado` = '2'
@@ -193,6 +205,7 @@
         $comentario="Editar el estado de una cuenta luego de un corte dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+
       // Borrar una cuenta
       function borrar_cuenta($id,$descripcion,$monto){
         $descripcion= substr($descripcion, 0, 17);

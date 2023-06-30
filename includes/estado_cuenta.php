@@ -131,7 +131,12 @@
           <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado']);echo '</div>
         </div>'; 
 
-        $total_faltante= $total_abonos - $total_cargos;
+        if($total_cargos==0){
+          $total_faltante=0;
+        }else{
+          $total_faltante= $total_abonos - $total_cargos;
+        }
+
 
         echo '<div class="row">
           <div class="col-sm-4"></div>
@@ -140,13 +145,12 @@
           <div class="col-sm-2">Total $'.number_format($total_abonos, 2).'</div>
         </div>
 
-        <div class="row">';
+        <div class="row d-flex justify-content-between">';
           /*if($total_faltante==0){
             echo '<div class="col-sm-12"></div>';
           }else{*/
-            echo '<div class="col-sm-4"></div>';
+            echo '<div class="col-sm-2"><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Cargar</button></div>';
             echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
-            echo '<div class="col-sm-4"></div>';
             echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>';
           //}
         echo '</div>

@@ -118,8 +118,14 @@
 			if($permisos_reportes_diarios>0 || $usuario->nivel==2){
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Corte </a></i></ul>';
+
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes(0)"> Corte Global Diario </a></i></ul>';
+
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Corte Global </a></i></ul>';
+
 			}
-			
 		}
 		echo'
 			</ul>
