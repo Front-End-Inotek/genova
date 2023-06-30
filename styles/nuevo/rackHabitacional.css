@@ -146,7 +146,11 @@
   /* background: linear-gradient(85deg, #97a2f9ee 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%) !important; */
   background-color: var(--fondoCeldas) !important;
 }
-
+.tableRack td:first-child:hover {
+  color: white;
+  /* background: linear-gradient(85deg, #97a2f9ee 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%) !important; */
+  background-color: var(--subtitulos) !important;
+}
 .tableRack tr:hover {
  background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
  -webkit-box-shadow: 0 6px 6px -6px #0E1119;
