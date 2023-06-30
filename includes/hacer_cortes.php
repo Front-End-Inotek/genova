@@ -110,7 +110,8 @@
                   </thead>
                 <tbody>';
                     $cantidad= $tipo->total_elementos();
-                    for($z=0 ; $z<$cantidad; $z++)
+                    $c = sizeof($inf->hab_tipo_hospedaje);
+                    for($z=0 ; $z<$c; $z++)
                     {
                         if(($z%2) == 0){
                           echo '<tr class="table-white text-center">';

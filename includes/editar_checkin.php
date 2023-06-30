@@ -87,7 +87,12 @@ if($reservacion->estado==2){
     }
 }
 
-
+$ruta_regreso="";
+if(isset($_GET['ruta_regreso'])){
+    $ruta_regreso=$_GET['ruta_regreso'];
+}else{
+    $ruta_regreso="ver_reservaciones()";
+}
 
 
 $canales_reserva = array("telefono"=>"Telefono","email"=>"Email","web"=>"Web","agencia"=>"Agencia de viajes");
@@ -301,7 +306,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             </div>
             </div>
             <div class="d-flex justify-content-between">
-                
                 <div class="form-group col-md-4">
                     <label for="forma-garantia">Forma de Garantía</label>
                     <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)">
@@ -340,7 +344,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); guardarNuevaReservacion('.$hab_id.','.$id_cuenta.','.$reservacion->id.')">Actualizar</button>
             </div>
         </form>
-        <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button></div>
+        <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="'.$ruta_regreso.'"> ←</button></div>
         <div id="example"></div>
     </div>
     

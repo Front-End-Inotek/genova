@@ -3,7 +3,8 @@
   $reservacion= 0;
   echo '
   <!-- Modal -->
-      <div class="modal-content">
+      <div class="modal-content" >
+      <form id="form-huesped">
         <div class="modal-header">
           <h4 class="modal-title" id="exampleModalLabel">Agregra huesped </h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -11,7 +12,7 @@
           </button>
         </div>
         <div class="modal-body">
-
+       
 
         <div class="row">
         <div class="col-6">
@@ -19,7 +20,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Nombre </span>
             </div>
-              <input type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+              <input required type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
         </div>
         </div>
 
@@ -28,7 +29,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Apellido </span>
             </div>
-              <input type="text" id="apellido" name="apellido" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+              <input required type="text" id="apellido" name="apellido" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
         </div>
         </div>
         </div>
@@ -48,7 +49,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px;"> Ciudad </span>
             </div>
-              <input type="text" id="ciudad" name="ciudad" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+              <input required type="text" id="ciudad" name="ciudad" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
         </div>
         </div>
         </div>
@@ -213,7 +214,7 @@
         </div>
         </div>
 
-
+      
         </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -221,5 +222,6 @@
           <input type="button" class="btn btn-success btn-block" value="Guardar" onclick="guardar_huesped('.$reservacion.')">
         </div>
         </div>
+        </form>
       </div>';
 ?>

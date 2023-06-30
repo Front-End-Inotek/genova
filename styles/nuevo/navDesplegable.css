@@ -250,11 +250,9 @@ span {
   /*
   background: linear-gradient(90deg, #30349f 0%, #595dd5 50%, #181b63 100%);*/
   transition: 0.5s;
+  
   font-size: large;
   z-index: 9999;
-  -webkit-box-shadow: 9px 8px 23px -7px rgba(0,0,0,0.5);
--moz-box-shadow: 9px 8px 23px -7px rgba(0,0,0,0.5);
-box-shadow: 9px 8px 23px -7px rgba(0,0,0,0.5);
 }
 
 

@@ -4,6 +4,7 @@
   $reservacion= NEW Reservacion(0);
 
   $incial = $_GET['inicial'];
+  $final = $_GET['final'];
   $opcion=1;
 //para dibujar solamente "una vez" los buscadores.
 if($_GET['btn']==0) {
@@ -19,6 +20,10 @@ if($_GET['btn']==0) {
             <div class="col-sm-2">
               <input class="form-control form-control" type="date"  id="inicial"  placeholder="Reservacion inicial" autofocus="autofocus"/>
             </div>
+            <div class="col-sm-2">Fecha Final:</div>
+            <div class="col-sm-2">
+              <input class="form-control form-control" type="date"  id="final"  placeholder="Reservacion final" autofocus="autofocus"/>
+            </div>
             <div class="col-sm-1">
               <button class="btn btn-success btn-block btn-default" onclick="ver_reportes_llegadas(1)">
                 Buscar
@@ -26,7 +31,7 @@ if($_GET['btn']==0) {
             </div>
           </div><br>
           <div id="paginacion_reservaciones">';
-    $cat_paginas = $reservacion->mostrar_llegadas(1, $_GET['usuario_id'], $incial);
+    $cat_paginas = $reservacion->mostrar_llegadas(1, $_GET['usuario_id'], $incial,$final);
 
     echo '
           </div>

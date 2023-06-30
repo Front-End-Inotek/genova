@@ -132,6 +132,7 @@ ul.payment-types li.paymenttype {
     border-radius: 16px;
 }
 .card .flipper {
+    left: 25%;
     transition: 0.75s;
     transform-style: preserve-3d;
     position: relative;

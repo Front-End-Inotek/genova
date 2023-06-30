@@ -47,7 +47,7 @@
           // Arial italic 8
         $this->SetFont('Arial','',7);
 
-        $this->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", 'Le invitamos a visitar nuestra página web: http://www. donde encontrará mayor información acerca de nuestras instalaciones y servicios.'), 0, 'C');
+        $this->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", 'Le invitamos a visitar nuestra página web: '.$conf->credencial_auto.' donde encontrará mayor información acerca de nuestras instalaciones y servicios.'), 0, 'C');
 
 
         $this->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", $conf->domicilio), 0, 0, 'C');

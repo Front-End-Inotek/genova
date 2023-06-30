@@ -1981,7 +1981,7 @@ function buscar_asignar_huesped(funcion,precio_hospedaje,total_adulto,total_juni
 }
 
 function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv,correo,voucher){
-    console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv)
+    // console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv, voucher)
     $("#nombre").val(nombre)
     $("#apellido").val(apellido)
     $("#empresa").val(empresa)
@@ -2018,6 +2018,10 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
     if(voucher!=""){
         $("#div_voucher").show();
         $('#voucher').val(voucher)
+    }else{
+        $('#voucher').val("") 
+        $("#div_voucher").hide();
+
     }
     $("#tomahuespedantes").val(id)
     //cargar los datos de la tarjeta igualmente.
@@ -2125,7 +2129,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         sobrevender = document.getElementById('sobrevender').checked
         canal_reserva = (document.getElementById("canal-reserva").value);
         tipo_reservacion = (document.getElementById("tipo-reservacion").value);
-        titulo="RESERVACION"
+        titulo="RESERVACIÓN"
         var persona_reserva= (document.getElementById("persona-reserva").value);
     }else{
         estado=2;
@@ -2247,10 +2251,11 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
                 if(confirarmNo!=null){
                     confirarmNo = confirarmNo.checked
                     if(!confirarmNo && correo!=""){
-                        alert("enviar correo")
+                        //alert("enviar correo")
+                        enviar_reserva_correo(res,correo,false);
                     }
                 }
-                ver_reporte_reservacion(res,"ver_reservaciones()",titulo)
+                ver_reporte_reservacion(res,"ver_reservaciones()",titulo,correo)
             },
             timeout:5000,
             error:problemas_sistema
@@ -2260,7 +2265,69 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         alert("Campos incompletos o descuento no permitido");
     }
 }
+function enviar_reserva_correo(info,correo,reenviar){
+    if(correo!=""){
+        var usuario_id=localStorage.getItem("id");
+        var datos = {
+            "info": info,
+            "usuario_id":usuario_id,
+            "correo":correo,
+          };
+       $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/enviar_correo_reserva.php",
+            data:datos,
+            beforeSend:inicioEnvio,
+            success:function(res){
+                respuesta_correo_reserva(res,reenviar)
+            },
+            timeout:5000,
+            error:problemas
+          });
+    }else{
+        swal("No hay un correo asociado para enviar la confirmación","No hay un correo asociado para enviar la confirmación",'error');
+    }
+    return false;
+}
+function respuesta_correo_reserva(info,reenviar){
+    console.log(info);
+    if(reenviar){
+        swal("Correo de confirmación reenviado correctamente","Correo de confirmación reenviado correctamente",'success');
+    }
+    
+}
 
+function enviar_cancela_correo(info,correo,reenviar){
+    if(correo!=""){
+        var usuario_id=localStorage.getItem("id");
+        var datos = {
+            "info": info,
+            "usuario_id":usuario_id,
+            "correo":correo,
+          };
+        console.log(datos)
+       $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/enviar_correo_cancela.php",
+            data:datos,
+            beforeSend:inicioEnvio,
+            success:function(res){
+                respuesta_correo_reserva(res,reenviar)
+            },
+            timeout:5000,
+            error:problemas
+          });
+    }else{
+        // swal("No hay un correo asociado para enviar la confirmación","No hay un correo asociado para enviar la confirmación",'error');
+    }
+    return false;
+}
 function asignarValorTarjeta(){
 
     if(!verificarFormulario('form-garantia',"name")){
@@ -2568,57 +2635,70 @@ function ver_reservaciones(){
 // Muestra la paginacion de las reservaciones
 function ver_reservaciones_paginacion(buton,posicion,caso=0){
     var usuario_id=localStorage.getItem("id");
-    inicial = 0;
-    a_buscar=0;
-     //se ocupa 'mantener' los filtros que están seleccionados para mandarselos a la paginación y que no se 'pierda' dicho filtro (?)
-    // if(caso!=0){
-    //     inicial = $('#inicial').value
-    //     a_buscar = $('#a_buscar').value
-    // }
-    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id+"&caso="+caso);   
+    inicial = $('#inicial').value
+    final =$('#final').value
+
+    $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id+"&caso="+caso+"&inicial="+inicial+"&final="+final,
+    function(res){
+       
+    });
 }
 
 // Barra de diferentes busquedas en ver llegadas
 function buscar_llegadas_salidas(e,opcion){
+    setTimeout(() => {
+        var a_buscar=encodeURIComponent($("#a_buscar").val());
+        var usuario_id=localStorage.getItem("id");
+        var inicial = $("#inicial").val()
+        var final = $("#final").val()
+    
+        if(inicial==undefined){
+            inicial="";
+        }
+        final = $("#final").val()
+        if(final==undefined){
+            final="";
+        }
+        funcion_php="";
+        funcion_buscar="";
+        if(opcion==1){
+            funcion_php="ver_llegadas.php"
+            funcion_buscar = "buscar_llegadas.php"
+        }else{
+            funcion_php ="ver_salidas.php"
+            funcion_buscar = "buscar_salidas.php"
+        }
+        if(a_buscar.length >0){
+            $('.pagination').hide();
+        }else{
+            //$('.pagination').show();
+            // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+0); return false; }
+        }
+     
+        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion+"&final="+final);  
+    }, "1000");
    
-    var a_buscar=encodeURIComponent($("#a_buscar").val());
-    var usuario_id=localStorage.getItem("id");
-    var inicial = $("#inicial").val()
-    funcion_php="";
-    funcion_buscar="";
-    if(opcion==1){
-        funcion_php="ver_llegadas.php"
-        funcion_buscar = "buscar_llegadas.php"
-    }else{
-        funcion_php ="ver_salidas.php"
-        funcion_buscar = "buscar_salidas.php"
-    }
-    if(a_buscar.length >0){
-        $('.pagination').hide();
-    }else{
-        //$('.pagination').show();
-        if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+0); return false; }
-    }
- 
-	$("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion);  
 }
 
 // Barra de diferentes busquedas en ver reservaciones
 function buscar_reservacion(e){
-   
-    var a_buscar=encodeURIComponent($("#a_buscar").val());
-    var usuario_id=localStorage.getItem("id");
-    if(a_buscar.length >0){
-        $('.pagination').hide();
-    }else{
-        $('.pagination').show();
-        return false;
-        if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
-    }
-  
-	$("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
+    setTimeout(() => {
+        var a_buscar=encodeURIComponent($("#a_buscar").val());
+        var usuario_id=localStorage.getItem("id");
+        if(a_buscar.length >0){
+            $('.pagination').hide();
+            console.log(a_buscar)
+            $("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
+               
+            });  
+        }else{
+            $('.pagination').show();
+            // return false;
+            // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
+        }
        
-    });  
+      }, "1000");
+   
 }
 
 // Busqueda por fecha en ver reservaciones
@@ -2638,7 +2718,6 @@ function busqueda_reservacion(){
 function busqueda_reservacion_combinada(){
 	var inicial=$("#inicial").val();
 	var final=$("#final").val();
-    console.log(final)
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var id=localStorage.getItem("id");
     if((inicial.length >0 && final.length >0) || a_buscar.length >0){
@@ -2720,10 +2799,12 @@ function busqueda_reservacion_combinada_por_dia(){
 //Generar reporte de todas las reservaciones (rango de fechas)
 
 function ver_reservaciones_reporte(){
+    var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()
     final = $("#final").val()
+    a_buscar = $("#a_buscar").val()
 
-    window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final);
+    window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final+"&usuario_id="+usuario_id+"&a_buscar="+a_buscar);
 }
 
 // Generar reporte en ver reservaciones por dia
@@ -2732,12 +2813,15 @@ function reporte_reservacion_por_dia(dia){
     window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id);
 }
 // Editar una reservacion
-function editar_reservacionNew(id){
-    $("#area_trabajo_menu").load("includes/editar_reservacionNew.php?id="+id);
+function editar_reservacionNew(id,ruta_regreso){
+    if(ruta_regreso==""){
+        ruta_regreso="regresar_reservacion()";
+    }
+    $("#area_trabajo_menu").load("includes/editar_reservacionNew.php?id="+id+"&ruta_regreso="+ruta_regreso);
 }
 // Editar un checkin
-function editar_checkin(id,hab_id){
-    $("#area_trabajo_menu").load("includes/editar_checkin.php?id="+id+"&hab_id="+hab_id);
+function editar_checkin(id,hab_id,ruta_regreso){
+    $("#area_trabajo_menu").load("includes/editar_checkin.php?id="+id+"&hab_id="+hab_id+"&ruta_regreso="+ruta_regreso);
 }
 
 // Editar una reservacion
@@ -2882,12 +2966,14 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 }
 
 // Muestra las reservaciones de la bd
-function ver_reporte_reservacion(id,ruta="regresar_reservacion()",titulo="RESERVACION"){
+function ver_reporte_reservacion(id,ruta="regresar_reservacion()",titulo="RESERVACION",correo=""){
+
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id+"&ruta="+ruta+"&titulo="+titulo);
+    console.log(ruta)
+	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id+"&ruta="+ruta+"&titulo="+titulo+"&correo="+correo);
 	closeNav();
 }
 
@@ -2973,27 +3059,31 @@ function preasignar_reservacion(id,opcion=""){
 }
 
 // Modal de cancelar una reservacion
-function aceptar_cancelar_reservacion(id,preasignada=0){
-	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id+"&preasignada="+preasignada);
+function aceptar_cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
+    
+	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada);
 }
 
 // Cancelar una reservacion
-function cancelar_reservacion(id,preasignada=0){
-  
+function cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
+
     var usuario_id=localStorage.getItem("id");
     var nombre_cancela= encodeURI(document.getElementById("nombre_cancela").value);
+    var motivo_cancela= encodeURI(document.getElementById("motivo_cancela").value);
 
-    if (id >0 && nombre_cancela.length >0) {
+    // console.log(motivo_cancela)
+    // return 
+
+    if (id >0 && nombre_cancela.length >0 && motivo_cancela.length>0) {
         $('#caja_herramientas').modal('hide');
         $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
         var datos = {
                 "id": id,
                 "nombre_cancela": nombre_cancela,
+                "motivo_cancela": motivo_cancela,
                 "usuario_id": usuario_id,
                 "preasignada":preasignada,
-            };
-        // console.log(datos)
-        // return
+            };  
         $.ajax({
                 async:true,
                 type: "POST",
@@ -3002,7 +3092,13 @@ function cancelar_reservacion(id,preasignada=0){
                 url:"includes/cancelar_reservacion.php",
                 data:datos,
                 beforeSend:loaderbar,
-                success:ver_reservaciones,
+                success:function(res){
+                    console.log(res)
+                    if(correo!="" && garantizada!=1){
+                        enviar_cancela_correo(id,correo,false)
+                    }
+                    ver_reservaciones()
+                },
                 //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
@@ -3254,39 +3350,39 @@ function agregar_huespedes_reservacion(){
         "usuario_id": usuario_id,
     };
 
-    // console.log(datos)
-    // return;
+    if(!verificarFormulario("form-huesped","id")){
+        let xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre+"&apellido="+apellido+"&direccion="+direccion+"&ciudad="+ciudad+
+        "&estado="+estado+"&codigo_postal="+codigo_postal+"&telefono="+telefono+"&correo="+correo+"&contrato="+contrato+"&cupon="+cupon+
+        "&preferencias="+preferencias+"&comentarios="+comentarios+"&titular_tarjeta="+titular_tarjeta+"&tipo_tarjeta="+tipo_tarjeta+"&numero_tarjeta="+numero_tarjeta+
+        "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id,true);
+    
+        xhttp.addEventListener('load', e =>{
+            //Si el servidor responde 4  y esta todo ok 200
+            if (e.target.readyState == 4 && e.target.status == 200) {
+                //Entrara la contidicion que valida la respuesta del formulario
+                // console.log(e.target.responseText);
+                // console.log(xhttp.responseText)
+                const  response =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+                if (response == 'NO_DATA') {
+                    swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
+                    return
+                }else if(response == 'NO_VALIDO'){
+                    swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+                }else{
+                    $('#caja_herramientas').modal('hide');
+                    swal("Nuevo huesped agregado!", "Excelente trabajo!", "success");
+                    ver_huespedes()
 
-    let xhttp;
-    xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre+"&apellido="+apellido+"&direccion="+direccion+"&ciudad="+ciudad+
-    "&estado="+estado+"&codigo_postal="+codigo_postal+"&telefono="+telefono+"&correo="+correo+"&contrato="+contrato+"&cupon="+cupon+
-    "&preferencias="+preferencias+"&comentarios="+comentarios+"&titular_tarjeta="+titular_tarjeta+"&tipo_tarjeta="+tipo_tarjeta+"&numero_tarjeta="+numero_tarjeta+
-    "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id,true);
-
-    xhttp.addEventListener('load', e =>{
-        //Si el servidor responde 4  y esta todo ok 200
-        if (e.target.readyState == 4 && e.target.status == 200) {
-            //Entrara la contidicion que valida la respuesta del formulario
-            // console.log(e.target.responseText);
-            // console.log(xhttp.responseText)
-            const  response =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-            if (response == 'NO_DATA') {
-                swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
-                return
-            }else if(response == 'NO_VALIDO'){
-                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+                }
             }else{
-                $('#caja_herramientas').modal('hide');
-                swal("Nuevo huesped agregado!", "Excelente trabajo!", "success");
-                ver_huespedes()
-                
+                swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
-        }else{
-            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
-        }
-    })
-    xhttp.send();
+        })
+        xhttp.send();        
+    }
+
 }
 
 // Guarda el modal luego de su uso
@@ -4316,6 +4412,64 @@ function estado_cuenta(hab_id,estado,mov=0){
 	$('#caja_herramientas').modal('hide');
 }
 
+
+// Agregar un cargo al cargo por habitacion //
+function agregar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
+
+	$("#mostrar_herramientas").load("includes/agregar_cargo.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante+"&mov="+mov+"&id_maestra="+id_maestra);
+}
+
+// Guardar un abono al cargo por habitacion
+function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
+  
+    var usuario_id=localStorage.getItem("id");
+    var descripcion= encodeURI(document.getElementById("descripcion").value);
+   
+    var cargo= document.getElementById("cargo").value;
+   
+    
+    if(descripcion.length >0 && cargo >0){
+        $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+              "hab_id": hab_id,
+              "estado": estado,
+              "faltante": faltante,
+              "descripcion": descripcion,
+              "cargo": cargo,
+              "abono": 0,
+              "usuario_id": usuario_id,
+              "mov":mov,
+              "id_maestra":id_maestra,
+            };
+         
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/guardar_cargo.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:function(res){
+                console.log(res)
+                if(id_maestra==0){
+                    recibe_datos_monto(res)
+                }else{
+                    recibe_datos_monto_maestra(res)
+                }
+              },
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }    
+}
+
+
+
 // Agregar un abono al cargo por habitacion //
 function agregar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
 
@@ -4847,18 +5001,17 @@ function ver_inventario(){
 function switch_rack(){
     console.log(vista);
     if(vista==0){
-        console.log("rack de habitaciones "+vista);
-        var usuario_id=localStorage.getItem("id");
-        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-        vista=1;
-    }else{
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         localStorage.removeItem('estatus_hab')
         estatus_hab=""
-
         $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
+        vista=1;
+    }else{
+        console.log("rack de habitaciones "+vista);
+        var usuario_id=localStorage.getItem("id");
+        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         vista=0;
     }
 }
@@ -6322,19 +6475,76 @@ function previsualizar_estado(){
 
 //* Cortes *//
 
-// Hacer un corte
-function hacer_cortes(){
-    var usuario_id=localStorage.getItem("id");
-	$('#area_trabajo').hide();
+
+function hacer_corte(){
+    usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
     $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/hacer_cortes.php?usuario_id="+usuario_id);
-	closeNav();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_corte.php?usuario_id="+usuario_id);
+    closeNav();
+}
+
+
+// Hacer un corte
+function hacer_cortes(usuario){
+    var usuario_id=0;
+    if(usuario==0){
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/hacer_cortes2.php");
+        closeNav();
+        
+    }else{
+        usuario_id=localStorage.getItem("id");
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/hacer_cortes.php?usuario_id="+usuario_id);
+        closeNav();
+    }
+   
 }
 
 // Modal de guardar corte
 function aceptar_guardar_corte(){
 	$("#mostrar_herramientas").load("includes/guardar_modal_corte.php");
+}
+
+
+// Modal de guardar corte
+function aceptar_guardar_corte_global(){
+	$("#mostrar_herramientas").load("includes/guardar_modal_corte_global.php");
+}
+
+
+// Guardar un corte global
+function guardar_corte_global(){
+    var usuario_id=localStorage.getItem("id");
+    //var usuario_id= 4;
+    $('#caja_herramientas').modal('hide');
+
+    var datos = {
+        "usuario_id": usuario_id,
+    };
+    $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_corte_global.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+        });    
+    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
+    //guardar_reporte_corte();
+    mostrar_corte_reporte();
+    return false;
 }
 
 // Guardar un corte
@@ -6437,20 +6647,22 @@ function ver_reportes_salidas(btn=0){
     inicial = $("#inicial").val()
     if(inicial==undefined){
         inicial="";
-        //ver_reportes_salidas
+    }
+    final = $("#final").val()
+    if(final==undefined){
+        final="";
     }
     if(btn==0){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/ver_salidas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn);
+        $("#area_trabajo_menu").load("includes/ver_salidas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
         closeModal();
         closeNav();
     }else{
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
-        var inicial = $("#inicial").val()
-        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2);  
+        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final);  
     }
 }
 
@@ -6485,6 +6697,11 @@ function imprimir_reportes(opcion){
         inicial="";
     }
     inicial = encodeURIComponent(inicial)
+    a_buscar = $("#a_buscar").val()
+    if(a_buscar==undefined){
+        a_buscar="";
+    }
+    a_buscar = encodeURIComponent(a_buscar)
     switch (opcion ) {
         case 1:
             titulo="LLEGADAS PROBABLES"
@@ -6501,12 +6718,13 @@ function imprimir_reportes(opcion){
         default:
             break;
     }
-    include = "includes/reporte_reservacion_general.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial
+    include = "includes/reporte_reservacion_general.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
     window.open(include);
 }
 
 function ver_reportes_reservaciones(opcion,btn=0){
-
+   
+   
     titulo=""
     ruta=""
     switch (opcion ) {
@@ -6533,13 +6751,25 @@ function ver_reportes_reservaciones(opcion,btn=0){
     if(inicial==undefined){
         inicial="";
     }
-    inicial = encodeURIComponent(inicial)
+    a_buscar = $("#a_buscar").val()
+    if(a_buscar==undefined){
+        a_buscar="";
+    }
+    a_buscar = encodeURIComponent(a_buscar)
 	var usuario_id=localStorage.getItem("id");
     if(btn==0){
+        if(inicial!=""){
+            $("#dia").val("")
+            inicial=""
+        }
+        if(a_buscar!=""){
+            $("#a_buscar").val("")
+            a_buscar=""
+        }
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial
+        include = "includes/ver_reportes_reservaciones.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
         $("#area_trabajo_menu").load(include);
     }else{
     a_buscar = $("#a_buscar").val()
@@ -6553,7 +6783,6 @@ function ver_reportes_reservaciones(opcion,btn=0){
     include = "includes/buscar_entradas_salidas.php?usuario_id="+usuario_id+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
     $("#tabla_reservacion").load(include);
     }
-	
 
 }
 
@@ -6562,24 +6791,25 @@ function ver_reportes_reservaciones(opcion,btn=0){
 function ver_reportes_llegadas(btn=0){
     var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()
-    if(inicial==undefined){
-        inicial="";
+    if(inicial==undefined || inicial==""){
+        inicial=0;
+    }
+    final = $("#final").val()
+    if(final==undefined || inicial==""){
+        final=0;
     }
     if(btn==0){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/ver_llegadas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn);
+        $("#area_trabajo_menu").load("includes/ver_llegadas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
         closeModal();
         closeNav();
     }else{
-        
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
-        var inicial = $("#inicial").val()
-        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+1);  
+        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+1+"&final="+final);  
     }
-	
 }
 
 // Busqueda por fecha en ver cortes de la bd

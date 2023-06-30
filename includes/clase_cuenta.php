@@ -185,6 +185,18 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar el estado de una cuenta luego de un corte
+      function editar_estadoGlobal(){
+        $hoy = date('Y-m-d');
+        $sentencia = "UPDATE `cuenta` SET
+            `estado` = '2'
+            where from_unixtime(cuenta.fecha + 3600,'%Y-%m-%d') = '$hoy' AND `estado` = '1';";
+        //echo $sentencia ;
+        $comentario="Editar el estado de una cuenta luego de un corte dentro de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      
+
+      // Editar el estado de una cuenta luego de un corte
       function editar_estado($id_usuario){
         $sentencia = "UPDATE `cuenta` SET
             `estado` = '2'
@@ -193,6 +205,7 @@
         $comentario="Editar el estado de una cuenta luego de un corte dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+
       // Borrar una cuenta
       function borrar_cuenta($id,$descripcion,$monto){
         $descripcion= substr($descripcion, 0, 17);
@@ -307,6 +320,40 @@
         }
         return $suma_abonos;
       }
+
+   
+
+      function mostrar_abonosPDF($mov){
+        $total_abonos= 0;
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
+        FROM cuenta 
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
+        $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
+        // echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
+      function mostrar_cargosPDF($mov){
+        $limite="";
+        // if($init!=0 && $base!=0){
+        //   $limite="LIMIT $init, $base";
+        // }
+
+        $total_cargos= 0;
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
+        FROM cuenta 
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha
+        ".$limite."
+        ";
+        $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
+        // echo $sentencia;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
       // Mostrar los cargos que tenemos por movimiento en una habitacion
       function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
         $total_cargos= 0;
@@ -551,8 +598,8 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Resumen del dia actual
-      function resumen_actual($ocupadas,$disponibles,$salidas,$usuario_id){
-        $preasignados= 0;
+      function resumen_actual($ocupadas,$disponibles,$salidas,$usuario_id,$preasignadas){
+        // $preasignadas= 0;
         $total_adultos= 4;
         $total_niños= 0;
         $total_cargos= $this->saber_total_cargos($usuario_id);
@@ -568,7 +615,7 @@
               <div class="row rowFooter">
               <div class="col-xs-2 col-sm-4 col-md-2">Total Ocupadass: '.$ocupadas.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Disponibles: '.$disponibles.'</div>
-              <div class="col-xs-2 col-sm-4 col-md-2">Total Preasignadas: '.$preasignados.'</div>
+              <div class="col-xs-2 col-sm-4 col-md-2">Total Preasignadas: '.$preasignadas.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Salidas: '.$salidas.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Cargos: $'.$total_cargos.'</div>
               <div class="col-xs-2 col-sm-4 col-md-2">Total Abonos: $'.$total_abonos.'</div>
@@ -578,6 +625,9 @@
         </div>
         <div>';
       }
+
+      //Obtener el total de reservaciones preasignadas.
+
       // Obtener el total de cargos del dia actual
       function saber_total_cargos($usuario_id){
         $cargos=0;

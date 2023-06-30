@@ -89,6 +89,12 @@ if($reservacion->estado==1){
 
 $resultado = $reservacion->comprobarFechaReserva(date('Y-m-d',$reservacion->fecha_entrada),date('Y-m-d',$reservacion->fecha_salida),$hab_id,$preasignada);
 
+$ruta_regreso="";
+if(isset($_GET['ruta_regreso'])){
+    $ruta_regreso=$_GET['ruta_regreso'];
+}else{
+    $ruta_regreso="ver_reservaciones()";
+}
 
 $canales_reserva = array("telefono"=>"Telefono","email"=>"Email","web"=>"Web","agencia"=>"Agencia de viajes");
 
@@ -349,7 +355,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); guardarNuevaReservacion('.$hab_id.','.$id_cuenta.','.$reservacion->id.')">Actualizar</button>
             </div>
         </form>
-        <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button></div>
+        <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="'.$ruta_regreso.'"> ←</button></div>
         <div id="example"></div>
     </div>
     

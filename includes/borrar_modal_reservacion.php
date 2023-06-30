@@ -4,6 +4,7 @@
   $reservacion= NEW Reservacion($_GET['id']);
   $preasignada = 0;
 
+
   if(isset($_GET['preasignada']) && $_GET['preasignada']!=0){
     $preasignada=$_GET['preasignada'];
   }

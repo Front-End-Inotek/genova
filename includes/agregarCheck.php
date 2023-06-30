@@ -196,7 +196,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <input type="text" class="form-control" id="correo">
                 </div>
                 <div class="form-group col-md-2">
-                <label for="confirmacion">Confirmación</label>
+                <!-- <label for="confirmacion">Confirmación</label>
                 <div class="checkbox-container">
                 <input type="radio" name="rdo" id="yes" checked/>
                 <input type="radio" name="rdo" id="no" />
@@ -208,6 +208,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <input type="checkbox" id="confirmacion"  class="form-check"/>
                 </div>
                 </select>
+                -->
             </div>
             </div>
             <div class="d-flex justify-content-between">

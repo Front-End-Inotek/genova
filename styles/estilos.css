@@ -241,8 +241,8 @@ label {
 @-webkit-keyframes efecto {
   0% {
       opacity: 0;
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
+      -webkit-transform: translate3d(-50%, 0, 0);
+      transform: translate3d(-50%, 0, 0);
   }
 
   100% {
@@ -255,8 +255,8 @@ label {
 @keyframes efecto {
   0% {
       opacity: 0;
-      -webkit-transform: translate3d(100%, 0, 0);
-      transform: translate3d(100%, 0, 0);
+      -webkit-transform: translate3d(-20%, 0, 0);
+      transform: translate3d(-20%, 0, 0);
   }
 
   100% {

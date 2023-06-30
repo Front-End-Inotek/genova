@@ -3,25 +3,29 @@
   include_once("clase_huesped.php");
   include_once("clase_reservacion.php");
   $reservacion= NEW Reservacion(0);
-
+  $correo = $_GET['correo'];
   $ruta = $_GET['ruta'];
-  
+  $titulo = $_GET['titulo'];
+
   echo ' <div class="container blanco">
          <div class="row">
          <div class="col-sm-11 blanco_margen">
 
             <div class="row">
 
-              <div class="col-sm-7 d-flex justify-content-end "><h2 class="text-dark">'.$_GET['titulo'].' '.$_GET['id'].'</h2></div>
+              <div class="col-sm-7 d-flex justify-content-end "><h2 class="text-dark">'.$titulo.' '.$_GET['id'].'</h2></div>
 
               <div class="col-sm-4  ">
               <div class=" d-flex justify-content-between">
                 <div  id="boton_reservacion">
                   <input type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">
-                </div>
-                <div  id="boton_reservacion">
-                <input type="submit" class="btn btn-success btn-block margen-1" value="Reenviar" onclick="vista_desarrollo('.$_GET['id'].',0)">
-                </div>
+                </div>';
+                if($titulo=="RESERVACIÓN"){
+                  echo '<div  id="boton_reservacion">
+                  <input type="submit" class="btn btn-success btn-block margen-1" value="Reenviar" onclick="enviar_reserva_correo('.$_GET['id'].',\''.$correo.'\',true)">
+                  </div>';
+                }
+                echo '
                 <div ><button class="btn btn-info btn-block" onclick="'.$ruta.'"> ←</button></div>
               </div>
               </div>

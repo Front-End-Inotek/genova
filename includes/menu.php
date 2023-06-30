@@ -12,7 +12,7 @@
 			<!----------------------->
 			<!-- Side-Nav -->
 			<!-----------------------> 
-			<div class="side-navbar d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+			<div class="side-navbar  d-flex justify-content-between flex-wrap flex-column" id="sidebar">
 			<ul class="nav flex-column text-white w-100">
 			<div class="informacion">
 			<a href="inicio.php" class="nav-link text-white my-2">
@@ -22,7 +22,7 @@
 			<div class="form-check2 form-switch ocultar">
 			<input class="form-check-input2" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="cambiarVista(); switch_rack();">
 			<label class="form-check-label2" for="flexSwitchCheckDefault" onclick="sub_menu(); boton_menu();">
-			<span id="vista" class="toggle-text vista-habitacional">Rack Opereciones</span>
+			<span id="vista" class="toggle-text vista-habitacional">Rack Operaciones</span>
 			</label>
 			</div>
 			</div>';
@@ -118,8 +118,14 @@
 			if($permisos_reportes_diarios>0 || $usuario->nivel==2){
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Corte </a></i></ul>';
+
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes(0)"> Corte Global Diario </a></i></ul>';
+
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Corte Global </a></i></ul>';
+
 			}
-			
 		}
 		echo'
 			</ul>
@@ -253,7 +259,7 @@
 		
 		<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 			<i class="bx bxs-user mx-2 text-secondary" ></i>
-			<span onclick=""> Desarrollo </span>
+			<span onclick="hacer_cortes()"> Desarrollo </span>
 		</li>
 
 

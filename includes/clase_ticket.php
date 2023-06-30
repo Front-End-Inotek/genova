@@ -143,12 +143,35 @@
         $comentario="Editar el estado del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Editar el estado del ticket
+      function editar_estadoGlobal($corte,$estado){
+        $hoy = date('Y-m-d');
+        $sentencia = "UPDATE `ticket` SET
+        `corte` = '$corte',
+        `estado` = '$estado'
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `estado` = '1'";
+        // echo $sentencia;
+        $comentario="Editar el estado del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Editar el estado del ticket faltantes en corte
       function editar_estado_corte($id_usuario,$corte,$estado){
         $sentencia = "UPDATE `ticket` SET
         `corte` = '$corte',
         `estado` = '$estado'
         WHERE `id_usuario` = '$id_usuario' AND `corte` = '0' AND `estado` != '2';";
+        $comentario="Editar el estado del ticket faltantes en corte";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Editar el estado del ticket global
+      function editar_estado_corteGlobal($corte,$estado){
+        $hoy = date('Y-m-d');
+
+        $sentencia = "UPDATE `ticket` SET
+        `corte` = '$corte',
+        `estado` = '$estado'
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `corte` = '0' AND `estado` != '2';";
+        // echo $sentencia;
         $comentario="Editar el estado del ticket faltantes en corte";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
@@ -322,6 +345,7 @@
         `corte` = '$nueva_etiqueta'
         WHERE `id` = '1';";
         $comentario="Actualizar la etiqueta del corte";
+        // echo $sentencia;
         $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtener la comanda que es el id de la tabla sql pedido_rest
@@ -458,6 +482,18 @@
             //echo "Es producto ya existe";
           }
         }
+      }
+      // Cambiar estado activo del concepto
+      function cambiar_activoGlobal(){
+        $hoy = date('Y-m-d');
+        $sentencia = "UPDATE `concepto` 
+        LEFT JOIN ticket ON ticket.id = concepto.id_ticket
+        SET
+        `activo` = '0'
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'";
+        $comentario="Poner estado activo como inactivo del concepto";
+        // echo $sentencia;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Cambiar estado activo del concepto
       function cambiar_activo($id_usuario){

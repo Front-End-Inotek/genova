@@ -11,11 +11,11 @@
             <div class="col-sm-2">';
               echo '<input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_reservacion(event)" class="color_black form-control form-control" autofocus="autofocus"/>
             </div>
-            <div class="col-sm-2">Fecha Inicial:</div>
+            <div class="col-sm-1">Fecha Inicial:</div>
             <div class="col-sm-2">
               <input class="form-control form-control" type="date"  id="inicial"  placeholder="Reservacion inicial" autofocus="autofocus"/>
             </div>
-            <div class="col-sm-2">Fecha Final:</div>
+            <div class="col-sm-1">Fecha Final:</div>
             <div class="col-sm-2">
               <input class="form-control form-control" type="date" id="final" placeholder="Reservacion final" autofocus="autofocus"/>
             </div>

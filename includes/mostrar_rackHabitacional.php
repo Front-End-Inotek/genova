@@ -384,19 +384,15 @@ class RackHabitacional extends ConexionMYSql
                             // if(date('Y-m-d',$tiempo_actual) == date('Y-m-d',$fila['inicio'])){
                                 $noches++;
                                 $noches_reserva=1;
-                                $widths = $this->calcularWidths($noches_reserva,$noches);
-                                $width = $widths[0];
-                                $width2 = $widths[1];
+                              
                                 echo '';
                                 echo '
                                 <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
-                                echo '<div class="ajuste7" style="'.$width.'" href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                                 ';
                                 echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
                                 echo '</div>';
-                                echo '<div class="ajuste3" style="'.$width2.';">';
-    
-                                echo '</div>';
+                               
                                 echo'
                                 </td>
                                 ';
@@ -496,9 +492,7 @@ class RackHabitacional extends ConexionMYSql
                                     </td>
                                     ';
                                     $show=true;
-                                    // echo "here";
-                                    // die();
-                                   
+
                                 }else{
                                  
                                 }
