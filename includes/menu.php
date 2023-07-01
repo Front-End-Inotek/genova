@@ -29,7 +29,7 @@
 
 			echo '
 			<li href="#" onclick="sub_menu()" class="nav-link">
-			<i class="bx bx-desktop"></i>
+			<i class="bx bx-desktop text-secondary"></i>
 			<span class="mx-2">Recepcion</span>
 			<ul id="reportes_submenu" class="submenu">
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_check()"> Check In </a></i></ul>
@@ -50,7 +50,7 @@
 		if($permisos_reservaciones>0){
 		echo '
 		<li href="#" onclick="sub_menu()" class="nav-link">
-			<i class="bx bx-calendar" ></i>
+			<i class="bx bx-calendar text-secondary" ></i>
 			<span class="mx-2 reservaciones">Reservaciones</span>
 			<ul id="reservaciones_submenu" class="submenu">';
 
@@ -79,7 +79,7 @@
 
 		echo '
 			<li href="#" onclick="sub_menu()" class="nav-link">
-			<i class="bx bxs-arrow-to-right"></i>
+			<i class="bx bxs-arrow-to-right text-secondary"></i>
 			<span class="mx-2">Llegadas y Salidas</span>
 			<ul id="reportes_submenu" class="submenu">
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(1)"> Llegadas probables </a></i></ul>
@@ -99,7 +99,7 @@
 		if($permisos_reportes>0){
 		echo '
 		<li href="#" onclick="sub_menu()" class="nav-link">
-			<i class="bx bxs-report" ></i>
+			<i class="bx bxs-report text-secondary"></i>
 			<span class="mx-2 reportes">Reportes</span>
 			<ul id="reportes_submenu" class="submenu">';
 
@@ -140,7 +140,7 @@
 		if($permisos_restaurantes>0){
 		echo '
 		<li href="#" onclick="sub_menu()" class="nav-link">
-			<i class="bx bx-user-check"></i>
+			<i class="bx bx-user-check text-secondary"></i>
 			<span class="mx-2">Restaurante</span>
 			<ul id="restaurante_submenu" class="submenu">';
 
@@ -170,7 +170,7 @@
 		if($permisos_habitaciones>0){
 				echo '
 				<li id="#" onclick="sub_menu();" class="nav-link">
-				<i class="bx bx-bed"></i>
+				<i class="bx bx-bed text-secondary"></i>
 				<span class="mx-2 habitaciones">Configuracion Hab.</span>
 				<ul id="habitaciones_submenu" class="submenu ocultar">
 				';
@@ -202,7 +202,7 @@
 		if($permisos_herramientas>0){
 		  echo '
 		<li href="#" onclick="sub_menu()" class="nav-link">
-			<i class="bx bxs-wrench"></i>
+			<i class="bx bxs-wrench text-secondary"></i>
 			<span class="mx-2">Herramientas</span>
 			<ul id="herramientas_submenu" class="submenu">';
 
@@ -258,14 +258,14 @@
 		echo '
 		
 		<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
-			<i class="bx bxs-user mx-2" ></i>
+			<i class="bx bxs-user mx-2 text-secondary" ></i>
 			<span onclick="hacer_cortes()"> Desarrollo </span>
 		</li>
 
 
 
 		<li href="#" onclick="pregunta_salir()" class="nav-link">
-			<i class="bx bx-exit"></i>
+			<i class="bx bx-exit text-secondary"></i>
 			<span class="mx-2">Salir</span>
 		</li>
 
@@ -277,7 +277,7 @@
 		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--verde menu-btn" onclick="boton_menu()" id="menu-btn-desplegar">
 			<!--icono extraido con la clase desde box icons---->
             <i class="bx bx-menu"></i>
-            <span class="label">Menu</span>
+            <span class="label color_black">Menu</span>
 		</a>
 		<!---
 		<a href="#" class="btn btn-primary border-0 d-flex align-items-center justify-content-center icon-btn icon-btn--amarillo menu-btn" id="menu-btn-fecha">
@@ -294,14 +294,7 @@
             <i class="bx bxl-stack-overflow" ></i>
             <span class="label">Filtro</span>
         </a>-->
-		<button class="btn btn-primary border-0 menu-btn icon-btn" id="filtro-noche" onclick="modoNocturno()">
- 		<i class="bx bx-moon icono-luna"></i>
-		 <span class="label">Color</span>
-		</button>
-		<button class="btn btn-primary border-0 menu-btn btn-cubo icon-btn" id="cubo" onclick="ocultarMostrar()">
-		<i class="bx bx-cube-alt"></i>
-		<span class="label">Efecto</span>
-		</button>
+		
 	</div>
 
 
