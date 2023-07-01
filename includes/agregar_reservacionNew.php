@@ -261,7 +261,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                         <label for="no">No</label>
                         <span></span>
                     </div>
-                    <input type="checkbox" id="confirmacion"  class="form-check"/>
+                    <input type="checkbox" id="confirmacion"  class="form-check" hidden/>
                     </div>';
                 }
 
@@ -272,7 +272,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 
                 <div class="form-group col-md-4">
                     <label for="forma-garantia">Forma de Garantía</label>
-                    <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)">
+                    <select class="form-control" id="forma-garantia" required">
                     <option value="">Seleccione una opción </option>
                     ';
                 
@@ -283,7 +283,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
               
                 <div class="form-group col-md-4">
                 <label for="forma-garantia">Forma de Garantía</label>
-                <button type="button" id="btngarantia" disabled class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
+                <button type="button" id="btngarantia" class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
                 </div>';
 
                 if (empty($_GET['hab_id'])) {

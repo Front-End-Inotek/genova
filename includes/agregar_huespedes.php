@@ -212,6 +212,28 @@
               <input type="text" id="cvv" name="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="3" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
         </div>
         </div>
+
+        <div class="col-6">
+       
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox"  id="c_abierto">
+                <label class="form-check-label" for="flexCheckDefault">Crédito abierto</label>
+                <input class="form-check-input" type="checkbox"  id="c_cerrado">
+                <label class="form-check-label" for="flexCheckDefault">Crédito cerrado</label>
+            </div>
+        </div>
+
+      <div class="col-6">
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px; text-align: justify;"> Límite de crédito </span>
+      </div>
+        <input type="number" id="limite_credito" name="limite_credito"  class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+    </div>
+      </div>
+
+
+       
         </div>
 
       

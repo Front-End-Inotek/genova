@@ -2265,6 +2265,35 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         alert("Campos incompletos o descuento no permitido");
     }
 }
+
+
+function enviar_abono_correo(mov,abono,descripcion,forma_pago){
+        var usuario_id=localStorage.getItem("id");
+        var datos = {
+            "mov": mov,
+            "abono":abono,
+            "descripcion":descripcion,
+            "forma_pago":forma_pago,
+          };
+       $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/enviar_correo_abono.php",
+            data:datos,
+            beforeSend:inicioEnvio,
+            success:function(res){
+                console.log(res)
+               
+            },
+            timeout:5000,
+            error:problemas
+          });
+    return false;
+}
+
+
 function enviar_reserva_correo(info,correo,reenviar){
     if(correo!=""){
         var usuario_id=localStorage.getItem("id");
@@ -3328,6 +3357,16 @@ function agregar_huespedes_reservacion(){
 	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
 	var cvv= encodeURI(document.getElementById("cvv").value);
 
+
+    opc_credito = "";
+    if ($('#c_abierto').is(':checked')) {
+        opc_credito = "abierto";
+    }
+    if ($('#c_cerrado').is(':checked')) {
+        opc_credito = "cerrado";
+    }
+    limite_credito = encodeURI(document.getElementById("limite_credito").value);
+
     var datos = {
         "nombre": nombre,
         "apellido": apellido,
@@ -3356,15 +3395,18 @@ function agregar_huespedes_reservacion(){
         xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre+"&apellido="+apellido+"&direccion="+direccion+"&ciudad="+ciudad+
         "&estado="+estado+"&codigo_postal="+codigo_postal+"&telefono="+telefono+"&correo="+correo+"&contrato="+contrato+"&cupon="+cupon+
         "&preferencias="+preferencias+"&comentarios="+comentarios+"&titular_tarjeta="+titular_tarjeta+"&tipo_tarjeta="+tipo_tarjeta+"&numero_tarjeta="+numero_tarjeta+
-        "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id,true);
+        "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id+
+        "&opc_credito="+opc_credito+"&limite_credito="+limite_credito,
+        true);
+
     
         xhttp.addEventListener('load', e =>{
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {
                 //Entrara la contidicion que valida la respuesta del formulario
-                // console.log(e.target.responseText);
-                // console.log(xhttp.responseText)
                 const  response =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+                // console.log(response)
+                // return
                 if (response == 'NO_DATA') {
                     swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
                     return
@@ -4481,12 +4523,16 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
     /*alert(hab_id);
     alert(estado);
     alert(faltante);*/
+
     var usuario_id=localStorage.getItem("id");
     var descripcion= encodeURI(document.getElementById("descripcion").value);
     var forma_pago= document.getElementById("forma_pago").value;
     var cargo= document.getElementById("cargo").value;
     var abono= document.getElementById("abono").value;
-    
+
+    var fp_txt = $("#forma_pago option:selected").text();
+    // console.log(fp_txt)
+    // return
     if(descripcion.length >0 && forma_pago >0 && abono >0){
         $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -4501,7 +4547,8 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
               "mov":mov,
               "id_maestra":id_maestra,
             };
-         
+        //  console.log(datos)
+        //  return
         $.ajax({
               async:true,
               type: "POST",
@@ -4511,11 +4558,15 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
               data:datos,
               //beforeSend:loaderbar,
               success:function(res){
-                
+                // console.log(res)
+                // return
                 if(id_maestra==0){
+                    var data = res.split("/");
                     recibe_datos_monto(res)
+                    enviar_abono_correo(data[2],abono,descripcion,fp_txt);
                 }else{
                     recibe_datos_monto_maestra(res)
+                  
                 }
               },
               //success:problemas_sistema,
@@ -4531,17 +4582,17 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
 // Recibe los datos para efectuar agregar un monto
 function recibe_datos_monto_maestra(datos){
     //alert(datos);
-    var res = datos.split("/");
+  
     $('#caja_herramientas').modal('hide');
-    
+   
     estado_cuenta_maestra(res[0] , res[1], res[2], res[3]);
+   
 }
 
 // Recibe los datos para efectuar agregar un monto
 function recibe_datos_monto(datos){
-    //alert(datos);
-    var res = datos.split("/");
     $('#caja_herramientas').modal('hide');
+    var res = datos.split("/");
     estado_cuenta(res[0] , res[1]);
 }
 
@@ -5933,6 +5984,8 @@ function mesa_disponible_asignar(mesa_id,estado){
 	$("#mostrar_herramientas").load("includes/mesa_disponible_asignar.php?mesa_id="+mesa_id+"&estado="+estado);
 }
 
+
+
 // Asignar una mesa disponible
 function disponible_asignar_mesa(mesa_id,estado){
 	var usuario_id=localStorage.getItem("id");
@@ -6507,6 +6560,10 @@ function hacer_cortes(usuario){
    
 }
 
+function aceptar_guardar_corte_nuevo(){
+    $("#mostrar_herramientas").load("includes/guardar_modal_corte.php");
+}
+
 // Modal de guardar corte
 function aceptar_guardar_corte(){
 	$("#mostrar_herramientas").load("includes/guardar_modal_corte.php");
@@ -6517,6 +6574,37 @@ function aceptar_guardar_corte(){
 function aceptar_guardar_corte_global(){
 	$("#mostrar_herramientas").load("includes/guardar_modal_corte_global.php");
 }
+
+// Guardar un corte global
+function guardar_corte_nuevo(){
+    var usuario_id=localStorage.getItem("id");
+    //var usuario_id= 4;
+    $('#caja_herramientas').modal('hide');
+
+    var datos = {
+        "usuario_id": usuario_id,
+    };
+    $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_corte_global.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:function(res){
+                
+            },
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+        });    
+    //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
+    //guardar_reporte_corte();
+    // mostrar_corte_reporte();
+    return false;
+}
+
 
 
 // Guardar un corte global

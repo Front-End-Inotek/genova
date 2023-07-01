@@ -256,7 +256,28 @@
                                   <label class="form-check-label" for="check3">Sin garantía</label>
                                 </div>
                               </div>
-                            
+
+                              
+        <div class="row">     
+        <div class="col-6">
+       
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox"  id="c_abierto">
+            <label class="form-check-label" for="flexCheckDefault">Crédito abierto</label>
+            <input class="form-check-input" type="checkbox"  id="c_cerrado">
+            <label class="form-check-label" for="flexCheckDefault">Crédito cerrado</label>
+        </div>
+    </div>
+
+    <div class="col-6">
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px; text-align: justify;"> Límite de crédito </span>
+    </div>
+      <input type="number" id="limite_credito" name="limite_credito"  class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+  </div>
+    </div>
+    </div>
                         </div>
                         
                     </form>
@@ -272,16 +293,13 @@
 
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
-      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher){
-        
-      
+      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$opc_credito,$limite_credito){
+
         //validaciones del huesped.
         if(empty($nombre)){
           echo "NO_DATA";
           exit();
         }
-
-
         //Revisar si el tipo de pago/tipo_tarjeta/garantia es realmente una garantía.
         if($tipo_tarjeta!=""){
           include_once('clase_forma_pago.php');
@@ -296,16 +314,14 @@
 
         $existe = "SELECT id FROM huesped where nombre = '$nombre' and apellido='$apellido'";
         $comentario = "Verificar si existe el nombre del huesped";
-        $consulta_existe = $this->realizaConsulta($existe,$comentario); 
-
-    
+        $consulta_existe = $this->realizaConsulta($existe,$comentario);
 
         if(mysqli_num_rows($consulta_existe)==0){
           //ya existe.
           $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, 
-          `estado_huesped`,`pais`,`empresa`,`nombre_tarjeta`,`estado_tarjeta`,`voucher`)
+          `estado_huesped`,`pais`,`empresa`,`nombre_tarjeta`,`estado_tarjeta`,`voucher`,`opc_credito`,`limite_credito`)
           VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', 
-          '$cvv', '0', '1','$pais','$empresa','$nombre_tarjeta','$estado_tarjeta','$voucher');";
+          '$cvv', '0', '1','$pais','$empresa','$nombre_tarjeta','$estado_tarjeta','$voucher','$opc_credito','$limite_credito');";
           $comentario="Guardamos el huesped en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           if(!$consulta){
@@ -337,7 +353,7 @@
         ,comentarios ='$comentarios' 
         , codigo_postal = '$codigo_postal', correo = '$correo', titular_tarjeta = '$titular_tarjeta', estado_tarjeta = '$estado_tarjeta', nombre_tarjeta = '$nombre_tarjeta'
         , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = '$numero_tarjeta', vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
-        , cvv = '$cvv', voucher = '$voucher'
+        , cvv = '$cvv', voucher = '$voucher', opc_credito='$opc_credito',limite_credito='$limite_credito'
         WHERE id='$huesped_id'";
         $comentario="actualizamos el huesped en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

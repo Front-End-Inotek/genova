@@ -80,7 +80,7 @@
   $descripcion= 'Restaurante';
 
   if(isset($_POST['motivo'])){
-    if($_POST['motivo']!="" && $_POST['motivo'] !=0){
+    if(!empty($_POST['motivo'])){
       $descripcion=$_POST['motivo'];
     }
   }

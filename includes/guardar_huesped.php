@@ -55,7 +55,7 @@
   $huesped= NEW Huesped(0);
   
   @$huesped->guardar_huesped(urldecode($_GET['nombre']),urldecode($_GET['apellido']),urldecode($_GET['direccion']),urldecode($_GET['ciudad']),urldecode($_GET['estado']),urldecode($_GET['codigo_postal']),urldecode($_GET['telefono']),urldecode($_GET['correo']),urldecode($_GET['contrato']),urldecode($_GET['cupon']),urldecode($_GET['preferencias']),urldecode($_GET['comentarios']),urldecode($_GET['titular_tarjeta']),urldecode($_GET['tipo_tarjeta']),urldecode($_GET['numero_tarjeta']),urldecode($_GET['vencimiento_mes']),urldecode($_GET['vencimiento_ano']),urldecode($_GET['cvv']),
-  $_GET['usuario_id'],$_GET['pais'],$_GET['empresa'],$_GET['nombre_tarjeta'],$_GET['estado_tarjeta'],$_GET['voucher']);
+  $_GET['usuario_id'],$_GET['pais'],$_GET['empresa'],$_GET['nombre_tarjeta'],$_GET['estado_tarjeta'],$_GET['voucher'],$_GET['opc_credito'],$_GET['limite_credito']);
   
   ?>
 

@@ -771,6 +771,13 @@ hr{
   border-bottom: 0.3em solid #2d3139;
 }
 
+.linea_cuenta {
+
+
+  line-height: normal !important;
+  border-bottom: 0.3em solid #2d3139 !important;
+}
+
 .btn-square-md-rest {
   /* */
   background-color: #71db94;

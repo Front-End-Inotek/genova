@@ -321,7 +321,71 @@
         return $suma_abonos;
       }
 
-   
+
+      function mostrarAbonosMaestra($id_usuario){
+        $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre
+        from cuenta
+        left join cuenta_maestra as cm on cm.mov = cuenta.mov 
+        where id_usuario =$id_usuario
+        and cm.estado = 1 and cuenta.estado!=2
+        and cuenta.abono>0
+        order by cm.id , cuenta.fecha asc";
+        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
+        // echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
+      function mostrarAbonos($id_usuario){
+        $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta 
+        LEFT join hab on hab.mov = cuenta.mov
+        where cuenta.estado !=2
+        and cuenta.id_usuario= $id_usuario
+        and hab.estado = 1
+        AND cuenta.abono > 0
+        order by hab.id , cuenta.fecha asc";
+
+        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
+        // echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+
+      }
+
+
+      function mostrarCargosMaestra($id_usuario){
+        $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre
+        from cuenta
+        left join cuenta_maestra as cm on cm.mov = cuenta.mov 
+        where id_usuario =$id_usuario
+        and cm.estado = 1 and cuenta.estado!=2
+        and cuenta.cargo>0
+        order by cm.id , cuenta.fecha asc" ;
+        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
+        // echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
+      function mostrarCargos($id_usuario){
+        $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta 
+        LEFT join hab on hab.mov = cuenta.mov
+        where cuenta.estado !=2
+        and cuenta.id_usuario= $id_usuario
+        and hab.estado = 1
+        AND cuenta.cargo > 0
+        order by hab.id , cuenta.fecha asc";
+
+        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
+        // echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+
+      }
 
       function mostrar_abonosPDF($mov){
         $total_abonos= 0;
@@ -356,6 +420,7 @@
 
       // Mostrar los cargos que tenemos por movimiento en una habitacion
       function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
+        $fecha_atras="";
         $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
         FROM cuenta 
@@ -374,10 +439,22 @@
               </tr>
             </thead>
             <tbody>';
+            $c=0;
               while ($fila = mysqli_fetch_array($consulta))
               {
                 $descripcion= substr($fila['concepto'], 0, 17);
                 $largo= strlen($fila['concepto']);
+
+                if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
+                  if($c!=0) {
+                   echo '<tr>
+                    <td colspan="5"></td>
+                  
+                    </tr>';
+                  }
+              }
+
+
                 if($fila['edo'] == 1){
                   $total_cargos= $total_cargos + $fila['cargo'];
                   if($descripcion == 'Total reservacion'){
@@ -397,7 +474,13 @@
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
                     <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                    
+                  
                     </tr>';
+
+                    echo '';
+
+                    
                   }
                 }else{
                   echo '<tr class="fuente_menor table-secondary text-center">
@@ -407,6 +490,10 @@
                   <td></td>
                   </tr>';
                 }
+
+               
+                $fecha_atras = date('Y-m-d',$fila['fecha']);
+                $c++;
               }
               echo '
             </tbody>
@@ -416,6 +503,7 @@
       }
       // Mostramos los abonos que tenemos por movimiento en una habitacion
       function mostrar_abonos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
+        $fecha_atras="";
         $total_abonos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
         FROM cuenta 
@@ -437,10 +525,20 @@
               </tr>
             </thead>
             <tbody>';
+              $c=0;
               while ($fila = mysqli_fetch_array($consulta))
               {
                 $descripcion= substr($fila['concepto'], 0, 17);
                 $largo= strlen($fila['concepto']);
+
+                if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
+                  if($c!=0) {
+                    echo '<tr>
+                    <td colspan="5"></td>
+                  
+                    </tr>';
+                  }
+              }
                 if($fila['edo'] == 1){
                   $total_abonos= $total_abonos + $fila['abono'];
                   if($descripcion == 'Total reservacion'){
@@ -473,7 +571,10 @@
                   <td></td>
                   </tr>';
                 }
+                $fecha_atras = date('Y-m-d',$fila['fecha']);
+                $c++;
               }
+             
               echo '
             </tbody>
           </table>
