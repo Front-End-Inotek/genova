@@ -1,9 +1,8 @@
 body{
- overflow-x: hidden;
-
- /*background-color: #f6f6f6;*/
+    overflow-x: hidden;
+    /*background-color: #f6f6f6;*/
 }
 .topnav{
- background-color: #142750;
- overflow: hidden;
+    background-color: #142750;
+    overflow: hidden;
 }

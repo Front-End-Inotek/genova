@@ -157,12 +157,13 @@
 
 /* Color para tabla de encabezado info **/
 .table-info-encabezado {
-  color: #fff;
+  /* color: #fff; */
+  color: var(--titulos);
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
   background-color: #3e54ac;
-  background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
+  /* background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%); */
   border-top-style: none;
 }
 
@@ -342,7 +343,7 @@ label {
 
 /*color check box*/
 .form-check-input:checked {
-  background-color: #4f3cfb;
+  /* background-color: #4f3cfb; */
   border: 1px solid #3f51b5;
   font-size: 20px;
   margin-right: 5px;
@@ -351,7 +352,8 @@ label {
 
 .input-group-text {
   background-color: #e9ecef;
-  color: #3f51b5 !important;
+  /* color: #3f51b5 !important; */
+  color: var(--titulos);
 }
 
 input:hover {
@@ -484,10 +486,9 @@ tr:hover {
 }
 
 .card-body{
-  background-color: #a5c1ff57 !important;
+  background-color: #f7faff57 !important;
   /* border: 2px solid; */
 }
-
 
 /* Contenedor con fondo blanco y margen */
 .blanco_margen {
@@ -500,7 +501,6 @@ tr:hover {
   background-color: #ecf2ff;
   border: 2px solid #3f51b5;
 }
-
 
 /* Margen de uno en escritura */
 .margen-1 {
@@ -625,8 +625,6 @@ a.topictitle:hover {
 hr{
   display: none;
 }
-
-
 
 .titulo_hab {
   /* estado */

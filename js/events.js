@@ -223,8 +223,8 @@ function recargar_pagina(){
     location.reload();
 }
 
-// Evaluar si la session  
-function sabersession(){ 
+// Evaluar si la session
+function sabersession(){
 	var id=localStorage.getItem("id");
 	if(id==null){
 		$('#entrada_formulario').show();

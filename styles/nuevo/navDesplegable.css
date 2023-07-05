@@ -104,9 +104,9 @@ span {
   transition: all 0.3s ease;
 }
 
-.form-check-label:hover {
+/* .form-check-label:hover {
   color: #FFf;
-}
+} */
 
 .form-check-label:hover:after {
   left: auto;
@@ -116,7 +116,7 @@ span {
 
 .form-check-input:checked+.form-check-label {
   background-color: #fff;
-  color: #30349f;
+  /* color: #30349f; */
   border-color: #8e97f9;
   font-weight: 500;
 }
@@ -240,7 +240,7 @@ span {
 /******************************/
 .side-navbar {
   min-width: 300px;
-  height: 120%;
+  height: 100vh;
   position: absolute;
   margin-left: -15.7%;
 
@@ -249,13 +249,11 @@ span {
   /* background:linear-gradient(90deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%); */
   /*
   background: linear-gradient(90deg, #30349f 0%, #595dd5 50%, #181b63 100%);*/
-  transition: 0.5s;
+  transition: 0.2s all ease-in;
   
   font-size: large;
   z-index: 9999;
 }
-
-
 
 #navbarDropdown {
   color: #fff;
@@ -273,7 +271,6 @@ span {
   font-size: medium;
   color: var(--parrafos);
 }
-
 
 /*informacion sobre la empresa */
 
@@ -330,7 +327,6 @@ span {
   background-color: var(--fondoAzul);
 }
 
-
 #menu-btn-fecha {
   left: 125%;
 }
@@ -341,7 +337,6 @@ span {
 
 #mostrar-botones {
   left: 175%;
-
 }
 
 #filtro-noche{
@@ -386,7 +381,6 @@ span {
   line-height: 1;
 }
 
-
 /* .btn-primary:focus {
   background-color: #222226;
 
@@ -402,15 +396,11 @@ span {
   visibility: hidden;
 }
 
-
-
-
 @media (max-width: 668px) {
 
   /* Agregamos un media query para dispositivos móviles */
   .side-navbar {
     margin-left: -53%;
-
   }
 
   .active-nav {
@@ -479,6 +469,7 @@ span {
   #mostrar-botones {
     left: 55%;
   }
+
   #filtro-noche{
     left: 85.5%;
   }
@@ -552,9 +543,9 @@ span {
   #mostrar-botones {
     left: 160%;
   }
-    #filtro-noche{
+  #filtro-noche{
   left: 90.5%;
-}
+  }
 }
 
 /* Para pantallas de tamaño grande, entre 992px y 1980px */
@@ -590,9 +581,6 @@ span {
     left: 160%;
   }
 }
-
-
-
 
 /* Para pantallas de tamaño extra grande */
 @media (min-width: 2082px) {

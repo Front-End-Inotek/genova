@@ -22,26 +22,21 @@ function togglePanel() {
   };
 }
 
+function mostrarInformacion() {
 
+  swal({
+    title: "Información",
+    text: "Informacion del Huesped",
+    icon: "info",
+    button: "OK",
+  });
+};
 
- function mostrarInformacion() {
+const tasks = document.querySelectorAll(".task");
 
-   swal({
-     title: "Información",
-     text: "Informacion del Huesped",
-     icon: "info",
-     button: "OK",
-   });
- };
-
- const tasks = document.querySelectorAll(".task");
-
- tasks.forEach(task => {
+tasks.forEach(task => {
   task.addEventListener("click", mostrarInformacion);
 });
-
-
-
 
 /************************************* */
 /* ***funcion par sobre poner ***********/

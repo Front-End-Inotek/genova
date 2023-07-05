@@ -22,12 +22,12 @@ function switch_rack() {
 
 function boton_menu() {
   let sidebar = document.querySelector("#sidebar");
-  let container = document.querySelector(".my-container");
+  /* let container = document.querySelector(".my-container"); */
   sidebar.classList.toggle("active-nav");
 
   // container.classList.toggle("active-cont");
   // if(container!=null){
-    container.classList.toggle("active-cont");
+    /* container.classList.toggle("active-cont"); */
   // }
   
 }

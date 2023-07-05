@@ -69,7 +69,6 @@
   margin-right: calc((200px - 100px) / 2); /* Margen derecho para centrar el TD */
 }
 
-
 .mes {
   background-color: #30349f;
   color: #fff;
@@ -113,16 +112,15 @@
   top: 0;
   z-index: 1040;
   text-align: center;
-
 }
 
 .tableRack td {
   font-weight: normal;
   font-size: 1em;
--webkit-box-shadow: 0 2px 2px -2px #0E1119;
-   -moz-box-shadow: 0 2px 2px -2px #0E1119;
-        box-shadow: 0 2px 2px -2px #0E1119;
-        background: #00000000 !important;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+  -moz-box-shadow: 0 2px 2px -2px #0E1119;
+  box-shadow: 0 2px 2px -2px #0E1119;
+  background: #00000000 !important;
 }
 
 .tableRack th {
@@ -138,8 +136,7 @@
     transition-duration: 0.2s;
     transition-property: all;
   transition-timing-function: line;
-  }
-
+}
 
 .tableRack td:first-child {
   color: var(--titulos);
@@ -152,20 +149,20 @@
   background-color: var(--subtitulos) !important;
 }
 .tableRack tr:hover {
- background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
- -webkit-box-shadow: 0 6px 6px -6px #0E1119;
-    -moz-box-shadow: 0 6px 6px -6px #0E1119;
-         box-shadow: 0 6px 6px -6px #0E1119;
- }
- 
+  background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
+  -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+  -moz-box-shadow: 0 6px 6px -6px #0E1119;
+  box-shadow: 0 6px 6px -6px #0E1119;
+  /* background: var(--subtitulos) !important; */
+}
 .tableRack td:hover {
   background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
-color: #30349f;
-box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
-transition-delay: 0s;
+  color: #30349f;
+  box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
+  transition-delay: 0s;
   transition-duration: 0.4s;
   transition-property: all;
-transition-timing-function: line;
+  transition-timing-function: line;
 }
 
 .tableRack th:hover + tr td {
@@ -195,9 +192,6 @@ transition-timing-function: line;
   background-color: transparent;
 }
 
-
-
-
 /*---------calendario------*/
 .cal-container {
   max-width: 900px;
@@ -218,14 +212,12 @@ transition-timing-function: line;
   background-color: #ecf2ff;
   position: sticky;
   z-index: 1010;
-
 }
 
 .cal-viewmonth {
   font-size: 16px;
   width: 150px;
   height: 50px;
-
 }
 
 .cal-toprow {
@@ -270,13 +262,11 @@ transition-timing-function: line;
   padding: 0.3em;
 }
 
-
 .cal-userbadge {
   border-radius: 0;
   font-weight: 600;
   font-size: 11px;
 }
-
 
 /* ------------task de estado de habitacion -------*/
 
@@ -290,14 +280,11 @@ transition-timing-function: line;
   text-align: left !important;
 }
 
-
-
 .task--bloqueado {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #333;
   border-left: 7px solid #0b0b0b;
   color: #fff;
-
 }
 
 .task--bloqueado:hover {
@@ -319,7 +306,6 @@ transition-timing-function: line;
   box-shadow: 0 10px 14px #05d1ca8b;
 }
 
-
 .task--mantenimiento {
   border-left: 7px solid var(--colorTextNaranja);
   background: var(--fondoNaranja);
@@ -336,8 +322,6 @@ transition-timing-function: line;
   box-shadow: 0 10px 14px #fdb44d84;
 }
 
-
-
 .task--ocupada-sucia {
   border-left: 7px solid #bd0202;
   /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
@@ -347,7 +331,6 @@ transition-timing-function: line;
   /* background: linear-gradient(180deg, #ed6a6a 0%, #fb9595 40%, #bc3f3f 100%); */
   align-self: end;
   color: var(--fondoRojo);
-
 }
 
 .task--ocupada-sucia:hover {
@@ -369,9 +352,8 @@ transition-timing-function: line;
 .task--ocupadoH:hover {
   /* background-color: #9f0404fb !important; */
   color: #fff;
-  box-shadow: 0 10px 14px #780202af;
+  /* box-shadow: 0 10px 14px #780202af; */
 }
-
 
 .task--vacia-sucia {
   border-left: 7px solid var(--colorTextVerde);
@@ -379,8 +361,6 @@ transition-timing-function: line;
   /* background: linear-gradient(180deg, #b9ed84 0%, #d6f6b5 40%, #98cb62 100%); */
   align-self: end;
   color: var(--colorTextVerde);
-
-
 }
 
 .task--vacia-sucia:hover {
@@ -398,14 +378,13 @@ transition-timing-function: line;
   background-color: var(--fondoGris);
   box-shadow: var(--sombra);
   color: var(--titulos);
-
 }
 
 .task--disponible-limpia:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
   border-left: 7px solid #9b9a9a !important;
-  box-shadow: 0 10px 14px #9b9a9a;
+  /* box-shadow: 0 10px 14px #9b9a9a; */
 }
 
 .task--disponible-limpia a {
@@ -418,22 +397,16 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 10;*/
   background: #6b0fe3af;
-  background: linear-gradient(180deg, #be8cff 0%, #c199f6af 40%, #7439c3 100%);
-  color: #000;
-
-
+  /* background: linear-gradient(180deg, #be8cff 0%, #c199f6af 40%, #7439c3 100%); */
+  color: #ffffff;
 }
 
 .task--reserva-pagada:hover {
   background-color: #6b0fe3af !important;
-  
   color: #fff !important;
   border-left: 7px solid #4d03ae !important;
-  box-shadow: 0 10px 14px #6b0fe396;
+  /* box-shadow: 0 10px 14px #6b0fe396; */
 }
-
-
-
 
 .task--reserva-pendiente-pago {
   border-left: 7px solid #bc88ff;
@@ -441,29 +414,23 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 11;
   background: #3b0286;
-  background: linear-gradient(180deg, #4f0ba8 0%, #8c4ddf 40%, #1e0243 100%);
+  /* background: linear-gradient(180deg, #4f0ba8 0%, #8c4ddf 40%, #1e0243 100%); */
   color: #FFF;
-
-
 }
 
 .task--reserva-pendiente-pago:hover {
   background-color: #3b0286 !important;
   color: #fff !important;
   border-left: 7px solid #bc88ff !important;
-  box-shadow: 0 10px 14px #3b0286cb;
+  /* box-shadow: 0 10px 14px #3b0286cb; */
 }
-
 #yo:hover ~  #hh {color: yellow; }
-
-
 
 .task--limpieza-vacia {
   border-left: 7px solid #4786ff;
   background: rgb(205, 222, 252);
   /* background: linear-gradient(180deg, #b4ceff 0%, rgb(206, 223, 255) 40%, #80acff 100%); */
   color: #0a5eff;
-
 }
 
 .task--limpieza-vacia:hover {
@@ -475,7 +442,6 @@ transition-timing-function: line;
 .task--limpieza-vacia a {
   color: #0a5eff !important;
 }
-
 
 .task--limpieza-ocupada {
   border-left: 7px solid #052d76;
@@ -491,7 +457,7 @@ transition-timing-function: line;
   /* background-color: #052d76 !important; */
   color: #fff !important;
   border-left: 7px solid #6398fb !important;
-  box-shadow: 0 10px 14px #6398fbdd;
+  /* box-shadow: 0 10px 14px #6398fbdd; */
 }
 
 .task--transparente{
@@ -508,7 +474,6 @@ transition-timing-function: line;
   border-left: 7px solid transparent !important;
 }
 
-
 .task__detail {
   position: absolute;
   left: 0;
@@ -522,7 +487,6 @@ transition-timing-function: line;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   z-index: 2;
 }
-
 
 /*esta e sla animacion para mostrar el nombre del huesped*/
 .task:after {
@@ -539,18 +503,17 @@ transition-timing-function: line;
   z-index: 1;
   background:#fff;
   box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
-    7px 7px 20px 0px rgba(0, 0, 0, .1),
-    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  7px 7px 20px 0px rgba(0, 0, 0, .1),
+  4px 4px 5px 0px rgba(0, 0, 0, .1);
   transition: all 0.5s ease;
   border-radius: 3px;
 }
 
 .elhover {
-
   background:#fff;
   box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
-    7px 7px 20px 0px rgba(0, 0, 0, .1),
-    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  7px 7px 20px 0px rgba(0, 0, 0, .1),
+  4px 4px 5px 0px rgba(0, 0, 0, .1);
   transition: all 0.5s ease;
   border-radius: 3px;
 }
@@ -565,13 +528,11 @@ transition-timing-function: line;
   width: 100%;
 }
 
-
 .my-input:checked+.task {
   background-color: #fff;
   color: #30349f;
   border-color: #8e97f9;
   font-weight: 500;
-  
 }
 
 .my-input:checked+.task:after {
@@ -589,8 +550,6 @@ transition-timing-function: line;
 .task:hover:after {
   opacity: 1;
 }
-
-
 
 /* -----------agregar estados 2 estados en el mismo dia---------*/
 
