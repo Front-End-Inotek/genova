@@ -206,7 +206,7 @@ label {
 
 /* Color en las letras del boton */
 .btn-primary {
-  color: white;
+  color: var(--subtitulos) ;
   border: 2px solid var(--subtitulos) !important;
 }
 

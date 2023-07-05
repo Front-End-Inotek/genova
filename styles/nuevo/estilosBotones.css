@@ -394,7 +394,7 @@ body {
 .btn-warning {
   font-weight: 500;
   border:2px solid  var(--colorTextNaranja);
-  background: var(--colorTextNaranja);
+  background: var(--fondoNaranja);
   /* background: linear-gradient(0deg, rgba(255,107,39,1) 0%, rgba(251,253,45,1) 100%); */
   /* box-shadow: inset 1px 2px 2px 0px rgba(222, 222, 222, 0.5), 
   0px 0px 0px 0px rgba(194, 194, 194, 0.475), 10px 4px 5px 0px rgba(127, 127, 127, 0.456) !important; */
@@ -404,25 +404,25 @@ body {
 .btn-warning:hover {
   font-weight: 500;
   border:2px solid  var(--colorTextNaranja);
-  background: var(--fondoNaranja) !important;
+  background: var(--colorTextNaranja) !important;
   color: var(--titulos) !important;
 }
 
 .btn-success {
   font-weight: 700;
   /* background-image: linear-gradient( rgb(182, 244, 146), rgb(51, 139, 147)); */
-  color: var(--fondoVerde) !important;
+  color: var(--colorTextVerde) !important;
   /* box-shadow: inset 1px 2px 2px 0px rgba(222, 222, 222, 0.5), 
   0px 0px 0px 0px rgba(194, 194, 194, 0.475), 10px 4px 5px 0px rgba(127, 127, 127, 0.456) !important; */
-  background-color: var(--colorTextVerde);
+  background-color: var(--fondoVerde);
   border: 2px solid var(--colorTextVerde) !important;
 }
 
 .btn-success:hover {
   /*background-color: #c8d7ff !important;*/
   border: 2px solid var(--colorTextVerde) !important;
-  color: var(--colorTextVerde) !important;
-  background-color: var(--fondoVerde);
+  color: var(--fondoVerde) !important;
+  background-color: var(--colorTextVerde);
   /* box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #fff; */
 }
 
@@ -431,44 +431,49 @@ body {
 .btn-danger {
   border:2px solid  var(--colorTextRojo);
   /* background: linear-gradient(0deg, rgba(195,34,126,1) 0%, rgba(253,45,49,1) 100%); */
-  background: var(--colorTextRojo);
+  background: var(--fondoRojo);
   /* box-shadow: inset 1px 2px 2px 0px rgba(222, 222, 222, 0.5), 
   0px 0px 0px 0px rgba(194, 194, 194, 0.475), 10px 4px 5px 0px rgba(127, 127, 127, 0.456) !important; */
-  font-weight: 500;
-  color: var(--fondoRojo) !important;
-}
-
-.btn-danger:hover {
-  border:2px solid  var(--colorTextRojo);
-  background: var(--fondoRojo);
-  /* box-shadow: inset 2px 2px 2px 0px rgba(255, 49, 8, 0.3),
-    7px 7px 20px 0px rgba(246, 8, 4, 0.1), 4px 4px 5px 0px rgba(243, 9, 1, 0.352) !important; */
   font-weight: 500;
   color: var(--colorTextRojo) !important;
 }
 
+.btn-danger:hover {
+  border:2px solid  var(--colorTextRojo);
+  background:  var(--colorTextRojo);
+  /* box-shadow: inset 2px 2px 2px 0px rgba(255, 49, 8, 0.3),
+    7px 7px 20px 0px rgba(246, 8, 4, 0.1), 4px 4px 5px 0px rgba(243, 9, 1, 0.352) !important; */
+  font-weight: 500;
+  color: var(--fondoRojo) !important;
+}
+
 .btn-primary {
-  background-color: var(--subtitulos);
-  color: #fff ;
+  background-color: var(--fondoAzul);
+  color: var(--subtitulos) ;
   border: 2px solid var(--subtitulos) !important;
   /* box-shadow: inset 1px 2px 2px 0px rgba(222, 222, 222, 0.5),
   0px 0px 0px 0px rgba(194, 194, 194, 0.475), 10px 4px 5px 0px rgba(127, 127, 127, 0.456) !important;
   background-image: linear-gradient( #98a7ff, #3f51b5); */
 }
 .btn-primary:hover{
-  background-color: var(--fondoAzul);
-  color: var(--subtitulos);
+  background-color: var(--subtitulos);
+  color: var(--fondoAzul);
   border: 2px solid var(--subtitulos) !important;
 }
 
 
 .btn-secondary {
   /* background-image: linear-gradient( #98a7ff, #3f51b5); */
-  background-color: var(--colorTextAzul);
+  background-color: var(--fondoAzul);
   /* box-shadow: inset 1px 2px 2px 0px rgba(185, 196, 252, 0.5),
   0px 0px 0px 0px rgba(128, 128, 239, 0.475), 10px 4px 5px 0px rgba(58, 73, 242, 0.456) !important; */
-  color: #fff !important;
-  /* border: 2px solid #3f51b5; */
+  color: var(--colorTextAzul) !important;
+  border: 2px solid var(--colorTextAzul);
+}
+.btn-secondary:hover{
+  background-color: var(--colorTextAzul);
+  color: var(--fondoAzul) !important;
+  border: 2px solid var(--colorTextAzul);
 }
 
 .checkbox-container {
@@ -1032,15 +1037,15 @@ body.modo-nocturno .containerRackOp .btn:focus {
   box-shadow: inset 1px 2px 2px 0px rgba(185, 196, 252, 0.5),
   0px 0px 0px 0px rgba(128, 128, 239, 0.475), 10px 4px 5px 0px rgba(58, 73, 242, 0.456) !important;
   color: #fff !important; */
-  background-color: var(--colorTextInfo);
+  background-color: var(--fondoAzul);
   border: 2px solid var(--colorTextInfo);
-  color: white !important;
+  color: var(--colorTextInfo) !important;
 }
 
 .btn-info:hover {
-  background-color: var(--fondoAzul);
+  background-color: var(--colorTextInfo);
   border-color: var(--colorTextInfo);
-  color: var(--colorTextInfo) !important;
+  color: var(--fondoAzul) !important;
 }
 
 .modal-header {
