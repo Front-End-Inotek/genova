@@ -166,12 +166,28 @@
         $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+
+      // Editar multiples cargos de cuentas
+      function editar_cargos($cargos){
+        $cargos = json_decode($cargos);
+        // print_r($cargos);
+        // die();
+        foreach ($cargos as $key => $cargo) {
+          $sentencia = "UPDATE `cuenta` SET
+          `cargo` = '$cargo->valor'
+          WHERE `id` = '$cargo->cuenta_id';";
+          // echo $sentencia ;
+          $comentario="Editar el cargo de una cuenta dentro de la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }
+      }
+
       // Editar el cargo de una cuenta
       function editar_cargo($id,$cargo){
         $sentencia = "UPDATE `cuenta` SET
             `cargo` = '$cargo'
             WHERE `id` = '$id';";
-        //echo $sentencia ;
+        // echo $sentencia ;
         $comentario="Editar el cargo de una cuenta dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
@@ -319,6 +335,78 @@
           $suma_abonos= $suma_abonos + ($abono= $fila['abono']);
         }
         return $suma_abonos;
+      }
+
+      //Obtener el limite de credito de husped en base a un movimiento.
+
+      function mostrarLimiteCredito($mov){
+
+        $sentencia="SELECT huesped.estado_credito as estado_credito , huesped.limite_credito
+        FROM hab 
+        INNER JOIN movimiento as mov ON hab.mov = mov.id
+        LEFT JOIN huesped on mov.id_huesped = huesped.id
+        where hab.estado !=0 
+        and hab.mov = $mov
+        ";
+        $comentario="Obtener el limite de credito de husped en base a un movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $estado_credito="";
+        $limite_credito =0;
+
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+            $estado_credito= $fila['estado_credito'];
+            $limite_credito = $fila['limite_credito'];
+        }
+        return [$estado_credito,$limite_credito];
+
+      }
+
+      function estadoCargosHabs(){
+        $sentencia="SELECT *, hab.nombre as hab_nombre, reservacion.total as tarifa, cuenta.id as cuenta_id
+        FROM 
+        cuenta
+        INNER JOIN hab  ON hab.mov = cuenta.mov
+        INNER JOIN movimiento as mov ON hab.mov = mov.id 
+        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
+        where hab.estado = 1
+        AND cuenta.estado != 2
+        AND (cuenta.cargo>0) 
+        order by hab.id";
+        $comentario="Obtenemos cargos/habonos de una habitacion en casa";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
+      function hab_ocupadas(){
+        $sentencia="SELECT hab.id ,hab.nombre as hab_nombre,hab.tipo,hab.mov as mov,hab.estado,reservacion.total as tarifa,  
+        huesped.nombre, huesped.apellido, reservacion.estado_credito, reservacion.limite_credito
+        FROM hab INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id  
+        INNER JOIN movimiento as mov ON hab.mov = mov.id 
+        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
+        INNER JOIN huesped on mov.id_huesped = huesped.id
+        WHERE hab.estado = 1  
+        ORDER BY id";
+
+        $comentario="Obtenemos habitaciones en casa";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
+      function estadoCuentaHabs(){
+        $sentencia="SELECT *, hab.nombre as hab_nombre, reservacion.total as tarifa
+        FROM 
+        cuenta
+        INNER JOIN hab  ON hab.mov = cuenta.mov
+        INNER JOIN movimiento as mov ON hab.mov = mov.id 
+        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
+        where hab.estado = 1
+        AND cuenta.estado != 2
+        AND (cuenta.abono>0 OR cuenta.cargo>0) 
+        order by hab.id";
+        $comentario="Obtenemos cargos/habonos de una habitacion en casa";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
       }
 
 

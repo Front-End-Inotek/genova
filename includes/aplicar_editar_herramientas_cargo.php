@@ -10,7 +10,7 @@
   $logs = NEW Log(0);
   $nombre= $hab->nombre;
   $mensaje_log="Editar cargo de habitacion: ". $nombre." en cuenta ". $_POST['id'];
-  if(isset($_POST['id_maestra'])){
+  if(isset($_POST['id_maestra']) && !empty($_POST['id_maestra'])){
     require_once('clase_cuenta_maestra.php');
     $cm = new CuentaMaestra($_POST['id_maestra']);
     $mensaje_log="Editar cargo de cuenta maestra: ". $cm->nombre." en cuenta ". $_POST['id'];

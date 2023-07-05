@@ -193,8 +193,8 @@ function cargar_area_trabajo(){
 
     function pregunta_salir(){
     swal({
-        title: "Estas deacuerdo en cerrar la sesion?",
-        text: "Podras iniciar sesion siempre que quieras y tus credenciales sean correctas!",
+        title: "¿Estás de acuerdo en cerrar la sesión?",
+        text: "¡Podrás iniciar sesion siempre que quieras y tus credenciales sean correctas!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -1905,9 +1905,13 @@ function redondearDecimales(numero,decimales){
 function mostrar_modal_garantia(){
     id_huesped = $("#tomahuespedantes").val()
     estado_tarjeta=$("#estadotarjeta").val()
+    estado_credito=$("#estadocredito").val()
     $("#mostrar_herramientas").load('includes/modal_mostrar_garantia.php?huesped='+id_huesped+"&estadotarjeta="+estado_tarjeta,function(){
         if(estado_tarjeta!=""){
             $(":checkbox[value="+estado_tarjeta+"]").prop("checked","true");
+        }
+        if(estado_credito!=""){
+            $(":checkbox[value="+estado_credito+"]").prop("checked","true");
         }
         
     })
@@ -1980,7 +1984,7 @@ function buscar_asignar_huesped(funcion,precio_hospedaje,total_adulto,total_juni
 	$("#tabla_huesped").load("includes/buscar_asignar_huesped.php?funcion="+funcion+"&precio_hospedaje="+precio_hospedaje+"&total_adulto="+total_adulto+"&total_junior="+total_junior+"&total_infantil="+total_infantil+"&a_buscar="+a_buscar);
 }
 
-function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv,correo,voucher){
+function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv,correo,voucher, estado_credito, limite_credito, nombre_tarjeta){
     // console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv, voucher)
     $("#nombre").val(nombre)
     $("#apellido").val(apellido)
@@ -1996,7 +2000,10 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
     $("#nt").val(titular_tarjeta)
     $("#mes").val(vencimiento_mes)
     $("#year").val(vencimiento_ano)
-    $("#ccv").val(ccv)
+    $("#limitecredito").val(limite_credito)
+    $("#estadocredito").val(estado_credito)
+
+    $("#nombre_tarjeta").val(nombre_tarjeta)
 
     $("#correo").val(correo)
 
@@ -2182,10 +2189,14 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
 
     if(id_cuenta!=0){
         ruta="includes/aplicar_editar_reservacionNew.php";
-      
     }
     var voucher =document.getElementById('voucher').value
     var estado_tarjeta=document.getElementById('estadotarjeta').value
+
+
+    estado_credito = $("#estadocredito").val()
+    limite_credito = $("#limitecredito").val()
+
     var datos = {
         "id":id_reservacion,
         "id_huesped": id_huesped,
@@ -2224,6 +2235,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "preasignada" : Number(preasignada),
         "voucher":voucher,
         "estado_tarjeta":estado_tarjeta,
+        "estado_credito":estado_credito,
+        "limite_credito":limite_credito,
       };
     console.log(datos)
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
@@ -2266,6 +2279,45 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     }
 }
 
+//Auditoria
+
+function ver_auditoria(){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_auditoria.php?usuario_id="+usuario_id);
+    closeModal();
+	closeNav();
+
+}
+
+
+function enviar_transacciones_correo(mov,abono,descripcion,forma_pago){
+    var usuario_id=localStorage.getItem("id");
+    var datos = {
+        "mov": mov,
+        "abono":abono,
+        "descripcion":descripcion,
+        "forma_pago":forma_pago,
+      };
+   $.ajax({
+        async:true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url:"includes/enviar_correo_transacciones.php",
+        data:datos,
+        beforeSend:inicioEnvio,
+        success:function(res){
+            console.log(res)
+           
+        },
+        timeout:5000,
+        error:problemas
+      });
+return false;
+}
 
 function enviar_abono_correo(mov,abono,descripcion,forma_pago){
         var usuario_id=localStorage.getItem("id");
@@ -2362,13 +2414,28 @@ function asignarValorTarjeta(){
     if(!verificarFormulario('form-garantia',"name")){
         closeModal();
     }
-    $("#nut").val($("#cardnumber").val())
+
+    $("#nut").val($("#numero_tarjeta").val())
     $("#nt").val($("#cardholder").val())
     $("#nombre_tarjeta").val($("#tipo").val())
     $("#mes").val($("#expires-month").val())
     $("#year").val($("#expires-year").val())
     $("#ccv").val($("#tccv").val())
     $("#estadotarjeta").val($("input[name=estado]:checked").val())
+
+
+    estado_credito = "";
+    if ($('#c_abierto').is(':checked')) {
+        estado_credito = "abierto";
+    }
+    if ($('#c_cerrado').is(':checked')) {
+        estado_credito = "cerrado";
+    }
+    limite_credito = encodeURI(document.getElementById("limite_credito").value);
+
+    $("#estadocredito").val(estado_credito)
+    $("#limitecredito").val(limite_credito)
+
 }
 
 
@@ -2418,8 +2485,9 @@ function verificarFormulario(id_form,field) {
 }
 
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
+
+
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
-        
         alert("Fecha de asignación inválida")
         return false
     }
@@ -2449,6 +2517,12 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         nombre_tarjeta = $("#nombre_tarjeta").val()
         estado_tarjeta=$("#estadotarjeta").val()
 
+        estado_credito = $("#estadocredito").val()
+        limite_credito = $("#limitecredito").val()
+
+        if(numero_tarjeta=="**************"){
+            numero_tarjeta=null
+        }
         // console.log(nombre_tarjeta)
         // return
 
@@ -2459,14 +2533,15 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         "&ciudad="+ciudad_huesped+"&estado="+estado_huesped+"&telefono="+telefono_huesped+"&comentarios="+comentarios_huesped+"&tipo_tarjeta="+tipo_tarjeta+"&usuario_id="+usuario_id+
         "&titular_tarjeta="+titular_tarjeta+"&numero_tarjeta="+numero_tarjeta+
         "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&nombre_tarjeta="+nombre_tarjeta
-        +"&estado_tarjeta="+estado_tarjeta+"&correo="+correo+"&voucher="+voucher
+        +"&estado_tarjeta="+estado_tarjeta+"&correo="+correo+"&voucher="+voucher+"&estado_credito="+estado_credito+"&limite_credito="+limite_credito
         ,true);
         xhttp.addEventListener('load', e =>{
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {
                 //Entrara la contidicion que valida la respuesta del formulario
                 // console.log(e.target.responseText);
-                // console.log(xhttp.responseText)
+                // return
+               
                 const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
                 if(response_msj == "NO_DATA"){
                     swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
@@ -3358,12 +3433,12 @@ function agregar_huespedes_reservacion(){
 	var cvv= encodeURI(document.getElementById("cvv").value);
 
 
-    opc_credito = "";
+    estado_credito = "";
     if ($('#c_abierto').is(':checked')) {
-        opc_credito = "abierto";
+        estado_credito = "abierto";
     }
     if ($('#c_cerrado').is(':checked')) {
-        opc_credito = "cerrado";
+        estado_credito = "cerrado";
     }
     limite_credito = encodeURI(document.getElementById("limite_credito").value);
 
@@ -3396,7 +3471,7 @@ function agregar_huespedes_reservacion(){
         "&estado="+estado+"&codigo_postal="+codigo_postal+"&telefono="+telefono+"&correo="+correo+"&contrato="+contrato+"&cupon="+cupon+
         "&preferencias="+preferencias+"&comentarios="+comentarios+"&titular_tarjeta="+titular_tarjeta+"&tipo_tarjeta="+tipo_tarjeta+"&numero_tarjeta="+numero_tarjeta+
         "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id+
-        "&opc_credito="+opc_credito+"&limite_credito="+limite_credito,
+        "&estado_credito="+estado_credito+"&limite_credito="+limite_credito,
         true);
 
     
@@ -3425,6 +3500,52 @@ function agregar_huespedes_reservacion(){
         xhttp.send();        
     }
 
+}
+
+function mostrar_tarjeta(huesped_id){
+    
+    if ($('#check_tarjeta').is(':checked')) {
+        let password = prompt("Escriba su contraseña para continuar")
+        if (password == null || password == "") {
+            $('#numero_tarjeta').val("**************")
+            $('#check_tarjeta').prop('checked', false);
+          } else {
+            validar_pass(password,huesped_id)
+          }
+    }else{
+        $('#numero_tarjeta').val("**************")
+    }
+}
+
+function validar_pass(password,huesped_id){
+    let usuario_id=localStorage.getItem("id");
+    let datos={
+        "usuario_id" : usuario_id,
+        "password" : password,
+        "huesped_id" : huesped_id,
+    }
+    $.ajax({
+        async:true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url:"includes/evaluar_password.php",
+        data:datos,
+        beforeSend:loaderbar,
+        success:function(res){
+            if(res!=0){
+                console.log("good")
+                $('#numero_tarjeta').val(res)
+
+                $('#numero_tarjeta').prop("disabled",false)
+
+            }else{
+                $('#check_tarjeta').prop('checked', false);
+            }
+        },
+        timeout:5000,
+        error:problemas_sistema
+    });
 }
 
 // Guarda el modal luego de su uso
@@ -3489,6 +3610,9 @@ function modificar_huesped(id,hab_id,id_reservacion){
 	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
 	var cvv= encodeURI(document.getElementById("cvv").value);
 
+    if(numero_tarjeta=="**************"){
+        numero_tarjeta=null
+    }
 
 	if(id >0){
 		$("#boton_huesped").html('<div class="spinner-border text-primary"></div>');
@@ -4446,11 +4570,10 @@ function estado_cuenta(hab_id,estado,mov=0){
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/estado_cuenta.php?hab_id="+hab_id+"&estado="+estado,function(res){
-        
         if(res=="nada"){
             document.location.href='inicio.php'; 
         }
-    }); 
+    });
 	$('#caja_herramientas').modal('hide');
 }
 
@@ -4607,6 +4730,106 @@ function editar_herramientas_cargo(id,hab_id,estado,cargo,id_maestra=0,mov=0){
     
     $("#mostrar_herramientas").load("includes/modal_editar_herramientas_cargo.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo+"&id_maestra="+id_maestra+"&mov="+mov);
 }
+
+function confirmar_cambiar_cargos(){
+    swal({
+        title: "¿Estás de acuerdo con editar los cargos de las cuentas?",
+        text: "¡Los cargos se editarán y pueden ser editados mientras corra la noche!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        cancelButtonText: ''
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+         campos_cargos()
+        }
+        });
+    }
+
+
+function campos_cargos(){
+    
+    var usuario_id=localStorage.getItem("id");
+    var array_cargos=[];
+
+    var cargos= document.getElementsByClassName('campos_cargos')
+
+    for (let item of cargos) {
+        if(item.value!=""){
+            array_cargos.push({
+                "cuenta_id":item.dataset.cuentaid,
+                "valor":item.value,
+               })
+        }
+      
+    }
+    if(array_cargos.length!=0){
+        var datos = {
+            "datos_cargos": JSON.stringify(array_cargos),
+            "usuario_id": usuario_id,
+          };
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/aplicar_editar_herramientas_cargos.php",
+            data:datos,
+            //beforeSend:loaderbar,
+            success:function(res){
+                ver_auditoria()
+            },
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+          });
+    }
+
+
+
+    return false;
+}
+
+
+// Editar un cargo en estado de cuenta desde auditoria.
+function modificar_herramientas_cargo_aud(id,hab_id,estado,id_maestra=0,mov=0,campo){
+	var usuario_id=localStorage.getItem("id");
+  
+    var cargo= document.getElementById(campo).value;
+    
+    if(cargo!=""){
+        $("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+              "id": id,
+              "hab_id": hab_id,
+              "estado": estado,
+			  "cargo": cargo,
+              "usuario_id": usuario_id,
+              "id_maestra": id_maestra,
+              "mov":mov,
+            };
+        // console.log(datos)
+        // return
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/aplicar_editar_herramientas_cargo.php",
+              data:datos,
+              //beforeSend:loaderbar,
+              success:function(res){
+               
+              },
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+    }
+    return false;
+}
+
 
 // Editar un cargo en estado de cuenta
 function modificar_herramientas_cargo(id,hab_id,estado,id_maestra=0,mov=0){
@@ -6528,6 +6751,15 @@ function previsualizar_estado(){
 
 //* Cortes *//
 
+function saldo_huespedes(){
+    usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_saldo_huespedes.php?usuario_id="+usuario_id);
+    closeNav();
+}
+
 
 function hacer_corte(){
     usuario_id=localStorage.getItem("id");
@@ -6561,7 +6793,7 @@ function hacer_cortes(usuario){
 }
 
 function aceptar_guardar_corte_nuevo(){
-    $("#mostrar_herramientas").load("includes/guardar_modal_corte.php");
+    $("#mostrar_herramientas").load("includes/guardar_modal_corte_nuevo.php");
 }
 
 // Modal de guardar corte
@@ -6575,6 +6807,11 @@ function aceptar_guardar_corte_global(){
 	$("#mostrar_herramientas").load("includes/guardar_modal_corte_global.php");
 }
 
+function aceptar_ver_saldo_huspedes(){
+    window.open("includes/reporte_saldo_huespedes.php");
+
+}
+
 // Guardar un corte global
 function guardar_corte_nuevo(){
     var usuario_id=localStorage.getItem("id");
@@ -6584,21 +6821,24 @@ function guardar_corte_nuevo(){
     var datos = {
         "usuario_id": usuario_id,
     };
-    $.ajax({
-            async:true,
-            type: "POST",
-            dataType: "html",
-            contentType: "application/x-www-form-urlencoded",
-            url:"includes/guardar_corte_global.php",
-            data:datos,
-            beforeSend:loaderbar,
-            success:function(res){
+
+    window.open("includes/guardar_corte_nuevo.php?id_usuario="+usuario_id);
+
+    // $.ajax({
+    //         async:true,
+    //         type: "POST",
+    //         dataType: "html",
+    //         contentType: "application/x-www-form-urlencoded",
+    //         url:"includes/guardar_corte_global.php",
+    //         data:datos,
+    //         beforeSend:loaderbar,
+    //         success:function(res){
                 
-            },
-            //success:problemas_sistema,
-            timeout:5000,
-            error:problemas_sistema
-        });    
+    //         },
+    //         //success:problemas_sistema,
+    //         timeout:5000,
+    //         error:problemas_sistema
+    //     });    
     //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     //guardar_reporte_corte();
     // mostrar_corte_reporte();
