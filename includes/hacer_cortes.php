@@ -40,7 +40,7 @@
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
               
-              echo '<div class="card-header">Ventas Restaurante</div>
+              echo '<div class="card-header"><h5>Ventas Restaurante</h5></div>
               
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
@@ -95,7 +95,7 @@
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
               
-              echo '<div class="card-header">Hospedaje</div>
+              echo '<div class="card-header"><h5>Hospedaje</h5></div>
               
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
@@ -144,7 +144,7 @@
             <div  class="card bg-light text-dark">';
               //$cantidad= $tipo->total_elementos();
               
-              echo '<div class="card-header">Totales</div>
+              echo '<div class="card-header"><h5>Totales</h5></div>
               
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
@@ -195,7 +195,7 @@
             <div  class="card bg-light text-dark">';
               $cantidad= $forma_pago->total_elementos();
               
-              echo '<div class="card-header">Desgloce en Sistema</div>
+              echo '<div class="card-header"><h5>Desgloce en Sistema</h5></div>
               
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
