@@ -2,7 +2,7 @@
   /* Firefox */
   * {
     scrollbar-width: auto;
-    scrollbar-color: #9e9e9e #ffffff;
+    scrollbar-color: #9e9e9e #e2e2e2;
   }
 
   /* Chrome, Edge, and Safari */
@@ -11,13 +11,13 @@
   }
 
   *::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: #e2e2e2;
   }
 
   *::-webkit-scrollbar-thumb {
     background-color: #9e9e9e;
     border-radius: 10px;
-    border: 3px solid #ffffff;
+    border: 3px solid #e2e2e2;
   }
 
 
@@ -485,7 +485,7 @@ tr:hover {
 
 .card-body{
   background-color: #a5c1ff57 !important;
-  border: 2px solid;
+  /* border: 2px solid; */
 }
 
 
@@ -571,7 +571,7 @@ a.topictitle:hover {
 }
 
 .alinear_centro {
-  color: #fff;
+  color: var(--titulos);
   text-align: center;
   border-radius: 5px;
   padding: 25px 2px 3px 2px;
@@ -997,20 +997,20 @@ hr{
   /*#5c646e;*/
   text-align: center;
   background-color: #9f9f9f;
-  background: linear-gradient(145deg, #9f9f9f 0%, #ecf2ff 40%, #848181 100%);
+  /* background: linear-gradient(145deg, #9f9f9f 0%, #ecf2ff 40%, #848181 100%); */
   /*background-color: #242C34*/
   font-size: 1.2em;
-  color: #333;
+  color: #ffffff;
 }
 
 .terminar {
   /*#1E487A; #337C99; */
   text-align: center;
   background-color: #77a2ad;
-  background: linear-gradient(145deg, #77a2ad 0%, #c4f4ff 50%, #548793 100%);
+  /* background: linear-gradient(145deg, #77a2ad 0%, #c4f4ff 50%, #548793 100%); */
   /*background-color: #242C34*/
   font-size: 1.2em;
-  color: #0a414f;
+  color: #ffffff;
 }
 
 .ocupada {
