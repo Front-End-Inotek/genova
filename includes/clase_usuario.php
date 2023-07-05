@@ -246,6 +246,26 @@
         }  
       }
 
+      //Obtener si un usuario es valido en base a su id y contraseña
+
+      function evaluar_password($usuario_id,$password_evaluar){
+        include_once("clase_log.php");
+        $logs = NEW Log(0);
+        $id=0;
+        $sentencia = "SELECT id FROM usuario WHERE id = '$usuario_id' AND pass= '$password_evaluar' AND estado = 1";
+        $comentario="Obtenemos el usuario y contraseña de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+          // Guardamos logs de inicio de session
+          $logs->guardar_log($fila['id'],"Consultando contraseña del usuario: ".$id);
+        }
+        return $id;
+      }
+
       function remover_token($usuario){
         include_once('clase_log.php');
         $sentencia="DELETE FROM token WHERE usuario=$usuario";

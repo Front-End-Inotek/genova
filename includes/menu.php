@@ -125,6 +125,9 @@
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Corte Global </a></i></ul>';
 
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="saldo_huespedes()"> Saldo de huéspedes </a></i></ul>';
+
 			}
 		}
 		echo'
@@ -258,11 +261,14 @@
 		echo '
 		
 		<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
-			<i class="bx bxs-user mx-2 text-secondary" ></i>
-			<span onclick="hacer_cortes()"> Desarrollo </span>
+			<i class="bx bxs-user text-secondary" ></i>
+			<span class="mx-2" onclick="hacer_cortes()"> Desarrollo </span>
 		</li>
 
-
+		<li href="#"  class="nav-link" onclick="sub_menu(); boton_menu();">
+			<i class="bx bx-file-find text-secondary"></i>
+			<span class="mx-2"  onclick="ver_auditoria()">Auditoría</span>
+		</li>
 
 		<li href="#" onclick="pregunta_salir()" class="nav-link">
 			<i class="bx bx-exit text-secondary"></i>

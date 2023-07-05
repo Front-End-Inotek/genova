@@ -95,10 +95,19 @@
   }
 
   $motivo = empty($_POST['preasignada']) ? "reservar" : "preasignar";
+
+ 
  
   $sobrevender = isset($_POST['sobrevender']) ? $_POST['sobrevender'] : "";
+
   $id_movimiento= $movimiento->disponible_asignar($hab->mov,$actual_hab,$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa'],$motivo);
+  
+
+ 
   $mov_actual= $movimiento->ultima_insercion();
+
+
+  
   if($_POST['hab_id'] != 0){
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
     $logs->guardar_log($_POST['usuario_id'],"Check-in en habitacion: ". $hab->nombre);
@@ -118,9 +127,11 @@
   $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
   urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
   $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$total_pago,$actual_hab,
-  $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno);
+  $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno
+,$_POST['estado_credito'],$_POST['limite_credito']);
 
-  
+
+
 
   //si hay preasignada 
   if($_POST['preasignada']!=0){

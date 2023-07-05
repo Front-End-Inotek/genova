@@ -16,16 +16,16 @@
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;">Cargo</span>
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;">Descripción</span>
             </div>
-              <input required type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+              <input placeholder="Ingresa la descripción del cargo" required type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
         </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;"> Monto </span>
+                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;"> Cargo </span>
             </div>
-              <input type="number" id="monto" name ="monto" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+              <input placeholder="Ingresa la cantidad del cargo" type="number" id="monto" name ="monto" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
         </div>
 
         </div>

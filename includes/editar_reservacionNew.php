@@ -250,12 +250,15 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <button class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
             <input type="text" id="tomahuespedantes"  hidden value="'.$huesped->id.'">
             <input type="text" id="estadotarjeta" hidden value="'.$huesped->estado_tarjeta.'">
-            <input type="text" id="nut" hidden value="'.$huesped->titular_tarjeta.'">
-            <input type="text" id="nt" hidden value="'.$huesped->numero_tarjeta.'">
+            <input type="text" id="nut"  hidden value="**************">
+            <input type="text" id="nt"  hidden value="'.$huesped->titular_tarjeta.'">
             <input type="text" id="mes" hidden value="'.$huesped->vencimiento_mes.'">
             <input type="text" id="year" hidden value="'.$huesped->vencimiento_ano.'">
             <input type="text" id="ccv" hidden value="'.$huesped->cvv.'">
             <input type="text" id="nombre_tarjeta" hidden value="'.$huesped->nombre_tarjeta.'">
+
+            <input type="text" id="estadocredito" value="'.$huesped->estado_credito.'" hidden>
+            <input type="text" id="limitecredito" value="'.$huesped->limite_credito.'" hidden>
           
            
             <br>

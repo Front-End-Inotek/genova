@@ -121,10 +121,21 @@
         </div>
         <div class="row">
           <div class="col-sm-2">Número de la tarjeta:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
+          <div class="col-sm-4">';
+
+          if($huesped->numero_tarjeta==""){
+            echo '  <div class="form-group">
             <input class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->numero_tarjeta.'" maxlength="16">
-          </div>
+            </div>';
+          }else{
+            echo ' <div class="input-group mb-3">
+            <input disabled class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  value="**************" maxlength="16">
+            <div class="input-group-text">
+              <input id="check_tarjeta" onchange="mostrar_tarjeta('.$huesped->id.')" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            </div>';
+          }
+          echo '
           </div>
           <div class="col-sm-2">Fecha de vencimiento:</div>
           <div class="col-sm-2">

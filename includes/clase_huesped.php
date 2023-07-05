@@ -29,6 +29,10 @@
       public $nombre_tarjeta;
       public $empresa;
       public $voucher;
+
+      public $estado_credito;
+      public $limite_credito;
+
       // Constructor
       function __construct($id)
       {
@@ -58,6 +62,8 @@
           $this->nombre_tarjeta="";
           $this->empresa="";
           $this->voucher="";
+          $this->estado_credito="";
+          $this->limite_credito=0;
         }else{
           $sentencia = "SELECT * FROM huesped WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores de un huesped";
@@ -89,6 +95,8 @@
               $this->nombre_tarjeta=$fila['nombre_tarjeta'];
               $this->empresa=$fila['empresa'];
               $this->voucher=$fila['voucher'];
+              $this->estado_credito=$fila['estado_credito'];
+              $this->limite_credito=$fila['limite_credito'];
           }
         }
       }
@@ -190,12 +198,27 @@
                     <form class="tarjeta-form" id="form-garantia">
                         <div class="form-content">
                             <div class="form-group">
-                              <label for="cardnumber">Numero de tarjeta</label>
-                              <div class="input-group">
-                                <input onchange="" type="number" name="número de tarjeta" class="form-control" id="cardnumber" maxlength="20" value="'.$this->numero_tarjeta.'" required>
+                              <label for="cardnumber">Numero de tarjeta</label>';
+
+                              if(!empty($this->numero_tarjeta)){
+                                echo '<div class="input-group">
+                                <input disabled class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  value="**************" maxlength="16">
+                                <div class="input-group-text">
+                                <input id="check_tarjeta" onchange="mostrar_tarjeta('.$this->id.')" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                              </div>
+                                </div>';
+                              }else{
+                                echo '<div class="input-group">
+                                <input onchange="" type="number" name="número de tarjeta" class="form-control" id="numero_tarjeta" maxlength="20" value="'.$this->numero_tarjeta.'" required>
                                 <div class="input-group-append">
                                 </div>
-                              </div>
+                              </div>';
+                              }
+
+
+
+                              echo '
+                           
                             </div>
                             <div class="form-group">
                               <label for="cardholder">Nombre en Tarjeta</label>
@@ -259,23 +282,23 @@
 
                               
         <div class="row">     
-        <div class="col-6">
-       
-        <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox"  id="c_abierto">
-            <label class="form-check-label" for="flexCheckDefault">Crédito abierto</label>
-            <input class="form-check-input" type="checkbox"  id="c_cerrado">
-            <label class="form-check-label" for="flexCheckDefault">Crédito cerrado</label>
-        </div>
-    </div>
+                            <div class="col-6">
+                          
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox"  id="c_abierto" value="abierto">
+                                <label class="form-check-label" for="flexCheckDefault">Crédito abierto</label>
+                                <input class="form-check-input" type="checkbox"  id="c_cerrado" value="cerrado ">
+                                <label class="form-check-label" for="flexCheckDefault">Crédito cerrado</label>
+                            </div>
+                        </div>
 
-    <div class="col-6">
-    <div class="input-group mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px; text-align: justify;"> Límite de crédito </span>
-    </div>
-      <input type="number" id="limite_credito" name="limite_credito"  class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
-  </div>
+                        <div class="col-6">
+                        <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px; text-align: justify;"> Límite de crédito </span>
+                        </div>
+                          <input value="'.$this->limite_credito.'" type="number" id="limite_credito" name="limite_credito"  class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
+                      </div>
     </div>
     </div>
                         </div>
@@ -293,7 +316,9 @@
 
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
-      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$opc_credito,$limite_credito){
+      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$estado_credito,$limite_credito){
+
+
 
         //validaciones del huesped.
         if(empty($nombre)){
@@ -319,9 +344,9 @@
         if(mysqli_num_rows($consulta_existe)==0){
           //ya existe.
           $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, 
-          `estado_huesped`,`pais`,`empresa`,`nombre_tarjeta`,`estado_tarjeta`,`voucher`,`opc_credito`,`limite_credito`)
+          `estado_huesped`,`pais`,`empresa`,`nombre_tarjeta`,`estado_tarjeta`,`voucher`,`estado_credito`,`limite_credito`)
           VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', 
-          '$cvv', '0', '1','$pais','$empresa','$nombre_tarjeta','$estado_tarjeta','$voucher','$opc_credito','$limite_credito');";
+          '$cvv', '0', '1','$pais','$empresa','$nombre_tarjeta','$estado_tarjeta','$voucher','$estado_credito','$limite_credito');";
           $comentario="Guardamos el huesped en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           if(!$consulta){
@@ -352,9 +377,10 @@
         SET nombre ='$nombre', apellido='$apellido', empresa = '$empresa',telefono='$telefono',pais='$pais',estado='$estado',ciudad='$ciudad',direccion='$direccion'
         ,comentarios ='$comentarios' 
         , codigo_postal = '$codigo_postal', correo = '$correo', titular_tarjeta = '$titular_tarjeta', estado_tarjeta = '$estado_tarjeta', nombre_tarjeta = '$nombre_tarjeta'
-        , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = '$numero_tarjeta', vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
-        , cvv = '$cvv', voucher = '$voucher', opc_credito='$opc_credito',limite_credito='$limite_credito'
+        , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'), vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
+        , cvv = '$cvv', voucher = '$voucher', estado_credito='$estado_credito',limite_credito='$limite_credito'
         WHERE id='$huesped_id'";
+        // echo $sentencia;
         $comentario="actualizamos el huesped en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if(!$consulta){
@@ -534,6 +560,8 @@
       }
       // Editar un huesped
       function editar_huesped($id,$nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv){
+        
+        echo $numero_tarjeta;
         $sentencia = "UPDATE `huesped` SET
             `nombre` = '$nombre',
             `apellido` = '$apellido',
@@ -549,7 +577,7 @@
             `comentarios` = '$comentarios',
             `titular_tarjeta` = '$titular_tarjeta',
             `tipo_tarjeta` = '$tipo_tarjeta',
-            `numero_tarjeta` = '$numero_tarjeta',
+             numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'),
             `vencimiento_mes` = '$vencimiento_mes',
             `vencimiento_ano` = '$vencimiento_ano',
             `cvv` = '$cvv'
@@ -685,9 +713,10 @@
           <tbody>';
               while ($fila = mysqli_fetch_array($consulta))
               {
+                $numero_tarjeta="**************";
                
                 echo '<tr class="text-center">
-                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $fila['numero_tarjeta'] . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\')"> Agregar</button></td>
+                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $numero_tarjeta . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\',\'' . $fila['estado_credito'] . '\',\'' . $fila['limite_credito'] . '\',\'' . $fila['nombre_tarjeta'] . '\')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>  
                 <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>
@@ -841,11 +870,12 @@
           <tbody>';
               while ($fila = mysqli_fetch_array($consulta))
               {
+                $numero_tarjeta="**************";
                 echo '<tr class="text-center">
                 <td>';
                 //here
                 if($id_maestra==0){
-                  echo '<button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $fila['numero_tarjeta'] . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\')"> Agregar</button>';
+                  echo '<button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $numero_tarjeta . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\',\'' . $fila['nombre_tarjeta'] . '\')"> Agregar</button>';
                 }else{
                   echo '<button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped_maestra('.$fila['id'] .','.$id_maestra .','.$mov.')"> Agregar</button>';
                 }
