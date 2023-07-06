@@ -12,7 +12,7 @@
 			<!----------------------->
 			<!-- Side-Nav -->
 			<!-----------------------> 
-			<div class="side-navbar  d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+			<div class="side-navbar   flex-wrap flex-column" id="sidebar">
 			<ul class="nav flex-column text-white w-100">
 			<div class="informacion">
 			<a href="inicio.php" class="nav-link text-white my-2">
@@ -77,7 +77,8 @@
 			</ul>
 		</li>';
 
-		echo '
+		if($usuario->llegadas_salidas_ver>0){
+			echo '
 			<li href="#" onclick="sub_menu()" class="nav-link">
 			<i class="bx bxs-arrow-to-right text-secondary"></i>
 			<span class="mx-2">Llegadas y Salidas</span>
@@ -93,6 +94,7 @@
 		echo'
 			</ul>
 			</li>';
+		}
 
 
 		$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
@@ -258,25 +260,32 @@
 			<span class="mx-2">Rack Habitacional</span>
 		</li>*/
 
-		echo '
-		
-		<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
+		$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
+		if($permisos_reportes>0) {
+			echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 			<i class="bx bxs-user text-secondary" ></i>
 			<span class="mx-2" onclick="hacer_cortes()"> Desarrollo </span>
-		</li>
+			</li>';
+		}
 
-		<li href="#"  class="nav-link" onclick="sub_menu(); boton_menu();">
-			<i class="bx bx-file-find text-secondary"></i>
-			<span class="mx-2"  onclick="ver_auditoria()">Auditoría</span>
-		</li>
-
+		echo '
+		';
+		if($usuario->auditoria_ver>0){
+			echo '<li href="#"  class="nav-link" onclick="sub_menu(); boton_menu();">
+					<i class="bx bx-file-find text-secondary"></i>
+					<span class="mx-2"  onclick="ver_auditoria()">Auditoría</span>
+				</li>';
+		}else{
+			echo '<li href="#"  class="nav-link" onclick="sub_menu(); boton_menu();">
+					<i class="bx bx-file-find text-secondary"></i>
+					<span class="mx-2"  onclick="ver_auditoria()">Auditoría</span>
+				</li>';
+		}
+		echo '
 		<li href="#" onclick="pregunta_salir()" class="nav-link">
 			<i class="bx bx-exit text-secondary"></i>
 			<span class="mx-2">Salir</span>
 		</li>
-
-
-
 		</ul>
 			<!--ajustado con bootstrap---->
 			<div class="informacion">

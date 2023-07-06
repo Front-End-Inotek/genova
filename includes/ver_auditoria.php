@@ -31,7 +31,7 @@
           echo '</div>
           <div class="col-sm-2">
           <div id="boton_usuario">
-            <input type="submit" class="btn btn-danger btn-block" value="Cerrar la noche" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte_nuevo()">
+            <input type="submit" class="btn btn-danger btn-block" value="Cerrar la noche"   onclick="confirmar_cambiar_cargos()">
           </div>
           </div>
         </div>
@@ -73,13 +73,13 @@
                     }
                 $campo = "campo".$c;
                 echo '<td>
-                        <p>'.number_format($fila['cargo'],2).'</p>
+                        <p>'.number_format($fila['tarifa'],2).'</p>
                         <input type="number" class="color_black campos_cargos" style="width:30%" id="'.$campo.'"
-                        data-cuentaid ="'.$fila['cuenta_id'].'"
+                        data-reservaid ="'.$fila['reserva_id'].'"
                         />
                 </td>';
 
-                echo '<td>'.$fila['descripcion'].'</td>';
+                echo '<td>Cargo por noche</td>';
                 echo '</tr>';
 
                 $fila_atras = $fila['hab_nombre'];
@@ -147,10 +147,12 @@
 echo ' </tbody>
 </table>
 </div>
+<!---
 <div class="d-flex justify-content-end">
 <button type="button" class="btn btn-success" onclick="confirmar_cambiar_cargos()"> Aceptar</button>
 </div>
 
+--->
 
 </div>
 </div>

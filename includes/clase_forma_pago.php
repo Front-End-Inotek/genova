@@ -137,6 +137,11 @@
     }
     // Muestra las formas de pago
     function mostrar_forma_pago($forma=0){
+      
+      if($forma==="Credito" || $forma==="Debito"){
+        $forma = 2;
+      }
+    
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
       $comentario="Mostrar las formas de pago";
       $consulta= $this->realizaConsulta($sentencia,$comentario);

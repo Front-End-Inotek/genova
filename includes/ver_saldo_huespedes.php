@@ -46,7 +46,7 @@
               
                 <div class="table-responsive" style="height:100%" id="tabla_tipo">
                 <table class="table table-bordered table-hover">
-                  <thead>
+                  <thead class="cal-thead">
                     <tr class="table-primary-encabezado text-center">
                     <th>Número de hab.</th>
                     <th>Nombre del húesped</th>

@@ -105,15 +105,18 @@
           <div class="col-sm-4">
           <div class="form-group">
             <select class="form-control" id="tipo_tarjeta">';
-              if($huesped->tipo_tarjeta == "Debito"){echo '
-                <option value="Debito">'.$huesped->tipo_tarjeta.'</option>
+              if($huesped->indole_tarjeta == "Debito"){echo '
+                <option value="">Seleccionar una opción</option>
+                <option selected value="Debito">Debito</option>
                 <option value="Credito">Credito</option>';
-              }elseif ($huesped->tipo_tarjeta == "") {echo '
+              }elseif ($huesped->indole_tarjeta == "") {echo '
+                <option value="">Seleccionar una opción</option>
                 <option value="Debito">Debito</option>
                 <option value="Credito">Credito</option>';
-              }else{ echo '
-                <option value="Credito">'.$huesped->tipo_tarjeta.'</option>
-                <option value="Debito">Debito</option>';
+              }elseif ($huesped->indole_tarjeta=="Credito"){ echo '
+                <option value="">Seleccionar una opción</option>
+                <option  value="Debito">Debito</option>
+                <option selected value="Credito">Credito</option>';
               }echo '
             </select>
           </div>

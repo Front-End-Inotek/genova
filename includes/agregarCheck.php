@@ -150,7 +150,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <input type="text" id="mes" hidden>
             <input type="text" id="year" hidden>
             <input type="text" id="ccv" hidden>
-            <input type="text" id="nombre_tarjeta "hidden >
+            <input type="text" id="nombre_tarjeta"hidden >
 
             <input type="text" id="estadocredito" hidden>
             <input type="text" id="limitecredito" hidden>

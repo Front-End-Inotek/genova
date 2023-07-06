@@ -488,12 +488,39 @@
               }else{
               echo '<input class="form-check-input" type="checkbox" id="reservacion_borrar" checked>';
               }
-              echo '   <label class="form-check-label">
+              echo '   <label class="form-check-label" for="reservacion_borrar">
                   Borrar
                 </label>
               </div>
             </div>
+            <div class="col-sm-1">
+            <div class="form-check">';
+            if($usuario->reservacion_preasignar==0){
+            echo '<input class="form-check-input" type="checkbox" id="reservacion_preasignar">';
+            }else{
+            echo '<input class="form-check-input" type="checkbox" id="reservacion_preasignar" checked>';
+            }
+            echo '   <label class="form-check-label" for="reservacion_preasignar">
+                Preasignar
+              </label>
+            </div>
+          </div>
             </div><br><hr> 
+            <div class="form-group row">
+            <div class="col-sm-3">LLegadas y Salidas:</div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->llegadas_salidas_ver==0){
+              echo '<input class="form-check-input" type="checkbox" id="llegadas_salidas_ver">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="llegadas_salidas_ver" checked>';
+              }
+              echo '   <label class="form-check-label" for="llegadas_salidas_ver">
+                  Ver
+                </label>
+              </div>
+            </div>
+            </div><br><hr>
             <div class="form-group row">
             <div class="col-sm-3">Reporte:</div>
             <div class="col-sm-1">
@@ -796,6 +823,22 @@
               echo '<input class="form-check-input" type="checkbox" id="logs_ver">';
               }else{
               echo '<input class="form-check-input" type="checkbox" id="logs_ver" checked>';
+              }
+              echo '   <label class="form-check-label">
+                  Ver
+                </label>
+              </div>
+            </div>
+            </div><br><hr> 
+
+            <div class="form-group row">
+            <div class="col-sm-3">Auditoria:</div>
+            <div class="col-sm-1">
+              <div class="form-check">';
+              if($usuario->auditoria_ver==0){
+              echo '<input class="form-check-input" type="checkbox" id="auditoria_ver">';
+              }else{
+              echo '<input class="form-check-input" type="checkbox" id="auditoria_ver" checked>';
               }
               echo '   <label class="form-check-label">
                   Ver

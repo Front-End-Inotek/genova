@@ -363,15 +363,12 @@
       }
 
       function estadoCargosHabs(){
-        $sentencia="SELECT *, hab.nombre as hab_nombre, reservacion.total as tarifa, cuenta.id as cuenta_id
+        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.total as tarifa, reservacion.id as reserva_id
         FROM 
-        cuenta
-        INNER JOIN hab  ON hab.mov = cuenta.mov
+        hab
         INNER JOIN movimiento as mov ON hab.mov = mov.id 
         INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
         where hab.estado = 1
-        AND cuenta.estado != 2
-        AND (cuenta.cargo>0) 
         order by hab.id";
         $comentario="Obtenemos cargos/habonos de una habitacion en casa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

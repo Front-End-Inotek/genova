@@ -509,7 +509,7 @@ function guardar_cuenta_m(nombre,codigo){
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_cuenta_maestra()
-                swal("Nuevo plan de alimentos agregado!", "Excelente trabajo!", "success");
+                swal("Nueva cuenta maestra agregada!", "Excelente trabajo!", "success");
                 return false;
             }else if(e.target.responseText == 'NO_valido'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
@@ -517,7 +517,7 @@ function guardar_cuenta_m(nombre,codigo){
                 swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
             }
         }else{
-            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+            swal("Error del servidor!", "Intentelo de nuevo o contacte con soporte tecnico", "error");
         }
     })
     xhttp.send();
@@ -2539,9 +2539,8 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {
                 //Entrara la contidicion que valida la respuesta del formulario
-                // console.log(e.target.responseText);
-                // return
-               
+                //console.log(e.target.responseText);
+                //return
                 const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
                 if(response_msj == "NO_DATA"){
                     swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
@@ -4136,6 +4135,7 @@ function modificar_usuario(id){
     var reservacion_agregar= document.getElementById("reservacion_agregar").checked;
     var reservacion_editar= document.getElementById("reservacion_editar").checked;
     var reservacion_borrar= document.getElementById("reservacion_borrar").checked;
+    var reservacion_preasignar= document.getElementById("reservacion_preasignar").checked;
     var reporte_ver= document.getElementById("reporte_ver").checked;
     var reporte_agregar= document.getElementById("reporte_agregar").checked;
     var forma_pago_ver= document.getElementById("forma_pago_ver").checked;
@@ -4160,6 +4160,14 @@ function modificar_usuario(id){
     var cupon_editar= document.getElementById("cupon_editar").checked;
     var cupon_borrar= document.getElementById("cupon_borrar").checked;
     var logs_ver= document.getElementById("logs_ver").checked;
+    var auditoria_ver= document.getElementById("auditoria_ver").checked;
+
+    var llegadas_salidas_ver= document.getElementById("llegadas_salidas_ver").checked;
+
+    // console.log(reservacion_preasignar)
+    // return
+
+
     // Convertir usuario permisos
     if(usuario_ver){
         usuario_ver=1;
@@ -4466,6 +4474,7 @@ function modificar_usuario(id){
                   "reservacion_agregar": reservacion_agregar,
                   "reservacion_editar": reservacion_editar,
                   "reservacion_borrar": reservacion_borrar,
+                  "reservacion_preasignar":reservacion_preasignar,
                   "reporte_ver": reporte_ver,
                   "reporte_agregar": reporte_agregar,
                   "forma_pago_ver": forma_pago_ver,
@@ -4490,6 +4499,8 @@ function modificar_usuario(id){
                   "cupon_editar": cupon_editar,
                   "cupon_borrar": cupon_borrar,
                   "logs_ver": logs_ver,
+                  "auditoria_ver":auditoria_ver,
+                  "llegadas_salidas_ver":llegadas_salidas_ver,
                   "usuario_id": usuario_id,
 			};
 		$.ajax({
@@ -4500,7 +4511,10 @@ function modificar_usuario(id){
 			  url:"includes/aplicar_editar_usuario.php",
 			  data:datos,
 			  //beforeSend:loaderbar,
-              success:ver_usuarios,
+              success:function(res){
+                // console.log(res)
+                ver_usuarios()
+              },
               //success:problemas_sistema,
 			  timeout:5000,
 			  error:problemas_sistema
@@ -4736,9 +4750,23 @@ function confirmar_cambiar_cargos(){
         title: "¿Estás de acuerdo con editar los cargos de las cuentas?",
         text: "¡Los cargos se editarán y pueden ser editados mientras corra la noche!",
         icon: "warning",
-        buttons: true,
+        buttons: {
+            cancel: {
+              text: "Cancelar",
+              value: null,
+              visible: true,
+              className: "",
+              closeModal: true,
+            },
+            confirm: {
+              text: "OK",
+              value: true,
+              visible: true,
+              className: "",
+              closeModal: true
+            }
+          },
         dangerMode: true,
-        cancelButtonText: ''
         })
         .then((willDelete) => {
         if (willDelete) {
@@ -4758,12 +4786,14 @@ function campos_cargos(){
     for (let item of cargos) {
         if(item.value!=""){
             array_cargos.push({
-                "cuenta_id":item.dataset.cuentaid,
+                "reservaid":item.dataset.reservaid,
                 "valor":item.value,
                })
         }
       
     }
+    // console.log(array_cargos)
+    // return
     if(array_cargos.length!=0){
         var datos = {
             "datos_cargos": JSON.stringify(array_cargos),

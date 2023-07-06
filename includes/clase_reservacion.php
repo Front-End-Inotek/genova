@@ -1003,7 +1003,7 @@ class Reservacion extends ConexionMYSql
         return $cat_paginas;
     }
 
-    public function construirTabla($fila,$agregar,$editar,$borrar,$ruta=""){
+    public function construirTabla($fila,$agregar,$editar,$borrar,$ruta="",$preasignar=0){
         $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
 
@@ -1046,10 +1046,12 @@ class Reservacion extends ConexionMYSql
                 } else {
                     echo '<td></td>';
                 }
-                if($fila['id_hab']==0) {
+                if($fila['id_hab']==0 && $preasignar==1) {
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
-                } else {
+                } elseif($fila['id_hab']!=0) {
                     echo '<td>Preasignada '.$preasignada.'</td>';
+                }else{
+                    echo '<td></td>';
                 }
 
                 echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
@@ -1160,6 +1162,21 @@ class Reservacion extends ConexionMYSql
         }
     }
 
+     // Editar multiples cargos de reservaciones
+     function editar_cargos($cargos){
+        $cargos = json_decode($cargos);
+        // print_r($cargos);
+        // die();
+        foreach ($cargos as $key => $cargo) {
+          $sentencia = "UPDATE `reservacion` SET
+          `total` = '$cargo->valor'
+          WHERE `id` = '$cargo->reservaid';";
+          // echo $sentencia ;
+          $comentario="Editar el cargo de una cuenta dentro de la base de datos";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        }
+      }
+
     // Mostramos las reservaciones
     public function mostrar($posicion, $id)
     {
@@ -1168,6 +1185,7 @@ class Reservacion extends ConexionMYSql
         $agregar = $usuario->reservacion_agregar;
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
+        $preasignar = $usuario->reservacion_preasignar;
         date_default_timezone_set('America/Mexico_City');
         $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
@@ -1255,7 +1273,7 @@ class Reservacion extends ConexionMYSql
         while ($fila = mysqli_fetch_array($consulta)) {
             if($cont>=$posicion & $cont<$final) {
 
-                $this->construirTabla($fila,$agregar,$editar,$borrar,$ruta);
+                $this->construirTabla($fila,$agregar,$editar,$borrar,$ruta,$preasignar);
             }
             $cont++;
         }

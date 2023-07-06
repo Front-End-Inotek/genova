@@ -32,6 +32,7 @@
 
       public $estado_credito;
       public $limite_credito;
+      public $indole_tarjeta;
 
       // Constructor
       function __construct($id)
@@ -64,6 +65,8 @@
           $this->voucher="";
           $this->estado_credito="";
           $this->limite_credito=0;
+
+          $this->indole_tarjeta="";
         }else{
           $sentencia = "SELECT * FROM huesped WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores de un huesped";
@@ -97,6 +100,8 @@
               $this->voucher=$fila['voucher'];
               $this->estado_credito=$fila['estado_credito'];
               $this->limite_credito=$fila['limite_credito'];
+
+              $this->indole_tarjeta=$fila['indole_tarjeta'];
           }
         }
       }
@@ -316,7 +321,7 @@
 
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
-      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$estado_credito,$limite_credito){
+      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$estado_credito,$limite_credito,$indole_tarjeta){
 
 
 
@@ -344,9 +349,9 @@
         if(mysqli_num_rows($consulta_existe)==0){
           //ya existe.
           $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, 
-          `estado_huesped`,`pais`,`empresa`,`nombre_tarjeta`,`estado_tarjeta`,`voucher`,`estado_credito`,`limite_credito`)
+          `estado_huesped`,`pais`,`empresa`,`nombre_tarjeta`,`estado_tarjeta`,`voucher`,`estado_credito`,`limite_credito`,`indole_tarjeta`)
           VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', 
-          '$cvv', '0', '1','$pais','$empresa','$nombre_tarjeta','$estado_tarjeta','$voucher','$estado_credito','$limite_credito');";
+          '$cvv', '0', '1','$pais','$empresa','$nombre_tarjeta','$estado_tarjeta','$voucher','$estado_credito','$limite_credito','$indole_tarjeta');";
           $comentario="Guardamos el huesped en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           if(!$consulta){
@@ -378,7 +383,7 @@
         ,comentarios ='$comentarios' 
         , codigo_postal = '$codigo_postal', correo = '$correo', titular_tarjeta = '$titular_tarjeta', estado_tarjeta = '$estado_tarjeta', nombre_tarjeta = '$nombre_tarjeta'
         , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'), vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
-        , cvv = '$cvv', voucher = '$voucher', estado_credito='$estado_credito',limite_credito='$limite_credito'
+        , cvv = '$cvv', voucher = '$voucher', estado_credito='$estado_credito',limite_credito='$limite_credito' , indole_tarjeta ='$indole_tarjeta'
         WHERE id='$huesped_id'";
         // echo $sentencia;
         $comentario="actualizamos el huesped en la base de datos";

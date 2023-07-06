@@ -278,7 +278,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <option value="">Seleccione una opción </option>
                     ';
                 
-                    $forma_pago->mostrar_forma_pago();
+                    $forma_pago->mostrar_forma_pago(0);
                     echo'
                     </select>
                 </div>
