@@ -206,7 +206,7 @@ function cargar_area_trabajo(){
                 salirsession();
             }, 3000);
         } else {
-            swal("Tu sesion sigue activo!", "!", "success");
+            swal("Tu sesion sigue activo!", "", "success");
         }
         });
     }

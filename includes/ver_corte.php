@@ -43,7 +43,7 @@
           <div class="col-sm-12">
             <div  class="card bg-light text-dark">';
               
-              echo '<div class="card-header">Cargos</div>
+              echo '<div class="card-header"><h5>Cargos</h5></div>
               
               <div class="card-body">
                 <div class="table-responsive" style="height:100%" id="tabla_tipo">
@@ -179,7 +179,7 @@
   echo '   <div class="col-sm-12">
   <div  class="card bg-light text-dark">';
     
-    echo '<div class="card-header">Abonos</div>
+    echo '<div class="card-header"><h5>Abonos</h5></div>
     
     <div class="card-body">
       <div class="table-responsive" style="height:100%" id="tabla_tipo">

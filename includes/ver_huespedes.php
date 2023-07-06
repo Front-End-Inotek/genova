@@ -5,7 +5,7 @@
   
   echo ' <div class="container-fluid blanco"> 
           <br>
-          <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">HUESPEDES</h2></div>
+          <div class="col-sm-12 text-center"><h2 class="text-dark ">HUESPEDES</h2></div>
           
           <div class="row">
             <div class="col-sm-2">

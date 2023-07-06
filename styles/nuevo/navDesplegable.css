@@ -1,19 +1,20 @@
 @import '../colors.css';
 
 html{
-  background: 
+  background:
   radial-gradient(18% 28% at 24% 50%,#cefAFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),radial-gradient(70% 53% at 36% 76%,#73f2FFFF 0,#073AFF00 100%),radial-gradient(42% 53% at 15% 94%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(42% 53% at 34% 72%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 35% 87%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(31% 43% at 7% 98%,#fffFFFFF 24%,#073AFF00 100%),radial-gradient(21% 37% at 72% 23%,#d3fF6D9C 24%,#073AFF00 100%),radial-gradient(35% 56% at 91% 74%,#8a4FFFF5 9%,#073AFF00 100%),radial-gradient(74% 86% at 67% 38%,#6dfFAEF5 24%,#073AFF00 100%),linear-gradient(125deg,#4eb5FFFF 1%,#4c00FCFF 100%) !important;
   background-color: #ecf2ff;
   overflow: hidden;
 }
 body {
   min-height: 100vh;
-    background-color: #ecf2ff;
-    /*
-    background: 
+  /* background-color: #ecf2ff; */
+  background-color: var(--fondo);
+  /*
+  background:
   radial-gradient(18% 28% at 24% 50%,#cefAFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),radial-gradient(70% 53% at 36% 76%,#73f2FFFF 0,#073AFF00 100%),radial-gradient(42% 53% at 15% 94%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(42% 53% at 34% 72%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 35% 87%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(31% 43% at 7% 98%,#fffFFFFF 24%,#073AFF00 100%),radial-gradient(21% 37% at 72% 23%,#d3fF6D9C 24%,#073AFF00 100%),radial-gradient(35% 56% at 91% 74%,#8a4FFFF5 9%,#073AFF00 100%),radial-gradient(74% 86% at 67% 38%,#6dfFAEF5 24%,#073AFF00 100%),linear-gradient(125deg,#4eb5FFFF 1%,#4c00FCFF 100%);
   */
-  background-size: cover;   
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -35,7 +36,6 @@ body::-webkit-scrollbar-track {
   background-color: #ec0e0e; /* Color del fondo de la barra de desplazamiento */
 }
 
-
 a {
   text-decoration: none;
   cursor: pointer;
@@ -44,24 +44,19 @@ a {
   letter-spacing: normal;
 }
 
-
 a:hover {
   color: inherit;
   color: var(--subtitulos);
 }
-
 
 span {
   cursor: pointer;
   color: var(--titulos);
 }
 
-
 .submenu {
   display: none;
 }
-
-
 
 /*checkbox*/
 .form-check-label {
@@ -134,7 +129,6 @@ span {
 }
 
 /*boton cambio de rack*/
-
 
 .form-check-input2[type=checkbox] {
   height: 0;
@@ -231,9 +225,7 @@ span {
   border-bottom-left-radius: 10px;
   */
   width: 105%;
-  }
-
-  
+}
 
 /******************************/
 /*tamaño y ocultar la side nav*/
@@ -243,14 +235,12 @@ span {
   height: 100vh;
   position: absolute;
   margin-left: -15.7%;
-
   background-color: var(--fondo);
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.395);
   /* background:linear-gradient(90deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%); */
   /*
   background: linear-gradient(90deg, #30349f 0%, #595dd5 50%, #181b63 100%);*/
-  transition: 0.2s all ease-in;
-  
+  /* transition: 0.2s all ease-in; */
   font-size: large;
   z-index: 9999;
 }
@@ -309,9 +299,6 @@ span {
 /* tamaño y posicionamiento ****/
 /*******************************/
 .menu-btn {
-  
-  
-
   color: #ecf2ff;
   color: var(--titulos);
   position: absolute;
@@ -323,8 +310,8 @@ span {
 .menu-btn:hover{
   /* background:radial-gradient( circle at center , #7275e4 0%, #3939c6 50%, #1b1f89 100%); */
   /* border: none !important; */
-  color: var(--subtitulos);
-  background-color: var(--fondoAzul);
+  color: var(--fondoAzul);
+  background-color: var(--subtitulos);
 }
 
 #menu-btn-fecha {
@@ -370,7 +357,7 @@ span {
 }
 
 #cubo{
-    position: fixed ;
+  position: fixed ;
   font-size: 28px !important;
   left: 95.5% !important;
   top: 12px;
@@ -400,20 +387,20 @@ span {
 
   /* Agregamos un media query para dispositivos móviles */
   .side-navbar {
-    margin-left: -53%;
-  }
+  margin-left: -53%;
+}
 
   .active-nav {
-    margin-left: -250px;
-    /* Cambiamos el valor de margin-left a -250px para que la barra salga de la pantalla */
-  }
+  margin-left: -250px;
+  /* Cambiamos el valor de margin-left a -250px para que la barra salga de la pantalla */
+}
 
   .active-cont {
-    margin-left: 0;
-    /* Cambiamos el valor de margin-left a 0 para que el contenido ocupe toda la pantalla */
-    width: 50px;
-    left: 90%;
-  }
+  margin-left: 0;
+  /* Cambiamos el valor de margin-left a 0 para que el contenido ocupe toda la pantalla */
+  width: 50px;
+  left: 90%;
+}
 
   .menu-btn {
     left: 110%;

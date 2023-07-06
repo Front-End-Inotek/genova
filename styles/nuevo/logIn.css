@@ -1,7 +1,6 @@
 @import '../colors.css';
 
 body {
-
     /*background-color: #fff !important;*/
     /* color: #1f238a !important; */
     color: var(--titulos);
@@ -36,7 +35,6 @@ body {
     height: 100vh;
 }
 
-
 #form {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
@@ -62,7 +60,6 @@ body {
     text-align: center;
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
-    
 }
 
 #icon {
@@ -70,11 +67,9 @@ body {
     margin: 10px 0 15px;
 }
 
-
 #login{
     margin-bottom: 20px !important;
 }
-
 
 /* Formulario */
 
@@ -161,7 +156,6 @@ input[type="text"]:placeholder {
         -webkit-transform: translate3d(0, -100%, 0);
         transform: translate3d(0, -100%, 0);
     }
-
     100% {
         opacity: 1;
         -webkit-transform: none;
@@ -175,7 +169,6 @@ input[type="text"]:placeholder {
         -webkit-transform: translate3d(0, -100%, 0);
         transform: translate3d(0, -100%, 0);
     }
-
     100% {
         opacity: 1;
         -webkit-transform: none;
@@ -183,20 +176,25 @@ input[type="text"]:placeholder {
     }
 }
 
-
 @media (max-width: 767px) {
-
     .container {
-      padding: 10px;
+    padding: 10px;
     }
     #form {
-      max-width: 70%;
+    max-width: 70%;
     }
     input[type="text"],
     input[type="password"],
     input[type="button"],
     input[type="submit"] {
-      width: 100%;
-      margin: 5px 0;
+    width: 100%;
+    margin: 5px 0;
     }
-  }
+}
+
+.alert-warning{
+    position: absolute;
+    z-index: 100;
+    top: 13%;
+    margin: 0 auto;
+}
