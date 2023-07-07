@@ -6,6 +6,11 @@
   $hab= NEW Hab($_GET['hab_id']);
   $total_faltante= 0.0;
   $total_faltante= $cuenta->mostrar_faltante($hab->mov);
+  $ver = $_GET['ver'];
+  if($ver==1){
+    $total_faltante=0;
+  }
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -25,7 +30,7 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>';
       if($total_faltante >= 0){
-        echo '<button type="button" class="btn btn-success" onclick="hab_desocupar('.$_GET['hab_id'].','.$_GET['estado'].')"> Aceptar</button>';
+        echo '<button type="button" class="btn btn-success" onclick="hab_desocupar('.$_GET['hab_id'].','.$_GET['estado'].','.$ver.')"> Aceptar</button>';
       }
     echo '</div>
   </div>';

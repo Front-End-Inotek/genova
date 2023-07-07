@@ -253,6 +253,10 @@ class Reservacion extends ConexionMYSql
         $no_disponibles=[];
         $disponibles=[];
 
+        //Se debería comparar fechas de las habitaciones en determinados estados?
+        //en mantenimiento, bloqueadas, uso casa, etc.
+        //Se agrega hab.estado=8 para que compare también en uso casa
+
         //hacer otra sentencia para comprobar las ocupadas y que la reservacion no intervenga con estas
         $ocupadas = "SELECT * 
         FROM hab
@@ -263,7 +267,36 @@ class Reservacion extends ConexionMYSql
         " .$agregar_;
         ;
 
-        // print_r($ocupadas);
+        // echo $ocupadas;
+
+        //En teoría esto solo funciona con reservaciones.
+
+        if($hab_id==0){
+        $otras = "SELECT * 
+        FROM hab
+        INNER JOIN movimiento as m on hab.mov = m.id
+        WHERE hab.estado > 1 
+        ";
+
+        $sentencia_otras="";
+        $consulta_otras = $this->realizaConsulta($otras, "");
+        while($fila=mysqli_fetch_array($consulta_otras)) {
+           if($fila['estado'] == 8){
+            $sentencia_otras="SELECT * 
+            FROM hab
+            INNER JOIN movimiento as m on hab.mov = m.id
+            AND ('$fecha_salida' > m.detalle_inicio  AND '$fecha_entrada' <  m.detalle_fin)";
+
+            // echo $sentencia_otras;
+
+            $consulta = $this->realizaConsulta($sentencia_otras, "");
+            while($fila=mysqli_fetch_array($consulta)) {
+                $no_disponibles [] = $fila['id_hab'];
+            }
+
+           }
+        }
+        }
 
 
         $consulta = $this->realizaConsulta($ocupadas, "");
@@ -1162,11 +1195,13 @@ class Reservacion extends ConexionMYSql
         }
     }
 
-    function editar_tarifa_hab($tarifa,$total){
+    function editar_tarifa_hab($tarifa,$total,$id_reserva){
+        $hoy = time();
         $sentencia = "UPDATE `reservacion` SET
-        precio_hoespedaje = '$tarifa',
-        `total` = '$total'
-        WHERE `id` = '$cargo->reservaid';";
+        precio_hospedaje = '$tarifa',
+        `total` = '$total',
+        fecha_auditoria = '$hoy'
+        WHERE `id` = '$id_reserva';";
         echo $sentencia ;
         // $comentario="Editar el cargo de una cuenta dentro de la base de datos";
         // $consulta= $this->realizaConsulta($sentencia,$comentario);

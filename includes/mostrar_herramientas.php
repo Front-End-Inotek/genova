@@ -5,11 +5,14 @@ include_once("clase_hab.php");
 include_once("clase_configuracion.php");
 include_once("clase_movimiento.php");
 $conf = NEW Configuracion();
-function mostar_info($hab_id,$estado,$mov,$id){
-	$info = NEW Informacion($hab_id,$estado,$mov,$id);
+function mostar_info($hab_id,$estado,$mov,$id,$entrada="",$salida=""){
+
+	$info = NEW Informacion($hab_id,$estado,$mov,$id,$entrada,$salida);
 }
 function show_info($hab_id,$estado){
 	$hab = NEW Hab($hab_id);
+	
+	
 	
 	echo '<div class="row">'; 
 	echo '<div class="col-xs-12 col-sm-12 col-md-12">';
@@ -408,30 +411,54 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	break;
-
-
 	case 6 :
-	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
-			echo '</br>';
-			echo '<div>';
-				//echo '<img src="images/home.png"  class="center-block img-responsive">';
-			echo '</div>';
-			echo '<div>';
-			echo 'Terminar';
-			echo '</div>';
-			echo '</br>';
-		echo '</div>';
-		echo '</div>';
-	}
+	// if($user->nivel<=2){
+	// 	echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+	// 	echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
+	// 		echo '</br>';
+	// 		echo '<div>';
+	// 			//echo '<img src="images/home.png"  class="center-block img-responsive">';
+	// 		echo '</div>';
+	// 		echo '<div>';
+	// 		echo 'Terminar';
+	// 		echo '</div>';
+	// 		echo '</br>';
+	// 	echo '</div>';
+	// 	echo '</div>';
+	// }
 	break;
-
+	case 8:
+		if($user->nivel<=2){
+			echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+			echo '<div class="desocupar btn-square-lg" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].',1)">';
+				echo '</br>';
+				echo '<div>';
+					//echo '<img src="images/home.png"  class="center-block img-responsive">';
+				echo '</div>';
+				echo '<div>';
+				echo 'Desocupar';
+				echo '</div>';
+				echo '</br>';
+			echo '</div>';
+			echo '</div>';
+		}
+		break;
 
 }
+
+$entrada="";
+$salida="";
+if(isset($_GET['entrada'])){
+	$entrada = $_GET['entrada'];
+}
+if(isset($_GET['salida'])){
+	$salida = $_GET['salida'];
+}
+
+
 echo '</div>';
 echo '<div class="row">';
-	mostar_info($_GET['hab_id'],$_GET['estado'],$hab->mov,$_GET['id']);
+	mostar_info($_GET['hab_id'],$_GET['estado'],$hab->mov,$_GET['id'],$entrada,$salida);
 echo '</div>';
 echo '</div>';
 echo '<div class="modal-footer" style="background-color: #97b2f9ee; color: #000;">

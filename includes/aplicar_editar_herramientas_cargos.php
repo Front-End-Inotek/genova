@@ -31,8 +31,7 @@
       $total_adulto = $reservacion->extra_adulto * $forzar_tarifa  *  $reservacion->noches  * $reservacion->numero_hab;
       $total_infantil = $reservacion->extra_infantil * $forzar_tarifa *  $reservacion->noches  * $reservacion->numero_hab;
 
-     
-      
+
       $total =( $forzar_tarifa * $reservacion->noches * $reservacion->numero_hab ) + $total_adulto + $total_infantil;
       if($reservacion->plan_alimentos!= 0 && $reservacion->plan_alimentos!=null){
         $plan_alimentos =  new PlanesAlimentos($reservacion->plan_alimentos);
@@ -41,6 +40,8 @@
       $total = $total + $costo_plan + $reservacion->pax_extra;
 
       //se actualiza la tarifa y el cargo de dicha "reservacion".
+
+      $reservacion->editar_tarifa_hab($forzar_tarifa,$total,$reservacion->id);
 
 
 

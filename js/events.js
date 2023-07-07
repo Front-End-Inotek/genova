@@ -283,9 +283,9 @@ function problemas_sistema(datos){
 }
 
 // Muestra los subestados de las habitaciones
-function mostrar_herramientas(hab_id,estado,nombre){ 
+function mostrar_herramientas(hab_id,estado,nombre,entrada="",salida=""){ 
 	var id=localStorage.getItem("id");
-	$("#mostrar_herramientas").load("includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id);
+	$("#mostrar_herramientas").load("includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id+"&entrada="+entrada+"&salida="+salida);
    
 }
 
@@ -2241,8 +2241,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "estado_credito":estado_credito,
         "limite_credito":limite_credito,
       };
-    console.log(datos)
-    return
+    //console.log(datos)
+    // return
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
         // return ;
     //   errores_reserva="";
@@ -2488,14 +2488,48 @@ function verificarFormulario(id_form,field) {
     }
 }
 
-function guardarUsoCasa(hab_id,id_cuenta=0,id_reservacion=0){
+function guardarUsoCasa(hab_id,estado){
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
         alert("Fecha de asignación inválida")
         return false
     }
 
     if(!verificarFormulario("form-reserva","id") ){
-        guardarReservacion(0,hab_id,id_cuenta,id_reservacion)
+        // guardarReservacion(0,hab_id,id_cuenta,id_reservacion)
+        var usuario_id=localStorage.getItem("id");
+        var nombre = $("#nombre").val()
+        var apellido = $("#apellido").val()
+        var fecha_entrada = $("#fecha_entrada").val()
+        var fecha_salida = $("#fecha_salida").val()
+
+        $('#caja_herramientas').modal('hide');
+        var datos = {
+              "hab_id": hab_id,
+              "estado": estado,
+              "usuario_id": usuario_id,
+              "nombre" : nombre,
+              "apellido" : apellido,
+              "fecha_entrada":fecha_entrada,
+              "fecha_salida":fecha_salida
+            };
+        // console.log(datos)
+        $.ajax({
+              async:true,
+              type: "POST",
+              dataType: "html",
+              contentType: "application/x-www-form-urlencoded",
+              url:"includes/hab_limpieza.php",
+              data:datos,
+              beforeSend:loaderbar,
+              success:function(res){
+                // console.log(res)
+                principal()
+              },
+              //success:problemas_sistema,
+              timeout:5000,
+              error:problemas_sistema
+            });
+        return false;
     }
 }
 
@@ -7368,12 +7402,12 @@ function hab_inicial(hab_id,estado,usuario){
 //Edo. 1-Ocupado//
 
 // Modal de mandar a desocupar una habitacion ocupada
-function hab_desocupar_hospedaje(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_modal_desocupar_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
+function hab_desocupar_hospedaje(hab_id,estado,ver=0){
+	$("#mostrar_herramientas").load("includes/hab_modal_desocupar_hospedaje.php?hab_id="+hab_id+"&estado="+estado+"&ver="+ver);
 }
 
 // Mandar a desocupar una habitacion ocupada
-function hab_desocupar(hab_id,estado){
+function hab_desocupar(hab_id,estado, ver =0){
     var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -7390,7 +7424,9 @@ function hab_desocupar(hab_id,estado){
           data:datos,
           beforeSend:loaderbar,
           success:function(){
-            window.open("includes/imprimir_estado_cuenta.php?id="+hab_id);
+            if(ver==0){
+                window.open("includes/imprimir_estado_cuenta.php?id="+hab_id);
+            }
             principal()
           },
           //success:problemas_sistema,
