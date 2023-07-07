@@ -23,7 +23,7 @@
   $total_productos_rest= 0;
   echo '
       <div class="container-fluid blanco">
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">Auditoria</h2></div>
+        <div class="col-sm-12 text-left"><h2 class="text-dark">Auditoria</h2></div>
         <div class="row">
           <div class="col-sm-8"></div>
           <div class="col-sm-2">';

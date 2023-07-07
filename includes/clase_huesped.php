@@ -113,7 +113,7 @@
       
             <!--Principal-->
            
-                <div class="container-fluid blanco " style="width: 550px;">
+                <div class="container-fluid blanco " style="width: 650px;">
                     <h1>Tarjeta Credito</h1>
                     <h2></h2>
                     <header class="tarjeta">
@@ -269,18 +269,18 @@
                           </div>
                             <br>
                             <div class="d-flex justify-content-between col-11">
-                                <div class="form-check form-check-inline col-6">
-                                  <input class="form-check-input" type="checkbox" name="estado" value="1" id="check1">
+                                <div class="form-check form-check-inline col-5">
+                                  <input class="form-check-input" type="radio" name="estado" value="1" id="check1">
                                   <label class="form-check-label" for="check1">Pendiente de preautorizar</label>
                                 </div>
                               
                                 <div class="form-check form-check-inline col-3">
-                                  <input class="form-check-input" type="checkbox" name="estado" value="2" id="check2">
+                                  <input class="form-check-input" type="radio" name="estado" value="2" id="check2">
                                   <label class="form-check-label" for="check2">Garantizada</label>
                                 </div>
                               
                                 <div class="form-check form-check-inline col-3">
-                                  <input class="form-check-input" type="checkbox" name="estado" value="3" id="check3">
+                                  <input class="form-check-input" type="radio" name="estado" value="3" id="check3">
                                   <label class="form-check-label" for="check3">Sin garantía</label>
                                 </div>
                               </div>
@@ -290,9 +290,9 @@
                             <div class="col-6">
                           
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox"  id="c_abierto" value="abierto">
+                                <input class="form-check-input" type="radio"  id="c_abierto" value="abierto" name="credit">
                                 <label class="form-check-label" for="flexCheckDefault">Crédito abierto</label>
-                                <input class="form-check-input" type="checkbox"  id="c_cerrado" value="cerrado ">
+                                <input class="form-check-input" type="radio"  id="c_cerrado" value="cerrado " name="credit">
                                 <label class="form-check-label" for="flexCheckDefault">Crédito cerrado</label>
                             </div>
                         </div>
@@ -300,7 +300,7 @@
                         <div class="col-6">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 130px; font-size: 12px; text-align: justify;"> Límite de crédito </span>
+                            <span class="input-group-text" id="inputGroup-sizing-default"  font-size: 14px; text-align: justify;"> Límite de crédito </span>
                         </div>
                           <input value="'.$this->limite_credito.'" type="number" id="limite_credito" name="limite_credito"  class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
                       </div>

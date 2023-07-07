@@ -119,7 +119,7 @@
   -webkit-box-shadow: 0 2px 2px -2px #0E1119;
   -moz-box-shadow: 0 2px 2px -2px #0E1119;
   box-shadow: 0 2px 2px -2px #0E1119;
-  background: #00000000 !important;
+  background: var(--fondo) !important;
 }
 
 .tableRack th {
@@ -148,14 +148,14 @@
   background-color: var(--subtitulos) !important;
 }
 .tableRack tr:hover {
-  background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
+  /* background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%); */
   /* background: red !important; */
   -webkit-box-shadow: 0 6px 6px -6px #0E1119;
   -moz-box-shadow: 0 6px 6px -6px #0E1119;
   box-shadow: 0 6px 6px -6px #0E1119;
 }
 .tableRack td:hover {
-  background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
+  /* background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%); */
   color: #30349f;
   box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
   transition-delay: 0s;
@@ -274,7 +274,7 @@
   font-size: 14px;
   position: relative;
   min-width: 9em;
-  min-height: 4em;
+  min-height: 4.2em;
   max-height: 4em;
   text-align: left !important;
 }

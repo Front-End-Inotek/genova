@@ -256,8 +256,8 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 if (empty($_GET['hab_id'])) {
                     echo '<label for="confirmacion">Confirmación</label>
                     <div class="checkbox-container">
-                    <input type="radio" name="rdo" id="yes" checked/>
-                    <input type="radio" name="rdo" id="no" />
+                    <input class="yesornot" type="radio" name="rdo" id="yes" checked/>
+                    <input class="yesornot" type="radio" name="rdo" id="no" />
                     <div class="switch">
                         <label for="yes">Si</label>
                         <label for="no">No</label>
