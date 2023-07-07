@@ -183,6 +183,7 @@ label {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
+  transition: all 0.2s ease-out;
 }
 
 .contenedor-sub a:hover {
@@ -833,7 +834,7 @@ hr{
   text-align: center !important;
   padding-top: -12px;
   font-size: 1rem !important;
-  border-radius: 2px;
+  /* border-radius: 2px; */
 }
 
 .btn-square-lg-doble {
@@ -995,11 +996,12 @@ hr{
   /* */
   /*#5c646e;*/
   text-align: center;
-  background-color: #9f9f9f;
+  background-color: var(--fondo);
   /* background: linear-gradient(145deg, #9f9f9f 0%, #ecf2ff 40%, #848181 100%); */
   /*background-color: #242C34*/
   font-size: 1.2em;
-  color: #ffffff;
+  color: var(--parrafos);
+  border-left: 7px solid var(--parrafos) !important;
 }
 
 .terminar {
@@ -1120,9 +1122,14 @@ hr{
 .limpieza {
   /* */
   text-align: center;
-  background-color: #28294e;
+  background-color: var(--fondoAzul);
   font-size: 1.2em;
-  color: rgb(255, 255, 255);
+  color: var(--subtitulos);
+  border-left: 7px solid var(--subtitulos);
+}
+.limpieza:hover{
+  background-color: var(--subtitulos);
+  color: var(--fondoAzul);
 }
 
 .estados {
@@ -1483,7 +1490,7 @@ hr{
 
 .container-fluid {
   /* padding-right: 15px; */
-  padding-left: 0px;
+  /* padding-left: 0px; */
   margin-right: auto;
   margin-left: auto;
   text-align: center;

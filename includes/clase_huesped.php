@@ -243,7 +243,7 @@
                           </div>
                             <div class="form-group">
                               <div class="row">
-                                <div class="col-4">
+                                <div class="col-6">
                                   <label for="expires-month">Expira</label>
                                   <div class="input-group expire-date">
                                     <div class="input-group-prepend">
@@ -256,7 +256,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6">
                                   <label for="ccv">CCV</label>
                                   <div class="input-group ccv">
                                     <input type="tel" class="form-control" id="tccv" autocomplete="off" maxlength="3" value="'.$this->cvv.'">
@@ -268,8 +268,8 @@
                             </div>
                           </div>
                             <br>
-                            <div class="d-flex justify-content-between col-md-12">
-                                <div class="form-check form-check-inline col-md-6">
+                            <div class="d-flex justify-content-between col-11">
+                                <div class="form-check form-check-inline col-6">
                                   <input class="form-check-input" type="checkbox" name="estado" value="1" id="check1">
                                   <label class="form-check-label" for="check1">Pendiente de preautorizar</label>
                                 </div>
@@ -279,7 +279,7 @@
                                   <label class="form-check-label" for="check2">Garantizada</label>
                                 </div>
                               
-                                <div class="form-check form-check-inline col-3 mb-5">
+                                <div class="form-check form-check-inline col-3">
                                   <input class="form-check-input" type="checkbox" name="estado" value="3" id="check3">
                                   <label class="form-check-label" for="check3">Sin garantía</label>
                                 </div>

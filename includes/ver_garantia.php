@@ -114,7 +114,7 @@ echo '
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                           <label for="expires-month">Expira</label>
                           <div class="input-group expire-date">
                             <div class="input-group-prepend">
@@ -127,7 +127,7 @@ echo '
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                           <label for="ccv">CCV</label>
                           <div class="input-group ccv">
                             <input type="tel" class="form-control" id="ccv" autocomplete="off" maxlength="3">
