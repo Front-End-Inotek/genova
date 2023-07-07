@@ -114,10 +114,10 @@
         $usuario= NEW Usuario($detalle_realiza);
         echo '<div class="container">
           <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6">';
+            <div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
               echo 'Hora llegada: '.date("d-m-Y H:i:s",  $detalle_inicio);
             echo '</div>';
-            echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+            echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
               $nombre_usuario= $usuario->usuario;
               echo 'Meser@: '.$nombre_usuario;
             echo '</div>
@@ -143,7 +143,7 @@
                       if($usuario->nivel <= 1){
                         // echo '<button type="button" class="btn btn-danger" onclick="borrar_desde_hab('.$filas1['id'].')">Borrar</button>';
                       }
-                      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+                      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
                       echo $filas1['cantidad'].' -  '.$filas1['nombre'].' -  $'.number_format($filas1['total'], 2);
                       echo '</div>';
                     }
@@ -170,7 +170,7 @@
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Ocupada: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Termino: '. date("d-m-Y H:i:s",$termina_hospe);
       echo '</div>';
     }
@@ -191,10 +191,10 @@
         $persona_limpio= $fila['persona_limpio'];
       }
       $usuario = NEW Usuario($persona_limpio);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Inicio Limpieza :   '. date("d-m-Y H:i:s",$inicio_limpieza);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Termino ocupada: '. date("d-m-Y H:i:s",$termina_hospe);
       echo '</div>';
       echo '<div class="col-xs-12 col-sm-12 col-md-12">';
@@ -218,7 +218,7 @@
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Realiza: '.$usuario->usuario;
       echo '</div>';
     }
@@ -236,10 +236,10 @@
         $detalle_realiza= $fila['detalle_realiza'];
       }
       $usuario = NEW Usuario($detalle_realiza);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Realiza: '.$usuario->usuario;
       echo '</div>';
     }
@@ -262,7 +262,7 @@
           echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
 
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
           echo 'Motivo: '.$detalle;
         echo '</div>';
 
@@ -281,10 +281,10 @@
         $cobara=$fila['detalle_realiza'];
       }
       $usuario = NEW Usuario($cobara);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Ocupada: '.date("d-m-Y H:i:s",  $detalle_inicio);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Cobrara: '. $usuario->usuario;
       echo '</div>';
     }
@@ -498,13 +498,13 @@
 
       }
         $usuario = NEW Usuario($detalle_realizo);
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
           echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
           echo 'Realiza: '.$usuario->usuario;
         echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
           echo 'Fin : '.date("d-m-Y H:i:s",  $detalle_fin);
         echo '</div>';
     }

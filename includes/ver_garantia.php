@@ -7,7 +7,7 @@ echo '
    
     <!--Principal-->
    
-        <div class="container-fluid blanco " style="width: 550px;">
+        <div class="container-fluid blanco " style="width: 650px;">
             <h1>Tarjeta Credito</h1>
             <h2></h2>
             <header class="tarjeta">
