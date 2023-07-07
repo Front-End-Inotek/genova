@@ -116,6 +116,7 @@ ul.payment-types li.paymenttype {
 }
 .card .card-bg {
     z-index: 2;
+    filter: hue-rotate(281deg);
 }
 .card .shadow {
     position: absolute;
@@ -160,7 +161,7 @@ ul.payment-types li.paymenttype {
     position: absolute;
     width: 100%;
     overflow: hidden;
-    color: #7a1a86;
+    /* color: #7a1a86; */
     padding-left: 2px;
     white-space: nowrap;
 }
@@ -312,7 +313,7 @@ ul.payment-types li.paymenttype {
 }
 
 .tarjeta{
-    margin-bottom: 105px;
+    margin-bottom: 10px;
 }
 
 @keyframes glow {

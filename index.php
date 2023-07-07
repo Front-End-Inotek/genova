@@ -35,6 +35,7 @@
           </head>
     <body class="context" id="animacion" onload="sabersession()" >
     <div class="color">
+    <!---
     <ul class="circles">
               <li></li>
               <li></li>
@@ -48,6 +49,7 @@
               <li></li>
               <li></li>
       </ul>
+      --->
       </div>';
           //<center><h1 class="text-primary">'.$config->nombre.'</h1></center>
         echo '</div>
