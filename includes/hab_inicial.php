@@ -11,6 +11,9 @@
   }*/
 
   switch($_POST['estado']){
+
+   
+
     case 4:// Enviar a mantenimiento 
         $id = $movimiento->guardar_comentario($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario'],$_POST['estado'],urldecode($_POST['motivo']));
         $hab->cambiohab($_POST['hab_id'],$id,4);

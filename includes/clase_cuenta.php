@@ -363,7 +363,7 @@
       }
 
       function estadoCargosHabs(){
-        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.total as tarifa, reservacion.id as reserva_id
+        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.precio_hospedaje as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa 
         FROM 
         hab
         INNER JOIN movimiento as mov ON hab.mov = mov.id 

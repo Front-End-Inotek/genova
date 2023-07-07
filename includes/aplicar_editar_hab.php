@@ -2,7 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_hab.php");
   include_once("clase_log.php");
-  if(empty($_GET['id']) or empty($_GET['nombre']) or empty($_GET['tipo']) or empty($_GET['comentario']) or empty($_GET['usuario_id'])){
+  if(empty($_GET['id']) or empty($_GET['nombre']) or empty($_GET['tipo']) or empty($_GET['usuario_id'])){
     echo 'NO_valido';
   }else{
     $hab= NEW Hab(0);

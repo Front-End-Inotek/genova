@@ -71,20 +71,25 @@
                     }else{
                         echo '<td></td>';
                     }
-                $campo = "campo".$c;
-                echo '<td>
-                        <p>'.number_format($fila['tarifa'],2).'</p>
-                        <input type="number" class="color_black campos_cargos" style="width:30%" id="'.$campo.'"
-                        data-reservaid ="'.$fila['reserva_id'].'"
-                        />
-                </td>';
+                    $campo = "campo".$c;
+                    echo '<td>';
+                    if($fila['forzar_tarifa'] != 0){
+                      echo ' <p>'.number_format($fila['forzar_tarifa'],2).'</p>';
+                    }else{
+                      echo ' <p>'.number_format($fila['tarifa'],2).'</p>';
+                    }
+                    echo '
+                    <input type="number" class="color_black campos_cargos" style="width:30%" id="'.$campo.'"
+                    data-reservaid ="'.$fila['reserva_id'].'"
+                    />
+                    </td>';
 
-                echo '<td>Cargo por noche</td>';
-                echo '</tr>';
+                    echo '<td>Cargo por noche</td>';
+                    echo '</tr>';
 
-                $fila_atras = $fila['hab_nombre'];
+                    $fila_atras = $fila['hab_nombre'];
 
-                $c++;
+                    $c++;
 
                 }
 

@@ -1659,7 +1659,7 @@ function editarTotalEstancia(event){
 }
 
 // Calculamos la cantidad de noches de una reservacion
-function calcular_noches(hab_id=0,preasignada=0){
+function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
 
     var fecha_salida= document.getElementById("fecha_salida")
     var fecha_entrada= document.getElementById("fecha_entrada");
@@ -1699,10 +1699,10 @@ function calcular_noches(hab_id=0,preasignada=0){
         }else{
             cambiar_adultosNew("",hab_id)
         }
-        console.log(preasignada)
+        // console.log(uso_casa)
         // $(".div_adultos").load("includes/consultar_reservacion_disponible.php?fechas="+JSON.stringify(fechas)+"&hab_id="+hab_id);
-        include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id+"&preasignada="+preasignada;
-        console.log(include);
+        include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id+"&preasignada="+preasignada+"&uso_casa="+uso_casa;
+        //console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
                 // console.log(res)
@@ -1986,6 +1986,9 @@ function buscar_asignar_huesped(funcion,precio_hospedaje,total_adulto,total_juni
 
 function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv,correo,voucher, estado_credito, limite_credito, nombre_tarjeta){
     // console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv, voucher)
+    
+
+    
     $("#nombre").val(nombre)
     $("#apellido").val(apellido)
     $("#empresa").val(empresa)
@@ -2150,7 +2153,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var extra_adulto= Number(document.getElementById("extra_adulto").value);
     var extra_infantil= Number(document.getElementById("extra_infantil").value);
 
-    var pax_extra= Number(document.getElementById("extra_infantil").value);
+    var pax_extra= Number(document.getElementById("pax-extra").value);
 
     var tipo_hab= (document.getElementById("tipo-habitacion").value);
 
@@ -2239,6 +2242,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "limite_credito":limite_credito,
       };
     console.log(datos)
+    return
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
         // return ;
     //   errores_reserva="";
@@ -2484,6 +2488,17 @@ function verificarFormulario(id_form,field) {
     }
 }
 
+function guardarUsoCasa(hab_id,id_cuenta=0,id_reservacion=0){
+    if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
+        alert("Fecha de asignación inválida")
+        return false
+    }
+
+    if(!verificarFormulario("form-reserva","id") ){
+        guardarReservacion(0,hab_id,id_cuenta,id_reservacion)
+    }
+}
+
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
 
 
@@ -2523,7 +2538,7 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         if(numero_tarjeta=="**************"){
             numero_tarjeta=null
         }
-        // console.log(nombre_tarjeta)
+        // console.log(estado_credito, nombre_tarjeta)
         // return
 
         //guardar asyncronicamente el "husped" para obtener su id; si ya existe retorna su id..
@@ -3748,6 +3763,17 @@ function habSeleccionada(event){
     $("#tarifa").load(include);
 }
 
+// Agregar una uso casa
+function uso_casa_asignar(hab_id,estado){
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+
+    $("#area_trabajo_menu").load("includes/agregar_uso_casa.php?hab_id="+hab_id); 
+	$('#caja_herramientas').modal('hide');
+}
+
+
 // Agregar una reservacion en la habitacion
 function disponible_asignar(hab_id,estado){
 	$('#area_trabajo').hide();
@@ -4162,6 +4188,8 @@ function modificar_usuario(id){
     var logs_ver= document.getElementById("logs_ver").checked;
     var auditoria_ver= document.getElementById("auditoria_ver").checked;
 
+    var auditoria_editar= document.getElementById("auditoria_editar").checked;
+
     var llegadas_salidas_ver= document.getElementById("llegadas_salidas_ver").checked;
 
     // console.log(reservacion_preasignar)
@@ -4500,6 +4528,7 @@ function modificar_usuario(id){
                   "cupon_borrar": cupon_borrar,
                   "logs_ver": logs_ver,
                   "auditoria_ver":auditoria_ver,
+                  "auditoria_editar":auditoria_editar,
                   "llegadas_salidas_ver":llegadas_salidas_ver,
                   "usuario_id": usuario_id,
 			};
@@ -4512,7 +4541,7 @@ function modificar_usuario(id){
 			  data:datos,
 			  //beforeSend:loaderbar,
               success:function(res){
-                // console.log(res)
+                //console.log(res)
                 ver_usuarios()
               },
               //success:problemas_sistema,
@@ -4808,7 +4837,9 @@ function campos_cargos(){
             data:datos,
             //beforeSend:loaderbar,
             success:function(res){
-                ver_auditoria()
+                console.log(res)
+                
+                //ver_auditoria()
             },
             //success:problemas_sistema,
             timeout:5000,

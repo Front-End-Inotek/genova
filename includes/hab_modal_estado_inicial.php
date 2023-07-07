@@ -27,7 +27,7 @@
                   echo '</div>
                 </div>';
                 break;
-            case 9:// Enviar a mantenimiento 
+            case 9: case 4: // Enviar a mantenimiento 
                 echo '<h3>MANTENIMIENTO - Habitación '.$hab->nombre.'</h3>
                     </div>
                     <div class="col-sm-12">
@@ -43,7 +43,7 @@
                   echo '</div>
                 </div>';
                 break;
-            case 10:// Enviar a supervision 
+            case 10: case 5:// Enviar a supervision 
                 echo '<h3>SUPERVISION - Habitación '.$hab->nombre.'</h3>
                     </div>
                     <div class="col-sm-12">

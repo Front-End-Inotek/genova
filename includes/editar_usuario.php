@@ -845,6 +845,18 @@
                 </label>
               </div>
             </div>
+            <div class="col-sm-1">
+            <div class="form-check">';
+            if($usuario->auditoria_editar==0){
+            echo '<input class="form-check-input" type="checkbox" id="auditoria_editar">';
+            }else{
+            echo '<input class="form-check-input" type="checkbox" id="auditoria_editar" checked>';
+            }
+            echo '   <label class="form-check-label">
+                Editar
+              </label>
+            </div>
+          </div>
             </div><br><hr> 
             <div class="row">
               <div class="col-sm-9"></div>

@@ -19,6 +19,13 @@
 
   switch($estado){
     case 4:// Enviar a mantenimiento 
+      
+      // if($_GET['estado']==4){
+      //   $aux_estado = 9;
+      // }else{
+      //   $aux_estado = $_GET['estado'];
+      // }
+     
       echo '<!-- Modal content-->
       <div class="modal-content">
           <div class="modal-header">
