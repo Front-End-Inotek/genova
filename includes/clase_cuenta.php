@@ -362,13 +362,24 @@
 
       }
 
-      function estadoCargosHabs(){
+      function estadoCargosHabs($editable){
+        $filtro="";
+
+        if(!$editable){
+          $filtro ="and 
+          (from_unixtime(reservacion.fecha_auditoria,'%Y-%m-%d') != CURRENT_DATE()
+         or reservacion.fecha_auditoria is null 
+         )";
+        }
+
         $sentencia="SELECT hab.nombre as hab_nombre, reservacion.precio_hospedaje as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa 
+		    , reservacion.fecha_auditoria
         FROM 
         hab
         INNER JOIN movimiento as mov ON hab.mov = mov.id 
         INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
         where hab.estado = 1
+        ".$filtro."
         order by hab.id";
         $comentario="Obtenemos cargos/habonos de una habitacion en casa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

@@ -437,6 +437,17 @@
           echo '</div>';
         }
       }
+      function datos_auditoria(){
+        $sentencia="SELECT *,hab.id AS ID 
+        FROM hab
+        INNER JOIN movimiento ON hab.mov = movimiento.id 
+        INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.estado_hab = 1
+        and (from_unixtime(reservacion.fecha_auditoria,'%Y-%m-%d') = CURRENT_DATE())";
+        $comentario="Obtengo los datos del cargo por noche de la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
       // Obtengo los datos del cargo por noche de la habitacion para realizar su reporte
       function datos_cargo_noche(){
         $sentencia = "SELECT *,hab.id AS ID 

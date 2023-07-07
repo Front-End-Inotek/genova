@@ -21,9 +21,12 @@
  
   //Se necesita recalcular el total de pago de esa reservación con la 'nueva tarifa', seria como forzar la tarifa.
   //Para ello se necesita obtener la info de dicha reservación para volver a calcular precios, etc.
+
+  // print_r($cargos);
+  // die();
   foreach ($cargos as $key => $cargo) {
       $reservacion = new Reservacion($cargo->reservaid);
-      print_r($reservacion);
+      // print_r($reservacion);
       $forzar_tarifa = $cargo->valor;
 
       
@@ -52,9 +55,6 @@
   //   $comentario="Editar el cargo de una cuenta dentro de la base de datos";
   //   $consulta= $this->realizaConsulta($sentencia,$comentario);
   }
-  echo $total; 
-
-  die();
 
   $logs->guardar_log($_POST['usuario_id'],$mensaje_log);
 //   echo $_POST['hab_id']."/".$_POST['estado']."/".$_POST['mov']."/".$_POST['id_maestra'];

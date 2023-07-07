@@ -1200,11 +1200,12 @@ class Reservacion extends ConexionMYSql
         $sentencia = "UPDATE `reservacion` SET
         precio_hospedaje = '$tarifa',
         `total` = '$total',
-        fecha_auditoria = '$hoy'
+        fecha_auditoria = '$hoy',
+        forzar_tarifa = '$tarifa'
         WHERE `id` = '$id_reserva';";
-        echo $sentencia ;
-        // $comentario="Editar el cargo de una cuenta dentro de la base de datos";
-        // $consulta= $this->realizaConsulta($sentencia,$comentario);
+        // echo $sentencia ;
+        $comentario="Editar el cargo de una cuenta dentro de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
 
      // Editar multiples cargos de reservaciones

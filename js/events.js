@@ -3890,7 +3890,39 @@ function cargo_noche(){
             url:"includes/cargo_noche.php",
             data:datos,
             beforeSend:loaderbar,
-            success:principal,
+            success:function(res){
+                console.log(res)
+                principal()
+            },
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+        });
+    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+    //guardar_reporte_cargo_noche();
+    mostrar_cargo_noche_reporte();
+    return false;
+}
+
+// Aceptar el cargo noche de las habitaciones seleccionadas
+function cargo_auditoria(){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+
+    var datos = {
+            "usuario_id": usuario_id,
+        };
+    $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/cargo_auditoria.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:function(res){
+                console.log(res)
+            },
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
@@ -4872,6 +4904,7 @@ function campos_cargos(){
             //beforeSend:loaderbar,
             success:function(res){
                 console.log(res)
+                cargo_auditoria()
                 
                 //ver_auditoria()
             },

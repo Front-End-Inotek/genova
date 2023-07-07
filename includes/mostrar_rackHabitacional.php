@@ -407,7 +407,7 @@ class RackHabitacional extends ConexionMYSql
                             }else{
                                 echo '
                                 <td class="celdaCompleta tdCheck " >';
-                                echo date('Y-m-d',$tiempo_aux);
+                                // echo date('Y-m-d',$tiempo_aux);
                                 echo'
                                 </td>
                                 ';
