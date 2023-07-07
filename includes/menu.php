@@ -265,6 +265,8 @@
 			echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 			<i class="bx bxs-user text-secondary" ></i>
 			<span class="mx-2" onclick="hacer_cortes()"> Desarrollo </span>
+			<span class="mx-2" onclick="mostrar_cargo_noche()"> Desarrollo </span>
+			
 			</li>';
 		}
 

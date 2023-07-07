@@ -36,12 +36,12 @@ class RackHabitacional extends ConexionMYSql
                 $estado_texto[1] = 'Vacia limpia';
                 break;
             case 4:
-                $estado_texto[0] = 'task--ocupada-sucia';
-                $estado_texto[1] = 'Sucia ocupada';
+                $estado_texto[0] = 'task--mantenimiento';
+                $estado_texto[1] = 'Mantenimiento';
                 break;
             case 5:
-                $estado_texto[0] = 'task--limpieza-ocupada';
-                $estado_texto[1] = 'Ocupada limpieza';
+                $estado_texto[0] = 'task--bloqueado';
+                $estado_texto[1] = 'Bloqueo';
                 break;
             case 6:
                 $estado_texto[0] = 'task--reserva-pagada';

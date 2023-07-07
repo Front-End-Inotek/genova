@@ -10,6 +10,8 @@ $fecha_salida = $_GET['fecha_salida'];
 $hab_id = $_GET['hab_id'];
 $preasignada =$_GET['preasignada'];
 
+$uso_casa = $_GET['uso_casa'];
+
 $resultado = $reservacion->comprobarFechaReserva($fecha_entrada,$fecha_salida,$hab_id,$preasignada);
 
 
@@ -29,8 +31,12 @@ if($hab_id!=0){
     if($resultado <1){
         echo "<script>var fecha_valida=false; alert('Fecha de asignación inválida'); manejarReservacion(0);</script>";
     }else{
-
-        echo "<script>var fecha_valida=true; manejarReservacion(1);</script>";
+        if($uso_casa==1){
+            echo "<script>var fecha_valida=true;</script>";  
+        }else{
+            echo "<script>var fecha_valida=true; manejarReservacion(1);</script>";  
+        }
+       
     }
     
     
