@@ -64,6 +64,9 @@
   display: block;
   transition: 0.3s;
 }
+.nombre{
+  color: inherit;
+}
 
 /* Cuando pasas el mouse sobre los enlaces de navegación, cambia su color */
 .sidenav a:hover,
@@ -911,7 +914,9 @@ hr{
   font-size: 1.2em;
   color: white;
 }
-
+.bloque span{
+  color: white !important;
+}
 .mantenimiento {
   text-align: center;
   background-color: #8d8d31ef;
