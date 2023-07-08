@@ -764,7 +764,7 @@
                 <td>'.$fila['nombre'].'</td>
                 <td>$'.number_format($fila['precio'], 2).'</td>
                 <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
-                echo '<td><button class="btn btn-outline-warning btn-sm" href="#caja_herramientas" data-toggle="modal"  onclick="editar_modal_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$fila['cant'].','.$id_maestra.')"> ✎</button></td>';
+                echo '<td><button class="btn btn-outline-warning btn-sm" href="#caja_herramientas" data-toggle="modal"  onclick="editar_modal_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$fila['cant'].','.$id_maestra.')">✏️</button></td>';
                 echo '<td><button class="btn btn-outline-danger btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')"> 🗑️</button></td>';
                 echo '</tr>';
               }

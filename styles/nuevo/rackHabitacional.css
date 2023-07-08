@@ -235,7 +235,7 @@
 }
 
 .cal-userinfo {
-  height: 80px;
+  /* height: 80px; */
   box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
   padding-top: 50px;
 }

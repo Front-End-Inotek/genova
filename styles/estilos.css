@@ -64,6 +64,9 @@
   display: block;
   transition: 0.3s;
 }
+.nombre{
+  color: inherit;
+}
 
 /* Cuando pasas el mouse sobre los enlaces de navegación, cambia su color */
 .sidenav a:hover,
@@ -398,14 +401,17 @@ button {
   right: 0;
   left: 0;
   transform: translateY(0);
-  color: #fff;
+  color: #fff !important;
+  background-color: var(--parrafos);
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
 }
 
 /* se especifica el contenedor donde se encuentra*/
 .informacion:focus-visible .label,
 .icon-btn:hover .label {
   opacity: 1;
-  transform: translateY(10%);
+  transform: translateY(25%);
 }
 
 input {
@@ -834,7 +840,7 @@ hr{
   height: 80px !important;
   text-align: center !important;
   padding-top: -12px;
-  font-size: 1rem !important;
+  font-size: 1.1rem !important;
   /* border-radius: 2px; */
 }
 
@@ -908,7 +914,9 @@ hr{
   font-size: 1.2em;
   color: white;
 }
-
+.bloque span{
+  color: white !important;
+}
 .mantenimiento {
   text-align: center;
   background-color: #8d8d31ef;

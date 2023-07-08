@@ -291,9 +291,9 @@
                           
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="radio"  id="c_abierto" value="abierto" name="credit">
-                                <label class="form-check-label" for="flexCheckDefault">Crédito abierto</label>
+                                <label class="form-check-label" for="c_abierto">Crédito abierto</label>
                                 <input class="form-check-input" type="radio"  id="c_cerrado" value="cerrado " name="credit">
-                                <label class="form-check-label" for="flexCheckDefault">Crédito cerrado</label>
+                                <label class="form-check-label" for="c_cerrado">Crédito cerrado</label>
                             </div>
                         </div>
 
