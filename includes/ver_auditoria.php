@@ -5,11 +5,16 @@
   include_once("clase_forma_pago.php");
   include_once("clase_corte_info.php");
   include_once("clase_cuenta.php");
+  include_once("clase_usuario.php");
+
   $ticket= NEW Ticket(0);
   $tipo= NEW Tipo(0);
   $forma_pago= NEW Forma_pago(0);
   $cuenta = new Cuenta(0);
   $usuario_id = $_GET['usuario_id'];
+  $usuario = new Usuario($usuario_id);
+
+
   /*$ticket_inicial= $ticket->ticket_ini();
   $ticket_final= $ticket->ticket_fin();
   $inf= NEW Corte_info($ticket_inicial,$ticket_final);*/
@@ -54,13 +59,15 @@
                     </tr>
                   </thead>
                 <tbody>';
+                $editar_auditoria = $usuario->auditoria_editar;
+
                 //obtenemos los cargos por habitacion
-                $consulta= $cuenta->estadoCargosHabs();
+                $consulta= $cuenta->estadoCargosHabs($editar_auditoria);
                 $fila_atras="";
                 $total_cargos=0;
                 $total_=0;
                 $c=0;
-
+             
                 while ($fila = mysqli_fetch_array($consulta)) {
                     echo '<tr class="text-center">';
                     if($fila_atras!= $fila['hab_nombre']) {
@@ -78,10 +85,14 @@
                     }else{
                       echo ' <p>'.number_format($fila['tarifa'],2).'</p>';
                     }
+
+                    if($editar_auditoria){
+                      echo '
+                      <input type="number" class="color_black campos_cargos" style="width:30%" id="'.$campo.'"
+                      data-reservaid ="'.$fila['reserva_id'].'"
+                      />';
+                    }
                     echo '
-                    <input type="number" class="color_black campos_cargos" style="width:30%" id="'.$campo.'"
-                    data-reservaid ="'.$fila['reserva_id'].'"
-                    />
                     </td>';
 
                     echo '<td>Cargo por noche</td>';

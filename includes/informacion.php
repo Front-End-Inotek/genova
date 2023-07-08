@@ -124,13 +124,13 @@ echo'
             break;
 
             case 4:
-            $estado= "Sucia ocupada";
-            $cronometro= $movimiento->saber_inicio_sucia($fila['moviemiento']);
+            $estado="Mantenimiento";
+            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
 
             case 5:
-            $estado="Ocupada limpieza";
-            $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
+            $estado="Bloqueo";
+            $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
 
             case 6:

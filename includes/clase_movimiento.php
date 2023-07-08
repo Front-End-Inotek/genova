@@ -481,12 +481,31 @@
           case 1.2:
               $estado_interno= 'limpieza';
               break;
+          case 1.3:
+              $estado_interno= 'uso casa';
+              break;
         }
 
         $sentencia = "UPDATE `movimiento` SET
         `estado_interno` = '$estado_interno'
         WHERE `id` = '$mov';";
+        echo $sentencia;
         $comentario="Modificar el estado interno del movimiento";
+        $this->realizaConsulta($sentencia,$comentario);
+      }
+
+      // Modificar movimiento por estado limpieza
+      function editar_estado_usocasa($mov,$usuario_id,$nombre_uso,$fecha_entrada,$fecha_salida){
+
+        $fecha_entrada = strtotime($fecha_entrada);
+        $fecha_salida = strtotime($fecha_salida);
+        $sentencia = "UPDATE `movimiento` SET
+        `detalle_manda` = '$usuario_id',
+        `detalle_inicio` = '$fecha_entrada',
+        `detalle_fin` = '$fecha_salida',
+        `persona_uso` = '$nombre_uso'
+        WHERE `id` = '$mov';";
+        $comentario="Modificar la persona limpio del movimiento";
         $this->realizaConsulta($sentencia,$comentario);
       }
       // Modificar movimiento por estado limpieza

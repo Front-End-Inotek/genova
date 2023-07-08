@@ -12,6 +12,7 @@
           <div class="col-sm-12">';
           switch($_GET['nuevo_estado']){
             case 2:// Enviar a limpieza 
+              // echo $_GET['nuevo_estado'];
                 echo '<h3>LIMPIEZA - Habitación '.$hab->nombre.'</h3>
                     </div>
                     <div class="col-sm-12">

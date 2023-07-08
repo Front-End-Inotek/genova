@@ -21,9 +21,12 @@
  
   //Se necesita recalcular el total de pago de esa reservación con la 'nueva tarifa', seria como forzar la tarifa.
   //Para ello se necesita obtener la info de dicha reservación para volver a calcular precios, etc.
+
+  // print_r($cargos);
+  // die();
   foreach ($cargos as $key => $cargo) {
       $reservacion = new Reservacion($cargo->reservaid);
-      print_r($reservacion);
+      // print_r($reservacion);
       $forzar_tarifa = $cargo->valor;
 
       
@@ -31,8 +34,7 @@
       $total_adulto = $reservacion->extra_adulto * $forzar_tarifa  *  $reservacion->noches  * $reservacion->numero_hab;
       $total_infantil = $reservacion->extra_infantil * $forzar_tarifa *  $reservacion->noches  * $reservacion->numero_hab;
 
-     
-      
+
       $total =( $forzar_tarifa * $reservacion->noches * $reservacion->numero_hab ) + $total_adulto + $total_infantil;
       if($reservacion->plan_alimentos!= 0 && $reservacion->plan_alimentos!=null){
         $plan_alimentos =  new PlanesAlimentos($reservacion->plan_alimentos);
@@ -41,6 +43,8 @@
       $total = $total + $costo_plan + $reservacion->pax_extra;
 
       //se actualiza la tarifa y el cargo de dicha "reservacion".
+
+      $reservacion->editar_tarifa_hab($forzar_tarifa,$total,$reservacion->id);
 
 
 
@@ -51,9 +55,6 @@
   //   $comentario="Editar el cargo de una cuenta dentro de la base de datos";
   //   $consulta= $this->realizaConsulta($sentencia,$comentario);
   }
-  echo $total; 
-
-  die();
 
   $logs->guardar_log($_POST['usuario_id'],$mensaje_log);
 //   echo $_POST['hab_id']."/".$_POST['estado']."/".$_POST['mov']."/".$_POST['id_maestra'];

@@ -213,35 +213,35 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="empresa">Empresa/Agencia</label>
-                    <input type="text" class="form-control" id="empresa">
+                    <input disabled type="text" class="form-control" id="empresa">
                 </div>
             </div>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-3">
                     <label for="telefono">Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono" required>
+                    <input disabled type="tel" class="form-control" id="telefono" >
                 </div>
                 <div class="form-group col-md-3">
                     <label for="pais">País</label>
-                    <input type="text" class="form-control" id="pais">
+                    <input disabled type="text" class="form-control" id="pais">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="estado">Estado</label>
-                    <input type="text" class="form-control" id="estado">
+                    <input disabled type="text" class="form-control" id="estado">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="ciudad">Ciudad</label>
-                    <input type="text" class="form-control" id="ciudad" required>
+                    <input disabled type="text" class="form-control" id="ciudad" >
                 </div>
             </div>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-6">
                     <label for="direccion">Dirección</label>
-                    <input type="text" class="form-control" id="direccion">
+                    <input disabled type="text" class="form-control" id="direccion">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="email">Correo electrónico </label>
-                    <input type="email" class="form-control" id="correo" onblur="comprobarEmail()">
+                    <input disabled type="email" class="form-control" id="correo" onblur="comprobarEmail()">
                 </div>
                 <div class="form-group col-md-2">';
                 if (empty($_GET['hab_id'])) {
@@ -297,11 +297,11 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
-                <textarea class="form-control" id="observaciones" rows="3"></textarea>
+                <textarea disabled class="form-control" id="observaciones" rows="3"></textarea>
             </div>
             <br>
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); guardarUsoCasa('.$_GET['hab_id'].')">Enviar</button>
+                <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); guardarUsoCasa('.$_GET['hab_id'].',8)">Enviar</button>
             </div>
         </form>
 

@@ -11,7 +11,7 @@
   class Informacion extends ConexionMYSql
   {
 
-    function __construct($hab_id,$estado,$mov,$id)
+    function __construct($hab_id,$estado,$mov,$id,$entrada="",$salida="")
     {
       switch ($estado) {
         case 0:
@@ -32,13 +32,17 @@
         case 5:
               $this->supervision($hab_id,$estado,$mov);
           break;
-        case 6:
-              $this->cancelada($hab_id,$estado,$mov);
-              //$this->por_cobrar($hab_id,$estado,$mov);
+        // case 6:
+        //       // $this->cancelada($hab_id,$estado,$mov);
+        //       //$this->por_cobrar($hab_id,$estado,$mov);
+        //   break;
+        case 8:
+            $this->uso_casa($hab_id,$estado,$mov);
           break;
-        /*case 7:
-              //$this->ocupada($hab_id,$estado,$mov,$id);
-          break;*/
+        case 7: case 6:
+        
+              $this->reserva_pendiente($hab_id,$estado,$mov,$id,$entrada,$salida);
+          break;
         default:
             echo '<div class="col-xs-2 col-sm-2 col-md-2">';
               echo 'No definido';
@@ -281,6 +285,72 @@
         }
       echo '</div>';
       echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
+      echo '</div>';
+    }
+
+    // Estado 7
+    function reserva_pendiente($hab_id,$estado,$mov,$id,$entrada,$salida){
+   
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
+      $comentario="Obtener informacion para la habitacion con el estado cancelada";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      $inicio_hospedaje=$entrada;
+      $fin_hospedaje=$salida;
+      $motivo= '';
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        
+        $motivo= $fila['comentario'];
+      }
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Inicio: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Fin: '.date("d-m-Y H:i:s",  $fin_hospedaje);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        if($motivo != ''){
+          echo 'Motivo: '.$motivo;
+        }
+      echo '</div>';
+      echo '<div class="col-xs-12 col-sm-12 col-md-12">';
+        echo 'Tipo Habitación: '.$tipo_habitacion;
+      echo '</div>';
+    }
+
+    // Estado 8
+    function uso_casa($hab_id,$estado,$mov){
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
+      $comentario= "Obtener informacion para la habitacion con el estado limpieza";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      $inicio_uso= 0;
+      $fin_uso= 0;
+      $persona_uso= 0;
+      while($fila = mysqli_fetch_array($consulta))
+      {
+        $inicio_uso= $fila['detalle_inicio'];
+        //$fin_limpieza= $fila['fin_limpieza'];
+        $fin_uso= $fila['detalle_fin'];
+        $persona_uso= $fila['persona_uso'];
+      }
+      // $usuario = NEW Usuario($persona_limpio);
+      $hab= NEW Hab(0);
+      $tipo_habitacion= $hab->consultar_tipo($hab_id);
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Inicio Uso :   '. date("d-m-Y H:i:s",$inicio_uso);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Termino Uso: '. date("d-m-Y H:i:s",$fin_uso);
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+        echo 'Usando hab: '. $persona_uso;
+      echo '</div>';
+      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
         echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
