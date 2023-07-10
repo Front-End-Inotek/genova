@@ -162,8 +162,9 @@ class RackHabitacional extends ConexionMYSql
 
         //Se utiliza la misma consulta para el rack de operaciones
         $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
-        ,movimiento.detalle_inicio, movimiento.detalle_fin
+        ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
+        LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1  
         /*AND hab.id=43*/
         ORDER BY id";
@@ -325,7 +326,8 @@ class RackHabitacional extends ConexionMYSql
                             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                                 <div >
                         ';
-                        echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                        $h=0;
+                        echo '<section style="content:'.$h.';" class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
                         echo '</div>';
                         echo '
                             </div>
@@ -333,7 +335,7 @@ class RackHabitacional extends ConexionMYSql
                         ';
                         }
                         }
-
+                     
                     //se le suma 1 día para que no tome el dia 'actual'.
                     $tiempo_aux = time() + $adicional;
                     $c=0;
@@ -419,10 +421,15 @@ class RackHabitacional extends ConexionMYSql
                         }
                     }
                     $i=32;
-                    
+                    //Ocupadas
                     } else {
                         //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
-                      
+                        $huesped = $fila['n_huesped'] . " " . $fila['a_huesped'];
+                        echo '<style>
+                        .miclase::after {
+                            content: "'.$huesped.'";
+                        }
+                        </style>';
                         $earlier = new DateTime(date('Y-m-d'));
                         $later = new DateTime(date('Y-m-d',$fila['fin']));
                         $eltd ="";
@@ -438,7 +445,7 @@ class RackHabitacional extends ConexionMYSql
                         <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
                         echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                         ';
-                        echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
+                        echo '<section class="miclase task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
                         echo '</div>';
                         echo'
                         </td>
@@ -489,7 +496,7 @@ class RackHabitacional extends ConexionMYSql
                                     <td class="celdaCompleta tdCheck " colspan="' . $aux_r  . '">';
                                     echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado. ',' . $fila['nombre'] . '. ,' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')" >
                                     ';
-                                    echo '<section class="task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches . ' </section>';
+                                    echo '<section class="miclase task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches . ' </section>';
                                     echo '</div>';
                                     echo'
                                     </td>
