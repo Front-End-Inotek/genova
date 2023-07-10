@@ -3922,7 +3922,7 @@ function cargo_auditoria(){
             beforeSend:loaderbar,
             success:function(res){
                 console.log(res)
-                principal()
+                // principal()
             },
             //success:problemas_sistema,
             timeout:5000,

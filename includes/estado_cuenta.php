@@ -95,7 +95,7 @@
         </div>
         <div class="row">
           <div class="col-sm-4">Nombre Huesped: '.$nombre_huesped.'</div>
-          <div class="col-sm-4">Quién Reserva: '.$quien_reserva.'</div>
+          <div class="col-sm-4"></div>
           <div class="col-sm-2">Acompañante: '.$acompanante.'</div>
           <div class="col-sm-2">Forma Pago: '.$forma_pago.'</div>
         </div>

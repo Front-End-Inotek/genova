@@ -20,21 +20,21 @@
   $consulta = $hab->datos_auditoria();
 
   // Revisamos el total de cargo por habitacion
-  while ($fila = mysqli_fetch_array($consulta))
-  {
-    $hab_id = $fila['ID'];
-    $extra_adulto = $fila['extra_adulto'];
-    $extra_junior = $fila['extra_junior'];
-    $extra_infantil = $fila['extra_infantil'];
-    $id_tarifa = $fila['tarifa'];
-    $descuento = $fila['descuento'];
-    $mov = $fila['mov'];
+//   while ($fila = mysqli_fetch_array($consulta))
+//   {
+//     $hab_id = $fila['ID'];
+//     $extra_adulto = $fila['extra_adulto'];
+//     $extra_junior = $fila['extra_junior'];
+//     $extra_infantil = $fila['extra_infantil'];
+//     $id_tarifa = $fila['tarifa'];
+//     $descuento = $fila['descuento'];
+//     $mov = $fila['mov'];
 
-    $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
-    $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
-    $total_final= $total_final + $total_tarifa;
-    $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,$descripcion,1,$total_tarifa,0);
-  }
+//     $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
+//     $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
+//     $total_final= $total_final + $total_tarifa;
+//     $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,$descripcion,1,$total_tarifa,0);
+//   }
 
   $logs->guardar_log($_POST['usuario_id'],"Aplicar cargo por noche en las habitaciones");
 
@@ -148,9 +148,12 @@
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   $consulta = $hab->datos_auditoria();
+
+  
   // Revisamos el total de cargo por habitacion
   while ($fila = mysqli_fetch_array($consulta))
   {
+  
     $cantidad_hab++;
     $hab_id = $fila['ID'];
     $hab_nombre = $fila['nombre'];  
@@ -168,12 +171,12 @@
     $precio_tarifa = $fila['precio_hospedaje'];
     $noches = $fila['noches'];
     $nohabs = $fila['numero_hab'];
-    //$total = $fila['total'];
+    $total = $fila['total'];
 
     $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
     $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
     $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
-    $total_final= $total_final + $total_tarifa;
+    $total_final= $total_final + $total;
 
     $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
     $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$nombre_tarifa),1,0,'C');
@@ -184,7 +187,7 @@
     $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
     $pdf->Cell(40,5,iconv("UTF-8", "ISO-8859-1",$nombre_huesped),1,0,'C'); 
     $pdf->Cell(30,5,iconv("UTF-8", "ISO-8859-1",$quien_reserva),1,0,'C'); 
-    $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_tarifa, 2)),1,1,'C');    
+    $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total, 2)),1,1,'C');    
 
       /*for ($i = 1; $i <= 26; $i++) {
         $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
@@ -223,6 +226,7 @@
         $pdf->SetFont('Arial','',7);
         $pdf->SetTextColor(0,0,0);
       }
+     
   }
 
   $pdf->SetFont('Arial','',10);

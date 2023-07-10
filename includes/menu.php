@@ -125,7 +125,10 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes(0)"> Corte Global Diario </a></i></ul>';
 
 			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Corte Global </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes()"> Corte Global </a></i></ul>';
+
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Resumen transacciones </a></i></ul>';
 
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="saldo_huespedes()"> Saldo de huéspedes </a></i></ul>';
@@ -264,7 +267,7 @@
 		if($permisos_reportes>0) {
 			echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 			<i class="bx bxs-user text-secondary" ></i>
-			<span class="mx-2" onclick="hacer_cortes()"> Desarrollo </span>
+			<span class="mx-2" onclick=""> Desarrollo </span>
 			<!-- <span class="mx-2" onclick="mostrar_cargo_noche()"> Desarrollo </span> -->
 			
 			</li>';

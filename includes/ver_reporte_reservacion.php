@@ -98,8 +98,13 @@
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Nombre Huesped: '.$nombre_huesped.'</div>
-              <div class="col-sm-5">Quién Reserva: '.$quien_reserva.'</div>
+              <div class="col-sm-6">Nombre Huesped: '.$nombre_huesped.'</div>';
+              if($quien_reserva!="checkin"){
+                echo '<div class="col-sm-5">Quién Reserva: '.$quien_reserva.'</div>';
+              }else{
+                echo '<div class="col-sm-5"></div>';
+              }
+              echo '
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
