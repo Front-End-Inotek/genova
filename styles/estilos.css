@@ -277,6 +277,7 @@ label {
   /* font-size: 1.1rem; */
 }
 
+
 .blanco {
   position: relative;
   box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
@@ -337,8 +338,11 @@ label {
 .table-responsive {
   margin-left: 10px !important;
   background-color: #f5f5f51f !important;
-  max-height: 900px;
+  /* max-height: 900px; */
   height: auto;
+  /* height: 87vh; */
+  /* padding-top: 55px; */
+  /* height: calc(100vh - 111px); */
 }
 
 .table-responsive tr {/*
@@ -489,9 +493,9 @@ th {
 
 tr:hover {
   background-color: #efefefe1;
-  -webkit-box-shadow: 0 6px 6px -6px #0e1119;
+  /* -webkit-box-shadow: 0 6px 6px -6px #0e1119;
   -moz-box-shadow: 0 6px 6px -6px #0e1119;
-  box-shadow: 0 6px 6px -6px #0e1119;
+  box-shadow: 0 6px 6px -6px #0e1119; */
 }
 
 .card-body{

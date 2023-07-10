@@ -4,6 +4,7 @@
 
 .tableRack {
   table-layout: auto;
+  height: calc(100vh - 111px) !important;
 }
 
 #tablaTotal {
@@ -150,9 +151,9 @@
 .tableRack tr:hover {
   /* background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%); */
   /* background: red !important; */
-  -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+  /* -webkit-box-shadow: 0 6px 6px -6px #0E1119;
   -moz-box-shadow: 0 6px 6px -6px #0E1119;
-  box-shadow: 0 6px 6px -6px #0E1119;
+  box-shadow: 0 6px 6px -6px #0E1119; */
 }
 .tableRack td:hover {
   /* background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%); */
