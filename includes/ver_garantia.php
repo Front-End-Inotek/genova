@@ -2,7 +2,7 @@
 
 echo ' 
 <h1 class="pago">Metodo de pago / Metodo de garantia</h1>
-<p id="choosen-paymenttype">tarjeta de credito</p>
+
 
    
     <!--Principal-->

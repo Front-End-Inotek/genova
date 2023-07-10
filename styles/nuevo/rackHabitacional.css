@@ -12,7 +12,7 @@
 }
 
 #cal-largo {
-  height: 760px;
+  height: 850px;
 }
 
 .my-container {
@@ -274,7 +274,7 @@
   font-size: 14px;
   position: relative;
   min-width: 9em;
-  min-height: 4.2em;
+  min-height: 3.5em;
   max-height: 4em;
   text-align: left !important;
 }
