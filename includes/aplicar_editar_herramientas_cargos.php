@@ -42,6 +42,8 @@
       }
       $total = $total + $costo_plan + $reservacion->pax_extra;
 
+      echo $forzar_tarifa;
+
       //se actualiza la tarifa y el cargo de dicha "reservacion".
 
       $reservacion->editar_tarifa_hab($forzar_tarifa,$total,$reservacion->id);

@@ -4879,17 +4879,26 @@ function campos_cargos(){
 
     var cargos= document.getElementsByClassName('campos_cargos')
 
-    for (let item of cargos) {
-        if(item.value!=""){
-            array_cargos.push({
-                "reservaid":item.dataset.reservaid,
-                "valor":item.value,
-               })
-        }
+    var campos_habs = document.getElementsByClassName('campos_habs')
+
+    var tarifa=0;
+
+    for (var i = 0; i < cargos.length; i++) {
       
+
+         if(cargos[i].value=="" && campos_habs[i].checked){
+            tarifa = cargos[i].dataset.oldvalue
+        }
+        if(cargos[i].value!="" && campos_habs[i].checked){
+            tarifa = cargos[i].value
+        }
+        array_cargos.push({
+            "reservaid":cargos[i].dataset.reservaid,
+            "valor":tarifa,
+           }) 
     }
-    // console.log(array_cargos)
-    // return
+    console.log(array_cargos)
+
     if(array_cargos.length!=0){
         var datos = {
             "datos_cargos": JSON.stringify(array_cargos),

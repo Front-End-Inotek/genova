@@ -20,21 +20,22 @@
   $consulta = $hab->datos_auditoria();
 
   // Revisamos el total de cargo por habitacion
-//   while ($fila = mysqli_fetch_array($consulta))
-//   {
-//     $hab_id = $fila['ID'];
-//     $extra_adulto = $fila['extra_adulto'];
-//     $extra_junior = $fila['extra_junior'];
-//     $extra_infantil = $fila['extra_infantil'];
-//     $id_tarifa = $fila['tarifa'];
-//     $descuento = $fila['descuento'];
-//     $mov = $fila['mov'];
+  while ($fila = mysqli_fetch_array($consulta))
+  {
+    $hab_id = $fila['ID'];
+    $extra_adulto = $fila['extra_adulto'];
+    $extra_junior = $fila['extra_junior'];
+    $extra_infantil = $fila['extra_infantil'];
+    $id_tarifa = $fila['tarifa'];
+    $descuento = $fila['descuento'];
+    $mov = $fila['mov'];
 
-//     $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
-//     $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
-//     $total_final= $total_final + $total_tarifa;
-//     $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,$descripcion,1,$total_tarifa,0);
-//   }
+    $total_aux = $fila['precio_hospedaje'];
+    $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
+    $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
+    $total_final= $total_final + $total_tarifa;
+    $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,$descripcion,1,$total_aux,0);
+  }
 
   $logs->guardar_log($_POST['usuario_id'],"Aplicar cargo por noche en las habitaciones");
 

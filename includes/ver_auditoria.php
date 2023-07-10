@@ -53,7 +53,7 @@
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr class="table-primary-encabezado text-center">
-                    <th>Hab. <input type="checkbox"  /></th>
+                    <th>Hab.</th>
                     <th>Cargos </th>
                     <th>Descripción</th>
                     </tr>
@@ -67,13 +67,14 @@
                 $total_cargos=0;
                 $total_=0;
                 $c=0;
+                $tarifa=0;
              
                 while ($fila = mysqli_fetch_array($consulta)) {
                     echo '<tr class="text-center">';
                     if($fila_atras!= $fila['hab_nombre']) {
                         echo '<td>
                         <span>'.$fila['hab_nombre'].'</span>
-                        <input type="checkbox"  />
+                        <input type="checkbox"  class="campos_habs" />
                         </td>';
                     }else{
                         echo '<td></td>';
@@ -81,14 +82,15 @@
                     $campo = "campo".$c;
                     echo '<td>';
                     if($fila['forzar_tarifa'] != 0){
-                      echo ' <p>'.number_format($fila['forzar_tarifa'],2).'</p>';
+                      $tarifa = $fila['forzar_tarifa'];
                     }else{
-                      echo ' <p>'.number_format($fila['tarifa'],2).'</p>';
+                      $tarifa = $fila['tarifa'];
                     }
-
+                    echo ' <p>'.number_format($tarifa,2).'</p>';
                     if($editar_auditoria){
                       echo '
                       <input type="number" class="color_black campos_cargos" style="width:30%" id="'.$campo.'"
+                      data-oldvalue="'.$tarifa.'"
                       data-reservaid ="'.$fila['reserva_id'].'"
                       />';
                     }
