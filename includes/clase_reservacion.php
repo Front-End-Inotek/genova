@@ -2714,7 +2714,7 @@ class Reservacion extends ConexionMYSql
 		LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
+		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada = $dia || (reservacion.fecha_entrada > $dia && reservacion.fecha_salida <= $salida)) AND (reservacion.estado = 1) ORDER BY reservacion.fecha_entrada DESC;";
         $comentario="Obtengo los datos del cargo por noche de la habitacion";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         return $consulta;

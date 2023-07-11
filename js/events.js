@@ -1903,12 +1903,16 @@ function mostrar_modal_garantia(){
     id_huesped = $("#tomahuespedantes").val()
     estado_tarjeta=$("#estadotarjeta").val()
     estado_credito=$("#estadocredito").val()
+
+    console.log(estado_credito)
+   
+
     $("#mostrar_herramientas").load('includes/modal_mostrar_garantia.php?huesped='+id_huesped+"&estadotarjeta="+estado_tarjeta,function(){
         if(estado_tarjeta!=""){
-            $(":checkbox[value="+estado_tarjeta+"]").prop("checked","true");
+            $(":radio[value="+estado_tarjeta+"]").prop("checked","true");
         }
         if(estado_credito!=""){
-            $(":checkbox[value="+estado_credito+"]").prop("checked","true");
+            $(":radio[value="+estado_credito+"]").prop("checked","true");
         }
         
     })
@@ -1983,9 +1987,7 @@ function buscar_asignar_huesped(funcion,precio_hospedaje,total_adulto,total_juni
 
 function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv,correo,voucher, estado_credito, limite_credito, nombre_tarjeta){
     // console.log(id,nombre,apellido,empresa,telefono,pais,estado,ciudad,direccion,estado_tarjeta,tipo_tarjeta,titular_tarjeta,numero_tarjeta,vencimiento_mes,vencimiento_ano,ccv, voucher)
-    
 
-    
     $("#nombre").val(nombre)
     $("#apellido").val(apellido)
     $("#empresa").val(empresa)
@@ -1998,6 +2000,7 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
     $("#estadotarjeta").val(estado_tarjeta)
     $("#nut").val(numero_tarjeta)
     $("#nt").val(titular_tarjeta)
+    $("#ccv").val(ccv)
     $("#mes").val(vencimiento_mes)
     $("#year").val(vencimiento_ano)
     $("#limitecredito").val(limite_credito)
