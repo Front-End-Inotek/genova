@@ -23,7 +23,7 @@
   $total_productos_rest= 0;
   echo '
       <div class="container-fluid blanco">
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">RESUMEN  TRANSACCIONES </h2></div>
+        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">RESUMEN TRANSACCIONES </h2></div>
         <div class="row">
           <div class="col-sm-8"></div>
           <div class="col-sm-2">';
@@ -111,8 +111,7 @@
                   
                 }
                 $total_maestra=0;
-              
-              
+
                 //cargos cuentas maestras.
                 $consulta= $cuenta->mostrarCargosMaestra($usuario_id);
                 while ($fila = mysqli_fetch_array($consulta)) {

@@ -409,7 +409,7 @@
         INNER JOIN movimiento as mov ON hab.mov = mov.id 
         INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
         where hab.estado = 1
-        AND cuenta.estado != 2
+        AND cuenta.estado =1
         AND (cuenta.abono>0 OR cuenta.cargo>0) 
         order by hab.id";
         $comentario="Obtenemos cargos/habonos de una habitacion en casa";
@@ -423,7 +423,7 @@
         from cuenta
         left join cuenta_maestra as cm on cm.mov = cuenta.mov 
         where id_usuario =$id_usuario
-        and cm.estado = 1 and cuenta.estado!=2
+        and cm.estado = 1 and cuenta.estado=1
         and cuenta.abono>0
         order by cm.id , cuenta.fecha asc";
         $comentario="Mostrar los cargos de todas las habitaciones por usuario";
@@ -436,7 +436,7 @@
       function mostrarAbonos($id_usuario){
         $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta 
         LEFT join hab on hab.mov = cuenta.mov
-        where cuenta.estado !=2
+        where cuenta.estado =1
         and cuenta.id_usuario= $id_usuario
         and hab.estado = 1
         AND cuenta.abono > 0
@@ -452,11 +452,11 @@
 
 
       function mostrarCargosMaestra($id_usuario){
-        $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre
+        $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre
         from cuenta
         left join cuenta_maestra as cm on cm.mov = cuenta.mov 
         where id_usuario =$id_usuario
-        and cm.estado = 1 and cuenta.estado!=2
+        and cm.estado = 1 and cuenta.estado =1
         and cuenta.cargo>0
         order by cm.id , cuenta.fecha asc" ;
         $comentario="Mostrar los cargos de todas las habitaciones por usuario";
@@ -469,9 +469,10 @@
       function mostrarCargos($id_usuario){
         $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta 
         LEFT join hab on hab.mov = cuenta.mov
-        where cuenta.estado !=2
-        and cuenta.id_usuario= $id_usuario
-        and hab.estado = 1
+        where cuenta.estado =1
+        AND cuenta.id_usuario= $id_usuario
+        AND hab.estado = 1
+        AND cuenta.estado
         AND cuenta.cargo > 0
         order by hab.id , cuenta.fecha asc";
 
@@ -850,7 +851,8 @@
         $dia_actual= date("d-m-Y",$fecha_actual);
         $dia_actual= strtotime($dia_actual);
         
-        $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual AND id_usuario = $usuario_id AND estado = 1";
+        $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual AND id_usuario = $usuario_id AND estado = 1 AND estado!=2";
+        // echo $sentencia;
         $comentario="Obtener el total de cargos del dia actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
