@@ -166,7 +166,7 @@ class RackHabitacional extends ConexionMYSql
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1  
-        /*AND hab.id=43*/
+        /*AND hab.id=54*/
         ORDER BY id";
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -263,9 +263,11 @@ class RackHabitacional extends ConexionMYSql
             $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado,
             reservacion.estado_interno AS garantia
             ,movimiento.estado_interno AS interno
+            ,huesped.nombre as n_huesped, huesped.apellido as a_huesped
             FROM movimiento
             left join reservacion on movimiento.id_reservacion = reservacion.id
             LEFT JOIN hab on movimiento.id_hab = hab.id
+            LEFT JOIN huesped on movimiento.id_huesped = huesped.id
             where reservacion.estado =1
             and movimiento.motivo='preasignar'
             and movimiento.id_hab=$hab
@@ -297,6 +299,7 @@ class RackHabitacional extends ConexionMYSql
 
                     //Si la habitación actual no está ocupada entra aqui.
                     if ($i == 2 && $fila['estado'] != 1 ) {
+                        
 
                         //aplica lo mismo que en una reservacion de momento solo en uso casa.
                         if($fila['estado'] == 8){
@@ -327,7 +330,7 @@ class RackHabitacional extends ConexionMYSql
                                 <div >
                         ';
                         $h=0;
-                        echo '<section style="content:'.$h.';" class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                        echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
                         echo '</div>';
                         echo '
                             </div>
@@ -340,6 +343,14 @@ class RackHabitacional extends ConexionMYSql
                     $tiempo_aux = time() + $adicional;
                     $c=0;
                     while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
+                        $huesped_reserva = $fila_r['n_huesped'] . " " . $fila_r['a_huesped'];
+                        $clase_hover = "nuevax" . $i .rand(1,100);;
+                        echo '<style>
+                        .'.$clase_hover.'::after {
+                        content: "'.$huesped_reserva.'";
+                        }
+                        </style>';
+
                         $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                         while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
                         //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias), 
@@ -359,7 +370,7 @@ class RackHabitacional extends ConexionMYSql
                             <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
                                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',' . $fila['nombre'] . ',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')" >
                             ';
-                            echo '<section class="task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . ' </section>';
+                            echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . '</section>';
                             echo '            </div>
 
                                 </td>
@@ -424,12 +435,15 @@ class RackHabitacional extends ConexionMYSql
                     //Ocupadas
                     } else {
                         //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
-                        $huesped = $fila['n_huesped'] . " " . $fila['a_huesped'];
+                       
+                        $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
+                        $clase_hover = "nuevax" . $i .rand(1,100);;
                         echo '<style>
-                        .miclase::after {
-                            content: "'.$huesped.'";
+                        .'.$clase_hover.'::after {
+                            content: "'.$huesped_ocupada.'";
                         }
                         </style>';
+                    
                         $earlier = new DateTime(date('Y-m-d'));
                         $later = new DateTime(date('Y-m-d',$fila['fin']));
                         $eltd ="";
@@ -439,33 +453,59 @@ class RackHabitacional extends ConexionMYSql
                         $imprimi_ocupadas=true;
                         $ocupada=true;
                         $tiempo_actual = time();
+                        $tiempo_aux = time();
 
                         echo '';
                         echo '
                         <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
                         echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                         ';
-                        echo '<section class="miclase task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
+                        echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
                         echo '</div>';
                         echo'
                         </td>
                         ';
+                        if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila['fin']))
+                        {
 
+                            $tiempo_aux += 86400;
+                        }
+
+
+                        if($noches>1){
+                            $n = 86400 * ($noches);
+                            $tiempo_aux += $n;
+                        }else{
+                              
+                                // echo "d2";
+                                // die();
+                        }
+                        // echo date('Y-m-d',$tiempo_aux);
+                       
                         //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
                         if($contador_row==0){
-                           
+
                             $i = 32;
                         }else{
                             //aqui van las reservas, fila_r contiene las reservas
                             //$tiempo_aux contendrá el tiempo 'actual', mas la suma de cada dia para cada reservación.
-                            $tiempo_aux = $fila['fin'] ;
+
                             $current=0; //contador del ciclo de reservaciones.
                             $ultima=""; //penúltima fecha de la reservacion.
                             $filaL=null; //contendrá los datos de la ultima penúltima reservación.
                             $existetd=false; //Sí ya se imprió un td, no volver a imprimir.
                             $show=false;
                             while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
-                                
+                                $huesped_reserva = $fila_r['n_huesped'] . " " . $fila_r['a_huesped'];
+                                $clase_hover = "nuevax" . $i .rand(1,100);;
+                                echo '<style>
+                                .'.$clase_hover.'::after {
+                                    content: "'.$huesped_reserva.'";
+                                }
+                                </style>';
+
+                                $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
+
                                 //ciclo para 'avanzar' atraves de los días de la reservación.
                                 while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
                                 //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias), 
@@ -484,8 +524,8 @@ class RackHabitacional extends ConexionMYSql
                                     }
 
                                     $aux_r =($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
-                                    $noches_reserva=1;
-                                    $tiempo_aux= $fila_r['fecha_salida'] - 86400;
+
+                                    // $tiempo_aux= $fila_r['fecha_salida'] - 86400;
 
                                     $estado_habitacion_reserva = $this->estado_habitacion($estado, "","");
                                     //Este td es para cuando se ocupa imprimir las noches ocupadas junto con la reservación que coicida en la fecha de entrada con 
@@ -496,35 +536,44 @@ class RackHabitacional extends ConexionMYSql
                                     <td class="celdaCompleta tdCheck " colspan="' . $aux_r  . '">';
                                     echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado. ',' . $fila['nombre'] . '. ,' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')" >
                                     ';
-                                    echo '<section class="miclase task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches . ' </section>';
+                                    echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches . ' </section>';
                                     echo '</div>';
                                     echo'
                                     </td>
                                     ';
+                                    if($noches_reserva<=1){
+                                        $tiempo_aux += 86400;
+                                     
+                                    }else{
+                                        // Si solo se trata del primero también seguirá sumando solo 1 día
+                                            //Solo en casos en los que no se al primer elemento del ciclo y tenga mas de 1 noche de reserva, 
+                                            //entonces el tiempo actual se le quedará  con la cantidad de noches de la reservacion 
+                                            // y las noches se setean a 1, para que ya no vuelva a sumarle dichos días, sino que termine con la ultima 
+                                            //fecha de reservacion.
+                                            $n = 86400 * $noches_reserva;
+                                            $tiempo_aux += $n;
+                                            $noches_reserva=1;
+                                           
+                                        }
 
-
-                                    $existetd=true;
                                 }else {
+                                   
+                                    // if($noches_reserva>1){
+                                    //     $noches_reserva=1;
+                                    // }
+                                    $tiempo_aux += 86400;
                                     echo '
                                     <td class="celdaCompleta tdCheck ">';
-                                    //echo date('Y-m-d',$tiempo_aux);
+                                    // echo date('Y-m-d',$tiempo_aux);
                                     echo'
                                     </td>';
+
+                                    // die();
                                 }
-
-                                if($noches_reserva<=1){
-                                    $tiempo_aux += 86400;
-                                }else{
-                                    // Si solo se trata del primero también seguirá sumando solo 1 día
-                                        //Solo en casos en los que no se al primer elemento del ciclo y tenga mas de 1 noche de reserva, 
-                                        //entonces el tiempo actual se le quedará  con la cantidad de noches de la reservacion 
-                                        // y las noches se setean a 1, para que ya no vuelva a sumarle dichos días, sino que termine con la ultima 
-                                        //fecha de reservacion.
-                                        $n = 86400 * $noches_reserva;
-                                        $tiempo_aux += $n;
-                                        $noches_reserva=1;
-                                    }
-
+                               
+                                
+                                    //  echo date('Y-m-d',$tiempo_aux);
+                                    // die();
                                 }
 
                             }

@@ -292,7 +292,7 @@
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="radio"  id="c_abierto" value="abierto" name="credit">
                                 <label class="form-check-label" for="c_abierto">Crédito abierto</label>
-                                <input class="form-check-input" type="radio"  id="c_cerrado" value="cerrado " name="credit">
+                                <input class="form-check-input" type="radio"  id="c_cerrado" value="cerrado" name="credit">
                                 <label class="form-check-label" for="c_cerrado">Crédito cerrado</label>
                             </div>
                         </div>
@@ -383,7 +383,7 @@
         ,comentarios ='$comentarios' 
         , codigo_postal = '$codigo_postal', correo = '$correo', titular_tarjeta = '$titular_tarjeta', estado_tarjeta = '$estado_tarjeta', nombre_tarjeta = '$nombre_tarjeta'
         , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'), vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
-        , cvv = '$cvv', voucher = '$voucher', estado_credito='$estado_credito',limite_credito='$limite_credito' , indole_tarjeta ='$indole_tarjeta'
+        , cvv = '$cvv', voucher = '$voucher', estado_credito='$estado_credito',limite_credito='$limite_credito' , indole_tarjeta = IF('$indole_tarjeta' ='', indole_tarjeta, '$indole_tarjeta')
         WHERE id='$huesped_id'";
         // echo $sentencia;
         $comentario="actualizamos el huesped en la base de datos";
@@ -566,7 +566,7 @@
       // Editar un huesped
       function editar_huesped($id,$nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv){
         
-        echo $numero_tarjeta;
+        // echo $numero_tarjeta;
         $sentencia = "UPDATE `huesped` SET
             `nombre` = '$nombre',
             `apellido` = '$apellido',
@@ -581,7 +581,7 @@
             `preferencias` = '$preferencias',
             `comentarios` = '$comentarios',
             `titular_tarjeta` = '$titular_tarjeta',
-            `tipo_tarjeta` = '$tipo_tarjeta',
+            `indole_tarjeta` = '$tipo_tarjeta',
              numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'),
             `vencimiento_mes` = '$vencimiento_mes',
             `vencimiento_ano` = '$vencimiento_ano',

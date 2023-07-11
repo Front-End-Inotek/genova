@@ -265,7 +265,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 
                 <div class="form-group col-md-4">
                     <label for="forma-garantia">Forma de Garantía</label>
-                    <select disabled class="form-control" id="forma-garantia" required">
+                    <select disabled class="form-control" id="forma-garantia" required>
                     ';
                 
                     
