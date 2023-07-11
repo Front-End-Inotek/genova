@@ -345,7 +345,7 @@ setlocale(LC_ALL, "es_ES");
                     //Ocupadas
                     } else {
                         //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
-                       
+
                         $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
                         $clase_hover = "nuevax" . $i .rand(1,100);;
                         echo '<style>
@@ -353,7 +353,7 @@ setlocale(LC_ALL, "es_ES");
                             content: "'.$huesped_ocupada.'";
                         }
                         </style>';
-                    
+
                         $earlier = new DateTime(date('Y-m-d'));
                         $later = new DateTime(date('Y-m-d',$fila['fin']));
                         $eltd ="";
@@ -364,13 +364,14 @@ setlocale(LC_ALL, "es_ES");
                         $ocupada=true;
                         $tiempo_actual = time();
                         $tiempo_aux = time();
+                        $noches = $noches == 0 ? 1 : $noches;
 
                         echo '';
                         echo '
                         <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
                         echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                         ';
-                        echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
+                        echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . 'x</section>';
                         echo '</div>';
                         echo'
                         </td>
