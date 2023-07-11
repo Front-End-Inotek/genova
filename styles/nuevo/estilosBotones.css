@@ -842,7 +842,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .bloqueo:hover {
   box-shadow: 0 10px 14px #090909be;
-  background-color: #181818 !important;
+  background-color: #0b0b0b !important;
 }
 
 .usoCasa {
@@ -957,7 +957,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 .vacia-limpia:hover {
   background-color: rgb(160, 192, 251) !important;
   color: #0a5eff !important;
-  border-left: 7px solid rgb(203, 221, 255) !important;
+  border-left: 7px solid rgb(160, 192, 251) !important;
   box-shadow: 0 10px 14px #0a60ff9d;
 }
 

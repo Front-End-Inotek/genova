@@ -420,7 +420,7 @@
 .task--reserva-pendiente-pago:hover {
   background-color: #3b0286 !important;
   color: #fff !important;
-  border-left: 7px solid #bc88ff !important;
+  border-left: 7px solid #3b0286 !important;
   /* box-shadow: 0 10px 14px #3b0286cb; */
 }
 #yo:hover ~  #hh {color: yellow; }

@@ -460,7 +460,7 @@ while ($habil = mysqli_fetch_array($movimientosHabiles)) {
 
           </head>
     <body class="context" onload="sabernosession()">
-      <ul class="circles">
+      <!-- <ul class="circles">
               <li></li>
               <li></li>
               <li></li>
@@ -471,7 +471,7 @@ while ($habil = mysqli_fetch_array($movimientosHabiles)) {
               <li></li>
               <li></li>
               <li></li>
-      </ul>
+      </ul> -->
 </div >
     
       <div class="menu"></div>
@@ -480,11 +480,6 @@ while ($habil = mysqli_fetch_array($movimientosHabiles)) {
       <div id="area_trabajo" class="container-fluid"></div>
       <div id="area_trabajo_menu" class="container-fluid">
       </div>
-      
-
-      
-
-
     </div>
     
       <!-- Modal -->

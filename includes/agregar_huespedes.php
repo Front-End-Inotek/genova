@@ -216,10 +216,10 @@
         <div class="col-6">
        
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox"  id="c_abierto">
-                <label class="form-check-label" for="flexCheckDefault">Crédito abierto</label>
-                <input class="form-check-input" type="checkbox"  id="c_cerrado">
-                <label class="form-check-label" for="flexCheckDefault">Crédito cerrado</label>
+                <input class="form-check-input" type="radio"  id="c_abierto" name="creditoabiertoocerrado">
+                <label class="form-check-label" for="c_abierto">Crédito abierto</label>
+                <input class="form-check-input" type="radio"  id="c_cerrado" name="creditoabiertoocerrado">
+                <label class="form-check-label" for="c_cerrado">Crédito cerrado</label>
             </div>
         </div>
 

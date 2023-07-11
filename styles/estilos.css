@@ -216,7 +216,7 @@ label {
 
 /* Contenedor con fondo blanco y bordes */
 .blanco {
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   padding: 25px 25px;
   /*
   background: url('../images/vista_back.jpg') !important;*/
@@ -415,7 +415,7 @@ input {
 
 input:hover{
   /* box-shadow: inset 2px 2px 25px 0px rgba(255, 255, 255, 0.796), 7px 7px 20px 0px #c8d0e779, 4px 4px 5px 0px #c8d0e782 !important; */
-  background-color: var(--fondo);
+  background-color: var(--fondo) !important;
 }
 
 .d-flex{

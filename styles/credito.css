@@ -111,7 +111,7 @@ ul.payment-types li.paymenttype {
     right: 0;
     bottom: 0;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, .25) 0%, rgba(255, 255, 255, 0) 60%);
+    /* background: linear-gradient(135deg, rgba(255, 255, 255, .25) 0%, rgba(255, 255, 255, 0) 60%); */
     z-index: 5;
 }
 .card .card-bg {
@@ -187,7 +187,7 @@ ul.payment-types li.paymenttype {
 }
 .card .front, .card .back {
     backface-visibility: hidden;
-    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.25);
+    /* box-shadow: 0 4px 8px rgba(10, 10, 10, 0.25); */
     border-radius: 0px;
 }
 .card .front {
@@ -226,17 +226,18 @@ ul.payment-types li.paymenttype {
 }
 .card .credit-card-type {
     position: absolute;
-    right: 20px;
-    top: 20px;
-    background-color: rgba(255, 255, 255, .4);
-    width: 50px;
-    height: 30px;
+    right: 11px;
+    top: 15px;
+    /* background-color: rgba(255, 255, 255, .4); */
+    width: 105px;
+    height: 54px;
     border-style: solid;
     border-color: rgba(255, 255, 255, 0);
     border-width: 2px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
+    background-image: url("https://fantactica.mx/wp-content/uploads/2021/04/visa-and-mastercard-logos-logo-visa-png-logo-visa-mastercard-png-visa-logo-white-png-awesome-logos.png");
 }
 .card .credit-card-type.amex {
     background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/513985/amex.svg);
