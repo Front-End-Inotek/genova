@@ -26,20 +26,20 @@ function evaluar(){
 	var user=$("#user").val();
 	var pass=$("#pass").val();
 	var datos = {
-		  "usuario": user,
-		  "password": pass,
+		"usuario": user,
+		"password": pass,
 		};
-	 $.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/evaluar.php",
-		  data:datos,
-		  beforeSend:inicioEnvio,
-		  success:recibir,
-		  timeout:5000,
-		  error:problemas
+	$.ajax({
+		async:true,
+		type: "POST",
+		dataType: "html",
+		contentType: "application/x-www-form-urlencoded",
+		url:"includes/evaluar.php",
+		data:datos,
+		beforeSend:inicioEnvio,
+		success:recibir,
+		timeout:5000,
+		error:problemas
 		});
 	return false;
 }
@@ -56,7 +56,6 @@ $("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert aler
 
 // Recibimos la info
 function recibir(datos){
-    
 	//alert(datos);
 	//var id=parseInt(datos);
 	var res = datos.split("-");
@@ -283,10 +282,9 @@ function problemas_sistema(datos){
 }
 
 // Muestra los subestados de las habitaciones
-function mostrar_herramientas(hab_id,estado,nombre,entrada="",salida=""){ 
+function mostrar_herramientas(hab_id,estado,nombre,entrada="",salida=""){
 	var id=localStorage.getItem("id");
 	$("#mostrar_herramientas").load("includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id+"&entrada="+entrada+"&salida="+salida);
-   
 }
 
 //cerrar el modal cuando se navega a otra 'vista'
@@ -340,7 +338,6 @@ function guardar_cargo_adicional(id,mov){
         swal("Campo monto vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     console.log(nombre,monto)
     aplicar_rest_cobro_hab(monto, 0,0,mov,nombre,id)
 }
