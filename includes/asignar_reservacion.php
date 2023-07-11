@@ -33,7 +33,7 @@
   }
  
   //proceso para asignar reservacion a hab si es 'preasignada'
-  if(isset($_POST['movimiento'])){
+  if(isset($_POST['movimiento']) && !empty($_POST['movimiento'])){
     $mov_actual= $_POST['movimiento'];
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
    
@@ -44,7 +44,8 @@
   }
 
   $reservacion->modificar_estado($_POST['id_reservacion'],2); 
-  $id_cuenta= $cuenta->reservacion_cuenta($_POST['usuario_id'],$mov_actual,$reservacion->forma_pago,$reservacion->total_suplementos,$reservacion->total_pago);
+  //Funcion que guarda como abono el total de la cuenta.
+  // $id_cuenta= $cuenta->reservacion_cuenta($_POST['usuario_id'],$mov_actual,$reservacion->forma_pago,$reservacion->total_suplementos,$reservacion->total_pago);
   $reservacion->modificar_id_cuenta($_POST['id_reservacion'],$id_cuenta);
   $noches= $reservacion->noches;
   $cantidad_hab= $reservacion->numero_hab;
@@ -54,11 +55,4 @@
   $huesped->modificar_visitas($reservacion->id_huesped,$cantidad_visitas);
   $logs->guardar_log($_POST['usuario_id'],"Asignar reservacion ". $_POST['id_reservacion']. " para hacer check-in en habitacion: ". $hab->nombre); 
   echo $_POST['id_reservacion']."/".$_POST['habitaciones'];
-
-  /*if($_POST['habitaciones'] > 1){
-    $habitaciones= $_POST['habitaciones'] - 1;
-    echo "<script>";
-      echo "select_asignar_reservacion_multiple('$_POST['id_reservacion']','$habitaciones);";
-    echo "</script>";
-  }*/
 ?>

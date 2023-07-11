@@ -385,9 +385,9 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
+      //Saldo huespedes en casa
       function hab_ocupadas(){
-        $sentencia="SELECT hab.id ,hab.nombre as hab_nombre,hab.tipo,hab.mov as mov,hab.estado,reservacion.total as tarifa,  
+        $sentencia="SELECT hab.id ,hab.nombre as hab_nombre,hab.tipo,hab.mov as mov,hab.estado,reservacion.total as tarifa, reservacion.precio_hospedaje,
         huesped.nombre, huesped.apellido, reservacion.estado_credito, reservacion.limite_credito
         FROM hab INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id  
         INNER JOIN movimiento as mov ON hab.mov = mov.id 
@@ -515,9 +515,16 @@
       }
 
       // Mostrar los cargos que tenemos por movimiento en una habitacion
-      function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
+      function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0,$id_usuario){
         $fecha_atras="";
         $total_cargos= 0;
+
+        include_once('clase_usuario.php');
+        $usuario = new Usuario($id_usuario);
+        $auditoria_editar = $usuario->auditoria_editar;
+
+        // echo $id_usuario;
+
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
         FROM cuenta 
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
@@ -535,7 +542,8 @@
               </tr>
             </thead>
             <tbody>';
-            $c=0;
+            $c=0;   
+          
               while ($fila = mysqli_fetch_array($consulta))
               {
                 $descripcion= substr($fila['concepto'], 0, 17);
@@ -549,8 +557,6 @@
                     </tr>';
                   }
               }
-
-
                 if($fila['edo'] == 1){
                   $total_cargos= $total_cargos + $fila['cargo'];
                   if($descripcion == 'Total reservacion'){
@@ -565,18 +571,30 @@
                     <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
-                    echo '<tr class="fuente_menor text-center">
-                    <td>'.$fila['concepto'].'</td>
-                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['cargo'], 2).'</td>
-                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
-                    
-                  
-                    </tr>';
-
-                    echo '';
-
-                    
+                    if($descripcion=="Cargo por noche" && $auditoria_editar>0){
+                      echo '<tr class="fuente_menor text-center">
+                      <td>'.$fila['concepto'].'</td>
+                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>$'.number_format($fila['cargo'], 2).'</td>
+                      <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                      </tr>';
+                      echo '';
+                    }elseif($descripcion!="Cargo por noche"){
+                      echo '<tr class="fuente_menor text-center">
+                      <td>'.$fila['concepto'].'</td>
+                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>$'.number_format($fila['cargo'], 2).'</td>
+                      <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                      </tr>';
+                      echo '';
+                    }else{
+                      echo '<tr class="fuente_menor table-secondary text-center">
+                      <td>'.$fila['concepto'].'</td>
+                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>$'.number_format($fila['cargo'], 2).'</td>
+                      <td></td>
+                      </tr>';
+                    }
                   }
                 }else{
                   echo '<tr class="fuente_menor table-secondary text-center">
@@ -586,7 +604,7 @@
                   <td></td>
                   </tr>';
                 }
-
+               
                
                 $fecha_atras = date('Y-m-d',$fila['fecha']);
                 $c++;

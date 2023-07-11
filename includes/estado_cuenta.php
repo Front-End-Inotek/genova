@@ -12,6 +12,8 @@
   $id_reservacion= $movimiento->saber_id_reservacion($hab->mov);
   $reservacion= NEW Reservacion($id_reservacion);
   $consulta = $reservacion->datos_reservacion($id_reservacion);
+  $usuario_id = $_GET['usuario_id'];
+
   if($consulta->num_rows==0){
     echo "nada";
     die();
@@ -127,8 +129,8 @@
         echo '</div><br>
 
         <div class="row">
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado']);echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
         </div>'; 
 
         if($total_cargos==0){

@@ -12,6 +12,8 @@
   $movimiento= NEW Movimiento($_GET['mov']);
   $cm = new CuentaMaestra($_GET['id']);
 
+  $usuario_id = $_GET['usuario_id'];
+
   //revisar si existe un huesped asignado a la cuenta maestra para mostrar 'cierta'  info de ese huesped
 
   $id_huesped=0;
@@ -71,8 +73,8 @@
 
         echo '
         <div class="row">
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id']);echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id']);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id'],$usuario_id);echo '</div>
+          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,0,$_GET['hab_id'],$_GET['estado'],$_GET['id'],$usuario_id);echo '</div>
         </div>'; 
 
         $total_faltante= $total_abonos - $total_cargos;

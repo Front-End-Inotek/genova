@@ -427,21 +427,21 @@ class Reservacion extends ConexionMYSql
         //   if($forzar_tarifa > 0) {
         //       $total_cargo= $total_suplementos + $forzar_tarifa;
         //   }
-          if($cuenta == 1 && $id_movimiento != 0) {
-              $pago_total= $total_pago + $cantidad_cupon;
-              //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
-              $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-              VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
-              $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
-              $consulta= $this->realizaConsulta($sentencia, $comentario);
+        //   if($cuenta == 1 && $id_movimiento != 0) {
+        //       $pago_total= $total_pago + $cantidad_cupon;
+        //       //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
+        //       $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+        //       VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
+        //       $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
+        //       $consulta= $this->realizaConsulta($sentencia, $comentario);
 
-              $sentencia = "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
-              $comentario="Obtengo el id de la cuenta agregada";
-              $consulta= $this->realizaConsulta($sentencia, $comentario);
-              while ($fila = mysqli_fetch_array($consulta)) {
-                  $id_cuenta= $fila['id'];
-              }
-          }
+        //       $sentencia = "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
+        //       $comentario="Obtengo el id de la cuenta agregada";
+        //       $consulta= $this->realizaConsulta($sentencia, $comentario);
+        //       while ($fila = mysqli_fetch_array($consulta)) {
+        //           $id_cuenta= $fila['id'];
+        //       }
+        //   }
           $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, 
           `estado`,`pax_extra`,`canal_reserva`,`plan_alimentos`,`tipo_reservacion`,`sobrevender`,`estado_interno`,`estado_credito`,`limite_credito`)
           VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', 

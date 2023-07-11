@@ -280,11 +280,6 @@
 					<i class="bx bx-file-find text-secondary"></i>
 					<span class="mx-2"  onclick="ver_auditoria()">Auditoría</span>
 				</li>';
-		}else{
-			echo '<li href="#"  class="nav-link" onclick="sub_menu(); boton_menu();">
-					<i class="bx bx-file-find text-secondary"></i>
-					<span class="mx-2"  onclick="ver_auditoria()">Auditoría</span>
-				</li>';
 		}
 		echo '
 		<li href="#" onclick="pregunta_salir()" class="nav-link">

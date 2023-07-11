@@ -94,7 +94,12 @@
       $persona_limpio= 0;
       while($fila = mysqli_fetch_array($consulta))
       {
-        $detalle_inicio= $fila['detalle_inicio'];
+
+        if($fila['motivo'] == "preasignar"){
+          $detalle_inicio = $fila['inicio_hospedaje'];
+        }else{
+          $detalle_inicio= $fila['detalle_inicio'];
+        }
         //$detalle_fin=$fila['detalle_fin'];
         $fin_hospedaje= $fila['fin_hospedaje'];
         $id_huesped= $fila['id_huesped'];

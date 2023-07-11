@@ -10,7 +10,7 @@
   $nombre= $hab->nombre;
   $monto= 1;
   $mensaje_log="Borrar cargo de habitacion: ". $nombre." en cuenta ". $_POST['id'];
-  if(isset($_POST['id_maestra'])){
+  if(isset($_POST['id_maestra']) && !empty($_POST['id_maestra'])){
     require_once('clase_cuenta_maestra.php');
     $cm = new CuentaMaestra($_POST['id_maestra']);
     $mensaje_log="Borrar cargo de cuenta maestra: ". $cm->nombre." en cuenta ". $_POST['id'];

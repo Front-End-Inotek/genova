@@ -3922,7 +3922,7 @@ function cargo_auditoria(){
             beforeSend:loaderbar,
             success:function(res){
                 console.log(res)
-                // principal()
+                principal()
             },
             //success:problemas_sistema,
             timeout:5000,
@@ -4667,19 +4667,21 @@ function regresar_editar_usuario(){
 
 // Muestra el estado de cuenta de una habitacion
 function estado_cuenta_maestra(hab_id,estado,mov,id){
+    var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/estado_cuenta_maestra.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&id="+id); 
+	$("#area_trabajo_menu").load("includes/estado_cuenta_maestra.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&id="+id+"&usuario_id="+usuario_id); 
 	$('#caja_herramientas').modal('hide');
 }
 
 // Muestra el estado de cuenta de una habitacion
 function estado_cuenta(hab_id,estado,mov=0){
+    var id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/estado_cuenta.php?hab_id="+hab_id+"&estado="+estado,function(res){
+	$("#area_trabajo_menu").load("includes/estado_cuenta.php?hab_id="+hab_id+"&estado="+estado+"&usuario_id="+id,function(res){
         if(res=="nada"){
             document.location.href='inicio.php'; 
         }
@@ -4881,10 +4883,8 @@ function campos_cargos(){
 
     var campos_habs = document.getElementsByClassName('campos_habs')
 
-    var tarifa=0;
-
     for (var i = 0; i < cargos.length; i++) {
-      
+        var tarifa=0;
 
          if(cargos[i].value=="" && campos_habs[i].checked){
             tarifa = cargos[i].dataset.oldvalue
@@ -4892,10 +4892,13 @@ function campos_cargos(){
         if(cargos[i].value!="" && campos_habs[i].checked){
             tarifa = cargos[i].value
         }
-        array_cargos.push({
-            "reservaid":cargos[i].dataset.reservaid,
-            "valor":tarifa,
-           }) 
+        if(tarifa!=0){
+            array_cargos.push({
+                "reservaid":cargos[i].dataset.reservaid,
+                "valor":tarifa,
+               }) 
+        }
+      
     }
     console.log(array_cargos)
 
