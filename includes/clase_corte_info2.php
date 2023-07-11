@@ -102,10 +102,12 @@
 	  $dinero_descuento= 0;
       $hoy = date('Y-m-d');
 	  $sentencia = "SELECT * FROM ticket
-       WHERE (pago > 0  OR monto > 0) AND (estado = 0 OR estado != 2)
-       AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'";//1 
+	
+       WHERE (pago > 0  OR monto > 0) AND (ticket.estado = 0 OR ticket.estado != 2)
+       AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+	   ";//1 
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
-	  //echo $sentencia;
+	//   echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -205,12 +207,15 @@
 	  $sentencia = "SELECT *,SUM(cantidad) AS total 
 	  FROM concepto 
       LEFT JOIN ticket ON concepto.id_ticket = ticket.id
+	 
 	  INNER JOIN hab ON concepto.categoria = hab.id WHERE hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3
       AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+
       ";
+
 	  $comentario="Obtener el total del hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
-	  //echo $sentencia;
+	  
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
 		  $total=$fila['total'];
@@ -220,6 +225,7 @@
 	  }else{
 		  $total=0;
 	  }
+	  
 	  return $total;
 	}
 	// Obtenemos el total del hospedaje
@@ -229,8 +235,10 @@
 	  $sentencia = "SELECT SUM(concepto.total) AS total 
 	  FROM concepto 
       LEFT JOIN ticket ON concepto.id_ticket = ticket.id
+	  
 	  INNER JOIN hab ON concepto.categoria = hab.id WHERE  hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3
       AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+	 
       ";
 	  $comentario="Obtener el total del  de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -243,6 +251,7 @@
 	  }else{
 		  $total=0;
 	  }
+	  
 	  return $total;
 	}
 	// Obtenemos la cantidad del hospedaje
@@ -342,8 +351,11 @@
         $hoy = date('Y-m-d');
 		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto
         INNER JOIN ticket ON concepto.id_ticket =  ticket.id
+		
         WHERE  tipo_cargo = 3 AND activo = 1
-        AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'";
+        AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+		
+		";
         // echo $sentencia;
 		$comentario="Obtener el total del de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);

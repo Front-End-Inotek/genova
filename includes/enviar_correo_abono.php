@@ -95,7 +95,7 @@
             <tbody>
     
             <tr>
-            <td>'.$descripcion.'</td>
+            <td>'.urlencode($descripcion).'</td>
             <td>'.$f_h.'</td>
             <td>$'.number_format($abono,2).'</td>
             <td>'.$forma_pago.'</td>

@@ -4814,7 +4814,7 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
 // Recibe los datos para efectuar agregar un monto
 function recibe_datos_monto_maestra(datos){
     //alert(datos);
-  
+    var res = datos.split("/");
     $('#caja_herramientas').modal('hide');
    
     estado_cuenta_maestra(res[0] , res[1], res[2], res[3]);
