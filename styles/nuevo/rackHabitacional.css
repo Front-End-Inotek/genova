@@ -4,7 +4,7 @@
 
 .tableRack {
   table-layout: auto;
-  height: calc(100vh - 111px) !important;
+  height: calc(100vh - 116px) !important;
 }
 
 #tablaTotal {
