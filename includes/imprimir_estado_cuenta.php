@@ -1,4 +1,10 @@
 <?php
+
+session_start();
+if(!isset($_SESSION['auth']) || !$_SESSION['auth']){
+   return ;
+}
+
 date_default_timezone_set('America/Mexico_City');
 include_once("clase_configuracion.php");
 include_once("clase_huesped.php");
@@ -14,7 +20,6 @@ $hab= new Hab($_GET['id']);
 if($hab->estado == 0) {
     die();
 }
-
 
 require('../fpdf/fpdf.php');
 

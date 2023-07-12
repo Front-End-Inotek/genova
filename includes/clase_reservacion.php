@@ -132,8 +132,6 @@ class Reservacion extends ConexionMYSql
     public function preasignar_hab($id, $preasignada)
     {
 
-
-
         $sentencia = "UPDATE movimiento
 		INNER JOIN reservacion ON reservacion.id = movimiento.id_reservacion
         SET movimiento.id_hab = '$preasignada', movimiento.motivo ='preasignar'

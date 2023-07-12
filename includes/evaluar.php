@@ -10,6 +10,8 @@
   
 
   if($id>0){
+    session_start();
+    $_SESSION['auth']=true;
     //se evalua si ya existe un token.
     /*
     $existe_token = $users->evaluarToken($id);
