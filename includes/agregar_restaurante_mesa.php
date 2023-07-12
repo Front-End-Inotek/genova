@@ -16,7 +16,7 @@
   echo '
   <div class="modal-content alinear_centro">
     <h5>Agregar Restaurante</h5>
-    <div class="col-sm-12 fondo_rest"><br>  
+    <div class="col-sm-12 fondo_rest">
 
       <div class="row">
         <div class="col-sm-6">

@@ -29,8 +29,8 @@
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '
   <div class="modal-content alinear_centro" style="background: transparent; !important;">
-    <h5 style="padding-bottom: 25px; color= white !important";>Agregar Restaurante </h5>
-    <div class="col-sm-12 fondo_rest"><br>  
+    <h5 style= color= white !important";>Agregar Restaurante </h5>
+    <div class="col-sm-12 fondo_rest">
 
       <div class="row">
         <div class="col-sm-6">

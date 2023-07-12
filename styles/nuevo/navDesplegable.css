@@ -113,7 +113,7 @@ span {
 .form-check-input:checked+.form-check-label {
   background-color: #fff;
   /* color: #30349f; */
-  border-color: #8e97f9;
+  /* border-color: #8e97f9; */
   font-weight: 500;
 }
 

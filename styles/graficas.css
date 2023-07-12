@@ -1,0 +1,105 @@
+@import "./colors.css";
+
+.contenedor__graficas{
+    margin: auto;
+    margin-top: 10vh;
+    width: 100%;
+    max-width: 1700px;
+    height: auto;
+    background-color: white;
+    box-shadow: var(--sombra);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main_info{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.contenedor__graficas-main{
+    width: 45%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 0.5px solid var(--fondoCeldas);
+}
+.title{
+    font-size: 2.5rem;
+    width: 100%;
+    text-align: left;
+    color: var(--titulos);
+    font-weight: 700;
+}
+.subtitle{
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: left;
+    color: var(--titulos);
+    font-weight: 500;
+}
+.info {
+    font-size: 1.0rem;
+    width: 100%;
+    text-align: left;
+    color: var(--parrafos);
+    font-weight: 400;
+}
+.contenedor__graficas-secundario{
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.graficas__card{
+    height: 300px;
+    width: 430px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    box-shadow: var(--sombra);
+    border-radius: 15px;
+    border: 1px solid var(--fondoCeldas);
+}
+.card__encabezado{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+.card__encabezado-titulo{
+    font-size: 16px;
+    color: var(--titulos);
+    font-weight: 600;
+    margin: 0;
+    text-align: left;
+}
+.card__encabezado-subtitulo{
+    font-size: 12px;
+    color: var(--parrafos);
+    font-weight: 500;
+    margin: 0;
+}
+.card__content{
+    width: 100%;
+    height: max-content;
+}

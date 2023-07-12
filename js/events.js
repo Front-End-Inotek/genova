@@ -1559,6 +1559,14 @@ function agregar_reservaciones(hab_id=0){
     closeModal();
 	closeNav();
 }
+function graficas(){
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/graficas.php");
+    closeModal();
+    closeNav();
+}
 //Función que calcula las fechas entre 2 fechas.
 function getDatesInRange(date, endDate) {
   
