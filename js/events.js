@@ -2198,7 +2198,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
 
     ruta="includes/guardar_reservacionNew.php";
 
-    if(id_cuenta!=0){
+    if(id_cuenta!=0 || id_reservacion!=0){
         ruta="includes/aplicar_editar_reservacionNew.php";
     }
     var voucher =document.getElementById('voucher').value
