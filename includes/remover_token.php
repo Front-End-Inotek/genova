@@ -5,4 +5,9 @@
   $users = NEW Usuario(0);
   $users->remover_token($usuario);
 
+
+  session_start();
+  unset($_SESSION['auth']);
+
+
 ?>

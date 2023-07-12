@@ -83,7 +83,7 @@ function sabernosession(){
             if(vista==0){
                 console.log("rack de habitaciones "+vista);
                 var usuario_id=localStorage.getItem("id");
-                $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+                $("#area_trabajo").load("includes/ver_cuenta_maestra.php?usuario_id="+usuario_id);
                 //closeNav();
             }else{
                 console.log("rack de operaciones "+vista);
