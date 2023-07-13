@@ -1,6 +1,71 @@
 datos_ocupadas = [];
 const usuario_id=localStorage.getItem("id");
 
+const ocupacionActual = document.querySelector("#ocupacionActual");
+
+const ocupacionEtiquetas = [
+    "Ocupada",
+    "Sucia ocupada",
+    "Vacia sucia",
+    "Mantenimiento",
+    "Bloqueada",
+    "Reserva pagada",
+    "Vacia limpieza",
+    "Uso casa",
+    "disponible"
+];
+
+const datosOcupacionActual = {
+    label: "Ocupacion actual de habitaciones",
+    data: [
+        10,
+        2,
+        5,
+        2,
+        1,
+        2,
+        4,
+        1,
+        16
+    ],
+    backgroundColor: [
+        "rgb(208,26,59)",
+        "rgb(189,2,2)",
+        "rgb(0,159,92)",
+        "rgb(255,193,7)",
+        "rgb(11,11,11)",
+        "rgb(77,3,174)",
+        "rgb(71,134,255)",
+        "rgb(5,209,202)",
+        "rgb(155,154,154)"
+    ],
+    /* borderColor: [
+        "rgb(208,26,59)",
+        "rgb(189,2,2)",
+        "rgb(0,159,92)",
+        "rgb(255,193,7)",
+        "rgb(11,11,11)",
+        "rgb(77,3,174)",
+        "rgb(71,134,255)",
+        "rgb(5,209,202)",
+        "rgb(155,154,154)"
+    ], */
+    /* borderWidth: 1, */
+}
+new Chart(ocupacionActual, {
+    type: "pie",
+    data : {
+        labels: ocupacionEtiquetas,
+        datasets: [
+            datosOcupacionActual
+        ]
+    },
+    options: {
+        legend: {
+            position: "left"
+        }
+    }
+})
 
 const $grafica = document.querySelector("#grafica");
 
@@ -47,14 +112,14 @@ const datosOcupacion = {
         "rgba(63,152,199,1)",
         "rgba(101,101,102,1)",
     ],
-    borderColor: [
+    /* borderColor: [
         "rgba(108,130,178,1)",
         "rgba(254,63,64,1)",
         "rgba(84,183,245,1)",
         "rgba(63,152,199,1)",
         "rgba(101,101,102,1)",
-    ],
-    borderWidth: 1,
+    ], */
+    /* borderWidth: 1, */
 };
 
 new Chart(graficaPastel,{
