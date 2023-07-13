@@ -1,10 +1,14 @@
+datos_ocupadas = [];
+const usuario_id=localStorage.getItem("id");
+
+
 const $grafica = document.querySelector("#grafica");
 
-const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"];
+const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio","Agosto","Octubre","Noviembre","Diciembre"];
 
 const datosVentas200 = {
     label: "Ocupacion de habitaciones",
-    data: [50, 60, 60, 80, 90, 100, 95],
+    data: datos_ocupadas,
     /* backgroundColor: 'rgba(56,116,255, 0.7)', */
     borderColor: 'rgba(56,116,255, 1)',
     borderWidth: 1,
@@ -12,7 +16,7 @@ const datosVentas200 = {
     tension: 0.1
 }
 
-new Chart($grafica, {
+var grafica_ocupadas= new Chart($grafica, {
     type: 'line',
     data: {
         labels: etiquetas,
@@ -156,3 +160,45 @@ new Chart ($restaurant, {
         }
     }
 })
+
+
+cargarInfoServidor();
+
+
+function asignarInfo(info){
+
+
+    datos_ocupadas = info['datos_ocupadas']
+
+    grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
+
+    grafica_ocupadas.update();
+}
+
+function cargarInfoServidor(){
+    // console.log("**** Cargando info del servidor *****")
+    include="includes/cargar_datos_visit.php?usuario="+usuario_id
+    $.ajax({
+        async:true,
+        type: "GET",
+        dataType: "HTML",
+        contentType: "application/json",
+        url:include,
+        // beforeSend:loaderbar,
+        //una vez eliminado el token de la bd, se redirecciona.
+        success:function(res){
+            res = JSON.parse(res)
+            // console.log(res)
+            asignarInfo(res)
+        },
+        //success:problemas_sistema,
+        timeout:5000,
+        error:function(err){
+            console.log(err)
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+      });
+
+    setTimeout('cargarInfoServidor()',3000);//5500
+}
+

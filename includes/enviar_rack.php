@@ -499,7 +499,7 @@ setlocale(LC_ALL, "es_ES");
                                         ';
                                         if($noches_reserva<=1){
                                             $tiempo_aux += 86400;
-
+                                         
                                         }else{
                                             // Si solo se trata del primero también seguirá sumando solo 1 día
                                                 //Solo en casos en los que no se al primer elemento del ciclo y tenga mas de 1 noche de reserva, 
@@ -509,7 +509,7 @@ setlocale(LC_ALL, "es_ES");
                                                 $n = 86400 * $noches_reserva;
                                                 $tiempo_aux += $n;
                                                 $noches_reserva=1;
-
+                                               
                                             }
     
                                     }else {
