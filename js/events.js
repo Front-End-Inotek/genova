@@ -1,6 +1,8 @@
 var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario'];
 var hab = [];
 var hab_ultimo_mov = [];
+var mostrar_inicio=true;
+
 var vista=0;
 x=$(document);
 x.ready(inicio);
@@ -79,11 +81,18 @@ function sabernosession(){
 		if(id>0){
             obtener_datos_hab_inicial ();
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
-
+            
+            if(mostrar_inicio){
+                var usuario_id=localStorage.getItem("id");
+                $("#area_trabajo").load("includes/graficas.php?usuario_id="+usuario_id);
+                mostrar_inicio=false;
+                cargar_area_trabajo();
+                return
+            }
             if(vista==0){
                 console.log("rack de habitaciones "+vista);
                 var usuario_id=localStorage.getItem("id");
-                $("#area_trabajo").load("includes/ver_cuenta_maestra.php?usuario_id="+usuario_id);
+                $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
                 //closeNav();
             }else{
                 console.log("rack de operaciones "+vista);
@@ -91,6 +100,8 @@ function sabernosession(){
                 var token=localStorage.getItem("tocken");
                 $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
             }
+
+          
 
 			//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
             $("#pie").load("includes/pie.php?id="+id);
@@ -165,6 +176,7 @@ function obtener_datos_hab_inicial () {
       };
       xhttp.open("GET", "includes/api_info_hab.php", true);
       xhttp.send();
+     
 }
 // Se carga el area de trabajo
 function cargar_area_trabajo(){
@@ -5421,20 +5433,21 @@ function ver_inventario(){
 
 function switch_rack(){
     console.log(vista);
-    if(vista==0){
+    if(vista!=0){
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         localStorage.removeItem('estatus_hab')
         estatus_hab=""
         $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
-        vista=1;
+        vista=0;
     }else{
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-        vista=0;
+        vista=1;
     }
+   
 }
 
 function ver_rack_habitacional(){

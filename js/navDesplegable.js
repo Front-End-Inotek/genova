@@ -29,7 +29,7 @@ function boton_menu() {
   // if(container!=null){
     /* container.classList.toggle("active-cont"); */
   // }
-  
+ 
 }
 
 /*********************************************/
@@ -68,7 +68,7 @@ function cambiarVista() {
   var checkbox = document.getElementById("flexSwitchCheckDefault");
   var vista = document.getElementById("vista");
 
-  if (checkbox.checked == true) {
+  if (checkbox.checked != true) {
     vista.classList.remove("rack-operaciones");
     vista.classList.add("vista-habitacional");
     vista.innerHTML = "Rack Habitacional";
