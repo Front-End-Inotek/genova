@@ -10,7 +10,7 @@ const datosVentas200 = {
     label: "Ocupacion de habitaciones",
     data: [50, 60, 60, 80, 90, 100, 95],
     /* backgroundColor: 'rgba(56,116,255, 0.7)', */
-    borderColor: 'rgba(56,116,255, 1)',
+    borderColor: 'rgba(44,123,229, 1)',
     borderWidth: 1,
     fill: false,
     tension: 0.1
@@ -41,18 +41,18 @@ const etiquetasGraficaPastel = ["Suite", "Doble", "Sencillo", "Suite", "Triple"]
 const datosOcupacion = {
     data: [ 10 , 15, 50 , 10, 43],
     backgroundColor: [
-        "rgba(163,221,203,1)",
-        "rgba(232,233,161,1)",
-        "rgba(230,181,102,1)",
-        "rgba(229,112,126,1)",
-        "rgba(229,12,106,1)",
+        "rgba(108,130,178,1)",
+        "rgba(254,63,64,1)",
+        "rgba(84,183,245,1)",
+        "rgba(63,152,199,1)",
+        "rgba(101,101,102,1)",
     ],
     borderColor: [
-        "rgba(163,221,203,1)",
-        "rgba(232,233,161,1)",
-        "rgba(230,181,102,1)",
-        "rgba(229,112,126,1)",
-        "rgba(229,12,106,1)",
+        "rgba(108,130,178,1)",
+        "rgba(254,63,64,1)",
+        "rgba(84,183,245,1)",
+        "rgba(63,152,199,1)",
+        "rgba(101,101,102,1)",
     ],
     borderWidth: 1,
 };
@@ -74,10 +74,10 @@ const datosFormasDePago = {
     label: "Formas de pago",
     data: [ 15, 12, 43, 25],
     backgroundColor: [
-        "rgb(255, 99, 132)",
-        "rgb(54, 162, 235)",
-        "rgb(255, 205, 86)",
-        "rgb(2, 205, 86)",
+        "rgba(108,130,178,1)",
+        "rgba(254,63,64,1)",
+        "rgba(84,183,245,1)",
+        "rgba(63,152,199,1)",
     ],
     hoverOffset: 4
 }
@@ -97,16 +97,16 @@ const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "S
 const datosVentas2020 = {
     label: "Ventas hospedaje",
     data: [5000, 1500, 8000, 5102, 4000, 1599, 10000],
-    backgroundColor: "rgba(54, 162, 235, 1)",
-    borderColor: "rgba(54, 162, 235, 1)",
+    backgroundColor: "rgba(254,63,64,1)",
+    borderColor: "rgba(254,63,64,1)",
     borderWidth: 1,
 };
 
 const datosVentas2021 = {
     label: "Ventas restaurant",
     data: [1000, 1700, 5000, 5989, 6000, 7000, 9000],
-    backgroundColor: "rgba(255, 159, 64, 1)",
-    borderColor: "rgba(255, 159, 64, 1)",
+    backgroundColor: "rgba(101,101,102,1)",
+    borderColor: "rgba(101,101,102,1)",
     borderWidth: 1,
 };
 
@@ -137,8 +137,8 @@ const etiquetasRestaurant = [ "Red Velvet" , "Coca cola" , "Sopa" , "Pizza" ];
 const datosRestaurant = {
     label: "Productos mas vendidos",
     data: [ 400, 424 , 565 , 324 ],
-    backgroundColor: "rgba(54, 162, 235, 0.5)",
-    borderColor: "rgba(52, 162, 235, 1)",
+    backgroundColor: 'rgba(44,123,229, 1)',
+    borderColor: 'rgba(44,123,229, 1)',
     borderWidth: 1,
 }
 

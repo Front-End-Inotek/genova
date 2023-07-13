@@ -2,9 +2,9 @@
 
 .contenedor__graficas{
     margin: auto;
-    margin-top: 10vh;
+    margin-top: 1vh;
     width: 100%;
-    max-width: 1800px;
+    max-width: 1900px;
     height: auto;
     background-color: white;
     box-shadow: var(--sombra);
@@ -12,13 +12,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow-y: auto;
 }
 .main_info{
     width: 97%;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -26,11 +27,12 @@
 }
 .contenedor__graficas-main{
     width: 45%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    min-width: 374px;
 }
 .title{
     font-size: 2.5rem;
@@ -55,13 +57,14 @@
 }
 .contenedor__graficas-secundario{
     width: 55%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
+    min-width: 457px;
 }
 .graficas__card{
     height: 300px;
