@@ -4,7 +4,7 @@
     margin: auto;
     margin-top: 10vh;
     width: 100%;
-    max-width: 1700px;
+    max-width: 1800px;
     height: auto;
     background-color: white;
     box-shadow: var(--sombra);
@@ -15,23 +15,22 @@
     justify-content: center;
 }
 .main_info{
-    width: 95%;
+    width: 97%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    flex-wrap: wrap;
 }
-
 .contenedor__graficas-main{
     width: 45%;
-    height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-right: 0.5px solid var(--fondoCeldas);
 }
 .title{
     font-size: 2.5rem;
@@ -64,7 +63,6 @@
     flex-wrap: wrap;
     gap: 1rem;
 }
-
 .graficas__card{
     height: 300px;
     width: 430px;
@@ -98,6 +96,7 @@
     color: var(--parrafos);
     font-weight: 500;
     margin: 0;
+    text-align: left;
 }
 .card__content{
     width: 100%;

@@ -1563,7 +1563,7 @@ function graficas(){
     $('#area_trabajo').hide();
     $('#pie').hide();
     $('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/graficas.php");
+	$("#area_trabajo_menu").load("includes/graficas.php?");
     closeModal();
     closeNav();
 }
@@ -1658,8 +1658,6 @@ function editarTotalEstancia(event){
     total = aux_total + adicional_adulto + adicional_infantil + pax_extra + costo_plan
 
     $("#total").val(total);
-
-    
 
 }
 
