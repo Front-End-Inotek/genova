@@ -1355,6 +1355,7 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 20000;
+
 }
 
 .rowFooter {
@@ -1375,6 +1376,7 @@ body {
 
 .card-header {
   /* background-color: #30349f !important; */
+  /* background-color: var(--fondo); */
   background-color: var(--fondo);
   /*
   background:

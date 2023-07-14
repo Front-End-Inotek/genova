@@ -68,10 +68,11 @@ echo '
                 </div>
             </div>
         </div>
-        <div class="secundariInfo">
+        <!--  <div class="secundariInfo">
             <p class="subtitle"> Ocupación actual</p>
             <canvas id="ocupacionActual"></canvas>
         </div>
+        -->
     </div>
 
     <script>mostrar_graficas()</script>

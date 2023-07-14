@@ -60,7 +60,7 @@
 }
 
 .cal-dia {
-  min-width: 150px; /* Ancho del TH */
+  min-width: 100px; /* Ancho del TH */
   height: 40px;
 }
 
@@ -246,7 +246,7 @@
   text-align: center;
   color: rgb(57, 57, 57);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 0.03em;
   background: #ecf2ff;
   padding: 0.3em;
@@ -313,7 +313,7 @@
   border-left: 7px solid var(--colorTextNaranja);
   background: var(--fondoNaranja);
   /* background: linear-gradient(180deg, #ffbe5b 0%, #f9d7a5 40%, #ffb546 100%); */
-  min-width: 200px;
+  /* min-width: 200px; */
   color: var(----colorTextNaranja);
 }
 

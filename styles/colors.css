@@ -2,18 +2,18 @@
 
 :root{
     --titulos: #344050;
-    --subtitulos: #2C8FEB;
+    --subtitulos: #2c8feb;
     --parrafos: #5e6e82;
     --fondo: #EDF2F9;
-    --fondoAzul: #E6EFFC;
+    --fondoAzul: #e6effc;
     --fondoCeldas: #D8E2EF;
     --fondoNaranja: #FEF0E8;
-    --fondoVerde: #E0FAEF;
+    --fondoVerde: #e0faef;
     --fondoGris: #F9FAFD;
     --fondoRojo: #FCE7EB;
     --colorTextAzul: #1862C6;
     --colorTextRojo: #D01A3B;
-    --colorTextVerde: #009F5C;
+    --colorTextVerde: #00D27A;
     --colorTextNaranja: #FFC107;
     --colorTextInfo: #17A2B8;
     --sombra: 7px 10px 17px -8px rgba(0,0,0,0.1);
