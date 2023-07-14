@@ -6,7 +6,7 @@ echo '
             <main class="contenedor__graficas-main">
                 <h1 class="title"> Visit Dashboard </h1>
                 <p class="info"> Aqui es donde puedes ver que es lo que esta pasando en tu negocio ahora mismo </p>
-                <p class="subtitle"> Total de ocupacion </p>
+                <p class="subtitle"> Total de ocupacion en los ultimos 6 meses</p>
                 <canvas id="grafica"></canvas>
             </main>
             <div class="contenedor__graficas-secundario">
@@ -16,7 +16,9 @@ echo '
                             <p class="card__encabezado-titulo">Hospeje</p>
                             <p class="card__encabezado-subtitulo">Ultimos 7 dias</p>
                         </div>
-                        <p class="card__encabezado-titulo">100</p>
+                        <p class="card__encabezado-titulo">
+                            <i class="bx bxs-hotel text-secondary"></i>
+                        </p>
                     </div>
                     <div class="card__content">
                         <canvas id="graficaPastel"></canvas>
@@ -28,7 +30,9 @@ echo '
                             <p class="card__encabezado-titulo">Formas de pago</p>
                             <p class="card__encabezado-subtitulo">Ultimos 7 dias</p>
                         </div>
-                        <p class="card__encabezado-titulo">100</p>
+                        <p class="card__encabezado-titulo">
+                            <i class="bx bxs-credit-card text-secondary"></i>
+                        </p>
                     </div>
                     <div class="card__content">
                         <canvas id="graficaDona"></canvas>
@@ -40,7 +44,9 @@ echo '
                             <p class="card__encabezado-titulo">Ventas</p>
                             <p class="card__encabezado-subtitulo">Ultima semana</p>
                         </div>
-                        <p class="card__encabezado-titulo">100</p>
+                        <p class="card__encabezado-titulo">
+                            <i class="bx bxs-dollar-circle text-secondary"></i>
+                        </p>
                     </div>
                     <div class="card__content">
                         <canvas id="ventas"></canvas>
@@ -52,7 +58,9 @@ echo '
                             <p class="card__encabezado-titulo">Ventas en restaurant</p>
                             <p class="card__encabezado-subtitulo">Ultimos 7 dias</p>
                         </div>
-                        <p class="card__encabezado-titulo">100</p>
+                        <p class="card__encabezado-titulo">
+                            <i class="bx bxs-cookie text-secondary"></i>
+                        </p>
                     </div>
                     <div class="card__content">
                         <canvas id="restaurant"></canvas>
@@ -60,7 +68,11 @@ echo '
                 </div>
             </div>
         </div>
+        <div class="secundariInfo">
+            <p class="subtitle"> Ocupacio actual</p>
+            <canvas id="ocupacionActual"></canvas>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <script src="./js/graficas.js"></script>
 ';

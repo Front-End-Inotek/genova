@@ -1,6 +1,71 @@
 datos_ocupadas = [];
 const usuario_id=localStorage.getItem("id");
 
+const ocupacionActual = document.querySelector("#ocupacionActual");
+
+const ocupacionEtiquetas = [
+    "Ocupada",
+    "Sucia ocupada",
+    "Vacia sucia",
+    "Mantenimiento",
+    "Bloqueada",
+    "Reserva pagada",
+    "Vacia limpieza",
+    "Uso casa",
+    "disponible"
+];
+
+const datosOcupacionActual = {
+    label: "Ocupacion actual de habitaciones",
+    data: [
+        10,
+        2,
+        5,
+        2,
+        1,
+        2,
+        4,
+        1,
+        16
+    ],
+    backgroundColor: [
+        "rgb(208,26,59)",
+        "rgb(189,2,2)",
+        "rgb(0,159,92)",
+        "rgb(255,193,7)",
+        "rgb(11,11,11)",
+        "rgb(77,3,174)",
+        "rgb(71,134,255)",
+        "rgb(5,209,202)",
+        "rgb(155,154,154)"
+    ],
+    /* borderColor: [
+        "rgb(208,26,59)",
+        "rgb(189,2,2)",
+        "rgb(0,159,92)",
+        "rgb(255,193,7)",
+        "rgb(11,11,11)",
+        "rgb(77,3,174)",
+        "rgb(71,134,255)",
+        "rgb(5,209,202)",
+        "rgb(155,154,154)"
+    ], */
+    /* borderWidth: 1, */
+}
+new Chart(ocupacionActual, {
+    type: "pie",
+    data : {
+        labels: ocupacionEtiquetas,
+        datasets: [
+            datosOcupacionActual
+        ]
+    },
+    options: {
+        legend: {
+            position: "left"
+        }
+    }
+})
 
 const $grafica = document.querySelector("#grafica");
 
@@ -8,15 +73,15 @@ const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio
 
 const datosVentas200 = {
     label: "Ocupacion de habitaciones",
-    data: datos_ocupadas,
+    data: [50, 60, 60, 80, 90, 100, 95],
     /* backgroundColor: 'rgba(56,116,255, 0.7)', */
-    borderColor: 'rgba(56,116,255, 1)',
+    borderColor: 'rgba(44,123,229, 1)',
     borderWidth: 1,
     fill: false,
     tension: 0.1
 }
 
-var grafica_ocupadas= new Chart($grafica, {
+new Chart($grafica, {
     type: 'line',
     data: {
         labels: etiquetas,
@@ -35,30 +100,30 @@ var grafica_ocupadas= new Chart($grafica, {
     }
 })
 
-const $graficaPastel = document.querySelector("#graficaPastel");
+const graficaPastel = document.querySelector("#graficaPastel");
 const etiquetasGraficaPastel = ["Suite", "Doble", "Sencillo", "Suite", "Triple"];
 
 const datosOcupacion = {
     data: [ 10 , 15, 50 , 10, 43],
     backgroundColor: [
-        'rgba(163,221,203,1)',
-        'rgba(232,233,161,1)',
-        'rgba(230,181,102,1)',
-        'rgba(229,112,126,1)',
-        'rgba(229,12,106,1)',
+        "rgba(108,130,178,1)",
+        "rgba(254,63,64,1)",
+        "rgba(84,183,245,1)",
+        "rgba(63,152,199,1)",
+        "rgba(101,101,102,1)",
     ],
-    borderColor: [
-        'rgba(163,221,203,1)',
-        'rgba(232,233,161,1)',
-        'rgba(230,181,102,1)',
-        'rgba(229,112,126,1)',
-        'rgba(229,12,106,1)',
-    ],
-    borderWidth: 1,
+    /* borderColor: [
+        "rgba(108,130,178,1)",
+        "rgba(254,63,64,1)",
+        "rgba(84,183,245,1)",
+        "rgba(63,152,199,1)",
+        "rgba(101,101,102,1)",
+    ], */
+    /* borderWidth: 1, */
 };
 
-new Chart($graficaPastel,{
-    type: 'pie',
+new Chart(graficaPastel,{
+    type: "pie",
     data: {
         labels: etiquetasGraficaPastel,
         datasets: [
@@ -67,21 +132,21 @@ new Chart($graficaPastel,{
     }
 })
 
-const $graficaDona = document.querySelector("#graficaDona");
+const graficaDona = document.querySelector("#graficaDona");
 const etiquetasDona = ["Efectivo", "Transferencia" , "Tarjeta" , "Cupon"];
 
 const datosFormasDePago = {
     label: "Formas de pago",
     data: [ 15, 12, 43, 25],
     backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)',
-        'rgb(2, 205, 86)',
+        "rgba(108,130,178,1)",
+        "rgba(254,63,64,1)",
+        "rgba(84,183,245,1)",
+        "rgba(63,152,199,1)",
     ],
     hoverOffset: 4
 }
-new Chart($graficaDona, {
+new Chart(graficaDona, {
     type: "doughnut",
     data: {
         labels : etiquetasDona,
@@ -91,26 +156,26 @@ new Chart($graficaDona, {
     }
 })
 
-const $ventas = document.querySelector("#ventas");
+const ventas = document.querySelector("#ventas");
 const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 
 const datosVentas2020 = {
     label: "Ventas hospedaje",
     data: [5000, 1500, 8000, 5102, 4000, 1599, 10000],
-    backgroundColor: 'rgba(54, 162, 235, 1)',
-    borderColor: 'rgba(54, 162, 235, 1)',
+    backgroundColor: "rgba(254,63,64,1)",
+    borderColor: "rgba(254,63,64,1)",
     borderWidth: 1,
 };
 
 const datosVentas2021 = {
     label: "Ventas restaurant",
     data: [1000, 1700, 5000, 5989, 6000, 7000, 9000],
-    backgroundColor: 'rgba(255, 159, 64, 1)',
-    borderColor: 'rgba(255, 159, 64, 1)',
+    backgroundColor: "rgba(101,101,102,1)",
+    borderColor: "rgba(101,101,102,1)",
     borderWidth: 1,
 };
 
-new Chart ($ventas, {
+new Chart (ventas, {
     type: "bar",
     data: {
         labels : etiquetasVentas,
@@ -130,20 +195,20 @@ new Chart ($ventas, {
     }
 })
 
-const $restaurant = document.querySelector("#restaurant");
+const restaurant = document.querySelector("#restaurant");
 
-const etiquetasRestaurant = ["Red Velvet", "Coca cola", "Sopa", "Pizza"];
+const etiquetasRestaurant = [ "Red Velvet" , "Coca cola" , "Sopa" , "Pizza" ];
 
 const datosRestaurant = {
     label: "Productos mas vendidos",
     data: [ 400, 424 , 565 , 324 ],
-    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-    borderColor: 'rgba(52, 162, 235, 1)',
+    backgroundColor: 'rgba(44,123,229, 1)',
+    borderColor: 'rgba(44,123,229, 1)',
     borderWidth: 1,
 }
 
-new Chart ($restaurant, {
-    type: 'bar',
+new Chart (restaurant, {
+    type: "bar",
     data: {
         labels: etiquetasRestaurant,
         datasets: [
