@@ -3,7 +3,7 @@ var hab = [];
 var hab_ultimo_mov = [];
 var mostrar_inicio=true;
 
-var vista=0;
+var vista=3;
 x=$(document);
 x.ready(inicio);
 
@@ -106,7 +106,6 @@ function sabernosession(){
             // console.log("s")
 
 			//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-            // $("#pie").load("includes/pie.php?id="+id);
             cargar_area_trabajo();
 		}
 		else{
@@ -182,9 +181,8 @@ function obtener_datos_hab_inicial () {
 }
 // Se carga el area de trabajo
 function cargar_area_trabajo(){
-    //console.log(vista);
+    // console.log(vista);
     obtener_datos_hab();
-
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
    /* if(vista==0){
@@ -1574,8 +1572,9 @@ function agregar_reservaciones(hab_id=0){
 	closeNav();
 }
 function graficas(){
+    vista = 3;
+
     $('#area_trabajo').hide();
-    $('#pie').hide();
     $('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/graficas.php?");
     closeModal();
@@ -5439,7 +5438,17 @@ function ver_inventario(){
 
 function switch_rack(){
     console.log(vista);
-    if(vista!=0){
+    if(vista==3 || vista==0){
+        console.log("rack de habitaciones "+vista);
+        var usuario_id=localStorage.getItem("id");
+        $('#area_trabajo').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        closeModal();
+        closeNav();
+        vista=1;
+    }else{
+
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
@@ -5448,22 +5457,9 @@ function switch_rack(){
         $('#area_trabajo').hide();
         $('#area_trabajo_menu').show();
         $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
-        $("#pie").load("includes/pie.php?id="+id);
-
         closeModal();
         closeNav();
         vista=0;
-    }else{
-        console.log("rack de habitaciones "+vista);
-        var usuario_id=localStorage.getItem("id");
-        $('#area_trabajo').hide();
-        $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-        $("#pie").load("includes/pie.php?id="+usuario_id);
-
-        closeModal();
-        closeNav();
-        vista=1;
     }
    
 }

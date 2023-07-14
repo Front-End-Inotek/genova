@@ -1,5 +1,8 @@
-datos_ocupadas = [];
-const usuario_id=localStorage.getItem("id");
+var datos_ocupadas = [];
+var usuario_id=localStorage.getItem("id");
+var grafica_ocupadas;
+function mostrar_graficas(){
+
 
 const ocupacionActual = document.querySelector("#ocupacionActual");
 
@@ -82,8 +85,7 @@ const datosVentas200 = {
     fill: false,
     tension: 0.1
 }
-
-var grafica_ocupadas  = new Chart($grafica, {
+grafica_ocupadas  = new Chart($grafica, {
     type: 'line',
     data: {
         labels: etiquetas,
@@ -227,14 +229,17 @@ new Chart (restaurant, {
         }
     }
 })
-
-
 cargarInfoServidor();
+}
+
+
+
 
 
 function asignarInfo(info){
-    // console.log(info)
+    console.log(info)
 
+    // return
     datos_ocupadas = info['datos_ocupadas']
 
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
@@ -243,6 +248,12 @@ function asignarInfo(info){
 }
 
 function cargarInfoServidor(){
+    //Mientras se mantenga la vista de graficas, leera info del server.
+    if(vista !=3){
+        clearTimeout(timer_grafica)
+        return
+    }
+
     // console.log("**** Cargando info del servidor *****")
     include="includes/cargar_datos_visit.php?usuario="+usuario_id
     $.ajax({
@@ -255,7 +266,6 @@ function cargarInfoServidor(){
         //una vez eliminado el token de la bd, se redirecciona.
         success:function(res){
             res = JSON.parse(res)
-            // console.log(res)
             asignarInfo(res)
         },
         //success:problemas_sistema,
@@ -266,6 +276,6 @@ function cargarInfoServidor(){
         }
       });
 
-    setTimeout('cargarInfoServidor()',3000);//5500
+    timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
 }
 

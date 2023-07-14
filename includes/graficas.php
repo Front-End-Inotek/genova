@@ -6,14 +6,14 @@ echo '
             <main class="contenedor__graficas-main">
                 <h1 class="title"> Visit Dashboard</h1>
                 <p class="info"> Aqui es donde puedes ver que es lo que esta pasando en tu negocio ahora mismo </p>
-                <p class="subtitle"> Total de ocupacion en los ultimos 6 meses</p>
+                <p class="subtitle"> Total de ocupación año actual</p>
                 <canvas id="grafica"></canvas>
             </main>
             <div class="contenedor__graficas-secundario">
                 <div class="graficas__card">
                     <div class="card__encabezado">
                         <div>
-                            <p class="card__encabezado-titulo">Hospeje</p>
+                            <p class="card__encabezado-titulo">Hospedaje</p>
                             <p class="card__encabezado-subtitulo">Ultimos 7 dias</p>
                         </div>
                         <p class="card__encabezado-titulo">
@@ -73,6 +73,6 @@ echo '
             <canvas id="ocupacionActual"></canvas>
         </div>
     </div>
-    
-    <script src="./js/graficas.js"></script>
+
+    <script>mostrar_graficas()</script>
 ';
