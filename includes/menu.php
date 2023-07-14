@@ -209,6 +209,23 @@
 		</li>';
 
 		
+		
+
+		/*<li href="" onclick="ver_rack_habitacional()" class="nav-link">
+			<i class="bx bxs-user" ></i>
+			<span class="mx-2">Rack Habitacional</span>
+		</li>*/
+
+
+		echo '
+		';
+		if($usuario->auditoria_ver>0){
+			echo '<li href="#"  class="nav-link" onclick="sub_menu(); boton_menu();">
+					<i class="bx bx-file-find text-secondary"></i>
+					<span class="mx-2"  onclick="ver_auditoria()">Auditoría</span>
+				</li>';
+		}
+
 		$permisos_herramientas=$usuario->usuario_ver+$usuario->usuario_agregar+$usuario->logs_ver+$usuario->forma_pago_ver+$usuario->forma_pago_agregar+$usuario->cupon_ver+$usuario->cupon_agregar;
 		if($permisos_herramientas>0){
 		  echo '
@@ -261,11 +278,8 @@
 			</ul>
 		</li>';
 
-		/*<li href="" onclick="ver_rack_habitacional()" class="nav-link">
-			<i class="bx bxs-user" ></i>
-			<span class="mx-2">Rack Habitacional</span>
-		</li>*/
 
+		
 		$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
 		if($permisos_reportes>0) {
 			echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
@@ -277,14 +291,6 @@
 			
 		}
 
-		echo '
-		';
-		if($usuario->auditoria_ver>0){
-			echo '<li href="#"  class="nav-link" onclick="sub_menu(); boton_menu();">
-					<i class="bx bx-file-find text-secondary"></i>
-					<span class="mx-2"  onclick="ver_auditoria()">Auditoría</span>
-				</li>';
-		}
 		echo '
 		<li href="#" onclick="pregunta_salir()" class="nav-link">
 			<i class="bx bx-exit text-secondary"></i>

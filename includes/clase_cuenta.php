@@ -372,7 +372,7 @@
          )";
         }
 
-        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.precio_hospedaje as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa 
+        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.total as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa 
 		    , reservacion.fecha_auditoria
         FROM 
         hab

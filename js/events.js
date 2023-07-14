@@ -86,25 +86,25 @@ function sabernosession(){
                 var usuario_id=localStorage.getItem("id");
                 $("#area_trabajo").load("includes/graficas.php?usuario_id="+usuario_id);
                 mostrar_inicio=false;
-                cargar_area_trabajo();
-                return
-            }
-            if(vista==0){
-                console.log("rack de habitaciones "+vista);
-                var usuario_id=localStorage.getItem("id");
-                $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-                //closeNav();
-            }else{
-                console.log("rack de operaciones "+vista);
-                var id=localStorage.getItem("id");
-                var token=localStorage.getItem("tocken");
-                $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-            }
 
-          
+                // cargar_area_trabajo();
+                // return
+            }
+            // if(vista==0){
+            //     console.log("rack de habitaciones "+vista);
+            //     var usuario_id=localStorage.getItem("id");
+            //     $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+            //     //closeNav();
+            // }else{
+            //     console.log("rack de operaciones "+vista);
+            //     var id=localStorage.getItem("id");
+            //     var token=localStorage.getItem("tocken");
+            //     $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+            // }
+            // console.log("s")
 
 			//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-            $("#pie").load("includes/pie.php?id="+id);
+            // $("#pie").load("includes/pie.php?id="+id);
             cargar_area_trabajo();
 		}
 		else{
@@ -1639,6 +1639,7 @@ function editarTotalEstancia(event){
         tarifa_base=forzar_tarifa
         tarifa_adultos  = tarifa_base
         tarifa_infantil=tarifa_base
+        return //no calcula nada.
     }
     // tarifa_base =123;
 
@@ -1818,8 +1819,9 @@ function cambiar_adultosNew(event=null,hab_id){
         if(forzar_tarifa!=""){
             $("#tipo-habitacion").removeAttr("disabled");
             $("#tarifa").attr('required',false);
-            $("#tarifa_base").val(forzar_tarifa)
-            editarTotalEstancia()
+            // $("#tarifa_base").val(forzar_tarifa)
+            $("#total").val(forzar_tarifa)
+            //editarTotalEstancia()
             
         }
       
@@ -2205,6 +2207,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         tarifa_existe = tarifa;
     }else{
         tarifa_existe=forzar_tarifa;
+        total_hospedaje = forzar_tarifa
+        total = forzar_tarifa
         $("#tarifa").removeAttr('required');
     }
 
@@ -4904,24 +4908,24 @@ function campos_cargos(){
     var campos_habs = document.getElementsByClassName('campos_habs')
 
     for (var i = 0; i < cargos.length; i++) {
-        var tarifa=0;
+        // var tarifa=0;
 
          if(cargos[i].value=="" && campos_habs[i].checked){
-            tarifa = cargos[i].dataset.oldvalue
-        }
-        if(cargos[i].value!="" && campos_habs[i].checked){
-            tarifa = cargos[i].value
-        }
-        if(tarifa!=0){
             array_cargos.push({
                 "reservaid":cargos[i].dataset.reservaid,
-                "valor":tarifa,
-               }) 
+                "valor":0,
+                }) 
         }
-      
+        if(cargos[i].value!="" && campos_habs[i].checked){
+            array_cargos.push({
+                "reservaid":cargos[i].dataset.reservaid,
+                "valor": cargos[i].value,
+                }) 
+        }
     }
-    console.log(array_cargos)
+    // console.log(array_cargos)
 
+    // return
     if(array_cargos.length!=0){
         var datos = {
             "datos_cargos": JSON.stringify(array_cargos),
@@ -5441,12 +5445,24 @@ function switch_rack(){
         var token=localStorage.getItem("tocken");
         localStorage.removeItem('estatus_hab')
         estatus_hab=""
-        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
+        $('#area_trabajo').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
+        $("#pie").load("includes/pie.php?id="+id);
+
+        closeModal();
+        closeNav();
         vista=0;
     }else{
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
-        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        $('#area_trabajo').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        $("#pie").load("includes/pie.php?id="+usuario_id);
+
+        closeModal();
+        closeNav();
         vista=1;
     }
    
