@@ -4,10 +4,14 @@ include_once('clase_reservacion.php');
 include_once('clase_hab.php');
 include_once('clase_forma_pago.php');
 
+$reservacion = new Reservacion(0);
+
+$reservacion->consultar_datos_pago();
+
 $forma_pago = new Forma_pago(0);
 $etiquetas_forma_pago= $forma_pago->etiquetas_forma_pago();
 
-$reservacion = new Reservacion(0);
+
 $hab = new Hab(0);
 $year = "2023";
 

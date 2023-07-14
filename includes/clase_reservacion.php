@@ -130,8 +130,32 @@ class Reservacion extends ConexionMYSql
     }
 
 
-    public function consultar_datos_hospedaje($tipo_hab){
+    public function consultar_datos_pago($tipo_hab){
+        //Fecha actual menos 7 dias.
+        $rango = time()-604800;
+        $rango_fecha = date('Y-m-d',$rango);
+        $sentencia = "SELECT SUM(reservacion.numero_hab) as numero_hab
+        FROM reservacion
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 2  || reservacion.estado = 1) 
+        AND from_unixtime(reservacion.fecha_entrada,'%Y-%m-%d') >= '$rango_fecha'
+        AND tipo_hab.nombre ='".$tipo_hab."'
+        ORDER BY reservacion.fecha_entrada ASC
+        ";
+        // echo $sentencia;
+        $numero_hab=0;
+        $comentario="Consultar todas las ocupadas ";
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        while ($fila = mysqli_fetch_array($consulta)) {
+            $numero_hab= $numero_hab + $fila['numero_hab'];
+        }
+        return $numero_hab;
+    }
 
+    public function consultar_datos_hospedaje($tipo_hab){
         //Fecha actual menos 7 dias.
         $rango = time()-604800;
         $rango_fecha = date('Y-m-d',$rango);
