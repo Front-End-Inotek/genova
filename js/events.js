@@ -6952,7 +6952,7 @@ function hacer_cortes(usuario){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/hacer_cortes2.php");
+        $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php");
         closeNav();
         
     }else{

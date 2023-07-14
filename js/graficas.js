@@ -1,11 +1,21 @@
-var datos_ocupadas = [];
 var usuario_id=localStorage.getItem("id");
+
+//Datos
+var datos_ocupadas = [];
+var datos_hospedaje =[];
+
+
+//Graficas
 var grafica_ocupadas;
+var grafica_hospedaje;
+var grafica_forma_pago;
+
+//Etiquetas
+var etiquetas_hospedaje=[];
+var etiquetas_forma_pago=[];
+
 function mostrar_graficas(){
-
-
 const ocupacionActual = document.querySelector("#ocupacionActual");
-
 const ocupacionEtiquetas = [
     "Ocupada",
     "Sucia ocupada",
@@ -104,11 +114,10 @@ grafica_ocupadas  = new Chart($grafica, {
     }
 })
 
+//Hospedaje
 const graficaPastel = document.querySelector("#graficaPastel");
-const etiquetasGraficaPastel = ["Suite", "Doble", "Sencillo", "Suite", "Triple"];
-
 const datosOcupacion = {
-    data: [ 10 , 15, 50 , 10, 43],
+    data: datos_hospedaje,
     backgroundColor: [
         "rgba(108,130,178,1)",
         "rgba(254,63,64,1)",
@@ -126,22 +135,23 @@ const datosOcupacion = {
     /* borderWidth: 1, */
 };
 
-new Chart(graficaPastel,{
+grafica_hospedaje= new Chart(graficaPastel,{
     type: "pie",
     data: {
-        labels: etiquetasGraficaPastel,
+        labels: etiquetas_hospedaje,
         datasets: [
             datosOcupacion
         ]
     }
 })
 
-const graficaDona = document.querySelector("#graficaDona");
-const etiquetasDona = ["Efectivo", "Transferencia" , "Tarjeta" , "Cupon"];
+//Formas Pago
 
+const graficaDona = document.querySelector("#graficaDona");
+const etiquetas_forma_pago = [];
 const datosFormasDePago = {
     label: "Formas de pago",
-    data: [ 15, 12, 43, 25],
+    data: [ 15, 12, 43, 25,33],
     backgroundColor: [
         "rgba(108,130,178,1)",
         "rgba(254,63,64,1)",
@@ -150,16 +160,15 @@ const datosFormasDePago = {
     ],
     hoverOffset: 4
 }
-new Chart(graficaDona, {
+grafica_forma_pago=  new Chart(graficaDona, {
     type: "doughnut",
     data: {
-        labels : etiquetasDona,
+        labels : etiquetas_forma_pago,
         datasets: [
             datosFormasDePago
         ]
     }
 })
-
 const ventas = document.querySelector("#ventas");
 const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 
@@ -232,18 +241,23 @@ new Chart (restaurant, {
 cargarInfoServidor();
 }
 
-
-
-
-
 function asignarInfo(info){
     // console.log(info)
     // return
     datos_ocupadas = info['datos_ocupadas']
-
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
-
     grafica_ocupadas.update();
+
+    //Hospedaje
+    // console.log(info['etiquetas_hospedaje'])
+    datos_hospedaje = info['datos_hospedaje'];
+    grafica_hospedaje.data.datasets[0].data = datos_hospedaje;
+    grafica_hospedaje.data.labels = info['etiquetas_hospedaje']
+    grafica_hospedaje.update();
+
+    //Formas de pago
+    grafica_forma_pago.data.labels = info['etiquetas_forma_pago']
+    grafica_forma_pago.update();
 }
 
 function cargarInfoServidor(){
@@ -275,6 +289,6 @@ function cargarInfoServidor(){
         }
       });
 
-    timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
+    //timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
 }
 

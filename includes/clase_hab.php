@@ -42,6 +42,18 @@
           }
         }
       }
+      function mostrar_tipoHab(){
+        $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1 ORDER BY id";
+        $comentario="Mostrar los nombres de las habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        $nombres = [];
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          array_push($nombres,$fila['nombre']);
+        }
+        return $nombres;
+      }
       // Guardar la habitacion
       function guardar_hab($nombre,$tipo,$comentario){
         $sentencia = "INSERT INTO `hab` (`nombre`, `tipo`, `mov`, `comentario`, `estado`, `cargo_noche`, `estado_hab`)

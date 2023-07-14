@@ -3,7 +3,7 @@
   include_once("clase_ticket.php");
   include_once("clase_tipo.php");
   include_once("clase_forma_pago.php");
-  include_once("clase_corte_info2.php");
+  include_once("clase_corte_info_dia.php");
   $ticket= NEW Ticket(0);
   $tipo= NEW Tipo(0);
   $forma_pago= NEW Forma_pago(0);

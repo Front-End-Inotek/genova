@@ -51,8 +51,16 @@
       return $cantidad;
     }
 
-    function mostrar_select(){
-
+    function etiquetas_forma_pago(){
+      $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
+      $comentario="Mostrar los tipos formas de pago";
+      $etiquetas_forma_pago = [];
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        array_push($etiquetas_forma_pago,$fila['descripcion']);
+      }
+      return $etiquetas_forma_pago;
     }
 
     // Mostramos las formas de pago
