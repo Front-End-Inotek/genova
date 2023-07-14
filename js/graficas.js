@@ -4,11 +4,11 @@ const usuario_id=localStorage.getItem("id");
 const ocupacionActual = document.querySelector("#ocupacionActual");
 
 const ocupacionEtiquetas = [
-    "Ocupada",
-    "Sucia ocupada",
-    "Vacia sucia",
+    "Ocupadas",
+    "Sucia ocupadas",
+    "Vacia sucias",
     "Mantenimiento",
-    "Bloqueada",
+    "Bloqueadas",
     "Reserva pagada",
     "Vacia limpieza",
     "Uso casa",
@@ -30,28 +30,28 @@ const datosOcupacionActual = {
     ]
     ,
     backgroundColor: [
-        "rgb(208,26,59)",
-        "rgb(189,2,2)",
+        "rgba(254,63,64,1)",
+        "rgb(194,1,1)",
         "rgb(0,159,92)",
         "rgb(255,193,7)",
-        "rgb(11,11,11)",
+        "rgba(101,101,102,1)",
         "rgb(77,3,174)",
         "rgb(71,134,255)",
         "rgb(5,209,202)",
         "rgb(155,154,154)"
     ],
     /* borderColor: [
-        "rgb(208,26,59)",
-        "rgb(189,2,2)",
+        "rgba(254,63,64,1)",
+        "rgb(194,1,1)",
         "rgb(0,159,92)",
         "rgb(255,193,7)",
-        "rgb(11,11,11)",
+        "rgba(101,101,102,1)",
         "rgb(77,3,174)",
         "rgb(71,134,255)",
         "rgb(5,209,202)",
         "rgb(155,154,154)"
     ], */
-    /* borderWidth: 1, */
+    /* borderWidth: 2, */
 }
 
 new Chart(ocupacionActual, {
@@ -71,15 +71,15 @@ new Chart(ocupacionActual, {
 
 const $grafica = document.querySelector("#grafica");
 
-const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio","Agosto","Octubre","Noviembre","Diciembre"];
+const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio","Agosto", "Septiembre","Octubre","Noviembre","Diciembre"];
 
 const datosVentas200 = {
     label: "Ocupacion de habitaciones",
     data: datos_ocupadas,
-    /* backgroundColor: 'rgba(56,116,255, 0.7)', */
-    borderColor: 'rgba(44,123,229, 1)',
+    backgroundColor: "rgba(84,183,245,0.5)",
+    borderColor: 'rgba(56,116,255, 1)',
     borderWidth: 1,
-    fill: false,
+    /* fill: false, */
     tension: 0.1
 }
 
@@ -164,16 +164,16 @@ const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "S
 const datosVentas2020 = {
     label: "Ventas hospedaje",
     data: [5000, 1500, 8000, 5102, 4000, 1599, 10000],
-    backgroundColor: "rgb(230, 239, 252, 1)",
-    borderColor: "rgb(44, 143, 235, 1)",
+    backgroundColor: "rgba(101,101,102,1)",
+    borderColor: "rgba(101,101,102,1)",
     borderWidth: 1,
 };
 
 const datosVentas2021 = {
     label: "Ventas restaurant",
     data: [1000, 1700, 5000, 5989, 6000, 7000, 9000],
-    backgroundColor: "rgb(224, 250, 239, 1)",
-    borderColor: "rgb(0, 159, 92, 1)",
+    backgroundColor: "rgba(84,183,245,1)",
+    borderColor: "rgba(84,183,245,1)",
     borderWidth: 1,
 };
 
@@ -204,8 +204,8 @@ const etiquetasRestaurant = [ "Red Velvet" , "Coca cola" , "Sopa" , "Pizza" ];
 const datosRestaurant = {
     label: "Productos mas vendidos",
     data: [ 400, 424 , 565 , 599 ],
-    backgroundColor: 'rgba(44,123,229, 1)',
-    borderColor: 'rgba(44,123,229, 1)',
+    backgroundColor: "rgba(84,183,245,1)",
+    borderColor: "rgba(84,183,245,1)",
     borderWidth: 1,
 }
 
@@ -228,17 +228,12 @@ new Chart (restaurant, {
     }
 })
 
-
 cargarInfoServidor();
-
 
 function asignarInfo(info){
     // console.log(info)
-
     datos_ocupadas = info['datos_ocupadas']
-
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
-
     grafica_ocupadas.update();
 }
 
@@ -264,8 +259,7 @@ function cargarInfoServidor(){
             console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
-      });
-
+    });
     setTimeout('cargarInfoServidor()',3000);//5500
 }
 

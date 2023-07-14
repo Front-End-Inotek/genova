@@ -89,7 +89,12 @@
     box-shadow: var(--sombra);
     border-radius: 15px;
     border: 1px solid var(--fondoCeldas);
+    /* transition: all 0.2s ease-in-out; */
 }
+/* .graficas__card:hover{
+    transform: scale(1.04);
+} */
+
 .card__encabezado{
     width: 90%;
     height: auto;
@@ -98,6 +103,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
+    border-bottom: 1px solid var(--fondoCeldas);
 }
 .card__encabezado-titulo{
     font-size: 16px;
