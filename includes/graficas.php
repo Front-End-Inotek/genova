@@ -73,6 +73,5 @@ echo '
             <canvas id="ocupacionActual"></canvas>
         </div>
     </div>
-    
     <script src="./js/graficas.js"></script>
 ';

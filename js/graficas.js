@@ -162,16 +162,16 @@ const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "S
 const datosVentas2020 = {
     label: "Ventas hospedaje",
     data: [5000, 1500, 8000, 5102, 4000, 1599, 10000],
-    backgroundColor: "rgba(254,63,64,1)",
-    borderColor: "rgba(254,63,64,1)",
+    backgroundColor: "rgb(230, 239, 252, 1)",
+    borderColor: "rgb(44, 143, 235, 1)",
     borderWidth: 1,
 };
 
 const datosVentas2021 = {
     label: "Ventas restaurant",
     data: [1000, 1700, 5000, 5989, 6000, 7000, 9000],
-    backgroundColor: "rgba(101,101,102,1)",
-    borderColor: "rgba(101,101,102,1)",
+    backgroundColor: "rgb(224, 250, 239, 1)",
+    borderColor: "rgb(0, 159, 92, 1)",
     borderWidth: 1,
 };
 
@@ -201,7 +201,7 @@ const etiquetasRestaurant = [ "Red Velvet" , "Coca cola" , "Sopa" , "Pizza" ];
 
 const datosRestaurant = {
     label: "Productos mas vendidos",
-    data: [ 400, 424 , 565 , 324 ],
+    data: [ 400, 424 , 565 , 599 ],
     backgroundColor: 'rgba(44,123,229, 1)',
     borderColor: 'rgba(44,123,229, 1)',
     borderWidth: 1,
