@@ -129,6 +129,21 @@ class Reservacion extends ConexionMYSql
         }
     }
 
+
+    public function consultar_ocupacion_mes(){
+        $sentencia_tarifa = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        FROM reservacion
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 2 ) ORDER BY reservacion.fecha_entrada DESC";
+        
+        $comentario="Consultar todas las ocupadas ";
+        $consulta = $this->realizaConsulta($sentencia_tarifa, $comentario);
+        return $consulta;
+    }
+
     public function preasignar_hab($id, $preasignada)
     {
 
@@ -1193,13 +1208,23 @@ class Reservacion extends ConexionMYSql
         }
     }
 
-    function editar_tarifa_hab($tarifa,$total,$id_reserva){
+    
+    function editar_tarifa_hab_aud($id_reserva){
         $hoy = time();
         $sentencia = "UPDATE `reservacion` SET
-        precio_hospedaje = '$tarifa',
+        fecha_auditoria = '$hoy'
+        WHERE `id` = '$id_reserva';";
+        // echo $sentencia ;
+        $comentario="Editar el cargo de una cuenta dentro de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+    }
+
+    function editar_tarifa_hab($total,$id_reserva){
+        $hoy = time();
+        $sentencia = "UPDATE `reservacion` SET
         `total` = '$total',
         fecha_auditoria = '$hoy',
-        forzar_tarifa = '$tarifa'
+        tarifa = 0
         WHERE `id` = '$id_reserva';";
         // echo $sentencia ;
         $comentario="Editar el cargo de una cuenta dentro de la base de datos";

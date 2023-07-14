@@ -30,7 +30,7 @@
     $descuento = $fila['descuento'];
     $mov = $fila['mov'];
 
-    $total_aux = $fila['precio_hospedaje'];
+    $total_aux = $fila['total'];
     $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
     $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
     $total_final= $total_final + $total_tarifa;
@@ -119,10 +119,10 @@
   $pdf->SetTextColor(255, 255, 255);
   $pdf->SetFillColor(99, 155, 219);
   $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA $'),0,0,'C',True);
+  $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
+  // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA $'),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NO.'),0,0,'C',True);
+  // $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NO.'),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
   $pdf->Cell(40,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
@@ -131,10 +131,10 @@
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,1,'C',True);
 
   $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(50,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
+  // $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
   $pdf->Cell(40,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 
@@ -179,11 +179,16 @@
     $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
     $total_final= $total_final + $total;
 
+    $nombre_tarifa = $id_tarifa != 0 ? $nombre_tarifa : "Forzar tarifa";
+
+
+  
+
     $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
-    $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$nombre_tarifa),1,0,'C');
-    $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$precio_tarifa),1,0,'C'); 
+    $pdf->Cell(50,5,iconv("UTF-8", "ISO-8859-1",$nombre_tarifa),1,0,'C');
+    // $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$precio_tarifa),1,0,'C'); 
     $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_adulto),1,0,'C');
-    $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$nohabs),1,0,'C');
+    // $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$nohabs),1,0,'C');
     $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
     $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
     $pdf->Cell(40,5,iconv("UTF-8", "ISO-8859-1",$nombre_huesped),1,0,'C'); 
@@ -203,9 +208,9 @@
         $pdf->SetFillColor(99, 155, 219);
         $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
         $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
-        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA $'),0,0,'C',True);
+        // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA $'),0,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NO.'),0,0,'C',True);
+        // $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NO.'),0,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
         $pdf->Cell(40,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
@@ -215,9 +220,9 @@
 
         $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
         $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-        $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+        // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
+        // $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
         $pdf->Cell(40,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 

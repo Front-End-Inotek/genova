@@ -22,30 +22,17 @@
   //Se necesita recalcular el total de pago de esa reservación con la 'nueva tarifa', seria como forzar la tarifa.
   //Para ello se necesita obtener la info de dicha reservación para volver a calcular precios, etc.
 
+
   foreach ($cargos as $key => $cargo) {
       $reservacion = new Reservacion($cargo->reservaid);
       // print_r($reservacion);
       $forzar_tarifa = $cargo->valor;
 
-      
-
-      $total_adulto = $reservacion->extra_adulto * $forzar_tarifa  *  $reservacion->noches  * $reservacion->numero_hab;
-      $total_infantil = $reservacion->extra_infantil * $forzar_tarifa *  $reservacion->noches  * $reservacion->numero_hab;
-
-
-      $total =( $forzar_tarifa * $reservacion->noches * $reservacion->numero_hab ) + $total_adulto + $total_infantil;
-      if($reservacion->plan_alimentos!= 0 && $reservacion->plan_alimentos!=null){
-        $plan_alimentos =  new PlanesAlimentos($reservacion->plan_alimentos);
-        $costo_plan = $plan_alimentos->costo;
+      if($forzar_tarifa==0){
+        $reservacion->editar_tarifa_hab_aud($reservacion->id);
+      }else{
+        $reservacion->editar_tarifa_hab($forzar_tarifa,$reservacion->id);
       }
-      $total = $total + $costo_plan + $reservacion->pax_extra;
-
-      echo $forzar_tarifa;
-
-      //se actualiza la tarifa y el cargo de dicha "reservacion".
-
-      $reservacion->editar_tarifa_hab($forzar_tarifa,$total,$reservacion->id);
-
 
 
   //   $sentencia = "UPDATE `reservacion` SET
