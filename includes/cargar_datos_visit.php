@@ -1,20 +1,15 @@
 <?php
 
 include_once('clase_reservacion.php');
+include_once('clase_hab.php');
 
 $reservacion = new Reservacion(0);
-
+$hab = new Hab(0);
 $year = "2023";
 
 
-// $info_ocupadas = $reservacion->consultar_ocupacion_mes();
-
-
-// $datos_ocupadas[0] = $reservacion->consultar_ocupacion_mes($year,"01");
+//Para consultar todas las habitaciones que se ocuparon por año.
 $datos_ocupadas=[];
-
-$setencias = [];
-
 for ($i=1; $i <=12 ; $i++) {
     if($i<10){
         $mes = "0".$i;
@@ -28,7 +23,7 @@ for ($i=1; $i <=12 ; $i++) {
 // $datos_ocupadas=[30, 150, 60, 80, 90, 89, 33,8,8,55,300];
 $datos_visit = [
     "datos_ocupadas" => $datos_ocupadas,
-    // "sentencias"=>$setencias,
+    "datos_habs"=>[],
   
 ];
 

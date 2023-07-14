@@ -20,7 +20,7 @@ class RackHabitacional extends ConexionMYSql
                     $estado_texto[0] = 'task--ocupada-sucia';
                     $estado_texto[1] = 'Sucia ocupada';
                 }
-                if($interno== "limpieza"){
+                if($interno=="limpieza"){
                     $estado_texto[0] = 'task--limpieza-ocupada';
                     $estado_texto[1] = 'Ocupada limpieza';
                     
@@ -299,7 +299,6 @@ class RackHabitacional extends ConexionMYSql
                     $tiempo_aux = time() + $adicional;
                     $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1,$fila['interno']);
                     $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2,$fila['interno']);
-                    
 
                     if(date('Y-m-d',$tiempo_aux) >= $fila['fin']){
                         $clase_tarde="";
@@ -348,7 +347,6 @@ class RackHabitacional extends ConexionMYSql
                         }
                      
                     //se le suma 1 día para que no tome el dia 'actual'.
-                   
                     $c=0;
                     while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
                         $huesped_reserva = $fila_r['n_huesped'] . " " . $fila_r['a_huesped'];

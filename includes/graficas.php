@@ -69,7 +69,7 @@ echo '
             </div>
         </div>
         <div class="secundariInfo">
-            <p class="subtitle"> Ocupacio actual</p>
+            <p class="subtitle"> Ocupación actual</p>
             <canvas id="ocupacionActual"></canvas>
         </div>
     </div>

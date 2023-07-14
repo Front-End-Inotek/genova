@@ -237,8 +237,7 @@ cargarInfoServidor();
 
 
 function asignarInfo(info){
-    console.log(info)
-
+    // console.log(info)
     // return
     datos_ocupadas = info['datos_ocupadas']
 
