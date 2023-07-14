@@ -27,7 +27,8 @@ const datosOcupacionActual = {
         4,
         1,
         16
-    ],
+    ]
+    ,
     backgroundColor: [
         "rgb(208,26,59)",
         "rgb(189,2,2)",
@@ -52,6 +53,7 @@ const datosOcupacionActual = {
     ], */
     /* borderWidth: 1, */
 }
+
 new Chart(ocupacionActual, {
     type: "pie",
     data : {
@@ -73,7 +75,7 @@ const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio
 
 const datosVentas200 = {
     label: "Ocupacion de habitaciones",
-    data: [50, 60, 60, 80, 90, 100, 95],
+    data: datos_ocupadas,
     /* backgroundColor: 'rgba(56,116,255, 0.7)', */
     borderColor: 'rgba(44,123,229, 1)',
     borderWidth: 1,
@@ -81,7 +83,7 @@ const datosVentas200 = {
     tension: 0.1
 }
 
-new Chart($grafica, {
+var grafica_ocupadas  = new Chart($grafica, {
     type: 'line',
     data: {
         labels: etiquetas,
@@ -231,7 +233,7 @@ cargarInfoServidor();
 
 
 function asignarInfo(info){
-
+    // console.log(info)
 
     datos_ocupadas = info['datos_ocupadas']
 

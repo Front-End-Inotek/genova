@@ -4,7 +4,7 @@ echo '
     <div class="contenedor__graficas">
         <div class="main_info">
             <main class="contenedor__graficas-main">
-                <h1 class="title"> Visit Dashboard </h1>
+                <h1 class="title"> Visit Dashboard</h1>
                 <p class="info"> Aqui es donde puedes ver que es lo que esta pasando en tu negocio ahora mismo </p>
                 <p class="subtitle"> Total de ocupacion en los ultimos 6 meses</p>
                 <canvas id="grafica"></canvas>

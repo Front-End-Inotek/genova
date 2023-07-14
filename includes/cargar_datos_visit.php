@@ -12,7 +12,7 @@ while ($fila = mysqli_fetch_array($info_ocupadas)) {
 
 }
 
-$datos_ocupadas=[30, 60, 60, 80, 90, 89, 33,8,8,55,300];
+$datos_ocupadas=[30, 150, 60, 80, 90, 89, 33,8,8,55,200];
 
 
 $datos_visit = [

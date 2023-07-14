@@ -56,6 +56,8 @@ function problemas(){
 $("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-danger" ><span class="glyphicon glyphicon-wrench"></span> Problemas en el servidor.</strong>');
 }
 
+
+
 // Recibimos la info
 function recibir(datos){
 	//alert(datos);
@@ -84,7 +86,7 @@ function sabernosession(){
             
             if(mostrar_inicio){
                 var usuario_id=localStorage.getItem("id");
-                $("#area_trabajo").load("includes/graficas.php?usuario_id="+usuario_id);
+                graficas()
                 mostrar_inicio=false;
 
                 // cargar_area_trabajo();
