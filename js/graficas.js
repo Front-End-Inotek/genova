@@ -1,9 +1,12 @@
-datos_ocupadas = [];
-const usuario_id=localStorage.getItem("id");
+var datos_ocupadas = [];
+var usuario_id=localStorage.getItem("id");
+var grafica_ocupadas;
+function mostrar_graficas(){
 
-const ocupacionActual = document.querySelector("#ocupacionActual");
 
-const ocupacionEtiquetas = [
+//const ocupacionActual = document.querySelector("#ocupacionActual");
+
+/* const ocupacionEtiquetas = [
     "Ocupadas",
     "Sucia ocupadas",
     "Vacia sucias",
@@ -14,8 +17,8 @@ const ocupacionEtiquetas = [
     "Uso casa",
     "disponible"
 ];
-
-const datosOcupacionActual = {
+ */
+/* const datosOcupacionActual = {
     label: "Ocupacion actual de habitaciones",
     data: [
         10,
@@ -40,7 +43,7 @@ const datosOcupacionActual = {
         "rgb(5,209,202)",
         "rgb(155,154,154)"
     ],
-    /* borderColor: [
+    borderColor: [
         "rgba(254,63,64,1)",
         "rgb(194,1,1)",
         "rgb(0,159,92)",
@@ -50,11 +53,11 @@ const datosOcupacionActual = {
         "rgb(71,134,255)",
         "rgb(5,209,202)",
         "rgb(155,154,154)"
-    ], */
-    /* borderWidth: 2, */
-}
+    ],
+    borderWidth: 2,
+} */
 
-new Chart(ocupacionActual, {
+/* new Chart(ocupacionActual, {
     type: "pie",
     data : {
         labels: ocupacionEtiquetas,
@@ -67,7 +70,7 @@ new Chart(ocupacionActual, {
             position: "left"
         }
     }
-})
+}) */
 
 const $grafica = document.querySelector("#grafica");
 
@@ -82,8 +85,7 @@ const datosVentas200 = {
     /* fill: false, */
     tension: 0.1
 }
-
-var grafica_ocupadas  = new Chart($grafica, {
+grafica_ocupadas  = new Chart($grafica, {
     type: 'line',
     data: {
         labels: etiquetas,
@@ -164,8 +166,8 @@ const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "S
 const datosVentas2020 = {
     label: "Ventas hospedaje",
     data: [5000, 1500, 8000, 5102, 4000, 1599, 10000],
-    backgroundColor: "rgba(101,101,102,1)",
-    borderColor: "rgba(101,101,102,1)",
+    backgroundColor: "#00D27A",
+    borderColor: "#00D27A",
     borderWidth: 1,
 };
 
@@ -204,8 +206,8 @@ const etiquetasRestaurant = [ "Red Velvet" , "Coca cola" , "Sopa" , "Pizza" ];
 const datosRestaurant = {
     label: "Productos mas vendidos",
     data: [ 400, 424 , 565 , 599 ],
-    backgroundColor: "rgba(84,183,245,1)",
-    borderColor: "rgba(84,183,245,1)",
+    backgroundColor: "#00D27A",
+    borderColor: "#00D27A",
     borderWidth: 1,
 }
 
@@ -227,17 +229,28 @@ new Chart (restaurant, {
         }
     }
 })
-
 cargarInfoServidor();
+}
+
+
+
+
 
 function asignarInfo(info){
     // console.log(info)
+    // return
     datos_ocupadas = info['datos_ocupadas']
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
     grafica_ocupadas.update();
 }
 
 function cargarInfoServidor(){
+    //Mientras se mantenga la vista de graficas, leera info del server.
+    if(vista !=3){
+        clearTimeout(timer_grafica)
+        return
+    }
+
     // console.log("**** Cargando info del servidor *****")
     include="includes/cargar_datos_visit.php?usuario="+usuario_id
     $.ajax({
@@ -250,7 +263,6 @@ function cargarInfoServidor(){
         //una vez eliminado el token de la bd, se redirecciona.
         success:function(res){
             res = JSON.parse(res)
-            // console.log(res)
             asignarInfo(res)
         },
         //success:problemas_sistema,
@@ -259,7 +271,8 @@ function cargarInfoServidor(){
             console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
-    });
-    setTimeout('cargarInfoServidor()',3000);//5500
+      });
+
+    timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
 }
 

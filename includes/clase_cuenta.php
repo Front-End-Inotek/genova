@@ -827,7 +827,7 @@
         <div class="containerFooter">
         <div>
           <div class="card cardFooter">
-            <div class="card-header">
+            <div class="card-header footerContenedor">
               <div class="row rowFooter">
               <div class="col-xs-2 col-sm-4">Total Ocupadas: '.$ocupadas.'</div>
               <div class="col-xs-2 col-sm-4">Total Disponibles: '.$disponibles.'</div>

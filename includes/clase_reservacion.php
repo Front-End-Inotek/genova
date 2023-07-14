@@ -130,18 +130,27 @@ class Reservacion extends ConexionMYSql
     }
 
 
-    public function consultar_ocupacion_mes(){
-        $sentencia_tarifa = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+    public function consultar_ocupacion_mes($rango_fecha){
+
+        $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
         FROM reservacion
         LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 2 ) ORDER BY reservacion.fecha_entrada DESC";
-        
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 2 ) 
+        AND from_unixtime(reservacion.fecha_entrada,'%Y-%m') = '$rango_fecha'
+        ORDER BY reservacion.fecha_entrada ASC
+        ";
+        // echo $sentencia;
+        $numero_hab=0;
         $comentario="Consultar todas las ocupadas ";
-        $consulta = $this->realizaConsulta($sentencia_tarifa, $comentario);
-        return $consulta;
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+
+        while ($fila = mysqli_fetch_array($consulta)) {
+            $numero_hab= $numero_hab + $fila['numero_hab'];
+        }
+        return $numero_hab;
     }
 
     public function preasignar_hab($id, $preasignada)
