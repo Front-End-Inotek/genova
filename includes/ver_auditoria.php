@@ -26,6 +26,9 @@
   $total_restaurante= 0;
   $total_productos_hab= 0;
   $total_productos_rest= 0;
+
+
+
   echo '
       <div class="container-fluid blanco">
         <div class="col-sm-12 text-left"><h2 class="text-dark">Auditoria</h2></div>

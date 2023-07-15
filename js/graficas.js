@@ -3,88 +3,23 @@ var usuario_id=localStorage.getItem("id");
 //Datos
 var datos_ocupadas = [];
 var datos_hospedaje =[];
+var datos_pagos = [];
+var datos_ventas=[];
+var datos_ventas_rest=[];
 
 
 //Graficas
 var grafica_ocupadas;
 var grafica_hospedaje;
 var grafica_forma_pago;
+var grafica_ventas;
+var grafica_ventas_rest;
 
 //Etiquetas
 var etiquetas_hospedaje=[];
 var etiquetas_forma_pago=[];
 
 function mostrar_graficas(){
-
-
-//const ocupacionActual = document.querySelector("#ocupacionActual");
-
-/* const ocupacionEtiquetas = [
-    "Ocupadas",
-    "Sucia ocupadas",
-    "Vacia sucias",
-    "Mantenimiento",
-    "Bloqueadas",
-    "Reserva pagada",
-    "Vacia limpieza",
-    "Uso casa",
-    "disponible"
-];
- */
-/* const datosOcupacionActual = {
-    label: "Ocupacion actual de habitaciones",
-    data: [
-        10,
-        2,
-        5,
-        2,
-        1,
-        2,
-        4,
-        1,
-        16
-    ]
-    ,
-    backgroundColor: [
-        "rgba(254,63,64,1)",
-        "rgb(194,1,1)",
-        "rgb(0,159,92)",
-        "rgb(255,193,7)",
-        "rgba(101,101,102,1)",
-        "rgb(77,3,174)",
-        "rgb(71,134,255)",
-        "rgb(5,209,202)",
-        "rgb(155,154,154)"
-    ],
-    borderColor: [
-        "rgba(254,63,64,1)",
-        "rgb(194,1,1)",
-        "rgb(0,159,92)",
-        "rgb(255,193,7)",
-        "rgba(101,101,102,1)",
-        "rgb(77,3,174)",
-        "rgb(71,134,255)",
-        "rgb(5,209,202)",
-        "rgb(155,154,154)"
-    ],
-    borderWidth: 2,
-} */
-
-/* new Chart(ocupacionActual, {
-    type: "pie",
-    data : {
-        labels: ocupacionEtiquetas,
-        datasets: [
-            datosOcupacionActual
-        ]
-    },
-    options: {
-        legend: {
-            position: "left"
-        }
-    }
-}) */
-
 const $grafica = document.querySelector("#grafica");
 
 const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio","Agosto", "Septiembre","Octubre","Noviembre","Diciembre"];
@@ -154,7 +89,7 @@ const graficaDona = document.querySelector("#graficaDona");
 const etiquetas_forma_pago = [];
 const datosFormasDePago = {
     label: "Formas de pago",
-    data: [ 15, 12, 43, 25,33],
+    data: datos_pagos,
     backgroundColor: [
         "rgba(108,130,178,1)",
         "rgba(254,63,64,1)",
@@ -172,12 +107,13 @@ grafica_forma_pago=  new Chart(graficaDona, {
         ]
     }
 })
+//Ventas
 const ventas = document.querySelector("#ventas");
 const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 
 const datosVentas2020 = {
     label: "Ventas hospedaje",
-    data: [5000, 1500, 8000, 5102, 4000, 1599, 10000],
+    data: datos_ventas,
     backgroundColor: "#00D27A",
     borderColor: "#00D27A",
     borderWidth: 1,
@@ -185,13 +121,13 @@ const datosVentas2020 = {
 
 const datosVentas2021 = {
     label: "Ventas restaurant",
-    data: [1000, 1700, 5000, 5989, 6000, 7000, 9000],
+    data: datos_ventas_rest,
     backgroundColor: "rgba(84,183,245,1)",
     borderColor: "rgba(84,183,245,1)",
     borderWidth: 1,
 };
 
-new Chart (ventas, {
+grafica_ventas=new Chart (ventas, {
     type: "bar",
     data: {
         labels : etiquetasVentas,
@@ -245,22 +181,40 @@ cargarInfoServidor();
 }
 
 function asignarInfo(info){
-    // console.log(info)
-    // return
+    console.log(info)
+    
+    //Ocupacion
     datos_ocupadas = info['datos_ocupadas']
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
     grafica_ocupadas.update();
 
     //Hospedaje
-    // console.log(info['etiquetas_hospedaje'])
     datos_hospedaje = info['datos_hospedaje'];
     grafica_hospedaje.data.datasets[0].data = datos_hospedaje;
     grafica_hospedaje.data.labels = info['etiquetas_hospedaje']
     grafica_hospedaje.update();
 
     //Formas de pago
+    datos_pagos = info['datos_pagos'];
+    grafica_forma_pago.data.datasets[0].data=datos_pagos
     grafica_forma_pago.data.labels = info['etiquetas_forma_pago']
     grafica_forma_pago.update();
+
+    // //Ventas
+    // datos_ventas = info['datos_ventas'];
+    // grafica_ventas.data.datasets[0].data=datos_ventas
+    // //Ventas rest
+    // datos_ventas_rest = info['datos_ventas_rest'];
+    // grafica_ventas.data.datasets[1].data=datos_ventas_rest
+    // grafica_ventas.update();
+
+      //Abonos datos
+      datos_ventas = info['datos_abonos'];
+      grafica_ventas.data.datasets[0].data=datos_ventas
+      //Ventas rest
+      datos_ventas_rest = info['datos_cargos'];
+      grafica_ventas.data.datasets[1].data=datos_ventas_rest
+      grafica_ventas.update();
 }
 
 function cargarInfoServidor(){

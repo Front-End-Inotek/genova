@@ -129,20 +129,115 @@ class Reservacion extends ConexionMYSql
         }
     }
 
+    public function consultar_restuarante_top4($fecha){
+        $sentencia="SELECT count(nombre) as cantidad, concepto.nombre
+        FROM concepto
+        LEFT JOIN ticket on concepto.id_ticket = ticket.id
+        where activo = 1 
+        AND concepto.tipo_cargo !=3
+        -- AND from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$fecha'
+        group by nombre
+        order by cantidad desc
+        limit 4";
+        $comentario="";
+        $venta_producto=[];
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        while ($fila = mysqli_fetch_array($consulta)) {
+            array_push($venta_producto,$fila);
+        }
+        return $venta_producto;
+    }
 
-    public function consultar_datos_pago($tipo_hab){
-        //Fecha actual menos 7 dias.
-        $rango = time()-604800;
-        $rango_fecha = date('Y-m-d',$rango);
-        $sentencia = "SELECT SUM(reservacion.numero_hab) as numero_hab
+    public function consultar_datos_abonos($fecha){
+        $sentencia="SELECT* FROM cuenta 
+        WHERE (estado =1 or estado=2)
+        AND from_unixtime(cuenta.fecha,'%Y-%m-%d') = '$fecha'
+        AND abono>0
+        ";
+        $comentario="";
+        $total_abono=0;
+        // echo $sentencia;
+        // die();
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        while ($fila = mysqli_fetch_array($consulta)) {
+            $total_abono+=$fila['abono'];
+        }
+        return $total_abono;
+
+    }
+
+    public function consultar_datos_cargos($fecha){
+        $sentencia="SELECT* FROM cuenta 
+        WHERE (estado =1 or estado=2)
+        AND from_unixtime(cuenta.fecha,'%Y-%m-%d') = '$fecha'
+        AND cargo>0
+        ";
+        $comentario="";
+        $total_cargo=0;
+        // echo $sentencia;
+        // die();
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        while ($fila = mysqli_fetch_array($consulta)) {
+            $total_cargo+=$fila['cargo'];
+        }
+        return $total_cargo;
+
+    }
+
+    public function consultar_ventas_restaurante($fecha){
+        $sentencia="SELECT* FROM cuenta 
+        WHERE (estado =1 or estado=2)
+        AND from_unixtime(cuenta.fecha,'%Y-%m-%d') = '$fecha'
+        AND descripcion like '%Restaurante%'
+        AND cargo>0
+        ";
+        $comentario="";
+        $total_cargo=0;
+        // echo $sentencia;
+        // die();
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        while ($fila = mysqli_fetch_array($consulta)) {
+            $total_cargo+=$fila['cargo'];
+        }
+        return $total_cargo;
+
+    }
+
+    public function consultar_datos_ventas($fecha){
+        $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
         FROM reservacion
         LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 2  || reservacion.estado = 1) 
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 2) 
+        AND from_unixtime(reservacion.fecha_entrada,'%Y-%m-%d') = '$fecha'
+        ORDER BY reservacion.fecha_entrada ASC
+        ";
+        // echo $sentencia;
+        // die();
+        $comentario="Consultar todas las ventas ";
+        $total_hab = 0;
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        while ($fila = mysqli_fetch_array($consulta)) {
+            $total_hab+=$fila['total'];
+        }
+        return $total_hab;
+    }
+
+    public function consultar_datos_pago($tipo_pago){
+        //Fecha actual menos 7 dias.
+        $rango = time()-604800;
+        $rango_fecha = date('Y-m-d',$rango);
+        $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        FROM reservacion
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 2) 
         AND from_unixtime(reservacion.fecha_entrada,'%Y-%m-%d') >= '$rango_fecha'
-        AND tipo_hab.nombre ='".$tipo_hab."'
+        AND forma_pago.descripcion ='".$tipo_pago."'
         ORDER BY reservacion.fecha_entrada ASC
         ";
         // echo $sentencia;
