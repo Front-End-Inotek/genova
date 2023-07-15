@@ -3,7 +3,7 @@
   $dia= time();
   $dia_actual= date("Y-m-d",$dia);
   echo '
-      <div class="container blanco"> 
+      <div class="container blanco">
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR CUPÓN</h2></div>
         <div class="row">
           <div class="col-sm-2">Vigencia Inicio:</div>

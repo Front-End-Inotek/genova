@@ -11,7 +11,7 @@
 			echo '
 			<!----------------------->
 			<!-- Side-Nav -->
-			<!-----------------------> 
+			<!----------------------->
 			<div class="side-navbar   flex-wrap flex-column" id="sidebar">
 			<ul class="nav flex-column text-white w-100">
 			<div class="informacion">
@@ -28,7 +28,7 @@
 			</div>';
 			echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 			<i class="bx bxs-chart text-secondary" ></i>
-			<span class="mx-2" onclick="graficas()"> Graficas </span>
+			<span class="mx-2" onclick="graficas()"> Estadística </span>
 			</li>';
 			echo '
 			<li href="#" onclick="sub_menu()" class="nav-link">
@@ -43,7 +43,6 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_llegadas()">Reporte de llegadas</a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
-		
 		echo'
 			</ul>
 			</li>';
@@ -71,9 +70,6 @@
 			if($permisos_huesped>0){
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
-
-			
-			
 			}
 		}
 			echo'
@@ -88,12 +84,9 @@
 			<ul id="reportes_submenu" class="submenu">
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(1)"> Llegadas probables </a></i></ul>
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(2)"> Llegadas efectivas </a></i></ul>
-			
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(3)"> Salidas probables </a></i></ul>
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(4)"> Salidas efectivas </a></i></ul>
 			';
-			
-		
 		echo'
 			</ul>
 			</li>';
@@ -141,10 +134,6 @@
 		echo'
 			</ul>
 		</li>';
-
-
-
-		
 
 
 		$permisos_restaurantes=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->restaurante_ver+$usuario->restaurante_agregar;
@@ -208,8 +197,6 @@
 			</ul>
 		</li>';
 
-		
-		
 
 		/*<li href="" onclick="ver_rack_habitacional()" class="nav-link">
 			<i class="bx bxs-user" ></i>
@@ -228,7 +215,7 @@
 
 		$permisos_herramientas=$usuario->usuario_ver+$usuario->usuario_agregar+$usuario->logs_ver+$usuario->forma_pago_ver+$usuario->forma_pago_agregar+$usuario->cupon_ver+$usuario->cupon_agregar;
 		if($permisos_herramientas>0){
-		  echo '
+		echo '
 		<li href="#" onclick="sub_menu()" class="nav-link">
 			<i class="bx bxs-wrench text-secondary"></i>
 			<span class="mx-2">Herramientas</span>
@@ -244,7 +231,6 @@
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_usuarios('.$_GET['id'].')">Agregar Usuarios </a></i></ul>';
 			}
-			
 			$permisos_logs=$usuario->logs_ver;
 			if($permisos_logs>0){
 			echo '
@@ -272,23 +258,18 @@
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_politicas_reservacion()">Políticas de reservación</a></i></ul>';
 			}
-			
 		}
 			echo '
 			</ul>
 		</li>';
 
-
-		
 		$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
 		if($permisos_reportes>0) {
 			echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 			<i class="bx bxs-user text-secondary" ></i>
 			<span class="mx-2" onclick=""> Desarrollo </span>
 			<!-- <span class="mx-2" onclick="mostrar_cargo_noche()"> Desarrollo </span> -->
-			
 			</li>';
-			
 		}
 
 		echo '
@@ -314,12 +295,10 @@
 		<span class="label">Buscar</span>
 
 		</a>
-		
 		<a class="btn btn-primary border-0 d-flex align-items-center justify-content-center menu-btn icon-btn icon-btn--morado" id="mostrar-botones" onclick="toggleBotones()">
             <i class="bx bxl-stack-overflow" ></i>
             <span class="label">Filtro</span>
         </a>-->
-		
 	</div>
 
 
@@ -354,4 +333,3 @@
 			echo "</script>";
 			}
 			?>
-			
