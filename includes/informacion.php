@@ -50,13 +50,15 @@ class Informacion extends ConexionMYSql
     $cuenta= NEW Cuenta(0);
     $movimiento= NEW movimiento(0);
     $cronometro=0;
+    
+    $tiempo_actual = time();
 
     $filtro="";
     if($estatus_hab!=null){
         $filtro ="AND hab.estado = " . $estatus_hab;
     }
     if (true) {
-    $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 $filtro ORDER BY id";
+    $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 $filtro ORDER BY id";
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);
     // echo $sentencia;
@@ -92,6 +94,11 @@ echo'
     echo ' <div class="container containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {
+        $clase_expirar="";
+        if(date('Y-m-d',$tiempo_actual) >= $fila['fin'] && $fila['estado']==1){
+            $clase_expirar="expirar";
+        }
+
         $total_faltante= 0.0;
         $estado="no definido";
         switch($fila['estado']) {
@@ -168,7 +175,7 @@ echo'
 
         if($fila['tipo']>0){
 
-            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
+            echo'<div class="'.$clase_expirar.'" href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
             switch($estado) {
                 case "Disponible limpia":
                 echo'<div class="btn disponible-limpia">';

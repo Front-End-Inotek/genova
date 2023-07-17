@@ -485,7 +485,7 @@ class Reservacion extends ConexionMYSql
 		"
         .$agregar_editar
         .$agregar_id;
-        // print_r($sentencia);
+        print_r($sentencia);
         // die();
         $consulta = $this->realizaConsulta($sentencia, "");
         while($fila=mysqli_fetch_array($consulta)) {

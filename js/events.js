@@ -86,8 +86,13 @@ function sabernosession(){
             
             if(mostrar_inicio){
                 var usuario_id=localStorage.getItem("id");
-                graficas()
-                mostrar_inicio=false;
+                // graficas()
+                // mostrar_inicio=false;
+
+                console.log("rack de habitaciones "+vista);
+                var usuario_id=localStorage.getItem("id");
+                $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+                //closeNav();
 
                 // cargar_area_trabajo();
                 // return
@@ -1722,7 +1727,7 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
         //console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
-                // console.log(res)
+                console.log(res)
             });       
         }
         // $(".div_adultos").load(include);    

@@ -11,13 +11,6 @@
   $dia= time();
   $dia_actual= date("Y-m-d",$dia);
 
-  
-
-  // echo $reservacion->comprobarFechaReserva("1682744400",1);
-
-
-
-
   // Checar si hab_id esta vacia o no
   if (empty($_GET['hab_id'])){
     //echo 'La variable esta vacia';
@@ -37,9 +30,6 @@
   
   }
 
- 
-
- 
 
   echo '
       <div class="container blanco">';
