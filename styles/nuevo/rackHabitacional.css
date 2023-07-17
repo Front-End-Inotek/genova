@@ -624,3 +624,31 @@
   width: calc(100% - 1px);
   /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
 }
+
+
+.expirar{
+  animation: borderAnimation infinite 5s alternate-reverse;
+}
+
+@keyframes borderAnimation {
+  0%{
+    border-left: 7px solid blue;
+    /* background-color: blue;
+    color: white; */
+  }
+  33.33%{
+    border-left: 7px solid red;
+    /* background-color: red;
+    color: black; */
+  }
+  66%{
+    border-left: 7px solid green;
+    /* background-color: green;
+    color: white; */
+  }
+  100%{
+    border-left: 7px solid yellow;
+    /* background-color: yellow;
+    color: black; */
+  }
+}
