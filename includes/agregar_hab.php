@@ -3,7 +3,7 @@
   include_once("clase_hab.php");
   $hab= NEW Hab(0);
   echo '
-   <!-- Modal -->
+  <!-- Modal -->
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Agregra tipo de habitacion </h5>

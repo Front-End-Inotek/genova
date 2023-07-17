@@ -101,7 +101,7 @@ const datosFormasDePago = {
     ],
     hoverOffset: 4
 }
-grafica_forma_pago=  new Chart(graficaDona, {
+grafica_forma_pago =  new Chart(graficaDona, {
     type: "doughnut",
     data: {
         labels : etiquetas_forma_pago,

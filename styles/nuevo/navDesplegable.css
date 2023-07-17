@@ -233,7 +233,7 @@ span {
 /******************************/
 .side-navbar {
   min-width: 300px;
-  height: 100vh;
+  height: 94vh;
   position: absolute;
   margin-left: -15.7%;
   background-color: var(--fondo);
@@ -282,7 +282,7 @@ span {
 .nav{
   flex-wrap: nowrap;
   overflow-y: auto;
-  height: 95vh;
+  height: 91vh;
 }
 
 /*********************************/
@@ -294,6 +294,7 @@ span {
 
 .active-nav {
   margin-left: 0;
+  border-radius: 0 0 10px 0;
 }
 
 .active-cont {
@@ -608,3 +609,4 @@ span {
     left: 141%;
   }
 }
+
