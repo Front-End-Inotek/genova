@@ -6,6 +6,7 @@ var datos_hospedaje =[];
 var datos_pagos = [];
 var datos_ventas=[];
 var datos_ventas_rest=[];
+var ventas_rest=[];
 
 
 //Graficas
@@ -14,10 +15,12 @@ var grafica_hospedaje;
 var grafica_forma_pago;
 var grafica_ventas;
 var grafica_ventas_rest;
+var grafica_ventas4;
 
 //Etiquetas
 var etiquetas_hospedaje=[];
 var etiquetas_forma_pago=[];
+var etiquetasRestaurant=[];
 
 function mostrar_graficas(){
 const $grafica = document.querySelector("#grafica");
@@ -149,17 +152,16 @@ grafica_ventas=new Chart (ventas, {
 
 const restaurant = document.querySelector("#restaurant");
 
-const etiquetasRestaurant = [ "Red Velvet" , "Coca cola" , "Sopa" , "Pizza" ];
 
 const datosRestaurant = {
     label: "Productos mas vendidos",
-    data: [ 400, 424 , 565 , 599 ],
+    data: ventas_rest,
     backgroundColor: "#00D27A",
     borderColor: "#00D27A",
     borderWidth: 1,
 }
 
-new Chart (restaurant, {
+grafica_ventas4 = new Chart (restaurant, {
     type: "bar",
     data: {
         labels: etiquetasRestaurant,
@@ -208,13 +210,21 @@ function asignarInfo(info){
     // grafica_ventas.data.datasets[1].data=datos_ventas_rest
     // grafica_ventas.update();
 
-      //Abonos datos
-      datos_ventas = info['datos_abonos'];
-      grafica_ventas.data.datasets[0].data=datos_ventas
-      //Ventas rest
-      datos_ventas_rest = info['datos_cargos'];
-      grafica_ventas.data.datasets[1].data=datos_ventas_rest
-      grafica_ventas.update();
+      //Abonos/cargos datos
+    datos_ventas = info['datos_abonos'];
+    grafica_ventas.data.datasets[0].data=datos_ventas
+    //Ventas rest
+    datos_ventas_rest = info['datos_cargos'];
+    grafica_ventas.data.datasets[1].data=datos_ventas_rest
+    grafica_ventas.update();
+
+    //Datos rest 4
+    ventas4 = info['venta_rest'];
+    console.log(ventas4)
+    grafica_ventas4.data.labels = info['etiquetas_rest']
+    grafica_ventas4.data.datasets[0].data=ventas4
+    grafica_ventas4.update();
+
 }
 
 function cargarInfoServidor(){

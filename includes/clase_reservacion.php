@@ -140,12 +140,14 @@ class Reservacion extends ConexionMYSql
         order by cantidad desc
         limit 4";
         $comentario="";
+        $nombre_producto=[];
         $venta_producto=[];
         $consulta = $this->realizaConsulta($sentencia, $comentario);
         while ($fila = mysqli_fetch_array($consulta)) {
-            array_push($venta_producto,$fila);
+            array_push($nombre_producto,$fila['nombre']);
+            array_push($venta_producto,$fila['cantidad']);
         }
-        return $venta_producto;
+        return [$nombre_producto,$venta_producto];
     }
 
     public function consultar_datos_abonos($fecha){

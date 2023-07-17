@@ -1,9 +1,9 @@
 <?php
-	date_default_timezone_set('America/Mexico_City');
+  date_default_timezone_set('America/Mexico_City');
   include_once("clase_ticket.php");
   include_once("clase_forma_pago.php");
   include_once("clase_corte.php");
-  include_once("clase_corte_info2.php");
+  include_once("clase_corte_info_dia.php");
   include_once("clase_log.php");
   include_once("clase_configuracion.php");
   include_once("clase_cuenta.php");

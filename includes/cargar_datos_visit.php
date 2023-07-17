@@ -20,15 +20,17 @@ $dates = $reservacion->date_range($lunes_pasado,$domingo_pasado);
 $datos_cargos=[];
 $datos_abonos=[];
 
-$datos_rest = $reservacion->consultar_restuarante_top4("");
 
+//Info de los 4 productos mas vendidos.
+$info_rest= $reservacion->consultar_restuarante_top4("");
+$etiquetas_rest = $info_rest[0];
+$venta_rest = $info_rest[1];
 
-
+//Info cargos/abonos.
 foreach ($dates as $key => $fecha) {
     # code...
     $info = $reservacion->consultar_datos_abonos($fecha);
     array_push($datos_cargos,$info);
-
     $info_rest = $reservacion->consultar_datos_cargos($fecha);
     array_push($datos_abonos,$info_rest);
 }
@@ -83,7 +85,8 @@ $datos_visit = [
     "datos_pagos"=>$datos_pagos,
     "datos_ventas"=>$datos_ventas,
     "datos_ventas_rest"=>$datos_ventas_rest,
-    "datos_rest"=>$datos_rest,
+    "etiquetas_rest"=>$etiquetas_rest,
+    "venta_rest" => $venta_rest,
 
     "datos_abonos"=>$datos_abonos,
     "datos_cargos"=>$datos_cargos,

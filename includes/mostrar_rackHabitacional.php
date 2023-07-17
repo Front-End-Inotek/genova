@@ -289,7 +289,7 @@ class RackHabitacional extends ConexionMYSql
                     ';*/
                 } else {
 
-                    $clase_tarde="";
+                    $clase_expirar="";
 
                     //Se calculan los estados de las habitaciones.
                     $mes = $this->convertir_mes(date('n', $tiempo));
@@ -301,7 +301,7 @@ class RackHabitacional extends ConexionMYSql
                     $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2,$fila['interno']);
 
                     if(date('Y-m-d',$tiempo_aux) >= $fila['fin']){
-                        $clase_tarde="";
+                        $clase_expirar="";
                     }
 
                     //Si la habitación actual no está ocupada entra aqui.
@@ -473,7 +473,7 @@ class RackHabitacional extends ConexionMYSql
                         <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
                         echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                         ';
-                        echo '<section class="'.$clase_tarde.' '.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
+                        echo '<section class="'.$clase_expirar.' '.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
                         echo '</div>';
                         echo'
                         </td>
