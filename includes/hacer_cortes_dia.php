@@ -37,7 +37,7 @@
 
         <div class="row">
 
-          <div class="col-sm-4">
+          <div class="col">
             <div  class="card bg-light text-dark">';
               
               echo '<div class="card-header"><h5> Ventas Restaurante </h5> </div>
@@ -92,7 +92,7 @@
             </div>
           </div>
 
-          <div class="col-sm-4">
+          <div class="col">
             <div  class="card bg-light text-dark">';
               
               echo '<div class="card-header"><h5>Hospedaje</h5></div>
@@ -140,7 +140,7 @@
             </div>
           </div>
 
-          <div class="col-sm-4">
+          <div class="col">
             <div  class="card bg-light text-dark">';
               //$cantidad= $tipo->total_elementos();
               
@@ -235,7 +235,7 @@
 
         echo '<div class="row">
              
-          <div class="col-sm-4">';
+          <div class="col">';
             /*<div  class="card bg-light text-dark">';
               $cantidad= $tipo->total_elementos();
               
@@ -247,7 +247,7 @@
             </div>*/
           echo '</div>
 
-          <div class="col-sm-4">';
+          <div class="col">';
             /*<div  class="card bg-light text-dark">';
               $cantidad= $tipo->total_elementos();
               
@@ -259,7 +259,7 @@
             </div>*/
           echo '</div>
 
-          <div class="col-sm-4">';
+          <div class="col">';
             /*<div  class="card bg-light text-dark">';
               $cantidad= $forma_pago->total_elementos();
               

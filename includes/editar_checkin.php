@@ -97,7 +97,7 @@ if(isset($_GET['ruta_regreso'])){
 
 $canales_reserva = array("telefono"=>"Telefono","email"=>"Email","web"=>"Web","agencia"=>"Agencia de viajes");
 
-echo '<div class="container-fluid blanco" style="width: 1200px;">
+echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
         <form onsubmit="" id="form-reserva">
@@ -118,9 +118,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     </select>
                 </div>';
                 }
-                
                 echo'
-               
                 <div class="form-group col-md-4">
                     <label for="total-estancia">Total de la estancia</label>
                     <input type="number" class="form-control" id="total" min="0" step="0.01" value='.$reservacion->total.' readonly>
@@ -140,7 +138,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <label for="noches">Noches</label>
                     <input class="form-control" type="number" value="'.$reservacion->noches.'"  id="noches" placeholder="0" onchange="cambiar_adultosNew("",'.$hab_id.');" disabled/>
                 </div>
-                
             </div>
             <div class="d-flex justify-content-between">
             <div class="form-group col-md-4">
@@ -149,8 +146,8 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <option value="">Selecciona</option>';
                     $tarifa->mostrar_tarifas_editar($reservacion->tarifa);
                     echo '
-                  </select>
-                  <input type="text" id="tarifa_base" value="'.$tarifa->precio_hospedaje.'" hidden>
+                </select>
+                <input type="text" id="tarifa_base" value="'.$tarifa->precio_hospedaje.'" hidden>
                 </div>
             <div class="form-group col-md-4 mb-3">
                     <label for="tipo-habitacion">Forzar tarifa</label>
@@ -162,7 +159,7 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     ';
                     $hab->mostrar_hab_editarTarifa($reservacion->tarifa);
                     echo '
-                  </select>
+                </select>
                 </div>
                 <!---
                 <div class="form-group col-md-3">
@@ -173,7 +170,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             </div>
             <div class="d-flex justify-content-between">
             <div class="form-group col-md-4">
-                    
             </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="adultos">Adultos</label>
@@ -185,8 +181,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <input type="number" class="form-control" id="extra_infantil" min="0"  value="'.$reservacion->extra_infantil.'" onchange="editarTotalEstancia()">
                     <input type="number" id="tarifa_menores" value="'.$tarifa->precio_infantil.'" hidden>
                 </div>
-             
-                
             </div>
             <div class="d-flex justify-content-between">
             <div class="form-group col-md-4">
@@ -202,9 +196,9 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <select class="form-control" id="plan-alimentos"  onchange="editarTotalEstancia(event)">
                     <option value="">Seleccione una opción</option>';
                     $planes_alimentos->mostrar_planes_select($reservacion->plan_alimentos);
-                  echo'
-                  </select>
-                  <input type="number" id="costoplan" hidden value="'.$planes_alimentos->costo.'">
+                echo'
+                </select>
+                <input type="number" id="costoplan" hidden value="'.$planes_alimentos->costo.'">
                 </div>
             </div>';
             if (empty($_GET['hab_id'])) {
@@ -219,13 +213,9 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 </div>
                 <div class="form-group col-md-4 sobrevender">
                     <label for="sobrevender">Sobrevender</label>
-                    
                     <div class="checkbox-container">
-                    
                         <input type="checkbox" id="sobrevender" disabled class="form-check" onchange="sobreVenderHab(event)"/>
-                        
                     </div>
-                    
                 </div>
                 <div class="form-group col-md-4">
                     <label for="canal-reserva">Canal de reserva</label>
@@ -255,8 +245,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
             <input type="text" id="year" hidden value="'.$huesped->vencimiento_ano.'">
             <input type="text" id="ccv" hidden value="'.$huesped->cvv.'">
             <input type="text" id="nombre_tarjeta" hidden value="'.$huesped->nombre_tarjeta.'">
-          
-           
             <br>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
@@ -311,7 +299,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                     <select class="form-control" id="forma-garantia" required>
                     <option value="">Seleccione una opción </option>
                     ';
-
                     $forma_pago->mostrar_forma_pago($huesped->tipo_tarjeta);
                     echo'
                     </select>
@@ -320,7 +307,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
                 <label for="forma-garantia">Forma de Garantía</label>
                 <button id="btngarantia"  class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
                 </div>';
-
                 if (empty($_GET['hab_id'])) {
                 echo ' <div class="form-group col-md-4">
                 <label for="persona-reserva">Persona que reserva</label>
@@ -347,7 +333,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
         <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="'.$ruta_regreso.'"> ←</button></div>
         <div id="example"></div>
     </div>
-    
 </div>
 </div>
 ';

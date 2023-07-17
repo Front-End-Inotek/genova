@@ -394,11 +394,12 @@ span {
 
   /* Agregamos un media query para dispositivos móviles */
   .side-navbar {
-  margin-left: -53%;
+  margin-left: -83vw;
 }
 
   .active-nav {
-  margin-left: -250px;
+  /* margin-left: -250px; */
+  margin-left: 0vw;
   /* Cambiamos el valor de margin-left a -250px para que la barra salga de la pantalla */
 }
 
