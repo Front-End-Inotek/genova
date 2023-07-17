@@ -18,10 +18,10 @@
 
   $titulo_="";
   $clv="";
-  
+
 
   // Checar si hab_id esta vacia o no
-  if (empty($_GET['hab_id'])){
+if (empty($_GET['hab_id'])){
 
     $hab_id= 0;
     $hab_tipo= 0;
@@ -30,7 +30,7 @@
 
     $hab = NEW Hab(0);
     $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
-  }else{
+}else{
     $titulo_="CHECK-IN";
     $clv="Clave uso casa";
     $hab_id= $_GET['hab_id'];
@@ -39,13 +39,13 @@
     $inputFechaEn="disabled";
     $inputValueFecha=$dia_actual;
     $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
-  }
+}
 
 
 
   //obtener el ultimo id de reserva.
 $ultimo_id = $reservacion->obtener_ultimo_id() /*+ 1*/;
-echo '<div class="container-fluid blanco" style="width: 1200px;">
+echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
         <form onsubmit="event.preventDefault();" id="form-reserva">
@@ -53,7 +53,6 @@ echo '<div class="container-fluid blanco" style="width: 1200px;">
         <h2 class="titulo">USO CASA</h2> <br>
             <div class="d-flex justify-content-end">
                 <div class="form-group col-md-4 mb-3">
-              
                     <label for="clave-reserva" class="text-right">'.$clv.'</label>
                     <input type="text" value="'.$ultimo_id.'" class="form-control" id="clave-reserva" readonly>
                 </div>';

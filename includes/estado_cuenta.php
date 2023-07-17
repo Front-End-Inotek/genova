@@ -78,60 +78,59 @@
   echo '
       <div class="container blanco"> 
         <div class="row">
-          <div class="col-sm-6 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA - Habitación '.$hab->nombre.'</h2></div>';
+          <div class="col-sm-6 text-left"><h2 class="text-dark ">Estado de cuenta habitación : '.$hab->nombre.'</h2></div>';
           if($faltante == 0){
             echo '<div class="col-sm-6 text-right"></div>';
           }else{
             if($faltante > 0){
-              echo '<div class="col-sm-6 text-right"><h5 class="text-dark margen-1">Saldo Total '.$faltante_mostrar.'</h5></div>';
+              echo '<div class="col-sm-6 text-right"><h5 class="text-dark ">Saldo Total '.$faltante_mostrar.'</h5></div>';
             }else{
-              echo '<div class="col-sm-6 text-right"><h5 class="text-danger margen-1">Saldo Total '.$faltante_mostrar.'</h5></div>';
+              echo '<div class="col-sm-6 text-right"><h5 class="text-danger ">Saldo Total '.$faltante_mostrar.'</h5></div>';
             }
           }
         echo '</div>
         <div class="row">
-          <div class="col-sm-4">Fecha Entrada: '.$fecha_entrada.'</div>
-          <div class="col-sm-4">Fecha Salida: '.$fecha_salida.'</div>
-          <div class="col-sm-2">Noches: '.$noches.'</div>
-          <div class="col-sm-2">Tarifa: '.$tarifa.'</div>
+          <div class="col">Fecha Entrada: <span>'.$fecha_entrada.'</span></div>
+          <div class="col">Fecha Salida: <span>'.$fecha_salida.'</span></div>
+          <div class="col">Noches: <span>'.$noches.'</span></div>
+          <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
         </div>
         <div class="row">
-          <div class="col-sm-4">Nombre Huesped: '.$nombre_huesped.'</div>
-          <div class="col-sm-4"></div>
-          <div class="col-sm-2">Acompañante: '.$acompanante.'</div>
-          <div class="col-sm-2">Forma Pago: '.$forma_pago.'</div>
+          <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span></div>
+          <div class="col">Suplementos: <span>'.$suplementos.'</span></div>
+          <div class="col">Acompañante: <span>'.$acompanante.'</span></div>
+          <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
         </div>
-        <div class="row">
-          <div class="col-sm-4">Suplementos: '.$suplementos.'</div>';
+        <div class="row">';
           if($extra_adulto>0){
-            echo '<div class="col-sm-2">Extra Adulto: '.$extra_adulto.'</div>';
+            echo '<div class="col">Extra Adulto: <span>'.$extra_adulto.'</span></div>';
           }else{
-            echo '<div class="col-sm-2"></div>'; 
+            echo '';
           }
 
           if($extra_junior>0){
-            echo '<div class="col-sm-2">Extra Junior: '.$extra_junior.'</div>';
+            echo '<div class="col">Extra Junior: <span>'.$extra_junior.'</span></div>';
           }else{
-            echo '<div class="col-sm-2"></div>'; 
+            echo '';
           }
 
           if($extra_infantil>0){
-            echo '<div class="col-sm-2">Extra Infantil: '.$extra_infantil.'</div>';
+            echo '<div class="col">Extra Infantil: <span>'.$extra_infantil.'</span></div>';
           }else{
-            echo '<div class="col-sm-2"></div>'; 
+            echo '';
           }
 
           if($extra_menor>0){
-            echo '<div class="col-sm-2">Extra Menor: '.$extra_menor.'></div>';
+            echo '<div class="col">Extra Menor: <span>'.$extra_menor.'</span></div>';
           }else{
-            echo '<div class="col-sm-2"></div>'; 
-          }          
-        echo '</div><br>
+            echo '';
+          }
+        echo '</div>
 
         <div class="row">
           <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
           <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
-        </div>'; 
+        </div>';
 
         if($total_cargos==0){
           $total_faltante=0;
@@ -142,9 +141,9 @@
 
         echo '<div class="row">
           <div class="col-sm-4"></div>
-          <div class="col-sm-2">Total $'.number_format($total_cargos, 2).'</div>
+          <div class="col-sm-2">Total: <span>$'.number_format($total_cargos, 2).'</span></div>
           <div class="col-sm-4"></div>
-          <div class="col-sm-2">Total $'.number_format($total_abonos, 2).'</div>
+          <div class="col-sm-2">Total: <span>$'.number_format($total_abonos, 2).'</span></div>
         </div>
 
         <div class="row d-flex justify-content-between">';

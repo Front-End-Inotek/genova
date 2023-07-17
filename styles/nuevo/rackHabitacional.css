@@ -279,9 +279,9 @@
   max-height: 4em;
   text-align: left !important;
 }
-.expirar {
+/* .expirar {
   box-shadow: 1px;
-}
+} */
 
 .task--bloqueado {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
@@ -626,29 +626,3 @@
 }
 
 
-.expirar{
-  animation: borderAnimation infinite 5s alternate-reverse;
-}
-
-@keyframes borderAnimation {
-  0%{
-    border-left: 7px solid blue;
-    /* background-color: blue;
-    color: white; */
-  }
-  33.33%{
-    border-left: 7px solid red;
-    /* background-color: red;
-    color: black; */
-  }
-  66%{
-    border-left: 7px solid green;
-    /* background-color: green;
-    color: white; */
-  }
-  100%{
-    border-left: 7px solid yellow;
-    /* background-color: yellow;
-    color: black; */
-  }
-}
