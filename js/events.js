@@ -1,9 +1,8 @@
 var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario'];
 var hab = [];
 var hab_ultimo_mov = [];
-var mostrar_inicio=true;
+var siguiente_vista=0;
 
-var vista=3;
 x=$(document);
 x.ready(inicio);
 
@@ -66,6 +65,7 @@ function recibir(datos){
 	if(res[1]!="0"){
 		localStorage.setItem("id",res[0]);
 		localStorage.setItem("tocken",res[1]);
+        localStorage.setItem('vista',3);
 		document.location.href='inicio.php';
 	}else{
 		$("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-warning"><span class="glyphicon glyphicon-remove"></span> Creo que has escrito mal tu usuario o contraseña </strong>');
@@ -76,41 +76,32 @@ function recibir(datos){
 function sabernosession(){
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
+    var vista = localStorage.getItem("vista");
 	if(id==null){
 		document.location.href='index.php';
 	}else{
 		id=parseInt(id);
+        console.log(vista)
+        // return
 		if(id>0){
             obtener_datos_hab_inicial ();
 			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
             
-            if(mostrar_inicio){
+            if(vista==3){
                 var usuario_id=localStorage.getItem("id");
                 graficas()
-                mostrar_inicio=false;
-
-                // console.log("rack de habitaciones "+vista);
-                // var usuario_id=localStorage.getItem("id");
-                // $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-                //closeNav();
-
-                // cargar_area_trabajo();
-                // return
             }
-            // if(vista==0){
-            //     console.log("rack de habitaciones "+vista);
-            //     var usuario_id=localStorage.getItem("id");
-            //     $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-            //     //closeNav();
-            // }else{
-            //     console.log("rack de operaciones "+vista);
-            //     var id=localStorage.getItem("id");
-            //     var token=localStorage.getItem("tocken");
-            //     $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-            // }
-            // console.log("s")
-
-			//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+            if(vista==0){
+                console.log("rack de habitaciones "+vista);
+                var usuario_id=localStorage.getItem("id");
+                $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+            }
+            if(vista==1){
+                console.log("rack de operaciones "+vista);
+                var id=localStorage.getItem("id");
+                var token=localStorage.getItem("tocken");
+                $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+            }
             cargar_area_trabajo();
 		}
 		else{
@@ -254,6 +245,7 @@ function salirsession(){
 	let usuario_id = localStorage.getItem("id");
     localStorage.removeItem('id');
     localStorage.removeItem('tocken');
+    localStorage.removeItem('vista');
     //remover el token de la db?
     include="includes/remover_token.php?usuario="+usuario_id
     $.ajax({
@@ -1543,7 +1535,7 @@ function agregar_reservaciones(hab_id=0){
 	closeNav();
 }
 function graficas(){
-    vista = 3;
+    localStorage.setItem('vista',3)
     $('#area_trabajo').hide();
     $('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/graficas.php?");
@@ -5363,7 +5355,13 @@ function ver_inventario(){
 }
 
 function switch_rack(){
-    console.log(vista);
+
+    if(siguiente_vista==0){
+        localStorage.setItem('vista',0)
+    }else{
+        localStorage.setItem('vista',1)
+    }
+    vista = localStorage.getItem('vista')
     if(vista==3 || vista==0){
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
@@ -5372,9 +5370,9 @@ function switch_rack(){
         $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         closeModal();
         closeNav();
-        vista=1;
-    }else{
+        siguiente_vista=1;
 
+    }else{
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
@@ -5385,7 +5383,7 @@ function switch_rack(){
         $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
         closeModal();
         closeNav();
-        vista=0;
+        siguiente_vista=0;
     }
    
 }
