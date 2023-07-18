@@ -2767,10 +2767,8 @@ function buscar_llegadas_salidas(e,opcion){
             //$('.pagination').show();
             // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+0); return false; }
         }
-     
         $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion+"&final="+final);  
     }, "1000");
-   
 }
 
 // Barra de diferentes busquedas en ver reservaciones
@@ -2782,16 +2780,13 @@ function buscar_reservacion(e){
             $('.pagination').hide();
             console.log(a_buscar)
             $("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
-               
-            });  
+            });
         }else{
             $('.pagination').show();
             // return false;
             // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id); return false; }
         }
-       
-      }, "1000");
-   
+    }, "1000");
 }
 
 // Busqueda por fecha en ver reservaciones

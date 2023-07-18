@@ -779,6 +779,11 @@ label[for="no"] {
   grid-gap: 10px;
   margin: 20px;
   margin-top: 50px !important;
+  overflow-y: auto;
+  width: 99%;
+  /* height: 88vh; */
+  max-height: calc(100vh - 116px) !important;
+  padding-bottom: 2rem;
 }
 
 .containerRackOp .btn {
@@ -1425,7 +1430,7 @@ body {
   .containerRackOp .btn {
     position: relative;
     width: 150px;
-    height: 80px;
+    height: 150px;
   }
 }
 
@@ -1439,7 +1444,7 @@ body {
   .containerRackOp .btn {
     position: relative;
     width: 170px;
-    height: 100px;
+    height: 150px;
   }
 }
 
@@ -1453,7 +1458,7 @@ body {
   .containerRackOp .btn {
     position: relative;
     width: 170px;
-    height: 100px;
+    height: 140px;
   }
 }
 
@@ -1467,7 +1472,7 @@ body {
   .containerRackOp .btn {
     position: relative;
     width: 170px;
-    height: 130px;
+    height: 140px;
   }
 }
 
@@ -1481,7 +1486,7 @@ body {
   .containerRackOp .btn {
     position: relative;
     width: 170px;
-    height: 100px;
+    height: 150px;
   }
 }
 
@@ -1494,7 +1499,7 @@ body {
   .containerRackOp .btn {
     position: relative;
     width: 170px;
-    height: 120px;
+    height: 140px;
   }
 }
 

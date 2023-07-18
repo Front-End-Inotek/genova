@@ -91,7 +91,7 @@ echo'
 
 ';
 
-    echo ' <div class="container containerRackOp" id="contenido-boton">';
+    echo ' <div class="containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {
         $clase_expirar="";

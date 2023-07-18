@@ -4,7 +4,7 @@
 
 .tableRack {
   table-layout: auto;
-  max-height: calc(100vh - 116px) !important; */
+  max-height: calc(100vh - 116px) !important;
 }
 
 #tablaTotal {

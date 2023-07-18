@@ -78,7 +78,7 @@ echo'
 <button class="botones-estado" id="mostrar-reservada-pendiente" onclick="mostrar_estadorack(11)"> Reservacion deuda</button>
 </div>';
 
-    echo ' <div class="container containerRackOp" id="contenido-boton">';
+    echo ' <div class="containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {
         $total_faltante= 0.0;
