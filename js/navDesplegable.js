@@ -14,10 +14,11 @@ function switch_rack() {
 /* funcion para desplegar y ocultar el navbar*
 /*********************************************/
 
-const boton_menu = () => {
+function boton_menu() {
   let sidebar = document.querySelector("#sidebar");
   /* let container = document.querySelector(".my-container"); */
   sidebar.classList.toggle("active-nav");
+
   // container.classList.toggle("active-cont");
   // if(container!=null){
   /* container.classList.toggle("active-cont"); */
@@ -56,7 +57,6 @@ const boton_menu = () => {
 const showMenu = (id) => {
   //console.log(id)
   const submenu = document.getElementById(`${id}`)
-  //const sidebar = document.getElementById("sidebar")
   //console.log(submenu)
   /* if (submenu.style.display === "" ||  submenu.style.display === "none"){
     console.log("Mostrar menu")
@@ -76,7 +76,6 @@ const showMenu = (id) => {
     submenu.style.display = "none"
   } */
   submenu.classList.toggle("ocultarMenus")
-  //sidebar.classList.toggle("active-nav")
 }
 //cambiar el texto del rack
 function cambiarVista() {
