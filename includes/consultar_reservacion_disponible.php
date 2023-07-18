@@ -14,8 +14,7 @@ $uso_casa = $_GET['uso_casa'];
 
 $resultado = $reservacion->comprobarFechaReserva($fecha_entrada,$fecha_salida,$hab_id,$preasignada);
 
-print_r($resultado);
-
+// print_r($resultado);
 
 //Lógica para reservaciones
 if(is_array($resultado)){

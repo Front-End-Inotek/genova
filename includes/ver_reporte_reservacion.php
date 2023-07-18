@@ -43,6 +43,7 @@
                     $noches= $fila['noches'];
                     $numero_hab= $fila['numero_hab'];
                     $tarifa= $fila['habitacion'];
+                    $costo_tarifa = $fila['total'];
                     $precio_hospedaje= '$'.number_format($fila['precio_hospedaje'], 2);
                     $cantidad_hospedaje= $fila['cantidad_hospedaje'];
                     $extra_adulto= $fila['extra_adulto'];
@@ -94,7 +95,7 @@
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-6">Noches: '.$noches.'</div>
-              <div class="col-sm-5">Tarifa: '.$tarifa.'</div>
+              <div class="col-sm-5">Tarifa: '.$tarifa.' $'.number_format($costo_tarifa,2).'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>

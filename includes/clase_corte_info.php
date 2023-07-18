@@ -35,16 +35,22 @@
 	  $contador= 0;
 	  $cantidad_hab= 0;
 	  $total_hab= 0;
-	  $sentencia = "SELECT *,tipo_hab.id AS ID,tipo_hab.nombre AS titulo
-	  FROM  tarifa_hospedaje 
-	  INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id WHERE tipo_hab.estado = 1 AND tarifa_hospedaje.estado = 1;";
+	  $sentencia = "SELECT *, sum(concepto.precio), tipo_hab.nombre as titulo, tipo_hab.id as ID
+	  from 
+	  hab 
+	  inner join tipo_hab on hab.tipo = tipo_hab.id
+	  inner join concepto on hab.id = concepto.categoria
+	  where hab.estado = 1
+	  and tipo_hab.estado=1
+      GROUP by tipo_hab.nombre
+	  ;";
 	  $comentario="Obtener las tarifas de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
 		  $this->hab_tipo_hospedaje[$contador]= $fila['titulo'];
-		  $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
-		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($id_usuario,$fila['ID']);
+		//   $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
+		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($id_usuario,$fila['ID'],$fila['id']);
 		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($id_usuario,$fila['ID']);
 		  $contador++;
 	  }
@@ -195,12 +201,19 @@
 
 	}
 	// Obtenemos la cantidad del hospedaje
-	function cantidad_hospedaje($id_usuario,$tipo){
+	function cantidad_hospedaje($id_usuario,$tipo,$tarifa_id){
 	  $total=0;
 	  $sentencia = "SELECT *,SUM(cantidad) AS total 
 	  FROM concepto 
-	  INNER JOIN hab ON concepto.categoria = hab.id WHERE concepto.id_usuario = $id_usuario AND hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3";
+	  INNER JOIN hab ON concepto.categoria = hab.id 
+	  WHERE concepto.id_usuario = $id_usuario 
+	  AND hab.tipo = $tipo 
+	  AND concepto.activo = 1 
+	  AND concepto.tipo_cargo = 3
+	  ";
 	  $comentario="Obtener el total del hospedaje";
+
+	//   echo $sentencia;
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
@@ -218,7 +231,8 @@
 	  $total=0;
 	  $sentencia = "SELECT SUM(total) AS total 
 	  FROM concepto 
-	  INNER JOIN hab ON concepto.categoria = hab.id WHERE concepto.id_usuario = $id_usuario AND hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3";
+	  INNER JOIN hab ON concepto.categoria = hab.id WHERE concepto.id_usuario = $id_usuario AND hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3
+	  ";
 	  $comentario="Obtener el total del  de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))

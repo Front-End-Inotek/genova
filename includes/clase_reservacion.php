@@ -258,8 +258,9 @@ class Reservacion extends ConexionMYSql
         $rango_fecha = date('Y-m-d',$rango);
         $sentencia = "SELECT SUM(reservacion.numero_hab) as numero_hab
         FROM reservacion
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
-        LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+        LEFT JOIN movimiento  ON movimiento.id_reservacion = reservacion.id 
+        LEFT JOIN hab on movimiento.id_hab = hab.id
+        LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 2 ) 
@@ -485,7 +486,7 @@ class Reservacion extends ConexionMYSql
 		"
         .$agregar_editar
         .$agregar_id;
-        print_r($sentencia);
+        // print_r($sentencia);
         // die();
         $consulta = $this->realizaConsulta($sentencia, "");
         while($fila=mysqli_fetch_array($consulta)) {
@@ -1222,10 +1223,20 @@ class Reservacion extends ConexionMYSql
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['noches'].'</td>
-            <td>'.$fila['numero_hab'].'</td>
-            <td>'.$fila['habitacion'].'</td>';
-                echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                echo '<td>'.$fila['cantidad_hospedaje'].'</td>
+            <td>'.$fila['numero_hab'].'</td>';
+
+            if(empty($fila['tarifa'])){
+                echo '
+                <td>Forzar tarifa</td>'
+                ;
+            }else{
+                echo '
+                <td>'.$fila['habitacion'].'</td>'
+                ;
+            }
+           
+            echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
+            echo '<td>'.$fila['cantidad_hospedaje'].'</td>
             <td>'.$fila['extra_adulto'].'</td>
              <!-- <td>'.$fila['extra_junior'].'</td> -->
             <!-- <td>'.$fila['extra_infantil'].'</td> --->
@@ -1271,8 +1282,16 @@ class Reservacion extends ConexionMYSql
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['noches'].'</td> 
-            <td>'.$fila['numero_hab'].'</td> 
-            <td>'.$fila['habitacion'].'</td>';
+            <td>'.$fila['numero_hab'].'</td>';
+            if(empty($fila['tarifa'])){
+                echo '
+                <td>Forzar tarifa</td>'
+                ;
+            }else{
+                echo '
+                <td>'.$fila['habitacion'].'</td>'
+                ;
+            }
                 echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
                 echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
             <td>'.$fila['extra_adulto'].'</td> 
@@ -1319,8 +1338,16 @@ class Reservacion extends ConexionMYSql
           <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
           <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
           <td>'.$fila['noches'].'</td> 
-          <td>'.$fila['numero_hab'].'</td> 
-          <td>'.$fila['habitacion'].'</td>';
+          <td>'.$fila['numero_hab'].'</td>';
+            if(empty($fila['tarifa'])){
+                echo '
+                <td>Forzar tarifa</td>'
+                ;
+            }else{
+                echo '
+                <td>'.$fila['habitacion'].'</td>'
+                ;
+            }
             echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
             echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
           <td>'.$fila['extra_adulto'].'</td> 
@@ -1439,10 +1466,10 @@ class Reservacion extends ConexionMYSql
         LEFT JOIN hab ON movimiento.id_hab = hab.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1)  AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia) ORDER BY reservacion.id DESC;";
+		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 || reservacion.estado=2)  AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia) ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
-        // echo $sentencia;
+        //echo $sentencia;
         $cat_paginas=($this->total_elementos($sentencia)/20);
         // print_r($cat_paginas);
         $extra=($this->total_elementos($sentencia)%20);

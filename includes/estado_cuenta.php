@@ -56,6 +56,8 @@
       $total_pago= $fila['total_pago'];
       $forma_pago= $fila['descripcion'];
       $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
+
+      $total_tarifa = $fila['total'];
   }
 
   $saldo_faltante= 0;
@@ -94,6 +96,7 @@
           <div class="col">Fecha Salida: <span>'.$fecha_salida.'</span></div>
           <div class="col">Noches: <span>'.$noches.'</span></div>
           <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
+          <div class="col">Tarifa: <span>$'.number_format($total_tarifa,2).'</span></div>
         </div>
         <div class="row">
           <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span></div>

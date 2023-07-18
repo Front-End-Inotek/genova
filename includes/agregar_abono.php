@@ -81,7 +81,7 @@
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['faltante'].','.$mov.','.$id_maestra.')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].', \''.$_GET['faltante'].'\','.$mov.','.$id_maestra.')"> Aceptar</button>
     </div>
   </div>';
 ?>

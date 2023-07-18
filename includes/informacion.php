@@ -175,7 +175,7 @@ echo'
 
         if($fila['tipo']>0){
 
-            echo'<div class="'.$clase_expirar.'" href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
+            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
             switch($estado) {
                 case "Disponible limpia":
                 echo'<div class="btn disponible-limpia">';
@@ -190,7 +190,7 @@ echo'
                 break;
 
                 case "Ocupado":
-                echo'<div class="btn supervision ocupadoH">';
+                echo'<div class="btn  supervision ocupadoH '.$clase_expirar.'">';
                 break;
 
                 case "Sucia ocupada":

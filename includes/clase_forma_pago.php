@@ -109,7 +109,7 @@
               if($fila['garantia']){
                 echo '<td><i style="font-size:2em;" class="bx bx-check-circle"></i></td>';
               }else{
-                echo '<td><i style="font-size:2em;" class="bx bx-x-circle"></i></td>'; 
+                echo '<td><i style="font-size:2em;" class="bx bx-check-circle"></i></td>'; 
               }
 
               if($editar==1){

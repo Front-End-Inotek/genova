@@ -648,7 +648,7 @@
               <th>Apellido</th>
               <th>Direccion</th>
               <th>Ciudad</th>
-              <th>Estafghfdo</th>
+              <th>Estado</th>
               <th>Codigo Postal</th>
               <th>Telefono</th>
               <th>Correo</th>
@@ -705,7 +705,7 @@
               <th>Apellido</th>
               <th>Direccion</th>
               <th>Ciudad</th>
-              <th>Estafghfdo</th>
+              <th>Estado</th>
               <th>Codigo Postal</th>
               <th>Telefono</th>
               <th>Correo</th>
@@ -762,7 +762,7 @@
               <th>Apellido</th>
               <th>Direccion</th>
               <th>Ciudad</th>
-              <th>Estafghfdo</th>
+              <th>Estado</th>
               <th>Codigo Postal</th>
               <th>Telefono</th>
               <th>Correo</th>

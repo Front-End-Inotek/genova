@@ -199,18 +199,23 @@ setlocale(LC_ALL, "es_ES");
                         ';*/
                     } else{
 
+                        $clase_expirar="";
+    
                         //Se calculan los estados de las habitaciones.
                         $mes = $this->convertir_mes(date('n', $tiempo));
                         $dia = date('d', $tiempo);
+                        $adicional =0;
                         $tiempo += 86400;
+                        $tiempo_aux = time() + $adicional;
                         $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1,$fila['interno']);
                         $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2,$fila['interno']);
-                        $adicional =0;
+                        // echo date('Y-m-d',$tiempo_aux);
+                        if(date('Y-m-d',$tiempo_aux) >= date('Y-m-d',$fila['fin'])){
+                            $clase_expirar="expirar";
+                        }
     
                         //Si la habitación actual no está ocupada entra aqui.
                         if ($i == 2 && $fila['estado'] != 1 ) {
-                            
-    
                             //aplica lo mismo que en una reservacion de momento solo en uso casa.
                             if($fila['estado'] == 8){
                                 //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
@@ -246,11 +251,9 @@ setlocale(LC_ALL, "es_ES");
                                 </div>
                             </td>
                             ';
+                            }else{
                             }
                             }
-                         
-                        //se le suma 1 día para que no tome el dia 'actual'.
-                        $tiempo_aux = time() + $adicional;
                         $c=0;
                         while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
                             $huesped_reserva = $fila_r['n_huesped'] . " " . $fila_r['a_huesped'];
@@ -291,6 +294,7 @@ setlocale(LC_ALL, "es_ES");
                                 // $tiempo_aux += 86400 ;
                             }else{
                                 //Uso casa.
+                                $mastiempo=false;
                                 if ($c == 0 && $fila['estado'] != 1 ) {
                                     if($fila['estado'] == 8){
                                         //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
@@ -313,20 +317,74 @@ setlocale(LC_ALL, "es_ES");
                                         $tiempo_aux += $n;
                                         $noches_reserva=1;
                                     }else{
-    
-                                    //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
-                                    $adicional=86400;
-                                    echo '
-                                    <td class="celdaCompleta tdCheck " title="nombre huesped">
-                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
-                                    <div >
-                                    ';
-                                    echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
-                                    echo '</div>';
-                                    echo '
-                                    </div>
-                                    </td>
-                                    ';
+                                        if($contador_row==0) {
+                                            //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
+                                            $adicional=86400;
+                                            echo '
+                                            <td class="celdaCompleta tdCheck " title="nombre huesped">
+                                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                            <div >
+                                            ';
+                                            echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                            echo '</div>';
+                                            echo '
+                                            </div>
+                                            </td>
+                                            ';
+                                        }else{
+                                            //Cuando la f.salida de la reservacion sobrepasa la fecha actual y no hay ocupadas. 
+                                            if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila_r['fecha_entrada']) && date('Y-m-d', $tiempo_aux) < date('Y-m-d', $fila_r['fecha_salida'])  )
+                                            {
+                                                $earlier = new DateTime(date('Y-m-d'));
+                                                $later = new DateTime(date('Y-m-d',$fila_r['fecha_salida']));
+                                                $noches_uso = $later->diff($earlier)->format("%a");
+                                                // echo $noches_uso;
+                                                $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
+                                                if($fila_r['garantia'] == "garantizada"){
+                                                    $estado = 6;
+                                                }else{
+                                                    $estado = 7;
+                                                }
+                                                $estado_habitacion_reserva = $this->estado_habitacion($estado, "","");
+                                                echo '
+                                                <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="'.$noches_uso.'">
+                                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',' . $fila['nombre'] . ',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')"  >
+                                                <div >
+                                                ';
+                                                echo '<section class="task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . '</section>';
+                                                echo '</div>';
+                                                echo '
+                                                </div>
+                                                </td>
+                                                ';
+                                                if($noches_uso>1){
+                                                    $mastiempo=true;
+                                                    $n = 86400 * ($noches_uso);
+                                                    $tiempo_aux += $n;
+                                                }
+                                            }else{
+                                                if($fila['estado'] == 0){
+                                                    echo '
+                                                    <td class="celdaCompleta tdCheck " title="nombre huesped">
+                                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                                    <div >
+                                                    ';
+                                                    echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                                    echo '</div>';
+                                                    echo '
+                                                    </div>
+                                                    </td>
+                                                    ';
+                                                }else{
+                                                    echo '
+                                                    <td class="celdaCompleta tdCheck " >';
+                                                    // echo date('Y-m-d',$tiempo_aux);
+                                                    echo'
+                                                    </td>
+                                                    ';
+                                                }
+                                            }
+                                        }
                                     }
     
                                 }else{
@@ -338,9 +396,11 @@ setlocale(LC_ALL, "es_ES");
                                     ';
                                 }
                             }
-                                $tiempo_aux += 86400 ;
-                                
-                                $c++;
+                            if(!$mastiempo){
+                                $tiempo_aux += 86400;
+                            }
+    
+                            $c++;
                             }
                         }
                         $i=32;
@@ -364,11 +424,9 @@ setlocale(LC_ALL, "es_ES");
                             //     $earlier = new DateTime(date('Y-m-d'));
                             // }
                             $inicio = new DateTime(date('Y-m-d'));
-                           
                             $fin = new DateTime(date('Y-m-d',$fila['fin']));
     
                             $noches = $fin->diff($inicio)->format("%a");
-                            
                             $tiempo_aux = time();
                             $noches = $noches == 0 ? 1 : $noches;
     
@@ -377,13 +435,13 @@ setlocale(LC_ALL, "es_ES");
                             <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
                             echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
                             ';
-                            echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
+                            echo '<section class="'.$clase_expirar.' '.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
                             echo '</div>';
                             echo'
                             </td>
                             ';
                             if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila['fin']))
-                            {   
+                            {
                                 $mastiempo=true;
                                 $tiempo_aux += 86400;
                             }
@@ -499,7 +557,6 @@ setlocale(LC_ALL, "es_ES");
                                         ';
                                         if($noches_reserva<=1){
                                             $tiempo_aux += 86400;
-                                         
                                         }else{
                                             // Si solo se trata del primero también seguirá sumando solo 1 día
                                                 //Solo en casos en los que no se al primer elemento del ciclo y tenga mas de 1 noche de reserva, 
@@ -509,11 +566,9 @@ setlocale(LC_ALL, "es_ES");
                                                 $n = 86400 * $noches_reserva;
                                                 $tiempo_aux += $n;
                                                 $noches_reserva=1;
-                                               
                                             }
     
                                     }else {
-                                        
                                         echo '
                                         <td class="celdaCompleta tdCheck ">';
                                         // echo date('Y-m-d',$tiempo_aux);

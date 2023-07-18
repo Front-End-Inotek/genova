@@ -86,12 +86,12 @@ function sabernosession(){
             
             if(mostrar_inicio){
                 var usuario_id=localStorage.getItem("id");
-                // graficas()
-                // mostrar_inicio=false;
+                graficas()
+                mostrar_inicio=false;
 
-                console.log("rack de habitaciones "+vista);
-                var usuario_id=localStorage.getItem("id");
-                $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+                // console.log("rack de habitaciones "+vista);
+                // var usuario_id=localStorage.getItem("id");
+                // $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
                 //closeNav();
 
                 // cargar_area_trabajo();
@@ -404,11 +404,15 @@ function guardar_politicaReservacion(nombre,codigo,descripcion){
     let usuario_id=localStorage.getItem("id");
     let xhttp;
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/guardar_politica_reservacion.php?nombre="+nombre+"&codigo="+codigo+"&descripcion="+descripcion+"&usuario_id="+usuario_id,true);
+    var parametros = "nombre="+nombre+"&codigo="+codigo+"&descripcion="+descripcion+"&usuario_id="+usuario_id
+
+    xhttp.open("POST","includes/guardar_politica_reservacion.php",true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.responseText)
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_politicas_reservacion()
@@ -423,7 +427,7 @@ function guardar_politicaReservacion(nombre,codigo,descripcion){
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
     })
-    xhttp.send();
+    xhttp.send(parametros);
 }
 
 function guardar_planes_alimentos() {
@@ -697,15 +701,22 @@ function modificar_politica_reservacion(id){
 	let codigo = encodeURI(document.getElementById("codigo").value);
     let descripcion = encodeURI(document.getElementById("descripcion").value);
 
-    include = "includes/aplicar_editar_politica_reservacion.php?nombre="+nombre+"&codigo="+codigo+"&id="+id+"&usuario_id="+usuario_id+"&descripcion="+descripcion;
+    datos ={
+        "nombre":nombre,
+        "codigo":codigo,
+        "id":id,
+        "usuario_id":usuario_id,
+        "descripcion":descripcion,  
+    }
+    include = "includes/aplicar_editar_politica_reservacion.php";
     $.ajax({
         async:true,
-        type: "GET",
-        dataType: "HTML",
-        contentType: "application/json",
+        type: "POST",
         url:include,
+        data:datos,
         beforeSend:loaderbar,
         success:function(res){
+            console.log(res)
             if(res=="NO"){
                 $('#caja_herramientas').modal('hide');
                 ver_politicas_reservacion()
@@ -1727,7 +1738,7 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
         //console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
-                console.log(res)
+                //console.log(res)
             });       
         }
         // $(".div_adultos").load(include);    
@@ -2256,7 +2267,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "total": total_hospedaje,
         "total_pago": 0,
         "hab_id": Number(hab_id),
-        "tipo_hab": tarifa,
+        "tipo_hab": tipo_hab,
         "estado": estado,
         "usuario_id": usuario_id,
         "plan_alimentos" : plan_alimentos,

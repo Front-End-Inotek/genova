@@ -36,15 +36,20 @@
 	  $contador= 0;
 	  $cantidad_hab= 0;
 	  $total_hab= 0;
-	  $sentencia = "SELECT *,tipo_hab.id AS ID,tipo_hab.nombre AS titulo
-	  FROM  tarifa_hospedaje 
-	  INNER JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id WHERE tipo_hab.estado = 1 AND tarifa_hospedaje.estado = 1;";
+	  $sentencia = "SELECT *, sum(concepto.precio), tipo_hab.nombre as titulo, tipo_hab.id as ID
+	  from 
+	  hab 
+	  inner join tipo_hab on hab.tipo = tipo_hab.id
+	  inner join concepto on hab.id = concepto.categoria
+	  where hab.estado = 1
+	  and tipo_hab.estado=1
+      GROUP by tipo_hab.nombre";
 	  $comentario="Obtener las tarifas de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
 		  $this->hab_tipo_hospedaje[$contador]= $fila['titulo'];
-		  $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
+		//   $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
 		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($fila['ID']);
 		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($fila['ID']);
 		  $contador++;
@@ -107,7 +112,7 @@
        AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
 	   ";//1 
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
-		echo $sentencia;
+		// echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))

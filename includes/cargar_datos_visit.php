@@ -15,7 +15,13 @@ $lunes_pasado= strtotime($lunes_pasado);
 $domingo_pasado =  date("Y-m-d", strtotime("last week sunday"));
 $domingo_pasado=strtotime($domingo_pasado . "+1 day");
 
-$dates = $reservacion->date_range($lunes_pasado,$domingo_pasado);
+//del lunes actual al domingo "entrante"
+$lunes_actual = date('Y-m-d',strtotime("monday"));
+$lunes_actual= strtotime($lunes_actual);
+$domingo_actual =  date("Y-m-d", strtotime("sunday"));
+$domingo_actual=strtotime($domingo_actual . "+1 day");
+
+$rango_fechas = $reservacion->date_range($lunes_actual,$domingo_actual);
 
 $datos_cargos=[];
 $datos_abonos=[];
@@ -27,7 +33,7 @@ $etiquetas_rest = $info_rest[0];
 $venta_rest = $info_rest[1];
 
 //Info cargos/abonos.
-foreach ($dates as $key => $fecha) {
+foreach ($rango_fechas as $key => $fecha) {
     # code...
     $info = $reservacion->consultar_datos_abonos($fecha);
     array_push($datos_cargos,$info);
@@ -41,7 +47,7 @@ $datos_ventas_rest=[];
 //Ventas
 $datos_ventas =[];
 
-foreach ($dates as $key => $fecha) {
+foreach ($rango_fechas as $key => $fecha) {
     # code...
     $info = $reservacion->consultar_datos_ventas($fecha);
     array_push($datos_ventas,$info);

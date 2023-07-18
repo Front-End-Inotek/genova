@@ -102,7 +102,8 @@
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr class="table-primary-encabezado text-center">
-                    <th>Tipo</th>';
+                    <th>Tipo</th>
+                    ';
                     //<th>Precio</th>
                     echo '<th>Cantidad</th>
                     <th>Total</th>
@@ -111,6 +112,8 @@
                 <tbody>';
                     $cantidad= $tipo->total_elementos();
                     $c = sizeof($inf->hab_tipo_hospedaje);
+                    $c = $c;
+                  
                     for($z=0 ; $z<$c; $z++)
                     {
                         if(($z%2) == 0){
@@ -119,7 +122,7 @@
                           echo '<tr class="table-secondary text-center">';
                         }
                           echo '<td>'.$inf->hab_tipo_hospedaje[$z].'</td>';
-                          //<td>$'.number_format($inf->hab_precio_hospedaje[$z], 2).'</td> 
+                          // echo '<td>$'.number_format($inf->hab_precio_hospedaje[$z], 2).'</td>';
                           echo '<td>'.$inf->hab_cantidad_hospedaje[$z].'</td> 
                           <td>$'.number_format($inf->hab_total_hospedaje[$z], 2).'</td> 
                         </tr>';
@@ -128,6 +131,7 @@
                     }
                     echo '<tr class="table-primary  text-center">
                       <td></td>
+                     
                       <td>'.$suma_cuartos_hospedaje.'</td>
                       <td>$'.number_format($total_cuartos_hospedaje, 2).'</td>
                     </tr>';

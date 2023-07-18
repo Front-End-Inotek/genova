@@ -111,6 +111,7 @@
                 <tbody>';
                     $cantidad= $tipo->total_elementos();
                     $c = sizeof($inf->hab_tipo_hospedaje);
+                    $c = $c;
                     for($z=0 ; $z<$c; $z++)
                     {
                         if(($z%2) == 0){

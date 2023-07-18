@@ -4,6 +4,8 @@
   $config = NEW Configuracion();
   $timepo = time();
   $activo= $config->activacion- $timepo;
+
+ 
   echo '
     <!DOCTYPE html>
       <html lang="es">
