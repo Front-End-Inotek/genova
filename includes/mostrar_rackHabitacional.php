@@ -164,7 +164,7 @@ class RackHabitacional extends ConexionMYSql
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1
-        /*AND hab.id=45*/
+        /*AND hab.id=42*/
         ORDER BY id";
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -309,7 +309,7 @@ class RackHabitacional extends ConexionMYSql
                                 $adicional=86400;
                                 echo '
                             <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="' . $noches_uso . '">
-                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ' \''.$fila['nombre'].'\')" >
+                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] .',\''.$fila['nombre'].'\')" >
                                     <div >
                             ';
                             echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
@@ -325,7 +325,7 @@ class RackHabitacional extends ConexionMYSql
                             $adicional=86400;
                             echo '
                         <td class="celdaCompleta tdCheck " title="nombre huesped">
-                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ', \''.$fila['nombre'].'\')" >
+                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\' )" >
                                 <div >
                         ';
                         $h=0;
