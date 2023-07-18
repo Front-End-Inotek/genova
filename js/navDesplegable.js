@@ -29,14 +29,14 @@ function boton_menu() {
 /*funcion para desplegar y ocultar submenus**/
 /*********************************************/
 
-function sub_menu() {
+/* function sub_menu() {
   // Obtener todos los elementos del menú con clase "nav-link"
   var menuItems = document.querySelectorAll(".nav-link");
   // Iterar a través de cada elemento de menú y agregar un evento de clic
   menuItems.forEach(function (item) {
     var submenu = item.querySelector(".submenu");
     // Si el elemento de menú tiene un submenú y el evento de clic aún no se ha agregado, agregar evento de clic
-    if (submenu && !item.classList.contains("has-click-event")) {
+    if (submenu ) {
       item.addEventListener("click", function (event) {
         event.preventDefault();
         // Si el submenú está oculto, lo mostramos
@@ -52,10 +52,30 @@ function sub_menu() {
       item.classList.add("has-click-event");
     }
   });
-}
+} */
 
-const showMenu = () => {
-  console.log("show menu")
+const showMenu = (id) => {
+  //console.log(id)
+  const submenu = document.getElementById(`${id}`)
+  //console.log(submenu)
+  /* if (submenu.style.display === "" ||  submenu.style.display === "none"){
+    console.log("Mostrar menu")
+    submenu.style.display = "block"
+    submenu.setAttribute("style", "display : block;")
+  }else if(submenu.style.display === "block"){
+    console.log("Ocultar menu")
+    submenu.style.display = "none"
+    submenu.setAttribute("style", "display : none;")
+  }else {
+    submenu.style.display = "none"
+  } */
+  //////////////////
+  /* if(submenu.style.display === "none"){
+    submenu.style.display = "block";
+  }else{
+    submenu.style.display = "none"
+  } */
+  submenu.classList.toggle("ocultarMenus")
 }
 //cambiar el texto del rack
 function cambiarVista() {

@@ -117,13 +117,13 @@ function obtener_datos_hab() {
     //código de la función
     var id=localStorage.getItem("id_knife");
     var xhttp;
-      xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //console.log(this.responseText);
-          const hab_info =JSON.parse(this.responseText);
+        const hab_info =JSON.parse(this.responseText);
           //console.log(hab_info);
-          var i;
+        var i;
             for(i in hab_info){
                 if(hab_info[i]instanceof Object){
                     /*console.log(hab_info[i]);
@@ -136,33 +136,31 @@ function obtener_datos_hab() {
                         });
                         /*const collection = document.getElementById("hab_"+hab_info[i]['id']);
                         collection.innerHTML = '<button id="submit">Submit</button>';*/
-
                         //console.log(hab_info[i]['id']+"-"+hab[hab_info[i]['id']]+"-"+hab_ultimo_mov[hab_info[i]['id']]);
                     }
                     else{
                         // console.log("sin cambio en la habitacion con id "+hab_info[i]['id']);
                     }
-                    
                 }
             }
          // console.log(hab_info.length);
         }
-      };
-      xhttp.open("GET", "includes/api_info_hab.php", true);
-      xhttp.send();
+    };
+    xhttp.open("GET", "includes/api_info_hab.php", true);
+    xhttp.send();
 }
 
 function obtener_datos_hab_inicial () {
     //código de la función
     var id=localStorage.getItem("id_knife");
     var xhttp;
-      xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //console.log(this.responseText);
-          const hab_info =JSON.parse(this.responseText);
+        const hab_info =JSON.parse(this.responseText);
           //console.log(hab_info);
-          var i;
+        var i;
             for(i in hab_info){
                 if(hab_info[i]instanceof Object){
                     /*console.log(hab_info[i]);
@@ -174,10 +172,9 @@ function obtener_datos_hab_inicial () {
             }
          // console.log(hab_info.length);
         }
-      };
-      xhttp.open("GET", "includes/api_info_hab.php", true);
-      xhttp.send();
-     
+    };
+    xhttp.open("GET", "includes/api_info_hab.php", true);
+    xhttp.send();
 }
 // Se carga el area de trabajo
 function cargar_area_trabajo(){
@@ -185,7 +182,7 @@ function cargar_area_trabajo(){
     obtener_datos_hab();
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
-   /* if(vista==0){
+    /* if(vista==0){
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
@@ -242,18 +239,16 @@ function sabersession(){
 	}else{
 		id=parseInt(id);
 		if(id>0){
-			document.location.href='inicio.php'; 
+			document.location.href='inicio.php';
 		}
 	}
 }
 
-// Salir de la session 
+// Salir de la session
 function salirsession(){
 	let usuario_id = localStorage.getItem("id");
-    
     localStorage.removeItem('id');
     localStorage.removeItem('tocken');
-	
     //remover el token de la db?
     include="includes/remover_token.php?usuario="+usuario_id
     $.ajax({
@@ -273,9 +268,7 @@ function salirsession(){
             console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
-      });
-
-    
+    });
 }
 
 // Barra de progreso
@@ -321,7 +314,6 @@ function closeNav(){
         document.getElementById("main").style.marginLeft = "0";
     }
 }
-
 
 // Agregar una politica de reservacion
 function agregar_politicas_reservacion(){
@@ -444,7 +436,6 @@ function guardar_planAlimentos(){
 	let nombre= encodeURI(document.getElementById("nombre").value);
 	let costo= encodeURI(document.getElementById("codigo").value);
 
-
     let xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/guardar_plan_alimentos.php?nombre="+nombre+"&costo="+costo+"&usuario_id="+usuario_id,true);
@@ -453,7 +444,6 @@ function guardar_planAlimentos(){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             console.log(e.target.responseText);
-          
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_planes_alimentos()
@@ -514,7 +504,6 @@ function guardar_cuenta_m(nombre,codigo){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             console.log(e.target.responseText);
-          
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_cuenta_maestra()
@@ -531,7 +520,6 @@ function guardar_cuenta_m(nombre,codigo){
     })
     xhttp.send();
 }
-
 
 // Guardar un tipo de habitacion
 function guardar_habitacion(){
@@ -572,7 +560,6 @@ function guardar_habitacion(){
     xhttp.send();
 }
 
-
 // Muestra las politicas de reservacion existentes.
 function ver_politicas_reservacion(){
 	var usuario_id=localStorage.getItem("id");
@@ -595,7 +582,6 @@ function ver_planes_alimentos(){
 	closeNav();
 }
 
-
 // Muestra las tipos de habitaciones de la bd
 function ver_tipos(){
 	var usuario_id=localStorage.getItem("id");
@@ -617,14 +603,12 @@ function editar_politica_reservacion(id){
 function editar_plan_alimentos(id,nombre,costo){
     nombre = encodeURIComponent(nombre)
     include = "includes/editar_plan_alimentos.php?id="+id+"&nombre="+nombre+"&costo="+costo
-  
     $("#mostrar_herramientas").load(include);
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
 
 // Editar un tipo de habitacion
 function editar_cuenta_maestra(id){
-   
     $("#mostrar_herramientas").load("includes/editar_cuenta_maestra.php?id="+id);
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
@@ -638,7 +622,6 @@ function editar_tipo(id){
 
 function mostrar_estadorack(estatus_hab) {
     console.log(estatus_hab);
-
     if(estatus_hab!="99"){
         localStorage.setItem('estatus_hab',estatus_hab)
     }else{
@@ -646,13 +629,8 @@ function mostrar_estadorack(estatus_hab) {
     }
     estatus_hab=localStorage.getItem('estatus_hab')
     $("#area_trabajo").load("includes/area_trabajo.php?id="+0+"&token="+0+"&estatus_hab="+estatus_hab);
-    
-
-
     return;
-
     var datos = {"estatus_hab":estatus_hab}
-
     //Declaramos una variable con nuestra perticion xmlhttprequest
         var xhttp = new XMLHttpRequest();
     //Abrimos las conexion hacia el archivo validar
@@ -663,15 +641,12 @@ function mostrar_estadorack(estatus_hab) {
         if(e.target.readyState == 4 && e.target.status == 200){
     //Si la respuesta fue para el usuario se va a redirigir a la pagina correspondiente
             console.log(e.target.response);
-
             if(e.target.response == "validar_usa"){
                 console.log(e.target.response);
-
                 location.href = 'src/main_user.php';
     //Si la respues fue administrador se va redirigir a la pagina correspindiente
             }if(e.target.response == "validar_admin"){
                 console.log(e.target.response);
-
                 location.href = 'src/main_admin.php';
     //Si no nos mostrara un mensaje de error
             }else{
@@ -691,7 +666,6 @@ function modificar_politica_reservacion(id){
     let nombre = encodeURI(document.getElementById("nombre").value);
 	let codigo = encodeURI(document.getElementById("codigo").value);
     let descripcion = encodeURI(document.getElementById("descripcion").value);
-
     include = "includes/aplicar_editar_politica_reservacion.php?nombre="+nombre+"&codigo="+codigo+"&id="+id+"&usuario_id="+usuario_id+"&descripcion="+descripcion;
     $.ajax({
         async:true,
@@ -708,7 +682,6 @@ function modificar_politica_reservacion(id){
             }else{
                 swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
             }
-          
         },
         //success:problemas_sistema,
         timeout:5000,
@@ -716,7 +689,7 @@ function modificar_politica_reservacion(id){
             console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
-      });
+    });
 }
 
 
@@ -743,7 +716,6 @@ function modificar_plan_alimentos(id){
             }else{
                 swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
             }
-          
         },
         //success:problemas_sistema,
         timeout:5000,
@@ -751,7 +723,7 @@ function modificar_plan_alimentos(id){
             console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
-      });
+    });
 }
 
 
@@ -769,7 +741,6 @@ function modificar_cuenta_maestra(id){
 			"codigo": codigo,
             "usuario_id": usuario_id,
         };
-    
     let xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/aplicar_editar_cuenta_maestra.php?nombre="+nombre+"&codigo="+codigo+"&id_tipo="+id_tipo+"&usuario_id="+usuario_id,true);
@@ -800,14 +771,12 @@ function modificar_tipo(id){
     let id_tipo = id;
     let nombre = encodeURI(document.getElementById("nombre").value);
 	let codigo = encodeURI(document.getElementById("codigo").value);
-
         let datos = {
             "id_tipo": id_tipo,
             "nombre": nombre,
 			"codigo": codigo,
             "usuario_id": usuario_id,
         };
-
     let xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/aplicar_editar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&id_tipo="+id_tipo+"&usuario_id="+usuario_id,true);
@@ -832,14 +801,11 @@ function modificar_tipo(id){
     xhttp.send();
 }
 
-
 function borrar_politica_reservacion(id, nombre, codigo){
     let nombre_tipo = nombre;
     let id_tipo = id;
     let codigo_tipo = codigo;
     let usuario_id=localStorage.getItem("id");
-
-
     let tabla = document.createElement("div");
     tabla.innerHTML += `
     <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
@@ -854,7 +820,6 @@ function borrar_politica_reservacion(id, nombre, codigo){
         <td>${codigo_tipo}</td>
         </tr>
     </table> <br>`;
-
     swal({
         title: "Antes de continuar por favor verifique los datos de la política de reservación  a eliminar",
         text: "Antes de continuar por favor verifique los datos de la política de reservación a eliminar ",
@@ -889,9 +854,7 @@ function borrar_politica_reservacion(id, nombre, codigo){
                 console.log(err)
                 swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
-          });
-   
-        
+        });
     } else {
         swal("Se cancelo eliminar el plan de alimentación!", "Por favor verifique los datos antes de eliminarlos!", "success")
     }
@@ -904,7 +867,6 @@ function borrar_plan_alimentacion(id, nombre, codigo ){
     let id_tipo = id;
     let codigo_tipo = codigo;
     let usuario_id=localStorage.getItem("id");
-
 
     let tabla = document.createElement("div");
     tabla.innerHTML += `
@@ -920,7 +882,6 @@ function borrar_plan_alimentacion(id, nombre, codigo ){
         <td>${codigo_tipo}</td>
         </tr>
     </table> <br>`;
-
     swal({
         title: "Antes de continuar por favor verifique los datos del plan de alimentación a eliminar",
         text: "Antes de continuar por favor verifique los datos del plan de alimentación a eliminar ",
@@ -954,9 +915,8 @@ function borrar_plan_alimentacion(id, nombre, codigo ){
                 console.log(err)
                 swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
-          });
-   
-        
+        });
+
     } else {
         swal("Se cancelo eliminar el plan de alimentación!", "Por favor verifique los datos antes de eliminarlos!", "success")
     }
@@ -1007,7 +967,7 @@ function borrar_cuenta_maestra(id, nombre, codigo ){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             // console.log(e.target.response);
-            // return 
+            // return
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_cuenta_maestra()
@@ -1033,12 +993,10 @@ function borrar_tipo(id, nombre, codigo ){
     let id_tipo = id;
     let codigo_tipo = codigo;
     let usuario_id=localStorage.getItem("id");
-
     let datos = {
         "id_tipo": id_tipo,
         "usuario_id": usuario_id
     };
-
     let tabla = document.createElement("div");
     tabla.innerHTML += `
     <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
@@ -1122,12 +1080,10 @@ function guardar_tarifa(){
 	let precio_infantil= document.getElementById("precio_infantil").value;
     let tipo= document.getElementById("tipo").value;
     let leyenda= encodeURI(document.getElementById("leyenda").value);
-
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     if(precio_hospedaje === null || precio_hospedaje === ''){
         swal("Campo precio_hospedaje vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -1136,7 +1092,6 @@ function guardar_tarifa(){
         swal("Campo cantidad_hospedaje vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     if(cantidad_maxima === null || cantidad_maxima === ''){
         swal("Campo cantidad_maxima vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -1145,7 +1100,6 @@ function guardar_tarifa(){
         swal("Campo precio_adulto vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     if(precio_junior === null || precio_junior === ''){
         swal("Campo precio_junior vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -1154,7 +1108,6 @@ function guardar_tarifa(){
         swal("Campo precio_infantil vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     if(tipo === null || tipo === ''){
         swal("Campo tipo vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -1374,7 +1327,7 @@ function regresar_editar_tarifa(){
 
 // Agregar una habitacion
 function agregar_hab(){
-	$("#mostrar_herramientas").load("includes/agregar_hab.php"); 
+	$("#mostrar_herramientas").load("includes/agregar_hab.php");
 }
 
 // Guardar una habitacion
@@ -1479,7 +1432,6 @@ function borrar_hab(ID, nom, habitacion, comentario){
         "ID": ID,
         "usuario_id": usuario_id,
     };
-
     let tabla = document.createElement("div");
     tabla.innerHTML += `
     <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
@@ -1551,7 +1503,6 @@ function regresar_editar_hab(){
 
 //* Reservacion *//
 
-
 // Agregar una reservacion
 function agregar_check(){
 	$('#area_trabajo').hide();
@@ -1573,7 +1524,6 @@ function agregar_reservaciones(hab_id=0){
 }
 function graficas(){
     vista = 3;
-
     $('#area_trabajo').hide();
     $('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/graficas.php?");
@@ -1582,34 +1532,29 @@ function graficas(){
 }
 //Función que calcula las fechas entre 2 fechas.
 function getDatesInRange(date, endDate) {
-  
     const dates = [];
-  
     // dates.push(date)
     inicioDate = new Date(date)
-   
     while (inicioDate < endDate) {
-      fecha_rango = new Date(inicioDate)
-      fecha_rango = fecha_rango.toISOString().split('T')[0];
-      dates.push(fecha_rango);
-      inicioDate.setDate(inicioDate.getDate() + 1);
+    fecha_rango = new Date(inicioDate)
+    fecha_rango = fecha_rango.toISOString().split('T')[0];
+    dates.push(fecha_rango);
+    inicioDate.setDate(inicioDate.getDate() + 1);
     }
-  
     return dates;
-  }
+}
 
- function manejarReservacion(control){
+function manejarReservacion(control){
 
     if(control == 0){
         document.getElementById('numero_hab').disabled=true;
         document.getElementById('tarifa').disabled=true;
-     
     }else{
         document.getElementById('tarifa').disabled=false;
         document.getElementById('numero_hab').disabled=false;
     }
 
- }
+}
 
 function calcular_nochesChek(){
     hab_id = $("#habitacion_checkin :selected").data("habid")
@@ -1623,18 +1568,13 @@ function calcular_nochesChek(){
 }
 
 function editarTotalEstancia(event){
-
     forzar_tarifa = $("#forzar-tarifa").val()
     extra_adultos = $("#extra_adulto").val();
     extra_infantil =  $("#extra_infantil").val();
-
     tarifa_adultos = $("#tarifa_adultos").val();
-
     tarifa_infantil = $("#tarifa_menores").val();
     noches = $("#noches").val();
-
     numero_hab = $("#numero_hab").val();
-
     tarifa_base = $("#tarifa_base").val()
     if(forzar_tarifa!="" || forzar_tarifa!=0  ){
         tarifa_base=forzar_tarifa
@@ -1643,10 +1583,8 @@ function editarTotalEstancia(event){
         return //no calcula nada.
     }
     // tarifa_base =123;
-
     adicional_adulto=0;
     adicional_infantil=0;
-
     if(extra_adultos!=0){
        adicional_adulto = extra_adultos * tarifa_adultos *  noches;
     }
@@ -1655,9 +1593,7 @@ function editarTotalEstancia(event){
     }
     // console.log(tarifa_base,noches, numero_hab)
     aux_total = tarifa_base * noches * numero_hab
-
     //Adicionales
-
     var pax_extra= Number(document.getElementById("pax-extra").value);
     if(event!=null){
         var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
@@ -1668,11 +1604,8 @@ function editarTotalEstancia(event){
     }else{
         costo_plan = Number($("#costoplan").val())
     }
-
     total = aux_total + adicional_adulto + adicional_infantil + pax_extra + costo_plan
-
     $("#total").val(total);
-
 }
 
 // Calculamos la cantidad de noches de una reservacion
@@ -1680,37 +1613,28 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
 
     var fecha_salida= document.getElementById("fecha_salida")
     var fecha_entrada= document.getElementById("fecha_entrada");
-
     fecha_entrada_value = fecha_entrada.value
     fecha_salida_value = fecha_salida.value
-
     selectedDate = new Date(fecha_entrada_value)
     auxSelectedDate = selectedDate.toISOString().split('T')[0];
-
     min_salida = selectedDate.setDate(selectedDate.getDate()+1)
-
     min_salida = selectedDate.toISOString().split('T')[0];
-
     fecha_salida.setAttribute('min', min_salida)
     const dateSalida = new Date(fecha_salida_value);
-
 	var noches= calculo_noches(fecha_entrada_value,fecha_salida_value)
     if(isNaN(noches)){
         document.getElementById("noches").value = 0
     }else{
         document.getElementById("noches").value = noches
     }
-
     //Si cambia el numero de noches y ya existen tarifas se calcula el total de la instancia.
-
     tarifa_base = $("#tarifa_base").val()
     if(fecha_entrada_value!="" && fecha_salida_value!=""){
     if( fecha_entrada_value >= fecha_salida_value ){
-       fecha_salida.value=""
+    fecha_salida.value=""
     }else{
         fechas = (getDatesInRange(auxSelectedDate,dateSalida))
         ultima_fecha = fechas[fechas.length-1]
-
         if(tarifa_base!=0 || tarifa_base!=""){
             editarTotalEstancia()
         }else{
@@ -1723,17 +1647,13 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
                 // console.log(res)
-            });       
+            });
         }
-        // $(".div_adultos").load(include);    
+        // $(".div_adultos").load(include);
         $("#preasignada").load(include,function(res){
             // console.log(res)
-        });    
-     
+        });
     }
-  
-
-  
     }
 }
 
@@ -1741,9 +1661,9 @@ function sobreVenderHab(e){
     //Si se sobrevende todas la habitaciones están disponibles.
     if (e.currentTarget.checked) {
         // alert('checked');
-      } else {
+    } else {
         // alert('not checked');
-      }
+    }
 }
 
 // Calculo para obtener la cantidad de noches de una reservacion
@@ -1762,14 +1682,12 @@ function calculo_noches(fecha_entrada,fecha_salida){
 function cambiar_adultosNew(event=null,hab_id){
     //si hay un select entonces se lee el evento del select para extraer el hab_id, desde reservaciones.
     //se verifica que el evento no sea nulo para obtener el id del tipo de la habitación desde el tipo de tarifa selccionada.
-    
     if(event!=0){
         var tipo_hab = event.target.options[event.target.selectedIndex].dataset.tipo;
         if(tipo_hab!=undefined){
             $("#tipo-habitacion").val(tipo_hab)
             $("#tipo-habitacion").attr("disabled",true);
         }
-       
     }
     var forzar_tarifa = $("#forzar-tarifa").val()
 
@@ -1778,12 +1696,9 @@ function cambiar_adultosNew(event=null,hab_id){
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
     var numero_hab= Number(document.getElementById("numero_hab").value);
-    
     // $(".div_adultos").load("includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id);  
     url_data ="includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id
-   
     if(!isNaN(noches) && forzar_tarifa=="" && tarifa!=""){
-       
         $("#tarifa").attr('required',true);
         $.ajax({
             async:true,
@@ -1794,13 +1709,11 @@ function cambiar_adultosNew(event=null,hab_id){
             beforeSend:loaderbar,
             success:function(res){
             //    console.log(res)
-               $("#total").val(res.precio_hab)
-               $("#tarifa_base").val(res.precio_hospedaje)
-               $("#tarifa_menores").val(res.precio_infantil)
-               $("#tarifa_adultos").val(res.precio_adulto)
-
-               editarTotalEstancia()
-
+            $("#total").val(res.precio_hab)
+            $("#tarifa_base").val(res.precio_hospedaje)
+            $("#tarifa_menores").val(res.precio_infantil)
+            $("#tarifa_adultos").val(res.precio_adulto)
+            editarTotalEstancia()
                //al seleccionar una nueva tarifa los extras se "reinician"
             //    $("#extra_adulto").val("")
             //    $("#extra_infantil").val("")
@@ -1811,7 +1724,7 @@ function cambiar_adultosNew(event=null,hab_id){
             error:function(err){
                 console.log(err)
             }
-          });
+        });
     }else{
         //no consulta la tarifa de la bd.
         //  console.log("forzando:" + noches +" t:"+forzar_tarifa)
@@ -1821,15 +1734,8 @@ function cambiar_adultosNew(event=null,hab_id){
             // $("#tarifa_base").val(forzar_tarifa)
             $("#total").val(forzar_tarifa)
             //editarTotalEstancia()
-            
         }
-      
-        
     }
-    
-
-   
-
     //alert("Cambiando tarifa "+tarifa);
 }
 
