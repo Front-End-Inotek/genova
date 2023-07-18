@@ -14,7 +14,7 @@ echo '
                     <div class="card__encabezado">
                         <div>
                             <p class="card__encabezado-titulo">Hospedaje</p>
-                            <p class="card__encabezado-subtitulo">Ultimos 7 dias</p>
+                            <p class="card__encabezado-subtitulo">Actual</p>
                         </div>
                         <p class="card__encabezado-titulo">
                             <i class="bx bxs-hotel text-secondary"></i>
