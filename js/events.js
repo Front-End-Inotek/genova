@@ -292,9 +292,12 @@ function problemas_sistema(datos){
 }
 
 // Muestra los subestados de las habitaciones
-function mostrar_herramientas(hab_id,estado,nombre,entrada="",salida=""){
+function mostrar_herramientas(hab_id,estado,nombre,entrada=0,salida=0){
 	var id=localStorage.getItem("id");
-	$("#mostrar_herramientas").load("includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id+"&entrada="+entrada+"&salida="+salida);
+    nombre = encodeURI(nombre)
+    include="includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id+"&entrada="+entrada+"&salida="+salida
+    //console.log(include)
+	$("#mostrar_herramientas").load(include);
 }
 
 //cerrar el modal cuando se navega a otra 'vista'
