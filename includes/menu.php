@@ -31,10 +31,10 @@
 			<span class="mx-2" onclick="graficas()"> Estadística </span>
 			</li>';
 			echo '
-			<li href="#" onclick="sub_menu()" class="nav-link">
+			<li href="#" onclick="showMenu(1)" class="nav-link">
 			<i class="bx bx-desktop text-secondary"></i>
 			<span class="mx-2">Recepcion</span>
-			<ul id="reportes_submenu" class="submenu">
+			<ul id="1" class="submenu" name="1">
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_check()"> Check In </a></i></ul>
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cuenta_maestra()"> Cuenta Maestra </a></i></ul>';
 			echo '
@@ -51,10 +51,10 @@
 		$permisos_reservaciones=$usuario->reservacion_ver+$usuario->reservacion_agregar+$usuario->huesped_ver+$usuario->huesped_agregar;
 		if($permisos_reservaciones>0){
 		echo '
-		<li href="#" onclick="sub_menu()" class="nav-link">
+		<li href="#" onclick="showMenu(2)" class="nav-link">
 			<i class="bx bx-calendar text-secondary" ></i>
 			<span class="mx-2 reservaciones">Reservaciones</span>
-			<ul id="reservaciones_submenu" class="submenu">';
+			<ul id="2" class="submenu">';
 
 			$permisos_reservar=$usuario->reservacion_ver+$usuario->reservacion_agregar;
 			if($permisos_reservar>0){
@@ -78,10 +78,10 @@
 
 		if($usuario->llegadas_salidas_ver>0){
 			echo '
-			<li href="#" onclick="sub_menu()" class="nav-link">
+			<li href="#" onclick="showMenu(3)" class="nav-link">
 			<i class="bx bxs-arrow-to-right text-secondary"></i>
 			<span class="mx-2">Llegadas y Salidas</span>
-			<ul id="reportes_submenu" class="submenu">
+			<ul id="3" class="submenu">
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(1)"> Llegadas probables </a></i></ul>
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(2)"> Llegadas efectivas </a></i></ul>
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_reservaciones(3)"> Salidas probables </a></i></ul>
@@ -96,10 +96,10 @@
 		$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
 		if($permisos_reportes>0){
 		echo '
-		<li href="#" onclick="sub_menu()" class="nav-link">
+		<li href="#" onclick="showMenu(4)" class="nav-link">
 			<i class="bx bxs-report text-secondary"></i>
 			<span class="mx-2 reportes">Reportes</span>
-			<ul id="reportes_submenu" class="submenu">';
+			<ul id="4" class="submenu">';
 
 			$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
 			if($permisos_reportes_diarios>0){
@@ -139,10 +139,10 @@
 		$permisos_restaurantes=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->restaurante_ver+$usuario->restaurante_agregar;
 		if($permisos_restaurantes>0){
 		echo '
-		<li href="#" onclick="sub_menu()" class="nav-link">
+		<li href="#" onclick="showMenu(5)" class="nav-link">
 			<i class="bx bx-user-check text-secondary"></i>
 			<span class="mx-2">Restaurante</span>
-			<ul id="restaurante_submenu" class="submenu">';
+			<ul id="5" class="submenu">';
 
 			$permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->categoria_ver;
 			if($permisos_inventario>0){
@@ -169,10 +169,10 @@
 		$permisos_habitaciones=$usuario->tipo_ver+$usuario->tipo_agregar+$usuario->tarifa_ver+$usuario->tarifa_agregar+$usuario->hab_ver+$usuario->hab_agregar;
 		if($permisos_habitaciones>0){
 				echo '
-				<li id="#" onclick="sub_menu();" class="nav-link">
+				<li id="#" onclick="showMenu(6);" class="nav-link">
 				<i class="bx bx-bed text-secondary"></i>
 				<span class="mx-2 habitaciones">Configuracion Hab.</span>
-				<ul id="habitaciones_submenu" class="submenu ocultar">
+				<ul id="6" class="submenu ocultar">
 				';
 
 			$permisos_tipo=$usuario->tipo_ver+$usuario->tipo_agregar;
@@ -216,10 +216,10 @@
 		$permisos_herramientas=$usuario->usuario_ver+$usuario->usuario_agregar+$usuario->logs_ver+$usuario->forma_pago_ver+$usuario->forma_pago_agregar+$usuario->cupon_ver+$usuario->cupon_agregar;
 		if($permisos_herramientas>0){
 		echo '
-		<li href="#" onclick="sub_menu()" class="nav-link">
+		<li href="#" onclick="showMenu(7)" class="nav-link">
 			<i class="bx bxs-wrench text-secondary"></i>
 			<span class="mx-2">Herramientas</span>
-			<ul id="herramientas_submenu" class="submenu">';
+			<ul id="7" class="submenu">';
 
 			$permisos_usuario=$usuario->usuario_ver;
 			if($permisos_usuario>0){

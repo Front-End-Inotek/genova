@@ -27,25 +27,24 @@
   $estado_reserva = $reservacion->estado;
   $id_cuenta = $reservacion->id_cuenta;
 
- 
-  $inputFechaEn="";
-  $inputValueFecha="";
-  $dia= time();
-  $dia_actual= date("Y-m-d",$dia);
+$inputFechaEn="";
+$inputValueFecha="";
+$dia= time();
+$dia_actual= date("Y-m-d",$dia);
 
-  $forma_pago = new Forma_pago(0);
+$forma_pago = new Forma_pago(0);
 
-  $titulo_="";
-  $clv="";
-  
-  $require_tarifa="required";
+$titulo_="";
+$clv="";
 
-  if($reservacion->forzar_tarifa!=""){
+$require_tarifa="required";
+
+if($reservacion->forzar_tarifa!=""){
     $require_tarifa="";
-  }
+}
 
   // Checar si hab_id esta vacia o no
-  if (empty($_GET['hab_id'])){
+if (empty($_GET['hab_id'])){
 
     $hab_id= 0;
     $hab_tipo= 0;
@@ -54,7 +53,7 @@
 
     $hab = NEW Hab(0);
     $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
-  }else{
+}else{
     $titulo_="CHECK-IN";
     $clv="Clave check-in";
     $hab_id= $_GET['hab_id'];
@@ -72,7 +71,6 @@ if($reservacion->sobrevender){
 }
 
 if($reservacion->plan_alimentos!=0 && $reservacion->plan_alimentos!=null){
-    
     $planes_alimentos = new PlanesAlimentos($reservacion->plan_alimentos);
 }else{
     $planes_alimentos = new PlanesAlimentos(0);
@@ -214,13 +212,9 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
                 <div class="form-group col-md-4 sobrevender">
                     <label for="sobrevender">Sobrevender</label>
-                    
                     <div class="checkbox-container">
-                    
                         <input type="checkbox" id="sobrevender" disabled class="form-check" onchange="sobreVenderHab(event)"/>
-                        
                     </div>
-                    
                 </div>
                 <div class="form-group col-md-4">
                     <label for="canal-reserva">Canal de reserva</label>
@@ -348,7 +342,6 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
         <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="'.$ruta_regreso.'"> ←</button></div>
         <div id="example"></div>
     </div>
-    
 </div>
 </div>
 ';
