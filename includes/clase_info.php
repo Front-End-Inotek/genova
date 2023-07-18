@@ -188,7 +188,7 @@
       {
         $inicio_limpieza= $fila['inicio_limpieza'];
         //$fin_limpieza= $fila['fin_limpieza'];
-        $termina_hospe= $fila['finalizado'];
+        $termina_hospe= $fila['finalizado'] == 0 ? "" : date("d-m-Y H:i:s",$fila['finalizado']);
         $persona_limpio= $fila['persona_limpio'];
       }
       $usuario = NEW Usuario($persona_limpio);
@@ -198,7 +198,7 @@
         echo 'Inicio Limpieza :   '. date("d-m-Y H:i:s",$inicio_limpieza);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
-        echo 'Termino ocupada: '. date("d-m-Y H:i:s",$termina_hospe);
+        echo 'Termino ocupada: '. $termina_hospe;
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
         echo 'Persona Limpiando: '. $usuario->usuario;

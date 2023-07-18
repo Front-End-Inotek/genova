@@ -208,7 +208,7 @@ class Reservacion extends ConexionMYSql
     public function consultar_datos_ventas($fecha){
         $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
         FROM reservacion
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -233,7 +233,7 @@ class Reservacion extends ConexionMYSql
         $rango_fecha = date('Y-m-d',$rango);
         $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
         FROM reservacion
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -282,7 +282,7 @@ class Reservacion extends ConexionMYSql
 
         $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
         FROM reservacion
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -321,6 +321,7 @@ class Reservacion extends ConexionMYSql
     }
     public function obtener_ultimo_id()
     {
+    
         //esta sentencia trae el ultimo valor registrado.
         // $sentencia = "SELECT reservacion.id
         // FROM reservacion
@@ -334,6 +335,7 @@ class Reservacion extends ConexionMYSql
         WHERE TABLE_SCHEMA = 'visit'
         AND   TABLE_NAME   = 'reservacion';";
         $ultimo_id=0;
+        // echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         while ($fila = mysqli_fetch_array($consulta)) {
             $ultimo_id= $fila['id'];
@@ -810,7 +812,7 @@ class Reservacion extends ConexionMYSql
         }
         $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM reservacion
-            LEFT JOIN tarifa_hospedaje ON reservacion.tipo_hab = tarifa_hospedaje.id 
+            LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id 
             LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
             INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
             INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -1015,7 +1017,7 @@ class Reservacion extends ConexionMYSql
         LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
         INNER JOIN movimiento ON hab.mov = movimiento.id 
         INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id 
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
@@ -1119,7 +1121,7 @@ class Reservacion extends ConexionMYSql
         }
         $sentencia = "SELECT *,huesped.correo as correo_huesped,movimiento.id as mov, movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id
@@ -1460,7 +1462,7 @@ class Reservacion extends ConexionMYSql
 
         $sentencia = "SELECT *, hab.nombre as nombre_hab, huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
         LEFT JOIN hab ON movimiento.id_hab = hab.id
@@ -1586,7 +1588,7 @@ class Reservacion extends ConexionMYSql
             $ruta="ver_reportes_llegadas()";
             $sentencia="SELECT *,huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM reservacion
-            LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+            LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
             INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
             LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
             INNER JOIN usuario ON reservacion.id_usuario = usuario.id
@@ -1608,7 +1610,7 @@ class Reservacion extends ConexionMYSql
             LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
             INNER JOIN movimiento ON hab.mov = movimiento.id 
             INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id 
-            LEFT JOIN tarifa_hospedaje ON reservacion.tipo_hab = tarifa_hospedaje.id 
+            LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id 
             INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
             INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
             INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
@@ -1697,7 +1699,7 @@ class Reservacion extends ConexionMYSql
         // } else {
             $sentencia = "SELECT *, huesped.correo as correo_huesped,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM reservacion
-            LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+            LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
             INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
             LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
             INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
@@ -1801,7 +1803,7 @@ class Reservacion extends ConexionMYSql
             if($a_buscar != ' ' && $noexiste_inicio && $noexiste_fin) {
                 $sentencia = "SELECT *,huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
-                LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
                 LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
                 INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
@@ -1810,7 +1812,7 @@ class Reservacion extends ConexionMYSql
             } elseif($a_buscar != ' ' && strlen($fecha_ini) > 0 && strlen($fecha_fin) > 0 && $combinada == 1) {
                 $sentencia = "SELECT *, huesped.correo as correo_huesped,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
-                LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
                 LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
                 INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
@@ -1829,7 +1831,7 @@ class Reservacion extends ConexionMYSql
 
                 $sentencia = "SELECT *, huesped.correo as correo_huesped,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
-                LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
                 LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 			    INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
@@ -1900,7 +1902,7 @@ class Reservacion extends ConexionMYSql
         if($a_buscar != ' ') {
             $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		  FROM reservacion
-          LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+          LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
           LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		  INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 		  INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -1908,7 +1910,7 @@ class Reservacion extends ConexionMYSql
         } else {
             $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		  FROM reservacion
-		  LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+		  LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
           LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		  INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 		  INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -2072,7 +2074,7 @@ class Reservacion extends ConexionMYSql
         }
         $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM reservacion
-            LEFT JOIN tarifa_hospedaje ON reservacion.tipo_hab = tarifa_hospedaje.id 
+            LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id 
             LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
             INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
             INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -2530,7 +2532,7 @@ class Reservacion extends ConexionMYSql
             } else {
                 $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 			FROM reservacion
-            LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+            LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
 		    LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 			INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 			INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -2916,7 +2918,7 @@ class Reservacion extends ConexionMYSql
         $salida= $dia + 86399;
         $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
 		LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
@@ -2944,7 +2946,7 @@ class Reservacion extends ConexionMYSql
 
         $sentencia = "SELECT *, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
-        LEFT JOIN tarifa_hospedaje  ON reservacion.tipo_hab = tarifa_hospedaje.id 
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id

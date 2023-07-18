@@ -142,6 +142,21 @@
         }
         return $id;
       }
-              
+      
+        // Obtener el ultimo cargo noche ingresado 
+        function ultima_insercion_auto(){
+          $sentencia= "SELECT `AUTO_INCREMENT` as id
+          FROM  INFORMATION_SCHEMA.TABLES
+          WHERE TABLE_SCHEMA = 'visit'
+          AND   TABLE_NAME   = 'cargo_noche';";
+          $id= 0;
+          $comentario="Obtener el ultimo cargo noche ingresado";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            $id= $fila['id'];
+          }
+          return $id;
+        }        
   }
 ?>

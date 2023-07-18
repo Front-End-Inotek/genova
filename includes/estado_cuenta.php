@@ -101,7 +101,7 @@
         <div class="row">
           <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span></div>
           <div class="col">Suplementos: <span>'.$suplementos.'</span></div>
-          <div class="col">Acompañante: <span>'.$acompanante.'</span></div>
+          <div class="col"></span></div> 
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
         </div>
         <div class="row">';

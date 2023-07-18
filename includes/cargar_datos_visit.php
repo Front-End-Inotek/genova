@@ -16,9 +16,9 @@ $domingo_pasado =  date("Y-m-d", strtotime("last week sunday"));
 $domingo_pasado=strtotime($domingo_pasado . "+1 day");
 
 //del lunes actual al domingo "entrante"
-$lunes_actual = date('Y-m-d',strtotime("monday"));
+$lunes_actual = date('Y-m-d',strtotime("monday this week"));
 $lunes_actual= strtotime($lunes_actual);
-$domingo_actual =  date("Y-m-d", strtotime("sunday"));
+$domingo_actual =  date("Y-m-d", strtotime("sunday this week"));
 $domingo_actual=strtotime($domingo_actual . "+1 day");
 
 $rango_fechas = $reservacion->date_range($lunes_actual,$domingo_actual);

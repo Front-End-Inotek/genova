@@ -41,7 +41,7 @@ echo '
                 <div class="graficas__card">
                     <div class="card__encabezado">
                         <div>
-                            <p class="card__encabezado-titulo">Ventas</p>
+                            <p class="card__encabezado-titulo">Cargos /</p>
                             <p class="card__encabezado-subtitulo">Ultima semana</p>
                         </div>
                         <p class="card__encabezado-titulo">

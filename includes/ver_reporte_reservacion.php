@@ -95,7 +95,7 @@
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-6">Noches: '.$noches.'</div>
-              <div class="col-sm-5">Tarifa: '.$tarifa.' $'.number_format($costo_tarifa,2).'</div>
+              <div class="col-sm-5">Tarifa: '.$tarifa.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
@@ -109,7 +109,7 @@
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Acompañante: '.$acompanante.'</div>
+              <div class="col-sm-6">Tarifa: '.' $'.number_format($costo_tarifa,2).'</div>
               <div class="col-sm-5">Cantidad Hospedaje: '.$cantidad_hospedaje.'</div>
             </div>
             <div class="row">';
