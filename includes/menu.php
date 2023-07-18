@@ -147,6 +147,10 @@
 			$permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->categoria_ver;
 			if($permisos_inventario>0){
 			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_inventario()"> Agregar </a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_categorias()"> Categorías </a></i></ul>';
+			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_inventario()"> Inventario </a></i></ul>';
 			}
 
