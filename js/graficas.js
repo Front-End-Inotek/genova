@@ -244,7 +244,7 @@ function asignarInfo(info){
 
 function cargarInfoServidor(){
     //Mientras se mantenga la vista de graficas, leera info del server.
-    if(vista !=3){
+    if(localStorage.getItem('vista') !=3){
         clearTimeout(timer_grafica)
         return
     }

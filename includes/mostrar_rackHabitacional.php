@@ -675,7 +675,7 @@ class RackHabitacional extends ConexionMYSql
                     if ($i == 2 && $fila['estado'] != 1 ) {
                         $i = 32;
                     }
-                }
+                }//end data.
             }
             echo '</tr>';
         }
