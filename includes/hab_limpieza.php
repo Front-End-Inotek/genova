@@ -30,13 +30,14 @@
         break;
     //uso casa
     case 8:
-      $nombre_uso = $_POST['nombre'] . " " . $_POST['apellido'];
-      $movimiento->editar_estado_interno($hab->mov,1.3);
-      $movimiento->editar_estado_usocasa($hab->mov,$_POST['usuario_id'],$nombre_uso,$_POST['fecha_entrada'],$_POST['fecha_salida']);
-      $hab->cambiohab($_POST['hab_id'],$hab->mov,8);
-      $logs->guardar_log($_POST['usuario_id'],"Limpiar en habitacion: ". $hab->nombre);
-      die();
-      break;
+        $entrada = strtotime($_POST['fecha_entrada']);
+        $salida = strtotime($_POST['fecha_salida']);
+        $nombre_uso = $_POST['nombre'] . " " . $_POST['apellido'];
+        $id = $movimiento->guardar_usocasa($_POST['hab_id'],$_POST['usuario_id'],$nombre_uso,$entrada,$salida);
+        // $movimiento->editar_estado_usocasa($hab->mov,$_POST['usuario_id'],$nombre_uso,$_POST['fecha_entrada'],$_POST['fecha_salida']);
+        $hab->cambiohab($_POST['hab_id'],$id,8);
+        $logs->guardar_log($_POST['usuario_id'],"Uso casa  en habitacion: ". $hab->nombre);
+        break;
 
     default:
         //echo "Estado indefinido";

@@ -61,7 +61,8 @@
           $mes= $logs->formato_fecha($mes);
           $anio = substr($fecha, 6, 4);
           $nombre= $conf->obtener_nombre();
-          $realizo_usuario= $usuario->obtengo_nombre_completo($_POST['usuario_id']);
+          // $realizo_usuario= $usuario->obtengo_nombre_completo($_POST['usuario_id']);
+          $realizo_usuario="";
 
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
@@ -150,7 +151,7 @@
   $pdf->SetTextColor(0,0,0);
   $consulta = $hab->datos_auditoria();
 
-  
+  $NX =0;
   // Revisamos el total de cargo por habitacion
   while ($fila = mysqli_fetch_array($consulta))
   {
@@ -182,10 +183,8 @@
     $nombre_tarifa = $id_tarifa != 0 ? $nombre_tarifa : "Forzar tarifa";
 
 
-  
-
     $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
-    $pdf->Cell(50,5,iconv("UTF-8", "ISO-8859-1",$nombre_tarifa),1,0,'C');
+    $pdf->Cell(50,5,iconv("UTF-8", "ISO-8859-1",$total),1,0,'C');
     // $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$precio_tarifa),1,0,'C'); 
     $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_adulto),1,0,'C');
     // $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$nohabs),1,0,'C');
@@ -236,8 +235,8 @@
   }
 
   $pdf->SetFont('Arial','',10);
-  $numero_actual= $cargo_noche->ultima_insercion();
-  $numero_actual++;
+  $numero_actual= $cargo_noche->ultima_insercion_auto();
+  // $numero_actual++;
   $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
 
   // Luego de guardar el reporte se cambia el estado cargo noche de todas las habitaciones a 0

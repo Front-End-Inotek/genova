@@ -130,7 +130,7 @@ const ventas = document.querySelector("#ventas");
 const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 
 const datosVentas2020 = {
-    label: "Ventas hospedaje",
+    label: "Cargos",
     data: datos_ventas,
     backgroundColor: "#00D27A",
     borderColor: "#00D27A",
@@ -138,7 +138,7 @@ const datosVentas2020 = {
 };
 
 const datosVentas2021 = {
-    label: "Ventas restaurant",
+    label: "Abonos",
     data: datos_ventas_rest,
     backgroundColor: "rgba(84,183,245,1)",
     borderColor: "rgba(84,183,245,1)",

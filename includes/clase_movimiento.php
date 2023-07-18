@@ -369,6 +369,16 @@
         $id= $this->ultima_insercion();
         return $id;
       }
+      function guardar_usocasa($mov,$usuario_id,$nombre_uso,$fecha_entrada,$fecha_salida){
+        $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `id_mesa`, `personas`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `tarifa`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`,persona_uso)
+        VALUES ('$hab_id', '0', '0', '0', '0', '0', '0', '$fecha_entrada', '$fecha_salida', '$usuario_id', '0', '0', '0', '0', '0', '0', '0', 'limpiar', '', 'sin estado', '$nombre_uso');";
+        $comentario="Agregar uso casa  en la habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        $id= $this->ultima_insercion();
+        return $id;
+      }
+
       // Agregar una habitacion en estado limpieza
       function guardar_limpieza($hab_id,$usuario_id,$usuario){
         $fecha_entrada= time();

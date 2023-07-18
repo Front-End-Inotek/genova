@@ -95,6 +95,7 @@ function sabernosession(){
                 console.log("rack de habitaciones "+vista);
                 var usuario_id=localStorage.getItem("id");
                 $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+                siguiente_vista=1
             }
             if(vista==1){
                 console.log("rack de operaciones "+vista);
@@ -1096,6 +1097,12 @@ function guardar_tarifa(){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
+    console.log(precio_hospedaje.length)
+    if(precio_hospedaje.length > 15){
+        swal("Campo precio_hospedaje demasiado grande!", "El campo no debe superar los 15 caracteres!", "warning");
+        return false;
+    }
+
     if(precio_hospedaje === null || precio_hospedaje === ''){
         swal("Campo precio_hospedaje vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -2182,7 +2189,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "estado_credito":estado_credito,
         "limite_credito":limite_credito,
       };
-    //console.log(datos)
+    // console.log(datos)
     // return
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
         // return ;
@@ -3840,35 +3847,7 @@ function cargo_noche(){
     return false;
 }
 
-// Aceptar el cargo noche de las habitaciones seleccionadas
-function cargo_auditoria(){
-    var usuario_id=localStorage.getItem("id");
-    $('#caja_herramientas').modal('hide');
 
-    var datos = {
-            "usuario_id": usuario_id,
-        };
-    $.ajax({
-            async:true,
-            type: "POST",
-            dataType: "html",
-            contentType: "application/x-www-form-urlencoded",
-            url:"includes/cargo_auditoria.php",
-            data:datos,
-            beforeSend:loaderbar,
-            success:function(res){
-                console.log(res)
-                principal()
-            },
-            //success:problemas_sistema,
-            timeout:5000,
-            error:problemas_sistema
-        });
-    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
-    //guardar_reporte_cargo_noche();
-    mostrar_cargo_noche_reporte();
-    return false;
-}
 
 // Generar reporte de cargo noche y guardarlo
 function guardar_reporte_cargo_noche(){
@@ -4809,64 +4788,96 @@ function confirmar_cambiar_cargos(){
         });
     }
 
-
-function campos_cargos(){
+    function campos_cargos(){
     
-    var usuario_id=localStorage.getItem("id");
-    var array_cargos=[];
-
-    var cargos= document.getElementsByClassName('campos_cargos')
-
-    var campos_habs = document.getElementsByClassName('campos_habs')
-
-    for (var i = 0; i < cargos.length; i++) {
-        // var tarifa=0;
-
-         if(cargos[i].value=="" && campos_habs[i].checked){
-            array_cargos.push({
-                "reservaid":cargos[i].dataset.reservaid,
-                "valor":0,
-                }) 
+        var usuario_id=localStorage.getItem("id");
+        var array_cargos=[];
+    
+        var cargos= document.getElementsByClassName('campos_cargos')
+    
+        var campos_habs = document.getElementsByClassName('campos_habs')
+    
+        for (var i = 0; i < cargos.length; i++) {
+            // var tarifa=0;
+    
+             if(cargos[i].value=="" && campos_habs[i].checked){
+                array_cargos.push({
+                    "reservaid":cargos[i].dataset.reservaid,
+                    "valor":0,
+                    }) 
+            }
+            if(cargos[i].value!="" && campos_habs[i].checked){
+                array_cargos.push({
+                    "reservaid":cargos[i].dataset.reservaid,
+                    "valor": cargos[i].value,
+                    }) 
+            }
         }
-        if(cargos[i].value!="" && campos_habs[i].checked){
-            array_cargos.push({
-                "reservaid":cargos[i].dataset.reservaid,
-                "valor": cargos[i].value,
-                }) 
+        // console.log(array_cargos)
+    
+        // return
+        if(array_cargos.length!=0){
+            var datos = {
+                "datos_cargos": JSON.stringify(array_cargos),
+                "usuario_id": usuario_id,
+              };
+            $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/aplicar_editar_herramientas_cargos.php",
+                data:datos,
+                //beforeSend:loaderbar,
+                success:function(res){
+                    console.log(res)
+                    cargo_auditoria()
+                    
+                    //ver_auditoria()
+                },
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
+              });
         }
+    
+    
+    
+        return false;
     }
-    // console.log(array_cargos)
 
-    // return
-    if(array_cargos.length!=0){
-        var datos = {
-            "datos_cargos": JSON.stringify(array_cargos),
+// Aceptar el cargo noche de las habitaciones seleccionadas
+function cargo_auditoria(){
+    var usuario_id=localStorage.getItem("id");
+    $('#caja_herramientas').modal('hide');
+
+    var datos = {
             "usuario_id": usuario_id,
-          };
-        $.ajax({
+        };
+    $.ajax({
             async:true,
             type: "POST",
             dataType: "html",
             contentType: "application/x-www-form-urlencoded",
-            url:"includes/aplicar_editar_herramientas_cargos.php",
+            url:"includes/cargo_auditoria.php",
             data:datos,
-            //beforeSend:loaderbar,
+            beforeSend:loaderbar,
             success:function(res){
                 console.log(res)
-                cargo_auditoria()
+                mostrar_cargo_noche_reporte();
+                principal()
                 
-                //ver_auditoria()
             },
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
-          });
-    }
-
-
-
+        });
+    //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
+    //guardar_reporte_cargo_noche();
+   
     return false;
 }
+
 
 
 // Editar un cargo en estado de cuenta desde auditoria.
@@ -7412,7 +7423,10 @@ function hab_desocupar(hab_id,estado, ver =0){
 		  "hab_id": hab_id,
 		  "estado": estado,
           "usuario_id": usuario_id,
+          "ver":ver,
 		};
+        // console.log(datos)
+        // return
     $.ajax({
           async:true,
           type: "POST",
@@ -7423,7 +7437,7 @@ function hab_desocupar(hab_id,estado, ver =0){
           beforeSend:loaderbar,
           success:function(){
             if(ver==0){
-                window.open("includes/imprimir_estado_cuenta.php?id="+hab_id);
+                window.open("includes/imprimir_estado_cuenta2.php?id="+hab_id);
             }
             principal()
           },

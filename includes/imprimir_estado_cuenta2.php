@@ -119,6 +119,7 @@ while ($fila = mysqli_fetch_array($consulta)) {
     $noches= $fila['noches'];
     $numero_hab= $fila['numero_hab'];
     $tarifa= $fila['habitacion'];
+    $tarifa = number_format($fila['total'],2);
     $precio_hospedaje= $fila['precio_hospedaje'];
     $extra_adulto= $fila['extra_adulto'];
     $extra_junior= $fila['extra_junior'];
@@ -180,7 +181,7 @@ $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Noches: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $noches), 0, 0, 'L');
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Tarifa: '), 0, 0, 'L');
+$pdf->Cell(20, 5, iconv("UTF-8", "ISO-8859-1", 'Tarifa: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $tarifa), 0, 0, 'L');
 $pdf->Ln(10);

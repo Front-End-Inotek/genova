@@ -238,13 +238,15 @@ class RackHabitacional extends ConexionMYSql
         ';
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
+            $hab_nombre =$fila['nombre'];
+            $hab_nombre = strlen($hab_nombre) > 13 ? substr($hab_nombre,0,12)."..." : $hab_nombre;
             echo '
                 <tr id="hab_'.$fila['id'].'" >
                     <td class="cal-userinfo">
             ';
             echo 'Habitación ';
             if ($fila['id'] < 100) {
-                echo $fila['nombre'];
+                echo $hab_nombre;
             } else {
                 echo $fila['comentario'];
             }

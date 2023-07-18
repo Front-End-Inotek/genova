@@ -17,7 +17,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Numero </span>
                 </div>
-                  <input type="text" id="nombre" name ="nombre" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input  type="text" id="nombre" name ="nombre" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
