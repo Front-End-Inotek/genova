@@ -26,10 +26,13 @@
 			</label>
 			</div>
 			</div>';
-			echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
-			<i class="bx bxs-chart text-secondary" ></i>
-			<span class="mx-2" onclick="graficas()"> Estadística </span>
-			</li>';
+			if($usuario->nivel==0){
+				echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
+				<i class="bx bxs-chart text-secondary" ></i>
+				<span class="mx-2" onclick="graficas()"> Estadística </span>
+				</li>';
+			}
+
 			echo '
 			<li href="#" onclick="showMenu(1)" class="nav-link">
 			<i class="bx bx-desktop text-secondary"></i>

@@ -25,7 +25,7 @@ function show_info($hab_id,$estado){
 
 			case 1:
 				echo 'Ocupado';
-				
+
 			break;
 
 			case 2:

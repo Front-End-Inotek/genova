@@ -1060,9 +1060,7 @@ class Reservacion extends ConexionMYSql
 			<th>Forma Pago</th>
 			<th>Límite Pago</th>
 			<th>Status</th>';
-        if($agregar==1 && $fila['edo'] = 1) {
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
-        }
         //preasignar.
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
 
@@ -1174,9 +1172,7 @@ class Reservacion extends ConexionMYSql
 			<th>Forma Pago</th>
 			<th>Límite Pago</th>
 			<th>Status</th>';
-        if($agregar==1 && $fila['edo'] = 1) {
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
-        }
         //preasignar.
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
 
@@ -1512,12 +1508,8 @@ class Reservacion extends ConexionMYSql
 			<th>Forma Pago</th>
 			<th>Límite Pago</th>
 			<th>Status</th>';
-        if($agregar==1 && $fila['edo'] = 1) {
-            echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
-        }
-        //preasignar.
+        echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
-
 
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
         if($editar==1 && $fila['edo'] = 1) {
@@ -1645,9 +1637,7 @@ class Reservacion extends ConexionMYSql
 				<th>Forma Pago</th>
 				<th>Límite Pago</th>
 				<th>Status</th>';
-        if($agregar==1 && $fila['edo'] = 1) {
-            echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
-        }
+        echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
         if($editar==1 && $fila['edo'] = 1) {
@@ -1738,9 +1728,7 @@ class Reservacion extends ConexionMYSql
 				<th>Forma Pago</th>
 				<th>Límite Pago</th>
 				<th>Status</th>';
-            if($agregar==1 && $fila['edo'] = 1) {
-                echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
-            }
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
             if($editar==1 && $fila['edo'] = 1) {
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -1866,9 +1854,7 @@ class Reservacion extends ConexionMYSql
 			  <th>Forma Pago</th>
 			  <th>Límite Pago</th>
 			  <th>Status</th>';
-            if($agregar==1 && $fila['edo'] = 1) {
-                echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
-            }
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
 
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';

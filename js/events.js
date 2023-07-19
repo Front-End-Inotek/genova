@@ -65,7 +65,13 @@ function recibir(datos){
 	if(res[1]!="0"){
 		localStorage.setItem("id",res[0]);
 		localStorage.setItem("tocken",res[1]);
-        localStorage.setItem('vista',3);
+
+        if(res[2]==0){
+            localStorage.setItem('vista',3);
+        }else{
+            localStorage.setItem('vista',0);
+        }
+
 		document.location.href='inicio.php';
 	}else{
 		$("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-warning"><span class="glyphicon glyphicon-remove"></span> Creo que has escrito mal tu usuario o contraseña </strong>');
@@ -1430,7 +1436,7 @@ function modificar_hab(id){
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_hab()
-                swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
+                swal("Datos de habitación actualizados!", "Excelente trabajo!", "success");
                 return false;
             }else if(e.target.responseText == 'NO_valido'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
@@ -1542,10 +1548,11 @@ function agregar_reservaciones(hab_id=0){
 	closeNav();
 }
 function graficas(){
+    var usuario_id=localStorage.getItem("id");
     localStorage.setItem('vista',3)
     $('#area_trabajo').hide();
     $('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/graficas.php?");
+	$("#area_trabajo_menu").load("includes/graficas.php?usuario_id="+usuario_id);
     closeModal();
     closeNav();
 }

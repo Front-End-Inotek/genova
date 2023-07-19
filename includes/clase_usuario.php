@@ -349,7 +349,7 @@
         include_once("clase_log.php");
         $logs = NEW Log(0);
         $id=0;
-        $sentencia = "SELECT id FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$password_evaluar' AND estado = 1";
+        $sentencia = "SELECT id,nivel FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$password_evaluar' AND estado = 1";
         $comentario="Obtenemos el usuario y contraseña de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       
@@ -357,10 +357,11 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           $id= $fila['id'];
+          $nivel =$fila['nivel'];
           // Guardamos logs de inicio de session
           $logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
         }
-        return $id;
+        return [$id,$nivel];
       }
       // Guardar el token
       function guardar_token($token,$usuario){

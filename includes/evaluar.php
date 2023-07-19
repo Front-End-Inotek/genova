@@ -6,9 +6,10 @@
   $password =md5($_POST["password"]); 
   $users = NEW Usuario(0);
   // se evalua si existe y son validas las credenciales
-  $id=$users->evaluarEntrada($usuario,$password);
-  
 
+  $entrada = $users->evaluarEntrada($usuario,$password);
+  $id=$entrada[0];
+  $nivel=$entrada[1];
   if($id>0){
     session_start();
     $_SESSION['auth']=true;
@@ -16,7 +17,6 @@
     /*
     $existe_token = $users->evaluarToken($id);
     if($existe_token>0){
-      
     }else{*/
       $timepo = time();
       $token = hash('sha256', $timepo.$usuario.$password);
@@ -24,5 +24,5 @@
     /*}*/
   }
 
-  echo $id.'-'.$token;
+  echo $id.'-'.$token."-".$nivel;
 ?>
