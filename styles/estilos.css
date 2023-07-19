@@ -271,6 +271,11 @@ label {
   min-width: 1000px;
   /* font-size: 1.1rem; */
 }
+@media (max-width: 1000px){
+  .modal-dialog{
+    min-width: fit-content;
+  }
+}
 
 .blanco {
   position: relative;

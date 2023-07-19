@@ -282,7 +282,7 @@ span {
 .nav{
   flex-wrap: nowrap;
   overflow-y: auto;
-  height: 91vh;
+  max-height: 91vh;
 }
 
 /*********************************/
