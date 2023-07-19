@@ -87,7 +87,7 @@ function sabernosession(){
 		document.location.href='index.php';
 	}else{
 		id=parseInt(id);
-        console.log(vista)
+        // console.log(vista)
         // return
 		if(id>0){
             obtener_datos_hab_inicial ();
@@ -123,7 +123,7 @@ function obtener_datos_hab() {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          //console.log(this.responseText);
+        // console.log(this.responseText);
         const hab_info =JSON.parse(this.responseText);
           //console.log(hab_info);
         var i;
@@ -349,7 +349,6 @@ function guardar_cargo_adicional(id,mov){
         swal("Campo monto vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-    console.log(nombre,monto)
     aplicar_rest_cobro_hab(monto, 0,0,mov,nombre,id)
 }
 
@@ -1813,8 +1812,8 @@ function obtener_garantia(event=null){
     garantia_id = $("#forma-garantia").val()
     if(event!=0){
         var garantia = event.target.options[event.target.selectedIndex].dataset.garantia;
-        console.log(garantia)
-        if(garantia!=undefined && garantia == 1){
+        var efectivo = event.target.options[event.target.selectedIndex].text
+        if(garantia!=undefined && garantia == 1 && (efectivo.toLowerCase() !="efectivo")){
             $("#div_voucher").show();
             $("#voucher").attr("required",true)
         }else{
@@ -2136,6 +2135,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var tarifa_existe = 0;
     if($("#forzar-tarifa").val()==""){
         tarifa_existe = tarifa;
+        forzar_tarifa=0;
     }else{
         tarifa_existe=forzar_tarifa;
         total_hospedaje = forzar_tarifa
@@ -6234,7 +6234,8 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
         "motivo":motivo,
         "id_maestra":id_maestra,
     };
-    //console.log(datos)
+    // console.log(datos)
+    // return
     $.ajax({
         async:true,
         type: "POST",
@@ -6890,7 +6891,7 @@ function hacer_cortes(usuario){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php");
+        $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php?usuario_id="+usuario_id);
         closeNav();
         
     }else{

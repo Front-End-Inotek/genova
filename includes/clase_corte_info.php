@@ -11,6 +11,7 @@
 	public $total_personas;
 	public $cantidad_hab;
 	public $total_hab;
+	public $total_cuenta_maestra;
 	public $total_productos;
 	public $total_restaurante;
 	public $total_restaurante_entrada;
@@ -35,6 +36,7 @@
 	  $contador= 0;
 	  $cantidad_hab= 0;
 	  $total_hab= 0;
+	  $total_cuenta_maestra=0;
 	  $sentencia = "SELECT *, sum(concepto.precio), tipo_hab.nombre as titulo, tipo_hab.id as ID
 	  from 
 	  hab 
@@ -56,6 +58,7 @@
 	  }
 	  $cantidad_hab= $this->cantidad_hab= $this->cantidad_habitaciones($id_usuario);
 	  $total_hab= $this->total_hab= $this->total_habitaciones($id_usuario);
+	  $total_cuenta_maestra = $this->total_cuenta_maestra = $this->total_cuenta_maestra($id_usuario);
 	  $total_restaurante_entrada= $this->total_restaurante_entrada= $this->total_restaurante_entrada($id_usuario);
 
 	  // Obtenemos el total de personas extra
@@ -333,10 +336,29 @@
 	  }
 	  return $cantidad;
 	}
+
+	// Obtener el total del hospedaje
+	function total_cuenta_maestra($id_usuario){
+		$total=0;
+		$sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 3 AND activo = 1 AND categoria=0";
+		$comentario="Obtener el total del de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta))
+		{
+			$total=$fila['total'];
+		}
+		if($total>0){
+  
+		}else{ 
+			$total=0;
+		}
+		return $total;
+	}
+
 	// Obtener el total del hospedaje
 	function total_habitaciones($id_usuario){
 		$total=0;
-		$sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 3 AND activo = 1";
+		$sentencia = "SELECT SUM(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 3 AND activo = 1 AND categoria!=0";
 		$comentario="Obtener el total del de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))

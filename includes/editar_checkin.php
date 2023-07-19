@@ -296,7 +296,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
                     <label for="forma-garantia">Forma de Garantía</label>
-                    <select class="form-control" id="forma-garantia" required>
+                    <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)">
                     <option value="">Seleccione una opción </option>
                     ';
                     $forma_pago->mostrar_forma_pago($huesped->tipo_tarjeta);

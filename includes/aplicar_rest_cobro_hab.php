@@ -85,22 +85,17 @@
     }
   }
 
+  $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
+  $pedido->cambiar_estado_pedido_hab($_POST['hab_id'],$_POST['mov']);
+  $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
+
   //si no hay motivo, se trata de restaurante y por lo tanto si se debe cambiar el estado del pedido.
-  if($descripcion=="Restaurante"){
-    $pedido_rest->cambiar_estado_pedido_cobro($_POST['mov'],$pagado);
-    $pedido->cambiar_estado_pedido_hab($_POST['hab'],$_POST['mov']);
-    $pedido->cambiar_estado($id_pedido);// Se imprime la comanda
-    if($_POST['id_maestra']!=0){
+  if($_POST['id_maestra']!=0){
       require_once('clase_cuenta_maestra.php');
       $cm = new CuentaMaestra($_POST['id_maestra']);
       $hab_nombre = $cm->nombre;
       $mensaje_log = "Cargo de cobro ".$descripcion." en cuenta maestra: ". $hab_nombre;
-    }
-  }else{
-    require_once('clase_cuenta_maestra.php');
-    $cm = new CuentaMaestra($_POST['id_maestra']);
-    $hab_nombre = $cm->nombre;
-    $mensaje_log = "Cargo de cobro ".$descripcion." en cuenta maestra: ". $hab_nombre;
+    
   }
   $cargo= $_POST['total'];
   $cuenta->guardar_cuenta($_POST['usuario_id'],$_POST['mov'],$descripcion,$forma_pago,$cargo,0);

@@ -4,6 +4,7 @@
   include_once('clase_log.php');
   $movimiento = NEW Movimiento(0);
   $hab = NEW Hab($_POST['hab_id']);
+  $hab->cambiohabUltimo($hab->id);
   $logs = NEW Log(0);
   $movimiento->editar_detalle_inicio($hab->mov);
   $movimiento->editar_estado_interno($hab->mov,1.1);

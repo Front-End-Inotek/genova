@@ -878,7 +878,7 @@ class Reservacion extends ConexionMYSql
                             <th>Total Estancia</th>
                             <th>Total Pago</th>
                             <th>Forma Pago</th>
-                            <th>Límite Pago</th>
+                            <!-- <th>Límite Pago</th> --->
                             <th>Status</th>';
         echo '</tr>
                     </thead>
@@ -914,7 +914,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Abierta</td>';
                         echo '</tr>';
                     } else {
@@ -941,7 +941,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Garantizada</td>';
                         echo '</tr>';
                     }
@@ -969,7 +969,7 @@ class Reservacion extends ConexionMYSql
                     }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                     echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                    // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                     echo '<td>Activa</td>';
                     echo '</tr>';
                 }
@@ -1058,7 +1058,7 @@ class Reservacion extends ConexionMYSql
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
 			<th>Forma Pago</th>
-			<th>Límite Pago</th>
+			<!-- <th>Límite Pago</th> --->
 			<th>Status</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         //preasignar.
@@ -1170,7 +1170,7 @@ class Reservacion extends ConexionMYSql
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
 			<th>Forma Pago</th>
-			<th>Límite Pago</th>
+			<!-- <th>Límite Pago</th> --->
 			<th>Status</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         //preasignar.
@@ -1248,7 +1248,7 @@ class Reservacion extends ConexionMYSql
                 }
                 echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                 echo '<td>'.$fila['descripcion'].'</td>';
-                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                 echo '<td>Abierta</td>';
                 //  echo date('Y-m-d', $fila['fecha_entrada']) . "/" . date('Y-m-d', $inicio_dia);
                 // die();
@@ -1305,7 +1305,7 @@ class Reservacion extends ConexionMYSql
                 }
                 echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                 echo '<td>'.$fila['descripcion'].'</td>';
-                echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                 echo '<td>Garantizada</td>';
                 if($agregar==1 && $fila['edo'] = 1) {
                     echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
@@ -1361,7 +1361,7 @@ class Reservacion extends ConexionMYSql
             }
             echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
             echo '<td>'.$fila['descripcion'].'</td>';
-            echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+            // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
             echo '<td>Activa</td>';
             //no se puede hacer chekin en estado 2.
             echo '<td></td>';
@@ -1506,7 +1506,7 @@ class Reservacion extends ConexionMYSql
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
 			<th>Forma Pago</th>
-			<th>Límite Pago</th>
+			<!-- <th>Límite Pago</th> --->
 			<th>Status</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
@@ -1635,7 +1635,7 @@ class Reservacion extends ConexionMYSql
 				<th>Total Estancia</th>
 				<th>Total Pago</th>
 				<th>Forma Pago</th>
-				<th>Límite Pago</th>
+				<!-- <th>Límite Pago</th> --->
 				<th>Status</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
@@ -1726,7 +1726,7 @@ class Reservacion extends ConexionMYSql
 				<th>Total Estancia</th>
 				<th>Total Pago</th>
 				<th>Forma Pago</th>
-				<th>Límite Pago</th>
+				<!-- <th>Límite Pago</th> --->
 				<th>Status</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
@@ -1852,7 +1852,7 @@ class Reservacion extends ConexionMYSql
 			  <th>Total Estancia</th>
 			  <th>Total Pago</th>
 			  <th>Forma Pago</th>
-			  <th>Límite Pago</th>
+			  <!-- <th>Límite Pago</th> --->
 			  <th>Status</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
@@ -2097,7 +2097,7 @@ class Reservacion extends ConexionMYSql
                 <th>Total Estancia</th>
                 <th>Total Pago</th>
                 <th>Forma Pago</th>
-                <th>Límite Pago</th>
+                <!-- <th>Límite Pago</th> --->
                 <th>Status</th>';
         echo '</tr>
               </thead>
@@ -2134,7 +2134,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Abierta</td>';
                         echo '</tr>';
                     } else {
@@ -2161,7 +2161,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Garantizada</td>';
                         echo '</tr>';
                     }
@@ -2189,7 +2189,7 @@ class Reservacion extends ConexionMYSql
                     }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                     echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                    // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                     echo '<td>Activa</td>';
                     echo '</tr>';
                 }
@@ -2256,7 +2256,7 @@ class Reservacion extends ConexionMYSql
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
 			<th>Forma Pago</th>
-			<th>Límite Pago</th>
+			<!-- <th>Límite Pago</th> --->
 			<th>Status</th>';
         echo '</tr>
 		  </thead>
@@ -2287,7 +2287,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Abierta</td>';
                         echo '</tr>';
                     } else {
@@ -2313,7 +2313,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Garantizada</td>';
                         echo '</tr>';
                     }
@@ -2340,7 +2340,7 @@ class Reservacion extends ConexionMYSql
                     }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                     echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                    // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                     echo '<td>Activa</td>';
                     echo '</tr>';
                 }
@@ -2395,7 +2395,7 @@ class Reservacion extends ConexionMYSql
 				<th>Total Estancia</th>
 				<th>Total Pago</th>
 				<th>Forma Pago</th>
-				<th>Límite Pago</th>
+				<!-- <th>Límite Pago</th> --->
 				<th>Status</th>';
             echo '</tr>
 			  </thead>
@@ -2425,7 +2425,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Abierta</td>';
                         echo '</tr>';
                     } else {
@@ -2451,7 +2451,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Garantizada</td>';
                         echo '</tr>';
                     }
@@ -2478,7 +2478,7 @@ class Reservacion extends ConexionMYSql
                     }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                     echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                    // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                     echo '<td>Activa</td>';
                     echo '</tr>';
                 }
@@ -2551,7 +2551,7 @@ class Reservacion extends ConexionMYSql
 			  <th>Total Estancia</th>
 			  <th>Total Pago</th>
 			  <th>Forma Pago</th>
-			  <th>Límite Pago</th>
+			  <!-- <th>Límite Pago</th> --->
 			  <th>Status</th>';
             echo '</tr>
 			</thead>
@@ -2581,7 +2581,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Abierta</td>';
                         echo '</tr>';
                     } else {
@@ -2607,7 +2607,7 @@ class Reservacion extends ConexionMYSql
                         }
                         echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                         echo '<td>'.$fila['descripcion'].'</td>';
-                        echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                        // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Garantizada</td>';
                         echo '</tr>';
                     }
@@ -2634,7 +2634,7 @@ class Reservacion extends ConexionMYSql
                     }
                     echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
                     echo '<td>'.$fila['descripcion'].'</td>';
-                    echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                    // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                     echo '<td>Activa</td>';
                     echo '</tr>';
                 }

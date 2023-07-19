@@ -10,7 +10,7 @@
   /*$ticket_inicial= $ticket->ticket_ini();
   $ticket_final= $ticket->ticket_fin();
   $inf= NEW Corte_info($ticket_inicial,$ticket_final);*/
-  $inf= NEW Corte_info();
+  $inf= NEW Corte_info($_GET['usuario_id']);
   $total_cuartos_hospedaje= 0;
   $suma_cuartos_hospedaje= 0; 
   $total_cuartos= 0;

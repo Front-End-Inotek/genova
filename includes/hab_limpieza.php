@@ -20,6 +20,7 @@
         $motivo= 0;// No se cambia el motivo, manteniendo el motivo de reservar
         $movimiento->editar_estado_interno($hab->mov,1.2);
         $movimiento->editar_estado_limpieza($hab->mov,$_POST['usuario_id'],$_POST['usuario'],$motivo);
+        $hab->cambiohabUltimo($hab->id);
         $logs->guardar_log($_POST['usuario_id'],"Habitacion ocupada limpieza: ". $hab->nombre);
         break;
     case 2:// En habitacion sucia-edo.2 

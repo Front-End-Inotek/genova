@@ -164,7 +164,7 @@ while($fila=mysqli_fetch_array($consulta)) {
           $pdf->Cell(40, 5, number_format($total_cargos, 2), 0, 1, 'C');
           $total_cargos=0;
         }
-    $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1","Cuenta maestra: ".  $fila['maestra_nombre']), 0, 0, 'C');
+    $pdf->Cell(60, 5, iconv("UTF-8", "ISO-8859-1","Cuenta maestra: ".  $fila['maestra_nombre']), 0, 0, 'C');
     $pdf->Cell(40, 5,'');
     $pdf->Cell(35, 5, '', 0, 0, 'C');
     $pdf->Cell(40, 5,'', 0, 0, 'C');
@@ -258,7 +258,7 @@ while($fila=mysqli_fetch_array($consulta)) {
           $pdf->Cell(40, 5, number_format($total_abonos, 2), 0, 1, 'C');
           $total_abonos=0;
         }
-    $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1","Cuenta maestra: ".  $fila['maestra_nombre']), 0, 0, 'C');
+    $pdf->Cell(60, 5, iconv("UTF-8", "ISO-8859-1","Cuenta maestra: ".  $fila['maestra_nombre']), 0, 0, 'C');
     $pdf->Cell(40, 5,'');
     $pdf->Cell(35, 5, '', 0, 0, 'C');
     $pdf->Cell(40, 5,'', 0, 0, 'C');

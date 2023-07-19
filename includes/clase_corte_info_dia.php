@@ -30,7 +30,7 @@
 
 
 	// Constructor
-	function __construct()
+	function __construct($id_usuario)
 	{
 	  // Obtenemos el total del hospedaje
 	  $contador= 0;
@@ -50,12 +50,12 @@
 	  {
 		  $this->hab_tipo_hospedaje[$contador]= $fila['titulo'];
 		//   $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
-		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($fila['ID']);
-		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($fila['ID']);
+		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($id_usuario,$fila['ID']);
+		  $this->hab_total_hospedaje[$contador]= $this->total_hospe($id_usuario,$fila['ID']);
 		  $contador++;
 	  }
 	  $cantidad_hab= $this->cantidad_hab= $this->cantidad_habitaciones();
-	  $total_hab= $this->total_hab= $this->total_habitaciones();
+	  $total_hab= $this->total_hab= $this->total_habitaciones($id_usuario);
 	  $total_restaurante_entrada= $this->total_restaurante_entrada= $this->total_restaurante_entrada();
 
 	  // Obtenemos el total de personas extra
@@ -107,9 +107,9 @@
 	  $dinero_descuento= 0;
       $hoy = date('Y-m-d');
 	  $sentencia = "SELECT * FROM ticket
-	
        WHERE (pago > 0  OR monto > 0) AND (ticket.estado = 0 OR ticket.estado != 2)
        AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+	   AND ticket.id_usuario =$id_usuario
 	   ";//1 
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
 		// echo $sentencia;
@@ -206,7 +206,7 @@
 
 	}
 	// Obtenemos la cantidad del hospedaje
-	function cantidad_hospedaje($tipo){
+	function cantidad_hospedaje($id_usuario,$tipo){
 	  $total=0;
       $hoy = date('Y-m-d');
 	  $sentencia = "SELECT *,SUM(cantidad) AS total 
@@ -215,6 +215,7 @@
 	 
 	  INNER JOIN hab ON concepto.categoria = hab.id WHERE hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3
       AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+	  AND concepto.id_usuario=$id_usuario
 
       ";
 
@@ -234,7 +235,7 @@
 	  return $total;
 	}
 	// Obtenemos el total del hospedaje
-	function total_hospe($tipo){
+	function total_hospe($id_usuario,$tipo){
       $hoy = date('Y-m-d');
 	  $total=0;
 	  $sentencia = "SELECT SUM(concepto.total) AS total 
@@ -243,7 +244,7 @@
 	  
 	  INNER JOIN hab ON concepto.categoria = hab.id WHERE  hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3
       AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
-	 
+	  AND concepto.id_usuario=$id_usuario
       ";
 	  $comentario="Obtener el total del  de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -351,15 +352,15 @@
 	  return $cantidad;
 	}
 	// Obtener el total del hospedaje
-	function total_habitaciones(){
+	function total_habitaciones($id_usuario){
 		$total=0;
         $hoy = date('Y-m-d');
 		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto
         INNER JOIN ticket ON concepto.id_ticket =  ticket.id
-		
         WHERE  tipo_cargo = 3 AND activo = 1
         AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
-		
+		AND categoria!=0
+		AND concepto.id_usuario = $id_usuario
 		";
         // echo $sentencia;
 		$comentario="Obtener el total del de hospedaje";
@@ -796,7 +797,8 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 	function total_hospe($id_ini, $id_fin,$tarifa){
 
 		$total=0;
-		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 1 AND concepto.categoria = $tarifa AND concepto.activo = 1;";
+		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 1 AND concepto.categoria = $tarifa 
+		AND concepto.activo = 1;";
 		//echo $sentencia;
 		$comentario="Obtener el total del  de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);

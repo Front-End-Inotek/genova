@@ -69,7 +69,7 @@
                     }
                     if($fila['forzar_tarifa']>0){
                             $total_estancia= '$'.number_format($fila['forzar_tarifa'], 2);
-                            $precio_hospedaje = "tarifa forzada:" . $fila['forzar_tarifa'];
+                            $precio_hospedaje = "tarifa forzada: " . number_format($fila['forzar_tarifa'],2);
                     }else{
                             $total_estancia= '$'.number_format($fila['total'], 2);
                     }
