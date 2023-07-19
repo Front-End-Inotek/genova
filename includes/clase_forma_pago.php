@@ -33,7 +33,7 @@
     // Guardar una forma de pago
     function guardar_forma_pago($descripcion,$garantia){
       $sentencia = "INSERT INTO `forma_pago` (`descripcion`, `estado`, `garantia`)
-      VALUES ('$descripcion', '1','$garantia');";
+      VALUES ('$descripcion', '1',$garantia);";
       $comentario="Guardamos la forma de pago en la base de datos";
       $consulta= $this->realizaConsulta($sentencia,$comentario);                 
     }
@@ -109,7 +109,7 @@
               if($fila['garantia']){
                 echo '<td><i style="font-size:2em;" class="bx bx-check-circle"></i></td>';
               }else{
-                echo '<td><i style="font-size:2em;" class="bx bx-check-circle"></i></td>'; 
+                echo '<td><i style="font-size:2em;" class="bx bx-x-circle"></i></td>'; 
               }
 
               if($editar==1){

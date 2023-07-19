@@ -807,7 +807,7 @@ function modificar_tipo(id){
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_tipos()
-                swal("Actualizo tipo de habitacion!", "Excelente trabajo!", "success");
+                swal("Actualizó tipo de habitación!", "Excelente trabajo!", "success");
             }else if (e.target.response == 'NO_valido'){
                 swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
             }else{
@@ -1034,8 +1034,8 @@ function borrar_tipo(id, nombre, codigo ){
     var xhttp;
     xhttp = new XMLHttpRequest();
     swal({
-        title: "Antes de continuar por favor verifique datos de la habitacion a eliminar",
-        text: "Antes de continuar por favor verifique datos de la habitacion a eliminar ",
+        title: "Antes de continuar por favor verifique los datos del tipo de habitación a eliminar",
+        text: "Antes de continuar por favor verifique  los datos del tipo de habitación a eliminar ",
         content: tabla,
         icon: "warning",
         buttons: true,
@@ -1463,7 +1463,6 @@ function borrar_hab(ID, nom, habitacion, comentario){
         <tr>
         <td>Id</td>
         <td>Nombre</td>
-        <td>Precio</td>
         <td>Tipo Habitacion</td>
         </tr>
         <tr>
@@ -1477,8 +1476,8 @@ function borrar_hab(ID, nom, habitacion, comentario){
     let xhttp;
     xhttp = new XMLHttpRequest();
     swal({
-        title: "Antes de continuar por favor verifique datos de la tarifa a eliminar",
-        text: "Antes de continuar por favor verifique datos de la tarifa a eliminar ",
+        title: "Antes de continuar por favor verifique los datos de la habitación a eliminar",
+        text: "Antes de continuar por favor verifique los datos de la habitación a eliminar ",
         content: tabla,
         icon: "warning",
         buttons: true,
@@ -1495,7 +1494,7 @@ function borrar_hab(ID, nom, habitacion, comentario){
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_hab()
-                swal("Se elimino tipo de habitacion!", "Excelente trabajo!", "success");
+                swal("Se eliminó la habitacion del sistema!", "Excelente trabajo!", "success");
             }else if (e.target.response == 'NO_valido'){
                 swal("Accion no realizada!", "Error de transferencia de datos!", "error");
             }else{
@@ -1508,7 +1507,7 @@ function borrar_hab(ID, nom, habitacion, comentario){
     xhttp.send();
                 } else {
                     $('#caja_herramientas').modal('hide');
-        swal("Se cancelo eliminar tipo de habitacion!", "Por favor verifique los datos antes de eliminarlos!", "success")
+        swal("Se cancelo eliminar la habitacion!", "Por favor verifique los datos antes de eliminarlos!", "success")
         }
     });
 }
@@ -1965,7 +1964,7 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
 
     if(tipo_tarjeta=="Efectivo" || tipo_tarjeta==1){
         $("#forma-garantia option[value=1]").prop("selected", true);
-        $("#btngarantia").attr("disabled",true)
+        // $("#btngarantia").attr("disabled",true)
     }
 
     if(tipo_tarjeta=="Debito" || tipo_tarjeta=="Credito" || tipo_tarjeta==2){
@@ -3915,8 +3914,8 @@ function busqueda_cargo_noche(){
 function guardar_forma_pago(){
     var usuario_id=localStorage.getItem("id");
 	var descripcion= encodeURI(document.getElementById("descripcion").value);
-    var garantia = encodeURI(document.getElementById('garantia').value)
-	
+    var garantia = encodeURI(document.getElementById('garantia').checked)
+
 
 	if(descripcion.length >0){
 			$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
@@ -3925,6 +3924,7 @@ function guardar_forma_pago(){
                   "usuario_id": usuario_id,
                   "garantia":garantia,
 				};
+              
 			$.ajax({
 				  async:true,
 				  type: "POST",

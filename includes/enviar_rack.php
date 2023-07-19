@@ -211,7 +211,7 @@ setlocale(LC_ALL, "es_ES");
                         $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2,$fila['interno']);
                         // echo date('Y-m-d',$tiempo_aux);
                         if(date('Y-m-d',$tiempo_aux) >= date('Y-m-d',$fila['fin'])){
-                            $clase_expirar="expirar";
+                            $clase_expirar="expirarRack";
                         }
     
                         //Si la habitación actual no está ocupada entra aqui.

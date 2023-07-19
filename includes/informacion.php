@@ -96,7 +96,7 @@ echo'
     {
         $clase_expirar="";
         if(date('Y-m-d',$tiempo_actual) >= $fila['fin'] && $fila['estado']==1){
-            $clase_expirar="expirar";
+            $clase_expirar="expirarRack";
         }
 
         $total_faltante= 0.0;
