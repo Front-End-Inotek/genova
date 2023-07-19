@@ -1360,7 +1360,7 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 20000;
-
+  padding: 0 1rem;
 }
 
 .rowFooter {
@@ -1368,8 +1368,8 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 20000;
-  margin-bottom: 15px;
-  font-size: calc(0.4rem + 0.6vw) !important;
+  /* margin-bottom: 15px; */
+  font-size: 1.5em;
 }
 /*
 .cardFooter {
@@ -1395,14 +1395,24 @@ body {
   padding-bottom: 25px !important;
 }
 
-/*
+
 .cardFooter{
-  padding-bottom: 50px !important;
-  margin: 15px;
-  background-color: #30349f !important;
-  color: #fff;
-  position: relative;
-}*/
+  background-color: var(--fondo);
+  color: var(--parrafos);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  overflow-x: auto;
+  gap: 1rem;
+  max-height: 100px;
+  /* background-color: red; */
+}
+@media (max-width: 605px){
+  .cardFooter{
+    justify-content: flex-start;
+  }
+}
 /* Para pantallas de tamaño pequeño, menores a 576px */
 @media (max-width: 575.98px) {
   .containerRackOp {

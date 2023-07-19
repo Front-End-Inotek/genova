@@ -98,6 +98,11 @@ grafica_hospedaje= new Chart(graficaPastel,{
         datasets: [
             datosOcupacion
         ]
+    },
+    options: {
+        legend: {
+            display: false
+        }
     }
 })
 
@@ -167,7 +172,6 @@ grafica_ventas=new Chart (ventas, {
 
 const restaurant = document.querySelector("#restaurant");
 
-
 const datosRestaurant = {
     label: "Productos mas vendidos",
     data: ventas_rest,
@@ -203,19 +207,16 @@ function asignarInfo(info){
     datos_ocupadas = info['datos_ocupadas']
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
     grafica_ocupadas.update();
-
     //Hospedaje
     datos_hospedaje = info['datos_hospedaje'];
     grafica_hospedaje.data.datasets[0].data = datos_hospedaje;
     grafica_hospedaje.data.labels = info['etiquetas_hospedaje']
     grafica_hospedaje.update();
-
     //Formas de pago
     datos_pagos = info['datos_pagos'];
     grafica_forma_pago.data.datasets[0].data=datos_pagos
     grafica_forma_pago.data.labels = info['etiquetas_forma_pago']
     grafica_forma_pago.update();
-
     // //Ventas
     // datos_ventas = info['datos_ventas'];
     // grafica_ventas.data.datasets[0].data=datos_ventas
@@ -223,7 +224,6 @@ function asignarInfo(info){
     // datos_ventas_rest = info['datos_ventas_rest'];
     // grafica_ventas.data.datasets[1].data=datos_ventas_rest
     // grafica_ventas.update();
-
       //Abonos/cargos datos
     datos_ventas = info['datos_abonos'];
     grafica_ventas.data.datasets[0].data=datos_ventas
@@ -231,13 +231,11 @@ function asignarInfo(info){
     datos_ventas_rest = info['datos_cargos'];
     grafica_ventas.data.datasets[1].data=datos_ventas_rest
     grafica_ventas.update();
-
     //Datos rest 4
     ventas4 = info['venta_rest'];
     grafica_ventas4.data.labels = info['etiquetas_rest']
     grafica_ventas4.data.datasets[0].data=ventas4
     grafica_ventas4.update();
-
 }
 
 function cargarInfoServidor(){
@@ -246,7 +244,6 @@ function cargarInfoServidor(){
         clearTimeout(timer_grafica)
         return
     }
-
     // console.log("**** Cargando info del servidor *****")
     include="includes/cargar_datos_visit.php?usuario="+usuario_id
     $.ajax({

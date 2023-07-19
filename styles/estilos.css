@@ -97,8 +97,8 @@
 }
 
 /*body {/* Body info*/
-/*overflow-x: hidden; 
- background-color: #14040B;
+/*overflow-x: hidden;
+background-color: #14040B;
 }*/
 
 /* Agregue un color de fondo negro a la navegación superior */
@@ -282,7 +282,6 @@ label {
   box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
   overflow-y: scroll;
   max-height: 822px;
-  
 }
 /*
 .blanco:before, .blanco:after {
