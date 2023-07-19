@@ -251,6 +251,11 @@
   background: #ecf2ff;
   padding: 0.3em;
 }
+@media (max-width: 415px){
+  .cal-tbody .cal-userinfo{
+    font-size: 11px;
+  }
+}
 
 .cal-usersheader {
   height: 20px;

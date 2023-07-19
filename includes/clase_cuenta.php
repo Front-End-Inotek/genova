@@ -825,20 +825,14 @@
 
         echo '
         <div class="containerFooter">
-        <div>
-          <div class="card cardFooter">
-            <div class="card-header footerContenedor">
-              <div class="row rowFooter">
-              <div class="col-xs-2 col-sm-4">Total Ocupadas: '.$ocupadas.'</div>
-              <div class="col-xs-2 col-sm-4">Total Disponibles: '.$disponibles.'</div>
-              <div class="col-xs-2 col-sm-4">Total Preasignadas: '.$preasignadas.'</div>
-              <div class="col-xs-2 col-sm-4">Total Salidas: '.$salidas.'</div>
-              <div class="col-xs-2 col-sm-4">Total Cargos: $'.$total_cargos.'</div>
-              <div class="col-xs-2 col-sm-4">Total Abonos: $'.$total_abonos.'</div>
-              </div>
-            </div>
+          <div class="cardFooter">
+              <div >Total Ocupadas: '.$ocupadas.'</div>
+              <div >Total Disponibles: '.$disponibles.'</div>
+              <div >Total Preasignadas: '.$preasignadas.'</div>
+              <div >Total Salidas: '.$salidas.'</div>
+              <div >Total Cargos: $'.$total_cargos.'</div>
+              <div >Total Abonos: $'.$total_abonos.'</div>
           </div>
-        </div>
         <div>';
       }
 

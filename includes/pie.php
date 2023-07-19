@@ -10,7 +10,7 @@
     $salidas= $movimiento->saber_salidas();
     $preasignadas = $movimiento->obtener_preasignadas();
     echo '
-    <div class="container-fluid Alin-center">';
+    <div class="">';
         $cuenta->resumen_actual($ocupadas,$disponibles,$salidas,$_GET['id'],$preasignadas);
         
         /*echo '<p>Este ejemplo demuestra la utilización del control <code>&lt;input type="color"&gt;</code>.</p>
