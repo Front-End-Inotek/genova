@@ -58,7 +58,10 @@ class Informacion extends ConexionMYSql
         $filtro ="AND hab.estado = " . $estatus_hab;
     }
     if (true) {
-    $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado_hab = 1 $filtro ORDER BY id";
+    $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id
+    WHERE hab.estado_hab = 1 $filtro 
+    /*AND hab.id=44*/
+    ORDER BY id";
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);
     // echo $sentencia;
@@ -94,14 +97,46 @@ echo'
     echo ' <div class="containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {
+        $tiempo_actual = time();
+        $hab = $fila['id'];
+        //por cada hab, se tiene que consultar las preasignaciones existentes
+        $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado,
+        reservacion.estado_interno AS garantia
+        ,movimiento.estado_interno AS interno
+        ,huesped.nombre as n_huesped, huesped.apellido as a_huesped
+        FROM movimiento
+        left join reservacion on movimiento.id_reservacion = reservacion.id
+        LEFT JOIN hab on movimiento.id_hab = hab.id
+        LEFT JOIN huesped on movimiento.id_huesped = huesped.id
+        where reservacion.estado =1
+        and movimiento.motivo='preasignar'
+        and movimiento.id_hab=$hab
+        and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') 
+        order by reservacion.fecha_entrada asc;
+        ";
+        // echo $sentencia_reservaciones;
+        $comentario = "Optenemos las habitaciones para el rack de habitaciones";
+        $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
+        $contador_row = mysqli_num_rows($consulta_reservaciones);
+        $estado_hab = $fila['estado'];
+        while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
+            // echo date('Y-m-d',$tiempo_actual) ."|". date('Y-m-d',$fila_r['fecha_entrada']);
+            if(date('Y-m-d',$tiempo_actual) == date('Y-m-d',$fila_r['fecha_entrada']) && $estado_hab!=1){
+                if($fila_r['garantia'] == "garantizada"){
+                    $estado_hab = 6;
+                }else{
+                    $estado_hab = 7;
+                }
+            }
+        }
         $clase_expirar="";
-        if(date('Y-m-d',$tiempo_actual) >= date('Y-m-d',$fila['fin']) && $fila['estado']==1){
+        if(date('Y-m-d',$tiempo_actual) >= date('Y-m-d',$fila['fin']) && $estado_hab==1){
             $clase_expirar="expirarRack";
         }
 
         $total_faltante= 0.0;
         $estado="no definido";
-        switch($fila['estado']) {
+        switch($estado_hab) {
             case 0:
             $estado= "Disponible limpia";
             $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
@@ -175,7 +210,7 @@ echo'
 
         if($fila['tipo']>0){
 
-            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].',\''.$fila['nombre'].'\')" >';
+            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\')" >';
             switch($estado) {
                 case "Disponible limpia":
                 echo'<div class="btn disponible-limpia">';
@@ -239,7 +274,7 @@ echo'
                     <span class="nombre" id="N1">';
             $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
             //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
-            if($fila['estado'] == 0){
+            if($estado_hab == 0){
             if($cronometro == 0){
             
                 echo $tipo_habitacion;
@@ -249,7 +284,7 @@ echo'
                 echo '<br>';
                 echo $tipo_habitacion;
             }
-            }elseif($fila['estado'] == 1){
+            }elseif($estado_hab == 1){
             echo $fecha_salida;
             }else{
             if($cronometro == 0){
