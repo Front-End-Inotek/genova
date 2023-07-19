@@ -1,4 +1,15 @@
 <?php
+include_once('clase_usuario.php');
+
+$usuario_id = $_GET['usuario_id'];
+
+$usuario = new Usuario($usuario_id);
+
+
+if($usuario->nivel !=0){
+    die();
+}
+
 
 echo '
     <div class="contenedor__graficas">
@@ -41,7 +52,7 @@ echo '
                 <div class="graficas__card">
                     <div class="card__encabezado">
                         <div>
-                            <p class="card__encabezado-titulo">Cargos /</p>
+                            <p class="card__encabezado-titulo">Cargos / Abonos</p>
                             <p class="card__encabezado-subtitulo">Ultima semana</p>
                         </div>
                         <p class="card__encabezado-titulo">
