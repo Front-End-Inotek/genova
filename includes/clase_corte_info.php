@@ -110,7 +110,7 @@
 	  $dinero_descuento= 0;
 	  $sentencia = "SELECT * FROM ticket WHERE id_usuario = $id_usuario AND (pago > 0  OR monto > 0) AND (estado = 0 OR estado != 2)";//1 
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
-	  //echo $sentencia;
+	//   echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))

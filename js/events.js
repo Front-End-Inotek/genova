@@ -6885,24 +6885,23 @@ function hacer_corte(){
 
 
 // Hacer un corte
-function hacer_cortes(usuario){
-    var usuario_id=0;
-    if(usuario==0){
-        $('#area_trabajo').hide();
-        $('#pie').hide();
-        $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php?usuario_id="+usuario_id);
-        closeNav();
-        
-    }else{
-        usuario_id=localStorage.getItem("id");
-        $('#area_trabajo').hide();
-        $('#pie').hide();
-        $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/hacer_cortes.php?usuario_id="+usuario_id);
-        closeNav();
-    }
-   
+function hacer_cortes(){
+    usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/hacer_cortes.php?usuario_id="+usuario_id);
+    closeNav();
+}
+
+// Hacer un corte
+function hacer_cortes_dia(){
+    usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php?usuario_id="+usuario_id);
+    closeNav();
 }
 
 function aceptar_guardar_corte_nuevo(){

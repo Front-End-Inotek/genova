@@ -11,6 +11,7 @@
 	public $total_personas;
 	public $cantidad_hab;
 	public $total_hab;
+	public $total_cuenta_maestra;
 	public $total_productos;
 	public $total_restaurante;
 	public $total_restaurante_entrada;
@@ -36,6 +37,7 @@
 	  $contador= 0;
 	  $cantidad_hab= 0;
 	  $total_hab= 0;
+	  $total_cuenta_maestra=0;
 	  $sentencia = "SELECT *, sum(concepto.precio), tipo_hab.nombre as titulo, tipo_hab.id as ID
 	  from 
 	  hab 
@@ -56,6 +58,7 @@
 	  }
 	  $cantidad_hab= $this->cantidad_hab= $this->cantidad_habitaciones();
 	  $total_hab= $this->total_hab= $this->total_habitaciones($id_usuario);
+	  $total_cuenta_maestra = $this->total_cuenta_maestra = $this->total_cuenta_maestra($id_usuario);
 	  $total_restaurante_entrada= $this->total_restaurante_entrada= $this->total_restaurante_entrada();
 
 	  // Obtenemos el total de personas extra
@@ -112,7 +115,7 @@
 	   AND ticket.id_usuario =$id_usuario
 	   ";//1 
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
-		// echo $sentencia;
+	//   echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -376,6 +379,30 @@
 		}
 		return $total;
 	}
+	// Obtener el total del hospedaje
+	function total_cuenta_maestra($id_usuario){
+		$total=0;
+		$hoy = date('Y-m-d');
+		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto 
+		INNER JOIN ticket on concepto.id_ticket = ticket.id
+		WHERE concepto.id_usuario = $id_usuario AND tipo_cargo = 3 AND activo = 1 
+		AND categoria=0
+		AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+		";
+		$comentario="Obtener el total del de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta))
+		{
+			$total=$fila['total'];
+		}
+		if($total>0){
+
+		}else{ 
+			$total=0;
+		}
+		return $total;
+	}
+
 	// Obtener el total del restaurante entrado en el turno
 	function total_restaurante_entrada(){
         $hoy = date('Y-m-d');
