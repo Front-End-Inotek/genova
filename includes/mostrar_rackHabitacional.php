@@ -449,7 +449,7 @@ class RackHabitacional extends ConexionMYSql
                                                 $tiempo_aux += $n;
                                             }
                                         }else{
-                                            if($fila['estado'] == 0){
+                                            if($fila['estado'] != 1){
                                                 echo '
                                                 <td class="celdaCompleta tdCheck " title="nombre huesped">
                                                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
@@ -482,6 +482,7 @@ class RackHabitacional extends ConexionMYSql
                                 ';
                             }
                         }
+                        // die();
                         if(!$mastiempo){
                             $tiempo_aux += 86400;
                         }

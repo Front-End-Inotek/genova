@@ -1980,6 +1980,7 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
     if(voucher!=""){
         $("#div_voucher").show();
         $('#voucher').val(voucher)
+        $("#forma-garantia option[value="+tipo_tarjeta+"]").prop("selected", true);
     }else{
         $('#voucher').val("") 
         $("#div_voucher").hide();

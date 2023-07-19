@@ -211,7 +211,7 @@ setlocale(LC_ALL, "es_ES");
                         $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2,$fila['interno']);
                         // echo date('Y-m-d',$tiempo_aux);
                         if(date('Y-m-d',$tiempo_aux) >= date('Y-m-d',$fila['fin'])){
-                            $clase_expirar="expirarRack";
+                            $clase_expirar="expirar";
                         }
     
                         //Si la habitación actual no está ocupada entra aqui.
@@ -281,7 +281,7 @@ setlocale(LC_ALL, "es_ES");
                                 echo '';
                                 echo '
                                 <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
-                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',' . $fila['nombre'] . ',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')" >
+                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')" >
                                 ';
                                 echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . '</section>';
                                 echo '            </div>
@@ -304,7 +304,7 @@ setlocale(LC_ALL, "es_ES");
                                         // echo $noches_uso;
                                             echo '
                                         <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="' . $noches_uso . '">
-                                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
                                                 <div >
                                         ';
                                         echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
@@ -322,7 +322,7 @@ setlocale(LC_ALL, "es_ES");
                                             $adicional=86400;
                                             echo '
                                             <td class="celdaCompleta tdCheck " title="nombre huesped">
-                                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
                                             <div >
                                             ';
                                             echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
@@ -348,7 +348,7 @@ setlocale(LC_ALL, "es_ES");
                                                 $estado_habitacion_reserva = $this->estado_habitacion($estado, "","");
                                                 echo '
                                                 <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="'.$noches_uso.'">
-                                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',' . $fila['nombre'] . ',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')"  >
+                                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')"  >
                                                 <div >
                                                 ';
                                                 echo '<section class="task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . '</section>';
@@ -363,10 +363,10 @@ setlocale(LC_ALL, "es_ES");
                                                     $tiempo_aux += $n;
                                                 }
                                             }else{
-                                                if($fila['estado'] == 0){
+                                                if($fila['estado'] != 1){
                                                     echo '
                                                     <td class="celdaCompleta tdCheck " title="nombre huesped">
-                                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
                                                     <div >
                                                     ';
                                                     echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
@@ -396,6 +396,7 @@ setlocale(LC_ALL, "es_ES");
                                     ';
                                 }
                             }
+                            // die();
                             if(!$mastiempo){
                                 $tiempo_aux += 86400;
                             }
