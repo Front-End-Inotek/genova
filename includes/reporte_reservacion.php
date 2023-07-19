@@ -162,7 +162,7 @@
   $x= 20;
   $pdf->SetX($x);
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Número Cuenta: '.$id_cuenta),0,0,'L');
-  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Precio Hospedaje: '.$precio_hospedaje),0,1,'L');
+  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Precio Hospedaje: '.number_format($precio_hospedaje,2)),0,1,'L');
   
   $x= 20;
   $pdf->SetX($x);

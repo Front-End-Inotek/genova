@@ -111,7 +111,7 @@
                   
                 }
                 $total_maestra=0;
-
+                $fila_atras="";
                 //cargos cuentas maestras.
                 $consulta= $cuenta->mostrarCargosMaestra($usuario_id);
                 while ($fila = mysqli_fetch_array($consulta)) {

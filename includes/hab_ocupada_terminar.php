@@ -4,6 +4,7 @@
   include_once('clase_log.php');
   $movimiento = NEW Movimiento(0);
   $hab = NEW Hab($_POST['hab_id']);
+  $hab->cambiohabUltimo($hab->id);
   $logs = NEW Log(0);
   $estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
   if($estado_interno == 'limpieza'){

@@ -419,10 +419,10 @@
 
 
       function mostrarAbonosMaestra($id_usuario){
-        $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre
+        $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.descripcion, cuenta.abono, cuenta.fecha
         from cuenta
-        left join cuenta_maestra as cm on cm.mov = cuenta.mov 
-        where id_usuario =$id_usuario
+        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov 
+        -- where id_usuario =$id_usuario
         and cm.estado = 1 and cuenta.estado=1
         and cuenta.abono>0
         order by cm.id , cuenta.fecha asc";
@@ -437,7 +437,7 @@
         $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta 
         LEFT join hab on hab.mov = cuenta.mov
         where cuenta.estado =1
-        and cuenta.id_usuario= $id_usuario
+        -- and cuenta.id_usuario= $id_usuario
         and hab.estado = 1
         AND cuenta.abono > 0
         order by hab.id , cuenta.fecha asc";
@@ -452,10 +452,10 @@
 
 
       function mostrarCargosMaestra($id_usuario){
-        $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre
+        $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.cargo, cuenta.descripcion, cuenta.fecha
         from cuenta
-        left join cuenta_maestra as cm on cm.mov = cuenta.mov 
-        where id_usuario =$id_usuario
+        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov 
+        -- where id_usuario =$id_usuario
         and cm.estado = 1 and cuenta.estado =1
         and cuenta.cargo>0
         order by cm.id , cuenta.fecha asc" ;
@@ -470,7 +470,7 @@
         $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta 
         LEFT join hab on hab.mov = cuenta.mov
         where cuenta.estado =1
-        AND cuenta.id_usuario= $id_usuario
+        -- AND cuenta.id_usuario= $id_usuario
         AND hab.estado = 1
         AND cuenta.estado
         AND cuenta.cargo > 0

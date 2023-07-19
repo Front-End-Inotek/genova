@@ -202,7 +202,7 @@ cargarInfoServidor();
 }
 
 function asignarInfo(info){
-    console.log(info)
+    // console.log(info)
     //Ocupacion
     datos_ocupadas = info['datos_ocupadas']
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
@@ -233,7 +233,6 @@ function asignarInfo(info){
     grafica_ventas.update();
     //Datos rest 4
     ventas4 = info['venta_rest'];
-    console.log(ventas4)
     grafica_ventas4.data.labels = info['etiquetas_rest']
     grafica_ventas4.data.datasets[0].data=ventas4
     grafica_ventas4.update();
@@ -265,7 +264,8 @@ function cargarInfoServidor(){
             console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
-    });
-    //timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
+      });
+
+    timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
 }
 
