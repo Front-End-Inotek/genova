@@ -850,14 +850,14 @@ hr{
 
 .btn-square-lg-doble {
   /* */
-  width: 100px !important;
+  /* width: 100px !important; */
   max-width: 100% !important;
   max-height: 100% !important;
-  height: 100px !important;
+  /* height: 100px !important; */
   text-align: center;
-  padding-top: 2px;
+  /* padding-top: 2px; */
   font-size: 12px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .btn-square-xl {
