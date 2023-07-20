@@ -154,8 +154,9 @@ setlocale(LC_ALL, "es_ES");
             $cronometro = 0;
             //Se utiliza la misma consulta para el rack de operaciones
             $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
-            ,movimiento.detalle_inicio, movimiento.detalle_fin
+            ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped
             FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
+            LEFT JOIN huesped on huesped.id = movimiento.id_huesped
             WHERE hab.id=$hab_id
             AND hab.estado_hab = 1  ORDER BY id";
             $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -453,54 +454,12 @@ setlocale(LC_ALL, "es_ES");
                                 $n = 86400 * ($noches);
                                 $tiempo_aux += $n;
                             }
-                            //Este fragmento "quita" las habitaciones que siguen ocupadas pero ya expiró su fecha de salida.
-                        //     if($fin>$inicio){
-                        //     echo '';
-                        //     echo '
-                        //     <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
-                        //     echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
-                        //     ';
-                        //     echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
-                        //     echo '</div>';
-                        //     echo'
-                        //     </td>
-                        //     ';
-                        //     if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila['fin']))
-                        //     {
-                        //         $mastiempo=true;
-                        //         $tiempo_aux += 86400;
-                        //     }
-    
-    
-                        //     if($noches>1){
-                        //         $mastiempo=true;
-                        //         $n = 86400 * ($noches);
-                        //         $tiempo_aux += $n;
-                        //     }
-                        // }else{
-                        //     $mastiempo=true;
-                        //     echo '';
-                        //     echo '
-                        //     <td class="celdaCompleta tdCheck " >';
-                        //     echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
-                        //     ';
-                        //     echo '<section class="'.$clase_hover.' task task--disponible-limpia"> Disponible</section>';
-                        //     echo '</div>';
-                        //     echo'
-                        //     </td>
-                        //     ';
-                        //     $tiempo_aux += 86400;
-                        // }
-                            // echo date('Y-m-d',$tiempo_aux);
-    
                             //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
                             if($contador_row==0){
-    
                                 $i = 32;
                             }else{
                                 //aqui van las reservas, fila_r contiene las reservas
                                 //$tiempo_aux contendrá el tiempo 'actual', mas la suma de cada dia para cada reservación.
-    
                                 $current=0; //contador del ciclo de reservaciones.
                                 $ultima=""; //penúltima fecha de la reservacion.
                                 $filaL=null; //contendrá los datos de la ultima penúltima reservación.
