@@ -164,7 +164,7 @@ class RackHabitacional extends ConexionMYSql
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1
-        /*AND hab.id=43*/
+        /*AND hab.id=2*/
         ORDER BY id";
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -286,7 +286,7 @@ class RackHabitacional extends ConexionMYSql
                 } else {
 
                     $clase_expirar="";
-
+                    $mastiempo=false;
                     //Se calculan los estados de las habitaciones.
                     $mes = $this->convertir_mes(date('n', $tiempo));
                     $dia = date('d', $tiempo);
@@ -380,7 +380,7 @@ class RackHabitacional extends ConexionMYSql
                             // $tiempo_aux += 86400 ;
                         }else{
                             //Uso casa.
-                            $mastiempo=false;
+                           
                             if ($c == 0 && $fila['estado'] != 1 ) {
                                 if($fila['estado'] == 8){
                                     //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
@@ -496,7 +496,7 @@ class RackHabitacional extends ConexionMYSql
                         //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
                         $mastiempo=false;
                         $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
-                        $clase_hover = "nuevax" . $i .rand(1,100);;
+                        $clase_hover = "nuevax" . $i .rand(1,200);;
                         echo '<style>
                         .'.$clase_hover.'::after {
                             content: "'.$huesped_ocupada.'";
