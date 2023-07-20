@@ -95,7 +95,7 @@ echo'
     while ($fila = mysqli_fetch_array($consulta))
     {
         $clase_expirar="";
-        if(date('Y-m-d',$tiempo_actual) >= $fila['fin'] && $fila['estado']==1){
+        if(date('Y-m-d',$tiempo_actual) >= date('Y-m-d',$fila['fin']) && $fila['estado']==1){
             $clase_expirar="expirarRack";
         }
 

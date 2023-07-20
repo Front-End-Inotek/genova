@@ -38,11 +38,11 @@
       $quien_reserva= $fila['nombre_reserva'];
       $acompanante= $fila['acompanante'];
       // Checar si suplementos esta vacio o no
-      if (empty($fila['suplementos'])){
+      if (empty($fila['nombre_plan'])){
         //echo 'La variable esta vacia';
         $suplementos= 'Ninguno';
       }else{
-        $suplementos= $fila['suplementos'];
+        $suplementos= $fila['nombre_plan'];
       }
       $total_suplementos= $fila['total_suplementos'];
       $total_habitacion= $fila['total_hab'];
@@ -95,13 +95,13 @@
           <div class="col">Fecha Entrada: <span>'.$fecha_entrada.'</span></div>
           <div class="col">Fecha Salida: <span>'.$fecha_salida.'</span></div>
           <div class="col">Noches: <span>'.$noches.'</span></div>
-          <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
+      
           <div class="col">Tarifa: <span>$'.number_format($total_tarifa,2).'</span></div>
         </div>
         <div class="row">
           <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span></div>
           <div class="col">Suplementos: <span>'.$suplementos.'</span></div>
-          <div class="col"></span></div> 
+          <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
         </div>
         <div class="row">';
