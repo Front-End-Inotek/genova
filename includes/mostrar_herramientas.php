@@ -95,12 +95,12 @@ echo '<div class="modal-header" style="background-color: #97b2f9ee; color: #000;
 echo '<div class="container-fluid">';
 show_info($_GET['hab_id'],$_GET['estado']);
 echo '</br>';
-echo '<div class="row">';
+echo '<div class="row flex-wrap">';
 
 switch ($_GET['estado']) {
 	case 0:
 	if($user->nivel<=2 && $conf->hospedaje ==1){
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="supervision ocupadoH  btn-square-lg" onclick="disponible_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -116,7 +116,7 @@ switch ($_GET['estado']) {
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
 		$nuevo_estado= 2;
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="limpieza ocupada-limpieza btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
 			echo '</br>';
 			echo '<div>';
@@ -131,7 +131,7 @@ switch ($_GET['estado']) {
 	}
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="ocupada usoCasa uso btn-square-lg" onclick="uso_casa_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -149,7 +149,7 @@ switch ($_GET['estado']) {
 		// echo $nuevo_estado;
 		$nuevo_estado=9;
 		$nuevo_estado= 4;
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="ocupada mantenimiento btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
 			echo '</br>';
 			echo '<div>';
@@ -165,7 +165,7 @@ switch ($_GET['estado']) {
 	if($user->nivel<=2 && $conf->hospedaje ==1){
 		$nuevo_estado= 10;
 		$nuevo_estado=5;
-		echo '<div class=" bcol-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="ocupada bloqueo btn-square-lg" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
 			echo '</br>';
 			echo '<div>';
@@ -183,7 +183,7 @@ switch ($_GET['estado']) {
 
 	case 1 :
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="desocupar btn-square-lg" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -197,7 +197,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+		echo '<div class="col-md-2 btn-herramientas" >';
 		echo '<div class="edo_cuenta btn-square-lg" onclick="estado_cuenta('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -211,7 +211,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+		echo '<div class="col-md-2 btn-herramientas" >';
 		echo '<div class="restaurante btn-square-lg" onclick="agregar_restaurante('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -225,7 +225,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2 && $estado_interno != 'sucia'){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="sucia btn-square-lg" onclick="hab_sucia_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -239,7 +239,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2 && $estado_interno != 'limpieza'){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+		echo '<div class="col-md-2 btn-herramientas" >';
 		echo '<div class="limpieza btn-square-lg" onclick="hab_estado_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -253,7 +253,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2 && $estado_interno != 'sin estado'){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="terminar btn-square-lg" onclick="hab_ocupada_terminar_interno('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -286,7 +286,7 @@ switch ($_GET['estado']) {
 
 	case 2 :
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
+		echo '<div class="col-md-2 btn-herramientas" >';
 		echo '<div class="limpieza btn-square-lg" onclick="hab_estado_limpiar('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -300,7 +300,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -318,7 +318,7 @@ switch ($_GET['estado']) {
 
 	case 3 :
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -332,7 +332,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="cambiar_usuario btn-square-lg" onclick="hab_cambiar_persona_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -350,7 +350,7 @@ switch ($_GET['estado']) {
 
 	case 4 :
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -365,7 +365,7 @@ switch ($_GET['estado']) {
 	}
 
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="cambiar_usuario btn-square-lg" onclick="hab_cambiar_persona_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -383,7 +383,7 @@ switch ($_GET['estado']) {
 
 	case 5 :
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="terminar btn-square-lg" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -397,7 +397,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+		echo '<div class="col-md-2 btn-herramientas">';
 		echo '<div class="cambiar_usuario btn-square-lg" onclick="hab_cambiar_persona_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
@@ -429,7 +429,7 @@ switch ($_GET['estado']) {
 	break;
 	case 8:
 		if($user->nivel<=2){
-			echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+			echo '<div class="col-md-2 btn-herramientas">';
 			echo '<div class="desocupar btn-square-lg" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].',1)">';
 				echo '</br>';
 				echo '<div>';
@@ -457,7 +457,7 @@ if(isset($_GET['salida'])){
 
 
 echo '</div>';
-echo '<div class="row">';
+echo '<div class="row flex-wrap justify-content-around">';
 	mostar_info($_GET['hab_id'],$_GET['estado'],$hab->mov,$_GET['id'],$entrada,$salida);
 echo '</div>';
 echo '</div>';

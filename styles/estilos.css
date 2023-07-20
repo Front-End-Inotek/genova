@@ -270,6 +270,7 @@ label {
 .modal-dialog{
   min-width: 1000px;
   /* font-size: 1.1rem; */
+  margin-bottom: 10rem;
 }
 @media (max-width: 1000px){
   .modal-dialog{
@@ -281,7 +282,7 @@ label {
   position: relative;
   box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
   overflow-y: scroll;
-  max-height: 822px;
+  max-height: 85vh;
 }
 /*
 .blanco:before, .blanco:after {
@@ -671,6 +672,11 @@ hr{
   max-height: 100% !important;
   padding: 0em 0px 0px 0px;
   border: none !important;
+}
+@media (max-width: 530px){
+  .card{
+    display: none !important;
+  }
 }
 
 .fondo_dark {

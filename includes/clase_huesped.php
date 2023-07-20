@@ -113,10 +113,10 @@
       
             <!--Principal-->
            
-                <div class="container-fluid blanco " style="width: 650px;">
+                <div class="container-fluid blanco >
                     <h1>Tarjeta Credito</h1>
                     <h2></h2>
-                    <header class="tarjeta">
+                    <header class="tarjeta" style="max-width: 600px;">
                         <div class="card" id="cc-card">
                             <div class="flipper">
                                 <div class="front">
@@ -242,10 +242,10 @@
                             </div>
                           </div>
                             <div class="form-group">
-                              <div class="row">
-                                <div class="col-6">
+                              <div class="row flex-wrap">
+                                <div class="col-6 col-12">
                                   <label for="expires-month">Expira</label>
-                                  <div class="input-group expire-date">
+                                  <div class="input-group expire-date d-flex flex-wrap">
                                     <div class="input-group-prepend">
                                     </div>
                                     <input name="expira (mes)" type="tel" class="form-control" id="expires-month" placeholder="MM" allowed-pattern="[0-9]" maxlength="2" value="'.$this->vencimiento_mes.'" required>
@@ -256,7 +256,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6 col-12">
                                   <label for="ccv">CCV</label>
                                   <div class="input-group ccv">
                                     <input type="tel" class="form-control" id="tccv" autocomplete="off" maxlength="3" value="'.$this->cvv.'">
@@ -268,26 +268,26 @@
                             </div>
                           </div>
                             <br>
-                            <div class="d-flex justify-content-between col-11">
-                                <div class="form-check form-check-inline col-5">
+                            <div class="d-flex justify-content-between flex-wrap">
+                                <div class="form-check form-check-inline col-12 col-sm-3">
                                   <input class="form-check-input" type="radio" name="estado" value="1" id="check1">
                                   <label class="form-check-label" for="check1">Pendiente de preautorizar</label>
                                 </div>
                               
-                                <div class="form-check form-check-inline col-3">
+                                <div class="form-check form-check-inline col-12 col-sm-3">
                                   <input class="form-check-input" type="radio" name="estado" value="2" id="check2">
                                   <label class="form-check-label" for="check2">Garantizada</label>
                                 </div>
                               
-                                <div class="form-check form-check-inline col-3">
+                                <div class="form-check form-check-inline col-12 col-sm-4">
                                   <input class="form-check-input" type="radio" name="estado" value="3" id="check3">
                                   <label class="form-check-label" for="check3">Sin garantía</label>
                                 </div>
                               </div>
 
                               
-        <div class="row">     
-                            <div class="col-6">
+        <div class="row flex-wrap">     
+                            <div class="col-12 col-sm-5">
                           
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="radio"  id="c_abierto" value="abierto" name="credit">
@@ -297,7 +297,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-12 col-sm-5">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default"  font-size: 14px; text-align: justify;"> Límite de crédito </span>
