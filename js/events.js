@@ -2078,6 +2078,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var noches= Number(document.getElementById("noches").value);
     var tarifa= Number(document.getElementById("tarifa").value);
 
+    var ruta_regreso="";
     var preasignada=0;
     var sobrevender=0;
     var canal_reserva=0;
@@ -2093,10 +2094,12 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         tipo_reservacion = (document.getElementById("tipo-reservacion").value);
         titulo="RESERVACIÓN"
         var persona_reserva= (document.getElementById("persona-reserva").value);
+        ruta_regreso="ver_reservaciones()"
     }else{
         estado=2;
         persona_reserva="checkin"
         titulo="CHECK-IN"
+        ruta_regreso="principal()"
     }
 
     var forzar_tarifa = $("#forzar-tarifa").val()
@@ -2227,7 +2230,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
                         enviar_reserva_correo(res,correo,false);
                     }
                 }
-                ver_reporte_reservacion(res,"ver_reservaciones()",titulo,correo)
+                ver_reporte_reservacion(res,ruta_regreso,titulo,correo)
             },
             timeout:5000,
             error:problemas_sistema
