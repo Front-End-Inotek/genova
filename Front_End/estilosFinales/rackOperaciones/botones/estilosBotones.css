@@ -313,8 +313,6 @@ span {
   width: 100vw;
   z-index: 20000;
   font-size: 1rem;
-  background-color: red !important;
-  border: 1px solid red;
 }
 
 .card {
@@ -339,9 +337,9 @@ span {
     width: 140px;
     height: 70px;
   }
-  .informacion{
+  /* .informacion{
     margin-top: 70px;
-  }
+  } */
 }
 /* para pantallas más pequeñas que 768px */
 @media (max-width: 767px) {

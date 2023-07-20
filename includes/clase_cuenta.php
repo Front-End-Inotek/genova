@@ -291,12 +291,10 @@
         $comentario="Mostrar los nombres de las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-  
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
         }
-  
       }
       // Obtengo los nombres de las habitaciones a editar**
       function mostrar_hab_editar($id){
@@ -309,7 +307,7 @@
           if($id==$fila['id']){
             echo '  <option value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
           }else{
-            echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';  
+            echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
           }
         }
       }
@@ -322,7 +320,7 @@
         WHERE `id` = '$hab';";
         $comentario="Cambiar estado de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-      }     
+      }
       // Obtenemos la suma de los abonos que tenemos por movimiento en una habitacion
       function obtner_abonos($mov){ 
         $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND estado != 0";
@@ -366,15 +364,15 @@
         $filtro="";
 
         if(!$editable){
-          $filtro ="and 
+          $filtro ="and
           (from_unixtime(reservacion.fecha_auditoria,'%Y-%m-%d') != CURRENT_DATE()
-         or reservacion.fecha_auditoria is null 
-         )";
+        or reservacion.fecha_auditoria is null
+        )";
         }
 
         $sentencia="SELECT hab.nombre as hab_nombre, reservacion.total as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa 
 		    , reservacion.fecha_auditoria
-        FROM 
+        FROM
         hab
         INNER JOIN movimiento as mov ON hab.mov = mov.id 
         INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
@@ -393,9 +391,8 @@
         INNER JOIN movimiento as mov ON hab.mov = mov.id 
         INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
         INNER JOIN huesped on mov.id_huesped = huesped.id
-        WHERE hab.estado = 1  
+        WHERE hab.estado = 1
         ORDER BY id";
-
         $comentario="Obtenemos habitaciones en casa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
@@ -416,7 +413,6 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
 
       function mostrarAbonosMaestra($id_usuario){
         $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.descripcion, cuenta.abono, cuenta.fecha
@@ -441,15 +437,12 @@
         and hab.estado = 1
         AND cuenta.abono > 0
         order by hab.id , cuenta.fecha asc";
-
         $comentario="Mostrar los cargos de todas las habitaciones por usuario";
         // echo $sentencia;
         //echo $id;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
-
       }
-
 
       function mostrarCargosMaestra($id_usuario){
         $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.cargo, cuenta.descripcion, cuenta.fecha
@@ -505,7 +498,7 @@
 
         $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
-        FROM cuenta 
+        FROM cuenta
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha
         ".$limite."
         ";
@@ -543,8 +536,7 @@
               </tr>
             </thead>
             <tbody>';
-            $c=0;   
-          
+            $c=0;
               while ($fila = mysqli_fetch_array($consulta))
               {
                 $descripcion= substr($fila['concepto'], 0, 17);
@@ -552,9 +544,8 @@
 
                 if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
                   if($c!=0) {
-                   echo '<tr>
+                    echo '<tr>
                     <td colspan="5"></td>
-                  
                     </tr>';
                   }
               }
@@ -605,8 +596,6 @@
                   <td></td>
                   </tr>';
                 }
-               
-               
                 $fecha_atras = date('Y-m-d',$fila['fecha']);
                 $c++;
               }
@@ -650,7 +639,6 @@
                   if($c!=0) {
                     echo '<tr>
                     <td colspan="5"></td>
-                  
                     </tr>';
                   }
               }
@@ -826,12 +814,12 @@
         echo '
         <div class="containerFooter">
           <div class="cardFooter">
-              <div >Total Ocupadas: '.$ocupadas.'</div>
-              <div >Total Disponibles: '.$disponibles.'</div>
-              <div >Total Preasignadas: '.$preasignadas.'</div>
-              <div >Total Salidas: '.$salidas.'</div>
-              <div >Total Cargos: $'.$total_cargos.'</div>
-              <div >Total Abonos: $'.$total_abonos.'</div>
+              <div>Total Ocupadas: '.$ocupadas.'</div>
+              <div>Total Disponibles: '.$disponibles.'</div>
+              <div>Total Preasignadas: '.$preasignadas.'</div>
+              <div>Total Salidas: '.$salidas.'</div>
+              <div>Total Cargos: $'.$total_cargos.'</div>
+              <div>Total Abonos: $'.$total_abonos.'</div>
           </div>
         <div>';
       }

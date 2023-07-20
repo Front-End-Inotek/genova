@@ -243,7 +243,7 @@ span {
   background: linear-gradient(90deg, #30349f 0%, #595dd5 50%, #181b63 100%);*/
   /* transition: 0.2s all ease-in; */
   font-size: large;
-  z-index: 9999;
+  z-index: 1000000;
 }
 
 #navbarDropdown {

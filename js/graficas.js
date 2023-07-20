@@ -264,7 +264,7 @@ function cargarInfoServidor(){
             console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
-      });
+    });
 
     timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
 }
