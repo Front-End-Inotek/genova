@@ -16,7 +16,7 @@
 			<ul class="nav flex-column text-white w-100">
 			<div class="informacion">
 			<a href="inicio.php" class="nav-link text-white my-2">
-				<img src="images/InotekLogotipoRec.png" alt="logo" width="215" height="50" style= "margin-top: 25px; margin-bottom:10px;">
+				<img src="images/InotekLogotipoRec.png" alt="logo" width="215" height="50" style= "filter: invert(1);">
 			</a>
 			<div class="texto-check"><p></p></div>
 			<div class="form-check2 form-switch ocultar">
