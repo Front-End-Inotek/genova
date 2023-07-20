@@ -45,14 +45,17 @@
                     $tarifa= $fila['habitacion'];
                     $costo_tarifa = $fila['total'];
                     $precio_hospedaje= '$'.number_format($fila['precio_hospedaje'], 2);
-                    $cantidad_hospedaje= $fila['cantidad_hospedaje'];
+                    $cantidad_hospedaje= $fila['reserva_cantidad'];
                     $extra_adulto= $fila['extra_adulto'];
+                    $precio_adulto =  '$'.number_format($fila['precio_adulto'], 2);
                     $extra_junior= $fila['extra_junior'];
                     $extra_infantil= $fila['extra_infantil'];
+                    $precio_infantil =  '$'.number_format($fila['precio_infantil'], 2);
                     $extra_menor= $fila['extra_menor'];
                     $nombre_huesped= $fila['persona'].' '.$fila['apellido'];
                     $quien_reserva= $fila['nombre_reserva'];
                     $acompanante= $fila['acompanante'];
+                    $pax_extra ='$'.number_format($fila['pax_extra'],2);
                     // Checar si suplementos esta vacio o no
                     if (empty($fila['suplementos'])){
                             //echo 'La variable esta vacia';
@@ -61,6 +64,7 @@
                             $suplementos= $fila['suplementos'];
                     }
                     $total_suplementos= '$'.number_format($fila['total_suplementos'], 2);
+                    $total_alimentos= '$'.number_format($fila['costo_plan'], 2);
                     $total_habitacion= '$'.number_format($fila['total_hab'], 2);
                     if($fila['descuento']>0){
                             $descuento= $fila['descuento'].'%'; 
@@ -115,7 +119,7 @@
             <div class="row">';
               if($extra_adulto>0){
                 echo '<div class="col-sm-1"></div>';
-                echo '<div class="col-sm-6">Extra Adulto: '.$extra_adulto.'</div>';
+                echo '<div class="col-sm-6">Extra Adulto: '.$extra_adulto.' ('.$precio_adulto.')</div>';
               }else{
                 echo '<div class="col-sm-1"></div>';
                 echo '<div class="col-sm-6"></div>'; 
@@ -130,7 +134,7 @@
             <div class="row">';
               if($extra_infantil>0){
                 echo '<div class="col-sm-1"></div>';
-                echo '<div class="col-sm-6">Extra Infantil: '.$extra_infantil.'</div>';
+                echo '<div class="col-sm-6">Extra Infantil: '.$extra_infantil.' ('.$precio_infantil.')</div>';
               }else{
                 echo '<div class="col-sm-1"></div>';
                 echo '<div class="col-sm-6"></div>'; 
@@ -150,12 +154,12 @@
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-6">Suplementos: '.$suplementos.'</div>
-              <div class="col-sm-5">Total suplementos: '.$total_suplementos.'</div>'; 
+              <div class="col-sm-5">Plan Alimentos: '.$total_alimentos.'</div>'; 
             echo '</div>
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-6">Forma Pago: '.$forma_pago.'</div>
-              <div class="col-sm-5">Limite Pago: '.$limite_pago.'</div>
+              <div class="col-sm-5">Pax Extra: '.$pax_extra.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>

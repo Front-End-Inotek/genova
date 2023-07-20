@@ -450,11 +450,13 @@ class Reservacion extends ConexionMYSql
 
         $sentencia_otras="";
         $consulta_otras = $this->realizaConsulta($otras, "");
+        // print_r($no_disponibles);
         while($fila=mysqli_fetch_array($consulta_otras)) {
            if($fila['estado'] == 8){
             $sentencia_otras="SELECT * 
             FROM hab
             INNER JOIN movimiento as m on hab.mov = m.id
+            WHERE hab.estado = 8
             AND ('$fecha_salida' > m.detalle_inicio  AND '$fecha_entrada' <  m.detalle_fin)";
 
             // echo $sentencia_otras;
@@ -467,6 +469,7 @@ class Reservacion extends ConexionMYSql
            }
         }
         }
+        // print_r($no_disponibles);
         $consulta = $this->realizaConsulta($ocupadas, "");
         while($fila=mysqli_fetch_array($consulta)) {
             $no_disponibles [] = $fila['id_hab'];
@@ -2882,7 +2885,7 @@ class Reservacion extends ConexionMYSql
     {
         //cambié a left join por el hecho de que una reservacion "forzada" no tiene tarifa_hospedaje asignada como tal.
         $sentencia = "SELECT *,tipo_hab.nombre as tipohab,reservacion.precio_hospedaje as precio_hospe, planes_alimentos.nombre_plan as nombre_alimentos ,  
-        planes_alimentos.costo_plan as costo_plan,
+        planes_alimentos.costo_plan as costo_plan, reservacion.cantidad_hospedaje as reserva_cantidad,
         reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
 		FROM reservacion
 		LEFT JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id

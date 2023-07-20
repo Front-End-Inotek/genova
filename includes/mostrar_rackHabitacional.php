@@ -164,7 +164,7 @@ class RackHabitacional extends ConexionMYSql
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1
-        /*AND hab.id=51*/
+        /*AND hab.id=87*/
         ORDER BY id";
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";

@@ -201,7 +201,7 @@ setlocale(LC_ALL, "es_ES");
                     } else{
 
                         $clase_expirar="";
-    
+                        $mastiempo=false;
                         //Se calculan los estados de las habitaciones.
                         $mes = $this->convertir_mes(date('n', $tiempo));
                         $dia = date('d', $tiempo);
@@ -295,7 +295,7 @@ setlocale(LC_ALL, "es_ES");
                                 // $tiempo_aux += 86400 ;
                             }else{
                                 //Uso casa.
-                                $mastiempo=false;
+                               
                                 if ($c == 0 && $fila['estado'] != 1 ) {
                                     if($fila['estado'] == 8){
                                         //Si no tiene reservaciones se imprime normal, pero si si tiene el día actual es de reservación.
@@ -411,23 +411,14 @@ setlocale(LC_ALL, "es_ES");
                             //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
                             $mastiempo=false;
                             $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
-                            $clase_hover = "nuevax" . $i .rand(1,100);;
+                            $clase_hover = "nuevax" . $i .rand(1,200);;
                             echo '<style>
                             .'.$clase_hover.'::after {
                                 content: "'.$huesped_ocupada.'";
                             }
                             </style>';
-                            // echo date('Y-m-d');
-                            // if(date('Y-m-d',$fila['fin']) == date('Y-m-d')){
-                            //     echo "s";
-                            //     $earlier = new DateTime(date('Y-m-d',$fila['inicio']));
-                            // }else{
-                            //     echo "d";
-                            //     $earlier = new DateTime(date('Y-m-d'));
-                            // }
                             $inicio = new DateTime(date('Y-m-d'));
                             $fin = new DateTime(date('Y-m-d',$fila['fin']));
-    
                             $noches = $fin->diff($inicio)->format("%a");
                             $tiempo_aux = time();
                             $noches = $noches == 0 ? 1 : $noches;
@@ -442,27 +433,36 @@ setlocale(LC_ALL, "es_ES");
                             echo'
                             </td>
                             ';
+                            $n = 86400;
                             if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila['fin']))
-                            {
+                            {  
                                 $mastiempo=true;
                                 $tiempo_aux += 86400;
                             }
-    
-    
                             if($noches>1){
                                 $mastiempo=true;
                                 $n = 86400 * ($noches);
                                 $tiempo_aux += $n;
+                              
                             }
+                            // echo date('Y-m-d',$tiempo_aux);
+                            if(date('Y-m-d',$tiempo_aux) > date('Y-m-d',$fila['fin']))
+                            {
+                                // echo $n;
+                                $tiempo_aux = time()-$n;
+                            }
+    
                             //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
                             if($contador_row==0){
+    
                                 $i = 32;
                             }else{
                                 //aqui van las reservas, fila_r contiene las reservas
                                 //$tiempo_aux contendrá el tiempo 'actual', mas la suma de cada dia para cada reservación.
+    
                                 $current=0; //contador del ciclo de reservaciones.
                                 $ultima=""; //penúltima fecha de la reservacion.
-                                $filaL=null; //contendrá los datos de la ultima penúltima reservación.
+                                $fila_anterior=null; //contendrá los datos de la ultima penúltima reservación.
                                 $existetd=false; //Sí ya se imprió un td, no volver a imprimir.
                                 $show=false;
                                 if(!$mastiempo){
@@ -480,13 +480,15 @@ setlocale(LC_ALL, "es_ES");
     
                                     $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
     
+                                    if ($ultima!=""){
+                                        if(date('Y-m-d',$ultima)==date('Y-m-d',$fila['fin'])){
+    
+                                        }
+                                    }
+    
+    
                                     //ciclo para 'avanzar' atraves de los días de la reservación.
                                     while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
-                                    //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias), 
-                                    //con el tiempo de la reservacion
-                                    // $re= date('Y-m-d',$fila_r['fecha_entrada']);
-                                    // $rs= date('Y-m-d',$fila_r['fecha_salida']);
-                                    // $clase="ajuste";
                                     //Si el contador de fecha es igual a la fecha de entrada de la reservación y si trata del primer dato.
                                     if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila_r['fecha_entrada']))
                                     {
@@ -541,8 +543,10 @@ setlocale(LC_ALL, "es_ES");
                                         //  echo date('Y-m-d',$tiempo_aux);
                                         // die();
                                     }
-    
+                                    $fila_anterior=$fila_r;
+                                    $ultima = $fila_r['fecha_entrada'];
                                 }
+                                
     
                                 $i=32;
                             }
