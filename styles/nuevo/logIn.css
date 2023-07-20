@@ -54,7 +54,7 @@ body {
 
 #formFooter {
     /* background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%); */
-    background-color: var(--subtitulos);
+    /* background-color: var(--subtitulos); */
     padding: 7px;
     margin-top: 40px;
     text-align: center;
