@@ -1464,7 +1464,7 @@ class Reservacion extends ConexionMYSql
         LEFT JOIN hab ON movimiento.id_hab = hab.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 || reservacion.estado=2)  AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia) ORDER BY reservacion.id DESC;";
+		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1)  AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia) ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         //echo $sentencia;
@@ -2893,7 +2893,7 @@ class Reservacion extends ConexionMYSql
         LEFT JOIN planes_alimentos ON reservacion.plan_alimentos = planes_alimentos.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND (reservacion.estado = 2 OR reservacion.estado = 1) ORDER BY reservacion.id DESC";
+		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND (reservacion.estado = 1) ORDER BY reservacion.id DESC";
         $comentario="Mostrar los datos de la reservacion";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         return $consulta;
