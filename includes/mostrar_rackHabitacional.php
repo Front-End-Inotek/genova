@@ -164,7 +164,7 @@ class RackHabitacional extends ConexionMYSql
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1
-        /*AND hab.id=2*/
+        /*AND hab.id=51*/
         ORDER BY id";
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -239,7 +239,7 @@ class RackHabitacional extends ConexionMYSql
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
             $hab_nombre =$fila['nombre'];
-            $hab_nombre = strlen($hab_nombre) > 13 ? substr($hab_nombre,0,12)."..." : $hab_nombre;
+            // $hab_nombre = strlen($hab_nombre) > 13 ? substr($hab_nombre,0,12)."..." : $hab_nombre;
             echo '
                 <tr id="hab_'.$fila['id'].'" >
                     <td class="cal-userinfo">
@@ -518,8 +518,9 @@ class RackHabitacional extends ConexionMYSql
                         echo'
                         </td>
                         ';
+                        $n = 86400;
                         if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila['fin']))
-                        {
+                        {  
                             $mastiempo=true;
                             $tiempo_aux += 86400;
                         }
@@ -527,7 +528,15 @@ class RackHabitacional extends ConexionMYSql
                             $mastiempo=true;
                             $n = 86400 * ($noches);
                             $tiempo_aux += $n;
+                          
                         }
+                        // echo date('Y-m-d',$tiempo_aux);
+                        if(date('Y-m-d',$tiempo_aux) > date('Y-m-d',$fila['fin']))
+                        {
+                            // echo $n;
+                            $tiempo_aux = time()-$n;
+                        }
+
                         //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
                         if($contador_row==0){
 
@@ -560,8 +569,6 @@ class RackHabitacional extends ConexionMYSql
                                     if(date('Y-m-d',$ultima)==date('Y-m-d',$fila['fin'])){
 
                                     }
-                                    // echo date('Y-m-d',$ultima)."|".date('Y-m-d',$fila['fin']);
-                                    // die();
                                 }
 
 
