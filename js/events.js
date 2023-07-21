@@ -1670,12 +1670,12 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
         //console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
-                //console.log(res)
+                // console.log(res)
             });       
         }
         // $(".div_adultos").load(include);
         $("#preasignada").load(include,function(res){
-            // console.log(res)
+            //console.log(res)
         });
     }
     }
@@ -1813,21 +1813,20 @@ function obtener_garantia(event=null){
     if(event!=0){
         var garantia = event.target.options[event.target.selectedIndex].dataset.garantia;
         var efectivo = event.target.options[event.target.selectedIndex].text
-        if(garantia!=undefined && garantia == 1 && (efectivo.toLowerCase() !="efectivo")){
-            $("#div_voucher").show();
-            $("#voucher").attr("required",true)
+        if(garantia!=undefined && garantia == 1){
+            if((efectivo.toLowerCase() !="efectivo")){
+                $("#div_voucher").show();
+                $("#voucher").attr("required",true)
+            }
+            $("#estadotarjeta").val(2)
         }else{
             $("#div_voucher").hide();
             $("#voucher").removeAttr("required")
+            $("#estadotarjeta").val("")
         }
-    }
-    if(garantia_id==1 || garantia_id==0){
-        $("#btngarantia").attr("disabled",true)
-    }else{
-        $("#btngarantia").removeAttr("disabled");
+
     }
 
-    // console.log(garantia_id)
 }
 
 // Realiza un descuento de nuestros calculos

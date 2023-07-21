@@ -417,8 +417,6 @@ class Reservacion extends ConexionMYSql
             $agregar_="";
         }
 
-
-
         $fecha_entrada = strtotime($fecha_entrada);
         //se toma en cuenta un 'dia antes' porque puede salir el dia que otro entra.
         $fecha_salida=strtotime($fecha_salida);
@@ -459,7 +457,7 @@ class Reservacion extends ConexionMYSql
             INNER JOIN movimiento as m on hab.mov = m.id
             AND ('$fecha_salida' > m.detalle_inicio  AND '$fecha_entrada' <  m.detalle_fin)";
 
-            // echo $sentencia_otras;
+            echo $sentencia_otras;
 
             $consulta = $this->realizaConsulta($sentencia_otras, "");
             while($fila=mysqli_fetch_array($consulta)) {
@@ -469,13 +467,10 @@ class Reservacion extends ConexionMYSql
            }
         }
         }
-
-
         $consulta = $this->realizaConsulta($ocupadas, "");
         while($fila=mysqli_fetch_array($consulta)) {
             $no_disponibles [] = $fila['id_hab'];
         }
-
 
         $sentencia ="SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r
 		LEFT JOIN tarifa_hospedaje ON r.tipo_hab = tarifa_hospedaje.id
