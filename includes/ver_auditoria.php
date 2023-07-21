@@ -77,7 +77,7 @@
                     if($fila_atras!= $fila['hab_nombre']) {
                         echo '<td>
                         <span>'.$fila['hab_nombre'].'</span>
-                        <input type="checkbox"  class="campos_habs" checked/>
+                        <input type="checkbox"  class="campos_habs" checked />
                         </td>';
                     }else{
                         echo '<td></td>';
@@ -85,7 +85,7 @@
                     $campo = "campo".$c;
                     echo '<td>';
                     if($fila['forzar_tarifa'] != 0){
-                      $tarifa = $fila['forzar_tarifa'];
+                      $tarifa = $fila['tarifa'];
                     }else{
                       $tarifa = $fila['tarifa'];
                     }
@@ -108,54 +108,6 @@
                     $c++;
 
                 }
-
-
-                // while ($fila = mysqli_fetch_array($consulta)) {
-
-                //     $saldo = $cuenta->mostrar_faltante($fila['mov']);
-                //     $estado_credito = $cuenta->mostrarLimiteCredito($fila['mov']);
-                //     $opc_credito = $estado_credito[0];
-                //     $limite_credito = $estado_credito[1];
-
-                //     echo '<tr class="text-center">';
-                //     if($fila_atras!= $fila['hab_nombre']) {
-
-                       
-
-                //         echo '<td>'.$fila['hab_nombre'].'</td>';
-                //         echo '<td>'.$fila['descripcion'].'</td>';
-                //         echo '<td>'.$fila['cargo'].'</td>';
-                //         echo '<td>'.$fila['abono'].'</td>';
-                //         echo '<td>'.$saldo.'</td>';
-                //         echo '<td>'.$fila['tarifa'].'</td>';
-
-                //     }else{
-                //         echo '<td></td>';
-                //         echo '<td>'.$fila['descripcion'].'</td>';
-                //         echo '<td>'.$fila['cargo'].'</td>';
-                //         echo '<td>'.$fila['abono'].'</td>';
-                //         echo '<td></td>';
-                //         echo '<td></td>';
-
-                        
-                //             echo '<tr>
-                //             <td></td>
-                //             <td></td>
-                //             <td></td>
-                //             <td></td>
-                //             <td>Estado credito: '.$opc_credito.'</td>
-                //             <td>Límite de crédito: '.number_format($limite_credito,2).'</td>
-                //             </tr>
-                //             ';
-                       
-                //     }
-
-                //     echo '</tr>';
-                //     $fila_atras = $fila['hab_nombre'];
-                //     $c++;
-                  
-                // }
-
 
             
     echo ' </tbody>

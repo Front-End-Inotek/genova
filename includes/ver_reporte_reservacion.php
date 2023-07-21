@@ -188,7 +188,7 @@
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-6"><span class="texto_reporte">Estado:</span> '.$huesped->estado.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Codigo postal:>/span> '.$huesped->codigo_postal.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Codigo postal:</span> '.$huesped->codigo_postal.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>

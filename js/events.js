@@ -1636,7 +1636,7 @@ function editarTotalEstancia(event){
 
 // Calculamos la cantidad de noches de una reservacion
 function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
-
+    var tipo_hab=0;
     var fecha_salida= document.getElementById("fecha_salida")
     var fecha_entrada= document.getElementById("fecha_entrada");
     fecha_entrada_value = fecha_entrada.value
@@ -1653,6 +1653,21 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
     }else{
         document.getElementById("noches").value = noches
     }
+    var elemento = document.getElementById("tarifa");
+    elemento_opcion = elemento.options[elemento.selectedIndex]
+    if(elemento_opcion!=undefined){
+        tipo_hab = elemento.options[elemento.selectedIndex].getAttribute('data-tipo')
+
+        if(tipo_hab == null){
+            tipo_hab=0
+        }
+    }
+    forzar_tarifa= document.getElementById("forzar-tarifa").value;
+    if(noches!=0 && forzar_tarifa!=0){
+        precio_hospedaje  = forzar_tarifa/noches;
+        document.getElementById("precio_hospedaje").value = precio_hospedaje
+    }
+
     //Si cambia el numero de noches y ya existen tarifas se calcula el total de la instancia.
     tarifa_base = $("#tarifa_base").val()
     if(fecha_entrada_value!="" && fecha_salida_value!=""){
@@ -1668,7 +1683,7 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
         }
         // console.log(uso_casa)
         // $(".div_adultos").load("includes/consultar_reservacion_disponible.php?fechas="+JSON.stringify(fechas)+"&hab_id="+hab_id);
-        include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id+"&preasignada="+preasignada+"&uso_casa="+uso_casa;
+        include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id+"&preasignada="+preasignada+"&uso_casa="+uso_casa+"&tipo_hab="+tipo_hab;
         //console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
@@ -1677,7 +1692,7 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
         }
         // $(".div_adultos").load(include);
         $("#preasignada").load(include,function(res){
-            //console.log(res)
+            // console.log(res)
         });
     }
     }
@@ -1703,16 +1718,21 @@ function calculo_noches(fecha_entrada,fecha_salida){
     return Number(noches);
 }
 
+function comprobarExisteNoches(){
+
+}
 
 // Conseguimos la cantidad de adultos permitidos por tarifa hospedaje
 function cambiar_adultosNew(event=null,hab_id){
     //si hay un select entonces se lee el evento del select para extraer el hab_id, desde reservaciones.
     //se verifica que el evento no sea nulo para obtener el id del tipo de la habitación desde el tipo de tarifa selccionada.
+    var tipo_hab=0;
     if(event!=0){
-        var tipo_hab = event.target.options[event.target.selectedIndex].dataset.tipo;
+        tipo_hab = event.target.options[event.target.selectedIndex].dataset.tipo;
         if(tipo_hab!=undefined){
             $("#tipo-habitacion").val(tipo_hab)
             $("#tipo-habitacion").attr("disabled",true);
+            
         }
     }
     var forzar_tarifa = $("#forzar-tarifa").val()
@@ -1734,16 +1754,14 @@ function cambiar_adultosNew(event=null,hab_id){
             url:url_data,
             beforeSend:loaderbar,
             success:function(res){
-            //    console.log(res)
+            console.log(res)
             $("#total").val(res.precio_hab)
             $("#tarifa_base").val(res.precio_hospedaje)
             $("#tarifa_menores").val(res.precio_infantil)
             $("#tarifa_adultos").val(res.precio_adulto)
+            $("#precio_hospedaje").val(res.precio_hospedaje)
+            calcular_noches(0,0, 0)
             editarTotalEstancia()
-               //al seleccionar una nueva tarifa los extras se "reinician"
-            //    $("#extra_adulto").val("")
-            //    $("#extra_infantil").val("")
-            //    $("#pax-extra").val("")
             },
             //success:problemas_sistema,
             timeout:5000,
@@ -1759,6 +1777,8 @@ function cambiar_adultosNew(event=null,hab_id){
             $("#tarifa").attr('required',false);
             // $("#tarifa_base").val(forzar_tarifa)
             $("#total").val(forzar_tarifa)
+            precio_hospedaje = forzar_tarifa/ noches
+            $("#precio_hospedaje").val(precio_hospedaje)
             //editarTotalEstancia()
         }
     }
@@ -2129,7 +2149,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var total_hospedaje= precio_hospedaje * noches * numero_hab;
     var total_hab= total_hospedaje + extra_adulto  + extra_infantil + pax_extra;  
 
-    var precio_hospedaje = document.getElementById('tarifa_base').value
+    var precio_hospedaje = document.getElementById('precio_hospedaje').value
     var total_hospedaje = document.getElementById('total').value
 
     sobrevender = sobrevender ? 1 : 0 ;
@@ -4086,6 +4106,8 @@ function guardar_usuario(){
                     
                     if(res.search("Duplicate entry")){
                         alert("El nombre de usuario ya se encuentra ocupado")
+                        //<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">
+                        $("#boton_usuario").html('<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">');
                     }else{
                         ver_usuarios()
                     }
@@ -4781,7 +4803,7 @@ function editar_herramientas_cargo(id,hab_id,estado,cargo,id_maestra=0,mov=0){
 function confirmar_cambiar_cargos(){
     swal({
         title: "¿Estás de acuerdo con editar los cargos de las cuentas?",
-        text: "¡Los cargos se editarán y pueden ser editados mientras corra la noche!",
+        text: "¡Los cargos se aplicaran y pueden ser editados mientras corra la noch!",
         icon: "warning",
         buttons: {
             cancel: {
@@ -4834,7 +4856,6 @@ function confirmar_cambiar_cargos(){
             }
         }
         // console.log(array_cargos)
-    
         // return
         if(array_cargos.length!=0){
             var datos = {

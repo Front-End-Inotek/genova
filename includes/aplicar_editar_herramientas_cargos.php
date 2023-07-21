@@ -18,6 +18,8 @@
   $forzar_tarifa=0;
   $total=0;
   $costo_plan = 0;
+  $usuario_id =$_POST['usuario_id'];
+  $descripcion="Cargo por noche";
  
   //Se necesita recalcular el total de pago de esa reservación con la 'nueva tarifa', seria como forzar la tarifa.
   //Para ello se necesita obtener la info de dicha reservación para volver a calcular precios, etc.
@@ -27,9 +29,12 @@
       $reservacion = new Reservacion($cargo->reservaid);
       // print_r($reservacion);
       $forzar_tarifa = $cargo->valor;
+      $mov = $reservacion->saber_id_movimiento_($reservacion->id);
 
       if($forzar_tarifa==0){
+        $total_aux =$reservacion->precio_hospedaje;
         $reservacion->editar_tarifa_hab_aud($reservacion->id);
+        $cuenta->guardar_cuenta($usuario_id,$mov,$descripcion,1,$total_aux,0);
       }else{
         $reservacion->editar_tarifa_hab($forzar_tarifa,$reservacion->id);
       }

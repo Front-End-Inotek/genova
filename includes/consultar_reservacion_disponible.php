@@ -12,7 +12,9 @@ $preasignada =$_GET['preasignada'];
 
 $uso_casa = $_GET['uso_casa'];
 
-$resultado = $reservacion->comprobarFechaReserva($fecha_entrada,$fecha_salida,$hab_id,$preasignada);
+$tipo_hab = $_GET['tipo_hab'];
+
+$resultado = $reservacion->comprobarFechaReserva($fecha_entrada,$fecha_salida,$hab_id,$preasignada,$tipo_hab);
 
 //Lógica para reservaciones
 if(is_array($resultado)){

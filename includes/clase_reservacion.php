@@ -375,6 +375,18 @@ class Reservacion extends ConexionMYSql
         return $dates;
     }
 
+     public function saber_id_movimiento_($id)
+     {
+         $id_mov= 0;
+         $sentencia = "SELECT id, id_hab,motivo  FROM movimiento WHERE id_reservacion = $id LIMIT 1";
+         $comentario="Obtener el id de movimiento desde una reservacion";
+         $consulta= $this->realizaConsulta($sentencia, $comentario);
+         //se recibe la consulta y se convierte a arreglo
+         while ($fila = mysqli_fetch_array($consulta)) {
+             $id_mov=$fila['id'];
+         }
+         return $id_mov;
+     }
 
      // Obtener el id de reservacion de un movimiento
      public function saber_id_movimiento($id)
@@ -391,8 +403,14 @@ class Reservacion extends ConexionMYSql
          return $datos;
      }
 
-    public function comprobarFechaReserva($fecha_entrada, $fecha_salida, $hab_id, $preasignada)
+    public function comprobarFechaReserva($fecha_entrada, $fecha_salida, $hab_id, $preasignada,$tipo_hab)
     {
+
+        $agregar_tipo="";
+
+        if($tipo_hab!=0){
+            $agregar_tipo="AND tipo=$tipo_hab";
+        }
 
         $agregar_editar ="";
         $agregar_="";
@@ -516,8 +534,9 @@ class Reservacion extends ConexionMYSql
                 array_push($result, false);
             }
             $arraySQL = implode("','", $no_disponibles);
-            $sentencia = "SELECT * FROM hab  WHERE id NOT IN ('".$arraySQL."') AND estado_hab=1";
+            $sentencia = "SELECT * FROM hab  WHERE id NOT IN ('".$arraySQL."') AND estado_hab=1 $agregar_tipo";
             $consulta = $this->realizaConsulta($sentencia, "");
+            // echo $sentencia;
             $opciones ="";
             while($fila=mysqli_fetch_array($consulta)) {
                 $disponibles [] = $fila['id'];
@@ -527,7 +546,7 @@ class Reservacion extends ConexionMYSql
                 if($preasignada == $fila['id']) {
                     $opciones .= '<option selected value="'.$fila['id'].'">Habitación: '.$fila['nombre'].'</option>';
                 } else {
-                    $opciones .= '<option value="'.$fila['id'].'">Habitación: '.$fila['nombre'].'</option>';
+                    $opciones .= '<option value="'.$fila['id'].'">Hab. '.$fila['nombre'].'</option>';
                 }
 
             }
@@ -1258,7 +1277,7 @@ class Reservacion extends ConexionMYSql
                 if($fila['id_hab']==0 && $preasignar==1) {
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
                 } elseif($fila['id_hab']!=0) {
-                    echo '<td>Preasignada '.$preasignada.'</td>';
+                    echo '<td>Hab. '.$preasignada.'</td>';
                 }else{
                     echo '<td></td>';
                 }
@@ -1311,10 +1330,7 @@ class Reservacion extends ConexionMYSql
                 if($fila['id_hab']==0) {
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
                 } else {
-
-                    
-
-                    echo '<td>Preasignada '.$preasignada.'</td>';
+                    echo '<td>Hab. '.$preasignada.'</td>';
                 }
 
                 echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
@@ -2885,7 +2901,7 @@ class Reservacion extends ConexionMYSql
     {
         //cambié a left join por el hecho de que una reservacion "forzada" no tiene tarifa_hospedaje asignada como tal.
         $sentencia = "SELECT *,tipo_hab.nombre as tipohab,reservacion.precio_hospedaje as precio_hospe, planes_alimentos.nombre_plan as nombre_alimentos ,  
-        planes_alimentos.costo_plan as costo_plan, reservacion.cantidad_hospedaje as reserva_cantidad,
+        planes_alimentos.costo_plan as costo_plan, reservacion.cantidad_hospedaje as reserva_cantidad, reservacion.precio_hospedaje as reserva_precio_hospedaje,
         reservacion.id AS ID,tarifa_hospedaje.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario
 		FROM reservacion
 		LEFT JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id

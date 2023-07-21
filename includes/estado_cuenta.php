@@ -29,7 +29,7 @@
       $noches= $fila['noches'];
       $numero_hab= $fila['numero_hab'];
       $tarifa= $fila['habitacion'];
-      $precio_hospedaje= $fila['precio_hospedaje'];
+      $precio_hospedaje="$".number_format($fila['reserva_precio_hospedaje'],2);
       $extra_adulto= $fila['extra_adulto'];
       $extra_junior= $fila['extra_junior'];
       $extra_infantil= $fila['extra_infantil'];
@@ -104,7 +104,7 @@
           <div class="col">Fecha Entrada: <span>'.$fecha_entrada.'</span></div>
           <div class="col">Fecha Salida: <span>'.$fecha_salida.'</span></div>
           <div class="col">Noches: <span>'.$noches.'</span></div>
-      
+          <div class="col">Costo noche: <span>'.$precio_hospedaje.'</span></div>
           <div class="col">Tarifa: <span>$'.number_format($total_tarifa,2).'</span></div>
         </div>
         <div class="row">

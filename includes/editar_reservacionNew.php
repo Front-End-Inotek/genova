@@ -1,5 +1,5 @@
 <?php
-  error_reporting(0);
+  error_reporting(1);
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_tarifa.php");
   include_once("clase_hab.php");
@@ -26,6 +26,7 @@
   $forzar_tarifa = $reservacion->forzar_tarifa == 0 ? "" : $reservacion->forzar_tarifa;
   $estado_reserva = $reservacion->estado;
   $id_cuenta = $reservacion->id_cuenta;
+$tipo_hab=0;
 
 $inputFechaEn="";
 $inputValueFecha="";
@@ -53,6 +54,7 @@ if (empty($_GET['hab_id'])){
 
     $hab = NEW Hab(0);
     $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
+    $tipo_hab = $reservacion->tipo_hab;
 }else{
     $titulo_="CHECK-IN";
     $clv="Clave check-in";
@@ -85,7 +87,7 @@ if($reservacion->estado==1){
     }
 }
 
-$resultado = $reservacion->comprobarFechaReserva(date('Y-m-d',$reservacion->fecha_entrada),date('Y-m-d',$reservacion->fecha_salida),$hab_id,$preasignada);
+$resultado = $reservacion->comprobarFechaReserva(date('Y-m-d',$reservacion->fecha_entrada),date('Y-m-d',$reservacion->fecha_salida),$hab_id,$preasignada,$tipo_hab);
 
 $ruta_regreso="";
 if(isset($_GET['ruta_regreso'])){
@@ -168,8 +170,10 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 -->
             </div>
             <div class="d-flex justify-content-between flex-wrap">
-            <div class="form-group col-md-4 col-12">
-            </div>
+                <div class="form-group col-md-4 col-12">
+                    <label for="adultos">Precio noche</label>
+                    <input type="number" class="form-control" id="precio_hospedaje" min="0" disabled value="'.$reservacion->precio_hospedaje.'">
+                </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="adultos">Adultos</label>
                     <input type="number" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->extra_adulto.'"  onchange="editarTotalEstancia()">
