@@ -9,7 +9,7 @@ function mostar_info($hab_id,$estado,$mov,$id,$entrada="",$salida=""){
 
 	$info = NEW Informacion($hab_id,$estado,$mov,$id,$entrada,$salida);
 }
-function show_info($hab_id,$estado){
+function show_info($hab_id,$estado,$estado_interno){
 	$hab = NEW Hab($hab_id);
 	
 	
@@ -24,7 +24,16 @@ function show_info($hab_id,$estado){
 			break;
 
 			case 1:
-				echo 'Ocupado';
+				if($estado_interno=="sin estado"){
+					echo 'Ocupado';
+				}else{
+					if($estado_interno=="limpieza"){
+						echo "Ocupada limpieza";
+					}
+					if($estado_interno=="sucia"){
+						echo "Sucia ocupada";
+					}
+				}
 
 			break;
 
@@ -37,11 +46,11 @@ function show_info($hab_id,$estado){
 			break;
 
 			case 4:
-				echo 'Sucia ocupada';
+				echo 'Mantenimiento';
 			break;
 
 			case 5:
-				echo 'Ocupada limpieza';
+				echo 'Bloqueo';
 			break;
 
 			case 6:
@@ -93,7 +102,7 @@ echo '<div class="modal-header" style="background-color: #97b2f9ee; color: #000;
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	</div>';
 echo '<div class="container-fluid">';
-show_info($_GET['hab_id'],$_GET['estado']);
+show_info($_GET['hab_id'],$_GET['estado'],$estado_interno);
 echo '</br>';
 echo '<div class="row flex-wrap">';
 

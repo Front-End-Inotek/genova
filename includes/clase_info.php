@@ -40,8 +40,7 @@
             $this->uso_casa($hab_id,$estado,$mov);
           break;
         case 7: case 6:
-        
-              $this->reserva_pendiente($hab_id,$estado,$mov,$id,$entrada,$salida);
+          $this->reserva_pendiente($hab_id,$estado,$mov,$id,$entrada,$salida);
           break;
         default:
             echo '<div class="col-xs-2 col-sm-2 col-md-2">';
@@ -318,9 +317,6 @@
         echo 'Fin: '.date("d-m-Y H:i:s",  $fin_hospedaje);
       echo '</div>';
       echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-        if($motivo != ''){
-          echo 'Motivo: '.$motivo;
-        }
       echo '</div>';
       echo '<div class="col-xs-12 col-sm-12 col-md-12">';
         echo 'Tipo Habitación: '.$tipo_habitacion;

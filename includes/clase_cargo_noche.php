@@ -140,6 +140,7 @@
         {
           $id= $fila['id'];
         }
+        $id = $id == 0 ? 1 : $id;
         return $id;
       }
       

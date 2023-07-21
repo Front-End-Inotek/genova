@@ -1539,18 +1539,20 @@ function agregar_check(){
 // Agregar una reservacion
 function agregar_reservaciones(hab_id=0){
 	$('#area_trabajo').hide();
-    $('#pie').hide();
 	$('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/agregar_reservacionNew.php?hab_id="+hab_id); 
     closeModal();
 	closeNav();
+    $('#pie').hide();
 }
 function graficas(){
     var usuario_id=localStorage.getItem("id");
     localStorage.setItem('vista',3)
     $('#area_trabajo').hide();
+   
     $('#area_trabajo_menu').show();
 	$("#area_trabajo_menu").load("includes/graficas.php?usuario_id="+usuario_id);
+    $('#pie').show();
     closeModal();
     closeNav();
 }
@@ -5383,6 +5385,7 @@ function switch_rack(){
         var usuario_id=localStorage.getItem("id");
         $('#area_trabajo').hide();
         $('#area_trabajo_menu').show();
+        $('#pie').show();
         $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         closeModal();
         closeNav();
@@ -5395,6 +5398,7 @@ function switch_rack(){
         localStorage.removeItem('estatus_hab')
         estatus_hab=""
         $('#area_trabajo').hide();
+        $('#pie').show();
         $('#area_trabajo_menu').show();
         $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
         closeModal();
@@ -7006,7 +7010,9 @@ function guardar_corte(){
             url:"includes/guardar_corte.php",
             data:datos,
             beforeSend:loaderbar,
-            success:principal,
+            success:function(res){
+                principal()
+            },
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema

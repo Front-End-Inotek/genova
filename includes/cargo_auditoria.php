@@ -122,10 +122,10 @@
   $pdf->Cell(25,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
   $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
   // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA $'),0,0,'C',True);
-  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
   // $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NO.'),0,0,'C',True);
-  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
-  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
   $pdf->Cell(40,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
   $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
 
@@ -134,10 +134,10 @@
   $pdf->Cell(25,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
   // $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
-  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
   $pdf->Cell(40,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 
   $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",'RESERVA'),0,0,'C',True);
 
@@ -186,10 +186,10 @@
     $pdf->Cell(25,5,iconv("UTF-8", "ISO-8859-1",$hab_nombre),1,0,'C');
     $pdf->Cell(30,5,iconv("UTF-8", "ISO-8859-1",$total),1,0,'C');
     // $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$precio_tarifa),1,0,'C'); 
-    $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$extra_adulto),1,0,'C');
+    $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_adulto),1,0,'C');
     // $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$nohabs),1,0,'C');
-    $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
-    $pdf->Cell(8,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
+    $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
+    $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
     $pdf->Cell(40,5,iconv("UTF-8", "ISO-8859-1",$nombre_huesped),1,0,'C'); 
     $pdf->Cell(30,5,iconv("UTF-8", "ISO-8859-1",$quien_reserva),1,0,'C'); 
     $pdf->Cell(28,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total, 2)),1,1,'C');    
@@ -208,10 +208,10 @@
         $pdf->Cell(25,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
         $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
         // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA $'),0,0,'C',True);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True); 
         // $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NO.'),0,0,'C',True);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
         $pdf->Cell(40,4,iconv("UTF-8", "ISO-8859-1",'NOMBRE'),0,0,'C',True); 
         $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",'QUIEN'),0,0,'C',True); 
 
@@ -220,10 +220,10 @@
         $pdf->Cell(25,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
         $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
         // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'ADULTO'),0,0,'C',True); 
         // $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-        $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'MENOR'),0,0,'C',True); 
         $pdf->Cell(40,4,iconv("UTF-8", "ISO-8859-1",'HUESPED'),0,0,'C',True); 
         $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",'RESERVA'),0,0,'C',True);
     
@@ -235,8 +235,8 @@
   }
 
   $pdf->SetFont('Arial','',10);
-  $numero_actual= $cargo_noche->ultima_insercion_auto();
-  // $numero_actual++;
+  $numero_actual= $cargo_noche->ultima_insercion();
+  $numero_actual++;
   $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Total $ '.number_format($total_final, 2)),0,1,'R');
 
   // Luego de guardar el reporte se cambia el estado cargo noche de todas las habitaciones a 0

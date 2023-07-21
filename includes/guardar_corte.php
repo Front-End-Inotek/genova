@@ -144,6 +144,7 @@
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   $cantidad= $tipo->total_elementos();
+  $cantidad = sizeof($inf->hab_tipo_hospedaje);
   for($z=0 ; $z<$cantidad; $z++)
   {
       $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_tipo_hospedaje[$z]),1,0,'C');
@@ -278,19 +279,20 @@
   }
   
   $nueva_etiqueta= $labels->obtener_corte();
+
+//   echo $nueva_etiqueta;
+//   die();
+
   //$nueva_etiqueta= $nueva_etiqueta - 1;
   $corte_id= $corte->ultima_insercion();
-  
   // Cambiar concepto a inactivo
   $concepto->cambiar_activo($_POST['usuario_id']);
-  
   // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
   $ticket->editar_estado_corte($_POST['usuario_id'],$corte_id,2);
   $ticket->editar_estado($_POST['usuario_id'],$corte_id,2);
   $labels->actualizar_etiqueta_corte();
   $cuenta->editar_estado($_POST['usuario_id']);
   $logs->guardar_log($_POST['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
-  
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","F");
   //$pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");

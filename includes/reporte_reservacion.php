@@ -69,7 +69,7 @@
       $numero_hab= $fila['numero_hab'];
       $tarifa= $fila['habitacion'];
       $precio_hospedaje= '$'.number_format($fila['precio_hospedaje'], 2);
-      $cantidad_hospedaje= $fila['cantidad_hospedaje'];
+      $cantidad_hospedaje= $fila['reserva_cantidad'];
       $extra_adulto= $fila['extra_adulto'];
       $extra_junior= $fila['extra_junior'];
       $extra_infantil= $fila['extra_infantil'];
@@ -77,6 +77,10 @@
       $nombre_huesped= $fila['persona'].' '.$fila['apellido'];
       $quien_reserva= $fila['nombre_reserva'];
       $acompanante= $fila['acompanante'];
+      $precio_adulto =  '$'.number_format($fila['precio_adulto'], 2);
+      $pax_extra ='$'.number_format($fila['pax_extra'],2);
+      $precio_infantil =  '$'.number_format($fila['precio_infantil'], 2);
+      $total_alimentos= '$'.number_format($fila['costo_plan'], 2);  
       // Checar si suplementos esta vacio o no
       if (empty($fila['suplementos'])){
           //echo 'La variable esta vacia';
@@ -85,6 +89,7 @@
           $suplementos= $fila['suplementos'];
       }
       $total_suplementos= '$'.number_format($fila['total_suplementos'], 2);
+    
       $total_habitacion= '$'.number_format($fila['total_hab'], 2);
       if($fila['descuento']>0){
           $descuento= $fila['descuento'].'%'; 
@@ -136,7 +141,7 @@
   $x= 20;
   $pdf->SetX($x);
   if($extra_adulto>0){
-      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Adulto: '.$extra_adulto),0,0,'L');
+      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Adulto: '.$extra_adulto . " (".$precio_adulto.')'),0,0,'L');
   }else{
       $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Adulto: 0'),0,0,'L');
   }
@@ -149,7 +154,7 @@
   $x= 20;
   $pdf->SetX($x);
   if($extra_infantil>0){
-      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Infantil: '.$extra_infantil),0,0,'L');
+      $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Infantil: '.$extra_infantil. " (".$precio_infantil.')' ),0,0,'L');
   }else{
       $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Extra Infantil: 0'),0,0,'L');
   }
@@ -167,12 +172,12 @@
   $x= 20;
   $pdf->SetX($x);
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Suplementos: '.$suplementos),0,0,'L');
-  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Total suplementos: '.$total_suplementos),0,1,'L');
+  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Plan Alimentos: '.$total_alimentos),0,1,'L');
   
   $x= 20;
   $pdf->SetX($x);
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Forma Pago: '.$forma_pago),0,0,'L');
-  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Limite Pago: '.$limite_pago),0,1,'L');
+  $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Pax Extra: '.$pax_extra),0,1,'L');
   
   $x= 20;
   $pdf->SetX($x);

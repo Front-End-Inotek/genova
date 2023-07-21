@@ -58,6 +58,15 @@
       $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
 
       $total_tarifa = $fila['total'];
+
+      if(!empty($fila['forzar_tarifa'])){
+        $tarifa="Forzada";
+      }
+
+      $precio_adulto =  '$'.number_format($fila['precio_adulto'], 2);
+      $pax_extra ='$'.number_format($fila['pax_extra'],2);
+      $precio_infantil =  '$'.number_format($fila['precio_infantil'], 2);
+      $total_alimentos= '$'.number_format($fila['costo_plan'], 2);  
   }
 
   $saldo_faltante= 0;
@@ -100,13 +109,14 @@
         </div>
         <div class="row">
           <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span></div>
-          <div class="col">Suplementos: <span>'.$suplementos.'</span></div>
+          <div class="col">Plan Alimentos: <span>'.$total_alimentos.'</span></div>
           <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
         </div>
         <div class="row">';
+          echo '<div class="col">Pax Extra: <span>'.$pax_extra.'</span></div>';
           if($extra_adulto>0){
-            echo '<div class="col">Extra Adulto: <span>'.$extra_adulto.'</span></div>';
+            echo '<div class="col">Extra Adulto: <span>'.$extra_adulto.' ('.$precio_adulto.')</span></div>';
           }else{
             echo '';
           }
@@ -118,7 +128,7 @@
           }
 
           if($extra_infantil>0){
-            echo '<div class="col">Extra Infantil: <span>'.$extra_infantil.'</span></div>';
+            echo '<div class="col">Extra Infantil: <span>'.$extra_infantil.' ('.$precio_infantil.')</span></div>';
           }else{
             echo '';
           }

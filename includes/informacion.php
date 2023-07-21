@@ -60,7 +60,7 @@ class Informacion extends ConexionMYSql
     if (true) {
     $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id
     WHERE hab.estado_hab = 1 $filtro 
-    /*AND hab.id=44*/
+    /*AND hab.id=3*/
     ORDER BY id";
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -97,7 +97,6 @@ echo'
     echo ' <div class="containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {
-        $tiempo_actual = time();
         $hab = $fila['id'];
         //por cada hab, se tiene que consultar las preasignaciones existentes
         $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado,
@@ -114,19 +113,25 @@ echo'
         and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') 
         order by reservacion.fecha_entrada asc;
         ";
+        $reserva_entrada=0;
+        $reserva_salida=0;
+        $estado_hab = $fila['estado'];
         // echo $sentencia_reservaciones;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
         $contador_row = mysqli_num_rows($consulta_reservaciones);
-        $estado_hab = $fila['estado'];
+        
         while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
             // echo date('Y-m-d',$tiempo_actual) ."|". date('Y-m-d',$fila_r['fecha_entrada']);
             if(date('Y-m-d',$tiempo_actual) == date('Y-m-d',$fila_r['fecha_entrada']) && $estado_hab!=1){
+                $reserva_entrada=$fila_r['fecha_entrada'];
+                $reserva_salida=$fila_r['fecha_salida'];
                 if($fila_r['garantia'] == "garantizada"){
                     $estado_hab = 6;
                 }else{
                     $estado_hab = 7;
                 }
+                break;
             }
         }
         $clase_expirar="";
@@ -210,7 +215,7 @@ echo'
 
         if($fila['tipo']>0){
 
-            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\')" >';
+            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';
             switch($estado) {
                 case "Disponible limpia":
                 echo'<div class="btn disponible-limpia">';
