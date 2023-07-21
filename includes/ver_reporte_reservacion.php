@@ -18,15 +18,15 @@
               <div class="col-sm-4  ">
               <div class=" d-flex justify-content-between">
                 <div  id="boton_reservacion">
-                  <input type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">
+                  <button type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">Imprimir</button>
                 </div>';
                 if($titulo=="RESERVACIÓN"){
                   echo '<div  id="boton_reservacion">
-                  <input type="submit" class="btn btn-success btn-block margen-1" value="Reenviar" onclick="enviar_reserva_correo('.$_GET['id'].',\''.$correo.'\',true)">
+                  <button type="submit" class="btn btn-success btn-block margen-1" value="Reenviar" onclick="enviar_reserva_correo('.$_GET['id'].',\''.$correo.'\',true)">Reenviar</button>
                   </div>';
                 }
                 echo '
-                <div ><button class="btn btn-info btn-block" onclick="'.$ruta.'"> ←</button></div>
+                <div ><button class="btn btn-info btn-block" onclick="'.$ruta.'">⬅</button></div>
               </div>
               </div>
             </div>';
