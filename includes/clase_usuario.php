@@ -455,7 +455,11 @@
           default:// indeterminado
               echo "Aun no se encuentra registrado ese nivel de usuario";
               break; 
-        }                 
+
+          
+        }
+        
+        return $consulta;
       }
       // Evaluar los datos de un usuario para autorizar un cambio
       function evaluar_datos($usuario_evaluar,$contrasena_evaluar){

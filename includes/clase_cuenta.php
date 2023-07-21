@@ -370,8 +370,8 @@
         )";
         }
 
-        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.total as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa 
-		    , reservacion.fecha_auditoria
+        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.precio_hospedaje as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa 
+        ,reservacion.fecha_auditoria
         FROM
         hab
         INNER JOIN movimiento as mov ON hab.mov = mov.id 
@@ -589,12 +589,23 @@
                     }
                   }
                 }else{
-                  echo '<tr class="fuente_menor table-secondary text-center">
-                  <td>'.$fila['concepto'].'</td>
-                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                  <td>$'.number_format($fila['cargo'], 2).'</td>
-                  <td></td>
-                  </tr>';
+                  if($auditoria_editar>0){
+                    echo '<tr class="fuente_menor text-center">
+                    <td>'.$fila['concepto'].'</td>
+                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>$'.number_format($fila['cargo'], 2).'</td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                    </tr>';
+                    echo '';
+                  }else{
+                    echo '<tr class="fuente_menor table-secondary text-center">
+                    <td>'.$fila['concepto'].'</td>
+                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>$'.number_format($fila['cargo'], 2).'</td>
+                    <td></td>
+                    </tr>';
+                  }
+                  
                 }
                 $fecha_atras = date('Y-m-d',$fila['fecha']);
                 $c++;

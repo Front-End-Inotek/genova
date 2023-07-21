@@ -139,54 +139,6 @@
     $hab->cambiohabUltimo($actual_hab);
   }
 
-  // if($total_pago > 0){
-  //   if($_POST['forma_pago'] == 2){
-  //     $factuar= 1;
-  //   }else{
-  //     $factuar= 0;
-  //   }
-  //   if($_POST['forma_pago'] == 1){
-  //     $efectivo_pago= 1;
-  //   }else{
-  //     $efectivo_pago= 0;
-  //   }
-
-  //   $tipo_cargo= 3; // Corresponde al cargo de hospedaje sin comida
-  //   $resta= 0;
-  //   $nueva_etiqueta= $labels->obtener_etiqueta();
-  //   $labels->actualizar_etiqueta();
-  //   $comanda= $pedido_rest->saber_comanda($id_movimiento);
-
-  //   if($_POST['forma_pago'] == 1){
-  //     $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,$total_pago,0,0,0,$descuento,$factuar,'','Pago al reservar',$nueva_etiqueta,$resta,$comanda,0);
-  //   }else{
-  //     $ticket_id= $ticket->guardar_ticket($id_movimiento,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,0,0,$total_pago,0,$descuento,$factuar,'','Pago al reservar',$nueva_etiqueta,$resta,$comanda,0);
-  //   }
-
-  //   $cantidad= 1;
-  //   $categoria= $_POST['tipo_hab'];
-  //   $nombre= $hab->nombre;
-  //   if($nombre == 0){
-  //     $nombre_concepto= 'Primer abono de habitacion ';
-  //   }else{
-  //     $nombre_concepto= 'Primer abono de habitacion '.$nombre;
-  //   }
-  //   $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$total_pago,($total_pago*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
-    
-  //   // Imprimir ticket
-  //   // if($confi->ticket_restaurante == 0){
-  //   //   $ticket->cambiar_estado($ticket_id);
-  //   // }
-
-  //   $logs->guardar_log($_POST['usuario_id'],"Agregar primer abono a la habitacion: ". $nombre);
-  //   $logs->guardar_log($_POST['usuario_id'],"Agregar ticket con etiqueta: ". $nueva_etiqueta);
-  //   // Cupon, extra_persona, suplementos, hab_tipo
-
-  //   //todo salió bien en teoría, retornar el id de la reservacion creada.
-  //   //echo $id_reservacion;
-    
-  // }
-  //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
   echo $id_reservacion;
 
 ?>

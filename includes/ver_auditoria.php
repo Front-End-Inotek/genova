@@ -77,7 +77,7 @@
                     if($fila_atras!= $fila['hab_nombre']) {
                         echo '<td>
                         <span>'.$fila['hab_nombre'].'</span>
-                        <input type="checkbox"  class="campos_habs" />
+                        <input type="checkbox"  class="campos_habs" checked/>
                         </td>';
                     }else{
                         echo '<td></td>';

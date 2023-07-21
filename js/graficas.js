@@ -8,6 +8,9 @@ var datos_ventas=[];
 var datos_ventas_rest=[];
 var ventas_rest=[];
 
+var datos_abonos=[];
+var datos_cargos=[];
+
 
 //Graficas
 var grafica_ocupadas;
@@ -136,7 +139,7 @@ const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "S
 
 const datosVentas2020 = {
     label: "Cargos",
-    data: datos_ventas,
+    data: datos_cargos,
     backgroundColor: "#00D27A",
     borderColor: "#00D27A",
     borderWidth: 1,
@@ -144,7 +147,7 @@ const datosVentas2020 = {
 
 const datosVentas2021 = {
     label: "Abonos",
-    data: datos_ventas_rest,
+    data: datos_abonos,
     backgroundColor: "rgba(84,183,245,1)",
     borderColor: "rgba(84,183,245,1)",
     borderWidth: 1,
@@ -155,8 +158,8 @@ grafica_ventas=new Chart (ventas, {
     data: {
         labels : etiquetasVentas,
         datasets: [
+            datosVentas2021,
             datosVentas2020,
-            datosVentas2021
         ]
     },
     options: {
@@ -202,7 +205,7 @@ cargarInfoServidor();
 }
 
 function asignarInfo(info){
-    // console.log(info)
+    console.log(info)
     //Ocupacion
     datos_ocupadas = info['datos_ocupadas']
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;
@@ -225,11 +228,10 @@ function asignarInfo(info){
     // grafica_ventas.data.datasets[1].data=datos_ventas_rest
     // grafica_ventas.update();
       //Abonos/cargos datos
-    datos_ventas = info['datos_abonos'];
-    grafica_ventas.data.datasets[0].data=datos_ventas
-    //Ventas rest
-    datos_ventas_rest = info['datos_cargos'];
-    grafica_ventas.data.datasets[1].data=datos_ventas_rest
+    datos_abonos = info['datos_abonos'];
+    grafica_ventas.data.datasets[0].data=datos_abonos
+    datos_cargos = info['datos_cargos'];
+    grafica_ventas.data.datasets[1].data=datos_cargos
     grafica_ventas.update();
     //Datos rest 4
     ventas4 = info['venta_rest'];
@@ -266,6 +268,6 @@ function cargarInfoServidor(){
         }
     });
 
-    timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
+    // timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
 }
 

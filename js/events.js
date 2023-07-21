@@ -4081,7 +4081,15 @@ function guardar_usuario(){
                   url:"includes/guardar_usuario.php",
                   data:datos,
                   beforeSend:loaderbar,
-                  success:ver_usuarios,
+                  success:function(res){
+                    console.log(res)
+                    
+                    if(res.search("Duplicate entry")){
+                        alert("El nombre de usuario ya se encuentra ocupado")
+                    }else{
+                        ver_usuarios()
+                    }
+                  },
                   //success:problemas_sistema,
                   timeout:5000,
                   error:problemas_sistema

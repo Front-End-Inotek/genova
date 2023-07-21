@@ -347,7 +347,7 @@ class Reservacion extends ConexionMYSql
     public function obtenerTipoDesdeTarifa($tipo_hab)
     {
         $real_tipo_hab =0;
-        $sentencia_tarifa = "SELECT tipo FROM tarifa_hospedaje WHERE id = $tipo_hab";
+        $sentencia_tarifa = "SELECT tipo FROM tarifa_hospedaje WHERE tipo = $tipo_hab";
         $comentario="Consultar el el tipo de habitación en base a la tarifa dada.";
         $consulta = $this->realizaConsulta($sentencia_tarifa, $comentario);
 
@@ -598,7 +598,7 @@ class Reservacion extends ConexionMYSql
         //       $total_cargo= $total_suplementos + $forzar_tarifa;
         //   }
           if($cuenta == 1 && $id_movimiento != 0) {
-              $pago_total= $total_pago + $cantidad_cupon;
+              $pago_total= 0;
               //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
               $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
               VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
