@@ -17,7 +17,7 @@
         <div class="col-sm-12">';
         $producto = $surtir->producto;
         $mostrar = $inventario->obtengo_nombre($producto);
-        echo '  '.$mostrar; 
+        echo '  '.$mostrar;
         echo '</div>
       </div><br>
 
@@ -27,10 +27,9 @@
         <div class="form-group">
         <input class="form-control" type="number"  id="cantidad" value="'.$surtir->cantidad.'"/>
         </div>
-        </div> 
+        </div>
       </div><br>
     </div>
-    
     <div class="modal-footer" id="boton_surtir">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       <button type="button" class="btn btn-success" onclick="editar_surtir_inventario('.$_GET['id'].')"> Aceptar</button>

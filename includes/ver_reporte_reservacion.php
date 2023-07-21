@@ -88,24 +88,24 @@
             $huesped= NEW Huesped($id_huesped);
             echo '<div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Fecha Entrada: '.$fecha_entrada.'</div>
-              <div class="col-sm-5">Fecha Salida: '.$fecha_salida.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Fecha Entrada:</span> '.$fecha_entrada.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Fecha Salida:</span> '.$fecha_salida.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Usuario que la hizo: '.$usuario_reservacion.'</div>
-              <div class="col-sm-5">Cantidad habitaciones: '.$numero_hab.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Usuario que la hizo:</span> '.$usuario_reservacion.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Cantidad habitaciones:</span> '.$numero_hab.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Noches: '.$noches.'</div>
-              <div class="col-sm-5">Tarifa: '.$tarifa.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Noches:</span> '.$noches.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Tarifa:</span> '.$tarifa.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Nombre Huesped: '.$nombre_huesped.'</div>';
+              <div class="col-sm-6"><span class="texto_reporte">Nombre Huesped:</span> '.$nombre_huesped.'</div>';
               if($quien_reserva!="checkin"){
-                echo '<div class="col-sm-5">Quién Reserva: '.$quien_reserva.'</div>';
+                echo '<div class="col-sm-5"><span class="texto_reporte">Quién Reserva:</span> '.$quien_reserva.'</div>';
               }else{
                 echo '<div class="col-sm-5"></div>';
               }
@@ -113,20 +113,20 @@
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Tarifa: '.' $'.number_format($costo_tarifa,2).'</div>
-              <div class="col-sm-5">Cantidad Hospedaje: '.$cantidad_hospedaje.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Tarifa:</span> '.' $'.number_format($costo_tarifa,2).'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Cantidad Hospedaje:</span> '.$cantidad_hospedaje.'</div>
             </div>
             <div class="row">';
               if($extra_adulto>0){
                 echo '<div class="col-sm-1"></div>';
-                echo '<div class="col-sm-6">Extra Adulto: '.$extra_adulto.' ('.$precio_adulto.')</div>';
+                echo '<div class="col-sm-6"><span class="texto_reporte">Extra Adulto:</span> '.$extra_adulto.' ('.$precio_adulto.')</div>';
               }else{
                 echo '<div class="col-sm-1"></div>';
                 echo '<div class="col-sm-6"></div>'; 
               }
 
               if($extra_junior>0){
-                echo '<div class="col-sm-5">Extra Junior: '.$extra_junior.'</div>';
+                echo '<div class="col-sm-5"><span class="texto_reporte">Extra Junior:</span> '.$extra_junior.'</div>';
               }else{
                 echo '<div class="col-sm-5"></div>'; 
               }
@@ -134,42 +134,42 @@
             <div class="row">';
               if($extra_infantil>0){
                 echo '<div class="col-sm-1"></div>';
-                echo '<div class="col-sm-6">Extra Infantil: '.$extra_infantil.' ('.$precio_infantil.')</div>';
+                echo '<div class="col-sm-6"><span class="texto_reporte">Extra Infantil:</span> '.$extra_infantil.' ('.$precio_infantil.')</div>';
               }else{
-                echo '<div class="col-sm-1"></div>';
+                echo '<div></div>';
                 echo '<div class="col-sm-6"></div>'; 
               }
 
               if($extra_menor>0){
-                echo '<div class="col-sm-5">Extra Menor: '.$extra_menor.'</div>';
+                echo '<div class="col-sm-5"><span class="texto_reporte">Extra Menor:</span> '.$extra_menor.'</div>';
               }else{
                 echo '<div class="col-sm-5"></div>'; 
               }
             echo '</div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Número Cuenta: '.$id_cuenta.'</div>
-              <div class="col-sm-5">Precio Hospedaje: '.$precio_hospedaje.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Número Cuenta:</span> '.$id_cuenta.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Precio Hospedaje:</span> '.$precio_hospedaje.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Suplementos: '.$suplementos.'</div>
-              <div class="col-sm-5">Plan Alimentos: '.$total_alimentos.'</div>'; 
+              <div class="col-sm-6"><span class="texto_reporte">Suplementos:</span> '.$suplementos.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Plan Alimentos:</span> '.$total_alimentos.'</div>'; 
             echo '</div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Forma Pago: '.$forma_pago.'</div>
-              <div class="col-sm-5">Pax Extra: '.$pax_extra.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Forma Pago:</span> '.$forma_pago.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Pax Extra:</span> '.$pax_extra.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Total Habitacion: '.$total_habitacion.'</div>
-              <div class="col-sm-5">Descuento: '.$descuento.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Total Habitacion:</span> '.$total_habitacion.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Descuento:</span> '.$descuento.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Total Estancia: '.$total_estancia.'</div>
-              <div class="col-sm-5">Total Pago: '.$total_pago.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Total Estancia:</span> '.$total_estancia.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Total Pago:</span> '.$total_pago.'</div>
             </div><hr> 
             <div class="row">
               <div class="col-sm-1"></div>
@@ -177,33 +177,33 @@
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Nombre: '.$huesped->nombre.'</div>
-              <div class="col-sm-5">Apellido: '.$huesped->apellido.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Nombre:</span> '.$huesped->nombre.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Apellido:</span> '.$huesped->apellido.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Direccion: '.$huesped->direccion.'</div>
-              <div class="col-sm-5">Ciudad: '.$huesped->ciudad.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Direccion:</span> '.$huesped->direccion.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Ciudad:</span> '.$huesped->ciudad.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Estado: '.$huesped->estado.'</div>
-              <div class="col-sm-5">Codigo postal: '.$huesped->codigo_postal.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Estado:</span> '.$huesped->estado.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Codigo postal:>/span> '.$huesped->codigo_postal.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Telefono: '.$huesped->telefono.'</div>
-              <div class="col-sm-5">Correo: '.$huesped->correo.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Telefono:</span> '.$huesped->telefono.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Correo:</span> '.$huesped->correo.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Contrato Socio: '.$huesped->contrato.'</div>
-              <div class="col-sm-5">Cupón: '.$huesped->cupon.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Contrato Socio:</span> '.$huesped->contrato.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Cupón:</span> '.$huesped->cupon.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6">Preferencias del huésped: '.$huesped->preferencias.'</div>
-              <div class="col-sm-5">Comentarios adicionales: '.$huesped->comentarios.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Preferencias del huésped:</span> '.$huesped->preferencias.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Comentarios adicionales:</span> '.$huesped->comentarios.'</div>
             </div>
         </div>'; 
   echo '

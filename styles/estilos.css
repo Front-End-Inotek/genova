@@ -503,16 +503,22 @@ tr:hover {
 
 /* Contenedor con fondo blanco y margen */
 .blanco_margen {
-  padding: 35px 35px;
-  margin-bottom: 30px;
-  margin-top: 30px;
-  margin-left: 45px;
-  text-align: initial;
-  margin-left: 40px;
-  background-color: #ecf2ff5f;
-  border: 1px solid #3f51b523;
-  border-radius: 15px;
-  box-shadow: 7px 12px 13px 0px #00000022;
+  /* padding: 35px 35px; */
+  /* margin-bottom: 30px; */
+  /* margin-top: 30px; */
+  /* margin-left: 45px; */
+  /* text-align: initial; */
+  /* margin-left: 40px; */
+  /* background-color: #ecf2ff5f; */
+  /* border: 1px solid #3f51b523; */
+  /* border-radius: 15px; */
+  /* box-shadow: 7px 12px 13px 0px #00000022; */
+  font-family: sans-serif;
+  color: rgba(0, 0, 0, 0.781);
+}
+
+.texto_reporte{
+  font-weight: 700;
 }
 
 /* Margen de uno en escritura */
@@ -581,6 +587,8 @@ a.topictitle:hover {
   /*background-color: #E9E9E9;*/
   background-color: transparent !important;
   border-radius: 5px;
+  overflow-y: scroll;
+  max-height: 90vh;
 }
 
 .alinear_centro {
@@ -624,6 +632,7 @@ a.topictitle:hover {
 .btn-herramientas {
   margin-bottom: 1em;
   font-size: 13px;
+  word-wrap: break-word;
 }
 
 .modal-content {
@@ -798,7 +807,7 @@ hr{
   width: 150px !important;
   max-width: 113% !important;
   max-height: 100% !important;
-  height: 80px !important;
+  height: 95px !important;
   text-align: center !important;
   padding-top: -12px;
   font-size: 1.1rem !important;

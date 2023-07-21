@@ -652,7 +652,7 @@
                       echo '<td>Pago al reservar</td>';
                     }
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['abono'], 2).'</td> 
+                    <td>$'.number_format($fila['abono'], 2).'</td>
                     <td>'.$fila['descripcion'].'</td>
                     <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
                     </tr>';
@@ -660,7 +660,7 @@
                     echo '<tr class="fuente_menor text-center">
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['abono'], 2).'</td> 
+                    <td>$'.number_format($fila['abono'], 2).'</td>
                     <td>'.$fila['descripcion'].'</td>
                     <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
                     </tr>';
@@ -669,7 +669,7 @@
                   echo '<tr class="fuente_menor table-secondary text-center">
                   <td>'.$fila['concepto'].'</td>
                   <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                  <td>$'.number_format($fila['abono'], 2).'</td> 
+                  <td>$'.number_format($fila['abono'], 2).'</td>
                   <td>'.$fila['descripcion'].'</td>
                   <td></td>
                   </tr>';
@@ -677,7 +677,6 @@
                 $fecha_atras = date('Y-m-d',$fila['fecha']);
                 $c++;
               }
-             
               echo '
             </tbody>
           </table>
@@ -691,8 +690,8 @@
         $total_cargos= $this->mostrar_total_cargos($mov);
 
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
-        FROM cuenta 
-        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        FROM cuenta
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -712,8 +711,8 @@
       function mostrar_total_cargos($mov){
         $total_cargos= 0;
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo    
-        FROM cuenta 
-        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        FROM cuenta
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -746,19 +745,18 @@
           $cargo= $fila['cargo'];
           $abono= $fila['abono'];
         }
- 
         $descripcion= substr($descripcion, 0, 17);
         if($descripcion == 'Total reservacion'){
           // Para poder cambiar de lugar el cargo o abono de una reservacion se divide en dos
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
           VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '0', '1');";
           $comentario="Guardamos la cuenta en la base de datos";
-          $consulta= $this->realizaConsulta($sentencia,$comentario); 
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
 
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
           VALUES ('$id_usuario', '$mov', 'Pago al reservar', '$fecha', '$forma_pago', '0', '$abono', '1');";
           $comentario="Guardamos la cuenta en la base de datos";
-          $consulta= $this->realizaConsulta($sentencia,$comentario); 
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
 
           // Despues de dividir la cuenta se inactiva
           $sentencia = "UPDATE `cuenta` SET
@@ -832,7 +830,6 @@
         $fecha_actual= time();
         $dia_actual= date("d-m-Y",$fecha_actual);
         $dia_actual= strtotime($dia_actual);
-        
         $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual AND id_usuario = $usuario_id AND estado = 1 AND estado!=2";
         // echo $sentencia;
         $comentario="Obtener el total de cargos del dia actual";
@@ -849,7 +846,6 @@
         $fecha_actual= time();
         $dia_actual= date("d-m-Y",$fecha_actual);
         $dia_actual= strtotime($dia_actual);
-        
         $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual AND id_usuario = $usuario_id AND estado = 1";
         $comentario="Obtener el total de abonos del dia actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -883,6 +879,5 @@
         }
         return $id;
       }
-             
   }
 ?>
