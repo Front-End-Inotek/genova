@@ -55,42 +55,18 @@
             <script src="js/graficas.js"></script>
           </head>
     <body  onload="sabernosession()">
-        <!---
-      <ul class="circles">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-      </ul>---->
-    
+
       <div class="menu"></div>
-      
       <div id="pie" class="footer"></div>
       <div id="area_trabajo" class="container-fluid"></div>
       <div id="area_trabajo_menu" class="container-fluid">
       </div>
-      
-
-      
-
-
-    
       <!-- Modal -->
               <div id="caja_herramientas" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-lg">
-
                   <!-- Modal content-->
                   <div class="modal-content" id="mostrar_herramientas">
-
                   </div>
-
                 </div>
               </div>
               </div>

@@ -413,22 +413,22 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<div class="col-xs-6 col-sm-4 col-md-3 btn-herramientas estado estado">';
+          echo '<div class="col-lg-4 col-md-5 col-sm-5 col-12 btn-herramientas estado estado">';
             if($multiple == 0){
               echo '<div class="estado estado0" onclick="asignar_reservacion('.$fila['ID'].','.$id_reservacion.','.$habitaciones.')">';
             }else{
               echo '<div class="estado estado0" onclick="asignar_reservacion_multiple('.$fila['ID'].','.$id_reservacion.','.$habitaciones.')">';
             }
-              echo '<div class="row">
-                <div class="col-sm-6">
+              echo '<div >
+                <div >
                   <div class="titulo_hab">';
                     echo "Disponible";
                   echo '</div>
                 </div>
 
-                <div class="col-sm-6">
+                <div >
                   <div class="imagen_hab">';
-                   echo '<span class="badge tama_num_hab">'.$fila['nom'].'</span>';
+                  echo '<span class="badge tama_num_hab">'.$fila['nom'].'</span>';
                   echo '</div>
                 </div>
               </div>';
@@ -442,9 +442,8 @@
               echo '</div>';
 
               echo '<div class="icono_hab">';
-                echo '<div><br></div>';    
+                echo '<div><br></div>';
               echo '</div>';
-              
             echo '</div>';
           echo '</div>';
         }

@@ -5,7 +5,6 @@
   $timepo = time();
   $activo= $config->activacion- $timepo;
 
- 
   echo '
     <!DOCTYPE html>
       <html lang="es">
@@ -19,46 +18,25 @@
             <meta http-equiv="Pragma" content="no-cache">
             <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
             <link rel="icon" href="favicon.ico" type="image/x-icon">
-            
-
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
             <link rel=stylesheet href="styles/nuevo/estilosBotones.css" type="text/css">
             <link rel=stylesheet href="styles/nuevo/navDesplegable.css" type="text/css">
             <link rel=stylesheet href="styles/nuevo/rackHabitacional.css" type="text/css">
             <link rel=stylesheet href="styles/nuevo/logIn.css" type="text/css">
-
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
             <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-           
             <script src="js/events.js"></script>
           </head>
     <body class="context" id="animacion" onload="sabersession()" >
     <div class="color">
-    <!---
-    <ul class="circles">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-      </ul>
-      --->
       </div>';
           //<center><h1 class="text-primary">'.$config->nombre.'</h1></center>
         echo '</div>
       </header>
      ';
       if($activo>0){
-        
           echo '
           <div class="container efecto" height="260" width="380">
           <form id="form">
