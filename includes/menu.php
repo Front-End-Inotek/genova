@@ -317,7 +317,7 @@
 			<div class="modal-content">
 			<div class"modal-header">
 				<h3 class="modal-title"> <p> <a href="#" class="text-dark"> Reservaciones -> salir </a> </p> </h3>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span arial-hidden="true">&times;</span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
 				</div><br>
 
 				<div class="modal-body">
