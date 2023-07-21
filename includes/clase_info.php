@@ -65,15 +65,15 @@
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
       if($fin_hospedaje>0){
-        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
           echo 'Ultima renta: '.date("d-m-Y H:i:s",  $fin_hospedaje);
         echo '</div>';
       }else{
-        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+        echo '<div class="col-12  col-md-6 letras-grandes-modal">';
           echo 'Ultima renta: INFORMACION NO DISPONIBLE';
         echo '</div>';
       }
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
@@ -113,17 +113,17 @@
         $total= $cuenta->mostrar_total_cargos($mov);
         $total_faltante= $cuenta->mostrar_faltante($mov);
         $tipo_habitacion= $hab->consultar_tipo($hab_id);
-        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
           echo 'Fecha entrada: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
           echo 'Fecha salida: '.date("d-m-Y H:i:s",  $fin_hospedaje);
         echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
           $nombre_huesped= $huesped->nombre.' '.$huesped->apellido;
           echo 'Huésped: '.$nombre_huesped;
         echo '</div>';
-        echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
           //echo 'Saldo: $'.$total= number_format($total, 2);
           if($total_faltante >= 0){
             echo 'Saldo: $'.number_format($total_faltante, 2);
@@ -139,10 +139,10 @@
         }
         if($estado_interno == 'limpieza'){
           $usuario = NEW Usuario($persona_limpio);
-          echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+          echo '<div class="col-12 col-md-6 letras-grandes-modal">';
             echo 'Inicio Limpieza: '.date("d-m-Y H:i:s",  $detalle_inicio);
           echo '</div>';
-          echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+          echo '<div class="col-12 col-md-6 letras-grandes-modal">';
             echo 'Persona Limpiando: '. $usuario->usuario;
           echo '</div>';
         }
@@ -165,10 +165,10 @@
       }
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Última recervación: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Termino ocupada: '. date("d-m-Y H:i:s",$termina_hospe);
       echo '</div>';
       echo '<div class="col-xs-12 col-sm-12 col-md-12 letras-grandes-modal">';
@@ -194,16 +194,16 @@
       $usuario = NEW Usuario($persona_limpio);
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Inicio Limpieza :   '. date("d-m-Y H:i:s",$inicio_limpieza);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Termino ocupada: '. $termina_hospe;
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Persona Limpiando: '. $usuario->usuario;
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
@@ -225,18 +225,18 @@
       $usuario = NEW Usuario($detalle_realiza);
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Realiza: '.$usuario->usuario;
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         if($motivo != ''){
           echo 'Motivo: '.$motivo;
         }
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
@@ -256,10 +256,10 @@
       $usuario = NEW Usuario($detalle_realiza);
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         echo 'Realiza: '.$usuario->usuario;
       echo '</div>';
       echo '<div class="col-xs-12 col-sm-12 col-md-12">';
@@ -281,10 +281,10 @@
       }
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         if($motivo != ''){
           echo 'Motivo: '.$motivo;
         }
@@ -311,13 +311,13 @@
       }
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         echo 'Inicio: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         echo 'Fin: '.date("d-m-Y H:i:s",  $fin_hospedaje);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         if($motivo != ''){
           echo 'Motivo: '.$motivo;
         }
@@ -346,16 +346,16 @@
       // $usuario = NEW Usuario($persona_limpio);
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         echo 'Inicio Uso :   '. date("d-m-Y H:i:s",$inicio_uso);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         echo 'Termino Uso: '. date("d-m-Y H:i:s",$fin_uso);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         echo 'Usando hab: '. $persona_uso;
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
+      echo '<div class="col-12 col-md-6">';
         echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
@@ -372,10 +372,10 @@
         $cobrara=$fila['detalle_realiza'];
       }
       $usuario = NEW Usuario($cobara);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Ocupada: '.date("d-m-Y H:i:s",  $detalle_inicio);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Cobrara: '. $usuario->usuario;
       echo '</div>';
     }
@@ -487,13 +487,13 @@
         $detalle_realizo=$fila['detalle_realiza'];
       }
       $usuario = NEW Usuario($detalle_realizo);
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Realiza: '.$usuario->usuario;
       echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6 letras-grandes-modal">';
+      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
         echo 'Fin : '.date("d-m-Y H:i:s",  $detalle_fin);
       echo '</div>';
     }

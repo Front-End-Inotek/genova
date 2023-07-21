@@ -11,7 +11,7 @@ echo '
             <h1>Tarjeta Credito</h1>
             <h2></h2>
             <header class="tarjeta">
-                <div class="card" id="cc-card">
+                <div class="card .creditCard" id="cc-card">
                     <div class="flipper">
                         <div class="front">
                             <div class="shine"></div>
