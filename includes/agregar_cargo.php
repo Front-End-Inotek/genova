@@ -33,7 +33,7 @@
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
     <div class="modal-body">
-      <div class="row">
+      <div class="row flex-wrap">
         <div class="col-sm-1"></div>
         <div class="col-sm-3">Descripcion:</div>
         <div class="col-sm-7">

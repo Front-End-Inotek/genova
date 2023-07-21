@@ -89,7 +89,7 @@
   echo '
       <div class="container blanco"> 
         <div class="row">
-          <div class="col-sm-6 text-left"><h2 class="text-dark ">Estado de cuenta habitación : '.$hab->nombre.'</h2></div>';
+          <div class="col-sm-6 text-left"><h2 class="text-dark ">Estado de cuenta habitación: '.$hab->nombre.'</h2></div>';
           if($faltante == 0){
             echo '<div class="col-sm-6 text-right"></div>';
           }else{
