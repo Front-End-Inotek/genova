@@ -178,7 +178,7 @@
     $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
     $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
     $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
-    $total_final= $total_final + $total;
+    $total_final= $total_final + $precio_tarifa;
 
     $nombre_tarifa = $id_tarifa != 0 ? $nombre_tarifa : "Forzar tarifa";
 
@@ -192,7 +192,7 @@
     $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$extra_menor),1,0,'C');
     $pdf->Cell(40,5,iconv("UTF-8", "ISO-8859-1",$nombre_huesped),1,0,'C'); 
     $pdf->Cell(30,5,iconv("UTF-8", "ISO-8859-1",$quien_reserva),1,0,'C'); 
-    $pdf->Cell(28,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total, 2)),1,1,'C');    
+    $pdf->Cell(28,5,iconv("UTF-8", "ISO-8859-1",'$'.number_format($precio_tarifa, 2)),1,1,'C');    
 
       /*for ($i = 1; $i <= 26; $i++) {
         $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
