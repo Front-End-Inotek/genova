@@ -843,6 +843,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
   display: inline-block;
   height: auto;
   transition: 0.5s ease-out;
+  width: 100%;
 }
 
 .bloqueo:hover {
