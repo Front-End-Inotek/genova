@@ -11,7 +11,7 @@ body {
 .fondoWaves{
   background-color: var(--fondo);
   color: var(--titulos);
-  width: 100vw;
+  width: 96vw;
   height: 60px;
   min-height: 40px;
   min-width: 40px;
@@ -598,9 +598,9 @@ label[for="no"] {
 }
 
 .contenedor-sub {
-  padding-left: 20px;
+  /* padding-left: 20px; */
   padding-top: 3px;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
 
 /*tabla de estados de filtro*/
