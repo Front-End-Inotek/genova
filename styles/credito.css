@@ -111,7 +111,6 @@ ul.payment-types li.paymenttype {
     right: 0;
     bottom: 0;
     border-radius: 16px;
-    /* background: linear-gradient(135deg, rgba(255, 255, 255, .25) 0%, rgba(255, 255, 255, 0) 60%); */
     z-index: 5;
 }
 .card .card-bg {
@@ -130,7 +129,6 @@ ul.payment-types li.paymenttype {
     border-radius: 16px;
 }
 .card .flipper {
-    /* left: 25%; */
     transition: 0.75s;
     transform-style: preserve-3d;
     position: relative;
@@ -162,7 +160,6 @@ ul.payment-types li.paymenttype {
     position: absolute;
     width: 100%;
     overflow: hidden;
-    /* color: #7a1a86; */
     padding-left: 2px;
     white-space: nowrap;
 }
@@ -188,7 +185,6 @@ ul.payment-types li.paymenttype {
 }
 .card .front, .card .back {
     backface-visibility: hidden;
-    /* box-shadow: 0 4px 8px rgba(10, 10, 10, 0.25); */
     border-radius: 0px;
 }
 .card .front {

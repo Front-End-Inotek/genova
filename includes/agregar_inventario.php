@@ -83,7 +83,7 @@
           <div class="col-sm-10"></div>
           <div class="col-sm-2">
           <div id="boton_inventario">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_inventario()">
+            <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_inventario()">Guardar</button>
           </div>
           </div>
         </div>
