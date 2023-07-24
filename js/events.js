@@ -6395,41 +6395,48 @@ function guardar_mesa(){
     comentario=$("#comentario").val();
     capacidad=$("#capacidad").val();
 
-    var datos = {
-        "nombre": nombre,
-        "comentario": comentario,
-        "capacidad": capacidad,
-        "usuario_id": usuario_id,
-        };
-        console.log(datos)
-    $.ajax({
-        async:true,
-        type: "POST",
-        dataType: "html",
-        contentType: "application/x-www-form-urlencoded",
-        url:"includes/guardar_mesa.php",
-        data:datos,
-        beforeSend:loaderbar,
-        success:function(res){
-            mesas_restaurante()
-            // console.log(res)
-            // if(res=="OK"){
-            //     mesas_restaurante()
-            // }else{
-            //     alert("Ha ocurrido un error intentelo de nuevo")
-            // }
-            
-        },//
-        //success:problemas,
-        timeout:5000,
-        error:problemas
-        });
-    return false;
+    if(nombre == ""){
+        alert("Ingresa nombre de la mesa")
+    }else if(capacidad == ""){
+        alert("Ingresa una capacidad para la mesa")
+    }else if(comentario == ""){
+        alert("Ingresa un comentario para la habitacion")
+    }else{
+        var datos = {
+            "nombre": nombre,
+            "comentario": comentario,
+            "capacidad": capacidad,
+            "usuario_id": usuario_id,
+            };
+            console.log(datos)
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_mesa.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:function(res){
+                mesas_restaurante()
+                // console.log(res)
+                // if(res=="OK"){
+                //     mesas_restaurante()
+                // }else{
+                //     alert("Ha ocurrido un error intentelo de nuevo")
+                // }
+            },//
+            //success:problemas,
+            timeout:5000,
+            error:problemas
+            });
+        return false;
+    }
+
 }
 
 // Mesas en el restaurante
 function mesas_restaurante(){
-    
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();

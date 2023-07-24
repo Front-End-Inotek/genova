@@ -23,7 +23,7 @@
           <div class="col-sm-2">Comentario:</div>
           <div class="col-sm-4">
           <div class="form-group">
-          <input class="form-control" type="number" id="comentario" placeholder="Ingresa un comentario para la mesa">
+          <input class="form-control" type="text" id="comentario" placeholder="Ingresa un comentario para la mesa">
           </div>
           </div>
          
@@ -33,7 +33,7 @@
           <div class="col-sm-10"></div>
           <div class="col-sm-2">
           <div id="boton_inventario">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_mesa()">
+            <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_mesa()">Guardar</button>
           </div>
           </div>
         </div>

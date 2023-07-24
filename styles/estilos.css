@@ -1060,6 +1060,16 @@ hr{
   background-color: #00622c;
   font-size: 1.2em;
   color: white;
+  border-left: 7px solid green;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.personas span{
+  color: white;
+}
+.personas:hover{
+  background-color: green;
+  box-shadow: 0 10px 14px #2929294f;
 }
 
 .recibo {
@@ -1193,14 +1203,14 @@ hr{
 }
 
 .estado_mesa0 {
-  background-color: #115d2a;
+  background-color: #57b776;
   color: #5aa875;
   padding: 0.5em 10px 0px 10px;
   border-radius: 20px;
-  width: 100px !important;
+  /* width: 100px !important; */
   max-width: 100% !important;
   max-height: 100% !important;
-  height: 100px !important;
+  /* height: 100px !important; */
 }
 
 .estado_mesa0:hover {
@@ -1208,10 +1218,10 @@ hr{
   color: #5aa875;
   padding: 0.5em 10px 0px 10px;
   border-radius: 20px;
-  width: 100px !important;
+  /* width: 100px !important; */
   max-width: 100% !important;
   max-height: 100% !important;
-  height: 100px !important;
+  /* height: 100px !important; */
 }
 
 .estado_mesa1 {
@@ -1219,10 +1229,10 @@ hr{
   color: #d98880;
   padding: 0.5em 10px 0px 10px;
   border-radius: 20px;
-  width: 100px !important;
+ /*  width: 100px !important; */
   max-width: 100% !important;
   max-height: 100% !important;
-  height: 100px !important;
+  /* height: 100px !important; */
 }
 
 .estado_mesa1:hover {
@@ -1231,19 +1241,19 @@ hr{
   /*color: white;*/
   padding: 0.5em 10px 0px 10px;
   border-radius: 20px;
-  width: 100px !important;
+ /*  width: 100px !important; */
   max-width: 100% !important;
   max-height: 100% !important;
-  height: 100px !important;
+  /* height: 100px !important; */
 }
 
 .espacio_mesa {
   /* */
-  width: 155px !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  height: 130px !important;
-  font-size: 13px;
+  width: 165px !important;
+  /* max-width: 100% !important;
+  max-height: 100% !important; */
+  height: 165px !important;
+  font-size: 1rem;
 }
 
 .btn-square-mesa-lg {
