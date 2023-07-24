@@ -1483,7 +1483,7 @@ class Reservacion extends ConexionMYSql
         ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
-        // echo $sentencia;
+        //echo $sentencia;
         $cat_paginas=($this->total_elementos($sentencia)/20);
         // print_r($cat_paginas);
         $extra=($this->total_elementos($sentencia)%20);

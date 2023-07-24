@@ -166,6 +166,10 @@
 			if($permisos_restaurante>0){
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="mesas_restaurante()">Mesas</a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_mesa()"> Agregar mesa </a></i></ul>';
 			}
 		}
 			echo '

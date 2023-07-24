@@ -26,6 +26,22 @@
       }
       return $id;
     }
+
+    function guardar_mesa($nombre,$comentario,$capacidad,$mov){
+      $id= 0;
+      $sentencia= "INSERT INTO `mesa`( `nombre`, `mov`, `comentario`, `capacidad`, `estado`, `estado_mesa`,`tipo`) VALUES 
+      ('$nombre','$mov','$comentario','$capacidad',0,1,1)";
+      $comentario= "Evaluar los datos para cambiar los productos de una mesa";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      //echo $sentencia;
+      if($consulta){
+        echo "OK";
+      }else{
+        echo "NO";
+      }
+     
+    }
     // Evaluar los datos para cambiar los productos de una mesa
     function evaluar_datos($usuario_evaluar ,$password_evaluar){
       $id= 0;
