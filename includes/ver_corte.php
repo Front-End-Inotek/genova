@@ -31,11 +31,10 @@
           echo '</div>
           <div class="col-sm-2">
           <div id="boton_usuario">
-            <input type="submit" class="btn btn-danger btn-block" value="Hacer Corte" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte_nuevo()">
+            <button type="submit" class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte_nuevo()">Hacer reporte</button>
           </div>
           </div>
         </div>
-        
         <div class="text-dark margen-1"></div>
 
         <div class="row">

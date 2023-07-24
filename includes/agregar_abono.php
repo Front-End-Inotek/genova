@@ -2,6 +2,10 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_forma_pago.php");
   include_once("clase_hab.php");
+
+  include_once('clase_configuracion.php');
+
+  $config = new Configuracion();
   $forma_pago= NEW Forma_pago(0);
   $hab = NEW Hab($_GET['hab_id']);//$_GET['hab_estado'] es mov
   $mov=0;
@@ -38,7 +42,13 @@
         <div class="col-sm-3">Descripcion:</div>
         <div class="col-sm-7">
         <div class="form-group">
-          <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="20">
+          <!-- <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="20"> -->
+          <select class="form-select" id="descripcion">
+          <option value="">Seleccionar un tipo de abono</option>
+          ';
+          $config->tipos_abonos();
+          echo '
+          </select>
         </div>
         </div>
         <div class="col-sm-1"></div>

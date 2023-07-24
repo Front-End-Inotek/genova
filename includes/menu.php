@@ -268,6 +268,9 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_planes_alimentos()">Plan de alimentos</a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_politicas_reservacion()">Políticas de reservación</a></i></ul>';
+
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_tipos_abonos()">Tipos de abonos</a></i></ul>';
 			}
 		}
 			echo '
