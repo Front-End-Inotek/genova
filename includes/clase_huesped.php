@@ -58,7 +58,7 @@
           $this->vencimiento_ano= "";
           $this->cvv= "";
           $this->visitas= 0;
-          $this->estado_huesped= 0; 
+          $this->estado_huesped= 0;
           $this->estado_tarjeta=0;
           $this->nombre_tarjeta="";
           $this->empresa="";
@@ -107,15 +107,10 @@
       }
 
       public function mostrar_garantia($estado_tarjeta){
-        echo ' 
-        
+        echo '
         <p id="choosen-paymenttype">tarjeta de credito</p>
-      
-            <!--Principal-->
-           
-                <div class="container-fluid blanco >
-                    <h1>Tarjeta Credito</h1>
-                    <h2></h2>
+                <!--Principal-->
+                <div class="container-fluid blanco" >
                     <header class="tarjeta" style="max-width: 600px;">
                         <div class="card creditCard" id="cc-card">
                             <div class="flipper">
@@ -161,11 +156,9 @@
                                                     YY
                                                 </span>
                                             </div>
-        
                                         </div>
                                     </div>
                                 </div>
-        
                                 <div class="back">
                                     <div class="shine"></div>
                                     <div class="shadow"></div>
@@ -199,7 +192,6 @@
                             </div>
                         </div>
                     </header>
-        
                     <form class="tarjeta-form" id="form-garantia">
                         <div class="form-content">
                             <div class="form-group">
@@ -219,11 +211,7 @@
                                 </div>
                               </div>';
                               }
-
-
-
                               echo '
-                           
                             </div>
                             <div class="form-group">
                               <label for="cardholder">Nombre en Tarjeta</label>

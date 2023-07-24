@@ -804,13 +804,14 @@ hr{
 }
 
 .btn-square-lg {
-  width: 150px !important;
-  max-width: 113% !important;
+  /* width: 150px !important; */
+  /* max-width: 113% !important; */
   max-height: 100% !important;
   height: 95px !important;
   text-align: center !important;
   padding-top: -12px;
   font-size: 1.1rem !important;
+  cursor: pointer;
 }
 
 .btn-square-lg-doble {
@@ -1450,3 +1451,7 @@ hr{
   background-color: #FFF !important;
   box-shadow: 0px -10px 15px -3px rgba(0,0,0,0.1);
 }
+
+/* * {
+  border: 1px solid red;
+} */
