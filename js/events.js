@@ -328,6 +328,13 @@ function agregar_politicas_reservacion(){
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
 
+
+// Agregar un plan de alimentacion
+function agregar_tipos_abonos(){
+	$("#mostrar_herramientas").load("includes/agregar_tipos_abonos.php");
+    //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
+}
+
 //* Tipo hab *//
 
 // Agregar un plan de alimentacion
@@ -422,6 +429,41 @@ function guardar_politicaReservacion(nombre,codigo,descripcion){
     })
     xhttp.send(parametros);
 }
+
+function guardar_tipos_abonos() {
+    let usuario_id=localStorage.getItem("id");
+	var nombre= encodeURI(document.getElementById("nombre").value);
+    let descripcion= encodeURI(document.getElementById("descripcion").value);
+    if(nombre === null || nombre === ''){
+        swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    var parametros = "nombre="+nombre+"&descripcion="+descripcion+"&usuario_id="+usuario_id
+
+    xhttp.open("POST","includes/guardar_tipo_abono.php",true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            if (e.target.responseText == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tipos_abonos()
+                swal("Nuevo tipo  de abono agregado!", "Excelente trabajo!", "success");
+                return false;
+            }else if(e.target.responseText == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send(parametros);
+}
+
 
 function guardar_planes_alimentos() {
 	var nombre= encodeURI(document.getElementById("nombre").value);
@@ -581,6 +623,17 @@ function ver_politicas_reservacion(){
 	closeNav();
 }
 
+// Muestra los tipos de abonos existentes
+function ver_tipos_abonos(){
+	var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_tipos_abonos.php?usuario_id="+usuario_id);
+    closeModal();
+	closeNav();
+}
+
 // Muestra los tipos de planes de alimentos existentes
 function ver_planes_alimentos(){
 	var usuario_id=localStorage.getItem("id");
@@ -606,6 +659,14 @@ function ver_tipos(){
 // Editar una politica de reservacion
 function editar_politica_reservacion(id){
     include = "includes/editar_politica_reservacion.php?id="+id
+    $("#mostrar_herramientas").load(include);
+}
+
+// Editar un plan de alimentos
+function editar_tipo_abono(id,nombre,descripcion){
+    nombre = encodeURIComponent(nombre)
+    descripcion = encodeURIComponent(descripcion)
+    include = "includes/editar_tipo_abono.php?id="+id+"&nombre="+nombre+"&descripcion="+descripcion
     $("#mostrar_herramientas").load(include);
 }
 
@@ -711,6 +772,43 @@ function modificar_politica_reservacion(id){
 }
 
 
+function modificar_tipo_abono(id){
+    // Editar un tipo de plan de alimentación
+	let usuario_id = localStorage.getItem("id");
+    let id_abono = id;
+    let nombre = encodeURI(document.getElementById("nombre").value);
+	let descripcion = encodeURI(document.getElementById("descripcion").value);
+
+    let xhttp;
+    xhttp = new XMLHttpRequest();
+    var parametros = "nombre="+nombre+"&descripcion="+descripcion+"&usuario_id="+usuario_id+"&id_abono="+id_abono
+
+    console.log(parametros)
+
+    xhttp.open("POST","includes/aplicar_editar_tipo_abono.php",true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            // console.log(e.target.responseText)
+            if (e.target.responseText == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_tipos_abonos()
+                swal("Actualizó el tipo de abono!", "Excelente trabajo!", "success");
+                return false;
+            }else if(e.target.responseText == 'NO_valido'){
+                swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+            }else{
+                swal("Los datos no se agregaron!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send(parametros);
+}
+
 function modificar_plan_alimentos(id){
     // Editar un tipo de plan de alimentación
 	let usuario_id = localStorage.getItem("id");
@@ -802,7 +900,7 @@ function modificar_tipo(id){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.response);
+            // console.log(e.target.response);
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_tipos()
@@ -875,6 +973,68 @@ function borrar_politica_reservacion(id, nombre, codigo){
         });
     } else {
         swal("Se cancelo eliminar el plan de alimentación!", "Por favor verifique los datos antes de eliminarlos!", "success")
+    }
+    });
+}
+function borrar_tipo_abono(id, nombre, descripcion ){
+    let nombre_tipo = nombre;
+    let id_tipo = id;
+    let codigo_tipo = descripcion;
+    let usuario_id=localStorage.getItem("id");
+
+    let tabla = document.createElement("div");
+    tabla.innerHTML += `
+    <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
+        <tr>
+        <td>Id abono</td>
+        <td>Nombre del abono</td>
+        <td>Descripción</td>
+        </tr>
+        <tr>
+        <td>${id_tipo}</td>
+        <td>${nombre_tipo}</td>
+        <td>${codigo_tipo}</td>
+        </tr>
+    </table> <br>`;
+    swal({
+        title: "Antes de continuar por favor verifique los datos del tipo de abono a eliminar",
+        text: "Antes de continuar por favor verifique los datos del tipo de abono a eliminar ",
+        content: tabla,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+        include="includes/borrar_tipo_abono.php?id_tipo="+id_tipo+"&usuario_id="+usuario_id
+        $.ajax({
+            async:true,
+            type: "GET",
+            dataType: "HTML",
+            contentType: "application/json",
+            url:include,
+            beforeSend:loaderbar,
+            success:function(res){
+                // console.log(res)
+                // return
+                if(res=="NO"){
+                    $('#caja_herramientas').modal('hide');
+                    ver_tipos_abonos()
+                    swal("Se elimino el tipo de abono!", "Excelente trabajo!", "success");
+                }else{
+                    swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+                }
+            },
+            //success:problemas_sistema,
+            timeout:5000,
+            error:function(err){
+                console.log(err)
+                swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+            }
+        });
+
+    } else {
+        swal("Se cancelo eliminar el tipo de abono!", "Por favor verifique los datos antes de eliminarlos!", "success")
     }
     });
 }

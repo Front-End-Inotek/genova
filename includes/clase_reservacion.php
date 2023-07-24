@@ -1507,8 +1507,6 @@ class Reservacion extends ConexionMYSql
             $cat_paginas++;
         }
 
-      
-
         //se recibe la consulta y se convierte a arreglo
         //<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
         echo '
