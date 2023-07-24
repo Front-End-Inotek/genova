@@ -866,6 +866,20 @@
         }
         return $abonos;
       }
+
+      function reservacion_garantia($usuario_id,$id_movimiento,$forma_pago,$total_pago){
+        $fecha=time();
+        $id_cuenta= 0;
+        //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
+        $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+        VALUES ('$usuario_id', '$id_movimiento', 'Pago al reservar', '$fecha', '$forma_pago', 0, '$total_pago', '1');";
+        $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        $id_cuenta= $this->ultima_insercion();
+        return $id_cuenta;
+      }
+
       function reservacion_cuenta($usuario_id,$id_movimiento,$forma_pago,$total_suplementos,$total_pago){
         $fecha=time();
         $id_cuenta= 0;

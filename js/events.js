@@ -3184,6 +3184,50 @@ function preasignar_reservacion(id,opcion=""){
 	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id+"&opcion="+opcion);
 }
 
+
+// Modal de cancelar una reservacion
+function aceptar_garantizar_reservacion(id,preasignada=0,correo,garantizada=0){
+    
+	$("#mostrar_herramientas").load("includes/garantizar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada);
+}
+
+function garantizar_reservacion(id,preasignada=0,correo,garantizada=0){
+    var usuario_id=localStorage.getItem("id");
+    var estado= encodeURI(document.getElementById("estado").value);
+    var forma_garantia= encodeURI(document.getElementById("forma-garantia").value);
+    var monto= encodeURI(document.getElementById("monto").value);
+
+    if (id >0 && estado.length >0 && forma_garantia.length>0 && monto.length >0) {
+        $('#caja_herramientas').modal('hide');
+        $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
+        var datos = {
+                "id": id,
+                "estado_interno": estado,
+                "forma_garantia": forma_garantia,
+                "usuario_id": usuario_id,
+                "total_pago":monto,
+            };  
+        $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/garantizar_reservacion.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:function(res){
+                    ver_reservaciones()
+                },
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
+            });
+        return false;
+    }else{
+        alert("Campos incompletos");
+    }
+}
+
 // Modal de cancelar una reservacion
 function aceptar_cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
     
@@ -3271,7 +3315,8 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             data:datos,
             beforeSend:loaderbar,
             success:function(res){
-                console.log(res)
+                // console.log(res)
+                // return
                 if(res=="OCUPADA"){
                     $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
                 }else{

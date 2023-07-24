@@ -1281,7 +1281,11 @@ class Reservacion extends ConexionMYSql
                 }else{
                     echo '<td></td>';
                 }
-
+                if(true){
+                    echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
+                }else{
+                    echo '<td></td>';
+                }
                 echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
                 if($editar==1 && $fila['edo'] = 1) {
                     echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')"> Editar</button></td>';
@@ -1331,6 +1335,12 @@ class Reservacion extends ConexionMYSql
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
                 } else {
                     echo '<td>Hab. '.$preasignada.'</td>';
+                }
+
+                if(true){
+                    echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
+                }else{
+                    echo '<td></td>';
                 }
 
                 echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
@@ -1388,6 +1398,11 @@ class Reservacion extends ConexionMYSql
             if($fila['id_hab']==0) {
                 echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
             } else {
+                echo '<td></td>';
+            }
+            if(true){
+                echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
+            }else{
                 echo '<td></td>';
             }
             echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'CHECK-IN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
@@ -1483,7 +1498,7 @@ class Reservacion extends ConexionMYSql
         ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
-        //echo $sentencia;
+        // echo $sentencia;
         $cat_paginas=($this->total_elementos($sentencia)/20);
         // print_r($cat_paginas);
         $extra=($this->total_elementos($sentencia)%20);
@@ -1526,6 +1541,8 @@ class Reservacion extends ConexionMYSql
 			<th>Status</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
+
+        echo '<th><span class=" glyphicon glyphicon-cog"></span> Garantizar</th>';
 
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
         if($editar==1 && $fila['edo'] = 1) {
@@ -2848,6 +2865,17 @@ class Reservacion extends ConexionMYSql
 		`id_cuenta` = '$id_cuenta'
 		WHERE `id` = '$id';";
         $comentario="Poner nuevo id cuenta de una reservacion";
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
+    }
+
+    public function modificar_garantizada($id,$estado_interno ,$total_pago,$forma_garantia){
+        $fecha_cancelacion= time();
+        $sentencia = "UPDATE `reservacion` SET
+		`estado_interno` = '$estado_interno',
+        `total_pago` = '$total_pago',
+        `forma_pago` = '$forma_garantia'
+		WHERE `id` = '$id';";
+        $comentario="Poner datos por realizar una garantizada de una reservacion";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
     }
     // Modificar datos por realizar una cancelacion de una reservacion
