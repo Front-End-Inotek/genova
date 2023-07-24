@@ -2,14 +2,13 @@
   //error_reporting(0);
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
- 
   class Informacion_mesas extends ConexionMYSql
   {
     // Constructor
     function __construct()
     {
 
-    } 
+    }
     function evaluarEntrada($usuario_evaluar ,$password_evaluar){
       //include_once('log.php');
       //$logs = NEW Log(0);
@@ -21,7 +20,7 @@
       //echo $sentencia;
       while ($fila = mysqli_fetch_array($consulta))
       {
-           $id= $fila['id'];
+          $id= $fila['id'];
            //$logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
       }
       return $id;
@@ -40,7 +39,6 @@
       }else{
         echo "NO";
       }
-     
     }
     // Evaluar los datos para cambiar los productos de una mesa
     function evaluar_datos($usuario_evaluar ,$password_evaluar){
@@ -89,7 +87,7 @@
             echo $persona;
           break;
         case 11:
-           echo $nombre;
+          echo $nombre;
           break;
         case 12:
             echo $nombre;
@@ -104,7 +102,7 @@
             echo $nombre;
           break;
         case 16:
-            echo $nombre; 
+            echo $nombre;
           break;
           case 17:
             echo $persona;
@@ -166,7 +164,6 @@
         if($fila['tipo']>0){
           echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio_mesa">';
             echo '<a href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas_mesas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')"><div class="estado_mesa'.$fila['estado'].'">';
-
               echo '<div class="row">
                 <div class="col-sm-12">
                   <div class="titulo_mesa">';
@@ -216,13 +213,13 @@
                   //echo $motivo;
                   /*switch ($fila['interno']){
                     case '':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<img id="icono_r" src="."';
                       break;
                     case 'disponible':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<img id="icono_r" src="."';
                       break;
                     case 'sin estado':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<img id="icono_r" src="."';
                       break;
                     case 'sucia':
                       echo '<img id="icono_c" src="images/basura.png">';
@@ -263,7 +260,7 @@
                     case 14:
                       //echo '<img src="images/limpieza.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
-                }   */      
+                }   */
               echo '</div>';
 
               echo '</div>';
@@ -271,7 +268,7 @@
             echo '</a>';
           echo '</div>';
         }else{
-          echo '<div class="hidden-xs hidden-sm col-md-1 espacio_mesa">';   
+          echo '<div class="hidden-xs hidden-sm col-md-1 espacio_mesa">';
           echo '</div>';
         }
       }

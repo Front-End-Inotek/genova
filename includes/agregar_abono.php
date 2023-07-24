@@ -29,7 +29,7 @@
         echo '<h3 class="modal-title">AHCloud>Panel>Cuenta Maestra '.$cm->nombre.'</h3>';
       }
     echo '
-      <h2>-Abonar</h2>
+      <h2>Abonar</h2>
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
     <div class="modal-body">
