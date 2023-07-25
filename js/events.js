@@ -7170,6 +7170,15 @@ function saldo_huespedes(){
 }
 
 
+function corte_diario(){
+    usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/ver_corte_diario.php?usuario_id="+usuario_id);
+    closeNav();
+}
+
 function hacer_corte(){
     usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();

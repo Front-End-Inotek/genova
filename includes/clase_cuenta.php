@@ -444,6 +444,21 @@
         return $consulta;
       }
 
+      function mostrarCuentaUsuario($id_usuario){
+        $sentencia="SELECT cuenta.descripcion as concepto, cuenta.cargo, cuenta.descripcion, cuenta.fecha
+        from cuenta
+        where cuenta.id_usuario $id_usuario
+        and cuenta.estado =1
+        and (cuenta.cargo>0 || cuenta.abono >0)
+        and (from_unixtime(cuenta.fecha,'%Y-%m-%d') = CURRENT_DATE())
+        order by cuenta.forma_pago , cuenta.fecha asc" ;
+        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
+        // echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
       function mostrarCargosMaestra($id_usuario){
         $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.cargo, cuenta.descripcion, cuenta.fecha
         from cuenta
