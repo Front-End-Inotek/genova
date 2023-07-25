@@ -1134,11 +1134,12 @@ class Reservacion extends ConexionMYSql
         } else {
             $fin_dia = strtotime($fin_dia);
         }
-        $sentencia = "SELECT *,huesped.correo as correo_huesped,movimiento.id as mov, movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        $sentencia = "SELECT *,hab.nombre as nombre_hab, huesped.correo as correo_huesped,movimiento.id as mov, movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
         LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+        LEFT JOIN hab ON movimiento.id_hab = hab.id
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1 ) AND (reservacion.fecha_entrada >= $inicio_dia && reservacion.fecha_entrada <= $fin_dia) ORDER BY reservacion.id DESC;";
@@ -1156,7 +1157,7 @@ class Reservacion extends ConexionMYSql
         $ultimoid=0;
 
         
-        //echo $sentencia;
+        // echo $sentencia;
         $comentario="Mostrar las reservaciones que llegan hoy";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -1249,7 +1250,6 @@ class Reservacion extends ConexionMYSql
                 <td>'.$fila['habitacion'].'</td>'
                 ;
             }
-           
             echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
             echo '<td>'.$fila['cantidad_hospedaje'].'</td>
             <td>'.$fila['extra_adulto'].'</td>
@@ -1400,11 +1400,11 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<td></td>';
             }
-            if(true){
-                echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
-            }else{
-                echo '<td></td>';
-            }
+            // if(true){
+            //     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
+            // }else{
+            //     echo '<td></td>';
+            // }
             echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'CHECK-IN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
            
             if($editar==1 && $fila['edo'] = 1) {
