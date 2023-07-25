@@ -32,7 +32,7 @@
   }
   // echo $id_maestra;
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
-  // style="background-color:LightSlateGray,aliceblue;"       
+  // style="background-color:LightSlateGray,aliceblue;"
   echo '
   <div class="modal-content alinear_centro">
     <h5>Agregar Restaurante</h5>
@@ -61,7 +61,6 @@
               }
             echo '</div>
           </div><br>
- 
         </div>
 
         <div class="col-sm-6">
