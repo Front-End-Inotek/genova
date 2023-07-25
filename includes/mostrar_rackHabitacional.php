@@ -136,8 +136,6 @@ class RackHabitacional extends ConexionMYSql
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta = $this->realizaConsulta($sentencia, $comentario);
-
-
         echo '
             <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
             <!--tabla operativa--->

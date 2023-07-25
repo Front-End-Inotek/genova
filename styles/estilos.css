@@ -1033,7 +1033,7 @@ hr{
   font-size: 1.5em;
 }
 
-/*Mesas----------------------------------------------------------------------------------------------------------------------------*/
+/*Mesas-----------------*/
 .titulo_mesa {
   width: 100%;
   text-align: center;
@@ -1061,7 +1061,7 @@ hr{
   text-align: right;
   font-size: 1.1rem;
   border-radius: 50%;
-  color: var(--titulos);
+  color: white;
   font-weight: 700;
 }
 
