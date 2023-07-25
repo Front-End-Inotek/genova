@@ -537,12 +537,12 @@
           $producto= $inventario->obtener_id($fila['nombre']);
           $total_fila= $fila['cantidad'] * $fila['precio'];
           if(($cantidad%2)==0){
-            echo '<div href="#" class="list-group-item list-group-item-success" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
+            echo '<div href="#" class="list-group-item " onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
               <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.number_format($fila['precio'], 2).' </h6>
               <h6 class="list-group-item-text"> Total: $'.number_format($total_fila, 2).' </h6>
             </div>';
           }else{
-            echo '<div href="#" class="list-group-item list-group-item-info" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
+            echo '<div href="#" class="list-group-item " onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
               <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.number_format($fila['precio'], 2).' </h6>
               <h6 class="list-group-item-text"> Total: $'.number_format($total_fila, 2).' </h6>
             </div>';

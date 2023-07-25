@@ -35,7 +35,7 @@
                     <h6 for="sel1">Total: </h6>
                   </div>
                   <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">
-                    <h6 for="sel1"><input class="form-control alinear_centro" type="number" id="total"  placeholder="'.number_format($precio, 2).'" disabled></h6>
+                    <h6 for="sel1"><input class="form-control " type="number" id="total"  placeholder="'.number_format($precio, 2).'" disabled></h6>
                   </div>
                   <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">';
                     echo '<button type="button" id="boton_cobrar" class="btn btn-danger btn-block" onclick="aplicar_rest_cobro('.$precio.','.$_GET['mesa_id'].','.$_GET['estado'].','.$mesa->mov.',1)"> Cobrar</button>';                                                                                                                                               //('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';    

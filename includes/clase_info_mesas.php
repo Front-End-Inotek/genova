@@ -143,7 +143,7 @@
                       if($usuario->nivel <= 1){
                         // echo '<button type="button" class="btn btn-danger" onclick="borrar_desde_hab('.$filas1['id'].')">Borrar</button>';
                       }
-                      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
+                      echo '<div class="col-12 letras-grandes-modal">';
                       echo $filas1['cantidad'].' -  '.$filas1['nombre'].' -  $'.number_format($filas1['total'], 2);
                       echo '</div>';
                     }

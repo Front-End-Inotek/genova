@@ -640,7 +640,7 @@ hr{
 }
 
 .altura_comanda {
-  height: 62.2em;
+  height: 60vh;
   overflow-x: scroll;
 }
 
@@ -950,6 +950,13 @@ hr{
   background-color: #2f27a1;
   font-size: 1.2em;
   color: white;
+  height: 100%;
+  width: 100%;
+  transition: all 0.3s ease-out;
+}
+.recibo:hover{
+  box-shadow: 0 10px 14px #2929294F;
+  cursor: pointer;
 }
 
 .caja_mostrar_totales {
