@@ -9,16 +9,12 @@ class PDF extends FPDF
     {
         // Logo
         $this->Image('logo.png', 10, 10, 30);
-        
         // Título
         $this->SetFont('Arial', 'B', 15);
         $this->Cell(0, 15, 'Confirmación de Reservación de Hotel', 0, 1, 'C');
-        
         // Salto de línea
         $this->Ln(10);
     }
-    
-   
     function Footer()
     {
         // Número de página
@@ -28,10 +24,8 @@ class PDF extends FPDF
     }
 }
 
-
 $pdf = new PDF();
 $pdf->AliasNbPages(); //numeración de páginas
-
 
 $pdf->AddPage();
 
@@ -49,7 +43,6 @@ $pdf->Ln(10);
 $pdf->Cell(0, 10, 'Si tiene alguna pregunta o necesita realizar cambios en su reserva, no dude en ponerse en contacto con nosotros.', 0, 1);
 $pdf->Ln(5);
 $pdf->Cell(0, 10, '¡Esperamos darle la bienvenida a nuestro hotel!', 0, 1);
-
 
 // Salida del PDF
 $pdf->Output();
