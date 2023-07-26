@@ -2592,6 +2592,21 @@ function guardarCheck(){
     }
 }
 
+function datosFormulario(id_form){
+    var form = document.getElementById(id_form);
+    var datosFormulario= {};
+
+    for (var i = 0; i < form.elements.length; i++) {
+        var elemento = form.elements[i];
+        var id=elemento.id
+        // datosFormulario.push({
+        //     "id" : elemento.value
+        // });
+        datosFormulario[id] = elemento.value
+    }
+    return datosFormulario;
+}
+
 function verificarFormulario(id_form,field) {
     
     var form = document.getElementById(id_form);
@@ -3620,6 +3635,12 @@ function asignar_reservacion_multiple(hab_id,id_reservacion,habitaciones){
 
 //* Huesped *//
 
+function agregar_vehiculo(id_reserva,id_huesped){
+    let usuario_id=localStorage.getItem("id");
+	$("#mostrar_herramientas").load("includes/agregar_datos_vehiculo.php?usuario_id="+usuario_id+"&id_huesped="+id_huesped+"&id_reserva="+id_reserva);
+}
+
+
 // Agregar un huesped
 function agregar_huespedes(){
 	$("#mostrar_herramientas").load("includes/agregar_huespedes.php");
@@ -3630,13 +3651,51 @@ function agregar_huespedes_reservacion(){
     $("#mostrar_herramientas").load("includes/agregar_huespedes_reservacion.php");
 }
 
-    function validar_guardar_huesped(reservacion){
-        if(reservacion == 0){
-            guardar_huesped()
-        }else{
-            swal("El huesped que intenta agregar ya tiene una reservacion!", "Excelente trabajo!", "warning");
-        }
+function validar_guardar_huesped(reservacion){
+    if(reservacion == 0){
+        guardar_huesped()
+    }else{
+        swal("El huesped que intenta agregar ya tiene una reservacion!", "Excelente trabajo!", "warning");
     }
+}
+
+function guardar_datos_vehiculo(id_reserva,id_huesped) {
+    let usuario_id=localStorage.getItem("id");
+    let matricula = $("#matricula").val();
+    let ingreso = $("#ingreso").val();
+
+    // console.log(fecha_ingreso)
+
+    if(matricula == "" || ingreso == ""){
+            alert("Debe escribir al menos una matrícula y una fecha de ingreso");
+    }else{
+        datos = datosFormulario("form-vehiculo")
+        datos['usuario_id'] = usuario_id
+        datos['id_huesped'] = id_huesped
+        datos['id_reserva'] = id_reserva
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_datos_vehiculo.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:function(res){
+                if(res=="OK"){
+                    swal("Datos agregados correctamente", "Los datos ingresados se han registrado con éxito!", "success");
+                    $('#caja_herramientas').modal('hide');
+    
+                }else{
+                    swal("Ha ocurrido un error con la transferencia de información", "Verifique su información e intentlo de nuevo", "error");
+                }
+                console.log(res)
+            },
+            timeout:5000,
+            error:problemas_sistema
+        });
+    }
+}
 
     function guardar_huesped(){
     var usuario_id=localStorage.getItem("id");
@@ -7207,6 +7266,28 @@ function hacer_cortes_dia(){
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php?usuario_id="+usuario_id);
     closeNav();
+}
+
+function aceptar_guardar_corte_diario(){
+    // $("#mostrar_herramientas").load("includes/guardar_modal_corte_nuevo.php");
+    swal({
+        title: "¿Realizar reporte?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            var usuario_id=localStorage.getItem("id");
+            //var usuario_id= 4;
+            $('#caja_herramientas').modal('hide');
+            var datos = {
+                "usuario_id": usuario_id,
+            };
+            window.open("includes/guardar_corte_diario.php?id_usuario="+usuario_id);
+            return false;
+        }
+        });
 }
 
 function aceptar_guardar_corte_nuevo(){

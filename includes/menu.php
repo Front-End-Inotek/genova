@@ -133,7 +133,7 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="saldo_huespedes()"> Saldo de huéspedes </a></i></ul>';
 
 			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> ++ </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
 
 			}
 		}

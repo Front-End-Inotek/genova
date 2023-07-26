@@ -307,6 +307,86 @@
        ';
       }
 
+      function existe_vehiculo($id_huesped,$id_reserva){
+        $sentencia="SELECT* FROM datos_vehiculo WHERE id_huesped=$id_huesped AND id_reserva=$id_reserva";
+        $comentario="Obtenemos datos de un vehiculo";
+        $comentario="Actualizando info del vehiculo huesped";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $datos=[];
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $datos= $fila;
+        }
+        return $datos;
+      }
+
+      function actualizar_datos_vehiculo($datos){
+        $id_huesped = $datos['id_huesped'];
+        $usuario_id =$datos['usuario_id'];
+        $matricula =$datos['matricula'];
+        $marca=$datos['marca'];
+        $modelo=$datos['modelo'];
+        $year =$datos['year'];
+        $color =$datos['color'];
+        $propietario =$datos['propietario'];
+        $fecha_ingreso =strtotime($datos['ingreso']);
+        $fecha_salida =strtotime($datos['salida']);
+        $observaciones =$datos['observaciones'];
+        $id_reserva=$datos['id_reserva'];
+
+        $sentencia = "UPDATE `datos_vehiculo` SET 
+        `id_usuario`='$usuario_id', 
+        `matricula`='$matricula', 
+        `marca`='$marca', 
+        `modelo`='$modelo', 
+        `year`='$year', 
+        `color`='$color', 
+        `propietario`='$propietario', 
+        `fecha_ingreso`='$fecha_ingreso', 
+        `fecha_salida`='$fecha_salida', 
+        `observaciones`='$observaciones'
+        WHERE `id_huesped`='$id_huesped'";
+
+        $comentario="Actualizando info del vehiculo huesped";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if(!$consulta){
+          echo "NO_VALIDO";
+        }else{
+          $logs = new Log(0);
+          $logs->guardar_log($_POST['usuario_id'], "Actualizando datos vehiculo". $_POST['id_huesped']);
+          echo "OK";
+        }
+
+      }
+
+      function guardar_datos_vehiculo($datos){
+        $id_huesped = $datos['id_huesped'];
+        $id_reserva=$datos['id_reserva'];
+        $usuario_id =$datos['usuario_id'];
+        $matricula =$datos['matricula'];
+        $marca=$datos['marca'];
+        $modelo=$datos['modelo'];
+        $year =$datos['year'];
+        $color =$datos['color'];
+        $propietario =$datos['propietario'];
+        $fecha_ingreso =strtotime($datos['ingreso']);
+        $fecha_salida =strtotime($datos['salida']);
+        $observaciones =$datos['observaciones'];
+
+        $sentencia="INSERT INTO `datos_vehiculo`(`id_huesped`, `id_usuario`, `id_reserva`, `matricula`, `marca`, `modelo`, `year`, `color`, `propietario`, `fecha_ingreso`, `fecha_salida`, `observaciones`) 
+        VALUES ('$id_huesped','$usuario_id','$id_reserva','$matricula','$marca','$modelo','$year','$color','$propietario','$fecha_ingreso','$fecha_salida','$observaciones')";
+        $comentario="Guardando info del vehiculo huesped";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if(!$consulta){
+          echo "NO_VALIDO";
+        }else{
+          $logs = new Log(0);
+          $logs->guardar_log($_POST['usuario_id'], "Guardando datos vehiculo". $_POST['id_huesped']);
+          echo "OK";
+        }
+
+      }
+
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
       $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$estado_credito,$limite_credito,$indole_tarjeta){

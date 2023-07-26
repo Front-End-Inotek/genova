@@ -444,17 +444,21 @@
         return $consulta;
       }
 
-      function mostrarCuentaUsuario($id_usuario){
-        $sentencia="SELECT cuenta.descripcion as concepto, cuenta.cargo, cuenta.descripcion, cuenta.fecha
-        from cuenta
-        where cuenta.id_usuario $id_usuario
+      function mostrarCuentaUsuario($id_usuario,$forma_pago){
+        $sentencia="SELECT  cuenta.fecha, reservacion.id as fcasa,hab.nombre as hab_nombre, cuenta.descripcion, cuenta.cargo, cuenta.abono, usuario.usuario
+        from cuenta 
+        inner join movimiento on cuenta.mov = movimiento.id
+        left join reservacion on movimiento.id_reservacion = reservacion.id
+        left join hab on movimiento.id_hab = hab.id
+        inner join usuario on cuenta.id_usuario = usuario.id
+        where cuenta.id_usuario= $id_usuario
+        and cuenta.forma_pago = $forma_pago
         and cuenta.estado =1
-        and (cuenta.cargo>0 || cuenta.abono >0)
-        and (from_unixtime(cuenta.fecha,'%Y-%m-%d') = CURRENT_DATE())
+        and (cuenta.abono >0) 
+        and (from_unixtime(cuenta.fecha,'%Y-%m-%d') = CURRENT_DATE()) 
         order by cuenta.forma_pago , cuenta.fecha asc" ;
         $comentario="Mostrar los cargos de todas las habitaciones por usuario";
         // echo $sentencia;
-        //echo $id;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }

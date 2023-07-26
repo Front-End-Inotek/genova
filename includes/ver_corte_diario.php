@@ -31,7 +31,7 @@
           echo '</div>
           <div class="col-sm-2">
           <div id="boton_usuario">
-            <button type="submit" class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte_nuevo()">Hacer reporte</button>
+            <button type="submit" class="btn btn-danger btn-block"  onclick="aceptar_guardar_corte_diario()">Hacer reporte</button>
           </div>
           </div>
         </div>
@@ -51,117 +51,74 @@
                     <tr class="table-primary-encabezado text-center">
                     <th>Fecha</th>
                     <th>FCasa</th>
-                    <th>Cuarto</th>
+                    <th>Hab.</th>
                     <th>Descripción</th>
-                    <th>Descripción</th>
-                    <th>Descripción</th>
+                    <th>Cargos</th>
+                    <th>Abonos</th>
                     <th>Usuario</th>
-                    
                     </tr>
                   </thead>
                 <tbody>';
                 //obtenemos los cargos por habitacion
-                $consulta= $cuenta->mostrarCuentaUsuario($usuario_id);
+               
              
                 $fila_atras="";
                 $total_cargos=0;
-                $total_=0;
+                $total_abonos=0;
+                $total_general=0;
 
-                echo '<tr class="table-secondary" style="text-align:left">';
-
-                echo '<td colspan="">Efectivo</td>
-                    </tr>
-                ';
                 echo '<tr class="table-secondary">';
-                $c=0;
-                while ($fila = mysqli_fetch_array($consulta)) {
-                  if($fila_atras!= $fila['hab_nombre']){
-                    if($c!=0){
-                      echo '<tr class="table-primary  text-center">
-                      <td></td>
-                      <td></td>
-                      <td>Total:</td>
-                      <td>$'.number_format($total_cargos, 2).'</td>
-                      </tr>';
-                      $total_cargos=0;
-                    }
-                    echo '<td>Habitación '.$fila['hab_nombre'].'</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                foreach ($forma_pago->formas_pagos() as $key => $pago) {
+                    
+                $consulta= $cuenta->mostrarCuentaUsuario($usuario_id,$pago['id']);
+
+                $contador_row = mysqli_num_rows($consulta);
+
+                if($contador_row!=0){
+                    $descripcion = ucwords($pago['descripcion']);
+                    echo '<td style="text-align:left;" colspan="">'.$descripcion.'</td>
                     </tr>
-                    ';
-                  
-                  }
-                  echo '<td></td>
+                ';
+             
+                while ($fila = mysqli_fetch_array($consulta)) {
+                    echo '<tr class="table-primary  text-center">
+                    <td>'.date('d-m-Y H:m:s',$fila['fecha']).'</td>
+                    <td>'.$fila['fcasa'].'</td>
+                    <td>'.$fila['hab_nombre'].'</td>
                     <td>'.$fila['descripcion'].'</td>
                     <td>'.$fila['cargo'].'</td>
-                    <td>0</td>
-                    </tr>
-                      ';
-                  
-                     
-
-                  $fila_atras=$fila['hab_nombre'];
-                  $total_cargos+=$fila['cargo'];
-                  $total_+=$fila['cargo'];
-                  $c++;
-                 
-                  
-                }
-                $total_maestra=0;
-                $fila_atras="";
-                //cargos cuentas maestras.
-                $consulta= $cuenta->mostrarCargosMaestra($usuario_id);
-                while ($fila = mysqli_fetch_array($consulta)) {
-                  if($fila_atras!= $fila['maestra_id']){
-                    if($c!=0){
-                      echo '<tr class="table-primary  text-center">
-                      <td></td>
-                      <td></td>
-                      <td>Total:</td>
-                      <td>$'.number_format($total_cargos, 2).'</td>
-                      </tr>';
-                      $total_cargos=0;
-                    }
-                    echo '<td>Cuenta maestra: '.$fila['maestra_nombre'].'</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>'.$fila['abono'].'</td>
+                    <td>'.$fila['usuario'].'</td>
                     </tr>
                     ';
-
-                  }
-                  echo '<td></td>
-                    <td>'.$fila['descripcion'].'</td>
-                    <td>'.$fila['cargo'].'</td>
-                    <td>0</td>
-                    </tr>
-                      ';
-
-
-                  $fila_atras=$fila['maestra_id'];
-                  $total_cargos+=$fila['cargo'];
-                  $total_maestra+=$fila['cargo'];
-                  $c++;
-
+                    $total_abonos+=$fila['abono'];
                 }
-                echo '<td></td>
+                echo '<tr class="table-primary  text-center">
                 <td></td>
-                <td>Total:</td>
-                <td>'.$total_cargos.'</td>
+                <td></td>
+                <td></td>
+                <td>Total posteo:</td>
+                <td>$0.00</td>
+                <td>$'.number_format($total_abonos,2).'</td>
+                <td></td>
                 </tr>
                 ';
-
-                $total_cargo_general = $total_+ $total_maestra;
-
-                echo '<td></td>
-                <td>Total cargos:</td>
-                <td></td>
-                <td>$'.number_format($total_cargo_general, 2).'</td>
-                </tr>
-                      ';
-
+                $total_general+=$total_abonos;
+                $total_abonos=0;
+                }
+               
+            }
+            echo '<tr class="table-primary  text-center">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total:</td>
+            <td>$0.00</td>
+            <td>$'.number_format($total_general,2).'</td>
+            <td></td>
+            </tr>
+            ';
+               
   ;
     echo ' </tbody>
     </table>

@@ -79,7 +79,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial', '', 9);
 
 date_default_timezone_set('America/Mexico_City');
-include_once("clase_cuenta.php");
+
 include_once("clase_tarifa.php");
 include_once("clase_movimiento.php");
 $cuenta= new Cuenta(0);
