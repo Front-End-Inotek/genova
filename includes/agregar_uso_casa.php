@@ -211,7 +211,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     <input type="text" class="form-control" id="apellido" required>
                 </div>
                 <div class="form-group col-md-4 col-12">
-                    <label for="empresa">Empresa/Agencia</label>
+                    <label for="empresa">Empresa / Agencia</label>
                     <input disabled type="text" class="form-control" id="empresa">
                 </div>
             </div>

@@ -3,7 +3,6 @@
   include_once('consulta.php');
 
   class Forma_pago extends ConexionMYSql{
-    
     public $id;
     public $descripcion;
     public $estado;
@@ -17,16 +16,16 @@
         $this->descripcion= 0;
         $this->estado= 0;
         $this->garantia=0;
-      }else{  
+      }else{
         $sentencia = "SELECT * FROM forma_pago WHERE id = $id LIMIT 1";
         $comentario="Obtener todos los valores de forma de pago";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-            $this->id= $fila['id'];  
-            $this->descripcion= $fila['descripcion']; 
-            $this->estado= $fila['estado'];      
-            $this->garantia= $fila['garantia'];         
+            $this->id= $fila['id'];
+            $this->descripcion= $fila['descripcion'];
+            $this->estado= $fila['estado'];
+            $this->garantia= $fila['garantia'];
         }
       }
     }
@@ -35,7 +34,7 @@
       $sentencia = "INSERT INTO `forma_pago` (`descripcion`, `estado`, `garantia`)
       VALUES ('$descripcion', '1',$garantia);";
       $comentario="Guardamos la forma de pago en la base de datos";
-      $consulta= $this->realizaConsulta($sentencia,$comentario);                 
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
     // Obtengo el total de formas de pago
     function total_elementos(){
@@ -94,7 +93,6 @@
           <th>Descripción</th>
           <th>Garantía</th>
           ';
-          
           if($editar==1){
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
           }
@@ -108,11 +106,10 @@
             <td><input type="text" class ="color_black" id="descripcion" placeholder="Ingresa la descripción" pattern="[a-z]{1,15}" maxlength="50"></td>
             <td><input type="checkbox" class ="color_black" id="garantia"></td>'
             ;
-            
             if($agregar==1){
               echo '<td><button class="btn btn-success" onclick="guardar_forma_pago()"> Guardar</button></td>';
             }
-            echo '<td></td>       
+            echo '<td></td>
           </tr>';
           while ($fila = mysqli_fetch_array($consulta))
           {
@@ -121,7 +118,7 @@
               if($fila['garantia']){
                 echo '<td><i style="font-size:2em;" class="bx bx-check-circle"></i></td>';
               }else{
-                echo '<td><i style="font-size:2em;" class="bx bx-x-circle"></i></td>'; 
+                echo '<td><i style="font-size:2em;" class="bx bx-x-circle"></i></td>';
               }
 
               if($editar==1){
@@ -157,11 +154,9 @@
     }
     // Muestra las formas de pago
     function mostrar_forma_pago($forma=0){
-      
       if($forma==="Credito" || $forma==="Debito"){
         $forma = 2;
       }
-    
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
       $comentario="Mostrar las formas de pago";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -173,7 +168,6 @@
         }else{
           echo '<option data-garantia="'.$fila['garantia'].'" value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';
         }
-        
       }
       return $consulta;
     }
@@ -188,7 +182,7 @@
         if($id==$fila['id']){
           echo '<option value="'.$fila['id'].'" selected>'.$fila['descripcion'].'</option>';
         }else{
-          echo '<option value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';  
+          echo '<option value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';
         }
       }
     }
@@ -217,6 +211,5 @@
       }
       return $descripcion;
     }
-    
   }
 ?>

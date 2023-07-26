@@ -936,6 +936,8 @@ hr{
   border-left: 7px solid green;
   cursor: pointer;
   transition: all 0.3s ease-out;
+  height: 100%;
+  width: 100%;
 }
 .personas span{
   color: white;
@@ -1081,8 +1083,8 @@ hr{
 }
 
 .estado_mesa0 {
-  background-color: #57b776;
-  color: #5aa875;
+  background-color: #28A742;
+  color: #3add5a;
   padding: 0.5em 10px 0px 10px;
   border-radius: 15px;
   max-width: 100% !important;
@@ -1093,7 +1095,7 @@ hr{
 }
 
 .estado_mesa0:hover {
-  background-color: #1ea049;
+  background-color: #3add5a;
   color: #5aa875;
   padding: 0.5em 10px 0px 10px;
   border-radius: 15px;

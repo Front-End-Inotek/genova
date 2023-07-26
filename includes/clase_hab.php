@@ -449,9 +449,9 @@
         }
       }
       function datos_auditoria(){
-        $sentencia="SELECT *,hab.id AS ID 
+        $sentencia="SELECT *,hab.id AS ID
         FROM hab
-        INNER JOIN movimiento ON hab.mov = movimiento.id 
+        INNER JOIN movimiento ON hab.mov = movimiento.id
         INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.estado_hab = 1
         and (from_unixtime(reservacion.fecha_auditoria,'%Y-%m-%d') = CURRENT_DATE())";
         $comentario="Obtengo los datos del cargo por noche de la habitacion";
@@ -461,9 +461,9 @@
 
       // Obtengo los datos del cargo por noche de la habitacion para realizar su reporte
       function datos_cargo_noche(){
-        $sentencia = "SELECT *,hab.id AS ID 
+        $sentencia = "SELECT *,hab.id AS ID
         FROM hab
-        INNER JOIN movimiento ON hab.mov = movimiento.id 
+        INNER JOIN movimiento ON hab.mov = movimiento.id
         INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE hab.cargo_noche = 1 AND reservacion.forzar_tarifa = 0 AND hab.estado_hab = 1";
         $comentario="Obtengo los datos del cargo por noche de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -489,9 +489,9 @@
         $huesped= NEW Huesped(0);
         $tarifa= NEW Tarifa(0);
 
-        $sentencia = "SELECT *,hab.id AS ID,hab.cargo_noche AS cargo 
+        $sentencia = "SELECT *,hab.id AS ID,hab.cargo_noche AS cargo
         FROM hab
-        INNER JOIN movimiento ON hab.mov = movimiento.id 
+        INNER JOIN movimiento ON hab.mov = movimiento.id
         INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id WHERE reservacion.forzar_tarifa = 0 AND hab.estado = 1 AND hab.estado_hab = 1";
         $comentario="Mostrar los datos del cargo por noche de la habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -517,7 +517,7 @@
             while ($fila = mysqli_fetch_array($consulta))
             {
                 $hab_id = $fila['ID'];
-                $hab_nombre = $fila['nombre'];  
+                $hab_nombre = $fila['nombre'];
                 $extra_adulto = $fila['extra_adulto'];
                 $extra_junior = $fila['extra_junior'];
                 $extra_infantil = $fila['extra_infantil'];
@@ -610,6 +610,5 @@
         }
         return $nombre;
       }
-              
   }
 ?>

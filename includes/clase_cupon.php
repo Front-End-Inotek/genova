@@ -13,7 +13,6 @@
       public $cantidad;
       public $tipo;
       public $estado;
-      
       // Constructor
       function __construct($id)
       {
@@ -53,8 +52,7 @@
         $sentencia = "INSERT INTO `cupon` (`codigo`, `descripcion`, `fecha`, `vigencia_inicio`, `vigencia_fin`, `cantidad`, `tipo`, `estado`)
         VALUES ('$codigo', '$descripcion', '$fecha', '$vigencia_inicio', '$vigencia_fin', '$cantidad', '$tipo', '1');";
         $comentario="Guardamos el cupon en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);    
-        
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
         include_once("clase_log.php");
         $logs = NEW Log(0);
         $sentencia = "SELECT id FROM cupon ORDER BY id DESC LIMIT 1";
@@ -85,7 +83,6 @@
         $usuario =  NEW Usuario($id);
         $editar = $usuario->cupon_editar;
         $borrar = $usuario->cupon_borrar;
-    
         $cont = 1;
         //echo $posicion;
         $final = $posicion+20;
@@ -126,7 +123,7 @@
             {
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
-                <td>'.$fila['id'].'</td>  
+                <td>'.$fila['id'].'</td>
                 <td>'.$fila['codigo'].'</td>
                 <td>'.$fila['descripcion'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -190,10 +187,10 @@
               echo '</tr>
             </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta)) 
+              while ($fila = mysqli_fetch_array($consulta))
               {
                 echo '<tr class="text-center">
-                <td>'.$fila['id'].'</td>  
+                <td>'.$fila['id'].'</td>
                 <td>'.$fila['codigo'].'</td>
                 <td>'.$fila['descripcion'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -260,10 +257,10 @@
               echo '</tr>
             </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta)) 
+              while ($fila = mysqli_fetch_array($consulta))
               {
                 echo '<tr class="text-center">
-                <td>'.$fila['id'].'</td>  
+                <td>'.$fila['id'].'</td>
                 <td>'.$fila['codigo'].'</td>
                 <td>'.$fila['descripcion'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -327,6 +324,5 @@
         }
         return $id;
       }
-             
   }
 ?>

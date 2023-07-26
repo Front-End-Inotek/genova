@@ -2432,9 +2432,7 @@ function ver_auditoria(){
 	$("#area_trabajo_menu").load("includes/ver_auditoria.php?usuario_id="+usuario_id);
     closeModal();
 	closeNav();
-
 }
-
 
 function enviar_transacciones_correo(mov,abono,descripcion,forma_pago){
     var usuario_id=localStorage.getItem("id");
@@ -2454,7 +2452,6 @@ function enviar_transacciones_correo(mov,abono,descripcion,forma_pago){
         beforeSend:inicioEnvio,
         success:function(res){
             console.log(res)
-           
         },
         timeout:5000,
         error:problemas
@@ -2480,7 +2477,6 @@ function enviar_abono_correo(mov,abono,descripcion,forma_pago){
             beforeSend:inicioEnvio,
             success:function(res){
                 console.log(res)
-               
             },
             timeout:5000,
             error:problemas
@@ -2521,7 +2517,6 @@ function respuesta_correo_reserva(info,reenviar){
     if(reenviar){
         swal("Correo de confirmación reenviado correctamente","Correo de confirmación reenviado correctamente",'success');
     }
-    
 }
 
 function enviar_cancela_correo(info,correo,reenviar){
@@ -2608,14 +2603,11 @@ function datosFormulario(id_form){
 }
 
 function verificarFormulario(id_form,field) {
-    
     var form = document.getElementById(id_form);
     var camposNoValidados = [];
-  
     // Recorre todos los elementos del formulario
     for (var i = 0; i < form.elements.length; i++) {
       var elemento = form.elements[i];
-  
       // Verifica si el elemento es un campo requerido y si está vacío
       if (elemento.required && elemento.value === "") {
         if(field=="id"){
@@ -2623,10 +2615,8 @@ function verificarFormulario(id_form,field) {
         }else{
             camposNoValidados.push(elemento.name);
         }
-        
-      }
     }
-  
+    }
     // Si hay campos no validados, muestra una alerta con sus identificadores
     if (camposNoValidados.length > 0) {
       //var mensaje="";
@@ -2793,7 +2783,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
 	var total_adulto= total_adulto * extra_adulto;
 	var total_junior= total_junior * extra_junior;
 	var total_infantil= total_infantil * extra_infantil;
-	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
+	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil;
 	//var total= total_hab + total_suplementos;
     //var total= total_hab; ANTERIOR
     var total= Number(document.getElementById("total").value);
@@ -2821,7 +2811,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
     var datos = {
         "id_huesped": id_huesped,
         "fecha_entrada": fecha_entrada,
-        "fecha_salida": fecha_salida, 
+        "fecha_salida": fecha_salida,
         "noches": noches,
         "numero_hab": numero_hab,
         "precio_hospedaje": precio_hospedaje,
@@ -2861,7 +2851,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
             var datos = {
                   "id_huesped": id_huesped,
                   "fecha_entrada": fecha_entrada,
-                  "fecha_salida": fecha_salida, 
+                  "fecha_salida": fecha_salida,
                   "noches": noches,
                   "numero_hab": numero_hab,
                   "precio_hospedaje": precio_hospedaje,
@@ -2946,7 +2936,6 @@ function ver_reservaciones_paginacion(buton,posicion,caso=0){
 
     $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id+"&caso="+caso+"&inicial="+inicial+"&final="+final,
     function(res){
-       
     });
 }
 
@@ -2957,7 +2946,6 @@ function buscar_llegadas_salidas(e,opcion){
         var usuario_id=localStorage.getItem("id");
         var inicial = $("#inicial").val()
         var final = $("#final").val()
-    
         if(inicial==undefined){
             inicial="";
         }
@@ -3082,7 +3070,6 @@ function busqueda_reservacion_combinada_por_dia(){
 	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada_por_dia.php?dia="+dia+"&id="+id+"&a_buscar="+a_buscar);
 }
 
-
 // Busqueda combinada en ver reservaciones por dia
 function busqueda_reservacion_combinada_por_dia(){
 	var dia=$("#dia").val();
@@ -3096,7 +3083,6 @@ function busqueda_reservacion_combinada_por_dia(){
 	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada_por_dia.php?dia="+dia+"&id="+id+"&a_buscar="+a_buscar);
 }
 
-
 //Generar reporte de todas las reservaciones (rango de fechas)
 
 function ver_reservaciones_reporte(){
@@ -3104,7 +3090,6 @@ function ver_reservaciones_reporte(){
     inicial = $("#inicial").val()
     final = $("#final").val()
     a_buscar = $("#a_buscar").val()
-
     window.open("includes/reporte_reservaciones.php?inicial="+inicial+"&final="+final+"&usuario_id="+usuario_id+"&a_buscar="+a_buscar);
 }
 
@@ -3155,7 +3140,6 @@ function calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_
 	var total_suplementos= Number(document.getElementById("total_suplementos").value);
 	var descuento= Number(document.getElementById("descuento").value);
     //var total_pago= Number(document.getElementById("total_pago").value);
-    
 	var total_hospedaje= precio_hospedaje * noches * numero_hab;
 	var total_adulto= total_adulto * extra_adulto;
 	var total_junior= total_junior * extra_junior;
@@ -3210,7 +3194,6 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 	calculo_descuento= redondearDecimales(calculo_descuento,2);
 	total= calculo_descuento;
 
-
 	if(id >0 && id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago.length >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
         if(cantidad_ocupacion <= cantidad_maxima){
             $("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
@@ -3263,7 +3246,7 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
         }
     }else{
         alert("Campos incompletos o descuento no permitido");
-    }    
+    }
 }
 
 // Muestra las reservaciones de la bd
@@ -3286,7 +3269,6 @@ function reporte_reservacion(id){
 
 // Borrar una reservacion
 function borrar_reservacion(id,preasignada=0){
-    
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     if (id >0) {
@@ -3318,9 +3300,6 @@ function guardar_preasignar_reservacion(id,opcion="")
     var usuario_id=localStorage.getItem("id");
     preasignada = $("#preasignada").val();
     console.log(preasignada,id)
-   
-
-
     if (id >0 && preasignada.length >0) {
         $('#caja_herramientas').modal('hide');
         $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
@@ -3352,7 +3331,6 @@ function guardar_preasignar_reservacion(id,opcion="")
     }else{
         alert("Campos incompletos");
     }
-
 }
 // Modal de preasignar reservacion
 function preasignar_reservacion(id,opcion=""){
@@ -3362,7 +3340,6 @@ function preasignar_reservacion(id,opcion=""){
 
 // Modal de cancelar una reservacion
 function aceptar_garantizar_reservacion(id,preasignada=0,correo,garantizada=0){
-    
 	$("#mostrar_herramientas").load("includes/garantizar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada);
 }
 
@@ -3381,7 +3358,7 @@ function garantizar_reservacion(id,preasignada=0,correo,garantizada=0){
                 "forma_garantia": forma_garantia,
                 "usuario_id": usuario_id,
                 "total_pago":monto,
-            };  
+            };
         $.ajax({
                 async:true,
                 type: "POST",
@@ -3405,7 +3382,6 @@ function garantizar_reservacion(id,preasignada=0,correo,garantizada=0){
 
 // Modal de cancelar una reservacion
 function aceptar_cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
-    
 	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada);
 }
 
@@ -3417,7 +3393,7 @@ function cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
     var motivo_cancela= encodeURI(document.getElementById("motivo_cancela").value);
 
     // console.log(motivo_cancela)
-    // return 
+    // return
 
     if (id >0 && nombre_cancela.length >0 && motivo_cancela.length>0) {
         $('#caja_herramientas').modal('hide');
@@ -3428,7 +3404,7 @@ function cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
                 "motivo_cancela": motivo_cancela,
                 "usuario_id": usuario_id,
                 "preasignada":preasignada,
-            };  
+            };
         $.ajax({
                 async:true,
                 type: "POST",
@@ -3507,8 +3483,6 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
     }
 
     //si no, tendrá que seleccionar una de las habitaciones disponibles.
-
-	
 }
 
 // Modal de asignar una reservacion a una habitacion en estado disponible
@@ -3566,7 +3540,7 @@ function asignar_reservacion(hab_id,id_reservacion,habitaciones){
             error:problemas_sistema
           });
       return false;
-    }    
+    }
 }
 
 // Recibe los datos para realizar checkin multiple
@@ -3630,7 +3604,7 @@ function asignar_reservacion_multiple(hab_id,id_reservacion,habitaciones){
               error:problemas_sistema
             });
         return false;
-    }  
+    }
 }
 
 //* Huesped *//
@@ -3760,7 +3734,6 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
         "&estado_credito="+estado_credito+"&limite_credito="+limite_credito,
         true);
 
-    
         xhttp.addEventListener('load', e =>{
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {
@@ -3783,13 +3756,12 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
                 swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
         })
-        xhttp.send();        
+        xhttp.send();
     }
 
 }
 
 function mostrar_tarjeta(huesped_id){
-    
     if ($('#check_tarjeta').is(':checked')) {
         let password = prompt("Escriba su contraseña para continuar")
         if (password == null || password == "") {
@@ -3940,7 +3912,7 @@ function modificar_huesped(id,hab_id,id_reservacion){
                     timeout:5000,
                     error:problemas_sistema
                 });
-            return false;      
+            return false;
         }else{
             if(id_reservacion == 0){
                 $.ajax({
@@ -3956,7 +3928,7 @@ function modificar_huesped(id,hab_id,id_reservacion){
                         timeout:5000,
                         error:problemas_sistema
                     });
-                return false; 
+                return false;
             }else{
                 $.ajax({
                         async:true,
@@ -3971,12 +3943,12 @@ function modificar_huesped(id,hab_id,id_reservacion){
                         timeout:5000,
                         error:problemas_sistema
                     });
-                return false; 
+                return false;
             }
-        }    
+        }
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 // Borrar un huesped
@@ -4027,7 +3999,6 @@ function habSeleccionada(event){
         if(tipo_hab!=undefined){
           console.log(tipo_hab)
         }
-       
     }
     // console.log($("#habitacion_check").val())
     // hab_id = $("#habitacion_check").val()
@@ -4051,9 +4022,9 @@ function disponible_asignar(hab_id,estado){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	//checkin 
-    //$("#area_trabajo_menu").load("includes/agregar_reservaciones.php?hab_id="+hab_id+"&estado="+estado); 
-    $("#area_trabajo_menu").load("includes/agregar_reservacionNew.php?hab_id="+hab_id); 
+	//checkin
+    //$("#area_trabajo_menu").load("includes/agregar_reservaciones.php?hab_id="+hab_id+"&estado="+estado);
+    $("#area_trabajo_menu").load("includes/agregar_reservacionNew.php?hab_id="+hab_id);
 	$('#caja_herramientas').modal('hide');
 }
 
@@ -4102,7 +4073,7 @@ function cambiar_cargo_noche(id,cargo){
 			  error:problemas_sistema
 			});
             return false;
-    }else{ 
+    }else{
         alert("Campos incompletos");
     }
 }
@@ -4142,15 +4113,12 @@ function cargo_noche(){
     return false;
 }
 
-
-
 // Generar reporte de cargo noche y guardarlo
 function guardar_reporte_cargo_noche(){
     var usuario_id=localStorage.getItem("id");
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
-    
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	//window.open("includes/mostrar_cargo_noche_reporte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
     window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
@@ -4164,7 +4132,6 @@ function mostrar_cargo_noche_reporte(){
 	var ancho= tam[0];
     //var alto= 1000;
 	//var ancho= 500;
-    
     //$("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/mostrar_cargo_noche_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
     //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
@@ -4213,7 +4180,6 @@ function guardar_forma_pago(){
                   "usuario_id": usuario_id,
                   "garantia":garantia,
 				};
-              
 			$.ajax({
 				  async:true,
 				  type: "POST",
@@ -4281,7 +4247,7 @@ function modificar_forma_pago(id){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 // Borrar una forma de pago
@@ -4367,7 +4333,6 @@ function guardar_usuario(){
                   beforeSend:loaderbar,
                   success:function(res){
                     console.log(res)
-                    
                     if(res.search("Duplicate entry")){
                         alert("El nombre de usuario ya se encuentra ocupado")
                         //<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">
@@ -4384,7 +4349,7 @@ function guardar_usuario(){
         }else{
             alert("Las contraseñas no coinciden");
         }
-    }else{ 
+    }else{
         alert("Campos incompletos");
     }
 }
@@ -4482,7 +4447,6 @@ function modificar_usuario(id){
 
     // console.log(reservacion_preasignar)
     // return
-
 
     // Convertir usuario permisos
     if(usuario_ver){
@@ -4628,7 +4592,6 @@ function modificar_usuario(id){
     }else{
         reporte_agregar = 0;
     }
-    
     // Convertir forma_pago permisos
     if(forma_pago_ver){
         forma_pago_ver = 1;
@@ -4677,7 +4640,6 @@ function modificar_usuario(id){
     }else{
         inventario_surtir = 0;
     }
-    
     // Convertir categoria permisos
     if(categoria_ver){
         categoria_ver = 1;
@@ -4750,7 +4712,6 @@ function modificar_usuario(id){
     }else{
         logs_ver = 0;
     }
-    
 
 	if(usuario.length >0 && nivel.length >0){
         //if(contrasena == recontrasena){
@@ -4840,7 +4801,7 @@ function modificar_usuario(id){
         /*}else{
             alert("Las contraseñas no coinciden");
         }*/
-    }else{ 
+    }else{
         alert("Campos incompletos");
     }
 }
@@ -4910,7 +4871,6 @@ function estado_cuenta(hab_id,estado,mov=0){
 	$('#caja_herramientas').modal('hide');
 }
 
-
 // Agregar un cargo al cargo por habitacion //
 function agregar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
 
@@ -4919,13 +4879,9 @@ function agregar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
 
 // Guardar un abono al cargo por habitacion
 function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
-  
     var usuario_id=localStorage.getItem("id");
     var descripcion= encodeURI(document.getElementById("descripcion").value);
-   
     var cargo= document.getElementById("cargo").value;
-   
-    
     if(descripcion.length >0 && cargo >0){
         $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -4939,7 +4895,6 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
               "mov":mov,
               "id_maestra":id_maestra,
             };
-         
         $.ajax({
               async:true,
               type: "POST",
@@ -4963,7 +4918,7 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 
@@ -5022,7 +4977,6 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
                     enviar_abono_correo(data[2],abono,descripcion,fp_txt);
                 }else{
                     recibe_datos_monto_maestra(res)
-                  
                 }
               },
               //success:problemas_sistema,
@@ -5032,7 +4986,7 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 // Recibe los datos para efectuar agregar un monto
@@ -5040,9 +4994,7 @@ function recibe_datos_monto_maestra(datos){
     //alert(datos);
     var res = datos.split("/");
     $('#caja_herramientas').modal('hide');
-   
     estado_cuenta_maestra(res[0] , res[1], res[2], res[3]);
-   
 }
 
 // Recibe los datos para efectuar agregar un monto
@@ -5054,13 +5006,11 @@ function recibe_datos_monto(datos){
 
 // Modal de herramientas de cargos en estado de cuenta
 function herramientas_cargos(id,hab_id,estado,usuario,cargo,id_maestra=0,mov=0){
-   
     $("#mostrar_herramientas").load("includes/modal_herramientas_cargos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&cargo="+cargo+"&id_maestra="+id_maestra+"&mov="+mov);
 }
 
 // Modal de editar cargo en estado de cuenta
 function editar_herramientas_cargo(id,hab_id,estado,cargo,id_maestra=0,mov=0){
-    
     $("#mostrar_herramientas").load("includes/modal_editar_herramientas_cargo.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo+"&id_maestra="+id_maestra+"&mov="+mov);
 }
 
@@ -5095,28 +5045,23 @@ function confirmar_cambiar_cargos(){
     }
 
     function campos_cargos(){
-    
         var usuario_id=localStorage.getItem("id");
         var array_cargos=[];
-    
         var cargos= document.getElementsByClassName('campos_cargos')
-    
         var campos_habs = document.getElementsByClassName('campos_habs')
-    
         for (var i = 0; i < cargos.length; i++) {
             // var tarifa=0;
-    
              if(cargos[i].value=="" && campos_habs[i].checked){
                 array_cargos.push({
                     "reservaid":cargos[i].dataset.reservaid,
                     "valor":0,
-                    }) 
+                    })
             }
             if(cargos[i].value!="" && campos_habs[i].checked){
                 array_cargos.push({
                     "reservaid":cargos[i].dataset.reservaid,
                     "valor": cargos[i].value,
-                    }) 
+                    })
             }
         }
         // console.log(array_cargos)
@@ -5137,7 +5082,6 @@ function confirmar_cambiar_cargos(){
                 success:function(res){
                     console.log(res)
                     cargo_auditoria()
-                    
                     //ver_auditoria()
                 },
                 //success:problemas_sistema,
@@ -5145,9 +5089,6 @@ function confirmar_cambiar_cargos(){
                 error:problemas_sistema
               });
         }
-    
-    
-    
         return false;
     }
 
@@ -5171,7 +5112,6 @@ function cargo_auditoria(){
                 console.log(res)
                 mostrar_cargo_noche_reporte();
                 principal()
-                
             },
             //success:problemas_sistema,
             timeout:5000,
@@ -5179,7 +5119,6 @@ function cargo_auditoria(){
         });
     //window.open("includes/reporte_cargo_noche.php?usuario_id="+usuario_id);
     //guardar_reporte_cargo_noche();
-   
     return false;
 }
 
@@ -5188,9 +5127,7 @@ function cargo_auditoria(){
 // Editar un cargo en estado de cuenta desde auditoria.
 function modificar_herramientas_cargo_aud(id,hab_id,estado,id_maestra=0,mov=0,campo){
 	var usuario_id=localStorage.getItem("id");
-  
     var cargo= document.getElementById(campo).value;
-    
     if(cargo!=""){
         $("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -5213,7 +5150,6 @@ function modificar_herramientas_cargo_aud(id,hab_id,estado,id_maestra=0,mov=0,ca
               data:datos,
               //beforeSend:loaderbar,
               success:function(res){
-               
               },
               //success:problemas_sistema,
               timeout:5000,
@@ -5265,7 +5201,7 @@ function modificar_herramientas_cargo(id,hab_id,estado,id_maestra=0,mov=0){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 // Modal de borrar cargo en estado de cuenta
@@ -5287,7 +5223,6 @@ function borrar_herramientas_cargo(id,hab_id,estado,id_maestra,mov){
               "id_maestra":id_maestra,
               "mov":mov
             };
-       
         $.ajax({
               async:true,
               type: "POST",
@@ -5310,7 +5245,7 @@ function borrar_herramientas_cargo(id,hab_id,estado,id_maestra,mov){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 // Modal de herramientas de abonos en estado de cuenta
@@ -5340,7 +5275,6 @@ function modificar_herramientas_abono(id,hab_id,estado,id_maestra=0,mov=0){
               "id_maestra":id_maestra,
               "mov":mov,
             };
-       
         $.ajax({
               async:true,
               type: "POST",
@@ -5363,7 +5297,7 @@ function modificar_herramientas_abono(id,hab_id,estado,id_maestra=0,mov=0){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 // Modal de borrar abono en estado de cuenta
@@ -5407,10 +5341,10 @@ function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
-//* Edo. Cuenta - Cambiar hab *// 
+//* Edo. Cuenta - Cambiar hab *//
 
 // Modal de cambiar de habitacion el monto en estado de cuenta
 function cambiar_hab_herramientas_monto(monto,id,hab_id,estado,cargo){
@@ -5435,7 +5369,7 @@ function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 		  async:true,
 		  type: "POST",
 		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded", 
+		  contentType: "application/x-www-form-urlencoded",
 		  url:"includes/cambiar_hab_monto.php",
 		  data:datos,
 		  beforeSend:loaderbar,
@@ -5447,7 +5381,7 @@ function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 	return false;
 }
 
-// Modal para unificar cuentas en una habitacion seleccionada 
+// Modal para unificar cuentas en una habitacion seleccionada
 function unificar_cuentas(hab_id,estado,mov){
     $("#mostrar_herramientas").load("includes/modal_unificar_cuentas.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
 }
@@ -5483,7 +5417,7 @@ function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
 	return false;
 }
 
-//* Categoria *// 
+//* Categoria *//
 
 // Guardar un categoria del inventario
 function guardar_categoria(){
@@ -5560,7 +5494,7 @@ function modificar_categoria(id){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 // Borrar una categoria
@@ -5618,7 +5552,6 @@ function guardar_inventario(){
     var bodega_inventario= document.getElementById("bodega_inventario").value;
     var bodega_stock= document.getElementById("bodega_stock").value;
     var clave= document.getElementById("clave").value;
-	
 
 	if(nombre.length >0 && categoria >0 && precio >0){
 			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
@@ -5698,7 +5631,6 @@ function switch_rack(){
         closeNav();
         siguiente_vista=0;
     }
-   
 }
 
 function ver_rack_habitacional(){
@@ -5780,7 +5712,7 @@ function modificar_inventario(id){
         return false;
     }else{
         alert("Campos incompletos");
-    }    
+    }
 }
 
 // Borrar un inventario
@@ -5909,17 +5841,17 @@ function inventario_surtir_producto(producto){
 	}
 }
 
-// Muestra los datos de surtir de la bd 
+// Muestra los datos de surtir de la bd
 function cargar_surtir(){
 	$("#a_surtir").load("includes/mostrar_surtir.php");
 }
 
-// Modal de editar un producto de surtir inventario 
+// Modal de editar un producto de surtir inventario
 function aceptar_editar_surtir_inventario(id){
 	$("#mostrar_herramientas").load("includes/editar_modal_surtir_inventario.php?id="+id);
 }
 
-// Editar un producto de surtir inventario 
+// Editar un producto de surtir inventario
 function editar_surtir_inventario(id){
 	var cantidad= document.getElementById("cantidad").value;
 
@@ -5947,10 +5879,10 @@ function editar_surtir_inventario(id){
         return false;
     }else{
         alert("¡La cantidad debe ser mayor a 0!");
-    }    
+    }
 }
 
-// Borrar un producto de surtir inventario 
+// Borrar un producto de surtir inventario
 function borrar_surtir_inventario(id){
     $('#caja_herramientas').modal('hide');
     if (id >0) {
@@ -5974,12 +5906,12 @@ function borrar_surtir_inventario(id){
     }
 }
 
-// Modal de borrar un producto de surtir inventario 
+// Modal de borrar un producto de surtir inventario
 function aceptar_borrar_surtir_inventario(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_surtir_inventario.php?id="+id);
 }
 
-// Modal de aplicar surtir inventario 
+// Modal de aplicar surtir inventario
 function aceptar_aplicar_surtir_inventario(id){
 	$("#mostrar_herramientas").load("includes/aplicar_modal_surtir_inventario.php?id="+id);
 }
@@ -5987,7 +5919,7 @@ function aceptar_aplicar_surtir_inventario(id){
 function validarEmail(email){
     return email.match(
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+    );
 }
 
 function comprobarEmail(){
@@ -6048,7 +5980,6 @@ function agregar_restaurante_mesa(mesa_id,estado){
 
 // Mostrar categorias existentes en el inventario
 function buscar_categoria_restaurente(categoria,hab_id,estado,mov,mesa,maestra=0){
-    
 	$("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa+"&maestra="+maestra);
 }
 
@@ -6126,7 +6057,6 @@ function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad
 	var usuario_id=localStorage.getItem("id");
     var categoria= 0;
     var cantidad= document.getElementById("cantidad").value;
-    
 
 	if(cantidad>0){
         var datos = {
@@ -6156,8 +6086,8 @@ function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad
             });
         return false;
     }else{
-        alert("Campos incompletos"); 
-    }        
+        alert("Campos incompletos");
+    }
 }
 
 // Borrar un producto del pedido del restaurante
@@ -6166,7 +6096,7 @@ function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa,id_maestr
     var categoria= 0;
 
     console.log(id_maestra);
-    
+
     var datos = {
 		"producto": producto,
         "categoria": categoria,
@@ -6206,7 +6136,6 @@ function guardar_inventario(){
     var bodega_inventario= document.getElementById("bodega_inventario").value;
     var bodega_stock= document.getElementById("bodega_stock").value;
     var clave= document.getElementById("clave").value;
-	
 
 	if(nombre.length >0 && categoria >0 && precio >0){
 			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
@@ -6242,7 +6171,7 @@ function guardar_inventario(){
 			}
 }
 
-// Pedir restaurante cobro 
+// Pedir restaurante cobro
 function pedir_rest_cobro(total,hab_id,estado,mov,id_maestra=0){
     if(mov == 0){
         $("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
@@ -6259,14 +6188,14 @@ function pedir_rest_cobro_directo(total,hab_id,estado,mov){
 // Pedir restaurante el cobro se carga a la habitacion
 function pedir_rest_cobro_hab(total,hab_id,estado,mov,id_maestra=0){
     $("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro_hab.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&id_maestra="+id_maestra); 
- }
+}
 
-// Pedir restaurante cobro en mesa 
+// Pedir restaurante cobro en mesa
 function pedir_rest_cobro_mesa(total,hab_id,estado,mov){
 	$("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro_mesa.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
 }
 
-// Cambio en pedir restaurante 
+// Cambio en pedir restaurante
 function cambio_rest_cobro(total){
 	var efectivo=$("#efectivo").val();
 	var cambio= efectivo-total;

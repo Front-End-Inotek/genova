@@ -17,7 +17,7 @@
         case 0:
               $this->disponible($hab_id,$estado);
           break;
-        case 1: 
+        case 1:
               $this->ocupada($hab_id,$estado,$mov);
           break;
         case 2:
@@ -295,7 +295,6 @@
 
     // Estado 7
     function reserva_pendiente($hab_id,$estado,$mov,$id,$entrada,$salida){
-   
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
       $comentario="Obtener informacion para la habitacion con el estado cancelada";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -305,7 +304,6 @@
       $motivo= '';
       while ($fila = mysqli_fetch_array($consulta))
       {
-        
         $motivo= $fila['comentario'];
       }
       $hab= NEW Hab(0);
@@ -437,7 +435,7 @@
                   while ($fila = mysqli_fetch_array($consulta))
                   {
                       echo '<div>
-                       '.$fila['cantidad'].' -  '.$this->nombre_producto($fila['producto']).'
+                      '.$fila['cantidad'].' -  '.$this->nombre_producto($fila['producto']).'
                       </div>';
                   }
                 echo '</div>
@@ -493,6 +491,5 @@
         echo 'Fin : '.date("d-m-Y H:i:s",  $detalle_fin);
       echo '</div>';
     }
-
   }
 ?>

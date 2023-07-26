@@ -76,7 +76,7 @@
   switch ($_GET['estado']) {
     case 0:
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+        echo '<div class="col-12 col-md-3 btn-herramientas">';
           echo '<div class="ocupada btn-square-lg" onclick="mesa_disponible_asignar('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
@@ -134,7 +134,7 @@
         echo '</div>';
       }*/
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+        echo '<div class="col-12 col-md-3 btn-herramientas">';
           echo '<div class="restaurante btn-square-lg" onclick="agregar_restaurante_mesa('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
@@ -148,7 +148,7 @@
         echo '</div>';
       }
       if($user->nivel<=2 && $precio>0){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+        echo '<div class="col-12 col-md-3 btn-herramientas">';
           // Caja para cobrar anterior
           //echo '<div class="cobrar btn-square-lg" onclick="mesa_cobrar_rest('.$_GET['mesa_id'].','.$_GET['estado'].')">';
           echo '<div class="cobrar btn-square-lg" onclick="ver_caja_rest('.$_GET['mesa_id'].','.$_GET['estado'].')">';
@@ -164,8 +164,8 @@
         echo '</div>';
       }
       if($user->nivel<=2){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="personas btn-square-lg-doble" onclick="mesa_cambiar_personas('.$_GET['mesa_id'].','.$_GET['estado'].')">';
+        echo '<div class="col-12 col-md-3 btn-herramientas">';
+          echo '<div class="personas btn-square-lg" onclick="mesa_cambiar_personas('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';
                 //echo '<img src="images/persona.png"  class="center-block img-responsive">';
@@ -178,7 +178,7 @@
         echo '</div>';
       }
       if($user->nivel<=2 && $precio>0){
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+        echo '<div class="col-12 col-md-3 btn-herramientas">';
           echo '<div class="recibo btn-square-lg-doble" onclick="mesa_imprimir_ticket('.$_GET['mesa_id'].','.$_GET['estado'].')">';
             echo '</br>';
             echo '<div>';

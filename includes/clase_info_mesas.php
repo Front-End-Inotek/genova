@@ -122,8 +122,8 @@
               echo 'Meser@: '.$nombre_usuario;
             echo '</div>
 
-            <div class="col-sm-6 izquierda">
-                  <div>
+            <div class="col-12 izquierda">
+                  <div style="font-size: 1.5rem; padding-bottom: 1rem; padding-top: 0.5rem;">
                     Restaurante:
                   </div>';
                   //$sentencia = "SELECT id FROM ticket WHERE mov = $mov";
@@ -143,14 +143,13 @@
                       if($usuario->nivel <= 1){
                         // echo '<button type="button" class="btn btn-danger" onclick="borrar_desde_hab('.$filas1['id'].')">Borrar</button>';
                       }
-                      echo '<div class="col-12 letras-grandes-modal">';
+                      echo '<div class="col-12 letras-grandes-modal" style="padding-bottom: 5px; border-bottom: 1px solid #00000026"> ';
                       echo $filas1['cantidad'].' -  '.$filas1['nombre'].' -  $'.number_format($filas1['total'], 2);
                       echo '</div>';
                     }
                     echo ' </div>';
                   }
                 echo '</div>
-
           </div>
         </div>';
     }
@@ -288,7 +287,6 @@
         echo 'Cobrara: '. $usuario->usuario;
       echo '</div>';
     }
-    
     function ocupada_rest($mesa_id,$estado,$mov){
 
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
@@ -340,9 +338,8 @@
                 <div>
                   Modelo: '.$modelo.'
                 </div>
-
                 </div>
-                <div class="col-sm-6 izquierda">
+                <div class="col-12 izquierda">
                   <div>
                     Restaurante
                   </div>';
@@ -353,13 +350,12 @@
                   while ($fila = mysqli_fetch_array($consulta))
                   {
                       echo '<div>
-                       '.$fila['cantidad'].' -  '.$this->nombre_producto($fila['producto']).'
+                      '.$fila['cantidad'].' -  '.$this->nombre_producto($fila['producto']).'
                       </div>';
                   }
                 echo '</div>
           </div>
             </div>';
-
 
     }
     function nombre_producto($id){
@@ -463,7 +459,6 @@
                     while ($filas = mysqli_fetch_array($consulta1)){
                         echo '<div>';
                         if($nivel_usuario->nivel<=1){
-                          
                          // echo '<button type="button" class="btn btn-danger" onclick="borrar_desde_mesa('.$filas['id'].')">Borrar</button>';
                         }
                       echo $filas['cantidad'].' -  '.$filas['nombre'].' -  $'.$filas['total'];
@@ -477,9 +472,7 @@
           </div>
             </div>';
 
-
     }*/
-
 
     function detllado($mesa_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";

@@ -13,7 +13,6 @@
       public $cargo;
       public $abono;
       public $estado;
-      
       // Constructor
       function __construct($id)
       {
@@ -106,7 +105,7 @@
         $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
         VALUES ('$usuario_id', '$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
         $comentario="Guardamos la cuenta en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);                 
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Mostramos las habitaciones
       function mostrar($id){
@@ -116,7 +115,7 @@
         $borrar = $usuario->tarifa_borrar;
 
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
-        FROM hab 
+        FROM hab
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado != 0 ORDER BY hab.nombre";
         $comentario="Mostrar las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -210,7 +209,6 @@
         $comentario="Editar el estado de una cuenta luego de un corte dentro de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      
 
       // Editar el estado de una cuenta luego de un corte
       function editar_estado($id_usuario){
@@ -251,7 +249,7 @@
             $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
             VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '0', '0');";
             $comentario="Guardamos la cuenta en la base de datos";
-            $consulta= $this->realizaConsulta($sentencia,$comentario); 
+            $consulta= $this->realizaConsulta($sentencia,$comentario);
 
             $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
             VALUES ('$id_usuario', '$mov', 'Pago al reservar', '$fecha', '$forma_pago', '0', '$abono', '1');";
@@ -262,13 +260,13 @@
             $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
             VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '0', '1');";
             $comentario="Guardamos la cuenta en la base de datos";
-            $consulta= $this->realizaConsulta($sentencia,$comentario); 
+            $consulta= $this->realizaConsulta($sentencia,$comentario);
 
             $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
             VALUES ('$id_usuario', '$mov', 'Pago al reservar', '$fecha', '$forma_pago', '0', '$abono', '0');";
             $comentario="Guardamos la cuenta en la base de datos";
             $consulta= $this->realizaConsulta($sentencia,$comentario);
-          } 
+          }
 
           // Despues de dividir la cuenta se inactiva
           $sentencia = "UPDATE `cuenta` SET
@@ -322,7 +320,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtenemos la suma de los abonos que tenemos por movimiento en una habitacion
-      function obtner_abonos($mov){ 
+      function obtner_abonos($mov){
         $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND estado != 0";
         //echo $sentencia;
         $suma_abonos = 0;
@@ -340,10 +338,10 @@
       function mostrarLimiteCredito($mov){
 
         $sentencia="SELECT huesped.estado_credito as estado_credito , huesped.limite_credito
-        FROM hab 
+        FROM hab
         INNER JOIN movimiento as mov ON hab.mov = mov.id
         LEFT JOIN huesped on mov.id_huesped = huesped.id
-        where hab.estado !=0 
+        where hab.estado !=0
         and hab.mov = $mov
         ";
         $comentario="Obtener el limite de credito de husped en base a un movimiento";
@@ -374,7 +372,7 @@
         ,reservacion.fecha_auditoria
         FROM
         hab
-        INNER JOIN movimiento as mov ON hab.mov = mov.id 
+        INNER JOIN movimiento as mov ON hab.mov = mov.id
         INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
         where hab.estado = 1
         ".$filtro."
@@ -387,8 +385,8 @@
       function hab_ocupadas(){
         $sentencia="SELECT hab.id ,hab.nombre as hab_nombre,hab.tipo,hab.mov as mov,hab.estado,reservacion.total as tarifa, reservacion.precio_hospedaje,
         huesped.nombre, huesped.apellido, reservacion.estado_credito, reservacion.limite_credito
-        FROM hab INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id  
-        INNER JOIN movimiento as mov ON hab.mov = mov.id 
+        FROM hab INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id
+        INNER JOIN movimiento as mov ON hab.mov = mov.id
         INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
         INNER JOIN huesped on mov.id_huesped = huesped.id
         WHERE hab.estado = 1
@@ -400,14 +398,14 @@
 
       function estadoCuentaHabs(){
         $sentencia="SELECT *, hab.nombre as hab_nombre, reservacion.total as tarifa
-        FROM 
+        FROM
         cuenta
         INNER JOIN hab  ON hab.mov = cuenta.mov
-        INNER JOIN movimiento as mov ON hab.mov = mov.id 
+        INNER JOIN movimiento as mov ON hab.mov = mov.id
         INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
         where hab.estado = 1
         AND cuenta.estado =1
-        AND (cuenta.abono>0 OR cuenta.cargo>0) 
+        AND (cuenta.abono>0 OR cuenta.cargo>0)
         order by hab.id";
         $comentario="Obtenemos cargos/habonos de una habitacion en casa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -430,7 +428,7 @@
       }
 
       function mostrarAbonos($id_usuario){
-        $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta 
+        $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta
         LEFT join hab on hab.mov = cuenta.mov
         where cuenta.estado =1
         -- and cuenta.id_usuario= $id_usuario
@@ -466,7 +464,7 @@
       function mostrarCargosMaestra($id_usuario){
         $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.cargo, cuenta.descripcion, cuenta.fecha
         from cuenta
-        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov 
+        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov
         -- where id_usuario =$id_usuario
         and cm.estado = 1 and cuenta.estado =1
         and cuenta.cargo>0
@@ -479,7 +477,7 @@
       }
 
       function mostrarCargos($id_usuario){
-        $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta 
+        $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta
         LEFT join hab on hab.mov = cuenta.mov
         where cuenta.estado =1
         -- AND cuenta.id_usuario= $id_usuario
