@@ -238,7 +238,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             <div class="form-group col-md-6" id="div_voucher" style="display:none">
             <label for="voucher">Voucher</label>
-            <textarea id="voucher" class="form-control" rows="1"></textarea>
+            <input id="voucher" type="text" class="form-control" rows="1"></input>
         </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
