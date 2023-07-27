@@ -1757,6 +1757,18 @@ function editarTotalEstancia(event){
     forzar_tarifa = $("#forzar-tarifa").val()
     extra_adultos = $("#extra_adulto").val();
     extra_infantil =  $("#extra_infantil").val();
+    cantidad_hospedaje =$("#cantidad_hospedaje").val()
+    suma_extra = Number(extra_adultos) + Number(extra_infantil)
+    console.log(suma_extra)
+    diff_extra=0
+
+    if(suma_extra>cantidad_hospedaje){
+        diff_extra = suma_extra - cantidad_hospedaje
+        extra_adultos = diff_extra
+    }else{
+        extra_adultos=0
+    }
+    console.log(diff_extra)
     tarifa_adultos = $("#tarifa_adultos").val();
     tarifa_infantil = $("#tarifa_menores").val();
     noches = $("#noches").val();
@@ -1774,9 +1786,9 @@ function editarTotalEstancia(event){
     if(extra_adultos!=0){
        adicional_adulto = extra_adultos * tarifa_adultos *  noches;
     }
-    if(extra_infantil!=0){
-        adicional_infantil = extra_infantil * tarifa_infantil*  noches;
-    }
+    // if(extra_infantil!=0){
+    //     adicional_infantil = extra_infantil * tarifa_infantil*  noches;
+    // }
     // console.log(tarifa_base,noches, numero_hab)
     aux_total = tarifa_base * noches * numero_hab
     //Adicionales
@@ -1920,6 +1932,8 @@ function cambiar_adultosNew(event=null,hab_id){
             $("#tarifa_menores").val(res.precio_infantil)
             $("#tarifa_adultos").val(res.precio_adulto)
             $("#precio_hospedaje").val(res.precio_hospedaje)
+            $("#cantidad_hospedaje").val(res.cantidad_hospedaje)
+
             calcular_noches(0,0, 0)
             editarTotalEstancia()
             },

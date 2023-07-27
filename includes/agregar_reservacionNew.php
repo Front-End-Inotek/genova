@@ -131,11 +131,14 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 <div class="form-group col-md-4 col-12">
                     <label for="adultos">Precio noche</label>
                     <input type="number" class="form-control" id="precio_hospedaje" min="0" disabled>
+                    
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="adultos">Adultos</label>
                     <input type="number" class="form-control" id="extra_adulto" min="0"   onchange="editarTotalEstancia()">
                     <input type="number" id="tarifa_adultos" hidden>
+                    <input type="number" id="cantidad_hospedaje" hidden>
+
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="menores">Menores</label>
