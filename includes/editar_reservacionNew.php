@@ -333,7 +333,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             <div class="d-flex justify-content-between flex-wrap">
             <div class="form-group col-md-6" id="div_voucher" >
             <label for="voucher">Voucher</label>
-            <textarea disabled id="voucher" class="form-control" rows="1"></textarea>
+            <input disabled id="voucher" type="text" class="form-control" rows="1"></input>
             </div>
 
             <div class="form-group col-md-6" id="div_garantia" >
