@@ -1764,7 +1764,7 @@ function editarTotalEstancia(event){
     cantidad_maxima =Number($("#cantidad_maxima").val())
 
     suma_extra = Number(extra_adultos) + Number(extra_infantil)
-    console.log(suma_extra,cantidad_maxima)
+    // console.log(suma_extra,cantidad_maxima)
     diff_extra=0
 
     if(cantidad_maxima!=0){
@@ -1783,7 +1783,7 @@ function editarTotalEstancia(event){
     }
 
 
-    console.log(diff_extra)
+    // console.log(diff_extra)
     tarifa_adultos = $("#tarifa_adultos").val();
     tarifa_infantil = $("#tarifa_menores").val();
     noches = $("#noches").val();
@@ -2404,8 +2404,10 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     if(suma_extra>cantidad_hospedaje){
         diff_extra = suma_extra - cantidad_hospedaje
         extra_adulto = diff_extra
+        extra_infantil=0
     }else{
         extra_adulto=0
+        extra_infantil=0
     }
 
     var datos = {
@@ -2449,8 +2451,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "estado_credito":estado_credito,
         "limite_credito":limite_credito,
       };
-    console.log(datos)
-    return
+    // console.log(datos)
+    // return
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
         // return ;
     //   errores_reserva="";
@@ -3364,7 +3366,7 @@ function borrar_reservacion(id,preasignada=0){
 }
 
 //funcion para agregar la habitacion seleccionada a la reservacion.
-function guardar_preasignar_reservacion(id,opcion="")
+function guardar_preasignar_reservacion(id,opcion=0)
 {
     var usuario_id=localStorage.getItem("id");
     preasignada = $("#preasignada").val();
@@ -3386,7 +3388,7 @@ function guardar_preasignar_reservacion(id,opcion="")
                 data:datos,
                 beforeSend:loaderbar,
                 success:function(res){
-                    if(opcion==""){
+                    if(opcion==0){
                         ver_reservaciones();
                     }else{
                         ver_reportes_llegadas();
@@ -3402,8 +3404,8 @@ function guardar_preasignar_reservacion(id,opcion="")
     }
 }
 // Modal de preasignar reservacion
-function preasignar_reservacion(id,opcion=""){
-	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id+"&opcion="+opcion);
+function preasignar_reservacion(id,opcion=0,tipo_hab){
+	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id+"&opcion="+opcion+"&tipo_hab="+tipo_hab);
 }
 
 

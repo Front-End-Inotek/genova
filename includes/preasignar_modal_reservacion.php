@@ -4,6 +4,7 @@
   $reservacion= NEW Reservacion($_GET['id']);
   $entrada = date('Y-m-d',$reservacion->fecha_entrada);
   $salida = date('Y-m-d',$reservacion->fecha_salida);
+  $tipo_hab = $_GET['tipo_hab'];
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -19,7 +20,8 @@
         <div class="col-sm-9" >
         <div class="form-group">
         <select class="form-control" id="preasignada">';
-       echo  $reservacion->comprobarFechaReserva($entrada,$salida,0,0)[1];
+        
+       echo  $reservacion->comprobarFechaReserva($entrada,$salida,0,0,$tipo_hab)[1];
         echo '
         </select>
         </div>
