@@ -1035,7 +1035,7 @@ class Reservacion extends ConexionMYSql
         $final = $posicion+20;
         $ultimoid=0;
         //Consulta para traer la información de habitaciones ocupadas, con fecha de salida dada por el usuario.
-        $sentencia ="SELECT *, huesped.correo as correo_huesped,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        $sentencia ="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,  huesped.correo as correo_huesped,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
         FROM hab 
         LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
         INNER JOIN movimiento ON hab.mov = movimiento.id 
@@ -1141,7 +1141,7 @@ class Reservacion extends ConexionMYSql
         } else {
             $fin_dia = strtotime($fin_dia);
         }
-        $sentencia = "SELECT *,hab.nombre as nombre_hab, huesped.correo as correo_huesped,movimiento.id as mov, movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,  hab.nombre as nombre_hab, huesped.correo as correo_huesped,movimiento.id as mov, movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
         LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
         INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
@@ -1669,7 +1669,7 @@ class Reservacion extends ConexionMYSql
                 $where_fechas=""; 
             }
             $ruta="ver_reportes_llegadas()";
-            $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,,huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM reservacion
             LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id  
             INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
