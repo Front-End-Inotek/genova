@@ -43,7 +43,7 @@
                     $noches= $fila['noches'];
                     $numero_hab= $fila['numero_hab'];
                     $tarifa= $fila['habitacion'];
-                    $costo_tarifa = $fila['total'];
+                  
                     $precio_hospedaje= '$'.number_format($fila['precio_hospedaje'], 2);
                     $cantidad_hospedaje= $fila['reserva_cantidad'];
                     $extra_adulto= $fila['extra_adulto'];
@@ -73,9 +73,13 @@
                             $descuento= 'Ninguno'; 
                     }
                     if($fila['forzar_tarifa']>0){
-                            $total_estancia= '$'.number_format($fila['forzar_tarifa'], 2);
+                            $costo_tarifa = $fila['forzar_tarifa'];
+                            $total_estancia= '$'.number_format($fila['total'], 2);
+                            $nombre_tarifa ="Forzada";
                             $precio_hospedaje = "tarifa forzada: " . number_format($fila['forzar_tarifa'],2);
                     }else{
+                            $costo_tarifa = $fila['precio_hospedaje'];
+                            $nombre_tarifa=$fila['nombre_tarifa'];
                             $total_estancia= '$'.number_format($fila['total'], 2);
                     }
                     if($fila['total_pago']>0){
@@ -100,7 +104,7 @@
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-6"><span class="texto_reporte">Noches:</span> '.$noches.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Tarifa:</span> '.$tarifa.'</div>
+              <div class="col-sm-5"><span class="texto_reporte">Nombre Tarifa:</span> '.$nombre_tarifa.'</div>
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
