@@ -1200,7 +1200,7 @@ class Reservacion extends ConexionMYSql
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         //preasignar.
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Garantizar</th>';
+        //echo '<th><span class=" glyphicon glyphicon-cog"></span> Garantizar</th>';
 
 
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -1289,11 +1289,11 @@ class Reservacion extends ConexionMYSql
                 }else{
                     echo '<td></td>';
                 }
-                if(true){
+                /* if(true){
                     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
                 }else{
                     echo '<td></td>';
-                }
+                } */
                 //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
                 if($editar==1 && $fila['edo'] = 1) {
                     //echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')"> Editar</button></td>';
@@ -1303,6 +1303,7 @@ class Reservacion extends ConexionMYSql
                             Ver mas
                             </button>
                             <div class="dropdown-menu" aria-labelledby="options">';
+                            echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Garantizar</a>';
                             echo '<a class="dropdown-item" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')">Ver reporte</a>';
                             echo '<a class="dropdown-item" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
                             if($borrar == 1 && $fila['edo'] != 0){
@@ -1363,11 +1364,11 @@ class Reservacion extends ConexionMYSql
                     echo '<td>Hab. '.$preasignada.'</td>';
                 }
 
-                if(true){
+                /* if(true){
                     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
                 }else{
                     echo '<td></td>';
-                }
+                } */
 
                 //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
                 if($editar==1 && $fila['edo'] = 1) {
@@ -1378,6 +1379,7 @@ class Reservacion extends ConexionMYSql
                             Ver mas
                             </button>
                             <div class="dropdown-menu" aria-labelledby="options">';
+                                echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')" >Garantizar</a>';
                                 echo '<a class="dropdown-item" href="#"onclick=" ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')" >Ver reporte</a>';
                                 if($borrar == 1 && $fila['edo'] != 0){
                                     echo '<a class="dropdown-item" href="#" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
@@ -1600,7 +1602,7 @@ class Reservacion extends ConexionMYSql
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
 
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Garantizar</th>';
+        /* echo '<th><span class=" glyphicon glyphicon-cog"></span> Garantizar</th>'; */
 
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>';
         /* if($editar==1 && $fila['edo'] = 1) {

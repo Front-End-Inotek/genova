@@ -42,7 +42,6 @@ class Informacion extends ConexionMYSql
     }
     }
     
-
     function mostrarhab($id,$token){
     include_once("clase_cuenta.php");
     include('clase_movimiento.php');
