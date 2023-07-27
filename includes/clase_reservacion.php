@@ -2875,6 +2875,9 @@ class Reservacion extends ConexionMYSql
 
     public function modificar_garantizada($id,$estado_interno ,$total_pago,$forma_garantia){
         $fecha_cancelacion= time();
+
+        //Debo obtener el total de pago previo para sumarle al nuevo que se está agregando.
+
         $sentencia = "UPDATE `reservacion` SET
 		`estado_interno` = '$estado_interno',
         `total_pago` = '$total_pago',

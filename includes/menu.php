@@ -107,7 +107,7 @@
 			$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
 			if($permisos_reportes_diarios>0){
 			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cargo_noche()"> Diarios </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cargo_noche()"> Cargos por noche </a></i></ul>';
 			}
 			$permisos_surtir=$usuario->inventario_surtir;
 			if($permisos_surtir>0){
@@ -118,7 +118,7 @@
 			$permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
 			if($permisos_reportes_diarios>0 || $usuario->nivel==2){
 			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Corte </a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Ver cortes </a></i></ul>';
 
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes_dia()"> Corte Global Diario </a></i></ul>';

@@ -131,7 +131,7 @@ class RackHabitacional extends ConexionMYSql
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1
-        -- AND hab.id=51
+        -- AND hab.id=6
         ORDER BY id";
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -347,7 +347,7 @@ class RackHabitacional extends ConexionMYSql
                             // $re= date('Y-m-d',$fila_r['fecha_entrada']);
                             // $rs= date('Y-m-d',$fila_r['fecha_salida']);
 
-                            if($c==0){
+                            if($c==0 && $fila['estado']!=0){
                                 echo '
                                 <td class="celdaCompleta tdCheck " title="nombre huesped">
                                     <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
