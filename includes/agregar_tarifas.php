@@ -49,12 +49,12 @@
                   <input type="number" onkeypress="return event.charCode != 45" min="0" id="precio_adulto" name ="precio_adulto" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
-            <div class="input-group mb-3">
+           <!--- <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio junior </span>
                 </div>
                   <input type="number" id="precio_junior" onkeypress="return event.charCode != 45" min="0" name ="precio_junior" value="" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
-            </div>
+            </div> --->
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
