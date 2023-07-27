@@ -126,10 +126,11 @@ class RackHabitacional extends ConexionMYSql
         $cronometro = 0;
 
         //Se utiliza la misma consulta para el rack de operaciones
-        $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
+        $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin, datos_vehiculo.id as id_vehiculo
         ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
+        LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
         WHERE hab.estado_hab = 1
         AND hab.tipo>0
         -- AND hab.id=6
@@ -215,7 +216,6 @@ class RackHabitacional extends ConexionMYSql
             ';
             echo 'Hab. ';
             if ($fila['id'] < 100) {
-                
                 echo $hab_nombre;
             } else {
                 echo $fila['comentario'];
@@ -283,7 +283,6 @@ class RackHabitacional extends ConexionMYSql
                                 $adicional=86400;
                                 echo '
                             <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="' . $noches_uso . '">
-                            <i class="bx bxs-car car"></i>
                                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] .',\''.$fila['nombre'].'\')" >
                                     <div >
                             ';
@@ -489,6 +488,13 @@ class RackHabitacional extends ConexionMYSql
                             content: "'.$huesped_ocupada.'";
                         }
                         </style>';
+
+                        $icono_carro ="";
+
+                        if(!empty($fila['id_vehiculo'])){
+                            $icono_carro='<i class="bx bxs-car car"></i>';
+                        }
+
                         $inicio = new DateTime(date('Y-m-d'));
                         $fin = new DateTime(date('Y-m-d',$fila['fin']));
                         $noches = $fin->diff($inicio)->format("%a");
@@ -497,7 +503,9 @@ class RackHabitacional extends ConexionMYSql
 
                         echo '';
                         echo '
-                        <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">';
+                        <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">
+                        '.$icono_carro.'
+                        ';
                         echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ', \''.$fila['nombre'].'\')" >
                         ';
                         echo '<section class="'.$clase_expirar.' '.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . '</section>';
