@@ -632,8 +632,8 @@
 
 .car{
   position: absolute;
-  right: 4px;
-  bottom: 5px;
+  left: 12px;
+  bottom: 4px;
   z-index: 1000;
 }
 
