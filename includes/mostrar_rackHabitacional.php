@@ -131,6 +131,7 @@ class RackHabitacional extends ConexionMYSql
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1
+        AND hab.tipo>0
         -- AND hab.id=6
         ORDER BY id";
         // echo $sentencia;
@@ -211,8 +212,9 @@ class RackHabitacional extends ConexionMYSql
                 <tr id="hab_'.$fila['id'].'" >
                     <td class="cal-userinfo">
             ';
-            echo 'Habitación ';
+            echo 'Hab. ';
             if ($fila['id'] < 100) {
+                
                 echo $hab_nombre;
             } else {
                 echo $fila['comentario'];
