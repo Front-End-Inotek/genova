@@ -5,9 +5,10 @@
   $reservacion= NEW Reservacion($_POST['id']);
   $logs = NEW Log(0);
 //   $reservacion->modificar_estado($_POST['id'],3);
+  $anterior_pago = $reservacion->total_pago;
+  $total_pago = $anterior_pago + $_POST['total_pago'];
 
-
-  $reservacion->modificar_garantizada($_POST['id'],urldecode($_POST['estado_interno']),urldecode($_POST['total_pago']),urldecode($_POST['forma_garantia']));
+  $reservacion->modificar_garantizada($_POST['id'],urldecode($_POST['estado_interno']),urldecode($total_pago),urldecode($_POST['forma_garantia']));
 
   if($_POST['estado_interno']=="garantizada"){
     include_once('clase_cuenta.php');
