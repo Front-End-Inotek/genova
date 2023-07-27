@@ -52,9 +52,9 @@
         }
       }
       // Guardar la tarifa hospedaje
-      function guardar_tarifa($nombre,$precio_hospedaje,$cantidad_hospedaje,$cantidad_maxima,$precio_adulto,$precio_junior,$precio_infantil,$tipo,$leyenda){
-        $sentencia = "INSERT INTO `tarifa_hospedaje` (`nombre`, `precio_hospedaje`, `cantidad_hospedaje`, `cantidad_maxima`, `precio_adulto`, `precio_junior`, `precio_infantil`, `leyenda`, `tipo`, `estado`)
-        VALUES ('$nombre', '$precio_hospedaje', '$cantidad_hospedaje', '$cantidad_maxima', '$precio_adulto', '$precio_junior', '$precio_infantil', '$leyenda', '$tipo', '1');";
+      function guardar_tarifa($nombre,$precio_hospedaje,$cantidad_hospedaje,$cantidad_maxima,$precio_adulto,$precio_infantil,$tipo,$leyenda){
+        $sentencia = "INSERT INTO `tarifa_hospedaje` (`nombre`, `precio_hospedaje`, `cantidad_hospedaje`, `cantidad_maxima`, `precio_adulto`, `precio_infantil`, `leyenda`, `tipo`, `estado`)
+        VALUES ('$nombre', '$precio_hospedaje', '$cantidad_hospedaje', '$cantidad_maxima', '$precio_adulto', '$precio_infantil', '$leyenda', '$tipo', '1');";
         $comentario="Guardamos la tarifa hospedaje en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if($consulta){
@@ -130,14 +130,13 @@
         </div>';
       }
       // Editar una tarifa hospedaje
-      function editar_tarifa($id,$nombre,$precio_hospedaje,$cantidad_hospedaje,$cantidad_maxima,$precio_adulto,$precio_junior,$precio_infantil,$tipo,$leyenda){
+      function editar_tarifa($id,$nombre,$precio_hospedaje,$cantidad_hospedaje,$cantidad_maxima,$precio_adulto,$precio_infantil,$tipo,$leyenda){
         $sentencia = "UPDATE `tarifa_hospedaje` SET
             `nombre` = '$nombre',
             `precio_hospedaje` = '$precio_hospedaje',
             `cantidad_hospedaje` = '$cantidad_hospedaje',
             `cantidad_maxima` = '$cantidad_maxima',
             `precio_adulto` = '$precio_adulto',
-            `precio_junior` = '$precio_junior',
             `precio_infantil` = '$precio_infantil',
             `leyenda` = '$leyenda',
             `tipo` = '$tipo'

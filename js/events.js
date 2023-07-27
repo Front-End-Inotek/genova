@@ -1257,10 +1257,11 @@ function guardar_tarifa(){
 	let cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
     let cantidad_maxima= document.getElementById("cantidad_maxima").value;
 	let precio_adulto= document.getElementById("precio_adulto").value;
-	let precio_junior= document.getElementById("precio_junior").value;
+	// let precio_junior= document.getElementById("precio_junior").value;
 	let precio_infantil= document.getElementById("precio_infantil").value;
     let tipo= document.getElementById("tipo").value;
     let leyenda= encodeURI(document.getElementById("leyenda").value);
+    // console.log(tipo)
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -1287,15 +1288,15 @@ function guardar_tarifa(){
         swal("Campo precio_adulto vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-    if(precio_junior === null || precio_junior === ''){
-        swal("Campo precio_junior vacio!", "Verifique los datos correctamente por favor!", "warning");
-        return false;
-    }
-    if(precio_infantil === null || precio_infantil === ''){
-        swal("Campo precio_infantil vacio!", "Verifique los datos correctamente por favor!", "warning");
-        return false;
-    }
-    if(tipo === null || tipo === ''){
+    // if(precio_junior === null || precio_junior === ''){
+    //     swal("Campo precio_junior vacio!", "Verifique los datos correctamente por favor!", "warning");
+    //     return false;
+    // }
+    // if(precio_infantil === null || precio_infantil === ''){
+    //     swal("Campo precio_infantil vacio!", "Verifique los datos correctamente por favor!", "warning");
+    //     return false;
+    // }
+    if(tipo === null || tipo === '' || tipo==0){
         swal("Campo tipo vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
@@ -1316,7 +1317,7 @@ function guardar_tarifa_nueva(){
 	let cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
     let cantidad_maxima= document.getElementById("cantidad_maxima").value;
 	let precio_adulto= document.getElementById("precio_adulto").value;
-	let precio_junior= document.getElementById("precio_junior").value;
+	//let precio_junior= document.getElementById("precio_junior").value;
 	let precio_infantil= document.getElementById("precio_infantil").value;
     let tipo= document.getElementById("tipo").value;
     let leyenda= encodeURI(document.getElementById("leyenda").value);
@@ -1328,7 +1329,7 @@ function guardar_tarifa_nueva(){
         "cantidad_hospedaje": cantidad_hospedaje,
         "cantidad_maxima": cantidad_maxima,
         "precio_adulto": precio_adulto,
-        "precio_junior": precio_junior,
+        // "precio_junior": precio_junior,
         "precio_infantil": precio_infantil,
         "tipo": tipo,
         "leyenda": leyenda,
@@ -1337,7 +1338,7 @@ function guardar_tarifa_nueva(){
     let xhttp;
     xhttp = new XMLHttpRequest();
     //xhttp.open("GET","includes/guardar_tarifa.php?nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
-    var parametros = "nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id
+    var parametros = "nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id
     xhttp.open("POST","includes/guardar_tarifa.php",true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.addEventListener('load', e =>{
@@ -1345,6 +1346,7 @@ function guardar_tarifa_nueva(){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+            console.log(response)
             if (response == "NO") {
                 $('#caja_herramientas').modal('hide');
                 swal("Nuevo tipo de tarifa agregada!", "Excelente trabajo!", "success");
@@ -1386,7 +1388,6 @@ function modificar_tarifa(id){
 	var cantidad_hospedaje= document.getElementById("cantidad_hospedaje").value;
     var cantidad_maxima= document.getElementById("cantidad_maxima").value;
 	var precio_adulto= document.getElementById("precio_adulto").value;
-	var precio_junior= document.getElementById("precio_junior").value;
 	var precio_infantil= document.getElementById("precio_infantil").value;
     var tipo= document.getElementById("tipo").value;
     var leyenda= encodeURI(document.getElementById("leyenda").value);
@@ -1399,7 +1400,6 @@ function modificar_tarifa(id){
         "cantidad_hospedaje": cantidad_hospedaje,
         "cantidad_maxima": cantidad_maxima,
         "precio_adulto": precio_adulto,
-        "precio_junior": precio_junior,
         "precio_infantil": precio_infantil,
         "tipo": tipo,
         "leyenda": leyenda
@@ -1407,7 +1407,7 @@ function modificar_tarifa(id){
 
     let xhttp;
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/aplicar_editar_tarifa.php?id="+id+"&nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
+    xhttp.open("GET","includes/aplicar_editar_tarifa.php?id="+id+"&nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {

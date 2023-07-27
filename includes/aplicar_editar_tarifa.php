@@ -7,7 +7,7 @@
   }else{
     $tarifa= NEW Tarifa(0);
     $logs = NEW Log(0);
-    $tarifa->editar_tarifa($_GET['id'],urldecode($_GET['nombre']),$_GET['precio_hospedaje'],$_GET['cantidad_hospedaje'],$_GET['cantidad_maxima'],$_GET['precio_adulto'],$_GET['precio_junior'],$_GET['precio_infantil'],$_GET['tipo'],urldecode($_GET['leyenda']));
+    $tarifa->editar_tarifa($_GET['id'],urldecode($_GET['nombre']),$_GET['precio_hospedaje'],$_GET['cantidad_hospedaje'],$_GET['cantidad_maxima'],$_GET['precio_adulto'],/*$_GET['precio_junior'],*/$_GET['precio_infantil'],$_GET['tipo'],urldecode($_GET['leyenda']));
     $logs->guardar_log($_GET['usuario_id'],"Editar tarifa hospedaje: ". $_GET['id']);
   }
 
