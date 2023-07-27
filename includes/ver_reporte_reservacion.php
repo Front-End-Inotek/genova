@@ -56,6 +56,7 @@
                     $quien_reserva= $fila['nombre_reserva'];
                     $acompanante= $fila['acompanante'];
                     $pax_extra ='$'.number_format($fila['pax_extra'],2);
+                    $nombre_plan = $fila['nombre_plan'];
                     // Checar si suplementos esta vacio o no
                     if (empty($fila['suplementos'])){
                             //echo 'La variable esta vacia';
@@ -153,7 +154,7 @@
             </div>
             <div class="row">
               <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Suplementos:</span> '.$suplementos.'</div>
+              <div class="col-sm-6"><span class="texto_reporte">Suplementos:</span> '.$nombre_plan.'</div>
               <div class="col-sm-5"><span class="texto_reporte">Plan Alimentos:</span> '.$total_alimentos.'</div>'; 
             echo '</div>
             <div class="row">

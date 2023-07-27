@@ -139,6 +139,8 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                     <input type="number" id="tarifa_adultos" hidden>
                     <input type="number" id="cantidad_hospedaje" hidden>
 
+                    <input type="number" id="cantidad_maxima" hidden >
+
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="menores">Menores</label>

@@ -1283,7 +1283,7 @@ class Reservacion extends ConexionMYSql
                     echo '<td></td>';
                 }
                 if($fila['id_hab']==0 && $preasignar==1) {
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].')"> Preasignar</button></td>';
                 } elseif($fila['id_hab']!=0) {
                     echo '<td>Hab. '.$preasignada.'</td>';
                 }else{
@@ -1358,7 +1358,7 @@ class Reservacion extends ConexionMYSql
                     echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
                 }
                 if($fila['id_hab']==0) {
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].')"> Preasignar</button></td>';
                 } else {
                     echo '<td>Hab. '.$preasignada.'</td>';
                 }
@@ -1434,7 +1434,7 @@ class Reservacion extends ConexionMYSql
             // }
             //botón para preasignar una habitación.
             if($fila['id_hab']==0) {
-                echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].')"> Preasignar</button></td>';
+                echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].')"> Preasignar</button></td>';
             } else {
                 echo '<td></td>';
             }

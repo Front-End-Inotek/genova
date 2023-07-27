@@ -133,14 +133,15 @@ function tipos_abonos($id=0)
         echo "error en la consulta";
       }
     }
-    function editar_plan($plan_id,$nombre,$costo){
+    function editar_plan($plan_id,$nombre,$costo,$descripcion){
       $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
       $sentencia = "UPDATE `planes_alimentos` SET
       `nombre_plan` = '$nombre',
-      `costo_plan` = '$costo'
+      `costo_plan` = '$costo',
+      `descripcion` = '$descripcion',
       WHERE `id` = '$plan_id';";
       //echo $sentencia ;
-      $comentario="Editar un tipo habitacion dentro de la base de datos ";
+      $comentario="Editar un plan dentro de la base de datos ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       if($consulta){
         echo ("NO");
@@ -164,11 +165,11 @@ function tipos_abonos($id=0)
       }
     }
 
-  function guardar_plan_alimentos($nombre,$costo){
+  function guardar_plan_alimentos($nombre,$costo,$descripcion){
 
       $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
-      $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`)
-      VALUES ('$nombre', '$costo', '1');";
+      $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`, `descripcion`)
+      VALUES ('$nombre', '$costo', '1','$descripcion');";
       $comentario="Guardamos el plan de alimentos en la base de datos";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       if($consulta){
@@ -297,8 +298,9 @@ function tipos_abonos($id=0)
               <td>'.$fila['costo_plan'].'</td>
 
               ';
+              $descripcion=$fila['descripcion'];
               if($editar==1){
-                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ',  \'' . $fila['nombre_plan'] . '\', '.$fila['costo_plan'].')"> Editar</button></td>';
+                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ',  \'' . $fila['nombre_plan'] . '\', '.$fila['costo_plan'].', \'' . $descripcion . '\')"> Editar</button></td>';
               }
               if($borrar==1){
                 echo '<td><button class="btn btn-danger" onclick="borrar_plan_alimentacion(' . $fila['id'] . ', \'' . addslashes($fila['nombre_plan']) . '\', \'' . addslashes($fila['costo_plan']) . '\')">Borrar</button></td>';
