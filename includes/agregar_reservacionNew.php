@@ -22,14 +22,12 @@
 
   // Checar si hab_id esta vacia o no
   if (empty($_GET['hab_id'])){
-
     $hab_id= 0;
     $hab_tipo= 0;
     $titulo_="Reservación de habitación";
     $clv="Clave de reserva";
-
     $hab = NEW Hab(0);
-    $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
+    $dia_actual = date("Y-m-d",strtotime($dia_actual));
   }else{
     $titulo_="CHECK-IN";
     $clv="Clave check-in";
