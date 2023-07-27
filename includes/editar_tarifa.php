@@ -6,7 +6,7 @@
       <!-- Modal -->
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="modal_editar_tarifas">Editar tipo de habitacion </h5>
+              <h5 class="modal-title" id="modal_editar_tarifas">Editar tipo de tarifa </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 &times;
               </button>
@@ -48,12 +48,13 @@
                   <input type="number" id="precio_adulto" name ="precio_adulto" value="'.$tarifa->precio_adulto.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
+            <!---
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio junior </span>
                 </div>
                   <input type="number" id="precio_junior" name ="precio_junior" value="'.$tarifa->precio_junior.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
-            </div>
+            </div> --->
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">

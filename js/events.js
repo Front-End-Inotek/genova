@@ -1336,7 +1336,10 @@ function guardar_tarifa_nueva(){
 
     let xhttp;
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/guardar_tarifa.php?nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
+    //xhttp.open("GET","includes/guardar_tarifa.php?nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
+    var parametros = "nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id
+    xhttp.open("POST","includes/guardar_tarifa.php",true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
@@ -1356,7 +1359,7 @@ function guardar_tarifa_nueva(){
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
     })
-    xhttp.send();
+    xhttp.send(parametros);
 }
 
 // Muestra las tarifas hospedaje de la bd
