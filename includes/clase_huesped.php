@@ -310,6 +310,32 @@
         return $datos;
       }
 
+      function mostrar_historial_cuenta($id_huesped,$inicial,$final){
+        $filtro_fecha="";
+
+        if(!empty($inicial) && !empty($final)){
+          $inicial = strtotime($inicial);
+          $final = strtotime($final);
+          $filtro_fecha="AND cuenta.fecha BETWEEN $inicial AND $final";
+        }
+        $sentencia="SELECT *, hab.nombre as hab_nombre, reservacion.total as tarifa, cuenta.estado as estado_cuenta
+        FROM
+        cuenta
+        INNER JOIN hab  ON hab.mov = cuenta.mov
+        INNER JOIN movimiento as mov ON hab.mov = mov.id
+        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
+        INNER JOIN huesped on mov.id_huesped  = huesped.id
+        AND (cuenta.abono>0 OR cuenta.cargo>0)
+        AND huesped.id = $id_huesped
+        AND cuenta.estado!=0
+        ".$filtro_fecha."
+        order by cuenta.fecha desc";
+       
+        $comentario="Obtenemos cargos/habonos de una habitacion en casa";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
       function actualizar_datos_vehiculo($datos){
         $id_huesped = $datos['id_huesped'];
         $usuario_id =$datos['usuario_id'];
