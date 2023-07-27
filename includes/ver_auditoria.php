@@ -56,7 +56,7 @@
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr class="table-primary-encabezado text-center">
-                    <th>Hab.</th>
+                    <th>Hab. <input type="checkbox" id="cajas"  onclick="cajasAuditoria()"  checked /></th>
                     <th>Cargos </th>
                     <th>Descripción</th>
                     </tr>

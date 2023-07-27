@@ -5179,6 +5179,21 @@ function confirmar_cambiar_cargos(){
         return false;
     }
 
+function cajasAuditoria() {
+    cajas = document.getElementById('cajas').checked
+    console.log(cajas)
+    if(cajas) {
+        // Iterate each checkbox
+        $('.campos_habs').each(function() {
+            this.checked = true;                        
+        });
+    } else {
+        $('.campos_habs').each(function() {
+            this.checked = false;                       
+        });
+    }
+
+}
 // Aceptar el cargo noche de las habitaciones seleccionadas
 function cargo_auditoria(){
     var usuario_id=localStorage.getItem("id");
