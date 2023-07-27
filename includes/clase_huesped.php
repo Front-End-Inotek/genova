@@ -503,14 +503,9 @@
             <th>Contrato Socio</th>
             <th>Cupón</th>
             <th>Preferencias</th>
-            <th>Comentarios</th>';
-            if($editar==1){
-              echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
-            }
-            if($borrar==1){
-              echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-            }
-            echo '</tr>
+            <th>Comentarios</th>
+            <th>Ajustes</th>';
+            '</tr>
           </thead>
         <tbody>';
             while ($fila = mysqli_fetch_array($consulta))
@@ -528,13 +523,32 @@
                 <td>'.$fila['contrato'].'</td>
                 <td>'.$fila['cupon'].'</td>
                 <td>'.$fila['preferencias'].'</td>
-                <td>'.$fila['comentarios'].'</td>';
-                if($editar==1){
-                  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"> Editar</button></td>';
-                }
-                if($borrar==1){
-                  echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
-                }
+                <td>'.$fila['comentarios'].'</td>
+                <td>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Ver mas
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+                  if($editar==1){
+                    echo ' <a class="dropdown-item" onclick="editar_huesped('.$fila['id'].')">Editar</a>';
+                  }
+                  if($borrar==1){
+                    echo ' <a class="dropdown-item" onclick="ver_historial_huesped('.$fila['id'].')">Ver historial</a>';
+                  }
+                  if($borrar==1){
+                    echo ' <div class="dropdown-divider"></div> ';
+                    echo ' <a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')">Borrar</a>';
+                  }'
+                  </div>
+                </div>
+                </td>';
+                //if($editar==1){
+                //  echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"> Editar</button></td>';
+                //}
+                //if($borrar==1){
+                //  echo '<td><button class="btn btn-danger" > Borrar</button></td>';
+                //}
                 echo '</tr>';
               }
               $cont++;

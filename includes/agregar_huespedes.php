@@ -243,3 +243,18 @@
         </form>
     </div>';
 ?>
+
+
+
+<td>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Ver herramientas
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Ver historial</a>
+                    <a class="dropdown-item" href="#">Editar</a>
+                    <a class="dropdown-item" href="#">Borrar</a>
+                  </div>
+                </div>
+                </td>

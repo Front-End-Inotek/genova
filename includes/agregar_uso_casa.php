@@ -284,12 +284,11 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     </div>';
                 }else{
                     echo ' <div class="form-group col-md-4">
-                    </div>';  
+                    </div>';
                 }
 
                 echo '
             </div>
-            
             <div class="form-group col-md-6" id="div_voucher" style="display:none">
             <label for="voucher">Voucher</label>
             <input id="voucher" type="text" class="form-control" rows="1"></input>
