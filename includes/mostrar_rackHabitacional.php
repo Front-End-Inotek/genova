@@ -203,7 +203,8 @@ class RackHabitacional extends ConexionMYSql
                 </tr>
             </thead>
             <tbody class="cal-tbody">
-        ';
+        '; 
+        $existe_disponible=false;
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
             $hab_nombre =$fila['nombre'];
@@ -243,7 +244,7 @@ class RackHabitacional extends ConexionMYSql
             $comentario = "Optenemos las habitaciones para el rack de habitaciones";
             $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
             $contador_row = mysqli_num_rows($consulta_reservaciones);
-
+           
             //for para cargar los 31  dias dentro de las habitaciones
             for ($i = 1; $i <= 31; $i++) {
                 //Se omite el día anterior.
@@ -256,6 +257,7 @@ class RackHabitacional extends ConexionMYSql
 
                     $clase_expirar="";
                     $mastiempo=false;
+                    
                     //Se calculan los estados de las habitaciones.
                     $mes = $this->convertir_mes(date('n', $tiempo));
                     $dia = date('d', $tiempo);
@@ -321,7 +323,7 @@ class RackHabitacional extends ConexionMYSql
 
                         $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                         // echo date('Y-m-d', $tiempo_aux) ."|". date('Y-m-d', $fila_r['fecha_entrada']) ."|".  date('Y-m-d', $fila_r['fecha_salida']);
-                        if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila_r['fecha_entrada']) && date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_salida']) && $fila['estado'] != 0) {
+                        if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila_r['fecha_entrada']) && date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_salida']) && !$existe_disponible) {
                         echo '
                         <td class="celdaCompleta tdCheck " title="nombre huesped">
                         <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
@@ -333,7 +335,8 @@ class RackHabitacional extends ConexionMYSql
                         </div>
                         </td>
                         ';
-}
+                        $existe_disponible=true;
+                        }
 
                         while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
                         //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias), 

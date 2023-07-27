@@ -468,8 +468,7 @@ function guardar_tipos_abonos() {
 function guardar_planes_alimentos() {
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var costo= encodeURI(document.getElementById("codigo").value);
-
-    console.log(nombre,costo)
+    // console.log(nombre,costo)
 
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
@@ -487,10 +486,13 @@ function guardar_planAlimentos(){
     let usuario_id=localStorage.getItem("id");
 	let nombre= encodeURI(document.getElementById("nombre").value);
 	let costo= encodeURI(document.getElementById("codigo").value);
+    var descripcion= encodeURI(document.getElementById("descripcion").value);
 
     let xhttp;
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/guardar_plan_alimentos.php?nombre="+nombre+"&costo="+costo+"&usuario_id="+usuario_id,true);
+    let parametros="nombre="+nombre+"&costo="+costo+"&usuario_id="+usuario_id+"&descripcion="+descripcion
+    xhttp.open("POST","includes/guardar_plan_alimentos.php",true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
@@ -510,7 +512,7 @@ function guardar_planAlimentos(){
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
     })
-    xhttp.send();
+    xhttp.send(parametros);
 }
 
 function guardar_tipo() {
@@ -671,9 +673,10 @@ function editar_tipo_abono(id,nombre,descripcion){
 }
 
 // Editar un plan de alimentos
-function editar_plan_alimentos(id,nombre,costo){
+function editar_plan_alimentos(id,nombre,costo,descripcion){
     nombre = encodeURIComponent(nombre)
-    include = "includes/editar_plan_alimentos.php?id="+id+"&nombre="+nombre+"&costo="+costo
+    descripcion = encodeURIComponent(descripcion)
+    include = "includes/editar_plan_alimentos.php?id="+id+"&nombre="+nombre+"&costo="+costo+"&descripcion="+descripcion
     $("#mostrar_herramientas").load(include);
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
@@ -1766,16 +1769,12 @@ function editarTotalEstancia(event){
 
     if(cantidad_maxima!=0){
         if(suma_extra >cantidad_maxima){
-            alert("Ha superado la cantidad máxima de personas")
+            alert("Ha superado la cantidad máxima de personas de la habitación")
             $("#extra_adulto").val("");
             $("#extra_infantil").val("");
             return
         }
     }
-
-    
-
-
     if(suma_extra>cantidad_hospedaje){
         diff_extra = suma_extra - cantidad_hospedaje
         extra_adultos = diff_extra
@@ -2390,6 +2389,25 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     estado_credito = $("#estadocredito").val()
     limite_credito = $("#limitecredito").val()
 
+    suma_extra = Number(extra_adulto) + Number(extra_infantil)
+    // console.log(suma_extra,cantidad_maxima)
+    diff_extra=0
+    //Setear los extras.
+    // if(cantidad_maxima!=0){
+    //     if(suma_extra >cantidad_maxima){
+    //         alert("Ha superado la cantidad máxima de personas de la habitación")
+    //         $("#extra_adulto").val("");
+    //         $("#extra_infantil").val("");
+    //         return
+    //     }
+    // }
+    if(suma_extra>cantidad_hospedaje){
+        diff_extra = suma_extra - cantidad_hospedaje
+        extra_adulto = diff_extra
+    }else{
+        extra_adulto=0
+    }
+
     var datos = {
         "id":id_reservacion,
         "id_huesped": id_huesped,
@@ -2431,8 +2449,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "estado_credito":estado_credito,
         "limite_credito":limite_credito,
       };
-    // console.log(datos)
-    // return
+    console.log(datos)
+    return
         //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
         // return ;
     //   errores_reserva="";
