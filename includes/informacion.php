@@ -231,6 +231,7 @@ echo'
 
                 case "Ocupado":
                 echo'<div class="btn  supervision ocupadoH '.$clase_expirar.'">';
+                echo '<i class="bx bxs-car car"></i> ';
                 break;
 
                 case "Sucia ocupada":

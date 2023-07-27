@@ -109,7 +109,7 @@
           <div class="col">Tarifa: <span>$'.number_format($total_tarifa,2).'</span></div>
         </div>
         <div class="row">
-          <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span><button href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" style="margin-left:6px;"><i class="bx bx-user-circle"></i></button> </div>
+          <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span><button href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" style="margin-left:6px;"><i class="bx bx-car"></i></button> </div>
           <div class="col">Plan Alimentos: <span>'.$total_alimentos.'</span></div>
           <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
