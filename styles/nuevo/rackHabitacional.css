@@ -630,4 +630,11 @@
   /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
 }
 
+.car{
+  position: absolute;
+  right: 4px;
+  bottom: 5px;
+  z-index: 1000;
+}
+
 

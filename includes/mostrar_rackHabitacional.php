@@ -283,6 +283,7 @@ class RackHabitacional extends ConexionMYSql
                                 $adicional=86400;
                                 echo '
                             <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="' . $noches_uso . '">
+                            <i class="bx bxs-car car"></i>
                                 <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] .',\''.$fila['nombre'].'\')" >
                                     <div >
                             ';
@@ -450,7 +451,7 @@ class RackHabitacional extends ConexionMYSql
                                             ';
                                         }else{
                                             echo '
-                                            <td class="celdaCompleta tdCheck " >';
+                                            <td class="celdaCompleta tdCheck " > ';
                                             echo date('Y-m-d',$tiempo_aux);
                                             echo'
                                             </td>
