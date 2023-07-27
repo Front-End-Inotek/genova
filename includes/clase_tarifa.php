@@ -82,7 +82,7 @@
         <br>
         <br>
 
-        <div class="table-responsive" id="tabla_tipo" style="max-height:560px; overflow-y: scroll;">
+        <div class="table-responsive" id="tabla_tipo" style="max-height:560px; overflow-y: scroll; padding-bottom: 3rem;">
         <table class="table table-bordered table-hover" >
           <thead>
             <tr class="table-primary-encabezado text-center">

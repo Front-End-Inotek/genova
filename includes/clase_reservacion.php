@@ -1060,7 +1060,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; padding-bottom: 3rem;">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1174,7 +1174,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; padding-bottom: 3rem;">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1312,7 +1312,7 @@ class Reservacion extends ConexionMYSql
                             }
                                 //<a class="dropdown-item" href="#">Another action</a>
                                 //<a class="dropdown-item" href="#">Something else here</a>
-                    echo '        </div>
+                    echo ' </div>
                         </div>
                     </td>';
                 }
@@ -1369,7 +1369,7 @@ class Reservacion extends ConexionMYSql
                     echo '<td></td>';
                 }
 
-                echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
+                //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
                 if($editar==1 && $fila['edo'] = 1) {
                     //echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')"> Editar</button></td>';
                     echo '<td>
@@ -1377,18 +1377,22 @@ class Reservacion extends ConexionMYSql
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Ver herramientas
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="options">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
+                            <div class="dropdown-menu" aria-labelledby="options">';
+                                echo '<a class="dropdown-item" href="#"onclick=" ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')" >Ver reporte</a>';
+                                if($borrar == 1 && $fila['edo'] != 0){
+                                    echo '<a class="dropdown-item" href="#" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
+                                    echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',1)">Cancelar</a>';
+                                    echo '<div class="dropdown-divider"></div>';
+                                    echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')">Borrar</a>';
+                                }
+                    echo '  </div>
                         </div>
                     </td>';
                 }
-                if($borrar==1 && $fila['edo'] != 0) {
+                /* if($borrar==1 && $fila['edo'] != 0) {
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',1)"> Cancelar</button></td>';
                     echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrar</button></td>';
-                }
+                } */
                 echo '</tr>';
             }
         } else {
@@ -1570,7 +1574,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; padding-bottom: 3rem;">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1598,14 +1602,14 @@ class Reservacion extends ConexionMYSql
 
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Garantizar</th>';
 
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
-        if($editar==1 && $fila['edo'] = 1) {
+        echo '<th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>';
+        /* if($editar==1 && $fila['edo'] = 1) {
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
         }
         if($borrar==1 && $fila['edo'] != 0) {
             echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
             echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-        }
+        } */
 
         echo '</tr>
 		</thead>
