@@ -532,7 +532,7 @@
                   }
                   if($borrar==1){
                     echo ' <div class="dropdown-divider"></div> ';
-                    echo ' <a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')">Borrar</a>';
+                    echo ' <a class="dropdown-item text-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')">Borrar</a>';
                   }'
                   </div>
                 </div>
@@ -617,7 +617,7 @@
                     echo ' <a class="dropdown-item" href="#" onclick="editar_huesped('.$fila['id'].')" >Editar</a> ';
                     echo ' <a class="dropdown-item" href="#" onclick="editar_huesped('.$fila['id'].')" >Ver historial</a> ';
                     echo '<div class="dropdown-divider"></div>';
-                    echo ' <a class="dropdown-item" href="#" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')">Borrar</a> ';
+                    echo ' <a class="dropdown-item text-danger" href="#" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')">Borrar</a> ';
                 echo ' </div>
                 </td>';
                 /* if($editar==1){
