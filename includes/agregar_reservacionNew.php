@@ -85,7 +85,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 <div class="form-group col-md-4 col-12">
                     <label for="total-estancia">Total de la estancia</label>
                     <input type="number" class="form-control" id="total" min="0" step="0.01" readonly>
-                    <input type="number" class="form-control" id="tarifa_base" min="0" step="0.01" readonly hidden>
+                    <input type="number" class="form-control" id="tarifa_base" min="0" step="0.01" readonly hidden >
                 </div>
             </div>
             <div class="d-flex justify-content-between flex-wrap">
@@ -162,7 +162,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 <div class="form-group col-md-4 col-12">
                     <label for="plan-alimentos">Plan de alimentos</label>
                     <select class="form-control" id="plan-alimentos"  onchange="editarTotalEstancia(event)">
-                    <option value="">Seleccione una opción</option>';
+                    <option data-costoplan="0" value="">Seleccione una opción</option>';
                     $config->mostrar_planes_select();
                   echo'
                   </select>

@@ -1762,7 +1762,8 @@ function editarTotalEstancia(event){
     extra_infantil =  $("#extra_infantil").val();
     cantidad_hospedaje =$("#cantidad_hospedaje").val()
     cantidad_maxima =Number($("#cantidad_maxima").val())
-
+    var pax_extra= Number(document.getElementById("pax-extra").value);
+    noches = $("#noches").val();
     suma_extra = Number(extra_adultos) + Number(extra_infantil)
     // console.log(suma_extra,cantidad_maxima)
     diff_extra=0
@@ -1781,18 +1782,30 @@ function editarTotalEstancia(event){
     }else{
         extra_adultos=0
     }
-
+    if(event!=null){
+        var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
+        if(costoplan!=undefined){
+            costo_plan=Number(costoplan)
+            $('#costoplan').val(costo_plan)
+        }
+    }else{
+        costo_plan = Number($("#costoplan").val())
+    }
 
     // console.log(diff_extra)
     tarifa_adultos = $("#tarifa_adultos").val();
     tarifa_infantil = $("#tarifa_menores").val();
-    noches = $("#noches").val();
+    
     numero_hab = $("#numero_hab").val();
     tarifa_base = $("#tarifa_base").val()
     if(forzar_tarifa!="" || forzar_tarifa!=0  ){
+        aux_total = $("#tarifa_base").val()
+        aux_total = forzar_tarifa * noches * numero_hab
         tarifa_base=forzar_tarifa
         tarifa_adultos  = tarifa_base
         tarifa_infantil=tarifa_base
+        total = Number(aux_total) + pax_extra + costo_plan
+        $("#total").val(total)  
         return //no calcula nada.
     }
     // tarifa_base =123;
@@ -1807,16 +1820,6 @@ function editarTotalEstancia(event){
     // console.log(tarifa_base,noches, numero_hab)
     aux_total = tarifa_base * noches * numero_hab
     //Adicionales
-    var pax_extra= Number(document.getElementById("pax-extra").value);
-    if(event!=null){
-        var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
-        if(costoplan!=undefined){
-            costo_plan=Number(costoplan)
-            $('#costoplan').val(costo_plan)
-        }
-    }else{
-        costo_plan = Number($("#costoplan").val())
-    }
     total = aux_total + adicional_adulto + adicional_infantil + pax_extra + costo_plan
     $("#total").val(total);
 }
@@ -1852,7 +1855,7 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
     forzar_tarifa= document.getElementById("forzar-tarifa").value;
     if(noches!=0 && forzar_tarifa!=0){
         precio_hospedaje  = forzar_tarifa/noches;
-        document.getElementById("precio_hospedaje").value = precio_hospedaje
+        // document.getElementById("precio_hospedaje").value = precio_hospedaje
     }
 
     //Si cambia el numero de noches y ya existen tarifas se calcula el total de la instancia.
@@ -1966,10 +1969,14 @@ function cambiar_adultosNew(event=null,hab_id){
             $("#tipo-habitacion").removeAttr("disabled");
             $("#tarifa").attr('required',false);
             // $("#tarifa_base").val(forzar_tarifa)
-            $("#total").val(forzar_tarifa)
+            total = forzar_tarifa * noches * numero_hab
+            $("#total").val(forzar_tarifa * noches * numero_hab)
+            // $("#tarifa_base").val(total)
             precio_hospedaje = forzar_tarifa/ noches
-            $("#precio_hospedaje").val(precio_hospedaje)
-            //editarTotalEstancia()
+            // $("#precio_hospedaje").val(precio_hospedaje)
+            editarTotalEstancia()
+        }else{
+            $("#tarifa").attr('required',true);
         }
     }
     //alert("Cambiando tarifa "+tarifa);
@@ -2358,6 +2365,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var total_hab= total_hospedaje + extra_adulto  + extra_infantil + pax_extra;  
 
     var precio_hospedaje = document.getElementById('precio_hospedaje').value
+    total_hab = precio_hospedaje * noches * numero_hab
+
     var total_hospedaje = document.getElementById('total').value
 
     sobrevender = sobrevender ? 1 : 0 ;
@@ -2373,7 +2382,9 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     }else{
         tarifa_existe=forzar_tarifa;
         total_hospedaje = forzar_tarifa
-        total = forzar_tarifa
+        // total = forzar_tarifa
+        precio_hospedaje = forzar_tarifa
+        total_hab = precio_hospedaje * noches * numero_hab
         $("#tarifa").removeAttr('required');
     }
 
@@ -2431,11 +2442,11 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "limite_pago": 0,
         "suplementos": 0,
         "total_suplementos": 0,
-        "total_hab": total,
+        "total_hab": total_hab,
         "forzar_tarifa":forzar_tarifa,
         "descuento": 0,
         "codigo_descuento": 0,
-        "total": total_hospedaje,
+        "total": total,
         "total_pago": total_pago,
         "hab_id": Number(hab_id),
         "tipo_hab": tipo_hab,
