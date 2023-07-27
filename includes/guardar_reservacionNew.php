@@ -46,9 +46,9 @@
     $estado_interno = "garantizada";
   }
 
-  $total_pago=$_POST['total_pago'];
+  $total_pago=0;
   if($estado_interno=="garantizada"){
-    $total_pago=$total;
+    $total_pago=$_POST['total_pago'];
   }
 
   //Revisar la existencia de un cupon de descuento

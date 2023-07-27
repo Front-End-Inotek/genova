@@ -1995,14 +1995,24 @@ function obtener_garantia(event=null){
     if(event!=0){
         var garantia = event.target.options[event.target.selectedIndex].dataset.garantia;
         var efectivo = event.target.options[event.target.selectedIndex].text
+        efectivo_txt = efectivo.toLowerCase()
+        console.log(efectivo_txt)
         if(garantia!=undefined && garantia == 1){
-            if((efectivo.toLowerCase() !="efectivo")){
-                $("#div_voucher").show();
+            if((efectivo_txt !="efectivo") && efectivo_txt!="tarjeta"){
                 $("#voucher").attr("required",true)
+                $("#voucher").attr("disabled",false)
+            }else{
+                $("#voucher").attr("disabled",true)
+                $("#voucher").removeAttr("required")
             }
+            $("#garantia_monto").attr("required",true)
+            $("#garantia_monto").attr("disabled",false)
             $("#estadotarjeta").val(2)
         }else{
-            $("#div_voucher").hide();
+            $("#garantia_monto").attr("required",false)
+            $("#garantia_monto").attr("disabled",true)
+            $("#garantia_monto").val("")
+            $("#voucher").attr("disabled",true)
             $("#voucher").removeAttr("required")
             $("#estadotarjeta").val("")
         }
@@ -2142,9 +2152,17 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
 
     $("#correo").val(correo)
 
+    if(estado_tarjeta==2){
+        $("#garantia_monto").attr("disabled",false);
+        $("#garantia_monto").attr("required",true);
+    }else{
+        $("#garantia_monto").attr("disabled",true);
+        $("#garantia_monto").attr("required",false);
+        $("#garantia_monto").val("")
+    }
+
     if(tipo_tarjeta=="Efectivo" || tipo_tarjeta==1){
         $("#forma-garantia option[value=1]").prop("selected", true);
-        // $("#btngarantia").attr("disabled",true)
     }
 
     if(tipo_tarjeta=="Debito" || tipo_tarjeta=="Credito" || tipo_tarjeta==2){
@@ -2158,12 +2176,12 @@ function aceptar_asignar_huespedNew(id,nombre,apellido,empresa,telefono,pais,est
         $("#btngarantia").removeAttr("disabled");
     }
     if(voucher!=""){
-        $("#div_voucher").show();
+        $("#div_voucher").attr("disabled",false);
         $('#voucher').val(voucher)
         $("#forma-garantia option[value="+tipo_tarjeta+"]").prop("selected", true);
     }else{
-        $('#voucher').val("") 
-        $("#div_voucher").hide();
+        $("#div_voucher").attr("disabled",true);
+
 
     }
     $("#tomahuespedantes").val(id)
@@ -2314,6 +2332,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
 
     sobrevender = sobrevender ? 1 : 0 ;
 
+    total_pago = document.getElementById('garantia_monto').value;
+
 
     //verifica si hay una tarifa (forzada o no)
     var tarifa_existe = 0;
@@ -2365,7 +2385,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "descuento": 0,
         "codigo_descuento": 0,
         "total": total_hospedaje,
-        "total_pago": 0,
+        "total_pago": total_pago,
         "hab_id": Number(hab_id),
         "tipo_hab": tipo_hab,
         "estado": estado,

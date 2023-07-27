@@ -45,11 +45,11 @@
 
   $reservacion->modificar_estado($_POST['id_reservacion'],2); 
   //Funcion que guarda como abono el total de la cuenta.
-  echo $reservacion->total_pago;
-  if(!empty($reservacion->total_pago)){
-    $id_cuenta= $cuenta->reservacion_garantia($_POST['usuario_id'],$mov_actual,$reservacion->forma_pago,$reservacion->total_pago);
-    $reservacion->modificar_id_cuenta($_POST['id_reservacion'],$id_cuenta);
-  }
+  // echo $reservacion->total_pago;
+  // if(!empty($reservacion->total_pago)){
+  //   $id_cuenta= $cuenta->reservacion_garantia($_POST['usuario_id'],$mov_actual,$reservacion->forma_pago,$reservacion->total_pago);
+  //   $reservacion->modificar_id_cuenta($_POST['id_reservacion'],$id_cuenta);
+  // }
 
   $noches= $reservacion->noches;
   $cantidad_hab= $reservacion->numero_hab;

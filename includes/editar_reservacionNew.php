@@ -330,10 +330,17 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
 
                 echo '
             </div>
-            <div class="form-group col-md-6" id="div_voucher" style="display:none">
+            <div class="d-flex justify-content-between flex-wrap">
+            <div class="form-group col-md-6" id="div_voucher" >
             <label for="voucher">Voucher</label>
-            <textarea id="voucher" class="form-control" rows="1"></textarea>
+            <textarea disabled id="voucher" class="form-control" rows="1"></textarea>
             </div>
+
+            <div class="form-group col-md-6" id="div_garantia" >
+            <label for="garantia_monto">Monto garantía</label>
+            <input  type="number" class="form-control" id="garantia_monto" value="'.$reservacion->total_pago.'">
+            </div>
+        </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
                 <textarea class="form-control" id="observaciones" rows="3">'.$huesped->comentarios.'</textarea>

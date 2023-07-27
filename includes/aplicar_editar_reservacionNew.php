@@ -64,10 +64,9 @@
   if($_POST['estado_tarjeta'] == 2 || !empty($_POST['voucher'] )){
     $estado_interno = "garantizada";
   }
-
-  $total_pago=$_POST['total_pago'];
+  $total_pago=0;
   if($estado_interno=="garantizada"){
-    $total_pago=$total;
+    $total_pago=$_POST['total_pago'];
   }
 
   $id_reservacion = $reservacion->editar_reservacionNew($_POST['id_huesped'],$_POST['tipo_hab'],0,$_POST['fecha_entrada'],$_POST['fecha_salida'],

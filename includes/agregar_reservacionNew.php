@@ -200,7 +200,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
             <h2>Datos Personales</h2>
             <button type="button" class="btn btn-success btn-block mb-2"  onclick="event.preventDefault(); asignar_huespedNew(0,0,0,0,0)" href="#caja_herramientas" data-toggle="modal"> Buscar Huésped</button>
             <input type="text" id="tomahuespedantes" hidden>
-            <input type="text" id="estadotarjeta" hidden>
+            <input type="text" id="estadotarjeta" hidden >
             <input type="text" id="nut" hidden>
             <input type="text" id="nt" hidden>
             <input type="text" id="mes" hidden>
@@ -300,13 +300,20 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
 
                 echo '
             </div>
-            
-            <div class="form-group col-md-6" id="div_voucher" style="display:none">
-            <label for="voucher">Voucher</label>
-            <textarea id="voucher" class="form-control" rows="1"></textarea>
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="form-group col-md-6" id="div_voucher" >
+                <label for="voucher">Voucher</label>
+                <textarea disabled id="voucher" class="form-control" rows="1"></textarea>
+                </div>
+
+                <div class="form-group col-md-6" id="div_garantia" >
+                <label for="garantia_monto">Monto garantía</label>
+                <input disabled type="number" class="form-control" id="garantia_monto">
+                </div>
             </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
+                
                 <textarea class="form-control" id="observaciones" rows="3"></textarea>
             </div>
             <br>
