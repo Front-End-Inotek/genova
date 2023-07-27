@@ -500,9 +500,6 @@
             <th>Código Postal</th>
             <th>Teléfono</th>
             <th>Correo</th>
-            <th>Contrato Socio</th>
-            <th>Cupón</th>
-            <th>Preferencias</th>
             <th>Comentarios</th>
             <th>Ajustes</th>';
             '</tr>
@@ -520,9 +517,6 @@
                 <td>'.$fila['codigo_postal'].'</td>
                 <td>'.$fila['telefono'].'</td>
                 <td>'.$fila['correo'].'</td>
-                <td>'.$fila['contrato'].'</td>
-                <td>'.$fila['cupon'].'</td>
-                <td>'.$fila['preferencias'].'</td>
                 <td>'.$fila['comentarios'].'</td>
                 <td>
                 <div class="dropdown">
