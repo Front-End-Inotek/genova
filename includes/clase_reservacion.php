@@ -879,7 +879,7 @@ class Reservacion extends ConexionMYSql
         $consulta = $this->seleccion_reporte($fecha_inicio, $inicio_dia, $opcion,$a_buscar);
         //se recibe la consulta y se convierte a arreglo
         $this->buscador_reportes($inicio_dia, $opcion);
-        echo '<div class="table-responsive" id="tabla_reservacion">';
+        echo '<div class="table-responsive" id="tabla_reservacion" > ';
         echo '<table class="table table-bordered table-hover">
                     <thead>
                         <tr class="table-primary-encabezado text-center">
@@ -1060,7 +1060,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; padding-bottom: 3rem;">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1174,7 +1174,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; padding-bottom: 3rem;">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1576,7 +1576,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; padding-bottom: 3rem;">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1732,14 +1732,14 @@ class Reservacion extends ConexionMYSql
 				<th>Status</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
-        if($editar==1 && $fila['edo'] = 1) {
+        echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+        /* if($editar==1 && $fila['edo'] = 1) {
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
         }
         if($borrar==1 && $fila['edo'] != 0) {
             echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
             echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-        }
+        } */
         echo '</tr>
 			  </thead>
 			<tbody>';
@@ -1826,10 +1826,10 @@ class Reservacion extends ConexionMYSql
             if($editar==1 && $fila['edo'] = 1) {
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
-            if($borrar==1 && $fila['edo'] != 0) {
+            /* if($borrar==1 && $fila['edo'] != 0) {
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-            }
+            } */
             echo '</tr>
 			  </thead>
 			<tbody>';
@@ -1950,14 +1950,14 @@ class Reservacion extends ConexionMYSql
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
 
-            echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
-            if($editar==1 && $fila['edo'] = 1) {
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>';
+            /* if($editar==1 && $fila['edo'] = 1) {
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
             if($borrar==1 && $fila['edo'] != 0) {
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-            }
+            } */
             echo '</tr>
 			</thead>
 		  <tbody>';

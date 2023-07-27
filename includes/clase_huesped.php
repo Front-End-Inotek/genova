@@ -488,7 +488,7 @@
         <br>
         <br>
 
-        <div class="table-responsive" id="tabla_huesped" style="max-height:560px; ">
+        <div class="table-responsive" id="tabla_huesped" style="max-height:560px;">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
@@ -567,7 +567,7 @@
           $comentario="Mostrar diferentes busquedas en ver huespedes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
-          echo '<div class="table-responsive" id="tabla_huesped">
+          echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -582,13 +582,14 @@
               <th>Contrato Socio</th>
               <th>Cupón</th>
               <th>Preferencias</th>
-              <th>Comentarios</th>';
-              if($editar==1){
+              <th>Comentarios</th>
+              <th>Ajustes</th>';
+              /* if($editar==1){
                 echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
               }
               if($borrar==1){
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
-              }
+              } */
               echo '</tr>
             </thead>
           <tbody>';
@@ -606,14 +607,26 @@
                 <td>'.$fila['contrato'].'</td>
                 <td>'.$fila['cupon'].'</td>
                 <td>'.$fila['preferencias'].'</td>
-                <td>'.$fila['comentarios'].'</td>';
-                if($editar==1){
+                <td>'.$fila['comentarios'].'</td>
+                <td> 
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ver mas
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="options">';
+                    echo ' <a class="dropdown-item" href="#" onclick="editar_huesped('.$fila['id'].')" >Editar</a> ';
+                    echo ' <a class="dropdown-item" href="#" onclick="editar_huesped('.$fila['id'].')" >Ver historial</a> ';
+                    echo '<div class="dropdown-divider"></div>';
+                    echo ' <a class="dropdown-item" href="#" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')">Borrar</a> ';
+                echo ' </div>
+                </td>';
+                /* if($editar==1){
                   echo '<td><button class="btn btn-warning" onclick="editar_huesped('.$fila['id'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
                   echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')"> Borrar</button></td>';
                 }
-                echo '</tr>';
+                echo  */'</tr>';
               }
         }
             echo '
@@ -696,7 +709,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -751,7 +764,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -807,7 +820,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -856,7 +869,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -906,7 +919,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
