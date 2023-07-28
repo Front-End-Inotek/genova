@@ -396,6 +396,38 @@
         return $consulta;
       }
 
+      function mostrar_historial_cuentas($inicial,$final,$a_buscar){
+        $filtro_fecha="";
+        $filtro_buscar="";
+        if(!empty($a_buscar)){
+          $filtro_buscar=" AND (hab.nombre LIKE '%$a_buscar%' || cuenta.descripcion LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' 
+          || huesped.apellido LIKE '%$a_buscar%')";
+        }
+
+        if(!empty($inicial) && !empty($final)){
+          $inicial = strtotime($inicial);
+          $final = strtotime($final);
+          $filtro_fecha="AND cuenta.fecha BETWEEN $inicial AND $final";
+        }
+        $sentencia="SELECT *, hab.nombre as hab_nombre, reservacion.total as tarifa, cuenta.estado as estado_cuenta
+        ,huesped.nombre as huesped_nombre, huesped.apellido as huesped_apellido 
+        FROM
+        cuenta
+        INNER JOIN hab  ON hab.mov = cuenta.mov
+        INNER JOIN movimiento as mov ON hab.mov = mov.id
+        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
+        INNER JOIN huesped on mov.id_huesped  = huesped.id
+        AND (cuenta.abono>0 OR cuenta.cargo>0)
+        AND cuenta.estado!=0
+        ".$filtro_fecha."
+        ".$filtro_buscar."
+        order by cuenta.fecha desc";
+        echo $sentencia;
+        $comentario="Obtenemos cargos/habonos de una habitacion en casa";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
       function estadoCuentaHabs(){
         $sentencia="SELECT *, hab.nombre as hab_nombre, reservacion.total as tarifa
         FROM

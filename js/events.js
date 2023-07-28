@@ -3943,6 +3943,39 @@ function buscar_historial_huesped(id){
     $("#tabla_historial").load("includes/buscar_historial_huesped.php?id="+id+"&inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar);
 }
 
+
+function buscar_historial_cuentas(){
+    a_buscar = $("#a_buscar").val()
+    inicial = $("#inicial_historial").val() === undefined ? 0 :  $("#inicial_historial").val()
+    final =$("#final_historial").val() === undefined  ? 0 : $("#final_historial").val()
+
+    $("#tabla_historial").load("includes/buscar_historial_cuentas.php?inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar);
+}
+
+// ver Historia del huesped
+function ver_historial_cuentas(id){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_historial_cuentas.php?id="+id+"&inicial="+0+"&final="+0);
+    closeModal();
+	closeNav();
+    
+}
+
+// ver Historia del huesped
+function ver_historial_huesped(id){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_historial_huesped.php?id="+id+"&inicial="+0+"&final="+0);
+    closeModal();
+	closeNav();
+    
+}
+
 // ver Historia del huesped
 function ver_historial_huesped(id){
     var usuario_id=localStorage.getItem("id");

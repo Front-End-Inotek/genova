@@ -8,8 +8,6 @@ $final = $_GET['final'];
 $a_buscar =$_GET['a_buscar'];
 $historial = $huesped->mostrar_historial_cuenta($huesped->id,$inicial,$final,$a_buscar);
 
-
-
     echo '
 
     <table class="table table-striped" id="tabla_historial">
