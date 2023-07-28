@@ -53,8 +53,7 @@
     "precio_infantil"=>$precio_infantil,
     "precio_hospedaje"=>$precio_hospedaje,
     "cantidad_hospedaje"=>$cantidad_hospedaje,
-
-
+    "cantidad_maxima" => $cantidad_maxima,
   );
 
   echo json_encode($datos_interes);

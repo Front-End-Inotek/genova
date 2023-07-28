@@ -1758,9 +1758,23 @@ function editarTotalEstancia(event){
     extra_adultos = $("#extra_adulto").val();
     extra_infantil =  $("#extra_infantil").val();
     cantidad_hospedaje =$("#cantidad_hospedaje").val()
+    cantidad_maxima =Number($("#cantidad_maxima").val())
+
     suma_extra = Number(extra_adultos) + Number(extra_infantil)
-    console.log(suma_extra)
+    console.log(suma_extra,cantidad_maxima)
     diff_extra=0
+
+    if(cantidad_maxima!=0){
+        if(suma_extra >cantidad_maxima){
+            alert("Ha superado la cantidad máxima de personas")
+            $("#extra_adulto").val("");
+            $("#extra_infantil").val("");
+            return
+        }
+    }
+
+    
+
 
     if(suma_extra>cantidad_hospedaje){
         diff_extra = suma_extra - cantidad_hospedaje
@@ -1768,6 +1782,8 @@ function editarTotalEstancia(event){
     }else{
         extra_adultos=0
     }
+
+
     console.log(diff_extra)
     tarifa_adultos = $("#tarifa_adultos").val();
     tarifa_infantil = $("#tarifa_menores").val();
@@ -1933,6 +1949,7 @@ function cambiar_adultosNew(event=null,hab_id){
             $("#tarifa_adultos").val(res.precio_adulto)
             $("#precio_hospedaje").val(res.precio_hospedaje)
             $("#cantidad_hospedaje").val(res.cantidad_hospedaje)
+            $("#cantidad_maxima").val(res.cantidad_maxima)
 
             calcular_noches(0,0, 0)
             editarTotalEstancia()
