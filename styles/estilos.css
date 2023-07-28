@@ -29,7 +29,6 @@
 .mi-tabla {
   background-color: #f6f6f6;
   color: #333;
-
 }
 
 /* El menú de navegación lateral */
@@ -1326,7 +1325,6 @@ hr{
   width: 8.33333333%;
 }
 
-
 .letras-grandes-modal{
   font-size: 1.1rem;
 }
@@ -1342,4 +1340,8 @@ hr{
 
 table {
   border-color: #edf2f9;
+}
+
+.BordeIzquierdoTipoHab{
+  border-left: 7px solid !important;
 }

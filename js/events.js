@@ -5024,7 +5024,10 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
     var usuario_id=localStorage.getItem("id");
     var descripcion= encodeURI(document.getElementById("descripcion").value);
     var cargo= document.getElementById("cargo").value;
-    if(descripcion.length >0 && cargo >0){
+    if(cargo.length > 10){
+        alert("Cantidad debe de ser menor a 10 digitos")
+        return
+    }else if (descripcion.length >0 && cargo >0){
         $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
               "hab_id": hab_id,

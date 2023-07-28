@@ -744,14 +744,14 @@ label[for="no"] {
 
 .containerRackOp {
   display: grid;
-  grid-template-columns: repeat(10, minmax(180px, 1fr));
-  grid-gap: 10px;
-  margin: 20px;
-  margin-top: 50px !important;
+  grid-template-columns: repeat(12, minmax(169px, 1fr));
+  /* grid-gap: 10px; */
+  /* margin: 20px; */
+  margin-top: 40px !important;
   overflow-y: auto;
-  width: 99%;
+  width: 100%;
   /* height: 88vh; */
-  max-height: calc(100vh - 116px) !important;
+  max-height: calc(100vh - 100px) !important;
   padding-bottom: 2rem;
 }
 
@@ -1389,14 +1389,14 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 @media (min-width: 1801px) {
   .containerRackOp {
-    grid-template-columns: repeat(10, minmax(180px, 1fr));
-    grid-gap: 5px;
-    margin: 25px;
+    grid-template-columns: repeat(12, minmax(140px, 1fr));
+    /* grid-gap: 5px; */
+    /* margin: 25px; */
   }
   .containerRackOp .btn {
     position: relative;
-    width: 170px;
-    height: 140px;
+    width: 150px;
+    height: 160px;
   }
 }
 
