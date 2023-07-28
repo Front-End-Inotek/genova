@@ -118,8 +118,8 @@ class RackHabitacional extends ConexionMYSql
         $mes_rack = $this->convertir_mes(date('m'));
         //variable para alamcenar año de rack
         $anio_rack = date('Y');
-
-
+        
+        $total_faltante=0.0;
         $cuenta = new Cuenta(0);
         $movimiento = new movimiento(0);
 
@@ -208,6 +208,7 @@ class RackHabitacional extends ConexionMYSql
         $existe_disponible=false;
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
+
             $hab_nombre =$fila['nombre'];
             // $hab_nombre = strlen($hab_nombre) > 13 ? substr($hab_nombre,0,12)."..." : $hab_nombre;
             echo '
@@ -474,7 +475,6 @@ class RackHabitacional extends ConexionMYSql
 
                         $c++;
                         }
-                   
                     }
                     $i=32;
                     //Ocupadas
@@ -482,10 +482,27 @@ class RackHabitacional extends ConexionMYSql
                         //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
                         $mastiempo=false;
                         $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
-                        $clase_hover = "nuevax" . $i .rand(1,200);;
+                        $clase_hover = "nuevax" . $i .rand(1,200);
+                        $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
+
+                        $saldo="";
+                        $saldo_c="";
+
+                        if($total_faltante > 0){
+                            $saldo = 'Saldo: $'.number_format($total_faltante, 2);
+                            $saldo_c="green";
+                        }elseif($total_faltante==0){
+                            $saldo= 'Saldo: $0.0';
+                        }else{
+                            $total_faltante= substr($total_faltante, 1);
+                            $saldo= 'Saldo: -$'.number_format($total_faltante, 2);
+                            $saldo_c="red";
+                        }
+                        
                         echo '<style>
                         .'.$clase_hover.'::after {
-                            content: "'.$huesped_ocupada.'";
+                            content: "'.$saldo.'";
+                            color:'.$saldo_c.';
                         }
                         </style>';
 

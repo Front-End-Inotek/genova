@@ -58,7 +58,10 @@ class Informacion extends ConexionMYSql
         $filtro ="AND hab.estado = " . $estatus_hab;
     }
     if (true) {
-    $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id
+    $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno , datos_vehiculo.id as id_vehiculo
+    FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
+    LEFT JOIN movimiento ON hab.mov = movimiento.id
+    LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
     WHERE hab.estado_hab = 1 $filtro 
     /*AND hab.id=3*/
     ORDER BY id";
@@ -97,6 +100,11 @@ echo'
     echo ' <div class="containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
     {
+        $icono_carro="";
+
+        if(!empty($fila['id_vehiculo'])){
+            $icono_carro='<i class="bx bxs-car car"></i>';
+        }
         $hab = $fila['id'];
         //por cada hab, se tiene que consultar las preasignaciones existentes
         $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado,
@@ -231,7 +239,7 @@ echo'
 
                 case "Ocupado":
                 echo'<div class="btn  supervision ocupadoH '.$clase_expirar.'">';
-                echo '<i class="bx bxs-car car"></i> ';
+                echo $icono_carro;
                 break;
 
                 case "Sucia ocupada":

@@ -1124,6 +1124,7 @@ class Reservacion extends ConexionMYSql
         $agregar = $usuario->reservacion_agregar;
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
+        $preasignar = $usuario->reservacion_preasignar;
         $ruta="ver_reportes_llegadas()";
         date_default_timezone_set('America/Mexico_City');
 
@@ -1162,9 +1163,6 @@ class Reservacion extends ConexionMYSql
             $cat_paginas++;
         }
         $ultimoid=0;
-
-        
-        // echo $sentencia;
         $comentario="Mostrar las reservaciones que llegan hoy";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -1219,7 +1217,7 @@ class Reservacion extends ConexionMYSql
         while ($fila = mysqli_fetch_array($consulta)) {
 
             if($cont>=$posicion & $cont<$final) {
-                $this->construirTabla($fila,$agregar,$editar,$borrar,"ver_reportes_llegadas()");
+                $this->construirTabla($fila,$agregar,$editar,$borrar,"ver_reportes_llegadas()",$preasignar);
             }
             $cont++;
         }
@@ -1635,6 +1633,7 @@ class Reservacion extends ConexionMYSql
         $agregar = $usuario->reservacion_agregar;
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
+        $preasignar =$usuario->reservacion_preasignar;
 
         $noexiste_inicio=false;
         $noexiste_fin=false;
@@ -1668,11 +1667,12 @@ class Reservacion extends ConexionMYSql
                 $where_fechas=""; 
             }
             $ruta="ver_reportes_llegadas()";
-            $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            $sentencia="SELECT *,  hab.nombre as nombre_hab,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM reservacion
             LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
             INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
             LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+            LEFT JOIN hab ON movimiento.id_hab = hab.id
             INNER JOIN usuario ON reservacion.id_usuario = usuario.id
             INNER JOIN huesped ON reservacion.id_huesped = huesped.id
             INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
@@ -1741,7 +1741,7 @@ class Reservacion extends ConexionMYSql
 			</thead>
 			<tbody>';
         while ($fila = mysqli_fetch_array($consulta)) {
-            $this->construirTabla($fila,$agregar,$editar,$borrar,$ruta);
+            $this->construirTabla($fila,$agregar,$editar,$borrar,$ruta,$preasignar);
         }
 
         echo '
