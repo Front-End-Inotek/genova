@@ -29,7 +29,7 @@ $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,"");
               </button>
             </div>
             <div class="col-sm-1">
-              <button class="btn btn-primary btn-block btn-default" onclick="buscar_historial_cuentas()">
+              <button class="btn btn-primary btn-block btn-default" onclick="mostrar_reporte_historial()">
                 Reporte
               </button>
             </div>

@@ -78,7 +78,6 @@ class PDF extends FPDF
 
 $forma_pago= NEW Forma_pago(0);
 $cuenta = new Cuenta(0);
-$usuario_id=2;
 
 $pdf = new PDF();
 $pdf->AliasNbPages();
@@ -88,7 +87,7 @@ $pdf->SetFont('Arial', '', 9);
 $total_abonos=0;
 $total_general=0;
 
-$id_usuario=2;
+$id_usuario=$_GET['usuario_id'];
 
 $pdf->SetFont('Arial', '', 15);
 $pdf->Cell(80);
@@ -167,7 +166,7 @@ if($contador_row!=0) {
         $pdf->Cell(28, 6, iconv("UTF-8", "ISO-8859-1",''), $border_text, 1, 'C');
 
 $pdf->Output("reporte_estado_cuenta_.pdf", "I");
-//$logs->guardar_log($_GET['usuario_id'], "Reporte reservacion: ". $_GET['id']);
+$logs->guardar_log($_GET['usuario_id'], "Reporte reservacion diario: ");
 
 ?>
 

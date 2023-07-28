@@ -41,11 +41,25 @@
 
 echo '<style>
 
-.side-navbar{
-    transition: transform 300ms linear !important;
-    
-    
-    }
+label {
+    display: block;
+  }
+  
+  input {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo para el asterisco */
+  label:after {
+    content: "";
+    color: red;
+  }
+  
+  /* Estilo para campos requeridos */
+  input:required + label:after {
+    content: "*";
+  }
 
 </style>';
 

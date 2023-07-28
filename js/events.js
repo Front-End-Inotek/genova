@@ -2423,19 +2423,11 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
 
     estado_credito = $("#estadocredito").val()
     limite_credito = $("#limitecredito").val()
+    limite_credito = limite_credito == "" ? 0 : limite_credito
 
     suma_extra = Number(extra_adulto) + Number(extra_infantil)
-    // console.log(suma_extra,cantidad_maxima)
     diff_extra=0
-    //Setear los extras.
-    // if(cantidad_maxima!=0){
-    //     if(suma_extra >cantidad_maxima){
-    //         alert("Ha superado la cantidad máxima de personas de la habitación")
-    //         $("#extra_adulto").val("");
-    //         $("#extra_infantil").val("");
-    //         return
-    //     }
-    // }
+
     if(suma_extra>cantidad_hospedaje){
         diff_extra = suma_extra - cantidad_hospedaje
         extra_adulto = diff_extra
@@ -2820,9 +2812,6 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         limite_credito = $("#limitecredito").val()
 
         limite_credito = limite_credito == "" ? 0 : limite_credito
-
-        console.log(limite_credito)
-        return
 
         if(numero_tarjeta=="**************"){
             numero_tarjeta=null
@@ -7380,6 +7369,15 @@ function hacer_cortes_dia(){
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php?usuario_id="+usuario_id);
     closeNav();
+}
+
+function mostrar_reporte_historial(){
+    var usuario_id=localStorage.getItem("id");
+    a_buscar = $("#a_buscar").val()
+    inicial = $("#inicial_historial").val() === undefined ? 0 :  $("#inicial_historial").val()
+    final =$("#final_historial").val() === undefined  ? 0 : $("#final_historial").val()
+
+    window.open("includes/guardar_historial_cuentas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar);
 }
 
 function aceptar_guardar_corte_diario(){
