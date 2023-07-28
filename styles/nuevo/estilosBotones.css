@@ -1396,7 +1396,8 @@ body.modo-nocturno .containerRackOp .btn:focus {
   .containerRackOp .btn {
     position: relative;
     width: 150px;
-    height: 160px;
+    height: 130px;
+    /* overflow-y: auto; */
   }
 }
 

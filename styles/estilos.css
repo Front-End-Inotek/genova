@@ -1345,3 +1345,15 @@ table {
 .BordeIzquierdoTipoHab{
   border-left: 7px solid !important;
 }
+
+*:required::after{
+  content: "*";
+  color: red;
+}
+
+input[required] + label:after {
+	content: '*' !important;
+	color: red !important;
+}
+
+.

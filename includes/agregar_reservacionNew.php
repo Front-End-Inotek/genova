@@ -98,7 +98,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="noches">Noches</label>
-                    <input class="form-control" type="number"  id="noches" placeholder="0" onchange="cambiar_adultosNew("",'.$hab_id.');" disabled/>
+                    <input  class="form-control" type="number"  id="noches" placeholder="0" onchange="cambiar_adultosNew("",'.$hab_id.');" disabled/>
                 </div>
                 
             </div>
@@ -218,7 +218,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="form-group col-md-4 col-12">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" required>
+                    <input type="text" class="form-control" id="nombre" required name="nombre">
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="apellido">Apellido</label>
