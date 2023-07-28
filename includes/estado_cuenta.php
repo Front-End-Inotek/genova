@@ -90,14 +90,15 @@
   echo '
       <div class="container blanco"> 
         <div class="row">
+        <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="recargar_pagina()"> ←</button></div>
           <div class="col-sm-6 text-left"><h2 class="text-dark ">Estado de cuenta habitación: '.$hab->nombre.'</h2></div>';
           if($faltante == 0){
             echo '<div class="col-sm-6 text-right"></div>';
           }else{
             if($faltante > 0){
-              echo '<div class="col-sm-6 text-right"><h5 class="text-dark ">Saldo Total '.$faltante_mostrar.'</h5></div>';
+              echo '<div class="col-sm-5 text-right"><h5 class="text-dark ">Saldo Total '.$faltante_mostrar.'</h5></div>';
             }else{
-              echo '<div class="col-sm-6 text-right"><h5 class="text-danger ">Saldo Total '.$faltante_mostrar.'</h5></div>';
+              echo '<div class="col-sm-5 text-right"><h5 class="text-danger ">Saldo Total '.$faltante_mostrar.'</h5></div>';
             }
           }
         echo '</div>

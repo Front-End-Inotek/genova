@@ -310,8 +310,12 @@
         return $datos;
       }
 
-      function mostrar_historial_cuenta($id_huesped,$inicial,$final){
+      function mostrar_historial_cuenta($id_huesped,$inicial,$final,$a_buscar){
         $filtro_fecha="";
+        $filtro_buscar="";
+        if(!empty($a_buscar)){
+          $filtro_buscar=" AND (hab.nombre LIKE '%$a_buscar%' || cuenta.descripcion LIKE '%$a_buscar%')";
+        }
 
         if(!empty($inicial) && !empty($final)){
           $inicial = strtotime($inicial);
@@ -329,8 +333,9 @@
         AND huesped.id = $id_huesped
         AND cuenta.estado!=0
         ".$filtro_fecha."
+        ".$filtro_buscar."
         order by cuenta.fecha desc";
-       
+        //echo $sentencia;
         $comentario="Obtenemos cargos/habonos de una habitacion en casa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

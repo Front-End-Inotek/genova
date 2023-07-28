@@ -5,12 +5,13 @@ $huesped = new Huesped($_GET['id']);
 
 $inicial = $_GET['inicial'];
 $final = $_GET['final'];
-$historial = $huesped->mostrar_historial_cuenta($huesped->id,$inicial,$final);
+$historial = $huesped->mostrar_historial_cuenta($huesped->id,$inicial,$final,"");
 
 
     date_default_timezone_set('America/Mexico_CIty');
     echo '
     <div class="container-fluid blanco">
+    <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="ver_huespedes()"> ←</button></div>
     <div class="col-12 text-center"><h2 class="text-dark">Historial del cliente</h2></div>
     <br>
     <div class="row">

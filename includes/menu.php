@@ -30,7 +30,6 @@
 				echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 				<i class="bx bxs-chart text-secondary" ></i>
 				<span class="mx-2" onclick="graficas()"> Estadística </span>
-				<span class="mx-2" onclick="ver_historial_huesped(1)"> ddd </span>
 				</li>';
 			}
 

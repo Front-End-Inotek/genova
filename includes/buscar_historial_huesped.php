@@ -5,7 +5,8 @@ $huesped = new Huesped($_GET['id']);
 
 $inicial = $_GET['inicial'];
 $final = $_GET['final'];
-$historial = $huesped->mostrar_historial_cuenta($huesped->id,$inicial,$final);
+$a_buscar =$_GET['a_buscar'];
+$historial = $huesped->mostrar_historial_cuenta($huesped->id,$inicial,$final,$a_buscar);
 
 
 

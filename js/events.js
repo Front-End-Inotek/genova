@@ -6636,6 +6636,7 @@ function aplicar_rest_cobro_mesa(total,hab_id,estado,mov){
                 return false;
 }
 
+
 // Regresa al inicio
 function principal(){
     $('#caja_herramientas').modal('hide');
