@@ -3880,6 +3880,11 @@ function editar_huesped(id){
     $("#area_trabajo_menu").load("includes/editar_huesped.php?id="+id);
 }
 
+// ver Historia del huesped
+function ver_historial_huesped(id){
+    $("#area_trabajo_menu").load("includes/ver_historial_huesped.php?id="+id);
+}
+
 // Editar un huesped
 function modificar_huesped(id,hab_id,id_reservacion){
 	var usuario_id=localStorage.getItem("id");
