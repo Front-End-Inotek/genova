@@ -2819,6 +2819,11 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         estado_credito = $("#estadocredito").val()
         limite_credito = $("#limitecredito").val()
 
+        limite_credito = limite_credito == "" ? 0 : limite_credito
+
+        console.log(limite_credito)
+        return
+
         if(numero_tarjeta=="**************"){
             numero_tarjeta=null
         }

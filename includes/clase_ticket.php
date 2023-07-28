@@ -144,12 +144,14 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar el estado del ticket
-      function editar_estadoGlobal($corte,$estado){
+      function editar_estadoGlobal($id_usuario,$corte,$estado){
         $hoy = date('Y-m-d');
         $sentencia = "UPDATE `ticket` SET
         `corte` = '$corte',
         `estado` = '$estado'
-        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `estado` = '1'";
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `estado` = '1'
+        AND `id_usuario` = '$id_usuario'
+        ";
         // echo $sentencia;
         $comentario="Editar el estado del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -164,13 +166,15 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Editar el estado del ticket global
-      function editar_estado_corteGlobal($corte,$estado){
+      function editar_estado_corteGlobal($id_usuario,$corte,$estado){
         $hoy = date('Y-m-d');
 
         $sentencia = "UPDATE `ticket` SET
         `corte` = '$corte',
         `estado` = '$estado'
-        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `corte` = '0' AND `estado` != '2';";
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `corte` = '0' AND `estado` != '2';
+        AND `id_usuario` = '$id_usuario'
+        ";
         // echo $sentencia;
         $comentario="Editar el estado del ticket faltantes en corte";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -486,13 +490,15 @@
         }
       }
       // Cambiar estado activo del concepto
-      function cambiar_activoGlobal(){
+      function cambiar_activoGlobal($id_usuario){
         $hoy = date('Y-m-d');
         $sentencia = "UPDATE `concepto` 
         LEFT JOIN ticket ON ticket.id = concepto.id_ticket
         SET
         `activo` = '0'
-        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'";
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+        AND `id_usuario` = '$id_usuario';
+        ";
         $comentario="Poner estado activo como inactivo del concepto";
         // echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);

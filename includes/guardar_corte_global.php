@@ -286,13 +286,13 @@
   $hoy = date('Y-m-d');
   
   // Cambiar concepto a inactivo
-  $concepto->cambiar_activoGlobal();
+  $concepto->cambiar_activoGlobal($_POST['usuario_id']);
 
   // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
-  $ticket->editar_estado_corteGlobal($corte_id,2);
-  $ticket->editar_estadoGlobal($corte_id,2);
+  $ticket->editar_estado_corteGlobal($_POST['usuario_id'],$corte_id,2);
+  $ticket->editar_estadoGlobal($_POST['usuario_id'],$corte_id,2);
   $labels->actualizar_etiqueta_corte();
-  $cuenta->editar_estadoGlobal();
+  $cuenta->editar_estadoGlobal($_POST['usuario_id']);
   $logs->guardar_log($_POST['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
   
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
