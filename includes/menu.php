@@ -22,7 +22,7 @@
 			<div class="form-check2 form-switch ocultar">
 			<input class="form-check-input2" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="cambiarVista(); switch_rack();">
 			<label class="form-check-label2" for="flexSwitchCheckDefault" onclick="sub_menu(); boton_menu();">
-			<span id="vista" class="toggle-text vista-habitacional">Rack Habitacional</span>
+			<span id="vista" class="toggle-text vista-habitacional">Rack Operaciones</span>
 			</label>
 			</div>
 			</div>';
@@ -30,7 +30,6 @@
 				echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
 				<i class="bx bxs-chart text-secondary" ></i>
 				<span class="mx-2" onclick="graficas()"> Estadística </span>
-				<span class="mx-2" onclick="ver_historial_cuentas(1)"> DDD </span>
 				</li>';
 			}
 
@@ -135,6 +134,9 @@
 
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
+
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_historial_cuentas()"> Historial cuentas </a></i></ul>';
 
 			}
 		}

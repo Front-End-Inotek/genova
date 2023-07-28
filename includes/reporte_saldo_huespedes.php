@@ -123,7 +123,7 @@ while($fila=mysqli_fetch_array($consulta)) {
 
 
     if($fila_atras!= $fila['hab_nombre']){
-        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1","Habitación ".  $fila['hab_nombre']), 0, 0, 'C');
+        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1","Hab. ".  $fila['hab_nombre']), 0, 0, 'C');
         $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1",$nombre_huesped), 0, 0, 'C');
         $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1", $abonos), 0, 0, 'C');
         $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1",$cargos), 0, 0, 'C');

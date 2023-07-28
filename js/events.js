@@ -3949,16 +3949,16 @@ function buscar_historial_cuentas(){
     inicial = $("#inicial_historial").val() === undefined ? 0 :  $("#inicial_historial").val()
     final =$("#final_historial").val() === undefined  ? 0 : $("#final_historial").val()
 
-    $("#tabla_historial").load("includes/buscar_historial_cuentas.php?inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar);
+    $("#tabla_historial").load("includes/buscar_historial_cuentas.php?inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar)+"&usuario_id="+usuario_id;
 }
 
 // ver Historia del huesped
-function ver_historial_cuentas(id){
+function ver_historial_cuentas(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/ver_historial_cuentas.php?id="+id+"&inicial="+0+"&final="+0);
+	$("#area_trabajo_menu").load("includes/ver_historial_cuentas.php?usuario_id="+usuario_id+"&inicial="+0+"&final="+0);
     closeModal();
 	closeNav();
     
@@ -5759,6 +5759,7 @@ function switch_rack(){
 
     if(siguiente_vista==0){
         localStorage.setItem('vista',0)
+        localStorage.setItem('txt_vista',0)
     }else{
         localStorage.setItem('vista',1)
     }

@@ -157,7 +157,7 @@ if($contador_row!=0) {
         $noY = $pdf->GetY();
 
         $pdf->SetY($noY-3);
-
+        $border_text="";    
         $pdf->Cell(38, 6, iconv("UTF-8", "ISO-8859-1", ''), $border_text, 0, 'C');
         $pdf->Cell(25, 6, iconv("UTF-8", "ISO-8859-1",''), $border_text, 0, 'C');
         $pdf->Cell(25, 6, iconv("UTF-8", "ISO-8859-1", ''), $border_text, 0, 'C');

@@ -383,7 +383,7 @@
       }
       //Saldo huespedes en casa
       function hab_ocupadas(){
-        $sentencia="SELECT hab.id ,hab.nombre as hab_nombre,hab.tipo,hab.mov as mov,hab.estado,reservacion.total as tarifa, reservacion.precio_hospedaje,
+        $sentencia="SELECT hab.id ,hab.nombre as hab_nombre,hab.tipo,hab.mov as mov,hab.estado,reservacion.precio_hospedaje as tarifa, reservacion.precio_hospedaje,
         huesped.nombre, huesped.apellido, reservacion.estado_credito, reservacion.limite_credito
         FROM hab INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id
         INNER JOIN movimiento as mov ON hab.mov = mov.id
@@ -401,28 +401,32 @@
         $filtro_buscar="";
         if(!empty($a_buscar)){
           $filtro_buscar=" AND (hab.nombre LIKE '%$a_buscar%' || cuenta.descripcion LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' 
-          || huesped.apellido LIKE '%$a_buscar%')";
+          || huesped.apellido LIKE '%$a_buscar%'|| cuenta.estado LIKE '%$a_buscar%')";
         }
 
         if(!empty($inicial) && !empty($final)){
           $inicial = strtotime($inicial);
           $final = strtotime($final);
-          $filtro_fecha="AND cuenta.fecha BETWEEN $inicial AND $final";
+          if($inicial == $final){
+            $filtro_fecha="AND FROM_UNIXTIME(cuenta.fecha  + 3600,'%Y-%m-%d') = FROM_UNIXTIME($inicial + 3600,'%Y-%m-%d')";
+          }else{
+            $filtro_fecha="AND FROM_UNIXTIME(cuenta.fecha  + 3600,'%Y-%m-%d') >=  FROM_UNIXTIME($inicial + 3600,'%Y-%m-%d') AND FROM_UNIXTIME(cuenta.fecha  + 3600,'%Y-%m-%d') <=  FROM_UNIXTIME($final + 3600,'%Y-%m-%d')";
+          }
         }
         $sentencia="SELECT *, hab.nombre as hab_nombre, reservacion.total as tarifa, cuenta.estado as estado_cuenta
-        ,huesped.nombre as huesped_nombre, huesped.apellido as huesped_apellido 
+        ,huesped.nombre as huesped_nombre, huesped.apellido as huesped_apellido, cuenta.id as id_cuenta
         FROM
         cuenta
-        INNER JOIN hab  ON hab.mov = cuenta.mov
-        INNER JOIN movimiento as mov ON hab.mov = mov.id
-        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
-        INNER JOIN huesped on mov.id_huesped  = huesped.id
-        AND (cuenta.abono>0 OR cuenta.cargo>0)
+        INNER JOIN movimiento as mov ON cuenta.mov = mov.id 
+        LEFT JOIN hab ON hab.mov = cuenta.mov 
+        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id 
+        LEFT JOIN huesped on mov.id_huesped = huesped.id 
+        WHERE (cuenta.abono>0 OR cuenta.cargo>0)
         AND cuenta.estado!=0
         ".$filtro_fecha."
         ".$filtro_buscar."
         order by cuenta.fecha desc";
-        echo $sentencia;
+        // echo $sentencia;
         $comentario="Obtenemos cargos/habonos de una habitacion en casa";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
@@ -512,7 +516,7 @@
         $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta
         LEFT join hab on hab.mov = cuenta.mov
         where cuenta.estado =1
-        -- AND cuenta.id_usuario= $id_usuario
+        AND cuenta.id_usuario= $id_usuario
         AND hab.estado = 1
         AND cuenta.estado
         AND cuenta.cargo > 0

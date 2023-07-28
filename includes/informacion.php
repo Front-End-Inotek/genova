@@ -276,7 +276,7 @@ echo'
             }
             echo'
                 <a >
-                    Habitación ';
+                    Hab. ';
                     if($fila['id']<100){
                         echo $fila['nombre'];
                     }else{
@@ -287,19 +287,33 @@ echo'
             echo '
                     <span class="nombre" id="N1">';
             $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
+            $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
+            if($total_faltante > 0){
+                $saldo = 'Saldo: $'.number_format($total_faltante, 2);
+                $saldo_c="green";
+            }elseif($total_faltante==0){
+                $saldo= 'Saldo: $0.0';
+            }else{
+                $total_faltante= substr($total_faltante, 1);
+                $saldo= 'Saldo: -$'.number_format($total_faltante, 2);
+                $saldo_c="red";
+            }
             //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             if($estado_hab == 0){
             if($cronometro == 0){
             
-                echo $tipo_habitacion;
+                // echo $tipo_habitacion;
+                
             }else{
                 $fecha_inicio= date("d-m-Y",$cronometro);
                 echo $fecha_inicio;
                 echo '<br>';
-                echo $tipo_habitacion;
+                // echo $tipo_habitacion;
+               
             }
             }elseif($estado_hab == 1){
             echo $fecha_salida;
+            echo $saldo;
             }else{
             if($cronometro == 0){
                 $fecha_inicio= '&nbsp';

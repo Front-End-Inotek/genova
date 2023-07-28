@@ -8,38 +8,41 @@ $a_buscar =$_GET['a_buscar'];
 $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,$a_buscar);
 
     echo '
+  
     <table class="table table-striped" id="tabla_historial">
-    <thead>
-      <tr>
-        <th scope="col">Fecha</th>
-        <th scope="col">Huesped</th>
-        <th scope="col">Tipo hab.</th>
-        <th scope="col">Cargo</th>
-        <th scrop="col">Abono</th>
-        <th scrop="col">Estado</th>
-        <th scope="col">Descripción</th>
-      </tr>
-    </thead>
-    <tbody>';
-  
-    while ($fila = mysqli_fetch_array($historial)) {
-      $nombre_huesped = $fila['huesped_nombre'] . " ". $fila['huesped_apellido'];
-      $estado = $fila['estado_cuenta']== 1 ? "Activo" : "Cerrado";
-      echo '
-      <tr>
-        <th scope="row">'.date('Y-m-d',$fila['fecha']).'</th>
-        <td>'.$nombre_huesped.'</td>
-        <td>'.$fila['hab_nombre'].'</td>
-        <td>$'.number_format($fila['cargo'],2).'</td>
-        <td>$'.number_format($fila['abono'],2).'</td>
-        <td>'.$estado.'</td>
-        <td>'.$fila['descripcion'].'</td>
-      </tr>
-  
-      ';
-    }
+  <thead>
+    <tr>
+        <th scope="col">ID CUENTA</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Huesped</th>
+      <th scope="col">Tipo hab.</th>
+      <th scope="col">Cargo</th>
+      <th scrop="col">Abono</th>
+      <th scrop="col">Estado</th>
+      <th scope="col">Descripción</th>
+    </tr>
+  </thead>
+  <tbody>';
+
+  while ($fila = mysqli_fetch_array($historial)) {
+    $nombre_huesped = $fila['huesped_nombre'] . " ". $fila['huesped_apellido'];
+    $estado = $fila['estado_cuenta']== 1 ? "Activo" : "Cerrado";
     echo '
-    </tbody>
-  </table>
+    <tr>
+      <th scope="row">'.$fila['id_cuenta'].'</th>
+      <th>'.date('Y-m-d',$fila['fecha']).'</th>
+      <td>'.$nombre_huesped.'</td>
+      <td>'.$fila['hab_nombre'].'</td>
+      <td>$'.number_format($fila['cargo'],2).'</td>
+      <td>$'.number_format($fila['abono'],2).'</td>
+      <td>'.$estado.'</td>
+      <td>'.$fila['descripcion'].'</td>
+    </tr>
+
+    ';
+  }
+  echo '
+  </tbody>
+</table>
     ';
 ?>

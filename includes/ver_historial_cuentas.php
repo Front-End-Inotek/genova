@@ -28,7 +28,6 @@ $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,"");
                 Buscar 
               </button>
             </div>
-           
             <div class="col-sm-1">
               <button class="btn btn-primary btn-block btn-default" onclick="buscar_historial_cuentas()">
                 Reporte
@@ -44,6 +43,7 @@ $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,"");
     <table class="table table-striped" id="tabla_historial">
   <thead>
     <tr>
+        <th scope="col">ID CUENTA</th>
       <th scope="col">Fecha</th>
       <th scope="col">Huesped</th>
       <th scope="col">Tipo hab.</th>
@@ -60,7 +60,8 @@ $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,"");
     $estado = $fila['estado_cuenta']== 1 ? "Activo" : "Cerrado";
     echo '
     <tr>
-      <th scope="row">'.date('Y-m-d',$fila['fecha']).'</th>
+      <th scope="row">'.$fila['id_cuenta'].'</th>
+      <th>'.date('Y-m-d',$fila['fecha']).'</th>
       <td>'.$nombre_huesped.'</td>
       <td>'.$fila['hab_nombre'].'</td>
       <td>$'.number_format($fila['cargo'],2).'</td>
