@@ -223,51 +223,94 @@ echo'
 
         if($fila['tipo']>0){
 
+            $color="";
+            $tipo = $fila['tipo'];
+            switch ($tipo) {
+                case '1':
+                    $color ="pink"; // sencilla (servidor)
+                    break;
+                case '2':
+                    $color ="yellow"; // king
+                    break;
+                case '3':
+                    $color ="blue"; //doble
+                    break;
+                case '4':
+                    $color ="green";
+                    break;
+                case '5':
+                    $color ="purple";
+                    break;
+                case '6':
+                    $color ="yellow";
+                    break;
+                case '7':
+                    $color ="brown";
+                    break;
+                case '8':
+                    $color ="cyan";
+                    break;
+                case '9':
+                    $color ="indigo";
+                    break;
+                case '10':
+                    $color ="orange";
+                    break;
+                case '11':
+                    $color ="salmon";
+                    break;
+                default:
+                    # code...
+                    $color ="gray";
+                    break;
+            }
+            $estilo_tipo='style="border-left-color: '.$color.' !important;"';
+
             echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';
             switch($estado) {
                 case "Disponible limpia":
-                echo'<div class="btn disponible-limpia">';
+                echo'<div class="btn disponible-limpia" '.$estilo_tipo.'>';
                 break;
 
                 case "Vacia limpia":
-                echo'<div class="btn vacia-limpia">';
+                echo'<div class="btn vacia-limpia" '.$estilo_tipo.'>';
                 break;
 
                 case "Vacia sucia":
-                echo'<div class="btn vacia-sucia">';
+                echo'<div class="btn vacia-sucia" '.$estilo_tipo.'>';
                 break;
 
                 case "Ocupado":
-                echo'<div class="btn  supervision ocupadoH '.$clase_expirar.'">';
+                echo'<div class="btn  supervision ocupadoH '.$clase_expirar.'" '.$estilo_tipo.'>';
                 echo $icono_carro;
                 break;
 
                 case "Sucia ocupada":
-                echo'<div class="btn sucia-ocupada">';
+                echo'<div class="btn sucia-ocupada" '.$estilo_tipo.'>';
                 break;
 
                 case "Ocupada limpieza":
-                echo'<div class="btn ocupada-limpieza">';
+                echo'<div class="btn ocupada-limpieza" '.$estilo_tipo.'>';
                 break;
 
                 case "Reserva pagada":
-                echo'<div class="btn reserva-pagada">';
+                echo'<div class="btn reserva-pagada" '.$estilo_tipo.'>';
                 break;
 
                 case "Reserva pendiente":
-                echo'<div class="btn reserva-pendiente">';
+                echo'<div class="btn reserva-pendiente" '.$estilo_tipo.'>';
                 break;
 
                 case "Uso casa":
-                echo'<div class="btn usoCasa">';
+                echo'<div class="btn usoCasa" '.$estilo_tipo.'>';
                 break;
 
                 case "Mantenimiento":
-                echo'<div class="btn mantenimiento">';
+                echo'<div class="btn mantenimiento" '.$estilo_tipo.'>';
                 break;
 
                 case "Bloqueo":
-                echo'<div class="btn bloqueo">';
+                echo'<div class="btn bloqueo" '.$estilo_tipo.'>';
                 break;
 
                 default:
