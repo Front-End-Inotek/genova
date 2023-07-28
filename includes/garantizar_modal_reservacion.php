@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-3" >Método de garantía:</div>
+        <div class="col-sm-3 asterisco" >Método de garantía:</div>
         <div class="col-sm-9" >
         <div class="form-group">
         <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)" >
