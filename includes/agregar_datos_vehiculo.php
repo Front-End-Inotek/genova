@@ -47,7 +47,7 @@ if(sizeof($datos_vehiculo)>0) {
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"  > Matrícula </span>
+                <span class="input-group-text asterisco" id="inputGroup-sizing-default"  > Matrícula </span>
             </div>
             <input value="'.$matricula.'" required type="text" id="matricula" name ="matricula" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" >
         </div>
@@ -56,7 +56,7 @@ if(sizeof($datos_vehiculo)>0) {
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"> Marca </span>
+                <span class="input-group-text asterisco" id="inputGroup-sizing-default"> Marca </span>
             </div>
             <input value="'.$marca.'" required type="text" id="marca" name="marca" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
         </div>
@@ -76,7 +76,7 @@ if(sizeof($datos_vehiculo)>0) {
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default" > Año </span>
+                <span class="input-group-text asterisco" id="inputGroup-sizing-default" > Año </span>
             </div>
             <input value="'.$year.'" required type="text" id="year" name="year" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
         </div>

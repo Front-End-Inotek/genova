@@ -195,7 +195,7 @@
                     <form class="tarjeta-form" id="form-garantia">
                         <div class="form-content">
                             <div class="form-group">
-                              <label for="cardnumber">Numero de tarjeta</label>';
+                              <label class="asterisco" for="cardnumber">Numero de tarjeta</label>';
 
                               if(!empty($this->numero_tarjeta)){
                                 echo '<div class="input-group">
@@ -214,7 +214,7 @@
                               echo '
                             </div>
                             <div class="form-group">
-                              <label for="cardholder">Nombre en Tarjeta</label>
+                              <label class="asterisco" for="cardholder">Nombre en Tarjeta</label>
                               <div class="input-group">
                                 <input  type="text" class="form-control" name="nombre en tarjeta" id="cardholder" maxlength="25" autocorrect="off" spellcheck="false" value="'.$this->titular_tarjeta.'" required>
                                 <div class="input-group-append">
@@ -222,7 +222,7 @@
                               </div>
                             </div>
                             <div class="form-group">
-                            <label for="cardnumber">Tipo de tarjeta</label>
+                            <label class="asterisco" for="cardnumber">Tipo de tarjeta</label>
                             <div class="input-group">
                               <input onchange="" name="tipo de tarjeta" placeholder="Mastercard, Visa, American Express, etc..." type="text" class="form-control" id="tipo" maxlength="20" value="'.$this->nombre_tarjeta.'" required>
                               <div class="input-group-append">
@@ -232,7 +232,7 @@
                             <div class="form-group">
                               <div class="row flex-wrap">
                                 <div class="col-6 col-12">
-                                  <label for="expires-month">Expira</label>
+                                  <label class="asterisco" for="expires-month">Expira</label>
                                   <div class="input-group expire-date d-flex flex-wrap">
                                     <div class="input-group-prepend">
                                     </div>

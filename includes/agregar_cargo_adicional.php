@@ -16,7 +16,7 @@
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;">Descripción</span>
+                <span class="input-group-text asterisco" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;">Descripción</span>
             </div>
               <input placeholder="Ingresa la descripción del cargo" required type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
         </div>

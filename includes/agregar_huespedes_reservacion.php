@@ -11,7 +11,7 @@
           <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR HUÉSPED</h2></div>
 
           <div class="row">
-            <div class="col-sm-2">Nombre:</div>
+            <div class="col-sm-2 asterisco">Nombre:</div>
             <div class="col-sm-4">
             <div class="form-group">
               <input required class="form-control" type="text" id="nombre" placeholder="Ingresa el nombre" maxlength="70">
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-2">Dirección:</div>
+            <div class="col-sm-2 asterisco">Dirección:</div>
             <div class="col-sm-4">
             <div class="form-group">
               <input required class="form-control" type="text" id="direccion" placeholder="Ingresa la dirección" maxlength="60">

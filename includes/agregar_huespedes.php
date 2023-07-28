@@ -17,7 +17,7 @@
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"  > Nombre </span>
+                <span class="input-group-text asterisco" id="inputGroup-sizing-default"  > Nombre </span>
             </div>
             <input required type="text" id="nombre" name ="nombre" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default"  >
         </div>
@@ -26,7 +26,7 @@
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3 ">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default" > Apellido </span>
+                <span class="input-group-text asterisco" id="inputGroup-sizing-default" > Apellido </span>
             </div>
             <input required type="text" id="apellido" name="apellido" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" >
         </div>
@@ -46,7 +46,7 @@
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"  > Ciudad </span>
+                <span class="input-group-text asterisco" id="inputGroup-sizing-default"  > Ciudad </span>
             </div>
             <input required type="text" id="ciudad" name="ciudad" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" >
         </div>

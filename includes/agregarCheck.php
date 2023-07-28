@@ -41,7 +41,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>';
               
                     echo ' <div class="form-group col-md-4 col-12">
-                    <label for="clave-reserva" class="text-right">Habitación</label>
+                    <label for="clave-reserva asterisco" class="text-right">Habitación</label>
                     <select class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event); calcular_nochesChek()" required>
                     <option value="">Seleccionar una habitación</option>
                     ';
@@ -60,11 +60,11 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="form-group col-md-4 col-12">
-                    <label for="llegada">Llegada</label>
+                    <label class="asterisco" for="llegada">Llegada</label>
                     <input required '.$inputFechaEn.' value="'.$inputValueFecha.'" class="form-control" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_nochesChek()">
                 </div>
                 <div class="form-group col-md-4 col-12">
-                    <label for="salida">Salida</label>
+                    <label class="asterisco" for="salida">Salida</label>
                     <input required class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' placeholder="Ingresa la fecha de salida" onchange="calcular_nochesChek();">
                 </div>
                 <div class="form-group col-md-4 col-12">
@@ -75,7 +75,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             <div class="d-flex justify-content-between flex-wrap">
             <div class="form-group col-md-4 col-12">
-                    <label for="tarifa">Tarifa por noche</label>
+                    <label class="asterisco" for="tarifa">Tarifa por noche</label>
                     <select required class="form-control" id="tarifa" onchange="cambiar_adultosNew(event,'.$hab_id.')">
                    
                     ';
@@ -96,7 +96,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
                 <!---
                 <div class="form-group col-md-3">
-                    <label for="no-habitaciones">No. de habitaciones</label>
+                    <label class="asterisco" for="no-habitaciones">No. de habitaciones</label>
                     <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew("",'.$hab_id.')">
                 </div>
                 -->
@@ -121,7 +121,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             <div class="d-flex justify-content-between flex-wrap">
             <div class="form-group col-md-4 col-12">
-                    <label for="no-habitaciones">Número de habitaciones</label>
+                    <label class="asterisco" for="no-habitaciones">Número de habitaciones</label>
                     <input type="number" class="form-control" id="numero_hab" min="1" value="1" required  onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4 col-12">
@@ -159,11 +159,11 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             <br>
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="form-group col-md-4 col-12">
-                    <label for="nombre">Nombre</label>
+                    <label class="asterisco" for="nombre">Nombre</label>
                     <input type="text" class="form-control" id="nombre" required>
                 </div>
                 <div class="form-group col-md-4 col-12">
-                    <label for="apellido">Apellido</label>
+                    <label class="asterisco" for="apellido">Apellido</label>
                     <input type="text" class="form-control" id="apellido" required>
                 </div>
                 <div class="form-group col-md-4 col-12">
@@ -173,7 +173,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="form-group col-md-3 col-12">
-                    <label for="telefono">Teléfono</label>
+                    <label class="asterisco" for="telefono">Teléfono</label>
                     <input type="tel" class="form-control" id="telefono" required>
                 </div>
                 <div class="form-group col-md-3 col-12">
@@ -185,7 +185,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     <input type="text" class="form-control" id="estado">
                 </div>
                 <div class="form-group col-md-3 col-12">
-                    <label for="ciudad">Ciudad</label>
+                    <label class="asterisco" for="ciudad">Ciudad</label>
                     <input type="text" class="form-control" id="ciudad" required>
                 </div>
             </div>
@@ -217,7 +217,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             <div class="d-flex justify-content-between flex-wrap">
                 
                 <div class="form-group col-md-4 col-12">
-                    <label for="forma-garantia">Forma de Garantía</label>
+                    <label class="asterisco" for="forma-garantia">Forma de Garantía</label>
                     <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)" >
                     <option value="">Seleccione una opción </option>
                     ';
