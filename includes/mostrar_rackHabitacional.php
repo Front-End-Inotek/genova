@@ -255,7 +255,7 @@ class RackHabitacional extends ConexionMYSql
             // $hab_nombre = strlen($hab_nombre) > 13 ? substr($hab_nombre,0,12)."..." : $hab_nombre;
             echo '
                 <tr id="hab_'.$fila['id'].'" >
-                    <td class="cal-userinfo BordeIzquierdoTipoHab" style="border-color: '.$color.' !important;">
+                    <td class="cal-userinfo BordeIzquierdoTipoHab" style="border-left-color: '.$color.' !important;">
             ';
             echo 'Hab. ';
             if ($fila['id'] < 100) {
