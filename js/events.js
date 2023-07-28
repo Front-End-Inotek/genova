@@ -83,6 +83,11 @@ function sabernosession(){
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
     var vista = localStorage.getItem("vista");
+
+    txt_vista = localStorage.setItem("txt_vista", "Rack Operaciones");
+
+    
+
 	if(id==null){
 		document.location.href='index.php';
 	}else{
@@ -91,24 +96,35 @@ function sabernosession(){
         // return
 		if(id>0){
             obtener_datos_hab_inicial ();
-			$(".menu").load("includes/menu.php?id="+id+"&token="+token);
+			$(".menu").load("includes/menu.php?id="+id+"&token="+token,function(){
+                if(vista==3){
+                    var usuario_id=localStorage.getItem("id");
+                    graficas()
+                }
+                if(vista==0){
+                    // localStorage.setItem("txt_vista", "Rack Operaciones");
+                    // txt_vista =localStorage.getItem("txt_vista");
+                    var menu_vista = document.getElementById("vista");
+                    menu_vista.innerHTML="Rack Operaciones"
+    
+                    console.log("rack de operaciones "+vista);
+                    var usuario_id=localStorage.getItem("id");
+                    $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+                    siguiente_vista=1
+                }
+                if(vista==1){
+                    var menu_vista = document.getElementById("vista");
+                    menu_vista.innerHTML="Rack Habitacional"
+    
+                    console.log("rack de operaciones "+vista);
+                    var id=localStorage.getItem("id");
+                    var token=localStorage.getItem("tocken");
+                    
+                    $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+                }
+            });
+
             
-            if(vista==3){
-                var usuario_id=localStorage.getItem("id");
-                graficas()
-            }
-            if(vista==0){
-                console.log("rack de habitaciones "+vista);
-                var usuario_id=localStorage.getItem("id");
-                $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-                siguiente_vista=1
-            }
-            if(vista==1){
-                console.log("rack de operaciones "+vista);
-                var id=localStorage.getItem("id");
-                var token=localStorage.getItem("tocken");
-                $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-            }
             cargar_area_trabajo();
 		}
 		else{
@@ -253,6 +269,7 @@ function salirsession(){
     localStorage.removeItem('id');
     localStorage.removeItem('tocken');
     localStorage.removeItem('vista');
+    localStorage.removeItem('txt_vista');
     //remover el token de la db?
     include="includes/remover_token.php?usuario="+usuario_id
     $.ajax({
@@ -5762,9 +5779,10 @@ function switch_rack(){
 
     if(siguiente_vista==0){
         localStorage.setItem('vista',0)
-        localStorage.setItem('txt_vista',0)
+        localStorage.setItem('txt_vista',"Rack Habitacional")
     }else{
         localStorage.setItem('vista',1)
+        localStorage.setItem('txt_vista',"Rack Operaciones")
     }
     vista = localStorage.getItem('vista')
     if(vista==3 || vista==0){

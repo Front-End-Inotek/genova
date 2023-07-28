@@ -289,13 +289,13 @@ echo'
             $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             if($total_faltante > 0){
-                $saldo = 'Saldo: $'.number_format($total_faltante, 2);
+                $saldo = '$'.number_format($total_faltante, 2);
                 $saldo_c="green";
             }elseif($total_faltante==0){
-                $saldo= 'Saldo: $0.0';
+                $saldo= '$0.0';
             }else{
                 $total_faltante= substr($total_faltante, 1);
-                $saldo= 'Saldo: -$'.number_format($total_faltante, 2);
+                $saldo= '-$'.number_format($total_faltante, 2);
                 $saldo_c="red";
             }
             //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
@@ -313,6 +313,7 @@ echo'
             }
             }elseif($estado_hab == 1){
             echo $fecha_salida;
+            echo "<br>";
             echo $saldo;
             }else{
             if($cronometro == 0){

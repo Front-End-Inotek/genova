@@ -22,7 +22,7 @@
 			<div class="form-check2 form-switch ocultar">
 			<input class="form-check-input2" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="cambiarVista(); switch_rack();">
 			<label class="form-check-label2" for="flexSwitchCheckDefault" onclick="sub_menu(); boton_menu();">
-			<span id="vista" class="toggle-text vista-habitacional">Rack Operaciones</span>
+			<span id="vista" class="toggle-text vista-habitacional">Rack Habitacional</span>
 			</label>
 			</div>
 			</div>';

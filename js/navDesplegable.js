@@ -61,14 +61,16 @@ const showMenu = (id) => {
 function cambiarVista() {
   var checkbox = document.getElementById("flexSwitchCheckDefault");
   var vista = document.getElementById("vista");
+  txt_vista = localStorage.getItem("txt_vista");
+  console.log(txt_vista)
   if (checkbox.checked != true) {
     vista.classList.remove("rack-operaciones");
     vista.classList.add("vista-habitacional");
-    vista.innerHTML = "Rack Habitacional";
+    vista.innerHTML = txt_vista;
   } else {
     vista.classList.remove("vista-habitacional");
     vista.classList.add("rack-operaciones");
-    vista.innerHTML = "Rack Operaciones";
+    vista.innerHTML =txt_vista;
   }
 }
 
