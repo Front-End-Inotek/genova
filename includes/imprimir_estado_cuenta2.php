@@ -57,7 +57,7 @@ class PDF extends FPDF
         $this->Cell(80);
         // Título
         $this->SetFont('Arial', '', 20);
-        $this->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", 'ESTADO DE CUENTA - Habitación  '.$hab->nombre), 0, 0, 'C');
+        $this->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", 'ESTADO DE CUENTA - Hab.  '.$hab->nombre), 0, 0, 'C');
         $this->SetFont('Arial', 'B', 10);
         $this->Ln(8);
         $this->SetX(160);
