@@ -1935,6 +1935,7 @@ function cambiar_adultosNew(event=null,hab_id){
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
     var numero_hab= Number(document.getElementById("numero_hab").value);
+
     // $(".div_adultos").load("includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id);  
     url_data ="includes/cambiar_tarifaNew.php?tarifa="+tarifa+"&noches="+noches+"&numero_hab="+numero_hab+"&hab_id="+hab_id
     if(!isNaN(noches) && forzar_tarifa=="" && tarifa!=""){
@@ -1979,7 +1980,10 @@ function cambiar_adultosNew(event=null,hab_id){
             // $("#precio_hospedaje").val(precio_hospedaje)
             editarTotalEstancia()
         }else{
-            $("#tarifa").attr('required',true);
+            var tarifa= document.getElementById("tarifa")
+            if(tarifa.options.length!=0){
+                $("#tarifa").attr('required',true);
+            }
         }
     }
     //alert("Cambiando tarifa "+tarifa);
@@ -7664,6 +7668,9 @@ function ver_reportes_reservaciones(opcion,btn=0){
 
 }
 
+function ver_reporte_historial_cliente(){
+    alert("Generando reporte, espere porfavor...")
+}
 
 //funcion para ver los reportes de llegada
 function ver_reportes_llegadas(btn=0){

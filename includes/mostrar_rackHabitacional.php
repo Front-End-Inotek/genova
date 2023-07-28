@@ -133,7 +133,7 @@ class RackHabitacional extends ConexionMYSql
         LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
         WHERE hab.estado_hab = 1
         AND hab.tipo>0
-        -- AND hab.id=6
+        -- AND hab.id=46
         ORDER BY id";
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -193,6 +193,7 @@ class RackHabitacional extends ConexionMYSql
         $tiempo = $tiempo_inicial;
         //for para cargar los 31  dias
         for ($i = 1; $i <= 31; $i++) {
+            
             $mes = $this->convertir_mes(date('n', $tiempo));
             $dia = date('d', $tiempo);
             $tiempo += 86400;
@@ -205,10 +206,10 @@ class RackHabitacional extends ConexionMYSql
             </thead>
             <tbody class="cal-tbody">
         '; 
-        $existe_disponible=false;
+       
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
-
+            $existe_disponible=false;
             $hab_nombre =$fila['nombre'];
             // $hab_nombre = strlen($hab_nombre) > 13 ? substr($hab_nombre,0,12)."..." : $hab_nombre;
             echo '
@@ -323,7 +324,10 @@ class RackHabitacional extends ConexionMYSql
                         </style>';
 
                         $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
-                        // echo date('Y-m-d', $tiempo_aux) ."|". date('Y-m-d', $fila_r['fecha_entrada']) ."|".  date('Y-m-d', $fila_r['fecha_salida']);
+                        // if($fila['id']==46){
+                        //     echo date('Y-m-d', $tiempo_aux) ."|". date('Y-m-d', $fila_r['fecha_entrada']) ."|".  date('Y-m-d', $fila_r['fecha_salida']);
+                        //     echo $existe_disponible;
+                        // }
                         if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila_r['fecha_entrada']) && date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_salida']) && !$existe_disponible) {
                         echo '
                         <td class="celdaCompleta tdCheck " title="nombre huesped">
@@ -337,6 +341,8 @@ class RackHabitacional extends ConexionMYSql
                         </td>
                         ';
                         $existe_disponible=true;
+                        }else{
+                            $existe_disponible=false;
                         }
 
                         while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
@@ -482,7 +488,7 @@ class RackHabitacional extends ConexionMYSql
                         //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
                         $mastiempo=false;
                         $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
-                        $clase_hover = "nuevax" . $i .rand(1,200);
+                        $clase_hover = "nuevax" . $fila['id'];
                         $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
 
                         $saldo="";
@@ -498,7 +504,6 @@ class RackHabitacional extends ConexionMYSql
                             $saldo= 'Saldo: -$'.number_format($total_faltante, 2);
                             $saldo_c="red";
                         }
-                        
                         echo '<style>
                         .'.$clase_hover.'::after {
                             content: "'.$saldo.'";
@@ -652,6 +657,9 @@ class RackHabitacional extends ConexionMYSql
                 }//end data.
             }
             echo '</tr>';
+            // if($fila['id']==46){
+            //     die();
+            // }
         }
     }
 }

@@ -216,19 +216,19 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
             </div>
             <div class="d-flex justify-content-between flex-wrap">
-                <div class="form-group col-md-4 col-12">
+                <div class="form-group col-md-3 col-12">
                     <label for="telefono">Teléfono</label>
                     <input disabled type="tel" class="form-control" id="telefono" >
                 </div>
-                <div class="form-group col-md-4 col-12">
+                <div class="form-group col-md-3 col-12">
                     <label for="pais">País</label>
                     <input disabled type="text" class="form-control" id="pais">
                 </div>
-                <div class="form-group col-md-4 col-12">
+                <div class="form-group col-md-3 col-12">
                     <label for="estado">Estado</label>
                     <input disabled type="text" class="form-control" id="estado">
                 </div>
-                <div class="form-group col-md-4 col-12">
+                <div class="form-group col-md-3 col-12">
                     <label for="ciudad">Ciudad</label>
                     <input disabled type="text" class="form-control" id="ciudad" >
                 </div>
@@ -295,7 +295,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
-                <textarea disabled class="form-control" id="observaciones" rows="3"></textarea>
+                <textarea class="form-control" id="observaciones" rows="3"></textarea>
             </div>
             <br>
             <div class="d-flex justify-content-end">
