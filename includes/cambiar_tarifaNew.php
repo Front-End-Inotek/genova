@@ -20,6 +20,8 @@
   $precio_junior= $tarifa->precio_junior;
   $precio_infantil= $tarifa->precio_infantil;
 
+  $cantidad_hospedaje = $tarifa->cantidad_hospedaje;
+
   // Checar si numero hab esta vacia o no
   if (empty($_GET['numero_hab'])){
     //echo 'La variable esta vacia';
@@ -50,6 +52,7 @@
     "precio_adulto"=>$precio_adulto,
     "precio_infantil"=>$precio_infantil,
     "precio_hospedaje"=>$precio_hospedaje,
+    "cantidad_hospedaje"=>$cantidad_hospedaje,
 
 
   );
