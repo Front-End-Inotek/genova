@@ -175,7 +175,7 @@ span {
 }
 
 .form-check-input2:checked+.form-check-label2 {
-  background-color: #fff;
+  /* background-color: #fff; */
   color: #30349f;
   border-color: #8e97f9;
   font-weight: 500;
@@ -184,7 +184,7 @@ span {
 .form-check-input2:checked+.form-check-label2:after {
   left: calc(102% - 8px);
   transform: translateX(-100%);
-  border: 2px solid #fff;
+  /* border: 2px solid #fff; */
   transition: all 0.3s ease;
 }
 
