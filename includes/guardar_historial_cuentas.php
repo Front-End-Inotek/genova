@@ -98,25 +98,36 @@ $total_general=0;
 $pdf->SetFont('Arial', '', 15);
 $pdf->Cell(80);
 // Título
-$pdf->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", date('d-m-Y')), 0, 1, 'C');
-$pdf->Ln();         
+$pdf->Cell(30, 10, iconv("UTF-8", "ISO-8859-1","'". $_GET['a_buscar']."'"), 0, 1, 'C');
+
+if(!empty($_GET['a_buscar'])){
+    $pdf->Ln();
+}
+ 
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetTextColor(255, 255, 255);
-$pdf->Cell(38, 4, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 1, 0, 'C',1);
-$pdf->Cell(25, 4, iconv("UTF-8", "ISO-8859-1", 'FCasa'), 1, 0, 'C',1);
-$pdf->Cell(25, 4, iconv("UTF-8", "ISO-8859-1", 'Hab.'), 1, 0, 'C',1);
-$pdf->Cell(35, 4, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 1, 0, 'C',1);
-$pdf->Cell(22, 4, iconv("UTF-8", "ISO-8859-1", 'Cargos'), 1, 0, 'C',1);
-$pdf->Cell(22, 4, iconv("UTF-8", "ISO-8859-1", 'Abonos'), 1, 0, 'C',1);
-$pdf->Cell(28, 4, iconv("UTF-8", "ISO-8859-1", 'Usuario'), 1, 0, 'C',1);
-$pdf->Ln(10);
+$pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 1, 0, '',1);
+$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Huésped.'), 1, 0, '',1);
+$pdf->Cell(28, 4, iconv("UTF-8", "ISO-8859-1", 'Tipo hab.'), 1, 0, '',1);
+$pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", 'Cargo'), 1, 0, '',1);
+$pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", 'Abono'), 1, 0, '',1);
+$pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1", 'Estado'), 1, 0, '',1);
+$pdf->Cell(34, 4, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 1, 0, '',1);
+$pdf->Ln();
 $pdf->SetTextColor(0, 0, 0);
 
 $c=0;
 while ($fila = mysqli_fetch_array($historial)) {
     $nombre_huesped = $fila['huesped_nombre'] . " ". $fila['huesped_apellido'];
-
+    $estado = $fila['estado_cuenta']== 1 ? "Activo" : "Cerrado";
+    $pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1", date('Y-m-d',$fila['fecha'])), 1, 0, '');
+    $pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", $nombre_huesped), 1, 0, 'C');
+    $pdf->Cell(28, 4, iconv("UTF-8", "ISO-8859-1",$fila['hab_nombre']), 1, 0, 'C');
+    $pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", number_format($fila['cargo'],2)), 1, 0, 'C');
+    $pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", number_format($fila['abono'],2)), 1, 0, 'C');
+    $pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1",$estado), 1, 0, 'C');
+    $pdf->Cell(34, 4, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 1, 1, '');
 }
 
 
