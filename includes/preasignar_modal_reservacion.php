@@ -19,7 +19,7 @@
         <div id="re"></div>
         <div class="col-sm-9" >
         <div class="form-group">
-        <select class="form-control" id="preasignada">';
+        <select class="form-control select" id="preasignada" multiple>';
         
        echo  $reservacion->comprobarFechaReserva($entrada,$salida,0,0,$tipo_hab)[1];
         echo '

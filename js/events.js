@@ -3400,6 +3400,7 @@ function guardar_preasignar_reservacion(id,opcion=0)
     var usuario_id=localStorage.getItem("id");
     preasignada = $("#preasignada").val();
     console.log(preasignada,id)
+    return
     if (id >0 && preasignada.length >0) {
         $('#caja_herramientas').modal('hide');
         $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
@@ -7369,6 +7370,15 @@ function hacer_cortes_dia(){
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php?usuario_id="+usuario_id);
     closeNav();
+}
+
+function mostrar_reporte_historial_cliente(id_huesped){
+    var usuario_id=localStorage.getItem("id");
+    a_buscar = $("#a_buscar").val()
+    inicial = $("#inicial_historial").val() === undefined ? 0 :  $("#inicial_historial").val()
+    final =$("#final_historial").val() === undefined  ? 0 : $("#final_historial").val()
+
+    window.open("includes/guardar_historial_cuenta_cliente.php?usuario_id="+usuario_id+"&inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar+"&id="+id_huesped);
 }
 
 function mostrar_reporte_historial(){

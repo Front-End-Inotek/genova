@@ -33,7 +33,7 @@ $historial = $huesped->mostrar_historial_cuenta($huesped->id,$inicial,$final,"")
             </div>
            
             <div class="col-sm-1">
-              <button class="btn btn-primary btn-block btn-default" onclick="ver_reporte_historial_cliente()">
+              <button class="btn btn-primary btn-block btn-default" onclick="mostrar_reporte_historial_cliente('.$huesped->id.')">
                 Reporte
               </button>
             </div>
