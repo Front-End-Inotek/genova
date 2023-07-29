@@ -36,7 +36,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
                 <div id="boton_log">
-                        <input type="submit" class="btn btn-success btn-lg btn-block" value="Guardar" onclick="busqueda_logs('.$_GET['usuario_id'].')">
+                        <button type="submit" class="btn btn-success btn-lg btn-block" value="Guardar" onclick="busqueda_logs('.$_GET['usuario_id'].')">Guardar</button>
                 </div>
                 </div>
                 <div class="col-sm-1"></div>

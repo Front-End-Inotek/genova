@@ -31,7 +31,7 @@
           echo '</div>
           <div class="col-sm-2">
           <div id="boton_usuario">
-            <input type="submit" class="btn btn-danger btn-block" value="Reporte"  onclick="aceptar_ver_saldo_huspedes()">
+            <button type="submit" class="btn btn-danger btn-block" value="Reporte"  onclick="aceptar_ver_saldo_huspedes()">Reporte</button>
           </div>
           </div>
         </div>

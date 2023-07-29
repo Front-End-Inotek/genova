@@ -132,8 +132,8 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     <input required '.$inputFechaEn.' value="'.date("Y-m-d",$reservacion->fecha_entrada).'" class="form-control" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.','.$preasignada.')">
                 </div>
                 <div class="form-group col-md-4 col-12">
-                    <label for="salida">Salida</label>
-                    <input class="asterisco" required class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' value="'.date("Y-m-d",$reservacion->fecha_salida).'" placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.','.$preasignada.');">
+                    <label class="asterisco" for="salida">Salida</label>
+                    <input class="form-control" required class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' value="'.date("Y-m-d",$reservacion->fecha_salida).'" placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.','.$preasignada.');">
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="noches">Noches</label>
