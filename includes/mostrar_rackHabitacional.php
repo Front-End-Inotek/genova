@@ -508,7 +508,7 @@ class RackHabitacional extends ConexionMYSql
                                         }
                                     } else {
                                         echo '
-                                <td class="celdaCompleta tdCheck " >';
+                                <td class="celdaCompleta tdCheck nobordertable " >';
                                         // echo date('Y-m-d',$tiempo_aux);
                                         echo'
                                 </td>
@@ -671,7 +671,7 @@ class RackHabitacional extends ConexionMYSql
 
                                     } else {
                                         echo '
-                                    <td class="celdaCompleta tdCheck ">';
+                                    <td class="celdaCompleta tdCheck nobordertable">';
                                         // echo date('Y-m-d',$tiempo_aux);
                                         echo'
                                     </td>';
