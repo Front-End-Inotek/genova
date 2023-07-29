@@ -18,7 +18,7 @@
               <div class="col-sm-4  ">
               <div class=" d-flex justify-content-between">
                 <div  id="boton_reservacion">
-                  <button type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].')">Imprimir</button>
+                  <button type="submit" class="btn btn-success btn-block margen-1" value="Imprimir" onclick="reporte_reservacion('.$_GET['id'].',\''.$titulo.'\')">Imprimir</button>
                 </div>';
                 if($titulo=="RESERVACIÓN"){
                   echo '<div  id="boton_reservacion">

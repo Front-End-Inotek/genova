@@ -33,7 +33,7 @@
           // Movernos a la derecha
           $this->Cell(80);
           // Título
-          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'RESERVACIÓN '.$_GET['id']),0,0,'C');
+          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",''.$_GET['titulo']. ' '.$_GET['id']),0,0,'C');
           // Salto de línea
           $this->Ln(18);
       }
@@ -41,10 +41,15 @@
       // Pie de página
       function Footer()
       {
+          $this->Ln(50);
+          $this->SetX($this->GetPageWidth() / 4);
+          $this->Cell(100,5,iconv("UTF-8", "ISO-8859-1",'Firma'),'T',0,'C');
           // Posición: a 1,5 cm del final
           $this->SetY(-15);
           // Arial italic 8
           $this->SetFont('Arial','',8);
+
+          
           // Número de página
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }

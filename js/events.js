@@ -3436,9 +3436,9 @@ function ver_reporte_reservacion(id,ruta="regresar_reservacion()",titulo="RESERV
 }
 
 // Generar reporte de reservacion
-function reporte_reservacion(id){
+function reporte_reservacion(id,titulo){
     var usuario_id=localStorage.getItem("id");
-    window.open("includes/reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id);
+    window.open("includes/reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id+"&titulo="+titulo);
 }
 
 // Borrar una reservacion
@@ -3508,8 +3508,9 @@ function guardar_preasignar_reservacion(id,opcion=0)
     }
 }
 // Modal de preasignar reservacion
-function preasignar_reservacion(id,opcion=0,tipo_hab){
-	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id+"&opcion="+opcion+"&tipo_hab="+tipo_hab);
+function preasignar_reservacion(id,opcion=0,tipo_hab,numero_hab){
+    console.log(numero_hab)
+	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id+"&opcion="+opcion+"&tipo_hab="+tipo_hab+"&numero_hab="+numero_hab);
 }
 
 

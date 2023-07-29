@@ -5,6 +5,12 @@
   $entrada = date('Y-m-d',$reservacion->fecha_entrada);
   $salida = date('Y-m-d',$reservacion->fecha_salida);
   $tipo_hab = $_GET['tipo_hab'];
+  $numero_hab = $_GET['numero_hab'];
+  $multiple="";
+  // if($numero_hab>1){
+  //   $multiple="multiple";
+  // }
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -19,7 +25,7 @@
         <div id="re"></div>
         <div class="col-sm-9" >
         <div class="form-group">
-        <select class="form-control select" id="preasignada" multiple>';
+        <select class="form-control select" id="preasignada" '.$multiple.'>';
         
        echo  $reservacion->comprobarFechaReserva($entrada,$salida,0,0,$tipo_hab)[1];
         echo '
