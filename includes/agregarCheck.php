@@ -240,6 +240,17 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             <label for="voucher">Voucher</label>
             <input id="voucher" type="text" class="form-control" rows="1"></input>
         </div>
+        <div class="d-flex justify-content-between flex-wrap">
+                <div class="form-group col-md-6" id="div_voucher" >
+                <label for="voucher">Voucher</label>
+                <input disabled id="voucher" type="text" class="form-control" rows="1"></input>
+                </div>
+
+                <div class="form-group col-md-6" id="div_garantia" >
+                <label for="garantia_monto">Monto garantía</label>
+                <input disabled type="number" class="form-control" id="garantia_monto">
+                </div>
+            </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
                 <textarea class="form-control" id="observaciones" rows="3"></textarea>

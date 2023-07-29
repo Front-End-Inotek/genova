@@ -450,35 +450,9 @@
         return $consulta;
       }
 
-      function mostrarAbonosMaestra($id_usuario){
-        $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.descripcion, cuenta.abono, cuenta.fecha
-        from cuenta
-        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov 
-        -- where id_usuario =$id_usuario
-        and cm.estado = 1 and cuenta.estado=1
-        and cuenta.abono>0
-        order by cm.id , cuenta.fecha asc";
-        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
-        // echo $sentencia;
-        //echo $id;
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        return $consulta;
-      }
+      
 
-      function mostrarAbonos($id_usuario){
-        $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta
-        LEFT JOIN movimiento ON cuenta.mov = movimiento.id
-        LEFT JOIN hab ON  movimiento.id_hab = hab.id
-        where cuenta.estado =1
-        -- and cuenta.id_usuario= $id_usuario
-        AND cuenta.abono > 0
-        order by hab.id , cuenta.fecha asc";
-        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
-        // echo $sentencia;
-        //echo $id;
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        return $consulta;
-      }
+      
 
       function mostrarCuentaUsuario($id_usuario,$forma_pago){
         $sentencia="SELECT  cuenta.fecha, reservacion.id as fcasa,hab.nombre as hab_nombre, cuenta.descripcion, cuenta.cargo, cuenta.abono, usuario.usuario
@@ -499,21 +473,9 @@
         return $consulta;
       }
 
-      function mostrarCargosMaestra($id_usuario){
-        $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.cargo, cuenta.descripcion, cuenta.fecha
-        from cuenta
-        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov
-        -- where id_usuario =$id_usuario
-        and cm.estado = 1 and cuenta.estado =1
-        and cuenta.cargo>0
-        order by cm.id , cuenta.fecha asc" ;
-        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
-        // echo $sentencia;
-        //echo $id;
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        return $consulta;
-      }
+     
 
+      /*RESUMEN DE TRANSACCIONES*/
       function mostrarCargos($id_usuario){
         $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta
         LEFT join hab on hab.mov = cuenta.mov
@@ -530,6 +492,49 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
 
+      }
+      function mostrarCargosMaestra($id_usuario){
+        $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.cargo, cuenta.descripcion, cuenta.fecha
+        from cuenta
+        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov
+        -- where id_usuario =$id_usuario
+        and cm.estado = 1 and cuenta.estado =1
+        and cuenta.cargo>0
+        order by cm.id , cuenta.fecha asc" ;
+        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
+        // echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function mostrarAbonos($id_usuario){
+        $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta
+        LEFT JOIN movimiento ON cuenta.mov = movimiento.id
+        INNER JOIN hab ON  movimiento.id_hab = hab.id
+        AND hab.estado = 1
+        where cuenta.estado =1
+        and cuenta.id_usuario= $id_usuario
+        AND cuenta.abono > 0
+        order by hab.id , cuenta.fecha asc";
+        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+
+      function mostrarAbonosMaestra($id_usuario){
+        $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.descripcion, cuenta.abono, cuenta.fecha
+        from cuenta
+        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov 
+        -- where id_usuario =$id_usuario
+        and cm.estado = 1 and cuenta.estado=1
+        and cuenta.abono>0
+        order by cm.id , cuenta.fecha asc";
+        $comentario="Mostrar los cargos de todas las habitaciones por usuario";
+        // echo $sentencia;
+        //echo $id;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
       }
 
       function mostrar_abonosPDF($mov){
@@ -565,10 +570,9 @@
 
       // Mostrar los cargos que tenemos por movimiento en una habitacion
       function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0,$id_usuario){
+        include_once('clase_usuario.php');
         $fecha_atras="";
         $total_cargos= 0;
-
-        include_once('clase_usuario.php');
         $usuario = new Usuario($id_usuario);
         $auditoria_editar = $usuario->auditoria_editar;
 
