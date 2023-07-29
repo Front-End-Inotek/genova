@@ -1396,7 +1396,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
   .containerRackOp .btn {
     position: relative;
     width: 150px;
-    height: 130px;
+    height: 125px;
     /* overflow-y: auto; */
   }
 }
@@ -1434,4 +1434,5 @@ body.modo-nocturno .containerRackOp .btn:focus {
 .asterisco::after{
   content: "*";
   color: red;
+  margin-left: 3px;
 }
