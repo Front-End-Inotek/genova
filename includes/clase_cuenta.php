@@ -482,7 +482,7 @@
         where cuenta.estado =1
         AND cuenta.id_usuario= $id_usuario
         AND hab.estado = 1
-        AND cuenta.estado
+        AND cuenta.estado = 1
         AND cuenta.cargo > 0
         order by hab.id , cuenta.fecha asc";
 
@@ -510,10 +510,10 @@
       function mostrarAbonos($id_usuario){
         $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta
         LEFT JOIN movimiento ON cuenta.mov = movimiento.id
-        INNER JOIN hab ON  movimiento.id_hab = hab.id
-        AND hab.estado = 1
-        where cuenta.estado =1
-        and cuenta.id_usuario= $id_usuario
+        LEFT JOIN hab ON  movimiento.id_hab = hab.id
+        WHERE movimiento.motivo !='maestra'
+        AND cuenta.estado=1
+        AND cuenta.id_usuario= $id_usuario
         AND cuenta.abono > 0
         order by hab.id , cuenta.fecha asc";
         $comentario="Mostrar los cargos de todas las habitaciones por usuario";
