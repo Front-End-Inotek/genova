@@ -1850,6 +1850,7 @@ function editarTotalEstancia(event){
     cantidad_maxima =Number($("#cantidad_maxima").val())
     var pax_extra= Number(document.getElementById("pax-extra").value);
     noches = $("#noches").val();
+    numero_hab = $("#numero_hab").val();
     suma_extra = Number(extra_adultos) + Number(extra_infantil)
     // console.log(suma_extra,cantidad_maxima)
     diff_extra=0
@@ -1877,12 +1878,22 @@ function editarTotalEstancia(event){
     }else{
         costo_plan = Number($("#costoplan").val())
     }
+    console.log(pax_extra)
+    if(pax_extra!=0){
+        console.log("ddd")
+        pax_extra= pax_extra * numero_hab * noches
 
+    }
+    console.log(costoplan)
+    if(costoplan!=undefined){
+        console.log("ddd")
+        costo_plan = costoplan * numero_hab * noches
+    }
     // console.log(diff_extra)
     tarifa_adultos = $("#tarifa_adultos").val();
     tarifa_infantil = $("#tarifa_menores").val();
     
-    numero_hab = $("#numero_hab").val();
+   
     tarifa_base = $("#tarifa_base").val()
     if(forzar_tarifa!="" || forzar_tarifa!=0  ){
         aux_total = $("#tarifa_base").val()
@@ -2546,9 +2557,6 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
       };
     // console.log(datos)
     // return
-        //console.log(response_msj,fecha_entrada.length,fecha_salida.length,tarifa,persona_reserva.length,forma_pago,total_hab)
-        // return ;
-    //   errores_reserva="";
     var correo = $("#correo").val()
 
     console.log(ruta)
