@@ -1121,6 +1121,72 @@ function borrar_plan_alimentacion(id, nombre, codigo ){
     });
 }
 
+function cerrar_cuenta_maestra(id, nombre, codigo , mov){
+    let nombre_tipo = nombre;
+    let id_tipo = id;
+    let codigo_tipo = codigo;
+    let usuario_id=localStorage.getItem("id");
+
+    let datos = {
+        "id_tipo": id_tipo,
+        "usuario_id": usuario_id
+    };
+
+    let tabla = document.createElement("div");
+    tabla.innerHTML += `
+    <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
+        <tr>
+        <td>Id</td>
+        <td>Nombre Cuenta Maestra</td>
+        <td>Codigo</td>
+        </tr>
+        <tr>
+        <td>${id_tipo}</td>
+        <td>${nombre_tipo}</td>
+        <td>${codigo_tipo}</td>
+        </tr>
+    </table> <br>`;
+
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    swal({
+        title: "Antes de continuar por favor verifique los datos de la cuenta maestra a cerrar",
+        text: "Antes de continuar por favor verifique los datos de la cuenta maestra a cerrar ",
+        content: tabla,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+    xhttp.open("GET","includes/cerrar_cuenta_maestra.php?id_tipo="+id_tipo+"&usuario_id="+usuario_id+"&mov="+mov,true);
+    xhttp.addEventListener('load', e =>{
+        //Si el servidor responde 4  y esta todo ok 200
+        if (e.target.readyState == 4 && e.target.status == 200) {
+            //Entrara la contidicion que valida la respuesta del formulario
+            console.log(e.target.response)
+            if (e.target.response == 'NO') {
+                $('#caja_herramientas').modal('hide');
+                ver_cuenta_maestra()
+                swal("Cuenta maestra cerrada correctamente!", "Excelente trabajo!", "success");
+            }else if (e.target.response == 'NO_valido'){
+                swal("Accion no realizada!", "Error de transferencia de datos!", "error");
+            }else{
+                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
+            }
+        }else{
+            swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
+        }
+    })
+    xhttp.send();
+                } else {
+        swal("Operación omitida!", "Por favor verifique los datos antes de cancelar la cuenta!", "success")
+        }
+    });
+}
+
+
+
 function borrar_cuenta_maestra(id, nombre, codigo ){
     let nombre_tipo = nombre;
     let id_tipo = id;
