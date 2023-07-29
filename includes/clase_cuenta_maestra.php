@@ -47,6 +47,31 @@ class CuentaMaestra extends ConexionMYSql{
       }
     }
 
+    // Cerrar una cuenta maestra
+    function cerrar_cuenta_maestra($id,$mov){
+      $sentencia = "UPDATE `cuenta_maestra` SET
+      `estado` = '2'
+      WHERE `id` = '$id';";
+      $comentario="Poner estado de cuenta maestra como cerrada";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+      //Cerramos la cuenta "normal".
+
+      $sentencia = "UPDATE `cuenta` SET
+      `estado` = '2'
+      WHERE `mov` = '$mov'
+      AND estado!=0
+      ";
+      $comentario="Poner estado de cuenta normal como cerrada";
+      $consulta_cuenta= $this->realizaConsulta($sentencia,$comentario);
+
+      if($consulta || $consulta_cuenta){
+        echo ("NO");
+      }else{
+        echo ("error en la consulta");
+      }
+    }
+
     // Borrar una cuenta maestra
     function borrar_cuenta_maestra($id){
       $sentencia = "UPDATE `cuenta_maestra` SET
@@ -103,9 +128,11 @@ class CuentaMaestra extends ConexionMYSql{
 
     function mostrar($id){
         require_once('clase_usuario.php');
-        $sentencia = "SELECT *, cuenta_maestra.nombre as nombre_maestra, cuenta_maestra.id as id_maestra FROM cuenta_maestra 
+        $sentencia = "SELECT *, cuenta_maestra.nombre as nombre_maestra, cuenta_maestra.id as id_maestra 
+        , cuenta_maestra.estado as cm_estado
+        FROM cuenta_maestra
         LEFT JOIN huesped on cuenta_maestra.huesped = huesped.id
-        WHERE cuenta_maestra.estado=1";
+        WHERE cuenta_maestra.estado!=0";
         $comentario ="Se obtienen todas las cuentas maestras";
         $usuario = NEW Usuario($id);
         $editar = $usuario->tipo_editar;
@@ -122,7 +149,9 @@ class CuentaMaestra extends ConexionMYSql{
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
-            <th>Código</th>';
+            <th>Código</th>
+            <th>Estado</th>'
+            ;
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Asignar huesped</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Cargo restaurante</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Cargos adicionales</th>';
@@ -132,6 +161,8 @@ class CuentaMaestra extends ConexionMYSql{
               echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
             }
             if($borrar==1){
+              echo '<th><span class="glyphicon glyphicon-cog"></span> Cerrar</th>';
+
               echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
             }
             echo '</tr>
@@ -139,9 +170,12 @@ class CuentaMaestra extends ConexionMYSql{
         <tbody>';
             while ($fila = mysqli_fetch_array($consulta))
             {
+                $estado = $fila['cm_estado'] == 1  ? "Activa" : "Cerrada";
                 echo '<tr class="text-center">
                 <td>'.$fila['nombre_maestra'].'</td>
-                <td>'.$fila['codigo'].'</td>';
+                <td>'.$fila['codigo'].'</td>
+                <td>'.$estado.'</td>
+                ';
                 if(empty($fila['huesped'])){
                   echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$fila['id_maestra'].','.$fila['mov'].')">Húesped</button></td>';
                 }else{
@@ -160,6 +194,7 @@ class CuentaMaestra extends ConexionMYSql{
                   echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_cuenta_maestra('.$fila['id_maestra'].')"> Editar</button></td>';
                 }
                 if($borrar==1){
+                  echo '<td><button class="btn btn-secondary" onclick="cerrar_cuenta_maestra(' . $fila['id_maestra'] . ', \'' . addslashes($fila['nombre_maestra']) . '\', \'' . addslashes($fila['codigo']) . '\','.$fila['mov'].')">Cerrar</button></td>';
                   echo '<td><button class="btn btn-danger" onclick="borrar_cuenta_maestra(' . $fila['id_maestra'] . ', \'' . addslashes($fila['nombre_maestra']) . '\', \'' . addslashes($fila['codigo']) . '\')">Borrar</button></td>';
                 }
                 echo '</tr>';

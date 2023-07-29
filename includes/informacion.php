@@ -287,10 +287,14 @@ echo'
 
                 case "Sucia ocupada":
                 echo'<div class="btn sucia-ocupada" '.$estilo_tipo.'>';
+                echo $icono_carro;
+
                 break;
 
                 case "Ocupada limpieza":
                 echo'<div class="btn ocupada-limpieza" '.$estilo_tipo.'>';
+                echo $icono_carro;
+
                 break;
 
                 case "Reserva pagada":
