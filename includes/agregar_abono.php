@@ -42,7 +42,7 @@
         <div class="col-sm-3">Descripcion:</div>
         <div class="col-sm-7">
         <div class="form-group">
-          <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="20"> 
+          <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="30"> 
 
           <!-- <select class="form-select" id="descripcion">
           <option value="">Seleccionar un tipo de abono</option>
