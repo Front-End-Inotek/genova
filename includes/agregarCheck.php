@@ -97,7 +97,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 <!---
                 <div class="form-group col-md-3">
                     <label class="asterisco" for="no-habitaciones">No. de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew("",'.$hab_id.')">
+                    <input disabled type="number" class="form-control" id="numero_hab" min="1" value="" required  onchange="cambiar_adultosNew("",'.$hab_id.')">
                 </div>
                 -->
             </div>
@@ -122,7 +122,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             <div class="d-flex justify-content-between flex-wrap">
             <div class="form-group col-md-4 col-12">
                     <label class="asterisco" for="no-habitaciones">Número de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="1" required  onchange="editarTotalEstancia()">
+                    <input disabled type="number" class="form-control" id="numero_hab" min="1" value="1" required  onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="pax-extra">Pax extra</label>

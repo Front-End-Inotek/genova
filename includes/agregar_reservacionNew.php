@@ -18,7 +18,7 @@
 
   $titulo_="";
   $clv="";
-  
+  $no_hab_estado="";
 
   // Checar si hab_id esta vacia o no
   if (empty($_GET['hab_id'])){
@@ -37,6 +37,7 @@
     $inputFechaEn="disabled";
     $inputValueFecha=$dia_actual;
     $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
+    $no_hab_estado = "disabled";
   }
 
 echo '<style>
@@ -165,7 +166,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
             <div class="d-flex justify-content-between flex-wrap">
             <div class="form-group col-md-4 col-12">
                     <label class="asterisco" for="no-habitaciones">Número de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="1" required  onchange="editarTotalEstancia()">
+                    <input '.$no_hab_estado.' type="number" class="form-control" id="numero_hab" min="1" value="1" required  onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="pax-extra">Pax extra</label>
