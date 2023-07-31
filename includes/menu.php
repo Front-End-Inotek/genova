@@ -142,16 +142,16 @@
 				$permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
 				if($permisos_reportes_diarios>0 || $usuario->nivel==2){
 				echo'
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Ver cortes </a></i></ul>';
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Historial cortes usuario </a></i></ul>';
 	
 				echo'
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes_dia()"> Corte Global Diario </a></i></ul>';
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes_dia()"> Corte diario usuario</a></i></ul>';
 
 				echo'
 				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Resumen transacciones </a></i></ul>';
 
-				echo'
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
+				// echo'
+				// <ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
 
 				}
 			}
