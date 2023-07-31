@@ -841,12 +841,15 @@ body.modo-nocturno .containerRackOp .btn:focus {
 .ocupadoH {
   /* background-color: #a80000fc !important;
   background: linear-gradient( 180deg,#a80000fc 0%, rgb(253, 87, 87) 40%,#a80000fc 100%); */
-  background: var(--fondoRojo) !important;
-  color: var(--colorTextRojo) !important;
+  /* background: var(--fondoRojo) !important;
+  color: var(--colorTextRojo) !important; */
+  background: var(--colorTextRojo) !important;;
+  color: var(--fondoRojo) !important;
   border-left: 7px solid var(--colorTextRojo) !important;
 }
 .ocupadoH a{
-  color: var(--colorTextRojo) !important;
+  /* color: var(--colorTextRojo) !important; */
+  color: var(--fondoRojo) !important;
 }
 
 .ocupadoH:hover {
