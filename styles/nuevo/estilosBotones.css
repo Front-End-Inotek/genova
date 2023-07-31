@@ -1439,3 +1439,14 @@ body.modo-nocturno .containerRackOp .btn:focus {
   color: red;
   margin-left: 3px;
 }
+
+.OcupadaLimpia{
+  background-color: #146C43;
+  color: white;
+  border-left: 7px solid;
+}
+.OcupadaSucia{
+  background-color: #B02A37;
+  color: white;
+  border-left: 7px solid;
+}

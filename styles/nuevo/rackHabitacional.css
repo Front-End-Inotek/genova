@@ -636,5 +636,18 @@
   bottom: 4px;
   z-index: 1000;
 }
+.clean{
+  position: absolute;
+  right: 12px;
+  bottom: 4px;
+  z-index: 1000;
+}
+.dirt{
+  position: absolute;
+  right: 12px;
+  bottom: 4px;
+  z-index: 1000;
+  color: red;
+}
 
 
