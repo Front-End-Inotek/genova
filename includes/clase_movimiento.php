@@ -355,10 +355,9 @@
         }else{
           $fecha_salidaF = $fecha_salidaP;
         }
-       
+
+        $fecha_salidaF = empty($fecha_salidaF) ? 0 : $fecha_salidaF;
         $inicio=time();
-        
-      
         $sentencia="INSERT INTO `movimiento` (`id_hab`, `id_huesped`, `id_reservacion`, `id_mesa`, `personas`, `inicio_hospedaje`, `fin_hospedaje`, `detalle_inicio`, `detalle_fin`, `detalle_manda`, `detalle_realiza`, `finalizado`, `tarifa`, `inicio_limpieza`, `fin_limpieza`, `persona_limpio`, `liberacion`, `motivo`, `comentario`, `estado_interno`)
         VALUES ('$hab_id', '$id_huesped', '$mov', '0', '0', '$fecha_entradaF', '$fecha_salidaF', '$inicio', '0', '$usuario_id', '0', '0', '$tarifa', '0', '0', '0', '0', '$motivo', '', 'sin estado');";
         $comentario="Agregar una reservacion en la habitacion";

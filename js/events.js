@@ -4549,7 +4549,7 @@ function guardar_usuario(){
                   beforeSend:loaderbar,
                   success:function(res){
                     console.log(res)
-                    if(res.search("Duplicate entry")){
+                    if(res.includes("Duplicate entry")){
                         alert("El nombre de usuario ya se encuentra ocupado")
                         //<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">
                         $("#boton_usuario").html('<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">');
