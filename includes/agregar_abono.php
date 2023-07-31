@@ -42,13 +42,14 @@
         <div class="col-sm-3">Descripcion:</div>
         <div class="col-sm-7">
         <div class="form-group">
-          <!-- <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="20"> -->
-          <select class="form-select" id="descripcion">
+          <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="20"> 
+
+          <!-- <select class="form-select" id="descripcion">
           <option value="">Seleccionar un tipo de abono</option>
           ';
           $config->tipos_abonos();
           echo '
-          </select>
+          </select> -->
         </div>
         </div>
         <div class="col-sm-1"></div>
