@@ -135,7 +135,7 @@
 		if($permisos_reportes>0){
 			echo '
 			<li href="#" onclick="showMenu(8)" class="nav-link">
-				<i class="bx bxs-detail text-secondary"></i>
+				<i class="bx bx-transfer text-secondary"></i>
 				<span class="mx-2 reportes">Cortes y transacciones</span>
 				<ul id="8" class="submenu">';
 				$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
@@ -166,7 +166,7 @@
 		if($permisos_restaurantes>0){
 		echo '
 		<li href="#" onclick="showMenu(5)" class="nav-link">
-			<i class="bx bx-user-check text-secondary"></i>
+			<i class="bx bx-restaurant text-secondary"></i>
 			<span class="mx-2">Restaurante</span>
 			<ul id="5" class="submenu">';
 

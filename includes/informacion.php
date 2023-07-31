@@ -281,12 +281,12 @@ echo'
                 break;
 
                 case "Ocupado":
-                echo'<div class="btn  supervision ocupadoH '.$clase_expirar.'" '.$estilo_tipo.'>';
+                echo'<div class="btn  OcupadaLimpia '.$clase_expirar.'" '.$estilo_tipo.'>';
                 echo $icono_carro;
                 break;
 
                 case "Sucia ocupada":
-                echo'<div class="btn sucia-ocupada" '.$estilo_tipo.'>';
+                echo'<div class="btn OcupadaSucia" '.$estilo_tipo.'>';
                 echo $icono_carro;
 
                 break;
