@@ -51,12 +51,12 @@
       $total_suplementos= $fila['total_suplementos'];
       $total_habitacion= $fila['total_hab'];
       if($fila['descuento']>0){
-        $descuento= $fila['descuento'].'%'; 
+        $descuento= $fila['descuento'].'%';
       }else{
-        $descuento= 'Ninguno'; 
+        $descuento= 'Ninguno';
       }
       // Total provisional
-      $total_estancia= $fila['total']; 
+      $total_estancia= $fila['total'];
       $total_pago= $fila['total_pago'];
       $forma_pago= $fila['descripcion'];
       $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
