@@ -922,8 +922,6 @@ body.modo-nocturno .containerRackOp .btn:focus {
   color: var(--fondo) !important;
 }
 
-
-
 .vacia-limpia {
   background-color: rgb(203, 221, 255) !important;
   color: #0a5eff !important;
@@ -1439,11 +1437,19 @@ body.modo-nocturno .containerRackOp .btn:focus {
   color: red;
   margin-left: 3px;
 }
-
-.OcupadaLimpia{
-  background-color: #146C43;
-  color: white;
+.Disponible{
+  background-color: #ADB5BD;
   border-left: 7px solid;
+}
+.Disponible a{
+  color: black !important;
+}
+.OcupadaLimpia{
+  background-color: #F1AEB5;
+  border-left: 7px solid;
+}
+.OcupadaLimpia a{
+  color: black !important;
 }
 .OcupadaSucia{
   background-color: #B02A37;
@@ -1466,4 +1472,9 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 .Mantenimiento a{
   color: black !important;
+}
+.OcupadaLimpieza{
+  background-color: #3DD5F3;
+  border-left: 7px solid;
+  color: black;
 }

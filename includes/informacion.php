@@ -281,7 +281,7 @@ echo'
                 break;
 
                 case "Ocupado":
-                echo'<div class="btn  OcupadaLimpia '.$clase_expirar.'" '.$estilo_tipo.'>';
+                echo'<div class="btn ocupada-limpieza '.$clase_expirar.'" '.$estilo_tipo.'>';
                 echo $icono_carro;
                 break;
 
@@ -308,11 +308,11 @@ echo'
                 break;
 
                 case "Uso casa":
-                echo'<div class="btn OcupadaUsoCasa" '.$estilo_tipo.'>';
+                echo'<div class="btn usoCasa" '.$estilo_tipo.'>';
                 break;
 
                 case "Mantenimiento":
-                echo'<div class="btn Mantenimiento" '.$estilo_tipo.'>';
+                echo'<div class="btn mantenimiento" '.$estilo_tipo.'>';
                 break;
 
                 case "Bloqueo":
