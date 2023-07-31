@@ -5,6 +5,8 @@
   include_once("clase_tarifa.php");
   include_once("clase_movimiento.php");
   include_once("clase_reservacion.php");
+  include_once("clase_usuario.php");
+
   $cuenta= NEW Cuenta(0);
   $hab= NEW Hab($_GET['hab_id']);
   $tarifa= NEW Tarifa(0);
@@ -13,6 +15,7 @@
   $reservacion= NEW Reservacion($id_reservacion);
   $consulta = $reservacion->datos_reservacion($id_reservacion);
   $usuario_id = $_GET['usuario_id'];
+  $usuario = new Usuario($usuario_id);
 
   if($consulta->num_rows==0){
     echo "nada";
@@ -168,8 +171,8 @@
             echo '<div class="col-sm-2"><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Cobrar</button></div>';
             echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
             echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>';
-            if($faltante >= 0){
-              echo '<div class="col-sm-3"><button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="hab_desocupar('.$_GET['hab_id'].','.$_GET['estado'].','.$ver.')">Desocupar hab.</button></div>';
+            if($faltante >= 0 && $usuario->nivel<=2){
+              echo '<div class="col-sm-3"><button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="hab_desocupar('.$_GET['hab_id'].','.$_GET['estado'].')">Desocupar hab.</button></div>';
             }
           //}
         echo '</div>
