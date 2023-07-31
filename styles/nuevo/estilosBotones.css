@@ -1450,3 +1450,20 @@ body.modo-nocturno .containerRackOp .btn:focus {
   color: white;
   border-left: 7px solid;
 }
+.OcupadaUsoCasa{
+  background-color: #087990;
+  color: white;
+  border-left: 7px solid;
+}
+.OcupadaLimpieza{
+  background-color: #0D6EFD;
+  color: white;
+  border-left: 7px solid;
+}
+.Mantenimiento{
+  background-color: #FFC107;
+  border-left: 7px solid;
+}
+.Mantenimiento a{
+  color: black !important;
+}
