@@ -26,11 +26,13 @@
         echo 'Confirmar desocupar habitación '.$hab->nombre.':';
       }
     echo '</div><br>
-    
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>';
       if($total_faltante >= 0){
         echo '<button type="button" class="btn btn-success" onclick="hab_desocupar('.$_GET['hab_id'].','.$_GET['estado'].','.$ver.')"> Aceptar</button>';
+      }
+      if($total_faltante < 0){
+        echo '<button type="button" class="btn btn-info" onclick="estado_cuenta('.$_GET['hab_id'].','.$_GET['estado'].')"> Ver estado de cuenta</button>';
       }
     echo '</div>
   </div>';
