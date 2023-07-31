@@ -12,7 +12,7 @@
   $labels= NEW Labels(0);
   $forma_pago= NEW Forma_pago(0);
   $corte= NEW Corte(0);
-  $inf= NEW Corte_info();
+  $inf= NEW Corte_info($_POST['usuario_id']);
   $logs = NEW Log(0);
   $cuenta= NEW Cuenta(0);
   $ticket= NEW Ticket(0);
@@ -144,7 +144,9 @@
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
   $cantidad= $tipo->total_elementos();
-  for($z=0 ; $z<$cantidad; $z++)
+  $c = sizeof($inf->hab_tipo_hospedaje);
+  $c = $c;
+  for($z=0 ; $z<$c; $z++)
   {
       $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_tipo_hospedaje[$z]),1,0,'C');
       $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",$inf->hab_cantidad_hospedaje[$z]),1,0,'C');
@@ -284,12 +286,12 @@
 
 
   $hoy = date('Y-m-d');
-  
   // Cambiar concepto a inactivo
   $concepto->cambiar_activoGlobal($_POST['usuario_id']);
 
   // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
   $ticket->editar_estado_corteGlobal($_POST['usuario_id'],$corte_id,2);
+
   $ticket->editar_estadoGlobal($_POST['usuario_id'],$corte_id,2);
   $labels->actualizar_etiqueta_corte();
   $cuenta->editar_estadoGlobal($_POST['usuario_id']);
@@ -297,7 +299,4 @@
   
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","F");
-  //$pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","I");
-  //$pdf->Output("../reportes/corte/reporte_corte.pdf","I");
-      //echo 'Reporte corte';*/ I
 ?>

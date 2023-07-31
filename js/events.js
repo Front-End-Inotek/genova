@@ -1826,7 +1826,7 @@ function manejarReservacion(control){
         document.getElementById('tarifa').disabled=true;
     }else{
         document.getElementById('tarifa').disabled=false;
-        document.getElementById('numero_hab').disabled=false;
+        // document.getElementById('numero_hab').disabled=false;
     }
 
 }
@@ -1834,12 +1834,7 @@ function manejarReservacion(control){
 function calcular_nochesChek(){
     hab_id = $("#habitacion_checkin :selected").data("habid")
     console.log(hab_id)
-    if(hab_id!=0 && hab_id!=undefined){
-        calcular_noches(hab_id)
-    }else{
-        calcular_noches(hab_id)
-        //swal("Seleccione al menos una habitación",'Debe seleccionar una habitación para continuar con el checkin','error')
-    }
+    calcular_noches(hab_id)
 }
 
 function editarTotalEstancia(event){
@@ -1871,29 +1866,26 @@ function editarTotalEstancia(event){
     }
     if(event!=null){
         var costoplan = event.target.options[event.target.selectedIndex].dataset.costoplan;
+        // console.log(costoplan)
         if(costoplan!=undefined){
             costo_plan=Number(costoplan)
             $('#costoplan').val(costo_plan)
+        }else{
+            costo_plan=0;
         }
     }else{
         costo_plan = Number($("#costoplan").val())
     }
-    console.log(pax_extra)
+    
     if(pax_extra!=0){
-        console.log("ddd")
         pax_extra= pax_extra * numero_hab * noches
-
     }
-    console.log(costoplan)
     if(costoplan!=undefined){
-        console.log("ddd")
         costo_plan = costoplan * numero_hab * noches
     }
     // console.log(diff_extra)
     tarifa_adultos = $("#tarifa_adultos").val();
     tarifa_infantil = $("#tarifa_menores").val();
-    
-   
     tarifa_base = $("#tarifa_base").val()
     if(forzar_tarifa!="" || forzar_tarifa!=0  ){
         aux_total = $("#tarifa_base").val()
@@ -1968,16 +1960,12 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
         }else{
             cambiar_adultosNew("",hab_id)
         }
-        // console.log(uso_casa)
-        // $(".div_adultos").load("includes/consultar_reservacion_disponible.php?fechas="+JSON.stringify(fechas)+"&hab_id="+hab_id);
         include = "includes/consultar_reservacion_disponible.php?fecha_entrada="+fecha_entrada.value+"&fecha_salida="+fecha_salida.value+"&hab_id="+hab_id+"&preasignada="+preasignada+"&uso_casa="+uso_casa+"&tipo_hab="+tipo_hab;
-        //console.log(include);
         if(hab_id!=0){
             $(".div_adultos").load(include,function(res){
                 // console.log(res)
             });       
         }
-        // $(".div_adultos").load(include);
         $("#preasignada").load(include,function(res){
             // console.log(res)
         });
@@ -2019,7 +2007,6 @@ function cambiar_adultosNew(event=null,hab_id){
         if(tipo_hab!=undefined){
             $("#tipo-habitacion").val(tipo_hab)
             $("#tipo-habitacion").attr("disabled",true);
-            
         }
     }
     var forzar_tarifa = $("#forzar-tarifa").val()
@@ -5099,7 +5086,14 @@ function estado_cuenta(hab_id,estado,mov=0){
     });
 	$('#caja_herramientas').modal('hide');
 }
-
+function validarNumero(event) {
+    const charCode = event.charCode;
+    
+    // Check if the pressed key is a number (charCode 48 to 57 represent digits 0 to 9)
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
 // Agregar un cargo al cargo por habitacion //
 function agregar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
 
@@ -7541,8 +7535,7 @@ function guardar_corte_nuevo(){
 }
 
 
-
-// Guardar un corte global
+// Guardar un corte  diario...
 function guardar_corte_global(){
     var usuario_id=localStorage.getItem("id");
     //var usuario_id= 4;
@@ -7570,7 +7563,7 @@ function guardar_corte_global(){
     return false;
 }
 
-// Guardar un corte
+// Guardar un corte global.
 function guardar_corte(){
     var usuario_id=localStorage.getItem("id");
     //var usuario_id= 4;

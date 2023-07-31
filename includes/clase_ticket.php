@@ -168,14 +168,13 @@
       // Editar el estado del ticket global
       function editar_estado_corteGlobal($id_usuario,$corte,$estado){
         $hoy = date('Y-m-d');
-
         $sentencia = "UPDATE `ticket` SET
         `corte` = '$corte',
         `estado` = '$estado'
-        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `corte` = '0' AND `estado` != '2';
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `corte` = '0' AND `estado` != '2'
         AND `id_usuario` = '$id_usuario'
         ";
-        // echo $sentencia;
+        //echo $sentencia;
         $comentario="Editar el estado del ticket faltantes en corte";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
@@ -497,10 +496,10 @@
         SET
         `activo` = '0'
         WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
-        AND `id_usuario` = '$id_usuario';
+        AND concepto.id_usuario = '$id_usuario';
         ";
         $comentario="Poner estado activo como inactivo del concepto";
-        // echo $sentencia;
+        //echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Cambiar estado activo del concepto

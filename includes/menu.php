@@ -46,6 +46,8 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_llegadas()">Reporte de llegadas</a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="saldo_huespedes()"> Saldo de huéspedes </a></i></ul>';
 		echo'
 			</ul>
 			</li>';
@@ -117,23 +119,7 @@
 
 			$permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
 			if($permisos_reportes_diarios>0 || $usuario->nivel==2){
-			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Ver cortes </a></i></ul>';
 
-			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes_dia()"> Corte Global Diario </a></i></ul>';
-
-			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes()"> Corte Global </a></i></ul>';
-
-			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Resumen transacciones </a></i></ul>';
-
-			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="saldo_huespedes()"> Saldo de huéspedes </a></i></ul>';
-
-			echo'
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
 
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_historial_cuentas()"> Historial cuentas </a></i></ul>';
@@ -143,6 +129,35 @@
 		echo'
 			</ul>
 		</li>';
+
+		if($permisos_reportes>0){
+			echo '
+			<li href="#" onclick="showMenu(8)" class="nav-link">
+				<i class="bx bxs-detail text-secondary"></i>
+				<span class="mx-2 reportes">Cortes y transacciones</span>
+				<ul id="8" class="submenu">';
+				$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
+				$permisos_surtir=$usuario->inventario_surtir;
+	
+				$permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
+				if($permisos_reportes_diarios>0 || $usuario->nivel==2){
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cortes()"> Ver cortes </a></i></ul>';
+	
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes_dia()"> Corte Global Diario </a></i></ul>';
+
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Resumen transacciones </a></i></ul>';
+
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
+
+				}
+			}
+			echo'
+				</ul>
+			</li>';
 
 
 		$permisos_restaurantes=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->restaurante_ver+$usuario->restaurante_agregar;

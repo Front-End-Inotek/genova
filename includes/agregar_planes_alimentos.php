@@ -22,7 +22,9 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;"> Costo </span>
             </div>
-              <input type="number" id="codigo" name ="codigo" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+              <input
+              type="text" maxlength="10"  onkeypress="validarNumero(event)"
+              id="codigo" name ="codigo" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
         </div>
 
         <div class="input-group mb-3">

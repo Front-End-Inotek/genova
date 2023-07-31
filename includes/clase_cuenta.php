@@ -204,7 +204,7 @@
         $hoy = date('Y-m-d');
         $sentencia = "UPDATE `cuenta` SET
             `estado` = '2'
-            where from_unixtime(cuenta.fecha + 3600,'%Y-%m-%d') = '$hoy' AND `estado` = '1';
+            where from_unixtime(cuenta.fecha + 3600,'%Y-%m-%d') = '$hoy' AND `estado` = '1'
             AND `id_usuario` = '$id_usuario'
             ";
         //echo $sentencia ;

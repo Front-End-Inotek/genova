@@ -24,28 +24,28 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio </span>
                 </div>
-                  <input type="number" id="precio_hospedaje" name ="precio_hospedaje" value="'.$tarifa->precio_hospedaje.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input  type="text" maxlength="10"  onkeypress="validarNumero(event)" id="precio_hospedaje" name ="precio_hospedaje" value="'.$tarifa->precio_hospedaje.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
     
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Cantidad habitación </span>
                 </div>
-                  <input type="number" id="cantidad_hospedaje" name ="cantidad_hospedaje" value="'.$tarifa->cantidad_hospedaje.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input   type="text" maxlength="2"  onkeypress="validarNumero(event)" id="cantidad_hospedaje" name ="cantidad_hospedaje" value="'.$tarifa->cantidad_hospedaje.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Cantidad máxima </span>
                 </div>
-                  <input type="number" id="cantidad_maxima" name ="cantidad_maxima" value="'.$tarifa->cantidad_maxima.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input   type="text" maxlength="2"  onkeypress="validarNumero(event)" id="cantidad_maxima" name ="cantidad_maxima" value="'.$tarifa->cantidad_maxima.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio adulto </span>
                 </div>
-                  <input type="number" id="precio_adulto" name ="precio_adulto" value="'.$tarifa->precio_adulto.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input   type="text" maxlength="10"  onkeypress="validarNumero(event)" id="precio_adulto" name ="precio_adulto" value="'.$tarifa->precio_adulto.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <!---
@@ -60,7 +60,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 200px; font-size: 16px;"> Precio infantil </span>
                 </div>
-                  <input type="number" id="precio_infantil" name ="precio_infantil" value="'.$tarifa->precio_infantil.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+                  <input   type="text" maxlength="10"  onkeypress="validarNumero(event)" id="precio_infantil" name ="precio_infantil" value="'.$tarifa->precio_infantil.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">

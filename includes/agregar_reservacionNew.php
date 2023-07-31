@@ -128,7 +128,9 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 </div>
             <div class="form-group col-md-4 col-12">
                     <label for="tipo-habitacion">Forzar tarifa</label>
-                    <input type="number" class="form-control" id="forzar-tarifa" min="0" step="0.01" onchange="cambiar_adultosNew(0,'.$hab_id.')">
+                    <input type="text" class="form-control" id="forzar-tarifa" min="0" step="0.01" 
+                    maxlength="10"   onkeypress="validarNumero(event)"
+                    onchange="cambiar_adultosNew(0,'.$hab_id.')">
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="tipo-habitacion">Tipo de habitación</label>
@@ -148,7 +150,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="adultos">Adultos</label>
-                    <input type="number" class="form-control" id="extra_adulto" min="0"   onchange="editarTotalEstancia()">
+                    <input type="text" class="form-control" id="extra_adulto" maxlength="2" onkeypress="validarNumero(event)"  onchange="editarTotalEstancia()">
                     <input type="number" id="tarifa_adultos" hidden>
                     <input type="number" id="cantidad_hospedaje" hidden>
 
@@ -157,7 +159,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="menores">Menores</label>
-                    <input type="number" class="form-control" id="extra_infantil" min="0"  onchange="editarTotalEstancia()">
+                    <input type="text" class="form-control" id="extra_infantil" maxlength="2"   onkeypress="validarNumero(event)"  onchange="editarTotalEstancia()">
                     <input type="number" id="tarifa_menores" hidden>
                 </div>
              
@@ -166,11 +168,13 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
             <div class="d-flex justify-content-between flex-wrap">
             <div class="form-group col-md-4 col-12">
                     <label class="asterisco" for="no-habitaciones">Número de habitaciones</label>
-                    <input '.$no_hab_estado.' type="number" class="form-control" id="numero_hab" min="1" value="1" required  onchange="editarTotalEstancia()">
+                    <input maxlength="2" '.$no_hab_estado.' type="text" class="form-control" id="numero_hab" minlength="1" value="1" required 
+                    onkeypress="validarNumero(event)"
+                    onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="pax-extra">Pax extra</label>
-                    <input type="number" class="form-control" id="pax-extra" min="0"   onchange="editarTotalEstancia()">
+                    <input type="text"  class="form-control" id="pax-extra" maxlength="10"   onkeypress="validarNumero(event)"  onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="plan-alimentos">Plan de alimentos</label>
@@ -326,7 +330,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
 
                 <div class="form-group col-md-6 col-12" id="div_garantia" >
                 <label for="garantia_monto">Monto garantía</label>
-                <input disabled type="number" class="form-control" id="garantia_monto">
+                <input disabled type="text" class="form-control" id="garantia_monto"  maxlength="10"  onkeypress="validarNumero(event)">
                 </div>
             </div>
             <div class="form-group col-md-12">

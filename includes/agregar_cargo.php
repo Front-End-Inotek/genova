@@ -33,6 +33,7 @@
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
     <div class="modal-body">
+  
       <div class="row flex-wrap">
         <div class="col-sm-1"></div>
         <div class="col-sm-3">Descripcion:</div>
@@ -58,7 +59,7 @@
         <div class="col-sm-3">Cargo:</div>
         <div class="col-sm-7">
         <div class="form-group">
-          <input class="form-control" type="number" id="cargo" placeholder="Ingresa la cantidad del cargo">
+          <input maxlength="10" class="form-control" type="text" id="cargo" placeholder="Ingresa la cantidad del cargo" onkeypress="validarNumero(event)">
         </div>
         </div>
         <div class="col-sm-1"></div>
@@ -67,7 +68,8 @@
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="guardar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['faltante'].','.$mov.','.$id_maestra.')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick=""> Aceptar</button>
     </div>
+  
   </div>';
 ?>
