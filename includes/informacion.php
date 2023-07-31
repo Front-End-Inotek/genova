@@ -287,12 +287,14 @@ echo'
 
                 case "Sucia ocupada":
                 echo'<div class="btn OcupadaSucia" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-brush-alt dirt"></i>';
                 echo $icono_carro;
 
                 break;
 
                 case "Ocupada limpieza":
-                echo'<div class="btn OcupadaLimpieza" '.$estilo_tipo.'>';
+                echo'<div class="btn ocupada-limpieza" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-brush-alt clean"></i>';
                 echo $icono_carro;
 
                 break;
