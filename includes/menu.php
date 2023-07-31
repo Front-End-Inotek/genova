@@ -115,6 +115,8 @@
 			if($permisos_surtir>0){
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_surtir()"> Surtir </a></i></ul>';
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
 			}
 
 			$permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
@@ -182,6 +184,7 @@
 			if($permisos_surtir>0){
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="surtir_inventario()"> Surtir </a></i></ul>';
+			
 			}
 			$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
 			if($permisos_restaurante>0){

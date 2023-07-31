@@ -87,7 +87,7 @@ $pdf->SetFont('Arial', '', 9);
 $total_abonos=0;
 $total_general=0;
 
-$id_usuario=$_GET['usuario_id'];
+$id_usuario=$_GET['id_usuario'];
 
 $pdf->SetFont('Arial', '', 15);
 $pdf->Cell(80);
@@ -111,7 +111,7 @@ $c=0;
 
 
 foreach ($forma_pago->formas_pagos() as $key => $pago) {
-    $consulta= $cuenta->mostrarCuentaUsuario($usuario_id,$pago['id']);
+    $consulta= $cuenta->mostrarCuentaUsuario($id_usuario,$pago['id']);
 
     $contador_row = mysqli_num_rows($consulta);
 
@@ -166,7 +166,7 @@ if($contador_row!=0) {
         $pdf->Cell(28, 6, iconv("UTF-8", "ISO-8859-1",''), $border_text, 1, 'C');
 
 $pdf->Output("reporte_estado_cuenta_.pdf", "I");
-$logs->guardar_log($_GET['usuario_id'], "Reporte reservacion diario: ");
+$logs->guardar_log($_GET['id_usuario'], "Reporte reservacion diario: ");
 
 ?>
 

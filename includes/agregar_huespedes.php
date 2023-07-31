@@ -6,7 +6,7 @@
       <div class="modal-content" >
       <form id="form-huesped">
         <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Agregra huesped </h4>
+        <h4 class="modal-title" id="exampleModalLabel">Agregar huesped </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             &times;
         </button>
@@ -245,16 +245,3 @@
 ?>
 
 
-
-<td>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Ver herramientas
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Ver historial</a>
-                    <a class="dropdown-item" href="#">Editar</a>
-                    <a class="dropdown-item" href="#">Borrar</a>
-                  </div>
-                </div>
-                </td>
