@@ -87,7 +87,7 @@ if(sizeof($datos_vehiculo)>0) {
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"> Color del vechiculo </span>
+                <span class="input-group-text" id="inputGroup-sizing-default"> Color del vehiculo </span>
             </div>
             <input value="'.$color.'" type="text" id="color" name="color" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
         </div>
@@ -124,11 +124,9 @@ if(sizeof($datos_vehiculo)>0) {
         </div>
 
         <div class="row">
-        <div class="col-12 col-sm-6">
+        <div class="col-12">
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"> Observaciones </span>
-            </div>
+            <span class="input-group-text" id="inputGroup-sizing-default"> Observaciones </span>
             <textarea id="observaciones" class="form-control">'.$observaciones.'</textarea>
         </div>
         </div>
