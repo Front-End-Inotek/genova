@@ -168,6 +168,9 @@
             echo '<div class="col-sm-2"><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Cobrar</button></div>';
             echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
             echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>';
+            if($faltante >= 0){
+              echo '<div class="col-sm-3"><button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="hab_desocupar('.$_GET['hab_id'].','.$_GET['estado'].','.$ver.')">Desocupar hab.</button></div>';
+            }
           //}
         echo '</div>
    
