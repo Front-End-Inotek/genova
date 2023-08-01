@@ -95,6 +95,7 @@ $movimiento = NEW Movimiento(0);
 //$cliente = NEW Cliente($_GET['hab_id']);
 $user = NEW Usuario($_GET['id']);
 $estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
+$id_reserva = $movimiento->saber_id_reservacion($hab->mov);
 echo '<div class="modal-header" style="background-color: #97b2f9ee; color: #000;">
 		<h3 class="modal-title">Habitacion '.$_GET['nombre'].' </h3>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -274,9 +275,10 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	/* boton para editar */
-	if(true){
+	if($user->nivel<=2){
+		$ruta="recargar_pagina()";
 		echo '<div class="col-md-3 btn-herramientas">';
-		echo '<div class="editarHab btn-square-lg" onclick="hab_ocupada_terminar_interno('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="editarHab btn-square-lg" onclick="editar_checkin('.$id_reserva.','.$_GET['hab_id'].',\''.$ruta.'\')">';
 			echo '</br>';
 			echo '<div>';
 			echo '</div>';
