@@ -131,8 +131,6 @@ input[type="text"]:placeholder {
     color: #4e4ef0 !important;
 }
 
-/*animacion*/
-
 .efecto {
     -webkit-animation-name: efecto;
     animation-name: efecto;

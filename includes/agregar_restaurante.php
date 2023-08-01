@@ -28,7 +28,7 @@
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '
-  <div class="modal-content alinear_centro" style="background: transparent; !important;">
+  <div class="modal-content alinear_centro" >
     <h5 style= color= white !important";>Agregar Restaurante </h5>
     <div class="col-sm-12 fondo_rest">
 
@@ -50,7 +50,7 @@
             </div>
             <div class="card-body altura-rest_productos" id="caja_mostrar_busqueda">
             </div>
-          </div><br>
+          </div>
  
         </div>
 
