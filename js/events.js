@@ -2816,9 +2816,6 @@ function datosFormulario(id_form){
     for (var i = 0; i < form.elements.length; i++) {
         var elemento = form.elements[i];
         var id=elemento.id
-        // datosFormulario.push({
-        //     "id" : elemento.value
-        // });
         datosFormulario[id] = elemento.value
     }
     return datosFormulario;
@@ -3527,10 +3524,10 @@ function borrar_reservacion(id,preasignada=0){
 //funcion para agregar la habitacion seleccionada a la reservacion.
 function guardar_preasignar_reservacion(id,opcion=0)
 {
-    var usuario_id=localStorage.getItem("id");
-    preasignada = $("#preasignada").val();
-    console.log(preasignada,id)
-    return
+    // var usuario_id=localStorage.getItem("id");
+    // preasignada = $("#preasignada").val();
+    // console.log(preasignada,id)
+    // return
     if (id >0 && preasignada.length >0) {
         $('#caja_herramientas').modal('hide');
         $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
