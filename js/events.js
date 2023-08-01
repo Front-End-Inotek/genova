@@ -2542,7 +2542,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "estado_credito":estado_credito,
         "limite_credito":limite_credito,
       };
-    console.log(datos, ruta)
+    // console.log(datos, ruta)
     // return
     var correo = $("#correo").val()
 

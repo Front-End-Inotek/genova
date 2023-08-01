@@ -2861,11 +2861,12 @@ class Reservacion extends ConexionMYSql
         // $consulta= $this->realizaConsulta($sentencia, $comentario);
 
 
-    }
+    } 
 
     function ingresar_cuenta($usuario_id,$id_mov,$descripcion,$forma_pago,$pago_total){
+        $fecha_entrada= time();
         $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-        VALUES ('$usuario_id', '$id_movimiento', '$descripcion', '$fecha_entrada', '$forma_pago', '0', '$pago_total', '1');";
+        VALUES ('$usuario_id', '$id_mov', '$descripcion', '$fecha_entrada', '$forma_pago', '0', '$pago_total', '1');";
         echo $sentencia;
         $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
         $consulta= $this->realizaConsulta($sentencia, $comentario);

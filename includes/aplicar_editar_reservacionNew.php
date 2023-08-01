@@ -79,6 +79,13 @@
   $datos_mov = $reservacion->saber_id_movimiento($_POST['id']);
 
 
+  if($_POST['forma_pago'] == 2){
+    $factuar= 1;
+  }else{
+    $factuar= 0;
+  }
+
+
 
   if(isset($_POST['preasignada']) && $_POST['preasignada']!=0){
     $id_mov = 0;
@@ -113,13 +120,32 @@
         $descripcion="Pago en checkin";
         $pago_total=$total_pago;
         $fecha_entrada = time();
-        $reservacion->ingresar_cuenta($usuario_id,$id_mov,$descripcion,$_POST['forma_pago'],$pago_total);
+        $reservacion->ingresar_cuenta($_POST['usuario_id'],$id_mov,$descripcion,$_POST['forma_pago'],$pago_total);
+
+        $cantidad=1;
+        $tipo_cargo=3;
+        $resta= 0;
+        $nombre_concepto="Pago al ingresar";
+        $categoria= $actual_hab;
+        $nueva_etiqueta= $labels->obtener_etiqueta();
+        $labels->actualizar_etiqueta();
+        $comanda= $pedido_rest->saber_comanda($id_mov);
+        if($_POST['forma_pago'] == 1){
+          $efectivo_pago=1;
+          $ticket_id= $ticket->guardar_ticket($id_mov,$datos_mov['id_hab'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,$total_pago,0,0,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
+        }else{
+          $efectivo_pago=0;
+          $ticket_id= $ticket->guardar_ticket($id_mov,$datos_mov['id_hab'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,0,0,$total_pago,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
+        }
+        $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$total_pago,($total_pago*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+        
+        
+
     }
 
     }
 }
 
-  
   $logs->guardar_log($_POST['usuario_id'],$log_msj. $_POST['id']);
   echo $_POST['id'];
 ?>

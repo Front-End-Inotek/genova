@@ -182,7 +182,7 @@
                     }
                     echo '<tr class="table-primary  text-center">
                       <td>Total</td>
-                      <td>$'.number_format($total[2], 2).'</td>
+                      <td>$'.number_format($total[3], 2).'</td>
                     </tr>';
                     echo '
                   </tbody>
