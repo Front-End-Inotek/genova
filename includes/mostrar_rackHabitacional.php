@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 include_once('consulta.php');
 date_default_timezone_set('America/Mexico_City');
@@ -131,7 +134,7 @@ class RackHabitacional extends ConexionMYSql
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         WHERE hab.estado_hab = 1
-        -- AND hab.id=51
+        -- AND hab.id=1
         ORDER BY id";
         // echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -325,7 +328,21 @@ class RackHabitacional extends ConexionMYSql
                         // echo date('Y-m-d',$tiempo_aux) ."|". date('Y-m-d',$fila_r['fecha_salida']);
                         // die();
                         if(date('Y-m-d',$tiempo_aux) >= date('Y-m-d',$fila_r['fecha_salida'])){
-                            // echo "qe pasa";
+                            
+                            echo '
+                            <td class="celdaCompleta tdCheck " title="nombre huesped">
+                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
+                            <div >
+                            ';
+                            echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                            echo '</div>';
+                            echo '
+                            </div>
+                            </td>
+                            ';
+                        }
+                        //Condición para que se siga el estado de la hab aunque ya haya pasado su fecha.
+                        if($i==2 && date('Y-m-d',$tiempo_aux) >= date('Y-m-d',$fila_r['fecha_entrada'])){
                             echo '
                             <td class="celdaCompleta tdCheck " title="nombre huesped">
                             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
@@ -343,6 +360,7 @@ class RackHabitacional extends ConexionMYSql
                         //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias), 
                         //con el tiempo de la reservacion
                         if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila_r['fecha_entrada'])){
+                          
                             if($fila_r['garantia'] == "garantizada"){
                                 $estado = 6;
                             }else{

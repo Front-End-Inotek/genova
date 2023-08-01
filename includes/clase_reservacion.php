@@ -1193,6 +1193,7 @@ class Reservacion extends ConexionMYSql
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         //preasignar.
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
+        echo '<th><span class=" glyphicon glyphicon-cog"></span> Garantizar</th>';
 
 
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
