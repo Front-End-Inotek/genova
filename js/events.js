@@ -1844,63 +1844,64 @@ function editarTotalEstancia(event){
     console.log(extra_adultos)
 
     //Crear elemementos necesarios.
-    if(extra_adultos!=0){
-        adicionales = document.getElementById('adicionales')
+    // if(extra_adultos!=0){
+    //     adicionales = document.getElementById('adicionales')
 
-        for (let index = 0; index < extra_adultos; index++) {
+    //     for (let index = 0; index < extra_adultos; index++) {
 
-            div = document.createElement("div")
-            div.classList.add('d-flex')
-            div.classList.add('justify-content-between')
-            div.classList.add('flex-wrap')
-            h4 = document.createElement('h4')
-            h4.innerHTML="Adicional " + (index+1)
+    //         div = document.createElement("div")
+    //         div.classList.add('d-flex')
+    //         div.classList.add('justify-content-between')
+    //         div.classList.add('flex-wrap')
+    //         h4 = document.createElement('h4')
+    //         h4.innerHTML="Adicional " + (index+1)
+    //         div.a
     
-            div2 = document.createElement("div")
-            div2.classList.add('form-group')
-            div2.classList.add('col-md-4')
-            div2.classList.add('col-12')
-            label_nombre = document.createElement("label")
-            label_nombre.innerHTML ="Nombre"
-            label_nombre.classList.add('asterisco')
-            input_nombre = document.createElement("input")
-            input_nombre.classList.add('form-control')
+    //         div2 = document.createElement("div")
+    //         div2.classList.add('form-group')
+    //         div2.classList.add('col-md-4')
+    //         div2.classList.add('col-12')
+    //         label_nombre = document.createElement("label")
+    //         label_nombre.innerHTML ="Nombre"
+    //         label_nombre.classList.add('asterisco')
+    //         input_nombre = document.createElement("input")
+    //         input_nombre.classList.add('form-control')
     
-            div3 = document.createElement("div")
-            div3.classList.add('form-group')
-            div3.classList.add('col-md-4')
-            div3.classList.add('col-12')
+    //         div3 = document.createElement("div")
+    //         div3.classList.add('form-group')
+    //         div3.classList.add('col-md-4')
+    //         div3.classList.add('col-12')
     
-            label_ap = document.createElement("label")
-            label_ap.innerHTML ="Apellido"
-            label_ap.classList.add('asterisco')
-            input_ap = document.createElement("input")
-            input_ap.classList.add('form-control')
+    //         label_ap = document.createElement("label")
+    //         label_ap.innerHTML ="Apellido"
+    //         label_ap.classList.add('asterisco')
+    //         input_ap = document.createElement("input")
+    //         input_ap.classList.add('form-control')
     
-            div_vacio = document.createElement("div")
-            div_vacio.classList.add('form-group')
-            div_vacio.classList.add('col-md-4')
-            div_vacio.classList.add('col-12')
+    //         div_vacio = document.createElement("div")
+    //         div_vacio.classList.add('form-group')
+    //         div_vacio.classList.add('col-md-4')
+    //         div_vacio.classList.add('col-12')
             
-            div2.appendChild(label_nombre)
-            div2.appendChild(input_nombre)
+    //         div2.appendChild(label_nombre)
+    //         div2.appendChild(input_nombre)
     
-            div3.appendChild(label_ap)
-            div3.appendChild(input_ap)
+    //         div3.appendChild(label_ap)
+    //         div3.appendChild(input_ap)
     
     
-            div.appendChild(div2)
-            div.appendChild(div3)
-            div.appendChild(div_vacio)
-            adicionales.appendChild(div)
+    //         div.appendChild(div2)
+    //         div.appendChild(div3)
+    //         div.appendChild(div_vacio)
+    //         adicionales.appendChild(div)
 
-        }
+    //     }
 
       
 
-    }
+    // }
 
-    return
+    // return
 
     extra_infantil =  $("#extra_infantil").val();
     cantidad_hospedaje =$("#cantidad_hospedaje").val()

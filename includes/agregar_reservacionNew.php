@@ -296,7 +296,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 echo '
             </div>
             </div>
-            <div id="adicionales"> </div>
+            <!--- <div id="adicionales"> </div>
 
             <div class="d-flex justify-content-between flex-wrap">
             <h4>Adicional 1</h4>
@@ -311,7 +311,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 <div class="form-group col-md-4 col-12">
 
             </div>
-            </div>
+            </div> --->
 
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="form-group col-md-4 col-12">
