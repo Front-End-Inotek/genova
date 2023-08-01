@@ -79,6 +79,13 @@
   $datos_mov = $reservacion->saber_id_movimiento($_POST['id']);
 
 
+  if($_POST['forma_pago'] == 2){
+    $factuar= 1;
+  }else{
+    $factuar= 0;
+  }
+
+
 
   if(isset($_POST['preasignada']) && $_POST['preasignada']!=0){
     $id_mov = 0;
@@ -93,16 +100,52 @@
     $hab->cambiohabUltimo($old_hab);
     $hab->cambiohabUltimo($_POST['preasignada']);
   }
-  if($datos_mov!=null && $datos_mov['motivo'] == "reservar" && $datos_mov['id_hab']!=0){
+  $log_msj="Editar reservacion: ";
+
+  if($datos_mov!=null && $datos_mov['id_hab']!=0){
     $id_mov=$datos_mov['id'];
     $old_hab = $datos_mov['id_hab'];
     $mov = new Movimiento($id_mov);
    
     $mov->actualizarFechasMov($id_mov, strtotime($_POST['fecha_entrada']),strtotime($_POST['fecha_salida']));
     $hab->cambiohabUltimo($old_hab);
+
+    $finalizado = $mov->saber_tiempo_finalizado_renta($id_mov);
+
+    if(!empty($finalizado)){
+      $hab->cambiohab($datos_mov['id_hab'],$id_mov,1);
+      $log_msj="Reactivar checkin: ";
+      $mov->cambiar_finalizado($id_mov);
+      if($total_pago>0){
+        $descripcion="Pago en checkin";
+        $pago_total=$total_pago;
+        $fecha_entrada = time();
+        $reservacion->ingresar_cuenta($_POST['usuario_id'],$id_mov,$descripcion,$_POST['forma_pago'],$pago_total);
+
+        $cantidad=1;
+        $tipo_cargo=3;
+        $resta= 0;
+        $nombre_concepto="Pago al ingresar";
+        $categoria= $actual_hab;
+        $nueva_etiqueta= $labels->obtener_etiqueta();
+        $labels->actualizar_etiqueta();
+        $comanda= $pedido_rest->saber_comanda($id_mov);
+        if($_POST['forma_pago'] == 1){
+          $efectivo_pago=1;
+          $ticket_id= $ticket->guardar_ticket($id_mov,$datos_mov['id_hab'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,$total_pago,0,0,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
+        }else{
+          $efectivo_pago=0;
+          $ticket_id= $ticket->guardar_ticket($id_mov,$datos_mov['id_hab'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,0,0,$total_pago,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
+        }
+        $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$total_pago,($total_pago*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+        
+        
+
+    }
+
+    }
 }
 
-  
-  $logs->guardar_log($_POST['usuario_id'],"Editar reservacion: ". $_POST['id']);
+  $logs->guardar_log($_POST['usuario_id'],$log_msj. $_POST['id']);
   echo $_POST['id'];
 ?>

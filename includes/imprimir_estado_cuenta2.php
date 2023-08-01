@@ -281,7 +281,6 @@ while($fila=mysqli_fetch_array($consulta_abonos)) {
     $descripcion= substr($fila['concepto'], 0, 17);
     $largo= strlen($fila['concepto']);
     if($fila['edo'] == 1) {
-        $total_abonos= $total_abonos + $fila['abono'];
         if($descripcion == 'Total reservacion') {
             $pdf->Cell(40, 5, '', 0, 0, 'C');
             if($largo > 17) {

@@ -81,7 +81,7 @@
         }
       }
 
-      function mostrar_hab_option(){
+      function mostrar_hab_option($hab_id=0){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab  = 1 AND hab.estado=0 ORDER BY hab.id";// nombre
@@ -90,12 +90,13 @@
 
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<option data-habid="'.$fila['ID'].'" data-habtipo="'.$fila['tipo'].'" value="'.$fila['nom'].'">'.$fila['nom'].'</option>';
-         
+          if($hab_id == $fila['ID']){
+            echo '<option selected data-habid="'.$fila['ID'].'" data-habtipo="'.$fila['tipo'].'" value="'.$fila['nom'].'">'.$fila['nom'].'</option>';
+          }else{
+            echo '<option data-habid="'.$fila['ID'].'" data-habtipo="'.$fila['tipo'].'" value="'.$fila['nom'].'">'.$fila['nom'].'</option>';
+          }
         }
       }
-    
-
       // Mostramos las habitaciones
       function mostrar($id){
         include_once('clase_usuario.php');

@@ -81,10 +81,15 @@
                 ';
              
                 while ($fila = mysqli_fetch_array($consulta)) {
+                    $hab_nombre = $fila['hab_nombre'];
+                    if($hab_nombre == null){
+                      $hab_nombre="CM: ". $fila['cm_nombre'];
+                    }
+
                     echo '<tr class="table-primary  text-center">
                     <td>'.date('d-m-Y H:m:s',$fila['fecha']).'</td>
                     <td>'.$fila['fcasa'].'</td>
-                    <td>'.$fila['hab_nombre'].'</td>
+                    <td>'.$hab_nombre.'</td>
                     <td>'.$fila['descripcion'].'</td>
                     <td>'.$fila['cargo'].'</td>
                     <td>'.$fila['abono'].'</td>

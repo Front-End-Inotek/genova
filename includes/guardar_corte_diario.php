@@ -123,12 +123,14 @@ if($contador_row!=0) {
     $pdf->SetFont('Arial', '', 10);
     while ($fila = mysqli_fetch_array($consulta)) {
         $border_text="1";
-        // if($c==0){
-        //     $border_text="LTR";
-        // }
+        $hab_nombre = $fila['hab_nombre'];
+        if($hab_nombre == null){
+          $hab_nombre="CM: ". $fila['cm_nombre'];
+        }
+
         $pdf->Cell(38, 6, iconv("UTF-8", "ISO-8859-1", date('d-m-Y H:m:s', $fila['fecha'])), $border_text, 0, 'C');
         $pdf->Cell(25, 6, iconv("UTF-8", "ISO-8859-1", $fila['fcasa']), $border_text, 0, 'C');
-        $pdf->Cell(25, 6, iconv("UTF-8", "ISO-8859-1", $fila['hab_nombre']), $border_text, 0, 'C');
+        $pdf->Cell(25, 6, iconv("UTF-8", "ISO-8859-1", $hab_nombre), $border_text, 0, 'C');
         $pdf->Cell(35, 6, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), $border_text, 0, 'C');
         $pdf->Cell(22, 6, iconv("UTF-8", "ISO-8859-1", $fila['cargo']), $border_text, 0, 'C');
         $pdf->Cell(22, 6, iconv("UTF-8", "ISO-8859-1", $fila['abono']), $border_text, 0, 'C');

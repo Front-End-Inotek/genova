@@ -180,6 +180,29 @@
         }
         return $fin_hospedaje;
       }
+
+      function cambiar_finalizado($mov){
+        $sentencia = "UPDATE `movimiento` SET
+        `finalizado` = '0'
+        WHERE `id` = '$mov';";
+        $comentario="Modificar el detalle inicio del movimiento";
+        $this->realizaConsulta($sentencia,$comentario);
+      }
+
+      // Obtener el tiempo de finalizado
+      function saber_tiempo_finalizado_renta($mov){
+        $finalizado= 0;
+        $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1 ";
+        $comentario="Obtener el tiempo de fin de hospedaje";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+            $finalizado= $fila['finalizado'];
+        }
+        return $finalizado;
+      }
+
       // Obtener el tiempo de utlima rente de fin hospedaje
       function saber_tiempo_ultima_renta($hab){
         $finalizado= 0;

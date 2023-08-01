@@ -2542,7 +2542,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "estado_credito":estado_credito,
         "limite_credito":limite_credito,
       };
-    // console.log(datos)
+    // console.log(datos, ruta)
     // return
     var correo = $("#correo").val()
 
@@ -2560,8 +2560,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
             success:function(res){
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
-                // console.log(res)
-                // return
+                console.log(res)
+                return
                 confirarmNo = document.getElementById('no')
                 if(confirarmNo!=null){
                     confirarmNo = confirarmNo.checked
@@ -2837,7 +2837,6 @@ function guardarUsoCasa(hab_id,estado){
 }
 
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
-
 
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
         alert("Fecha de asignación inválida")

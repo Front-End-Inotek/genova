@@ -129,6 +129,29 @@
 ,$_POST['estado_credito'],$_POST['limite_credito']);
 
 
+if($_POST['forma_pago'] == 2){
+  $factuar= 1;
+}else{
+  $factuar= 0;
+}
+
+$cantidad=1;
+$tipo_cargo=3;
+$resta= 0;
+$nombre_concepto="Pago al ingresar";
+$categoria= $actual_hab;
+$nueva_etiqueta= $labels->obtener_etiqueta();
+$labels->actualizar_etiqueta();
+$comanda= $pedido_rest->saber_comanda($id_movimiento);
+if($_POST['forma_pago'] == 1){
+  $efectivo_pago=1;
+  $ticket_id= $ticket->guardar_ticket($id_movimiento,$actual_hab,$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,$total_pago,0,0,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
+}else{
+  $efectivo_pago=0;
+  $ticket_id= $ticket->guardar_ticket($id_movimiento,$actual_hab,$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,0,0,$total_pago,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
+}
+$concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$total_pago,($total_pago*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+
 
 
   //si hay preasignada 

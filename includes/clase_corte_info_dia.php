@@ -43,8 +43,8 @@
 	  hab 
 	  inner join tipo_hab on hab.tipo = tipo_hab.id
 	  inner join concepto on hab.id = concepto.categoria
-	  where hab.estado = 1
-	  and tipo_hab.estado=1
+	--   where hab.estado = 1
+	  where tipo_hab.estado=1
       GROUP by tipo_hab.nombre";
 	  $comentario="Obtener las tarifas de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -96,7 +96,7 @@
 	  $this->total_productos_rest= $total_productos_rest; 
 
 	  // Obtenemos el total global
-	  $this->total_global= $total_hab + $total_restaurante_entrada;
+	  $this->total_global= $total_hab + $total_restaurante_entrada + $total_cuenta_maestra;
 
 	  include_once('clase_forma_pago.php');
 	  $forma_pago = NEW Forma_pago(0);
@@ -115,7 +115,7 @@
 	   AND ticket.id_usuario =$id_usuario
 	   ";//1 
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
-	//   echo $sentencia;
+	//  echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
