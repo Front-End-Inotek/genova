@@ -4597,26 +4597,26 @@ function guardar_usuario(){
         if(contrasena == recontrasena){
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
             var datos = {
-                  "usuario": usuario,
-                  "contrasena": contrasena,
-                  "recontrasena": recontrasena,
-                  "nivel": nivel,
-                  "nombre_completo": nombre_completo,
-                  "puesto": puesto,
-                  "celular": celular,
-                  "correo": correo,
-                  "direccion": direccion,
-                  "id":id,
+                    "usuario": usuario,
+                    "contrasena": contrasena,
+                    "recontrasena": recontrasena,
+                    "nivel": nivel,
+                    "nombre_completo": nombre_completo,
+                    "puesto": puesto,
+                    "celular": celular,
+                    "correo": correo,
+                    "direccion": direccion,
+                    "id":id,
                 };
             $.ajax({
-                  async:true,
-                  type: "POST",
-                  dataType: "html",
-                  contentType: "application/x-www-form-urlencoded",
-                  url:"includes/guardar_usuario.php",
-                  data:datos,
-                  beforeSend:loaderbar,
-                  success:function(res){
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/guardar_usuario.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                success:function(res){
                     console.log(res)
                     if(res.includes("Duplicate entry")){
                         alert("El nombre de usuario ya se encuentra ocupado")
@@ -4625,10 +4625,10 @@ function guardar_usuario(){
                     }else{
                         ver_usuarios()
                     }
-                  },
+                },
                   //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
+                    timeout:5000,
+                    error:problemas_sistema
                 });
             return false;
         }else{
@@ -4655,7 +4655,7 @@ function ver_usuarios(){
 function ver_usuarios_paginacion(buton,posicion){
     //alert(id);
     var id=localStorage.getItem("id");
-    $("#paginacion_usuarios").load("includes/ver_usuarios_paginacion.php?posicion="+posicion+"&id="+id);    
+    $("#paginacion_usuarios").load("includes/ver_usuarios_paginacion.php?posicion="+posicion+"&id="+id);
 }
 
 // Editar un usuario
@@ -5002,85 +5002,85 @@ function modificar_usuario(id){
         //if(contrasena == recontrasena){
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
             var datos = {
-                  "id": id,
-                  "usuario": usuario,
-                  //"contrasena": contrasena,
-                  //"recontrasena": recontrasena,
-                  "nivel": nivel,
-                  "nombre_completo": nombre_completo,
-                  "puesto": puesto,
-                  "celular": celular,
-                  "correo": correo,
-				  "direccion": direccion,
-                  "usuario_ver": usuario_ver,
-                  "usuario_agregar": usuario_agregar,
-                  "usuario_editar": usuario_editar,
-                  "usuario_borrar": usuario_borrar,
-                  "huesped_ver": huesped_ver,
-                  "huesped_agregar": huesped_agregar,
-                  "huesped_editar": huesped_editar,
-                  "huesped_borrar": huesped_borrar,
-                  /*"tipo_ver": tipo_ver,
-                  "tipo_agregar": tipo_agregar,
-                  "tipo_editar": tipo_editar,
-                  "tipo_borrar": tipo_borrar,*/
-                  "tarifa_ver": tarifa_ver,
-                  "tarifa_agregar": tarifa_agregar,
-                  "tarifa_editar": tarifa_editar,
-                  "tarifa_borrar": tarifa_borrar,
-                  /*"hab_ver": hab_ver,
-                  "hab_agregar": hab_agregar,
-                  "hab_editar": hab_editar,
-                  "hab_borrar": hab_borrar,*/
-                  "reservacion_ver": reservacion_ver,
-                  "reservacion_agregar": reservacion_agregar,
-                  "reservacion_editar": reservacion_editar,
-                  "reservacion_borrar": reservacion_borrar,
-                  "reservacion_preasignar":reservacion_preasignar,
-                  "reporte_ver": reporte_ver,
-                  "reporte_agregar": reporte_agregar,
-                  "forma_pago_ver": forma_pago_ver,
-                  "forma_pago_agregar": forma_pago_agregar,
-                  "forma_pago_editar": forma_pago_editar,
-                  "forma_pago_borrar": forma_pago_borrar,
-                  "inventario_ver": inventario_ver,
-                  "inventario_agregar": inventario_agregar,
-                  "inventario_editar": inventario_editar,
-                  "inventario_borrar": inventario_borrar,
-                  "inventario_surtir": inventario_surtir,
-                  "categoria_ver": categoria_ver,
-                  "categoria_agregar": categoria_agregar,
-                  "categoria_editar": categoria_editar,
-                  "categoria_borrar": categoria_borrar,
-                  "restaurante_ver": restaurante_ver,
-                  "restaurante_agregar": restaurante_agregar,
-                  "restaurante_editar": restaurante_editar,
-                  "restaurante_borrar": restaurante_borrar,
-                  "cupon_ver": cupon_ver,
-                  "cupon_agregar": cupon_agregar,
-                  "cupon_editar": cupon_editar,
-                  "cupon_borrar": cupon_borrar,
-                  "logs_ver": logs_ver,
-                  "auditoria_ver":auditoria_ver,
-                  "auditoria_editar":auditoria_editar,
-                  "llegadas_salidas_ver":llegadas_salidas_ver,
-                  "usuario_id": usuario_id,
+                    "id": id,
+                    "usuario": usuario,
+                    //"contrasena": contrasena,
+                    //"recontrasena": recontrasena,
+                    "nivel": nivel,
+                    "nombre_completo": nombre_completo,
+                    "puesto": puesto,
+                    "celular": celular,
+                    "correo": correo,
+                    "direccion": direccion,
+                    "usuario_ver": usuario_ver,
+                    "usuario_agregar": usuario_agregar,
+                    "usuario_editar": usuario_editar,
+                    "usuario_borrar": usuario_borrar,
+                    "huesped_ver": huesped_ver,
+                    "huesped_agregar": huesped_agregar,
+                    "huesped_editar": huesped_editar,
+                    "huesped_borrar": huesped_borrar,
+                    /*"tipo_ver": tipo_ver,
+                    "tipo_agregar": tipo_agregar,
+                    "tipo_editar": tipo_editar,
+                    "tipo_borrar": tipo_borrar,*/
+                    "tarifa_ver": tarifa_ver,
+                    "tarifa_agregar": tarifa_agregar,
+                    "tarifa_editar": tarifa_editar,
+                    "tarifa_borrar": tarifa_borrar,
+                    /*"hab_ver": hab_ver,
+                    "hab_agregar": hab_agregar,
+                    "hab_editar": hab_editar,
+                    "hab_borrar": hab_borrar,*/
+                    "reservacion_ver": reservacion_ver,
+                    "reservacion_agregar": reservacion_agregar,
+                    "reservacion_editar": reservacion_editar,
+                    "reservacion_borrar": reservacion_borrar,
+                    "reservacion_preasignar":reservacion_preasignar,
+                    "reporte_ver": reporte_ver,
+                    "reporte_agregar": reporte_agregar,
+                    "forma_pago_ver": forma_pago_ver,
+                    "forma_pago_agregar": forma_pago_agregar,
+                    "forma_pago_editar": forma_pago_editar,
+                    "forma_pago_borrar": forma_pago_borrar,
+                    "inventario_ver": inventario_ver,
+                    "inventario_agregar": inventario_agregar,
+                    "inventario_editar": inventario_editar,
+                    "inventario_borrar": inventario_borrar,
+                    "inventario_surtir": inventario_surtir,
+                    "categoria_ver": categoria_ver,
+                    "categoria_agregar": categoria_agregar,
+                    "categoria_editar": categoria_editar,
+                    "categoria_borrar": categoria_borrar,
+                    "restaurante_ver": restaurante_ver,
+                    "restaurante_agregar": restaurante_agregar,
+                    "restaurante_editar": restaurante_editar,
+                    "restaurante_borrar": restaurante_borrar,
+                    "cupon_ver": cupon_ver,
+                    "cupon_agregar": cupon_agregar,
+                    "cupon_editar": cupon_editar,
+                    "cupon_borrar": cupon_borrar,
+                    "logs_ver": logs_ver,
+                    "auditoria_ver":auditoria_ver,
+                    "auditoria_editar":auditoria_editar,
+                    "llegadas_salidas_ver":llegadas_salidas_ver,
+                    "usuario_id": usuario_id,
 			};
 		$.ajax({
-			  async:true,
-			  type: "POST",
-			  dataType: "html",
-			  contentType: "application/x-www-form-urlencoded",
-			  url:"includes/aplicar_editar_usuario.php",
-			  data:datos,
-			  //beforeSend:loaderbar,
-              success:function(res){
-                //console.log(res)
-                ver_usuarios()
-              },
-              //success:problemas_sistema,
-			  timeout:5000,
-			  error:problemas_sistema
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/aplicar_editar_usuario.php",
+                data:datos,
+                //beforeSend:loaderbar,
+                success:function(res){
+                    //console.log(res)
+                    ver_usuarios()
+                },
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
 			});
             return false;
         /*}else{
@@ -5119,7 +5119,7 @@ function borrar_usuario(id){
 
 // Modal de borrar usuario
 function aceptar_borrar_usuario(id){
-	$("#mostrar_herramientas").load("includes/borrar_modal_usuario.php?id="+id); 
+	$("#mostrar_herramientas").load("includes/borrar_modal_usuario.php?id="+id);
 }
 
 // Regresar a la pagina anterior de editar usuario
@@ -5157,12 +5157,11 @@ function estado_cuenta(hab_id,estado,mov=0){
 }
 function validarNumero(event) {
     const charCode = event.charCode;
-    
     // Check if the pressed key is a number (charCode 48 to 57 represent digits 0 to 9)
     if (charCode < 48 || charCode > 57) {
-      event.preventDefault();
+    event.preventDefault();
     }
-  }
+}
 // Agregar un cargo al cargo por habitacion //
 function agregar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
 
@@ -5180,43 +5179,41 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
     }else if (descripcion.length >0 && cargo >0){
         $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
-              "hab_id": hab_id,
-              "estado": estado,
-              "faltante": faltante,
-              "descripcion": descripcion,
-              "cargo": cargo,
-              "abono": 0,
-              "usuario_id": usuario_id,
-              "mov":mov,
-              "id_maestra":id_maestra,
+            "hab_id": hab_id,
+            "estado": estado,
+            "faltante": faltante,
+            "descripcion": descripcion,
+            "cargo": cargo,
+            "abono": 0,
+            "usuario_id": usuario_id,
+            "mov":mov,
+            "id_maestra":id_maestra,
             };
         $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/guardar_cargo.php",
-              data:datos,
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/guardar_cargo.php",
+            data:datos,
               //beforeSend:loaderbar,
-              success:function(res){
+            success:function(res){
                 console.log(res)
                 if(id_maestra==0){
                     recibe_datos_monto(res)
                 }else{
                     recibe_datos_monto_maestra(res)
                 }
-              },
+            },
               //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+            timeout:5000,
+            error:problemas_sistema
             });
         return false;
     }else{
         alert("Campos incompletos");
     }
 }
-
-
 
 // Agregar un abono al cargo por habitacion //
 function agregar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
@@ -5242,28 +5239,28 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
     if(descripcion.length >0 && forma_pago >0 && abono >0){
         $("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
-              "hab_id": hab_id,
-              "estado": estado,
-              "faltante": faltante,
-              "descripcion": descripcion,
-              "forma_pago": forma_pago,
-              "cargo": cargo,
-              "abono": abono,
-              "usuario_id": usuario_id,
-              "mov":mov,
-              "id_maestra":id_maestra,
+                "hab_id": hab_id,
+                "estado": estado,
+                "faltante": faltante,
+                "descripcion": descripcion,
+                "forma_pago": forma_pago,
+                "cargo": cargo,
+                "abono": abono,
+                "usuario_id": usuario_id,
+                "mov":mov,
+                "id_maestra":id_maestra,
             };
         //  console.log(datos)
         //  return
         $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/guardar_abono.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:function(res){
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/guardar_abono.php",
+                data:datos,
+                //beforeSend:loaderbar,
+                success:function(res){
                 // console.log(res)
                 // return
                 if(id_maestra==0){
@@ -5273,10 +5270,10 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
                 }else{
                     recibe_datos_monto_maestra(res)
                 }
-              },
+                },
               //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+                timeout:5000,
+                error:problemas_sistema
             });
         return false;
     }else{
@@ -5316,25 +5313,25 @@ function confirmar_cambiar_cargos(){
         icon: "warning",
         buttons: {
             cancel: {
-              text: "Cancelar",
-              value: null,
-              visible: true,
-              className: "",
-              closeModal: true,
+            text: "Cancelar",
+            value: null,
+            visible: true,
+            className: "",
+            closeModal: true,
             },
             confirm: {
-              text: "OK",
-              value: true,
-              visible: true,
-              className: "",
-              closeModal: true
+            text: "OK",
+            value: true,
+            visible: true,
+            className: "",
+            closeModal: true
             }
-          },
+        },
         dangerMode: true,
         })
         .then((willDelete) => {
         if (willDelete) {
-         campos_cargos()
+        campos_cargos()
         }
         });
     }
@@ -5346,7 +5343,7 @@ function confirmar_cambiar_cargos(){
         var campos_habs = document.getElementsByClassName('campos_habs')
         for (var i = 0; i < cargos.length; i++) {
             // var tarifa=0;
-             if(cargos[i].value=="" && campos_habs[i].checked){
+            if(cargos[i].value=="" && campos_habs[i].checked){
                 array_cargos.push({
                     "reservaid":cargos[i].dataset.reservaid,
                     "valor":0,
@@ -5365,7 +5362,7 @@ function confirmar_cambiar_cargos(){
             var datos = {
                 "datos_cargos": JSON.stringify(array_cargos),
                 "usuario_id": usuario_id,
-              };
+            };
             $.ajax({
                 async:true,
                 type: "POST",
@@ -5382,7 +5379,7 @@ function confirmar_cambiar_cargos(){
                 //success:problemas_sistema,
                 timeout:5000,
                 error:problemas_sistema
-              });
+            });
         }
         return false;
     }
@@ -5393,11 +5390,11 @@ function cajasAuditoria() {
     if(cajas) {
         // Iterate each checkbox
         $('.campos_habs').each(function() {
-            this.checked = true;                        
+            this.checked = true;
         });
     } else {
         $('.campos_habs').each(function() {
-            this.checked = false;                       
+            this.checked = false;
         });
     }
 
@@ -5479,34 +5476,34 @@ function modificar_herramientas_cargo(id,hab_id,estado,id_maestra=0,mov=0){
     if(id >0){
 		$("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
         var datos = {
-              "id": id,
-              "hab_id": hab_id,
-              "estado": estado,
-			  "cargo": cargo,
-              "usuario_id": usuario_id,
-              "id_maestra": id_maestra,
-              "mov":mov,
+                "id": id,
+                "hab_id": hab_id,
+                "estado": estado,
+                "cargo": cargo,
+                "usuario_id": usuario_id,
+                "id_maestra": id_maestra,
+                "mov":mov,
             };
         // console.log(datos)
         // return
         $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_herramientas_cargo.php",
-              data:datos,
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/aplicar_editar_herramientas_cargo.php",
+                data:datos,
               //beforeSend:loaderbar,
-              success:function(res){
+            success:function(res){
                 if(id_maestra==0){
                     recibe_datos_monto(res)
                 }else{
                     recibe_datos_monto_maestra(res)
                 }
-              },
+            },
               //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+                timeout:5000,
+                error:problemas_sistema
             });
         return false;
     }else{
@@ -5526,31 +5523,31 @@ function borrar_herramientas_cargo(id,hab_id,estado,id_maestra,mov){
 
     if(id >0){
         var datos = {
-              "id": id,
-              "hab_id": hab_id,
-              "estado": estado,
-              "usuario_id": usuario_id,
-              "id_maestra":id_maestra,
-              "mov":mov
+                "id": id,
+                "hab_id": hab_id,
+                "estado": estado,
+                "usuario_id": usuario_id,
+                "id_maestra":id_maestra,
+                "mov":mov
             };
         $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/borrar_herramientas_cargo.php",
-              data:datos,
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/borrar_herramientas_cargo.php",
+                data:datos,
               //beforeSend:loaderbar,
-              success:function(res){
+            success:function(res){
                 if(id_maestra==0){
                     recibe_datos_monto(res)
                 }else{
                     recibe_datos_monto_maestra(res)
                 }
-              },
+            },
               //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+                timeout:5000,
+                error:problemas_sistema
             });
         return false;
     }else{
@@ -5577,32 +5574,32 @@ function modificar_herramientas_abono(id,hab_id,estado,id_maestra=0,mov=0){
     if(id >0){
 		$("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
-              "id": id,
-              "hab_id": hab_id,
-              "estado": estado,
-			  "abono": abono,
-              "usuario_id": usuario_id,
-              "id_maestra":id_maestra,
-              "mov":mov,
+                "id": id,
+                "hab_id": hab_id,
+                "estado": estado,
+                "abono": abono,
+                "usuario_id": usuario_id,
+                "id_maestra":id_maestra,
+                "mov":mov,
             };
         $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_herramientas_abono.php",
-              data:datos,
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/aplicar_editar_herramientas_abono.php",
+                data:datos,
               //beforeSend:loaderbar,
-              success:function(res){
+            success:function(res){
                 if(id_maestra==0){
                     recibe_datos_monto(res)
                 }else{
                     recibe_datos_monto_maestra(res)
                 }
-              },
+            },
               //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+                timeout:5000,
+                error:problemas_sistema
             });
         return false;
     }else{
@@ -5622,31 +5619,31 @@ function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
 
     if(id >0){
         var datos = {
-              "id": id,
-              "hab_id": hab_id,
-              "estado": estado,
-              "usuario_id": usuario_id,
-              "mov":mov,
-              "id_maestra":id_maestra,
+                "id": id,
+                "hab_id": hab_id,
+                "estado": estado,
+                "usuario_id": usuario_id,
+                "mov":mov,
+                "id_maestra":id_maestra,
             };
         $.ajax({
-              async:true,
+                async:true,
               type: "POST",
               dataType: "html",
               contentType: "application/x-www-form-urlencoded",
               url:"includes/borrar_herramientas_abono.php",
               data:datos,
               //beforeSend:loaderbar,
-              success:function(res){
+            success:function(res){
                 if(id_maestra==0){
                     recibe_datos_monto(res)
                 }else{
                     recibe_datos_monto_maestra(res)
                 }
-              },
+            },
               //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+                timeout:5000,
+                error:problemas_sistema
             });
         return false;
     }else{
@@ -5667,26 +5664,26 @@ function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
     $('#caja_herramientas').modal('hide');
 
 	var datos = {
-          "id_hab": id_hab,
-          "mov": mov,
-          "monto": monto,
-          "id": id,
-          "hab_id": hab_id,
-          "estado": estado,
-		  "usuario_id": usuario_id,
+            "id_hab": id_hab,
+            "mov": mov,
+            "monto": monto,
+            "id": id,
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario_id": usuario_id,
 		};
 	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/cambiar_hab_monto.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:recibe_datos_monto,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/cambiar_hab_monto.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:recibe_datos_monto,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
 		});
 	return false;
 }
@@ -5703,26 +5700,26 @@ function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
     $('#caja_herramientas').modal('hide');
 
 	var datos = {
-          "id_hab": id_hab,
-          "nombre_hab": nombre_hab,
-          "mov_hab": mov_hab,
-          "hab_id": hab_id,
-          "estado": estado,
-          "mov": mov,
-		  "usuario_id": usuario_id,
+            "id_hab": id_hab,
+            "nombre_hab": nombre_hab,
+            "mov_hab": mov_hab,
+            "hab_id": hab_id,
+            "estado": estado,
+            "mov": mov,
+            "usuario_id": usuario_id,
 		};
 	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded", 
-		  url:"includes/cambiar_hab_cuentas.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:recibe_datos_monto,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded", 
+            url:"includes/cambiar_hab_cuentas.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:recibe_datos_monto,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
 		});
 	return false;
 }
@@ -5734,7 +5731,6 @@ function guardar_categoria(){
 	var usuario_id=localStorage.getItem("id");
     var nombre= encodeURI(document.getElementById("nombre").value);
     $('#caja_herramientas').modal('hide');
-	
     if(nombre.length >0){
 		var datos = {
 			"nombre": nombre,
@@ -5784,22 +5780,22 @@ function modificar_categoria(id){
     if(id >0 && nombre.length >0){
 		$("#boton_categoria").html('<div class="spinner-border text-primary"></div>');
         var datos = {
-              "id": id,
-              "nombre": nombre,
-              "usuario_id": usuario_id,
+                "id": id,
+                "nombre": nombre,
+                "usuario_id": usuario_id,
             };
         $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_categoria.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:ver_categorias,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/aplicar_editar_categoria.php",
+                data:datos,
+                //beforeSend:loaderbar,
+                success:ver_categorias,
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
             });
         return false;
     }else{
@@ -5866,30 +5862,30 @@ function guardar_inventario(){
 	if(nombre.length >0 && categoria >0 && precio >0){
 			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
-			 	  "nombre": nombre,
-				  "descripcion": descripcion,
-				  "categoria": categoria,
-                  "precio": precio,
-                  "precio_compra": precio_compra,
-                  "stock": stock,
-                  "inventario": inventario,
-                  "bodega_inventario": bodega_inventario,
-                  "bodega_stock": bodega_stock,
-                  "clave": clave,
-                  "usuario_id": usuario_id,
+                    "nombre": nombre,
+                    "descripcion": descripcion,
+                    "categoria": categoria,
+                    "precio": precio,
+                    "precio_compra": precio_compra,
+                    "stock": stock,
+                    "inventario": inventario,
+                    "bodega_inventario": bodega_inventario,
+                    "bodega_stock": bodega_stock,
+                    "clave": clave,
+                    "usuario_id": usuario_id,
 				};
 			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_inventario.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_inventario,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/guardar_inventario.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                    success:ver_inventario,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
 				});
 				return false;
 			}else{
@@ -5995,31 +5991,31 @@ function modificar_inventario(id){
 	if(id >0){
 		$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
         var datos = {
-			  "id": id,
-              "nombre": nombre,
-			  "descripcion": descripcion,
-			  "categoria": categoria,
-              "precio": precio,
-              "precio_compra": precio_compra,
-              "stock": stock,
-              "inventario": inventario,
-              "bodega_inventario": bodega_inventario,
-              "bodega_stock": bodega_stock,
-              "clave": clave,
-			  "usuario_id": usuario_id,
+                "id": id,
+                "nombre": nombre,
+                "descripcion": descripcion,
+                "categoria": categoria,
+                "precio": precio,
+                "precio_compra": precio_compra,
+                "stock": stock,
+                "inventario": inventario,
+                "bodega_inventario": bodega_inventario,
+                "bodega_stock": bodega_stock,
+                "clave": clave,
+                "usuario_id": usuario_id,
             };
         $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/aplicar_editar_inventario.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:ver_inventario,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/aplicar_editar_inventario.php",
+                data:datos,
+                //beforeSend:loaderbar,
+                success:ver_inventario,
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
             });
         return false;
     }else{
@@ -6135,17 +6131,17 @@ function inventario_surtir_producto(producto){
 			    "cantidad_producto": cantidad_producto,
 			};
 		$.ajax({
-			  async:true,
-			  type: "POST",
-			  dataType: "html",
-			  contentType: "application/x-www-form-urlencoded",
-			  url:"includes/inventario_surtir.php",
-			  data:datos,
-			  beforeSend:loaderbar,
-			  success:cargar_surtir,
-			  //success:problemas_hab,
-			  timeout:5000,
-			  error:problemas_sistema
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/inventario_surtir.php",
+                data:datos,
+                beforeSend:loaderbar,
+                success:cargar_surtir,
+                //success:problemas_hab,
+                timeout:5000,
+                error:problemas_sistema
 			});
 		return false;
 	}else{
@@ -6172,21 +6168,21 @@ function editar_surtir_inventario(id){
         $('#caja_herramientas').modal('hide');
 		$("#boton_surtir").html('<div class="spinner-border text-primary"></div>');
         var datos = {
-			  "id": id,
-              "cantidad": cantidad,
+                "id": id,
+                "cantidad": cantidad,
             };
         $.ajax({
-              async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/editar_surtir_inventario.php",
-              data:datos,
-              //beforeSend:loaderbar,
-              success:cargar_surtir,
-              //success:problemas_sistema,
-              timeout:5000,
-              error:problemas_sistema
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/editar_surtir_inventario.php",
+                data:datos,
+                //beforeSend:loaderbar,
+                success:cargar_surtir,
+                //success:problemas_sistema,
+                timeout:5000,
+                error:problemas_sistema
             });
         return false;
     }else{
@@ -6241,12 +6237,12 @@ function comprobarEmail(){
     }
 }
 
-// Aplicar surtir inventario 
+// Aplicar surtir inventario
 function aplicar_surtir_inventario(){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     $("#area_trabajo_menu").load("includes/aplicar_surtir_inventario.php?usuario_id="+usuario_id);
-    reporte_surtir_inventario(0); 
+    reporte_surtir_inventario(0);
     principal();
 }
 
@@ -6333,7 +6329,7 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa,m
 function recibe_datos_restaurante(datos){
     //alert(datos);
     var res = datos.split("/");
-   console.log(res[5]);
+    console.log(res[5]);
     agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3], res[4], res[5]);
 }
 
@@ -6465,17 +6461,17 @@ function guardar_inventario(){
                 "usuario_id": usuario_id,
 				};
 			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_inventario.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_inventario,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/guardar_inventario.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                    success:ver_inventario,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
 				});
 			return false;
 			}else{
@@ -6494,7 +6490,7 @@ function pedir_rest_cobro(total,hab_id,estado,mov,id_maestra=0){
 
 // Pedir restaurante cobro directo
 function pedir_rest_cobro_directo(total,hab_id,estado,mov){
-   $("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
+    $("#mostrar_herramientas").load("includes/modal_pedir_rest_cobro.php?total="+total+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov); 
 }
 
 // Pedir restaurante el cobro se carga a la habitacion
@@ -6603,7 +6599,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             url:"includes/aplicar_rest_cobro.php",
                             data:datos,
                             beforeSend:loaderbar,
-                             success:principal,
+                            success:principal,
                             //success:problemas_sistema,
                             timeout:5000,
                             error:problemas_sistema
@@ -6643,8 +6639,8 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
                             timeout:5000,
                             error:problemas
                             });
-                        return false;                        
-                    }             
+                        return false;
+                    }
                 }else{
                         alert("¡Falta agregar el folio del pago de la tarjeta!");
                     }
@@ -6717,7 +6713,7 @@ function cargar_rest_cobro_mesa(total,mesa_id,estado,mov){
                     "descuento": descuento,
                     "total_descuento": total_descuento,
                     "total_final": total_final,
-                    "comentario": comentario,       
+                    "comentario": comentario,
                     "total_inicial": total_inicial,
                     "mesa_id": mesa_id,
                     "estado": estado,
@@ -6803,27 +6799,26 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
 function aplicar_rest_cobro_mesa(total,hab_id,estado,mov){
     var usuario_id=localStorage.getItem("id");
     var comentario= encodeURI(document.getElementById("comentario").value);
-	
     var datos = {
-           "total": total,
-           "comentario": comentario,
-           "hab_id": hab_id,
-           "estado": estado,
-           "mov": mov,
-           "usuario_id": usuario_id,
+            "total": total,
+            "comentario": comentario,
+            "hab_id": hab_id,
+            "estado": estado,
+            "mov": mov,
+            "usuario_id": usuario_id,
             };
             $.ajax({
-                  async:true,
-                  type: "POST",
-                  dataType: "html",
-                  contentType: "application/x-www-form-urlencoded",
-                  url:"includes/aplicar_rest_cobro_mesa.php",
-                  data:datos,
-                  beforeSend:loaderbar,
-                  success:mesas_restaurante,
-                  //success:problemas,
-                  timeout:5000,
-                  error:problemas
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/aplicar_rest_cobro_mesa.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                    success:mesas_restaurante,
+                    //success:problemas,
+                    timeout:5000,
+                    error:problemas
                 });
                 return false;
 }
@@ -6923,7 +6918,6 @@ function mesa_disponible_asignar(mesa_id,estado){
 function disponible_asignar_mesa(mesa_id,estado){
 	var usuario_id=localStorage.getItem("id");
 	var personas= document.getElementById("personas").value;
-	
 	if(personas >0){
 		$('#caja_herramientas').modal('hide');
 		var datos = {
@@ -6974,14 +6968,13 @@ function editar_modal_producto_mesa(mesa_id,producto,cantidad,precio,id_producto
     $("#mostrar_herramientas").load("includes/editar_modal_producto_mesa.php?mesa_id="+mesa_id+"&producto="+producto+"&cantidad="+cantidad+"&precio="+precio+"&id_producto="+id_producto);
 }
 
-// Editar producto del concepto de una mesa 
+// Editar producto del concepto de una mesa
 function modificar_producto_mesa(mesa_id,producto,precio,id_producto,cantidad_antes){
 	var estado= 1;
 	var id=localStorage.getItem("id");
     var cantidad= document.getElementById("cantidad").value;
 	var usuario= encodeURI(document.getElementById("usuario").value);
     var contrasena= document.getElementById("contrasena").value;
-    
 
 	if(cantidad>0 && usuario.length>0 && contrasena.length>0){
         var datos = {
@@ -7011,8 +7004,8 @@ function modificar_producto_mesa(mesa_id,producto,precio,id_producto,cantidad_an
             });
         return false;
     }else{
-        alert("Campos incompletos"); 
-    }        
+        alert("Campos incompletos");
+    }
 }
 
 // Mensaje de usuario o contrasena mal al editar
@@ -7021,7 +7014,7 @@ function recibe_datos_editar_mesa(datos){
 	var id= parseInt(res[2]);
 	if(id >= 1){
 		localStorage.setItem("id",id);
-    	$('#caja_herramientas').modal('hide');
+        $('#caja_herramientas').modal('hide');
 		ver_caja_rest(res[0],res[1]);
 	}else{
 		alert("¡Creo que has escrito mal tu usuario o contraseña!"); 
@@ -7041,7 +7034,6 @@ function eliminar_producto_mesa(mesa_id,producto,id_producto){
 	var id=localStorage.getItem("id");
 	var usuario= encodeURI(document.getElementById("usuario").value);
     var contrasena= document.getElementById("contrasena").value;
-    
 
 	if(usuario.length>0 && contrasena.length>0){
         var datos = {
@@ -7068,8 +7060,8 @@ function eliminar_producto_mesa(mesa_id,producto,id_producto){
             });
         return false;
     }else{
-        alert("Campos incompletos"); 
-    }        
+        alert("Campos incompletos");
+    }
 }
 
 // Mensaje de usuario o contrasena mal al borrar
@@ -7080,9 +7072,8 @@ function recibe_datos_borrar_mesa(datos){
 		localStorage.setItem("id",id);
     	$('#caja_herramientas').modal('hide');
 		ver_caja_rest(res[0],res[1]);
-	
 	}else{
-		alert("¡Creo que has escrito mal tu usuario o contraseña!"); 
+		alert("¡Creo que has escrito mal tu usuario o contraseña!");
 		borrar_modal_producto_mesa(res[0],res[3],res[4]);
 		//$("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-warning"><span class="glyphicon glyphicon-remove"></span> Creo que has escrito mal tu usuario o contraseña </strong>');
 	}
@@ -7097,7 +7088,6 @@ function mesa_cambiar_personas(mesa_id,estado){
 function cambiar_personas(mesa_id,estado){
 	var usuario_id=localStorage.getItem("id");
 	var personas= document.getElementById("personas").value;
-	
 	if(personas > 0){
 		$('#caja_herramientas').modal('hide');
 		var datos = {
@@ -7133,7 +7123,6 @@ function mesa_imprimir_ticket(mesa_id,estado){
 // Imprimir el ticket de la mesa
 function imprimir_ticket(mesa_id,estado){
 	var usuario_id=localStorage.getItem("id");
-	
 	$('#caja_herramientas').modal('hide');
 	var datos = {
 		"mesa_id": mesa_id,
@@ -7213,7 +7202,7 @@ function agregar_cupones(){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_cupones.php"); 
+	$("#area_trabajo_menu").load("includes/agregar_cupones.php");
 	closeNav();
 }
 
@@ -7233,32 +7222,31 @@ function guardar_cupon(){
     if(dinero_tipo){
         tipo=1;
     }
-	
 
 	if(vigencia_inicio.length >0 && vigencia_fin.length >0 && codigo.length >0 && cantidad >0){
         if((cantidad >-0.01 && cantidad <100 && tipo == 0) || (cantidad >-0.01 && tipo == 1)){
 			$("#boton_cupon").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
-			 	  "vigencia_inicio": vigencia_inicio,
-				  "vigencia_fin": vigencia_fin,
-				  "codigo": codigo,
-				  "descripcion": descripcion,
-                  "cantidad": cantidad,
-                  "tipo": tipo,
-                  "usuario_id": usuario_id,
+                    "vigencia_inicio": vigencia_inicio,
+                    "vigencia_fin": vigencia_fin,
+                    "codigo": codigo,
+                    "descripcion": descripcion,
+                    "cantidad": cantidad,
+                    "tipo": tipo,
+                    "usuario_id": usuario_id,
 				};
 			$.ajax({
-				  async:true,
-				  type: "POST",
-				  dataType: "html",
-				  contentType: "application/x-www-form-urlencoded",
-				  url:"includes/guardar_cupon.php",
-				  data:datos,
-				  beforeSend:loaderbar,
-				  success:ver_cupones,
-				  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/guardar_cupon.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                    success:ver_cupones,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
 				});
 				return false;
             }else{
@@ -7333,32 +7321,31 @@ function modificar_cupon(id,hab_id,id_reservacion){
         tipo=1;
     }
 
-
 	if(vigencia_inicio.length >0 && vigencia_fin.length >0 && codigo.length >0 && cantidad >0){
         if((cantidad >-0.01 && cantidad <100 && tipo == 0) || (cantidad >-0.01 && tipo == 1)){
             $("#boton_cupon").html('<div class="spinner-border text-primary"></div>');
             var datos = {
-                  "id": id,
-                  "vigencia_inicio": vigencia_inicio,
-                  "vigencia_fin": vigencia_fin,
-                  "codigo": codigo,
-                  "descripcion": descripcion,
-                  "cantidad": cantidad,
-                  "tipo": tipo,
-                  "usuario_id": usuario_id,
+                    "id": id,
+                    "vigencia_inicio": vigencia_inicio,
+                    "vigencia_fin": vigencia_fin,
+                    "codigo": codigo,
+                    "descripcion": descripcion,
+                    "cantidad": cantidad,
+                    "tipo": tipo,
+                    "usuario_id": usuario_id,
                 };
             $.ajax({
-                  async:true,
-                  type: "POST",
-                  dataType: "html",
-                  contentType: "application/x-www-form-urlencoded",
-                  url:"includes/aplicar_editar_cupon.php",
-                  data:datos,
-                  beforeSend:loaderbar,
-                  success:ver_cupones,
-                  //success:problemas_sistema,
-                  timeout:5000,
-                  error:problemas_sistema
+                    async:true,
+                    type: "POST",
+                    dataType: "html",
+                    contentType: "application/x-www-form-urlencoded",
+                    url:"includes/aplicar_editar_cupon.php",
+                    data:datos,
+                    beforeSend:loaderbar,
+                    success:ver_cupones,
+                    //success:problemas_sistema,
+                    timeout:5000,
+                    error:problemas_sistema
                 });
                 return false;
             }else{
@@ -7456,7 +7443,7 @@ function previsualizar_estado(){
     sub_limpieza= sub_limpieza.substr(1);
     $(".div_previsualizar").html('<div class="spinner-border text-primary"></div>');
     $(".div_previsualizar").load("includes/cambiar_previsualizacion.php?estado="+estado+"&rack="+rack+"&hover="+hover+"&letra="+letra+"&sub_sucia="+sub_sucia+"&sub_limpieza="+sub_limpieza);  
-    //alert("Cambiando color en "+estado);  
+    //alert("Cambiando color en "+estado);
 }
 
 //* Cortes *//
@@ -7469,7 +7456,6 @@ function saldo_huespedes(){
     $("#area_trabajo_menu").load("includes/ver_saldo_huespedes.php?usuario_id="+usuario_id);
     closeNav();
 }
-
 
 function corte_diario(){
     usuario_id=localStorage.getItem("id");
@@ -7488,7 +7474,6 @@ function hacer_corte(){
     $("#area_trabajo_menu").load("includes/ver_corte.php?usuario_id="+usuario_id);
     closeNav();
 }
-
 
 // Hacer un corte
 function hacer_cortes(){
@@ -7591,18 +7576,16 @@ function guardar_corte_nuevo(){
     //         data:datos,
     //         beforeSend:loaderbar,
     //         success:function(res){
-                
     //         },
     //         //success:problemas_sistema,
     //         timeout:5000,
     //         error:problemas_sistema
-    //     });    
+    //     });
     //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     //guardar_reporte_corte();
     // mostrar_corte_reporte();
     return false;
 }
-
 
 // Guardar un corte  diario...
 function guardar_corte_global(){
@@ -7625,7 +7608,7 @@ function guardar_corte_global(){
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
-        });    
+        });
     //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     //guardar_reporte_corte();
     mostrar_corte_reporte();
@@ -7655,7 +7638,7 @@ function guardar_corte(){
             //success:problemas_sistema,
             timeout:5000,
             error:problemas_sistema
-        });    
+        });
     //window.open("includes/reporte_corte.php?usuario_id="+usuario_id);
     //guardar_reporte_corte();
     mostrar_corte_reporte();
@@ -7668,7 +7651,6 @@ function guardar_reporte_corte(){
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
-    
     $("#area_trabajo_menu").load("includes/barra_progreso.php");
 	window.open("includes/reporte_corte.php?usuario_id="+usuario_id, "Diseño Web", "width="+ancho+", height="+alto);
     setTimeout(mostrar_corte_reporte, 7000);
@@ -7689,22 +7671,22 @@ function tam_ventana() {
     var tam = [0, 0];
     if (typeof window.innerWidth != 'undefined')
     {
-      tam = [window.innerWidth,window.innerHeight];
+    tam = [window.innerWidth,window.innerHeight];
     }
     else if (typeof document.documentElement != 'undefined'
         && typeof document.documentElement.clientWidth !=
         'undefined' && document.documentElement.clientWidth != 0)
     {
-      tam = [
-          document.documentElement.clientWidth,
-          document.documentElement.clientHeight
-      ];
+        tam = [
+            document.documentElement.clientWidth,
+            document.documentElement.clientHeight
+        ];
     }
     else   {
-      tam = [
-          document.getElementsByTagName('body')[0].clientWidth,
-          document.getElementsByTagName('body')[0].clientHeight
-      ];
+        tam = [
+            document.getElementsByTagName('body')[0].clientWidth,
+            document.getElementsByTagName('body')[0].clientHeight
+        ];
     }
     return tam;
 }
@@ -7724,8 +7706,6 @@ function ver_cortes(){
 function mostrar_reporte_corte(id){
 	window.open("reportes/corte/reporte_corte_"+id+".pdf");
 }
-
-
 
 //funcion para ver los reportes de salida
 
@@ -7774,7 +7754,6 @@ function buscador_reportes_reservas(opcion){
     $("#tabla_reservacion").load(include);
 }
 
-
 function imprimir_reportes(opcion){
     var usuario_id=localStorage.getItem("id");
     titulo=""
@@ -7810,8 +7789,6 @@ function imprimir_reportes(opcion){
 }
 
 function ver_reportes_reservaciones(opcion,btn=0){
-   
-   
     titulo=""
     ruta=""
     switch (opcion ) {
@@ -8002,23 +7979,23 @@ function hab_limpieza(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
-		  "hab_id": hab_id,
-		  "estado": estado,
-          "usuario": usuario,
-          "usuario_id": usuario_id,
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario": usuario,
+            "usuario_id": usuario_id,
 		};
 	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_limpieza.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:principal,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/hab_limpieza.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
 		});
 	return false;
 }
@@ -8051,17 +8028,17 @@ function hab_inicial(hab_id,estado,usuario){
             };
     }
 	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_inicial.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:principal,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/hab_inicial.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
 		});
 	return false;
 }
@@ -8078,30 +8055,30 @@ function hab_desocupar(hab_id,estado, ver =0){
     var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
-		  "hab_id": hab_id,
-		  "estado": estado,
-          "usuario_id": usuario_id,
-          "ver":ver,
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario_id": usuario_id,
+            "ver":ver,
 		};
         // console.log(datos)
         // return
     $.ajax({
-          async:true,
-          type: "POST",
-          dataType: "html",
-          contentType: "application/x-www-form-urlencoded",
-          url:"includes/hab_desocupar.php",
-          data:datos,
-          beforeSend:loaderbar,
-          success:function(){
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/hab_desocupar.php",
+            data:datos,
+            beforeSend:loaderbar,
+        success:function(){
             if(ver==0){
                 window.open("includes/imprimir_estado_cuenta2.php?id="+hab_id);
             }
             principal()
-          },
-          //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
+        },
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
         });
     return false;
 }
@@ -8116,22 +8093,22 @@ function hab_ocupada_sucia(hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
-		  "hab_id": hab_id,
-		  "estado": estado,
-          "usuario_id": usuario_id,
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario_id": usuario_id,
 		};
 	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_ocupada_sucia.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:principal,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/hab_ocupada_sucia.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
 		});
 	return false;
 }
@@ -8146,22 +8123,22 @@ function hab_ocupada_terminar(hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
-		  "hab_id": hab_id,
-		  "estado": estado,
-          "usuario_id": usuario_id,
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario_id": usuario_id,
 		};
 	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_ocupada_terminar.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:principal,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/hab_ocupada_terminar.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
 		});
 	return false;
 }
