@@ -194,7 +194,7 @@
   // Datos dentro de la tabla desgloce en sistema
   $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(20, 31, 102);
-  $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Desgloce en Sistema'),0,1,'C');
+  $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Desglose en Sistema'),0,1,'C');
   $pdf->SetFont('Arial','B',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),1,0,'C',True);

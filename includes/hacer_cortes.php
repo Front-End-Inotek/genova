@@ -199,7 +199,7 @@
             <div  class="card bg-light text-dark">';
               $cantidad= $forma_pago->total_elementos();
               
-              echo '<div class="card-header"><h5>Desgloce en Sistema</h5></div>
+              echo '<div class="card-header"><h5>Desglose en Sistema</h5></div>
               
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
@@ -267,7 +267,7 @@
             /*<div  class="card bg-light text-dark">';
               $cantidad= $forma_pago->total_elementos();
               
-              echo '<div class="card-header">Desgloce en Sistema</div>
+              echo '<div class="card-header">Desglose en Sistema</div>
               
               <div class="card-body">
               </div>

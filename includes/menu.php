@@ -74,7 +74,7 @@
 			$permisos_huesped=$usuario->huesped_ver+$usuario->huesped_agregar;
 			if($permisos_huesped>0){
 			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_huespedes()">Ver huéspedes</a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_huespedes()">Info de huéspedes</a></i></ul>';
 			}
 		}
 			echo'
