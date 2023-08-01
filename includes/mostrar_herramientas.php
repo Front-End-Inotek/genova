@@ -273,6 +273,20 @@ switch ($_GET['estado']) {
 		echo '</div>';
 		echo '</div>';
 	}
+	/* boton para editar */
+	if(true){
+		echo '<div class="col-md-3 btn-herramientas">';
+		echo '<div class="editarHab btn-square-lg" onclick="hab_ocupada_terminar_interno('.$_GET['hab_id'].','.$_GET['estado'].')">';
+			echo '</br>';
+			echo '<div>';
+			echo '</div>';
+			echo '<div>';
+			echo 'Editar';
+			echo '</div>';
+			echo '</br>';
+		echo '</div>';
+		echo '</div>';
+	}
 	/*if($user->nivel<=2){
 		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
 				echo '<div class="restaurante btn-square-lg" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].')">';

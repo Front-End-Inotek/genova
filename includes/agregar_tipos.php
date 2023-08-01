@@ -4,7 +4,7 @@
   <!-- Modal -->
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregra tipo de habitacion </h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar tipo de habitacion </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             &times;
           </button>
@@ -23,6 +23,10 @@
                 <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;"> Codigo </span>
             </div>
               <input type="text" id="codigo" name ="codigo" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+        </div>
+        <div class="input-group mb-3 d-flex gap-2">
+          <label for="color" class="form-label">Color de la hab.</label>
+          <input type="color" class="form-control form-control-color" id="color" value="#2C8FEB" title="Color">
         </div>
 
         </div>
