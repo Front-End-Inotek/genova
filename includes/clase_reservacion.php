@@ -790,7 +790,6 @@ class Reservacion extends ConexionMYSql
         if(!empty($a_buscar)) {
             $a_buscar=" AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%')";
         }
-
         //según la opción proporcionada, será una consulta distinta para cada caso.
 
         switch ($opcion) {
@@ -869,11 +868,15 @@ class Reservacion extends ConexionMYSql
             $cat_paginas++;
         }
         $ultimoid=0;
-
+        $ruta="";
         $comentario="";
         $where="";
         $where_fecha ="";
-
+        $btn_reactivar=false;
+        if($opcion==4){
+            $btn_reactivar=true;
+            $ruta="ver_reportes_reservaciones(4)";
+        }
 
 
         $consulta = $this->seleccion_reporte($fecha_inicio, $inicio_dia, $opcion,$a_buscar);
@@ -903,6 +906,9 @@ class Reservacion extends ConexionMYSql
                             <th>Forma Pago</th>
                             <!-- <th>Límite Pago</th> --->
                             <th>Status</th>';
+                        if($btn_reactivar){
+                            echo '<th>Reactivar</th>';
+                        }
         echo '</tr>
                     </thead>
         <tbody>';
@@ -994,6 +1000,11 @@ class Reservacion extends ConexionMYSql
                     echo '<td>'.$fila['descripcion'].'</td>';
                     // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                     echo '<td>Activa</td>';
+                    if($btn_reactivar){
+                        echo '<td>';
+                        echo '<a class="btn btn-danger" href="#" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')" >Editar</a>';
+                        echo '</td>';
+                    }
                     echo '</tr>';
                 }
             }
@@ -2104,6 +2115,8 @@ class Reservacion extends ConexionMYSql
 
         //según la opción proporcionada, será una consulta distinta para cada caso.
 
+        $btn_reactivar=false;
+        $ruta="";
         switch ($opcion) {
             case 1:
                 //llegadas probables
@@ -2134,6 +2147,8 @@ class Reservacion extends ConexionMYSql
                 $where="WHERE (reservacion.estado=2) AND movimiento.finalizado!=0";
                 $where_fecha=" AND (from_unixtime(movimiento.finalizado,'%Y-%m-%d') ='$inicio_normal') ";
                 $comentario="Mostrar las salidas efectivas";
+                $btn_reactivar=true;
+                $ruta="ver_reportes_reservaciones(4)";
                 break;
             default:
                 # code...
@@ -2183,6 +2198,10 @@ class Reservacion extends ConexionMYSql
                 <th>Forma Pago</th>
                 <!-- <th>Límite Pago</th> --->
                 <th>Status</th>';
+                if($btn_reactivar){
+                    echo '<th>Reactivar</th>';
+                }
+
         echo '</tr>
               </thead>
             <tbody>';
@@ -2248,6 +2267,7 @@ class Reservacion extends ConexionMYSql
                         // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>Garantizada</td>';
                         echo '</tr>';
+                        
                     }
                 } else {
                     echo '<tr class="table-secondary text-center">
@@ -2275,7 +2295,13 @@ class Reservacion extends ConexionMYSql
                     echo '<td>'.$fila['descripcion'].'</td>';
                     // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                     echo '<td>Activa</td>';
+                    if($btn_reactivar){
+                        echo '<td>';
+                        echo '<a class="btn btn-danger" href="#" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')" >Editar</a>';
+                        echo '</td>';
+                    }
                     echo '</tr>';
+                    
                 }
             }
             $cont++;
@@ -2776,16 +2802,17 @@ class Reservacion extends ConexionMYSql
     {
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
-        if($forzar_tarifa > 0) {
-            $total_cargo= $total_suplementos + $forzar_tarifa;
-        } else {
-            $total_cargo=$total_pago;
-        }
-        if($cantidad_cupon > 0) {
-            $pago_total= $total_pago + $cantidad_cupon;
-        } else {
-            $pago_total= $total_pago;
-        }
+        // if($forzar_tarifa > 0) {
+        //     $total_cargo= $total_suplementos + $forzar_tarifa;
+        // } else {
+        //     $total_cargo=$total_pago;
+        // }
+        // if($cantidad_cupon > 0) {
+        //     $pago_total= $total_pago + $cantidad_cupon;
+        // } else {
+        //     $pago_total= $total_pago;
+        // }
+
         $sentencia = "UPDATE `reservacion` SET
 			`id_huesped` = '$id_huesped',
 			`tipo_hab` = '$tipo_hab',
@@ -2834,6 +2861,14 @@ class Reservacion extends ConexionMYSql
         // $consulta= $this->realizaConsulta($sentencia, $comentario);
 
 
+    }
+
+    function ingresar_cuenta($usuario_id,$id_mov,$descripcion,$forma_pago,$pago_total){
+        $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+        VALUES ('$usuario_id', '$id_movimiento', '$descripcion', '$fecha_entrada', '$forma_pago', '0', '$pago_total', '1');";
+        echo $sentencia;
+        $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
     }
 
     // Editar una reservacion

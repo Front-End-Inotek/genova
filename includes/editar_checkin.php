@@ -118,6 +118,16 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     </select>
                 </div>';
                 }
+                echo ' <div class="form-group col-md-4 col-12">
+                <label for="clave-reserva asterisco" class="text-right">Habitación</label>
+                <select class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event); calcular_nochesChek()" required>
+                <option value="">Seleccionar una habitación</option>
+                ';
+                $hab->mostrar_hab_option($hab->id);
+
+                echo '
+                </select>
+                </div>';
                 echo'
                 <div class="form-group col-md-4">
                     <label for="total-estancia">Total de la estancia</label>
@@ -151,7 +161,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
             <div class="form-group col-md-4 mb-3">
                     <label for="tipo-habitacion">Forzar tarifa</label>
-                    <input type="number" class="form-control" value="'.$forzar_tarifa.'" id="forzar-tarifa" min="0" step="0.01" onchange="cambiar_adultosNew(0,'.$hab_id.')">
+                    <input type="text" maxlength="10"   onkeypress="validarNumero(event)" class="form-control" value="'.$forzar_tarifa.'" id="forzar-tarifa" min="0" step="0.01" onchange="cambiar_adultosNew(0,'.$hab_id.')">
                 </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="tipo-habitacion">Tipo de habitación</label>
@@ -169,27 +179,31 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 -->
             </div>
             <div class="d-flex justify-content-between">
-            <div class="form-group col-md-4">
-            </div>
-                <div class="form-group col-md-4 mb-3">
-                    <label for="adultos">Adultos</label>
-                    <input type="number" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->extra_adulto.'"  onchange="editarTotalEstancia()">
-                    <input type="number" id="tarifa_adultos" value="'.$tarifa->precio_adulto.'" hidden>
+                <div class="form-group col-md-4 col-12">
+                    <label for="adultos">Precio noche</label>
+                    <input type="number" class="form-control" id="precio_hospedaje" min="0" disabled value="'.$reservacion->precio_hospedaje.'">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4 col-12">
+                    <label for="adultos">Adultos</label>
+                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->extra_adulto.'"  onchange="editarTotalEstancia()">
+                    <input type="number" id="cantidad_hospedaje" value="'.$tarifa->cantidad_hospedaje.'" hidden>
+                    <input type="number" id="tarifa_adultos" value="'.$tarifa->precio_adulto.'" hidden>
+                    <input type="number" id="cantidad_maxima" value="'.$tarifa->cantidad_maxima.'" hidden >
+                </div>
+                <div class="form-group col-md-4 col-12">
                     <label for="menores">Menores</label>
-                    <input type="number" class="form-control" id="extra_infantil" min="0"  value="'.$reservacion->extra_infantil.'" onchange="editarTotalEstancia()">
+                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="extra_infantil" min="0"  value="'.$reservacion->extra_infantil.'" onchange="editarTotalEstancia()">
                     <input type="number" id="tarifa_menores" value="'.$tarifa->precio_infantil.'" hidden>
                 </div>
             </div>
             <div class="d-flex justify-content-between">
             <div class="form-group col-md-4">
                     <label class="asterisco" for="no-habitaciones">Número de habitaciones</label>
-                    <input type="number" class="form-control" id="numero_hab" min="1" value="'.$reservacion->numero_hab.'" required onchange="editarTotalEstancia()">
+                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="numero_hab" min="1" value="'.$reservacion->numero_hab.'" required onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="pax-extra">Pax extra</label>
-                    <input type="number" class="form-control" id="pax-extra" min="0" value="'.$reservacion->pax_extra.'"  onchange="editarTotalEstancia()">
+                    <input type="text" maxlength="10"   onkeypress="validarNumero(event)" class="form-control" id="pax-extra" min="0" value="'.$reservacion->pax_extra.'"  onchange="editarTotalEstancia()">
                 </div>
                 <div class="form-group col-md-4 mb-3">
                     <label for="plan-alimentos">Plan de alimentos</label>
@@ -300,6 +314,11 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     <option value="">Seleccione una opción </option>
                     ';
                     $forma_pago->mostrar_forma_pago($huesped->tipo_tarjeta);
+                    // $garantia_activa="disabled";
+                    // if($husped->tipo_tarjeta == 2){
+                    //     $garantia_activa="";
+
+                    // }
                     echo'
                     </select>
                 </div>
@@ -317,10 +336,17 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 }
                 echo '
             </div>
-            <div class="form-group col-md-6" id="div_voucher" style="display:none">
+            <div class="d-flex justify-content-between flex-wrap">
+            <div class="form-group col-md-6" id="div_voucher" >
             <label for="voucher">Voucher</label>
-            <input id="voucher" type="text" class="form-control" rows="1"></input>
+            <input disabled id="voucher" type="text" class="form-control" rows="1"></input>
             </div>
+
+            <div class="form-group col-md-6" id="div_garantia" >
+            <label for="garantia_monto">Monto garantía</label>
+            <input   type="text" maxlength="10"   onkeypress="validarNumero(event)" class="form-control" id="garantia_monto" value="'.$reservacion->total_pago.'">
+            </div>
+        </div>
             <div class="form-group col-md-12">
                 <label for="observaciones">Observaciones</label>
                 <textarea class="form-control" id="observaciones" rows="3">'.$huesped->comentarios.'</textarea>

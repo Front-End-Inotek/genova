@@ -39,13 +39,11 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     <label for="clave-reserva" class="text-right">'.$clv.'</label>
                     <input type="text" value="'.$ultimo_id.'" class="form-control" id="clave-reserva" readonly>
                 </div>';
-              
                     echo ' <div class="form-group col-md-4 col-12">
                     <label for="clave-reserva asterisco" class="text-right">Habitación</label>
                     <select class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event); calcular_nochesChek()" required>
                     <option value="">Seleccionar una habitación</option>
                     ';
-                    
                     $hab->mostrar_hab_option();
 
                     echo '
@@ -113,6 +111,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     <input class="form-control" id="extra_adulto" 
                     type="text" maxlength="2"  onkeypress="validarNumero(event)"
                     onchange="editarTotalEstancia()">
+                    <input type="number" id="cantidad_hospedaje" hidden>
                     <input type="number" id="tarifa_adultos" hidden>
                 </div>
                 <div class="form-group col-md-4 col-12">

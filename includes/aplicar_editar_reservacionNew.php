@@ -93,16 +93,33 @@
     $hab->cambiohabUltimo($old_hab);
     $hab->cambiohabUltimo($_POST['preasignada']);
   }
-  if($datos_mov!=null && $datos_mov['motivo'] == "reservar" && $datos_mov['id_hab']!=0){
+  $log_msj="Editar reservacion: ";
+
+  if($datos_mov!=null && $datos_mov['id_hab']!=0){
     $id_mov=$datos_mov['id'];
     $old_hab = $datos_mov['id_hab'];
     $mov = new Movimiento($id_mov);
    
     $mov->actualizarFechasMov($id_mov, strtotime($_POST['fecha_entrada']),strtotime($_POST['fecha_salida']));
     $hab->cambiohabUltimo($old_hab);
+
+    $finalizado = $mov->saber_tiempo_finalizado_renta($id_mov);
+
+    if(!empty($finalizado)){
+      $hab->cambiohab($datos_mov['id_hab'],$id_mov,1);
+      $log_msj="Reactivar checkin: ";
+      $mov->cambiar_finalizado($id_mov);
+      if($total_pago>0){
+        $descripcion="Pago en checkin";
+        $pago_total=$total_pago;
+        $fecha_entrada = time();
+        $reservacion->ingresar_cuenta($usuario_id,$id_mov,$descripcion,$_POST['forma_pago'],$pago_total);
+    }
+
+    }
 }
 
   
-  $logs->guardar_log($_POST['usuario_id'],"Editar reservacion: ". $_POST['id']);
+  $logs->guardar_log($_POST['usuario_id'],$log_msj. $_POST['id']);
   echo $_POST['id'];
 ?>
