@@ -28,7 +28,7 @@
 			</div>';
 			if($usuario->nivel==0){
 				echo '<li href="#" class="nav-link" onclick="sub_menu(); boton_menu();">
-				<i class="bx bxs-chart text-secondary" ></i>
+				<i class="bx bxs-bar-chart-square text-secondary" ></i>
 				<span class="mx-2" onclick="graficas()"> Estadística </span>
 				</li>';
 			}

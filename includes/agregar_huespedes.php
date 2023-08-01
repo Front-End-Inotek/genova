@@ -12,7 +12,6 @@
         </button>
         </div>
         <div class="modal-body">
-
         <div class="row flex-wrap">
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
