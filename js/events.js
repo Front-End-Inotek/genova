@@ -3566,18 +3566,70 @@ function preasignar_reservacion(id,opcion=0,tipo_hab,numero_hab){
 	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id+"&opcion="+opcion+"&tipo_hab="+tipo_hab+"&numero_hab="+numero_hab);
 }
 
-
 // Modal de cancelar una reservacion
-function aceptar_garantizar_reservacion(id,preasignada=0,correo,garantizada=0){
-	$("#mostrar_herramientas").load("includes/garantizar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada);
+function aceptar_garantizar_reservacion(id,preasignada=0,correo,garantizada=0,huesped_id){
+ 
+	$("#mostrar_herramientas").load("includes/garantizar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada+"&huesped_id="+huesped_id);
 }
 
-function garantizar_reservacion(id,preasignada=0,correo,garantizada=0){
+
+function guardar_datos_tarjeta(huesped_id,forma_garantia){
+
+    if(!verificarFormulario('garantia-tarjeta','name')){
+    datos= {
+        "numero_tarjeta" :$("#numero_tarjeta").val(),
+        "nombre_tarjeta" :$("#cardholder").val(),
+        "tipo_tarjeta" :$("#tipo").val(),
+        "mes_tarjeta" :$("#expires-month").val(),
+        "year_tarjeta" :$("#expires-year").val(),
+        "huesped_id" : huesped_id,
+        "forma_garantia":forma_garantia
+
+    }
+    $.ajax({
+        async:true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url:"includes/guardar_datos_tarjeta.php",
+        data:datos,
+        beforeSend:loaderbar,
+        success:function(res){
+            console.log(res)
+        },
+        //success:problemas_sistema,
+        timeout:5000,
+        error:problemas_sistema
+    });
+}
+}
+
+function garantizar_reserva_selects(){
+    estado =$("#estado").val()
+    garantia =$("#forma-garantia option:selected").text()
+    garantia = garantia.toLowerCase()
+
+    if(estado=="garantizada" && garantia.includes('tarjeta')){
+        $("#div-tarjeta").show()
+    }else{
+        $("#div-tarjeta").hide()
+    }
+
+}
+
+function garantizar_reservacion(id,preasignada=0,correo,garantizada=0,huesped_id){
+
     var usuario_id=localStorage.getItem("id");
     var estado= encodeURI(document.getElementById("estado").value);
     var forma_garantia= encodeURI(document.getElementById("forma-garantia").value);
     var monto= encodeURI(document.getElementById("monto").value);
 
+    numero_tarjeta=$("#numero_tarjeta").val()
+
+    if(numero_tarjeta!=""){
+        guardar_datos_tarjeta(huesped_id,forma_garantia)
+    }
+    // return
     if (id >0 && estado.length >0 && forma_garantia.length>0 && monto.length >0) {
         $('#caja_herramientas').modal('hide');
         $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');
