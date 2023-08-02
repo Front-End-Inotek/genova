@@ -42,7 +42,7 @@
   // Comienza a realizarse el reporte //
 
   $total_cuartos_hospedaje= 0;
-  $suma_cuartos_hospedaje= 0; 
+  $suma_cuartos_hospedaje= 0;
   $total_cuartos= 0;
   $total_productos= 0;//$inf->total_productos;
   $total_restaurante= 0;//$inf->total_restaurante;

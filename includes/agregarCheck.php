@@ -108,9 +108,9 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="adultos">Adultos</label>
-                    <input class="form-control" id="extra_adulto" 
+                    <input class="form-control" id="extra_adulto"
                     type="text" maxlength="2"  onkeypress="validarNumero(event)"
-                    onchange="editarTotalEstancia()">
+                    onchange="editarTotalEstancia(); mostrarAcordeonCompleto()">
                     <input type="number" id="cantidad_hospedaje" hidden>
                     <input type="number" id="tarifa_adultos" hidden>
                 </div>
@@ -222,13 +222,23 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             </div>
             <div class="d-flex justify-content-between flex-wrap">
-                
+                <div class="accordionCustom" id="acordeonchido">
+                    <div class="accordion-itemCustom">
+                        <div id="acordeonIcon" onclick="mostrarAcorderon()" class="accordionItemHeaderCustom">
+                            <label>Agregar huespedes</label>
+                        </div>
+                        <div id="acordeon" class="accordionItemBodyCustom">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between flex-wrap">
                 <div class="form-group col-md-4 col-12">
                     <label class="asterisco" for="forma-garantia">Forma de Garantía</label>
                     <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)" >
                     <option value="">Seleccione una opción </option>
                     ';
-                
                     $forma_pago->mostrar_forma_pago();
                     echo'
                     </select>
