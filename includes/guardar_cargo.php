@@ -29,8 +29,9 @@
       $id_maestra = $_POST['id_maestra'];
     }
   }
-  $forma_pago = 1;
 
+  //Buscar en la BD el id correspondiente a efectivo.
+  $forma_pago = $cuenta->obtener_id_pago();
 
   $nombre= $hab->nombre;
   $faltante= 0;//$_POST['faltante']
