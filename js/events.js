@@ -8271,22 +8271,24 @@ function mostrarAcordeonCompleto(){
     const cuerpoacordeon = document.querySelector("#acordeon");
     if(input > 1){
         acorderon.classList.add("accordionCustomMostrar")
-        for (let i = 0; i < input; i++) {
-            console.log(i)
+        cuerpoacordeon.innerHTML = ``
+        for (let i = 1; i < input; i++) {
             cuerpoacordeon.innerHTML += `
                 <div class="accordionItemBodyContentCustom">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Nombre">
-                        <label for="floatingInput">Nombre</label>
+                    <label style="width: 100%;text-align: left;">Huesped ${i + 1}</label>
+                    <div class="mb-3">
+                        <label for="inputName${i}" class="form-label">Nombre</label>
+                        <input type="text" class="form-control nombreExtra" id="inputName${i}">
                     </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingPassword" placeholder="Apellido">
-                        <label for="floatingPassword">Apellido</label>
+                    <div class="mb-3">
+                        <label for="inputLastName${i}" class="form-label">Apellido</label>
+                        <input type="text" class="form-control apellidoExtra" id="inputLastName${i}">
                     </div>
                 </div>
                 `
         }
     }else{
-        acorderon.classList.remove("accordionCustomMostrar")
+        acorderon.classList.remove("accordionCustomMostrar");
+        cuerpoacordeon.innerHTML = ``;
     }
 }
