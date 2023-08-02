@@ -8278,11 +8278,11 @@ function mostrarAcordeonCompleto(){
                     <label style="width: 100%;text-align: left;">Huesped ${i + 1}</label>
                     <div class="mb-3">
                         <label for="inputName${i}" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="inputName${i}">
+                        <input type="text" class="form-control nombreExtra" id="inputName${i}">
                     </div>
                     <div class="mb-3">
                         <label for="inputLastName${i}" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="inputLastName${i}">
+                        <input type="text" class="form-control apellidoExtra" id="inputLastName${i}">
                     </div>
                 </div>
                 `
