@@ -8273,7 +8273,6 @@ function mostrarAcordeonCompleto(){
         acorderon.classList.add("accordionCustomMostrar")
         cuerpoacordeon.innerHTML = ``
         for (let i = 1; i < input; i++) {
-            console.log(i)
             cuerpoacordeon.innerHTML += `
                 <div class="accordionItemBodyContentCustom">
                     <label style="width: 100%;text-align: left;">Huesped ${i + 1}</label>
@@ -8289,6 +8288,7 @@ function mostrarAcordeonCompleto(){
                 `
         }
     }else{
-        acorderon.classList.remove("accordionCustomMostrar")
+        acorderon.classList.remove("accordionCustomMostrar");
+        cuerpoacordeon.innerHTML = ``;
     }
 }
