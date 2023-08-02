@@ -408,6 +408,30 @@
 
       }
 
+      function guardar_tarjeta($huesped_id,$datos_tarjeta){
+
+        print_r($datos_tarjeta);
+
+        $titular_tarjeta=$datos_tarjeta['nombre_tarjeta'];
+        $nombre_tarjeta=$datos_tarjeta['tipo_tarjeta'];
+        $tipo_tarjeta=$datos_tarjeta['forma_garantia'];
+        $numero_tarjeta=$datos_tarjeta['numero_tarjeta'];
+        $vencimiento_mes=$datos_tarjeta['mes_tarjeta'];
+        $vencimiento_ano=$datos_tarjeta['year_tarjeta'];
+
+        $sentencia = "UPDATE  `huesped` 
+        SET  titular_tarjeta = '$titular_tarjeta', estado_tarjeta = 2, nombre_tarjeta = '$nombre_tarjeta'
+        , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'), vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
+        WHERE id='$huesped_id'";
+
+        $comentario="actualizamos el huesped en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        if(!$consulta){
+          echo "NO_VALIDO";
+          exit();
+        }
+      }
+
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
       $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$estado_credito,$limite_credito,$indole_tarjeta){
