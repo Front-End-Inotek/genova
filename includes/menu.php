@@ -46,6 +46,8 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_llegadas()">Reporte de llegadas</a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
+			echo '
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de cancelaciones</a></i></ul>';
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="saldo_huespedes()"> Saldo de huéspedes </a></i></ul>';
 		echo'

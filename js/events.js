@@ -7758,6 +7758,30 @@ function mostrar_reporte_corte(id){
 
 //funcion para ver los reportes de salida
 
+function ver_reportes_cancelaciones(btn=0){
+    var usuario_id=localStorage.getItem("id");
+    inicial = $("#inicial").val()
+    if(inicial==undefined){
+        inicial="";
+    }
+    final = $("#final").val()
+    if(final==undefined){
+        final="";
+    }
+    if(btn==0){
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/ver_salidas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
+        closeModal();
+        closeNav();
+    }else{
+        var a_buscar=encodeURIComponent($("#a_buscar").val());
+        var usuario_id=localStorage.getItem("id");
+        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final);  
+    }
+}
+
 function ver_reportes_salidas(btn=0){
     var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()

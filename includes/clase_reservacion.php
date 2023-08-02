@@ -889,6 +889,7 @@ class Reservacion extends ConexionMYSql
                             <th>Número</th>
                             <th>Fecha Entrada</th>
                             <th>Fecha Salida</th>
+                            <th>Usuario</th>
                             <th>Checkout</th>
                             <th>Nombre Huésped</th>
                             <th>Noches</th>
@@ -924,6 +925,7 @@ class Reservacion extends ConexionMYSql
                             <td>'.$fila['ID'].'</td> 
                             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+                            <td>'.$fila['usuario'].'</td>
                             <td>'.$finalizado.'</td>
                             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                             <td>'.$fila['noches'].'</td> 
@@ -952,6 +954,7 @@ class Reservacion extends ConexionMYSql
                             <td>'.$fila['ID'].'</td> 
                             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+                            <td>'.$fila['usuario'].'</td>
                             <td>'.$finalizado.'</td>
                             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                             <td>'.$fila['noches'].'</td> 
@@ -980,6 +983,7 @@ class Reservacion extends ConexionMYSql
                     <td>'.$fila['ID'].'</td> 
                     <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                     <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+                    <td>'.$fila['usuario'].'</td>
                     <td>'.$finalizado.'</td>
                     <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['noches'].'</td> 

@@ -965,5 +965,17 @@
         }
         return $id;
       }
+
+      function obtener_id_pago(){
+        $sentencia= "SELECT id FROM forma_pago WHERE descripcion LIKE '%efectivo%'   ORDER BY id DESC LIMIT 1";
+        $id= 0;
+        $comentario="Obtener la ultima cuenta ingresada";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+        }
+        return $id;
+      }
   }
 ?>
