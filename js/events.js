@@ -8272,20 +8272,20 @@ function mostrarAcordeonCompleto(){
     if(input > 1){
         acorderon.classList.add("accordionCustomMostrar")
         cuerpoacordeon.innerHTML = ``
-        for (let i = 1; i < input; i++) {
+        for ( let i = 0 ; i < input ; i++ ) {
             cuerpoacordeon.innerHTML += `
                 <div class="accordionItemBodyContentCustom">
                     <label style="width: 100%;text-align: left;">Huesped ${i + 1}</label>
-                    <div class="mb-3">
-                        <label for="inputName${i}" class="form-label">Nombre</label>
+                    <div >
+                        <label for="inputName${i}" class="form-label" style="width: 90%;text-align: left;">Nombre</label>
                         <input type="text" class="form-control nombreExtra" id="inputName${i}">
                     </div>
                     <div class="mb-3">
-                        <label for="inputLastName${i}" class="form-label">Apellido</label>
+                        <label for="inputLastName${i}" class="form-label" style="width: 90%;text-align: left;">Apellido</label>
                         <input type="text" class="form-control apellidoExtra" id="inputLastName${i}">
                     </div>
                 </div>
-                `
+            `
         }
     }else{
         acorderon.classList.remove("accordionCustomMostrar");
