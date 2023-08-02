@@ -1355,3 +1355,52 @@ input[required] + label:after {
 	content: ' *' !important;
 	color: red !important;
 } */
+
+.accordionCustom{
+  width: 100%;
+  /* max-width: 1000px; */
+  margin: 1rem auto;
+  display: none;
+}
+.accordionCustomMostrar{
+  display: block;
+}
+.accordion-itemCustom{
+  background-color: #fff;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  /* box-shadow: 0 2px 5px 0 rgba(0,0,0,0.25); */
+  border: 1px solid #ced4da;
+}
+.accordionItemHeaderCustom{
+  padding: 0.5rem 3rem 0.5rem 1rem;
+  min-height: 3.5rem;
+  line-height: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+.accordionItemHeaderCustom::after{
+  content: "\002B";
+  font-size: 2rem;
+  position: absolute;
+  right: 1rem;
+}
+.accordionItemHeaderCustom.active::after{
+  content: "\2212" !important;
+}
+.accordionItemBodyCustom{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+}
+.activeAcordeon{
+  max-height: fit-content !important;
+}
+.accordionItemBodyContentCustom{
+  padding: 1rem;
+  line-height: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.087);
+}

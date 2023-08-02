@@ -6,7 +6,7 @@
       <div class="container blanco">
         <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">AGREGAR INVENTARIO</h2></div>
         <div class="row">
-          <div class="col-sm-2">Nombre:</div>
+          <div class="col-sm-2 asterisco">Nombre:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <input class="form-control" type="text" id="nombre" placeholder="Ingresa el nombre del producto" maxlength="60">
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Categoría:</div>
+          <div class="col-sm-2 asterisco">Categoría:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <select class="form-control" id="categoria" class="form-control">
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-2">Precio de Venta:</div>
+          <div class="col-sm-2 asterisco">Precio de Venta:</div>
           <div class="col-sm-4">
           <div class="form-group">
             <input class="form-control" type="number" id="precio" placeholder="Ingresa el precio de venta">

@@ -76,7 +76,7 @@
       }
   }
 
-  // Fecha y datos generales 
+  // Fecha y datos generales
   $pdf = new PDF();
   $pdf->AliasNbPages();
   $pdf->AddPage();

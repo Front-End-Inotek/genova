@@ -6930,7 +6930,7 @@ function guardar_mesa(){
                 // }else{
                 //     alert("Ha ocurrido un error intentelo de nuevo")
                 // }
-            },//
+            },
             //success:problemas,
             timeout:5000,
             error:problemas
@@ -8257,4 +8257,36 @@ function hab_cambiar_persona(hab_id,estado,usuario){
 	return false;
 }
 
+//funcion para el acorderon
+function mostrarAcorderon(){
+    const acordeon = document.querySelector("#acordeon")
+    const acordeonIcon = document.querySelector("#acordeonIcon")
+    acordeon.classList.toggle("activeAcordeon");
+    acordeonIcon.classList.toggle("active");
+}
 
+function mostrarAcordeonCompleto(){
+    const input = document.querySelector("#extra_adulto").value
+    const acorderon = document.querySelector("#acordeonchido")
+    const cuerpoacordeon = document.querySelector("#acordeon");
+    if(input > 1){
+        acorderon.classList.add("accordionCustomMostrar")
+        for (let i = 0; i < input; i++) {
+            console.log(i)
+            cuerpoacordeon.innerHTML += `
+                <div class="accordionItemBodyContentCustom">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Nombre">
+                        <label for="floatingInput">Nombre</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingPassword" placeholder="Apellido">
+                        <label for="floatingPassword">Apellido</label>
+                    </div>
+                </div>
+                `
+        }
+    }else{
+        acorderon.classList.remove("accordionCustomMostrar")
+    }
+}
