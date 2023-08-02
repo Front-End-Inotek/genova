@@ -1840,6 +1840,69 @@ function calcular_nochesChek(){
 function editarTotalEstancia(event){
     forzar_tarifa = $("#forzar-tarifa").val()
     extra_adultos = $("#extra_adulto").val();
+
+    console.log(extra_adultos)
+
+    //Crear elemementos necesarios.
+    // if(extra_adultos!=0){
+    //     adicionales = document.getElementById('adicionales')
+
+    //     for (let index = 0; index < extra_adultos; index++) {
+
+    //         div = document.createElement("div")
+    //         div.classList.add('d-flex')
+    //         div.classList.add('justify-content-between')
+    //         div.classList.add('flex-wrap')
+    //         h4 = document.createElement('h4')
+    //         h4.innerHTML="Adicional " + (index+1)
+    //         div.a
+    
+    //         div2 = document.createElement("div")
+    //         div2.classList.add('form-group')
+    //         div2.classList.add('col-md-4')
+    //         div2.classList.add('col-12')
+    //         label_nombre = document.createElement("label")
+    //         label_nombre.innerHTML ="Nombre"
+    //         label_nombre.classList.add('asterisco')
+    //         input_nombre = document.createElement("input")
+    //         input_nombre.classList.add('form-control')
+    
+    //         div3 = document.createElement("div")
+    //         div3.classList.add('form-group')
+    //         div3.classList.add('col-md-4')
+    //         div3.classList.add('col-12')
+    
+    //         label_ap = document.createElement("label")
+    //         label_ap.innerHTML ="Apellido"
+    //         label_ap.classList.add('asterisco')
+    //         input_ap = document.createElement("input")
+    //         input_ap.classList.add('form-control')
+    
+    //         div_vacio = document.createElement("div")
+    //         div_vacio.classList.add('form-group')
+    //         div_vacio.classList.add('col-md-4')
+    //         div_vacio.classList.add('col-12')
+            
+    //         div2.appendChild(label_nombre)
+    //         div2.appendChild(input_nombre)
+    
+    //         div3.appendChild(label_ap)
+    //         div3.appendChild(input_ap)
+    
+    
+    //         div.appendChild(div2)
+    //         div.appendChild(div3)
+    //         div.appendChild(div_vacio)
+    //         adicionales.appendChild(div)
+
+    //     }
+
+      
+
+    // }
+
+    // return
+
     extra_infantil =  $("#extra_infantil").val();
     cantidad_hospedaje =$("#cantidad_hospedaje").val()
     cantidad_maxima =Number($("#cantidad_maxima").val())
@@ -2560,8 +2623,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
             success:function(res){
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
-                console.log(res)
-                return
+                // console.log(res)
+                // return
                 confirarmNo = document.getElementById('no')
                 if(confirarmNo!=null){
                     confirarmNo = confirarmNo.checked
@@ -2753,9 +2816,6 @@ function datosFormulario(id_form){
     for (var i = 0; i < form.elements.length; i++) {
         var elemento = form.elements[i];
         var id=elemento.id
-        // datosFormulario.push({
-        //     "id" : elemento.value
-        // });
         datosFormulario[id] = elemento.value
     }
     return datosFormulario;
@@ -3267,7 +3327,14 @@ function editar_reservacionNew(id,ruta_regreso){
 }
 // Editar un checkin
 function editar_checkin(id,hab_id,ruta_regreso){
-    $("#area_trabajo_menu").load("includes/editar_checkin.php?id="+id+"&hab_id="+hab_id+"&ruta_regreso="+ruta_regreso);
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/editar_checkin.php?id="+id+"&hab_id="+hab_id+"&ruta_regreso="+ruta_regreso+"&usuario_id="+usuario_id);
+    closeModal();
+	closeNav();
+
 }
 
 // Editar una reservacion
@@ -3457,10 +3524,10 @@ function borrar_reservacion(id,preasignada=0){
 //funcion para agregar la habitacion seleccionada a la reservacion.
 function guardar_preasignar_reservacion(id,opcion=0)
 {
-    var usuario_id=localStorage.getItem("id");
-    preasignada = $("#preasignada").val();
-    console.log(preasignada,id)
-    return
+    // var usuario_id=localStorage.getItem("id");
+    // preasignada = $("#preasignada").val();
+    // console.log(preasignada,id)
+    // return
     if (id >0 && preasignada.length >0) {
         $('#caja_herramientas').modal('hide');
         $("#boton_cancelar_reservacion").html('<div class="spinner-border text-primary"></div>');

@@ -890,16 +890,16 @@ class Reservacion extends ConexionMYSql
                             <th>Fecha Entrada</th>
                             <th>Fecha Salida</th>
                             <th>Checkout</th>
+                            <th>Nombre Huésped</th>
                             <th>Noches</th>
-                            <th>No. Habitaciones</th>
+                            <!-- <th>No. Habitaciones</th> -->
                             <th>Tarifa</th>
                             <th>Precio Hospedaje</th>
-                            <th>Cantidad Hospedaje</th>
+                            <th>Plan alimentos</th>
                             <th>Extra Adulto</th>
                             <!-- <th>Extra Junior</th> --->
                             <!-- <th>Extra Infantil</th> --->
                             <th>Extra Menor</th>
-                            <th>Nombre Huésped</th>
                             <th>Teléfono Huésped</th>
                             <th>Total Estancia</th>
                             <th>Total Pago</th>
@@ -925,16 +925,17 @@ class Reservacion extends ConexionMYSql
                             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
                             <td>'.$finalizado.'</td>
+                            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                             <td>'.$fila['noches'].'</td> 
-                            <td>'.$fila['numero_hab'].'</td> 
+                           <!--- <td>'.$fila['numero_hab'].'</td>  --->
                             <td>'.$fila['habitacion'].'</td>';
                         echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                        echo '<td>'.$fila['plan_alimentos'].'</td>  
                             <td>'.$fila['extra_adulto'].'</td> 
                              <!-- <td>'.$fila['extra_junior'].'</td> --> 
                             <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
                             <td>'.$fila['extra_menor'].'</td>
-                            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+                            
                             <td>'.$fila['tel'].'</td>';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
@@ -952,16 +953,16 @@ class Reservacion extends ConexionMYSql
                             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
                             <td>'.$finalizado.'</td>
+                            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                             <td>'.$fila['noches'].'</td> 
-                            <td>'.$fila['numero_hab'].'</td> 
+                            <!--- <td>'.$fila['numero_hab'].'</td>  --->
                             <td>'.$fila['habitacion'].'</td>';
                         echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                        echo '<td>'.$fila['plan_alimentos'].'</td>  
                             <td>'.$fila['extra_adulto'].'</td> 
                              <!-- <td>'.$fila['extra_junior'].'</td> --> 
                             <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
                             <td>'.$fila['extra_menor'].'</td>
-                            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                             <td>'.$fila['tel'].'</td>';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
@@ -980,16 +981,17 @@ class Reservacion extends ConexionMYSql
                     <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                     <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
                     <td>'.$finalizado.'</td>
+                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                     <td>'.$fila['noches'].'</td> 
-                    <td>'.$fila['numero_hab'].'</td> 
+                  <!---  <td>'.$fila['numero_hab'].'</td> --->
                     <td>'.$fila['habitacion'].'</td>';
                     echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                    echo '<td>'.$fila['plan_alimentos'].'</td>  
                     <td>'.$fila['extra_adulto'].'</td> 
                      <!-- <td>'.$fila['extra_junior'].'</td> --> 
                     <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+                   
                     <td>'.$fila['tel'].'</td>';
                     if($fila['forzar_tarifa']>0) {
                         echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
@@ -1078,16 +1080,16 @@ class Reservacion extends ConexionMYSql
 			<th>Número</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
+            <th>Nombre Huésped</th>
 			<th>Noches</th>
-			<th>No. Habitaciones</th>
+			<!--- <th>No. Habitaciones</th> --->
 			<th>Tarifa</th>
 			<th>Precio Hospedaje</th>
-			<th>Cantidad Hospedaje</th>
+			<th>Plan alimentos</th>
 			<th>Extra Adulto</th>
 			<!-- <th>Extra Junior</th> --->
 			<!-- <th>Extra Infantil</th> --->
 			<th>Extra Menor</th>
-			<th>Nombre Huésped</th>
 			<th>Teléfono Huésped</th>
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
@@ -1190,16 +1192,16 @@ class Reservacion extends ConexionMYSql
 			<th>Número</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
+            <th>Nombre Huésped</th>
 			<th>Noches</th>
-			<th>No. Habitaciones</th>
+			<!--- <th>No. Habitaciones</th> --->
 			<th>Tarifa</th>
 			<th>Precio Hospedaje</th>
-			<th>Cantidad Hospedaje</th>
+			<th>Plan alimentos</th>
 			<th>Extra Adulto</th>
 			<!-- <th>Extra Junior</th> --->
 			<!-- <th>Extra Infantil</th> --->
 			<th>Extra Menor</th>
-			<th>Nombre Huésped</th>
 			<th>Teléfono Huésped</th>
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
@@ -1255,8 +1257,9 @@ class Reservacion extends ConexionMYSql
             <td>'.$fila['ID'].'</td>
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
             <td>'.$fila['noches'].'</td>
-            <td>'.$fila['numero_hab'].'</td>';
+            <!--- <td>'.$fila['numero_hab'].'</td> --->';
 
             if(empty($fila['tarifa'])){
                 echo '
@@ -1268,12 +1271,11 @@ class Reservacion extends ConexionMYSql
                 ;
             }
             echo '<td>$'.number_format($fila['precio_hospedaje_reserva'], 2).'</td>';
-            echo '<td>'.$fila['cantidad_hospedaje'].'</td>
+            echo '<td>'.$fila['plan_alimentos'].'</td>
             <td>'.$fila['extra_adulto'].'</td>
-             <!-- <td>'.$fila['extra_junior'].'</td> -->
+            <!-- <td>'.$fila['extra_junior'].'</td> -->
             <!-- <td>'.$fila['extra_infantil'].'</td> --->
             <td>'.$fila['extra_menor'].'</td>
-            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
             <td>'.$fila['tel'].'</td>';
                 if($fila['forzar_tarifa']>0) {
                     echo '<td>$'.number_format($fila['total'], 2).'</td>';
@@ -1336,8 +1338,9 @@ class Reservacion extends ConexionMYSql
             <td>'.$fila['ID'].'</td> 
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
             <td>'.$fila['noches'].'</td> 
-            <td>'.$fila['numero_hab'].'</td>';
+            <!-- <td>'.$fila['numero_hab'].'</td> ---> ';
             if(empty($fila['tarifa'])){
                 echo '
                 <td>Forzar tarifa</td>'
@@ -1348,12 +1351,11 @@ class Reservacion extends ConexionMYSql
                 ;
             }
                 echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                echo '<td>'.$fila['cantidad_hospedaje'].'</td>  
+                echo '<td>'.$fila['plan_alimentos'].'</td>  
             <td>'.$fila['extra_adulto'].'</td> 
              <!-- <td>'.$fila['extra_junior'].'</td> --> 
             <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
             <td>'.$fila['extra_menor'].'</td>
-            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
             <td>'.$fila['tel'].'</td>';
                 if($fila['forzar_tarifa']>0) {
                     echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
@@ -1412,8 +1414,9 @@ class Reservacion extends ConexionMYSql
           <td>'.$fila['ID'].'</td>
           <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
           <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+          <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
           <td>'.$fila['noches'].'</td>
-          <td>'.$fila['numero_hab'].'</td>';
+         <!--- <td>'.$fila['numero_hab'].'</td> --->';
             if(empty($fila['tarifa'])){
                 echo '
                 <td>Forzar tarifa</td>'
@@ -1424,12 +1427,11 @@ class Reservacion extends ConexionMYSql
                 ;
             }
             echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-            echo '<td>'.$fila['cantidad_hospedaje'].'</td>
+            echo '<td>'.$fila['plan_alimentos'].'</td>
             <td>'.$fila['extra_adulto'].'</td>
             <!-- <td>'.$fila['extra_junior'].'</td> -->
             <!-- <td>'.$fila['extra_infantil'].'</td> --->
             <td>'.$fila['extra_menor'].'</td>
-            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
             <td>'.$fila['tel'].'</td>';
             if($fila['forzar_tarifa']>0) {
                 echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
@@ -1590,16 +1592,17 @@ class Reservacion extends ConexionMYSql
 			<th>Número</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
+            <th>Nombre Huésped</th>
 			<th>Noches</th>
-			<th>No. Habitaciones</th>
+			<!-- <th>No. Habitaciones</th> -->
 			<th>Tarifa</th>
 			<th>Precio Hospedaje</th>
-			<th>Cantidad Hospedaje</th>
+			<th>Plan alimentos</th>
 			<th>Extra Adulto</th>
 			<!-- <th>Extra Junior</th> --->
 			<!-- <th>Extra Infantil</th> --->
 			<th>Extra Menor</th>
-			<th>Nombre Huésped</th>
+			
 			<th>Teléfono Huésped</th>
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
@@ -1722,16 +1725,16 @@ class Reservacion extends ConexionMYSql
 				<th>Número</th>
 				<th>Fecha Entrada</th>
 				<th>Fecha Salida</th>
+                <th>Nombre Huésped</th>
 				<th>Noches</th>
-				<th>No. Habitaciones</th>
+				<!--- <th>No. Habitaciones</th> -->
 				<th>Tarifa</th>
 				<th>Precio Hospedaje</th>
-				<th>Cantidad Hospedaje</th>
+				<th>Plan alimentos</th>
 				<th>Extra Adulto</th>
 				<!-- <th>Extra Junior</th> --->
 				<!-- <th>Extra Infantil</th> --->
 				<th>Extra Menor</th>
-				<th>Nombre Huésped</th>
 				<th>Teléfono Huésped</th>
 				<th>Total Estancia</th>
 				<th>Total Pago</th>
@@ -2182,16 +2185,17 @@ class Reservacion extends ConexionMYSql
                 <th>Fecha Entrada</th>
                 <th>Fecha Salida</th>
                 <th>Checkout</th>
+                <th>Nombre Huésped</th>
                 <th>Noches</th>
-                <th>No. Habitaciones</th>
+                <!--- <th>No. Habitaciones</th> --->
                 <th>Tarifa</th>
                 <th>Precio Hospedaje</th>
-                <th>Cantidad Hospedaje</th>
+                <th>Plan alimentos</th>
                 <th>Extra Adulto</th>
                 <!-- <th>Extra Junior</th> --->
                 <!-- <th>Extra Infantil</th> --->
                 <th>Extra Menor</th>
-                <th>Nombre Huésped</th>
+                
                 <th>Teléfono Huésped</th>
                 <th>Total Estancia</th>
                 <th>Total Pago</th>
@@ -2219,16 +2223,17 @@ class Reservacion extends ConexionMYSql
                         <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                         <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
                         <td>'.$finalizado.'</td>
+                        <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                         <td>'.$fila['noches'].'</td>
-                        <td>'.$fila['numero_hab'].'</td>
+                       <!--- <td>'.$fila['numero_hab'].'</td> --->
                         <td>'.$fila['habitacion'].'</td>';
                         echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>
+                        echo '<td>'.$fila['plan_alimentos'].'</td>
                         <td>'.$fila['extra_adulto'].'</td>
                         <!-- <td>'.$fila['extra_junior'].'</td> -->
                         <!-- <td>'.$fila['extra_infantil'].'</td> --->
                         <td>'.$fila['extra_menor'].'</td>
-                        <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+                        
                         <td>'.$fila['tel'].'</td>';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
@@ -2246,16 +2251,17 @@ class Reservacion extends ConexionMYSql
                         <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                         <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
                         <td>'.$finalizado.'</td>
+                        <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                         <td>'.$fila['noches'].'</td>
-                        <td>'.$fila['numero_hab'].'</td>
+                        <!-- <td>'.$fila['numero_hab'].'</td> --->
                         <td>'.$fila['habitacion'].'</td>';
                         echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                        echo '<td>'.$fila['cantidad_hospedaje'].'</td>
+                        echo '<td>'.$fila['plan_alimentos'].'</td>
                         <td>'.$fila['extra_adulto'].'</td>
                         <!-- <td>'.$fila['extra_junior'].'</td> -->
                         <!-- <td>'.$fila['extra_infantil'].'</td> --->
                         <td>'.$fila['extra_menor'].'</td>
-                        <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+                       
                         <td>'.$fila['tel'].'</td>';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
@@ -2275,16 +2281,16 @@ class Reservacion extends ConexionMYSql
                         <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                         <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
                         <td>'.$finalizado.'</td>
+                        <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                         <td>'.$fila['noches'].'</td>
-                        <td>'.$fila['numero_hab'].'</td>
+                        <!--- <td>'.$fila['numero_hab'].'</td> --->
                         <td>'.$fila['habitacion'].'</td>';
                     echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
-                    echo '<td>'.$fila['cantidad_hospedaje'].'</td>
+                    echo '<td>'.$fila['plan_alimentos'].'</td>
                         <td>'.$fila['extra_adulto'].'</td>
                         <!-- <td>'.$fila['extra_junior'].'</td> -->
                         <!-- <td>'.$fila['extra_infantil'].'</td> --->
                         <td>'.$fila['extra_menor'].'</td>
-                        <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
                         <td>'.$fila['tel'].'</td>';
                     if($fila['forzar_tarifa']>0) {
                         echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';

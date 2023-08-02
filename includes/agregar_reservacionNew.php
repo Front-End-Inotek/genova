@@ -1,3 +1,5 @@
+
+
 <?php
   error_reporting(0);
   date_default_timezone_set('America/Mexico_City');
@@ -271,10 +273,13 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                     <label for="direccion">Dirección</label>
                     <input type="text" class="form-control" id="direccion">
                 </div>
+               
                 <div class="form-group col-md-4 col-12">
                     <label for="email">Correo electrónico </label>
                     <input type="email" class="form-control" id="correo" onblur="comprobarEmail()">
                 </div>
+
+
                 <div class="form-group col-md-2 col-12">';
                 if (empty($_GET['hab_id'])) {
                     echo '<label for="confirmacion">Confirmación</label>
@@ -293,6 +298,38 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 echo '
             </div>
             </div>
+            <!--- <div id="adicionales"> </div>
+
+            <div class="d-flex justify-content-between flex-wrap">
+            <h4>Adicional 1</h4>
+                <div class="form-group col-md-4 col-12">
+                    <label class="asterisco" for="telefono">Nombre</label>
+                    <input type="tel" class="form-control" id="telefono" required>
+                </div>
+                <div class="form-group col-md-4 col-12">
+                    <label for="pais">Apellido</label>
+                    <input type="text" class="form-control" id="pais">
+                </div>
+                <div class="form-group col-md-4 col-12">
+
+            </div>
+            </div> --->
+
+            <p>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-bs-target
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+  </div>
+</div>
+            
+
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="form-group col-md-4 col-12">
                     <label class="asterisco" for="forma-garantia">Forma de Garantía</label>
@@ -349,3 +386,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
 </div>
 </div>
 ';
+
+
+?>
+
