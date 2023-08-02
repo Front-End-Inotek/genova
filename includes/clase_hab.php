@@ -84,7 +84,7 @@
       function mostrar_hab_option($hab_id=0){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab  = 1 AND hab.estado=0 ORDER BY hab.id";// nombre
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab  = 1 ORDER BY hab.id";// nombre
         $comentario="Mostrar las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 

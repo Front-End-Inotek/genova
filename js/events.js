@@ -7756,9 +7756,32 @@ function mostrar_reporte_corte(id){
 	window.open("reportes/corte/reporte_corte_"+id+".pdf");
 }
 
-//funcion para ver los reportes de salida
-
-function ver_reportes_cancelaciones(btn=0){
+// Barra de diferentes busquedas en ver llegadas
+function buscar_canceladas(e,opcion){
+    setTimeout(() => {
+        var a_buscar=encodeURIComponent($("#a_buscar").val());
+        var usuario_id=localStorage.getItem("id");
+        var inicial = $("#inicial").val()
+        var final = $("#final").val()
+        if(inicial==undefined){
+            inicial="";
+        }
+        final = $("#final").val()
+        if(final==undefined){
+            final="";
+        }
+        funcion_php="ver_canceladas.php"
+        funcion_buscar = "buscar_canceladas.php"
+        if(a_buscar.length >0){
+            $('.pagination').hide();
+        }else{
+            //$('.pagination').show();
+            // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+0); return false; }
+        }
+        $("#tabla_reservacion").load("includes/buscar_canceladas.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion+"&final="+final);  
+    }, "1000");
+}
+function ver_reportes_canceladas(btn=0){
     var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()
     if(inicial==undefined){
@@ -7772,13 +7795,13 @@ function ver_reportes_cancelaciones(btn=0){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/ver_salidas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
+        $("#area_trabajo_menu").load("includes/ver_canceladas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
         closeModal();
         closeNav();
     }else{
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
-        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final);  
+        $("#tabla_reservacion").load("includes/buscar_canceladas.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final);  
     }
 }
 
