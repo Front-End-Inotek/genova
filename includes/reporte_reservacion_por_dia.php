@@ -87,10 +87,11 @@
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NÚMERO'),0,0,'C',True);
   $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True);
   $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True); 
+  $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",'HUÉSPED'),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NO.'),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'PLAN'),0,0,'C',True);
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'TIPO'),0,0,'C',True);
-  $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",'HUÉSPED'),0,0,'C',True); 
+   
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,0,'C',True); 
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'STATUS'),0,1,'C',True);
@@ -98,10 +99,11 @@
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'ENTRADA'),0,0,'C',True);
   $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'SALIDA'),0,0,'C',True); 
-  $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'HAB.'),0,0,'C',True);
-  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'HABITACIÓN'),0,0,'C',True); 
   $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True); 
+  $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'AL.'),0,0,'C',True);
+  $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'HABITACIÓN'),0,0,'C',True); 
+  
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'ESTANCIA'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'PAGO'),0,0,'C',True); 
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",''),0,1,'C',True);
@@ -118,6 +120,7 @@
       $numero= $fila['ID'];
       $fecha_entrada= date("d-m-Y",$fila['fecha_entrada']);
       $fecha_salida= date("d-m-Y",$fila['fecha_salida']);
+      $plan_alimentos = $fila['plan_alimentos'];
       $noches= $fila['noches']; 
       $numero_habitaciones= $fila['numero_hab']; 
       $tipo_habitacion= $fila['habitacion'];    
@@ -138,10 +141,11 @@
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$numero),1,0,'C');
           $pdf->Cell(16,5,iconv("UTF-8", "ISO-8859-1",$fecha_entrada),1,0,'C');
           $pdf->Cell(16,5,iconv("UTF-8", "ISO-8859-1",$fecha_salida),1,0,'C'); 
+          $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C');
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
-          $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$numero_habitaciones),1,0,'C');
+          $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$plan_alimentos),1,0,'C');
           $pdf->Cell(26,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
-          $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C'); 
+           
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_estancia),1,0,'C'); 
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_pago),1,0,'C'); 
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'Abierta'),1,1,'C'); 
@@ -149,10 +153,11 @@
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$numero),1,0,'C');
           $pdf->Cell(16,5,iconv("UTF-8", "ISO-8859-1",$fecha_entrada),1,0,'C');
           $pdf->Cell(16,5,iconv("UTF-8", "ISO-8859-1",$fecha_salida),1,0,'C'); 
-          $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
-          $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$numero_habitaciones),1,0,'C');
-          $pdf->Cell(26,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
           $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C'); 
+          $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
+          $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$plan_alimentos),1,0,'C');
+          $pdf->Cell(26,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
+          
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_estancia),1,0,'C'); 
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_pago),1,0,'C'); 
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'Garantizada'),1,1,'C');
@@ -162,7 +167,7 @@
           $pdf->Cell(16,5,iconv("UTF-8", "ISO-8859-1",$fecha_entrada),1,0,'C');
           $pdf->Cell(16,5,iconv("UTF-8", "ISO-8859-1",$fecha_salida),1,0,'C'); 
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
-          $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$numero_habitaciones),1,0,'C');
+          $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$plan_alimentos),1,0,'C');
           $pdf->Cell(26,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
           $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C'); 
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_estancia),1,0,'C'); 
@@ -184,10 +189,11 @@
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NÚMERO'),0,0,'C',True);
         $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True);
         $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True); 
+        $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",'HUÉSPED'),0,0,'C',True);
         $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NO.'),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'PLAN.'),0,0,'C',True);
         $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'TIPO'),0,0,'C',True);
-        $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",'HUÉSPED'),0,0,'C',True); 
+         
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,0,'C',True); 
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,0,'C',True);
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'STATUS'),0,1,'C',True);
@@ -195,10 +201,11 @@
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
         $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'ENTRADA'),0,0,'C',True);
         $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'SALIDA'),0,0,'C',True); 
-        $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'HAB.'),0,0,'C',True);
-        $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'HABITACIÓN'),0,0,'C',True); 
         $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True); 
+        $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+        $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'AL.'),0,0,'C',True);
+        $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'HABITACIÓN'),0,0,'C',True); 
+        
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'ESTANCIA'),0,0,'C',True);
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'PAGO'),0,0,'C',True); 
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",''),0,1,'C',True);

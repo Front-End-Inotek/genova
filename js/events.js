@@ -2623,8 +2623,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
             success:function(res){
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
-                console.log(res)
-                return
+                // console.log(res)
+                // return
                 confirarmNo = document.getElementById('no')
                 if(confirarmNo!=null){
                     confirarmNo = confirarmNo.checked
