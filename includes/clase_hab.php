@@ -258,7 +258,7 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="select_reca btn-square-lg" onclick="hab_cambio('.$hab_id.','.$estado.','.$fila['id'].')">';
+          echo '<div class="CambiarHabitacion btn-square-lg" onclick="hab_cambio('.$hab_id.','.$estado.','.$fila['id'].')">';
           echo '</br>';
           echo '<div>';
               //echo '<img src="images/persona.png"  class="center-block img-responsive">';

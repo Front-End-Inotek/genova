@@ -488,6 +488,12 @@
   background-color: #28a74671 !important;
 }
 
+.CambiarHabitacion{
+  border-left: 7px solid #9b9a9a !important;
+  background-color: #e5e4e4 !important;
+  color: black !important;
+}
+
 .task--transparente{
   border-left-width: 3px;
   padding: 8px 6px;
