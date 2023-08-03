@@ -466,6 +466,7 @@ class Reservacion extends ConexionMYSql
         INNER JOIN movimiento as m on hab.mov = m.id
         WHERE hab.estado > 1 
         ";
+        
 
         $sentencia_otras="";
         $consulta_otras = $this->realizaConsulta($otras, "");
@@ -491,7 +492,7 @@ class Reservacion extends ConexionMYSql
         // print_r($no_disponibles);
         $consulta = $this->realizaConsulta($ocupadas, "");
         while($fila=mysqli_fetch_array($consulta)) {
-            $no_disponibles [] = $fila['id_hab'];
+            $no_disponibles [] = $fila['id'];
         }
 
         $sentencia ="SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r
