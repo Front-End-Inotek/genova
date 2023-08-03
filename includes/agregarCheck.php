@@ -145,8 +145,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                   <input type="number" id="costoplan" hidden>
                 </div>
             </div>';
-          
-          
+
         echo'
             <br>
             <h2>Datos Personales</h2>

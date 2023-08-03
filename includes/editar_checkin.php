@@ -185,7 +185,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="adultos">Adultos</label>
-                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->extra_adulto.'"  onchange="editarTotalEstancia()">
+                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->extra_adulto.'"  onchange="editarTotalEstancia(); mostrarAcordeonCompleto()">
                     <input type="number" id="cantidad_hospedaje" value="'.$tarifa->cantidad_hospedaje.'" hidden>
                     <input type="number" id="tarifa_adultos" value="'.$tarifa->precio_adulto.'" hidden>
                     <input type="number" id="cantidad_maxima" value="'.$tarifa->cantidad_maxima.'" hidden >
@@ -306,6 +306,17 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 <input type="checkbox" id="confirmacion"  class="form-check"/>
                 </select>
             </div>
+            </div>
+            <div class="d-flex justify-content-between flex-wrap">
+            <div class="accordionCustom" id="acordeonchido">
+                <div class="accordion-itemCustom">
+                    <div id="acordeonIcon" onclick="mostrarAcorderon()" class="accordionItemHeaderCustom">
+                        <label>Agregar huespedes</label>
+                    </div>
+                    <div id="acordeon" class="accordionItemBodyCustom">
+                        
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
