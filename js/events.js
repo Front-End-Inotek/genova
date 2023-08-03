@@ -1845,65 +1845,6 @@ function editarTotalEstancia(event){
 
     console.log(extra_adultos)
 
-    //Crear elemementos necesarios.
-    // if(extra_adultos!=0){
-    //     adicionales = document.getElementById('adicionales')
-
-    //     for (let index = 0; index < extra_adultos; index++) {
-
-    //         div = document.createElement("div")
-    //         div.classList.add('d-flex')
-    //         div.classList.add('justify-content-between')
-    //         div.classList.add('flex-wrap')
-    //         h4 = document.createElement('h4')
-    //         h4.innerHTML="Adicional " + (index+1)
-    //         div.a
-    
-    //         div2 = document.createElement("div")
-    //         div2.classList.add('form-group')
-    //         div2.classList.add('col-md-4')
-    //         div2.classList.add('col-12')
-    //         label_nombre = document.createElement("label")
-    //         label_nombre.innerHTML ="Nombre"
-    //         label_nombre.classList.add('asterisco')
-    //         input_nombre = document.createElement("input")
-    //         input_nombre.classList.add('form-control')
-    
-    //         div3 = document.createElement("div")
-    //         div3.classList.add('form-group')
-    //         div3.classList.add('col-md-4')
-    //         div3.classList.add('col-12')
-    
-    //         label_ap = document.createElement("label")
-    //         label_ap.innerHTML ="Apellido"
-    //         label_ap.classList.add('asterisco')
-    //         input_ap = document.createElement("input")
-    //         input_ap.classList.add('form-control')
-    
-    //         div_vacio = document.createElement("div")
-    //         div_vacio.classList.add('form-group')
-    //         div_vacio.classList.add('col-md-4')
-    //         div_vacio.classList.add('col-12')
-            
-    //         div2.appendChild(label_nombre)
-    //         div2.appendChild(input_nombre)
-    
-    //         div3.appendChild(label_ap)
-    //         div3.appendChild(input_ap)
-    
-    
-    //         div.appendChild(div2)
-    //         div.appendChild(div3)
-    //         div.appendChild(div_vacio)
-    //         adicionales.appendChild(div)
-
-    //     }
-
-      
-
-    // }
-
-    // return
 
     extra_infantil =  $("#extra_infantil").val();
     cantidad_hospedaje =$("#cantidad_hospedaje").val()
@@ -3550,8 +3491,8 @@ function borrar_reservacion(id,preasignada=0){
 //funcion para agregar la habitacion seleccionada a la reservacion.
 function guardar_preasignar_reservacion(id,opcion=0)
 {
-    // var usuario_id=localStorage.getItem("id");
-    // preasignada = $("#preasignada").val();
+    var usuario_id=localStorage.getItem("id");
+    preasignada = $("#preasignada").val();
     // console.log(preasignada,id)
     // return
     if (id >0 && preasignada.length >0) {
@@ -3560,8 +3501,9 @@ function guardar_preasignar_reservacion(id,opcion=0)
         var datos = {
                 "id": id,
                 "preasignada": preasignada,
-                "usuario_id": usuario_id,
-            };
+                "usuario_id": usuario_id
+            }
+        // console.log(datos)
         $.ajax({
                 async:true,
                 type: "POST",
@@ -3571,6 +3513,7 @@ function guardar_preasignar_reservacion(id,opcion=0)
                 data:datos,
                 beforeSend:loaderbar,
                 success:function(res){
+                    console.log(res)
                     if(opcion==0){
                         ver_reservaciones();
                     }else{
@@ -3778,7 +3721,11 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
                 if(res=="OCUPADA"){
                     $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
                 }else{
-                    principal()
+                    seleccionar_vista()
+                    setTimeout(() => {
+                        mostrar_herramientas(hab_id,1,'')
+                        $('#caja_herramientas').modal('show');
+                    }, 2000);
                 }
             },
             //success:problemas_sistema,
@@ -3786,7 +3733,7 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             error:problemas_sistema
           });
     }else{
-        $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
+        $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab+"&mov="+movimiento);
     }
 
     //si no, tendrá que seleccionar una de las habitaciones disponibles.
@@ -3799,8 +3746,34 @@ function select_asignar_reservacion(id,numero_hab){
 	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
 }
 
+ function seleccionar_vista(){
+    vista= localStorage.getItem('vista')
+    if(vista==3 || vista==0){
+        var usuario_id=localStorage.getItem("id");
+        $('#area_trabajo').hide();
+        $('#area_trabajo_menu').show();
+        $('#pie').show();
+        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        closeModal();
+        closeNav();
+    }else{
+        var id=localStorage.getItem("id");
+        var token=localStorage.getItem("tocken");
+        localStorage.removeItem('estatus_hab')
+        estatus_hab=""
+        $('#area_trabajo').hide();
+        $('#pie').show();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab,function(){
+        });
+        closeModal();
+        closeNav();
+    }
+}
+
 // Asignar una reservacion a una habitacion en estado disponible
-function asignar_reservacion(hab_id,id_reservacion,habitaciones){
+function asignar_reservacion(hab_id,id_reservacion,habitaciones,mov){
+    //here
     if(habitaciones == 1){
         var usuario_id=localStorage.getItem("id");
         $('#caja_herramientas').modal('hide');
@@ -3809,6 +3782,7 @@ function asignar_reservacion(hab_id,id_reservacion,habitaciones){
             "id_reservacion": id_reservacion,
             "habitaciones": habitaciones,
             "usuario_id": usuario_id,
+            "movimiento":mov,
             };
         $.ajax({
               async:true,
@@ -3818,7 +3792,15 @@ function asignar_reservacion(hab_id,id_reservacion,habitaciones){
               url:"includes/asignar_reservacion.php",
               data:datos,
               beforeSend:loaderbar,
-              success:principal,
+              success:function(res){
+                // console.log(res)
+                // return
+                seleccionar_vista()
+                setTimeout(() => {
+                    mostrar_herramientas(hab_id,1,'')
+                    $('#caja_herramientas').modal('show');
+                }, 2000);
+              },
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -5726,6 +5708,7 @@ function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
     }
 }
 
+
 //* Edo. Cuenta - Cambiar hab *//
 
 // Modal de cambiar de habitacion el monto en estado de cuenta
@@ -6988,7 +6971,6 @@ function mesa_disponible_asignar(mesa_id,estado){
 }
 
 
-
 // Asignar una mesa disponible
 function disponible_asignar_mesa(mesa_id,estado){
 	var usuario_id=localStorage.getItem("id");
@@ -7781,9 +7763,32 @@ function mostrar_reporte_corte(id){
 	window.open("reportes/corte/reporte_corte_"+id+".pdf");
 }
 
-//funcion para ver los reportes de salida
-
-function ver_reportes_cancelaciones(btn=0){
+// Barra de diferentes busquedas en ver llegadas
+function buscar_canceladas(e,opcion){
+    setTimeout(() => {
+        var a_buscar=encodeURIComponent($("#a_buscar").val());
+        var usuario_id=localStorage.getItem("id");
+        var inicial = $("#inicial").val()
+        var final = $("#final").val()
+        if(inicial==undefined){
+            inicial="";
+        }
+        final = $("#final").val()
+        if(final==undefined){
+            final="";
+        }
+        funcion_php="ver_canceladas.php"
+        funcion_buscar = "buscar_canceladas.php"
+        if(a_buscar.length >0){
+            $('.pagination').hide();
+        }else{
+            //$('.pagination').show();
+            // if( e.which === 8 ){ $("#area_trabajo_menu").load("includes/"+funcion_php+"?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+0); return false; }
+        }
+        $("#tabla_reservacion").load("includes/buscar_canceladas.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion+"&final="+final);  
+    }, "1000");
+}
+function ver_reportes_canceladas(btn=0){
     var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()
     if(inicial==undefined){
@@ -7797,13 +7802,13 @@ function ver_reportes_cancelaciones(btn=0){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/ver_salidas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
+        $("#area_trabajo_menu").load("includes/ver_canceladas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&btn="+btn+"&final="+final);
         closeModal();
         closeNav();
     }else{
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
-        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final);  
+        $("#tabla_reservacion").load("includes/buscar_canceladas.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final);  
     }
 }
 
@@ -8075,6 +8080,39 @@ function asignarHabitacion(){
 // Modal de mandar una habitacion a estado limpieza
 function hab_estado_limpiar(hab_id,estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_estado_limpiar.php?hab_id="+hab_id+"&estado="+estado);
+}
+// Modal de mandar una habitacion a estado limpieza
+function hab_estado_cambiar_hab(id_reserva, hab_id,estado,ruta){
+	$("#mostrar_herramientas").load("includes/hab_modal_estado_cambiar_hab.php?hab_id="+hab_id+"&estado="+estado);
+}
+
+
+// Cambiar huesped de habitacion 
+function hab_cambio(hab_id,estado,nueva_hab_id){
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario_id": usuario_id,
+            "nueva_hab_id": nueva_hab_id,
+		};
+	$.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/hab_cambio.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:function(res){
+                principal()
+            },
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+		});
+	return false;
 }
 
 // Mandar una habitacion a estado limpieza

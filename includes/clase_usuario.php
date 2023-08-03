@@ -790,7 +790,7 @@
         $sentencia = "SELECT * FROM usuario WHERE activo = 1 AND nivel = $nivel AND estado = 1 ORDER BY usuario";
         $comentario="Asignación de usuarios a la clase usuario funcion constructor";
         // echo $sentencia . "|" . $nuevo_estado;
-
+        
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))

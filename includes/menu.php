@@ -47,7 +47,7 @@
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de salidas</a></i></ul>';
 			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_salidas()">Reporte de cancelaciones</a></i></ul>';
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_reportes_canceladas()">Reporte de cancelaciones</a></i></ul>';
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="saldo_huespedes()"> Saldo de huéspedes </a></i></ul>';
 		echo'

@@ -9,6 +9,8 @@
   $reservacion= NEW Reservacion($_POST['id_reservacion']);
   $hab = NEW Hab($_POST['hab_id']);
 
+
+
   //verificar que la habitación no está ocupada desde una preasignada.
   if($hab->estado!=0){
     echo "OCUPADA";
@@ -31,11 +33,12 @@
       $total= $reservacion->total_hab; 
     }
   }
- 
+
   //proceso para asignar reservacion a hab si es 'preasignada'
   if(isset($_POST['movimiento']) && !empty($_POST['movimiento'])){
     $mov_actual= $_POST['movimiento'];
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
+    $reservacion->preasignar_hab($reservacion->id, $_POST['hab_id']);
    
   }else{
     $id_movimiento= $movimiento->disponible_asignar($_POST['id_reservacion'],$_POST['hab_id'],$reservacion->id_huesped,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->tarifa);
