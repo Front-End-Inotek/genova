@@ -84,7 +84,7 @@
       function mostrar_hab_option($hab_id=0){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab
-        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab  = 1 ORDER BY hab.id";// nombre
+        INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab  = 1 AND hab.estado=0 ORDER BY hab.id";// nombre
         $comentario="Mostrar las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 
@@ -237,6 +237,52 @@
           }
         }
       }
+
+      //Mostrar las reservas disponibles para asignar a la habitación seleccionada.
+      function select_hab_reserva($hab_id,$estado,$nuevo_estado,$hab_tipo){
+        // Seleccionar recamarera    
+
+      if($nuevo_estado == 1){
+        $nivel= 3;
+      }else{
+        $nivel= $nuevo_estado;
+      }
+      // echo $hab_id . "|" . $estado ."|".$nuevo_estado;
+      if($nuevo_estado == 2){
+        $nivel = 3;
+      }
+      $hoy=date('Y-m-d');
+      $sentencia = "SELECT reservacion.id, movimiento.id_hab,movimiento.id as mov
+      FROM reservacion 
+      INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
+      WHERE tipo_hab = '$hab_tipo' AND from_unixtime(fecha_entrada + 3600,'%Y-%m-%d') = '$hoy' AND reservacion.estado_interno='garantizada' AND estado=1";
+      $comentario="Asignación de usuarios a la clase usuario funcion constructor";
+      // echo $sentencia . "|" . $nuevo_estado;
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      $contador_row = mysqli_num_rows($consulta);
+
+      if($contador_row==0){
+        echo '¡No existe ninguna reservación disponible para asignar a la habitación!';
+      }
+
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+        echo '<div class="supervicion AsignarReservaBtn btn-square-lg" onclick="select_asignar_checkin('.$fila['id'].',1,'.$hab_id.','.$fila['mov'].')">';
+        echo '</br>';
+        echo '<div>';
+            //echo '<img src="images/persona.png"  class="center-block img-responsive">';
+        echo '</div>';
+        echo '<div>';
+          echo 'Reservación: '.$fila['id'];
+        echo '</div>';
+        echo '</div>';
+      echo '</div>';
+      }
+    
+    }
+
       function select_hab_cambio($hab_id,$estado,$nuevo_estado,$hab_tipo){
           // Seleccionar recamarera    
 
@@ -255,6 +301,12 @@
         // echo $sentencia . "|" . $nuevo_estado;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
+        $contador_row = mysqli_num_rows($consulta);
+
+        if($contador_row==0){
+          echo '¡No existe ninguna habitación disponible para hacer el cambio de habitación!';
+        }
+
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';

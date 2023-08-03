@@ -125,7 +125,7 @@ switch ($_GET['estado']) {
 	//boton para agregar reservas
 	if(true){
 		echo '<div class="col-md-3 btn-herramientas">';
-		echo '<div class="supervision AsignarReserva  btn-square-lg" onclick="asignarHabitacion()">';
+		echo '<div class="supervision AsignarReserva  btn-square-lg" onclick="asignarHabitacion('.$id_reserva.','.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
 				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
@@ -469,10 +469,11 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	break;
+	//reserva pagada
 	case 6 :
 	if($user->nivel<=2){
 		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupadoH btn-square-lg" onclick="select_asignar_checkin()">';
+		echo '<div class="ocupadoH btn-square-lg" onclick="select_asignar_checkin('.$_GET['reserva_id'].',1,'.$_GET['hab_id'].','.$_GET['mov'].')">';
 			echo '</br>';
 			echo '<div>';
 				//echo '<img src="images/home.png"  class="center-block img-responsive">';

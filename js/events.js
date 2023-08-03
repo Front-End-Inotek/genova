@@ -310,10 +310,10 @@ function problemas_sistema(datos){
 }
 
 // Muestra los subestados de las habitaciones
-function mostrar_herramientas(hab_id,estado,nombre,entrada=0,salida=0){
+function mostrar_herramientas(hab_id,estado,nombre,entrada=0,salida=0,mov=0,reserva_id=""){
 	var id=localStorage.getItem("id");
     nombre = encodeURI(nombre)
-    include="includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id+"&entrada="+entrada+"&salida="+salida
+    include="includes/mostrar_herramientas.php?hab_id="+hab_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id+"&entrada="+entrada+"&salida="+salida+"&mov="+mov+"&reserva_id="+reserva_id
     //console.log(include)
 	$("#mostrar_herramientas").load(include);
 }
@@ -1973,7 +1973,7 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
             });       
         }
         $("#preasignada").load(include,function(res){
-            // console.log(res)
+            //console.log(res)
         });
     }
     }
@@ -8073,8 +8073,8 @@ function hab_estado_inicial(hab_id,estado,nuevo_estado){
 }
 
 // Modal para asignar una reservacion
-function asignarHabitacion(){
-    $("#mostrar_herramientas").load("includes/hab_modal_asignar_reserva.php")
+function asignarHabitacion(id_reserva,hab_id,estado,ruta){
+    $("#mostrar_herramientas").load("includes/hab_modal_asignar_reserva.php?hab_id="+hab_id+"&estado="+estado)
 }
 
 // Modal de mandar una habitacion a estado limpieza
