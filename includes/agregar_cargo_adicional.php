@@ -32,7 +32,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
           <div id="boton_tipo">
-          <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_cargo_adicional('.$id.','.$mov.')">
+          <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_cargo_adicional('.$id.','.$mov.')">Guardar</button>
         </div>
         </div>
       </div>';

@@ -80,7 +80,7 @@
           <div class="col-sm-4"></div>
           <div class="col-sm-2">
           <div id="boton_usuario">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">
+            <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">Guardar</button>
           </div>
           </div>
         </div>

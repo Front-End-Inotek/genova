@@ -73,7 +73,7 @@
           <div class="col-sm-9"></div>
           <div class="col-sm-2">
           <div id="boton_cupon">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_cupon('.$_GET['id'].',0,0)">
+            <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_cupon('.$_GET['id'].',0,0)">Guardar</button>
           </div>
           </div>
           <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_cupon()"> ←</button></div>
