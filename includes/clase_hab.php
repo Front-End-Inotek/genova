@@ -237,6 +237,41 @@
           }
         }
       }
+      function select_hab_cambio($hab_id,$estado,$nuevo_estado,$hab_tipo){
+          // Seleccionar recamarera    
+
+        if($nuevo_estado == 1){
+          $nivel= 3;
+        }else{
+          $nivel= $nuevo_estado;
+        }
+        // echo $hab_id . "|" . $estado ."|".$nuevo_estado;
+        if($nuevo_estado == 2){
+          $nivel = 3;
+        }
+
+        $sentencia = "SELECT * FROM hab WHERE estado = 0 AND tipo = '$hab_tipo' AND estado_hab=1 ORDER BY hab.id";
+        $comentario="Asignación de usuarios a la clase usuario funcion constructor";
+        // echo $sentencia . "|" . $nuevo_estado;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+          echo '<div class="select_reca btn-square-lg" onclick="hab_cambio('.$hab_id.','.$estado.','.$fila['id'].')">';
+          echo '</br>';
+          echo '<div>';
+              //echo '<img src="images/persona.png"  class="center-block img-responsive">';
+          echo '</div>';
+          echo '<div>';
+            echo $fila['nombre'];
+          echo '</div>';
+          echo '</div>';
+        echo '</div>';
+        }
+      
+      }
+
       //Cambiar el ultimo movimiento (Fecha)  de una habitacion (Reserva)
 
       function cambiohabUltimo($hab){

@@ -38,6 +38,7 @@
   if(isset($_POST['movimiento']) && !empty($_POST['movimiento'])){
     $mov_actual= $_POST['movimiento'];
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
+    $reservacion->preasignar_hab($reservacion->id, $_POST['hab_id']);
    
   }else{
     $id_movimiento= $movimiento->disponible_asignar($_POST['id_reservacion'],$_POST['hab_id'],$reservacion->id_huesped,$reservacion->fecha_entrada,$reservacion->fecha_salida,$_POST['usuario_id'],$reservacion->tarifa);

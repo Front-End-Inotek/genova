@@ -281,7 +281,7 @@ switch ($_GET['estado']) {
 	if($user->nivel<=2){
 		$ruta="recargar_pagina()";
 		echo '<div class="col-md-3 btn-herramientas">';
-		echo '<div class="editarHab btn-square-lg" onclick="editar_checkin('.$id_reserva.','.$_GET['hab_id'].',\''.$ruta.'\')">';
+		echo '<div class="editarHab btn-square-lg" onclick="hab_estado_cambiar_hab('.$id_reserva.','.$_GET['hab_id'].','.$_GET['estado'].',\''.$ruta.'\')">';
 			echo '</br>';
 			echo '<div>';
 			echo '</div>';

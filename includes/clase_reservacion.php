@@ -375,6 +375,7 @@ class Reservacion extends ConexionMYSql
         return $dates;
     }
 
+
      public function saber_id_movimiento_($id)
      {
          $id_mov= 0;

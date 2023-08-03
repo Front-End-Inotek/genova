@@ -153,10 +153,11 @@ setlocale(LC_ALL, "es_ES");
             $movimiento = new movimiento(0);
             $cronometro = 0;
             //Se utiliza la misma consulta para el rack de operaciones
-            $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
+            $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin, datos_vehiculo.id as id_vehiculo
             ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped
             FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
             LEFT JOIN huesped on huesped.id = movimiento.id_huesped
+            LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
             WHERE hab.id=$hab_id
             AND hab.estado_hab = 1  ORDER BY id";
             $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -176,13 +177,15 @@ setlocale(LC_ALL, "es_ES");
                 $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado,
                 reservacion.estado_interno AS garantia
                 ,movimiento.estado_interno AS interno
+                ,huesped.nombre as n_huesped, huesped.apellido as a_huesped
                 FROM movimiento
                 left join reservacion on movimiento.id_reservacion = reservacion.id
                 LEFT JOIN hab on movimiento.id_hab = hab.id
+                LEFT JOIN huesped on movimiento.id_huesped = huesped.id
                 where reservacion.estado =1
                 and movimiento.motivo='preasignar'
                 and movimiento.id_hab=$hab
-                and from_unixtime(fecha_entrada + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') 
+                and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') 
                 order by reservacion.fecha_entrada asc;
                 ";
                 $comentario = "Optenemos las habitaciones para el rack de habitaciones";
