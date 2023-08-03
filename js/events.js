@@ -2901,30 +2901,29 @@ function guardarUsoCasa(hab_id,estado){
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
     //****************************************************************************************** */
     // funcion para los huespedes extras
-    const nombresHuespedes = document.querySelectorAll(".nombreExtra")
+    const nombresHuespedes = document.querySelectorAll(".nombreExtra");
     const valoresNombres = [];
     nombresHuespedes.forEach(function(input) {
         valoresNombres.push(input.value);
     });
     console.log(valoresNombres)
-    const apellidosHuespedes = document.querySelectorAll(".apellidoExtra")
+    const apellidosHuespedes = document.querySelectorAll(".apellidoExtra");
     const valoresApellidos = [];
     apellidosHuespedes.forEach(function(input){
-        valoresApellidos.push(input.value)
-    })
-    console.log(valoresApellidos)
-
-    const arregloHuespedes = []
+        valoresApellidos.push(input.value);
+    });
+    console.log(valoresApellidos);
+    const arregloHuespedes = [];
     for (let i = 0; i < valoresNombres.length; i++){
         const nuevoObjeto = {
             nombre: valoresNombres[i],
             apellido: valoresApellidos[i]
         };
         arregloHuespedes.push(nuevoObjeto)
-    }
-    console.log(arregloHuespedes)
-    // *********************apoco si tilin***************************
+    };
+    console.log(arregloHuespedes);
 
+    // *********************apoco si tilin***************************
 
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
         alert("Fecha de asignación inválida")
@@ -8325,17 +8324,17 @@ function mostrarAcordeonCompleto(){
     if(input > 1){
         acorderon.classList.add("accordionCustomMostrar")
         cuerpoacordeon.innerHTML = ``
-        for ( let i = 0 ; i < input ; i++ ) {
+        for ( let i = 1 ; i < input ; i++ ) {
             cuerpoacordeon.innerHTML += `
                 <div class="accordionItemBodyContentCustom">
-                    <label style="width: 100%;text-align: left;">Huesped ${i + 1}</label>
+                    <label style="width: 100%;text-align: left;">Acompañante ${i}</label>
                     <div >
-                        <label for="inputName${i}" class="form-label" style="width: 90%;text-align: left;">Nombre</label>
-                        <input type="text" class="form-control nombreExtra" id="inputName${i}" >
+                        <label for="inputName${i}" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
+                        <input type="text" class="form-control nombreExtra" id="inputName${i}" minlength="5" maxlength="15" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputLastName${i}" class="form-label" style="width: 90%;text-align: left;">Apellido</label>
-                        <input type="text" class="form-control apellidoExtra" id="inputLastName${i}" >
+                        <label for="inputLastName${i}" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
+                        <input type="text" class="form-control apellidoExtra" id="inputLastName${i}" minlength="5" maxlength="15" required>
                     </div>
                 </div>
             `
