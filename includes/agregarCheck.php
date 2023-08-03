@@ -224,7 +224,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 <div class="accordionCustom" id="acordeonchido">
                     <div class="accordion-itemCustom">
                         <div id="acordeonIcon" onclick="mostrarAcorderon()" class="accordionItemHeaderCustom">
-                            <label>Agregar huespedes</label>
+                            <label>Acompañantes</label>
                         </div>
                         <div id="acordeon" class="accordionItemBodyCustom">
                             

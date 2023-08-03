@@ -1357,7 +1357,7 @@ input[required] + label:after {
 } */
 
 .accordionCustom{
-  width: 100%;
+  width: 97%;
   /* max-width: 1000px; */
   margin: 1rem auto;
   display: none;
