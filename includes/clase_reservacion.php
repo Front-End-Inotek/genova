@@ -1093,7 +1093,7 @@ class Reservacion extends ConexionMYSql
          $tarifa_td="";
 
          echo '
-         <div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+         <div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; min-height: 300px;">
          <table class="table table-bordered table-hover">
          <thead>
              <tr class="table-primary-encabezado text-center">
@@ -1240,7 +1240,7 @@ class Reservacion extends ConexionMYSql
          $tarifa_td="";
 
          echo '
-         <div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+         <div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
          <table class="table table-bordered table-hover">
          <thead>
              <tr class="table-primary-encabezado text-center">
@@ -1384,7 +1384,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1496,7 +1496,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1897,7 +1897,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; ">
+		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">

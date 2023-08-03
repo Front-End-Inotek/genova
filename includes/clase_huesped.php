@@ -543,7 +543,7 @@
         <br>
         <br>
 
-        <div class="table-responsive" id="tabla_huesped" style="max-height:560px;">
+        <div class="table-responsive" id="tabla_huesped" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">

@@ -493,6 +493,18 @@
   background-color: #e5e4e4 !important;
   color: black !important;
 }
+.CambiarHabitacion:hover{
+  background-color: #9b9a9a !important;
+}
+.btnCambiarHab{
+  border-left: 7px solid #17A2B8 !important;
+  color: #000 !important;
+  background-color: #a5eaf4 !important;
+}
+.btnCambiarHab:hover{
+  background-color: #17A2B8 !important;
+  color: black !important;
+}
 
 .task--transparente{
   border-left-width: 3px;
