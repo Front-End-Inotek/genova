@@ -405,7 +405,7 @@
         return $cantidad;
       }
       // Seleccionar habitacion a asignar reservacion para check-in
-      function select_asignar_reservacion($tipo_hab,$id_reservacion,$habitaciones,$multiple){
+      function select_asignar_reservacion($tipo_hab,$id_reservacion,$habitaciones,$multiple,$mov=0){
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab 
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.estado_hab = 1 AND hab.tipo = $tipo_hab ORDER BY hab.id";
@@ -416,7 +416,7 @@
         {
           echo '<div class="col-lg-4 col-md-5 col-sm-5 col-12 btn-herramientas estado estado">';
             if($multiple == 0){
-              echo '<div class="estado estado0" onclick="asignar_reservacion('.$fila['ID'].','.$id_reservacion.','.$habitaciones.')">';
+              echo '<div class="estado estado0" onclick="asignar_reservacion('.$fila['ID'].','.$id_reservacion.','.$habitaciones.','.$mov.')">';
             }else{
               echo '<div class="estado estado0" onclick="asignar_reservacion_multiple('.$fila['ID'].','.$id_reservacion.','.$habitaciones.')">';
             }

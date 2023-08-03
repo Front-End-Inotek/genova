@@ -3534,8 +3534,9 @@ function guardar_preasignar_reservacion(id,opcion=0)
         var datos = {
                 "id": id,
                 "preasignada": preasignada,
-                "usuario_id": usuario_id,
-            };
+                "usuario_id": usuario_id
+            }
+        console.log("??")
         $.ajax({
                 async:true,
                 type: "POST",
@@ -3545,6 +3546,7 @@ function guardar_preasignar_reservacion(id,opcion=0)
                 data:datos,
                 beforeSend:loaderbar,
                 success:function(res){
+                    console.log(res)
                     if(opcion==0){
                         ver_reservaciones();
                     }else{
@@ -3760,7 +3762,7 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             error:problemas_sistema
           });
     }else{
-        $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
+        $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab+"&mov="+movimiento);
     }
 
     //si no, tendrá que seleccionar una de las habitaciones disponibles.
@@ -3773,8 +3775,34 @@ function select_asignar_reservacion(id,numero_hab){
 	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
 }
 
+ function seleccionar_vista(){
+    vista= localStorage.getItem('vista')
+    if(vista==3 || vista==0){
+        var usuario_id=localStorage.getItem("id");
+        $('#area_trabajo').hide();
+        $('#area_trabajo_menu').show();
+        $('#pie').show();
+        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        closeModal();
+        closeNav();
+    }else{
+        var id=localStorage.getItem("id");
+        var token=localStorage.getItem("tocken");
+        localStorage.removeItem('estatus_hab')
+        estatus_hab=""
+        $('#area_trabajo').hide();
+        $('#pie').show();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab,function(){
+        });
+        closeModal();
+        closeNav();
+    }
+}
+
 // Asignar una reservacion a una habitacion en estado disponible
-function asignar_reservacion(hab_id,id_reservacion,habitaciones){
+function asignar_reservacion(hab_id,id_reservacion,habitaciones,mov){
+    //here
     if(habitaciones == 1){
         var usuario_id=localStorage.getItem("id");
         $('#caja_herramientas').modal('hide');
@@ -3783,6 +3811,7 @@ function asignar_reservacion(hab_id,id_reservacion,habitaciones){
             "id_reservacion": id_reservacion,
             "habitaciones": habitaciones,
             "usuario_id": usuario_id,
+            "movimiento":mov,
             };
         $.ajax({
               async:true,
@@ -3792,7 +3821,15 @@ function asignar_reservacion(hab_id,id_reservacion,habitaciones){
               url:"includes/asignar_reservacion.php",
               data:datos,
               beforeSend:loaderbar,
-              success:principal,
+              success:function(res){
+                console.log(res)
+                return
+                seleccionar_vista()
+                setTimeout(() => {
+                    mostrar_herramientas(hab_id,1,'')
+                    $('#caja_herramientas').modal('show');
+                }, 2000);
+              },
               //success:problemas_sistema,
               timeout:5000,
               error:problemas_sistema
@@ -5700,6 +5737,7 @@ function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
     }
 }
 
+
 //* Edo. Cuenta - Cambiar hab *//
 
 // Modal de cambiar de habitacion el monto en estado de cuenta
@@ -6960,7 +6998,6 @@ function mostrar_herramientas_mesas(mesa_id,estado,nombre){
 function mesa_disponible_asignar(mesa_id,estado){
 	$("#mostrar_herramientas").load("includes/mesa_disponible_asignar.php?mesa_id="+mesa_id+"&estado="+estado);
 }
-
 
 
 // Asignar una mesa disponible

@@ -97,7 +97,7 @@ $user = NEW Usuario($_GET['id']);
 $estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
 $id_reserva = $movimiento->saber_id_reservacion($hab->mov);
 echo '<div class="modal-header" style="background-color: #97b2f9ee; color: #000;">
-		<h3 class="modal-title">Habitacion '.$_GET['nombre'].' </h3>
+		<h3 class="modal-title">Habitacion '.$nombre_habitacion.' </h3>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	</div>';
 echo '<div class="container-fluid">';
@@ -260,20 +260,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 		echo '</div>';
 	}
-	if($user->nivel<=2 && $estado_interno != 'sin estado'){
-		echo '<div class="col-md-3 btn-herramientas">';
-		echo '<div class="terminar btn-square-lg" onclick="hab_ocupada_terminar_interno('.$_GET['hab_id'].','.$_GET['estado'].')">';
-			echo '</br>';
-			echo '<div>';
-				//echo '<img src="images/home.png"  class="center-block img-responsive">';
-			echo '</div>';
-			echo '<div>';
-			echo 'Terminar';
-			echo '</div>';
-			echo '</br>';
-		echo '</div>';
-		echo '</div>';
-	}
+
 	/* boton para editar */
 	if($user->nivel<=2){
 		$ruta="recargar_pagina()";
@@ -289,6 +276,38 @@ switch ($_GET['estado']) {
 		echo '</div>';
 		echo '</div>';
 	}
+
+	/* boton para editar */
+	if($user->nivel<=2){
+		$ruta="recargar_pagina()";
+		echo '<div class="col-md-3 btn-herramientas">';
+		echo '<div class="editarHab btn-square-lg" onclick="editar_checkin('.$id_reserva.','.$_GET['hab_id'].',\''.$ruta.'\')">';
+			echo '</br>';
+			echo '<div>';
+			echo '</div>';
+			echo '<div>';
+			echo 'Cambiar hab.';
+			echo '</div>';
+			echo '</br>';
+		echo '</div>';
+		echo '</div>';
+	}
+
+	if($user->nivel<=2 && $estado_interno != 'sin estado'){
+		echo '<div class="col-md-3 btn-herramientas">';
+		echo '<div class="terminar btn-square-lg" onclick="hab_ocupada_terminar_interno('.$_GET['hab_id'].','.$_GET['estado'].')">';
+			echo '</br>';
+			echo '<div>';
+				//echo '<img src="images/home.png"  class="center-block img-responsive">';
+			echo '</div>';
+			echo '<div>';
+			echo 'Terminar';
+			echo '</div>';
+			echo '</br>';
+		echo '</div>';
+		echo '</div>';
+	}
+	
 	/*if($user->nivel<=2){
 		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas" >';
 				echo '<div class="restaurante btn-square-lg" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].')">';

@@ -10,6 +10,11 @@
 
 
   $disponible= $hab->consultar_disponibilidad($tipo_hab);
+  $mov = 0;
+  if(isset($_GET['mov']) && !empty($_GET['mov'])){
+    $mov =$_GET['mov'];
+  }
+
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -36,7 +41,7 @@
               echo "¡No existen ".$_GET['numero_hab']." habitaciones disponibles en ese tipo de habitación!";
             echo '</div>';
           }else{
-            $hab->select_asignar_reservacion($tipo_hab,$_GET['id'],$_GET['numero_hab'],0);
+            $hab->select_asignar_reservacion($tipo_hab,$_GET['id'],$_GET['numero_hab'],0,$mov);
           }
         echo '</div>';
       echo '</div>
