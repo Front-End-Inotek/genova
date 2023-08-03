@@ -105,6 +105,7 @@ show_info($_GET['hab_id'],$_GET['estado'],$estado_interno);
 echo '</br>';
 echo '<div class="row flex-wrap">';
 
+
 switch ($_GET['estado']) {
 	case 0:
 	if($user->nivel<=2 && $conf->hospedaje ==1){
@@ -116,6 +117,21 @@ switch ($_GET['estado']) {
 			echo '</div>';
 			echo '<div>';
 			echo 'Asignar / ocupar';
+			echo '</div>';
+			echo '</br>';
+		echo '</div>';
+		echo '</div>';
+	}
+	//boton para agregar reservas
+	if(true){
+		echo '<div class="col-md-3 btn-herramientas">';
+		echo '<div class="supervision AsignarReserva  btn-square-lg" onclick="asignarHabitacion()">';
+			echo '</br>';
+			echo '<div>';
+				//echo '<img src="images/cama.png"  class="center-block img-responsive">';
+			echo '</div>';
+			echo '<div>';
+			echo 'Asignar reserva';
 			echo '</div>';
 			echo '</br>';
 		echo '</div>';

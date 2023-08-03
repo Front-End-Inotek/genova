@@ -473,6 +473,20 @@
 .editarHab:hover {
   background-color: #FD7E14 !important;
 }
+.AsignarReserva{
+  border-left: 7px solid #6610F2 !important;
+  color: #fff !important;
+  background-color: #6e42c172 !important;
+}
+.AsignarReserva:hover{
+  background-color: #6610F2 !important;
+}
+
+.AsignarReservaBtn{
+  border-left: 7px solid #28A745 !important;
+  color: #000 !important;
+  background-color: #28a74671 !important;
+}
 
 .task--transparente{
   border-left-width: 3px;

@@ -7346,7 +7346,7 @@ function ver_cupones(){
 // Muestra la paginacion de los cupones
 function ver_cupones_paginacion(buton,posicion){
     var usuario_id=localStorage.getItem("id");
-    $("#paginacion_cupones").load("includes/ver_cupones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);   
+    $("#paginacion_cupones").load("includes/ver_cupones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id);
 }
 
 // Barra de diferentes busquedas en ver cupones
@@ -7358,7 +7358,7 @@ function buscar_cupon(){
     }else{
         $('.pagination').show();
     }
-	$("#tabla_cupon").load("includes/buscar_cupon.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+	$("#tabla_cupon").load("includes/buscar_cupon.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);
 }
 
 // Busqueda por fecha en ver cupones
@@ -7428,8 +7428,7 @@ function modificar_cupon(id,hab_id,id_reservacion){
             }
     }else{
         alert("Campos incompletos");
-    } 
-
+    }
 }
 
 // Borrar un cupon
@@ -8068,6 +8067,11 @@ function hab_estado_inicial(hab_id,estado,nuevo_estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_estado_inicial.php?hab_id="+hab_id+"&estado="+estado+"&nuevo_estado="+nuevo_estado);
 }
 
+// Modal para asignar una reservacion
+function asignarHabitacion(){
+    $("#mostrar_herramientas").load("includes/hab_modal_asignar_reserva.php")
+}
+
 // Modal de mandar una habitacion a estado limpieza
 function hab_estado_limpiar(hab_id,estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_estado_limpiar.php?hab_id="+hab_id+"&estado="+estado);
@@ -8315,8 +8319,6 @@ function mostrarAcorderon(){
     acordeonIcon.classList.toggle("active");
 }
 
-
-
 function mostrarAcordeonCompleto(){
     const input = document.querySelector("#extra_adulto").value
     const acorderon = document.querySelector("#acordeonchido")
@@ -8329,11 +8331,11 @@ function mostrarAcordeonCompleto(){
                 <div class="accordionItemBodyContentCustom">
                     <label style="width: 100%;text-align: left;">Acompañante ${i}</label>
                     <div >
-                        <label for="inputName${i}" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
+                        <label for="inputName${i}" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
                         <input type="text" class="form-control nombreExtra" id="inputName${i}" minlength="5" maxlength="15" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputLastName${i}" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
+                        <label for="inputLastName${i}" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
                         <input type="text" class="form-control apellidoExtra" id="inputLastName${i}" minlength="5" maxlength="15" required>
                     </div>
                 </div>
@@ -8344,4 +8346,3 @@ function mostrarAcordeonCompleto(){
         cuerpoacordeon.innerHTML = ``;
     }
 }
-
