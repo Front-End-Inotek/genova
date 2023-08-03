@@ -3,6 +3,8 @@ var hab = [];
 var hab_ultimo_mov = [];
 var siguiente_vista=0;
 
+let huespedesExtras = []
+
 x=$(document);
 x.ready(inicio);
 
@@ -2897,12 +2899,37 @@ function guardarUsoCasa(hab_id,estado){
 }
 
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
+    //****************************************************************************************** */
+    // funcion para los huespedes extras
+    const nombresHuespedes = document.querySelectorAll(".nombreExtra")
+    const valoresNombres = [];
+    nombresHuespedes.forEach(function(input) {
+        valoresNombres.push(input.value);
+    });
+    console.log(valoresNombres)
+    const apellidosHuespedes = document.querySelectorAll(".apellidoExtra")
+    const valoresApellidos = [];
+    apellidosHuespedes.forEach(function(input){
+        valoresApellidos.push(input.value)
+    })
+    console.log(valoresApellidos)
+
+    const arregloHuespedes = []
+    for (let i = 0; i < valoresNombres.length; i++){
+        const nuevoObjeto = {
+            nombre: valoresNombres[i],
+            apellido: valoresApellidos[i]
+        };
+        arregloHuespedes.push(nuevoObjeto)
+    }
+    console.log(arregloHuespedes)
+    // *********************apoco si tilin***************************
+
 
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
         alert("Fecha de asignación inválida")
         return false
     }
-
     if(!verificarFormulario("form-reserva","id") ){
         var usuario_id=localStorage.getItem("id");
         var nombre_huesped= document.getElementById("nombre").value;
@@ -8349,6 +8376,8 @@ function mostrarAcorderon(){
     acordeonIcon.classList.toggle("active");
 }
 
+
+
 function mostrarAcordeonCompleto(){
     const input = document.querySelector("#extra_adulto").value
     const acorderon = document.querySelector("#acordeonchido")
@@ -8362,11 +8391,11 @@ function mostrarAcordeonCompleto(){
                     <label style="width: 100%;text-align: left;">Huesped ${i + 1}</label>
                     <div >
                         <label for="inputName${i}" class="form-label" style="width: 90%;text-align: left;">Nombre</label>
-                        <input type="text" class="form-control nombreExtra" id="inputName${i}">
+                        <input type="text" class="form-control nombreExtra" id="inputName${i}" >
                     </div>
                     <div class="mb-3">
                         <label for="inputLastName${i}" class="form-label" style="width: 90%;text-align: left;">Apellido</label>
-                        <input type="text" class="form-control apellidoExtra" id="inputLastName${i}">
+                        <input type="text" class="form-control apellidoExtra" id="inputLastName${i}" >
                     </div>
                 </div>
             `
@@ -8376,3 +8405,4 @@ function mostrarAcordeonCompleto(){
         cuerpoacordeon.innerHTML = ``;
     }
 }
+

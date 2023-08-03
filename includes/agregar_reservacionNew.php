@@ -152,7 +152,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="adultos">Adultos</label>
-                    <input type="text" class="form-control" id="extra_adulto" maxlength="2" onkeypress="validarNumero(event)"  onchange="editarTotalEstancia()">
+                    <input type="text" class="form-control" id="extra_adulto" maxlength="2" onkeypress="validarNumero(event)"  onchange="editarTotalEstancia(); mostrarAcordeonCompleto()">
                     <input type="number" id="tarifa_adultos" hidden>
                     <input type="number" id="cantidad_hospedaje" hidden>
 
@@ -217,7 +217,9 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                         <option value="agencia">Agencia de viajes</option>
                     </select>
                 </div>
-            </div>';
+            </div>
+            
+            ';
             }
         echo'
             <br>
@@ -297,6 +299,18 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
 
                 echo '
             </div>
+            </div>
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="accordionCustom" id="acordeonchido">
+                    <div class="accordion-itemCustom">
+                        <div id="acordeonIcon" onclick="mostrarAcorderon()" class="accordionItemHeaderCustom">
+                            <label>Agregar huespedes</label>
+                        </div>
+                        <div id="acordeon" class="accordionItemBodyCustom">
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--- <div id="adicionales"> </div>
 
