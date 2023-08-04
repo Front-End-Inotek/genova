@@ -96,6 +96,17 @@ $movimiento = NEW Movimiento(0);
 $user = NEW Usuario($_GET['id']);
 $estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
 $id_reserva = $movimiento->saber_id_reservacion($hab->mov);
+
+$entrada="";
+$salida="";
+if(isset($_GET['entrada'])){
+	$entrada = $_GET['entrada'];
+}
+if(isset($_GET['salida'])){
+	$salida = $_GET['salida'];
+}
+
+
 echo '<div class="modal-header" style="background-color: #97b2f9ee; color: #000;">
 		<h3 class="modal-title">Habitacion '.$nombre_habitacion.' </h3>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -472,18 +483,23 @@ switch ($_GET['estado']) {
 	//reserva pagada
 	case 6 :
 	if($user->nivel<=2){
-		echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-		echo '<div class="ocupadoH btn-square-lg" onclick="select_asignar_checkin('.$_GET['reserva_id'].',1,'.$_GET['hab_id'].','.$_GET['mov'].')">';
-			echo '</br>';
-			echo '<div>';
-				//echo '<img src="images/home.png"  class="center-block img-responsive">';
+		$hoy = date('Y-m-d');
+		$entrada_fecha = date('Y-m-d',$entrada);
+		if($hoy == $entrada_fecha){
+			echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
+			echo '<div class="ocupadoH btn-square-lg" onclick="select_asignar_checkin('.$_GET['reserva_id'].',1,'.$_GET['hab_id'].','.$_GET['mov'].')">';
+				echo '</br>';
+				echo '<div>';
+					//echo '<img src="images/home.png"  class="center-block img-responsive">';
+				echo '</div>';
+				echo '<div>';
+				echo 'Asignar';
+				echo '</div>';
+				echo '</br>';
 			echo '</div>';
-			echo '<div>';
-			echo 'Asignar';
 			echo '</div>';
-			echo '</br>';
-		echo '</div>';
-		echo '</div>';
+		}
+		
 	}
 	break;
 	case 8:
@@ -505,14 +521,6 @@ switch ($_GET['estado']) {
 
 }
 
-$entrada="";
-$salida="";
-if(isset($_GET['entrada'])){
-	$entrada = $_GET['entrada'];
-}
-if(isset($_GET['salida'])){
-	$salida = $_GET['salida'];
-}
 
 
 echo '</div>';
