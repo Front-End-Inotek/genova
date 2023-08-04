@@ -8359,13 +8359,10 @@ function mostrarAcorderon(){
     acordeonIcon.classList.toggle("active");
 }
 
-
-
 function mostrarAcordeonCompleto(cantidad=1){
     const input = document.querySelector("#extra_adulto").value
     const acorderon = document.querySelector("#acordeonchido")
     const cuerpoacordeon = document.querySelector("#acordeon");
-
 
     if(input > 1){
 

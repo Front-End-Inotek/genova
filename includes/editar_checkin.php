@@ -307,7 +307,16 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
                 <div class="form-group col-md-2">
                 <label for="confirmacion">Confirmación</label>
-                <input type="checkbox" id="confirmacion"  class="form-check"/>
+                    <div class="checkbox-container">
+                    <input class="yesornot" type="radio" name="rdo" id="yes" checked/>
+                    <input class="yesornot" type="radio" name="rdo" id="no" />
+                    <div class="switch">
+                        <label for="yes">Si</label>
+                        <label for="no">No</label>
+                        <span></span>
+                    </div>
+                    <input type="checkbox" id="confirmacion"  class="form-check" hidden/>
+                    </div>
                 </select>
             </div>
             </div>
