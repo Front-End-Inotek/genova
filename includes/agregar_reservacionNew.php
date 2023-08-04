@@ -306,29 +306,12 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;
                         <div id="acordeonIcon" onclick="mostrarAcorderon()" class="accordionItemHeaderCustom">
                             <label>Acompañantes</label>
                         </div>
-                        <div id="acordeon" class="accordionItemBodyCustom">
-                            
+                        <div id="acordeon" class="accordionItemBodyCustom acordeon">
+
                         </div>
                     </div>
                 </div>
             </div>
-            <!--- <div id="adicionales"> </div>
-
-            <div class="d-flex justify-content-between flex-wrap">
-            <h4>Adicional 1</h4>
-                <div class="form-group col-md-4 col-12">
-                    <label class="asterisco" for="telefono">Nombre</label>
-                    <input type="tel" class="form-control" id="telefono" required>
-                </div>
-                <div class="form-group col-md-4 col-12">
-                    <label for="pais">Apellido</label>
-                    <input type="text" class="form-control" id="pais">
-                </div>
-                <div class="form-group col-md-4 col-12">
-
-            </div>
-            </div> --->
-            
 
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="form-group col-md-4 col-12">

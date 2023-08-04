@@ -177,7 +177,7 @@ setlocale(LC_ALL, "es_ES");
                 $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado,
                 reservacion.estado_interno AS garantia
                 ,movimiento.estado_interno AS interno
-                ,huesped.nombre as n_huesped, huesped.apellido as a_huesped
+                ,huesped.nombre as n_huesped, huesped.apellido as a_huesped, movimiento.id as mov,reservacion.id as reserva_id
                 FROM movimiento
                 left join reservacion on movimiento.id_reservacion = reservacion.id
                 LEFT JOIN hab on movimiento.id_hab = hab.id
@@ -323,7 +323,7 @@ setlocale(LC_ALL, "es_ES");
                                         echo '';
                                         echo '
                                 <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
-                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')" >
+                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ','.$fila_r['mov'].','.$fila_r['reserva_id'].')" >
                                 ';
                                         echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . '</section>';
                                         echo '            </div>
@@ -374,7 +374,7 @@ setlocale(LC_ALL, "es_ES");
                                                     $estado_habitacion_reserva = $this->estado_habitacion($estado, "", "");
                                                     echo '
                                             <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="'.$noches_uso.'">
-                                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')"  >
+                                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ','.$fila_r['mov'].','.$fila_r['reserva_id'].')"  >
                                             <div >
                                             ';
                                                     echo '<section class="task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . '</section>';
@@ -554,7 +554,7 @@ setlocale(LC_ALL, "es_ES");
                                             echo '';
                                             echo '
                                         <td class="celdaCompleta tdCheck " colspan="' . $aux_r  . '">';
-                                            echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado. ', \''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ')" >
+                                            echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado. ', \''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ','.$fila_r['mov'].','.$fila_r['reserva_id'].')" >
                                         ';
                                             echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . ' </section>';
                                             echo '</div>';
