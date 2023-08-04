@@ -133,9 +133,9 @@ class RackHabitacional extends ConexionMYSql
         LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
         WHERE hab.estado_hab = 1
         AND hab.tipo>0
-        -- AND hab.id=46
+        -- AND hab.id=1
         ORDER BY id";
-        // echo $sentencia;
+        //echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta = $this->realizaConsulta($sentencia, $comentario);
 

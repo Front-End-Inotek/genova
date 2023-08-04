@@ -3716,12 +3716,16 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             contentType: "application/x-www-form-urlencoded",
             url:"includes/asignar_reservacion.php",
             data:datos,
-            beforeSend:loaderbar,
+          
             success:function(res){
                 // console.log(res)
                 // return
                 if(res=="OCUPADA"){
-                    $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
+                   setTimeout(() => {
+                        include="includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab
+                        $("#mostrar_herramientas").load(include);
+                        $('#caja_herramientas').modal('show');
+                    }, 500);
                 }else{
                     seleccionar_vista()
                     setTimeout(() => {
