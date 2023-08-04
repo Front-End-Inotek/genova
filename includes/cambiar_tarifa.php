@@ -218,9 +218,9 @@
           <div class="col-sm-2">
           <div id="boton_reservacion">';
             if($_GET['hab_id'] != 0){
-              echo '<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].','.$cantidad_maxima.','.$tipo_hab.',2)">';
+              echo '<button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].','.$cantidad_maxima.','.$tipo_hab.',2)">Guardar</button>';
             }else{
-              echo '<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].','.$cantidad_maxima.','.$tipo_hab.',1)">';
+              echo '<button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_reservacion('.$precio_hospedaje.','.$precio_adulto.','.$precio_junior.','.$precio_infantil.','.$adultos.','.$_GET['hab_id'].','.$cantidad_maxima.','.$tipo_hab.',1)">Guardar</button>';
             }
           echo '</div>
           </div>

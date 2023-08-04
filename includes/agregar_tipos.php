@@ -33,7 +33,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
           <div id="boton_tipo">
-          <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_tipo()">
+          <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_tipo()">Guardar</button>
         </div>
         </div>
       </div>';

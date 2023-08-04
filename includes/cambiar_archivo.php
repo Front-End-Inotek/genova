@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-sm-2">
                         <div id="boton_tipo">
-                                <input type="submit" class="btn btn-success btn-block" value="Guardar">
+                                <button type="submit" class="btn btn-success btn-block" value="Guardar">Guardar</button>
                         </div>
                         </div>
                 </div

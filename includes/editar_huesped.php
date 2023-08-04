@@ -324,7 +324,7 @@
           <div class="col-sm-5"></div>
           <div class="col-sm-2">
           <div id="boton_huesped">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_huesped('.$_GET['id'].',-1,0)">
+            <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_huesped('.$_GET['id'].',-1,0)">Guardar</button>
           </div>
           </div>
           <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_huesped()"> ←</button></div>

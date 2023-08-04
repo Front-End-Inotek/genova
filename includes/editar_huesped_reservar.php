@@ -310,7 +310,7 @@
             echo '<div class="col-sm-4"></div>
             <div class="col-sm-2">
             <div id="boton_huesped">
-              <input type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].','.$_GET['id_reservacion'].')">
+              <button type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].','.$_GET['id_reservacion'].')">Ocultar Datos</button>
             </div>
             </div>';
           }else{
@@ -318,13 +318,13 @@
             echo '<div class="col-sm-4"></div>
             <div class="col-sm-2">
             <div id="boton_huesped">
-              <input type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].','.$_GET['id_reservacion'].')">
+              <button type="submit" class="btn btn-danger btn-block" value="Ocultar Datos" onclick="ocultar_datos('.$_GET['hab_id'].','.$_GET['id_reservacion'].')">Ocultar Datos</button>
             </div>
             </div>';
           }
           echo '<div class="col-sm-2">
           <div id="boton_huesped">
-            <input type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['id_reservacion'].')">
+            <button type="submit" class="btn btn-warning btn-block" value="Editar Huésped" onclick="modificar_huesped('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['id_reservacion'].')">Editar Huésped</button>
           </div>
           </div>
         </div> 

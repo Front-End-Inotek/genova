@@ -60,7 +60,7 @@
           <div class="col-sm-10"></div>
           <div class="col-sm-2">
           <div id="boton_cupon">
-            <input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_cupon()">
+            <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_cupon()">Guardar</button>
           </div>
           </div>
         </div>

@@ -39,7 +39,7 @@
           echo '</div>
           <div class="col-sm-2">
           <div id="boton_usuario">
-            <input type="submit" class="btn btn-danger btn-block" value="Cerrar la noche"   onclick="confirmar_cambiar_cargos()">
+            <button type="submit" class="btn btn-danger btn-block" value="Cerrar la noche"   onclick="confirmar_cambiar_cargos()">Cerrar la noche</button>
           </div>
           </div>
         </div>

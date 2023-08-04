@@ -570,7 +570,7 @@
               <div class="col-sm-2"></div>
               <div class="col-sm-2">
               <div id="boton_reservacion">
-                <input type="submit" class="btn btn-success btn-block margen-1" value="Aplicar" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cargo_noche()">
+                <button type="submit" class="btn btn-success btn-block margen-1" value="Aplicar" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cargo_noche()">Aplicar</button>
               </div>
               </div>
         </div>';
