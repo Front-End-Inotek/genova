@@ -565,7 +565,8 @@
 }
 
 .task:hover {
-  color: #FFf;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .task:hover:after {

@@ -90,8 +90,8 @@
           </div>
         </div><br>
         <div class="row">
-          <div class="col-sm-6"><h4 class="text-dark  margen-1">DATOS TARJETA:</h4></div>
-          <div class="col-sm-6"></div>
+          <div class="col-sm-12"><h4 class="text-dark  margen-1">DATOS TARJETA:</h4></div>
+          
         </div>
         <div class="row">
           <div class="col-sm-2">Titular de la tarjeta:</div>

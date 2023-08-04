@@ -691,6 +691,7 @@ hr{
   max-height: 100% !important;
   text-align: center;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .btn-square-xl {

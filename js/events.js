@@ -2093,8 +2093,6 @@ function cambiar_adultos(hab_id){
 
 // Calculamos el total de una reservacion
 function calcular_total(precio_hospedaje,total_adulto,total_junior,total_infantil){
-
- 
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
 	var fecha_salida= document.getElementById("fecha_salida").value;
 	var noches= calculo_noches(fecha_entrada,fecha_salida);
@@ -2106,7 +2104,6 @@ function calcular_total(precio_hospedaje,total_adulto,total_junior,total_infanti
 	var suplementos= encodeURI(document.getElementById("suplementos").value);
 	var total_suplementos= Number(document.getElementById("total_suplementos").value);
 	var descuento= Number(document.getElementById("descuento").value);
-    
 	var total_hospedaje= precio_hospedaje * noches * numero_hab;
 	var total_adulto= total_adulto * extra_adulto;
 	var total_junior= total_junior * extra_junior;
@@ -2147,9 +2144,7 @@ function obtener_garantia(event=null){
             $("#voucher").removeAttr("required")
             $("#estadotarjeta").val("")
         }
-
     }
-
 }
 
 // Realiza un descuento de nuestros calculos
@@ -2169,8 +2164,6 @@ function redondearDecimales(numero,decimales){
     }
 }
 
-
-
 //modal para mostrar la información de la tarjeta del husped
 function mostrar_modal_garantia(){
     id_huesped = $("#tomahuespedantes").val()
@@ -2178,7 +2171,6 @@ function mostrar_modal_garantia(){
     estado_credito=$("#estadocredito").val()
 
     console.log(estado_credito)
-   
 
     $("#mostrar_herramientas").load('includes/modal_mostrar_garantia.php?huesped='+id_huesped+"&estadotarjeta="+estado_tarjeta,function(){
         if(estado_tarjeta!=""){
@@ -2187,9 +2179,7 @@ function mostrar_modal_garantia(){
         if(estado_credito!=""){
             $(":radio[value="+estado_credito+"]").prop("checked","true");
         }
-        
     })
-   
 }
 
 function aceptar_asignar_huesped_maestra(id_huesped,id_maestra,mov){
@@ -2217,12 +2207,11 @@ function aceptar_asignar_huesped_maestra(id_huesped,id_maestra,mov){
             ver_cuenta_maestra()
           }else{
             swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
-          }
-        },
-    
+        }
+    },
         timeout:5000,
         error:problemas_sistema
-      });
+    });
 
 }
 
