@@ -83,9 +83,12 @@
 
   //Editar adicionales. 
   //Una vez obtenemos la reserva se la asiganamos a los adicionales.
-  $reservacion->eliminar_adicional($_POST['id']);
-  foreach ($_POST['adicionales'] as $key => $adicional) {
-    $reservacion->guardar_adicional($_POST['id'],$adicional['nombre'],$adicional['apellido']);
+
+  if(!empty($_POST['adicionales'])){
+    $reservacion->eliminar_adicional($_POST['id']);
+    foreach ($_POST['adicionales'] as $key => $adicional) {
+      $reservacion->guardar_adicional($_POST['id'],$adicional['nombre'],$adicional['apellido']);
+    }  
   }
 
 

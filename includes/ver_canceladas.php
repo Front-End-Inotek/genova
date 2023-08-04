@@ -8,7 +8,7 @@
   if($_GET['btn']==0) {
     echo ' <div class="container-fluid blanco"> 
           <br>
-          <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">REPORTE DE CANCELADAS</h2></div>
+          <div class="col-sm-12 text-center"><h2 class="text-dark margen-1">REPORTE CANCELADAS</h2></div>
     
           <div class="row">
             <div class="col-sm-2">';
