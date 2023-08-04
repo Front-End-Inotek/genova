@@ -40,6 +40,8 @@
     }
   }
 
+
+
   // No se consideran los suplementos
   /*if($_POST['forzar_tarifa'] > 0){
     $total=$_POST['forzar_tarifa']; 
@@ -74,9 +76,17 @@
   $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
   urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
   $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$total_pago,$_POST['hab_id'],
-  $_POST['usuario_id'],$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$_POST['id'],$estado_interno);
+  $_POST['usuario_id'],$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$_POST['id'],$estado_interno,
+  $_POST['estado_credito'],$_POST['limite_credito'],$_POST['adultos'],$_POST['infantiles']);
 
   $datos_mov = $reservacion->saber_id_movimiento($_POST['id']);
+
+  //Editar adicionales. 
+  //Una vez obtenemos la reserva se la asiganamos a los adicionales.
+  $reservacion->eliminar_adicional($_POST['id']);
+  foreach ($_POST['adicionales'] as $key => $adicional) {
+    $reservacion->guardar_adicional($_POST['id'],$adicional['nombre'],$adicional['apellido']);
+  }
 
 
   if($_POST['forma_pago'] == 2){
@@ -138,9 +148,6 @@
           $ticket_id= $ticket->guardar_ticket($id_mov,$datos_mov['id_hab'],$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,0,0,$total_pago,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
         }
         $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$total_pago,($total_pago*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
-        
-        
-
     }
 
     }

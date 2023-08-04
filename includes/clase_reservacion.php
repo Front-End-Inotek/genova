@@ -41,6 +41,8 @@ class Reservacion extends ConexionMYSql
     public $plan_alimentos;
     public $sobrevender;
     public $canal_reserva;
+    public $adultos;
+    public $infantiles;
     //mejor poner el autoincrement de la tabla con ese valor inicial
     //public const INIT_ID=10000;
 
@@ -84,6 +86,8 @@ class Reservacion extends ConexionMYSql
             $this->plan_alimentos= 0;
             $this->sobrevender= 0;
             $this->canal_reserva=0;
+            $this->adultos=0;
+            $this->infantiles=0;
         } else {
             $sentencia = "SELECT * FROM reservacion WHERE id = $id LIMIT 1 ";
             $comentario="Obtener todos los valores de una reservacion";
@@ -125,6 +129,9 @@ class Reservacion extends ConexionMYSql
                 $this->plan_alimentos=$fila['plan_alimentos'];
                 $this->sobrevender=$fila['sobrevender'];
                 $this->canal_reserva=$fila['canal_reserva'];
+
+                $this->adultos=$fila['adultos'];
+                $this->infantiles=$fila['infantiles'];
             }
         }
     }
@@ -203,6 +210,48 @@ class Reservacion extends ConexionMYSql
         }
         return $total_cargo;
 
+    }
+
+
+    public function eliminar_adicional($id_reserva){
+        $sentencia_borrado="DELETE FROM  `reserva_adicionales` WHERE id_reserva='$id_reserva'";
+        $comentario="Guardando adultos adicionales";
+        $consulta_borrado = $this->realizaConsulta($sentencia_borrado, $comentario);
+    }
+
+    public function actualizar_adicional($id_reserva,$nombre,$apellido){
+        // $sentencia="UPDATE `reserva_adicionales` SET `nombre`='$nombre',`apellido`='$apellido' 
+        // WHERE `id_reserva`='$id_reserva'";
+        // $comentario="Actualizando adultos adicionales";
+        // $consulta = $this->realizaConsulta($sentencia, $comentario);
+        // if($consulta){
+        //     return "HECHO";
+        // }else{
+        //     return "NO";
+        // }
+
+        //
+        $sentencia="INSERT INTO `reserva_adicionales`( `id_reserva`, `nombre`, `apellido`) 
+        VALUES ('$id_reserva','$nombre','$apellido')";
+        $comentario="Guardando adultos adicionales";
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        if($consulta){
+            return "HECHO";
+        }else{
+            return "NO";
+        }
+    }
+
+    public function guardar_adicional($id_reserva,$nombre,$apellido){
+        $sentencia="INSERT INTO `reserva_adicionales`( `id_reserva`, `nombre`, `apellido`) 
+        VALUES ('$id_reserva','$nombre','$apellido')";
+        $comentario="Guardando adultos adicionales";
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        if($consulta){
+            return "HECHO";
+        }else{
+            return "NO";
+        }
     }
 
     public function consultar_datos_ventas($fecha){
@@ -608,7 +657,9 @@ class Reservacion extends ConexionMYSql
           $sobrevender,
           $estado_interno,
           $estado_credito,
-          $limite_credito
+          $limite_credito,
+          $adultos,
+          $infantiles
       ) 
       {
           $fecha_entrada= strtotime($fecha_entrada);
@@ -640,9 +691,9 @@ class Reservacion extends ConexionMYSql
             }
         }
           $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, 
-          `estado`,`pax_extra`,`canal_reserva`,`plan_alimentos`,`tipo_reservacion`,`sobrevender`,`estado_interno`,`estado_credito`,`limite_credito`)
+          `estado`,`pax_extra`,`canal_reserva`,`plan_alimentos`,`tipo_reservacion`,`sobrevender`,`estado_interno`,`estado_credito`,`limite_credito`,`adultos`,`infantiles`)
           VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', 
-          '$estado','$pax_extra','$canal_reserva','$plan_alimentos','$tipo_reservacion',$sobrevender,'$estado_interno','$estado_credito','$limite_credito');";
+          '$estado','$pax_extra','$canal_reserva','$plan_alimentos','$tipo_reservacion',$sobrevender,'$estado_interno','$estado_credito','$limite_credito','$adultos','$infantiles');";
           $comentario="Guardamos la reservacion en la base de datos";
           
         //   echo $sentencia;
@@ -671,6 +722,15 @@ class Reservacion extends ConexionMYSql
           return $id;
 
       }
+
+    public function obtener_acompa($reservacion_id){
+        $sentencia="SELECT * FROM reserva_adicionales WHERE id_reserva = $reservacion_id";
+        $comentario="Obtenemos los datos adicionales de una reserva";
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
+
+        return $consulta;
+    }
+
     // Guardar la reservacion
     public function guardar_reservacion(
         $id_huesped,
@@ -3110,22 +3170,15 @@ class Reservacion extends ConexionMYSql
         $tipo_reservacion,
         $sobrevender,
         $id_cuenta,
-        $estado_interno
+        $estado_interno,
+        $estado_credito,
+        $limite_credito,
+        $adultos,
+        $infantiles
     ) 
     {
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
-        // if($forzar_tarifa > 0) {
-        //     $total_cargo= $total_suplementos + $forzar_tarifa;
-        // } else {
-        //     $total_cargo=$total_pago;
-        // }
-        // if($cantidad_cupon > 0) {
-        //     $pago_total= $total_pago + $cantidad_cupon;
-        // } else {
-        //     $pago_total= $total_pago;
-        // }
-
         $sentencia = "UPDATE `reservacion` SET
 			`id_huesped` = '$id_huesped',
 			`tipo_hab` = '$tipo_hab',
@@ -3159,7 +3212,11 @@ class Reservacion extends ConexionMYSql
             `plan_alimentos` = '$plan_alimentos',
             `tipo_reservacion` = '$tipo_reservacion',
             `sobrevender` = '$sobrevender',
-            `estado_interno` = '$estado_interno'
+            `estado_interno` = '$estado_interno',
+            `estado_credito` = '$estado_credito',
+            `limite_credito` = '$limite_credito',
+            `adultos` = '$adultos',
+            `infantiles` = '$infantiles'
 			WHERE `id` = '$id_cuenta'";
         //echo $sentencia;
         $comentario="Editar una reservacion dentro de la base de datos";

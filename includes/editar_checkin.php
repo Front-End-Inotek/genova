@@ -97,6 +97,7 @@ if(isset($_GET['ruta_regreso'])){
 
 $canales_reserva = array("telefono"=>"Telefono","email"=>"Email","web"=>"Web","agencia"=>"Agencia de viajes");
 
+
 echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;">
 <div class="row justify-content-center ">
     <div class="col-md-9">
@@ -185,14 +186,14 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="adultos">Adultos</label>
-                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->extra_adulto.'"  onchange="editarTotalEstancia(); mostrarAcordeonCompleto()">
+                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="extra_adulto" min="0"  value="'.$reservacion->adultos.'"  onchange="editarTotalEstancia(); mostrarAcordeonCompleto('.$reservacion->adultos.')">
                     <input type="number" id="cantidad_hospedaje" value="'.$tarifa->cantidad_hospedaje.'" hidden>
                     <input type="number" id="tarifa_adultos" value="'.$tarifa->precio_adulto.'" hidden>
                     <input type="number" id="cantidad_maxima" value="'.$tarifa->cantidad_maxima.'" hidden >
                 </div>
                 <div class="form-group col-md-4 col-12">
                     <label for="menores">Menores</label>
-                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="extra_infantil" min="0"  value="'.$reservacion->extra_infantil.'" onchange="editarTotalEstancia()">
+                    <input type="text" maxlength="2"   onkeypress="validarNumero(event)" class="form-control" id="extra_infantil" min="0"  value="'.$reservacion->infantiles.'" onchange="editarTotalEstancia()">
                     <input type="number" id="tarifa_menores" value="'.$tarifa->precio_infantil.'" hidden>
                 </div>
             </div>
@@ -259,6 +260,9 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             <input type="text" id="year" hidden value="'.$huesped->vencimiento_ano.'">
             <input type="text" id="ccv" hidden value="'.$huesped->cvv.'">
             <input type="text" id="nombre_tarjeta" hidden value="'.$huesped->nombre_tarjeta.'">
+
+            <input type="text" id="estadocredito" value="'.$huesped->estado_credito.'" hidden >
+            <input type="text" id="limitecredito" value="'.$huesped->limite_credito.'" hidden>
             <br>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
@@ -308,15 +312,34 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             </div>
             <div class="d-flex justify-content-between flex-wrap">
-            <div class="accordionCustom" id="acordeonchido">
+            <div class="accordionCustom accordionCustomMostrar" id="acordeonchido">
                 <div class="accordion-itemCustom">
                     <div id="acordeonIcon" onclick="mostrarAcorderon()" class="accordionItemHeaderCustom">
                         <label>Acompañantes</label>
+                    </div>';
+                    $consulta =  $reservacion->obtener_acompa($reservacion->id);
+                    $i=1;
+                    echo '<div id="acordeon" class="accordionItemBodyCustom acordeon">';
+                    while ($fila = mysqli_fetch_array($consulta)){
+                        echo ' 
+                        <div class="accordionItemBodyContentCustom">
+                        <label style="width: 100%;text-align: left;">Acompañante '.$i.'</label>
+                        <div >
+                            <label for="acompañante '.$i.' nombre" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
+                            <input value="'.$fila['nombre'].'"  type="text" class="form-control nombreExtra" id="acompañante '.$i.' nombre" minlength="5" maxlength="15" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="acompañante '.$i.' apellido" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
+                            <input  value="'.$fila['apellido'].'" type="text" class="form-control apellidoExtra" id="acompañante '.$i.' apellido" minlength="5" maxlength="15" required>
+                        </div>
                     </div>
-                    <div id="acordeon" class="accordionItemBodyCustom">
-                        
-                    </div>
+                        ';
+                        $i++;
+                    }
+
+                echo '</div>
                 </div>
+            </div>
             </div>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">

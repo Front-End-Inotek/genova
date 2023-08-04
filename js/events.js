@@ -3,8 +3,6 @@ var hab = [];
 var hab_ultimo_mov = [];
 var siguiente_vista=0;
 
-let huespedesExtras = []
-
 x=$(document);
 x.ready(inicio);
 
@@ -2427,6 +2425,9 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     var extra_adulto= Number(document.getElementById("extra_adulto").value);
     var extra_infantil= Number(document.getElementById("extra_infantil").value);
 
+    let adultos = extra_adulto
+    let infantiles = extra_infantil
+
     var pax_extra= Number(document.getElementById("pax-extra").value);
 
     var tipo_hab= (document.getElementById("tipo-habitacion").value);
@@ -2496,6 +2497,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         extra_infantil=0
     }
 
+    let adicionales = obtener_adicionales()
+
     var datos = {
         "id":id_reservacion,
         "id_huesped": id_huesped,
@@ -2536,6 +2539,9 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "estado_tarjeta":estado_tarjeta,
         "estado_credito":estado_credito,
         "limite_credito":limite_credito,
+        "adicionales":adicionales,
+        "adultos":adultos,
+        "infantiles":infantiles
       };
     // console.log(datos, ruta)
     // return
@@ -2553,6 +2559,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
             beforeSend:loaderbar,
             //success:ver_reservaciones,
             success:function(res){
+                // console.log(res)
+                // return
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
                 // console.log(res)
@@ -2828,8 +2836,8 @@ function guardarUsoCasa(hab_id,estado){
     }
 }
 
-function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
-    //****************************************************************************************** */
+function obtener_adicionales(){
+        //****************************************************************************************** */
     // funcion para los huespedes extras
     const nombresHuespedes = document.querySelectorAll(".nombreExtra");
     const valoresNombres = [];
@@ -2851,9 +2859,14 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         };
         arregloHuespedes.push(nuevoObjeto)
     };
+    return arregloHuespedes;
     console.log(arregloHuespedes);
 
     // *********************apoco si tilin***************************
+}
+
+function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
+
 
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
         alert("Fecha de asignación inválida")
@@ -8346,28 +8359,35 @@ function mostrarAcorderon(){
     acordeonIcon.classList.toggle("active");
 }
 
-function mostrarAcordeonCompleto(){
+
+
+function mostrarAcordeonCompleto(cantidad=1){
     const input = document.querySelector("#extra_adulto").value
     const acorderon = document.querySelector("#acordeonchido")
     const cuerpoacordeon = document.querySelector("#acordeon");
+
+
     if(input > 1){
+
         acorderon.classList.add("accordionCustomMostrar")
-        cuerpoacordeon.innerHTML = ``
+        contenidoacordeon= ``
+        cuerpoacordeon.innerHTML = ``;
         for ( let i = 1 ; i < input ; i++ ) {
-            cuerpoacordeon.innerHTML += `
+            contenidoacordeon+= `
                 <div class="accordionItemBodyContentCustom">
                     <label style="width: 100%;text-align: left;">Acompañante ${i}</label>
                     <div >
-                        <label for="inputName${i}" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
-                        <input type="text" class="form-control nombreExtra" id="inputName${i}" minlength="5" maxlength="15" required>
+                        <label for="acompañante ${i} nombre" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
+                        <input  type="text" class="form-control nombreExtra" id="acompañante ${i} nombre" minlength="5" maxlength="15" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputLastName${i}" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
-                        <input type="text" class="form-control apellidoExtra" id="inputLastName${i}" minlength="5" maxlength="15" required>
+                        <label for="acompañante ${i} apellido" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
+                        <input  type="text" class="form-control apellidoExtra" id="acompañante ${i} apellido" minlength="5" maxlength="15" required>
                     </div>
                 </div>
             `
         }
+        cuerpoacordeon.innerHTML += contenidoacordeon
     }else{
         acorderon.classList.remove("accordionCustomMostrar");
         cuerpoacordeon.innerHTML = ``;

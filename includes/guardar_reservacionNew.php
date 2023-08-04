@@ -27,6 +27,7 @@
   $cantidad_cupon= 0;
   $id_movimiento= 0;
 
+
     // No se consideran los suplementos
   /*if($_POST['forzar_tarifa'] > 0){
     $total=$_POST['forzar_tarifa']; 
@@ -39,6 +40,7 @@
       $total=$_POST['total_hab']; 
     }
   //}
+
 
   //logica para saber si una reservación estará o no garantizada.
   $estado_interno="pendiente";
@@ -126,7 +128,12 @@
   urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
   $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$total_pago,$actual_hab,
   $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno
-,$_POST['estado_credito'],$_POST['limite_credito']);
+,$_POST['estado_credito'],$_POST['limite_credito'],$_POST['adultos'],$_POST['infantiles']);
+
+//Una vez obtenemos la reserva se la asiganamos a los adicionales.
+foreach ($_POST['adicionales'] as $key => $adicional) {
+  $reservacion->guardar_adicional($id_reservacion,$adicional['nombre'],$adicional['apellido']);
+}
 
 
 if($_POST['forma_pago'] == 2){
