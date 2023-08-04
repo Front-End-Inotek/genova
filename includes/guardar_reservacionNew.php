@@ -131,8 +131,10 @@
 ,$_POST['estado_credito'],$_POST['limite_credito'],$_POST['adultos'],$_POST['infantiles']);
 
 //Una vez obtenemos la reserva se la asiganamos a los adicionales.
-foreach ($_POST['adicionales'] as $key => $adicional) {
-  $reservacion->guardar_adicional($id_reservacion,$adicional['nombre'],$adicional['apellido']);
+if(!empty($_POST['adicionales'])){
+  foreach ($_POST['adicionales'] as $key => $adicional) {
+    $reservacion->guardar_adicional($id_reservacion,$adicional['nombre'],$adicional['apellido']);
+  }
 }
 
 

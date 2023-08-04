@@ -2509,6 +2509,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     }
 
     let adicionales = obtener_adicionales()
+    adicionales = adicionales.length== 0 ? 0: adicionales
 
     var datos = {
         "id":id_reservacion,
@@ -2570,7 +2571,6 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
             beforeSend:loaderbar,
             //success:ver_reservaciones,
             success:function(res){
-                // console.log(res)
                 // return
                 //recibo el id de la reservacion creada.
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
