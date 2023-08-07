@@ -83,9 +83,10 @@
 
       function mostrar_hab_option($hab_id=0){
         $where="AND hab.estado = 0";
-        // if($hab_id!=0){
-        //   $where="AND hab.estado = 1";
-        // }
+        if($hab_id!=0){
+          $where="AND hab.estado = 1";
+        }
+        $where="";
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab  = 1 ".$where." ORDER BY hab.id";// nombre
@@ -397,7 +398,7 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-                echo '<div class="hab_cambiar" onclick="cambiar_hab_cuentas('.$fila['id'].','.$fila['nombre'].','.$fila['mov'].','.$hab_id.','.$estado.','.$mov.')">';
+                echo '<div class="hab_cambiar" onclick="cambiar_hab_cuentas('.$fila['id'].',\''.$fila['nombre'].'\','.$fila['mov'].','.$hab_id.','.$estado.','.$mov.')">';
               echo '</br>';
               echo '<div>';
                   //echo '<img src="images/home.png"  class="center-block img-responsive">';

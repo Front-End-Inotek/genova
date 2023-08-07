@@ -54,6 +54,8 @@
                     <th>Cargos</th>
                     <th>Saldo</th>
                     <th>Tarifa xnx</th>
+                    <th>Estado crédito</th>
+                    <th>Límite de crédito</th>
                     </tr>
                   </thead>
                 <tbody>';
@@ -87,6 +89,9 @@
                         echo '<td>'.$saldo.'</td>';
                         echo '<td>'.$fila['tarifa'].'</td>';
 
+                        echo '<td>'.$estado_credito.'</td>';
+                        echo '<td>'.$limite_credito.'</td>';
+
                     }else{
                         echo '<td></td>';
                         echo '<td>'.$nombre_huesped.'</td>';
@@ -97,15 +102,15 @@
                        
                     }
 
-                    echo '<tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Estado credito: '.$estado_credito.'</td>
-                    <td>Límite de crédito: '.number_format($limite_credito,2).'</td>
-                    </tr>
-                    ';
+                    // echo '<tr>
+                    // <td></td>
+                    // <td></td>
+                    // <td></td>
+                    // <td></td>
+                    // <td>Estado credito: '.$estado_credito.'</td>
+                    // <td>Límite de crédito: '.number_format($limite_credito,2).'</td>
+                    // </tr>
+                    // ';
 
                     echo '</tr>';
                     $fila_atras = $fila['hab_nombre'];

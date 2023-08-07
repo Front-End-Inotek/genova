@@ -124,7 +124,7 @@ if($contador_row!=0) {
     while ($fila = mysqli_fetch_array($consulta)) {
         $border_text="1";
         $hab_nombre = $fila['hab_nombre'];
-        if($hab_nombre == null){
+        if($hab_nombre == null && $fila['fcasa'] == null){
           $hab_nombre="CM: ". $fila['cm_nombre'];
         }
 
