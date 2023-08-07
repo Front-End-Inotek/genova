@@ -3709,6 +3709,7 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             "usuario_id": usuario_id,
             "movimiento":movimiento
             };
+        console.log(datos)
         $.ajax({
             async:true,
             type: "POST",
@@ -3716,9 +3717,8 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             contentType: "application/x-www-form-urlencoded",
             url:"includes/asignar_reservacion.php",
             data:datos,
-          
             success:function(res){
-                // console.log(res)
+                console.log(res)
                 // return
                 if(res=="OCUPADA"){
                    setTimeout(() => {
@@ -7897,6 +7897,7 @@ function imprimir_reportes(opcion){
     include = "includes/reporte_reservacion_general.php?usuario_id="+usuario_id+"&titulo="+titulo+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
     window.open(include);
 }
+
 
 function ver_reportes_reservaciones(opcion,btn=0){
     titulo=""

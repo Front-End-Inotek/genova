@@ -5,6 +5,7 @@
   include_once('clase_log.php');
   $reservacion= NEW Reservacion(0);
   $logs = NEW Log(0);
+  $opcion = $_GET['opcion'];
 
   require('../fpdf/fpdf.php');
   
@@ -92,7 +93,15 @@
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True); 
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'USUARIO'),0,0,'C',True); 
-  $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'CHECKOUT'),0,0,'C',True);
+ 
+
+  if($opcion==2){
+    $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'CHECKIN'),0,0,'C',True);
+  }elseif ($opcion==4) {
+    $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'CHECKOUT'),0,0,'C',True);
+  }
+ 
+
   $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",'HUÉSPED'),0,0,'C',True); 
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TIPO'),0,0,'C',True);
@@ -133,6 +142,7 @@
       $fecha_salida= date("d-m-Y",$fila['fecha_salida']);
       $noches= $fila['noches']; 
       $fecha_checkout =date("d-m-Y",$fila['finalizado']);
+      $fecha_checkin = date("d-m-Y",$fila['detalle_inicio']);
       $numero_habitaciones= $fila['numero_hab']; 
       $tipo_habitacion= $fila['habitacion'];    
       $plan_alimentos = $fila['plan_alimentos'];
@@ -154,7 +164,12 @@
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_entrada),1,0,'C');
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_salida),1,0,'C'); 
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$usuario),1,0,'C'); 
-          $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C'); 
+          if($opcion==2){
+            $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkin),1,0,'C'); 
+          }elseif ($opcion==4) {
+            $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C'); 
+          }
+         
           $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C'); 
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
        
@@ -181,7 +196,12 @@
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_entrada),1,0,'C');
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_salida),1,0,'C'); 
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$usuario),1,0,'C'); 
-          $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C'); 
+          if($opcion==2){
+            $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkin),1,0,'C'); 
+          }elseif ($opcion==4) {
+            $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C'); 
+          }
+         
           $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C'); 
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
 
