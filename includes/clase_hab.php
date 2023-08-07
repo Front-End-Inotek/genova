@@ -83,9 +83,9 @@
 
       function mostrar_hab_option($hab_id=0){
         $where="AND hab.estado = 0";
-        if($hab_id!=0){
-          $where="AND hab.estado = 1";
-        }
+        // if($hab_id!=0){
+        //   $where="AND hab.estado = 1";
+        // }
         $sentencia = "SELECT *,hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
         FROM hab
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado_hab  = 1 ".$where." ORDER BY hab.id";// nombre

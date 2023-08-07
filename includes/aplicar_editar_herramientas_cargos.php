@@ -23,7 +23,8 @@
  
   //Se necesita recalcular el total de pago de esa reservación con la 'nueva tarifa', seria como forzar la tarifa.
   //Para ello se necesita obtener la info de dicha reservación para volver a calcular precios, etc.
-
+  //Buscar en la BD el id correspondiente a efectivo.
+  $forma_pago = $cuenta->obtener_id_pago();
 
   foreach ($cargos as $key => $cargo) {
       $reservacion = new Reservacion($cargo->reservaid);
@@ -34,7 +35,7 @@
       if($forzar_tarifa==0){
         $total_aux =$reservacion->precio_hospedaje;
         $reservacion->editar_tarifa_hab_aud($reservacion->id);
-        $cuenta->guardar_cuenta($usuario_id,$mov,$descripcion,1,$total_aux,0);
+        $cuenta->guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$total_aux,0);
       }else{
         $reservacion->editar_tarifa_hab($forzar_tarifa,$reservacion->id);
       }

@@ -121,7 +121,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 }
                 echo ' <div class="form-group col-md-4 col-12">
                 <label for="clave-reserva asterisco" class="text-right">Habitación</label>
-                <select disabled class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event); calcular_nochesChek()" required>
+                <select  class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event); calcular_nochesChek()" required>
                 <option value="">Seleccionar una habitación</option>
                 ';
                 $hab->mostrar_hab_option($hab->id);
