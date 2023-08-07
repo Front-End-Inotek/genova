@@ -691,6 +691,7 @@ hr{
   max-height: 100% !important;
   text-align: center;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .btn-square-xl {
@@ -1355,6 +1356,21 @@ input[required] + label:after {
 	content: ' *' !important;
 	color: red !important;
 } */
+input[disabled]{
+  cursor: not-allowed !important;
+}
+input[readonly]{
+  cursor: not-allowed;
+}
+input[type=date]{
+  cursor: pointer;
+}
+select{
+  cursor: pointer;
+}
+select[disabled]{
+  cursor: not-allowed;
+}
 
 .accordionCustom{
   width: 97%;
