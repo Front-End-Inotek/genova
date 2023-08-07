@@ -698,3 +698,5 @@ class RackHabitacional extends ConexionMYSql
         }
     }
 }
+
+

@@ -351,6 +351,12 @@ function agregar_tipos_abonos(){
 	$("#mostrar_herramientas").load("includes/agregar_tipos_abonos.php");
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
+///////////////////////////////////////////////////////////
+function mostrar_info_custom(){
+    console.log("mostrar info")
+    /* $("#mostrar_herramientas").load("includes/info.php"); */
+    $("#mostrar_herramientas").load("includes/info.php");
+}
 
 //* Tipo hab *//
 
@@ -5493,7 +5499,6 @@ function cargo_auditoria(){
 }
 
 
-
 // Editar un cargo en estado de cuenta desde auditoria.
 function modificar_herramientas_cargo_aud(id,hab_id,estado,id_maestra=0,mov=0,campo){
 	var usuario_id=localStorage.getItem("id");
@@ -6824,7 +6829,7 @@ function ver_cuenta_maestra(){
 // Aplicar el cobro en pedido restaurante enviado a una hab
 function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
     var usuario_id=localStorage.getItem("id");
-
+    $("#boton_pago").html('<div class="spinner-border text-primary"></div>');
     var datos = {
         "total": total,
         "hab_id": hab_id,
@@ -6853,7 +6858,6 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
             }
         },
         //success:problemas_sistema,
-
         error:problemas_sistema
     });
     return false;
@@ -8302,23 +8306,23 @@ function hab_terminar(hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
-		  "hab_id": hab_id,
-		  "estado": estado,
-          "usuario_id": usuario_id,
+		"hab_id": hab_id,
+		"estado": estado,
+        "usuario_id": usuario_id,
 		};
 	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_terminar.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:principal,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
-		});
+		async:true,
+		type: "POST",
+		dataType: "html",
+		contentType: "application/x-www-form-urlencoded",
+		url:"includes/hab_terminar.php",
+		data:datos,
+		beforeSend:loaderbar,
+		success:principal,
+		//success:problemas_sistema,
+        timeout:5000,
+        error:problemas_sistema
+	});
 	return false;
 }
 
@@ -8379,11 +8383,11 @@ function mostrarAcordeonCompleto(cantidad=1){
                     <label style="width: 100%;text-align: left;">Acompañante ${i}</label>
                     <div >
                         <label for="acompañante ${i} nombre" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
-                        <input  type="text" class="form-control nombreExtra" id="acompañante ${i} nombre" minlength="5" maxlength="15" required>
+                        <input  type="text" class="form-control nombreExtra" id="acompañante ${i} nombre" minlength="5" maxlength="15" >
                     </div>
                     <div class="mb-3">
                         <label for="acompañante ${i} apellido" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
-                        <input  type="text" class="form-control apellidoExtra" id="acompañante ${i} apellido" minlength="5" maxlength="15" required>
+                        <input  type="text" class="form-control apellidoExtra" id="acompañante ${i} apellido" minlength="5" maxlength="15">
                     </div>
                 </div>
             `

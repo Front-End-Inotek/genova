@@ -270,18 +270,22 @@ echo'
             switch($estado) {
                 case "Disponible limpia":
                 echo'<div class="btn disponible-limpia" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-brush-alt clean"></i>';
                 break;
 
                 case "Vacia limpia":
                 echo'<div class="btn vacia-limpia" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-brush-alt clean"></i>';
                 break;
 
                 case "Vacia sucia":
                 echo'<div class="btn vacia-sucia" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-brush-alt dirt"></i>';
                 break;
 
                 case "Ocupado":
                 echo'<div class="btn ocupadoH '.$clase_expirar.'" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-brush-alt clean"></i>';
                 echo $icono_carro;
                 break;
 
@@ -294,7 +298,7 @@ echo'
 
                 case "Ocupada limpieza":
                 echo'<div class="btn ocupada-limpieza" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-brush-alt clean"></i>';
+                echo '<i class="bx bxs-brush-alt cleaning"></i>';
                 echo $icono_carro;
 
                 break;
@@ -393,4 +397,52 @@ echo'
     }
     
 }
+
+echo '<i class="btn-info-custom bx bxs-info-circle" data-toggle="modal" data-target="#exampleModal"></i>';
+echo '
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Informacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group mb-4">
+            <li class="list-group-item fw-bolder">Tipos de habitaciones</li>
+            <li class="list-group-item">Compartidas</li>
+            <li class="list-group-item">Cuadruples</li>
+            <li class="list-group-item">Dobles</li>
+            <li class="list-group-item">Familiar</li>
+            <li class="list-group-item">Gran suite</li>
+            <li class="list-group-item">Individuales</li>
+            <li class="list-group-item">Junior suite</li>
+            <li class="list-group-item">Matrimonial</li>
+            <li class="list-group-item">Presidencial</li>
+            <li class="list-group-item">Suite</li>
+            <li class="list-group-item">Suite principal</li>
+        </ul>
+        <ul class="list-group mb-0">
+            <li class="list-group-item fw-bolder">Estado de habitaciones</li>
+            <li class="list-group-item InfoDisponible">Disponible limpia</li>
+            <li class="list-group-item InfoLimpiezaVacia">Limpieza vacia</li>
+            <li class="list-group-item InfoOcupadaLimpieza">Limpieza ocupada</li>
+            <li class="list-group-item InfoOcupada">Ocupada</li>
+            <li class="list-group-item InfoOcupadaSucia">Ocupada sucia</li>
+            <li class="list-group-item InfoUsoCasa">Uso casa</li>
+            <li class="list-group-item InfoBloqueado">Bloqueado</li>
+            <li class="list-group-item InfoMantenimiento">Mantenimiento</li>
+            <li class="list-group-item InfoReservaPagada">Reserva pagada</li>
+            <li class="list-group-item InfoReservaPendiente">Reserva pendiente pago</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div> '
 ?>
+

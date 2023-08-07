@@ -940,9 +940,11 @@ hr{
   height: 100%;
   width: 100%;
 }
+
 .personas span{
   color: white;
 }
+
 .personas:hover{
   background-color: green;
   box-shadow: 0 10px 14px #2929294f;
@@ -957,6 +959,7 @@ hr{
   width: 100%;
   transition: all 0.3s ease-out;
 }
+
 .recibo:hover{
   box-shadow: 0 10px 14px #2929294F;
   cursor: pointer;
@@ -978,6 +981,7 @@ hr{
   color: var(--subtitulos);
   border-left: 7px solid var(--subtitulos);
 }
+
 .limpieza:hover{
   background-color: var(--subtitulos);
   color: var(--fondoAzul);
