@@ -8334,23 +8334,23 @@ function hab_cambiar_persona(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
-		  "hab_id": hab_id,
-		  "estado": estado,
-          "usuario": usuario,
-          "usuario_id": usuario_id,
-		};
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario": usuario,
+            "usuario_id": usuario_id,
+	};
 	$.ajax({
-		  async:true,
-		  type: "POST",
-		  dataType: "html",
-		  contentType: "application/x-www-form-urlencoded",
-		  url:"includes/hab_cambiar_persona.php",
-		  data:datos,
-		  beforeSend:loaderbar,
-		  success:principal,
-		  //success:problemas_sistema,
-          timeout:5000,
-          error:problemas_sistema
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/hab_cambiar_persona.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
 		});
 	return false;
 }
@@ -8378,11 +8378,11 @@ function mostrarAcordeonCompleto(cantidad=1){
                 <div class="accordionItemBodyContentCustom">
                     <label style="width: 100%;text-align: left;">Acompañante ${i}</label>
                     <div >
-                        <label for="acompañante ${i} nombre" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
+                        <label for="acompañante ${i} nombre" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
                         <input  type="text" class="form-control nombreExtra" id="acompañante ${i} nombre" minlength="5" maxlength="15" required>
                     </div>
                     <div class="mb-3">
-                        <label for="acompañante ${i} apellido" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
+                        <label for="acompañante ${i} apellido" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
                         <input  type="text" class="form-control apellidoExtra" id="acompañante ${i} apellido" minlength="5" maxlength="15" required>
                     </div>
                 </div>
