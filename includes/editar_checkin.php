@@ -121,7 +121,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 }
                 echo ' <div class="form-group col-md-4 col-12">
                 <label for="clave-reserva asterisco" class="text-right">Habitación</label>
-                <select  class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event); calcular_nochesChek()" required>
+                <select disabled class="form-control" id="habitacion_checkin" name="habitacion_check" onchange="habSeleccionada(event); calcular_nochesChek()" required>
                 <option value="">Seleccionar una habitación</option>
                 ';
                 $hab->mostrar_hab_option($hab->id);
@@ -307,16 +307,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
                 <div class="form-group col-md-2">
                 <label for="confirmacion">Confirmación</label>
-                    <div class="checkbox-container">
-                    <input class="yesornot" type="radio" name="rdo" id="yes" checked/>
-                    <input class="yesornot" type="radio" name="rdo" id="no" />
-                    <div class="switch">
-                        <label for="yes">Si</label>
-                        <label for="no">No</label>
-                        <span></span>
-                    </div>
-                    <input type="checkbox" id="confirmacion"  class="form-check" hidden/>
-                    </div>
+                <input type="checkbox" id="confirmacion"  class="form-check"/>
                 </select>
             </div>
             </div>

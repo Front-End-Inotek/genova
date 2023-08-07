@@ -428,7 +428,7 @@ class Reservacion extends ConexionMYSql
      public function saber_id_movimiento_($id)
      {
          $id_mov= 0;
-         $sentencia = "SELECT id, id_hab,motivo  FROM movimiento WHERE id_reservacion = $id LIMIT 1";
+         $sentencia = "SELECT id, id_hab,motivo  FROM movimiento WHERE id_reservacion = $id AND id_hab!=0";
          $comentario="Obtener el id de movimiento desde una reservacion";
          $consulta= $this->realizaConsulta($sentencia, $comentario);
          //se recibe la consulta y se convierte a arreglo
@@ -2258,20 +2258,22 @@ class Reservacion extends ConexionMYSql
             $cat_paginas = $this->mostrar(1, $id);
         } else {
             if($a_buscar != ' ' && $noexiste_inicio && $noexiste_fin) {
-                $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, hab.nombre as nombre_hab, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
                 LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
                 LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+                LEFT JOIN hab ON movimiento.id_hab = hab.id
                 INNER JOIN usuario ON reservacion.id_usuario = usuario.id
                 INNER JOIN huesped ON reservacion.id_huesped = huesped.id
                 INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1) ORDER BY reservacion.id DESC";
             } elseif($a_buscar != ' ' && strlen($fecha_ini) > 0 && strlen($fecha_fin) > 0 && $combinada == 1) {
-                $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
                 LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
                 LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+                LEFT JOIN hab ON movimiento.id_hab = hab.id
                 INNER JOIN usuario ON reservacion.id_usuario = usuario.id
                 INNER JOIN huesped ON reservacion.id_huesped = huesped.id
                 INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_salida BETWEEN $fecha_ini and $fecha_fin) && reservacion.fecha_entrada > 0 
@@ -2286,11 +2288,12 @@ class Reservacion extends ConexionMYSql
                 // INNER JOIN huesped ON reservacion.id_huesped = huesped.id
                 // INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
 
-                $sentencia = "SELECT *, reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                $sentencia = "SELECT *, reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
                 LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
                 LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+                LEFT JOIN hab ON movimiento.id_hab = hab.id
 			    INNER JOIN usuario ON reservacion.id_usuario = usuario.id
 			    INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 			    INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_salida BETWEEN $fecha_ini and $fecha_fin)  && reservacion.fecha_entrada > 0  AND (reservacion.estado = 1) ORDER BY reservacion.id DESC;";
@@ -2307,16 +2310,16 @@ class Reservacion extends ConexionMYSql
 			  <th>Número</th>
 			  <th>Fecha Entrada</th>
 			  <th>Fecha Salida</th>
+              <th>Nombre Huésped</th>
 			  <th>Noches</th>
-			  <th>No. Habitaciones</th>
+			  <!-- <th>No. Habitaciones</th> -->
 			  <th>Tarifa</th>
 			  <th>Precio Hospedaje</th>
-			  <th>Cantidad Hospedaje</th>
+			  <th>Plan alimentos</th>
 			  <th>Extra Adulto</th>
 			  <!-- <th>Extra Junior</th> --->
 			  <!-- <th>Extra Infantil</th> --->
 			  <th>Extra Menor</th>
-			  <th>Nombre Huésped</th>
 			  <th>Teléfono Huésped</th>
 			  <th>Total Estancia</th>
 			  <th>Total Pago</th>

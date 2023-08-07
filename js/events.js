@@ -5772,6 +5772,7 @@ function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
             "mov": mov,
             "usuario_id": usuario_id,
 		};
+    console.log(datos)
 	$.ajax({
             async:true,
             type: "POST",
