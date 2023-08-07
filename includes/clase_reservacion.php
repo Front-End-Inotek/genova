@@ -496,7 +496,7 @@ class Reservacion extends ConexionMYSql
         //Se agrega hab.estado=8 para que compare también en uso casa
 
         //hacer otra sentencia para comprobar las ocupadas y que la reservacion no intervenga con estas
-        $ocupadas = "SELECT * 
+        $ocupadas = "SELECT * , hab.id as hab_id
         FROM hab
         INNER JOIN movimiento as m on hab.mov = m.id
         INNER JOIN reservacion on m.id_reservacion = reservacion.id
@@ -522,7 +522,7 @@ class Reservacion extends ConexionMYSql
         // print_r($no_disponibles);
         while($fila=mysqli_fetch_array($consulta_otras)) {
            if($fila['estado'] == 8){
-            $sentencia_otras="SELECT * 
+            $sentencia_otras="SELECT *  , hab.id as hab_id
             FROM hab
             INNER JOIN movimiento as m on hab.mov = m.id
             WHERE hab.estado = 8
@@ -532,16 +532,16 @@ class Reservacion extends ConexionMYSql
 
             $consulta = $this->realizaConsulta($sentencia_otras, "");
             while($fila=mysqli_fetch_array($consulta)) {
-                $no_disponibles [] = $fila['id_hab'];
+                $no_disponibles [] = $fila['hab_id'];
             }
 
            }
         }
         }
-        // print_r($no_disponibles);
+    //    print_r($no_disponibles);
         $consulta = $this->realizaConsulta($ocupadas, "");
         while($fila=mysqli_fetch_array($consulta)) {
-            $no_disponibles [] = $fila['id'];
+            $no_disponibles [] = $fila['hab_id'];
         }
 
         $sentencia ="SELECT r.id, m.id_hab AS hab_id FROM reservacion AS r

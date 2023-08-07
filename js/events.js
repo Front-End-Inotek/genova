@@ -1971,7 +1971,7 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
             });       
         }
         $("#preasignada").load(include,function(res){
-            //console.log(res)
+            // console.log(res)
         });
     }
     }
@@ -6864,7 +6864,7 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
             }
         },
         //success:problemas_sistema,
-        timeout:5000,
+
         error:problemas_sistema
     });
     return false;
