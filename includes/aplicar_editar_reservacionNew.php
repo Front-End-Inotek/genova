@@ -5,10 +5,13 @@
   include_once("clase_log.php");
   include_once('clase_movimiento.php');
   include_once('clase_hab.php');
+  include_once('clase_ticket.php');
   $reservacion= NEW Reservacion(0);
   $cupon= NEW Cupon(0);
   $logs = NEW Log(0);
   $hab = new Hab(0);
+  $labels= NEW Labels(0);
+
   $descuento= $_POST['descuento'];
   $tipo_descuento= 0;
   $cantidad_cupon= 0;
@@ -130,6 +133,7 @@
       $log_msj="Reactivar checkin: ";
       $mov->cambiar_finalizado($id_mov);
       if($total_pago>0){
+        
         $descripcion="Pago en checkin";
         $pago_total=$total_pago;
         $fecha_entrada = time();

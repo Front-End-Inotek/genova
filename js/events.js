@@ -5411,7 +5411,6 @@ function confirmar_cambiar_cargos(){
         var cargos= document.getElementsByClassName('campos_cargos')
         var campos_habs = document.getElementsByClassName('campos_habs')
         for (var i = 0; i < cargos.length; i++) {
-            // var tarifa=0;
             if(cargos[i].value=="" && campos_habs[i].checked){
                 array_cargos.push({
                     "reservaid":cargos[i].dataset.reservaid,
@@ -5425,8 +5424,6 @@ function confirmar_cambiar_cargos(){
                     })
             }
         }
-        // console.log(array_cargos)
-        // return
         if(array_cargos.length!=0){
             var datos = {
                 "datos_cargos": JSON.stringify(array_cargos),
@@ -5756,11 +5753,88 @@ function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 		});
 	return false;
 }
+function cargos_seleccionados(){
+    const cargos= document.getElementsByClassName('campos_cargos')
+    let array_cargos=[]
+
+    const abonos= document.getElementsByClassName('campos_abonos')
+    let array_abonos=[]
+    
+    for (let i = 0; i < cargos.length; i++) {
+        // console.log(cargos[i].dataset.cuentaid)
+        if(cargos[i].checked)
+            array_cargos.push({
+                "cargo_id":cargos[i].dataset.cuentaid,
+                })
+    }
+
+    for (let i = 0; i < abonos.length; i++) {
+        if(abonos[i].checked)
+            array_abonos.push({
+                "abono_id":abonos[i].dataset.cuentaid,
+                })
+    }
+    return [array_cargos,array_abonos]
+    console.log(array_abonos,array_cargos)
+}
+
+// Modal para seleccionar las cuentas a unificar
+function seleccionar_cuentas(hab_id,estado,mov){
+    var usuario_id=localStorage.getItem("id");
+    $("#mostrar_herramientas").load("includes/modal_seleccionar_cuentas.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&usuario_id="+usuario_id);
+}
 
 // Modal para unificar cuentas en una habitacion seleccionada
 function unificar_cuentas(hab_id,estado,mov){
+   
+
     $("#mostrar_herramientas").load("includes/modal_unificar_cuentas.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
 }
+
+// Funcion para cambiar de habitacion las cuentas en estado de cuenta a otra habitacion
+function cambiar_hab_cuentas_seleccionadas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
+	var usuario_id=localStorage.getItem("id");
+    var nombre_hab= encodeURI(nombre_hab);
+    $('#caja_herramientas').modal('hide');
+    const cuenta = cargos_seleccionados()
+    console.log(cuenta)
+    let cargos = cuenta[0]
+    let abonos = cuenta[1]
+    cargos = cargos.length == 0 ? 0 : cargos
+    abonos = abonos.length == 0 ? 0 : abonos
+    if(cargos==0 && abonos==0){
+        alert("No ha seleccionado nada para unificar")
+        return
+    }
+	var datos = {
+            "id_hab": id_hab,
+            "nombre_hab": nombre_hab,
+            "mov_hab": mov_hab,
+            "hab_id": hab_id,
+            "estado": estado,
+            "mov": mov,
+            "usuario_id": usuario_id,
+            "cargos":cargos,
+            "abonos":abonos,
+		};
+    // console.log(datos)
+    // return
+	$.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded", 
+            url:"includes/cambiar_hab_cuentas_seleccionadas.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:recibe_datos_monto,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+		});
+	return false;
+}
+
 
 // Funcion para cambiar de habitacion las cuentas en estado de cuenta a otra habitacion
 function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
@@ -5777,7 +5851,8 @@ function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
             "mov": mov,
             "usuario_id": usuario_id,
 		};
-    console.log(datos)
+    // console.log(datos)
+    // return
 	$.ajax({
             async:true,
             type: "POST",

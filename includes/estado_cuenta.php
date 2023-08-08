@@ -115,7 +115,7 @@
         <div class="row">
           <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" style="margin-left:6px;"><i class="bx bx-car"></i></button> </div>
           <div class="col">Plan Alimentos: <span>'.$total_alimentos.'</span></div>
-          <div class="col">Total estancia: <span>'.$tarifa.'</span></div>
+          <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
         </div>
         <div class="row">';
@@ -156,11 +156,10 @@
           $total_faltante= $total_abonos - $total_cargos;
         }
 
+        echo '<div class="row d-flex justify-content-between"">
 
-        echo '<div class="row">
-          <div class="col-sm-4"></div>
           <div class="col-sm-2">Total: <span>$'.number_format($total_cargos, 2).'</span></div>
-          <div class="col-sm-4"></div>
+          <div class="col-sm-4">Saldo Total: <span>$'.number_format($total_faltante, 2).'</span></div>
           <div class="col-sm-2">Total: <span>$'.number_format($total_abonos, 2).'</span></div>
         </div>
 
@@ -170,8 +169,9 @@
           }else{*/
             echo '<div class="col-sm-2"><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Cobrar</button></div>';
             echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
+            // echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="seleccionar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
             echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>';
-            if($faltante >= 0 && $usuario->nivel<=2){
+            if($faltante == 0 && $usuario->nivel<=2){
               echo '<div class="col-sm-3"><button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">Desocupar hab.</button></div>';
             }
           //}

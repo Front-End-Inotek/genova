@@ -570,6 +570,119 @@
         return $consulta;
       }
 
+// Mostrar los cargos que tenemos por movimiento en una habitacion, para seleccionar
+function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0,$id_usuario){
+  include_once('clase_usuario.php');
+  $fecha_atras="";
+  $total_cargos= 0;
+  $usuario = new Usuario($id_usuario);
+  $auditoria_editar = $usuario->auditoria_editar;
+
+  // echo $id_usuario;
+
+  $sentencia = "SELECT  usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma, cuenta.fecha, cuenta.cargo
+  FROM cuenta 
+  INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
+  $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
+  $consulta= $this->realizaConsulta($sentencia,$comentario);
+  //se recibe la consulta y se convierte a arreglo 
+  echo '<div class="table-responsive" id="tabla_cargos">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr class="table-primary-encabezado text-center">
+        <th></th>
+        <th>Fecha</th>
+        <th>Cargo</th>
+        <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
+        </tr>
+      </thead>
+      <tbody>';
+      $c=0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $descripcion= substr($fila['concepto'], 0, 17);
+          $largo= strlen($fila['concepto']);
+
+          if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
+            if($c!=0) {
+              echo '<tr>
+              <td colspan="5"></td>
+              </tr>';
+            }
+        }
+        $campo = "campo".$c;
+        echo '<tr class="fuente_menor text-center">
+        <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"  id="'.$campo.'" </td>
+        <td>'.$fila['concepto'].'</td>
+        <td>'.date("d-m-Y",$fila['fecha']).'</td>
+        <td>$'.number_format($fila['cargo'], 2).'</td>
+        </tr>';
+          $fecha_atras = date('Y-m-d',$fila['fecha']);
+          $c++;
+        }
+        echo '
+      </tbody>
+    </table>
+  </div>';
+  return $total_cargos;
+}
+
+ // Mostramos los abonos que tenemos por movimiento en una habitacion
+ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
+  $fecha_atras="";
+  $total_abonos= 0;
+  $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
+  FROM cuenta 
+  INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+  INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
+  $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
+  //echo $sentencia;
+  //echo $id;
+  $consulta= $this->realizaConsulta($sentencia,$comentario);
+  echo '<div class="table-responsive" id="tabla_abonos">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr class="table-info-encabezado text-center">
+        <th></th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Abono</th>
+        <th>Forma Pago</th>
+       
+        </tr>
+      </thead>
+      <tbody>';
+        $c=0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $descripcion= substr($fila['concepto'], 0, 17);
+          $largo= strlen($fila['concepto']);
+
+          if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
+            if($c!=0) {
+              echo '<tr>
+              <td colspan="5"></td>
+              </tr>';
+            }
+        }
+          echo '<tr class="fuente_menor table-secondary text-center">
+          <td><input type="checkbox"> </td>
+          <td>'.$fila['concepto'].'</td>
+          <td>'.date("d-m-Y",$fila['fecha']).'</td>
+          <td>$'.number_format($fila['abono'], 2).'</td>
+          <td>'.$fila['descripcion'].'</td>
+          </tr>';
+          $fecha_atras = date('Y-m-d',$fila['fecha']);
+          $c++;
+        }
+        echo '
+      </tbody>
+    </table>
+  </div>';
+  return $total_abonos;
+}
+
+
       // Mostrar los cargos que tenemos por movimiento en una habitacion
       function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0,$id_usuario){
         include_once('clase_usuario.php');
@@ -590,6 +703,7 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
+              <th></th>
               <th>Descripción</th>
               <th>Fecha</th>
               <th>Cargo</th>
@@ -613,7 +727,9 @@
                 if($fila['edo'] == 1){
                   $total_cargos= $total_cargos + $fila['cargo'];
                   if($descripcion == 'Total reservacion'){
-                    echo '<tr class="fuente_menor text-center">';
+                    echo '<tr class="fuente_menor text-center">
+                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
+                    ';
                     if($largo > 17){
                       echo '<td>Total suplementos*</td>';
                     }else{
@@ -626,6 +742,7 @@
                   }else{
                     if($descripcion=="Cargo por noche" && $auditoria_editar>0){
                       echo '<tr class="fuente_menor text-center">
+                      <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -634,14 +751,18 @@
                       echo '';
                     }elseif($descripcion!="Cargo por noche"){
                       echo '<tr class="fuente_menor text-center">
+                      <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
-                      <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                      <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button>
+                    
+                      </td>
                       </tr>';
                       echo '';
                     }else{
                       echo '<tr class="fuente_menor table-secondary text-center">
+                      <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -652,6 +773,7 @@
                 }else{
                   if($auditoria_editar>0){
                     echo '<tr class="fuente_menor text-center">
+                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -660,6 +782,7 @@
                     echo '';
                   }else{
                     echo '<tr class="fuente_menor table-secondary text-center">
+                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos" </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -693,6 +816,7 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-info-encabezado text-center">
+              <th></th>
               <th>Descripción</th>
               <th>Fecha</th>
               <th>Abono</th>
@@ -730,6 +854,7 @@
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
+                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos" > </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td>
@@ -846,6 +971,23 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }
       }
+
+      // Cambiar de habitacion el monto en estado de cuenta
+      function cambiar_hab_cuentas_seleccionadas($mov_hab,$id_cuenta){
+        $sentencia = "SELECT * FROM cuenta WHERE id = $id_cuenta AND cuenta.estado != 0  ORDER BY fecha";
+        //echo $sentencia;
+        $id= 0;
+        $descripcion= '';
+        $comentario="Obtenemos los datos de la correspondiente cuenta";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+          $descripcion= $fila['descripcion'].'*';// Total reservacion
+          $this->cambiar_cuentas($id,$mov_hab,$descripcion);
+        }
+      }
+
       // Cambiar de habitacion el monto en estado de cuenta
       function cambiar_hab_cuentas($mov_hab,$mov){
         $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND cuenta.estado != 0  ORDER BY fecha";
