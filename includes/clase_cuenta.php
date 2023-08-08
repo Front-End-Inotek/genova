@@ -834,7 +834,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                 if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
                   if($c!=0) {
                     echo '<tr>
-                    <td colspan="5"></td>
+                    <td colspan=""></td>
                     </tr>';
                   }
               }

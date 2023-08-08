@@ -1243,10 +1243,12 @@ class Reservacion extends ConexionMYSql
                         echo '<td>'.$fila['hab_nombre'].'</td>';
                         // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                         echo '<td>'.$estado.'</td>';
-                        if($btn_reactivar && date('Y-m-d',$fila['finalizado'] == date('Y-m-d'))) {
+                        if($btn_reactivar && date('Y-m-d',$fila['finalizado']) == date('Y-m-d')) {
                             echo '<td>';
-                            echo '<a class="btn btn-danger" href="#" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')" >Editar</a>';
+                            echo '<a class="btn btn-danger" href="#" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')" >Editarx</a>';
                             echo '</td>';
+                        }else{
+                            echo '<td></td>';
                         }
                         echo '</tr>';
                 }
@@ -1405,7 +1407,6 @@ class Reservacion extends ConexionMYSql
              <!-- <th>Extra Junior</th> --->
              <!-- <th>Extra Infantil</th> --->
              <th>Extra Menor</th>
-             <th>Teléfono Huésped</th>
              <th>Total Estancia</th>
              <th>Total Pago</th>
              <th>Forma Pago</th>
@@ -1454,7 +1455,7 @@ class Reservacion extends ConexionMYSql
                      <!-- <td>'.$fila['extra_junior'].'</td> --> 
                     <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['tel'].'</td>';
+                    ';
             if($fila['forzar_tarifa']>0) {
                 echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
             } else {
@@ -1552,7 +1553,6 @@ class Reservacion extends ConexionMYSql
              <!-- <th>Extra Junior</th> --->
              <!-- <th>Extra Infantil</th> --->
              <th>Extra Menor</th>
-             <th>Teléfono Huésped</th>
              <th>Total Estancia</th>
              <th>Total Pago</th>
              <th>Forma Pago</th>
@@ -1602,7 +1602,7 @@ class Reservacion extends ConexionMYSql
                      <!-- <td>'.$fila['extra_junior'].'</td> --> 
                     <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
                     <td>'.$fila['extra_menor'].'</td>
-                    <td>'.$fila['tel'].'</td>';
+                    ';
                 if($fila['forzar_tarifa']>0) {
                     echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                 } else {
@@ -1693,7 +1693,6 @@ class Reservacion extends ConexionMYSql
 			<!-- <th>Extra Junior</th> --->
 			<!-- <th>Extra Infantil</th> --->
 			<th>Extra Menor</th>
-			<th>Teléfono Huésped</th>
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
 			<th>Forma Pago</th>
@@ -1805,7 +1804,6 @@ class Reservacion extends ConexionMYSql
 			<!-- <th>Extra Junior</th> --->
 			<!-- <th>Extra Infantil</th> --->
 			<th>Extra Menor</th>
-			<th>Teléfono Huésped</th>
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
 			<th>Forma Pago</th>
@@ -1880,7 +1878,7 @@ class Reservacion extends ConexionMYSql
             <!-- <td>'.$fila['extra_junior'].'</td> -->
             <!-- <td>'.$fila['extra_infantil'].'</td> --->
             <td>'.$fila['extra_menor'].'</td>
-            <td>'.$fila['tel'].'</td>';
+            ';
                 if($fila['forzar_tarifa']>0) {
                     echo '<td>$'.number_format($fila['total'], 2).'</td>';
                 } else {
@@ -1921,6 +1919,7 @@ class Reservacion extends ConexionMYSql
                             <div class="dropdown-menu" aria-labelledby="options">';
                     echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',0,'.$fila['huesped_id'].')">Garantizar</a>';
                     echo '<a class="dropdown-item" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')">Ver reporte</a>';
+                    echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].')">Duplicar</a>';
                     echo '<a class="dropdown-item" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
                     if($borrar == 1 && $fila['edo'] != 0) {
                         echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Cancelar</a>';
@@ -1961,7 +1960,7 @@ class Reservacion extends ConexionMYSql
              <!-- <td>'.$fila['extra_junior'].'</td> --> 
             <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
             <td>'.$fila['extra_menor'].'</td>
-            <td>'.$fila['tel'].'</td>';
+            ';
                 if($fila['forzar_tarifa']>0) {
                     echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                 } else {
@@ -1997,6 +1996,7 @@ class Reservacion extends ConexionMYSql
                             <div class="dropdown-menu" aria-labelledby="options">';
                     echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',0,'.$fila['huesped_id'].')" >Garantizar</a>';
                     echo '<a class="dropdown-item" href="#"onclick=" ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')" >Ver reporte</a>';
+                    echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].')">Duplicar</a>';
                     if($borrar == 1 && $fila['edo'] != 0) {
                         echo '<a class="dropdown-item" href="#" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
                         echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',1)">Cancelar</a>';
@@ -2036,8 +2036,7 @@ class Reservacion extends ConexionMYSql
             <td>'.$fila['extra_adulto'].'</td>
             <!-- <td>'.$fila['extra_junior'].'</td> -->
             <!-- <td>'.$fila['extra_infantil'].'</td> --->
-            <td>'.$fila['extra_menor'].'</td>
-            <td>'.$fila['tel'].'</td>';
+            <td>'.$fila['extra_menor'].'</td>';
             if($fila['forzar_tarifa']>0) {
                 echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
             } else {
@@ -2073,6 +2072,7 @@ class Reservacion extends ConexionMYSql
                 </button>
                 <div class="dropdown-menu" aria-labelledby="options">';
             echo '<a class="dropdown-item" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'CHECK-IN\',\''.$fila['correo_huesped'].'\')"> Reporte</a>';
+            echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].')">Duplicar</a>';
             if($editar==1 && $fila['edo'] = 1) {
                 echo '<a class="dropdown-item" href="#" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')" >Editar</a>';
             }
@@ -2177,7 +2177,7 @@ class Reservacion extends ConexionMYSql
         ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
-        // echo $sentencia;
+        //echo $sentencia;
         $cat_paginas=($this->total_elementos($sentencia)/20);
         // print_r($cat_paginas);
         $extra=($this->total_elementos($sentencia)%20);
@@ -2210,8 +2210,7 @@ class Reservacion extends ConexionMYSql
 			<!-- <th>Extra Junior</th> --->
 			<!-- <th>Extra Infantil</th> --->
 			<th>Extra Menor</th>
-			
-			<th>Teléfono Huésped</th>
+
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
 			<th>Forma Pago</th>
@@ -2291,7 +2290,7 @@ class Reservacion extends ConexionMYSql
                 $where_fechas="";
             }
             $ruta="ver_reportes_llegadas()";
-            $sentencia="SELECT *,  hab.nombre as nombre_hab,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+            $sentencia="SELECT *,  hab.nombre as nombre_hab,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
             FROM reservacion
             LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
             INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
@@ -2345,7 +2344,6 @@ class Reservacion extends ConexionMYSql
 				<!-- <th>Extra Junior</th> --->
 				<!-- <th>Extra Infantil</th> --->
 				<th>Extra Menor</th>
-				<th>Teléfono Huésped</th>
 				<th>Total Estancia</th>
 				<th>Total Pago</th>
 				<th>Forma Pago</th>
@@ -2376,6 +2374,7 @@ class Reservacion extends ConexionMYSql
         $agregar = $usuario->reservacion_agregar;
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
+        $preasignar = $usuario->reservacion_preasignar;
         date_default_timezone_set('America/Mexico_City');
         $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
@@ -2418,8 +2417,8 @@ class Reservacion extends ConexionMYSql
 				<th>Número</th>
 				<th>Fecha Entrada</th>
 				<th>Fecha Salida</th>
+                <th>Nombre Huésped</th>
 				<th>Noches</th>
-				<th>No. Habitaciones</th>
 				<th>Tarifa</th>
 				<th>Precio Hospedaje</th>
 				<th>Cantidad Hospedaje</th>
@@ -2427,8 +2426,6 @@ class Reservacion extends ConexionMYSql
 				<!-- <th>Extra Junior</th> --->
 				<!-- <th>Extra Infantil</th> --->
 				<th>Extra Menor</th>
-				<th>Nombre Huésped</th>
-				<th>Teléfono Huésped</th>
 				<th>Total Estancia</th>
 				<th>Total Pago</th>
 				<th>Forma Pago</th>
@@ -2447,7 +2444,7 @@ class Reservacion extends ConexionMYSql
 			</thead>
 			<tbody>';
         while ($fila = mysqli_fetch_array($consulta)) {
-            $this->construirTabla($fila, $agregar, $editar, $borrar);
+            $this->construirTabla($fila, $agregar, $editar, $borrar,"",$preasignar);
         }
         // }
         echo '
@@ -2463,6 +2460,7 @@ class Reservacion extends ConexionMYSql
         $agregar = $usuario->reservacion_agregar;
         $editar = $usuario->reservacion_editar;
         $borrar = $usuario->reservacion_borrar;
+        $preasignar = $usuario->reservacion_preasignar;
         date_default_timezone_set('America/Mexico_City');
         // $fecha_ini_tiempo= $fecha_ini_tiempo. " 0:00:00";
         // $fecha_fin_tiempo= $fecha_fin_tiempo  . " 23:59:59";
@@ -2556,7 +2554,6 @@ class Reservacion extends ConexionMYSql
 			  <!-- <th>Extra Junior</th> --->
 			  <!-- <th>Extra Infantil</th> --->
 			  <th>Extra Menor</th>
-			  <th>Teléfono Huésped</th>
 			  <th>Total Estancia</th>
 			  <th>Total Pago</th>
 			  <th>Forma Pago</th>
@@ -2577,7 +2574,7 @@ class Reservacion extends ConexionMYSql
 			</thead>
 		<tbody>';
             while ($fila = mysqli_fetch_array($consulta)) {
-                $this->construirTabla($fila, $agregar, $editar, $borrar);
+                $this->construirTabla($fila, $agregar, $editar, $borrar,"",$preasignar);
             }
         }
         echo '
@@ -2857,7 +2854,6 @@ class Reservacion extends ConexionMYSql
 			<!-- <th>Extra Infantil</th> --->
 			<th>Extra Menor</th>
 			<th>Nombre Huésped</th>
-			<th>Teléfono Huésped</th>
 			<th>Total Estancia</th>
 			<th>Total Pago</th>
 			<th>Forma Pago</th>
@@ -2884,7 +2880,7 @@ class Reservacion extends ConexionMYSql
 					<!-- <td>'.$fila['extra_infantil'].'</td> --->
 					<td>'.$fila['extra_menor'].'</td>
 					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
+					';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                         } else {
@@ -2910,7 +2906,7 @@ class Reservacion extends ConexionMYSql
 					<!-- <td>'.$fila['extra_infantil'].'</td> --->
 					<td>'.$fila['extra_menor'].'</td>
 					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
+					';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                         } else {
@@ -2937,7 +2933,7 @@ class Reservacion extends ConexionMYSql
 				    <!-- <td>'.$fila['extra_infantil'].'</td> --->
 				    <td>'.$fila['extra_menor'].'</td>
 				    <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-				    <td>'.$fila['tel'].'</td>';
+				   ';
                     if($fila['forzar_tarifa']>0) {
                         echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                     } else {
@@ -2996,14 +2992,13 @@ class Reservacion extends ConexionMYSql
 				<!-- <th>Extra Infantil</th> --->
 				<th>Extra Menor</th>
 				<th>Nombre Huésped</th>
-				<th>Teléfono Huésped</th>
 				<th>Total Estancia</th>
 				<th>Total Pago</th>
 				<th>Forma Pago</th>
 				<!-- <th>Límite Pago</th> --->
 				<th>Status</th>';
             echo '</tr>
-			  </thead>
+			</thead>
 			<tbody>';
             while ($fila = mysqli_fetch_array($consulta)) {
                 if($fila['edo'] == 1) {
@@ -3022,7 +3017,7 @@ class Reservacion extends ConexionMYSql
 					  <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
 					  <td>'.$fila['extra_menor'].'</td>
 					  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					  <td>'.$fila['tel'].'</td>';
+					 ';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                         } else {
@@ -3048,7 +3043,7 @@ class Reservacion extends ConexionMYSql
 					  <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
 					  <td>'.$fila['extra_menor'].'</td>
 					  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					  <td>'.$fila['tel'].'</td>';
+					  ';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                         } else {
@@ -3075,7 +3070,7 @@ class Reservacion extends ConexionMYSql
 					<!-- <td>'.$fila['extra_infantil'].'</td> ---> 
 					<td>'.$fila['extra_menor'].'</td>
 					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
+					';
                     if($fila['forzar_tarifa']>0) {
                         echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                     } else {
@@ -3152,7 +3147,6 @@ class Reservacion extends ConexionMYSql
 			  <!-- <th>Extra Infantil</th> --->
 			  <th>Extra Menor</th>
 			  <th>Nombre Huésped</th>
-			  <th>Teléfono Huésped</th>
 			  <th>Total Estancia</th>
 			  <th>Total Pago</th>
 			  <th>Forma Pago</th>
@@ -3178,7 +3172,7 @@ class Reservacion extends ConexionMYSql
 					<!-- <td>'.$fila['extra_infantil'].'</td> ---> 
 					<td>'.$fila['extra_menor'].'</td>
 					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
+					';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                         } else {
@@ -3204,7 +3198,7 @@ class Reservacion extends ConexionMYSql
 					<!-- <td>'.$fila['extra_infantil'].'</td> ---> 
 					<td>'.$fila['extra_menor'].'</td>
 					<td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-					<td>'.$fila['tel'].'</td>';
+					';
                         if($fila['forzar_tarifa']>0) {
                             echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                         } else {
@@ -3231,7 +3225,7 @@ class Reservacion extends ConexionMYSql
 				  <!-- <td>'.$fila['extra_infantil'].'</td> ---> 
 				  <td>'.$fila['extra_menor'].'</td>
 				  <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
-				  <td>'.$fila['tel'].'</td>';
+				';
                     if($fila['forzar_tarifa']>0) {
                         echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
                     } else {
@@ -3575,5 +3569,26 @@ class Reservacion extends ConexionMYSql
         // print_r($sentencia);
 
         return $consulta;
+    }
+
+    public function duplicar($id_duplicar){
+        $sentencia="INSERT INTO reservacion
+        (id_usuario, id_huesped, id_cuenta, tipo_hab, fecha_entrada, fecha_salida, noches, numero_hab, precio_hospedaje, cantidad_hospedaje, pax_extra, adultos, infantiles, extra_adulto, extra_junior, extra_infantil, extra_menor, tarifa, nombre_reserva, acompanante,forma_pago,limite_pago,suplementos,total_suplementos	,total_hab,forzar_tarifa,codigo_descuento,descuento,total,total_pago	,fecha_cancelacion,nombre_cancela,motivo_cancela,tipo_descuento,estado,estado_interno,canal_reserva,plan_alimentos,tipo_reservacion,sobrevender,estado_credito,limite_credito,fecha_auditoria)
+        SELECT id_usuario, id_huesped, id_cuenta, tipo_hab, fecha_entrada, fecha_salida, noches, numero_hab, precio_hospedaje, cantidad_hospedaje, pax_extra, adultos, infantiles, extra_adulto, extra_junior, extra_infantil, extra_menor, tarifa, nombre_reserva, acompanante,forma_pago,limite_pago,suplementos,total_suplementos	,total_hab,forzar_tarifa,codigo_descuento,descuento,total,total_pago	,fecha_cancelacion,nombre_cancela,motivo_cancela,tipo_descuento,estado,estado_interno,canal_reserva,plan_alimentos,tipo_reservacion,sobrevender,estado_credito,limite_credito,fecha_auditoria
+        FROM reservacion
+        WHERE id = $id_duplicar";
+        $comentario="Duplicando reservación";
+
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
+
+        $sentencia = "SELECT LAST_INSERT_ID(id) as id From reservacion";
+        $comentario="Obtenemos la ultima reservación";
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
+        $id_reserva="";
+        while ($fila = mysqli_fetch_array($consulta)) {
+            $id_reserva= $fila['id'];
+        }
+
+        return $id_reserva;
     }
 }

@@ -5386,7 +5386,7 @@ function editar_herramientas_cargo(id,hab_id,estado,cargo,id_maestra=0,mov=0){
 function confirmar_cambiar_cargos(){
     swal({
         title: "¿Estás de acuerdo con editar los cargos de las cuentas?",
-        text: "¡Los cargos se aplicaran y pueden ser editados mientras corra la noch!",
+        text: "¡Los cargos se aplicaran y pueden ser editados mientras corra la noche!",
         icon: "warning",
         buttons: {
             cancel: {
@@ -5843,6 +5843,58 @@ function cambiar_hab_cuentas_seleccionadas(id_hab,nombre_hab,mov_hab,hab_id,esta
 	return false;
 }
 
+function confirmar_duplicar_reservacion(id_reserva,id_mov){
+    swal({
+        title: "¿Estás de acuerdo con duplicar la reservación?",
+        icon: "warning",
+        buttons: {
+            cancel: {
+            text: "Cancelar",
+            value: null,
+            visible: true,
+            className: "",
+            closeModal: true,
+            },
+            confirm: {
+            text: "OK",
+            value: true,
+            visible: true,
+            className: "",
+            closeModal: true
+            }
+        },
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            duplicar_reservacion(id_reserva,id_mov)
+        }
+        });
+
+   
+}
+
+function duplicar_reservacion(id_reserva,id_mov){
+    var usuario_id=localStorage.getItem("id");
+    let datos = {
+        "id_reserva":id_reserva,
+        "id_mov":id_mov,
+        "usuario_id":usuario_id,
+    }
+    $.ajax({
+        async:true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded", 
+        url:"includes/duplicar_reservacion.php",
+        data:datos,
+        beforeSend:loaderbar,
+        success:ver_reservaciones,
+        //success:problemas_sistema,
+        timeout:5000,
+        error:problemas_sistema
+    });
+}
 
 // Funcion para cambiar de habitacion las cuentas en estado de cuenta a otra habitacion
 function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){

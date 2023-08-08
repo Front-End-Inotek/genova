@@ -628,6 +628,17 @@
         $comentario="Actualizando las fechas de hospedaje del movimiento";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+
+      function duplicar($id_mov, $id_reserva){
+        $sentencia="INSERT INTO movimiento
+        (id_hab, id_huesped, id_reservacion, id_mesa, personas, inicio_hospedaje, fin_hospedaje, detalle_inicio, detalle_fin, detalle_manda, detalle_realiza, finalizado, tarifa, fin_limpieza, persona_limpio, liberacion, motivo, comentario, estado_interno, persona_uso)
+        SELECT id_hab, id_huesped, '$id_reserva', id_mesa, personas, inicio_hospedaje, fin_hospedaje, detalle_inicio, detalle_fin, detalle_manda, detalle_realiza, finalizado, tarifa, fin_limpieza, persona_limpio, liberacion, motivo, comentario, estado_interno, persona_uso
+        FROM movimiento
+        WHERE id = $id_mov";
+        $comentario="Duplicar movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+      }
   
   }
 ?>
