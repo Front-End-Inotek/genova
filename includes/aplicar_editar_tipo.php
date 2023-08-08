@@ -8,7 +8,7 @@
   }else{
     $tipo= NEW Tipo(0);
     $logs = NEW Log(0);
-    $tipo->editar_tipo($_GET['id_tipo'],urldecode($_GET['nombre']),urldecode($_GET['codigo']));
+    $tipo->editar_tipo($_GET['id_tipo'],urldecode($_GET['nombre']),urldecode($_GET['codigo']),urldecode($_GET['color']));
     $logs->guardar_log($_GET['usuario_id'],"Editar tipo de habitacion: ". $_GET['id_tipo']);
   }
 

@@ -26,6 +26,10 @@
                 </div>
                   <input type="text" id="codigo" name ="codigo" value="'.$tipo->codigo.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
+            <div class="input-group mb-3 d-flex gap-2">
+                <label for="color" class="form-label">Color de la hab. </label>
+                <input type="color" class="form-control form-control-color" id="colorHab" value='.$tipo->color.'" title="Color">
+            </div>
     
             </div>
             <div class="modal-footer">
