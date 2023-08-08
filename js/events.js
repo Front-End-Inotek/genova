@@ -1811,6 +1811,14 @@ function graficas(){
     closeModal();
     closeNav();
 }
+function pronosticos(){
+    $('#area_trabajo').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/pronosticos.php");
+    $('#pie').show();
+    closeModal();
+    closeNav();
+}
 //Función que calcula las fechas entre 2 fechas.
 function getDatesInRange(date, endDate) {
     const dates = [];

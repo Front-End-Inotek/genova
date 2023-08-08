@@ -120,6 +120,8 @@
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_surtir()"> Surtir </a></i></ul>';
 			echo'
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
+			echo'
+			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="pronosticos()">Pronosticos de ocupacion </a></i></ul>';
 			}
 			
 			// echo'
