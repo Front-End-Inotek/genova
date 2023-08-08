@@ -58,7 +58,8 @@ class Informacion extends ConexionMYSql
         $filtro ="AND hab.estado = " . $estatus_hab;
     }
     if (true) {
-    $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno , datos_vehiculo.id as id_vehiculo
+    $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,
+    movimiento.estado_interno AS interno , datos_vehiculo.id as id_vehiculo, tipo_hab.color as color_tipo
     FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
     LEFT JOIN movimiento ON hab.mov = movimiento.id
     LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
@@ -224,47 +225,8 @@ echo'
 
         if($fila['tipo']>0){
 
-            $color="";
-            $tipo = $fila['tipo'];
-            switch ($tipo) {
-                case '1':
-                    $color ="pink"; // sencilla (servidor)
-                    break;
-                case '2':
-                    $color ="yellow"; // king
-                    break;
-                case '3':
-                    $color ="blue"; //doble
-                    break;
-                case '4':
-                    $color ="green";
-                    break;
-                case '5':
-                    $color ="purple";
-                    break;
-                case '6':
-                    $color ="yellow";
-                    break;
-                case '7':
-                    $color ="brown";
-                    break;
-                case '8':
-                    $color ="cyan";
-                    break;
-                case '9':
-                    $color ="indigo";
-                    break;
-                case '10':
-                    $color ="orange";
-                    break;
-                case '11':
-                    $color ="salmon";
-                    break;
-                default:
-                    # code...
-                    $color ="gray";
-                    break;
-            }
+            $color = $fila['color_tipo'];
+            $color = "#".$color;
             $estilo_tipo='style="border-left-color: '.$color.' !important;"';
 
             echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';

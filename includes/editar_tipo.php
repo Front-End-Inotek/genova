@@ -28,7 +28,7 @@
             </div>
             <div class="input-group mb-3 d-flex gap-2">
                 <label for="color" class="form-label">Color de la hab. </label>
-                <input type="color" class="form-control form-control-color" id="colorHab" value='.$tipo->color.'" title="Color">
+                <input type="color" class="form-control form-control-color" id="colorHab" value="#'.$tipo->color.'" title="Color">
             </div>
     
             </div>

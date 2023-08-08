@@ -127,7 +127,7 @@ class RackHabitacional extends ConexionMYSql
 
         //Se utiliza la misma consulta para el rack de operaciones
         $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin, datos_vehiculo.id as id_vehiculo
-        ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped
+        ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped, tipo_hab.color as color_tipo
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
         LEFT JOIN huesped on huesped.id = movimiento.id_huesped
         LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
@@ -206,47 +206,8 @@ class RackHabitacional extends ConexionMYSql
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
             $existe_disponible=false;
-            $color="";
-            $tipo = $fila['tipo'];
-            switch ($tipo) {
-                case '1':
-                    $color ="pink"; // sencilla (servidor)
-                    break;
-                case '2':
-                    $color ="yellow"; // king
-                    break;
-                case '3':
-                    $color ="blue"; //doble
-                    break;
-                case '4':
-                    $color ="green";
-                    break;
-                case '5':
-                    $color ="purple";
-                    break;
-                case '6':
-                    $color ="yellow";
-                    break;
-                case '7':
-                    $color ="brown";
-                    break;
-                case '8':
-                    $color ="cyan";
-                    break;
-                case '9':
-                    $color ="indigo";
-                    break;
-                case '10':
-                    $color ="orange";
-                    break;
-                case '11':
-                    $color ="salmon";
-                    break;
-                default:
-                    # code...
-                    $color ="gray";
-                    break;
-            }
+            $color = $fila['color_tipo'];
+            $color = "#".$color;
             $hab_nombre =$fila['nombre'];
             // $hab_nombre = strlen($hab_nombre) > 13 ? substr($hab_nombre,0,12)."..." : $hab_nombre;
             echo '

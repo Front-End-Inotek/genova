@@ -154,7 +154,7 @@ setlocale(LC_ALL, "es_ES");
             $cronometro = 0;
             //Se utiliza la misma consulta para el rack de operaciones
             $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin, datos_vehiculo.id as id_vehiculo
-            ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped
+            ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped, tipo_hab.color as color_tipo
             FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
             LEFT JOIN huesped on huesped.id = movimiento.id_huesped
             LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
@@ -164,7 +164,10 @@ setlocale(LC_ALL, "es_ES");
             $consulta = $this->realizaConsulta($sentencia, $comentario);
             //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
             while ($fila = mysqli_fetch_array($consulta)) {
-                echo ' <td class="cal-userinfo">
+                $color = $fila['color_tipo'];
+                $color = "#".$color;
+
+                echo ' <td class="cal-userinfo BordeIzquierdoTipoHab" style="border-left-color: '.$color.' !important;">
                 ';
                     echo 'Habitación ------';
                         echo $hab_id;

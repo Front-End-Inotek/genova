@@ -924,6 +924,9 @@ function modificar_tipo(id){
     let nombre = encodeURI(document.getElementById("nombre").value);
 	let codigo = encodeURI(document.getElementById("codigo").value);
     let color = encodeURI(document.getElementById("colorHab").value);
+    color = color.replace("#","")
+    color_hab= encodeURI(color)
+
         let datos = {
             "id_tipo": id_tipo,
             "nombre": nombre,
@@ -933,7 +936,7 @@ function modificar_tipo(id){
         };
     let xhttp;
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/aplicar_editar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&id_tipo="+id_tipo+"&color="+colorHab+"&usuario_id="+usuario_id,true);
+    xhttp.open("GET","includes/aplicar_editar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&id_tipo="+id_tipo+"&color="+color_hab+"&usuario_id="+usuario_id,true);
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {

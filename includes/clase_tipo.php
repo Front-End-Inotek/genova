@@ -18,6 +18,7 @@
           $this->nombre= 0;
           $this->codigo= 0;
           $this->estado= 0;
+          $this->color= 0;
         }else{
           $sentencia = "SELECT * FROM tipo_hab WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores de tipo habitacion";
@@ -28,6 +29,7 @@
               $this->nombre= $fila['nombre'];
               $this->codigo= $fila['codigo'];
               $this->estado= $fila['estado'];
+              $this->color= $fila['color'];
           }
         }
       }
@@ -117,10 +119,11 @@
         </div>';
       }
       // Editar un tipo habitacion
-      function editar_tipo($id,$nombre,$codigo){
+      function editar_tipo($id,$nombre,$codigo,$color){
         $sentencia = "UPDATE `tipo_hab` SET
             `nombre` = '$nombre',
-            `codigo` = '$codigo'
+            `codigo` = '$codigo',
+            `color` = '$color'
             WHERE `id` = '$id';";
         //echo $sentencia ;
         $comentario="Editar un tipo habitacion dentro de la base de datos ";
