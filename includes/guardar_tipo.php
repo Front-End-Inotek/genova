@@ -9,7 +9,7 @@
   }else{
     $tipo= NEW Tipo(0);
     $logs = NEW Log(0);
-      $tipo->guardar_tipo(urldecode($_GET['nombre']),urldecode($_GET['codigo']));
+      $tipo->guardar_tipo(urldecode($_GET['nombre']),urldecode($_GET['codigo']),urldecode($_GET['color']));
       $logs->guardar_log($_GET['usuario_id'],"Agregar tipo de habitacion: ". urldecode($_GET['nombre']));
   }
 

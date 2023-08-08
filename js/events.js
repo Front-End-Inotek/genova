@@ -541,6 +541,7 @@ function guardar_planAlimentos(){
 function guardar_tipo() {
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var codigo= encodeURI(document.getElementById("codigo").value);
+    //const color = encodeURI(document.getElementById("colorHab").value);
 
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
@@ -605,16 +606,18 @@ function guardar_habitacion(){
     let usuario_id=localStorage.getItem("id");
 	let nombre= encodeURI(document.getElementById("nombre").value);
 	let codigo= encodeURI(document.getElementById("codigo").value);
+    const colorHab = encodeURI(document.getElementById("colorHab").value);
 
     let datos = {
         "nombre": nombre,
         "codigo": codigo,
         "usuario_id": usuario_id,
+        "colorHab": colorHab,
     };
 
     let xhttp;
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/guardar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&usuario_id="+usuario_id,true);
+    xhttp.open("GET","includes/guardar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&color="+colorHab+"&usuario_id="+usuario_id,true);
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
