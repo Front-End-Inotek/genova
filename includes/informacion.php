@@ -412,17 +412,9 @@ echo '
       <div class="modal-body">
         <ul class="list-group mb-4">
             <li class="list-group-item fw-bolder">Tipos de habitaciones</li>
-            <li class="list-group-item">Compartidas</li>
-            <li class="list-group-item">Cuadruples</li>
-            <li class="list-group-item">Dobles</li>
-            <li class="list-group-item">Familiar</li>
-            <li class="list-group-item">Gran suite</li>
-            <li class="list-group-item">Individuales</li>
-            <li class="list-group-item">Junior suite</li>
-            <li class="list-group-item">Matrimonial</li>
-            <li class="list-group-item">Presidencial</li>
-            <li class="list-group-item">Suite</li>
-            <li class="list-group-item">Suite principal</li>
+            <li class="list-group-item sencilla">DOBLE</li>
+            <li class="list-group-item king">KING</li>
+            <li class="list-group-item doble">SENCILLA</li>
         </ul>
         <ul class="list-group mb-4">
             <li class="list-group-item fw-bolder">Estado de habitaciones</li>
