@@ -2,7 +2,7 @@
 
 echo '
     <div class="contenedor__pronosticos">
-        <table class="table table-bordered table-sm">
+        <table class="table table-bordered table-sm ">
             <thead>
             <tr>
                 <th >Mes</th>

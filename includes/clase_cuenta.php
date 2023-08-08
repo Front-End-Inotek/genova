@@ -737,7 +737,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     }
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
-                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
                     if($descripcion=="Cargo por noche" && $auditoria_editar>0){
@@ -746,7 +746,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
-                      <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                      <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
                       </tr>';
                       echo '';
                     }elseif($descripcion!="Cargo por noche"){
@@ -755,7 +755,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
-                      <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button>
+                      <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button>
                     
                       </td>
                       </tr>';
@@ -777,7 +777,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
-                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                    <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
                     </tr>';
                     echo '';
                   }else{
@@ -850,7 +850,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td>
                     <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
@@ -859,7 +859,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td>
                     <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')"> ✏️ Editar</button></td>
+                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
                     </tr>';
                   }
                 }else{
