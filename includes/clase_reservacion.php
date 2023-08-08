@@ -1245,7 +1245,7 @@ class Reservacion extends ConexionMYSql
                         echo '<td>'.$estado.'</td>';
                         if($btn_reactivar && date('Y-m-d',$fila['finalizado']) == date('Y-m-d')) {
                             echo '<td>';
-                            echo '<a class="btn btn-danger" href="#" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')" >Editarx</a>';
+                            echo '<a class="btn btn-danger" href="#" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')" >Editar</a>';
                             echo '</td>';
                         }else{
                             echo '<td></td>';
@@ -3353,7 +3353,7 @@ class Reservacion extends ConexionMYSql
         $fecha_entrada= time();
         $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
         VALUES ('$usuario_id', '$id_mov', '$descripcion', '$fecha_entrada', '$forma_pago', '0', '$pago_total', '1');";
-        echo $sentencia;
+        //echo $sentencia;
         $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
     }
