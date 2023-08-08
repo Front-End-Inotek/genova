@@ -386,7 +386,7 @@ echo '
             {
             $color ="#".$fila['color'];
     
-            echo '<li class="list-group-item" style="color:black; background-color: '.$color.'">'.$fila['nombre'].'</li>';
+            echo '<li class="list-group-item" style="background-color: '.$color.'"><p style="  filter: contrast(100%); font-weight: 700;">'.$fila['nombre'].'</p></li>';
             }
         echo '
         </ul>
