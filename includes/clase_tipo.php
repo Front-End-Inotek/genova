@@ -160,6 +160,15 @@
         }
         return $nombre;
       }
+      function obtener_tipos(){ 
+        $sentencia = "SELECT * FROM tipo_hab WHERE estado = 1";
+        //echo $sentencia;
+        $nombre= '';
+        $comentario="Obtengo el nombre de un tipo habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+        
+      }
              
   }
 ?>

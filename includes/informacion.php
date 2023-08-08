@@ -362,6 +362,12 @@ echo'
     
 }
 
+include_once('clase_tipo.php');
+
+$tipo = new Tipo(0);
+
+$tipos = $tipo->obtener_tipos();
+
 echo '<i class="btn-info-custom bx bxs-info-circle" data-toggle="modal" data-target="#exampleModal" ></i>';
 echo '
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -375,10 +381,14 @@ echo '
       </div>
       <div class="modal-body">
         <ul class="list-group mb-4">
-            <li class="list-group-item fw-bolder">Tipos de habitaciones</li>
-            <li class="list-group-item sencilla">DOBLE</li>
-            <li class="list-group-item king">KING</li>
-            <li class="list-group-item doble">SENCILLA</li>
+            <li class="list-group-item fw-bolder">Tipos de habitaciones</li>';
+            while ($fila = mysqli_fetch_array($tipos))
+            {
+            $color ="#".$fila['color'];
+    
+            echo '<li class="list-group-item" style="color:black; background-color: '.$color.'">'.$fila['nombre'].'</li>';
+            }
+        echo '
         </ul>
         <ul class="list-group mb-4">
             <li class="list-group-item fw-bolder">Estado de habitaciones</li>
