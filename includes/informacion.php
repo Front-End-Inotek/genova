@@ -398,7 +398,7 @@ echo'
     
 }
 
-echo '<i class="btn-info-custom bx bxs-info-circle" data-toggle="modal" data-target="#exampleModal"></i>';
+echo '<i class="btn-info-custom bx bxs-info-circle" data-toggle="modal" data-target="#exampleModal" ></i>';
 echo '
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -424,7 +424,7 @@ echo '
             <li class="list-group-item">Suite</li>
             <li class="list-group-item">Suite principal</li>
         </ul>
-        <ul class="list-group mb-0">
+        <ul class="list-group mb-4">
             <li class="list-group-item fw-bolder">Estado de habitaciones</li>
             <li class="list-group-item InfoDisponible">Disponible limpia</li>
             <li class="list-group-item InfoLimpiezaVacia">Limpieza vacia</li>
@@ -436,6 +436,21 @@ echo '
             <li class="list-group-item InfoMantenimiento">Mantenimiento</li>
             <li class="list-group-item InfoReservaPagada">Reserva pagada</li>
             <li class="list-group-item InfoReservaPendiente">Reserva pendiente pago</li>
+        </ul>
+        <ul class="list-group mb-0">
+            <li class="list-group-item fw-bolder">Estado de limpieza</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="margin-bottom: 0;">
+                Limpia
+                <i class="bx bxs-brush-alt clean2"></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="margin-bottom: 0;">
+                En limpieza
+                <i class="bx bxs-brush-alt cleaning2"></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="margin-bottom: 0;">
+                Sucia
+                <i class="bx bxs-brush-alt dirt2"></i>
+            </li>
         </ul>
       </div>
       <div class="modal-footer">

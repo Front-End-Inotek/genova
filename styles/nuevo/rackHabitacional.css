@@ -690,6 +690,12 @@
   justify-content: center;
   padding: 4px;
 }
+.clean2{
+  color: white;
+  background-color: #28A745;
+  border-radius: 50%;
+  padding: 4px;
+}
 .dirt{
   position: absolute;
   right: 12px;
@@ -704,6 +710,12 @@
   justify-content: center;
   padding: 4px;
 }
+.dirt2{
+  color: white;
+  background-color: #DC3545;
+  border-radius: 50%;
+  padding: 4px;
+}
 .cleaning{
   position: absolute;
   right: 12px;
@@ -716,6 +728,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 4px;
+}
+.cleaning2{
+  color: white;
+  background-color: #0f6fd0;
+  border-radius: 50%;
   padding: 4px;
 }
 
