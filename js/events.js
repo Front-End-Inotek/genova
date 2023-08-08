@@ -916,6 +916,11 @@ function modificar_cuenta_maestra(id){
     xhttp.send();
 }
 
+function mostrar_info(){
+    let usuario_id = localStorage.getItem("id");
+    $("#info_here").load("includes/mostrar_info.php?usuario_id="+usuario_id)
+}
+
 // Editar un tipo de habitacion
 function modificar_tipo(id){
     //$('#caja_herramientas').modal('hide');
