@@ -4,6 +4,7 @@
   include_once("clase_cupon.php");
   include_once("clase_log.php");
   include_once('clase_movimiento.php');
+  include_once("clase_inventario.php");
   include_once('clase_hab.php');
   include_once('clase_ticket.php');
   $reservacion= NEW Reservacion(0);
@@ -11,11 +12,12 @@
   $logs = NEW Log(0);
   $hab = new Hab(0);
   $labels= NEW Labels(0);
-
+  $pedido_rest= NEW Pedido_rest(0);
   $descuento= $_POST['descuento'];
   $tipo_descuento= 0;
   $cantidad_cupon= 0;
-
+  $ticket= NEW Ticket(0);
+  $concepto= NEW Concepto(0);
   //Revisar la existencia de un cupon de descuento
   // Checar si codigo descuento esta vacio o no
   if (empty($_POST['codigo_descuento'])){
@@ -143,7 +145,7 @@
         $tipo_cargo=3;
         $resta= 0;
         $nombre_concepto="Pago al ingresar";
-        $categoria= $actual_hab;
+        $categoria= $old_hab;
         $nueva_etiqueta= $labels->obtener_etiqueta();
         $labels->actualizar_etiqueta();
         $comanda= $pedido_rest->saber_comanda($id_mov);
