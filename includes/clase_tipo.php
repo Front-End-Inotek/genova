@@ -37,12 +37,13 @@
       // }
 
       // Guardar en el tipo habitacion
-      function guardar_tipo($nombre,$codigo){
+      function guardar_tipo($nombre,$codigo,$color){
         $nombre = sanitize($nombre);
         $codigo = sanitize($codigo);
+        $color = sanitize($color);
 
-        $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `codigo`, `estado`)
-        VALUES ('$nombre', '$codigo', '1');";
+        $sentencia = "INSERT INTO `tipo_hab` (`nombre`, `codigo`, `color`, `estado`)
+        VALUES ('$nombre', '$codigo', '$color',  '1');";
         $comentario="Guardamos el tipo habitacion en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if($consulta){

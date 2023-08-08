@@ -1,4 +1,12 @@
 <?php
+include_once('clase_hab.php');
+
+$hab = new Hab(0);
+
+$total_habs = $hab->obtener_todas();
+
+
+$tiempo = time();
 
 echo '
     <div class="contenedor__pronosticos">
@@ -10,74 +18,32 @@ echo '
                 <th rowspan="2" scope="col">Mensual</th>
             </tr>
             <tr>
-                <th scope="col">Dia</th>
-                <th scope="col">1</th>
-                <th scope="col">2</th>
-                <th scope="col">3</th>
-                <th scope="col">4</th>
-                <th scope="col">5</th>
-                <th scope="col">6</th>
-                <th scope="col">7</th>
-                <th scope="col">8</th>
-                <th scope="col">9</th>
-                <th scope="col">10</th>
-                <th scope="col">11</th>
-                <th scope="col">12</th>
-                <th scope="col">13</th>
-                <th scope="col">14</th>
-                <th scope="col">15</th>
-                <th scope="col">16</th>
-                <th scope="col">17</th>
-                <th scope="col">18</th>
-                <th scope="col">19</th>
-                <th scope="col">20</th>
-                <th scope="col">21</th>
-                <th scope="col">22</th>
-                <th scope="col">23</th>
-                <th scope="col">24</th>
-                <th scope="col">25</th>
-                <th scope="col">26</th>
-                <th scope="col">27</th>
-                <th scope="col">28</th>
-                <th scope="col">29</th>
-                <th scope="col">30</th>
-                <th scope="col">31</th>
+            <th scope="col">Dia</th>
+            ';
+
+            for ($i = 1; $i <= 31; $i++) {
+                $dia = date('d', $tiempo);
+                $tiempo += 86400;
+                echo "
+                <th scope='col'>$i</th>
+                ";
+            }
+
+            echo '
             </tr>
             </thead>
             <tbody class="table-group-divider">
             <tr>
-                <th scope="row">Inventario total de habitaciones</th>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
-                <td>110</td>
+                <th scope="row">Inventario total de habitaciones</th>';
+
+                for ($i = 1; $i <= 31; $i++) {
+                    $dia = date('d', $tiempo);
+                    $tiempo += 86400;
+                    echo '
+                    <td>'.$total_habs.'</td>';
+            }
+
+            echo '
                 <td>3410</td>
             </tr>
             <tr>

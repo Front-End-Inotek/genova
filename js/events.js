@@ -608,21 +608,28 @@ function guardar_habitacion(){
 	let codigo= encodeURI(document.getElementById("codigo").value);
     const colorHab = encodeURI(document.getElementById("colorHab").value);
 
+    let color_hab = colorHab.replace("#","")
+    color_hab= encodeURI(color_hab)
     let datos = {
         "nombre": nombre,
         "codigo": codigo,
         "usuario_id": usuario_id,
         "colorHab": colorHab,
     };
+    // console.log(colorHab)
+    // return
 
     let xhttp;
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET","includes/guardar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&color="+colorHab+"&usuario_id="+usuario_id,true);
+    let include = "includes/guardar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&color="+color_hab+"&usuario_id="+usuario_id
+    console.log(include)
+    xhttp.open("GET",include,true);
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
+            console.log(response)
             if (response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");

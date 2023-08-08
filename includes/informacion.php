@@ -220,6 +220,7 @@ echo'
             //echo "Estado indefinido";
             break;
         }
+        
 
         if($fila['tipo']>0){
 
@@ -269,6 +270,7 @@ echo'
             echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';
             switch($estado) {
                 case "Disponible limpia":
+                $estado="";
                 echo'<div class="btn disponible-limpia" '.$estilo_tipo.'>';
                 echo '<i class="bx bxs-brush-alt clean"></i>';
                 break;
