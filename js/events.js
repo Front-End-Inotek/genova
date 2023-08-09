@@ -690,6 +690,14 @@ function ver_tipos(){
     closeModal();
 	closeNav();
 }
+function config_colores_hab(){
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/configcoloreshab.php");
+    closeModal();
+	closeNav();
+}
 
 // Editar una politica de reservacion
 function editar_politica_reservacion(id){
@@ -8554,4 +8562,69 @@ function mostrarAcordeonCompleto(cantidad=1){
         acorderon.classList.remove("accordionCustomMostrar");
         cuerpoacordeon.innerHTML = ``;
     }
+}
+
+function guardarColoresHab() {
+    const clasesEstados = [];
+    let disponibleLimpia = document.getElementsByName("colorDisponibleLimpia");
+    for (let i = 0; i < disponibleLimpia.length; i++){
+        if (disponibleLimpia[i].checked){
+            clasesEstados.push(disponibleLimpia[i].value)
+        }
+    }
+    let limpiezaVacia = document.getElementsByName("LimpiezaVacia");
+    for (let i = 0; i < limpiezaVacia.length; i++){
+        if (limpiezaVacia[i].checked){
+            clasesEstados.push(limpiezaVacia[i].value)
+        }
+    }
+    let limpiezaOcupada = document.getElementsByName("LimpiezaOcupada");
+    for (let i = 0; i < limpiezaOcupada.length; i++){
+        if (limpiezaOcupada[i].checked){
+            clasesEstados.push(limpiezaOcupada[i].value)
+        }
+    }
+    let Ocupada = document.getElementsByName("Ocupada");
+    for (let i = 0; i < Ocupada.length; i++){
+        if (Ocupada[i].checked){
+            clasesEstados.push(Ocupada[i].value)
+        }
+    }
+    let OcupadaSucia = document.getElementsByName("OcupadaSucia");
+    for (let i = 0; i < OcupadaSucia.length; i++){
+        if (OcupadaSucia[i].checked){
+            clasesEstados.push(OcupadaSucia[i].value)
+        }
+    }
+    let usoCasa = document.getElementsByName("usoCasa");
+    for (let i = 0; i < usoCasa.length; i++){
+        if (usoCasa[i].checked){
+            clasesEstados.push(usoCasa[i].value)
+        }
+    }
+    let Bloqueado = document.getElementsByName("Bloqueado");
+    for (let i = 0; i < Bloqueado.length; i++){
+        if (Bloqueado[i].checked){
+            clasesEstados.push(Bloqueado[i].value)
+        }
+    }
+    let Mantenimiento = document.getElementsByName("Mantenimiento");
+    for (let i = 0; i < Mantenimiento.length; i++){
+        if (Mantenimiento[i].checked){
+            clasesEstados.push(Mantenimiento[i].value)
+        }
+    }
+    let ReservaPag = document.getElementsByName("ReservaPag");
+    for (let i = 0; i < ReservaPag.length; i++){
+        if (ReservaPag[i].checked){
+            clasesEstados.push(ReservaPag[i].value)
+        }
+    }
+    let ReservaPend = document.getElementsByName("ReservaPend");
+    for (let i = 0; i < ReservaPend.length; i++){
+        if (ReservaPend[i].checked){
+            clasesEstados.push(ReservaPend[i].value)
+        }
+    }
+    alert(clasesEstados)
 }
