@@ -239,7 +239,7 @@ echo'
 
                 case "Vacia limpieza":
                 echo'<div class="btn vacia-limpia" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-brush-alt clean"></i>';
+                echo '<i class="bx bxs-brush-alt cleaning"></i>';
                 break;
 
                 case "Vacia sucia":

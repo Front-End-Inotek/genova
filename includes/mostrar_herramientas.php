@@ -40,7 +40,7 @@ function show_info($hab_id,$estado,$estado_interno){
 			break;
 
 			case 3:
-				echo 'Vacia limpia';
+				echo 'Vacia limpieza';
 			break;
 
 			case 4:

@@ -739,11 +739,15 @@
 
 .btn-info-custom{
   position: absolute;
-  top: 15px;
-  right: 20px;
-  z-index: 1000000;
+  top: 5px;
+  right: 10px;
+  z-index: 1000000000000000000000;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 2.0rem;
+  transition: all 0.2s ease-in-out;
+}
+.btn-info-custom:hover{
+  scale: 1.1;
 }
 
 .InfoHab{
@@ -753,14 +757,14 @@
   /* width: fit-content; */
   margin: auto;
 }
-.InfoHab:hover{
+/* .InfoHab:hover{
   color: black !important;
   background-color: white !important;
   filter: invert(1) !important;
   width: fit-content;
   margin: auto;
   cursor: help;
-}
+} */
 
 .InfoDisponible{
   background-color: #a2fcb7;
