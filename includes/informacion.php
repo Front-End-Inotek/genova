@@ -362,12 +362,6 @@ echo'
     
 }
 
-include_once('clase_tipo.php');
-
-$tipo = new Tipo(0);
-
-$tipos = $tipo->obtener_tipos();
-
 echo '<i class="btn-info-custom bx bxs-info-circle"  data-toggle="modal" onclick="mostrar_info()" data-target="#exampleModal" ></i>';
 echo '
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -157,18 +157,31 @@
       //se recibe la consulta y se convierte a arreglo
       $inicio_hospedaje= 0;
       $termina_hospe= 0;
+
+      $txt_inicio ="Última reservación:";
+      $txt_fin ="Termino ocupada:";
+
       while($fila = mysqli_fetch_array($consulta))
       {
         $inicio_hospedaje= $fila['inicio_hospedaje'];
         $termina_hospe= $fila['finalizado'];
+
+        if(empty($inicio_hospedaje)){
+          $inicio_hospedaje = $fila['detalle_inicio'];
+          $txt_inicio ="Último movimiento:";
+        }
+        if(empty($termina_hospe)){
+          $termina_hospe = $fila['detalle_fin'];
+          $txt_fin ="Termino movimiento:";
+        }
       }
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
       echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Última recervación: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
+        echo ''.$txt_inicio.' '.date("d-m-Y H:i:s",  $inicio_hospedaje);
       echo '</div>';
       echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Termino ocupada: '. date("d-m-Y H:i:s",$termina_hospe);
+        echo ''.$txt_fin.' '. date("d-m-Y H:i:s",$termina_hospe);
       echo '</div>';
       echo '<div class="col-xs-12 col-sm-12 col-md-12 letras-grandes-modal">';
         echo 'Tipo Habitación: '.$tipo_habitacion;
