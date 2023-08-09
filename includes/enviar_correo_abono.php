@@ -26,6 +26,9 @@
     if(!empty($correo)){
 
         $descripcion = $_POST['descripcion'];
+        $descripcion = urldecode($descripcion);
+        $descripcion = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
+
         $abono =$_POST['abono'];
         $forma_pago = $_POST['forma_pago'];
 
@@ -52,16 +55,16 @@
             $mail->CharSet = 'UTF-8'; 
             //Recipients
             $mail->setFrom('orware.factura@gmail.com', utf8_decode('Carlos Garcia'));
-            $mail->addAddress($correo, utf8_decode('Carlos Garcia'));  
+            $mail->addAddress($correo, ('Carlos Garcia'));  
     
             $contenido_pie="<div style='text-align:center'><p>Le invitamos a visitar nuestra página web:$conf->credencial_auto donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
             <span>$conf->domicilio</span>
             </div>";
 
-            $contenido_pie = utf8_decode($contenido_pie);
+
     
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = utf8_decode('Abono Visit');
+            $mail->Subject = ('Abono Visit');
             $mail->msgHTML('
             <div style="padding: 35px 35px;
             margin-bottom: 30px;
@@ -72,11 +75,11 @@
             border: 2px solid #3f51b5;
             font-family:Arial">
     
-            <h2 style="font-weight: bold;"> '.utf8_decode('Confirmación').' de abono realizado correctamente </h2>
+            <h2 style="font-weight: bold;"> '.('Confirmación').' de abono realizado correctamente </h2>
     
-            <p>Estimado(A) Sr (Srita) <span style="text-decoration:underline;">'. str_repeat('&nbsp;', 5). utf8_decode($nombre_huesped). str_repeat('&nbsp;', 5).' </span> </p>
+            <p>Estimado(A) Sr (Srita) <span style="text-decoration:underline;">'. str_repeat('&nbsp;', 5). $nombre_huesped. str_repeat('&nbsp;', 5).' </span> </p>
     
-            <p>'.utf8_decode('Su abono ha sido procesado con éxito con fecha  ').$fecha_actual.'</p>
+            <p>'.('Su abono ha sido procesado con éxito con fecha  ').$fecha_actual.'</p>
     
             <table style="vertical-align:top;   border-collapse: collapse; ">
             <thead>
@@ -85,7 +88,7 @@
               font-family: sans-serif;
               font-weight: bolder;
               ">
-              <th>'.utf8_decode('Descripción').'</th>
+              <th>'.('Descripción').'</th>
               <th>Fecha</th>
               <th>Abono</th>
               <th>Forma Pago</th>
@@ -95,7 +98,7 @@
             <tbody>
     
             <tr>
-            <td>'.utf8_decode(urlencode($descripcion)).'</td>
+            <td>'.(($descripcion)).'</td>
             <td>'.$f_h.'</td>
             <td>$'.number_format($abono,2).'</td>
             <td>'.$forma_pago.'</td>
