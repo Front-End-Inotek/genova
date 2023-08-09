@@ -49,7 +49,7 @@
             $mail->Password   = 'wmtitpzizsqnnwcr';                               //SMTP password
             $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        
+            $mail->CharSet = 'UTF-8'; 
             //Recipients
             $mail->setFrom('orware.factura@gmail.com', utf8_decode('Carlos Garcia'));
             $mail->addAddress($correo, utf8_decode('Carlos Garcia'));  
@@ -57,6 +57,8 @@
             $contenido_pie="<div style='text-align:center'><p>Le invitamos a visitar nuestra página web:$conf->credencial_auto donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
             <span>$conf->domicilio</span>
             </div>";
+
+            $contenido_pie = utf8_decode($contenido_pie);
     
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = utf8_decode('Abono Visit');
@@ -70,22 +72,20 @@
             border: 2px solid #3f51b5;
             font-family:Arial">
     
-            <h2 style="font-weight: bold;"> Confirmación de abono realizado correctamente </h2>
+            <h2 style="font-weight: bold;"> '.utf8_decode('Confirmación').' de abono realizado correctamente </h2>
     
-            <p>Estimado(A) Sr (Srita) <span style="text-decoration:underline;">'. str_repeat('&nbsp;', 5). $nombre_huesped. str_repeat('&nbsp;', 5).' </span> </p>
+            <p>Estimado(A) Sr (Srita) <span style="text-decoration:underline;">'. str_repeat('&nbsp;', 5). utf8_decode($nombre_huesped). str_repeat('&nbsp;', 5).' </span> </p>
     
-            <p>Su abono ha sido procesado con éxito con fecha  '.$fecha_actual.'</p>
+            <p>'.utf8_decode('Su abono ha sido procesado con éxito con fecha  ').$fecha_actual.'</p>
     
             <table style="vertical-align:top;   border-collapse: collapse; ">
             <thead>
-              <tr style=" border: 2px solid #3f51b5 !important;
-              color: #fff;
+              <tr style="border: 2px solid #3f51b5 !important;
               font-size: 13px;
               font-family: sans-serif;
               font-weight: bolder;
-              background: linear-gradient(180deg, #2d31ae 0%, #4e4ef0 50%, #1f238a 100%);
               ">
-              <th>Descripción</th>
+              <th>'.utf8_decode('Descripción').'</th>
               <th>Fecha</th>
               <th>Abono</th>
               <th>Forma Pago</th>
@@ -95,7 +95,7 @@
             <tbody>
     
             <tr>
-            <td>'.urlencode($descripcion).'</td>
+            <td>'.utf8_decode(urlencode($descripcion)).'</td>
             <td>'.$f_h.'</td>
             <td>$'.number_format($abono,2).'</td>
             <td>'.$forma_pago.'</td>

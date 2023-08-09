@@ -174,7 +174,7 @@ echo'
             break;
 
             case 3:
-            $estado= "Vacia limpia";
+            $estado= "Vacia limpieza";
             $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
@@ -237,7 +237,7 @@ echo'
                 echo '<i class="bx bxs-brush-alt clean"></i>';
                 break;
 
-                case "Vacia limpia":
+                case "Vacia limpieza":
                 echo'<div class="btn vacia-limpia" '.$estilo_tipo.'>';
                 echo '<i class="bx bxs-brush-alt clean"></i>';
                 break;

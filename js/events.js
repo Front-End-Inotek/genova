@@ -214,6 +214,7 @@ function cargar_area_trabajo(){
     }*/
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
+    console.log("??")
 
     setTimeout('cargar_area_trabajo()',3000);//5500
 }

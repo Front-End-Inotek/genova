@@ -452,22 +452,6 @@
       } 
 
       // Obtengo el total de habitaciones ocupadas
-      function obtener_todas(){ 
-        $sentencia = "SELECT * FROM hab WHERE  hab.estado_hab = 1";
-        //echo $sentencia;
-        $cantidad=0;
-        $comentario="Obtengo el total de habitaciones";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        // while ($fila = mysqli_fetch_array($consulta))
-        // {
-        //   $cantidad= $fila['cantidad'];
-        // }
-        return $consulta;
-
-        return $cantidad;
-      }
-
-      // Obtengo el total de habitaciones ocupadas
       function obtener_ocupadas(){ 
         $sentencia = "SELECT count(hab.id) AS cantidad,hab.estado,hab.estado_hab FROM hab WHERE hab.estado = 1 AND hab.estado_hab = 1";
         //echo $sentencia;
@@ -482,7 +466,7 @@
       }
       // Obtengo el total de habitaciones disponibles
       function obtener_disponibles(){ 
-        $sentencia = "SELECT count(hab.id) AS cantidad,hab.estado,hab.estado_hab FROM hab WHERE hab.estado = 0 AND hab.estado_hab = 1";
+        $sentencia = "SELECT count(hab.id) AS cantidad,hab.estado,hab.estado_hab FROM hab WHERE hab.estado = 0 AND hab.estado_hab = 1 AND hab.tipo > 0";
         //echo $sentencia;
         $cantidad=0;
         $comentario="Obtengo el total de habitaciones disponibles";
@@ -719,6 +703,65 @@
           $nombre= $fila['habitacion'];
         }
         return $nombre;
+      }
+
+      /** Pronosticos */
+
+       // Obtengo el total de habitaciones ocupadas
+       function obtener_todas(){ 
+        $sentencia = "SELECT * FROM hab WHERE  hab.estado_hab = 1";
+        //echo $sentencia;
+        $cantidad=0;
+        $comentario="Obtengo el total de habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        // while ($fila = mysqli_fetch_array($consulta))
+        // {
+        //   $cantidad= $fila['cantidad'];
+        // }
+        return $consulta;
+        // return $cantidad;
+      }
+
+      function fuera_servicio($actual){
+        $actual = date('Y-m-d',$actual);
+        $sentencia="SELECT count(mov.id) as cantidad FROM `hab` 
+        INNER JOIN movimiento as mov  on hab.mov = mov.id
+        WHERE hab.estado not in (0,1,6,7,8)
+        AND (from_unixtime(mov.detalle_inicio + 3600 , '%Y-%m-%d' ) = '$actual' OR
+        from_unixtime(mov.inicio_limpieza + 3600 , '%Y-%m-%d' ) = '$actual')
+        ;";
+        // print_r($sentencia);
+        $comentario="Obtengo el total de habitaciones";
+        $cantidad=0;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cantidad=0;
+        while ($fila = mysqli_fetch_array($consulta))
+       {
+         $cantidad= $fila['cantidad'];
+       }
+       return $cantidad;
+      }
+
+      function en_libros($actual){
+        $actual = date('Y-m-d',$actual);
+        $sentencia="SELECT count(reservacion.id) as cantidad FROM reservacion LEFT JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
+        INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion 
+        LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
+        LEFT JOIN hab ON movimiento.id_hab = hab.id 
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id 
+        WHERE (reservacion.estado = 1 || reservacion.estado = 2) 
+        AND (from_unixtime(reservacion.fecha_salida + 3600 , '%Y-%m-%d' ) >= '$actual') ORDER BY reservacion.id DESC;
+        ";
+        $comentario="Obtener todo en libros que sea mayor al dia actual";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cantidad=0;
+         while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+        return $cantidad;
       }
   }
 ?>

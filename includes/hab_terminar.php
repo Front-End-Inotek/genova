@@ -22,7 +22,8 @@
     case 4:// En habitacion mantenimiento-edo.4 
         $movimiento->editar_detalle_fin($hab->mov);
         $movimiento->editar_liberacion($hab->mov);
-        $hab->cambiohab($_POST['hab_id'],$hab->mov,0);
+        $nuevo_estado = 2;
+        $hab->cambiohab($_POST['hab_id'],$hab->mov,$nuevo_estado);
         $logs->guardar_log($_POST['usuario_id'],"Terminar estado mantenimiento de la habitacion: ". $hab->nombre);
         break;     
     case 5:// En habitacion supervision-edo.5 

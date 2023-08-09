@@ -5,7 +5,7 @@ $tipos = $tipo->obtener_tipos();
 
 echo ' <div class="modal-content">
 <div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLabel">Informacion</h5>
+  <h5 class="modal-title" id="exampleModalLabel">Información</h5>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     &times;
   </button>
