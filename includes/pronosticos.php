@@ -70,20 +70,20 @@ echo '
                     if($key==0){
                         $fuera_servicio = $hab->fuera_servicio($primer_dia);
                         echo '<td>'.$fuera_servicio.'</td>';
-                        $primer_dia+=86400;
                     }
                     if($key==1){
                         $cant_libros = $hab->en_libros($primer_dia);
                         echo '<td>'.$cant_libros.'</td>';
-                        $primer_dia+=86400;
-                        imprimir_tarifa();
+                    }
+                    if($key==2){
+
+                        echo '<td></td>';
+                        
                     }
                     if($key==3){
-                        echo $cant_libros;
-                        die();
+                        $llegadas_dia = $hab->llegadas_dia($primer_dia);
+                        echo '<td>'.$llegadas_dia.'</td>';
                     }
-                    
-                   
                     // if($key==2){
                     //     while($fila= mysqli_fetch_array($en_libros)){
                     //         if(date('Y-m-d',$tiempo_actual) == date('Y-m-d',$fila['detalle_inicio'] ) ||  date('Y-m-d',$tiempo_actual) == date('Y-m-d',$fila['inicio_limpieza'])){
@@ -95,7 +95,7 @@ echo '
                     // echo '<td>'.$suma.'</td>';
                     // }
 
-
+                    $primer_dia+=86400;
                 }
 
                 echo'

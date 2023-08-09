@@ -763,5 +763,29 @@
         }
         return $cantidad;
       }
+      function llegadas_dia($actual){
+        $actual = date('Y-m-d',$actual);
+        $sentencia="SELECT count(reservacion.id)
+        FROM reservacion
+        LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
+        LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
+        INNER JOIN movimiento on reservacion.id = movimiento.id_reservacion
+        LEFT JOIN hab on movimiento.id_hab = hab.id
+        WHERE (reservacion.estado = 1)
+       AND (reservacion.fecha_entrada = '$actual')
+        ORDER BY reservacion.id DESC;";
+        $comentario="";
+
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $cantidad=0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $cantidad= $fila['cantidad'];
+        }
+        return $cantidad;
+      }
   }
 ?>

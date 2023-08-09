@@ -299,11 +299,12 @@ echo'
                     }else{
                         echo $fila['comentario'];
                     }
-                    echo '<br>'. $estado .'  <br>';
+                    // echo '<br>'. $estado .'  <br>';
 
             echo '
                     <span class="nombre" id="N1">';
             $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
+            $fecha_entrada= $movimiento->ver_fecha_entrada($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             if($total_faltante > 0){
                 $saldo = '$'.number_format($total_faltante, 2);
@@ -329,6 +330,7 @@ echo'
                
             }
             }elseif($estado_hab == 1){
+            echo $fecha_entrada;
             echo $fecha_salida;
             echo "<br>";
             echo $saldo;
