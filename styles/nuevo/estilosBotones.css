@@ -737,11 +737,11 @@ label[for="no"] {
   min-height: 30px;
   height: 30px;
 }
-
-/***************************/
-/***rack operaciones***/
-/***************************/
-
+/****************************/
+/****************************/
+/******rack operaciones******/
+/****************************/
+/****************************/
 .containerRackOp {
   display: grid;
   grid-template-columns: repeat(12, minmax(169px, 1fr));

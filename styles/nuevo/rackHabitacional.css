@@ -672,13 +672,13 @@
 
 .car{
   position: absolute;
-  left: 12px;
+  left: 4px;
   bottom: 4px;
   z-index: 1000;
 }
 .clean{
   position: absolute;
-  right: 12px;
+  right: 4px;
   bottom: 4px;
   z-index: 1000;
   color: white;
@@ -698,7 +698,7 @@
 }
 .dirt{
   position: absolute;
-  right: 12px;
+  right: 4px;
   bottom: 4px;
   z-index: 1000;
   color: white;
@@ -718,7 +718,7 @@
 }
 .cleaning{
   position: absolute;
-  right: 12px;
+  right: 4px;
   bottom: 4px;
   z-index: 1000;
   color: white;
