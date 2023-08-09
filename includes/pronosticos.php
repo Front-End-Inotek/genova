@@ -3,7 +3,9 @@ include_once('clase_hab.php');
 
 $hab = new Hab(0);
 
-$total_habs = $hab->obtener_todas();
+$info_habs=$hab->obtener_todas();
+
+$total_habs =mysqli_num_rows($info_habs);
 
 
 $tiempo = time();

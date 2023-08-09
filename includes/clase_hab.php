@@ -453,15 +453,17 @@
 
       // Obtengo el total de habitaciones ocupadas
       function obtener_todas(){ 
-        $sentencia = "SELECT count(hab.id) AS cantidad FROM hab WHERE  hab.estado_hab = 1";
+        $sentencia = "SELECT * FROM hab WHERE  hab.estado_hab = 1";
         //echo $sentencia;
         $cantidad=0;
         $comentario="Obtengo el total de habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $cantidad= $fila['cantidad'];
-        }
+        // while ($fila = mysqli_fetch_array($consulta))
+        // {
+        //   $cantidad= $fila['cantidad'];
+        // }
+        return $consulta;
+
         return $cantidad;
       }
 
