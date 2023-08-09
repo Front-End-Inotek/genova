@@ -639,6 +639,15 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
 
       }
+
+      function cancelar_preasignada($id_mov){
+        $sentencia="UPDATE movimiento set id_hab = NULL
+        WHERE id = $id_mov";
+        $comentario="Cancelar preasignada";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+
+        return $consulta;
+      }
   
   }
 ?>

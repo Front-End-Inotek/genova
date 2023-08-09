@@ -214,7 +214,6 @@ function cargar_area_trabajo(){
     }*/
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
-    console.log("??")
 
     setTimeout('cargar_area_trabajo()',3000);//5500
 }
@@ -2591,7 +2590,6 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     // return
     var correo = $("#correo").val()
 
-    console.log(ruta)
     if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa_existe >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
         $.ajax({
             async:true,
@@ -3158,6 +3156,7 @@ function ver_reservaciones(){
 	$("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
     closeModal();
 	closeNav();
+
 }
 
 // Muestra la paginacion de las reservaciones
@@ -3495,7 +3494,6 @@ function ver_reporte_reservacion(id,ruta="regresar_reservacion()",titulo="RESERV
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-    console.log(ruta)
 	$("#area_trabajo_menu").load("includes/ver_reporte_reservacion.php?id="+id+"&usuario_id="+usuario_id+"&ruta="+ruta+"&titulo="+titulo+"&correo="+correo);
 	closeNav();
 }
@@ -5872,7 +5870,8 @@ function cambiar_hab_cuentas_seleccionadas(id_hab,nombre_hab,mov_hab,hab_id,esta
 	return false;
 }
 
-function confirmar_duplicar_reservacion(id_reserva,id_mov){
+function confirmar_duplicar_reservacion(id_reserva,id_mov, ruta){
+
     swal({
         title: "¿Estás de acuerdo con duplicar la reservación?",
         icon: "warning",
@@ -5896,14 +5895,67 @@ function confirmar_duplicar_reservacion(id_reserva,id_mov){
         })
         .then((willDelete) => {
         if (willDelete) {
-            duplicar_reservacion(id_reserva,id_mov)
+            duplicar_reservacion(id_reserva,id_mov,ruta)
         }
         });
 
    
 }
 
-function duplicar_reservacion(id_reserva,id_mov){
+function confirmar_cancelar_preasignada(id_reserva,id_mov,ruta){
+    swal({
+        title: "¿Estás de acuerdo con cancelar la preasignación?",
+        icon: "warning",
+        buttons: {
+            cancel: {
+            text: "Cancelar",
+            value: null,
+            visible: true,
+            className: "",
+            closeModal: true,
+            },
+            confirm: {
+            text: "OK",
+            value: true,
+            visible: true,
+            className: "",
+            closeModal: true
+            }
+        },
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            cancelar_preasignada(id_reserva,id_mov,ruta)
+        }
+        });
+
+   
+}
+
+function cancelar_preasignada(id_reserva,id_mov,ruta){
+    var usuario_id=localStorage.getItem("id");
+    let datos = {
+        "id_reserva":id_reserva,
+        "id_mov":id_mov,
+        "usuario_id":usuario_id,
+    }
+    $.ajax({
+        async:true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded", 
+        url:"includes/cancelar_preasignada.php",
+        data:datos,
+        beforeSend:loaderbar,
+        success:eval(ruta),
+        //success:problemas_sistema,
+        timeout:5000,
+        error:problemas_sistema
+    });
+}
+
+function duplicar_reservacion(id_reserva,id_mov,ruta){
     var usuario_id=localStorage.getItem("id");
     let datos = {
         "id_reserva":id_reserva,
@@ -5918,8 +5970,7 @@ function duplicar_reservacion(id_reserva,id_mov){
         url:"includes/duplicar_reservacion.php",
         data:datos,
         beforeSend:loaderbar,
-        success:ver_reservaciones,
-        //success:problemas_sistema,
+        success:eval(ruta),
         timeout:5000,
         error:problemas_sistema
     });
@@ -8405,8 +8456,41 @@ function hab_sucia_hospedaje(hab_id,estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_sucia_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
 }
 
+
+// Modal de mandar a sucia una habitacion ocupada
+function hab_sucia_hospedaje(hab_id,estado){
+	$("#mostrar_herramientas").load("includes/hab_modal_disponible_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
+}
+
+// Mandar al estado interno sucia una habitacion disponible
+function hab_disponible_sucia(hab_id,estado){
+    console.log("from")
+	var usuario_id=localStorage.getItem("id");
+	$('#caja_herramientas').modal('hide');
+	var datos = {
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario_id": usuario_id,
+		};
+	$.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/hab_disponible_sucia.php",
+            data:datos,
+            beforeSend:loaderbar,
+            success:principal,
+            //success:problemas_sistema,
+            timeout:5000,
+            error:problemas_sistema
+		});
+	return false;
+}
+
 // Mandar al estado interno sucia una habitacion ocupada
 function hab_ocupada_sucia(hab_id,estado){
+    console.log("from")
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {

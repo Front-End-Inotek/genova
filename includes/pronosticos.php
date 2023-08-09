@@ -65,6 +65,9 @@ echo '
                 for ($i = 1; $i <= $mes_largo; $i++) {
                     $suma=0;
                     $cant_libros=0;
+                    $llegadas_dia=0;
+                    $salidas_dia=0;
+                    $disponibles=0;
 
                     // echo date('Y-m-d',$primer_dia) ."\n";
                     if($key==0){
@@ -77,12 +80,46 @@ echo '
                     }
                     if($key==2){
 
-                        echo '<td></td>';
+                        echo '<td>5500000000</td>';
                         
                     }
                     if($key==3){
+                        // echo date('Y-m-d',$primer_dia);
+                        // die();
                         $llegadas_dia = $hab->llegadas_dia($primer_dia);
                         echo '<td>'.$llegadas_dia.'</td>';
+                        // die();
+                    }
+                    if($key==4){
+                        // echo date('Y-m-d',$primer_dia);
+                        // die();
+                        $salidas_dia = $hab->llegadas_salida($primer_dia);
+                        echo '<td>'.$salidas_dia.'</td>';
+                        // die();
+                    }
+                    if($key == 5){
+                        $cant_libros = $hab->en_libros($primer_dia);
+                        $fuera_servicio = $hab->fuera_servicio($primer_dia);
+                        $disponibles = $total_habs - $cant_libros - $fuera_servicio;
+
+                        echo '<td>'.$disponibles.'</td>';
+
+                    }
+                    if($key==6){
+                        $cant_libros = $hab->en_libros($primer_dia);
+                        $fuera_servicio = $hab->fuera_servicio($primer_dia);
+                        $disponibles = $total_habs - $cant_libros - $fuera_servicio;
+                        //aplicamos 3.
+                        $d  = (100 * $disponibles) / $total_habs;
+                        $d =round($d,2);
+                        echo '<td>'.$d.'</td>';
+                    }
+                    if($key==7){
+                        $cant_libros = $hab->en_libros($primer_dia);
+                        //aplicamos 3.
+                        $d  = (100 * $cant_libros) / $total_habs;
+                        $d =round($d,2);
+                        echo '<td>'.$d.'</td>';
                     }
                     // if($key==2){
                     //     while($fila= mysqli_fetch_array($en_libros)){

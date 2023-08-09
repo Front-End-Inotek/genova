@@ -167,6 +167,21 @@ switch ($_GET['estado']) {
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
 		echo '<div class="col-md-3 btn-herramientas">';
+		echo '<div class="sucia btn-square-lg" onclick="hab_sucia_hospedaje('.$_GET['hab_id'].',2)">';
+			echo '</br>';
+			echo '<div>';
+				//echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
+			echo '</div>';
+			echo '<div>';
+			echo 'Sucia';
+			echo '</div>';
+			echo '</br>';
+		echo '</div>';
+		echo '</div>';
+	}
+
+	if($user->nivel<=2 && $conf->hospedaje ==1){
+		echo '<div class="col-md-3 btn-herramientas">';
 		echo '<div class="ocupada usoCasa uso btn-square-lg" onclick="uso_casa_asignar('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '</br>';
 			echo '<div>';
