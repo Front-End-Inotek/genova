@@ -1,0 +1,225 @@
+.contenedor__colores{
+    margin: auto;
+    margin-top: 1vh;
+    width: 100%;
+    max-width: 1400px;
+    height: auto;
+    background-color: white;
+    box-shadow: var(--sombra);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    max-height: 90vh;
+    padding-bottom: 2rem;
+}
+.title__colors{
+    font-size: 2.0rem;
+    padding: 2rem 0;
+}
+.subtitulo__colors{
+    font-size: 1.5rem;
+    padding-top: 1rem;
+}
+.form_colores{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 95%;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+}
+.card_color{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 0.5rem;
+}
+.card_btn{
+    width: 170px;
+    height: 140px;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-left: 7px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: all ease-in-out 0.2s;
+}
+.card_btn:hover{
+    box-shadow: 0px 0px 0px 5px rgba(68, 255, 244, 0.2);
+}
+.placeholdercolor{
+    background-color: #80808096;
+    width: 80%;
+    height: 15px;
+}
+/* Disponible limpia */
+.DisponibleLimpia1{
+    background-color: #A2FCB7;
+}
+.DisponibleLimpia2{
+    background-color: #51ff00;
+}
+.DisponibleLimpia3{
+    background-color: #39fff8;
+}
+.DisponibleLimpia4{
+    background-color: #00bfff;
+}
+.DisponibleLimpia5{
+    background-color: #a449ff;
+}
+
+/* Limpieza vacia */
+.LimpiezaVacia1{
+    background-color: #CBDDFF;
+}
+.LimpiezaVacia2{
+    background-color: #98b7f1;
+}
+.LimpiezaVacia3{
+    background-color: #6282bd;
+}
+.LimpiezaVacia4{
+    background-color: #758198;
+}
+.LimpiezaVacia5{
+    background-color: #75f4f1;
+}
+/* Limpieza vacia */
+.LimpiezaOcupada1{
+    background-color: #E6EFFC;
+}
+.LimpiezaOcupada2{
+    background-color: #abc0dd;
+}
+.LimpiezaOcupada3{
+    background-color: #a1abba;
+}
+.LimpiezaOcupada4{
+    background-color: #32445c;
+}
+.LimpiezaOcupada5{
+    background-color: #595e65;
+}
+/* Ocupada */
+.Ocupada1{
+    background-color: #F8D7DA;
+}
+.Ocupada2{
+    background-color: #fd5967;
+}
+.Ocupada3{
+    background-color: #a2555b;
+}
+.Ocupada4{
+    background-color: #664f51;
+}
+.Ocupada5{
+    background-color: #ee1f30;
+}
+/* Ocupada sucia */
+.OcupadaSucia1{
+    background-color: #B02A37;
+}
+.OcupadaSucia2{
+    background-color: #6f1821;
+}
+.OcupadaSucia3{
+    background-color: #3d5a17;
+}
+.OcupadaSucia4{
+    background-color: #6b5713;
+}
+.OcupadaSucia5{
+    background-color: #ec9730;
+}
+/* Uso casa */
+.usoCasa1{
+    background-color: #BEF3F1;
+}
+.usoCasa2{
+    background-color: #8bc3c1;
+}
+.usoCasa3{
+    background-color: #88eae7;
+}
+.usoCasa4{
+    background-color: #446564;
+}
+.usoCasa5{
+    background-color: #445756;
+}
+/* Bloqueado */
+.Bloqueado1{
+    background-color: #0B0B0B;
+}
+.Bloqueado2{
+    background-color: #2b2b2b;
+}
+.Bloqueado3{
+    background-color: #252222;
+}
+.Bloqueado4{
+    background-color: #606060;
+}
+.Bloqueado5{
+    background-color: #272121;
+}
+/* Mantenimiento */
+.Mantenimiento1{
+    background-color: #FeF0E8;
+}
+.Mantenimiento2{
+    background-color: #dbd510;
+}
+.Mantenimiento3{
+    background-color: #eeb413;
+}
+.Mantenimiento4{
+    background-color: #e56d1e;
+}
+.Mantenimiento5{
+    background-color: #fff93e;
+}
+/* Reserva Pagada */
+.ReservaPag1{
+    background-color: #995AEC;
+}
+.ReservaPag2{
+    background-color: #7448ad;
+}
+.ReservaPag3{
+    background-color: #74559b;
+}
+.ReservaPag4{
+    background-color: #51a02c;
+}
+.ReservaPag5{
+    background-color: #bb9ae6;
+}
+/* Reserva Pendiente */
+.ReservaPend1{
+    background-color: #3B0286;
+}
+.ReservaPend2{
+    background-color: #250154;
+}
+.ReservaPend3{
+    background-color: #3f107c;
+}
+.ReservaPend4{
+    background-color: #331a53;
+}
+.ReservaPend5{
+    background-color: #412b5e;
+}

@@ -38,6 +38,7 @@
             <link rel=stylesheet href="styles/subestados.css" type="text/css">
             <link rel=stylesheet href="styles/graficas.css" type="text/css">
             <link rel=stylesheet href="styles/pronosticos.css" type="text/css">
+            <link rel=stylesheet href="styles/configColorsHab.css" type="text/css">
             <link rel="stylesheet" href="styles/credito.css">
 
             <script src="js/events.js"></script>
