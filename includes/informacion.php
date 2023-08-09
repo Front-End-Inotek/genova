@@ -59,10 +59,11 @@ class Informacion extends ConexionMYSql
     }
     if (true) {
     $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,
-    movimiento.estado_interno AS interno , datos_vehiculo.id as id_vehiculo, tipo_hab.color as color_tipo
+    movimiento.estado_interno AS interno , datos_vehiculo.id as id_vehiculo, tipo_hab.color as color_tipo, huesped.nombre as n_huesped, huesped.apellido as a_huesped
     FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
     LEFT JOIN movimiento ON hab.mov = movimiento.id
     LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
+    LEFT JOIN huesped on movimiento.id_huesped = huesped.id
     WHERE hab.estado_hab = 1 $filtro 
     /*AND hab.id=3*/
     ORDER BY id";
@@ -330,6 +331,9 @@ echo'
                
             }
             }elseif($estado_hab == 1){
+            $nombre = $fila['n_huesped'] . " " . $fila['a_huesped'];
+
+            echo $nombre;
             echo $fecha_entrada;
             echo $fecha_salida;
             echo "<br>";
