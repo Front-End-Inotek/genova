@@ -758,7 +758,7 @@ label[for="no"] {
 .containerRackOp .btn {
   font-size: 0.9rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  padding: 10px;
+  padding: 5px;
   letter-spacing: 1px;
   text-decoration: none;
   overflow: hidden;
