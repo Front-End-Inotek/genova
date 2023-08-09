@@ -334,7 +334,9 @@ echo'
             $nombre = $fila['n_huesped'] . " " . $fila['a_huesped'];
 
             echo $nombre;
+            echo "<br>";
             echo $fecha_entrada;
+            echo "<br>";
             echo $fecha_salida;
             echo "<br>";
             echo $saldo;
