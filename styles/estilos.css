@@ -63,6 +63,11 @@
 }
 .nombre{
   color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 17px;
 }
 
 /* Cuando pasas el mouse sobre los enlaces de navegación, cambia su color */
