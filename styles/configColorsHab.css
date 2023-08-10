@@ -65,161 +65,295 @@
 /* Disponible limpia */
 .DisponibleLimpia1{
     background-color: #A2FCB7;
+    border-left: 7px solid;
 }
+.DisponibleLimpia1 a{
+    color: black;
+}
+.DisponibleLimpia1:hover{
+    background-color: #82ffa1;
+}
+
 .DisponibleLimpia2{
-    background-color: #3db605;
+    background-color: #90a955;
+    border-left:  7px solid;
 }
+.DisponibleLimpia2 a {
+    color: black;
+}
+.DisponibleLimpia2:hover{
+    background-color: #b1d068;
+}
+
 .DisponibleLimpia3{
-    background-color: #39fff8;
+    background-color: #4f772d;
+    border-left:  7px solid;
 }
+.DisponibleLimpia3 a {
+    color: black;
+}
+.DisponibleLimpia3:hover{
+    background-color: #689c3c;
+}
+
 .DisponibleLimpia4{
-    background-color: #00bfff;
+    background-color: #31572c;
+    border-left:  7px solid;
 }
+.DisponibleLimpia4 a {
+    color: white;
+}
+.DisponibleLimpia4:hover{
+    background-color: #4b8243;
+}
+
 .DisponibleLimpia5{
-    background-color: #a449ff;
+    background-color: #132a13;
+    border-left:  7px solid;
+}
+.DisponibleLimpia5 a {
+    color: white;
+}
+.DisponibleLimpia5:hover{
+    background-color: #234d23;
 }
 
 /* Limpieza vacia */
 .LimpiezaVacia1{
-    background-color: #CBDDFF;
+    background-color: #b4fadc;
+    border-left:  7px solid;
 }
+.LimpiezaVacia1 a{
+    color: black;
+}
+.LimpiezaVacia1:hover {
+    background-color: #c7ffe7;
+}
+
 .LimpiezaVacia2{
-    background-color: #98b7f1;
+    background-color: #8fd9c4;
+    border-left:  7px solid;
 }
+
 .LimpiezaVacia3{
-    background-color: #6282bd;
+    background-color: #76d5c3;
+    border-left:  7px solid;
 }
+
 .LimpiezaVacia4{
-    background-color: #758198;
+    background-color: #54b4ad;
+    border-left:  7px solid;
 }
+
 .LimpiezaVacia5{
-    background-color: #75f4f1;
+    background-color: #1fa6b8;
+    border-left:  7px solid;
 }
+
 /* Limpieza vacia */
 .LimpiezaOcupada1{
     background-color: #E6EFFC;
+    border-left:  7px solid;
 }
+
 .LimpiezaOcupada2{
-    background-color: #abc0dd;
+    background-color: #75c9c8;
+    border-left:  7px solid;
 }
+
 .LimpiezaOcupada3{
-    background-color: #a1abba;
+    background-color: #80a1d4;
+    border-left:  7px solid;
 }
+
 .LimpiezaOcupada4{
-    background-color: #32445c;
+    background-color: #c0b9dd;
+    border-left:  7px solid;
 }
+
 .LimpiezaOcupada5{
-    background-color: #595e65;
+    background-color: #ded9e2;
+    border-left:  7px solid;
 }
+
 /* Ocupada */
 .Ocupada1{
     background-color: #F8D7DA;
+    border-left:  7px solid;
 }
+
 .Ocupada2{
-    background-color: #fd5967;
+    background-color: #c52233;
+    border-left:  7px solid;
 }
+
 .Ocupada3{
-    background-color: #a2555b;
+    background-color: #a51c30;
+    border-left:  7px solid;
 }
+
 .Ocupada4{
-    background-color: #664f51;
+    background-color: #a7333f;
+    border-left:  7px solid;
 }
+
 .Ocupada5{
     background-color: #ee1f30;
+    border-left:  7px solid;
 }
+
 /* Ocupada sucia */
 .OcupadaSucia1{
     background-color: #B02A37;
+    border-left:  7px solid;
 }
+
 .OcupadaSucia2{
-    background-color: #6f1821;
+    background-color: #b10f2e;
+    border-left:  7px solid;
 }
+
 .OcupadaSucia3{
-    background-color: #3d5a17;
+    background-color: #570000;
+    border-left:  7px solid;
 }
+
 .OcupadaSucia4{
-    background-color: #6b5713;
+    background-color: #280000;
+    border-left:  7px solid;
 }
+
 .OcupadaSucia5{
-    background-color: #ec9730;
+    background-color: #de7c5a;
+    border-left:  7px solid;
 }
+
 /* Uso casa */
 .usoCasa1{
     background-color: #BEF3F1;
+    border-left:  7px solid;
 }
+
 .usoCasa2{
-    background-color: #8bc3c1;
+    background-color: #90e0ef;
+    border-left:  7px solid;
 }
+
 .usoCasa3{
-    background-color: #88eae7;
+    background-color: #00b4d8;
+    border-left:  7px solid;
 }
+
 .usoCasa4{
-    background-color: #446564;
+    background-color: #0077b6;
+    border-left:  7px solid;
 }
+
 .usoCasa5{
-    background-color: #445756;
+    background-color: #03045e;
+    border-left:  7px solid;
 }
+
 /* Bloqueado */
 .Bloqueado1{
     background-color: #0B0B0B;
+    border-left:  7px solid;
 }
+
 .Bloqueado2{
-    background-color: #2b2b2b;
+    background-color: #212529;
+    border-left:  7px solid;
 }
+
 .Bloqueado3{
-    background-color: #252222;
+    background-color: #343a40;
+    border-left:  7px solid;
 }
+
 .Bloqueado4{
-    background-color: #606060;
+    background-color: #495057;
+    border-left:  7px solid;
 }
+
 .Bloqueado5{
-    background-color: #272121;
+    background-color: #6c757d;
+    border-left:  7px solid;
 }
+
 /* Mantenimiento */
 .Mantenimiento1{
     background-color: #FeF0E8;
+    border-left:  7px solid;
 }
+
 .Mantenimiento2{
-    background-color: #dbd510;
+    background-color: #f4e409;
+    border-left:  7px solid;
 }
+
 .Mantenimiento3{
-    background-color: #eeb413;
+    background-color: #eeba0b;
+    border-left:  7px solid;
 }
+
 .Mantenimiento4{
-    background-color: #e56d1e;
+    background-color: #c36f09;
+    border-left:  7px solid;
 }
+
 .Mantenimiento5{
-    background-color: #fff93e;
+    background-color: #a63c06;
+    border-left:  7px solid;
 }
+
 /* Reserva Pagada */
 .ReservaPag1{
     background-color: #995AEC;
+    border-left:  7px solid;
 }
+
 .ReservaPag2{
-    background-color: #7448ad;
+    background-color: #420039;
+    border-left:  7px solid;
 }
+
 .ReservaPag3{
-    background-color: #74559b;
+    background-color: #932f6d;
+    border-left:  7px solid;
 }
+
 .ReservaPag4{
-    background-color: #51a02c;
+    background-color: #e07be0;
+    border-left:  7px solid;
 }
+
 .ReservaPag5{
-    background-color: #bb9ae6;
+    background-color: #dcccff;
+    border-left:  7px solid;
 }
+
 /* Reserva Pendiente */
 .ReservaPend1{
     background-color: #3B0286;
+    border-left:  7px solid;
 }
+
 .ReservaPend2{
-    background-color: #250154;
+    background-color: #3c0663;
+    border-left:  7px solid;
 }
+
 .ReservaPend3{
-    background-color: #3f107c;
+    background-color: #4a0a77;
+    border-left:  7px solid;
 }
+
 .ReservaPend4{
-    background-color: #331a53;
+    background-color: #5a108f;
+    border-left:  7px solid;
 }
+
 .ReservaPend5{
-    background-color: #412b5e;
+    background-color: #8b2fc9;
+    border-left:  7px solid;
 }
