@@ -32,6 +32,9 @@
         $abono =$_POST['abono'];
         $forma_pago = $_POST['forma_pago'];
 
+        $forma_pago = urldecode($forma_pago);
+        $forma_pago = htmlspecialchars($forma_pago, ENT_QUOTES, 'UTF-8');
+
         $fecha = date("d-m-Y");
         $f_h = date('d-m-Y');
         $dia = substr($fecha, 0, 2);
