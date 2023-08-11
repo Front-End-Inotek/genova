@@ -672,7 +672,7 @@
 
 .car{
   position: absolute;
-  left: 4px;
+  left: 8px;
   bottom: 4px;
   z-index: 1000;
 }
@@ -688,13 +688,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 3px;
 }
 .clean2{
   color: white;
   background-color: #28A745;
   border-radius: 50%;
-  padding: 4px;
+  padding: 3px;
 }
 .dirt{
   position: absolute;
@@ -708,13 +708,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 3px;
 }
 .dirt2{
   color: white;
   background-color: #DC3545;
   border-radius: 50%;
-  padding: 4px;
+  padding: 3px;
 }
 .cleaning{
   position: absolute;
@@ -728,15 +728,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 3px;
 }
 .cleaning2{
   color: white;
   background-color: #0f6fd0;
   border-radius: 50%;
-  padding: 4px;
+  padding: 3px;
 }
-
 .btn-info-custom{
   position: absolute;
   top: 5px;
