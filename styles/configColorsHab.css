@@ -55,7 +55,7 @@
     transition: all ease-in-out 0.2s;
 }
 .card_btn:hover{
-    box-shadow: 0px 0px 0px 5px rgba(68, 255, 244, 0.2);
+    box-shadow: 0px 0px 0px 5px rgba(68, 255, 243, 0.102);
 }
 .placeholdercolor{
     background-color: #80808096;
@@ -134,20 +134,44 @@
     background-color: #8fd9c4;
     border-left:  7px solid;
 }
+.LimpiezaVacia2 a{
+    color: black;
+}
+.LimpiezaVacia2:hover{
+    background-color: #a7eeda;
+}
 
 .LimpiezaVacia3{
     background-color: #76d5c3;
     border-left:  7px solid;
+}
+.LimpiezaVacia3 a {
+    color: black;
+}
+.LimpiezaVacia3:hover{
+    background-color: #8ef6e3;
 }
 
 .LimpiezaVacia4{
     background-color: #54b4ad;
     border-left:  7px solid;
 }
+.LimpiezaVacia4 a{
+    color: black;
+}
+.LimpiezaVacia4:hover{
+    background-color: #6ae0d8;
+}
 
 .LimpiezaVacia5{
     background-color: #1fa6b8;
     border-left:  7px solid;
+}
+.LimpiezaVacia5 a{
+    color: black;
+}
+.LimpiezaVacia5:hover{
+    background-color: #27c5da;
 }
 
 /* Limpieza vacia */
@@ -155,25 +179,56 @@
     background-color: #E6EFFC;
     border-left:  7px solid;
 }
+.LimpiezaOcupada1 a{
+    color: black;
+}
+.LimpiezaOcupada1:hover{
+    background-color: #f4f8ff;
+}
+
 
 .LimpiezaOcupada2{
     background-color: #75c9c8;
     border-left:  7px solid;
+}
+.LimpiezaOcupada2 a {
+    color: black;
+}
+.LimpiezaOcupada2:hover{
+    background-color: #8deae8;
 }
 
 .LimpiezaOcupada3{
     background-color: #80a1d4;
     border-left:  7px solid;
 }
+.LimpiezaOcupada3 a{
+    color: black;
+}
+.LimpiezaOcupada3:hover{
+    background-color: #93b7ec;
+}
 
 .LimpiezaOcupada4{
     background-color: #c0b9dd;
     border-left:  7px solid;
 }
+.LimpiezaOcupada4 a {
+    color: black;
+}
+.LimpiezaOcupada4:hover{
+    background-color: #d6cef7;
+}
 
 .LimpiezaOcupada5{
     background-color: #ded9e2;
     border-left:  7px solid;
+}
+.LimpiezaOcupada5 a {
+    color: black;
+}
+.LimpiezaOcupada5:hover{
+    background-color: #e8dff0;
 }
 
 /* Ocupada */
@@ -181,47 +236,95 @@
     background-color: #F8D7DA;
     border-left:  7px solid;
 }
+.Ocupada1 a {
+    color: black;
+}
+.Ocupada1:hover{
+    background-color: #ffe7e9;
+}
 
 .Ocupada2{
     background-color: #c52233;
     border-left:  7px solid;
+}
+.Ocupada2 a {
+    color: white;
+}
+.Ocupada2:hover {
+    background-color:#ff6b7d ;
 }
 
 .Ocupada3{
     background-color: #a51c30;
     border-left:  7px solid;
 }
+.Ocupada3 a {
+    color: white;
+}
+.Ocupada3:hover {
+    background-color:#ea87aa  ;
+}
 
 .Ocupada4{
     background-color: #a7333f;
     border-left:  7px solid;
+}
+.Ocupada4 a {
+    color: white;
+}
+.Ocupada4:hover {
+    background-color:#ec9db0  ;
 }
 
 .Ocupada5{
     background-color: #ee1f30;
     border-left:  7px solid;
 }
-
+.Ocupada5 a {
+    color: white;
+}
+.Ocupada5:hover {
+    background-color:#ef6d75  ;
+}
 /* Ocupada sucia */
 .OcupadaSucia1{
     background-color: #B02A37;
     border-left:  7px solid;
+}
+.OcupadaSucia1 a {
+    color: white;
+}
+.OcupadaSucia1:hover {
+    background-color:#cc6470  ;
 }
 
 .OcupadaSucia2{
     background-color: #b10f2e;
     border-left:  7px solid;
 }
+.OcupadaSucia2 a {
+    color: white;
+}
+.OcupadaSucia2:hover {
+    background-color:#cd91ab  ;
+}
 
 .OcupadaSucia3{
     background-color: #570000;
     border-left:  7px solid;
+}
+.OcupadaSucia3 a {
+    color: white;
+}
+.OcupadaSucia3:hover {
+    background-color:#820202;
 }
 
 .OcupadaSucia4{
     background-color: #280000;
     border-left:  7px solid;
 }
+.OcupadaSucia4 a 
 
 .OcupadaSucia5{
     background-color: #de7c5a;
