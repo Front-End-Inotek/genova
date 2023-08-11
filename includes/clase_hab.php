@@ -724,27 +724,27 @@
 
       function fuera_servicio($actual){
         $actual = date('Y-m-d',$actual);
-        $sentencia="SELECT count(mov.id) as cantidad FROM `hab` 
+        $sentencia="SELECT  mov.*  FROM `hab` 
         INNER JOIN movimiento as mov  on hab.mov = mov.id
         WHERE hab.estado not in (0,1,6,7,8)
-        AND (from_unixtime(mov.detalle_inicio + 3600 , '%Y-%m-%d' ) = '$actual' OR
-        from_unixtime(mov.inicio_limpieza + 3600 , '%Y-%m-%d' ) = '$actual')
+        AND (from_unixtime(mov.detalle_inicio + 3600 , '%Y-%m-%d' ) >= '$actual' OR
+        from_unixtime(mov.inicio_limpieza + 3600 , '%Y-%m-%d' ) >= '$actual')
         ;";
-        // print_r($sentencia);
         $comentario="Obtengo el total de habitaciones";
         $cantidad=0;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        $cantidad=0;
-        while ($fila = mysqli_fetch_array($consulta))
-       {
-         $cantidad= $fila['cantidad'];
-       }
-       return $cantidad;
+        return $consulta;
+      //   $cantidad=0;
+      //   while ($fila = mysqli_fetch_array($consulta))
+      //  {
+      //    $cantidad= $fila['cantidad'];
+      //  }
+      //  return $cantidad;
       }
 
       function en_libros($actual){
         $actual = date('Y-m-d',$actual);
-        $sentencia="SELECT count(reservacion.id) as cantidad FROM reservacion LEFT JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
+        $sentencia="SELECT reservacion.*  FROM reservacion LEFT JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
         INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion 
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
         LEFT JOIN hab ON movimiento.id_hab = hab.id 
@@ -756,16 +756,17 @@
         ";
         $comentario="Obtener todo en libros que sea mayor al dia actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        $cantidad=0;
-         while ($fila = mysqli_fetch_array($consulta))
-        {
-          $cantidad= $fila['cantidad'];
-        }
-        return $cantidad;
+        return $consulta;
+        // $cantidad=0;
+        //  while ($fila = mysqli_fetch_array($consulta))
+        // {
+        //   $cantidad= $fila['cantidad'];
+        // }
+        // return $cantidad;
       }
       function llegadas_dia($actual){
         $actual = date('Y-m-d',$actual);
-        $sentencia="SELECT count(reservacion.id) as cantidad
+        $sentencia="SELECT reservacion.*
         FROM reservacion
         LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
@@ -775,22 +776,23 @@
         INNER JOIN movimiento on reservacion.id = movimiento.id_reservacion
         LEFT JOIN hab on movimiento.id_hab = hab.id
         WHERE (reservacion.estado = 1)
-        AND from_unixtime(reservacion.fecha_entrada + 3600 , '%Y-%m-%d' ) = '$actual'
+        AND from_unixtime(reservacion.fecha_entrada + 3600 , '%Y-%m-%d' ) >= '$actual'
         ORDER BY reservacion.id DESC;";
         $comentario="";
 
-        // echo $sentencia;
+        //echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        $cantidad=0;
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $cantidad= $fila['cantidad'];
-        }
-        return $cantidad;
+        return $consulta;
+        // $cantidad=0;
+        // while ($fila = mysqli_fetch_array($consulta))
+        // {
+        //   $cantidad= $fila['cantidad'];
+        // }
+        // return $cantidad;
       }
-      function llegadas_salida($actual){
+      function salidas_dia($actual){
         $actual = date('Y-m-d',$actual);
-        $sentencia="SELECT count(reservacion.id) as cantidad
+        $sentencia="SELECT reservacion.*
         FROM reservacion
         LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
         LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
@@ -801,18 +803,19 @@
         LEFT JOIN hab on movimiento.id_hab = hab.id
         WHERE (reservacion.estado = 1 || reservacion.estado=2)
         AND movimiento.finalizado  = 0
-        AND from_unixtime(reservacion.fecha_salida + 3600 , '%Y-%m-%d' ) = '$actual'
+        AND from_unixtime(reservacion.fecha_salida + 3600 , '%Y-%m-%d' ) >= '$actual'
         ORDER BY reservacion.id DESC;";
         $comentario="";
 
         // echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        $cantidad=0;
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $cantidad= $fila['cantidad'];
-        }
-        return $cantidad;
+        return $consulta;
+        // $cantidad=0;
+        // while ($fila = mysqli_fetch_array($consulta))
+        // {
+        //   $cantidad= $fila['cantidad'];
+        // }
+        // return $cantidad;
       }
   }
 ?>
