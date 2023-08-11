@@ -576,7 +576,7 @@
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        echo '<div class="row">';
+        echo '<div class="row d-flex flex-wrap">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta))
           {

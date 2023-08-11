@@ -48,7 +48,7 @@
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
               ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa'],$id_maestra);
             echo '</div>
-          </div><br>
+          </div>
 
           <div class="card">
             <div class="card-header alinear_centro">

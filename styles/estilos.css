@@ -1015,6 +1015,10 @@ hr{
   padding-left: 16px;
   padding-right: 45px;
 }
+.margen_inf{
+  min-width: 110px !important;
+  min-height: 110px !important;
+}
 
 .margen_sup {
   margin-top: 10px;
@@ -1171,8 +1175,18 @@ hr{
   color: #000;
 }
 option{
-  font-size: 1.5rem;
+  font-size: 1.8em;
 }
+select option {
+  text-transform: capitalize !important ;
+  background-color: #edf2f981;
+  padding: 8px;
+  border: none;
+}
+select option:hover{
+  background-color: #163172;
+}
+
 .box .btn {
   width: 100%;
   color: #fff;
