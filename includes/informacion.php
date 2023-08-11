@@ -78,7 +78,7 @@ class Informacion extends ConexionMYSql
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
     $consulta= $this->realizaConsulta($sentencia,$comentario);*/
 
-echo'
+/* echo'
 <!---
 <div class="botones-mostrados" id="botones">
 <h3 class="titulo-filtro">Filtrar por:</h3>
@@ -97,7 +97,7 @@ echo'
 </div> -->
 <div class="arealight"></div>
 
-';
+'; */
 
     echo ' <div class="containerRackOp" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta))
@@ -157,7 +157,6 @@ echo'
             $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
             $tipo_habitacion= $fila['tipo_nombre'];
             break;
-
             case 1:
             $estado= "Ocupado";
             $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
@@ -168,12 +167,10 @@ echo'
                 $estado = "Ocupada limpieza";
             }
             break;
-
             case 2:
             $estado= "Vacia sucia";
             $cronometro= $movimiento->saber_inicio_sucia($fila['moviemiento']);
             break;
-
             case 3:
             $estado= "Vacia limpieza";
             $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
@@ -222,7 +219,6 @@ echo'
             //echo "Estado indefinido";
             break;
         }
-        
 
         if($fila['tipo']>0){
 

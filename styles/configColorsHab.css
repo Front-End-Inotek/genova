@@ -324,11 +324,22 @@
     background-color: #280000;
     border-left:  7px solid;
 }
-.OcupadaSucia4 a 
+.OcupadaSucia4 a {
+    color: white;
+}
+.OcupadaSucia4:hover {
+    background-color:#4f0000;
+}
 
 .OcupadaSucia5{
     background-color: #de7c5a;
     border-left:  7px solid;
+}
+.OcupadaSucia5 a {
+    color: black;
+}
+.OcupadaSucia5:hover {
+    background-color: #f68b67;
 }
 
 /* Uso casa */
@@ -336,25 +347,55 @@
     background-color: #BEF3F1;
     border-left:  7px solid;
 }
+.usoCasa1 a {
+    color:black ;
+}
+.usoCasa1:hover {
+    background-color: #d4fffe;
+}
 
 .usoCasa2{
     background-color: #90e0ef;
     border-left:  7px solid;
+}
+.usoCasa2 a {
+    color: black;
+}
+.usoCasa2:hover{
+    background-color:rgb(208, 255, 255);
 }
 
 .usoCasa3{
     background-color: #00b4d8;
     border-left:  7px solid;
 }
+.usoCasa3 a {
+    color: black;
+}
+.usoCasa3:hover {
+    background-color:#16c7ea;
+}
 
 .usoCasa4{
     background-color: #0077b6;
     border-left:  7px solid;
 }
+.usoCasa4 a {
+    color: white;
+}
+.usoCasa4:hover {
+    background-color:#1696db;
+}
 
 .usoCasa5{
     background-color: #03045e;
     border-left:  7px solid;
+}
+.usoCasa5 a {
+    color:white ;
+}
+.usoCasa5:hover {
+    background-color:#181d7f;
 }
 
 /* Bloqueado */
@@ -362,25 +403,55 @@
     background-color: #0B0B0B;
     border-left:  7px solid;
 }
+.Bloqueado1 a {
+    color:white  ;
+}
+.Bloqueado1:hover {
+    background-color:#323232;
+}
 
 .Bloqueado2{
     background-color: #212529;
     border-left:  7px solid;
+}
+.Bloqueado2 a {
+    color:white;
+}
+.Bloqueado2:hover {
+    background-color:#515960;
 }
 
 .Bloqueado3{
     background-color: #343a40;
     border-left:  7px solid;
 }
+.Bloqueado3 a {
+    color:white
+}
+.Bloqueado3:hover {
+    background-color:#8e98a1;
+}
 
 .Bloqueado4{
     background-color: #495057;
     border-left:  7px solid;
 }
+.Bloqueado4 a {
+    color:white
+}
+.Bloqueado4:hover {
+    background-color:#6e7780;
+}
 
 .Bloqueado5{
     background-color: #6c757d;
     border-left:  7px solid;
+}
+.Bloqueado5 a {
+    color:white
+}
+.Bloqueado5:hover {
+    background-color:#9ca8b1;
 }
 
 /* Mantenimiento */
@@ -388,25 +459,55 @@
     background-color: #FeF0E8;
     border-left:  7px solid;
 }
+.Mantenimiento1 a {
+    color:black;
+}
+.Mantenimiento1:hover {
+    background-color:#fff8f4;
+}
 
 .Mantenimiento2{
     background-color: #f4e409;
     border-left:  7px solid;
+}
+.Mantenimiento2 a {
+    color:black;
+}
+.Mantenimiento2:hover {
+    background-color:#fff133;
 }
 
 .Mantenimiento3{
     background-color: #eeba0b;
     border-left:  7px solid;
 }
+.Mantenimiento3 a {
+    color:black;
+}
+.Mantenimiento3:hover {
+    background-color:rgb(255, 229, 126);
+}
 
 .Mantenimiento4{
     background-color: #c36f09;
     border-left:  7px solid;
 }
+.Mantenimiento4 a {
+    color: black;
+}
+.Mantenimiento4:hover {
+    background-color: #ec8d18;
+}
 
 .Mantenimiento5{
     background-color: #a63c06;
     border-left:  7px solid;
+}
+.Mantenimiento5 a {
+    color:#fff ;
+}
+.Mantenimiento5:hover {
+    background-color: #da5e1f;
 }
 
 /* Reserva Pagada */
@@ -414,25 +515,55 @@
     background-color: #995AEC;
     border-left:  7px solid;
 }
+.ReservaPag1 a {
+    color:#fff  ;
+}
+.ReservaPag1:hover {
+    background-color: #c599ff;
+}
 
 .ReservaPag2{
     background-color: #420039;
     border-left:  7px solid;
+}
+.ReservaPag2 a {
+    color:#fff;
+}
+.ReservaPag2:hover {
+    background-color: #7a056a;
 }
 
 .ReservaPag3{
     background-color: #932f6d;
     border-left:  7px solid;
 }
+.ReservaPag3 a {
+    color:#fff;
+}
+.ReservaPag3:hover {
+    background-color: #d25ebd;
+}
 
 .ReservaPag4{
     background-color: #e07be0;
     border-left:  7px solid;
 }
+.ReservaPag4 a {
+    color: black;
+}
+.ReservaPag4:hover {
+    background-color: #f19bf1;
+}
 
 .ReservaPag5{
     background-color: #dcccff;
     border-left:  7px solid;
+}
+.ReservaPag5 a {
+    color:black ;
+}
+.ReservaPag5:hover {
+    background-color: #e4d8ff;
 }
 
 /* Reserva Pendiente */
@@ -440,23 +571,53 @@
     background-color: #3B0286;
     border-left:  7px solid;
 }
+.ReservaPend1 a {
+    color:#fff  ;
+}
+.ReservaPend1:hover {
+    background-color: #5b17b4;
+}
 
 .ReservaPend2{
     background-color: #3c0663;
     border-left:  7px solid;
+}
+.ReservaPend2 a {
+    color:#fff  ;
+}
+.ReservaPend2:hover {
+    background-color: #7c31cd;
 }
 
 .ReservaPend3{
     background-color: #4a0a77;
     border-left:  7px solid;
 }
+.ReservaPend3 a {
+    color:#fff  ;
+}
+.ReservaPend3:hover {
+    background-color: #65179d;
+}
 
 .ReservaPend4{
     background-color: #5a108f;
     border-left:  7px solid;
 }
+.ReservaPend4 a {
+    color:#fff  ;
+}
+.ReservaPend4:hover {
+    background-color: #8624cd;
+}
 
 .ReservaPend5{
     background-color: #8b2fc9;
     border-left:  7px solid;
+}
+.ReservaPend5 a {
+    color:#fff  ;
+}
+.ReservaPend5:hover {
+    background-color: #a747e7;
 }

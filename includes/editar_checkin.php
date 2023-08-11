@@ -321,18 +321,18 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     $i=1;
                     echo '<div id="acordeon" class="accordionItemBodyCustom acordeon">';
                     while ($fila = mysqli_fetch_array($consulta)){
-                        echo ' 
+                        echo '
                         <div class="accordionItemBodyContentCustom">
-                        <label style="width: 100%;text-align: left;">Acompañante '.$i.'</label>
-                        <div >
-                            <label for="acompañante '.$i.' nombre" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
-                            <input value="'.$fila['nombre'].'"  type="text" class="form-control nombreExtra" id="acompañante '.$i.' nombre" minlength="5" maxlength="15" required>
+                            <label style="width: 100%;text-align: left;">Acompañante '.$i.'</label>
+                            <div >
+                                <label for="acompañante '.$i.' nombre" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
+                                <input value="'.$fila['nombre'].'"  type="text" class="form-control nombreExtra" id="acompañante '.$i.' nombre" minlength="5" maxlength="15" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="acompañante '.$i.' apellido" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
+                                <input  value="'.$fila['apellido'].'" type="text" class="form-control apellidoExtra" id="acompañante '.$i.' apellido" minlength="5" maxlength="15" required>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="acompañante '.$i.' apellido" class="form-label asterisco" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
-                            <input  value="'.$fila['apellido'].'" type="text" class="form-control apellidoExtra" id="acompañante '.$i.' apellido" minlength="5" maxlength="15" required>
-                        </div>
-                    </div>
                         ';
                         $i++;
                     }
