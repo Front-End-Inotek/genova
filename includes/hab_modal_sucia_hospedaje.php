@@ -12,7 +12,6 @@
     <div class="modal-body">
         ¿Poner como sucia a la habitación '.$hab->nombre.'?
     </div><br>
-    
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       <button type="button" class="btn btn-success" onclick="hab_ocupada_sucia('.$_GET['hab_id'].','.$_GET['estado'].')"> Aceptar</button>
