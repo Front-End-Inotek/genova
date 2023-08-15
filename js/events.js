@@ -8374,11 +8374,12 @@ function hab_sucia_hospedaje(hab_id,estado){
 }
 
 
-/* // Modal de mandar a sucia una habitacion ocupada
-function hab_sucia_hospedaje(hab_id,estado){
+// Modal de mandar a sucia una habitacion ocupada
+function hab_sucia_vacia(hab_id,estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_disponible_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
-} */
+}
 
+// !**************************************************************
 // Mandar al estado interno sucia una habitacion disponible
 function hab_disponible_sucia(hab_id,estado){
     console.log("from")
@@ -8404,7 +8405,7 @@ function hab_disponible_sucia(hab_id,estado){
 		});
 	return false;
 }
-
+//! ***************************************************************************
 // Mandar al estado interno sucia una habitacion ocupada
 function hab_ocupada_sucia(hab_id,estado){
     console.log("from")

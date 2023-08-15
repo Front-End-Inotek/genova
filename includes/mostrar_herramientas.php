@@ -167,7 +167,7 @@ switch ($_GET['estado']) {
 
 	if($user->nivel<=2 && $conf->hospedaje ==1){
 		echo '<div class="col-md-3 btn-herramientas">';
-		echo '<div class="sucia btn-square-lg" onclick="hab_sucia_hospedaje('.$_GET['hab_id'].',2)">';
+		echo '<div class="sucia btn-square-lg" onclick="hab_sucia_vacia('.$_GET['hab_id'].',2)">';
 			echo '</br>';
 			echo '<div>';
 				//echo '<img src="images/cobrando.png"  class="center-block img-responsive">';
