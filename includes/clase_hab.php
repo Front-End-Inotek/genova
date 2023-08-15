@@ -238,14 +238,14 @@
           if($id==$fila['id']){
             echo '  <option value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
           }else{
-            echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';  
+            echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
           }
         }
       }
 
       //Mostrar las reservas disponibles para asignar a la habitación seleccionada.
       function select_hab_reserva($hab_id,$estado,$nuevo_estado,$hab_tipo){
-        // Seleccionar recamarera    
+        // Seleccionar recamarera
 
       if($nuevo_estado == 1){
         $nivel= 3;
@@ -285,11 +285,10 @@
         echo '</div>';
       echo '</div>';
       }
-    
     }
 
       function select_hab_cambio($hab_id,$estado,$nuevo_estado,$hab_tipo){
-          // Seleccionar recamarera    
+          // Seleccionar recamarera
 
         if($nuevo_estado == 1){
           $nivel= 3;
@@ -353,9 +352,9 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         // }
 
-      } 
+      }
       // Mostramos el nombre de la habitacion
-      function mostrar_nombre_hab($id){ 
+      function mostrar_nombre_hab($id){
         $sentencia = "SELECT nombre FROM hab WHERE id = $id LIMIT 1";
         //echo $sentencia;
         $nombre = 0;
@@ -366,8 +365,8 @@
           $nombre= $fila['nombre'];
         }
         return $nombre;
-      } 
-      // Nos permite seleccionar una habitacion ocupada 
+      }
+      // Nos permite seleccionar una habitacion ocupada
       function cambiar_hab_ocupada($monto,$id,$hab_id,$estado){
         $sentencia = "SELECT * FROM hab WHERE id != $hab_id AND estado = 1";
         $comentario="Nos permite seleccionar una habitacion ocupada";
@@ -388,7 +387,7 @@
             echo '</div>';
           echo '</div>';
         }
-      }   
+      }
       // Nos permite seleccionar una habitacion ocupada para cambiar las cuentas
       function cambiar_cuentas_hab_ocupada($hab_id,$estado,$mov){
         $sentencia = "SELECT * FROM hab WHERE id != $hab_id AND estado = 1";
@@ -412,7 +411,7 @@
         }
       }
       // Mostramos el movimiento de la habitacion
-      function mostrar_mov_hab($id){ 
+      function mostrar_mov_hab($id){
         $sentencia = "SELECT mov FROM hab WHERE id = $id LIMIT 1";
         //echo $sentencia;
         $mov = 0;
@@ -423,9 +422,9 @@
           $mov= $fila['mov'];
         }
         return $mov;
-      } 
+      }
       // Mostramos el id de la habitacion
-      function mostrar_id_hab($nombre){ 
+      function mostrar_id_hab($nombre){
         $sentencia = "SELECT id FROM hab WHERE id = $nombre LIMIT 1";
         //echo $sentencia;
         $id = 0;
@@ -436,9 +435,9 @@
           $id= $fila['id'];
         }
         return $id;
-      } 
+      }
       // Mostramos el movimiento de la habitacion por medio del nombre
-      function mostrar_movimiento_hab($nombre){ 
+      function mostrar_movimiento_hab($nombre){
         $sentencia = "SELECT mov FROM hab WHERE nombre LIKE '%$nombre%' LIMIT 1";
         //echo $sentencia;
         $mov = 0;
@@ -449,10 +448,10 @@
           $mov= $fila['mov'];
         }
         return $mov;
-      } 
+      }
 
       // Obtengo el total de habitaciones ocupadas
-      function obtener_ocupadas(){ 
+      function obtener_ocupadas(){
         $sentencia = "SELECT count(hab.id) AS cantidad,hab.estado,hab.estado_hab FROM hab WHERE hab.estado = 1 AND hab.estado_hab = 1";
         //echo $sentencia;
         $cantidad=0;
@@ -465,7 +464,7 @@
         return $cantidad;
       }
       // Obtengo el total de habitaciones disponibles
-      function obtener_disponibles(){ 
+      function obtener_disponibles(){
         $sentencia = "SELECT count(hab.id) AS cantidad,hab.estado,hab.estado_hab FROM hab WHERE hab.estado = 0 AND hab.estado_hab = 1 AND hab.tipo > 0";
         //echo $sentencia;
         $cantidad=0;
@@ -481,10 +480,9 @@
       function consultar_disponibilidad($tipo_hab){
 
         //consultar el el tipo de habitación en base a la tarifa dada.
-       
         $cantidad=0;
         $sentencia = "SELECT *,count(hab.id) AS cantidad,hab.nombre AS nom,tipo_hab.nombre AS habitacion
-        FROM hab 
+        FROM hab
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.estado = 0 AND hab.tipo = $tipo_hab ORDER BY hab.id";
         $comentario="Consultar disponibilidad de un tipo de habitacion para hacer check-in";
         //echo $sentencia;
@@ -494,7 +492,6 @@
         {
           $cantidad= $fila['cantidad'];
         }
-   
         return $cantidad;
       }
       // Seleccionar habitacion a asignar reservacion para check-in
@@ -563,7 +560,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-      // Obtengo los datos del cargo por noche de la habitacion 
+      // Obtengo los datos del cargo por noche de la habitacion
       function mostrar_cargo_noche(){
         //<div class="col-sm-12 text-center"><h2 class="text-dark margen-1">CARGO POR NOCHE</h2></div>';
         echo '<div class="row">
@@ -622,7 +619,6 @@
                 $descuento = $fila['descuento'];
                 //$cargo_noche = $fila['cargo'];
                 $cargo_noche = $this->consultar_cargo($hab_id);
-
                 $nombre_huesped= $huesped->obtengo_nombre_completo($id_huesped);
                 $nombre_tarifa= $tarifa->obtengo_nombre($id_tarifa);
                 $total_tarifa= $tarifa->obtengo_tarifa_dia($id_tarifa,$extra_adulto,$extra_junior,$extra_infantil,$descuento);
@@ -675,7 +671,7 @@
         `cargo_noche` = '$estado';";
         $comentario="Cambiar estado cargo noche en todas las habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-      } 
+      }
       // Consultar cargo noche de una habitacion
       function consultar_cargo($hab_id){
         $cargo_noche= 0;
@@ -693,7 +689,7 @@
       function consultar_tipo($hab_id){
         $nombre= '';
         $sentencia = "SELECT hab.id AS ID,hab.nombre AS nom,tipo_hab.nombre AS habitacion
-        FROM hab 
+        FROM hab
         INNER JOIN tipo_hab ON hab.tipo = tipo_hab.id WHERE hab.id = $hab_id AND hab.estado_hab = 1 ORDER BY hab.id";
         $comentario="Consultar el nombre del tipo de una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -708,7 +704,7 @@
       /** Pronosticos */
 
        // Obtengo el total de habitaciones ocupadas
-       function obtener_todas(){ 
+       function obtener_todas(){
         $sentencia = "SELECT * FROM hab WHERE  hab.estado_hab = 1";
         //echo $sentencia;
         $cantidad=0;
@@ -724,7 +720,7 @@
 
       function fuera_servicio($actual){
         $actual = date('Y-m-d',$actual);
-        $sentencia="SELECT  mov.*  FROM `hab` 
+        $sentencia="SELECT  mov.*  FROM `hab`
         INNER JOIN movimiento as mov  on hab.mov = mov.id
         WHERE hab.estado not in (0,1,6,7,8)
         AND (from_unixtime(mov.detalle_inicio + 3600 , '%Y-%m-%d' ) >= '$actual' OR
@@ -744,14 +740,14 @@
 
       function en_libros($actual){
         $actual = date('Y-m-d',$actual);
-        $sentencia="SELECT reservacion.*  FROM reservacion LEFT JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id 
-        INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion 
-        LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id 
-        LEFT JOIN hab ON movimiento.id_hab = hab.id 
-        INNER JOIN usuario ON reservacion.id_usuario = usuario.id 
-        INNER JOIN huesped ON reservacion.id_huesped = huesped.id 
-        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id 
-        WHERE (reservacion.estado = 1 || reservacion.estado = 2) 
+        $sentencia="SELECT reservacion.*  FROM reservacion LEFT JOIN tarifa_hospedaje ON reservacion.tarifa = tarifa_hospedaje.id
+        INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
+        LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+        LEFT JOIN hab ON movimiento.id_hab = hab.id
+        INNER JOIN usuario ON reservacion.id_usuario = usuario.id
+        INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+        INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
+        WHERE (reservacion.estado = 1 || reservacion.estado = 2)
         AND (from_unixtime(reservacion.fecha_salida + 3600 , '%Y-%m-%d' ) >= '$actual') ORDER BY reservacion.id DESC;
         ";
         $comentario="Obtener todo en libros que sea mayor al dia actual";
@@ -806,7 +802,6 @@
         AND from_unixtime(reservacion.fecha_salida + 3600 , '%Y-%m-%d' ) >= '$actual'
         ORDER BY reservacion.id DESC;";
         $comentario="";
-
         // echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

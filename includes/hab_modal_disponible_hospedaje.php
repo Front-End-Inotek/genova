@@ -15,7 +15,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="hab_disponible_sucia('.$_GET['hab_id'].','.$_GET['estado'].')"> Aceptar</button>
+      <button type="button" class="btn btn-success" onclick="hab_disponible_sucia('.$_GET['hab_id'].','.$_GET['estado'].')"> Aceptarr</button>
     </div>
   </div>';
 ?>

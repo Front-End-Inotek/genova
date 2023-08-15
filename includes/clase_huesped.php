@@ -108,7 +108,7 @@
 
       public function mostrar_garantia($estado_tarjeta){
         echo '
-        <p id="choosen-paymenttype">tarjeta de credito</p>
+        <p id="choosen-paymenttype"></p>
                 <!--Principal-->
                 <div class="container-fluid blanco" >
                     <header class="tarjeta" style="max-width: 600px;">

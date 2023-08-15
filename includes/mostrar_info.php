@@ -11,7 +11,7 @@ echo ' <div class="modal-content">
   </button>
 </div>
 <div class="modal-body">
-  <ul class="list-group mb-4">
+  <ul class="list-group mb-5">
       <li class="list-group-item fw-bolder">Tipos de habitaciones</li>';
       while ($fila = mysqli_fetch_array($tipos))
       {
@@ -21,7 +21,7 @@ echo ' <div class="modal-content">
       }
   echo '
   </ul>
-  <ul class="list-group mb-4">
+  <ul class="list-group mb-5">
       <li class="list-group-item fw-bolder">Estado de habitaciones</li>
       <li class="list-group-item InfoDisponible">Disponible limpia</li>
       <li class="list-group-item InfoLimpiezaVacia">Limpieza vacia</li>

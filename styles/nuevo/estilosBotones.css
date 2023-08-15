@@ -1350,15 +1350,15 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .containerRackOp {
-    grid-template-columns: repeat(5, minmax(200px, 1fr));
-    grid-gap: 5px;
-    margin: 20px;
+    grid-template-columns: repeat(12, minmax(155px, 1fr));
+    /* grid-gap: 5px;
+    margin: 20px; */
   }
 
   .containerRackOp .btn {
     position: relative;
-    width: 170px;
-    height: 140px;
+    width: 150px;
+    height: 125px;
   }
 }
 

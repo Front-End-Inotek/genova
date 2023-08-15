@@ -24,7 +24,7 @@
                 Buscar 
               </button>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-2">
               <button class="btn btn-primary btn-block btn-default" onclick="ver_reservaciones_por_dia()">
                 Por día
               </button>

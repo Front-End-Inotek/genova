@@ -978,6 +978,7 @@ class Reservacion extends ConexionMYSql
                 <th>Fecha Entrada</th>
                 <th>Fecha Salida</th>
                 <th>Usuario</th>
+                <th>Hora</th>
                 <th>Nombre Huésped</th>
                     <th>Noches</th>
                     <!-- <th>No. Habitaciones</th> -->
