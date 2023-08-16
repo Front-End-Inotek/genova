@@ -144,22 +144,13 @@ class RackHabitacional extends ConexionMYSql
             <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
             <!--tabla operativa--->
                 <div class="headTable justify-content-center align-items-center">
-                <div class="fondoWaves">
-                <div style="text-align:center;">
-                <div >
-                    <h2 class="fechaAñoMes">' . $mes_rack . ' ' . $anio_rack . '</h2>
+                    <div class="fondoWaves">
+                    <div style="text-align:center;">
+                    <div >
+                        <h2 class="fechaAñoMes">' . $mes_rack . ' ' . $anio_rack . '</h2>
+                    </div>
+                    </div>
                 </div>
-                </div>
-
-                <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.5)" />
-                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.3)" />
-                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.1)" />
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-                </g>
-                </svg>
-                </div>
-
                 <div class="wrapper">
                     <div class="card__">
                     <br><br><br>
@@ -168,13 +159,10 @@ class RackHabitacional extends ConexionMYSql
                         </div>
                         <div class="card__cometOuter">
                         </div>
-                        <div class="card__circle"></div>
-                        <div class="card__smallCircle"></div>
-                        <div class="card__greenShine"></div>
-
+                        
                     </div>
-                                </div>
-                        ';
+            </div>
+        ';
 
         echo '
             <!-- DISPLAY USER-->

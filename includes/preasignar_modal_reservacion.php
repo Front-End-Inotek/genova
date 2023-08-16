@@ -21,7 +21,7 @@
 
     <div class="modal-body">
       <div class="row">
-        <div class="col-sm-3" >Habitaciones disponibles:</div>
+        <div class="col-sm-4" >Habitaciones disponibles:</div>
         <div id="re"></div>
         <div class="col-sm-9" >
         <div class="form-group">

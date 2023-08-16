@@ -21,9 +21,7 @@ setlocale(LC_ALL, "es_ES");
                     if($interno== "limpieza"){
                         $estado_texto[0] = 'task--limpieza-ocupada';
                         $estado_texto[1] = 'Ocupada limpieza';
-                        
                     }
-                    
                     break;
                 case 2:
                     $estado_texto[0] = 'task--vacia-sucia';
@@ -62,7 +60,6 @@ setlocale(LC_ALL, "es_ES");
                     $estado_texto[1] = 'Bloqueo';
                     break;
             }
-    
             return $estado_texto;
         }
     private function convertir_mes($mes)
@@ -195,7 +192,6 @@ setlocale(LC_ALL, "es_ES");
                 $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
                 $contador_row = mysqli_num_rows($consulta_reservaciones);
                 $imprimi_ocupadas=false;
-    
                 //for para cargar los 31  dias dentro de las habitaciones
                 for ($i = 1; $i <= 31; $i++) {
                     //Se omite el día anterior.
@@ -208,7 +204,6 @@ setlocale(LC_ALL, "es_ES");
 
                         $clase_expirar="";
                         $mastiempo=false;
-    
                         //Se calculan los estados de las habitaciones.
                         $mes = $this->convertir_mes(date('n', $tiempo));
                         $dia = date('d', $tiempo);
@@ -221,7 +216,6 @@ setlocale(LC_ALL, "es_ES");
                         if(date('Y-m-d', $tiempo_aux) >= date('Y-m-d', $fila['fin'])) {
                             $clase_expirar="expirar";
                         }
-    
                         //Si la habitación actual no está ocupada entra aqui.
                         if ($i == 2 && $fila['estado'] != 1) {
                             //aplica lo mismo que en una reservacion de momento solo en uso casa.
@@ -262,7 +256,6 @@ setlocale(LC_ALL, "es_ES");
                                 }
                             }
                             $c=0;
-    
                             while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
                                 $huesped_reserva = $fila_r['n_huesped'] . " " . $fila_r['a_huesped'];
                                 $clase_hover = "nuevax" . $i .rand(1, 100);
@@ -272,7 +265,6 @@ setlocale(LC_ALL, "es_ES");
                             content: "'.$huesped_reserva.'";
                             }
                             </style>';
-    
                                 $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                                 // if($fila['id']==46){
                                 //     echo date('Y-m-d', $tiempo_aux) ."|". date('Y-m-d', $fila_r['fecha_entrada']) ."|".  date('Y-m-d', $fila_r['fecha_salida']);
@@ -294,7 +286,6 @@ setlocale(LC_ALL, "es_ES");
                                 } else {
                                     $existe_disponible=false;
                                 }
-    
                                 while(date('Y-m-d', $tiempo_aux) < date('Y-m-d', $fila_r['fecha_salida'])) {
                                     //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias),
                                     //con el tiempo de la reservacion
@@ -308,7 +299,6 @@ setlocale(LC_ALL, "es_ES");
                                         $estado_habitacion_reserva = $this->estado_habitacion($estado, "", "");
                                         // $re= date('Y-m-d',$fila_r['fecha_entrada']);
                                         // $rs= date('Y-m-d',$fila_r['fecha_salida']);
-    
                                         if($c==0 && $fila['estado']!=0) {
                                             echo '
                                     <td class="celdaCompleta tdCheck " title="nombre huesped">
@@ -322,7 +312,6 @@ setlocale(LC_ALL, "es_ES");
                                     </td>
                                     ';
                                         }
-    
                                         echo '';
                                         echo '
                                 <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
@@ -330,7 +319,6 @@ setlocale(LC_ALL, "es_ES");
                                 ';
                                         echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . '</section>';
                                         echo '            </div>
-    
                                     </td>
                                 ';
                                         $n = 86400 * ($noches_reserva -1);
@@ -427,7 +415,6 @@ setlocale(LC_ALL, "es_ES");
                                     if(!$mastiempo) {
                                         $tiempo_aux += 86400;
                                     }
-    
                                     $c++;
                                 }
                             }
@@ -439,10 +426,8 @@ setlocale(LC_ALL, "es_ES");
                             $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
                             $clase_hover = "nuevax" . $fila['id'];
                             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
-    
                             $saldo="";
                             $saldo_c="";
-    
                             if($total_faltante > 0) {
                                 $saldo = 'Saldo: $'.number_format($total_faltante, 2);
                                 $saldo_c="green";
@@ -459,19 +444,15 @@ setlocale(LC_ALL, "es_ES");
                                 color:'.$saldo_c.';
                             }
                             </style>';
-    
                             $icono_carro ="";
-    
                             if(!empty($fila['id_vehiculo'])) {
                                 $icono_carro='<i class="bx bxs-car car"></i>';
                             }
-    
                             $inicio = new DateTime(date('Y-m-d'));
                             $fin = new DateTime(date('Y-m-d', $fila['fin']));
                             $noches = $fin->diff($inicio)->format("%a");
                             $tiempo_aux = time();
                             $noches = $noches == 0 ? 1 : $noches;
-    
                             echo '';
                             echo '
                             <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">
@@ -493,22 +474,18 @@ setlocale(LC_ALL, "es_ES");
                                 $mastiempo=true;
                                 $n = 86400 * ($noches);
                                 $tiempo_aux += $n;
-    
                             }
                             // echo date('Y-m-d',$tiempo_aux);
                             if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila['fin'])) {
                                 // echo $n;
                                 $tiempo_aux = time()-$n;
                             }
-    
                             //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
                             if($contador_row==0) {
-    
                                 $i = 32;
                             } else {
                                 //aqui van las reservas, fila_r contiene las reservas
                                 //$tiempo_aux contendrá el tiempo 'actual', mas la suma de cada dia para cada reservación.
-    
                                 $current=0; //contador del ciclo de reservaciones.
                                 $ultima=""; //penúltima fecha de la reservacion.
                                 $fila_anterior=null; //contendrá los datos de la ultima penúltima reservación.
@@ -527,12 +504,9 @@ setlocale(LC_ALL, "es_ES");
                                         content: "'.$huesped_reserva.'";
                                     }
                                     </style>';
-    
                                     $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
-    
                                     if ($ultima!="") {
                                         if(date('Y-m-d', $ultima)==date('Y-m-d', $fila['fin'])) {
-    
                                         }
                                     }
                                     //ciclo para 'avanzar' atraves de los días de la reservación.
@@ -545,15 +519,11 @@ setlocale(LC_ALL, "es_ES");
                                             } else {
                                                 $estado = 7;
                                             }
-    
                                             $aux_r =($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
-    
                                             // $tiempo_aux= $fila_r['fecha_salida'] - 86400;
-    
                                             $estado_habitacion_reserva = $this->estado_habitacion($estado, "", "");
                                             //Este td es para cuando se ocupa imprimir las noches ocupadas junto con la reservación que coicida en la fecha de entrada con
                                             //la fecha de salida de la ocupada.
-    
                                             echo '';
                                             echo '
                                         <td class="celdaCompleta tdCheck " colspan="' . $aux_r  . '">';
@@ -576,7 +546,6 @@ setlocale(LC_ALL, "es_ES");
                                                 $tiempo_aux += $n;
                                                 $noches_reserva=1;
                                             }
-    
                                         } else {
                                             echo '
                                         <td class="celdaCompleta tdCheck nobordertable">';
@@ -586,17 +555,14 @@ setlocale(LC_ALL, "es_ES");
                                             $tiempo_aux += 86400;
                                             // die();
                                         }
-    
                                         //  echo date('Y-m-d',$tiempo_aux);
                                         // die();
                                     }
                                     $fila_anterior=$fila_r;
                                     $ultima = $fila_r['fecha_entrada'];
                                 }
-    
                                 $i=32;
                             }
-    
                         }
                         if ($i == 2 && $fila['estado'] != 1) {
                             $i = 32;
@@ -605,8 +571,6 @@ setlocale(LC_ALL, "es_ES");
                 }
             }
         }
-
     }
-
 
 ?>

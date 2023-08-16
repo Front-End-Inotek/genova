@@ -42,8 +42,7 @@
         <div class="col-sm-3">Descripcion:</div>
         <div class="col-sm-7">
         <div class="form-group">
-          <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="30"> 
-
+          <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="30">
           <!-- <select class="form-select" id="descripcion">
           <option value="">Seleccionar un tipo de abono</option>
           ';
@@ -91,7 +90,7 @@
     <div>
 
     <div class="modal-footer" id="boton_abono">
-      <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
       <button type="button" class="btn btn-success" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].', \''.$_GET['faltante'].'\','.$mov.','.$id_maestra.')"> Aceptar</button>
     </div>
   </div>';

@@ -104,8 +104,6 @@ body {
   list-style: none;
   width: 40px;
   height: 40px;
-  background:
-  radial-gradient(18% 28% at 24% 50%,#cefAFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 18% 71%,#fffFFF59 6%,#073AFF00 100%),radial-gradient(70% 53% at 36% 76%,#73f2FFFF 0,#073AFF00 100%),radial-gradient(42% 53% at 15% 94%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(42% 53% at 34% 72%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(18% 28% at 35% 87%,#fffFFFFF 7%,#073AFF00 100%),radial-gradient(31% 43% at 7% 98%,#fffFFFFF 24%,#073AFF00 100%),radial-gradient(21% 37% at 72% 23%,#d3fF6D9C 24%,#073AFF00 100%),radial-gradient(35% 56% at 91% 74%,#8a4FFFF5 9%,#073AFF00 100%),radial-gradient(74% 86% at 67% 38%,#6dfFAEF5 24%,#073AFF00 100%),linear-gradient(125deg,#4eb5FFFF 1%,#4c00FCFF 100%);
   animation: rotate 10s infinite linear;
   animation: animate 25s linear infinite;
   bottom: -150px;
@@ -233,7 +231,6 @@ body {
   display: none;
 }
 .card__ {
-  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/279756/2017_bg.png);
   background-size: cover;
   width: 655px;
   height: 342px;
@@ -250,7 +247,6 @@ body {
   background-size: cover;
 }
 .card__orangeShine {
-  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/279756/orange_shine.png);
   right: -150px;
   top: -90px;
   bottom: 50px;
@@ -259,7 +255,6 @@ body {
   height: 500px;
 }
 .card__greenShine {
-  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/279756/green_shine.png);
   left: 20%;
   top: 0;
   bottom: 0;
@@ -779,12 +774,12 @@ label[for="no"] {
   border-top-left-radius: 15px;
   border-bottom-right-radius: 15px; */
   box-shadow: 0 10px 14px #292929dd !important;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-.containerRackOp .btn:hover a {
+/* .containerRackOp .btn:hover a {
   font-weight: 500;
-}
+} */
 /*
 /* Estilo del botón en modo noche *//*
 body.modo-nocturno .containerRackOp .btn {
@@ -1236,7 +1231,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .containerRackOp .btn:hover {
   transform: translateY(-5px);
-  transition: 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 
 .containerRackOp .btn::before {
@@ -1274,7 +1269,6 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .card-header {
-
   background-color: var(--fondo);
   color: var(--titulos);
   padding-top: 25px !important;
@@ -1294,7 +1288,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
   background-color: var(--fondoAzul) !important;
   padding-bottom: 1rem;
   padding-top: 1rem;
-  -webkit-box-shadow: 0px -5px 33px 14px rgba(194,194,194,0.2); 
+  -webkit-box-shadow: 0px -5px 33px 14px rgba(194,194,194,0.2);
   box-shadow: 0px -5px 33px 14px rgba(194,194,194,0.2);
 }
 @media (max-width: 605px){
