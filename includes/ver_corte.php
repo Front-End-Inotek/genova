@@ -64,7 +64,7 @@
                 $total_cargos=0;
                 $total_=0;
 
-                echo '<tr class="table-secondary" style="text-align:left">';
+                echo '<tr class="table" style="text-align:left">';
 
                 echo '<td>Cargos</td>
                     <td></td>
@@ -72,7 +72,7 @@
                     <td></td>
                     </tr>
                 ';
-                echo '<tr class="table-secondary">';
+                echo '<tr class="table">';
                 $c=0;
                 while ($fila = mysqli_fetch_array($consulta)) {
                   if($fila_atras!= $fila['hab_nombre']){
@@ -199,14 +199,14 @@
       $total_abonos=0;
       $total_=0;
 
-      echo '<tr class="table-secondary" style="text-align:left">';
+      echo '<tr class="table" style="text-align:left">';
       echo '<td>Abonos</td>
           <td></td>
           <td></td>
           <td></td>
           </tr>
       ';
-      echo '<tr class="table-secondary">';
+      echo '<tr class="table">';
       $c=0;
       while ($fila = mysqli_fetch_array($consulta)) {
         if($fila_atras!= $fila['hab_nombre']){

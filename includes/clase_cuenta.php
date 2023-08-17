@@ -642,7 +642,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
   echo '<div class="table-responsive" id="tabla_abonos">
     <table class="table table-bordered table-hover">
       <thead>
-        <tr class="table-info-encabezado text-center">
+        <tr class="table-primary-encabezado text-center">
         <th></th>
         <th>Descripción</th>
         <th>Fecha</th>
@@ -665,7 +665,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
               </tr>';
             }
         }
-          echo '<tr class="fuente_menor table-secondary text-center">
+          echo '<tr class="fuente_menor table text-center">
           <td><input type="checkbox"> </td>
           <td>'.$fila['concepto'].'</td>
           <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -761,7 +761,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       </tr>';
                       echo '';
                     }else{
-                      echo '<tr class="fuente_menor table-secondary text-center">
+                      echo '<tr class="fuente_menor table text-center">
                       <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -781,7 +781,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     </tr>';
                     echo '';
                   }else{
-                    echo '<tr class="fuente_menor table-secondary text-center">
+                    echo '<tr class="fuente_menor table text-center">
                     <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos" </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
@@ -815,7 +815,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         echo '<div class="table-responsive" id="tabla_abonos">
           <table class="table table-bordered table-hover">
             <thead>
-              <tr class="table-info-encabezado text-center">
+              <tr class="table-primary-encabezado text-center">
               <th></th>
               <th>Descripción</th>
               <th>Fecha</th>
@@ -834,7 +834,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                 if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
                   if($c!=0) {
                     echo '<tr>
-                    <td colspan="6"></td>
+                    <td colspan="6" style="height: 4px; padding: 0; background-color: #CBE3F9;"></td>
                     </tr>';
                   }
               }
@@ -863,7 +863,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     </tr>';
                   }
                 }else{
-                  echo '<tr class="fuente_menor table-secondary text-center">
+                  echo '<tr class="fuente_menor table text-center">
                   <td>'.$fila['concepto'].'</td>
                   <td>'.date("d-m-Y",$fila['fecha']).'</td>
                   <td>$'.number_format($fila['abono'], 2).'</td>

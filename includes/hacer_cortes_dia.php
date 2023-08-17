@@ -63,7 +63,7 @@
                       if(($z%2) == 0){
                         echo '<tr class="table-white text-center">';
                       }else{
-                        echo '<tr class="table-secondary text-center">';
+                        echo '<tr class="table text-center">';
                       }
                         echo '<td>'.$inf->producto_nombre[$z].'</td>
                         <td>$'.number_format($inf->producto_precio[$z], 2).'</td>
@@ -118,7 +118,7 @@
                         if(($z%2) == 0){
                           echo '<tr class="table-white text-center">';
                         }else{
-                          echo '<tr class="table-secondary text-center">';
+                          echo '<tr class="table text-center">';
                         }
                           echo '<td>'.$inf->hab_tipo_hospedaje[$z].'</td>';
                           //<td>$'.number_format($inf->hab_precio_hospedaje[$z], 2).'</td> 
@@ -174,7 +174,7 @@
                         if(($z%2) == 0){
                           echo '<tr class="table-white text-center">';
                         }else{
-                          echo '<tr class="table-secondary text-center">';
+                          echo '<tr class="table text-center">';
                         }
                           echo '<td>'.$concepto[$z].'</td>
                           <td>$'.number_format($total[$z], 2).'</td>
@@ -215,7 +215,7 @@
                         if(($z%2) == 0){
                           echo '<tr class="table-white text-center">';
                         }else{
-                          echo '<tr class="table-secondary text-center">';
+                          echo '<tr class="table text-center">';
                         }
                           echo '<td>'.$forma_pago->obtener_descripcion($z).'</td>
                           <td>$'.number_format($inf->total_pago[$z-1], 2).'</td>

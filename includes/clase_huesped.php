@@ -196,7 +196,6 @@
                         <div class="form-content">
                             <div class="form-group">
                               <label class="asterisco" for="cardnumber">Numero de tarjeta</label>';
-
                               if(!empty($this->numero_tarjeta)){
                                 echo '<div class="input-group">
                                 <input disabled class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  value="**************" maxlength="16">
@@ -256,7 +255,7 @@
                             </div>
                           </div>
                             <br>
-                            <div class="d-flex justify-content-between flex-wrap">
+                            <div class="d-flex justify-content-between flex-wrap mb-4">
                                 <div class="form-check form-check-inline col-12 col-sm-3">
                                   <input class="form-check-input" type="radio" name="estado" value="1" id="check1">
                                   <label class="form-check-label" for="check1">Pendiente de preautorizar</label>

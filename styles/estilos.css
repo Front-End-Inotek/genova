@@ -145,11 +145,11 @@ background-color: #14040B;
 
 /* Color para tabla de encabezado primary **/
 .table-primary-encabezado {
-  color: var(--titulos);
+  color: black !important;
   font-size: 13px;
   font-family: sans-serif;
   font-weight: bolder;
-  background-color: #caebffdd !important;
+  background-color: #2c8feb3d !important;
   border-top-style: none;
 }
 
@@ -353,14 +353,22 @@ select {
 }
 
 .table-responsive td {
+  transition: all 0.1s ease-in-out;
   /*
   background: linear-gradient(180deg, #c3cafd 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);*/
 }
 
 .table-responsive td:hover {
-  background-color: #fff;
+  background-color: #2C8FEB;
+  color: white;
 }
-
+td:hover {
+  background-color: #2C8FEB;
+  color: white;
+}
+td:hocer span{
+  color: white;
+}
 .text-dark {
   color: var(--titulos);
 }
@@ -375,20 +383,24 @@ select {
 
 /* primera fila  */
 tr:nth-child(odd) {
-  background-color: #eef8ffc1;
-  border-radius: 50px;
+  background-color: #EDF2F9;
+  /* border-radius: 50px; */
+  transition: all 0.1s ease-in-out;
 }
 
 tr:nth-child(even) {
-  background-color: #d9f0ffc1;
+  background-color: #EDF2F9;
+  transition: all 0.1s ease-in-out;
 }
 
 th {
-  background-color: #d3d3d3b8;
+  background-color: #EDF2F9;
+  transition: all 0.1s ease-in-out;
 }
 
 tr:hover {
-  background-color: #efefefe1;
+  background-color: #BBDEFB;
+  color: #000000;
 }
 
 .card-body{

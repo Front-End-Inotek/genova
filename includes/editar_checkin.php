@@ -343,7 +343,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             </div>
             <div class="d-flex justify-content-between">
                 <div class="form-group col-md-4">
-                    <label class="asterisco" for="forma-garantia">Forma de Garantía</label>
+                    <label class="asterisco col-12" for="forma-garantia">Forma de Garantía</label>
                     <select class="form-control" id="forma-garantia" required onchange="obtener_garantia(event)">
                     <option value="">Seleccione una opción </option>
                     ';
@@ -357,7 +357,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                <label for="forma-garantia">Forma de Garantía</label>
+                <label for="forma-garantia" class="col-12">Forma de Garantía</label>
                 <button id="btngarantia"  class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
                 </div>';
                 if (empty($_GET['hab_id'])) {

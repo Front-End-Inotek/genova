@@ -1045,7 +1045,7 @@ class Reservacion extends ConexionMYSql
                         }
                     } else {
                         $estado="Activa";
-                        $tr='<tr class="table-secondary text-center">';
+                        $tr='<tr class=" text-center">';
                     }
                     echo $tr;
                     echo '
@@ -1103,7 +1103,7 @@ class Reservacion extends ConexionMYSql
                         }
                     } else {
                         $estado="Activa";
-                        $tr='<tr class="table-secondary text-center">';
+                        $tr='<tr class=" text-center">';
                     }
                     echo $tr;
                     echo '
@@ -1159,7 +1159,7 @@ class Reservacion extends ConexionMYSql
                         }
                     } else {
                         $estado="Activa";
-                        $tr='<tr class="table-secondary text-center">';
+                        $tr='<tr class=" text-center">';
                     }
                     echo $tr;
                     echo '
@@ -1213,7 +1213,7 @@ class Reservacion extends ConexionMYSql
                         }
                     } else {
                         $estado="Activa";
-                        $tr='<tr class="table-secondary text-center">';
+                        $tr='<tr class=" text-center">';
                     }
                     echo $tr;
                     echo '
@@ -1438,7 +1438,7 @@ class Reservacion extends ConexionMYSql
             } else {
                 $estado_reserva="Activa";
             }
-            echo '<tr class="table-secondary text-center">
+            echo '<tr class=" text-center">
                     <td>'.$fila['ID'].'</td> 
                     <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                     <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1585,7 +1585,7 @@ class Reservacion extends ConexionMYSql
                 } else {
                     $estado_reserva="Activa";
                 }
-                echo '<tr class="table-secondary text-center">
+                echo '<tr class=" text-center">
                     <td>'.$fila['ID'].'</td> 
                     <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                     <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -2019,7 +2019,7 @@ class Reservacion extends ConexionMYSql
             }
         } else {
 
-            echo '<tr class="table-secondary text-center">
+            echo '<tr class=" text-center">
           <td>'.$fila['ID'].'</td>
           <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
           <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -2924,7 +2924,7 @@ class Reservacion extends ConexionMYSql
                         echo '</tr>';
                     }
                 } else {
-                    echo '<tr class="table-secondary text-center">
+                    echo '<tr class=" text-center">
 				  <td>'.$fila['ID'].'</td>
 				  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
 				  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -3061,7 +3061,7 @@ class Reservacion extends ConexionMYSql
                         echo '</tr>';
                     }
                 } else {
-                    echo '<tr class="table-secondary text-center">
+                    echo '<tr class=" text-center">
 					<td>'.$fila['ID'].'</td> 
 					<td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
 					<td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -3216,7 +3216,7 @@ class Reservacion extends ConexionMYSql
                         echo '</tr>';
                     }
                 } else {
-                    echo '<tr class="table-secondary text-center">
+                    echo '<tr class=" text-center">
 				  <td>'.$fila['ID'].'</td> 
 				  <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
 				  <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>

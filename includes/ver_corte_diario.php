@@ -67,7 +67,7 @@
                 $total_abonos=0;
                 $total_general=0;
 
-                echo '<tr class="table-secondary">';
+                echo '<tr class="table">';
                 foreach ($forma_pago->formas_pagos() as $key => $pago) {
                     
                 $consulta= $cuenta->mostrarCuentaUsuario($usuario_id,$pago['id']);

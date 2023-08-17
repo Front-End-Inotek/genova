@@ -263,7 +263,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
             <div class="d-flex justify-content-between flex-wrap">
                 
                 <div class="form-group col-md-4 col-12">
-                    <label for="forma-garantia">Forma de Garantía</label>
+                    <label class="col-12" for="forma-garantia">Forma de Garantía</label>
                     <select disabled class="form-control" id="forma-garantia" >
                     ';
                 
@@ -273,7 +273,7 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 </div>
               
                 <div class="form-group col-md-4">
-                <label for="forma-garantia">Forma de Garantía</label>
+                <label class="col-12" for="forma-garantia">Forma de Garantía</label>
                 <button disabled type="button" id="btngarantia" class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">Añadir tarjeta</button>
                 </div>';
 
