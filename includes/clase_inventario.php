@@ -129,7 +129,7 @@
             {
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
-                <td>'.$fila['nom'].'</td>  
+                <td>'.$fila['nom'].'</td>
                 <td>'.$fila['descripcion'].'</td>
                 <td>'.$fila['categoria'].'</td>
                 <td>$'.number_format($fila['precio'], 2).'</td>
@@ -167,7 +167,7 @@
           $cat_paginas = $this->mostrar(1,$id);
         }else{
           $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
-          FROM inventario 
+          FROM inventario
           INNER JOIN categoria ON inventario.categoria = categoria.id WHERE (inventario.nombre LIKE '%$a_buscar%' || inventario.descripcion LIKE '%$a_buscar%' || categoria.nombre LIKE '%$a_buscar%' || inventario.clave LIKE '%$a_buscar%') && inventario.estado = 1 ORDER BY inventario.nombre;";
           $comentario="Mostrar diferentes busquedas en ver inventario";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -196,10 +196,10 @@
               echo '</tr>
             </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta)) 
+              while ($fila = mysqli_fetch_array($consulta))
               {
                 echo '<tr class="text-center">
-                <td>'.$fila['nom'].'</td>  
+                <td>'.$fila['nom'].'</td>
                 <td>'.$fila['descripcion'].'</td>
                 <td>'.$fila['categoria'].'</td>
                 <td>'.$fila['precio'].'</td>
@@ -228,7 +228,7 @@
       function mostrar_surtir_inventario(){
         $cantidad= 0;
         $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
-        FROM inventario 
+        FROM inventario
         INNER JOIN categoria ON inventario.categoria = categoria.id WHERE inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
         $comentario="Mostramos los productos para poder surtir inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -272,7 +272,7 @@
       function buscar_surtir_inventario($a_buscar){
         $cantidad= 0;
         $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
-        FROM inventario 
+        FROM inventario
         INNER JOIN categoria ON inventario.categoria = categoria.id WHERE (inventario.nombre LIKE '%$a_buscar%' || inventario.descripcion LIKE '%$a_buscar%' || categoria.nombre LIKE '%$a_buscar%' || inventario.clave LIKE '%$a_buscar%') && inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
         $comentario="Mostrar diferentes busquedas en ver inventario surtir";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -321,11 +321,11 @@
 
         if($categoria==0){
           $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
-          FROM inventario 
+          FROM inventario
           INNER JOIN categoria ON inventario.categoria = categoria.id WHERE inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
         }else{
           $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
-          FROM inventario 
+          FROM inventario
           INNER JOIN categoria ON inventario.categoria = categoria.id WHERE categoria.id = $categoria && inventario.estado = 1 ORDER BY categoria.id,inventario.nombre";
         }
         $comentario="Mostrar diferentes categorias en ver inventario surtir";
@@ -351,7 +351,6 @@
           </div>
           <div class="col-sm-8"></div>
         </div><br>';
-        
         echo '<div class="row">
           <div class="col-sm-8">';
             echo '<div class="table-responsive" id="tabla_surtir_inventario">
@@ -390,7 +389,6 @@
               </table>
             </div>
           </div>
-          
           <div class="col-sm-4" id="a_surtir">';
             $surtir->mostrar_a_surtir();
           echo  '</div>
@@ -555,11 +553,9 @@
               echo'</button></div>';
             }
             $cunt++;
-    
             if($cont==1){
               $cont=0;
               echo '</br></br>';
-    
             }
             else{
               $cont++;
@@ -597,11 +593,9 @@
               }
             }
             $cunt++;
-    
             if($cont==1){
               $cont=0;
               echo '</br></br>';
-    
             }
             else{
               $cont++;
@@ -624,13 +618,12 @@
         }
         return $id;
       }
-             
   }
   /**
   *
   */
   class Pedido_rest extends ConexionMYSql
-  {    
+  {
       public $id;
       public $mov;
       public $id_mesa;
@@ -665,7 +658,7 @@
             $this->cantidad= $fila['cantidad'];
             $this->pagado= $fila['pagado'];
             $this->pedido= $fila['pedido'];
-            $this->estado= $fila['estado'];             
+            $this->estado= $fila['estado'];
           }
         }
       }
@@ -677,7 +670,6 @@
           include_once("clase_ticket.php");
           $movimiento= NEW Movimiento(0);
           $labels= NEW Labels(0);
-
           if($mov != 0){
             $id_mesa= $movimiento->saber_id_mesa($mov);
           }else{
@@ -687,7 +679,6 @@
           VALUES ('$mov', '$id_mesa', '$producto', '1', '0', '0', '1');";
           $comentario="Agregar un producto al pedido de restaurante";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
-
           $comanda= $this->ultima_insercion();
           $labels->actualizar_comanda($comanda);
         /*}else{
@@ -729,8 +720,8 @@
       }
       // Mostrar los productos del pedido restaurente sin habitacion
       function mostar_pedido($hab_id,$estado,$mov,$mesa,$id_maestra=0){
-        $sentencia = "SELECT *,pedido_rest.id AS ID,pedido_rest.cantidad AS cant 
-        FROM pedido_rest 
+        $sentencia = "SELECT *,pedido_rest.id AS ID,pedido_rest.cantidad AS cant
+        FROM pedido_rest
         INNER JOIN inventario ON pedido_rest.id_producto = inventario.id WHERE pedido_rest.mov = $mov AND pedido_rest.pagado = 0 AND pedido_rest.pedido = 0 AND pedido_rest.estado = 1";
         $comentario="Mostrar los productos del pedido restaurente sin habitacion";
         // echo $sentencia;
@@ -768,7 +759,7 @@
                 echo '<td><button class="btn btn-outline-danger btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')"> 🗑️</button></td>';
                 echo '</tr>';
               }
-            } 
+            }
             echo '
           </tbody>
         </table>';
@@ -787,7 +778,6 @@
           $cm = new CuentaMaestra($id_maestra);
           $cuenta_nombre = $cm->nombre;
         }
-
         $linea= -1;
         $cantidad= 0;
         $total= 0;
@@ -799,14 +789,12 @@
           }
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
-
-        echo '<div class="row">'; 
+        echo '<div class="row">';
           if($cantidad > 0){
             if($hab_id != 0){
-              echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
+              echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>
               <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Habitación: '.$hab_nombre.'</div>';
             }else{
-
               echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
               if($id_maestra!=0){
                 echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Cuenta Maestra: '.$cuenta_nombre.'</div>';
@@ -814,7 +802,7 @@
                 echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir"></div>';
               }
             }
-            echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
+            echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div>
             <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0,'.$id_maestra.')">Linea</button></></div>
             <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.','.$id_maestra.')">Pedir</button></></div>
             ';
@@ -841,20 +829,19 @@
           }
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
-
         echo '<div class="row">';
           if($cantidad > 0){//
             if($mesa_id != 0){
               echo '<div class="col-sm-1"></div>
-              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div> 
+              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>
               <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Mesa: '.$mesa_nombre.'</div>';
             }else{
               echo '<div class="col-sm-3"></div>
               <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
-            } 
-            echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div> 
+            }
+            echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div>
             <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$mesa_id.','.$estado.','.$mov.',1)">Linea</button></></div>
-            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>   
+            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>
             <div class="col-sm-1"></div>';
           }else{
             echo '<div class="col-sm-12"></div>';
@@ -905,7 +892,7 @@
         $comentario="Cambiar el estado del pedido restaurante cobrado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      // Obtener la ultimo pedido restaurante ingresado 
+      // Obtener la ultimo pedido restaurante ingresado
       function ultima_insercion(){
         $sentencia= "SELECT id FROM pedido_rest ORDER BY id DESC LIMIT 1";
         $id= 0;
@@ -943,13 +930,12 @@
         }
         return $comanda;
       }*/
-
   }
   /**
   *
   */
   class Pedido extends ConexionMYSql
-  {    
+  {
       public $id;
       public $mov;
       public $id_hab;
@@ -959,7 +945,6 @@
       public $impreso;
       public $recepcion;
       public $estado;
-
       // Constructor
       function __construct($id)
       {
@@ -1066,6 +1051,5 @@
         }
         return $id;
       }
-
   }
 ?>

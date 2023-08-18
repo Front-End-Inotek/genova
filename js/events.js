@@ -6,8 +6,6 @@ var siguiente_vista=0;
 x=$(document);
 x.ready(inicio);
 
-
-
 //Evaluamos el inicio de sesion
 function inicio(){
 	var x=$("#login");
@@ -18,9 +16,7 @@ function toggleBotones() {
     var botones = document.getElementById("botones");
         botones.classList.add("botones-mostrados");
         botones.classList.remove("botones-ocultos");
-
 }
-
 
 // Evaluamos las credenciales para generar el acceso
 function evaluar(){
@@ -55,8 +51,6 @@ function problemas(){
 $("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-danger" ><span class="glyphicon glyphicon-wrench"></span> Problemas en el servidor.</strong>');
 }
 
-
-
 // Recibimos la info
 function recibir(datos){
 	//alert(datos);
@@ -65,13 +59,11 @@ function recibir(datos){
 	if(res[1]!="0"){
 		localStorage.setItem("id",res[0]);
 		localStorage.setItem("tocken",res[1]);
-
         if(res[2]==0){
             localStorage.setItem('vista',3);
         }else{
             localStorage.setItem('vista',0);
         }
-
 		document.location.href='inicio.php';
 	}else{
 		$("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-warning"><span class="glyphicon glyphicon-remove"></span> Creo que has escrito mal tu usuario o contraseña </strong>');
@@ -83,11 +75,7 @@ function sabernosession(){
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
     var vista = localStorage.getItem("vista");
-
     txt_vista = localStorage.setItem("txt_vista", "Rack Operaciones");
-
-    
-
 	if(id==null){
 		document.location.href='index.php';
 	}else{
@@ -106,7 +94,6 @@ function sabernosession(){
                     // txt_vista =localStorage.getItem("txt_vista");
                     var menu_vista = document.getElementById("vista");
                     menu_vista.innerHTML="Rack Operaciones"
-    
                     console.log("rack de operaciones "+vista);
                     var usuario_id=localStorage.getItem("id");
                     $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
@@ -115,16 +102,12 @@ function sabernosession(){
                 if(vista==1){
                     var menu_vista = document.getElementById("vista");
                     menu_vista.innerHTML="Rack Habitacional"
-    
                     console.log("rack de operaciones "+vista);
                     var id=localStorage.getItem("id");
                     var token=localStorage.getItem("tocken");
-                    
                     $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
                 }
             });
-
-            
             cargar_area_trabajo();
 		}
 		else{
@@ -214,7 +197,6 @@ function cargar_area_trabajo(){
     }*/
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
-
     setTimeout('cargar_area_trabajo()',3000);//5500
 }
 
@@ -344,7 +326,6 @@ function agregar_politicas_reservacion(){
 	$("#mostrar_herramientas").load("includes/agregar_politicas_reservacion.php");
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
-
 
 // Agregar un plan de alimentacion
 function agregar_tipos_abonos(){
@@ -538,29 +519,24 @@ function guardar_tipo() {
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var codigo= encodeURI(document.getElementById("codigo").value);
     //const color = encodeURI(document.getElementById("colorHab").value);
-
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     if(codigo === null || codigo === ''){
         swal("Campo codigo vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     guardar_habitacion()
 }
 
 function guardar_cuenta_maestra() {
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var codigo= encodeURI(document.getElementById("codigo").value);
-
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     if(codigo === null || codigo === ''){
         swal("Campo codigo vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -603,7 +579,6 @@ function guardar_habitacion(){
 	let nombre= encodeURI(document.getElementById("nombre").value);
 	let codigo= encodeURI(document.getElementById("codigo").value);
     const colorHab = encodeURI(document.getElementById("colorHab").value);
-
     let color_hab = colorHab.replace("#","")
     color_hab= encodeURI(color_hab)
     let datos = {
@@ -614,7 +589,6 @@ function guardar_habitacion(){
     };
     // console.log(colorHab)
     // return
-
     let xhttp;
     xhttp = new XMLHttpRequest();
     let include = "includes/guardar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&color="+color_hab+"&usuario_id="+usuario_id
@@ -882,7 +856,6 @@ function modificar_cuenta_maestra(id){
     let id_tipo = id;
     let nombre = encodeURI(document.getElementById("nombre").value);
 	let codigo = encodeURI(document.getElementById("codigo").value);
-
         let datos = {
             "id_tipo": id_tipo,
             "nombre": nombre,
@@ -927,7 +900,6 @@ function modificar_tipo(id){
     let color = encodeURI(document.getElementById("colorHab").value);
     color = color.replace("#","")
     color_hab= encodeURI(color)
-
         let datos = {
             "id_tipo": id_tipo,
             "nombre": nombre,
@@ -1023,7 +995,6 @@ function borrar_tipo_abono(id, nombre, descripcion ){
     let id_tipo = id;
     let codigo_tipo = descripcion;
     let usuario_id=localStorage.getItem("id");
-
     let tabla = document.createElement("div");
     tabla.innerHTML += `
     <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
@@ -1074,7 +1045,6 @@ function borrar_tipo_abono(id, nombre, descripcion ){
                 swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
         });
-
     } else {
         swal("Se cancelo eliminar el tipo de abono!", "Por favor verifique los datos antes de eliminarlos!", "success")
     }
@@ -1134,7 +1104,6 @@ function borrar_plan_alimentacion(id, nombre, codigo ){
                 swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
         });
-
     } else {
         swal("Se cancelo eliminar el plan de alimentación!", "Por favor verifique los datos antes de eliminarlos!", "success")
     }
@@ -8539,9 +8508,7 @@ function mostrarAcordeonCompleto(cantidad=1){
     const input = document.querySelector("#extra_adulto").value
     const acorderon = document.querySelector("#acordeonchido")
     const cuerpoacordeon = document.querySelector("#acordeon");
-
     if(input > 1){
-
         acorderon.classList.add("accordionCustomMostrar")
         contenidoacordeon= ``
         cuerpoacordeon.innerHTML = ``;
@@ -8638,6 +8605,5 @@ function guardarColoresHab() {
     xhttp.addEventListener('load',e =>{
         response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
         console.log(response);
-        
     })
 }

@@ -1317,7 +1317,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 /* para pantallas más pequeñas que 768px */
 @media (max-width: 767px) {
   .containerRackOp {
-    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
     grid-gap: 5px;
     margin: 10px;
   }

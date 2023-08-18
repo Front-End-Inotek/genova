@@ -263,13 +263,11 @@
             VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '0', '1');";
             $comentario="Guardamos la cuenta en la base de datos";
             $consulta= $this->realizaConsulta($sentencia,$comentario);
-
             $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
             VALUES ('$id_usuario', '$mov', 'Pago al reservar', '$fecha', '$forma_pago', '0', '$abono', '0');";
             $comentario="Guardamos la cuenta en la base de datos";
             $consulta= $this->realizaConsulta($sentencia,$comentario);
           }
-
           // Despues de dividir la cuenta se inactiva
           $sentencia = "UPDATE `cuenta` SET
             `estado` = '0'
@@ -334,11 +332,8 @@
         }
         return $suma_abonos;
       }
-
       //Obtener el limite de credito de husped en base a un movimiento.
-
       function mostrarLimiteCredito($mov){
-
         $sentencia="SELECT huesped.estado_credito as estado_credito , huesped.limite_credito
         FROM hab
         INNER JOIN movimiento as mov ON hab.mov = mov.id
@@ -350,27 +345,22 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $estado_credito="";
         $limite_credito =0;
-
         while ($fila = mysqli_fetch_array($consulta))
         {
-            $estado_credito= $fila['estado_credito'];
-            $limite_credito = $fila['limite_credito'];
+          $estado_credito= $fila['estado_credito'];
+          $limite_credito = $fila['limite_credito'];
         }
         return [$estado_credito,$limite_credito];
-
       }
-
       function estadoCargosHabs($editable){
         $filtro="";
-
         if(!$editable){
           $filtro ="and
           (from_unixtime(reservacion.fecha_auditoria,'%Y-%m-%d') != CURRENT_DATE()
         or reservacion.fecha_auditoria is null
         )";
         }
-
-        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.precio_hospedaje as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa 
+        $sentencia="SELECT hab.nombre as hab_nombre, reservacion.precio_hospedaje as tarifa, reservacion.id as reserva_id, reservacion.forzar_tarifa
         ,reservacion.fecha_auditoria
         FROM
         hab
@@ -397,15 +387,13 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
       function mostrar_historial_cuentas($inicial,$final,$a_buscar){
         $filtro_fecha="";
         $filtro_buscar="";
         if(!empty($a_buscar)){
-          $filtro_buscar=" AND (hab.nombre LIKE '%$a_buscar%' || cuenta.descripcion LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' 
+          $filtro_buscar=" AND (hab.nombre LIKE '%$a_buscar%' || cuenta.descripcion LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%'
           || huesped.apellido LIKE '%$a_buscar%'|| cuenta.estado LIKE '%$a_buscar%')";
         }
-
         if(!empty($inicial) && !empty($final)){
           $inicial = strtotime($inicial);
           $final = strtotime($final);
@@ -419,10 +407,10 @@
         ,huesped.nombre as huesped_nombre, huesped.apellido as huesped_apellido, cuenta.id as id_cuenta
         FROM
         cuenta
-        INNER JOIN movimiento as mov ON cuenta.mov = mov.id 
-        LEFT JOIN hab ON hab.mov = cuenta.mov 
-        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id 
-        LEFT JOIN huesped on mov.id_huesped = huesped.id 
+        INNER JOIN movimiento as mov ON cuenta.mov = mov.id
+        LEFT JOIN hab ON hab.mov = cuenta.mov
+        INNER JOIN reservacion ON mov.id_reservacion = reservacion.id
+        LEFT JOIN huesped on mov.id_huesped = huesped.id
         WHERE (cuenta.abono>0 OR cuenta.cargo>0)
         AND cuenta.estado!=0
         ".$filtro_fecha."
@@ -449,15 +437,10 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
-      
-
-      
-
       function mostrarCuentaUsuario($id_usuario,$forma_pago){
         $sentencia="SELECT  cuenta.fecha, reservacion.id as fcasa,hab.nombre as hab_nombre, cuenta.descripcion, cuenta.cargo, cuenta.abono, usuario.usuario,
         cm.nombre as cm_nombre
-        from cuenta 
+        from cuenta
         inner join movimiento on cuenta.mov = movimiento.id
         left join reservacion on movimiento.id_reservacion = reservacion.id
         left join hab on movimiento.id_hab = hab.id
@@ -467,16 +450,13 @@
         and cuenta.forma_pago = $forma_pago
         and cuenta.estado =1
         and (cuenta.abono >0) 
-        and (from_unixtime(cuenta.fecha + 3600,'%Y-%m-%d') = CURRENT_DATE()) 
+        and (from_unixtime(cuenta.fecha + 3600,'%Y-%m-%d') = CURRENT_DATE())
         order by cuenta.forma_pago , cuenta.fecha asc" ;
         $comentario="Mostrar los cargos de todas las habitaciones por usuario";
         //echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
-     
-
       /*RESUMEN DE TRANSACCIONES*/
       function mostrarCargos($id_usuario){
         $sentencia="SELECT *, hab.id as hab_id ,hab.nombre as hab_nombre from cuenta
@@ -487,13 +467,11 @@
         AND cuenta.estado = 1
         AND cuenta.cargo > 0
         order by hab.id , cuenta.fecha asc";
-
         $comentario="Mostrar los cargos de todas las habitaciones por usuario";
         // echo $sentencia;
         //echo $id;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
-
       }
       function mostrarCargosMaestra($id_usuario){
         $sentencia="SELECT cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.cargo, cuenta.descripcion, cuenta.fecha
@@ -523,11 +501,10 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
       function mostrarAbonosMaestra($id_usuario){
         $sentencia="SELECT *, cuenta.descripcion as concepto, cm.id as maestra_id, cm.nombre as maestra_nombre, cuenta.descripcion, cuenta.abono, cuenta.fecha
         from cuenta
-        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov 
+        INNER join cuenta_maestra as cm on cm.mov = cuenta.mov
         -- where id_usuario =$id_usuario
         and cm.estado = 1 and cuenta.estado=1
         and cuenta.abono>0
@@ -538,12 +515,11 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
       function mostrar_abonosPDF($mov){
         $total_abonos= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
-        FROM cuenta 
-        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo
+        FROM cuenta
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
         // echo $sentencia;
@@ -551,15 +527,13 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
       function mostrar_cargosPDF($mov){
         $limite="";
         // if($init!=0 && $base!=0){
         //   $limite="LIMIT $init, $base";
         // }
-
         $total_cargos= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma
         FROM cuenta
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha
         ".$limite."
@@ -577,15 +551,13 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
   $total_cargos= 0;
   $usuario = new Usuario($id_usuario);
   $auditoria_editar = $usuario->auditoria_editar;
-
   // echo $id_usuario;
-
   $sentencia = "SELECT  usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma, cuenta.fecha, cuenta.cargo
-  FROM cuenta 
+  FROM cuenta
   INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
   $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
   $consulta= $this->realizaConsulta($sentencia,$comentario);
-  //se recibe la consulta y se convierte a arreglo 
+  //se recibe la consulta y se convierte a arreglo
   echo '<div class="table-responsive" id="tabla_cargos">
     <table class="table table-bordered table-hover">
       <thead>
@@ -602,11 +574,10 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         {
           $descripcion= substr($fila['concepto'], 0, 17);
           $largo= strlen($fila['concepto']);
-
           if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
             if($c!=0) {
               echo '<tr>
-              <td colspan="5"></td>
+              <td colspan="5" style="height: 4px; padding: 0; background-color: #CBE3F9;"></td>
               </tr>';
             }
         }
@@ -628,12 +599,12 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
 }
 
  // Mostramos los abonos que tenemos por movimiento en una habitacion
- function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
+function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
   $fecha_atras="";
   $total_abonos= 0;
-  $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
-  FROM cuenta 
-  INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+  $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo
+  FROM cuenta
+  INNER JOIN usuario ON cuenta.id_usuario = usuario.id
   INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
   $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
   //echo $sentencia;
@@ -648,7 +619,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         <th>Fecha</th>
         <th>Abono</th>
         <th>Forma Pago</th>
-       
         </tr>
       </thead>
       <tbody>';
@@ -657,11 +627,10 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         {
           $descripcion= substr($fila['concepto'], 0, 17);
           $largo= strlen($fila['concepto']);
-
           if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
             if($c!=0) {
               echo '<tr>
-              <td colspan="5"></td>
+              <td colspan="5" style="height: 4px; padding: 0; background-color: #CBE3F9;"></td>
               </tr>';
             }
         }
@@ -681,8 +650,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
   </div>';
   return $total_abonos;
 }
-
-
       // Mostrar los cargos que tenemos por movimiento en una habitacion
       function mostrar_cargos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0,$id_usuario){
         include_once('clase_usuario.php');
@@ -690,15 +657,13 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $total_cargos= 0;
         $usuario = new Usuario($id_usuario);
         $auditoria_editar = $usuario->auditoria_editar;
-
         // echo $id_usuario;
-
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma    
-        FROM cuenta 
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma
+        FROM cuenta
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        //se recibe la consulta y se convierte a arreglo 
+        //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_cargos">
           <table class="table table-bordered table-hover">
             <thead>
@@ -720,7 +685,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                 if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
                   if($c!=0) {
                     echo '<tr>
-                    <td colspan="5"></td>
+                    <td colspan="5" style="height: 4px; padding: 0; background-color: #CBE3F9;"></td>
                     </tr>';
                   }
               }
@@ -756,7 +721,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
                       <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button>
-                    
                       </td>
                       </tr>';
                       echo '';
@@ -789,7 +753,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     <td></td>
                     </tr>';
                   }
-                  
                 }
                 $fecha_atras = date('Y-m-d',$fila['fecha']);
                 $c++;
@@ -804,9 +767,9 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
       function mostrar_abonos($mov,$id_reservacion,$hab_id,$estado,$id_maestra=0){
         $fecha_atras="";
         $total_abonos= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
-        FROM cuenta 
-        INNER JOIN usuario ON cuenta.id_usuario = usuario.id 
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo
+        FROM cuenta
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
         //echo $sentencia;
@@ -830,7 +793,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
               {
                 $descripcion= substr($fila['concepto'], 0, 17);
                 $largo= strlen($fila['concepto']);
-
                 if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
                   if($c!=0) {
                     echo '<tr>
@@ -885,7 +847,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $total_abonos= 0;
         $total_faltante= 0;
         $total_cargos= $this->mostrar_total_cargos($mov);
-
         $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
         FROM cuenta
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id
@@ -898,7 +859,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
             $total_abonos= $total_abonos + $fila['abono'];
           //}
         }
-
         // Obtenemos la diferencia existente entre los cargos y los abonos
         //$total_faltante= $total_cargos - $total_abonos;
         $total_faltante= $total_abonos - $total_cargos;
@@ -907,7 +867,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
       // Mostrar la cantidad total de cargos que tenemos por movimiento en una habitacion
       function mostrar_total_cargos($mov){
         $total_cargos= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo    
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo
         FROM cuenta
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
@@ -949,12 +909,10 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
           VALUES ('$id_usuario', '$mov', 'Total suplementos', '$fecha', '$forma_pago', '$cargo', '0', '1');";
           $comentario="Guardamos la cuenta en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
-
           $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
           VALUES ('$id_usuario', '$mov', 'Pago al reservar', '$fecha', '$forma_pago', '0', '$abono', '1');";
           $comentario="Guardamos la cuenta en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
-
           // Despues de dividir la cuenta se inactiva
           $sentencia = "UPDATE `cuenta` SET
             `estado` = '0'
@@ -971,7 +929,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }
       }
-
       // Cambiar de habitacion el monto en estado de cuenta
       function cambiar_hab_cuentas_seleccionadas($mov_hab,$id_cuenta){
         $sentencia = "SELECT * FROM cuenta WHERE id = $id_cuenta AND cuenta.estado != 0  ORDER BY fecha";
@@ -987,7 +944,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
           $this->cambiar_cuentas($id,$mov_hab,$descripcion);
         }
       }
-
       // Cambiar de habitacion el monto en estado de cuenta
       function cambiar_hab_cuentas($mov_hab,$mov){
         $sentencia = "SELECT * FROM cuenta WHERE mov = $mov AND cuenta.estado != 0  ORDER BY fecha";
@@ -1022,7 +978,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $total_abonos= $this->saber_total_abonos($usuario_id);
         $total_cargos= number_format($total_cargos, 2);
         $total_abonos= number_format($total_abonos, 2);
-
         echo '
         <div class="containerFooter">
           <div class="cardFooter">
@@ -1035,9 +990,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
           </div>
         <div>';
       }
-
       //Obtener el total de reservaciones preasignadas.
-
       // Obtener el total de cargos del dia actual
       function saber_total_cargos($usuario_id){
         $cargos=0;
@@ -1069,7 +1022,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         }
         return $abonos;
       }
-
       function reservacion_garantia($usuario_id,$id_movimiento,$forma_pago,$total_pago){
         $fecha=time();
         $id_cuenta= 0;
@@ -1078,11 +1030,9 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         VALUES ('$usuario_id', '$id_movimiento', 'Pago al reservar', '$fecha', '$forma_pago', 0, '$total_pago', '1');";
         $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-
         $id_cuenta= $this->ultima_insercion();
         return $id_cuenta;
       }
-
       function reservacion_cuenta($usuario_id,$id_movimiento,$forma_pago,$total_suplementos,$total_pago){
         $fecha=time();
         $id_cuenta= 0;
@@ -1091,7 +1041,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         VALUES ('$usuario_id', '$id_movimiento', 'Total reservacion', '$fecha', '$forma_pago', '$total_suplementos', '$total_pago', '1');";
         $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-
         $id_cuenta= $this->ultima_insercion();
         return $id_cuenta;
       }
@@ -1107,7 +1056,6 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         }
         return $id;
       }
-
       function obtener_id_pago(){
         $sentencia= "SELECT id FROM forma_pago WHERE descripcion LIKE '%efectivo%'   ORDER BY id DESC LIMIT 1";
         $id= 0;

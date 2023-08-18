@@ -621,7 +621,7 @@
           $comentario="Mostrar diferentes busquedas en ver huespedes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
-          echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
+          echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -763,7 +763,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -818,7 +818,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -874,7 +874,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -923,7 +923,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
@@ -973,7 +973,7 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;">
+        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
