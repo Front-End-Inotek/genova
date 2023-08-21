@@ -847,7 +847,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $total_abonos= 0;
         $total_faltante= 0;
         $total_cargos= $this->mostrar_total_cargos($mov);
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo   
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo
         FROM cuenta
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
@@ -859,6 +859,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
             $total_abonos= $total_abonos + $fila['abono'];
           //}
         }
+        //echo $sentencia;
         // Obtenemos la diferencia existente entre los cargos y los abonos
         //$total_faltante= $total_cargos - $total_abonos;
         $total_faltante= $total_abonos - $total_cargos;
@@ -867,10 +868,9 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
       // Mostrar la cantidad total de cargos que tenemos por movimiento en una habitacion
       function mostrar_total_cargos($mov){
         $total_cargos= 0;
-        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo
+        $sentencia = "SELECT *,usuario.usuario,cuenta.descripcion AS concepto,cuenta.id AS ID,cuenta.estado AS edo,cuenta.forma_pago AS forma
         FROM cuenta
-        INNER JOIN usuario ON cuenta.id_usuario = usuario.id
-        INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
+        INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
@@ -879,6 +879,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
             $total_cargos= $total_cargos + $fila['cargo'];
           //}
         }
+       // echo $sentencia;
         return $total_cargos;
       }
       // Cambiar de habitacion el monto en estado de cuenta

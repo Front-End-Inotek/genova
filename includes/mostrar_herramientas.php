@@ -94,8 +94,11 @@ $nombre_habitacion = $hab->nombre;
 $movimiento = NEW Movimiento(0);
 //$cliente = NEW Cliente($_GET['hab_id']);
 $user = NEW Usuario($_GET['id']);
-$estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
-$id_reserva = $movimiento->saber_id_reservacion($hab->mov);
+if($hab->mov > 0){
+	$estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
+	$id_reserva = $movimiento->saber_id_reservacion($hab->mov); ///----------------------*/
+}
+
 
 $entrada="";
 $salida="";

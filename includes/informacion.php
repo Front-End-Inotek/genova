@@ -300,9 +300,14 @@ class Informacion extends ConexionMYSql
 
             echo '
                     <span class="nombre" id="N1">';
-            $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
-            $fecha_entrada= $movimiento->ver_fecha_entrada($fila['moviemiento']);
-            $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
+            
+            if($estado_hab == 1){
+                //echo $estado_hab;
+                $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
+                $fecha_entrada= $movimiento->ver_fecha_entrada($fila['moviemiento']);
+                $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
+            }
+
             if($total_faltante > 0){
                 $saldo = '$'.number_format($total_faltante, 2);
                 $saldo_c="green";

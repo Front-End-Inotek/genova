@@ -37,20 +37,14 @@
         $quien_reserva= $fila['nombre_reserva'];
         $acompanante= $fila['acompanante'];
         $tarifa_noche = $fila['precio_hospe'];
-        
-        
         $habitaciones=$fila['numero_hab'];
-  
         $tipohab=$fila['tipohab'];
         $nombre_alimentos=$fila['nombre_alimentos'];
-  
         $costo_plan = $fila['costo_plan'];
         $costo_plan= '$'.number_format($costo_plan, 2);
         if($tarifa_noche>0){
           $tarifa_noche= '$'.number_format($tarifa_noche, 2);
         }
-        
-       
         // Checar si suplementos esta vacio o no
         if (empty($fila['suplementos'])){
             //echo 'La variable esta vacia';
