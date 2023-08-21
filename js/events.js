@@ -2,15 +2,16 @@ var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario
 var hab = [];
 var hab_ultimo_mov = [];
 var siguiente_vista=0;
-
-x=$(document);
-x.ready(inicio);
-
 //Evaluamos el inicio de sesion
 function inicio(){
 	var x=$("#login");
 	x.click(evaluar);
 }
+
+x=$(document);
+x.ready(inicio);
+
+
 
 function toggleBotones() {
     var botones = document.getElementById("botones");
@@ -3860,7 +3861,16 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
     if ($('#c_cerrado').is(':checked')) {
         estado_credito = "cerrado";
     }
-    limite_credito = encodeURI(document.getElementById("limite_credito").value);
+    var limite_credito = encodeURI(document.getElementById("limite_credito").value);
+    if (isNaN(limite_credito)) {
+        console.log('Es un número');
+        limite_credito=0;
+    }else{
+        if(limite_credito<=0){
+            limite_credito=0;
+        }
+        
+    }
     var datos = {
         "nombre": nombre,
         "apellido": apellido,
@@ -3896,7 +3906,7 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
             if (e.target.readyState == 4 && e.target.status == 200) {
                 //Entrara la contidicion que valida la respuesta del formulario
                 const  response =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-                // console.log(response)
+                 console.log(response)
                 // return
                 if (response == 'NO_DATA') {
                     swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
@@ -3965,7 +3975,7 @@ function guardar_modal(){
 }
 
 // Muestra los huespedes de la bd
-function ver_huespedes(){
+function ver_huespedes(){ 
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();

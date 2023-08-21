@@ -21,7 +21,7 @@
   $id_paginacion=1;
   echo '
   
-  <ul class="pagination">';
+  <ul class="pagination">'; 
   for($i = 1; $i <= $cat_paginas; $i++){
     echo '<li class="page-item"><a class="page-link" href="#" onclick="ver_huespedes_paginacion('.$i.','.$id_paginacion.')">'.$i.'</a></li>';
     $id_paginacion=$id_paginacion+20;
