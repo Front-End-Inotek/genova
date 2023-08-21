@@ -21,6 +21,10 @@
     border: 0px solid #e2e2e2;
   }
 
+:root {
+  color-scheme: dark;
+}
+
 /*personalizacion de color tabla*/
 .table-primary-encabezado {
   border: 1px solid var(--fondoCeldas) !important;
@@ -227,7 +231,6 @@ label {
       -webkit-transform: translate3d(-50%, 0, 0);
       transform: translate3d(-50%, 0, 0);
   }
-
   100% {
       opacity: 1;
       -webkit-transform: none;

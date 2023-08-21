@@ -20,6 +20,5 @@
       mysqli_close ($con);
       return $query;
     }
-    
   }
 ?>

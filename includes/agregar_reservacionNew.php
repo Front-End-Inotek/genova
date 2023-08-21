@@ -64,7 +64,6 @@ input:required + label:after {
 
 </style>';
 
-
   //obtener el ultimo id de reserva.
 $ultimo_id = $reservacion->obtener_ultimo_id() /*+ 1*/;
 echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;;">

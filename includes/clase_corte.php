@@ -25,10 +25,8 @@
       public $restaurante;
       //public $personas;
       public $estado;
-      
       // Constructor
-      function __construct($id)
-      {
+      function __construct($id){
         if($id==0){
           $this->id= 0;
           $this->id_usuario= 0;
@@ -85,21 +83,19 @@
         $sentencia = "INSERT INTO `corte` (`id_usuario`, `fecha`, `etiqueta`, `total`, `efectivo`, `tarjeta`, `forma_pago_tres`, `forma_pago_cuatro`, `forma_pago_cinco`, `forma_pago_seis`, `forma_pago_siete`, `forma_pago_ocho`, `forma_pago_nueve`, `forma_pago_diez`, `descuento`, `cantidad_habitaciones`, `total_habitaciones`, `restaurante`, `estado`)
         VALUES ('$id_usuario', '$fecha', '$nueva_etiqueta', '$total', '$efectivo', '$tarjeta', '$forma_pago_tres', '$forma_pago_cuatro', '$forma_pago_cinco', '$forma_pago_seis', '$forma_pago_siete', '$forma_pago_ocho', '$forma_pago_nueve', '$forma_pago_diez', '0', '$cantidad_habitaciones', '$total_habitaciones', '$restaurante', '0');";
         $comentario="Guardamos el surtir_inventario en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);     
-        
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
         $id= $this->ultima_insercion();
         return $id;
       }
       // Mostramos los reportes de cortes
       function mostrar(){
         date_default_timezone_set('America/Mexico_City');
-        $inicio_dia= date("d-m-Y");   
+        $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
         $inicio_dia= $inicio_dia + 86399;
         $fin_dia= $inicio_dia - 863989;// 7 - 604799
-
-        $sentencia = "SELECT *,corte.etiqueta AS ID 
-        FROM corte 
+        $sentencia = "SELECT *,corte.etiqueta AS ID
+        FROM corte
         INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE (corte.fecha >= $fin_dia && corte.fecha <= $inicio_dia) ORDER BY corte.etiqueta DESC";
         $comentario="Mostrar los reportes de cortes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -119,7 +115,7 @@
             while ($fila = mysqli_fetch_array($consulta))
             {
                 echo '<tr class="text-center">
-                <td>'.$fila['ID'].'</td> 
+                <td>'.$fila['ID'].'</td>
                 <td>'.$fila['usuario'].'</td>
                 <td>'.date("d-m-Y",$fila['fecha']).'</td>
                 <td>$'.number_format($fila['total'], 2).'</td>
@@ -138,12 +134,11 @@
         $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
         $fecha_ini =strtotime($fecha_ini_tiempo);
         $fecha_fin =strtotime($fecha_fin_tiempo);
-
         if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar();
         }else{
-          $sentencia = "SELECT *,corte.etiqueta AS ID 
-          FROM corte 
+          $sentencia = "SELECT *,corte.etiqueta AS ID
+          FROM corte
           INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE corte.fecha >= $fecha_ini && corte.fecha <= $fecha_fin && corte.fecha > 0 ORDER BY corte.etiqueta DESC";
           $comentario="Mostrar por fecha los reportes de cortes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -160,10 +155,9 @@
               </tr>
             </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta))
-              {
+              while ($fila = mysqli_fetch_array($consulta)){
                   echo '<tr class="text-center">
-                  <td>'.$fila['ID'].'</td> 
+                  <td>'.$fila['ID'].'</td>
                   <td>'.$fila['usuario'].'</td>
                   <td>'.date("d-m-Y",$fila['fecha']).'</td>
                   <td>$'.number_format($fila['total'], 2).'</td>
@@ -176,7 +170,7 @@
           </div>';
         }
       }
-      // Obtener el ultimo corte ingresado 
+      // Obtener el ultimo corte ingresado
       function ultima_insercion(){
         $sentencia= "SELECT id FROM corte ORDER BY id DESC LIMIT 1";
         $id= 0;
@@ -188,7 +182,7 @@
         }
         return $id;
       }
-      // Obtener la ultima etiqueta ingresada 
+      // Obtener la ultima etiqueta ingresada
       function ultima_etiqueta(){
         $sentencia= "SELECT etiqueta FROM corte ORDER BY id DESC LIMIT 1";
         $etiqueta= 0;
@@ -200,6 +194,5 @@
         }
         return $etiqueta;
       }
-              
   }
 ?>

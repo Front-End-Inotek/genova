@@ -93,7 +93,6 @@
           $cat_paginas++;
         }
         $ultimoid=0;
-
         $sentencia = "SELECT * FROM cupon WHERE estado = 1 ORDER BY id";
         $comentario="Mostrar los cupones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -158,7 +157,6 @@
         $usuario =  NEW Usuario($id);
         $editar = $usuario->cupon_editar;
         $borrar = $usuario->cupon_borrar;
-
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
@@ -228,7 +226,6 @@
         $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
         $fecha_ini =strtotime($fecha_ini_tiempo);
         $fecha_fin =strtotime($fecha_fin_tiempo);
-
         if(strlen ($fecha_ini) == 0 && strlen ($fecha_fin) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{

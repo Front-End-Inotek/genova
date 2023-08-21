@@ -77,7 +77,7 @@
                 while ($fila = mysqli_fetch_array($consulta)) {
                   if($fila_atras!= $fila['hab_nombre']){
                     if($c!=0){
-                      echo '<tr class="table-primary  text-center">
+                      echo '<tr class="table  text-center">
                       <td></td>
                       <td></td>
                       <td>Total:</td>
@@ -116,7 +116,7 @@
                 while ($fila = mysqli_fetch_array($consulta)) {
                   if($fila_atras!= $fila['maestra_id']){
                     if($c!=0){
-                      echo '<tr class="table-primary  text-center">
+                      echo '<tr class="table  text-center">
                       <td></td>
                       <td></td>
                       <td>Total:</td>
@@ -211,7 +211,7 @@
       while ($fila = mysqli_fetch_array($consulta)) {
         if($fila_atras!= $fila['hab_nombre']){
           if($c!=0){
-            echo '<tr class="table-primary  text-center">
+            echo '<tr class="table  text-center">
             <td></td>
             <td></td>
             <td>Total:</td>
@@ -247,7 +247,7 @@
       while ($fila = mysqli_fetch_array($consulta)) {
         if($fila_atras!= $fila['maestra_id']){
           if($c!=0){
-            echo '<tr class="table-primary  text-center">
+            echo '<tr class="table  text-center">
             <td></td>
             <td></td>
             <td>Total:</td>

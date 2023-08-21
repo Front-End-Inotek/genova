@@ -1,8 +1,6 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
-  
- 
   class Mesa extends ConexionMYSql
   {
     public $id;
@@ -15,7 +13,6 @@
     public $capacidad;
     public $estado;
     public $comentario;
-
     function __construct($id)
     {
       if($id>0){
@@ -92,18 +89,15 @@
       $sentencia = "SELECT mov FROM mesa WHERE id =$mesa_id LIMIT 1";
       $comentario="Obtenemos el movimiento de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         $mov=$fila['mov'];
       }
-  
       $sentencia2 = "SELECT cliente FROM  movimiento WHERE id = $mov LIMIT 1";
       $comentario2="Obtener el cliente de movimiento de check-in";
       $consulta2= $this->realizaConsulta($sentencia2,$comentario2);
       //se recibe la consulta y se convierte a arreglo
-      while ($fila2 = mysqli_fetch_array($consulta2))
-      {
-         $cliente= $fila2['cliente'];
+      while ($fila2 = mysqli_fetch_array($consulta2)){
+        $cliente= $fila2['cliente'];
       }
       return $cliente;
     }
@@ -111,18 +105,15 @@
       $sentencia = "SELECT mov FROM mesa WHERE id =$mesa_id LIMIT 1 ";
       $comentario="Obtenemos el movimiento de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         $mov=$fila['mov'];
       }
-  
       $sentencia2 = "SELECT detalle_inicio FROM  movimiento WHERE id = $mov LIMIT 1";
       $comentario2="Obtener el tiempo de inicio de hospedaje";
       $consulta2= $this->realizaConsulta($sentencia2,$comentario2);
       //se recibe la consulta y se convierte a arreglo
-      while ($fila2 = mysqli_fetch_array($consulta2))
-      {
-         $detalle_inicio= $fila2['detalle_inicio'];
+      while ($fila2 = mysqli_fetch_array($consulta2)){
+        $detalle_inicio= $fila2['detalle_inicio'];
       }
       return $detalle_inicio;
     }
@@ -130,17 +121,14 @@
       $sentencia = "SELECT mov FROM mesa WHERE id =$mesa_id LIMIT 1 ";
       $comentario="Obtenemos el movimiento de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         $mov=$fila['mov'];
       }
-   
       $sentencia2 = "SELECT fin_hospedaje FROM  movimiento WHERE id = $mov LIMIT 1";
       $comentario2="Obtener el tiempo de fin de hospedaje";
       $consulta2= $this->realizaConsulta($sentencia2,$comentario2);
       //se recibe la consulta y se convierte a arreglo
-      while ($fila2 = mysqli_fetch_array($consulta2))
-      {
+      while ($fila2 = mysqli_fetch_array($consulta2)){
         $fin_hospedaje= $fila2['fin_hospedaje'];
       }
       return $fin_hospedaje;
@@ -152,15 +140,13 @@
       VALUES ('$origen', '$destino', '$usuario', '$mov', '$timpo', '0');";
       $comentario="Obtenemos los tipos de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      
     }
     function cambiohosp($id){
       $sentencia = "SELECT * FROM mesa WHERE tipo = " . $this->tipo_num  .' AND estado = 0';
       //echo $sentencia ;
       $comentario="Obtenemos los tipos de mesa";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
               echo '<div class="asignar_reca_activa" onclick="aplicarcambiohospe('.$id.','.$fila['id'].','.$this->tipo_num.')">';
               echo '</br>';
@@ -175,6 +161,5 @@
           echo '</div>';
       }
     }
-    
   }
 ?>

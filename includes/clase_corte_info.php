@@ -2,12 +2,11 @@
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
 
-  class Corte_info extends ConexionMYSql{
+	class Corte_info extends ConexionMYSql{
 	public $hab_tipo_hospedaje=array();
 	public $hab_precio_hospedaje=array();
 	public $hab_cantidad_hospedaje=array();
 	public $hab_total_hospedaje=array();
-
 	public $total_personas;
 	public $cantidad_hab;
 	public $total_hab;
@@ -18,17 +17,14 @@
 	public $total_productos_hab;
 	public $total_productos_rest;
 	public $total_global;
-
 	public $total_pago=array();
 	public $total_numero_descuento;
 	public $total_dinero_descuento;
-
 	public $producto_nombre=array();
 	public $producto_venta=array();
 	public $producto_precio=array();
 	public $producto_tipo_hab=array();
 	public $producto_tipo_rest=array();
-
 	// Constructor
 	function __construct($id_usuario)
 	{
@@ -38,8 +34,8 @@
 	  $total_hab= 0;
 	  $total_cuenta_maestra=0;
 	  $sentencia = "SELECT *, sum(concepto.precio), tipo_hab.nombre as titulo, tipo_hab.id as ID
-	  from 
-	  hab 
+	  from
+	  hab
 	  inner join tipo_hab on hab.tipo = tipo_hab.id
 	  inner join concepto on hab.id = concepto.categoria
 	  where hab.estado = 1
@@ -48,8 +44,7 @@
 	  ;";
 	  $comentario="Obtener las tarifas de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
-	  while ($fila = mysqli_fetch_array($consulta))
-	  {
+	  while ($fila = mysqli_fetch_array($consulta)){
 		  $this->hab_tipo_hospedaje[$contador]= $fila['titulo'];
 		//   $this->hab_precio_hospedaje[$contador]= $fila['precio_hospedaje'];
 		  $this->hab_cantidad_hospedaje[$contador]= $this->cantidad_hospedaje($id_usuario,$fila['ID'],$fila['id']);
@@ -87,13 +82,13 @@
 			  $total_restaurante= $total_restaurante + ($venta * $precio);
 			  $total_productos_hab= $total_productos_hab + $rest;
 	          $total_productos_rest= $total_productos_rest + ($venta - $rest);
-			  $contador++;	  
+			  $contador++;
 		  }
 	  }
-	  $this->total_productos= $total_productos; 
+	  $this->total_productos= $total_productos;
 	  $this->total_restaurante= $total_restaurante;
-	  $this->total_productos_hab= $total_productos_hab; 
-	  $this->total_productos_rest= $total_productos_rest; 
+	  $this->total_productos_hab= $total_productos_hab;
+	  $this->total_productos_rest= $total_productos_rest;
 
 	  // Obtenemos el total global
 	  $this->total_global= $total_hab + $total_restaurante_entrada;
@@ -185,9 +180,9 @@
 				  }
 				  break;
 			  default:
-				  // No sucede nada	
-				  break;	
-		  }				
+				  // No sucede nada
+				  break;
+		  }
 					
 		  if($fila['descuento'] > 0){
 			  $numero_descuento++;
@@ -206,12 +201,12 @@
 	// Obtenemos la cantidad del hospedaje
 	function cantidad_hospedaje($id_usuario,$tipo,$tarifa_id){
 	  $total=0;
-	  $sentencia = "SELECT *,SUM(cantidad) AS total 
-	  FROM concepto 
-	  INNER JOIN hab ON concepto.categoria = hab.id 
-	  WHERE concepto.id_usuario = $id_usuario 
-	  AND hab.tipo = $tipo 
-	  AND concepto.activo = 1 
+	  $sentencia = "SELECT *,SUM(cantidad) AS total
+	  FROM concepto
+	  INNER JOIN hab ON concepto.categoria = hab.id
+	  WHERE concepto.id_usuario = $id_usuario
+	  AND hab.tipo = $tipo
+	  AND concepto.activo = 1
 	  AND concepto.tipo_cargo = 3
 	  ";
 	  $comentario="Obtener el total del hospedaje";
@@ -232,21 +227,20 @@
 	// Obtenemos el total del hospedaje
 	function total_hospe($id_usuario,$tipo){
 	  $total=0;
-	  $sentencia = "SELECT SUM(total) AS total 
-	  FROM concepto 
+	  $sentencia = "SELECT SUM(total) AS total
+	  FROM concepto
 	  INNER JOIN hab ON concepto.categoria = hab.id WHERE concepto.id_usuario = $id_usuario AND hab.tipo = $tipo AND concepto.activo = 1 AND concepto.tipo_cargo = 3
 	  ";
 	//   echo $sentencia;
 	  $comentario="Obtener el total del  de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
-	  while ($fila = mysqli_fetch_array($consulta))
-	  {
-		  $total=$fila['total'];
+	  while ($fila = mysqli_fetch_array($consulta)){
+		$total=$fila['total'];
 	  }
 	  if($total>0){
 
 	  }else{
-		  $total=0;
+		$total=0;
 	  }
 	  return $total;
 	}
@@ -286,21 +280,19 @@
     }
 	// Obtener el total del producto vendido en una habitacion
 	function venta_hab($id_usuario,$nombre){
-      $total=0;
-	  $sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE concepto.id_usuario = $id_usuario AND concepto.nombre = '$nombre' AND ticket.mov > 0 AND concepto.tipo_cargo = 1 AND concepto.activo = 1;";
-	  //echo $sentencia;
-	  $comentario="Obtener el total del  producto vendido en una habitacion";
-	  $consulta= $this->realizaConsulta($sentencia,$comentario);
-	  while ($fila = mysqli_fetch_array($consulta))
-	  {
-		  $total=$fila['cantidad'];
-	  }
-	  if($total>0){
-
-	  }else{
-		  $total=0;
-	  }
-	  return $total;
+		$total=0;
+		$sentencia = "SELECT SUM(cantidad) AS cantidad FROM concepto LEFT JOIN ticket ON ticket.id = concepto.id_ticket WHERE concepto.id_usuario = $id_usuario AND concepto.nombre = '$nombre' AND ticket.mov > 0 AND concepto.tipo_cargo = 1 AND concepto.activo = 1;";
+	  	//echo $sentencia;
+		$comentario="Obtener el total del  producto vendido en una habitacion";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta)){
+		$total=$fila['cantidad'];
+	}
+	if($total>0){
+	}else{
+		$total=0;
+	}
+	return $total;
     }
 	// Obtener el total del producto vendido en el restaurante
 	function venta_rest($id_usuario,$nombre){
@@ -314,7 +306,6 @@
 			$total=$fila['cantidad'];
 		}
 		if($total>0){
-
 		}else{
 			$total=0;
 		}
@@ -322,22 +313,20 @@
 	}
 	// Obtener la cantidad de habitaciones del hospedaje
 	function cantidad_habitaciones($id_usuario){
-	  $cantidad=0;
-	  $sentencia = "SELECT count(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 1 AND activo = 1";
-	  $comentario="Obtener la cantidad de habitaciones del hospedaje";
-	  $consulta= $this->realizaConsulta($sentencia,$comentario);
-	  while ($fila = mysqli_fetch_array($consulta))
-	  {
-		  $cantidad=$fila['total'];
-	  }
-	  if($cantidad>0){
-
-	  }else{ 
-		  $cantidad=0;
-	  }
-	  return $cantidad;
+		$cantidad=0;
+		$sentencia = "SELECT count(total) AS total FROM concepto WHERE id_usuario = $id_usuario AND tipo_cargo = 1 AND activo = 1";
+		$comentario="Obtener la cantidad de habitaciones del hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+	while ($fila = mysqli_fetch_array($consulta)){
+		$cantidad=$fila['total'];
 	}
+	if($cantidad>0){
 
+	}else{
+		$cantidad=0;
+	}
+	return $cantidad;
+	}
 	// Obtener el total del hospedaje
 	function total_cuenta_maestra($id_usuario){
 		$total=0;
@@ -349,8 +338,8 @@
 			$total=$fila['total'];
 		}
 		if($total>0){
-  
-		}else{ 
+
+		}else{
 			$total=0;
 		}
 		return $total;
@@ -367,8 +356,8 @@
 			$total=$fila['total'];
 		}
 		if($total>0){
-  
-		}else{ 
+
+		}else{
 			$total=0;
 		}
 		return $total;
@@ -376,8 +365,8 @@
 	// Obtener el total del restaurante entrado en el turno
 	function total_restaurante_entrada($id_usuario){
 		$total=0;
-		$sentencia = "SELECT *,SUM(concepto.total) AS total 
-		FROM concepto 
+		$sentencia = "SELECT *,SUM(concepto.total) AS total
+		FROM concepto
 		INNER JOIN ticket ON concepto.id_ticket = ticket.id WHERE concepto.id_usuario = $id_usuario AND concepto.tipo_cargo != 3 AND concepto.activo = 1 AND ticket.pago > 0";
 		$comentario="Obtener el total del restaurante entrado en el turno";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -386,15 +375,15 @@
 			$total=$fila['total'];
 		}
 		if($total>0){
-  
-		}else{ 
+
+		}else{
 			$total=0;
 		}
 		return $total;
 	}
 
 
-  }// Fin	
+}// Fin
 ///////////
 class Cortes_limpieza_manual extends ConexionMYSql{
 	public $corte_inicial_id;
@@ -406,7 +395,6 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 	public $ticket_inicial_etiqueta;
 	public $ticket_final_etiqueta;
 	public $contador;
-
 	public $ticket_id=array();
 	public $id_concepto=array();
 	public $ticket_etiqueta=array();
@@ -415,16 +403,14 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 	public $ticket_total=array();
 	public $ticket_pago=array();
 	public $ticket_tarjeta=array();
-	 public $ticket_efectivo=array();
+	public $ticket_efectivo=array();
 	public $ticket_cantidad=array();
 	public $ticket_concepto=array();
 	public $ticket_tipocargo=array();
-
 	public $hab_horas_total=array();
 	public $hab_horas_cantidad=array();
 	public $hab_personas_total=array();
 	public $hab_personas_cantidad=array();
-
 	public $total_antes;
 	public $total_hab=array();
 	public $total_hab_descip=array();
@@ -432,7 +418,6 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 	public $consumo_antes;
 	public $hospedaje_despues;
 	public $consumo_despues;
-
 	public $hab_tipo_hospedaje=array();
 	public $hab_cantidad_hospedaje=array();
 	public $hab_precio_hospedaje=array();
@@ -446,22 +431,20 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 	public $global_consumo;
 	public $pocentaje_tickets_hospedaje;
 	public $pocentaje_tickets_consumo;
-
-	function __construct($corte_ini,$corte_fin,$hopedaje,$consumo)
-	{
-	   $this->global_hospedaje=$hopedaje;
-	   $this->global_consumo=$consumo;
-	   $this->corte_inicial_id=$corte_ini;
-	   $this->corte_final_id=$corte_fin;
-	   $this->ticket_inicial($corte_ini);
-	   $this->ticket_final($corte_fin);
+	function __construct($corte_ini,$corte_fin,$hopedaje,$consumo){
+		$this->global_hospedaje=$hopedaje;
+		$this->global_consumo=$consumo;
+		$this->corte_inicial_id=$corte_ini;
+		$this->corte_final_id=$corte_fin;
+		$this->ticket_inicial($corte_ini);
+		$this->ticket_final($corte_fin);
 	   //$this->cambiar_estado_todos_0();
-	   $this->cargar_info();
-	   $this->porcentage_tickets($this->ticket_inicial_id,$this->ticket_final_id);
-	   $this->ticket_inicial_etiqueta=$this->obtener_etiqueta($this->ticket_inicial_id);
-	   $this->ticket_final_etiqueta=$this->obtener_etiqueta($this->ticket_final_id);
-	   $this->corte_inicial_fecha=$this->obtener_fecha_corte($corte_ini);
-	   $this->corte_final_fecha=$this->obtener_fecha_corte($corte_fin);
+		$this->cargar_info();
+		$this->porcentage_tickets($this->ticket_inicial_id,$this->ticket_final_id);
+		$this->ticket_inicial_etiqueta=$this->obtener_etiqueta($this->ticket_inicial_id);
+		$this->ticket_final_etiqueta=$this->obtener_etiqueta($this->ticket_final_id);
+		$this->corte_inicial_fecha=$this->obtener_fecha_corte($corte_ini);
+		$this->corte_final_fecha=$this->obtener_fecha_corte($corte_fin);
 	}
 	function totales(){
 		$this->total_antes=0;
@@ -486,53 +469,49 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 		$this->tarifa_limpieza($this->ticket_inicial_id,$this->ticket_final_id);
 	}
 	function porcentage_tickets($id_ini, $id_fin){
-	   $cantidad_tickets_hospedaje=$this->contar_tickets($id_ini, $id_fin,1);
-	   $cantidad_tickets_consumo=$this->contar_tickets($id_ini, $id_fin,2);
-	   $cantidad_tickets_horas=$this->contar_tickets($id_ini, $id_fin,3);
-	   $cantidad_tickets_personas=$this->contar_tickets($id_ini, $id_fin,4);
-	   $this->pocentaje_tickets_hospedaje=round((($cantidad_tickets_hospedaje+$cantidad_tickets_horas+$cantidad_tickets_personas)/100)*$this->global_hospedaje,0);
-	   $this->pocentaje_tickets_consumo=round(($cantidad_tickets_consumo/100)*$this->global_consumo,0);
+		$cantidad_tickets_hospedaje=$this->contar_tickets($id_ini, $id_fin,1);
+		$cantidad_tickets_consumo=$this->contar_tickets($id_ini, $id_fin,2);
+		$cantidad_tickets_horas=$this->contar_tickets($id_ini, $id_fin,3);
+		$cantidad_tickets_personas=$this->contar_tickets($id_ini, $id_fin,4);
+		$this->pocentaje_tickets_hospedaje=round((($cantidad_tickets_hospedaje+$cantidad_tickets_horas+$cantidad_tickets_personas)/100)*$this->global_hospedaje,0);
+		$this->pocentaje_tickets_consumo=round(($cantidad_tickets_consumo/100)*$this->global_consumo,0);
 	   //echo $pocentaje_tickets_hospedaje ."- ".$this->global_hospedaje; 
-
-   }
-   function saber_etiqueta_fin(){
-	   $inicial_id= $this->ticket_inicial_id;
-	   $final_id=$this->ticket_final_id;
-	   $etiqueta = 0;
-	   $sentencia = "SELECT etiqueta FROM ticket WHERE estado = 1 AND etiqueta > 0 AND id>$inicial_id AND id <=$final_id  ORDER BY id DESC LIMIT 1 ;";
+	}
+	function saber_etiqueta_fin(){
+		$inicial_id= $this->ticket_inicial_id;
+		$final_id=$this->ticket_final_id;
+		$etiqueta = 0;
+		$sentencia = "SELECT etiqueta FROM ticket WHERE estado = 1 AND etiqueta > 0 AND id>$inicial_id AND id <=$final_id  ORDER BY id DESC LIMIT 1 ;";
+		//echo $sentencia.'</br>';
+		$comentario="Obtener las tarifas de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta)){
+			$etiqueta= $fila['etiqueta'];
+		}
+		return $etiqueta;
+	}
+	function contar_tickets($id_ini, $id_fin,$tipocargo){
+		$cantidad = 0;
+		$sentencia = "SELECT sum(total) AS cantidad  FROM concepto WHERE ticket >= $id_ini AND ticket <= $id_fin	AND tipocargo = $tipocargo;";
 	   //echo $sentencia.'</br>';
-	   $comentario="Obtener las tarifas de hospedaje";
-	   $consulta= $this->realizaConsulta($sentencia,$comentario);
-	   while ($fila = mysqli_fetch_array($consulta))
-	   {
-		   $etiqueta= $fila['etiqueta'];
-	   }
-	   return $etiqueta;
-   }
-   function contar_tickets($id_ini, $id_fin,$tipocargo){
-	   $cantidad = 0;
-	   $sentencia = "SELECT sum(total) AS cantidad  FROM concepto WHERE ticket >= $id_ini AND ticket <= $id_fin	AND tipocargo = $tipocargo;";
+		$comentario="Obtener las tarifas de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta)){
+			$cantidad= $fila['cantidad'];
+		}
+		return $cantidad;
+	}
+	function saber_si_incluir($nombre){
+		$incluird = "";
+		$sentencia = "SELECT incluir FROM producto WHERE nombre = '$nombre' LIMIT 1 ;";
 	   //echo $sentencia.'</br>';
-	   $comentario="Obtener las tarifas de hospedaje";
-	   $consulta= $this->realizaConsulta($sentencia,$comentario);
-	   while ($fila = mysqli_fetch_array($consulta))
-	   {
-		   $cantidad= $fila['cantidad'];
-	   }
-	   return $cantidad;
-   }
-   function saber_si_incluir($nombre){
-	   $incluird = "";
-	   $sentencia = "SELECT incluir FROM producto WHERE nombre = '$nombre' LIMIT 1 ;";
-	   //echo $sentencia.'</br>';
-	   $comentario="Obtener las tarifas de hospedaje";
-	   $consulta= $this->realizaConsulta($sentencia,$comentario);
-	   while ($fila = mysqli_fetch_array($consulta))
-	   {
-		   $incluir= $fila['incluir'];
-	   }
-	   return $incluir;
-   }
+		$comentario="Obtener las tarifas de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta)){
+			$incluir= $fila['incluir'];
+		}
+		return $incluir;
+	}
 	function desgloce(){
 		$contador=0;
 		$sentencia = "SELECT * FROM  tarifa;";
@@ -548,36 +527,30 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 			$this->hab_horas_total[$contador]=$this->total_medios_turnos($this->ticket_inicial_id,$this->ticket_final_id,$fila['id']);
 			$this->hab_personas_total[$contador]=$this->personas_extras_cantidad($this->ticket_inicial_id,$this->ticket_final_id,$fila['id']);
 			$this->hab_personas_cantidad[$contador]=$this->personas_extras_total($this->ticket_inicial_id,$this->ticket_final_id,$fila['id']);
-
 			$contador++;
 			//echo $this->hab_tipo[$contador];
 		}
-
-
 		$sentencia = "SELECT * FROM  tarifa_hospedaje;";
 		$comentario="Obtener las tarifas de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
-		   $this->hab_tipo_hospedaje[$contador]=$fila['nombre'];
-		   $this->hab_precio_hospedaje[$contador]=$fila['precio_hospedaje'];
-		   $this->hab_cantidad_hospedaje[$contador]=$this->cantidad_hospedaje_tarifa($this->ticket_inicial_id, $this->ticket_final_id,$fila['id']);
-		   $this->hab_total_hospedaje[$contador]=$this->total_hospe_tarifa($this->ticket_inicial_id, $this->ticket_final_id,$fila['id']);
-		   $this->hab_horas_cantidad[$contador]=0;
-		   $this->hab_horas_total[$contador]=0;
-		   $this->hab_personas_total[$contador]=0;
-		   $this->hab_personas_cantidad[$contador]=0;
-		   $contador++;
+		while ($fila = mysqli_fetch_array($consulta)){
+			$this->hab_tipo_hospedaje[$contador]=$fila['nombre'];
+			$this->hab_precio_hospedaje[$contador]=$fila['precio_hospedaje'];
+			$this->hab_cantidad_hospedaje[$contador]=$this->cantidad_hospedaje_tarifa($this->ticket_inicial_id, $this->ticket_final_id,$fila['id']);
+			$this->hab_total_hospedaje[$contador]=$this->total_hospe_tarifa($this->ticket_inicial_id, $this->ticket_final_id,$fila['id']);
+			$this->hab_horas_cantidad[$contador]=0;
+			$this->hab_horas_total[$contador]=0;
+			$this->hab_personas_total[$contador]=0;
+			$this->hab_personas_cantidad[$contador]=0;
+			$contador++;
 		}
-
 	}
 	function corte_final($id){
 		$sentencia = "SELECT fecha FROM corte WHERE 	etiqueta = $id LIMIT 1 ";
 		$fecha=0;
 		$comentario="obtener los conceptos de los tickets";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
+		while ($fila = mysqli_fetch_array($consulta)){
 			if($fila['fecha']>0){
 					$fecha=date("Y-m-d H:i:s",$fila['fecha']);
 			}
@@ -588,7 +561,6 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 		return $fecha;
 	}
 	function cantidad_hospedaje($id_ini, $id_fin,$tarifa){
-
 		$total=0;
 		$sentencia = "SELECT SUM(concepto.cantidad) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 1 AND concepto.categoria = $tarifa AND concepto.activo = 1;";
 		//echo $sentencia;
@@ -599,30 +571,27 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 			$total=$fila['total'];
 		}
 		if($total>0){
-
 		}else{
 			$total=0;
 		}
 		return $total;
 	}
 	function cantidad_hospedaje_tarifa($id_ini, $id_fin,$tarifa){
+		$total=0;
+		$sentencia = "SELECT SUM(concepto.cantidad) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 3 AND concepto.categoria = $tarifa AND concepto.activo = 1;";
+		//echo $sentencia;
+		$comentario="Obtener el total del  de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta)){
+			$total=$fila['total'];
+		}
+		if($total>0){
 
-	   $total=0;
-	   $sentencia = "SELECT SUM(concepto.cantidad) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 3 AND concepto.categoria = $tarifa AND concepto.activo = 1;";
-	   //echo $sentencia;
-	   $comentario="Obtener el total del  de hospedaje";
-	   $consulta= $this->realizaConsulta($sentencia,$comentario);
-	   while ($fila = mysqli_fetch_array($consulta))
-	   {
-		   $total=$fila['total'];
-	   }
-	   if($total>0){
-
-	   }else{
-		   $total=0;
-	   }
-	   return $total;
-   }
+		}else{
+			$total=0;
+		}
+		return $total;
+	}
 	function saber_si_cambiar($id){
 		$activo=array();
 		$activo[0]=0;
@@ -634,10 +603,7 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 		while ($fila = mysqli_fetch_array($consulta))
 		{
 			$activo[0]=$activo[0]+$fila['activo'];
-
 			$activo[1]=$activo[1]+$fila['total'];
-
-
 		}
 		return $activo;
 	}
@@ -645,14 +611,12 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 		$total=0;
 		$inicial=$this->etiqueta_inicial;
 		$t_inicial=$this->ticket_inicial_id;
-		 $t_final=$this->ticket_final_id;
+		$t_final=$this->ticket_final_id;
 		$sentencia = "SELECT * FROM ticket  WHERE id >= $t_inicial AND id <= $t_final ";
 		//echo $sentencia;
 		$comentario="Obtener los tickets";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
-
+		while ($fila = mysqli_fetch_array($consulta)){
 			$activo= $this->saber_si_cambiar($fila['id']);
 			if($activo[0]>0){
 				if($fila['pago']>0){
@@ -671,18 +635,16 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 				$this->aplicar_cambio_etiqueta_manual($fila['id'],$inicial,$impresora,$activo[1],$pago,$tarjeta,$descuento,1);
 				$inicial++;
 			}else{
-
-				   $this->aplicar_cambio_etiqueta($fila['id'],0,1,2);
+				$this->aplicar_cambio_etiqueta($fila['id'],0,1,2);
 			}
 		}
 		$sentencia = "SELECT * FROM ticket  WHERE id >  $t_final ";
 		//echo $sentencia;
 		$comentario="Obtener los tickets";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
-		   $this->aplicar_cambio_etiqueta($fila['id'],$inicial,1,$fila['estado']);
-		   $inicial++;
+		while ($fila = mysqli_fetch_array($consulta)){
+			$this->aplicar_cambio_etiqueta($fila['id'],$inicial,1,$fila['estado']);
+			$inicial++;
 		}
 		$this->apicar_cambio_corte();
 		$this->cambiar_etiqueta_general($inicial);
@@ -725,8 +687,7 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 		$sentencia = "SELECT SUM(cantidad) AS total  FROM concepto  WHERE ticket >= $id_ini AND ticket <=$id_fin AND tipocargo = 4 AND activo =1 AND categoria = $tarifa;";
 		$comentario="Obtener el total del  de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
+		while ($fila = mysqli_fetch_array($consulta)){
 			$total=$fila['total'];
 		}
 		if($total>0){
@@ -741,8 +702,7 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 		$sentencia = "SELECT SUM(total) AS total  FROM concepto  WHERE ticket >= $id_ini AND ticket <=$id_fin AND tipocargo = 4 AND activo =1 AND categoria = $tarifa;";
 		$comentario="Obtener el total del  de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
+		while ($fila = mysqli_fetch_array($consulta)){
 			$total=$fila['total'];
 		}
 		if($total>0){
@@ -754,50 +714,47 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 	}
 	function apicar_cambio_corte(){
 		$sentencia = "UPDATE `corte` SET
-	   `estado` = '1'
-	   WHERE `id` >= '$this->corte_inicial_id' AND `id` <= '$this->corte_final_id' ;";
-	   $comentario="Recojer el id del limpieza anterior";
+		`estado` = '1'
+		WHERE `id` >= '$this->corte_inicial_id' AND `id` <= '$this->corte_final_id' ;";
+		$comentario="Recojer el id del limpieza anterior";
 
-	   $consulta= $this->realizaConsulta($sentencia,$comentario);
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
 
 	}
 	function guardar_limpieza_manual($corte_ini,$corte_fin,$realizo){
 		$tiempo=time();
-	  $sentencia = "INSERT INTO `limpieza` (`fecha`, `corte_ini`, `corte_fin`, `realizo`)
+		$sentencia = "INSERT INTO `limpieza` (`fecha`, `corte_ini`, `corte_fin`, `realizo`)
 		VALUES ('$tiempo', '$corte_ini', '$corte_fin', '$realizo');";
-	  $comentario="Guardar Limpieza";
-	  $consulta= $this->realizaConsulta($sentencia,$comentario);
-	  $id_limpieza=$this->id_mysql();
-	  return $id_limpieza;
+		$comentario="Guardar Limpieza";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		$id_limpieza=$this->id_mysql();
+		return $id_limpieza;
 	}
 	function id_mysql(){
 		$id=0;
 		$sentencia = "SELECT id FROM limpieza ORDER BY id DESC LIMIT 1";
 		$comentario="Recojer el id del limpieza anterior";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
-				   $id= $fila['id'];
+		while ($fila = mysqli_fetch_array($consulta)){
+			$id= $fila['id'];
 		}
 		return $id;
 	}
 	function cambiar_etiqueta_general($etiqueta){
 		$sentencia = "UPDATE `labels` SET
-		   `ticket` = '$etiqueta'
-		   WHERE `id` = '1';";
+		`ticket` = '$etiqueta'
+		WHERE `id` = '1';";
 		$comentario="Recojer el id del limpieza anterior";
 		//echo $sentencia.'</br>';
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 	}
 	function total_hospe($id_ini, $id_fin,$tarifa){
-
 		$total=0;
 		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 1 AND concepto.categoria = $tarifa AND concepto.activo = 1;";
 		//echo $sentencia;
 		$comentario="Obtener el total del  de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
-		while ($fila = mysqli_fetch_array($consulta))
-		{
+		while ($fila = mysqli_fetch_array($consulta)){
 			$total=$fila['total'];
 		}
 		if($total>0){
@@ -808,25 +765,22 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 		return $total;
 	}
 	function total_hospe_tarifa($id_ini, $id_fin,$tarifa){
-
-	   $total=0;
-	   $sentencia = "SELECT SUM(concepto.total) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 3 AND concepto.categoria = $tarifa AND concepto.activo = 1;";
+		$total=0;
+		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 3 AND concepto.categoria = $tarifa AND concepto.activo = 1;";
 	   //echo $sentencia;
-	   $comentario="Obtener el total del  de hospedaje";
-	   $consulta= $this->realizaConsulta($sentencia,$comentario);
-	   while ($fila = mysqli_fetch_array($consulta))
-	   {
-		   $total=$fila['total'];
-	   }
-	   if($total>0){
+		$comentario="Obtener el total del  de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta)){
+			$total=$fila['total'];
+		}
+		if($total>0){
 
-	   }else{
-		   $total=0;
-	   }
-	   return $total;
-   }
+		}else{
+			$total=0;
+		}
+		return $total;
+	}
 	function total_hospe_efectivo($id_ini, $id_fin){
-
 		$total=0;
 		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo != 2  AND concepto.activo = 1 AND  ticket.facturado = 0;";
 		$comentario="Obtener el total del  de hospedaje";

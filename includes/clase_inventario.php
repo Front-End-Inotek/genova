@@ -17,7 +17,6 @@
       public $clave;
       public $historial;
       public $estado;
-      
       // Constructor
       function __construct($id)
       {
@@ -34,7 +33,7 @@
           $this->bodega_stock= 0;
           $this->clave= 0;
           $this->historial= 0;
-          $this->estado= 0; 
+          $this->estado= 0;
         }else{
           $sentencia = "SELECT * FROM inventario WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores del inventario";
@@ -62,7 +61,7 @@
         $sentencia = "INSERT INTO `inventario` (`nombre`, `descripcion`, `categoria`, `precio`, `precio_compra`, `stock`, `inventario`, `bodega_inventario`, `bodega_stock`, `clave`, `historial`, `estado`)
         VALUES ('$nombre', '$descripcion', '$categoria', '$precio', '$precio_compra', '$stock', '$inventario', '$bodega_inventario', '$bodega_stock', '$clave', '0', '1');";
         $comentario="Guardamos el inventario en la base de datos";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);    
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtengo el total de inventario
       function total_elementos(){
@@ -83,7 +82,6 @@
         $usuario =  NEW Usuario($id);
         $editar = $usuario->inventario_editar;
         $borrar = $usuario->inventario_borrar;
-    
         $cont = 1;
         //echo $posicion;
         $final = $posicion+20;
@@ -94,9 +92,8 @@
           $cat_paginas++;
         }
         $ultimoid=0;
-
         $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
-        FROM inventario 
+        FROM inventario
         INNER JOIN categoria ON inventario.categoria = categoria.id WHERE inventario.estado = 1 ORDER BY inventario.nombre";
         $comentario="Mostrar el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -162,7 +159,6 @@
         $usuario =  NEW Usuario($id);
         $editar = $usuario->inventario_editar;
         $borrar = $usuario->inventario_borrar;
-
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
@@ -291,8 +287,7 @@
             </tr>
           </thead>
         <tbody>';
-            while ($fila = mysqli_fetch_array($consulta))
-            {
+            while ($fila = mysqli_fetch_array($consulta)){
               $faltante= $fila['stock'] - $fila['inventario'];
               if($faltante <= 0){
                 $faltante= 0;
@@ -318,7 +313,6 @@
         include_once("clase_surtir.php");
         $surtir = NEW Surtir(0);
         $cantidad= 0;
-
         if($categoria==0){
           $sentencia = "SELECT *,inventario.id AS ID,inventario.nombre AS nom,categoria.nombre AS categoria
           FROM inventario
@@ -367,8 +361,7 @@
                 </tr>
               </thead>
             <tbody>';
-                while ($fila = mysqli_fetch_array($consulta))
-                {
+                while ($fila = mysqli_fetch_array($consulta)){
                   $faltante= $fila['stock'] - $fila['inventario'];
                   if($faltante <= 0){
                     $faltante= 0;
@@ -400,8 +393,7 @@
         $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar las categorias del inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           echo '<option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
         }
       }
@@ -410,8 +402,7 @@
         $sentencia = "SELECT * FROM categoria WHERE estado = 1 ORDER BY nombre";
         $comentario="Obtengo el valor de las categoria seleccionada";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           if($fila['id']==$categoria){
             echo '<option value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
           }else{
@@ -452,8 +443,7 @@
         $nombre= '';
         $comentario="Obtengo el nombre en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $nombre= $fila['nombre'];
         }
         return $nombre;
@@ -465,8 +455,7 @@
         $precio= 0;
         $comentario="Obtengo el precio en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $precio= $fila['precio'];
         }
         return $precio;
@@ -478,8 +467,7 @@
         $categoria= 0;
         $comentario="Obtengo la categoria en el inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $categoria= $fila['categoria'];
         }
         return $categoria;
@@ -491,8 +479,7 @@
         $inventario= 0;
         $comentario="Mostrar la cantidad de inventario de un producto";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $inventario= $fila['inventario'];
         }
         return $inventario;
@@ -504,8 +491,7 @@
         $historial= 0;
         $comentario="Mostrar el historial de inventario de un producto";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $historial= $fila['historial'];
         }
         return $historial;
@@ -535,8 +521,7 @@
         $cunt= 0;
         echo '<div class="row">';
           $cont=0;
-          while ($fila = mysqli_fetch_array($consulta))
-          {
+          while ($fila = mysqli_fetch_array($consulta)){
             if($cunt%3==0){
               //echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
               echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
@@ -574,8 +559,7 @@
         $cunt=0;
         echo '<div class="row d-flex flex-wrap">';
           $cont=0;
-          while ($fila = mysqli_fetch_array($consulta))
-          {
+          while ($fila = mysqli_fetch_array($consulta)){
             if($fila['id'] != -1){
               if($cunt%3==0){
                 echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
@@ -632,7 +616,6 @@
       public $pagado;
       public $pedido;
       public $estado;
-
       // Constructor
       function __construct($id)
       {
@@ -699,8 +682,7 @@
         $comentario="Obtener el estado del producto del pedido de restaurante";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $pedido=0;
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $pedido=$fila['id'];
         }
         return $pedido;
@@ -712,8 +694,7 @@
         $comentario="Obtener la cantidad de un producto de un pedido restaurante";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cantidad=0;
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $cantidad=$fila['cantidad'];
         }
         return $cantidad;
@@ -741,8 +722,7 @@
             </tr>
           </thead>
           <tbody>';
-            while ($fila = mysqli_fetch_array($consulta))
-            {
+            while ($fila = mysqli_fetch_array($consulta)){
               $total=$total+($fila['precio']*$fila['cantidad']);
               $cont++;
               if($fila['id_producto'] == -1){
@@ -782,8 +762,7 @@
         $cantidad= 0;
         $total= 0;
         $consulta= $this->total_productos($mov);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           if($fila['id_producto'] != -1){
             $cantidad= $cantidad+$fila['cantidad'];
           }
@@ -822,15 +801,14 @@
         $cantidad= 0;
         $total= 0;
         $consulta= $this->total_productos($mov);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           if($fila['id_producto'] != -1){
             $cantidad= $cantidad+$fila['cantidad'];
           }
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
         echo '<div class="row">';
-          if($cantidad > 0){//
+          if($cantidad > 0){
             if($mesa_id != 0){
               echo '<div class="col-sm-1"></div>
               <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>
@@ -911,8 +889,7 @@
         $comentario="Obtener el concepto del pedido restaurante para guardarlo en el ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $comanda= 0;
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $comanda=$fila['id'];
         }
         return $comanda;
@@ -946,8 +923,7 @@
       public $recepcion;
       public $estado;
       // Constructor
-      function __construct($id)
-      {
+      function __construct($id){
         if($id==0){
           $this->id= 0;
           $this->mov= 0;
@@ -1034,7 +1010,7 @@
       // Cambiar el estado del pedido para imprimir la comanda
       function cambiar_estado($id_pedido){
         $sentencia = "UPDATE `pedido` SET
-        `impreso` = '0' 
+        `impreso` = '0'
         WHERE `id` = '$id_pedido';";
         $comentario="Cambiar el estado del pedido para imprimir la comanda";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

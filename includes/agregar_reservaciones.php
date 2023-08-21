@@ -27,9 +27,7 @@
     $inputValueFecha=$dia_actual;
     $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
     // die("no");
-  
   }
-
 
   echo '
       <div class="container blanco">';
@@ -51,7 +49,6 @@
             <input class="form-control" type="date"  id="fecha_salida" min='.$dia_actual.' placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.')">
           </div>
           </div>
-          
         </div>
         <div class="row">
           <div class="col-sm-2">Cant.Hab.:</div>
@@ -60,9 +57,7 @@
             if($hab_id != 0){
               echo '<input class="form-control" type="number"  id="numero_hab" value="1" onchange="cambiar_adultos('.$hab_id.')"/>';
               // echo '<input class="form-control" type="number"  id="numero_hab" value="1" onchange="cambiar_adultos('.$hab_id.')" disabled/>';
-
             }else{
-            
               echo '<input class="form-control" type="number"  id="numero_hab" placeholder="0" onchange="cambiar_adultos('.$hab_id.')">';
               // echo '<select required class="form-control" id="numero_hab" onchange="cambiar_adultos('.$hab_id.',event)">
               // <option value="0">Selecciona</option>';
@@ -77,13 +72,11 @@
           <div class="form-group">
             <select class="form-control" id="tarifa" onchange="cambiar_adultos('.$hab_id.')">
               <option value="0">Selecciona</option>';
-              
               $tarifa->mostrar_tarifas($hab_tipo);
               echo '
             </select>
           </div>
           </div>
-          
           <div class="col-sm-1">Noches:</div>
           <div class="col-sm-1">
           <div class="form-group">

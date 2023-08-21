@@ -1,16 +1,13 @@
 <?php
-
 date_default_timezone_set('America/Mexico_City');
 include_once('consulta.php');
 
 class PlanesAlimentos extends ConexionMYSql
 {
-    
     public $id;
     public $nombre;
     public $costo;
     public $estado;
-
     // Constructor
     function __construct($id)
     {
@@ -32,12 +29,10 @@ class PlanesAlimentos extends ConexionMYSql
         }
       }
     }
-
     function mostrar_planes_select($id=0){
         $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
         $comentario = "Consulta todos los planes de alimentos disponibles";
         $consulta = $this->realizaConsulta($sentencia, $comentario);
-  
         while ($fila = mysqli_fetch_array($consulta))
         {
           if($id==$fila['id']){

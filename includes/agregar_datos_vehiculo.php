@@ -1,10 +1,10 @@
 <?php
-  date_default_timezone_set('America/Mexico_City');
-  include_once('clase_huesped.php');
-  $reservacion= $_GET['id_reserva'];
-  $id_huesped = $_GET['id_huesped'];
-  $huesped = new Huesped(0);
-  $datos_vehiculo = $huesped->existe_vehiculo($id_huesped,$reservacion);
+    date_default_timezone_set('America/Mexico_City');
+    include_once('clase_huesped.php');
+    $reservacion= $_GET['id_reserva'];
+    $id_huesped = $_GET['id_huesped'];
+    $huesped = new Huesped(0);
+    $datos_vehiculo = $huesped->existe_vehiculo($id_huesped,$reservacion);
 
 if(sizeof($datos_vehiculo)>0) {
     $matricula = $datos_vehiculo['matricula'];
@@ -16,7 +16,6 @@ if(sizeof($datos_vehiculo)>0) {
     $ingreso = date('Y-m-d', $datos_vehiculo['fecha_ingreso']);
     $salida = empty($datos_vehiculo['fecha_salida']) ? "" : date('Y-m-d',$datos_vehiculo['fecha_salida']);
     $observaciones = $datos_vehiculo['observaciones'];
- 
 }else{
     $matricula ="";
     $marca = "";
@@ -29,12 +28,10 @@ if(sizeof($datos_vehiculo)>0) {
     $observaciones = "";
 }
 
-
- 
-  echo '
-  <!-- Modal -->
-      <div class="modal-content" >
-      <form id="form-vehiculo">
+echo '
+    <!-- Modal -->
+        <div class="modal-content" >
+        <form id="form-vehiculo">
         <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">Datos vehiculo</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -42,7 +39,6 @@ if(sizeof($datos_vehiculo)>0) {
         </button>
         </div>
         <div class="modal-body">
-
         <div class="row flex-wrap">
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
@@ -52,7 +48,6 @@ if(sizeof($datos_vehiculo)>0) {
             <input value="'.$matricula.'" required type="text" id="matricula" name ="matricula" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" >
         </div>
         </div>
-
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -62,7 +57,6 @@ if(sizeof($datos_vehiculo)>0) {
         </div>
         </div>
         </div>
-
         <div class="row">
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
@@ -72,7 +66,6 @@ if(sizeof($datos_vehiculo)>0) {
             <input value="'.$modelo.'" type="text" id="modelo" name="modelo" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
         </div>
         </div>
-
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -82,7 +75,6 @@ if(sizeof($datos_vehiculo)>0) {
         </div>
         </div>
         </div>
-
         <div class="row">
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
@@ -92,7 +84,6 @@ if(sizeof($datos_vehiculo)>0) {
             <input value="'.$color.'" type="text" id="color" name="color" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
         </div>
         </div>
-
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -102,7 +93,6 @@ if(sizeof($datos_vehiculo)>0) {
         </div>
         </div>
         </div>
-
         <div class="row">
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
@@ -112,7 +102,6 @@ if(sizeof($datos_vehiculo)>0) {
             <input value="'.$ingreso.'" type="date" id="ingreso" name="ingreso" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" >
         </div>
         </div>
-
         <div class="col-12 col-sm-6">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -122,7 +111,6 @@ if(sizeof($datos_vehiculo)>0) {
         </div>
         </div>
         </div>
-
         <div class="row">
         <div class="col-12">
         <div class="input-group mb-3">
@@ -130,7 +118,6 @@ if(sizeof($datos_vehiculo)>0) {
             <textarea id="observaciones" class="form-control">'.$observaciones.'</textarea>
         </div>
         </div>
-
         </div>
         </div>
         <div class="modal-footer">

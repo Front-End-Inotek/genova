@@ -1,15 +1,12 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
-  
   class Log extends ConexionMYSql{
-    
     public $id;
     public $usuario;
     public $hora;
     public $ip;
     public $actividad;
-
     // Constructor
     function __construct($id)
     {
@@ -19,7 +16,7 @@
           $this->hora= 0;
           $this->ip= 0;
           $this->actividad= 0;
-        }else{  
+        }else{
           $sentencia = "SELECT * FROM logs WHERE id = $id LIMIT 1";
           $comentario="Obtener todos los valores de los logs";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -29,12 +26,12 @@
               $this->usuario= $fila['usuario'];
               $this->hora= $fila['hora'];
               $this->ip= $fila['ip'];
-              $this->actividad= $fila['actividad']; 
+              $this->actividad= $fila['actividad'];
           }
         }
     }
     // Mostramos los logs
-    function ver_log(){ 
+    function ver_log(){
       $sentencia = "SELECT logs.hora, logs.ip, logs.actividad, usuario.usuario  AS usuario FROM logs LEFT JOIN  usuario ON logs.usuario = usuario.id DESC";
       $comentario="Mostrar las diferentes actividades del usuario";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -81,11 +78,10 @@
           $ipaddress = getenv('REMOTE_ADDR');
       else
           $ipaddress = 'UNKNOWN';
-  
       return $ipaddress;
     }
     // Guardamos los logs dentro de la bd
-    function guardar_log($usuario,$actividad){ 
+    function guardar_log($usuario,$actividad){
       $hora=time();
       $ip=$this->get_client_ip_env();
       $sentencia = "INSERT INTO `logs` (`usuario`, `hora`,`ip`,`actividad`)
@@ -94,7 +90,7 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
     // Guardamos los logs dentro de la API
-    function guardar_logs($actividad){ 
+    function guardar_logs($actividad){
       $hora=time();
       $ip=$this->get_client_ip_env();
       $sentencia = "INSERT INTO `logs` (`usuario`, `hora`,`ip`,`actividad`)
@@ -103,25 +99,24 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
     // Obtengo el nombre del usuario
-    function saber_nombre($id_usuario){ 
+    function saber_nombre($id_usuario){
       $sentencia = "SELECT usuario FROM usuario WHERE id = $id_usuario LIMIT 1";
       $comentario="Selecciona el nombre del usuario ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-           $id_usuario= $fila['usuario'];
+      while ($fila = mysqli_fetch_array($consulta)){
+        $id_usuario= $fila['usuario'];
       }
       return $id_usuario;
     }
     // Obtengo los usuarios existentes
-    function obtener_usuario(){ 
+    function obtener_usuario(){
       $sentencia = "SELECT * FROM usuario ORDER BY usuario";
       $comentario="Obtengo los usuarios existentes dentro de la base de datos ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       return $consulta;
     }
     // Obtengo los datos de logs
-    function obtener_logs($id,$fecha_ini,$fecha_fin,$actividad){ 
+    function obtener_logs($id,$fecha_ini,$fecha_fin,$actividad){
       if($id == 0 && strlen($actividad) == 0){
         $sentencia = "SELECT * FROM logs WHERE hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 ORDER BY hora DESC";
       }elseif($id != 0 && strlen($actividad) == 0){
@@ -138,12 +133,11 @@
       return $consulta;
     }
     // Mostrar los usuarios de logs
-    function mostrar_usuario(){ 
+    function mostrar_usuario(){
       $sentencia = "SELECT * FROM usuario WHERE estado = 1 ORDER BY usuario";
       $comentario="Mostrar los usuarios de logs";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
-
       while ($fila = mysqli_fetch_array($consulta))
       {
         echo '  <option value="'.$fila['id'].'">'.$fila['usuario'].'</option>';
@@ -151,20 +145,19 @@
       //return $usuario;
     }
     // Obtengo el total de logs
-    function total_elementos(){ 
+    function total_elementos(){
       $cantidad=0;
       $sentencia = "SELECT count(id) AS cantidad  FROM logs";
       //echo $sentencia;
       $comentario="Obtengo el total de logs";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         $cantidad= $fila['cantidad'];
       }
       return $cantidad;
     }
     // Mostramos los logs ya filtrados por fecha
-    function mostrar_logs($fecha_ini_tiempo,$fecha_fin_tiempo,$id){ 
+    function mostrar_logs($fecha_ini_tiempo,$fecha_fin_tiempo,$id){
       date_default_timezone_set('America/Mexico_City');
       $fecha_ini_tiempo =$fecha_ini_tiempo. " 0:00:00";
       $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
@@ -184,7 +177,7 @@
       }else{
         $sentencia = "SELECT * FROM logs WHERE hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 AND id >= '.$id.' ORDER BY hora DESC;";
         $comentario="Seleccionar los datos de logs";
-      } 
+      }
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$id=$consulta;
       //se recibe la consulta y se convierte a arreglo
@@ -193,7 +186,7 @@
           <div class="col-sm-3">
             <select type="text" id="usuario" class="color_black form-control form-control-lg" onchange="buscar_logs_usuario('.$fecha_ini.','.$fecha_fin.','.$id.')" autofocus="autofocus">
               <option value="0">Selecciona</option>';
-              $this->mostrar_usuario(); 
+              $this->mostrar_usuario();
             echo '</select>
           </div>
           <div class="col-sm-1">Actividad:</div>
@@ -202,7 +195,7 @@
           </div>
           <div class="col-sm-2">
             <button class="btn btn-secondary btn-block btn-default btn-lg" type="button" value="Buscar" onclick="buscar_usuario_logs()">
-              Buscar 
+              Buscar
             </button>
           </div>
           <div class="col-sm-2">
@@ -211,7 +204,6 @@
             </button>
           </div>
       </div><br>
-      
       <div class="table-responsive" id="tabla_logs">
       <table class="table table-bordered table-hover">
         <thead>
@@ -250,19 +242,18 @@
               echo '
               <li class="page-item" onclick="busqueda_logs('.(($i*40)+1).')"><a class="page-link" href="#">'.($i+1).'</a></li>';
             }
-          }       
+          }
         }*/
         echo ' </ul>';
         //echo $sentencia;
     }
     // Mostramos los logs ya filtrados por fecha
-    function mostrar_logs_tabla($fecha_ini_tiempo,$fecha_fin_tiempo,$id){ 
+    function mostrar_logs_tabla($fecha_ini_tiempo,$fecha_fin_tiempo,$id){
       date_default_timezone_set('America/Mexico_City');
       $fecha_ini_tiempo =$fecha_ini_tiempo. " 0:00:00";
       $fecha_fin_tiempo=$fecha_fin_tiempo . " 23:59:59";
       $fecha_ini =strtotime($fecha_ini_tiempo);
       $fecha_fin =strtotime($fecha_fin_tiempo);
-  
       $sentencia = "SELECT * FROM logs WHERE hora >= $fecha_ini AND hora <= $fecha_fin AND hora > 0 ORDER BY hora DESC;";
       $comentario="Seleccionar los datos de logs";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -294,7 +285,7 @@
       </div>';
     }
     // Barra de busqueda de usuarios en logs
-    function buscar_usuario($a_usuario){ 
+    function buscar_usuario($a_usuario){
       $sentencia = "SELECT * FROM logs WHERE usuario = $a_usuario ORDER BY actividad;";
       $comentario="Mostrar los logs usuario";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -320,12 +311,12 @@
             echo '</tr>';
           }
           echo '
-         </tbody>
-       </table>
+          </tbody>
+        </table>
       </div>';
     }
     // Barra de busqueda de actividad en logs
-    function buscar_actividad($a_buscar){ 
+    function buscar_actividad($a_buscar){
       $sentencia = "SELECT * FROM logs WHERE actividad LIKE '%$a_buscar%' ORDER BY actividad;";
       $comentario="Mostrar los logs actividad";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -351,8 +342,8 @@
             echo '</tr>';
           }
           echo '
-         </tbody>
-       </table>
+          </tbody>
+        </table>
       </div>';
     }
     // Boton de busqueda de usuarios y actividad en logs
@@ -428,12 +419,11 @@
               break;
           case "12":
               $mes = "diciembre";
-              break;            
+              break;
           default:
               echo "No existe este mes";
       }
       return $mes;
     }
-      
   }
 ?>

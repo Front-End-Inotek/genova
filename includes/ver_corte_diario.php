@@ -86,7 +86,7 @@
                       $hab_nombre="CM: ". $fila['cm_nombre'];
                     }
 
-                    echo '<tr class="table-primary  text-center">
+                    echo '<tr class="table  text-center">
                     <td>'.date('d-m-Y H:m:s',$fila['fecha']).'</td>
                     <td>'.$fila['fcasa'].'</td>
                     <td>'.$hab_nombre.'</td>
@@ -98,7 +98,7 @@
                     ';
                     $total_abonos+=$fila['abono'];
                 }
-                echo '<tr class="table-primary  text-center">
+                echo '<tr class="table  text-center">
                 <td></td>
                 <td></td>
                 <td></td>
@@ -113,7 +113,7 @@
                 }
                
             }
-            echo '<tr class="table-primary  text-center">
+            echo '<tr class="table  text-center">
             <td></td>
             <td></td>
             <td></td>

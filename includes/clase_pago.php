@@ -3,24 +3,22 @@
   include_once('consulta.php');
 
   class Pago extends ConexionMYSql{
-    
     public $id;
     public $limite_pago;
-
     // Constructor
     function __construct($id)
     {
       if($id==0){
         $this->id= 0;
         $this->limite_pago= 0;
-      }else{  
+      }else{
         $sentencia = "SELECT * FROM pago WHERE id = $id LIMIT 1";
         $comentario="Obtener todos los valores de pago";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-            $this->id= $fila['id'];  
-            $this->limite_pago= $fila['limite_pago'];             
+            $this->id= $fila['id'];
+            $this->limite_pago= $fila['limite_pago'];
         }
       }
     }
@@ -47,7 +45,7 @@
         if($id==$fila['id']){
           echo '<option value="'.$fila['id'].'" selected>'.$fila['limite_pago'].'</option>';
         }else{
-          echo '<option value="'.$fila['id'].'">'.$fila['limite_pago'].'</option>';  
+          echo '<option value="'.$fila['id'].'">'.$fila['limite_pago'].'</option>';
         }
       }
     }
@@ -64,6 +62,5 @@
       }
       return $limite_pago;
     }*/
-    
   }
 ?>
