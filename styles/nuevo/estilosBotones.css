@@ -1082,6 +1082,9 @@ body.modo-nocturno .containerRackOp .btn:focus {
 .btn {
   color: #000;
 }
+.btn-danger.disabled, .btn-danger:disabled{
+  color: white !important;
+}
 
 .containerRackOp .btn:after {
   position: absolute;

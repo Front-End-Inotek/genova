@@ -49,7 +49,6 @@
             <input class="form-control" pattern="[A-Za-z0-9]+" type="text"  id="user"  placeholder="Usuario" maxlength="20" />
           </div>
             <div class="form-group texto_entrada">
-              
               <input class="form-control" type="password" id="pass" placeholder="Contraseña"   maxlength="20"/>
             </div>
             <input type="submit" class="fadeIn fourth" name="login" id="login">
@@ -58,14 +57,12 @@
             <div id="formFooter">
           </div>
           </form>
-          
           </div>
           </div>
           </br>
           </br>
           </div>
             <div class="container "  id="renglon_entrada_mensaje">
-        
               ';
             if($activo<518400){
               echo '<div class="alert alert-warning">

@@ -60,17 +60,14 @@
       $total_pago= $fila['total_pago'];
       $forma_pago= $fila['descripcion'];
       $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
-
       $total_tarifa = $fila['total'];
-
       if(!empty($fila['forzar_tarifa'])){
         $tarifa="Forzada";
       }
-
       $precio_adulto =  '$'.number_format($fila['precio_adulto'], 2);
       $pax_extra ='$'.number_format($fila['pax_extra'],2);
       $precio_infantil =  '$'.number_format($fila['precio_infantil'], 2);
-      $total_alimentos= '$'.number_format($fila['costo_plan'], 2);  
+      $total_alimentos= '$'.number_format($fila['costo_plan'], 2);
   }
 
   $saldo_faltante= 0;
@@ -118,8 +115,20 @@
           <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
           </div>
-        <div class="d-flex">
-          <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" style="margin-left:18px;"><i class="bx bx-car"></i></button> 
+        <div class="d-flex">';
+        if(false){
+          echo '
+          <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" style="margin-left:18px;"><i class="bx bx-car"></i> Agregar datos vehiculo </button>
+        ';
+        }else{
+          echo '
+          <div class="btn-group" role="group" aria-label="Basic example"  style="margin-left:18px;">
+            <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" > Ver vehiculo </button>
+            <button type="button" disabled class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Auto en habitacion"><i class="bx bx-car"></i></button>
+          </div>
+          ';
+        }
+        echo'
         </div>
         <div class="row">';
           echo '<div class="col">Pax Extra: <span>'.$pax_extra.'</span></div>';

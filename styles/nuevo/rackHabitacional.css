@@ -379,7 +379,7 @@
 }
 
 .task--disponible-limpia {
-  border-left: 7px solid #000;
+  border-left: 7px solid #006912;
   background: #bfffce ;
   /* background: linear-gradient(180deg, #e9e9e9ee 0%, #ffffff 40%, rgb(170, 170, 170) 100%); */
   box-shadow: var(--sombra);
