@@ -37,24 +37,20 @@
   <div class="modal-content alinear_centro">
     <h5>Agregar Restaurante</h5>
     <div class="col-sm-12 fondo_rest" style="background-color: #ede4ffc5;">
-
       <div class="row">
         <div class="col-sm-6">
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Categorias</h5>
             </div>
-
             <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
               ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa'],$id_maestra);
             echo '</div>
           </div>
-
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Productos</h5>
             </div>
-
             <div class="card-body altura-rest_productos" id="caja_mostrar_busqueda">
               ';if($_GET['categoria'] != 0){
                 $inventario->mostrar_producto_restaurente($_GET['categoria'],$_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa'],$id_maestra);
@@ -62,13 +58,11 @@
             echo '</div>
           </div><br>
         </div>
-
         <div class="col-sm-6">
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Pedido</h5>
             </div>
-
             <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">
               <div class="row">
                 <div class="col-sm-4">
@@ -78,20 +72,17 @@
               ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$_GET['mesa'],$id_maestra);
             echo '</div>
           </div>
-
           <div class="card">
             <div class="card-body " id="caja_mostrar_total">';
               if($_GET['mesa'] == 0){
                 $pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov,$id_maestra);
               }else{
                 $pedido_rest->mostar_pedido_funciones_mesa($_GET['hab_id'],$_GET['estado'],$mov,$id_maestra);
-              } 
+              }
             echo '</div>
           </div><br>
-        
         </div>
       </div>
-
     </div>
   </div>';
 ?>

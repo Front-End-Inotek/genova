@@ -1,13 +1,11 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
-
   class Forma_pago extends ConexionMYSql{
     public $id;
     public $descripcion;
     public $estado;
     public $garantia;
-
     // Constructor
     function __construct($id)
     {
@@ -49,7 +47,6 @@
       }
       return $cantidad;
     }
-
     function formas_pagos(){
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
       $comentario="Mostrar los tipos formas de pago";
@@ -61,7 +58,6 @@
       }
       return $etiquetas_forma_pago;
     }
-
     function etiquetas_forma_pago(){
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
       $comentario="Mostrar los tipos formas de pago";
@@ -73,7 +69,6 @@
       }
       return $etiquetas_forma_pago;
     }
-
     // Mostramos las formas de pago
     function mostrar($id){
       include_once('clase_usuario.php');
@@ -81,7 +76,6 @@
       $agregar = $usuario->categoria_editar;
       $editar = $usuario->forma_pago_editar;
       $borrar = $usuario->forma_pago_borrar;
-
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY descripcion";
       $comentario="Mostrar los tipos formas de pago";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -120,7 +114,6 @@
               }else{
                 echo '<td><i style="font-size:2em;" class="bx bx-x-circle"></i></td>';
               }
-
               if($editar==1){
                 echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_forma_pago('.$fila['id'].')"> Editar</button></td>';
               }

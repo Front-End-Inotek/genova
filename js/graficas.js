@@ -1,29 +1,28 @@
-var usuario_id=localStorage.getItem("id");
+let usuario_id=localStorage.getItem("id");
 
 //Datos
-var datos_ocupadas = [];
-var datos_hospedaje =[];
-var datos_pagos = [];
-var datos_ventas=[];
-var datos_ventas_rest=[];
-var ventas_rest=[];
+let datos_ocupadas = [];
+let datos_hospedaje =[];
+let datos_pagos = [];
+let datos_ventas=[];
+let datos_ventas_rest=[];
+let ventas_rest=[];
 
-var datos_abonos=[];
-var datos_cargos=[];
-
+let datos_abonos=[];
+let datos_cargos=[];
 
 //Graficas
-var grafica_ocupadas;
-var grafica_hospedaje;
-var grafica_forma_pago;
-var grafica_ventas;
-var grafica_ventas_rest;
-var grafica_ventas4;
+let grafica_ocupadas;
+let grafica_hospedaje;
+let grafica_forma_pago;
+let grafica_ventas;
+let grafica_ventas_rest;
+let grafica_ventas4;
 
 //Etiquetas
-var etiquetas_hospedaje=[];
-var etiquetas_forma_pago=[];
-var etiquetasRestaurant=[];
+let etiquetas_hospedaje=[];
+let etiquetas_forma_pago=[];
+let etiquetasRestaurant=[];
 
 function mostrar_graficas(){
 const $grafica = document.querySelector("#grafica");
@@ -79,10 +78,12 @@ const datosOcupacion = {
         "#D0EDA4",
         "#F7F172",
         "#A01D1E",
-        "#F3B9BB",
-        "#FAF5F5",
-        "#EDAAA4",
-        "#F77772",
+        "#6C82F2",
+        "#FE3FF0",
+        "#54B7F5",
+        "#1F98A7",
+        "#6565F6",
+        "#02B4F1",
     ],
     /* borderColor: [
         "rgba(108,130,178,1)",
@@ -283,7 +284,6 @@ function cargarInfoServidor(){
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
     });
-
     // timer_grafica = setTimeout('cargarInfoServidor()',3000);//5500
 }
 

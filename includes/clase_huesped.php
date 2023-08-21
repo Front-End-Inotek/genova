@@ -278,7 +278,6 @@
                                 <label class="form-check-label" for="c_cerrado">Crédito cerrado</label>
                             </div>
                         </div>
-
                         <div class="col-12 col-sm-5">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -295,7 +294,6 @@
                 </div>
       ';
       }
-
       function existe_vehiculo($id_huesped,$id_reserva){
         $sentencia="SELECT* FROM datos_vehiculo WHERE id_huesped=$id_huesped AND id_reserva=$id_reserva";
         $comentario="Obtenemos datos de un vehiculo";
@@ -308,14 +306,12 @@
         }
         return $datos;
       }
-
       function mostrar_historial_cuenta($id_huesped,$inicial,$final,$a_buscar){
         $filtro_fecha="";
         $filtro_buscar="";
         if(!empty($a_buscar)){
           $filtro_buscar=" AND (hab.nombre LIKE '%$a_buscar%' || cuenta.descripcion LIKE '%$a_buscar%')";
         }
-
         if(!empty($inicial) && !empty($final)){
           $inicial = strtotime($inicial);
           $final = strtotime($final);
@@ -339,7 +335,6 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-
       function actualizar_datos_vehiculo($datos){
         $id_huesped = $datos['id_huesped'];
         $usuario_id =$datos['usuario_id'];
@@ -353,20 +348,18 @@
         $fecha_salida =strtotime($datos['salida']);
         $observaciones =$datos['observaciones'];
         $id_reserva=$datos['id_reserva'];
-
-        $sentencia = "UPDATE `datos_vehiculo` SET 
-        `id_usuario`='$usuario_id', 
-        `matricula`='$matricula', 
-        `marca`='$marca', 
-        `modelo`='$modelo', 
-        `year`='$year', 
-        `color`='$color', 
-        `propietario`='$propietario', 
-        `fecha_ingreso`='$fecha_ingreso', 
-        `fecha_salida`='$fecha_salida', 
+        $sentencia = "UPDATE `datos_vehiculo` SET
+        `id_usuario`='$usuario_id',
+        `matricula`='$matricula',
+        `marca`='$marca',
+        `modelo`='$modelo',
+        `year`='$year',
+        `color`='$color',
+        `propietario`='$propietario',
+        `fecha_ingreso`='$fecha_ingreso',
+        `fecha_salida`='$fecha_salida',
         `observaciones`='$observaciones'
         WHERE `id_huesped`='$id_huesped'";
-
         $comentario="Actualizando info del vehiculo huesped";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if(!$consulta){
@@ -376,9 +369,7 @@
           $logs->guardar_log($_POST['usuario_id'], "Actualizando datos vehiculo". $_POST['id_huesped']);
           echo "OK";
         }
-
       }
-
       function guardar_datos_vehiculo($datos){
         $id_huesped = $datos['id_huesped'];
         $id_reserva=$datos['id_reserva'];
@@ -392,7 +383,6 @@
         $fecha_ingreso =strtotime($datos['ingreso']);
         $fecha_salida =strtotime($datos['salida']);
         $observaciones =$datos['observaciones'];
-
         $sentencia="INSERT INTO `datos_vehiculo`(`id_huesped`, `id_usuario`, `id_reserva`, `matricula`, `marca`, `modelo`, `year`, `color`, `propietario`, `fecha_ingreso`, `fecha_salida`, `observaciones`) 
         VALUES ('$id_huesped','$usuario_id','$id_reserva','$matricula','$marca','$modelo','$year','$color','$propietario','$fecha_ingreso','$fecha_salida','$observaciones')";
         $comentario="Guardando info del vehiculo huesped";
@@ -404,25 +394,19 @@
           $logs->guardar_log($_POST['usuario_id'], "Guardando datos vehiculo". $_POST['id_huesped']);
           echo "OK";
         }
-
       }
-
       function guardar_tarjeta($huesped_id,$datos_tarjeta){
-
         print_r($datos_tarjeta);
-
         $titular_tarjeta=$datos_tarjeta['nombre_tarjeta'];
         $nombre_tarjeta=$datos_tarjeta['tipo_tarjeta'];
         $tipo_tarjeta=$datos_tarjeta['forma_garantia'];
         $numero_tarjeta=$datos_tarjeta['numero_tarjeta'];
         $vencimiento_mes=$datos_tarjeta['mes_tarjeta'];
         $vencimiento_ano=$datos_tarjeta['year_tarjeta'];
-
-        $sentencia = "UPDATE  `huesped` 
+        $sentencia = "UPDATE  `huesped`
         SET  titular_tarjeta = '$titular_tarjeta', estado_tarjeta = 2, nombre_tarjeta = '$nombre_tarjeta'
         , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'), vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
         WHERE id='$huesped_id'";
-
         $comentario="actualizamos el huesped en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if(!$consulta){
@@ -430,11 +414,9 @@
           exit();
         }
       }
-
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
       $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$estado_credito,$limite_credito,$indole_tarjeta){
-
         //validaciones del huesped.
         if(empty($nombre)){
           echo "NO_DATA";
@@ -444,18 +426,14 @@
         if($tipo_tarjeta!=""){
           include_once('clase_forma_pago.php');
           $forma_pago = new Forma_pago($tipo_tarjeta);
-
           if($forma_pago!=null && $forma_pago->garantia == 1){
             $estado_tarjeta = 2; //Garantizada.
           }
         }
-
         //verififca si el cliente/huesped ya existe.
-
         $existe = "SELECT id FROM huesped where nombre = '$nombre' and apellido='$apellido'";
         $comentario = "Verificar si existe el nombre del huesped";
         $consulta_existe = $this->realizaConsulta($existe,$comentario);
-
         if(mysqli_num_rows($consulta_existe)==0){
           //ya existe.
           $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, 
@@ -532,7 +510,6 @@
           $cat_paginas++;
         }
         $ultimoid=0;
-
         $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY nombre";
         $comentario="Mostrar los huespedes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -541,7 +518,6 @@
         <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()"> Agregar huesped </button>
         <br>
         <br>
-
         <div class="table-responsive" id="tabla_huesped" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
         <table class="table table-bordered table-hover">
           <thead>
@@ -613,7 +589,6 @@
         $usuario =  NEW Usuario($id);
         $editar = $usuario->huesped_editar;
         $borrar = $usuario->huesped_borrar;
-
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
         }else{
@@ -662,7 +637,7 @@
                 <td>'.$fila['cupon'].'</td>
                 <td>'.$fila['preferencias'].'</td>
                 <td>'.$fila['comentarios'].'</td>
-                <td> 
+                <td>
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Ver mas
@@ -751,7 +726,6 @@
         }
         return $nombre_completo;
       }
-
       // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huesped_maestra($id_maestra,$mov){
         echo '<div class="row">
@@ -806,7 +780,6 @@
           </table>
         </div>';
       }
-
        // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huespedNew($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
         echo '<div class="row">
@@ -862,7 +835,6 @@
           </table>
         </div>';
       }
-
       // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huesped($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
         echo '<div class="row">
@@ -966,7 +938,6 @@
           </table>
         </div>';
       }
-
       // Busqueda de los huespedes para asignar en una reservacion
       function buscar_asignar_huespedNew($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil,$a_buscar,$id_maestra=0,$mov=0){
         $sentencia = "SELECT * FROM huesped WHERE (nombre LIKE '%$a_buscar%' || apellido LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%' || telefono LIKE '%$a_buscar%') && estado_huesped = 1 ORDER BY nombre;";
@@ -1004,7 +975,6 @@
                 }else{
                   echo '<button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped_maestra('.$fila['id'] .','.$id_maestra .','.$mov.')"> Agregar</button>';
                 }
-
                 echo'
                 </td>
                 <td>'.$fila['nombre'].'</td>

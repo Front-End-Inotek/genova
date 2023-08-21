@@ -33,7 +33,6 @@
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
     <div class="modal-body">
-  
       <div class="row flex-wrap">
         <div class="col-sm-1"></div>
         <div class="col-sm-3">Descripcion:</div>
@@ -65,11 +64,9 @@
         <div class="col-sm-1"></div>
       </div>
     <div>
-
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       <button type="button" class="btn btn-success" onclick="guardar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['faltante'].','.$mov.','.$id_maestra.')"> Aceptar</button>
     </div>
-  
   </div>';
 ?>

@@ -113,10 +113,13 @@
           <div class="col">Total estancia: <span>$'.number_format($total_tarifa,2).'</span></div>
         </div>
         <div class="row">
-          <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" style="margin-left:6px;"><i class="bx bx-car"></i></button> </div>
+          <div class="col">Nombre Huesped: <span>'.$nombre_huesped.'</span></div>
           <div class="col">Plan Alimentos: <span>'.$total_alimentos.'</span></div>
           <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
+          </div>
+        <div class="d-flex">
+          <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" style="margin-left:18px;"><i class="bx bx-car"></i></button> 
         </div>
         <div class="row">';
           echo '<div class="col">Pax Extra: <span>'.$pax_extra.'</span></div>';
@@ -125,19 +128,16 @@
           }else{
             echo '';
           }
-
           if($extra_junior>0){
             echo '<div class="col">Extra Junior: <span>'.$extra_junior.'</span></div>';
           }else{
             echo '';
           }
-
           if($extra_infantil>0){
             echo '<div class="col">Extra Infantil: <span>'.$extra_infantil.' ('.$precio_infantil.')</span></div>';
           }else{
             echo '';
           }
-
           if($extra_menor>0){
             echo '<div class="col">Extra Menor: <span>'.$extra_menor.'</span></div>';
           }else{

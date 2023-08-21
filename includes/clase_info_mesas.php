@@ -2,20 +2,15 @@
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
   include_once('clase_usuario.php');
-
-  /**
-   *
-   */
   class Informacion_mesas extends ConexionMYSql
   {
-
     function __construct($mesa_id,$estado,$mov,$id)
     {
       switch ($estado) {
         case 0:
               $this->disponible($mesa_id,$estado);
           break;
-        case 1: 
+        case 1:
               $this->ocupada($mesa_id,$estado,$mov);
           break;
         case 2:
@@ -58,7 +53,6 @@
               //$this->ocupada_rest($mesa_id,$estado,$mov);
           break;
         case 14:
-
               $this->limpieza($mesa_id,$estado,$mov);
           break;
         case 15:
@@ -73,7 +67,6 @@
             echo '</div>';
           break;
       }
-
     }
     // Estado 0
     function disponible($mesa_id,$estado){
@@ -121,7 +114,6 @@
               $nombre_usuario= $usuario->usuario;
               echo 'Meser@: '.$nombre_usuario;
             echo '</div>
-
             <div class="col-12 izquierda">
                   <div style="font-size: 1.5rem; padding-bottom: 1rem; padding-top: 0.5rem;">
                     Restaurante:
@@ -250,24 +242,19 @@
       //se recibe la consulta y se convierte a arreglo
       $detalle_inicio=0;
       $detalle=0;
-
       while ($fila = mysqli_fetch_array($consulta))
       {
         $detalle_inicio=$fila['detalle_inicio'];
         $detalle=$fila['comentario'];
-
       }
         echo '<div class="col-12 col-md-6">';
           echo 'Inicio: '.date("d-m-Y H:i:s",  $detalle_inicio);
         echo '</div>';
-
         echo '<div class="col-12 col-md-6 letras-grandes-modal">';
           echo 'Motivo: '.$detalle;
         echo '</div>';
-
     }
     function por_cobrar($mesa_id,$estado,$mov){
-
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
       $comentario="obtener de la mesa  por cobrar ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -288,7 +275,6 @@
       echo '</div>';
     }
     function ocupada_rest($mesa_id,$estado,$mov){
-
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
       $comentario="obtener de la mesa  por cobrar ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -356,7 +342,6 @@
                 echo '</div>
           </div>
             </div>';
-
     }
     function nombre_producto($id){
       $sentencia = "SELECT nombre FROM  producto WHERE id  = $id  LIMIT 1 ";
@@ -381,7 +366,6 @@
       return $cantidad;
     }
     /*function ocupada($mesa_id,$estado,$mov,$id){
-
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
       //echo $sentencia;
       $comentario="obtener de la mesapor cobrar ";
@@ -468,12 +452,9 @@
                   /*  echo ' </div>';
                   }
                 echo '</div>
-
           </div>
             </div>';
-
     }*/
-
     function detllado($mesa_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
       $comentario="obtener informacion de la ultima vez que se rento ";
@@ -488,7 +469,6 @@
         $detalle_inicio=$fila['detalle_inicio'];
         $detalle_fin=$fila['detalle_fin'];
         $detalle_realizo=$fila['detalle_realiza'];
-
       }
         $usuario = NEW Usuario($detalle_realizo);
         echo '<div class="col-12 col-md-6 letras-grandes-modal">';
@@ -501,6 +481,5 @@
           echo 'Fin : '.date("d-m-Y H:i:s",  $detalle_fin);
         echo '</div>';
     }
-
   }
 ?>

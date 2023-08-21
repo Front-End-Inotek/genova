@@ -853,8 +853,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         INNER JOIN forma_pago ON cuenta.forma_pago = forma_pago.id WHERE cuenta.mov = $mov AND cuenta.abono > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los abonos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           //if($fila['edo'] == 1){
             $total_abonos= $total_abonos + $fila['abono'];
           //}
@@ -873,8 +872,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         INNER JOIN usuario ON cuenta.id_usuario = usuario.id WHERE cuenta.mov = $mov AND cuenta.cargo > 0 AND cuenta.estado != 0 ORDER BY cuenta.fecha";
         $comentario="Mostrar los cargos que tenemos por movimiento en una habitacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           //if($fila['edo'] == 1){
             $total_cargos= $total_cargos + $fila['cargo'];
           //}
@@ -894,8 +892,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $abono= 0;
         $comentario="Obtenemos los datos de la correspondiente cuenta";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $id_usuario= $fila['id_usuario'];
           $descripcion= $fila['descripcion'];
           $fecha= $fila['fecha'];
@@ -938,8 +935,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $descripcion= '';
         $comentario="Obtenemos los datos de la correspondiente cuenta";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $id= $fila['id'];
           $descripcion= $fila['descripcion'].'*';// Total reservacion
           $this->cambiar_cuentas($id,$mov_hab,$descripcion);
@@ -953,8 +949,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $descripcion= '';
         $comentario="Obtenemos los datos de la correspondiente cuenta";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $id= $fila['id'];
           $descripcion= $fila['descripcion'].'*';// Total reservacion
           $this->cambiar_cuentas($id,$mov_hab,$descripcion);
@@ -1002,8 +997,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         // echo $sentencia;
         $comentario="Obtener el total de cargos del dia actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $cargos= $cargos + $fila['cargo'];
         }
         return $cargos;
@@ -1017,8 +1011,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $sentencia = "SELECT * FROM cuenta WHERE fecha >= $dia_actual AND id_usuario = $usuario_id AND estado = 1";
         $comentario="Obtener el total de abonos del dia actual";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $abonos= $abonos + $fila['abono'];
         }
         return $abonos;
@@ -1045,14 +1038,13 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $id_cuenta= $this->ultima_insercion();
         return $id_cuenta;
       }
-      // Obtener la ultima cuenta ingresada 
+      // Obtener la ultima cuenta ingresada
       function ultima_insercion(){
         $sentencia= "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
         $id= 0;
         $comentario="Obtener la ultima cuenta ingresada";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $id= $fila['id'];
         }
         return $id;
@@ -1062,8 +1054,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $id= 0;
         $comentario="Obtener la ultima cuenta ingresada";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $id= $fila['id'];
         }
         return $id;

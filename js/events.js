@@ -348,7 +348,6 @@ function agregar_planes_alimentos(){
 }
 
 //Guardar el cargo adicional
-
 function guardar_cargo_adicional(id,mov){
     nombre = $("#nombre").val()
     monto = $("#monto").val()
@@ -383,15 +382,12 @@ function guardar_politica_reservacion(){
     var nombre= encodeURI(document.getElementById("nombre").value);
 	var codigo= encodeURI(document.getElementById("codigo").value);
     var descripcion = encodeURI(document.getElementById("descripcion").value);
-
     // console.log(nombre,codigo,descripcion)
-
     // return
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     if(codigo === null || codigo === ''){
         swal("Campo codigo vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -400,7 +396,6 @@ function guardar_politica_reservacion(){
         swal("Campo descripcion vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     guardar_politicaReservacion(nombre,codigo,descripcion)
 }
 
@@ -470,19 +465,17 @@ function guardar_planes_alimentos() {
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var costo= encodeURI(document.getElementById("codigo").value);
     // console.log(nombre,costo)
-
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     if(costo === null || costo === ''){
         swal("Campo costo vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-
     guardar_planAlimentos()
 }
+
 function guardar_planAlimentos(){
     let usuario_id=localStorage.getItem("id");
 	let nombre= encodeURI(document.getElementById("nombre").value);
@@ -660,6 +653,7 @@ function ver_tipos(){
     closeModal();
 	closeNav();
 }
+
 function config_colores_hab(){
 	$('#area_trabajo').hide();
     $('#pie').hide();
@@ -1115,12 +1109,10 @@ function cerrar_cuenta_maestra(id, nombre, codigo , mov){
     let id_tipo = id;
     let codigo_tipo = codigo;
     let usuario_id=localStorage.getItem("id");
-
     let datos = {
         "id_tipo": id_tipo,
         "usuario_id": usuario_id
     };
-
     let tabla = document.createElement("div");
     tabla.innerHTML += `
     <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
@@ -1135,7 +1127,6 @@ function cerrar_cuenta_maestra(id, nombre, codigo , mov){
         <td>${codigo_tipo}</td>
         </tr>
     </table> <br>`;
-
     var xhttp;
     xhttp = new XMLHttpRequest();
     swal({
@@ -1179,12 +1170,10 @@ function borrar_cuenta_maestra(id, nombre, codigo ){
     let id_tipo = id;
     let codigo_tipo = codigo;
     let usuario_id=localStorage.getItem("id");
-
     let datos = {
         "id_tipo": id_tipo,
         "usuario_id": usuario_id
     };
-
     let tabla = document.createElement("div");
     tabla.innerHTML += `
     <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
@@ -1199,7 +1188,6 @@ function borrar_cuenta_maestra(id, nombre, codigo ){
         <td>${codigo_tipo}</td>
         </tr>
     </table> <br>`;
-
     var xhttp;
     xhttp = new XMLHttpRequest();
     swal({
@@ -1262,7 +1250,6 @@ function borrar_tipo(id, nombre, codigo ){
         <td>${codigo_tipo}</td>
         </tr>
     </table> <br>`;
-
     var xhttp;
     xhttp = new XMLHttpRequest();
     swal({
@@ -1341,7 +1328,6 @@ function guardar_tarifa(){
         swal("Campo precio_hospedaje demasiado grande!", "El campo no debe superar los 15 caracteres!", "warning");
         return false;
     }
-
     if(precio_hospedaje === null || precio_hospedaje === ''){
         swal("Campo precio_hospedaje vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
@@ -1377,7 +1363,6 @@ function guardar_tarifa(){
     guardar_tarifa_nueva()
 }
 
-
 // Guardar una tarifa hospedaje
 function guardar_tarifa_nueva(){
     //debugger
@@ -1391,7 +1376,6 @@ function guardar_tarifa_nueva(){
 	let precio_infantil= document.getElementById("precio_infantil").value;
     let tipo= document.getElementById("tipo").value;
     let leyenda= encodeURI(document.getElementById("leyenda").value);
-
     let datos = {
         "usuario_id": usuario_id,
         "nombre": nombre,
@@ -1404,7 +1388,6 @@ function guardar_tarifa_nueva(){
         "tipo": tipo,
         "leyenda": leyenda,
     };
-
     let xhttp;
     xhttp = new XMLHttpRequest();
     //xhttp.open("GET","includes/guardar_tarifa.php?nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_junior="+precio_junior+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
@@ -1461,7 +1444,6 @@ function modificar_tarifa(id){
 	var precio_infantil= document.getElementById("precio_infantil").value;
     var tipo= document.getElementById("tipo").value;
     var leyenda= encodeURI(document.getElementById("leyenda").value);
-
     var datos = {
         "id": id,
         "usuario_id": usuario_id,
@@ -1474,7 +1456,6 @@ function modificar_tarifa(id){
         "tipo": tipo,
         "leyenda": leyenda
     };
-
     let xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/aplicar_editar_tarifa.php?id="+id+"&nombre="+nombre+"&precio_hospedaje="+precio_hospedaje+"&cantidad_hospedaje="+cantidad_hospedaje+"&cantidad_maxima="+cantidad_maxima+"&precio_adulto="+precio_adulto+"&precio_infantil="+precio_infantil+"&tipo="+tipo+"&leyenda="+leyenda+"&usuario_id="+usuario_id,true);
@@ -1506,12 +1487,10 @@ function borrar_tarifa(id, nom, precio_hospedaje, cantidad_hospedaje, cantidad_m
     let precio = precio_hospedaje;
     let habitaciones = habitacion;
     let leyendas = leyenda;
-
     let datos = {
         "id": id,
         "usuario_id": usuario_id,
     };
-
     let tabla = document.createElement("div");
     tabla.innerHTML += `
     <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
@@ -1530,7 +1509,6 @@ function borrar_tarifa(id, nom, precio_hospedaje, cantidad_hospedaje, cantidad_m
         <td>${leyendas}</td>
         </tr>
     </table> <br>`;
-
     var xhttp;
     xhttp = new XMLHttpRequest();
     swal({
@@ -1651,7 +1629,6 @@ function modificar_hab(id){
     var nombre= encodeURI(document.getElementById("nombre").value);
 	var tipo= document.getElementById("tipo").value;
 	var comentario= encodeURI(document.getElementById("comentario").value);
-
     var datos = {
         "id": id,
         "nombre": nombre,
@@ -1659,7 +1636,6 @@ function modificar_hab(id){
         "comentario": comentario,
         "usuario_id": usuario_id,
     };
-
     let xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/aplicar_editar_hab.php?id="+id+"&nombre="+nombre+"&tipo="+tipo+"&comentario="+comentario+"&usuario_id="+usuario_id,true);
@@ -1707,7 +1683,6 @@ function borrar_hab(ID, nom, habitacion, comentario){
         <td>${comentario}</td>
         </tr>
     </table> <br>`;
-
     let xhttp;
     xhttp = new XMLHttpRequest();
     swal({
@@ -1821,7 +1796,6 @@ function manejarReservacion(control){
         document.getElementById('tarifa').disabled=false;
         // document.getElementById('numero_hab').disabled=false;
     }
-
 }
 
 function calcular_nochesChek(){
@@ -1843,7 +1817,6 @@ function editarTotalEstancia(event){
     suma_extra = Number(extra_adultos) + Number(extra_infantil)
     // console.log(suma_extra,cantidad_maxima)
     diff_extra=0
-
     if(cantidad_maxima!=0){
         if(suma_extra >cantidad_maxima){
             alert("Ha superado la cantidad máxima de personas de la habitación")
@@ -1929,7 +1902,6 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
     elemento_opcion = elemento.options[elemento.selectedIndex]
     if(elemento_opcion!=undefined){
         tipo_hab = elemento.options[elemento.selectedIndex].getAttribute('data-tipo')
-
         if(tipo_hab == null){
             tipo_hab=0
         }
@@ -1939,7 +1911,6 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
         precio_hospedaje  = forzar_tarifa/noches;
         // document.getElementById("precio_hospedaje").value = precio_hospedaje
     }
-
     //Si cambia el numero de noches y ya existen tarifas se calcula el total de la instancia.
     tarifa_base = $("#tarifa_base").val()
     if(fecha_entrada_value!="" && fecha_salida_value!=""){
@@ -2342,7 +2313,6 @@ function calcular_total_cupon(precio_hospedaje,total_adulto,total_junior,total_i
 	var total_adulto= total_adulto * extra_adulto;
 	var total_junior= total_junior * extra_junior;
 	var total_infantil= total_infantil * extra_infantil;
-
 	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil;
 	//var total= total_hab + total_suplementos;
     var total= total_hab;
@@ -2386,43 +2356,29 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     }
 
     var forzar_tarifa = $("#forzar-tarifa").val()
-
     var extra_adulto= Number(document.getElementById("extra_adulto").value);
     var extra_infantil= Number(document.getElementById("extra_infantil").value);
-
     let adultos = extra_adulto
     let infantiles = extra_infantil
-
     var pax_extra= Number(document.getElementById("pax-extra").value);
-
     var tipo_hab= (document.getElementById("tipo-habitacion").value);
-
     var total= (document.getElementById("total").value);
-
     var plan_alimentos = (document.getElementById("plan-alimentos").value);
     // var estado = preasignada!="" ? 4 : 2;
     // estado = 1;
     var forma_pago= (document.getElementById("forma-garantia").value);
-
     var fecha_entrada= (document.getElementById("fecha_entrada").value);
     var fecha_salida= (document.getElementById("fecha_salida").value);
     var noches = (document.getElementById("noches").value);
     var numero_hab = (document.getElementById("numero_hab").value);
-
     var precio_hospedaje = (document.getElementById("tarifa").value);
     var total_hospedaje= precio_hospedaje * noches * numero_hab;
     var total_hab= total_hospedaje + extra_adulto  + extra_infantil + pax_extra;
-
     var precio_hospedaje = document.getElementById('precio_hospedaje').value
     total_hab = precio_hospedaje * noches * numero_hab
-
     var total_hospedaje = document.getElementById('total').value
-
     sobrevender = sobrevender ? 1 : 0 ;
-
     total_pago = document.getElementById('garantia_monto').value;
-
-
     //verifica si hay una tarifa (forzada o no)
     var tarifa_existe = 0;
     if($("#forzar-tarifa").val()==""){
@@ -2436,23 +2392,17 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         total_hab = precio_hospedaje * noches * numero_hab
         $("#tarifa").removeAttr('required');
     }
-
     ruta="includes/guardar_reservacionNew.php";
-
     if(id_cuenta!=0 || id_reservacion!=0){
         ruta="includes/aplicar_editar_reservacionNew.php";
     }
     var voucher =document.getElementById('voucher').value
     var estado_tarjeta=document.getElementById('estadotarjeta').value
-
-
     estado_credito = $("#estadocredito").val()
     limite_credito = $("#limitecredito").val()
     limite_credito = limite_credito == "" ? 0 : limite_credito
-
     suma_extra = Number(extra_adulto) + Number(extra_infantil)
     diff_extra=0
-
     if(suma_extra>cantidad_hospedaje){
         diff_extra = suma_extra - cantidad_hospedaje
         extra_adulto = diff_extra
@@ -2461,10 +2411,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         extra_adulto=0
         extra_infantil=0
     }
-
     let adicionales = obtener_adicionales()
     adicionales = adicionales.length== 0 ? 0: adicionales
-
     var datos = {
         "id":id_reservacion,
         "id_huesped": id_huesped,
@@ -2512,7 +2460,6 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     // console.log(datos, ruta)
     // return
     var correo = $("#correo").val()
-
     if(fecha_entrada.length >0 && fecha_salida.length >0 && noches >0  && tarifa_existe >0 && persona_reserva.length >0 && forma_pago !="" && total_hab >=0){
         $.ajax({
             async:true,
@@ -2727,9 +2674,9 @@ function verificarFormulario(id_form,field) {
         // Verifica si el elemento es un campo requerido y si está vacío
     if (elemento.required && elemento.value === "") {
     if(field=="id"){
-            camposNoValidados.push(elemento.id);
+        camposNoValidados.push(elemento.id);
     }else{
-            camposNoValidados.push(elemento.name);
+        camposNoValidados.push(elemento.name);
     }
     }
     }
@@ -3057,7 +3004,6 @@ function ver_reservaciones(){
 	$("#area_trabajo_menu").load("includes/ver_reservaciones.php?usuario_id="+usuario_id);
     closeModal();
 	closeNav();
-
 }
 
 // Muestra la paginacion de las reservaciones
@@ -3065,7 +3011,6 @@ function ver_reservaciones_paginacion(buton,posicion,caso=0){
     var usuario_id=localStorage.getItem("id");
     inicial = $('#inicial').value
     final =$('#final').value
-
     $("#paginacion_reservaciones").load("includes/ver_reservaciones_paginacion.php?posicion="+posicion+"&usuario_id="+usuario_id+"&caso="+caso+"&inicial="+inicial+"&final="+final,
     function(res){
     });
@@ -3230,6 +3175,7 @@ function reporte_reservacion_por_dia(dia){
     var usuario_id=localStorage.getItem("id");
     window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id);
 }
+
 // Editar una reservacion
 function editar_reservacionNew(id,ruta_regreso){
     if(ruta_regreso==""){
@@ -3237,6 +3183,7 @@ function editar_reservacionNew(id,ruta_regreso){
     }
     $("#area_trabajo_menu").load("includes/editar_reservacionNew.php?id="+id+"&ruta_regreso="+ruta_regreso);
 }
+
 // Editar un checkin
 function editar_checkin(id,hab_id,ruta_regreso){
     var usuario_id=localStorage.getItem("id");
@@ -3282,7 +3229,6 @@ function calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_
 	var total_adulto= total_adulto * extra_adulto;
 	var total_junior= total_junior * extra_junior;
 	var total_infantil= total_infantil * extra_infantil;
-
 	var total_hab= total_hospedaje + total_adulto + total_junior + total_infantil; 
 	//var total= total_hab + total_suplementos;
     var total= total_hab;
@@ -3331,7 +3277,6 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 	var calculo_descuento= descuento_total(total,descuento);
 	calculo_descuento= redondearDecimales(calculo_descuento,2);
 	total= calculo_descuento;
-
 	if(id >0 && id_huesped >0 && fecha_entrada.length >0 && fecha_salida.length >0 && noches >0 && numero_hab >0 && tarifa >0 && nombre_reserva.length >0 && forma_pago.length >0 && limite_pago >0 && total_suplementos >=0 && total_pago >=0 && descuento >-0.01 && descuento <100){
         if(cantidad_ocupacion <= cantidad_maxima){
             $("#boton_reservacion").html('<div class="spinner-border text-primary"></div>');
@@ -3389,7 +3334,6 @@ function modificar_reservacion(id,precio_hospedaje,total_adulto,total_junior,tot
 
 // Muestra las reservaciones de la bd
 function ver_reporte_reservacion(id,ruta="regresar_reservacion()",titulo="RESERVACION",correo=""){
-
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
@@ -3432,8 +3376,7 @@ function borrar_reservacion(id,preasignada=0){
 }
 
 //funcion para agregar la habitacion seleccionada a la reservacion.
-function guardar_preasignar_reservacion(id,opcion=0)
-{
+function guardar_preasignar_reservacion(id,opcion=0){
     var usuario_id=localStorage.getItem("id");
     preasignada = $("#preasignada").val();
     // console.log(preasignada,id)
@@ -3472,6 +3415,7 @@ function guardar_preasignar_reservacion(id,opcion=0)
         alert("Campos incompletos");
     }
 }
+
 // Modal de preasignar reservacion
 function preasignar_reservacion(id,opcion=0,tipo_hab,numero_hab){
     console.log(numero_hab)
@@ -3516,24 +3460,19 @@ function garantizar_reserva_selects(){
     estado =$("#estado").val()
     garantia =$("#forma-garantia option:selected").text()
     garantia = garantia.toLowerCase()
-
     if(estado=="garantizada" && garantia.includes('tarjeta')){
         $("#div-tarjeta").show()
     }else{
         $("#div-tarjeta").hide()
     }
-
 }
 
 function garantizar_reservacion(id,preasignada=0,correo,garantizada=0,huesped_id){
-
     var usuario_id=localStorage.getItem("id");
     var estado= encodeURI(document.getElementById("estado").value);
     var forma_garantia= encodeURI(document.getElementById("forma-garantia").value);
     var monto= encodeURI(document.getElementById("monto").value);
-
     numero_tarjeta=$("#numero_tarjeta").val()
-
     if(numero_tarjeta!=""){
         guardar_datos_tarjeta(huesped_id,forma_garantia)
     }
@@ -3675,7 +3614,6 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
     }else{
         $("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab+"&mov="+movimiento);
     }
-
     //si no, tendrá que seleccionar una de las habitaciones disponibles.
 }
 
@@ -3837,12 +3775,10 @@ function asignar_reservacion_multiple(hab_id,id_reservacion,habitaciones){
 }
 
 //* Huesped *//
-
 function agregar_vehiculo(id_reserva,id_huesped){
     let usuario_id=localStorage.getItem("id");
 	$("#mostrar_herramientas").load("includes/agregar_datos_vehiculo.php?usuario_id="+usuario_id+"&id_huesped="+id_huesped+"&id_reserva="+id_reserva);
 }
-
 
 // Agregar un huesped
 function agregar_huespedes(){
@@ -3866,9 +3802,7 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
     let usuario_id=localStorage.getItem("id");
     let matricula = $("#matricula").val();
     let ingreso = $("#ingreso").val();
-
     // console.log(fecha_ingreso)
-
     if(matricula == "" || ingreso == ""){
             alert("Debe escribir al menos una matrícula y una fecha de ingreso");
     }else{
@@ -3919,8 +3853,6 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
 	var vencimiento_mes= encodeURI(document.getElementById("vencimiento_mes").value);
 	var vencimiento_ano= encodeURI(document.getElementById("vencimiento_ano").value);
 	var cvv= encodeURI(document.getElementById("cvv").value);
-
-
     estado_credito = "";
     if ($('#c_abierto').is(':checked')) {
         estado_credito = "abierto";
@@ -3929,7 +3861,6 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
         estado_credito = "cerrado";
     }
     limite_credito = encodeURI(document.getElementById("limite_credito").value);
-
     var datos = {
         "nombre": nombre,
         "apellido": apellido,
@@ -3951,7 +3882,6 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
         "cvv": cvv,
         "usuario_id": usuario_id,
     };
-
     if(!verificarFormulario("form-huesped","id")){
         let xhttp;
         xhttp = new XMLHttpRequest();
@@ -3961,7 +3891,6 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
         "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&usuario_id="+usuario_id+
         "&estado_credito="+estado_credito+"&limite_credito="+limite_credito,
         true);
-
         xhttp.addEventListener('load', e =>{
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {
@@ -3985,7 +3914,6 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
         })
         xhttp.send();
     }
-
 }
 
 function mostrar_tarjeta(huesped_id){
@@ -4021,9 +3949,7 @@ function validar_pass(password,huesped_id){
             if(res!=0){
                 console.log("good")
                 $('#numero_tarjeta').val(res)
-
                 $('#numero_tarjeta').prop("disabled",false)
-
             }else{
                 $('#check_tarjeta').prop('checked', false);
             }
@@ -4077,7 +4003,6 @@ function buscar_historial_huesped(id){
     a_buscar = $("#a_buscar").val()
     inicial = $("#inicial_historial").val() === undefined ? 0 :  $("#inicial_historial").val()
     final =$("#final_historial").val() === undefined  ? 0 : $("#final_historial").val()
-
     $("#tabla_historial").load("includes/buscar_historial_huesped.php?id="+id+"&inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar);
 }
 
@@ -4086,7 +4011,6 @@ function buscar_historial_cuentas(){
     a_buscar = $("#a_buscar").val()
     inicial = $("#inicial_historial").val() === undefined ? 0 :  $("#inicial_historial").val()
     final =$("#final_historial").val() === undefined  ? 0 : $("#final_historial").val()
-
     $("#tabla_historial").load("includes/buscar_historial_cuentas.php?inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar)+"&usuario_id="+usuario_id;
 }
 
@@ -4268,9 +4192,7 @@ function regresar_editar_huesped(){
 }
 
 //***// ESTADOS DE RACKS //***//
-
 function habSeleccionada(event){
-
     if(event!=0){
         var tipo_hab = event.target.options[event.target.selectedIndex].dataset.habtipo;
         if(tipo_hab!=undefined){
@@ -4288,11 +4210,9 @@ function uso_casa_asignar(hab_id,estado){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-
     $("#area_trabajo_menu").load("includes/agregar_uso_casa.php?hab_id="+hab_id); 
 	$('#caja_herramientas').modal('hide');
 }
-
 
 // Agregar una reservacion en la habitacion
 function disponible_asignar(hab_id,estado){
@@ -4306,7 +4226,6 @@ function disponible_asignar(hab_id,estado){
 }
 
 //* Reporte *//
-
 // Aceptar realizara el cargo por noche de las habitaciones ocupadas
 function mostrar_cargo_noche(){
 	$('#area_trabajo').hide();
@@ -4364,7 +4283,6 @@ function aceptar_cargo_noche(){
 function cargo_noche(){
     var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
-
     var datos = {
             "usuario_id": usuario_id,
         };
@@ -4442,13 +4360,11 @@ function busqueda_cargo_noche(){
 }
 
 //* Forma pago *//
-
 // Guardar una forma de pago
 function guardar_forma_pago(){
     var usuario_id=localStorage.getItem("id");
 	var descripcion= encodeURI(document.getElementById("descripcion").value);
     var garantia = encodeURI(document.getElementById('garantia').checked)
-
 	if(descripcion.length >0){
 			$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
@@ -4496,9 +4412,7 @@ function modificar_forma_pago(id){
 	var usuario_id=localStorage.getItem("id");
     var descripcion= encodeURI(document.getElementById("descripcion_nueva").value);
     var garantia= encodeURI(document.getElementById("garantia_nueva").checked);
-
     $('#caja_herramientas').modal('hide');
-
     if(id >0 && descripcion.length >0){
 		$("#boton_forma").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -4558,7 +4472,6 @@ function aceptar_borrar_forma_pago(id){
 }
 
 //* Usuario *//
-
 // Agregar un usuario
 function agregar_usuarios(id){
 	$('#area_trabajo').hide();
@@ -4582,7 +4495,6 @@ function guardar_usuario(){
     var celular= encodeURI(document.getElementById("celular").value);
     var correo= encodeURI(document.getElementById("correo").value);
     var direccion= encodeURI(document.getElementById("direccion").value);
-
     if(usuario.length >0 && contrasena.length >0 && nivel >0){
         if(contrasena == recontrasena){
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
@@ -4715,14 +4627,10 @@ function modificar_usuario(id){
     var cupon_borrar= document.getElementById("cupon_borrar").checked;
     var logs_ver= document.getElementById("logs_ver").checked;
     var auditoria_ver= document.getElementById("auditoria_ver").checked;
-
     var auditoria_editar= document.getElementById("auditoria_editar").checked;
-
     var llegadas_salidas_ver= document.getElementById("llegadas_salidas_ver").checked;
-
     // console.log(reservacion_preasignar)
     // return
-
     // Convertir usuario permisos
     if(usuario_ver){
         usuario_ver=1;
@@ -4745,7 +4653,6 @@ function modificar_usuario(id){
     }else{
         usuario_borrar = 0;
     }
-
     // Convertir huesped permisos
     if(huesped_ver){
         huesped_ver = 1;
@@ -4767,7 +4674,6 @@ function modificar_usuario(id){
     }else{
         huesped_borrar = 0;
     }
-
     // Convertir tipo permisos
     /*if(tipo_ver){
         tipo_ver = 1;
@@ -4789,7 +4695,6 @@ function modificar_usuario(id){
     }else{
         tipo_borrar = 0;
     }*/
-
     // Convertir tarifa permisos
     if(tarifa_ver){
         tarifa_ver = 1;
@@ -4811,7 +4716,6 @@ function modificar_usuario(id){
     }else{
         tarifa_borrar = 0;
     }
-
     // Convertir hab permisos
     /*if(hab_ver){
         hab_ver = 1;
@@ -4833,7 +4737,6 @@ function modificar_usuario(id){
     }else{
         hab_borrar = 0;
     }*/
-
     // Convertir reservacion permisos
     if(reservacion_ver){
         reservacion_ver = 1;
@@ -4855,7 +4758,6 @@ function modificar_usuario(id){
     }else{
         reservacion_borrar = 0;
     }
-
     // Convertir reporte permisos
     if(reporte_ver){
         reporte_ver = 1;
@@ -4888,7 +4790,6 @@ function modificar_usuario(id){
     }else{
         forma_pago_borrar = 0;
     }
-
     // Convertir inventario permisos
     if(inventario_ver){
         inventario_ver = 1;
@@ -4936,7 +4837,6 @@ function modificar_usuario(id){
     }else{
         categoria_borrar = 0;
     }
-
     // Convertir restaurante permisos
     if(restaurante_ver){
         restaurante_ver = 1;
@@ -4958,7 +4858,6 @@ function modificar_usuario(id){
     }else{
         restaurante_borrar = 0;
     }
-
     // Convertir cupon permisos
     if(cupon_ver){
         cupon_ver = 1;
@@ -4980,14 +4879,12 @@ function modificar_usuario(id){
     }else{
         cupon_borrar = 0;
     }
-
     // Convertir logs permisos
     if(logs_ver){
         logs_ver = 1;
     }else{
         logs_ver = 0;
     }
-
 	if(usuario.length >0 && nivel.length >0){
         //if(contrasena == recontrasena){
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
@@ -5121,7 +5018,6 @@ function regresar_editar_usuario(){
 }
 
 //* Edo. Cuenta *//
-
 // Muestra el estado de cuenta de una habitacion
 function estado_cuenta_maestra(hab_id,estado,mov,id){
     var usuario_id=localStorage.getItem("id");
@@ -5145,6 +5041,7 @@ function estado_cuenta(hab_id,estado,mov=0){
     });
 	$('#caja_herramientas').modal('hide');
 }
+
 function validarNumero(event) {
     const charCode = event.charCode;
     // Check if the pressed key is a number (charCode 48 to 57 represent digits 0 to 9)
@@ -5152,9 +5049,9 @@ function validarNumero(event) {
     event.preventDefault();
     }
 }
+
 // Agregar un cargo al cargo por habitacion //
 function agregar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
-
 	$("#mostrar_herramientas").load("includes/agregar_cargo.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante+"&mov="+mov+"&id_maestra="+id_maestra);
 }
 
@@ -5207,7 +5104,6 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
 
 // Agregar un abono al cargo por habitacion //
 function agregar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
-
 	$("#mostrar_herramientas").load("includes/agregar_abono.php?hab_id="+hab_id+"&estado="+estado+"&faltante="+faltante+"&mov="+mov+"&id_maestra="+id_maestra);
 }
 
@@ -5216,13 +5112,11 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
     /*alert(hab_id);
     alert(estado);
     alert(faltante);*/
-
     var usuario_id=localStorage.getItem("id");
     var descripcion= encodeURI(document.getElementById("descripcion").value);
     var forma_pago= document.getElementById("forma_pago").value;
     var cargo= document.getElementById("cargo").value;
     var abono= document.getElementById("abono").value;
-
     var fp_txt = $("#forma_pago option:selected").text();
     // console.log(fp_txt)
     // return
@@ -5325,7 +5219,6 @@ function confirmar_cambiar_cargos(){
         }
         });
     }
-
     function campos_cargos(){
         var usuario_id=localStorage.getItem("id");
         var array_cargos=[];
@@ -5416,7 +5309,6 @@ function cargo_auditoria(){
     return false;
 }
 
-
 // Editar un cargo en estado de cuenta desde auditoria.
 function modificar_herramientas_cargo_aud(id,hab_id,estado,id_maestra=0,mov=0,campo){
 	var usuario_id=localStorage.getItem("id");
@@ -5452,13 +5344,10 @@ function modificar_herramientas_cargo_aud(id,hab_id,estado,id_maestra=0,mov=0,ca
     return false;
 }
 
-
 // Editar un cargo en estado de cuenta
 function modificar_herramientas_cargo(id,hab_id,estado,id_maestra=0,mov=0){
 	var usuario_id=localStorage.getItem("id");
     var cargo= document.getElementById("cargo").value;
-
-
     if(id >0){
 		$("#boton_cargo").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -5506,7 +5395,6 @@ function aceptar_borrar_herramientas_cargo(id,hab_id,estado,cargo,id_maestra,mov
 function borrar_herramientas_cargo(id,hab_id,estado,id_maestra,mov){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
-
     if(id >0){
         var datos = {
                 "id": id,
@@ -5555,8 +5443,6 @@ function editar_herramientas_abono(id,hab_id,estado,abono,id_maestra=0,mov=0){
 function modificar_herramientas_abono(id,hab_id,estado,id_maestra=0,mov=0){
 	var usuario_id=localStorage.getItem("id");
     var abono= document.getElementById("abono").value;
-
-
     if(id >0){
 		$("#boton_abono").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -5602,7 +5488,6 @@ function aceptar_borrar_herramientas_abono(id,hab_id,estado,abono,mov=0,id_maest
 function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
-
     if(id >0){
         var datos = {
                 "id": id,
@@ -5614,11 +5499,11 @@ function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
             };
         $.ajax({
                 async:true,
-              type: "POST",
-              dataType: "html",
-              contentType: "application/x-www-form-urlencoded",
-              url:"includes/borrar_herramientas_abono.php",
-              data:datos,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"includes/borrar_herramientas_abono.php",
+                data:datos,
               //beforeSend:loaderbar,
             success:function(res){
                 if(id_maestra==0){
@@ -5637,9 +5522,7 @@ function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
     }
 }
 
-
 //* Edo. Cuenta - Cambiar hab *//
-
 // Modal de cambiar de habitacion el monto en estado de cuenta
 function cambiar_hab_herramientas_monto(monto,id,hab_id,estado,cargo){
     $("#mostrar_herramientas").load("includes/modal_cambiar_hab_herramientas_monto.php?monto="+monto+"&id="+id+"&hab_id="+hab_id+"&estado="+estado+"&cargo="+cargo);
@@ -5649,7 +5532,6 @@ function cambiar_hab_herramientas_monto(monto,id,hab_id,estado,cargo){
 function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
-
 	var datos = {
             "id_hab": id_hab,
             "mov": mov,
@@ -5677,10 +5559,8 @@ function cambiar_hab_monto(id_hab,mov,monto,id,hab_id,estado){
 function cargos_seleccionados(){
     const cargos= document.getElementsByClassName('campos_cargos')
     let array_cargos=[]
-
     const abonos= document.getElementsByClassName('campos_abonos')
     let array_abonos=[]
-    
     for (let i = 0; i < cargos.length; i++) {
         // console.log(cargos[i].dataset.cuentaid)
         if(cargos[i].checked)
@@ -5688,7 +5568,6 @@ function cargos_seleccionados(){
                 "cargo_id":cargos[i].dataset.cuentaid,
                 })
     }
-
     for (let i = 0; i < abonos.length; i++) {
         if(abonos[i].checked)
             array_abonos.push({
@@ -5707,8 +5586,6 @@ function seleccionar_cuentas(hab_id,estado,mov){
 
 // Modal para unificar cuentas en una habitacion seleccionada
 function unificar_cuentas(hab_id,estado,mov){
-   
-
     $("#mostrar_herramientas").load("includes/modal_unificar_cuentas.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
 }
 
@@ -5757,7 +5634,6 @@ function cambiar_hab_cuentas_seleccionadas(id_hab,nombre_hab,mov_hab,hab_id,esta
 }
 
 function confirmar_duplicar_reservacion(id_reserva,id_mov, ruta){
-
     swal({
         title: "¿Estás de acuerdo con duplicar la reservación?",
         icon: "warning",
@@ -5784,8 +5660,6 @@ function confirmar_duplicar_reservacion(id_reserva,id_mov, ruta){
             duplicar_reservacion(id_reserva,id_mov,ruta)
         }
         });
-
-   
 }
 
 function confirmar_cancelar_preasignada(id_reserva,id_mov,ruta){
@@ -5815,8 +5689,6 @@ function confirmar_cancelar_preasignada(id_reserva,id_mov,ruta){
             cancelar_preasignada(id_reserva,id_mov,ruta)
         }
         });
-
-   
 }
 
 function cancelar_preasignada(id_reserva,id_mov,ruta){
@@ -5883,7 +5755,7 @@ function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
             async:true,
             type: "POST",
             dataType: "html",
-            contentType: "application/x-www-form-urlencoded", 
+            contentType: "application/x-www-form-urlencoded",
             url:"includes/cambiar_hab_cuentas.php",
             data:datos,
             beforeSend:loaderbar,
@@ -5896,7 +5768,6 @@ function cambiar_hab_cuentas(id_hab,nombre_hab,mov_hab,hab_id,estado,mov){
 }
 
 //* Categoria *//
-
 // Guardar un categoria del inventario
 function guardar_categoria(){
 	var usuario_id=localStorage.getItem("id");
@@ -5946,8 +5817,6 @@ function modificar_categoria(id){
 	var usuario_id=localStorage.getItem("id");
     var nombre = encodeURI(document.getElementById("nombre_categoria").value);
     $('#caja_herramientas').modal('hide');
-
-
     if(id >0 && nombre.length >0){
 		$("#boton_categoria").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -5998,12 +5867,12 @@ function borrar_categoria(id){
             });
         return false;
     }
-}
+};
 
 // Modal de borrar una categoria
 function aceptar_borrar_categoria(id){
 	$("#mostrar_herramientas").load("includes/borrar_modal_categoria.php?id="+id);
-}
+};
 
 //* Inventario y Sutir*//
 
@@ -6012,9 +5881,9 @@ function agregar_inventario(){
 	$('#area_trabajo').hide();
     $('#pie').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/agregar_inventario.php"); 
+	$("#area_trabajo_menu").load("includes/agregar_inventario.php");
 	closeNav();
-}
+};
 
 // Guardar en el inventario
 function guardar_inventario(){
@@ -6029,7 +5898,6 @@ function guardar_inventario(){
     var bodega_inventario= document.getElementById("bodega_inventario").value;
     var bodega_stock= document.getElementById("bodega_stock").value;
     var clave= document.getElementById("clave").value;
-
 	if(nombre.length >0 && categoria >0 && precio >0){
 			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
@@ -6076,7 +5944,6 @@ function ver_inventario(){
 }
 
 function switch_rack(){
-
     if(siguiente_vista==0){
         localStorage.setItem('vista',0)
         localStorage.setItem('txt_vista',"Rack Habitacional")
@@ -6095,7 +5962,6 @@ function switch_rack(){
         closeModal();
         closeNav();
         siguiente_vista=1;
-
     }else{
         console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
@@ -6136,7 +6002,7 @@ function buscar_inventario(){
     }else{
         $('.pagination').show();
     }
-	$("#tabla_inventario").load("includes/buscar_inventario.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);  
+	$("#tabla_inventario").load("includes/buscar_inventario.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id);
 }
 
 // Editar el inventario
@@ -6157,8 +6023,6 @@ function modificar_inventario(id){
     var bodega_inventario= document.getElementById("bodega_inventario").value;
     var bodega_stock= document.getElementById("bodega_stock").value;
     var clave= document.getElementById("clave").value;
-
-
 	if(id >0){
 		$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
         var datos = {
@@ -6234,7 +6098,6 @@ function regresar_editar_inventario(){
 }
 
 //* Surtir *//
-
 // Muestra los productos para poder surtir inventario
 function surtir_inventario(){
 	$('#area_trabajo').hide();
@@ -6333,8 +6196,6 @@ function aceptar_editar_surtir_inventario(id){
 // Editar un producto de surtir inventario
 function editar_surtir_inventario(id){
 	var cantidad= document.getElementById("cantidad").value;
-
-
 	if(cantidad >0){
         $('#caja_herramientas').modal('hide');
 		$("#boton_surtir").html('<div class="spinner-border text-primary"></div>');
@@ -6424,7 +6285,6 @@ function reporte_surtir_inventario(id){
 }
 
 //* Restaurante *//
-
 // Agregar en el restaurante
 function agregar_restaurante(hab_id,estado,maestra=0,mov=0){
     $('#caja_herramientas').modal('hide');
@@ -6465,7 +6325,6 @@ function buscar_categoria_restaurente(categoria,hab_id,estado,mov,mesa,maestra=0
 function buscarCategoriaRestaurante(categoria,hab_id,estado,mov,mesa){
     $("#caja_mostrar_busqueda").load("includes/mostrar_buscar_categoria_restaurente.php?categoria="+categoria+"&hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&mesa="+mesa);
 }
-
 
 // Mostrar productos de las categorias existentes en el inventario
 function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa,maestra=0){
@@ -6536,7 +6395,6 @@ function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad
 	var usuario_id=localStorage.getItem("id");
     var categoria= 0;
     var cantidad= document.getElementById("cantidad").value;
-
 	if(cantidad>0){
         var datos = {
             "producto": producto,
@@ -6573,9 +6431,7 @@ function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad
 function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa,id_maestra=0){
     var usuario_id=localStorage.getItem("id");
     var categoria= 0;
-
     console.log(id_maestra);
-
     var datos = {
 		"producto": producto,
         "categoria": categoria,
@@ -6615,13 +6471,12 @@ function guardar_inventario(){
     var bodega_inventario= document.getElementById("bodega_inventario").value;
     var bodega_stock= document.getElementById("bodega_stock").value;
     var clave= document.getElementById("clave").value;
-
 	if(nombre.length >0 && categoria >0 && precio >0){
 			$("#boton_inventario").html('<div class="spinner-border text-primary"></div>');
 			var datos = {
-			 	"nombre": nombre,
-				"descripcion": descripcion,
-				"categoria": categoria,
+			    "nombre": nombre,
+			    "descripcion": descripcion,
+			    "categoria": categoria,
                 "precio": precio,
                 "precio_compra": precio_compra,
                 "stock": stock,
@@ -6630,7 +6485,7 @@ function guardar_inventario(){
                 "bodega_stock": bodega_stock,
                 "clave": clave,
                 "usuario_id": usuario_id,
-				};
+			};
 			$.ajax({
                     async:true,
                     type: "POST",
@@ -6687,7 +6542,7 @@ function cambio_rest_cobro(total){
 	document.getElementById("cambio").value =cambio;
 }
 
-// Descuento en pedir restaurante 
+// Descuento en pedir restaurante
 function cambio_rest_descuento(total){
 	var descuento= Number(document.getElementById("descuento").value);
     var calculo_descuento= descuento_total(total,descuento);
@@ -6734,7 +6589,6 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
 	var total_pago= efectivo + monto;
     total_descuento= total_inicial - total_final;
     total_descuento= redondearDecimales(total_descuento,2);
-
     // Checar si el cobro es en mesa o no
     if(monto <= total_final){
         if(total_pago >= total_final){
@@ -6826,7 +6680,7 @@ function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
     }
 }
 
-// Datos del modal de confirmacion de cargar restaurante cobro 
+// Datos del modal de confirmacion de cargar restaurante cobro
 function modal_cargar_rest_cobro(total,mesa_id,estado,mov){
     $("#mostrar_herramientas").load("includes/modal_cargar_rest_cobro.php?total="+total+"&mesa_id="+mesa_id+"&estado="+estado+"&mov="+mov); 
 }
@@ -6873,7 +6727,6 @@ function cargar_rest_cobro_mesa(total,mesa_id,estado,mov){
     }
     total_descuento= total_inicial - total_final;
     total_descuento= redondearDecimales(total_descuento,2);
-
     if(hab.length >0){
         if((revision_nombre != revision_hab) || (revision_apellido != revision_hab)){
             if(credencial.length >4){
@@ -6917,7 +6770,6 @@ function cargar_rest_cobro_mesa(total,mesa_id,estado,mov){
 }
 
 //ver cuenta maestra
-
 function ver_cuenta_maestra(){
     var usuario_id = localStorage.getItem("id");
     $('#area_trabajo').hide();
@@ -6993,7 +6845,6 @@ function aplicar_rest_cobro_mesa(total,hab_id,estado,mov){
                 return false;
 }
 
-
 // Regresa al inicio
 function principal(){
     $('#caja_herramientas').modal('hide');
@@ -7004,7 +6855,6 @@ function principal(){
 }
 
 //* Mesas *//
-
 // Mesas en el restaurante
 function agregar_mesa(){
     $('#caja_herramientas').modal('hide');
@@ -7020,7 +6870,6 @@ function guardar_mesa(){
     nombre=$("#nombre").val();
     comentario=$("#comentario").val();
     capacidad=$("#capacidad").val();
-
     if(nombre == ""){
         alert("Ingresa nombre de la mesa")
     }else if(capacidad == ""){
@@ -7058,7 +6907,6 @@ function guardar_mesa(){
             });
         return false;
     }
-
 }
 
 // Mesas en el restaurante
@@ -7072,7 +6920,7 @@ function mesas_restaurante(){
 }
 
 // Muestra o carga los productos por mesa
-function mostrar_herramientas_mesas(mesa_id,estado,nombre){ 
+function mostrar_herramientas_mesas(mesa_id,estado,nombre){
 	var id=localStorage.getItem("id");
 	$("#mostrar_herramientas").load("includes/mostrar_herramientas_mesas.php?mesa_id="+mesa_id+"&id="+id+"&estado="+estado+"&nombre="+nombre+"&id="+id);
 }
@@ -7081,7 +6929,6 @@ function mostrar_herramientas_mesas(mesa_id,estado,nombre){
 function mesa_disponible_asignar(mesa_id,estado){
 	$("#mostrar_herramientas").load("includes/mesa_disponible_asignar.php?mesa_id="+mesa_id+"&estado="+estado);
 }
-
 
 // Asignar una mesa disponible
 function disponible_asignar_mesa(mesa_id,estado){
@@ -7144,7 +6991,6 @@ function modificar_producto_mesa(mesa_id,producto,precio,id_producto,cantidad_an
     var cantidad= document.getElementById("cantidad").value;
 	var usuario= encodeURI(document.getElementById("usuario").value);
     var contrasena= document.getElementById("contrasena").value;
-
 	if(cantidad>0 && usuario.length>0 && contrasena.length>0){
         var datos = {
             "id": id,
@@ -7186,7 +7032,7 @@ function recibe_datos_editar_mesa(datos){
         $('#caja_herramientas').modal('hide');
 		ver_caja_rest(res[0],res[1]);
 	}else{
-		alert("¡Creo que has escrito mal tu usuario o contraseña!"); 
+		alert("¡Creo que has escrito mal tu usuario o contraseña!");
 		editar_modal_producto_mesa(res[0],res[3],res[4],res[5]);
 		//$("#renglon_entrada_mensaje").html('<strong id="mensaje_error" class="alert alert-warning"><span class="glyphicon glyphicon-remove"></span> Creo que has escrito mal tu usuario o contraseña </strong>');
 	}
@@ -7203,7 +7049,6 @@ function eliminar_producto_mesa(mesa_id,producto,id_producto){
 	var id=localStorage.getItem("id");
 	var usuario= encodeURI(document.getElementById("usuario").value);
     var contrasena= document.getElementById("contrasena").value;
-
 	if(usuario.length>0 && contrasena.length>0){
         var datos = {
             "id": id,
@@ -7365,7 +7210,6 @@ function cambio_rest_descuento_mesa(){
 }
 
 //* Cupon *//
-
 // Agregar un cupon
 function agregar_cupones(){
 	$('#area_trabajo').hide();
@@ -7391,7 +7235,6 @@ function guardar_cupon(){
     if(dinero_tipo){
         tipo=1;
     }
-
 	if(vigencia_inicio.length >0 && vigencia_fin.length >0 && codigo.length >0 && cantidad >0){
         if((cantidad >-0.01 && cantidad <100 && tipo == 0) || (cantidad >-0.01 && tipo == 1)){
 			$("#boton_cupon").html('<div class="spinner-border text-primary"></div>');
@@ -7489,7 +7332,6 @@ function modificar_cupon(id,hab_id,id_reservacion){
     if(dinero_tipo){
         tipo=1;
     }
-
 	if(vigencia_inicio.length >0 && vigencia_fin.length >0 && codigo.length >0 && cantidad >0){
         if((cantidad >-0.01 && cantidad <100 && tipo == 0) || (cantidad >-0.01 && tipo == 1)){
             $("#boton_cupon").html('<div class="spinner-border text-primary"></div>');
@@ -7565,7 +7407,6 @@ function regresar_editar_cupon(){
 }
 
 //* Configuracion *//
-
 // Cambiar la imagen de login del sistema
 function cambiar_imagen(){
 	var usuario_id=localStorage.getItem("id");
@@ -7615,7 +7456,6 @@ function previsualizar_estado(){
 }
 
 //* Cortes *//
-
 function saldo_huespedes(){
     usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
@@ -7668,7 +7508,6 @@ function mostrar_reporte_historial_cliente(id_huesped){
     a_buscar = $("#a_buscar").val()
     inicial = $("#inicial_historial").val() === undefined ? 0 :  $("#inicial_historial").val()
     final =$("#final_historial").val() === undefined  ? 0 : $("#final_historial").val()
-
     window.open("includes/guardar_historial_cuenta_cliente.php?usuario_id="+usuario_id+"&inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar+"&id="+id_huesped);
 }
 
@@ -7677,7 +7516,6 @@ function mostrar_reporte_historial(){
     a_buscar = $("#a_buscar").val()
     inicial = $("#inicial_historial").val() === undefined ? 0 :  $("#inicial_historial").val()
     final =$("#final_historial").val() === undefined  ? 0 : $("#final_historial").val()
-
     window.open("includes/guardar_historial_cuentas.php?usuario_id="+usuario_id+"&inicial="+inicial+"&final="+final+"&a_buscar="+a_buscar);
 }
 
@@ -7712,7 +7550,6 @@ function aceptar_guardar_corte(){
 	$("#mostrar_herramientas").load("includes/guardar_modal_corte.php");
 }
 
-
 // Modal de guardar corte
 function aceptar_guardar_corte_global(){
 	$("#mostrar_herramientas").load("includes/guardar_modal_corte_global.php");
@@ -7720,7 +7557,6 @@ function aceptar_guardar_corte_global(){
 
 function aceptar_ver_saldo_huspedes(){
     window.open("includes/reporte_saldo_huespedes.php");
-
 }
 
 // Guardar un corte global
@@ -7728,13 +7564,10 @@ function guardar_corte_nuevo(){
     var usuario_id=localStorage.getItem("id");
     //var usuario_id= 4;
     $('#caja_herramientas').modal('hide');
-
     var datos = {
         "usuario_id": usuario_id,
     };
-
     window.open("includes/guardar_corte_nuevo.php?id_usuario="+usuario_id);
-
     // $.ajax({
     //         async:true,
     //         type: "POST",
@@ -7760,7 +7593,6 @@ function guardar_corte_global(){
     var usuario_id=localStorage.getItem("id");
     //var usuario_id= 4;
     $('#caja_herramientas').modal('hide');
-
     var datos = {
         "usuario_id": usuario_id,
     };
@@ -7788,7 +7620,6 @@ function guardar_corte(){
     var usuario_id=localStorage.getItem("id");
     //var usuario_id= 4;
     $('#caja_herramientas').modal('hide');
-
     var datos = {
             "usuario_id": usuario_id,
         };
@@ -7829,7 +7660,6 @@ function mostrar_corte_reporte(){
 	var tam= tam_ventana();
 	var alto= tam[1];
 	var ancho= tam[0];
-
 	window.open("includes/mostrar_corte_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
     salirsession();
 }
@@ -7900,6 +7730,7 @@ function buscar_canceladas(e,opcion){
         $("#tabla_reservacion").load("includes/buscar_canceladas.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+opcion+"&final="+final);  
     }, "1000");
 }
+
 function ver_reportes_canceladas(btn=0){
     var usuario_id=localStorage.getItem("id");
     inicial = $("#inicial").val()
@@ -7960,7 +7791,6 @@ function buscador_reportes_reservas(opcion){
         a_buscar="";
     }
     a_buscar = encodeURIComponent(a_buscar)
-
 	var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
@@ -8003,7 +7833,6 @@ function imprimir_reportes(opcion){
     window.open(include);
 }
 
-
 function ver_reportes_reservaciones(opcion,btn=0){
     titulo=""
     ruta=""
@@ -8023,9 +7852,7 @@ function ver_reportes_reservaciones(opcion,btn=0){
         default:
             break;
     }
-
     titulo = encodeURIComponent(titulo)
-
     var usuario_id=localStorage.getItem("id");
     inicial = $("#dia").val()
     if(inicial==undefined){
@@ -8063,7 +7890,6 @@ function ver_reportes_reservaciones(opcion,btn=0){
     include = "includes/buscar_entradas_salidas.php?usuario_id="+usuario_id+"&opcion="+opcion+"&inicial="+inicial+"&a_buscar="+a_buscar
     $("#tabla_reservacion").load(include);
     }
-
 }
 
 function ver_reporte_historial_cliente(){
@@ -8108,7 +7934,6 @@ function busqueda_corte(){
 }
 
 //* Logs *//
-
 // Muestra los logs de la bd
 function ver_logs(){
     var usuario_id=localStorage.getItem("id");
@@ -8125,7 +7950,7 @@ function ver_logs_paginacion(buton,id,inicial,final){//
     //alert(id);
     //alert(inicial);
     //alert(final);
-    $("#paginacion_logs").load("includes/ver_logs_paginacion.php?id="+id+"&inicial="+inicial+"&final="+final);   
+    $("#paginacion_logs").load("includes/ver_logs_paginacion.php?id="+id+"&inicial="+inicial+"&final="+final);
 }
 
 // Busqueda por fecha en ver logs
@@ -8199,8 +8024,7 @@ function hab_estado_cambiar_hab(id_reserva, hab_id,estado,ruta){
 	$("#mostrar_herramientas").load("includes/hab_modal_estado_cambiar_hab.php?hab_id="+hab_id+"&estado="+estado);
 }
 
-
-// Cambiar huesped de habitacion 
+// Cambiar huesped de habitacion
 function hab_cambio(hab_id,estado,nueva_hab_id){
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
@@ -8298,7 +8122,6 @@ function hab_inicial(hab_id,estado,usuario){
 }
 
 //Edo. 1-Ocupado//
-
 // Modal de mandar a desocupar una habitacion ocupada
 function hab_desocupar_hospedaje(hab_id,estado,ver=0){
 	$("#mostrar_herramientas").load("includes/hab_modal_desocupar_hospedaje.php?hab_id="+hab_id+"&estado="+estado+"&ver="+ver);
@@ -8464,7 +8287,6 @@ function hab_terminar(hab_id,estado){
 }
 
 //Edo. 3-Limpieza//
-
 // Modal de cambiar persona que realiza estado de una habitacion
 function hab_cambiar_persona_estado(hab_id,estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_cambiar_persona.php?hab_id="+hab_id+"&estado="+estado);
@@ -8498,8 +8320,8 @@ function hab_cambiar_persona(hab_id,estado,usuario){
 
 //funcion para el acorderon
 function mostrarAcorderon(){
-    const acordeon = document.querySelector("#acordeon")
-    const acordeonIcon = document.querySelector("#acordeonIcon")
+    const acordeon = document.querySelector("#acordeon");
+    const acordeonIcon = document.querySelector("#acordeonIcon");
     acordeon.classList.toggle("activeAcordeon");
     acordeonIcon.classList.toggle("active");
 }
@@ -8515,7 +8337,7 @@ function mostrarAcordeonCompleto(cantidad=1){
         for ( let i = 1 ; i < input ; i++ ) {
             contenidoacordeon+= `
                 <div class="accordionItemBodyContentCustom">
-                    <label style="width: 100%;text-align: left;">Acompañante ${i}</label>
+                    <label style="width: 100%; text-align: left;">Acompañante ${i}</label>
                     <div >
                         <label for="acompañante ${i} nombre" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
                         <input  type="text" class="form-control nombreExtra" id="acompañante ${i} nombre" minlength="5" maxlength="15" >

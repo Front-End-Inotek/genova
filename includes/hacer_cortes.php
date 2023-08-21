@@ -75,7 +75,7 @@
                         $total_productos_hab= $total_productos_hab + $inf->producto_tipo_hab[$z];
                         $total_productos_rest= $total_productos_rest + $inf->producto_tipo_rest[$z];
                     }
-                      echo '<tr class="table-primary  text-center">
+                      echo '<tr class="table  text-center">
                         <td></td>
                         <td></td>
                         <td>'.$total_productos.'</td>
@@ -129,7 +129,7 @@
                         $total_cuartos_hospedaje= $total_cuartos_hospedaje + $inf->hab_total_hospedaje[$z];
                         $suma_cuartos_hospedaje= $suma_cuartos_hospedaje + $inf->hab_cantidad_hospedaje[$z];
                     }
-                    echo '<tr class="table-primary  text-center">
+                    echo '<tr class="table  text-center">
                       <td></td>
                      
                       <td>'.$suma_cuartos_hospedaje.'</td>
@@ -182,7 +182,7 @@
                           <td>$'.number_format($total[$z], 2).'</td>
                         </tr>';
                     }
-                    echo '<tr class="table-primary  text-center">
+                    echo '<tr class="table  text-center">
                       <td>Total</td>
                       <td>$'.number_format($total[2], 2).'</td>
                     </tr>';

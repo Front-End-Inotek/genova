@@ -4,13 +4,8 @@
   include_once("clase_cuenta.php");
   include_once('clase_huesped.php');
   include_once('clase_hab.php');
-
-  /**
-   *
-   */
   class Informacion extends ConexionMYSql
   {
-
     function __construct($hab_id,$estado,$mov,$id,$entrada="",$salida="")
     {
       switch ($estado) {
@@ -93,7 +88,6 @@
       $persona_limpio= 0;
       while($fila = mysqli_fetch_array($consulta))
       {
-
         if($fila['motivo'] == "preasignar"){
           $detalle_inicio = $fila['inicio_hospedaje'];
         }else{
@@ -157,15 +151,12 @@
       //se recibe la consulta y se convierte a arreglo
       $inicio_hospedaje= 0;
       $termina_hospe= 0;
-
       $txt_inicio ="Última reservación:";
       $txt_fin ="Termino ocupada:";
-
       while($fila = mysqli_fetch_array($consulta))
       {
         $inicio_hospedaje= $fila['inicio_hospedaje'];
         $termina_hospe= $fila['finalizado'];
-
         if(empty($inicio_hospedaje)){
           $inicio_hospedaje = $fila['detalle_inicio'];
           $txt_inicio ="Último movimiento:";
@@ -305,7 +296,6 @@
         echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
-
     // Estado 7
     function reserva_pendiente($hab_id,$estado,$mov,$id,$entrada,$salida){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
@@ -333,7 +323,6 @@
         echo 'Tipo Habitación: '.$tipo_habitacion;
       echo '</div>';
     }
-
     // Estado 8
     function uso_casa($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
@@ -399,8 +388,7 @@
       $modelo=0;
       $modelo=0;
       $anotacion=0;
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         $detalle_inicio=$fila['detalle_inicio'];
         $cobara=$fila['detalle_realiza'];
         $termina_hospe=$fila['fin_hospedaje'];
@@ -445,8 +433,7 @@
                   //echo $sentencia;
                   $comentario="obtener los productos vendidos";
                   $consulta= $this->realizaConsulta($sentencia,$comentario);
-                  while ($fila = mysqli_fetch_array($consulta))
-                  {
+                  while ($fila = mysqli_fetch_array($consulta)){
                       echo '<div>
                       '.$fila['cantidad'].' -  '.$this->nombre_producto($fila['producto']).'
                       </div>';
@@ -454,15 +441,13 @@
                 echo '</div>
           </div>
         </div>';
-
     }
     function nombre_producto($id){
       $sentencia = "SELECT nombre FROM  producto WHERE id  = $id  LIMIT 1 ";
       $comentario="obtener el nombre del procucto ";
       $nombre = "";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         $nombre = $fila['nombre'];
       }
       return $nombre;
@@ -472,8 +457,7 @@
       $comentario="obtener la cantidad de veces que se ha rentado una habitacion ";
       $cantidad = "";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         $cantidad = $fila['cantidad'];
       }
       return $cantidad;
@@ -487,8 +471,7 @@
       $detalle_inicio=0;
       $detalle_fin=0;
       $detalle_realizo=0;
-      while ($fila = mysqli_fetch_array($consulta))
-      {
+      while ($fila = mysqli_fetch_array($consulta)){
         $detalle_inicio=$fila['detalle_inicio'];
         $detalle_fin=$fila['detalle_fin'];
         $detalle_realizo=$fila['detalle_realiza'];
