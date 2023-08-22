@@ -287,7 +287,7 @@ function loaderbar_menu(){
 
 // Notifica un error o problema en el proceso
 function problemas_sistema(datos){
-	alert("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
+	console.log("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
 }
 
 // Muestra los subestados de las habitaciones
@@ -8178,7 +8178,7 @@ function hab_sucia_hospedaje(hab_id,estado){
 
 // Modal de mandar a sucia una habitacion ocupada
 function hab_sucia_vacia(hab_id,estado){
-	$("#mostrar_herramientas").load("includes/hab_modal_disponible_hospedaje.php?hab_id="+hab_id+"&estado="+estado);
+	$("#mostrar_herramientas").load("includes/hab_modal_disponible_hospedaje.php?hab_id="+hab_id+"&estado="+estado); 
 }
 
 // !**************************************************************
