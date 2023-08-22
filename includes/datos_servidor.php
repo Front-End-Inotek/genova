@@ -7,5 +7,5 @@
   //$password="123";
   $password="ORWare1986";
   $base_datos="visit";
-  //.gitignore 
+  //.gitignore
 ?>
