@@ -1467,5 +1467,5 @@ select[disabled]{
   color: inherit;
 }
 .otrosApartados {
-  color: inherit;
+  color: inherit !important;
 }

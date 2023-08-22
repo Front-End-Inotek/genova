@@ -274,14 +274,17 @@ class Informacion extends ConexionMYSql
 
                 case "Uso casa":
                 echo'<div class="btn usoCasa" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-bed IconoUsoCasa"></i>';
                 break;
 
                 case "Mantenimiento":
                 echo'<div class="btn mantenimiento" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-cog matenimientoCog"></i>';
                 break;
 
                 case "Bloqueo":
                 echo'<div class="btn bloqueo" '.$estilo_tipo.'>';
+                echo '<i class="bx bx-block blockIcon"></i>';
                 break;
 
                 default:

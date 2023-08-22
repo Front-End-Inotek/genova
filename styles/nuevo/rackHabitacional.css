@@ -747,6 +747,57 @@
 .btn-info-custom:hover{
   scale: 1.1;
 }
+.matenimientoCog{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #fa5f05 !important;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  animation: rotate infinite 8s forwards linear;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+.IconoUsoCasa {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #336c80 !important;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+.blockIcon{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #ff0a0a !important;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
 
 .InfoHab{
   /* color: rgb(0, 0, 0); */
