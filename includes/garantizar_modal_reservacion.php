@@ -22,7 +22,6 @@ echo '
       Garantizar Reservación: '.$_GET['id'];
 echo '<button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
-
     <div class="modal-body">
     <form id="garantia-tarjeta">
       <div class="row">
@@ -44,7 +43,6 @@ echo '<button type="button" class="close" data-dismiss="modal">&times;</button>
         <select class="form-control" id="forma-garantia" required onchange="garantizar_reserva_selects(event)" >
         <option value="">Seleccione una opción </option>
         ';
-
 $forma_pago->mostrar_forma_pago();
 echo'
         </select>
@@ -52,7 +50,7 @@ echo'
         </div>
       </div>
       <div id="div-tarjeta" style="display:none">
-       <div class="row">
+        <div class="row">
         <div class="col-sm-3 asterisco" >Número de tarjeta:</div>
         <div class="col-sm-9" >
         <div class="form-group">
@@ -103,7 +101,6 @@ echo'
       <br>
     </div>
     </form>
-    
     <div class="modal-footer" id="boton_cancelar_reservacion">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       <button type="button" class="btn btn-success" onclick="garantizar_reservacion('.$_GET['id'].','.$preasignada.',\''.$correo.'\','.$garantizada.','.$huesped_id.')"> Aceptar</button>

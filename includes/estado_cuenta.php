@@ -6,7 +6,6 @@
   include_once("clase_movimiento.php");
   include_once("clase_reservacion.php");
   include_once("clase_usuario.php");
-
   $cuenta= NEW Cuenta(0);
   $hab= NEW Hab($_GET['hab_id']);
   $tarifa= NEW Tarifa(0);
@@ -16,12 +15,10 @@
   $consulta = $reservacion->datos_reservacion($id_reservacion);
   $usuario_id = $_GET['usuario_id'];
   $usuario = new Usuario($usuario_id);
-
   if($consulta->num_rows==0){
     echo "nada";
     die();
   }
-
   while ($fila = mysqli_fetch_array($consulta))
   {
       $id_huesped = $fila['id_huesped'];
@@ -69,7 +66,6 @@
       $precio_infantil =  '$'.number_format($fila['precio_infantil'], 2);
       $total_alimentos= '$'.number_format($fila['costo_plan'], 2);
   }
-
   $saldo_faltante= 0;
   $total_faltante= 0;
   $mov= $hab->mov;
@@ -86,9 +82,8 @@
     $faltante_mostrar= substr($faltante, 1);
     $faltante_mostrar= '-$'.number_format($faltante_mostrar, 2);
   }
-
   echo '
-      <div class="container blanco"> 
+      <div class="container blanco">
         <div class="row">
         <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="recargar_pagina()"> ←</button></div>
           <div class="col-sm-6 text-left"><h2 class="text-dark ">Estado de cuenta habitación: '.$hab->nombre.'</h2></div>';
@@ -153,25 +148,20 @@
             echo '';
           }
         echo '</div>
-
         <div class="row">
           <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
           <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
         </div>';
-
         if($total_cargos==0){
           $total_faltante=0;
         }else{
           $total_faltante= $total_abonos - $total_cargos;
         }
-
         echo '<div class="row d-flex justify-content-between"">
-
           <div class="col-sm-2">Total: <span>$'.number_format($total_cargos, 2).'</span></div>
           <div class="col-sm-4">Saldo Total: <span>$'.number_format($total_faltante, 2).'</span></div>
           <div class="col-sm-2">Total: <span>$'.number_format($total_abonos, 2).'</span></div>
         </div>
-
         <div class="row d-flex justify-content-between">';
           /*if($total_faltante==0){
             echo '<div class="col-sm-12"></div>';
@@ -185,6 +175,5 @@
             }
           //}
         echo '</div>
-   
       </div>';
 ?>

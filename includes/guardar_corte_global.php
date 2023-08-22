@@ -18,7 +18,6 @@
   $ticket= NEW Ticket(0);
   $concepto= NEW Concepto(0);
   $tipo= NEW Tipo(0);
-
   // Guardar corte
   $cantidad_habitaciones= $inf->total_hab;
   $total_habitaciones= $inf->total_hab;

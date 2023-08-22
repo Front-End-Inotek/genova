@@ -1,15 +1,11 @@
 <?php
 include_once('clase_usuario.php');
-
 $usuario_id = $_GET['usuario_id'];
-
 $usuario = new Usuario($usuario_id);
-
 
 if($usuario->nivel !=0){
     die();
 }
-
 
 echo '
     <div class="contenedor__graficas">
@@ -85,6 +81,5 @@ echo '
         </div>
         -->
     </div>
-
     <script>mostrar_graficas()</script>
 ';

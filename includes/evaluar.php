@@ -3,10 +3,9 @@
   include ("clase_usuario.php");
   $token=0;
   $usuario =$_POST["usuario"];
-  $password =md5($_POST["password"]); 
+  $password =md5($_POST["password"]);
   $users = NEW Usuario(0);
   // se evalua si existe y son validas las credenciales
-
   $entrada = $users->evaluarEntrada($usuario,$password);
   $id=$entrada[0];
   $nivel=$entrada[1];
