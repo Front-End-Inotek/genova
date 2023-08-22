@@ -760,7 +760,7 @@
   align-items: center;
   justify-content: center;
   padding: 3px;
-  animation: rotate infinite 8s forwards linear;
+  animation: rotate infinite 20s forwards linear;
 }
 @keyframes rotate {
   0% {
@@ -797,6 +797,19 @@
   align-items: center;
   justify-content: center;
   padding: 3px;
+}
+.IRP{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  font-size: 16px;
 }
 
 .InfoHab{

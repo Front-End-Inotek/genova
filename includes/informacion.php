@@ -266,10 +266,12 @@ class Informacion extends ConexionMYSql
 
                 case "Reserva pagada":
                 echo'<div class="btn reserva-pagada" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-message-square-check IRP"></i>';
                 break;
 
                 case "Reserva pendiente":
                 echo'<div class="btn reserva-pendiente" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-message-square-error IRP"></i>';
                 break;
 
                 case "Uso casa":
