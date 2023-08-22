@@ -786,7 +786,7 @@
         echo '<div class="row">
               <div class="col-sm-12">
                 <input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huespedNew('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control" />
-                <button type="button" class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()">Agregar huesped</button>
+                <button type="button" class="btn btn-primary mt-1" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()">Agregar huesped</button>
                 </div> 
         </div><br>';
         $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";

@@ -514,12 +514,12 @@ a.topictitle:hover {
 }
 
 .espacio {
-  width: 155px !important;
-  max-width: 100% !important;
+  /* width: 155px !important; */
+  /* max-width: 100% !important;
   max-height: 100% !important;
-  height: 110px !important;
+  height: 110px !important; */
   font-size: 14px;
-  margin: 0.6em;
+  /* margin: 0.6em; */
 }
 
 .btn-herramientas {
