@@ -334,26 +334,19 @@ class Informacion extends ConexionMYSql
             }elseif($estado_hab == 1){
             $nombre = $fila['n_huesped'] . " " . $fila['a_huesped'];
 
-            echo $nombre;
-            echo "<br>";
-            echo $fecha_entrada;
-            echo "<br>";
-            echo $fecha_salida;
-            echo "<br>";
+            echo '<span class="nombreOperaciones">'; echo $nombre; echo '</span>';
+            echo '<span class="otrosApartados">'; echo $fecha_entrada; echo '</span>';
+            echo '<span class="otrosApartados">'; echo $fecha_salida; echo '</span>';
             echo $saldo;
             }else{
             if($cronometro == 0){
                 $fecha_inicio= '&nbsp';
-              
             }else{
                 $fecha_inicio= date("d-m-Y",$cronometro);
             }
-           
-
             echo $fecha_inicio;
             }
             echo '</span>';
-
             echo '
                 </a>
             </div>
