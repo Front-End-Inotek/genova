@@ -16,7 +16,7 @@
 			<ul class="nav flex-column text-white w-100">
 			<div class="informacion">
 			<a href="inicio.php" class="nav-link text-white my-2">
-				<img src="images/InotekLogotipoRec.png" alt="logo" width="215" height="50" style= "filter: invert(1); object-fit: contain;">
+				<img src="images/hotelexpoabastos.png" alt="logo" width="215" height="50" style= "object-fit: contain;">
 			</a>
 			<div class="texto-check"><p></p></div>
 			<div class="form-check2 form-switch ocultar">

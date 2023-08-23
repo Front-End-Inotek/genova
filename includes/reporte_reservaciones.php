@@ -70,7 +70,7 @@
           
           $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",$final.' - '.$final_titulo." - ".$buscando),0,1,'R');
           // Logo
-          $this->Image("../images/simbolo.png",10,18,25,25);
+          $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
           // Salto de línea
           $this->Ln(14);
           // Movernos a la derecha

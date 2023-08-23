@@ -1829,8 +1829,8 @@ function editarTotalEstancia(event){
     if(cantidad_maxima!=0){
         if(suma_extra >cantidad_maxima){
             alert("Ha superado la cantidad máxima de personas de la habitación")
-            $("#extra_adulto").val("");
-            $("#extra_infantil").val("");
+            $("#extra_adulto").val(0);
+            $("#extra_infantil").val(0);
             return
         }
     }

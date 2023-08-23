@@ -44,7 +44,7 @@
           $this->SetTextColor(0,0,0);
           $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Día '.$dia.' de '.$mes.' de '.$anio.' - '.$porcentaje.'% de Ocupación'),0,1,'R');
           // Logo
-          $this->Image("../images/simbolo.png",10,18,25,25);
+          $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
           // Salto de línea
           $this->Ln(14);
           // Movernos a la derecha
