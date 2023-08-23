@@ -33,6 +33,7 @@
       public $estado_credito;
       public $limite_credito;
       public $indole_tarjeta;
+      
 
       // Constructor
       function __construct($id)
@@ -335,6 +336,13 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
+      function actualizar_estado_vehiculo($id_huesped,$estado){
+        $sentencia = "UPDATE `datos_vehiculo` SET
+        `estado`='$estado'
+        WHERE `id_huesped`='$id_huesped'";
+        $comentario="Actualizando info del vehiculo huesped";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       function actualizar_datos_vehiculo($datos){
         $id_huesped = $datos['id_huesped'];
         $usuario_id =$datos['usuario_id'];
@@ -344,8 +352,8 @@
         $year =$datos['year'];
         $color =$datos['color'];
         $propietario =$datos['propietario'];
-        $fecha_ingreso =strtotime($datos['ingreso']);
-        $fecha_salida =strtotime($datos['salida']);
+        $fecha_ingreso =0;
+        $fecha_salida =0;
         $observaciones =$datos['observaciones'];
         $id_reserva=$datos['id_reserva'];
         $sentencia = "UPDATE `datos_vehiculo` SET
@@ -370,6 +378,18 @@
           echo "OK";
         }
       }
+      function optener_estado_vehiculo($id_huesped){
+        $estado=0;
+        $sentencia = "SELECT estado FROM datos_vehiculo WHERE id_huesped = $id_huesped";
+        //echo $sentencia;
+        $comentario="Actualizando info del vehiculo huesped";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $estado= $fila['estado'];
+        }
+        return $estado;
+      }
       function guardar_datos_vehiculo($datos){
         $id_huesped = $datos['id_huesped'];
         $id_reserva=$datos['id_reserva'];
@@ -380,8 +400,8 @@
         $year =$datos['year'];
         $color =$datos['color'];
         $propietario =$datos['propietario'];
-        $fecha_ingreso =strtotime($datos['ingreso']);
-        $fecha_salida =strtotime($datos['salida']);
+        $fecha_ingreso =0;
+        $fecha_salida =0;
         $observaciones =$datos['observaciones'];
         $sentencia="INSERT INTO `datos_vehiculo`(`id_huesped`, `id_usuario`, `id_reserva`, `matricula`, `marca`, `modelo`, `year`, `color`, `propietario`, `fecha_ingreso`, `fecha_salida`, `observaciones`) 
         VALUES ('$id_huesped','$usuario_id','$id_reserva','$matricula','$marca','$modelo','$year','$color','$propietario','$fecha_ingreso','$fecha_salida','$observaciones')";

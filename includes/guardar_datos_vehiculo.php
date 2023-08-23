@@ -1,5 +1,6 @@
 <?php
-if(empty($_POST['usuario_id'] || empty($_POST['matricula'])) || empty($_POST['ingreso']) || empty($_POST['id_huesped'])){
+//var_dump($_POST);
+if(empty($_POST['usuario_id'] || empty($_POST['matricula'])) || empty($_POST['id_huesped'])){
     echo "NO";
     die();
 }

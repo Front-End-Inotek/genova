@@ -6,15 +6,18 @@
   include_once("clase_movimiento.php");
   include_once("clase_reservacion.php");
   include_once("clase_usuario.php");
+  include_once("clase_huesped.php");
   $cuenta= NEW Cuenta(0);
   $hab= NEW Hab($_GET['hab_id']);
   $tarifa= NEW Tarifa(0);
+  $huesped= NEW Huesped(0);
   $movimiento= NEW Movimiento($hab->mov);
   $id_reservacion= $movimiento->saber_id_reservacion($hab->mov);
   $reservacion= NEW Reservacion($id_reservacion);
   $consulta = $reservacion->datos_reservacion($id_reservacion);
   $usuario_id = $_GET['usuario_id'];
   $usuario = new Usuario($usuario_id);
+  $id_huesped=0;
   if($consulta->num_rows==0){
     echo "nada";
     die();
@@ -66,6 +69,8 @@
       $precio_infantil =  '$'.number_format($fila['precio_infantil'], 2);
       $total_alimentos= '$'.number_format($fila['costo_plan'], 2);
   }
+ 
+  $estado_veiculo=$huesped->optener_estado_vehiculo($id_huesped);
   $saldo_faltante= 0;
   $total_faltante= 0;
   $mov= $hab->mov;
@@ -110,20 +115,24 @@
           <div class="col">Tarifa: <span>'.$tarifa.'</span></div>
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
           </div>
-        <div class="d-flex">';
-        if(false){
-          echo '
-          <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" style="margin-left:18px;"><i class="bx bx-car"></i> Agregar datos vehiculo </button>
-        ';
-        }else{
-          echo '
+        <div class="d-flex">
+       
+        
           <div class="btn-group" role="group" aria-label="Basic example"  style="margin-left:18px;">
             <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" > Ver vehiculo </button>
-            <button type="button" disabled class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Auto en habitacion"><i class="bx bx-car"></i></button>
-          </div>
-          ';
-        }
-        echo'
+            <div id="coche_estado">';
+            
+            if($estado_veiculo==0){
+              echo '
+              <button type="button"  class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Auto en habitacion" onclick="cambiar_estado_vehiculo('.$id_huesped.',1)"><i class="bx bx-car"></i></button>';
+            }else{
+              echo '
+              <button type="button"  class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Auto en habitacion" onclick="cambiar_estado_vehiculo('.$id_huesped.',0)"><i class="bx bx-car"></i></button>';
+            }
+           
+
+          echo '</div></div>
+        
         </div>
         <div class="row">';
           echo '<div class="col">Pax Extra: <span>'.$pax_extra.'</span></div>';
