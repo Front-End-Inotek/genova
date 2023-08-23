@@ -59,7 +59,7 @@ class Informacion extends ConexionMYSql
     }
     if (true) {
     $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,
-    movimiento.estado_interno AS interno , datos_vehiculo.id as id_vehiculo, tipo_hab.color as color_tipo, huesped.nombre as n_huesped, huesped.apellido as a_huesped
+    movimiento.estado_interno AS interno , datos_vehiculo.id as id_vehiculo,datos_vehiculo.estado as estado_vehiculo, tipo_hab.color as color_tipo, huesped.nombre as n_huesped, huesped.apellido as a_huesped
     FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
     LEFT JOIN movimiento ON hab.mov = movimiento.id
     LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
@@ -104,7 +104,7 @@ class Informacion extends ConexionMYSql
     {
         $icono_carro="";
 
-        if(!empty($fila['id_vehiculo'])){
+        if($fila['estado_vehiculo']==1){
             $icono_carro='<i class="bx bxs-car car"></i>';
         }
         $hab = $fila['id'];

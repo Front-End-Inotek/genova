@@ -93,24 +93,7 @@ echo '
         </div>
         </div>
         </div>
-        <div class="row">
-        <div class="col-12 col-sm-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default" > Fecha ingreso </span>
-            </div>
-            <input value="'.$ingreso.'" type="date" id="ingreso" name="ingreso" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" >
-        </div>
-        </div>
-        <div class="col-12 col-sm-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default" > Fecha salida </span>
-            </div>
-            <input value="'.$salida.'" type="date" id="salida" name="salida" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" >
-        </div>
-        </div>
-        </div>
+        
         <div class="row">
         <div class="col-12">
         <div class="input-group mb-3">

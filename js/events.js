@@ -3833,7 +3833,11 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
         });
     }
 }
-
+function cambiar_estado_vehiculo(id_huesped,estado){
+    usuario_id=localStorage.getItem("id");
+    $("#coche_estado").load("includes/cambiar_estado_vehiculo.php?usuario_id="+usuario_id+"&id_huesped="+id_huesped+"&estado="+estado); 
+    console.log("Cambiando el estado del vehiculo");
+}
     function guardar_huesped(){
     var usuario_id=localStorage.getItem("id");
 	var nombre= encodeURI(document.getElementById("nombre").value);
