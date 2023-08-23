@@ -465,6 +465,7 @@ function guardar_tipos_abonos() {
 function guardar_planes_alimentos() {
 	var nombre= encodeURI(document.getElementById("nombre").value);
 	var costo= encodeURI(document.getElementById("codigo").value);
+    var costo_menores = encodeURI(document.getElementById("costo_menores").value);
     // console.log(nombre,costo)
     if(nombre === null || nombre === ''){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
@@ -474,6 +475,10 @@ function guardar_planes_alimentos() {
         swal("Campo costo vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
+    if(costo_menores === null || costo_menores === ''){
+        swal("Costo para menores vario!", "Verifique los datos correctamente por favor!", "warning");
+        return false;
+    }
     guardar_planAlimentos()
 }
 
@@ -481,10 +486,12 @@ function guardar_planAlimentos(){
     let usuario_id=localStorage.getItem("id");
 	let nombre= encodeURI(document.getElementById("nombre").value);
 	let costo= encodeURI(document.getElementById("codigo").value);
+    let costo_menores = encodeURI(document.getElementById("costo_menores").value);
     var descripcion= encodeURI(document.getElementById("descripcion").value);
     let xhttp;
     xhttp = new XMLHttpRequest();
-    let parametros="nombre="+nombre+"&costo="+costo+"&usuario_id="+usuario_id+"&descripcion="+descripcion
+    //Aqui se modifico el url para mandarlo al back
+    let parametros="nombre="+nombre+"&costo="+costo+"&usuario_id="+usuario_id+"&descripcion="+descripcion+"&costo_menores="+costo_menores
     xhttp.open("POST","includes/guardar_plan_alimentos.php",true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.addEventListener('load', e =>{
@@ -818,7 +825,8 @@ function modificar_plan_alimentos(id){
     let id_plan = id;
     let nombre = encodeURI(document.getElementById("nombre").value);
 	let costo = encodeURI(document.getElementById("codigo").value);
-    include = "includes/aplicar_editar_plan_alimentacion.php?nombre="+nombre+"&costo="+costo+"&id_tipo="+id_plan+"&usuario_id="+usuario_id;
+    let costo_menores = encodeURI(document.getElementById("costo_menores").value);
+    include = "includes/aplicar_editar_plan_alimentacion.php?nombre="+nombre+"&costo="+costo+"&id_tipo="+id_plan+"&usuario_id="+usuario_id+"&costo_menores="+costo_menores;
     $.ajax({
         async:true,
         type: "GET",

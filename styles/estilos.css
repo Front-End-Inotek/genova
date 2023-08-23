@@ -823,11 +823,11 @@ hr{
 
 .hab_cambiar {
   text-align: center;
-  background-color: green;
   background-color: #252954a5;
   border-left: 7px solid #272d60;
   font-size: 1.2em;
   color: white;
+  cursor: pointer;
 }
 
 .limpiar {
@@ -1458,4 +1458,14 @@ select[disabled]{
   padding: 1rem;
   line-height: 1.5rem;
   border-top: 1px solid rgba(0, 0, 0, 0.087);
+}
+.nombreOperaciones {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: inherit;
+}
+.otrosApartados {
+  color: inherit !important;
 }

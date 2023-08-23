@@ -3,7 +3,6 @@ include_once('consulta.php');
 date_default_timezone_set('America/Mexico_City');
 setlocale(LC_ALL, "es_ES");
     class Rack  extends ConexionMYSql{
-
         private function estado_habitacion($estado, $turno,$interno="")
         {
             switch ($estado) {
@@ -104,10 +103,8 @@ setlocale(LC_ALL, "es_ES");
                 $mes_texto = "Diciembre";
                 break;
         }
-
         return $mes_texto;
     }
-
     public function calcularWidths($noches_reserva,$noches){
         $total_noches = 0;
         $width="";
@@ -117,13 +114,10 @@ setlocale(LC_ALL, "es_ES");
             $t1 = 100 * $noches;
             $t1 = $t1/$total_noches;
             $t1+="2";
-
             $t2 = 100 * $noches_reserva;
             $t2 = $t2/$total_noches;
-
             $width = "width:" . $t1 ."%";
             $width2 = "width:" . $t2 ."%";
-
         }else{
             $noches++;
             $total_noches = $noches;
@@ -136,7 +130,6 @@ setlocale(LC_ALL, "es_ES");
         }
         return [$width,$width2,$total_noches];
     }
-
         public function mostrar($id, $tiempo_inicial)
         {
             include_once("clase_cuenta.php");
@@ -163,7 +156,6 @@ setlocale(LC_ALL, "es_ES");
             while ($fila = mysqli_fetch_array($consulta)) {
                 $color = $fila['color_tipo'];
                 $color = "#".$color;
-
                 echo ' <td class="cal-userinfo BordeIzquierdoTipoHab" style="border-left-color: '.$color.' !important;">
                 ';
                     echo 'Habitación ------';
@@ -201,7 +193,6 @@ setlocale(LC_ALL, "es_ES");
                             </td>
                         ';*/
                     } else{
-
                         $clase_expirar="";
                         $mastiempo=false;
                         //Se calculan los estados de las habitaciones.

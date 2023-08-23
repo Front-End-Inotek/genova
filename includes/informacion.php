@@ -5,16 +5,10 @@ include_once('consulta.php');
 
 class Informacion extends ConexionMYSql
 {
-
     const INTERNO_SUCIA ="sucia";
-   
-
     // Constructor
-    function __construct()
-    {
-
+    function __construct(){
     }
-
     function ver_detalle($hab_id,$estado,$nombre,$persona,$mov){
     switch ($estado) {
         case 0:
@@ -50,9 +44,7 @@ class Informacion extends ConexionMYSql
     $cuenta= NEW Cuenta(0);
     $movimiento= NEW movimiento(0);
     $cronometro=0;
-    
     $tiempo_actual = time();
-
     $filtro="";
     if($estatus_hab!=null){
         $filtro ="AND hab.estado = " . $estatus_hab;
@@ -71,7 +63,6 @@ class Informacion extends ConexionMYSql
     $consulta= $this->realizaConsulta($sentencia,$comentario);
     // echo $sentencia;
     }
-
 
 /*
     $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id WHERE hab.estado = 1 ORDER BY id";
@@ -256,34 +247,31 @@ class Informacion extends ConexionMYSql
                 echo $icono_carro;
 
                 break;
-
                 case "Ocupada limpieza":
                 echo'<div class="btn ocupadoH" '.$estilo_tipo.'>';
                 echo '<i class="bx bxs-brush-alt cleaning"></i>';
                 echo $icono_carro;
-
                 break;
-
                 case "Reserva pagada":
                 echo'<div class="btn reserva-pagada" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-message-square-check IRP"></i>';
                 break;
-
                 case "Reserva pendiente":
                 echo'<div class="btn reserva-pendiente" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-message-square-error IRP"></i>';
                 break;
-
                 case "Uso casa":
                 echo'<div class="btn usoCasa" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-bed IconoUsoCasa"></i>';
                 break;
-
                 case "Mantenimiento":
                 echo'<div class="btn mantenimiento" '.$estilo_tipo.'>';
+                echo '<i class="bx bxs-cog matenimientoCog"></i>';
                 break;
-
                 case "Bloqueo":
                 echo'<div class="btn bloqueo" '.$estilo_tipo.'>';
+                echo '<i class="bx bx-block blockIcon"></i>';
                 break;
-
                 default:
                 //echo "Estado indefinido";
                 break;
@@ -297,17 +285,14 @@ class Informacion extends ConexionMYSql
                         echo $fila['comentario'];
                     }
                     // echo '<br>'. $estado .'  <br>';
-
             echo '
                     <span class="nombre" id="N1">';
-            
             if($estado_hab == 1){
                 //echo $estado_hab;
                 $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
                 $fecha_entrada= $movimiento->ver_fecha_entrada($fila['moviemiento']);
                 $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             }
-
             if($total_faltante > 0){
                 $saldo = '$'.number_format($total_faltante, 2);
                 $saldo_c="green";
@@ -321,54 +306,39 @@ class Informacion extends ConexionMYSql
             //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             if($estado_hab == 0){
             if($cronometro == 0){
-            
                 // echo $tipo_habitacion;
-                
             }else{
                 $fecha_inicio= date("d-m-Y",$cronometro);
                 echo $fecha_inicio;
                 echo '<br>';
                 // echo $tipo_habitacion;
-               
             }
             }elseif($estado_hab == 1){
             $nombre = $fila['n_huesped'] . " " . $fila['a_huesped'];
-
-            echo $nombre;
-            echo "<br>";
-            echo $fecha_entrada;
-            echo "<br>";
-            echo $fecha_salida;
-            echo "<br>";
+            echo '<span class="nombreOperaciones">'; echo $nombre; echo '</span>';
+            echo '<span class="otrosApartados">'; echo $fecha_entrada; echo '</span>';
+            echo '<span class="otrosApartados">'; echo $fecha_salida; echo '</span>';
             echo $saldo;
             }else{
             if($cronometro == 0){
                 $fecha_inicio= '&nbsp';
-              
             }else{
                 $fecha_inicio= date("d-m-Y",$cronometro);
             }
-           
-
             echo $fecha_inicio;
             }
             echo '</span>';
-
             echo '
                 </a>
             </div>
             </div>';
-
         }else{
         echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
         echo '</div>';
         }
-       
     }
     echo ' </div>';
-  
     }
-    
 }
 
 echo '<i class="btn-info-custom bx bxs-info-circle"  data-toggle="modal" onclick="mostrar_info()" data-target="#exampleModal" ></i>';

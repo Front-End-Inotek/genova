@@ -4,6 +4,7 @@
   $id= $_GET['id'];
   $nombre = $_GET['nombre'];
   $costo = $_GET['costo'];
+  $costo_menores = $_GET['costo_menores'];
   $descripcion = $_GET['descripcion'];
       echo '
       <!-- Modal -->
@@ -25,10 +26,17 @@
     
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;"> Costo </span>
+                    <span class="input-group-text" id="inputGroup-sizing-default"  style=" font-size: 16px;"> Costo adultos </span>
                 </div>
                   <input type="text" maxlength="10"  onkeypress="validarNumero(event)"
                   id="codigo" name ="codigo" value="'.$costo.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default"  style=" font-size: 16px;"> Costo menores</span>
+                </div>
+                  <input type="text" maxlength="10"  onkeypress="validarNumero(event)"
+                  id="costo_menores" name ="costo_menores" value="'.$costo_menores.'" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
             </div>
 
             <div class="input-group mb-3">
