@@ -1815,15 +1815,24 @@ function calcular_nochesChek(){
 
 function editarTotalEstancia(event){
     forzar_tarifa = $("#forzar-tarifa").val()
+    console.log("Forzar tarifa: "+forzar_tarifa)
     extra_adultos = $("#extra_adulto").val();
-    console.log(extra_adultos)
+    console.log("Extra adultos: "+extra_adultos)
     extra_infantil =  $("#extra_infantil").val();
+    console.log("Extra infantil: "+extra_infantil)
     cantidad_hospedaje =$("#cantidad_hospedaje").val()
+    console.log("Cantidad hospedaje: "+cantidad_hospedaje)
     cantidad_maxima =Number($("#cantidad_maxima").val())
+    console.log("cantidad Maxima: "+cantidad_maxima)
     var pax_extra= Number(document.getElementById("pax-extra").value);
+    console.log("Pax extra: "+pax_extra)
     noches = $("#noches").val();
+    console.log("Noches: "+noches)
     numero_hab = $("#numero_hab").val();
+    console.log("NUmero hab: "+numero_hab)
     suma_extra = Number(extra_adultos) + Number(extra_infantil)
+    console.log("Suma extra: "+suma_extra)
+    console.log("-----------------------------------")
     // console.log(suma_extra,cantidad_maxima)
     diff_extra=0
     if(cantidad_maxima!=0){
@@ -1850,15 +1859,16 @@ function editarTotalEstancia(event){
             costo_plan=0;
         }
     }else{
-        costo_plan = Number($("#costoplan").val())
+        costo_plan = Number($("#costoplan").val()) * suma_extra
+        console.log(costo_plan)
     }
     if(pax_extra!=0){
         pax_extra= pax_extra * numero_hab * noches
     }
     if(costoplan!=undefined){
-        costo_plan = costoplan * numero_hab * noches
+        costo_plan = costoplan * suma_extra
     }
-    // console.log(diff_extra)
+    console.log(diff_extra)
     tarifa_adultos = $("#tarifa_adultos").val();
     tarifa_infantil = $("#tarifa_menores").val();
     tarifa_base = $("#tarifa_base").val()

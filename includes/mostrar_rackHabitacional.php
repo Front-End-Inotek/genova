@@ -17,11 +17,11 @@ class RackHabitacional extends ConexionMYSql
                 $estado_texto[0] = 'task--ocupadoH';
                 $estado_texto[1] = 'Ocupada';
                 if($interno == "sucia") {
-                    $estado_texto[0] = 'task--ocupada-sucia';
+                    $estado_texto[0] = 'task--ocupadoH';
                     $estado_texto[1] = 'Sucia ocupada';
                 }
                 if($interno=="limpieza") {
-                    $estado_texto[0] = 'task--limpieza-ocupada';
+                    $estado_texto[0] = 'task--ocupadoH';
                     $estado_texto[1] = 'Ocupada limpieza';
                 }
                 break;
@@ -152,7 +152,6 @@ class RackHabitacional extends ConexionMYSql
                         </div>
                         <div class="card__cometOuter">
                         </div>
-                        
                     </div>
             </div>
         ';
@@ -474,9 +473,17 @@ class RackHabitacional extends ConexionMYSql
                         }
                         </style>';
                         $icono_carro ="";
-
+                        $icono_estado_limpieza ="";
                         if($fila['estado_vehiculo']==1){
                             $icono_carro='<i class="bx bxs-car car"></i>';
+                        }
+//**************************************************************************************************************** */
+                        if($estado_habitacion_matutino[1] == "Ocupada" ){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt clean" style="font-size: 11px; padding: 3px;"></i>';
+                        }else if($estado_habitacion_matutino[1] == "Sucia ocupada"){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt dirt" style="font-size: 11px; padding: 3px;"></i>';
+                        }else if($estado_habitacion_matutino[1] == "Ocupada limpieza"){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt cleaning" style="font-size: 11px; padding: 3px;"></i>';
                         }
                         $inicio = new DateTime(date('Y-m-d'));
                         $fin = new DateTime(date('Y-m-d', $fila['fin']));
@@ -487,6 +494,7 @@ class RackHabitacional extends ConexionMYSql
                         echo '
                         <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">
                         '.$icono_carro.'
+                        '.$icono_estado_limpieza.'
                         ';
                         echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ', \''.$fila['nombre'].'\')" >
                         ';
