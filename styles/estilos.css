@@ -823,11 +823,11 @@ hr{
 
 .hab_cambiar {
   text-align: center;
-  background-color: green;
   background-color: #252954a5;
   border-left: 7px solid #272d60;
   font-size: 1.2em;
   color: white;
+  cursor: pointer;
 }
 
 .limpiar {

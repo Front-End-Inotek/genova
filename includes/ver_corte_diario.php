@@ -60,32 +60,24 @@
                   </thead>
                 <tbody>';
                 //obtenemos los cargos por habitacion
-               
-             
                 $fila_atras="";
                 $total_cargos=0;
                 $total_abonos=0;
                 $total_general=0;
-
                 echo '<tr class="table">';
                 foreach ($forma_pago->formas_pagos() as $key => $pago) {
-                    
                 $consulta= $cuenta->mostrarCuentaUsuario($usuario_id,$pago['id']);
-
                 $contador_row = mysqli_num_rows($consulta);
-
                 if($contador_row!=0){
                     $descripcion = ucwords($pago['descripcion']);
                     echo '<td style="text-align:left;" colspan="">'.$descripcion.'</td>
                     </tr>
                 ';
-             
                 while ($fila = mysqli_fetch_array($consulta)) {
                     $hab_nombre = $fila['hab_nombre'];
                     if($hab_nombre == null && $fila['fcasa'] == null){
                       $hab_nombre="CM: ". $fila['cm_nombre'];
                     }
-
                     echo '<tr class="table  text-center">
                     <td>'.date('d-m-Y H:m:s',$fila['fecha']).'</td>
                     <td>'.$fila['fcasa'].'</td>

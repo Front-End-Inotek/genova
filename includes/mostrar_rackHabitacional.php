@@ -62,7 +62,6 @@ class RackHabitacional extends ConexionMYSql
                 $estado_texto[1] = 'Bloqueo';
                 break;
         }
-
         return $estado_texto;
     }
     private function convertir_mes($mes)
@@ -107,7 +106,6 @@ class RackHabitacional extends ConexionMYSql
                 $mes_texto = "Diciembre";
                 break;
         }
-
         return $mes_texto;
     }
     public function mostrar($id, $tiempo_inicial)
@@ -118,13 +116,10 @@ class RackHabitacional extends ConexionMYSql
         $mes_rack = $this->convertir_mes(date('m'));
         //variable para alamcenar año de rack
         $anio_rack = date('Y');
-
         $total_faltante=0.0;
         $cuenta = new Cuenta(0);
         $movimiento = new movimiento(0);
-
         $cronometro = 0;
-
         //Se utiliza la misma consulta para el rack de operaciones
         $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin, datos_vehiculo.id as id_vehiculo
         ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped, tipo_hab.color as color_tipo
@@ -138,8 +133,6 @@ class RackHabitacional extends ConexionMYSql
         //echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta = $this->realizaConsulta($sentencia, $comentario);
-
-
         echo '
             <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
             <!--tabla operativa--->
@@ -163,7 +156,6 @@ class RackHabitacional extends ConexionMYSql
                     </div>
             </div>
         ';
-
         echo '
             <!-- DISPLAY USER-->
             <div class="table-responsive tableRack" style="margin-left: -10px !important;">
@@ -177,7 +169,6 @@ class RackHabitacional extends ConexionMYSql
         $tiempo = $tiempo_inicial;
         //for para cargar los 31  dias
         for ($i = 1; $i <= 31; $i++) {
-
             $mes = $this->convertir_mes(date('n', $tiempo));
             $dia = date('d', $tiempo);
             $tiempo += 86400;
@@ -190,7 +181,6 @@ class RackHabitacional extends ConexionMYSql
             </thead>
             <tbody class="cal-tbody">
         ';
-
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
             $existe_disponible=false;
@@ -232,7 +222,6 @@ class RackHabitacional extends ConexionMYSql
             $comentario = "Optenemos las habitaciones para el rack de habitaciones";
             $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
             $contador_row = mysqli_num_rows($consulta_reservaciones);
-
             //for para cargar los 31  dias dentro de las habitaciones
             for ($i = 1; $i <= 31; $i++) {
                 //Se omite el día anterior.
@@ -242,10 +231,8 @@ class RackHabitacional extends ConexionMYSql
                         </td>
                     ';*/
                 } else {
-
                     $clase_expirar="";
                     $mastiempo=false;
-
                     //Se calculan los estados de las habitaciones.
                     $mes = $this->convertir_mes(date('n', $tiempo));
                     $dia = date('d', $tiempo);
@@ -258,7 +245,6 @@ class RackHabitacional extends ConexionMYSql
                     if(date('Y-m-d', $tiempo_aux) >= date('Y-m-d', $fila['fin'])) {
                         $clase_expirar="expirar";
                     }
-
                     //Si la habitación actual no está ocupada entra aqui.
                     if ($i == 2 && $fila['estado'] != 1) {
                         //aplica lo mismo que en una reservacion de momento solo en uso casa.
@@ -299,7 +285,6 @@ class RackHabitacional extends ConexionMYSql
                             }
                         }
                         $c=0;
-
                         while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
                             $huesped_reserva = $fila_r['n_huesped'] . " " . $fila_r['a_huesped'];
                             $clase_hover = "nuevax" . $i .rand(1, 100);
@@ -309,7 +294,6 @@ class RackHabitacional extends ConexionMYSql
                         content: "'.$huesped_reserva.'";
                         }
                         </style>';
-
                             $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                             // if($fila['id']==46){
                             //     echo date('Y-m-d', $tiempo_aux) ."|". date('Y-m-d', $fila_r['fecha_entrada']) ."|".  date('Y-m-d', $fila_r['fecha_salida']);
@@ -331,7 +315,6 @@ class RackHabitacional extends ConexionMYSql
                             } else {
                                 $existe_disponible=false;
                             }
-
                             while(date('Y-m-d', $tiempo_aux) < date('Y-m-d', $fila_r['fecha_salida'])) {
                                 //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias),
                                 //con el tiempo de la reservacion
@@ -345,7 +328,6 @@ class RackHabitacional extends ConexionMYSql
                                     $estado_habitacion_reserva = $this->estado_habitacion($estado, "", "");
                                     // $re= date('Y-m-d',$fila_r['fecha_entrada']);
                                     // $rs= date('Y-m-d',$fila_r['fecha_salida']);
-
                                     if($c==0 && $fila['estado']!=0) {
                                         echo '
                                 <td class="celdaCompleta tdCheck " title="nombre huesped">
@@ -359,7 +341,6 @@ class RackHabitacional extends ConexionMYSql
                                 </td>
                                 ';
                                     }
-
                                     echo '';
                                     echo '
                             <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
@@ -367,7 +348,6 @@ class RackHabitacional extends ConexionMYSql
                             ';
                                     echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . '</section>';
                                     echo '            </div>
-
                                 </td>
                             ';
                                     $n = 86400 * ($noches_reserva -1);
@@ -464,7 +444,6 @@ class RackHabitacional extends ConexionMYSql
                                 if(!$mastiempo) {
                                     $tiempo_aux += 86400;
                                 }
-
                                 $c++;
                             }
                         }
@@ -476,10 +455,8 @@ class RackHabitacional extends ConexionMYSql
                         $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
                         $clase_hover = "nuevax" . $fila['id'];
                         $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
-
                         $saldo="";
                         $saldo_c="";
-
                         if($total_faltante > 0) {
                             $saldo = 'Saldo: $'.number_format($total_faltante, 2);
                             $saldo_c="green";
@@ -496,19 +473,15 @@ class RackHabitacional extends ConexionMYSql
                             color:'.$saldo_c.';
                         }
                         </style>';
-
                         $icono_carro ="";
-
                         if(!empty($fila['id_vehiculo'])) {
                             $icono_carro='<i class="bx bxs-car car"></i>';
                         }
-
                         $inicio = new DateTime(date('Y-m-d'));
                         $fin = new DateTime(date('Y-m-d', $fila['fin']));
                         $noches = $fin->diff($inicio)->format("%a");
                         $tiempo_aux = time();
                         $noches = $noches == 0 ? 1 : $noches;
-
                         echo '';
                         echo '
                         <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">
@@ -530,22 +503,18 @@ class RackHabitacional extends ConexionMYSql
                             $mastiempo=true;
                             $n = 86400 * ($noches);
                             $tiempo_aux += $n;
-
                         }
                         // echo date('Y-m-d',$tiempo_aux);
                         if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila['fin'])) {
                             // echo $n;
                             $tiempo_aux = time()-$n;
                         }
-
                         //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
                         if($contador_row==0) {
-
                             $i = 32;
                         } else {
                             //aqui van las reservas, fila_r contiene las reservas
                             //$tiempo_aux contendrá el tiempo 'actual', mas la suma de cada dia para cada reservación.
-
                             $current=0; //contador del ciclo de reservaciones.
                             $ultima=""; //penúltima fecha de la reservacion.
                             $fila_anterior=null; //contendrá los datos de la ultima penúltima reservación.
@@ -564,12 +533,9 @@ class RackHabitacional extends ConexionMYSql
                                     content: "'.$huesped_reserva.'";
                                 }
                                 </style>';
-
                                 $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
-
                                 if ($ultima!="") {
                                     if(date('Y-m-d', $ultima)==date('Y-m-d', $fila['fin'])) {
-
                                     }
                                 }
                                 //ciclo para 'avanzar' atraves de los días de la reservación.
@@ -582,15 +548,11 @@ class RackHabitacional extends ConexionMYSql
                                         } else {
                                             $estado = 7;
                                         }
-
                                         $aux_r =($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
-
                                         // $tiempo_aux= $fila_r['fecha_salida'] - 86400;
-
                                         $estado_habitacion_reserva = $this->estado_habitacion($estado, "", "");
                                         //Este td es para cuando se ocupa imprimir las noches ocupadas junto con la reservación que coicida en la fecha de entrada con
                                         //la fecha de salida de la ocupada.
-
                                         echo '';
                                         echo '
                                     <td class="celdaCompleta tdCheck " colspan="' . $aux_r  . '">';
@@ -613,7 +575,6 @@ class RackHabitacional extends ConexionMYSql
                                             $tiempo_aux += $n;
                                             $noches_reserva=1;
                                         }
-
                                     } else {
                                         echo '
                                     <td class="celdaCompleta tdCheck nobordertable">';
@@ -623,17 +584,14 @@ class RackHabitacional extends ConexionMYSql
                                         $tiempo_aux += 86400;
                                         // die();
                                     }
-
                                     //  echo date('Y-m-d',$tiempo_aux);
                                     // die();
                                 }
                                 $fila_anterior=$fila_r;
                                 $ultima = $fila_r['fecha_entrada'];
                             }
-
                             $i=32;
                         }
-
                     }
                     if ($i == 2 && $fila['estado'] != 1) {
                         $i = 32;
