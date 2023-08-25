@@ -309,7 +309,7 @@ setlocale(LC_ALL, "es_ES");
                                     <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ','.$fila_r['mov'].','.$fila_r['reserva_id'].')" >
                                 ';
                                         echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . '</section>';
-                                        echo '            </div>
+                                        echo '</div>
                                     </td>
                                 ';
                                         $n = 86400 * ($noches_reserva -1);

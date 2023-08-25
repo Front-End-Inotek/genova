@@ -24,12 +24,10 @@ class PDF extends FPDF
         $cuenta= new Cuenta(0);
         $conf = new Configuracion(0);
         $nombre = $conf->nombre;
-
-
         // Marco primera pagina
         $this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 10);
+        $this->SetFont('Arial', '', 10);
         // Color de letra
         $this->SetTextColor(0, 102, 205);
         // Movernos a la derecha
@@ -43,9 +41,9 @@ class PDF extends FPDF
         // Movernos a la derecha
         $this->Cell(80);
         // Título
-        $this->SetFont('Arial', '', 16);
+        $this->SetFont('Arial', '', 14);
         $this->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", 'RESUMEN TRANSACCIONES'), 0, 0, 'C');
-        $this->SetFont('Arial', 'B', 10);
+        $this->SetFont('Arial', '', 10);
         $this->Ln(8);
         $this->SetX(160);
         // Salto de línea
@@ -71,6 +69,8 @@ class PDF extends FPDF
         $this->Cell(0, 4, iconv("UTF-8", "ISO-8859-1", 'Página '.$this->PageNo().'/{nb}'), 0, 0, 'R');
     }
 }
+  //Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
 
 // Datos dentro de la reservacion
 $pdf = new PDF();
@@ -91,15 +91,10 @@ $tarifa= new Tarifa(0);
 $consulta_cargos = $cuenta->mostrarCargos($id_usuario);
 $consulta_abonos = $cuenta->mostrarAbonos($id_usuario);
 
-$pdf->SetFont('Arial', '', 15);
-
-
-
-
-
+$pdf->SetFont('Arial', '', 14);
 
 // Titulos tabla cargos
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 
 $pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Habitación/Folio Maestra'), 0, 0, 'C');
 $pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Descripcion'), 0, 0, 'C');
@@ -148,7 +143,6 @@ while($fila=mysqli_fetch_array($consulta_cargos)) {
     $c++;
 }
 $pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
-
 
 //cargos cuentas maestras.
 $consulta= $cuenta->mostrarCargosMaestra($id_usuario);
