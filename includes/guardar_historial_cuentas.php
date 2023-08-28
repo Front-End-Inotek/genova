@@ -26,12 +26,10 @@ class PDF extends FPDF
         $cuenta= new Cuenta(0);
         $conf = new Configuracion(0);
         $nombre = $conf->nombre;
-
-
         // Marco primera pagina
         $this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 10);
+        $this->SetFont('Arial', '', 10);
         // Color de letra
         $this->SetTextColor(0, 102, 205);
         // Movernos a la derecha
@@ -45,7 +43,7 @@ class PDF extends FPDF
         // Movernos a la derecha
         $this->Cell(80);
         // Título
-        $this->SetFont('Arial', '', 16);
+        $this->SetFont('Arial', '', 14);
         $this->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", 'HISTORIAL CUENTAS'), 0, 0, 'C');
         $this->SetFont('Arial', '', 10);
         $this->Cell(30, 22, iconv("UTF-8", "ISO-8859-1", 'Fecha Inicio: ' .$_GET['inicial']), 0, 0, 'C');
@@ -55,7 +53,6 @@ class PDF extends FPDF
         // Salto de línea
         $this->Ln(10);
     }
-
     // Pie de página
     public function Footer()
     {
@@ -64,30 +61,26 @@ class PDF extends FPDF
         $this->SetY(-20);
         // Arial italic 8
         $this->SetFont('Arial', '', 7);
-
         $this->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", 'Le invitamos a visitar nuestra página web: '.$conf->credencial_auto.' donde encontrará mayor información acerca de nuestras instalaciones y servicios.'), 0, 'C');
-
-
         $this->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", $conf->domicilio), 0, 0, 'C');
-
         // Número de página
         $this->SetFont('Arial', '', 8);
         $this->Cell(0, 4, iconv("UTF-8", "ISO-8859-1", 'Página '.$this->PageNo().'/{nb}'), 0, 0, 'R');
     }
 }
-
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
 $forma_pago= NEW Forma_pago(0);
 $cuenta = new Cuenta(0);
 $usuario_id=$_GET['usuario_id'];
-
 
 $inicial = $_GET['inicial'];
 $final = $_GET['final'];
 $a_buscar =$_GET['a_buscar'];
 $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,$a_buscar);
 
-
 $pdf = new PDF();
+
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Arial', '', 9);
@@ -95,25 +88,24 @@ $pdf->SetFont('Arial', '', 9);
 $total_abonos=0;
 $total_general=0;
 
-$pdf->SetFont('Arial', '', 15);
+$pdf->SetFont('Arial', '', 14);
 $pdf->Cell(80);
 // Título
-$pdf->Cell(30, 10, iconv("UTF-8", "ISO-8859-1","'". $_GET['a_buscar']."'"), 0, 1, 'C');
+$pdf->Cell(30, 10, iconv("UTF-8", "ISO-8859-1","". $_GET['a_buscar'].""), 0, 1, 'C');
 
 if(!empty($_GET['a_buscar'])){
     $pdf->Ln();
 }
- 
 
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 8);
 $pdf->SetTextColor(255, 255, 255);
-$pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 1, 0, '',1);
-$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Huésped.'), 1, 0, '',1);
-$pdf->Cell(28, 4, iconv("UTF-8", "ISO-8859-1", 'Tipo hab.'), 1, 0, '',1);
-$pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", 'Cargo'), 1, 0, '',1);
-$pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", 'Abono'), 1, 0, '',1);
-$pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1", 'Estado'), 1, 0, '',1);
-$pdf->Cell(34, 4, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 1, 0, '',1);
+$pdf->Cell(20, 5, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 1, 0, 'C',1);
+$pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", 'Huésped.'), 1, 0, 'C',1);
+$pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Tipo hab.'), 1, 0, 'C',1);
+$pdf->Cell(26, 5, iconv("UTF-8", "ISO-8859-1", 'Cargo'), 1, 0, 'C',1);
+$pdf->Cell(26, 5, iconv("UTF-8", "ISO-8859-1", 'Abono'), 1, 0, 'C',1);
+$pdf->Cell(20, 5, iconv("UTF-8", "ISO-8859-1", 'Estado'), 1, 0, 'C',1);
+$pdf->Cell(34, 5, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 1, 0, 'C',1);
 $pdf->Ln();
 $pdf->SetTextColor(0, 0, 0);
 
@@ -121,15 +113,14 @@ $c=0;
 while ($fila = mysqli_fetch_array($historial)) {
     $nombre_huesped = $fila['huesped_nombre'] . " ". $fila['huesped_apellido'];
     $estado = $fila['estado_cuenta']== 1 ? "Activo" : "Cerrado";
-    $pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1", date('Y-m-d',$fila['fecha'])), 1, 0, '');
+    $pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1", date('Y-m-d',$fila['fecha'])), 1, 0, 'C');
     $pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", $nombre_huesped), 1, 0, 'C');
     $pdf->Cell(28, 4, iconv("UTF-8", "ISO-8859-1",$fila['hab_nombre']), 1, 0, 'C');
     $pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", number_format($fila['cargo'],2)), 1, 0, 'C');
     $pdf->Cell(26, 4, iconv("UTF-8", "ISO-8859-1", number_format($fila['abono'],2)), 1, 0, 'C');
     $pdf->Cell(20, 4, iconv("UTF-8", "ISO-8859-1",$estado), 1, 0, 'C');
-    $pdf->Cell(34, 4, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 1, 1, '');
+    $pdf->Cell(34, 4, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 1, 1, 'C');
 }
-
 
 $pdf->Output("reporte_historial_cuentas_.pdf", "I");
 $logs->guardar_log($_GET['usuario_id'], "Reporte Historial Cuentas: ");

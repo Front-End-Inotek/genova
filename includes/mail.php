@@ -19,7 +19,7 @@
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           // Color de letra
           $this->SetTextColor(0, 102, 205);
           // Movernos a la derecha
@@ -37,7 +37,6 @@
           // Salto de línea
           $this->Ln(18);
       }
-      
       // Pie de página
       function Footer()
       {
@@ -46,20 +45,14 @@
         $this->SetY(-20);
           // Arial italic 8
         $this->SetFont('Arial','',7);
-
         $this->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", 'Le invitamos a visitar nuestra página web: '.$conf->credencial_auto.' donde encontrará mayor información acerca de nuestras instalaciones y servicios.'), 0, 'C');
-
-
         $this->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", $conf->domicilio), 0, 0, 'C');
-
           // Número de página
         $this->SetFont('Arial','',8);
         $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
   }
 
-
-  
   // Datos dentro de la reservacion
   $pdf = new PDF();
   $pdf->AliasNbPages();
@@ -88,20 +81,14 @@
       $quien_reserva= $fila['nombre_reserva'];
       $acompanante= $fila['acompanante'];
       $tarifa_noche = $fila['precio_hospe'];
-      
-      
       $habitaciones=$fila['numero_hab'];
-
       $tipohab=$fila['tipohab'];
       $nombre_alimentos=$fila['nombre_alimentos'];
-
       $costo_plan = $fila['costo_plan'];
       $costo_plan= '$'.number_format($costo_plan, 2);
       if($tarifa_noche>0){
         $tarifa_noche= '$'.number_format($tarifa_noche, 2);
       }
-      
-     
       // Checar si suplementos esta vacio o no
       if (empty($fila['suplementos'])){
           //echo 'La variable esta vacia';
@@ -112,9 +99,9 @@
       $total_suplementos= '$'.number_format($fila['total_suplementos'], 2);
       $total_habitacion= '$'.number_format($fila['total_hab'], 2);
       if($fila['descuento']>0){
-          $descuento= $fila['descuento'].'%'; 
+          $descuento= $fila['descuento'].'%';
       }else{
-          $descuento= 'Ninguno'; 
+          $descuento= 'Ninguno';
       }
       if($fila['forzar_tarifa']>0){
           $total_estancia= '$'.number_format($fila['forzar_tarifa'], 2);
@@ -131,9 +118,8 @@
       $forma_pago= $fila['descripcion'];
       $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
   }
-
   // Datos de reservacion
-  $huesped= NEW Huesped($id_huesped);  
+  $huesped= NEW Huesped($id_huesped);
   $vencimiento_tarjeta = $huesped->vencimiento_mes . "/" . $huesped->vencimiento_ano;
   //
   include_once('clase_forma_pago.php');
@@ -144,7 +130,7 @@
     $forma_pago = new Forma_pago($huesped->estado_tarjeta);
   }
   $x= 20;
-  $pdf->SetFont('Arial','B',10);
+  $pdf->SetFont('Arial','',10);
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Confirmación de reservación'),0,0,'L');
   $pdf->SetFont('Arial','',9);
   $pdf->Ln(10);
@@ -182,7 +168,6 @@
   $pdf->Ln();
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Total estancia: ' .$total_estancia),0,0,'L');
   $pdf->Ln(10);
-  
   $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Precio en Pesos Mexicanos por habitación, por noche 19% impuestos incluidos. Todas nuestras habitaciones son de NO FUMAR'),0,0,'L');
   //$pdf->MultiCell(80,5,iconv("UTF-8", "ISO-8859-1",'Su reservación ha sido procesada con éxito el (día) de (mes) del (año), de acuerdo con los siguientes datos:'.$huesped->comentarios),0,'J');
   $pdf->Ln(10);
@@ -201,7 +186,6 @@
       $pdf->Ln();
       $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Esta reserva está confirmada y garantizada por la tarjeta con el número '$huesped->numero_tarjeta', que caduca el '$vencimiento_tarjeta'. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos."),0,'J');
     }
-   
   }
   if(strtoupper($forma_pago->descripcion=="EFECTIVO") || strtoupper($huesped->tipo_tarjeta)=="EFECTVIO"){
     $pdf->Cell(92,5,iconv("UTF-8", "ISO-8859-1",'Garantía:'),0,0,'L');
@@ -220,14 +204,9 @@
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1",$politica['descripcion']),0,'J');
     $pdf->Ln(8);
   }
-
-
-
- 
   //$logs->guardar_log($_GET['usuario_id'],"Reporte reservacion: ". $_GET['id']);
   //$pdf->Output("reporte_reservacion.pdf","I");
   $pdf->Output("reporte_reservacion_".$_GET['id'].".pdf","I");
-  
   //$pdf->Output("../reportes/reservaciones/reporte_reservacion.pdf","F");
       //echo 'Reporte reservacion';*/
 ?>

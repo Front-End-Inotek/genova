@@ -24,12 +24,10 @@ class PDF extends FPDF
         $cuenta= new Cuenta(0);
         $conf = new Configuracion(0);
         $nombre = $conf->nombre;
-
-
         // Marco primera pagina
         $this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 10);
+        $this->SetFont('Arial', '', 10);
         // Color de letra
         $this->SetTextColor(0, 102, 205);
         // Movernos a la derecha
@@ -71,7 +69,8 @@ class PDF extends FPDF
         $this->Cell(0, 4, iconv("UTF-8", "ISO-8859-1", 'Página '.$this->PageNo().'/{nb}'), 0, 0, 'R');
     }
 }
-
+//Formato de hoja (Orientacion, tamaño , tipo)
+    $pdf = new FPDF('P', 'mm', 'Letter');
 // Datos dentro de la reservacion
 $pdf = new PDF();
 $pdf->AliasNbPages();

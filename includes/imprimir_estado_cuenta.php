@@ -42,12 +42,10 @@ class PDF extends FPDF
             $faltante_mostrar= substr($faltante, 1);
             $faltante_mostrar= '-$'.number_format($faltante_mostrar, 2);
         }
-
-
         // Marco primera pagina
         $this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 10);
+        $this->SetFont('Arial', '', 10);
         // Color de letra
         $this->SetTextColor(0, 102, 205);
         // Movernos a la derecha
@@ -61,12 +59,11 @@ class PDF extends FPDF
         // Movernos a la derecha
         $this->Cell(80);
         // Título
-        $this->SetFont('Arial', '', 20);
+        $this->SetFont('Arial', '', 14);
         $this->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", 'ESTADO DE CUENTA - Habitación  '.$hab->nombre), 0, 0, 'C');
-        $this->SetFont('Arial', 'B', 10);
+        $this->SetFont('Arial', '', 10);
         $this->Ln(8);
         $this->SetX(160);
-
         $this->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", 'Saldo  Total ' .$faltante_mostrar), 0, 0, 'C');
         // Salto de línea
         $this->Ln(18);
@@ -91,6 +88,8 @@ class PDF extends FPDF
         $this->Cell(0, 4, iconv("UTF-8", "ISO-8859-1", 'Página '.$this->PageNo().'/{nb}'), 0, 0, 'R');
     }
 }
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
 
 // Datos dentro de la reservacion
 $pdf = new PDF();
@@ -171,59 +170,59 @@ if($faltante >= 0) {
 }
 
 
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Fecha Entrada: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $fecha_entrada), 0, 0, 'L');
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Fecha Salida: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $fecha_salida), 0, 0, 'L');
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Noches: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $noches), 0, 0, 'L');
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Tarifa: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $tarifa), 0, 0, 'L');
 $pdf->Ln(10);
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(32, 5, iconv("UTF-8", "ISO-8859-1", 'Nombre Huesped: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->MultiCell(80, 5, iconv("UTF-8", "ISO-8859-1", $nombre_huesped), 0, 'J');
 $pdf->SetXY($pdf->GetX()+80, $pdf->GetY()-5);
 
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Quién reserva: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $quien_reserva), 0, 0, 'L');
 
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Forma Pago: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $forma_pago), 0, 0, 'L');
 $pdf->Ln(10);
 
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Suplementos: '), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $suplementos), 0, 0, 'L');
 
 if($extra_adulto>0) {
-    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Extra Adulto: '), 0, 0, 'L');
     $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $extra_adulto), 0, 0, 'L');
 
 }
 if($extra_infantil>0) {
-    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Extra Infantil: '), 0, 0, 'L');
     $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", $extra_infantil), 0, 0, 'L');
 }
-$pdf->SetFont('Arial', '', 15);
+$pdf->SetFont('Arial', '', 14);
 
 $pdf->Ln(15);
 
@@ -232,7 +231,7 @@ $pdf->Ln(15);
 
 
 // Titulos tabla cargos
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(99, 155, 219);
 $pdf->Cell(25, 4, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 0, 0, 'C', true);

@@ -51,8 +51,7 @@
           $conf = NEW Configuracion(0);
           $usuario= NEW Usuario(0);
           $logs = NEW Log(0);
-
-          $this->SetFont('Arial','B',8);
+          $this->SetFont('Arial','',8);
           $this->SetTextColor(0,0,0);
           $fecha_actual = time();
           $fecha = date("d-m-Y",$fecha_actual);
@@ -67,7 +66,7 @@
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           // Color de letra
           $this->SetTextColor(0, 102, 205);
           // Movernos a la derecha
@@ -85,7 +84,7 @@
           // Movernos a la derecha
           $this->Cell(80);
           // Título
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           $this->SetTextColor(0, 102, 205);
           $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CARGO POR NOCHE'),0,0,'C');
           // Salto de línea
@@ -103,7 +102,8 @@
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
   }
-
+  //Formato de hoja (Orientacion, tamaño , tipo)
+  $pdf = new FPDF('P', 'mm', 'Letter');
   // Fecha y datos generales 
   $pdf = new PDF();
   $pdf->AliasNbPages();
@@ -116,7 +116,7 @@
   $anio = substr($fecha, 6, 4);
 
   // Titulos tabla -277
-  $pdf->SetFont('Arial','B',7);
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->SetFillColor(99, 155, 219);
   $pdf->Cell(25,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
@@ -202,7 +202,7 @@
       $y=$pdf->GetY();
       if($y >= 265){
         $pdf->AddPage();
-        $pdf->SetFont('Arial','B',7);
+        $pdf->SetFont('Arial','',7);
         $pdf->SetTextColor(255, 255, 255);
         $pdf->SetFillColor(99, 155, 219);
         $pdf->Cell(25,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);

@@ -15,7 +15,7 @@
           $conf = NEW Configuracion(0);
           $reservacion= NEW Reservacion(0);
           $logs = NEW Log(0);
-          $this->SetFont('Arial','B',8);
+          $this->SetFont('Arial','',8);
           $this->SetTextColor(0,0,0);
           $fecha_actual = $_GET['inicial'];
           if(empty($fecha_actual)){
@@ -32,7 +32,7 @@
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           // Color de letra
           $this->SetTextColor(0, 102, 205);
           // Movernos a la derecha
@@ -50,7 +50,7 @@
           // Movernos a la derecha
           $this->Cell(80);
           // Título
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           $this->SetTextColor(0, 102, 205);
           $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",$_GET['titulo']),0,0,'C');
           // Salto de línea
@@ -67,7 +67,8 @@
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
   }
-
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
   // Fecha y datos generales
   $pdf = new PDF();
   $pdf->AliasNbPages();
@@ -79,7 +80,7 @@
 //   $mes= $logs->formato_fecha($mes);
 //   $anio = substr($fecha, 6, 4);
 //   Titulos tabla
-  $pdf->SetFont('Arial','B',7);
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->SetFillColor(99, 155, 219);
   $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'No.'),0,0,'C',True);
@@ -117,8 +118,7 @@
   $inicio_dia= strtotime($inicio_dia);
   $consulta = $reservacion->seleccion_reporte($_GET['inicial'],$inicio_dia,$_GET['opcion'],$_GET['a_buscar']);
   // Revisamos las reservaciones por dia
-  while ($fila = mysqli_fetch_array($consulta))
-  {
+  while ($fila = mysqli_fetch_array($consulta)){
       $usuario =$fila['usuario'];
       $numero= $fila['ID'];
       $fecha_entrada= date("d-m-Y",$fila['fecha_entrada']);
@@ -194,7 +194,7 @@
       $y=$pdf->GetY();
       if($y >= 265){
         $pdf->AddPage();
-        $pdf->SetFont('Arial','B',7);
+        $pdf->SetFont('Arial','',7);
         $pdf->SetTextColor(255, 255, 255);
         $pdf->SetFillColor(99, 155, 219);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NÚMERO'),0,0,'C',True);
@@ -228,7 +228,7 @@
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'$ '.number_format($total_pago_final, 2)),1,0,'C');
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'TOTAL SUMA'),1,1,'C');
 
-//   $logs->guardar_log($_GET['usuario_id'],"Reporte reservaciones por dia: ".$dia.' de '.$mes.' de '.$anio);
+  //$logs->guardar_log($_GET['usuario_id'],"Reporte reservaciones por dia: ".$dia.' de '.$mes.' de '.$anio);
   //$pdf->Output("reporte_reservacion_por_dia.pdf","I");
   $pdf->Output("reporte_reservacion_por_dia_.pdf","I");
   //$pdf->Output("../reportes/reservaciones/por_dia/reporte_reservacion_por_dia.pdf","F");

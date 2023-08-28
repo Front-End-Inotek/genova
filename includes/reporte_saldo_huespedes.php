@@ -24,8 +24,6 @@ class PDF extends FPDF
         $cuenta= new Cuenta(0);
         $conf = new Configuracion(0);
         $nombre = $conf->nombre;
-
-
         // Marco primera pagina
         $this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
         // Arial bold 15
@@ -60,17 +58,15 @@ class PDF extends FPDF
         $this->SetY(-20);
         // Arial italic 8
         $this->SetFont('Arial', '', 7);
-
         $this->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", 'Le invitamos a visitar nuestra página web: '.$conf->credencial_auto.' donde encontrará mayor información acerca de nuestras instalaciones y servicios.'), 0, 'C');
-
-
         $this->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", $conf->domicilio), 0, 0, 'C');
-
         // Número de página
         $this->SetFont('Arial', '', 8);
         $this->Cell(0, 4, iconv("UTF-8", "ISO-8859-1", 'Página '.$this->PageNo().'/{nb}'), 0, 0, 'R');
     }
 }
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
 
 // Datos dentro de la reservacion
 $pdf = new PDF();

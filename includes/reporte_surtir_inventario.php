@@ -10,7 +10,6 @@
   $logs = NEW Log(0);
 
   require('../fpdf/fpdf.php');
-  
   class PDF extends FPDF
   {
       // Cabecera de página
@@ -20,7 +19,6 @@
           $usuario= NEW Usuario(0);
           $surtir_inventario = NEW Surtir_inventario($_GET['id']);
           $logs = NEW Log(0);
-
           $this->SetFont('Arial','B',8);
           $this->SetTextColor(0,0,0);
           if($_GET['id'] == 0){
@@ -35,7 +33,6 @@
           $anio = substr($fecha, 6, 4);
           $nombre= $conf->obtener_nombre();
           $realizo_usuario= $usuario->obtengo_nombre_completo($_GET['usuario_id']);
-
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
@@ -75,6 +72,8 @@
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
   }
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
 
   // Fecha y datos generales
   $pdf = new PDF();

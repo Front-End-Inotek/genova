@@ -24,7 +24,7 @@ class PDF extends FPDF
         // Marco primera pagina
         $this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 10);
+        $this->SetFont('Arial', '', 10);
         // Color de letra
         $this->SetTextColor(0, 102, 205);
         // Movernos a la derecha
@@ -38,7 +38,7 @@ class PDF extends FPDF
         // Movernos a la derecha
         $this->Cell(80);
         // Título
-        $this->SetFont('Arial', '', 16);
+        $this->SetFont('Arial', '', 14);
         $this->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", 'DIARIO/CORTE'), 0, 0, 'C');
         $this->SetFont('Arial', '', 10);
         $this->Cell(30, 22, iconv("UTF-8", "ISO-8859-1", 'Fecha Inicio: ' .date('d-m-Y')), 0, 0, 'C');
@@ -63,7 +63,8 @@ class PDF extends FPDF
         $this->Cell(0, 4, iconv("UTF-8", "ISO-8859-1", 'Página '.$this->PageNo().'/{nb}'), 0, 0, 'R');
     }
 }
-
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
 $forma_pago= NEW Forma_pago(0);
 $cuenta = new Cuenta(0);
 $pdf = new PDF();
@@ -73,20 +74,20 @@ $pdf->SetFont('Arial', '', 9);
 $total_abonos=0;
 $total_general=0;
 $id_usuario=$_GET['id_usuario'];
-$pdf->SetFont('Arial', '', 15);
+$pdf->SetFont('Arial', '', 14);
 $pdf->Cell(80);
 // Título
 $pdf->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", date('d-m-Y')), 0, 1, 'C');
 $pdf->Ln();
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 10);
 $pdf->SetTextColor(255, 255, 255);
-$pdf->Cell(38, 4, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 1, 0, 'C',1);
-$pdf->Cell(25, 4, iconv("UTF-8", "ISO-8859-1", 'FCasa'), 1, 0, 'C',1);
-$pdf->Cell(25, 4, iconv("UTF-8", "ISO-8859-1", 'Hab.'), 1, 0, 'C',1);
-$pdf->Cell(35, 4, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 1, 0, 'C',1);
-$pdf->Cell(22, 4, iconv("UTF-8", "ISO-8859-1", 'Cargos'), 1, 0, 'C',1);
-$pdf->Cell(22, 4, iconv("UTF-8", "ISO-8859-1", 'Abonos'), 1, 0, 'C',1);
-$pdf->Cell(28, 4, iconv("UTF-8", "ISO-8859-1", 'Usuario'), 1, 0, 'C',1);
+$pdf->Cell(38, 5, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 1, 0, 'C',1);
+$pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", 'FCasa'), 1, 0, 'C',1);
+$pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1", 'Hab.'), 1, 0, 'C',1);
+$pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", 'Descripción'), 1, 0, 'C',1);
+$pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", 'Cargos'), 1, 0, 'C',1);
+$pdf->Cell(22, 5, iconv("UTF-8", "ISO-8859-1", 'Abonos'), 1, 0, 'C',1);
+$pdf->Cell(28, 5, iconv("UTF-8", "ISO-8859-1", 'Usuario'), 1, 0, 'C',1);
 $pdf->Ln(10);
 $pdf->SetTextColor(0, 0, 0);
 $c=0;
@@ -95,7 +96,7 @@ foreach ($forma_pago->formas_pagos() as $key => $pago) {
     $consulta= $cuenta->mostrarCuentaUsuario($id_usuario,$pago['id']);
     $contador_row = mysqli_num_rows($consulta);
     if($contador_row!=0) {
-    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->SetFont('Arial', '', 11);
     $pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", $pago['descripcion']), 0, 1);
     $pdf->Ln(2);
     $pdf->SetFont('Arial', '', 10);
