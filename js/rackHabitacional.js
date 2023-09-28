@@ -75,7 +75,6 @@ for (var i = 0; i < celdas.length; i++) {
   }
 }
 
-
 // Se seleccionan todas las clase medioDia
 // const medioDias = celda.querySelectorAll('.medioDia');
 

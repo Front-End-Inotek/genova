@@ -17,7 +17,7 @@
       echo '¿Aplicar cargo por noche en las habitaciones seleccionadas?';
       echo '
     </div><br>
-    
+
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       <button type="button" class="btn btn-success" onclick="cargo_noche()"> Aceptar</button>
