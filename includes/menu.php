@@ -328,4 +328,4 @@
 			echo "salida_automatica();";
 			echo "</script>";
 			}
-			?>
+?>

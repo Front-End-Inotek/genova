@@ -37,7 +37,6 @@ class Informacion extends ConexionMYSql
             break;
     }
     }
-
     function mostrarhab($id,$token, $estatus_hab=""){
     include_once("clase_cuenta.php");
     include('clase_movimiento.php');
@@ -52,11 +51,11 @@ class Informacion extends ConexionMYSql
     if (true) {
     $sentencia = "SELECT movimiento.fin_hospedaje as fin,hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,
     movimiento.estado_interno AS interno , datos_vehiculo.id as id_vehiculo,datos_vehiculo.estado as estado_vehiculo, tipo_hab.color as color_tipo, huesped.nombre as n_huesped, huesped.apellido as a_huesped
-    FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id 
+    FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
     LEFT JOIN movimiento ON hab.mov = movimiento.id
     LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
     LEFT JOIN huesped on movimiento.id_huesped = huesped.id
-    WHERE hab.estado_hab = 1 $filtro 
+    WHERE hab.estado_hab = 1 $filtro
     /*AND hab.id=3*/
     ORDER BY id";
     $comentario="Mostrar hab archivo areatrabajo.php funcion mostrarhab";
@@ -91,10 +90,8 @@ class Informacion extends ConexionMYSql
 '; */
 
     echo ' <div class="containerRackOp" id="contenido-boton">';
-    while ($fila = mysqli_fetch_array($consulta))
-    {
+    while ($fila = mysqli_fetch_array($consulta)){
         $icono_carro="";
-
         if($fila['estado_vehiculo']==1){
             $icono_carro='<i class="bx bxs-car car"></i>';
         }
@@ -121,7 +118,6 @@ class Informacion extends ConexionMYSql
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
         $contador_row = mysqli_num_rows($consulta_reservaciones);
-        
         while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
             // echo date('Y-m-d',$tiempo_actual) ."|". date('Y-m-d',$fila_r['fecha_entrada']);
             if(date('Y-m-d',$tiempo_actual) == date('Y-m-d',$fila_r['fecha_entrada']) && $estado_hab!=1){
@@ -139,7 +135,6 @@ class Informacion extends ConexionMYSql
         if(date('Y-m-d',$tiempo_actual) >= date('Y-m-d',$fila['fin']) && $estado_hab==1){
             $clase_expirar="expirarRack";
         }
-
         $total_faltante= 0.0;
         $estado="no definido";
         switch($estado_hab) {
@@ -167,56 +162,45 @@ class Informacion extends ConexionMYSql
             $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
             break;
-
             case 4:
             $estado="Mantenimiento";
             $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
-
             case 5:
             $estado="Bloqueo";
             $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
-
             case 6:
             $estado="Reserva pagada";
             $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
             $tipo_habitacion= $fila['tipo_nombre'];
             break;
-
             case 7:
             $estado= "Reserva pendiente";
             $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
             $tipo_habitacion= $fila['tipo_nombre'];
             break;
-
             case 8:
             $estado= "Uso casa";
             $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
             $tipo_habitacion= $fila['tipo_nombre'];
             break;
-
             case 9:
             $estado="Mantenimiento";
             $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
-
             case 10:
             $estado="Bloqueo";
             $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
-
             default:
             //echo "Estado indefinido";
             break;
         }
-
         if($fila['tipo']>0){
-
             $color = $fila['color_tipo'];
             $color = "#".$color;
             $estilo_tipo='style="border-left-color: '.$color.' !important;"';
-
             echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';
             switch($estado) {
                 case "Disponible limpia":
@@ -224,28 +208,23 @@ class Informacion extends ConexionMYSql
                 echo'<div class="btn disponible-limpia" '.$estilo_tipo.'>';
                 echo '<i class="bx bxs-brush-alt clean"></i>';
                 break;
-
                 case "Vacia limpieza":
                 echo'<div class="btn vacia-limpia" '.$estilo_tipo.'>';
                 echo '<i class="bx bxs-brush-alt cleaning"></i>';
                 break;
-
                 case "Vacia sucia":
                 echo'<div class="btn vacia-sucia" '.$estilo_tipo.'>';
                 echo '<i class="bx bxs-brush-alt dirt"></i>';
                 break;
-
                 case "Ocupado":
                 echo'<div class="btn ocupadoH '.$clase_expirar.'" '.$estilo_tipo.'>';
                 echo '<i class="bx bxs-brush-alt clean"></i>';
                 echo $icono_carro;
                 break;
-
                 case "Sucia ocupada":
                 echo'<div class="btn ocupadoH" '.$estilo_tipo.'>';
                 echo '<i class="bx bxs-brush-alt dirt"></i>';
                 echo $icono_carro;
-
                 break;
                 case "Ocupada limpieza":
                 echo'<div class="btn ocupadoH" '.$estilo_tipo.'>';
@@ -345,7 +324,6 @@ echo '<i class="btn-info-custom bx bxs-info-circle"  data-toggle="modal" onclick
 echo '
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document" id="info_here">
-
   </div>
 </div>'
 ?>

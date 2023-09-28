@@ -10,14 +10,12 @@
   if($ver==1){
     $total_faltante=0;
   }
-
   echo '
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
-
     <div class="modal-body">';
       $signo="";
       if($total_faltante != 0){

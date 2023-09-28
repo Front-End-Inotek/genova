@@ -11,7 +11,6 @@
   $hab->cambiohab($hab->id,$hab->mov,2);
 
   $estado == 'estado1';
-  
   // Se comprueba si existe el archivo previamente antes de generarlo
   if(!file_exists('../styles/'.$estado.'.css')){
     //echo "Existio un problema borrando el archivo";
@@ -76,7 +75,6 @@
     fwrite($archivo,"\n");
     fwrite($archivo,'}');
     fwrite($archivo,"\n");
-
     fwrite($archivo,'.'.$sucia.'{');
     fwrite($archivo,"\n");
     fwrite($archivo,' background-color:'.$sub_sucia.';');
@@ -87,7 +85,6 @@
     fwrite($archivo,"\n");
     fwrite($archivo,'}');
     fwrite($archivo,"\n");
-
     fwrite($archivo,'.'.$limpieza.'{');
     fwrite($archivo,"\n");
     fwrite($archivo,' background-color:'.$sub_limpieza.';');
@@ -99,7 +96,6 @@
     fwrite($archivo,'}');
     fwrite($archivo,"\n");
   }
-
   //echo "Se creo correctamente el archivo";
   $logs->guardar_log($_GET['usuario_id'],"Cambiar los colores del ". $estado);
   header("location:../inicio.php");

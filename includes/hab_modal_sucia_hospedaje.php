@@ -8,7 +8,6 @@
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div><br>
-
     <div class="modal-body">
         ¿Poner como sucia a la habitación '.$hab->nombre.'?
     </div><br>

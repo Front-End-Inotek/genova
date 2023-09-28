@@ -2,10 +2,8 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_tarifa.php");
   include_once("clase_log.php");
-
   if(empty($_POST['nombre']) or empty($_POST['precio_hospedaje']) or empty($_POST['cantidad_hospedaje']) or empty($_POST['cantidad_maxima']) or empty($_POST['precio_adulto'])  or empty($_POST['tipo']) or empty($_POST['leyenda'])){
     echo 'NO_valido';
-
   }else{
     $tarifa= new Tarifa(0);
     $logs = new Log(0);

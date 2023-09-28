@@ -102,7 +102,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'ENTRADA'),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'SALIDA'),0,0,'C',True);
   $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  //$pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'HABITACIÓN'),0,0,'C',True);
@@ -162,7 +162,9 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_entrada),1,0,'C');
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_salida),1,0,'C');
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$usuario),1,0,'C');
-          $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C');
+          // Esta es la fecha del checkout pero no se muestra correctamente
+          //ya que descuadra toda la tabla
+          //$pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C');
           $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C');
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
           $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
@@ -221,13 +223,11 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->SetTextColor(0,0,0);
       }
   }
-
   $total_diferencia= $total_estancia_final - $total_pago_final;
-  $pdf->Cell(132,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
+  $pdf->Cell(122,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'$ '.number_format($total_estancia_final, 2)),1,0,'C');
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'$ '.number_format($total_pago_final, 2)),1,0,'C');
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'TOTAL SUMA'),1,1,'C');
-
   //$logs->guardar_log($_GET['usuario_id'],"Reporte reservaciones por dia: ".$dia.' de '.$mes.' de '.$anio);
   //$pdf->Output("reporte_reservacion_por_dia.pdf","I");
   $pdf->Output("reporte_reservacion_por_dia_.pdf","I");

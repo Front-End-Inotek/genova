@@ -64,8 +64,7 @@ class RackHabitacional extends ConexionMYSql
         }
         return $estado_texto;
     }
-    private function convertir_mes($mes)
-    {
+    private function convertir_mes($mes){
         // comvertir el mes de formato numero a texto
         $mes_texto = "";
         switch ($mes) {
@@ -108,8 +107,7 @@ class RackHabitacional extends ConexionMYSql
         }
         return $mes_texto;
     }
-    public function mostrar($id, $tiempo_inicial)
-    {
+    public function mostrar($id, $tiempo_inicial){
         include_once("clase_cuenta.php");
         include('clase_movimiento.php');
         //variable para alamcenar mes de rack
@@ -318,6 +316,7 @@ class RackHabitacional extends ConexionMYSql
                                 //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias),
                                 //con el tiempo de la reservacion
                                 if(date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_entrada'])) {
+                                    $icono_estado_limpieza ="";
                                     if($fila_r['garantia'] == "garantizada") {
                                         $estado = 6;
                                     } else {
@@ -477,7 +476,6 @@ class RackHabitacional extends ConexionMYSql
                         if($fila['estado_vehiculo']==1){
                             $icono_carro='<i class="bx bxs-car car"></i>';
                         }
-//**************************************************************************************************************** */
                         if($estado_habitacion_matutino[1] == "Ocupada" ){
                             $icono_estado_limpieza='<i class="bx bxs-brush-alt clean" style="font-size: 11px; padding: 3px;"></i>';
                         }else if($estado_habitacion_matutino[1] == "Sucia ocupada"){

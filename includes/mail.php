@@ -108,7 +108,6 @@
       }else{
           $total_estancia= '$'.number_format($fila['total'], 2);
       }
-
       $total_estancia= '$'.number_format($fila['total'], 2);
       if($fila['total_pago']>0){
           $total_pago= '$'.number_format($fila['total_pago'], 2);
@@ -208,6 +207,4 @@
   //$pdf->Output("reporte_reservacion.pdf","I");
   $pdf->Output("reporte_reservacion_".$_GET['id'].".pdf","I");
   //$pdf->Output("../reportes/reservaciones/reporte_reservacion.pdf","F");
-      //echo 'Reporte reservacion';*/
-?>
-
+  //echo 'Reporte reservacion';*/

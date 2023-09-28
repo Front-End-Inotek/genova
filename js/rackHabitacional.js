@@ -12,7 +12,6 @@ botonMostrar.addEventListener("click", function() {
 function togglePanel() {
   const botonMostrar = document.getElementById("mostrar");
   const panel = document.getElementById("panel");
-
   botonMostrar.onclick = function() {
     if (panel.style.display === "none") {
       panel.style.display = "block";
@@ -49,10 +48,8 @@ tasks.forEach(task => {
 function ajusteDeAncho(tablaTotal) {
   const table = document.getElementById(tablaTotal);
   const cells = table.getElementsByTagName("td");
-
   for (let i = 0; i < cells.length; i++) {
     const cell = cells[i];
-
     // Si la celda tiene un colspan mayor a 1
     if (cell.colSpan > 1) {
       let width = 0;
@@ -72,7 +69,6 @@ var celdas = document.querySelectorAll("td.celdaCompleta");
 for (var i = 0; i < celdas.length; i++) {
   // Seleccionar los divs "medioDia" dentro de la celda
   var medioDiaDivs = celdas[i].querySelectorAll("div.medioDia");
-
   // Recorrer cada div "medioDia" y asignarle un ID único
   for (var j = 0; j < medioDiaDivs.length; j++) {
     medioDiaDivs[j].id = (i + 1) + "." + (j + 1);

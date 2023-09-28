@@ -9,7 +9,6 @@
   $movimiento->editar_detalle_inicio($hab->mov);
   $movimiento->editar_estado_interno($hab->mov,1.1);
   $estado == 'estado1';
-  
   // Se comprueba si existe el archivo previamente antes de generarlo
   if(!file_exists('../styles/'.$estado.'.css')){
     //echo "Existio un problema borrando el archivo";
@@ -19,7 +18,6 @@
   }
   // Se genera el archivo de css
   $archivo=fopen('../styles/'.$estado.'.css','a') or die ('Error al crear');
-
   fwrite($archivo,'.'.$estado.'{');
   fwrite($archivo,"\n");
   fwrite($archivo,' background-color:'.$rack.';');

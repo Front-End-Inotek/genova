@@ -100,15 +100,11 @@
           </div>
           </div>';
       }
-
   echo '
     <div class="container ">
       <div class="row hidden-xs " id="tecaldo">
-
       </div>
     </div>
   </body>
   ';
-
-
 ?>

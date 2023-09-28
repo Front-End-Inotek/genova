@@ -24,7 +24,6 @@
         <div class="col-sm-1"></div>
       </div>
     </div>
-    
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       <button type="button" class="btn btn-success" onclick="cambiar_personas('.$_GET['mesa_id'].','.$_GET['estado'].')"> Aceptar</button>
