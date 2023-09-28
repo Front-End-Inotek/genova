@@ -52,7 +52,6 @@ function ajusteDeAncho(tablaTotal) {
 
   for (let i = 0; i < cells.length; i++) {
     const cell = cells[i];
-
     // Si la celda tiene un colspan mayor a 1
     if (cell.colSpan > 1) {
       let width = 0;
@@ -78,7 +77,6 @@ for (var i = 0; i < celdas.length; i++) {
     medioDiaDivs[j].id = (i + 1) + "." + (j + 1);
   }
 }
-
 
 // Se seleccionan todas las clase medioDia
 // const medioDias = celda.querySelectorAll('.medioDia');

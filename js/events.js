@@ -11,8 +11,6 @@ function inicio(){
 x=$(document);
 x.ready(inicio);
 
-
-
 function toggleBotones() {
     var botones = document.getElementById("botones");
         botones.classList.add("botones-mostrados");

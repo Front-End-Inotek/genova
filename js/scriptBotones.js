@@ -6,18 +6,16 @@ function mostrarHabitaciones(selector, boton) {
   for (var i = 0; i < habitaciones.length; i++) {
     habitaciones[i].style.display = 'none';
   }
-
   // Muestra solo las habitaciones seleccionadas
   var habitacionesSeleccionadas = document.querySelectorAll(selector);
   for (var i = 0; i < habitacionesSeleccionadas.length; i++) {
     habitacionesSeleccionadas[i].parentNode.style.display = 'inline-block';
   }
-  
   // Muestra el botón "Mostrar todas las habitaciones"
   boton.style.display = 'inline-block';
 
    // Guarda la información de visibilidad de las habitaciones en el almacenamiento local
-   localStorage.setItem('habitacionesVisibles', selector);
+  localStorage.setItem('habitacionesVisibles', selector);
 }
 
 function mostrarTodasLasHabitaciones(boton) {
@@ -26,18 +24,14 @@ function mostrarTodasLasHabitaciones(boton) {
   for (var i = 0; i < habitaciones.length; i++) {
     habitaciones[i].style.display = 'inline-block';
   }
-  
   // Oculta el botón "Mostrar todas las habitaciones"
   boton.style.display = 'none';
 }
-
-
 
 function agregarEventoDeMostrarHabitaciones(boton, selector) {
   boton.onclick = function() {
     mostrarHabitaciones(selector, botonMostrarTodasLasHabitaciones);
   };
-
 }
 */
 //botones de estado para ocultarlos o mostrarlos
@@ -47,15 +41,12 @@ function mostrarHabitaciones(selector, boton) {
   for (var i = 0; i < habitaciones.length; i++) {
     habitaciones[i].style.display = 'none';
   }
-
   // Muestra solo las habitaciones seleccionadas
   var habitacionesSeleccionadas = document.querySelectorAll(selector);
   for (var i = 0; i < habitacionesSeleccionadas.length; i++) {
     habitacionesSeleccionadas[i].parentNode.style.display = 'inline-block';
   }
-
   boton.style.display = 'inline-block';
-
   // Guarda la información de visibilidad de las habitaciones en el almacenamiento local
   localStorage.setItem('habitacionesVisibles', selector);
 }
@@ -89,8 +80,6 @@ function agregarEventoDeMostrarHabitaciones(boton, selector) {
     mostrarHabitaciones(selector, botonMostrarTodasLasHabitaciones);
   };
 }
-
-
 
 var botonMostrarTodasLasHabitaciones = document.getElementById('mostrar-todas');
 agregarEventoDeMostrarHabitaciones(botonMostrarTodasLasHabitaciones, '');
@@ -126,7 +115,7 @@ var botonMostrarBloqueo = document.getElementById('mostrar-bloqueo');
 agregarEventoDeMostrarHabitaciones(botonMostrarBloqueo, '.bloqueoVisible');
 
 /*
- function seleccionarCheckbox() {
+function seleccionarCheckbox() {
     var radio = document.getElementById("yes");
     var checkbox = document.getElementById("confirmacion");
 
