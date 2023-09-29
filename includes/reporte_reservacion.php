@@ -16,27 +16,32 @@ class PDF extends FPDF {
         // Marco primera pagina
         //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
         // Arial bold 15
-        $this->SetFont('Arial','',10);
+        $this->SetFont('Arial','',8);
+        $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
+        $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
+        $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 68, 12);
         // Color de letra
         $this->SetTextColor(0, 102, 205);
         // Movernos a la derecha
         $this->Cell(2);
         // Nombre del Hotel
-        $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+        //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
         // Logo
-        $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
+        $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
         // Salto de línea
-        $this->Ln(24);
+        $this->Ln(22);
         // Movernos a la derecha
-        $this->Cell(80);
+        $this->Cell(9);
         // Título
-        $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",''.$_GET['titulo']. ' '.$_GET['id']),0,0,'C');
+        $this->SetTextColor(255,255,255);
+        $this->SetFont('Arial', '', 16);
+        $this->Cell(25,-11,iconv("UTF-8", "ISO-8859-1",''.$_GET['titulo']. ' '.$_GET['id']),0,0,'C');
         // Salto de línea
-        $this->Ln(18);
+        $this->Ln(5);
     }
       // Pie de página
     function Footer(){
-        $this->Ln(50);
+        $this->Ln(110);
         $this->SetX($this->GetPageWidth() / 4);
         $this->Cell(100,5,iconv("UTF-8", "ISO-8859-1",'Firma'),'T',0,'C');
         // Posición: a 1,5 cm del final
@@ -178,7 +183,7 @@ $y=$pdf->GetY() + 10;
 $x = 20;
 $pdf->SetXY($x,$y);
 $pdf->SetFont('Arial','',10);
-$pdf->SetTextColor(0, 102, 205);
+$pdf->SetTextColor(45, 63, 83);
 $pdf->Cell(192,7,iconv("UTF-8", "ISO-8859-1",'DATOS HUÉSPED'),0,1,'L');
 $pdf->SetTextColor(0,0,0);
 $pdf->SetFont('Arial','',10);
