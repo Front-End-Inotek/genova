@@ -22,7 +22,6 @@ function boton_menu() {
   let sidebar = document.querySelector("#sidebar");
   /* let container = document.querySelector(".my-container"); */
   sidebar.classList.toggle("active-nav");
-
   // container.classList.toggle("active-cont");
   // if(container!=null){
   /* container.classList.toggle("active-cont"); */
@@ -32,7 +31,6 @@ function boton_menu() {
 /*********************************************/
 /*funcion para desplegar y ocultar submenus**/
 /*********************************************/
-
 
 const showMenu = (id) => {
   //console.log(id)
@@ -79,7 +77,6 @@ function cambiarVista() {
 function modoNocturno() {
   var body = document.body;
   var boton = document.getElementById("filtro-noche");
-
   if (body.classList.contains("modo-nocturno")) {
     // Si la clase modo-nocturno está presente, cambiar al modo diurno
     body.classList.remove("modo-nocturno");

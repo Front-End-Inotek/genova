@@ -4,9 +4,7 @@
   include_once("clase_usuario.php");
   include_once('clase_log.php');
   $logs = NEW Log(0);
-
   require('../fpdf/fpdf.php');
-  
   class PDF extends FPDF
   {
       // Cabecera de página
@@ -15,7 +13,6 @@
           $conf = NEW Configuracion(0);
           $usuario= NEW Usuario(0);
           $logs = NEW Log(0);
-
           $this->SetFont('Arial','B',8);
           $this->SetTextColor(0,0,0);
           $fecha_actual = time();
@@ -28,17 +25,15 @@
           $actividad= urldecode($_GET['buscar']);
           $nombre= $conf->obtener_nombre();
           $realizo_usuario= $usuario->obtengo_nombre_completo($_GET['usuario_id']);
-
           // Reporte de que fecha a que fecha
           $fecha_ini = date("Y-m-d",$_GET['fecha_ini']);
           $fecha_fin = date("Y-m-d",$_GET['fecha_fin']);
           $fecha_inicial_dia = substr($fecha_ini, 8, 2);
-          $fecha_inicial_mes = substr($fecha_ini, 5, 2); 
-          $fecha_inicial_anio = substr($fecha_ini, 0, 4);  
+          $fecha_inicial_mes = substr($fecha_ini, 5, 2);
+          $fecha_inicial_anio = substr($fecha_ini, 0, 4);
           $fecha_final_dia = substr($fecha_fin, 8, 2);
-          $fecha_final_mes = substr($fecha_fin, 5, 2); 
+          $fecha_final_mes = substr($fecha_fin, 5, 2);
           $fecha_final_anio = substr($fecha_fin, 0, 4);
-          
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
@@ -70,14 +65,12 @@
           // Movernos a la derecha
           $this->Cell(80);
           // Título
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           $this->SetTextColor(0, 102, 205);
           $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'Reporte Logs del '.$fecha_inicial_dia.'-'.$fecha_inicial_mes.'-'.$fecha_inicial_anio.' al '.$fecha_final_dia.'-'.$fecha_final_mes.'-'.$fecha_final_anio),0,0,'C');
-      
           // Salto de línea
           $this->Ln(18);
       }
-      
       // Pie de página
       function Footer()
       {
@@ -89,8 +82,9 @@
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
   }
-
-  // Fecha y datos generales 
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
+  // Fecha y datos generales
   $pdf = new PDF();
   $pdf->AliasNbPages();
   $pdf->AddPage();
@@ -101,16 +95,16 @@
   $fecha_ini = date("Y-m-d",$_GET['fecha_ini']);
   $fecha_fin = date("Y-m-d",$_GET['fecha_fin']);
   $fecha_inicial_dia = substr($fecha_ini, 8, 2);
-  $fecha_inicial_mes = substr($fecha_ini, 5, 2); 
-  $fecha_inicial_anio = substr($fecha_ini, 0, 4);  
+  $fecha_inicial_mes = substr($fecha_ini, 5, 2);
+  $fecha_inicial_anio = substr($fecha_ini, 0, 4);
   $fecha_final_dia = substr($fecha_fin, 8, 2);
-  $fecha_final_mes = substr($fecha_fin, 5, 2); 
+  $fecha_final_mes = substr($fecha_fin, 5, 2);
   $fecha_final_anio = substr($fecha_fin, 0, 4);
 
   // Titulos de tabla
   $pdf->SetFont('Arial','U',9);
   $pdf->SetTextColor(20, 31, 102);
-  $pdf->SetFont('Arial','B',7);
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->SetFillColor(99, 155, 219);
   $pdf->Cell(70,6,iconv("UTF-8", "ISO-8859-1",'USUARIO'),1,0,'C',True); 
@@ -190,7 +184,7 @@
         $x =10;
         $pdf->SetFont('Arial','U',9);
         $pdf->SetTextColor(20, 31, 102);
-        $pdf->SetFont('Arial','B',7);
+        $pdf->SetFont('Arial','',7);
         $pdf->SetTextColor(255, 255, 255);
         $pdf->SetFillColor(99, 155, 219);
         $pdf->Cell(70,6,iconv("UTF-8", "ISO-8859-1",'USUARIO'),1,0,'C',True); 

@@ -12,7 +12,7 @@
   $inf= NEW Corte_info($ticket_inicial,$ticket_final);*/
   $inf= NEW Corte_info($_GET['usuario_id']);
   $total_cuartos_hospedaje= 0;
-  $suma_cuartos_hospedaje= 0; 
+  $suma_cuartos_hospedaje= 0;
   $total_cuartos= 0;
   $total_productos= 0;
   $total_restaurante= 0;
@@ -32,16 +32,11 @@
           </div>
           </div>
         </div>
-        
         <div class="text-dark margen-1"></div>
-
         <div class="row">
-
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
-              
               echo '<div class="card-header"><h5>Ventas Restaurante</h5></div>
-              
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
                 <table class="table table-bordered table-hover">
@@ -88,15 +83,11 @@
                 </table>
                 </div>
               </div>
-              
             </div>
           </div>
-
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
-              
               echo '<div class="card-header"><h5>Hospedaje</h5></div>
-              
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
                 <table class="table table-bordered table-hover">
@@ -113,7 +104,6 @@
                     $cantidad= $tipo->total_elementos();
                     $c = sizeof($inf->hab_tipo_hospedaje);
                     $c = $c;
-                  
                     for($z=0 ; $z<$c; $z++)
                     {
                         if(($z%2) == 0){
@@ -131,7 +121,6 @@
                     }
                     echo '<tr class="table  text-center">
                       <td></td>
-                     
                       <td>'.$suma_cuartos_hospedaje.'</td>
                       <td>$'.number_format($total_cuartos_hospedaje, 2).'</td>
                     </tr>';
@@ -140,16 +129,12 @@
                 </table>
                 </div>
               </div>
-              
             </div>
           </div>
-
           <div class="col-sm-4">
             <div  class="card bg-light text-dark">';
               //$cantidad= $tipo->total_elementos();
-              
               echo '<div class="card-header"><h5>Totales</h5></div>
-              
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
                 <table class="table table-bordered table-hover">
@@ -191,16 +176,11 @@
                 </table>
                 </div>
               </div>
-              
             </div>
-
             <div class="text-dark margen-1"></div>
-
             <div  class="card bg-light text-dark">';
               $cantidad= $forma_pago->total_elementos();
-              
               echo '<div class="card-header"><h5>Desglose en Sistema</h5></div>
-              
               <div class="card-body">
                 <div class="table-responsive" id="tabla_tipo">
                 <table class="table table-bordered table-hover">
@@ -228,56 +208,36 @@
                 </table>
                 </div>
               </div>
-              
             </div>
-
           </div>
-
         </div>';
-
         //<div class="text-dark margen-1"></div>
-
         echo '<div class="row">
-             
           <div class="col-sm-4">';
             /*<div  class="card bg-light text-dark">';
               $cantidad= $tipo->total_elementos();
-              
               echo '<div class="card-header">Extras</div>
-              
               <div class="card-body">
               </div>
-              
             </div>*/
           echo '</div>
-
           <div class="col-sm-4">';
             /*<div  class="card bg-light text-dark">';
               $cantidad= $tipo->total_elementos();
-              
               echo '<div class="card-header">Totales</div>
-              
               <div class="card-body">
               </div>
-              
             </div>*/
           echo '</div>
-
           <div class="col-sm-4">';
             /*<div  class="card bg-light text-dark">';
               $cantidad= $forma_pago->total_elementos();
-              
               echo '<div class="card-header">Desglose en Sistema</div>
-              
               <div class="card-body">
               </div>
-              
             </div>*/
           echo '</div>
-
         </div>
-
-
       </div>';
 ?>
 

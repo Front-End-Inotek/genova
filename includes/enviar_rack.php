@@ -3,8 +3,7 @@ include_once('consulta.php');
 date_default_timezone_set('America/Mexico_City');
 setlocale(LC_ALL, "es_ES");
     class Rack  extends ConexionMYSql{
-        private function estado_habitacion($estado, $turno,$interno="")
-        {
+        private function estado_habitacion($estado, $turno,$interno=""){
             switch ($estado) {
                 case 0:
                     $estado_texto[0] = 'task--disponible-limpia';
@@ -61,8 +60,7 @@ setlocale(LC_ALL, "es_ES");
             }
             return $estado_texto;
         }
-    private function convertir_mes($mes)
-    {
+    private function convertir_mes($mes){
         // comvertir el mes de formato numero a texto
         $mes_texto = "";
         switch ($mes) {
@@ -130,8 +128,7 @@ setlocale(LC_ALL, "es_ES");
         }
         return [$width,$width2,$total_noches];
     }
-        public function mostrar($id, $tiempo_inicial)
-        {
+        public function mostrar($id, $tiempo_inicial){
             include_once("clase_cuenta.php");
             include('clase_movimiento.php');
             //variable para alamcenar mes de rack
@@ -177,7 +174,7 @@ setlocale(LC_ALL, "es_ES");
                 where reservacion.estado =1
                 and movimiento.motivo='preasignar'
                 and movimiento.id_hab=$hab
-                and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') 
+                and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d')
                 order by reservacion.fecha_entrada asc;
                 ";
                 $comentario = "Optenemos las habitaciones para el rack de habitaciones";
@@ -309,7 +306,7 @@ setlocale(LC_ALL, "es_ES");
                                     <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ','.$fila_r['mov'].','.$fila_r['reserva_id'].')" >
                                 ';
                                         echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . '</section>';
-                                        echo '            </div>
+                                        echo '</div>
                                     </td>
                                 ';
                                         $n = 86400 * ($noches_reserva -1);

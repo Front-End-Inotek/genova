@@ -1,9 +1,7 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
-
   class Huesped extends ConexionMYSql{
-
       public $id;
       public $nombre;
       public $apellido;
@@ -29,12 +27,9 @@
       public $nombre_tarjeta;
       public $empresa;
       public $voucher;
-
       public $estado_credito;
       public $limite_credito;
       public $indole_tarjeta;
-      
-
       // Constructor
       function __construct($id)
       {
@@ -66,14 +61,12 @@
           $this->voucher="";
           $this->estado_credito="";
           $this->limite_credito=0;
-
           $this->indole_tarjeta="";
         }else{
           $sentencia = "SELECT * FROM huesped WHERE id = $id LIMIT 1 ";
           $comentario="Obtener todos los valores de un huesped";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
-          while ($fila = mysqli_fetch_array($consulta))
-          {
+          while ($fila = mysqli_fetch_array($consulta)){
               $this->id= $fila['id'];
               $this->nombre= $fila['nombre'];
               $this->apellido= $fila['apellido'];
@@ -101,12 +94,10 @@
               $this->voucher=$fila['voucher'];
               $this->estado_credito=$fila['estado_credito'];
               $this->limite_credito=$fila['limite_credito'];
-
               $this->indole_tarjeta=$fila['indole_tarjeta'];
           }
         }
       }
-
       public function mostrar_garantia($estado_tarjeta){
         echo '
         <p id="choosen-paymenttype"></p>
@@ -135,26 +126,26 @@
                                             <em>Expira</em>
                                             <div class="e-month">
                                                 <span>
-                                                    MM
+                                                  MM
                                                 </span>
                                                 <span>
-                                                    MM
+                                                  MM
                                                 </span>
                                             </div>
                                             <div class="e-divider">
                                                 <span>
-                                                    /
+                                                  /
                                                 </span>
                                                 <span>
-                                                    /
+                                                  /
                                                 </span>
                                             </div>
                                             <div class="e-year">
                                                 <span>
-                                                    YY
+                                                  YY
                                                 </span>
                                                 <span>
-                                                    YY
+                                                  YY
                                                 </span>
                                             </div>
                                         </div>
@@ -286,8 +277,8 @@
                         </div>
                           <input value="'.$this->limite_credito.'" type="number" id="limite_credito" name="limite_credito"  class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
                       </div>
-    </div>
-    </div>
+                        </div>
+                        </div>
                         </div>
                     </form>
                 </div>
@@ -472,8 +463,7 @@
           $sentencia = "SELECT id FROM huesped ORDER BY id DESC LIMIT 1";
           $comentario="Obtengo el id del huesped agregado";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
-          while ($fila = mysqli_fetch_array($consulta))
-          {
+          while ($fila = mysqli_fetch_array($consulta)){
             $id= $fila['id'];
           }
           //retornamos el id del nuevo husped para usarlo en la reservación.
@@ -481,13 +471,12 @@
           $logs->guardar_log($usuario_id,"Agregar huesped: ". $id);
         }else{
           //actualizar el cliente existente con los datos 'nuevos' del formulario.
-          while ($fila = mysqli_fetch_array($consulta_existe))
-        {
+          while ($fila = mysqli_fetch_array($consulta_existe)){
           $huesped_id= $fila['id'];
         }
-        $sentencia = "UPDATE  `huesped` 
+        $sentencia = "UPDATE  `huesped`
         SET nombre ='$nombre', apellido='$apellido', empresa = '$empresa',telefono='$telefono',pais='$pais',estado='$estado',ciudad='$ciudad',direccion='$direccion'
-        ,comentarios ='$comentarios' 
+        ,comentarios ='$comentarios'
         , codigo_postal = '$codigo_postal', correo = '$correo', titular_tarjeta = '$titular_tarjeta', estado_tarjeta = '$estado_tarjeta', nombre_tarjeta = '$nombre_tarjeta'
         , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'), vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
         , cvv = '$cvv', voucher = '$voucher', estado_credito='$estado_credito',limite_credito='$limite_credito' , indole_tarjeta = IF('$indole_tarjeta' ='', indole_tarjeta, '$indole_tarjeta')
@@ -509,8 +498,7 @@
         //echo $sentencia;
         $comentario="Obtengo el total de huespedes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $cantidad= $fila['cantidad'];
         }
         return $cantidad;
@@ -556,8 +544,7 @@
             '</tr>
           </thead>
         <tbody>';
-            while ($fila = mysqli_fetch_array($consulta))
-            {
+            while ($fila = mysqli_fetch_array($consulta)){
               if($cont>=$posicion & $cont<$final){
                 echo '<tr class="text-center">
                 <td>'.$fila['nombre'].'</td>
@@ -612,7 +599,7 @@
         $borrar = $usuario->huesped_borrar;
         if(strlen ($a_buscar) == 0){
           $cat_paginas = $this->mostrar(1,$id);
-        }else{
+          }else{
           $sentencia = "SELECT * FROM huesped WHERE (nombre LIKE '%$a_buscar%' || apellido LIKE '%$a_buscar%' || direccion LIKE '%$a_buscar%' || telefono LIKE '%$a_buscar%') && estado_huesped = 1 ORDER BY nombre;";
           $comentario="Mostrar diferentes busquedas en ver huespedes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -643,8 +630,7 @@
               echo '</tr>
             </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta))
-              {
+              while ($fila = mysqli_fetch_array($consulta)){
                 echo '<tr class="text-center">
                 <td>'.$fila['nombre'].'</td>
                 <td>'.$fila['apellido'].'</td>
@@ -726,8 +712,7 @@
         $nombre= '';
         $comentario="Obtengo el nombre del huesped";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $nombre= $fila['nombre'];
         }
         return $nombre;
@@ -739,8 +724,7 @@
         $nombre_completo= '';
         $comentario="Obtengo el nombre completo del huesped";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
+        while ($fila = mysqli_fetch_array($consulta)){
           $nombre= $fila['nombre'];
           $apellido= $fila['apellido'];
           $nombre_completo= $nombre.' '.$apellido;
@@ -778,8 +762,7 @@
               </tr>
           </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta))
-              {
+              while ($fila = mysqli_fetch_array($consulta)){
                 echo '<tr class="text-center">
                 <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped_maestra('.$fila['id'] .','.$id_maestra .','.$mov.')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>
@@ -807,7 +790,7 @@
               <div class="col-sm-12">
                 <input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huespedNew('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control" />
                 <button type="button" class="btn btn-primary mt-1" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()">Agregar huesped</button>
-                </div> 
+                </div>
         </div><br>';
         $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";
         //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY id DESC LIMIT 15";
@@ -835,8 +818,7 @@
               </tr>
           </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta))
-              {
+              while ($fila = mysqli_fetch_array($consulta)){
                 $numero_tarjeta="**************";
                 echo '<tr class="text-center">
                 <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $numero_tarjeta . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\',\'' . $fila['estado_credito'] . '\',\'' . $fila['limite_credito'] . '\',\'' . $fila['nombre_tarjeta'] . '\')"> Agregar</button></td>
@@ -939,8 +921,7 @@
               </tr>
           </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta))
-              {
+              while ($fila = mysqli_fetch_array($consulta)){
                 echo '<tr class="text-center">
                 <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped('.$fila['id'].','.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>
@@ -988,8 +969,7 @@
               </tr>
           </thead>
           <tbody>';
-              while ($fila = mysqli_fetch_array($consulta))
-              {
+              while ($fila = mysqli_fetch_array($consulta)){
                 $numero_tarjeta="**************";
                 echo '<tr class="text-center">
                 <td>';

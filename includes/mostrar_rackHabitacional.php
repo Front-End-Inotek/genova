@@ -17,11 +17,11 @@ class RackHabitacional extends ConexionMYSql
                 $estado_texto[0] = 'task--ocupadoH';
                 $estado_texto[1] = 'Ocupada';
                 if($interno == "sucia") {
-                    $estado_texto[0] = 'task--ocupada-sucia';
+                    $estado_texto[0] = 'task--ocupadoH';
                     $estado_texto[1] = 'Sucia ocupada';
                 }
                 if($interno=="limpieza") {
-                    $estado_texto[0] = 'task--limpieza-ocupada';
+                    $estado_texto[0] = 'task--ocupadoH';
                     $estado_texto[1] = 'Ocupada limpieza';
                 }
                 break;
@@ -64,8 +64,7 @@ class RackHabitacional extends ConexionMYSql
         }
         return $estado_texto;
     }
-    private function convertir_mes($mes)
-    {
+    private function convertir_mes($mes){
         // comvertir el mes de formato numero a texto
         $mes_texto = "";
         switch ($mes) {
@@ -108,8 +107,7 @@ class RackHabitacional extends ConexionMYSql
         }
         return $mes_texto;
     }
-    public function mostrar($id, $tiempo_inicial)
-    {
+    public function mostrar($id, $tiempo_inicial){
         include_once("clase_cuenta.php");
         include('clase_movimiento.php');
         //variable para alamcenar mes de rack
@@ -152,7 +150,6 @@ class RackHabitacional extends ConexionMYSql
                         </div>
                         <div class="card__cometOuter">
                         </div>
-                        
                     </div>
             </div>
         ';
@@ -319,6 +316,7 @@ class RackHabitacional extends ConexionMYSql
                                 //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias),
                                 //con el tiempo de la reservacion
                                 if(date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_entrada'])) {
+                                    $icono_estado_limpieza ="";
                                     if($fila_r['garantia'] == "garantizada") {
                                         $estado = 6;
                                     } else {
@@ -474,9 +472,16 @@ class RackHabitacional extends ConexionMYSql
                         }
                         </style>';
                         $icono_carro ="";
-
+                        $icono_estado_limpieza ="";
                         if($fila['estado_vehiculo']==1){
                             $icono_carro='<i class="bx bxs-car car"></i>';
+                        }
+                        if($estado_habitacion_matutino[1] == "Ocupada" ){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt clean" style="font-size: 11px; padding: 3px;"></i>';
+                        }else if($estado_habitacion_matutino[1] == "Sucia ocupada"){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt dirt" style="font-size: 11px; padding: 3px;"></i>';
+                        }else if($estado_habitacion_matutino[1] == "Ocupada limpieza"){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt cleaning" style="font-size: 11px; padding: 3px;"></i>';
                         }
                         $inicio = new DateTime(date('Y-m-d'));
                         $fin = new DateTime(date('Y-m-d', $fila['fin']));
@@ -487,6 +492,7 @@ class RackHabitacional extends ConexionMYSql
                         echo '
                         <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">
                         '.$icono_carro.'
+                        '.$icono_estado_limpieza.'
                         ';
                         echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ', \''.$fila['nombre'].'\')" >
                         ';

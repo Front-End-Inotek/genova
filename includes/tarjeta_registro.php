@@ -21,6 +21,8 @@ class PDF extends \setasign\Fpdi\Fpdi {
      $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
  }
 }
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
 
 $pdf = new PDF();
 $pdf->AliasNbPages();

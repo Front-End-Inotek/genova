@@ -2,12 +2,9 @@
   //error_reporting(0);
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
-  class Informacion_mesas extends ConexionMYSql
-  {
+  class Informacion_mesas extends ConexionMYSql{
     // Constructor
-    function __construct()
-    {
-
+    function __construct(){
     }
     function evaluarEntrada($usuario_evaluar ,$password_evaluar){
       //include_once('log.php');
@@ -18,14 +15,12 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       //echo $sentencia;
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-          $id= $fila['id'];
-           //$logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
+      while ($fila = mysqli_fetch_array($consulta)){
+        $id= $fila['id'];
+         //$logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
       }
       return $id;
     }
-
     function guardar_mesa($nombre,$comentario,$capacidad,$mov){
       $id= 0;
       $sentencia= "INSERT INTO `mesa`( `nombre`, `mov`, `comentario`, `capacidad`, `estado`, `estado_mesa`,`tipo`) VALUES 
@@ -48,9 +43,8 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       //echo $sentencia;
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-           $id= $fila['id'];
+      while ($fila = mysqli_fetch_array($consulta)){
+        $id= $fila['id'];
       }
       return $id;
     }
@@ -160,7 +154,6 @@
             break;
           break;
         }
-
         if($fila['tipo']>0){
           echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio_mesa">';
             echo '<a href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas_mesas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')"><div class="estado_mesa'.$fila['estado'].'">';
@@ -170,7 +163,6 @@
                     echo $estado;
                   echo '</div>
                 </div>
-
                 <div class="col-sm-12">
                   <div class="imagen_mesa">';
                     if($fila['id']<100){
@@ -181,7 +173,6 @@
                   echo '</div>
                 </div>
               </div>';
-
               echo '<div class="capacidad_mesa">';
                       if($fila['estado'] == 0){
                         $capacidad= $fila['capacidad'];
@@ -192,7 +183,6 @@
                         echo $capacidad;
                       }
               echo '</div>';
-
               /*echo '<div class="capacidad_mesa">';
                       //$total= $movimiento->cuenta_total($fila['id']);
                       if($fila['estado'] == 1){
@@ -207,7 +197,6 @@
                         echo $total_faltante;
                       }
               echo '</div>';*/
-
               echo '<div class="icono_mesa">';
               //echo '<img id="icono" src="images/mesa.png">';
                   //echo $motivo;
@@ -262,7 +251,6 @@
                       break;
                 }   */
               echo '</div>';
-
               echo '</div>';
               echo '</div>';
             echo '</a>';
@@ -273,7 +261,6 @@
         }
       }
     }
-
   }
 ?>
 

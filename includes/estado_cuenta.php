@@ -69,7 +69,6 @@
       $precio_infantil =  '$'.number_format($fila['precio_infantil'], 2);
       $total_alimentos= '$'.number_format($fila['costo_plan'], 2);
   }
- 
   $estado_veiculo=$huesped->optener_estado_vehiculo($id_huesped);
   $saldo_faltante= 0;
   $total_faltante= 0;
@@ -116,12 +115,9 @@
           <div class="col">Forma Pago: <span>'.$forma_pago.'</span></div>
           </div>
         <div class="d-flex">
-       
-        
           <div class="btn-group" role="group" aria-label="Basic example"  style="margin-left:18px;">
             <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_vehiculo('.$id_reservacion.','.$id_huesped.')" > Ver vehiculo </button>
             <div id="coche_estado">';
-            
             if($estado_veiculo==0){
               echo '
               <button type="button"  class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Auto en habitacion" onclick="cambiar_estado_vehiculo('.$id_huesped.',1)"><i class="bx bx-car"></i></button>';
@@ -129,10 +125,7 @@
               echo '
               <button type="button"  class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Auto en habitacion" onclick="cambiar_estado_vehiculo('.$id_huesped.',0)"><i class="bx bx-car"></i></button>';
             }
-           
-
           echo '</div></div>
-        
         </div>
         <div class="row">';
           echo '<div class="col">Pax Extra: <span>'.$pax_extra.'</span></div>';

@@ -43,7 +43,7 @@
           <header class="titulo">
           <h2 class="user"> Inicio de Sesión</h2>
           <br>
-          <center><img src="images/login/'.$config->imagen.'" height="160" width="180"/></center>
+          <center><img src="images/hotelexpoabastos.png" height="160" width="180"/></center>
             <div class="form-group texto_entrada">
             <br>
             <input class="form-control" pattern="[A-Za-z0-9]+" type="text"  id="user"  placeholder="Usuario" maxlength="20" />
@@ -100,15 +100,11 @@
           </div>
           </div>';
       }
-
   echo '
     <div class="container ">
       <div class="row hidden-xs " id="tecaldo">
-
       </div>
     </div>
   </body>
   ';
-
-
 ?>

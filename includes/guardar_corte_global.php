@@ -62,7 +62,7 @@
           $usuario= NEW Usuario(0);
           $logs = NEW Log(0);
 
-          $this->SetFont('Arial','B',8);
+          $this->SetFont('Arial','',8);
           $this->SetTextColor(0,0,0);
           $fecha_actual = time();
           $fecha = date("d-m-Y h:i A",$fecha_actual);
@@ -79,7 +79,7 @@
           // Marco primera pagina
           $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           // Color de letra
           $this->SetTextColor(0, 102, 205);
           // Movernos a la derecha
@@ -97,7 +97,7 @@
           // Movernos a la derecha
           $this->Cell(80);
           // Título
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           $this->SetTextColor(0, 102, 205);
           $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,0,'C');
           // Salto de línea
@@ -116,7 +116,10 @@
       }
   }
 
-  // Fecha y datos generales 
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
+
+  // Fecha y datos generales
   $pdf = new PDF();
   $pdf->AliasNbPages();
   $pdf->AddPage();
@@ -127,15 +130,14 @@
   $mes= $logs->formato_fecha($mes);
   $anio = substr($fecha, 6, 4);
   $anio_hora = substr($fecha, 6, 13);
-  
   // Datos dentro de la tabla hospedaje
   $x_inicial=$pdf->GetX();
   $y_inicial=$pdf->GetY();
   $pdf->SetFillColor(99, 155, 219);
-  $pdf->SetFont('Arial','B',8);
+  $pdf->SetFont('Arial','',8);
   $pdf->SetTextColor(24, 31, 102);
   $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Hospedaje'),0,1,'C');
-  $pdf->SetFont('Arial','B',7);
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",'Tipo'),1,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'Cant.'),1,0,'C',True);
@@ -161,10 +163,10 @@
   $pdf->Ln(6);
  
   // Datos dentro de la tabla totales
-  $pdf->SetFont('Arial','B',8);
+  $pdf->SetFont('Arial','',8);
   $pdf->SetTextColor(20, 31, 102);
   $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Totales'),0,1,'C');
-  $pdf->SetFont('Arial','B',7);
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),1,0,'C',True);
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),1,1,'C',True);
@@ -192,10 +194,10 @@
   $pdf->Ln(6);
  
   // Datos dentro de la tabla desgloce en sistema
-  $pdf->SetFont('Arial','B',8);
+  $pdf->SetFont('Arial','',8);
   $pdf->SetTextColor(20, 31, 102);
   $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Desglose en Sistema'),0,1,'C');
-  $pdf->SetFont('Arial','B',7);
+  $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
   $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",'Concepto'),1,0,'C',True);
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),1,1,'C',True);
@@ -253,7 +255,7 @@
           $y=$pdf->GetY();
           if($y >= 265){
             $pdf->AddPage();
-            $pdf->SetFont('Arial','B',7);
+            $pdf->SetFont('Arial','',7);
             $pdf->SetTextColor(255, 255, 255);
             $pdf->SetFillColor(99, 155, 219);
             $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');

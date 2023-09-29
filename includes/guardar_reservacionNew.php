@@ -26,33 +26,27 @@
   $tipo_descuento= 0;
   $cantidad_cupon= 0;
   $id_movimiento= 0;
-
-
     // No se consideran los suplementos
   /*if($_POST['forzar_tarifa'] > 0){
-    $total=$_POST['forzar_tarifa']; 
+    $total=$_POST['forzar_tarifa'];
   }else{*/
     if($_POST['descuento'] > 0){
       $descuento_calculo= $_POST['descuento'] / 100;
       $descuento_calculo= 1 - $descuento_calculo;
       $total=$_POST['total_hab'] * $descuento_calculo;
     }else{
-      $total=$_POST['total_hab']; 
+      $total=$_POST['total_hab'];
     }
   //}
-
-
   //logica para saber si una reservación estará o no garantizada.
   $estado_interno="pendiente";
   if($_POST['estado_tarjeta'] == 2 || !empty($_POST['voucher'] )){
     $estado_interno = "garantizada";
   }
-
   $total_pago=0;
   if($estado_interno=="garantizada"){
     $total_pago=$_POST['total_pago'];
   }
-
   //Revisar la existencia de un cupon de descuento
   // Checar si codigo descuento esta vacio o no
   if (empty($_POST['codigo_descuento'])){
@@ -79,49 +73,30 @@
       }
     }
   }
-
-
   $cuenta= 1;
   if($_POST['forzar_tarifa'] > 0 || $_POST['total_suplementos'] > 0 || $total_pago > 0 || $cantidad_cupon > 0){
     $cuenta= 1;
   }
-
   $actual_hab=$_POST['hab_id'];
-
   if(empty($_POST['preasignada'])){
     $motivo ="reservar";
   }else{
     $motivo="preasignar";
     $actual_hab = $_POST['preasignada'];
-    
   }
-
   $motivo = empty($_POST['preasignada']) ? "reservar" : "preasignar";
-
- 
- 
   $sobrevender = isset($_POST['sobrevender']) ? $_POST['sobrevender'] : "";
-
   $id_movimiento= $movimiento->disponible_asignar($hab->mov,$actual_hab,$_POST['id_huesped'],$_POST['fecha_entrada'],$_POST['fecha_salida'],$_POST['usuario_id'],$_POST['tarifa'],$motivo);
-  
-
- 
   $mov_actual= $movimiento->ultima_insercion();
-
   if($_POST['hab_id'] != 0){
     $hab->cambiohab($_POST['hab_id'],$mov_actual,1);
     $logs->guardar_log($_POST['usuario_id'],"Check-in en habitacion: ". $hab->nombre);
     $cuenta= 1;
   }
-
   $pax_extra = isset($_POST['pax_extra']) ? $_POST['pax_extra'] : "";
   $canal_reserva = isset($_POST['canal_reserva']) ? $_POST['canal_reserva'] : "";
   $plan_alimentos = isset($_POST['plan_alimentos']) ? $_POST['plan_alimentos'] : "";
   $tipo_reservacion = isset($_POST['tipo_reservacion']) ? $_POST['tipo_reservacion'] : "";
-
-
-
-
   $id_reservacion = $reservacion->guardar_reservacionNew($_POST['id_huesped'],$_POST['tipo_hab'],$id_movimiento,$_POST['fecha_entrada'],$_POST['fecha_salida'],
   $_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],
   $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
@@ -136,8 +111,6 @@ if(!empty($_POST['adicionales'])){
     $reservacion->guardar_adicional($id_reservacion,$adicional['nombre'],$adicional['apellido']);
   }
 }
-
-
 if($_POST['forma_pago'] == 2){
   $factuar= 1;
 }else{
@@ -161,9 +134,7 @@ if($_POST['forma_pago'] == 1){
 }
 $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$total_pago,($total_pago*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
 
-
-
-  //si hay preasignada 
+  //si hay preasignada
   if($_POST['preasignada']!=0){
     $logs->guardar_log($_POST['usuario_id'],"Preasignar reservacion: ". $id_reservacion . " Hab: " . $actual_hab);
 

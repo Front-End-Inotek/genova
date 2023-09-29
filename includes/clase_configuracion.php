@@ -50,11 +50,9 @@
     public $puntos;
     public $autocobro;
     public $checkin;
-
     public $domicilio;
 
-    function __construct()
-    {
+    function __construct(){
       $sentencia = "SELECT * FROM configuracion WHERE id = 1 LIMIT 1";
       $comentario="Obtener todos los valores de la configuracion";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -92,9 +90,7 @@
            $this->domicilio= $fila['domicilio'];
       }
     }
-
-function tipos_abonos($id=0)
-{
+function tipos_abonos($id=0){
     $sentencia = "SELECT* from tipos_abonos WHERE estado= 1";
     $comentario = "Consulta todos los planes de alimentos disponibles";
     $consulta = $this->realizaConsulta($sentencia, $comentario);
@@ -106,7 +102,6 @@ function tipos_abonos($id=0)
         }
     }
 }
-
     function borrar_tipo_abono($id){
       $sentencia = "UPDATE `tipos_abonos` SET
       `estado` = '0'
@@ -120,7 +115,6 @@ function tipos_abonos($id=0)
         echo "error en la consulta";
       }
     }
-
     function borrar_plan_alimentacion($id){
       $sentencia = "UPDATE `planes_alimentos` SET
       `estado_plan` = '0'
@@ -149,12 +143,10 @@ function tipos_abonos($id=0)
         echo ("error en la consulta");
       }
     }
-
     function mostrar_planes_select($id=0){
       $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
       $comentario = "Consulta todos los planes de alimentos disponibles";
       $consulta = $this->realizaConsulta($sentencia, $comentario);
-
       while ($fila = mysqli_fetch_array($consulta))
       {
         if($id==$fila['id']){
@@ -164,9 +156,7 @@ function tipos_abonos($id=0)
         }
       }
     }
-
   function guardar_plan_alimentos($nombre,$costo,$descripcion){
-
       $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
       $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`, `descripcion`)
       VALUES ('$nombre', '$costo', '1','$descripcion');";
@@ -195,8 +185,7 @@ function tipos_abonos($id=0)
       }
     }
 
-    public function guardar_tipo_abono($nombre,$descripcion)
-    {
+    public function guardar_tipo_abono($nombre,$descripcion){
         $nombre = sanitize($nombre);
         $descripcion = sanitize($descripcion);
         $sentencia = "INSERT INTO `tipos_abonos` (`nombre`,`descripcion`,`estado`)
@@ -209,13 +198,11 @@ function tipos_abonos($id=0)
             echo("error en la consulta");
         }
     }
-
     public function mostrar_tipos_abonos($id){
       include_once('clase_usuario.php');
       $usuario = NEW Usuario($id);
       $editar = $usuario->tipo_editar;
       $borrar = $usuario->tipo_borrar;
-
       $sentencia = "SELECT* from tipos_abonos WHERE estado= 1";
       $comentario = "Consulta todos los planes de alimentos disponibles";
       $consulta = $this->realizaConsulta($sentencia, $comentario);
@@ -244,7 +231,6 @@ function tipos_abonos($id=0)
               echo '<tr class="text-center">
               <td>'.$fila['nombre'].'</td>
               <td>'.$fila['descripcion'].'</td>
-
               ';
               if($editar==1){
                 echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_tipo_abono(' . $fila['id'] . ', \'' . addslashes($fila['nombre']) . '\', \'' . addslashes($fila['descripcion']) . '\')"> Editar</button></td>';
@@ -258,18 +244,14 @@ function tipos_abonos($id=0)
         </tbody>
       </table>
       </div>';
-
   }
-
   public function mostrar_planes_alimentos($id){
       include_once('clase_usuario.php');
       $usuario = NEW Usuario($id);
       $editar = $usuario->tipo_editar;
       $borrar = $usuario->tipo_borrar;
-
       $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
       $comentario = "Consulta todos los planes de alimentos disponibles";
-
       $consulta = $this->realizaConsulta($sentencia, $comentario);
       //se recibe la consulta y se convierte a arreglo
       echo '
@@ -296,7 +278,6 @@ function tipos_abonos($id=0)
               echo '<tr class="text-center">
               <td>'.$fila['nombre_plan'].'</td>
               <td>'.$fila['costo_plan'].'</td>
-
               ';
               $descripcion=$fila['descripcion'];
               if($editar==1){
@@ -311,9 +292,7 @@ function tipos_abonos($id=0)
         </tbody>
       </table>
       </div>';
-
   }
-
     // Guardar la foto de inicio
     function guardar_foto($nombre){
       $sentencia = "UPDATE `configuracion` SET
@@ -343,6 +322,5 @@ function tipos_abonos($id=0)
       }
       return $nombre;
     }
-    
   }
 ?>
