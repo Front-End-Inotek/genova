@@ -123,13 +123,14 @@ $pdf->Ln();
 $pdf->SetTextColor(0, 0, 0);
 $c=0;
 while ($fila = mysqli_fetch_array($historial)) {
+    $pdf->Cell(-9);
     $estado = $fila['estado_cuenta']== 1 ? "Activo" : "Cerrado";
     $pdf->Cell(21, 5, iconv("UTF-8", "ISO-8859-1", date('Y-m-d',$fila['fecha'])), 1, 0, 'C');
     $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1",$fila['hab_nombre']), 1, 0, 'C');
     $pdf->Cell(21, 5, iconv("UTF-8", "ISO-8859-1", number_format($fila['cargo'],2)), 1, 0, 'C');
     $pdf->Cell(21, 5, iconv("UTF-8", "ISO-8859-1", number_format($fila['abono'],2)), 1, 0, 'C');
     $pdf->Cell(20, 5, iconv("UTF-8", "ISO-8859-1",$estado), 1, 0, 'C');
-    $pdf->Cell(86, 5, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 1, 1, 'C');
+    $pdf->Cell(95, 5, iconv("UTF-8", "ISO-8859-1", $fila['descripcion']), 1, 1, 'C');
 }
 $pdf->Output("reporte_historial_cuentas_.pdf", "I");
 $logs->guardar_log($_GET['usuario_id'], "Reporte Historial Cuentas: ");
