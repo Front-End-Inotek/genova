@@ -59,7 +59,7 @@ function mostrarTodasLasHabitaciones(boton) {
   }
 
   // Oculta el botón "Mostrar todas las habitaciones"
-  boton.style.display = 'none';
+  //boton.style.display = 'none';
 
   // Borra la información de visibilidad de las habitaciones del almacenamiento local
   localStorage.removeItem('habitacionesVisibles');

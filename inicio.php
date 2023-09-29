@@ -10,9 +10,9 @@
             <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
             <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
             <link rel="icon" href="favicon.ico" type="image/x-icon">
-            <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
-            <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
-            <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
+            <script language="JavaScript" type="text/javascript" src="./js/jquery-1.2.6.min.js"></script>
+            <script language="JavaScript" type="text/javascript" src="./js/jquery-ui-personalized-1.5.2.packed.js"></script>
+            <script language="JavaScript" type="text/javascript" src="./js/sprinkle.js"></script>
             <!-- bootstrap 5  -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
             <!-- BOX ICONS CSS-->

@@ -14,7 +14,7 @@ class PDF extends FPDF {
         $conf = NEW Configuracion(0);
         $nombre= $conf->obtener_nombre();
         // Marco primera pagina
-        $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+        //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
         // Arial bold 15
         $this->SetFont('Arial','',10);
         // Color de letra
