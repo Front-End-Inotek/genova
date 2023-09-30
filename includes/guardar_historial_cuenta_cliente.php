@@ -95,7 +95,7 @@ $nombre_huesped =$huesped->nombre . " ". $huesped->apellido;
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
-$pdf->SetFont('Arial', '', 9);
+$pdf->SetFont('Arial', '', 7 );
 $total_abonos=0;
 $total_general=0;
 $pdf->SetFont('Arial', '', 13);

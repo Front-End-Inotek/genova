@@ -15,6 +15,11 @@
           $conf = NEW Configuracion(0);
           $reservacion= NEW Reservacion(0);
           $logs = NEW Log(0);
+
+          $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
+          $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
+          $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 68, 12);
+
           $this->SetFont('Arial','',8);
           $this->SetTextColor(0,0,0);
           $fecha_actual = $_GET['inicial'];
@@ -30,37 +35,40 @@
           $a_buscar= ' ';
           // $porcentaje= $reservacion->porcentaje_ocupacion($_GET['inicial'],$a_buscar);
           // Marco primera pagina
-          $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+        //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
-          $this->SetFont('Arial','',10);
+          $this->SetFont('Arial','',8);
           // Color de letra
-          $this->SetTextColor(0, 102, 205);
           // Movernos a la derecha
           $this->Cell(2);
           // Nombre del Hotel
-          $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+          //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
           // Datos y fecha
-          $this->SetFont('Arial','',10);
-          $this->SetTextColor(0,0,0);
-          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Día '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
+          $this->SetFont('Arial','',8);
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
+          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
+          $this->SetTextColor(0, 0, 0);
           // Salto de línea
-          $this->Ln(14);
+          $this->Ln(12);
           // Movernos a la derecha
-          $this->Cell(80);
+          $this->Cell(18);
           // Título
-          $this->SetFont('Arial','',10);
-          $this->SetTextColor(0, 102, 205);
+          $this->SetFont('Arial','',15);
+          $this->SetTextColor(255, 255, 255);
           $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",$_GET['titulo']),0,0,'C');
           // Salto de línea
-          $this->Ln(18);
+          $this->Ln(6);
+          $this->SetFont('Arial','',10);
+          $this->SetTextColor(0,0,0);
+          $this->Cell(195,9,iconv("UTF-8", "ISO-8859-1",'Día '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
+          $this->Ln(1);
       }
       // Pie de página
       function Footer()
       {
           // Posición: a 1,5 cm del final
-          $this->SetY(-15);
+          $this->SetY(-20);
+          $this->SetTextColor(45, 63, 83);
           // Arial italic 8
           $this->SetFont('Arial','',8);
           // Número de página
@@ -82,7 +90,9 @@ $pdf = new FPDF('P', 'mm', 'Letter');
 //   Titulos tabla
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
-  $pdf->SetFillColor(99, 155, 219);
+  $pdf->Cell(-9);
+  $pdf->SetLineWidth(0.1);
+  $pdf->SetFillColor(45, 63, 83);
   $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",'No.'),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True);
@@ -92,20 +102,21 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   }elseif ($opcion==4) {
     $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'CHECKOUT'),0,0,'C',True);
   }
-  $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",'HUÉSPED'),0,0,'C',True);
+  $pdf->Cell(48,4,iconv("UTF-8", "ISO-8859-1",'HUÉSPED'),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NOCHES'),0,0,'C',True);
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TIPO'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'STATUS'),0,1,'C',True);
+  $pdf->Cell(-9);
   $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'ENTRADA'),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",'SALIDA'),0,0,'C',True);
-  $pdf->Cell(36,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  //$pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(14,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
+  $pdf->Cell(48,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
-  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'HABITACIÓN'),0,0,'C',True);
+  $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'HAB.'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'ESTANCIA'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'PAGO'),0,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",''),0,1,'C',True);
@@ -119,6 +130,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $consulta = $reservacion->seleccion_reporte($_GET['inicial'],$inicio_dia,$_GET['opcion'],$_GET['a_buscar']);
   // Revisamos las reservaciones por dia
   while ($fila = mysqli_fetch_array($consulta)){
+      $pdf->Cell(-9);
       $usuario =$fila['usuario'];
       $numero= $fila['ID'];
       $fecha_entrada= date("d-m-Y",$fila['fecha_entrada']);
@@ -151,7 +163,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           }elseif ($opcion==4) {
             $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C');
           }
-          $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C');
+          $pdf->Cell(48,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C');
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
           $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_estancia),1,0,'C');
@@ -165,7 +177,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           // Esta es la fecha del checkout pero no se muestra correctamente
           //ya que descuadra toda la tabla
           //$pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C');
-          $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C');
+          $pdf->Cell(48,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C');
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
           $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_estancia),1,0,'C');
@@ -182,7 +194,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           }elseif ($opcion==4) {
             $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$fecha_checkout),1,0,'C');
           }
-          $pdf->Cell(36,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C');
+          $pdf->Cell(48,5,iconv("UTF-8", "ISO-8859-1",$huesped),1,0,'C');
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
           $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_estancia),1,0,'C');
@@ -196,6 +208,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       $y=$pdf->GetY();
       if($y >= 265){
         $pdf->AddPage();
+        
         $pdf->SetFont('Arial','',7);
         $pdf->SetTextColor(255, 255, 255);
         $pdf->SetFillColor(99, 155, 219);
@@ -224,6 +237,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       }
   }
   $total_diferencia= $total_estancia_final - $total_pago_final;
+$pdf->Cell(17);
   $pdf->Cell(122,5,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'$ '.number_format($total_estancia_final, 2)),1,0,'C');
   $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'$ '.number_format($total_pago_final, 2)),1,0,'C');

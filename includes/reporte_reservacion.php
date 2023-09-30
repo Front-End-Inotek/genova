@@ -31,7 +31,7 @@ class PDF extends FPDF {
         // Salto de línea
         $this->Ln(22);
         // Movernos a la derecha
-        $this->Cell(9);
+        $this->Cell(15);
         // Título
         $this->SetTextColor(255,255,255);
         $this->SetFont('Arial', '', 16);

@@ -25,29 +25,34 @@ class PDF extends FPDF
         $conf = new Configuracion(0);
         $nombre = $conf->nombre;
         // Marco primera pagina
-        $this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
+        //$this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 10);
+        $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
+        $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
+        $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 85, 12);
+        $this->SetFont('Arial', '', 8);
         // Color de letra
-        $this->SetTextColor(0, 102, 205);
+        $this->SetTextColor(0, 0, 0);
         // Movernos a la derecha
         $this->Cell(2);
         // Nombre del Hotel
-        $this->Cell(20, 9, iconv("UTF-8", "ISO-8859-1", $nombre), 0, 0, 'C');
+        //$this->Cell(20, 9, iconv("UTF-8", "ISO-8859-1", $nombre), 0, 0, 'C');
         // Logo
-        $this->Image("../images/hotelexpoabastos.png", 10, 18, 25, 25);
+        $this->Image("../images/hotelexpoabastos.png", 160, 1, 27, 27);
         // Salto de línea
-        $this->Ln(24);
+        $this->Ln(22);
         // Movernos a la derecha
-        $this->Cell(80);
+        $this->Cell(30);
         // Título
-        $this->SetFont('Arial', '', 16);
-        $this->Cell(30, 10, iconv("UTF-8", "ISO-8859-1", 'SALDO DE HÚESPEDES - EN CASA'), 0, 0, 'C');
+        $this->SetTextColor(255,255,255);
+        $this->SetFont('Arial', '', 13);
+        $this->Cell(25, -11, iconv("UTF-8", "ISO-8859-1", 'SALDO DE HÚESPEDES - EN CASA'), 0, 0, 'C');
         $this->SetFont('Arial', 'B', 10);
-        $this->Ln(8);
+        $this->SetTextColor(0, 0 , 0);
+        $this->Ln(-10);
         $this->SetX(160);
         // Salto de línea
-        $this->Ln(18);
+        $this->Ln(15);
     }
 
     // Pie de página
@@ -57,7 +62,8 @@ class PDF extends FPDF
         // Posición: a 1,5 cm del final
         $this->SetY(-20);
         // Arial italic 8
-        $this->SetFont('Arial', '', 7);
+        $this->SetFont('Arial', '', 8);
+        $this->SetTextColor(45, 63, 83);
         $this->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", 'Le invitamos a visitar nuestra página web: '.$conf->credencial_auto.' donde encontrará mayor información acerca de nuestras instalaciones y servicios.'), 0, 'C');
         $this->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", $conf->domicilio), 0, 0, 'C');
         // Número de página
