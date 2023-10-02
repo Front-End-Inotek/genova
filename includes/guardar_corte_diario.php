@@ -65,7 +65,7 @@ class PDF extends FPDF
         // Posición: a 1,5 cm del final
         $this->SetY(-20);
         // Arial italic 8
-        $this->SetFont('Arial', '', 8);
+        $this->SetFont('Arial', '', 7);
         $this->SetTextColor(45, 63, 83);
         $this->Cell(0, 10, iconv("UTF-8", "ISO-8859-1", $textoCompleto), 0, 1, 'C');
         $this->MultiCell(0, 2, iconv("UTF-8", "ISO-8859-1", 'Le invitamos a visitar nuestra página web: '.$conf->credencial_auto.' donde encontrará mayor información acerca de nuestras instalaciones y servicios.'), 0, 'C');
