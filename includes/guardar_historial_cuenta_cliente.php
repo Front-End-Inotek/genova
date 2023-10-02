@@ -107,12 +107,13 @@ if(!empty($nombre_huesped)){
     $pdf->Ln(1);
 }
 
-$pdf->Cell(-9);
+ 
 $pdf->SetFont('Arial', '', 8);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(45, 63, 83);
 $pdf->SetLineWidth(0.1);
 $pdf->SetDrawColor(45, 63 , 83);
+$pdf->Cell(-9);
 $pdf->Cell(21, 5, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 1, 0, 'C',1);
 $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1", 'Tipo hab.'), 1, 0, 'C',1);
 $pdf->Cell(21, 5, iconv("UTF-8", "ISO-8859-1", 'Cargo'), 1, 0, 'C',1);

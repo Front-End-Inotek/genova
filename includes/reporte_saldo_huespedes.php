@@ -95,64 +95,72 @@ $consulta= $cuenta->hab_ocupadas();
 $pdf->SetFont('Arial', '', 15);
 
 // Titulos tabla cargos
-$pdf->SetFont('Arial', 'B', 10);
-
-$pdf->Cell(30, 4, iconv("UTF-8", "ISO-8859-1", 'Número de hab.'), 0, 0, 'C');
-$pdf->Cell(40, 4, iconv("UTF-8", "ISO-8859-1", 'Nombre del húesped'), 0, 0, 'C');
-$pdf->Cell(30, 4, iconv("UTF-8", "ISO-8859-1", 'Abonos'), 0, 0, 'C');
-$pdf->Cell(30, 4, iconv("UTF-8", "ISO-8859-1", 'Cargos'), 0, 0, 'C');
-$pdf->Cell(30, 4, iconv("UTF-8", "ISO-8859-1", 'Saldo'), 0, 0, 'C');
-$pdf->Cell(30, 4, iconv("UTF-8", "ISO-8859-1", 'Tarifa xnx'), 0, 0, 'C');
+$pdf->SetFont('Arial', '', 9);
+$pdf->Cell(-9);
+$pdf->Cell(25, 4, iconv("UTF-8", "ISO-8859-1", 'Número de hab.'), 0, 0, 'C');
+$pdf->Cell(43, 4, iconv("UTF-8", "ISO-8859-1", 'Nombre del húesped'), 0, 0, 'C');
+$pdf->Cell(35, 4, iconv("UTF-8", "ISO-8859-1", 'Abonos'), 0, 0, 'C');
+$pdf->Cell(35, 4, iconv("UTF-8", "ISO-8859-1", 'Cargos'), 0, 0, 'C');
+$pdf->Cell(35, 4, iconv("UTF-8", "ISO-8859-1", 'Saldo'), 0, 0, 'C');
+$pdf->Cell(35, 4, iconv("UTF-8", "ISO-8859-1", 'Tarifa xnx'), 0, 0, 'C');
 $pdf->Ln();
-
-$pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
-$pdf->Ln(10);
-
+$pdf->Cell(-9);
+$pdf->Line($pdf->GetX(), $pdf->GetY(), 209,$pdf->GetY());
+$pdf->Ln(2);
 $fila_atras="";
 $total_cargos =0;
 $total_maestra=0;
 $total_=0;
 $c=0;
-
 while($fila=mysqli_fetch_array($consulta)) {
     $abonos = $cuenta->obtner_abonos($fila['mov']);
     $cargos = $cuenta->mostrar_total_cargos($fila['mov']);
     $saldo = $cuenta->mostrar_faltante($fila['mov']);
-    $nombre_huesped = $fila['nombre'] . ' ' . $fila['apellido'];
-
+    //$nombre_huesped = $fila['nombre'] . ' ' . $fila['apellido'];
     $estado_credito = $fila['estado_credito'];
     $limite_credito = $fila['limite_credito'];
 
+    $nombre_huesped = $fila['nombre'];
+    $apellido_huesped = $fila['apellido'];
+
+    if ( strlen($nombre_huesped) > 13 ){
+        $nombre_huesped = substr($nombre_huesped, 0 , 13) . '...';
+    }
+    if ( strlen($apellido_huesped) > 10 ){
+        $apellido_huesped = substr($apellido_huesped, 0 , 10) . '...';
+    }
+    $nombre_completo = $nombre_huesped . " " . $apellido_huesped;
 
     if($fila_atras!= $fila['hab_nombre']){
-        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1","Hab. ".  $fila['hab_nombre']), 0, 0, 'C');
-        $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1",$nombre_huesped), 0, 0, 'C');
-        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1", $abonos), 0, 0, 'C');
-        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1",$cargos), 0, 0, 'C');
-        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1",$saldo), 0, 0, 'C');
-        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1",number_format($fila['tarifa'],2)), 0, 0, 'C');
+        $pdf->Cell(-9);
+        $pdf->Cell(25, 5, iconv("UTF-8", "ISO-8859-1","Hab. ".  $fila['hab_nombre']), 0, 0, 'C');
+        $pdf->Cell(43, 5, iconv("UTF-8", "ISO-8859-1", $nombre_completo), 0, 0, 'C');
+        $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", $abonos), 0, 0, 'C');
+        $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1",$cargos), 0, 0, 'C');
+        $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1",$saldo), 0, 0, 'C');
+        $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1",number_format($fila['tarifa'],2)), 0, 0, 'C');
     }else{
-        $pdf->Cell(30, 5, '', 0, 0, 'C');
-        $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1",$nombre_huesped), 0, 0, 'C');
-        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1",$abonos), 0, 0, 'C');
-        $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1",$cargos), 0, 0, 'C');
-        $pdf->Cell(30, 5, '', 0, 0, 'C');
-        $pdf->Cell(30, 5,'', 0, 0, 'C');
+        $pdf->Cell(-9);
+        $pdf->Cell(25, 5, '', 0, 0, 'C');
+        $pdf->Cell(43, 5, iconv("UTF-8", "ISO-8859-1", $nombre_completo), 0, 0, 'C');
+        $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1",$abonos), 0, 0, 'C');
+        $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1",$cargos), 0, 0, 'C');
+        $pdf->Cell(35, 5, '', 0, 0, 'C');
+        $pdf->Cell(35, 5,'', 0, 0, 'C');
     }
     $pdf->Ln(5);
-    
-    $pdf->Ln(5);
-    $pdf->Cell(20, 5, '', 0, 0, 'C');
+    $pdf->Cell(25, 5, '', 0, 0, 'C');
     $pdf->Cell(20, 5, '', 0, 0, 'C');
     $pdf->Cell(20, 5, '', 0, 0, 'C');
     $pdf->Cell(20, 5, '', 0, 0, 'C');
     $pdf->Cell(50, 5, iconv("UTF-8", "ISO-8859-1","Estado credito: ".  $estado_credito), 0, 0, 'C');
     $pdf->Cell(50, 5, iconv("UTF-8", "ISO-8859-1","Limite de credito:    ".number_format($limite_credito,2)), 0, 0, 'C');
     $pdf->Ln(5);
-    $pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
+    $pdf->Cell(-9);
+    $pdf->Line($pdf->GetX(), $pdf->GetY(), 209,$pdf->GetY());
     $fila_atras = $fila['hab_nombre'];
     $c++;
-    $pdf->Ln(10);
+    $pdf->Ln(5);
 }
 
 
