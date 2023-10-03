@@ -62,7 +62,7 @@ echo '
                 <div class="graficas__card">
                     <div class="card__encabezado">
                         <div>
-                            <p class="card__encabezado-titulo">Ventas en restaurant</p>
+                            <p class="card__encabezado-titulo">Productos mas vendidos en restaurante</p>
                             <p class="card__encabezado-subtitulo">Ultimos 7 dias</p>
                         </div>
                         <p class="card__encabezado-titulo">
