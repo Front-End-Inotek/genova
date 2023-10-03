@@ -29,7 +29,7 @@ class PDF extends FPDF
 
         // Marco primera pagina
         //$this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
-        //Encabezado 
+        //Encabezado
         $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
         $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
         $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 68, 12);
