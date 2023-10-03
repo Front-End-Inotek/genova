@@ -107,7 +107,6 @@ if(!empty($nombre_huesped)){
     $pdf->Ln(1);
 }
 
- 
 $pdf->SetFont('Arial', '', 8);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(45, 63, 83);

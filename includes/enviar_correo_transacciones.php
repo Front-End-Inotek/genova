@@ -25,7 +25,7 @@ class PDF extends FPDF
         $conf = new Configuracion(0);
         $nombre = $conf->nombre;
         // Marco primera pagina
-        $this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
+        //$this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
         // Arial bold 15
         $this->SetFont('Arial', '', 10);
         // Color de letra
@@ -33,7 +33,7 @@ class PDF extends FPDF
         // Movernos a la derecha
         $this->Cell(2);
         // Nombre del Hotel
-        $this->Cell(20, 9, iconv("UTF-8", "ISO-8859-1", $nombre), 0, 0, 'C');
+        //$this->Cell(20, 9, iconv("UTF-8", "ISO-8859-1", $nombre), 0, 0, 'C');
         // Logo
         $this->Image("../images/hotelexpoabastos.png", 10, 18, 25, 25);
         // Salto de línea
