@@ -2095,8 +2095,8 @@ function obtener_garantia(event=null){
         efectivo_txt = efectivo.toLowerCase()
         console.log(efectivo_txt)
         if(garantia!=undefined && garantia == 1){
-            if((efectivo_txt !="efectivo") && efectivo_txt!="tarjeta"){
-                $("#voucher").attr("required",true)
+            if((efectivo_txt !="efectivo") && efectivo_txt!="tarjeta" && efectivo_txt!="tarjeta de credito" && efectivo_txt!="tarjeta de debito"){
+                $("#voucher").attr("required",false)
                 $("#voucher").attr("disabled",false)
             }else{
                 $("#voucher").attr("disabled",true)
