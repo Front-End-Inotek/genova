@@ -18,6 +18,10 @@
     $huesped= NEW Huesped($id_huesped);  
     $nombre_huesped =$huesped->nombre ." ".$huesped->apellido;
 
+    $imagenEncabezado = "../images/hotelexpoabastos.png";
+    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
+
+
     $correo = $huesped->correo;
 
 
@@ -86,8 +90,9 @@
             color: black;
             font-family:Arial">
 
-            <div style="background-color: #2D3F54; text-align: center; padding: 8px;" >
+            <div style="background-color: #2D3F54; text-align: center; padding: 8px; " >
               <h2 style="font-weight: bold; font-size: 24px; color: #ffffff;"> Confirmación de abono realizado correctamente </h2>
+              <img style="background-color: #F7F7F7; border-radius: 15px; height: 7rem;"  src="cid:imagen_encabezado" alt="Encabezado" />
             </div>
     
             <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700;">'. str_repeat('&nbsp;', 1). $nombre_huesped. str_repeat('&nbsp;', 1).' </span> </p>

@@ -12,6 +12,11 @@
     $logs = NEW Log(0);
     $correo=NEW Email();
     $mail = new PHPMailer(true); // Declaramos un nuevo correo, el parametro true significa que mostrara excepciones y errores.
+    //Nombre del hotel
+    $nombreHotel = $conf->nombre;
+    $imagenEncabezado = "../images/hotelexpoabastos.png";
+
+    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado'. "hotelexpoabastos.png");
     //Consulta datos de la reserva
 
     $consulta= $reservacion->datos_cancelacion($_POST['info']);
@@ -128,8 +133,8 @@
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
-        $mail->setFrom('orware.factura@gmail.com', utf8_decode('Carlos Garcia'));
-        $mail->addAddress($_POST['correo'], utf8_decode('Carlos Garcia'));  
+        $mail->setFrom('orware.factura@gmail.com', $nombreHotel);
+        $mail->addAddress($_POST['correo'], $nombreHotel);  
         //$mail->addAddress('carlosramongarcia@gmail.com', utf8_decode('Carlos Garcia'));        
         /*$mail->addReplyTo('info@example.com', 'Information');
         $mail->addCC('cc@example.com');
@@ -143,9 +148,15 @@
         $contenido_voucher="";
         $contenido_tarjeta="";
         $contenido_efectivo="";
-        $contenido_pie="<div style='text-align:center'><p>Le invitamos a visitar nuestra página web:$conf->credencial_auto donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
-        <span>$conf->domicilio</span>
-        </div>";
+        $contenido_pie="
+        <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff;'>
+            <div style='text-align: center'>
+                <p>Le invitamos a visitar nuestra página web: <a style=' #A0C3FF !important; '>$conf->credencial_auto</a>. </p><br/>
+                <p>donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
+                <span>$conf->domicilio</span>
+            </div>
+        </div>"
+        ;
 
         $pr = new PoliticasReservacion(0);
 
@@ -165,49 +176,52 @@
             <p>Esta reserva está confirmada y garantizada por un pago en efectivo. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos.</p>";
         }
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = utf8_decode('Cancelacion Visit');
+        $mail->CharSet = "UTF-8";
+        $mail->Encoding = "base64";
+        $mail->Subject = 'Cancelacion Visit';
         $mail->msgHTML('
-        <div style="padding: 35px 35px;
+        <div style="padding: 0px 35px;
         margin-bottom: 30px;
-        margin-top: 30px;
-        margin-left: 45px;
+        max-width: 900px;
         text-align: initial;
-        margin-left: 40px;
-        border: 2px solid #3f51b5;
+        background-color: #F7F7F7;
+        color: black;
         font-family:Arial">
+        <div style=" background-color: #2d3f54; text-align: center; padding: 8px;">
+            <h2 style="font-weight: bold;"> Confirmación de cancelación </h2>
+            <img style="background-color: #F7F7F7; border-radius: 15px: height: 7rem;" src="cid:imagen_encabezado" alt="Encabezado"/>
+        </div>
 
-        <p style="font-weight: bold;"> Confirmación de cancelación </p>
-
-        <p>Estimado(A) Sr (Srita) <span style="text-decoration:underline;">'. str_repeat('&nbsp;', 5). $nombre_huesped. str_repeat('&nbsp;', 5).' </span> </p>
+        <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700;">'. str_repeat('&nbsp;', 1). $nombre_huesped. str_repeat('&nbsp;', 1).' </span> </p>
 
         <p>Su reservación ha sido cancelada con éxito  de acuerdo con los siguientes datos:</p>
 
-        <p style="font-weight: bold;">Datos de cancelación:</p>
-        <span style="font-weight: bold;">Usuario que cancela: </span> <span>'.$nombre_cancela.'</span><br>
+        <p style="font-weight: bold; color: #2D3F54;">Datos de cancelación:</p>
+        <span style="font-weight: bold; color: #2D3F54;">Usuario que cancela: </span> <span>'.$nombre_cancela.'</span><br>
 
-        <span style="font-weight: bold;">Motivo de cancelación: </span> <span>'.$motivo_cancela.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Motivo de cancelación: </span> <span>'.$motivo_cancela.'</span><br>
 
-        <span style="font-weight: bold;">Fecha de cancelación: </span> <span>'.date('Y-m-d H:m:s',$fecha_cancelacion).'</span><br><br>
+        <span style="font-weight: bold; color: #2D3F54;">Fecha de cancelación: </span> <span>'.date('Y-m-d H:m:s',$fecha_cancelacion).'</span><br><br>
 
        
 
-        <span style="font-weight: bold;">Nombre: </span> <span>'.$nombre_huesped.'</span><br>
-        <span style="font-weight: bold;">Empresa/agencia: </span><span>'.$huesped->empresa.' </span><br>
-        <span style="font-weight: bold;">Fecha de llegada: </span><span>'.$fecha_entrada.'</span><br>
-        <span style="font-weight: bold;">Fecha de salida: </span><span>'.$fecha_salida.'</span><br>
-        <span style="font-weight: bold;">Número de noches: </span><span> ' .$noches.'</span><br>
-        <span style="font-weight: bold;">Número de habitaciones: </span><span>' .$habitaciones.'</span><br>
-        <span style="font-weight: bold;">Adultos: </span><span> '.$extra_adulto.'</span><br>
-        <span style="font-weight: bold;">Niños: </span><span> '.$extra_infantil.'</span><br>
-        <span style="font-weight: bold;">Tipo de habitación: </span><span> '.$tipohab.'</span><br>
-        <span style="font-weight: bold;">Plan de alimentos: </span><span> '.$nombre_alimentos . " ". $costo_plan.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Nombre: </span> <span>'.$nombre_huesped.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Empresa/agencia: </span><span>'.$huesped->empresa.' </span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Fecha de llegada: </span><span>'.$fecha_entrada.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Fecha de salida: </span><span>'.$fecha_salida.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Número de noches: </span><span> ' .$noches.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Número de habitaciones: </span><span>' .$habitaciones.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Adultos: </span><span> '.$extra_adulto.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Niños: </span><span> '.$extra_infantil.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Tipo de habitación: </span><span> '.$tipohab.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Plan de alimentos: </span><span> '.$nombre_alimentos . " ". $costo_plan.'</span><br>
 
-        <p style="font-weight: bold;">Clave de confirmación: '.$_POST['info'].'</p>
+        <p style="font-weight: bold; color: #2D3F54;">Clave de confirmación: '.$_POST['info'].'</p>
 
-        <span style="font-weight: bold;">Tarifa por noche: </span><span>' .$tarifa_noche.'</span><br>
-        <span style="font-weight: bold;">Total estancia: </span><span> ' .$total_estancia.'</span>
+        <span style="font-weight: bold; color: #2D3F54;">Tarifa por noche: </span><span>' .$tarifa_noche.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54;">Total estancia: </span><span> ' .$total_estancia.'</span>
 
-        <p>Precio en Pesos Mexicanos por habitación, por noche 19% impuestos incluidos. Todas nuestras habitaciones son de NO FUMAR<p>
+        <p style="font-style: italic; font-size: 13px; color: #2D3F54; font-weight: bold;">Precio en Pesos Mexicanos por habitación, por noche 19% impuestos incluidos. Todas nuestras habitaciones son de NO FUMAR<p>
 
         '.$contenido_voucher.'
         '.$contenido_tarjeta.'

@@ -17,6 +17,9 @@
     $dia_procesado = date("d");
     $mes_procesado = date("F");
     $anio_procesado = date("Y");
+    $imagenEncabezado = "../images/hotelexpoabastos.png";
+
+    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
     //Consulta datos de la reserva
 
     $consulta= $reservacion->datos_reservacion($_POST['info']);
@@ -138,10 +141,10 @@
         $contenido_pie="
         <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff; ' >
             <div style='text-align:center'>
-                <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;' >$conf->credencial_auto</a>.<br/>
+                <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;' >$conf->credencial_auto</a>.</p><br/>
                 <p>Donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
-            <span>$conf->domicilio</span>
-        </div>
+                <span>$conf->domicilio</span>
+            </div>
         </div>
         ";
 
@@ -175,8 +178,9 @@
         color: black;
         font-family:Arial">
 
-        <div style="background-color: #2D3F54; text-align: center; padding: 8px;">
+        <div style="background-color:#2d3f54; text-align: center; padding: 8px;  ">
             <h2 style="font-weight: bold; font-size: 24px; color: #ffffff;"> Confirmación de reservación </h2>
+            <img style="background-color: #F7F7F7; border-radius: 15px; height: 7rem;"  src="cid:imagen_encabezado" alt="Encabezado" />
         </div>
 
         <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700; ">'. str_repeat('&nbsp;', 1). $nombre_huesped. str_repeat('&nbsp;', 1).' </span> </p>
@@ -194,10 +198,10 @@
         <span style="font-weight: bold; color: #2D3F54; ">Tipo de habitación: </span><span> '.$tipohab.'</span><br>
         <span style="font-weight: bold; color: #2D3F54; ">Plan de alimentos: </span><span> '.$nombre_alimentos . " ". $costo_plan.'</span><br>
 
-        <p style="font-weight: bold;">Clave de confirmación: '.$_POST['info'].'</p>
+        <p style="font-weight: bold; color: #2D3F54; ">Clave de confirmación: '.$_POST['info'].'</p>
 
-        <span style="font-weight: bold;">Tarifa por noche: </span><span>' .$tarifa_noche.'</span><br>
-        <span style="font-weight: bold;">Total estancia: </span><span> ' .$total_estancia.'</span>
+        <span style="font-weight: bold; color: #2D3F54; ">Tarifa por noche: </span><span>' .$tarifa_noche.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Total estancia: </span><span> ' .$total_estancia.'</span>
 
         <p style="font-style: italic; font-size: 13px; color: #2D3F54; font-weight: bold;" >Precio en Pesos Mexicanos por habitación, por noche 19% impuestos incluidos. Todas nuestras habitaciones son de NO FUMAR<p>
 
