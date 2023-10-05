@@ -21,6 +21,8 @@
     $correo = $huesped->correo;
 
 
+    $nombreHotel = $conf->nombre;
+
 
 
     if(!empty($correo)){
@@ -57,54 +59,62 @@
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             $mail->CharSet = 'UTF-8'; 
             //Recipients
-            $mail->setFrom('orware.factura@gmail.com', utf8_decode('Carlos Garcia'));
-            $mail->addAddress($correo, ('Carlos Garcia'));  
+            $mail->setFrom('orware.factura@gmail.com', $nombreHotel);
+            $mail->addAddress($correo, $nombreHotel);  
     
-            $contenido_pie="<div style='text-align:center'><p>Le invitamos a visitar nuestra página web:$conf->credencial_auto donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
-            <span>$conf->domicilio</span>
+            $contenido_pie="
+            <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff; ' >
+              <div style='text-align:center'>
+                  <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;'>$conf->credencial_auto</a>. <br/>
+                  <p> donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
+                  <span>$conf->domicilio</span>
+              </div>
             </div>";
 
 
     
             $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->CharSet = "UTF-8";
+            $mail->Encoding = "base64";
             $mail->Subject = ('Abono Visit');
             $mail->msgHTML('
-            <div style="padding: 35px 35px;
+            <div style="padding: 0px 35px;
             margin-bottom: 30px;
-            margin-top: 30px;
-            margin-left: 45px;
+            max-width: 900px;
             text-align: initial;
-            margin-left: 40px;
-            border: 2px solid #3f51b5;
+            background-color: #F7F7F7;
+            color: black;
             font-family:Arial">
+
+            <div style="background-color: #2D3F54; text-align: center; padding: 8px;" >
+              <h2 style="font-weight: bold; font-size: 24px; color: #ffffff;"> Confirmación de abono realizado correctamente </h2>
+            </div>
     
-            <h2 style="font-weight: bold;"> '.('Confirmación').' de abono realizado correctamente </h2>
+            <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700;">'. str_repeat('&nbsp;', 1). $nombre_huesped. str_repeat('&nbsp;', 1).' </span> </p>
     
-            <p>Estimado(A) Sr (Srita) <span style="text-decoration:underline;">'. str_repeat('&nbsp;', 5). $nombre_huesped. str_repeat('&nbsp;', 5).' </span> </p>
+            <p>Su abono ha sido procesado con éxito con fecha '.$fecha_actual.'</p>
     
-            <p>'.('Su abono ha sido procesado con éxito con fecha  ').$fecha_actual.'</p>
-    
-            <table style="vertical-align:top;   border-collapse: collapse; ">
+            <table style="vertical-align:top;   border-collapse: collapse; margin: 2rem 0 ;">
             <thead>
-              <tr style="border: 2px solid #3f51b5 !important;
+              <tr style="border: 1px solid #2D3F54 !important;
               font-size: 13px;
               font-family: sans-serif;
               font-weight: bolder;
               ">
-              <th>'.('Descripción').'</th>
-              <th>Fecha</th>
-              <th>Abono</th>
-              <th>Forma Pago</th>
+              <th style="border: 1px solid #2D3F54; background: #2D3F54; color: white; padding: 5px 10px;" >Descripción</th>
+              <th style="border: 1px solid #2D3F54; background: #2D3F54; color: white; padding: 5px 10px;" >Fecha</th>
+              <th style="border: 1px solid #2D3F54; background: #2D3F54; color: white; padding: 5px 10px;" >Abono</th>
+              <th style="border: 1px solid #2D3F54; background: #2D3F54; color: white; padding: 5px 10px;" >Forma Pago</th>
            
               </tr>
             </thead>
             <tbody>
     
             <tr>
-            <td>'.(($descripcion)).'</td>
-            <td>'.$f_h.'</td>
-            <td>$'.number_format($abono,2).'</td>
-            <td>'.$forma_pago.'</td>
+            <td style="border: 1px solid #2D3F54; padding: 5px 10px;" >'.(($descripcion)).'</td>
+            <td style="border: 1px solid #2D3F54; padding: 5px 10px;" >'.$f_h.'</td>
+            <td style="border: 1px solid #2D3F54; padding: 5px 10px;" >$'.number_format($abono,2).'</td>
+            <td style="border: 1px solid #2D3F54; padding: 5px 10px;" >'.$forma_pago.'</td>
             </tr>
     
             </tbody>
