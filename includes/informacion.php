@@ -284,14 +284,17 @@ class Informacion extends ConexionMYSql
             }
             //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             if($estado_hab == 0){
-            if($cronometro == 0){
-                // echo $tipo_habitacion;
-            }else{
-                $fecha_inicio= date("d-m-Y",$cronometro);
-                echo $fecha_inicio;
-                echo '<br>';
-                // echo $tipo_habitacion;
-            }
+                if($cronometro == 0){
+                    // echo $tipo_habitacion;
+                    $fecha_inicio= date("d-m-Y",$cronometro);
+                    echo $fecha_inicio;
+                    echo '<br>';
+                }else{
+                    $fecha_inicio= date("d-m-Y",$cronometro);
+                    echo $fecha_inicio;
+                    echo '<br>';
+                    // echo $tipo_habitacion;
+                }
             }elseif($estado_hab == 1){
             $nombre = $fila['n_huesped'] . " " . $fila['a_huesped'];
             echo '<span class="nombreOperaciones">'; echo $nombre; echo '</span>';
