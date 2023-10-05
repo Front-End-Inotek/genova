@@ -94,7 +94,7 @@
 
       // Datos de reservacion
   $huesped= NEW Huesped($id_huesped);  
-  $vencimiento_tarjeta = $huesped->vencimiento_mes . "/" . $huesped->vencimiento_ano;
+  $vencimiento_tarjeta = $huesped->vencimiento_mes . " / " . $huesped->vencimiento_ano;
   //
   include_once('clase_forma_pago.php');
 
@@ -151,7 +151,7 @@
         $contenido_pie="
         <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff;'>
             <div style='text-align: center'>
-                <p>Le invitamos a visitar nuestra página web: <a style=' #A0C3FF !important; '>$conf->credencial_auto</a>. </p><br/>
+                <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important; '>$conf->credencial_auto</a>. </p>
                 <p>donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
                 <span>$conf->domicilio</span>
             </div>
@@ -187,9 +187,10 @@
         background-color: #F7F7F7;
         color: black;
         font-family:Arial">
+
         <div style=" background-color: #2d3f54; text-align: center; padding: 8px;">
-            <h2 style="font-weight: bold;"> Confirmación de cancelación </h2>
-            <img style="background-color: #F7F7F7; border-radius: 15px: height: 7rem;" src="cid:imagen_encabezado" alt="Encabezado"/>
+            <h2 style="font-weight: bold; font-size: 24px; color: #ffffff"> Confirmación de cancelación </h2>
+            <img style="background-color: #F7F7F7; border-radius: 15px; height: 7rem;"  src="cid:imagen_encabezado" alt="Encabezado" />
         </div>
 
         <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700;">'. str_repeat('&nbsp;', 1). $nombre_huesped. str_repeat('&nbsp;', 1).' </span> </p>

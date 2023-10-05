@@ -86,7 +86,7 @@
 
       // Datos de reservacion
   $huesped= NEW Huesped($id_huesped);  
-  $vencimiento_tarjeta = $huesped->vencimiento_mes . "/" . $huesped->vencimiento_ano;
+  $vencimiento_tarjeta = $huesped->vencimiento_mes . " / " . $huesped->vencimiento_ano;
   //
   include_once('clase_forma_pago.php');
 
@@ -141,7 +141,7 @@
         $contenido_pie="
         <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff; ' >
             <div style='text-align:center'>
-                <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;' >$conf->credencial_auto</a>.</p><br/>
+                <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;' >$conf->credencial_auto</a>.</p>
                 <p>Donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
                 <span>$conf->domicilio</span>
             </div>
@@ -165,6 +165,58 @@
             $contenido_tarjeta="<p style='font-weight: bold;'>Garantía:</p>
             <p>Esta reserva está confirmada y garantizada por un pago en efectivo. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos.</p>";
         }
+         // DATOS PARA LA TRASNFERENCIA
+         $nombre_fiscal = "HOTEL ABASTOS DE OCCIDENTE S.A DE C.V";
+         $banco = "banorte";
+         $cuenta_clave = "072320001630554730";
+         $cuenta = "0163055473";
+         $n_sucursal = "163";
+ 
+         //DATOS DE LA TARJETA A MANDAR
+         $nombre_persona = "Margarita Mariscal";
+         $puesto_persona = "Ventas & Reservas";
+         $cel_persona = "3322722511";
+         $tipo_tel = "WhatsApp";
+         $direccion = "Av. Lázaro Cárdenas 44900, Guadalajara, Jalisco";
+         $telefonos = "(33) 3811-1155 / 3811-1858 / 3811-1910";
+         $correo_persona = "reserva@hotelabastos.mx";
+         $booking = "https://expohotelabastos.mx//";
+         
+        if($forma_pago == "Transferencia" || "transferencia"){
+            $forma_pago_html = '
+            <h3>DATOS BANCARIOS</h3>
+            <ol>
+              <li>Transferencia Interbancaria a nombre de '.$nombre_fiscal.'. Cuenta Clave: '.$cuenta_clave.' en '. $banco .'.</li>
+              <li>Depósito Bancario a nombre de '. $nombre_fiscal .' Cuenta: '. $cuenta .' en '. $banco .'.</li>
+              <li>Numero de sucursal # '.$n_sucursal.'.</li>
+            </ol>
+  
+            <h3>NOTA: Es importante referir su pago ya sea deposito u transferencia con nombre de huesped y numero de reservacion al igual muy importante enviar comprobante de pago a los siguientes correos:</h3>
+  
+            <p>reserva@hotelesabastos.mx</p>
+            <p>ventas@hotelesabastos.mx</p>
+  
+            <h3>PÓLITICA DE GARANTÍA</h3>
+            <ul>
+              <li>Las cancelaciones serán aceptadas sin cargo, si son notificadas a nuestro departamento de reservas 2 días hábiles antes de la llegada de los pasajeros a nuestras instalaciones.</li>
+              <li>Cancelaciones extemporáneas causaran cargo de una noche de hospedaje por cada habitación reservada por concepto de "No Show".</li>
+              <li>Las reservaciones aceptadas y confirmadas por el establecimiento se sostendran hasta las 18:00 hrs. Salvo el caso en que se haya constituido depositos para la garantia.</li>
+            </ul>
+  
+            <div style="background: #2d3f54db; color: #F7F7F7; border-radius: 7px; padding: 8px; max-width: 330px; margin-bottom: 1rem;">
+              <h3>'. $nombre_persona  .'</h3>
+              <p>'. $puesto_persona .'</p>
+              <p>'. $cel_persona .'</p>
+              <p>'. $direccion .'</p>
+              <p>Tel: '. $telefonos .'</p>
+              <p>Correo: <a style="color: #F7F7F7">'. $correo_persona .'</a> </p>
+              <p>Pagina de booking: <a style="color: #F7F7F7">'. $booking .'</a></p>
+            </div>
+            ';
+        } else {
+            $forma_pago_html = "";
+        }
+
         $mail->isHTML(true);      
         $mail->CharSet = "UTF-8";
         $mail->Encoding = "base64";
@@ -204,11 +256,12 @@
         <span style="font-weight: bold; color: #2D3F54; ">Total estancia: </span><span> ' .$total_estancia.'</span>
 
         <p style="font-style: italic; font-size: 13px; color: #2D3F54; font-weight: bold;" >Precio en Pesos Mexicanos por habitación, por noche 19% impuestos incluidos. Todas nuestras habitaciones son de NO FUMAR<p>
-
+        '. $forma_pago_html .'
         '.$contenido_voucher.'
         '.$contenido_tarjeta.'
         '.$politicas.'
         '.$contenido_pie.'
+
 
         </div>');
 

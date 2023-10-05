@@ -41,6 +41,58 @@
         $forma_pago = urldecode($forma_pago);
         $forma_pago = htmlspecialchars($forma_pago, ENT_QUOTES, 'UTF-8');
 
+        // DATOS PARA LA TRASNFERENCIA
+        $nombre_fiscal = "HOTEL ABASTOS DE OCCIDENTE S.A DE C.V";
+        $banco = "banorte";
+        $cuenta_clave = "072320001630554730";
+        $cuenta = "0163055473";
+        $n_sucursal = "163";
+
+        //DATOS DE LA TARJETA A MANDAR
+        $nombre_persona = "Margarita Mariscal";
+        $puesto_persona = "Ventas & Reservas";
+        $cel_persona = "3322722511";
+        $tipo_tel = "WhatsApp";
+        $direccion = "Av. Lázaro Cárdenas 44900, Guadalajara, Jalisco";
+        $telefonos = "(33) 3811-1155 / 3811-1858 / 3811-1910";
+        $correo_persona = "reserva@hotelabastos.mx";
+        $booking = "https://expohotelabastos.mx//";
+
+        if($forma_pago == "Transferencia" || "transferencia"){
+          $forma_pago_html = '
+          <h3>DATOS BANCARIOS</h3>
+          <ol>
+            <li>Transferencia Interbancaria a nombre de '.$nombre_fiscal.'. Cuenta Clave: '.$cuenta_clave.' en '. $banco .'.</li>
+            <li>Depósito Bancario a nombre de '. $nombre_fiscal .' Cuenta: '. $cuenta .' en '. $banco .'.</li>
+            <li>Numero de sucursal # '.$n_sucursal.'.</li>
+          </ol>
+
+          <h3>NOTA: Es importante referir su pago ya sea deposito u transferencia con nombre de huesped y numero de reservacion al igual muy importante enviar comprobante de pago a los siguientes correos:</h3>
+
+          <p>reserva@hotelesabastos.mx</p>
+          <p>ventas@hotelesabastos.mx</p>
+
+          <h3>PÓLITICA DE GARANTÍA</h3>
+          <ul>
+            <li>Las cancelaciones serán aceptadas sin cargo, si son notificadas a nuestro departamento de reservas 2 días hábiles antes de la llegada de los pasajeros a nuestras instalaciones.</li>
+            <li>Cancelaciones extemporáneas causaran cargo de una noche de hospedaje por cada habitación reservada por concepto de "No Show".</li>
+            <li>Las reservaciones aceptadas y confirmadas por el establecimiento se sostendran hasta las 18:00 hrs. Salvo el caso en que se haya constituido depositos para la garantia.</li>
+          </ul>
+
+          <div style="background: #2d3f54db; color: #F7F7F7; border-radius: 7px; padding: 8px; max-width: 330px; margin-bottom: 1rem;">
+            <h3>'. $nombre_persona  .'</h3>
+            <p>'. $puesto_persona .'</p>
+            <p>'. $cel_persona .'</p>
+            <p>'. $direccion .'</p>
+            <p>Tel: '. $telefonos .'</p>
+            <p>Correo: <a style="color: #F7F7F7">'. $correo_persona .'</a> </p>
+            <p>Pagina de booking: <a style="color: #F7F7F7">'. $booking .'</a></p>
+          </div>
+          ';
+        } else {
+          $forma_pago = "";
+        }
+
         $fecha = date("d-m-Y");
         $f_h = date('d-m-Y');
         $dia = substr($fecha, 0, 2);
@@ -69,7 +121,7 @@
             $contenido_pie="
             <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff; ' >
               <div style='text-align:center'>
-                  <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;'>$conf->credencial_auto</a>. <br/>
+                  <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;'>$conf->credencial_auto</a>. </p>
                   <p> donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
                   <span>$conf->domicilio</span>
               </div>
@@ -87,7 +139,7 @@
             max-width: 900px;
             text-align: initial;
             background-color: #F7F7F7;
-            color: black;
+            color: black !important;
             font-family:Arial">
 
             <div style="background-color: #2D3F54; text-align: center; padding: 8px; " >
@@ -110,27 +162,21 @@
               <th style="border: 1px solid #2D3F54; background: #2D3F54; color: white; padding: 5px 10px;" >Fecha</th>
               <th style="border: 1px solid #2D3F54; background: #2D3F54; color: white; padding: 5px 10px;" >Abono</th>
               <th style="border: 1px solid #2D3F54; background: #2D3F54; color: white; padding: 5px 10px;" >Forma Pago</th>
-           
+
               </tr>
             </thead>
             <tbody>
-    
             <tr>
             <td style="border: 1px solid #2D3F54; padding: 5px 10px;" >'.(($descripcion)).'</td>
             <td style="border: 1px solid #2D3F54; padding: 5px 10px;" >'.$f_h.'</td>
             <td style="border: 1px solid #2D3F54; padding: 5px 10px;" >$'.number_format($abono,2).'</td>
             <td style="border: 1px solid #2D3F54; padding: 5px 10px;" >'.$forma_pago.'</td>
             </tr>
-    
             </tbody>
             </table>
-            <hr>
-         
+            '.$forma_pago_html.'
             '.$contenido_pie.'
             </div>');
-    
-    
-    
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             $mail->send();
             echo 'Messagehasbeensent';
