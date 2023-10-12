@@ -123,11 +123,11 @@ while($fila=mysqli_fetch_array($consulta)) {
     $nombre_huesped = $fila['nombre'];
     $apellido_huesped = $fila['apellido'];
 
-    if ( strlen($nombre_huesped) > 13 ){
-        $nombre_huesped = substr($nombre_huesped, 0 , 13) . '...';
+    if ( strlen($nombre_huesped) > 9 ){
+        $nombre_huesped = substr($nombre_huesped, 0 , 9 ) . '...';
     }
-    if ( strlen($apellido_huesped) > 10 ){
-        $apellido_huesped = substr($apellido_huesped, 0 , 10) . '...';
+    if ( strlen($apellido_huesped) > 9 ){
+        $apellido_huesped = substr($apellido_huesped, 0 , 9 ) . '...';
     }
     $nombre_completo = $nombre_huesped . " " . $apellido_huesped;
 
@@ -154,7 +154,7 @@ while($fila=mysqli_fetch_array($consulta)) {
     $pdf->Cell(20, 5, '', 0, 0, 'C');
     $pdf->Cell(20, 5, '', 0, 0, 'C');
     $pdf->Cell(50, 5, iconv("UTF-8", "ISO-8859-1","Estado credito: ".  $estado_credito), 0, 0, 'C');
-    $pdf->Cell(50, 5, iconv("UTF-8", "ISO-8859-1","Limite de credito:    ".number_format($limite_credito,2)), 0, 0, 'C');
+    $pdf->Cell(50, 5, iconv("UTF-8", "ISO-8859-1","Limite de credito: ".number_format($limite_credito,2)), 0, 0, 'C');
     $pdf->Ln(5);
     $pdf->Cell(-9);
     $pdf->Line($pdf->GetX(), $pdf->GetY(), 209,$pdf->GetY());

@@ -32,7 +32,7 @@ const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio
 const datosVentas200 = {
     label: "Ocupacion de habitaciones",
     data: datos_ocupadas,
-    backgroundColor: "rgba(84,183,245,0.5)",
+    backgroundColor: "rgba(84,183,245,0.1)",
     borderColor: 'rgba(56,116,255, 1)',
     borderWidth: 1,
     /* fill: false, */

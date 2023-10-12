@@ -297,6 +297,7 @@ function mostrar_herramientas(hab_id,estado,nombre,entrada=0,salida=0,mov=0,rese
 	$("#mostrar_herramientas").load(include);
 }
 
+
 //cerrar el modal cuando se navega a otra 'vista'
 function closeModal(){
     $('#caja_herramientas').modal('hide');

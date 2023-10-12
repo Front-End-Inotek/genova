@@ -15,7 +15,7 @@
 
     $id_huesped= $movimiento->saber_id_huesped($_POST['mov']);
       // Datos de reservacion
-    $huesped= NEW Huesped($id_huesped);  
+    $huesped= NEW Huesped($id_huesped);
     $nombre_huesped =$huesped->nombre ." ".$huesped->apellido;
 
     $imagenEncabezado = "../images/hotelexpoabastos.png";

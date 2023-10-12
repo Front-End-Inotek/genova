@@ -92,11 +92,6 @@ $consulta_abonos = $cuenta->mostrarAbonos($id_usuario);
 
 $pdf->SetFont('Arial', '', 15);
 
-
-
-
-
-
 // Titulos tabla cargos
 $pdf->SetFont('Arial', 'B', 10);
 
@@ -118,7 +113,6 @@ $total_=0;
 $c=0;
 
 while($fila=mysqli_fetch_array($consulta_cargos)) {
-   
     if($fila_atras!= $fila['hab_nombre']){
         if($c!=0){
           $pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
@@ -140,7 +134,6 @@ while($fila=mysqli_fetch_array($consulta_cargos)) {
     $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $fila['fecha'])), 0, 0, 'C');
     $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1",$fila['cargo']), 0, 0, 'C');
     $pdf->Cell(40, 5, '0', 0, 1, 'C');
-    
     $fila_atras=$fila['hab_nombre'];
     $total_cargos+=$fila['cargo'];
     $total_+=$fila['cargo'];
@@ -148,14 +141,11 @@ while($fila=mysqli_fetch_array($consulta_cargos)) {
 }
 $pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
 
-
 //cargos cuentas maestras.
 $consulta= $cuenta->mostrarCargosMaestra($id_usuario);
 while($fila=mysqli_fetch_array($consulta)) {
-   
     if($fila_atras!= $fila['maestra_id']){
         if($c!=0){
-         
           $pdf->Cell(40, 5,'',0, 0, 'C');
           $pdf->Cell(40, 5,'');
           $pdf->Cell(35, 5, '', 0, 0, 'C');
@@ -174,7 +164,6 @@ while($fila=mysqli_fetch_array($consulta)) {
     $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $fila['fecha'])), 0, 0, 'C');
     $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1",$fila['cargo']), 0, 0, 'C');
     $pdf->Cell(40, 5, '0', 0, 1, 'C');
-    
     $fila_atras=$fila['maestra_id'];
     $total_cargos+=$fila['cargo'];
     $total_maestra+=$fila['cargo'];
@@ -188,7 +177,6 @@ $pdf->Cell(40, 5,'Total:', 0, 0, 'C');
 $pdf->Cell(40, 5, number_format($total_cargos, 2), 0, 1, 'C');
 $total_cargos=0;
 
-
 $pdf->Ln();
 $pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
 $total_cargo_general = $total_+ $total_maestra;
@@ -198,7 +186,6 @@ $pdf->Cell(40, 5,'', 0, 0, 'C');
 $pdf->Cell(35, 5, '', 0, 0, 'C');
 $pdf->Cell(40, 5,'', 0, 0, 'C');
 $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($total_cargo_general, 2)), 0, 1, 'C');
-
 
 //Abonos
 $pdf->Ln(10);
@@ -211,7 +198,6 @@ $total_=0;
 $c=0;
 
 while($fila=mysqli_fetch_array($consulta_abonos)) {
-   
     if($fila_atras!= $fila['hab_nombre']){
         if($c!=0){
           $pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
@@ -231,10 +217,8 @@ while($fila=mysqli_fetch_array($consulta_abonos)) {
     $pdf->Cell(40, 5,'');
     $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1",$fila['descripcion']), 0, 0, 'C');
     $pdf->Cell(35, 5, iconv("UTF-8", "ISO-8859-1", date("d-m-Y", $fila['fecha'])), 0, 0, 'C');
-
     $pdf->Cell(40, 5, '0', 0, 0, 'C');
     $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1",$fila['abono']), 0, 1, 'C');
-    
     $fila_atras=$fila['hab_nombre'];
     $total_abonos+=$fila['abono'];
     $total_+=$fila['abono'];
@@ -246,10 +230,8 @@ $pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
 //cargos cuentas maestras.
 $consulta= $cuenta->mostrarAbonosMaestra($id_usuario);
 while($fila=mysqli_fetch_array($consulta)) {
-   
     if($fila_atras!= $fila['maestra_id']){
         if($c!=0){
-         
           $pdf->Cell(40, 5,'',0, 0, 'C');
           $pdf->Cell(40, 5,'');
           $pdf->Cell(35, 5, '', 0, 0, 'C');
@@ -280,8 +262,6 @@ $pdf->Cell(35, 5, '', 0, 0, 'C');
 $pdf->Cell(40, 5,'Total:', 0, 0, 'C');
 $pdf->Cell(40, 5, number_format($total_abonos, 2), 0, 1, 'C');
 $total_abonos=0;
-
-
 $pdf->Ln();
 $pdf->Line($pdf->GetX(), $pdf->GetY(), 200,$pdf->GetY());
 $total_abono_general = $total_+ $total_maestra;
@@ -292,11 +272,7 @@ $pdf->Cell(35, 5, '', 0, 0, 'C');
 $pdf->Cell(40, 5,'', 0, 0, 'C');
 $pdf->Cell(40, 5, iconv("UTF-8", "ISO-8859-1", number_format($total_abono_general, 2)), 0, 1, 'C');
 
-
-
-
 $file = $pdf->Output("reporte_estado_cuenta_.pdf", "S");
-
 
 require_once('../PHPMailer/class.phpmailer.php');
 
@@ -321,7 +297,7 @@ try {
     $mail->addStringAttachment($file, 'reporte_transacciones.pdf');
 
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = utf8_decode('Resumen de transacciones');
+    $mail->Subject = 'Resumen de transacciones';
 
     $mail->msgHTML('Se adjunta archivo con las transacciones realizadas en Visit');
 
