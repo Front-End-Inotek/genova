@@ -11,6 +11,25 @@
     foreach ($lista_tickets as $fila) {
         array_push($lista_Id_tickets, $fila['id']);
     }
-    var_dump($lista_Id_tickets)
+    var_dump($lista_Id_tickets);
+
+    echo '
+    <table class="table table-bordered" style="max-width: 1500px; margin: auto;">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Concepto</th>
+        <th scope="col">Costo Unitario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><input type="checkbox"/> </th>
+        <td>Suite Junior</td>
+        <td>$1000</td>
+      </tr>
+    </tbody>
+    </table>
+    ';
 
 ?>
