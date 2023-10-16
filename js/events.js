@@ -7544,7 +7544,16 @@ function manejo_facturas(){
             dangerMode: true,
         })
         return
-    } else {
+    } else if(fechaInio > fechaFin){
+        swal({
+            title: "Error en el rango de fechas",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return
+    }
+    else {
         datos = { fechaInio: fechaInio, fechaFin: fechaFin }
         $.ajax({
             async:true,
