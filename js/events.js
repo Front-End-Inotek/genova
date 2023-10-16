@@ -7524,6 +7524,43 @@ function factura_global(){
     closeNav();
 }
 
+function manejo_facturas(){
+    const fechaInio = document.getElementById("fecha_inicio_factura").value;
+    const fechaFin = document.getElementById("fecha_fin_factura").value;
+
+    if(!fechaInio) {
+        swal({
+            title: "Falta fecha de inicio",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return
+    }else if (!fechaFin) {
+        swal({
+            title: "Falta fecha de final",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return
+    } else {
+        datos = { fechaInio: fechaInio, fechaFin: fechaFin }
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/factura_global_consulta.php",
+            data:datos,
+            success: function(response){
+                alert(response)
+            } ,
+        });
+    }
+
+}
+
 // Hacer un corte
 function hacer_cortes(){
     usuario_id=localStorage.getItem("id");
