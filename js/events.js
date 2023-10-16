@@ -7528,32 +7528,32 @@ function manejo_facturas(){
     const fechaInio = document.getElementById("fecha_inicio_factura").value;
     const fechaFin = document.getElementById("fecha_fin_factura").value;
 
-    if(!fechaInio) {
+    if (!fechaInio) {
         swal({
             title: "Falta fecha de inicio",
             icon: "warning",
-            buttons: true,
+            confirmButtonText: "Aceptar",
             dangerMode: true,
         })
         return
-    }else if (!fechaFin) {
+    } else if (!fechaFin) {
         swal({
             title: "Falta fecha de final",
             icon: "warning",
-            buttons: true,
+            confirmButtonText: "Aceptar",
             dangerMode: true,
         })
         return
-    } else if(fechaInio > fechaFin){
+    } else if (fechaInio > fechaFin){
         swal({
             title: "Error en el rango de fechas",
             icon: "warning",
-            buttons: true,
+            confirmButtonText: "Aceptar",
             dangerMode: true,
         })
         return
-    }
-    else {
+    } else {
+        const contenedor = document.getElementById("contenedor-facturas");
         datos = { fechaInio: fechaInio, fechaFin: fechaFin }
         $.ajax({
             async:true,
@@ -7563,11 +7563,11 @@ function manejo_facturas(){
             url:"includes/factura_global_consulta.php",
             data:datos,
             success: function(response){
-                alert(response)
+                contenedor.innerHTML = response;
+                //console.log(response);
             } ,
         });
     }
-
 }
 
 // Hacer un corte
