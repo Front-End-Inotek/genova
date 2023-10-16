@@ -7565,6 +7565,7 @@ function manejo_facturas(){
             success: function(response){
                 contenedor.innerHTML = response;
                 //console.log(response);
+                console.log(response)
             } ,
         });
     }

@@ -448,6 +448,25 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }
       }
+      function info_concepto($id){
+        $total=0;
+        $informacion = array();
+        $sentencia = "SELECT * FROM concepto WHERE id_ticket = $id ";
+          $comentario="Obtener todos los valores de concepto";
+          //echo $sentencia;
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta)) {
+          $id_ticket=$fila['id_ticket'];
+          $total=$fila['total'];
+          $nombre=$fila['nombre'];
+          $tipo_cargo=$fila['tipo_cargo'];
+          $informacion['id']=$id_ticket;
+          $informacion['nombre']=$nombre;
+          $informacion['total']=$total;
+          $informacion['tipo_cargo']=$tipo_cargo;
+        }
+        return $informacion;
+      }
       // Saber cual es el numero del concepto
       function saber_pedido($id_ticket,$nombre){
         $sentencia = "SELECT * FROM concepto WHERE id_ticket = $id_ticket AND nombre = '$nombre' AND activo = 1 LIMIT 1";
