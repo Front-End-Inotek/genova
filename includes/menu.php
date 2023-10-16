@@ -138,6 +138,10 @@
 				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_cortes_dia()"> Corte diario usuario</a></i></ul>';
 				echo'
 				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="hacer_corte(0)"> Resumen transacciones </a></i></ul>';
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_global()"> Factura global </a></i></ul>';
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_global()"> Factura libre </a></i></ul>';
 				// echo'
 				// <ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="corte_diario()"> Corte diario </a></i></ul>';
 				}

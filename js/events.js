@@ -7514,6 +7514,16 @@ function hacer_corte(){
     closeNav();
 }
 
+function factura_global(){
+    //usuario_id=localStorage.getItem("id");
+    console.log("facturas")
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_global.php");
+    closeNav();
+}
+
 // Hacer un corte
 function hacer_cortes(){
     usuario_id=localStorage.getItem("id");

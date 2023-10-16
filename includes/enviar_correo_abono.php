@@ -17,17 +17,10 @@
       // Datos de reservacion
     $huesped= NEW Huesped($id_huesped);
     $nombre_huesped =$huesped->nombre ." ".$huesped->apellido;
-
     $imagenEncabezado = "../images/hotelexpoabastos.png";
     $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
-
-
     $correo = $huesped->correo;
-
-
     $nombreHotel = $conf->nombre;
-
-
 
     if(!empty($correo)){
 
@@ -127,8 +120,6 @@
               </div>
             </div>";
 
-
-    
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->CharSet = "UTF-8";
             $mail->Encoding = "base64";
@@ -146,11 +137,8 @@
               <h2 style="font-weight: bold; font-size: 24px; color: #ffffff;"> Confirmación de abono realizado correctamente </h2>
               <img style="background-color: #F7F7F7; border-radius: 15px; height: 7rem;"  src="cid:imagen_encabezado" alt="Encabezado" />
             </div>
-    
             <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700;">'. str_repeat('&nbsp;', 1). $nombre_huesped. str_repeat('&nbsp;', 1).' </span> </p>
-    
             <p>Su abono ha sido procesado con éxito con fecha '.$fecha_actual.'</p>
-    
             <table style="vertical-align:top;   border-collapse: collapse; margin: 2rem 0 ;">
             <thead>
               <tr style="border: 1px solid #2D3F54 !important;

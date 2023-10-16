@@ -21,9 +21,7 @@
 
     $consulta= $reservacion->datos_cancelacion($_POST['info']);
 
-    while ($fila = mysqli_fetch_array($consulta))
-    {
-       
+    while ($fila = mysqli_fetch_array($consulta)){
         $id_hab= $fila['ID'];
         $id_usuario= $fila['id_usuario'];
         $usuario_reservacion= $fila['usuario'];
@@ -44,23 +42,17 @@
         $quien_reserva= $fila['nombre_reserva'];
         $acompanante= $fila['acompanante'];
         $tarifa_noche = $fila['precio_hospe'];
-
         $nombre_cancela=$fila['nombre_cancela'];
         $motivo_cancela=$fila['motivo_cancela'];
         $fecha_cancelacion = $fila['fecha_cancelacion'];
-
         $habitaciones=$fila['numero_hab'];
-  
         $tipohab=$fila['tipohab'];
         $nombre_alimentos=$fila['nombre_alimentos'];
-  
         $costo_plan = $fila['costo_plan'];
         $costo_plan= '$'.number_format($costo_plan, 2);
         if($tarifa_noche>0){
           $tarifa_noche= '$'.number_format($tarifa_noche, 2);
         }
-        
-       
         // Checar si suplementos esta vacio o no
         if (empty($fila['suplementos'])){
             //echo 'La variable esta vacia';
@@ -71,16 +63,15 @@
         $total_suplementos= '$'.number_format($fila['total_suplementos'], 2);
         $total_habitacion= '$'.number_format($fila['total_hab'], 2);
         if($fila['descuento']>0){
-            $descuento= $fila['descuento'].'%'; 
+            $descuento= $fila['descuento'].'%';
         }else{
-            $descuento= 'Ninguno'; 
+            $descuento= 'Ninguno';
         }
         if($fila['forzar_tarifa']>0){
             $total_estancia= '$'.number_format($fila['forzar_tarifa'], 2);
         }else{
             $total_estancia= '$'.number_format($fila['total'], 2);
         }
-  
         $total_estancia= '$'.number_format($fila['total'], 2);
         if($fila['total_pago']>0){
             $total_pago= '$'.number_format($fila['total_pago'], 2);
@@ -90,10 +81,9 @@
         $forma_pago= $fila['descripcion'];
         $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
     }
-  
 
       // Datos de reservacion
-  $huesped= NEW Huesped($id_huesped);  
+  $huesped= NEW Huesped($id_huesped);
   $vencimiento_tarjeta = $huesped->vencimiento_mes . " / " . $huesped->vencimiento_ano;
   //
   include_once('clase_forma_pago.php');
@@ -105,21 +95,16 @@
   }
   $politicas="";
   $pr = new PoliticasReservacion(0);
-
-
-
   $consulta= $pr->datos_politicas();
 
   while ($politica = mysqli_fetch_array($consulta)) {
     $nombre = $politica['nombre'];
     $descripcion = $politica['descripcion'];
-
     $politicas.="<p style='font-weight: bold;'>$nombre<p>
     <p>$descripcion</p>
     ";
   }
-  
-  
+
     $mail->IsSMTP(); // Se especifica a la clase que se utilizará SMTP
     try {
         //Server settings
@@ -131,17 +116,15 @@
         $mail->Password   = 'wmtitpzizsqnnwcr';                               //SMTP password
         $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    
         //Recipients
         $mail->setFrom('orware.factura@gmail.com', $nombreHotel);
-        $mail->addAddress($_POST['correo'], $nombreHotel);  
-        //$mail->addAddress('carlosramongarcia@gmail.com', utf8_decode('Carlos Garcia'));        
+        $mail->addAddress($_POST['correo'], $nombreHotel);
+        //$mail->addAddress('carlosramongarcia@gmail.com', utf8_decode('Carlos Garcia'));
         /*$mail->addReplyTo('info@example.com', 'Information');
         $mail->addCC('cc@example.com');
         $mail->addBCC('bcc@example.com');*/
-    
         //Attachments
-       /* $mail->addAttachment('../facturas/'. $folio .'_Factura.pdf'); 
+       /* $mail->addAttachment('../facturas/'. $folio .'_Factura.pdf');
         $mail->addAttachment('../facturas/'. $folio .'_cfdi_factura.xml');
         $mail->addAttachment('../facturas/'. $folio .'_cfdi_factura.png');*/
         //Content
@@ -194,18 +177,11 @@
         </div>
 
         <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700;">'. str_repeat('&nbsp;', 1). $nombre_huesped. str_repeat('&nbsp;', 1).' </span> </p>
-
         <p>Su reservación ha sido cancelada con éxito  de acuerdo con los siguientes datos:</p>
-
         <p style="font-weight: bold; color: #2D3F54;">Datos de cancelación:</p>
         <span style="font-weight: bold; color: #2D3F54;">Usuario que cancela: </span> <span>'.$nombre_cancela.'</span><br>
-
         <span style="font-weight: bold; color: #2D3F54;">Motivo de cancelación: </span> <span>'.$motivo_cancela.'</span><br>
-
         <span style="font-weight: bold; color: #2D3F54;">Fecha de cancelación: </span> <span>'.date('Y-m-d H:m:s',$fecha_cancelacion).'</span><br><br>
-
-       
-
         <span style="font-weight: bold; color: #2D3F54;">Nombre: </span> <span>'.$nombre_huesped.'</span><br>
         <span style="font-weight: bold; color: #2D3F54;">Empresa/agencia: </span><span>'.$huesped->empresa.' </span><br>
         <span style="font-weight: bold; color: #2D3F54;">Fecha de llegada: </span><span>'.$fecha_entrada.'</span><br>
@@ -216,22 +192,16 @@
         <span style="font-weight: bold; color: #2D3F54;">Niños: </span><span> '.$extra_infantil.'</span><br>
         <span style="font-weight: bold; color: #2D3F54;">Tipo de habitación: </span><span> '.$tipohab.'</span><br>
         <span style="font-weight: bold; color: #2D3F54;">Plan de alimentos: </span><span> '.$nombre_alimentos . " ". $costo_plan.'</span><br>
-
         <p style="font-weight: bold; color: #2D3F54;">Clave de confirmación: '.$_POST['info'].'</p>
-
         <span style="font-weight: bold; color: #2D3F54;">Tarifa por noche: </span><span>' .$tarifa_noche.'</span><br>
         <span style="font-weight: bold; color: #2D3F54;">Total estancia: </span><span> ' .$total_estancia.'</span>
-
         <p style="font-style: italic; font-size: 13px; color: #2D3F54; font-weight: bold;">Precio en Pesos Mexicanos por habitación, por noche 19% impuestos incluidos. Todas nuestras habitaciones son de NO FUMAR<p>
-
         '.$contenido_voucher.'
         '.$contenido_tarjeta.'
         '.$politicas.'
         '.$contenido_pie.'
 
         </div>');
-
-
 
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         $mail->send();
