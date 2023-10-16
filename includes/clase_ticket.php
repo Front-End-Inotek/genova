@@ -126,6 +126,12 @@
         $comentario="Cambiar estado de impreso del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      function tickets_por_fecha($inicio,$fin){
+        $sentencia="SELECT * FROM `ticket` WHERE `tiempo`>=$inicio AND `tiempo`<=$fin";
+        $comentario="Consulta de tickets en un rango de fechas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
       // Cambiar a un estado en especifico del ticket
       function cambiar_estado_especifico($id_ticket,$estado){
         $sentencia = "UPDATE `ticket` SET
@@ -635,6 +641,5 @@
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-    
   }
 ?>
