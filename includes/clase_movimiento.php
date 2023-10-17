@@ -456,21 +456,8 @@
       }
       // Modificar el estado interno del movimiento
       function editar_estado_interno($mov,$opcion){
-        $estado_interno= '';
-        switch($opcion){
-          case 0:
-              $estado_interno= 'sin estado';
-              break;
-          case 1.1:
-              $estado_interno= 'sucia';
-              break;
-          case 1.2:
-              $estado_interno= 'limpieza';
-              break;
-          case 1.3:
-              $estado_interno= 'uso casa';
-              break;
-        }
+        $estado_interno= $opcion;
+        
         $sentencia = "UPDATE `movimiento` SET
         `estado_interno` = '$estado_interno'
         WHERE `id` = '$mov';";
@@ -517,14 +504,19 @@
       }
       // Obtner el estado interno del movimiento de una habitacion 
       function mostrar_estado_interno($mov){
-        $sentencia= "SELECT estado_interno FROM movimiento WHERE id =$mov LIMIT 1";
-        $estado_interno= '';
-        $comentario="Obtner el estado interno del movimiento de una habitacion ";
-        $consulta= $this->realizaConsulta($sentencia,$comentario);
-        while ($fila = mysqli_fetch_array($consulta))
-        {
-          $estado_interno= $fila['estado_interno'];
+        if($mov >0){
+          $sentencia= "SELECT estado_interno FROM movimiento WHERE id =$mov LIMIT 1";
+          $estado_interno= '';
+          $comentario="Obtner el estado interno del movimiento de una habitacion ";
+          $consulta= $this->realizaConsulta($sentencia,$comentario);
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+            $estado_interno= $fila['estado_interno'];
+          }
+        }else{
+          $estado_interno="Disponible";
         }
+        
         return $estado_interno;
       }
       // Poner tiempo en campo finalizado al desocupar una habitacion

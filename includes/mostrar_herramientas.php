@@ -94,7 +94,7 @@ $nombre_habitacion = $hab->nombre;
 $movimiento = NEW Movimiento(0);
 //$cliente = NEW Cliente($_GET['hab_id']);
 $user = NEW Usuario($_GET['id']);
-if($hab->mov > 0){
+if($hab->mov >= 0){
 	$estado_interno= $movimiento->mostrar_estado_interno($hab->mov);
 	$id_reserva = $movimiento->saber_id_reservacion($hab->mov); ///----------------------*/
 }
@@ -115,6 +115,7 @@ echo '<div class="modal-header" style="background-color: #97b2f9ee; color: #000;
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	</div>';
 echo '<div class="container-fluid">';
+echo $estado_interno;
 show_info($_GET['hab_id'],$_GET['estado'],$estado_interno);
 echo '</br>';
 echo '<div class="row flex-wrap">';

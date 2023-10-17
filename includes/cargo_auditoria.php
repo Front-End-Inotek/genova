@@ -63,41 +63,45 @@
           // $realizo_usuario= $usuario->obtengo_nombre_completo($_POST['usuario_id']);
           $realizo_usuario="";
 
+          $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
+          $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
+          $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 68, 12);
+
           // Marco primera pagina
-          $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+          //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
-          $this->SetFont('Arial','',10);
+          $this->SetFont('Arial','',12);
           // Color de letra
-          $this->SetTextColor(0, 102, 205);
+          $this->SetTextColor(255, 255, 255);
           // Movernos a la derecha
           $this->Cell(2);
           // Nombre del Hotel
-          $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+          //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
           // Datos y fecha
-          $this->SetFont('Arial','',10);
-          $this->SetTextColor(0,0,0);
-          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
+          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
           // Salto de línea
-          $this->Ln(14);
+          $this->Ln(12);
+          $this->Cell(70,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CARGO POR NOCHE'),0,0,'C');
           // Movernos a la derecha
-          $this->Cell(80);
+          $this->SetFont('Arial','',12);
+          $this->SetTextColor(0, 0, 0);
+          $this->Ln();
+          $this->Cell(160);
+          $this->Cell( 25 ,0,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
           // Título
-          $this->SetFont('Arial','',10);
-          $this->SetTextColor(0, 102, 205);
-          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CARGO POR NOCHE'),0,0,'C');
           // Salto de línea
-          $this->Ln(18);
+          $this->Ln(8);
       }
       
       // Pie de página
       function Footer()
       {
           // Posición: a 1,5 cm del final
-          $this->SetY(-15);
+          $this->SetY(-20);
           // Arial italic 8
-          $this->SetFont('Arial','',8);
+          $this->SetTextColor(45, 63, 83);
+          $this->SetFont('Arial','',7);
           // Número de página
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
@@ -116,9 +120,11 @@
   $anio = substr($fecha, 6, 4);
 
   // Titulos tabla -277
-  $pdf->SetFont('Arial','',7);
+  $pdf->SetFont('Arial','',8);
   $pdf->SetTextColor(255, 255, 255);
-  $pdf->SetFillColor(99, 155, 219);
+  $pdf->SetFillColor(45, 63, 83);
+  $pdf->SetLineWidth(0.1);
+  $pdf->SetDrawColor(45, 63 , 83);
   $pdf->Cell(25,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
   $pdf->Cell(30,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
   // $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA $'),0,0,'C',True);

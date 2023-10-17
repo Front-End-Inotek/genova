@@ -32,7 +32,7 @@ const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio
 const datosVentas200 = {
     label: "Ocupacion de habitaciones",
     data: datos_ocupadas,
-    backgroundColor: "rgba(84,183,245,0.5)",
+    backgroundColor: "rgba(84,183,245,0.1)",
     borderColor: 'rgba(56,116,255, 1)',
     borderWidth: 1,
     /* fill: false, */
@@ -53,7 +53,7 @@ grafica_ocupadas  = new Chart($grafica, {
                     beginAtZero: true
                 }
             }]
-        }
+        },
     }
 })
 
@@ -118,25 +118,25 @@ const datosFormasDePago = {
     label: "Formas de pago",
     data: datos_pagos,
     backgroundColor: [
-        "#6C82B2",
-        "#FE3F40",
-        "#54B7F5",
         "#3F98C7",
-        "#656566",
+        "#B4B7FA",
         "#02B0C0",
         "#B3E4FF",
         "#AEF8AB",
+        "#A01D1E",
+        "#6C82B2",
+        "#656566",
         "#FDE996",
         "#FE9F6C",
         "#0E41B0",
-        "#B4B7FA",
+        "#54B7F5",
         "#F9FAF5",
         "#D0EDA4",
         "#F7F172",
-        "#A01D1E",
         "#F3B9BB",
         "#FAF5F5",
-        "#EDAAA4",
+        "#EDA324",
+        "#FE3F40",
         "#F77772",
     ],
     hoverOffset: 4
@@ -193,7 +193,7 @@ grafica_ventas=new Chart (ventas, {
 const restaurant = document.querySelector("#restaurant");
 
 const datosRestaurant = {
-    label: "Productos mas vendidos",
+    label: "Unidades vendidas",
     data: ventas_rest,
     backgroundColor: "#00D27A",
     borderColor: "#00D27A",
@@ -215,6 +215,9 @@ grafica_ventas4 = new Chart (restaurant, {
                     beginAtZero: true
                 }
             }]
+        },
+        legend: {
+            display: false
         }
     }
 })

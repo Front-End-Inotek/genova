@@ -61,7 +61,7 @@
           $nombre= $conf->obtener_nombre();
           $realizo_usuario= $usuario->obtengo_nombre_completo($_POST['usuario_id']);
           // Marco primera pagina
-          $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+          //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
           $this->SetFont('Arial','',10);
           // Color de letra
@@ -69,7 +69,7 @@
           // Movernos a la derecha
           $this->Cell(2);
           // Nombre del Hotel
-          $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+          //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
           // Datos y fecha
           $this->SetFont('Arial','',10);
           $this->SetTextColor(0,0,0);

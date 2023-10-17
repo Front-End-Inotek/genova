@@ -29,7 +29,7 @@ class PDF extends FPDF
 
         // Marco primera pagina
         //$this->Image("../images/hoja_margen.png", 1.5, -2, 211, 295);
-        //Encabezado 
+        //Encabezado
         $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
         $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
         $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 68, 12);
@@ -72,7 +72,7 @@ class PDF extends FPDF
         // Posición: a 1,5 cm del final
         $this->SetY(-20);
         // Arial italic 8
-        $this->SetFont('Arial', '', 8);
+        $this->SetFont('Arial', '', 7);
         $this->SetTextColor(45, 63, 83);
         $this->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", 'Le invitamos a visitar nuestra página web: '.$conf->credencial_auto.' donde encontrará mayor información acerca de nuestras instalaciones y servicios.'), 0, 'C');
         $this->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", $conf->domicilio), 0, 0, 'C');
@@ -95,7 +95,7 @@ $nombre_huesped =$huesped->nombre . " ". $huesped->apellido;
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
-$pdf->SetFont('Arial', '', 9);
+$pdf->SetFont('Arial', '', 7 );
 $total_abonos=0;
 $total_general=0;
 $pdf->SetFont('Arial', '', 13);
@@ -107,12 +107,12 @@ if(!empty($nombre_huesped)){
     $pdf->Ln(1);
 }
 
-$pdf->Cell(-9);
 $pdf->SetFont('Arial', '', 8);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(45, 63, 83);
 $pdf->SetLineWidth(0.1);
 $pdf->SetDrawColor(45, 63 , 83);
+$pdf->Cell(-9);
 $pdf->Cell(21, 5, iconv("UTF-8", "ISO-8859-1", 'Fecha'), 1, 0, 'C',1);
 $pdf->Cell(30, 5, iconv("UTF-8", "ISO-8859-1", 'Tipo hab.'), 1, 0, 'C',1);
 $pdf->Cell(21, 5, iconv("UTF-8", "ISO-8859-1", 'Cargo'), 1, 0, 'C',1);

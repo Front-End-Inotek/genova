@@ -12,6 +12,14 @@
     $logs = NEW Log(0);
     $correo=NEW Email();
     $mail = new PHPMailer(true); // Declaramos un nuevo correo, el parametro true significa que mostrara excepciones y errores.
+    //Nombre del hotel
+    $nombreHotel = $conf->nombre;
+    $dia_procesado = date("d");
+    $mes_procesado = date("F");
+    $anio_procesado = date("Y");
+    $imagenEncabezado = "../images/hotelexpoabastos.png";
+
+    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
     //Consulta datos de la reserva
 
     $consulta= $reservacion->datos_reservacion($_POST['info']);
@@ -78,7 +86,7 @@
 
       // Datos de reservacion
   $huesped= NEW Huesped($id_huesped);  
-  $vencimiento_tarjeta = $huesped->vencimiento_mes . "/" . $huesped->vencimiento_ano;
+  $vencimiento_tarjeta = $huesped->vencimiento_mes . " / " . $huesped->vencimiento_ano;
   //
   include_once('clase_forma_pago.php');
 
@@ -115,8 +123,8 @@
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
-        $mail->setFrom('orware.factura@gmail.com', utf8_decode('Carlos Garcia'));
-        $mail->addAddress($_POST['correo'], utf8_decode('Carlos Garcia'));  
+        $mail->setFrom('orware.factura@gmail.com', $nombreHotel);
+        $mail->addAddress($_POST['correo'], $nombreHotel);  
         //$mail->addAddress('carlosramongarcia@gmail.com', utf8_decode('Carlos Garcia'));        
         /*$mail->addReplyTo('info@example.com', 'Information');
         $mail->addCC('cc@example.com');
@@ -130,9 +138,15 @@
         $contenido_voucher="";
         $contenido_tarjeta="";
         $contenido_efectivo="";
-        $contenido_pie="<div style='text-align:center'><p>Le invitamos a visitar nuestra página web:$conf->credencial_auto donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
-        <span>$conf->domicilio</span>
-        </div>";
+        $contenido_pie="
+        <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff; ' >
+            <div style='text-align:center'>
+                <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;' >$conf->credencial_auto</a>.</p>
+                <p>Donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
+                <span>$conf->domicilio</span>
+            </div>
+        </div>
+        ";
 
         $pr = new PoliticasReservacion(0);
 
@@ -151,46 +165,103 @@
             $contenido_tarjeta="<p style='font-weight: bold;'>Garantía:</p>
             <p>Esta reserva está confirmada y garantizada por un pago en efectivo. Dependiendo de los términos y condiciones aplicables a las tarifas de las habitaciones reservadas, el cliente acepta que el hotel cobre cualquier pago necesario bajo estos mismos términos.</p>";
         }
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = utf8_decode('Reserva Visit');
+         // DATOS PARA LA TRASNFERENCIA
+         $nombre_fiscal = "HOTEL ABASTOS DE OCCIDENTE S.A DE C.V";
+         $banco = "banorte";
+         $cuenta_clave = "072320001630554730";
+         $cuenta = "0163055473";
+         $n_sucursal = "163";
+ 
+         //DATOS DE LA TARJETA A MANDAR
+         $nombre_persona = "Margarita Mariscal";
+         $puesto_persona = "Ventas & Reservas";
+         $cel_persona = "3322722511";
+         $tipo_tel = "WhatsApp";
+         $direccion = "Av. Lázaro Cárdenas 44900, Guadalajara, Jalisco";
+         $telefonos = "(33) 3811-1155 / 3811-1858 / 3811-1910";
+         $correo_persona = "reserva@hotelabastos.mx";
+         $booking = "https://expohotelabastos.mx//";
+         
+        if($forma_pago == "Transferencia" || "transferencia"){
+            $forma_pago_html = '
+            <h3>DATOS BANCARIOS</h3>
+            <ol>
+              <li>Transferencia Interbancaria a nombre de '.$nombre_fiscal.'. Cuenta Clave: '.$cuenta_clave.' en '. $banco .'.</li>
+              <li>Depósito Bancario a nombre de '. $nombre_fiscal .' Cuenta: '. $cuenta .' en '. $banco .'.</li>
+              <li>Numero de sucursal # '.$n_sucursal.'.</li>
+            </ol>
+  
+            <h3>NOTA: Es importante referir su pago ya sea deposito u transferencia con nombre de huesped y numero de reservacion al igual muy importante enviar comprobante de pago a los siguientes correos:</h3>
+  
+            <p>reserva@hotelesabastos.mx</p>
+            <p>ventas@hotelesabastos.mx</p>
+  
+            <h3>PÓLITICA DE GARANTÍA</h3>
+            <ul>
+              <li>Las cancelaciones serán aceptadas sin cargo, si son notificadas a nuestro departamento de reservas 2 días hábiles antes de la llegada de los pasajeros a nuestras instalaciones.</li>
+              <li>Cancelaciones extemporáneas causaran cargo de una noche de hospedaje por cada habitación reservada por concepto de "No Show".</li>
+              <li>Las reservaciones aceptadas y confirmadas por el establecimiento se sostendran hasta las 18:00 hrs. Salvo el caso en que se haya constituido depositos para la garantia.</li>
+            </ul>
+  
+            <div style="background: #2d3f54db; color: #F7F7F7; border-radius: 7px; padding: 8px; max-width: 330px; margin-bottom: 1rem;">
+              <h3>'. $nombre_persona  .'</h3>
+              <p>'. $puesto_persona .'</p>
+              <p>'. $cel_persona .'</p>
+              <p>'. $direccion .'</p>
+              <p>Tel: '. $telefonos .'</p>
+              <p>Correo: <a style="color: #F7F7F7">'. $correo_persona .'</a> </p>
+              <p>Pagina de booking: <a style="color: #F7F7F7">'. $booking .'</a></p>
+            </div>
+            ';
+        } else {
+            $forma_pago_html = "";
+        }
+
+        $mail->isHTML(true);      
+        $mail->CharSet = "UTF-8";
+        $mail->Encoding = "base64";
+        $mail->Subject = 'Reserva Visit';
         $mail->msgHTML('
-        <div style="padding: 35px 35px;
+        <div style="padding: 0px 35px;
         margin-bottom: 30px;
-        margin-top: 30px;
-        margin-left: 45px;
+        max-width: 900px;
         text-align: initial;
-        margin-left: 40px;
-        border: 2px solid #3f51b5;
+        background-color: #F7F7F7;
+        color: black;
         font-family:Arial">
 
-        <h2 style="font-weight: bold;"> Confirmación de reservación </h2>
+        <div style="background-color:#2d3f54; text-align: center; padding: 8px;  ">
+            <h2 style="font-weight: bold; font-size: 24px; color: #ffffff;"> Confirmación de reservación </h2>
+            <img style="background-color: #F7F7F7; border-radius: 15px; height: 7rem;"  src="cid:imagen_encabezado" alt="Encabezado" />
+        </div>
 
-        <p>Estimado(A) Sr (Srita) <span style="text-decoration:underline;">'. str_repeat('&nbsp;', 5). $nombre_huesped. str_repeat('&nbsp;', 5).' </span> </p>
+        <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700; ">'. str_repeat('&nbsp;', 1). $nombre_huesped. str_repeat('&nbsp;', 1).' </span> </p>
 
-        <p>Su reservación ha sido procesada con éxito el (día) de (mes) del (año), de acuerdo con los siguientes datos:</p>
+        <p>Su reservación ha sido procesada con éxito el '. $dia_procesado. ' de '. $mes_procesado.' del '. $anio_procesado .', de acuerdo con los siguientes datos:</p>
 
-        <span style="font-weight: bold;">Nombre: </span> <span>'.$nombre_huesped.'</span><br>
-        <span style="font-weight: bold;">Empresa/agencia: </span><span>'.$huesped->empresa.' </span><br>
-        <span style="font-weight: bold;">Fecha de llegada: </span><span>'.$fecha_entrada.'</span><br>
-        <span style="font-weight: bold;">Fecha de salida: </span><span>'.$fecha_salida.'</span><br>
-        <span style="font-weight: bold;">Número de noches: </span><span> ' .$noches.'</span><br>
-        <span style="font-weight: bold;">Número de habitaciones: </span><span>' .$habitaciones.'</span><br>
-        <span style="font-weight: bold;">Adultos: </span><span> '.$extra_adulto.'</span><br>
-        <span style="font-weight: bold;">Niños: </span><span> '.$extra_infantil.'</span><br>
-        <span style="font-weight: bold;">Tipo de habitación: </span><span> '.$tipohab.'</span><br>
-        <span style="font-weight: bold;">Plan de alimentos: </span><span> '.$nombre_alimentos . " ". $costo_plan.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Nombre: </span> <span>'.$nombre_huesped.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Empresa/agencia: </span><span>'.$huesped->empresa.' </span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Fecha de llegada: </span><span>'.$fecha_entrada.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Fecha de salida: </span><span>'.$fecha_salida.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Número de noches: </span><span> ' .$noches.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Número de habitaciones: </span><span>' .$habitaciones.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Adultos: </span><span> '.$extra_adulto.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Niños: </span><span> '.$extra_infantil.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Tipo de habitación: </span><span> '.$tipohab.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Plan de alimentos: </span><span> '.$nombre_alimentos . " ". $costo_plan.'</span><br>
 
-        <p style="font-weight: bold;">Clave de confirmación: '.$_POST['info'].'</p>
+        <p style="font-weight: bold; color: #2D3F54; ">Clave de confirmación: '.$_POST['info'].'</p>
 
-        <span style="font-weight: bold;">Tarifa por noche: </span><span>' .$tarifa_noche.'</span><br>
-        <span style="font-weight: bold;">Total estancia: </span><span> ' .$total_estancia.'</span>
+        <span style="font-weight: bold; color: #2D3F54; ">Tarifa por noche: </span><span>' .$tarifa_noche.'</span><br>
+        <span style="font-weight: bold; color: #2D3F54; ">Total estancia: </span><span> ' .$total_estancia.'</span>
 
-        <p>Precio en Pesos Mexicanos por habitación, por noche 19% impuestos incluidos. Todas nuestras habitaciones son de NO FUMAR<p>
-
+        <p style="font-style: italic; font-size: 13px; color: #2D3F54; font-weight: bold;" >Precio en Pesos Mexicanos por habitación, por noche 19% impuestos incluidos. Todas nuestras habitaciones son de NO FUMAR<p>
+        '. $forma_pago_html .'
         '.$contenido_voucher.'
         '.$contenido_tarjeta.'
         '.$politicas.'
         '.$contenido_pie.'
+
 
         </div>');
 

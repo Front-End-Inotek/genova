@@ -35,7 +35,6 @@ $venta_rest = $info_rest[1];
 //Info cargos/abonos.
 foreach ($rango_fechas as $key => $fecha) {
     # code...
-   
     $info_rest = $reservacion->consultar_datos_cargos($fecha);
     array_push($datos_cargos,$info_rest);
     $info = $reservacion->consultar_datos_abonos($fecha);
@@ -94,7 +93,6 @@ $datos_visit = [
     "datos_ventas_rest"=>$datos_ventas_rest,
     "etiquetas_rest"=>$etiquetas_rest,
     "venta_rest" => $venta_rest,
-
     "datos_abonos"=>$datos_abonos,
     "datos_cargos"=>$datos_cargos,
 

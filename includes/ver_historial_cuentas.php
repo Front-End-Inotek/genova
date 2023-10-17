@@ -25,7 +25,7 @@ $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,"");
             </div>
             <div class="col-sm-1">
               <button class="btn btn-success btn-block btn-default" onclick="buscar_historial_cuentas()">
-                Buscar 
+                Buscar
               </button>
             </div>
             <div class="col-sm-1">
@@ -33,17 +33,15 @@ $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,"");
                 Reporte
               </button>
             </div>
-
           </div><br>
     <div class="flex-wrap row>
         <div class="col-12 col-sm-4">
-      
     </div>
 
     <table class="table table-striped" id="tabla_historial">
   <thead>
     <tr>
-        <th scope="col">ID CUENTA</th>
+      <th scope="col">ID CUENTA</th>
       <th scope="col">Fecha</th>
       <th scope="col">Huesped</th>
       <th scope="col">Tipo hab.</th>
@@ -69,7 +67,6 @@ $historial = $cuenta->mostrar_historial_cuentas($inicial,$final,"");
       <td>'.$estado.'</td>
       <td>'.$fila['descripcion'].'</td>
     </tr>
-
     ';
   }
   echo '

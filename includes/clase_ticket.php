@@ -126,6 +126,17 @@
         $comentario="Cambiar estado de impreso del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      function tickets_por_fecha($inicio,$fin){
+        $sentencia="SELECT * FROM `ticket` WHERE `tiempo`>=$inicio AND `tiempo`<=$fin";
+        $comentario="Consulta de tickets en un rango de fechas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function cambiar_estado_facturados($id){
+        $sentencia="UPDATE `ticket` SET facturado = 1 WHERE `id`=$id";
+        $comentario="cambio de estado en la columna de acturado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Cambiar a un estado en especifico del ticket
       function cambiar_estado_especifico($id_ticket,$estado){
         $sentencia = "UPDATE `ticket` SET
@@ -442,6 +453,12 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }
       }
+      function info_concepto($id){
+        $sentencia = "SELECT * FROM concepto WHERE id_ticket = $id";
+        $comentario="Obtener todos los valores de concepto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
       // Saber cual es el numero del concepto
       function saber_pedido($id_ticket,$nombre){
         $sentencia = "SELECT * FROM concepto WHERE id_ticket = $id_ticket AND nombre = '$nombre' AND activo = 1 LIMIT 1";
@@ -635,6 +652,5 @@
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-    
   }
 ?>

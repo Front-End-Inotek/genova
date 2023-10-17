@@ -297,6 +297,7 @@ function mostrar_herramientas(hab_id,estado,nombre,entrada=0,salida=0,mov=0,rese
 	$("#mostrar_herramientas").load(include);
 }
 
+
 //cerrar el modal cuando se navega a otra 'vista'
 function closeModal(){
     $('#caja_herramientas').modal('hide');
@@ -2095,8 +2096,8 @@ function obtener_garantia(event=null){
         efectivo_txt = efectivo.toLowerCase()
         console.log(efectivo_txt)
         if(garantia!=undefined && garantia == 1){
-            if((efectivo_txt !="efectivo") && efectivo_txt!="tarjeta"){
-                $("#voucher").attr("required",true)
+            if((efectivo_txt !="efectivo") && efectivo_txt!="tarjeta" && efectivo_txt!="tarjeta de credito" && efectivo_txt!="tarjeta de debito"){
+                $("#voucher").attr("required",false)
                 $("#voucher").attr("disabled",false)
             }else{
                 $("#voucher").attr("disabled",true)
@@ -7511,6 +7512,108 @@ function hacer_corte(){
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/ver_corte.php?usuario_id="+usuario_id);
     closeNav();
+}
+
+function factura_individual(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_individual.php");
+    closeNav();
+}
+function factura_global(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_global.php");
+    closeNav();
+}
+function factura_cancelar(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_cancelar.php");
+    closeNav();
+}
+function factura_buscar_fecha(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_buscar_fecha.php");
+    closeNav();
+}
+function factura_buscar_folio(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_buscar_folio.php");
+    closeNav();
+}
+
+function manejo_facturas(){
+    const fechaInio = document.getElementById("fecha_inicio_factura").value;
+    const fechaFin = document.getElementById("fecha_fin_factura").value;
+
+    if (!fechaInio) {
+        swal({
+            title: "Falta fecha de inicio",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            dangerMode: true,
+        })
+        return
+    } else if (!fechaFin) {
+        swal({
+            title: "Falta fecha de final",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            dangerMode: true,
+        })
+        return
+    } else if (fechaInio > fechaFin){
+        swal({
+            title: "Error en el rango de fechas",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            dangerMode: true,
+        })
+        return
+    } else {
+        const contenedor = document.getElementById("contenedor-facturas");
+        datos = { fechaInio: fechaInio, fechaFin: fechaFin }
+        $.ajax({
+            async:true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/factura_global_consulta.php",
+            data:datos,
+            success: function(response){
+                contenedor.innerHTML = response;
+                //console.log(response);
+            } ,
+        });
+    }
+}
+function generar_facturas_global(){
+    console.log("Facturas generadas")
+    const facturas = ""
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-ww-form-urlencoded",
+        url: "includes/",
+        data: facturas,
+        success: function(response){
+            alert("Alertas generadas con exito")
+        }
+    })
 }
 
 // Hacer un corte

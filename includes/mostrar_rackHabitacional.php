@@ -451,6 +451,9 @@ class RackHabitacional extends ConexionMYSql
                         //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
                         $mastiempo=false;
                         $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
+                        if (strlen($huesped_ocupada) > 25){
+                            $huesped_ocupada = substr($huesped_ocupada, 0 , 25) . "...";
+                        }
                         $clase_hover = "nuevax" . $fila['id'];
                         $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
                         $saldo="";

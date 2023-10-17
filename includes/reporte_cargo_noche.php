@@ -31,21 +31,25 @@
           $nombre= $conf->obtener_nombre();
           $realizo_usuario= $usuario->obtengo_nombre_completo($_GET['usuario_id']);
           // Marco primera pagina
-          $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
-          // Arial bold 15
-          $this->SetFont('Arial','',10);
+          //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+          // Arial bold 
+          $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
+          $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
+          $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 85, 12);
+          $this->SetFont('Arial', '', 8);
           // Color de letra
-          $this->SetTextColor(0, 102, 205);
+          $this->SetTextColor(0, 0, 0);
           // Movernos a la derecha
           $this->Cell(2);
           // Nombre del Hotel
-          $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+          //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
           // Datos y fecha
+          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
+
           $this->SetFont('Arial','',10);
           $this->SetTextColor(0,0,0);
-          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
+          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Realizóoo '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
           // Salto de línea
           $this->Ln(14);
           // Movernos a la derecha
