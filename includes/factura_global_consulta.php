@@ -83,14 +83,14 @@
                   </thead>';
                 }
                 echo'
-                <tbody>
+                
                   <tr>
                     <th scope="row" class="ticket_colum_color">'.$listconceptos["nombre"].'</th>
                     <td class="ticket_colum_color">'.$listconceptos["cantidad"].'</td>
                     <td class="ticket_colum_color">$'.$listconceptos["precio"].'</td>
                     <td class="ticket_colum_color">$'.$listconceptos["total"].'</td>
                   </tr>
-                </tbody>
+                
               </table>
           </div>
         </div>

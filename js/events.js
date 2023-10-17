@@ -7596,10 +7596,24 @@ function manejo_facturas(){
             success: function(response){
                 contenedor.innerHTML = response;
                 //console.log(response);
-                console.log(response)
             } ,
         });
     }
+}
+function generar_facturas_global(){
+    console.log("Facturas generadas")
+    const facturas = ""
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-ww-form-urlencoded",
+        url: "includes/",
+        data: facturas,
+        success: function(response){
+            alert("Alertas generadas con exito")
+        }
+    })
 }
 
 // Hacer un corte
