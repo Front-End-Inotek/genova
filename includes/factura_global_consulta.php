@@ -39,6 +39,8 @@
     <thead>
       <tr>
         <th scope="col"></th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Nombre de habitación</th>
         <th scope="col">Concepto</th>
         <th scope="col">Costo Unitario</th>
       </tr>
@@ -46,23 +48,30 @@
     <tbody>
     ';
     $contador = 1;
-
-    foreach( $lista_Nombre_Hospedaje as $nombre){
-      $index = array_search($nombre, $lista_Nombre_Hospedaje);
+    $totalHospedaje = 0.0;
+    foreach( $lista_Nombre_Hospedaje as $concepto){
+      $index = array_search($concepto, $lista_Nombre_Hospedaje);
+      $id = $lista_Id_tickets[$index];
+      $total = $lista_Total_Hospedaje[$index];
       echo '
       <tr>
         <td scope="row"> <input type="checkbox" checked /> </td>
-        <td>' . $nombre . '</td>
-        <td>' . $lista_Total_Hospedaje[$index] . '</td>
+        <td>' . $concepto. '</td>
+        <td>' . $id . '</td>
+        <td>' . $concepto . '</td>
+        <td>$' . $total. '</td>
       </tr>
       ';
       $contador++;
+      $totalHospedaje += floatval($lista_Total_Hospedaje[$index]);
     }
-      '
-      <td scope="row" colspan="2"></td>
-      <td>Total: $599</td>
-    </tr>
-    </tbody>
+    echo'
+      <tr>
+        <td scope="row" colspan="3"></td>
+        <td>Total: </td>
+        <td>$' . $totalHospedaje . '</td>
+      </tr>
+      </tbody>
     </table>
     ';
 ?>
