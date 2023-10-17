@@ -7514,13 +7514,44 @@ function hacer_corte(){
     closeNav();
 }
 
+function factura_individual(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_individual.php");
+    closeNav();
+}
 function factura_global(){
     //usuario_id=localStorage.getItem("id");
-    console.log("facturas")
     $('#area_trabajo').hide();
     $('#pie').hide();
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/factura_global.php");
+    closeNav();
+}
+function factura_cancelar(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_cancelar.php");
+    closeNav();
+}
+function factura_buscar_fecha(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_buscar_fecha.php");
+    closeNav();
+}
+function factura_buscar_folio(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_buscar_folio.php");
     closeNav();
 }
 

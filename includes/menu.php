@@ -147,16 +147,22 @@
 			echo '
 			<li href="#" onclick="showMenu(9)" class="nav-link">
 				<i class="bx bx-file text-secondary"></i>
-				<span class="mx-2 reportes">Facturas</span>
+				<span class="mx-2 reportes">Facturación</span>
 				<ul id="9" class="submenu">';
 				$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
 				$permisos_surtir=$usuario->inventario_surtir;
 				$permisos_reportes_diarios=$usuario->reporte_ver;//+$usuario->reporte_agregar;
 				if($permisos_reportes_diarios>0 || $usuario->nivel==2){
 				echo'
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_global()"> Factura individual </a></i></ul>';
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_individual()"> Factura individual </a></i></ul>';
 				echo'
 				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_global()"> Factura global </a></i></ul>';
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_cancelar()"> Cancelar factura </a></i></ul>';
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_buscar_fecha()"> Buscar factura por fecha </a></i></ul>';
+				echo'
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_buscar_folio()"> Buscar factura por folio</a></i></ul>';
 				}
 			}
 			echo'

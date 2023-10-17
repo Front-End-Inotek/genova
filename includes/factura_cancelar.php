@@ -2,7 +2,7 @@
 
 echo '
     <div class="container-fluid blanco">
-        <div class="col-12 text-center"><h2 class="text-dark">Factura global</h2></div>
+        <div class="col-12 text-center"><h2 class="text-dark">Cancelar factura</h2></div>
         <br>
         <div class="row">
             <div class="col-sm-2">
@@ -18,7 +18,7 @@ echo '
                 <button class="btn btn-primary btn-block btn-default" onclick="manejo_facturas()" > Buscar </button>
             </div>
         </div>
-        <div id="contenedor-facturas">
+        <div class="row" id="contenedor-facturas">
         </div>
     </div>
 ';
