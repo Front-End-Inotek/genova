@@ -14,7 +14,7 @@ echo '
                 <input class="form-control" type="date" placeholder="Fecha de inicio" id="fecha_fin_factura"/>
             </div>
             <div class="col-sm-2">
-                <label class="col-12"><h6>Fecha final</h6></label>
+                <label class="col-12"><h6>Hacer busqueda</h6></label>
                 <button class="btn btn-primary btn-block btn-default" onclick="manejo_facturas()" > Buscar </button>
             </div>
         </div>

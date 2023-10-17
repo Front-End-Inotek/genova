@@ -49,7 +49,7 @@
             }
         }
     }
-    echo '
+    /* echo '
     <table class="table table-bordered" style="max-width: 850px; margin: auto;">
     <thead>
       <tr>
@@ -89,5 +89,56 @@
       </tr>
       </tbody>
     </table>
+    '; */
+    echo '
+    <div class="card text-center ticket_container">
+      <div class="ticket_container_header">
+        <div class="ticket_container_header_input">
+          <input type="checkbox"/>
+        </div>
+        <div class="ticket_container_header_info">
+          <div class="ticket_container_header_info_fecha">
+            <p class="ticket_container_header_info_fecha_fecha">Fecha : 17/ 12 / 2023 </p>
+            <p class="ticket_container_header_info_fecha_fecha">Hora : 11:24 a.m </p>
+          </div>
+          <div class="ticket_container_header_info_more">
+            <div>
+              <p class="ticket_info_p ticket_info_n">Ticket #5656</p>
+            </div>
+            <div class="ticket_container_header_info_more_items">
+            <p class="ticket_info_p">Forma de pago: <spam class="ticket_spam" >Tarjeta</spam></p>
+            <p class="ticket_info_p">Total: <spam class="ticket_spam" >$192</spam></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ticket_tabla_contenedor">
+        <table class="table table-sm">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="ticket_colum_color">Concepto</th>
+                <th scope="col" class="ticket_colum_color">Cantidad</th>
+                <th scope="col" class="ticket_colum_color">Precio</th>
+                <th scope="col" class="ticket_colum_color">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="ticket_colum_color">Pago de habitacion</th>
+                <td class="ticket_colum_color">1</td>
+                <td class="ticket_colum_color">$455</td>
+                <td class="ticket_colum_color">$455</td>
+              </tr>
+              <tr>
+                <th scope="row" class="ticket_colum_color">Coca Cola</th>
+                <td class="ticket_colum_color" >1</td>
+                <td class="ticket_colum_color" >$20</td>
+                <td class="ticket_colum_color" >$20</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
     ';
 ?>
