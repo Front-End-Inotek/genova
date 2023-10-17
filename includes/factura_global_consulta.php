@@ -57,10 +57,14 @@
     </thead>
     <tbody>
       <tr>
-        <th scope="row"><input type="checkbox"/> </th>
+        <td scope="row"><input type="checkbox" checked /></td>
         <td>Suite Junior</td>
         <td>$1000</td>
       </tr>
+      <tr>
+      <td scope="row" colspan="2"></td>
+      <td>Total: $599</td>
+    </tr>
     </tbody>
     </table>
     ';
