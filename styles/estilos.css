@@ -1558,3 +1558,11 @@ select[disabled]{
   justify-content: center;
   width: 90%;
 }
+.table-fixed {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.table-fixed th, .table-fixed td {
+  word-wrap: break-word;
+}

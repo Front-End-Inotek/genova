@@ -55,7 +55,7 @@
             foreach ($result as $columnas) {
               echo'
             <div class="ticket_tabla_contenedor">
-              <table class="table table-sm">';
+              <table class="table table-sm table-fixed">';
 
               if($contador==0){
                 echo '<thead>
