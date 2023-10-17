@@ -34,11 +34,13 @@
         $Diccionario_Conseptos[]=$consepto;
     }
     $id_ticket="";
+    $bandera=false;
     foreach ($Diccionario_Conseptos as $listconceptos) {
       echo '
         <div class="card text-center ticket_container">';
           if($id_ticket!=$listconceptos["id"]){
             $id_ticket=$listconceptos["id"];
+            $bandera=true;
             echo '
               <div class="ticket_container_header">
                 <div class="ticket_container_header_input">
@@ -64,14 +66,20 @@
           <div class="ticket_tabla_contenedor">
             <table class="table table-sm">
             <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col" class="ticket_colum_color">Concepto</th>
-                    <th scope="col" class="ticket_colum_color">Cantidad</th>
-                    <th scope="col" class="ticket_colum_color">Precio</th>
-                    <th scope="col" class="ticket_colum_color">Total</th>
-                  </tr>
-                </thead>
+                ';
+                if($bandera==true){
+                  $bandera=false;
+                  echo'
+                  <thead>
+                    <tr>
+                      <th scope="col" class="ticket_colum_color">Concepto</th>
+                      <th scope="col" class="ticket_colum_color">Cantidad</th>
+                      <th scope="col" class="ticket_colum_color">Precio</th>
+                      <th scope="col" class="ticket_colum_color">Total</th>
+                    </tr>
+                  </thead>';
+                }
+                echo'
                 <tbody>
                   <tr>
                     <th scope="row" class="ticket_colum_color">'.$listconceptos["nombre"].'</th>
