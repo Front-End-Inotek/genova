@@ -57,7 +57,7 @@
                       <p class="ticket_info_p ticket_info_n">Ticket #'.$listconceptos["id"].'</p>
                     </div>
                     <div class="ticket_container_header_info_more_items">
-                    <p class="ticket_info_p">Forma de pago: <spam class="ticket_spam" >Tarjeta</spam></p>
+                    <p class="ticket_info_p">Forma de pago: <spam class="ticket_spam" >'.$listconceptos["forma_pago"].'</spam></p>
                     <p class="ticket_info_p">Total: <spam class="ticket_spam" >$'.$listconceptos["totalTicket"].'</spam></p>
                     </div>
                   </div>
