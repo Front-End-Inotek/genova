@@ -1,10 +1,12 @@
 <?php
     include_once('clase_ticket.php');
     include_once("clase_hab.php");
+    include_once("clase_forma_pago.php");
     $Tickets= NEW Ticket(0);
 
     $Concepto=NEW Concepto(0);
     $hab=NEW Hab(0);
+    $forma_pago=NEW Forma_pago(0);
     $fechaInicio = $_POST['fechaInio'];
     $fechaFin=$_POST['fechaFin'];
     $fechaInicioUnix=strtotime($fechaInicio);
@@ -20,7 +22,7 @@
           $consepto = array(
             "id" => $fila['id'],
             "fecha"=>$fila['fecha'],
-            "forma_pago"=>$fila['forma_pago'],
+            "forma_pago"=>$forma_pago->obtener_descripcion($fila['forma_pago']),
             "habitacion"=>$nombre_hab,
             "totalTicket"=>$fila['total'],
 
