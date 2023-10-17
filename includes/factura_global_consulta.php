@@ -66,12 +66,13 @@
     $totalHospedaje = 0.0;
     foreach( $lista_Nombre_Hospedaje as $concepto){
       $index = array_search($concepto, $lista_Nombre_Hospedaje);
-      $id = $lista_Id_tickets[$index];
+      $id = $lista_IdHabitacion_Hospedaje[$index];
       $total = $lista_Total_Hospedaje[$index];
+      $fecha = $lista_Fecha_Hospedaje[$index];
       echo '
       <tr>
         <td scope="row"> <input type="checkbox" checked /> </td>
-        <td>' . $concepto. '</td>
+        <td>' . $fecha. '</td>
         <td>' . $id . '</td>
         <td>' . $concepto . '</td>
         <td>$' . $total. '</td>
