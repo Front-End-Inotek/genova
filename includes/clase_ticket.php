@@ -132,6 +132,11 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
+      function cambiar_estado_facturados($id){
+        $sentencia="UPDATE `ticket` SET facturado = 1 WHERE `id`=$id";
+        $comentario="cambio de estado en la columna de facturado";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Cambiar a un estado en especifico del ticket
       function cambiar_estado_especifico($id_ticket,$estado){
         $sentencia = "UPDATE `ticket` SET
