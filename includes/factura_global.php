@@ -18,7 +18,7 @@ echo '
                 <button class="btn btn-primary btn-block btn-default" onclick="manejo_facturas()" > Buscar </button>
             </div>
         </div>
-        <div id="contenedor-facturas">
+        <div class="row" id="contenedor-facturas">
         </div>
     </div>
 ';

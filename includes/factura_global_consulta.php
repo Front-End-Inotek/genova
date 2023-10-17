@@ -21,7 +21,7 @@
         array_push($lista_Id_tickets, $fila['id']);
         $result=$Concepto->info_concepto($fila['id']);
         //var_dump($result);
-        var_dump($result);
+        //var_dump($result);
         if (isset($result["tipo_cargo"])){
             if($result["tipo_cargo"]==3){
                 array_push($lista_ID_Hospedaje,$result["id"]);
@@ -35,7 +35,7 @@
         }
     }
     echo '
-    <table class="table table-bordered" style="max-width: 1500px; margin: auto;">
+    <table class="table table-bordered" style="max-width: 850px; margin: auto;">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -44,12 +44,21 @@
       </tr>
     </thead>
     <tbody>
+    ';
+    $contador = 1;
+
+    foreach( $lista_Nombre_Hospedaje as $nombre){
+      $index = array_search($nombre, $lista_Nombre_Hospedaje);
+      echo '
       <tr>
-        <td scope="row"><input type="checkbox" checked /></td>
-        <td>Suite Junior</td>
-        <td>$1000</td>
+        <td scope="row"> <input type="checkbox" checked /> </td>
+        <td>' . $nombre . '</td>
+        <td>' . $lista_Total_Hospedaje[$index] . '</td>
       </tr>
-      <tr>
+      ';
+      $contador++;
+    }
+      '
       <td scope="row" colspan="2"></td>
       <td>Total: $599</td>
     </tr>
