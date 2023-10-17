@@ -21,31 +21,19 @@
         array_push($lista_Id_tickets, $fila['id']);
         $result=$Concepto->info_concepto($fila['id']);
         //var_dump($result);
-        if($result["tipo_cargo"]==3){
-            array_push($lista_ID_Hospedaje,$result["id"]);
-            array_push($lista_Nombre_Hospedaje,$result["nombre"]);
-            array_push($lista_Total_Hospedaje,$result["total"]);
-        }else{
-            array_push($lista_ID_Restaurante,$result["id"]);
-            array_push($lista_Nombre_Restaurante,$result["nombre"]);
-            array_push($lista_Total_Restaurante,$result["total"]);
+        var_dump($result);
+        if (isset($result["tipo_cargo"])){
+            if($result["tipo_cargo"]==3){
+                array_push($lista_ID_Hospedaje,$result["id"]);
+                array_push($lista_Nombre_Hospedaje,$result["nombre"]);
+                array_push($lista_Total_Hospedaje,$result["total"]);
+            }else{
+                array_push($lista_ID_Restaurante,$result["id"]);
+                array_push($lista_Nombre_Restaurante,$result["nombre"]);
+                array_push($lista_Total_Restaurante,$result["total"]);
+            }
         }
     }
-    var_dump($lista_Id_tickets);
-    var_dump($lista_tipo_cargo);
-   /* $lista_hospedaje=array();
-    $lista_restaurante=array();
-    foreach ($Concepto as $filas) {
-        var_dump($filas);
-        //echo $filas['tipo_cargo'];
-        /*if ($filas['tipo_cargo']==3){
-            array_push($lista_hospedaje,$filas['total']);
-        }else{
-            array_push($lista_restaurante,$filas['total']);
-        }*/
-    //}
-    //var_dump($lista_hospedaje)
-
     echo '
     <table class="table table-bordered" style="max-width: 1500px; margin: auto;">
     <thead>
@@ -68,5 +56,4 @@
     </tbody>
     </table>
     ';
-
 ?>
