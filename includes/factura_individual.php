@@ -1,5 +1,7 @@
 <?php
-    include 'datos_servidor.php';
+    include 'clase_factura.php';
+    $fact = NEW factura();
+
     if(isset($_GET['fila'])){
         $contador = $_GET['fila'];
     }else{
@@ -47,8 +49,10 @@
                     <select id="regimen" name ="rfc[]" class="form-select" id="inputGroupSelect01">
                         <option selected disabled>Selecciona una opción</option>
                         <?php
-                            $sqal="SELECT * FROM regimen_fiscal";
-                            $resulta=mysqli_query($con,$sqal);
+
+                             $resulta=$fact->regimen_fiscal();
+               /*$sqal="SELECT * FROM regimen_fiscal";
+                            $resulta=mysqli_query($con,$sqal);*/
                             while ($vara=mysqli_fetch_array($resulta)) {  ?>
                                 <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
                         <?php } ?>
