@@ -7586,6 +7586,13 @@ function manejo_facturas(){
     } else {
         const contenedor = document.getElementById("contenedor-facturas");
         datos = { fechaInio: fechaInio, fechaFin: fechaFin }
+            contenedor.innerHTML = `
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+            `;
         $.ajax({
             async:true,
             type: "POST",
