@@ -15,13 +15,13 @@
     $lista_Id_tickets=array();
     $Diccionario_Conseptos_Hospedajes = array();
     $Diccionario_Conseptos_Restaurante = array();
-    $contador=1;
+    $contadoriteraciones=1;
     //Primera tabla
     echo '<div class="contenedor_tablas_1_facturas">
           <h2 class="titulo_tabla_facturas">Facturas en habitacion</h2>
     ';
     foreach ($lista_tickets as $fila) {
-      if($fila['facturado'] == 0 && $fila["id_hab"]!=0) {
+      if($fila['facturado'] == 0) {
       echo '
       <div class="card text-center ticket_container">';
         /*if($id_ticket!=$listconceptos["id"]){
@@ -29,8 +29,8 @@
           $bandera=true;*/
           echo '
             <div class="ticket_container_header">
-              <div class="ticket_container_header_input">
-                <input type="checkbox" checked/>
+              <div class="ticket_container_header_input ">
+                <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" checked/>
               </div>
               <div class="ticket_container_header_info">
                 <div class="ticket_container_header_info_fecha">
@@ -40,16 +40,17 @@
                 <div class="ticket_container_header_info_more">
                   <div>
                     <p class="ticket_info_p ticket_info_n">'.$hab->mostrar_nombre_hab($fila["id_hab"]).'</p>
-                    <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contador.'" value="'. $fila["id_hab"].'"/></p>
+                    <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id_hab"].'"/></p>
                   </div>
                   <div class="ticket_container_header_info_more_items">
                   <p class="ticket_info_p">Forma de pago: <spam class="ticket_spam" >'.$forma_pago->obtener_descripcion($fila["forma_pago"]).'</spam></p>
-                  <p class="ticket_info_p">Total: <spam class="ticket_spam ticket_info_price" >$'.$fila["total"].'</spam></p>
+                  <p class="ticket_info_p">Total: <spam class="ticket_spam ticket_info_price">$'.$fila["total"].'</spam></p>
+                  <input class="d-none" type="number" id="leer_total_'.$contadoriteraciones.'" value="'.$fila["total"].'"/>
                   </div>
                 </div>
               </div>
             </div>';
-            $contador++;
+            $contadoriteraciones++;
         array_push($lista_Id_tickets, $fila['id']);
         $result=$Concepto->info_concepto($fila['id']);
         $nombre_hab=$hab->mostrar_nombre_hab($fila['id_hab']);
@@ -85,8 +86,8 @@
             }
             echo '</div>';
         }
-    
       }
+      echo'<input class="d-none" type="number" id="leer_iteraciones" value="'. $contadoriteraciones.'"/></p>';
     echo "</div>";
       //Segunda tabla aqui se retornaria el contenido de la tabla derecha
 

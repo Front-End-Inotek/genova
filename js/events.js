@@ -7608,7 +7608,20 @@ function manejo_facturas(){
     }
 }
 function generar_facturas_global(){
-    console.log("Facturas generadas")
+    var input_longitud=document.getElementById("leer_iteraciones");
+    var index=input_longitud.value;
+    var lista_id_tickets=[];
+    var total=0;
+    for (let i = 1; i < index; i++) {
+        var checkBox_status=document.getElementById("leer_check_"+i)
+        var id_ticket=document.getElementById("leer_id_"+i);
+        var leer_total=document.getElementById("leer_total_"+i);
+        if (checkBox_status.checked) {
+            lista_id_tickets.push(id_ticket.value);
+            total=total+parseInt(leer_total.value);
+        }
+    }
+    console.log("facturas generadas");
     const facturas = ""
     $.ajax({
         async: true,
