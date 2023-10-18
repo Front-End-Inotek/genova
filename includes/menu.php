@@ -156,7 +156,7 @@
 				echo'
 				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_individual()"> Factura individual </a></i></ul>';
 				echo'
-				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_global()"> Factura global </a></i></ul>';
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_global_form()"> Factura global </a></i></ul>';
 				echo'
 				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="factura_cancelar()"> Cancelar factura </a></i></ul>';
 				echo'

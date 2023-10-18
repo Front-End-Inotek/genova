@@ -7522,7 +7522,7 @@ function factura_individual(){
     $("#area_trabajo_menu").load("includes/factura_individual.php");
     closeNav();
 }
-function factura_global(){
+function factura_global_form(){
     //usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
     $('#pie').hide();
