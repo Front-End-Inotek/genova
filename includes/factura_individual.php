@@ -123,8 +123,31 @@
     </div>
         </center> -->
         
-        <div class="dinamic col-sm-9" id="dinamic" style="max-height:635px; overflow-y: scroll; ">
-            <div class="form-row row" >
+        <div class="dinamic col-sm-9" id="dinamic" >
+            <div class="col-12">
+                            <div class="row col-12" style="font-weight: bold;">
+                                <div class="col-2 form-floating">
+                                    <input type="text" name="rimporte" class="form-control" id="rimporte" readonly placeholder="Importe:">
+                                    <label for="rimporte">Importe:</label> 
+                                </div>
+                                <div class="col-2 form-floating">
+                                    <input type="text" name="riva" class="form-control" id="riva" readonly placeholder="I.V.A">
+                                    <label for="riva">I.V.A.</label>  
+                                </div>
+                                <div class="col-2 form-floating">
+                                    <input type="text" name="rish" class="form-control" id="rish" readonly placeholder="I.S.H">
+                                    <label for="rish">I.S.H.</label>
+                                </div>
+                                <div class="col-2 form-floating">
+                                    <input type="text" name="rtotal" class="form-control" id="rtotal" readonly placeholder="Total:">
+                                    <label for="rtotal">Total:</label>
+                                </div>
+                                <button type="button" class="btn btn-info col-2" id="timbrar" name ="timbrar" onclick="timbrar_factura()" >
+                                    Timbrar&nbsp;Factura
+                                </button>
+                            </div>
+                    </div>
+            <div class="form-row row" style="max-height:590px; overflow-y: scroll;">
                 <div class="row col-12 mb-2">
                     <!--             Imput Uso de CFDI -->
                         <div id ="input_periocidad" class="form-floating col-3" style="display: none;">
@@ -162,58 +185,58 @@
             <?php
 
                 for ($i=1; $i <= $contador ; $i++) {
-                    echo '<div class="form-group col-xl-1">
+                    echo '<div class="form-group col-1">
                     <label for="inputCity">Cantidad</label>
                     <input type="text" name="cantidad['.$i.']" class="form-control" id="cantidad['.$i.']" oninput="cal()" value="" style="font-size: 12px;">
                 </div>
     <!--             Imput Unidad -->
-                <div class="form-group col-xl-1">
+                <div class="form-group col-1">
                     <label for="inputCity">Unidad</label>
                     <input type="text" name="unidad['.$i.']" class="form-control" id="unidad['.$i.']" value="SER" style="font-size: 12px;">
                 </div>
     <!--             Imput Clave/Unidad -->
-                <div class="form-group col-xl-1">
+                <div class="form-group col-1">
                     <label for="inputCity">Clave/Unidad </label>
                     <input type="text" name="claveunidad['.$i.']" class="form-control" id="claveunidad['.$i.']" value="E48" style="font-size: 12px;">
                 </div>
     <!--             Imput Clave -->
-                <div class="form-group col-xl-1">
+                <div class="form-group col-1">
                     <label for="inputCity">Clave</label>
                     <input type="text" name="clave['.$i.']" class="form-control" id="clave['.$i.']" value="90111500" style="font-size: 12px;">
                 </div>
     <!--             Imput Id -->
-                <div class="form-group col-xl-1">
+                <div class="form-group col-1">
                     <label for="inputCity">ID</label>
                     <input type="text" name="id['.$i.']" class="form-control" id="id['.$i.']" value="" style="font-size: 12px;">
                 </div>
     <!--             Imput Producto -->
-                <div class="form-group col-xl-2">
+                <div class="form-group col-2">
                     <label for="inputCity">Producto</label>
                     <input type="text" name="producto['.$i.']" class="form-control" id="producto['.$i.']" value="HOSPEDAJE" style="font-size: 12px;">
                 </div>
     <!--             Imput Imp Unitario -->
-                <div class="form-group col-xl-1">
+                <div class="form-group col-1">
                     <label for="inputCity" >Imp.&nbsp;Unitario</label>
                     <input type="text" name="importeuni['.$i.']" class="form-control" id="importeuni['.$i.']" oninput="cal()" value="" style="font-size: 12px;">
                 </div>
     <!--             Imput Importe -->
-                <div class="form-group col-xl-1">
+                <div class="form-group col-1">
                     <label for="inputCity">Importe</label>
                     <input type="text" name="importe['.$i.']" class="form-control" id="importe['.$i.']" value="" readonly style="font-size: 12px;">
                 </div>
     <!--             Imput IVA -->
-                <div class="form-group col-xl-1">
+                <div class="form-group col-1">
                     <label for="inputCity">IVA</label>
                     <input name="iva['.$i.']" type="text" class="form-control" id="iva['.$i.']" oninput="cal()" value="" readonly style="font-size: 12px;">
                 </div>
     <!--             Checkbox ISH -->
-                <div class="form-group" style="margin-top:35px;">
-                    <div class="form-check">
+                <div class="form-group col-1">
+                    
                         <input name="checisah['.$i.']" class="form-check-input" type="checkbox" id="checisah['.$i.']" oninput="cal()" checked> 
-                    </div>
+                    
                 </div>
     <!--             Imput ISH -->
-                <div class="form-group col-xl-1">
+                <div class="form-group col-1">
                     <label for="inputCity">ISH</label>
                     <input type="text" name="ish['.$i.']" class="form-control" id="ish['.$i.']" oninput="cal()" value="" readonly style="font-size: 12px;"> 
                 </div>';
@@ -223,24 +246,7 @@
         </div>
         <div class="row col-xl-12">
             <div class="col-md-4"><!-- Espacio en blanco --></div>
-            <div class="row col-md-8" style="font-weight: bold;">
-                <div class="col-xl-3 form-floating">
-                    <input type="text" name="rimporte" class="form-control" id="rimporte" readonly placeholder="Importe:">
-                    <label for="rimporte">Importe:</label> 
-                </div>
-                <div class="col-xl-3 form-floating">
-                    <input type="text" name="riva" class="form-control" id="riva" readonly placeholder="I.V.A">
-                    <label for="riva">I.V.A.</label>  
-                </div>
-                <div class="col-xl-3 form-floating">
-                    <input type="text" name="rish" class="form-control" id="rish" readonly placeholder="I.S.H">
-                    <label for="rish">I.S.H.</label>
-                </div>
-                <div class="col-xl-3 form-floating">
-                    <input type="text" name="rtotal" class="form-control" id="rtotal" readonly placeholder="Total:">
-                    <label for="rtotal">Total:</label>
-                </div>
-            </div>
+            
         </div>
     </div>
     <br>
@@ -248,7 +254,7 @@
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Cargando...
             </button></center>
-    <center><button type="button" class="btn btn-secondary btn-lg" id="timbrar" name ="timbrar" onclick="timbrar_factura()" style="margin-left: 180px; width: 550px;">Timbrar&nbsp;Factura</button></center>
+    <center></center>
     <!--<center><button type="submit" class="btn btn-secondary btn-lg" style="width: 550px;">Timbrar&nbsp;Factura</button></center>-->
 </form>
         </div>
