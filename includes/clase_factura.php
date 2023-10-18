@@ -54,6 +54,14 @@
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
     }
+    function consulta_rfc($rfc){
+      $sentencia = "SELECT * FROM rfc WHERE rfc = '$rfc'";
+      //echo $sentencia;
+      $comentario="periocidad ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
     function periocidad(){
       $sentencia = "SELECT * FROM periocidad";
       $comentario="periocidad ";

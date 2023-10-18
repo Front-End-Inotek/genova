@@ -1,7 +1,6 @@
 <?php
-    include 'clase_factura.php';
-    $fact = NEW factura();
-
+    include("clase_factura.php");
+    $fact = NEW factura ();
     if(isset($_GET['fila'])){
         $contador = $_GET['fila'];
     }else{

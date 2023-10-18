@@ -10,6 +10,7 @@ function buscar_rfc(){
             console.log("Entra respuesta //");
             var posicion=0;
             var respuesta=this.responseText;
+            console.log(this.responseText);
             var datos = respuesta.split('/');
             document.getElementById("nombre").value = datos[0];
             document.getElementById("correo").value = datos[1];
@@ -20,7 +21,7 @@ function buscar_rfc(){
             //document.getElementById("cuerpo_app").innerHTML = this.responseText;
         }
         };
-        xhttp.open("GET", "includes/consulta_rfc.php?inputRFC="+inputRFC, true);
+        xhttp.open("GET", "includes/consulta_rfc.php?inputRFC="+inputRFC, true); 
         xhttp.send();
     }
 }
