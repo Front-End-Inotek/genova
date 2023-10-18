@@ -219,17 +219,16 @@
                         <label for="inputCity">IVA</label>
                         <input name="iva['.$i.']" type="text" class="form-control" id="iva['.$i.']" oninput="cal()" value="" readonly style="font-size: 12px;">
                     </div>
+                <!--             Imput ISH -->
+                        <div class="form-group col-1">
+                            <label for="inputCity">ISH</label>
+                            <input type="text" name="ish['.$i.']" class="form-control" id="ish['.$i.']" oninput="cal()" value="" readonly style="font-size: 12px;"> 
+                        </div>
         <!--             Checkbox ISH -->
                     <div class="form-group col-1">
-                        
                             <input name="checisah['.$i.']" class="form-check-input" type="checkbox" id="checisah['.$i.']" oninput="cal()" checked> 
-                        
                     </div>
-        <!--             Imput ISH -->
-                    <div class="form-group col-1">
-                        <label for="inputCity">ISH</label>
-                        <input type="text" name="ish['.$i.']" class="form-control" id="ish['.$i.']" oninput="cal()" value="" readonly style="font-size: 12px;"> 
-                    </div>';
+                    ';
                     }
                     echo'
                     </div>
