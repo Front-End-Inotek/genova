@@ -28,7 +28,7 @@ echo '
                 </button>
             </div>
         </div>
-        <div id="contenedor-facturas">
+        <div id="contenedor-facturas" class="contenedor_columnas_tablas">
         </div>
     </div>
 ';
