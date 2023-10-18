@@ -45,12 +45,9 @@
 <!--             Imput Uso de CFDI -->
                 <div class="form-floating mb-2">
                     <select id="regimen" name ="rfc[]" class="form-select" id="inputGroupSelect01">
-                        <option selected disabled>Selecciona una opción</option>
+                        <option selected disabled>Selecciona una opciónn</option>
                         <?php
-
-                             $resulta=$fact->regimen_fiscal();
-               /*$sqal="SELECT * FROM regimen_fiscal";
-                            $resulta=mysqli_query($con,$sqal);*/
+                            $resulta=$fact->regimen_fiscal();
                             while ($vara=mysqli_fetch_array($resulta)) {  ?>
                                 <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
                         <?php } ?>
@@ -62,8 +59,7 @@
                     <select id="cfdi" name ="rfc[]" class="form-select" id="inputGroupSelect01">
                         <option selected disabled>Selecciona una opción</option>
                         <?php
-                            $sqal="SELECT * FROM uso_cfdi";
-                            $resulta=mysqli_query($con,$sqal);
+                            $resulta=$fact->uso_cfdi();
                             while ($vara=mysqli_fetch_array($resulta)) {  ?>
                             <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
                             <?php } ?>
@@ -80,8 +76,7 @@
                     <select id="metodopago" name="rfc[]" class="form-select" id="inputGroupSelect01">
                         <option selected disabled>Selecciona una opción</option>
                         <?php
-                            $sqal="SELECT * FROM metodo_pago";
-                            $resulta=mysqli_query($con,$sqal);
+                            $resulta=$fact->metodo_pago();
                             while ($vara=mysqli_fetch_array($resulta)) {  ?>
                                 <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
                                 <?php } ?>
@@ -93,8 +88,7 @@
                     <select id="forma_pago" name="rfc[]" class="form-select" id="inputGroupSelect01">
                         <option selected disabled>Selecciona una opción</option>
                         <?php
-                            $sqal="SELECT * FROM forma_pago";
-                            $resulta=mysqli_query($con,$sqal);
+                            $resulta=$fact->forma_pago();
                             while ($vara=mysqli_fetch_array($resulta)) {  ?>
                         <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
                         <?php } ?>
@@ -129,8 +123,7 @@
                             <select id="periocidad" name ="rfc[]" class="form-select" id="inputGroupSelect01">
                             <option selected disabled>Selecciona una opción</option>
                             <?php
-                                $sqal="SELECT * FROM periocidad";
-                                $resulta=mysqli_query($con,$sqal);
+                                $resulta=$fact->periocidad();
                                 while ($vara=mysqli_fetch_array($resulta)) {  ?>
                             <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
                             <?php } ?>
@@ -142,8 +135,7 @@
                         <select id="mes" name ="rfc[]" class="form-select" id="inputGroupSelect01" >
                             <option selected disabled>Selecciona una opción</option>
                             <?php
-                                $sqal="SELECT * FROM mes";
-                                $resulta=mysqli_query($con,$sqal);
+                                $resulta=$fact->mes();
                                 while ($vara=mysqli_fetch_array($resulta)) {  ?>
                             <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
                             <?php } ?>
