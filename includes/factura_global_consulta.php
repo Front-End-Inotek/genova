@@ -90,16 +90,16 @@
     echo "</div>";
       //Segunda tabla aqui se retornaria el contenido de la tabla derecha
 
-    echo '<div class="contenedor_tablas_2_facturas">
+    /* echo '<div class="contenedor_tablas_2_facturas">
           <h2 class="titulo_tabla_facturas">Facturas en restaurante</h2>
     ';
     foreach ($lista_tickets as $fila) {
       if($fila['facturado'] == 0&& $fila["id_hab"]==0) {
       echo '
       <div class="card text-center ticket_container">';
-        /*if($id_ticket!=$listconceptos["id"]){
+        if($id_ticket!=$listconceptos["id"]){
           $id_ticket=$listconceptos["id"];
-          $bandera=true;*/
+          $bandera=true;
           echo '
             <div class="ticket_container_header">
               <div class="ticket_container_header_input">
@@ -160,5 +160,5 @@
         }
     
       }
-    echo '</div>';
+    echo '</div> ';*/
 ?>
