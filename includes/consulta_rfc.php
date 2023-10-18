@@ -6,5 +6,10 @@
 
     $resultado= $fact->consulta_rfc($campo);
     $row=mysqli_fetch_array($resultado);
-    echo $row["nombre"].'/'.$row["email"].'/'.$row["notas"].'/'.$row["codigo_postal"].'/'.$row["regimen_fiscal"].'/'.$row["regimen_fiscal"];
+    try { count($row)>0;
+        echo $row["nombre"].'/'.$row["email"].'/'.$row["notas"].'/'.$row["codigo_postal"].'/'.$row["regimen_fiscal"].'/'.$row["regimen_fiscal"];
+    } catch (\Throwable $th) {
+        echo "".'/'."".'/'."".'/'."".'/'."".'/'."";
+    }
+
 ?>
