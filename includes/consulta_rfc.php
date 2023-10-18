@@ -1,10 +1,10 @@
 <?php
-    include 'datos_servidor.php'; //conexion con la base de datos
+    include("clase_factura.php");
+    $fact = NEW factura ();
 
     $campo = $_GET["inputRFC"];
-    $consulta="SELECT * FROM rfc ";
-    $consulta.= "WHERE rfc = '$campo' ";
-    $resultado=mysqli_query($con,$consulta);
+
+    $resultado= $fact->consulta_rfc($campo);
     $row=mysqli_fetch_array($resultado);
-    echo $row["nombre"].'/'.$row["email"].'/'.$row["notas"].'/'.$row["codigo_postal"].'/'.$row["regimen_fiscal"].'/'.$row["626"];
+    echo $row["nombre"].'/'.$row["email"].'/'.$row["notas"].'/'.$row["codigo_postal"].'/'.$row["regimen_fiscal"].'/'.$row["regimen_fiscal"];
 ?>
