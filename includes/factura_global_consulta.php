@@ -17,7 +17,9 @@
     $Diccionario_Conseptos_Restaurante = array();
     $contador=1;
     //Primera tabla
-    echo '<div class="contenedor_tablas_1_facturas">';
+    echo '<div class="contenedor_tablas_1_facturas">
+          <h2 class="titulo_tabla_facturas">Facturas en habitacion</h2>
+    ';
     foreach ($lista_tickets as $fila) {
       if($fila['facturado'] == 0 && $fila["id_hab"]!=0) {
       echo '
@@ -88,7 +90,9 @@
     echo "</div>";
       //Segunda tabla aqui se retornaria el contenido de la tabla derecha
 
-    echo '<div class="contenedor_tablas_2_facturas">';
+    echo '<div class="contenedor_tablas_2_facturas">
+          <h2 class="titulo_tabla_facturas">Facturas en restaurante</h2>
+    ';
     foreach ($lista_tickets as $fila) {
       if($fila['facturado'] == 0&& $fila["id_hab"]==0) {
       echo '
