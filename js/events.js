@@ -7556,8 +7556,10 @@ function factura_buscar_folio(){
 }
 
 function manejo_facturas(){
+    const btn = document.querySelector("#btn_generar_factura");
     const fechaInio = document.getElementById("fecha_inicio_factura").value;
     const fechaFin = document.getElementById("fecha_fin_factura").value;
+    btn.style.display = "none"
 
     if (!fechaInio) {
         swal({
@@ -7593,9 +7595,9 @@ function manejo_facturas(){
                 </div>
             </div>
             `;
-        $.ajax({
-            async:true,
-            type: "POST",
+            $.ajax({
+                async:true,
+                type: "POST",
             dataType: "html",
             contentType: "application/x-www-form-urlencoded",
             url:"includes/factura_global_consulta.php",
@@ -7603,6 +7605,7 @@ function manejo_facturas(){
             success: function(response){
                 contenedor.innerHTML = response;
                 //console.log(response);
+                btn.style.display = "block";
             } ,
         });
     }
