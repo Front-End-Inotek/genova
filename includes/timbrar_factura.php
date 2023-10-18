@@ -1,6 +1,6 @@
 <?php
-
-include 'datos_servidor.php'; //conexion con la base de datos
+include("clase_factura.php");
+$fact = NEW factura ();
 
 $consulta="SELECT * FROM rfc ";
 $consulta.= "WHERE id = '1' ";
