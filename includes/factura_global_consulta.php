@@ -10,7 +10,7 @@
     $fechaInicio = $_POST['fechaInio'];
     $fechaFin=$_POST['fechaFin'];
     $fechaInicioUnix=strtotime($fechaInicio);
-    $fechaFinUnix=strtotime($fechaFin)+(60*24);
+    $fechaFinUnix=strtotime($fechaFin)+(60*60*24);
     $lista_tickets=$Tickets->tickets_por_fecha($fechaInicioUnix,$fechaFinUnix);
     $lista_Id_tickets=array();
     $Diccionario_Conseptos_Hospedajes = array();
