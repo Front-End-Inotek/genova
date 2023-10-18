@@ -106,10 +106,11 @@
                     <textarea id="notas" name="rfc[]" class="form-control" id="exampleFormControlTextarea1" placeholder="Notas" style="height: 80px"></textarea>
                     <label for="notas" id="inputGroup-sizing-default">Notas</label>
                 </div>
+                <hr style="color: black; display: block" />
 
                 <div class="input-group">
                     <span  id="inputGroup-sizing-default" >Agregar a factura global</span>
-                    <input type="checkbox" id="checkfacturaglobal" aria-label="Checkbox for following text input" onclick="factura_global()">
+                    <input type="checkbox" id="checkfacturaglobal" aria-label="Checkbox for following text input" onclick="factura_global()" style="margin-left: 1rem;">
                 </div>
             </div>
         </div>
@@ -122,36 +123,38 @@
         
         <div class="dinamic col-sm-9" id="dinamic" style="max-height:635px; overflow-y: scroll; ">
             <div class="form-row row" >
-                <!--             Imput Uso de CFDI -->
-                <div id ="input_periocidad" class="form-floating col-4 mb-3" style="display: none;">
-                    <select id="periocidad" name ="rfc[]" class="form-select" id="inputGroupSelect01">
-                        <option selected disabled>Selecciona una opción</option>
-                        <?php
-                            $sqal="SELECT * FROM periocidad";
-                            $resulta=mysqli_query($con,$sqal);
-                            while ($vara=mysqli_fetch_array($resulta)) {  ?>
-                        <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
-                        <?php } ?>
-                    </select>
-                    <label for="periocidad">Periodicidad</label>
-                </div>
-                <!--             Imput Nombre -->
-                <div id ="input_mes" class="form-floating col-4 mb-3" style="display: none;">
-                    <select id="mes" name ="rfc[]" class="form-select" id="inputGroupSelect01" >
-                        <option selected disabled>Selecciona una opción</option>
-                        <?php
-                            $sqal="SELECT * FROM mes";
-                            $resulta=mysqli_query($con,$sqal);
-                            while ($vara=mysqli_fetch_array($resulta)) {  ?>
-                        <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
-                        <?php } ?>
-                    </select>
-                    <label for="mes">Mes</label>
-                </div>
-    <!--             Imput Codigo postal -->
-                <div id ="input_año" class="form-floating col-4 mb-3" style="display: none;">
-                    <input type="text" id="año" name="rfc[]" maxlength="100" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  value="" placeholder="Año">
-                    <label  for="año">Año</label>
+                <div class="row col-12 mb-2">
+                    <!--             Imput Uso de CFDI -->
+                        <div id ="input_periocidad" class="form-floating col-3" style="display: none;">
+                            <select id="periocidad" name ="rfc[]" class="form-select" id="inputGroupSelect01">
+                            <option selected disabled>Selecciona una opción</option>
+                            <?php
+                                $sqal="SELECT * FROM periocidad";
+                                $resulta=mysqli_query($con,$sqal);
+                                while ($vara=mysqli_fetch_array($resulta)) {  ?>
+                            <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
+                            <?php } ?>
+                        </select>
+                        <label for="periocidad">Periodicidad</label>
+                    </div>
+                    <!--             Imput Nombre -->
+                    <div id ="input_mes" class="form-floating col-3" style="display: none;">
+                        <select id="mes" name ="rfc[]" class="form-select" id="inputGroupSelect01" >
+                            <option selected disabled>Selecciona una opción</option>
+                            <?php
+                                $sqal="SELECT * FROM mes";
+                                $resulta=mysqli_query($con,$sqal);
+                                while ($vara=mysqli_fetch_array($resulta)) {  ?>
+                            <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
+                            <?php } ?>
+                        </select>
+                        <label for="mes">Mes</label>
+                    </div>
+                    <!--             Imput Codigo postal -->
+                    <div id ="input_año" class="form-floating col-3" style="display: none;">
+                        <input type="text" id="año" name="rfc[]" maxlength="100" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  value="" placeholder="Año">
+                        <label  for="año">Año</label>
+                    </div>
                 </div>
 
             <?php
