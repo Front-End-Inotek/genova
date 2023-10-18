@@ -26,6 +26,14 @@
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
     }
+    function regimen_fiscal(){
+      $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final";
+    
+    $comentario="obtener las facturas registradas ";
+    $consulta= $this->realizaConsulta($sentencia,$comentario);
+    //$fila = mysqli_fetch_array($consulta);
+    return $consulta;
+    }
     function busqueda($metodo, $inicial, $final){
       if($metodo==0){
         $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final";

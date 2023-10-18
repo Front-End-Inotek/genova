@@ -1,5 +1,7 @@
 <?php
-    include 'datos_servidor.php';
+    include 'clase_factura.php';
+    $fact = NEW factura();
+
     if(isset($_GET['fila'])){
         $contador = $_GET['fila'];
     }else{
@@ -22,7 +24,6 @@
 <!--         Columna 1  Datos del usuario-->
         <div class="col-sm-3" style="background-color:#33475b" >
             <div class="control" id="control">
-
             <div class="input-group mb-3" style="display: none;">
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default" style="width: 105px; font-size: 12px;">Agregar fila</span>
@@ -57,8 +58,10 @@
                 </div>
                 <select id="regimen" name ="rfc[]" class="custom-select" id="inputGroupSelect01" style="font-size: 12px;">
                 <?php
-               $sqal="SELECT * FROM regimen_fiscal";
-               $resulta=mysqli_query($con,$sqal);
+
+                $resulta=$fact->regimen_fiscal();
+               /*$sqal="SELECT * FROM regimen_fiscal";
+               $resulta=mysqli_query($con,$sqal);*/
                 while ($vara=mysqli_fetch_array($resulta)) {  ?>
                   <option value="<?php echo $vara[1] ?>"> <?php echo ("$vara[1] $vara[2]") ?></option>
               <?php } ?>
