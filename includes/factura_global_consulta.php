@@ -16,6 +16,8 @@
     $Diccionario_Conseptos_Hospedajes = array();
     $Diccionario_Conseptos_Restaurante = array();
     $contador=1;
+    //Primera tabla
+    echo '<div class="contenedor_tablas_1_facturas">';
     foreach ($lista_tickets as $fila) {
       if($fila['facturado'] == 0) {
       echo '
@@ -46,15 +48,13 @@
               </div>
             </div>';
             $contador++;
-
-
         array_push($lista_Id_tickets, $fila['id']);
         $result=$Concepto->info_concepto($fila['id']);
         $nombre_hab=$hab->mostrar_nombre_hab($fila['id_hab']);
         $contador=0;
             foreach ($result as $columnas) {
               echo'
-            <div class="ticket_tabla_contenedor">
+              
               <table class="table table-sm table-fixed">';
 
               if($contador==0){
@@ -78,12 +78,17 @@
                     </tr>
                   </tbody>
               </table>
-
-          </div>
-          ';
-          $contador++;
+              ';
+              $contador++;
             }
+            echo '</div>';
         }
-        echo "</div>";
-    }
+    
+      }
+    echo "</div>";
+      //Segunda tabla aqui se retornaria el contenido de la tabla derecha
+
+    echo '<div class="contenedor_tablas_2_facturas">';
+    echo "<h1>hola mundo</h1>";
+    echo '</div>';
 ?>
