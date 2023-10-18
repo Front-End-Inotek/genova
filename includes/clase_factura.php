@@ -27,12 +27,46 @@
       return $consulta;
     }
     function regimen_fiscal(){
-      $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final";
-    
-    $comentario="obtener las facturas registradas ";
-    $consulta= $this->realizaConsulta($sentencia,$comentario);
-    //$fila = mysqli_fetch_array($consulta);
-    return $consulta;
+      $sentencia = "SELECT * FROM regimen_fiscal";
+      $comentario="regimen_fiscal ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
+    function uso_cfdi(){
+      $sentencia = "SELECT * FROM uso_cfdi";
+      $comentario="uso_cfdi ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
+    function metodo_pago(){
+      $sentencia = "SELECT * FROM metodo_pago";
+      $comentario="metodo_pago ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
+    function forma_pago(){
+      $sentencia = "SELECT * FROM forma_pago";
+      $comentario="forma_pago ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
+    function periocidad(){
+      $sentencia = "SELECT * FROM periocidad";
+      $comentario="periocidad ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
+    function mes(){
+      $sentencia = "SELECT * FROM mes";
+      $comentario="mes ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
     }
     function busqueda($metodo, $inicial, $final){
       if($metodo==0){
