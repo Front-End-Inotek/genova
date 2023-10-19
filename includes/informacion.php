@@ -98,19 +98,19 @@ class Informacion extends ConexionMYSql
         $hab = $fila['id'];
         //por cada hab, se tiene que consultar las preasignaciones existentes
         $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado,
-        reservacion.estado_interno AS garantia
-        ,movimiento.estado_interno AS interno
-        ,huesped.nombre as n_huesped, huesped.apellido as a_huesped
-        FROM movimiento
-        left join reservacion on movimiento.id_reservacion = reservacion.id
-        LEFT JOIN hab on movimiento.id_hab = hab.id
-        LEFT JOIN huesped on movimiento.id_huesped = huesped.id
-        where reservacion.estado =1
-        and movimiento.motivo='preasignar'
-        and movimiento.id_hab=$hab
-        and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') 
-        order by reservacion.fecha_entrada asc;
-        ";
+                reservacion.estado_interno AS garantia
+                ,movimiento.estado_interno AS interno
+                ,huesped.nombre as n_huesped, huesped.apellido as a_huesped, movimiento.id as mov,reservacion.id as reserva_id
+                FROM movimiento
+                left join reservacion on movimiento.id_reservacion = reservacion.id
+                LEFT JOIN hab on movimiento.id_hab = hab.id
+                LEFT JOIN huesped on movimiento.id_huesped = huesped.id
+                where reservacion.estado =1
+                and movimiento.motivo='preasignar'
+                and movimiento.id_hab=$hab
+                and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d')
+                order by reservacion.fecha_entrada asc;
+                ";
         $reserva_entrada=0;
         $reserva_salida=0;
         $estado_hab = $fila['estado'];
@@ -200,8 +200,17 @@ class Informacion extends ConexionMYSql
         if($fila['tipo']>0){
             $color = $fila['color_tipo'];
             $color = "#".$color;
+            $mov=0;
+            $reserva=0;
             $estilo_tipo='style="border-left-color: '.$color.' !important;"';
-            echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';
+            if (isset($fila_r)) {
+                $mov=$fila_r['mov'];
+                $reserva=$fila_r['reserva_id'];
+                echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.','.$mov.','.$reserva.')" >';
+            } else {
+                echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';
+            
+            }
             switch($estado) {
                 case "Disponible limpia":
                 $estado="";
