@@ -4,8 +4,8 @@
   $servidor="localhost";
   //$usuario_servidor="kala";
   $usuario_servidor="root";
-  $password="ORWare1986";
-  //$password="123";
+  //$password="ORWare1986";
+  $password="123";
   $base_datos="visit";
   //.gitignore
 ?>
