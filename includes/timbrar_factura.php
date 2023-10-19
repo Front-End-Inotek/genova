@@ -2,17 +2,15 @@
 include("clase_factura.php");
 $fact = NEW factura ();
 
-$consulta="SELECT * FROM rfc ";
-$consulta.= "WHERE id = '1' ";
-$resultado=mysqli_query($con,$consulta);
+$resultado=$fact->rfc_propio();
+//$resultado=mysqli_query($con,$consulta);
 $row=mysqli_fetch_array($resultado);
 
 $folio=1;
-$consulta2="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";
-$resultado2=mysqli_query($con,$consulta2);
-$row2=mysqli_fetch_array($resultado2);
 
-$numfolio =$row2[0]+1;
+
+$numfolio=$fact->obtener_folio_factura();
+
 
 $rfc = $_POST['rfc'];
 
@@ -58,7 +56,7 @@ $datos['validacion_local']= 'NO';
 // Credenciales de Timbrado
 $datos['PAC']['usuario'] = $row['usuariopac'];   //BASE DE DATOS
 $datos['PAC']['pass'] = $row['passpac'];    //BASE DE DATOS
-$datos['PAC']['produccion'] = 'SI';
+$datos['PAC']['produccion'] = 'NO';
 
 // Rutas y clave de los CSD
 $datos['conf']['cer'] = '../../sdk2/certificados/00001000000510019114.cer';
@@ -70,9 +68,9 @@ $datos['factura']['condicionesDePago'] = 'CONDICIONES';
 $datos['factura']['descuento'] = '0.00';
 $datos['factura']['fecha_expedicion'] = date('Y-m-d\TH:i:s', time() - 120);
 $datos['factura']['folio'] = $row2[0]+1;    //BASE DE DATOS
-$datos['factura']['forma_pago'] = $rfc['7'];    //RFC
+$datos['factura']['forma_pago'] = '01';    //RFC
 $datos['factura']['LugarExpedicion'] = '44700';    //CODIGO POSTAL
-$datos['factura']['metodo_pago'] = $rfc['6'];    //METODO DE PAGO
+$datos['factura']['metodo_pago'] = "PUE";    //METODO DE PAGO
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = $rimporte;  //TOTAL DE IMPORTE

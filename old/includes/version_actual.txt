@@ -1,0 +1,185 @@
+VERSION 1.0
+
+VERSION 1.1
+-Colocar login
+-Generar menu lateral con rama vertical_nav
+-Generar permisos y tipos de usuarios
+-Generar funciones basicas para tipo_hab
+-Generar funciones basicas para tarifa_hospedaje
+-Generar funciones basicas para hab
+
+VERSION 1.2
+-Generar rama reservacion
+-Generar funciones basicas para reservacion
+-Generar busquedas para reservacion
+
+VERSION 1.3
+-Generar rama huesped
+-Generar funciones basicas para huesped
+-Generar busquedas para huesped
+-Agregar mas datos en huesped
+-Generar tabla pago para elegir el limite de pago en una reservacion
+-Agregar elegir huesped en una reservacion
+-Agregar mas datos en reservacion
+-Mostrar los datos de un huesped en una reservacion al agregar y poder editarlos
+-Mostrar los datos de un huesped en una reservacion al editar y poder editarlos
+-Comenzar hacer los racks en area de trabajo
+-Estado 0 y 1 de habitaciones
+
+VERSION 1.35
+-Agregar total de pago a una reservacion
+-Reporte de cargo por noche
+-Agregar tabla sql y funciones de forma de pago
+-Agregar funciones de usuario
+-Agregar tabla sql y funciones de cuenta
+-Generar estado de cuenta
+-Generar las dos tablas de estado de cuenta 
+-Editar y borrar cargos en estado de cuenta
+-Editar y borrar abonos en estado de cuenta
+-Cambiar de habitacion un cargo o abono de estado de cuenta
+-Al agregar una reservacion generar una cuenta con su total suplementos como cargo y su total pago como abono
+-Poner en gris la cuenta eliminada, cambiar botones y funciones incesarias
+-Boton para unificar las cuentas al seleccionar una habitacion en especifico
+
+VERSION 1.4
+-Generar rama restaurante
+-Acomodo de javascript
+-Agregar permisos y tablas de categorias e inventario
+-Interfaz de agregar restaurante
+-Agregar tabla y funciones de pedido rest
+-Generar pago de restaurante sin habitacion, agregar tabla y funciones de ticket
+-Vistas cuadradas de todos los botones junto con rendondear sus bordes
+
+VERSION 1.5
+-Generar rama vistas
+-Cambios en los cuadritos de racks de estados
+-Agregar icono como estado interno de la habitacion
+-Generar estado 2 de sucio y mandar a terminar en una habitacion
+-Subestados en estado 0 disponible
+-Subestados en estado 1 ocupado
+-Subestados en estado 2 sucia
+-Agregar otros niveles de usuarios
+-Subestados en estado 3 limpieza
+-Subestados en estado 4 mantenimiento
+
+VERSION 1.6
+-Generar rama estados
+-Estados iniciales en habitacion disponible
+-Subestados en estado 5 supervision
+-Subestados en estado 6 cancelada
+-Cambiar vista en restaurante
+-Ver todos los datos de una reservacion en su tabla
+-Reporte de una reservacion
+-Pie con el resumen de la informacion de todas las reservaciones
+-Acomodar vista de pie en una sola linea
+-Cambiar derechos de superusuario y administrador
+-Cambiar imagen de login
+-Cambiar los colores de los estados de los racks
+
+VERSION 1.6
+-Generar rama configuracion
+-Generar chaflan en subestados
+-Cambiar color de chaflan en subestado
+-Cambiar los colores de fondo y nombre del sistema
+-Cambiar menu y funcion agregar reservacion
+-Agregar boton asignar para realizar checkin con una reservacion previa
+
+VERSION 1.7
+-Generar rama asignar_checkin
+-Cambios por forzar tarifa en una reservacion
+-Cambios para poder hacer checkin con una reservacion
+-Hacer checkin con mas de una habitacion
+-Quitar datos de la tabla reservacion y agregar telefono del huesped
+-Agregar funcion y estado cancelar una reservacion 
+-Boton de ver por dia las reservaciones
+-Reporte de reservaciones por dia
+-Acomodo de busquedas en reservaciones general y en por dia
+-Quitar datos innecesarios de movimiento
+-Agregar fecha cancelacion, quien cancela y codigo descuento a reservacion
+-Poner derechos de cupon en usuario
+-Agregar tabla cupon con sus respectivas funciones
+-Acomodar descuento manual y codigo promocional en reservacion
+-Aplicar cupon y mostrar datos de cupon en la reservacion
+-Precargar sistema cada 3 segundos
+-Ajustar como abono cuando un cupon en reservacion es de tipo 1-dinero
+-Ajustar todos los cambios en reporte de cargo por noche
+-Generar cargo por noche en las habitaciones seleccionadas
+-Crear derechos y vista para poder ver reportes de cargos por noche
+-Funcion de ver reportes de cargos por noche y por fecha
+-Resurtir inventario
+-Generar tabla y funciones de surtir para poder generar el cargo de surtir inventario
+-Reporte y ajustes de surtir inventario
+-Cambio de sql y derechos de usuario por inventario_surtir
+-Tabla para poder visualizar los surtidos de inventario
+-Ajustes en surtir inventario
+
+***********************************************************************************************
+
+VERSION 2.0
+
+VERSION 2.1
+-Generar rama ticket
+-Revisar los tickets de restaurante por su estado
+-Agregar ticket al hacer un abono
+-Agregar ticket al hacer una reservacion
+-Hacer corte vista y contenido
+-Generar clase corte info para poder obtener toda la informacion del corte
+
+VERSION 2.2
+-Generar rama corte
+-Agregar tabla sql corte, con su insert y ajustes al realizar el corte
+-Reporte de corte con su respectiva vista de ver cortes
+-Ajustes para hacer solo corte con un usuario en especifico
+-Actualizar el campo comanda en labels al guardar el numero de comanda al ingresar un nuevo ticket 
+-Agregar marcos en reporte de corte
+-Poner logo en reporte de corte
+-Cambio de orden y ajustes en reporte de corte
+
+VERSION 2.3
+-Generar rama mesas
+-Generar espacio para las mesas del comedor del restaurante
+-Funciones de estado disponible y ocupada de una mesa
+-Mejorar la vista de agregar restaurante
+-Agrega id_mesa en tablas ticket y pedido_rest
+-Generar 3 tipos de restaurante en hab, directo y en mesa
+-Agregar funciones en restaurante de mesas
+-Agregar tabla y bd de pedido
+-Acomodo en hacer pedido en mesa
+-Funciones en mesa ocupada
+-Poner nombre del hotel en corte
+-Acomodo de todos los reportes con estilos nuevos
+-Acomodo de pagar directo o agregar cargo a la habitacion en restaurante hab
+-Acomodo de pagar directo o agregar cargo a la habitacion en restaurante mesa
+-Revision de todas las formas de pago de restaurante en sus 5 modalidades
+-Revision de rest.libre con pago al momento 
+-Revision de rest.hab con pago al momento
+-Revision de rest.hab con envio de cargo a la hab
+-Revision de rest.mesa pedir multiples pedidos(comandas)
+-Revision de rest.mesa cobrar con pago al momento y multiples pedidos(comandas)
+-Revision de rest.mesa cobrar con envio de cargo a la hab y multiples pedidos(comandas)
+
+VERSION 2.4
+-Generar rama linea
+-Acomodar interfaz grafica de linea en restaurante directo, hab y mesas
+-Separar productos en pedido siempre de restaurante directo, hab y mesas
+-Al pedir un concepto en un pedido(comanda) poder editarlo o borrarlo
+-Revision de funcionamiento correcto de linea y de productos separados en restaurante directo, hab y mesas
+-Correcciones al realizar una reservacion
+-Retoques globales en navbar
+-Retoques globales de reportes y corte
+
+VERSION 2.5
+-Generar rama logs
+-Agregar permisos de ver logs con su sql
+-Vista y agregar al menu ver logs
+-Funcionalidad y reporte de ver logs
+-Correcion de check-input de cargo noche por habitacion
+-Correcciones de corte y su reporte
+-Cambiar palabra checkin por check-in en todo el sistema
+-Limitar date al dia actual en agregar reservaciones y cupones
+-En rack poner el tipo de habitacion en estado disponible
+-Boton para poder agregar huesped nuevo al agregar una reservacion
+-Ajustes generales en cargo por noche
+-Ajustes de cargos y abonos en estado de cuenta
+-Cambios de estilos en el area de trabajo
+-Cambiar a palabra Check-in

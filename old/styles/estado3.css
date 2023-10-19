@@ -1,0 +1,12 @@
+.estado3{
+ background-color: #242646;
+ color: #7072be;
+ padding: 0em 0px 0px 10px;
+ border-radius: 10px;
+}
+.estado3:hover{
+ background-color: #3b3d70;
+ color: #7072be;
+ padding: 0em 0px 0px 10px;
+ border-radius: 10px;
+}
