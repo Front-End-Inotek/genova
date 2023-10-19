@@ -63,16 +63,15 @@
         $total_suplementos= '$'.number_format($fila['total_suplementos'], 2);
         $total_habitacion= '$'.number_format($fila['total_hab'], 2);
         if($fila['descuento']>0){
-            $descuento= $fila['descuento'].'%'; 
+            $descuento= $fila['descuento'].'%';
         }else{
-            $descuento= 'Ninguno'; 
+            $descuento= 'Ninguno';
         }
         if($fila['forzar_tarifa']>0){
             $total_estancia= '$'.number_format($fila['forzar_tarifa'], 2);
         }else{
             $total_estancia= '$'.number_format($fila['total'], 2);
         }
-  
         $total_estancia= '$'.number_format($fila['total'], 2);
         if($fila['total_pago']>0){
             $total_pago= '$'.number_format($fila['total_pago'], 2);
@@ -82,10 +81,9 @@
         $forma_pago= $fila['descripcion'];
         $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
     }
-  
 
       // Datos de reservacion
-  $huesped= NEW Huesped($id_huesped);  
+  $huesped= NEW Huesped($id_huesped);
   $vencimiento_tarjeta = $huesped->vencimiento_mes . " / " . $huesped->vencimiento_ano;
   //
   include_once('clase_forma_pago.php');

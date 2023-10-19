@@ -6583,6 +6583,7 @@ function cambio_rest_descuento(total){
 
 // Aplicar el cobro en pedido restaurante
 function aplicar_rest_cobro(total,hab_id,estado,mov,mesa){
+    
     var mesa_id= hab_id;
     var total_inicial= total;
     var usuario_id=localStorage.getItem("id");
@@ -6814,6 +6815,11 @@ function ver_cuenta_maestra(){
 // Aplicar el cobro en pedido restaurante enviado a una hab
 function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
     var usuario_id=localStorage.getItem("id");
+    const btnRest = document.getElementById("btn-restaurant");
+    btnRest.disabled = true;
+    btnRest.style.opacity = 0.7;
+    btnRest.textContent = "Procesando...";
+    //alert("Boton presionado")
     $("#boton_pago").html('<div class="spinner-border text-primary"></div>');
     var datos = {
         "total": total,

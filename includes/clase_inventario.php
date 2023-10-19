@@ -783,7 +783,7 @@
             }
             echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div>
             <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0,'.$id_maestra.')">Linea</button></></div>
-            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.','.$id_maestra.')">Pedir</button></></div>
+            <div class="col-sm-2"><button  class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.','.$id_maestra.')">Pedir</button></></div>
             ';
           }else{
             echo '<div class="col-sm-12"></div>';
