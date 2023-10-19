@@ -802,19 +802,19 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
-              <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Direccion</th>
-              <th>Ciudad</th>
-              <th>Estado</th>
-              <th>Codigo Postal</th>
-              <th>Telefono</th>
-              <th>Correo</th>
-              <th>Contrato Socio</th>
-              <th>Cupón</th>
-              <th>Preferencias</th>
-              <th>Comentarios</th>
+              <th style="position: static;"><span class=" glyphicon glyphicon-cog"></span> Productos</th>
+              <th style="position: static;">Nombre</th>
+              <th style="position: static;">Apellido</th>
+              <th style="position: static;">Direccion</th>
+              <th style="position: static;">Ciudad</th>
+              <th style="position: static;">Estado</th>
+              <th style="position: static;">Codigo Postal</th>
+              <th style="position: static;">Telefono</th>
+              <th style="position: static;">Correo</th>
+              <th style="position: static;">Contrato Socio</th>
+              <th style="position: static;">Cupón</th>
+              <th style="position: static;">Preferencias</th>
+              <th style="position: static;">Comentarios</th>
               </tr>
           </thead>
           <tbody>';
