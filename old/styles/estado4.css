@@ -1,0 +1,12 @@
+.estado4{
+    background-color:#F2921D;
+    color: #f2bf89;
+    padding: 0em 0px 0px 10px;
+    border-radius: 10px;
+}
+.estado4:hover{
+    background-color: #fbca8e;
+    color: #F2921D;
+    padding: 0em 0px 0px 10px;
+    border-radius: 10px;
+}

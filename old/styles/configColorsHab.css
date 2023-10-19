@@ -1,0 +1,623 @@
+.contenedor__colores{
+    margin: auto;
+    margin-top: 1vh;
+    width: 100%;
+    max-width: 1400px;
+    height: auto;
+    background-color: white;
+    box-shadow: var(--sombra);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    max-height: 90vh;
+    padding-bottom: 2rem;
+}
+.title__colors{
+    font-size: 2.0rem;
+    padding: 2rem 0;
+}
+.subtitulo__colors{
+    font-size: 1.5rem;
+    padding-top: 1rem;
+}
+.form_colores{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 95%;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+}
+.card_color{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 0.5rem;
+}
+.card_btn{
+    width: 170px;
+    height: 140px;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-left: 7px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: all ease-in-out 0.2s;
+}
+.card_btn:hover{
+    box-shadow: 0px 0px 0px 5px rgba(68, 255, 243, 0.102);
+}
+.placeholdercolor{
+    background-color: #80808096;
+    width: 80%;
+    height: 15px;
+}
+/* Disponible limpia */
+.DisponibleLimpia1{
+    background-color: #A2FCB7;
+    border-left: 7px solid;
+}
+.DisponibleLimpia1 a{
+    color: black;
+}
+.DisponibleLimpia1:hover{
+    background-color: #82ffa1;
+}
+
+.DisponibleLimpia2{
+    background-color: #90a955;
+    border-left:  7px solid;
+}
+.DisponibleLimpia2 a {
+    color: black;
+}
+.DisponibleLimpia2:hover{
+    background-color: #b1d068;
+}
+
+.DisponibleLimpia3{
+    background-color: #4f772d;
+    border-left:  7px solid;
+}
+.DisponibleLimpia3 a {
+    color: black;
+}
+.DisponibleLimpia3:hover{
+    background-color: #689c3c;
+}
+
+.DisponibleLimpia4{
+    background-color: #31572c;
+    border-left:  7px solid;
+}
+.DisponibleLimpia4 a {
+    color: white;
+}
+.DisponibleLimpia4:hover{
+    background-color: #4b8243;
+}
+
+.DisponibleLimpia5{
+    background-color: #132a13;
+    border-left:  7px solid;
+}
+.DisponibleLimpia5 a {
+    color: white;
+}
+.DisponibleLimpia5:hover{
+    background-color: #234d23;
+}
+
+/* Limpieza vacia */
+.LimpiezaVacia1{
+    background-color: #b4fadc;
+    border-left:  7px solid;
+}
+.LimpiezaVacia1 a{
+    color: black;
+}
+.LimpiezaVacia1:hover {
+    background-color: #c7ffe7;
+}
+
+.LimpiezaVacia2{
+    background-color: #8fd9c4;
+    border-left:  7px solid;
+}
+.LimpiezaVacia2 a{
+    color: black;
+}
+.LimpiezaVacia2:hover{
+    background-color: #a7eeda;
+}
+
+.LimpiezaVacia3{
+    background-color: #76d5c3;
+    border-left:  7px solid;
+}
+.LimpiezaVacia3 a {
+    color: black;
+}
+.LimpiezaVacia3:hover{
+    background-color: #8ef6e3;
+}
+
+.LimpiezaVacia4{
+    background-color: #54b4ad;
+    border-left:  7px solid;
+}
+.LimpiezaVacia4 a{
+    color: black;
+}
+.LimpiezaVacia4:hover{
+    background-color: #6ae0d8;
+}
+
+.LimpiezaVacia5{
+    background-color: #1fa6b8;
+    border-left:  7px solid;
+}
+.LimpiezaVacia5 a{
+    color: black;
+}
+.LimpiezaVacia5:hover{
+    background-color: #27c5da;
+}
+
+/* Limpieza vacia */
+.LimpiezaOcupada1{
+    background-color: #E6EFFC;
+    border-left:  7px solid;
+}
+.LimpiezaOcupada1 a{
+    color: black;
+}
+.LimpiezaOcupada1:hover{
+    background-color: #f4f8ff;
+}
+
+
+.LimpiezaOcupada2{
+    background-color: #75c9c8;
+    border-left:  7px solid;
+}
+.LimpiezaOcupada2 a {
+    color: black;
+}
+.LimpiezaOcupada2:hover{
+    background-color: #8deae8;
+}
+
+.LimpiezaOcupada3{
+    background-color: #80a1d4;
+    border-left:  7px solid;
+}
+.LimpiezaOcupada3 a{
+    color: black;
+}
+.LimpiezaOcupada3:hover{
+    background-color: #93b7ec;
+}
+
+.LimpiezaOcupada4{
+    background-color: #c0b9dd;
+    border-left:  7px solid;
+}
+.LimpiezaOcupada4 a {
+    color: black;
+}
+.LimpiezaOcupada4:hover{
+    background-color: #d6cef7;
+}
+
+.LimpiezaOcupada5{
+    background-color: #ded9e2;
+    border-left:  7px solid;
+}
+.LimpiezaOcupada5 a {
+    color: black;
+}
+.LimpiezaOcupada5:hover{
+    background-color: #e8dff0;
+}
+
+/* Ocupada */
+.Ocupada1{
+    background-color: #F8D7DA;
+    border-left:  7px solid;
+}
+.Ocupada1 a {
+    color: black;
+}
+.Ocupada1:hover{
+    background-color: #ffe7e9;
+}
+
+.Ocupada2{
+    background-color: #c52233;
+    border-left:  7px solid;
+}
+.Ocupada2 a {
+    color: white;
+}
+.Ocupada2:hover {
+    background-color:#ff6b7d ;
+}
+
+.Ocupada3{
+    background-color: #a51c30;
+    border-left:  7px solid;
+}
+.Ocupada3 a {
+    color: white;
+}
+.Ocupada3:hover {
+    background-color:#ea87aa  ;
+}
+
+.Ocupada4{
+    background-color: #a7333f;
+    border-left:  7px solid;
+}
+.Ocupada4 a {
+    color: white;
+}
+.Ocupada4:hover {
+    background-color:#ec9db0  ;
+}
+
+.Ocupada5{
+    background-color: #ee1f30;
+    border-left:  7px solid;
+}
+.Ocupada5 a {
+    color: white;
+}
+.Ocupada5:hover {
+    background-color:#ef6d75  ;
+}
+/* Ocupada sucia */
+.OcupadaSucia1{
+    background-color: #B02A37;
+    border-left:  7px solid;
+}
+.OcupadaSucia1 a {
+    color: white;
+}
+.OcupadaSucia1:hover {
+    background-color:#cc6470  ;
+}
+
+.OcupadaSucia2{
+    background-color: #b10f2e;
+    border-left:  7px solid;
+}
+.OcupadaSucia2 a {
+    color: white;
+}
+.OcupadaSucia2:hover {
+    background-color:#cd91ab  ;
+}
+
+.OcupadaSucia3{
+    background-color: #570000;
+    border-left:  7px solid;
+}
+.OcupadaSucia3 a {
+    color: white;
+}
+.OcupadaSucia3:hover {
+    background-color:#820202;
+}
+
+.OcupadaSucia4{
+    background-color: #280000;
+    border-left:  7px solid;
+}
+.OcupadaSucia4 a {
+    color: white;
+}
+.OcupadaSucia4:hover {
+    background-color:#4f0000;
+}
+
+.OcupadaSucia5{
+    background-color: #de7c5a;
+    border-left:  7px solid;
+}
+.OcupadaSucia5 a {
+    color: black;
+}
+.OcupadaSucia5:hover {
+    background-color: #f68b67;
+}
+
+/* Uso casa */
+.usoCasa1{
+    background-color: #BEF3F1;
+    border-left:  7px solid;
+}
+.usoCasa1 a {
+    color:black ;
+}
+.usoCasa1:hover {
+    background-color: #d4fffe;
+}
+
+.usoCasa2{
+    background-color: #90e0ef;
+    border-left:  7px solid;
+}
+.usoCasa2 a {
+    color: black;
+}
+.usoCasa2:hover{
+    background-color:rgb(208, 255, 255);
+}
+
+.usoCasa3{
+    background-color: #00b4d8;
+    border-left:  7px solid;
+}
+.usoCasa3 a {
+    color: black;
+}
+.usoCasa3:hover {
+    background-color:#16c7ea;
+}
+
+.usoCasa4{
+    background-color: #0077b6;
+    border-left:  7px solid;
+}
+.usoCasa4 a {
+    color: white;
+}
+.usoCasa4:hover {
+    background-color:#1696db;
+}
+
+.usoCasa5{
+    background-color: #03045e;
+    border-left:  7px solid;
+}
+.usoCasa5 a {
+    color:white ;
+}
+.usoCasa5:hover {
+    background-color:#181d7f;
+}
+
+/* Bloqueado */
+.Bloqueado1{
+    background-color: #0B0B0B;
+    border-left:  7px solid;
+}
+.Bloqueado1 a {
+    color:white  ;
+}
+.Bloqueado1:hover {
+    background-color:#323232;
+}
+
+.Bloqueado2{
+    background-color: #212529;
+    border-left:  7px solid;
+}
+.Bloqueado2 a {
+    color:white;
+}
+.Bloqueado2:hover {
+    background-color:#515960;
+}
+
+.Bloqueado3{
+    background-color: #343a40;
+    border-left:  7px solid;
+}
+.Bloqueado3 a {
+    color:white
+}
+.Bloqueado3:hover {
+    background-color:#8e98a1;
+}
+
+.Bloqueado4{
+    background-color: #495057;
+    border-left:  7px solid;
+}
+.Bloqueado4 a {
+    color:white
+}
+.Bloqueado4:hover {
+    background-color:#6e7780;
+}
+
+.Bloqueado5{
+    background-color: #6c757d;
+    border-left:  7px solid;
+}
+.Bloqueado5 a {
+    color:white
+}
+.Bloqueado5:hover {
+    background-color:#9ca8b1;
+}
+
+/* Mantenimiento */
+.Mantenimiento1{
+    background-color: #FeF0E8;
+    border-left:  7px solid;
+}
+.Mantenimiento1 a {
+    color:black;
+}
+.Mantenimiento1:hover {
+    background-color:#fff8f4;
+}
+
+.Mantenimiento2{
+    background-color: #f4e409;
+    border-left:  7px solid;
+}
+.Mantenimiento2 a {
+    color:black;
+}
+.Mantenimiento2:hover {
+    background-color:#fff133;
+}
+
+.Mantenimiento3{
+    background-color: #eeba0b;
+    border-left:  7px solid;
+}
+.Mantenimiento3 a {
+    color:black;
+}
+.Mantenimiento3:hover {
+    background-color:rgb(255, 229, 126);
+}
+
+.Mantenimiento4{
+    background-color: #c36f09;
+    border-left:  7px solid;
+}
+.Mantenimiento4 a {
+    color: black;
+}
+.Mantenimiento4:hover {
+    background-color: #ec8d18;
+}
+
+.Mantenimiento5{
+    background-color: #a63c06;
+    border-left:  7px solid;
+}
+.Mantenimiento5 a {
+    color:#fff ;
+}
+.Mantenimiento5:hover {
+    background-color: #da5e1f;
+}
+
+/* Reserva Pagada */
+.ReservaPag1{
+    background-color: #995AEC;
+    border-left:  7px solid;
+}
+.ReservaPag1 a {
+    color:#fff  ;
+}
+.ReservaPag1:hover {
+    background-color: #c599ff;
+}
+
+.ReservaPag2{
+    background-color: #420039;
+    border-left:  7px solid;
+}
+.ReservaPag2 a {
+    color:#fff;
+}
+.ReservaPag2:hover {
+    background-color: #7a056a;
+}
+
+.ReservaPag3{
+    background-color: #932f6d;
+    border-left:  7px solid;
+}
+.ReservaPag3 a {
+    color:#fff;
+}
+.ReservaPag3:hover {
+    background-color: #d25ebd;
+}
+
+.ReservaPag4{
+    background-color: #e07be0;
+    border-left:  7px solid;
+}
+.ReservaPag4 a {
+    color: black;
+}
+.ReservaPag4:hover {
+    background-color: #f19bf1;
+}
+
+.ReservaPag5{
+    background-color: #dcccff;
+    border-left:  7px solid;
+}
+.ReservaPag5 a {
+    color:black ;
+}
+.ReservaPag5:hover {
+    background-color: #e4d8ff;
+}
+
+/* Reserva Pendiente */
+.ReservaPend1{
+    background-color: #3B0286;
+    border-left:  7px solid;
+}
+.ReservaPend1 a {
+    color:#fff  ;
+}
+.ReservaPend1:hover {
+    background-color: #5b17b4;
+}
+
+.ReservaPend2{
+    background-color: #3c0663;
+    border-left:  7px solid;
+}
+.ReservaPend2 a {
+    color:#fff  ;
+}
+.ReservaPend2:hover {
+    background-color: #7c31cd;
+}
+
+.ReservaPend3{
+    background-color: #4a0a77;
+    border-left:  7px solid;
+}
+.ReservaPend3 a {
+    color:#fff  ;
+}
+.ReservaPend3:hover {
+    background-color: #65179d;
+}
+
+.ReservaPend4{
+    background-color: #5a108f;
+    border-left:  7px solid;
+}
+.ReservaPend4 a {
+    color:#fff  ;
+}
+.ReservaPend4:hover {
+    background-color: #8624cd;
+}
+
+.ReservaPend5{
+    background-color: #8b2fc9;
+    border-left:  7px solid;
+}
+.ReservaPend5 a {
+    color:#fff  ;
+}
+.ReservaPend5:hover {
+    background-color: #a747e7;
+}

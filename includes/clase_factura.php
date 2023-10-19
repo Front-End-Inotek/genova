@@ -41,14 +41,14 @@
       return $consulta;
     }
     function metodo_pago(){
-      $sentencia = "SELECT * FROM metodo_pago";
+      $sentencia = "SELECT * FROM metodo_pago_factura";
       $comentario="metodo_pago ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
     }
     function forma_pago(){
-      $sentencia = "SELECT * FROM forma_pago";
+      $sentencia = "SELECT * FROM forma_pago_factura";
       $comentario="forma_pago ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$fila = mysqli_fetch_array($consulta);
@@ -68,6 +68,26 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
+    }
+    function rfc_propio(){
+      $sentencia="SELECT * FROM rfc WHERE id = '1'  ";
+
+      $comentario="rfc_propio ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+
+    }
+    function obtener_folio_factura(){
+      $folio=0;
+      $sentencia="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";
+      $comentario="rfc_propio ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $folio=$fila['folio']+1;
+      }
+      return $folio;
     }
     function mes(){
       $sentencia = "SELECT * FROM mes";
