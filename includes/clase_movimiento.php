@@ -456,8 +456,21 @@
       }
       // Modificar el estado interno del movimiento
       function editar_estado_interno($mov,$opcion){
-        $estado_interno= $opcion;
-        
+        $estado_interno= '';
+        switch($opcion){
+          case 0:
+              $estado_interno= 'sin estado';
+              break;
+          case 1.1:
+              $estado_interno= 'sucia';
+              break;
+          case 1.2:
+              $estado_interno= 'limpieza';
+              break;
+          case 1.3:
+              $estado_interno= 'uso casa';
+              break;
+        }
         $sentencia = "UPDATE `movimiento` SET
         `estado_interno` = '$estado_interno'
         WHERE `id` = '$mov';";
