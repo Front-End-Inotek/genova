@@ -16,7 +16,7 @@
     $nombreHotel = $conf->nombre;
     $imagenEncabezado = "../images/hotelexpoabastos.png";
 
-    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado'. "hotelexpoabastos.png");
+    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
     //Consulta datos de la reserva
 
     $consulta= $reservacion->datos_cancelacion($_POST['info']);
