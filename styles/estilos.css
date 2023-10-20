@@ -1559,7 +1559,7 @@ select[disabled]{
   width: 90%;
 }
 .table-fixed {
-  table-layout: fixed;
+  /* table-layout: fixed; */
   width: 100%;
 }
 

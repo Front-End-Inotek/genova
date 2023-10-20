@@ -8,7 +8,7 @@
 }
 
 thead th {
-    position: sticky;   /* queremos que las celdas estén fijas    */
+    /* position: sticky;  */  /* queremos que las celdas estén fijas    */
     top: 0;             /* en lo más alto de la tabla/página.     */
     background: white;  /* esto debería ser el fondo de la celda  */
     z-index: 10;         /* debe quedar encima de las otras celdas */
