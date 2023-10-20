@@ -34,7 +34,7 @@
 			echo '
 			<li href="#" onclick="showMenu(1)" class="nav-link">
 			<i class="bx bx-desktop text-secondary"></i>
-			<span class="mx-2">Recepcion</span>
+			<span class="mx-2">Recepción</span>
 			<ul id="1" class="submenu" name="1">
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_check()"> Check In </a></i></ul>
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="ver_cuenta_maestra()"> Cuenta Maestra </a></i></ul>';
@@ -207,7 +207,7 @@
 				echo '
 				<li id="#" onclick="showMenu(6);" class="nav-link">
 				<i class="bx bx-bed text-secondary"></i>
-				<span class="mx-2 habitaciones">Configuracion Hab.</span>
+				<span class="mx-2 habitaciones">Configuración Hab.</span>
 				<ul id="6" class="submenu ocultar">
 				';
 			$permisos_tipo=$usuario->tipo_ver+$usuario->tipo_agregar;
