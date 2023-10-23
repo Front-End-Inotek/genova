@@ -7536,7 +7536,7 @@ function factura_hab(){
     $('#area_trabajo').hide();
     $('#pie').hide();
     $('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/factura_hab.php");
+    $("#area_trabajo_menu").load("includes/factura_global_form.php");
     closeNav();
 }
 function factura_global_form(){
