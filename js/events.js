@@ -2792,7 +2792,15 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
     if(!verificarFormulario("form-reserva","id") ){
         var usuario_id=localStorage.getItem("id");
         var nombre_huesped= document.getElementById("nombre").value;
+        var nombre_huesped_sin_editar=""
+        if(document.getElementById("leer_nombre_sin_editar")){
+            nombre_huesped_sin_editar= document.getElementById("leer_nombre_sin_editar").value;
+        }
         var apellido_huesped= document.getElementById("apellido").value;
+        var apellido_huesped_sin_editar="";
+        if(document.getElementById("leer_apellido_sin_editar")){
+            apellido_huesped_sin_editar= document.getElementById("leer_apellido_sin_editar").value;
+        }
         var empresa_huesped= document.getElementById("empresa").value;
         var telefono_huesped= document.getElementById("telefono").value;
         var pais_huesped= document.getElementById("pais").value;
@@ -2822,12 +2830,7 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         //guardar asyncronicamente el "husped" para obtener su id; si ya existe retorna su id..
         let xhttp;
         xhttp = new XMLHttpRequest();
-        xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre_huesped+"&apellido="+apellido_huesped+"&direccion="+direccion_huesped+"&pais="+pais_huesped+"&empresa="+empresa_huesped+
-        "&ciudad="+ciudad_huesped+"&estado="+estado_huesped+"&telefono="+telefono_huesped+"&comentarios="+comentarios_huesped+"&tipo_tarjeta="+tipo_tarjeta+"&usuario_id="+usuario_id+
-        "&titular_tarjeta="+titular_tarjeta+"&numero_tarjeta="+numero_tarjeta+
-        "&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&nombre_tarjeta="+nombre_tarjeta
-        +"&estado_tarjeta="+estado_tarjeta+"&correo="+correo+"&voucher="+voucher+"&estado_credito="+estado_credito+"&limite_credito="+limite_credito
-        ,true);
+        xhttp.open("GET","includes/guardar_huesped.php?nombre="+nombre_huesped+"&apellido="+apellido_huesped+"&direccion="+direccion_huesped+"&pais="+pais_huesped+"&empresa="+empresa_huesped+"&ciudad="+ciudad_huesped+"&estado="+estado_huesped+"&telefono="+telefono_huesped+"&comentarios="+comentarios_huesped+"&tipo_tarjeta="+tipo_tarjeta+"&usuario_id="+usuario_id+"&titular_tarjeta="+titular_tarjeta+"&numero_tarjeta="+numero_tarjeta+"&vencimiento_mes="+vencimiento_mes+"&vencimiento_ano="+vencimiento_ano+"&cvv="+cvv+"&nombre_tarjeta="+nombre_tarjeta+"&estado_tarjeta="+estado_tarjeta+"&correo="+correo+"&voucher="+voucher+"&estado_credito="+estado_credito+"&limite_credito="+limite_credito+"&nombre_huesped_sin_editar="+nombre_huesped_sin_editar+"&apellido_huesped_sin_editar="+apellido_huesped_sin_editar,true);
         xhttp.addEventListener('load', e =>{
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {

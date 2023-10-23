@@ -268,10 +268,12 @@ echo '<div class="container-fluid blanco" style="width: 100%;max-width: 1200px;"
                 <div class="form-group col-md-4">
                     <label class="asterisco" for="nombre">Nombre</label>
                     <input type="text" class="form-control" id="nombre" value="'.$huesped->nombre.'" required>
+                    <input type="text" class="d-none" id="leer_nombre_sin_editar" value="'.$huesped->nombre.'"readonly/>
                 </div>
                 <div class="form-group col-md-4">
                     <label class="asterisco" for="apellido">Apellido</label>
                     <input type="text" class="form-control" id="apellido"  value="'.$huesped->apellido.'"required>
+                    <input type="text" class="d-none" id="leer_apellido_sin_editar" value="'.$huesped->apellido.'"readonly/>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="empresa">Empresa / Agencia</label>

@@ -427,7 +427,7 @@
       }
       // Guardar el huesped
       function guardar_huesped($nombre,$apellido,$direccion,$ciudad,$estado,$codigo_postal,$telefono,$correo,$contrato,$cupon,$preferencias,$comentarios,$titular_tarjeta,$tipo_tarjeta,$numero_tarjeta,$vencimiento_mes,$vencimiento_ano,$cvv,
-      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$estado_credito,$limite_credito,$indole_tarjeta){
+      $usuario_id,$pais,$empresa,$nombre_tarjeta,$estado_tarjeta,$voucher,$estado_credito,$limite_credito,$indole_tarjeta,$nombre_huesped_sin_editar,$apellido_huesped_sin_editar){
         //validaciones del huesped.
         if(empty($nombre)){
           echo "NO_DATA";
@@ -441,12 +441,16 @@
             $estado_tarjeta = 2; //Garantizada.
           }
         }
+        if($nombre_huesped_sin_editar=="" && $apellido_huesped_sin_editar==""){
+          $nombre_huesped_sin_editar=$nombre;
+          $apellido_huesped_sin_editar=$apellido;
+        }
         //verififca si el cliente/huesped ya existe.
-        $existe = "SELECT id FROM huesped where nombre = '$nombre' and apellido='$apellido'";
+        $existe = "SELECT id FROM huesped WHERE nombre = '$nombre_huesped_sin_editar' and apellido='$apellido_huesped_sin_editar'";
         $comentario = "Verificar si existe el nombre del huesped";
         $consulta_existe = $this->realizaConsulta($existe,$comentario);
         if(mysqli_num_rows($consulta_existe)==0){
-          //ya existe.
+          //no existe.
           $sentencia = "INSERT INTO `huesped` (`nombre`, `apellido`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `telefono`, `correo`, `contrato`, `cupon`, `preferencias`, `comentarios`, `titular_tarjeta`,`tipo_tarjeta`, `numero_tarjeta`, `vencimiento_mes`, `vencimiento_ano`, `cvv`, `visitas`, 
           `estado_huesped`,`pais`,`empresa`,`nombre_tarjeta`,`estado_tarjeta`,`voucher`,`estado_credito`,`limite_credito`,`indole_tarjeta`)
           VALUES ('$nombre', '$apellido', '$direccion', '$ciudad', '$estado','$codigo_postal', '$telefono', '$correo', '$contrato', '$cupon', '$preferencias', '$comentarios', '$titular_tarjeta', '$tipo_tarjeta', '$numero_tarjeta', '$vencimiento_mes', '$vencimiento_ano', 
@@ -481,7 +485,7 @@
         , tipo_tarjeta = '$tipo_tarjeta' , numero_tarjeta = IF('$numero_tarjeta' ='', numero_tarjeta, '$numero_tarjeta'), vencimiento_mes = '$vencimiento_mes', vencimiento_ano = '$vencimiento_ano'
         , cvv = '$cvv', voucher = '$voucher', estado_credito='$estado_credito',limite_credito='$limite_credito' , indole_tarjeta = IF('$indole_tarjeta' ='', indole_tarjeta, '$indole_tarjeta')
         WHERE id='$huesped_id'";
-        // echo $sentencia;
+        //echo $sentencia;
         $comentario="actualizamos el huesped en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if(!$consulta){
