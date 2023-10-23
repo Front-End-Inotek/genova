@@ -7652,7 +7652,7 @@ function generar_facturas_global(){
         url: "includes/factura_global_form.php",
         data: { lista_id_tickets: lista_id_tickets, total: total },
         success: function(response){
-            console.log(response)
+            //console.log(response)
             alert("Alertas generadas con exito")
         }
     })
