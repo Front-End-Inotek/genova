@@ -7633,19 +7633,26 @@ function generar_facturas_global(){
             total=total+parseInt(leer_total.value);
         }
     }
+    localStorage.setItem('lista_id_tickets', lista_id_tickets);
+    localStorage.setItem('total', total);
     console.log("facturas generadas");
-    const facturas = ""
     $.ajax({
         async: true,
         type: "POST",
         dataType: "html",
         contentType: "application/x-ww-form-urlencoded",
-        url: "includes/",
-        data: facturas,
+        url: "includes/factura_global_form.php",
+        data: { lista_id_tickets: lista_id_tickets, total: total },
         success: function(response){
+            console.log(response)
             alert("Alertas generadas con exito")
         }
     })
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets);
+    closeNav();
 }
 
 // Hacer un corte
