@@ -127,7 +127,7 @@
             }
           echo '</div></div>
           <div>
-            <button class="btn btn-info">
+            <button class="btn btn-info" onclick="factura_hab()">
               Factura
             </button>
           </div>

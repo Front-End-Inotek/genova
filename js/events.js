@@ -7531,6 +7531,14 @@ function factura_individual(){
     $("#area_trabajo_menu").load("includes/factura_individual.php");
     closeNav();
 }
+function factura_hab(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_hab.php");
+    closeNav();
+}
 function factura_global_form(){
     //usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
