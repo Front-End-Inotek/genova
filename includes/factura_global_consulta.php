@@ -19,7 +19,9 @@
     //Primera tabla
     echo '<div class="contenedor_tablas_1_facturas">
           <h2 class="titulo_tabla_facturas">Facturas en habitacion</h2>
+          <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_facturacion" value="1"/></p>
     ';
+    
     foreach ($lista_tickets as $fila) {
       if($fila['facturado'] == 0) {
       echo '

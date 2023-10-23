@@ -2,12 +2,15 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $total = $_POST["total"];
         $listaId = $_POST["listaId"];
+        $tipo=$_POST["tipo"];
         // Procesar los parámetros
     } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
         $total = $_GET["total"];
         $listaId = $_GET["listaId"];
+        $tipo = $_GET["tipo"];
         // Procesar los parámetros
     }
+    //echo $tipo;
     include("clase_factura.php");
     $fact = NEW factura ();
     if(isset($_GET['fila'])){
@@ -38,8 +41,19 @@
                     </div>
     <!--             Imput RFC -->
                     <div class="form-floating mb-2">
-                        <input type="text" id="rfc" name ="rfc[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="buscar_rfc()" placeholder="RFC" >
-                        <label  for="rfc"  id="inputGroup-sizing-default"  >RFC </label>
+                        ';
+                        if($tipo==1){
+                            echo'
+                                <input type="text" id="rfc" name ="rfc[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="buscar_rfc()" value="XAXX010101000" placeholder="RFC" >
+                                <label  for="rfc"  id="inputGroup-sizing-default"  >RFC </label>
+                            ';
+                        }else{
+                            echo'
+                                <input type="text" id="rfc" name ="rfc[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="buscar_rfc()"  placeholder="RFC" >
+                                <label  for="rfc"  id="inputGroup-sizing-default"  >RFC </label>
+                            ';
+                        }
+                        echo'
                     </div>
     <!--             Imput Nombre -->
                     <div class="form-floating mb-2">
@@ -278,6 +292,7 @@
             </div>
 
         <script>
+            buscar_rfc()
             cal()
         </script>
     ';
