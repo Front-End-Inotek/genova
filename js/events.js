@@ -202,7 +202,7 @@ function cargar_area_trabajo(){
     function pregunta_salir(){
     swal({
         title: "¿Estás de acuerdo en cerrar la sesión?",
-        text: "¡Podrás iniciar sesion siempre que quieras y tus credenciales sean correctas!",
+        text: "¡Podrás iniciar sesión siempre que quieras y tus credenciales sean correctas!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
