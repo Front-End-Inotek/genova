@@ -103,7 +103,6 @@
           // Salto de línea
           $this->Ln(18);
       }
-      
       // Pie de página
       function Footer()
       {
@@ -116,7 +115,7 @@
       }
   }
 
-  // Fecha y datos generales 
+  // Fecha y datos generales
   $pdf = new PDF();
   $pdf->AliasNbPages();
   $pdf->AddPage();
@@ -127,7 +126,6 @@
   $mes= $logs->formato_fecha($mes);
   $anio = substr($fecha, 6, 4);
   $anio_hora = substr($fecha, 6, 13);
-  
   // Datos dentro de la tabla hospedaje
   $x_inicial=$pdf->GetX();
   $y_inicial=$pdf->GetY();
@@ -159,7 +157,6 @@
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_cuartos_hospedaje, 2)),1,1,'C',True);
   $pdf->SetFillColor(99, 155, 219);
   $pdf->Ln(6);
- 
   // Datos dentro de la tabla totales
   $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(20, 31, 102);
@@ -175,7 +172,7 @@
   $conceptos[0]= 'Habitaciones';
   $conceptos[1]= 'Restaurante';
   $conceptos[2]= 'Total';
-  $total= array(); 
+  $total= array();
   $total[0]= $inf->total_hab;
   $total[1]= $inf->total_restaurante_entrada;
   $total[2]= $inf->total_global;
@@ -190,7 +187,6 @@
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_global, 2)),1,1,'C',True);
   $pdf->SetFillColor(99, 155, 219);
   $pdf->Ln(6);
- 
   // Datos dentro de la tabla desgloce en sistema
   $pdf->SetFont('Arial','B',8);
   $pdf->SetTextColor(20, 31, 102);
@@ -214,11 +210,11 @@
       $x_final=$pdf->GetX();
       $y_final=$pdf->GetY();
       $pdf->SetXY($x_inicial,$y_inicial);
-      $pdf->SetFont('Arial','B',8);
+      $pdf->SetFont('Arial','',8);
       $pdf->SetTextColor(20, 31, 102);
       $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
       $pdf->Cell(106,8,iconv("UTF-8", "ISO-8859-1",'Ventas Restaurante'),0,1,'C');
-      $pdf->SetFont('Arial','B',7);
+      $pdf->SetFont('Arial','',7);
       $pdf->SetTextColor(255, 255, 255);
       $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
       $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",'Producto'),1,0,'C',True);
@@ -243,7 +239,6 @@
           $total_productos= $total_productos + $inf->producto_venta[$z];
           $total_productos_hab= $total_productos_hab + $inf->producto_tipo_hab[$z];
           $total_productos_rest= $total_productos_rest + $inf->producto_tipo_rest[$z];
-          
           /*if($z == 4){
             for ($i = 1; $i <= 24; $i++) {
                 $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
@@ -277,13 +272,9 @@
       $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$total_productos_rest),1,1,'C',True);
       $pdf->SetFillColor(99, 155, 219);
   }
-  
   $nueva_etiqueta= $labels->obtener_corte();
   //$nueva_etiqueta= $nueva_etiqueta - 1;
   $corte_id= $corte->ultima_insercion();
-
-
-
   $hoy = date('Y-m-d');
   // Cambiar concepto a inactivo
   $concepto->cambiar_activoGlobal($_POST['usuario_id']);
@@ -294,8 +285,7 @@
   $ticket->editar_estadoGlobal($_POST['usuario_id'],$corte_id,2);
   $labels->actualizar_etiqueta_corte();
   $cuenta->editar_estadoGlobal($_POST['usuario_id']);
-  $logs->guardar_log($_POST['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio); 
-  
+  $logs->guardar_log($_POST['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio);
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","F");
 ?>
