@@ -15,7 +15,7 @@
     $lista_Id_tickets=array();
     $Diccionario_Conseptos_Hospedajes = array();
     $Diccionario_Conseptos_Restaurante = array();
-    $contadoriteraciones=1;
+    $contadoriteraciones=0;
     //Primera tabla
     echo '<div class="contenedor_tablas_1_facturas">
           <h2 class="titulo_tabla_facturas">Facturas en habitacion</h2>

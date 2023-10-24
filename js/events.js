@@ -7633,7 +7633,7 @@ function generar_facturas_global(){
     var lista_id_tickets=[];
     var total=0;
     var bandera_facturacion=document.getElementById("leer_facturacion").value;
-    for (let i = 1; i < index; i++) {
+    for (let i = 0; i < index; i++) {
         var checkBox_status=document.getElementById("leer_check_"+i)
         var id_ticket=document.getElementById("leer_id_"+i);
         var leer_total=document.getElementById("leer_total_"+i);

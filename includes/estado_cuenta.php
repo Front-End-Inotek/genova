@@ -127,7 +127,7 @@
             }
           echo '</div></div>
           <div>
-            <button class="btn btn-info" onclick="factura_hab()">
+            <button class="btn btn-info" onclick="generar_facturas_global()">
               Factura
             </button>
           </div>

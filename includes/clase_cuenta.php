@@ -99,11 +99,11 @@
 
 
       // Guardar la cuenta
-      function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono){
+      function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono,$id_ticket=0){
         $fecha=time();
         $descripcion = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
-        $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-        VALUES ('$usuario_id', '$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
+        $sentencia = "INSERT INTO `cuenta` (`id_usuario`,id_ticket, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+        VALUES ('$usuario_id',$id_ticket ,'$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
         $comentario="Guardamos la cuenta en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
@@ -800,6 +800,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     </tr>';
                   }
               }
+              //var_dump($fila);
                 if($fila['edo'] == 1){
                   $total_abonos= $total_abonos + $fila['abono'];
                   if($descripcion == 'Total reservacion'){
@@ -816,10 +817,15 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
-                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos" > </td>
+                    hola
+                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos " id="leer_check_'.+$c.'"> 
+                        <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
+                    </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['abono'], 2).'</td>
+                    <td>$'.number_format($fila['abono'], 2).'
+                        <input class="d-none" type="number" id="leer_total_'.+$c.'" value='.$fila['abono'].' >
+                    </td>
                     <td>'.$fila['descripcion'].'</td>
                     <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
                     </tr>';
@@ -838,6 +844,8 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
               }
               echo '
             </tbody>
+            <input class="d-none" type="number" id="leer_iteraciones" value='.$c.' readonly>
+            <input class="d-none" type="number" id="leer_facturacion" value="0" readonly>
           </table>
         </div>';
         return $total_abonos;
