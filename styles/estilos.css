@@ -1551,6 +1551,9 @@ select[disabled]{
 .ticket_colum_color{
   background-color: #F5F5F7 !important;
 }
+.ticket_colum_color:hover {
+  color: inherit;
+}
 .ticket_tabla_contenedor{
   display: flex;
   flex-direction: column;
