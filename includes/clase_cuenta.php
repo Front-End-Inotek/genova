@@ -817,7 +817,6 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     </tr>';
                   }else{
                     echo '<tr class="fuente_menor text-center">
-                    hola
                     <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos " id="leer_check_'.+$c.'"> 
                         <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
                     </td>
