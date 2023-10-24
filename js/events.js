@@ -7656,7 +7656,13 @@ function generar_facturas_global(){
             data: { lista_id_tickets: lista_id_tickets, total: total },
             success: function(response){
                 //console.log(response)
-                alert("Alertas generadas con exito")
+                //alert("Alertas generadas con exito")
+                swal({
+                    title: "",
+                    icon: "warning",
+                    confirmButtonText: "Aceptar",
+                    dangerMode: true,
+                })
             }
         })
         $('#area_trabajo').hide();
@@ -7665,7 +7671,12 @@ function generar_facturas_global(){
         $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets+"&tipo="+bandera_facturacion);
         closeNav();
     }else{
-        alert("porfavor selecciona los datos que quieres facturar")
+        swal({
+            title: "Por favor selecciona los datos que quieres facturar",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            dangerMode: true,
+        })
     }
     
 }
