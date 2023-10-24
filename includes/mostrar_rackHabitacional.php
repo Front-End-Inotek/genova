@@ -488,7 +488,12 @@ class RackHabitacional extends ConexionMYSql
                         }
                         $inicio = new DateTime(date('Y-m-d'));
                         $fin = new DateTime(date('Y-m-d', $fila['fin']));
-                        $noches = $fin->diff($inicio)->format("%a");
+                        $tiempoUnix= time();
+                        if($fila['fin']>=$tiempoUnix){
+                            $noches = $fin->diff($inicio)->format("%a");
+                        }else{
+                            $noches=0;
+                        }
                         $tiempo_aux = time();
                         $noches = $noches == 0 ? 1 : $noches;
                         echo '';
