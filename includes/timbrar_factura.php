@@ -5,6 +5,7 @@ $fact = NEW factura ();
 $resultado=$fact->rfc_propio();
 //$resultado=mysqli_query($con,$consulta);
 $row=mysqli_fetch_array($resultado);
+//var_dump($row);
 
 $folio=1;
 
@@ -59,9 +60,9 @@ $datos['PAC']['pass'] = $row['passpac'];    //BASE DE DATOS
 $datos['PAC']['produccion'] = 'NO';
 
 // Rutas y clave de los CSD
-$datos['conf']['cer'] = '../../sdk2/certificados/00001000000511032961.cer';
-$datos['conf']['key'] = '../../sdk2/certificados/HAO770222B99.key';
-$datos['conf']['pass'] = 'isabel51';
+$datos['conf']['cer'] = $row['cer'];
+$datos['conf']['key'] = $row['key'];
+$datos['conf']['pass'] = $row["passkey"];
 
 // Datos de la Factura
 $datos['factura']['condicionesDePago'] = 'CONDICIONES';
@@ -80,9 +81,9 @@ $datos['factura']['total'] = $rtotal;   //TOTAL
 $datos['factura']['Exportacion'] = '01';
 
 // Datos del Emisor
-$datos['emisor']['rfc'] = 'HAO770222B99'; //RFC DE PRUEBA
-$datos['emisor']['nombre'] = 'HOTEL ABASTOS OCCIDENTE';  // EMPRESA DE PRUEBA
-$datos['emisor']['RegimenFiscal'] = '601';
+$datos['emisor']['rfc'] = $row["rfc"]; //RFC DE PRUEBA
+$datos['emisor']['nombre'] = $row["nombre"];  // EMPRESA DE PRUEBA
+$datos['emisor']['RegimenFiscal'] = $row["regimen_fiscal"];
 
 // Datos del Receptor
 /*$datos['receptor']['rfc'] = $rfc['0'];
@@ -91,12 +92,12 @@ $datos['receptor']['UsoCFDI'] = $rfc['4'];
 $datos['receptor']['DomicilioFiscalReceptor'] = $rfc['2'];
 $datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];*/
 
-$datos['receptor']['rfc'] = 'XAXX010101000';
-$datos['receptor']['nombre'] = 'Publico en General';
-$datos['receptor']['UsoCFDI'] = 'S01';
-$datos['receptor']['DomicilioFiscalReceptor'] ='44900';
-$datos['receptor']['RegimenFiscalReceptor'] = '616';
-
+$datos['receptor']['rfc'] = $rfc['0'];
+$datos['receptor']['nombre'] = $rfc['1'];
+$datos['receptor']['UsoCFDI'] = $rfc['4'];
+$datos['receptor']['DomicilioFiscalReceptor'] = $rfc['2'];
+$datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];
+var_dump($datos);
 //Informacion Global
 if($rfc['11'] > 0){
     $datos['InformacionGlobal']['Periodicidad'] = $rfc['9'];
