@@ -5,7 +5,6 @@ $fact = NEW factura ();
 $resultado=$fact->rfc_propio();
 //$resultado=mysqli_query($con,$consulta);
 $row=mysqli_fetch_array($resultado);
-//var_dump($row);
 
 $folio=1;
 
@@ -60,6 +59,9 @@ $datos['PAC']['pass'] = $row['passpac'];    //BASE DE DATOS
 $datos['PAC']['produccion'] = 'NO';
 
 // Rutas y clave de los CSD
+/*$datos['conf']['cer'] = '../../sdk2/certificados/00001000000510019114.cer';
+$datos['conf']['key'] = '../../sdk2/certificados/CSD_BELISARIO_GBE1803058Z3_20211123_105435.key';
+$datos['conf']['pass'] = 'GBE180305';*/
 $datos['conf']['cer'] = $row['cer'];
 $datos['conf']['key'] = $row['key'];
 $datos['conf']['pass'] = $row["passkey"];
@@ -70,7 +72,7 @@ $datos['factura']['descuento'] = '0.00';
 $datos['factura']['fecha_expedicion'] = date('Y-m-d\TH:i:s', time() - 120);
 $datos['factura']['folio'] = $row2[0]+1;    //BASE DE DATOS
 $datos['factura']['forma_pago'] = '01';    //RFC
-$datos['factura']['LugarExpedicion'] = '44900';    //CODIGO POSTAL
+$datos['factura']['LugarExpedicion'] = $row['codigo_postal'];    //CODIGO POSTAL
 $datos['factura']['metodo_pago'] = "PUE";    //METODO DE PAGO
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
@@ -95,15 +97,8 @@ $datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];*/
 $datos['receptor']['rfc'] = $rfc['0'];
 $datos['receptor']['nombre'] = $rfc['1'];
 $datos['receptor']['UsoCFDI'] = $rfc['4'];
-$datos['receptor']['DomicilioFiscalReceptor'] = $rfc['2'];
+$datos['receptor']['DomicilioFiscalReceptor'] = "".$rfc['2'];
 $datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];
-var_dump($datos);
-//Informacion Global
-if($rfc['11'] > 0){
-    $datos['InformacionGlobal']['Periodicidad'] = $rfc['9'];
-    $datos['InformacionGlobal']['Meses'] = $rfc['10'];
-    $datos['InformacionGlobal']['Año'] = $rfc['11'];
-}
 
 for ($i=1; $i <= $contador ; $i++) {
     if($cantidad[$i] > 0 && $importeuni[$i] > 0){
@@ -172,16 +167,16 @@ $row3=mysqli_fetch_array($resultado3);
     if(mysqli_num_rows($resultado3) < 0){
         //echo var_dump('El usuario ya existe');
         $consulta4="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`)
-        VALUES ('$regimenfiscal','$rfc','$nombre','','$codigopostal','$email','','','','','','','')";
+        VALUES ('$regimenfiscal','$rfc','$rfc[1]','','$codigopostal','$email','','','','','','','')";
         $resultado4=mysqli_query($con,$consulta4);
     }
 
 
     if($res['cancelada']=='NO'){
-        $consulta4="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`)
-        VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$formapago')";
-        $resultado4=mysqli_query($con,$consulta4);
 
+        $fact->guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6]);
+       
+       
         echo $res['cancelada'];
         
     }else{
