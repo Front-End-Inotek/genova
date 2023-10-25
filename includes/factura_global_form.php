@@ -292,13 +292,9 @@
 
     </form>
             </div>
-
-            
         <script>
             buscar_rfc()
             cal()
         </script>
     ';
-
-
 ?>
