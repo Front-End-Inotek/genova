@@ -1551,6 +1551,9 @@ select[disabled]{
 .ticket_colum_color{
   background-color: #F5F5F7 !important;
 }
+.ticket_colum_color:hover {
+  color: inherit;
+}
 .ticket_tabla_contenedor{
   display: flex;
   flex-direction: column;
@@ -1580,3 +1583,25 @@ select[disabled]{
   letter-spacing: .004em;
   color: black;
 }
+
+/* Loader */
+.loader {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 20px solid;
+  border-color: rgba(0, 217, 251, 1) rgba(0, 188, 252, 1) rgba(0, 160, 253, 1) rgba(0, 102, 255, 1);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

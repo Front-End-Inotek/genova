@@ -211,7 +211,7 @@ setlocale(LC_ALL, "es_ES");
                                 $earlier = new DateTime(date('Y-m-d'));
                                 $later = new DateTime(date('Y-m-d', $fila['detalle_fin']));
                                 $noches_uso = $later->diff($earlier)->format("%a");
-                                // echo $noches_uso;
+                                //echo $noches_uso;
                                 if($contador_row==0) {
                                     $adicional=86400;
                                     echo '

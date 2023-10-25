@@ -5147,7 +5147,13 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
     alert(estado);
     alert(faltante);*/
     var usuario_id=localStorage.getItem("id");
-    var descripcion= encodeURI(document.getElementById("descripcion").value);
+    var descripcion= "";
+    if(document.getElementById("leer_tipo_abono").value=="value2"){
+        descripcion="Abono restaurante";
+    }
+    else if(document.getElementById("leer_tipo_abono").value=="value3"){
+        descripcion="Abono hospedaje";
+    }
     var forma_pago= document.getElementById("forma_pago").value;
     var cargo= document.getElementById("cargo").value;
     var abono= document.getElementById("abono").value;
@@ -7633,6 +7639,7 @@ function generar_facturas_global(){
     var lista_id_tickets=[];
     var total=0;
     var bandera_facturacion=document.getElementById("leer_facturacion").value;
+    
     for (let i = 0; i < index; i++) {
         var checkBox_status=document.getElementById("leer_check_"+i)
         var id_ticket=document.getElementById("leer_id_"+i);
@@ -7645,23 +7652,39 @@ function generar_facturas_global(){
     localStorage.setItem('lista_id_tickets', lista_id_tickets);
     localStorage.setItem('total', total);
     console.log("facturas generadas");
-    $.ajax({
-        async: true,
-        type: "POST",
-        dataType: "html",
-        contentType: "application/x-ww-form-urlencoded",
-        url: "includes/factura_global_form.php",
-        data: { lista_id_tickets: lista_id_tickets, total: total },
-        success: function(response){
-            //console.log(response)
-            alert("Alertas generadas con exito")
-        }
-    })
-    $('#area_trabajo').hide();
-    $('#pie').hide();
-    $('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets+"&tipo="+bandera_facturacion);
-    closeNav();
+    if (total>0){
+        $.ajax({
+            async: true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-ww-form-urlencoded",
+            url: "includes/factura_global_form.php",
+            data: { lista_id_tickets: lista_id_tickets, total: total },
+            success: function(response){
+                //console.log(response)
+                //alert("Alertas generadas con exito")
+                /* swal({
+                    title: "",
+                    icon: "warning",
+                    confirmButtonText: "Aceptar",
+                    dangerMode: true,
+                }) */
+                console.log("Factura generada con exito")
+            }
+        })
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets+"&tipo="+bandera_facturacion);
+        closeNav();
+    }else{
+        swal({
+            title: "Por favor selecciona los datos que quieres facturar",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            dangerMode: true,
+        })
+    }
 }
 
 // Hacer un corte
