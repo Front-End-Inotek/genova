@@ -6,10 +6,10 @@ $resultado=$fact->rfc_propio();
 //$resultado=mysqli_query($con,$consulta);
 $row=mysqli_fetch_array($resultado);
 
-$folio=1;
+//$folio=1;
 
 
-$numfolio=$fact->obtener_folio_factura();
+$numfolio=$fact->obtener_folio_factura()+1;
 
 
 $rfc = $_POST['rfc'];
@@ -70,7 +70,7 @@ $datos['conf']['pass'] = $row["passkey"];
 $datos['factura']['condicionesDePago'] = 'CONDICIONES';
 $datos['factura']['descuento'] = '0.00';
 $datos['factura']['fecha_expedicion'] = date('Y-m-d\TH:i:s', time() - 120);
-$datos['factura']['folio'] = $row2[0]+1;    //BASE DE DATOS
+$datos['factura']['folio'] = $numfolio;    //BASE DE DATOS
 $datos['factura']['forma_pago'] = '01';    //RFC
 $datos['factura']['LugarExpedicion'] = $row['codigo_postal'];    //CODIGO POSTAL
 $datos['factura']['metodo_pago'] = "PUE";    //METODO DE PAGO
@@ -147,7 +147,7 @@ echo "</pre>";*/
 $res = mf_genera_cfdi4($datos);
 ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
 $rfcval = $rfc['0'];
-$folios = $row2[0]+1;
+$folios = $numfolio;
 
 $regimenfiscal = $rfc['3'];
 
@@ -178,6 +178,7 @@ $row3=mysqli_fetch_array($resultado3);
        
        
         echo $res['cancelada'];
+        //var_dump($datos);
         
     }else{
         echo $res['mensaje_original_pac_json'];

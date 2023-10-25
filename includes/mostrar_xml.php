@@ -9,7 +9,7 @@ $row2=mysqli_fetch_array($resultado2);
 $numfolio =$row2[0];
 
 header("Location: ../facturas/{$numfolio}_cfdi_factura.xml");
-
+ 
 
 
 ?>
