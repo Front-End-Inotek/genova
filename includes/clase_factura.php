@@ -95,6 +95,13 @@
       }
       return $folio;
     }
+    function folio(){
+      $sentencia = "SELECT folio FROM facturas ORDER BY id DESC LIMIT 1 ";
+      $comentario="sacar el ultimo folio ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
     function mes(){
       $sentencia = "SELECT * FROM mes";
       $comentario="mes ";

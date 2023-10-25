@@ -146,7 +146,7 @@ echo "</pre>";*/
 //$res = mf_genera_cfdi($datos);
 $res = mf_genera_cfdi4($datos);
 ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
-$rfc = $rfc['0'];
+$rfcval = $rfc['0'];
 $folios = $row2[0]+1;
 
 $regimenfiscal = $rfc['3'];
@@ -174,7 +174,7 @@ $row3=mysqli_fetch_array($resultado3);
 
     if($res['cancelada']=='NO'){
 
-        $fact->guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6]);
+        $fact->guardar_factura($rfcval,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6]);
        
        
         echo $res['cancelada'];
