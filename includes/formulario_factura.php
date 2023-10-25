@@ -121,11 +121,7 @@
             </div>
         </div>
 <!--         Columna 2 Datos del documento a facturar-->
-        <center>
-        <div id="animacion_formulario" class="spinner-border" style="width: 24rem; height: 24rem; margin-left:50%; margin-right: 50%; display:none; align-items: center;" role="status">
-        <span class="sr-only">Loading...</span>
-        </div>
-        </center>
+
 
         <div class="dinamic col-xl-9" id="dinamic" style="max-height:460px; overflow-y: scroll;">
         <div class="form-row" >
@@ -238,10 +234,5 @@
         </div>
     </div>
     <br>
-    <center><button class="btn btn-secondary" id="animacion_timbrar" type="button" style="margin-left: 180px; width: 550px; display:none">
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Cargando...
-            </button></center>
-    <center><button type="button" class="btn btn-secondary btn-lg" id="timbrar" name ="timbrar" onclick="timbrar_factura()" style="margin-left: 180px; width: 550px;">Timbrar&nbsp;Factura</button></center>
-    <!--<center><button type="submit" class="btn btn-secondary btn-lg" style="width: 550px;">Timbrar&nbsp;Factura</button></center>-->
+    <button type="button" class="btn btn-secondary btn-lg" id="timbrar" name ="timbrar" onclick="timbrar_factura()" style="margin-left: 180px; width: 550px;">Timbrar&nbsp;Factura</button>
 </form>

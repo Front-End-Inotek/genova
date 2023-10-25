@@ -7663,12 +7663,13 @@ function generar_facturas_global(){
             success: function(response){
                 //console.log(response)
                 //alert("Alertas generadas con exito")
-                swal({
+                /* swal({
                     title: "",
                     icon: "warning",
                     confirmButtonText: "Aceptar",
                     dangerMode: true,
-                })
+                }) */
+                console.log("Factura generada con exito")
             }
         })
         $('#area_trabajo').hide();
@@ -7684,7 +7685,6 @@ function generar_facturas_global(){
             dangerMode: true,
         })
     }
-    
 }
 
 // Hacer un corte

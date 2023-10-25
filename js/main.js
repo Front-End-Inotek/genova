@@ -28,7 +28,7 @@ function buscar_rfc(){
 
 function ocultar_animacion() {
     document.getElementById("animacion_formulario").style.display='none';
-    document.getElementById("animacion_timbrar").style.display='none';
+    //document.getElementById("animacion_timbrar").style.display='none';
 
     document.getElementById("dinamic").style.display='block';
     document.getElementById("timbrar").style.display='block';
@@ -36,7 +36,7 @@ function ocultar_animacion() {
 
 function mostrar_animacion() {
     document.getElementById("animacion_formulario").style.display='block';
-    document.getElementById("animacion_timbrar").style.display='block';
+    //document.getElementById("animacion_timbrar").style.display='block';
 
     document.getElementById("timbrar").style.display='none';
     document.getElementById("dinamic").style.display='none';
@@ -123,6 +123,7 @@ function timbrar_factura(){
 
 function mandartimbre (){
     mostrar_animacion();
+
     //Declaramos una variable que contendra nuestro formulario
     form = document.getElementById('formfactura');
     //Declaramos una constante que contendra XMLHttpRequest(); intercambia datos detras de escena
