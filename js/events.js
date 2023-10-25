@@ -5147,7 +5147,13 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
     alert(estado);
     alert(faltante);*/
     var usuario_id=localStorage.getItem("id");
-    var descripcion= encodeURI(document.getElementById("descripcion").value);
+    var descripcion= "";
+    if(document.getElementById("leer_tipo_abono").value=="value2"){
+        descripcion="Abono restaurante";
+    }
+    else if(document.getElementById("leer_tipo_abono").value=="value3"){
+        descripcion="Abono hospedaje";
+    }
     var forma_pago= document.getElementById("forma_pago").value;
     var cargo= document.getElementById("cargo").value;
     var abono= document.getElementById("abono").value;

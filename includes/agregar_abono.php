@@ -43,7 +43,7 @@
         <div class="col-sm-7">
         <div class="form-group">
           <!-- <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="30"> -->
-          <select name="select" class="form-select" aria-label="opcion">
+          <select name="select" id="leer_tipo_abono" class="form-select" aria-label="opcion">
             <option value="value1" selected disable>Selecciona una opción</option>
             <option value="value2">Abono restaurante</option>
             <option value="value3">Abono hospedaje</option>
