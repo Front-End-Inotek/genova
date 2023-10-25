@@ -78,6 +78,12 @@
       return $consulta;
 
     }
+    function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago){
+      $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`)
+      VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago')";
+      $comentario="rfc_propio ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+    }
     function obtener_folio_factura(){
       $folio=0;
       $sentencia="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";
@@ -88,6 +94,13 @@
         $folio=$fila['folio']+1;
       }
       return $folio;
+    }
+    function folio(){
+      $sentencia = "SELECT folio FROM facturas ORDER BY id DESC LIMIT 1 ";
+      $comentario="sacar el ultimo folio ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
     }
     function mes(){
       $sentencia = "SELECT * FROM mes";

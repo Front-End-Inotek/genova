@@ -59,9 +59,12 @@ $datos['PAC']['pass'] = $row['passpac'];    //BASE DE DATOS
 $datos['PAC']['produccion'] = 'NO';
 
 // Rutas y clave de los CSD
-$datos['conf']['cer'] = '../../sdk2/certificados/00001000000510019114.cer';
+/*$datos['conf']['cer'] = '../../sdk2/certificados/00001000000510019114.cer';
 $datos['conf']['key'] = '../../sdk2/certificados/CSD_BELISARIO_GBE1803058Z3_20211123_105435.key';
-$datos['conf']['pass'] = 'GBE180305';
+$datos['conf']['pass'] = 'GBE180305';*/
+$datos['conf']['cer'] = $row['cer'];
+$datos['conf']['key'] = $row['key'];
+$datos['conf']['pass'] = $row["passkey"];
 
 // Datos de la Factura
 $datos['factura']['condicionesDePago'] = 'CONDICIONES';
@@ -69,7 +72,7 @@ $datos['factura']['descuento'] = '0.00';
 $datos['factura']['fecha_expedicion'] = date('Y-m-d\TH:i:s', time() - 120);
 $datos['factura']['folio'] = $row2[0]+1;    //BASE DE DATOS
 $datos['factura']['forma_pago'] = '01';    //RFC
-$datos['factura']['LugarExpedicion'] = '44700';    //CODIGO POSTAL
+$datos['factura']['LugarExpedicion'] = $row['codigo_postal'];    //CODIGO POSTAL
 $datos['factura']['metodo_pago'] = "PUE";    //METODO DE PAGO
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
@@ -80,9 +83,9 @@ $datos['factura']['total'] = $rtotal;   //TOTAL
 $datos['factura']['Exportacion'] = '01';
 
 // Datos del Emisor
-$datos['emisor']['rfc'] = 'GBE1803058Z3'; //RFC DE PRUEBA
-$datos['emisor']['nombre'] = 'GRUPO BELISARIO';  // EMPRESA DE PRUEBA
-$datos['emisor']['RegimenFiscal'] = '601';
+$datos['emisor']['rfc'] = $row["rfc"]; //RFC DE PRUEBA
+$datos['emisor']['nombre'] = $row["nombre"];  // EMPRESA DE PRUEBA
+$datos['emisor']['RegimenFiscal'] = $row["regimen_fiscal"];
 
 // Datos del Receptor
 /*$datos['receptor']['rfc'] = $rfc['0'];
@@ -91,18 +94,11 @@ $datos['receptor']['UsoCFDI'] = $rfc['4'];
 $datos['receptor']['DomicilioFiscalReceptor'] = $rfc['2'];
 $datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];*/
 
-$datos['receptor']['rfc'] = 'XAXX010101000';
-$datos['receptor']['nombre'] = 'Publico en General';
-$datos['receptor']['UsoCFDI'] = 'S01';
-$datos['receptor']['DomicilioFiscalReceptor'] ='44700';
-$datos['receptor']['RegimenFiscalReceptor'] = '616';
-
-//Informacion Global
-if($rfc['11'] > 0){
-    $datos['InformacionGlobal']['Periodicidad'] = $rfc['9'];
-    $datos['InformacionGlobal']['Meses'] = $rfc['10'];
-    $datos['InformacionGlobal']['Año'] = $rfc['11'];
-}
+$datos['receptor']['rfc'] = $rfc['0'];
+$datos['receptor']['nombre'] = $rfc['1'];
+$datos['receptor']['UsoCFDI'] = $rfc['4'];
+$datos['receptor']['DomicilioFiscalReceptor'] = "".$rfc['2'];
+$datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];
 
 for ($i=1; $i <= $contador ; $i++) {
     if($cantidad[$i] > 0 && $importeuni[$i] > 0){
@@ -150,7 +146,7 @@ echo "</pre>";*/
 //$res = mf_genera_cfdi($datos);
 $res = mf_genera_cfdi4($datos);
 ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
-$rfc = $rfc['0'];
+$rfcval = $rfc['0'];
 $folios = $row2[0]+1;
 
 $regimenfiscal = $rfc['3'];
@@ -171,16 +167,16 @@ $row3=mysqli_fetch_array($resultado3);
     if(mysqli_num_rows($resultado3) < 0){
         //echo var_dump('El usuario ya existe');
         $consulta4="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`)
-        VALUES ('$regimenfiscal','$rfc','$nombre','','$codigopostal','$email','','','','','','','')";
+        VALUES ('$regimenfiscal','$rfc','$rfc[1]','','$codigopostal','$email','','','','','','','')";
         $resultado4=mysqli_query($con,$consulta4);
     }
 
 
     if($res['cancelada']=='NO'){
-        $consulta4="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`)
-        VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$formapago')";
-        $resultado4=mysqli_query($con,$consulta4);
 
+        $fact->guardar_factura($rfcval,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6]);
+       
+       
         echo $res['cancelada'];
         
     }else{
