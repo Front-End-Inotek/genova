@@ -59,9 +59,9 @@ $datos['PAC']['pass'] = $row['passpac'];    //BASE DE DATOS
 $datos['PAC']['produccion'] = 'NO';
 
 // Rutas y clave de los CSD
-$datos['conf']['cer'] = '../../sdk2/certificados/00001000000510019114.cer';
-$datos['conf']['key'] = '../../sdk2/certificados/CSD_BELISARIO_GBE1803058Z3_20211123_105435.key';
-$datos['conf']['pass'] = 'GBE180305';
+$datos['conf']['cer'] = '../../sdk2/certificados/00001000000511032961.cer';
+$datos['conf']['key'] = '../../sdk2/certificados/HAO770222B99.key';
+$datos['conf']['pass'] = 'isabel51';
 
 // Datos de la Factura
 $datos['factura']['condicionesDePago'] = 'CONDICIONES';
@@ -69,7 +69,7 @@ $datos['factura']['descuento'] = '0.00';
 $datos['factura']['fecha_expedicion'] = date('Y-m-d\TH:i:s', time() - 120);
 $datos['factura']['folio'] = $row2[0]+1;    //BASE DE DATOS
 $datos['factura']['forma_pago'] = '01';    //RFC
-$datos['factura']['LugarExpedicion'] = '44700';    //CODIGO POSTAL
+$datos['factura']['LugarExpedicion'] = '44900';    //CODIGO POSTAL
 $datos['factura']['metodo_pago'] = "PUE";    //METODO DE PAGO
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
@@ -80,8 +80,8 @@ $datos['factura']['total'] = $rtotal;   //TOTAL
 $datos['factura']['Exportacion'] = '01';
 
 // Datos del Emisor
-$datos['emisor']['rfc'] = 'GBE1803058Z3'; //RFC DE PRUEBA
-$datos['emisor']['nombre'] = 'GRUPO BELISARIO';  // EMPRESA DE PRUEBA
+$datos['emisor']['rfc'] = 'HAO770222B99'; //RFC DE PRUEBA
+$datos['emisor']['nombre'] = 'HOTEL ABASTOS OCCIDENTE';  // EMPRESA DE PRUEBA
 $datos['emisor']['RegimenFiscal'] = '601';
 
 // Datos del Receptor
@@ -94,7 +94,7 @@ $datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];*/
 $datos['receptor']['rfc'] = 'XAXX010101000';
 $datos['receptor']['nombre'] = 'Publico en General';
 $datos['receptor']['UsoCFDI'] = 'S01';
-$datos['receptor']['DomicilioFiscalReceptor'] ='44700';
+$datos['receptor']['DomicilioFiscalReceptor'] ='44900';
 $datos['receptor']['RegimenFiscalReceptor'] = '616';
 
 //Informacion Global
