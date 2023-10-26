@@ -6825,9 +6825,11 @@ function ver_cuenta_maestra(){
 function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
     var usuario_id=localStorage.getItem("id");
     const btnRest = document.getElementById("btn-restaurant");
-    btnRest.disabled = true;
-    btnRest.style.opacity = 0.7;
-    btnRest.textContent = "Procesando...";
+    if(btnRest){
+        btnRest.disabled = true ;
+        btnRest.style.opacity = 0.7;
+        btnRest.textContent = "Procesando...";
+    }
     //alert("Boton presionado")
     $("#boton_pago").html('<div class="spinner-border text-primary"></div>');
     var datos = {
