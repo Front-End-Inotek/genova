@@ -86,7 +86,7 @@ function Header()
           // Salto de línea
       $this->Ln(3);
       }
-   //$this->Image('logo.png',10,1,40);
+   $this->Image('../images/hotelexpoabastos.png',10,1,40);
 }
 
 // Pie de página

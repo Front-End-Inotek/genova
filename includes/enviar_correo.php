@@ -7,13 +7,16 @@ require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
 include 'datos_servidor.php'; //conexion con la base de datos
-
-$consulta="SELECT * FROM rfc WHERE id = '1' ";
-$resultado=mysqli_query($con,$consulta);
+include ("clase_factura.php");
+$facturacion = NEW factura();
+//$consulta="SELECT * FROM rfc WHERE id = '1' ";
+//$resultado=mysqli_query($con,$consulta);
+$resultado=$facturacion->obtener_primer_rfc();
 $row=mysqli_fetch_array($resultado);
 
-$consulta2="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1 ";
-$resultado2=mysqli_query($con,$consulta2);
+//$consulta2="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1 ";
+//$resultado2=mysqli_query($con,$consulta2);
+$resultado2=$facturacion->obtener_folio();
 $row2=mysqli_fetch_array($resultado2);
 
 $folio = $row2[0];

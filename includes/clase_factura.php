@@ -47,6 +47,20 @@
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
     }
+    function obtener_primer_rfc(){
+      $sentencia = "SELECT * FROM rfc WHERE id = '1' ";
+      $comentario="obtener el primer rfc ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
+    function obtener_folio(){
+      $sentencia = "SELECT folio FROM facturas ORDER BY id DESC LIMIT 1 ";
+      $comentario="obtener el folio ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
     function forma_pago(){
       $sentencia = "SELECT * FROM forma_pago_factura";
       $comentario="forma_pago ";
