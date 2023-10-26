@@ -1,27 +1,21 @@
 <?php
 require('../fpdf/fpdf.php');
+include("clase_factura.php");
 
 include 'datos_servidor.php'; //conexion con la base de datos
-include("clase_factura.php");
+
 $fact = NEW factura ();
 $resultado2=$fact->folio();
 $row2=mysqli_fetch_array($resultado2);
 
-$numfolio =$row2[0];
-//if(file_exists( '../facturas/'.$numfolio.'_cfdi_factura.xml')){
-      echo '../facturas/'.$numfolio.'_cfdi_factura.xml';
-      filesize('../facturas/'.$numfolio.'_cfdi_factura.xml');
-      $xml = simplexml_load_file('../facturas/'.$numfolio.'_cfdi_factura.xml');
-      $xml=simplexml_load_string($xml);
-      echo $xml;
-      /*$ns = $xml->getNamespaces(true);
-      $xml->registerXPathNamespace('cfdi', $ns['cfdi']);
-      $xml->registerXPathNamespace('t', $ns['tfd']);*/
-//}
+$folio = $row2[0];
+
+$xml = simplexml_load_file('../facturas/'.$folio.'_cfdi_factura.xml');
+$ns = $xml->getNamespaces(true);
+$xml->registerXPathNamespace('cfdi', $ns['cfdi']);
+$xml->registerXPathNamespace('t', $ns['tfd']);
 
 
-
-/*
 class PDF extends FPDF
 {
 // Cabecera de página
@@ -29,8 +23,8 @@ function Header()
 {
       include 'datos_servidor.php'; //conexion con la base de datos
 
-      $consulta2="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";
-      $resultado2=mysqli_query($con,$consulta2);
+      $fact = NEW factura ();
+      $resultado2=$fact->folio();
       $row2=mysqli_fetch_array($resultado2);
 
       $folio = $row2[0];
@@ -48,7 +42,7 @@ function Header()
       
       $this->setX(60);
       foreach ($xml->xpath('//cfdi:Emisor') as $Emisor){
-       $this->Cell(60,5, utf8_decode($Emisor['Nombre']),0,0,'L',0);
+/*DATOS DE LA HOJA*/  $this->Cell(60,5, utf8_decode($Emisor['Nombre']),0,0,'L',0);
       }
       $this->SetFont('Arial','B',10);
       $this->Cell(80,5, utf8_decode('FACTURA CFDI - VERSIÓN ').$cfdiComprobante['Version'],0,1,'R',0);
@@ -100,8 +94,8 @@ function Footer()
 {
       include 'datos_servidor.php'; //conexion con la base de datos
 
-      $consulta2="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";
-      $resultado2=mysqli_query($con,$consulta2);
+      $fact = NEW factura ();
+      $resultado2=$fact->folio();
       $row2=mysqli_fetch_array($resultado2);
 
       $folio = $row2[0];
@@ -168,27 +162,27 @@ foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){
       $pdf->Ln(3);
 
       $pdf->setX(10);
- $pdf->Cell(30,5, utf8_decode('Método de Pago: '),0,0,'L',0);
+/*DATOS DE LA HOJA*/  $pdf->Cell(30,5, utf8_decode('Método de Pago: '),0,0,'L',0);
       $pdf->SetFont('Arial','B',11);
       $pdf->Cell(60,5, $cfdiComprobante['MetodoPago'],0,0,'L',0);
       $pdf->SetFont('Arial','',10);
-  $pdf->Cell(80,5, utf8_decode('Tipo de comprobante: '),0,0,'R',0);
+/*DATOS DE LA HOJA*/  $pdf->Cell(80,5, utf8_decode('Tipo de comprobante: '),0,0,'R',0);
       $pdf->SetFont('Arial','B',11);
       $pdf->Cell(10,5, $cfdiComprobante['TipoDeComprobante'],0,1,'L',0);
 
       $pdf->setX(10);
       $pdf->SetFont('Arial','',10);
-  $pdf->Cell(30,5, utf8_decode('Forma de Pago: '),0,0,'L',0);
+/*DATOS DE LA HOJA*/  $pdf->Cell(30,5, utf8_decode('Forma de Pago: '),0,0,'L',0);
       $pdf->SetFont('Arial','B',11);
       $pdf->Cell(60,5, $cfdiComprobante['FormaPago'],0,0,'L',0);
       $pdf->SetFont('Arial','',10);
- $pdf->Cell(80,5, utf8_decode('Moneda : '),0,0,'R',0);
+/*DATOS DE LA HOJA*/  $pdf->Cell(80,5, utf8_decode('Moneda : '),0,0,'R',0);
       $pdf->SetFont('Arial','B',11);
       $pdf->Cell(90,5, $cfdiComprobante['Moneda'],0,1,'L',0);
 
       $pdf->setX(10);
       $pdf->SetFont('Arial','',10);
-  $pdf->Cell(170,5, utf8_decode('Tipo de cambio: '),0,0,'R',0);
+/*DATOS DE LA HOJA*/  $pdf->Cell(170,5, utf8_decode('Tipo de cambio: '),0,0,'R',0);
       $pdf->SetFont('Arial','B',11);
       $pdf->Cell(90,5, $cfdiComprobante['TipoCambio'],0,1,'L',0);
 
@@ -272,7 +266,7 @@ foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $Receptor){
       $pdf->Cell(20,5, utf8_decode('SubTotal'),1,0,'L',1);
       $pdf->SetFont('Arial','',11);
       $pdf->Cell(10,5, utf8_decode(' $ '). $cfdiComprobante['SubTotal'],0,1,'L',0);
-
+      /*$pdf->Cell(10,5, utf8_decode(' $ '). $cfdiComprobante['SubTotal'],0,1,'L',0,);*/
       $pdf->setX(150);
       $pdf->SetFont('Arial','B',11);
 
@@ -299,5 +293,4 @@ foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $Receptor){
 $pdf->Output();
 //$pdf->Output('F', '../facturas/'. $folio .'_Factura.pdf');
 //echo 'Gpfd';
-*/
 ?>
