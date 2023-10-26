@@ -1,10 +1,11 @@
 <?php
 require('../fpdf/fpdf.php');
+include("clase_factura.php");
 
 include 'datos_servidor.php'; //conexion con la base de datos
 
-$consulta2="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1 ";
-$resultado2=mysqli_query($con,$consulta2);
+$fact = NEW factura ();
+$resultado2=$fact->folio();
 $row2=mysqli_fetch_array($resultado2);
 
 $folio = $row2[0];
@@ -22,8 +23,8 @@ function Header()
 {
       include 'datos_servidor.php'; //conexion con la base de datos
 
-      $consulta2="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";
-      $resultado2=mysqli_query($con,$consulta2);
+      $fact = NEW factura ();
+      $resultado2=$fact->folio();
       $row2=mysqli_fetch_array($resultado2);
 
       $folio = $row2[0];
@@ -93,8 +94,8 @@ function Footer()
 {
       include 'datos_servidor.php'; //conexion con la base de datos
 
-      $consulta2="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";
-      $resultado2=mysqli_query($con,$consulta2);
+      $fact = NEW factura ();
+      $resultado2=$fact->folio();
       $row2=mysqli_fetch_array($resultado2);
 
       $folio = $row2[0];
@@ -103,7 +104,7 @@ function Footer()
       $xml->registerXPathNamespace('cfdi', $ns['cfdi']);
       $xml->registerXPathNamespace('t', $ns['tfd']);
     // Posición: a 1,5 cm del final
-    $this->SetY(-70);
+    $this->SetY(-82);
     $this->setDrawColor(176,173,172);
     $this->Cell(190,0,'','B');
     // Arial italic 8
@@ -120,6 +121,12 @@ function Footer()
       $this->Cell(50,8, utf8_decode('Fecha Timbrado'),0,1,'L',0);
       $this->SetFont('Arial','',8);
       $this->Cell(89,5, $tfd['FechaTimbrado'],0,1,'R',0);
+
+      $this->setX(70);
+      $this->SetFont('Arial','B',12);
+      $this->Cell(50,8, utf8_decode('UUID'),0,1,'L',0);
+      $this->SetFont('Arial','',8);
+      $this->Cell(116,5, $tfd['UUID'],0,1,'R',0);
 
       $this->setX(70);
       $this->SetFont('Arial','B',12);
@@ -140,7 +147,7 @@ function Footer()
       $this->SetFont('Arial','B',10);
       $this->Cell(50,5, utf8_decode('Powered By inotek.mx'),0,1,'L',0);
       
-      $this->Image('../facturas/'.$folio.'_cfdi_factura.png',5,228,60);
+      $this->Image('../facturas/'.$folio.'_cfdi_factura.png',5,223,60);
 }
 }
 }

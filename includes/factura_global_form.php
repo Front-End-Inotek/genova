@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $total = $_POST["total"];
         $listaId = $_POST["listaId"];
@@ -10,6 +11,7 @@
         $tipo = $_GET["tipo"];
         // Procesar los parámetros
     }
+    $_SESSION['lista_id_ticket'] = '$listaId';
     //echo $tipo;
     include("clase_factura.php");
     $fact = NEW factura ();
