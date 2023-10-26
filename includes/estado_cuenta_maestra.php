@@ -46,7 +46,7 @@
       <div class="container blanco" id="ec"> 
         <div class="row">
         <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="ver_cuenta_maestra()"> ←</button></div>
-          <div class="col-sm-5 text-left"><h2 class="text-dark margen-1">ESTADO DE CUENTA MAESTRA - Nombre: '.$cm->nombre.' - Código: '.$cm->codigo.'</h2></div>';
+          <div class="col-sm-5 text-left"><h4 class="text-dark margen-1">ESTADO DE CUENTA MAESTRA - Nombre: '.$cm->nombre.' - Código: '.$cm->codigo.'</h4></div>';
           if($faltante == 0){
             echo '<div class="col-sm-6 text-right"></div>';
           }else{
@@ -59,7 +59,9 @@
         echo '</div>
         <div class="row">';
           if(!empty($nombre_huesped)){
-            echo '  <div class="col-sm-4">Nombre Huesped: '.$nombre_huesped.'
+            echo '  
+            <div class="col-sm-4 row">
+            <h5>Nombre Huesped: '.$nombre_huesped.'</h5>
             <button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$_GET['id'].','.$mov.')"> Cambiar huesped</button>
             </div>
            </div>';
