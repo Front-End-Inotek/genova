@@ -1,9 +1,10 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
+  include_once('clase_ticket.php');
+ 
 
   class Cuenta extends ConexionMYSql{
-
       public $id;
       public $id_usuario;
       public $mov;
@@ -806,6 +807,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     </tr>';
                   }
               }
+              include_once('clase_ticket.php');
               //var_dump($fila);
                 if($fila['edo'] == 1){
                   $total_abonos= $total_abonos + $fila['abono'];
@@ -822,18 +824,37 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
                     </tr>';
                   }else{
-                    echo '<tr class="fuente_menor text-center">
-                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos " id="leer_check_'.+$c.'"> 
-                        <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
-                    </td>
-                    <td>'.$fila['concepto'].'</td>
-                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['abono'], 2).'
-                        <input class="d-none" type="number" id="leer_total_'.+$c.'" value='.$fila['abono'].' >
-                    </td>
-                    <td>'.$fila['descripcion'].'</td>
-                    <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
-                    </tr>';
+                    $Tickets= NEW Ticket(0);
+                    //echo $fila['id_ticket'];
+                    $estado_facturacion=$Tickets->saber_estado_facturados($fila['id_ticket'])->fetch_assoc();
+                    //var_dump($estado_facturacion);
+                    if($estado_facturacion['facturado']==0){
+                      echo '<tr class="fuente_menor text-center">
+                      <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos " id="leer_check_'.+$c.'"> 
+                          <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
+                      </td>
+                      <td>'.$fila['concepto'].'</td>
+                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>$'.number_format($fila['abono'], 2).'
+                          <input class="d-none" type="number" id="leer_total_'.+$c.'" value='.$fila['abono'].' >
+                      </td>
+                      <td>'.$fila['descripcion'].'</td>
+                      <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
+                      </tr>';
+                    }else{
+                      echo '<tr class="fuente_menor text-center">
+                      <td><input type="checkbox" disabled  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos " id="leer_check_'.+$c.'"> 
+                          <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
+                      </td>
+                      <td>'.$fila['concepto'].'</td>
+                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>$'.number_format($fila['abono'], 2).'
+                          <input class="d-none" type="number" id="leer_total_'.+$c.'" value='.$fila['abono'].' >
+                      </td>
+                      <td>'.$fila['descripcion'].'</td>
+                      <td><button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> ✏️ Editar</button></td>
+                      </tr>';
+                    }
                   }
                 }else{
                   echo '<tr class="fuente_menor table text-center">
