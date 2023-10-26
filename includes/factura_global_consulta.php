@@ -94,7 +94,7 @@
             $id_ticket=$listconceptos["id"];
             $bandera=true;*/
             echo '
-              <div class="ticket_container_header">
+              <div class="ticket_container_header disableTax">
                 <div class="ticket_container_header_input ">
                   <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" disabled/>
                 </div>
@@ -124,7 +124,7 @@
               foreach ($result as $columnas) {
                 echo'
               
-              <table class="table table-sm table-fixed">';
+              <table class="table table-sm table-fixed disableTax">';
 
               if($contador==0){
                 echo '<thead>

@@ -1605,3 +1605,9 @@ select[disabled]{
     transform: rotate(360deg);
   }
 } 
+
+
+.disableTax {
+  opacity: 0.7;
+  filter: grayscale(1);
+}
