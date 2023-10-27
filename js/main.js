@@ -571,7 +571,7 @@ function enviarcorreo(){
         theObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     
         theObject.onreadystatechange = function() {
-            document.getElementById('contenedor-formulario').innerHTML = theObject.responseText;
+            document.getElementById('contenedor-facturas').innerHTML = theObject.responseText;
         }
         theObject.send();
     }
@@ -606,8 +606,11 @@ function enviarcorreo(){
         theObject.open("GET",  "includes/buscar_facturas_fecha.php?inicial="+ inicial + "&final="+final ,true);
         theObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     
-        theObject.onreadystatechange = function() {
+        /* theObject.onreadystatechange = function() {
             document.getElementById('contenedor-formulario').innerHTML = theObject.responseText;
+        } */
+        theObject.onreadystatechange = function() {
+            document.getElementById('contenedor-facturas').innerHTML = theObject.responseText;
         }
         theObject.send();
     }

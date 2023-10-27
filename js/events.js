@@ -7569,6 +7569,7 @@ function factura_buscar_fecha(){
     $('#pie').hide();
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/factura_buscar_fecha.php");
+    //$("#area_trabajo_menu").load("includes/ver_facturas_fecha.php");
     closeNav();
 }
 function factura_buscar_folio(){
@@ -7577,6 +7578,7 @@ function factura_buscar_folio(){
     $('#pie').hide();
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/factura_buscar_folio.php");
+    //$("#area_trabajo_menu").load("includes/ver_facturas_folio.php");
     closeNav();
 }
 
