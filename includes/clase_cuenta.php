@@ -826,7 +826,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                   }else{
                     $Tickets= NEW Ticket(0);
                     //echo $fila['id_ticket'];
-                    $estado_facturacion=$Tickets->saber_estado_facturados($fila['id_ticket'])->fetch_assoc();
+                    $estado_facturacion=$Tickets->saber_estado_facturados($fila['id_ticket']->fetch_assoc());
                     //var_dump($estado_facturacion);
                     if($estado_facturacion['facturado']==0){
                       echo '<tr class="fuente_menor text-center">
