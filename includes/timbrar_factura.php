@@ -1,6 +1,7 @@
 <?php
-include("clase_factura.php");
 session_start();
+include("clase_factura.php");
+
 include_once('clase_ticket.php');
 $ticket= NEW Ticket(0);
 $fact = NEW factura ();
@@ -181,7 +182,7 @@ $row3=mysqli_fetch_array($resultado3);
        
        
         echo $res['cancelada'];
-        //var_dump($datos);¨
+       // var_dump($_SESSION['lista_id_ticket']);
         $lista=$_SESSION['lista_id_ticket'];
         for($i=0; $i<count($lista); $i++){
             $ticket->cambiar_estado_facturados($lista[$i]);

@@ -96,6 +96,7 @@
       $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`)
       VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago')";
       $comentario="rfc_propio ";
+      //echo $sentencia;
       $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
     function obtener_folio_factura(){
