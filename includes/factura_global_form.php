@@ -11,7 +11,7 @@
         $tipo = $_GET["tipo"];
         // Procesar los parámetros
     }
-    $_SESSION['lista_id_ticket'] = '$listaId';
+    $_SESSION['lista_id_ticket'] = $listaId;
     //echo $tipo;
     include("clase_factura.php");
     $fact = NEW factura ();
