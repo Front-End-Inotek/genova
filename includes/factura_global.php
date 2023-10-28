@@ -21,7 +21,11 @@ echo '
                  Buscar
                 </button>
             </div>
-            <div class="col-sm-6" id="btn_generar_factura" style="display: none;" >
+            <div class="col-sm-3" id="total_factura_global" style="display: none;">
+                <label class="col-12"><h6>Total</h6></label>
+                <h4 id="total_factura_global_number" style="color: black;" ></h4>
+            </div>
+            <div class="col-sm-3" id="btn_generar_factura" style="display: none;" >
                 <label class="col-12"><h6>Facturas</h6></label>
                 <button   class="btn btn-primary btn-block btn-default" onclick="generar_facturas_global()" >
                  Timbrar factura

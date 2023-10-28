@@ -7584,9 +7584,12 @@ function factura_buscar_folio(){
 
 function manejo_facturas(){
     const btn = document.querySelector("#btn_generar_factura");
+    const infoTotal = document.querySelector("#total_factura_global");
+    const total = document.querySelector("#total_factura_global_number");
     const fechaInio = document.getElementById("fecha_inicio_factura").value;
     const fechaFin = document.getElementById("fecha_fin_factura").value;
     btn.style.display = "none"
+    infoTotal.style.display = "none"
 
     if (!fechaInio) {
         swal({
@@ -7631,8 +7634,11 @@ function manejo_facturas(){
             data:datos,
             success: function(response){
                 contenedor.innerHTML = response;
-                //console.log(response);
+                const totalInput = document.getElementById("total_factura_input");
+                const totalValue = totalInput.value; // Lee el valor del input
+                total.textContent = totalValue; // Actualiza el elemento con el valor total
                 btn.style.display = "block";
+                infoTotal.style.display = "block";
             } ,
         });
     }
