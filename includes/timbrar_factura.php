@@ -147,7 +147,7 @@ echo "</pre>";*/
 //echo "<pre>"; echo arr2cs($datos); echo "</pre>".die();
 // Se ejecuta el SDK
 //$res = mf_genera_cfdi($datos);
-$res = mf_genera_cfdi4($datos);
+res = mf_genera_cfdi4($datos);
 ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
 $rfcval = $rfc['0'];
 $folios = $numfolio;
@@ -162,18 +162,16 @@ $fecha = time();
 
 //echo $formapago;
 
-$consulta3="SELECT * FROM rfc ";
-$consulta3.="WHERE rfc = '$rfc'";
-$resultado3=mysqli_query($con,$consulta3);
+//$consulta3="SELECT * FROM rfc ";
+//$consulta3.="WHERE rfc = '$rfc'";
+//$resultado3=mysqli_query($con,$consulta3);
+$resultado3=$fact->consultar_rfc($rfc);
 $row3=mysqli_fetch_array($resultado3);
 
     if(mysqli_num_rows($resultado3) < 0){
         //echo var_dump('El usuario ya existe');
-        $consulta4="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`)
-        VALUES ('$regimenfiscal','$rfc','$rfc[1]','','$codigopostal','$email','','','','','','','')";
-        $resultado4=mysqli_query($con,$consulta4);
+        $consulta4=$fact->registrar_rfc($regimenfiscal,$rfc,$codigopostal,$email);
     }
-
 
     if($res['cancelada']=='NO'){
 
@@ -183,6 +181,7 @@ $row3=mysqli_fetch_array($resultado3);
         echo $res['cancelada'];
         //var_dump($datos);¨
         $lista=$_SESSION['lista_id_ticket'];
+        var_dump($lista);
         for($i=0; $i<count($lista); $i++){
             $ticket->cambiar_estado_facturados($lista[$i]);
         };
