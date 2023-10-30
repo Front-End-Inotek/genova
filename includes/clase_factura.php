@@ -61,6 +61,23 @@
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
     }
+    function consultar_rfc($rfc){
+      $sentencia ="SELECT * FROM rfc WHERE rfc = '$rfc'";
+      
+      $comentario="consultar rfc ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
+    function registrar_rfc($regimenfiscal,$rfc,$codigopostal,$email){
+      $sentencia ="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`)
+      VALUES ('$regimenfiscal','$rfc','$rfc[1]','','$codigopostal','$email','','','','','','','')";
+      
+      $comentario="registrar rfc ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+      return $consulta;
+    }
     function forma_pago(){
       $sentencia = "SELECT * FROM forma_pago_factura";
       $comentario="forma_pago ";
