@@ -297,6 +297,6 @@ foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $Receptor){
 }
 
 $pdf->Output();
-//$pdf->Output('F', '../facturas/'. $folio .'_Factura.pdf');
+$pdf->Output('F', '../facturas/'. $folio .'_Factura.pdf');
 //echo 'Gpfd';
 ?>
