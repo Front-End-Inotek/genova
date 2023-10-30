@@ -97,13 +97,6 @@
   $canal_reserva = isset($_POST['canal_reserva']) ? $_POST['canal_reserva'] : "";
   $plan_alimentos = isset($_POST['plan_alimentos']) ? $_POST['plan_alimentos'] : "";
   $tipo_reservacion = isset($_POST['tipo_reservacion']) ? $_POST['tipo_reservacion'] : "";
-  $id_reservacion = $reservacion->guardar_reservacionNew($_POST['id_huesped'],$_POST['tipo_hab'],$id_movimiento,$_POST['fecha_entrada'],$_POST['fecha_salida'],
-  $_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],
-  $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
-  urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
-  $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$total_pago,$actual_hab,
-  $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno
-,$_POST['estado_credito'],$_POST['limite_credito'],$_POST['adultos'],$_POST['infantiles']);
 
 //Una vez obtenemos la reserva se la asiganamos a los adicionales.
 if(!empty($_POST['adicionales'])){
@@ -133,6 +126,14 @@ if($_POST['forma_pago'] == 1){
   $ticket_id= $ticket->guardar_ticket($id_movimiento,$actual_hab,$_POST['usuario_id'],$_POST['forma_pago'],$total_pago,0,0,$total_pago,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
 }
 $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$total_pago,($total_pago*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
+
+$id_reservacion = $reservacion->guardar_reservacionNew($_POST['id_huesped'],$_POST['tipo_hab'],$id_movimiento,$_POST['fecha_entrada'],$_POST['fecha_salida'],
+$_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],
+$_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
+urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
+$_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$total_pago,$actual_hab,
+$_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno
+,$_POST['estado_credito'],$_POST['limite_credito'],$_POST['adultos'],$_POST['infantiles'],$_POST['id_ticket']);
 
   //si hay preasignada
   if($_POST['preasignada']!=0){

@@ -2473,7 +2473,8 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         "limite_credito":limite_credito,
         "adicionales":adicionales,
         "adultos":adultos,
-        "infantiles":infantiles
+        "infantiles":infantiles,
+        "id_ticket":0
     };
     // console.log(datos, ruta)
     // return
