@@ -178,13 +178,13 @@ $row3=mysqli_fetch_array($resultado3);
 
         $fact->guardar_factura($rfcval,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6]);
        
-       
+        //echo count($listaid);
         echo $res['cancelada'];
-       // var_dump($_SESSION['lista_id_ticket']);
-        $lista=$_SESSION['lista_id_ticket'];
-        var_dump($lista);
-        for($i=0; $i<count($lista); $i++){
-            $ticket->cambiar_estado_facturados($lista[$i]);
+        //var_dump($datos);¨
+        $listaid=$_SESSION['lista_id_ticket'];
+        //var_dump($listaid);
+        for($i=0; $i<count($listaid); $i++){
+            $ticket->cambiar_estado_facturados($listaid[$i]);
         };
     }else{
         echo $res['mensaje_original_pac_json'];

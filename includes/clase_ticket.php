@@ -140,7 +140,8 @@
       }
       function saber_estado_facturados($id){
         $estado=0;
-        $sentencia="SELECT `facturado`FROM `ticket` WHERE `id`=$id LIMIT 1";
+        $sentencia="SELECT facturado FROM ticket WHERE id =$id LIMIT 1";
+        $sentencia;
         $comentario="revisar el estado de facturacion del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
