@@ -60,7 +60,7 @@ $datos['validacion_local']= 'NO';
 // Credenciales de Timbrado
 $datos['PAC']['usuario'] = $row['usuariopac'];   //BASE DE DATOS
 $datos['PAC']['pass'] = $row['passpac'];    //BASE DE DATOS
-$datos['PAC']['produccion'] = 'NO';
+$datos['PAC']['produccion'] = $row['produccion'];
 
 // Rutas y clave de los CSD
 /*$datos['conf']['cer'] = '../../sdk2/certificados/00001000000510019114.cer';
