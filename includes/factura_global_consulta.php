@@ -16,6 +16,7 @@
     $Diccionario_Conseptos_Hospedajes = array();
     $Diccionario_Conseptos_Restaurante = array();
     $contadoriteraciones=0;
+    $total = 0;
     //Primera tabla
     echo '<div class="contenedor_tablas_1_facturas">
           <h2 class="titulo_tabla_facturas">Facturas en habitacion</h2>
@@ -46,7 +47,9 @@
                   </div>
                   <div class="ticket_container_header_info_more_items">
                   <p class="ticket_info_p">Forma de pago: <spam class="ticket_spam" >'.$forma_pago->obtener_descripcion($fila["forma_pago"]).'</spam></p>
-                  <p class="ticket_info_p">Total: <spam class="ticket_spam ticket_info_price">$'.$fila["total"].'</spam></p>
+                  <p class="ticket_info_p">Total: <spam class="ticket_spam ticket_info_price">$'.$fila["total"].'</spam></p> ';
+                  $total += $fila["total"];
+                  echo '
                   <input class="d-none" type="number" id="leer_total_'.$contadoriteraciones.'" value="'.$fila["total"].'"/>
                   </div>
                 </div>
@@ -228,4 +231,7 @@
     
       }
     echo '</div> ';*/
+    /* echo '<script>console.log("El total es '.$total.'")</script>';
+    echo '<script>console.log("hola")</script>'; */
+    echo '<input type="text" id="total_factura_input" value="$' . $total . '" style="display: none;">';
 ?>

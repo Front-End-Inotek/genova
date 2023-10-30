@@ -634,7 +634,8 @@ class Reservacion extends ConexionMYSql
         $estado_credito,
         $limite_credito,
         $adultos,
-        $infantiles
+        $infantiles,
+        $id_ticket
     ) {
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
@@ -643,6 +644,14 @@ class Reservacion extends ConexionMYSql
         //   if($forzar_tarifa > 0) {
         //       $total_cargo= $total_suplementos + $forzar_tarifa;
         //   }
+        $sentenciaticket = "SELECT * FROM ticket WHERE mov = $id_movimiento LIMIT 1";
+        $comentario="Mostrar el id de un ticket";
+        $consulta= $this->realizaConsulta($sentenciaticket,$comentario);
+        $id_ticket= 0;
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id_ticket= $fila['id'];
+        }
         if($cuenta == 1 && $id_movimiento != 0) {
             $descripcion="Cuenta reserva";
             $pago_total=0;
@@ -651,8 +660,9 @@ class Reservacion extends ConexionMYSql
                 $pago_total=$total_pago;
             }
             //Se guarda como cuenta el cargo del total suplementos y como abono del total pago de la reservacion
-            $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-            VALUES ('$usuario_id', '$id_movimiento', '$descripcion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1');";
+            $sentencia = "INSERT INTO `cuenta` (`id_usuario`,`id_ticket`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
+            VALUES ('$usuario_id','$id_ticket', '$id_movimiento', '$descripcion', '$fecha_entrada', '$forma_pago', '$total_cargo', '$pago_total', '1')";
+            
             $comentario="Se guarda como cuenta el cargo del total suplementos y como abono del total pago en la base de datos";
             $consulta= $this->realizaConsulta($sentencia, $comentario);
             $sentencia = "SELECT id FROM cuenta ORDER BY id DESC LIMIT 1";
