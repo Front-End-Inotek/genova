@@ -133,6 +133,11 @@
                             <span  id="inputGroup-sizing-default" >Agregar a factura global</span>
                             <input type="checkbox" id="checkfacturaglobal" aria-label="Checkbox for following text input" onclick="factura_global()" style="margin-left: 1rem;">
                             ';
+                        }else{
+                            echo '
+                            <span  id="inputGroup-sizing-default" >Agregar a factura global</span>
+                            <input type="checkbox" id="checkfacturaglobal" disabled aria-label="Checkbox for following text input" onclick="factura_global()" style="margin-left: 1rem;">
+                            ';
                         }
                         echo '
                     </div>
