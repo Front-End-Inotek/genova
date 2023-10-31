@@ -127,13 +127,14 @@ function tipos_abonos($id=0){
         echo "error en la consulta";
       }
     }
-    function editar_plan($plan_id,$nombre,$costo,$descripcion){
+    function editar_plan($plan_id,$nombre,$costo,$descripcion,$costo_menores){
       $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
       $sentencia = "UPDATE `planes_alimentos` SET
       `nombre_plan` = '$nombre',
       `costo_plan` = '$costo',
-      `descripcion` = '$descripcion',
-      WHERE `id` = '$plan_id';";
+      `costo_menores` = '$costo_menores',
+      `descripcion` = '$descripcion'
+      WHERE `id` = '$plan_id'";
       //echo $sentencia ;
       $comentario="Editar un plan dentro de la base de datos ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -281,7 +282,8 @@ function tipos_abonos($id=0){
               ';
               $descripcion=$fila['descripcion'];
               if($editar==1){
-                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ',  \'' . $fila['nombre_plan'] . '\', '.$fila['costo_plan'].', \'' . $descripcion . '\')"> Editar</button></td>';
+                //var_dump($fila);
+                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ',  \'' . $fila['nombre_plan'] . '\', '.$fila['costo_plan'].', \'' . $descripcion . '\', '.$fila['costo_menores'].')"> Editar</button></td>';
               }
               if($borrar==1){
                 echo '<td><button class="btn btn-danger" onclick="borrar_plan_alimentacion(' . $fila['id'] . ', \'' . addslashes($fila['nombre_plan']) . '\', \'' . addslashes($fila['costo_plan']) . '\')">Borrar</button></td>';

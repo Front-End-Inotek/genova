@@ -685,10 +685,10 @@ function editar_tipo_abono(id,nombre,descripcion){
 }
 
 // Editar un plan de alimentos
-function editar_plan_alimentos(id,nombre,costo,descripcion){
+function editar_plan_alimentos(id,nombre,costo,descripcion,costo_menores){
     nombre = encodeURIComponent(nombre)
     descripcion = encodeURIComponent(descripcion)
-    include = "includes/editar_plan_alimentos.php?id="+id+"&nombre="+nombre+"&costo="+costo+"&descripcion="+descripcion
+    include = "includes/editar_plan_alimentos.php?id="+id+"&nombre="+nombre+"&costo="+costo+"&descripcion="+descripcion+"&costo_menores="+costo_menores;
     $("#mostrar_herramientas").load(include);
     //$("#mostrar_herramientas").load("includes/borrar_modal_tipo.php?id="+id);
 }
@@ -824,15 +824,9 @@ function modificar_plan_alimentos(id){
     let id_plan = id;
     let nombre = encodeURI(document.getElementById("nombre").value);
 	let costo = encodeURI(document.getElementById("codigo").value);
+    let descripcion=encodeURI(document.getElementById("descripcion").value);
     let costo_menores = encodeURI(document.getElementById("costo_menores").value);
-    include = "includes/aplicar_editar_plan_alimentacion.php?nombre="+nombre+"&costo="+costo+"&id_tipo="+id_plan+"&usuario_id="+usuario_id+"&costo_menores="+costo_menores;
-    datos = {
-        nombre : nombre,
-        costo: costo,
-        id_plan: id_plan,
-        usuario_id: usuario_id,
-        costo_menores: costo_menores,
-    }
+    include = "includes/aplicar_editar_plan_alimentacion.php?nombre="+nombre+"&costo="+costo+"&id_tipo="+id_plan+"&usuario_id="+usuario_id+"&descripcion="+descripcion+"&costo_menores="+costo_menores;
     $.ajax({
         async:true,
         type: "GET",
@@ -840,15 +834,10 @@ function modificar_plan_alimentos(id){
         contentType: "application/json",
         url:include,
         beforeSend:loaderbar,
-        data: datos,
         success:function(res){
-            if(res=="NO"){
-                $('#caja_herramientas').modal('hide');
-                ver_planes_alimentos()
-                swal("Actualizo el plan de alimentación!", "Excelente trabajo!", "success");
-            }else{
-                swal("Accion no realizada!", "Error de conexion a base de datos!", "error");
-            }
+            $('#caja_herramientas').modal('hide');
+            ver_planes_alimentos()
+            swal("Actualizo el plan de alimentación!", "Excelente trabajo!", "success");
         },
         //success:problemas_sistema,
         timeout:5000,
