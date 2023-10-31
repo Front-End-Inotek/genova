@@ -31,6 +31,6 @@
   $nombre= $hab->nombre;
   $faltante= 0;//$_POST['faltante']
   $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$forma_pago,$_POST['cargo'],$faltante);
-  $logs->guardar_log($_POST['usuario_id'],"Agregar cargo hab: ". $_POST['hab_id']  ." usuario:" .$_POST['usuario_id']);
+  $logs->guardar_log($_POST['usuario_id'],"Agregar cargo hab: ". $_POST['hab_id']  ." usuario: " .$_POST['usuario_id']);
   echo $_POST['hab_id']."/".$_POST['estado']."/".$mov."/".$id_maestra;
 ?>

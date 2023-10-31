@@ -10,9 +10,9 @@
 
 
   if(isset($_POST['ver']) && $_POST['ver'] !=0){
-    $logs->guardar_log($_POST['usuario_id'],"Terminar uso casa en habitacion: ". $hab->nombre);
+    $logs->guardar_log($_POST['usuario_id'],"Terminar uso casa en habitación: ". $hab->nombre);
   }else{
-    $logs->guardar_log($_POST['usuario_id'],"Terminar hospedaje en habitacion: ". $hab->nombre);
+    $logs->guardar_log($_POST['usuario_id'],"Terminar hospedaje en habitación: ". $hab->nombre);
   }
 
   

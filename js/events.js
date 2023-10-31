@@ -826,6 +826,13 @@ function modificar_plan_alimentos(id){
 	let costo = encodeURI(document.getElementById("codigo").value);
     let costo_menores = encodeURI(document.getElementById("costo_menores").value);
     include = "includes/aplicar_editar_plan_alimentacion.php?nombre="+nombre+"&costo="+costo+"&id_tipo="+id_plan+"&usuario_id="+usuario_id+"&costo_menores="+costo_menores;
+    datos = {
+        nombre : nombre,
+        costo: costo,
+        id_plan: id_plan,
+        usuario_id: usuario_id,
+        costo_menores: costo_menores,
+    }
     $.ajax({
         async:true,
         type: "GET",
@@ -833,6 +840,7 @@ function modificar_plan_alimentos(id){
         contentType: "application/json",
         url:include,
         beforeSend:loaderbar,
+        data: datos,
         success:function(res){
             if(res=="NO"){
                 $('#caja_herramientas').modal('hide');
