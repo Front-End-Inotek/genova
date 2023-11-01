@@ -618,3 +618,8 @@ function enviarcorreo(){
     function reporte_facturacio(modo,inicio,fin){
         window.open("includes/facturas_a_excel.php?modo="+modo+"&inicio="+inicio+"&fin="+fin, "Diseño Web", "width=300, height=200")
     }
+
+
+    function reenviar_factura() {
+        aler("Factura reenviada :D")
+    }

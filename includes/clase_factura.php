@@ -178,7 +178,8 @@
               <th>Fecha</th>
               <th>Forma de pago</th>
               <th><span class=" glyphicon glyphicon-cog"></span> XML</th>
-              <th><span class=" glyphicon glyphicon-cog"></span> PDF</th>      
+              <th><span class=" glyphicon glyphicon-cog"></span> PDF</th>
+              <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
               </tr>
             </thead>';
             }
@@ -256,14 +257,21 @@
               }else{
                   echo '<th>-</th>';
               }
-              echo '  </tr>';
               $contador++;
-              }
+            }
               if($contador==0){
                 echo "Sin Facturas para mostrar";
               }else{
                 $totales=$importe+$iva+$ish;
 
+                //Boton de reenviar
+              if(true){
+                echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura()" >Reenviar</button></th>  ';
+              }else {
+                echo '<th>-</th>';
+              }
+              echo '  </tr>';
+              
             echo'
             </tr>
             </tbody>
