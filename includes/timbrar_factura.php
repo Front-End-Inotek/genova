@@ -148,7 +148,7 @@ echo "</pre>";*/
 //echo "<pre>"; echo arr2cs($datos); echo "</pre>".die();
 // Se ejecuta el SDK
 //$res = mf_genera_cfdi($datos);
-res = mf_genera_cfdi4($datos);
+$res = mf_genera_cfdi4($datos);
 ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
 $rfcval = $rfc['0'];
 $folios = $numfolio;
