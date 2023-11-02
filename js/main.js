@@ -622,8 +622,7 @@ function enviarcorreo(){
 
 
     function reenviar_factura( folio ) {
-        const folio=folio;
-        const email="";
+        let email="";
         swal({
             text: 'Ingresa el correo en donde deseas reenviar la factura.',
             content: "input",
@@ -632,10 +631,12 @@ function enviarcorreo(){
               closeModal: false,
             },
           })
-          .then(name => {
-            if (!name) throw null;
-            email=name
-            return Promise.resolve()
+          .then((name) => {
+            if (!name) {
+                throw null;
+            }
+            email = name
+            //return Promise.resolve()
           })
          .then(() => {
             console.log(folio)
@@ -643,12 +644,12 @@ function enviarcorreo(){
             swal({
                 title: "Factura reenviada con exito",
                 text: `Factura con el ID: ${folio}, Se ha enviado correctamente al correo: ${email}`,
-                icon: "succes",
+                icon: "success",
             })
          })
           .catch(err => {
             if (err) {
-              swal("Oh noes!", "The AJAX request failed!", "error");
+              swal("Error", "The AJAX request failed!", "error");
             } else {
               swal.stopLoading();
               swal.close();
