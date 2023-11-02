@@ -298,6 +298,7 @@ function enviarcorreo(){
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/enviar_correo.php?nombre="+nombre+"&cfdi="+cfdi+"&cp="+cp+"&regimen="+regimen+"&correo="+correo+"&metodopago="+metodopago+"&forma_pago="+forma_pago+"&notas="+notas,true);
     xhttp.addEventListener('load', e =>{
+        console.log(e)
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
