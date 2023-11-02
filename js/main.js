@@ -621,7 +621,9 @@ function enviarcorreo(){
     }
 
 
-    function reenviar_factura() {
+    function reenviar_factura(folio) {
+        const folio=folio;
+        const email="";
         swal({
             text: 'Ingresa el correo en donde deseas reenviar la factura.',
             content: "input",
@@ -632,7 +634,7 @@ function enviarcorreo(){
           })
           .then(name => {
             if (!name) throw null;
-           
+            email=name
             return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
           })
           .then(results => {
