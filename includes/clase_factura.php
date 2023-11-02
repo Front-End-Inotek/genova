@@ -156,6 +156,7 @@
       $importe=0;
       $ish=0;
       $consulta= $this->realizaConsulta($sentencia,$comentario);
+      $c=0;
       while ($fila = mysqli_fetch_array($consulta))
       {
         if($contador==0){
@@ -258,20 +259,15 @@
                   echo '<th>-</th>';
               }
               $contador++;
+              echo'<th><button type="button" class="btn btn-outline-primary"  onclick="reenviar_factura('.$fila['folio'].')" >Reenviar</button></th>';
             }
               if($contador==0){
                 echo "Sin Facturas para mostrar";
               }else{
                 $totales=$importe+$iva+$ish;
 
-                //Boton de reenviar
-              if(true){
-                echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura()" >Reenviar</button></th>  ';
-              }else {
-                echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura()" >Reenviar</button></th>  ';
-              }
               echo '  </tr>';
-              
+
             echo'
             </tr>
             </tbody>
@@ -291,6 +287,7 @@
           </div>
           </div>';
           echo '';
+      $c=$c+1;
       }
     }
   }
