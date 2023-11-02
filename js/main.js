@@ -635,26 +635,17 @@ function enviarcorreo(){
           .then(name => {
             if (!name) throw null;
             email=name
-            return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
+            return Promise.resolve()
           })
-          .then(results => {
-            return results.json();
-          })
-          .then(json => {
-            const movie = json.results[0];
+         .then(() => {
             console.log(folio)
             console.log(email)
-            if (!movie) {
-              return swal("No movie was found!");
-            }
-            const name = movie.trackName;
-            const imageURL = movie.artworkUrl100;
             swal({
-              title: "Factura reenviada con exito",
-              text: name,
-              icon: imageURL,
-            });
-          })
+                title: "Factura reenviada con exito",
+                text: `Factura con el ID: ${folio}, Se ha enviado correctamente al correo: ${email}`,
+                icon: "succes",
+            })
+         })
           .catch(err => {
             if (err) {
               swal("Oh noes!", "The AJAX request failed!", "error");
