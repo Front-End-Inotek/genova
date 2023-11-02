@@ -621,7 +621,7 @@ function enviarcorreo(){
     }
 
 
-    function reenviar_factura() {
+    function reenviar_factura( folio ) {
         swal({
             text: 'Ingresa el correo en donde deseas reenviar la factura.',
             content: "input",
@@ -632,7 +632,7 @@ function enviarcorreo(){
           })
           .then(name => {
             if (!name) throw null;
-           
+           // return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
             return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
           })
           .then(results => {
@@ -640,14 +640,11 @@ function enviarcorreo(){
           })
           .then(json => {
             const movie = json.results[0];
-           
             if (!movie) {
               return swal("No movie was found!");
             }
-           
             const name = movie.trackName;
             const imageURL = movie.artworkUrl100;
-           
             swal({
               title: "Factura reenviada con exito",
               text: name,
