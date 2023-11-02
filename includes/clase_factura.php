@@ -268,7 +268,7 @@
               if(true){
                 echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura()" >Reenviar</button></th>  ';
               }else {
-                echo '<th>-</th>';
+                echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura()" >Reenviar</button></th>  ';
               }
               echo '  </tr>';
               

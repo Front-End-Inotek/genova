@@ -622,5 +622,44 @@ function enviarcorreo(){
 
 
     function reenviar_factura() {
-        aler("Factura reenviada :D")
+        swal({
+            text: 'Ingresa el correo en donde deseas reenviar la factura.',
+            content: "input",
+            button: {
+              text: "Reenviar",
+              closeModal: false,
+            },
+          })
+          .then(name => {
+            if (!name) throw null;
+           
+            return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
+          })
+          .then(results => {
+            return results.json();
+          })
+          .then(json => {
+            const movie = json.results[0];
+           
+            if (!movie) {
+              return swal("No movie was found!");
+            }
+           
+            const name = movie.trackName;
+            const imageURL = movie.artworkUrl100;
+           
+            swal({
+              title: "Factura reenviada con exito",
+              text: name,
+              icon: imageURL,
+            });
+          })
+          .catch(err => {
+            if (err) {
+              swal("Oh noes!", "The AJAX request failed!", "error");
+            } else {
+              swal.stopLoading();
+              swal.close();
+            }
+          });
     }
