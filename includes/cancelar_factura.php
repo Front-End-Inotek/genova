@@ -1,10 +1,10 @@
 <?php
 
 include 'datos_servidor.php'; //conexion con la base de datos
+include("clase_factura.php");
+$fact = NEW factura ();
 
-$consulta="SELECT * FROM rfc ";
-$consulta.= "WHERE id = '1' ";
-$resultado=mysqli_query($con,$consulta);
+$resultado=$fact->obtener_primer_rfc();
 $row=mysqli_fetch_array($resultado);
 
 $motivo = $_POST["motivo"];

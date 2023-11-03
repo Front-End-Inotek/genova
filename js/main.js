@@ -422,14 +422,9 @@ function enviarcorreo(){
     }
 
     function validar_c_cancelacion(){
-        var file = document.getElementById("file");
         var motivo = document.getElementById("motivo");
         const uudi = document.querySelector("#uudi");
 
-            if(file.value === null || file.value === ''){
-                swal("Campo archivo XML vacio!", "Verifique los datos correctamente por favor!", "error");
-                return false;
-            }
             if(motivo.value === null || motivo.value === ''){
                 swal("Campo Motivo vacio!", "Verifique los datos correctamente por favor!", "error");
                 return false;
@@ -456,6 +451,7 @@ function enviarcorreo(){
             });
     }
     function cancelar_factura (){
+        const uudi = document.querySelector("#uudi");
         document.getElementById("animacion_cancelar").style.display='block';
         document.getElementById("cancelar").style.display='none';
 
