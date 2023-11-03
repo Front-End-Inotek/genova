@@ -8,19 +8,19 @@ echo '
             <form id="formcancelar" enctype="multipart/form-data">
                 <div>
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Archivo XML</label>
-                        <input class="form-control form-control-lg" type="file" id="formFile">
+                        <label for="file" class="form-label">Archivo XML</label>
+                        <input class="form-control form-control-lg" type="file" id="file">
                     </div>
                 </div>
                 <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                    <select class="form-select" id="motivo" name="motivo"  aria-label="Floating label select example">
                         <option selected disable >Selecciona un motivo</option>
                         <option value="01">“01” Comprobantes emitidos con errores con relación.</option>
                         <option value="02">“02” Comprobantes emitidos con errores sin relación.</option>
                         <option value="03">“03” No se llevó a cabo la operación.</option>
                         <option value="06">“04” Operación nominativa relacionada en una factura global.</option>
                     </select>
-                    <label for="floatingSelect">Motivo</label>
+                    <label for="motivo">Motivo</label>
                 </div>
                 <div>
                     <button class="btn btn-danger" id="animacion_cancelar" type="button" style="margin-left: 180px; width: 550px; display:none">
