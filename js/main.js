@@ -21,7 +21,7 @@ function buscar_rfc(){
             //document.getElementById("cuerpo_app").innerHTML = this.responseText;
         }
         };
-        xhttp.open("GET", "includes/consulta_rfc.php?inputRFC="+inputRFC, true); 
+        xhttp.open("GET", "includes/consulta_rfc.php?inputRFC="+inputRFC, true);
         xhttp.send();
     }
 }
@@ -29,7 +29,6 @@ function buscar_rfc(){
 function ocultar_animacion() {
     document.getElementById("animacion_formulario").style.display='none';
     //document.getElementById("animacion_timbrar").style.display='none';
-
     document.getElementById("dinamic").style.display='block';
     document.getElementById("timbrar").style.display='block';
 }
@@ -37,7 +36,6 @@ function ocultar_animacion() {
 function mostrar_animacion() {
     document.getElementById("animacion_formulario").style.display='block';
     //document.getElementById("animacion_timbrar").style.display='block';
-
     document.getElementById("timbrar").style.display='none';
     document.getElementById("dinamic").style.display='none';
 }
@@ -452,7 +450,6 @@ function enviarcorreo(){
                 }
             });
     }
-    
     function cancelar_factura (){
         document.getElementById("animacion_cancelar").style.display='block';
         document.getElementById("cancelar").style.display='none';
@@ -536,7 +533,6 @@ function enviarcorreo(){
                 console.log(e.target.response);
             }
         })
-        
         //Enviamos nuestro la respuesta de nuestro formulario
         xhr.send(formData);
     }
@@ -544,8 +540,6 @@ function enviarcorreo(){
     function buscar_factura_folio(){
         var inicial = document.getElementById("inicial");
         var final = document.getElementById("final");
-
-    
             if(inicial.value === null || inicial.value === ''){
                 swal("Campo folio inicial vacio!", "Verifique los datos correctamente por favor!", "error");
                 return false;
@@ -570,7 +564,6 @@ function enviarcorreo(){
         var theObject = new XMLHttpRequest();
         theObject.open("GET",  "includes/buscar_facturas_folio.php?inicial="+ inicial + "&final="+final ,true);
         theObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    
         theObject.onreadystatechange = function() {
             document.getElementById('contenedor-facturas').innerHTML = theObject.responseText;
         }
@@ -580,8 +573,6 @@ function enviarcorreo(){
     function buscar_factura_fecha(){
         var inicial = document.getElementById("inicial");
         var final = document.getElementById("final");
-
-    
             if(inicial.value === null || inicial.value === ''){
                 swal("Campo fecha inicial vacio!", "Verifique los datos correctamente por favor!", "error");
                 return false;
@@ -606,7 +597,6 @@ function enviarcorreo(){
         var theObject = new XMLHttpRequest();
         theObject.open("GET",  "includes/buscar_facturas_fecha.php?inicial="+ inicial + "&final="+final ,true);
         theObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    
         /* theObject.onreadystatechange = function() {
             document.getElementById('contenedor-formulario').innerHTML = theObject.responseText;
         } */
@@ -615,7 +605,6 @@ function enviarcorreo(){
         }
         theObject.send();
     }
-    
     function reporte_facturacio(modo,inicio,fin){
         window.open("includes/facturas_a_excel.php?modo="+modo+"&inicio="+inicio+"&fin="+fin, "Diseño Web", "width=300, height=200")
     }
@@ -649,7 +638,8 @@ function enviarcorreo(){
          })
           .catch(err => {
             if (err) {
-              swal("Error", "The AJAX request failed!", "error");
+              swal("Error", "Error al envio de factura", "error");
+              console.log(err)
             } else {
               swal.stopLoading();
               swal.close();
