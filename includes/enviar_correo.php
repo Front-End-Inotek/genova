@@ -63,7 +63,7 @@ try {
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->CharSet = "UTF-8";
     $mail->Encoding = "base64";
-    $mail->Subject = ("FACTURACIÓN CFDI - VERSIÓN 4.0");
+    $mail->Subject = ('Envio de factura');
     $mail->MsgHTML('
     <div style="background-color: #2D3F54; text-align: center; padding: 8px; " >
     <h2 style="font-weight: bold; font-size: 24px; color: #ffffff;"> Factura </h2>
