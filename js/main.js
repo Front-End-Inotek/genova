@@ -423,21 +423,19 @@ function enviarcorreo(){
 
     function validar_c_cancelacion(){
         var motivo = document.getElementById("motivo");
-        const uudi = document.querySelector("#uudi");
+        const uuid = document.querySelector("#uuid");
 
             if(motivo.value === null || motivo.value === ''){
                 swal("Campo Motivo vacio!", "Verifique los datos correctamente por favor!", "error");
                 return false;
             }
-            if(uudi.value === null || uudi.value === ""){
-                swal("Campo UUDI vacio!", "Verifique los datos correctamente por favor!", "error");
+            if(uuid.value === null || uuid.value === ""){
+                swal("Campo UUID vacio!", "Verifique los datos correctamente por favor!", "error");
                 return false;
             }
 
-            var archivo = document.getElementById("file").value;
             swal({
                 title: "Tu factura sera cancelada!",
-                text: "factura con nombre : "+ archivo +" sera cancelada quieres continuar?",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -451,7 +449,7 @@ function enviarcorreo(){
             });
     }
     function cancelar_factura (){
-        const uudi = document.querySelector("#uudi");
+        const uuid = document.querySelector("#uuid").value;
         document.getElementById("animacion_cancelar").style.display='block';
         document.getElementById("cancelar").style.display='none';
 
@@ -460,7 +458,7 @@ function enviarcorreo(){
         //Declaramos una constante que contendra XMLHttpRequest(); intercambia datos detras de escena
         const xhr = new XMLHttpRequest();
         //open recive informacion son 3 parametro
-        xhr.open('POST', 'includes/cancelar_factura.php', true);
+        xhr.open('POST', 'includes/cancelar_factura.php?uuid='+uuid, true);
         //FormData interpretara los datos del formulario
         var formData = new FormData(form);
         //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor

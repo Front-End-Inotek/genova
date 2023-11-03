@@ -14,8 +14,8 @@ echo '
                 </div> --> 
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="uudi" placeholder="UUDI" min-length="1" maxlength="36" required >
-                    <label for="uudi">UUDI</label>
+                    <input type="text" class="form-control" id="uuid" placeholder="UUID" min-length="1" maxlength="36" required >
+                    <label for="uuid">UUID</label>
                 </div>
 
                 <div class="form-floating">

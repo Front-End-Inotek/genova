@@ -8,7 +8,8 @@ $resultado=$fact->obtener_primer_rfc();
 $row=mysqli_fetch_array($resultado);
 
 $motivo = $_POST["motivo"];
-$file = $_FILES['file']['tmp_name'];
+$uuid=$_GET["uuid"];
+//$file = $_FILES['file']['tmp_name'];
 
 
 error_reporting(E_ERROR);                        
@@ -18,8 +19,8 @@ $datos['PAC']['pass'] = $row['passpac'];
 $datos['modulo']="cancelacion2022"; 
 $datos['accion']="cancelar";                                                  
 $datos["produccion"]=$row['produccion'];
-$datos["xml"]= $file;
-//$datos["uuid"]="e95c803b-47da-433d-aafd-0cf90f3df1d6";
+//$datos["xml"]= $file;
+$datos["uuid"]=$uuid;
 $datos["rfc"] =$row['rfc'];
 $datos["password"]=$row['passkey'];
 $datos["motivo"]=$motivo;
