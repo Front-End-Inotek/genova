@@ -13,7 +13,7 @@
                 <label class="custom-file-label" for="inputGroupFile01" style="font-size: 12px;"></label>
             </div>
             </div>
-            
+
 <!--             Imput Motivo de cancelacion -->
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -34,7 +34,7 @@
         <div class="form-row" >
             </div>
         </div>
-        
+
     </div>
     <br>
     <center><button class="btn btn-danger" id="animacion_cancelar" type="button" style="margin-left: 180px; width: 550px; display:none">

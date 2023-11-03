@@ -6,12 +6,18 @@ echo '
         <br>
         <div class="container">
             <form id="formcancelar" enctype="multipart/form-data">
-                <div>
+                <!-- <div>
                     <div class="mb-3">
                         <label for="file" class="form-label">Archivo XML</label>
                         <input class="form-control form-control-lg" type="file" id="file">
                     </div>
+                </div> --> 
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="uudi" placeholder="UUDI" min-length="1" maxlength="32" required >
+                    <label for="uudi">UUDI</label>
                 </div>
+
                 <div class="form-floating">
                     <select class="form-select" id="motivo" name="motivo"  aria-label="Floating label select example">
                         <option selected disable >Selecciona un motivo</option>
@@ -22,18 +28,19 @@ echo '
                     </select>
                     <label for="motivo">Motivo</label>
                 </div>
+
                 <div>
                     <button class="btn btn-danger" id="animacion_cancelar" type="button" style="margin-left: 180px; width: 550px; display:none">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     </button>
                 </div>
+                <br>
                 <div>
-                    <button type="button" class="btn btn-danger" id="cancelar" name ="cancelar" onclick="validar_c_cancelacion()" style="margin-left: 180px; width: 550px;">Cancelar&nbsp;Factura</button>
+                    <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="validar_c_cancelacion()" style="margin-left: 180px; width: 550px;">Cancelar&nbsp;Factura</button>
                 </div>
             </form>
         </div>
-        <div class="row" id="contenedor-facturas">
-        </div>
+
     </div>
 ';
 
