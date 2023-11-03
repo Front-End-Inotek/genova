@@ -257,9 +257,13 @@
                 echo '<th><a href="'.$ruta.'" target="_blank"><span class=" glyphicon glyphicon-file"></span> PDF</a></th>';
               }else{
                   echo '<th>-</th>';
-              }
-              $contador++;
-              echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura(' . htmlspecialchars($fila['folio']) . ', \'' . htmlspecialchars($fila['nombre']) . '\')">Reenviar</button></th>';
+                }
+                $contador++;
+                if(file_exists( $file )){
+                  echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura(' . htmlspecialchars($fila['folio']) . ', \'' . htmlspecialchars($fila['nombre']) . '\')">Reenviar</button></th>';
+                }else {
+                  echo '<th>-</th>';
+                }
               //echo'<th><button type="button" class="btn btn-outline-primary"  onclick="reenviar_factura('.$fila['folio'] .','. $fila['nombre'].')" >Reenviar</button></th>';
             }
               if($contador==0){
