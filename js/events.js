@@ -7559,6 +7559,7 @@ function factura_cancelar(){
     $('#pie').hide();
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/factura_cancelar.php");
+    //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
     closeNav();
 }
 function factura_buscar_fecha(){

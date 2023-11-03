@@ -4,19 +4,33 @@ echo '
     <div class="container-fluid blanco">
         <div class="col-12 text-center"><h2 class="text-dark">Cancelar factura</h2></div>
         <br>
-        <div class="row">
-            <div class="col-sm-2">
-                <label><h6>Fecha inicial</h6></label>
-                <input class="form-control" type="date" placeholder="Fecha de inicio" id="fecha_inicio_factura"/>
-            </div>
-            <div class="col-sm-2">
-                <label><h6>Fecha final</h6></label>
-                <input class="form-control" type="date" placeholder="Fecha de inicio" id="fecha_fin_factura"/>
-            </div>
-            <div class="col-sm-2">
-                <label class="col-12"><h6>Hacer busqueda</h6></label>
-                <button class="btn btn-primary btn-block btn-default" onclick="manejo_facturas()" > Buscar </button>
-            </div>
+        <div class="container">
+            <form id="formcancelar" enctype="multipart/form-data">
+                <div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Archivo XML</label>
+                        <input class="form-control form-control-lg" type="file" id="formFile">
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected disable >Selecciona un motivo</option>
+                        <option value="01">“01” Comprobantes emitidos con errores con relación.</option>
+                        <option value="02">“02” Comprobantes emitidos con errores sin relación.</option>
+                        <option value="03">“03” No se llevó a cabo la operación.</option>
+                        <option value="06">“04” Operación nominativa relacionada en una factura global.</option>
+                    </select>
+                    <label for="floatingSelect">Motivo</label>
+                </div>
+                <div>
+                    <button class="btn btn-danger" id="animacion_cancelar" type="button" style="margin-left: 180px; width: 550px; display:none">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger" id="cancelar" name ="cancelar" onclick="validar_c_cancelacion()" style="margin-left: 180px; width: 550px;">Cancelar&nbsp;Factura</button>
+                </div>
+            </form>
         </div>
         <div class="row" id="contenedor-facturas">
         </div>

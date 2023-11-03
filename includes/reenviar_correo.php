@@ -18,11 +18,7 @@ $correo=$_GET["correo"];
 $nombre=$_GET["nombre"];
 $resultado2=$facturacion->obtener_folio();
 $row2=mysqli_fetch_array($resultado2);
-
-
 $folio=$_GET["folio"]; // Esto generará una excepción de división por cero
-
-
 
 try {
     //Server settings                   //Enable verbose debug output

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ["cantidad[13]" , "unidad[13]" , "claveunidad[13]" , "clave[13]" , "id[13]" , "producto[13]" , "importeuni[13]" , "importe[13]" , "iva[13]" , "ish[13]" , "checisah[13]"],
         ["cantidad[14]" , "unidad[14]" , "claveunidad[14]" , "clave[14]" , "id[14]" , "producto[14]" , "importeuni[14]" , "importe[14]" , "iva[14]" , "ish[14]" , "checisah[14]"],
         ["cantidad[15]" , "unidad[15]" , "claveunidad[15]" , "clave[15]" , "id[15]" , "producto[15]" , "importeuni[15]" , "importe[15]" , "iva[15]" , "ish[15]" , "checisah[15]"],
-    ]
+    ];
     let currentRow = 0;
     let currentCol = 0;
 
@@ -33,8 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //moveFocus(currentRow, currentCol);
     document.addEventListener("keydown", (e) => {
+      console.log( e.key );
 
-      if (e.key === "ArrowDown") {
+     if (e.key === "ArrowDown") {
         currentRow = Math.min(currentRow + 1, inputsBoard.length - 1);
         moveFocus(currentRow, currentCol);
         console.log(currentRow)
