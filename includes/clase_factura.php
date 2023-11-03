@@ -70,8 +70,8 @@
       return $consulta;
     }
     function registrar_rfc($regimenfiscal,$rfc,$codigopostal,$email){
-      $sentencia ="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`)
-      VALUES ('$regimenfiscal','$rfc','$rfc[1]','','$codigopostal','$email','','','','','','','')";
+      $sentencia ="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`,`notas`)
+      VALUES ('$regimenfiscal','$rfc[0]','$rfc[1]','','$codigopostal','$email','','','','','','','','')";
       
       $comentario="registrar rfc ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);

@@ -166,10 +166,10 @@ $fecha = time();
 //$consulta3="SELECT * FROM rfc ";
 //$consulta3.="WHERE rfc = '$rfc'";
 //$resultado3=mysqli_query($con,$consulta3);
-$resultado3=$fact->consultar_rfc($rfc);
+$resultado3=$fact->consultar_rfc($rfcval);
 $row3=mysqli_fetch_array($resultado3);
 
-    if(mysqli_num_rows($resultado3) < 0){
+    if(mysqli_num_rows($resultado3) <= 0){
         //echo var_dump('El usuario ya existe');
         $consulta4=$fact->registrar_rfc($regimenfiscal,$rfc,$codigopostal,$email);
     }
