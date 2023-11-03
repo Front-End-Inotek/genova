@@ -621,7 +621,7 @@ function enviarcorreo(){
     }
 
 
-    function reenviar_factura( folio ) {
+    function reenviar_factura(folio , nombre) {
         let email="";
         swal({
             text: 'Ingresa el correo en donde deseas reenviar la factura.',
@@ -641,11 +641,37 @@ function enviarcorreo(){
          .then(() => {
             console.log(folio)
             console.log(email)
-            swal({
-                title: "Factura reenviada con exito",
-                text: `Factura con el ID: ${folio}, Se ha enviado correctamente al correo: ${email}`,
-                icon: "success",
+            console.log(nombre)
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.open("GET","includes/reenviar_correo.php?nombre="+nombre+"&correo="+email+"&folio="+folio,true);
+            xhttp.addEventListener('load', e =>{
+                console.log(e)
+                //Si el servidor responde 4  y esta todo ok 200
+                if (e.target.readyState == 4 && e.target.status == 200) {
+                    //Entrara la contidicion que valida la respuesta del formulario
+                    if (e.target.response == 'Messagehasbeensent') {
+                        console.log(e.target.response);
+                        console.log("Correo enviado ///");
+                        swal("Tu factura se envio correctamente!", "Pronto recibirás un correo con los archivos correspondientes de tu factura!", "success");
+                    }else if(contador < 3){
+                        console.log(e.target.response);
+                        swal({
+                            title: "Tu factura no envió!",
+                            text: "Puede consultar las facturas en las seccion de \"Buscar Factura\" en la barra de menu o presione \"OK\" para intentar enviar el correo otra vez ",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                    }else{
+                        swal("Error del servidor!", "Puede consultar las facturas en las seccion de Buscar Factura en la barra de menu", "error");
+                    }
+                }else{
+                    swal("Error del servidor!", "Puede consultar las facturas en las seccion de Buscar Factura en la barra de menu", "error");
+                }
             })
+            //Enviamos nuestro la respuesta de nuestro formulario
+            xhttp.send();
          })
           .catch(err => {
             if (err) {
@@ -655,4 +681,6 @@ function enviarcorreo(){
               swal.close();
             }
           });
+
+    
     }

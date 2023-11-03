@@ -259,7 +259,8 @@
                   echo '<th>-</th>';
               }
               $contador++;
-              echo'<th><button type="button" class="btn btn-outline-primary"  onclick="reenviar_factura('.$fila['folio'].')" >Reenviar</button></th>';
+              echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura(' . htmlspecialchars($fila['folio']) . ', \'' . htmlspecialchars($fila['nombre']) . '\')">Reenviar</button></th>';
+              //echo'<th><button type="button" class="btn btn-outline-primary"  onclick="reenviar_factura('.$fila['folio'] .','. $fila['nombre'].')" >Reenviar</button></th>';
             }
               if($contador==0){
                 echo "Sin Facturas para mostrar";
