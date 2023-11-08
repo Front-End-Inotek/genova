@@ -98,12 +98,7 @@
   $plan_alimentos = isset($_POST['plan_alimentos']) ? $_POST['plan_alimentos'] : "";
   $tipo_reservacion = isset($_POST['tipo_reservacion']) ? $_POST['tipo_reservacion'] : "";
 
-//Una vez obtenemos la reserva se la asiganamos a los adicionales.
-if(!empty($_POST['adicionales'])){
-  foreach ($_POST['adicionales'] as $key => $adicional) {
-    $reservacion->guardar_adicional($id_reservacion,$adicional['nombre'],$adicional['apellido']);
-  }
-}
+
 if($_POST['forma_pago'] == 2){
   $factuar= 1;
 }else{
@@ -135,6 +130,13 @@ $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']
 $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno
 ,$_POST['estado_credito'],$_POST['limite_credito'],$_POST['adultos'],$_POST['infantiles'],$_POST['id_ticket']);
 
+
+  //Una vez obtenemos la reserva se la asiganamos a los adicionales.
+  if(!empty($_POST['adicionales'])){
+    foreach ($_POST['adicionales'] as $key => $adicional) {
+      $reservacion->guardar_adicional($id_reservacion,$adicional['nombre'],$adicional['apellido']);
+    }
+  }
   //si hay preasignada
   if($_POST['preasignada']!=0){
     $logs->guardar_log($_POST['usuario_id'],"Preasignar reservacion: ". $id_reservacion . " Hab: " . $actual_hab);
@@ -142,7 +144,6 @@ $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$p
     //Para cambiar el ultimo_mov siendo una reservacion.
     $hab->cambiohabUltimo($actual_hab);
   }
-
   echo $id_reservacion;
 
 ?>
