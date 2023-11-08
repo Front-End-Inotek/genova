@@ -98,27 +98,27 @@
             }
             $huesped= NEW Huesped($id_huesped);
             echo '
-            <div class="container row">
+            <div class="col-12 row">
             <ul class="list-group list-group-flush col-6">
               <li class="list-group-item">
                 <h5 class="texto_reporte ">Fecha Entrada:</h5>
-                <h4>'.$fecha_entrada.'</h4>
+                <h4>'.($fecha_entrada ? $fecha_entrada : "-").'</h4>
               </li>
               <li class="list-group-item">
                 <h5 class="texto_reporte ">Usuario que la hizo:</h5>
-                <h4>'.$usuario_reservacion.'</h4>
+                <h4>'.($usuario_reservacion ? $usuario_reservacion : "-").'</h4>
               </li>
               <li class="list-group-item">
                 <h5 class="texto_reporte ">Noches:</h5>
-                <h4>'.$noches.'</h4>
+                <h4>'.($noches ? $noches : "-").'</h4>
               </li>
               <li class="list-group-item">
                 <h5 class="texto_reporte ">Nombre Huesped:</h5>
-                <h4>'.$nombre_huesped.'</h4>
+                <h4>'.($nombre_huesped ? $nombre_huesped : "-").'</h4>
                 </li>
               <li class="list-group-item">
                 <h5 class="texto_reporte ">Tarifa:</h5>
-                <h4>'.' $'.number_format($costo_tarifa,2).'</h4>
+                <h4>'.' $'.( $costo_tarifa ? number_format($costo_tarifa,2) : "-").'</h4>
               </li>';
               if($extra_infantil > 0 ){
                 echo '
@@ -148,18 +148,18 @@
               <ul class="list-group list-group-flush col-6">
               <li class="list-group-item">
               <h5 class="texto_reporte ">Fecha Salida:</h5>
-                <h4>'.$fecha_salida.'</h4>
+                <h4>'.($fecha_salida ? $fecha_salida : "-" ).'</h4>
                 </li>
               <li class="list-group-item">
               <h5 class="texto_reporte ">Cantidad habitaciones</h5>
-                <h4>'.$numero_hab.'</h4>
+                <h4>'.($numero_hab ? $numero_hab : "-").'</h4>
               </li>
               <li class="list-group-item">
                 <h5 class="texto_reporte ">Nombre Tarifa:</h5>
-                <h4>'.$nombre_tarifa.'</h4>
+                <h4>'.($nombre_tarifa ? $nombre_tarifa : "-" ).'</h4>
               </li>
               <li class="list-group-item">';
-                if($quien_reserva   !="checkin"){
+                if($quien_reserva  != "checkin"){
                   echo '
                     <h5 class="texto_reporte ">Quién Reserva:</h5>
                     <h4>'.$quien_reserva.'</h4>
@@ -172,7 +172,7 @@
                 </li>
                 <li class="list-group-item">
                 <h5 class="texto_reporte">Cantidad Hospedaje:</h5> 
-                <h4>'.$cantidad_hospedaje.'</h4>
+                <h4>'.($cantidad_hospedaje ? $cantidad_hospedaje : "-" ).'</h4>
                 </li>
               </ul>
             </div>
@@ -181,49 +181,49 @@
             <!-- -------------------------------------------------------------------------------- -->
 
 
-            <div class="container row">
+            <div class="col-12 row">
               <ul class="list-group list-group-flush col-6">
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Número Cuenta:</h5>
-                  <h4>'.$id_cuenta.'</h4>
+                  <h4>'.($id_cuenta ? $id_cuenta : "-").'</h4>
                 </li>
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Suplementos:</h5>
-                  <h4>'.$nombre_plan.'</h4>
+                  <h4>'.($nombre_plan ? $nombre_plan : "-" ).'</h4>
                 </li>
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Forma Pago:</h5>
-                  <h4>'.$forma_pago.'</h4>
+                  <h4>'.($forma_pago ? $forma_pago : "-" ).'</h4>
                 </li>
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Total Habitación:</h5>
-                  <h4>'.$total_habitacion.'</h4>
+                  <h4>'.($total_habitacion ? $total_habitacion : "-").'</h4>
                 </li>
                 <li>
                   <h5 class="texto_reporte ">Total Estancia:</h5>
-                  <h4>'.$total_estancia.'</h4>
+                  <h4>'.($total_estancia ? $total_estancia : "-" ).'</h4>
                 </li>
               </ul>
               <ul class="list-group list-group-flush col-6">
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Precio Hospedaje:</h5>
-                  <h4>'.$precio_hospedaje.'</h4>
+                  <h4>'.($precio_hospedaje ? $precio_hospedaje : "-" ).'</h4>
                 </li>
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Plan Alimentos:</h5>
-                  <h4>'.$total_alimentos.'</h4>
+                  <h4>'.($total_alimentos ? $total_alimentos : "-" ).'</h4>
                 </li>
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Pax Extra:</h5>
-                  <h4>'.$pax_extra.'</h4>
+                  <h4>'.($pax_extra ? $pax_extra : "-").'</h4>
                 </li>
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Descuento:</h5>
-                  <h4>'.$descuento.'</h4>
+                  <h4>'.($descuento ? $descuento : "-" ).'</h4>
                 </li>
                 <li class="list-group-item">
                   <h5 class="texto_reporte ">Total Pago:</h5>
-                  <h4>'.$total_pago.'</h4>
+                  <h4>'.($total_pago ? $total_pago : "-").'</h4>
                 </li>
               </ul>
             </div>
@@ -232,41 +232,41 @@
               <div class="col-sm-12 text-left"><h4 class="text-dark">DATOS HUÉSPED</h4></div>
             </div>
 
-            <div class="container row">
+            <div class="col-12 row">
                 <ul class="list-group list-group-flush col-6">
                   <li class="list-group-item">
                     <h5 class="texto_reporte" >Nombre</h5>
-                    <h4>'.$huesped->nombre.'</h4>
+                    <h4>'.($huesped->nombre ? $huesped->nombre : "-").'</h4>
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Dirección:</h5>
-                    <h4>'.$huesped->direccion.'</h4>
+                    <h4>'.($huesped->direccion ? $huesped->direccion : "-").'</h4>
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Estado</h5>
-                    <h4>'.$huesped->estado.'</h4>
+                    <h4>'.($huesped->estado ? $huesped->estado : "-").'</h4>
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Telefono:</h5>
-                    <h4>'.$huesped->telefono.'</h4>
+                    <h4>'.($huesped->telefono ? $huesped->telefono : "-").'</h4>
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Contrato Socio:</h5>
-                    <h4>'.$huesped->contrato.'</h4>
+                    <h4>'.($huesped->contrato ? $huesped->contrato : "-").'</h4>
                   </li>
                   <li>
                     <h5 class="texto_reporte">Preferencias del huésped</h5>
-                    <h4>'.$huesped->preferencias.'</h4>
+                    <h4>'.($huesped->preferencias ? $huesped->preferencias : "-").'</h4>
                   </li>
                 </ul>
                 <ul class="list-group list-group-flush col-6">
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Apellido:</h5>
-                    <h4>'.$huesped->apellido.'</h4>
+                    <h4>'.($huesped->apellido ? $huesped->apellido : "-").'</h4>
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Dirección:</h5>
-                    <h4>'.$huesped->direccion.'</h4>
+                    <h4>'.($huesped->direccion ? $huesped->direccion : "-").'</h4>
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Codigo postal:</h5>
@@ -274,15 +274,15 @@
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Correo</h5>
-                    <h4>'.$huesped->correo.'</h4>
+                    <h4>'.($huesped->correo ? $huesped->correo : "-").'</h4>
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Cupón</h5>
-                    <h4>'.$huesped->cupon.'</h4>
+                    <h4>'.($huesped->cupon ? $huesped->cupon : "-").'</h4>
                   </li>
                   <li class="list-group-item">
                     <h5 class="texto_reporte">Comentarios adicionales:</h5>
-                    <h4>'.$huesped->comentarios.'</h4>
+                    <h4>'.($huesped->comentarios ? $huesped->comentarios : "-").'</h4>
                   </li>
                 </ul>
             </div>
