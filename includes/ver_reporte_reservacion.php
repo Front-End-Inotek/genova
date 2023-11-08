@@ -25,8 +25,15 @@
                   <button type="submit" class="btn btn-success btn-block margen-1" value="Reenviar" onclick="enviar_reserva_correo('.$_GET['id'].',\''.$correo.'\',true)">Reenviar</button>
                   </div>';
                 }
+                //<div ><button class="btn btn-info btn-block" onclick="'.$ruta.'">⬅</button></div>
                 echo '
-                <div ><button class="btn btn-info btn-block" onclick="'.$ruta.'">⬅</button></div>
+                <div >
+                  <button class="btn btn-info btn-block" onclick="'.$ruta.'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               </div>
             </div>';
@@ -43,7 +50,6 @@
                     $noches= $fila['noches'];
                     $numero_hab= $fila['numero_hab'];
                     $tarifa= $fila['habitacion'];
-                  
                     $precio_hospedaje= '$'.number_format($fila['precio_hospedaje'], 2);
                     $cantidad_hospedaje= $fila['reserva_cantidad'];
                     $extra_adulto= $fila['extra_adulto'];
@@ -91,126 +97,196 @@
                     $limite_pago= $reservacion->mostrar_nombre_pago($fila['limite_pago']);
             }
             $huesped= NEW Huesped($id_huesped);
-            echo '<div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Fecha Entrada:</span> '.$fecha_entrada.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Fecha Salida:</span> '.$fecha_salida.'</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Usuario que la hizo:</span> '.$usuario_reservacion.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Cantidad habitaciones:</span> '.$numero_hab.'</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Noches:</span> '.$noches.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Nombre Tarifa:</span> '.$nombre_tarifa.'</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Nombre Huesped:</span> '.$nombre_huesped.'</div>';
-              if($quien_reserva!="checkin"){
-                echo '<div class="col-sm-5"><span class="texto_reporte">Quién Reserva:</span> '.$quien_reserva.'</div>';
-              }else{
-                echo '<div class="col-sm-5"></div>';
+            echo '
+            <div class="container row">
+            <ul class="list-group list-group-flush col-6">
+              <li class="list-group-item">
+                <h5 class="texto_reporte ">Fecha Entrada:</h5>
+                <h4>'.$fecha_entrada.'</h4>
+              </li>
+              <li class="list-group-item">
+                <h5 class="texto_reporte ">Usuario que la hizo:</h5>
+                <h4>'.$usuario_reservacion.'</h4>
+              </li>
+              <li class="list-group-item">
+                <h5 class="texto_reporte ">Noches:</h5>
+                <h4>'.$noches.'</h4>
+              </li>
+              <li class="list-group-item">
+                <h5 class="texto_reporte ">Nombre Huesped:</h5>
+                <h4>'.$nombre_huesped.'</h4>
+                </li>
+              <li class="list-group-item">
+                <h5 class="texto_reporte ">Tarifa:</h5>
+                <h4>'.' $'.number_format($costo_tarifa,2).'</h4>
+              </li>';
+              if($extra_infantil > 0 ){
+                echo '
+                <li class="list-group-item">
+                  <h5 class="texto-reporte ">Extra infantil:</h5>
+                  <h4>'.$extra_infantil.' ('.$precio_infantil.')</h4>
+                </li>
+                ';
+              } else {
+                echo '
+                ';
+              }
+              if($extra_menor > 0 ){
+                echo'
+                  <li class="list-group-item">
+                    <h5 class="texto-reporte ">Extra menor:</h5>
+                    <h4>'.$extra_menor.'</h4>
+                  </li>
+                ';
+              } else {
+                echo '
+                ';
               }
               echo '
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Tarifa:</span> '.' $'.number_format($costo_tarifa,2).'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Cantidad Hospedaje:</span> '.$cantidad_hospedaje.'</div>
-            </div>
-            <div class="row">';
-              if($extra_adulto>0){
-                echo '<div class="col-sm-1"></div>';
-                echo '<div class="col-sm-6"><span class="texto_reporte">Extra Adulto:</span> '.$extra_adulto.' ('.$precio_adulto.')</div>';
-              }else{
-                echo '<div class="col-sm-1"></div>';
-                echo '<div class="col-sm-6"></div>'; 
-              }
+              </ul>
 
-              if($extra_junior>0){
-                echo '<div class="col-sm-5"><span class="texto_reporte">Extra Junior:</span> '.$extra_junior.'</div>';
-              }else{
-                echo '<div class="col-sm-5"></div>'; 
-              }
-            echo '</div>
-            <div class="row">';
-              if($extra_infantil>0){
-                echo '<div class="col-sm-1"></div>';
-                echo '<div class="col-sm-6"><span class="texto_reporte">Extra Infantil:</span> '.$extra_infantil.' ('.$precio_infantil.')</div>';
-              }else{
-                echo '<div></div>';
-                echo '<div class="col-sm-6"></div>'; 
-              }
+              <ul class="list-group list-group-flush col-6">
+              <li class="list-group-item">
+              <h5 class="texto_reporte ">Fecha Salida:</h5>
+                <h4>'.$fecha_salida.'</h4>
+                </li>
+              <li class="list-group-item">
+              <h5 class="texto_reporte ">Cantidad habitaciones</h5>
+                <h4>'.$numero_hab.'</h4>
+              </li>
+              <li class="list-group-item">
+                <h5 class="texto_reporte ">Nombre Tarifa:</h5>
+                <h4>'.$nombre_tarifa.'</h4>
+              </li>
+              <li class="list-group-item">';
+                if($quien_reserva   !="checkin"){
+                  echo '
+                    <h5 class="texto_reporte ">Quién Reserva:</h5>
+                    <h4>'.$quien_reserva.'</h4>
+                  ';
+                }else {
+                  echo '
+                  ';
+                }
+                echo '
+                </li>
+                <li class="list-group-item">
+                <h5 class="texto_reporte">Cantidad Hospedaje:</h5> 
+                <h4>'.$cantidad_hospedaje.'</h4>
+                </li>
+              </ul>
+            </div>
 
-              if($extra_menor>0){
-                echo '<div class="col-sm-5"><span class="texto_reporte">Extra Menor:</span> '.$extra_menor.'</div>';
-              }else{
-                echo '<div class="col-sm-5"></div>'; 
-              }
-            echo '</div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Número Cuenta:</span> '.$id_cuenta.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Precio Hospedaje:</span> '.$precio_hospedaje.'</div>
+
+            <!-- -------------------------------------------------------------------------------- -->
+
+
+            <div class="container row">
+              <ul class="list-group list-group-flush col-6">
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Número Cuenta:</h5>
+                  <h4>'.$id_cuenta.'</h4>
+                </li>
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Suplementos:</h5>
+                  <h4>'.$nombre_plan.'</h4>
+                </li>
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Forma Pago:</h5>
+                  <h4>'.$forma_pago.'</h4>
+                </li>
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Total Habitación:</h5>
+                  <h4>'.$total_habitacion.'</h4>
+                </li>
+                <li>
+                  <h5 class="texto_reporte ">Total Estancia:</h5>
+                  <h4>'.$total_estancia.'</h4>
+                </li>
+              </ul>
+              <ul class="list-group list-group-flush col-6">
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Precio Hospedaje:</h5>
+                  <h4>'.$precio_hospedaje.'</h4>
+                </li>
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Plan Alimentos:</h5>
+                  <h4>'.$total_alimentos.'</h4>
+                </li>
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Pax Extra:</h5>
+                  <h4>'.$pax_extra.'</h4>
+                </li>
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Descuento:</h5>
+                  <h4>'.$descuento.'</h4>
+                </li>
+                <li class="list-group-item">
+                  <h5 class="texto_reporte ">Total Pago:</h5>
+                  <h4>'.$total_pago.'</h4>
+                </li>
+              </ul>
             </div>
+
             <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Suplementos:</span> '.$nombre_plan.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Plan Alimentos:</span> '.$total_alimentos.'</div>'; 
-            echo '</div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Forma Pago:</span> '.$forma_pago.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Pax Extra:</span> '.$pax_extra.'</div>
+              <div class="col-sm-12 text-left"><h4 class="text-dark">DATOS HUÉSPED</h4></div>
             </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Total Habitacion:</span> '.$total_habitacion.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Descuento:</span> '.$descuento.'</div>
+
+            <div class="container row">
+                <ul class="list-group list-group-flush col-6">
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte" >Nombre</h5>
+                    <h4>'.$huesped->nombre.'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Dirección:</h5>
+                    <h4>'.$huesped->direccion.'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Estado</h5>
+                    <h4>'.$huesped->estado.'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Telefono:</h5>
+                    <h4>'.$huesped->telefono.'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Contrato Socio:</h5>
+                    <h4>'.$huesped->contrato.'</h4>
+                  </li>
+                  <li>
+                    <h5 class="texto_reporte">Preferencias del huésped</h5>
+                    <h4>'.$huesped->preferencias.'</h4>
+                  </li>
+                </ul>
+                <ul class="list-group list-group-flush col-6">
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Apellido:</h5>
+                    <h4>'.$huesped->apellido.'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Dirección:</h5>
+                    <h4>'.$huesped->direccion.'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Codigo postal:</h5>
+                    <h4>'.($huesped->codigo_postal ? $huesped->codigo_postal : "-").'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Correo</h5>
+                    <h4>'.$huesped->correo.'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Cupón</h5>
+                    <h4>'.$huesped->cupon.'</h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h5 class="texto_reporte">Comentarios adicionales:</h5>
+                    <h4>'.$huesped->comentarios.'</h4>
+                  </li>
+                </ul>
             </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Total Estancia:</span> '.$total_estancia.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Total Pago:</span> '.$total_pago.'</div>
-            </div><hr> 
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-11 text-left"><h4 class="text-dark">DATOS HUÉSPED</h4></div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Nombre:</span> '.$huesped->nombre.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Apellido:</span> '.$huesped->apellido.'</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Direccion:</span> '.$huesped->direccion.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Ciudad:</span> '.$huesped->ciudad.'</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Estado:</span> '.$huesped->estado.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Codigo postal:</span> '.$huesped->codigo_postal.'</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Telefono:</span> '.$huesped->telefono.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Correo:</span> '.$huesped->correo.'</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Contrato Socio:</span> '.$huesped->contrato.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Cupón:</span> '.$huesped->cupon.'</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-1"></div>
-              <div class="col-sm-6"><span class="texto_reporte">Preferencias del huésped:</span> '.$huesped->preferencias.'</div>
-              <div class="col-sm-5"><span class="texto_reporte">Comentarios adicionales:</span> '.$huesped->comentarios.'</div>
-            </div>
-        </div>'; 
+        </div>';
   echo '
          </div><div class="col-sm-1"></div>
          </div></div>';
