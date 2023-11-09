@@ -116,6 +116,12 @@
       //echo $sentencia;
       $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
+    function guardar_uuid($folio, $uuid){
+      $sentencia="UPDATE `facturas` SET `uuid`='$uuid' WHERE `folio`='$folio'";
+      $comentario="guardar uuid ";
+      //echo $sentencia;
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+    }
     function obtener_folio_factura(){
       $folio=0;
       $sentencia="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";

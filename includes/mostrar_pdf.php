@@ -128,6 +128,8 @@ function Footer()
       $this->SetFont('Arial','',8);
       $this->Cell(116,5, $tfd['UUID'],0,1,'R',0);
 
+      $fact->guardar_uuid($folio,$tfd['UUID']);
+
       $this->setX(70);
       $this->SetFont('Arial','B',12);
       $this->Cell(50,8, utf8_decode('No. Certificado Sat'),0,1,'L',0);

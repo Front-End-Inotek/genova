@@ -6,7 +6,7 @@
     }else{
         $contador = 15;
     }
-    
+    $_SESSION['lista_id_ticket']="";
     if(empty($contador)){
         $contador = 15;
     }

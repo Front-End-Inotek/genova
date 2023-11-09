@@ -33,7 +33,6 @@ $rimporte = $_POST['rimporte'];
 $riva = $_POST['riva'];
 $rish = $_POST['rish'];
 $rtotal = $_POST['rtotal'];
-
 $contador = $_POST['filas'];
 
 // Se desactivan los mensajes de debug
@@ -183,9 +182,12 @@ $row3=mysqli_fetch_array($resultado3);
         //var_dump($datos);¨
         $listaid=$_SESSION['lista_id_ticket'];
         //var_dump($listaid);
-        for($i=0; $i<count($listaid); $i++){
-            $ticket->cambiar_estado_facturados($listaid[$i]);
-        };
+        if($listaid!=""){
+            for($i=0; $i<count($listaid); $i++){
+                $ticket->cambiar_estado_facturados($listaid[$i]);
+            };
+        }
+        $_SESSION['lista_id_ticket']="";
     }else{
         echo $res['mensaje_original_pac_json'];
         var_dump($datos);
