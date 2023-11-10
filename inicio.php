@@ -39,6 +39,7 @@
             <link rel=stylesheet href="styles/configColorsHab.css" type="text/css">
             <link rel="stylesheet" href="styles/credito.css">
             <link rel="stylesheet" href="css/stylesform.css" />
+            <link rel="stylesheet" href="styles/index.css" />
             <script src="js/events.js"></script>
             <script src="js/contenido_inicio.js"></script>
             <script src="js/main.js"></script>

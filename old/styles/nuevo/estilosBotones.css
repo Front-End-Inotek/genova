@@ -793,6 +793,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
 
 .context {
   display: block;
+  background-color: red !important;
 }
 
 .context.hide {
