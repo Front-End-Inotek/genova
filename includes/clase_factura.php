@@ -5,6 +5,7 @@
    date_default_timezone_set('America/Mexico_City');
    include_once('consulta.php');
    include_once('clase_usuario.php');
+   session_start();
 
 
   class factura extends ConexionMYSql
@@ -123,6 +124,7 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
     function obtener_uuid($folio){
+      $uuid="";
       $sentencia="SELECT `uuid` FROM `facturas` WHERE `folio`='$folio'";
       $comentario="obtener uuid ";
       //echo $sentencia;
@@ -152,7 +154,7 @@
       return $consulta;
     }
     function estado_cancelar_factura($folio){
-      $sentencia = "UPDATE facturas SET estado = 1 WHERE folio = $folio";
+      $sentencia = "UPDATE facturas SET estado = 1 WHERE folio = '$folio'";
       $comentario="cambiar estado de factura a cancelado ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$fila = mysqli_fetch_array($consulta);
