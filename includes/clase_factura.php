@@ -151,6 +151,12 @@
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
     }
+    function estado_cancelar_factura($folio){
+      $sentencia = "UPDATE facturas SET estado = 1 WHERE folio = $folio";
+      $comentario="cambiar estado de factura a cancelado ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //$fila = mysqli_fetch_array($consulta);
+    }
     function mes(){
       $sentencia = "SELECT * FROM mes";
       $comentario="mes ";

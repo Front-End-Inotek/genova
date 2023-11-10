@@ -48,9 +48,7 @@ if($respuesta == 'OK'){
     foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){
     $folio = $cfdiComprobante['Folio'];
     }
-        $consulta2="UPDATE facturas SET estado = 1 WHERE folio = $folio";
-        $resultado2=mysqli_query($con,$consulta2);
-        $row2=mysqli_fetch_array($resultado2);
+        $fact->estado_cancelar_factura($folio);
 }
 
 /*NOTA: PARA REALIZAR LA CANCELACION SE REQUIERE EL UUID DE LA FACTURA A CANCELAR. 
