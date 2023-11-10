@@ -1,5 +1,10 @@
 <?php
-
+include("clase_factura.php");
+$fact = NEW factura ();
+$folio="";
+$folio=$_GET['folio'];
+$uuid= $fact->obtener_uuid($folio);
+echo $folio;
 echo '
     <div class="container-fluid blanco">
         <div class="col-12 text-center"><h2 class="text-dark">Cancelar factura</h2></div>
@@ -14,7 +19,7 @@ echo '
                 </div> --> 
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="uuid" placeholder="UUID" min-length="1" maxlength="36" required >
+                    <input type="text" class="form-control" id="uuid" placeholder="UUID" min-length="1" maxlength="36" value="'.$uuid.'" required >
                     <label for="uuid">UUID</label>
                 </div>
 

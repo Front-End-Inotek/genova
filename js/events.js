@@ -7562,6 +7562,15 @@ function factura_cancelar(){
     //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
     closeNav();
 }
+function factura_cancelarbtn(folio){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_cancelar.php?folio="+folio);
+    //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
+    closeNav();
+}
 function factura_buscar_fecha(){
     //usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();

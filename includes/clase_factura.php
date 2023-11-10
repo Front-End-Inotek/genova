@@ -122,6 +122,17 @@
       //echo $sentencia;
       $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
+    function obtener_uuid($folio){
+      $sentencia="SELECT `uuid` FROM `facturas` WHERE `folio`='$folio'";
+      $comentario="obtener uuid ";
+      //echo $sentencia;
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $uuid=$fila['uuid'];
+      }
+      return $uuid;
+    }
     function obtener_folio_factura(){
       $folio=0;
       $sentencia="SELECT folio FROM facturas ORDER BY id DESC LIMIT 1";
@@ -266,7 +277,18 @@
                 }
                 $contador++;
                 if(file_exists( $file )){
-                  echo '<th><button type="button" class="btn btn-outline-primary" onclick="reenviar_factura(' . htmlspecialchars($fila['folio']) . ', \'' . htmlspecialchars($fila['nombre']) . '\')">Reenviar</button></th>';
+                  echo '
+                    <th>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ver mas
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" onclick="reenviar_factura(' . htmlspecialchars($fila['folio']) . ', \'' . htmlspecialchars($fila['nombre']) . '\')">Reenviar</a>
+                        <a class="dropdown-item" href="#" onclick="factura_cancelarbtn('.$fila['folio'].')">Cancelar</a>
+                      </div>
+                    </div>
+                    </th>';
                 }else {
                   echo '<th>-</th>';
                 }
