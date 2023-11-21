@@ -1774,7 +1774,7 @@ function graficas(){
 function pronosticos(){
     $('#area_trabajo').hide();
     $('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/pronosticos.php");
+    $("#area_trabajo_menu").load("includes/pronosticos_de_ocupacion.php");
     $('#pie').show();
     closeModal();
     closeNav();

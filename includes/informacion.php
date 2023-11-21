@@ -320,9 +320,10 @@ class Informacion extends ConexionMYSql
                 $fecha_inicio= date("d-m-Y",$cronometro);
             }
             echo $fecha_inicio;
+            
             }
             echo '</span>';
-            echo '<span class="otrosApartados">'; echo $tipo_habitacion; echo '</span>';
+            echo '<span class="otrosApartados" style="background-color: '.$color.' !important; ">'; echo $tipo_habitacion; echo '</span>';
             echo '
                 </a>
             </div>
