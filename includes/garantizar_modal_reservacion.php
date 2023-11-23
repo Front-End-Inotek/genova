@@ -17,38 +17,41 @@ if(isset($_GET['preasignada']) && $_GET['preasignada']!=0) {
 }
 echo '
   <!-- Modal content-->
-  <div class="modal-content">
     <div class="modal-header">
-      Garantizar Reservación: '.$_GET['id'];
-echo '<button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h5>Garantizar Reservación: '.$_GET['id'].' <h5>
+      <button type="button" class="btn btn-light" data-dismiss="modal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+      </button>
     </div><br>
+
     <div class="modal-body">
+
     <form id="garantia-tarjeta">
-      <div class="row">
-        <div class="col-sm-3" >Estado:</div>
-        <div class="col-sm-9" >
-        <div class="form-group">
-        <select class="form-control" id="estado"  onchange="garantizar_reserva_selects(event)">
-        <option value="">Seleccione una opción</option>
-        <option value="garantizada">Garantizada</option>
-        <option value="pendiente">Sin garantía</option>
-        </select>
-        </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 asterisco" >Método de garantía:</div>
-        <div class="col-sm-9" >
-        <div class="form-group">
-        <select class="form-control" id="forma-garantia" required onchange="garantizar_reserva_selects(event)" >
-        <option value="">Seleccione una opción </option>
-        ';
-$forma_pago->mostrar_forma_pago();
-echo'
-        </select>
-        </div>
+
+      <div class="inputs_form_container">
+        <div class="form-floating input_container">
+          <select class="form-select custom_input" id="estado"  onchange="garantizar_reserva_selects(event)">
+            <option selected disabled>Seleccione una opción</option>
+            <option value="garantizada">Garantizada</option>
+            <option value="pendiente">Sin garantía</option>
+          </select>
+          <label for="estado">Estado</label>
         </div>
       </div>
+
+      <div class="inputs_form_container input_container">
+        <div class="form-floating input_container">
+          <select class="form-control custom_input" id="forma-garantia" required onchange="garantizar_reserva_selects(event)" >
+          <option selected disabled>Seleccione una opción</option>';
+          $forma_pago->mostrar_forma_pago();
+    echo'
+          </select>
+          <label for="forma-garantia">Metodo de garantia</label>
+        </div>
+      </div>
+
       <div id="div-tarjeta" style="display:none">
         <div class="row">
         <div class="col-sm-3 asterisco" >Número de tarjeta:</div>
@@ -90,19 +93,18 @@ echo'
         </div>
       </div>
       </div>
-      <div class="row">
-      <div class="col-sm-3" >Monto:</div>
-      <div class="col-sm-9" >
-      <div class="form-group">
-      <input class="form-control" type="text"  id="monto" placeholder="Ingresa el monto con el que garantizas la reservación" maxlength="60">
+
+      <div class="inputs_form_container">
+        <div class="form-floating input_container" >
+          <input class="form-control custom_input" type="text"  id="monto" placeholder="Ingresa el monto con el que garantizas la reservación" maxlength="60">
+          <label for="monto">Monto</label>
+        </div>
       </div>
-      </div>
-    </div>
-      <br>
+  
     </div>
     </form>
     <div class="modal-footer" id="boton_cancelar_reservacion">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="garantizar_reservacion('.$_GET['id'].','.$preasignada.',\''.$correo.'\','.$garantizada.','.$huesped_id.')"> Aceptar</button>
+      <button type="button" class="btn btn-primary" onclick="garantizar_reservacion('.$_GET['id'].','.$preasignada.',\''.$correo.'\','.$garantizada.','.$huesped_id.')"> Aceptar</button>
     </div>
-  </div>';
+  ';

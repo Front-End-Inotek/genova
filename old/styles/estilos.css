@@ -208,13 +208,6 @@ label {
 
 /* Contenedor con fondo blanco y bordes */
 .blanco {
-  padding: 25px 25px;
-  background-size:contain;
-  color: var(--subtitulos) !important;
-  background-color: #fff !important;
-  margin-top: 60px !important;
-  padding-top: 20px !important;
-  border-radius: 5px;
   -webkit-animation-name: efecto;
   animation-name: efecto;
   -webkit-animation-duration: 1s;
@@ -253,17 +246,7 @@ label {
   margin-bottom: 10rem;
 }
 
-.blanco {
-  position: relative;
-  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
-  overflow-y: scroll;
-  max-height: 85vh;
-  min-height: 60vh;
-}
 
-.blanco{
-  border-radius: 10px;
-}
 
 .table-responsive {
   margin-left: 10px !important;
@@ -359,14 +342,8 @@ select {
   background: linear-gradient(180deg, #c3cafd 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);*/
 }
 
-.table-responsive td:hover {
-  background-color: #2C8FEB;
-  color: white;
-}
-td:hover {
-  background-color: #2C8FEB;
-  color: white;
-}
+
+
 td:hocer span{
   color: white;
 }
@@ -1240,12 +1217,7 @@ select option:hover{
   text-align: center;
 }
 
-.row {
-  margin-right: -10px;
-  margin-left: -10px;
-  padding-left: 15px;
-  margin-bottom: 20px;
-}
+
 
 .col-xs-1,
 .col-sm-1,

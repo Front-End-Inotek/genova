@@ -1321,10 +1321,10 @@ class Reservacion extends ConexionMYSql
         $tarifa_td="";
 
         echo '
-            <div class="table-responsive" id="tabla_reservacion" style="max-height:560px; overflow-x: scroll; min-height: 300px;">
-            <table class="table table-bordered table-hover">
+            <div class="table-responsive" id="tabla_reservacion" style=" overflow-x: scroll; min-height: 300px;">
+            <table class="table">
             <thead>
-                <tr class="table-primary-encabezado text-center">
+                <tr class=" text-center">
                 <th>Número</th>
                 <th>Fecha Entrada</th>
                 <th>Fecha Salida</th>
@@ -1460,8 +1460,8 @@ class Reservacion extends ConexionMYSql
         $estado_reserva="";
         $tarifa_td="";
         echo '
-            <div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
-            <table class="table table-bordered table-hover">
+            <div class="table-responsive" id="tabla_reservacion" style="overflow-x: scroll;min-height: 300px;">
+            <table class="table ">
             <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Número</th>
@@ -1595,11 +1595,15 @@ class Reservacion extends ConexionMYSql
         $comentario="Mostrar las reservaciones que llegan hoy";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         echo '
-		<button class="btn btn-success" href="" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
-		<br>
-		<br>
+		<button class="btn btn-primary" href="" data-toggle="modal" onclick="agregar_reservaciones()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            Agregar reservaciones
+        </button>
 		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
-		<table class="table table-bordered table-hover">
+		<table class="table">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
@@ -1696,11 +1700,15 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         //<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
         echo '
-		<button class="btn btn-success" href="" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
-		<br>
-		<br>
+        <button class="btn btn-primary" href="" data-toggle="modal" onclick="agregar_reservaciones()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            Agregar reservaciones
+        </button>
 		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
-		<table class="table table-bordered table-hover">
+		<table class="table ">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
@@ -1815,7 +1823,7 @@ class Reservacion extends ConexionMYSql
                     //echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')"> Editar</button></td>';
                     echo '<td>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Ver mas
                             </button>
                             <div class="dropdown-menu" aria-labelledby="options">';
@@ -1891,7 +1899,7 @@ class Reservacion extends ConexionMYSql
                     //echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')"> Editar</button></td>';
                     echo '<td>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Ver mas
                             </button>
                             <div class="dropdown-menu" aria-labelledby="options">';
@@ -1967,7 +1975,7 @@ class Reservacion extends ConexionMYSql
             //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'CHECK-IN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
             echo '<td>
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ver mas
                 </button>
                 <div class="dropdown-menu" aria-labelledby="options">';
@@ -2078,11 +2086,15 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         //<button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
         echo '
-		<button class="btn btn-success" href="" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
-		<br>
-		<br>
+        <button class="btn btn-primary" href="" data-toggle="modal" onclick="agregar_reservaciones()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            Agregar reservaciones
+        </button>
 		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
-		<table class="table table-bordered table-hover">
+		<table class="table">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
@@ -2205,7 +2217,7 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         echo '
 			<div class="table-responsive" id="tabla_reservacion">
-			<table class="table table-bordered table-hover">
+			<table class="table">
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
@@ -2282,7 +2294,7 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         echo '
 			<div class="table-responsive" id="tabla_reservacion">
-			<table class="table table-bordered table-hover">
+			<table class="table">
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
@@ -2401,7 +2413,7 @@ class Reservacion extends ConexionMYSql
             $consulta= $this->realizaConsulta($sentencia, $comentario);
             //se recibe la consulta y se convierte a arreglo
             echo '<div class="table-responsive" id="tabla_reservacion">
-		    <table class="table table-bordered table-hover">
+		    <table class="table">
 			<thead>
 			    <tr class="table-primary-encabezado text-center">
 			    <th>Número</th>
@@ -2683,7 +2695,7 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_reservacion">';
         $this->datos_por_dia($inicio_dia, $a_buscar);
-        echo '<table class="table table-bordered table-hover">
+        echo '<table class="table">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
@@ -2820,7 +2832,7 @@ class Reservacion extends ConexionMYSql
 			<div class="table-responsive" id="tabla_reservacion">';
             $this->datos_por_dia($inicio_dia, $a_buscar);
 
-            echo '<table class="table table-bordered table-hover">
+            echo '<table class="table">
                 <thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
@@ -2975,7 +2987,7 @@ class Reservacion extends ConexionMYSql
             echo '<div class="table-responsive" id="tabla_reservacion">';
             $this->datos_por_dia($fecha_dia, $a_buscar);
 
-            echo '<table class="table table-bordered table-hover">
+            echo '<table class="table">
 			<thead>
 			  <tr class="table-primary-encabezado text-center">
 			  <th>Número</th>

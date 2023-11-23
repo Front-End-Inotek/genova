@@ -14,6 +14,7 @@ echo '
                 <h1 class="title"> Visit Dashboard</h1>
                 <p class="info"> Aqui es donde puedes ver que es lo que esta pasando en tu negocio ahora mismo </p>
                 <p class="subtitle"> Total de ocupación año actual</p>
+                <hr/>
                 <canvas id="grafica"></canvas>
             </main>
             <div class="contenedor__graficas-secundario">

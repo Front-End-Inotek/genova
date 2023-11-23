@@ -1,0 +1,338 @@
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #9e9e9e #e2e2e2;
+    text-decoration: none;
+  }
+  a {
+    text-decoration: none !important;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+/*   *::-webkit-scrollbar-track {
+    background: #e2e2e2;
+  } */
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #343434;
+    border-radius: 0px;
+    border: 0px solid #e2e2e2;
+  }
+
+body {
+  background-color: #F5F5F7;
+  color: #1D1D1F;
+  width: auto;
+  overflow: hidden;
+  height: auto;
+  overflow: scroll;
+}
+
+.main {
+  width: calc( 100% - 5.9rem );
+  margin-left: 5.9rem;
+  padding-bottom: 10vh;
+  height: 100%;
+}
+/* formulari */
+.form_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:  0 0 2rem 0;
+}
+.form_title_container {
+  width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #1d1d1f;
+  border-bottom: 1px solid #d2d2d7;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.custom_input {
+  border: 2px solid#8686868b;
+  background-color: #ffffffcc;
+  border-radius: 12px;
+}
+.custom_input:focus {
+  border-color: #0071e3;
+  box-shadow: none;
+}
+
+.inputs_form_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+.input_container {
+  flex-grow: 1;
+}
+.input_container_date{
+  width: 100%;
+  max-width: 150px;
+}
+.formulario_contenedor{
+  width: 95%;
+  max-width: 900px;
+}
+.container_btn {
+  width: 100%;
+  margin: 1rem 0;
+}
+.accordionItemHeaderCustom::after{
+  content: "\002B";
+  font-size: 2rem;
+  position: absolute;
+  right: 1rem;
+}
+.accordionItemHeaderCustom.active::after{
+  content: "\2212" !important;
+}
+.accordionItemBodyCustom{
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+.activeAcordeon{
+  max-height: fit-content !important;
+}
+.accordionItemBodyContentCustom{
+  padding: 1rem;
+  line-height: 1.5rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.087);
+}
+.accordionCustom{
+  width: 100%;
+  /* max-width: 1000px; */
+  margin: 1rem auto;
+  display: none;
+}
+.accordionCustomMostrar{
+  display: block;
+}
+.accordion-itemCustom{
+  background-color: #fff;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  /* box-shadow: 0 2px 5px 0 rgba(0,0,0,0.25); */
+  border: 2px solid #8686868b;
+}
+.accordionItemHeaderCustom{
+  padding: 0.5rem 3rem 0.5rem 1rem;
+  min-height: 3.5rem;
+  line-height: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Rack de operaciones estilos */
+.room_container {
+  width: 200px;
+  height: 143.776px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8.507px;
+  background-color: #FFF;
+}
+
+/* Footer */
+.footerContainer {
+    position: fixed;
+    width: 100%;
+    height: 4vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    bottom: 0;
+    padding-left: 5.375rem;
+    background-color: #fafafa2a;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    flex-wrap: wrap;
+    overflow: scroll;
+}
+.footerContainerText {
+    margin: 0;
+    height: fit-content;
+}
+.footerDividor{
+    height: 80%;
+    width: 0.1px;
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0.56;
+    border-radius: 15px;
+}
+/* .modal-dialog {
+  margin: auto auto auto 5.7rem;
+} */
+
+.main_container {
+  height: auto;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+}
+.main_container_title {
+  display: flex;
+  width: 95%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #d2d2d7;
+  font-size: 1rem;
+  line-height: 1.1;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+.credit_card_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.credit_card_svg {
+  width: 100%;
+  max-width: 150px;
+}
+.table-responsive {
+  padding-bottom: 7rem;
+}
+.ios-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.ios-switch-checkbox {
+  display: none;
+}
+
+.ios-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.ios-switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.ios-switch-checkbox:checked + .ios-switch-slider {
+  background-color: #2196F3;
+}
+
+.ios-switch-checkbox:focus + .ios-switch-slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.ios-switch-checkbox:checked + .ios-switch-slider:before {
+  transform: translateX(26px);
+}
+
+/* iOS style */
+.ios-switch-slider:before {
+  border: 1px solid #2196F3;
+}
+
+.mesas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Estilos para mobile */
+@media only screen and (max-width: 600px){
+    .main {
+        width: 100%;
+        height: 95vh;
+        background-color: #F5F5F7;
+        color: #1D1D1F;
+        margin-left: 0;
+        margin-top: 7vh;
+    }
+    .footerContainer {
+        height: 7vh;
+        width: 100%;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        flex-direction: column;
+        background-color: #fafafa2a;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid #0000004f;
+        display: none !important;
+    }
+    .footerDividor {
+        display: none;
+    }
+    .form_container {
+      width: 100%;
+      height: 97vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .modal-dialog {
+      margin: 10vh auto 0px auto;
+    }
+    .main_container {
+      width: 100%;
+    }
+    .input_container_date{
+      max-width: 95%;
+      margin: auto;
+    }
+}

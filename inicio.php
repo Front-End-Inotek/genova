@@ -18,28 +18,24 @@
             <!-- BOX ICONS CSS-->
             <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet"/>
             <link rel=stylesheet href="styles/nuevo/estilosBotones.css" type="text/css">
-            <link rel=stylesheet href="styles/nuevo/navDesplegable.css" type="text/css">
-            <link rel=stylesheet href="styles/nuevo/rackHabitacional.css" type="text/css">
             <script src="js/rackHabitacional.js"></script>
             <script src="js/navDesplegable.js"></script>
             <script src="js/scriptBotones.js"></script>
             <script src="js/sweetalert.min.js"></script>
             <!--link css-->
-            <link rel=stylesheet href="styles/estilos.css" type="text/css">
-            <link rel=stylesheet href="styles/estado0.css" type="text/css">
-            <link rel=stylesheet href="styles/estado1.css" type="text/css">
-            <link rel=stylesheet href="styles/estado2.css" type="text/css">
-            <link rel=stylesheet href="styles/estado3.css" type="text/css">
-            <link rel=stylesheet href="styles/estado4.css" type="text/css">
-            <link rel=stylesheet href="styles/estado5.css" type="text/css">
-            <link rel=stylesheet href="styles/estado6.css" type="text/css">
-            <link rel=stylesheet href="styles/subestados.css" type="text/css">
-            <link rel=stylesheet href="styles/graficas.css" type="text/css">
-            <link rel=stylesheet href="styles/pronosticos.css" type="text/css">
-            <link rel=stylesheet href="styles/configColorsHab.css" type="text/css">
-            <link rel="stylesheet" href="styles/credito.css">
-            <link rel="stylesheet" href="css/stylesform.css" />
             <link rel="stylesheet" href="styles/index.css" />
+            <link rel=stylesheet href="styles/graficas.css" type="text/css">
+            <link rel=stylesheet href="styles/configColorsHab.css" type="text/css">
+            <link rel="stylesheet" href="styles/asidenav.css" />
+            <link rel=stylesheet href="styles/estilos.css" type="text/css">
+
+
+            <link rel=stylesheet href="styles/nuevo/estilosBotones.css" type="text/css">
+            <link rel=stylesheet href="styles/nuevo/rackHabitacional.css" type="text/css">
+            <link rel=stylesheet href="styles/pronosticos.css" type="text/css">
+            <link rel="stylesheet" href="css/stylesform.css" />
+
+
             <script src="js/events.js"></script>
             <script src="js/contenido_inicio.js"></script>
             <script src="js/main.js"></script>
@@ -53,21 +49,25 @@
             <script src="js/graficas.js"></script>
           </head>
     <body  onload="sabernosession()">
+
+      <!-- menu de navegacion -->
       <div class="menu"></div>
-      <div id="pie" class="footer"></div>
-      <div id="area_trabajo" class="container-fluid"></div>
-      <div id="area_trabajo_menu" class="container-fluid">
-      </div>
+
+      <!-- Area de trabajo en donde todo se renderiza -->
+      <div id="area_trabajo" class="main"></div>
+      <div id="area_trabajo_menu" class="main"></div>
+
       <!-- Modal -->
-              <div id="caja_herramientas" class="modal fade" role="dialog">
-                <div class="modal-dialog modal-lg">
-                  <!-- Modal content-->
-                  <div class="modal-content" id="mostrar_herramientas">
-                  </div>
-                </div>
-              </div>
-              </div>
-    </div>
+      <div id="caja_herramientas" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <!-- Modal content-->
+          <div class="modal-content" id="mostrar_herramientas"></div>
+        </div>
+      </div>
+
+      <!-- footer -->
+      <footer id="pie" class="footerContainer"></footer>
+
     </body>
   ';
 ?>

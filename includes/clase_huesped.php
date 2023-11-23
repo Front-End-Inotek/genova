@@ -100,190 +100,103 @@
       }
       public function mostrar_garantia($estado_tarjeta){
         echo '
-        <p id="choosen-paymenttype"></p>
-                <!--Principal-->
-                <div class="container-fluid blanco" >
-                    <header class="tarjeta" style="max-width: 600px;">
-                        <div class="card creditCard" id="cc-card">
-                            <div class="flipper">
-                                <div class="front">
-                                    <div class="shine"></div>
-                                    <div class="shadow"></div>
-                                    <div class="card-bg">
-                                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/513985/cc-front-bg.png" />
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="credit-card-type"></div>
-                                        <div class="card-number">
-                                            <span>1234 1234 1234 1234</span>
-                                            <span>1234 1234 1234 1234</span>
-                                        </div>
-                                        <div class="card-holder">
-                                            <span>Tu nombre</span>
-                                            <span>Tu nombre</span>
-                                        </div>
-                                        <div class="validuntil">
-                                            <em>Expira</em>
-                                            <div class="e-month">
-                                                <span>
-                                                  MM
-                                                </span>
-                                                <span>
-                                                  MM
-                                                </span>
-                                            </div>
-                                            <div class="e-divider">
-                                                <span>
-                                                  /
-                                                </span>
-                                                <span>
-                                                  /
-                                                </span>
-                                            </div>
-                                            <div class="e-year">
-                                                <span>
-                                                  YY
-                                                </span>
-                                                <span>
-                                                  YY
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+        <!--<p id="choosen-paymenttype"></p> -->
+          <div class="container-fluid" >
+              <form  id="form-garantia">
+                <picture class="credit_card_container">
+                  <img class="credit_card_svg" src="./assets/credit_card.svg" />
+                </picture>
+                          ';
+                            if(!empty($this->numero_tarjeta)){
+                              echo '
+                                <div class="form-floating input_container">
+                                  <input disabled class="form-control custom_input" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  value="**************" maxlength="16">
+                                  <input id="check_tarjeta" onchange="mostrar_tarjeta('.$this->id.')" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                                  <label class="asterisco" for"numero_tarjeta">Numero de tarjeta</label>
                                 </div>
-                                <div class="back">
-                                    <div class="shine"></div>
-                                    <div class="shadow"></div>
-                                    <div class="card-bg">
-                                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/513985/cc-back-bg-new.png" />
-                                    </div>
-                                    <div class="ccv">
-                                        <em>Numero CCV</em>
-                                        <strong></strong>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="card-number">
-                                            <span>4111 1111 1111 1111</span>
-                                            <span>4111 1111 1111 1111</span>
-                                        </div>
-                                        <div class="card-holder">
-                                            <span>Tu Nombre</span>
-                                            <span>Tu Nombre</span>
-                                        </div>
-                                        <div class="validuntil">
-                                            <span>
-                                                <strong class="e-month">MM</strong> / <strong class="e-year">YY</strong>
-                                            </span>
-                                            <span>
-                                                <strong class="e-month">MM</strong> /
-                                                <strong class="e-year">YY</strong>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
-                    <form class="tarjeta-form" id="form-garantia">
-                        <div class="form-content">
-                            <div class="form-group">
-                              <label class="asterisco" for="cardnumber">Numero de tarjeta</label>';
-                              if(!empty($this->numero_tarjeta)){
-                                echo '<div class="input-group">
-                                <input disabled class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  value="**************" maxlength="16">
-                                <div class="input-group-text">
-                                <input id="check_tarjeta" onchange="mostrar_tarjeta('.$this->id.')" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                              </div>
-                                </div>';
+                              ';
                               }else{
-                                echo '<div class="input-group">
-                                <input onchange="" type="number" name="número de tarjeta" class="form-control" id="numero_tarjeta" maxlength="20" value="'.$this->numero_tarjeta.'" required>
-                                <div class="input-group-append">
-                                </div>
-                              </div>';
+                                echo '
+                                <div class="form-floating input_container">
+                                  <input onchange="" type="number" name="número de tarjeta" class="form-control custom_input" id="numero_tarjeta" maxlength="20" value="'.$this->numero_tarjeta.'" required placeholder="Numero de tarjeta">
+                                  <label class="asterisco" for="numero_tarjeta">Numero de tarjeta</label>
+                                </div>';
                               }
                               echo '
-                            </div>
-                            <div class="form-group">
-                              <label class="asterisco" for="cardholder">Nombre en Tarjeta</label>
-                              <div class="input-group">
-                                <input  type="text" class="form-control" name="nombre en tarjeta" id="cardholder" maxlength="25" autocorrect="off" spellcheck="false" value="'.$this->titular_tarjeta.'" required>
-                                <div class="input-group-append">
-                                </div>
+
+                            <div class="inputs_form_container">
+                              <div class="form-floating input_container">
+                                <input  type="text" class="form-control custom_input" name="nombre en tarjeta" id="cardholder" maxlength="25" autocorrect="off" spellcheck="false" value="'.$this->titular_tarjeta.'" required placeholder="Nombre en Tarjeta">
+                                <label class="asterisco" for="cardholder">Nombre en Tarjeta</label>
                               </div>
                             </div>
-                            <div class="form-group">
-                            <label class="asterisco" for="cardnumber">Tipo de tarjeta</label>
-                            <div class="input-group">
-                              <input onchange="" name="tipo de tarjeta" placeholder="Mastercard, Visa, American Express, etc..." type="text" class="form-control" id="tipo" maxlength="20" value="'.$this->nombre_tarjeta.'" required>
-                              <div class="input-group-append">
+
+                            <div class="inputs_form_container">
+                              <div class="form-floating input_container">
+                                <input onchange="" name="tipo de tarjeta" placeholder="Mastercard, Visa, American Express, etc..." type="text" class="form-control custom_input" id="tipo" maxlength="20" value="'.$this->nombre_tarjeta.'" required>
+                                <label class="asterisco" for="tipo">Tipo de tarjeta</label>
                               </div>
                             </div>
-                          </div>
-                            <div class="form-group">
-                              <div class="row flex-wrap">
-                                <div class="col-6 col-12">
-                                  <label class="asterisco" for="expires-month">Expira</label>
-                                  <div class="input-group expire-date d-flex flex-wrap">
-                                    <div class="input-group-prepend">
-                                    </div>
-                                    <input name="expira (mes)" type="tel" class="form-control" id="expires-month" placeholder="MM" allowed-pattern="[0-9]" maxlength="2" value="'.$this->vencimiento_mes.'" required>
-                                    <div class="input-group-prepend divider">
-                                    </div>
-                                    <input name="expira (año)" type="tel" class="form-control" id="expires-year" placeholder="YY" allowed-pattern="[0-9]" maxlength="2"  value="'.$this->vencimiento_ano.'" required>
-                                    <div class="input-group-append">
-                                    </div>
+
+                            <div class="inputs_form_container">
+                              <div class="col-12 row g-2">
+                                <div class="col-md">
+                                  <div class="form-floating input_container">
+                                    <input type="tel" name="expira (mes)" class="form-control custom_input" id="expires-month" placeholder="MM" allowed-pattern="[0-9]" maxlength="2" value="'.$this->vencimiento_mes.'" required>
+                                    <label class="asterisco" for="expires-month">Mes de expiracion</label>
                                   </div>
                                 </div>
-                                <div class="col-6 col-12">
-                                  <label for="ccv">CCV</label>
-                                  <div class="input-group ccv">
-                                    <input type="tel" class="form-control" id="tccv" autocomplete="off" maxlength="3" value="'.$this->cvv.'">
-                                    <div class="input-group-append">
-                                    </div>
+                                <div class="col-md">
+                                  <div class="form-floating input_container">
+                                    <input type="tel" name="expira (año)" class="form-control custom_input" id="expires-year" placeholder="YY" allowed-pattern="[0-9]" maxlength="2" value="'.$this->vencimiento_ano.'" required>
+                                    <label class="asterisco" for="expires-year">Año de expiracion</label>
+                                  </div>
+                                </div>
+                                <div class="col-md">
+                                  <div class="form-floating input_container">
+                                    <input type="tel" name="expira (año)" class="form-control custom_input" id="tcccv" placeholder="CCV" allowed-pattern="[0-9]" maxlength="3" value="'.$this->cvv.'" required>
+                                    <label class="asterisco" for="expires-year">CCV</label>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                            <br>
-                            <div class="d-flex justify-content-between flex-wrap mb-4">
-                                <div class="form-check form-check-inline col-12 col-sm-3">
-                                  <input class="form-check-input" type="radio" name="estado" value="1" id="check1">
-                                  <label class="form-check-label" for="check1">Pendiente de preautorizar</label>
-                                </div>
-                                <div class="form-check form-check-inline col-12 col-sm-3">
+
+
+                            <div class="mb-2">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="estado" value="1" id="check1">
+                                <label class="form-check-label" for="check1">Pendiente de preautorizar</label>
+                              </div>
+                              <div class="form-check">
                                   <input class="form-check-input" type="radio" name="estado" value="2" id="check2">
                                   <label class="form-check-label" for="check2">Garantizada</label>
-                                </div>
-                                <div class="form-check form-check-inline col-12 col-sm-4">
+                              </div>
+                              <div class="form-check">
                                   <input class="form-check-input" type="radio" name="estado" value="3" id="check3">
                                   <label class="form-check-label" for="check3">Sin garantía</label>
-                                </div>
                               </div>
-        <div class="row flex-wrap">
-                            <div class="col-12 col-sm-5">
-                            <div class="form-check mb-3">
+                            </div>
+                            <hr/>
+                            <div class="mb-2">
+                              <div class="form-check">
                                 <input class="form-check-input" type="radio"  id="c_abierto" value="abierto" name="credit">
                                 <label class="form-check-label" for="c_abierto">Crédito abierto</label>
+                              </div>
+                              <div class="form-check">
                                 <input class="form-check-input" type="radio"  id="c_cerrado" value="cerrado" name="credit">
                                 <label class="form-check-label" for="c_cerrado">Crédito cerrado</label>
+                              </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-sm-5">
-                        <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default"  font-size: 14px; text-align: justify;"> Límite de crédito </span>
-                        </div>
-                          <input value="'.$this->limite_credito.'" type="number" id="limite_credito" name="limite_credito"  class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 14px;" >
-                      </div>
-                        </div>
-                        </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
-                </div>
+
+                            <div class="inputs_form_container">
+                              <div class="form-floating input_container">
+                                <input value="'.$this->limite_credito.'" type="number" id="limite_credito" name="limite_credito"  class="form-control custom_input"  autocomplete="off" >
+                                <label for="limite_credito" class="asterisco">Límite de crédito</label>
+                              </div>
+                            </div>
+
+              </form>
+          </div>
       ';
       }
       function existe_vehiculo($id_huesped,$id_reserva){
@@ -528,13 +441,18 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '
-        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()"> Agregar huesped </button>
-        <br>
-        <br>
+        <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
+            </svg>
+          Agregar huesped
+        </button>
+
         <div class="table-responsive" id="tabla_huesped" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
-        <table class="table table-bordered table-hover">
+        <table class="table">
           <thead>
-            <tr class="table-primary-encabezado text-center">
+            <tr class="text-center">
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Dirección</th>
@@ -562,7 +480,7 @@
                 <td>'.$fila['comentarios'].'</td>
                 <td>
                 <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Ver mas
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
@@ -608,8 +526,8 @@
           $comentario="Mostrar diferentes busquedas en ver huespedes";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
-          echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
-          <table class="table table-bordered table-hover">
+          echo '<div class="table-responsive" id="tabla_huesped" >
+          <table class="table ">
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th>Nombre</th>
@@ -737,17 +655,22 @@
       }
       // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huesped_maestra($id_maestra,$mov){
-        echo '<div class="row">
-              <div class="col-sm-12"><input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huespedNew(0,0,0,0,0,'.$id_maestra.','.$mov.')" id="a_buscar" class="color_black form-control-lg" /></div> 
-        </div><br>';
+        echo '
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" placeholder="Buscar" onkeyup="buscar_asignar_huespedNew(0,0,0,0,0,'.$id_maestra.','.$mov.')" id="a_buscar" />
+            <label for="a_buscar">Buscar huesped</label>
+          </div>
+        </div> 
+        ';
         $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";
         //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY id DESC LIMIT 15";
         //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC LIMIT 15";
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
-          <table class="table table-bordered table-hover">
+        echo '<div class="table-responsive" id="tabla_huesped">
+          <table class="table ">
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
@@ -768,7 +691,7 @@
           <tbody>';
               while ($fila = mysqli_fetch_array($consulta)){
                 echo '<tr class="text-center">
-                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped_maestra('.$fila['id'] .','.$id_maestra .','.$mov.')"> Agregar</button></td>
+                <td><button type="button" class="btn btn-primary" onclick="aceptar_asignar_huesped_maestra('.$fila['id'] .','.$id_maestra .','.$mov.')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>
                 <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>
@@ -790,54 +713,60 @@
       }
        // Mostrar las huespedes para asignar en una reservacion
       function mostrar_asignar_huespedNew($funcion,$precio_hospedaje,$total_adulto,$total_junior,$total_infantil){
-        echo '<div class="row">
-              <div class="col-sm-12">
-                <input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huespedNew('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="color_black form-control" />
-                <button type="button" class="btn btn-primary mt-1" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()">Agregar huesped</button>
-                </div>
-        </div><br>';
+        echo '
+          
+          <div class="inputs_form_container">
+            <div class="form-floating input_container">
+              <input type="text" placeholder="Buscar" onkeyup="buscar_asignar_huespedNew('.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')" id="a_buscar" class="form-control custom_input" />
+              <label for="a_buscar">Buscar</label>
+            </div>
+            <button type="button" class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()">Agregar huesped</button>
+          </div>
+        ';
         $sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC,id DESC LIMIT 30";
         //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY id DESC LIMIT 15";
         //$sentencia = "SELECT * FROM huesped WHERE estado_huesped = 1 ORDER BY visitas DESC LIMIT 15";
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
-          <table class="table table-bordered table-hover">
+        echo '
+        <div class="table-responsive text-center" id="tabla_huesped" ">
+          <table class="table">
             <thead>
-              <tr class="table-primary-encabezado text-center">
-              <th style="position: static;"><span class=" glyphicon glyphicon-cog"></span> Productos</th>
-              <th style="position: static;">Nombre</th>
-              <th style="position: static;">Apellido</th>
-              <th style="position: static;">Direccion</th>
-              <th style="position: static;">Ciudad</th>
-              <th style="position: static;">Estado</th>
-              <th style="position: static;">Codigo Postal</th>
-              <th style="position: static;">Telefono</th>
-              <th style="position: static;">Correo</th>
-              <th style="position: static;">Contrato Socio</th>
-              <th style="position: static;">Cupón</th>
-              <th style="position: static;">Preferencias</th>
-              <th style="position: static;">Comentarios</th>
+              <tr>
+              <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Direccion</th>
+              <th>Ciudad</th>
+              <th>Estado</th>
+              <th>Codigo Postal</th>
+              <th>Telefono</th>
+              <th>Correo</th>
+              <th>Contrato Socio</th>
+              <th>Cupón</th>
+              <th>Preferencias</th>
+              <th>Comentarios</th>
               </tr>
           </thead>
           <tbody>';
               while ($fila = mysqli_fetch_array($consulta)){
                 $numero_tarjeta="**************";
-                echo '<tr class="text-center">
-                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $numero_tarjeta . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\',\'' . $fila['estado_credito'] . '\',\'' . $fila['limite_credito'] . '\',\'' . $fila['nombre_tarjeta'] . '\')"> Agregar</button></td>
-                <td>'.$fila['nombre'].'</td>
-                <td>'.$fila['apellido'].'</td>
-                <td>'.$fila['direccion'].'</td>
-                <td>'.$fila['ciudad'].'</td>
-                <td>'.$fila['estado'].'</td>
-                <td>'.$fila['codigo_postal'].'</td>
-                <td>'.$fila['telefono'].'</td>
-                <td>'.$fila['correo'].'</td>
-                <td>'.$fila['contrato'].'</td>
-                <td>'.$fila['cupon'].'</td>
-                <td>'.$fila['preferencias'].'</td>
-                <td>'.$fila['comentarios'].'</td>
+                echo '
+                <tr >
+                  <td><button type="button" class="btn btn-primary" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $numero_tarjeta . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\',\'' . $fila['estado_credito'] . '\',\'' . $fila['limite_credito'] . '\',\'' . $fila['nombre_tarjeta'] . '\')"> Agregar</button></td>
+                  <td>'.$fila['nombre'].'</td>
+                  <td>'.$fila['apellido'].'</td>
+                  <td>'.$fila['direccion'].'</td>
+                  <td>'.$fila['ciudad'].'</td>
+                  <td>'.$fila['estado'].'</td>
+                  <td>'.$fila['codigo_postal'].'</td>
+                  <td>'.$fila['telefono'].'</td>
+                  <td>'.$fila['correo'].'</td>
+                  <td>'.$fila['contrato'].'</td>
+                  <td>'.$fila['cupon'].'</td>
+                  <td>'.$fila['preferencias'].'</td>
+                  <td>'.$fila['comentarios'].'</td>
                 </tr>';
               }
               echo '
@@ -856,10 +785,11 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
-          <table class="table table-bordered table-hover">
+        echo '
+        <div class="table-responsive" id="tabla_huesped" >
+          <table class="table ">
             <thead>
-              <tr class="table-primary-encabezado text-center">
+              <tr >
               <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
               <th>Nombre</th>
               <th>Apellido</th>
@@ -879,7 +809,7 @@
               while ($fila = mysqli_fetch_array($consulta))
               {
                 echo '<tr class="text-center">
-                <td><button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped('.$fila['id'].','.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')"> Agregar</button></td>
+                <td><button type="button" class="btn btn-primary" onclick="aceptar_asignar_huesped('.$fila['id'].','.$funcion.','.$precio_hospedaje.','.$total_adulto.','.$total_junior.','.$total_infantil.')"> Agregar</button></td>
                 <td>'.$fila['nombre'].'</td>
                 <td>'.$fila['apellido'].'</td>
                 <td>'.$fila['direccion'].'</td>
@@ -905,10 +835,10 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
-          <table class="table table-bordered table-hover">
+        echo '<div class="table-responsive" id="tabla_huesped" >
+          <table class="table ">
             <thead>
-              <tr class="table-primary-encabezado text-center">
+              <tr >
               <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
               <th>Nombre</th>
               <th>Apellido</th>
@@ -953,10 +883,10 @@
         $comentario="Mostrar los huespedes para asignar en una reservacion";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-        echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
-          <table class="table table-bordered table-hover">
+        echo '<div class="table-responsive" id="tabla_huesped">
+          <table class="table" >
             <thead>
-              <tr class="table-primary-encabezado text-center">
+              <tr >
               <th><span class=" glyphicon glyphicon-cog"></span> Productos</th>
               <th>Nombre</th>
               <th>Apellido</th>
@@ -979,9 +909,9 @@
                 <td>';
                 //here
                 if($id_maestra==0){
-                  echo '<button type="button" class="btn btn-success" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $numero_tarjeta . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\',\'' . $fila['estado_credito'] . '\',\'' . $fila['limite_credito'] . '\',\'' . $fila['nombre_tarjeta'] . '\')"> Agregar</button>';
+                  echo '<button type="button" class="btn btn-primary" onclick="aceptar_asignar_huespedNew(' . $fila['id'] . ', \'' . $fila['nombre'] . '\', \'' . $fila['apellido'] . '\', \'' . $fila['empresa'] . '\', \'' . $fila['telefono'] . '\', \'' . $fila['pais'] . '\', \'' . $fila['estado'] . '\', \'' . $fila['ciudad'] . '\', \'' . $fila['direccion'] . '\', \'' . $fila['estado_tarjeta'] . '\', \'' . $fila['tipo_tarjeta'] . '\', \'' . $fila['titular_tarjeta'] . '\', \'' . $numero_tarjeta . '\', \'' . $fila['vencimiento_mes'] . '\', \'' . $fila['vencimiento_ano'] . '\',\'' . $fila['cvv'] . '\',\'' . $fila['correo'] . '\',\'' . $fila['voucher'] . '\',\'' . $fila['estado_credito'] . '\',\'' . $fila['limite_credito'] . '\',\'' . $fila['nombre_tarjeta'] . '\')"> Agregar</button>';
                 }else{
-                  echo '<button type="button" class="btn btn-success" onclick="aceptar_asignar_huesped_maestra('.$fila['id'] .','.$id_maestra .','.$mov.')"> Agregar</button>';
+                  echo '<button type="button" class="btn btn-primary" onclick="aceptar_asignar_huesped_maestra('.$fila['id'] .','.$id_maestra .','.$mov.')"> Agregar</button>';
                 }
                 echo'
                 </td>

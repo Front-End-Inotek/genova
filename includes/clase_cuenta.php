@@ -1013,16 +1013,30 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $total_cargos= number_format($total_cargos, 2);
         $total_abonos= number_format($total_abonos, 2);
         echo '
-        <div class="containerFooter">
-          <div class="cardFooter">
-              <div>Total Ocupadas: '.$ocupadas.'</div>
-              <div>Total Disponibles: '.$disponibles.'</div>
-              <div>Total Preasignadas: '.$preasignadas.'</div>
-              <div>Total Salidas: '.$salidas.'</div>
-              <div>Total Cargos: $'.$total_cargos.'</div>
-              <div>Total Abonos: $'.$total_abonos.'</div>
-          </div>
-        <div>';
+          <p class="footerContainerText">
+            <strong>Total Ocupadas:</strong> '.$ocupadas.'
+          </p>
+          <div class="footerDividor"></div>
+          <p class="footerContainerText">
+          <strong>Total Disponibles:</strong> '.$disponibles.'
+          </p>
+          <div class="footerDividor"></div>
+          <p class="footerContainerText">
+          <strong>Total Preasignadas:</strong> '.$preasignadas.'
+          </p>
+          <div class="footerDividor"></div>
+          <p class="footerContainerText">
+          <strong>Total Salidas:</strong> '.$salidas.'
+          </p>
+          <div class="footerDividor"></div>
+          <p class="footerContainerText">
+          <strong>Total Cargos:</strong> $'.$total_cargos.'
+          </p>
+          <div class="footerDividor"></div>
+          <p class="footerContainerText">
+            <strong>Total Abonos:</strong> $'.$total_abonos.'
+          </p>
+        ';
       }
       //Obtener el total de reservaciones preasignadas.
       // Obtener el total de cargos del dia actual

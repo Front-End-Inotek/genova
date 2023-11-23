@@ -91,16 +91,16 @@ function sabernosession(){
                 if(vista==0){
                     // localStorage.setItem("txt_vista", "Rack Operaciones");
                     // txt_vista =localStorage.getItem("txt_vista");
-                    var menu_vista = document.getElementById("vista");
-                    menu_vista.innerHTML="Rack Operaciones"
+                    /* var menu_vista = document.getElementById("vista");
+                    menu_vista.innerHTML="Rack Operaciones" */
                     console.log("rack de operaciones "+vista);
                     var usuario_id=localStorage.getItem("id");
                     $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
                     siguiente_vista=1
                 }
                 if(vista==1){
-                    var menu_vista = document.getElementById("vista");
-                    menu_vista.innerHTML="Rack Habitacional"
+                    /* var menu_vista = document.getElementById("vista");
+                    menu_vista.innerHTML="Rack Habitacional" */
                     console.log("rack de operaciones "+vista);
                     var id=localStorage.getItem("id");
                     var token=localStorage.getItem("tocken");
@@ -196,7 +196,7 @@ function cargar_area_trabajo(){
     }*/
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
-    setTimeout('cargar_area_trabajo()',3000);//5500
+    //setTimeout('cargar_area_trabajo()',3000);//5500
 }
 
     function pregunta_salir(){
@@ -8551,13 +8551,13 @@ function mostrarAcordeonCompleto(cantidad=1){
             contenidoacordeon+= `
                 <div class="accordionItemBodyContentCustom">
                     <label style="width: 100%; text-align: left;">Acompañante ${i}</label>
-                    <div >
-                        <label for="acompañante ${i} nombre" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Nombre</label>
-                        <input  type="text" class="form-control nombreExtra" id="acompañante ${i} nombre" minlength="5" maxlength="15" >
+                    <div class="form-floating mb-1">
+                        <input  type="text" class="form-control nombreExtra custom_input" id="acompañante ${i} nombre" minlength="5" maxlength="25" placeholder="Nombre" >
+                        <label for="acompañante ${i} nombre">Nombre</label>
                     </div>
-                    <div class="mb-3">
-                        <label for="acompañante ${i} apellido" class="form-label" style="width: 90%;text-align: left; margin-left: 1rem;">Apellido</label>
-                        <input  type="text" class="form-control apellidoExtra" id="acompañante ${i} apellido" minlength="5" maxlength="15">
+                    <div class="form-floating mb-1">
+                        <input  type="text" class="form-control apellidoExtra custom_input" id="acompañante ${i} apellido" minlength="5" maxlength="25" placeholder="Apellido">
+                        <label for="acompañante ${i} apellido" class="form-label" >Apellido</label>
                     </div>
                 </div>
             `

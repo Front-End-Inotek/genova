@@ -110,3 +110,31 @@ function ocultarMostrar() {
     });
   }
 }
+
+function handleSiceTable () {
+  const nav = document.getElementById("asidenav");
+  const menusText = document.getElementsByClassName("aside_nav_link_text");
+  const rutas = document.getElementsByClassName("aside_nav_link_containerInfo_links");
+  const btnSwitch = document.getElementById("switch_container_menu");
+
+  const contenedor = document.getElementsByClassName("aside_nav_link_container");
+  const contenedor2 = document.getElementsByClassName("aside_nav_link_containerMore");
+  const contenedor3 = document.getElementsByClassName("aside_nav_link_containerInfo");
+  nav.classList.toggle("aside_nav_container_open");
+  btnSwitch.classList.toggle("aside_nav_menu_switch_container_show");
+  for (let i = 0; i < menusText.length; i++) {
+    menusText[i].classList.toggle("aside_nav_link_show");
+  }
+  for ( let i = 0; i < rutas.length; i++ ) {
+    rutas[i].classList.remove("ocultarMenus")
+  }
+  for ( let i = 0; i < contenedor.length; i++) {
+    contenedor[i].classList.toggle("space_around")
+  }
+  for ( let i = 0; i < contenedor2.length; i++) {
+    contenedor2[i].classList.toggle("space_around")
+  }
+  for ( let i = 0; i < contenedor3.length; i++) {
+    contenedor3[i].classList.toggle("space_around")
+  }
+}

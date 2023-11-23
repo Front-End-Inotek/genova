@@ -124,11 +124,16 @@ class CuentaMaestra extends ConexionMYSql{
         // print_r($sentencia);
         $consulta=$this->realizaConsulta($sentencia,$comentario);
         echo '
-        <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_cuentas_maestras('.$id.')"> Agregar </button>
-        <br>
-        <br>
-        <div class="table-responsive" id="tabla_tipo"  style="max-height:860px; overflow-x: scroll; ">
-        <table class="table table-bordered table-hover">
+          <button class="btn btn-primary" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_cuentas_maestras('.$id.')"> 
+            Agregar
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+            </svg>
+          </button>
+        </header>
+        
+        <div class="table-responsive" id="tabla_tipo"  ">
+        <table class="table">
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>

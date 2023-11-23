@@ -1,10 +1,4 @@
 @import '../colors.css';
-body {
-  margin: 0;
-  height: 100% !important;
-  display: flex;
-  flex-direction: column;
-}
 
 /* Animation */
 
@@ -375,88 +369,6 @@ body {
   color: #000;
 }
 
-/*botones de bootstrap*/
-.btn-warning {
-  border:2px solid  var(--colorTextNaranja);
-  background: var(--fondoNaranja);
-  color: var(--titulos) !important;
-}
-
-.btn-warning:hover {
-  border:2px solid  var(--colorTextNaranja);
-  background: var(--colorTextNaranja) !important;
-  color: var(--titulos) !important;
-}
-.btn-warning:focus{
-  color: var(--titulos) !important;
-  transform: scale(0.9);
-}
-
-.btn-success {
-  color: var(--colorTextVerde) !important;
-  background-color: var(--fondoVerde);
-  border: 2px solid var(--colorTextVerde) !important;
-}
-
-.btn-success:hover {
-  border: 2px solid var(--colorTextVerde) !important;
-  color: var(--fondoVerde) !important;
-  background-color: var(--colorTextVerde);
-}
-.btn-success:focus{
-  scale: 0.9;
-  color: var(--fondoVerde) !important;
-}
-
-.btn-danger {
-  border:2px solid  var(--colorTextRojo);
-  background: var(--fondoRojo);
-  color: var(--colorTextRojo) !important;
-}
-
-.btn-danger:hover {
-  border:2px solid  var(--colorTextRojo);
-  background:  var(--colorTextRojo);
-  color: var(--fondoRojo) !important;
-}
-.btn-danger:focus{
-  color: var(--fondoRojo) !important;
-  scale: 0.9;
-}
-
-.btn-primary {
-  background-color: var(--fondoAzul);
-  color: var(--subtitulos) ;
-  border: 2px solid var(--subtitulos) !important;
-}
-.btn-primary:hover{
-  background-color: var(--subtitulos);
-  color: var(--fondoAzul);
-  border: 2px solid var(--subtitulos) !important;
-}
-.btn-primary:focus{
-  background-color: var(--subtitulos);
-  color: var(--fondoAzul);
-  border: 2px solid var(--subtitulos) !important;
-  transform: scale(0.9);
-}
-
-.btn-secondary {
-  background-color: var(--fondoAzul);
-  color: var(--colorTextAzul) !important;
-  border: 2px solid var(--colorTextAzul);
-}
-.btn-secondary:hover{
-  background-color: var(--colorTextAzul);
-  color: var(--fondoAzul) !important;
-  border: 2px solid var(--colorTextAzul);
-}
-.btn-secondary:focus{
-  background-color: var(--colorTextAzul);
-  color: var(--fondoAzul) !important;
-  border: 2px solid var(--colorTextAzul);
-  transform: scale(0.9);
-}
 
 .checkbox-container {
   display: flex;
@@ -511,11 +423,7 @@ input[type="checkbox"]{
   width: 20px;
   border: 1px solid var(--subtitulos);
 }
-input[type="radio"] {
-  /* display: none; */
-  height: 20px;
-  width: 20px;
-}
+
 
 .switch label {
   cursor: pointer;
@@ -1047,44 +955,7 @@ body.modo-nocturno .containerRackOp .btn:focus {
   color: var(--fondoAzul) !important;
 }
 
-.modal-header {
-  background-color: var(--fondo) !important;
-  text-align: center;
-  color: var(--titulos) !important;
-}
 
-.modal-footer {
-  background-color: var(--fondo) !important;
-  color: #3f51b5 !important;
-}
-
-.close {
-  text-transform: uppercase !important;
-  width: 30px !important;
-  height: 30px !important;
-  font-size: 18px;
-  background: var(--colorTextRojo);
-  color: white;
-  border-radius: 5px;
-  border: 2px solid var(--colorTextRojo) !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.close:hover {
-  width: 30px !important;
-  height: 30px !important;
-  background-color: var(--fondoRojo);
-  color:  var(--colorTextRojo);
-  border: 2px solid var(--colorTextRojo) !important;
-}
-.btn {
-  color: #000;
-}
-.btn-danger.disabled, .btn-danger:disabled{
-  color: white !important;
-}
 
 .containerRackOp .btn:after {
   position: absolute;

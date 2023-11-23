@@ -94,17 +94,8 @@ span {
   width: 100%;
 }
 
-.form-check-input:checked+.form-check-label {
-  background-color: #fff;
-  font-weight: 500;
-}
 
-.form-check-input:checked+.form-check-label:after {
-  left: calc(102% - 8px);
-  transform: translateX(-100%);
-  border: 2px solid #fff;
-  transition: all 0.3s ease;
-}
+
 
 /*boton cambio de rack*/
 

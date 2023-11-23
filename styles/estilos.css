@@ -1,32 +1,5 @@
-/* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #9e9e9e #e2e2e2;
-  }
-
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-
-/*   *::-webkit-scrollbar-track {
-    background: #e2e2e2;
-  } */
-
-  *::-webkit-scrollbar-thumb {
-    background-color: #9e9e9e;
-    border-radius: 10px;
-    border: 0px solid #e2e2e2;
-  }
-
-
 
 /*personalizacion de color tabla*/
-.table-primary-encabezado {
-  border: 1px solid var(--fondoCeldas) !important;
-}
 
 .mi-tabla {
   background-color: #f6f6f6;
@@ -146,30 +119,10 @@ background-color: #14040B;
 }
 
 /* Color para tabla de encabezado primary **/
-.table-primary-encabezado {
-  color: black !important;
-  font-size: 13px;
-  font-family: sans-serif;
-  font-weight: bolder;
-  background-color: #2c8feb3d !important;
-  border-top-style: none;
-}
+
 
 /* Color para tabla de encabezado info **/
-.table-info-encabezado {
-  color: var(--titulos);
-  font-size: 13px;
-  font-family: sans-serif;
-  font-weight: bolder;
-  background-color: #3e54ac;
-  border-top-style: none;
-}
 
-label {
-  border-radius: 10px;
-  box-shadow: 0 12px 35px 0 rgba(255, 235, 167, 0.15);
-  font-weight: 500;
-}
 
 /*fondo amarrillo nav*/
 .contenedor-sub a {
@@ -200,21 +153,9 @@ label {
   font-weight: bolder;
 }
 
-/* Color en las letras del boton */
-.btn-primary {
-  color: var(--subtitulos) ;
-  border: 2px solid var(--subtitulos) !important;
-}
 
 /* Contenedor con fondo blanco y bordes */
 .blanco {
-  padding: 25px 25px;
-  background-size:contain;
-  color: var(--subtitulos) !important;
-  background-color: #fff !important;
-  margin-top: 60px !important;
-  padding-top: 20px !important;
-  border-radius: 5px;
   -webkit-animation-name: efecto;
   animation-name: efecto;
   -webkit-animation-duration: 1s;
@@ -249,56 +190,20 @@ label {
   }
 }
 
-.modal-dialog{
-  margin-bottom: 10rem;
-}
 
-.blanco {
-  position: relative;
-  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
-  overflow-y: scroll;
-  max-height: 85vh;
-  min-height: 60vh;
-}
-
-.blanco{
-  border-radius: 10px;
-}
-
-.table-responsive {
-  margin-left: 10px !important;
-  background-color: #f5f5f51f !important;
-  height: auto;
-}
-
-.table-responsive tr {
-  border: 1px solid #a5a5a56f;
-}
-
-.form-check-input:checked {
-  background-color: var(--subtitulos) !important;
-  border: 1px solid #3f51b5;
-  font-size: 20px;
-}
 
 .input-group-text {
   background-color: #e9ecef;
   color: var(--titulos);
 }
 
-input:hover {
-  background-color: #e5e5e5 !important;
-}
 
 .titulo {
   color: var(--titulos) !important;
 }
 
 /*sombras 3d box shadow*/
-td {
-  color: var(--parrafos);
-  font-weight: bold;
-}
+
 
 button {
   outline: none;
@@ -328,13 +233,6 @@ button {
   transform: translateY(25%);
 }
 
-input {
-  outline: var(--subtitulos);
-}
-
-input:hover{
-  background-color: var(--fondo) !important;
-}
 
 .d-flex{
   margin-bottom: 15px;
@@ -353,55 +251,8 @@ select {
   outline: none;
 }
 
-.table-responsive td {
-  transition: all 0.1s ease-in-out;
-  /*
-  background: linear-gradient(180deg, #c3cafd 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);*/
-}
-
-.table-responsive td:hover {
-  background-color: #2C8FEB;
-  color: white;
-}
-td:hover {
-  background-color: #2C8FEB;
-  color: white;
-}
-td:hocer span{
-  color: white;
-}
 .text-dark {
   color: var(--titulos);
-}
-
-.tableRack tr:nth-child(odd) {
-  background-color: #f1f2f2c0 !important;
-}
-
-.tableRack tr:nth-child(even) {
-  background-color: #d5d5d5c3 !important;
-}
-
-/* primera fila  */
-tr:nth-child(odd) {
-  background-color: #EDF2F9;
-  /* border-radius: 50px; */
-  transition: all 0.1s ease-in-out;
-}
-
-tr:nth-child(even) {
-  background-color: #EDF2F9;
-  transition: all 0.1s ease-in-out;
-}
-
-th {
-  background-color: #EDF2F9;
-  transition: all 0.1s ease-in-out;
-}
-
-tr:hover {
-  background-color: #BBDEFB;
-  color: #000000;
 }
 
 .card-body{
@@ -533,9 +384,7 @@ a.topictitle:hover {
   color: var(--parrafos);
 }
 
-hr{
-  display: none;
-}
+
 
 .titulo_hab {
   width: 100%;
@@ -1216,106 +1065,6 @@ select option:hover{
   padding-left: 15px;
 }
 
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
-}
-
-.container-fluid {
-  margin-right: auto;
-  margin-left: auto;
-  text-align: center;
-}
-
-.row {
-  margin-right: -10px;
-  margin-left: -10px;
-  padding-left: 15px;
-  margin-bottom: 20px;
-}
-
-.col-xs-1,
-.col-sm-1,
-.col-md-1,
-.col-lg-1,
-.col-xs-2,
-.col-sm-2,
-.col-md-2,
-.col-lg-2,
-.col-xs-3,
-.col-sm-3,
-.col-md-3,
-.col-lg-3,
-.col-xs-4,
-.col-sm-4,
-.col-md-4,
-.col-lg-4,
-.col-xs-5,
-.col-sm-5,
-.col-md-5,
-.col-lg-5,
-.col-xs-6,
-.col-sm-6,
-.col-md-6,
-.col-lg-6,
-.col-xs-7,
-.col-sm-7,
-.col-md-7,
-.col-lg-7,
-.col-xs-8,
-.col-sm-8,
-.col-md-8,
-.col-lg-8,
-.col-xs-9,
-.col-sm-9,
-.col-md-9,
-.col-lg-9,
-.col-xs-10,
-.col-sm-10,
-.col-md-10,
-.col-lg-10,
-.col-xs-11,
-.col-sm-11,
-.col-md-11,
-.col-lg-11,
-.col-xs-12,
-.col-sm-12,
-.col-md-12,
-.col-lg-12 {
-  position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-  padding-top: 10px;
-}
-
-.col-xs-1,
-.col-xs-2,
-.col-xs-3,
-.col-xs-4,
-.col-xs-5,
-.col-xs-6,
-.col-xs-7,
-.col-xs-8,
-.col-xs-9,
-.col-xs-10,
-.col-xs-11,
-.col-xs-12 {
-  float: left;
-}
 
 .col-xs-12 {
   width: 100%;
@@ -1411,54 +1160,7 @@ select[disabled]{
   cursor: not-allowed;
 }
 
-.accordionCustom{
-  width: 97%;
-  /* max-width: 1000px; */
-  margin: 1rem auto;
-  display: none;
-}
-.accordionCustomMostrar{
-  display: block;
-}
-.accordion-itemCustom{
-  background-color: #fff;
-  margin: 1rem 0;
-  border-radius: 0.5rem;
-  /* box-shadow: 0 2px 5px 0 rgba(0,0,0,0.25); */
-  border: 1px solid #ced4da;
-}
-.accordionItemHeaderCustom{
-  padding: 0.5rem 3rem 0.5rem 1rem;
-  min-height: 3.5rem;
-  line-height: 1.25rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-}
-.accordionItemHeaderCustom::after{
-  content: "\002B";
-  font-size: 2rem;
-  position: absolute;
-  right: 1rem;
-}
-.accordionItemHeaderCustom.active::after{
-  content: "\2212" !important;
-}
-.accordionItemBodyCustom{
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.5s ease-in-out;
-}
-.activeAcordeon{
-  max-height: fit-content !important;
-}
-.accordionItemBodyContentCustom{
-  padding: 1rem;
-  line-height: 1.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.087);
-}
+
 .nombreOperaciones {
   width: 100%;
   white-space: nowrap;
