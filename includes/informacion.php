@@ -144,6 +144,7 @@ class Informacion extends ConexionMYSql
             $tipo_habitacion= $fila['tipo_nombre'];
             break;
             case 1:
+            $tipo_habitacion= $fila['tipo_nombre'];
             $estado= "Ocupado";
             $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
             if($fila['interno'] == self::INTERNO_SUCIA){
@@ -194,6 +195,7 @@ class Informacion extends ConexionMYSql
             $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
             break;
             default:
+            $tipo_habitacion= $fila['tipo_nombre'];
             //echo "Estado indefinido";
             break;
         }
@@ -309,6 +311,7 @@ class Informacion extends ConexionMYSql
             echo '<span class="nombreOperaciones">'; echo $nombre; echo '</span>';
             echo '<span class="otrosApartados">'; echo $fecha_entrada; echo '</span>';
             echo '<span class="otrosApartados">'; echo $fecha_salida; echo '</span>';
+            
             echo $saldo;
             }else{
             if($cronometro == 0){
@@ -317,8 +320,10 @@ class Informacion extends ConexionMYSql
                 $fecha_inicio= date("d-m-Y",$cronometro);
             }
             echo $fecha_inicio;
+            
             }
             echo '</span>';
+            echo '<span class="otrosApartados" style="background-color: '.$color.' !important; ">'; echo $tipo_habitacion; echo '</span>';
             echo '
                 </a>
             </div>

@@ -663,6 +663,64 @@
         }
         return $nombre;
       }
+      function consultar_tipos(){
+        $sentencia = "SELECT `id` FROM `tipo_hab`";
+        $comentario="Consultar el nombre del tipo de una habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        //se recibe la consulta y se convierte a arreglo
+        return $consulta;
+      }
+      function id_tipos_habitacion($id){
+        $contador=0;
+        $sentencia = "SELECT id FROM `hab` WHERE `tipo`='$id'";
+        $comentario="Consultar el tipo de habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $contador= $contador+1;
+        }
+        return $contador;
+      }
+      function habitaciones_ocupadas_checkin($inicio,$id){
+        $checkin="checkin";
+        $sentencia = "SELECT * FROM `reservacion` WHERE `tipo_hab`='$id' AND `nombre_reserva`='$checkin'";
+        //echo $sentencia;
+        $comentario="Consultar checkin";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function habitaciones_reservadas($id){
+        $checkin="checkin";
+        $web="web";
+        $sentencia = "SELECT * FROM `reservacion` WHERE `tipo_hab`='$id' AND `nombre_reserva`!='$checkin' AND `canal_reserva`!='$web' ";
+        //echo $sentencia;
+        $comentario="Consultar checkin";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function habitaciones_reservadas_web($id){
+        $checkin="checkin";
+        $web="web";
+        $sentencia = "SELECT * FROM `reservacion` WHERE `tipo_hab`='$id' AND `nombre_reserva`!='$checkin' AND `canal_reserva`='$web' ";
+        //echo $sentencia;
+        $comentario="Consultar checkin";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function llegadas_huespedes_dia($entrada){
+        $sentencia = "SELECT * FROM `reservacion` WHERE `fecha_entrada`='$entrada' ";
+        //echo $sentencia;
+        $comentario="Consultar checkin";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function salidas_huespedes_dia($salida){
+        $sentencia = "SELECT * FROM `reservacion` WHERE `fecha_salida`='$salida' ";
+        //echo $sentencia;
+        $comentario="Consultar checkin";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
       /** Pronosticos */
        // Obtengo el total de habitaciones ocupadas
         function obtener_todas(){

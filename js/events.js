@@ -1774,7 +1774,7 @@ function graficas(){
 function pronosticos(){
     $('#area_trabajo').hide();
     $('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/pronosticos.php");
+    $("#area_trabajo_menu").load("includes/pronosticos_de_ocupacion.php");
     $('#pie').show();
     closeModal();
     closeNav();
@@ -7559,6 +7559,15 @@ function factura_cancelar(){
     $('#pie').hide();
     $('#area_trabajo_menu').show();
     $("#area_trabajo_menu").load("includes/factura_cancelar.php");
+    //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
+    closeNav();
+}
+function factura_cancelarbtn(folio){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_cancelar.php?folio="+folio);
     //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
     closeNav();
 }
