@@ -894,23 +894,9 @@ body.modo-nocturno .containerRackOp .btn:focus {
   box-shadow: 0 10px 14px #6b0fe396;
 }
 
-.mantenimiento {
-  background-color: #ffdaa2;
-  background: var(--fondoNaranja) !important;
-  color: var(--titulos) !important;
-  border-left: 7px solid var(--colorTextNaranja) !important;
-}
 
-.mantenimiento:hover {
-  background-color: var(--colorTextNaranja) !important;
-  color: var(--titulos) !important;
-  border-left: 7px solid var(--colorTextNaranja) !important;
-  box-shadow: 0 10px 14px #fa5f05;
-}
 
-.mantenimiento a {
-  color: #fa5f05 !important;
-}
+
 
 .btn-dark {
   background-color: #97b2f96e !important;
@@ -1289,18 +1275,6 @@ body.modo-nocturno .containerRackOp .btn:focus {
   }
 }
 
-.expirarRack{
-  animation: shadow infinite reverse 2s !important;
-}
-
-@keyframes shadow{
-  0%{
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 16%);
-  }
-  100%{
-    box-shadow: 0px 0 2px 3px rgba(255, 25, 25, 0.54);
-  }
-}
 
 .asterisco::after{
   content: "*";

@@ -110,7 +110,7 @@ if(isset($_GET['salida'])){
 }
 
 
-echo '<div class="modal-header" style="background-color: #97b2f9ee; color: #000;">
+echo '<div class="modal-header" >
 		<h3 class="modal-title">Habitacion '.$nombre_habitacion.' </h3>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	</div>';
@@ -547,7 +547,7 @@ echo '<div class="row flex-wrap justify-content-around">';
 	mostar_info($_GET['hab_id'],$_GET['estado'],$hab->mov,$_GET['id'],$entrada,$salida);
 echo '</div>';
 echo '</div>';
-echo '<div class="modal-footer" style="background-color: #97b2f9ee; color: #000;">
+echo '<div class="modal-footer" >
 		<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 		</div>';
 ?>

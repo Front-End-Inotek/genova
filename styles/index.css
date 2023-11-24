@@ -289,6 +289,212 @@ body {
   gap: 1rem;
   margin-top: 1rem;
 }
+.container_rack_main {
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 3rem; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  /* grid-template-columns: repeat(12, 1fr); */
+  gap: 5px;
+  padding-top: 2rem;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 2rem;
+}
+.habitacion_container {
+  width: 100%;
+  height: 150px;
+  border-radius: 8.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  -webkit-box-shadow: 11px 6px 36px 0px rgba(184,184,184,1);
+  -moz-box-shadow: 11px 6px 36px 0px rgba(184,184,184,1);
+  box-shadow: 11px 6px 36px 0px rgba(184,184,184,1);
+}
+.habitacion_container:hover {
+  scale: 1.01;
+  transition: all ease-in 0.1s;
+}
+
+/* Estados de habitaciones */
+.disponible_limpia {
+  background-color: #F7FAF7;
+  color: #6C9B7D;
+}
+.disponible_limpieza {
+  background-color: #F5FAFC;
+  color: #5B97BD;
+}
+.vacia_sucia{
+  background-color: #FBF9F8;
+  color: #BB846C;
+}
+.ocupado{
+  background-color: #FEF8F7;
+  color: #E16F64;
+}
+.ocupado_sucia{
+  background-color: #ffece8;
+  color: #f15446;
+}
+.ocupado_limpieza{
+  background-color: #d3f2ffbe;
+  color: #4c98c7;
+}
+.reserva_pagada{
+  background-color: #FBF9FD;
+  color: #A782C3;
+}
+.reserva_pendiente{
+  background-color: #FCF8FC;
+  color: #CD749F;
+}
+.uso_casa{
+  background-color: #F5FAFC;
+  color: #5B97BD;
+}
+.bloqueado{
+  background-color: #f5f5f7;
+  color: #91918e;
+}
+.mantenimiento{
+  background-color: #FBF9F2;
+  color: #CB9433;
+}
+.disponible_limpia_fondo {
+  background-color: #DBEDDB;
+}
+.disponible_limpieza_fondo {
+  background-color: #D3E5EF;
+}
+.vacia_sucia_fondo {
+  background-color: #EEE0DA;
+}
+.ocupada_fondo {
+  background-color: #FFE2DD;
+}
+.ocupado_sucio_fondo {
+  background-color: #f5c7bf;
+}
+.ocupado_limpieza_fondo {
+  background-color: #a0c7d89a;
+}
+.reserva_pagada_fondo {
+  background-color: #E8DEEE;
+}
+.reserva_pendiente_fondo {
+  background-color: #F5E0E9;
+}
+.uso_casa_fondo {
+  background-color: #D3E5EF;
+}
+.mantenimiento_fondo {
+  background-color: #FDECC8;
+}
+.bloqueado_fondo {
+  background-color: #d9d9d9;
+}
+
+.habitacion_container_main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 5px;
+  border-radius: 0 8.5px 8.5px 0;
+}
+
+.habitacion_container_encabezado {
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  height: auto;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.habitacion_container_encabezado_pildora {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  border-radius: 5.25px;
+  padding: 2px 5px;
+}
+
+.habitacion_container_encabezado_circle{
+  border-radius: 50%;
+  height: 7.66px;
+  width: 7.66px;
+}
+.habitacion_container_encabezado_iconos{
+  display: flex;
+  flex-direction: row;
+  border-radius: 50%;
+}
+.habitacion_container_encabezado_iconos_icon{
+  height: 22px;
+  width: 22px;
+  padding: 3px;
+}
+
+.habitacion_container_body{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 95%;
+  height: 75%;
+  border-radius: 5.25px;
+  position: relative;
+  padding: 5px;
+}
+.habitacion_tipo_capsul {
+  background-color: #FDECC8;
+  color: black;
+  border-radius: 5px;
+  padding: 0px 3px;
+  position: absolute;
+  bottom: 3px;
+  left: 1px;
+}
+.habitacion_texto_contenedor{
+  width: 100%;
+  display: flex;
+  gap: 2px;
+  font-size: 13px;
+  align-items: center;
+  /* color: #333131; */
+}
+.habitacion_text_text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.expirarRack{
+  animation: shadow infinite reverse 2s !important;
+}
+
+@keyframes shadow{
+  0%{
+    background-color: inherit;
+  }
+  100%{
+    background-color: #ff000091;
+  }
+}
 
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){

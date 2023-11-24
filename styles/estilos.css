@@ -621,12 +621,7 @@ a.topictitle:hover {
 .bloque span{
   color: white !important;
 }
-.mantenimiento {
-  text-align: center;
-  background-color: #8d8d31ef;
-  font-size: 1.2em;
-  color: white;
-}
+
 
 .supervision {
   text-align: center;
@@ -719,12 +714,7 @@ a.topictitle:hover {
   color: #ffffff;
 }
 
-.ocupada {
-  text-align: center;
-  background-color: #6b1f18e8;
-  font-size: 1.2em;
-  color: white;
-}
+
 
 .cambiar_usuario {
   text-align: center;

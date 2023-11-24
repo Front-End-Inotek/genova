@@ -89,7 +89,7 @@ class Informacion extends ConexionMYSql
 
 '; */
 
-    echo ' <div class="containerRackOp" id="contenido-boton">';
+    echo ' <div class="container_rack_main" id="contenido-boton">';
     while ($fila = mysqli_fetch_array($consulta)){
         $icono_carro="";
         if($fila['estado_vehiculo']==1){
@@ -162,6 +162,7 @@ class Informacion extends ConexionMYSql
             $estado= "Vacia limpieza";
             $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
+            $tipo_habitacion= $fila['tipo_nombre'];
             break;
             case 4:
             $estado="Mantenimiento";
@@ -204,79 +205,195 @@ class Informacion extends ConexionMYSql
             $color = "#".$color;
             $mov=0;
             $reserva=0;
-            $estilo_tipo='style="border-left-color: '.$color.' !important;"';
+            $estilo_tipo='style="border-left: '.$color.' solid 7px;"';
             if (isset($fila_r)) {
                 $mov=$fila_r['mov'];
                 $reserva=$fila_r['reserva_id'];
-                echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.','.$mov.','.$reserva.')" >';
+                echo'<div href="#caja_herramientas" class="habitacion_container" '.$estilo_tipo.' data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.','.$mov.','.$reserva.')" >';
             } else {
-                echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';
+                echo'<div href="#caja_herramientas" class="habitacion_container" '.$estilo_tipo.' data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$estado_hab.',\''.$fila['nombre'].'\','.$reserva_entrada.','.$reserva_salida.')" >';
             
             }
             switch($estado) {
                 case "Disponible limpia":
                 $estado="";
-                echo'<div class="btn disponible-limpia" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-brush-alt clean"></i>';
+                echo'<div class="habitacion_container_main disponible_limpia" >
+                        <section class="habitacion_container_encabezado">
+                            <div class="habitacion_container_encabezado_pildora disponible_limpia_fondo ">
+                                <div class="habitacion_container_encabezado_circle  disponible_limpia" style="background-color: '.$color.' ;"></div>
+                                <span>'.$fila['nombre'].'</span>
+                            </div>
+                            <div class="habitacion_container_encabezado_iconos disponible_limpia_fondo">
+                                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/disponible_limpia.svg"/>
+                            </div>
+                        </section>
+
+                        <section class="habitacion_container_body disponible_limpia_fondo">
+                        
+                ';
                 break;
                 case "Vacia limpieza":
-                echo'<div class="btn vacia-limpia" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-brush-alt cleaning"></i>';
+                echo'<div class="habitacion_container_main disponible_limpieza" >
+                        <section class="habitacion_container_encabezado">
+                            <div class="habitacion_container_encabezado_pildora disponible_limpieza_fondo">
+                                <div class="habitacion_container_encabezado_circle disponible_limpieza" style="background-color: '.$color.' ;"></div>
+                                <span>'.$fila['nombre'].'</span>
+                            </div>
+                            <div class="habitacion_container_encabezado_iconos disponible_limpieza_fondo">
+                                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/disponible_limpieza.svg"/>
+                            </div>
+                        </section>
+
+                        <section class="habitacion_container_body disponible_limpieza_fondo">
+                ';
                 break;
                 case "Vacia sucia":
-                echo'<div class="btn vacia-sucia" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-brush-alt dirt"></i>';
+                echo'<div class="habitacion_container_main vacia_sucia" >
+                        <section class="habitacion_container_encabezado">
+                            <div class="habitacion_container_encabezado_pildora vacia_sucia_fondo">
+                                <div class="habitacion_container_encabezado_circle vacia_sucia" style="background-color: '.$color.' ;"></div>
+                                <span>'.$fila['nombre'].'</span>
+                            </div>
+                            <div class="habitacion_container_encabezado_iconos vacia_sucia_fondo">
+                                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/vacia_sucia.svg"/>
+                            </div>
+                        </section>
+
+                        <section class="habitacion_container_body vacia_sucia_fondo">
+                ';
+
                 break;
                 case "Ocupado":
-                echo'<div class="btn ocupadoH '.$clase_expirar.'" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-brush-alt clean"></i>';
+                echo'<div class="habitacion_container_main ocupado '.$clase_expirar.'" >
+                        <section class="habitacion_container_encabezado">
+                            <div class="habitacion_container_encabezado_pildora ocupada_fondo">
+                                <div class="habitacion_container_encabezado_circle ocupado" style="background-color: '.$color.' ;"></div>
+                                <span>'.$fila['nombre'].'</span>
+                            </div>
+                            <div class="habitacion_container_encabezado_iconos ocupada_fondo">
+                                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado.svg"/>
+                            </div>
+                        </section>
+
+                        <section class="habitacion_container_body ocupada_fondo">
+                ';
                 echo $icono_carro;
                 break;
                 case "Sucia ocupada":
-                echo'<div class="btn ocupadoH" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-brush-alt dirt"></i>';
+                echo'<div class="habitacion_container_main ocupado_sucia '.$clase_expirar.'" >
+                        <section class="habitacion_container_encabezado">
+                            <div class="habitacion_container_encabezado_pildora ocupado_sucio_fondo">
+                                <div class="habitacion_container_encabezado_circle ocupado_sucia" style="background-color: '.$color.' ;"></div>
+                                <span>'.$fila['nombre'].'</span>
+                            </div>
+                            <div class="habitacion_container_encabezado_iconos ocupado_sucio_fondo">
+                                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado_sucia.svg"/>
+                            </div>
+                        </section>
+
+                        <section class="habitacion_container_body ocupado_sucio_fondo">
+                ';
                 echo $icono_carro;
                 break;
                 case "Ocupada limpieza":
-                echo'<div class="btn ocupadoH" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-brush-alt cleaning"></i>';
+                echo'<div class="habitacion_container_main ocupado_limpieza '.$clase_expirar.'" >
+                        <section class="habitacion_container_encabezado">
+                            <div class="habitacion_container_encabezado_pildora ocupado_limpieza_fondo">
+                                <div class="habitacion_container_encabezado_circle ocupado_limpieza" style="background-color: '.$color.' ;"></div>
+                                <span>'.$fila['nombre'].'</span>
+                            </div>
+                            <div class="habitacion_container_encabezado_iconos ocupado_limpieza_fondo">
+                                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado_limpieza.svg"/>
+                            </div>
+                        </section>
+
+                        <section class="habitacion_container_body ocupado_limpieza_fondo">
+                ';
                 echo $icono_carro;
                 break;
                 case "Reserva pagada":
-                echo'<div class="btn reserva-pagada" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-message-square-check IRP"></i>';
+                    echo'<div class="habitacion_container_main reserva_pagada " >
+                    <section class="habitacion_container_encabezado">
+                        <div class="habitacion_container_encabezado_pildora reserva_pagada_fondo">
+                            <div class="habitacion_container_encabezado_circle reserva_pagada" style="background-color: '.$color.' ;"></div>
+                            <span>'.$fila['nombre'].'</span>
+                        </div>
+                        <div class="habitacion_container_encabezado_iconos reserva_pagada_fondo">
+                            <img class="habitacion_container_encabezado_iconos_icon" src="./assets/reserva_pagada.svg"/>
+                        </div>
+                    </section>
+
+                    <section class="habitacion_container_body reserva_pagada_fondo">
+                ';
                 break;
                 case "Reserva pendiente":
-                echo'<div class="btn reserva-pendiente" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-message-square-error IRP"></i>';
+                    echo'<div class="habitacion_container_main reserva_pendiente " >
+                    <section class="habitacion_container_encabezado">
+                        <div class="habitacion_container_encabezado_pildora reserva_pendiente_fondo">
+                            <div class="habitacion_container_encabezado_circle reserva_pendiente" style="background-color: '.$color.' ;"></div>
+                            <span>'.$fila['nombre'].'</span>
+                        </div>
+                        <div class="habitacion_container_encabezado_iconos reserva_pendiente_fondo">
+                            <img class="habitacion_container_encabezado_iconos_icon" src="./assets/reserva_pendiente.svg"/>
+                        </div>
+                    </section>
+
+                    <section class="habitacion_container_body reserva_pendiente_fondo">
+                ';
                 break;
                 case "Uso casa":
-                echo'<div class="btn usoCasa" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-bed IconoUsoCasa"></i>';
+                    echo'<div class="habitacion_container_main uso_casa " >
+                    <section class="habitacion_container_encabezado">
+                        <div class="habitacion_container_encabezado_pildora uso_casa_fondo">
+                            <div class="habitacion_container_encabezado_circle uso_casa" style="background-color: '.$color.' ;"></div>
+                            <span>'.$fila['nombre'].'</span>
+                        </div>
+                        <div class="habitacion_container_encabezado_iconos uso_casa_fondo">
+                            <img class="habitacion_container_encabezado_iconos_icon" src="./assets/uso_casa.svg"/>
+                        </div>
+                    </section>
+
+                    <section class="habitacion_container_body uso_casa_fondo">
+                ';
+        
                 break;
                 case "Mantenimiento":
-                echo'<div class="btn mantenimiento" '.$estilo_tipo.'>';
-                echo '<i class="bx bxs-cog matenimientoCog"></i>';
+                    echo'<div class="habitacion_container_main mantenimiento " >
+                    <section class="habitacion_container_encabezado">
+                        <div class="habitacion_container_encabezado_pildora mantenimiento_fondo">
+                            <div class="habitacion_container_encabezado_circle mantenimiento" style="background-color: '.$color.' ;"></div>
+                            <span>'.$fila['nombre'].'</span>
+                        </div>
+                        <div class="habitacion_container_encabezado_iconos mantenimiento_fondo">
+                            <img class="habitacion_container_encabezado_iconos_icon" src="./assets/mantenimiento.svg"/>
+                        </div>
+                    </section>
+
+                    <section class="habitacion_container_body mantenimiento_fondo">
+                ';
                 break;
                 case "Bloqueo":
-                echo'<div class="btn bloqueo" '.$estilo_tipo.'>';
-                echo '<i class="bx bx-block blockIcon"></i>';
+                    echo'<div class="habitacion_container_main bloqueado " >
+                    <section class="habitacion_container_encabezado">
+                        <div class="habitacion_container_encabezado_pildora bloqueado_fondo">
+                            <div class="habitacion_container_encabezado_circle bloqueado" style="background-color: '.$color.' ;"></div>
+                            <span>'.$fila['nombre'].'</span>
+                        </div>
+                        <div class="habitacion_container_encabezado_iconos bloqueado_fondo">
+                            <img class="habitacion_container_encabezado_iconos_icon" src="./assets/bloqueado.svg"/>
+                        </div>
+                    </section>
+
+                    <section class="habitacion_container_body bloqueado_fondo">
+                ';
                 break;
                 default:
                 //echo "Estado indefinido";
                 break;
             }
-            echo'
-                <a >
-                    Hab. ';
-                    if($fila['id']<100){
-                        echo $fila['nombre'];
-                    }else{
-                        echo $fila['comentario'];
-                    }
-                    // echo '<br>'. $estado .'  <br>';
+            
             echo '
-                    <span class="nombre" id="N1">';
+                    <span  id="N1">';
             if($estado_hab == 1){
                 //echo $estado_hab;
                 $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
@@ -298,39 +415,99 @@ class Informacion extends ConexionMYSql
                 if($cronometro == 0){
                     // echo $tipo_habitacion;
                     $fecha_inicio= date("d-m-Y",$cronometro);
-                    echo $fecha_inicio;
-                    echo '<br>';
+                    echo '<span class="habitacion_texto_contenedor" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-x-fill" viewBox="0 0 16 16">
+                                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M6.854 8.146 8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708z"/>
+                            </svg>
+                            <p class="habitacion_text_text">'.$fecha_inicio.'</p>
+                        </span>
+                    ';
                 }else{
                     $fecha_inicio= date("d-m-Y",$cronometro);
-                    echo $fecha_inicio;
-                    echo '<br>';
+                    $fecha_inicio= date("d-m-Y",$cronometro);
+                    echo '<span class="habitacion_texto_contenedor" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-x-fill" viewBox="0 0 16 16">
+                                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M6.854 8.146 8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708z"/>
+                            </svg>
+                            <p class="habitacion_text_text">'.$fecha_inicio.'</p>
+                        </span>
+                    ';
                     // echo $tipo_habitacion;
                 }
             }elseif($estado_hab == 1){
             $nombre = $fila['n_huesped'] . " " . $fila['a_huesped'];
-            echo '<span class="nombreOperaciones">'; echo $nombre; echo '</span>';
-            echo '<span class="otrosApartados">'; echo $fecha_entrada; echo '</span>';
-            echo '<span class="otrosApartados">'; echo $fecha_salida; echo '</span>';
+            echo '<span class="habitacion_texto_contenedor" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                    </svg>
+                    <p class="habitacion_text_text">'.$nombre.'</p>
+                </span>
+            ';
+            echo '<span class="habitacion_texto_contenedor" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+                    </svg>
+                    <p class="habitacion_text_text">'.$fecha_entrada.'</p>
+                    </span>
+                    ';
             
-            echo $saldo;
+            echo '<span class="habitacion_texto_contenedor" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-x-fill" viewBox="0 0 16 16">
+                        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M6.854 8.146 8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708z"/>
+                    </svg>
+                    <p class="habitacion_text_text">'.$fecha_salida.'</p>
+                </span>
+            ';
+            echo '<span class="habitacion_texto_contenedor" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                        <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                        <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
+                    </svg>
+                    <p class="habitacion_text_text">'.$saldo.'</p>
+                </span>
+            ';
+
             }else{
             if($cronometro == 0){
-                $fecha_inicio= '&nbsp';
+                $fecha_inicio= '<span class="habitacion_texto_contenedor" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-check-fill" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                    <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514Z"/>
+                </svg>
+                <p class="habitacion_text_text">USO CASA</p>
+            </span>';
             }else{
-                $fecha_inicio= date("d-m-Y",$cronometro);
+                echo '<span class="habitacion_texto_contenedor" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-x-fill" viewBox="0 0 16 16">
+                            <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M6.854 8.146 8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708z"/>
+                        </svg>
+                        <p class="habitacion_text_text">'.$fecha_inicio= date("d-m-Y",$cronometro).'</p>
+                    </span>
+        ';
             }
             echo $fecha_inicio;
             
             }
             echo '</span>';
-            echo '<span class="otrosApartados" style="background-color: '.$color.' !important; ">'; echo $tipo_habitacion; echo '</span>';
+            echo'
+                    <div class="habitacion_tipo_capsul">
+                    Hab. ';
+                    if($fila['id']<100){
+                        echo $fila['tipo_nombre'];
+                    }else{
+                        echo $fila['comentario'];
+                    }
+                    // echo '<br>'. $estado .'  <br>';
+            echo '</div>';
+            
             echo '
-                </a>
+                
+                </section>
             </div>
             </div>';
         }else{
-        echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
-        echo '</div>';
+        
         }
     }
     echo ' </div>';
