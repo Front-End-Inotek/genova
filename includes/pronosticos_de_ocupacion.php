@@ -92,7 +92,7 @@ for ($k = 0; $k < count($id_hab); $k++) {
                 $infantiles=$infantiles+$fila["infantiles"];
             }
         }
-        $matriz[1][$j] = $contador;
+        $matriz[2][$j] = $contador;
         //var_dump($hab_ocupadas);
         $listaAdultos[$j]=$listaAdultos[$j]+$adultos;
         $listaInfantiles[$j]=$listaInfantiles[$j]+$infantiles;
@@ -122,7 +122,7 @@ for ($k = 0; $k < count($id_hab); $k++) {
                 $infantiles=$infantiles+$fila["infantiles"];
             }
         }
-        $matriz[1][$j] = $contador;
+        $matriz[3][$j] = $contador;
         //var_dump($hab_ocupadas);
         $listaAdultos[$j]=$listaAdultos[$j]+$adultos;
         $listaInfantiles[$j]=$listaInfantiles[$j]+$infantiles;
