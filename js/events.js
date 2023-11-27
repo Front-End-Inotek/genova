@@ -1785,11 +1785,15 @@ function generarReporte() {
     const contenedor = document.getElementById("contenedor_para_pronosticos")
     const loader = document.getElementById("loader_pronosticos");
     const btnReporte = document.getElementById("btn_ver_reporte_pronostico");
+    const btnBuscar = document.getElementById("buscar_reporte")
     if( mes == "" || null ){
         contenedor.innerHTML = "<p>Selecciona una fecha valida</p>"
         return
     }
-    loader.style.display = "block";
+    btnReporte.disabled = true;
+    btnBuscar.disabled = true;
+    loader.style.visibility = "visible";
+    contenedor.innerHTML = "";
 
     let datos = {
         "fecha" : mes
@@ -1802,8 +1806,10 @@ function generarReporte() {
         url: "includes/pronosticos_de_ocupacion.php",
         data: datos,
         success: function(res){
-            loader.style.display = "none";
+            loader.style.visibility = "hidden";
             contenedor.innerHTML = res;
+            btnReporte.disabled = false;
+            btnBuscar.disabled = false;
         }
     })
 

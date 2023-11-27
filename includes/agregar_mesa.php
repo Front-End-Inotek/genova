@@ -31,7 +31,6 @@
             <label for="comentario">Comentario para la mesa</label>
           </div>
         </div>
-        <div class="d-flex justify-content-end">
       <div id="boton_inventario">
             <button type="submit" class="btn btn-primary" value="Guardar" onclick="guardar_mesa()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
