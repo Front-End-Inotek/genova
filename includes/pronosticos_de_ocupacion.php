@@ -139,12 +139,12 @@ for ($k = 0; $k < count($id_hab); $k++) {
     $lista_matrices[$k]=$matriz;
 }
 
-echo '<div class="table-responsive">';
+echo '<div class="table-responsive table-hover">';
 
 //imprimie las matrices
 for ($k = 0; $k < count($id_hab); $k++) {
     echo'
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover text-center table-sm">
         <tr>';
     $matriz=$lista_matrices[$k];
     for ($i = 0; $i < 5; $i++) {
@@ -196,7 +196,7 @@ for ($k = 0; $k < count($id_hab); $k++) {
 
 //se imprime el calculo de totales por noche de todas las habitaciones
 echo'
-<table class="table table-bordered">';
+<table class="table table-bordered table-hover text-center table-sm">';
 echo "<caption>Total cuartos noche:</caption>";
 echo '
     <tr>';
@@ -238,7 +238,7 @@ for ($j = 0; $j < $n; $j++) {
     
 }
 echo'
-<table class="table table-bordered">
+<table class="table table-bordered table-hover text-center table-sm">
     <caption>Ocupacion</caption>
     <tr>';
     echo'<td>Ocupacion Bruta(%)</td>';
@@ -296,7 +296,7 @@ for ($k = 0; $k < count($id_hab)+2; $k++) {
 echo "<br>";
 
 echo'
-<table class="table table-bordered">
+<table class="table table-bordered table-hover text-center table-sm ">
     <tr>';
     echo'<td>Adultos</td>';
 for ($j = 0; $j < $n; $j++) {
@@ -337,7 +337,7 @@ for ($i=1; $i<=$n; $i++){
 }
 echo "<br>";
 echo'
-<table class="table table-bordered">
+<table class="table table-bordered table-hover text-center table-sm">
     <tr>';
     echo'<td>Adultos</td>';
 for ($i=0; $i<$n; $i++){
@@ -379,7 +379,7 @@ for ($i=1; $i<=$n; $i++){
 }
 echo "<br>";
 echo'
-<table class="table table-bordered">
+<table class="table table-bordered table-hover text-center table-sm">
     <tr>';
     echo'<td>Adultos</td>';
 for ($i=0; $i<$n; $i++){
