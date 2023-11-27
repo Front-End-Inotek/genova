@@ -8,7 +8,7 @@
             <div class="inputs_form_container justify-content-start">
                 <div class="form-floating">
                     <div class="form-floating">
-                        <input type="month" name="fecha" id="mesanio" class="form-control custom_input" value="2023-01" pattern="^(20\d{2})-(0[1-9]|1[0-2])$" title="Formato inválido. Utiliza YYYY-MM">
+                        <input type="month" name="fecha" id="mesanio" class="form-control custom_input"  maxlength="7" minlength="7" value="2023-01" pattern="^(20\d{2})-(0[1-9]|1[0-2])$" title="Formato inválido. Utiliza YYYY-MM">
                         <label for="mesanio">Mes del reporte</label>
                     </div>
                 </div>
