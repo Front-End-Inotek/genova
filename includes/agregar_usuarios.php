@@ -22,6 +22,12 @@
            <label for="contrasena">Contraseña</label>       
         </div>
            <div class="form-floating input_container">
+           <input class="form-control custom_input" type="password" id="recontrasena" placeholder="Ingresa nuevamente la contraseña" maxlength="50">
+           <label for="contrasena">Confirmar contraseña</label>       
+      </div>
+      </div>
+      <div class="inputs_form_container">
+           <div class="form-floating input_container">
             <select class="form-select custom_input" id="nivel">
               <option value="0">Selecciona</option>
               <option value="1">Administrador</option>
@@ -36,12 +42,6 @@
             </select>  
             <label for="categoria">Categoria</label>     
           </div>
-        </div>      
-           <div class="inputs_form_container">
-            <div class="form-floating input_container">
-            <input class="form-control custom_input" type="password" id="recontrasena" placeholder="Ingresa nuevamente la contraseña" maxlength="50">
-            <label for="contrasena">Contraseña</label>       
-          </div>
           <div class="form-floating input_container">
             <input class="form-control custom_input" type="text" id="puesto" placeholder="Ingresa el puesto del usuario" maxlength="40">
             <label for="puesto">Puesto</label>     
@@ -54,24 +54,18 @@
           </div>
             <div class="form-floating input_container">
             <input class="form-control custom_input" type="text" id="correo" placeholder="Ingresa el correo del usuario" maxlength="70">
-            <label for="Correo">Celular</label>       
+            <label for="correo">Correo</label>       
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Dirección:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="direccion" placeholder="Ingresa la dirección del usuario">
+             <div class="form-floating input_container">
+             <input class="form-control custom_input" type="text" id="direccion" placeholder="Ingresa la dirección del usuario">
+             <label for="direccion">Dirección</label>       
+          </div>
+          <div class="inputs_form_container">
+          <div class="container_btn">
+          <button type="submit" class="btn btn-primary btn-lg btn-block" value="Guardar" onclick="guardar_usuario()">Guardar</button>
           </div>
           </div>
-          <div class="col-sm-4"></div>
-          <div class="col-sm-2">
-          <div id="boton_usuario">
-            <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">Guardar</button>
-          </div>
-          </div>
-        </div>
       </div>';
 ?>
 

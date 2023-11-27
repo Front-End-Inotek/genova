@@ -514,6 +514,12 @@ body {
   animation: shadow infinite reverse 2s !important;
 }
 
+.fabReporte {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+}
+
 @keyframes shadow{
   0%{
     background-color: inherit;
