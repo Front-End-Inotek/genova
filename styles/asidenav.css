@@ -9,7 +9,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    z-index: 100000000000000000000000000000000000000000000000000000000000000000000;
+    z-index: 150;
     top: 0;
     left: 0;
 }

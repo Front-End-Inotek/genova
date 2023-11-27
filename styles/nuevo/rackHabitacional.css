@@ -2,20 +2,20 @@
 /* header y columnas */
 @import '../colors.css';
 
-.tableRack {
+/* .tableRack {
   table-layout: auto;
   max-height: calc(100vh - 116px) !important;
 }
-
+ */
 #tablaTotal {
   /* border: 1px solid #6a67ef !important; */
   /*6a67ef*/
 }
 
-#cal-largo {
+/* #cal-largo {
   height: 850px;
 }
-
+ */
 .my-container {
   display: none;
 }
@@ -98,13 +98,13 @@
 .tableRack th:first-child {
   position: sticky !important;
   left: 0;
-  z-index: 1030;
+  z-index: 100;
 }
 
 .tableRack td:first-child {
   position: sticky !important;
   left: 0;
-  z-index: 1010;
+  z-index: 100;
 }
 
 .tableRack thead>th {

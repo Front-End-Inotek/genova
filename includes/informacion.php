@@ -2,6 +2,7 @@
 date_default_timezone_set('America/Mexico_City');
 
 include_once('consulta.php');
+include_once("clase_info_mesas.php");
 
 class Informacion extends ConexionMYSql
 {
@@ -221,7 +222,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora disponible_limpia_fondo ">
                                 <div class="habitacion_container_encabezado_circle  disponible_limpia" style="background-color: '.$color.' ;"></div>
-                                <span>'.$fila['nombre'].'</span>
+                                <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos disponible_limpia_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/disponible_limpia.svg"/>
@@ -237,7 +238,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora disponible_limpieza_fondo">
                                 <div class="habitacion_container_encabezado_circle disponible_limpieza" style="background-color: '.$color.' ;"></div>
-                                <span>'.$fila['nombre'].'</span>
+                                <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos disponible_limpieza_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/disponible_limpieza.svg"/>
@@ -252,7 +253,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora vacia_sucia_fondo">
                                 <div class="habitacion_container_encabezado_circle vacia_sucia" style="background-color: '.$color.' ;"></div>
-                                <span>'.$fila['nombre'].'</span>
+                                <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos vacia_sucia_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/vacia_sucia.svg"/>
@@ -268,7 +269,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora ocupada_fondo">
                                 <div class="habitacion_container_encabezado_circle ocupado" style="background-color: '.$color.' ;"></div>
-                                <span>'.$fila['nombre'].'</span>
+                                <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos ocupada_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado.svg"/>
@@ -284,7 +285,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora ocupado_sucio_fondo">
                                 <div class="habitacion_container_encabezado_circle ocupado_sucia" style="background-color: '.$color.' ;"></div>
-                                <span>'.$fila['nombre'].'</span>
+                                <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos ocupado_sucio_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado_sucia.svg"/>
@@ -300,7 +301,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora ocupado_limpieza_fondo">
                                 <div class="habitacion_container_encabezado_circle ocupado_limpieza" style="background-color: '.$color.' ;"></div>
-                                <span>'.$fila['nombre'].'</span>
+                                <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos ocupado_limpieza_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado_limpieza.svg"/>
@@ -316,7 +317,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora reserva_pagada_fondo">
                             <div class="habitacion_container_encabezado_circle reserva_pagada" style="background-color: '.$color.' ;"></div>
-                            <span>'.$fila['nombre'].'</span>
+                            <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos reserva_pagada_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/reserva_pagada.svg"/>
@@ -331,7 +332,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora reserva_pendiente_fondo">
                             <div class="habitacion_container_encabezado_circle reserva_pendiente" style="background-color: '.$color.' ;"></div>
-                            <span>'.$fila['nombre'].'</span>
+                            <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos reserva_pendiente_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/reserva_pendiente.svg"/>
@@ -346,7 +347,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora uso_casa_fondo">
                             <div class="habitacion_container_encabezado_circle uso_casa" style="background-color: '.$color.' ;"></div>
-                            <span>'.$fila['nombre'].'</span>
+                            <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos uso_casa_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/uso_casa.svg"/>
@@ -362,7 +363,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora mantenimiento_fondo">
                             <div class="habitacion_container_encabezado_circle mantenimiento" style="background-color: '.$color.' ;"></div>
-                            <span>'.$fila['nombre'].'</span>
+                            <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos mantenimiento_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/mantenimiento.svg"/>
@@ -377,7 +378,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora bloqueado_fondo">
                             <div class="habitacion_container_encabezado_circle bloqueado" style="background-color: '.$color.' ;"></div>
-                            <span>'.$fila['nombre'].'</span>
+                            <span class="filtro_text_pildora">'.$fila['nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos bloqueado_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/bloqueado.svg"/>
@@ -410,6 +411,18 @@ class Informacion extends ConexionMYSql
                 $saldo= '-$'.number_format($total_faltante, 2);
                 $saldo_c="red";
             }
+
+            /* AQUI EL ESTADO DE BLOQUEO ERA 7 PERO FUNCIONO CON EL 5 */
+            if($estado_hab == 5){
+                echo '  
+                <span class="habitacion_texto_contenedor" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban-fill" viewBox="0 0 16 16">
+                       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M2.71 12.584c.218.252.454.488.706.707l9.875-9.875a7.034 7.034 0 0 0-.707-.707l-9.875 9.875Z"/>
+                     </svg>
+                    <p class="habitacion_text_text">Bloqueo</p>
+                </span>';
+            }
+
             //$fecha_salida= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
             if($estado_hab == 0){
                 if($cronometro == 0){
@@ -484,15 +497,39 @@ class Informacion extends ConexionMYSql
                         </svg>
                         <p class="habitacion_text_text">'.$fecha_inicio= date("d-m-Y",$cronometro).'</p>
                     </span>
-        ';
+            ';
             }
-            echo $fecha_inicio;
+            /* echo $fecha_inicio; */
+            /* AQUI EL ESTADO DE USO CASA ERA 6 PERO FUNCIONO CON EL 8*/
+            if($estado_hab == 8){
+                $nombre = $fila['n_huesped'] . " " . $fila['a_huesped'];
+                echo '<span class="habitacion_texto_contenedor" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                 <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+                </svg>
+                 <p class="habitacion_text_text">Uso casa</p>
+                 </span>
+            ';
+            }
+
+            /* AQUI EL ESTADO DE RESERVA PAGADA ERA 9 PERO FUNCIONO CON EL 6 */
+            if($estado_hab == 6){
+                echo '  
+                <span class="habitacion_texto_contenedor" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+                    </svg>
+                    <p class="habitacion_text_text">Reserva pagada</p>
+                </span>';
+            }
+           
             
             }
             echo '</span>';
             echo'
                     <div class="habitacion_tipo_capsul">
-                    Hab. ';
+                     ';
                     if($fila['id']<100){
                         echo $fila['tipo_nombre'];
                     }else{

@@ -3,24 +3,26 @@
   include_once("clase_inventario.php");
   $inventario= NEW Inventario(0);
   
-  echo ' <div class="container-fluid blanco"> 
-          <br>
-          <div class="col-sm-12 text-center"><h2 class="text-dark ">INVENTARIO</h2></div>
+  echo ' <div class="main_container"> 
           
-          <div class="row">
-            <div class="col-sm-2">
-              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_surtir_inventario()" class="color_black form-control form-control"/>
+          <header class="main_container_title">
+            <h2 >INVENTARIO</h2>
+          </header>
+          
+          <div class="inputs_form_container justify-content-start">
+            <div class="form-floating input_container">
+              <input type="text" id="a_buscar" placeholder="Buscar" onkeyup="buscar_surtir_inventario()" class="form-control custom_input"/>
+              <label for="a_buscar">Buscar</label>
             </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <select class="form-control-lg" id="categoria" onchange="mostrar_surtir_categoria()">
-                  <option value="-1">Selecciona</option>
+
+            <div class="form-floating input_container">
+                <select class="form-select custom_input" id="categoria" onchange="mostrar_surtir_categoria()" placeholder="Categoria">
+                  <option value="-1" disabled selected>Selecciona</option>
                   <option value="0">Todos</option>';
                   $inventario->categoria_surtir();
-                echo '</select>
-              </div>
+            echo '</select>
+                <label for="categoria" >Categoria</label>
             </div>
-            <div class="col-sm-8"></div>
           </div><br>';
           $inventario->mostrar_surtir_inventario();
   echo '  

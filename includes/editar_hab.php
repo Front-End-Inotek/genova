@@ -3,8 +3,6 @@
   include_once("clase_hab.php");
   $hab= NEW Hab($_GET['id']);
   echo '
- <!-- Modal -->
-      <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Editar tipo de habitacion </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -44,6 +42,6 @@
               <div id="boton_tipo">
               <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_hab('.$_GET['id'].')">Guardar</button>
             </div>
-            </div>
-          </div>';
+          </div>
+          ';
 ?>

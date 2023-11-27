@@ -26,7 +26,7 @@
     }
     intval($contador);
     echo'
-    <div class="container-fluid blanco">
+    <div class="main_container">
         <div class="col-12 text-center">
             <h2 class="text-dark">Factura individual</h2>
         </div>

@@ -99,7 +99,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_inventario">
-        <table class="table table-bordered table-hover">
+        <table class="table table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
@@ -169,7 +169,7 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
           echo '<div class="table-responsive" id="tabla_inventario">
-          <table class="table table-bordered table-hover">
+          <table class="table table-hover">
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th>Nombre</th>
@@ -229,7 +229,7 @@
         $comentario="Mostramos los productos para poder surtir inventario";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         echo '<div class="table-responsive" id="tabla_surtir_inventario">
-        <table class="table table-bordered table-hover">
+        <table class="table  table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
@@ -255,8 +255,19 @@
               <td>'.$fila['stock'].'</td>
               <td>'.$fila['inventario'].'</td>
               <td>'.$faltante.'</td>
-              <td><input type="nombre" class="color_black" value = "'.$faltante.'" id="cantidad'.$fila['ID'].'"></td>
-              <td><button class="btn btn-success" onclick="inventario_surtir_producto('.$fila['ID'].')"> Guardar</button></td>
+              <td>
+                <div class="form-floating">
+                  <input type="nombre" class="form-control custom_input" value = "'.$faltante.'" id="cantidad'.$fila['ID'].'" placeholder="Faltante">
+                  <label>Faltante</label>
+                </div>
+              </td>
+              <td><button class="btn btn-primary" onclick="inventario_surtir_producto('.$fila['ID'].')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
+                      <path d="M11 2H9v3h2z"/>
+                      <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
+                    </svg>
+                    Guardar
+                  </button></td>
               </tr>';
             }
             echo '

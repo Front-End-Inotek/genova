@@ -1,20 +1,30 @@
 <?php
 
 echo '
-    <div class="container-fluid blanco">
-        <div class="col-12 text-center"><h2 class="text-dark">Buscar factura por folio</h2></div>
-        <br>
-        <div class="row">
-            <div class="col-sm-2 form-floating mb-3">
-                <input type="number" class="form-control" id="inicial" placeholder="Factura inicial">
-                <label for="inicial" style="padding-left: 25px;" >Folio inicial de la Factura</label>
+    <div class="main_container">
+        <header class="main_container_title">
+            <h2>Buscar factura por folio</h2>
+        </header>
+
+        <div class="inputs_form_container justify-content-start">
+
+            <div class="form-floating input_container">
+                <input type="number" class="form-control custom_input" id="inicial" placeholder="Factura inicial">
+                <label for="inicial" >Folio inicial de la Factura</label>
             </div>
-            <div class="col-sm-2 form-floating mb-3">
-                <input type="number" class="form-control" id="final" placeholder="Factura final">
-                <label for="final" style="padding-left: 25px;" >Folio final de la factura</label>
+
+            <div class="form-floating input_container">
+                <input type="number" class="form-control custom_input" id="final" placeholder="Factura final">
+                <label for="final"  >Folio final de la factura</label>
             </div>
-            <div class="col-sm-2">
-                <button class="btn btn-primary btn-block btn-default" onclick="buscar_factura_folio()" > Buscar </button>
+
+            <div class="form-floating input_container_date">
+                <button class="btn btn-primary btn-block btn-default" onclick="buscar_factura_folio()" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                    Buscar
+                </button>
             </div>
         </div>
         <div class="row" id="contenedor-facturas">

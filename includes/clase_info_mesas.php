@@ -213,6 +213,20 @@
         echo 'Realiza: '.$usuario->usuario;
       echo '</div>';
     }
+    function user_mantenimiento($mov){
+      $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
+      $comentario= "Obtener nombre de quien hizo mantenimiento";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      $detalle_realiza= 0;
+      while($fila = mysqli_fetch_array($consulta))
+      {
+        $detalle_realiza= $fila['detalle_realiza'];
+      }
+      $usuario = NEW Usuario($detalle_realiza);
+      
+      $nombre=$usuario->usuario;
+      return $nombre;
+    }
     // Estado 5
     function supervision($mesa_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
