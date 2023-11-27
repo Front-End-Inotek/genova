@@ -139,7 +139,20 @@ for ($k = 0; $k < count($id_hab); $k++) {
     $lista_matrices[$k]=$matriz;
 }
 
-echo '<div class="contenedor__pronosticos">';
+echo '<div class="main_container">
+    <header class="main_container_title">
+        <h2>PRONOSTICO DE OCUPACIÓN</h2>
+    </header>
+
+    <div class="inputs_form_container justify-content-start">
+        <div class="form-floating input_container_date">
+            <div class="form-control custom_input">
+                <input type="month" name="fecha" id="fecha" class="form-control" value="2019-08">
+                <label for="fecha">Primera fecha</label>
+            </div>
+        </div>
+    </div>
+';
 
 //imprimie las matrices
 for ($k = 0; $k < count($id_hab); $k++) {

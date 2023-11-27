@@ -1774,10 +1774,38 @@ function graficas(){
 function pronosticos(){
     $('#area_trabajo').hide();
     $('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/pronosticos_de_ocupacion.php");
+    //$("#area_trabajo_menu").load("includes/pronosticos_de_ocupacion.php");
+    $("#area_trabajo_menu").load("includes/select_pronosticos.php");
     $('#pie').show();
     closeModal();
     closeNav();
+}
+function generarReporte() {
+    const mes = document.getElementById("mesanio").value
+    const contenedor = document.getElementById("contenedor_para_pronosticos")
+    const loader = document.getElementById("loader_pronosticos");
+    if( mes == "" || null ){
+        contenedor.innerHTML = "<p>Selecciona una fecha valida</p>"
+        return
+    }
+    loader.style.display = "block";
+
+    let datos = {
+        "fecha" : mes
+    }
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/pronosticos_de_ocupacion.php",
+        data: datos,
+        success: function(res){
+            loader.style.display = "none";
+            contenedor.innerHTML = res;
+        }
+    })
+
 }
 //Función que calcula las fechas entre 2 fechas.
 function getDatesInRange(date, endDate) {
