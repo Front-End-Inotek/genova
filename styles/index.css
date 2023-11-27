@@ -573,4 +573,8 @@ body {
       max-width: 95%;
       margin: auto;
     }
+    .fabReporte {
+      top: 5rem;
+      right: 5px;
+    }
 }

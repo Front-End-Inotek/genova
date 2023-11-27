@@ -1811,6 +1811,26 @@ function generarReporte() {
     })
 
 }
+
+function ver_reporte_pronostico() {
+    console.log("Reporte generado")
+    const mes = document.getElementById("mesanio").value
+    let datos = {
+        "fecha" : mes
+    }
+
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/generar_reporte_pronosticos.php",
+        data: datos,
+        succes: function(res){
+            console.log("Mirando el reporte" + res)
+        }
+    })
+}
 //Función que calcula las fechas entre 2 fechas.
 function getDatesInRange(date, endDate) {
     const dates = [];
