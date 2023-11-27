@@ -1784,6 +1784,7 @@ function generarReporte() {
     const mes = document.getElementById("mesanio").value
     const contenedor = document.getElementById("contenedor_para_pronosticos")
     const loader = document.getElementById("loader_pronosticos");
+    const btnReporte = document.getElementById("btn_ver_reporte_pronostico");
     if( mes == "" || null ){
         contenedor.innerHTML = "<p>Selecciona una fecha valida</p>"
         return
