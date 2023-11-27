@@ -1,8 +1,22 @@
 <?php
 include_once("clase_hab.php");
 $hab= NEW Hab(0);
-$mes = '11';
-$año = '2023';
+$obtenerfecha=$_POST["fecha"];
+//echo $obtenerfecha;
+$mes = '';
+$año = '';
+$aux="";
+for($i=0; $i<strlen($obtenerfecha); $i++){
+    if($obtenerfecha[$i]!="-"){
+        $aux=$aux.$obtenerfecha[$i];
+    }else{
+        $año=$aux;
+        $aux="";
+    }
+}
+$mes=$aux;
+//echo $año;
+//echo $mes;
 $n = cal_days_in_month(CAL_GREGORIAN, $mes, $año);
 $id_hab=array();
 
