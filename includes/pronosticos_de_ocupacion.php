@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once("clase_hab.php");
 $hab= NEW Hab(0);
 $obtenerfecha=$_POST["fecha"];
@@ -412,6 +413,18 @@ echo '</tr>';
 echo'
 </table>
 ';
+$_SESSION["lista_matrices"]=$lista_matrices;
+$_SESSION["total_cuartos_noche"]=$total_cuartos_noche;
+$_SESSION["totales"]=$totales;
+$_SESSION["ocupacion"]=$ocupacion;
+$_SESSION["listaAdultos"]=$listaAdultos;
+$_SESSION["listaInfantiles"]=$listaInfantiles;
+$_SESSION["listaLlegadasAdultos"]=$listaLlegadasAdultos;
+$_SESSION["listaLlegadasInfantiles"]=$listaLlegadasInfantiles;
+$_SESSION["listaSalidasAdultos"]=$listaSalidasAdultos;
+$_SESSION["listaSalidasInfantiles"]=$listaSalidasInfantiles;
+
+
 
 echo '
     <a href="#" class="btn btn-primary fabReporte" onclick="ver_reporte_pronostico()">
