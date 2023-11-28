@@ -1818,8 +1818,9 @@ function ver_reporte_pronostico() {
     let datos = {
         "fecha" : mes
     }
-
-    $.ajax({
+    window.open("includes/generar_reporte_pronosticos.php?fecha="+mes,"Pronostico");
+    
+    /*$.ajax({
         async: true,
         type: "POST",
         dataType: "html",
@@ -1829,7 +1830,7 @@ function ver_reporte_pronostico() {
         succes: function(res){
             console.log("Mirando el reporte" + res)
         }
-    })
+    })*/
 }
 //Función que calcula las fechas entre 2 fechas.
 function getDatesInRange(date, endDate) {
