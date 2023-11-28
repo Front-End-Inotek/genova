@@ -47,7 +47,7 @@ class PDF extends FPDF
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(177, 8, 'Tipo de Cuarto', 0, 0, 'C');
         $this->SetFont('Arial', 'B', 7);
-        $this->Cell(25, 8, mb_convert_encoding('Año:', 'ISO-8859-1', 'UTF-8'), 0, 0, 'R');
+        $this->Cell(25, 8, utf8_decode('Año:'), 0, 0, 'R');
         $this->Cell(25, 8, $año, 0, 1, );
         $this->Ln(1);
     }
@@ -57,7 +57,7 @@ class PDF extends FPDF
         // Pie de página
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 6);
-        $this->Cell(0, 10, mb_convert_encoding('Página ', 'ISO-8859-1', 'UTF-8') . $this->PageNo(), 0, 0, 'C');
+        $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo(), 0, 0, 'C');
     }
 
     function CreateTable()
@@ -76,8 +76,9 @@ class PDF extends FPDF
         $tipo_de_habitacion=$_SESSION["tipo_de_habitacion"];
         $ctotales=0;
         // Configurar encabezado de la tabla
-        $this->SetFont('Arial', 'B', 6);
+        $this->SetFont('Arial', '', 6);
         $this->Cell(25, 4, $tipo_de_habitacion[$ctotales], 0);
+        $this->SetFont('Arial', 'B', 6);
         for ($i=1; $i<=count($total_cuartos_noche[0]); $i++){
             $this->Cell(7, 4, $i, 0);
         }
@@ -155,7 +156,7 @@ class PDF extends FPDF
             $this->Cell(7, 4, $listaAdultos[$j], 1);
         }
         $this->Ln();
-        $this->Cell(25, 4, mb_convert_encoding('niño', 'ISO-8859-1', 'UTF-8'), 1);
+        $this->Cell(25, 4, utf8_decode('niño'), 1);
         for ($j = 0; $j < count($total_cuartos_noche[0]); $j++) {
             $this->Cell(7, 4, $listaInfantiles[$j], 1);
         }
@@ -168,7 +169,7 @@ class PDF extends FPDF
             $this->Cell(7, 4, $listaLlegadasAdultos[$j], 1);
         }
         $this->Ln();
-        $this->Cell(25, 4, mb_convert_encoding('niño', 'ISO-8859-1', 'UTF-8'), 1);
+        $this->Cell(25, 4, utf8_decode('niño'), 1);
         for ($j = 0; $j < count($total_cuartos_noche[0]); $j++) {
             $this->Cell(7, 4, $listaLlegadasInfantiles[$j], 1);
         }
@@ -181,7 +182,7 @@ class PDF extends FPDF
             $this->Cell(7, 4, $listaSalidasAdultos[$j], 1);
         }
         $this->Ln();
-        $this->Cell(25, 4, mb_convert_encoding('niño', 'ISO-8859-1', 'UTF-8'), 1);
+        $this->Cell(25, 4, utf8_decode('niño'), 1);
         for ($j = 0; $j < count($total_cuartos_noche[0]); $j++) {
             $this->Cell(7, 4, $listaSalidasInfantiles[$j], 1);
         }
