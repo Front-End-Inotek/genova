@@ -16,6 +16,8 @@ for($i=0; $i<strlen($obtenerfecha); $i++){
     }
 }
 $mes=$aux;
+$_SESSION["mes"]=$mes;
+$_SESSION["año"]=$año;
 //echo $año;
 //echo $mes;
 $n = cal_days_in_month(CAL_GREGORIAN, $mes, $año);
@@ -48,6 +50,8 @@ for ($k = 0; $k < count($id_hab); $k++) {
     }
     $lista_matrices[$k]=$matriz;
 }
+$tipo_de_habitacion=$hab->mostrar_tipoHab();
+//var_dump($tipo_de_habitacion);
 $listaAdultos=array();
 $listaInfantiles=array();
 for ($j = 0; $j < $n; $j++) {
@@ -160,6 +164,7 @@ echo '<div class="table-responsive table-hover">
 
 //imprimie las matrices
 for ($k = 0; $k < count($id_hab); $k++) {
+    echo $tipo_de_habitacion[$k];
     echo'
     <table class="table table-bordered table-hover text-center table-sm">
         <tr>';
@@ -212,9 +217,10 @@ for ($k = 0; $k < count($id_hab); $k++) {
 }
 
 //se imprime el calculo de totales por noche de todas las habitaciones
+echo "<caption>Total cuartos noche:</caption>";
 echo'
 <table class="table table-bordered table-hover text-center table-sm">';
-echo "<caption>Total cuartos noche:</caption>";
+
 echo '
     <tr>';
 echo '<br>';
@@ -255,8 +261,10 @@ for ($j = 0; $j < $n; $j++) {
     
 }
 echo'
+<caption>Ocupacion</caption>
+
 <table class="table table-bordered table-hover text-center table-sm">
-    <caption>Ocupacion</caption>
+    
     <tr>';
     echo'<td>Ocupacion Bruta(%)</td>';
 for ($j = 0; $j < $n; $j++) {
@@ -423,6 +431,7 @@ $_SESSION["listaLlegadasAdultos"]=$listaLlegadasAdultos;
 $_SESSION["listaLlegadasInfantiles"]=$listaLlegadasInfantiles;
 $_SESSION["listaSalidasAdultos"]=$listaSalidasAdultos;
 $_SESSION["listaSalidasInfantiles"]=$listaSalidasInfantiles;
+$_SESSION["tipo_de_habitacion"]=$tipo_de_habitacion;
 
 
 
