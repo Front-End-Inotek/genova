@@ -190,6 +190,13 @@
   overscroll-behavior: contain;
 }
 
+.cal-thead {
+  top: 0px;
+  background-color: #ecf2ff;
+  position: sticky;
+  z-index: 100;
+}
+
 .cal-viewmonth {
   font-size: 16px;
   width: 150px;

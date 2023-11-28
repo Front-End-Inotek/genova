@@ -16,6 +16,8 @@ for($i=0; $i<strlen($obtenerfecha); $i++){
     }
 }
 $mes=$aux;
+$_SESSION["mes"]=$mes;
+$_SESSION["año"]=$año;
 //echo $año;
 //echo $mes;
 $n = cal_days_in_month(CAL_GREGORIAN, $mes, $año);
@@ -48,6 +50,8 @@ for ($k = 0; $k < count($id_hab); $k++) {
     }
     $lista_matrices[$k]=$matriz;
 }
+$tipo_de_habitacion=$hab->mostrar_tipoHab();
+//var_dump($tipo_de_habitacion);
 $listaAdultos=array();
 $listaInfantiles=array();
 for ($j = 0; $j < $n; $j++) {
@@ -154,42 +158,7 @@ for ($k = 0; $k < count($id_hab); $k++) {
     $lista_matrices[$k]=$matriz;
 }
 
-echo '<div class="table-responsive table-hover">
-    
-';
 
-//imprimie las matrices
-for ($k = 0; $k < count($id_hab); $k++) {
-    echo'
-    <table class="table table-bordered table-hover text-center table-sm">
-        <tr>';
-    $matriz=$lista_matrices[$k];
-    for ($i = 0; $i < 5; $i++) {
-        if ($i==0){
-            echo'<td>Cuartos Noche</td>';
-        }else if ($i==1){
-            echo'<td>Reservadas</td>';
-        }else if ($i==2){
-            echo'<td>Reservadas Web</td>';
-        }else if ($i==3){
-            echo'<td>Walk-in</td>';
-        }else if ($i==4){
-            echo'<td>Dispobles</td>';
-        }
-        for ($j = 0; $j < $n; $j++) {
-            //echo $matriz[$i][$j]."      ";
-            echo'<td>'.$matriz[$i][$j].'</td>';
-        }
-        echo'<td>'." ".'</td>';
-        echo'<td>'." ".'</td>';
-        echo '</tr>';
-    }
-
-    echo'
-    </table>
-    ';
-    echo '<br>';
-}
 
 
 // se crea una matriz vacia para tel total de cuartos por noche
@@ -211,35 +180,7 @@ for ($k = 0; $k < count($id_hab); $k++) {
     }
 }
 
-//se imprime el calculo de totales por noche de todas las habitaciones
-echo'
-<table class="table table-bordered table-hover text-center table-sm">';
-echo "<caption>Total cuartos noche:</caption>";
-echo '
-    <tr>';
-echo '<br>';
-for ($i = 0; $i < 5; $i++) {
-    if ($i==0){
-        echo'<td>Cuartos Noche</td>';
-    }else if ($i==1){
-        echo'<td>Reservadas</td>';
-    }else if ($i==2){
-        echo'<td>Reservadas Web</td>';
-    }else if ($i==3){
-        echo'<td>Walk-in</td>';
-    }else if ($i==4){
-        echo'<td>Dispobles</td>';
-    }
-    for ($j = 0; $j < $n; $j++) {
-        //echo $total_cuartos_noche[$i][$j]."      ";
-        echo'<td>'.$total_cuartos_noche[$i][$j].'</td>';
-    }
-    echo '</tr>';
-}
-echo'
-</table>
-';
-echo '<br>';
+
 
 //se saca el promedio de ocupacion de todas las habitaciones por dia
 
@@ -254,20 +195,7 @@ for ($j = 0; $j < $n; $j++) {
     }
     
 }
-echo'
-<table class="table table-bordered table-hover text-center table-sm">
-    <caption>Ocupacion</caption>
-    <tr>';
-    echo'<td>Ocupacion Bruta(%)</td>';
-for ($j = 0; $j < $n; $j++) {
-    //echo $ocupacion[$j]."      ";
-    echo'<td>'.$ocupacion[$j].'</td>';
-}
-echo '</tr>';
-echo'
-</table>
-';
-echo "<br>";
+
 
 //se llena la columna de los totales de las tablas
 $totales=array();
@@ -303,15 +231,158 @@ $matriz[0]=number_format($sum/$n,2);
 array_push($totales,$matriz);
 
 
-echo "totales";
-echo "<br>";
-for ($k = 0; $k < count($id_hab)+2; $k++) {
-    for ($j = 0; $j < 5; $j++) {
-        echo $totales[$k][$j] . "      ";
-    }
+
+
+
+
+
+$listaLlegadasAdultos=array();
+$listaLlegadasInfantiles=array();
+for ($i=1; $i<=$n; $i++){
+    $adultos=0;
+    $infantiles=0;
+    $fecha=$año."-".$mes."-".$i." "."00:00:00";
+    $tUnix=strtotime($fecha);
+    $consulta=$hab->llegadas_huespedes_dia($tUnix);
+    while ($fila = mysqli_fetch_array($consulta))
+        {
+          $adultos=$adultos+$fila["adultos"];
+          $infantiles=$infantiles+$fila["infantiles"];
+        }
+    array_push($listaLlegadasAdultos,$adultos);
+    array_push($listaLlegadasInfantiles,$infantiles);
+    
 }
+
+
+
+$listaSalidasAdultos=array();
+$listaSalidasInfantiles=array();
+for ($i=1; $i<=$n; $i++){
+    $adultos=0;
+    $infantiles=0;
+    $fecha=$año."-".$mes."-".$i." "."00:00:00";
+    $tUnix=strtotime($fecha);
+    $consulta=$hab->salidas_huespedes_dia($tUnix);
+    while ($fila = mysqli_fetch_array($consulta))
+        {
+          $adultos=$adultos+$fila["adultos"];
+          $infantiles=$infantiles+$fila["infantiles"];
+        }
+    array_push($listaSalidasAdultos,$adultos);
+    array_push($listaSalidasInfantiles,$infantiles);
+    
+}
+
+$_SESSION["lista_matrices"]=$lista_matrices;
+$_SESSION["total_cuartos_noche"]=$total_cuartos_noche;
+$_SESSION["totales"]=$totales;
+$_SESSION["ocupacion"]=$ocupacion;
+$_SESSION["listaAdultos"]=$listaAdultos;
+$_SESSION["listaInfantiles"]=$listaInfantiles;
+$_SESSION["listaLlegadasAdultos"]=$listaLlegadasAdultos;
+$_SESSION["listaLlegadasInfantiles"]=$listaLlegadasInfantiles;
+$_SESSION["listaSalidasAdultos"]=$listaSalidasAdultos;
+$_SESSION["listaSalidasInfantiles"]=$listaSalidasInfantiles;
+$_SESSION["tipo_de_habitacion"]=$tipo_de_habitacion;
+
+
+
+
+///IMPRESIONES
+
+echo '<div class="table-responsive table-hover">
+';
+//imprimie las matrices
+for ($k = 0; $k < count($id_hab); $k++) {
+    echo $tipo_de_habitacion[$k];
+    echo'
+    <table class="table table-bordered table-hover text-center table-sm">
+        <tr>';
+    $matriz=$lista_matrices[$k];
+    for ($i = 0; $i < 5; $i++) {
+        if ($i==0){
+            echo'<td>Cuartos Noche</td>';
+        }else if ($i==1){
+            echo'<td>Reservadas</td>';
+        }else if ($i==2){
+            echo'<td>Reservadas Web</td>';
+        }else if ($i==3){
+            echo'<td>Walk-in</td>';
+        }else if ($i==4){
+            echo'<td>Dispobles</td>';
+        }
+        for ($j = 0; $j < $n; $j++) {
+            //echo $matriz[$i][$j]."      ";
+            echo'<td>'.$matriz[$i][$j].'</td>';
+        }
+        echo'<td>'." ".'</td>';
+        echo'<td>'.$totales[$k][$i].'</td>';
+        echo '</tr>';
+    }
+
+    echo'
+    </table>
+    ';
+    echo '<br>';
+}
+$tope=$k;
+
+//se imprime el calculo de totales por noche de todas las habitaciones
+echo "<caption>Total cuartos noche:</caption>";
+echo'
+<table class="table table-bordered table-hover text-center table-sm">';
+
+echo '
+    <tr>';
+echo '<br>';
+for ($i = 0; $i < 5; $i++) {
+    if ($i==0){
+        echo'<td>Cuartos Noche</td>';
+    }else if ($i==1){
+        echo'<td>Reservadas</td>';
+    }else if ($i==2){
+        echo'<td>Reservadas Web</td>';
+    }else if ($i==3){
+        echo'<td>Walk-in</td>';
+    }else if ($i==4){
+        echo'<td>Dispobles</td>';
+    }
+    for ($j = 0; $j < $n; $j++) {
+        //echo $total_cuartos_noche[$i][$j]."      ";
+        echo'<td>'.$total_cuartos_noche[$i][$j].'</td>';
+    }
+    echo'<td>'." ".'</td>';
+        echo'<td>'.$totales[$tope][$i].'</td>';
+    echo '</tr>';
+}
+$tope=$tope+1;
+echo'
+</table>
+';
+echo '<br>';
+
+//se imprime la ocupacion
+echo'
+<caption>Ocupacion</caption>
+
+<table class="table table-bordered table-hover text-center table-sm">
+    
+    <tr>';
+    echo'<td>Ocupacion Bruta(%)</td>';
+for ($j = 0; $j < $n; $j++) {
+    //echo $ocupacion[$j]."      ";
+    echo'<td>'.$ocupacion[$j].'</td>';
+}
+echo'<td>'." ".'</td>';
+echo'<td>'.$totales[$tope][0].'</td>';
+echo '</tr>';
+echo'
+</table>
+';
 echo "<br>";
 
+//se imprimen los clientes alojados
 echo'
 <table class="table table-bordered table-hover text-center table-sm ">
     <tr>';
@@ -333,25 +404,9 @@ echo'
 ';
 echo "<br>";
 
+
+//se imprimen las llegadas
 echo "Llegadas:";
-echo "<br>";
-$listaLlegadasAdultos=array();
-$listaLlegadasInfantiles=array();
-for ($i=1; $i<=$n; $i++){
-    $adultos=0;
-    $infantiles=0;
-    $fecha=$año."-".$mes."-".$i." "."00:00:00";
-    $tUnix=strtotime($fecha);
-    $consulta=$hab->llegadas_huespedes_dia($tUnix);
-    while ($fila = mysqli_fetch_array($consulta))
-        {
-          $adultos=$adultos+$fila["adultos"];
-          $infantiles=$infantiles+$fila["infantiles"];
-        }
-    array_push($listaLlegadasAdultos,$adultos);
-    array_push($listaLlegadasInfantiles,$infantiles);
-    
-}
 echo "<br>";
 echo'
 <table class="table table-bordered table-hover text-center table-sm">
@@ -374,26 +429,8 @@ echo'
 ';
 echo "<br>";
 
-
+//se imprimen las salidas
 echo "Salidas:";
-echo "<br>";
-$listaSalidasAdultos=array();
-$listaSalidasInfantiles=array();
-for ($i=1; $i<=$n; $i++){
-    $adultos=0;
-    $infantiles=0;
-    $fecha=$año."-".$mes."-".$i." "."00:00:00";
-    $tUnix=strtotime($fecha);
-    $consulta=$hab->salidas_huespedes_dia($tUnix);
-    while ($fila = mysqli_fetch_array($consulta))
-        {
-          $adultos=$adultos+$fila["adultos"];
-          $infantiles=$infantiles+$fila["infantiles"];
-        }
-    array_push($listaSalidasAdultos,$adultos);
-    array_push($listaSalidasInfantiles,$infantiles);
-    
-}
 echo "<br>";
 echo'
 <table class="table table-bordered table-hover text-center table-sm">
@@ -413,16 +450,6 @@ echo '</tr>';
 echo'
 </table>
 ';
-$_SESSION["lista_matrices"]=$lista_matrices;
-$_SESSION["total_cuartos_noche"]=$total_cuartos_noche;
-$_SESSION["totales"]=$totales;
-$_SESSION["ocupacion"]=$ocupacion;
-$_SESSION["listaAdultos"]=$listaAdultos;
-$_SESSION["listaInfantiles"]=$listaInfantiles;
-$_SESSION["listaLlegadasAdultos"]=$listaLlegadasAdultos;
-$_SESSION["listaLlegadasInfantiles"]=$listaLlegadasInfantiles;
-$_SESSION["listaSalidasAdultos"]=$listaSalidasAdultos;
-$_SESSION["listaSalidasInfantiles"]=$listaSalidasInfantiles;
 
 
 
