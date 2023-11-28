@@ -5,7 +5,6 @@
    date_default_timezone_set('America/Mexico_City');
    include_once('consulta.php');
    include_once('clase_usuario.php');
-   session_start();
 
 
   class factura extends ConexionMYSql
