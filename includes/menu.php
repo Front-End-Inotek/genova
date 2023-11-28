@@ -40,7 +40,7 @@
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
 							<img class="aside_nav_link" src="./assets/icons-nav/recepcion.svg" onclick="handleSiceTable()"/>
-							<p class="aside_nav_link_text" onclick="showMenu(1)">Recepción </p>
+							<p class="aside_nav_link_text flex-grow-1" onclick="showMenu(1)">Recepción </p>
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(1)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links " id="1">
@@ -61,7 +61,7 @@
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
 							<img class="aside_nav_link" src="./assets/icons-nav/reservaciones.svg" onclick="handleSiceTable()"/>
-							<p class="aside_nav_link_text" onclick="showMenu(2)">Reservaciones </p>
+							<p class="aside_nav_link_text flex-grow-1" onclick="showMenu(2)">Reservaciones </p>
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(2)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="2">
@@ -92,7 +92,7 @@
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
 							<img class="aside_nav_link" src="./assets/icons-nav/reportes.svg" onclick="handleSiceTable()"/>
-							<p class="aside_nav_link_text" onclick="showMenu(3)">Reportes </p>
+							<p class="aside_nav_link_text flex-grow-1" onclick="showMenu(3)">Reportes </p>
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(3)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="3">
@@ -128,7 +128,7 @@
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
 							<img class="aside_nav_link" src="./assets/icons-nav/cortesytransacciones.svg" onclick="handleSiceTable()"/>
-							<p class="aside_nav_link_text" onclick="showMenu(4)">Cortes y transacciones </p>
+							<p class="aside_nav_link_text flex-grow-1" onclick="showMenu(4)">Cortes y transacciones </p>
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(4)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="4">
@@ -154,7 +154,7 @@
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
 							<img class="aside_nav_link" src="./assets/icons-nav/factura.svg" onclick="handleSiceTable()"/>
-							<p class="aside_nav_link_text" onclick="showMenu(5)">Facturacion </p>
+							<p class="aside_nav_link_text flex-grow-1" onclick="showMenu(5)">Facturacion </p>
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(5)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="5">
@@ -182,7 +182,7 @@
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
 							<img class="aside_nav_link" src="./assets/icons-nav/restaurante.svg" onclick="handleSiceTable()"/>
-							<p class="aside_nav_link_text" onclick="showMenu(6)">Restaurante </p>
+							<p class="aside_nav_link_text flex-grow-1" onclick="showMenu(6)">Restaurante </p>
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(6)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="6">
@@ -221,7 +221,7 @@
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
 							<img class="aside_nav_link" src="./assets/icons-nav/configuracionhab.svg" onclick="handleSiceTable()"/>
-							<p class="aside_nav_link_text" onclick="showMenu(7)">Configuración Hab. </p>
+							<p class="aside_nav_link_text flex-grow-1" onclick="showMenu(7)">Configuración Hab. </p>
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(7)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="7">
@@ -257,7 +257,7 @@
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
 							<img class="aside_nav_link" src="./assets/icons-nav/herramientas.svg" onclick="handleSiceTable()"/>
-							<p class="aside_nav_link_text" onclick="showMenu(8)">Herramientas</p>
+							<p class="aside_nav_link_text flex-grow-1" onclick="showMenu(8)">Herramientas</p>
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(8)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="8">

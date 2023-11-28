@@ -521,8 +521,8 @@
         $comentario="Mostrar los usuarios";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-         echo '<div class="table-responsive" id="tabla_usuario" style="margin-left: 15px;">
-           <table class="table table-bordered table-hover">
+         echo '<div class="table-responsive" id="tabla_usuario" >
+           <table class="table  table-hover">
              <thead>
                <tr class="table-primary-encabezado text-center">
                <th>Nombre</th>
