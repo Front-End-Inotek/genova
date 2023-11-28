@@ -134,31 +134,18 @@ class RackHabitacional extends ConexionMYSql
         echo '
             <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
             <!--tabla operativa--->
-                <div class="headTable justify-content-center align-items-center">
-                    <div class="fondoWaves">
-                    <div style="text-align:center;">
-                    <div >
-                        <h2 class="fechaAñoMes">' . $mes_rack . ' ' . $anio_rack . '</h2>
-                    </div>
-                    </div>
-                </div>
-                <div class="wrapper">
-                    <div class="card__">
-                    <br><br><br>
-                        <div class="card__year">
-                        <div>' . $mes_rack . '  ' . $anio_rack . '</div>
-                        </div>
-                        <div class="card__cometOuter">
-                        </div>
-                    </div>
+            
+            <div class="header_rack">
+                <h2>' . $mes_rack . ' ' . $anio_rack . '</h2>
             </div>
+
         ';
         echo '
             <!-- DISPLAY USER-->
             <div class="table-responsive tableRack" >
                 <div id="cal-largo">
                     <div class="cal-sectionDiv">
-                        <table class="tableRack table-striped table-bordered" id="tablaTotal">
+                        <table class="tableRack table-bordered boderTabla" id="tablaTotal">
                             <thead class="cal-thead">
                                 <tr>
                                 <th class="cal-viewmonth" id="changemonth"></th>

@@ -178,6 +178,23 @@ body {
   background-color: #FFF;
 }
 
+.aside_nav_menu_switch{
+  padding: 2px 6px;
+  border-radius: 5px;
+  border: 1px solid #ffffff00;
+  cursor: pointer;
+}
+.aside_nav_menu_switch:hover{
+  transition: all ease-in-out 0.2s;
+  border: 1px solid #027FFF;
+  color: black;
+  background-color: #ffffff59;
+}
+.aside_nav_menu_switch:active{
+  transition: all ease-in-out 0.2s;
+  scale: 0.9;
+}
+
 /* Footer */
 .footerContainer {
     position: fixed;
@@ -189,9 +206,7 @@ body {
     align-items: center;
     bottom: 0;
     padding-left: 5.375rem;
-    background-color: #fafafa2a;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background-color: #fff;
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: -.01em;
@@ -223,6 +238,17 @@ body {
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  animation:  fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .main_container_title {
   display: flex;
@@ -421,6 +447,9 @@ body {
 .bloqueado_fondo {
   background-color: #d9d9d9;
 }
+.estado{
+  background-color: rgb(114, 111, 255);
+}
 
 .form_checks_title {
   font-size:  28px;
@@ -537,6 +566,48 @@ body {
   }
 }
 
+.header_rack{
+  background-color: #F1F0EF;
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  line-height: 1.05;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #1d1d1f;
+
+}
+.cal-thead{
+  top: 0px;
+  position: sticky;
+  z-index: 100;
+}
+.boderTabla {
+  border-color: #E9E9E7;
+  border-color: #c2c2c2;
+  border-color: #c2c2c260;
+}
+.tableRack th {
+  background-color: #FFFFFF;
+  background-color: #F1F0EF;
+  color: #37352F;
+  padding: 0 8px;
+  font-size: 17px;
+  line-height:  1.47;
+  font-weight:  600;
+}
+.tableRack td:first-child {
+  background-color: #FFFFFF;
+  background-color: #F1F0EF;
+  color: #37352F;
+  font-size: 17px;
+  line-height:  1.47;
+  font-weight:  600;
+}
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {
@@ -555,7 +626,7 @@ body {
         flex-wrap: wrap;
         box-sizing: border-box;
         flex-direction: column;
-        background-color: #fafafa2a;
+        background-color: #ffffff;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-top: 1px solid #0000004f;

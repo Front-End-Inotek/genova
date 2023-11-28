@@ -104,13 +104,7 @@
     
 
   }
-  .cal-thead {
-    top: 0px;
-    background-color: #ecf2ff;
-    position: sticky;
-    z-index: 1010;
 
-  }
   
   .cal-viewmonth {
     font-size: 16px;

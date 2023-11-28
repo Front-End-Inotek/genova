@@ -20,7 +20,7 @@
 					<img class="aside_menu_hamburger" src="./assets/icons-nav/burger.svg" onclick="handleSiceTable()"/>
 					<div class="aside_nav_menu_switch_container" id="switch_container_menu">
 						<input class="switch_input_rack" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="switch_rack(); handleSiceTable();" />
-						<label class="" for="flexSwitchCheckDefault"> Cambiar vista </label>
+						<label class="aside_nav_menu_switch" for="flexSwitchCheckDefault"> Cambiar vista </label>
 					</div>
 				</div>
 				<div class="aside_nav_divider"></div>

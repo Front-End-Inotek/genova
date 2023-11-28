@@ -114,20 +114,7 @@
   text-align: center;
 }
 
-.tableRack td {
-  font-weight: normal;
-  font-size: 1em;
-  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
-  -moz-box-shadow: 0 2px 2px -2px #0E1119;
-  box-shadow: 0 2px 2px -2px #0E1119;
-  background: var(--fondo) !important;
-}
 
-.tableRack th {
-  /* background: linear-gradient(180deg, #b3b3fe 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%); */
-  background-color: var(--fondoCeldas);
-  color: var(--titulos);
-}
 
 .tableRack th:hover {
   background-color: var(--subtitulos);
@@ -138,11 +125,7 @@
   transition-timing-function: line;
 }
 
-.tableRack td:first-child {
-  color: var(--titulos);
-  /* background: linear-gradient(85deg, #97a2f9ee 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%) !important; */
-  background-color: var(--fondoCeldas) !important;
-}
+
 .tableRack td:first-child:hover {
   color: white;
   /* background: linear-gradient(85deg, #97a2f9ee 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%) !important; */
@@ -205,13 +188,6 @@
   border: solid #ebebeb;
   border-width: 0 1px 0 0;
   overscroll-behavior: contain;
-}
-
-.cal-thead {
-  top: 0px;
-  background-color: #ecf2ff;
-  position: sticky;
-  z-index: 1010;
 }
 
 .cal-viewmonth {

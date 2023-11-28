@@ -20,13 +20,7 @@
   display: none;
 }
 
-.tableRack td,
-.tableRack th {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: center;
-}
+
 .th-dividido {
   display: flex;
   flex-direction: row;
@@ -123,11 +117,6 @@
   background: var(--fondo) !important;
 }
 
-.tableRack th {
-  /* background: linear-gradient(180deg, #b3b3fe 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%); */
-  background-color: var(--fondoCeldas);
-  color: var(--titulos);
-}
 
 .tableRack th:hover {
   background-color: var(--subtitulos);
@@ -207,12 +196,7 @@
   overscroll-behavior: contain;
 }
 
-.cal-thead {
-  top: 0px;
-  background-color: #ecf2ff;
-  position: sticky;
-  z-index: 1010;
-}
+
 
 .cal-viewmonth {
   font-size: 16px;

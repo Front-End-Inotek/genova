@@ -9,7 +9,11 @@
 
         <div class="main_container_title">
           <h2 >EDITAR USUARIO</h2>
-          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_usuario()"> ←</button></div>
+          <button class="btn btn-link" onclick="regresar_logs()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+              <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1"></path>
+            </svg>
+          </button>
         </div>
 
         <div class="inputs_form_container">
@@ -616,11 +620,10 @@
                 echo '<input class="form-check-input" type="checkbox" id="inventario_ver" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="inventario_ver" >Ver</label>
+                <label class="form-check-label" for="inventario_ver">Ver</label>
               </div>
 
-              <div class="form-check form-check-inline">
-                <div class="form-check">';
+              <div class="form-check form-check-inline">';
                 if($usuario->inventario_agregar==0){
                 echo '<input class="form-check-input" type="checkbox" id="inventario_agregar">';
                 }else{
@@ -728,46 +731,37 @@
                 echo '<input class="form-check-input" type="checkbox" id="restaurante_ver" checked>';
                 }
                 echo '
-                <label class="form-check-label">Ver</label>
+                <label class="form-check-label" for="restaurante_ver" >Ver</label>
               </div>
 
-              <div class="form-check form-check-inline">
-                <div class="form-check">';
+              <div class="form-check form-check-inline">';
                 if($usuario->restaurante_agregar==0){
                 echo '<input class="form-check-input" type="checkbox" id="restaurante_agregar">';
                 }else{
                 echo '<input class="form-check-input" type="checkbox" id="restaurante_agregar" checked>';
                 }
-                echo '   <label class="form-check-label">
-                    Agregar
-                  </label>
-                </div>
+                echo '
+                <label class="form-check-label" for="restaurante_agregar" >Agregar</label>
               </div>
 
-              <div class="form-check form-check-inline">
-                <div class="form-check">';
+              <div class="form-check form-check-inline">';
                 if($usuario->restaurante_editar==0){
                 echo '<input class="form-check-input" type="checkbox" id="restaurante_editar">';
                 }else{
                 echo '<input class="form-check-input" type="checkbox" id="restaurante_editar" checked>';
                 }
-                echo '   <label class="form-check-label">
-                    Editar
-                  </label>
-                </div>
+                echo '
+                <label class="form-check-label" for="restaurante_editar" >Editar</label>
               </div>
 
-              <div class="form-check form-check-inline">
-                <div class="form-check">';
+              <div class="form-check form-check-inline">';
                 if($usuario->restaurante_borrar==0){
                 echo '<input class="form-check-input" type="checkbox" id="restaurante_borrar">';
                 }else{
                 echo '<input class="form-check-input" type="checkbox" id="restaurante_borrar" checked>';
                 }
-                echo '   <label class="form-check-label">
-                    Borrar
-                  </label>
-                </div>
+                echo '
+                <label class="form-check-label" for="restaurante_borrar" >Borrar</label>
               </div>
 
               </div>
@@ -775,103 +769,110 @@
 
             <hr>
 
-            <div class="form-group row">
-            <div class="col-sm-3">Cupón:</div>
-            <div class="col-sm-1">
-              <div class="form-check">';
-              if($usuario->cupon_ver==0){
-              echo '<input class="form-check-input" type="checkbox" id="cupon_ver">';
-              }else{
-              echo '<input class="form-check-input" type="checkbox" id="cupon_ver" checked>';
-              }
-              echo '   <label class="form-check-label">
-                  Ver
-                </label>
+            <section class="form_checks_container">
+              <div class="form_checks_title">
+                <p>Cupón</p>
               </div>
-            </div>
-            <div class="col-sm-1">
-              <div class="form-check">';
-              if($usuario->cupon_agregar==0){
-              echo '<input class="form-check-input" type="checkbox" id="cupon_agregar">';
-              }else{
-              echo '<input class="form-check-input" type="checkbox" id="cupon_agregar" checked>';
-              }
-              echo '   <label class="form-check-label">
-                  Agregar
-                </label>
-              </div>
-            </div>
-            <div class="col-sm-1">
-              <div class="form-check">';
-              if($usuario->cupon_editar==0){
-              echo '<input class="form-check-input" type="checkbox" id="cupon_editar">';
-              }else{
-              echo '<input class="form-check-input" type="checkbox" id="cupon_editar" checked>';
-              }
-              echo '   <label class="form-check-label">
-                  Editar
-                </label>
-              </div>
-            </div>
-            <div class="col-sm-1">
-              <div class="form-check">';
-              if($usuario->cupon_borrar==0){
-              echo '<input class="form-check-input" type="checkbox" id="cupon_borrar">';
-              }else{
-              echo '<input class="form-check-input" type="checkbox" id="cupon_borrar" checked>';
-              }
-              echo '   <label class="form-check-label">
-                  Borrar
-                </label>
-              </div>
-            </div>
-            </div><br><hr>
-            <div class="form-group row">
-            <div class="col-sm-3">Logs:</div>
-            <div class="col-sm-1">
-              <div class="form-check">';
-              if($usuario->logs_ver==0){
-              echo '<input class="form-check-input" type="checkbox" id="logs_ver">';
-              }else{
-              echo '<input class="form-check-input" type="checkbox" id="logs_ver" checked>';
-              }
-              echo '   <label class="form-check-label">
-                  Ver
-                </label>
-              </div>
-            </div>
-            </div><br><hr> 
+              <div class="form_checks_container">
 
-            <div class="form-group row">
-            <div class="col-sm-3">Auditoria:</div>
-            <div class="col-sm-1">
-              <div class="form-check">';
-              if($usuario->auditoria_ver==0){
-              echo '<input class="form-check-input" type="checkbox" id="auditoria_ver">';
-              }else{
-              echo '<input class="form-check-input" type="checkbox" id="auditoria_ver" checked>';
-              }
-              echo '   <label class="form-check-label">
-                  Ver
-                </label>
+              <div class="form-check form-check-inline">';
+                if($usuario->cupon_ver==0){
+                echo '<input class="form-check-input" type="checkbox" id="cupon_ver">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="cupon_ver" checked>';
+                }
+                echo '
+                <label class="form-check-label">Ver</label>
               </div>
-            </div>
-            <div class="col-sm-1">
-            <div class="form-check">';
-            if($usuario->auditoria_editar==0){
-            echo '<input class="form-check-input" type="checkbox" id="auditoria_editar">';
-            }else{
-            echo '<input class="form-check-input" type="checkbox" id="auditoria_editar" checked>';
-            }
-            echo '   <label class="form-check-label">
-                Editar
-              </label>
-            </div>
-          </div>
-            </div><br><hr> 
-            <div class="row">
-              <div class="col-sm-9"></div>
-              <div class="col-sm-2">
+
+              <div class="form-check form-check-inline">';
+                if($usuario->cupon_agregar==0){
+                echo '<input class="form-check-input" type="checkbox" id="cupon_agregar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="cupon_agregar" checked>';
+                }
+                echo '
+                <label class="form-check-label">Agregar</label>
+              </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->cupon_editar==0){
+                echo '<input class="form-check-input" type="checkbox" id="cupon_editar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="cupon_editar" checked>';
+                }
+                echo '
+                <label class="form-check-label">Editar</label>
+              </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->cupon_borrar==0){
+                echo '<input class="form-check-input" type="checkbox" id="cupon_borrar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="cupon_borrar" checked>';
+                }
+                echo '
+                <label class="form-check-label">Borrar</label>
+              </div>
+
+              </div>
+            </section>
+
+            <hr>
+
+            <section class="form_checks_container">
+              <div class="form_checks_title">
+                <p>Logs</p>
+              </div>
+              <div class="form_checks_container">
+
+              <div class="form-check form-check-inline">';
+                if($usuario->logs_ver==0){
+                echo '<input class="form-check-input" type="checkbox" id="logs_ver">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="logs_ver" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="logs_ver">Ver</label>
+                </div>
+              </div>
+            </section>
+
+            <hr>
+
+            <section class="form_checks_container">
+                <div class="form_checks_title">
+                  <p>Auditoria</p>
+                </div>
+                <div class="form_checks_container">
+
+                <div class="form-check form-check-inline">';
+                  if($usuario->auditoria_ver==0){
+                  echo '<input class="form-check-input" type="checkbox" id="auditoria_ver">';
+                  }else{
+                  echo '<input class="form-check-input" type="checkbox" id="auditoria_ver" checked>';
+                  }
+                  echo '
+                  <label class="form-check-label" for="auditoria_ver" >Ver</label>
+                </div>
+
+                <div class="form-check form-check-inline">';
+                if($usuario->auditoria_editar==0){
+                echo '<input class="form-check-input" type="checkbox" id="auditoria_editar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="auditoria_editar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="auditoria_editar" >Editar</label>
+              </div>
+
+              </div>
+
+            </section>
+
+            <hr>
+
+            <div class="container_btn">
               <div id="boton_usuario">
                 <button type="submit" class="btn btn-primary btn-block" value="Guardar" onclick="modificar_usuario('.$_GET['id'].')">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
@@ -881,8 +882,8 @@
                   Guardar
                 </button>
               </div>
-              </div>
             </div>
+
           </form>
         </div>
       </div>';

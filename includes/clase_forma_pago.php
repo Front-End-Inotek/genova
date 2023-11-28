@@ -81,7 +81,7 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       echo '<div class="table-responsive" id="tabla_forma">
-      <table class="table table-bordered table-hover">
+      <table class="table  table-hover">
         <thead>
           <tr class="table-primary-encabezado text-center">
           <th>Descripción</th>
@@ -97,11 +97,16 @@
         </thead>
       <tbody>';
           echo '<tr <tr class="text-center">
-            <td><input type="text" class ="color_black" id="descripcion" placeholder="Ingresa la descripción" pattern="[a-z]{1,15}" maxlength="50"></td>
-            <td><input type="checkbox" class ="color_black" id="garantia"></td>'
+            <td>
+              <div class="form-floating input_container">
+                <input type="text" class ="form-control custom_input" id="descripcion" placeholder="Ingresa la descripción" pattern="[a-z]{1,15}" maxlength="50">
+                <label for="descripcion">Ingresa descrpcion</label>
+              </div>
+            </td>
+            <td><input type="checkbox" class ="form-check-input" id="garantia"></td>'
             ;
             if($agregar==1){
-              echo '<td><button class="btn btn-success" onclick="guardar_forma_pago()"> Guardar</button></td>';
+              echo '<td><button class="btn btn-primary" onclick="guardar_forma_pago()"> Guardar</button></td>';
             }
             echo '<td></td>
           </tr>';
