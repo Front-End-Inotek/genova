@@ -52,13 +52,19 @@ class PDF extends FPDF
         $this->Ln(1);
     }
 
+    
     function Footer()
     {
+        date_default_timezone_set('America/Mexico_City');
+        $fechaHoraActual = date('Y-m-d H:i:s');
         // Pie de página
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 6);
-        $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo(), 0, 0, 'C');
+        $this->Cell(30, 10, utf8_decode($fechaHoraActual) , 0, 0, 'C');
+        $this->Cell(217, 10, utf8_decode('') , 0, 0, 'C');
+        $this->Cell(30, 10, utf8_decode('Página ') . $this->PageNo(), 0, 0, 'C');
     }
+
 
     function CreateTable()
     {
