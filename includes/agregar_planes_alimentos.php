@@ -28,25 +28,23 @@
             </div>
         </div>
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"  style="font-size: 16px;"> Costo Menores</span>
+        <div class="inputs_form_container">
+        <div class="form-floating input_container">
+            <input type="text" maxlength="10"  onkeypress="validarNumero(event)" id="costo_menores" name ="costo_menores" class="form-control custom_input" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" placeholder="costo menores" >
+                <label for="costo_menores" id="inputGroup-sizing-default"> Costo Menores </label>
             </div>
-              <input
-              type="text" maxlength="10"  onkeypress="validarNumero(event)"
-              id="costo_menores" name ="costo_menores" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;" >
         </div>
 
-      <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default"  style="width: 105px; font-size: 16px;"> Descripción </span>
-          <textarea id="descripcion" name="descripcion" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" style="font-size: 16px;"></textarea>
-      </div>
-
+        <div class="inputs_form_container">
+        <div class="form-floating input_container">
+        <input id="descripcion" name="descripcion" class="form-control custom_input" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" placeholder="Descripción" ></input>
+        <label for="descripcion" id="inputGroup-sizing-default"> Descripción </label>
+        </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
           <div id="boton_tipo">
-          <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_planes_alimentos()">Guardar</button>
+          <button type="submit" class="btn btn-primary btn-block" value="Guardar" onclick="guardar_planes_alimentos()">Guardar</button>
         </div>
         </div>
       </div>';
