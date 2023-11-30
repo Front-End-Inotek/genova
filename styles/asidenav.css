@@ -175,6 +175,17 @@
 }
 .aside_ruta {
     padding: 4px 2px;
+    animation: slideInFronLeft 0.1s ease-out;
+}
+@keyframes slideInFronLeft {
+    0% {
+        opacity: 0;
+        transform: translate(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
 }
 .aside_ruta:hover {
     background-color: #0177cc15;

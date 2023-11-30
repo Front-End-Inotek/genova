@@ -30,8 +30,12 @@
 
 
   echo '
-      <div class="container-fluid blanco">
-        <div class="col-sm-12 text-left"><h2 class="text-dark">Auditoria</h2></div>
+      <div class="main_container">
+        <div class="main_container_title">
+          <h2 >Auditoriaaaa</h2>
+        </div>
+
+
         <div class="row">
           <div class="col-sm-8"></div>
           <div class="col-sm-2">';
