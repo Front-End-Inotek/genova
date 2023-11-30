@@ -431,7 +431,7 @@ body {
   background-color: #f5c7bf;
 }
 .ocupado_limpieza_fondo {
-  background-color: #a0c7d89a;
+  background-color: #a0c7d8;
 }
 .reserva_pagada_fondo {
   background-color: #E8DEEE;
@@ -521,6 +521,7 @@ body {
   border-radius: 5.25px;
   position: relative;
   padding: 5px;
+  overflow: hidden;
 }
 .habitacion_tipo_capsul {
   background-color: #FDECC8;
@@ -546,6 +547,7 @@ body {
   text-overflow: ellipsis;
   word-break: keep-all;
   margin: 0;
+  filter: brightness(0.5);
 }
 
 .expirarRack{
