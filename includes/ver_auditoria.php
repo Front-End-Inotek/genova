@@ -30,33 +30,32 @@
 
 
   echo '
-      <div class="container-fluid blanco">
-        <div class="col-sm-12 text-left"><h2 class="text-dark">Auditoria</h2></div>
-        <div class="row">
-          <div class="col-sm-8"></div>
-          <div class="col-sm-2">';
-            //echo '<h4>Tickets '.$ticket->obtener_etiqueta($ticket_inicial).' - ' .$ticket->obtener_etiqueta($ticket_final);echo '</h4> onclick="aceptar_guardar_corte('. $ticket_inicial.','. $ticket_final.')
-          echo '</div>
-          <div class="col-sm-2">
-          <div id="boton_usuario">
-            <button type="submit" class="btn btn-danger btn-block" value="Cerrar la noche"   onclick="confirmar_cambiar_cargos()">Cerrar la noche</button>
-          </div>
-          </div>
+      <div class="main_container">
+        <div class="main_container_title">
+          <h2>Auditoriaaa</h2>
+          <button type="submit" class="btn btn-primary btn-block" value="Cerrar la noche"   onclick="confirmar_cambiar_cargos()">
+            Cerrar la noche
+          </button>
         </div>
+
+        
         
         <div class="text-dark margen-1"></div>
-
-        <div class="row">
 
           <div class="col-sm-12">
            ';
               echo '
-              
-                <div class="table-responsive" style="height:100%" id="tabla_tipo">
-                <table class="table table-bordered table-hover">
+            
+                <div class="table-responsive" id="tabla_tipo">
+                <table class="table  table-hover">
                   <thead>
                     <tr class="table-primary-encabezado text-center">
-                    <th>Hab. <input type="checkbox" id="cajas"  onclick="cajasAuditoria()"  checked /></th>
+                    <th>
+                      <div>
+                        <input type="checkbox" id="cajas" class="form-check-input"  onclick="cajasAuditoria()"  checked />
+                        <label class="form-check-label" for="cajas" >Hab.</label>
+                      </div>
+                      </th>
                     <th>Cargos </th>
                     <th>Descripción</th>
                     </tr>
@@ -72,13 +71,18 @@
                 $c=0;
                 $tarifa=0;
              
+                $i = 0;
                 while ($fila = mysqli_fetch_array($consulta)) {
                     echo '<tr class="text-center">';
                     if($fila_atras!= $fila['hab_nombre']) {
-                        echo '<td>
-                        <span>'.$fila['hab_nombre'].'</span>
-                        <input type="checkbox"  class="campos_habs" checked />
+                        echo '
+                        <td>
+                        <div cass="form-check">
+                          <input type="checkbox"  class="form-check-input campos_habs" id="'.$i.'"  checked />
+                          <label class="form-check-label" for="'.$i.'" >'.$fila['hab_nombre'].'</label>
+                        </div>
                         </td>';
+                        $i++;
                     }else{
                         echo '<td></td>';
                     }
@@ -119,7 +123,7 @@
 
 echo ' </tbody>
 </table>
-</div>
+
 <!---
 <div class="d-flex justify-content-end">
 <button type="button" class="btn btn-success" onclick="confirmar_cambiar_cargos()"> Aceptar</button>

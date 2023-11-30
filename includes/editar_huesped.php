@@ -4,146 +4,143 @@
   $huesped= NEW Huesped($_GET['id']);
   $reservacion= 0;
   echo '
-      <div class="container blanco"> 
-        <div class="col-sm-12 text-left"><h2 class="text-dark margen-1">EDITAR HUÉSPED</h2></div>
-        <div class="row">
-          <div class="col-sm-2">Nombre:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="nombre" value="'.$huesped->nombre.'" maxlength="70">
+<div class="form_container">
+  <form class="formulario_contenedor">
+
+    <div class="form_title_container">
+      <h2 class="form_title_text">EDITAR HUÉSPED</h2>
+      <button class="btn btn-link" onclick="regresar_editar_huesped()"> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+          <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1"></path>
+        </svg>
+      </button>
+
+    </div>
+        
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input class="form-select custom_input" type="text" id="nombre" value="'.$huesped->nombre.'" maxlength="70" placeholder="Nombre">
+            <label for="nombre" >Nombre</label>
           </div>
-          </div>
-          <div class="col-sm-2">Apellido:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="apellido" value="'.$huesped->apellido.'" maxlength="70">
-          </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Dirección:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="direccion" value="'.$huesped->direccion.'" maxlength="60">
-          </div>
-          </div>
-          <div class="col-sm-2">Ciudad:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="ciudad" value="'.$huesped->ciudad.'" maxlength="30">
-          </div>
+
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="apellido" value="'.$huesped->apellido.'" maxlength="70" placeholder="Apellido">
+            <label for="apellido" >Apellido</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-2">Estado:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="estado" value="'.$huesped->estado.'" maxlength="30">
+
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="direccion" value="'.$huesped->direccion.'" maxlength="60" placeholder="Direccion" >
+            <label for="direccion" >Dirección</label>
           </div>
-          </div>
-          <div class="col-sm-2">Código postal:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="codigo_postal" value="'.$huesped->codigo_postal.'" maxlength="20">
-          </div>
+
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="ciudad" value="'.$huesped->ciudad.'" maxlength="30" placeholder="Ciudad" >
+            <label for="ciudad" >Ciudad</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-2">Teléfono:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="telefono" value="'.$huesped->telefono.'" maxlength="50">
+
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="estado" value="'.$huesped->estado.'" maxlength="30" placeholder="Estado">
+            <label for="estado" >Estado</label>
           </div>
-          </div>
-          <div class="col-sm-2">Correo:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="correo" value="'.$huesped->correo.'" maxlength="200">
-          </div>
+
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="codigo_postal" value="'.$huesped->codigo_postal.'" maxlength="20" placeholder="Código Postal">
+            <label for="codigo_posta" >Código postal</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-2">Contrato Socio:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="contrato" value="'.$huesped->contrato.'" maxlength="40">
+
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="telefono" value="'.$huesped->telefono.'" maxlength="50" placeholder="Telefono" >
+            <label for="telefono" >Teléfono</label>
           </div>
-          </div>
-          <div class="col-sm-2">Cupón:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="cupon" value="'.$huesped->cupon.'" maxlength="40">
-          </div>
+
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="correo" value="'.$huesped->correo.'" maxlength="200" placeholder="Correo">
+            <label for="correo" >Correo</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-2">Preferencias del huésped:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="preferencias" value="'.$huesped->preferencias.'">
+
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="contrato" value="'.$huesped->contrato.'" maxlength="40" placeholder="Contrato socio" >
+            <label for="contrato" >Contrato socio</label>
           </div>
+          
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="cupon" value="'.$huesped->cupon.'" maxlength="40" placeholder="Cupon" >
+            <label for="cupon" >Cupón</label>
           </div>
-          <div class="col-sm-2">Comentarios adicionales:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="comentarios" value="'.$huesped->comentarios.'">
-          </div>
-          </div>
-        </div><br>
-        <div class="row">
-          <div class="col-sm-6"><h4 class="text-dark  margen-1">DATOS TARJETA:</h4></div>
-          <div class="col-sm-6"></div>
         </div>
-        <div class="row">
-          <div class="col-sm-2">Titular de la tarjeta:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" id="titular_tarjeta" value="'.$huesped->titular_tarjeta.'" maxlength="70">
+
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="preferencias" value="'.$huesped->preferencias.'" placeholder="Preferencias del huesped" >
+            <label for="preferencias" >Preferencias del huésped</label>
           </div>
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="comentarios" value="'.$huesped->comentarios.'" placeholder="Comentarios" >
+            <label for="comentarios" >Comentarios</label>
           </div>
-          <div class="col-sm-2">Tipo de la tarjeta:</div>
-          <div class="col-sm-4">
-          <div class="form-group">
-            <select class="form-control" id="tipo_tarjeta">';
+        </div>
+
+        <div class="form_title_container">
+          <h2 class="form_title_text">DATOS TARJETA:</h2>
+        </div>
+
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="titular_tarjeta" value="'.$huesped->titular_tarjeta.'" maxlength="70" placeholder="Titular de la tarjeta" >
+            <label for="titular_tarjeta">Titular de la tarjeta</label>
+          </div>
+
+          <div class="form-floating input_container">
+            <select class="form-control custom_input" id="tipo_tarjeta">';
               if($huesped->indole_tarjeta == "Debito"){echo '
-                <option value="">Seleccionar una opción</option>
+                <option value="" disabled selected >Seleccionar una opción</option>
                 <option selected value="Debito">Debito</option>
                 <option value="Credito">Credito</option>';
               }elseif ($huesped->indole_tarjeta == "") {echo '
-                <option value="">Seleccionar una opción</option>
+                <option value="" disabled selected >Seleccionar una opción</option>
                 <option value="Debito">Debito</option>
                 <option value="Credito">Credito</option>';
               }elseif ($huesped->indole_tarjeta=="Credito"){ echo '
-                <option value="">Seleccionar una opción</option>
+                <option value="" disabled selected >Seleccionar una opción</option>
                 <option  value="Debito">Debito</option>
                 <option selected value="Credito">Credito</option>';
               }echo '
             </select>
-          </div>
+            <label for="tipo_tarjeta" >Tipo de tarjeta</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-2">Número de la tarjeta:</div>
-          <div class="col-sm-4">';
 
-          if($huesped->numero_tarjeta==""){
-            echo '  <div class="form-group">
-            <input class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->numero_tarjeta.'" maxlength="16">
-            </div>';
-          }else{
-            echo ' <div class="input-group mb-3">
-            <input disabled class="form-control" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  value="**************" maxlength="16">
-            <div class="input-group-text">
-              <input id="check_tarjeta" onchange="mostrar_tarjeta('.$huesped->id.')" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            </div>';
-          }
-          echo '
+        <div class="inputs_form_container">';
+        if($huesped->numero_tarjeta==""){
+          echo '  
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->numero_tarjeta.'" maxlength="16" placeholder="Numero de tarjeta" >
+            <label for="numero_tarjeta" >Numero de tarjeta</label>
+          </div>';
+        }else{
+          echo ' 
+          <div class="form-floating input_container">
+            <input disabled class="form-control custom_input" type="text" id="numero_tarjeta" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  value="**************" maxlength="16" placeholder="Numero de tarjeta" >
+            <label for="numero_tarjeta" >Numero de tarjeta</label>
           </div>
-          <div class="col-sm-2">Fecha de vencimiento:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <select class="form-control" id="vencimiento_mes">';
+            <input id="check_tarjeta" onchange="mostrar_tarjeta('.$huesped->id.')" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+          ';
+        }
+
+        echo '
+        </div>
+
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <select class="form-control custom_input" id="vencimiento_mes">';
               if($huesped->vencimiento_mes == "01"){echo '
                 <option value="01">'.$huesped->vencimiento_mes.'</option>
                 <option value="02">02</option>
@@ -305,29 +302,31 @@
                 <option value="11">11</option>';
               }echo '
             </select>
+            <label for="vencimiento_mes" >Mes de vecimiento </label>
           </div>
+
+          <div class="form-floating input_container">
+            <input class="form-control custom_input " type="text" id="vencimiento_ano" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->vencimiento_ano.'" maxlength="2" placeholder="Año de vencimiento" >
+            <label for="vencimiento_ano" >Año de vencimiento</label>
           </div>
-          <div class="col-sm-1">
-          <div class="form-group">
-            <input class="form-control" type="text" id="vencimiento_ano" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->vencimiento_ano.'" maxlength="2">
+
+          <div class="form-floating input_container">
+            <input class="form-control custom_input" type="text" id="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->cvv.'" maxlength="3" placeholder="CVV">
+            <label for="cvv" >CVV</label>
           </div>
-          </div>
-          <div class="col-sm-1">mes/año</div>
+
         </div>
-        <div class="row">
-          <div class="col-sm-2">Código Seguridad:</div>
-          <div class="col-sm-2">
-          <div class="form-group">
-            <input class="form-control" type="text" id="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="'.$huesped->cvv.'" maxlength="3">
-          </div>
-          </div>
-          <div class="col-sm-5"></div>
-          <div class="col-sm-2">
+          
           <div id="boton_huesped">
-            <button type="submit" class="btn btn-success btn-block" value="Guardar" onclick="modificar_huesped('.$_GET['id'].',-1,0)">Guardar</button>
+            <button type="submit" class="btn btn-primary btn-block" value="Guardar" onclick="modificar_huesped('.$_GET['id'].',-1,0)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
+                <path d="M11 2H9v3h2z"/>
+                <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
+              </svg>
+              Guardar
+            </button>
           </div>
-          </div>
-          <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="regresar_editar_huesped()"> ←</button></div>
-        </div>  
-      </div>';
+
+  </form>
+</div>';
 ?>
