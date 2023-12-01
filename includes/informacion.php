@@ -411,14 +411,39 @@ class Informacion extends ConexionMYSql
                 $saldo= '-$'.number_format($total_faltante, 2);
                 $saldo_c="red";
             }
-
+                        /*icono de habitacion sucia*/
+            if($estado_hab == 2){
+                echo '  
+                <span class="habitacion_texto_contenedor" >
+                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/broom-svgrepo-sucia.svg"/>
+                    </svg>
+                    <p class="habitacion_text_text">Sucia</p>
+                </span>';
+            }
+            /*icono de habitacion en limpieza*/
+            if($estado_hab == 3){
+                echo '  
+                <span class="habitacion_texto_contenedor" >
+                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/broom-svgrepo-com.svg"/>
+                    </svg>
+                    <p class="habitacion_text_text">Limpieza</p>
+                </span>';
+            }
+            if($estado_hab == 4){
+                echo '  
+                <span class="habitacion_texto_contenedor" >
+                <img class="habitacion_container_encabezado_iconos_icon" src="./assets/mantenimiento.svg"/>
+                    </svg>
+                    <p class="habitacion_text_text">Mantenimiento</p>
+                </span>';
+            }
             /* AQUI EL ESTADO DE BLOQUEO ERA 7 PERO FUNCIONO CON EL 5 */
             if($estado_hab == 5){
                 echo '  
                 <span class="habitacion_texto_contenedor" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban-fill" viewBox="0 0 16 16">
-                       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M2.71 12.584c.218.252.454.488.706.707l9.875-9.875a7.034 7.034 0 0 0-.707-.707l-9.875 9.875Z"/>
-                     </svg>
+                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+                 <path d="M15 8a6.973 6.973 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+                </svg>
                     <p class="habitacion_text_text">Bloqueo</p>
                 </span>';
             }
@@ -504,9 +529,8 @@ class Informacion extends ConexionMYSql
             if($estado_hab == 8){
                 $nombre = $fila['n_huesped'] . " " . $fila['a_huesped'];
                 echo '<span class="habitacion_texto_contenedor" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
-                 <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                 </svg>
                  <p class="habitacion_text_text">Uso casa</p>
                  </span>
@@ -524,7 +548,7 @@ class Informacion extends ConexionMYSql
                 </span>';
             }
            
-            
+        
             }
             echo '</span>';
             echo'
