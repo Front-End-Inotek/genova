@@ -4,8 +4,8 @@ let timerInterval;
 
 const startTimer = () => {
     setInterval(() => {
-        inactivityTime += 1;
-        console.log(inactivityTime);
+        inactivityTime += 0;
+        //console.log(inactivityTime);
         if (inactivityTime >= 30) {
             alert("Desconexión por inactividad");
             clearInterval(timerInterval);
@@ -16,7 +16,7 @@ const startTimer = () => {
 }
 
 const resetTimer = () => {
-    console.log("Reseteo del invernadero");
+    //console.log("Reseteo del invernadero");
     inactivityTime = 0;
 }
 
