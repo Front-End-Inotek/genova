@@ -495,7 +495,7 @@ body {
   width: 7.66px;
 }
 .filtro_text_pildora{
-  filter: brightness(0.5);
+  filter: brightness(0.35);
 
 }
 .habitacion_container_encabezado_iconos{
@@ -537,7 +537,7 @@ body {
   font-size: 13px;
   align-items: center;
   /* color: #333131; */
-  filter: brightness(0.);
+  filter: brightness(0.5);
 }
 .habitacion_text_text {
   white-space: nowrap;
