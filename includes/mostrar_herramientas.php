@@ -316,7 +316,7 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 	if($user->nivel<=2){
-		echo '<div class="btn_modal_herramientas" onclick="hab_cambiar_persona_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
+		echo '<div class="btn_modal_herramientas btn_cambiar" onclick="hab_cambiar_persona_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
 			echo '<img  class="btn_modal_img" src="./assets/iconos_btn/cambiar.svg" />';
 			echo '<p>Cambio Sup.</p>';
 		echo '</div>';
