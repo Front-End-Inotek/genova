@@ -28,16 +28,16 @@
 body {
   background-color: #F5F5F7;
   color: #1D1D1F;
-  width: auto;
-  overflow: hidden;
-  height: auto;
-  overflow: scroll;
+  width: 100%;
+  /* verflow: hidden; */
+  /* height: auto; */
+  /* overflow: scroll; */
 }
 
 .main {
   width: calc( 100% - 5.9rem );
   margin-left: 5.9rem;
-  padding-bottom: 10vh;
+  /* padding-bottom: 10vh; */
   height: 100%;
 }
 /* formulari */
@@ -275,9 +275,7 @@ body {
   width: 100%;
   max-width: 150px;
 }
-.table-responsive {
-  padding-bottom: 7rem;
-}
+
 .ios-switch {
   position: relative;
   display: inline-block;
@@ -350,7 +348,7 @@ body {
   padding-top: 2rem;
   padding-left: 5px;
   padding-right: 5px;
-  padding-bottom: 2rem;
+  padding-bottom: 5rem;
 }
 .habitacion_container {
   width: 100%;
@@ -611,6 +609,100 @@ body {
   line-height:  1.47;
   font-weight:  600;
 }
+
+.tabla_maximo {
+  height: calc( 100vh - 12vh );
+}
+.espaciado {
+  padding-bottom:  10vh;
+}
+
+.contenedor_botones {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+}
+.btn_modal_herramientas {
+  color: #183153;
+  border-radius: 0.75em;
+  height: 126px;
+  display: flex;
+  width: 98%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.521);
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.1s ease-in all;
+}
+.btn_modal_herramientas:hover {
+  scale: 1.02;
+}
+.btn_modal_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.btn_ocupado {
+  background-color: #E16F64;
+  color: white;
+}
+.btn_reservar {
+  background-color: #A782C3;
+  color: black;
+}
+.btn_limpieza{
+  background-color: #5B97BD;
+  color: black;
+}
+.btn_sucia {
+  background-color: #f15446;
+  color: black;
+}
+.btn_uso_casa {
+  background-color: #5B97BD;
+  color: black;
+}
+.btn_mantenimiento {
+  background-color: #CB9433;
+  color: black;
+}
+.btn_bloqueado {
+  background-color: #91918e;
+  color: black;
+}
+.btn_desocupar {
+  background-color: #5B97BD;
+  color: black;
+}
+.btn_edo_cuenta {
+  background-color: #00D27A;
+  color: black;
+}
+.btn_restaurante {
+  background-color: #FFC700;
+  color: black;
+}
+.btn_editar {
+  background-color: #c2c2c2;
+  color: black;
+}
+.btn_cambiar {
+  background-color: #819cb3 ;
+  color: black;
+}
+.btn_terminar {
+  background-color: rgb(37, 59, 87);
+  color: white;
+}
+.btn_modal_img {
+  width: 40px;
+  height: 40px;
+}
+
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {

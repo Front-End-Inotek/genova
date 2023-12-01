@@ -1602,7 +1602,7 @@ class Reservacion extends ConexionMYSql
             </svg>
             Agregar reservaciones
         </button>
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+		<div class="table-responsive" id="tabla_reservacion" >
 		<table class="table">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1707,7 +1707,7 @@ class Reservacion extends ConexionMYSql
             </svg>
             Agregar reservaciones
         </button>
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+		<div class="table-responsive" id="tabla_reservacion" >
 		<table class="table ">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -2093,7 +2093,7 @@ class Reservacion extends ConexionMYSql
             </svg>
             Agregar reservaciones
         </button>
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+		<div class="table-responsive" id="tabla_reservacion" >
 		<table class="table">
 		<thead>
 			<tr class="table-primary-encabezado text-center">

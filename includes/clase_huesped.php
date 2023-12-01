@@ -449,7 +449,7 @@
           Agregar huesped
         </button>
 
-        <div class="table-responsive" id="tabla_huesped" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+        <div class="table-responsive" id="tabla_huesped">
         <table class="table">
           <thead>
             <tr class="text-center">

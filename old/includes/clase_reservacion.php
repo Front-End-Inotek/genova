@@ -1450,7 +1450,7 @@ class Reservacion extends ConexionMYSql
         $estado_reserva="";
         $tarifa_td="";
         echo '
-            <div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+            <div class="table-responsive" id="tabla_reservacion" >
             <table class="table table-bordered table-hover">
             <thead>
             <tr class="table-primary-encabezado text-center">
@@ -1588,7 +1588,7 @@ class Reservacion extends ConexionMYSql
 		<button class="btn btn-success" href="" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
 		<br>
 		<br>
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+		<div class="table-responsive" id="tabla_reservacion" >
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -1689,7 +1689,7 @@ class Reservacion extends ConexionMYSql
 		<button class="btn btn-success" href="" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
 		<br>
 		<br>
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+		<div class="table-responsive" id="tabla_reservacion" >
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
@@ -2071,7 +2071,7 @@ class Reservacion extends ConexionMYSql
 		<button class="btn btn-success" href="" data-toggle="modal" onclick="agregar_reservaciones()">Agregar reservaciones</button>
 		<br>
 		<br>
-		<div class="table-responsive" id="tabla_reservacion" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+		<div class="table-responsive" id="tabla_reservacion" >
 		<table class="table table-bordered table-hover">
 		<thead>
 			<tr class="table-primary-encabezado text-center">

@@ -14,14 +14,14 @@ class RackHabitacional extends ConexionMYSql
                 $estado_texto[1] = 'Disponible';
                 break;
             case 1:
-                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[0] = 'ocupado';
                 $estado_texto[1] = 'Ocupada';
                 if($interno == "sucia") {
-                    $estado_texto[0] = 'task--ocupadoH';
+                    $estado_texto[0] = 'ocupado';
                     $estado_texto[1] = 'Sucia ocupada';
                 }
                 if($interno=="limpieza") {
-                    $estado_texto[0] = 'task--ocupadoH';
+                    $estado_texto[0] = 'ocupado';
                     $estado_texto[1] = 'Ocupada limpieza';
                 }
                 break;
@@ -142,7 +142,7 @@ class RackHabitacional extends ConexionMYSql
         ';
         echo '
             <!-- DISPLAY USER-->
-            <div class="table-responsive tableRack" >
+            <div class="table-responsive tableRack tabla_maximo " >
                 <div id="cal-largo">
                     <div class="cal-sectionDiv">
                         <table class="tableRack table-bordered boderTabla" id="tablaTotal">

@@ -536,10 +536,10 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '
-        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()"> Agregar huesped </button>
+        <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_huespedes()"> Agregar huesped </button>
         <br>
         <br>
-        <div class="table-responsive" id="tabla_huesped" style="max-height:560px;overflow-x: scroll;min-height: 300px;">
+        <div class="table-responsive" id="tabla_huesped" >
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="table-primary-encabezado text-center">
