@@ -640,6 +640,10 @@ body {
 .btn_modal_herramientas:hover {
   scale: 1.02;
 }
+.btn_modal_herramientas:active {
+  scale: 0.9;
+  filter: opacity(0.9);
+}
 .btn_modal_body {
   display: flex;
   flex-direction: column;
