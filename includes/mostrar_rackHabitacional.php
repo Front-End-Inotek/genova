@@ -6,7 +6,7 @@ setlocale(LC_ALL, "es_ES");
 
 class RackHabitacional extends ConexionMYSql
 {
-    private function estado_habitacion($estado, $turno,$interno="")
+    private function estado_habitacion($estado, $turno, $interno="")
     {
         switch ($estado) {
             case 0:
@@ -14,18 +14,16 @@ class RackHabitacional extends ConexionMYSql
                 $estado_texto[1] = 'Disponible';
                 break;
             case 1:
-                $estado_texto[0] = 'task--ocupadoH';
+                $estado_texto[0] = 'ocupado';
                 $estado_texto[1] = 'Ocupada';
-                if($interno == "sucia"){
-                    $estado_texto[0] = 'task--ocupada-sucia';
+                if($interno == "sucia") {
+                    $estado_texto[0] = 'ocupado';
                     $estado_texto[1] = 'Sucia ocupada';
                 }
-                if($interno== "limpieza"){
-                    $estado_texto[0] = 'task--limpieza-ocupada';
+                if($interno=="limpieza") {
+                    $estado_texto[0] = 'ocupado';
                     $estado_texto[1] = 'Ocupada limpieza';
-                    
                 }
-                
                 break;
             case 2:
                 $estado_texto[0] = 'task--vacia-sucia';
@@ -33,15 +31,15 @@ class RackHabitacional extends ConexionMYSql
                 break;
             case 3:
                 $estado_texto[0] = 'task--limpieza-vacia';
-                $estado_texto[1] = 'Vacia limpia';
+                $estado_texto[1] = 'Vacia limpieza';
                 break;
             case 4:
-                $estado_texto[0] = 'task--ocupada-sucia';
-                $estado_texto[1] = 'Sucia ocupada';
+                $estado_texto[0] = 'task--mantenimiento';
+                $estado_texto[1] = 'Mantenimiento';
                 break;
             case 5:
-                $estado_texto[0] = 'task--limpieza-ocupada';
-                $estado_texto[1] = 'Ocupada limpieza';
+                $estado_texto[0] = 'task--bloqueado';
+                $estado_texto[1] = 'Bloqueo';
                 break;
             case 6:
                 $estado_texto[0] = 'task--reserva-pagada';
@@ -64,11 +62,9 @@ class RackHabitacional extends ConexionMYSql
                 $estado_texto[1] = 'Bloqueo';
                 break;
         }
-
         return $estado_texto;
     }
-    private function convertir_mes($mes)
-    {
+    private function convertir_mes($mes){
         // comvertir el mes de formato numero a texto
         $mes_texto = "";
         switch ($mes) {
@@ -109,63 +105,59 @@ class RackHabitacional extends ConexionMYSql
                 $mes_texto = "Diciembre";
                 break;
         }
-
         return $mes_texto;
     }
-    public function mostrar($id, $tiempo_inicial)
-    {
+    public function mostrar($id, $tiempo_inicial){
         include_once("clase_cuenta.php");
         include('clase_movimiento.php');
         //variable para alamcenar mes de rack
         $mes_rack = $this->convertir_mes(date('m'));
         //variable para alamcenar año de rack
         $anio_rack = date('Y');
-
-
+        $total_faltante=0.0;
         $cuenta = new Cuenta(0);
         $movimiento = new movimiento(0);
-
         $cronometro = 0;
-
         //Se utiliza la misma consulta para el rack de operaciones
-        $sentencia = "SELECT hab.id,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin 
+        $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as moviemiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin, datos_vehiculo.id as id_vehiculo
+        ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped,datos_vehiculo.estado as estado_vehiculo, tipo_hab.color as color_tipo
         FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
-        WHERE hab.estado_hab = 1  ORDER BY id";
+        LEFT JOIN huesped on huesped.id = movimiento.id_huesped
+        LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
+        WHERE hab.estado_hab = 1
+        AND hab.tipo>0
+        -- AND hab.id=1
+        ORDER BY id";
+        //echo $sentencia;
         $comentario = "Optenemos las habitaciones para el rack de habitaciones";
         $consulta = $this->realizaConsulta($sentencia, $comentario);
-
-
         echo '
             <!--todo el contenido que estre por dentro de este div sera desplegado junto a la barra de nav--->
             <!--tabla operativa--->
+            
+            <div class="header_rack">
+                <h2>' . $mes_rack . ' ' . $anio_rack . '</h2>
+            </div>
 
-                <div class="headTable justify-content-center align-items-center">
-                    <div style="text-align:center;">
-                    <div>
-                        <h2>' . $mes_rack . ' ' . $anio_rack . '</h2> 
-                    </div>
-                    </div>
-                </div>
         ';
-
         echo '
             <!-- DISPLAY USER-->
-            <div class="table-responsive tableRack" style="margin-left: -10px !important;">
+            <div class="table-responsive tableRack tabla_maximo " >
                 <div id="cal-largo">
                     <div class="cal-sectionDiv">
-                        <table class="tableRack table-striped table-bordered" id="tablaTotal">
+                        <table class="tableRack table-bordered boderTabla" id="tablaTotal">
                             <thead class="cal-thead">
                                 <tr>
                                 <th class="cal-viewmonth" id="changemonth"></th>
         ';
-        $tiempo = $tiempo_inicial - 86400;
+        $tiempo = $tiempo_inicial;
         //for para cargar los 31  dias
         for ($i = 1; $i <= 31; $i++) {
             $mes = $this->convertir_mes(date('n', $tiempo));
             $dia = date('d', $tiempo);
             $tiempo += 86400;
             echo "
-                <th class='cal-dia'> $dia - $mes</th>
+                <th class='cal-dia '> $dia - $mes</th>
             ";
         }
         echo '
@@ -175,711 +167,445 @@ class RackHabitacional extends ConexionMYSql
         ';
         //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
         while ($fila = mysqli_fetch_array($consulta)) {
+            $existe_disponible=false;
+            $color = $fila['color_tipo'];
+            $color = "#".$color;
+            $hab_nombre =$fila['nombre'];
+            // $hab_nombre = strlen($hab_nombre) > 13 ? substr($hab_nombre,0,12)."..." : $hab_nombre;
             echo '
-                <tr id="u1">
-                    <td class="cal-userinfo">
+                <tr id="hab_'.$fila['id'].'" >
+                    <td class="cal-userinfo BordeIzquierdoTipoHab" style="border-left-color: '.$color.' !important;">
             ';
-            echo 'Habitación ';
+            echo 'Hab. ';
             if ($fila['id'] < 100) {
-                echo $fila['nombre'];
+                echo $hab_nombre;
             } else {
                 echo $fila['comentario'];
             }
             echo '
                 </td>
             ';
-            $tiempo = $tiempo_inicial - 86400;
+            $tiempo = $tiempo_inicial;
             $hab = $fila['id'];
             //por cada hab, se tiene que consultar las preasignaciones existentes
-            $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado ,movimiento.estado_interno AS interno
+            $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado,
+            reservacion.estado_interno AS garantia
+            ,movimiento.estado_interno AS interno
+            ,huesped.nombre as n_huesped, huesped.apellido as a_huesped, movimiento.id as mov,reservacion.id as reserva_id
             FROM movimiento
             left join reservacion on movimiento.id_reservacion = reservacion.id
             LEFT JOIN hab on movimiento.id_hab = hab.id
+            LEFT JOIN huesped on movimiento.id_huesped = huesped.id
             where reservacion.estado =1
             and movimiento.motivo='preasignar'
             and movimiento.id_hab=$hab
+            and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') 
             order by reservacion.fecha_entrada asc;
             ";
+            // echo $sentencia_reservaciones;
             $comentario = "Optenemos las habitaciones para el rack de habitaciones";
             $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, $comentario);
             $contador_row = mysqli_num_rows($consulta_reservaciones);
-            $imprimi_ocupadas=false;
-
             //for para cargar los 31  dias dentro de las habitaciones
             for ($i = 1; $i <= 31; $i++) {
+                //Se omite el día anterior.
                 if ($i == 1) {
-                    echo '
+                    /*echo '
                         <td class="celdaCompleta tdCheck " >
                         </td>
-                    ';
+                    ';*/
                 } else {
-
+                    $clase_expirar="";
+                    $mastiempo=false;
+                    //Se calculan los estados de las habitaciones.
                     $mes = $this->convertir_mes(date('n', $tiempo));
-
                     $dia = date('d', $tiempo);
+                    $adicional =0;
                     $tiempo += 86400;
-                    $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1,$fila['interno']);
-                    $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2,$fila['interno']);
-
-                    if ($i == 2 && $fila['estado'] != 1 ) {
-                        echo '
-                        <td class="celdaCompleta tdCheck " title="nombre huesped">
-                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
-                                <div >
-                        ';
-                        echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
-                        echo '</div>';
-                        echo '
-                            </div>
-                        </td>
-                        ';
-                    //mismo caso 
-                    //se le suma 1 día para ignorar el día actual.
-                    $tiempo_aux = time()+86400;
-                    while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
-                        $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
-                        while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
-                        //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias), 
-                        //con el tiempo de la reservacion
-                        if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila_r['fecha_entrada'])){
-                            $estado=7;
-                            echo '';
-                            echo '
-                            <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
-                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',' . $fila['nombre'] . ')" >
+                    $tiempo_aux = time() + $adicional;
+                    $estado_habitacion_matutino = $this->estado_habitacion($fila['estado'], 1, $fila['interno']);
+                    $estado_habitacion_vespertino = $this->estado_habitacion($fila['estado'], 2, $fila['interno']);
+                    // echo date('Y-m-d',$tiempo_aux);
+                    if(date('Y-m-d', $tiempo_aux) >= date('Y-m-d', $fila['fin'])) {
+                        $clase_expirar="expirar";
+                    }
+                    //Si la habitación actual no está ocupada entra aqui.
+                    if ($i == 2 && $fila['estado'] != 1) {
+                        //aplica lo mismo que en una reservacion de momento solo en uso casa.
+                        if($fila['estado'] == 8) {
+                            $earlier = new DateTime(date('Y-m-d'));
+                            $later = new DateTime(date('Y-m-d', $fila['detalle_fin']));
+                            $noches_uso = $later->diff($earlier)->format("%a");
+                            // echo $noches_uso;
+                            if($contador_row==0) {
+                                $adicional=86400;
+                                echo '
+                            <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="' . $noches_uso . '">
+                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] .',\''.$fila['nombre'].'\')" >
+                                    <div >
                             ';
-                            echo '<section class="task task--reserva-pendiente-pago"> Reserva pendiente ' . $noches_reserva . ' </section>';
-                            echo '            </div>
-
-                                </td>
-                            ';
-                        }else{
-                            echo '
-                            <td   td class="celdaCompleta tdCheck " >
+                                echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                echo '</div>';
+                                echo '
+                                </div>
                             </td>
                             ';
-                        }
-                            $tiempo_aux += 86400;
-                        }
-                    }
-                    $i=32;
-
-                    } else {
-                        //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
-                        $noches = ($fila['fin'] - $fila['inicio']) / 86400;
-                        //solo imprime una vez las ocupadas, esto evita que se sigan imprimiendo si hay reservaciones
-                        if($imprimi_ocupadas==false){
-                            echo '';
-                            echo '
-                            <td class="celdaCompleta tdCheck " colspan="' . $noches . '">
-                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',' . $fila['nombre'] . ')" >
+                            }
+                        } else {
+                            if($contador_row==0) {
+                                $adicional=86400;
+                                echo '
+                            <td class="celdaCompleta tdCheck " title="nombre huesped">
+                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\' )" >
+                                    <div >
                             ';
-                            echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . ' ' . $noches . ' </section>';
-                            echo '            </div>
-                                </td>
+                                $h=0;
+                                echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                echo '</div>';
+                                echo '
+                                </div>
+                            </td>
                             ';
-                            $imprimi_ocupadas=true;
+                            }
                         }
-                        //si no hay reservaciones se termina el ciclo.
-                        if($contador_row==0){
-                            $i = 32;
-                        }else{
-                            //aqui van las reservas, fila_r contiene las reservas
-                            $tiempo_aux = $fila['fin'];
-                            while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
-                                $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
-                                while(date('Y-m-d',$tiempo_aux) < date('Y-m-d',$fila_r['fecha_salida'])){
-                                //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias), 
+                        $c=0;
+                        while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
+                            $huesped_reserva = $fila_r['n_huesped'] . " " . $fila_r['a_huesped'];
+                            $clase_hover = "nuevax" . $i .rand(1, 100);
+                            ;
+                            echo '<style>
+                        .'.$clase_hover.'::after {
+                        content: "'.$huesped_reserva.'";
+                        }
+                        </style>';
+                            $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
+                            // if($fila['id']==46){
+                            //     echo date('Y-m-d', $tiempo_aux) ."|". date('Y-m-d', $fila_r['fecha_entrada']) ."|".  date('Y-m-d', $fila_r['fecha_salida']);
+                            //     echo $existe_disponible;
+                            // }
+                            if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila_r['fecha_entrada']) && date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_salida']) && !$existe_disponible) {
+                                echo '
+                        <td class="celdaCompleta tdCheck " title="nombre huesped">
+                        <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
+                        <div >
+                        ';
+                                echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                echo '</div>';
+                                echo '
+                        </div>
+                        </td>
+                        ';
+                                $existe_disponible=true;
+                            } else {
+                                $existe_disponible=false;
+                            }
+                            while(date('Y-m-d', $tiempo_aux) < date('Y-m-d', $fila_r['fecha_salida'])) {
+                                //tiempo aux será una variable que contendrá los "días actuales", esto para comparar el día actual (dentro del ciclo de 31 dias),
                                 //con el tiempo de la reservacion
-                                if(date('Y-m-d',$tiempo_aux) == date('Y-m-d',$fila_r['fecha_entrada'])){
-                                    $estado=7;
+                                if(date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_entrada'])) {
+                                    $icono_estado_limpieza ="";
+                                    if($fila_r['garantia'] == "garantizada") {
+                                        $estado = 6;
+                                    } else {
+                                        $estado = 7;
+                                    }
+                                    $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
+                                    $estado_habitacion_reserva = $this->estado_habitacion($estado, "", "");
+                                    // $re= date('Y-m-d',$fila_r['fecha_entrada']);
+                                    // $rs= date('Y-m-d',$fila_r['fecha_salida']);
+                                    if($c==0 && $fila['estado']!=0) {
+                                        echo '
+                                <td class="celdaCompleta tdCheck " title="nombre huesped">
+                                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
+                                        <div >
+                                ';
+                                        echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                        echo '</div>';
+                                        echo '
+                                    </div>
+                                </td>
+                                ';
+                                    }
                                     echo '';
                                     echo '
-                                    <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
-                                        <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',' . $fila['nombre'] . ')" >
-                                    ';
-                                    echo '<section class="task task--reserva-pendiente-pago"> Reserva pendiente ' . $noches_reserva . ' </section>';
+                            <td class="celdaCompleta tdCheck " colspan="' . $noches_reserva . '">
+                                <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ','.$fila_r['mov'].','.$fila_r['reserva_id'].')" >
+                            ';
+                                    echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . '</section>';
                                     echo '            </div>
-
-                                        </td>
+                                </td>
+                            ';
+                                    $n = 86400 * ($noches_reserva -1);
+                                    $tiempo_aux += $n;
+                                    $noches_reserva=1;
+                                    // echo "fin";
+                                    // die();
+                                    // $tiempo_aux += 86400 ;
+                                } else {
+                                    //Uso casa.
+                                    if ($c == 0 && $fila['estado'] != 1) {
+                                        if($fila['estado'] == 8) {
+                                            $earlier = new DateTime(date('Y-m-d'));
+                                            $later = new DateTime(date('Y-m-d', $fila['detalle_fin']));
+                                            $noches_uso = $later->diff($earlier)->format("%a");
+                                            // echo $noches_uso;
+                                            echo '
+                                    <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="' . $noches_uso . '">
+                                        <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
+                                            <div >
                                     ';
-                                }else{
-                                    echo '
-                                    <td   td class="celdaCompleta tdCheck " >
+                                            echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                            echo '</div>';
+                                            echo '
+                                        </div>
                                     </td>
                                     ';
+                                            $n = 86400 * ($noches_uso - 1);
+                                            $tiempo_aux += $n;
+                                            $noches_reserva=1;
+                                        } else {
+                                            //Cuando la f.salida de la reservacion sobrepasa la fecha actual y no hay ocupadas.
+                                            if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila_r['fecha_entrada']) && date('Y-m-d', $tiempo_aux) < date('Y-m-d', $fila_r['fecha_salida'])) {
+                                                $earlier = new DateTime(date('Y-m-d'));
+                                                $later = new DateTime(date('Y-m-d', $fila_r['fecha_salida']));
+                                                $noches_uso = $later->diff($earlier)->format("%a");
+                                                // echo $noches_uso;
+                                                $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
+                                                if($fila_r['garantia'] == "garantizada") {
+                                                    $estado = 6;
+                                                } else {
+                                                    $estado = 7;
+                                                }
+                                                $estado_habitacion_reserva = $this->estado_habitacion($estado, "", "");
+                                                echo '
+                                        <td class="celdaCompleta tdCheck " title="nombre huesped" colspan="'.$noches_uso.'">
+                                        <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado . ',\''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ','.$fila_r['mov'].','.$fila_r['reserva_id'].')"  >
+                                        <div >
+                                        ';
+                                                echo '<section class="task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . '</section>';
+                                                echo '</div>';
+                                                echo '
+                                        </div>
+                                        </td>
+                                        ';
+                                                if($noches_uso>1) {
+                                                    $mastiempo=true;
+                                                    $n = 86400 * ($noches_uso);
+                                                    $tiempo_aux += $n;
+                                                }
+                                            } else {
+                                                if($fila['estado'] != 1) {
+                                                    echo '
+                                            <td class="celdaCompleta tdCheck " title="nombre huesped">
+                                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
+                                            <div >
+                                            ';
+                                                    echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                                    echo '</div>';
+                                                    echo '
+                                            </div>
+                                            </td>
+                                            ';
+                                                } else {
+                                                    echo '
+                                            <td class="celdaCompleta tdCheck " > ';
+                                                    echo date('Y-m-d', $tiempo_aux);
+                                                    echo'
+                                            </td>
+                                            ';
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        echo '
+                                <td class="celdaCompleta tdCheck nobordertable " >';
+                                        // echo date('Y-m-d',$tiempo_aux);
+                                        echo'
+                                </td>
+                                ';
+                                    }
                                 }
+                                // die();
+                                if(!$mastiempo) {
                                     $tiempo_aux += 86400;
                                 }
+                                $c++;
+                            }
+                        }
+                        $i=32;
+                        //Ocupadas
+                    } else {
+                        //si la habitacion esta ocupada, dibuja los dias en los que estará ocupada (ignora el dia anterior)
+                        $mastiempo=false;
+                        $huesped_ocupada = $fila['n_huesped'] . " " . $fila['a_huesped'];
+                        if (strlen($huesped_ocupada) > 25){
+                            $huesped_ocupada = substr($huesped_ocupada, 0 , 25) . "...";
+                        }
+                        $clase_hover = "nuevax" . $fila['id'];
+                        $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
+                        $saldo="";
+                        $saldo_c="";
+                        if($total_faltante > 0) {
+                            $saldo = 'Saldo: $'.number_format($total_faltante, 2);
+                            $saldo_c="green";
+                        } elseif($total_faltante==0) {
+                            $saldo= 'Saldo: $0.0';
+                        } else {
+                            $total_faltante= substr($total_faltante, 1);
+                            $saldo= 'Saldo: -$'.number_format($total_faltante, 2);
+                            $saldo_c="red";
+                        }
+                        echo '<style>
+                        .'.$clase_hover.'::after {
+                            content: "'.$saldo.'";
+                            color:'.$saldo_c.';
+                        }
+                        </style>';
+                        $icono_carro ="";
+                        $icono_estado_limpieza ="";
+                        if($fila['estado_vehiculo']==1){
+                            $icono_carro='<i class="bx bxs-car car"></i>';
+                        }
+                        if($estado_habitacion_matutino[1] == "Ocupada" ){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt clean" style="font-size: 11px; padding: 3px;"></i>';
+                        }else if($estado_habitacion_matutino[1] == "Sucia ocupada"){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt dirt" style="font-size: 11px; padding: 3px;"></i>';
+                        }else if($estado_habitacion_matutino[1] == "Ocupada limpieza"){
+                            $icono_estado_limpieza='<i class="bx bxs-brush-alt cleaning" style="font-size: 11px; padding: 3px;"></i>';
+                        }
+                        $inicio = new DateTime(date('Y-m-d'));
+                        $fin = new DateTime(date('Y-m-d', $fila['fin']));
+                        $tiempoUnix= time();
+                        if($fila['fin']>=$tiempoUnix){
+                            $noches = $fin->diff($inicio)->format("%a");
+                        }else{
+                            $noches=0;
+                        }
+                        $tiempo_aux = time();
+                        $noches = $noches == 0 ? 1 : $noches;
+                        echo '';
+                        echo '
+                        <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">
+                        '.$icono_carro.'
+                        '.$icono_estado_limpieza.'
+                        ';
+                        echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ', \''.$fila['nombre'].'\')" >
+                        ';
+                        echo '<section class="'.$clase_expirar.' '.$clase_hover.' task ' . $estado_habitacion_matutino[0] . '"> '.$huesped_ocupada.'</section>';
+                        echo '</div>';
+                        echo'
+                        </td>
+                        ';
+                        $n = 86400;
+                        if(date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila['fin'])) {
+                            $mastiempo=true;
+                            $tiempo_aux += 86400;
+                        }
+                        if($noches>1) {
+                            $mastiempo=true;
+                            $n = 86400 * ($noches);
+                            $tiempo_aux += $n;
+                        }
+                        // echo date('Y-m-d',$tiempo_aux);
+                        if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila['fin'])) {
+                            // echo $n;
+                            $tiempo_aux = time()-$n;
+                        }
+                        //si no hay reservaciones se termina el ciclo: y solo imprime las ocupadas con un 'medio dia'  al final.
+                        if($contador_row==0) {
+                            $i = 32;
+                        } else {
+                            //aqui van las reservas, fila_r contiene las reservas
+                            //$tiempo_aux contendrá el tiempo 'actual', mas la suma de cada dia para cada reservación.
+                            $current=0; //contador del ciclo de reservaciones.
+                            $ultima=""; //penúltima fecha de la reservacion.
+                            $fila_anterior=null; //contendrá los datos de la ultima penúltima reservación.
+                            $existetd=false; //Sí ya se imprió un td, no volver a imprimir.
+                            $show=false;
+                            if(!$mastiempo) {
+                                $tiempo_aux = $fila['fin'];
+                            }
+                            // echo date('Y-m-d',$tiempo_aux);
+                            while ($fila_r = mysqli_fetch_array($consulta_reservaciones)) {
+                                $huesped_reserva = $fila_r['n_huesped'] . " " . $fila_r['a_huesped'];
+                                $clase_hover = "nuevax" . $i .rand(1, 100);
+                                ;
+                                echo '<style>
+                                .'.$clase_hover.'::after {
+                                    content: "'.$huesped_reserva.'";
+                                }
+                                </style>';
+                                $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
+                                if ($ultima!="") {
+                                    if(date('Y-m-d', $ultima)==date('Y-m-d', $fila['fin'])) {
+                                    }
+                                }
+                                //ciclo para 'avanzar' atraves de los días de la reservación.
+                                while(date('Y-m-d', $tiempo_aux) < date('Y-m-d', $fila_r['fecha_salida'])) {
+                                    //Si el contador de fecha es igual a la fecha de entrada de la reservación y si trata del primer dato.
+                                    if(date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_entrada'])) {
+                                        //Se verifica si la reservación está garantizada o no.
+                                        if($fila_r['garantia'] == "garantizada") {
+                                            $estado = 6;
+                                        } else {
+                                            $estado = 7;
+                                        }
+                                        $aux_r =($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
+                                        // $tiempo_aux= $fila_r['fecha_salida'] - 86400;
+                                        $estado_habitacion_reserva = $this->estado_habitacion($estado, "", "");
+                                        //Este td es para cuando se ocupa imprimir las noches ocupadas junto con la reservación que coicida en la fecha de entrada con
+                                        //la fecha de salida de la ocupada.
+                                        echo '';
+                                        echo '
+                                    <td class="celdaCompleta tdCheck " colspan="' . $aux_r  . '">';
+                                        echo '<div class="ajuste"  href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $estado. ', \''.$fila['nombre'].'\',' . $fila_r['fecha_entrada'] . ',' . $fila_r['fecha_salida'] . ','.$fila_r['mov'].','.$fila_r['reserva_id'].')" >
+                                    ';
+                                        echo '<section class="'.$clase_hover.' task ' . $estado_habitacion_reserva[0] . '"> ' . $estado_habitacion_reserva[1] . ' ' . $noches_reserva . ' </section>';
+                                        echo '</div>';
+                                        echo'
+                                    </td>
+                                    ';
+                                        if($noches_reserva<=1) {
+                                            $tiempo_aux += 86400;
+                                        } else {
+                                            // Si solo se trata del primero también seguirá sumando solo 1 día
+                                            //Solo en casos en los que no se al primer elemento del ciclo y tenga mas de 1 noche de reserva,
+                                            //entonces el tiempo actual se le quedará  con la cantidad de noches de la reservacion
+                                            // y las noches se setean a 1, para que ya no vuelva a sumarle dichos días, sino que termine con la ultima
+                                            //fecha de reservacion.
+                                            $n = 86400 * $noches_reserva;
+                                            $tiempo_aux += $n;
+                                            $noches_reserva=1;
+                                        }
+                                    } else {
+                                        echo '
+                                    <td class="celdaCompleta tdCheck nobordertable">';
+                                        // echo date('Y-m-d',$tiempo_aux);
+                                        echo'
+                                    </td>';
+                                        $tiempo_aux += 86400;
+                                        // die();
+                                    }
+                                    //  echo date('Y-m-d',$tiempo_aux);
+                                    // die();
+                                }
+                                $fila_anterior=$fila_r;
+                                $ultima = $fila_r['fecha_entrada'];
                             }
                             $i=32;
                         }
-
                     }
-
-                    if ($i == 2 && $fila['estado'] != 1 ) {
+                    if ($i == 2 && $fila['estado'] != 1) {
                         $i = 32;
                     }
-                }
+                }//end data.
             }
-
             echo '</tr>';
+            // if($fila['id']==46){
+            //     die();
+            // }
         }
-        /*for($x=1;$x++;$x>=31){
-            $tiempo_de_ayer+=86400;
-            echo "
-                <th class='cal-dia'> LUNES ".$x ."</th>
-            ";
-        }*/
-        /*$fecha_actual = date('Y-m-d'); // Obtiene la fecha actual en formato YYYY-MM-DD
-        $fecha_final = date('Y-m-d', strtotime('+32 days')); // Obtiene la fecha actual más 32 días en formato YYYY-MM-DD
-        $fecha = $fecha_actual; // Se guarda la fecha acutal en una nueva variable
-        $contador = 0;
-        $total_dias = 32;   //En una nueva variable guardamos el total de dias
-        $yesterday =  date('j', strtotime('-1 day'));
-
-        $daybefore = date('d-m-Y', strtotime('-1 day'));
-
-        // echo $daybefore;
-
-        $dia = date('N', strtotime($fecha));
-
-        $diaanterior = date('N', strtotime('-1 day'));
-
-       
-        
-
-        echo'
-            </tr>
-        </thead>';
-       /* $contador_row=0;
-        $empezar_reservas="";
-        //Ciclo while que nos mostrara todas las habitaciones habilitadas y los estados de estas
-        while ($fila = mysqli_fetch_array($consulta)) {
-
-
-
-            //Se definen los estados de las habitaciones
-            $total_faltante= 0.0;
-            $estado="no definido";
-            switch($fila['estado']) {
-                case 0:
-                    $estado= "Disponible limpia";
-                    $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
-                    $tipo_habitacion= $fila['tipo_nombre'];
-
-                    break;
-
-                case 1:
-                    $estado= "Ocupado";
-                    $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
-                    break;
-
-                case 2:
-                    $estado= "Vacia sucia";
-                    $cronometro= $movimiento->saber_inicio_sucia($fila['moviemiento']);
-                    break;
-
-                case 3:
-                    $estado= "Vacia limpia";
-                    $cronometro= $movimiento->saber_fin_hospedaje($fila['moviemiento']);
-                    $total_faltante= $cuenta->mostrar_faltante($fila['moviemiento']);
-                    break;
-
-                case 4:
-                    $estado= "Sucia ocupada";
-                    $cronometro= $movimiento->saber_inicio_sucia($fila['moviemiento']);
-                    break;
-
-                case 5:
-                    $estado="Ocupada limpieza";
-                    $cronometro= $movimiento->saber_inicio_limpieza($fila['moviemiento']);
-                    break;
-
-                case 6:
-                    $estado="Reserva pagada";
-                    $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
-                    $tipo_habitacion= $fila['tipo_nombre'];
-                    break;
-
-                case 7:
-                    $estado= "Reserva pendiente";
-                    $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
-                    $tipo_habitacion= $fila['tipo_nombre'];
-                    break;
-
-                case 8:
-                    $estado= "Uso casa";
-                    $cronometro= $movimiento->saber_tiempo_ultima_renta($fila['id']);
-                    $tipo_habitacion= $fila['tipo_nombre'];
-                    break;
-
-                case 9:
-                    $estado="Mantenimiento";
-                    $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
-                    break;
-
-                case 10:
-                    $estado="Bloqueo";
-                    $cronometro= $movimiento->saber_detalle_inicio($fila['moviemiento']);
-                    break;
-
-                default:
-                    //echo "Estado indefinido";
-                    break;
-            }
-
-            //Se añade en el cuerpo de la tabla la numeracion de las habitaciones
-            if($fila['tipo']>0) {
-                echo'
-                <tbody class="cal-tbody">
-                <tr id="u1">
-                <td class="cal-userinfo">';
-                echo'Habitación ';
-                if($fila['id']<100) {
-                    echo $fila['nombre'];
-                } else {
-                    echo $fila['comentario'];
-                }
-                echo'
-                </td>';
-
-                // Se decide por las habitaciones vacias
-                $fecha_salida= $movimiento->ver_fecha_salida($fila['moviemiento']);
-
-                $fecha_salidaAux= $movimiento->ver_fecha_salida($fila['moviemiento']);
-                $fecha_entradaAux = $movimiento->ver_fecha_entrada($fila['moviemiento']);
-
-                $fecha_salidaAux = date('d-m-Y', strtotime($fecha_salidaAux));
-                $fecha_entradaAux= date('d-m-Y', strtotime($fecha_entradaAux));
-
-                // echo $fecha_entradaAux;
-                // echo $fecha_salidaAux;
-
-                $date1 = new DateTime($fecha_entradaAux);
-                $date2 = new DateTime($fecha_salidaAux);
-
-                $numColspan=0;
-                $diffDias=$date2->diff($date1);
-                $diffDias= $diffDias->days;
-
-                $check=false;
-
-
-
-                /*if ($fila['estado'] == 0) {
-                    // echo $daybefore;
-                    $aux_fecha_actual = date('d-m-Y', strtotime($fecha_actual));
-                    // echo $aux_fecha_actual;
-                    // die();
-                    while(strtotime($daybefore) <= strtotime($aux_fecha_actual)) {
-                        if($daybefore==$aux_fecha_actual) {
-                            echo'
-                    <td class="celdaCompleta ">
-                        <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >
-                            <div class="medioDia">
-                            <section class="task task--disponible-limpia" >
-                                <a> '. $estado . '<br></a>
-                            </section>
-                            </div>
-                            <div class="medioDia">
-                            <section class="task task--disponible-limpia" >
-                                <a> '. $estado . '<br></a>
-                            </section>
-                            </div>
-                        </div>
-                    </td>
-                    ';
-                        } else {
-                            echo'
-                    <td class="celdaCompleta">
-        
-                    </td>
-                    ';
-                        }
-
-                        $daybefore = date('d-m-Y', strtotime($daybefore.'+1 day'));
-                    }
-
-
-                } elseif($fecha_salida < 0) {
-                    echo'
-                <td class="celdaCompleta">
-
-             </td>
-                ';
-                } elseif($fecha_salida > 0) {
-                    $empezar_reservas = $fecha_salida;
-                    // print_r($fecha_entrada);
-                    // print_r($fecha_salida);
-                    //  die();
-                    $cw=0;
-                    $aux_fecha_actual = date('d-m-Y', strtotime($fecha_actual));
-                    //    echo $daybefore;
-                    //    echo $fecha_salidaAux;
-                    $checkNormal=false;
-                    while(strtotime($daybefore)<= strtotime($fecha_salidaAux)) {
-
-
-                        // die("si");
-                        // echo $fecha;
-                        // echo $fecha_entrada;
-                        if($fecha_entradaAux==$daybefore || $fecha_salidaAux == $daybefore) {
-
-
-                            // }
-
-                            if($estado != 'Ocupado') {
-                                $diffDias=1;
-                                $checkNormal=true;
-                            }
-
-                            if($diffDias>=1 && $estado=='Ocupado') {
-                                $check=true;
-                                $diffDias++;
-                            }
-
-                            if($check || $checkNormal) {
-
-                                // echo "<button></button>"
-
-                                // for ($i=0; $i < $total_dias+2; $i++) {
-                                # code...
-                                echo'
-                        <td class="celdaCompleta tdCheck medioDia" >';
-                                //Segunda columna que muesta los estados de las habitaciones
-                                //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
-                                echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
-                                //Con esta estructura de control definimos los estados y los estilos correspondientes a los estados
-                                switch($estado) {
-
-                                    case "Disponible limpia":
-
-                                        echo '<section class="task task--limpieza-vacia">';
-
-                                        break;
-
-
-                                    case "Vacia limpia":
-                                        echo'<section class="task task--limpieza-vacia">';
-                                        // echo '<section class="task task--limpieza-vacia">Limpieza Vacia</section>';
-
-                                        break;
-
-                                    case "Vacia sucia":
-                                        echo'<section class="task task--vacia-sucia" title="aqui mas informacion">';
-
-                                        break;
-
-                                    case "Ocupado":
-                                        echo'<section class="task task--ocupadoH">';
-                                        break;
-
-                                    case "Sucia ocupada":
-                                        echo'<section class="task task--ocupada-sucia">';
-                                        break;
-
-                                    case "Ocupada limpieza":
-                                        echo'<section class="task task--limpieza-ocupada">';
-                                        break;
-
-                                    case "Reserva pagada":
-                                        echo'<section class="task task--reserva-pagada">';
-                                        break;
-
-                                    case "Reserva pendiente":
-                                        echo'<section class="task task--reserva-pendiente-pago ajuste">';
-                                        break;
-
-                                    case "Uso casa":
-                                        echo'<section class="task task--uso-casa">';
-                                        break;
-
-                                    case "Mantenimiento":
-                                        echo'<section class="task task task--mantenimiento ajuste-2dias">';
-                                        break;
-
-                                    case "Bloqueo":
-                                        echo'<section class="task task--bloqueado">';
-                                        break;
-
-                                    default:
-                                        //echo "Estado indefinido";
-                                        break;
-                                }
-                                echo '<a> '. $estado .'<br> </a>';
-                                echo '<a> '. substr($fecha_salida, 0, -8) .'<br> </a>';
-
-                                //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
-                                echo '</section>
-                    </div>
-                </td>';
-
-
-                                echo'
-                <td class="celdaCompleta tdCheck medioDia" >';
-                                //Segunda columna que muesta los estados de las habitaciones
-                                //Definimos un div que contendra un evento onclick con el que se desplegara un modal y se mostrar la informacion de la habitacion
-                                echo'<div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')" >';
-                                //Con esta estructura de control definimos los estados y los estilos correspondientes a los estados
-                                switch($estado) {
-
-                                    case "Disponible limpia":
-
-                                        echo '<section class="task task--limpieza-vacia">';
-
-                                        break;
-
-
-                                    case "Vacia limpia":
-                                        echo'<section class="task task--limpieza-vacia">';
-                                        // echo '<section class="task task--limpieza-vacia">Limpieza Vacia</section>';
-
-                                        break;
-
-                                    case "Vacia sucia":
-                                        echo'<section class="task task--vacia-sucia" title="aqui mas informacion">';
-
-                                        break;
-
-                                    case "Ocupado":
-                                        echo'<section class="task task--ocupadoH">';
-                                        break;
-
-                                    case "Sucia ocupada":
-                                        echo'<section class="task task--ocupada-sucia">';
-                                        break;
-
-                                    case "Ocupada limpieza":
-                                        echo'<section class="task task--limpieza-ocupada">';
-                                        break;
-
-                                    case "Reserva pagada":
-                                        echo'<section class="task task--reserva-pagada">';
-                                        break;
-
-                                    case "Reserva pendiente":
-                                        echo'<section class="task task--reserva-pendiente-pago ajuste">';
-                                        break;
-
-                                    case "Uso casa":
-                                        echo'<section class="task task--uso-casa">';
-                                        break;
-
-                                    case "Mantenimiento":
-                                        echo'<section class="task task task--mantenimiento ajuste-2dias">';
-                                        break;
-
-                                    case "Bloqueo":
-                                        echo'<section class="task task--bloqueado">';
-                                        break;
-
-                                    default:
-                                        //echo "Estado indefinido";
-                                        break;
-                                }
-                                echo '<a> '. $estado .'<br> </a>';
-                                echo '<a> '. substr($fecha_salida, 0, -8) .'<br> </a>';
-
-                                //Definimos la informacion que contendra las card de las habitaciones el numero de habitacion y el estado
-                                echo '</section>
-                    </div>
-                </td>';
-
-
-                                if($checkNormal) {
-                                    $checkNormal=false;
-                                    break;
-                                }
-
-
-                                $diffDias=false;
-                                $check=false;
-                            }
-                            $daybefore = date('d-m-Y', strtotime($daybefore.'+1 day'));
-                            $fecha_entradaAux = date('d-m-Y', strtotime($fecha_entradaAux.'+1 day'));
-
-
-
-
-
-                        } else {
-                            // if($cw>0){
-                            //     echo "??";
-                            //     die();
-                            // }
-                            // echo "no es igual";
-
-                            echo'
-        <td class="celdaCompleta">
-
-        </td>
-        ';
-
-                            $daybefore = date('d-m-Y', strtotime($daybefore.'+1 day'));
-                            // echo $aux_fecha_actual;
-
-
-
-
-
-                        }
-                        $cw++;
-                    }
-
-
-
-                }
-                $dia_inicio=0;
-                $dia_actual = date('d-m-Y');
-
-                if($empezar_reservas!=0) {
-                    $dia_inicio = $empezar_reservas;
-                } else {
-                    $dia_inicio=$dia_actual;
-                }
-
-                $dia_inicio = date('d-m-Y', strtotime($dia_inicio.'.+1 day'));
-
-
-
-                $hab= $fila['id'];
-                //consultar las reservaciones "pendientes" sobre esa habitación.
-                $sentencia_reservaciones = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado ,movimiento.estado_interno AS interno
-        FROM movimiento 
-        left join reservacion on movimiento.id_reservacion = reservacion.id
-        LEFT JOIN hab on movimiento.id_hab = hab.id 
-        where reservacion.estado =4
-        and movimiento.id_hab=$hab";
-
-
-
-
-
-                $consulta_reservaciones = $this->realizaConsulta($sentencia_reservaciones, "");
-
-
-                $h=0;
-
-                $ultima_fecha = $todas_fechas[sizeof($todas_fechas)-1];
-
-
-
-                while ($fila = mysqli_fetch_array($consulta_reservaciones)) {
-
-
-                    $fr_salida = $fila['fecha_salida'];
-                    $entrada_reservacion = date('d-m-Y', $fila['fecha_entrada']);
-
-                    print_r($dia_inicio);
-                    print_r($entrada_reservacion);
-                    print_r(date('Y-m-d', $fr_salida));
-
-
-                    if(strtotime($entrada_reservacion)<strtotime($dia_actual)) {
-
-                        continue;
-                    }
-
-
-                    //   if($h==0){
-                    //     $dia_inicio = $entrada_reservacion;
-                    //   }
-
-                    //   die($dia_inicio);
-
-                    while(strtotime($dia_inicio) <= $fr_salida) {
-                        if(strtotime($dia_inicio) == $fr_salida) {
-                            echo "<td>igual?</td>";
-                        }
-
-
-                        if(strtotime($dia_inicio) == strtotime($entrada_reservacion)) {
-                            echo'
-                <td class="celdaCompleta">
-                    <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['id'].')" >
-                        <section class="task task--disponible-limpia" >
-                            <a> '. "nada" . '<br></a>
-                        </section>
-                    </div>
-                </td>
-                ';
-
-                            $entrada_reservacion = date('d-m-Y', strtotime($entrada_reservacion.'+1 day'));
-
-                        } else {
-                            echo'
-                        <td class="celdaCompleta">
-                
-                        </td>
-                        ';
-                        }
-                        $dia_inicio = date('d-m-Y', strtotime($dia_inicio.'+1 day'));
-                    }
-                    $dia_inicio =date('d-m-Y', $fr_salida);
-                    $dia_inicio = date('d-m-Y', strtotime($dia_inicio.'.+1 day'));
-
-                    // echo "el nuevo dia "  .  $dia_inicio;
-                    // die();
-
-
-
-                    // while(strtotime($dia_actual) <= strtotime($ultima_fecha)) {
-                    //     // print_r($entrada_reservacion);
-                    //     // print_r($entrada_reservacion);
-                    //     if(strtotime($entrada_reservacion)==strtotime($dia_actual)) {
-
-
-                    //         echo'
-                    //         <td class="celdaCompleta">
-                    //             <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas('.$fila['id'].','.$fila['estado'].','.$fila['id'].')" >
-                    //                 <section class="task task--disponible-limpia" >
-                    //                     <a> '. "nada" . '<br></a>
-                    //                 </section>
-                    //             </div>
-                    //         </td>
-                    //         ';
-                    //         $entrada_reservacion = date('d-m-Y', strtotime($entrada_reservacion.'+1 day'));
-                    //     }else{
-
-                    //         echo'
-                    //         <td class="celdaCompleta">
-
-                    //         </td>
-                    //         ';
-                    //     }
-
-                    //     $dia_actual = date('d-m-Y', strtotime($dia_actual.'+1 day'));
-
-                    //     //die("pass");
-                    //     $i++;
-                    // }
-
-
-
-
-
-                    $h++;
-                }
-
-
-
-                echo '
-            </tr>
-        </tbody>';
-            } else {
-                //echo '<div class="hidden-xs hidden-sm col-md-1 espacio">';
-            }
-
-            $daybefore = date('d-m-Y', strtotime('-1 day'));
-            $fecha_salidaAux="";
-            $fecha_entradaAux="";
-            $contador_row++;
-            // echo $contador_row;
-        }
-        echo'</table>
-        </div>
-    </div>
-</div>';*/
     }
 }
+
+
