@@ -6,7 +6,7 @@ const startTimer = () => {
     setInterval(() => {
         inactivityTime += 1;
         //console.log(inactivityTime);
-        if (inactivityTime >= 3000) {
+        if (inactivityTime >= 600) {
             clearInterval(timerInterval);
             salirsession()
         }
