@@ -4,21 +4,24 @@
         $total = $_POST["total"];
         $listaId = $_POST["listaId"];
         $tipo=$_POST["tipo"];
+        $lista_totales=$_POST["lista_totales"];
         // Procesar los parámetros
     } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
         $total = $_GET["total"];
         $listaId = $_GET["listaId"];
         $tipo = $_GET["tipo"];
+        $lista_totales=$_GET["lista_totales"];
         // Procesar los parámetros
     }
     $_SESSION['lista_id_ticket'] = explode(",",$listaId);
+    $lista_totales=explode(",",$lista_totales);
     //echo $tipo;
     include("clase_factura.php");
     $fact = NEW factura ();
     if(isset($_GET['fila'])){
         $contador = $_GET['fila'];
     }else{
-        $contador = 15;
+        $contador = count($_SESSION['lista_id_ticket']);
     }
     
     if(empty($contador)){
@@ -211,17 +214,10 @@
                         echo '
                         
                         <div class="form-floating col-1 mb-2">';
-                        if($i==1){
-                            echo'
-                            <input type="text" name="cantidad['.$i.']" class="form-control" id="cantidad['.$i.']" oninput="cal()" value="1" placeholder="Cantidad">
-                            <label for="inputCity" style="padding-left: 25px;">Cantidad</label>
-                            ';
-                        }else{
-                            echo'
-                            <input type="text" name="cantidad['.$i.']" class="form-control" id="cantidad['.$i.']" oninput="cal()" value="" placeholder="Cantidad">
-                            <label for="inputCity" style="padding-left: 25px;">Cantidad</label>
-                            ';
-                        }
+                        echo'
+                        <input type="text" name="cantidad['.$i.']" class="form-control" id="cantidad['.$i.']" oninput="cal()" value="1" placeholder="Cantidad">
+                        <label for="inputCity" style="padding-left: 25px;">Cantidad</label>
+                        ';
                         echo'
                         </div>
         <!--             Imput Unidad -->
@@ -252,17 +248,11 @@
         <!--             Imput Imp Unitario -->
                     <div class="form-floating col-1 mb-2">
                         ';
-                        if($i==1){
-                            echo'
-                            <input type="text" name="importeuni['.$i.']" class="form-control" id="importeuni['.$i.']" onload="cal() "oninput="cal()" value='.$total.' placeholder="Imp.&nbsp;Unitario">
-                            <label for="inputCity" style="padding-left: 25px;">Imp.&nbsp;Unitario</label>
-                            ';
-                        }else{
-                            echo'
-                            <input type="text" name="importeuni['.$i.']" class="form-control" id="importeuni['.$i.']" oninput="cal()" value="" placeholder="Imp.&nbsp;Unitario">
-                            <label for="inputCity" style="padding-left: 25px;">Imp.&nbsp;Unitario</label>
-                            ';
-                        }
+                        echo'
+                        <input type="text" name="importeuni['.$i.']" class="form-control" id="importeuni['.$i.']" onload="cal() "oninput="cal()" value='.$lista_totales[$i-1].' placeholder="Imp.&nbsp;Unitario">
+                        <label for="inputCity" style="padding-left: 25px;">Imp.&nbsp;Unitario</label>
+                        ';
+                        
                         echo'
                     </div>
         <!--             Imput Importe -->

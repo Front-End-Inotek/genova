@@ -7708,6 +7708,7 @@ function generar_facturas_global(){
     var input_longitud=document.getElementById("leer_iteraciones");
     var index=input_longitud.value;
     var lista_id_tickets=[];
+    var lista_totales=[];
     var total=0;
     var bandera_facturacion=document.getElementById("leer_facturacion").value;
     
@@ -7718,6 +7719,7 @@ function generar_facturas_global(){
         if (checkBox_status.checked) {
             lista_id_tickets.push(id_ticket.value);
             total=total+parseInt(leer_total.value);
+            lista_totales.push(parseInt(leer_total.value));
         }
     }
     localStorage.setItem('lista_id_tickets', lista_id_tickets);
@@ -7746,7 +7748,7 @@ function generar_facturas_global(){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets+"&tipo="+bandera_facturacion);
+        $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets+"&tipo="+bandera_facturacion+"&lista_totales="+lista_totales);
         closeNav();
     }else{
         swal({
