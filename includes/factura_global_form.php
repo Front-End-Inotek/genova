@@ -5,16 +5,19 @@
         $listaId = $_POST["listaId"];
         $tipo=$_POST["tipo"];
         $lista_totales=$_POST["lista_totales"];
+        $lista_tipo=$_POST["lista_tipo"];
         // Procesar los parámetros
     } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
         $total = $_GET["total"];
         $listaId = $_GET["listaId"];
         $tipo = $_GET["tipo"];
         $lista_totales=$_GET["lista_totales"];
+        $lista_tipo=$_GET["lista_tipo"];
         // Procesar los parámetros
     }
     $_SESSION['lista_id_ticket'] = explode(",",$listaId);
     $lista_totales=explode(",",$lista_totales);
+    $lista_tipo=explode(",",$lista_tipo);
     //echo $tipo;
     include("clase_factura.php");
     $fact = NEW factura ();
@@ -271,8 +274,13 @@
                             <label for="inputCity" style="padding-left: 25px;">ISH</label>
                         </div>
         <!--             Checkbox ISH -->
-                    <div class="form-group col-1">
-                            <input name="checisah['.$i.']" class="form-check-input" type="checkbox" id="checisah['.$i.']" oninput="cal()" checked> 
+                    <div class="form-group col-1">';
+                        if ( $lista_tipo[$i-1]==1){
+                            echo '<input name="checisah['.$i.']" class="form-check-input" type="checkbox" id="checisah['.$i.']" oninput="cal()" checked>';
+                        }else{
+                            echo '<input name="checisah['.$i.']" class="form-check-input" type="checkbox" id="checisah['.$i.']" oninput="cal()">';
+                        }
+                    echo'
                     </div>
                     ';
                     }
