@@ -1,0 +1,12 @@
+.estado2{
+ background-color: #898274;
+ color: gainsboro;
+ padding: 0em 0px 0px 10px;
+ border-radius: 10px;
+}
+.estado2:hover{
+ background-color: #544e41;
+ color: rgb(201, 198, 198);
+ padding: 0em 0px 0px 10px;
+ border-radius: 10px;
+}

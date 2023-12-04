@@ -2,14 +2,10 @@
   //error_reporting(0);
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
- 
-  class Informacion_mesas extends ConexionMYSql
-  {
+  class Informacion_mesas extends ConexionMYSql{
     // Constructor
-    function __construct()
-    {
-
-    } 
+    function __construct(){
+    }
     function evaluarEntrada($usuario_evaluar ,$password_evaluar){
       //include_once('log.php');
       //$logs = NEW Log(0);
@@ -19,12 +15,25 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       //echo $sentencia;
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-           $id= $fila['id'];
-           //$logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
+      while ($fila = mysqli_fetch_array($consulta)){
+        $id= $fila['id'];
+         //$logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
       }
       return $id;
+    }
+    function guardar_mesa($nombre,$comentario,$capacidad,$mov){
+      $id= 0;
+      $sentencia= "INSERT INTO `mesa`( `nombre`, `mov`, `comentario`, `capacidad`, `estado`, `estado_mesa`,`tipo`) VALUES 
+      ('$nombre','$mov','$comentario','$capacidad',0,1,1)";
+      $comentario= "Evaluar los datos para cambiar los productos de una mesa";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      //se recibe la consulta y se convierte a arreglo
+      //echo $sentencia;
+      if($consulta){
+        echo "OK";
+      }else{
+        echo "NO";
+      }
     }
     // Evaluar los datos para cambiar los productos de una mesa
     function evaluar_datos($usuario_evaluar ,$password_evaluar){
@@ -34,9 +43,8 @@
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       //echo $sentencia;
-      while ($fila = mysqli_fetch_array($consulta))
-      {
-           $id= $fila['id'];
+      while ($fila = mysqli_fetch_array($consulta)){
+        $id= $fila['id'];
       }
       return $id;
     }
@@ -73,7 +81,7 @@
             echo $persona;
           break;
         case 11:
-           echo $nombre;
+          echo $nombre;
           break;
         case 12:
             echo $nombre;
@@ -88,7 +96,7 @@
             echo $nombre;
           break;
         case 16:
-            echo $nombre; 
+            echo $nombre;
           break;
           case 17:
             echo $persona;
@@ -146,18 +154,15 @@
             break;
           break;
         }
-
         if($fila['tipo']>0){
           echo '<div class="col-xs-4 col-sm-2 col-md-1 espacio_mesa">';
             echo '<a href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas_mesas('.$fila['id'].','.$fila['estado'].','.$fila['nombre'].')"><div class="estado_mesa'.$fila['estado'].'">';
-
               echo '<div class="row">
                 <div class="col-sm-12">
                   <div class="titulo_mesa">';
                     echo $estado;
                   echo '</div>
                 </div>
-
                 <div class="col-sm-12">
                   <div class="imagen_mesa">';
                     if($fila['id']<100){
@@ -168,7 +173,6 @@
                   echo '</div>
                 </div>
               </div>';
-
               echo '<div class="capacidad_mesa">';
                       if($fila['estado'] == 0){
                         $capacidad= $fila['capacidad'];
@@ -179,7 +183,6 @@
                         echo $capacidad;
                       }
               echo '</div>';
-
               /*echo '<div class="capacidad_mesa">';
                       //$total= $movimiento->cuenta_total($fila['id']);
                       if($fila['estado'] == 1){
@@ -194,19 +197,18 @@
                         echo $total_faltante;
                       }
               echo '</div>';*/
-
               echo '<div class="icono_mesa">';
               //echo '<img id="icono" src="images/mesa.png">';
                   //echo $motivo;
                   /*switch ($fila['interno']){
                     case '':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<img id="icono_r" src="."';
                       break;
                     case 'disponible':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<img id="icono_r" src="."';
                       break;
                     case 'sin estado':
-                      echo '<img id="icono_r" src="."';  
+                      echo '<img id="icono_r" src="."';
                       break;
                     case 'sucia':
                       echo '<img id="icono_c" src="images/basura.png">';
@@ -247,20 +249,18 @@
                     case 14:
                       //echo '<img src="images/limpieza.png"  class="espacio_mesa-imagen center-block img-responsive">';
                       break;
-                }   */      
+                }   */
               echo '</div>';
-
               echo '</div>';
               echo '</div>';
             echo '</a>';
           echo '</div>';
         }else{
-          echo '<div class="hidden-xs hidden-sm col-md-1 espacio_mesa">';   
+          echo '<div class="hidden-xs hidden-sm col-md-1 espacio_mesa">';
           echo '</div>';
         }
       }
     }
-
   }
 ?>
 

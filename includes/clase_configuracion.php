@@ -1,6 +1,8 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
+  include_once('clase_validar_usuario.php');
+  require_once('sanitize.php');
 
   class Configuracion extends ConexionMYSql{
     
@@ -48,11 +50,9 @@
     public $puntos;
     public $autocobro;
     public $checkin;
-
     public $domicilio;
 
-    function __construct()
-    {
+    function __construct(){
       $sentencia = "SELECT * FROM configuracion WHERE id = 1 LIMIT 1";
       $comentario="Obtener todos los valores de la configuracion";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -90,7 +90,31 @@
            $this->domicilio= $fila['domicilio'];
       }
     }
-
+function tipos_abonos($id=0){
+    $sentencia = "SELECT* from tipos_abonos WHERE estado= 1";
+    $comentario = "Consulta todos los planes de alimentos disponibles";
+    $consulta = $this->realizaConsulta($sentencia, $comentario);
+    while ($fila = mysqli_fetch_array($consulta)) {
+        if($id==$fila['id']) {
+            echo '<option selected value="'.$fila['nombre'].'">'.$fila['nombre'].'</option>';
+        } else {
+            echo '<option value="'.$fila['nombre'].'">'.$fila['nombre'].'</option>';
+        }
+    }
+}
+    function borrar_tipo_abono($id){
+      $sentencia = "UPDATE `tipos_abonos` SET
+      `estado` = '0'
+      WHERE `id` = '$id';";
+      $comentario="Poner tipo de abono como inactivo";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      // echo $sentencia;
+      if($consulta){
+        echo "NO";
+      }else{
+        echo "error en la consulta";
+      }
+    }
     function borrar_plan_alimentacion($id){
       $sentencia = "UPDATE `planes_alimentos` SET
       `estado_plan` = '0'
@@ -103,14 +127,16 @@
         echo "error en la consulta";
       }
     }
-    function editar_plan($plan_id,$nombre,$costo){
+    function editar_plan($plan_id,$nombre,$costo,$descripcion,$costo_menores){
       $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
       $sentencia = "UPDATE `planes_alimentos` SET
       `nombre_plan` = '$nombre',
-      `costo_plan` = '$costo'
-      WHERE `id` = '$plan_id';";
+      `costo_plan` = '$costo',
+      `costo_menores` = '$costo_menores',
+      `descripcion` = '$descripcion'
+      WHERE `id` = '$plan_id'";
       //echo $sentencia ;
-      $comentario="Editar un tipo habitacion dentro de la base de datos ";
+      $comentario="Editar un plan dentro de la base de datos ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       if($consulta){
         echo ("NO");
@@ -118,12 +144,10 @@
         echo ("error en la consulta");
       }
     }
-
     function mostrar_planes_select($id=0){
       $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
       $comentario = "Consulta todos los planes de alimentos disponibles";
       $consulta = $this->realizaConsulta($sentencia, $comentario);
-
       while ($fila = mysqli_fetch_array($consulta))
       {
         if($id==$fila['id']){
@@ -133,12 +157,10 @@
         }
       }
     }
-
-  function guardar_plan_alimentos($nombre,$costo){
-
+  function guardar_plan_alimentos($nombre,$costo,$descripcion){
       $nombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
-      $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`)
-      VALUES ('$nombre', '$costo', '1');";
+      $sentencia = "INSERT INTO `planes_alimentos` (`nombre_plan`, `costo_plan`, `estado_plan`, `descripcion`)
+      VALUES ('$nombre', '$costo', '1','$descripcion');";
       $comentario="Guardamos el plan de alimentos en la base de datos";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       if($consulta){
@@ -147,24 +169,101 @@
         echo ("error en la consulta");
       }
     }
+    function editar_tipo_abono($tipo_id,$nombre,$descripcion){
+      $nombre = sanitize($nombre);
+      $descripcion = sanitize($descripcion);
+      $sentencia = "UPDATE `tipos_abonos` SET
+      `nombre` = '$nombre',
+      `descripcion` = '$descripcion'
+      WHERE `id` = '$tipo_id';";
+      // echo $sentencia ;
+      $comentario="Editar un tipo de abono dentro de la base de datos ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      if($consulta){
+        echo ("NO");
+      }else{
+        echo ("error en la consulta");
+      }
+    }
 
+    public function guardar_tipo_abono($nombre,$descripcion){
+        $nombre = sanitize($nombre);
+        $descripcion = sanitize($descripcion);
+        $sentencia = "INSERT INTO `tipos_abonos` (`nombre`,`descripcion`,`estado`)
+        VALUES ('$nombre','$descripcion',1);";
+        $comentario="Guardamos el tipo de abono en la base de datos";
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
+        if($consulta) {
+            echo('NO');
+        } else {
+            echo("error en la consulta");
+        }
+    }
+    public function mostrar_tipos_abonos($id){
+      include_once('clase_usuario.php');
+      $usuario = NEW Usuario($id);
+      $editar = $usuario->tipo_editar;
+      $borrar = $usuario->tipo_borrar;
+      $sentencia = "SELECT* from tipos_abonos WHERE estado= 1";
+      $comentario = "Consulta todos los planes de alimentos disponibles";
+      $consulta = $this->realizaConsulta($sentencia, $comentario);
+      //se recibe la consulta y se convierte a arreglo
+      echo '
+      <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_tipos_abonos('.$id.')"> Agregar </button>
+  
+      <div class="table-responsive" id="tabla_tipo"  style="max-height:860px; overflow-x: scroll; ">
+      <table class="table  table-hover">
+        <thead>
+          <tr class="table-primary-encabezado text-center">
+          <th>Nombre</th>
+          <th>Descripción</th>';
+          if($editar==1){
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+          }
+          if($borrar==1){
+            echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
+          }
+          echo '</tr>
+        </thead>
+      <tbody>';
+          while ($fila = mysqli_fetch_array($consulta))
+          {
+              echo '<tr class="text-center">
+              <td>'.$fila['nombre'].'</td>
+              <td>'.$fila['descripcion'].'</td>
+              ';
+              if($editar==1){
+                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_tipo_abono(' . $fila['id'] . ', \'' . addslashes($fila['nombre']) . '\', \'' . addslashes($fila['descripcion']) . '\')"> Editar</button></td>';
+              }
+              if($borrar==1){
+                echo '<td><button class="btn btn-danger" onclick="borrar_tipo_abono(' . $fila['id'] . ', \'' . addslashes($fila['nombre']) . '\', \'' . addslashes($fila['descripcion']) . '\')">Borrar</button></td>';
+              }
+              echo '</tr>';
+          }
+          echo '
+        </tbody>
+      </table>
+      </div>';
+  }
   public function mostrar_planes_alimentos($id){
       include_once('clase_usuario.php');
       $usuario = NEW Usuario($id);
       $editar = $usuario->tipo_editar;
       $borrar = $usuario->tipo_borrar;
-
       $sentencia = "SELECT* from planes_alimentos WHERE estado_plan= 1";
       $comentario = "Consulta todos los planes de alimentos disponibles";
-
       $consulta = $this->realizaConsulta($sentencia, $comentario);
       //se recibe la consulta y se convierte a arreglo
       echo '
-      <button class="btn btn-success" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_planes_alimentos('.$id.')"> Agregar </button>
-      <br>
-      <br>
-      <div class="table-responsive" id="tabla_tipo"  style="max-height:860px; overflow-x: scroll; ">
-      <table class="table table-bordered table-hover">
+      <button class="btn btn-primary" href="#caja_herramientas"  data-toggle="modal" onclick="agregar_planes_alimentos('.$id.')" style="width: 120px;" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+        </svg>
+        Agregar
+      </button>
+      
+      <div class="table-responsive" id="tabla_tipo">
+      <table class="table  table-hover">
         <thead>
           <tr class="table-primary-encabezado text-center">
           <th>Nombre</th>
@@ -183,10 +282,11 @@
               echo '<tr class="text-center">
               <td>'.$fila['nombre_plan'].'</td>
               <td>'.$fila['costo_plan'].'</td>
-
               ';
+              $descripcion=$fila['descripcion'];
               if($editar==1){
-                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ',  \'' . $fila['nombre_plan'] . '\', '.$fila['costo_plan'].')"> Editar</button></td>';
+                //var_dump($fila);
+                echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_plan_alimentos('.$fila['id']. ',  \'' . $fila['nombre_plan'] . '\', '.$fila['costo_plan'].', \'' . $descripcion . '\', '.$fila['costo_menores'].')"> Editar</button></td>';
               }
               if($borrar==1){
                 echo '<td><button class="btn btn-danger" onclick="borrar_plan_alimentacion(' . $fila['id'] . ', \'' . addslashes($fila['nombre_plan']) . '\', \'' . addslashes($fila['costo_plan']) . '\')">Borrar</button></td>';
@@ -197,9 +297,7 @@
         </tbody>
       </table>
       </div>';
-
   }
-
     // Guardar la foto de inicio
     function guardar_foto($nombre){
       $sentencia = "UPDATE `configuracion` SET
@@ -229,6 +327,5 @@
       }
       return $nombre;
     }
-    
   }
 ?>

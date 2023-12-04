@@ -52,9 +52,9 @@
         }
       }
       // Guardar la tarifa hospedaje
-      function guardar_tarifa($nombre,$precio_hospedaje,$cantidad_hospedaje,$cantidad_maxima,$precio_adulto,$precio_junior,$precio_infantil,$tipo,$leyenda){
-        $sentencia = "INSERT INTO `tarifa_hospedaje` (`nombre`, `precio_hospedaje`, `cantidad_hospedaje`, `cantidad_maxima`, `precio_adulto`, `precio_junior`, `precio_infantil`, `leyenda`, `tipo`, `estado`)
-        VALUES ('$nombre', '$precio_hospedaje', '$cantidad_hospedaje', '$cantidad_maxima', '$precio_adulto', '$precio_junior', '$precio_infantil', '$leyenda', '$tipo', '1');";
+      function guardar_tarifa($nombre,$precio_hospedaje,$cantidad_hospedaje,$cantidad_maxima,$precio_adulto,$precio_infantil,$tipo,$leyenda){
+        $sentencia = "INSERT INTO `tarifa_hospedaje` (`nombre`, `precio_hospedaje`, `cantidad_hospedaje`, `cantidad_maxima`, `precio_adulto`, `precio_infantil`, `leyenda`, `tipo`, `estado`)
+        VALUES ('$nombre', '$precio_hospedaje', '$cantidad_hospedaje', '$cantidad_maxima', '$precio_adulto', '$precio_infantil', '$leyenda', '$tipo', '1');";
         $comentario="Guardamos la tarifa hospedaje en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         if($consulta){
@@ -78,12 +78,23 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '
-        <button class="btn btn-success" href="#caja_herramientas" data-toggle="modal" onclick="agregar_tarifas('.$id.')"> Agregar</button>
-        <br>
-        <br>
+        <div class="inputs_form_container justify-content-start">
+          <div class="form-floating input_container_date">
+            <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="agregar_tarifas('.$id.')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0"/>
+                <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
+                <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z"/>
+                <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
+              </svg>
+              Agregar
+            </button>
+          </div>
+        </div>
 
-        <div class="table-responsive" id="tabla_tipo" style="max-height:560px; overflow-y: scroll;">
-        <table class="table table-bordered table-hover" >
+
+        <div class="table-responsive" id="tabla_tipo" >
+        <table class="table table-hover" >
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
@@ -130,14 +141,13 @@
         </div>';
       }
       // Editar una tarifa hospedaje
-      function editar_tarifa($id,$nombre,$precio_hospedaje,$cantidad_hospedaje,$cantidad_maxima,$precio_adulto,$precio_junior,$precio_infantil,$tipo,$leyenda){
+      function editar_tarifa($id,$nombre,$precio_hospedaje,$cantidad_hospedaje,$cantidad_maxima,$precio_adulto,$precio_infantil,$tipo,$leyenda){
         $sentencia = "UPDATE `tarifa_hospedaje` SET
             `nombre` = '$nombre',
             `precio_hospedaje` = '$precio_hospedaje',
             `cantidad_hospedaje` = '$cantidad_hospedaje',
             `cantidad_maxima` = '$cantidad_maxima',
             `precio_adulto` = '$precio_adulto',
-            `precio_junior` = '$precio_junior',
             `precio_infantil` = '$precio_infantil',
             `leyenda` = '$leyenda',
             `tipo` = '$tipo'
@@ -202,22 +212,22 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '  <option data-tipo="'.$fila['tipo'].'" value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
+          echo '<option data-tipo="'.$fila['tipo'].'" value="'.$fila['id'].'">'.$fila['nombre'].'</option>';
         }
         return $consulta;
       }
       // Muestra los nombres de las tarifas hospedaje a editar
       function mostrar_tarifas_editar($id){
-        $sentencia = "SELECT id,nombre,precio_hospedaje FROM tarifa_hospedaje WHERE estado = 1 ORDER BY nombre";
+        $sentencia = "SELECT id,nombre,precio_hospedaje,tipo FROM tarifa_hospedaje WHERE estado = 1 ORDER BY nombre";
         $comentario="Mostrar los nombres de las tarifas hospedaje a editar";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
           if($id==$fila['id']){
-            echo '  <option value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
+            echo '  <option data-tipo="'.$fila['tipo'].'" value="'.$fila['id'].'" selected>'.$fila['nombre'].'</option>';
           }else{
-            echo '  <option value="'.$fila['id'].'">'.$fila['nombre'].'</option>';  
+            echo '  <option data-tipo="'.$fila['tipo'].'" value="'.$fila['id'].'">'.$fila['nombre'].'</option>';  
           }
         }
       }

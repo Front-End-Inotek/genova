@@ -14,11 +14,8 @@
   $labels= NEW Labels(0);
   $ticket= NEW Ticket(0);
   $logs = NEW Log(0);
-
   $mov= $hab->mov;
-
   $id_maestra=0;
-
   if(isset($_POST['mov'])){
     if($_POST['mov']!=0){
       $mov = $_POST['mov'];
@@ -29,8 +26,6 @@
       $id_maestra = $_POST['id_maestra'];
     }
   }
-
-
   $nombre= $hab->nombre;
   $faltante= 0;//$_POST['faltante']
   if($_POST['forma_pago'] == 2){
@@ -43,8 +38,6 @@
   }else{
     $efectivo_pago= 0;
   }
-  $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono']);
-  
   // Guardamos el ticket del abono correspondiente y el log
   $tipo_cargo= 3; // Corresponde al cargo de hospedaje sin comida
   $resta= 0;
@@ -59,8 +52,8 @@
   }else{
     $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],0,0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
   }
+  $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono'],$ticket_id);
   $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['abono'],($_POST['abono']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
-  
   // Imprimir ticket
   if($config->ticket_restaurante == 0){
     $ticket->cambiar_estado($ticket_id);

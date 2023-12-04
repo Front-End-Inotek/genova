@@ -15,7 +15,7 @@
           <h3>CHE-CKIN</h3>
           </div>
           <div class="col-sm-12">
-          Selecciona la habitación disponible para asignar la reservación '.$_GET['id'].':
+          Selecciona la habitación disponible para asignar la reservaciónn '.$_GET['id'].':
           </div>
         </div>
         <button type="button" class="close" data-dismiss="modal">&times;</button>

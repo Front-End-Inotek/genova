@@ -1,21 +1,21 @@
 /*tabla operativa*/
 /* header y columnas */
+@import '../colors.css';
 
-
-.tableRack {
+/* .tableRack {
   table-layout: auto;
+  max-height: calc(100vh - 116px) !important;
 }
-
+ */
 #tablaTotal {
-  border: 1px solid #6a67ef !important;
+  /* border: 1px solid #6a67ef !important; */
   /*6a67ef*/
 }
 
-#cal-largo {
-  height: 760px;
-  
+/* #cal-largo {
+  height: 850px;
 }
-
+ */
 .my-container {
   display: none;
 }
@@ -27,6 +27,47 @@
   text-overflow: ellipsis;
   text-align: center;
 }
+.th-dividido {
+  display: flex;
+  flex-direction: row;
+}
+
+.th-dividido td {
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.half-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.half-content > div {
+  height: 50%;
+}
+
+.col1 {
+  width: 50%;
+}
+
+.col2 {
+  width: 50%;
+}
+
+.col-span-2 {
+  width: 75%;
+}
+
+.cal-dia {
+  min-width: 100px; /* Ancho del TH */
+  height: 40px;
+}
+
+.td-modificado {
+  width: 100px; /* Ancho deseado del TD */
+  margin-right: calc((200px - 100px) / 2); /* Margen derecho para centrar el TD */
+}
 
 .mes {
   background-color: #30349f;
@@ -36,8 +77,7 @@
 }
 
 .headTable {
-  background: linear-gradient(180deg, #2d32ae 0%, #4e4ef0 50%, #171a6e 100%);
-  color: #fff;
+  display: contents;
   padding-bottom: 25px;
   padding-top: 50px;
   margin-right: -15px;
@@ -58,13 +98,13 @@
 .tableRack th:first-child {
   position: sticky !important;
   left: 0;
-  z-index: 1030;
+  z-index: 100;
 }
 
 .tableRack td:first-child {
   position: sticky !important;
   left: 0;
-  z-index: 1010;
+  z-index: 100;
 }
 
 .tableRack thead>th {
@@ -72,52 +112,40 @@
   top: 0;
   z-index: 1040;
   text-align: center;
-
 }
 
-.tableRack td {
-  font-weight: normal;
-  font-size: 1em;
--webkit-box-shadow: 0 2px 2px -2px #0E1119;
-   -moz-box-shadow: 0 2px 2px -2px #0E1119;
-        box-shadow: 0 2px 2px -2px #0E1119;
-        background: #ffffff50 !important;
-}
 
-.tableRack th {
-  background: linear-gradient(180deg, #b3b3fe 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%);
-}
 
 .tableRack th:hover {
-  background-color: #fff;
-  color: #30349f;
+  background-color: var(--subtitulos);
+  color: var(--fondo);
   transition-delay: 0s;
-    transition-duration: 0.4s;
-    transition-property: all;
+  transition-duration: 0.2s;
+  transition-property: all;
   transition-timing-function: line;
-  }
-
-
-.tableRack td:first-child {
-  color: #30349f;
-  background: linear-gradient(85deg, #97a2f9ee 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%) !important;
 }
 
+
+.tableRack td:first-child:hover {
+  color: white;
+  /* background: linear-gradient(85deg, #97a2f9ee 0%, #ecf2ff 50%, rgb(182, 194, 253) 100%) !important; */
+  background-color: var(--subtitulos) !important;
+}
 .tableRack tr:hover {
- background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);;
- -webkit-box-shadow: 0 6px 6px -6px #0E1119;
-    -moz-box-shadow: 0 6px 6px -6px #0E1119;
-         box-shadow: 0 6px 6px -6px #0E1119;
- }
- 
+  /* background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%); */
+  /* background: red !important; */
+  /* -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+  -moz-box-shadow: 0 6px 6px -6px #0E1119;
+  box-shadow: 0 6px 6px -6px #0E1119; */
+}
 .tableRack td:hover {
-  background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%);
-color: #30349f;
-box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
-transition-delay: 0s;
+  /* background: linear-gradient(180deg, #c3cafdee 0%, #ecf2ff 40%, rgb(179, 190, 252) 100%); */
+  color: #30349f;
+  box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
+  transition-delay: 0s;
   transition-duration: 0.4s;
   transition-property: all;
-transition-timing-function: line;
+  transition-timing-function: line;
 }
 
 .tableRack th:hover + tr td {
@@ -125,7 +153,7 @@ transition-timing-function: line;
   color: #30349f;
   box-shadow: #adadfe9e -1px 1px, #adadfe9e -2px 2px, #adadfe9e -3px 3px, #adadfe9e -4px 4px, #adadfe9e -5px 5px, #adadfe9e -6px 6px;
   transition-delay: 0s;
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
   transition-property: all;
   transition-timing-function: line;
 }
@@ -144,10 +172,8 @@ transition-timing-function: line;
   display: inline-block;
   vertical-align: top;
   width: 50%;
+  background-color: transparent;
 }
-
-
-
 
 /*---------calendario------*/
 .cal-container {
@@ -155,10 +181,6 @@ transition-timing-function: line;
   max-height: 450px;
   overflow: auto;
   margin: auto;
-}
-
-.cal-dia {
-  min-width: 200px;
 }
 
 .cal-table {
@@ -172,15 +194,13 @@ transition-timing-function: line;
   top: 0px;
   background-color: #ecf2ff;
   position: sticky;
-  z-index: 1010;
-
+  z-index: 100;
 }
 
 .cal-viewmonth {
   font-size: 16px;
   width: 150px;
   height: 50px;
-
 }
 
 .cal-toprow {
@@ -199,7 +219,7 @@ transition-timing-function: line;
 }
 
 .cal-userinfo {
-  height: 80px;
+  /* height: 80px; */
   box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
   padding-top: 50px;
 }
@@ -209,10 +229,15 @@ transition-timing-function: line;
   text-align: center;
   color: rgb(57, 57, 57);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 0.03em;
   background: #ecf2ff;
   padding: 0.3em;
+}
+@media (max-width: 415px){
+  .cal-tbody .cal-userinfo{
+    font-size: 11px;
+  }
 }
 
 .cal-usersheader {
@@ -225,13 +250,11 @@ transition-timing-function: line;
   padding: 0.3em;
 }
 
-
 .cal-userbadge {
   border-radius: 0;
   font-weight: 600;
   font-size: 11px;
 }
-
 
 /* ------------task de estado de habitacion -------*/
 
@@ -240,19 +263,19 @@ transition-timing-function: line;
   font-size: 14px;
   position: relative;
   min-width: 9em;
-  min-height: 4em;
+  min-height: 3.5em;
   max-height: 4em;
   text-align: left !important;
 }
-
-
+/* .expirar {
+  box-shadow: 1px;
+} */
 
 .task--bloqueado {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #333;
   border-left: 7px solid #0b0b0b;
   color: #fff;
-
 }
 
 .task--bloqueado:hover {
@@ -274,24 +297,21 @@ transition-timing-function: line;
   box-shadow: 0 10px 14px #05d1ca8b;
 }
 
-
 .task--mantenimiento {
-  border-left: 7px solid #fdb44d;
-  background: #ffdaa2;
-  background: linear-gradient(180deg, #ffbe5b 0%, #f9d7a5 40%, #ffb546 100%);
-  min-width: 200px;
-  color: #fa5f05;
+  border-left: 7px solid var(--colorTextNaranja);
+  background: var(--fondoNaranja);
+  /* background: linear-gradient(180deg, #ffbe5b 0%, #f9d7a5 40%, #ffb546 100%); */
+  /* min-width: 200px; */
+  color: var(----colorTextNaranja);
 }
 
 .task--mantenimiento:hover {
   background-color: #fdb44d !important;
   color: #ff7700 !important;
-  border-left: 7px solid #ffdaa2 !important;
+  /* border-left: 7px solid #ffdaa2 !important; */
   box-shadow: 0 10px 14px #ff7700c9;
   box-shadow: 0 10px 14px #fdb44d84;
 }
-
-
 
 .task--ocupada-sucia {
   border-left: 7px solid #bd0202;
@@ -299,62 +319,61 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 7;
   background: #BB6464;
-  background: linear-gradient(180deg, #ed6a6a 0%, #fb9595 40%, #bc3f3f 100%);
+  /* background: linear-gradient(180deg, #ed6a6a 0%, #fb9595 40%, #bc3f3f 100%); */
   align-self: end;
-  color: #f8f3f3;
-
+  color: var(--fondoRojo);
 }
 
 .task--ocupada-sucia:hover {
-  background-color: #bd0202e8 !important;
+  /* background-color: #bd0202e8 !important; */
   color: #fff !important;
   border-left: 7px solid #bb6464 !important;
 }
 
 .task--ocupadoH {
   background-color: #b12e3b;
-  background: linear-gradient(180deg, #a80000fc 0%, rgb(253, 87, 87) 40%, #a80000fc 100%);
+  /* background: linear-gradient(180deg, #a80000fc 0%, rgb(253, 87, 87) 40%, #a80000fc 100%); */
   color: #fff;
-  border-left: 7px solid #6a0319;
+  border-left: 7px solid var(--colorTextRojo);
+  background-color: var(--fondoRojo);
+  color: var(--colorTextRojo);
+  /* box-shadow: var(--sombra); */
 }
 
 .task--ocupadoH:hover {
-  background-color: #9f0404fb !important;
+  /* background-color: #9f0404fb !important; */
   color: #fff;
-  box-shadow: 0 10px 14px #780202af;
+  /* box-shadow: 0 10px 14px #780202af; */
 }
 
-
 .task--vacia-sucia {
-  border-left: 7px solid #03ae11;
-  background: #bff1bf81;
-  background: linear-gradient(180deg, #c6fe8f 0%, #f0fee1 40%, #ccfe98 100%);
+  border-left: 7px solid var(--colorTextVerde);
+  background: var(--fondoVerde);
+  /* background: linear-gradient(180deg, #b9ed84 0%, #d6f6b5 40%, #98cb62 100%); */
   align-self: end;
-  color: #057410e8;
-
+  color: var(--colorTextVerde);
 }
 
 .task--vacia-sucia:hover {
   background-color: #81e389 !important;
-  
   color: #fff !important;
   border-left: 7px solid #bff1bfa1 !important;
   box-shadow: 0 10px 14px #35da435d;
 }
 
 .task--disponible-limpia {
-  border-left: 7px solid #9b9a9a;
-  background: #e5e4e4;
-  background: linear-gradient(180deg, #e9e9e9ee 0%, #ffffff 40%, rgb(170, 170, 170) 100%);
-  color: #030303;
-
+  border-left: 7px solid #006912;
+  background: #bfffce ;
+  /* background: linear-gradient(180deg, #e9e9e9ee 0%, #ffffff 40%, rgb(170, 170, 170) 100%); */
+  box-shadow: var(--sombra);
+  color: var(--titulos);
 }
 
 .task--disponible-limpia:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
   border-left: 7px solid #9b9a9a !important;
-  box-shadow: 0 10px 14px #9b9a9a;
+  /* box-shadow: 0 10px 14px #9b9a9a; */
 }
 
 .task--disponible-limpia a {
@@ -367,18 +386,15 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 10;*/
   background: #6b0fe3af;
-  background: linear-gradient(180deg, #be8cff 0%, #c199f6af 40%, #7439c3 100%);
-  color: #000;
-
-
+  /* background: linear-gradient(180deg, #be8cff 0%, #c199f6af 40%, #7439c3 100%); */
+  color: #ffffff;
 }
 
 .task--reserva-pagada:hover {
   background-color: #6b0fe3af !important;
-  
   color: #fff !important;
   border-left: 7px solid #4d03ae !important;
-  box-shadow: 0 10px 14px #6b0fe396;
+  /* box-shadow: 0 10px 14px #6b0fe396; */
 }
 
 .task--reserva-pendiente-pago {
@@ -387,53 +403,89 @@ transition-timing-function: line;
   grid-column: 2 / span 2;
   grid-row: 11;
   background: #3b0286;
-  background: linear-gradient(180deg, #4f0ba8 0%, #8c4ddf 40%, #1e0243 100%);
+  /* background: linear-gradient(180deg, #4f0ba8 0%, #8c4ddf 40%, #1e0243 100%); */
   color: #FFF;
-
-
 }
 
 .task--reserva-pendiente-pago:hover {
   background-color: #3b0286 !important;
   color: #fff !important;
-  border-left: 7px solid #bc88ff !important;
-  box-shadow: 0 10px 14px #3b0286cb;
+  border-left: 7px solid #3b0286 !important;
+  /* box-shadow: 0 10px 14px #3b0286cb; */
 }
-
-
+#yo:hover ~  #hh {color: yellow; }
 
 .task--limpieza-vacia {
   border-left: 7px solid #4786ff;
   background: rgb(205, 222, 252);
-  background: linear-gradient(180deg, #b4ceff 0%, rgb(206, 223, 255) 40%, #80acff 100%);
+  /* background: linear-gradient(180deg, #b4ceff 0%, rgb(206, 223, 255) 40%, #80acff 100%); */
   color: #0a5eff;
-
 }
 
 .task--limpieza-vacia:hover {
   box-shadow: 0 10px 14px #4787ff8d;
-  border-left: 7px solid #1260f0;
+  /* border-left: 7px solid #1260f0; */
+  border-left: 7px solid var(--colorTextAzul);
 }
 
 .task--limpieza-vacia a {
   color: #0a5eff !important;
 }
 
-
 .task--limpieza-ocupada {
   border-left: 7px solid #052d76;
-  background: #6398fb;
-  background: linear-gradient(180deg, #1c53ba 0%, #6398fb 40%, #0b3c96 100%);
+  background: var(--fondoAzul);
+  /* background: linear-gradient(180deg, #1c53ba 0%, #6398fb 40%, #0b3c96 100%); */
   align-self: end;
-  color: #fff;
-
+  /* color: #fff; */
+  color: var(--colorTextAzul);
+  box-shadow: var(--sombra);
 }
 
 .task--limpieza-ocupada:hover {
-  background-color: #052d76 !important;
+  /* background-color: #052d76 !important; */
   color: #fff !important;
   border-left: 7px solid #6398fb !important;
-  box-shadow: 0 10px 14px #6398fbdd;
+  /* box-shadow: 0 10px 14px #6398fbdd; */
+}
+.editarHab{
+  border-left: 7px solid #FD7E14;
+  background-color: #ffc698 !important;
+}
+.editarHab:hover {
+  background-color: #FD7E14 !important;
+}
+.AsignarReserva{
+  border-left: 7px solid #6610F2 !important;
+  color: #fff !important;
+  background-color: #6e42c195 !important;
+}
+.AsignarReserva:hover{
+  background-color: #6610F2 !important;
+}
+
+.AsignarReservaBtn{
+  border-left: 7px solid #28A745 !important;
+  color: #000 !important;
+  background-color: #28a74671 !important;
+}
+
+.CambiarHabitacion{
+  border-left: 7px solid #9b9a9a !important;
+  background-color: #e5e4e4 !important;
+  color: black !important;
+}
+.CambiarHabitacion:hover{
+  background-color: #9b9a9a !important;
+}
+.btnCambiarHab{
+  border-left: 7px solid #17A2B8 !important;
+  color: #000 !important;
+  background-color: #a5eaf4 !important;
+}
+.btnCambiarHab:hover{
+  background-color: #17A2B8 !important;
+  color: black !important;
 }
 
 .task--transparente{
@@ -450,7 +502,6 @@ transition-timing-function: line;
   border-left: 7px solid transparent !important;
 }
 
-
 .task__detail {
   position: absolute;
   left: 0;
@@ -465,11 +516,10 @@ transition-timing-function: line;
   z-index: 2;
 }
 
-
 /*esta e sla animacion para mostrar el nombre del huesped*/
 .task:after {
   position: absolute;
-  content: "Nombre Huesped";
+  content: "Hab. disponible";
   text-align: left;
   padding-left: 5px;
   color: #000;
@@ -481,14 +531,24 @@ transition-timing-function: line;
   z-index: 1;
   background:#fff;
   box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
-    7px 7px 20px 0px rgba(0, 0, 0, .1),
-    4px 4px 5px 0px rgba(0, 0, 0, .1);
+  7px 7px 20px 0px rgba(0, 0, 0, .1),
+  4px 4px 5px 0px rgba(0, 0, 0, .1);
+  transition: all 0.5s ease;
+  border-radius: 3px;
+}
+
+.elhover {
+  background:#fff;
+  box-shadow: inset 1px 2px 2px 0px rgba(255, 255, 255, .5),
+  7px 7px 20px 0px rgba(0, 0, 0, .1),
+  4px 4px 5px 0px rgba(0, 0, 0, .1);
   transition: all 0.5s ease;
   border-radius: 3px;
 }
 
 .task:hover {
-  color: #FFf;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .task:hover:after {
@@ -496,7 +556,6 @@ transition-timing-function: line;
   right: 0;
   width: 100%;
 }
-
 
 .my-input:checked+.task {
   background-color: #fff;
@@ -521,8 +580,6 @@ transition-timing-function: line;
   opacity: 1;
 }
 
-
-
 /* -----------agregar estados 2 estados en el mismo dia---------*/
 
 /*para agregar un estado donde el estado anterior y el siguiente inician el mismo dia */
@@ -532,11 +589,311 @@ transition-timing-function: line;
 
 /*se agrega la clase ajuste al estado que se necesita ajustar*/
 .ajuste {
-  width: calc(50% - 1px);
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
   /*el ajuste es 75% por cada dia que la tarea estara*/
 }
 
-.ajuste-2dias {
+.ajuste1 {
+  display: inline-block;
+  vertical-align: top;
+  width: 10%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+.ajuste2 {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+
+.ajuste3 {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+
+.ajuste4 {
+  display: inline-block;
+  vertical-align: top;
+  width: 40%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+.ajuste5 {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+.ajuste6 {
+  display: inline-block;
+  vertical-align: top;
+  width: 60%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+.ajuste7 {
+  display: inline-block;
+  vertical-align: top;
+  width: 70%;
+  /*el ajuste es 75% por cada dia que la tarea estara*/
+}
+
+.ajuste8{
+  display: inline-block;
+  vertical-align: top;
+  width: 80%;
+}
+
+.ajusteDias {
+  display: inline-block;
   width: calc(100% - 1px);
   /* un ejemplo donde estara 2 dias para 3 dias seria agregar otro 75% y asi sucesivamente */
+}
+
+.car{
+  position: absolute;
+  left: 8px;
+  bottom: 4px;
+  z-index: 1000;
+}
+.clean{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #28A745;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+.clean2{
+  color: white;
+  background-color: #28A745;
+  border-radius: 50%;
+  padding: 3px;
+}
+.dirt{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #DC3545;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+.dirt2{
+  color: white;
+  background-color: #DC3545;
+  border-radius: 50%;
+  padding: 3px;
+}
+.cleaning{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #0f6fd0;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+.cleaning::before{
+  animation: myAnim 3s ease-in-out 0s  normal  infinite;
+}
+
+
+.cleaning2{
+  color: white;
+  background-color: #0f6fd0;
+  border-radius: 50%;
+  padding: 3px;
+}
+.cleaning2::before{
+  animation: myAnim 3s ease-in-out 0s  normal  infinite;
+}
+@keyframes myAnim {
+	0%,
+	100% {
+		transform: rotate(0deg);
+		transform-origin: 50% 0;
+	}
+	10% {
+		transform: rotate(2deg);
+	}
+	20%,
+	40%,
+	60% {
+		transform: rotate(-4deg);
+	}
+	30%,
+	50%,
+	70% {
+		transform: rotate(4deg);
+	}
+	80% {
+		transform: rotate(-2deg);
+	}
+	90% {
+		transform: rotate(2deg);
+	}
+}
+.btn-info-custom{
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 1000000000000000000000;
+  cursor: pointer;
+  font-size: 2.0rem;
+  transition: all 0.2s ease-in-out;
+}
+.btn-info-custom:hover{
+  scale: 1.1;
+}
+.matenimientoCog{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #fa5f05 !important;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  animation: rotate infinite 20s forwards linear;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+.IconoUsoCasa {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #336c80 !important;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+.blockIcon{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  background-color: #ff0a0a !important;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+.IRP{
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  font-size: 16px;
+}
+
+.InfoHab{
+  /* color: rgb(0, 0, 0); */
+  margin: 0;
+  /* background-color: rgb(255, 255, 255); */
+  /* width: fit-content; */
+  margin: auto;
+}
+/* .InfoHab:hover{
+  color: black !important;
+  background-color: white !important;
+  filter: invert(1) !important;
+  width: fit-content;
+  margin: auto;
+  cursor: help;
+} */
+
+.InfoDisponible{
+  background-color: #a2fcb7;
+  color: black;
+}
+.InfoOcupada{
+  background-color: #f8d7da;
+  color: #000;
+}
+.InfoLimpiezaVacia{
+  background-color: #cbddff;
+  color: black;
+}
+.InfoOcupadaLimpieza{
+  background-color: #e6effc;
+  color: black;
+}
+.InfoOcupadaSucia{
+  background-color: #B02A37;
+  color: white;
+}
+.InfoUsoCasa{
+  background-color: #05d1ca42;
+  color: black;
+}
+.InfoBloqueado{
+  background-color: #0b0b0b;
+  color: white;
+}
+.InfoMantenimiento{
+  background-color: #fef0e8;
+  color: black;
+}
+.InfoReservaPagada{
+  background-color: #6b0fe3af;
+  color: white;
+}
+.InfoReservaPendiente{
+  background-color: #3b0286;
+  color: white;
+}
+.sencilla{
+  background-color: pink;
+  color: black;
+}
+.king{
+  background-color: yellow;
+  color: black;
+}
+.doble{
+  background-color: blue;
+  color: white;
 }

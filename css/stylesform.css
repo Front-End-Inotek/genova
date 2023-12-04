@@ -1,0 +1,17 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+
+}
+
+thead th {
+    /* position: sticky;  */  /* queremos que las celdas estén fijas    */
+    top: 0;             /* en lo más alto de la tabla/página.     */
+    background: white;  /* esto debería ser el fondo de la celda  */
+    z-index: 10;         /* debe quedar encima de las otras celdas */
+}
+
+

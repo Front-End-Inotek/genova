@@ -16,16 +16,16 @@
   echo '
   <div class="modal-content alinear_centro">
     <h5>Caja</h5>
-    <div class="col-sm-12 fondo_rest" style="background-color:white;"><br>  
+    <div class="col-sm-12 fondo_rest" ><br>  
 
       <div class="row">
-        <div class="col-sm-6" style="background-color:white;">
+        <div class="col-sm-6">
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Pedido</h5>
             </div>
 
-            <div class="card-body alinear_izq" style="background-color:white;">';
+            <div class="card-body alinear_izq">';
               $total= $concepto->mostrar_comanda($_GET['mesa_id'],$ticket_id);
               if($total > 0){
                 echo '<div class="row">
@@ -35,7 +35,7 @@
                     <h6 for="sel1">Total: </h6>
                   </div>
                   <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">
-                    <h6 for="sel1"><input class="form-control alinear_centro" type="number" id="total"  placeholder="'.number_format($precio, 2).'" disabled></h6>
+                    <h6 for="sel1"><input class="form-control " type="number" id="total"  placeholder="'.number_format($precio, 2).'" disabled></h6>
                   </div>
                   <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">';
                     echo '<button type="button" id="boton_cobrar" class="btn btn-danger btn-block" onclick="aplicar_rest_cobro('.$precio.','.$_GET['mesa_id'].','.$_GET['estado'].','.$mesa->mov.',1)"> Cobrar</button>';                                                                                                                                               //('.$total.','.$hab_id.','.$estado.','.$mov.')">Pedir</button></></div>';    
@@ -51,13 +51,13 @@
           </div>
         </div>
         
-        <div class="col-sm-6" style="background-color:white;">
+        <div class="col-sm-6" >
           <div class="card">
             <div class="card-header alinear_centro">
               <h5>Pagos</h5>
             </div>
 
-            <div class="card-body alinear_centro" style="background-color:white;">';
+            <div class="card-body alinear_centro">';
              
               echo '<div class="col-sm-12">
               

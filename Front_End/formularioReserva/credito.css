@@ -17,12 +17,6 @@ display: none;
     text-align: center;
     margin: 20px 0 5px 0;
 }
-#choosen-paymenttype {
-    text-align: center;
-    color: #fff;
-    margin: 0;
-    font-size: 12px;
-}
 ul.payment-types {
     list-style-type: none;
     margin: 0;
@@ -106,6 +100,7 @@ ul.payment-types li.paymenttype {
     transition: transform 0.5s ease-in;
     z-index: 5;
 }
+
 .card .shine {
     position: absolute;
     top: 0;
@@ -131,6 +126,7 @@ ul.payment-types li.paymenttype {
     border-radius: 16px;
 }
 .card .flipper {
+    left:25%;
     transition: 0.75s;
     transform-style: preserve-3d;
     position: relative;

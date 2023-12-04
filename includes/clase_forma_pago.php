@@ -1,14 +1,11 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
   include_once('consulta.php');
-
   class Forma_pago extends ConexionMYSql{
-    
     public $id;
     public $descripcion;
     public $estado;
     public $garantia;
-
     // Constructor
     function __construct($id)
     {
@@ -17,25 +14,25 @@
         $this->descripcion= 0;
         $this->estado= 0;
         $this->garantia=0;
-      }else{  
+      }else{
         $sentencia = "SELECT * FROM forma_pago WHERE id = $id LIMIT 1";
         $comentario="Obtener todos los valores de forma de pago";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         while ($fila = mysqli_fetch_array($consulta))
         {
-            $this->id= $fila['id'];  
-            $this->descripcion= $fila['descripcion']; 
-            $this->estado= $fila['estado'];      
-            $this->garantia= $fila['garantia'];         
+            $this->id= $fila['id'];
+            $this->descripcion= $fila['descripcion'];
+            $this->estado= $fila['estado'];
+            $this->garantia= $fila['garantia'];
         }
       }
     }
     // Guardar una forma de pago
     function guardar_forma_pago($descripcion,$garantia){
       $sentencia = "INSERT INTO `forma_pago` (`descripcion`, `estado`, `garantia`)
-      VALUES ('$descripcion', '1','$garantia');";
+      VALUES ('$descripcion', '1',$garantia);";
       $comentario="Guardamos la forma de pago en la base de datos";
-      $consulta= $this->realizaConsulta($sentencia,$comentario);                 
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
     }
     // Obtengo el total de formas de pago
     function total_elementos(){
@@ -50,11 +47,28 @@
       }
       return $cantidad;
     }
-
-    function mostrar_select(){
-
+    function formas_pagos(){
+      $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
+      $comentario="Mostrar los tipos formas de pago";
+      $etiquetas_forma_pago = [];
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        array_push($etiquetas_forma_pago,$fila);
+      }
+      return $etiquetas_forma_pago;
     }
-
+    function etiquetas_forma_pago(){
+      $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
+      $comentario="Mostrar los tipos formas de pago";
+      $etiquetas_forma_pago = [];
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        array_push($etiquetas_forma_pago,$fila['descripcion']);
+      }
+      return $etiquetas_forma_pago;
+    }
     // Mostramos las formas de pago
     function mostrar($id){
       include_once('clase_usuario.php');
@@ -62,19 +76,17 @@
       $agregar = $usuario->categoria_editar;
       $editar = $usuario->forma_pago_editar;
       $borrar = $usuario->forma_pago_borrar;
-
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY descripcion";
       $comentario="Mostrar los tipos formas de pago";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       echo '<div class="table-responsive" id="tabla_forma">
-      <table class="table table-bordered table-hover">
+      <table class="table  table-hover">
         <thead>
           <tr class="table-primary-encabezado text-center">
           <th>Descripción</th>
           <th>Garantía</th>
           ';
-          
           if($editar==1){
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
           }
@@ -85,14 +97,18 @@
         </thead>
       <tbody>';
           echo '<tr <tr class="text-center">
-            <td><input type="text" class ="color_black" id="descripcion" placeholder="Ingresa la descripción" pattern="[a-z]{1,15}" maxlength="50"></td>
-            <td><input type="checkbox" class ="color_black" id="garantia"></td>'
+            <td>
+              <div class="form-floating input_container">
+                <input type="text" class ="form-control custom_input" id="descripcion" placeholder="Ingresa la descripción" pattern="[a-z]{1,15}" maxlength="50">
+                <label for="descripcion">Ingresa descrpcion</label>
+              </div>
+            </td>
+            <td><input type="checkbox" class ="form-check-input" id="garantia"></td>'
             ;
-            
             if($agregar==1){
-              echo '<td><button class="btn btn-success" onclick="guardar_forma_pago()"> Guardar</button></td>';
+              echo '<td><button class="btn btn-primary" onclick="guardar_forma_pago()"> Guardar</button></td>';
             }
-            echo '<td></td>       
+            echo '<td></td>
           </tr>';
           while ($fila = mysqli_fetch_array($consulta))
           {
@@ -101,9 +117,8 @@
               if($fila['garantia']){
                 echo '<td><i style="font-size:2em;" class="bx bx-check-circle"></i></td>';
               }else{
-                echo '<td><i style="font-size:2em;" class="bx bx-x-circle"></i></td>'; 
+                echo '<td><i style="font-size:2em;" class="bx bx-x-circle"></i></td>';
               }
-
               if($editar==1){
                 echo '<td><button class="btn btn-warning" href="#caja_herramientas" data-toggle="modal" onclick="editar_forma_pago('.$fila['id'].')"> Editar</button></td>';
               }
@@ -137,6 +152,9 @@
     }
     // Muestra las formas de pago
     function mostrar_forma_pago($forma=0){
+      if($forma==="Credito" || $forma==="Debito"){
+        $forma = 2;
+      }
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
       $comentario="Mostrar las formas de pago";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -148,7 +166,6 @@
         }else{
           echo '<option data-garantia="'.$fila['garantia'].'" value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';
         }
-        
       }
       return $consulta;
     }
@@ -163,7 +180,7 @@
         if($id==$fila['id']){
           echo '<option value="'.$fila['id'].'" selected>'.$fila['descripcion'].'</option>';
         }else{
-          echo '<option value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';  
+          echo '<option value="'.$fila['id'].'">'.$fila['descripcion'].'</option>';
         }
       }
     }
@@ -192,6 +209,5 @@
       }
       return $descripcion;
     }
-    
   }
 ?>

@@ -4,9 +4,7 @@
   include_once("clase_usuario.php");
   include_once('clase_log.php');
   $logs = NEW Log(0);
-
   require('../fpdf/fpdf.php');
-  
   class PDF extends FPDF
   {
       // Cabecera de página
@@ -15,7 +13,6 @@
           $conf = NEW Configuracion(0);
           $usuario= NEW Usuario(0);
           $logs = NEW Log(0);
-
           $this->SetFont('Arial','B',8);
           $this->SetTextColor(0,0,0);
           $fecha_actual = time();
@@ -28,69 +25,76 @@
           $actividad= urldecode($_GET['buscar']);
           $nombre= $conf->obtener_nombre();
           $realizo_usuario= $usuario->obtengo_nombre_completo($_GET['usuario_id']);
-
           // Reporte de que fecha a que fecha
           $fecha_ini = date("Y-m-d",$_GET['fecha_ini']);
           $fecha_fin = date("Y-m-d",$_GET['fecha_fin']);
           $fecha_inicial_dia = substr($fecha_ini, 8, 2);
-          $fecha_inicial_mes = substr($fecha_ini, 5, 2); 
-          $fecha_inicial_anio = substr($fecha_ini, 0, 4);  
+          $fecha_inicial_mes = substr($fecha_ini, 5, 2);
+          $fecha_inicial_anio = substr($fecha_ini, 0, 4);
           $fecha_final_dia = substr($fecha_fin, 8, 2);
-          $fecha_final_mes = substr($fecha_fin, 5, 2); 
+          $fecha_final_mes = substr($fecha_fin, 5, 2);
           $fecha_final_anio = substr($fecha_fin, 0, 4);
-          
+          $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
+          $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
+          $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 68, 12);
           // Marco primera pagina
-          $this->Image("../images/hoja_margen.png",1.5,-2,211,295);
+          //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',8);
           // Color de letra
-          $this->SetTextColor(0, 102, 205);
+          $this->SetTextColor(255, 255, 205);
           // Movernos a la derecha
-          $this->Cell(2);
+          //$this->Cell(2);
           // Nombre del Hotel
-          $this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
+          //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
           // Datos y fecha
-          $this->SetFont('Arial','',10);
-          $this->SetTextColor(0,0,0);
-          $this->Cell(172,5,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
+          $this->SetFont('Arial','',13);
+          $this->SetTextColor( 255 , 255 , 255 );
+          $this->Cell(70,27,iconv("UTF-8", "ISO-8859-1",'Reporte Logs del '),0,0,'C');
+          $this->Ln();
+          $this->Cell(70,-15,iconv("UTF-8", "ISO-8859-1",$fecha_inicial_dia.'-'.$fecha_inicial_mes.'-'.$fecha_inicial_anio.' al '.$fecha_final_dia.'-'.$fecha_final_mes.'-'.$fecha_final_anio),0,0,'C');
+          $this->SetTextColor( 45 , 63 , 83 );
+          //$this->Ln(8);
+          //$this->Cell(0,5,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
           if($_GET['usuario'] == 0){
-            $this->Cell(194,5,iconv("UTF-8", "ISO-8859-1",''),0,1,'R');
+            //$this->Ln(20);
+            $this->Cell( 70, 0 , iconv("UTF-8", "ISO-8859-1",''),0,1,'R');
           }else{
-            $this->Cell(194,5,iconv("UTF-8", "ISO-8859-1",'Usuario buscado: '.$usuario_nombre),0,1,'R');
+            $this->Cell( 70, 7 , iconv("UTF-8", "ISO-8859-1",'Usuario buscado: '.$usuario_nombre),0,1,'R');
           }
           if(strlen($actividad) == 0){
-            $this->Cell(194,5,iconv("UTF-8", "ISO-8859-1",''),0,1,'R');
+            //$this->Ln(20);
+            $this->Cell( 70 , 0 , iconv("UTF-8", "ISO-8859-1",''),0,1,'R');
           }else{
-            $this->Cell(194,5,iconv("UTF-8", "ISO-8859-1",'Actividad buscada: '.$actividad),0,1,'R');
+            $this->Cell( 70 , 7 , iconv("UTF-8", "ISO-8859-1",'Actividad buscada: '.$actividad),0,1,'R');
           }
           // Logo
-          $this->Image("../images/simbolo.png",10,18,25,25);
+          $this->SetTextColor( 0 , 0 , 0 );
+          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
           // Salto de línea
-          $this->Ln(8);
+          //$this->Ln(8);
           // Movernos a la derecha
-          $this->Cell(80);
+          //$this->Cell(80);
           // Título
-          $this->SetFont('Arial','B',10);
+          $this->SetFont('Arial','',10);
           $this->SetTextColor(0, 102, 205);
-          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'Reporte Logs del '.$fecha_inicial_dia.'-'.$fecha_inicial_mes.'-'.$fecha_inicial_anio.' al '.$fecha_final_dia.'-'.$fecha_final_mes.'-'.$fecha_final_anio),0,0,'C');
-      
           // Salto de línea
-          $this->Ln(18);
+          //$this->Ln(0);
       }
-      
       // Pie de página
       function Footer()
       {
           // Posición: a 1,5 cm del final
-          $this->SetY(-15);
+          $this->SetY(-20);
           // Arial italic 8
           $this->SetFont('Arial','',8);
           // Número de página
           $this->Cell(0,4,iconv("UTF-8", "ISO-8859-1",'Página '.$this->PageNo().'/{nb}'),0,0,'R');
       }
   }
-
-  // Fecha y datos generales 
+//Formato de hoja (Orientacion, tamaño , tipo)
+$pdf = new FPDF('P', 'mm', 'Letter');
+  // Fecha y datos generales
   $pdf = new PDF();
   $pdf->AliasNbPages();
   $pdf->AddPage();
@@ -101,18 +105,18 @@
   $fecha_ini = date("Y-m-d",$_GET['fecha_ini']);
   $fecha_fin = date("Y-m-d",$_GET['fecha_fin']);
   $fecha_inicial_dia = substr($fecha_ini, 8, 2);
-  $fecha_inicial_mes = substr($fecha_ini, 5, 2); 
-  $fecha_inicial_anio = substr($fecha_ini, 0, 4);  
+  $fecha_inicial_mes = substr($fecha_ini, 5, 2);
+  $fecha_inicial_anio = substr($fecha_ini, 0, 4);
   $fecha_final_dia = substr($fecha_fin, 8, 2);
-  $fecha_final_mes = substr($fecha_fin, 5, 2); 
+  $fecha_final_mes = substr($fecha_fin, 5, 2);
   $fecha_final_anio = substr($fecha_fin, 0, 4);
 
   // Titulos de tabla
-  $pdf->SetFont('Arial','U',9);
-  $pdf->SetTextColor(20, 31, 102);
-  $pdf->SetFont('Arial','B',7);
+  $pdf->SetFont('Arial','',8);
   $pdf->SetTextColor(255, 255, 255);
-  $pdf->SetFillColor(99, 155, 219);
+  $pdf->SetFillColor(45, 63, 83);
+  $pdf->SetLineWidth(0.1);
+  $pdf->SetDrawColor(45, 63 , 83);
   $pdf->Cell(70,6,iconv("UTF-8", "ISO-8859-1",'USUARIO'),1,0,'C',True); 
   $pdf->Cell(26,6,iconv("UTF-8", "ISO-8859-1",'FECHA'),1,0,'C',True); 
   $pdf->Cell(26,6,iconv("UTF-8", "ISO-8859-1",'IP'),1,0,'C',True); 
@@ -186,13 +190,13 @@
 
       if($y >= 265){
         $pdf->AddPage();
-        $y =57;
+        $y =43;
         $x =10;
-        $pdf->SetFont('Arial','U',9);
-        $pdf->SetTextColor(20, 31, 102);
-        $pdf->SetFont('Arial','B',7);
+        $pdf->SetFont('Arial','',8);
         $pdf->SetTextColor(255, 255, 255);
-        $pdf->SetFillColor(99, 155, 219);
+        $pdf->SetFillColor(45, 63, 83);
+        $pdf->SetLineWidth(0.1);
+        $pdf->SetDrawColor(45, 63 , 83);
         $pdf->Cell(70,6,iconv("UTF-8", "ISO-8859-1",'USUARIO'),1,0,'C',True); 
         $pdf->Cell(26,6,iconv("UTF-8", "ISO-8859-1",'FECHA'),1,0,'C',True); 
         $pdf->Cell(26,6,iconv("UTF-8", "ISO-8859-1",'IP'),1,0,'C',True); 

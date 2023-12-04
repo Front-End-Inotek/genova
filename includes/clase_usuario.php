@@ -44,6 +44,7 @@
       public $reservacion_agregar;
       public $reservacion_editar;
       public $reservacion_borrar;
+      public $reservacion_preasignar;
       public $reporte_ver;
       public $reporte_agregar;
       public $forma_pago_ver;
@@ -68,6 +69,12 @@
       public $cupon_editar;
       public $cupon_borrar;
       public $logs_ver;
+
+      public $auditoria_ver;
+      public $auditoria_editar;
+      public $llegadas_salidas_ver;
+
+      
 
       /*function __construct(){
       }*/
@@ -111,6 +118,7 @@
           $this->reservacion_agregar= -1;
           $this->reservacion_editar= -1;
           $this->reservacion_borrar= -1;
+          $this->reservacion_preasignar= -1;
           $this->reporte_ver= -1;
           $this->reporte_agregar= -1;
           $this->forma_pago_ver= -1;
@@ -135,6 +143,10 @@
           $this->cupon_editar= -1;
           $this->cupon_borrar= -1;
           $this->logs_ver= -1;
+
+          $this->auditoria_ver= -1;
+          $this->auditoria_editar=-1;
+          $this->llegadas_salidas_ver= -1;
           
         }else{
           $sentencia = "SELECT * FROM usuario WHERE id = $id_usuario LIMIT 1";
@@ -216,6 +228,8 @@
               $this->reservacion_agregar= $fila['reservacion_agregar'];
               $this->reservacion_editar= $fila['reservacion_editar'];
               $this->reservacion_borrar= $fila['reservacion_borrar'];
+              $this->reservacion_preasignar= $fila['reservacion_preasignar'];
+
               $this->reporte_ver= $fila['reporte_ver'];
               $this->reporte_agregar= $fila['reporte_agregar'];
               $this->forma_pago_ver= $fila['forma_pago_ver'];
@@ -241,9 +255,32 @@
               $this->cupon_borrar= $fila['cupon_borrar'];
               $this->logs_ver= $fila['logs_ver'];
               
+              $this->auditoria_editar= $fila['auditoria_editar'];
+              $this->auditoria_ver= $fila['auditoria_ver'];
+              $this->llegadas_salidas_ver = $fila['llegadas_salidas_ver'];
           }
           $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->huesped_ver+$this->huesped_agregar+$this->huesped_editar+$this->huesped_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_ver+$this->tarifa_agregar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar+$this->reservacion_ver+$this->reservacion_agregar+$this->reservacion_editar+$this->reservacion_borrar+$this->reporte_ver+$this->reporte_agregar+$this->forma_pago_ver+$this->forma_pago_agregar+$this->forma_pago_editar+$this->forma_pago_borrar+$this->inventario_ver+$this->inventario_agregar+$this->inventario_editar+$this->inventario_borrar+$this->inventario_surtir+$this->categoria_ver+$this->categoria_agregar+$this->categoria_editar+$this->categoria_borrar+$this->restaurante_ver+$this->restaurante_agregar+$this->restaurante_editar+$this->restaurante_borrar+$this->cupon_ver+$this->cupon_agregar+$this->cupon_editar+$this->cupon_borrar+$this->logs_ver;
         }  
+      }
+
+      //Obtener si un usuario es valido en base a su id y contraseña
+
+      function evaluar_password($usuario_id,$password_evaluar){
+        include_once("clase_log.php");
+        $logs = NEW Log(0);
+        $id=0;
+        $sentencia = "SELECT id FROM usuario WHERE id = '$usuario_id' AND pass= '$password_evaluar' AND estado = 1";
+        $comentario="Obtenemos el usuario y contraseña de la base de datos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      
+        //se recibe la consulta y se convierte a arreglo
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $id= $fila['id'];
+          // Guardamos logs de inicio de session
+          $logs->guardar_log($fila['id'],"Consultando contraseña del usuario: ".$id);
+        }
+        return $id;
       }
 
       function remover_token($usuario){
@@ -312,7 +349,7 @@
         include_once("clase_log.php");
         $logs = NEW Log(0);
         $id=0;
-        $sentencia = "SELECT id FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$password_evaluar' AND estado = 1";
+        $sentencia = "SELECT id,nivel FROM usuario WHERE usuario = '$usuario_evaluar' AND pass= '$password_evaluar' AND estado = 1";
         $comentario="Obtenemos el usuario y contraseña de la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       
@@ -320,10 +357,11 @@
         while ($fila = mysqli_fetch_array($consulta))
         {
           $id= $fila['id'];
+          $nivel =$fila['nivel'];
           // Guardamos logs de inicio de session
           $logs->guardar_log($fila['id'],"Inicio de session el usuario: ".$id);
         }
-        return $id;
+        return [$id,$nivel];
       }
       // Guardar el token
       function guardar_token($token,$usuario){
@@ -417,7 +455,11 @@
           default:// indeterminado
               echo "Aun no se encuentra registrado ese nivel de usuario";
               break; 
-        }                 
+
+          
+        }
+        
+        return $consulta;
       }
       // Evaluar los datos de un usuario para autorizar un cambio
       function evaluar_datos($usuario_evaluar,$contrasena_evaluar){
@@ -479,8 +521,8 @@
         $comentario="Mostrar los usuarios";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
-         echo '<div class="table-responsive" id="tabla_usuario" style="margin-left: 15px;">
-           <table class="table table-bordered table-hover">
+         echo '<div class="table-responsive" id="tabla_usuario" >
+           <table class="table  table-hover">
              <thead>
                <tr class="table-primary-encabezado text-center">
                <th>Nombre</th>
@@ -557,9 +599,10 @@
           return $cat_paginas;
       }
       // Editar un usuario
-      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver){
+      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reservacion_preasignar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver,$auditoria_ver,$auditoria_editar,$llegadas_salidas_ver){
         //function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tipo_ver,$tipo_agregar,$tipo_editar,$tipo_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$hab_ver,$hab_agregar,$hab_editar,$hab_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver){
         //$pass=md5($pass);
+       
         $sentencia = "UPDATE `usuario` SET
             `usuario` = '$usuario',
             `nivel` = '$nivel',
@@ -592,6 +635,7 @@
             `reservacion_agregar` = '$reservacion_agregar',
             `reservacion_editar` = '$reservacion_editar',
             `reservacion_borrar` = '$reservacion_borrar',
+            `reservacion_preasignar` = $reservacion_preasignar,
             `reporte_ver` = '$reporte_ver',
             `reporte_agregar` = '$reporte_agregar',
             `forma_pago_ver` = '$forma_pago_ver',
@@ -615,9 +659,13 @@
             `cupon_agregar` = '$cupon_agregar',
             `cupon_editar` = '$cupon_editar',
             `cupon_borrar` = '$cupon_borrar',
-            `logs_ver` = '$logs_ver'
+            `logs_ver` = '$logs_ver',
+            `auditoria_ver` = $auditoria_ver,
+            `auditoria_editar` = $auditoria_editar,
+            `llegadas_salidas_ver` = $llegadas_salidas_ver
             WHERE `id` = '$id';";
-        //echo $sentencia ;
+        //  echo $sentencia ;
+        //  die();
         $comentario="Editar usuario dentro de la base de datos ";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
@@ -734,14 +782,21 @@
         }else{
           $nivel= $nuevo_estado;
         }
+        // echo $hab_id . "|" . $estado ."|".$nuevo_estado;
+        if($nuevo_estado == 2){
+          $nivel = 3;
+        }
+
         $sentencia = "SELECT * FROM usuario WHERE activo = 1 AND nivel = $nivel AND estado = 1 ORDER BY usuario";
         $comentario="Asignación de usuarios a la clase usuario funcion constructor";
+        // echo $sentencia . "|" . $nuevo_estado;
+        
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
           switch($nuevo_estado){
-            case 1:
+            case 1: case 2:
               echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
                   echo '<div class="select_reca btn-square-lg" onclick="hab_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
                   echo '</br>';
@@ -760,7 +815,7 @@
                 echo '</div>';
               echo '</div>';
               break;
-            case 3:// Enviar a limpieza
+            case 3: // Enviar a limpieza
               echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
                   echo '<div class="select_reca btn-square-lg" onclick="hab_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
                   echo '</br>';

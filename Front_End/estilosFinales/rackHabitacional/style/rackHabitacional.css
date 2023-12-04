@@ -7,6 +7,7 @@
 
 .table {
   table-layout: auto;
+  overflow-y: scroll;
 }
 
 
@@ -69,7 +70,7 @@
     z-index: 1010;
   }
   thead th {
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     z-index: 1040;
     text-align: center;
@@ -89,7 +90,8 @@
   }
 
   .cal-dia{
-    min-width: 200px;
+    width: 150px;
+    height: 50px;
   }
   .cal-dia:hover{
     height: 150%;
@@ -102,13 +104,7 @@
     
 
   }
-  .cal-thead {
-    top: 0px;
-    background-color: #ecf2ff;
-    position: sticky;
-    z-index: 1010;
 
-  }
   
   .cal-viewmonth {
     font-size: 16px;
@@ -136,9 +132,11 @@
   .cal-userinfo {
     height: 80px;
     box-shadow: 20px 0 50px rgba(0, 0, 0, 0.05);
-
+    background-color: red;
   }
-  
+  .cal-userinfo:hover{
+    background-color: var(--subtitulos);
+  }
   .cal-tbody .cal-userinfo {
     min-width: 150px !important;
     text-align: center;
@@ -179,6 +177,7 @@
     font-size: 14px;
     position: relative;
     min-width: 9em;
+    max-width: 150px !important;
     /*
     min-width: 20%;*/
   }
@@ -186,12 +185,11 @@
 
   .task--bloqueado {
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-  background-color: #333;
+    background-color: #333;
     border-left-color: #0b0b0b;
     color: #fff;
     margin-top: 15px;
     align-self: end;
-    
   }
   .task--bloqueado:hover{
     background-color: #000;

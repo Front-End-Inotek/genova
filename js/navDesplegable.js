@@ -1,19 +1,17 @@
-
 /* para cambiar entre racks*/
 function switch_rack() {
-
   var checkfactura = document.getElementById("flexSwitchCheckDefault");
   if (checkfactura.checked == true) {
-
     console.log("rack de operaciones");
     alert('si');
-
   } else {
-
     console.log("rack de habitaciones");
     alert('si');
-
   }
+}
+
+function sub_menu(){
+  closeNav()
 }
 
 /*********************************************/
@@ -22,56 +20,55 @@ function switch_rack() {
 
 function boton_menu() {
   let sidebar = document.querySelector("#sidebar");
-  let container = document.querySelector(".my-container");
+  /* let container = document.querySelector(".my-container"); */
   sidebar.classList.toggle("active-nav");
-  container.classList.toggle("active-cont");
+  // container.classList.toggle("active-cont");
+  // if(container!=null){
+  /* container.classList.toggle("active-cont"); */
+  // }
 }
 
 /*********************************************/
 /*funcion para desplegar y ocultar submenus**/
 /*********************************************/
 
-function sub_menu() {
-  // Obtener todos los elementos del menú con clase "nav-link"
-  var menuItems = document.querySelectorAll(".nav-link");
-
-  // Iterar a través de cada elemento de menú y agregar un evento de clic
-  menuItems.forEach(function (item) {
-    var submenu = item.querySelector(".submenu");
-
-    // Si el elemento de menú tiene un submenú y el evento de clic aún no se ha agregado, agregar evento de clic
-    if (submenu && !item.classList.contains("has-click-event")) {
-      item.addEventListener("click", function (event) {
-        event.preventDefault();
-        // Si el submenú está oculto, lo mostramos
-        if (submenu.style.display === "none" || submenu.style.display === "") {
-          submenu.style.display = "block";
-        }
-        // Si el submenú está visible, lo ocultamos
-        else {
-          submenu.style.display = "none";
-        }
-      });
-      // Agregar clase al elemento del menú para indicar que se ha agregado el evento de clic
-      item.classList.add("has-click-event");
-    }
-  });
+const showMenu = (id) => {
+  //console.log(id)
+  const submenu = document.getElementById(`${id}`)
+  //console.log(submenu)
+  /* if (submenu.style.display === "" ||  submenu.style.display === "none"){
+    console.log("Mostrar menu")
+    submenu.style.display = "block"
+    submenu.setAttribute("style", "display : block;")
+  }else if(submenu.style.display === "block"){
+    console.log("Ocultar menu")
+    submenu.style.display = "none"
+    submenu.setAttribute("style", "display : none;")
+  }else {
+    submenu.style.display = "none"
+  } */
+  //////////////////
+  /* if(submenu.style.display === "none"){
+    submenu.style.display = "block";
+  }else{
+    submenu.style.display = "none"
+  } */
+  submenu.classList.toggle("ocultarMenus")
 }
-
 //cambiar el texto del rack
 function cambiarVista() {
   var checkbox = document.getElementById("flexSwitchCheckDefault");
   var vista = document.getElementById("vista");
-
-  if (checkbox.checked == true) {
+  txt_vista = localStorage.getItem("txt_vista");
+  console.log(txt_vista)
+  if (checkbox.checked != true) {
     vista.classList.remove("rack-operaciones");
     vista.classList.add("vista-habitacional");
-    vista.innerHTML = "Rack Habitacional";
+    vista.innerHTML = txt_vista;
   } else {
     vista.classList.remove("vista-habitacional");
-    vista.classList.add("rack-operaciones"); 
-    vista.innerHTML = "Rack Operaciones";
-    
+    vista.classList.add("rack-operaciones");
+    vista.innerHTML =txt_vista;
   }
 }
 
@@ -79,24 +76,20 @@ function cambiarVista() {
 
 function modoNocturno() {
   var body = document.body;
-  var currentColor = body.style.backgroundColor;
   var boton = document.getElementById("filtro-noche");
-
-  if (currentColor === "rgb(34, 34, 82)" || currentColor === "#222252") {
-    // si el color actual es azul oscuro, cambiar de vuelta al color original y al icono de sol
-    body.style.backgroundColor = "";
+  if (body.classList.contains("modo-nocturno")) {
+    // Si la clase modo-nocturno está presente, cambiar al modo diurno
+    body.classList.remove("modo-nocturno");
     boton.classList.remove("btn-sol");
     boton.querySelector("i").classList.remove("bx-sun");
     boton.querySelector("i").classList.add("icono-sol");
-    body.classList.remove("modo-nocturno"); // eliminar la clase modo-nocturno del body
   } else {
-    // si el color actual es diferente a azul oscuro, cambiar a azul oscuro y al icono de luna
-    body.style.backgroundColor = "#222252";
+    // Si la clase modo-nocturno no está presente, cambiar al modo nocturno
+    body.classList.add("modo-nocturno");
     boton.classList.add("btn-sol");
     boton.querySelector("i").classList.add("bx-sun");
     boton.querySelector("i").classList.remove("icono-sol");
     boton.querySelector("i").classList.add("icono-luna");
-    body.classList.add("modo-nocturno"); // agregar la clase modo-nocturno al body
   }
 }
 
@@ -115,5 +108,33 @@ function ocultarMostrar() {
     lis.forEach(function(li) {
       li.style.display = "none";
     });
+  }
+}
+
+function handleSiceTable () {
+  const nav = document.getElementById("asidenav");
+  const menusText = document.getElementsByClassName("aside_nav_link_text");
+  const rutas = document.getElementsByClassName("aside_nav_link_containerInfo_links");
+  const btnSwitch = document.getElementById("switch_container_menu");
+
+  const contenedor = document.getElementsByClassName("aside_nav_link_container");
+  const contenedor2 = document.getElementsByClassName("aside_nav_link_containerMore");
+  const contenedor3 = document.getElementsByClassName("aside_nav_link_containerInfo");
+  nav.classList.toggle("aside_nav_container_open");
+  btnSwitch.classList.toggle("aside_nav_menu_switch_container_show");
+  for (let i = 0; i < menusText.length; i++) {
+    menusText[i].classList.toggle("aside_nav_link_show");
+  }
+  for ( let i = 0; i < rutas.length; i++ ) {
+    rutas[i].classList.remove("ocultarMenus")
+  }
+  for ( let i = 0; i < contenedor.length; i++) {
+    contenedor[i].classList.toggle("space_around")
+  }
+  for ( let i = 0; i < contenedor2.length; i++) {
+    contenedor2[i].classList.toggle("space_around")
+  }
+  for ( let i = 0; i < contenedor3.length; i++) {
+    contenedor3[i].classList.toggle("space_around")
   }
 }

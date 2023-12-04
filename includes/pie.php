@@ -8,9 +8,10 @@
     $ocupadas= $hab->obtener_ocupadas();
     $disponibles= $hab->obtener_disponibles();
     $salidas= $movimiento->saber_salidas();
+    $preasignadas = $movimiento->obtener_preasignadas();
     echo '
-    <div class="container-fluid Alin-center">';
-        $cuenta->resumen_actual($ocupadas,$disponibles,$salidas,$_GET['id']);
+    ';
+        $cuenta->resumen_actual($ocupadas,$disponibles,$salidas,$_GET['id'],$preasignadas);
         
         /*echo '<p>Este ejemplo demuestra la utilización del control <code>&lt;input type="color"&gt;</code>.</p>
         <label for="muestrario">Color:</label>
@@ -21,5 +22,4 @@
         a manera de previsualización (esto usa el suceso <code>input</code>).
         Cuando cierra el selector, se desencadena el suceso <code>change</code>
         y podemos detectarlo para cambiar todos los párrafos al color elegido.</p>*/
-    echo '</div>';  
 ?>

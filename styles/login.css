@@ -1,0 +1,166 @@
+/* Inicio de sesion */
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.formulario_login {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    background-color: #FFFEFC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.formulario_login_header {
+    height: 10vh;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 10vh;
+    justify-content: space-around;
+    align-items: center;
+}
+.formulario_login_logo_hotel {
+    height: 6rem;
+}
+
+.formulario_login_logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: #37352F;
+}
+.formulario_login_container{
+    width: 90%;
+    max-width: 516px;
+}
+.formulario_login_logo_text {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.formulario_login_title{
+    font-size: 3rem;
+    font-weight: 600;
+}
+.formulario_login_divider{
+    color: #37352F;
+}
+
+.formulario_login_logo_img {
+    height: 50px;
+    width: 50px;
+    color: #37352F;
+    filter: invert(1);
+    margin-bottom: 1rem;
+}
+
+/* Input container */
+.input-container {
+    position: relative;
+    margin: 20px 0 ;
+  }
+  /* Input field */
+  .input-field {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    
+  }
+  
+  /* Input label */
+  .input-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 16px;
+    color: rgba(204, 204, 204, 0);
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  
+  /* Input highlight */
+  .input-highlight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: #007bff;
+    transition: all 0.3s ease;
+  }
+  
+  /* Input field:focus styles */
+  .input-field:focus + .input-label {
+    top: -20px;
+    font-size: 12px;
+    color: #007bff;
+  }
+  
+  .input-field:focus + .input-label + .input-highlight {
+    width: 100%;
+  }
+
+.formulario_login_button {
+    width: 100%;
+    background-color: #0070F0;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    padding: 0.5rem 0;
+}
+.formulario_login_button:disabled {
+    cursor: not-allowed;
+    background-color: #002857;
+}
+.formulario_login_button:disabled:hover {
+    cursor: not-allowed;
+    background-color: #002857;
+}
+.formulario_login_button:hover {
+    background-color: #0156b8;
+    transition: all ease-in-out 0.2s;
+}
+.formulario-warning {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 32px;
+    background-color: #FFE2DD;
+    color: #E16F64;
+    margin-top: 1rem;
+}
+.formulario-warning-text {
+    width: 72%;
+    word-wrap: balance;
+    text-align: center;
+    margin: 0;
+    padding: 5px 0;
+}
+.formulario-warning-icon {
+    height: 3rem;
+}
+
+/* Estilo para campos deshabilitados */
+.input-field:disabled {
+    cursor: not-allowed;
+    border-bottom: 2px solid #E16F64;
+    background-color: #FFE2DD; /* Color de fondo en campos deshabilitados (rojo claro) */
+}
+
+.formulario_login_alert_box {
+    width: 100%;
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

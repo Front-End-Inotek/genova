@@ -228,12 +228,12 @@
                       $interno= 'sin estado';
                       switch($interno){
                         case 'sin estado':
-                          echo '<div><br>';  
+                          echo '<div><br>';
                           break;
                         default:
                           //echo "Estado interno indefinido";
                           break;
-                      }         
+                      }
                     echo '</div>';
                   echo '</div>';
             echo '</div>
@@ -243,7 +243,7 @@
 
             // Segundo rack
 
-            echo '<div 
+            echo '<div>
             <div class="col-sm-4"></div>
 
             <div class="col-sm-2">';

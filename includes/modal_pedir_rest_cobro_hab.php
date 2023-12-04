@@ -39,7 +39,7 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="aplicar_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].',0,'.$id_maestra.')"> Aceptar</button>
+      <button type="button" id="btn-restaurant" class="btn btn-success" onclick="aplicar_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].',0,'.$id_maestra.')"> Aceptar</button>
     </div>
   </div>';
 ?>

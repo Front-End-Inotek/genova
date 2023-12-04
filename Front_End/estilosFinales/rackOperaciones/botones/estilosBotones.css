@@ -272,11 +272,6 @@ span {
   color: #fff;
   border-left: 7px solid #bc88ff;
 }
-.mantenimiento {
-  background-color: #ffdaa2;
-  color: #ff7700;
-  border-left: 7px solid #fdb44d;
-}
 
 .ocupado {
   background-color: #780202f8;
@@ -310,15 +305,21 @@ span {
 .containerFooter {
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 20000;
+  font-size: 1rem;
 }
 
 .card {
   background-color: #30349f;
-  color: #fff;
-  height: auto;
+  color: transparent !important;
+  /*
+  height: auto;*/
+  background-color: #333;
+  border: 12px solid #333;
+  color: #333;
 }
+
 
 /* Para pantallas de tamaño pequeño, menores a 576px */
 @media (max-width: 575.98px) {
@@ -332,9 +333,9 @@ span {
     width: 140px;
     height: 70px;
   }
-  .informacion{
+  /* .informacion{
     margin-top: 70px;
-  }
+  } */
 }
 /* para pantallas más pequeñas que 768px */
 @media (max-width: 767px) {

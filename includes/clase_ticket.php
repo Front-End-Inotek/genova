@@ -126,6 +126,30 @@
         $comentario="Cambiar estado de impreso del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      function tickets_por_fecha($inicio,$fin){
+        $sentencia="SELECT * FROM `ticket` WHERE `tiempo`>=$inicio AND `tiempo`<=$fin";
+        $comentario="Consulta de tickets en un rango de fechas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function cambiar_estado_facturados($id){
+        $sentencia="UPDATE ticket SET facturado = 1 WHERE id = $id";
+        $comentario="cambio de estado en la columna de acturado";
+        echo $sentencia;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      function saber_estado_facturados($id){
+        $estado=0;
+        $sentencia="SELECT facturado FROM ticket WHERE id =$id LIMIT 1";
+        $sentencia;
+        $comentario="revisar el estado de facturacion del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $estado= $fila['facturado'];
+        }
+        return $estado;
+      }
       // Cambiar a un estado en especifico del ticket
       function cambiar_estado_especifico($id_ticket,$estado){
         $sentencia = "UPDATE `ticket` SET
@@ -143,12 +167,38 @@
         $comentario="Editar el estado del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      // Editar el estado del ticket
+      function editar_estadoGlobal($id_usuario,$corte,$estado){
+        $hoy = date('Y-m-d');
+        $sentencia = "UPDATE `ticket` SET
+        `corte` = '$corte',
+        `estado` = '$estado'
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `estado` = '1'
+        AND `id_usuario` = '$id_usuario'
+        ";
+        // echo $sentencia;
+        $comentario="Editar el estado del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       // Editar el estado del ticket faltantes en corte
       function editar_estado_corte($id_usuario,$corte,$estado){
         $sentencia = "UPDATE `ticket` SET
         `corte` = '$corte',
         `estado` = '$estado'
         WHERE `id_usuario` = '$id_usuario' AND `corte` = '0' AND `estado` != '2';";
+        $comentario="Editar el estado del ticket faltantes en corte";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Editar el estado del ticket global
+      function editar_estado_corteGlobal($id_usuario,$corte,$estado){
+        $hoy = date('Y-m-d');
+        $sentencia = "UPDATE `ticket` SET
+        `corte` = '$corte',
+        `estado` = '$estado'
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `corte` = '0' AND `estado` != '2'
+        AND `id_usuario` = '$id_usuario'
+        ";
+        //echo $sentencia;
         $comentario="Editar el estado del ticket faltantes en corte";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
@@ -302,6 +352,7 @@
         $comentario="Actualizar la etiqueta del ticket";
         $this->realizaConsulta($sentencia,$comentario);
       }
+
       // Obtener la etiqueta del corte 
       function obtener_corte(){
         $sentencia = "SELECT corte FROM labels LIMIT 1";
@@ -313,6 +364,7 @@
         {
           $etiqueta=$fila["corte"];
         }
+        // $etiqueta = $etiqueta== 0 ? 1 : $etiqueta;
         return $etiqueta;
       }
       // Actualizar la etiqueta del corte
@@ -322,6 +374,7 @@
         `corte` = '$nueva_etiqueta'
         WHERE `id` = '1';";
         $comentario="Actualizar la etiqueta del corte";
+        // echo $sentencia;
         $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtener la comanda que es el id de la tabla sql pedido_rest
@@ -413,6 +466,12 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }
       }
+      function info_concepto($id){
+        $sentencia = "SELECT * FROM concepto WHERE id_ticket = $id";
+        $comentario="Obtener todos los valores de concepto";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
       // Saber cual es el numero del concepto
       function saber_pedido($id_ticket,$nombre){
         $sentencia = "SELECT * FROM concepto WHERE id_ticket = $id_ticket AND nombre = '$nombre' AND activo = 1 LIMIT 1";
@@ -460,6 +519,20 @@
         }
       }
       // Cambiar estado activo del concepto
+      function cambiar_activoGlobal($id_usuario){
+        $hoy = date('Y-m-d');
+        $sentencia = "UPDATE `concepto` 
+        LEFT JOIN ticket ON ticket.id = concepto.id_ticket
+        SET
+        `activo` = '0'
+        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+        AND concepto.id_usuario = '$id_usuario';
+        ";
+        $comentario="Poner estado activo como inactivo del concepto";
+        //echo $sentencia;
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
+      // Cambiar estado activo del concepto
       function cambiar_activo($id_usuario){
         $sentencia = "UPDATE `concepto` SET
         `activo` = '0'
@@ -499,12 +572,12 @@
           $producto= $inventario->obtener_id($fila['nombre']);
           $total_fila= $fila['cantidad'] * $fila['precio'];
           if(($cantidad%2)==0){
-            echo '<div href="#" class="list-group-item list-group-item-success" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
+            echo '<div href="#" class="list-group-item " onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
               <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.number_format($fila['precio'], 2).' </h6>
               <h6 class="list-group-item-text"> Total: $'.number_format($total_fila, 2).' </h6>
             </div>';
           }else{
-            echo '<div href="#" class="list-group-item list-group-item-info" onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
+            echo '<div href="#" class="list-group-item " onclick="herramienta_comanda('.$mesa_id.','.$fila['id'].','.$fila['cantidad'].','.$fila['precio'].','.$producto.')">
               <h6 class="list-group-item-heading">'.$fila['cantidad'].' - '.$fila['nombre'].' - $'.number_format($fila['precio'], 2).' </h6>
               <h6 class="list-group-item-text"> Total: $'.number_format($total_fila, 2).' </h6>
             </div>';
@@ -592,6 +665,5 @@
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-    
   }
 ?>
