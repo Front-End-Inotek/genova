@@ -53,6 +53,9 @@
 
       <!-- menu de navegacion -->
       <div class="menu"></div>
+      ';
+      //var_dump($_SESSION["imprimir"]) ;
+      echo '
 
       <!-- Area de trabajo en donde todo se renderiza -->
       <div id="area_trabajo" class="main"></div>
