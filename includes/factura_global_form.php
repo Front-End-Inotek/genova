@@ -27,9 +27,11 @@
     intval($contador);
     echo'
     <div class="main_container">
-        <div class="col-12 text-center">
-            <h2 class="text-dark">Factura individual</h2>
+        <div class="main_container_title">
+            <h2 >Factura individual</h2>
         </div>
+
+        
         <form id="formfactura" autocomplete="off" accept-charset="utf-8">
         <div class="row" >
     <!--         Columna 1  Datos del usuario-->

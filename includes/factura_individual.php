@@ -13,14 +13,20 @@
     intval($contador);
     echo'
     <div class="main_container">
-        <div class="col-12 text-center">
-            <h2 class="text-dark">Factura individual</h2>
+        <div class="main_container_title">
+            <h2>Factura individual</h2>
+            <button type="button" class="btn btn-primary" id="timbrar" name ="timbrar" onclick="timbrar_factura()" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16">
+                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5M11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z"/>
+                    <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z"/>
+                </svg>
+                Timbrar Factura
+            </button>
         </div>
-        <form id="formfactura" autocomplete="off" accept-charset="utf-8">
-        <div class="row" >
+        
+        <form id="formfactura" class="contenedor_facturas" autocomplete="off" accept-charset="utf-8">
     <!--         Columna 1  Datos del usuario-->
-            <div class="col-2"  >
-                <div class="control" id="control">
+            <section class="contenedor_facturas_datos" id=control  >
                     <div class="input-group mb-3" style="display: none;">
                         <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default" style="width: 105px; font-size: 12px;">Agregar fila</span>
@@ -28,54 +34,67 @@
                         <input type="number" id="filas" name="filas" class="form-control" oninput="agregar_filas()" aria-label="Default" aria-describedby="inputGroup-sizing-default" value='.$contador.'>
                     </div>
     <!--             Imput RFC -->
-                    <div class="form-floating mb-2">
-                        <input type="text" id="rfc" name ="rfc[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="buscar_rfc()" placeholder="RFC" >
-                        <label  for="rfc"  id="inputGroup-sizing-default"  >RFC </label>
+                    <div class="inputs_form_container noMargin_input">
+                        <div class="form-floating input_container">
+                            <input type="text" id="rfc" name ="rfc[]" class="form-control custom_input" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="buscar_rfc()" placeholder="RFC" >
+                            <label  for="rfc"  id="inputGroup-sizing-default"  >RFC </label>
+                        </div>
                     </div>
     <!--             Imput Nombre -->
-                    <div class="form-floating mb-2">
-                        <input type="text" id="nombre" name="rfc[]" maxlength="100" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nombre">
-                        <label for="rfc" id="inputGroup-sizing-default">Nombre</label>
+                    <div class="inputs_form_container noMargin_input">
+                        <div class="form-floating input_container">
+                            <input type="text" id="nombre" name="rfc[]" maxlength="100" class="form-control custom_input" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nombre">
+                            <label for="rfc" id="inputGroup-sizing-default">Nombre</label>
+                        </div>
                     </div>
     <!--             Imput Codigo postal -->
-                    <div class="form-floating mb-2">
-                        <input type="text" id="cp" name="rfc[]" maxlength="100" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Codigo Postal">
-                        <label for="cp "id="inputGroup-sizing-default">Codigo Postal</label>
+                    <div class="inputs_form_container noMargin_input">
+                        <div class="form-floating input_container">
+                            <input type="text" id="cp" name="rfc[]" maxlength="100" class="form-control custom_input" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Codigo Postal">
+                            <label for="cp "id="inputGroup-sizing-default">Codigo Postal</label>
+                        </div>
                     </div>
     <!--             Imput Uso de CFDI -->
-                    <div class="form-floating mb-2">
-                        <select id="regimen" name ="rfc[]" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Selecciona una opciónn</option>
-                            ';
-                                $resulta=$fact->regimen_fiscal();
-                                while ($vara=mysqli_fetch_array($resulta)) {
-                                    echo '<option value='.$vara[1].'> '.$vara[1]. $vara[2].'</option>';
-                                }
-                        echo'</select>
-                        <label  for="regimen" >Régimen Fiscal</label>
+                    <div class="inputs_form_container noMargin_input">
+                        <div class="form-floating input_container">
+                            <select id="regimen" name ="rfc[]" class="form-select custom_input" id="inputGroupSelect01">
+                                <option selected disabled>Selecciona una opciónn</option>
+                                ';
+                                    $resulta=$fact->regimen_fiscal();
+                                    while ($vara=mysqli_fetch_array($resulta)) {
+                                        echo '<option value='.$vara[1].'> '.$vara[1]. $vara[2].'</option>';
+                                    }
+                            echo'</select>
+                            <label  for="regimen" >Régimen Fiscal</label>
+                        </div>
                     </div>
                     <!--   Imput Uso de CFDI -->
-                    <div class="form-floating mb-2">
-                        <select id="cfdi" name ="rfc[]" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Selecciona una opción</option>
-                            ';
-                                $resulta=$fact->uso_cfdi();
-                                while ($vara=mysqli_fetch_array($resulta)) {
-                                    echo'<option value='.$vara[1].'> '.$vara[1].$vara[2].' </option>';
-                                }
-                            echo '</select>
-                        <label for="cfdi">Uso de CFDI</label>
+                    <div class="inputs_form_container noMargin_input">
+                        <div class="form-floating input_container">
+                            <select id="cfdi" name ="rfc[]" class="form-select custom_input" id="inputGroupSelect01">
+                                <option selected disabled>Selecciona una opción</option>
+                                ';
+                                    $resulta=$fact->uso_cfdi();
+                                    while ($vara=mysqli_fetch_array($resulta)) {
+                                        echo'<option value='.$vara[1].'> '.$vara[1].$vara[2].' </option>';
+                                    }
+                                echo '</select>
+                            <label for="cfdi">Uso de CFDI</label>
+                        </div>
                     </div>
                     <!--             Imput Correo Electronico -->
-                    <div class="form-floating mb-2">
-                        <input type="text" id="correo" name="rfc[]" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="E-Mail">
-                        <label for="correo" id="inputGroup-sizing-default" >E-Mail</label>
+                    <div class="inputs_form_container noMargin_input">
+                        <div class="form-floating input_container">
+                            <input type="text" id="correo" name="rfc[]" class="form-control custom_input" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="E-Mail">
+                            <label for="correo" id="inputGroup-sizing-default" >E-Mail</label>
+                        </div>
                     </div>
                     <!--             Imput Metodo de Pago -->
-                    <div class="form-floating mb-2">
-                        <select id="metodopago" name="rfc[]" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Selecciona una opción</option>
-                            ';
+                    <div class="inputs_form_container noMargin_input">
+                            <div class="form-floating input_container">
+                                <select id="metodopago" name="rfc[]" class="form-select custom_input" id="inputGroupSelect01">
+                                    <option selected disabled>Selecciona una opción</option>
+                                    ';
                                 $resulta=$fact->metodo_pago();
                                 while ($vara=mysqli_fetch_array($resulta)) {
                                     echo'<option value='.$vara[1].'>  '.$vara[1]. $vara[2].'</option>';
@@ -83,159 +102,168 @@
                                 echo '</select>
                                 <label for="metodopago" >Metodo de Pago</label>
                             </div>
+                    </div>
     <!--             Imput Forma de Pago -->
-                    <div class="form-floating mb-2">
-                        <select id="forma_pago" name="rfc[]" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Selecciona una opción</option>
-                            ';
-                                $resulta=$fact->forma_pago();
-                                while ($vara=mysqli_fetch_array($resulta)) {
-                            echo'<option value='.$vara[1].'> '.$vara[1].$vara[2].' </option>';
-                            }
-                        echo '</select>
-                        <label for="forma_pago">Forma de Pago</label>
+                    <div class="inputs_form_container noMargin_input">
+                        <div class="form-floating input_container">
+                            <select id="forma_pago" name="rfc[]" class="form-select custom_input" id="inputGroupSelect01">
+                                <option selected disabled>Selecciona una opción</option>
+                                ';
+                                    $resulta=$fact->forma_pago();
+                                    while ($vara=mysqli_fetch_array($resulta)) {
+                                echo'<option value='.$vara[1].'> '.$vara[1].$vara[2].' </option>';
+                                }
+                            echo '</select>
+                            <label for="forma_pago">Forma de Pago</label>
+                        </div>
                     </div>
                     <!--             Textarea  Notas -->
-                    <div class="form-floating mb-2">
-                        <textarea id="notas" name="rfc[]" class="form-control" id="exampleFormControlTextarea1" placeholder="Notas" style="height: 80px"></textarea>
-                        <label for="notas" id="inputGroup-sizing-default">Notas</label>
+                    <div class="inputs_form_container noMargin_input">
+                        <div class="form-floating input_container">
+                            <textarea id="notas" name="rfc[]" class="form-control custom_input" id="exampleFormControlTextarea1" placeholder="Notas" style="height: 80px"></textarea>
+                            <label for="notas" id="inputGroup-sizing-default">Notas</label>
+                        </div>
                     </div>
-                    <hr style="color: black; display: block" />
-                    <div class="input-group">
-                        <span  id="inputGroup-sizing-default" >Agregar a factura global</span>
-                        <input type="checkbox" id="checkfacturaglobal" aria-label="Checkbox for following text input" onclick="factura_global()" style="margin-left: 1rem;">
+                        <div class="inputs_form_container">
+                        <div class="input-group">
+                            <span  id="inputGroup-sizing-default" >Agregar a factura global</span>
+                            <input type="checkbox" id="checkfacturaglobal" aria-label="Checkbox for following text input" onclick="factura_global()" style="margin-left: 1rem;">
+                        </div>
                     </div>
-                </div>
-            </div>
+            </section>
+            
+            
+
+            <section id="dinamic" class="contenedor_facturas_inputs" >
             <!--         Columna 2 Datos del documento a facturar-->
             <div id="animacion_formulario" class="col-10" style="display: none;">
                 <span class="loader"></span>
             </div>
-
-            <div class="dinamic col-10" id="dinamic" >
-                <div class="col-12">
-                                <div class="row col-12" >
-                                    <div class="col-2 form-floating">
-                                        <input type="text" name="rimporte" class="form-control" id="rimporte" readonly placeholder="Importe:">
-                                        <label for="rimporte" style="padding-left: 25px;">Importe:</label>
-                                    </div>
-                                    <div class="col-2 form-floating">
-                                        <input type="text" name="riva" class="form-control" id="riva" readonly placeholder="I.V.A">
-                                        <label for="riva" style="padding-left: 25px;">I.V.A.</label>  
-                                    </div>
-                                    <div class="col-2 form-floating">
-                                        <input type="text" name="rish" class="form-control" id="rish" readonly placeholder="I.S.H">
-                                        <label for="rish" style="padding-left: 25px;">I.S.H.</label>
-                                    </div>
-                                    <div class="col-2 form-floating">
-                                        <input type="text" name="rtotal" class="form-control" id="rtotal" readonly placeholder="Total:">
-                                        <label for="rtotal" style="padding-left: 25px;">Total:</label>
-                                    </div>
-                                    <button type="button" class="btn btn-info col-2" id="timbrar" name ="timbrar" onclick="timbrar_factura()" >
-                                        Timbrar&nbsp;Factura
-                                    </button>
-                                </div>
-                        </div>
-                <div class="form-row row" style="max-height:590px; overflow-y: scroll;">
-                    <div class="row col-12 mb-2">
-                        <!--             Imput Uso de CFDI -->
-                            <div id ="input_periocidad" class="form-floating col-3" style="display: none;">
-                                <select id="periocidad" name ="rfc[]" class="form-select" id="inputGroupSelect01">
-                                <option selected disabled>Selecciona una opción</option>
-                                ';
-                                $resulta=$fact->periocidad();
-                                while ($vara=mysqli_fetch_array($resulta)) {
-                                    echo'<option value='.$vara[1].'> '.$vara[1]. $vara[2].'</option>';
-                                }
-                            echo'</select>
-                            <label for="periocidad">Periodicidad</label>
-                            </div>
-                        <!--             Imput Nombre -->
-                        <div id ="input_mes" class="form-floating col-3" style="display: none;">
-                            <select id="mes" name ="rfc[]" class="form-select" id="inputGroupSelect01" >
-                                <option selected disabled>Selecciona una opción</option>
-                                ';
-                                    $resulta=$fact->mes();
-                                    while ($vara=mysqli_fetch_array($resulta)) {
-                                echo'<option value='.$vara[1].'> '.$vara[1]. $vara[2].'</option>';
-                                }
-                            echo'</select>
-                            <label for="mes">Mes</label>
-                        </div>
-                        <!--             Imput Codigo postal -->
-                        <div id ="input_año" class="form-floating col-3" style="display: none;">
-                            <input type="text" id="año" name="rfc[]" maxlength="100" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  value="" placeholder="Año">
-                            <label  for="año">Año</label>
-                        </div>
+                <div class="header_facturas" >
+                    <div class="form-floating input_container">
+                        <input type="text" name="rimporte" class="form-control custom_input" id="rimporte" readonly placeholder="Importe:">
+                        <label for="rimporte" >Importe:</label>
                     </div>
-                    
+                    <div class="form-floating input_container">
+                        <input type="text" name="riva" class="form-control custom_input" id="riva" readonly placeholder="I.V.A">
+                        <label for="riva" >I.V.A.</label> 
+                    </div>
+                    <div class="form-floating input_container">
+                        <input type="text" name="rish" class="form-control custom_input" id="rish" readonly placeholder="I.S.H">
+                        <label for="rish" >I.S.H.</label>
+                    </div>
+                    <div class="form-floating input_container">
+                        <input type="text" name="rtotal" class="form-control custom_input" id="rtotal" readonly placeholder="Total:">
+                        <label for="rtotal" >Total:</label>
+                    </div>
+                </div>
+                <div class="header_facturas">
+                    <!--             Imput Uso de CFDI -->
+                        <div id ="input_periocidad" class="form-floating input_container" style="display: none;">
+                            <select id="periocidad" name ="rfc[]" class="form-select custom_input" id="inputGroupSelect01">
+                            <option selected disabled>Selecciona una opción</option>
+                            ';
+                            $resulta=$fact->periocidad();
+                            while ($vara=mysqli_fetch_array($resulta)) {
+                                echo'<option value='.$vara[1].'> '.$vara[1]. $vara[2].'</option>';
+                            }
+                        echo'</select>
+                        <label for="periocidad">Periodicidad</label>
+                        </div>
+                    <!--             Imput Nombre -->
+                    <div id ="input_mes" class="form-floating input_container" style="display: none;">
+                        <select id="mes" name ="rfc[]" class="form-select custom_input" id="inputGroupSelect01" >
+                            <option selected disabled>Selecciona una opción</option>
+                            ';
+                                $resulta=$fact->mes();
+                                while ($vara=mysqli_fetch_array($resulta)) {
+                            echo'<option value='.$vara[1].'> '.$vara[1]. $vara[2].'</option>';
+                            }
+                        echo'</select>
+                        <label for="mes">Mes</label>
+                    </div>
+                    <!--             Imput Codigo postal -->
+                    <div id ="input_año" class="form-floating input_container" style="display: none;">
+                        <input type="text" id="año" name="rfc[]" maxlength="100" class="form-control custom_input" aria-label="Default" aria-describedby="inputGroup-sizing-default"  value="" placeholder="Año">
+                        <label  for="año">Año</label>
+                    </div>
+                </div>
+
+                
                 ';
-    
                     for ($i=1; $i <= $contador ; $i++) {
                         echo '
-                        
-                        <div class="form-floating col-1 mb-2">
-                            <input type="text" name="cantidad['.$i.']" class="form-control" id="cantidad['.$i.']" oninput="cal()" value="" placeholder="Cantidad">
-                            <label for="inputCity" style="padding-left: 25px;">Cantidad</label>
+                        <div class="inputs_form_container justify-content-start">
+                            <div class="form-floating ">
+                                <input type="text" name="cantidad['.$i.']" class="form-control custom_input maxWidthInput" id="cantidad['.$i.']" oninput="cal()" value="" placeholder="Cantidad">
+                                <label for="inputCity">Cantidad</label>
+                            </div>
+
+                            <!--Imput Unidad -->
+                            <div class="form-floating ">
+                                <input type="text" name="unidad['.$i.']" class="form-control custom_input maxWidthInput" id="unidad['.$i.']" value="SER" placeholder="Unidad">
+                                <label for="inputCity" >Unidad</label>
+                            </div>
+
+                             <!-- Imput Clave/Unidad -->
+                            <div class="form-floating ">
+                                <input type="text" name="claveunidad['.$i.']" class="form-control custom_input maxWidthInput" id="claveunidad['.$i.']" value="E48" placeholder="Clave/Unidad">
+                                <label for="inputCity">Clave/Unidad </label>
+                            </div>
+
+                            <!--Imput Clave -->
+                            <div class="form-floating ">
+                                <input type="text" name="clave['.$i.']" class="form-control custom_input maxWidthInput" id="clave['.$i.']" value="90111500" placeholder="Clave">
+                                <label for="inputCity">Clave</label>
+                            </div>
+
+                            <!-- Imput Id -->
+                            <div class="form-floating ">
+                                <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="" placeholder="ID">
+                                <label for="inputCity">ID</label>
+                            </div>
+
+                            <!--Imput Producto -->
+                            <div class="form-floating ">
+                                <input type="text" name="producto['.$i.']" class="form-control custom_input maxWidthInput" id="producto['.$i.']" value="HOSPEDAJE" placeholder="Producto">
+                                <label for="inputCity">Producto</label>
+                            </div>
+
+                            <!--Imput Imp Unitario -->
+                            <div class="form-floating ">
+                                <input type="text" name="importeuni['.$i.']" class="form-control custom_input maxWidthInput" id="importeuni['.$i.']" oninput="cal()" value="" placeholder="Imp.&nbsp;Unitario">
+                                <label for="inputCity">Imp.&nbsp;Unitario</label>
+                            </div>
+
+                            <!--Imput Importe -->
+                            <div class="form-floating ">
+                                <input type="text" name="importe['.$i.']" class="form-control custom_input maxWidthInput" id="importe['.$i.']" value="" readonly placeholder="Importe">
+                                <label for="inputCity">Importe</label>
+                            </div>
+
+                            <!-- Imput IVA -->
+                            <div class="form-floating ">
+                                <input name="iva['.$i.']" type="text" class="form-control custom_input maxWidthInput" id="iva['.$i.']" oninput="cal()" value="" readonly placeholder="IVA">
+                                <label for="inputCity">IVA</label>
+                            </div>
+
+                            <!-- Imput ISH -->
+                            <div class="form-floating ">
+                                <input type="text" name="ish['.$i.']" class="form-control custom_input maxWidthInput" id="ish['.$i.']" oninput="cal()" value="" readonly placeholder="ISH"> 
+                                <label for="inputCity">ISH</label>
+                            </div>
+
+                            <!--Checkbox ISH -->
+                            <div >
+                                    <input name="checisah['.$i.']" class="form-check-input" type="checkbox" id="checisah['.$i.']" oninput="cal()" checked> 
+                            </div>
                         </div>
-        <!--             Imput Unidad -->
-                    <div class="form-floating col-1 mb-2">
-                        <input type="text" name="unidad['.$i.']" class="form-control" id="unidad['.$i.']" value="SER" placeholder="Unidad">
-                        <label for="inputCity" style="padding-left: 25px;">Unidad</label>
-                    </div>
-        <!--             Imput Clave/Unidad -->
-                    <div class="form-floating col-1 mb-2">
-                        <input type="text" name="claveunidad['.$i.']" class="form-control" id="claveunidad['.$i.']" value="E48" placeholder="Clave/Unidad">
-                        <label for="inputCity" style="padding-left: 25px;">Clave/Unidad </label>
-                    </div>
-        <!--             Imput Clave -->
-                    <div class="form-floating col-1 mb-2">
-                        <input type="text" name="clave['.$i.']" class="form-control" id="clave['.$i.']" value="90111500" placeholder="Clave">
-                        <label for="inputCity" style="padding-left: 25px;">Clave</label>
-                    </div>
-        <!--             Imput Id -->
-                    <div class="form-floating col-1 mb-2">
-                        <input type="text" name="id['.$i.']" class="form-control" id="id['.$i.']" value="" placeholder="ID">
-                        <label for="inputCity" style="padding-left: 25px;">ID</label>
-                    </div>
-        <!--             Imput Producto -->
-                    <div class="form-floating col-2 mb-2">
-                        <input type="text" name="producto['.$i.']" class="form-control" id="producto['.$i.']" value="HOSPEDAJE" placeholder="Producto">
-                        <label for="inputCity" style="padding-left: 25px;">Producto</label>
-                    </div>
-        <!--             Imput Imp Unitario -->
-                    <div class="form-floating col-1 mb-2">
-                        <input type="text" name="importeuni['.$i.']" class="form-control" id="importeuni['.$i.']" oninput="cal()" value="" placeholder="Imp.&nbsp;Unitario">
-                        <label for="inputCity" style="padding-left: 25px;">Imp.&nbsp;Unitario</label>
-                    </div>
-        <!--             Imput Importe -->
-                    <div class="form-floating col-1 mb-2">
-                        <input type="text" name="importe['.$i.']" class="form-control" id="importe['.$i.']" value="" readonly placeholder="Importe">
-                        <label for="inputCity" style="padding-left: 25px;">Importe</label>
-                    </div>
-        <!--             Imput IVA -->
-                    <div class="form-floating col-1 mb-2">
-                        <input name="iva['.$i.']" type="text" class="form-control" id="iva['.$i.']" oninput="cal()" value="" readonly placeholder="IVA">
-                        <label for="inputCity" style="padding-left: 25px;">IVA</label>
-                    </div>
-                <!--             Imput ISH -->
-                        <div class="form-floating col-1 mb-2">
-                            <input type="text" name="ish['.$i.']" class="form-control" id="ish['.$i.']" oninput="cal()" value="" readonly placeholder="ISH"> 
-                            <label for="inputCity" style="padding-left: 25px;">ISH</label>
-                        </div>
-        <!--             Checkbox ISH -->
-                    <div class="form-group col-1">
-                            <input name="checisah['.$i.']" class="form-check-input" type="checkbox" id="checisah['.$i.']" oninput="cal()" checked> 
-                    </div>
                     ';
                     }
                     echo'
-                    </div>
-            </div>
             <div class="row col-xl-12">
                 <div class="col-md-4"><!-- Espacio en blanco --></div>
             </div>
-        </div>
         <!--<center><button type="submit" class="btn btn-secondary btn-lg" style="width: 550px;">Timbrar&nbsp;Factura</button></center>-->
     </form>
             </div>
