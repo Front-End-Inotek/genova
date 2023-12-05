@@ -1162,7 +1162,7 @@ select[disabled]{
 
 .ticket_container{
   width: 100%;
-  max-width: 900px !important;
+  max-width: 1500px !important;
   margin: 0 auto;
   /* border-radius: 15px !important;
   box-shadow: 1px 2px 14px 0px #00000038; */

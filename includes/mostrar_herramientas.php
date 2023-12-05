@@ -348,10 +348,12 @@ switch ($_GET['estado']) {
 }
 
 echo '</div>';
-echo '<div class="row flex-wrap justify-content-around">';
+
+echo '<div class="contenedor_modal_info">';
 	mostar_info($_GET['hab_id'],$_GET['estado'],$hab->mov,$_GET['id'],$entrada,$salida);
 echo '</div>';
 echo '</div>';
+
 echo '<div class="modal-footer" >
 		<button type="button" class="btn btn-danger btn-default" data-dismiss="modal">
 			Cancelar

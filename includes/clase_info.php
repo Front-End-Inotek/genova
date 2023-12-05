@@ -38,9 +38,9 @@
           $this->reserva_pendiente($hab_id,$estado,$mov,$id,$entrada,$salida);
           break;
         default:
-            echo '<div class="col-xs-2 col-sm-2 col-md-2">';
-              echo 'No definido';
-            echo '</div>';
+            echo '<ul class="list-group" style="width: 100%;">';
+              echo '<li class="list-group-item">No definido</li>';
+            echo '</ul>';
           break;
       }
     }
@@ -58,18 +58,20 @@
       }
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
+      echo '<ul class="list-group" style="width: 100%;" >';
       if($fin_hospedaje>0){
-        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-          echo 'Ultima renta: '.date("d-m-Y H:i:s",  $fin_hospedaje);
-        echo '</div>';
+        echo '<li class="list-group-item">';
+          echo '<b>Ultima renta:</b> '.date("d-m-Y H:i:s",  $fin_hospedaje);
+        echo '</li>';
       }else{
-        echo '<div class="col-12  col-md-6 letras-grandes-modal">';
-          echo 'Ultima renta: INFORMACION NO DISPONIBLE';
-        echo '</div>';
+        echo '<li class="list-group-item">';
+          echo '<b>Ultima renta:</b> INFORMACION NO DISPONIBLE';
+        echo '</li>';
       }
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Tipo Habitación: '.$tipo_habitacion;
-      echo '</div>';
+      echo '<li class="list-group-item">';
+        echo '<b>Tipo Habitación:</b> '.$tipo_habitacion;
+      echo '</li>';
+      echo '</ul>';
     }
     // Estado 1
     function ocupada($hab_id,$estado,$mov){

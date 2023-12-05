@@ -274,20 +274,20 @@
 .task--bloqueado {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   background-color: #333;
-  border-left: 7px solid #0b0b0b;
+  /* border-left: 7px solid #0b0b0b; */
   color: #fff;
 }
 
 .task--bloqueado:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
-  border-left: 7px solid #9b9a9a !important;
+  /* border-left: 7px solid #9b9a9a !important; */
   box-shadow: 0 10px 14px #9b9a9a;
 }
 
 .task--uso-casa {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='0.5' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-  border-left: 7px solid #05d1ca;
+  /* border-left: 7px solid #05d1ca; */
   background-color: #05d1ca;
   grid-row: 8;
 }
@@ -298,7 +298,7 @@
 }
 
 .task--mantenimiento {
-  border-left: 7px solid var(--colorTextNaranja);
+  /* border-left: 7px solid var(--colorTextNaranja); */
   background: var(--fondoNaranja);
   /* background: linear-gradient(180deg, #ffbe5b 0%, #f9d7a5 40%, #ffb546 100%); */
   /* min-width: 200px; */
@@ -327,14 +327,14 @@
 .task--ocupada-sucia:hover {
   /* background-color: #bd0202e8 !important; */
   color: #fff !important;
-  border-left: 7px solid #bb6464 !important;
+  /* border-left: 7px solid #bb6464 !important; */
 }
 
 .task--ocupadoH {
   background-color: #b12e3b;
   /* background: linear-gradient(180deg, #a80000fc 0%, rgb(253, 87, 87) 40%, #a80000fc 100%); */
   color: #fff;
-  border-left: 7px solid var(--colorTextRojo);
+  /* border-left: 7px solid var(--colorTextRojo); */
   background-color: var(--fondoRojo);
   color: var(--colorTextRojo);
   /* box-shadow: var(--sombra); */
@@ -347,7 +347,7 @@
 }
 
 .task--vacia-sucia {
-  border-left: 7px solid var(--colorTextVerde);
+  /* border-left: 7px solid var(--colorTextVerde); */
   background: var(--fondoVerde);
   /* background: linear-gradient(180deg, #b9ed84 0%, #d6f6b5 40%, #98cb62 100%); */
   align-self: end;
@@ -357,22 +357,22 @@
 .task--vacia-sucia:hover {
   background-color: #81e389 !important;
   color: #fff !important;
-  border-left: 7px solid #bff1bfa1 !important;
-  box-shadow: 0 10px 14px #35da435d;
+  /* border-left: 7px solid #bff1bfa1 !important; */
+  /* box-shadow: 0 10px 14px #35da435d; */
 }
 
 .task--disponible-limpia {
-  border-left: 7px solid #006912;
+  /* border-left: 7px solid #006912; */
   background: #bfffce ;
   /* background: linear-gradient(180deg, #e9e9e9ee 0%, #ffffff 40%, rgb(170, 170, 170) 100%); */
-  box-shadow: var(--sombra);
+  /* box-shadow: var(--sombra); */
   color: var(--titulos);
 }
 
 .task--disponible-limpia:hover {
   background-color: rgba(235, 235, 235, 0.7) !important;
   color: #000 !important;
-  border-left: 7px solid #9b9a9a !important;
+ /*  border-left: 7px solid #9b9a9a !important; */
   /* box-shadow: 0 10px 14px #9b9a9a; */
 }
 
@@ -381,7 +381,7 @@
 }
 
 .task--reserva-pagada {
-  border-left: 7px solid #4d03ae;
+  /* border-left: 7px solid #4d03ae; */
   /*aqui puedes seleccioanr donde y con span cuanto espacio requiere 
   grid-column: 2 / span 2;
   grid-row: 10;*/
@@ -393,12 +393,12 @@
 .task--reserva-pagada:hover {
   background-color: #6b0fe3af !important;
   color: #fff !important;
-  border-left: 7px solid #4d03ae !important;
+  /* border-left: 7px solid #4d03ae !important; */
   /* box-shadow: 0 10px 14px #6b0fe396; */
 }
 
 .task--reserva-pendiente-pago {
-  border-left: 7px solid #bc88ff;
+  /* border-left: 7px solid #bc88ff; */
   /*aqui puedes seleccioanr donde y con span cuanto espacio requiere */
   grid-column: 2 / span 2;
   grid-row: 11;
@@ -410,22 +410,22 @@
 .task--reserva-pendiente-pago:hover {
   background-color: #3b0286 !important;
   color: #fff !important;
-  border-left: 7px solid #3b0286 !important;
+  /* border-left: 7px solid #3b0286 !important; */
   /* box-shadow: 0 10px 14px #3b0286cb; */
 }
 #yo:hover ~  #hh {color: yellow; }
 
 .task--limpieza-vacia {
-  border-left: 7px solid #4786ff;
+  /* border-left: 7px solid #4786ff; */
   background: rgb(205, 222, 252);
   /* background: linear-gradient(180deg, #b4ceff 0%, rgb(206, 223, 255) 40%, #80acff 100%); */
   color: #0a5eff;
 }
 
 .task--limpieza-vacia:hover {
-  box-shadow: 0 10px 14px #4787ff8d;
+ /*  box-shadow: 0 10px 14px #4787ff8d; */
   /* border-left: 7px solid #1260f0; */
-  border-left: 7px solid var(--colorTextAzul);
+  /* border-left: 7px solid var(--colorTextAzul); */
 }
 
 .task--limpieza-vacia a {
@@ -433,7 +433,7 @@
 }
 
 .task--limpieza-ocupada {
-  border-left: 7px solid #052d76;
+  /* border-left: 7px solid #052d76; */
   background: var(--fondoAzul);
   /* background: linear-gradient(180deg, #1c53ba 0%, #6398fb 40%, #0b3c96 100%); */
   align-self: end;
@@ -445,7 +445,7 @@
 .task--limpieza-ocupada:hover {
   /* background-color: #052d76 !important; */
   color: #fff !important;
-  border-left: 7px solid #6398fb !important;
+  /* border-left: 7px solid #6398fb !important; */
   /* box-shadow: 0 10px 14px #6398fbdd; */
 }
 .editarHab{
@@ -456,7 +456,7 @@
   background-color: #FD7E14 !important;
 }
 .AsignarReserva{
-  border-left: 7px solid #6610F2 !important;
+  /* border-left: 7px solid #6610F2 !important; */
   color: #fff !important;
   background-color: #6e42c195 !important;
 }
@@ -465,13 +465,13 @@
 }
 
 .AsignarReservaBtn{
-  border-left: 7px solid #28A745 !important;
+  /* border-left: 7px solid #28A745 !important; */
   color: #000 !important;
   background-color: #28a74671 !important;
 }
 
 .CambiarHabitacion{
-  border-left: 7px solid #9b9a9a !important;
+  /* border-left: 7px solid #9b9a9a !important; */
   background-color: #e5e4e4 !important;
   color: black !important;
 }
@@ -479,7 +479,7 @@
   background-color: #9b9a9a !important;
 }
 .btnCambiarHab{
-  border-left: 7px solid #17A2B8 !important;
+  /* border-left: 7px solid #17A2B8 !important; */
   color: #000 !important;
   background-color: #a5eaf4 !important;
 }

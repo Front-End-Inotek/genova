@@ -1,4 +1,4 @@
-<?php
+<?phpFecha entrada
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_reservacion.php");
   include_once("clase_tarifa.php");

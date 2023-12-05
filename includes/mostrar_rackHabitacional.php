@@ -274,10 +274,10 @@ class RackHabitacional extends ConexionMYSql
                             $clase_hover = "nuevax" . $i .rand(1, 100);
                             ;
                             echo '<style>
-                        .'.$clase_hover.'::after {
-                        content: "'.$huesped_reserva.'";
-                        }
-                        </style>';
+                                .'.$clase_hover.'::after {
+                                content: "'.$huesped_reserva.'";
+                                }
+                                </style>';
                             $noches_reserva = ($fila_r['fecha_salida'] - $fila_r['fecha_entrada'])/86400;
                             // if($fila['id']==46){
                             //     echo date('Y-m-d', $tiempo_aux) ."|". date('Y-m-d', $fila_r['fecha_entrada']) ."|".  date('Y-m-d', $fila_r['fecha_salida']);
@@ -286,13 +286,13 @@ class RackHabitacional extends ConexionMYSql
                             if(date('Y-m-d', $tiempo_aux) > date('Y-m-d', $fila_r['fecha_entrada']) && date('Y-m-d', $tiempo_aux) == date('Y-m-d', $fila_r['fecha_salida']) && !$existe_disponible) {
                                 echo '
                         <td class="celdaCompleta tdCheck " title="nombre huesped">
-                        <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
-                        <div >
-                        ';
-                                echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
-                                echo '</div>';
-                                echo '
-                        </div>
+                            <div href="#caja_herramientas" data-toggle="modal" onclick="mostrar_herramientas(' . $fila['id'] . ',' . $fila['estado'] . ',\''.$fila['nombre'].'\')" >
+                            <div >
+                            ';
+                                    echo '<section class="task ' . $estado_habitacion_matutino[0] . '"> ' . $estado_habitacion_matutino[1] . '</section>';
+                                    echo '</div>';
+                                    echo '
+                            </div>
                         </td>
                         ';
                                 $existe_disponible=true;
@@ -485,7 +485,7 @@ class RackHabitacional extends ConexionMYSql
                         $noches = $noches == 0 ? 1 : $noches;
                         echo '';
                         echo '
-                        <td class="celdaCompleta tdCheck " colspan="' . $noches  . '">
+                        <td class="celdaCompleta tdCheck "  colspan="' . $noches  . '">
                         '.$icono_carro.'
                         '.$icono_estado_limpieza.'
                         ';
