@@ -5,7 +5,7 @@
   //$usuario_servidor="kala";
   $usuario_servidor="root";
   //$password="ORWare1986";
-  $password="123";
+  $password="";
   $base_datos="visit";
   //.gitignore
 ?>
