@@ -801,6 +801,17 @@ body {
   min-width: 112px;
   max-width: 50px;
 }
+
+.contenedor_tablas_1_facturas{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.contenedor_tablas_2_facturas{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {
