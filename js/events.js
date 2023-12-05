@@ -8709,3 +8709,22 @@ function guardarColoresHab() {
         console.log(response);
     })
 }
+
+function handle_rest( id_check , operador ) {
+    const total = document.getElementById("total_factura_global_number")
+    const checkBox = document.getElementById(id_check)
+
+    if( checkBox ){
+        let totalValor = parseFloat(total.innerHTML.replace(/[$,]/g, ''));
+        if(checkBox.checked){
+            let resultado = totalValor + operador;
+            let resultadoFormateado = "$" + resultado.toFixed(2);
+            total.innerHTML = resultadoFormateado
+        } else {
+            let resultado = totalValor - operador;
+            let resultadoFormateado = "$" + resultado.toFixed(2);
+            total.innerHTML = resultadoFormateado
+        }
+    }
+}
+    

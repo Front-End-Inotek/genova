@@ -32,7 +32,7 @@
         echo '
           <div class="ticket_container_header">
             <div class="ticket_container_header_input ">
-              <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" checked/>
+              <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" checked onchange="handle_rest(\'leer_check_'.$contadoriteraciones.'\', ' . $fila["total"] . ')" />
             </div>
             <div class="ticket_container_header_info">
               <div class="ticket_container_header_info_fecha">
@@ -50,7 +50,7 @@
                   <p class="ticket_info_p">Total: <spam class="ticket_spam ticket_info_price">$'.$fila["total"].'</spam></p> ';
                     $total += $fila["total"];
                   echo '
-                  <input class="d-none" type="number" id="leer_total_'.$contadoriteraciones.'" value="'.$fila["total"].'"/>
+                  <input class="d-none" type="number" id="leer_total_'.$contadoriteraciones.'" value="'.$fila["total"].'"  />
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
         echo '
           <div class="ticket_container_header">
             <div class="ticket_container_header_input ">
-              <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" checked/>
+            <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" checked onchange="handle_rest(\'leer_check_'.$contadoriteraciones.'\', ' . $fila["total"] . ')" />
             </div>
             <div class="ticket_container_header_info">
               <div class="ticket_container_header_info_fecha">

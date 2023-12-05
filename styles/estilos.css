@@ -1161,7 +1161,7 @@ select[disabled]{
 }
 
 .ticket_container{
-  width: 100%;
+  width: 80%;
   max-width: 1500px !important;
   margin: 0 auto;
   /* border-radius: 15px !important;
@@ -1267,11 +1267,15 @@ select[disabled]{
   width: 100%;
 }
 .titulo_tabla_facturas {
-  font-size: 32px;
+  font-size: 1rem;
   line-height: 1.125;
+  line-height: 1.1;
   font-weight: 600;
   letter-spacing: .004em;
-  color: black;
+  color: #1d1d1f;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #d2d2d7;
 }
 
 /* Loader */
