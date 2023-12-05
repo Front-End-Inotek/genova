@@ -300,16 +300,9 @@
         }
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-          echo '<div class="CambiarHabitacion btn-square-lg" onclick="hab_cambio('.$hab_id.','.$estado.','.$fila['id'].')">';
-          echo '</br>';
-          echo '<div>';
-              //echo '<img src="images/persona.png"  class="center-block img-responsive">';
-          echo '</div>';
-          echo '<div>';
+          echo '<div class="btn_modal_herramientas btn_cambiar_hab " onclick="hab_cambio('.$hab_id.','.$estado.','.$fila['id'].')">';
+          echo '<img  class="btn_modal_img" src="./assets/iconos_btn/house-user-solid.svg"/>';        
             echo $fila['nombre'];
-          echo '</div>';
-          echo '</div>';
         echo '</div>';
         }
       }

@@ -790,30 +790,18 @@
         $sentencia = "SELECT * FROM usuario WHERE activo = 1 AND nivel = $nivel AND estado = 1 ORDER BY usuario";
         $comentario="Asignación de usuarios a la clase usuario funcion constructor";
         // echo $sentencia . "|" . $nuevo_estado;
-        
+
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
           switch($nuevo_estado){
             case 1: case 2:
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-                  echo '<div class="select_reca btn-square-lg" onclick="hab_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
-                  echo '</br>';
-                  echo '<div>';
-                      //echo '<img src="images/persona.png"  class="center-block img-responsive">';
-                  echo '</div>';
-                  echo '<div>';
-                    echo $fila['usuario'];
-                    
-                  echo '</div>';
-                  /*echo '<div>Limpiadas: ';
-                    $fecha= $this->ultima_fecha();
-                    echo $this->cantidad_limpieza($fecha,$fila['id']);
-                  echo '</div>';*/
-                  //echo '</br>';
-                echo '</div>';
-              echo '</div>';
+              echo '<div class="btn_modal_herramientas btn_asginar_recam" onclick="hab_limpieza('.$hab_id.','.$estado.','.$fila['id'].')">';
+              echo '<img  class="btn_modal_img" src="./assets/iconos_btn/user-solid.svg"/>';        
+                echo $fila['usuario'];
+                    echo '</div>';
+
               break;
             case 3: // Enviar a limpieza
               echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
@@ -834,30 +822,17 @@
               echo '</div>';
               break;
             case 4:// Enviar a mantenimiento
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-                  echo '<div class="select_reca btn-square-lg" onclick="hab_modal_inicial('.$hab_id.','.$nuevo_estado.','.$fila['id'].')">';
-                  echo '</br>';
-                  echo '<div>';
-                      //echo '<img src="images/persona.png"  class="center-block img-responsive">';
-                  echo '</div>';
-                  echo '<div>';
+                  echo '<div class="btn_modal_herramientas btn_asginar_mtto" onclick="hab_modal_inicial('.$hab_id.','.$nuevo_estado.','.$fila['id'].')">';
+                  echo '<img  class="btn_modal_img" src="./assets/iconos_btn/user-solid.svg"/>';        
                     echo $fila['usuario'];
                   echo '</div>';
-                echo '</div>';
-              echo '</div>';
               break;
             case 5:// Enviar a supervision
-              echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-                  echo '<div class="select_reca btn-square-lg" onclick="hab_inicial('.$hab_id.','.$nuevo_estado.','.$fila['id'].')">';
-                  echo '</br>';
-                  echo '<div>';
-                      //echo '<img src="images/persona.png"  class="center-block img-responsive">';
-                  echo '</div>';
-                  echo '<div>';
+              
+                  echo '<div class="btn_modal_herramientas btn_asginar_surpev" onclick="hab_inicial('.$hab_id.','.$nuevo_estado.','.$fila['id'].')">';
+                  echo '<img  class="btn_modal_img" src="./assets/iconos_btn/user-solid.svg"/>';        
                     echo $fila['usuario'];
                   echo '</div>';
-                echo '</div>';
-              echo '</div>';
               break;
             default:
                     echo "Sin Información que mostrar";
