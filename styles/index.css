@@ -796,6 +796,26 @@ body {
   flex-direction: column;
   flex-grow: 1;
 }
+.estado_cuenta_resumen{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 95%;
+  margin: 0.5rem auto;
+  gap: 0.5rem;
+}
+.estado_cuenta_botones {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 95%;
+  margin: 0.5rem auto;
+  gap: 0.5rem;
+}
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {
@@ -852,5 +872,8 @@ body {
     }
     .contenedor_facturas_inputs {
       flex: 1;
+    }
+    .estado_cuenta_resumen{
+      flex-direction: column;
     }
 }
