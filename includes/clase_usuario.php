@@ -525,9 +525,9 @@
            <table class="table  table-hover">
              <thead>
                <tr class="table-primary-encabezado text-center">
-               <th>Nombre</th>
+               <th>Usuario</th>
                <th>Nivel</th>
-               <th>Nombre</th>
+               <th>Nombre completo</th>
                <th>Puesto</th>
                <th>Celular o teléfono</th>
                <th>Correo</th>
