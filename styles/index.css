@@ -832,6 +832,24 @@ body {
   margin: 0.5rem auto;
   gap: 0.5rem;
 }
+.btn_resumen_reservacion{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.contenedor_reporte_reservacion {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.list_group_perzonalizado {
+  flex-grow: 1;
+  border-radius: 15px;
+}
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {
@@ -891,5 +909,12 @@ body {
     }
     .estado_cuenta_resumen{
       flex-direction: column;
+    }
+    .contenedor_reporte_reservacion {
+      flex-direction: column;
+    }
+    .list_group_perzonalizado{
+      width: 80%;
+      margin: auto;
     }
 }
