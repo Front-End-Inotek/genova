@@ -671,7 +671,7 @@ body {
   color: white;
 }
 .btn_asginar_recam {
-  background-color: #74C0FC;
+  background-color: #619ABD;
   color: white;
 }
 .btn_asginar_mtto {
@@ -679,7 +679,7 @@ body {
   color: white;
 }
 .btn_asginar_surpev {
-  background-color: #92928F;
+  background-color: #2e2e2e;
   color: white;
 }
 .btn_cambiar_hab {
@@ -719,19 +719,19 @@ body {
   color: white;
 }
 .btn_restaurante {
-  background-color: #FFC700;
+  background-color: #d1aa1b;
   color: white;
 }
 .btn_editar {
-  background-color: #c2c2c2;
+  background-color: #096b99;
   color: white;
 }
 .btn_cambiar {
-  background-color: #819cb3 ;
+  background-color: #2f3031 ;
   color: white;
 }
 .btn_terminar {
-  background-color: rgb(37, 59, 87);
+  background-color: rgb(214, 105, 16);
   color: white;
 }
 .btn_modal_img {
