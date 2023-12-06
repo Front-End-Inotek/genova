@@ -667,11 +667,11 @@ body {
   justify-content: center;
 }
 .btn_ocupado {
-  background-color: #E16F64;
+  background-color: #DC3545;
   color: white;
 }
 .btn_asginar_recam {
-  background-color: #74C0FC;
+  background-color: #619ABD;
   color: white;
 }
 .btn_asginar_mtto {
@@ -679,7 +679,7 @@ body {
   color: white;
 }
 .btn_asginar_surpev {
-  background-color: #92928F;
+  background-color: #2e2e2e;
   color: white;
 }
 .btn_cambiar_hab {
@@ -687,19 +687,19 @@ body {
   color: white;
 }
 .btn_reservar {
-  background-color: #A782C3;
+  background-color: #8e54bb;
   color: white;
 }
 .btn_limpieza{
-  background-color: #5B97BD;
+  background-color: rgb(97, 154, 189);
   color: white;
 }
 .btn_sucia {
-  background-color: #f15446;
+  background-color: #C89B86;
   color: white;
 }
 .btn_uso_casa {
-  background-color: #5B97BD;
+  background-color: #3c9ad4;
   color: white;
 }
 .btn_mantenimiento {
@@ -707,31 +707,31 @@ body {
   color: white;
 }
 .btn_bloqueado {
-  background-color: #91918e;
+  background-color: #2e2e2e;
   color: white;
 }
 .btn_desocupar {
-  background-color: #5B97BD;
+  background-color: #176e17;
   color: white;
 }
 .btn_edo_cuenta {
-  background-color: #00D27A;
+  background-color: #40aa7e;
   color: white;
 }
 .btn_restaurante {
-  background-color: #FFC700;
+  background-color: #d1aa1b;
   color: white;
 }
 .btn_editar {
-  background-color: #c2c2c2;
+  background-color: #096b99;
   color: white;
 }
 .btn_cambiar {
-  background-color: #819cb3 ;
+  background-color: #2f3031 ;
   color: white;
 }
 .btn_terminar {
-  background-color: rgb(37, 59, 87);
+  background-color: rgb(214, 105, 16);
   color: white;
 }
 .btn_modal_img {
