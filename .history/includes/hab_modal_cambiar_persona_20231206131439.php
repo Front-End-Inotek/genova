@@ -45,7 +45,6 @@
         </svg>
       </button>
       </div>
-      <div class="modal-body">';
       echo '<div class="contenedor_botones">';
       switch($_GET['estado']){
             case 3:// En habitacion limpieza-edo.3

@@ -64,7 +64,6 @@
                 //echo "Estado indefinido";
                 break;
           }
-        echo '</div>';
       echo '</div>
       <div class="modal-footer" id="boton_asignar_huesped">
         <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>

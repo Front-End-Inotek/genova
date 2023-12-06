@@ -46,8 +46,8 @@
       </button>
       </div>
       <div class="modal-body">';
-      echo '<div class="contenedor_botones">';
-      switch($_GET['estado']){
+        echo '<div class="row">';
+          switch($_GET['estado']){
             case 3:// En habitacion limpieza-edo.3
                 $usuario_actual= $movimiento->saber_persona_limpio($hab->mov);
                 $usuario->select_cambiar_usuario($_GET['hab_id'],$_GET['estado'],$usuario_actual);
