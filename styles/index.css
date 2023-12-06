@@ -817,7 +817,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: flex-start;
   width: 95%;
   margin: 0.5rem auto;
   gap: 0.5rem;

@@ -348,17 +348,9 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-                echo '<div class="hab_cambiar" onclick="cambiar_hab_monto('.$fila['id'].','.$fila['mov'].','.$monto.','.$id.','.$hab_id.','.$estado.')">';
-              echo '</br>';
-              echo '<div>';
-                  //echo '<img src="images/home.png"  class="center-block img-responsive">';
-              echo '</div>';
-              echo '<div>';
-                  echo $fila['nombre'];
-              echo '</div>';
-              echo '</br>';
-            echo '</div>';
+          echo '<div class="btn_modal_herramientas btn_desocupar" onclick="cambiar_hab_monto('.$fila['id'].','.$fila['mov'].','.$monto.','.$id.','.$hab_id.','.$estado.')">';
+            echo '<img class="btn_modal_img" src="./assets/iconos_btn/desocupar.svg">';
+            echo $fila['nombre'];
           echo '</div>';
         }
       }
@@ -370,17 +362,9 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-                echo '<div class="hab_cambiar" onclick="cambiar_hab_cuentas_seleccionadas('.$fila['id'].',\''.$fila['nombre'].'\','.$fila['mov'].','.$hab_id.','.$estado.','.$mov.')">';
-              echo '</br>';
-              echo '<div>';
-                  //echo '<img src="images/home.png"  class="center-block img-responsive">';
-              echo '</div>';
-              echo '<div>';
-                  echo $fila['nombre'];
-              echo '</div>';
-              echo '</br>';
-            echo '</div>';
+          echo '<div class="btn_modal_herramientas btn_desocupar" onclick="cambiar_hab_cuentas_seleccionadas('.$fila['id'].',\''.$fila['nombre'].'\','.$fila['mov'].','.$hab_id.','.$estado.','.$mov.')" >';
+              echo '<img class="btn_modal_img" src="./assets/iconos_btn/desocupar.svg">';
+              echo $fila['nombre'];
           echo '</div>';
         }
       }

@@ -26,77 +26,63 @@
   <div class="modal-content">
     <div class="modal-header">';
       if($id_maestra==0){
-        echo '<h3 class="modal-title">AHCloud>Panel>Habitacion '.$hab->nombre.'</h3>';
+        echo '<h3 class="modal-title">Abonar a habitación '.$hab->nombre.'</h3>';
       }else{
         require_once('clase_cuenta_maestra.php');
         $cm = new CuentaMaestra($id_maestra);
-        echo '<h3 class="modal-title">AHCloud>Panel>Cuenta Maestra '.$cm->nombre.'</h3>';
+        echo '<h3 class="modal-title">Abonar a cuenta Maestra '.$cm->nombre.'</h3>';
       }
     echo '
-      <h2>Abonar</h2>
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-    </div><br>
+        <button type="button" class="btn btn-light" data-dismiss="modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
+          </svg>
+        </button>
+    </div>
     <div class="modal-body">
-      <div class="row flex-wrap">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-3">Descripcion:</div>
-        <div class="col-sm-7">
-        <div class="form-group">
-          <!-- <input class="form-control" type="text" id="descripcion" placeholder="Ingresa la descripcion del abono" maxlength="30"> -->
-          <select name="select" id="leer_tipo_abono" class="form-select" aria-label="opcion">
-            <option value="value1" selected disable>Selecciona una opción</option>
+      <div class="form-garantia">
+        <div class="inputs_form_container">
+        <div class="form-floating input_container">
+          <select name="select" class="form-select custom_input" id="leer_tipo_abono" aria-label="Floating label select example">
+            <option value="value1" selected disabled>Selecciona una opción</option>
             <option value="value2">Abono restaurante</option>
             <option value="value3">Abono hospedaje</option>
           </select>
-          <!-- <select class="form-select" id="descripcion">
-          <option value="">Seleccionar un tipo de abono</option>
-          ';
-          $config->tipos_abonos();
-          echo '
-          </select> -->
+          <label for="leer_tipo_abono">Descripción</label>
         </div>
         </div>
-        <div class="col-sm-1"></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-3">Forma de pago:</div>
-        <div class="col-sm-7">
-        <div class="form-group">
-          <select class="form-control" id="forma_pago">
-            <option value="0">Selecciona</option>';
+
+        <div class="inputs_form_container">
+        <div class="form-floating input_container">
+          <select class="form-select custom_input" id="forma_pago" aria-label="Floating label select example">
+            <option value="0" selected disabled>Selecciona una opción</option>';
             $forma_pago->mostrar_forma_pago();
             echo '
           </select>
+          <label for="forma_pago">Forma de pago</label>
         </div>
         </div>
-        <div class="col-sm-1"></div>
-      </div>
-      <div class="row flex-wrap">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-3">Cargo faltante:</div>
-        <div class="col-sm-7">
-        <div class="form-group">
-          <input class="form-control" type="text" id="cargo" placeholder="$'.number_format($_GET['faltante'], 2).'" maxlength="20" disabled>
+
+        <div class="inputs_form_container">
+        <div class="form-floating input_container">
+          <input type="email" class="form-control custom_input" id="cargo" placeholder="Cargo faltante" value="$'.number_format($_GET['faltante'], 2).'" maxlength="20" disabled>
+          <label for="cargo">Cargo faltante</label>
         </div>
         </div>
-        <div class="col-sm-1"></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-3">Abono:</div>
-        <div class="col-sm-7">
-        <div class="form-group">
-          <input maxlength="10"  class="form-control" type="text" id="abono" placeholder="Ingresa la cantidad del abono" onkeypress="validarNumero(event)">
+
+        <div class="inputs_form_container">
+        <div class="form-floating input_container">
+          <input type="email" class="form-control custom_input" id="abono" placeholder="Ingresa la cantidad del abono" maxlength="10" onkeypress="validarNumero(event)">
+          <label for="abono">Abono</label>
         </div>
         </div>
-        <div class="col-sm-1"></div>
+      
       </div>
     <div>
 
     <div class="modal-footer" id="boton_abono">
       <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-      <button type="button" class="btn btn-success" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].', \''.$_GET['faltante'].'\','.$mov.','.$id_maestra.')"> Aceptar</button>
+      <button type="button" class="btn btn-primary" onclick="guardar_abono('.$_GET['hab_id'].','.$_GET['estado'].', \''.$_GET['faltante'].'\','.$mov.','.$id_maestra.')"> Aceptar</button>
     </div>
   </div>';
 ?>
