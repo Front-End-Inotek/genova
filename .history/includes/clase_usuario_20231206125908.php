@@ -864,10 +864,17 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<div class="btn_modal_herramientas btn_cambiar_hab" onclick="hab_cambiar_persona('.$hab_id.','.$estado.','.$fila['id'].')">';
           echo '<img  class="btn_modal_img" src="./assets/iconos_btn/user-solid.svg"/>';        
+              echo '<div class="btn_modal_herramientas btn_asginar_mtto" onclick="hab_cambiar_persona('.$hab_id.','.$estado.','.$fila['id'].')">';
+              echo '</br>';
+              echo '<div>';
+                  //echo '<img src="images/persona.png"  class="center-block img-responsive">';
+              echo '</div>';
+              echo '<div>';
                 echo $fila['usuario'];
               echo '</div>';
+            echo '</div>';
+          echo '</div>';
           $cambio= $fila['id'];
         }
 

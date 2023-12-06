@@ -45,7 +45,6 @@
         </svg>
       </button>
       </div>
-      <div class="modal-body">';
       echo '<div class="contenedor_botones">';
       switch($_GET['estado']){
             case 3:// En habitacion limpieza-edo.3
@@ -65,7 +64,6 @@
                 break;
           }
         echo '</div>';
-      echo '</div>
       <div class="modal-footer" id="boton_asignar_huesped">
         <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
       </div>

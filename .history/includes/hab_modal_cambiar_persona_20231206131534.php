@@ -46,8 +46,9 @@
       </button>
       </div>
       <div class="modal-body">';
-      echo '<div class="contenedor_botones">';
       switch($_GET['estado']){
+        echo '<div class="contenedor_botones">';
+
             case 3:// En habitacion limpieza-edo.3
                 $usuario_actual= $movimiento->saber_persona_limpio($hab->mov);
                 $usuario->select_cambiar_usuario($_GET['hab_id'],$_GET['estado'],$usuario_actual);
@@ -64,7 +65,7 @@
                 //echo "Estado indefinido";
                 break;
           }
-        echo '</div>';
+        echo '</div>
       echo '</div>
       <div class="modal-footer" id="boton_asignar_huesped">
         <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
