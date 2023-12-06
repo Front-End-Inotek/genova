@@ -134,25 +134,25 @@
           </div>
         </div>
         <section class="estado_cuenta_resumen">
-          <ul class="list-group ">
+          <ul class="list-group list_group_perzonalizado ">
             <li class="list-group-item">Huesped: <span>'.$nombre_huesped.'</span></li>
             <li class="list-group-item">Costo noche: <span>'.$precio_hospedaje.'</span></li>
             <li class="list-group-item">Total estancia: <span>$'.number_format($total_tarifa,2).'</span></li>
           </ul>
 
-          <ul class="list-group ">
+          <ul class="list-group list_group_perzonalizado ">
             <li class="list-group-item">Fecha Entrada: <span>'.$fecha_entrada.'</span></li>
             <li class="list-group-item">Fecha Salida: <span>'.$fecha_salida.'</span></li>
             <li class="list-group-item">Noches: <span>'.$noches.'</span></li>
           </ul>
 
-          <ul class="list-group ">
+          <ul class="list-group list_group_perzonalizado ">
             <li class="list-group-item">Tarifa: <span>'.$tarifa.'</span></li>
             <li class="list-group-item">Forma Pago: <span>'.$forma_pago.'</span></li>
             <li class="list-group-item">Plan Alimentos: <span>'.$total_alimentos.'</span></li>
           </ul>
 
-          <ul class="list-group ">';
+          <ul class="list-group list_group_perzonalizado ">';
             echo '
               <ul class="list-group-item">Pax Extra: <span>'.$pax_extra.'</span></ul>';
             if($extra_adulto>0){

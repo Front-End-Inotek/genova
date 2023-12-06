@@ -173,6 +173,8 @@
                     ';
                   }else {
                     echo '
+                    <h5 class="texto_reporte ">Quién Reserva:</h5>
+                    <h4>CHECK-IN</h4>
                     ';
                   }
                   echo '
