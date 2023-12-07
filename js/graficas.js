@@ -32,11 +32,11 @@ const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio
 const datosVentas200 = {
     label: "Ocupacion de habitaciones",
     data: datos_ocupadas,
-    backgroundColor: "rgba(84,183,245,0.1)",
-    borderColor: 'rgba(56,116,255, 1)',
+    backgroundColor: "#007bff7a",
+    borderColor: "#007BFF",
     borderWidth: 1,
     /* fill: false, */
-    tension: 0.1
+    /* tension: 1 */
 }
 grafica_ocupadas  = new Chart($grafica, {
     type: 'line',
@@ -157,16 +157,16 @@ const etiquetasVentas = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "S
 const datosVentas2020 = {
     label: "Cargos",
     data: datos_cargos,
-    backgroundColor: "#00D27A",
-    borderColor: "#00D27A",
+    backgroundColor: "#007BFF",
+    borderColor: "#007BFF",
     borderWidth: 1,
 };
 
 const datosVentas2021 = {
     label: "Abonos",
     data: datos_abonos,
-    backgroundColor: "rgba(84,183,245,1)",
-    borderColor: "rgba(84,183,245,1)",
+    backgroundColor: "#17A2B8",
+    borderColor: "#17A2B8",
     borderWidth: 1,
 };
 
@@ -195,8 +195,8 @@ const restaurant = document.querySelector("#restaurant");
 const datosRestaurant = {
     label: "Unidades vendidas",
     data: ventas_rest,
-    backgroundColor: "#00D27A",
-    borderColor: "#00D27A",
+    backgroundColor: "#007BFF",
+    borderColor: "#007BFF",
     borderWidth: 1,
 }
 

@@ -478,7 +478,7 @@ body {
   height: auto;
   align-items: center;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 5px;
 }
 .habitacion_container_encabezado_pildora {
@@ -850,7 +850,22 @@ body {
   flex-grow: 1;
   border-radius: 15px;
 }
+.table{
+  margin-bottom: 10rem;
+}
 
+.mesas_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+.mesa_boton {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow:  0 4px 8px rgba( 0 , 0 , 0 , 0.1);
+  text-align: center;
+}
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {

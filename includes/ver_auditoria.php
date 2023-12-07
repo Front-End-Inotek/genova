@@ -93,13 +93,13 @@
                     }else{
                       $tarifa = $fila['tarifa'];
                     }
-                    echo ' <p>'.number_format($tarifa,2).'</p>';
                     if($editar_auditoria){
                       echo '
-                      <input type="number" class="color_black campos_cargos" style="width:30%" id="'.$campo.'"
-                      data-oldvalue="'.$tarifa.'"
-                      data-reservaid ="'.$fila['reserva_id'].'"
-                      />';
+                      <div class="form-floating">
+                        <input type="number" class="form-control campos_cargos"  id="'.$campo.'" data-oldvalue="'.$tarifa.'" data-reservaid ="'.$fila['reserva_id'].'" placeholder="numero"/>
+                        <label for="'.$campo.'" >'.number_format($tarifa,2).'</label>
+                      </div>
+                      ';
                     }
                     echo '
                     </td>';

@@ -460,35 +460,14 @@
         //se recibe la consulta y se convierte a arreglo
         while ($fila = mysqli_fetch_array($consulta))
         {
-          echo '<div class="col-lg-4 col-md-5 col-sm-5 col-12 btn-herramientas estado estado">';
             if($multiple == 0){
-              echo '<div class="estado estado0" onclick="asignar_reservacion('.$fila['ID'].','.$id_reservacion.','.$habitaciones.','.$mov.')">';
+              echo '<div class="btn_modal_herramientas btn_limpieza " onclick="asignar_reservacion('.$fila['ID'].','.$id_reservacion.','.$habitaciones.','.$mov.')">';
             }else{
-              echo '<div class="estado estado0" onclick="asignar_reservacion_multiple('.$fila['ID'].','.$id_reservacion.','.$habitaciones.')">';
+              echo '<div class="btn_modal_herramientas btn_limpieza " onclick="asignar_reservacion_multiple('.$fila['ID'].','.$id_reservacion.','.$habitaciones.')">';
             }
-              echo '<div >
-                <div >
-                  <div class="titulo_hab">';
-                    echo "Disponible";
-                  echo '</div>
-                </div>
-                <div >
-                  <div class="imagen_hab">';
-                  echo '<span class="badge tama_num_hab">'.$fila['nom'].'</span>';
-                  echo '</div>
-                </div>
-              </div>';
-              echo '<div class="timepo_hab">';
-                echo '&nbsp';
-              echo '</div>';
-              echo '<div class="timepo_hab">';
-                echo '&nbsp';
-              echo '</div>';
-              echo '<div class="icono_hab">';
-                echo '<div><br></div>';
-              echo '</div>';
+            echo '<img class="btn_modal_img" src="./assets/iconos_btn/bnt_ocupado.svg">';
+            echo '<p>Hab: '.$fila['nom'].'</p>';
             echo '</div>';
-          echo '</div>';
         }
       }
       function datos_auditoria(){

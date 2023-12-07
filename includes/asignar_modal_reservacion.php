@@ -27,11 +27,15 @@
           Selecciona la habitación disponible para asignar la reservación '.$_GET['id'].':
           </div>
         </div>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div><br>
+        <button type="button" class="btn btn-light" data-dismiss="modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
+          </svg>
+        </button>
+      </div>
 
       <div class="modal-body">';
-        echo '<div class="row">';
+        echo '<div class="contenedor_botones">';
           if($disponible == 0){
             echo '<div class="col-xs-12 col-sm-12 col-md-12 margen-1">';
               echo "¡No existe disponibilidad en ese tipo de habitación!";
