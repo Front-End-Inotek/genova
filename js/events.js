@@ -2007,11 +2007,12 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
 
 function sobreVenderHab(e){
     //Si se sobrevende todas la habitaciones están disponibles.
-    if (e.currentTarget.checked) {
+    /* if (e.currentTarget.checked) {
         // alert('checked');
     } else {
         // alert('not checked');
-    }
+    } */
+    console.log(e)
 }
 
 // Calculo para obtener la cantidad de noches de una reservacion
@@ -2411,6 +2412,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     if(hab_id==0){
         preasignada= (document.getElementById("preasignada").value);
         sobrevender = document.getElementById('sobrevender').checked
+        console.log("A ver que show " + sobrevender)
         canal_reserva = (document.getElementById("canal-reserva").value);
         tipo_reservacion = (document.getElementById("tipo-reservacion").value);
         titulo="RESERVACIÓN"
@@ -2545,7 +2547,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
                 //Aquí en teoría ya se guardo/hizo la reservación y es momento de mandar el correo con el pdf de confirmación
                 // console.log(res)
                 // return
-                confirarmNo = document.getElementById('no')
+                /* confirarmNo = document.getElementById('no')
                 if(confirarmNo!=null){
                     confirarmNo = confirarmNo.checked
                     if(!confirarmNo && correo!=""){
@@ -2553,7 +2555,15 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
                         enviar_reserva_correo(res,correo,false);
                     }
                 }
-                ver_reporte_reservacion(res,ruta_regreso,titulo,correo)
+                ver_reporte_reservacion(res,ruta_regreso,titulo,correo) */
+                confirarmNo = document.getElementById("confirmacion").checked;
+                //onsole.log("switch para confirmar " +  confirarmNo)
+                if (confirarmNo && correo != "") {
+                    //alert("enviar correo");
+                    enviar_reserva_correo(res, correo, false);
+                }
+                //console.log("Ya salio")
+                ver_reporte_reservacion(res, ruta_regreso, titulo, correo);
             },
             timeout:5000,
             error:problemas_sistema

@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: flex-start;
     max-height: 90vh;
-    animation: fadeInScale 0.5s ease-in-out forwards;
+    animation: fadeInScale 0.1s ease-in-out forwards;
 }
 
 @keyframes fadeInScale {

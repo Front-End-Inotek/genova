@@ -262,8 +262,8 @@ echo'
                 if (empty($_GET['hab_id'])) {
                     echo'
                         <div class="form-check form-switch input_container">
-                            <input class="form-check-input" type="checkbox" role="switch" id="sobrevender" onchange="sobreVenderHab(event)">
-                            <label class="form-check-label" for="sobrevender">Confirmacion</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="confirmacion" onchange="sobreVenderHab(event)">
+                            <label class="form-check-label" for="confirmacion">Confirmacion</label>
                         <!--
                             <label for="confirmacion">Confirmación</label>
                             <div class="checkbox-container">
