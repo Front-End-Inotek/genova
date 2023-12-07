@@ -32,7 +32,7 @@
   echo '
       <div class="main_container">
         <div class="main_container_title">
-          <h2>Auditoriaaa</h2>
+          <h2>Auditoria</h2>
           <button type="submit" class="btn btn-primary btn-block" value="Cerrar la noche"   onclick="confirmar_cambiar_cargos()">
             Cerrar la noche
           </button>
