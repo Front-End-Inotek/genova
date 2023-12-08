@@ -890,55 +890,6 @@ body.modo-nocturno .containerRackOp .btn:focus {
   box-shadow: 0 10px 14px #6b0fe396;
 }
 
-
-
-
-
-.btn-dark {
-  background-color: #97b2f96e !important;
-  border-color: #3f51b5 !important;
-  color: #3f51b5 !important;
-}
-
-.btn-dark:hover {
-  background-color: #97b2f9ee !important;
-  border-color: #0b258c !important;
-  color: #fff !important;
-}
-
-.btn-outline-warning {
-  color: #a37b03 !important;
-  border: 2px solid var(--colorTextNaranja);
-  background-color: var(--fondoNaranja);
-}
-
-.btn-outline-warning:hover {
-  color: #fff !important;
-}
-
-.btn-outline-danger {
-  background-color: var(--fondoRojo);
-  border: 2px solid var(--colorTextRojo);
-}
-
-.btn-info {
-  background-color: var(--fondoAzul);
-  border: 2px solid var(--colorTextInfo);
-  color: var(--colorTextInfo) !important;
-}
-
-.btn-info:hover {
-  background-color: var(--colorTextInfo);
-  border-color: var(--colorTextInfo);
-  color: var(--fondoAzul) !important;
-}
-.btn-info:focus{
-  transform: scale(0.9);
-  color: var(--fondoAzul) !important;
-}
-
-
-
 .containerRackOp .btn:after {
   position: absolute;
   content: " ";

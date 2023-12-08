@@ -202,23 +202,22 @@ echo '
                     <input type="text" class="form-control custom_input" id="correo" placeholder="Correo electrónico">
                     <label for="email">Correo electrónico </label>
                 </div>
-                <!-- 
-                <div class="form-floating">
-                    <label for="confirmacion">Confirmación</label>
-                    <div class="checkbox-container">
-                        <input class="yesornot" type="radio" name="rdo" id="yes" checked/>
-                        <input class="yesornot" type="radio" name="rdo" id="no" />
-                    <div class="switch">
-                        <label for="yes">Si</label>
-                        <label for="no">No</label>
-                        <span></span>
+                <div class="form-check form-switch input_container d-none">
+                            <input class="form-check-input" type="checkbox" role="switch" id="confirmacion" onchange="sobreVenderHab(event)">
+                            <label class="form-check-label" for="confirmacion">Confirmacion</label>
+                        <!--
+                            <label for="confirmacion">Confirmación</label>
+                            <div class="checkbox-container">
+                            <input class="yesornot" type="radio" name="rdo" id="yes" checked/>
+                            <input class="yesornot" type="radio" name="rdo" id="no" />
+                            <div class="switch">
+                            <label for="yes">Si</label>
+                            <label for="no">No</label>
+                            <span></span>
+                            </div>
+                            <input type="checkbox" id="confirmacion"  class="form-check" hidden/>
+                        -->
                         </div>
-                        <input type="checkbox" id="confirmacion"  class="form-check" hidden/>
-                        </div>
-                    </select>
-                
-                </div>
-                -->
             </div>
             <div class="inputs_form_container">
                 <div class="accordionCustom" id="acordeonchido">
