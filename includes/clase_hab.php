@@ -63,7 +63,81 @@
           echo ('consulta_no_realizada');
         }
       }
+      function obtener_habitaciones(){
+        $sentencia = "SELECT * FROM `hab` WHERE 1;";
+        $comentario="sacamos todas las habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function obtener_tipo_habitaciones($id){
+        $sentencia = "SELECT estado FROM `estados_hab_colores` WHERE id='$id';";
+        $comentario="sacamos todas las habitaciones";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $estado=$fila['estado'];
+        }
+        return $estado;
+      }
+      function obtener_estado_interno($mov){
+        $sentencia = "SELECT * FROM `movimiento` WHERE id =$mov LIMIT 1;";
+        $comentario="sacamos el estado interno";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $estado=$fila['estado_interno'];
+        }
+        return $estado;
+      }
+      function obtener_fecha_entrada_salida($mov){
+        $sentencia = "SELECT * FROM `movimiento` WHERE id ='$mov' LIMIT 1;";
+        $comentario="sacamos fecha de entrad y salida";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function obtener_estado_reservacion($id){
+        $id_reservacion="";
+        $tiempoInicioDia = strtotime('today midnight');
 
+        $sentencia = "SELECT * FROM `movimiento` WHERE `id_hab` ='$id' AND `inicio_hospedaje`='$tiempoInicioDia'  LIMIT 1;";
+        $comentario="sacamos el estado interno";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          if($fila){
+            $id_reservacion=$fila['id_reservacion'];
+          }
+        }
+        return $id_reservacion;
+      }
+      function obtener_garantia_reservacion($id){
+        $sentencia = "SELECT * FROM `reservacion` WHERE `id`='$id'  LIMIT 1;";
+        $comentario="sacamos el estado interno";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function obtener_huesped($mov){
+        $nombre="";
+        $huesped="";
+        $tiempoMedianoche = strtotime('today midnight');
+        $sentencia = "SELECT `id_huesped` FROM `movimiento` WHERE id =$mov AND '$tiempoMedianoche'>`fin_hospedaje` LIMIT 1;";
+        $comentario="sacamos el id del huesped";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        while ($fila = mysqli_fetch_array($consulta))
+        {
+          $huesped=$fila['id_huesped'];
+        }
+        if ($huesped!=""){
+          $sentencia = "SELECT `nombre`, `apellido` FROM `huesped` WHERE `id`='$huesped' LIMIT 1;";
+          $comentario="sacamos el nombre y apellido del huesped";
+          $consulta2= $this->realizaConsulta($sentencia,$comentario);
+          while ($fila = mysqli_fetch_array($consulta2))
+          {
+            $nombre=$fila['nombre']." ".$fila['apellido'];
+          }
+        }
+        return $nombre;
+      }
       function mostrar_tipo(){
         $sentencia = "SELECT *
         FROM tipo_hab
