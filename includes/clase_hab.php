@@ -265,17 +265,11 @@
       }
       while ($fila = mysqli_fetch_array($consulta))
       {
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-        echo '<div class="supervicion AsignarReservaBtn btn-square-lg" onclick="select_asignar_checkin('.$fila['id'].',1,'.$hab_id.','.$fila['mov'].')">';
-        echo '</br>';
-        echo '<div>';
-            //echo '<img src="images/persona.png"  class="center-block img-responsive">';
-        echo '</div>';
-        echo '<div>';
+        echo '<div class="btn_modal_herramientas btn_reservar" onclick="select_asignar_checkin('.$fila['id'].',1,'.$hab_id.','.$fila['mov'].')">';
+        echo '<img  class="btn_modal_img" src="./assets/iconos_btn/btn_reservar.svg"/>';        
           echo 'Reservación: '.$fila['id'];
         echo '</div>';
-        echo '</div>';
-      echo '</div>';
+     
       }
     }
       function select_hab_cambio($hab_id,$estado,$nuevo_estado,$hab_tipo){
