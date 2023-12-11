@@ -188,7 +188,7 @@
           <br>
           <br>
           <div class="table-responsive table-hover" style="max-height:560px; overflow-y: scroll;">
-          <table class="table" >
+          <table class="table table_expansion" >
             
             <thead>
               <tr>

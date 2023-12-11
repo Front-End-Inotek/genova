@@ -450,7 +450,7 @@
         </button>
 
         <div class="table-responsive" id="tabla_huesped">
-        <table class="table">
+        <table class="table table_expansion">
           <thead>
             <tr class="text-center">
             <th>Nombre</th>
@@ -527,7 +527,7 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
           echo '<div class="table-responsive" id="tabla_huesped" >
-          <table class="table ">
+          <table class="table table_expansion">
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th>Nombre</th>

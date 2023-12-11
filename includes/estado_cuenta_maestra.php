@@ -43,33 +43,35 @@
   }
 
   echo '
-      <div class="container blanco" id="ec"> 
-        <div class="row">
-        <div class="col-sm-1"><button class="btn btn-info btn-block" onclick="ver_cuenta_maestra()"> ←</button></div>
-          <div class="col-sm-5 text-left"><h4 class="text-dark margen-1">ESTADO DE CUENTA MAESTRA - Nombre: '.$cm->nombre.' - Código: '.$cm->codigo.'</h4></div>';
+      <div class="main_container" id="ec">
+        <header class="main_container_title">
+          <h3>ESTADO DE CUENTA MAESTRA - Nombre: '.$cm->nombre.' - Código: '.$cm->codigo.'</h3>
+          
+        ';
           if($faltante == 0){
-            echo '<div class="col-sm-6 text-right"></div>';
+            echo '';
           }else{
             if($faltante > 0){
-              echo '<div class="col-sm-6 text-right"><h5 class="text-dark margen-1">Saldo Total '.$faltante_mostrar.'</h5></div>';
+              echo '<h5 class="text-success">Saldo Total '.$faltante_mostrar.'</h5>';
             }else{
-              echo '<div class="col-sm-6 text-right"><h5 class="text-danger margen-1">Saldo Total '.$faltante_mostrar.'</h5></div>';
+              echo '<h5 class="text-danger">Saldo Total '.$faltante_mostrar.'</h5>';
             }
           }
-        echo '</div>
-        <div class="row">';
+        echo '
+        </header>
+
+      <!-- <button class="btn btn-info btn-block" onclick="ver_cuenta_maestra()"> ←</button> -->
+
+        <div class="estado_cuenta_botones">';
           if(!empty($nombre_huesped)){
-            echo '  
-            <div class="col-sm-4 row">
+            echo '
             <h5>Nombre Huesped: '.$nombre_huesped.'</h5>
-            <button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$_GET['id'].','.$mov.')"> Cambiar huesped</button>
-            </div>
+            <button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$_GET['id'].','.$mov.')"> Cambiar huesped</button>
            </div>';
 
           }else{
-            echo '<div class="col-sm-4">
-            <button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$_GET['id'].','.$mov.')"> Asignar huesped</button>
-            </div>
+            echo '
+            <button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="asignar_huesped_maestra('.$_GET['id'].','.$mov.')"> Asignar huesped</button>
            </div>';
           }
 
@@ -96,7 +98,7 @@
           
             echo '<div class="col-sm-2"><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo_adicional('.$cm->id.','.$_GET['mov'].')">Cargar</button></div>';
             echo '<div class="col-sm-2"></div>';
-            echo '<div class="col-sm-2"><button class="btn btn-success btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.','.$mov.','.$_GET['id'].')"> Abonar</button></div>';
+            echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.','.$mov.','.$_GET['id'].')"> Abonar</button></div>';
           //}
         echo '</div>
    

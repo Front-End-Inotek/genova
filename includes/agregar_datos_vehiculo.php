@@ -43,83 +43,64 @@ echo '
         </div>
         <div class="modal-body">
 
+        <div class="inputs_form_container">
+            <div class="form-floating input_container">
+                <input type="text" class="form-control custom_input" id="matricula" value="'.$matricula.'" name="matricula" autocomplete="off" placeholder="Matricula"   required >
+                <label for="matricula">Matricula</label>
+            </div>
+        </div>
+
+        <div class="inputs_form_container">
+            <div class="form-floating input_container">
+                <input type="text" class="form-control custom_input" id="marca" value="'.$marca.'" name="marca" autocomplete="off" placeholder="Matricula"   required >
+                <label for="marca">Marca</label>
+            </div>
+        </div>
+
+        <div class="inputs_form_container">
+            <div class="form-floating input_container">
+                <input type="text" class="form-control custom_input" id="modelo" value="'.$modelo.'" name="modelo" autocomplete="off" placeholder="Matricula"   required >
+                <label for="modelo">Marca</label>
+            </div>
+
+            <div class="form-floating input_container">
+                <input type="text" class="form-control custom_input" id="year" value="'.$year.'" name="year" autocomplete="off" placeholder="Matricula"   required >
+                <label for="year">Año</label>
+            </div>
+        </div>
+
+
+        <div class="inputs_form_container">
+            <div class="form-floating input_container">
+                <input type="text" class="form-control custom_input" id="color" value="'.$color.'" name="color" autocomplete="off" placeholder="Matricula"   required >
+                <label for="color">Color del vehiculo</label>
+            </div>
+
+            <div class="form-floating input_container">
+                <input type="text" class="form-control custom_input" id="propietario" value="'.$propietario.'" name="propietario" autocomplete="off" placeholder="Matricula"   required >
+                <label for="propietario">Propietario / conductor</label>
+            </div>
+        </div>
+
         <div class="form-floating input_container">
-            <input
+            <textarea class="form-control custom_input" name="observaciones" placeholder="Leave a comment here" id="observaciones" style="height: 100px"></textarea>
+            <label for="observaciones">'; isset($observaciones) ? $observaciones : 'Observaciones'; echo '</label>
         </div>
 
 
-
-        <div class="row flex-wrap">
-        <div class="col-12 col-sm-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text asterisco" id="inputGroup-sizing-default"  > Matrícula </span>
-            </div>
-            <input value="'.$matricula.'" required type="text" id="matricula" name ="matricula" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default" >
-        </div>
-        </div>
-        <div class="col-12 col-sm-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text asterisco" id="inputGroup-sizing-default"> Marca </span>
-            </div>
-            <input value="'.$marca.'" required type="text" id="marca" name="marca" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
-        </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-12 col-sm-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"> Modelo </span>
-            </div>
-            <input value="'.$modelo.'" type="text" id="modelo" name="modelo" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
-        </div>
-        </div>
-        <div class="col-12 col-sm-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text asterisco" id="inputGroup-sizing-default" > Año </span>
-            </div>
-            <input value="'.$year.'" required type="text" id="year" name="year" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
-        </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-12 col-sm-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default"> Color del vehiculo </span>
-            </div>
-            <input value="'.$color.'" type="text" id="color" name="color" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
-        </div>
-        </div>
-        <div class="col-12 col-sm-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default" > Propietario/conductor </span>
-            </div>
-            <input value="'.$propietario.'" type="text" id="propietario" name="propietario" class="form-control" aria-label="Default" autocomplete="off" aria-describedby="inputGroup-sizing-default">
-        </div>
-        </div>
         </div>
 
-        <div class="row">
-        <div class="col-12">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default"> Observaciones </span>
-            <textarea id="observaciones" class="form-control">'.$observaciones.'</textarea>
-        </div>
-        </div>
-        </div>
-        </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-        <div id="boton_tipo">
-        <button type="button" class="btn btn-success btn-block" onclick="guardar_datos_vehiculo('.$reservacion.','.$id_huesped.')">
-        Guardar
-        </button>
-        </div>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <div id="boton_tipo">
+                <button type="button" class="btn btn-primary btn-block" onclick="guardar_datos_vehiculo('.$reservacion.','.$id_huesped.')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
+                        <path d="M11 2H9v3h2z"/>
+                        <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
+                    </svg>
+                    Guardar
+                </button>
+            </div>
         </div>
         </form>
     </div>';

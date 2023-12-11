@@ -1690,7 +1690,7 @@ class Reservacion extends ConexionMYSql
 		<br>
 		<br>
 		<div class="table-responsive" id="tabla_reservacion" >
-		<table class="table table-bordered table-hover">
+		<table class="table table-bordered table-hover table_expansion">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>

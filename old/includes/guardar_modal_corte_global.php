@@ -10,7 +10,7 @@
     </div><br>
 
     <div class="modal-body">';
-      echo '¿Realizar corte?';
+      echo '¿Realizar corteeee?';
       echo '
     </div><br>
     

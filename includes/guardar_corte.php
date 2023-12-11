@@ -78,9 +78,9 @@
           // Marco primera pagina
           //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
-          $this->SetFont('Arial','',10);
+          $this->SetFont('Arial','',8);
           // Color de letra
-          $this->SetTextColor(0, 102, 205);
+          $this->SetTextColor(0, 0, 0);
           // Movernos a la derecha
           $this->Cell(2);
           // Nombre del Hotel
@@ -88,19 +88,28 @@
           // Datos y fecha
           $this->SetFont('Arial','',10);
           $this->SetTextColor(0,0,0);
-          $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
+          $this->Cell(25,-11,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
-          // Salto de línea
-          $this->Ln(14);
-          // Movernos a la derecha
-          $this->Cell(80);
+          $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
+          $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
+          $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 68, 12);
+          $this->SetFont('Arial','',8);
+          $this->SetTextColor(0, 0, 205);
+          $this->Cell(2);
           // Título
           $this->SetFont('Arial','',10);
-          $this->SetTextColor(0, 102, 205);
-          $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,0,'C');
+          $this->SetTextColor(0, 0, 100);
+          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
+          $this->Ln(22);
+          $this->Cell(22);
+
+          $this->SetTextColor(255, 255, 255);
+          $this->SetFont('Arial', '', 12);
+          $this->Ln(11);
+          $this->Cell(21);
+          $this->Cell(25, -11,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,0,'C');
+          $this->SetTextColor(0, 0, 0 );
           // Salto de línea
-          $this->Ln(18);
       }
       
       // Pie de página
@@ -131,9 +140,11 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   // Datos dentro de la tabla hospedaje
   $x_inicial=$pdf->GetX();
   $y_inicial=$pdf->GetY();
-  $pdf->SetFillColor(99, 155, 219);
+  $pdf->SetFillColor(45, 63, 83);
+  $pdf->SetLineWidth(0.1);
   $pdf->SetFont('Arial','',8);
   $pdf->SetTextColor(24, 31, 102);
+  $pdf->Ln(1);
   $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Hospedaje'),0,1,'C');
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
@@ -152,12 +163,14 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       $total_cuartos_hospedaje= $total_cuartos_hospedaje + $inf->hab_total_hospedaje[$z];
       $suma_cuartos_hospedaje= $suma_cuartos_hospedaje + $inf->hab_cantidad_hospedaje[$z];
   }
-  $pdf->SetFillColor(193, 229, 255);
+  $pdf->SetFillColor(45, 63, 83);
+  $pdf->SetTextColor( 255, 255, 255);
   $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",''),1,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",$suma_cuartos_hospedaje),1,0,'C',True);
   $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_cuartos_hospedaje, 2)),1,1,'C',True);
-  $pdf->SetFillColor(99, 155, 219);
+  $pdf->SetFillColor(45, 63, 83);
   $pdf->Ln(6);
+  $pdf->SetTextColor( 0, 0, 0);
  
   // Datos dentro de la tabla totales
   $pdf->SetFont('Arial','',8);
@@ -181,13 +194,17 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $cantidad= 2;
   for($z=0 ; $z<$cantidad; $z++)
   {
+      $pdf->SetTextColor( 255, 255 ,255);
       $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$conceptos[$z]),1,0,'C');
       $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total[$z], 2)),1,1,'C');
+      $pdf->SetTextColor( 0, 0 ,0);
   }
-  $pdf->SetFillColor(193, 229, 255);
+  $pdf->SetFillColor(45, 63, 83);
+  $pdf->SetTextColor( 255, 255 ,255);
   $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$conceptos[2]),1,0,'C',True);
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_global, 2)),1,1,'C',True);
-  $pdf->SetFillColor(99, 155, 219);
+  $pdf->SetTextColor( 0, 0 ,0);
+  $pdf->SetFillColor(45, 63, 83);
   $pdf->Ln(6);
  
   // Datos dentro de la tabla desgloce en sistema
@@ -254,7 +271,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
             $pdf->AddPage();
             $pdf->SetFont('Arial','',7);
             $pdf->SetTextColor(255, 255, 255);
-            $pdf->SetFillColor(99, 155, 219);
+            $pdf->SetFillColor(45, 63, 83);
             $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
             $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",'Producto'),1,0,'C',True);
             $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Precio'),1,0,'C',True);
@@ -267,14 +284,14 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           }
       }
       $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
-      $pdf->SetFillColor(193, 229, 255);
+      $pdf->SetFillColor(45, 63, 83);
       $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",''),1,0,'C',True);
       $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",''),1,0,'C',True);
       $pdf->Cell(10,4,iconv("UTF-8", "ISO-8859-1",$total_productos),1,0,'C',True);
       $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_restaurante, 2)),1,0,'C',True);
       $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$total_productos_hab),1,0,'C',True);
       $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$total_productos_rest),1,1,'C',True);
-      $pdf->SetFillColor(99, 155, 219);
+      $pdf->SetFillColor(45, 63, 83);
   }
   
   $nueva_etiqueta= $labels->obtener_corte();

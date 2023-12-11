@@ -540,7 +540,7 @@
         <br>
         <br>
         <div class="table-responsive" id="tabla_huesped" >
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover table_expansion">
           <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Nombre</th>
@@ -618,7 +618,7 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
           //se recibe la consulta y se convierte a arreglo
           echo '<div class="table-responsive" id="tabla_huesped" style="padding: 2rem 0;max-height: 44vh;">
-          <table class="table table-bordered table-hover">
+          <table class="table table-bordered table-hover table_expansion">
             <thead>
               <tr class="table-primary-encabezado text-center">
               <th>Nombre</th>

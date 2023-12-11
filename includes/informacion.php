@@ -575,7 +575,7 @@ class Informacion extends ConexionMYSql
     }
 }
 
-echo '<i class="btn-info-custom bx bxs-info-circle"  data-toggle="modal" onclick="mostrar_info()" data-target="#exampleModal" ></i>';
+echo '<i class="btn-info-custom bx bxs-info-circle d-none"  data-toggle="modal" onclick="mostrar_info()" data-target="#exampleModal" ></i>';
 echo '
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document" id="info_here">

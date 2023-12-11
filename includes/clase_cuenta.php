@@ -578,7 +578,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
           if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
             if($c!=0) {
               echo '<tr>
-              <td colspan="5" style="height: 4px; padding: 0; background-color: #CBE3F9;"></td>
+              <td colspan="5" style="height: 2px; padding: 0; background-color: #CBE3F9;"></td>
               </tr>';
             }
         }
@@ -631,7 +631,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
           if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
             if($c!=0) {
               echo '<tr>
-              <td colspan="5" style="height: 4px; padding: 0; background-color: #CBE3F9;"></td>
+              <td colspan="5" style="height: 2px; padding: 0; background-color: #CBE3F9;"></td>
               </tr>';
             }
         }
@@ -686,7 +686,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                 if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
                   if($c!=0) {
                     echo '<tr>
-                    <td colspan="5" style="height: 4px; padding: 0; background-color: #CBE3F9;"></td>
+                    <td colspan="5" style="height: 2px; padding: 0; background-color: #CBE3F9;"></td>
                     </tr>';
                   }
               }
@@ -803,7 +803,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                 if($fecha_atras!= date('Y-m-d',$fila['fecha'])) {
                   if($c!=0) {
                     echo '<tr>
-                    <td colspan="6" style="height: 4px; padding: 0; background-color: #CBE3F9;"></td>
+                    <td colspan="6" style="height: 2px; padding: 0; background-color: #CBE3F9;"></td>
                     </tr>';
                   }
               }

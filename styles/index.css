@@ -489,7 +489,6 @@ body {
   gap: 5px;
   border-radius: 5.25px;
   padding: 2px 5px;
-  
 }
 
 .habitacion_container_encabezado_circle{
@@ -850,7 +849,10 @@ body {
   flex-grow: 1;
   border-radius: 15px;
 }
-.table{
+/* .table{
+  margin-bottom: 10rem;
+} */
+.table_expansion {
   margin-bottom: 10rem;
 }
 
