@@ -809,7 +809,6 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
               }
               include_once('clase_ticket.php');
               //var_dump($fila);
-                if($fila['edo'] == 1){
                   $total_abonos= $total_abonos + $fila['abono'];
                   if($descripcion == 'Total reservacion'){
                     echo '<tr class="fuente_menor text-center">';
@@ -858,18 +857,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       </tr>';
                     }
                   }
-                }else{
-                  echo '<tr class="fuente_menor table text-center">
-                  <td><input type="checkbox" data-cuentaid='.$fila['ID'].' class="color_black campos_abonos " id="leer_check_'.+$c.'"> 
-                    <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
-                  </td>
-                  <td>'.$fila['concepto'].'</td>
-                  <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                  <td>$'.number_format($fila['abono'], 2).'</td>
-                  <td>'.$fila['descripcion'].'</td>
-                  <td></td>
-                  </tr>';
-                }
+                
                 $fecha_atras = date('Y-m-d',$fila['fecha']);
                 $c++;
               }
