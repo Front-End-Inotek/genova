@@ -1233,7 +1233,7 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         $this->buscador_reportes($inicio_dia, $opcion);
         echo '<div class="table-responsive" id="tabla_reservacion" > ';
-        echo '<table class="table table-bordered table-hover">
+        echo '<table class="table table-bordered table-hover table_expansion">
                     <thead>
                         <tr class="table-primary-encabezado text-center">
                         ';
@@ -1321,8 +1321,8 @@ class Reservacion extends ConexionMYSql
         $tarifa_td="";
 
         echo '
-            <div class="table-responsive" id="tabla_reservacion" style=" overflow-x: scroll; min-height: 300px;">
-            <table class="table">
+            <div class="table-responsive" id="tabla_reservacion" >
+            <table class="table table_expansion">
             <thead>
                 <tr class=" text-center">
                 <th>Número</th>
@@ -1460,8 +1460,8 @@ class Reservacion extends ConexionMYSql
         $estado_reserva="";
         $tarifa_td="";
         echo '
-            <div class="table-responsive" id="tabla_reservacion" style="overflow-x: scroll;min-height: 300px;">
-            <table class="table ">
+            <div class="table-responsive" id="tabla_reservacion" >
+            <table class="table table_expansion">
             <thead>
             <tr class="table-primary-encabezado text-center">
             <th>Número</th>
@@ -1603,7 +1603,7 @@ class Reservacion extends ConexionMYSql
             Agregar reservaciones
         </button>
 		<div class="table-responsive" id="tabla_reservacion" >
-		<table class="table">
+		<table class="table table_expansion">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
@@ -2094,7 +2094,7 @@ class Reservacion extends ConexionMYSql
             Agregar reservaciones
         </button>
 		<div class="table-responsive" id="tabla_reservacion" >
-		<table class="table">
+		<table class="table table_expansion">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
@@ -2217,7 +2217,7 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         echo '
 			<div class="table-responsive" id="tabla_reservacion">
-			<table class="table">
+			<table class="table table_expansion">
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
@@ -2294,7 +2294,7 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         echo '
 			<div class="table-responsive" id="tabla_reservacion">
-			<table class="table">
+			<table class="table table_expansion">
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
@@ -2413,7 +2413,7 @@ class Reservacion extends ConexionMYSql
             $consulta= $this->realizaConsulta($sentencia, $comentario);
             //se recibe la consulta y se convierte a arreglo
             echo '<div class="table-responsive" id="tabla_reservacion">
-		    <table class="table">
+		    <table class="table table_expansion">
 			<thead>
 			    <tr class="table-primary-encabezado text-center">
 			    <th>Número</th>
@@ -2659,7 +2659,7 @@ class Reservacion extends ConexionMYSql
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_reservacion">';
-        echo '<table class="table table-bordered table-hover">
+        echo '<table class="table table-bordered table-hover table_expansion">
                 <thead>
                 <tr class="table-primary-encabezado text-center">
         ';
@@ -2711,7 +2711,7 @@ class Reservacion extends ConexionMYSql
         //se recibe la consulta y se convierte a arreglo
         echo '<div class="table-responsive" id="tabla_reservacion">';
         $this->datos_por_dia($inicio_dia, $a_buscar);
-        echo '<table class="table">
+        echo '<table class="table table_expansion">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
@@ -2848,7 +2848,7 @@ class Reservacion extends ConexionMYSql
 			<div class="table-responsive" id="tabla_reservacion">';
             $this->datos_por_dia($inicio_dia, $a_buscar);
 
-            echo '<table class="table">
+            echo '<table class="table table_expansion">
                 <thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
@@ -3003,7 +3003,7 @@ class Reservacion extends ConexionMYSql
             echo '<div class="table-responsive" id="tabla_reservacion">';
             $this->datos_por_dia($fecha_dia, $a_buscar);
 
-            echo '<table class="table">
+            echo '<table class="table table_expansion">
 			<thead>
 			  <tr class="table-primary-encabezado text-center">
 			  <th>Número</th>

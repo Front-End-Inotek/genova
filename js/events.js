@@ -7951,7 +7951,7 @@ function mostrar_corte_reporte(){
 	var alto= tam[1];
 	var ancho= tam[0];
 	window.open("includes/mostrar_corte_reporte.php?ancho="+ancho+"&alto="+alto, "Diseño Web", "width="+ancho+", height="+alto);
-    //salirsession();
+    salirsession();
 }
 
 // Obtenemos el tamaño de la ventana
