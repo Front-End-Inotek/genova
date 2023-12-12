@@ -15,7 +15,24 @@
     //Nombre del hotel
     $nombreHotel = $conf->nombre;
     $dia_procesado = date("d");
-    $mes_procesado = date("F");
+
+    $meses_en_espanol = array(
+        'January' => 'enero',
+        'February' => 'febrero',
+        'March' => 'marzo',
+        'April' => 'abril',
+        'May' => 'mayo',
+        'June' => 'junio',
+        'July' => 'julio',
+        'August' => 'agosto',
+        'September' => 'septiembre',
+        'October' => 'octubre',
+        'November' => 'noviembre',
+        'December' => 'diciembre'
+    );
+
+    $mes_procesado = $meses_en_espanol[date("F")];
+
     $anio_procesado = date("Y");
     $imagenEncabezado = "../images/hotelexpoabastos.png";
 
