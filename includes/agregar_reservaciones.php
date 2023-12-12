@@ -40,7 +40,7 @@
           <div class="col-sm-2">Fecha Entrada:</div>
           <div class="col-sm-4">
           <div class="form-group">
-            <input '.$inputFechaEn.' value="'.$inputValueFecha.'" class="form-control" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.')">
+            <input '.$inputFechaEn.' value="'.$inputValueFecha.'" class="form-control" type="date"  id="fecha_entrada"  placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.')">
           </div>
           </div>
           <div class="col-sm-2">Fecha Salida:</div>
