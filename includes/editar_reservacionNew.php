@@ -404,6 +404,7 @@ echo '
                     </div>';
                     }
                     echo '
+                    <!--
                     <div class="form-floating input_container">
                         
                         <button id="btngarantia"  class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">
@@ -414,6 +415,7 @@ echo '
                         Añadir tarjeta
                         </button>
                     </div>
+                    -->
                 </div>
 
                 <div class="inputs_form_container">

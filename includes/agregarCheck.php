@@ -240,7 +240,7 @@ echo '
                     </select>
                     <label class="asterisco" for="forma-garantia">Forma de Garantía</label>
                 </div>
-                <div class="form-group input_container">
+                <!-- <div class="form-group input_container">
                 <label class="col-12" for="forma-garantia">Forma de Garantía</label>
                 <button id="btngarantia" class="btn btn-primary btn-block boton_datos"  onclick="event.preventDefault(); mostrar_modal_garantia()" href="#caja_herramientas" data-toggle="modal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
@@ -249,7 +249,7 @@ echo '
                     </svg>
                     Añadir tarjeta
                 </button>
-                </div>
+                </div> -->
             </div>
             <div class="form-floating input_container" id="div_voucher" style="display:none">
                 <input id="voucher" type="text" class="form-control custom_input" rows="1"></input>
