@@ -1798,13 +1798,11 @@ class Reservacion extends ConexionMYSql
                 echo '<td>'.$fila['descripcion'].'</td>';
                 // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                 echo '<td>Abierta</td>';
+                
                 //  echo date('Y-m-d', $fila['fecha_entrada']) . "/" . date('Y-m-d', $inicio_dia);
                 // die();
-                if($agregar==1 && date('Y-m-d', $fila['fecha_entrada']) == date('Y-m-d', $inicio_dia) && $fila['edo'] == 1) {
-                    echo '<td></td>';
-                    // echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
-                } else {
-                    echo '<td></td>';
+                if($agregar==1 && $fila['edo'] = 1) {
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
                 }
                 if($fila['id_hab']==0 && $preasignar==1) {
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar</button></td>';
