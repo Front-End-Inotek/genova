@@ -157,7 +157,7 @@ if (empty($_GET['hab_id'])) {
 
             <div class="form-floating input_container">
                 <select class="form-control custom_input" id="plan-alimentos"  onchange="editarTotalEstancia(event)">
-                <option data-costoplan="0"  disabled selected>Seleccione una opción</option>';
+                <option data-costoplan="0"  disabled value="0" selected>Seleccione una opción</option>';
                 $config->mostrar_planes_select();
                 echo'
                 </select>
