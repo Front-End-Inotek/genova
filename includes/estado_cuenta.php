@@ -19,7 +19,7 @@
   $usuario = new Usuario($usuario_id);
   $id_huesped=0;
   if($consulta->num_rows==0){
-    echo "nada";
+    echo "<h1>sin info que mostrar</h1>";
     die();
   }
   while ($fila = mysqli_fetch_array($consulta))
