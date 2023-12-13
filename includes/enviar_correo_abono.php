@@ -165,7 +165,8 @@
             '.$forma_pago_html.'
             '.$contenido_pie.'
             </div>');
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            
+            $mail->AltBody = 'Confirmación de abono: Su pago ha sido recibido con éxito.';
             $mail->send();
             echo 'Messagehasbeensent';
             // $logs->guardar_log($_POST['usuario_id'], "Enviar confirmación: ". $_POST['info']);

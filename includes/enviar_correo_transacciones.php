@@ -293,7 +293,7 @@ try {
     $mail->addAddress('gderiangarcia@gmail.com', utf8_decode('Carlos Garcia'));  
 
 
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->AltBody = 'Transaccion realizada con exito';
     $mail->addStringAttachment($file, 'reporte_transacciones.pdf');
 
     $mail->isHTML(true);                                  //Set email format to HTML

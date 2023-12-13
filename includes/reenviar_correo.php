@@ -73,7 +73,7 @@ try {
     <p>Su factura ha sido procesado con éxito con fecha '.$fecha_actual.'</p>
     '.$contenido_pie.'
     ');
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->AltBody = 'Factura procesada con éxito';
 
     $mail->send();
     echo 'Messagehasbeensent';
