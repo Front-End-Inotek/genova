@@ -1106,7 +1106,7 @@ class Reservacion extends ConexionMYSql
                     }
                     echo $tr;
                     echo '
-                        <td>'.$fila['ID'].'</td>
+                        <td>'.$fila['ID'].'</td>}
                         <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
                         <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
                         <td>'.$fila['usuario'].'</td>
@@ -1860,6 +1860,7 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<tr class="table-success text-center">
             <td>'.$fila['ID'].'</td>
+            <td>'.$fila['numero_hab'].'</td>
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
@@ -1890,13 +1891,19 @@ class Reservacion extends ConexionMYSql
                 echo '<td>'.$fila['descripcion'].'</td>';
                 // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                 echo '<td>Garantizada</td>';
-                if($agregar==1 && $fila['edo'] = 1) {
+                if($agregar==1 && $fila['edo'] = 1 && $fila['numero_hab']<=1) {
                     echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
+                }else{
+                    echo '<td></td>';
                 }
-                if($fila['id_hab']==0) {
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar</button></td>';
-                } else {
-                    echo '<td>Hab. '.$preasignada.'</td>';
+                if($fila['numero_hab']<=1){
+                    if($fila['id_hab']==0) {
+                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar</button></td>';
+                    } else {
+                        echo '<td>Hab. '.$preasignada.'</td>';
+                    }
+                }else{
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar Habitaciones</button></td>';
                 }
                 /* if(true){
                     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
@@ -1904,7 +1911,7 @@ class Reservacion extends ConexionMYSql
                     echo '<td></td>';
                 } */
                 //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
-                if($editar==1 && $fila['edo'] = 1) {
+                if($editar==1 && $fila['edo'] = 1 && $fila['numero_hab']<=1) {
                     //echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')"> Editar</button></td>';
                     echo '<td>
                         <div class="dropdown">
@@ -1925,6 +1932,8 @@ class Reservacion extends ConexionMYSql
                     echo '  </div>
                         </div>
                     </td>';
+                }else{
+                    echo '<td></td>';
                 }
                 /* if($borrar==1 && $fila['edo'] != 0) {
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',1)"> Cancelar</button></td>';
