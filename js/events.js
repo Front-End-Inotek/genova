@@ -4119,6 +4119,15 @@ function ver_historial_cuentas(){
     closeModal();
 	closeNav();
 }
+// ver reporte de ama de llaves
+function ver_reporte_ama_de_llaves(){
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $('#area_trabajo_menu').load("includes/reporte_ama_llaves.php");
+    closeModal();
+    closeNav();
+}
 
 // ver Historia del huesped
 function ver_historial_huesped(id){

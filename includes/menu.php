@@ -117,6 +117,11 @@
 							<li class="aside_ruta" onclick="ver_historial_cuentas(); handleSiceTable();">Historial de cuentas</li>
 							';
 						}
+						if(true){
+							echo '
+							<li class="aside_ruta" onclick="ver_reporte_ama_de_llaves(); handleSiceTable();">Reporte ama de llaves</li>
+							';
+						}
 						echo '
 							</ul>
 						</div>

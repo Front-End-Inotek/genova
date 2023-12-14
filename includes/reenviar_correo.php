@@ -46,7 +46,7 @@ try {
     $anio = substr($fecha, 6, 4);
 
     $fecha_actual = $dia . " de " . $mes . " de " . $anio;
-
+$mail->AltBody
     //Pie de pagina
     $contenido_pie="
       <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff; ' >
