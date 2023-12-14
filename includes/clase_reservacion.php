@@ -1784,7 +1784,7 @@ class Reservacion extends ConexionMYSql
                     echo '
                 <td>'.$fila['habitacion'].'</td>'
                     ;
-                }
+                }ver_historial_cuentas()
                 echo '<td>$'.number_format($fila['precio_hospedaje_reserva'], 2).'</td>';
                 echo '<td>'.$fila['plan_alimentos'].'</td>
             <td>'.$fila['extra_adulto'].'</td>
