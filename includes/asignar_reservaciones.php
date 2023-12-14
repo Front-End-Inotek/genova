@@ -1,6 +1,6 @@
 <?php 
     date_default_timezone_set('America/Mexico_City');
-    $numero_reserva = "5455";
+    $numero_reserva = $_GET['id_reserva'];
 
     echo '
     <div class="main_container">
@@ -8,7 +8,7 @@
             <h2>Asignar habitaciones a la reserva '.$numero_reserva.' </h2>
         </div>
 
-        
+
     </div>
     '
 

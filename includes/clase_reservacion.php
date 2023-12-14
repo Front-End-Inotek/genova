@@ -1784,7 +1784,7 @@ class Reservacion extends ConexionMYSql
                     echo '
                 <td>'.$fila['habitacion'].'</td>'
                     ;
-                }ver_historial_cuentas()
+                }
                 echo '<td>$'.number_format($fila['precio_hospedaje_reserva'], 2).'</td>';
                 echo '<td>'.$fila['plan_alimentos'].'</td>
             <td>'.$fila['extra_adulto'].'</td>
@@ -1818,7 +1818,7 @@ class Reservacion extends ConexionMYSql
                         echo '<td></td>';
                     }
                 }else{
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar Habitaciones</button></td>';
+                    echo '<td><button class="btn btn-secondary" onclick="asignar_habitaciones('.$fila['id_reserva'].');"> Preasignar Habitaciones</button></td>';
                 }
                 /* if(true){
                     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
@@ -1903,7 +1903,7 @@ class Reservacion extends ConexionMYSql
                         echo '<td>Hab. '.$preasignada.'</td>';
                     }
                 }else{
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar Habitaciones</button></td>';
+                    echo '<td><button class="btn btn-secondary" onclick="asignar_habitaciones('.$fila['id_reserva'].');"> Preasignar Habitaciones</button></td>';
                 }
                 /* if(true){
                     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';

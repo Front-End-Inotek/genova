@@ -8746,4 +8746,16 @@ function handle_rest( id_check , operador ) {
         }
     }
 }
+
+function asignar_habitaciones( id_reserva = 1 ){
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $('#area_trabajo_menu').load("includes/asignar_reservaciones.php?id_reserva=" + id_reserva,function(res){
+        if(res=="nada"){
+            document.location.href= "inicio.php"
+        }
+    });
+    $('#caja_herramientas').modal('hide');
+}
     
