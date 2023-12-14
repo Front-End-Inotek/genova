@@ -635,7 +635,9 @@ class Reservacion extends ConexionMYSql
         $limite_credito,
         $adultos,
         $infantiles,
-        $id_ticket
+        $id_ticket,
+        $id_reserva
+
     ) {
         $fecha_entrada= strtotime($fecha_entrada);
         $fecha_salida= strtotime($fecha_salida);
@@ -672,9 +674,9 @@ class Reservacion extends ConexionMYSql
                 $id_cuenta= $fila['id'];
             }
         }
-        $sentencia = "INSERT INTO `reservacion` (`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, 
+        $sentencia = "INSERT INTO `reservacion` (`id_reserva`,`id_usuario`, `id_huesped`, `id_cuenta`, `tipo_hab`,`fecha_entrada`, `fecha_salida`, `noches`, `numero_hab`, `precio_hospedaje`, `cantidad_hospedaje`, `extra_adulto`, `extra_junior`, `extra_infantil`, `extra_menor`, `tarifa`, `nombre_reserva`, `acompanante`, `forma_pago`, `limite_pago`, `suplementos`, `total_suplementos`, `total_hab`, `forzar_tarifa`, `codigo_descuento`, `descuento`, `total`, `total_pago`, `fecha_cancelacion`, `nombre_cancela`, `tipo_descuento`, 
             `estado`,`pax_extra`,`canal_reserva`,`plan_alimentos`,`tipo_reservacion`,`sobrevender`,`estado_interno`,`estado_credito`,`limite_credito`,`adultos`,`infantiles`)
-            VALUES ('$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', 
+            VALUES ('$id_reserva','$usuario_id', '$id_huesped', '$id_cuenta', '$tipo_hab', '$fecha_entrada', '$fecha_salida', '$noches', '$numero_hab', '$precio_hospedaje', '$cantidad_hospedaje', '$extra_adulto', '$extra_junior', '$extra_infantil', '$extra_menor', '$tarifa', '$nombre_reserva', '$acompanante', '$forma_pago', '$limite_pago', '$suplementos', '$total_suplementos', '$total_hab', '$forzar_tarifa', '$codigo_descuento', '$descuento', '$total', '$total_pago', '0', '', '$tipo_descuento', 
             '$estado','$pax_extra','$canal_reserva','$plan_alimentos','$tipo_reservacion',$sobrevender,'$estado_interno','$estado_credito','$limite_credito','$adultos','$infantiles');";
         $comentario="Guardamos la reservacion en la base de datos";
         //   echo $sentencia;
@@ -1768,6 +1770,7 @@ class Reservacion extends ConexionMYSql
             if($fila['total_pago'] <= 0) {
                 echo '<tr class="text-center">
             <td>'.$fila['ID'].'</td>
+            <td>'.$fila['numero_hab'].'</td>
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
@@ -1801,15 +1804,21 @@ class Reservacion extends ConexionMYSql
                 
                 //  echo date('Y-m-d', $fila['fecha_entrada']) . "/" . date('Y-m-d', $inicio_dia);
                 // die();
-                if($agregar==1 && $fila['edo'] = 1) {
+                if($agregar==1 && $fila['edo'] = 1 && $fila['numero_hab']<=1) {
                     echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_checkin('.$fila['ID'].','.$fila['numero_hab'].','.$fila['id_hab'].','.$fila['mov'].')"> Asignar</button></td>';
-                }
-                if($fila['id_hab']==0 && $preasignar==1) {
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar</button></td>';
-                } elseif($fila['id_hab']!=0) {
-                    echo '<td>Hab. '.$preasignada.'</td>';
-                } else {
+                }else{
                     echo '<td></td>';
+                }
+                if($fila['numero_hab']<=1){
+                    if($fila['id_hab']==0 && $preasignar==1) {
+                        echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar</button></td>';
+                    } elseif($fila['id_hab']!=0) {
+                        echo '<td>Hab. '.$preasignada.'</td>';
+                    } else {
+                        echo '<td></td>';
+                    }
+                }else{
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar Habitaciones</button></td>';
                 }
                 /* if(true){
                     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
@@ -1817,7 +1826,7 @@ class Reservacion extends ConexionMYSql
                     echo '<td></td>';
                 } */
                 //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
-                if($editar==1 && $fila['edo'] = 1) {
+                if($editar==1 && $fila['edo'] = 1 && $fila['numero_hab']<=1) {
                     //echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')"> Editar</button></td>';
                     echo '<td>
                         <div class="dropdown">
@@ -1840,6 +1849,8 @@ class Reservacion extends ConexionMYSql
                     echo ' </div>
                         </div>
                     </td>';
+                }else{
+                    echo '<td></td>';
                 }
                 /* if($borrar==1 && $fila['edo'] != 0) {
                     echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Cancelar</button></td>';
@@ -2095,7 +2106,8 @@ class Reservacion extends ConexionMYSql
 		<table class="table table_expansion">
 		<thead>
 			<tr class="table-primary-encabezado text-center">
-			<th>Número</th>
+			<th>Número aqui</th>
+            <th>Número Habitaciones</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
             <th>Nombre Huésped</th>
@@ -3347,6 +3359,19 @@ class Reservacion extends ConexionMYSql
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         return $consulta;
     }
+    function registrar_reserva($numero_hab,$fecha_entrada,$fecha_salida,$nombre_reserva){
+        $sentencia = "INSERT INTO `reserva`( `numero_hab`, `fecha_entrada`, `fecha_salida`, `nombre_reserva`) VALUES ($numero_hab,'$fecha_entrada','$fecha_salida','$nombre_reserva')";
+        $comentario = "se guarda la reservacion de varias habitaciones";
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        $sentencia = "SELECT `id` FROM `reserva`";
+        $comentario = "se guarda la reservacion de varias habitaciones";
+        $consulta = $this->realizaConsulta($sentencia, $comentario);
+        $id_reserva="";
+        while ($fila = mysqli_fetch_array($consulta)) {
+            $id_reserva= $fila['id'];
+        }
+        return $id_reserva;
+      }
     // Obtengo los datos de una reservacion
     public function datos_reservacion($id)
     {
