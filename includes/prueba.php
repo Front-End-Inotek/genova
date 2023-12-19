@@ -1,58 +1,54 @@
 <?php
-
-$rfc = $_POST['rfc'];
-$cantidad = $_POST['cantidad'];
-$unidad = $_POST['unidad'];
-$claveunidad = $_POST['claveunidad'];
-$clave = $_POST['clave'];
-$id = $_POST['id'];
-$producto = $_POST['producto'];
-$importeuni = $_POST['importeuni'];
-$importe = $_POST['importe'];
-$iva = $_POST['iva'];
-$ish = $_POST['ish'];
-
-$rimporte = $_POST['rimporte'];
-$riva = $_POST['riva'];
-$rish = $_POST['rish'];
-$rtotal = $_POST['rtotal'];
-
-$contador = $_POST['filas'];
-var_dump($contador);
-
-for ($i=1; $i <= $contador ; $i++) {
-    if($cantidad[$i] > 0){
-        var_dump($i.'.-cantidad '. $cantidad["$i"]);
-        var_dump($i.'.-unidad '. $unidad["$i"]);
-        var_dump($i.'.-claveunidad '. $claveunidad["$i"]);
-        var_dump($i.'.-clave '. $clave["$i"]);
-        var_dump($i.'.-id '. $id["$i"]);
-        var_dump($i.'.-producto '. $producto["$i"]);
-        var_dump($i.'.-importeuni '. $importeuni["$i"]);
-        var_dump($i.'.-importe '. $importe["$i"]);
-        var_dump($i.'.-iva '. $iva["$i"]);
-        var_dump($i.'.-ish '. $ish["$i"]);
-    }
-}
-
-
-var_dump($rfc['0']);//RFC
-var_dump($rfc['1']);//NOMBRE
-var_dump($rfc['2']);//CODIGO POSTAL
-var_dump($rfc['3']);//REGIMEN FISCAL
-var_dump($rfc['4']);//USO DE CFDI
-var_dump($rfc['5']);//E-MAIL
-var_dump($rfc['6']);//METODO DE PAGO
-var_dump($rfc['7']);//FORMA DE PAGO
-var_dump($rfc['8']);//NOTAS
-//DATOS FACTURA GLOBAL
-var_dump($rfc['9']);//PERIOCIDAD
-var_dump($rfc['10']);//MES
-var_dump($rfc['11']);//AÑO
-//DATOS PARA FACTURAR
-
-var_dump($rimporte);
-var_dump($riva);
-var_dump($rish);
-var_dump($rtotal);
+    echo'
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap demo</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="accordion accordion-flush" id="accordionFlushExample">';
+        for($i=0; $i<=10; $i++){
+            echo'
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse'.+$i.'" aria-expanded="false" aria-controls="flush-collapse'.+$i.'">
+                    Accordion Item #1
+                    </button>
+                </h2>
+                <div id="flush-collapse'.+$i.'" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <table class="table table_expansion">
+                            <thead>
+                                <tr class="table-primary-encabezado text-center">
+                                <th>Número aqui</th>
+                                <th>Número Habitaciones</th>
+                                <th>Fecha Entrada</th>
+                                <th>Fecha Salida</th>
+                                <th>Nombre Huésped</th>
+                                <th>Noches</th>
+                                <!-- <th>No. Habitaciones</th> -->
+                                <th>Tarifa</th>
+                                <th>Precio Hospedaje</th>
+                                <th>Plan alimentos</th>
+                                <th>Extra Adulto</th>
+                                <!-- <th>Extra Junior</th> --->
+                                <!-- <th>Extra Infantil</th> --->
+                                <th>Extra Menor</th>
+                                <th>Total Estancia</th>
+                                <th>Total Pago</th>
+                                <th>Forma Pago</th>
+                                <!-- <th>Límite Pago</th> --->
+                                <th>Status</th>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>';
+            }
+            echo'
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+    ';
 ?>
