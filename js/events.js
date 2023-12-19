@@ -3653,7 +3653,7 @@ function regresar_reservacion(){
 
 // Modal de asignar una reservacion a una habitacion en estado disponible
 function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
-    console.log(hab_id, id,movimiento )
+    numero_hab=1;
     //si ya tiene una habitación preasignada, hará "checkin" automaticamente.
     if(hab_id!=""){
         var usuario_id=localStorage.getItem("id");
