@@ -48,6 +48,8 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js@latest/dist/Chart.min.js"></script>
             <script src="js/graficas.js"></script>
+
+
           </head>
     <body  onload="sabernosession()">
 
@@ -70,8 +72,28 @@
       </div>
 
       <!-- footer -->
-      <footer id="pie" class="footerContainer"></footer>
+      <footer id="pie" class="footerContainer">
+      </footer>
 
+      <!-- chat -->
+      <section class="fab_container" onclick="show_chat()">
+        <img class="fab_img" src="./assets/chat.svg">
+        <span class="fab_img_notification"></span>
+      </section>
+
+      <section id="chat" class="chat_container" style="display: none;">
+        <div class="chat_encabezado">
+            <p> Chat - General</p>
+            <img src="./assets/close.svg" onclick="show_chat()" />
+        </div>
+        <div id="chat_content" class="chat_body"></div>
+          <div class="chat_input">
+            <input id="chat_message" class="chat_input_text" type="text" placeholder="Type a message" onkeyup="handleSendMessage(event)" />
+            <button class="button_send" type="button" onclick="send_message(0)">
+                <img  src="./assets/send.svg" />
+            </button>
+        </div>
+      </section>
     </body>
   ';
 ?>

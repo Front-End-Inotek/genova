@@ -8,6 +8,7 @@ function inicio(){
 	x.click(evaluar);
 }
 
+
 x=$(document);
 x.ready(inicio);
 
@@ -196,7 +197,7 @@ function cargar_area_trabajo(){
     }*/
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
-    //setTimeout('cargar_area_trabajo()',3000);//5500
+    setTimeout('cargar_area_trabajo()',3000);//5500
 }
 
     function pregunta_salir(){
@@ -8757,5 +8758,95 @@ function asignar_habitaciones( id_reserva = 1 ){
         }
     });
     $('#caja_herramientas').modal('hide');
+}
+
+function show_chat() {
+    const chat = document.getElementById("chat");
+    const chat_content = document.getElementById("chat_content");
+    chat.style.display = (chat.style.display === "none") ? "block" : "none";
+    const id = localStorage.getItem("id");
+
+    if (chat.style.display == "block") {
+        console.log("Abriendo chat");
+        cargarContenido(); // Llamar a la función de carga al abrir el chat
+
+        // Actualizar automáticamente cada 5 segundos
+        var intervalId = setInterval(cargarContenido, 10000);
+
+        // Detener la actualización cuando el chat se cierra
+        chat.onmouseleave = function() {
+            clearInterval(intervalId);
+        };
+    }
+}
+
+function cargarContenido() {
+    const id = localStorage.getItem("id");
+
+    const datos = {
+        "id": id
+    }
+
+    // Realizar la solicitud de AJAX al archivo PHP
+    $.ajax({
+        async: true,
+        url: "includes/chat.php",
+        dataType: "html",
+        type: "POST",
+        data: datos,
+        contentType: "application/x-www-form-urlencoded",
+        success: function(response) {
+            $("#chat_content").html(response);
+
+        },
+        error: function(error) {
+            console.log("Error al cargar el contenido: ", error);
+        }
+    });
+}
+function send_message( mensage_type ) {
+    const chat = document.getElementById("chat_content");
+    const messageInput = document.getElementById("chat_message");
+    const message = messageInput.value;
+    const id = localStorage.getItem("id");
+
+    if( !message ){
+        return
+    }else {
+        const datos = {
+            "mensaje" : message,
+            "id_usuario": id,
+            "message_type": mensage_type
+        };
+        const messageFormat = `
+            <div class="chat_message_other chat_message_own">
+                <img src="./assets/user_own.svg"/>
+                <div class="chat_message_content_own">
+                    <p>Tú</p>
+                    <p>${message}</p>
+                </div>
+            </div>
+        `;
+        $.ajax({
+            async: true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url: "includes/chat_guardar_mensaje.php",
+            data: datos,
+            success: function (res) {
+                console.log(res)
+                //chat.innerHTML += messageFormat;
+                chat.insertAdjacentHTML('afterbegin', messageFormat);
+                messageInput.value = "";
+            }
+        })
+    }
+}
+
+function handleSendMessage(event) {
+    if( event.key === "Enter" ) {
+        send_message();
+    }
 }
     
