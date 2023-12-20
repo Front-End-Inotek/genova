@@ -62,7 +62,6 @@ while ($fila = mysqli_fetch_array($datos)){
                     <p class="chat_message_name">Tú</p>
                     <p class="chat_message_name">'.$fecha.'</p>
                 </div>
-                
                 <p>'.$fila['mensaje'].'</p>
             </div>
         </div>
