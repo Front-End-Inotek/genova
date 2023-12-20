@@ -6,7 +6,7 @@ class Chat_Manager extends ConexionMYSql{
 
     public function guardarMensaje($usuarioId, $tipo_mensaje, $mensaje){
         $sentencia = "INSERT INTO `chat` ( `usuario_id` , `tipo_mensaje` , `mensaje` ) 
-        VALUES ('$usuarioId' , '$tipo_mensaje' , '$mensaje');";
+        VALUES ($usuarioId , $tipo_mensaje , '$mensaje');";
         $comentario = "Guardamos mensaje nuevo";
         $consulta = $this->realizaConsulta($sentencia , $comentario);
         if($consulta){
