@@ -656,13 +656,13 @@
   position: absolute;
   left: 8px;
   bottom: 4px;
-  z-index: 1000;
+  z-index: 40;
 }
 .clean{
   position: absolute;
   right: 4px;
   bottom: 4px;
-  z-index: 1000;
+  z-index: 40;
   color: white;
   background-color: #28A745;
   border-radius: 50%;
@@ -682,7 +682,7 @@
   position: absolute;
   right: 4px;
   bottom: 4px;
-  z-index: 1000;
+  z-index: 40;
   color: white;
   background-color: #DC3545;
   border-radius: 50%;
@@ -702,7 +702,7 @@
   position: absolute;
   right: 4px;
   bottom: 4px;
-  z-index: 1000;
+  z-index: 40;
   color: white;
   background-color: #0f6fd0;
   border-radius: 50%;
@@ -768,7 +768,7 @@
   position: absolute;
   right: 4px;
   bottom: 4px;
-  z-index: 1000;
+  z-index: 40;
   color: white;
   background-color: #fa5f05 !important;
   border-radius: 50%;
@@ -791,7 +791,7 @@
   position: absolute;
   right: 4px;
   bottom: 4px;
-  z-index: 1000;
+  z-index: 40;
   color: white;
   background-color: #336c80 !important;
   border-radius: 50%;
@@ -805,7 +805,7 @@
   position: absolute;
   right: 4px;
   bottom: 4px;
-  z-index: 1000;
+  z-index: 40;
   color: white;
   background-color: #ff0a0a !important;
   border-radius: 50%;
@@ -819,7 +819,7 @@
   position: absolute;
   right: 4px;
   bottom: 4px;
-  z-index: 1000;
+  z-index: 40;
   color: white;
   display: flex;
   flex-direction: column;
