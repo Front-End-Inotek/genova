@@ -1076,10 +1076,12 @@ body.modo-nocturno .containerRackOp .btn:focus {
 }
 
 .card-header {
-  background-color: var(--fondo);
-  color: var(--titulos);
-  padding-top: 25px !important;
-  padding-bottom: 25px !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  cursor: pointer;
+}
+.card-header:hover {
+  background-color: #0a60ff0a;
 }
 
 .cardFooter{
