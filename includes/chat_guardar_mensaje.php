@@ -6,7 +6,7 @@ try {
 
     $message = isset($_POST['mensaje']) ? $_POST['mensaje'] : '';
     $id_usuario = isset($_POST['id_usuario']) ? $_POST['id_usuario'] : 0; // Asegúrate de asignar un valor predeterminado adecuado
-    $message_type = isset($_POST['message_type']) ? $_POST['message_type'] : '';
+    $message_type = isset($_POST['message_type']) ? $_POST['message_type'] : 0 ;
 
     // Validar y escapar datos según sea necesario
     $id_usuario = intval($id_usuario); // Asegúrate de que $id_usuario sea un entero
