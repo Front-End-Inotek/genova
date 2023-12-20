@@ -2105,7 +2105,7 @@ class Reservacion extends ConexionMYSql
         </button>';
         $id_reserva=0;
         $nreserva=0;
-        echo '<div class="accordion accordion-flush" id="accordionFlushExample">';
+        echo '<div class="accordion" id="accordionExample">';
         while ($fila = mysqli_fetch_array($consulta)) {
             if ($id_reserva!=$fila['id_reserva'] and $id_reserva!=0){
                 echo'</table>
@@ -2122,55 +2122,55 @@ class Reservacion extends ConexionMYSql
             }else{
                 $nreserva=$nreserva+1;
                 echo'
-                
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse'.+$nreserva.'" aria-expanded="false" aria-controls="flush-collapse'.+$nreserva.'">
+                <div class="card">
+                    <div class="card-header" id="heading'.+$nreserva.'">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse'.+$nreserva.'" aria-expanded="true" aria-controls="collapse'.+$nreserva.'">
                             '.$nreserva.'.- <strong> '.$fila['persona'].' '.$fila['apellido'].' </strong>   del: '.date("d-m-Y", $fila['fecha_entrada']).' al: '.date("d-m-Y", $fila['fecha_salida']).'
                             </button>
                         </h2>
-                        <div id="flush-collapse'.+$nreserva.'" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <div class="table-responsive" id="tabla_reservacion" >
-                                    <table class="table ">
-                                        <thead>
-                                            <tr class="table-primary-encabezado text-center">
-                                            <th>Número aqui</th>
-                                            <th>Número Habitaciones</th>
-                                            <th>Fecha Entrada</th>
-                                            <th>Fecha Salida</th>
-                                            <th>Nombre Huésped</th>
-                                            <th>Noches</th>
-                                            <!-- <th>No. Habitaciones</th> -->
-                                            <th>Tarifa</th>
-                                            <th>Precio Hospedaje</th>
-                                            <th>Plan alimentos</th>
-                                            <th>Extra Adulto</th>
-                                            <!-- <th>Extra Junior</th> --->
-                                            <!-- <th>Extra Infantil</th> --->
-                                            <th>Extra Menor</th>
-                                            <th>Total Estancia</th>
-                                            <th>Total Pago</th>
-                                            <th>Forma Pago</th>
-                                            <!-- <th>Límite Pago</th> --->
-                                            <th>Status</th>';
-                                            echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
-                                            echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
-                                            echo '<th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
-                                        </thead>';
-                                        if($cont>=$posicion & $cont<$final) {
-                                            $this->construirTabla($fila, $agregar, $editar, $borrar, $ruta, $preasignar);
-                                        }
-                                        $id_reserva=$fila['id_reserva'];
+                    </div>
+                    <div id="collapse'.+$nreserva.'" class="collapse " aria-labelledby="heading'.+$nreserva.'" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="table-responsive" id="tabla_reservacion" >
+                                <table class="table ">
+                                    <thead>
+                                        <tr class="table-primary-encabezado text-center">
+                                        <th>Número aqui</th>
+                                        <th>Número Habitaciones</th>
+                                        <th>Fecha Entrada</th>
+                                        <th>Fecha Salida</th>
+                                        <th>Nombre Huésped</th>
+                                        <th>Noches</th>
+                                        <!-- <th>No. Habitaciones</th> -->
+                                        <th>Tarifa</th>
+                                        <th>Precio Hospedaje</th>
+                                        <th>Plan alimentos</th>
+                                        <th>Extra Adulto</th>
+                                        <!-- <th>Extra Junior</th> --->
+                                        <!-- <th>Extra Infantil</th> --->
+                                        <th>Extra Menor</th>
+                                        <th>Total Estancia</th>
+                                        <th>Total Pago</th>
+                                        <th>Forma Pago</th>
+                                        <!-- <th>Límite Pago</th> --->
+                                        <th>Status</th>';
+                                        echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
+                                        echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
+                                        echo '<th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
+                                    </thead>';
+                                    if($cont>=$posicion & $cont<$final) {
+                                        $this->construirTabla($fila, $agregar, $editar, $borrar, $ruta, $preasignar);
+                                    }
+                                    $id_reserva=$fila['id_reserva'];
             }
             echo'
             </div>';
             $cont++;
-        }
-        echo '
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>';
+            }
         //return $cat_paginas;
     }
+    
     //Barra de busqueda en ver llegadas y salidas, se usará la misma función.
     public function buscar_entradas_salidas_recep($a_buscar, $id, $inicio_dia, $opcion, $fin_dia)
     {
