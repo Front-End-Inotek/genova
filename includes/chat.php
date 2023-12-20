@@ -55,7 +55,7 @@ while ($fila = mysqli_fetch_array($datos)){
 
     if( $id_propio == $id ){
         $bodyChat .='
-        <div class="chat_message_other chat_message_own">
+        <div class="chat_message_other chat_message_own chat_message_own_triangle">
             <img src="./assets/user_own.svg" style="border: 2px solid white" />
             <div class="chat_message_content_own">
                 <div class="chat_message_info chat_message_info_own">
@@ -68,7 +68,7 @@ while ($fila = mysqli_fetch_array($datos)){
         ';
     } else {
         $bodyChat .= '
-        <div class="chat_message_other">
+        <div class="chat_message_other chat_message_other_triangle">
             <img src="./assets/user.svg" style="border: 2px solid '.$color_margen.';"/>
             <div class="chat_message_content">
                 <div class="chat_message_info ">

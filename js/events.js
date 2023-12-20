@@ -8771,7 +8771,7 @@ function show_chat() {
         cargarContenido(); // Llamar a la función de carga al abrir el chat
 
         // Actualizar automáticamente cada 5 segundos
-        var intervalId = setInterval(cargarContenido, 50000);
+        var intervalId = setInterval(cargarContenido, 5000);
 
         // Detener la actualización cuando el chat se cierra
         
@@ -8818,7 +8818,7 @@ function send_message( mensage_type ) {
         };
         const messageFormat = `
             <div class="chat_message_other chat_message_own">
-                <img src="./assets/user_own.svg"/>
+                <img src="./assets/user_own.svg" style="border: 2px solid white" />
                 <div class="chat_message_content_own">
                     <div class="chat_message_info chat_message_info_own">
                         <p class="chat_message_name">Tú</p>

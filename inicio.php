@@ -88,7 +88,7 @@
         </div>
         <div id="chat_content" class="chat_body"></div>
           <div class="chat_input">
-            <input id="chat_message" class="chat_input_text" type="text" placeholder="Type a message" onkeyup="handleSendMessage(event)" />
+            <input id="chat_message" class="chat_input_text" type="text" placeholder="Type a message" onkeyup="handleSendMessage(event)" maxlength="25"/>
             <button class="button_send" type="button" onclick="send_message(0)">
                 <img  src="./assets/send.svg" />
             </button>
