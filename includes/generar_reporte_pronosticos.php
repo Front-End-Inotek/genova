@@ -36,20 +36,25 @@ class PDF extends FPDF
         }elseif($mes==12){
             $mes="Diciembre";
         }
+        $this->Image("../images/encabezado_pdf_2.jpg"  , 0   , -8  , 300 );
+        $this->Image("../images/rectangulo_pdf.png"    , 260 , 2   , 20  , 20);
+        $this->Image("../images/rectangulo_pdf_2.png"  , 10  , 10  , 85  , 12);
+        $this->Image("../images/hotelexpoabastos.png"  , 260 , 1   , 20  , 20);
         $this->SetFont('Arial', 'B', 12);
-        $this->Cell(50, 8, '', 0, 0, 'C');
-        $this->Cell(177, 8, 'PRONOSTICO DE OCUPACION', 0, 0, 'C');
+        $this->SetTextColor( 255 , 255 , 255 );
+        $this->Cell(85, 8, iconv("UTF-8", "ISO-8859-1" ,"PRONOSTICO DE OCUPACIÓN"), 0, 0, 'C');
+        $this->Ln();
         $this->SetFont('Arial', 'B', 7);
-        $this->Cell(25, 8, 'Mes:', 0, 0, 'R');
-        $this->Cell(25, 8, $mes, 0, 1, );
-        $this->Ln(1);
-        $this->Cell(50, 8, '', 0, 0, 'C');
+        $this->Cell( 20 , 1, 'Mes:', 0, 0, 'R');
+        $this->Cell(20, 1, $mes, 0, 1, );
+        $this->Cell(65, 0, utf8_decode('Año:'), 0, 0, 'R');
+        $this->Cell(65, 0, $año, 0, 1, );
+        $this->SetTextColor(0, 0, 0);
         $this->SetFont('Arial', 'B', 12);
-        $this->Cell(177, 8, 'Tipo de Cuarto', 0, 0, 'C');
+        $this->Cell(35, 15, 'Tipo de Cuarto', 0, 0, 'C');
         $this->SetFont('Arial', 'B', 7);
-        $this->Cell(25, 8, utf8_decode('Año:'), 0, 0, 'R');
-        $this->Cell(25, 8, $año, 0, 1, );
-        $this->Ln(1);
+        $this->Ln(10);
+        $this->SetTextColor(255, 255, 255);
     }
 
     
