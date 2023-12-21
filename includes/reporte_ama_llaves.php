@@ -7,13 +7,13 @@ echo '
 
 <div class="main_container">
     <div class="main_container_title">
-        <h2>reporte ama de llaves</h2>
+        <h2>REPORTE AMA DE LLAVES</h2>
     </div>
 
 
     <div class="table-responsive">
         
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover text-center">
             <tr >
                 <th>Revision fisica</th>
                 <th>Habitacion</th>
@@ -146,7 +146,7 @@ echo '
                     <td>'.$estado.'</td>
                     <td>
                         <div class="form-floating">
-                            <select class="form-select" id="miSelect" name="miSelect">
+                            <select class="form-select custom_input" id="miSelect" name="miSelect">
                                 <option value="" disabled selected>Selecciona</option>
                                 <option value="0">Disponible limpia</option>
                                 <option value="1">Ocupado</option>
@@ -173,7 +173,7 @@ echo '
                     <td>discrepancia</td>
                     <td>
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Observaciones" id="miTextarea" name="miTextarea" style="height: 100px""></textarea>
+                            <textarea class="form-control custom_input" placeholder="Observaciones" id="miTextarea" name="miTextarea" style="height: 100px""></textarea>
                             <label>Observaciones</label>
                         </div>
                     </td>

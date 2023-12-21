@@ -22,4 +22,15 @@ class Chat_Manager extends ConexionMYSql{
         $consulta = $this->realizaConsulta($sentencia ,  $comentario);
         return $consulta;
     }
+
+    public function comprobarMensajeGlobal() {
+        $sentencia = "";
+        $comentario = "comprobar el ultimo mensaje";
+        $consulta = $this->realizaConsulta($sentencia , $comentario);
+        if($consulta){
+            echo ("SI");
+        } else {
+            echo ("Error en la consulta");
+        }
+    }
 }

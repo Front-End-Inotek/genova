@@ -288,29 +288,38 @@ $_SESSION["tipo_de_habitacion"]=$tipo_de_habitacion;
 
 
 
-
 ///IMPRESIONES
 
-echo '<div class="table-responsive table-hover">
-';
 //imprimie las matrices
 for ($k = 0; $k < count($id_hab); $k++) {
-    echo $tipo_de_habitacion[$k];
     echo'
-    <table class="table table-bordered table-hover text-center table-sm">
-        <tr>';
+    <h3 class="encabezado_tabla_pronosticos">'.$tipo_de_habitacion[$k].'</h3>
+
+    <div class="table-responsive table-hover">
+        <table class="table table-bordered table-hover text-center table-sm">
+            <tr>
+                <td class="fw-bold tabla_ancho_pronostico">Dia</td>';
+                for ($dia = 1; $dia <= $n; $dia++){
+                    echo'<td class="fw-bold">'.$dia.'</td>';
+                }
+        echo'
+                <td></td>
+                <td class="fw-bold">Total</td>
+            </tr>
+        <tr>
+        ';
     $matriz=$lista_matrices[$k];
     for ($i = 0; $i < 5; $i++) {
         if ($i==0){
-            echo'<td>Cuartos Noche</td>';
+            echo'<td class="fw-bold tabla_ancho_pronostico">Cuartos Noche</td>';
         }else if ($i==1){
-            echo'<td>Reservadas</td>';
+            echo'<td class="fw-bold tabla_ancho_pronostico">Reservadas</td>';
         }else if ($i==2){
-            echo'<td>Reservadas Web</td>';
+            echo'<td class="fw-bold tabla_ancho_pronostico">Reservadas Web</td>';
         }else if ($i==3){
-            echo'<td>Walk-in</td>';
+            echo'<td class="fw-bold tabla_ancho_pronostico">Walk-in</td>';
         }else if ($i==4){
-            echo'<td>Dispobles</td>';
+            echo'<td class="fw-bold tabla_ancho_pronostico">Dispobles</td>';
         }
         for ($j = 0; $j < $n; $j++) {
             //echo $matriz[$i][$j]."      ";
@@ -320,33 +329,44 @@ for ($k = 0; $k < count($id_hab); $k++) {
         echo'<td>'.$totales[$k][$i].'</td>';
         echo '</tr>';
     }
-
     echo'
-    </table>
-    ';
-    echo '<br>';
+        </table>
+        </div>
+        ';
 }
+
+
 $tope=$k;
 
 //se imprime el calculo de totales por noche de todas las habitaciones
-echo "<caption>Total cuartos noche:</caption>";
-echo'
-<table class="table table-bordered table-hover text-center table-sm">';
 
-echo '
-    <tr>';
 echo '<br>';
+echo '
+    <h3 class="encabezado_tabla_pronosticos">Total cuartos noche</h3>
+    <table class="table table-bordered table-hover text-center table-sm">
+            <tr>
+                <td class="fw-bold tabla_ancho_pronostico">Dia</td>';
+                for ($dia = 1; $dia <= $n; $dia++){
+                    echo'<td class="fw-bold">'.$dia.'</td>';
+                }
+        echo'
+                <td></td>
+                <td class="fw-bold">Total</td>
+            </tr>
+        <tr>
+    ';
 for ($i = 0; $i < 5; $i++) {
+
     if ($i==0){
-        echo'<td>Cuartos Noche</td>';
+        echo'<td class="fw-bold tabla_ancho_pronostico" >Cuartos Noche</td>';
     }else if ($i==1){
-        echo'<td>Reservadas</td>';
+        echo'<td class="fw-bold tabla_ancho_pronostico" >Reservadas</td>';
     }else if ($i==2){
-        echo'<td>Reservadas Web</td>';
+        echo'<td class="fw-bold tabla_ancho_pronostico" >Reservadas Web</td>';
     }else if ($i==3){
-        echo'<td>Walk-in</td>';
+        echo'<td class="fw-bold tabla_ancho_pronostico" >Walk-in</td>';
     }else if ($i==4){
-        echo'<td>Dispobles</td>';
+        echo'<td class="fw-bold tabla_ancho_pronostico" >Dispobles</td>';
     }
     for ($j = 0; $j < $n; $j++) {
         //echo $total_cuartos_noche[$i][$j]."      ";
@@ -355,21 +375,33 @@ for ($i = 0; $i < 5; $i++) {
     echo'<td>'." ".'</td>';
         echo'<td>'.$totales[$tope][$i].'</td>';
     echo '</tr>';
+    
+
 }
 $tope=$tope+1;
-echo'
-</table>
-';
+
+echo '</table>';
+
 echo '<br>';
 
 //se imprime la ocupacion
 echo'
-<caption>Ocupacion</caption>
+<h3 class="encabezado_tabla_pronosticos">Ocupación</h3>
 
 <table class="table table-bordered table-hover text-center table-sm">
+        <tr>
+                <td class="fw-bold tabla_ancho_pronostico">Dia</td>';
+                for ($dia = 1; $dia <= $n; $dia++){
+                    echo'<td class="fw-bold">'.$dia.'</td>';
+                }
+        echo'
+                <td></td>
+                <td class="fw-bold">Total</td>
+            </tr>
+        <tr>
     
     <tr>';
-    echo'<td>Ocupacion Bruta(%)</td>';
+    echo'<td class="fw-bold tabla_ancho_pronostico">Ocupacion Bruta(%)</td>';
 for ($j = 0; $j < $n; $j++) {
     //echo $ocupacion[$j]."      ";
     echo'<td>'.$ocupacion[$j].'</td>';
@@ -385,15 +417,26 @@ echo "<br>";
 //se imprimen los clientes alojados
 echo'
 <table class="table table-bordered table-hover text-center table-sm ">
+        <tr>
+                <td class="fw-bold tabla_ancho_pronostico">Dia</td>';
+                for ($dia = 1; $dia <= $n; $dia++){
+                    echo'<td class="fw-bold">'.$dia.'</td>';
+                }
+        echo'
+                <!-- <td></td>
+                <td class="fw-bold"></td>
+                -->
+            </tr>
+        <tr>
     <tr>';
-    echo'<td>Adultos</td>';
+    echo'<td class="fw-bold tabla_ancho_pronostico" >Adultos</td>';
 for ($j = 0; $j < $n; $j++) {
     //echo $listaAdultos[$j] . "      ";
     echo'<td>'.$listaAdultos[$j].'</td>';
 }
 echo '<tr>';
 
-echo'<td>niños</td>';
+echo'<td class="fw-bold tabla_ancho_pronostico" >niños</td>';
 for ($j = 0; $j < $n; $j++) {
     //echo $listaInfantiles[$j] . "      ";
     echo'<td>'.$listaInfantiles[$j].'</td>';
@@ -406,18 +449,28 @@ echo "<br>";
 
 
 //se imprimen las llegadas
-echo "Llegadas:";
-echo "<br>";
+echo '<h3 class="encabezado_tabla_pronosticos" >Llegadas</h3>';
 echo'
 <table class="table table-bordered table-hover text-center table-sm">
+        <tr>
+                <td class="fw-bold tabla_ancho_pronostico">Dia</td>';
+                for ($dia = 1; $dia <= $n; $dia++){
+                    echo'<td class="fw-bold">'.$dia.'</td>';
+                }
+        echo'
+                <!-- <td></td>
+                <td class="fw-bold"></td>
+                -->
+            </tr>
+        <tr>
     <tr>';
-    echo'<td>Adultos</td>';
+    echo'<td class="fw-bold tabla_ancho_pronostico" >Adultos</td>';
 for ($i=0; $i<$n; $i++){
     //echo $listaLlegadasAdultos[$i]."     ";
-    echo'<td>'.$listaLlegadasAdultos[$i].'</td>';
+    echo'<td >'.$listaLlegadasAdultos[$i].'</td>';
 }
 echo '<tr>';
-echo'<td>niños</td>';
+echo'<td class="fw-bold tabla_ancho_pronostico" >niños</td>';
 
 for ($i=0; $i<$n; $i++){
     //echo $listaLlegadasInfantiles[$i]."     ";
@@ -430,18 +483,28 @@ echo'
 echo "<br>";
 
 //se imprimen las salidas
-echo "Salidas:";
-echo "<br>";
+echo '<h3 class="encabezado_tabla_pronosticos">Salidas</h3>';
 echo'
 <table class="table table-bordered table-hover text-center table-sm">
+            <tr>
+                <td class="fw-bold tabla_ancho_pronostico">Dia</td>';
+                for ($dia = 1; $dia <= $n; $dia++){
+                    echo'<td class="fw-bold">'.$dia.'</td>';
+                }
+        echo'
+                <!-- <td></td>
+                <td class="fw-bold"></td>
+                -->
+            </tr>
+        <tr>
     <tr>';
-    echo'<td>Adultos</td>';
+    echo'<td class="fw-bold tabla_ancho_pronostico" >Adultos</td>';
 for ($i=0; $i<$n; $i++){
     //echo $listaLlegadasAdultos[$i]."     ";
     echo'<td>'.$listaSalidasAdultos[$i].'</td>';
 }
 echo '<tr>';
-echo'<td>niños</td>';
+echo'<td class="fw-bold tabla_ancho_pronostico" >niños</td>';
 for ($i=0; $i<$n; $i++){
     //echo $listaSalidasInfantiles[$i]."     ";
     echo'<td>'.$listaSalidasInfantiles[$i].'</td>';

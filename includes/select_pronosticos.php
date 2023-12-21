@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                <div id="contenedor_para_pronosticos"></div>
+                <div id="contenedor_para_pronosticos" style="padding-bottom: 3rem;"></div>
         </div>
     ';
 ?>

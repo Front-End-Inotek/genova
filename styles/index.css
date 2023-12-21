@@ -559,7 +559,7 @@ body {
 .fabReporte {
   position: fixed;
   top: 10px;
-  right: 20px;
+  right: 60px;
 }
 
 @keyframes shadow{
@@ -1081,6 +1081,18 @@ body {
 }
 .toogle-button p {
   margin: 0;
+}
+
+.encabezado_tabla_pronosticos{
+  font-size: 1.5rem;
+  color: #000000;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.tabla_ancho_pronostico {
+  max-width: 200px;
+  width: 200px;
+  min-width: 200px;
 }
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
