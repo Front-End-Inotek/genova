@@ -8771,7 +8771,7 @@ function show_chat() {
         cargarContenido(); // Llamar a la función de carga al abrir el chat
 
         // Actualizar automáticamente cada 5 segundos
-        var intervalId = setInterval(cargarContenido, 5000);
+        var intervalId = setInterval(cargarContenido, 50000);
 
         // Detener la actualización cuando el chat se cierra
         
