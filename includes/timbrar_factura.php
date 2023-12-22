@@ -105,6 +105,7 @@ $datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];
 
 for ($i=1; $i <= $contador ; $i++) {
     if($cantidad[$i] > 0 && $importeuni[$i] > 0){
+        $id_mov=$id["$i"];
         $datos['conceptos'][$i]['cantidad'] = $cantidad["$i"];/// 0
         $datos['conceptos'][$i]['unidad'] = $unidad["$i"];///1
         $datos['conceptos'][$i]['ID'] = $id["$i"];/////4
@@ -157,8 +158,10 @@ $regimenfiscal = $rfc['3'];
 $codigopostal = $rfc['2'];
 $email = $rfc['5'];
 $notas = $rfc['8'];
-
 $fecha = time();
+$nombre_hab=$_SESSION['nombre_usuario'];
+$pax=$_SESSION['extra_junior']+$_SESSION['extra_junior'];
+
 
 //echo $formapago;
 
@@ -172,11 +175,9 @@ $row3=mysqli_fetch_array($resultado3);
         //echo var_dump('El usuario ya existe');
         $consulta4=$fact->registrar_rfc($regimenfiscal,$rfc,$codigopostal,$email);
     }
-
     if($res['cancelada']=='NO'){
 
-        $fact->guardar_factura($rfcval,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6]);
-       
+        $fact->guardar_factura($rfcval,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6],$id_mov,$nombre_hab,$pax,$notas);
         //echo count($listaid);
         echo $res['cancelada'];
         //var_dump($datos);¨

@@ -1,5 +1,6 @@
 <?php
   date_default_timezone_set('America/Mexico_City');
+  session_start();
   include_once("clase_cuenta.php");
   include_once("clase_hab.php");
   include_once("clase_tarifa.php");
@@ -90,6 +91,7 @@
       <div class="main_container">
         <header class="main_container_title">
           <h2>Estado de cuenta habitación: '.$hab->nombre.'</h2>';
+          $_SESSION['nombre_usuario']=$hab->nombre;
           if($faltante == 0){
             echo '<p></p>';
           }else{
@@ -158,16 +160,20 @@
             if($extra_adulto>0){
               echo '
               <ul class="list-group-item">Extra Adulto: <span>'.$extra_adulto.' ('.$precio_adulto.')</span></ul>';
+              $_SESSION['extra_adulto']=$extra_adulto;
             }else{
               echo '
               <ul class="list-group-item">Extra Adulto: <span>-</span></ul>';
+              $_SESSION['extra_adulto']=0;
             }
             if($extra_junior>0){
               echo '
               <ul class="list-group-item">Extra Junior: <span>'.$extra_junior.'</span></ul>';
+              $_SESSION['extra_junior']=$extra_junior;
             }else{
               echo '
               <ul class="list-group-item">Extra Junior: <span>-</span></ul>';
+              $_SESSION['extra_junior']=$extra_junior;
             }
             if($extra_infantil>0){
               echo '<ul class="list-group-item">Extra Infantil: <span>'.$extra_infantil.' ('.$precio_infantil.')</span></ul>';
