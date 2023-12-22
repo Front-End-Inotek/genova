@@ -76,6 +76,7 @@
   $cuenta= 1;
   if($_POST['forzar_tarifa'] > 0 || $_POST['total_suplementos'] > 0 || $total_pago > 0 || $cantidad_cupon > 0){
     $cuenta= 1;
+    $total_pago=$total_pago/$_POST['numero_hab'];
   }
   $actual_hab=$_POST['hab_id'];
   if(empty($_POST['preasignada'])){
@@ -128,7 +129,7 @@
     $_POST['noches'],$_POST['numero_hab'],$_POST['precio_hospedaje'],$_POST['cantidad_hospedaje'],$_POST['extra_adulto'],
     $_POST['extra_junior'],$_POST['extra_infantil'],$_POST['extra_menor'],$_POST['tarifa'],urldecode($_POST['nombre_reserva']),
     urldecode($_POST['acompanante']),$_POST['forma_pago'],$_POST['limite_pago'],urldecode($_POST['suplementos']),$_POST['total_suplementos'],
-    $_POST['total_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total'],$total_pago,$actual_hab,
+    $_POST['total_hab']/$_POST['numero_hab'],$_POST['forzar_tarifa'],urldecode($_POST['codigo_descuento']),$descuento,$_POST['total']/$_POST['numero_hab'],$total_pago,$actual_hab,
     $_POST['usuario_id'],$cuenta,$cantidad_cupon,$tipo_descuento,$_POST['estado'],$pax_extra,$canal_reserva,$plan_alimentos,$tipo_reservacion,$sobrevender,$estado_interno
     ,$_POST['estado_credito'],$_POST['limite_credito'],$_POST['adultos'],$_POST['infantiles'],$_POST['id_ticket'],$id_reserva);
 

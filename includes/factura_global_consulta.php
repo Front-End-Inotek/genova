@@ -38,6 +38,8 @@
               <div class="ticket_container_header_info_fecha">
                 <p class="ticket_container_header_info_fecha_fecha">Fecha : '. $fila["fecha"].' </p>
                 <p class="ticket_container_header_info_fecha_fecha">Ticket #'. $fila["id"].'</p>
+                <p class="ticket_container_header_info_fecha_fecha">Folio casa#'. $fila["mov"].'</p>
+                <input class="" type="number" id="leer_mov_'.$contadoriteraciones.'">
               </div>
               <div class="ticket_container_header_info_more">
                 <div>
@@ -105,6 +107,8 @@
                   <div class="ticket_container_header_info_fecha">
                     <p class="ticket_container_header_info_fecha_fecha">Fecha : '. $fila["fecha"].' </p>
                     <p class="ticket_container_header_info_fecha_fecha">Ticket #'. $fila["id"].'</p>
+                    <p class="ticket_container_header_info_fecha_fecha">Folio casa#'. $fila["mov"].'</p>
+                    <input class="" type="number" id="leer_mov_'.$contadoriteraciones.'">
                   </div>
                   <div class="ticket_container_header_info_more">
                     <div>
@@ -176,6 +180,8 @@
               <div class="ticket_container_header_info_fecha">
                 <p class="ticket_container_header_info_fecha_fecha">Fecha : '. $fila["fecha"].' </p>
                 <p class="ticket_container_header_info_fecha_fecha">Ticket #'. $fila["id"].'</p>
+                <p class="ticket_container_header_info_fecha_fecha">Folio casa#'. $fila["mov"].'</p>
+                <input class="" type="number" id="leer_mov_'.$contadoriteraciones.'">
               </div>
               <div class="ticket_container_header_info_more">
                 <div>
@@ -243,6 +249,8 @@
                   <div class="ticket_container_header_info_fecha">
                     <p class="ticket_container_header_info_fecha_fecha">Fecha : '. $fila["fecha"].' </p>
                     <p class="ticket_container_header_info_fecha_fecha">Ticket #'. $fila["id"].'</p>
+                    <p class="ticket_container_header_info_fecha_fecha">Folio casa#'. $fila["mov"].'</p>
+                    <input class="" type="number" id="leer_mov_'.$contadoriteraciones.'" >
                   </div>
                   <div class="ticket_container_header_info_more">
                     <div>
@@ -296,6 +304,7 @@
       }
       echo'<input class="d-none" type="number" id="leer_iteraciones" value="'. $contadoriteraciones.'"/></p>';
       echo '</div> ';
+      
     /* echo '<script>console.log("El total es '.$total.'")</script>';
     echo '<script>console.log("hola")</script>'; */
     echo '<input type="text" id="total_factura_input" value="$' . $total . '" style="display: none;">';

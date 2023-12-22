@@ -1,11 +1,15 @@
 <?php
     session_start();
+    $_SESSION['nombre_usuario']=0;
+    $_SESSION['extra_junior']=0;
+    $_SESSION['extra_junior']=0;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $total = $_POST["total"];
         $listaId = $_POST["listaId"];
         $tipo=$_POST["tipo"];
         $lista_totales=$_POST["lista_totales"];
         $lista_tipo=$_POST["lista_tipo"];
+        $mov=$_POST["mov"];
         // Procesar los parámetros
     } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
         $total = $_GET["total"];
@@ -13,6 +17,7 @@
         $tipo = $_GET["tipo"];
         $lista_totales=$_GET["lista_totales"];
         $lista_tipo=$_GET["lista_tipo"];
+        $mov=$_GET["mov"];
         // Procesar los parámetros
     }
     $_SESSION['lista_id_ticket'] = explode(",",$listaId);
@@ -258,7 +263,7 @@
                     </div>
         <!--             Imput Id -->
                     <div class="form-floating">
-                        <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="" placeholder="ID">
+                        <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="'.$mov.'" placeholder="ID">
                         <label for="inputCity" >ID</label>
                     </div>
         <!--             Imput Producto -->
