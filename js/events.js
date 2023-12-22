@@ -8769,7 +8769,7 @@ function show_chat() {
 
     if (chat.style.display == "block") {
         cargarContenido();
-        intervalId = setInterval(cargarContenido, 500000);
+        intervalId = setInterval(cargarContenido, 5000);
     } 
 }
 
@@ -8851,21 +8851,30 @@ function handleSendMessage(event) {
     }
 }
 
-function chat_notification() {
+function chat_notification_global() {
+    console.log(" a ver ")
     const chat = document.getElementById("chat");
 
-    if( chat.style.display != "block"){
-        clearInterval(intervalId)
-        return
+    if( !localStorage.getItem("ultimo_mensaje")) {
+        console.log("entro al ajax padre")
+        $.ajax({
+            async: true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url: "includes/chat_notificacion_global.php",
+            success: function (res){
+                console.log("mensajito padre")
+                console.log(res)
+                localStorage.setItem({"ultimo_mensaje" : "123"})
+            }
+        })
+    } else {
+        console.log("Sin novedad padre")
     }
 
-    $.ajax({
-        async: true,
-        type: "POST",
-        dataType: "html",
-        contentType: "application/x-www-form-urlencoded",
-        url: "includes/chat_notificacion_global.php"
-    })
-
-    
 }
+
+setInterval(chat_notification_global, 1000)
+
+console.log("a ver")
