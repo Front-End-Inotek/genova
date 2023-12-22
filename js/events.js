@@ -8760,6 +8760,7 @@ function asignar_habitaciones( id_reserva = 1 ){
     $('#caja_herramientas').modal('hide');
 }
 
+
 function show_chat() {
     const chat = document.getElementById("chat");
     const chat_content = document.getElementById("chat_content");
@@ -8767,25 +8768,24 @@ function show_chat() {
     const id = localStorage.getItem("id");
 
     if (chat.style.display == "block") {
-        console.log("Abriendo chat");
-        cargarContenido(); // Llamar a la función de carga al abrir el chat
-
-        // Actualizar automáticamente cada 5 segundos
-        var intervalId = setInterval(cargarContenido, 5000);
-
-        // Detener la actualización cuando el chat se cierra
-        
-    }
+        cargarContenido();
+        intervalId = setInterval(cargarContenido, 500000);
+    } 
 }
 
 function cargarContenido() {
+    const chat = document.getElementById("chat");
+
+    if( chat.style.display != "block"){
+        return
+    }
+
     const id = localStorage.getItem("id");
 
     const datos = {
         "id": id
     }
 
-    // Realizar la solicitud de AJAX al archivo PHP
     $.ajax({
         async: true,
         url: "includes/chat.php",
@@ -8817,7 +8817,7 @@ function send_message( mensage_type ) {
             "message_type": mensage_type
         };
         const messageFormat = `
-            <div class="chat_message_other chat_message_own">
+            <div class="chat_message_other chat_message_own chat_message_own_triangle">
                 <img src="./assets/user_own.svg" style="border: 2px solid white" />
                 <div class="chat_message_content_own">
                     <div class="chat_message_info chat_message_info_own">
@@ -8850,4 +8850,22 @@ function handleSendMessage(event) {
         send_message();
     }
 }
+
+function chat_notification() {
+    const chat = document.getElementById("chat");
+
+    if( chat.style.display != "block"){
+        clearInterval(intervalId)
+        return
+    }
+
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/chat_notificacion_global.php"
+    })
+
     
+}

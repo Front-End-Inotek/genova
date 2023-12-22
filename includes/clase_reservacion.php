@@ -1770,7 +1770,7 @@ class Reservacion extends ConexionMYSql
             if($fila['total_pago'] <= 0) {
                 echo '<tr class="text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['numero_hab'].'</td>
+            <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
@@ -1856,7 +1856,7 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<tr class="table-success text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['numero_hab'].'</td>
+            <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
@@ -2127,7 +2127,7 @@ class Reservacion extends ConexionMYSql
                         <div class="toogle-button"  data-toggle="collapse" data-target="#collapse'.+$nreserva.'" aria-expanded="true" aria-controls="collapse'.+$nreserva.'">
     
                             <p>'.$nreserva.'.- <strong> '.$fila['persona'].' '.$fila['apellido'].' </strong></p>
-                            <p> del: '.date("d-m-Y", $fila['fecha_entrada']).' al: '.date("d-m-Y", $fila['fecha_salida']).'</p>
+                            <p class="fst-italic"><span class="fw-bold">Del: </span>'.date("d-m-Y", $fila['fecha_entrada']).' <span class="fw-bold">Al: </span>'.date("d-m-Y", $fila['fecha_salida']).'</p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
                                 <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                             </svg>
@@ -2135,12 +2135,11 @@ class Reservacion extends ConexionMYSql
                     </div>
                     <div id="collapse'.+$nreserva.'" class="collapse " aria-labelledby="heading'.+$nreserva.'" data-parent="#accordionExample">
                         <div class="card-body">
-                            <div class="table-responsive" id="tabla_reservacion" >
-                                <table class="table ">
+                            <div class="table-responsive" id="tabla_reservacion" style="padding-bottom: 10rem;">
+                                <table class="table " style="padding-bottom: 5rem;" >
                                     <thead>
                                         <tr class="table-primary-encabezado text-center">
-                                        <th>Número aqui</th>
-                                        <th>Número Habitaciones</th>
+                                        <th>Número</th>
                                         <th>Fecha Entrada</th>
                                         <th>Fecha Salida</th>
                                         <th>Nombre Huésped</th>
