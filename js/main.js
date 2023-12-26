@@ -689,10 +689,15 @@ function enviarcorreo(){
                 type: "POST",
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
-                url: "includes/buscar_facturas_folio.php",
+                url: "includes/buscar_facturas_folio_casa.php",
                 data: datos,
-                succes: function (res){
+                success: function (res){
                     console.log("hola")
+                    console.log(res)
+                    $("#resultado_folio_casa").html(res);
+                },
+                error: function(error){
+                    console.log("Error en la solicitud AJAX:")
                 }
             })
         }

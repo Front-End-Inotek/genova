@@ -22,6 +22,8 @@ echo '
             </div>
 
         </div>
+
+        <div id="resultado_folio_casa"></div>
     </div>
 
 ';
