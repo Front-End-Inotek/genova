@@ -5,8 +5,8 @@ $facturacion = NEW factura();
 $folio_casa = $_POST['folio'];
 
 echo '
-    <div>';
-
+    <div>
+    ';
     $facturacion->busqueda_folio_casa($folio_casa);
 
 echo '

@@ -689,15 +689,19 @@ function enviarcorreo(){
                 type: "POST",
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
-                url: "includes/buscar_facturas_folio_casa.php",
+                url: "includes/buscar_factura_folio_casa.php",
                 data: datos,
                 success: function (res){
                     console.log("hola")
                     console.log(res)
                     $("#resultado_folio_casa").html(res);
                 },
-                error: function(error){
+                error: function(xhr, status, error){
                     console.log("Error en la solicitud AJAX:")
+                    console.log("Estado: " + status);
+                    console.log("Error: " + error);
+                    console.log("Respuesta del servidor: " + xhr.responseText);
+                    $("#resultado_folio_casa").html("Error en la solicitud AJAX. Consulta la consola para más detalles.");
                 }
             })
         }
