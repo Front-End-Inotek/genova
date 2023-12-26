@@ -27,10 +27,11 @@ class Chat_Manager extends ConexionMYSql{
         $sentencia = "SELECT * FROM `chat` WHERE `tipo_mensaje` = 0 ORDER BY `mensaje_id` DESC LIMIT 1";
         $comentario = "comprobar el ultimo mensaje";
         $consulta = $this->realizaConsulta($sentencia , $comentario);
-        if($consulta){
-            echo ("Nuevo Mensaje!!");
+
+        if($consulta && $consulta->num_rows > 0){
+            return $consulta->fetch_assoc();
         } else {
-            echo ("Error en la consulta");
+            return ("Error en la consulta");
         }
     }
 }

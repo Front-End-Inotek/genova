@@ -225,7 +225,7 @@ cargarInfoServidor();
 }
 
 function asignarInfo(info){
-    console.log(info)
+    /* console.log(info) */
     //Ocupacion
     datos_ocupadas = info['datos_ocupadas']
     grafica_ocupadas.data.datasets[0].data = datos_ocupadas;

@@ -8,7 +8,6 @@ function inicio(){
 	x.click(evaluar);
 }
 
-
 x=$(document);
 x.ready(inicio);
 
@@ -7662,6 +7661,15 @@ function factura_buscar_folio(){
     //$("#area_trabajo_menu").load("includes/ver_facturas_folio.php");
     closeNav();
 }
+function factura_buscar_folio(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_buscar_folio_casa.php");
+    //$("#area_trabajo_menu").load("includes/ver_facturas_folio.php");
+    closeNav();
+}
 
 function manejo_facturas(){
     const btn = document.querySelector("#btn_generar_factura");
@@ -8768,10 +8776,15 @@ function show_chat() {
     chat.style.display = (chat.style.display === "none") ? "block" : "none";
     const id = localStorage.getItem("id");
 
+    localStorage.removeItem("ultimo_mensaje_global");
+
     if (chat.style.display == "block") {
         cargarContenido();
         intervalId = setInterval(cargarContenido, 5000);
-    } 
+    }else {
+        chat_notification_global()
+        notifatonId = setInterval(chat_notification_global, 5000)
+    }
 }
 
 function cargarContenido() {
@@ -8842,40 +8855,49 @@ function send_message( mensage_type ) {
                 chat.insertAdjacentHTML('afterbegin', messageFormat);
                 messageInput.value = "";
             }
+        });
+    };
+};
+
+
+function chat_notification_global() {
+    /* const chat = document.getElementById("chat"); */
+
+    const id = localStorage.getItem("id");
+
+    if( !localStorage.getItem("ultimo_mensaje_global")) {
+
+        const datos = {
+            "id" : id
+        }
+
+        $.ajax({
+            async: true,
+            type: "POST",
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded",
+            url: "includes/chat_notificacion_global.php",
+            data: datos,
+            success: function (res){
+
+                console.log("ID del mensaje:", res.mensaje_id);
+                console.log("ID del usuario:", res.usuario_id);
+                console.log("Tipo de mensaje:", res.tipo_mensaje);
+                console.log("Mensaje:", res.mensaje);
+                console.log("Hora de envío:", res.hora_envio);
+                localStorage.setItem("ultimo_mensaje_global" , res.mensaje_id)
+            }
         })
+    } else {
+        console.log("Sin novedad padre");
     }
-}
+
+};
+
+chat_notification_global();
 
 function handleSendMessage(event) {
     if( event.key === "Enter" ) {
         send_message();
-    }
-}
-
-function chat_notification_global() {
-    console.log(" a ver ")
-    const chat = document.getElementById("chat");
-
-    if( !localStorage.getItem("ultimo_mensaje")) {
-        console.log("entro al ajax padre")
-        $.ajax({
-            async: true,
-            type: "POST",
-            dataType: "html",
-            contentType: "application/x-www-form-urlencoded",
-            url: "includes/chat_notificacion_global.php",
-            success: function (res){
-                console.log("mensajito padre")
-                console.log(res)
-                localStorage.setItem({"ultimo_mensaje" : "123"})
-            }
-        })
-    } else {
-        console.log("Sin novedad padre")
-    }
-
-}
-
-setInterval(chat_notification_global, 1000)
-
-console.log("a ver")
+    };
+};

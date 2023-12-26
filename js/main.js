@@ -671,6 +671,30 @@ function enviarcorreo(){
               swal.close();
             }
           });
+    }
 
-    
+    function buscar_factura_folio_casa() {
+        let folio = document.getElementById("folio").value;
+        console.log(folio)
+
+        if(folio == null || folio === ""){
+            swal("Folio casa vacio!", "Verifica los datos correctamente por favor!", "error");
+            return false;
+        } else {
+            var datos = {
+                "folio" : id
+            }
+
+            $.ajax({
+                async: true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url: "includes/buscar_facturas_folio.php",
+                data: datos,
+                succes: function (res){
+                    console.log("hola")
+                }
+            })
+        }
     }
