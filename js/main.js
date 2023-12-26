@@ -675,14 +675,13 @@ function enviarcorreo(){
 
     function buscar_factura_folio_casa() {
         let folio = document.getElementById("folio").value;
-        console.log(folio)
 
         if(folio == null || folio === ""){
             swal("Folio casa vacio!", "Verifica los datos correctamente por favor!", "error");
             return false;
         } else {
             var datos = {
-                "folio" : id
+                "folio" : folio
             }
 
             $.ajax({

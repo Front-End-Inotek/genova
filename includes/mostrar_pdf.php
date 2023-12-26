@@ -14,8 +14,13 @@ $xml = simplexml_load_file('../facturas/'.$folio.'_cfdi_factura.xml');
 $ns = $xml->getNamespaces(true);
 $xml->registerXPathNamespace('cfdi', $ns['cfdi']);
 $xml->registerXPathNamespace('t', $ns['tfd']);
-
-
+$ultima_factura=$fact->ultima_factura();
+while ($fila = mysqli_fetch_array($ultima_factura)){
+      $folio_casa= $fila['folio_casa'];
+      $nombre_hab=$fila['nombre_hab'];
+      $pax=$fila['pax_extras'];
+      $notas=$fila['notas'];
+    }
 class PDF extends FPDF
 {
 // Cabecera de página
@@ -193,11 +198,25 @@ foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){
 /*DATOS DE LA HOJA*/  $pdf->Cell(170,5, utf8_decode('Tipo de cambio: '),0,0,'R',0);
       $pdf->SetFont('Arial','B',11);
       $pdf->Cell(90,5, $cfdiComprobante['TipoCambio'],0,1,'L',0);
+      
+      $pdf->setX(10);
+      /*DATOS DE LA HOJA*/  
+      $pdf->SetFont('Arial','',10);
+      $pdf->Cell(20,5, utf8_decode('Habitacion: '),0,0,'L',0);
+      $pdf->Cell(10,5, $nombre_hab,0,0,'L',0);
+      $pdf->Cell(65,5, utf8_decode('Folio casa: '),0,0,'R',0);
+      $pdf->Cell(10,5, $folio_casa,0,0,'L',0);
+      $pdf->Cell(65,5, utf8_decode('Pax: '),0,0,'R',0);
+      $pdf->Cell(10,5, $pax,0,0,'L',0);
+      $pdf->setX(10);
 
-      $pdf->Ln(3);
+      $pdf->Ln(5);
       $pdf->setDrawColor(176,173,172);
       $pdf->Cell(190,0,'','B');
       $pdf->Ln(3);
+
+      
+
 
 }
 
@@ -297,6 +316,15 @@ foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $Receptor){
       $pdf->SetFont('Arial','',11);
       $pdf->Cell(10,5, utf8_decode(' $ '). $cfdiComprobante['Total'],0,1,'L',0);
 }
+
+/*DATOS DE LA HOJA*/  
+$pdf->Ln(4);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(25,5, utf8_decode('Comentarios: '),0,0,'L',0);
+$pdf->SetFont('Arial','',9);
+$pdf->multicell(160,5, $notas,0,'J',0);
+
+
 
 $pdf->Output();
 $pdf->Output('F', '../facturas/'. $folio .'_Factura.pdf');
