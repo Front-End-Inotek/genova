@@ -136,7 +136,7 @@
         $sentencia="UPDATE ticket SET facturado = 1 WHERE id = $id";
         $comentario="cambio de estado en la columna de acturado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-      }
+              }
       function saber_estado_facturados($id){
         $estado=0;
         $sentencia="SELECT facturado FROM ticket WHERE id =$id LIMIT 1";
