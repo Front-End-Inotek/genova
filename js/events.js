@@ -11,6 +11,11 @@ function inicio(){
 x=$(document);
 x.ready(inicio);
 
+// Asignamos la función inicio al evento ready de $(document)
+/* $(function () {
+    inicio();
+}); */
+
 function toggleBotones() {
     var botones = document.getElementById("botones");
         botones.classList.add("botones-mostrados");
@@ -8769,21 +8774,20 @@ function asignar_habitaciones( id_reserva = 1 ){
     $('#caja_herramientas').modal('hide');
 }
 
-
 function show_chat() {
     const chat = document.getElementById("chat");
     const chat_content = document.getElementById("chat_content");
     chat.style.display = (chat.style.display === "none") ? "block" : "none";
     const id = localStorage.getItem("id");
-
-    localStorage.removeItem("ultimo_mensaje_global");
+    const fabImgNotification = document.querySelector(".fab_img_notification");
 
     if (chat.style.display == "block") {
         cargarContenido();
-        intervalId = setInterval(cargarContenido, 5000);
+        intervalId = setInterval(cargarContenido, 7000);
+        fabImgNotification.style.display = "none";
     }else {
-        chat_notification_global()
-        notifatonId = setInterval(chat_notification_global, 5000)
+        /* chat_notification_global() */
+        notifatonId = setInterval(chat_notification_global, 15000)
     }
 }
 
@@ -8850,7 +8854,7 @@ function send_message( mensage_type ) {
             url: "includes/chat_guardar_mensaje.php",
             data: datos,
             success: function (res) {
-                console.log(res)
+                //console.log(res)
                 //chat.innerHTML += messageFormat;
                 chat.insertAdjacentHTML('afterbegin', messageFormat);
                 messageInput.value = "";
@@ -8861,40 +8865,51 @@ function send_message( mensage_type ) {
 
 
 function chat_notification_global() {
-    /* const chat = document.getElementById("chat"); */
+    const chat = document.getElementById("chat");
 
+    /* if( chat.style.display != "block"){
+        return
+    } */
     const id = localStorage.getItem("id");
-
-    if( !localStorage.getItem("ultimo_mensaje_global")) {
-
-        const datos = {
-            "id" : id
-        }
-
-        $.ajax({
-            async: true,
-            type: "POST",
-            dataType: "json",
-            contentType: "application/x-www-form-urlencoded",
-            url: "includes/chat_notificacion_global.php",
-            data: datos,
-            success: function (res){
-
-                console.log("ID del mensaje:", res.mensaje_id);
-                console.log("ID del usuario:", res.usuario_id);
-                console.log("Tipo de mensaje:", res.tipo_mensaje);
-                console.log("Mensaje:", res.mensaje);
-                console.log("Hora de envío:", res.hora_envio);
-                localStorage.setItem("ultimo_mensaje_global" , res.mensaje_id)
-            }
-        })
-    } else {
-        console.log("Sin novedad padre");
+    const datos = {
+        "id" : id
     }
-
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/chat_notificacion_global.php",
+        data: datos,
+        success: function (res){
+            /* console.log("ID del mensaje:", res.mensaje_id);
+            console.log("Mensaje:", res.mensaje);
+            console.log("Hora de envío:", res.hora_envio); */
+            notificar(res.mensaje_id)
+        }
+    })
 };
 
-chat_notification_global();
+function notificar(nuevo_mensaje) {
+    const ultimo_mensaje = localStorage.getItem("ultimo_mensaje_global");
+    const fabImgNotification = document.querySelector(".fab_img_notification");
+
+    if(nuevo_mensaje === ultimo_mensaje  ){
+        console.log("El mensaje es el mismo")
+        fabImgNotification.innerText = "+1";
+    }else {
+        //console.log("Mensaje antiguo " + ultimo_mensaje )
+        //console.log("Nuevo mensaje " + nuevo_mensaje )
+        localStorage.setItem("ultimo_mensaje_global" , nuevo_mensaje)
+        //console.log("Nuevo mensaje")
+        fabImgNotification.style.display = "block";
+        fabImgNotification.innerText = nuevo_mensaje - ultimo_mensaje;
+
+    }
+}
+
+
+//chat_notification_global();
 
 function handleSendMessage(event) {
     if( event.key === "Enter" ) {

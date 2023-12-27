@@ -6,6 +6,7 @@ $folio_casa = $_POST['folio'];
 
 echo '
     <div>
+    <h1>'.$folio_casa.'</h1>
     ';
     $facturacion->busqueda_folio_casa($folio_casa);
 
