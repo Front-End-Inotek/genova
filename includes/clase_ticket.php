@@ -135,7 +135,6 @@
       function cambiar_estado_facturados($id){
         $sentencia="UPDATE ticket SET facturado = 1 WHERE id = $id";
         $comentario="cambio de estado en la columna de acturado";
-        echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       function saber_estado_facturados($id){

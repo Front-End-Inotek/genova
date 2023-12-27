@@ -23,6 +23,7 @@
     $_SESSION['lista_id_ticket'] = explode(",",$listaId);
     $lista_totales=explode(",",$lista_totales);
     $lista_tipo=explode(",",$lista_tipo);
+    $mov=explode(",",$mov);
     //echo $tipo;
     include("clase_factura.php");
     $fact = NEW factura ();
@@ -263,7 +264,7 @@
                     </div>
         <!--             Imput Id -->
                     <div class="form-floating">
-                        <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="'.$mov.'" placeholder="ID">
+                        <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="'.$mov[$i-1].'" placeholder="ID">
                         <label for="inputCity" >ID</label>
                     </div>
         <!--             Imput Producto -->

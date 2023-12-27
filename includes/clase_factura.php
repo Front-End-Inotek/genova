@@ -111,7 +111,7 @@
     }
     function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago,$id,$nombre_hab,$pax,$notas){
       $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`folio_casa`,`nombre_hab`,pax_extras,`notas` )
-      VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$id',$nombre_hab,$pax,'$notas')";
+      VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$id','$nombre_hab','$pax','$notas')";
       $comentario="rfc_propio ";
       //echo $sentencia;
       //echo $sentencia;
@@ -487,7 +487,6 @@
 
           echo'
           <div class="row col-xl-12">
-          <div class="row col-md-4"><br><button type="button" class="btn btn-success" onclick="reporte_facturacio('.$metodo.','.$inicial.','.$final.')" style="width: 400px;">Exportar</button><br><br></div>
           <div class="row col-md-8" style="font-weight: bold;">
               <div class="col-xl-3"><label for="">Importe:</label> <input type="text" name="rimporte" class="form-control" value="'.$importe.'" disabled></div>
               <div class="col-xl-3"><label for="">I.V.A.</label>  <input type="text" name="riva" class="form-control" value="'.$iva.'" disabled></div>
