@@ -8869,9 +8869,9 @@ function send_message( mensage_type ) {
 function chat_notification_global() {
     const chat = document.getElementById("chat");
 
-    /* if( chat.style.display != "block"){
+    if( chat.style.display === "block"){
         return
-    } */
+    }
     const id = localStorage.getItem("id");
     const datos = {
         "id" : id
@@ -8892,20 +8892,26 @@ function chat_notification_global() {
     })
 };
 
+
 function notificar(nuevo_mensaje) {
     const ultimo_mensaje = localStorage.getItem("ultimo_mensaje_global");
     const fabImgNotification = document.querySelector(".fab_img_notification");
 
     if(nuevo_mensaje === ultimo_mensaje  ){
         console.log("El mensaje es el mismo")
-        fabImgNotification.innerText = "+1";
+        /* fabImgNotification.innerText = "+1"; */
     }else {
         //console.log("Mensaje antiguo " + ultimo_mensaje )
         //console.log("Nuevo mensaje " + nuevo_mensaje )
         localStorage.setItem("ultimo_mensaje_global" , nuevo_mensaje)
         //console.log("Nuevo mensaje")
         fabImgNotification.style.display = "block";
-        fabImgNotification.innerText = nuevo_mensaje - ultimo_mensaje;
+        /* fabImgNotification.innerText = nuevo_mensaje - ultimo_mensaje; */
+        let audioNotification = new Audio("./assets/sounds/new_message.mp3");
+        if(audioNotification){
+            audioNotification.currentTime = 0;
+            audioNotification.play();
+        }
 
     }
 }

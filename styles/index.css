@@ -890,10 +890,10 @@ body {
 }
 .fab_img_notification {
   position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 18px;
-  height: 18px;
+  top: 0px;
+  right: -2px;
+  width: 13px;
+  height: 13px;
   background-color: red;
   border-radius: 50%;
   display: block;

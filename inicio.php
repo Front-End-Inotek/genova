@@ -78,7 +78,7 @@
       <!-- chat -->
       <section class="fab_container" onclick="show_chat()">
         <img class="fab_img" src="./assets/chat.svg">
-        <span style="display: none;" class="fab_img_notification">12</span>
+        <span style="display: none;" class="fab_img_notification"></span>
       </section>
 
       <section id="chat" class="chat_container" style="display: none;">
