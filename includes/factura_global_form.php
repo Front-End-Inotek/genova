@@ -3,23 +3,12 @@
     $_SESSION['nombre_usuario']=0;
     $_SESSION['extra_junior']=0;
     $_SESSION['extra_junior']=0;
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $total = $_POST["total"];
-        $listaId = $_POST["listaId"];
-        $tipo=$_POST["tipo"];
-        $lista_totales=$_POST["lista_totales"];
-        $lista_tipo=$_POST["lista_tipo"];
-        $mov=$_POST["mov"];
-        // Procesar los parámetros
-    } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
-        $total = $_GET["total"];
-        $listaId = $_GET["listaId"];
-        $tipo = $_GET["tipo"];
-        $lista_totales=$_GET["lista_totales"];
-        $lista_tipo=$_GET["lista_tipo"];
-        $mov=$_GET["mov"];
-        // Procesar los parámetros
-    }
+    $total = $_GET["total"];
+    $listaId = $_GET["listaId"];
+    $tipo=$_GET["tipo"];
+    $lista_totales=$_GET["lista_totales"];
+    $lista_tipo=$_GET["lista_tipo"];
+    $mov=$_GET["mov"];
     $_SESSION['lista_id_ticket'] = explode(",",$listaId);
     $lista_totales=explode(",",$lista_totales);
     $lista_tipo=explode(",",$lista_tipo);

@@ -7765,7 +7765,7 @@ function generar_facturas_global(){
     localStorage.setItem('total', total);
     console.log("facturas generadas");
     if (total>0){
-        $.ajax({
+        /* $.ajax({
             async: true,
             type: "POST",
             dataType: "html",
@@ -7780,10 +7780,10 @@ function generar_facturas_global(){
                     icon: "warning",
                     confirmButtonText: "Aceptar",
                     dangerMode: true,
-                }) */
+                }) 
                 console.log("Factura generada con exito")
             }
-        })
+        }) */
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();

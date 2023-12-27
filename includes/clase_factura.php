@@ -72,7 +72,7 @@
     function registrar_rfc($regimenfiscal,$rfc,$codigopostal,$email){
       $sentencia ="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`,`notas`)
       VALUES ('$regimenfiscal','$rfc[0]','$rfc[1]','','$codigopostal','$email','','','','','','','','')";
-      
+
       $comentario="registrar rfc ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$fila = mysqli_fetch_array($consulta);
@@ -110,7 +110,8 @@
 
     }
     function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago,$id,$nombre_hab,$pax,$notas){
-      $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`folio_casa`,`nombre_hab`,pax_extras,`notas` )
+      
+      $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`folio_casa`,`nombre_hab`,`pax_extras`,`notas` )
       VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$id','$nombre_hab','$pax','$notas')";
       $comentario="rfc_propio ";
       //echo $sentencia;
@@ -170,7 +171,7 @@
     }
     function mes(){
       $sentencia = "SELECT * FROM mes";
-      $comentario="mes ";
+      $comentario="mes";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
