@@ -8899,34 +8899,41 @@ function chat_notification_global() {
             console.log("Mensaje:", res.mensaje);
             console.log("Hora de envío:", res.hora_envio); */
             console.log(res)
-            notificar(res.mensaje_id, res.usuario_id)
+            notificar(res.mensaje_id, res.usuario_id, res.mensaje, res.id)
         }
     })
 };
 
 
-function notificar(nuevo_mensaje, usuario_id) {
+function notificar(nuevo_mensaje, usuario_id, nuevo_mensaje_1, nuevo_nombre) {
     const ultimo_mensaje = localStorage.getItem("ultimo_mensaje_global");
     const fabImgNotification = document.querySelector(".fab_img_notification");
     const local_user_id = localStorage.getItem("id");
 
-    if(nuevo_mensaje === ultimo_mensaje  ){
+    const notificacion = document.getElementById("notification")
+    const nombre = document.getElementById("nombre_notificacion");
+    const mensaje = document.getElementById("mensaje_notificacion");
+
+    if(nuevo_mensaje == ultimo_mensaje  ){
         console.log("El mensaje es el mismo")
-        /* fabImgNotification.innerText = "+1"; */
     }else if ( usuario_id == local_user_id ) {
         console.log("El ultimo mensaje es el mio padrino")
     } else {
-        //console.log("Mensaje antiguo " + ultimo_mensaje )
-        //console.log("Nuevo mensaje " + nuevo_mensaje )
         localStorage.setItem("ultimo_mensaje_global" , nuevo_mensaje)
-        //console.log("Nuevo mensaje")
         fabImgNotification.style.display = "block";
-        /* fabImgNotification.innerText = nuevo_mensaje - ultimo_mensaje; */
         let audioNotification = new Audio("./assets/sounds/new_message.mp3");
+
         if(audioNotification){
             audioNotification.currentTime = 0;
             audioNotification.play();
         }
+        notificacion.style.display = "block";
+        notificacion.classList.add("show")
+        /* nombre.innerText = nuevo_nombre */
+        mensaje.innerText = nuevo_mensaje_1
+        setTimeout(() => {
+            notificacion.style.display = "none";
+        }, 4000);
 
     }
 }

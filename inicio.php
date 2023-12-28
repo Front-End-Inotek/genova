@@ -94,6 +94,17 @@
             </button>
         </div>
       </section>
+
+      <section id="notification" class="notification_container" style="display: none;">
+        <div class="notification_header" >
+          <p>Nuevo mensaje global</p>
+          <p>justo ahora</p>
+        </div>
+        <div class="notification_body">
+          <p id="nombre_notificacion">Usuario</p>
+          <p id="mensaje_notificacion"></p>
+        </div>
+      </section>
     </body>
   ';
 ?>
