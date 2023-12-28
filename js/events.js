@@ -1868,6 +1868,7 @@ function calcular_nochesChek(){
 }
 
 function editarTotalEstancia(event){
+    console.log("👨")
     forzar_tarifa = $("#forzar-tarifa").val()
     console.log("Forzar tarifa: "+forzar_tarifa)
     extra_adultos = $("#extra_adulto").val();
@@ -1887,8 +1888,18 @@ function editarTotalEstancia(event){
     suma_extra = Number(extra_adultos) + Number(extra_infantil)
     console.log("Suma extra: "+suma_extra)
     console.log("-----------------------------------")
+    preasignada = $("#preasignada")
     // console.log(suma_extra,cantidad_maxima)
     diff_extra=0
+    if( numero_hab > 1 ){
+        console.log("Ya no se puede preasignar una habitacion")
+        preasignada.prop("disabled" , true);
+        //preasignada.val("")
+        preasignada.val(null)
+    } else {
+        console.log("Ahora si ya se puede agregar mas habitaciones");
+        preasignada.prop("disabled", false)
+    }
     if(cantidad_maxima!=0){
         if(suma_extra >cantidad_maxima){
             alert("Ha superado la cantidad máxima de personas de la habitación")
@@ -8887,20 +8898,24 @@ function chat_notification_global() {
             /* console.log("ID del mensaje:", res.mensaje_id);
             console.log("Mensaje:", res.mensaje);
             console.log("Hora de envío:", res.hora_envio); */
-            notificar(res.mensaje_id)
+            console.log(res)
+            notificar(res.mensaje_id, res.usuario_id)
         }
     })
 };
 
 
-function notificar(nuevo_mensaje) {
+function notificar(nuevo_mensaje, usuario_id) {
     const ultimo_mensaje = localStorage.getItem("ultimo_mensaje_global");
     const fabImgNotification = document.querySelector(".fab_img_notification");
+    const local_user_id = localStorage.getItem("id");
 
     if(nuevo_mensaje === ultimo_mensaje  ){
         console.log("El mensaje es el mismo")
         /* fabImgNotification.innerText = "+1"; */
-    }else {
+    }else if ( usuario_id == local_user_id ) {
+        console.log("El ultimo mensaje es el mio padrino")
+    } else {
         //console.log("Mensaje antiguo " + ultimo_mensaje )
         //console.log("Nuevo mensaje " + nuevo_mensaje )
         localStorage.setItem("ultimo_mensaje_global" , nuevo_mensaje)
