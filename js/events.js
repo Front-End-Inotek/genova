@@ -2,14 +2,7 @@ var teclado = ['user', 'pass','efectivo','monto','folio','descuento','comentario
 var hab = [];
 var hab_ultimo_mov = [];
 var siguiente_vista=0;
-//Evaluamos el inicio de sesion
-function inicio(){
-	var x=$("#login");
-	x.click(evaluar);
-}
 
-x=$(document);
-x.ready(inicio);
 
 // Asignamos la función inicio al evento ready de $(document)
 /* $(function () {
@@ -8905,9 +8898,9 @@ function chat_notification_global() {
         url: "includes/chat_notificacion_global.php",
         data: datos,
         success: function (res){
-            console.log("ID del mensaje:", res.mensaje_id);
+            /* console.log("ID del mensaje:", res.mensaje_id);
             console.log("Mensaje:", res.mensaje);
-            console.log("Hora de envío:", res.hora_envio);
+            console.log("Hora de envío:", res.hora_envio); */
             console.log(res)
             notificar(res.mensaje_id, res.usuario_id, res.mensaje, res.nombre)
         },
@@ -8916,6 +8909,8 @@ function chat_notification_global() {
         }
     })
 };
+
+
 
 
 function notificar(nuevo_mensaje, usuario_id, nuevo_mensaje_1, nuevo_nombre) {
@@ -8931,6 +8926,8 @@ function notificar(nuevo_mensaje, usuario_id, nuevo_mensaje_1, nuevo_nombre) {
         console.log("El mensaje es el mismo")
     }else if ( usuario_id == local_user_id ) {
         console.log("El ultimo mensaje es el mio padrino")
+    }else if( nuevo_mensaje < ultimo_mensaje ){
+        console.log("no se que show we alv")
     } else {
         localStorage.setItem("ultimo_mensaje_global" , nuevo_mensaje)
         fabImgNotification.style.display = "block";
@@ -8938,7 +8935,10 @@ function notificar(nuevo_mensaje, usuario_id, nuevo_mensaje_1, nuevo_nombre) {
 
         if(audioNotification){
             audioNotification.currentTime = 0;
-            audioNotification.play();
+            audioNotification.play()
+                .catch(error => {
+                    console.error("Error al reporducr el sonido: ", error)
+                });
         }
         notificacion.style.display = "block";
         notificacion.classList.add("show")
@@ -8959,3 +8959,15 @@ function handleSendMessage(event) {
         send_message();
     };
 };
+
+
+notifatonId = setInterval(chat_notification_global, 15000)
+
+//Evaluamos el inicio de sesion
+function inicio(){
+	var x=$("#login");
+	x.click(evaluar);
+}
+
+x=$(document);
+x.ready(inicio);
