@@ -1923,10 +1923,14 @@ class Reservacion extends ConexionMYSql
                             <div class="dropdown-menu" aria-labelledby="options">';
                     echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',0,'.$fila['huesped_id'].')" >Garantizar</a>';
                     echo '<a class="dropdown-item" href="#"onclick=" ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')" >Ver reporte</a>';
-                    echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
+                    if($fila['numero_hab'] <= 1){
+                        echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
+                    }
                     echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada</a>';
                     if($borrar == 1 && $fila['edo'] != 0) {
-                        echo '<a class="dropdown-item" href="#" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
+                        if($fila['numero_hab'] <= 1){
+                            echo '<a class="dropdown-item" href="#" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
+                        }
                         echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',1)">Cancelar</a>';
                         echo '<div class="dropdown-divider"></div>';
                         echo '<a class="dropdown-item text-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')">Borrar</a>';

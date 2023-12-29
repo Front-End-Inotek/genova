@@ -101,7 +101,7 @@
           <p>justo ahora</p>
         </div>
         <div class="notification_body">
-          <p id="nombre_notificacion">Usuario</p>
+          <p id="nombre_notificacion"></p>
           <p id="mensaje_notificacion"></p>
         </div>
       </section>
