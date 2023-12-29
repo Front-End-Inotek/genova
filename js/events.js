@@ -2767,7 +2767,7 @@ function verificarFormulario(id_form,field) {
     for (var i = 0; i < form.elements.length; i++) {
         var elemento = form.elements[i];
         // Verifica si el elemento es un campo requerido y si está vacío
-    if (elemento.required && elemento.value === "") {
+    if (elemento.required && elemento.value === "" && elemento.value === null ) {
     if(field=="id"){
         camposNoValidados.push(elemento.id);
     }else{
@@ -2886,6 +2886,10 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         var direccion_huesped= document.getElementById("direccion").value;
         var comentarios_huesped= document.getElementById("observaciones").value;
         var tipo_tarjeta= document.getElementById("forma-garantia").value;
+        if(tipo_tarjeta == "" || tipo_tarjeta == null || tipo_tarjeta == "Seleccione una opción") {
+            alert("Falta agregar la forma de garantia");
+            return
+        }
         var correo = $("#correo").val()
         huesped = $("#tomahuespedantes").val()
         var voucher =document.getElementById('voucher').value
