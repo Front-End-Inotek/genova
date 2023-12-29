@@ -7769,7 +7769,13 @@ function generar_facturas_global(){
             total=total+parseInt(leer_total.value);
             lista_totales.push(parseInt(leer_total.value));
             lista_tipo.push(parseInt(leer_tipo.value));
-            lista_mov.push(parseInt(mov.value))
+            if(mov.value){
+                lista_mov.push(parseInt(mov.value))
+            }
+            else{
+                lista_mov.push("")
+            }
+            
         }
     }
     localStorage.setItem('lista_id_tickets', lista_id_tickets);
