@@ -8879,7 +8879,7 @@ function send_message( mensage_type ) {
 
 function chat_notification_global() {
     const chat = document.getElementById("chat");
-
+    console.log("wachando mensajes")
     if( chat.style.display === "block"){
         return
     }
@@ -8895,11 +8895,14 @@ function chat_notification_global() {
         url: "includes/chat_notificacion_global.php",
         data: datos,
         success: function (res){
-            /* console.log("ID del mensaje:", res.mensaje_id);
+            console.log("ID del mensaje:", res.mensaje_id);
             console.log("Mensaje:", res.mensaje);
-            console.log("Hora de envío:", res.hora_envio); */
+            console.log("Hora de envío:", res.hora_envio);
             console.log(res)
-            notificar(res.mensaje_id, res.usuario_id, res.mensaje, res.id)
+            notificar(res.mensaje_id, res.usuario_id, res.mensaje, res.nombre)
+        },
+        error: function (error){
+            console.log(error.responseText)
         }
     })
 };
@@ -8929,7 +8932,7 @@ function notificar(nuevo_mensaje, usuario_id, nuevo_mensaje_1, nuevo_nombre) {
         }
         notificacion.style.display = "block";
         notificacion.classList.add("show")
-        /* nombre.innerText = nuevo_nombre */
+        nombre.innerText = nuevo_nombre
         mensaje.innerText = nuevo_mensaje_1
         setTimeout(() => {
             notificacion.style.display = "none";
