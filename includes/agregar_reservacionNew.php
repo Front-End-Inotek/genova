@@ -364,7 +364,7 @@ echo'
             </div>
 
             <div class="container_btn">
-                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="event.preventDefault(); guardarNuevaReservacion('.$_GET['hab_id'].')">Enviar</button>
+                <button id="btn_reservacion" type="submit" class="btn btn-primary btn-lg btn-block" onclick="event.preventDefault(); guardarNuevaReservacion('.$_GET['hab_id'].')">Enviar</button>
             </div>
 
             </form>
