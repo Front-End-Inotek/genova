@@ -28,59 +28,50 @@
   // <div class="col-sm-2"><input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')" id="a_buscar" class="color_black" autofocus="autofocus"/></div>
   // style="background-color:LightSlateGray,aliceblue;"       
   echo '
-  <div class="modal-content alinear_centro" >
-    <h5 style= color= white !important";>Agregar Restaurante </h5>
-    <div class="col-sm-12 fondo_rest">
+  <div class="main_container" >
 
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-header alinear_centro">
-              <h5>Categorias</h5>
-            </div>
-            
-            <div class="card-body altura-rest_categorias" id="caja_mostrar_categoria">
-              ';$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
-            echo '</div>
-          </div><br>
-
-          <div class="card">
-            <div class="card-header alinear_centro">
-              <h5>Productos</h5>
-            </div>
-            <div class="card-body altura-rest_productos" id="caja_mostrar_busqueda">
-            </div>
-          </div>
- 
-        </div>
-
-        <div class="col-sm-6" ">
-          <div class="card">
-            <div class="card-header alinear_centro">
-              <h5>Pedido</h5>
-            </div>
-
-            <div class="card-body altura-rest_pedido" id="caja_mostrar_funciones">
-              <div class="row">
-                <div class="col-sm-4">
-                  <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.','.$mesa.','.$id_maestra.')" id="a_buscar" class="form-control color_black">
-                </div>
-                <div class="col-sm-8"></div>
-              </div>
-              ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
-            echo '</div>
-          </div>
-
-          <div class="card">
-            <div class="card-body " id="caja_mostrar_total">
-              ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov,$id_maestra);
-            echo '</div>
-          </div><br>
-        
-        </div>
-      </div>
-
+    <div class="main_container_title">
+      <h2>Agregar restaurante</h2>
     </div>
+
+
+    <main class="restaurante_contenedor">
+      <section class="restaurante_section">
+        <div class="restaurante_section_body">
+          <h4>Categorias</h4>
+          <div class="restaurante_section_buttons" id="caja_mostrar_categoria" >';
+          ;$categoria->mostrar_categoria_restaurente($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
+          echo'
+          </div>
+        </div>
+
+        <div class="restaurante_section_body">
+          <h4>Productos</h4>
+          <div id="caja_mostrar_busqueda" class="contenedor_botones_restaurante">
+          </div>
+        </div>
+      </section>
+
+       <section class="restaurante_section">
+        <h4>Pedido</h4>
+        <div class="form-floating">
+          <input type="text" placeholder="Buscar" onkeyup="buscar_producto_restaurante('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.','.$mesa.','.$id_maestra.')" id="a_buscar" class="form-control">
+          <label for="a_buscar">Buscar</label>
+        </div>
+
+        <div class="table-restaurante" id="caja_mostrar_funciones">
+          ';$pedido_rest->mostar_pedido($_GET['hab_id'],$_GET['estado'],$mov,$mesa,$id_maestra);
+        echo '
+        </div>
+
+          <div class="footer_restaurante_tabla" id="caja_mostrar_total">
+            ';$pedido_rest->mostar_pedido_funciones($_GET['hab_id'],$_GET['estado'],$mov,$id_maestra);
+          echo '
+          </div>
+        
+      </section>
+    </main>
+
   </div>';
 
   /*

@@ -101,7 +101,7 @@
     // Datos dentro de la tabla hospedaje
     $x_inicial=$pdf->GetX();
     $y_inicial=$pdf->GetY();
-    $pdf->SetFillColor(99, 155, 219);
+    /* $pdf->SetFillColor(99, 155, 219); */
     $pdf->SetFont('Arial','',8);
     $pdf->SetTextColor(24, 31, 102);
     $pdf->Cell(72,8,iconv("UTF-8", "ISO-8859-1",'Hospedaje'),0,1,'C');
@@ -124,7 +124,7 @@
     $pdf->Cell(32,4,iconv("UTF-8", "ISO-8859-1",''),1,0,'C',True);
     $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",$suma_cuartos_hospedaje),1,0,'C',True);
     $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_cuartos_hospedaje, 2)),1,1,'C',True);
-    $pdf->SetFillColor(99, 155, 219);
+    /* $pdf->SetFillColor(99, 155, 219); */
     $pdf->Ln(6);
     // Datos dentro de la tabla totales
     $pdf->SetFont('Arial','',8);
@@ -153,7 +153,7 @@
     $pdf->SetFillColor(193, 229, 255);
     $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$conceptos[2]),1,0,'C',True);
     $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_global, 2)),1,1,'C',True);
-    $pdf->SetFillColor(99, 155, 219);
+    /* $pdf->SetFillColor(99, 155, 219); */
     $pdf->Ln(6);
     // Datos dentro de la tabla desgloce en sistema
     $pdf->SetFont('Arial','',8);
@@ -215,7 +215,7 @@
                 $pdf->AddPage();
                 $pdf->SetFont('Arial','',7);
                 $pdf->SetTextColor(255, 255, 255);
-                $pdf->SetFillColor(99, 155, 219);
+                /* $pdf->SetFillColor(99, 155, 219); */
                 $pdf->Cell(86,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C');
                 $pdf->Cell(42,4,iconv("UTF-8", "ISO-8859-1",'Producto'),1,0,'C',True);
                 $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'Precio'),1,0,'C',True);
@@ -235,7 +235,7 @@
         $pdf->Cell(15,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($total_restaurante, 2)),1,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$total_productos_hab),1,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$total_productos_rest),1,1,'C',True);
-        $pdf->SetFillColor(99, 155, 219);
+        /* $pdf->SetFillColor(99, 155, 219); */
     }
     $nueva_etiqueta= $labels->obtener_corte();
     //$nueva_etiqueta= $nueva_etiqueta - 1;

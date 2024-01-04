@@ -530,34 +530,31 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $categoria= 0;
         $cunt= 0;
-        echo '<div class="row">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta)){
             if($cunt%3==0){
               //echo '<div class="col-sm-4"><button type="button" class="btn btn-success btn-block" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.')">';
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
-              echo $fila['nombre'];
-              echo'</button></div>';
+              echo '<div class="btn_restaurante" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
+              echo '<p>'.$fila['nombre'].'</p>';
+              echo '</div>';
               $cunt=0;
             }elseif($cunt%2==0){
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
-              echo $fila['nombre'];
-              echo'</button></div>';
+              echo '<div class="btn_restaurante" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
+              echo '<p>'.$fila['nombre'].'</p>';
+              echo'</div>';
             }else{
-              echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
-              echo $fila['nombre'];
-              echo'</button></div>';
+              echo '<div class="btn_restaurante" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')">';
+              echo '<p>'.$fila['nombre'].'</p>';
+              echo'</div>';
             }
             $cunt++;
             if($cont==1){
               $cont=0;
-              echo '</br></br>';
             }
             else{
               $cont++;
           }
         }
-        echo '</div>';
         if ($cont==0){
           $sentencia;
         }
@@ -568,35 +565,32 @@
         $comentario="Mostrar los productos por restaurente";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cunt=0;
-        echo '<div class="row d-flex flex-wrap">';
           $cont=0;
           while ($fila = mysqli_fetch_array($consulta)){
             if($fila['id'] != -1){
               if($cunt%3==0){
-                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
-                echo $fila['nombre'];
-                echo'</button></div>';
+                echo '<div class="btn_restaurante" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
+                echo '<p>'.$fila['nombre'].'</p>';
+                echo'</div>';
                 $cunt=0;
               }elseif($cunt%2==0){
-                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
-                echo $fila['nombre'];
-                echo'</button></div>';
+                echo '<div class="btn_restaurante" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
+                echo '<p>'.$fila['nombre'].'</p>';
+                echo'</div>';
               }else{
-                echo '<div class="col-sm-2 margen_inf"><button type="button" class="btn btn-info btn-square-md" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
-                echo $fila['nombre'];
-                echo'</button></div>';
+                echo '<div class="btn_restaurante" onclick="cargar_producto_restaurante('.$fila['id'].','.$categoria.','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">';
+                echo '<p>'.$fila['nombre'].'</p>';
+                echo'</div>';
               }
             }
             $cunt++;
             if($cont==1){
               $cont=0;
-              echo '</br></br>';
             }
             else{
               $cont++;
             }
           }
-        echo '</div>';
         if ($cont==0){
           $sentencia;
         }
@@ -721,8 +715,9 @@
         $cont=0;
         $total=0;
         //echo '<tr class="fuente_menor text-center"> thead-light
-        echo '<table class="fuente_menor margen_sup table">
-          <thead class="encabezado_gris">
+        echo '
+        <table class="table table-bordered table-hover">
+          <thead>
             <tr class="text-center">
             <th scope="col">Cant</th>
             <th scope="col">Nombre</th>
@@ -746,8 +741,19 @@
                 <td>'.$fila['nombre'].'</td>
                 <td>$'.number_format($fila['precio'], 2).'</td>
                 <td>$'.number_format($fila['precio']*$fila['cantidad'], 2).'</td>';
-                echo '<td><button class="btn btn-outline-warning btn-sm" href="#caja_herramientas" data-toggle="modal"  onclick="editar_modal_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$fila['cant'].','.$id_maestra.')">✏️</button></td>';
-                echo '<td><button class="btn btn-outline-danger btn-sm" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')"> 🗑️</button></td>';
+                echo '
+                <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal"  onclick="editar_modal_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$fila['cant'].','.$id_maestra.')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                  </svg>
+                </button></td>';
+                echo '<td>
+                  <button class="btn btn-danger" onclick="eliminar_producto_restaurante('.$fila['ID'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$id_maestra.')"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                    </svg>
+                  </button></td>';
                 echo '</tr>';
               }
             }
@@ -779,27 +785,27 @@
           }
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
-        echo '<div class="row">';
           if($cantidad > 0){
             if($hab_id != 0){
-              echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>
-              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Habitación: '.$hab_nombre.'</div>';
+              echo '
+                <p>#Items: '.$cantidad.'</p>
+                <p>Habitación: '.$hab_nombre.'</p>';
             }else{
-              echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
+              echo '
+                <p>#Items: '.$cantidad.'</p>';
               if($id_maestra!=0){
-                echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Cuenta Maestra: '.$cuenta_nombre.'</div>';
-              }else{
-                echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir"></div>';
+                echo '
+                <p>Cuenta Maestra: '.$cuenta_nombre.'</p>';
               }
             }
-            echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div>
-            <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0,'.$id_maestra.')">Linea</button></></div>
-            <div class="col-sm-2"><button  class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.','.$id_maestra.')">Pedir</button></></div>
+            echo '
+              <p>Total: $'.number_format($total, 2).'</p>
+              <div><button  class="btn btn-success" onclick="cargar_producto_restaurante('.$linea.',1,'.$hab_id.','.$estado.','.$mov.',0,'.$id_maestra.')">Linea</button></div>
+              <div><button  class="btn btn-primary"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro('.$total.','.$hab_id.','.$estado.','.$mov.','.$id_maestra.')">Pedir</button></div>
             ';
           }else{
-            echo '<div class="col-sm-12"></div>';
+            echo '';
           }
-        echo '</div>';
       }
       // Mostrar los productos del pedido restaurente mesa
       function mostar_pedido_funciones_mesa($mesa_id,$estado,$mov){
@@ -818,24 +824,23 @@
           }
           $total= $total+($fila['precio']*$fila['cantidad']);
         }
-        echo '<div class="row">';
           if($cantidad > 0){
             if($mesa_id != 0){
-              echo '<div class="col-sm-1"></div>
-              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>
-              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Mesa: '.$mesa_nombre.'</div>';
+              echo '
+              <p>#Items: '.$cantidad.'</p>
+              <p>Mesa: '.$mesa_nombre.'</p>';
             }else{
-              echo '<div class="col-sm-3"></div>
-              <div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">#Items: '.$cantidad.'</div>';
+              echo '
+              <p>#Items: '.$cantidad.'</p>';
             }
-            echo '<div class="col-sm-2 fuente_menor_bolder margen_sup_pedir">Total: $'.number_format($total, 2).'</div>
-            <div class="col-sm-2"><button  class="btn btn-success btn-rectangle-sm" onclick="cargar_producto_restaurante('.$linea.',1,'.$mesa_id.','.$estado.','.$mov.',1)">Linea</button></></div>
-            <div class="col-sm-2"><button class="btn btn-danger btn-rectangle-sm"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></></div>
-            <div class="col-sm-1"></div>';
+            echo '
+            <p>Total: $'.number_format($total, 2).'</p>
+            <div><button  class="btn btn-success" onclick="cargar_producto_restaurante('.$linea.',1,'.$mesa_id.','.$estado.','.$mov.',1)">Linea</button></div>
+            <div><button class="btn btn-primary"  href="#caja_herramientas" data-toggle="modal" onclick="pedir_rest_cobro_mesa('.$total.','.$mesa_id.','.$estado.','.$mov.')">Pedir</button></div>
+            ';
           }else{
-            echo '<div class="col-sm-12"></div>';
+            echo '';
           }
-        echo '</div>';
       }
       // Obtengo el total de productos del pedido restaurente
       function total_productos($mov){
