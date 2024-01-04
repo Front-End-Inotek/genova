@@ -135,6 +135,7 @@
             </button>
           </div>
         </div>
+        <input class="d-none" type="number" id="tipo_factura" value="0" disabled/>
         <section class="estado_cuenta_resumen">
           <ul class="list-group list_group_perzonalizado ">
             <li class="list-group-item">Huesped: <span>'.$nombre_huesped.'</span></li>

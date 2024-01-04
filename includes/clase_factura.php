@@ -112,7 +112,7 @@
     function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago,$id,$nombre_hab,$pax,$notas){
       
       $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`folio_casa`,`nombre_hab`,`pax_extras`,`notas` )
-      VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$id','$nombre_hab','$pax','$notas')";
+      VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$id',$nombre_hab,$pax,'$notas')";
       $comentario="rfc_propio ";
       //echo $sentencia;
       //echo $sentencia;

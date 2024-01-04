@@ -24,6 +24,7 @@ echo '
                     Buscar facturas
                     </button>
                 </div>
+                <input class="d-none" type="number" id="tipo_factura" value="1" disabled/>
 
             </div>
 

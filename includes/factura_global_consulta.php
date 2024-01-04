@@ -39,7 +39,7 @@
                 <p class="ticket_container_header_info_fecha_fecha">Fecha : '. $fila["fecha"].' </p>
                 <p class="ticket_container_header_info_fecha_fecha">Ticket #'. $fila["id"].'</p>
                 <p class="ticket_container_header_info_fecha_fecha">Folio casa#'. $fila["mov"].'</p>
-                <input class="" type="number" id="leer_mov_'.$contadoriteraciones.'" value=" ">
+                <input class="d-none" type="number" id="leer_mov_'.$contadoriteraciones.'" value=" ">
               </div>
               <div class="ticket_container_header_info_more">
                 <div>
@@ -108,7 +108,7 @@
                     <p class="ticket_container_header_info_fecha_fecha">Fecha : '. $fila["fecha"].' </p>
                     <p class="ticket_container_header_info_fecha_fecha">Ticket #'. $fila["id"].'</p>
                     <p class="ticket_container_header_info_fecha_fecha">Folio casa#'. $fila["mov"].'</p>
-                    <input class="" type="number" id="leer_mov_'.$contadoriteraciones.'" value=" ">
+                    <input class="d-none" type="number" id="leer_mov_'.$contadoriteraciones.'" value=" ">
                   </div>
                   <div class="ticket_container_header_info_more">
                     <div>
@@ -181,7 +181,7 @@
                 <p class="ticket_container_header_info_fecha_fecha">Fecha : '. $fila["fecha"].' </p>
                 <p class="ticket_container_header_info_fecha_fecha">Ticket #'. $fila["id"].'</p>
                 <p class="ticket_container_header_info_fecha_fecha">Folio casa#'. $fila["mov"].'</p>
-                <input class="" type="number" id="leer_mov_'.$contadoriteraciones.'" value=" ">
+                <input class="d-none" type="number" id="leer_mov_'.$contadoriteraciones.'" value=" ">
               </div>
               <div class="ticket_container_header_info_more">
                 <div>
@@ -250,7 +250,7 @@
                     <p class="ticket_container_header_info_fecha_fecha">Fecha : '. $fila["fecha"].' </p>
                     <p class="ticket_container_header_info_fecha_fecha">Ticket #'. $fila["id"].'</p>
                     <p class="ticket_container_header_info_fecha_fecha">Folio casa#'. $fila["mov"].'</p>
-                    <input class="" type="number" id="leer_mov_'.$contadoriteraciones.'" value=" ">
+                    <input class="d-none" type="number" id="leer_mov_'.$contadoriteraciones.'" value=" ">
                   </div>
                   <div class="ticket_container_header_info_more">
                     <div>
