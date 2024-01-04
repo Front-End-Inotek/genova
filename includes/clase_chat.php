@@ -17,7 +17,7 @@ class Chat_Manager extends ConexionMYSql{
     }
     
     public function cargarMensajesGlobales(){
-        $sentencia = "SELECT * FROM `chat` WHERE `tipo_mensaje` = 0 ORDER BY `mensaje_id` DESC LIMIT 40";
+        $sentencia = "SELECT * FROM `chat` WHERE `tipo_mensaje` = 0 ORDER BY `mensaje_id` DESC LIMIT 20";
         $comentario = "Cargar 20 mensajes globales";
         $consulta = $this->realizaConsulta($sentencia ,  $comentario);
         return $consulta;

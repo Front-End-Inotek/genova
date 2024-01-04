@@ -74,7 +74,7 @@ while ($fila = mysqli_fetch_array($datos)){
                     <p class="chat_message_name">Tú</p>
                     <p class="chat_message_name">'.$fecha.'</p>
                 </div>
-                <p>'.$fila['mensaje'].'</p>
+                <p class="message">'.$fila['mensaje'].'</p>
             </div>
         </div>
         ';
@@ -87,7 +87,7 @@ while ($fila = mysqli_fetch_array($datos)){
                     <p class="chat_message_name">'.$nombre.'</p>
                     <p class="chat_message_name">'.$fecha.'</p>
                 </div>
-                <p style="width: 100%;">'.$mensaje.'</p>
+                <p class="message">'.$mensaje.'</p>
             </div>
         </div>
         ';

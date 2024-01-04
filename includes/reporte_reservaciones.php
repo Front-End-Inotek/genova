@@ -234,7 +234,6 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           $pdf->Cell(14,5,iconv("UTF-8", "ISO-8859-1",$noches),1,0,'C');
           $pdf->Cell(12,5,iconv("UTF-8", "ISO-8859-1",$plan_alimentos),1,0,'C');
           $pdf->Cell(26,5,iconv("UTF-8", "ISO-8859-1",$tipo_habitacion),1,0,'C');
-          
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_estancia),1,0,'C'); 
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",$total_pago),1,0,'C'); 
           $pdf->Cell(20,5,iconv("UTF-8", "ISO-8859-1",'Activa'),1,1,'C');
@@ -250,7 +249,8 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',7);
         $pdf->SetTextColor(255, 255, 255);
-        $pdf->SetFillColor(99, 155, 219);
+        /* $pdf->SetFillColor(99, 155, 219); */
+        $pdf->Cell(-9);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'NÚMERO'),0,0,'C',True);
         $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True);
         $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'FECHA'),0,0,'C',True);
@@ -261,7 +261,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,0,'C',True);
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'TOTAL'),0,0,'C',True);
         $pdf->Cell(20,4,iconv("UTF-8", "ISO-8859-1",'STATUS'),0,1,'C',True);
-
+        $pdf->Cell(-9);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",''),0,0,'C',True);
         $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'ENTRADA'),0,0,'C',True);
         $pdf->Cell(16,4,iconv("UTF-8", "ISO-8859-1",'SALIDA'),0,0,'C',True);

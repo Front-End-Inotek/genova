@@ -981,7 +981,7 @@ body {
   content: '';
   position: absolute;
   left: -10px; /* Posición del triángulo */
-  top: -17%;
+  top: -10px;
   border-width: 10px; /* Tamaño del triángulo */
   border-style: solid;
   border-color: transparent transparent transparent #e4f2ff; /* Color del triángulo */
@@ -991,7 +991,7 @@ body {
   content: '';
   position: absolute;
   right: -9px; /* Posición del triángulo */
-  top: -17%;
+  top: -10px;
   border-width: 10px; /* Tamaño del triángulo */
   border-style: solid;
   border-color: transparent transparent transparent #0D6EFD; /* Color del triángulo */
@@ -1012,7 +1012,7 @@ body {
   flex-direction: row-reverse;
 }
 .chat_message_content{
-  flex-grow: 1;
+  width: 89%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -1025,10 +1025,14 @@ body {
   border-radius:  15px 0px 15px 15px;
 }
 .chat_message_content_own{
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  width: 89%;
+}
+.message {
+  width: 100%;
+  word-wrap: break-word;
 }
 .chat_message_other img{
   height: 35px;
@@ -1147,6 +1151,100 @@ body {
   margin: 0;
 }
 
+/* Restaurante */
+.restaurante_contenedor {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.restaurante_section {
+  width: 49%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+  padding: 15px 10px;
+  gap: 1rem;
+  transition: all 0.5s ease-in-out;
+}
+.restaurante_section_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 95%;
+}
+.restaurante_section_buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  padding: 15px 5px;
+  border-top: 1px solid #d2d2d7;
+  border-bottom: 1px solid #d2d2d7;
+  margin-bottom: 1rem;
+}
+.btn_restaurante {
+  border-radius: 0.75em;
+  height: 126px;
+  display: flex;
+  width: 98%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.521);
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.1s ease-in all;
+  background-color: #0D6EFD;
+  color: white;
+  text-align: center;
+  text-wrap: balance;
+  word-wrap: break-word;
+}
+.btn_restaurante p {
+  width: 90%;
+  margin: 0;
+}
+.btn_restaurante:hover {
+  scale: 1.02;
+}
+.contenedor_botones_restaurante{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.table-restaurante {
+  width: 100%;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+.footer_restaurante_tabla {
+  width: 100%;
+  /* height: 1rem; */
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {
@@ -1216,7 +1314,7 @@ body {
     }
     .chat_container {
       width: 90vw;
-      height: 80vh;
+      height: 50vh;
       position: absolute;
       margin-top: 7vh;
     }
@@ -1225,5 +1323,14 @@ body {
       left: 50%;
       transform: translatex(-50%);
       top: 8vh;
+    }
+
+    .restaurante_contenedor {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .restaurante_section {
+      width: 95%;
     }
 }

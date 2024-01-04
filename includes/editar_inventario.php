@@ -22,7 +22,9 @@
             <input class="form-control custom_input" type="text" id="nombre" value="'.$inventario->nombre.'" maxlength="60">
             <label for="nombre">Nombre</label>
           </div>
+        </div>
 
+        <div class="inputs_form_container">
           <div class="form-floating input_container">
             <input class="form-control custom_input" type="number" id="stock" value="'.$inventario->stock.'">
             <label for="stock" >Stock</label>
@@ -38,7 +40,9 @@
             </select>
             <label for="categoria" >Categoría</label>
           </div>
+        </div>
 
+        <div class="inputs_form_container">
           <div class="form-floating input_container">
             <input class="form-control custom_input" type="number" id="inventario" value="'.$inventario->inventario.'">
             <label>Inventario</label>
@@ -50,7 +54,9 @@
             <input class="form-control custom_input" type="text" id="descripcion" value="'.$inventario->descripcion.'" maxlength="200">
             <label for="descripción" >Comentario</label>
           </div>
-          
+        </div>
+
+        <div class="inputs_form_container">
           <div class="form-floating input_container">
             <input class="form-control custom_input" type="number" id="bodega_stock" value="'.$inventario->bodega_stock.'">
             <label for="bodega_stock" >Bodega Stock</label>
@@ -59,10 +65,12 @@
 
         <div class="inputs_form_container">
           <div class="form-floating input_container">
-            <input class="form-control custom_input" type="number" id="precio" value="'.$inventario->precio.'">
-            <label for="precio" >Precio de venta</label>
+            <input class="form-control custom_input" type="number" id="bodega_inventario" value="'.$inventario->bodega_inventario.'">
+            <label for="bodega_inventario" >Bodega inventario</label>
           </div>
-          
+        </div>
+
+        <div class="inputs_form_container">
           <div class="form-floating input_container">
             <input class="form-control custom_input" type="number" id="bodega_inventario" value="'.$inventario->bodega_inventario.'">
             <label for="bodega_inventario" >Bodega inventario</label>

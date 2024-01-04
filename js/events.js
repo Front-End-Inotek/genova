@@ -2855,8 +2855,13 @@ function obtener_adicionales(){
 }
 
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
+    const btn_reservacion = document.getElementById("btn_reservacion");
+
+    btn_reservacion.setAttribute("disabled" , "true")
+
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
         alert("Fecha de asignación inválida")
+        btn_reservacion.setAttribute("disabled" , "false")
         return false
     }
     if(!verificarFormulario("form-reserva","id") ){
@@ -2881,6 +2886,7 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         var tipo_tarjeta= document.getElementById("forma-garantia").value;
         if(tipo_tarjeta == "" || tipo_tarjeta == null || tipo_tarjeta == "Seleccione una opción") {
             alert("Falta agregar la forma de garantia");
+            btn_reservacion.setAttribute("disabled" , "false")
             return
         }
         var correo = $("#correo").val()
@@ -2913,9 +2919,11 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
                 //return
                 const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
                 if(response_msj == "NO_DATA"){
+                    btn_reservacion.setAttribute("disabled" , "false")
                     swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
                     return
                 }else if(response_msj=="NO_VALIDO"){
+                    btn_reservacion.setAttribute("disabled" , "false")
                     swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
                     return
                 }else{
@@ -2923,6 +2931,7 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
                     //todo ocurre correctamente.
                 }
             }else{
+                btn_reservacion.setAttribute("disabled" , "false")
                 swal("Error del servidor!", "Intentelo de nuevo o contacte con soporte tecnico", "error");
             }
         })
@@ -8859,7 +8868,7 @@ function send_message( mensage_type ) {
                         <p class="chat_message_name">Tú</p>
                         <p class="chat_message_name">Justo ahora</p>
                     </div>
-                    <p>${message}</p>
+                    <p class="message">${message}</p>
                 </div>
             </div>
         `;
@@ -8883,7 +8892,7 @@ function send_message( mensage_type ) {
 
 function chat_notification_global() {
     const chat = document.getElementById("chat");
-    console.log("wachando mensajes")
+    /* console.log("wachando mensajes") */
     if( chat.style.display === "block"){
         return
     }
@@ -8902,7 +8911,7 @@ function chat_notification_global() {
             /* console.log("ID del mensaje:", res.mensaje_id);
             console.log("Mensaje:", res.mensaje);
             console.log("Hora de envío:", res.hora_envio); */
-            console.log(res)
+            /* console.log(res) */
             notificar(res.mensaje_id, res.usuario_id, res.mensaje, res.nombre)
         },
         error: function (error){
@@ -8924,11 +8933,11 @@ function notificar(nuevo_mensaje, usuario_id, nuevo_mensaje_1, nuevo_nombre) {
     const mensaje = document.getElementById("mensaje_notificacion");
 
     if(nuevo_mensaje == ultimo_mensaje  ){
-        console.log("El mensaje es el mismo")
+        /* console.log("El mensaje es el mismo") */
     }else if ( usuario_id == local_user_id ) {
-        console.log("El ultimo mensaje es el mio padrino")
+        /* console.log("El ultimo mensaje es el mio padrino") */
     }else if( nuevo_mensaje < ultimo_mensaje ){
-        console.log("no se que show we alv")
+        /* console.log("no se que show we alv") */
     } else {
         localStorage.setItem("ultimo_mensaje_global" , nuevo_mensaje)
         fabImgNotification.style.display = "block";

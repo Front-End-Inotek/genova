@@ -12,38 +12,64 @@
           <div class="form-floating input_container">
           <input class="form-control custom_input" type="text" id="nombre" placeholder="Ingresa el nombre del producto" maxlength="60">
           <label for="nombre">Nombre</label>
-        </div>          
+        </div>
+        </div>
+
+        <div class="inputs_form_container">          
         <div class="form-floating input_container">
           <input class="form-control custom_input" type="number" id="stock" placeholder="Ingresa la cantidad en stock" >
           <label for="stock">Stock</label>
         </div>
+        </div>
+
+        <div class="inputs_form_container">
           <div class="form-floating input_container">
-          <select class="form-select custom_input" id="categoria">
-              <option selected disabled>Seleccione una opción</option>';
-              $categoria->mostrar_categoria();
-              echo '
-          </select>
-          <label for="categoria">Categoria</label>
+            <select class="form-select custom_input" id="categoria">
+                <option selected disabled>Seleccione una opción</option>';
+                $categoria->mostrar_categoria();
+                echo '
+            </select>
+            <label for="categoria">Categoria</label>
           </div>
         </div>
+
         <div class="inputs_form_container">
-        <div class="form-floating input_container">
+          <div class="form-floating input_container">
             <input class="form-control custom_input" type="number" id="inventario" placeholder="Ingresa la cantidad en el inventario">
             <label for="inventario ">Inventario</label>
+          </div>
         </div>
-        <div class="form-floating input_container">
+
+
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
             <input class="form-control custom_input" type="text" id="descripcion" placeholder="Ingresa una descripción del producto" maxlength="200">
             <label for="descripcion">Descripción</label>
+          </div>
         </div>
+
+        <div class="inputs_form_container">
           <div class="form-floating input_container">
-            <input class="form-control custom_input" type="number" id="bodega_stock" placeholder="Ingresa la cantidad en bodega stock">
-            <label for="Bodega stock">Bodega stock</label>
+              <input class="form-control custom_input" type="number" id="bodega_stock" placeholder="Ingresa la cantidad en bodega stock">
+              <label for="Bodega stock">Bodega stock</label>
+          </div>
         </div>
-        <div class="form-floating input_container">
-            <input class="form-control custom_input" type="number" id="precio" placeholder="Ingresa el precio de venta">
-            <label for="precio de venta">Precio de venta</label>
+
+        <div class="inputs_form_container">
+            <div class="form-floating input_container">
+              <input class="form-control custom_input" type="number" id="bodega_stock" placeholder="Ingresa la cantidad en bodega stock">
+              <label for="Bodega stock">Bodega stock</label>
           </div>
-          </div>
+        </div>
+        
+        <div class="inputs_form_container">
+            <div class="form-floating input_container">
+              <input class="form-control custom_input" type="number" id="precio" placeholder="Ingresa el precio de venta">
+              <label for="precio de venta">Precio de venta</label>
+            </div>
+        </div>
+
+
           <div class="inputs_form_container">
           <div class="form-floating input_container">
             <input class="form-control custom_input" type="number" id="bodega_inventario" placeholder="Ingresa la cantidad en bodega inventario">
@@ -68,5 +94,6 @@
             </div>
           </div>
         </div>
-      </div>';
+      </div>
+      ';
 ?>

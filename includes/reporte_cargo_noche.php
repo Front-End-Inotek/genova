@@ -86,7 +86,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   // Titulos tabla -277
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(255, 255, 255);
-  $pdf->SetFillColor(99, 155, 219);
+  /* $pdf->SetFillColor(99, 155, 219); */
   $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
   $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
   $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);
@@ -153,7 +153,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->AddPage();
         $pdf->SetFont('Arial','',7);
         $pdf->SetTextColor(255, 255, 255);
-        $pdf->SetFillColor(99, 155, 219);
+        /* $pdf->SetFillColor(99, 155, 219); */
         $pdf->Cell(8,4,iconv("UTF-8", "ISO-8859-1",'HAB'),0,0,'C',True);
         $pdf->Cell(22,4,iconv("UTF-8", "ISO-8859-1",'TARIFA'),0,0,'C',True);
         $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",'EXTRA'),0,0,'C',True);

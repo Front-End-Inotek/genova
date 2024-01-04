@@ -12,38 +12,28 @@
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-      Pago del Restaurante
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-    </div><br>
+      <h3 class="modal-title">Pago del Restaurante</h3>
+      <button type="button" class="btn btn-light" data-dismiss="modal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
+        </svg>
+      </button>
+    </div>
+
+
     <div class="modal-body">
-      <div class="row">';
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-            echo '<div class="edo_cuenta btn-square-lg" onclick="pedir_rest_cobro_directo('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')">';
-            echo '</br>';
-            echo '<div>';
-                 //echo '<img src="images/persona.png"  class="center-block img-responsive">';
-            echo '</div>';
-            echo '<div>';
-              echo 'Pagar Directo';
-            echo '</div>';
-            echo '</br>';
-          echo '</div>';
+      <div class="contenedor_botones">';
+        echo '<div class="btn_modal_herramientas btn_edo_cuenta" onclick="pedir_rest_cobro_directo('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].')" >';
+        echo ' <img class="btn_modal_img" src="./assets/iconos_btn/pagar.svg"> ';
+        echo '<p>Pagar Directo</p>';
         echo '</div>';
-        echo '<div class="col-xs-6 col-sm-4 col-md-2 btn-herramientas">';
-            echo '<div class="edo_cuenta btn-square-lg" onclick="pedir_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].','.$_GET['id_maestra'].')">';
-            echo '</br>';
-            echo '<div>';
-                //echo '<img src="images/persona.png"  class="center-block img-responsive">';
-            echo '</div>';
-            echo '<div>';
-              echo $mensaje;
-            echo '</div>';
-            echo '</br>';
-          echo '</div>';
+
+        echo '<div class="btn_modal_herramientas btn_edo_cuenta" onclick="pedir_rest_cobro_hab('.$_GET['total'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].','.$_GET['id_maestra'].')" >';
+        echo ' <img class="btn_modal_img" src="./assets/iconos_btn/cargo.svg"> ';
+       echo '<p>'.$mensaje.'</p>';
         echo '</div>
-      </div>
-      <br>
-    <div>
+        </div>
+    </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
     </div>

@@ -432,7 +432,7 @@ echo '
             </div>
             </div>
             <div class="container_btn">
-                <button type="submit" class="btn btn-primary" onclick="event.preventDefault(); guardarNuevaReservacion('.$hab_id.','.$id_cuenta.','.$reservacion->id.')">Actualizar</button>
+                <button type="submit" id="btn_reservacion" class="btn btn-primary" onclick="event.preventDefault(); guardarNuevaReservacion('.$hab_id.','.$id_cuenta.','.$reservacion->id.')">Actualizar</button>
             </div>
         </form>
       </div>

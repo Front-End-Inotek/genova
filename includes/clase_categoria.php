@@ -148,13 +148,14 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $cont=0;
        
-        echo '<div class="row">';
         while ($fila = mysqli_fetch_array($consulta))
         {
           //if($cont%2==0){
-            echo '<div class="col-sm-2 margen_inf">
-              <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')"> '.$fila['nombre'].'</button>
-            </div>';
+            echo '
+              <button type="button" class="btn btn-primary " onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.','.$mesa.','.$maestra.')">
+                 '.$fila['nombre'].'
+              </button>
+            ';
           /*}else{
             echo '<div class="col-sm-2 margen_inf">
               <button type="button" class="btn btn-dark btn-square-md" onclick="buscar_categoria_restaurente('.$fila['id'].','.$hab_id.','.$estado.','.$mov.','.$mesa.')"> 🍽️<br>'.$fila['nombre'].'</button>
@@ -162,7 +163,6 @@
           }
           $cont++;*/
         }
-        echo '</div>';
       }
 
       function mostrarCategoriaRestaurante($hab_id,$estado,$mov,$mesa){
