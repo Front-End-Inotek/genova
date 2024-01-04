@@ -160,6 +160,9 @@ $email = $rfc['5'];
 $notas = $rfc['8'];
 $fecha = time();
 $nombre_hab=$_SESSION['nombre_usuario'];
+if($nombre_hab==null){
+    $nombre_hab=0;
+  }
 $pax=$_SESSION['extra_junior']+$_SESSION['extra_junior'];
 
 
