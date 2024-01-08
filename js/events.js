@@ -3155,13 +3155,17 @@ function buscar_llegadas_salidas(e,opcion){
 
 // Barra de diferentes busquedas en ver reservaciones
 function buscar_reservacion(e){
+    const div = document.getElementById("paginacion_reservaciones");
+
+    div.innerHTML = "";
+
     setTimeout(() => {
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
         if(a_buscar.length >0){
             $('.pagination').hide();
             console.log(a_buscar)
-            $("#tabla_reservacion").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
+            $("#paginacion_reservaciones").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
             });
         }else{
             $('.pagination').show();
