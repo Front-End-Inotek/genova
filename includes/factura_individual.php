@@ -22,6 +22,7 @@
                 </svg>
                 Timbrar Factura
             </button>
+            <input class="d-none" type="number" id="tipo_factura" value="0" disabled/>
         </div>
         
         <form id="formfactura" class="contenedor_facturas" autocomplete="off" accept-charset="utf-8">

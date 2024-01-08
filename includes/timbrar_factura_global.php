@@ -2,16 +2,22 @@
 session_start();
 include("clase_factura.php");
 
+
 include_once('clase_ticket.php');
 $ticket= NEW Ticket(0);
 $fact = NEW factura ();
-
+$LCantidad=explode(",", $_GET['LCantidad']);
+$LDescipcion=explode(",", $_GET['LDescipcion']);
+$LImporte=explode(",", $_GET['LImporte']);
+$LPrecio=explode(",", $_SESSION['lista_totales']);
+$Ltipo=explode(",", $_SESSION['lista_tipo']);
+//var_dump($LPrecio);
+//var_dump($Ltipo);
 $resultado=$fact->rfc_propio();
 //$resultado=mysqli_query($con,$consulta);
 $row=mysqli_fetch_array($resultado);
 
 //$folio=1;
-
 
 $numfolio=$fact->obtener_folio_factura()+1;
 
@@ -30,10 +36,11 @@ $iva = $_POST['iva'];
 $ish = $_POST['ish'];
 
 $rimporte = $_POST['rimporte'];
+//echo $rimporte;
 $riva = $_POST['riva'];
-$rish = $_POST['rish'];
+//echo $riva;
 $rtotal = $_POST['rtotal'];
-$contador = $_POST['filas'];
+$contador = count($LPrecio);
 
 // Se desactivan los mensajes de debug
 error_reporting(~(E_WARNING|E_NOTICE));
@@ -82,7 +89,7 @@ $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = $rimporte;  //TOTAL DE IMPORTE
 $datos['factura']['tipocambio'] = 1;
 $datos['factura']['tipocomprobante'] = 'I';
-$datos['factura']['total'] = $rtotal;   //TOTAL
+$datos['factura']['total'] = $rimporte+$riva;   //TOTAL
 $datos['factura']['Exportacion'] = '01';
 
 // Datos del Emisor
@@ -102,27 +109,40 @@ $datos['receptor']['nombre'] = $rfc['1'];
 $datos['receptor']['UsoCFDI'] = $rfc['4'];
 $datos['receptor']['DomicilioFiscalReceptor'] = "".$rfc['2'];
 $datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];
+$total=0;
+$rish = 0;
+for ($i=0; $i <= $contador ; $i++) {
+    if($LPrecio[$i] > 0){
+        if($Ltipo[$i]=="1"){
+            $precio=round(($LPrecio[$i]/1.19),2);
+            $rish=$rish+round(($precio*.03),2);
+        }else{
+            $precio=round(($LPrecio[$i]/1.16),2);
+        }
+        $iva=round(($precio*.16),2);
+        
+        $total=$total+$precio;
 
-for ($i=1; $i <= $contador ; $i++) {
-    if($cantidad[$i] > 0 && $importeuni[$i] > 0){
         $id_mov=$id["$i"];
-        $datos['conceptos'][$i]['cantidad'] = $cantidad["$i"];/// 0
-        $datos['conceptos'][$i]['unidad'] = $unidad["$i"];///1
+        $datos['conceptos'][$i]['cantidad'] = 1;/// 0
+        $datos['conceptos'][$i]['unidad'] = "SER";///1
         $datos['conceptos'][$i]['ID'] = $id["$i"];/////4
-        $datos['conceptos'][$i]['descripcion'] = $producto["$i"];////5
-        $datos['conceptos'][$i]['valorunitario']=round(($importeuni["$i"]/1.19),2);////6
-        $datos['conceptos'][$i]['importe'] = $importe["$i"];
-        $datos['conceptos'][$i]['ClaveProdServ'] = $clave["$i"];/////3
-        $datos['conceptos'][$i]['ClaveUnidad'] = $claveunidad["$i"];/////2
+        $datos['conceptos'][$i]['descripcion'] = "HOSPEDAJE";////5
+        $datos['conceptos'][$i]['valorunitario']=$precio;////6
+        $datos['conceptos'][$i]['importe'] = $precio;
+        $datos['conceptos'][$i]['ClaveProdServ'] = "90111500";/////3
+        $datos['conceptos'][$i]['ClaveUnidad'] = "E48";/////2
         $datos['conceptos'][$i]['ObjetoImp'] = '02';
 
-        $datos['conceptos'][$i]['Impuestos']['Traslados'][0]['Base'] = $importe["$i"];
+        $datos['conceptos'][$i]['Impuestos']['Traslados'][0]['Base'] = $precio;
         $datos['conceptos'][$i]['Impuestos']['Traslados'][0]['Impuesto'] = '002';
         $datos['conceptos'][$i]['Impuestos']['Traslados'][0]['TipoFactor'] = 'Tasa';
         $datos['conceptos'][$i]['Impuestos']['Traslados'][0]['TasaOCuota'] = '0.160000';
-        $datos['conceptos'][$i]['Impuestos']['Traslados'][0]['Importe'] = $iva["$i"];//IMPUESTO
+        $datos['conceptos'][$i]['Impuestos']['Traslados'][0]['Importe'] = $iva;//IMPUESTO
     }
 }
+//echo $total;
+
 
 $datos['impuestos']['TotalImpuestosTrasladados'] = $riva; ////TOTAL DE IMPUESTOS
 
@@ -160,9 +180,6 @@ $email = $rfc['5'];
 $notas = $rfc['8'];
 $fecha = time();
 $nombre_hab=$_SESSION['nombre_usuario'];
-if($nombre_hab==null){
-    $nombre_hab=0;
-  }
 $pax=$_SESSION['extra_junior']+$_SESSION['extra_junior'];
 
 

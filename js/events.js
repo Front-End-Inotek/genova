@@ -7760,6 +7760,7 @@ function manejo_facturas(){
 }
 function generar_facturas_global(){
     var input_longitud=document.getElementById("leer_iteraciones");
+    var tipo_de_factura=document.getElementById("tipo_factura").value;
     var index=input_longitud.value;
     var lista_id_tickets=[];
     var lista_totales=[];
@@ -7814,7 +7815,7 @@ function generar_facturas_global(){
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets+"&tipo="+bandera_facturacion+"&lista_totales="+lista_totales+"&lista_tipo="+lista_tipo+"&mov="+lista_mov);
+        $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets+"&tipo="+bandera_facturacion+"&lista_totales="+lista_totales+"&lista_tipo="+lista_tipo+"&mov="+lista_mov+"&tipo_factura="+tipo_de_factura);
         closeNav();
     }else{
         swal({

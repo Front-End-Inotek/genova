@@ -121,7 +121,7 @@ function timbrar_factura(){
 
 function mandartimbre (){
     mostrar_animacion();
-
+    var tipo_de_factura=document.getElementById("tipo_factura").value;
     //Declaramos una variable que contendra nuestro formulario
     form = document.getElementById('formfactura');
     //Declaramos una constante que contendra XMLHttpRequest(); intercambia datos detras de escena
@@ -132,15 +132,21 @@ function mandartimbre (){
 
     var tabla = document.createElement("div");
     var total = document.createElement("div");
-
+    var LCatidad=[];
+    var LDescipcion=[];
+    var LPrecio=[];
+    var LImporte=[];
     for (let i = 1; i <= contador; i++) {
         var
         cantidad = parseFloat(document.getElementById("cantidad["+i+"]").value),
         descripcion = document.getElementById("producto["+i+"]").value,
         precio = parseFloat(document.getElementById("importeuni["+i+"]").value),
         importe = parseFloat(document.getElementById("importe["+i+"]").value);
-
         if (cantidad > 0 && importe > 0) {
+            LCatidad.push(cantidad);
+            LDescipcion.push(descripcion);
+            LPrecio.push(precio);
+            LImporte.push(importe);
             tabla.innerHTML += `
             <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
                 <tr>
@@ -192,7 +198,12 @@ function mandartimbre (){
     .then((willDelete) => {
     if (willDelete) {
     //open recive informacion son 3 parametro}
-    xhr.open('POST', 'includes/timbrar_factura.php', true);
+    
+    if(tipo_de_factura==1){
+        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte, true);
+    }else{
+        xhr.open('POST', 'includes/timbrar_factura.php', true);
+    }
     //FormData interpretara los datos del formulario
     var formData = new FormData(form);
     //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor
