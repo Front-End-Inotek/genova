@@ -2857,11 +2857,15 @@ function obtener_adicionales(){
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
     const btn_reservacion = document.getElementById("btn_reservacion");
 
-    btn_reservacion.setAttribute("disabled" , "true")
+    if(btn_reservacion){
+        btn_reservacion.setAttribute("disabled" , "true")
+    }
 
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
+        if(btn_reservacion){
+            btn_reservacion.setAttribute("disabled" , "false")
+        }
         alert("Fecha de asignación inválida")
-        btn_reservacion.setAttribute("disabled" , "false")
         return false
     }
     if(!verificarFormulario("form-reserva","id") ){
@@ -2885,8 +2889,10 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         var comentarios_huesped= document.getElementById("observaciones").value;
         var tipo_tarjeta= document.getElementById("forma-garantia").value;
         if(tipo_tarjeta == "" || tipo_tarjeta == null || tipo_tarjeta == "Seleccione una opción") {
+            if(btn_reservacion){
+                btn_reservacion.setAttribute("disabled" , "false")
+            }
             alert("Falta agregar la forma de garantia");
-            btn_reservacion.setAttribute("disabled" , "false")
             return
         }
         var correo = $("#correo").val()
@@ -2919,23 +2925,35 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
                 //return
                 const  response_msj =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
                 if(response_msj == "NO_DATA"){
-                    btn_reservacion.setAttribute("disabled" , "false")
                     swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
+                    if(btn_reservacion){
+                        btn_reservacion.setAttribute("disabled" , "false")
+                    }
                     return
                 }else if(response_msj=="NO_VALIDO"){
-                    btn_reservacion.setAttribute("disabled" , "false")
                     swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
+                    if(btn_reservacion){
+                        btn_reservacion.setAttribute("disabled" , "false")
+                    }
                     return
                 }else{
+                    if(btn_reservacion){
+                        btn_reservacion.setAttribute("disabled" , "true")
+                    }
                     guardarReservacion(response_msj,hab_id,id_cuenta,id_reservacion)
                     //todo ocurre correctamente.
                 }
             }else{
-                btn_reservacion.setAttribute("disabled" , "false")
                 swal("Error del servidor!", "Intentelo de nuevo o contacte con soporte tecnico", "error");
+                if(btn_reservacion){
+                    btn_reservacion.setAttribute("disabled" , "false")
+                }
             }
         })
         xhttp.send();
+    }
+    if(btn_reservacion){
+        btn_reservacion.setAttribute("disabled" , "false")
     }
 }
 
