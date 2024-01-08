@@ -7709,7 +7709,7 @@ function factura_buscar_folio(){
     //$("#area_trabajo_menu").load("includes/ver_facturas_folio.php");
     closeNav();
 }
-function factura_buscar_folio(){
+function factura_buscar_folio_casa(){
     //usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
     $('#pie').hide();
