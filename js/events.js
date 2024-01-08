@@ -3190,6 +3190,10 @@ function busqueda_reservacion(){
 
 // Busqueda combinada en ver reservaciones
 function busqueda_reservacion_combinada(){
+    div = document.getElementById("paginacion_reservaciones");
+
+    div.innerHTML = "";
+
 	var inicial=$("#inicial").val();
 	var final=$("#final").val();
     var a_buscar=encodeURIComponent($("#a_buscar").val());
@@ -3199,7 +3203,7 @@ function busqueda_reservacion_combinada(){
     }else{
         $('.pagination').show();
     }
-	$("#tabla_reservacion").load("includes/busqueda_reservacion_combinada.php?inicial="+inicial+"&final="+final+"&id="+id+"&a_buscar="+a_buscar);
+	$("#paginacion_reservaciones").load("includes/busqueda_reservacion_combinada.php?inicial="+inicial+"&final="+final+"&id="+id+"&a_buscar="+a_buscar);
 }
 
 // Muestra las reservaciones por dia de la bd
