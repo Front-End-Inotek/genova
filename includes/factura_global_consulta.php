@@ -26,7 +26,7 @@
     ';
     
     foreach ($lista_tickets as $fila) {
-      if($fila['facturado'] == 0 && $fila["id_hab"]!=0) {
+      if($fila['facturado'] == 0 && $fila["rest"]==0) {
       echo '
       <div class="card text-center ticket_container">';
         echo '
@@ -92,7 +92,7 @@
               $contador++;
             }
             echo '</div>';
-        }elseif($fila['facturado'] != 0 && $fila["id_hab"]!=0){
+        }elseif($fila['facturado'] != 0 && $fila["rest"]==0){
           echo '
             <div class="card text-center ticket_container">';
             /*if($id_ticket!=$listconceptos["id"]){
@@ -168,7 +168,7 @@
           <h2 class="titulo_tabla_facturas">Facturas en restaurante</h2>
     ';
     foreach ($lista_tickets as $fila) {
-      if($fila['facturado'] == 0 && $fila["id_hab"]==0) {
+      if($fila['facturado'] == 0 && $fila["rest"]==1) {
       echo '
       <div class="card text-center ticket_container">';
         echo '
@@ -234,7 +234,7 @@
               $contador++;
             }
             echo '</div>';
-        }if($fila['facturado'] != 0 && $fila["id_hab"]==0){
+        }if($fila['facturado'] != 0 && $fila["rest"]==1){
           echo '
             <div class="card text-center ticket_container">';
             /*if($id_ticket!=$listconceptos["id"]){

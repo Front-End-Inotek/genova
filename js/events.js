@@ -5197,8 +5197,13 @@ function estado_cuenta(hab_id,estado,mov=0){
 function validarNumero(event) {
     const charCode = event.charCode;
     // Check if the pressed key is a number (charCode 48 to 57 represent digits 0 to 9)
-    if (charCode < 48 || charCode > 57) {
+    if ((charCode < 48 || charCode > 57) && charCode !== 46) {
     event.preventDefault();
+    }
+
+    const inputText = event.target.value;
+    if(charCode === 46 && inputText.indexOf(".") !== -1 ) {
+        event.preventDefault();
     }
 }
 

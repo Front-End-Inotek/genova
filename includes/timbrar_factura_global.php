@@ -123,7 +123,7 @@ for ($i=0; $i <= $contador ; $i++) {
         
         $total=$total+$precio;
 
-        $id_mov=$id["$i"];
+        $id_mov=0;
         $datos['conceptos'][$i]['cantidad'] = 1;/// 0
         $datos['conceptos'][$i]['unidad'] = "SER";///1
         $datos['conceptos'][$i]['ID'] = $id["$i"];/////4
@@ -179,8 +179,8 @@ $codigopostal = $rfc['2'];
 $email = $rfc['5'];
 $notas = $rfc['8'];
 $fecha = time();
-$nombre_hab=$_SESSION['nombre_usuario'];
-$pax=$_SESSION['extra_junior']+$_SESSION['extra_junior'];
+$nombre_hab=0;
+$pax=0;
 
 
 //echo $formapago;
