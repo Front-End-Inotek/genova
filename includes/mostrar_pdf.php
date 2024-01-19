@@ -201,14 +201,16 @@ foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){
       
       $pdf->setX(10);
       /*DATOS DE LA HOJA*/  
-      $pdf->SetFont('Arial','',10);
-      $pdf->Cell(20,5, utf8_decode('Habitacion: '),0,0,'L',0);
-      $pdf->Cell(10,5, $nombre_hab,0,0,'L',0);
-      $pdf->Cell(65,5, utf8_decode('Folio casa: '),0,0,'R',0);
-      $pdf->Cell(10,5, $folio_casa,0,0,'L',0);
-      $pdf->Cell(65,5, utf8_decode('Pax: '),0,0,'R',0);
-      $pdf->Cell(10,5, $pax,0,0,'L',0);
-      $pdf->setX(10);
+      if($folio_casa!=0){
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell(20,5, utf8_decode('Habitacion: '),0,0,'L',0);
+            $pdf->Cell(10,5, $nombre_hab,0,0,'L',0);
+            $pdf->Cell(65,5, utf8_decode('Folio casa: '),0,0,'R',0);
+            $pdf->Cell(10,5, $folio_casa,0,0,'L',0);
+            $pdf->Cell(65,5, utf8_decode('Pax: '),0,0,'R',0);
+            $pdf->Cell(10,5, $pax,0,0,'L',0);
+            $pdf->setX(10);
+      }
 
       $pdf->Ln(5);
       $pdf->setDrawColor(176,173,172);
@@ -318,11 +320,14 @@ foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $Receptor){
 }
 
 /*DATOS DE LA HOJA*/  
-$pdf->Ln(4);
-$pdf->SetFont('Arial','',10);
-$pdf->Cell(25,5, utf8_decode('Comentarios: '),0,0,'L',0);
-$pdf->SetFont('Arial','',9);
-$pdf->multicell(160,5, $notas,0,'J',0);
+if ($notas!=""){
+      $pdf->Ln(4);
+      $pdf->SetFont('Arial','',10);
+      $pdf->Cell(25,5, utf8_decode('Comentarios: '),0,0,'L',0);
+      $pdf->SetFont('Arial','',9);
+      $pdf->multicell(160,5, $notas,0,'J',0);
+}
+
 
 
 

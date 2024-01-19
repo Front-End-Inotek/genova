@@ -1,8 +1,6 @@
 <?php
     session_start();
-    $_SESSION['nombre_usuario']=0;
-    $_SESSION['extra_junior']=0;
-    $_SESSION['extra_junior']=0;
+
     $total = $_GET["total"];
     $listaId = $_GET["listaId"];
     $tipo=$_GET["tipo"];

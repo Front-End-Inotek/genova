@@ -47,10 +47,14 @@
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
   $comanda= $pedido_rest->saber_comanda($mov);
+  $rest=0;
+  if (urldecode($_POST['descripcion'])=="Abono restaurante"){
+    $rest=1;
+  }
   if($_POST['forma_pago'] == 1){
     $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],$_POST['abono'],0,0,0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
   }else{
-    $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],0,0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0);
+    $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],0,0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0,$rest);
   }
   $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono'],$ticket_id);
   $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['abono'],($_POST['abono']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
