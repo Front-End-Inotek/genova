@@ -2863,11 +2863,24 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
 
     if (typeof fecha_valida !== 'undefined' && fecha_valida==false) {
         if(btn_reservacion){
-            btn_reservacion.setAttribute("disabled" , "false")
+            btn_reservacion.removeAttribute("disabled");
         }
         alert("Fecha de asignación inválida")
         return false
     }
+
+    // Comprobar la forma de garantia si esta activo el input o desactivado y si viene null o string vacio
+    var forma_garantia = document.getElementById("garantia_monto")
+    if (forma_garantia.disabled) {
+        console.log("El campo de texto esta desactivado")
+    } else {
+        console.log("El campo de texto esta activado")
+        if(forma_garantia.value === "" || forma_garantia === null) {
+            alert("Falta agregar el monto de la forma de garantia")
+            return false
+        }
+    }
+
     if(!verificarFormulario("form-reserva","id") ){
         var usuario_id=localStorage.getItem("id");
         var nombre_huesped= document.getElementById("nombre").value;
@@ -2880,6 +2893,11 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         if(document.getElementById("leer_apellido_sin_editar")){
             apellido_huesped_sin_editar= document.getElementById("leer_apellido_sin_editar").value;
         }
+        
+
+        //TODO agregar la comprobacion de la forma de garantia
+
+        
         var empresa_huesped= document.getElementById("empresa").value;
         var telefono_huesped= document.getElementById("telefono").value;
         var pais_huesped= document.getElementById("pais").value;
@@ -2890,7 +2908,7 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         var tipo_tarjeta= document.getElementById("forma-garantia").value;
         if(tipo_tarjeta == "" || tipo_tarjeta == null || tipo_tarjeta == "Seleccione una opción") {
             if(btn_reservacion){
-                btn_reservacion.setAttribute("disabled" , "false")
+                btn_reservacion.removeAttribute("disabled");
             }
             alert("Falta agregar la forma de garantia");
             return
@@ -2927,13 +2945,13 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
                 if(response_msj == "NO_DATA"){
                     swal("Debe llenar los campos requeridos para el húesped", "Verifique que los campos no estén vacíos", "error");
                     if(btn_reservacion){
-                        btn_reservacion.setAttribute("disabled" , "false")
+                        btn_reservacion.removeAttribute("disabled");
                     }
                     return
                 }else if(response_msj=="NO_VALIDO"){
                     swal("Los datos no se agregaron!", "Error de trasnferencia de datos!", "error");
                     if(btn_reservacion){
-                        btn_reservacion.setAttribute("disabled" , "false")
+                        btn_reservacion.removeAttribute("disabled");
                     }
                     return
                 }else{
@@ -2946,14 +2964,14 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
             }else{
                 swal("Error del servidor!", "Intentelo de nuevo o contacte con soporte tecnico", "error");
                 if(btn_reservacion){
-                    btn_reservacion.setAttribute("disabled" , "false")
+                    btn_reservacion.removeAttribute("disabled");
                 }
             }
         })
         xhttp.send();
     }
     if(btn_reservacion){
-        btn_reservacion.setAttribute("disabled" , "false")
+        btn_reservacion.removeAttribute("disabled");
     }
 }
 
@@ -5197,8 +5215,13 @@ function estado_cuenta(hab_id,estado,mov=0){
 function validarNumero(event) {
     const charCode = event.charCode;
     // Check if the pressed key is a number (charCode 48 to 57 represent digits 0 to 9)
-    if (charCode < 48 || charCode > 57) {
+    if ((charCode < 48 || charCode > 57) && charCode !== 46) {
     event.preventDefault();
+    }
+
+    const inputText = event.target.value;
+    if(charCode === 46 && inputText.indexOf(".") !== -1 ) {
+        event.preventDefault();
     }
 }
 

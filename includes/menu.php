@@ -193,6 +193,12 @@
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="6">
 							<ul class="aside_nav_links_list">';
+							$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
+						if($permisos_restaurante > 0){
+							echo '
+							<li class="aside_ruta" onclick="agregar_restaurante(0,0); handleSiceTable();">Restaurante</li>
+							';
+						}
 						$permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->categoria_ver;
 						if($permisos_inventario > 0 ){
 							echo '
@@ -210,7 +216,6 @@
 						$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
 						if($permisos_restaurante > 0){
 							echo '
-							<li class="aside_ruta" onclick="agregar_restaurante(0,0); handleSiceTable();">Restaurante</li>
 							<li class="aside_ruta" onclick="mesas_restaurante(); handleSiceTable();">Mesas</li>
 							<li class="aside_ruta" onclick="agregar_mesa(); handleSiceTable();">Agregar mesa</li>
 							';

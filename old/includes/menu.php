@@ -178,6 +178,12 @@
 			<span class="mx-2">Restaurante</span>
 			<ul id="5" class="submenu">';
 
+			$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
+			if($permisos_restaurante>0){
+				echo '
+				<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
+			}
+
 			$permisos_inventario=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->categoria_ver;
 			if($permisos_inventario>0){
 			echo '
@@ -196,8 +202,6 @@
 			}
 			$permisos_restaurante=$usuario->restaurante_ver+$usuario->restaurante_agregar;
 			if($permisos_restaurante>0){
-			echo '
-			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="agregar_restaurante(0,0)"> Restaurante </a></i></ul>';
 			echo '
 			<ul class="contenedor-sub" onclick="sub_menu(); boton_menu();"><a class="subitem" onclick="mesas_restaurante()">Mesas</a></i></ul>';
 			echo '

@@ -867,7 +867,8 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
             <input class="d-none" type="number" id="leer_iteraciones" value='.$c.' readonly>
             <input class="d-none" type="number" id="leer_facturacion" value="0" readonly>
           </table>
-        </div>';
+        </div>
+        ';
         return $total_abonos;
       }
       // Mostrar la diferencia existente entre los cargos y los abonos que tenemos por movimiento en una habitacion
