@@ -2135,6 +2135,7 @@ class Reservacion extends ConexionMYSql
                 }
             }else{
                 $nreserva=$nreserva+1;
+                if($cont>=$posicion & $cont<$final) {
                 echo'
                 <div class="card">
                     <div class="card-header" id="heading'.+$nreserva.'">
@@ -2179,6 +2180,7 @@ class Reservacion extends ConexionMYSql
                                         $this->construirTabla($fila, $agregar, $editar, $borrar, $ruta, $preasignar);
                                     }
                                     $id_reserva=$fila['id_reserva'];
+                }
             }
             echo'
             </div>';
