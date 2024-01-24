@@ -2893,11 +2893,7 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         if(document.getElementById("leer_apellido_sin_editar")){
             apellido_huesped_sin_editar= document.getElementById("leer_apellido_sin_editar").value;
         }
-        
 
-        //TODO agregar la comprobacion de la forma de garantia
-
-        
         var empresa_huesped= document.getElementById("empresa").value;
         var telefono_huesped= document.getElementById("telefono").value;
         var pais_huesped= document.getElementById("pais").value;
