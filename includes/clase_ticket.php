@@ -132,6 +132,12 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
+      function tickets_por_folio_casa($folio_casa){
+        $sentencia="SELECT * FROM `ticket` WHERE `mov`=$folio_casa";
+        $comentario="Consulta de tickets en un rango de fechas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
       function cambiar_estado_facturados($id){
         $sentencia="UPDATE ticket SET facturado = 1 WHERE id = $id";
         $comentario="cambio de estado en la columna de acturado";
