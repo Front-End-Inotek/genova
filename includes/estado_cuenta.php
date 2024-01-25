@@ -92,7 +92,7 @@
         <header class="main_container_title">
           <div>
           <h2>Estado de cuenta habitación: '.$hab->nombre.'</h2>';
-          echo'<h3>Folio casa: <span>'.$hab->mov.'</span> </h3>
+          echo'<h4>Folio casa: <span class="text-muted">'.$hab->mov.'</span> </h4>
             </div>
           ';
           $_SESSION['nombre_usuario']=$hab->nombre;
