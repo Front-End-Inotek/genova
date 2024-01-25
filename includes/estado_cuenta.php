@@ -91,6 +91,7 @@
       <div class="main_container">
         <header class="main_container_title">
           <h2>Estado de cuenta habitación: '.$hab->nombre.'</h2>';
+          echo'<p>Foli casa: '.$hab->mov.' </p>';
           $_SESSION['nombre_usuario']=$hab->nombre;
           if($faltante == 0){
             echo '<p></p>';
@@ -190,7 +191,7 @@
 
         </section>
 
-        <p>Foli casa: '.$fila['mov'].' </p>
+        
 
         <div class="row">
           <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
