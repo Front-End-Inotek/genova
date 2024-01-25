@@ -171,6 +171,7 @@
 							echo '
 							<li class="aside_ruta" onclick="factura_individual(); handleSiceTable();">Factura individual</li>
 							<li class="aside_ruta" onclick="factura_global_form(); handleSiceTable();">Factura global</li>
+							<li class="aside_ruta" onclick="folio_casa_form(); handleSiceTable();">Buscar Conceptos por folio casa</li>
 							<li class="aside_ruta" onclick="factura_cancelar(); handleSiceTable();">Cancelar factura</li>
 							<li class="aside_ruta" onclick="factura_buscar_fecha(); handleSiceTable();">Buscar factura por fecha</li>
 							<li class="aside_ruta" onclick="factura_buscar_folio(); handleSiceTable();">Buscar factura por folio</li>

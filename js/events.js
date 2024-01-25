@@ -7692,6 +7692,14 @@ function factura_global_form(){
     $("#area_trabajo_menu").load("includes/factura_global.php");
     closeNav();
 }
+function folio_casa_form(){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/busqueda_folio_casa.php");
+    closeNav();
+}
 function factura_cancelar(){
     //usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
@@ -7793,6 +7801,51 @@ function manejo_facturas(){
                 const totalInput = document.getElementById("total_factura_input");
                 const totalValue = totalInput.value; // Lee el valor del input
                 total.textContent = totalValue; // Actualiza el elemento con el valor total
+                btn.style.display = "block";
+                infoTotal.style.display = "block";
+            } ,
+        });
+    }
+}
+function manejo_facturas_folio_casa(){
+    const btn = document.querySelector("#btn_generar_factura");
+    const infoTotal = document.querySelector("#total_factura_global");
+    //const total = document.querySelector("#total_factura_global_number");
+    const folio_casa = document.getElementById("folio_casa").value;
+    //const fechaFin = document.getElementById("fecha_fin_factura").value;
+    btn.style.display = "none"
+    infoTotal.style.display = "none"
+
+    if (!folio_casa) {
+        swal({
+            title: "Falta fecha de inicio",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            dangerMode: true,
+        })
+        return
+    }else {
+        const contenedor = document.getElementById("contenedor-facturas");
+        datos = { folio_casa: folio_casa }
+            contenedor.innerHTML = `
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+            `;
+            $.ajax({
+                async:true,
+                type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url:"includes/buscar_folio_casa_facturar.php",
+            data:datos,
+            success: function(response){
+                contenedor.innerHTML = response;
+                const totalInput = document.getElementById("total_factura_input");
+                //const totalValue = totalInput.value; // Lee el valor del input
+                //total.textContent = totalValue; // Actualiza el elemento con el valor total
                 btn.style.display = "block";
                 infoTotal.style.display = "block";
             } ,
