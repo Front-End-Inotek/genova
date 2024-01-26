@@ -331,7 +331,7 @@
 				$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
 				if($permisos_reportes > 0 ){
 					echo '
-					<div class="aside_nav_link_container" onclick="ver_auditoria(); handleSiceTable();">
+					<div class="aside_nav_link_container" onclick="ver_nuevo_rack(); handleSiceTable();">
 						<img class="aside_nav_link" src="./assets/icons-nav/desarrollo.svg" />
 						<p class="aside_nav_link_text">Desarrollo</p>
 						<img class="aside_nav_link aside_nav_link_text arrow-link hide_arow" src="./assets/icons-nav/arrow-next.svg" />

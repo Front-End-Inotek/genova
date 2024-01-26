@@ -2595,6 +2595,15 @@ function ver_auditoria(){
 	closeNav();
 }
 
+function ver_nuevo_rack() {
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/rack.php");
+    closeModal();
+    closeNav()
+}
+
 function enviar_transacciones_correo(mov,abono,descripcion,forma_pago){
     var usuario_id=localStorage.getItem("id");
     var datos = {
