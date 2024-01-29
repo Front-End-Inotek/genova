@@ -1,54 +1,81 @@
 <?php
+    date_default_timezone_set('America/Mexico_City');
+    //se realizan las importaciones de los archivos que se van a requerir
+    include_once "clase_reservacion.php";
+    include_once "clase_hab.php";
+    $reservacion= NEW Reservacion(0);
+    $hab=NEW Hab(0);
+
+    //se llena una lista con los ids de cada una de las habitaciones que se tienen registradas y activas
+    $Habs=$hab->numero_de_hab();
+    $lIds=[];
+    while ($fila = mysqli_fetch_array($Habs)) {
+        array_push($lIds,$fila['id']);
+    }
+    $nIds=count($lIds);
+
+    //encabezado
     echo'
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap demo</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    </head>
-    <body>
-        <div class="accordion accordion-flush" id="accordionFlushExample">';
-        for($i=0; $i<=10; $i++){
-            echo'
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse'.+$i.'" aria-expanded="false" aria-controls="flush-collapse'.+$i.'">
-                    Accordion Item #1
-                    </button>
-                </h2>
-                <div id="flush-collapse'.+$i.'" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <table class="table table_expansion">
-                            <thead>
-                                <tr class="table-primary-encabezado text-center">
-                                <th>Número aqui</th>
-                                <th>Número Habitaciones</th>
-                                <th>Fecha Entrada</th>
-                                <th>Fecha Salida</th>
-                                <th>Nombre Huésped</th>
-                                <th>Noches</th>
-                                <!-- <th>No. Habitaciones</th> -->
-                                <th>Tarifa</th>
-                                <th>Precio Hospedaje</th>
-                                <th>Plan alimentos</th>
-                                <th>Extra Adulto</th>
-                                <!-- <th>Extra Junior</th> --->
-                                <!-- <th>Extra Infantil</th> --->
-                                <th>Extra Menor</th>
-                                <th>Total Estancia</th>
-                                <th>Total Pago</th>
-                                <th>Forma Pago</th>
-                                <!-- <th>Límite Pago</th> --->
-                                <th>Status</th>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>';
-            }
-            echo'
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    </body>
+    <h1>matriz</h1>
     ';
+
+    // se inicializan las matrices y se saca el tiempo unix del dia de hoy
+    $matriz=[];
+    $lHab=[];
+    $lDias=[];
+    $now = new DateTime();
+    $midnight = new DateTime($now->format('Y-m-d') . ' 00:00:00');
+    $unix_time = $midnight->getTimestamp();
+
+    //se llena una matriz vacia de nxm n son la cantidad de habitaciones activas m es el numero de dias
+    for($i=0; $i<=$nIds; $i++){
+        for($j=0; $j<=30; $j++){
+            array_push($lHab,"-");
+        }
+        array_push($matriz,$lHab);
+    }
+
+    //se crea una lista donde contiene los dias a partir del dia de hoy en tiempo unix con la finalidad de obtener el indice del dia
+    for ($i=0; $i<=100;$i++){
+        array_push($lDias,$unix_time);
+        $unix_time=$unix_time+86400;
+    }
+
+    //se realiza la consulta de las reservaciones y se asignan las reservaciones en la matriz segun el dia en que tiene la reserva
+    $reservaciones=$reservacion->reservas_por_hab();
+    while ($fila = mysqli_fetch_array($reservaciones)) {
+        //var_dump($fila);
+        $entrada=$fila['fecha_entrada'];
+        $salida=$fila['fecha_salida'];
+        $diferencia=$salida-$entrada;
+        $dias_reservados=$diferencia/86400;
+        //echo $dias_reservados;
+        $id_hab=$fila['id'];
+        $posicion = array_search($entrada, $lDias);
+        $datos = array(
+            "id" => $fila['id'],
+            "nombre" => $fila['nombre'],
+            "fecha_entrada" => $fila['fecha_entrada'],
+            "fecha_salida" => $fila['fecha_salida'],
+            "estado" => $fila['estado'],
+            "garantia" => $fila['garantia'],
+            "interno" => $fila['interno'],
+            "n_huesped" => $fila['n_huesped'],
+            "a_huesped" => $fila['a_huesped'],
+            "mov" => $fila['mov'],
+            "reserva_id" => $fila['reserva_id']
+        );
+        $json = json_encode($datos);
+        for ($i=0; $i<$dias_reservados; $i++){
+            $matriz[$id_hab-1][$posicion+$i]=$datos;
+        }
+    }
+
+    //funcion para imprimir la matiz
+    for($i=0; $i<=$nIds; $i++){
+        for($j=0; $j<=30; $j++){
+            var_dump($matriz[$i][$j]);
+        }
+        echo'<br>';
+    }
 ?>
