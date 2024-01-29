@@ -1261,6 +1261,139 @@ body {
   justify-content: space-evenly;
 }
 
+
+/* Estilos para el rack */
+
+.calenderMain {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.calenderHeader {
+  width: 100%;
+  height: auto;
+  margin-left: 1.0rem;
+  font-size: 0.5rem;
+  padding: 0.6rem 0 1.2rem 0;
+}
+.calenderHeader h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.8rem;
+}
+.contenedor_fechas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.task_calendario {
+  height: 36px;
+  width: 150px;
+  min-width: 150px;
+}
+.dia_calendario {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2px;
+  text-transform: capitalize;
+  opacity: 0.8;
+  border-right: 0.3px solid rgba(0, 0, 0, 0.164);
+}
+.calendario {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.calendario_habitacion{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 0.3px solid rgba(0, 0, 0, 0.164);
+}
+.diaTask {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center ;
+  /* border-right: 0.3px solid rgba(0, 0, 0, 0.164); */
+  /* border-top: 0.3px solid rgba(0, 0, 0, 0.164);
+  border-top: 0.3px solid rgba(0, 0, 0, 0.164); */
+  text-align: center;
+  transition: all ease-in-out 0.1s;
+  cursor: pointer;
+}
+.diaTask::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 25px;
+  border-color: transparent transparent transparent currentColor;
+  left: -25px;
+  /* margin-right: -0.3px; */ 
+  transform: rotate(45deg);
+  top: 11px;
+}
+/* Estados de las habitaciones */
+.diaTask_disponible {
+  background-color: #DBEDDB;
+  color: #DBEDDB;
+}
+.diaTask_disponible p {
+  color: #364D3E;
+  margin: 0;
+}
+.diaTask_disponible:hover {
+  background-color: #364D3E;
+  color: #364D3E;
+}
+.diaTask_disponible:hover p {
+  color: #DBEDDB;
+}
+.diaTask_ocupado {
+  background-color: #FFE2DD;
+  color: #FFE2DD;
+}
+.diaTask_ocupado p{
+  color: #703732;
+  margin: 0;
+}
+.diaTask_ocupado:hover {
+  background-color: #703732;
+  color: #703732;
+}
+.diaTask_ocupado:hover p {
+  color: #FFE2DD;
+}
+.diaTask_uso_casa {
+  background-color: #D3E5EF;
+  color: #D3E5EF;
+}
+.diaTask_uso_casa p {
+  color: #79AAC9;
+  margin: 0;
+}
+.diaTask_uso_casa:hover {
+  background-color: #79AAC9;
+  color: #79AAC9;
+}
+.diaTask_uso_casa:hover p {
+  color: #D3E5EF;
+  margin: 0;
+}
+
+
+/* .diaTask::after {
+  left: 100%;
+  margin-left: -0.3px; 
+} */
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {
