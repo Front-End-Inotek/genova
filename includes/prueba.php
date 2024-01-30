@@ -31,6 +31,7 @@
     $now = new DateTime();
     $midnight = new DateTime($now->format('Y-m-d') . ' 00:00:00');
     $unix_time = $midnight->getTimestamp();
+    $unix_today=$unix_time;
 
     //se llena una matriz vacia de nxm n son la cantidad de habitaciones activas m es el numero de dias
     for($i=0; $i<=$nIds; $i++){
@@ -45,6 +46,7 @@
         array_push($lDias,$unix_time);
         $unix_time=$unix_time+86400;
     }
+    //var_dump($unix_time);
 
     //se realiza la consulta de las reservaciones y se asignan las reservaciones en la matriz segun el dia en que tiene la reserva
     $reservaciones=$reservacion->reservas_por_hab();
@@ -52,7 +54,14 @@
         //var_dump($fila);
         $entrada=$fila['fecha_entrada'];
         $salida=$fila['fecha_salida'];
-        $diferencia=$salida-$entrada;
+        if ($unix_today>=$entrada){
+            $diferencia=$salida-$unix_today;
+            if ($diferencia==0){
+                $diferencia=86400;
+            }
+        }else{
+            $diferencia=$salida-$entrada;
+        }
         $dias_reservados=$diferencia/86400;
         //echo $dias_reservados;
         $id_hab=$fila['id'];
@@ -68,13 +77,20 @@
             "n_huesped" => $fila['n_huesped'],
             "a_huesped" => $fila['a_huesped'],
             "mov" => $fila['mov'],
-            "reserva_id" => $fila['reserva_id']
+            "reserva_id" => $fila['reserva_id'],
+            "dias_reservados" => $dias_reservados
         );
         for ($i=0; $i<$dias_reservados; $i++){
-            $matriz[$id_hab-1][$posicion+$i]=$datos;
+            if ($unix_today>=$entrada){
+                $matriz[$id_hab-1][$posicion+$i]=$datos;
+            }else{
+                $matriz[$id_hab-1][$posicion+$i+1]=$datos;
+            }
+            
         }
         $datos=[];
     }
+    //var_dump($matriz);
     //funcion para imprimir la matiz
     for($i=0; $i<$nIds; $i++){
         echo '<div class="rack_habitacion">';
@@ -83,11 +99,13 @@
             </div>';
         for($j=0; $j<=30; $j++){
             if ($matriz[$i][$j]!="-"){
-                //var_dump($matriz[$i][$j]);
+                $aux=$matriz[$i][$j]['dias_reservados'];
+                $anchura=150*($aux);
                 echo'
-                    <div class="task_calendario diaTask diaTask_ocupado diaTask_estado" >
+                    <div class="task_calendario diaTask diaTask_ocupado diaTask_estado " style="width:'.$anchura.'px !important">
                         <p>Ocupado</p>
                     </div>';
+                $j=$j+($aux-1);
             }
             else{
                 echo'
