@@ -43,16 +43,16 @@ const mostrarCalentario = () => {
         const divDia = document.createElement("div");
         divDia.classList.add("task_calendario");
         divDia.classList.add("dia_calendario");
-
         divDia.innerHTML = `<span>${dia.nombreDia} ${dia.numeroDia}</span>`;
-
         if(dia.nombreDia.toLocaleLowerCase() === "domingo") {
             divDia.style.backgroundColor = "rgba( 108, 139, 192, 0.2)"
         }
 
         dias.appendChild(divDia);
     })
+}
 
+const mostrarRackCalendario = () => {
     const habitaciones = document.getElementById("habitaciones");
 
     fetch("includes/prueba.php")
@@ -65,7 +65,6 @@ const mostrarCalentario = () => {
         })
 
     console.log("Mostrando rack")
-    
 }
 
 

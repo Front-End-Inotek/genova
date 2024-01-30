@@ -1287,6 +1287,17 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 110;
+  background-color: #F5F5F7;
+}
+.nombre_hab {
+  z-index: 100;
+  position: sticky;
+  left: 5.375rem;
+  background-color: #F5F5F7;
+  border-left: 4px solid blue;
 }
 .task_calendario {
   height: 36px;
@@ -1294,7 +1305,7 @@ body {
   min-width: 150px;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
 }
 .task_calendario p {
   margin: 0;

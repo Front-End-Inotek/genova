@@ -29,7 +29,8 @@ echo '
 <!-- <script src="js/rack.js"></script> -->
 <script>
     mostrarCalentario();
-    <!-- setInterval(mostrarCalentario, 5000); -->
+    mostrarRackCalendario();
+    setInterval(mostrarRackCalendario, 5000);
 </script>
 
 ';
