@@ -7,7 +7,7 @@ echo '
 
     <div class="calendario">
         <div class="contenedor_fechas" id="dias">
-            <div class="task_calendario" style="width: 225px;border-bottom: 0.3px solid rgba(0,0,0, 0.164); border-right: 0.3px solid rgba(0, 0, 0, 0.164)" ></div>
+            <div class="task_calendario_especial" ></div>
         </div>
         <div class="calendario_habitacion" id="habitaciones">
         <!-- 

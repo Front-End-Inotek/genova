@@ -1311,6 +1311,16 @@ body {
   align-items: center;
   justify-content: center;
 }
+.task_calendario_especial {
+  height: 36px;
+  width: 79px;
+  min-width: 79px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 0.3px solid rgba(0,0,0, 0.164);
+  border-right: 0.3px solid rgba(0, 0, 0, 0.164)
+}
 .task_calendario p {
   margin: 0;
 }
@@ -1323,6 +1333,7 @@ body {
   text-transform: capitalize;
   opacity: 0.8;
   border-right: 0.3px solid rgba(0, 0, 0, 0.164);
+  border-bottom: 0.3px solid rgba(0, 0, 0, 0.164);
 }
 .calendario {
   display: flex;
