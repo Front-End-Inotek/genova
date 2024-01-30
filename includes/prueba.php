@@ -10,11 +10,13 @@
     $Habs=$hab->numero_de_hab();
     $lIds=[];
     $lNombres=[];
-    $ltipo=[];
+    $lColor=[];
     while ($fila = mysqli_fetch_array($Habs)) {
         array_push($lIds,$fila['id']);
         array_push($lNombres,$fila['nombre']);
+        array_push($lColor, $fila['color']);
     }
+    //var_dump($lColor);
     $nIds=count($lIds);
 
     //encabezado
@@ -76,8 +78,8 @@
     //funcion para imprimir la matiz
     for($i=0; $i<$nIds; $i++){
         echo '<div class="rack_habitacion">';
-        echo'<div class="task_calendario nombre_hab" >
-                <p>Habitacion '.$lNombres[$i].' </p>
+        echo'<div class="task_calendario" >
+                <p>Habitacion '.$lNombres[$i].$lColor[$i].' </p>
             </div>';
         for($j=0; $j<=30; $j++){
             if ($matriz[$i][$j]!="-"){
