@@ -1298,6 +1298,10 @@ body {
   left: 5.375rem;
   background-color: #F5F5F7;
   border-left: 4px solid blue;
+  text-align: center;
+}
+.nombre_hab p {
+  margin: 0;
 }
 .task_calendario {
   height: 36px;
