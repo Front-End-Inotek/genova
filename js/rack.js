@@ -1,3 +1,4 @@
+
 const mostrarCalentario = () => {
     //Fecha hoy
     const fechaHoy = document.getElementById("fecha_hoy");
@@ -38,6 +39,7 @@ const mostrarCalentario = () => {
     const dias = document.getElementById("dias")
 
     diasArray.map(dia => {
+
         const divDia = document.createElement("div");
         divDia.classList.add("task_calendario");
         divDia.classList.add("dia_calendario");
@@ -51,7 +53,19 @@ const mostrarCalentario = () => {
         dias.appendChild(divDia);
     })
 
-}
+    const habitaciones = document.getElementById("habitaciones");
 
+    fetch("includes/prueba.php")
+        .then(response => response.text())
+        .then(data => {
+            habitaciones.innerHTML = data;
+        })
+        .catch(error => {
+            console.error("Error en la solicitud:", error)
+        })
+
+    console.log("Mostrando rack")
+    
+}
 
 

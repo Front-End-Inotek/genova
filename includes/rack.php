@@ -9,7 +9,8 @@ echo '
         <div class="contenedor_fechas" id="dias">
             <div class="task_calendario" style="width: 225px;border-bottom: 0.3px solid rgba(0,0,0, 0.164); border-right: 0.3px solid rgba(0, 0, 0, 0.164)" ></div>
         </div>
-        <div class="calendario_habitacion">
+        <div class="calendario_habitacion" id="habitaciones">
+        <!-- 
             <div class="task_calendario" >Habitacion 1</div>
             <div class="task_calendario diaTask diaTask_disponible" >
                 <p>Disponible</p>
@@ -20,14 +21,16 @@ echo '
             <div class="task_calendario diaTask diaTask_uso_casa" >
                 <p>Uso casa</p>
             </div>
-            
-            
+        -->
         </div>
         
 </main>
 
 <!-- <script src="js/rack.js"></script> -->
-<script>mostrarCalentario()</script>
+<script>
+    mostrarCalentario();
+    <!-- setInterval(mostrarCalentario, 5000); -->
+</script>
 
 ';
 

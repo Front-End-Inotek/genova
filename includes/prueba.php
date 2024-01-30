@@ -9,15 +9,18 @@
     //se llena una lista con los ids de cada una de las habitaciones que se tienen registradas y activas
     $Habs=$hab->numero_de_hab();
     $lIds=[];
+    $lNombres=[];
+    $ltipo=[];
     while ($fila = mysqli_fetch_array($Habs)) {
         array_push($lIds,$fila['id']);
+        array_push($lNombres,$fila['nombre']);
     }
     $nIds=count($lIds);
 
     //encabezado
-    echo'
+    /* echo'
     <h1>matriz</h1>
-    ';
+    '; */
 
     // se inicializan las matrices y se saca el tiempo unix del dia de hoy
     $matriz=[];
@@ -65,17 +68,35 @@
             "mov" => $fila['mov'],
             "reserva_id" => $fila['reserva_id']
         );
-        $json = json_encode($datos);
         for ($i=0; $i<$dias_reservados; $i++){
             $matriz[$id_hab-1][$posicion+$i]=$datos;
         }
+        $datos=[];
+    }
+    //funcion para imprimir la matiz
+    for($i=0; $i<$nIds; $i++){
+        echo '<div class="rack_habitacion">';
+        echo'<div class="task_calendario" >
+                <p>Habitacion '.$lNombres[$i].' </p>
+            </div>';
+        for($j=0; $j<=30; $j++){
+            if ($matriz[$i][$j]!="-"){
+                //var_dump($matriz[$i][$j]);
+                echo'
+                    <div class="task_calendario diaTask diaTask_ocupado diaTask_estado" >
+                        <p>Ocupado</p>
+                    </div>';
+            }
+            else{
+                echo'
+                    <div class="task_calendario diaTask diaTask_disponible" >
+                        <p></p>
+                    </div>';
+            }
+            
+        }
+        echo '</div>';
     }
 
-    //funcion para imprimir la matiz
-    for($i=0; $i<=$nIds; $i++){
-        for($j=0; $j<=30; $j++){
-            var_dump($matriz[$i][$j]);
-        }
-        echo'<br>';
-    }
+    /* echo json_encode($matriz) */
 ?>

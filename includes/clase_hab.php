@@ -862,7 +862,7 @@
         // return $cantidad;
       }
       function numero_de_hab(){
-        $sentencia = "SELECT id FROM hab WHERE  estado_hab = '1'";
+        $sentencia = "SELECT id, nombre, tipo FROM hab WHERE  estado_hab = '1'";
         $comentario="Obtengo el total de habitaciones";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

@@ -1292,6 +1292,12 @@ body {
   height: 36px;
   width: 150px;
   min-width: 150px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+.task_calendario p {
+  margin: 0;
 }
 .dia_calendario {
   display: flex;
@@ -1311,6 +1317,11 @@ body {
 }
 .calendario_habitacion{
   display: flex;
+  flex-direction: column;
+  border-bottom: 0.3px solid rgba(0, 0, 0, 0.164);
+}
+.rack_habitacion {
+  display: flex;
   flex-direction: row;
   border-bottom: 0.3px solid rgba(0, 0, 0, 0.164);
 }
@@ -1324,7 +1335,7 @@ body {
   /* border-top: 0.3px solid rgba(0, 0, 0, 0.164);
   border-top: 0.3px solid rgba(0, 0, 0, 0.164); */
   text-align: center;
-  transition: all ease-in-out 0.1s;
+  /* ransition: all ease-in-out 0.1s; */
   cursor: pointer;
 }
 .diaTask::before {
@@ -1340,6 +1351,17 @@ body {
   /* margin-right: -0.3px; */ 
   transform: rotate(45deg);
   top: 11px;
+}
+.diaTask_estado::after{
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: -42px;
+  width: 50px;
+  height: 0.2px;
+  background-color: #d1d1d1;
+  /* transform: translateY(-50%); */
+  rotate: -45deg;
 }
 /* Estados de las habitaciones */
 .diaTask_disponible {
