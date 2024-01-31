@@ -5241,6 +5241,7 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
     var usuario_id=localStorage.getItem("id");
     var descripcion= encodeURI(document.getElementById("descripcion").value);
     var cargo= document.getElementById("cargo").value;
+    var observaciones=document.getElementById("observaciones").value;
     if(cargo.length > 10){
         alert("Cantidad debe de ser menor a 10 digitos")
         return
@@ -5256,6 +5257,7 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
             "usuario_id": usuario_id,
             "mov":mov,
             "id_maestra":id_maestra,
+            "observaciones":observaciones,
             };
         $.ajax({
             async:true,
@@ -5304,6 +5306,7 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
     var forma_pago= document.getElementById("forma_pago").value;
     var cargo= document.getElementById("cargo").value;
     var abono= document.getElementById("abono").value;
+    var observaciones= document.getElementById("observaciones").value;
     var fp_txt = $("#forma_pago option:selected").text();
     // console.log(fp_txt)
     // return
@@ -5320,6 +5323,7 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
                 "usuario_id": usuario_id,
                 "mov":mov,
                 "id_maestra":id_maestra,
+                "observaciones":observaciones,
             };
         //  console.log(datos)
         //  return

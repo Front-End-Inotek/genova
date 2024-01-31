@@ -58,6 +58,12 @@
             <label for="cargo">Cargo</label>
           </div>
         </div>
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input type="text" class="form-control custom_input" id="observaciones" placeholder="Ingresa observacion" maxlength="100" ">
+            <label for="cargo">Observaciones</label>
+          </div>
+        </div>
 
       </div>
 

@@ -132,6 +132,8 @@ function mandartimbre (){
 
     var tabla = document.createElement("div");
     var total = document.createElement("div");
+    var forma_pago = document.getElementById("forma_pago").value;
+    var metodopago = document.getElementById("metodopago").value;
     var LCatidad=[];
     var LDescipcion=[];
     var LPrecio=[];
@@ -202,7 +204,7 @@ function mandartimbre (){
     if(tipo_de_factura==1){
         xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte, true);
     }else{
-        xhr.open('POST', 'includes/timbrar_factura.php', true);
+        xhr.open('POST', 'includes/timbrar_factura.php?forma_pago='+forma_pago+'&metodopago='+metodopago, true);
     }
     //FormData interpretara los datos del formulario
     var formData = new FormData(form);
