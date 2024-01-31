@@ -38,6 +38,7 @@
   }else{
     $efectivo_pago= 0;
   }
+  $_SESSION['observaciones']=$_POST['observaciones'];
   // Guardamos el ticket del abono correspondiente y el log
   $tipo_cargo= 3; // Corresponde al cargo de hospedaje sin comida
   $resta= 0;
@@ -56,7 +57,7 @@
   }else{
     $ticket_id= $ticket->guardar_ticket($mov,$_POST['hab_id'],$_POST['usuario_id'],$_POST['forma_pago'],$_POST['abono'],0,0,$_POST['abono'],0,0,$factuar,'','',$nueva_etiqueta,$resta,$comanda,0,$rest);
   }
-  $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono'],$ticket_id,$_POST['observaciones']);
+  $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$_POST['forma_pago'],$faltante,$_POST['abono'],$ticket_id);
   $concepto->guardar_concepto($ticket_id,$_POST['usuario_id'],$nombre_concepto,$cantidad,$_POST['abono'],($_POST['abono']*$cantidad),$efectivo_pago,$_POST['forma_pago'],$tipo_cargo,$categoria);
   // Imprimir ticket
   if($config->ticket_restaurante == 0){

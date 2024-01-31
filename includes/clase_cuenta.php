@@ -100,7 +100,13 @@
 
 
       // Guardar la cuenta
-      function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono,$id_ticket=1,$observacion=""){
+      function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono,$id_ticket=1){
+        if (isset($_SESSION['observaciones'])) {
+          $observacion=$_SESSION['observaciones'];
+          unset($_SESSION['observaciones']);
+        }else{
+          $observacion="";
+        }
         $fecha=time();
         $descripcion = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
         $sentencia = "INSERT INTO `cuenta` (`id_usuario`,`id_ticket`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`,`observacion`)

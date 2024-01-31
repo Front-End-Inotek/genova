@@ -1,4 +1,5 @@
 <?php
+  session_start();
   date_default_timezone_set('America/Mexico_City');
   include_once('clase_configuracion.php');
   include_once("clase_cuenta.php");
@@ -6,6 +7,7 @@
   include_once("clase_inventario.php");
   include_once("clase_ticket.php");
   include_once("clase_log.php");
+  $_SESSION['observaciones']=$_POST['observaciones'];
   $config = NEW Configuracion();
   $cuenta= NEW Cuenta(0);
   $concepto= NEW Concepto(0);
@@ -30,7 +32,7 @@
   $forma_pago = $cuenta->obtener_id_pago();
   $nombre= $hab->nombre;
   $faltante= 0;//$_POST['faltante']
-  $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$forma_pago,$_POST['cargo'],$faltante);
+  $cuenta->guardar_cuenta($_POST['usuario_id'],$mov,urldecode($_POST['descripcion']),$forma_pago,$_POST['cargo'],$faltante,$_POST['observaciones']);
   $logs->guardar_log($_POST['usuario_id'],"Agregar cargo hab: ". $_POST['hab_id']  ." usuario:" .$_POST['usuario_id']);
   echo $_POST['hab_id']."/".$_POST['estado']."/".$mov."/".$id_maestra;
 ?>
