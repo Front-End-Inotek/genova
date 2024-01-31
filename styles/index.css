@@ -392,12 +392,12 @@ body {
   background-color: #FBF9F8;
   color: #BB846C;
 }
-/* .ocupado{
+.ocupado{
   background-color: #FEF8F7;
   color: #E16F64;
   content: "";
 }
-.ocupado::after {
+/* .ocupado::after {
   display: block;
   margin: 0 auto;
   width: 0;
@@ -405,7 +405,7 @@ body {
   border-color: black black transparent transparent;
   border-style: solid;
   border-width: 60px;
-} */
+}  */
 .ocupado_sucia{
   background-color: #ffece8;
   color: #f15446;
