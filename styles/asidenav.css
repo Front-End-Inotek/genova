@@ -36,13 +36,26 @@
     cursor: pointer;
     overflow: hidden;
 }
+.aside_nav_username {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 80%;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.aside_nav_username p {
+    margin: 0;
+}
 .aside_nav_menu_hamburger {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     width: 80%;
+    text-align: center;
 }
+
 .aside_nav_menu_switch_container{
     display: none;
 }

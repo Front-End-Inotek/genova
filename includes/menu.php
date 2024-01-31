@@ -6,6 +6,7 @@
 			$usuario =  NEW Usuario($_GET['id']);
 			$usuario->datos($_GET['id']);
 			$tiempo=time();
+			$nombreUsuario = $usuario->nombre_completo;
 
 			if($_GET['token']== $usuario->token & $usuario->fecha_vencimiento>=$tiempo & $usuario->activo=1 ){
 			echo '
@@ -15,6 +16,10 @@
 						<img class="aside_nav_logo_img" src="./images/nuve.png"/>
 						<p class="aside_nav_logo_link">VISIT</p>
 					</a>
+				</div>
+				<div class="aside_nav_username d-none" id="nombreNav">
+					<p>Bienvenido!</p>
+					<p class="text-secondary" >'.$nombreUsuario.'</p>
 				</div>
 				<div class="aside_nav_menu_hamburger" >
 					<img class="aside_menu_hamburger" src="./assets/icons-nav/burger.svg" onclick="handleSiceTable()"/>
