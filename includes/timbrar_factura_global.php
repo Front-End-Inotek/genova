@@ -34,6 +34,8 @@ $importeuni = $_POST['importeuni'];
 $importe = $_POST['importe'];
 $iva = $_POST['iva'];
 $ish = $_POST['ish'];
+$forma_pago=$_GET['forma_pago'];
+$metodopago=$_GET['metodopago'];
 
 $rimporte = $_POST['rimporte'];
 //echo $rimporte;
@@ -81,9 +83,9 @@ $datos['factura']['condicionesDePago'] = 'CONDICIONES';
 $datos['factura']['descuento'] = '0.00';
 $datos['factura']['fecha_expedicion'] = date('Y-m-d\TH:i:s', time() - 120);
 $datos['factura']['folio'] = $numfolio;    //BASE DE DATOS
-$datos['factura']['forma_pago'] = '01';    //RFC
+$datos['factura']['forma_pago'] = $forma_pago;    //RFC
 $datos['factura']['LugarExpedicion'] = $row['codigo_postal'];    //CODIGO POSTAL
-$datos['factura']['metodo_pago'] = "PUE";    //METODO DE PAGO
+$datos['factura']['metodo_pago'] = $metodopago;    //METODO DE PAGO
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = $rimporte;  //TOTAL DE IMPORTE

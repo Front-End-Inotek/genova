@@ -62,8 +62,8 @@
 
           <h3>NOTA: Es importante referir su pago ya sea deposito u transferencia con nombre de huesped y numero de reservacion al igual muy importante enviar comprobante de pago a los siguientes correos:</h3>
 
-          <p>reserva@hotelesabastos.mx</p>
-          <p>ventas@hotelesabastos.mx</p>
+          <p>reserva@hotelabastos.mx</p>
+          <p>ventas@hotelabastos.mx</p>
 
           <h3>PÓLITICA DE GARANTÍA</h3>
           <ul>

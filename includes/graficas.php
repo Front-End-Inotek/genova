@@ -2,6 +2,7 @@
 include_once('clase_usuario.php');
 $usuario_id = $_GET['usuario_id'];
 $usuario = new Usuario($usuario_id);
+$nombreUsuario = $usuario->nombre_completo;
 
 if($usuario->nivel !=0){
     die();
@@ -12,6 +13,7 @@ echo '
         <div class="main_info">
             <main class="contenedor__graficas-main">
                 <h1 class="title"> Visit Dashboard</h1>
+                <p class="info text-muted"> Bienvendio <span class="text-primary">'.$nombreUsuario.'</span> </p>
                 <p class="info"> Aqui es donde puedes ver que es lo que esta pasando en tu negocio ahora mismo </p>
                 <p class="subtitle"> Total de ocupación año actual</p>
                 <hr/>

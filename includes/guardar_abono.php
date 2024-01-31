@@ -38,6 +38,7 @@
   }else{
     $efectivo_pago= 0;
   }
+  $_SESSION['observaciones']=$_POST['observaciones'];
   // Guardamos el ticket del abono correspondiente y el log
   $tipo_cargo= 3; // Corresponde al cargo de hospedaje sin comida
   $resta= 0;
