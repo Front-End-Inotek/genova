@@ -1,5 +1,5 @@
 
-const mostrarCalentario = () => {
+function mostrarCalentario  ()  {
     //Fecha hoy
     const fechaHoy = document.getElementById("fecha_hoy");
     const obtenerNombreMesYAno = (fecha) => {
@@ -52,7 +52,20 @@ const mostrarCalentario = () => {
     })
 }
 
-const mostrarRackCalendario = () => {
+
+
+function mostrarRackCalendario () {
+
+    const marcador = document.getElementById("calendario_marcador");
+
+    if( !marcador ) {
+        console.log("Ya no esta en el calendario");
+        clearInterval(window.intervalRackCalendario);
+        return null;
+    }
+
+    console.log("Mostrando rack")
+
     const habitaciones = document.getElementById("habitaciones");
 
     fetch("includes/prueba.php")
@@ -64,7 +77,12 @@ const mostrarRackCalendario = () => {
             console.error("Error en la solicitud:", error)
         })
 
-    console.log("Mostrando rack")
 }
+
+mostrarCalentario();
+
+mostrarRackCalendario();
+
+window.intervalRackCalendario = setInterval(mostrarRackCalendario, 5000);
 
 

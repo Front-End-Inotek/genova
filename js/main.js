@@ -34,10 +34,10 @@ function ocultar_animacion() {
 }
 
 function mostrar_animacion() {
-    document.getElementById("animacion_formulario").style.display='block';
-    //document.getElementById("animacion_timbrar").style.display='block';
+    document.getElementById("animacion_formulario").style.display='flex';
+    //document.getElementById("animacion_timbrar").style.display='none';
     document.getElementById("timbrar").style.display='none';
-    document.getElementById("dinamic").style.display='none';
+    document.getElementById("dinamic").style.display='block';
 }
 
 function factura_global (){

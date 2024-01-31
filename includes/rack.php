@@ -1,6 +1,11 @@
 <?php
 echo '
 <main class="calenderMain">
+
+    <div class="d-none" id="calendario_marcador" >
+        <h1>hola</h1>
+    </div>
+
     <header class="calenderHeader">
         <h1 id="fecha_hoy"></h1>
     </header>
@@ -26,12 +31,14 @@ echo '
         
 </main>
 
-<!-- <script src="js/rack.js"></script> -->
-<script>
+<script src="js/rack.js"></script>
+<!-- <script>
     mostrarCalentario();
     mostrarRackCalendario();
     setInterval(mostrarRackCalendario, 5000);
 </script>
+
+-->
 
 ';
 

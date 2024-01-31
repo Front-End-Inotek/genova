@@ -1437,11 +1437,19 @@ body {
   margin: 0;
 }
 
+#animacion_formulario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* .diaTask::after {
   left: 100%;
   margin-left: -0.3px; 
 } */
+
+
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {

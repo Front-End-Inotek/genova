@@ -98,7 +98,7 @@
                 <p>Hab. '.$lNombres[$i].' </p>
             </div>';
         for($j=0; $j<=30; $j++){
-            if ($matriz[$i][$j]!="-"){
+            if ($matriz[$i][$j] !="-"){
                 $aux=$matriz[$i][$j]['dias_reservados'];
                 $anchura=150*($aux);
                 echo'
