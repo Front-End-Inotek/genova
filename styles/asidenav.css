@@ -38,15 +38,25 @@
 }
 .aside_nav_username {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
+    justify-content: center;
     width: 80%;
-    margin-bottom: 15px;
-    font-weight: 600;
+    /* max-width: 200px; */
+    margin-bottom: 10px;
+    font-weight: 500;
+    gap: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: none;
 }
 .aside_nav_username p {
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
 .aside_nav_menu_hamburger {
     display: flex;
     flex-direction: row;

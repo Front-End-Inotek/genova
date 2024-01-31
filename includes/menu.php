@@ -18,8 +18,7 @@
 					</a>
 				</div>
 				<div class="aside_nav_username d-none" id="nombreNav">
-					<p>Bienvenido!</p>
-					<p class="text-secondary" >'.$nombreUsuario.'</p>
+					<p>Bienvenido! <span class="text-secondary" >'.$nombreUsuario.'</span></p>
 				</div>
 				<div class="aside_nav_menu_hamburger" >
 					<img class="aside_menu_hamburger" src="./assets/icons-nav/burger.svg" onclick="handleSiceTable()"/>
