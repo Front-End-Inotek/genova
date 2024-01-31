@@ -100,11 +100,11 @@
 
 
       // Guardar la cuenta
-      function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono,$id_ticket=1){
+      function guardar_cuenta($usuario_id,$mov,$descripcion,$forma_pago,$cargo,$abono,$id_ticket=1,$observacion=""){
         $fecha=time();
         $descripcion = htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8');
-        $sentencia = "INSERT INTO `cuenta` (`id_usuario`,`id_ticket`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
-        VALUES ('$usuario_id','$id_ticket' ,'$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1');";
+        $sentencia = "INSERT INTO `cuenta` (`id_usuario`,`id_ticket`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`,`observacion`)
+        VALUES ('$usuario_id','$id_ticket' ,'$mov', '$descripcion', '$fecha', '$forma_pago', '$cargo', '$abono', '1', '$observacion');";
         $comentario="Guardamos la cuenta en la base de datos";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }

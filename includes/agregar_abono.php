@@ -76,7 +76,12 @@
           <label for="abono">Abono</label>
         </div>
         </div>
-      
+        <div class="inputs_form_container">
+          <div class="form-floating input_container">
+            <input type="text" class="form-control custom_input" id="observaciones" placeholder="Ingresa comentario" maxlength="100"">
+            <label for="Observaciones">Observaciones</label>
+          </div>
+        </div>
       </div>
     <div>
 
