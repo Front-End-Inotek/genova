@@ -445,7 +445,7 @@
         return $consulta;
       }
       function mostrarCuentaUsuario($id_usuario,$forma_pago){
-        $sentencia="SELECT  cuenta.fecha, reservacion.id as fcasa,hab.nombre as hab_nombre, cuenta.descripcion, cuenta.cargo, cuenta.abono, usuario.usuario,
+        $sentencia="SELECT  cuenta.fecha, reservacion.id as fcasa,hab.nombre as hab_nombre, cuenta.descripcion, cuenta.cargo, cuenta.abono, usuario.usuario,cuenta.observacion,
         cm.nombre as cm_nombre
         from cuenta
         inner join movimiento on cuenta.mov = movimiento.id
