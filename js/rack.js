@@ -1,4 +1,4 @@
-
+console.log("hola")
 function mostrarCalentario  ()  {
     //Fecha hoy
     const fechaHoy = document.getElementById("fecha_hoy");
@@ -64,7 +64,7 @@ function mostrarRackCalendario () {
         return null;
     }
 
-    console.log("Mostrando rack")
+    console.log("Mostrando rackkk")
 
     const habitaciones = document.getElementById("habitaciones");
 
@@ -83,6 +83,6 @@ mostrarCalentario();
 
 mostrarRackCalendario();
 
-window.intervalRackCalendario = setInterval(mostrarRackCalendario, 5000);
+window.intervalRackCalendario = setInterval(mostrarRackCalendario, 500000);
 
 

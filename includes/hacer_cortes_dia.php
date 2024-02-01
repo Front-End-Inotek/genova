@@ -191,7 +191,8 @@
                         }else{
                           echo '<tr class="table text-center">';
                         }
-                          echo '<td>'.$forma_pago->obtener_descripcion($z).'</td>
+                          echo '
+                          <td>'.$forma_pago->obtener_descripcion($z).' </td>
                           <td>$'.number_format($inf->total_pago[$z-1], 2).'</td>
                         </tr>';
                     }

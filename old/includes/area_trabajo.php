@@ -3,6 +3,7 @@
   include ("informacion.php");
   $saber = NEW Informacion();//
   $estatus_hab="";
+
   //si hay un filtro
   if(isset($_GET['estatus_hab'])){
     if($_GET['estatus_hab']!="")

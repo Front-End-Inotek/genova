@@ -101,16 +101,58 @@
             if ($matriz[$i][$j] !="-"){
                 $aux=$matriz[$i][$j]['dias_reservados'];
                 $anchura=150*($aux);
+
+                $estadoHab = "vacia_sucia";
+                //Switch para el estado de la habitacion 
+                switch ($estadoHab) {
+                    case "ocupado":
+                        $estadoCss = "diaTask_ocupado";
+                        $estado = "Ocupado";
+                        $icono = '
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                </svg>';
+                        break;
+                    case "uso_casa":
+                        $estadoCss = "diaTask_uso_casa";
+                        $estado = "Uso casa";
+                        $icono = '
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                                    <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+                                </svg>';
+                        break;
+                    case "vacia_sucia":
+                        $estadoCss = "diaTask_vacia_sucia";
+                        $estado = "Vacia sucia";
+                        $icono = '
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                </svg>';
+                        break;
+
+                }
+
                 echo'
-                    <div class="task_calendario diaTask diaTask_ocupado diaTask_estado " style="width:'.$anchura.'px !important">
-                        <p>Ocupado</p>
+                    <div class="task_calendario diaTask diaTask_estado '.$estadoCss.' " style="width:'.$anchura.'px !important">
+                        <div class="task_calendario_status">
+                            <p>'.$icono.'</p>
+                            <p>Jose Figueroa</p>
+                        </div>
+                        <div class="task_calendario_status">
+                            <p>'.$estado.'</p>
+                        </div>
                     </div>';
                 $j=$j+($aux-1);
             }
             else{
                 echo'
                     <div class="task_calendario diaTask diaTask_disponible" >
-                        <p></p>
+                        <div class="task_calendario_status">
+                            <p>Agregar</p>
+                        </div>
                     </div>';
             }
             

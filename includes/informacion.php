@@ -4,6 +4,7 @@ date_default_timezone_set('America/Mexico_City');
 include_once('consulta.php');
 include_once("clase_info_mesas.php");
 
+
 class Informacion extends ConexionMYSql
 {
     const INTERNO_SUCIA ="sucia";

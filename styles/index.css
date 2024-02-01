@@ -204,8 +204,8 @@ body {
     position: fixed;
     width: 100%;
     height: auto;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -220,7 +220,7 @@ body {
     color: rgba(0, 0, 0, 0.8);
     text-align: center;
     flex-wrap: wrap;
-    overflow: scroll;
+    overflow: auto;
     z-index: 110;
 }
 .footerContainerText {
@@ -1299,6 +1299,7 @@ body {
   background-color: #F5F5F7;
   border-left: 4px solid blue;
   text-align: center;
+  border-right: 0.3px solid rgba(0, 0, 0, 0.164) !important;
 }
 .nombre_hab p {
   margin: 0;
@@ -1310,6 +1311,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .task_calendario_especial {
   height: 36px;
@@ -1323,6 +1325,9 @@ body {
 }
 .task_calendario p {
   margin: 0;
+}
+.task_calendario_status_icon{
+  width: 14px;
 }
 .dia_calendario {
   display: flex;
@@ -1355,7 +1360,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center ;
   /* border-right: 0.3px solid rgba(0, 0, 0, 0.164); */
   /* border-top: 0.3px solid rgba(0, 0, 0, 0.164);
@@ -1363,6 +1368,7 @@ body {
   text-align: center;
   /* ransition: all ease-in-out 0.1s; */
   cursor: pointer;
+  font-size: 13px;
 }
 .diaTask::before {
   content: "";
@@ -1389,13 +1395,21 @@ body {
   /* transform: translateY(-50%); */
   rotate: -45deg;
 }
+.task_calendario_status{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 95%;
+  gap: 2px;
+}
 /* Estados de las habitaciones */
+/* Disponible */
 .diaTask_disponible {
-  background-color: #DBEDDB;
-  color: #DBEDDB;
+  background-color: #F5F5F7;
+  color: #F5F5F7;
 }
 .diaTask_disponible p {
-  color: #364D3E;
+  color: #F5F5F7;
   margin: 0;
 }
 .diaTask_disponible:hover {
@@ -1405,6 +1419,7 @@ body {
 .diaTask_disponible:hover p {
   color: #DBEDDB;
 }
+/* Ocupada  */
 .diaTask_ocupado {
   background-color: #FFE2DD;
   color: #FFE2DD;
@@ -1420,6 +1435,7 @@ body {
 .diaTask_ocupado:hover p {
   color: #FFE2DD;
 }
+/* Uso casa */
 .diaTask_uso_casa {
   background-color: #D3E5EF;
   color: #D3E5EF;
@@ -1434,6 +1450,74 @@ body {
 }
 .diaTask_uso_casa:hover p {
   color: #D3E5EF;
+  margin: 0;
+}
+/* Vacia Sucia */
+.diaTask_vacia_sucia {
+  background-color: #EEE0DA;
+  color: #EEE0DA;
+}
+.diaTask_vacia_sucia p {
+  color: #5D4236;
+  margin: 0;
+}
+.diaTask_vacia_sucia:hover {
+  background-color: #5D4236;
+  color: #5D4236;
+}
+.diaTask_vacia_sucia:hover p {
+  color: #EEE0DA;
+  margin: 0;
+}
+/* Limpieza */
+.diaTask_limpieza {
+  background-color: #D3E5EF;
+  color: #D3E5EF;
+}
+.diaTask_limpieza p {
+  color: #6199BD;
+  margin: 0;
+}
+.diaTask_limpieza:hover {
+  background-color: #6199BD;
+  color: #6199BD;
+}
+.diaTask_limpieza:hover p {
+  color: #D3E5EF;
+  margin: 0;
+}
+/* Mantenimiento */
+.diaTask_mantenimiento {
+  background-color: #FDECC8;
+  color: #FDECC8;
+}
+.diaTask_mantenimiento p {
+  color: #654A19;
+  margin: 0;
+}
+.diaTask_mantenimiento:hover {
+  background-color: #654A19;
+  color: #654A19;
+}
+.diaTask_mantenimiento:hover p {
+  color: #FDECC8;
+  margin: 0;
+}
+/* Bloqueado */
+.diaTask_bloqueado {
+  background-color: #D9D9D9;
+  color: #D9D9D9;
+}
+.diaTask_bloqueado p {
+  color: #484847;
+  margin: 0;
+}
+.diaTask_bloqueado:hover {
+  background-color: #484847;
+  color: #484847;;
+}
+.diaTask_bloqueado:hover p {
+  color: #D9D9D9;
   margin: 0;
 }
 
