@@ -56,6 +56,7 @@
                 $fila_atras="";
                 $total_cargos=0;
                 $total_abonos=0;
+                $total_general_cargos=0;
                 $total_general=0;
                 echo '<tr class="table">';
                 foreach ($forma_pago->formas_pagos() as $key => $pago) {
@@ -77,11 +78,12 @@
                     <td>'.$hab_nombre.'</td>
                     <td>'.$fila['descripcion'].'</td>
                     <td>'.$fila['observacion'].'</td>
-                    <td>'.$fila['cargo'].'</td>
-                    <td>'.$fila['abono'].'</td>
+                    <td>$'.number_format($fila['cargo'],2).'</td>
+                    <td>$'.number_format($fila['abono'],2).'</td>
                     <td>'.$fila['usuario'].'</td>
                     </tr>
                     ';
+                    $total_cargos+=$fila['cargo'];
                     $total_abonos+=$fila['abono'];
                 }
                 echo '<tr class="table  text-center">
@@ -89,15 +91,16 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
                 <td>Total posteo:</td>
-                <td>$0.00</td>
+                <td>$'.number_format($total_cargos,2).'</td>
                 <td>$'.number_format($total_abonos,2).'</td>
                 <td></td>
                 </tr>
                 ';
+                $total_general_cargos+=$total_cargos;
                 $total_general+=$total_abonos;
                 $total_abonos=0;
+                $total_cargos=0;
                 }
                
             }
@@ -106,9 +109,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
             <td>Total:</td>
-            <td>$0.00</td>
+            <td>$'.number_format($total_general_cargos,2).'</td>
             <td>$'.number_format($total_general,2).'</td>
             <td></td>
             </tr>
