@@ -102,6 +102,16 @@
 	  $forma_pago = NEW Forma_pago(0);
 	  //$cantidad= $forma_pago->total_elementos();
 	  $cantidad= 10;
+
+	  $diccionario_totales=array();
+	  $sentencia ="SELECT * from forma_pago  WHERE estado=1";
+	  $comentario="Obtener id de las formas de pago";
+	  $consulta= $this->realizaConsulta($sentencia,$comentario);
+	  while ($fila = mysqli_fetch_array($consulta))
+	  {
+		$diccionario_totales[$fila["id"]]=0;
+	}
+		//var_dump($diccionario_totales);
 	  $pago= array();
 	  for($z=0 ; $z<$cantidad; $z++){
 		$pago[$z]= 0;
@@ -114,86 +124,19 @@
        AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
 	   AND ticket.id_usuario =$id_usuario
 	   ";//1 
+	   //echo $sentencia;
 	  //$sentencia = "SELECT * FROM concepto WHERE id_ticket >= $id_usuario AND id_ticket <= $id_fin AND activo = 1";
 	//  echo $sentencia;
 	  $comentario="Obtener el total de dinero ingresado";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
-	  {
-		  // Se va sumando el monto de las diferentes formas de pago
-		  switch($fila['forma_pago']){
-			  case 1:
-				  //if($fila['pago'] > 0)
-				  $pago[0]= $pago[0] + ($fila['pago'] - $fila['cambio']);// pago
-				  break;
-			  case 2:
-				  $pago[1]= $pago[1] + $fila['monto'];// total
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  case 3:
-			  	  $pago[2]= $pago[2] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  case 4:
-				  $pago[3]= $pago[3] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  case 5:
-				  $pago[4]= $pago[4] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  case 6:
-				  $pago[5]= $pago[5] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  case 7:
-				  $pago[6]= $pago[6] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  case 8:
-				  $pago[7]= $pago[7] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  case 9:
-				  $pago[8]= $pago[8] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  case 10:
-				  $pago[9]= $pago[9] + $fila['monto'];
-				  if($fila['pago'] != $fila['monto'] && $fila['pago'] > 0){
-					$efectivo= $fila['pago'] - $fila['monto'];
-					$pago[0]= $pago[0] + $efectivo;
-				  }
-				  break;
-			  default:
-				  // No sucede nada	
-				  break;	
-		  }				
-					
+	  	{
+			//echo $fila['forma_pago'];
+			//echo $fila['pago'];
+			$diccionario_totales[$fila['forma_pago']]=$diccionario_totales[$fila['forma_pago']]+$fila['monto'];
+		}				
+		$this->total_pago=$diccionario_totales;
+		//var_dump($diccionario_totales);
 		  if($fila['descuento'] > 0){
 			  $numero_descuento++;
 		  }
@@ -203,11 +146,6 @@
 		  $this->total_numero_descuento= $numero_descuento;
 		  $this->total_dinero_descuento= $dinero_descuento;
 	  }
-      for($z=0 ; $z<$cantidad; $z++){
-		  $this->total_pago[$z]= $pago[$z];
-	  }
-
-	}
 	// Obtenemos la cantidad del hospedaje
 	function cantidad_hospedaje($id_usuario,$tipo){
 	  $total=0;
