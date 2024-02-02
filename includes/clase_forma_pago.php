@@ -37,15 +37,17 @@
     // Obtengo el total de formas de pago
     function total_elementos(){
       $cantidad=0;
-      $sentencia = "SELECT count(id) AS cantidad,descripcion FROM forma_pago WHERE estado = 1  ORDER BY id";
+      $ids=[];
+      $sentencia = "SELECT * FROM forma_pago WHERE estado = 1  ORDER BY id";
       //echo $sentencia;
       $comentario="Obtengo el total de formas de pago";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $cantidad= $fila['cantidad'];
+        $cantidad= count($fila);
+        array_push($ids,$fila['id']);
       }
-      return $cantidad;
+      return $ids;
     }
     function formas_pagos(){
       $sentencia = "SELECT * FROM forma_pago WHERE estado = 1 ORDER BY id";
@@ -207,6 +209,7 @@
       {
         $descripcion= $fila['descripcion'];
       }
+      echo $descripcion;
       return $descripcion;
     }
   }

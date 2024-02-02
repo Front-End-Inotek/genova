@@ -445,7 +445,7 @@
         return $consulta;
       }
       function mostrarCuentaUsuario($id_usuario,$forma_pago){
-        $sentencia="SELECT  cuenta.fecha, reservacion.id as fcasa,hab.nombre as hab_nombre, cuenta.descripcion, cuenta.cargo, cuenta.abono, usuario.usuario,
+        $sentencia="SELECT  cuenta.fecha, reservacion.id as fcasa,hab.nombre as hab_nombre, cuenta.descripcion, cuenta.cargo, cuenta.abono, usuario.usuario,cuenta.observacion,
         cm.nombre as cm_nombre
         from cuenta
         inner join movimiento on cuenta.mov = movimiento.id
@@ -456,7 +456,7 @@
         where cuenta.id_usuario= $id_usuario
         and cuenta.forma_pago = $forma_pago
         and cuenta.estado =1
-        and (cuenta.abono >0) 
+        and (cuenta.abono >0 or cuenta.cargo>0)
         and (from_unixtime(cuenta.fecha + 3600,'%Y-%m-%d') = CURRENT_DATE())
         order by cuenta.forma_pago , cuenta.fecha asc" ;
         $comentario="Mostrar los cargos de todas las habitaciones por usuario";
