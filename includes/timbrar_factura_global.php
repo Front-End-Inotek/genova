@@ -126,7 +126,7 @@ for ($i=0; $i <= $contador ; $i++) {
         if($Ltipo[$i]=="1"){
             //echo "------- ish";
             $precio=round(($LPrecio[$i]/1.19),2);
-            $rish=$rish+round(($precio*.03),2);
+            //$rish=$rish+round(($precio*.03),2);
         }else{
            //echo "-------Sin ish";
             $precio=round(($LPrecio[$i]/1.16),2);
@@ -165,10 +165,10 @@ $datos['impuestos']['translados'][0]['tasa'] = '0.160000';
 $datos['impuestos']['translados'][0]['importe'] = $riva; //TOTAL DE IMPUESTOS
 $datos['impuestos']['translados'][0]['TipoFactor'] = 'Tasa';
 
-if($rish > 0){
-$datos['implocal10']['TotaldeTraslados']= $rish;
+if($ish > 0){
+$datos['implocal10']['TotaldeTraslados']= $ish;
 $datos['implocal10']['TotaldeRetenciones']=0.00;
-$datos['implocal10']['TrasladosLocales'][0]['Importe']= $rish;
+$datos['implocal10']['TrasladosLocales'][0]['Importe']= $ish;
 $datos['implocal10']['TrasladosLocales'][0]['TasadeTraslado']=0.03;
 $datos['implocal10']['TrasladosLocales'][0]['ImpLocTrasladado'] = 'ISH';
 }
@@ -209,7 +209,7 @@ $row3=mysqli_fetch_array($resultado3);
     }
     if($res['cancelada']=='NO'){
 
-        $fact->guardar_factura($rfcval,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6],$id_mov,$nombre_hab,$pax,$notas);
+        $fact->guardar_factura($rfcval,$rimporte,$riva,$ish,$folios,$rfc[1],$fecha,$rfc[6],$id_mov,$nombre_hab,$pax,$notas);
         //echo count($listaid);
         echo $res['cancelada'];
         //var_dump($datos);

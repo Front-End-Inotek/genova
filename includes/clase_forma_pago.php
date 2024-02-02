@@ -209,7 +209,7 @@
       {
         $descripcion= $fila['descripcion'];
       }
-      echo $descripcion;
+      //echo $descripcion;
       return $descripcion;
     }
   }
