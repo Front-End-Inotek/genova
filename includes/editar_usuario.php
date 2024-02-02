@@ -2,6 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_usuario.php");
   $usuario= NEW Usuario($_GET['id']);
+
   echo '
       <div class="main_container">
       <div class="form_container">
@@ -864,6 +865,38 @@
                 }
                 echo '
                 <label class="form-check-label" for="auditoria_editar" >Editar</label>
+              </div>
+
+              </div>
+
+            </section>
+
+            <hr>
+
+            <section class="form_checks_container">
+                <div class="form_checks_title">
+                  <p>Facturas</p>
+                </div>
+                <div class="form_checks_container">
+
+                <div class="form-check form-check-inline">';
+                  if($usuario->facturas_ver==0){
+                  echo '<input class="form-check-input" type="checkbox" id="facturas_ver">';
+                  }else{
+                  echo '<input class="form-check-input" type="checkbox" id="facturas_ver" checked>';
+                  }
+                  echo '
+                  <label class="form-check-label" for="facturas_ver" >Ver</label>
+                </div>
+
+                <div class="form-check form-check-inline">';
+                if($usuario->facturas_cancelar==0){
+                echo '<input class="form-check-input" type="checkbox" id="facturas_cancelar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="facturas_cancelar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="facturas_cancelar" >Cancelar</label>
               </div>
 
               </div>

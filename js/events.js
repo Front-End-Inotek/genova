@@ -4805,6 +4805,9 @@ function modificar_usuario(id){
     var auditoria_ver= document.getElementById("auditoria_ver").checked;
     var auditoria_editar= document.getElementById("auditoria_editar").checked;
     var llegadas_salidas_ver= document.getElementById("llegadas_salidas_ver").checked;
+
+    var ver_facturas = document.getElementById("facturas_ver").checked;
+    var ver_cancelar = document.getElementById("facturas_cancelar").checked;
     // console.log(reservacion_preasignar)
     // return
     // Convertir usuario permisos
@@ -5061,6 +5064,17 @@ function modificar_usuario(id){
     }else{
         logs_ver = 0;
     }
+    if(ver_facturas) {
+        ver_facturas = 1;
+    }else {
+        ver_facturas = 0;
+    }
+    if(ver_cancelar) {
+        ver_cancelar = 1;
+    } else {
+        ver_cancelar = 0
+    }
+
 	if(usuario.length >0 && nivel.length >0){
         //if(contrasena == recontrasena){
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
@@ -5128,6 +5142,8 @@ function modificar_usuario(id){
                     "auditoria_editar":auditoria_editar,
                     "llegadas_salidas_ver":llegadas_salidas_ver,
                     "usuario_id": usuario_id,
+                    "factura_ver" : ver_facturas,
+                    "factura_cancelar" : ver_cancelar
 			};
 		$.ajax({
                 async:true,
@@ -5138,7 +5154,7 @@ function modificar_usuario(id){
                 data:datos,
                 //beforeSend:loaderbar,
                 success:function(res){
-                    //console.log(res)
+                    console.log(res)
                     ver_usuarios()
                 },
                 //success:problemas_sistema,

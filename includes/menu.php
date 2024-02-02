@@ -18,7 +18,7 @@
 					</a>
 				</div>
 				<div class="aside_nav_username d-none" id="nombreNav">
-					<p>Bienvenido! <span class="text-secondary" >'.$nombreUsuario.'</span></p>
+					<p>Bienvenido <span class="text-secondary" >'.$nombreUsuario.'.</span></p>
 				</div>
 				<div class="aside_nav_menu_hamburger" >
 					<img class="aside_menu_hamburger" src="./assets/icons-nav/burger.svg" onclick="handleSiceTable()"/>
@@ -158,7 +158,8 @@
 					</div>';
 				}
 				//Menu Facturacion
-				if($permisos_reportes > 0 ){
+				$permiso_ver_facturacion = $usuario->facturas_ver;
+				if($permiso_ver_facturacion  > 0 || $usuario->nivel == 2 ){
 					echo '
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
@@ -167,22 +168,20 @@
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(5)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="5">
-							<ul class="aside_nav_links_list">';
-						$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
-						$permisos_surtir=$usuario->inventario_surtir;
-						$permisos_reportes_diarios=$usuario->reporte_ver;
-						if($permisos_reportes_diarios > 0 || $usuario->nivel == 2){
+							<ul class="aside_nav_links_list">
+								<li class="aside_ruta" onclick="factura_individual(); handleSiceTable();">Factura individual</li>
+								<li class="aside_ruta" onclick="factura_global_form(); handleSiceTable();">Factura global</li>
+								<li class="aside_ruta" onclick="folio_casa_form(); handleSiceTable();">Buscar Conceptos por folio casa</li>';
+						$permisos_cancelar_factura=$usuario->facturas_cancelar;
+						if($permisos_cancelar_factura > 0 || $usuario->nivel == 2){
 							echo '
-							<li class="aside_ruta" onclick="factura_individual(); handleSiceTable();">Factura individual</li>
-							<li class="aside_ruta" onclick="factura_global_form(); handleSiceTable();">Factura global</li>
-							<li class="aside_ruta" onclick="folio_casa_form(); handleSiceTable();">Buscar Conceptos por folio casa</li>
-							<li class="aside_ruta" onclick="factura_cancelar(); handleSiceTable();">Cancelar factura</li>
-							<li class="aside_ruta" onclick="factura_buscar_fecha(); handleSiceTable();">Buscar factura por fecha</li>
-							<li class="aside_ruta" onclick="factura_buscar_folio(); handleSiceTable();">Buscar factura por folio</li>
-							<li class="aside_ruta" onclick="factura_buscar_folio_casa(); handleSiceTable();">Buscar factura folio casa</li>
+								<li class="aside_ruta" onclick="factura_cancelar(); handleSiceTable();">Cancelar factura</li>
 							';
 						};
 						echo '
+								<li class="aside_ruta" onclick="factura_buscar_fecha(); handleSiceTable();">Buscar factura por fecha</li>
+								<li class="aside_ruta" onclick="factura_buscar_folio(); handleSiceTable();">Buscar factura por folio</li>
+								<li class="aside_ruta" onclick="factura_buscar_folio_casa(); handleSiceTable();">Buscar factura folio casa</li>
 							</ul>
 						</div>
 					</div>';
