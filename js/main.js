@@ -34,10 +34,14 @@ function ocultar_animacion() {
 }
 
 function mostrar_animacion() {
-    document.getElementById("animacion_formulario").style.display='block';
+    document.getElementById("animacion_formulario").style.display='flex';
+<<<<<<< HEAD
+    //document.getElementById("animacion_timbrar").style.display='none';
+=======
     //document.getElementById("animacion_timbrar").style.display='block';
+>>>>>>> f93b9df8fde08ae54c5a09137419cc0c65608f08
     document.getElementById("timbrar").style.display='none';
-    document.getElementById("dinamic").style.display='none';
+    document.getElementById("dinamic").style.display='block';
 }
 
 function factura_global (){
@@ -171,7 +175,7 @@ function mandartimbre (){
         riva = parseFloat(document.getElementById("riva").value),
         rish = parseFloat(document.getElementById("rish").value),
         rtotal = parseFloat(document.getElementById("rtotal").value);
-
+        
         total.innerHTML = `
         <table cellpadding="2" cellspacing="0" width="100%" border="1"; >
         <tr>
@@ -202,8 +206,10 @@ function mandartimbre (){
     //open recive informacion son 3 parametro}
     
     if(tipo_de_factura==1){
-        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte, true);
+        console.log("timbrar_factura_global.php");
+        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte+'&forma_pago='+forma_pago+'&metodopago='+metodopago+'&rish='+rish, true);
     }else{
+        console.log("timbrar_factura.php");
         xhr.open('POST', 'includes/timbrar_factura.php?forma_pago='+forma_pago+'&metodopago='+metodopago, true);
     }
     //FormData interpretara los datos del formulario

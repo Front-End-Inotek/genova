@@ -171,7 +171,7 @@
           </div>
 
           <div class="col">';
-              $cantidad= $forma_pago->total_elementos();
+              $ids= $forma_pago->total_elementos();
               echo '
               <h5>Desglose en Sistema</h5>
                 <div class="table-responsive" id="tabla_tipo">
@@ -183,16 +183,22 @@
                     </tr>
                   </thead>
                 <tbody>';
-                    $cantidad= $cantidad + 1;
-                    for($z=1 ; $z<$cantidad; $z++)
+                    $cantidad= count($ids);
+                    for($z=0 ; $z<=$cantidad; $z++)
                     {
                         if(($z%2) == 0){
                           echo '<tr class="table-white text-center">';
                         }else{
                           echo '<tr class="table text-center">';
                         }
-                          echo '<td>'.$forma_pago->obtener_descripcion($z).'</td>
+<<<<<<< HEAD
+                          echo '
+                          <td>'.$forma_pago->obtener_descripcion($z).' </td>
                           <td>$'.number_format($inf->total_pago[$z-1], 2).'</td>
+=======
+                          echo '<td>'.$forma_pago->obtener_descripcion($ids[$z]).'</td>
+                          <td>$'.number_format($inf->total_pago[$ids[$z]], 2).'</td>
+>>>>>>> f93b9df8fde08ae54c5a09137419cc0c65608f08
                         </tr>';
                     }
                     echo '

@@ -3262,6 +3262,13 @@ class Reservacion extends ConexionMYSql
         // $comentario="Editar una cuenta proveniente de una reservacion dentro de la base de datos";
         // $consulta= $this->realizaConsulta($sentencia, $comentario);
     }
+    public function reservas_por_hab(){
+        $sentencia = "SELECT hab.id,hab.nombre, reservacion.fecha_entrada, reservacion.fecha_salida,hab.estado, reservacion.estado_interno AS garantia ,movimiento.estado_interno AS interno ,huesped.nombre as n_huesped, huesped.apellido as a_huesped, movimiento.id as mov,reservacion.id as reserva_id FROM movimiento left join reservacion on movimiento.id_reservacion = reservacion.id LEFT JOIN hab on movimiento.id_hab = hab.id LEFT JOIN huesped on movimiento.id_huesped = huesped.id where reservacion.estado =1 and movimiento.motivo='preasignar' and from_unixtime(fecha_salida + 3600, '%Y-%m-%d') >= from_unixtime(UNIX_TIMESTAMP(),'%Y-%m-%d') order by reservacion.fecha_entrada asc;";
+        //echo $sentencia;
+        $comentario="Se obtiene las reservaciones por habitacion";
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
+        return $consulta;
+    }
     public function ingresar_cuenta($usuario_id, $id_mov, $descripcion, $forma_pago, $pago_total){
         $fecha_entrada= time();
         $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)

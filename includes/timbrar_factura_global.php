@@ -19,7 +19,7 @@ $row=mysqli_fetch_array($resultado);
 
 //$folio=1;
 
-$numfolio=$fact->obtener_folio_factura()+1;
+$numfolio=$fact->obtener_folio_factura();
 
 
 $rfc = $_POST['rfc'];
@@ -33,9 +33,12 @@ $producto = $_POST['producto'];
 $importeuni = $_POST['importeuni'];
 $importe = $_POST['importe'];
 $iva = $_POST['iva'];
-$ish = $_POST['ish'];
+$ish = $_GET['rish'];
+//echo "---------".$ish;
 $forma_pago=$_GET['forma_pago'];
 $metodopago=$_GET['metodopago'];
+
+
 
 $rimporte = $_POST['rimporte'];
 //echo $rimporte;
@@ -52,8 +55,13 @@ date_default_timezone_set('America/Mexico_City');
 // Se incluye el SDK
 require_once '../../sdk2/sdk2.php';
 // Se especifica la version de CFDi 4.0
-if($rish > 0){
+if($ish > 0){
+    //echo "con ish";
     $datos['complemento'] = 'implocal10';
+    $sumatotal=$rimporte+$riva+$ish;
+}
+else{
+    $sumatotal=$rimporte+$riva;
 }
 
 $datos['version_cfdi'] = '4.0';
@@ -91,7 +99,7 @@ $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = $rimporte;  //TOTAL DE IMPORTE
 $datos['factura']['tipocambio'] = 1;
 $datos['factura']['tipocomprobante'] = 'I';
-$datos['factura']['total'] = $rimporte+$riva;   //TOTAL
+$datos['factura']['total'] =$sumatotal;   //TOTAL
 $datos['factura']['Exportacion'] = '01';
 
 // Datos del Emisor
@@ -112,13 +120,15 @@ $datos['receptor']['UsoCFDI'] = $rfc['4'];
 $datos['receptor']['DomicilioFiscalReceptor'] = "".$rfc['2'];
 $datos['receptor']['RegimenFiscalReceptor'] = $rfc['3'];
 $total=0;
-$rish = 0;
+//$rish = 0;
 for ($i=0; $i <= $contador ; $i++) {
     if($LPrecio[$i] > 0){
         if($Ltipo[$i]=="1"){
+            //echo "------- ish";
             $precio=round(($LPrecio[$i]/1.19),2);
             $rish=$rish+round(($precio*.03),2);
         }else{
+           //echo "-------Sin ish";
             $precio=round(($LPrecio[$i]/1.16),2);
         }
         $iva=round(($precio*.16),2);
@@ -166,7 +176,7 @@ $datos['implocal10']['TrasladosLocales'][0]['ImpLocTrasladado'] = 'ISH';
 /*echo "<pre>";
 print_r($datos);
 echo "</pre>";*/
-
+//var_dump($_GET);
 //echo "<pre>"; echo arr2cs($datos); echo "</pre>".die();
 // Se ejecuta el SDK
 //$res = mf_genera_cfdi($datos);
@@ -202,7 +212,7 @@ $row3=mysqli_fetch_array($resultado3);
         $fact->guardar_factura($rfcval,$rimporte,$riva,$rish,$folios,$rfc[1],$fecha,$rfc[6],$id_mov,$nombre_hab,$pax,$notas);
         //echo count($listaid);
         echo $res['cancelada'];
-        //var_dump($datos);¨
+        //var_dump($datos);
         $listaid=$_SESSION['lista_id_ticket'];
         //var_dump($listaid);
         if($listaid!=""){
