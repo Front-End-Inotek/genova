@@ -1521,6 +1521,10 @@ body {
   margin: 0;
 }
 
+.material-symbols-outlined{
+  font-size: inherit !important;
+}
+
 #animacion_formulario {
   display: flex;
   align-items: center;
