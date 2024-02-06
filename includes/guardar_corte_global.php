@@ -26,14 +26,15 @@
   $cantidad= $forma_pago->total_elementos();
   $pago= array();
   //$cantidad= $cantidad + 1;
-  $cantidad= 11;
+  $ids= $forma_pago->total_elementos();
+  $cantidad= count($ids);
   for($z=1 ; $z<$cantidad; $z++)
   {
-    $pago[$z-1]= $inf->total_pago[$z-1];
+    $pago[$z-1]= $inf->total_pago[$ids[$z]];
   }
   $nueva_etiqueta= $labels->obtener_corte();
   //$nueva_etiqueta++;
-  $corte->guardar_corte($_POST['usuario_id'],$nueva_etiqueta,$total,$pago[0],$pago[1],$pago[2],$pago[3],$pago[4],$pago[5],$pago[6],$pago[7],$pago[8],$pago[9],$cantidad_habitaciones,$total_habitaciones,$restaurante);
+  $corte->guardar_corte($_POST['usuario_id'],$nueva_etiqueta,$total,$pago[0],$pago[1],$pago[2],$pago[3],$pago[4],$pago[5],$pago[6],$pago[7],$pago[8],0,$cantidad_habitaciones,$total_habitaciones,$restaurante);
 
   // Guardar log
   $logs->guardar_log($_POST['usuario_id'],"Hacer corte con etiqueta: ". $nueva_etiqueta);
@@ -213,12 +214,12 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'Total'),1,1,'C',True);
   $pdf->SetFont('Arial','',7);
   $pdf->SetTextColor(0,0,0);
-  $cantidad= $forma_pago->total_elementos();
-  $cantidad= $cantidad + 1;
+  $ids= $forma_pago->total_elementos();
+  $cantidad= count($ids);
   for($z=1; $z<$cantidad; $z++)
   {
-      $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$forma_pago->obtener_descripcion($z)),1,0,'C');
-      $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_pago[$z-1], 2)),1,1,'C');
+      $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$forma_pago->obtener_descripcion($ids[$z])),1,0,'C');
+      $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_pago[$ids[$z]], 2)),1,1,'C');
   }
 
   // Datos dentro de la tabla ventas restaurante
