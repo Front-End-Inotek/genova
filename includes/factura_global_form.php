@@ -275,7 +275,7 @@
                     </div>
         <!--             Imput Importe -->
                     <div class="form-floating">
-                        <input type="text" name="importe['.$i.']" class="form-control custom_input maxWidthInput" id="importe['.$i.']" value="" readonly placeholder="Importe" disabled>
+                        <input type="text" name="importe['.$i.']" class="form-control custom_input maxWidthInput" id="importe['.$i.']" value="" readonly placeholder="Importe" >
                         <label for="inputCity" >Importe</label>
                     </div>
         <!--             Imput IVA -->

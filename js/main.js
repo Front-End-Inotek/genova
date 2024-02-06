@@ -35,11 +35,7 @@ function ocultar_animacion() {
 
 function mostrar_animacion() {
     document.getElementById("animacion_formulario").style.display='flex';
-<<<<<<< HEAD
     //document.getElementById("animacion_timbrar").style.display='none';
-=======
-    //document.getElementById("animacion_timbrar").style.display='block';
->>>>>>> f93b9df8fde08ae54c5a09137419cc0c65608f08
     document.getElementById("timbrar").style.display='none';
     document.getElementById("dinamic").style.display='block';
 }
