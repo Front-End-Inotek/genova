@@ -1315,8 +1315,10 @@ body {
 }
 .task_calendario_especial {
   height: 36px;
-  width: 255px;
-  min-width: 255px;
+  /* width: 255px;
+  min-width: 255px; */
+  width: 75px;
+  min-width: 75px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1530,6 +1532,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 
 
 /* .diaTask::after {

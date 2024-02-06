@@ -2588,6 +2588,10 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
         return false;
     }else{
         alert("Campos incompletos o descuento no permitido");
+        if( btn_reservacion ){
+            console.log("Si se desactivo el campo")
+            btn_reservacion.removeAttribute("disabled");
+        }
     }
 }
 
@@ -2885,8 +2889,10 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         console.log("El campo de texto esta desactivado")
     } else {
         console.log("El campo de texto esta activado")
+        btn_reservacion.removeAttribute("disabled");
         if(forma_garantia.value === "" || forma_garantia === null) {
             alert("Falta agregar el monto de la forma de garantia")
+            btn_reservacion.removeAttribute("disabled");
             return false
         }
     }
@@ -2979,10 +2985,14 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
     if(btn_reservacion){
         btn_reservacion.removeAttribute("disabled");
     }
+    btn_reservacion.removeAttribute("disabled");
 }
 
 // Guardar una reservacion
 function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_infantil,cantidad_hospedaje,hab_id,cantidad_maxima,tipo_hab,estado){
+    const btn_reservacion = document.getElementById("btn_reservacion");
+
+
     var usuario_id=localStorage.getItem("id");
 	var id_huesped= document.getElementById("id_huesped").value;
 	var fecha_entrada= document.getElementById("fecha_entrada").value;
@@ -3135,9 +3145,17 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
             }
         }else{
             alert("¡Cantidad máxima excedida de personas permitidas por el tipo de habitación!");
+            if( btn_reservacion ){
+                btn_reservacion.removeAttribute("disabled");
+            }
         }
     }else{
         alert("Campos incompletos o descuento no permitido");
+
+        if( btn_reservacion ){
+            console.log("Si se desactivo el campo")
+            btn_reservacion.removeAttribute("disabled");
+        }
     }
 }
 

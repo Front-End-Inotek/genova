@@ -116,9 +116,7 @@ function handleSiceTable () {
   const menusText = document.getElementsByClassName("aside_nav_link_text");
   const rutas = document.getElementsByClassName("aside_nav_link_containerInfo_links");
   const btnSwitch = document.getElementById("switch_container_menu");
-
   const nombre = document.getElementById("nombreNav");
-
   const contenedor = document.getElementsByClassName("aside_nav_link_container");
   const contenedor2 = document.getElementsByClassName("aside_nav_link_containerMore");
   const contenedor3 = document.getElementsByClassName("aside_nav_link_containerInfo");

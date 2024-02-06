@@ -1161,16 +1161,17 @@ select[disabled]{
 }
 
 .ticket_container{
-  width: 80%;
+  width: 90%;
   max-width: 1500px !important;
   margin: 0 auto;
   /* border-radius: 15px !important;
   box-shadow: 1px 2px 14px 0px #00000038; */
   display: flex;
   flex-direction: column;
-  background-color: #F5F5F7;
+  background-color: #d9d8d98c;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 45px;
+  border: 1px solid #d9d8d98c !important;
 }
 .ticket_container_header{
   display: flex;
