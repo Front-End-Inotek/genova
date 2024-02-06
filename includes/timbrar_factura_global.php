@@ -202,6 +202,7 @@ $pax=0;
 //$resultado3=mysqli_query($con,$consulta3);
 $resultado3=$fact->consultar_rfc($rfcval);
 $row3=mysqli_fetch_array($resultado3);
+//var_dump($_SESSION['lista_id_ticket']);
 
     if(mysqli_num_rows($resultado3) <= 0){
         //echo var_dump('El usuario ya existe');
