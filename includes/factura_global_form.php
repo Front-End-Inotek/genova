@@ -235,39 +235,39 @@
                         echo '
                     <div class="inputs_form_container justify-content-start">
                         <div class="form-floating">
-                        <input type="text" name="cantidad['.$i.']" class="form-control custom_input maxWidthInput" id="cantidad['.$i.']" oninput="cal()" value="1" placeholder="Cantidad">
+                        <input type="text" name="cantidad['.$i.']" class="form-control custom_input maxWidthInput" id="cantidad['.$i.']" oninput="cal()" value="1" placeholder="Cantidad" disabled>
                         <label for="inputCity" >Cantidad</label>
                         </div>
         <!--             Imput Unidad -->
                     <div class="form-floating">
-                        <input type="text" name="unidad['.$i.']" class="form-control custom_input maxWidthInput" id="unidad['.$i.']" value="SER" placeholder="Unidad">
+                        <input type="text" name="unidad['.$i.']" class="form-control custom_input maxWidthInput" id="unidad['.$i.']" value="SER" placeholder="Unidad" disabled>
                         <label for="inputCity" >Unidad</label>
                     </div>
         <!--             Imput Clave/Unidad -->
                     <div class="form-floating">
-                        <input type="text" name="claveunidad['.$i.']" class="form-control custom_input maxWidthInput" id="claveunidad['.$i.']" value="E48" placeholder="Clave/Unidad">
+                        <input type="text" name="claveunidad['.$i.']" class="form-control custom_input maxWidthInput" id="claveunidad['.$i.']" value="E48" placeholder="Clave/Unidad" disabled>
                         <label for="inputCity" >Clave/Unidad </label>
                     </div>
         <!--             Imput Clave -->
                     <div class="form-floating">
-                        <input type="text" name="clave['.$i.']" class="form-control custom_input maxWidthInput" id="clave['.$i.']" value="90111500" placeholder="Clave">
+                        <input type="text" name="clave['.$i.']" class="form-control custom_input maxWidthInput" id="clave['.$i.']" value="90111500" placeholder="Clave" disabled>
                         <label for="inputCity" >Clave</label>
                     </div>
         <!--             Imput Id -->
                     <div class="form-floating">
-                        <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="'.$mov[$i-1].'" placeholder="ID">
+                        <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="'.$mov[$i-1].'" placeholder="ID" disabled >
                         <label for="inputCity" >ID</label>
                     </div>
         <!--             Imput Producto -->
                     <div class="form-floating">
-                        <input type="text" name="producto['.$i.']" class="form-control custom_input maxWidthInput" id="producto['.$i.']" value="HOSPEDAJE" placeholder="Producto">
+                        <input type="text" name="producto['.$i.']" class="form-control custom_input maxWidthInput" id="producto['.$i.']" value="HOSPEDAJE" placeholder="Producto" disabled >
                         <label for="inputCity" >Producto</label>
                     </div>
         <!--             Imput Imp Unitario -->
                     <div class="form-floating">
                         ';
                         echo'
-                        <input type="text" name="importeuni['.$i.']" class="form-control custom_input maxWidthInput" id="importeuni['.$i.']" onload="cal() "oninput="cal()" value='.$lista_totales[$i-1].' placeholder="Imp.&nbsp;Unitario">
+                        <input type="text" name="importeuni['.$i.']" class="form-control custom_input maxWidthInput" id="importeuni['.$i.']" onload="cal() "oninput="cal()" value='.$lista_totales[$i-1].' placeholder="Imp.&nbsp;Unitario" disabled >
                         <label for="inputCity" >Imp.&nbsp;Unitario</label>
                         ';
                         
@@ -275,7 +275,7 @@
                     </div>
         <!--             Imput Importe -->
                     <div class="form-floating">
-                        <input type="text" name="importe['.$i.']" class="form-control custom_input maxWidthInput" id="importe['.$i.']" value="" readonly placeholder="Importe">
+                        <input type="text" name="importe['.$i.']" class="form-control custom_input maxWidthInput" id="importe['.$i.']" value="" readonly placeholder="Importe" disabled>
                         <label for="inputCity" >Importe</label>
                     </div>
         <!--             Imput IVA -->
