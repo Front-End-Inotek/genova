@@ -182,6 +182,7 @@
 								<li class="aside_ruta" onclick="factura_buscar_fecha(); handleSiceTable();">Buscar factura por fecha</li>
 								<li class="aside_ruta" onclick="factura_buscar_folio(); handleSiceTable();">Buscar factura por folio</li>
 								<li class="aside_ruta" onclick="factura_buscar_folio_casa(); handleSiceTable();">Buscar factura folio casa</li>
+								<li class="aside_ruta" onclick="factura_resumen(); handleSiceTable();">Resumen Facturas</li>
 							</ul>
 						</div>
 					</div>';

@@ -7793,7 +7793,15 @@ function factura_buscar_folio_casa(){
     //$("#area_trabajo_menu").load("includes/ver_facturas_folio.php");
     closeNav();
 }
-
+function factura_resumen() {
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/factura_resumen.php");
+    //$("#area_trabajo_menu").load("includes/ver_facturas_folio.php");
+    closeNav();
+}
 function manejo_facturas(){
     const btn = document.querySelector("#btn_generar_factura");
     const infoTotal = document.querySelector("#total_factura_global");

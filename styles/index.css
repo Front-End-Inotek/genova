@@ -1533,6 +1533,21 @@ body {
   justify-content: center;
 }
 
+.facturas_resumen {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 95%;
+  flex-direction: column;
+  gap: 25px;
+  margin: auto;
+}
+.facturas_resumen_fechas {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
 
 
 /* .diaTask::after {
@@ -1598,6 +1613,7 @@ body {
     .contenedor_facturas_inputs {
       flex: 1;
     }
+  
     .estado_cuenta_resumen{
       flex-direction: column;
     }
