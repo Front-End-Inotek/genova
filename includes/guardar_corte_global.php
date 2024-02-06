@@ -216,7 +216,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $pdf->SetTextColor(0,0,0);
   $ids= $forma_pago->total_elementos();
   $cantidad= count($ids);
-  for($z=1; $z<$cantidad; $z++)
+  for($z=0; $z<$cantidad; $z++)
   {
       $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$forma_pago->obtener_descripcion($ids[$z])),1,0,'C');
       $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_pago[$ids[$z]], 2)),1,1,'C');
