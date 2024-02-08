@@ -9043,6 +9043,68 @@ function send_message( mensage_type ) {
     };
 };
 
+function send_message_hab ( id_hab ) {
+    const chat = document.getElementById("cuerpo_chat_habitacion");
+    const messageInput = document.getElementById("chat_hab").value
+    const id = localStorage.getItem("id");
+
+    if(!messageInput) {
+        return
+    }else {
+        const datos = {
+            "mensaje" : messageInput,
+            "id_usuario" : id,
+            "message_type" : id_hab
+        };
+        //console.log({datos})
+        const messageFormat = `
+            <div class="chat_habitacion_body_message">
+				<div class="chat_habitacion_body_message_icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+					</svg>
+				</div>
+				<div class="chat_habitacion_body_message_text">
+					<div class="chat_habitacion_body_message_text_header">
+						<p>Tú</p>
+						<p>Justo ahora</p>
+					</div>
+					<p>${messageInput}</p>
+				</div>
+			</div>
+        `;
+
+        $.ajax({
+            async: true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-www-form-urlencoded",
+            url: "includes/chat_hab_guardar_mensaje.php",
+            data: datos,
+            success: function(res) {
+                //console.log(res)
+                chat.insertAdjacentHTML("afterbegin", messageFormat);
+                document.getElementById("chat_hab").value = "";
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
+    };
+};
+
+function mostrar_chat_hab() {
+    const chat = document.getElementById("chat_habitacion");
+
+    chat.classList.toggle("d-none");
+}
+
+function handleSendMessageHab(event) {
+    if( event.key === "Enter" ) {
+        send_message_hab();
+    };
+};
 
 function chat_notification_global() {
     const chat = document.getElementById("chat");

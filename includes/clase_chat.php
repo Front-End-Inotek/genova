@@ -34,4 +34,22 @@ class Chat_Manager extends ConexionMYSql{
             return ("Error en la consulta");
         }
     }
+
+    public function cargarMensajesHabitacion($id_habitacion) {
+        $sentencia = "SELECT * FROM `chat` WHERE `tipo_mensaje` = $id_habitacion ORDER BY `mensaje_id` DESC LIMIT 20";
+        $comentario = "Cargar 20 mensajes de la habitacion";
+        $consulta = $this->realizaConsulta($sentencia , $comentario);
+        return $consulta;
+    }
+    public function guardarMensajeHabitacion($usuarioId, $tipo_mensaje, $mensaje){
+        $sentencia = "INSERT INTO  `chat` (`usuario_id` , `tipo_mensaje` , `mensaje` )
+        VALUES ($usuarioId, $tipo_mensaje, '$mensaje');";
+        $comentario = "Guardamos mensaje nuevo de la habitacion";
+        $consulta = $this->realizaConsulta($sentencia , $comentario);
+        if($consulta) {
+            echo ("NO");
+        }  else {
+            echo( "Error en la consulta");
+        }
+    }
 }
