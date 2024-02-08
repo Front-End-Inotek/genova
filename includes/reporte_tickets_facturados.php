@@ -4,6 +4,11 @@ include_once ('clase_hab.php');
 include_once ('clase_movimiento.php');
 require('../fpdf/fpdf.php');
 
+// variables obtenidas por GET
+$opcion = $_GET["opcion"];
+$inicial = $_GET["inicial"];
+$final = $_GET["final"];
+
 
 class PDF extends FPDF
 {
