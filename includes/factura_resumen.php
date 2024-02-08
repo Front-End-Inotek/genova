@@ -43,12 +43,12 @@ echo '
                     <label for="fecha_inicio_factura">Fecha inicial</label>
                 </div>
                 <div class="form-floating ">
-                    <input class="form-control custom_input" type="date" placeholder="Fecha de inicio" id="fecha_inicio_factura">
-                    <label for="fecha_inicio_factura">Fecha inicial</label>
+                    <input class="form-control custom_input" type="date" placeholder="Fecha de fin" id="fecha_fin_factura">
+                    <label for="fecha_fin_facturaa">Fecha final</label>
                 </div>
             </div>
             <div>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick="resumenDeFacturas()">
                     Buscar
                 </button>
             </div>
