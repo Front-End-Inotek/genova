@@ -5,8 +5,9 @@ include_once('consulta.php');
 class Chat_Manager extends ConexionMYSql{
 
     public function guardarMensaje($usuarioId, $tipo_mensaje, $mensaje){
-        $sentencia = "INSERT INTO `chat` ( `usuario_id` , `tipo_mensaje` , `mensaje` ) 
-        VALUES ($usuarioId , $tipo_mensaje , '$mensaje');";
+        $tiempo_unix = time();
+        $sentencia = "INSERT INTO `chat` ( `usuario_id` , `tipo_mensaje` , `mensaje` , `hora_envio` ) 
+        VALUES ($usuarioId , $tipo_mensaje , '$mensaje' , $tiempo_unix);";
         $comentario = "Guardamos mensaje nuevo";
         $consulta = $this->realizaConsulta($sentencia , $comentario);
         if($consulta){
@@ -42,8 +43,9 @@ class Chat_Manager extends ConexionMYSql{
         return $consulta;
     }
     public function guardarMensajeHabitacion($usuarioId, $tipo_mensaje, $mensaje){
-        $sentencia = "INSERT INTO  `chat` (`usuario_id` , `tipo_mensaje` , `mensaje` )
-        VALUES ($usuarioId, $tipo_mensaje, '$mensaje');";
+        $tiempo_unix = time();
+        $sentencia = "INSERT INTO  `chat` (`usuario_id` , `tipo_mensaje` , `mensaje` , `hora_envio`)
+        VALUES ($usuarioId, $tipo_mensaje, '$mensaje' , $tiempo_unix);";
         $comentario = "Guardamos mensaje nuevo de la habitacion";
         $consulta = $this->realizaConsulta($sentencia , $comentario);
         if($consulta) {

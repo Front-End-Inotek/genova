@@ -376,6 +376,8 @@ echo '
 	$id_hab = $hab->nombre;
 	$datos = $chat_hab->cargarMensajesHabitacion($id_hab);	
 	while ($fila = mysqli_fetch_array($datos)){
+		$tiempo_Unix = $fila["hora_envio"];
+		$fecha = date("d/m/Y - H:i", $tiempo_Unix);
 		echo '
 			<div class="chat_habitacion_body_message">
 				<div class="chat_habitacion_body_message_icon">
@@ -387,7 +389,7 @@ echo '
 				<div class="chat_habitacion_body_message_text">
 					<div class="chat_habitacion_body_message_text_header">
 						<p>'.$user->obtengo_nombre_completo($fila["usuario_id"]).'</p>
-						<p>'.$fila ["hora_envio"].'</p>
+						<p>'.$fecha.'</p>
 					</div>
 					<p>'.$fila ["mensaje"].'</p>
 				</div>

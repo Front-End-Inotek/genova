@@ -4,7 +4,7 @@ include_once('clase_usuario.php');
 $ver_chats_globales = new Chat_Manager();
 $id_propio = $_POST['id'];
 $usuario =  NEW Usuario(0);
-
+date_default_timezone_set('America/Mexico_City');
 
 $bodyChat = '';
 
@@ -14,7 +14,8 @@ while ($fila = mysqli_fetch_array($datos)){
     $mensaje = $fila['mensaje'];
     $id = $fila['usuario_id'];
     $nombre=$usuario->obtengo_nombre_completo($id);
-    $fecha = date('H:i', strtotime($fila['hora_envio']));
+    $tiempo_unix = $fila['hora_envio'];
+    $fecha = date('d/m/Y - H:i', $tiempo_unix );
     $color_margen = "Administrador";
     $nivel=$usuario->obtener_nivel($id);
     $img = "";
