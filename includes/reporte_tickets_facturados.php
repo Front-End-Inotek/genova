@@ -5,9 +5,7 @@ include_once ('clase_movimiento.php');
 require('../fpdf/fpdf.php');
 
 // variables obtenidas por GET
-$opcion = $_GET["opcion"];
-$inicial = $_GET["inicial"];
-$final = $_GET["final"];
+
 
 
 class PDF extends FPDF
@@ -67,46 +65,53 @@ class PDF extends FPDF
         $this->SetTextColor(0, 0, 0);
         $this->SetFont('Arial', '', 7);
 
-        $this->Cell(30, 6, 'NO FACTURADO', 0);
-        $this->Ln();
-        $inicio=1699029534;
-        $fin=1699041428;
-        $respuesta=$ticket->reporte_tickets_en_rango_fechas_sin_facturar($inicio,$fin);
-        while ($fila = mysqli_fetch_array($respuesta)){
-            $this->SetTextColor(0, 0, 0);
-            $this->SetFont('Arial', '', 7);
-            $this->Cell(6, 6, utf8_decode($fila['id_ticket']), 1);
-            $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
-            $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
-            $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
-            $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
-            $this->Cell(20, 6, utf8_decode(''), 1);
-            $this->Cell(80, 6, utf8_decode(''), 1);
-            $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
-            $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
-            $this->Cell(20, 6, utf8_decode(''), 1);
-            $this->Cell(30, 6, utf8_decode(''), 1);
-            $this->Ln();
-        }
+        $opcion = $_GET["opcion"];
+        $inicial = $_GET["inicial"];
+        $final = $_GET["final"];
+        $inicio=strtotime($inicial);
+        $fin=strtotime($final);
 
-        $this->Cell(30, 6, 'FACTURADO', 0);
-        $this->Ln();
-        $respuesta=$ticket->reporte_tickets_en_rango_fechas_facturado($inicio,$fin);
-        while ($fila = mysqli_fetch_array($respuesta)){
-            $this->SetTextColor(0, 0, 0);
-            $this->SetFont('Arial', '', 7);
-            $this->Cell(6, 6, utf8_decode($fila['id_ticket']), 1);
-            $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
-            $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
-            $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
-            $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
-            $this->Cell(20, 6, utf8_decode($fila['folio']), 1);
-            $this->Cell(80, 6, utf8_decode($fila['nombre']), 1);
-            $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
-            $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
-            $this->Cell(20, 6, utf8_decode(''), 1);
-            $this->Cell(30, 6, utf8_decode($fila['uuid']), 1);
+        if($opcion=="no-facturado"||$opcion=="ambos"){
+            $this->Cell(30, 6, 'NO FACTURADO', 0);
             $this->Ln();
+            $respuesta=$ticket->reporte_tickets_en_rango_fechas_sin_facturar($inicio,$fin);
+            while ($fila = mysqli_fetch_array($respuesta)){
+                $this->SetTextColor(0, 0, 0);
+                $this->SetFont('Arial', '', 7);
+                $this->Cell(6, 6, utf8_decode($fila['id_ticket']), 1);
+                $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
+                $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
+                $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
+                $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
+                $this->Cell(20, 6, utf8_decode(''), 1);
+                $this->Cell(80, 6, utf8_decode(''), 1);
+                $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
+                $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
+                $this->Cell(20, 6, utf8_decode(''), 1);
+                $this->Cell(30, 6, utf8_decode(''), 1);
+                $this->Ln();
+            }
+        }
+        if($opcion=="facturado"||$opcion=="ambos"){
+            $this->Cell(30, 6, 'FACTURADO', 0);
+            $this->Ln();
+            $respuesta=$ticket->reporte_tickets_en_rango_fechas_facturado($inicio,$fin);
+            while ($fila = mysqli_fetch_array($respuesta)){
+                $this->SetTextColor(0, 0, 0);
+                $this->SetFont('Arial', '', 7);
+                $this->Cell(6, 6, utf8_decode($fila['id_ticket']), 1);
+                $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
+                $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
+                $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
+                $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
+                $this->Cell(20, 6, utf8_decode($fila['folio']), 1);
+                $this->Cell(80, 6, utf8_decode($fila['nombre']), 1);
+                $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
+                $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
+                $this->Cell(20, 6, utf8_decode(''), 1);
+                $this->Cell(30, 6, utf8_decode($fila['uuid']), 1);
+                $this->Ln();
+            }
         }
     }
 }
