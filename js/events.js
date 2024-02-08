@@ -9189,6 +9189,39 @@ function handleSendMessage(event) {
 
 notifatonId = setInterval(chat_notification_global, 15000)
 
+function resumenDeFacturas () {
+    let radios = document.getElementsByName("inlineRadioOptions");
+    let radioSeleccionado;
+    let fechaInicio = document.getElementById('fecha_inicio_factura').value;
+    let fechaFin = document.getElementById('fecha_fin_factura').value;
+
+
+    for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            radioSeleccionado = radios[i].value;
+            break;
+        }
+    }
+
+    if(!radioSeleccionado) {
+        alert("Selecciona una opcion")
+        return;
+    }
+    if(!fechaInicio){
+        alert("Selecciona una fecha inicial valida")
+        return;
+    }
+    if(!fechaFin){
+        alert("Selecciona una fecha final valida")
+        return
+    }
+
+    
+    console.log("Radio seleccionado:", radioSeleccionado);
+    console.log("Fecha de inicio:", fechaInicio);
+    console.log("Fecha de fin:", fechaFin);
+}
+
 //Evaluamos el inicio de sesion
 function inicio(){
 	var x=$("#login");
