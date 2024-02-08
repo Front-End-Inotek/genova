@@ -9210,9 +9210,9 @@ function resumenDeFacturas () {
     }
 
     window.open("includes/reporte_tickets_facturados.php?opcion="+radioSeleccionado+"&inicial="+fechaInicio+"&final="+fechaFin);
-    console.log("Radio seleccionado:", radioSeleccionado);
-    console.log("Fecha de inicio:", fechaInicio);
-    console.log("Fecha de fin:", fechaFin);
+    //console.log("Radio seleccionado:", radioSeleccionado);
+    //console.log("Fecha de inicio:", fechaInicio);
+    //console.log("Fecha de fin:", fechaFin);
 }
 
 //Evaluamos el inicio de sesion
