@@ -85,6 +85,14 @@
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
     }
+    function obtener_forma_pago($clave){
+      $sentencia = "SELECT nombre FROM forma_pago_factura WHERE clave=$clave";
+      $comentario="forma_pago ";
+      $consulta= $this->realizaConsulta($sentencia,$comentario);
+      $fila = mysqli_fetch_array($consulta);
+      $nombre=$fila['nombre'];
+      return $nombre;
+    }
     function consulta_rfc($rfc){
       $sentencia = "SELECT * FROM rfc WHERE rfc = '$rfc'";
       //echo $sentencia;
@@ -109,10 +117,10 @@
       return $consulta;
 
     }
-    function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago,$id,$nombre_hab,$pax,$notas){
+    function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago,$metodo_pago="",$id,$nombre_hab,$pax,$notas){
       
-      $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`folio_casa`,`nombre_hab`,`pax_extras`,`notas` )
-      VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$id',$nombre_hab,$pax,'$notas')";
+      $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`metodopago`,`folio_casa`,`nombre_hab`,`pax_extras`,`notas` )
+      VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$metodo_pago','$id',$nombre_hab,$pax,'$notas')";
       $comentario="rfc_propio ";
       //echo $sentencia;
       //echo $sentencia;
