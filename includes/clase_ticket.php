@@ -138,8 +138,35 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
-      function cambiar_estado_facturados($id){
-        $sentencia="UPDATE ticket SET facturado = 1 WHERE id = $id";
+      function reporte_tickets_en_rango_fechas_sin_facturar($inicio,$fin){
+        $sentencia="SELECT *, ticket.id AS id_ticket, ticket.tiempo AS ticket_fecha FROM ticket
+        LEFT JOIN facturas ON ticket.id_factura = facturas.id
+        WHERE ticket.facturado=0  AND ticket.tiempo>=$inicio AND ticket.tiempo<=$fin
+        UNION
+        SELECT *, ticket.id, ticket.tiempo FROM ticket
+        RIGHT JOIN facturas ON ticket.id_factura = facturas.id
+        WHERE ticket.facturado=0  AND ticket.tiempo>=$inicio AND ticket.tiempo<=$fin ;";
+        //echo $sentencia;
+        $comentario="obtener tickets en rango de fechas para llenar reporte";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function reporte_tickets_en_rango_fechas_facturado($inicio,$fin){
+        $sentencia="SELECT *, ticket.id AS id_ticket, ticket.tiempo AS ticket_fecha FROM ticket
+        LEFT JOIN facturas ON ticket.id_factura = facturas.id
+        WHERE ticket.facturado=1  AND ticket.tiempo>=$inicio AND ticket.tiempo<=$fin
+        UNION
+        SELECT *, ticket.id, ticket.tiempo FROM ticket
+        RIGHT JOIN facturas ON ticket.id_factura = facturas.id
+        WHERE ticket.facturado=1  AND ticket.tiempo>=$inicio AND ticket.tiempo<=$fin ;";
+        //echo $sentencia;
+        $comentario="obtener tickets en rango de fechas para llenar reporte";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function cambiar_estado_facturados($id,$id_factura){
+        $sentencia="UPDATE ticket SET facturado = 1, id_factura = '$id_factura'  WHERE id = $id";
+        //echo $sentencia;
         $comentario="cambio de estado en la columna de acturado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
               }

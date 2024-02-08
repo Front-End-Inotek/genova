@@ -93,6 +93,7 @@
           <div>
           <h2>Estado de cuenta habitación: '.$hab->nombre.'</h2>';
           echo'<h4>Folio casa: <span class="text-muted">'.$hab->mov.'</span> </h4>
+          <input class="d-none" type="number" id="leer_mov" value='.$hab->mov.'>
             </div>
           ';
           $_SESSION['nombre_usuario']=$hab->nombre;

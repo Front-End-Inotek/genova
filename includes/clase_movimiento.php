@@ -598,5 +598,23 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
+      function saber_fecha_inicio($mov){
+        $sentencia="SELECT inicio_hospedaje FROM movimiento
+        WHERE id = $mov";
+        $comentario="Cancelar preasignada";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $fila = mysqli_fetch_array($consulta);
+        $fecha= $fila['inicio_hospedaje'];
+        return $fecha;
+      }
+      function saber_fecha_fin($mov){
+        $sentencia="SELECT fin_hospedaje FROM movimiento
+        WHERE id = $mov";
+        $comentario="Cancelar preasignada";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $fila = mysqli_fetch_array($consulta);
+        $fecha= $fila['fin_hospedaje'];
+        return $fecha;
+      }
   }
 ?>

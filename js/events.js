@@ -7918,25 +7918,18 @@ function generar_facturas_global(){
     var lista_mov=[];
     var total=0;
     var bandera_facturacion=document.getElementById("leer_facturacion").value;
-    
+    var mov=document.getElementById("leer_mov").value;
+    lista_mov.push(parseInt(mov))
     for (let i = 0; i < index; i++) {
         var checkBox_status=document.getElementById("leer_check_"+i)
         var id_ticket=document.getElementById("leer_id_"+i);
         var leer_total=document.getElementById("leer_total_"+i);
         var leer_tipo=document.getElementById("leer_tipo_"+i);
-        var mov=document.getElementById("leer_mov_"+i);
         if (checkBox_status.checked) {
             lista_id_tickets.push(id_ticket.value);
             total=total+parseInt(leer_total.value);
             lista_totales.push(parseInt(leer_total.value));
             lista_tipo.push(parseInt(leer_tipo.value));
-            if(mov.value){
-                lista_mov.push(parseInt(mov.value))
-            }
-            else{
-                lista_mov.push("")
-            }
-            
         }
     }
     localStorage.setItem('lista_id_tickets', lista_id_tickets);

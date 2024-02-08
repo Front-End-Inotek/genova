@@ -120,7 +120,7 @@
     }
     function ultima_factura(){
       $sentencia="SELECT * FROM `facturas` ORDER BY fecha DESC LIMIT 1";
-      $comentario="sacar la vactura ";
+      $comentario="sacar la factura ";
       //echo $sentencia;
       //echo $sentencia;
       $consulta= $this->realizaConsulta($sentencia,$comentario);

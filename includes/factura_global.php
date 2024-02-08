@@ -25,6 +25,7 @@ echo '
                     </button>
                 </div>
                 <input class="d-none" type="number" id="tipo_factura" value="1" disabled/>
+                <input class="d-none" type="number" id="leer_mov" value=0>
 
             </div>
 

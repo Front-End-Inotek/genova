@@ -134,6 +134,7 @@ function mandartimbre (){
     var total = document.createElement("div");
     var forma_pago = document.getElementById("forma_pago").value;
     var metodopago = document.getElementById("metodopago").value;
+    var mov=document.getElementById("id[1]").value;
     var LCatidad=[];
     var LDescipcion=[];
     var LPrecio=[];
@@ -202,15 +203,14 @@ function mandartimbre (){
     //open recive informacion son 3 parametro}
     
     if(tipo_de_factura==1){
-        console.log("timbrar_factura_global.php");
-        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte+'&forma_pago='+forma_pago+'&metodopago='+metodopago+'&rish='+rish, true);
+        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte+'&forma_pago='+forma_pago+'&metodopago='+metodopago+'&rish='+rish+'&mov='+mov, true);
     }else{
-        console.log("timbrar_factura.php");
-        xhr.open('POST', 'includes/timbrar_factura.php?forma_pago='+forma_pago+'&metodopago='+metodopago, true);
+        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte+'&forma_pago='+forma_pago+'&metodopago='+metodopago+'&rish='+rish+'&mov='+mov, true);
     }
     //FormData interpretara los datos del formulario
     var formData = new FormData(form);
     //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor
+    console.log(formData);
     xhr.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
