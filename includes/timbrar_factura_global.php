@@ -210,17 +210,17 @@ $row3=mysqli_fetch_array($resultado3);
     }
     if($res['cancelada']=='NO'){
 
-        $fact->guardar_factura($rfcval,$rimporte,$riva,$ish,$folios,$rfc[1],$fecha,$rfc[6],$id_mov,$nombre_hab,$pax,$notas);
-        $facturas=$fact->ultima_factura();
-        while ($fila = mysqli_fetch_array($facturas))
-        {
-            $id_factura=$fila['id'];
-        }
+        $fact->guardar_factura($rfcval,$rimporte,$riva,$ish,$folios,$rfc[1],$fecha,$rfc[6],$forma_pago,$id_mov,$nombre_hab,$pax,$notas);
         //echo count($listaid);
         echo $res['cancelada'];
         //var_dump($datos);
         $listaid=$_SESSION['lista_id_ticket'];
         //var_dump($listaid);
+        $facturas=$fact->ultima_factura();
+        while ($fila = mysqli_fetch_array($facturas))
+        {
+            $id_factura=$fila['id'];
+        }
         if($listaid!=""){
             for($i=0; $i<count($listaid); $i++){
                 $ticket->cambiar_estado_facturados($listaid[$i],$id_factura);

@@ -2438,6 +2438,7 @@ class Reservacion extends ConexionMYSql
                 INNER JOIN huesped ON reservacion.id_huesped = huesped.id
                 INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_salida BETWEEN $fecha_ini and $fecha_fin) && reservacion.fecha_entrada > 0 
                 AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1) ORDER BY reservacion.id DESC;";
+                //echo 1;
             } else {
                 //old
                 // $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
@@ -2454,7 +2455,8 @@ class Reservacion extends ConexionMYSql
                 LEFT JOIN hab ON movimiento.id_hab = hab.id
 			    INNER JOIN usuario ON reservacion.id_usuario = usuario.id
 			    INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-			    INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_salida BETWEEN $fecha_ini and $fecha_fin)  && reservacion.fecha_entrada > 0  AND (reservacion.estado = 1) ORDER BY reservacion.id DESC;";
+			    INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada BETWEEN $fecha_ini and $fecha_fin)  && reservacion.fecha_entrada > 0  AND (reservacion.estado = 1) ORDER BY reservacion.id DESC;";
+                //echo 2;
             }
             // echo $sentencia;
             $comentario="Mostrar por fecha en ver reservaciones";
