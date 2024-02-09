@@ -7,7 +7,7 @@ include_once('clase_forma_pago.php');
 $reservacion = new Reservacion(0);
 $forma_pago = new Forma_pago(0);
 $hab = new Hab(0);
-$year = "2023";
+$year = date("Y"); // Año actual
 
 //Se consulta el rango de fechas del lunes pasado al domingo pasado.
 $lunes_pasado =   date("Y-m-d", strtotime("last week monday"));
