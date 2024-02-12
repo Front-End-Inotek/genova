@@ -591,7 +591,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         }
         $campo = "campo".$c;
         echo '<tr class="fuente_menor text-center">
-        <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"  id="'.$campo.'" </td>
+        <td><input type="checkbox"  onchange="activarBtnFacturaEstadoCuenta()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input"  id="'.$campo.'"> </td>
         <td>'.$fila['concepto'].'</td>
         <td>'.date("d-m-Y",$fila['fecha']).'</td>
         <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -702,7 +702,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                   $total_cargos= $total_cargos + $fila['cargo'];
                   if($descripcion == 'Total reservacion'){
                     echo '<tr class="fuente_menor text-center">
-                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
+                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input form-check-input"> </td>
                     ';
                     if($largo > 17){
                       echo '<td>Total suplementos*</td>';
@@ -722,7 +722,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                   }else{
                     if($descripcion=="Cargo por noche" && $auditoria_editar>0){
                       echo '<tr class="fuente_menor text-center">
-                      <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
+                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta()"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input"> </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -738,7 +738,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       echo '';
                     }elseif($descripcion!="Cargo por noche"){
                       echo '<tr class="fuente_menor text-center">
-                      <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
+                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input"> </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -755,7 +755,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       echo '';
                     }else{
                       echo '<tr class="fuente_menor table text-center">
-                      <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
+                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta()"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input"> </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -766,7 +766,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                 }else{
                   if($auditoria_editar>0){
                     echo '<tr class="fuente_menor text-center">
-                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos"> </td>
+                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input"> </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -782,7 +782,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     echo '';
                   }else{
                     echo '<tr class="fuente_menor table text-center">
-                    <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos" </td>
+                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input" </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -872,7 +872,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     //echo($estado_facturacion);
                     if($estado_facturacion==0){
                       echo '<tr class="fuente_menor text-center">
-                      <td><input type="checkbox"  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos " id="leer_check_'.+$c.'"> 
+                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta()" data-cuentaid='.$fila['ID'].' class="color_black campos_abonos input_fact form-check-input" id="leer_check_'.+$c.'"> 
                           <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
                           <input class="d-none" type="number" id="leer_mov_'.+$c.'" value='.$fila['mov'].'>
                           <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_'.+$c.'" value="1"/></p>
@@ -894,7 +894,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       </tr>';
                     }else{
                       echo '<tr class="fuente_menor text-center">
-                      <td><input type="checkbox" disabled  data-cuentaid='.$fila['ID'].' class="color_black campos_abonos " id="leer_check_'.+$c.'"> 
+                      <td><input type="checkbox" disabled onchange="activarBtnFacturaEstadoCuenta()" data-cuentaid='.$fila['ID'].' class="color_black campos_abonos input_fact form-check-input" id="leer_check_'.+$c.'"> 
                           <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
                       </td>
                       <td>'.$fila['concepto'].'</td>

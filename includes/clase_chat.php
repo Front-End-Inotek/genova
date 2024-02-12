@@ -36,12 +36,14 @@ class Chat_Manager extends ConexionMYSql{
         }
     }
 
-    public function cargarMensajesHabitacion($id_habitacion) {
+    public function cargarMensajesHabitacion( $id_habitacion ) {
         $sentencia = "SELECT * FROM `chat` WHERE `tipo_mensaje` = $id_habitacion ORDER BY `mensaje_id` DESC LIMIT 20";
         $comentario = "Cargar 20 mensajes de la habitacion";
         $consulta = $this->realizaConsulta($sentencia , $comentario);
+        //echo $sentencia;
         return $consulta;
     }
+
     public function guardarMensajeHabitacion($usuarioId, $tipo_mensaje, $mensaje){
         $tiempo_unix = time();
         $sentencia = "INSERT INTO  `chat` (`usuario_id` , `tipo_mensaje` , `mensaje` , `hora_envio`)
@@ -54,4 +56,5 @@ class Chat_Manager extends ConexionMYSql{
             echo( "Error en la consulta");
         }
     }
+
 }

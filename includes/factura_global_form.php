@@ -30,7 +30,7 @@
     echo'
     <div class="main_container">
         <div class="main_container_title">
-            <h2 >Factura global</h2>
+            <h2 >Factura</h2>
             <input class="d-none" type="number" id="tipo_factura" value='.$tipo_factura.' disabled/>
             <button type="button" class="btn btn-primary" id="timbrar" name ="timbrar" onclick="timbrar_factura()" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16">

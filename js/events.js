@@ -8990,6 +8990,7 @@ function cargarContenido() {
         },
         error: function(error) {
             console.log("Error al cargar el contenido: ", error);
+            $("#chat_content").html(error);
         }
     });
 }
@@ -9092,6 +9093,34 @@ function mostrar_chat_hab() {
 
     chat.classList.toggle("d-none");
 }
+
+function refrescarChat_hab( id ) {
+    const chat = document.getElementById("cuerpo_chat_habitacion");
+
+    chat.innerHTML = `
+        <div class="spinner-border text-primary mb-3" role="status">
+            <span class="sr-only"></span>
+        </div>
+    `
+    const datos = {
+        "id_hab" : id
+    }
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/chat_hab_actualizar.php",
+        data: datos,
+        success: function (res) {
+            //console.log(res)
+            $("#cuerpo_chat_habitacion").html(res);
+        },
+        error: function (error){
+            console.log( error.responseText )
+        }
+    })
+};
 
 function handleSendMessageHab(event) {
     if( event.key === "Enter" ) {
@@ -9213,6 +9242,21 @@ function resumenDeFacturas () {
     //console.log("Radio seleccionado:", radioSeleccionado);
     //console.log("Fecha de inicio:", fechaInicio);
     //console.log("Fecha de fin:", fechaFin);
+}
+
+function activarBtnFacturaEstadoCuenta() {
+    console.log("activando btn");
+    const btn = document.getElementById("btn_generar_factura");
+    let checkboxes = "";
+    checkboxes = document.querySelectorAll('.input_fact');
+
+    console.log(checkboxes);
+
+    const algunoMarcado = Array.from(checkboxes).some(function(cb) {
+        return cb.checked;
+    })
+
+    btn.disabled = !algunoMarcado
 }
 
 //Evaluamos el inicio de sesion
