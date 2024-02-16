@@ -9094,7 +9094,7 @@ function mostrar_chat_hab() {
     chat.classList.toggle("d-none");
 }
 
-function refrescarChat_hab( id ) {
+function refrescarChat_hab( id , mov ) {
     const chat = document.getElementById("cuerpo_chat_habitacion");
 
     chat.innerHTML = `
@@ -9103,7 +9103,8 @@ function refrescarChat_hab( id ) {
         </div>
     `
     const datos = {
-        "id_hab" : id
+        "id_hab" : id,
+        "mov" : mov
     }
     $.ajax({
         async: true,

@@ -6,11 +6,12 @@ date_default_timezone_set("America/Mexico_city");
 $usuario =  NEW Usuario(0);
 
 $id_hab = $_POST["id_hab"];
+$mov = $_POST["mov"];
 $ver_chats_hab = new Chat_Manager();
 
 //echo $id_hab;
 
-$datos = $ver_chats_hab->cargarMensajesHabitacion($id_hab);
+$datos = $ver_chats_hab->cargarMensajesHabitacion($id_hab, $mov);
 
 //var_dump($datos);
 
