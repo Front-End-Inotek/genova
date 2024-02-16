@@ -9085,7 +9085,7 @@ function send_message( mensage_type ) {
     };
 };
 
-function send_message_hab ( id_hab ) {
+function send_message_hab ( id_hab , mov ) {
     const chat = document.getElementById("cuerpo_chat_habitacion");
     const messageInput = document.getElementById("chat_hab").value
     const id = localStorage.getItem("id");
@@ -9096,7 +9096,8 @@ function send_message_hab ( id_hab ) {
         const datos = {
             "mensaje" : messageInput,
             "id_usuario" : id,
-            "message_type" : id_hab
+            "message_type" : id_hab,
+            "mov": mov
         };
         //console.log({datos})
         const messageFormat = `
@@ -9125,7 +9126,7 @@ function send_message_hab ( id_hab ) {
             url: "includes/chat_hab_guardar_mensaje.php",
             data: datos,
             success: function(res) {
-                //console.log(res)
+                console.log(res)
                 chat.insertAdjacentHTML("afterbegin", messageFormat);
                 document.getElementById("chat_hab").value = "";
             },
@@ -9141,7 +9142,7 @@ function mostrar_chat_hab() {
     chat.classList.toggle("d-none");
 }
 
-function refrescarChat_hab( id ) {
+function refrescarChat_hab( id , mov ) {
     const chat = document.getElementById("cuerpo_chat_habitacion");
 
     chat.innerHTML = `
@@ -9150,7 +9151,8 @@ function refrescarChat_hab( id ) {
         </div>
     `
     const datos = {
-        "id_hab" : id
+        "id_hab" : id,
+        "mov" : mov
     }
     $.ajax({
         async: true,
@@ -9169,9 +9171,9 @@ function refrescarChat_hab( id ) {
     })
 };
 
-function handleSendMessageHab( event , id_hab ) {
+function handleSendMessageHab( event , id_hab , mov) {
     if( event.key === "Enter" ) {
-        send_message_hab( id_hab );
+        send_message_hab( id_hab , mov );
     };
 };
 
