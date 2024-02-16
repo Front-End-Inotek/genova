@@ -3343,13 +3343,13 @@ function ver_reservaciones_reporte(){
 }
 
 // Generar reporte en ver reservaciones por dia
-function reporte_reservacion_por_dia(dia){
+function reporte_reservacion_por_dia( dia ){
     var usuario_id=localStorage.getItem("id");
     window.open("includes/reporte_reservacion_por_dia.php?dia="+dia+"&usuario_id="+usuario_id);
 }
 
 // Editar una reservacion
-function editar_reservacionNew(id,ruta_regreso){
+function editar_reservacionNew( id , ruta_regreso ){
     if(ruta_regreso==""){
         ruta_regreso="regresar_reservacion()";
     }
@@ -3357,7 +3357,7 @@ function editar_reservacionNew(id,ruta_regreso){
 }
 
 // Editar un checkin
-function editar_checkin(id,hab_id,ruta_regreso){
+function editar_checkin( id , hab_id , ruta_regreso ){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
@@ -3406,9 +3406,9 @@ function calcular_total_editar(precio_hospedaje,total_adulto,total_junior,total_
     var total= total_hab;
 	var calculo_descuento= descuento_total(total,descuento);
 	calculo_descuento= redondearDecimales(calculo_descuento,2);
-	/*document.getElementById("noches").value= noches;
-	document.getElementById("tarifa").value= tarifa;
-	document.getElementById("numero_hab").value= numero_hab;*/
+	/* document.getElementById("noches").value= noches; */
+	/* document.getElementById("tarifa").value= tarifa; */
+	/* document.getElementById("numero_hab").value= numero_hab; */
 	document.getElementById("total_hab").value= total_hab;
 	document.getElementById("total").value= calculo_descuento + total_suplementos;
 }
@@ -9090,7 +9090,6 @@ function send_message_hab ( id_hab ) {
 
 function mostrar_chat_hab() {
     const chat = document.getElementById("chat_habitacion");
-
     chat.classList.toggle("d-none");
 }
 
@@ -9122,9 +9121,9 @@ function refrescarChat_hab( id ) {
     })
 };
 
-function handleSendMessageHab(event) {
+function handleSendMessageHab( event , id_hab ) {
     if( event.key === "Enter" ) {
-        send_message_hab();
+        send_message_hab( id_hab );
     };
 };
 

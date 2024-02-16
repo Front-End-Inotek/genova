@@ -3,6 +3,77 @@
     //se realizan las importaciones de los archivos que se van a requerir
     include_once "clase_reservacion.php";
     include_once "clase_hab.php";
+
+    // Funciom para darle estado a la habitaciom
+
+    function setRoomStatus( $estado, $interno = "" ) {
+
+        $result = array();
+
+        switch ( $estado ) {
+            case "ocupado":
+                $estadoCss = "diaTask_ocupado";
+                $estado = "Ocupado";
+                $icono = '
+                        <span class="material-symbols-outlined">
+                            night_shelter
+                        </span>';
+                break;
+            case "uso_casa":
+                $estadoCss = "diaTask_uso_casa";
+                $estado = "Uso casa";
+                $icono = '
+                        <span class="material-symbols-outlined">
+                            home
+                        </span>';
+                break;
+            case "vacia_sucia":
+                $estadoCss = "diaTask_vacia_sucia";
+                $estado = "Vacia sucia";
+                $icono = '
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>';
+                break;
+            case "limpieza":
+                $estadoCss = "diaTask_limpieza";
+                $estado = "Limpieza";
+                $icono = '
+                    <span class="material-symbols-outlined">
+                        cleaning_bucket
+                    </span>';
+                break;
+            case "mantenimiento":
+                $estadoCss = "diaTask_mantenimiento";
+                $estado = "Mantenimiento";
+                $icono = '
+                    <span class="material-symbols-outlined">
+                        handyman
+                    </span>';
+                break;
+            case "bloqueado":
+                $estadoCss = "diaTask_bloqueado";
+                $estado = "Bloqueado";
+                $icono = '
+                        <span class="material-symbols-outlined">
+                            block
+                        </span>';
+                break;
+            case "reservada":
+                $estadoCss = "diaTask_bloqueado";
+                $estado = "Reservada";
+                $icono = '
+                        <span class="material-symbols-outlined">
+                            menu_book
+                        </span>';
+                break;
+            }
+            $result["estadoCss"] = $estadoCss;
+            $result["estado"] = $estado;
+            $result["icono"] = $icono;
+        return $result;
+    }
+
     $reservacion= NEW Reservacion(0);
     $hab=NEW Hab(0);
 
@@ -98,72 +169,15 @@
                 <p>Hab. '.$lNombres[$i].' </p>
             </div>';
         for($j=0; $j<=30; $j++){
-            if ($matriz[$i][$j] !="-"){
+            if ($matriz[$i][$j] != "-"){
                 $aux=$matriz[$i][$j]['dias_reservados'];
                 $anchura=150*($aux);
 
-                $estadoHab = "reservada";
-                //Switch para el estado de la habitacion 
-                switch ($estadoHab) {
-                    case "ocupado":
-                        $estadoCss = "diaTask_ocupado";
-                        $estado = "Ocupado";
-                        $icono = '
-                                <span class="material-symbols-outlined">
-                                    night_shelter
-                                </span>';
-                        break;
-                    case "uso_casa":
-                        $estadoCss = "diaTask_uso_casa";
-                        $estado = "Uso casa";
-                        $icono = '
-                                <span class="material-symbols-outlined">
-                                    home
-                                </span>';
-                        break;
-                    case "vacia_sucia":
-                        $estadoCss = "diaTask_vacia_sucia";
-                        $estado = "Vacia sucia";
-                        $icono = '
-                                    <span class="material-symbols-outlined">
-                                        delete
-                                    </span>';
-                        break;
-                    case "limpieza":
-                        $estadoCss = "diaTask_limpieza";
-                        $estado = "Limpieza";
-                        $icono = '
-                            <span class="material-symbols-outlined">
-                                cleaning_bucket
-                            </span>';
-                        break;
-                    case "mantenimiento":
-                        $estadoCss = "diaTask_mantenimiento";
-                        $estado = "Mantenimiento";
-                        $icono = '
-                            <span class="material-symbols-outlined">
-                                handyman
-                            </span>';
-                        break;
-                    case "bloqueado":
-                        $estadoCss = "diaTask_bloqueado";
-                        $estado = "Bloqueado";
-                        $icono = '
-                                <span class="material-symbols-outlined">
-                                    block
-                                </span>';
-                        break;
-                    case "reservada":
-                        $estadoCss = "diaTask_bloqueado";
-                        $estado = "Reservada";
-                        $icono = '
-                                <span class="material-symbols-outlined">
-                                    menu_book
-                                </span>';
-                        break;
-
-                }
-
+                //$estadoHab = "reservada";
+                $roomStatus = setRoomStatus($matriz[$i][$j]['estado'], $interno);
+                $estado = $roomStatus['estado'];
+                $icono = $roomStatus['icono'];
+                
                 echo'
                     <div class="task_calendario diaTask diaTask_estado '.$estadoCss.' " style="width:'.$anchura.'px !important">
                         <div class="task_calendario_status">

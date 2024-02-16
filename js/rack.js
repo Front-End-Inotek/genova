@@ -83,6 +83,6 @@ mostrarCalentario();
 
 mostrarRackCalendario();
 
-window.intervalRackCalendario = setInterval(mostrarRackCalendario, 5000);
+window.intervalRackCalendario = setInterval(mostrarRackCalendario, 20000);
 
 
