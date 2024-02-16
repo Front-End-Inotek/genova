@@ -7970,6 +7970,54 @@ function generar_facturas_global(){
     }
 }
 
+
+function generar_facturas_reserva(total,id,bandera_facturacion,totales,tipos, mov,tipo_fact){
+    lista_id_tickets=[];
+    lista_totales=[];
+    lista_tipo=[];
+    lista_mov=[];
+    tipo=bandera_facturacion;
+    lista_id_tickets.push(id);
+    lista_totales.push(totales)
+    lista_tipo.push(tipos)
+    lista_mov.push(mov);
+    tipo_de_factura=tipo_fact;
+    console.log("facturas generadas");
+    if (total>0){
+        /* $.ajax({
+            async: true,
+            type: "POST",
+            dataType: "html",
+            contentType: "application/x-ww-form-urlencoded",
+            url: "includes/factura_global_form.php",
+            data: { lista_id_tickets: lista_id_tickets, total: total },
+            success: function(response){
+                //console.log(response)
+                //alert("Alertas generadas con exito")
+                /* swal({
+                    title: "",
+                    icon: "warning",
+                    confirmButtonText: "Aceptar",
+                    dangerMode: true,
+                }) 
+                console.log("Factura generada con exito")
+            }
+        }) */
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/factura_global_form.php?total="+total+"&listaId="+lista_id_tickets+"&tipo="+bandera_facturacion+"&lista_totales="+lista_totales+"&lista_tipo="+lista_tipo+"&mov="+lista_mov+"&tipo_factura="+tipo_de_factura);
+        closeNav();
+    }else{
+        swal({
+            title: "Por favor selecciona los datos que quieres facturar",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            dangerMode: true,
+        })
+    }
+}
+
 // Hacer un corte
 function hacer_cortes(){
     usuario_id=localStorage.getItem("id");

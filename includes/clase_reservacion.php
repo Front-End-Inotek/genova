@@ -1926,7 +1926,8 @@ class Reservacion extends ConexionMYSql
                     if($fila['numero_hab'] <= 1){
                         echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
                     }
-                    echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada</a>';
+                    echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada2</a>';
+                    echo '<a class="dropdown-item" onclick="generar_facturas_reserva('.$fila['total_pago'].',0,0,'.$fila['total_pago'].',1,0,1)">Facturar</a>';
                     if($borrar == 1 && $fila['edo'] != 0) {
                         if($fila['numero_hab'] <= 1){
                             echo '<a class="dropdown-item" href="#" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
@@ -2150,7 +2151,7 @@ class Reservacion extends ConexionMYSql
                     </div>
                     <div id="collapse'.+$nreserva.'" class="collapse " aria-labelledby="heading'.+$nreserva.'" data-parent="#accordionExample">
                         <div class="card-body">
-                            <div class="table-responsive" id="tabla_reservacion" style="padding-bottom: 10rem;">
+                            <div class="table-responsive" id="tabla_reservacion" style="padding-bottom: 13rem;">
                                 <table class="table " style="padding-bottom: 5rem;" >
                                     <thead>
                                         <tr class="table-primary-encabezado text-center">
