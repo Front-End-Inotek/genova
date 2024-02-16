@@ -7,10 +7,11 @@ try {
     $message = isset($_POST["mensaje"]) ? $_POST["mensaje"] : '';
     $id_usuario = isset($_POST["id_usuario"]) ? $_POST["id_usuario"] : 0;
     $message_type = isset($_POST["message_type"]) ? $_POST["message_type"] : 0;
+    $movimiento = isset($_POST["mov"]) ? $_POST["mov"] : 0;
 
     $id_usuario = intval($id_usuario);
 
-    $guardarMensaje->guardarMensajeHabitacion($id_usuario, $message_type , $message);
+    $guardarMensaje->guardarMensajeHabitacion($id_usuario, $message_type , $message, $movimiento);
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }

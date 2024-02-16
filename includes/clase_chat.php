@@ -4,7 +4,7 @@ include_once('consulta.php');
 
 class Chat_Manager extends ConexionMYSql{
 
-    public function guardarMensaje($usuarioId, $tipo_mensaje, $mensaje){
+    public function guardarMensaje( $usuarioId , $tipo_mensaje , $mensaje ){
         $tiempo_unix = time();
         $sentencia = "INSERT INTO `chat` ( `usuario_id` , `tipo_mensaje` , `mensaje` , `hora_envio` ) 
         VALUES ($usuarioId , $tipo_mensaje , '$mensaje' , $tiempo_unix);";
@@ -36,22 +36,22 @@ class Chat_Manager extends ConexionMYSql{
         }
     }
 
-    public function cargarMensajesHabitacion( $id_habitacion ) {
-        $sentencia = "SELECT * FROM `chat` WHERE `tipo_mensaje` = $id_habitacion ORDER BY `mensaje_id` DESC LIMIT 20";
+    public function cargarMensajesHabitacion( $id_habitacion , $mov) {
+        $sentencia = "SELECT * FROM `chat` WHERE `tipo_mensaje` = $id_habitacion AND `movimiento` = $mov ORDER BY `mensaje_id` DESC LIMIT 20";
         $comentario = "Cargar 20 mensajes de la habitacion";
         $consulta = $this->realizaConsulta($sentencia , $comentario);
         //echo $sentencia;
         return $consulta;
     }
 
-    public function guardarMensajeHabitacion($usuarioId, $tipo_mensaje, $mensaje){
+    public function guardarMensajeHabitacion( $usuarioId , $tipo_mensaje , $mensaje, $movimiento ){
         $tiempo_unix = time();
-        $sentencia = "INSERT INTO  `chat` (`usuario_id` , `tipo_mensaje` , `mensaje` , `hora_envio`)
-        VALUES ($usuarioId, $tipo_mensaje, '$mensaje' , $tiempo_unix);";
+        $sentencia = "INSERT INTO  `chat` (`usuario_id` , `tipo_mensaje` , `mensaje` , `hora_envio` , `movimiento` )
+        VALUES ($usuarioId, $tipo_mensaje, '$mensaje' , $tiempo_unix , '$movimiento');";
         $comentario = "Guardamos mensaje nuevo de la habitacion";
         $consulta = $this->realizaConsulta($sentencia , $comentario);
         if($consulta) {
-            echo ("NO");
+            echo $consulta;
         }  else {
             echo( "Error en la consulta");
         }

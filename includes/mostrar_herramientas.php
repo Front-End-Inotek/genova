@@ -372,11 +372,12 @@ echo '
 			</button>
 			Chat en habitación
 		</p>
-		<p>Habitación: '.$hab->nombre.'</p>
+		<p>Habitación: '.$hab->nombre.'  |  Mov: '.$hab->mov.'</p>
 	</div>
 	<div class="chat_habitacion_body" id="cuerpo_chat_habitacion" >';
 	$id_hab = $hab->nombre;
-	$datos = $chat_hab->cargarMensajesHabitacion($id_hab);	
+	$mov = $hab->mov;
+	$datos = $chat_hab->cargarMensajesHabitacion( $id_hab , $mov );	
 	while ($fila = mysqli_fetch_array($datos)){
 		$tiempo_Unix = $fila["hora_envio"];
 		$fecha = date("d/m/Y - H:i", $tiempo_Unix);
@@ -402,8 +403,8 @@ echo '
 echo '
 	</div>
 	<div class="chat_habitacion_foter">
-		<input id="chat_hab"  type="text" class="form-control" placeholder="Escribe un mensaje para la habitación..." maxlength="255" onkeyup="handleSendMessageHab( event, '.$hab->nombre.' )" />
-		<button type="button" class="btn btn-primary" onclick="send_message_hab('.$hab->nombre.')" >
+		<input id="chat_hab"  type="text" class="form-control" placeholder="Escribe un mensaje para la habitación..." maxlength="255" onkeyup="handleSendMessageHab( event, '.$hab->nombre.' , '.$hab->mov.' )" />
+		<button type="button" class="btn btn-primary" onclick="send_message_hab('.$hab->nombre.' , '.$hab->mov.')" >
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
 				<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
 			</svg>
