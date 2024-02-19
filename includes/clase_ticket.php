@@ -170,6 +170,12 @@
         $comentario="cambio de estado en la columna de acturado";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
               }
+      function cambiar_facturado($id){
+        $sentencia = "UPDATE `ticket` SET `facturado`=1 WHERE mov =$id;";
+        //echo $sentencia;
+        $comentario="Poner estado de concepto como inactivo";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       function saber_estado_facturados($id){
         $estado=0;
         $sentencia="SELECT facturado FROM ticket WHERE id =$id LIMIT 1";
@@ -431,6 +437,7 @@
         $comentario="Actualizar la comanda";
         $this->realizaConsulta($sentencia,$comentario);
       }
+      
   
   }
   /**
@@ -697,5 +704,6 @@
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      
   }
 ?>

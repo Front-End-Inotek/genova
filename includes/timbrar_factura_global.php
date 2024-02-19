@@ -2,12 +2,14 @@
 session_start();
 include("clase_factura.php");
 include_once("clase_reservacion.php");
+include_once("clase_movimiento.php");
 
 
 include_once('clase_ticket.php');
 $ticket= NEW Ticket(0);
 $fact = NEW factura ();
 $reser=NEW Reservacion(0);
+$mov=NEW Movimiento(0);
 $LCantidad=explode(",", $_GET['LCantidad']);
 $LDescipcion=explode(",", $_GET['LDescipcion']);
 $LImporte=explode(",", $_GET['LImporte']);
@@ -218,6 +220,8 @@ $row3=mysqli_fetch_array($resultado3);
         echo $res['cancelada'];
         if($tipo_de_factura==2){
             $reser->cambiar_facturado($_SESSION['id_reservacion']);
+            $id_mov=$mov->saber_id_con_id_reservacion($_SESSION['id_reservacion']);
+            $ticket->cambiar_facturado($id_mov);
             $_SESSION['id_reservacion']=0;
 
         }else{

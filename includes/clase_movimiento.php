@@ -616,5 +616,16 @@
         $fecha= $fila['fin_hospedaje'];
         return $fecha;
       }
+      function saber_id_con_id_reservacion($id){
+        $sentencia="SELECT id FROM movimiento
+        WHERE id_reservacion = $id";
+        //echo $sentencia;
+        $comentario="Cancelar preasignada";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $fila = mysqli_fetch_array($consulta);
+        $result= $fila['id'];
+        //echo $result;
+        return $result;
+      }
   }
 ?>
