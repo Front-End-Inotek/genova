@@ -11,6 +11,9 @@
     $mov=$_GET["mov"];
     $_SESSION['lista_id_ticket'] = explode(",",$listaId);
     $tipo_factura = $_GET["tipo_factura"];
+    if ($tipo_factura==2){
+        $_SESSION['id_reservacion']=$listaId;
+    }
     $lista_tipo=explode(",",$lista_tipo);
     $lista_totales=explode(",",$lista_totales);
     $mov=explode(",",$mov);

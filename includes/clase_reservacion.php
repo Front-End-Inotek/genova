@@ -1927,7 +1927,7 @@ class Reservacion extends ConexionMYSql
                         echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
                     }
                     echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada2</a>';
-                    echo '<a class="dropdown-item" onclick="generar_facturas_reserva('.$fila['total_pago'].',0,0,'.$fila['total_pago'].',1,0,1)">Facturar</a>';
+                    echo '<a class="dropdown-item" onclick="generar_facturas_reserva('.$fila['total_pago'].','.$fila['ID'].',0,'.$fila['total_pago'].',1,0,2)">Facturar</a>';
                     if($borrar == 1 && $fila['edo'] != 0) {
                         if($fila['numero_hab'] <= 1){
                             echo '<a class="dropdown-item" href="#" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
@@ -3498,5 +3498,10 @@ class Reservacion extends ConexionMYSql
             $id_reserva= $fila['id'];
         }
         return $id_reserva;
+    }
+    public function cambiar_facturado($id){
+        $sentencia="UPDATE `reservacion` SET `facturado`=1 WHERE id =$id;";
+        $comentario="actualizar a facturado";
+        $consulta=$this->realizaConsulta($sentencia,$comentario);
     }
 }
