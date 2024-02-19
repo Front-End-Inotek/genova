@@ -800,7 +800,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  flex: 5;
+  flex: 6;
 }
 .header_facturas{
   width: 100%;
