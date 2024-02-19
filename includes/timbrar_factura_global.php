@@ -1,11 +1,13 @@
 <?php
 session_start();
 include("clase_factura.php");
+include_once("clase_reservacion.php");
 
 
 include_once('clase_ticket.php');
 $ticket= NEW Ticket(0);
 $fact = NEW factura ();
+$reser=NEW Reservacion(0);
 $LCantidad=explode(",", $_GET['LCantidad']);
 $LDescipcion=explode(",", $_GET['LDescipcion']);
 $LImporte=explode(",", $_GET['LImporte']);
@@ -37,6 +39,7 @@ $ish = $_GET['rish'];
 //echo "---------".$ish;
 $forma_pago=$_GET['forma_pago'];
 $metodopago=$_GET['metodopago'];
+$tipo_de_factura=$_GET['tipo_de_factura'];
 
 
 
@@ -213,20 +216,26 @@ $row3=mysqli_fetch_array($resultado3);
         $fact->guardar_factura($rfcval,$rimporte,$riva,$ish,$folios,$rfc[1],$fecha,$rfc[6],$forma_pago,$id_mov,$nombre_hab,$pax,$notas);
         //echo count($listaid);
         echo $res['cancelada'];
-        //var_dump($datos);
-        $listaid=$_SESSION['lista_id_ticket'];
-        //var_dump($listaid);
-        $facturas=$fact->ultima_factura();
-        while ($fila = mysqli_fetch_array($facturas))
-        {
-            $id_factura=$fila['id'];
+        if($tipo_de_factura==2){
+            $reser->cambiar_facturado($_SESSION['id_reservacion']);
+            $_SESSION['id_reservacion']=0;
+
+        }else{
+            //var_dump($datos);
+            $listaid=$_SESSION['lista_id_ticket'];
+            //var_dump($listaid);
+            $facturas=$fact->ultima_factura();
+            while ($fila = mysqli_fetch_array($facturas))
+            {
+                $id_factura=$fila['id'];
+            }
+            if($listaid!=""){
+                for($i=0; $i<count($listaid); $i++){
+                    $ticket->cambiar_estado_facturados($listaid[$i],$id_factura);
+                };
+            }
+            $_SESSION['lista_id_ticket']="";
         }
-        if($listaid!=""){
-            for($i=0; $i<count($listaid); $i++){
-                $ticket->cambiar_estado_facturados($listaid[$i],$id_factura);
-            };
-        }
-        $_SESSION['lista_id_ticket']="";
     }else{
         echo $res['mensaje_original_pac_json'];
         var_dump($datos);

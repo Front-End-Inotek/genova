@@ -203,9 +203,9 @@ function mandartimbre (){
     //open recive informacion son 3 parametro}
     
     if(tipo_de_factura==1){
-        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte+'&forma_pago='+forma_pago+'&metodopago='+metodopago+'&rish='+rish+'&mov='+mov, true);
+        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte+'&forma_pago='+forma_pago+'&metodopago='+metodopago+'&rish='+rish+'&mov='+mov+'&tipo_de_factura='+tipo_de_factura, true);
     }else{
-        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte+'&forma_pago='+forma_pago+'&metodopago='+metodopago+'&rish='+rish+'&mov='+mov, true);
+        xhr.open('POST', 'includes/timbrar_factura_global.php?LCantidad='+LCatidad+'&LDescipcion='+LDescipcion+'&LPrecio='+LPrecio+'&LImporte='+LImporte+'&forma_pago='+forma_pago+'&metodopago='+metodopago+'&rish='+rish+'&mov='+mov+'&tipo_de_factura='+tipo_de_factura, true);
     }
     //FormData interpretara los datos del formulario
     var formData = new FormData(form);
