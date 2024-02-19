@@ -573,7 +573,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="options">';
                     echo ' <a class="dropdown-item" href="#" onclick="editar_huesped('.$fila['id'].')" >Editar</a> ';
-                    echo ' <a class="dropdown-item" href="#" onclick="editar_huesped('.$fila['id'].')" >Ver historial</a> ';
+                    echo ' <a class="dropdown-item" href="#" onclick="ver_historial_huesped('.$fila['id'].')" >Ver historial</a> ';
                     echo '<div class="dropdown-divider"></div>';
                     echo ' <a class="dropdown-item text-danger" href="#" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_huesped('.$fila['id'].')">Borrar</a> ';
                 echo ' </div>
