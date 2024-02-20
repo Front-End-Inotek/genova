@@ -171,7 +171,7 @@
 							<ul class="aside_nav_links_list">
 								<li class="aside_ruta" onclick="factura_individual(); handleSiceTable();">Factura individual</li>
 								<li class="aside_ruta" onclick="factura_global_form(); handleSiceTable();">Factura global</li>
-								<li class="aside_ruta" onclick="folio_casa_form(); handleSiceTable();">Buscar Conceptos por folio casa</li>';
+								<li class="aside_ruta" onclick="folio_casa_form(); handleSiceTable();">Buscar conceptos por folio casa</li>';
 						$permisos_cancelar_factura=$usuario->facturas_cancelar;
 						if($permisos_cancelar_factura > 0 || $usuario->nivel == 2){
 							echo '

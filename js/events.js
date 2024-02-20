@@ -7866,12 +7866,14 @@ function manejo_facturas(){
 function manejo_facturas_folio_casa(){
     const btn = document.querySelector("#btn_generar_factura");
     const infoTotal = document.querySelector("#total_factura_global");
-    //const total = document.querySelector("#total_factura_global_number");
+    const total = document.querySelector("#total_factura_global_number");
     const folio_casa = document.getElementById("folio_casa").value;
-    //const fechaFin = document.getElementById("fecha_fin_factura").value;
+    const inputFolioCasa = document.getElementById("leer_mov")
+
     btn.style.display = "none"
     infoTotal.style.display = "none"
 
+    inputFolioCasa.value = folio_casa;
     if (!folio_casa) {
         swal({
             title: "Falta fecha de inicio",
@@ -7881,6 +7883,7 @@ function manejo_facturas_folio_casa(){
         })
         return
     }else {
+        console.log("hola")
         const contenedor = document.getElementById("contenedor-facturas");
         datos = { folio_casa: folio_casa }
             contenedor.innerHTML = `
@@ -7900,8 +7903,8 @@ function manejo_facturas_folio_casa(){
             success: function(response){
                 contenedor.innerHTML = response;
                 const totalInput = document.getElementById("total_factura_input");
-                //const totalValue = totalInput.value; // Lee el valor del input
-                //total.textContent = totalValue; // Actualiza el elemento con el valor total
+                const totalValue = totalInput.value; // Lee el valor del input
+                total.textContent = totalValue; // Actualiza el elemento con el valor total
                 btn.style.display = "block";
                 infoTotal.style.display = "block";
             } ,
