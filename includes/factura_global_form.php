@@ -236,7 +236,7 @@
     
                     for ($i=1; $i <= $contador ; $i++) {
                         echo '
-                    <div class="inputs_form_container justify-content-start">
+                    <div class="inputs_form_container justify-content-start inputs_f_cfact">
                         <div class="form-floating">
                         <input type="text" name="cantidad['.$i.']" class="form-control custom_input maxWidthInput" id="cantidad['.$i.']" oninput="cal()" value="1" placeholder="Cantidad" disabled>
                         <label for="inputCity" >Cantidad</label>

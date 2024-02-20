@@ -84,6 +84,9 @@ body {
   margin: 1rem 0;
   flex-wrap: wrap;
 }
+.inputs_f_cfact{
+  flex-wrap: nowrap !important;
+}
 .noMargin_input {
   margin: 0;
 }
@@ -801,6 +804,7 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
   flex: 6;
+  overflow-x: auto;
 }
 .header_facturas{
   width: 100%;
@@ -1824,5 +1828,8 @@ body {
 
     .restaurante_section {
       width: 95%;
+    }
+    .inputs_f_cfact{
+      flex-wrap: wrap !important;
     }
 }

@@ -96,22 +96,22 @@ function timbrar_factura(){
             return false;
         }
 
-        if(cfdi.value === null || cfdi.value === ''){
+        if(cfdi.value === null || cfdi.value === '' || cfdi.value == "Selecciona una opción"){
             swal("Campo USO DE CFDI FISCAL vacio!", "Verifique los datos correctamente por favor!", "error");
             return false;
         }
 
-        if(correo.value === null || correo.value === ''){
+        if(correo.value === null || correo.value === '' ){
             swal("Campo CORREO ELECTRONICO vacio!", "Verifique los datos correctamente por favor!", "error");
             return false;
         }
 
-        if(metodopago.value === null || metodopago.value === ''){
+        if(metodopago.value === null || metodopago.value === '' || metodopago.value == "Selecciona una opción"){
             swal("Campo METODO DE PAGO vacio!", "Verifique los datos correctamente por favor!", "error");
             return false;
         }
 
-        if(forma_pago.value === null || forma_pago.value === ''){
+        if(forma_pago.value === null || forma_pago.value === '' || forma_pago.value == "Selecciona una opción"){
             swal("Campo FORMA DE PAGO vacio!", "Verifique los datos correctamente por favor!", "error");
             return false;
         }
@@ -229,6 +229,7 @@ function mandartimbre (){
                         window.open('includes/mostrar_xml.php');
                         console.log("Entra llamado para enviar correo /");
                         enviarcorreo();
+                        window.location .href = "../inicio.php";
                     }, 2000)
             });
             }else{
