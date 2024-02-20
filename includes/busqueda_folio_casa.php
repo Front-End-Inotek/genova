@@ -6,7 +6,7 @@ echo '
             <h2>Busqueda de conceptos por folio casa</h2>
         </div>
 
-        <div class="inputs_form_bills">
+        <div class="inputs_form_bills header_facturas_sticky">
             <div class="inputs_form_container2  justify-content-start">
                 <div class="form-floating ">
                     <input class="form-control custom_input" type="text" placeholder="" id="folio_casa"/>

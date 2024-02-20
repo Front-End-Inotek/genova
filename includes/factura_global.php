@@ -6,7 +6,7 @@ echo '
             <h2>Factura global</h2>
         </div>
 
-        <div class="inputs_form_bills">
+        <div class="inputs_form_bills header_facturas_sticky">
             <div class="inputs_form_container2  justify-content-start">
                 <div class="form-floating input_container_date">
                     <input class="form-control custom_input" type="date" placeholder="Fecha de inicio" id="fecha_inicio_factura"/>

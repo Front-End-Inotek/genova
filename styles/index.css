@@ -1733,6 +1733,12 @@ body {
   }
 }
 
+.header_facturas_sticky {
+  position: sticky;
+  top: 0;
+  background-color: #F5F5F7;
+  z-index: 100;
+}
 
 /* .diaTask::after {
   left: 100%;
