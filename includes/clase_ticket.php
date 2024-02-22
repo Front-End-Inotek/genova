@@ -176,6 +176,27 @@
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      function tickets_intervalo($inicio,$fin,$metodo){
+        $sentencia = "SELECT * FROM ticket WHERE forma_pago=$metodo and tiempo BETWEEN $inicio AND $fin;";
+        //echo $sentencia;
+        $comentario="Poner estado de concepto como inactivo";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function tipo_abonos(){
+        $sentencia = "SELECT * FROM forma_pago;";
+        //echo $sentencia;
+        $comentario="sacar la forma de abonos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
+      function obtener_cargo_abono($ticket){
+        $sentencia = "SELECT * FROM cuenta WHERE id_ticket= $ticket;";
+        //echo $sentencia;
+        $comentario="sacar cargos y abonos";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
       function saber_estado_facturados($id){
         $estado=0;
         $sentencia="SELECT facturado FROM ticket WHERE id =$id LIMIT 1";

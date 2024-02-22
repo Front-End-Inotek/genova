@@ -1926,7 +1926,7 @@ class Reservacion extends ConexionMYSql
                     if($fila['numero_hab'] <= 1){
                         echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
                     }
-                    echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada2</a>';
+                    echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada</a>';
                     if($fila['facturado']==0){
                         echo '<a class="dropdown-item" onclick="generar_facturas_reserva('.$fila['total_pago'].','.$fila['ID'].',0,'.$fila['total_pago'].',1,0,2)">Facturar</a>';
                     }else{
