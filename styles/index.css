@@ -15,9 +15,9 @@
     height: 10px;
   }
 
-/*   *::-webkit-scrollbar-track {
+  *::-webkit-scrollbar-track {
     background: #e2e2e2;
-  } */
+  }
 
   *::-webkit-scrollbar-thumb {
     background-color: #34343436;

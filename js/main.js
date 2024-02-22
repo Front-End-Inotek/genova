@@ -229,7 +229,10 @@ function mandartimbre (){
                         window.open('includes/mostrar_xml.php');
                         console.log("Entra llamado para enviar correo /");
                         enviarcorreo();
-                        window.location .href = "../inicio.php";
+                        $('#area_trabajo').hide();
+                        $('#area_trabajo_menu').show();
+                        $("#area_trabajo_menu").load("includes/graficas.php?usuario_id="+usuario_id);
+                        $('#pie').show();
                     }, 2000)
             });
             }else{

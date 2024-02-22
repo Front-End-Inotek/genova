@@ -4536,6 +4536,15 @@ function ver_cargo_noche(){
 	closeNav();
 }
 
+function ver_reporte_corte() {
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/ver_reporte_corte.php");
+    closeModal();
+	closeNav();
+}
+
 // Muestra los reportes guardados de los cargos por noche de la bd
 function mostrar_reporte_cargo_noche(id){
 	window.open("reportes/reservaciones/cargo_noche/reporte_cargo_noche_"+id+".pdf");

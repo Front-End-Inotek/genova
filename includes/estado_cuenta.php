@@ -15,16 +15,17 @@
   $movimiento= NEW Movimiento($hab->mov);
   $id_reservacion= $movimiento->saber_id_reservacion($hab->mov);
   $reservacion= NEW Reservacion($id_reservacion);
+  echo $id_reservacion;
   $consulta = $reservacion->datos_reservacion($id_reservacion);
   $usuario_id = $_GET['usuario_id'];
   $usuario = new Usuario($usuario_id);
   $id_huesped=0;
   if($consulta->num_rows==0){
+    //var_dump($consulta);
     echo "<h1>sin info que mostrar</h1>";
     die();
   }
-  while ($fila = mysqli_fetch_array($consulta))
-  {
+  while ($fila = mysqli_fetch_array($consulta)) {
       $id_huesped = $fila['id_huesped'];
       $id_hab= $fila['ID'];
       $id_usuario= $fila['id_usuario'];
