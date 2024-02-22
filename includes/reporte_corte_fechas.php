@@ -5,6 +5,9 @@ include_once('clase_ticket.php');
 include_once('clase_usuario.php');
 session_start();
 
+$inicio = $_GET['inicio'] ?? null;
+$final = $_GET['final'] ?? null;
+
 class PDF extends FPDF
 {
     function Header()

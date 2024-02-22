@@ -5,7 +5,7 @@
 echo '
     <div class="main_container">
         <header class="main_container_title">
-            <h2>Reporte de cargos</h2>
+            <h2>Reporte de corte</h2>
         </header>
         <form class="container max-width-400" style="max-width: 450px;">
             <div class="form-floating mb-2">
@@ -16,7 +16,7 @@ echo '
                 <input type="datetime-local" class="form-control custom_input" id="final" placeholder="Fecha final" />
                 <label for="final">Fecha final</label>
             </div>
-            <button type="button" class="btn btn-primary  mb-2">
+            <button type="button" class="btn btn-primary  mb-2" onclick="handleReporteCortes()">
                 Generar reporte
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf" viewBox="0 0 16 16">
                     <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>

@@ -9320,6 +9320,46 @@ function activarBtnFacturaEstadoCuenta() {
     btn.disabled = !algunoMarcado
 }
 
+function handleReporteCortes() {
+    const inicio = document.getElementById("inicial").value;
+    const final = document.getElementById("final").value;
+
+    if(!inicio) {
+        swal({
+            title: "Falta agregar fecha inicial",
+            text: "Agrega una fecha inicial",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return
+    } else if( !final){
+        swal({
+            title: "Falta agregar fecha final",
+            text: "Agrega una fecha final",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return
+    }
+    const inicioUX = Date.parse(inicio) 
+    const finalUX = Date.parse(final)
+
+    if( inicioUX > finalUX) {
+        swal({
+            title: "Error de fecha",
+            text: "La fecha inicial no puede ser mayor que la fecha final",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return
+    }
+    window.open("includes/reporte_corte_fechas.php?inicio="+inicioUX+"&final="+finalUX)
+
+}
+
 //Evaluamos el inicio de sesion
 function inicio(){
 	var x=$("#login");
