@@ -2889,7 +2889,9 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
         console.log("El campo de texto esta desactivado")
     } else {
         console.log("El campo de texto esta activado")
-        btn_reservacion.removeAttribute("disabled");
+        if(btn_reservacion){
+            btn_reservacion.removeAttribute("disabled");
+        }
         if(forma_garantia.value === "" || forma_garantia === null) {
             alert("Falta agregar el monto de la forma de garantia")
             btn_reservacion.removeAttribute("disabled");
@@ -2985,7 +2987,6 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
     if(btn_reservacion){
         btn_reservacion.removeAttribute("disabled");
     }
-    btn_reservacion.removeAttribute("disabled");
 }
 
 // Guardar una reservacion

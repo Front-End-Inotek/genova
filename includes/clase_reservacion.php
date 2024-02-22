@@ -3442,7 +3442,7 @@ class Reservacion extends ConexionMYSql
 		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.id = $id AND (reservacion.estado = 1 or reservacion.estado = 2) ORDER BY reservacion.id DESC";
         $comentario="Mostrar los datos de la reservacion";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
-        echo $sentencia;
+        //echo $sentencia;
         return $consulta;
     }
     // Obtengo los datos del cargo por noche de la habitacio

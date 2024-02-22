@@ -15,7 +15,7 @@
   $movimiento= NEW Movimiento($hab->mov);
   $id_reservacion= $movimiento->saber_id_reservacion($hab->mov);
   $reservacion= NEW Reservacion($id_reservacion);
-  echo $id_reservacion;
+  //echo $id_reservacion;
   $consulta = $reservacion->datos_reservacion($id_reservacion);
   $usuario_id = $_GET['usuario_id'];
   $usuario = new Usuario($usuario_id);
