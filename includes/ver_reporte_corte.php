@@ -9,7 +9,7 @@ echo '
         </header>
         <form class="container max-width-400" style="max-width: 450px;">
             <div class="form-floating mb-2">
-                <input type="datetime-local" class="form-control custom_input" id="inicial" placeholder="Fecha inicial" />
+                <input type="date" class="form-control custom_input" id="inicial" placeholder="Fecha inicial" />
                 <label for="inicial">Fecha inicial</label>
             </div>
             <div class="form-floating  mb-2">
