@@ -13,7 +13,7 @@ echo '
                 <label for="inicial">Fecha inicial</label>
             </div>
             <div class="form-floating  mb-2">
-                <input type="datetime-local" class="form-control custom_input" id="final" placeholder="Fecha final" />
+                <input type="date" class="form-control custom_input" id="final" placeholder="Fecha final" />
                 <label for="final">Fecha final</label>
             </div>
             <button type="button" class="btn btn-primary  mb-2" onclick="handleReporteCortes()">
