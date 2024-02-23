@@ -9344,8 +9344,8 @@ function handleReporteCortes() {
         })
         return
     }
-    const inicioUX = Date.parse(inicio) 
-    const finalUX = Date.parse(final)
+    const inicioUX = Date.parse(inicio) / 1000
+    const finalUX = Date.parse(final) / 1000
 
     if( inicioUX > finalUX) {
         swal({

@@ -7,6 +7,8 @@ session_start();
 
 $inicio = $_GET['inicio'] ?? null;
 $final = $_GET['final'] ?? null;
+echo date('Y-m-d',$inicio);
+echo date('Y-m-d',$final);
 
 class PDF extends FPDF
 {
@@ -63,7 +65,8 @@ class PDF extends FPDF
             $listaFechas[] = $fechaInicio->format('Y-m-d');
             $fechaInicio->add(new DateInterval('P1D')); // Añadir un día a la fecha de inicio
         }
-        $fechaInicio->add(new DateInterval('P1D'));
+        $listaFechas[] = $fechaInicio->format('Y-m-d');
+        //var_dump($listaFechas);
         //var_dump($listaFechas);
         $ticket= NEW Ticket(0);
         $usuario= NEW Usuario(0);
@@ -73,7 +76,7 @@ class PDF extends FPDF
         {
             $abonos[$fila['id']]=$fila['descripcion'];
         }
-        for ($fecha=0; $fecha<count($listaFechas); $fecha++){
+        for ($fecha=0; $fecha<count($listaFechas)-1; $fecha++){
             
 
             
@@ -129,8 +132,8 @@ class PDF extends FPDF
                                     $cargo+=$fila_cuenta['cargo'];
                                     $abono+=$fila_cuenta['abono'];
                                 }
-                            $this->Cell( 30 , 5, $cargo, 1, 0, 'C');
-                            $this->Cell( 30 , 5, $abono, 1, 0, 'C');
+                            $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
+                            $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
                             $total_cargo+=$cargo;
                             $total_abono+=$abono;
                             $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
@@ -138,8 +141,8 @@ class PDF extends FPDF
                     }
                     $this->Cell( 158 , 5, "", 0, 0, 'C');
                     $this->Cell( 30 , 5, "Total:", 1, 0, 'C');
-                    $this->Cell( 30 , 5, $total_cargo, 1, 0, 'C');
-                    $this->Cell( 30 , 5, $total_abono, 1, 0, 'C');
+                    $this->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
+                    $this->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
                     $this->ln();
                 }
             }
@@ -197,8 +200,8 @@ class PDF extends FPDF
                                     $cargo+=$fila_cuenta['cargo'];
                                     $abono+=$fila_cuenta['abono'];
                                 }
-                            $this->Cell( 30 , 5, $cargo, 1, 0, 'C');
-                            $this->Cell( 30 , 5, $abono, 1, 0, 'C');
+                            $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
+                            $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
                             $total_cargo+=$cargo;
                             $total_abono+=$abono;
                             $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
@@ -206,8 +209,8 @@ class PDF extends FPDF
                     }
                     $this->Cell( 158 , 5, "", 0, 0, 'C');
                     $this->Cell( 30 , 5, "Total:", 1, 0, 'C');
-                    $this->Cell( 30 , 5, $total_cargo, 1, 0, 'C');
-                    $this->Cell( 30 , 5, $total_abono, 1, 0, 'C');
+                    $this->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
+                    $this->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
                     $this->ln();
                 }
             }
@@ -216,7 +219,7 @@ class PDF extends FPDF
             
             foreach ($abonos as $clave => $valor){
                 $fecha_inicio=$listaFechas[$fecha].' 22:00:00';
-                $fecha_fin=$listaFechas[$fecha].' 06:59:00';
+                $fecha_fin=$listaFechas[$fecha+1].' 06:59:00';
                 $fecha_inicio_unix = strtotime($fecha_inicio);
                 $fecha_fin_unix = strtotime($fecha_fin);
                 $consulta=$ticket->tickets_intervalo($fecha_inicio_unix,$fecha_fin_unix,$clave);
@@ -265,15 +268,15 @@ class PDF extends FPDF
                                     $cargo+=$fila_cuenta['cargo'];
                                     $abono+=$fila_cuenta['abono'];
                                 }
-                            $this->Cell( 30 , 5, $cargo, 1, 0, 'C');
-                            $this->Cell( 30 , 5, $abono, 1, 0, 'C');
+                            $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
+                            $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
                             $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
                             $this->ln();
                     }
                     $this->Cell( 158 , 5, "", 0, 0, 'C');
                     $this->Cell( 30 , 5, "Total:", 1, 0, 'C');
-                    $this->Cell( 30 , 5, $total_cargo, 1, 0, 'C');
-                    $this->Cell( 30 , 5, $total_abono, 1, 0, 'C');
+                    $this->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
+                    $this->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
                     $this->ln();
                 }
             }
