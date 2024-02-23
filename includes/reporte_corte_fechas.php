@@ -5,10 +5,6 @@ include_once('clase_ticket.php');
 include_once('clase_usuario.php');
 session_start();
 
-$inicio = $_GET['inicio'] ?? null;
-$final = $_GET['final'] ?? null;
-echo date('Y-m-d',$inicio);
-echo date('Y-m-d',$final);
 
 class PDF extends FPDF
 {
@@ -53,9 +49,13 @@ class PDF extends FPDF
 
     function CreateTable()
     {
+        $inicio = $_GET['inicio'] ?? null;
+        $final = $_GET['final'] ?? null;
+        $finicio=date('Y-m-d',$inicio);
+        $ffin=date('Y-m-d',$final);
 
-        $fechaInicio = new DateTime('2024-01-01');
-        $fechaFin = new DateTime('2024-02-23');
+        $fechaInicio = new DateTime($finicio);
+        $fechaFin = new DateTime($ffin);
 
         // Crear un array para almacenar las fechas
         $listaFechas = array();
