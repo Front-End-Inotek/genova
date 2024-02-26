@@ -6,14 +6,22 @@
 
     // Funciom para darle estado a la habitaciom
 
-    function setRoomStatus( $estado, $interno = "" ) {
+    function setRoomStatus( $hab , $interno = "" ) {
 
         $result = array();
+        $estadoHab = "Disponible";
+        $estadoCss = "diaTask_ocupado";
+        $icono = '<span class="material-symbols-outlined">
+                    night_shelter
+                </span>';
 
+        if(is_object($hab)){
+        $estado = $hab->estado;
+        echo $estado;
         switch ( $estado ) {
             case "ocupado":
                 $estadoCss = "diaTask_ocupado";
-                $estado = "Ocupado";
+                $estadoHab = "Ocupado";
                 $icono = '
                         <span class="material-symbols-outlined">
                             night_shelter
@@ -21,7 +29,7 @@
                 break;
             case "uso_casa":
                 $estadoCss = "diaTask_uso_casa";
-                $estado = "Uso casa";
+                $estadoHab = "Uso casa";
                 $icono = '
                         <span class="material-symbols-outlined">
                             home
@@ -29,7 +37,7 @@
                 break;
             case "vacia_sucia":
                 $estadoCss = "diaTask_vacia_sucia";
-                $estado = "Vacia sucia";
+                $estadoHab = "Vacia sucia";
                 $icono = '
                             <span class="material-symbols-outlined">
                                 delete
@@ -37,7 +45,7 @@
                 break;
             case "limpieza":
                 $estadoCss = "diaTask_limpieza";
-                $estado = "Limpieza";
+                $estadoHab = "Limpieza";
                 $icono = '
                     <span class="material-symbols-outlined">
                         cleaning_bucket
@@ -45,7 +53,7 @@
                 break;
             case "mantenimiento":
                 $estadoCss = "diaTask_mantenimiento";
-                $estado = "Mantenimiento";
+                $estadoHab = "Mantenimiento";
                 $icono = '
                     <span class="material-symbols-outlined">
                         handyman
@@ -53,7 +61,7 @@
                 break;
             case "bloqueado":
                 $estadoCss = "diaTask_bloqueado";
-                $estado = "Bloqueado";
+                $estadoHab = "Bloqueado";
                 $icono = '
                         <span class="material-symbols-outlined">
                             block
@@ -61,15 +69,16 @@
                 break;
             case "reservada":
                 $estadoCss = "diaTask_bloqueado";
-                $estado = "Reservada";
+                $estadoHab = "Reservada";
                 $icono = '
                         <span class="material-symbols-outlined">
                             menu_book
                         </span>';
                 break;
             }
+        }
             $result["estadoCss"] = $estadoCss;
-            $result["estado"] = $estado;
+            $result["estado"] = $estadoHab;
             $result["icono"] = $icono;
         return $result;
     }
@@ -169,14 +178,50 @@
                 <p>Hab. '.$lNombres[$i].' </p>
             </div>';
         for($j=0; $j<=30; $j++){
+            $interno = 1;
+
+            $estado = $matriz[$i][$j];
+            
+            $roomStatus = setRoomStatus( $estado , $interno);
+            $estadoCss = $roomStatus['estadoCss'];
+            $estadoHab = $roomStatus['estado'];
+            $icono = $roomStatus['icono'];
+            $anchura= 150 /* * ($aux) */;
+
+            echo '
+                <div class="task_calendario diaTask diaTask_estado '.$estadoCss.' " style="width:'.$anchura.'px !important">
+                    <div class="task_calendario_status">
+                        <p>'.$icono.'</p>
+                        <p>Jose Figueroa</p>
+                    </div>
+                    <div class="task_calendario_status">
+                        <p>'.$estadoHab.'</p>
+                    </div>
+                </div>
+            ';
+
+            //$estado = "diaTask_estado"; //diaTask_estado
+            //$estadoCss = "disponible";
+            //$anchura=150*($aux);
+            //$anchura= 150 ;
+
+           /*  echo '
+                <div class="task_calendario diaTask diaTask_estado '.$estadoCss.' " style="width:'.$anchura.'px !important">
+                    <div class="task_calendario_status">
+                        <p>'.$icono.'</p>
+                        <p>Jose Figueroa</p>
+                    </div>
+                    <div class="task_calendario_status">
+                        <p>'.$estadoHab.'</p>
+                    </div>
+                </div>
+            '; */
+/* 
             if ($matriz[$i][$j] != "-"){
                 $aux=$matriz[$i][$j]['dias_reservados'];
-                $anchura=150*($aux);
 
                 //$estadoHab = "reservada";
-                $roomStatus = setRoomStatus($matriz[$i][$j]['estado'], $interno);
-                $estado = $roomStatus['estado'];
-                $icono = $roomStatus['icono'];
+                
                 
                 echo'
                     <div class="task_calendario diaTask diaTask_estado '.$estadoCss.' " style="width:'.$anchura.'px !important">
@@ -204,7 +249,7 @@
                         </div>
                         </div>
                     </div>';
-            }
+            } */
             
         }
         echo '</div>';

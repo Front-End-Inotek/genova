@@ -1869,7 +1869,7 @@ function calcular_nochesChek(){
 }
 
 function editarTotalEstancia(event){
-    console.log("👨")
+    
     forzar_tarifa = $("#forzar-tarifa").val()
     console.log("Forzar tarifa: "+forzar_tarifa)
     extra_adultos = $("#extra_adulto").val();
