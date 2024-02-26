@@ -17,7 +17,6 @@
 
         if(is_object($hab)){
         $estado = $hab->estado;
-        echo $estado;
         switch ( $estado ) {
             case "ocupado":
                 $estadoCss = "diaTask_ocupado";
@@ -67,7 +66,7 @@
                             block
                         </span>';
                 break;
-            case "reservada":
+            case "1":
                 $estadoCss = "diaTask_bloqueado";
                 $estadoHab = "Reservada";
                 $icono = '
@@ -146,7 +145,7 @@
         //echo $dias_reservados;
         $id_hab=$fila['id'];
         $posicion = array_search($entrada, $lDias);
-        $datos = array(
+        $datos = (object)array(
             "id" => $fila['id'],
             "nombre" => $fila['nombre'],
             "fecha_entrada" => $fila['fecha_entrada'],
