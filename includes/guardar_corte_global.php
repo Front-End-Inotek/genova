@@ -185,12 +185,16 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $conceptos= array();
   $conceptos[0]= 'Habitaciones';
   $conceptos[1]= 'Restaurante';
-  $conceptos[2]= 'Total';
-  $total= array(); 
+  $conceptos[2]= 'Reservaciones';
+  $conceptos[3]= 'Cuentas Maestras';
+  $conceptos[4]= 'Total';
+  $total= array();
   $total[0]= $inf->total_hab;
   $total[1]= $inf->total_restaurante_entrada;
-  $total[2]= $inf->total_global;
-  $cantidad= 2;
+  $total[2]= $inf->total_reservas;
+  $total[3]= $inf->total_cuenta_maestra;
+  $total[4]= $inf->total_global;
+  $cantidad= 4;
   for($z=0 ; $z<$cantidad; $z++)
   {
       $pdf->SetTextColor(0, 0, 0);
@@ -199,7 +203,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       $pdf->SetTextColor(225, 225, 255);
   }
   $pdf->SetFillColor(45, 63, 83);
-  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$conceptos[2]),1,0,'C',True);
+  $pdf->Cell(46,4,iconv("UTF-8", "ISO-8859-1",$conceptos[4]),1,0,'C',True);
   $pdf->Cell(26,4,iconv("UTF-8", "ISO-8859-1",'$'.number_format($inf->total_global, 2)),1,1,'C',True);
   $pdf->SetFillColor(45, 63, 83);
   $pdf->Ln(6);

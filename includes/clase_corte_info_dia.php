@@ -11,6 +11,7 @@
 	public $total_personas;
 	public $cantidad_hab;
 	public $total_hab;
+	public $total_reservas;
 	public $total_cuenta_maestra;
 	public $total_productos;
 	public $total_restaurante;
@@ -43,9 +44,9 @@
 	  hab 
 	  inner join tipo_hab on hab.tipo = tipo_hab.id
 	  inner join concepto on hab.id = concepto.categoria
-	--   where hab.estado = 1
 	  where tipo_hab.estado=1
       GROUP by tipo_hab.nombre";
+	  //echo $sentencia;
 	  $comentario="Obtener las tarifas de hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
 	  while ($fila = mysqli_fetch_array($consulta))
@@ -58,8 +59,11 @@
 	  }
 	  $cantidad_hab= $this->cantidad_hab= $this->cantidad_habitaciones();
 	  $total_hab= $this->total_hab= $this->total_habitaciones($id_usuario);
+	  $total_reservas=$this->total_reservas=$this->total_reservaciones($id_usuario);
 	  $total_cuenta_maestra = $this->total_cuenta_maestra = $this->total_cuenta_maestra($id_usuario);
 	  $total_restaurante_entrada= $this->total_restaurante_entrada= $this->total_restaurante_entrada();
+	  
+	  
 
 	  // Obtenemos el total de personas extra
 	  $this->total_personas=$this->cantidad_personas();// No correcto
@@ -96,7 +100,7 @@
 	  $this->total_productos_rest= $total_productos_rest; 
 
 	  // Obtenemos el total global
-	  $this->total_global= $total_hab + $total_restaurante_entrada + $total_cuenta_maestra;
+	  $this->total_global= $total_hab + $total_restaurante_entrada +$total_reservas+ $total_cuenta_maestra;
 
 	  include_once('clase_forma_pago.php');
 	  $forma_pago = NEW Forma_pago(0);
@@ -110,7 +114,7 @@
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
 		$diccionario_totales[$fila["id"]]=0;
-	}
+	  }
 		//var_dump($diccionario_totales);
 	  $pago= array();
 	  for($z=0 ; $z<$cantidad; $z++){
@@ -145,7 +149,13 @@
 		  }
 		  $this->total_numero_descuento= $numero_descuento;
 		  $this->total_dinero_descuento= $dinero_descuento;
-	  }
+	}
+
+
+
+
+
+
 	// Obtenemos la cantidad del hospedaje
 	function cantidad_hospedaje($id_usuario,$tipo){
 	  $total=0;
@@ -317,16 +327,41 @@
 		}
 		return $total;
 	}
+	//obtener reservaciones
+	function total_reservaciones($id_usuario){
+		$total=0;
+		$hoy = date('Y-m-d');
+		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto 
+		INNER JOIN ticket on concepto.id_ticket = ticket.id
+		WHERE concepto.id_usuario = $id_usuario AND tipo_cargo = 3 AND activo = 1 AND bool_reservacion =1
+		AND categoria=0
+		AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+		";
+		//echo $sentencia;
+		$comentario="Obtener el total del de hospedaje";
+		$consulta= $this->realizaConsulta($sentencia,$comentario);
+		while ($fila = mysqli_fetch_array($consulta))
+		{
+			$total=$fila['total'];
+		}
+		if($total>0){
+
+		}else{ 
+			$total=0;
+		}
+		return $total;
+	}
 	// Obtener el total del hospedaje
 	function total_cuenta_maestra($id_usuario){
 		$total=0;
 		$hoy = date('Y-m-d');
 		$sentencia = "SELECT SUM(concepto.total) AS total FROM concepto 
 		INNER JOIN ticket on concepto.id_ticket = ticket.id
-		WHERE concepto.id_usuario = $id_usuario AND tipo_cargo = 3 AND activo = 1 
+		WHERE concepto.id_usuario = $id_usuario AND tipo_cargo = 3 AND activo = 1 AND bool_reservacion =0
 		AND categoria=0
 		AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
 		";
+		//echo $sentencia;
 		$comentario="Obtener el total del de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))
