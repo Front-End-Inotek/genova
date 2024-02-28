@@ -517,11 +517,11 @@
         }
       }
       // Guardar el concepto del ticket
-      function guardar_concepto($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria){
+      function guardar_concepto($id_ticket,$id_usuario,$nombre,$cantidad,$precio,$total,$efectivo_pago,$tipo_pago,$tipo_cargo,$categoria,$reserva=0){
         $nombre_mayuscula= strtoupper($nombre);
         if($nombre_mayuscula != 'LINEA'){
-          $sentencia = "INSERT INTO `concepto` (`activo`, `id_ticket`, `id_usuario`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `tipo_cargo`, `categoria`)
-          VALUES ('1', '$id_ticket', '$id_usuario', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria');";
+          $sentencia = "INSERT INTO `concepto` (`activo`, `id_ticket`, `id_usuario`, `nombre`, `cantidad`, `precio`, `total`, `efectivo_pago`, `tipo_pago`, `tipo_cargo`, `categoria`,`bool_reservacion`)
+          VALUES ('1', '$id_ticket', '$id_usuario', '$nombre', '$cantidad', '$precio', '$total', '$efectivo_pago', '$tipo_pago', '$tipo_cargo', '$categoria',$reserva);";
           $comentario="Guardamos el concepto en la base de datos";
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         }

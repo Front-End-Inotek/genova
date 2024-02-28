@@ -51,7 +51,6 @@ for ($k = 0; $k < count($id_hab); $k++) {
     $lista_matrices[$k]=$matriz;
 }
 $tipo_de_habitacion=$hab->mostrar_tipoHab();
-//var_dump($tipo_de_habitacion);
 $listaAdultos=array();
 $listaInfantiles=array();
 for ($j = 0; $j < $n; $j++) {
@@ -287,11 +286,10 @@ $_SESSION["listaSalidasInfantiles"]=$listaSalidasInfantiles;
 $_SESSION["tipo_de_habitacion"]=$tipo_de_habitacion;
 
 
-
 ///IMPRESIONES
 
 //imprimie las matrices
-for ($k = 0; $k < count($id_hab); $k++) {
+for ($k = 0; $k < count($tipo_de_habitacion); $k++) {
     echo'
     <h3 class="encabezado_tabla_pronosticos">'.$tipo_de_habitacion[$k].'</h3>
 

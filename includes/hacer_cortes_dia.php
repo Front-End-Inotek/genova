@@ -100,14 +100,16 @@
                     $concepto= array();
                     $concepto[0]= 'Habitaciones';
                     $concepto[1]= 'Restaurante';
-                    $concepto[2]= 'Cuentas Maestras';
-                    $concepto[3]= 'Total';
+                    $concepto[2]= 'Reservaciones';
+                    $concepto[3]= 'Cuentas Maestras';
+                    $concepto[4]= 'Total';
                     $total= array();
                     $total[0]= $inf->total_hab;
                     $total[1]= $inf->total_restaurante_entrada;
-                    $total[2]= $inf->total_cuenta_maestra;
-                    $total[3]= $inf->total_global;
-                    $cantidad= 3;
+                    $total[2]= $inf->total_reservas;
+                    $total[3]= $inf->total_cuenta_maestra;
+                    $total[4]= $inf->total_global;
+                    $cantidad= 4;
                     for($z=0 ; $z<$cantidad; $z++)
                     {
                         if(($z%2) == 0){
@@ -121,7 +123,7 @@
                     }
                     echo '<tr class="table  text-center">
                       <td>Total</td>
-                      <td>$'.number_format($total[3], 2).'</td>
+                      <td>$'.number_format($total[4], 2).'</td>
                     </tr>';
                     echo '
                   </tbody>
