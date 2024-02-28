@@ -203,15 +203,15 @@
         
 
         <div class="estado_cuenta_container">
-          <div class="" id="caja_mostrar_busqueda" >';
+          <div class="estado_cuenta_tabla" id="caja_mostrar_busqueda" >';
             $total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);
             echo '
-            <div class=""><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Cobrar</button></div>
+            <div class="btn_estado_cuenta"><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Cobrar</button></div>
           </div>
-          <div class="" id="caja_mostrar_totales" >';
+          <div class="estado_cuenta_tabla" id="caja_mostrar_totales" >';
             $total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);
             echo '
-            <div class=""><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>
+            <div class="btn_estado_cuenta"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>
           </div>
         </div>';
         if($total_cargos==0){

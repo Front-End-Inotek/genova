@@ -185,6 +185,7 @@ body {
   margin-top: 25px;
   margin-bottom: 25px;
   overflow-x: auto;
+  gap: 5px;
 }
 .estado_cuenta_cantidades {
   width: 95%;
@@ -192,10 +193,18 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   border-top: 1px solid #d2d2d7;
-  padding-top: 15px;
+  padding-top: 18px;
   font-size: 18px;
   font-weight: 600;
+  margin: auto;
   margin-bottom: 25px;
+}
+.estado_cuenta_tabla {
+  flex-grow: 1;
+}
+.btn_estado_cuenta {
+  display: flex;
+  justify-content: flex-end;
 }
 /* Rack de operaciones estilos */
 .room_container {
