@@ -6,20 +6,25 @@
 
     // Funciom para darle estado a la habitaciom
 
-    function setRoomStatus( $hab , $interno = "" ) {
+    function setRoomStatus( $hab ) {
 
         $result = array();
         $estadoHab = "Disponible";
-        $estadoCss = "diaTask_ocupado";
-        $icono = '<span class="material-symbols-outlined">
-                    night_shelter
-                </span>';
+        $estadoCss = "diaTask_disponible";
+        $icono = '<span class="material-symbols-outlined">add_circle</span>';
+        $dias = 150;
+        $nombre = "Disponible";
+        $apellido = "";
+        $funcion = "mostrar_herramientas()";
 
         if(is_object($hab)){
         $estado = $hab->estado;
+        $dias = 150 * ($hab->dias_reservados);
+        $nombre = $hab->n_huesped;
+        $apellido = $hab->a_huesped;
         switch ( $estado ) {
             case "ocupado":
-                $estadoCss = "diaTask_ocupado";
+                $estadoCss = "diaTask_ocupado diaTask_estado";
                 $estadoHab = "Ocupado";
                 $icono = '
                         <span class="material-symbols-outlined">
@@ -27,7 +32,7 @@
                         </span>';
                 break;
             case "uso_casa":
-                $estadoCss = "diaTask_uso_casa";
+                $estadoCss = "diaTask_uso_casa diaTask_estado";
                 $estadoHab = "Uso casa";
                 $icono = '
                         <span class="material-symbols-outlined">
@@ -35,7 +40,7 @@
                         </span>';
                 break;
             case "vacia_sucia":
-                $estadoCss = "diaTask_vacia_sucia";
+                $estadoCss = "diaTask_vacia_sucia diaTask_estado";
                 $estadoHab = "Vacia sucia";
                 $icono = '
                             <span class="material-symbols-outlined">
@@ -43,7 +48,7 @@
                             </span>';
                 break;
             case "limpieza":
-                $estadoCss = "diaTask_limpieza";
+                $estadoCss = "diaTask_limpieza diaTask_estado";
                 $estadoHab = "Limpieza";
                 $icono = '
                     <span class="material-symbols-outlined">
@@ -51,7 +56,7 @@
                     </span>';
                 break;
             case "mantenimiento":
-                $estadoCss = "diaTask_mantenimiento";
+                $estadoCss = "diaTask_mantenimiento diaTask_estado";
                 $estadoHab = "Mantenimiento";
                 $icono = '
                     <span class="material-symbols-outlined">
@@ -59,7 +64,7 @@
                     </span>';
                 break;
             case "bloqueado":
-                $estadoCss = "diaTask_bloqueado";
+                $estadoCss = "diaTask_bloqueado diaTask_estado";
                 $estadoHab = "Bloqueado";
                 $icono = '
                         <span class="material-symbols-outlined">
@@ -67,7 +72,7 @@
                         </span>';
                 break;
             case "1":
-                $estadoCss = "diaTask_bloqueado";
+                $estadoCss = "diaTask_bloqueado diaTask_estado";
                 $estadoHab = "Reservada";
                 $icono = '
                         <span class="material-symbols-outlined">
@@ -76,9 +81,15 @@
                 break;
             }
         }
-            $result["estadoCss"] = $estadoCss;
-            $result["estado"] = $estadoHab;
-            $result["icono"] = $icono;
+        //$result["dias"] = $hab['dias_reservados'];
+        $result["dias"] = $dias;
+        $result["estadoCss"] = $estadoCss;
+        $result["estado"] = $estadoHab;
+        $result["icono"] = $icono;
+        $result["nombre"] = $nombre;
+        $result["apellido"] = $apellido;
+        $result["funcion"] = $funcion;
+        
         return $result;
     }
 
@@ -159,6 +170,7 @@
             "reserva_id" => $fila['reserva_id'],
             "dias_reservados" => $dias_reservados
         );
+        //var_dump($datos);
         for ($i=0; $i<$dias_reservados; $i++){
             if ($unix_today>=$entrada){
                 $matriz[$id_hab-1][$posicion+$i]=$datos;
@@ -176,25 +188,31 @@
         echo'<div class="task_calendario nombre_hab" style="border-color: #'.$lColor[$i].' ">
                 <p>Hab. '.$lNombres[$i].' </p>
             </div>';
+            //$bandera = null;
         for($j=0; $j<=30; $j++){
-            $interno = 1;
-
             $estado = $matriz[$i][$j];
-            
-            $roomStatus = setRoomStatus( $estado , $interno);
-            $estadoCss = $roomStatus['estadoCss'];
-            $estadoHab = $roomStatus['estado'];
-            $icono = $roomStatus['icono'];
-            $anchura= 150 /* * ($aux) */;
+
+            /* if($bandera == $estado ){
+                continue;
+            } */
+            $bandera = $estado;
+            $roomStatus = setRoomStatus( $estado );
+            $estadoCss  = $roomStatus['estadoCss'];
+            $estadoHab  = $roomStatus['estado'];
+            $icono      = $roomStatus['icono'];
+            $anchura    = $roomStatus['dias'] ;
+            $nombre     = $roomStatus['nombre'];
+            $apellido   = $roomStatus['apellido'];
+            $funcion    = $roomStatus['funcion'];
 
             echo '
-                <div class="task_calendario diaTask diaTask_estado '.$estadoCss.' " style="width:'.$anchura.'px !important">
+                <div href="#caja_herramientas" class="task_calendario diaTask '.$estadoCss.' " style="width:'.$anchura.'px !important" data-toggle="modal" onclick="'.$funcion.'" >
                     <div class="task_calendario_status">
                         <p>'.$icono.'</p>
-                        <p>Jose Figueroa</p>
+                        <p>'.$estadoHab.'</p>
                     </div>
                     <div class="task_calendario_status">
-                        <p>'.$estadoHab.'</p>
+                        <p>'.$nombre.' '.$apellido.'</p>
                     </div>
                 </div>
             ';

@@ -1777,6 +1777,15 @@ function ver_nuevo_rack() {
     closeModal();
     closeNav()
 }
+function herramientas_admin() {
+    $('#area_trabajo').hide();
+	$('#area_trabajo_menu').show();
+	//$("#area_trabajo_menu").load("includes/herramientas_admin.php");
+	$("#area_trabajo_menu").load("includes/herramientas_admin_form.php");
+    $('#pie').hide();
+    closeModal();
+    closeNav()
+}
 function pronosticos(){
     $('#area_trabajo').hide();
     $('#area_trabajo_menu').show();
@@ -9361,6 +9370,88 @@ function handleReporteCortes() {
 
 }
 
+function login_super_admin() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const hashedPassword = "abelino";
+
+    if(username === "abel" && password === hashedPassword) {
+        alert("Simon")
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/herramientas_admin_form.php");
+        closeModal();
+        closeNav();
+    } else {
+        alert("no")
+    }
+}
+
+function selectior_super_admin( selector ) {
+    switch (selector) {
+        case 0:
+            console.log("Guardando informacion general..")
+            superAdminGuardarInformacionGeneral()
+            break;
+        case 1:
+            console.log("Borrando base de datos..")
+            break;
+        case 2: 
+            console.log("Borrando chats...")
+            break;
+        case 3:
+            console.log("Borrando chat global...")
+            break;
+        case 4: 
+            console.log("Borrando chat habitaciones....")
+        default:
+            break;
+    }
+}
+
+function superAdminGuardarInformacionGeneral() {
+    const nombreH = document.getElementById("nombre_hotel");
+    const direccionH = document.getElementById("direccion_hotel");
+    const paginaWeb = document.getElementById("pagina_web");
+    const pathImagen = document.getElementById("path_imagen");
+
+    if(!nombreH) {
+        swal({
+            title: "Falta agregar nombre del hotel",
+            text: "Por favor agrega el nombre del hotel",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return;
+    } else if(!direccionH) {
+        swal({
+            title: "Falta agregar direccion del hotel",
+            text: "Por favor agrega la direccion del hotel",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+    } else if(!paginaWeb) {
+        swal({
+            title: "Falta agregar pagina web",
+            text: "Por favor agrega una pagina web",
+            icon: "warning",
+            buttons: true,
+            dangerModer: true,
+        })
+    } else if(!pathImagen){
+        swal({
+            title: "Falta agregar pagina web",
+            text: "Por favor agrega una pagina web",
+            icon: "warning",
+            buttons: true,
+            dangerModer: true,
+        })
+    }
+}
 //Evaluamos el inicio de sesion
 function inicio(){
 	var x=$("#login");

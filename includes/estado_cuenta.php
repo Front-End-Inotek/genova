@@ -99,12 +99,12 @@
           ';
           $_SESSION['nombre_usuario']=$hab->nombre;
           if($faltante == 0){
-            echo '<p></p>';
+            echo '<h5>Sin adeudos</h5>';
           }else{
             if($faltante > 0){
-              echo '<h5 class="text-success">Saldo Total '.$faltante_mostrar.'</h5>';
+              echo '<h5 class="text-success">Sobrante '.$faltante_mostrar.'</h5>';
             }else{
-              echo '<h5 class="text-danger">Saldo Total '.$faltante_mostrar.'</h5>';
+              echo '<h5 class="text-danger">Faltante '.$faltante_mostrar.'</h5>';
             }
           }
         echo '
@@ -139,7 +139,11 @@
               </svg>
               Factura
             </button>
-          </div>
+          </div>';
+          if($faltante == 0 && $usuario->nivel<=2){
+            echo '<button style="margin-left: auto;" class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">Desocupar hab.</button>';
+          }
+          echo'
         </div>
         <input class="d-none" type="number" id="tipo_factura" value="0" disabled/>
         <section class="estado_cuenta_resumen">
@@ -198,9 +202,17 @@
 
         
 
-        <div class="row">
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_busqueda" >';$total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
-          <div class="col-sm-6 altura-rest" id="caja_mostrar_totales" >';$total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);echo '</div>
+        <div class="estado_cuenta_container">
+          <div class="" id="caja_mostrar_busqueda" >';
+            $total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);
+            echo '
+            <div class=""><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Cobrar</button></div>
+          </div>
+          <div class="" id="caja_mostrar_totales" >';
+            $total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$_GET['hab_id'],$_GET['estado'],0,$usuario_id);
+            echo '
+            <div class=""><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>
+          </div>
         </div>';
         if($total_cargos==0){
           $total_faltante=0;
@@ -208,29 +220,25 @@
           $total_faltante= $total_abonos - $total_cargos;
         }
         echo '
-        <div class="row d-flex justify-content-between"">
-          <div class="col-sm-2">Total: <span>$'.number_format($total_cargos, 2).'</span></div>
-          <div class="col-sm-4">Saldo Total: <span>$'.number_format($total_faltante, 2).'</span></div>
-          <div class="col-sm-2">Total: <span>$'.number_format($total_abonos, 2).'</span></div>
+        <div class="estado_cuenta_cantidades">
+          <div>Total: <span>$'.number_format($total_cargos, 2).'</span></div>
+          <div>Saldo Total: <span>$'.number_format($total_faltante, 2).'</span></div>
+          <div>Total: <span>$'.number_format($total_abonos, 2).'</span></div>
         </div>
 
         
-        <div class="row d-flex justify-content-between">';
+        <div class="">';
           /*if($total_faltante==0){
             echo '<div class="col-sm-12"></div>';
           }else{*/
-            echo '<div class="col-sm-2"><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Cobrar</button></div>';
-            echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> 
+            echo '<!-- <div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> 
                     Unificar
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse-vertical" viewBox="0 0 16 16">
                         <path d="M8 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M0 8a.5.5 0 0 1 .5-.5h3.793L3.146 6.354a.5.5 0 1 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8.5H.5A.5.5 0 0 1 0 8m11.707.5 1.147 1.146a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2a.5.5 0 0 1 .708.708L11.707 7.5H15.5a.5.5 0 0 1 0 1z"/>
                       </svg>
-                  </button></div>';
+                  </button> --> </div>';
             // echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="seleccionar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> Unificar</button></div>';
-            echo '<div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$_GET['hab_id'].','.$_GET['estado'].','.$total_faltante.')"> Abonar</button></div>';
-            if($faltante == 0 && $usuario->nivel<=2){
-              echo '<div class="col-sm-3"><button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">Desocupar hab.</button></div>';
-            }
+            
           //}
         echo '</div>
       </div>';

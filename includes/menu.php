@@ -344,12 +344,21 @@
 					</div>
 					';
 				}
+				$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
+				if($permisos_reportes > 0 ){
+					echo '
+					<div class="aside_nav_link_container" onclick="herramientas_admin(); handleSiceTable();">
+						<img class="aside_nav_link" src="./assets/icons-nav/admin.svg" />
+						<p class="aside_nav_link_text">Herramientas Admin</p>
+						<img class="aside_nav_link aside_nav_link_text arrow-link hide_arow" src="./assets/icons-nav/arrow-next.svg" />
+					</div>
+					';
+				}
 				echo '
 					<div class="aside_nav_divider"></div>
 					<div class="aside_nav_link_container aside_btn_salir" onclick="pregunta_salir()">
 						<img class="aside_nav_link" src="./assets/icons-nav/salir.svg" />
 						<p class="aside_nav_link_text">Salir</p>
-						<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow-next.svg" />
 					</div>
 				</section>
 			</aside>
