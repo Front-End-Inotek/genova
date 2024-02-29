@@ -311,6 +311,7 @@
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#" onclick="reenviar_factura(' . htmlspecialchars($fila['folio']) . ', \'' . htmlspecialchars($fila['nombre']) . '\')">Reenviar</a>
+                        <a class="dropdown-item" href="#" onclicK="agregar_comprobante('.$fila['folio'].')" >Agregar comprobante</a>
                         <a class="dropdown-item" href="#" onclick="factura_cancelarbtn('.$fila['folio'].')">Cancelar</a>
                       </div>
                     </div>

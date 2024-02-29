@@ -1772,7 +1772,8 @@ function graficas(){
 function ver_nuevo_rack() {
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/rack.php");
+	//$("#area_trabajo_menu").load("includes/rack.php");
+	$("#area_trabajo_menu").load("includes/agregar_comprobante.php");
     $('#pie').hide();
     closeModal();
     closeNav()
@@ -7785,6 +7786,15 @@ function factura_cancelarbtn(folio){
     //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
     closeNav();
 }
+function agregar_comprobante(folio){
+    //usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/agregar_comprobante.php?folio="+folio);
+    //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
+    closeNav();
+}
 function factura_buscar_fecha(){
     //usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
@@ -9329,7 +9339,35 @@ function activarBtnFacturaEstadoCuenta() {
 
     btn.disabled = !algunoMarcado
 }
+function hanldeSaveImageBill (folio) {
+    console.log("Guardando imagen...")
+    const fileInput = document.getElementById("image");
+    const file = fileInput.files[0];
 
+    if(!file) {
+        console.log("No se ha seleccionado ninguna imagen");
+        return;
+    }
+
+    const data = {
+        "image" : file,
+        "folio" : folio,
+    }
+
+    $.ajax({
+        url: "includes/guardar_imagen_fact.php",
+        type: "POST",
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function(response){
+            console.log("La imagen se ha guardado correctamente")
+        },
+        error: function(xhr , status, error){
+            console.log("Error al guardar la imagen: ", error)
+        }
+    })
+}
 function handleReporteCortes() {
     const inicio = document.getElementById("inicial").value;
     const final = document.getElementById("final").value;

@@ -1872,7 +1872,23 @@ body {
   border-bottom: 2px solid rgba(231, 234, 243, 0.7);
   padding: 5px;
 }
-
+.contenedor_imagenes_fact {
+  width: 100%;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: auto;
+  align-items: flex-start;
+  justify-content: center;
+}
+.contenedor_imagenes_fact img {
+  width: 95%;
+  max-width: 200px;
+  margin: auto;
+}
 
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
