@@ -160,7 +160,7 @@
 	function cantidad_hospedaje($id_usuario,$tipo){
 	  $total=0;
       $hoy = date('Y-m-d');
-	  $sentencia = "SELECT *,SUM(cantidad) AS total 
+	  $sentencia = "SELECT *
 	  FROM concepto 
       LEFT JOIN ticket ON concepto.id_ticket = ticket.id
 	 
@@ -169,20 +169,25 @@
 	  AND concepto.id_usuario=$id_usuario
 
       ";
-
+		//echo $sentencia;
 	  $comentario="Obtener el total del hospedaje";
 	  $consulta= $this->realizaConsulta($sentencia,$comentario);
-	  
+	  $hab=array();
+	  $total=0;
 	  while ($fila = mysqli_fetch_array($consulta))
 	  {
-		  $total=$fila['total'];
+		  
+		  if(!in_array($fila['mov'],$hab)){
+			$total+=1;
+			array_push($hab,$fila['mov']);
+		  }
 	  }
 	  if($total>0){
 
 	  }else{
 		  $total=0;
 	  }
-	  
+	  //var_dump($total);
 	  return $total;
 	}
 	// Obtenemos el total del hospedaje
@@ -596,7 +601,7 @@ class Cortes_limpieza_manual extends ConexionMYSql{
 
 		$total=0;
 		$sentencia = "SELECT SUM(concepto.cantidad) AS total FROM concepto  LEFT JOIN ticket ON concepto.ticket = ticket.id  WHERE concepto.ticket >= $id_ini AND concepto.ticket <=$id_fin AND concepto.tipocargo = 1 AND concepto.categoria = $tarifa AND concepto.activo = 1;";
-		//echo $sentencia;
+		echo $sentencia;
 		$comentario="Obtener el total del  de hospedaje";
 		$consulta= $this->realizaConsulta($sentencia,$comentario);
 		while ($fila = mysqli_fetch_array($consulta))
