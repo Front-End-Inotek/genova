@@ -327,5 +327,22 @@ function tipos_abonos($id=0){
       }
       return $nombre;
     }
+    function actualizar_info_basica( $nombre, $direccion, $web, $imagen ) {
+      $sentencia = "UPDATE `configuracion` SET
+      `nombre` = '$nombre',
+      `domicilio` = '$direccion',
+      `credencial_auto` = '$web',
+      `imagen` = '$imagen'
+      WHERE `id` = '1';";
+      $comentario = "Se modifica la informacion basica";
+      $consulta = $this->realizaConsulta($sentencia , $comentario);
+
+      if($consulta) {
+        return true;
+      } else {
+        return false;
+      }
+
+    }
   }
 ?>

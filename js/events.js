@@ -9391,31 +9391,38 @@ function login_super_admin() {
 
 function selectior_super_admin( selector ) {
     switch (selector) {
-        case 0:
+        case "infoBasica":
             console.log("Guardando informacion general..")
             superAdminGuardarInformacionGeneral()
             break;
-        case 1:
+        case "facturacion":
+            console.log("Guardando informacion de facturacion..")
+            break;
+        case "abono_reserva":
+            console.log("Manejando abono reserva...")
+            break;
+        case "borrar_db":
             console.log("Borrando base de datos..")
             break;
-        case 2: 
+        case "borrar_chats": 
             console.log("Borrando chats...")
             break;
-        case 3:
+        case "borrar_global":
             console.log("Borrando chat global...")
             break;
-        case 4: 
+        case "borrar_hab": 
             console.log("Borrando chat habitaciones....")
+            break;
         default:
             break;
     }
 }
 
 function superAdminGuardarInformacionGeneral() {
-    const nombreH = document.getElementById("nombre_hotel");
-    const direccionH = document.getElementById("direccion_hotel");
-    const paginaWeb = document.getElementById("pagina_web");
-    const pathImagen = document.getElementById("path_imagen");
+    const nombreH = document.getElementById("nombre_hotel").value;
+    const direccionH = document.getElementById("direccion_hotel").value;
+    const paginaWeb = document.getElementById("pagina_web").value;
+    const pathImagen = document.getElementById("path_imagen").value;
 
     if(!nombreH) {
         swal({
@@ -9425,7 +9432,7 @@ function superAdminGuardarInformacionGeneral() {
             buttons: true,
             dangerMode: true,
         })
-        return;
+        return null;
     } else if(!direccionH) {
         swal({
             title: "Falta agregar direccion del hotel",
@@ -9434,23 +9441,90 @@ function superAdminGuardarInformacionGeneral() {
             buttons: true,
             dangerMode: true,
         })
+        return null;
     } else if(!paginaWeb) {
         swal({
             title: "Falta agregar pagina web",
             text: "Por favor agrega una pagina web",
             icon: "warning",
             buttons: true,
-            dangerModer: true,
+            dangerMode: true,
         })
+        return null
     } else if(!pathImagen){
         swal({
             title: "Falta agregar pagina web",
             text: "Por favor agrega una pagina web",
             icon: "warning",
             buttons: true,
-            dangerModer: true,
+            dangerMode: true,
         })
-    }
+        return null;
+    } 
+
+    swal ({
+        title: "Estás seguro de querer actualizar los datos?",
+        text: "Una vez actualizados, los cambios no se podrám deshacer",
+        icon: "warning",
+        buttons: ["Cancelar" , "Actualizar"],
+        dangerMode: true,
+    }).then((willUpdate) => {
+        if(willUpdate){
+            swal({
+                title: "Por favor ingresa tu contraseña",
+                text: "Se requiere la contraseña de desarrollo para confirmar la acutalización",
+                content: "input",
+                button: {
+                    text: "Confirmar",
+                    closeModal: false,
+                },
+            }).then((password) => {
+                if( password && password.trim() === "A1B2C3" ){
+                    const datos = {
+                        "nombre" : nombreH,
+                        "direccion" : direccionH,
+                        "paginaWeb" : paginaWeb,
+                        "imagen" : pathImagen 
+                    }
+                    $.ajax({
+                        async: true,
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/x-www-form-urlencoded",
+                        url: "includes/actualizar_info.php",
+                        data: datos,
+                        success: function (res) {
+                            console.log(res)
+                            if(res == 1) {
+                                swal({
+                                    title: "Se actualizaron los datos",
+                                    timer: 5000,
+                                    text: "Se actualizaron correctamente los datos, sera redirigiro ",
+                                    icon: "success",
+                                }).then(() => {
+                                    window.location.href = "inicio.php";
+                                }, 5000)
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error.responseText)
+                            swal({
+                                title: "Error",
+                                text: "Error al actualizar los datos",
+                                icon: "error"
+                            })
+                        }
+                    });
+                } else {
+                    swal({
+                        title: "Contraseña incorrecta",
+                        text: "La contraseña ingresada no es valida, Por favor intentalo de nuevo.",
+                        icon: "error",
+                    });
+                }
+            });
+        }
+    });
 }
 //Evaluamos el inicio de sesion
 function inicio(){
