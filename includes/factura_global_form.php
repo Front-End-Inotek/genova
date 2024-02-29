@@ -252,13 +252,20 @@
                         <label for="inputCity" >Clave/Unidad </label>
                     </div>
         <!--             Imput Clave -->
-                    <div class="form-floating">
-                        <input type="text" name="clave['.$i.']" class="form-control custom_input maxWidthInput" id="clave['.$i.']" value="90111500" placeholder="Clave" disabled>
-                        <label for="inputCity" >Clave</label>
+                    <div class="form-floating">';
+                        if ( $lista_tipo[$i-1]==1){
+                            echo '<input type="text" name="clave['.$i.']" class="form-control custom_input maxWidthInput" id="clave['.$i.']" value="90111500" placeholder="Clave" disabled>
+                                <label for="inputCity" >Clave</label>';
+                        }else{
+                            echo '<input type="text" name="clave['.$i.']" class="form-control custom_input maxWidthInput" id="clave['.$i.']" value="90101500" placeholder="Clave" disabled>
+                                <label for="inputCity" >Clave</label>';
+                        }
+                        
+                        echo '
                     </div>
         <!--             Imput Id -->
                     <div class="form-floating">
-                        <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="'.$mov[$i-1].'" placeholder="ID" disabled >
+                        <input type="text" name="id['.$i.']" class="form-control custom_input maxWidthInput" id="id['.$i.']" value="'.$mov[0].'" placeholder="ID" disabled >
                         <label for="inputCity" >ID</label>
                     </div>
         <!--             Imput Producto -->
