@@ -7795,6 +7795,14 @@ function agregar_comprobante(folio){
     //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
     closeNav();
 }
+function ver_comprobante( folio ){
+    if(!folio) {
+        alert("No hay imagen para mostrar")
+    } else {
+        console.log("")
+    }
+    window.open(`comprobantes/comprobante_${folio}.jpeg` , "_blank");
+}
 function factura_buscar_fecha(){
     //usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
