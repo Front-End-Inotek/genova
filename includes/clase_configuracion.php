@@ -342,7 +342,23 @@ function tipos_abonos($id=0){
       } else {
         return false;
       }
+    }
+    function actualizar_info_fac( $n_emisor , $e_emisor , $p_emisor , $e_receptor, $n_receptor ) {
+      $sentencia = "UPDATE `correo` SET 
+      `emisor_nombre` = '$n_emisor',
+      `emisor_email` = '$e_emisor',
+      `emisor_password` = '$p_emisor',
+      `receptor_email` = '$e_receptor',
+      `receptor_nombre` = '$n_receptor'
+      WHERE `id` = '1';";
+      $comentario = "Se modifica la informacion de factura";
+      $consulta = $this->realizaConsulta($sentencia , $comentario);
 
+      if($consulta) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 ?>

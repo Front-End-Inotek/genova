@@ -1781,8 +1781,8 @@ function ver_nuevo_rack() {
 function herramientas_admin() {
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	//$("#area_trabajo_menu").load("includes/herramientas_admin.php");
-	$("#area_trabajo_menu").load("includes/herramientas_admin_form.php");
+	$("#area_trabajo_menu").load("includes/herramientas_admin.php");
+	//$("#area_trabajo_menu").load("includes/herramientas_admin_form.php");
     $('#pie').hide();
     closeModal();
     closeNav()
@@ -9412,10 +9412,16 @@ function login_super_admin() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const hashedPassword = "abelino";
+    const hashedPassword = "A1B2C3";
 
-    if(username === "abel" && password === hashedPassword) {
-        alert("Simon")
+    if(username === "super_admin" && password === hashedPassword) {
+        swal({
+            title: "Credenciales correctas",
+            text: "Acceso ortorgado",
+            iconn: "success",
+            buttons: true,
+            dangerMode: true,
+        })
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
@@ -9423,6 +9429,13 @@ function login_super_admin() {
         closeModal();
         closeNav();
     } else {
+        swal({
+            title: "Credenciales incorrectas",
+            text: "Acceso denegado",
+            iconn: "error",
+            buttons: true,
+            dangerMode: true,
+        })
         alert("no")
     }
 }
@@ -9435,6 +9448,7 @@ function selectior_super_admin( selector ) {
             break;
         case "facturacion":
             console.log("Guardando informacion de facturacion..")
+            superAdminGuardarFacturacion();
             break;
         case "abono_reserva":
             console.log("Manejando abono reserva...")
@@ -9502,14 +9516,14 @@ function superAdminGuardarInformacionGeneral() {
 
     swal ({
         title: "Estás seguro de querer actualizar los datos?",
-        text: "Una vez actualizados, los cambios no se podrám deshacer",
+        text: "Una vez actualizados, los cambios no se podrán deshacer",
         icon: "warning",
         buttons: ["Cancelar" , "Actualizar"],
         dangerMode: true,
     }).then((willUpdate) => {
         if(willUpdate){
             swal({
-                title: "Por favor ingresa tu contraseña",
+                title: "Por favor ingresa la contraseña de super admin",
                 text: "Se requiere la contraseña de desarrollo para confirmar la acutalización",
                 content: "input",
                 button: {
@@ -9546,6 +9560,124 @@ function superAdminGuardarInformacionGeneral() {
                         },
                         error: function (error) {
                             console.log(error.responseText)
+                            swal({
+                                title: "Error",
+                                text: "Error al actualizar los datos",
+                                icon: "error"
+                            })
+                        }
+                    });
+                } else {
+                    swal({
+                        title: "Contraseña incorrecta",
+                        text: "La contraseña ingresada no es valida, Por favor intentalo de nuevo.",
+                        icon: "error",
+                    });
+                }
+            });
+        }
+    });
+}
+function superAdminGuardarFacturacion() {
+    const nombreEmisor = document.getElementById("nombre_emisor").value;
+    const emailEmisor = document.getElementById("email_emisor").value;
+    const passwordEmisor = document.getElementById("emisor_password").value;
+    const emailReceptor = document.getElementById("email_receptor").value;
+    const nombreReceptor = document.getElementById("nombre_receptor").value;
+
+    if(!nombreEmisor) {
+        swal({
+            title: "Falta agregar nombre del emisor",
+            text: "Por favor agrega el nombre del emisor",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return null;
+    } else if (!emailEmisor) {
+        swal({
+            title: "Falta agregar email del emisor",
+            text: "Por favor agrega el nombre del emisor",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return null;
+    } else if(!passwordEmisor) {
+        swal({
+            title: "Falta agregar el password del emisor",
+            text: "Por favor agrega el password del emisor",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return null;
+    } else if(!emailReceptor) {
+        swal({
+            title: "Falta agregar email del receptor",
+            text: "Por favor agrega el email del receptor",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return null;
+    } else if(!nombreReceptor) {
+        swal({
+            title: "Falta agregar nombre del receptor",
+            text: "Por favor agrega el nombre del receptor",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        return null;
+    }
+    swal ({
+        title: "Estás seguro de querer actualizar los datos?",
+        text: "Una vez actualizados, los cambios no se podrán deshacer",
+        icon: "warning",
+        buttons: ["Cancelar" , "Actualizar"],
+        dangerMode: true,
+    }).then((willUpdate) => {
+        if(willUpdate) {
+            swal({
+                title: "Por favor ingresa la contraseña de super admin",
+                text: "Se requiere la contraseña de desarrollo para confirmar la actualización",
+                content: "input",
+                button: {
+                    text: "Confirmar",
+                    closeModal: false
+                },
+            }).then((password) => {
+                if( password && password.trim() === "A1B2C3") {
+                    const datos = {
+                        "n_emisor" : nombreEmisor,
+                        "e_emisor" : emailEmisor,
+                        "p_emisor" : passwordEmisor,
+                        "e_receptor" : emailReceptor,
+                        "n_receptor" : nombreReceptor,
+                    }
+                    $.ajax({
+                        async: true,
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/x-www-form-urlencoded",
+                        url: "includes/actualizar_fact.php",
+                        data: datos,
+                        success: function (res) {
+                            console.log(res)
+                            if( res == 1 ) {
+                                swal({
+                                    title: "Se actualizaron los datos de facturacion",
+                                    timer: 5000,
+                                    text: "Se actualizaron correctamente los datos, sera redirigido",
+                                    icon: "success"
+                                }).then(() => {
+                                    window.location.href = "inicio.php"
+                                }, 5000)
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error)
                             swal({
                                 title: "Error",
                                 text: "Error al actualizar los datos",

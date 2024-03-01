@@ -15,7 +15,6 @@ echo '
             <input class="custom_input_admin" type="password" id="password" placeholder="contraseña" autocomplete="off" />
             <div>
                 <button class="btn btn-primary" onclick="login_super_admin()" >Ingresar</button>
-                <button class="btn btn-danger">Salir</button>
             </div>
         </section>
     </div>

@@ -17,10 +17,6 @@ echo '
         <input type="file" id="image" accept="image/*" />
         <button type="button" class="btn btn-primary" onclick="hanldeSaveImageBill('.$folio.')" >Guardar imagen</button>
     </div>
-
-       
-
-
     </div>
 
 ';

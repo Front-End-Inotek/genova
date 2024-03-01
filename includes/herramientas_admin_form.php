@@ -55,8 +55,8 @@ $receptor_nombre = $correo->receptor_nombre;
             </div>
             <div class="herramientas_admin_item_body">
                 <div class="form-floating input_container">
-                    <input type="text" class="form-control custom_input" id="email_emisor" placeholder="Email emisor" value="'.$emisor_nombre.'"/>
-                    <label for="email_emisor">Nombre emisor</label>
+                    <input type="text" class="form-control custom_input" id="nombre_emisor" placeholder="Email emisor" value="'.$emisor_nombre.'"/>
+                    <label for="nombre_emisor">Nombre emisor</label>
                 </div>
                 <div class="form-floating input_container">
                     <input type="text" class="form-control custom_input" id="email_emisor" placeholder="Email emisor" value="'.$emisor_email.'"/>
@@ -67,12 +67,12 @@ $receptor_nombre = $correo->receptor_nombre;
                     <label for="emisor_password">Password emisor</label>
                 </div>
                 <div class="form-floating input_container">
-                    <input type="text" class="form-control custom_input" id="nombre_emisor" placeholder="Nombre emisor" value="'.$receptor_email.'" />
+                    <input type="text" class="form-control custom_input" id="email_receptor" placeholder="Nombre emisor" value="'.$receptor_email.'" />
                     <label for="nombre_emisor">Email receptor</label>
                 </div>
                 <div class="form-floating input_container">
-                    <input type="text" class="form-control custom_input" id="email_receptor" placeholder="Email receptor" value="'.$receptor_nombre.'" />
-                    <label for="email_receptor">Nombre receptor</label>
+                    <input type="text" class="form-control custom_input" id="nombre_receptor" placeholder="Email receptor" value="'.$receptor_nombre.'" />
+                    <label for="nombre_receptor">Nombre receptor</label>
                 </div>
             </div>
             <button class="btn btn-primary" onclick="selectior_super_admin(`facturacion`)">
