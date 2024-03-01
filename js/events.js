@@ -9339,34 +9339,33 @@ function activarBtnFacturaEstadoCuenta() {
 
     btn.disabled = !algunoMarcado
 }
-function hanldeSaveImageBill (folio) {
+function guardarComprobante (folio) {
     console.log("Guardando imagen...")
-    const fileInput = document.getElementById("image");
-    const file = fileInput.files[0];
+    var inputFile = document.getElementById('inputFile');
+    var file = inputFile.files[0];
 
-    if(!file) {
-        console.log("No se ha seleccionado ninguna imagen");
-        return;
+    if (file) {
+        var formData = new FormData();
+        formData.append('imagen', file);
+
+        $.ajax({
+            type: 'POST',
+            url: 'includes/comprobante_factura.php',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log(response);
+                alert('Imagen guardada correctamente.');
+            },
+            error: function(error) {
+                console.error(error);
+                alert('Error al guardar la imagen.');
+            }
+        });
+    } else {
+        alert('Por favor, seleccione una imagen.');
     }
-
-    const data = {
-        "image" : file,
-        "folio" : folio,
-    }
-
-    $.ajax({
-        url: "includes/guardar_imagen_fact.php",
-        type: "POST",
-        data: data,
-        processData: false,
-        contentType: false,
-        success: function(response){
-            console.log("La imagen se ha guardado correctamente")
-        },
-        error: function(xhr , status, error){
-            console.log("Error al guardar la imagen: ", error)
-        }
-    })
 }
 function handleReporteCortes() {
     const inicio = document.getElementById("inicial").value;

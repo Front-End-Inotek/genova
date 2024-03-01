@@ -14,8 +14,8 @@ echo '
         
         <img src="./assets/image.svg"/>
 
-        <input type="file" id="image" accept="image/*" />
-        <button type="button" class="btn btn-primary" onclick="hanldeSaveImageBill('.$folio.')" >Guardar imagen</button>
+        <input type="file" id="inputFile" accept="image/*">
+        <button type="button" class="btn btn-primary" onclick="guardarComprobante('.$folio.')" >Guardar imagen</button>
     </div>
     </div>
 
