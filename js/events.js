@@ -9347,10 +9347,12 @@ function guardarComprobante (folio) {
     if (file) {
         var formData = new FormData();
         formData.append('imagen', file);
+        formData.append('folio', folio);
+        
 
         $.ajax({
             type: 'POST',
-            url: 'includes/comprobante_factura.php',
+            url: 'includes/comprobante.php',
             data: formData,
             contentType: false,
             processData: false,

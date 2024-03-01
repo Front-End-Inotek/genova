@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 date_default_timezone_set('America/Mexico_City');
 include_once('consulta.php');
 
@@ -3507,6 +3507,12 @@ class Reservacion extends ConexionMYSql
     }
     public function cambiar_facturado($id){
         $sentencia="UPDATE `reservacion` SET `facturado`=1 WHERE id =$id;";
+        $comentario="actualizar a facturado";
+        $consulta=$this->realizaConsulta($sentencia,$comentario);
+    }
+    public function guardar_comprobante($nombre,$folio){
+        $sentencia="UPDATE `reservacion` SET `comprobante`='$nombre' WHERE id =$folio;";
+        $_SESSION["imprimir"]= $sentencia;
         $comentario="actualizar a facturado";
         $consulta=$this->realizaConsulta($sentencia,$comentario);
     }

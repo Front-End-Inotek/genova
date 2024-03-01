@@ -1,12 +1,16 @@
 <?php
+    include_once ("clase_reservacion.php");
+    $reserva=NEW Reservacion(0);
     session_start();
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $target_dir = '../comprobantes/';
         $target_file = $target_dir . basename($_FILES['imagen']['name']);
+        
 
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        //$_SESSION['target_file']=$target_file;
+        $change_name=$target_dir ."comprobante_".$_POST['folio'].'.'.$imageFileType;
+        //$_SESSION['imprimir']=$change_name;
         // Verificar si es una imagen real o una imagen falsa
         if (isset($_POST['submit'])) {
             $check = getimagesize($_FILES['imagen']['tmp_name']);
@@ -16,11 +20,7 @@
                 $uploadOk = 0;
             }
         }
-        echo "ipload 1= ".$uploadOk;
-        // Verificar si el archivo ya existe
-        if (file_exists($target_file)) {
-            $uploadOk = 0;
-        }
+        
 
         // Verificar el tamaño del archivo
         if ($_FILES['imagen']['size'] > 500000) {
@@ -37,7 +37,8 @@
         if ($uploadOk == 0) {
             echo 'Error al subir la imagen.';
         } else {
-            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
+            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $change_name)) {
+                $reserva->guardar_comprobante($change_name,$_POST['folio']);
                 echo 'La imagen ' . basename($_FILES['imagen']['name']) . ' ha sido subida correctamente.';
             } else {
                 echo 'Error al subir la imagen.';
