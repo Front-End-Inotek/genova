@@ -7801,7 +7801,7 @@ function ver_comprobante( folio ){
     } else {
         console.log("")
     }
-    window.open(`comprobantes/comprobante_${folio}.jpeg` , "_blank");
+    window.open(`${folio}` , "_blank");
 }
 function factura_buscar_fecha(){
     //usuario_id=localStorage.getItem("id");
