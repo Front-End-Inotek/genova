@@ -3512,8 +3512,18 @@ class Reservacion extends ConexionMYSql
     }
     public function guardar_comprobante($nombre,$folio){
         $sentencia="UPDATE `reservacion` SET `comprobante`='$nombre' WHERE id =$folio;";
-        $_SESSION["imprimir"]= $sentencia;
+        //$_SESSION["imprimir"]= $sentencia;
         $comentario="actualizar a facturado";
         $consulta=$this->realizaConsulta($sentencia,$comentario);
+    }
+    public function sacar_nombre_imagen($folio){
+        $sentencia="SELECT `comprobante` FROM `reservacion` WHERE `id` = $folio LIMIT 1;";
+        //$_SESSION["imprimir"]= $sentencia;
+        $comentario="actualizar a facturado";
+        $consulta=$this->realizaConsulta($sentencia,$comentario);
+        $fila = mysqli_fetch_array($consulta);
+        $nombre=$fila['comprobante'];
+        return $nombre;
+
     }
 }
