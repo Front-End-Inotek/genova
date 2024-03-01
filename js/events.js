@@ -9456,6 +9456,7 @@ function selectior_super_admin( selector ) {
             console.log("Borrando base de datos..")
             break;
         case "borrar_chats": 
+            borrar_chats()
             console.log("Borrando chats...")
             break;
         case "borrar_global":
@@ -9680,7 +9681,9 @@ function superAdminGuardarFacturacion() {
                             swal({
                                 title: "Error",
                                 text: "Error al actualizar los datos",
-                                icon: "error"
+                                icon: "error",
+                                buttons: true,
+                                dangerMode: true,
                             })
                         }
                     });
@@ -9694,6 +9697,24 @@ function superAdminGuardarFacturacion() {
             });
         }
     });
+}
+
+function borrar_chats() {
+    const check = document.getElementById("chats").checked
+
+    if(!check) {
+        console.log("No esta checked")
+        swal({
+            title: "Confirma la acción",
+            text: "Confirma el checkbox para continuar",
+            icon: "info"
+        })
+
+    } else if( check ) {
+        console.log("Si esta checked")
+    }
+
+
 }
 //Evaluamos el inicio de sesion
 function inicio(){

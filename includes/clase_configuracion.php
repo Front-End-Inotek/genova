@@ -360,5 +360,31 @@ function tipos_abonos($id=0){
         return false;
       }
     }
+    function limpiar_base_datos($pass) {
+      if($pass == "hola") {
+        $sentencia = "
+        DROP TALBE IF EXISTS nombre_de_la_tabla
+        ";
+        $comentario = "Se limpio la base de datos";
+        $consulta = $this->realizaConsulta( $sentencia , $comentario );
+
+        if( $consulta ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+    function limpiar_chats() {
+      $sentencia = "DROP TALBE IF EXIST chat";
+      $comentario = "Limpiando tabla de chats";
+      $consulta = $this->realizaConsulta( $sentencia , $comentario );
+
+      if($consulta) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 ?>
