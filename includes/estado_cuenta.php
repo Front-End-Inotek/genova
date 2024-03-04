@@ -221,9 +221,9 @@
         }
         echo '
         <div class="estado_cuenta_cantidades">
-          <div>Total: <span>$'.number_format($total_cargos, 2).'</span></div>
+          <div>Total cargos: <span>$'.number_format($total_cargos, 2).'</span></div>
           <div>Saldo Total: <span>$'.number_format($total_faltante, 2).'</span></div>
-          <div>Total: <span>$'.number_format($total_abonos, 2).'</span></div>
+          <div>Total abonos: <span>$'.number_format($total_abonos, 2).'</span></div>
         </div>
 
         
