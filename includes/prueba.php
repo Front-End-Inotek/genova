@@ -170,7 +170,52 @@
             "reserva_id" => $fila['reserva_id'],
             "dias_reservados" => $dias_reservados
         );
-        //var_dump($datos);
+        var_dump($datos);
+        for ($i=0; $i<$dias_reservados; $i++){
+            if ($unix_today>=$entrada){
+                $matriz[$id_hab-1][$posicion+$i]=$datos;
+            }else{
+                $matriz[$id_hab-1][$posicion+$i+1]=$datos;
+            }
+            
+        }
+        //$datos=[];
+    }
+
+
+    //se realiza la consulta de las reservaciones y se asignan las reservaciones en la matriz segun el dia en que tiene la reserva
+    $reservaciones=$reservacion->ocupacion_rack();
+    while ($fila = mysqli_fetch_array($reservaciones)) {
+        //var_dump($fila);
+        $entrada=$fila['inicio'];
+        $salida=$fila['fin'];
+        if ($unix_today>=$entrada){
+            $diferencia=$salida-$unix_today;
+            if ($diferencia==0){
+                $diferencia=86400;
+            }
+        }else{
+            $diferencia=$salida-$entrada;
+        }
+        $dias_reservados=$diferencia/86400;
+        //echo $dias_reservados;
+        $id_hab=$fila['id'];
+        $posicion = array_search($entrada, $lDias);
+        $datos = (object)array(
+            "id" => $fila['id'],
+            "nombre" => $fila['nombre'],
+            "fecha_entrada" => $fila['inicio'],
+            "fecha_salida" => $fila['fin'],
+            "estado" => $fila['estado'],
+            "garantia" => "",
+            "interno" => $fila['interno'],
+            "n_huesped" => $fila['n_huesped'],
+            "a_huesped" => $fila['a_huesped'],
+            "mov" => $fila['movimiento'],
+            "reserva_id" => "",
+            "dias_reservados" => $dias_reservados
+        );
+        var_dump($datos);
         for ($i=0; $i<$dias_reservados; $i++){
             if ($unix_today>=$entrada){
                 $matriz[$id_hab-1][$posicion+$i]=$datos;

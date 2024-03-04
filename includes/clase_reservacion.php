@@ -3277,6 +3277,21 @@ class Reservacion extends ConexionMYSql
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         return $consulta;
     }
+    public function ocupacion_rack(){
+        $sentencia = "SELECT hab.id ,hab.nombre,hab.tipo,hab.mov as movimiento,hab.estado,hab.comentario,tipo_hab.nombre AS tipo_nombre,movimiento.estado_interno AS interno ,movimiento.inicio_hospedaje AS inicio , movimiento.fin_hospedaje AS fin, datos_vehiculo.id as id_vehiculo
+        ,movimiento.detalle_inicio, movimiento.detalle_fin, huesped.nombre as n_huesped, huesped.apellido a_huesped,datos_vehiculo.estado as estado_vehiculo, tipo_hab.color as color_tipo
+        FROM hab LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id LEFT JOIN movimiento ON hab.mov = movimiento.id 
+        LEFT JOIN huesped on huesped.id = movimiento.id_huesped
+        LEFT JOIN datos_vehiculo on movimiento.id_reservacion = datos_vehiculo.id_reserva
+        WHERE hab.estado_hab = 1
+        AND hab.tipo>0
+        -- AND hab.id=1
+        ORDER BY id";
+        echo $sentencia;
+        $comentario="Se obtiene las reservaciones por habitacion";
+        $consulta= $this->realizaConsulta($sentencia, $comentario);
+        return $consulta;
+    }
     public function ingresar_cuenta($usuario_id, $id_mov, $descripcion, $forma_pago, $pago_total){
         $fecha_entrada= time();
         $sentencia = "INSERT INTO `cuenta` (`id_usuario`, `mov`, `descripcion`, `fecha`, `forma_pago`, `cargo`, `abono`, `estado`)
