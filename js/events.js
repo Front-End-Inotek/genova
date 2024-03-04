@@ -1772,8 +1772,7 @@ function graficas(){
 function ver_nuevo_rack() {
     $('#area_trabajo').hide();
 	$('#area_trabajo_menu').show();
-	//$("#area_trabajo_menu").load("includes/rack.php");
-	$("#area_trabajo_menu").load("includes/agregar_comprobante.php");
+	$("#area_trabajo_menu").load("includes/rack.php");
     $('#pie').hide();
     closeModal();
     closeNav()
