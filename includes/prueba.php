@@ -7,8 +7,10 @@
     // Funciom para darle estado a la habitaciom
 
     function setRoomStatus( $hab ) {
-
+        // Creacion de un objeto para retornarlo
         $result = array();
+
+        //Varoables inicializadas
         $estadoHab = "Disponible";
         $estadoCss = "diaTask_disponible";
         $icono = '<span class="material-symbols-outlined">add_circle</span>';
@@ -16,70 +18,87 @@
         $nombre = "Disponible";
         $apellido = "";
         $funcion = "mostrar_herramientas()";
+        $mov = "sin movimiento";
+
+        if($hab != "-"){
+            if(!$hab->reserva_id){
+                //Habitacion ocupada y con estado
+                $estado = $hab->estado;
+                switch ( $estado ) {
+                    case "ocupado":
+                        $estadoCss = "diaTask_ocupado diaTask_estado";
+                        $estadoHab = "Ocupado";
+                        $icono = '
+                                <span class="material-symbols-outlined">
+                                    night_shelter
+                                </span>';
+                        break;
+                    case "uso_casa":
+                        $estadoCss = "diaTask_uso_casa diaTask_estado";
+                        $estadoHab = "Uso casa";
+                        $icono = '
+                                <span class="material-symbols-outlined">
+                                    home
+                                </span>';
+                        break;
+                    case "vacia_sucia":
+                        $estadoCss = "diaTask_vacia_sucia diaTask_estado";
+                        $estadoHab = "Vacia sucia";
+                        $icono = '
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>';
+                        break;
+                    case "limpieza":
+                        $estadoCss = "diaTask_limpieza diaTask_estado";
+                        $estadoHab = "Limpieza";
+                        $icono = '
+                            <span class="material-symbols-outlined">
+                                cleaning_bucket
+                            </span>';
+                        break;
+                    case "mantenimiento":
+                        $estadoCss = "diaTask_mantenimiento diaTask_estado";
+                        $estadoHab = "Mantenimiento";
+                        $icono = '
+                            <span class="material-symbols-outlined">
+                                handyman
+                            </span>';
+                        break;
+                    case "bloqueado":
+                        $estadoCss = "diaTask_bloqueado diaTask_estado";
+                        $estadoHab = "Bloqueado";
+                        $icono = '
+                                <span class="material-symbols-outlined">
+                                    block
+                                </span>';
+                        break;
+                    case "1":
+                        $estadoCss = "diaTask_bloqueado diaTask_estado";
+                        $estadoHab = "Reservada";
+                        $icono = '
+                                <span class="material-symbols-outlined">
+                                    menu_book
+                                </span>';
+                        break;
+                    }
+            } else {
+                //Habitacion con reserva
+            }
+        } else {
+            /* if ( $hab->reserva_id == "" && $hab->estado == 1 ) {
+                //habitacion parpadeando xd
+            } */
+        }
 
         if(is_object($hab)){
-        $estado = $hab->estado;
-        $dias = 150 * ($hab->dias_reservados);
+        if ($hab->dias_reservados >= 0) {
+            $dias = 150 * $hab->dias_reservados;
+        } 
         $nombre = $hab->n_huesped;
         $apellido = $hab->a_huesped;
-        switch ( $estado ) {
-            case "ocupado":
-                $estadoCss = "diaTask_ocupado diaTask_estado";
-                $estadoHab = "Ocupado";
-                $icono = '
-                        <span class="material-symbols-outlined">
-                            night_shelter
-                        </span>';
-                break;
-            case "uso_casa":
-                $estadoCss = "diaTask_uso_casa diaTask_estado";
-                $estadoHab = "Uso casa";
-                $icono = '
-                        <span class="material-symbols-outlined">
-                            home
-                        </span>';
-                break;
-            case "vacia_sucia":
-                $estadoCss = "diaTask_vacia_sucia diaTask_estado";
-                $estadoHab = "Vacia sucia";
-                $icono = '
-                            <span class="material-symbols-outlined">
-                                delete
-                            </span>';
-                break;
-            case "limpieza":
-                $estadoCss = "diaTask_limpieza diaTask_estado";
-                $estadoHab = "Limpieza";
-                $icono = '
-                    <span class="material-symbols-outlined">
-                        cleaning_bucket
-                    </span>';
-                break;
-            case "mantenimiento":
-                $estadoCss = "diaTask_mantenimiento diaTask_estado";
-                $estadoHab = "Mantenimiento";
-                $icono = '
-                    <span class="material-symbols-outlined">
-                        handyman
-                    </span>';
-                break;
-            case "bloqueado":
-                $estadoCss = "diaTask_bloqueado diaTask_estado";
-                $estadoHab = "Bloqueado";
-                $icono = '
-                        <span class="material-symbols-outlined">
-                            block
-                        </span>';
-                break;
-            case "1":
-                $estadoCss = "diaTask_bloqueado diaTask_estado";
-                $estadoHab = "Reservada";
-                $icono = '
-                        <span class="material-symbols-outlined">
-                            menu_book
-                        </span>';
-                break;
-            }
+        $mov = $hab->mov;
+        
         }
         //$result["dias"] = $hab['dias_reservados'];
         $result["dias"] = $dias;
@@ -89,6 +108,7 @@
         $result["nombre"] = $nombre;
         $result["apellido"] = $apellido;
         $result["funcion"] = $funcion;
+        $result["mov"] = $mov;
         
         return $result;
     }
@@ -170,7 +190,7 @@
             "reserva_id" => $fila['reserva_id'],
             "dias_reservados" => $dias_reservados
         );
-        var_dump($datos);
+        //var_dump($datos);
         for ($i=0; $i<$dias_reservados; $i++){
             if ($unix_today>=$entrada){
                 $matriz[$id_hab-1][$posicion+$i]=$datos;
@@ -233,14 +253,11 @@
         echo'<div class="task_calendario nombre_hab" style="border-color: #'.$lColor[$i].' ">
                 <p>Hab. '.$lNombres[$i].' </p>
             </div>';
-            //$bandera = null;
+            $bandera = null;
         for($j=0; $j<=30; $j++){
             $estado = $matriz[$i][$j];
 
-            /* if($bandera == $estado ){
-                continue;
-            } */
-            $bandera = $estado;
+            
             $roomStatus = setRoomStatus( $estado );
             $estadoCss  = $roomStatus['estadoCss'];
             $estadoHab  = $roomStatus['estado'];
@@ -249,8 +266,16 @@
             $nombre     = $roomStatus['nombre'];
             $apellido   = $roomStatus['apellido'];
             $funcion    = $roomStatus['funcion'];
+            $mov        = $roomStatus["mov"];
+            //echo $mov;
 
-            echo '
+            /* if($bandera == $mov ){
+                echo "hola";
+                continue;
+            } */
+
+            if ($bandera == "sin movimiento"){
+                echo '
                 <div href="#caja_herramientas" class="task_calendario diaTask '.$estadoCss.' " style="width:'.$anchura.'px !important" data-toggle="modal" onclick="'.$funcion.'" >
                     <div class="task_calendario_status">
                         <p>'.$icono.'</p>
@@ -261,6 +286,27 @@
                     </div>
                 </div>
             ';
+            $bandera = $mov;
+
+            } elseif ($bandera == $mov) {
+                continue;
+            }else {
+                echo '
+                <div href="#caja_herramientas" class="task_calendario diaTask '.$estadoCss.' " style="width:'.$anchura.'px !important" data-toggle="modal" onclick="'.$funcion.'" >
+                    <div class="task_calendario_status">
+                        <p>'.$icono.'</p>
+                        <p>'.$estadoHab.'</p>
+                    </div>
+                    <div class="task_calendario_status">
+                        <p>'.$nombre.' '.$apellido.'</p>
+                    </div>
+                </div>
+                
+            ';
+                $bandera = $mov;
+
+            }
+            
 
             //$estado = "diaTask_estado"; //diaTask_estado
             //$estadoCss = "disponible";
