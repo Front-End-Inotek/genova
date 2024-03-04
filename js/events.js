@@ -7800,7 +7800,7 @@ function ver_comprobante( folio ){
     } else {
         console.log("")
     }
-    window.open(`${folio}` , "_blank");
+    window.open(`visit/${folio}` , "_blank");
 }
 function factura_buscar_fecha(){
     //usuario_id=localStorage.getItem("id");
