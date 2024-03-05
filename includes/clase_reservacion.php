@@ -1610,6 +1610,7 @@ class Reservacion extends ConexionMYSql
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
+            <th>Habitacion</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
             <th>Nombre Huésped</th>
@@ -1715,6 +1716,7 @@ class Reservacion extends ConexionMYSql
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
+            <th>Habitacion</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
             <th>Nombre Huésped</th>
@@ -1761,16 +1763,21 @@ class Reservacion extends ConexionMYSql
     }
     public function construirTabla($fila, $agregar, $editar, $borrar, $ruta="", $preasignar=0)
     {
+        include_once('clase_hab.php');
+        $hab=NEW Hab(0);
         $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
         $preasignada="";
         if(isset($fila['nombre_hab'])) {
             $preasignada=$fila['nombre_hab'];
         }
+        //var_dump($fila);
         if($fila['edo'] == 1) {
             if($fila['total_pago'] <= 0) {
                 echo '<tr class="text-center">
             <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1862,6 +1869,8 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<tr class="table-success text-center">
             <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1957,6 +1966,8 @@ class Reservacion extends ConexionMYSql
         } else {
             echo '<tr class=" text-center">
             <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
@@ -2161,6 +2172,7 @@ class Reservacion extends ConexionMYSql
                                     <thead>
                                         <tr class="table-primary-encabezado text-center">
                                         <th>Número</th>
+                                        <th>Habitacion</th>
                                         <th>Fecha Entrada</th>
                                         <th>Fecha Salida</th>
                                         <th>Nombre Huésped</th>
@@ -2275,6 +2287,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
+                <th>Habitacion</th>
 				<th>Fecha Entrada</th>
 				<th>Fecha Salida</th>
                 <th>Nombre Huésped</th>
@@ -2352,6 +2365,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
+                <th>Habitacion</th>
 				<th>Fecha Entrada</th>
 				<th>Fecha Salida</th>
                 <th>Nombre Huésped</th>
@@ -2473,6 +2487,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 			    <tr class="table-primary-encabezado text-center">
 			    <th>Número</th>
+                <th>Habitacion</th>
 			    <th>Fecha Entrada</th>
 			    <th>Fecha Salida</th>
                 <th>Nombre Huésped</th>
