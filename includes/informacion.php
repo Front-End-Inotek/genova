@@ -231,7 +231,7 @@ class Informacion extends ConexionMYSql
                         </section>
 
                         <section class="habitacion_container_body disponible_limpia_fondo">
-                        <div class="pildora_nombre">'.$fila['nombre'].'</div>
+                        <div class="pildora_nombre ">'.$fila['nombre'].'</div>
                 ';
                 break;
                 case "Vacia limpieza":
