@@ -223,7 +223,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora disponible_limpia_fondo ">
                                 <div class="habitacion_container_encabezado_circle  disponible_limpia" style="background-color: '.$color.' ;"></div>
-                                <span class="filtro_text_pildora">'.$fila['tipo_nombre'] . " " .$fila['nombre'] . '</span>
+                                <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos disponible_limpia_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/disponible_limpia.svg"/>
@@ -231,7 +231,7 @@ class Informacion extends ConexionMYSql
                         </section>
 
                         <section class="habitacion_container_body disponible_limpia_fondo">
-                        
+                        <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 break;
                 case "Vacia limpieza":
@@ -239,7 +239,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora disponible_limpieza_fondo">
                                 <div class="habitacion_container_encabezado_circle disponible_limpieza" style="background-color: '.$color.' ;"></div>
-                                <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                                <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos disponible_limpieza_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/disponible_limpieza.svg"/>
@@ -247,6 +247,7 @@ class Informacion extends ConexionMYSql
                         </section>
 
                         <section class="habitacion_container_body disponible_limpieza_fondo">
+                        <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 break;
                 case "Vacia sucia":
@@ -254,7 +255,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora vacia_sucia_fondo">
                                 <div class="habitacion_container_encabezado_circle vacia_sucia" style="background-color: '.$color.' ;"></div>
-                                <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                                <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos vacia_sucia_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/vacia_sucia.svg"/>
@@ -262,6 +263,7 @@ class Informacion extends ConexionMYSql
                         </section>
 
                         <section class="habitacion_container_body vacia_sucia_fondo">
+                        <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
 
                 break;
@@ -270,7 +272,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora ocupada_fondo">
                                 <div class="habitacion_container_encabezado_circle ocupado" style="background-color: '.$color.' ;"></div>
-                                <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                                <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos ocupada_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado.svg"/>
@@ -278,6 +280,7 @@ class Informacion extends ConexionMYSql
                         </section>
 
                         <section class="habitacion_container_body ocupada_fondo">
+                        <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 echo $icono_carro;
                 break;
@@ -286,7 +289,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora ocupado_sucio_fondo">
                                 <div class="habitacion_container_encabezado_circle ocupado_sucia" style="background-color: '.$color.' ;"></div>
-                                <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                                <span class="filtro_text_pildora">'.$fila['tipo_nombre'] .'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos ocupado_sucio_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado_sucia.svg"/>
@@ -294,6 +297,7 @@ class Informacion extends ConexionMYSql
                         </section>
 
                         <section class="habitacion_container_body ocupado_sucio_fondo">
+                        <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 echo $icono_carro;
                 break;
@@ -302,7 +306,7 @@ class Informacion extends ConexionMYSql
                         <section class="habitacion_container_encabezado">
                             <div class="habitacion_container_encabezado_pildora ocupado_limpieza_fondo">
                                 <div class="habitacion_container_encabezado_circle ocupado_limpieza" style="background-color: '.$color.' ;"></div>
-                                <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                                <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                             </div>
                             <div class="habitacion_container_encabezado_iconos ocupado_limpieza_fondo">
                                 <img class="habitacion_container_encabezado_iconos_icon" src="./assets/ocupado_limpieza.svg"/>
@@ -310,6 +314,7 @@ class Informacion extends ConexionMYSql
                         </section>
 
                         <section class="habitacion_container_body ocupado_limpieza_fondo">
+                        <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 echo $icono_carro;
                 break;
@@ -318,7 +323,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora reserva_pagada_fondo">
                             <div class="habitacion_container_encabezado_circle reserva_pagada" style="background-color: '.$color.' ;"></div>
-                            <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                            <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos reserva_pagada_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/reserva_pagada.svg"/>
@@ -326,6 +331,7 @@ class Informacion extends ConexionMYSql
                     </section>
 
                     <section class="habitacion_container_body reserva_pagada_fondo">
+                    <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 break;
                 case "Reserva pendiente":
@@ -333,7 +339,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora reserva_pendiente_fondo">
                             <div class="habitacion_container_encabezado_circle reserva_pendiente" style="background-color: '.$color.' ;"></div>
-                            <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                            <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos reserva_pendiente_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/reserva_pendiente.svg"/>
@@ -341,6 +347,7 @@ class Informacion extends ConexionMYSql
                     </section>
 
                     <section class="habitacion_container_body reserva_pendiente_fondo">
+                    <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 break;
                 case "Uso casa":
@@ -348,7 +355,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora uso_casa_fondo">
                             <div class="habitacion_container_encabezado_circle uso_casa" style="background-color: '.$color.' ;"></div>
-                            <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                            <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos uso_casa_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/uso_casa.svg"/>
@@ -356,6 +363,7 @@ class Informacion extends ConexionMYSql
                     </section>
 
                     <section class="habitacion_container_body uso_casa_fondo">
+                    <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
         
                 break;
@@ -364,7 +372,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora mantenimiento_fondo">
                             <div class="habitacion_container_encabezado_circle mantenimiento" style="background-color: '.$color.' ;"></div>
-                            <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                            <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos mantenimiento_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/mantenimiento.svg"/>
@@ -372,6 +380,7 @@ class Informacion extends ConexionMYSql
                     </section>
 
                     <section class="habitacion_container_body mantenimiento_fondo">
+                    <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 break;
                 case "Bloqueo":
@@ -379,7 +388,7 @@ class Informacion extends ConexionMYSql
                     <section class="habitacion_container_encabezado">
                         <div class="habitacion_container_encabezado_pildora bloqueado_fondo">
                             <div class="habitacion_container_encabezado_circle bloqueado" style="background-color: '.$color.' ;"></div>
-                            <span class="filtro_text_pildora">'.$fila['tipo_nombre']." " .$fila['nombre'] .'</span>
+                            <span class="filtro_text_pildora">'.$fila['tipo_nombre'].'</span>
                         </div>
                         <div class="habitacion_container_encabezado_iconos bloqueado_fondo">
                             <img class="habitacion_container_encabezado_iconos_icon" src="./assets/bloqueado.svg"/>
@@ -387,6 +396,7 @@ class Informacion extends ConexionMYSql
                     </section>
 
                     <section class="habitacion_container_body bloqueado_fondo">
+                    <div class="pildora_nombre">'.$fila['nombre'].'</div>
                 ';
                 break;
                 default:

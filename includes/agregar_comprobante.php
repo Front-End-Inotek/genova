@@ -11,11 +11,9 @@ echo '
     </header>
 
     <div class="contenedor_imagenes_fact">
-        
         <img src="./assets/image.svg"/>
-
         <input type="file" id="inputFile" accept="image/*">
-        <button type="button" class="btn btn-primary" onclick="guardarComprobante('.$folio.')" >Guardar imagen</button>
+        <button type="button" class="btn btn-primary" onclick="guardarComprobante('.$folio.')">Guardar imagen</button>
     </div>
     </div>
 

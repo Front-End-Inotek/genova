@@ -126,7 +126,7 @@ echo '<div class="container-fluid">';
 show_info($_GET['hab_id'],$_GET['estado'],$estado_interno);
 echo '<div class="contenedor_botones">';
 
-
+echo $_GET['estado'];
 switch ($_GET['estado']) {
 	case 0:
 	if($user->nivel<=2 && $conf->hospedaje ==1){
@@ -336,6 +336,18 @@ switch ($_GET['estado']) {
 				echo '<p>Asignar</p>';
 			echo '</div>';
 		}
+		
+	}
+	case 7:
+	if($user->nivel<=2){
+			echo '<div class="btn_modal_herramientas btn_garantizar" onclick="aceptar_garantizar_reservacion("")">';
+				echo '<img class="btn_modal_img" src="./assets/iconos_btn/garantizar.svg">';
+				echo '<p>Garantizar</p>';
+			echo '</div>';
+			echo '<div class="btn_modal_herramientas btn_cancelar" onclick="">';
+				echo '<img class="btn_modal_img" src="./assets/iconos_btn/cancelar.svg">';
+				echo '<p>Cancelar preasignación</p>';
+			echo '</div>';
 		
 	}
 	break;

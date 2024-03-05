@@ -544,6 +544,17 @@ body {
   border-radius: 5.25px;
   padding: 2px 5px;
 }
+.pildora_nombre {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0 3px;
+  border-radius: 5px;
+  opacity: 1;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: initial;
+}
 
 .habitacion_container_encabezado_circle{
   border-radius: 50%;
@@ -787,6 +798,10 @@ body {
   background-color: rgb(214, 105, 16);
   color: white;
 }
+.btn_garantizar {
+  background-color: #BCD269;
+  color: white;
+}
 .btn_chat {
   background-color: #0D6EFD;
   color: white;
@@ -795,7 +810,10 @@ body {
   width: 40px;
   height: 40px;
 }
-
+.btn_cancelar {
+  background-color: red;
+  color: white;
+}
 .contenedor_para_hab {
   position: relative;
   width: 100%;
