@@ -56,11 +56,39 @@
           </div>
       </div>';
         break;
-    case 5:// Enviar a supervision
-        $id = $movimiento->guardar_limpieza($_GET['hab_id'],$_GET['usuario_id'],$_GET['usuario']);
-        $hab->cambiohab($_GET['hab_id'],$id,3);
-        $logs->guardar_log($_GET['usuario_id'],"Limpieza en habitacion: ". $hab->nombre);
-        break;
+    case 0:// Enviar a bloqueo
+          echo '<!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h3>Asignar a Bloqueo</h3>
+                  </div>
+                  <div class="col-sm-12">
+                    Selecciona el motivo por el bloqueo a la habitación '.$hab->nombre.':
+                  </div>
+                </div>
+                <button type="button" class="btn btn-light" data-dismiss="modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
+            </svg>
+          </button>
+          </div>';                
+              echo '<div class="modal-body">';
+              echo '<div class="row">
+              <div class="inputs_form_container">
+              <div class="form-floating input_container">
+                  <input type="text" class="form-control custom_input" id="motivo" placeholder="Ingresa el motivo del matenimiento" maxlength="50">
+                  <label for="motivo">Motivo del bloqueo</label>     
+                  </div>
+              </div>
+              </div>';
+              echo '<div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+                <button type="button" class=" btn btn-primary" onclick="hab_inicial('.$_GET['hab_id'].', 5,'.$_GET['usuario'].')">Aceptar</button>
+              </div>
+          </div>';
+          break;
     case 6:// Enviar a cancelada
         echo '<!-- Modal content-->
         <div class="modal-content">
