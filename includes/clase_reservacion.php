@@ -1587,8 +1587,8 @@ class Reservacion extends ConexionMYSql
         INNER JOIN usuario ON reservacion.id_usuario = usuario.id
         INNER JOIN huesped ON reservacion.id_huesped = huesped.id
         INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
-        AND (reservacion.fecha_salida >= $inicio_dia && reservacion.fecha_salida <= $fin_dia) AND hab.estado_hab = 1 AND hab.estado=1 ORDER BY hab.id";
-        // echo $sentencia;
+        AND (reservacion.fecha_salida >= $inicio_dia && reservacion.fecha_salida <= $fin_dia) AND hab.estado_hab = 1 AND (hab.estado=2 OR hab.estado=3) ORDER BY hab.id";
+        //echo $sentencia;
         $cat_paginas=($this->total_elementos($sentencia)/20);
         $extra=($this->total_elementos($sentencia)%20);
         $cat_paginas=intval($cat_paginas);
@@ -2208,7 +2208,7 @@ class Reservacion extends ConexionMYSql
     }
     
     //Barra de busqueda en ver llegadas y salidas, se usará la misma función.
-    public function buscar_entradas_salidas_recep($a_buscar, $id, $inicio_dia, $opcion, $fin_dia)
+    public function buscar_entradas_salidas_recep($a_buscar, $id, $inicio_dia, $opcion, $fin_dia, $radio)
     {
         include_once('clase_usuario.php');
         $usuario =  new Usuario($id);
@@ -2265,19 +2265,46 @@ class Reservacion extends ConexionMYSql
                 $where_fechas="";
             }
             $ruta="ver_reportes_salidas()";
-            $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-            FROM hab
-            LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
-            INNER JOIN movimiento ON hab.mov = movimiento.id
-            INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id
-            LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
-            INNER JOIN usuario ON reservacion.id_usuario = usuario.id
-            INNER JOIN huesped ON reservacion.id_huesped = huesped.id
-            INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
-            ".$where_buscar."
-            ".$where_fechas." AND hab.estado_hab = 1 AND hab.estado=1 ORDER BY hab.id";
+            if($radio=="salidas"){
+                $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                FROM hab
+                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
+                INNER JOIN movimiento ON hab.mov = movimiento.id
+                INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
+                INNER JOIN usuario ON reservacion.id_usuario = usuario.id
+                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
+                ".$where_buscar."
+                ".$where_fechas." AND hab.estado_hab = 1 AND (hab.estado=2 OR hab.estado=3) ORDER BY hab.id";
+            }elseif($radio=="proximas"){
+                $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                FROM hab
+                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
+                INNER JOIN movimiento ON hab.mov = movimiento.id
+                INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
+                INNER JOIN usuario ON reservacion.id_usuario = usuario.id
+                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
+                ".$where_buscar."
+                ".$where_fechas." AND hab.estado_hab = 1 AND hab.estado=1 ORDER BY hab.id";
+            }else{
+                $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                FROM hab
+                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
+                INNER JOIN movimiento ON hab.mov = movimiento.id
+                INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
+                INNER JOIN usuario ON reservacion.id_usuario = usuario.id
+                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
+                ".$where_buscar."
+                ".$where_fechas." AND hab.estado_hab = 1 AND (hab.estado=1 OR hab.estado=2 OR hab.estado=3) ORDER BY hab.id";
+            }
+            
         }
-        // echo $sentencia;
+        //echo $sentencia;
         $comentario="Mostrar diferentes busquedas en ver reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         //se recibe la consulta y se convierte a arreglo

@@ -220,7 +220,7 @@
               <th>Estado</th>
               <th>Nombre</th>
               <th>Fecha</th>
-              <th>Forma de pago</th>
+              <th>Metodo de pago</th>
               <th><span class=" glyphicon glyphicon-cog"></span> XML</th>
               <th><span class=" glyphicon glyphicon-cog"></span> PDF</th>
               <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
@@ -250,26 +250,26 @@
               }
               echo '<th>'.$fila['nombre'].'</th>
               <th>'.date("F j, Y, g:i a",($fila['fecha']+21600)).'</th>';
-              switch ($fila['forma_pago']) {
-                case 1:
+              switch ($fila['metodopago']) {
+                case 01:
                    echo '<th>Efectivo</th>';
                   break;
-                case 2:
+                case 02:
                    echo '<th>Cheque</th>';
                   break;
-                case 3:
+                case 03:
                    echo '<th>Trasferemcia</th>';
                   break;
-                case 4:
+                case 04:
                    echo '<th>Tarjeta de credito</th>';
                   break;
-                case 5:
+                case 05:
                    echo '<th>Monedero electronico</th>';
                   break;
-                case 6:
+                case 06:
                    echo '<th>Dinero electronico</th>';
                   break;
-                case 8:
+                case 07:
                    echo '<th>Vales de despensa</th>';
                   break;
                 case 28:
