@@ -322,8 +322,8 @@
         }
         return $id_ticket;
       }
-      function sacar_tickets_corte($valor){
-        $sentencia="SELECT * FROM `ticket` WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '2024-03-06' AND `corte` = '0' AND `estado` != '2'AND `id_usuario`=28 AND `forma_pago`=$valor;";
+      function sacar_tickets_corte($usuario, $valor){
+        $sentencia="SELECT * FROM `ticket` WHERE  `corte` = '0' AND `estado` != '2'AND `id_usuario`=$usuario AND `forma_pago`=$valor;";
         $comentario="saco los tickets que comprenden el corte para mostrarlos en una tabla en el corte del usuairo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

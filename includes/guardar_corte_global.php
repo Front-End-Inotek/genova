@@ -332,16 +332,13 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   foreach ($abonos as $clave => $valor){
     $total=0;
     
-    $consulta=$ticket->sacar_tickets_corte($clave);
+    $consulta=$ticket->sacar_tickets_corte($_POST['usuario_id'],$clave);
     if ($consulta->num_rows > 0) {
       $pdf->Cell( 278 , 5, $valor, 0, 0,'C');
       $pdf->ln();
       // La consulta no está vacía, realiza alguna acción
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell( 30 , 5, '', 0, 0, 'C');
-        $pdf->ln();
         $pdf->SetFont('Arial', '', 10);
         
         $pdf->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
@@ -357,8 +354,8 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       $pdf->Cell( 158 , 5, "", 0, 0, 'C');
       $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
       $pdf->Cell( 30 , 5, "$".number_format($total,2), 1, 0, 'C');
-      $pdf->ln();
     }
+    $pdf->ln();
 
   }
   
