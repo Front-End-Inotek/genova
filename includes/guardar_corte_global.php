@@ -410,8 +410,9 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       $pdf->Cell( 158 , 5, "", 0, 0, 'C');
       $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
       $pdf->Cell( 30 , 5, "$".number_format($total,2), 1, 0, 'C');
+      $pdf->ln();
     }
-    $pdf->ln();
+    
 
   }
   
