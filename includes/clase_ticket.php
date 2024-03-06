@@ -254,7 +254,7 @@
         $sentencia = "UPDATE `ticket` SET
         `corte` = '$corte',
         `estado` = '$estado'
-        WHERE from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy' AND `corte` = '0' AND `estado` != '2'
+        WHERE `corte` = '0' AND `estado` != '2'
         AND `id_usuario` = '$id_usuario'
         ";
         //echo $sentencia;
