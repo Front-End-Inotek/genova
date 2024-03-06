@@ -75,7 +75,7 @@
     }
     // Estado 1
     function ocupada($hab_id,$estado,$mov){
-      $sentencia = "SELECT * FROM movimiento WHERE id = $mov ORDER BY id DESC LIMIT 1";
+      $sentencia = "SELECT *, huesped.comentarios FROM movimiento INNER JOIN huesped ON movimiento.id_huesped = huesped.id WHERE movimiento.id = $mov ORDER BY movimiento.id DESC LIMIT 1";
       $comentario= "Obtener informacion para la habitacion con el estado ocupada";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //echo $sentencia ;
@@ -101,6 +101,8 @@
         $estado_interno= $fila['estado_interno'];
         $inicio_limpieza= $fila['inicio_limpieza'];
         $persona_limpio= $fila['persona_limpio'];
+        $comentario=$fila['comentarios'];
+        //var_dump($fila);
       }
         $cuenta= NEW Cuenta(0);
         $huesped= NEW Huesped($id_huesped);
@@ -144,6 +146,11 @@
         echo '<div class="col-xs-12 col-sm-12 col-md-12 letras-grandes-modal">';
           echo 'Tipo Habitación: '.$tipo_habitacion;
         echo '</div>';
+        if($comentario!=''){
+          echo '<div class="col-xs-12 col-sm-12 col-md-12 letras-grandes-modal">';
+            echo 'Comentarios: '.$comentario;
+          echo '</div>';
+        }
     }
     // Estado 2
     function sucia($hab_id,$estado,$mov){

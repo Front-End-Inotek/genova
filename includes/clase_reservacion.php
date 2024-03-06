@@ -1,4 +1,5 @@
 <?php
+//session_start();
 date_default_timezone_set('America/Mexico_City');
 include_once('consulta.php');
 
@@ -467,10 +468,10 @@ class Reservacion extends ConexionMYSql
         $agregar_id="";
         //se agrega filtro para el id de la habitación.
         if($preasignada!=0 && $hab_id!=0) {
-            $agregar_="AND m.id_hab=".$hab_id." AND m.motivo!='reservar'";
+            $agregar_="AND m.id_hab=".$hab_id." AND m.motivo!='reservar' AND reservacion.estado <2";
             $agregar_editar="";
         } else {
-            $agregar_ ="AND m.id_hab=".$hab_id."  AND m.motivo!='preasignar'";
+            $agregar_ ="AND m.id_hab=".$hab_id."  AND m.motivo!='preasignar' AND reservacion.estado <2";
         }
         if($hab_id!=0) {
             $agregar_id ="AND m.id_hab=".$hab_id;
@@ -521,6 +522,7 @@ class Reservacion extends ConexionMYSql
             }
         }
         //    print_r($no_disponibles);
+        //echo  $ocupadas;
         $consulta = $this->realizaConsulta($ocupadas, "");
         while($fila=mysqli_fetch_array($consulta)) {
             $no_disponibles [] = $fila['hab_id'];
@@ -1608,6 +1610,7 @@ class Reservacion extends ConexionMYSql
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
+            <th>Habitacion</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
             <th>Nombre Huésped</th>
@@ -1713,6 +1716,7 @@ class Reservacion extends ConexionMYSql
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
+            <th>Habitacion</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
             <th>Nombre Huésped</th>
@@ -1759,17 +1763,21 @@ class Reservacion extends ConexionMYSql
     }
     public function construirTabla($fila, $agregar, $editar, $borrar, $ruta="", $preasignar=0)
     {
+        include_once('clase_hab.php');
+        $hab=NEW Hab(0);
         $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
         $preasignada="";
         if(isset($fila['nombre_hab'])) {
             $preasignada=$fila['nombre_hab'];
         }
-        //echo $fila['edo'];
+        //var_dump($fila);
         if($fila['edo'] == 1) {
             if($fila['total_pago'] <= 0) {
                 echo '<tr class="text-center">
             <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1828,7 +1836,6 @@ class Reservacion extends ConexionMYSql
                 } */
                 //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
                 if($editar==1 && $fila['edo'] = 1) {
-                    $id_hab=0+$fila['id_hab'];
                     //echo '<td><button class="btn btn-warning" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')"> Editar</button></td>';
                     echo '<td>
                         <div class="dropdown">
@@ -1836,15 +1843,15 @@ class Reservacion extends ConexionMYSql
                             Ver mas
                             </button>
                             <div class="dropdown-menu" aria-labelledby="options">';
-                    echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$id_hab.',\''.$fila['correo_huesped'].'\',0,'.$fila['huesped_id'].')">Garantizar</a>';
+                    echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',0,'.$fila['huesped_id'].')">Garantizar</a>';
                     echo '<a class="dropdown-item" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')">Ver reporte</a>';
                     echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
                     echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada</a>';
                     echo '<a class="dropdown-item" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
                     if($borrar == 1 && $fila['edo'] != 0) {
-                        echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$id_hab.',\''.$fila['correo_huesped'].'\')">Cancelar</a>';
+                        echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Cancelar</a>';
                         echo '<div class="dropdown-divider"></div>';
-                        echo '<a class="dropdown-item text-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$id_hab.',\''.$fila['correo_huesped'].'\')">Borrar</a>';
+                        echo '<a class="dropdown-item text-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Borrar</a>';
                     }
                     //<a class="dropdown-item" href="#">Another action</a>
                     //<a class="dropdown-item" href="#">Something else here</a>
@@ -1862,6 +1869,8 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<tr class="table-success text-center">
             <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1957,6 +1966,8 @@ class Reservacion extends ConexionMYSql
         } else {
             echo '<tr class=" text-center">
             <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
@@ -2106,7 +2117,7 @@ class Reservacion extends ConexionMYSql
         ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
-       // echo $sentencia;
+        //echo $sentencia;
         $cat_paginas=($this->total_elementos($sentencia)/20);
         // print_r($cat_paginas);
         $extra=($this->total_elementos($sentencia)%20);
@@ -2161,6 +2172,7 @@ class Reservacion extends ConexionMYSql
                                     <thead>
                                         <tr class="table-primary-encabezado text-center">
                                         <th>Número</th>
+                                        <th>Habitacion</th>
                                         <th>Fecha Entrada</th>
                                         <th>Fecha Salida</th>
                                         <th>Nombre Huésped</th>
@@ -2275,6 +2287,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
+                <th>Habitacion</th>
 				<th>Fecha Entrada</th>
 				<th>Fecha Salida</th>
                 <th>Nombre Huésped</th>
@@ -2352,6 +2365,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
+                <th>Habitacion</th>
 				<th>Fecha Entrada</th>
 				<th>Fecha Salida</th>
                 <th>Nombre Huésped</th>
@@ -2473,6 +2487,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 			    <tr class="table-primary-encabezado text-center">
 			    <th>Número</th>
+                <th>Habitacion</th>
 			    <th>Fecha Entrada</th>
 			    <th>Fecha Salida</th>
                 <th>Nombre Huésped</th>
