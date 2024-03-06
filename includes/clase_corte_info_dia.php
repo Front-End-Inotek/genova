@@ -125,7 +125,7 @@
       $hoy = date('Y-m-d');
 	  $sentencia = "SELECT * FROM ticket
        WHERE (pago > 0  OR monto > 0) AND (ticket.estado = 0 OR ticket.estado != 2)
-       AND  from_unixtime(ticket.tiempo,'%Y-%m-%d') = '$hoy'
+       
 	   AND ticket.id_usuario =$id_usuario
 	   ";//1 
 	   //echo $sentencia;
