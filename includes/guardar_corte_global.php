@@ -1,4 +1,5 @@
 <?php
+  session_start();
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_ticket.php");
   include_once("clase_forma_pago.php");
@@ -9,6 +10,7 @@
   include_once("clase_cuenta.php");
   include_once("clase_tipo.php");
   include_once("clase_usuario.php");
+  include_once("clase_hab.php");
   $labels= NEW Labels(0);
   $forma_pago= NEW Forma_pago(0);
   $corte= NEW Corte(0);
@@ -18,6 +20,8 @@
   $ticket= NEW Ticket(0);
   $concepto= NEW Concepto(0);
   $tipo= NEW Tipo(0);
+  $hab= NEW Hab(0);
+  $usuario= NEW Usuario(0);
   // Guardar corte
   $cantidad_habitaciones= $inf->total_hab;
   $total_habitaciones= $inf->total_hab;
@@ -124,7 +128,7 @@
 
 //Formato de hoja (Orientacion, tamaño , tipo)
 $pdf = new FPDF('P', 'mm', 'Letter');
-
+  $ticket= NEW Ticket(0);
   // Fecha y datos generales
   $pdf = new PDF();
   $pdf->AliasNbPages();
@@ -295,6 +299,67 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       $pdf->Cell(12,4,iconv("UTF-8", "ISO-8859-1",$total_productos_rest),1,1,'C',True);
       $pdf->SetTextColor(255, 255, 255);
       $pdf->SetFillColor(45, 63, 83);
+
+  
+  }
+
+  
+  $pdf->AddPage('L');
+  $total_cargo=0;
+  $total_abono=0;
+  $pdf->SetFont('Arial', 'B', 10);
+  $pdf->Cell( 278 , 5, "Tickets", 0, 0,'C');
+  $pdf->ln();
+  $abonos=array();
+  $consulta_abono=$ticket->tipo_abonos();
+  while ($fila = mysqli_fetch_array($consulta_abono))
+  {
+      $abonos[$fila['id']]=$fila['descripcion'];
+  }
+
+  /* $this->SetFont('Arial', 'B', 10);
+  $this->Cell( 278 , 5, 'NOMBRE', 0, 0);
+  $this->ln(); */
+
+  $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
+  $pdf->Cell( 30 , 5, 'Folio casa', 1, 0, 'C');
+  $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
+  $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
+  $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
+  $pdf->Cell( 30 , 5, 'total', 1, 0, 'C');
+  $pdf->Cell( 30 , 5, 'Usuario', 1, 0, 'C');
+  $pdf->ln();
+  foreach ($abonos as $clave => $valor){
+    $total=0;
+    
+    $consulta=$ticket->sacar_tickets_corte($clave);
+    if ($consulta->num_rows > 0) {
+      $pdf->Cell( 278 , 5, $valor, 0, 0,'C');
+      $pdf->ln();
+      // La consulta no está vacía, realiza alguna acción
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell( 30 , 5, '', 0, 0, 'C');
+        $pdf->ln();
+        $pdf->SetFont('Arial', '', 10);
+        
+        $pdf->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
+        $pdf->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']), 1, 0, 'C');
+        $pdf->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
+        $pdf->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
+        $pdf->Cell( 30 , 5,"$". number_format($fila['monto'],2), 1, 0, 'C');
+        $pdf->Cell( 30 , 5, $usuario->obtengo_nombre_completo($_POST['usuario_id']), 1, 0, 'C');
+        $pdf->ln();
+        $total+=$fila['monto'];
+      }
+      $pdf->Cell( 158 , 5, "", 0, 0, 'C');
+      $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
+      $pdf->Cell( 30 , 5, "$".number_format($total,2), 1, 0, 'C');
+      $pdf->ln();
+    }
+
   }
   
   $nueva_etiqueta= $labels->obtener_corte();
