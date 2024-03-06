@@ -28,6 +28,27 @@
               <label for="inicial" >Fecha final</label>
             </div>
 
+            <div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioReporte" id="salidas">
+                <label class="form-check-label" for="salidas">
+                  Salidas
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioReporte" id="proximas">
+                <label class="form-check-label" for="proximas">
+                  Proximas a salir
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioReporte" id="todas" checked>
+                <label class="form-check-label" for="todas">
+                  Todas
+                </label>
+              </div>
+            </div>
+
             <div class="form-floating">
               <button class="btn btn-primary" onclick="ver_reportes_salidas(1)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

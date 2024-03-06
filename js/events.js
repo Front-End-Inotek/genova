@@ -8347,9 +8347,18 @@ function ver_reportes_salidas(btn=0){
         closeModal();
         closeNav();
     }else{
+        const opciones = document.getElementsByName("radioReporte");
+        let opcionSeleccionada = "";
+
+        for (let i = 0; i < opciones.length; i++) {
+            if(opciones[i].checked) {
+                opcionSeleccionada = opciones[i].id;
+                break;
+            }
+        }
         var a_buscar=encodeURIComponent($("#a_buscar").val());
         var usuario_id=localStorage.getItem("id");
-        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final);  
+        $("#tabla_reservacion").load("includes/buscar_entradas_salidas_recep.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id+"&inicial="+inicial+"&opcion="+2+"&final="+final+"&radio="+opcionSeleccionada);  
     }
 }
 

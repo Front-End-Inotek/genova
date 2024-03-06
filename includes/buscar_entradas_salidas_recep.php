@@ -6,5 +6,7 @@
   $inicial =urldecode($_GET['inicial']);
   $final =urldecode($_GET['final']);
   $opcion =urldecode($_GET['opcion']);
+  $radio = urldecode($_GET["radio"]); // opcion del radio button
+  //echo $radio;
   $reservacion->buscar_entradas_salidas_recep($a_buscar,$_GET['usuario_id'],$inicial,$opcion,$final);
 ?>
