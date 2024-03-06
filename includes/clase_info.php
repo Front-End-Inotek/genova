@@ -314,27 +314,30 @@
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
       $comentario="Obtener informacion para la habitacion con el estado cancelada";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
+
       //se recibe la consulta y se convierte a arreglo
       $inicio_hospedaje=$entrada;
       $fin_hospedaje=$salida;
       $motivo= '';
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $motivo= $fila['comentario'];
+        //var_dump($fila);
+        $id_huesped = $fila['id_huesped'];
       }
+      $huesped= NEW Huesped($id_huesped);
+      $nombre = $huesped->nombre;
+      $apellido = $huesped->apellido;
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-12 col-md-6">';
-        echo 'Inicio: '.date("d-m-Y H:i:s",  $inicio_hospedaje);
-      echo '</div>';
-      echo '<div class="col-12 col-md-6">';
-        echo 'Fin: '.date("d-m-Y H:i:s",  $fin_hospedaje);
-      echo '</div>';
-      echo '<div class="col-xs-6 col-sm-6 col-md-6">';
-      echo '</div>';
-      echo '<div class="col-xs-12 col-sm-12 col-md-12">';
-        echo 'Tipo Habitación: '.$tipo_habitacion;
-      echo '</div>';
+      echo '
+      <ul class="list-group" style="width: 100%;">
+
+         <li class="list-group-item info_hab_li"><b>Info de reservación</b></li>
+         <li class="list-group-item info_hab_li"><b>Quien reserva</b> '.$nombre.' '.$apellido.'</li>
+         <li class="list-group-item info_hab_li"><b>Inicio</b> '.date("d-m-Y H:i:s",  $inicio_hospedaje).'</li>
+         <li class="list-group-item info_hab_li"><b>Fin</b> '.date("d-m-Y H:i:s",  $fin_hospedaje).'</li>
+         <li class="list-group-item info_hab_li"><b>Tipo habitación</b> '.$tipo_habitacion.'</li>
+      </ul>';
     }
     // Estado 8
     function uso_casa($hab_id,$estado,$mov){

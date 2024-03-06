@@ -187,6 +187,10 @@ body {
   overflow-x: auto;
   gap: 5px;
 }
+.info_hab_li {
+  display: flex;
+  justify-content: space-between;
+}
 .estado_cuenta_cantidades {
   width: 95%;
   display: flex;
