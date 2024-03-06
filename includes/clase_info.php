@@ -248,15 +248,19 @@
     // Estado 5
     function supervision($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";
+      //echo $sentencia;
       $comentario= "Obtener informacion para la habitacion con el estado supervision";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
       //se recibe la consulta y se convierte a arreglo
       $detalle_inicio= 0;
       $detalle_realiza= 0;
+      //var_dump($consulta);
       while($fila = mysqli_fetch_array($consulta))
       {
+        
         $detalle_inicio= $fila['detalle_inicio'];
         $detalle_realiza= $fila['detalle_realiza'];
+        $motivo= $fila['comentario'];
       }
       $usuario = NEW Usuario($detalle_realiza);
       $hab= NEW Hab(0);
@@ -265,7 +269,7 @@
         echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
       echo '</div>';
       echo '<div class="col-12 col-md-6">';
-        echo 'Realiza: '.$usuario->usuario;
+        echo 'Motivo: '.$motivo;
       echo '</div>';
       echo '<div class="col-xs-12 col-sm-12 col-md-12">';
         echo 'Tipo Habitación: '.$tipo_habitacion;

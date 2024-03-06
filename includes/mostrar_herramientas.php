@@ -126,7 +126,7 @@ echo '<div class="container-fluid">';
 show_info($_GET['hab_id'],$_GET['estado'],$estado_interno);
 echo '<div class="contenedor_botones">';
 
-echo $_GET['estado'];
+//echo $_GET['estado'];
 switch ($_GET['estado']) {
 	case 0:
 	if($user->nivel<=2 && $conf->hospedaje ==1){
@@ -178,7 +178,7 @@ switch ($_GET['estado']) {
 	if($user->nivel<=2 && $conf->hospedaje ==1){
 		$nuevo_estado= 10;
 		$nuevo_estado=5;
-		echo '<div class="btn_modal_herramientas btn_bloqueado" onclick="hab_estado_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
+		echo '<div class="btn_modal_herramientas btn_bloqueado" onclick="hab_modal_inicial('.$_GET['hab_id'].','.$_GET['estado'].','.$nuevo_estado.')">';
 			echo '<img  class="btn_modal_img" src="./assets/iconos_btn/btn_bloqueado.svg" />';
 			echo '<p>Bloqueo</p>';
 		echo '</div>';
@@ -310,7 +310,7 @@ switch ($_GET['estado']) {
 	}
 	break;
 
-
+	// hab bloqeada
 	case 5 :
 	if($user->nivel<=2){
 		echo '<div class="btn_modal_herramientas btn_terminar" onclick="hab_terminar_estado('.$_GET['hab_id'].','.$_GET['estado'].')">';
@@ -338,7 +338,8 @@ switch ($_GET['estado']) {
 		}
 		
 	}
-	case 7:
+	//case 7:
+	case 7000:
 	if($user->nivel<=2){
 			echo '<div class="btn_modal_herramientas btn_garantizar" onclick="aceptar_garantizar_reservacion("")">';
 				echo '<img class="btn_modal_img" src="./assets/iconos_btn/garantizar.svg">';

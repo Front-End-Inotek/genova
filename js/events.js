@@ -8660,7 +8660,7 @@ function hab_modal_inicial(hab_id,estado,usuario){
 // Mandar una habitacion a estado inicial
 function hab_inicial(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
-    if(estado!=5){
+    if(estado!=5 ){
         var motivo= encodeURI(document.getElementById("motivo").value);
         $('#caja_herramientas').modal('hide');
         var datos = {
@@ -8670,7 +8670,17 @@ function hab_inicial(hab_id,estado,usuario){
             "motivo": motivo,
             "usuario_id": usuario_id,
             };
-    }else{
+    }else if (estado == 5 ){
+        var motivo= encodeURI(document.getElementById("motivo").value);
+        $('#caja_herramientas').modal('hide');
+        var datos = {
+            "hab_id": hab_id,
+            "estado": estado,
+            "usuario": usuario,
+            "motivo": motivo,
+            "usuario_id": usuario_id,
+        };
+    } else{
         $('#caja_herramientas').modal('hide');
         var datos = {
             "hab_id": hab_id,

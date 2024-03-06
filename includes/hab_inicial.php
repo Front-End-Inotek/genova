@@ -18,7 +18,7 @@
         break;
     case 5:// Enviar a supervision
         $motivo= '';
-        $id = $movimiento->guardar_comentario($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario_id'],$_POST['estado'],$motivo);
+        $id = $movimiento->guardar_comentario($_POST['hab_id'],$_POST['usuario_id'],$_POST['usuario_id'],$_POST['estado'], urldecode($_POST['motivo']));
         $hab->cambiohab($_POST['hab_id'],$id,5);
         $logs->guardar_log($_POST['usuario_id'],"Supervision en habitacion: ". $hab->nombre);
         break;
