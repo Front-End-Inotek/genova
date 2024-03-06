@@ -2266,41 +2266,35 @@ class Reservacion extends ConexionMYSql
             }
             $ruta="ver_reportes_salidas()";
             if($radio=="salidas"){
-                $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-                FROM hab
-                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
-                INNER JOIN movimiento ON hab.mov = movimiento.id
+                $sentencia="SELECT * ,
+                hab.nombre AS nombre_habitacion,reservacion.estado AS edo,reservacion.id AS ID,huesped.nombre AS persona,tipo_hab.nombre AS habitacion
+                FROM movimiento
+                left JOIN hab ON hab.id = movimiento.id_hab
+                LEFT JOIN huesped ON huesped.id = movimiento.id_huesped
                 INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id
-                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
-                INNER JOIN usuario ON reservacion.id_usuario = usuario.id
-                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
                 INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
-                ".$where_buscar."
-                ".$where_fechas." AND hab.estado_hab = 1 AND (hab.estado=2 OR hab.estado=3) ORDER BY hab.id";
+                WHERE  movimiento.finalizado>= 1709704800 AND   movimiento.finalizado<= 1709791200  AND  movimiento.finalizado >0 AND hab.id>0 ORDER BY hab.id ASC";
             }elseif($radio=="proximas"){
-                $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-                FROM hab
-                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
-                INNER JOIN movimiento ON hab.mov = movimiento.id
+                $sentencia="SELECT * ,
+                hab.nombre AS nombre_habitacion,reservacion.estado AS edo,reservacion.id AS ID,huesped.nombre AS persona,tipo_hab.nombre AS habitacion
+                FROM movimiento
+                left JOIN hab ON hab.id = movimiento.id_hab
+                LEFT JOIN huesped ON huesped.id = movimiento.id_huesped
                 INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id
-                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
-                INNER JOIN usuario ON reservacion.id_usuario = usuario.id
-                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
                 INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
-                ".$where_buscar."
-                ".$where_fechas." AND hab.estado_hab = 1 AND hab.estado=1 ORDER BY hab.id";
+                WHERE  movimiento.fin_hospedaje>= 1709704800 AND   movimiento.fin_hospedaje<= 1709791200  AND  movimiento.finalizado =0 AND hab.id>0 ORDER BY hab.id ASC";
             }else{
-                $sentencia="SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
-                FROM hab
-                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
-                INNER JOIN movimiento ON hab.mov = movimiento.id
+                $sentencia="SELECT * ,
+                hab.nombre AS nombre_habitacion,reservacion.estado AS edo,reservacion.id AS ID,huesped.nombre AS persona,tipo_hab.nombre AS habitacion
+                FROM movimiento
+                left JOIN hab ON hab.id = movimiento.id_hab
+                LEFT JOIN huesped ON huesped.id = movimiento.id_huesped
                 INNER JOIN reservacion ON movimiento.id_reservacion = reservacion.id
-                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
-                INNER JOIN usuario ON reservacion.id_usuario = usuario.id
-                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                LEFT JOIN tipo_hab ON hab.tipo = tipo_hab.id
                 INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id
-                ".$where_buscar."
-                ".$where_fechas." AND hab.estado_hab = 1 AND (hab.estado=1 OR hab.estado=2 OR hab.estado=3) ORDER BY hab.id";
+                WHERE  ((movimiento.fin_hospedaje>= 1709704800 AND   movimiento.fin_hospedaje<= 1709791200)OR (movimiento.finalizado>= 1709704800 AND   movimiento.finalizado<= 1709791200))  AND hab.id>0 ORDER BY hab.id ASC";
             }
             
         }
