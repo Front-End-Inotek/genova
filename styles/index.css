@@ -429,7 +429,7 @@ body {
 }
 .ocupado{
   background-color: #FEF8F7;
-  color: #E16F64;
+  color: #91423b;
   content: "";
 }
 /* .ocupado::after {
@@ -476,7 +476,7 @@ body {
   background-color: #D3E5EF;
 }
 .vacia_sucia_fondo {
-  background-color: #EEE0DA;
+  background-color: #dbbdb1;
 }
 .ocupada_fondo {
   background-color: #FFE2DD;

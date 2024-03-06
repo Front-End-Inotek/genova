@@ -341,14 +341,19 @@ switch ($_GET['estado']) {
 	//case 7:
 	case 7000:
 	if($user->nivel<=2){
-			echo '<div class="btn_modal_herramientas btn_garantizar" onclick="aceptar_garantizar_reservacion("")">';
+			$id = $_GET['ID'];
+			$opcion = 0;
+			$tipo_hab = 2;
+			$numero_hab = 2;
+			echo $id;
+			echo '<div class="btn_modal_herramientas btn_garantizar" data-toggle="modal" href="#caja_herramientas" onclick="aceptar_garantizar_reservacion()">';
 				echo '<img class="btn_modal_img" src="./assets/iconos_btn/garantizar.svg">';
 				echo '<p>Garantizar</p>';
 			echo '</div>';
-			echo '<div class="btn_modal_herramientas btn_cancelar" onclick="">';
-				echo '<img class="btn_modal_img" src="./assets/iconos_btn/cancelar.svg">';
-				echo '<p>Cancelar preasignación</p>';
-			echo '</div>';
+			//echo '<div class="btn_modal_herramientas btn_cancelar" onclick="">';
+			//	echo '<img class="btn_modal_img" src="./assets/iconos_btn/cancelar.svg">';
+			//	echo '<p>Cancelar preasignación</p>';
+			//echo '</div>';
 		
 	}
 	break;

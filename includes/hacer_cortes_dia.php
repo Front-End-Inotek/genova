@@ -23,7 +23,7 @@
         <header class="main_container_title">
           <h2 >HACER CORTE DIARIO</h2>
           <div id="boton_usuario">
-          <button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte_global()">
+          <button disabled="true" class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_guardar_corte_global()" id="btn_hacer_corte">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16">
               <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5M11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z"/>
               <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z"/>
@@ -64,9 +64,9 @@
                         echo '<tr class="table text-center">';
                       }
                         echo '<td>'.$inf->producto_nombre[$z].'</td>
-                        <td>$'.number_format($inf->producto_precio[$z], 2).'</td>
+                        <td class="total_corte">$'.number_format($inf->producto_precio[$z], 2).'</td>
                         <td>'.$inf->producto_venta[$z].'</td>
-                        <td>$'.number_format(($inf->producto_venta[$z] * $inf->producto_precio[$z]), 2).'</td>
+                        <td class="total_corte">$'.number_format(($inf->producto_venta[$z] * $inf->producto_precio[$z]), 2).'</td>
                         <td>'.$inf->producto_tipo_hab[$z].'</td>
                         <td>'.$inf->producto_tipo_rest[$z].'</td>';
                         $total_restaurante= $total_restaurante + ($inf->producto_venta[$z] * $inf->producto_precio[$z]);
@@ -78,7 +78,7 @@
                         <td></td>
                         <td></td>
                         <td>'.$total_productos.'</td>
-                        <td>$'.number_format($total_restaurante, 2).'</td>
+                        <td class="total_corte">$'.number_format($total_restaurante, 2).'</td>
                         <td>'.$total_productos_hab.'</td>
                         <td>'.$total_productos_rest.'</td>
                       </tr>';
@@ -118,12 +118,12 @@
                           echo '<tr class="table text-center">';
                         }
                           echo '<td>'.$concepto[$z].'</td>
-                          <td>$'.number_format($total[$z], 2).'</td>
+                          <td class="total_corte">$'.number_format($total[$z], 2).'</td>
                         </tr>';
                     }
                     echo '<tr class="table  text-center">
                       <td>Total</td>
-                      <td>$'.number_format($total[4], 2).'</td>
+                      <td class="total_corte">$'.number_format($total[4], 2).'</td>
                     </tr>';
                     echo '
                   </tbody>
@@ -156,7 +156,7 @@
                           echo '<td>'.$inf->hab_tipo_hospedaje[$z].'</td>';
                           //<td>$'.number_format($inf->hab_precio_hospedaje[$z], 2).'</td>
                           echo '<td>'.$inf->hab_cantidad_hospedaje[$z].'</td>
-                          <td>$'.number_format($inf->hab_total_hospedaje[$z], 2).'</td>
+                          <td class="total_corte">$'.number_format($inf->hab_total_hospedaje[$z], 2).'</td>
                         </tr>';
                         $total_cuartos_hospedaje= $total_cuartos_hospedaje + $inf->hab_total_hospedaje[$z];
                         $suma_cuartos_hospedaje= $suma_cuartos_hospedaje + $inf->hab_cantidad_hospedaje[$z];
@@ -164,7 +164,7 @@
                     echo '<tr class="table  text-center">
                       <td></td>
                       <td>'.$suma_cuartos_hospedaje.'</td>
-                      <td>$'.number_format($total_cuartos_hospedaje, 2).'</td>
+                      <td class="total_corte">$'.number_format($total_cuartos_hospedaje, 2).'</td>
                     </tr>';
                     echo '
                   </tbody>
@@ -194,7 +194,7 @@
                           echo '<tr class="table text-center">';
                         }
                           echo '<td>'.$forma_pago->obtener_descripcion($ids[$z]).'</td>
-                          <td>$'.number_format($inf->total_pago[$ids[$z]], 2).'</td>
+                          <td class="total_corte">$'.number_format($inf->total_pago[$ids[$z]], 2).'</td>
                         </tr>';
                     }
                     echo '
@@ -230,6 +230,9 @@
             </div>*/
           echo '</div>
         </div>
-      </div>';
+      </div>
+
+      <script>handle_btn_corte_diario()</script>
+      ';
 ?>
 

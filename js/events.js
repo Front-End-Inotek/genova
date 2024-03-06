@@ -9732,8 +9732,29 @@ function borrar_chats() {
     } else if( check ) {
         console.log("Si esta checked")
     }
+}
 
+function handle_btn_corte_diario () {
+    console.log("Manejando los valores para activar el boton...")
+    const btn = document.getElementById("btn_hacer_corte")
+    const elementos = document.getElementsByClassName("total_corte");
+    let total = 0;
 
+    for (let i = 0; i < elementos.length; i++) {
+        let texto = elementos[i].textContent;
+
+        let numero = parseFloat(texto.replace("$" , "").replace("," , ""));
+
+        total += numero;
+    }
+
+    console.log(total)
+
+    if ( total > 0) {
+        btn.removeAttribute("disabled");
+    } else {
+        btn.setAttribute("disabled" , "disabled");
+    }
 }
 //Evaluamos el inicio de sesion
 function inicio(){
