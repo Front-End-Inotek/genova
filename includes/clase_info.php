@@ -332,7 +332,7 @@
       echo '
       <ul class="list-group" style="width: 100%;">
 
-         <li class="list-group-item info_hab_li"><b>Info de reservación</b></li>
+         <li class="list-group-item info_hab_header"><b>Info de reservación pendiente</b></li>
          <li class="list-group-item info_hab_li"><b>Quien reserva</b> '.$nombre.' '.$apellido.'</li>
          <li class="list-group-item info_hab_li"><b>Inicio</b> '.date("d-m-Y H:i:s",  $inicio_hospedaje).'</li>
          <li class="list-group-item info_hab_li"><b>Fin</b> '.date("d-m-Y H:i:s",  $fin_hospedaje).'</li>

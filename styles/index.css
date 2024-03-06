@@ -191,6 +191,15 @@ body {
   display: flex;
   justify-content: space-between;
 }
+.info_hab_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dee2e6;
+  font-weight: 400 !important;
+  font-size: 18px !important;
+}
+
 .estado_cuenta_cantidades {
   width: 95%;
   display: flex;
