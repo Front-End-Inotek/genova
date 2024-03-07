@@ -119,11 +119,6 @@ class PDF extends FPDF
                     $this->SetFont('Arial', '', 10);
                     while ($fila = mysqli_fetch_array($consulta))
                         {
-                            $this->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['id_hab'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
-                            $this->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
                             $cargo=0;
                             $abono=0;
                             $consulta_cuenta=$ticket->obtener_cargo_abono($fila['id']);
@@ -132,12 +127,20 @@ class PDF extends FPDF
                                     $cargo+=$fila_cuenta['cargo'];
                                     $abono+=$fila_cuenta['abono'];
                                 }
-                            $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
-                            $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
-                            $total_cargo+=$cargo;
-                            $total_abono+=$abono;
-                            $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
-                            $this->ln();
+                            $tot=$cargo+$abono;
+                            if($tot>0){
+                                $this->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['id_hab'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
+                                $this->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
+                                $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
+                                $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
+                                $total_cargo+=$cargo;
+                                $total_abono+=$abono;
+                                $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
+                                $this->ln();
+                            }
                     }
                     $this->Cell( 158 , 5, "", 0, 0, 'C');
                     $this->Cell( 30 , 5, "Total:", 1, 0, 'C');
@@ -187,11 +190,6 @@ class PDF extends FPDF
                     $this->SetFont('Arial', '', 10);
                     while ($fila = mysqli_fetch_array($consulta))
                         {
-                            $this->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['id_hab'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
-                            $this->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
                             $cargo=0;
                             $abono=0;
                             $consulta_cuenta=$ticket->obtener_cargo_abono($fila['id']);
@@ -200,12 +198,21 @@ class PDF extends FPDF
                                     $cargo+=$fila_cuenta['cargo'];
                                     $abono+=$fila_cuenta['abono'];
                                 }
-                            $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
-                            $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
-                            $total_cargo+=$cargo;
-                            $total_abono+=$abono;
-                            $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
-                            $this->ln();
+                            $tot=$cargo+$abono;
+                            if($tot>0){
+                                $this->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['id_hab'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
+                                $this->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
+                                
+                                $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
+                                $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
+                                $total_cargo+=$cargo;
+                                $total_abono+=$abono;
+                                $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
+                                $this->ln();
+                            }
                     }
                     $this->Cell( 158 , 5, "", 0, 0, 'C');
                     $this->Cell( 30 , 5, "Total:", 1, 0, 'C');
@@ -255,11 +262,6 @@ class PDF extends FPDF
                     $this->SetFont('Arial', '', 10);
                     while ($fila = mysqli_fetch_array($consulta))
                         {
-                            $this->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['id_hab'], 1, 0, 'C');
-                            $this->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
-                            $this->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
                             $cargo=0;
                             $abono=0;
                             $consulta_cuenta=$ticket->obtener_cargo_abono($fila['id']);
@@ -268,10 +270,19 @@ class PDF extends FPDF
                                     $cargo+=$fila_cuenta['cargo'];
                                     $abono+=$fila_cuenta['abono'];
                                 }
-                            $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
-                            $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
-                            $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
-                            $this->ln();
+                            $tot=$cargo+$abono;
+                            if($tot>0){
+                                $this->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['id_hab'], 1, 0, 'C');
+                                $this->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
+                                $this->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
+                                
+                                $this->Cell( 30 , 5,"$". number_format($cargo,2), 1, 0, 'C');
+                                $this->Cell( 30 , 5,"$". number_format($abono,2), 1, 0, 'C');
+                                $this->Cell( 30 , 5, $usuario->obtengo_nombre_completo($fila['id_usuario']), 1, 0, 'C');
+                                $this->ln();
+                            }
                     }
                     $this->Cell( 158 , 5, "", 0, 0, 'C');
                     $this->Cell( 30 , 5, "Total:", 1, 0, 'C');
