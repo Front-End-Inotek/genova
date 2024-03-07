@@ -1598,13 +1598,6 @@ class Reservacion extends ConexionMYSql
         $comentario="Mostrar las reservaciones que llegan hoy";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         echo '
-		<button class="btn btn-primary" href="" data-toggle="modal" onclick="agregar_reservaciones()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-            </svg>
-            Agregar reservaciones
-        </button>
 		<div class="table-responsive" id="tabla_reservacion" >
 		<table class="table table_expansion">
 		<thead>
@@ -1630,8 +1623,8 @@ class Reservacion extends ConexionMYSql
 			<th>Status</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         //preasignar.
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
-        echo '<th>Ajustes</th>';
+        //echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
+        //echo '<th>Ajustes</th>';
         /* echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
         if($editar==1 && $fila['edo'] = 1) {
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
@@ -2045,6 +2038,180 @@ class Reservacion extends ConexionMYSql
             echo '</tr>';
         }
     }
+    public function construirTablaSalidas($fila, $agregar, $editar, $borrar, $ruta="", $preasignar=0)
+    {
+        include_once('clase_hab.php');
+        $hab=NEW Hab(0);
+        $inicio_dia= date("d-m-Y");
+        $inicio_dia= strtotime($inicio_dia);
+        $preasignada="";
+        if(isset($fila['nombre_hab'])) {
+            $preasignada=$fila['nombre_hab'];
+        }
+        //var_dump($fila);
+        if($fila['edo'] == 1) {
+            if($fila['total_pago'] <= 0) {
+                echo '<tr class="text-center">
+            <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <!--<td>'.$fila['numero_hab'].'</td>-->
+            <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
+            <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+            <td>'.$fila['noches'].'</td>
+            <!--- <td>'.$fila['numero_hab'].'</td> --->';
+                if(empty($fila['tarifa'])) {
+                    echo '
+                <td>Forzar tarifa</td>'
+                    ;
+                } else {
+                    echo '
+                <td>'.$fila['habitacion'].'</td>'
+                    ;
+                }
+                echo '<td>$'.number_format($fila['precio_hospedaje_reserva'], 2).'</td>';
+                echo '<td>'.$fila['plan_alimentos'].'</td>
+            <td>'.$fila['extra_adulto'].'</td>
+            <!-- <td>'.$fila['extra_junior'].'</td> -->
+            <!-- <td>'.$fila['extra_infantil'].'</td> --->
+            <td>'.$fila['extra_menor'].'</td>
+            ';
+                if($fila['forzar_tarifa']>0) {
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';
+                } else {
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';
+                }
+                echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
+                echo '<td>'.$fila['descripcion'].'</td>';
+                // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                echo '<td>Abierta</td>';
+                
+                //  echo date('Y-m-d', $fila['fecha_entrada']) . "/" . date('Y-m-d', $inicio_dia);
+                // die();
+                
+                /* if(true){
+                    echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
+                }else{
+                    echo '<td></td>';
+                } */
+                //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
+                
+                /* if($borrar==1 && $fila['edo'] != 0) {
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Cancelar</button></td>';
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Borrar</button></td>';
+                } */
+                echo '</tr>';
+            } else {
+                echo '<tr class="table-success text-center">
+            <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <!--<td>'.$fila['numero_hab'].'</td>-->
+            <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
+            <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+            <td>'.$fila['noches'].'</td>
+            <!-- <td>'.$fila['numero_hab'].'</td> ---> ';
+                if(empty($fila['tarifa'])) {
+                    echo '
+                <td>Forzar tarifa</td>'
+                    ;
+                } else {
+                    echo '
+                <td>'.$fila['habitacion'].'</td>'
+                    ;
+                }
+                echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
+                echo '<td>'.$fila['plan_alimentos'].'</td>
+            <td>'.$fila['extra_adulto'].'</td>
+            <!-- <td>'.$fila['extra_junior'].'</td> -->
+            <!-- <td>'.$fila['extra_infantil'].'</td> --->
+            <td>'.$fila['extra_menor'].'</td>
+            ';
+                if($fila['forzar_tarifa']>0) {
+                    echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
+                } else {
+                    echo '<td>$'.number_format($fila['total'], 2).'</td>';
+                }
+                echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
+                echo '<td>'.$fila['descripcion'].'</td>';
+                // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+                echo '<td>Garantizada</td>';
+               
+                /* if(true){
+                    echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
+                }else{
+                    echo '<td></td>';
+                } */
+                //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
+                
+                /* if($borrar==1 && $fila['edo'] != 0) {
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',1)"> Cancelar</button></td>';
+                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrar</button></td>';
+                } */
+                echo '</tr>';
+            }
+        } else {
+            echo '<tr class=" text-center">
+            <td>'.$fila['ID'].'</td>
+            
+            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
+            <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
+            <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
+            <td>'.$fila['noches'].'</td>
+            <!--- <td>'.$fila['numero_hab'].'</td> --->';
+            if(empty($fila['tarifa'])) {
+                echo '
+                <td>Forzar tarifa</td>'
+                ;
+            } else {
+                echo '
+                <td>'.$fila['habitacion'].'</td>'
+                ;
+            }
+            echo '<td>$'.number_format($fila['precio_hospedaje'], 2).'</td>';
+            echo '<td>'.$fila['plan_alimentos'].'</td>
+            <td>'.$fila['extra_adulto'].'</td>
+            <!-- <td>'.$fila['extra_junior'].'</td> -->
+            <!-- <td>'.$fila['extra_infantil'].'</td> --->
+            <td>'.$fila['extra_menor'].'</td>';
+            if($fila['forzar_tarifa']>0) {
+                echo '<td>$'.number_format($fila['forzar_tarifa'], 2).'</td>';
+            } else {
+                echo '<td>$'.number_format($fila['total'], 2).'</td>';
+            }
+            echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
+            echo '<td>'.$fila['descripcion'].'</td>';
+            // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
+            echo '<td>Activa</td>';
+            //no se puede hacer chekin en estado 2.
+            echo '<td></td>';
+            // if($agregar==1 && $fila['edo'] = 1) {
+            //     //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
+            //     echo '<td></td>';
+            // }
+            //botón para preasignar una habitación.
+           
+            // if(true){
+            //     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
+            // }else{
+            //     echo '<td></td>';
+            // }
+            //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'CHECK-IN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
+            echo '
+            </td>';
+            /* if($editar==1 && $fila['edo'] = 1) {
+                //echo '<td><button class="btn btn-warning" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')"> Editar</button></td>';
+            }
+            if($borrar==1 && $fila['edo'] != 0) {
+                echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Cancelar</button></td>';
+                echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].')"> Borrar</button></td>';
+            } */
+            echo '</tr>';
+        }
+    }
     public function editar_tarifa_hab_aud($id_reserva)
     {
         $hoy = time();
@@ -2327,13 +2494,21 @@ class Reservacion extends ConexionMYSql
 				<!-- <th>Límite Pago</th> --->
 				<th>Status</th>';
         echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+        if($opcion == 1){
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
+        }
         echo '</tr>
 			</thead>
 			<tbody>';
-        while ($fila = mysqli_fetch_array($consulta)) {
-            $this->construirTabla($fila, $agregar, $editar, $borrar, $ruta, $preasignar);
+        if($opcion == 1) {
+            while ($fila = mysqli_fetch_array($consulta)) {
+                $this->construirTabla($fila, $agregar, $editar, $borrar, $ruta, $preasignar);
+            }
+        } else {
+            while ($fila = mysqli_fetch_array($consulta)) {
+                $this->construirTablaSalidas($fila, $agregar, $editar, $borrar, $ruta, $preasignar);
+            }
         }
         echo '
 			</tbody>

@@ -59,16 +59,17 @@
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
       echo '<ul class="list-group" style="width: 100%;" >';
+      echo '<li class="list-group-item info_hab_header"><b>Info de reservación pendiente</b></li> ';
       if($fin_hospedaje>0){
-        echo '<li class="list-group-item">';
+        echo '<li class="list-group-item info_hab_li">';
           echo '<b>Ultima renta:</b> '.date("d-m-Y H:i:s",  $fin_hospedaje);
         echo '</li>';
       }else{
-        echo '<li class="list-group-item">';
+        echo '<li class="list-group-item info_hab_li">';
           echo '<b>Ultima renta:</b> INFORMACION NO DISPONIBLE';
         echo '</li>';
       }
-      echo '<li class="list-group-item">';
+      echo '<li class="list-group-item info_hab_li">';
         echo '<b>Tipo Habitación:</b> '.$tipo_habitacion;
       echo '</li>';
       echo '</ul>';
@@ -110,47 +111,73 @@
         $total= $cuenta->mostrar_total_cargos($mov);
         $total_faltante= $cuenta->mostrar_faltante($mov);
         $tipo_habitacion= $hab->consultar_tipo($hab_id);
-        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-          echo 'Fecha entrada: '.date("d-m-Y H:i:s",  $detalle_inicio);
-        echo '</div>';
-        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-          echo 'Fecha salida: '.date("d-m-Y H:i:s",  $fin_hospedaje);
-        echo '</div>';
-        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-          $nombre_huesped= $huesped->nombre.' '.$huesped->apellido;
-          echo 'Huésped: '.$nombre_huesped;
-        echo '</div>';
-        echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-          //echo 'Saldo: $'.$total= number_format($total, 2);
+        $nombre_huesped= $huesped->nombre.' '.$huesped->apellido;
+        echo '
+        <ul class="list-group" style="width: 100%;">
+          <li class="list-group-item info_hab_header"><b>Información</b></li>
+          <li class="list-group-item info_hab_li">
+            <b>Fecha de entrada</b>
+            '.date("d-m-Y H:i:s",  $detalle_inicio).'
+          </li>
+          <li class="list-group-item info_hab_li">
+            <b>Fecha salida</b>
+            '.date("d-m-Y H:i:s",  $fin_hospedaje).'
+          </li>
+          <li class="list-group-item info_hab_li">
+            <b>Huésped</b>
+            '.$nombre_huesped.'
+          </li>
+          <li class="list-group-item info_hab_li">
+            <b>Saldo</b>
+          ';
           if($total_faltante >= 0){
-            echo 'Saldo: $'.number_format($total_faltante, 2);
+            echo '<span class="text-success">$'.number_format($total_faltante, 2).'</span>';
           }else{
             $total_faltante= substr($total_faltante, 1);
-            echo 'Saldo: -$'.number_format($total_faltante, 2);
+            echo '<span class="text-danger">$-'.number_format($total_faltante, 2).'</span>';
           }
-        echo '</div>';
+        echo'
+          </li>
+          
+        ';
         if($estado_interno == 'sucia'){
-          echo '<div class="col-xs-12 col-sm-12 col-md-12">';
-            echo 'Inicio sucia: '.date("d-m-Y H:i:s",  $detalle_inicio);
-          echo '</div>';
+          echo '
+          <li class="list-group-item info_hab_li">
+            <b>Inicio sucia</b> 
+            '.date("d-m-Y H:i:s",  $detalle_inicio),'
+          </li>';
         }
         if($estado_interno == 'limpieza'){
           $usuario = NEW Usuario($persona_limpio);
-          echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-            echo 'Inicio Limpieza: '.date("d-m-Y H:i:s",  $detalle_inicio);
-          echo '</div>';
-          echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-            echo 'Persona Limpiando: '. $usuario->usuario;
-          echo '</div>';
+          echo '
+          <li class="list-group-item info_hab_li">
+            <b>Inicio Limpieza</b> 
+            '.date("d-m-Y H:i:s",  $detalle_inicio).'
+          </li>
+          <li class="list-group-item info_hab_li">
+            <b>Persona Limpiando</b> 
+            '. $usuario->usuario,'
+          </li>
+          ';
         }
-        echo '<div class="col-xs-12 col-sm-12 col-md-12 letras-grandes-modal">';
-          echo 'Tipo Habitación: '.$tipo_habitacion;
-        echo '</div>';
+        echo '
+          <li class="list-group-item info_hab_li">
+            <b>Tipo habitación</b>
+            '.$tipo_habitacion.'
+          </li>';
         if($comentario!=''){
-          echo '<div class="col-xs-12 col-sm-12 col-md-12 letras-grandes-modal">';
-            echo 'Comentarios: '.$comentario;
-          echo '</div>';
+          echo '
+          <li class="list-group-item info_hab_li">
+            <b>Comentarios</b> 
+            '.$comentario.'
+          </li>';
         }
+        echo '
+        </ul>
+        ';
+        echo '</div>';
+
+        
     }
     // Estado 2
     function sucia($hab_id,$estado,$mov){
@@ -177,15 +204,25 @@
       }
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo ''.$txt_inicio.' '.date("d-m-Y H:i:s",  $inicio_hospedaje);
-      echo '</div>';
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo ''.$txt_fin.' '. date("d-m-Y H:i:s",$termina_hospe);
-      echo '</div>';
-      echo '<div class="col-xs-12 col-sm-12 col-md-12 letras-grandes-modal">';
-        echo 'Tipo Habitación: '.$tipo_habitacion;
-      echo '</div>';
+      echo '
+      <ul class="list-group" style="width: 100%">
+        <li class="list-group-item info_hab_header">
+          <b>Info de vacia sucia</b>
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>'.$txt_inicio.'</b> 
+          '.date("d-m-Y H:i:s",  $inicio_hospedaje).'
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>'.$txt_fin.'</b> 
+          '.date("d-m-Y H:i:s",$termina_hospe).'
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Tipo Habitación</b> 
+          '.$tipo_habitacion.'
+        </li>
+      </ul>
+      ';
     }
     // Estado 3
     function limpieza($hab_id,$estado,$mov){
@@ -206,18 +243,29 @@
       $usuario = NEW Usuario($persona_limpio);
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Inicio Limpieza :   '. date("d-m-Y H:i:s",$inicio_limpieza);
-      echo '</div>';
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Termino ocupada: '. $termina_hospe;
-      echo '</div>';
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Persona Limpiando: '. $usuario->usuario;
-      echo '</div>';
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Tipo Habitación: '.$tipo_habitacion;
-      echo '</div>';
+      echo '
+      <ul class="list-group" style="width: 100%;">
+        <li class="list-group-item info_hab_header">
+          <b>Info de limpieza</b>
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Inicio Limpieza</b> 
+          '. date("d-m-Y H:i:s",$inicio_limpieza).'
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Termino ocupada</b> 
+          '.$termina_hospe.'
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Persona Limpiando</b> 
+          '.$usuario->usuario.'
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Tipo Habitación</b> 
+          '.$tipo_habitacion.'
+        </li>
+      </ul>
+      ';
     }
     // Estado 4
     function mantenimiento($hab_id,$estado,$mov){
@@ -237,20 +285,33 @@
       $usuario = NEW Usuario($detalle_realiza);
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
-      echo '</div>';
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Realiza: '.$usuario->usuario;
-      echo '</div>';
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
+      echo '
+      <ul class="list-group" style="width: 100%;">
+        <li class="list-group-item info_hab_header">
+          <b>Info de mantenimiento</b>
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Inicio</b> 
+          '. date("d-m-Y H:i:s",$detalle_inicio).'
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Realiza</b> 
+          '.$usuario->usuario.'
+        </li>';
         if($motivo != ''){
-          echo 'Motivo: '.$motivo;
+          echo '
+          <li class="list-group-item info_hab_li">
+            <b>Motivo</b> 
+          '.$motivo.'
+          </li>';
         }
-      echo '</div>';
-      echo '<div class="col-12 col-md-6 letras-grandes-modal">';
-        echo 'Tipo Habitación: '.$tipo_habitacion;
-      echo '</div>';
+        echo '
+        <li class="list-group-item info_hab_li">
+          <b>Tipo Habitación</b> 
+          '.$tipo_habitacion.'
+        </li>
+      </ul>
+      ';
     }
     // Estado 5
     function supervision($hab_id,$estado,$mov){
@@ -331,7 +392,6 @@
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
       echo '
       <ul class="list-group" style="width: 100%;">
-
          <li class="list-group-item info_hab_header"><b>Info de reservación pendiente</b></li>
          <li class="list-group-item info_hab_li"><b>Quien reserva</b> '.$nombre.' '.$apellido.'</li>
          <li class="list-group-item info_hab_li"><b>Inicio</b> '.date("d-m-Y H:i:s",  $inicio_hospedaje).'</li>
