@@ -395,17 +395,18 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       // La consulta no está vacía, realiza alguna acción
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $pdf->SetFont('Arial', '', 10);
-        
-        $pdf->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
-        $pdf->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']), 1, 0, 'C');
-        $pdf->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
-        $pdf->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
-        $pdf->Cell( 30 , 5,"$". number_format($fila['monto'],2), 1, 0, 'C');
-        $pdf->Cell( 30 , 5, $usuario->obtengo_nombre_completo($_POST['usuario_id']), 1, 0, 'C');
-        $pdf->ln();
-        $total+=$fila['monto'];
+        if($fila['monto']>0){
+          $pdf->SetFont('Arial', '', 10);
+          $pdf->Cell( 30 , 5, $fila['fecha'], 1, 0, 'C');
+          $pdf->Cell( 30 , 5, $fila['mov'], 1, 0, 'C');
+          $pdf->Cell( 30 , 5, 'Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']), 1, 0, 'C');
+          $pdf->Cell( 30 , 5, $fila['id'], 1, 0, 'C');
+          $pdf->Cell( 68 , 5, $fila['comentario'],1, 0, 'C');
+          $pdf->Cell( 30 , 5,"$". number_format($fila['monto'],2), 1, 0, 'C');
+          $pdf->Cell( 30 , 5, $usuario->obtengo_nombre_completo($_POST['usuario_id']), 1, 0, 'C');
+          $pdf->ln();
+          $total+=$fila['monto'];
+        }
       }
       $pdf->Cell( 158 , 5, "", 0, 0, 'C');
       $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');

@@ -1603,6 +1603,7 @@ class Reservacion extends ConexionMYSql
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
+            <th>Folio Casa</th>
             <th>Habitacion</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
@@ -1709,6 +1710,7 @@ class Reservacion extends ConexionMYSql
 		<thead>
 			<tr class="table-primary-encabezado text-center">
 			<th>Número</th>
+            <th>Folio Casa</th>
             <th>Habitacion</th>
 			<th>Fecha Entrada</th>
 			<th>Fecha Salida</th>
@@ -1769,7 +1771,7 @@ class Reservacion extends ConexionMYSql
             if($fila['total_pago'] <= 0) {
                 echo '<tr class="text-center">
             <td>'.$fila['ID'].'</td>
-            
+            <td>'.$fila['mov'].'</td>
             <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
@@ -1862,7 +1864,7 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<tr class="table-success text-center">
             <td>'.$fila['ID'].'</td>
-            
+            <td>'.$fila['mov'].'</td>
             <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
@@ -1959,7 +1961,7 @@ class Reservacion extends ConexionMYSql
         } else {
             echo '<tr class=" text-center">
             <td>'.$fila['ID'].'</td>
-            
+            <td>'.$fila['mov'].'</td>
             <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -2339,6 +2341,7 @@ class Reservacion extends ConexionMYSql
                                     <thead>
                                         <tr class="table-primary-encabezado text-center">
                                         <th>Número</th>
+                                        <th>Folio Casa</th>
                                         <th>Habitacion</th>
                                         <th>Fecha Entrada</th>
                                         <th>Fecha Salida</th>
@@ -2475,6 +2478,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
+                <th>Folio Casa</th>
                 <th>Habitacion</th>
 				<th>Fecha Entrada</th>
 				<th>Fecha Salida</th>
@@ -2561,6 +2565,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 				<tr class="table-primary-encabezado text-center">
 				<th>Número</th>
+                <th>Folio Casa</th>
                 <th>Habitacion</th>
 				<th>Fecha Entrada</th>
 				<th>Fecha Salida</th>
@@ -2683,6 +2688,7 @@ class Reservacion extends ConexionMYSql
 			<thead>
 			    <tr class="table-primary-encabezado text-center">
 			    <th>Número</th>
+                <th>Folio Casa</th>
                 <th>Habitacion</th>
 			    <th>Fecha Entrada</th>
 			    <th>Fecha Salida</th>
