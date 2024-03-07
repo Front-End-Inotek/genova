@@ -160,7 +160,7 @@
     ';
     foreach ($lista_tickets as $fila) {
       if($fila['facturado'] == 0 && $fila["rest"]==1) {
-        if($fila["total"]){
+        if($fila["total"]>0){
           echo '
           <div class="card text-center ticket_container">';
           echo '
