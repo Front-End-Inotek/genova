@@ -333,15 +333,25 @@
       $usuario = NEW Usuario($detalle_realiza);
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-12 col-md-6">';
-        echo 'Inicio: '. date("d-m-Y H:i:s",$detalle_inicio);
-      echo '</div>';
-      echo '<div class="col-12 col-md-6">';
-        echo 'Motivo: '.$motivo;
-      echo '</div>';
-      echo '<div class="col-xs-12 col-sm-12 col-md-12">';
-        echo 'Tipo Habitación: '.$tipo_habitacion;
-      echo '</div>';
+      echo '
+      <ul class="list-group" style="width: 100%;">
+        <li class="list-group-item info_hab_header">
+          <b>Info de bloqueada</b>
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Inicio</b> 
+          '. date("d-m-Y H:i:s",$detalle_inicio).'
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Motivo</b> 
+          '.$motivo.'
+        </li>
+        <li class="list-group-item info_hab_li">
+          <b>Tipo Habitación</b> 
+          '.$tipo_habitacion.'
+        </li>
+      </ul>
+      ';
     }
     // Estado 6
     function cancelada($hab_id,$estado,$mov){
@@ -418,18 +428,15 @@
       // $usuario = NEW Usuario($persona_limpio);
       $hab= NEW Hab(0);
       $tipo_habitacion= $hab->consultar_tipo($hab_id);
-      echo '<div class="col-12 col-md-6">';
-        echo 'Inicio Uso :   '. date("d-m-Y H:i:s",$inicio_uso);
-      echo '</div>';
-      echo '<div class="col-12 col-md-6">';
-        echo 'Termino Uso: '. date("d-m-Y H:i:s",$fin_uso);
-      echo '</div>';
-      echo '<div class="col-12 col-md-6">';
-        echo 'Usando hab: '. $persona_uso;
-      echo '</div>';
-      echo '<div class="col-12 col-md-6">';
-        echo 'Tipo Habitación: '.$tipo_habitacion;
-      echo '</div>';
+      echo '
+      <ul class="list-group" style="width: 100%;">
+         <li class="list-group-item info_hab_header"><b>Info uso casa</b></li>
+         <li class="list-group-item info_hab_li"><b>Inicio Uso</b> '. date("d-m-Y H:i:s",$inicio_uso).'</li>
+         <li class="list-group-item info_hab_li"><b>Termino Uso</b> '.date("d-m-Y H:i:s",$fin_uso).'</li>
+         <li class="list-group-item info_hab_li"><b>Usando hab</b> '.$persona_uso.'</li>
+         <li class="list-group-item info_hab_li"><b>Tipo habitación</b> '.$tipo_habitacion.'</li>
+      </ul>
+      ';
     }
     function por_cobrar($hab_id,$estado,$mov){
       $sentencia = "SELECT * FROM movimiento WHERE id = $mov LIMIT 1";

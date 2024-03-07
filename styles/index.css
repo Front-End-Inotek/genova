@@ -518,7 +518,9 @@ body {
 .estado{
   background-color: rgb(114, 111, 255);
 }
-
+.min_width_fecha {
+  min-width: 400px;
+}
 .form_checks_title {
   font-size:  28px;
   line-height: 1.16;
