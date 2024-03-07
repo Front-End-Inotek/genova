@@ -30,7 +30,7 @@
 
             <div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioReporte" id="salidas">
+                <input class="form-check-input" type="radio" name="radioReporte" id="salidas" checked>
                 <label class="form-check-label" for="salidas">
                   Salidas
                 </label>
@@ -42,7 +42,7 @@
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioReporte" id="todas" checked>
+                <input class="form-check-input" type="radio" name="radioReporte" id="todas" >
                 <label class="form-check-label" for="todas">
                   Todas
                 </label>
@@ -60,6 +60,7 @@
           </div>
 
           <div id="paginacion_reservaciones">';
+          
     $cat_paginas = $reservacion->mostrar_salidas(1, $_GET['usuario_id'], $incial,$final);
     echo '
           </div>
