@@ -1595,7 +1595,16 @@ class Reservacion extends ConexionMYSql
         }
         $comentario="Mostrar las reservaciones que llegan hoy";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
-       echo '
+       
+        if( mysqli_num_rows($consulta) == 0 ) {
+            echo '
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading">¡Sin informacion!</h4>
+                <p>Lo siento, no hay información de salidas de huéspedes.</p>
+            </div>
+            ';
+        } else {
+            echo '
 			<div class="table-responsive" id="tabla_reservacion">
 			<table class="table table_expansion">
 			<thead>
@@ -1619,15 +1628,16 @@ class Reservacion extends ConexionMYSql
 				<th>Total Pago</th>
 				<th>Forma Pago</th>
 				<!-- <th>Límite Pago</th> --->
-				<th>Status</th>';
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
+				<!--<th>Status</th>-->
+                ';
+        //echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
         //preasignar.
         //echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
         //echo '<th>Ajustes</th>';
-        /* echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
+        //echo '<th><span class=" glyphicon glyphicon-cog"></span> Ver</th>';
         if($editar==1 && $fila['edo'] = 1) {
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
-        }
+        }/*
         if($borrar==1 && $fila['edo'] != 0) {
             echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
             echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
@@ -1635,12 +1645,13 @@ class Reservacion extends ConexionMYSql
         echo '</tr>
 		</thead>
 		<tbody>';
-        while ($fila = mysqli_fetch_array($consulta)) {
-            if($cont>=$posicion & $cont<$final) {
-                //ddddd
-                $this->construirTablaSalidas($fila, $agregar, $editar, $borrar, "ver_reportes_salidas()");
+            while ($fila = mysqli_fetch_array($consulta)) {
+                if($cont>=$posicion & $cont<$final) {
+                    //ddddd
+                    $this->construirTablaSalidas($fila, $agregar, $editar, $borrar, "ver_reportes_salidas()");
+                }
+                $cont++;
             }
-            $cont++;
         }
         echo '
 		</tbody>
@@ -2139,17 +2150,14 @@ class Reservacion extends ConexionMYSql
                 // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
                 echo '<td>Garantizada</td>';
                
-                /* if(true){
+                if(true){
                     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
                 }else{
                     echo '<td></td>';
-                } */
+                } 
                 //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
                 
-                /* if($borrar==1 && $fila['edo'] != 0) {
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\',1)"> Cancelar</button></td>';
-                    echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')"> Borrar</button></td>';
-                } */
+               
                 echo '</tr>';
             }
         } else {
@@ -2185,20 +2193,19 @@ class Reservacion extends ConexionMYSql
             echo '<td>$'.number_format($fila['total_pago'], 2).'</td>';
             echo '<td>'.$fila['descripcion'].'</td>';
             // echo '<td>'.$this->mostrar_nombre_pago($fila['limite_pago']).'</td>';
-            echo '<td>Activa</td>';
+            //echo '<td>Activa</td>';
             //no se puede hacer chekin en estado 2.
-            echo '<td></td>';
             // if($agregar==1 && $fila['edo'] = 1) {
             //     //echo '<td><button class="btn btn-danger" href="#caja_herramientas" data-toggle="modal" onclick="select_asignar_reservacion('.$fila['ID'].','.$fila['numero_hab'].')"> Asignar</button></td>';
             //     echo '<td></td>';
-            // }
+            
             //botón para preasignar una habitación.
-           
-            // if(true){
-            //     echo '<td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_garantizar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')"> Garantizar</button></td>';
-            // }else{
-            //     echo '<td></td>';
-            // }
+        
+            if(true){
+            echo '<td><button class="btn btn-primary" onclick="generar_factura_salidas('.$fila['mov'].')">Facturar</button></td>';
+            }else{
+            echo '<td></td>';
+            }
             //echo '<td><button class="btn btn-success" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'CHECK-IN\',\''.$fila['correo_huesped'].'\')"> Reporte</button></td>';
             echo '
             </td>';
@@ -2494,12 +2501,13 @@ class Reservacion extends ConexionMYSql
 				<th>Total Pago</th>
 				<th>Forma Pago</th>
 				<!-- <th>Límite Pago</th> --->
-				<th>Status</th>';
-        echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
+				';
         if($opcion == 1){
+            echo '<th>Status</th>';
+            echo '<th><span class=" glyphicon glyphicon-cog"></span> Check-in</th>';
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Preasignar</th>';
-            echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
         }
+        echo '<th><span class=" glyphicon glyphicon-cog"></span> Ajustes</th>';
         echo '</tr>
 			</thead>
 			<tbody>';

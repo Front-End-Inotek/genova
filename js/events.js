@@ -8057,6 +8057,15 @@ function generar_facturas_reserva(total,id,bandera_facturacion,totales,tipos, mo
     }
 }
 
+function generar_factura_salidas(folio_casa) {
+    console.log(folio_casa)
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/busqueda_folio_casa.php?folio="+folio_casa);
+    closeNav();
+}
+
 // Hacer un corte
 function hacer_cortes(){
     usuario_id=localStorage.getItem("id");

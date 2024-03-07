@@ -1,5 +1,11 @@
 <?php
 
+if(isset($_GET['folio'])) {
+    $folio = $_GET['folio'];
+}else {
+    $folio = "";
+}
+
 echo '
     <div class="main_container">
         <div class="main_container_title">
@@ -9,7 +15,7 @@ echo '
         <div class="inputs_form_bills header_facturas_sticky">
             <div class="inputs_form_container2  justify-content-start">
                 <div class="form-floating ">
-                    <input class="form-control custom_input" type="text" placeholder="" id="folio_casa"/>
+                    <input class="form-control custom_input" type="text" placeholder="" id="folio_casa" value="'.$folio.'"/>
                     <label for="fecha_inicio_factura">Folio casa</label>
                 </div>
                 
@@ -48,5 +54,5 @@ echo '
         </div>
     </div>
 ';
-
 ?>
+
