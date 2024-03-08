@@ -1869,7 +1869,7 @@ class Reservacion extends ConexionMYSql
                     if($borrar == 1 && $fila['edo'] != 0) {
                         echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Cancelar</a>';
                         echo '<div class="dropdown-divider"></div>';
-                        echo '<a class="dropdown-item text-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Borrar</a>';
+                       echo '<a class="dropdown-item text-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')">Borrar</a>';
                     }
                     //<a class="dropdown-item" href="#">Another action</a>
                     //<a class="dropdown-item" href="#">Something else here</a>
