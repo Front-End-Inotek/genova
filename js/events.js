@@ -3691,7 +3691,7 @@ function garantizar_reservacion(id,preasignada=0,correo,garantizada=0,huesped_id
 }
 
 // Modal de cancelar una reservacion
-function aceptar_cancelar_reservacion(id,preasignada = 0 ,correo,garantizada=0){
+function aceptar_cancelar_reservacion(id,preasignada = 0 ,correo="",garantizada=0){
 	$("#mostrar_herramientas").load("includes/cancelar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada);
 }
 
