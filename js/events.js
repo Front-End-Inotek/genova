@@ -8674,7 +8674,9 @@ function hab_limpieza(hab_id,estado,usuario){
 function hab_modal_inicial(hab_id,estado,usuario){
     $("#mostrar_herramientas").load("includes/hab_modal_inicial.php?hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario);
 }
-
+function reactivar_hab_modal( hab_id  ) {
+    $("#mostrar_herramientas").load("includes/hab_modal_reactivar.php?hab_id="+hab_id)
+}
 // Mandar una habitacion a estado inicial
 function hab_inicial(hab_id,estado,usuario){
 	var usuario_id=localStorage.getItem("id");
@@ -8721,6 +8723,28 @@ function hab_inicial(hab_id,estado,usuario){
             error:problemas_sistema
 		});
 	return false;
+}
+
+function reactivar_habitacion(id_hab) {
+    var usuario_id = localStorage.getItem("id");
+
+    const datos = {
+        "hab_id" : id_hab,
+        "usuario" : usuario_id
+    }
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/reactivar_hab.php",
+        data: datos,
+        beforeSend: loaderbar,
+        success: principal,
+        timeout: 5000,
+        error: problemas_sistema
+    });
+    return false;
 }
 
 //Edo. 1-Ocupado//

@@ -789,6 +789,10 @@ body {
   background-color: #2e2e2e;
   color: white;
 }
+.btn_reactivar {
+  background-color: #7b9e9f;
+  color: rgb(255, 255, 255);
+}
 .btn_desocupar {
   background-color: #176e17;
   color: white;

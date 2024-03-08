@@ -184,6 +184,22 @@ switch ($_GET['estado']) {
 		echo '</div>';
 	}
 
+	$id_huesped = $movimiento->saber_id_huesped($hab->mov);
+	//echo $id_huesped;
+	if($id_huesped != 0 ) {
+
+		if($user->nivel<=2 && $conf->hospedaje ==1){
+			$nuevo_estado= 10;
+			$nuevo_estado=5;
+			echo '<div class="btn_modal_herramientas btn_reactivar" onclick="reactivar_hab_modal('.$_GET['hab_id'].')">';
+			echo '<img  class="btn_modal_img" src="./assets/iconos_btn/reactivar.svg" />';
+			echo '<p>Reactivar</p>';
+			echo '</div>';
+		}
+	}
+
+
+
 	break;
 
 
@@ -275,6 +291,19 @@ switch ($_GET['estado']) {
 			echo '<p>Terminar</p>';
 		echo '</div>';
 	}
+	$id_huesped = $movimiento->saber_id_huesped($hab->mov);
+	//echo $id_huesped;
+	if($id_huesped != 0 ) {
+
+		if($user->nivel<=2 && $conf->hospedaje ==1){
+			$nuevo_estado= 10;
+			$nuevo_estado=5;
+			echo '<div class="btn_modal_herramientas btn_reactivar" onclick="reactivar_hab_modal('.$_GET['hab_id'].')">';
+			echo '<img  class="btn_modal_img" src="./assets/iconos_btn/reactivar.svg" />';
+			echo '<p>Reactivar</p>';
+			echo '</div>';
+		}
+	}
 	break;
 
 
@@ -338,18 +367,19 @@ switch ($_GET['estado']) {
 		}
 		
 	}
+	break;
 	//case 7:
-	case 7000:
+	case 7:
 	if($user->nivel<=2){
-			$id = $_GET['ID'];
-			$opcion = 0;
-			$tipo_hab = 2;
-			$numero_hab = 2;
-			echo $id;
-			echo '<div class="btn_modal_herramientas btn_garantizar" data-toggle="modal" href="#caja_herramientas" onclick="aceptar_garantizar_reservacion()">';
-				echo '<img class="btn_modal_img" src="./assets/iconos_btn/garantizar.svg">';
-				echo '<p>Garantizar</p>';
-			echo '</div>';
+			//$id = $_GET['ID'];
+			//$opcion = 0;
+			//$tipo_hab = 2;
+			//$numero_hab = 2;
+			//echo $id;
+			//echo '<div class="btn_modal_herramientas btn_garantizar" data-toggle="modal" href="#caja_herramientas" onclick="aceptar_garantizar_reservacion()">';
+			//	echo '<img class="btn_modal_img" src="./assets/iconos_btn/garantizar.svg">';
+			//	echo '<p>Garantizar</p>';
+			//echo '</div>';
 			//echo '<div class="btn_modal_herramientas btn_cancelar" onclick="">';
 			//	echo '<img class="btn_modal_img" src="./assets/iconos_btn/cancelar.svg">';
 			//	echo '<p>Cancelar preasignación</p>';

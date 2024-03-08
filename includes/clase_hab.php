@@ -395,6 +395,13 @@
           $consulta= $this->realizaConsulta($sentencia,$comentario);
         // }
       }
+      function reactivarHab ($hab) {
+        $sentencia = "UPDATE `hab` SET
+        `estado` = 1
+        WHERE `id` = '$hab';";
+        $comentario = "Reactivar habitacion";
+        $consulta = $this->realizaConsulta($sentencia,$comentario);
+      }
       // Mostramos el nombre de la habitacion
       function mostrar_nombre_hab($id){
         $sentencia = "SELECT nombre FROM hab WHERE id = $id LIMIT 1";
