@@ -1579,7 +1579,12 @@ class Reservacion extends ConexionMYSql
         $ultimoid=0;
         //Consulta para traer la información de habitaciones ocupadas, con fecha de salida dada por el usuario.
         $sentencia="SELECT * ,
-        hab.nombre AS nombre_habitacion,reservacion.estado AS edo,reservacion.id AS ID,huesped.nombre AS persona,tipo_hab.nombre AS habitacion
+        hab.nombre AS nombre_habitacion,
+        reservacion.estado AS edo,
+        reservacion.id AS ID,
+        huesped.nombre AS persona,
+        tipo_hab.nombre AS habitacion,
+        movimiento.id AS folio_casa
         FROM movimiento
         left JOIN hab ON hab.id = movimiento.id_hab
         LEFT JOIN huesped ON huesped.id = movimiento.id_huesped
@@ -1593,6 +1598,7 @@ class Reservacion extends ConexionMYSql
         if($extra>0) {
             $cat_paginas++;
         }
+        //echo $sentencia;
         $comentario="Mostrar las reservaciones que llegan hoy";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
        
@@ -1780,8 +1786,16 @@ class Reservacion extends ConexionMYSql
             if($fila['total_pago'] <= 0) {
                 echo '<tr class="text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['mov'].'</td>
-            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <td>'.$fila['mov'].'</td>';
+            if($fila['id_hab']>0){
+                echo '
+                <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+                ';
+            }else{
+                echo '
+                <td>Pendiente</td>';
+            }
+            echo '
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1855,7 +1869,7 @@ class Reservacion extends ConexionMYSql
                     if($borrar == 1 && $fila['edo'] != 0) {
                         echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Cancelar</a>';
                         echo '<div class="dropdown-divider"></div>';
-                        echo '<a class="dropdown-item text-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Borrar</a>';
+                       echo '<a class="dropdown-item text-danger" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_borrar_reservacion('.$fila['ID'].','.$fila['id_hab'].')">Borrar</a>';
                     }
                     //<a class="dropdown-item" href="#">Another action</a>
                     //<a class="dropdown-item" href="#">Something else here</a>
@@ -1873,8 +1887,16 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<tr class="table-success text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['mov'].'</td>
-            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <td>'.$fila['mov'].'</td>';
+            if($fila['id_hab']>0){
+                echo '
+                <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+                ';
+            }else{
+                echo '
+                <td>Pendiente</td>';
+            }
+            echo '
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1970,8 +1992,16 @@ class Reservacion extends ConexionMYSql
         } else {
             echo '<tr class=" text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['mov'].'</td>
-            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <td>'.$fila['mov'].'</td>';
+            if($fila['id_hab']>0){
+                echo '
+                <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+                ';
+            }else{
+                echo '
+                <td>Pendiente</td>';
+            }
+            echo '
             <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
@@ -2064,7 +2094,7 @@ class Reservacion extends ConexionMYSql
             if($fila['total_pago'] <= 0) {
                 echo '<tr class="text-center">
             <td>---------'.$fila['ID'].'</td>
-            <td>'.$fila['ID'].'</td>
+            <td>'.$fila['folio_casa'].'</td>
             <td>--------'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
@@ -2116,7 +2146,7 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<tr class="table-success text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['ID'].'</td>
+            <td>'.$fila['folio_casa'].'</td>
             <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
@@ -2163,7 +2193,7 @@ class Reservacion extends ConexionMYSql
         } else {
             echo '<tr class=" text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['mov'].'</td>
+            <td>'.$fila['folio_casa'].'</td>
             <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
             <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -2442,7 +2472,12 @@ class Reservacion extends ConexionMYSql
             $ruta="ver_reportes_salidas()";
             if($radio=="salidas"){
                 $sentencia="SELECT * ,
-                hab.nombre AS nombre_habitacion,reservacion.estado AS edo,reservacion.id AS ID,huesped.nombre AS persona,tipo_hab.nombre AS habitacion
+                hab.nombre AS nombre_habitacion,
+                reservacion.estado AS edo,
+                reservacion.id AS ID,
+                huesped.nombre AS persona,
+                tipo_hab.nombre AS habitacion,
+                movimiento.id AS folio_casa
                 FROM movimiento
                 left JOIN hab ON hab.id = movimiento.id_hab
                 LEFT JOIN huesped ON huesped.id = movimiento.id_huesped
@@ -2452,7 +2487,12 @@ class Reservacion extends ConexionMYSql
                 WHERE  movimiento.finalizado>= $inicio_dia AND   movimiento.finalizado<=  $fin_dia  AND  movimiento.finalizado >0 AND hab.id>0 ORDER BY hab.id ASC";
             }elseif($radio=="proximas"){
                 $sentencia="SELECT * ,
-                hab.nombre AS nombre_habitacion,reservacion.estado AS edo,reservacion.id AS ID,huesped.nombre AS persona,tipo_hab.nombre AS habitacion
+                hab.nombre AS nombre_habitacion,
+                reservacion.estado AS edo,
+                reservacion.id AS ID,
+                huesped.nombre AS persona,
+                tipo_hab.nombre AS habitacion,
+                movimiento.id AS folio_casa
                 FROM movimiento
                 left JOIN hab ON hab.id = movimiento.id_hab
                 LEFT JOIN huesped ON huesped.id = movimiento.id_huesped
@@ -2462,7 +2502,12 @@ class Reservacion extends ConexionMYSql
                 WHERE  movimiento.fin_hospedaje>= $inicio_dia AND   movimiento.fin_hospedaje<=  $fin_dia  AND  movimiento.finalizado =0 AND hab.id>0 ORDER BY hab.id ASC";
             }else{
                 $sentencia="SELECT * ,
-                hab.nombre AS nombre_habitacion,reservacion.estado AS edo,reservacion.id AS ID,huesped.nombre AS persona,tipo_hab.nombre AS habitacion
+                hab.nombre AS nombre_habitacion,
+                reservacion.estado AS edo,
+                reservacion.id AS ID,
+                huesped.nombre AS persona,
+                tipo_hab.nombre AS habitacion,
+                movimiento.id AS folio_casa
                 FROM movimiento
                 left JOIN hab ON hab.id = movimiento.id_hab
                 LEFT JOIN huesped ON huesped.id = movimiento.id_huesped
@@ -2473,7 +2518,7 @@ class Reservacion extends ConexionMYSql
             }
             
         }
-        //echo $sentencia;
+       // echo $sentencia;
         $comentario="Mostrar diferentes busquedas en ver reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -2685,7 +2730,7 @@ class Reservacion extends ConexionMYSql
 			    INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada BETWEEN $fecha_ini and $fecha_fin)  && reservacion.fecha_entrada > 0  AND (reservacion.estado = 1) ORDER BY reservacion.id DESC;";
                 //echo 2;
             }
-            // echo $sentencia;
+            //echo $sentencia;
             $comentario="Mostrar por fecha en ver reservaciones";
             $consulta= $this->realizaConsulta($sentencia, $comentario);
             //se recibe la consulta y se convierte a arreglo
@@ -2723,6 +2768,7 @@ class Reservacion extends ConexionMYSql
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Cancelar</th>';
                 echo '<th><span class="glyphicon glyphicon-cog"></span> Borrar</th>';
             } */
+            
             echo '</tr>
 			</thead>
 		<tbody>';

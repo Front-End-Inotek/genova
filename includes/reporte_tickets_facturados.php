@@ -57,7 +57,7 @@ class PDF extends FPDF
         $this->SetFillColor(64, 0, 61);
         $this->SetFont('Arial', 'B', 7);
         $this->SetTextColor(255, 255, 255);
-        $this->Cell(6, 6, '', 1, 0, 'C', true);
+        $this->Cell(8, 6, '', 1, 0, 'C', true);
         $this->Cell(20, 6, 'Inicio', 1, 0, 'C', true);
         $this->Cell(20, 6, 'Fin', 1, 0, 'C', true);
         $this->Cell(20, 6, 'Cuarto', 1, 0, 'C', true);
@@ -84,26 +84,30 @@ class PDF extends FPDF
             $this->Ln();
             $respuesta=$ticket->reporte_tickets_en_rango_fechas_sin_facturar($inicio,$fin+86400);
             while ($fila = mysqli_fetch_array($respuesta)){
-                $this->SetTextColor(0, 0, 0);
-                $this->SetFont('Arial', '', 7);
-                $this->Cell(6, 6, utf8_decode($fila['id_ticket']), 1);
-                $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
-                $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
-                $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
-                $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
-                $this->Cell(20, 6, utf8_decode(''), 1);
-                $this->Cell(40, 6, utf8_decode(''), 1);
-                $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
-                $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
-                $this->Cell(20, 6, utf8_decode(''), 1);
-                $this->Cell(70, 6, utf8_decode(''), 1);
-                $this->Ln();
-                $total_importe_nf+=$fila['monto'];
+                if($fila['monto']>0){
+                    $this->SetTextColor(0, 0, 0);
+                    $this->SetFont('Arial', '', 7);
+                    $this->Cell(8, 6, utf8_decode($fila['mov']), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
+                    $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
+                    $this->Cell(20, 6, utf8_decode(''), 1);
+                    $this->Cell(40, 6, utf8_decode(''), 1);
+                    $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
+                    $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
+                    $this->Cell(20, 6, utf8_decode(''), 1);
+                    $this->Cell(70, 6, utf8_decode(''), 1);
+                    $this->Ln();
+                    $total_importe_nf+=$fila['monto'];
+                    }
             }
-            $this->Cell(106, 6, utf8_decode(""), 0);
-            $this->Cell(40, 6, utf8_decode("Total NO FACTURADO"), 0);
-            $this->Cell(20, 6, utf8_decode('$'.number_format($total_importe_nf,2)), 0);
-            $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 0);
+            if($total_importe_nf>0){
+                $this->Cell(106, 6, utf8_decode(""), 0);
+                $this->Cell(40, 6, utf8_decode("Total NO FACTURADO"), 0);
+                $this->Cell(20, 6, utf8_decode('$'.number_format($total_importe_nf,2)), 0);
+                $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 0);
+            }
             $this->Ln();
             $this->Line(10, $this->GetY(), 286, $this->GetY());
         }
@@ -112,32 +116,37 @@ class PDF extends FPDF
             $this->Ln();
             $respuesta=$ticket->reporte_tickets_en_rango_fechas_facturado($inicio,$fin+86400);
             while ($fila = mysqli_fetch_array($respuesta)){
-                $this->SetTextColor(0, 0, 0);
-                $this->SetFont('Arial', '', 7);
-                $this->Cell(6, 6, utf8_decode($fila['id_ticket']), 1);
-                $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
-                $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
-                $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
-                $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
-                $this->Cell(20, 6, utf8_decode($fila['folio']), 1);
-                $this->Cell(40, 6, utf8_decode($fila['nombre']), 1);
-                $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
-                $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
-                if($fila['metodopago']){
-                    $this->Cell(20, 6, utf8_decode($fact->obtener_forma_pago($fila['metodopago'])), 1);
-                }else{
-                    $this->Cell(20, 6, utf8_decode(''), 1);
+                if($fila['monto']>0){
+                    $this->SetTextColor(0, 0, 0);
+                    $this->SetFont('Arial', '', 7);
+                    $this->Cell(8, 6, utf8_decode($fila['mov']), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
+                    $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
+                    $this->Cell(20, 6, utf8_decode($fila['folio']), 1);
+                    $this->Cell(40, 6, utf8_decode($fila['nombre']), 1);
+                    $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
+                    $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
+                    if($fila['metodopago']){
+                        $this->Cell(20, 6, utf8_decode($fact->obtener_forma_pago($fila['metodopago'])), 1);
+                    }else{
+                        $this->Cell(20, 6, utf8_decode(''), 1);
+                    }
+                    
+                    $this->Cell(70, 6, utf8_decode($fila['uuid']), 1);
+                    $this->Ln();
+                    $total_facturado_f+=$fila['monto'];
                 }
-                
-                $this->Cell(70, 6, utf8_decode($fila['uuid']), 1);
-                $this->Ln();
-                $total_facturado_f+=$fila['monto'];
             }
-            $this->Cell(106, 6, utf8_decode(""), 0);
-            $this->Cell(40, 6, utf8_decode("Total FACTURADO"), 0);
-            $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 0);
-            $this->Cell(20, 6, utf8_decode('$'.number_format($total_facturado_f,2)), 0);
-            $this->Ln();
+            if($total_facturado_f>0){
+                $this->Cell(106, 6, utf8_decode(""), 0);
+                $this->Cell(40, 6, utf8_decode("Total FACTURADO"), 0);
+                $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 0);
+                $this->Cell(20, 6, utf8_decode('$'.number_format($total_facturado_f,2)), 0);
+                $this->Ln();
+            }
+            
         }
     }
 }
