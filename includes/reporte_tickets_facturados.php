@@ -57,7 +57,7 @@ class PDF extends FPDF
         $this->SetFillColor(64, 0, 61);
         $this->SetFont('Arial', 'B', 7);
         $this->SetTextColor(255, 255, 255);
-        $this->Cell(6, 6, '', 1, 0, 'C', true);
+        $this->Cell(8, 6, '', 1, 0, 'C', true);
         $this->Cell(20, 6, 'Inicio', 1, 0, 'C', true);
         $this->Cell(20, 6, 'Fin', 1, 0, 'C', true);
         $this->Cell(20, 6, 'Cuarto', 1, 0, 'C', true);
@@ -87,7 +87,7 @@ class PDF extends FPDF
                 if($fila['monto']>0){
                     $this->SetTextColor(0, 0, 0);
                     $this->SetFont('Arial', '', 7);
-                    $this->Cell(6, 6, utf8_decode($fila['mov']), 1);
+                    $this->Cell(8, 6, utf8_decode($fila['mov']), 1);
                     $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
                     $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
                     $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
@@ -102,10 +102,12 @@ class PDF extends FPDF
                     $total_importe_nf+=$fila['monto'];
                     }
             }
-            $this->Cell(106, 6, utf8_decode(""), 0);
-            $this->Cell(40, 6, utf8_decode("Total NO FACTURADO"), 0);
-            $this->Cell(20, 6, utf8_decode('$'.number_format($total_importe_nf,2)), 0);
-            $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 0);
+            if($total_importe_nf>0){
+                $this->Cell(106, 6, utf8_decode(""), 0);
+                $this->Cell(40, 6, utf8_decode("Total NO FACTURADO"), 0);
+                $this->Cell(20, 6, utf8_decode('$'.number_format($total_importe_nf,2)), 0);
+                $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 0);
+            }
             $this->Ln();
             $this->Line(10, $this->GetY(), 286, $this->GetY());
         }
@@ -117,7 +119,7 @@ class PDF extends FPDF
                 if($fila['monto']>0){
                     $this->SetTextColor(0, 0, 0);
                     $this->SetFont('Arial', '', 7);
-                    $this->Cell(6, 6, utf8_decode($fila['mov']), 1);
+                    $this->Cell(8, 6, utf8_decode($fila['mov']), 1);
                     $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
                     $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
                     $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
@@ -137,11 +139,14 @@ class PDF extends FPDF
                     $total_facturado_f+=$fila['monto'];
                 }
             }
-            $this->Cell(106, 6, utf8_decode(""), 0);
-            $this->Cell(40, 6, utf8_decode("Total FACTURADO"), 0);
-            $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 0);
-            $this->Cell(20, 6, utf8_decode('$'.number_format($total_facturado_f,2)), 0);
-            $this->Ln();
+            if($total_facturado_f>0){
+                $this->Cell(106, 6, utf8_decode(""), 0);
+                $this->Cell(40, 6, utf8_decode("Total FACTURADO"), 0);
+                $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 0);
+                $this->Cell(20, 6, utf8_decode('$'.number_format($total_facturado_f,2)), 0);
+                $this->Ln();
+            }
+            
         }
     }
 }
