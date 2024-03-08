@@ -45,7 +45,7 @@
               <div class="ticket_container_header_info_more">
                 <div>
                   <p class="ticket_info_p ticket_info_n">'.$hab->mostrar_nombre_hab($fila["id_hab"]).'</p>
-                  <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id_hab"].'"/></p>
+                  <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id"].'"/></p>
                   <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_'.$contadoriteraciones.'" value="1"/></p>
                 </div>
                 <div class="ticket_container_header_info_more_items">
@@ -110,7 +110,7 @@
               <div class="ticket_container_header_info_more">
                 <div>
                   <p class="ticket_info_p ticket_info_n">'.$hab->mostrar_nombre_hab($fila["id_hab"]).'</p>
-                  <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id_hab"].'"/></p>
+                  <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id"].'"/></p>
                 </div>
                 <div class="ticket_container_header_info_more_items">
                   <p class="ticket_info_p">Forma de pago: <spam class="ticket_spam" >'.$forma_pago->obtener_descripcion($fila["forma_pago"]).'</spam></p>
@@ -181,7 +181,7 @@
               <div class="ticket_container_header_info_more">
                 <div>
                   <p class="ticket_info_p ticket_info_n">'.$hab->mostrar_nombre_hab($fila["id_hab"]).'</p>
-                  <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id_hab"].'"/></p>
+                  <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id"].'"/></p>
                   <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_'.$contadoriteraciones.'" value="2"/></p>
                 </div>
                 <div class="ticket_container_header_info_more_items">
@@ -245,7 +245,7 @@
                 <div class="ticket_container_header_info_more">
                   <div>
                     <p class="ticket_info_p ticket_info_n">'.$hab->mostrar_nombre_hab($fila["id_hab"]).'</p>
-                    <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id_hab"].'"/></p>
+                    <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_id_'.$contadoriteraciones.'" value="'. $fila["id"].'"/></p>
                   </div>
                   <div class="ticket_container_header_info_more_items">
                     <p class="ticket_info_p">Forma de pago: <spam class="ticket_spam" >'.$forma_pago->obtener_descripcion($fila["forma_pago"]).'</spam></p>

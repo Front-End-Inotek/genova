@@ -1784,11 +1784,18 @@ class Reservacion extends ConexionMYSql
         //var_dump($fila);
         if($fila['edo'] == 1) {
             if($fila['total_pago'] <= 0) {
-                echo $fila['id_hab']."rdfgdfg";
                 echo '<tr class="text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['mov'].'</td>
-            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <td>'.$fila['mov'].'</td>';
+            if($fila['id_hab']>0){
+                echo '
+                <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+                ';
+            }else{
+                echo '
+                <td>Pendiente</td>';
+            }
+            echo '
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1880,8 +1887,16 @@ class Reservacion extends ConexionMYSql
             } else {
                 echo '<tr class="table-success text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['mov'].'</td>
-            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <td>'.$fila['mov'].'</td>';
+            if($fila['id_hab']>0){
+                echo '
+                <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+                ';
+            }else{
+                echo '
+                <td>Pendiente</td>';
+            }
+            echo '
             <!--<td>'.$fila['numero_hab'].'</td>-->
             <td>'.date("d-m-Y", $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
@@ -1977,8 +1992,16 @@ class Reservacion extends ConexionMYSql
         } else {
             echo '<tr class=" text-center">
             <td>'.$fila['ID'].'</td>
-            <td>'.$fila['mov'].'</td>
-            <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+            <td>'.$fila['mov'].'</td>';
+            if($fila['id_hab']>0){
+                echo '
+                <td>'.$hab->mostrar_nombre_hab($fila['id_hab']).'</td>
+                ';
+            }else{
+                echo '
+                <td>Pendiente</td>';
+            }
+            echo '
             <td>'.date("d-m-Y", (int) $fila['fecha_entrada']).'</td>
             <td>'.date("d-m-Y", $fila['fecha_salida']).'</td>
             <td>'.$fila['persona'].' '.$fila['apellido'].'</td>
