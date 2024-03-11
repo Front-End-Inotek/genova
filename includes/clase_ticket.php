@@ -140,11 +140,11 @@
       }
       function reporte_tickets_en_rango_fechas_sin_facturar($inicio,$fin){
         $sentencia="SELECT *, ticket.id AS id_ticket, ticket.tiempo AS ticket_fecha FROM ticket
-        LEFT JOIN facturas ON ticket.id_factura = facturas.id
+        LEFT JOIN facturas ON ticket.id_factura = facturas.folio
         WHERE ticket.facturado=0  AND ticket.tiempo>=$inicio AND ticket.tiempo<=$fin
         UNION
         SELECT *, ticket.id, ticket.tiempo FROM ticket
-        RIGHT JOIN facturas ON ticket.id_factura = facturas.id
+        RIGHT JOIN facturas ON ticket.id_factura = facturas.folio
         WHERE ticket.facturado=0  AND ticket.tiempo>=$inicio AND ticket.tiempo<=$fin ;";
         //echo $sentencia;
         $comentario="obtener tickets en rango de fechas para llenar reporte";
@@ -153,12 +153,12 @@
       }
       function reporte_tickets_en_rango_fechas_facturado($inicio,$fin){
         $sentencia="SELECT *, ticket.id AS id_ticket, ticket.tiempo AS ticket_fecha FROM ticket
-        LEFT JOIN facturas ON ticket.id_factura = facturas.id
-        WHERE ticket.facturado=1  AND ticket.tiempo>=$inicio AND ticket.tiempo<=$fin
+        LEFT JOIN facturas ON ticket.id_factura = facturas.folio
+        WHERE ticket.facturado=1  AND ticket.fecha_facturacion>=$inicio AND ticket.fecha_facturacion<=$fin
         UNION
         SELECT *, ticket.id, ticket.tiempo FROM ticket
-        RIGHT JOIN facturas ON ticket.id_factura = facturas.id
-        WHERE ticket.facturado=1  AND ticket.tiempo>=$inicio AND ticket.tiempo<=$fin ;";
+        RIGHT JOIN facturas ON ticket.id_factura = facturas.folio
+        WHERE ticket.facturado=1  AND ticket.fecha_facturacion>=$inicio AND ticket.fecha_facturacion<=$fin ;";
         //echo $sentencia;
         $comentario="obtener tickets en rango de fechas para llenar reporte";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
