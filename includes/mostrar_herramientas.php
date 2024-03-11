@@ -365,6 +365,18 @@ switch ($_GET['estado']) {
 				echo '<p>Asignar</p>';
 			echo '</div>';
 		}
+		include_once("clase_reservacion.php");
+		include_once("clase_huesped.php");
+		$reservacion = new Reservacion($_GET["reserva_id"]);
+		$id = $_GET["reserva_id"];
+		$opcion = $_GET["hab_id"];
+		$huesped_id = $reservacion->id_huesped;
+		$huesped = new Huesped($huesped_id);
+		$correo = $huesped->correo;
+		echo '<div class="btn_modal_herramientas btn_cancelar" onclick="aceptar_cancelar_reservacion('.$id.' , '.$opcion.', \''.$correo.'\', 1)">';
+			echo '<img class="btn_modal_img" src="./assets/iconos_btn/cancelar.svg">';
+			echo '<p>Cancelar</p>';
+		echo '</div>';
 		
 	}
 	break;
@@ -372,19 +384,19 @@ switch ($_GET['estado']) {
 	case 7:
 	if($user->nivel<=2){
 			include_once("clase_reservacion.php");
+			include_once("clase_huesped.php");
 			$reservacion = new Reservacion($_GET["reserva_id"]);
-			//var_dump($reservacion);
 			$id = $_GET["reserva_id"];
 			$opcion = $_GET["hab_id"];
-			$correo = "dave_u@outlook.com";
 			$garantizada = 0;
 			$huesped_id = $reservacion->id_huesped;
-			//echo $id;
+			$huesped = new Huesped($huesped_id);
+			$correo = $huesped->correo;
 			echo '<div class="btn_modal_herramientas btn_garantizar"  href="#caja_herramientas" onclick="aceptar_garantizar_reservacion('.$id.' , '.$opcion.' ,\''.$correo.'\', 0 , '.$huesped_id.' )">';
 				echo '<img class="btn_modal_img" src="./assets/iconos_btn/garantizar.svg">';
 				echo '<p>Garantizar</p>';
 			echo '</div>';
-			echo '<div class="btn_modal_herramientas btn_cancelar" onclick="aceptar_borrar_reservacion('.$id.' , '.$opcion.')">';
+			echo '<div class="btn_modal_herramientas btn_cancelar" onclick="aceptar_cancelar_reservacion('.$id.' , '.$opcion.', \''.$correo.'\', 1)">';
 				echo '<img class="btn_modal_img" src="./assets/iconos_btn/cancelar.svg">';
 				echo '<p>Cancelar</p>';
 			echo '</div>';

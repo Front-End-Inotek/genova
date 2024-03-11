@@ -31,7 +31,7 @@
 
 				<section class="aside_nav_links">';
 
-				if($usuario->nivel == 0 ){
+				if($usuario->nivel == 0 || $usuario->nivel == 1){
 					echo '
 					<div class="aside_nav_link_container" onclick="graficas(); handleSiceTable();">
 						<img class="aside_nav_link" src="./assets/icons-nav/estadistica.svg" />
@@ -113,10 +113,12 @@
 						if($permisos_surtir > 0){
 							echo '
 							<li class="aside_ruta" onclick="ver_surtir(); handleSiceTable();">Surtir</li>
-							<li class="aside_ruta" onclick="corte_diario(); handleSiceTable();">Corte diario</li>
-							<li class="aside_ruta" onclick="pronosticos(); handleSiceTable();">Pronosticos de ocupación</li>
 							';
 						}
+						echo '
+							<li class="aside_ruta" onclick="corte_diario(); handleSiceTable();">Corte diario</li>
+							<li class="aside_ruta" onclick="pronosticos(); handleSiceTable();">Pronosticos de ocupación</li>
+						';
 						$permisos_reportes_diarios=$usuario->reporte_ver;
 						if($permisos_reportes_diarios > 0 || $usuario->nivel == 2){
 							echo '
@@ -334,8 +336,7 @@
 					</div>
 					';
 				}
-				$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
-				if($permisos_reportes > 0 ){
+				if($usuario->nivel == 0 ){
 					echo '
 					<div class="aside_nav_link_container" onclick="ver_nuevo_rack(); handleSiceTable();">
 						<img class="aside_nav_link" src="./assets/icons-nav/desarrollo.svg" />
@@ -343,9 +344,9 @@
 						<img class="aside_nav_link aside_nav_link_text arrow-link hide_arow" src="./assets/icons-nav/arrow-next.svg" />
 					</div>
 					';
-				}
-				$permisos_reportes=$usuario->reporte_ver+$usuario->reservacion_agregar;
-				if($permisos_reportes > 0 ){
+				};
+				//Herramientas de super usuario !SOLO PARA DESARROLLADORES
+				if($usuario->nivel == 0 ){
 					echo '
 					<div class="aside_nav_link_container" onclick="herramientas_admin(); handleSiceTable();">
 						<img class="aside_nav_link" src="./assets/icons-nav/admin.svg" />

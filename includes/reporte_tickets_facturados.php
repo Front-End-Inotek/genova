@@ -125,7 +125,9 @@ class PDF extends FPDF
                     $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
                     $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
                     $this->Cell(20, 6, utf8_decode($fila['folio']), 1);
-                    $this->Cell(40, 6, utf8_decode($fila['nombre']), 1);
+                    $nombre = $fila['nombre'];
+                    $nombre_truncado = (strlen($nombre) > 25 ) ? substr($nombre, 0 , 22 ) . '...' : $nombre;
+                    $this->Cell(40, 6, utf8_decode($nombre_truncado), 1);
                     $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
                     $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
                     if($fila['metodopago']){
