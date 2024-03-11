@@ -196,7 +196,7 @@ $codigopostal = $rfc['2'];
 $email = $rfc['5'];
 $notas = $rfc['8'];
 $fecha = time();
-$nombre_hab=0;
+$nombre_hab=$_GET['hab'];
 $pax=0;
 
 
