@@ -558,6 +558,7 @@ body {
   gap: 5px;
   border-radius: 5.25px;
   padding: 2px 5px;
+  font-weight: 500;
 }
 .pildora_nombre {
   position: absolute;
@@ -569,6 +570,10 @@ body {
   font-size: 20px;
   font-weight: 600;
   background-color: #F5F5F5;
+  color: inherit;
+}
+.pildora_nombre span {
+  filter: brightness(0.35);
 }
 
 .habitacion_container_encabezado_circle{
@@ -731,6 +736,7 @@ body {
   font-size: 16px;
   cursor: pointer;
   transition: 0.1s ease-in all;
+  text-align: center;
 }
 .btn_modal_herramientas:hover {
   scale: 1.02;
@@ -818,7 +824,7 @@ body {
   color: white;
 }
 .btn_garantizar {
-  background-color: #BCD269;
+  background-color: #99ad4c;
   color: white;
 }
 .btn_chat {
@@ -830,7 +836,7 @@ body {
   height: 40px;
 }
 .btn_cancelar {
-  background-color: red;
+  background-color: #EE6652;
   color: white;
 }
 .contenedor_para_hab {

@@ -53,6 +53,13 @@ echo '
         <div id="contenedor-facturas" class="contenedor_columnas_tablas">
         </div>
     </div>
+    
 ';
+
+if( $folio != "" ) {
+    echo '
+    <script>manejo_facturas_folio_casa()</script>
+    ';
+}
 ?>
 

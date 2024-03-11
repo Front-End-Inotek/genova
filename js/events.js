@@ -3600,12 +3600,13 @@ function guardar_preasignar_reservacion(id,opcion=0){
 
 // Modal de preasignar reservacion
 function preasignar_reservacion(id,opcion=0,tipo_hab,numero_hab){
-    console.log(numero_hab)
+    //console.log(numero_hab)
 	$("#mostrar_herramientas").load("includes/preasignar_modal_reservacion.php?id="+id+"&opcion="+opcion+"&tipo_hab="+tipo_hab+"&numero_hab="+numero_hab);
 }
 
 // Modal de cancelar una reservacion
 function aceptar_garantizar_reservacion(id,preasignada=0,correo,garantizada=0,huesped_id){
+    //console.log("holaaa")
 	$("#mostrar_herramientas").load("includes/garantizar_modal_reservacion.php?id="+id+"&preasignada="+preasignada+"&correo="+correo+"&garantizada="+garantizada+"&huesped_id="+huesped_id);
 }
 

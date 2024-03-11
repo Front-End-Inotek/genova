@@ -371,19 +371,23 @@ switch ($_GET['estado']) {
 	//case 7:
 	case 7:
 	if($user->nivel<=2){
-			//$id = $_GET['ID'];
-			//$opcion = 0;
-			//$tipo_hab = 2;
-			//$numero_hab = 2;
+			include_once("clase_reservacion.php");
+			$reservacion = new Reservacion($_GET["reserva_id"]);
+			//var_dump($reservacion);
+			$id = $_GET["reserva_id"];
+			$opcion = $_GET["hab_id"];
+			$correo = "dave_u@outlook.com";
+			$garantizada = 0;
+			$huesped_id = $reservacion->id_huesped;
 			//echo $id;
-			//echo '<div class="btn_modal_herramientas btn_garantizar" data-toggle="modal" href="#caja_herramientas" onclick="aceptar_garantizar_reservacion()">';
-			//	echo '<img class="btn_modal_img" src="./assets/iconos_btn/garantizar.svg">';
-			//	echo '<p>Garantizar</p>';
-			//echo '</div>';
-			//echo '<div class="btn_modal_herramientas btn_cancelar" onclick="">';
-			//	echo '<img class="btn_modal_img" src="./assets/iconos_btn/cancelar.svg">';
-			//	echo '<p>Cancelar preasignación</p>';
-			//echo '</div>';
+			echo '<div class="btn_modal_herramientas btn_garantizar"  href="#caja_herramientas" onclick="aceptar_garantizar_reservacion('.$id.' , '.$opcion.' ,\''.$correo.'\', 0 , '.$huesped_id.' )">';
+				echo '<img class="btn_modal_img" src="./assets/iconos_btn/garantizar.svg">';
+				echo '<p>Garantizar</p>';
+			echo '</div>';
+			echo '<div class="btn_modal_herramientas btn_cancelar" onclick="aceptar_borrar_reservacion('.$id.' , '.$opcion.')">';
+				echo '<img class="btn_modal_img" src="./assets/iconos_btn/cancelar.svg">';
+				echo '<p>Cancelar</p>';
+			echo '</div>';
 		
 	}
 	break;
