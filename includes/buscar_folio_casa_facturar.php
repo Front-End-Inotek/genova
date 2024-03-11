@@ -26,6 +26,7 @@
       if($fila['facturado'] == 0 && $fila["rest"]==0) {
         if($fila["total"]>0){
           echo '
+          <input class="d-none" type="number" id="leer_hab" value='.$hab->mostrar_nombre_hab($fila["id_hab"]).'>
           <div class="card text-center ticket_container">';
           echo '
           <div class="ticket_container_header">
