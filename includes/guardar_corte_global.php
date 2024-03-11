@@ -188,7 +188,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   // Fecha y datos generales
   $pdf = new PDF();
   $pdf->AliasNbPages();
-  $pdf->AddPage();
+/*   $pdf->AddPage();
   $fecha_actual = time();
   $fecha = date("d-m-Y h:i A",$fecha_actual);
   $dia = substr($fecha, 0, 2);
@@ -321,11 +321,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           $total_productos_hab= $total_productos_hab + $inf->producto_tipo_hab[$z];
           $total_productos_rest= $total_productos_rest + $inf->producto_tipo_rest[$z];
           
-          /*if($z == 4){
-            for ($i = 1; $i <= 24; $i++) {
-                $pdf->Cell(192,8,iconv("UTF-8", "ISO-8859-1",'Iteracion '.$i),0,1,'R');
-            }
-          }*/
+          
           $x=$pdf->GetX();
           $y=$pdf->GetY();
           if($y >= 265){
@@ -357,7 +353,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       $pdf->SetFillColor(45, 63, 83);
 
   
-  }
+  } */
 
   
   $pdf->AddPage('L');
