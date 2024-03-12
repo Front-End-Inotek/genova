@@ -152,19 +152,14 @@
         return $consulta;
       }
       function reporte_tickets_en_rango_fechas_facturado($inicio,$fin){
-        $sentencia="SELECT *, ticket.id AS id_ticket, ticket.tiempo AS ticket_fecha FROM ticket
-        LEFT JOIN facturas ON ticket.id_factura = facturas.folio
-        WHERE ticket.facturado=1  AND ticket.fecha_facturacion>=$inicio AND ticket.fecha_facturacion<=$fin
-        UNION
-        SELECT *, ticket.id, ticket.tiempo FROM ticket
-        RIGHT JOIN facturas ON ticket.id_factura = facturas.folio
-        WHERE ticket.facturado=1  AND ticket.fecha_facturacion>=$inicio AND ticket.fecha_facturacion<=$fin ;";
+        $sentencia="SELECT * FROM facturas WHERE fecha >=$inicio AND fecha <=$fin ;";
         //echo $sentencia;
         $comentario="obtener tickets en rango de fechas para llenar reporte";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
       function cambiar_estado_facturados($id,$id_factura){
+        date_default_timezone_set('America/Mexico_City');
         $tiempo_unix=time();
         $sentencia="UPDATE ticket SET facturado = 1, id_factura = '$id_factura' ,fecha_facturacion='$tiempo_unix'  WHERE id = $id";
         //echo $sentencia;

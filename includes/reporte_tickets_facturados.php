@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Mexico_City');
 include_once ('clase_ticket.php');
 include_once ('clase_hab.php');
 include_once ('clase_movimiento.php');
@@ -50,6 +51,7 @@ class PDF extends FPDF
 
     function CreateTable()
     {
+        date_default_timezone_set('America/Mexico_City');
         $ticket=NEW Ticket(0);
         $hab=NEW Hab(0);
         $mov= NEW Movimiento(0);
@@ -76,13 +78,13 @@ class PDF extends FPDF
         $inicial = $_GET["inicial"];
         $final = $_GET["final"];
         $inicio=strtotime($inicial);
-        $fin=strtotime($final);
+        $fin=strtotime($final)+86400;
         $total_importe_nf=0;
         $total_facturado_f=0;
         if($opcion=="no-facturado"||$opcion=="ambos"){
             $this->Cell(30, 6, 'NO FACTURADO', 0);
             $this->Ln();
-            $respuesta=$ticket->reporte_tickets_en_rango_fechas_sin_facturar($inicio,$fin+86400);
+            $respuesta=$ticket->reporte_tickets_en_rango_fechas_sin_facturar($inicio,$fin);
             while ($fila = mysqli_fetch_array($respuesta)){
                 if($fila['monto']>0){
                     $this->SetTextColor(0, 0, 0);
@@ -114,31 +116,33 @@ class PDF extends FPDF
         if($opcion=="facturado"||$opcion=="ambos"){
             $this->Cell(30, 6, 'FACTURADO', 0);
             $this->Ln();
-            $respuesta=$ticket->reporte_tickets_en_rango_fechas_facturado($inicio,$fin+86400);
+            $respuesta=$ticket->reporte_tickets_en_rango_fechas_facturado($inicio,$fin);
             while ($fila = mysqli_fetch_array($respuesta)){
-                if($fila['monto']>0){
+                if($fila){
                     $this->SetTextColor(0, 0, 0);
                     $this->SetFont('Arial', '', 7);
-                    $this->Cell(8, 6, utf8_decode($fila['mov']), 1);
-                    $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['mov']))), 1);
-                    $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['mov']))), 1);;
-                    $this->Cell(20, 6, utf8_decode($hab->mostrar_nombre_hab($fila['id_hab'])), 1);
-                    $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['ticket_fecha'])), 1);
+                    $this->Cell(8, 6, utf8_decode($fila['folio_casa']), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_inicio($fila['folio_casa']))), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d",$mov->saber_fecha_fin($fila['folio_casa']))), 1);;
+                    $this->Cell(20, 6, utf8_decode('habitacion '.$fila['nombre_hab']), 1);
+                    $this->Cell(20, 6, utf8_decode(date("Y-m-d", $fila['fecha'])), 1);
                     $this->Cell(20, 6, utf8_decode($fila['folio']), 1);
                     $nombre = $fila['nombre'];
                     $nombre_truncado = (strlen($nombre) > 25 ) ? substr($nombre, 0 , 22 ) . '...' : $nombre;
                     $this->Cell(40, 6, utf8_decode($nombre_truncado), 1);
                     $this->Cell(20, 6, utf8_decode('$'.number_format(0,2)), 1);
-                    $this->Cell(20, 6, utf8_decode('$'.number_format($fila['monto'],2)), 1);
+                    $this->Cell(20, 6, utf8_decode('$'.number_format($fila['importe']+$fila['iva']+$fila['ish'],2)), 1);
                     if($fila['metodopago']){
-                        $this->Cell(20, 6, utf8_decode($fact->obtener_forma_pago($fila['metodopago'])), 1);
+                        $nombreMP = $fact->obtener_forma_pago($fila['metodopago']);
+                        $nombre_truncadoMP = (strlen($nombreMP) > 18 ) ? substr($nombreMP, 0 , 16 ) . '...' : $nombreMP;
+                        $this->Cell(20, 6, utf8_decode($nombre_truncadoMP), 1);
                     }else{
                         $this->Cell(20, 6, utf8_decode(''), 1);
                     }
                     
                     $this->Cell(70, 6, utf8_decode($fila['uuid']), 1);
                     $this->Ln();
-                    $total_facturado_f+=$fila['monto'];
+                    $total_facturado_f+=($fila['importe']+$fila['iva']+$fila['ish']);
                 }
             }
             if($total_facturado_f>0){
