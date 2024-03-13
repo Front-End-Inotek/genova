@@ -3774,7 +3774,7 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             url:"includes/asignar_reservacion.php",
             data:datos,
             success:function(res){
-                console.log(res)
+                //console.log(res)
                 // return
                 if(res=="OCUPADA"){
                     setTimeout(() => {
@@ -3783,11 +3783,12 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
                         $('#caja_herramientas').modal('show');
                     }, 500);
                 }else{
-                    seleccionar_vista()
+                    //seleccionar_vista()
+                    ver_reservaciones();
                     setTimeout(() => {
                         mostrar_herramientas(hab_id,1,'')
                         $('#caja_herramientas').modal('show');
-                    }, 2000);
+                    }, 500);
                 }
             },
             //success:problemas_sistema,
@@ -3802,7 +3803,7 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
 
 // Modal de asignar una reservacion a una habitacion en estado disponible
 function select_asignar_reservacion(id,numero_hab){
-    console.log(id)
+    //console.log(id)
     return
 	$("#mostrar_herramientas").load("includes/asignar_modal_reservacion.php?id="+id+"&numero_hab="+numero_hab);
 }

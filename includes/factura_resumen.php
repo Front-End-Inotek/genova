@@ -1,4 +1,6 @@
 <?php
+
+$fecha_hoy = date("Y-m-d");
 echo '
     <div class="main_container">
         <header class="main_container_title">
@@ -39,11 +41,11 @@ echo '
             </div>
             <div class="facturas_resumen_fechas">
                 <div class="form-floating ">
-                    <input class="form-control custom_input" type="date" placeholder="Fecha de inicio" id="fecha_inicio_factura">
+                    <input class="form-control custom_input" type="date" value="'.$fecha_hoy.'" placeholder="Fecha de inicio" id="fecha_inicio_factura">
                     <label for="fecha_inicio_factura">Fecha inicial</label>
                 </div>
                 <div class="form-floating ">
-                    <input class="form-control custom_input" type="date" placeholder="Fecha de fin" id="fecha_fin_factura">
+                    <input class="form-control custom_input" type="date" value="'.$fecha_hoy.'" placeholder="Fecha de fin" id="fecha_fin_factura">
                     <label for="fecha_fin_facturaa">Fecha final</label>
                 </div>
             </div>

@@ -2842,6 +2842,7 @@ class Reservacion extends ConexionMYSql
             </div>
             <div class="form-floating input_container_date">
                 <input class="form-control custom_input" type="date" id="dia" placeholder="Reservacion dia" autofocus="autofocus"/>
+                <label for="dia">Dia</label>
             </div>
             <div class="form-floating ">
                 <button class="btn btn-primary btn-block btn-primary" onclick="busqueda_reservacion_combinada_por_dia()">
@@ -2863,7 +2864,7 @@ class Reservacion extends ConexionMYSql
             <!--<div class="form-floating ">
                 <button class="btn btn-info btn-block" onclick="regresar_reservacion()"> ←</button>
             </div> -->
-            <div class="col-sm-3"><h4><p><a href="#" class="text-dark">Día '.$fecha_dia_dia.'-'.$fecha_dia_mes.'-'.$fecha_dia_anio.' - '.$porcentaje.'% de Ocupación</a></p></h4></div>
+            <div class="col-sm-3"><h4><p>Día '.$fecha_dia_dia.'-'.$fecha_dia_mes.'-'.$fecha_dia_anio.' - '.$porcentaje.'% de Ocupación</p></h4></div>
 		</div><br>';
     }
 
