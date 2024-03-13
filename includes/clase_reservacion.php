@@ -2302,7 +2302,7 @@ class Reservacion extends ConexionMYSql
         $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
         //cantidad de dias a visualizar. (se añaden 15 dias)
-        $fin_dia= $inicio_dia + 1.296e+6;
+        $fin_dia= $inicio_dia + 86400;
         $cont = 1;
         //echo $posicion;
         $final = $posicion+20;
