@@ -3,6 +3,8 @@
   include_once("clase_cuenta.php");
   include_once("clase_hab.php");
   include_once("clase_log.php");
+  include_once("clase_ticket.php");
+  $ticket=NEW Ticket(0);
   $cuenta= NEW Cuenta($_POST['id']);
   $hab= NEW Hab($_POST['hab_id']);
   $logs = NEW Log(0);
@@ -19,6 +21,6 @@
 
   $cuenta->borrar_cuenta($_POST['id'],$descripcion,$monto);
   $logs->guardar_log($_POST['usuario_id'],$mensaje_log);
-  
+  $ticket->borrar_ticket($_POST['id_ticket']);
   echo $_POST['hab_id']."/".$_POST['estado']."/".$_POST['mov']."/".$_POST['id_maestra'];
 ?>

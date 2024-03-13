@@ -5676,8 +5676,8 @@ function borrar_herramientas_cargo(id,hab_id,estado,id_maestra,mov){
 }
 
 // Modal de herramientas de abonos en estado de cuenta
-function herramientas_abonos(id,hab_id,estado,usuario,abono,id_maestra=0,mov=0){
-    $("#mostrar_herramientas").load("includes/modal_herramientas_abonos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&abono="+abono+"&mov="+mov+"&id_maestra="+id_maestra);
+function herramientas_abonos(id,hab_id,estado,usuario,abono,id_maestra=0,mov=0,id_ticket=0){
+    $("#mostrar_herramientas").load("includes/modal_herramientas_abonos.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&usuario="+usuario+"&abono="+abono+"&mov="+mov+"&id_maestra="+id_maestra+"&id_ticket="+id_ticket);
 }
 
 // Modal de editar abono en estado de cuenta
@@ -5726,12 +5726,12 @@ function modificar_herramientas_abono(id,hab_id,estado,id_maestra=0,mov=0){
 }
 
 // Modal de borrar abono en estado de cuenta
-function aceptar_borrar_herramientas_abono(id,hab_id,estado,abono,mov=0,id_maestra=0){
-    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_abono.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono+"&mov="+mov+"&id_maestra="+id_maestra);
+function aceptar_borrar_herramientas_abono(id,hab_id,estado,abono,mov=0,id_maestra=0,id_ticket=0){
+    $("#mostrar_herramientas").load("includes/modal_borrar_herramientas_abono.php?id="+id+"&hab_id="+hab_id+"&estado="+estado+"&abono="+abono+"&mov="+mov+"&id_maestra="+id_maestra+"&id_ticket="+id_ticket);
 }
 
 // Borrar un abono en estado de cuenta
-function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
+function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0,id_ticket=0){
 	var usuario_id=localStorage.getItem("id");
     $('#caja_herramientas').modal('hide');
     if(id >0){
@@ -5742,6 +5742,7 @@ function borrar_herramientas_abono(id,hab_id,estado,mov=0,id_maestra=0){
                 "usuario_id": usuario_id,
                 "mov":mov,
                 "id_maestra":id_maestra,
+                "id_ticket":id_ticket,
             };
         $.ajax({
                 async:true,

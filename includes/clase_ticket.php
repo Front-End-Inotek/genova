@@ -318,6 +318,11 @@
         }
         return $id_ticket;
       }
+      function borrar_ticket($id){
+        $sentencia = "DELETE FROM ticket WHERE id = $id LIMIT 1";
+        $comentario="Buscar el id de un ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       function sacar_tickets_corte($usuario, $valor){
         $sentencia="SELECT * FROM `ticket` WHERE  `corte` = '0' AND `estado` != '2'AND `id_usuario`=$usuario AND `forma_pago`=$valor;";
         $comentario="saco los tickets que comprenden el corte para mostrarlos en una tabla en el corte del usuairo";
