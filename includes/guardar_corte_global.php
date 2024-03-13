@@ -62,59 +62,8 @@
       // Cabecera de página
       function Header()
       {
-        if ( $this->PageNo() == 1) {
-          $conf = NEW Configuracion(0);
-          $ticket= NEW Ticket(0);
-          $labels= NEW Labels(0);
-          $usuario= NEW Usuario(0);
-          $logs = NEW Log(0);
-
-          $this->SetFont('Arial','',8);
-          $this->SetTextColor(0,0,0);
-          $fecha_actual = time();
-          $fecha = date("d-m-Y h:i A",$fecha_actual);
-          $dia = substr($fecha, 0, 2);
-          $mes = substr($fecha, 3, 2);
-          $mes= $logs->formato_fecha($mes);
-          $anio = substr($fecha, 6, 4);
-          $anio_hora = substr($fecha, 6, 13);
-          $nombre= $conf->obtener_nombre();
-          $nueva_etiqueta= $labels->obtener_corte();
-          //$nueva_etiqueta= $nueva_etiqueta - 1;
-          $realizo_usuario= $usuario->obtengo_nombre_completo($_POST['usuario_id']);
-
-          // Marco primera pagina
-          //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
-          // Arial bold 15
-          $this->Image("../images/encabezado_pdf.jpg", 0, 0, 211);
-          $this->Image("../images/rectangulo_pdf.png", 160, 1, 27, 27);
-          $this->Image("../images/rectangulo_pdf_2.png", 10, 20, 68, 12);
-          $this->SetFont('Arial','',8);
-          // Color de letra
-          $this->SetTextColor(0, 102, 205);
-          // Movernos a la derecha
-          $this->Cell(2);
-          // Nombre del Hotel
-          //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
-          // Datos y fecha
-          $this->SetFont('Arial','',16);
-          $this->SetTextColor(255,255,255);
-          $this->Ln(22);
-          $this->Cell(21);
-          $this->Cell(25,-11,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,0,'C');
-          $this->SetTextColor( 0 , 0 ,0 );
-          // Logo
-          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
-          // Salto de línea
-          $this->Ln(10);
-          // Movernos a la derecha
-          $this->Cell(21);
-          // Título
-          $this->SetFont('Arial','',10);
-          $this->Cell(170,-20,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
-          // Salto de línea
-          $this->Ln(8);
-        } else {
+        
+          
           $conf = NEW Configuracion(0);
           $ticket= NEW Ticket(0);
           $labels= NEW Labels(0);
@@ -166,7 +115,6 @@
           $this->Cell(250,-20,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
           // Salto de línea
           $this->Ln(20);
-        }
           
       }
       

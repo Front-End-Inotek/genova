@@ -4,9 +4,10 @@ $usuario_id = $_GET['usuario_id'];
 $usuario = new Usuario($usuario_id);
 $nombreUsuario = $usuario->nombre_completo;
 
-if($usuario->nivel !=0){
+// Esta funcion se elimino por que solo mostraba si eras desarrollador
+/* if($usuario->nivel !=0 ){
     die();
-}
+} */
 
 echo '
     <div class="contenedor__graficas">
