@@ -117,7 +117,7 @@
       return $consulta;
 
     }
-    function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago,$metodo_pago="",$id,$nombre_hab,$pax,$notas){
+    function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago,$metodo_pago="",$id,$nombre_hab=0,$pax,$notas){
       
       $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`metodopago`,`folio_casa`,`nombre_hab`,`pax_extras`,`notas` )
       VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$metodo_pago','$id',$nombre_hab,$pax,'$notas')";
