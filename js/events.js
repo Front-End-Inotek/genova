@@ -3857,7 +3857,8 @@ function asignar_reservacion(hab_id,id_reservacion,habitaciones,mov){
                 success:function(res){
                 // console.log(res)
                 // return
-                seleccionar_vista()
+                //seleccionar_vista()
+                ver_reservaciones();
                 setTimeout(() => {
                     mostrar_herramientas(hab_id,1,'')
                     $('#caja_herramientas').modal('show');
