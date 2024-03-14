@@ -91,7 +91,7 @@ function sabernosession(){
                     // txt_vista =localStorage.getItem("txt_vista");
                     /* var menu_vista = document.getElementById("vista");
                     menu_vista.innerHTML="Rack Operaciones" */
-                    console.log("rack de operaciones "+vista);
+                    //console.log("rack de operaciones "+vista);
                     var usuario_id=localStorage.getItem("id");
                     $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
                     siguiente_vista=1
@@ -99,7 +99,7 @@ function sabernosession(){
                 if(vista==1){
                     /* var menu_vista = document.getElementById("vista");
                     menu_vista.innerHTML="Rack Habitacional" */
-                    console.log("rack de operaciones "+vista);
+                    //console.log("rack de operaciones "+vista);
                     var id=localStorage.getItem("id");
                     var token=localStorage.getItem("tocken");
                     $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
@@ -128,7 +128,7 @@ function obtener_datos_hab() {
                     /*console.log(hab_info[i]);
                     /*console.log(hab_info[i]['id']+"-"+hab_info[i]['ultimo_mov']);*/
                     if(hab[hab_info[i]['id']]<hab_info[i]['ultimo_mov']){
-                        console.log('hab_'+hab_info[i]['id']);
+                        //console.log('hab_'+hab_info[i]['id']);
                         hab[hab_info[i]['id']]=hab_info[i]['ultimo_mov'];
                         hab_ultimo_mov[hab_info[i]['id']]=hab_info[i]['mov'];
                         $("#hab_"+hab_info[i]['id']).load("includes/mostrar_cambios_hab.php?hab_id="+hab_info[i]['id'],function(res){
@@ -332,7 +332,7 @@ function agregar_tipos_abonos(){
 }
 ///////////////////////////////////////////////////////////
 function mostrar_info_custom(){
-    console.log("mostrar info")
+    //console.log("mostrar info")
     /* $("#mostrar_herramientas").load("includes/info.php"); */
     $("#mostrar_herramientas").load("includes/info.php");
 }
@@ -408,7 +408,7 @@ function guardar_politicaReservacion(nombre,codigo,descripcion){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.responseText)
+            //console.log(e.target.responseText)
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_politicas_reservacion()

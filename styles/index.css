@@ -213,7 +213,8 @@ body {
   margin-bottom: 25px;
 }
 .estado_cuenta_tabla {
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  min-width: 48%;
 }
 .btn_estado_cuenta {
   display: flex;

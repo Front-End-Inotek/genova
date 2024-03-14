@@ -45,7 +45,7 @@
     }
     //             Se envian los datos del formulario para evaluar -->
     function enviarform(){
-        console.log("conectando");
+        //console.log("conectando");
         let msError=document.getElementById('error-text');
         //Declaramos una variable que contendra nuestro formulario
         var form = document.getElementById('formLogin');
@@ -59,7 +59,7 @@
         xhr.addEventListener('load', e =>{
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {
-                console.log(e.target.response);
+                //console.log(e.target.response);
                 //Entrara la contidicion que valida la respuesta del formulario
                 if (e.target.response == 'validado') {
                     mostrarValidado('Sesión iniciada con éxito', msError);

@@ -155,8 +155,8 @@ setlocale(LC_ALL, "es_ES");
                 $color = "#".$color;
                 echo ' <td class="cal-userinfo BordeIzquierdoTipoHab" style="border-left-color: '.$color.' !important;">
                 ';
-                    echo 'Habitación ------';
-                        echo $hab_id;
+                    echo 'Hab. ';
+                    echo $hab_id;
                 echo '
                     </td>´
                 ';

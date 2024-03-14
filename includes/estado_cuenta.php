@@ -175,7 +175,7 @@
               $_SESSION['extra_adulto']=$extra_adulto;
             }else{
               echo '
-              <ul class="list-group-item">Extra Adulto: <span>-</span></ul>';
+              <ul class="list-group-item">Extra Adulto: </ul>';
               $_SESSION['extra_adulto']=0;
             }
             if($extra_junior>0){
@@ -184,7 +184,7 @@
               $_SESSION['extra_junior']=$extra_junior;
             }else{
               echo '
-              <ul class="list-group-item">Extra Junior: <span>-</span></ul>';
+              <ul class="list-group-item">Extra Junior: </ul>';
               $_SESSION['extra_junior']=$extra_junior;
             }
             if($extra_infantil>0){
