@@ -2317,7 +2317,7 @@ class Reservacion extends ConexionMYSql
 		INNER JOIN usuario ON reservacion.id_usuario = usuario.id
 		INNER JOIN huesped ON reservacion.id_huesped = huesped.id
 		INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.estado = 1)
-        AND (reservacion.fecha_salida BETWEEN $inicio_dia and $fin_dia)
+        AND (reservacion.fecha_entrada = $inicio_dia)
         ORDER BY reservacion.id DESC;";
         $comentario="Mostrar las reservaciones";
         $consulta= $this->realizaConsulta($sentencia, $comentario);
