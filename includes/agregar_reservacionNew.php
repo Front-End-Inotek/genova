@@ -34,7 +34,7 @@
         $hab_id= $_GET['hab_id'];
         $hab = NEW Hab($hab_id);
         $hab_tipo= $hab->tipo;
-        $inputFechaEn="disabled";
+        $inputFechaEn="";
         $inputValueFecha=$dia_actual;
         $dia_actual = date("Y-m-d",strtotime($dia_actual . "+ 1 days"));
         $no_hab_estado = "disabled";

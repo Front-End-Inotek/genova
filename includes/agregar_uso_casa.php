@@ -85,7 +85,7 @@ echo '
 
             <div class="inputs_form_container">
               <div class="form-floating input_container">
-              <input aria-required="true" required '.$inputFechaEn.' value="'.$inputValueFecha.'" class="form-control custom_input" type="date"  id="fecha_entrada" name="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.',0,1)"/>
+              <input aria-required="true" required  value="'.$inputValueFecha.'" class="form-control custom_input" type="date"  id="fecha_entrada" name="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.',0,1)"/>
               <label class="asterisco" for="llegada">Llegada</label>
                 <span> </span>
 

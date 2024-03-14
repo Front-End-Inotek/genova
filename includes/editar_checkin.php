@@ -147,7 +147,7 @@ echo '
 
               <div class="inputs_form_container">
                 <div class="form-floating input_container">
-               <input required '.$inputFechaEn.' value="'.date("Y-m-d",$reservacion->fecha_entrada).'" class="form-control custom_input" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.','.$preasignada.')" placeholder="Llegada">
+               <input required value="'.date("Y-m-d",$reservacion->fecha_entrada).'" class="form-control custom_input" type="date"  id="fecha_entrada"  placeholder="Ingresa la fecha de entrada" onchange="calcular_noches('.$hab_id.','.$preasignada.')" placeholder="Llegada">
                <label class="asterisco" for="llegada">Llegada</label>
                 </div>
 

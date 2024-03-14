@@ -62,7 +62,8 @@ echo '
 
             <div class="inputs_form_container">
                 <div class="form-floating input_container">
-                    <input required '.$inputFechaEn.' value="'.$inputValueFecha.'" class="form-control custom_input" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_nochesChek()">
+                    <!-- <input required '.$inputFechaEn.' value="'.$inputValueFecha.'" class="form-control custom_input" type="date"  id="fecha_entrada" min='.$dia_actual.' placeholder="Ingresa la fecha de entrada" onchange="calcular_nochesChek()"> -->
+                    <input required value="'.$inputValueFecha.'" class="form-control custom_input" type="date"  id="fecha_entrada"  placeholder="Ingresa la fecha de entrada" onchange="calcular_nochesChek()">
                     <label for="llegada">Llegada</label>
                 </div>
                 <div class="form-floating input_container">
