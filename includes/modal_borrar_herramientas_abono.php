@@ -29,7 +29,7 @@
     
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-primary" onclick="borrar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].','.$_GET['id_maestra'].')"> Aceptar</button>
+      <button type="button" class="btn btn-primary" onclick="borrar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['mov'].','.$_GET['id_maestra'].','.$_GET['id_ticket'].')"> Aceptar</button>
     </div>
   </div>';
 ?>

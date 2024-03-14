@@ -26,12 +26,12 @@
       if($fila['facturado'] == 0 && $fila["rest"]==0) {
         if($fila["total"]>0){
           echo '
-          <input class="d-none" type="number" id="leer_hab" value='.$hab->mostrar_nombre_hab($fila["id_hab"]).'>
           <div class="card text-center ticket_container">';
           echo '
           <div class="ticket_container_header">
             <div class="ticket_container_header_input ">
               <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" checked onchange="handle_rest(\'leer_check_'.$contadoriteraciones.'\', ' . $fila["total"] . ')" />
+              <input class="d-none" type="number" id="leer_hab" value='.$hab->mostrar_nombre_hab($fila["id_hab"]).'>
             </div>
             <div class="ticket_container_header_info">
               <div class="ticket_container_header_info_fecha">
@@ -97,6 +97,7 @@
           <div class="ticket_container_header disableTax">
             <div class="ticket_container_header_input ">
               <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" disabled/>
+              <input class="d-none" type="number" id="leer_hab" value='.$hab->mostrar_nombre_hab($fila["id_hab"]).'>
             </div>
             <div class="ticket_container_header_info">
               <div class="ticket_container_header_info_fecha">
@@ -168,6 +169,7 @@
           <div class="ticket_container_header">
             <div class="ticket_container_header_input ">
               <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" checked onchange="handle_rest(\'leer_check_'.$contadoriteraciones.'\', ' . $fila["total"] . ')" />
+              <input class="d-none" type="number" id="leer_hab" value='.$hab->mostrar_nombre_hab($fila["id_hab"]).'>
             </div>
             <div class="ticket_container_header_info">
               <div class="ticket_container_header_info_fecha">
@@ -232,6 +234,7 @@
             <div class="ticket_container_header disableTax">
               <div class="ticket_container_header_input ">
                 <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" disabled/>
+                <input class="d-none" type="number" id="leer_hab" value='.$hab->mostrar_nombre_hab($fila["id_hab"]).'>
               </div>
               <div class="ticket_container_header_info">
                 <div class="ticket_container_header_info_fecha">
