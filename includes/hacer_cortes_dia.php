@@ -211,7 +211,7 @@
         </div>';
         //<div class="text-dark margen-1"></div> */
   $consulta_abono=$ticket->tipo_abonos();
-  
+  $bandera = 0;
   while ($fila = mysqli_fetch_array($consulta_abono))
   {
       $abonos[$fila['id']]=$fila['descripcion'];
@@ -295,8 +295,16 @@
           </div>
         </div>
       ';
+      $bandera = $bandera + 1;
     }
-    echo '<br>';
+    echo '';
+  }
+  if($bandera <= 0) {
+    echo '
+    <div class="alert alert-warning" role="alert">
+      Sin info que mostrar
+    </div>
+    ';
   }
   
   //var_dump($consulta);
