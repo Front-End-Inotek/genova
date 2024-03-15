@@ -4,6 +4,10 @@
   include_once("clase_tipo.php");
   include_once("clase_forma_pago.php");
   include_once("clase_corte_info_dia.php");
+  include_once("clase_hab.php");
+  include_once("clase_cuenta.php");
+  $cuenta=NEW Cuenta(0);
+  $hab= NEW Hab(0);
   $ticket= NEW Ticket(0);
   $tipo= NEW Tipo(0);
   $forma_pago= NEW Forma_pago(0);
@@ -34,7 +38,7 @@
         </header>
           ';
             //echo '<h4>Tickets '.$ticket->obtener_etiqueta($ticket_inicial).' - ' .$ticket->obtener_etiqueta($ticket_final);echo '</h4> onclick="aceptar_guardar_corte('. $ticket_inicial.','. $ticket_final.')
-          echo '
+          /* echo '
 
         <div class="text-dark margen-1"></div>
 
@@ -203,36 +207,108 @@
                 </div>
           </div>
         </div>';
-        //<div class="text-dark margen-1"></div>
-        echo '<div class="row">
-          <div class="col">';
-            /*<div  class="card bg-light text-dark">';
-              $cantidad= $tipo->total_elementos();
-              echo '<div class="card-header">Extras</div>
-              <div class="card-body">
-              </div>
-            </div>*/
-          echo '</div>
-          <div class="col">';
-            /*<div  class="card bg-light text-dark">';
-              $cantidad= $tipo->total_elementos();
-              echo '<div class="card-header">Totales</div>
-              <div class="card-body">
-              </div>
-            </div>*/
-          echo '</div>
-          <div class="col">';
-            /*<div  class="card bg-light text-dark">';
-              $cantidad= $forma_pago->total_elementos();
-              echo '<div class="card-header">Desglose en Sistema</div>
-              <div class="card-body">
-              </div>
-            </div>*/
-          echo '</div>
+        //<div class="text-dark margen-1"></div> */
+  $consulta_abono=$ticket->tipo_abonos();
+  
+  while ($fila = mysqli_fetch_array($consulta_abono))
+  {
+      $abonos[$fila['id']]=$fila['descripcion'];
+  }
+  
+  foreach ($abonos as $clave => $valor){
+    $listas=array();
+    $consulta=$ticket->sacar_tickets_corte($_GET['usuario_id'],$clave);
+    $total_cargo=0;
+    $total_abono=0;
+    if ($consulta->num_rows > 0) {
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $listas[$fila['mov']]['fecha']=$fila['fecha'];
+        $listas[$fila['mov']]['folio_casa']=$fila['mov'];
+        $listas[$fila['mov']]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']);
+        if (isset($listas[$fila['mov']]['folio'])){
+          $listas[$fila['mov']]['folio']=$listas[$fila['mov']]['folio'].", ".$fila['id'];
+        }else{
+          $listas[$fila['mov']]['folio']=$fila['id'];
+        }
+        $listas[$fila['mov']]['observaciones']=$fila['comentario'];
+
+        $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
+        if (!isset($listas[$fila['mov']]['cargo'])){
+          $fila_cargo=$cuenta->sacar_cargo($fila['mov']);
+          $listas[$fila['mov']]['cargo']=$fila_cargo;
+          $total_cargo+=$fila_cargo;
+        }
+        if (isset($listas[$fila['mov']]['abono'])){
+          $listas[$fila['mov']]['abono']=$listas[$fila['mov']]['abono']+$fila_cuenta['abono'];
+          $total_abono+=$fila_cuenta['abono'];
+        }else{
+          $listas[$fila['mov']]['abono']=$fila_cuenta['abono'];
+          $total_abono+=$fila_cuenta['abono'];
+        }
+        
+        $listas[$fila['mov']]['usuario']=$_GET['usuario_id'];
+      }
+      echo $valor;
+      //var_dump($listas);
+      echo '
+      <div class="row">
+        <div class="col">
+          <div class="table-responsive" id="tabla_tipo">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="table-primary-encabezado text-center">
+                <th>Fecha</th>
+                <th>Folio casa</th>
+                <th>Cuarto</th>
+                <th>FPosteo</th>
+                <th>Obsevaciones</th>
+                <th>Cargo</th>
+                <th>Abono</th>
+                <th>Usuario</th>
+                </tr>
+              </thead>
+              <tbody>';
+                foreach ($listas as $item) {
+                  echo'
+                  <tr>
+                    <th>'.$item['fecha'].'</th>
+                    <th>'.$item['folio_casa'].'</th>
+                    <th>'.$item['cuarto'].'</th>
+                    <th>'.$item['folio'].'</th>
+                    <th>'.$item['observaciones'].'</th>
+                    <th>$'.number_format($item['cargo'],2).'</th>
+                    <th>$'.number_format($item['abono'],2).'</th>
+                    <th>'.$item['usuario'].'</th>
+                  </tr>';
+                }
+              echo'
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>Total:</th>
+                  <th>$'.number_format($total_cargo,2).'</th>
+                  <th>$'.number_format($total_cargo,2).'</th>
+                  <th></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-
-      <script>handle_btn_corte_diario()</script>
       ';
+    }
+    echo '<br>';
+  }
+  
+  //var_dump($consulta);
+  echo '
+    
+  </div>
+
+  <script>handle_btn_corte_diario()</script>
+';
 ?>
 
