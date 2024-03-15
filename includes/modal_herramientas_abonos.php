@@ -3,6 +3,8 @@
   include_once("clase_usuario.php");
   $usuario= NEW Usuario($_GET['usuario']);
   $nombre_usuario= $usuario->usuario;
+  $nivel_usuario = $usuario->nivel;
+  //echo $nivel_usuario;
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -26,8 +28,13 @@
             echo '<th><span class=" glyphicon glyphicon-cog"></span> Habitacion</th>';
           }
           echo'
-          <th><span class=" glyphicon glyphicon-cog"></span> Borrar</th>
-          <th><span class=" glyphicon glyphicon-cog"></span> Cambiar no facturado</th>
+          <th><span class=" glyphicon glyphicon-cog"></span> Borrar</th>';
+          if($nivel_usuario <= 1) {
+            echo'
+            <th><span class=" glyphicon glyphicon-cog"></span> Cambiar no facturado</th>
+            ';
+          }
+          echo'
           </tr>
         </thead>
         <tbody>
@@ -38,8 +45,13 @@
             if($_GET['id_maestra']==0){
               echo '<td><button class="btn btn-success" onclick="cambiar_hab_herramientas_monto('.$monto.','.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].')"> Cambiar</button></td>';
             }
-            echo '<td><button class="btn btn-danger" onclick="aceptar_borrar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].','.$_GET['mov'].','.$_GET['id_maestra'].','.$_GET['id_ticket'].')"> Borrar</button></td>
-            <td><button class="btn btn-danger" onclick="cambiarNoFac('.$_GET['id_ticket'].')"> Cambiar</button></td>
+            echo '<td><button class="btn btn-danger" onclick="aceptar_borrar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].','.$_GET['mov'].','.$_GET['id_maestra'].','.$_GET['id_ticket'].')"> Borrar</button></td>';
+            if($nivel_usuario <= 1 ){
+              echo '
+              <td><button class="btn btn-danger" onclick="cambiarNoFac('.$_GET['id_ticket'].')"> Cambiar</button></td>
+              ';
+            }
+            echo'
             </tr>
         </tbody>
       </table>
