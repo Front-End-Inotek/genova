@@ -9821,6 +9821,30 @@ function handle_btn_corte_diario () {
 
 function buscar_ticket_reactivar() {
     console.log("Ticket buscando")
+    const id_ticket = document.getElementById("id_ticket").value
+
+    if(!id_ticket) {
+        swal({
+            title: "Falta agregar numero de ticket",
+            text: "Agrega un numero de ticket para continuar",
+            icon: "error"
+        })
+        return
+    }
+    const datos = {
+        "id_ticket" : id_ticket,
+    }
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/reactivar_ticket.php",
+        data: datos,
+        succes: function (res) {
+            console.log(res)
+        }
+    })
 }
 //Evaluamos el inicio de sesion
 function inicio(){

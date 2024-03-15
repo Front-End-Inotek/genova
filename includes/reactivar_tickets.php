@@ -13,7 +13,7 @@
         </div>
         <div class="form-floating ">
             <button class="btn btn-primary" onclick="buscar_ticket_reactivar()">
-                Buscar ticket
+                Activar ticket
             </button>
         </div>
     </div>
