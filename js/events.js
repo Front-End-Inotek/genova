@@ -8087,7 +8087,12 @@ function hacer_cortes_dia(){
     $('#area_trabajo').hide();
     $('#pie').hide();
     $('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php?usuario_id="+usuario_id);
+    loaderbar_menu();
+
+    $("#area_trabajo_menu").load("includes/hacer_cortes_dia.php?usuario_id=" + usuario_id, function() {
+        // Una vez que se complete la carga del contenido, ocultar el loader
+        $("#loader").hide();
+    });
     closeNav();
 }
 
