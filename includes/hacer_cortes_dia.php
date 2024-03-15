@@ -6,6 +6,8 @@
   include_once("clase_corte_info_dia.php");
   include_once("clase_hab.php");
   include_once("clase_cuenta.php");
+  include_once("clase_usuario.php");
+  $usuario=NEW Usuario(0);
   $cuenta=NEW Cuenta(0);
   $hab= NEW Hab(0);
   $ticket= NEW Ticket(0);
@@ -247,7 +249,7 @@
           $total_abono+=$fila_cuenta['abono'];
         }
         
-        $listas[$fila['mov']]['usuario']=$_GET['usuario_id'];
+        $listas[$fila['mov']]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
       }
       echo '<h4>'.$valor.'</h4>';
       //var_dump($listas);
