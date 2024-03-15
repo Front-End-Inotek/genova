@@ -49,7 +49,7 @@
             echo '<td><button class="btn btn-danger" onclick="aceptar_borrar_herramientas_abono('.$_GET['id'].','.$_GET['hab_id'].','.$_GET['estado'].','.$_GET['abono'].','.$_GET['mov'].','.$_GET['id_maestra'].','.$_GET['id_ticket'].')"> Borrar</button></td>';
             if($nivel_usuario <= 1 ){
               echo '
-              <td><button class="btn btn-danger" onclick="cambiarNoFac('.$_GET['id_ticket'].')"> Cambiar</button></td>
+              <td><button class="btn btn-primary" onclick="cambiarNoFac('.$_GET['id_ticket'].')"> Cambiar</button></td>
               ';
             }
             echo'
