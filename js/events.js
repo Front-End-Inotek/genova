@@ -9785,6 +9785,7 @@ function handle_btn_corte_diario () {
     console.log("Manejando los valores para activar el boton...")
     const btn = document.getElementById("btn_hacer_corte")
     const elementos = document.getElementsByClassName("total_corte");
+    console.log(elementos)
     let total = 0;
 
     for (let i = 0; i < elementos.length; i++) {

@@ -249,10 +249,9 @@
         
         $listas[$fila['mov']]['usuario']=$_GET['usuario_id'];
       }
-      echo $valor;
+      echo '<h4>'.$valor.'</h4>';
       //var_dump($listas);
       echo '
-      <div class="row">
         <div class="col">
           <div class="table-responsive" id="tabla_tipo">
             <table class="table table-bordered table-hover">
@@ -271,33 +270,32 @@
               <tbody>';
                 foreach ($listas as $item) {
                   echo'
-                  <tr>
-                    <th>'.$item['fecha'].'</th>
-                    <th>'.$item['folio_casa'].'</th>
-                    <th>'.$item['cuarto'].'</th>
-                    <th>'.$item['folio'].'</th>
-                    <th>'.$item['observaciones'].'</th>
-                    <th>$'.number_format($item['cargo'],2).'</th>
-                    <th>$'.number_format($item['abono'],2).'</th>
-                    <th>'.$item['usuario'].'</th>
+                  <tr class="text-center">
+                    <td>'.$item['fecha'].'</td>
+                    <td>'.$item['folio_casa'].'</td>
+                    <td>'.$item['cuarto'].'</td>
+                    <td>'.$item['folio'].'</td>
+                    <td>'.$item['observaciones'].'</td>
+                    <td>$'.number_format($item['cargo'],2).'</td>
+                    <td>$'.number_format($item['abono'],2).'</td>
+                    <td>'.$item['usuario'].'</td>
                   </tr>';
                 }
               echo'
-                <tr>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
+                <tr class="text-center">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                   <th>Total:</th>
-                  <th>$'.number_format($total_cargo,2).'</th>
-                  <th>$'.number_format($total_cargo,2).'</th>
-                  <th></th>
+                  <th class="total_corte">$'.number_format($total_cargo,2).'</th>
+                  <th class="total_corte">$'.number_format($total_cargo,2).'</th>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-      </div>
       ';
     }
     echo '<br>';
