@@ -173,8 +173,7 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       function cambiar_no_facturado($id){
-        $sentencia = "UPDATE `ticket` SET `facturado`=0 WHERE mov =$id;";
-        //echo $sentencia;
+        $sentencia = "UPDATE `ticket` SET `facturado`='0'WHERE id ='$id';";
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
