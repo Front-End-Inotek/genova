@@ -5,6 +5,7 @@
   $opcion=2;
   $incial = $_GET['inicial'];
   $final = $_GET['final'];
+  $fecha_hoy = date('Y-m-d');
   if($_GET['btn']==0) {
     echo ' 
     <div class="main_container"> 
@@ -19,12 +20,12 @@
             </div>
 
             <div class="form-floating">
-              <input type="date" class="form-control custom_input" id="inicial" placeholder="Buscar"/>
+              <input type="date" class="form-control custom_input" id="inicial" placeholder="Buscar" value="'.$fecha_hoy.'" />
               <label for="a_buscar" >Fecha inicial</label>
             </div>
 
             <div class="form-floating">
-              <input type="date" class="form-control custom_input" id="final" placeholder="Buscar"/>
+              <input type="date" class="form-control custom_input" id="final" placeholder="Buscar" value="'.$fecha_hoy.'" />
               <label for="inicial" >Fecha final</label>
             </div>
 
