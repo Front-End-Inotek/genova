@@ -9843,6 +9843,11 @@ function buscar_ticket_reactivar() {
         data: datos,
         success: function (res) {
             console.log(res)
+            swal({
+                title: "Se activo el ticket",
+                text: `El ticket con ID: ${id_ticket}`,
+                icon: "success"
+            })
         }
     })
 }
