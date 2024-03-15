@@ -1940,7 +1940,16 @@ body {
   max-width: 33.33%;
   overflow: hidden;
 }
+.btn_reactivar {
+  position: absolute;
+  z-index: 1000;
+  top: -16px;
+  right: -13px;
+  background-color: red;
+  opacity: 1 !important;
+  filter: none !important;
 
+}
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){
     .main {
