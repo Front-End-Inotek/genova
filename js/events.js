@@ -9841,7 +9841,7 @@ function buscar_ticket_reactivar() {
         contentType: "application/x-www-form-urlencoded",
         url: "includes/reactivar_ticket.php",
         data: datos,
-        succes: function (res) {
+        success: function (res) {
             console.log(res)
         }
     })
