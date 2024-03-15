@@ -9851,6 +9851,36 @@ function buscar_ticket_reactivar() {
         }
     })
 }
+function cambiarNoFac(id_ticket) {
+    if(!id_ticket) {
+        swal({
+            title: "Falta agregar numero de ticket",
+            text: "Agrega un numero de ticket para continuar",
+            icon: "error"
+        })
+        return
+    }
+    const datos = {
+        "id_ticket" : id_ticket,
+    }
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/reactivar_ticket.php",
+        data: datos,
+        success: function (res) {
+            console.log(res)
+            swal({
+                title: "Se activo el ticket",
+                text: `El ticket con ID: ${id_ticket}`,
+                icon: "success"
+            })
+            closeModal();
+        }
+    })
+}
 //Evaluamos el inicio de sesion
 function inicio(){
 	var x=$("#login");
