@@ -172,6 +172,12 @@
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      function cambiar_no_facturado($id){
+        $sentencia = "UPDATE `ticket` SET `facturado`=0 WHERE mov =$id;";
+        //echo $sentencia;
+        $comentario="Poner estado de concepto como inactivo";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       function tickets_intervalo($inicio,$fin,$metodo){
         $sentencia = "SELECT * FROM ticket WHERE forma_pago=$metodo and tiempo BETWEEN $inicio AND $fin;";
         //echo $sentencia;
