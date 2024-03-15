@@ -4,7 +4,9 @@
   $usuario= NEW Usuario($_GET['usuario']);
   $nombre_usuario= $usuario->usuario;
   $nivel_usuario = $usuario->nivel;
-  //echo $nivel_usuario;
+  echo $_GET['usuario'];
+  echo $nombre_usuario;
+  echo $nivel_usuario;
   echo '
   <!-- Modal content-->
   <div class="modal-content">
