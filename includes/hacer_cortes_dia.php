@@ -251,7 +251,7 @@
         
         $listas[$fila['mov']]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
       }
-      echo '<h4>'.$valor.'</h4>';
+      echo '<h3>'.$valor.'</h3>';
       //var_dump($listas);
       echo '
         <div class="col">
@@ -264,9 +264,9 @@
                 <th>Cuarto</th>
                 <th>FPosteo</th>
                 <th>Obsevaciones</th>
+                <th>Usuario</th>
                 <th>Cargo</th>
                 <th>Abono</th>
-                <th>Usuario</th>
                 </tr>
               </thead>
               <tbody>';
@@ -278,21 +278,17 @@
                     <td>'.$item['cuarto'].'</td>
                     <td>'.$item['folio'].'</td>
                     <td>'.$item['observaciones'].'</td>
+                    <td>'.$item['usuario'].'</td>
                     <td>$'.number_format($item['cargo'],2).'</td>
                     <td>$'.number_format($item['abono'],2).'</td>
-                    <td>'.$item['usuario'].'</td>
                   </tr>';
                 }
               echo'
                 <tr class="text-center">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td colspan="5"></td>
                   <th>Total:</th>
                   <th class="total_corte">$'.number_format($total_cargo,2).'</th>
                   <th class="total_corte">$'.number_format($total_cargo,2).'</th>
-                  <td></td>
                 </tr>
               </tbody>
             </table>
