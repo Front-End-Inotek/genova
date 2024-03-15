@@ -281,7 +281,9 @@
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(8)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="8">
-							<ul class="aside_nav_links_list">';
+							<ul class="aside_nav_links_list">
+							<li class="aside_ruta" onclick="ver_reactivar_tickets(); handleSiceTable();">Reactivar tickets</li>
+							';
 						$permisos_usuario=$usuario->usuario_ver;
 						if($permisos_usuario > 0 ){
 							echo '

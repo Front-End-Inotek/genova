@@ -4768,6 +4768,15 @@ function ver_usuarios(){
     closeModal();
 	closeNav();
 }
+// Ver reactivar tickets
+function ver_reactivar_tickets(){
+    //var id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/reactivar_tickets.php");
+	closeNav();
+}
 
 // Muestra la paginacion de los usuarios
 function ver_usuarios_paginacion(buton,posicion){
@@ -9808,6 +9817,10 @@ function handle_btn_corte_diario () {
     } else {
         btn.setAttribute("disabled" , "disabled");
     }
+}
+
+function buscar_ticket_reactivar() {
+    console.log("Ticket buscando")
 }
 //Evaluamos el inicio de sesion
 function inicio(){
