@@ -279,7 +279,7 @@
                     <div class="form-floating">
                         ';
                         echo'
-                        <input type="text" name="importeuni['.$i.']" class="form-control custom_input maxWidthInput" id="importeuni['.$i.']" onload="cal() "oninput="cal()" value='.$lista_totales[$i-1].' placeholder="Imp.&nbsp;Unitario" disabled >
+                        <input type="text" name="importeuni['.$i.']" class="form-control custom_input maxWidthInput" id="importeuni['.$i.']" onload="cal() "oninput="cal()" value='.$lista_totales[$i-1].' placeholder="Imp.&nbsp;Unitario"  >
                         <label for="inputCity" >Imp.&nbsp;Unitario</label>
                         ';
                         
