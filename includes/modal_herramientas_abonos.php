@@ -3,10 +3,9 @@
   include_once("clase_usuario.php");
   $usuario= NEW Usuario($_GET['usuario']);
   $nombre_usuario= $usuario->usuario;
-  $nivel_usuario = $usuario->nivel;
-  echo $_GET['usuario'];
-  echo $nombre_usuario;
-  echo $nivel_usuario;
+  $nivel_usuario = $usuario->obtener_nivel($_GET['usuario']);
+  
+  //echo $nivel_usuario;
   echo '
   <!-- Modal content-->
   <div class="modal-content">
