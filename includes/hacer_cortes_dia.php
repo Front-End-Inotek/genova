@@ -288,7 +288,8 @@
                   <td colspan="5"></td>
                   <th>Total:</th>
                   <th class="total_corte">$'.number_format($total_cargo,2).'</th>
-                  <th class="total_corte">$'.number_format($total_cargo,2).'</th>
+                  <th class="total_corte">$'.number_format($total_abono,2).'</th>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
