@@ -8368,6 +8368,8 @@ function ver_reportes_salidas(btn=0){
         final="";
     }
     if(btn==0){
+        final="";
+        inicial="";
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
