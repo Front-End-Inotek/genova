@@ -339,7 +339,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
 
         $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
         if (!isset($listas[$fila['mov']]['cargo'])){
-          $fila_cargo=$cuenta->sacar_cargo($fila['mov']);
+          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_GET['usuario_id']);
           $listas[$fila['mov']]['cargo']=$fila_cargo;
           $total_cargo+=$fila_cargo;
         }
@@ -363,34 +363,32 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
       $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
       $pdf->ln();
-      foreach ($abonos as $clave => $valor){
-        $total=0;
-        
-        $consulta=$ticket->sacar_tickets_corte($_POST['usuario_id'],$clave);
-        if ($consulta->num_rows > 0) {
-          $pdf->Cell( 278 , 5, $valor, 0, 0,'C');
-          $pdf->ln();
-          // La consulta no está vacía, realiza alguna acción
-          foreach ($listas as $item) {
-              $pdf->SetFont('Arial', '', 10);
-              $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
-              $pdf->Cell( 30 , 5, $item['folio_casa'], 1, 0, 'C');
-              $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
-              $pdf->Cell( 30 , 5, $item['folio'], 1, 0, 'C');
-              $pdf->Cell( 68 , 5, $item['observaciones'],1, 0, 'C');
-              $pdf->Cell( 30 , 5, $item['usuario'], 1, 0, 'C');
-              $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
-              $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
-              $pdf->ln();
-            
-          }
-          $pdf->Cell( 188 , 5, "", 0, 0, 'C');
-          $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
-          $pdf->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
-          $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
-          $pdf->ln();
+      $total=0;
+      
+      $consulta=$ticket->sacar_tickets_corte($_POST['usuario_id'],$clave);
+      if ($consulta->num_rows > 0) {
+        $pdf->Cell( 278 , 5, $valor, 0, 0,'C');
+        $pdf->ln();
+        // La consulta no está vacía, realiza alguna acción
+        foreach ($listas as $item) {
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['folio_casa'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['folio'], 1, 0, 'C');
+            $pdf->Cell( 68 , 5, $item['observaciones'],1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['usuario'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
+            $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
+            $pdf->ln();
+          
         }
-      }    
+        $pdf->Cell( 188 , 5, "", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
+        $pdf->ln();
+      }
     }
   }
   

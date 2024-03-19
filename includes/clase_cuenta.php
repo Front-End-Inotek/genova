@@ -1111,8 +1111,8 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $fila = mysqli_fetch_array($consulta);
         return $fila;
       }
-      function sacar_cargo($id){
-        $sentencia = "SELECT SUM(cargo) AS total_cargo FROM cuenta WHERE mov=$id";
+      function sacar_cargo($id,$usuario){
+        $sentencia = "SELECT SUM(cargo) AS total_cargo FROM cuenta WHERE mov=$id AND id_usuario=$usuario";
         // echo $sentencia;
         $comentario="Obtener el total de cargos y abonos con respecto al ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

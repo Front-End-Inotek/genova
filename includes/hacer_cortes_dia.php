@@ -237,7 +237,7 @@
 
         $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
         if (!isset($listas[$fila['mov']]['cargo'])){
-          $fila_cargo=$cuenta->sacar_cargo($fila['mov']);
+          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_GET['usuario_id']);
           $listas[$fila['mov']]['cargo']=$fila_cargo;
           $total_cargo+=$fila_cargo;
         }
@@ -271,17 +271,19 @@
               </thead>
               <tbody>';
                 foreach ($listas as $item) {
-                  echo'
-                  <tr class="text-center">
-                    <td>'.$item['fecha'].'</td>
-                    <td>'.$item['folio_casa'].'</td>
-                    <td>'.$item['cuarto'].'</td>
-                    <td>'.$item['folio'].'</td>
-                    <td>'.$item['observaciones'].'</td>
-                    <td>'.$item['usuario'].'</td>
-                    <td>$'.number_format($item['cargo'],2).'</td>
-                    <td>$'.number_format($item['abono'],2).'</td>
-                  </tr>';
+                  if ($item['cargo']>0 || $item['abono']>0){
+                    echo'
+                    <tr class="text-center">
+                      <td>'.$item['fecha'].'</td>
+                      <td>'.$item['folio_casa'].'</td>
+                      <td>'.$item['cuarto'].'</td>
+                      <td>'.$item['folio'].'</td>
+                      <td>'.$item['observaciones'].'</td>
+                      <td>'.$item['usuario'].'</td>
+                      <td>$'.number_format($item['cargo'],2).'</td>
+                      <td>$'.number_format($item['abono'],2).'</td>
+                    </tr>';
+                  }
                 }
               echo'
                 <tr class="text-center">

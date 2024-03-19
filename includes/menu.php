@@ -53,7 +53,7 @@
 								<li class="aside_ruta" onclick="ver_cuenta_maestra(); handleSiceTable();">Cuenta Maestra</li>
 								<li class="aside_ruta" onclick="ver_cargo_noche(); handleSiceTable();">Reporte Diarios</li>
 								<li class="aside_ruta" onclick="ver_reportes_llegadas(); handleSiceTable();">Reporte de llegadas</li>
-								<li class="aside_ruta" onclick="ver_reportes_salidas(); handleSiceTable();">Reporte de salidas</li>
+								<li class="aside_ruta" onclick="ver_reportes_salidas(0); handleSiceTable();">Reporte de salidas</li>
 								<li class="aside_ruta" onclick="saldo_huespedes(); handleSiceTable();">Saldo de huéspedes</li>
 							</ul>
 						</div>
