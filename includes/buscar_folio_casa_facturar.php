@@ -92,15 +92,17 @@
       }elseif($fila['facturado'] != 0 && $fila["rest"]==0){
         if($fila["total"]>0){
           echo '
-          <div class="card text-center ticket_container">';
+          <div class="card text-center ticket_container">
+              <button class="btn btn_reactivar" onclick="cambiarNoFac2('.$fila['id'].')">
+                Reactivar
+              </button>
+          ';
           echo '
           <div class="ticket_container_header disableTax">
             <div class="ticket_container_header_input ">
               <input type="checkbox" id="leer_check_'.$contadoriteraciones.'" disabled/>
               <input class="d-none" type="number" id="leer_hab" value='.$hab->mostrar_nombre_hab($fila["id_hab"]).'>
-              <button class="btn btn-primary btn_reactivar" onclick="cambiarNoFac2('.$fila['id'].')">
-                Reactivar
-              </button>
+              
             </div>
             <div class="ticket_container_header_info">
               <div class="ticket_container_header_info_fecha">

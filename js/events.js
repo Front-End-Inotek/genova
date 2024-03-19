@@ -9908,6 +9908,7 @@ function cambiarNoFac2(id_ticket) {
                 icon: "success"
             })
             closeModal();
+            manejo_facturas_folio_casa();
         }
     })
 }
