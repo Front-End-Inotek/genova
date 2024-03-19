@@ -1943,8 +1943,12 @@ body {
 .btn_reactivar {
   position: absolute;
   z-index: 1000;
-  top: -16px;
-  right: -13px;
+  /* top: -16px;
+  right: -13px; */
+  top: -22px;
+  right: 0px;
+  font-size: 11px;
+  padding: 2px 3px;
 }
 /* Estilos para mobile */
 @media only screen and (max-width: 600px){

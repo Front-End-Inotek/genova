@@ -234,7 +234,11 @@
       }if($fila['facturado'] != 0 && $fila["rest"]==1){
         if($fila["total"]>0){
           echo '
-          <div class="card text-center ticket_container">';
+          <div class="card text-center ticket_container">
+              <button class="btn btn_reactivar" onclick="cambiarNoFac2('.$fila['id'].')">
+                Reactivar
+              </button>
+          ';
             echo '
             <div class="ticket_container_header disableTax">
               <div class="ticket_container_header_input ">
