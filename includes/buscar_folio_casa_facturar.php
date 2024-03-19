@@ -2,6 +2,7 @@
     include_once('clase_ticket.php');
     include_once("clase_hab.php");
     include_once("clase_forma_pago.php");
+    include_once('clase_usuario.php');
     session_start();
     $Tickets= NEW Ticket(0);
 
@@ -16,6 +17,13 @@
     $contadoriteraciones=0;
     $total = 0;
     $_SESSION["imprimir"]=$lista_tickets;
+
+    $id_user = $_POST['id'];
+    $usuario = NEW Usuario($id_user);
+    $nivelUsuario = $usuario->nivel;
+
+    //echo $nivelUsuario;
+
     //Primera tabla
     echo '<div class="contenedor_tablas_1_facturas">
           <h2 class="titulo_tabla_facturas">Facturas en habitacion</h2>
@@ -92,11 +100,14 @@
       }elseif($fila['facturado'] != 0 && $fila["rest"]==0){
         if($fila["total"]>0){
           echo '
-          <div class="card text-center ticket_container">
+          <div class="card text-center ticket_container">';
+            if($nivelUsuario == 0 || $nivelUsuario == 1) {
+            echo '
               <button class="btn btn_reactivar" onclick="cambiarNoFac2('.$fila['id'].')">
                 Reactivar
               </button>
-          ';
+            ';
+          }
           echo '
           <div class="ticket_container_header disableTax">
             <div class="ticket_container_header_input ">
@@ -234,11 +245,14 @@
       }if($fila['facturado'] != 0 && $fila["rest"]==1){
         if($fila["total"]>0){
           echo '
-          <div class="card text-center ticket_container">
-              <button class="btn btn_reactivar" onclick="cambiarNoFac2('.$fila['id'].')">
-                Reactivar
-              </button>
-          ';
+          <div class="card text-center ticket_container">';
+            if($nivelUsuario == 0 || $nivelUsuario == 1) {
+              echo '
+                <button class="btn btn_reactivar" onclick="cambiarNoFac2('.$fila['id'].')">
+                  Reactivar
+                </button>
+            ';
+            }
             echo '
             <div class="ticket_container_header disableTax">
               <div class="ticket_container_header_input ">

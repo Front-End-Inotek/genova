@@ -93,7 +93,8 @@ function sabernosession(){
                     menu_vista.innerHTML="Rack Operaciones" */
                     //console.log("rack de operaciones "+vista);
                     var usuario_id=localStorage.getItem("id");
-                    $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+                    //$("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+                    $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
                     siguiente_vista=1
                 }
                 if(vista==1){
@@ -6209,7 +6210,8 @@ function switch_rack(){
         localStorage.setItem('txt_vista',"Rack Operaciones")
     }
     vista = localStorage.getItem('vista')
-    if(vista==3 || vista==0){
+    //if(vista==3 || vista==0){
+    if(false){
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $('#area_trabajo').hide();
@@ -7918,6 +7920,7 @@ function manejo_facturas_folio_casa(){
     const total = document.querySelector("#total_factura_global_number");
     const folio_casa = document.getElementById("folio_casa").value;
     const inputFolioCasa = document.getElementById("leer_mov")
+    const usuario_id = localStorage.getItem("id");
 
     btn.style.display = "none"
     infoTotal.style.display = "none"
@@ -7932,9 +7935,11 @@ function manejo_facturas_folio_casa(){
         })
         return
     }else {
-        console.log("hola")
         const contenedor = document.getElementById("contenedor-facturas");
-        datos = { folio_casa: folio_casa }
+        datos = { 
+            folio_casa: folio_casa,
+            "id" : usuario_id,
+        }
             contenedor.innerHTML = `
             <div class="d-flex justify-content-center">
                 <div class="spinner-border" role="status">
