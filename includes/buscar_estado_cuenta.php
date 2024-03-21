@@ -27,7 +27,14 @@
   $id_huesped=0;
   if($consulta->num_rows==0){
     //var_dump($consulta);
-    echo "<h1>sin info que mostrar</h1>";
+    echo '
+    <div class="alert alert-warning mt-3" role="alert">
+      <h4 class="alert-heading">¡Atención!</h4>
+      <p>No se encontraron resultados para el folio de casa buscado. Por favor, revisa el folio e inténtalo de nuevo.</p>
+      <hr>
+      <p class="mb-0">¡Vuelve a intentarlo con un folio casa correcto!</p>
+    </div>
+    ';
     die();
   }
   while ($fila = mysqli_fetch_array($consulta)) {
