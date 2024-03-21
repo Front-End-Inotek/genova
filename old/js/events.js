@@ -7486,6 +7486,14 @@ function saldo_huespedes(){
     $("#area_trabajo_menu").load("includes/ver_saldo_huespedes.php?usuario_id="+usuario_id);
     closeNav();
 }
+function edo_cuenta_folio_casa(){
+    usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/edo_cuenta_folio_casa.php?usuario_id="+usuario_id);
+    closeNav();
+}
 
 function corte_diario(){
     usuario_id=localStorage.getItem("id");

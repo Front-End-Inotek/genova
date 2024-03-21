@@ -8,6 +8,11 @@
   include_once("clase_reservacion.php");
   include_once("clase_usuario.php");
   include_once("clase_huesped.php");
+
+  //Aqui se obtiene del folio casa 🐓
+  $folio_casa = $_GET["fcasa"];
+
+  echo $folio_casa;
   
   $cuenta= NEW Cuenta(0);
   //$hab= NEW Hab($_GET['hab_id']);

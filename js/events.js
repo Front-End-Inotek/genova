@@ -7732,6 +7732,40 @@ function saldo_huespedes(){
     closeNav();
 }
 
+function edo_cuenta_folio_casa(){
+    usuario_id=localStorage.getItem("id");
+    $('#area_trabajo').hide();
+    $('#pie').hide();
+    $('#area_trabajo_menu').show();
+    $("#area_trabajo_menu").load("includes/edo_cuenta_folio_casa.php?usuario_id="+usuario_id);
+    closeNav();
+}
+function buscar_cuenta_folio_casa(){
+    console.log("Hola")
+    const folio_casa = document.getElementById("a_buscar").value;
+    const usuario_id = localStorage.getItem("id");
+
+    console.log("Por aca")
+    if(folio_casa == "" || folio_casa == null) {
+        console.log("Por aca xd")
+        swal({
+            title: "Falta agregar Folio casa",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            dangerMode: true
+        })
+        return;
+    } else {
+        console.log("No aca xd")
+        $('#area_trabajo').hide();
+        $('#pie').hide();
+        $('#area_trabajo_menu').show();
+        $("#area_trabajo_menu").load("includes/buscar_estado_cuenta.php?usuario_id="+usuario_id+"&fcasa="+folio_casa);
+        closeNav();
+    }
+    console.log("salio")
+}
+
 function corte_diario(){
     usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
