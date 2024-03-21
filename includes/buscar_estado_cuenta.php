@@ -12,14 +12,13 @@
   //Aqui se obtiene del folio casa 🐓
   $folio_casa = $_GET["fcasa"];
 
-  echo $folio_casa;
-  
+
   $cuenta= NEW Cuenta(0);
   //$hab= NEW Hab($_GET['hab_id']);
   $tarifa= NEW Tarifa(0);
   $huesped= NEW Huesped(0);
-  $movimiento= NEW Movimiento(373);
-  $id_reservacion= $movimiento->saber_id_reservacion(373);
+  $movimiento= NEW Movimiento($folio_casa);
+  $id_reservacion= $movimiento->saber_id_reservacion($folio_casa);
   $reservacion= NEW Reservacion($id_reservacion);
   //echo $id_reservacion;
   $consulta = $reservacion->datos_reservacion($id_reservacion);
@@ -80,7 +79,7 @@
   $estado_veiculo=$huesped->optener_estado_vehiculo($id_huesped);
   $saldo_faltante= 0;
   $total_faltante= 0;
-  $mov= 373;
+  $mov= $folio_casa;
   $suma_abonos= $cuenta->obtner_abonos($mov);
   $saldo_pagado= $total_pago + $suma_abonos;
   $saldo_faltante= $total_estancia - $saldo_pagado;
@@ -98,9 +97,9 @@
       <div class="main_container">
         <header class="main_container_title">
           <div>
-          <h2>Estado de cuenta habitación: nombre</h2>';
-          echo'<h4>Folio casa: <span class="text-muted">373</span> </h4>
-          <input class="d-none" type="number" id="leer_mov" value=373>
+          <h2>Estado de cuenta habitación</h2>';
+          echo'<h4>Folio casa: <span class="text-muted">'.$folio_casa.'</span> </h4>
+          <input class="d-none" type="number" id="leer_mov" value='.$folio_casa.'>
           <input class="d-none" type="number" id="leer_hab" value=nombre>
             </div>
           ';
