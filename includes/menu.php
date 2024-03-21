@@ -55,6 +55,7 @@
 								<li class="aside_ruta" onclick="ver_reportes_llegadas(); handleSiceTable();">Reporte de llegadas</li>
 								<li class="aside_ruta" onclick="ver_reportes_salidas(0); handleSiceTable();">Reporte de salidas</li>
 								<li class="aside_ruta" onclick="saldo_huespedes(); handleSiceTable();">Saldo de huéspedes</li>
+								<li class="aside_ruta" onclick="mostrar_herramientas(1,3,101,0,0); handleSiceTable();">edo cuenta</li>
 							</ul>
 						</div>
 					</div>';
@@ -172,7 +173,12 @@
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(5)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="5">
-							<ul class="aside_nav_links_list">
+							<ul class="aside_nav_links_list">';
+							if($usuario->nivel <=1){
+								echo '
+									<li class="aside_ruta" onclick="factura_individual(); handleSiceTable();">Factura individual</li>';
+								};
+							echo'
 								<!-- <li class="aside_ruta" onclick="factura_individual(); handleSiceTable();">Factura individual</li> -->
 								<li class="aside_ruta" onclick="factura_global_form(); handleSiceTable();">Factura global</li>
 								<li class="aside_ruta" onclick="folio_casa_form(); handleSiceTable();">Buscar conceptos por folio casa</li>';
