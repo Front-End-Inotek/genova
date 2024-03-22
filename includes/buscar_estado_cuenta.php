@@ -115,15 +115,7 @@
             </div>
           ';
           $_SESSION['nombre_usuario']="nombre";
-          if($faltante == 0){
-            echo '<h5>Sin adeudos</h5>';
-          }else{
-            if($faltante > 0){
-              echo '<h5 class="text-success">Sobrante '.$faltante_mostrar.'</h5>';
-            }else{
-              echo '<h5 class="text-danger">Faltante '.$faltante_mostrar.'</h5>';
-            }
-          }
+          
         echo '
         </header>
         
