@@ -18,6 +18,10 @@
   $tarifa= NEW Tarifa(0);
   $huesped= NEW Huesped(0);
   $movimiento= NEW Movimiento($folio_casa);
+  $consulta=$movimiento->sacar_movimiento($folio_casa);
+  while ($fila = mysqli_fetch_array($consulta)){
+    $id_habitacion=$fila['id_hab'];
+  }
   $id_reservacion= $movimiento->saber_id_reservacion($folio_casa);
   $reservacion= NEW Reservacion($id_reservacion);
   //echo $id_reservacion;
@@ -104,22 +108,14 @@
       <div class="main_container">
         <header class="main_container_title">
           <div>
-          <h2>Estado de cuenta habitación</h2>';
+          <h2>Estado de cuenta habitación:'.$id_habitacion.'</h2>';
           echo'<h4>Folio casa: <span class="text-muted">'.$folio_casa.'</span> </h4>
           <input class="d-none" type="number" id="leer_mov" value='.$folio_casa.'>
           <input class="d-none" type="number" id="leer_hab" value=nombre>
             </div>
           ';
           $_SESSION['nombre_usuario']="nombre";
-          if($faltante == 0){
-            echo '<h5>Sin adeudos</h5>';
-          }else{
-            if($faltante > 0){
-              echo '<h5 class="text-success">Sobrante '.$faltante_mostrar.'</h5>';
-            }else{
-              echo '<h5 class="text-danger">Faltante '.$faltante_mostrar.'</h5>';
-            }
-          }
+          
         echo '
         </header>
         
@@ -214,14 +210,14 @@
 
         <div class="estado_cuenta_container">
           <div class="estado_cuenta_tabla" id="caja_mostrar_busqueda" >';
-            $total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,0,0,0,$usuario_id);
+            $total_cargos= $cuenta->mostrar_cargos($mov,$id_reservacion,$id_habitacion,1,0,$usuario_id);
             echo '
-            <div class="btn_estado_cuenta"><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo(0,0,'.$total_faltante.')"> Cobrar</button></div>
+            <div class="btn_estado_cuenta"><button class="btn btn-danger btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_cargo('.$id_habitacion.',1,'.$total_faltante.')"> Cobrar</button></div>
           </div>
           <div class="estado_cuenta_tabla" id="caja_mostrar_totales" >';
-            $total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,0,0,0,$usuario_id);
+            $total_abonos= $cuenta->mostrar_abonos($mov,$id_reservacion,$id_habitacion,1,0,$usuario_id);
             echo '
-            <div class="btn_estado_cuenta"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono(0,0,'.$total_faltante.')"> Abonar</button></div>
+            <div class="btn_estado_cuenta"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="agregar_abono('.$id_habitacion.',1,'.$total_faltante.')"> Abonar</button></div>
           </div>
         </div>';
         if($total_cargos==0){
@@ -241,7 +237,7 @@
           /*if($total_faltante==0){
             echo '<div class="col-sm-12"></div>';
           }else{*/
-            echo '<!-- <div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas(0,0,'.$mov.')"> 
+            echo '<!-- <div class="col-sm-2"><button class="btn btn-primary btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$id_habitacion.',1,'.$mov.')"> 
                     Unificar
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse-vertical" viewBox="0 0 16 16">
                         <path d="M8 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M0 8a.5.5 0 0 1 .5-.5h3.793L3.146 6.354a.5.5 0 1 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8.5H.5A.5.5 0 0 1 0 8m11.707.5 1.147 1.146a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2a.5.5 0 0 1 .708.708L11.707 7.5H15.5a.5.5 0 0 1 0 1z"/>
