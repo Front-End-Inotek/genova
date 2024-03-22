@@ -32,6 +32,12 @@
           $this->id_reservacion= 0;
         }*/
       }
+      function sacar_movimiento($mov){
+        $sentencia="SELECT * FROM movimiento WHERE id=$mov LIMIT 1;";
+        $comentario ="Obtner el numero de preasignadas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      }
       function obtener_preasignadas(){
         $preasignadas=0;
         $sentencia="SELECT count(hab.id) as preasignadas
