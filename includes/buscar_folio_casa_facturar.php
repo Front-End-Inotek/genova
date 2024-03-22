@@ -103,7 +103,7 @@
           <div class="card text-center ticket_container">';
             if($nivelUsuario == 0 || $nivelUsuario == 1) {
             echo '
-              <button class="btn btn_reactivar2" onclick="cambiarNoFac2('.$fila['id'].')">
+              <button class="btn btn-primary btn_reactivar2" onclick="cambiarNoFac2('.$fila['id'].')">
                 Reactivar
               </button>
             ';
@@ -248,7 +248,7 @@
           <div class="card text-center ticket_container">';
             if($nivelUsuario == 0 || $nivelUsuario == 1) {
               echo '
-                <button class="btn btn_reactivar2" onclick="cambiarNoFac2('.$fila['id'].')">
+                <button class="btn btn-primary btn_reactivar2" onclick="cambiarNoFac2('.$fila['id'].')">
                   Reactivar
                 </button>
             ';

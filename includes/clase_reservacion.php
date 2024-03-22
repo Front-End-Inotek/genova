@@ -2673,6 +2673,7 @@ class Reservacion extends ConexionMYSql
         // $inicio_dia= strtotime($inicio_dia);
         $noexiste_inicio=false;
         $noexiste_fin=false;
+
         if(empty($fecha_ini_tiempo)) {
             $fecha_ini= date("d-m-Y");
             $fecha_ini= strtotime($fecha_ini);
@@ -2689,6 +2690,7 @@ class Reservacion extends ConexionMYSql
         if($a_buscar == ' ' && strlen($fecha_ini) == 0 && strlen($fecha_fin) == 0) {
             $cat_paginas = $this->mostrar(1, $id);
         } else {
+            // CUANDO SOLO VIENE EL INPUT LLENO PERO NO VIENE FECHA DE FIN NI DE FINAL
             if($a_buscar != ' ' && $noexiste_inicio && $noexiste_fin) {
                 $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, hab.nombre as nombre_hab, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
@@ -2699,6 +2701,8 @@ class Reservacion extends ConexionMYSql
                 INNER JOIN usuario ON reservacion.id_usuario = usuario.id
                 INNER JOIN huesped ON reservacion.id_huesped = huesped.id
                 INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1) ORDER BY reservacion.id DESC";
+                //echo 0;
+                // CUANDO VIENE EL INPUT Y LAS FECHAS
             } elseif($a_buscar != ' ' && strlen($fecha_ini) > 0 && strlen($fecha_fin) > 0 && $combinada == 1) {
                 $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
@@ -2711,6 +2715,19 @@ class Reservacion extends ConexionMYSql
                 INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_salida BETWEEN $fecha_ini and $fecha_fin) && reservacion.fecha_entrada > 0 
                 AND (reservacion.id LIKE '%$a_buscar%' || huesped.nombre LIKE '%$a_buscar%' || huesped.apellido LIKE '%$a_buscar%' || reservacion.nombre_reserva LIKE '%$a_buscar%' || reservacion.suplementos LIKE '%$a_buscar%') AND (reservacion.estado = 1) ORDER BY reservacion.id DESC;";
                 //echo 1;
+            }elseif($a_buscar == ' ' && strlen($fecha_ini) > 0  && empty($fecha_fin_tiempo)) {
+                //$final_dia_unix = $fecha_ini + 86500;
+                $final_dia_unix = $fecha_ini + 86400 - 1;
+                $sentencia = "SELECT *, reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                FROM reservacion
+                LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
+                INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
+                LEFT JOIN tipo_hab ON tarifa_hospedaje.tipo = tipo_hab.id
+                LEFT JOIN hab ON movimiento.id_hab = hab.id
+                INNER JOIN usuario ON reservacion.id_usuario = usuario.id
+                INNER JOIN huesped ON reservacion.id_huesped = huesped.id
+                INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE (reservacion.fecha_entrada BETWEEN $fecha_ini and $final_dia_unix) && reservacion.fecha_entrada > 0  AND (reservacion.estado = 1) ORDER BY reservacion.id DESC;";
+                
             } else {
                 //old
                 // $sentencia = "SELECT *,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel

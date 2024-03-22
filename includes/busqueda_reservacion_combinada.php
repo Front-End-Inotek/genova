@@ -14,10 +14,12 @@
     echo ' <div class="container-fluid">
       <h4><p><a href="#" class="text-dark"></a></p></h4>';
     echo ' </div>';
+  }elseif ( empty($_GET['final']) ) {
+    echo '<h4>Reservaciones del dia: '.$fecha_inicial_dia.'/'.$fecha_inicial_mes.'/'.$fecha_inicial_anio.' </h4>';
   }else{
-    echo ' <div class="container-fluid">
-      <h4><p><a href="#" class="text-dark">Buscar del '.$fecha_inicial_dia.'-'.$fecha_inicial_mes.'-'.$fecha_inicial_anio.' al '.$fecha_final_dia.'-'.$fecha_final_mes.'-'.$fecha_final_anio.'</a></p></h4>';
-    echo ' </div>';
+    echo ' 
+      <h4>Buscar del '.$fecha_inicial_dia.'/'.$fecha_inicial_mes.'/'.$fecha_inicial_anio.' al '.$fecha_final_dia.'/'.$fecha_final_mes.'/'.$fecha_final_anio.'</h4>
+      ';
   }
 
   // Checar si la busqueda esta vacia o no

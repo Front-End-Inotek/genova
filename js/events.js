@@ -3269,6 +3269,7 @@ function busqueda_reservacion_combinada(){
 	var final=$("#final").val();
     var a_buscar=encodeURIComponent($("#a_buscar").val());
     var id=localStorage.getItem("id");
+
     if((inicial.length >0 && final.length >0) || a_buscar.length >0){
         $('.pagination').hide();
     }else{
