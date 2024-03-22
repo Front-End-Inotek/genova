@@ -126,8 +126,17 @@
         $comentario="Cambiar estado de impreso del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
-      function tickets_por_fecha($inicio,$fin){
+      /* function tickets_por_fecha($inicio,$fin){
         $sentencia="SELECT * FROM `ticket` WHERE `tiempo`>=$inicio AND `tiempo`<=$fin";
+        $comentario="Consulta de tickets en un rango de fechas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        return $consulta;
+      } */
+      //Buscar tickes por fecha y metodo de pago
+      function tickets_por_fecha( $inicio , $fin , $metodo_pago){
+        $condicion_metodo_pago = ($metodo_pago === "all") ? "" : "AND `forma_pago` = '$metodo_pago'";
+        $sentencia="SELECT * FROM `ticket` WHERE `tiempo` >= '$inicio' AND `tiempo` <= '$fin' $condicion_metodo_pago";
+        //echo $sentencia;
         $comentario="Consulta de tickets en un rango de fechas";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;

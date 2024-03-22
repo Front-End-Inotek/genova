@@ -1,4 +1,6 @@
 <?php
+include_once("clase_forma_pago.php");
+$forma_pago = new Forma_pago(0);
 
 echo '
     <div class="main_container">
@@ -15,6 +17,14 @@ echo '
                 <div class="form-floating input_container_date">
                     <input class="form-control custom_input" type="date" placeholder="Fecha de inicio" id="fecha_fin_factura"/>
                     <label for="fecha_fin_factura">Fecha final</label>
+                </div>
+                <div class="form-floating input_container input_container_date">
+                    <select class="form-select custom_input" id="tipo_pago" name="tipo_pago">
+                        <option selected value="all">Todas</option>';
+                        $forma_pago->mostrar_forma_pago(0);
+                        echo '
+                    </select>
+                    <label for="tipo_pago">Forma de pago</label>
                 </div>
                 <div class="form-floating input_">
                     <button class="btn btn-primary" onclick="manejo_facturas()" >

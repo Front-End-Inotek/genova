@@ -10,15 +10,17 @@
     $forma_pago=NEW Forma_pago(0);
     $fechaInicio = $_POST['fechaInio'];
     $fechaFin=$_POST['fechaFin'];
+    $metodo_pago = $_POST['forma_pago'];
     $fechaInicioUnix=strtotime($fechaInicio);
     $fechaFinUnix=strtotime($fechaFin)+(60*60*24);
-    $lista_tickets=$Tickets->tickets_por_fecha($fechaInicioUnix,$fechaFinUnix);
+    $lista_tickets=$Tickets->tickets_por_fecha($fechaInicioUnix,$fechaFinUnix, $metodo_pago);
     $lista_Id_tickets=array();
     $Diccionario_Conseptos_Hospedajes = array();
     $Diccionario_Conseptos_Restaurante = array();
     $contadoriteraciones=0;
     $total = 0;
     $_SESSION["imprimir"]=$lista_tickets;
+
     //Primera tabla
     echo '<div class="contenedor_tablas_1_facturas">
           <h2 class="titulo_tabla_facturas">Facturas en habitacion</h2>

@@ -7893,6 +7893,8 @@ function manejo_facturas(){
     const total = document.querySelector("#total_factura_global_number");
     const fechaInio = document.getElementById("fecha_inicio_factura").value;
     const fechaFin = document.getElementById("fecha_fin_factura").value;
+    const forma_pago = document.getElementById("tipo_pago").value;
+    console.log(forma_pago)
     btn.style.display = "none"
     infoTotal.style.display = "none"
 
@@ -7922,7 +7924,12 @@ function manejo_facturas(){
         return
     } else {
         const contenedor = document.getElementById("contenedor-facturas");
-        datos = { fechaInio: fechaInio, fechaFin: fechaFin }
+        datos = { 
+            fechaInio: fechaInio, 
+            fechaFin: fechaFin,
+            forma_pago: forma_pago 
+
+        }
             contenedor.innerHTML = `
             <div class="d-flex justify-content-center">
                 <div class="spinner-border" role="status">
