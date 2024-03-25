@@ -8071,7 +8071,7 @@ function generar_facturas_global(){
 }
 
 function generar_facturas_global_cargos(){
-    var input_longitud=document.getElementById("leer_iteraciones");
+    var input_longitud=document.getElementById("leer_iteraciones_c");
     var tipo_de_factura=document.getElementById("tipo_factura").value;
     var index=input_longitud.value;
     var lista_id_tickets=[];
@@ -8079,15 +8079,15 @@ function generar_facturas_global_cargos(){
     var lista_tipo=[];
     var lista_mov=[];
     var total=0;
-    var bandera_facturacion=document.getElementById("leer_facturacion").value;
+    var bandera_facturacion=document.getElementById("leer_facturacion_c").value;
     var mov=document.getElementById("leer_mov").value;
     var habitacion=document.getElementById("leer_hab").value;
     lista_mov.push(parseInt(mov))
     for (let i = 0; i < index; i++) {
-        var checkBox_status=document.getElementById("leer_check_"+i)
-        var id_ticket=document.getElementById("leer_id_"+i);
-        var leer_total=document.getElementById("leer_total_"+i);
-        var leer_tipo=document.getElementById("leer_tipo_"+i);
+        var checkBox_status=document.getElementById("leer_check_c_"+i)
+        var id_ticket=document.getElementById("leer_id_c_"+i);
+        var leer_total=document.getElementById("leer_total_c_"+i);
+        var leer_tipo=document.getElementById("leer_tipo_c_"+i);
         if (checkBox_status.checked) {
             lista_id_tickets.push(id_ticket.value);
             total=total+parseInt(leer_total.value);
