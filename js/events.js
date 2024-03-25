@@ -9466,6 +9466,21 @@ function activarBtnFacturaEstadoCuenta() {
 
     btn.disabled = !algunoMarcado
 }
+
+function activarBtnFacturaEstadoCuenta_cargos() {
+    console.log("Activando boton cargos");
+    const btn = document.getElementById("btn_generador_factura_cargos");
+    let checkboxes = "";
+    checkboxes = document.querySelectorAll(".input_fact_cargos")
+
+    console.log(checkboxes)
+
+    const algunoMarcado = Array.from(checkboxes).some(function(cb) {
+        return cb.checked
+    })
+
+    btn.disabled = !algunoMarcado
+}
 function guardarComprobante (folio) {
     console.log("Guardando imagen...")
     var inputFile = document.getElementById('inputFile');
