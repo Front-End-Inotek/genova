@@ -174,7 +174,7 @@
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="5">
 							<ul class="aside_nav_links_list">';
-							if($usuario->nivel <=1){
+							if($usuario->nivel <=0){
 								echo '
 									<li class="aside_ruta" onclick="factura_individual(); handleSiceTable();">Factura individual</li>';
 								};

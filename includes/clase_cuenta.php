@@ -591,7 +591,7 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         }
         $campo = "campo".$c;
         echo '<tr class="fuente_menor text-center">
-        <td><input type="checkbox"  onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input"  id="'.$campo.'"> </td>
+        <td><input type="checkbox"  onchange="activarBtnFacturaEstadoCuenta()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input"  id="'.$campo.'"> </td>
         <td>'.$fila['concepto'].'</td>
         <td>'.date("d-m-Y",$fila['fecha']).'</td>
         <td>$'.number_format($fila['cargo'], 2).'</td>
@@ -702,7 +702,11 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                   $total_cargos= $total_cargos + $fila['cargo'];
                   if($descripcion == 'Total reservacion'){
                     echo '<tr class="fuente_menor text-center">
-                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input form-check-input"> </td>
+                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact form-check-input form-check-input" id="leer_check_c_'.+$c.'"> 
+                      <input class="d-none" type="number" id="leer_id_c_'.+$c.'" value=0>
+                      <input class="d-none" type="number" id="leer_mov_c_'.+$c.'" value='.$fila['mov'].'>
+                      <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
+                    </td>
                     ';
                     if($largo > 17){
                       echo '<td>Total suplementos*</td>';
@@ -710,7 +714,8 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       echo '<td>Total suplementos</td>';
                     }
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['cargo'], 2).'</td>
+                    <td>$'.number_format($fila['cargo'], 2).'
+                    <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>
                     <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> 
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -722,10 +727,15 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                   }else{
                     if($descripcion=="Cargo por noche" && $auditoria_editar>0){
                       echo '<tr class="fuente_menor text-center">
-                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input"> </td>
+                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input" id="leer_check_c_'.+$c.'"> 
+                      <input class="d-none" type="number" id="leer_id_c_'.+$c.'" value=0>
+                      <input class="d-none" type="number" id="leer_mov_c_'.+$c.'" value='.$fila['mov'].'>
+                      <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
+                      </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                      <td>$'.number_format($fila['cargo'], 2).'</td>
+                      <td>$'.number_format($fila['cargo'], 2).'
+                      <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>
                       <td>'.$fila["observacion"].'</td>
                       <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -738,10 +748,15 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       echo '';
                     }elseif($descripcion!="Cargo por noche"){
                       echo '<tr class="fuente_menor text-center">
-                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input"> </td>
+                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input" id="leer_check_c_'.+$c.'"> 
+                      <input class="d-none" type="number" id="leer_id_c_'.+$c.'" value=0>
+                      <input class="d-none" type="number" id="leer_mov_c_'.+$c.'" value='.$fila['mov'].'>
+                      <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
+                      </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                      <td>$'.number_format($fila['cargo'], 2).'</td>
+                      <td>$'.number_format($fila['cargo'], 2).'
+                      <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>
                       <td>'.$fila["observacion"].'</td>
                       <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> 
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -755,10 +770,16 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       echo '';
                     }else{
                       echo '<tr class="fuente_menor table text-center">
-                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input"> </td>
+                      <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()"  data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input" id="leer_check_c_'.+$c.'"> 
+                        <input class="d-none" type="number" id="leer_id_c_'.+$c.'" value=0>
+                        <input class="d-none" type="number" id="leer_mov_c_'.+$c.'" value='.$fila['mov'].'>
+                        <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
+                      </td>
                       <td>'.$fila['concepto'].'</td>
                       <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                      <td>$'.number_format($fila['cargo'], 2).'</td>
+                      <td>$'.number_format($fila['cargo'], 2).'
+                      <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' >
+                      </td>
                       <td></td>
                       </tr>';
                     }
@@ -766,10 +787,16 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                 }else{
                   if($auditoria_editar>0){
                     echo '<tr class="fuente_menor text-center">
-                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input"> </td>
+                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input" id="leer_check_c_'.+$c.'"> 
+                      <input class="d-none" type="number" id="leer_id_c_'.+$c.'" value=0>
+                      <input class="d-none" type="number" id="leer_mov_c_'.+$c.'" value='.$fila['mov'].'>
+                      <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
+                    </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['cargo'], 2).'</td>
+                    <td>$'.number_format($fila['cargo'], 2).'
+                      <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' >
+                    </td>
                     <td>'.$fila["observacion"].'</td>
                     <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> 
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -782,10 +809,16 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     echo '';
                   }else{
                     echo '<tr class="fuente_menor table text-center">
-                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input" </td>
+                    <td><input type="checkbox" onchange="activarBtnFacturaEstadoCuenta_cargos()" data-cuentaid='.$fila['ID'].' class="color_black campos_cargos input_fact_cargos form-check-input" id="leer_check_c_'.+$c.'">
+                    <input class="" type="number" id="leer_id_c_'.+$c.'" value=0>
+                    <input class="" type="number" id="leer_mov_c_'.+$c.'" value='.$fila['mov'].'>
+                    <p class="ticket_info_p ticket_info_n"><input class="" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
+                    </td>
                     <td>'.$fila['concepto'].'</td>
                     <td>'.date("d-m-Y",$fila['fecha']).'</td>
-                    <td>$'.number_format($fila['cargo'], 2).'</td>
+                    <td>$'.number_format($fila['cargo'], 2).'
+                    <input class="" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' >
+                    </td>
                     <td></td>
                     </tr>';
                   }
@@ -796,6 +829,8 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
               echo '
             </tbody>
           </table>
+          <input class="d-none" type="number" id="leer_iteraciones_c" value='.$c.' readonly>
+          <input class="d-none" type="number" id="leer_facturacion_c" value="0" readonly>
         </div>';
         return $total_cargos;
       }
