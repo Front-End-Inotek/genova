@@ -260,6 +260,17 @@
         echo ' </ul>';
         //echo $sentencia;
     }
+    function mostrar_quien_hizo_checkin ($hab_id) {
+      $sentencia = "SELECT usuario FROM logs WHERE actividad = 'Check-in en habitacion: $hab_id' ORDER BY id DESC LIMIT 1;";
+      $comentario = "Seleccionar el ultimo usuario que hizo check-in";
+      $consulta = $this->realizaConsulta( $sentencia , $comentario );
+      //echo $sentencia;
+      //var_dump($consulta);
+      while($fila = mysqli_fetch_array($consulta)){
+        $user = $fila['usuario'];
+      }
+      return $user;
+    }
     // Mostramos los logs ya filtrados por fecha
     function mostrar_logs_tabla($fecha_ini_tiempo,$fecha_fin_tiempo,$id){
       date_default_timezone_set('America/Mexico_City');

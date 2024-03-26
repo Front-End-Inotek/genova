@@ -8,6 +8,8 @@
   include_once("clase_reservacion.php");
   include_once("clase_usuario.php");
   include_once("clase_huesped.php");
+  include_once('clase_log.php');
+  $logs = NEW Log(0);
   $cuenta= NEW Cuenta(0);
   $hab= NEW Hab($_GET['hab_id']);
   $tarifa= NEW Tarifa(0);
@@ -19,6 +21,7 @@
   $consulta = $reservacion->datos_reservacion($id_reservacion);
   $usuario_id = $_GET['usuario_id'];
   $usuario = new Usuario($usuario_id);
+  
   $id_huesped=0;
   if($consulta->num_rows==0){
     //var_dump($consulta);
@@ -82,6 +85,8 @@
   $total_abonos= 0;
   $faltante= 0;
   $faltante= $cuenta->mostrar_faltante($mov);
+  $ultimo_user_check_in = $logs->mostrar_quien_hizo_checkin($hab->nombre);
+  $nombre_user_check_in = new Usuario($ultimo_user_check_in);
   if($faltante >= 0){
     $faltante_mostrar= '$'.number_format($faltante, 2);
   }else{
@@ -165,8 +170,18 @@
           if($faltante == 0 && $usuario->nivel<=2){
             echo '<button style="margin-left: auto;" class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="hab_desocupar_hospedaje('.$_GET['hab_id'].','.$_GET['estado'].')">Desocupar hab.</button>';
           }
+          
           echo'
+        </div>';
+        echo '
+        <div style=" width: 95%; margin: auto;">
+          <p>
+            <strong>Hizo la reserva:</strong> '.$nombre_user_check_in->nombre_completo.'
+          </p>
         </div>
+        ';
+        echo '
+        
         <input class="d-none" type="number" id="tipo_factura" value="0" disabled/>
         <section class="estado_cuenta_resumen">
           <ul class="list-group list_group_perzonalizado ">
@@ -241,6 +256,7 @@
         }else{
           $total_faltante= $total_abonos - $total_cargos;
         }
+        
         echo '
         <div class="estado_cuenta_cantidades">
           <div>Total cargos: <span>$'.number_format($total_cargos, 2).'</span></div>
