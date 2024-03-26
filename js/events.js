@@ -5272,6 +5272,15 @@ function estado_cuenta_maestra(hab_id,estado,mov,id){
 }
 
 // Muestra el estado de cuenta de una habitacion
+function estado_cuenta_por_fcasa(folio_casa){
+    var usuario_id=localStorage.getItem("id");
+	$('#area_trabajo').hide();
+    $('#pie').hide();
+	$('#area_trabajo_menu').show();
+	$("#area_trabajo_menu").load("includes/buscar_estado_cuenta.php?usuario_id="+usuario_id+"&fcasa="+folio_casa);
+	$('#caja_herramientas').modal('hide');
+}
+// Muestra el estado de cuenta de una habitacion
 function estado_cuenta(hab_id,estado,mov=0){
     var id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
@@ -5337,7 +5346,11 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
             success:function(res){
                 console.log(res)
                 if(id_maestra==0){
-                    recibe_datos_monto(res)
+                    if (hab_id==0){
+                        recibe_datos_edo_cuenta(res)
+                    }else{
+                        recibe_datos_monto(res)
+                    }
                 }else{
                     recibe_datos_monto_maestra(res)
                 }
@@ -5407,8 +5420,13 @@ function guardar_abono(hab_id,estado,faltante,mov=0,id_maestra=0){
                 // return
                 if(id_maestra==0){
                     var data = res.split("/");
+                    console.log(data);
                     recibe_datos_monto(res)
-                    enviar_abono_correo(data[2],abono,descripcion,fp_txt);
+                    if(hab_id==0){
+                        estado_cuenta_por_fcasa(data[2])
+                    }else{
+                        enviar_abono_correo(data[2],abono,descripcion,fp_txt);
+                    }
                 }else{
                     recibe_datos_monto_maestra(res)
                 }
@@ -5430,7 +5448,12 @@ function recibe_datos_monto_maestra(datos){
     $('#caja_herramientas').modal('hide');
     estado_cuenta_maestra(res[0] , res[1], res[2], res[3]);
 }
-
+// Recibe los datos para efectuar agregar un monto
+function recibe_datos_edo_cuenta(datos){
+    $('#caja_herramientas').modal('hide');
+    var res = datos.split("/");
+    estado_cuenta_por_fcasa(res[2]);
+}
 // Recibe los datos para efectuar agregar un monto
 function recibe_datos_monto(datos){
     $('#caja_herramientas').modal('hide');
