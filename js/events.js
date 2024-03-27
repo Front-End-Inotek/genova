@@ -4859,6 +4859,8 @@ function modificar_usuario(id){
 
     var ver_facturas = document.getElementById("facturas_ver").checked;
     var ver_cancelar = document.getElementById("facturas_cancelar").checked;
+
+    var combinar_cuentas = document.getElementById("combinar_cuentas").checked;
     // console.log(reservacion_preasignar)
     // return
     // Convertir usuario permisos
@@ -5125,6 +5127,11 @@ function modificar_usuario(id){
     } else {
         ver_cancelar = 0
     }
+    if(combinar_cuentas) {
+        combinar_cuentas = 1;
+    } else {
+        combinar_cuentas = 0;
+    }
 
 	if(usuario.length >0 && nivel.length >0){
         //if(contrasena == recontrasena){
@@ -5194,8 +5201,10 @@ function modificar_usuario(id){
                     "llegadas_salidas_ver":llegadas_salidas_ver,
                     "usuario_id": usuario_id,
                     "factura_ver" : ver_facturas,
-                    "factura_cancelar" : ver_cancelar
+                    "factura_cancelar" : ver_cancelar,
+                    "combinar_cuentas" : combinar_cuentas,
 			};
+            //console.log(datos)
 		$.ajax({
                 async:true,
                 type: "POST",

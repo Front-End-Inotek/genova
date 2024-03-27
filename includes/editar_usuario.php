@@ -905,6 +905,29 @@
 
             <hr>
 
+            <section class="form_checks_container">
+                <div class="form_checks_title">
+                  <p>Combinar cuentas</p>
+                </div>
+                <div class="form_checks_container">
+
+                <div class="form-check form-check-inline">';
+                echo $usuario->combinar_cuentas;
+                if($usuario->combinar_cuentas==0){
+                echo '<input class="form-check-input" type="checkbox" id="combinar_cuentas">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="combinar_cuentas" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="combinar_cuentas" >Ver</label>
+              </div>
+
+              </div>
+
+            </section>
+
+            <hr>
+
             <div class="container_btn">
               <div id="boton_usuario">
                 <button type="submit" class="btn btn-primary btn-block" value="Guardar" onclick="modificar_usuario('.$_GET['id'].')">

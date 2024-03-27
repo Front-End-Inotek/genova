@@ -55,7 +55,13 @@
 								<li class="aside_ruta" onclick="ver_reportes_llegadas(); handleSiceTable();">Reporte de llegadas</li>
 								<li class="aside_ruta" onclick="ver_reportes_salidas(0); handleSiceTable();">Reporte de salidas</li>
 								<li class="aside_ruta" onclick="saldo_huespedes(); handleSiceTable();">Saldo de huéspedes</li>
-								<li class="aside_ruta" onclick="edo_cuenta_folio_casa(); handleSiceTable();">Edo. cuenta folio casa</li>
+								';
+								if($usuario->combinar_cuentas == 1) {
+									echo '
+									<li class="aside_ruta" onclick="edo_cuenta_folio_casa(); handleSiceTable();">Edo. cuenta folio casa</li>
+									';
+								}
+								echo '
 							</ul>
 						</div>
 					</div>';

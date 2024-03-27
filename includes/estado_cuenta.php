@@ -155,7 +155,7 @@
               Fac. Abonos
             </button>
           </div>';
-          if($total_faltante == 0){
+          if($total_faltante == 0  && $usuario->combinar_cuentas == 1){
             echo'
               <button class="btn btn-info btn-block" href="#caja_herramientas" data-toggle="modal" onclick="unificar_cuentas('.$_GET['hab_id'].','.$_GET['estado'].','.$mov.')"> 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse-vertical" viewBox="0 0 16 16">
