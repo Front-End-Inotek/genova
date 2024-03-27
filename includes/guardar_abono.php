@@ -21,12 +21,18 @@
       $mov = $_POST['mov'];
     }
   }
+  $categoria= 0;
+  $nombre= "";
+  if($_POST['hab_id']>0){
+    $mov= $hab->mov;
+    $nombre= $hab->nombre;
+    $categoria= $hab->id;
+  }
   if(isset($_POST['id_maestra'])){
     if($_POST['id_maestra']!=0){
       $id_maestra = $_POST['id_maestra'];
     }
   }
-  $nombre= $hab->nombre;
   $faltante= 0;//$_POST['faltante']
   if($_POST['forma_pago'] == 2){
     $factuar= 1;
@@ -44,7 +50,7 @@
   $resta= 0;
   $nombre_concepto= 'Abono de hospedaje';
   $cantidad= 1;
-  $categoria= $hab->id;
+  
   $nueva_etiqueta= $labels->obtener_etiqueta();
   $labels->actualizar_etiqueta();
   $comanda= $pedido_rest->saber_comanda($mov);
