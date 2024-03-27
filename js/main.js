@@ -1,16 +1,16 @@
 function buscar_rfc(){
     //alert("Buscando");
     var inputRFC= document.getElementById("rfc").value;
-    console.log("Entra consulta /");
+    //console.log("Entra consulta /");
     if(inputRFC.length>10){
         var xhttp;
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Entra respuesta //");
+            //console.log("Entra respuesta //");
             var posicion=0;
             var respuesta=this.responseText;
-            console.log(this.responseText);
+            //console.log(this.responseText);
             var datos = respuesta.split('/');
             document.getElementById("nombre").value = datos[0];
             document.getElementById("correo").value = datos[1];
@@ -43,7 +43,7 @@ function mostrar_animacion() {
 function factura_global (){
     var checkfactura = document.getElementById("checkfacturaglobal");
     if(checkfactura.checked == true){
-    console.log("Entra consulta global /");
+    //console.log("Entra consulta global /");
     swal("Cambiaste a factura global!", "Se deben de añadir 3 campos complementarios", "warning");
     document.getElementById('input_periocidad').style.display='block';
     document.getElementById('input_mes').style.display='block';
@@ -56,7 +56,7 @@ function factura_global (){
 }
 
 function timbrar_factura(){
-    console.log("Entra validaciones /");
+    //console.log("Entra validaciones /");
     var rfc = document.getElementById("rfc");
     var nombre = document.getElementById("nombre");
     var cp = document.getElementById("cp");
@@ -211,24 +211,24 @@ function mandartimbre (){
     //FormData interpretara los datos del formulario
     var formData = new FormData(form);
     //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor
-    console.log(formData);
+    //console.log(formData);
     xhr.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
-            console.log("Respuesta del servidor para timbrar //");
+            //console.log("Respuesta del servidor para timbrar //");
             //Entrara la contidicion que valida la respuesta del formulario
             if (e.target.response == 'NO') {
                 ocultar_animacion();
-                console.log("Respuesta del timbrado ///");
+                //console.log("Respuesta del timbrado ///");
                 swal("Tu factura se genero correctamente!", "Pronto podras descargar su factura!", "success")
                 .then((value) => {
-                    console.log("Entra llamado para generar pdf /");
+                    //console.log("Entra llamado para generar pdf /");
                     generarPdf();
-                    console.log("Abre mostrar pdf y mostrar xml /");
+                    //console.log("Abre mostrar pdf y mostrar xml /");
                     window.open('includes/mostrar_pdf.php');
                     setTimeout(() => {
                         window.open('includes/mostrar_xml.php');
-                        console.log("Entra llamado para enviar correo /");
+                        //console.log("Entra llamado para enviar correo /");
                         enviarcorreo();
                         $('#area_trabajo').hide();
                         $('#area_trabajo_menu').show();
@@ -238,14 +238,14 @@ function mandartimbre (){
             });
             }else{
                 ocultar_animacion();
-                console.log(e.target.response);
+                //console.log(e.target.response);
                 var respuesta=e.target.response;
                 var datos = respuesta;
                 swal("Tu factura no se genero!", datos, "error");
             }
         }else{
             ocultar_animacion();
-            console.log(e.target.response);
+            //console.log(e.target.response);
             var respuesta=e.target.response;
             var datos = respuesta;
             swal("Error del servidor!", datos, "error");
@@ -261,7 +261,7 @@ function mandartimbre (){
 }
 
 function generarPdf(){
-    console.log("Segunda entrada generar pdf //");
+    //console.log("Segunda entrada generar pdf //");
     //document.getElementById("timbrar").style.display='none';
     var xhttp;
     xhttp = new XMLHttpRequest();
@@ -269,7 +269,7 @@ function generarPdf(){
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
-            console.log("Entrar respuesta del servidor generar pdf ///");
+            //console.log("Entrar respuesta del servidor generar pdf ///");
             //Entrara la contidicion que valida la respuesta del formulario
             if (e.target.response == 'Gpfd') {
                 swal("Tu factura no se genero!", "Error al intentar generar el arvhivo PDF!", "error");
@@ -289,7 +289,7 @@ function generarPdf(){
 
 let contador = 0;
 function enviarcorreo(){
-    console.log("Entra enviar correo //");
+    //console.log("Entra enviar correo //");
     var rfc = encodeURI(document.getElementById("rfc").value);
     var nombre = encodeURI(document.getElementById("nombre").value);
     var cp = encodeURI(document.getElementById("cp").value);
@@ -316,16 +316,16 @@ function enviarcorreo(){
     xhttp = new XMLHttpRequest();
     xhttp.open("GET","includes/enviar_correo.php?nombre="+nombre+"&cfdi="+cfdi+"&cp="+cp+"&regimen="+regimen+"&correo="+correo+"&metodopago="+metodopago+"&forma_pago="+forma_pago+"&notas="+notas,true);
     xhttp.addEventListener('load', e =>{
-        console.log(e)
+        //console.log(e)
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             if (e.target.response == 'Messagehasbeensent') {
-                console.log(e.target.response);
-                console.log("Correo enviado ///");
+                //console.log(e.target.response);
+                //console.log("Correo enviado ///");
                 swal("Tu factura se envio correctamente!", "Pronto recibirás un correo con los archivos correspondientes de tu factura!", "success");
             }else if(contador < 3){
-                console.log(e.target.response);
+                //console.log(e.target.response);
                 swal({
                     title: "Tu factura no envió!",
                     text: "Puede consultar las facturas en las seccion de \"Buscar Factura\" en la barra de menu o presione \"OK\" para intentar enviar el correo otra vez ",
@@ -377,7 +377,7 @@ function enviarcorreo(){
     }
 
     function cal() {
-        console.log("Entra operaciones matematicas //");
+        //console.log("Entra operaciones matematicas //");
         //alert("prueba");
         //try {
             let contador = document.getElementById("filas").value;
@@ -486,14 +486,14 @@ function enviarcorreo(){
         xhr.addEventListener('load', e =>{
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {
-                console.log(e.target.response);
+                //console.log(e.target.response);
                 //Entrara la contidicion que valida la respuesta del formulario
                 if (e.target.response == 'OK') {
                     swal("Tu factura se cancelo!", " ", "success");
                     document.getElementById("animacion_cancelar").style.display='none';
                     document.getElementById("cancelar").style.display='block';
                 }else{
-                    console.log(e.target.response);
+                    //console.log(e.target.response);
                     var respuesta=e.target.response;
                     var datos = respuesta;
                     swal("No se pudo realizar la cancelacion", datos , "error");
@@ -537,10 +537,10 @@ function enviarcorreo(){
         xhr.addEventListener('load', e =>{
             //Si el servidor responde 4  y esta todo ok 200
             if (e.target.readyState == 4 && e.target.status == 200) {
-                console.log(e.target.response);
+                //console.log(e.target.response);
                 //Entrara la contidicion que valida la respuesta del formulario
                 if (e.target.response != 'Desconocido: talvez el servicio del sat esta sin servicio o saturado, intentalo mas tarde') {
-                    console.log(e.target.response);
+                    //console.log(e.target.response);
                     //swal("Tu consulta fue realizada con exito!", " ", "success");
                     var respuesta=e.target.response;
                     var datos = respuesta.split('/');
@@ -550,7 +550,7 @@ function enviarcorreo(){
                 }
             }else{
                 swal("No se pudo realizar la consulta", "Por favor revisar que el archivo tenga terminacion .xml" , "error");
-                console.log(e.target.response);
+                //console.log(e.target.response);
             }
         })
         //Enviamos nuestro la respuesta de nuestro formulario
@@ -648,23 +648,23 @@ function enviarcorreo(){
             //return Promise.resolve()
           })
          .then(() => {
-            console.log(folio)
-            console.log(email)
-            console.log(nombre)
+            //console.log(folio)
+            //console.log(email)
+            //console.log(nombre)
             var xhttp;
             xhttp = new XMLHttpRequest();
             xhttp.open("GET","includes/reenviar_correo.php?nombre="+nombre+"&correo="+email+"&folio="+folio,true);
             xhttp.addEventListener('load', e =>{
-                console.log(e)
+                //console.log(e)
                 //Si el servidor responde 4  y esta todo ok 200
                 if (e.target.readyState == 4 && e.target.status == 200) {
                     //Entrara la contidicion que valida la respuesta del formulario
                     if (e.target.response == 'Messagehasbeensent') {
-                        console.log(e.target.response);
-                        console.log("Correo enviado ///");
+                        //console.log(e.target.response);
+                        //console.log("Correo enviado ///");
                         swal("Tu factura se envio correctamente!", "Pronto recibirás un correo con los archivos correspondientes de tu factura!", "success");
                     }else if(contador < 3){
-                        console.log(e.target.response);
+                        //console.log(e.target.response);
                         swal({
                             title: "Tu factura no envió!",
                             text: "Puede consultar las facturas en las seccion de \"Buscar Factura\" en la barra de menu o presione \"OK\" para intentar enviar el correo otra vez ",
@@ -685,7 +685,7 @@ function enviarcorreo(){
           .catch(err => {
             if (err) {
               swal("Error", "Error al envio de factura", "error");
-              console.log(err)
+              //console.log(err)
             } else {
               swal.stopLoading();
               swal.close();
@@ -712,15 +712,15 @@ function enviarcorreo(){
                 url: "includes/buscar_factura_folio_casa.php",
                 data: datos,
                 success: function (res){
-                    console.log("hola")
-                    console.log(res)
+                    //console.log("hola")
+                    //console.log(res)
                     $("#resultado_folio_casa").html(res);
                 },
                 error: function(xhr, status, error){
-                    console.log("Error en la solicitud AJAX:")
-                    console.log("Estado: " + status);
-                    console.log("Error: " + error);
-                    console.log("Respuesta del servidor: " + xhr.responseText);
+                    //console.log("Error en la solicitud AJAX:")
+                    //console.log("Estado: " + status);
+                    //console.log("Error: " + error);
+                    //console.log("Respuesta del servidor: " + xhr.responseText);
                     $("#resultado_folio_casa").html("Error en la solicitud AJAX. Consulta la consola para más detalles.");
                 }
             })

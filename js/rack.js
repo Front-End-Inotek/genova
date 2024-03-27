@@ -1,4 +1,4 @@
-console.log("hola")
+//console.log("hola")
 function mostrarCalentario  ()  {
     //Fecha hoy
     const fechaHoy = document.getElementById("fecha_hoy");
@@ -59,12 +59,12 @@ function mostrarRackCalendario () {
     const marcador = document.getElementById("calendario_marcador");
 
     if( !marcador ) {
-        console.log("Ya no esta en el calendario");
+        //console.log("Ya no esta en el calendario");
         clearInterval(window.intervalRackCalendario);
         return null;
     }
 
-    console.log("Mostrando rackkk")
+    //console.log("Mostrando rackkk")
 
     const habitaciones = document.getElementById("habitaciones");
 

@@ -266,7 +266,7 @@ function salirsession(){
         //success:problemas_sistema,
         timeout:5000,
         error:function(err){
-            console.log(err)
+            //console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
     });
@@ -284,7 +284,7 @@ function loaderbar_menu(){
 
 // Notifica un error o problema en el proceso
 function problemas_sistema(datos){
-	console.log("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
+	console.error("Ocurrio algun error en el proceso.  Inf: "+datos.toString());
 }
 
 // Muestra los subestados de las habitaciones
@@ -496,7 +496,7 @@ function guardar_planAlimentos(){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.responseText);
+            //console.log(e.target.responseText);
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_planes_alimentos()
@@ -552,7 +552,7 @@ function guardar_cuenta_m(nombre,codigo){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.responseText);
+            //console.log(e.target.responseText);
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_cuenta_maestra()
@@ -591,14 +591,14 @@ function guardar_habitacion(){
     let xhttp;
     xhttp = new XMLHttpRequest();
     let include = "includes/guardar_tipo.php?nombre="+nombre+"&codigo="+codigo+"&color="+color_hab+"&usuario_id="+usuario_id
-    console.log(include)
+    //console.log(include)
     xhttp.open("GET",include,true);
     xhttp.addEventListener('load', e =>{
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-            console.log(response)
+            //console.log(response)
             if (response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 swal("Nuevo tipo de habitacion agregado!", "Excelente trabajo!", "success");
@@ -705,7 +705,7 @@ function editar_tipo(id){
 }
 
 function mostrar_estadorack(estatus_hab) {
-    console.log(estatus_hab);
+    //console.log(estatus_hab);
     if(estatus_hab!="99"){
         localStorage.setItem('estatus_hab',estatus_hab)
     }else{
@@ -724,13 +724,13 @@ function mostrar_estadorack(estatus_hab) {
     //Escuchamos los estados que responda el servidor
         if(e.target.readyState == 4 && e.target.status == 200){
     //Si la respuesta fue para el usuario se va a redirigir a la pagina correspondiente
-            console.log(e.target.response);
+            //console.log(e.target.response);
             if(e.target.response == "validar_usa"){
-                console.log(e.target.response);
+                //console.log(e.target.response);
                 location.href = 'src/main_user.php';
     //Si la respues fue administrador se va redirigir a la pagina correspindiente
             }if(e.target.response == "validar_admin"){
-                console.log(e.target.response);
+                //console.log(e.target.response);
                 location.href = 'src/main_admin.php';
     //Si no nos mostrara un mensaje de error
             }else{
@@ -765,7 +765,7 @@ function modificar_politica_reservacion(id){
         data:datos,
         beforeSend:loaderbar,
         success:function(res){
-            console.log(res)
+            //(res)
             if(res=="NO"){
                 $('#caja_herramientas').modal('hide');
                 ver_politicas_reservacion()
@@ -777,7 +777,7 @@ function modificar_politica_reservacion(id){
         //success:problemas_sistema,
         timeout:5000,
         error:function(err){
-            console.log(err)
+            //console.log(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
     });
@@ -792,7 +792,7 @@ function modificar_tipo_abono(id){
     let xhttp;
     xhttp = new XMLHttpRequest();
     var parametros = "nombre="+nombre+"&descripcion="+descripcion+"&usuario_id="+usuario_id+"&id_abono="+id_abono
-    console.log(parametros)
+    //console.log(parametros)
     xhttp.open("POST","includes/aplicar_editar_tipo_abono.php",true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.addEventListener('load', e =>{
@@ -841,7 +841,7 @@ function modificar_plan_alimentos(id){
         //success:problemas_sistema,
         timeout:5000,
         error:function(err){
-            console.log(err)
+            console.error(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
     });
@@ -967,7 +967,7 @@ function borrar_politica_reservacion(id, nombre, codigo){
             url:include,
             beforeSend:loaderbar,
             success:function(res){
-                console.log(res)
+                //console.log(res)
                 if(res=="NO"){
                     $('#caja_herramientas').modal('hide');
                     ver_politicas_reservacion()
@@ -979,7 +979,7 @@ function borrar_politica_reservacion(id, nombre, codigo){
             //success:problemas_sistema,
             timeout:5000,
             error:function(err){
-                console.log(err)
+                console.error(err)
                 swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
         });
@@ -1039,7 +1039,7 @@ function borrar_tipo_abono(id, nombre, descripcion ){
             //success:problemas_sistema,
             timeout:5000,
             error:function(err){
-                console.log(err)
+                console.error(err)
                 swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
         });
@@ -1098,7 +1098,7 @@ function borrar_plan_alimentacion(id, nombre, codigo ){
             //success:problemas_sistema,
             timeout:5000,
             error:function(err){
-                console.log(err)
+                console.error(err)
                 swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
             }
         });
@@ -1148,7 +1148,7 @@ function cerrar_cuenta_maestra(id, nombre, codigo , mov){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.response)
+            //console.log(e.target.response)
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_cuenta_maestra()
@@ -1271,7 +1271,7 @@ function borrar_tipo(id, nombre, codigo ){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.response);
+            //console.log(e.target.response);
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_tipos()
@@ -1327,7 +1327,7 @@ function guardar_tarifa(){
         swal("Campo nombre vacio!", "Verifique los datos correctamente por favor!", "warning");
         return false;
     }
-    console.log(precio_hospedaje.length)
+    //console.log(precio_hospedaje.length)
     if(precio_hospedaje.length > 15){
         swal("Campo precio_hospedaje demasiado grande!", "El campo no debe superar los 15 caracteres!", "warning");
         return false;
@@ -1403,7 +1403,7 @@ function guardar_tarifa_nueva(){
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
             response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-            console.log(response)
+            //console.log(response)
             if (response == "NO") {
                 $('#caja_herramientas').modal('hide');
                 swal("Nuevo tipo de tarifa agregada!", "Excelente trabajo!", "success");
@@ -1467,7 +1467,7 @@ function modificar_tarifa(id){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.response);
+            //console.log(e.target.response);
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_tarifas()
@@ -1530,7 +1530,7 @@ function borrar_tarifa(id, nom, precio_hospedaje, cantidad_hospedaje, cantidad_m
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.response);
+            //(e.target.response);
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_tarifas()
@@ -1647,7 +1647,7 @@ function modificar_hab(id){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.responseText);
+            //console.log(e.target.responseText);
             if (e.target.responseText == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_hab()
@@ -1704,7 +1704,7 @@ function borrar_hab(ID, nom, habitacion, comentario){
         //Si el servidor responde 4  y esta todo ok 200
         if (e.target.readyState == 4 && e.target.status == 200) {
             //Entrara la contidicion que valida la respuesta del formulario
-            console.log(e.target.response);
+            //console.log(e.target.response);
             if (e.target.response == 'NO') {
                 $('#caja_herramientas').modal('hide');
                 ver_hab()
@@ -1829,7 +1829,7 @@ function generarReporte() {
 }
 
 function ver_reporte_pronostico() {
-    console.log("Reporte generado")
+    //console.log("Reporte generado")
     const mes = document.getElementById("mesanio").value
     let datos = {
         "fecha" : mes
@@ -1844,7 +1844,7 @@ function ver_reporte_pronostico() {
         url: "includes/generar_reporte_pronosticos.php",
         data: datos,
         succes: function(res){
-            console.log("Mirando el reporte" + res)
+            //console.log("Mirando el reporte" + res)
         }
     })*/
 }
@@ -1874,41 +1874,41 @@ function manejarReservacion(control){
 
 function calcular_nochesChek(){
     hab_id = $("#habitacion_checkin :selected").data("habid")
-    console.log(hab_id)
+    //(hab_id)
     calcular_noches(hab_id)
 }
 
 function editarTotalEstancia(event){
     
     forzar_tarifa = $("#forzar-tarifa").val()
-    console.log("Forzar tarifa: "+forzar_tarifa)
+    //console.log("Forzar tarifa: "+forzar_tarifa)
     extra_adultos = $("#extra_adulto").val();
-    console.log("Extra adultos: "+extra_adultos)
+    //console.log("Extra adultos: "+extra_adultos)
     extra_infantil =  $("#extra_infantil").val();
-    console.log("Extra infantil: "+extra_infantil)
+    //console.log("Extra infantil: "+extra_infantil)
     cantidad_hospedaje =$("#cantidad_hospedaje").val()
-    console.log("Cantidad hospedaje: "+cantidad_hospedaje)
+    //console.log("Cantidad hospedaje: "+cantidad_hospedaje)
     cantidad_maxima =Number($("#cantidad_maxima").val())
-    console.log("cantidad Maxima: "+cantidad_maxima)
+    //console.log("cantidad Maxima: "+cantidad_maxima)
     var pax_extra= Number(document.getElementById("pax-extra").value);
-    console.log("Pax extra: "+pax_extra)
+    //console.log("Pax extra: "+pax_extra)
     noches = $("#noches").val();
-    console.log("Noches: "+noches)
+    //console.log("Noches: "+noches)
     numero_hab = $("#numero_hab").val();
-    console.log("NUmero hab: "+numero_hab)
+    //console.log("NUmero hab: "+numero_hab)
     suma_extra = Number(extra_adultos) + Number(extra_infantil)
-    console.log("Suma extra: "+suma_extra)
-    console.log("-----------------------------------")
+    //console.log("Suma extra: "+suma_extra)
+    //console.log("-----------------------------------")
     preasignada = $("#preasignada")
     // console.log(suma_extra,cantidad_maxima)
     diff_extra=0
     if( numero_hab > 1 ){
-        console.log("Ya no se puede preasignar una habitacion")
+        //("Ya no se puede preasignar una habitacion")
         preasignada.prop("disabled" , true);
         //preasignada.val("")
         preasignada.val(null)
     } else {
-        console.log("Ahora si ya se puede agregar mas habitaciones");
+        //console.log("Ahora si ya se puede agregar mas habitaciones");
         preasignada.prop("disabled", false)
     }
     if(cantidad_maxima!=0){
@@ -1936,7 +1936,7 @@ function editarTotalEstancia(event){
         }
     }else{
         costo_plan = Number($("#costoplan").val()) * suma_extra
-        console.log(costo_plan)
+        //console.log(costo_plan)
     }
     if(pax_extra!=0){
         pax_extra= pax_extra * numero_hab * noches
@@ -1944,7 +1944,7 @@ function editarTotalEstancia(event){
     if(costoplan!=undefined){
         costo_plan = costoplan * suma_extra
     }
-    console.log(diff_extra)
+    //console.log(diff_extra)
     tarifa_adultos = $("#tarifa_adultos").val();
     tarifa_infantil = $("#tarifa_menores").val();
     tarifa_base = $("#tarifa_base").val()
@@ -2039,7 +2039,7 @@ function sobreVenderHab(e){
     } else {
         // alert('not checked');
     } */
-    console.log(e)
+    console.error(e)
 }
 
 // Calculo para obtener la cantidad de noches de una reservacion
@@ -2087,7 +2087,7 @@ function cambiar_adultosNew(event=null,hab_id){
             url:url_data,
             beforeSend:loaderbar,
             success:function(res){
-            console.log(res)
+            //console.log(res)
             $("#total").val(res.precio_hab)
             $("#tarifa_base").val(res.precio_hospedaje)
             $("#tarifa_menores").val(res.precio_infantil)
@@ -2101,7 +2101,7 @@ function cambiar_adultosNew(event=null,hab_id){
             //success:problemas_sistema,
             timeout:5000,
             error:function(err){
-                console.log(err)
+                console.error(err)
             }
         });
     }else{
@@ -2172,7 +2172,7 @@ function obtener_garantia(event=null){
         var garantia = event.target.options[event.target.selectedIndex].dataset.garantia;
         var efectivo = event.target.options[event.target.selectedIndex].text
         efectivo_txt = efectivo.toLowerCase()
-        console.log(efectivo_txt)
+        //(efectivo_txt)
         if(garantia!=undefined && garantia == 1){
             if((efectivo_txt !="efectivo") && efectivo_txt!="tarjeta" && efectivo_txt!="tarjeta de credito" && efectivo_txt!="tarjeta de debito"){
                 $("#voucher").attr("required",false)
@@ -2217,7 +2217,7 @@ function mostrar_modal_garantia(){
     id_huesped = $("#tomahuespedantes").val()
     estado_tarjeta=$("#estadotarjeta").val()
     estado_credito=$("#estadocredito").val()
-    console.log(estado_credito)
+    //console.log(estado_credito)
     $("#mostrar_herramientas").load('includes/modal_mostrar_garantia.php?huesped='+id_huesped+"&estadotarjeta="+estado_tarjeta,function(){
         if(estado_tarjeta!=""){
             $(":radio[value="+estado_tarjeta+"]").prop("checked","true");
@@ -2231,7 +2231,7 @@ function mostrar_modal_garantia(){
 function aceptar_asignar_huesped_maestra(id_huesped,id_maestra,mov){
     //se debe actualizar el movimiento y la cuenta maestra.
     var usuario_id=localStorage.getItem("id");
-    console.log("asignando husped a cuenta maestra", id_huesped)
+    //console.log("asignando husped a cuenta maestra", id_huesped)
     datos ={
         "usuario_id":usuario_id,
         "huesped":id_huesped,
@@ -2247,7 +2247,7 @@ function aceptar_asignar_huesped_maestra(id_huesped,id_maestra,mov){
         data:datos,
         beforeSend:loaderbar,
         success:function(res){
-            console.log(res)
+            //console.log(res)
         if(res=="SI"){
             swal("Húesped asignado correctamente a cuenta maestra", "El húesped seleccionado se ha agregado correctamente a la cuenta maestra elegida", "success");
             ver_cuenta_maestra()
@@ -2439,7 +2439,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     if(hab_id==0){
         preasignada= (document.getElementById("preasignada").value);
         sobrevender = document.getElementById('sobrevender').checked
-        console.log("A ver que show " + sobrevender)
+        //console.log("A ver que show " + sobrevender)
         canal_reserva = (document.getElementById("canal-reserva").value);
         tipo_reservacion = (document.getElementById("tipo-reservacion").value);
         titulo="RESERVACIÓN"
@@ -2599,7 +2599,7 @@ function guardarReservacion(id_huesped,hab_id=0,id_cuenta=0,id_reservacion=0){
     }else{
         alert("Campos incompletos o descuento no permitido");
         if( btn_reservacion ){
-            console.log("Si se desactivo el campo")
+            //console.log("Si se desactivo el campo")
             btn_reservacion.removeAttribute("disabled");
         }
     }
@@ -2636,7 +2636,7 @@ function enviar_transacciones_correo(mov,abono,descripcion,forma_pago){
         data:datos,
         beforeSend:inicioEnvio,
         success:function(res){
-            console.log(res)
+            //console.log(res)
         },
         timeout:5000,
         error:problemas
@@ -2661,7 +2661,7 @@ function enviar_abono_correo(mov,abono,descripcion,forma_pago){
             data:datos,
             beforeSend:inicioEnvio,
             success:function(res){
-                console.log(res)
+                //console.log(res)
             },
             timeout:5000,
             error:problemas
@@ -2698,7 +2698,7 @@ function enviar_reserva_correo(info,correo,reenviar){
     return false;
 }
 function respuesta_correo_reserva(info,reenviar){
-    console.log(info);
+    //console.log(info);
     if(reenviar){
         swal("Correo de confirmación reenviado correctamente","Correo de confirmación reenviado correctamente",'success');
     }
@@ -2712,7 +2712,7 @@ function enviar_cancela_correo(info,correo,reenviar){
             "usuario_id":usuario_id,
             "correo":correo,
         };
-        console.log(datos)
+        //console.log(datos)
         $.ajax({
             async:true,
             type: "POST",
@@ -2859,13 +2859,13 @@ function obtener_adicionales(){
     nombresHuespedes.forEach(function(input) {
         valoresNombres.push(input.value);
     });
-    console.log(valoresNombres)
+    //console.log(valoresNombres)
     const apellidosHuespedes = document.querySelectorAll(".apellidoExtra");
     const valoresApellidos = [];
     apellidosHuespedes.forEach(function(input){
         valoresApellidos.push(input.value);
     });
-    console.log(valoresApellidos);
+    //console.log(valoresApellidos);
     const arregloHuespedes = [];
     for (let i = 0; i < valoresNombres.length; i++){
         const nuevoObjeto = {
@@ -2875,7 +2875,7 @@ function obtener_adicionales(){
         arregloHuespedes.push(nuevoObjeto)
     };
     return arregloHuespedes;
-    console.log(arregloHuespedes);
+    //console.log(arregloHuespedes);
 }
 
 function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
@@ -2896,9 +2896,9 @@ function guardarNuevaReservacion(hab_id,id_cuenta=0,id_reservacion=0){
     // Comprobar la forma de garantia si esta activo el input o desactivado y si viene null o string vacio
     var forma_garantia = document.getElementById("garantia_monto")
     if (forma_garantia.disabled) {
-        console.log("El campo de texto esta desactivado")
+        //console.log("El campo de texto esta desactivado")
     } else {
-        console.log("El campo de texto esta activado")
+        //console.log("El campo de texto esta activado")
         if(btn_reservacion){
             btn_reservacion.removeAttribute("disabled");
         }
@@ -3164,7 +3164,7 @@ function guardar_reservacion(precio_hospedaje,total_adulto,total_junior,total_in
         alert("Campos incompletos o descuento no permitido");
 
         if( btn_reservacion ){
-            console.log("Si se desactivo el campo")
+            //console.log("Si se desactivo el campo")
             btn_reservacion.removeAttribute("disabled");
         }
     }
@@ -3235,7 +3235,7 @@ function buscar_reservacion(e){
         var usuario_id=localStorage.getItem("id");
         if(a_buscar.length >0){
             $('.pagination').hide();
-            console.log(a_buscar)
+            //console.log(a_buscar)
             $("#paginacion_reservaciones").load("includes/buscar_reservacion.php?a_buscar="+a_buscar+"&usuario_id="+usuario_id,function(res){
             });
         }else{
@@ -3583,7 +3583,7 @@ function guardar_preasignar_reservacion(id,opcion=0){
                 data:datos,
                 beforeSend:loaderbar,
                 success:function(res){
-                    console.log(res)
+                    //console.log(res)
                     if(opcion==0){
                         ver_reservaciones();
                     }else{
@@ -3632,7 +3632,7 @@ function guardar_datos_tarjeta(huesped_id,forma_garantia){
         data:datos,
         beforeSend:loaderbar,
         success:function(res){
-            console.log(res)
+            //console.log(res)
         },
         //success:problemas_sistema,
         timeout:5000,
@@ -3724,7 +3724,7 @@ function cancelar_reservacion(id,preasignada=0,correo,garantizada=0){
                 data:datos,
                 beforeSend:loaderbar,
                 success:function(res){
-                    console.log(res)
+                    //console.log(res)
                     if(correo!="" && garantizada!=1){
                         enviar_cancela_correo(id,correo,false)
                     }
@@ -3767,7 +3767,7 @@ function select_asignar_checkin(id,numero_hab,hab_id="",movimiento){
             "usuario_id": usuario_id,
             "movimiento":movimiento
             };
-        console.log(datos)
+        //console.log(datos)
         $.ajax({
             async:true,
             type: "POST",
@@ -4012,7 +4012,7 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
                 }else{
                     swal("Ha ocurrido un error con la transferencia de información", "Verifique su información e intentlo de nuevo", "error");
                 }
-                console.log(res)
+                //console.log(res)
             },
             timeout:5000,
             error:problemas_sistema
@@ -4022,7 +4022,7 @@ function guardar_datos_vehiculo(id_reserva,id_huesped) {
 function cambiar_estado_vehiculo(id_huesped,estado){
     usuario_id=localStorage.getItem("id");
     $("#coche_estado").load("includes/cambiar_estado_vehiculo.php?usuario_id="+usuario_id+"&id_huesped="+id_huesped+"&estado="+estado); 
-    console.log("Cambiando el estado del vehiculo");
+    //console.log("Cambiando el estado del vehiculo");
 }
     function guardar_huesped(){
     var usuario_id=localStorage.getItem("id");
@@ -4053,7 +4053,7 @@ function cambiar_estado_vehiculo(id_huesped,estado){
     }
     var limite_credito = encodeURI(document.getElementById("limite_credito").value);
     if (isNaN(limite_credito)) {
-        console.log('Es un número');
+        //console.log('Es un número');
         limite_credito=0;
     }else{
         if(limite_credito<=0){
@@ -4096,7 +4096,7 @@ function cambiar_estado_vehiculo(id_huesped,estado){
             if (e.target.readyState == 4 && e.target.status == 200) {
                 //Entrara la contidicion que valida la respuesta del formulario
                 const  response =xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-                 console.log(response)
+                //console.log(response)
                 // return
                 if (response == 'NO_DATA') {
                     swal("Debe llenar los campos requeridos", "Verifique que los campos no estén vacíos", "error");
@@ -4147,7 +4147,7 @@ function validar_pass(password,huesped_id){
         beforeSend:loaderbar,
         success:function(res){
             if(res!=0){
-                console.log("good")
+                //console.log("good")
                 $('#numero_tarjeta').val(res)
                 $('#numero_tarjeta').prop("disabled",false)
             }else{
@@ -4405,7 +4405,7 @@ function habSeleccionada(event){
     if(event!=0){
         var tipo_hab = event.target.options[event.target.selectedIndex].dataset.habtipo;
         if(tipo_hab!=undefined){
-            console.log(tipo_hab)
+            //console.log(tipo_hab)
         }
     }
     // console.log($("#habitacion_check").val())
@@ -4504,7 +4504,7 @@ function cargo_noche(){
             data:datos,
             beforeSend:loaderbar,
             success:function(res){
-                console.log(res)
+                //console.log(res)
                 principal()
             },
             //success:problemas_sistema,
@@ -4737,7 +4737,7 @@ function guardar_usuario(){
                     data:datos,
                     beforeSend:loaderbar,
                 success:function(res){
-                    console.log(res)
+                    //console.log(res)
                     if(res.includes("Duplicate entry")){
                         alert("El nombre de usuario ya se encuentra ocupado")
                         //<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">
@@ -5205,7 +5205,7 @@ function modificar_usuario(id){
                 data:datos,
                 //beforeSend:loaderbar,
                 success:function(res){
-                    console.log(res)
+                    //console.log(res)
                     ver_usuarios()
                 },
                 //success:problemas_sistema,
@@ -5335,7 +5335,10 @@ function guardar_cargo(hab_id,estado,faltante,mov=0,id_maestra=0){
             data:datos,
               //beforeSend:loaderbar,
             success:function(res){
-                console.log(res)
+                //console.log(res)
+                if( !hab_id ) {
+                    //console.log("sin habitacion padrino")
+                }
                 if(id_maestra==0){
                     recibe_datos_monto(res)
                 }else{
@@ -5510,7 +5513,7 @@ function confirmar_cambiar_cargos(){
                 data:datos,
                 //beforeSend:loaderbar,
                 success:function(res){
-                    console.log(res)
+                    //console.log(res)
                     cargo_auditoria()
                     //ver_auditoria()
                 },
@@ -5524,7 +5527,7 @@ function confirmar_cambiar_cargos(){
 
 function cajasAuditoria() {
     cajas = document.getElementById('cajas').checked
-    console.log(cajas)
+    //console.log(cajas)
     if(cajas) {
         // Iterate each checkbox
         $('.campos_habs').each(function() {
@@ -5554,7 +5557,7 @@ function cargo_auditoria(){
             data:datos,
             beforeSend:loaderbar,
             success:function(res){
-                console.log(res)
+                //console.log(res)
                 mostrar_cargo_noche_reporte();
                 principal()
             },
@@ -5834,7 +5837,7 @@ function cargos_seleccionados(){
                 })
     }
     return [array_cargos,array_abonos]
-    console.log(array_abonos,array_cargos)
+    //console.log(array_abonos,array_cargos)
 }
 
 // Modal para seleccionar las cuentas a unificar
@@ -5854,7 +5857,7 @@ function cambiar_hab_cuentas_seleccionadas(id_hab,nombre_hab,mov_hab,hab_id,esta
     var nombre_hab= encodeURI(nombre_hab);
     $('#caja_herramientas').modal('hide');
     const cuenta = cargos_seleccionados()
-    console.log(cuenta)
+    //console.log(cuenta)
     let cargos = cuenta[0]
     let abonos = cuenta[1]
     cargos = cargos.length == 0 ? 0 : cargos
@@ -6213,7 +6216,7 @@ function switch_rack(){
     vista = localStorage.getItem('vista')
     //if(vista==3 || vista==0){
     if(false){
-        console.log("rack de habitaciones "+vista);
+        //console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $('#area_trabajo').hide();
         $('#area_trabajo_menu').show();
@@ -6223,7 +6226,7 @@ function switch_rack(){
         closeNav();
         siguiente_vista=1;
     }else{
-        console.log("rack de operaciones "+vista);
+        //console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         localStorage.removeItem('estatus_hab')
@@ -6619,13 +6622,13 @@ function cargar_producto_restaurante(producto,categoria,hab_id,estado,mov,mesa,m
 function recibe_datos_restaurante(datos){
     //alert(datos);
     var res = datos.split("/");
-    console.log(res[5]);
+    //console.log(res[5]);
     agregar_restaurante_cat(res[0] , res[1] , res[2] , res[3], res[4], res[5]);
 }
 
 // Agregar en el restaurante
 function agregar_restaurante_cat(categoria,hab_id,estado,mesa,mov,maestra){
-    console.log(maestra)
+    //console.log(maestra)
     $('#caja_herramientas').modal('hide');
 	$('#area_trabajo').hide();
     $('#pie').hide();
@@ -6691,7 +6694,7 @@ function modificar_producto_restaurante(producto,hab_id,estado,mov,mesa,cantidad
 function eliminar_producto_restaurante(producto,hab_id,estado,mov,mesa,id_maestra=0){
     var usuario_id=localStorage.getItem("id");
     var categoria= 0;
-    console.log(id_maestra);
+    //console.log(id_maestra);
     var datos = {
 		"producto": producto,
         "categoria": categoria,
@@ -7072,7 +7075,7 @@ function aplicar_rest_cobro_hab(total,hab_id,estado,mov,motivo="",id_maestra=0){
         data:datos,
         beforeSend:loaderbar,
         success:function(res){
-            console.log(res)
+            //console.log(res)
             if(id_maestra==0){
                 principal()
             }else{
@@ -7151,7 +7154,7 @@ function guardar_mesa(){
             "capacidad": capacidad,
             "usuario_id": usuario_id,
             };
-            console.log(datos)
+            //console.log(datos)
         $.ajax({
             async:true,
             type: "POST",
@@ -7742,13 +7745,10 @@ function edo_cuenta_folio_casa(){
     closeNav();
 }
 function buscar_cuenta_folio_casa(){
-    console.log("Hola")
     const folio_casa = document.getElementById("a_buscar").value;
     const usuario_id = localStorage.getItem("id");
 
-    console.log("Por aca")
     if(folio_casa == "" || folio_casa == null) {
-        console.log("Por aca xd")
         swal({
             title: "Falta agregar Folio casa",
             icon: "warning",
@@ -7757,14 +7757,12 @@ function buscar_cuenta_folio_casa(){
         })
         return;
     } else {
-        console.log("No aca xd")
         $('#area_trabajo').hide();
         $('#pie').hide();
         $('#area_trabajo_menu').show();
         $("#area_trabajo_menu").load("includes/buscar_estado_cuenta.php?usuario_id="+usuario_id+"&fcasa="+folio_casa);
         closeNav();
     }
-    console.log("salio")
 }
 
 function corte_diario(){
@@ -7895,7 +7893,6 @@ function manejo_facturas(){
     const fechaInio = document.getElementById("fecha_inicio_factura").value;
     const fechaFin = document.getElementById("fecha_fin_factura").value;
     const forma_pago = document.getElementById("tipo_pago").value;
-    console.log(forma_pago)
     btn.style.display = "none"
     infoTotal.style.display = "none"
 
@@ -8034,7 +8031,6 @@ function generar_facturas_global(){
     }
     localStorage.setItem('lista_id_tickets', lista_id_tickets);
     localStorage.setItem('total', total);
-    console.log("facturas generadas");
     if (total>0){
         /* $.ajax({
             async: true,
@@ -8052,7 +8048,7 @@ function generar_facturas_global(){
                     confirmButtonText: "Aceptar",
                     dangerMode: true,
                 }) 
-                console.log("Factura generada con exito")
+                //console.log("Factura generada con exito")
             }
         }) */
         $('#area_trabajo').hide();
@@ -8097,7 +8093,7 @@ function generar_facturas_global_cargos(){
     }
     localStorage.setItem('lista_id_tickets', lista_id_tickets);
     localStorage.setItem('total', total);
-    console.log("facturas generadas");
+    //console.log("facturas generadas");
     if (total>0){
         /* $.ajax({
             async: true,
@@ -8115,7 +8111,7 @@ function generar_facturas_global_cargos(){
                     confirmButtonText: "Aceptar",
                     dangerMode: true,
                 }) 
-                console.log("Factura generada con exito")
+                //console.log("Factura generada con exito")
             }
         }) */
         $('#area_trabajo').hide();
@@ -8145,7 +8141,7 @@ function generar_facturas_reserva(total,id,bandera_facturacion,totales,tipos, mo
     lista_tipo.push(tipos)
     lista_mov.push(mov);
     tipo_de_factura=tipo_fact;
-    console.log("facturas generadas");
+    //console.log("facturas generadas");
     if (total>0){
         /* $.ajax({
             async: true,
@@ -8163,7 +8159,7 @@ function generar_facturas_reserva(total,id,bandera_facturacion,totales,tipos, mo
                     confirmButtonText: "Aceptar",
                     dangerMode: true,
                 }) 
-                console.log("Factura generada con exito")
+                //console.log("Factura generada con exito")
             }
         }) */
         $('#area_trabajo').hide();
@@ -8182,7 +8178,7 @@ function generar_facturas_reserva(total,id,bandera_facturacion,totales,tipos, mo
 }
 
 function generar_factura_salidas(folio_casa) {
-    console.log(folio_casa)
+    //console.log(folio_casa)
     $('#area_trabajo').hide();
     $('#pie').hide();
     $('#area_trabajo_menu').show();
@@ -8931,7 +8927,7 @@ function hab_sucia_vacia(hab_id,estado){
 // !**************************************************************
 // Mandar al estado interno sucia una habitacion disponible
 function hab_disponible_sucia(hab_id,estado){
-    console.log("from")
+    //console.log("from")
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -8957,7 +8953,7 @@ function hab_disponible_sucia(hab_id,estado){
 //! ***************************************************************************
 // Mandar al estado interno sucia una habitacion ocupada
 function hab_ocupada_sucia(hab_id,estado){
-    console.log("from")
+    //console.log("from")
 	var usuario_id=localStorage.getItem("id");
 	$('#caja_herramientas').modal('hide');
 	var datos = {
@@ -9176,14 +9172,14 @@ function guardarColoresHab() {
             clasesEstados.push(ReservaPend[i].value)
         };
     };
-    console.log(clasesEstados);
+    //console.log(clasesEstados);
     let xhttp;
     xhttp = new XMLHttpRequest();
     let include = "includes/guardar_estados.php"
     xhttp.open("GET",include,true);
     xhttp.addEventListener('load',e =>{
         response = xhttp.responseText.replace(/(\r\n|\n|\r)/gm, "");
-        console.log(response);
+        //console.log(response);
     })
 }
 
@@ -9259,7 +9255,7 @@ function cargarContenido() {
 
         },
         error: function(error) {
-            console.log("Error al cargar el contenido: ", error);
+            console.error("Error al cargar el contenido: ", error);
             $("#chat_content").html(error);
         }
     });
@@ -9348,12 +9344,12 @@ function send_message_hab ( id_hab , mov ) {
             url: "includes/chat_hab_guardar_mensaje.php",
             data: datos,
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 chat.insertAdjacentHTML("afterbegin", messageFormat);
                 document.getElementById("chat_hab").value = "";
             },
             error: function(error) {
-                console.log(error)
+                console.error(error)
             }
         });
     };
@@ -9388,7 +9384,7 @@ function refrescarChat_hab( id , mov ) {
             $("#cuerpo_chat_habitacion").html(res);
         },
         error: function (error){
-            console.log( error.responseText )
+            console.error( error.responseText )
         }
     })
 };
@@ -9418,13 +9414,13 @@ function chat_notification_global() {
         data: datos,
         success: function (res){
             /* console.log("ID del mensaje:", res.mensaje_id);
-            console.log("Mensaje:", res.mensaje);
-            console.log("Hora de envío:", res.hora_envio); */
+            //console.log("Mensaje:", res.mensaje);
+            //console.log("Hora de envío:", res.hora_envio); */
             /* console.log(res) */
             notificar(res.mensaje_id, res.usuario_id, res.mensaje, res.nombre)
         },
         error: function (error){
-            console.log(error.responseText)
+            console.error(error.responseText)
         }
     })
 };
@@ -9516,12 +9512,9 @@ function resumenDeFacturas () {
 }
 
 function activarBtnFacturaEstadoCuenta() {
-    console.log("activando btn");
     const btn = document.getElementById("btn_generar_factura");
     let checkboxes = "";
     checkboxes = document.querySelectorAll('.input_fact');
-
-    console.log(checkboxes);
 
     const algunoMarcado = Array.from(checkboxes).some(function(cb) {
         return cb.checked;
@@ -9531,12 +9524,9 @@ function activarBtnFacturaEstadoCuenta() {
 }
 
 function activarBtnFacturaEstadoCuenta_cargos() {
-    console.log("Activando boton cargos");
     const btn = document.getElementById("btn_generador_factura_cargos");
     let checkboxes = "";
     checkboxes = document.querySelectorAll(".input_fact_cargos")
-
-    console.log(checkboxes)
 
     const algunoMarcado = Array.from(checkboxes).some(function(cb) {
         return cb.checked
@@ -9545,7 +9535,6 @@ function activarBtnFacturaEstadoCuenta_cargos() {
     btn.disabled = !algunoMarcado
 }
 function guardarComprobante (folio) {
-    console.log("Guardando imagen...")
     var inputFile = document.getElementById('inputFile');
     var file = inputFile.files[0];
 
@@ -9562,7 +9551,7 @@ function guardarComprobante (folio) {
             contentType: false,
             processData: false,
             success: function(response) {
-                console.log(response);
+                //console.log(response);
                 alert('Imagen guardada correctamente.');
             },
             error: function(error) {
@@ -9649,28 +9638,28 @@ function login_super_admin() {
 function selectior_super_admin( selector ) {
     switch (selector) {
         case "infoBasica":
-            console.log("Guardando informacion general..")
+            //console.log("Guardando informacion general..")
             superAdminGuardarInformacionGeneral()
             break;
         case "facturacion":
-            console.log("Guardando informacion de facturacion..")
+            //console.log("Guardando informacion de facturacion..")
             superAdminGuardarFacturacion();
             break;
         case "abono_reserva":
-            console.log("Manejando abono reserva...")
+            //console.log("Manejando abono reserva...")
             break;
         case "borrar_db":
-            console.log("Borrando base de datos..")
+            //console.log("Borrando base de datos..")
             break;
         case "borrar_chats": 
             borrar_chats()
-            console.log("Borrando chats...")
+            //console.log("Borrando chats...")
             break;
         case "borrar_global":
-            console.log("Borrando chat global...")
+            //console.log("Borrando chat global...")
             break;
         case "borrar_hab": 
-            console.log("Borrando chat habitaciones....")
+            //console.log("Borrando chat habitaciones....")
             break;
         default:
             break;
@@ -9753,7 +9742,7 @@ function superAdminGuardarInformacionGeneral() {
                         url: "includes/actualizar_info.php",
                         data: datos,
                         success: function (res) {
-                            console.log(res)
+                            //console.log(res)
                             if(res == 1) {
                                 swal({
                                     title: "Se actualizaron los datos",
@@ -9766,7 +9755,7 @@ function superAdminGuardarInformacionGeneral() {
                             }
                         },
                         error: function (error) {
-                            console.log(error.responseText)
+                            //console.log(error.responseText)
                             swal({
                                 title: "Error",
                                 text: "Error al actualizar los datos",
@@ -9871,7 +9860,7 @@ function superAdminGuardarFacturacion() {
                         url: "includes/actualizar_fact.php",
                         data: datos,
                         success: function (res) {
-                            console.log(res)
+                            //console.log(res)
                             if( res == 1 ) {
                                 swal({
                                     title: "Se actualizaron los datos de facturacion",
@@ -9884,7 +9873,7 @@ function superAdminGuardarFacturacion() {
                             }
                         },
                         error: function (error) {
-                            console.log(error)
+                            //console.log(error)
                             swal({
                                 title: "Error",
                                 text: "Error al actualizar los datos",
@@ -9910,7 +9899,6 @@ function borrar_chats() {
     const check = document.getElementById("chats").checked
 
     if(!check) {
-        console.log("No esta checked")
         swal({
             title: "Confirma la acción",
             text: "Confirma el checkbox para continuar",
@@ -9918,15 +9906,15 @@ function borrar_chats() {
         })
 
     } else if( check ) {
-        console.log("Si esta checked")
+        //console.log("Si esta checked")
     }
 }
 
 function handle_btn_corte_diario () {
-    console.log("Manejando los valores para activar el boton...")
+    //console.log("Manejando los valores para activar el boton...")
     const btn = document.getElementById("btn_hacer_corte")
     const elementos = document.getElementsByClassName("total_corte");
-    console.log(elementos)
+    //console.log(elementos)
     let total = 0;
 
     for (let i = 0; i < elementos.length; i++) {
@@ -9937,7 +9925,7 @@ function handle_btn_corte_diario () {
         total += numero;
     }
 
-    console.log(total)
+    //console.log(total)
 
     if ( total > 0) {
         btn.removeAttribute("disabled");
@@ -9947,7 +9935,7 @@ function handle_btn_corte_diario () {
 }
 
 function buscar_ticket_reactivar() {
-    console.log("Ticket buscando")
+    //console.log("Ticket buscando")
     const id_ticket = document.getElementById("id_ticket").value
 
     if(!id_ticket) {
@@ -9969,7 +9957,7 @@ function buscar_ticket_reactivar() {
         url: "includes/reactivar_ticket.php",
         data: datos,
         success: function (res) {
-            console.log(res)
+            //console.log(res)
             swal({
                 title: "Se activo el ticket",
                 text: `El ticket con ID: ${id_ticket}`,
@@ -9998,7 +9986,7 @@ function cambiarNoFac(id_ticket) {
         url: "includes/reactivar_ticket.php",
         data: datos,
         success: function (res) {
-            console.log(res)
+            //console.log(res)
             swal({
                 title: "Se activo el ticket",
                 text: `El ticket con ID: ${id_ticket}`,
@@ -10028,7 +10016,7 @@ function cambiarNoFac2(id_ticket) {
         url: "includes/reactivar_ticket.php",
         data: datos,
         success: function (res) {
-            console.log(res)
+            //console.log(res)
             swal({
                 title: "Se activo el ticket",
                 text: `El ticket con ID: ${id_ticket}`,
