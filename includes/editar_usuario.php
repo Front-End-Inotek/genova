@@ -912,7 +912,6 @@
                 <div class="form_checks_container">
 
                 <div class="form-check form-check-inline">';
-                echo $usuario->combinar_cuentas;
                 if($usuario->combinar_cuentas==0){
                 echo '<input class="form-check-input" type="checkbox" id="combinar_cuentas">';
                 }else{
