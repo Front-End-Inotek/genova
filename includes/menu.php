@@ -143,7 +143,8 @@
 					</div>';
 				}
 				//Menu Cortes y transacciones
-				if($permisos_reportes > 0 ){
+				$permisos_cortes_y_transacciones = $usuario->cortes_y_transacciones;
+				if($permisos_cortes_y_transacciones > 0 ){
 					echo '
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
@@ -152,18 +153,10 @@
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(4)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="4">
-							<ul class="aside_nav_links_list">';
-						$permisos_reportes_diarios=$usuario->reporte_ver+$usuario->reporte_agregar;
-						$permisos_surtir=$usuario->inventario_surtir;
-						$permisos_reportes_diarios=$usuario->reporte_ver;
-						if($permisos_reportes_diarios > 0 || $usuario->nivel == 2){
-							echo '
+							<ul class="aside_nav_links_list">
 							<li class="aside_ruta" onclick="ver_cortes(); handleSiceTable();">Historial cortes usuario</li>
 							<li class="aside_ruta" onclick="hacer_cortes_dia(); handleSiceTable();">Corte diario usuario</li>
 							<li class="aside_ruta" onclick="hacer_cortes(0); handleSiceTable();">Resumen transacciones</li>
-							';
-						};
-						echo '
 							</ul>
 						</div>
 					</div>';

@@ -528,7 +528,7 @@
 
             <section class="form_checks_container">
               <div class="form_checks_title">
-                <p>Reporte</p>
+                <p>Reportes</p>
               </div>
               <div class="form_checks_container">
 
@@ -551,6 +551,27 @@
                 echo '
                 <label class="form-check-label" for="reporte_agregar" >Agregar</label>
               </div>
+
+              </div>
+            </section>
+
+          <hr>
+
+            <section class="form_checks_container">
+              <div class="form_checks_title">
+                <p>Cortes y transacciones</p>
+              </div>
+              <div class="form_checks_container">
+
+                <div class="form-check form-check-inline">';
+                  if($usuario->cortes_y_transacciones==0){
+                  echo '<input class="form-check-input" type="checkbox" id="cortes_y_transacciones">';
+                  }else{
+                  echo '<input class="form-check-input" type="checkbox" id="cortes_y_transacciones" checked>';
+                  }
+                  echo '
+                  <label class="form-check-label" for="cortes_y_transacciones">Ver</label>
+                </div>
 
               </div>
             </section>
