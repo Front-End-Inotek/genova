@@ -42,7 +42,7 @@ function salirsession(){
         //success:problemas_sistema,
         timeout:5000,
         error:function(err){
-            console.log(err)
+            console.error(err)
             swal("Error del servidor!", "Intenelo de nuevo o contacte con soporte tecnico", "error");
         }
     });

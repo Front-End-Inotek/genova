@@ -2,10 +2,10 @@
 function switch_rack() {
   var checkfactura = document.getElementById("flexSwitchCheckDefault");
   if (checkfactura.checked == true) {
-    console.log("rack de operaciones");
+    //console.log("rack de operaciones");
     alert('si');
   } else {
-    console.log("rack de habitaciones");
+    //console.log("rack de habitaciones");
     alert('si');
   }
 }
@@ -60,7 +60,7 @@ function cambiarVista() {
   var checkbox = document.getElementById("flexSwitchCheckDefault");
   var vista = document.getElementById("vista");
   txt_vista = localStorage.getItem("txt_vista");
-  console.log(txt_vista)
+  //console.log(txt_vista)
   if (checkbox.checked != true) {
     vista.classList.remove("rack-operaciones");
     vista.classList.add("vista-habitacional");
