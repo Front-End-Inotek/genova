@@ -233,9 +233,14 @@
         }else{
           $listas[$fila['mov']]['folio']=$fila['id'];
         }
-        $listas[$fila['mov']]['observaciones']=$fila['comentario'];
-
         $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
+        if (isset($listas[$fila['mov']]['observaciones'])){
+          if ($fila_cuenta['observacion']){
+            $listas[$fila['mov']]['observaciones']=$listas[$fila['mov']]['observaciones']."<br>".$fila_cuenta['observacion'];
+          }
+        }else{
+          $listas[$fila['mov']]['observaciones']=$fila_cuenta['observacion'];
+        }
         if (!isset($listas[$fila['mov']]['cargo'])){
           $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_GET['usuario_id']);
           $listas[$fila['mov']]['cargo']=$fila_cargo;
