@@ -89,7 +89,7 @@ if (empty($_GET['hab_id'])) {
             </div>
 
             <div class="form-floating input_container">
-                <input required class="form-control custom_input" type="date"  id="fecha_salida" name="fecha_salida" min='.$dia_actual.' placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.');" >
+                <input required class="form-control custom_input" type="date"  id="fecha_salida" name="fecha_salida"  placeholder="Ingresa la fecha de salida" onchange="calcular_noches('.$hab_id.');" >
                 <label class="asterisco" for="salida">Salida</label>
             </div>
 

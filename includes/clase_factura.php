@@ -70,8 +70,14 @@
       return $consulta;
     }
     function registrar_rfc($regimenfiscal,$rfc,$codigopostal,$email){
-      $sentencia ="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`,`notas`)
-      VALUES ('$regimenfiscal','$rfc[0]','$rfc[1]','','$codigopostal','$email','','','','','','','','')";
+      if (strpos($rfc[1], "'") !== false) {
+        $sentencia ='INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`,`notas`)
+        VALUES ("'.$regimenfiscal.'","'.$rfc[0].'","'.$rfc[1].'","","'.$codigopostal.'","'.$email.'","","","","","","","","")';
+      }else{
+        $sentencia ="INSERT INTO rfc (`regimen_fiscal`,`rfc`,`nombre`,`produccion`,`codigo_postal`,`email`,`cer`,`key`,`passkey`,`usuariopac`,`passpac`,`impresora`,`telefono`,`notas`)
+        VALUES ('$regimenfiscal','$rfc[0]','$rfc[1]','','$codigopostal','$email','','','','','','','','')";
+      }
+      //echo $sentencia;
 
       $comentario="registrar rfc ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -118,9 +124,18 @@
 
     }
     function guardar_factura($rfc,$rimporte,$riva,$rish,$folios,$nombre,$fecha,$forma_pago,$metodo_pago="",$id,$nombre_hab='0',$pax,$notas){
-      $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`metodopago`,`folio_casa`,`nombre_hab`,`pax_extras`,`notas` )
-      VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$metodo_pago','$id','$nombre_hab',$pax,'$notas')";
-      $comentario="rfc_propio ";
+      if (strpos($nombre, "'") !== false) {
+        $sentencia='INSERT INTO facturas (rfc ,importe,iva,ish,folio,estado,nombre,fecha,forma_pago,metodopago,folio_casa,nombre_hab,pax_extras,notas)
+        VALUES ("'.$rfc.'","'.$rimporte.'","'.$riva.'","'.$rish.'","'.$folios.'","0","'.$nombre.'","'.$fecha.'","'.$forma_pago.'","'.$metodo_pago.'","'.$id.'","'.$nombre_hab.'","'.$pax.'","'.$notas.'")
+        ';
+        $comentario="rfc_propio ";
+      }else{
+        $sentencia="INSERT INTO facturas (`rfc`,`importe`,`iva`,`ish`,`folio`,`estado`,`nombre`,`fecha`,`forma_pago`,`metodopago`,`folio_casa`,`nombre_hab`,`pax_extras`,`notas` )
+        VALUES ('$rfc','$rimporte','$riva','$rish','$folios','0','$nombre','$fecha','$forma_pago','$metodo_pago','$id','$nombre_hab',$pax,'$notas')";
+        
+        $comentario="rfc_propio ";
+      }
+      //echo $sentencia;
       //echo $sentencia;
       //echo $sentencia;
       $consulta= $this->realizaConsulta($sentencia,$comentario);
