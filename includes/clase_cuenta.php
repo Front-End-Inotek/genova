@@ -1146,13 +1146,18 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         $fila = mysqli_fetch_array($consulta);
         return $fila;
       }
-      function sacar_cargo($id,$usuario){
-        $sentencia = "SELECT SUM(cargo) AS total_cargo FROM cuenta WHERE mov=$id AND id_usuario=$usuario";
-        // echo $sentencia;
+      function sacar_cargo($id,$usuario,$clave){
+        $sentencia = "SELECT SUM(cargo) AS total_cargo FROM cuenta WHERE mov=$id AND id_usuario=$usuario and corte=0 and forma_pago=$clave";
+        //echo $sentencia;
         $comentario="Obtener el total de cargos y abonos con respecto al ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         $fila = mysqli_fetch_array($consulta);
         return $fila['total_cargo'];
+      }
+      function cambiar_cargo($id,$usuario,$clave){
+        $sentencia = "UPDATE `cuenta` SET `corte`=1 WHERE mov=$id AND id_usuario=$usuario and corte=0 and forma_pago=$clave";
+        $comentario="Obtener el total de cargos y abonos con respecto al ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
       // Obtener el total de abonos del dia actual
       function saber_total_abonos($usuario_id){

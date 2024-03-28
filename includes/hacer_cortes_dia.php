@@ -242,7 +242,7 @@
           $listas[$fila['mov']]['observaciones']=$fila_cuenta['observacion'];
         }
         if (!isset($listas[$fila['mov']]['cargo'])){
-          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_GET['usuario_id']);
+          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_GET['usuario_id'],$clave);
           $listas[$fila['mov']]['cargo']=$fila_cargo;
           $total_cargo+=$fila_cargo;
         }

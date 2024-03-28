@@ -308,8 +308,8 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $total_cargo=0;
   $total_abono=0;
   $pdf->SetFont('Arial', 'B', 10);
-  $pdf->Cell( 278 , 5, "Tickets", 0, 0,'C');
-  $pdf->ln();
+  /* $pdf->Cell( 278 , 5, "Tickets", 0, 0,'C');
+  $pdf->ln(); */
   $abonos=array();
   $consulta_abono=$ticket->tipo_abonos();
   
@@ -321,7 +321,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   foreach ($abonos as $clave => $valor){
     $listas=array();
     $consulta=$ticket->sacar_tickets_corte($_POST['usuario_id'],$clave);
-    echo $_GET['usuario_id'].$clave;
+    //echo $_GET['usuario_id'].$clave;
     $total_cargo=0;
     $total_abono=0;
     if ($consulta->num_rows > 0) {
@@ -335,11 +335,18 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         }else{
           $listas[$fila['mov']]['folio']=$fila['id'];
         }
-        $listas[$fila['mov']]['observaciones']=$fila['comentario'];
-
         $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
+        if (isset($listas[$fila['mov']]['observaciones'])){
+          if ($fila_cuenta['observacion']){
+            $listas[$fila['mov']]['observaciones']=$listas[$fila['mov']]['observaciones']."|".$fila_cuenta['observacion'];
+          }
+        }else{
+          $listas[$fila['mov']]['observaciones']=$fila_cuenta['observacion'];
+        }
         if (!isset($listas[$fila['mov']]['cargo'])){
-          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_GET['usuario_id']);
+          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_POST['usuario_id'],$clave);
+          //cambiar estado de cargos
+          $cuenta->cambiar_cargo($fila['mov'],$_POST['usuario_id'],$clave);
           $listas[$fila['mov']]['cargo']=$fila_cargo;
           $total_cargo+=$fila_cargo;
         }
@@ -351,36 +358,49 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           $total_abono+=$fila_cuenta['abono'];
         }
         
-        $listas[$fila['mov']]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
+        $listas[$fila['mov']]['usuario']=$usuario->obtengo_nombre_completo($_POST['usuario_id']);
       }
 
-      $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
-      $pdf->Cell( 30 , 5, 'Folio casa', 1, 0, 'C');
-      $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
-      $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
-      $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
-      $pdf->Cell( 30 , 5, 'Usuario', 1, 0, 'C');
-      $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
-      $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
-      $pdf->ln();
+      
       $total=0;
       
       $consulta=$ticket->sacar_tickets_corte($_POST['usuario_id'],$clave);
       if ($consulta->num_rows > 0) {
         $pdf->Cell( 278 , 5, $valor, 0, 0,'C');
         $pdf->ln();
+        $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Folio casa', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
+        $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Usuario', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
+        $pdf->ln();
         // La consulta no está vacía, realiza alguna acción
         foreach ($listas as $item) {
+            $listaObservaciones=explode("|",$item['observaciones']);
             $pdf->SetFont('Arial', '', 10);
             $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['folio_casa'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['folio'], 1, 0, 'C');
-            $pdf->Cell( 68 , 5, $item['observaciones'],1, 0, 'C');
+            $pdf->Cell( 68 , 5, $listaObservaciones[0],1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['usuario'], 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
             $pdf->ln();
+            for ($i=1; $i<count($listaObservaciones); $i++){
+              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
+              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
+              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
+              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
+              $pdf->Cell( 68 , 5, $listaObservaciones[$i],1, 0, 'C');
+              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
+              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
+              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
+              $pdf->ln();
+            }
           
         }
         $pdf->Cell( 188 , 5, "", 0, 0, 'C');
@@ -401,7 +421,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $hoy = date('Y-m-d');
   // Cambiar concepto a inactivo
   $concepto->cambiar_activoGlobal($_POST['usuario_id']);
-
+  
   // Cambiar ticket a estado 1 (en corte) y poner el corte que le corresponde
   $ticket->editar_estado_corteGlobal($_POST['usuario_id'],$corte_id,2);
 
