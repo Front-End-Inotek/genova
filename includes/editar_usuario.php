@@ -197,6 +197,26 @@
 
         <section class="form_checks_container">
           <div class="form_checks_title">
+            <p>Estadisticas</p>
+          </div>
+          <div class="form_checks_container">
+
+            <div class="form-check form-check-inline">';
+              if($usuario->ver_graficas==0){
+                echo '<input class="form-check-input" type="checkbox" id="ver_graficas" >';
+              }else{
+                echo '<input class="form-check-input" type="checkbox" id="ver_graficas" checked >';
+              }
+              echo '   
+              <label class="form-check-label" for="ver_graficas">Ver</label>
+            </div>
+            </div>
+          </section>
+
+          <hr>
+
+        <section class="form_checks_container">
+          <div class="form_checks_title">
             <p>Usuario</p>
           </div>
           <div class="form_checks_container">

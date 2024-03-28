@@ -31,7 +31,7 @@
 
 				<section class="aside_nav_links">';
 
-				if($usuario->nivel == 0 || $usuario->nivel == 1){
+				if($usuario->nivel == 0 || $usuario->nivel == 1 || $usuario->ver_graficas == 1){
 					echo '
 					<div class="aside_nav_link_container" onclick="graficas(); handleSiceTable();">
 						<img class="aside_nav_link" src="./assets/icons-nav/estadistica.svg" />
@@ -155,7 +155,7 @@
 						<div class="aside_nav_link_containerInfo_links" id="4">
 							<ul class="aside_nav_links_list">
 							<li class="aside_ruta" onclick="ver_cortes(); handleSiceTable();">Historial cortes usuario</li>
-							<li class="aside_ruta" onclick="hacer_cortes_dia(); handleSiceTable();">Corte diario usuario</li>
+							<!-- <li class="aside_ruta" onclick="hacer_cortes_dia(); handleSiceTable();">Corte diario usuario</li> -->
 							<li class="aside_ruta" onclick="hacer_cortes(0); handleSiceTable();">Resumen transacciones</li>
 							</ul>
 						</div>
