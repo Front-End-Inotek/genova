@@ -123,7 +123,7 @@
 							';
 						}
 						echo '
-							<li class="aside_ruta" onclick="corte_diario(); handleSiceTable();">Corte diario</li>
+							<!--<li class="aside_ruta" onclick="corte_diario(); handleSiceTable();">Corte diario</li>--!>
 							<li class="aside_ruta" onclick="pronosticos(); handleSiceTable();">Pronosticos de ocupación</li>
 						';
 						$permisos_reportes_diarios=$usuario->reporte_ver;
@@ -155,7 +155,7 @@
 						<div class="aside_nav_link_containerInfo_links" id="4">
 							<ul class="aside_nav_links_list">
 							<li class="aside_ruta" onclick="ver_cortes(); handleSiceTable();">Historial cortes usuario</li>
-							<!-- <li class="aside_ruta" onclick="hacer_cortes_dia(); handleSiceTable();">Corte diario usuario</li> -->
+							<li class="aside_ruta" onclick="hacer_cortes_dia(); handleSiceTable();">Corte diario usuario</li>
 							<li class="aside_ruta" onclick="hacer_cortes(0); handleSiceTable();">Resumen transacciones</li>
 							</ul>
 						</div>
