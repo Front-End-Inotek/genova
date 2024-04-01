@@ -1147,15 +1147,14 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         return $fila;
       }
       function sacar_cargo($id,$usuario,$clave){
-        $sentencia = "SELECT SUM(cargo) AS total_cargo FROM cuenta WHERE mov=$id AND id_usuario=$usuario and corte=0 and forma_pago=$clave";
+        $sentencia = "SELECT * FROM cuenta WHERE  id_usuario=$usuario and corte=0 and forma_pago=$clave";
         //echo $sentencia;
         $comentario="Obtener el total de cargos y abonos con respecto al ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
-        $fila = mysqli_fetch_array($consulta);
-        return $fila['total_cargo'];
+        return $consulta;
       }
       function cambiar_cargo($id,$usuario,$clave){
-        $sentencia = "UPDATE `cuenta` SET `corte`=1 WHERE mov=$id AND id_usuario=$usuario and corte=0 and forma_pago=$clave";
+        $sentencia = "UPDATE `cuenta` SET `corte`=1 WHERE id_usuario=$usuario and corte=0 and forma_pago=$clave";
         $comentario="Obtener el total de cargos y abonos con respecto al ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }

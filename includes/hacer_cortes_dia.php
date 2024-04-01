@@ -222,40 +222,47 @@
     $consulta=$ticket->sacar_tickets_corte($_GET['usuario_id'],$clave);
     $total_cargo=0;
     $total_abono=0;
+    $c=0;
+    $lmov=[];
     if ($consulta->num_rows > 0) {
+      
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $listas[$fila['mov']]['fecha']=$fila['fecha'];
-        $listas[$fila['mov']]['folio_casa']=$fila['mov'];
-        $listas[$fila['mov']]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']);
-        if (isset($listas[$fila['mov']]['folio'])){
-          $listas[$fila['mov']]['folio']=$listas[$fila['mov']]['folio'].", ".$fila['id'];
-        }else{
-          $listas[$fila['mov']]['folio']=$fila['id'];
+        $listas[$c]['fecha']=$fila['fecha'];
+        $listas[$c]['folio_casa']=$fila['mov'];
+        if(!in_array($fila['mov'],$lmov)){
+          array_push($lmov, $fila['mov']);
         }
+        $listas[$c]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']);
+        $listas[$c]['folio']=$fila['id'];
         $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
-        if (isset($listas[$fila['mov']]['observaciones'])){
-          if ($fila_cuenta['observacion']){
-            $listas[$fila['mov']]['observaciones']=$listas[$fila['mov']]['observaciones']."<br>".$fila_cuenta['observacion'];
-          }
-        }else{
-          $listas[$fila['mov']]['observaciones']=$fila_cuenta['observacion'];
-        }
-        if (!isset($listas[$fila['mov']]['cargo'])){
-          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_GET['usuario_id'],$clave);
-          $listas[$fila['mov']]['cargo']=$fila_cargo;
-          $total_cargo+=$fila_cargo;
-        }
-        if (isset($listas[$fila['mov']]['abono'])){
-          $listas[$fila['mov']]['abono']=$listas[$fila['mov']]['abono']+$fila_cuenta['abono'];
-          $total_abono+=$fila_cuenta['abono'];
-        }else{
-          $listas[$fila['mov']]['abono']=$fila_cuenta['abono'];
-          $total_abono+=$fila_cuenta['abono'];
-        }
-        
-        $listas[$fila['mov']]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
+        $listas[$c]['observaciones']=$fila_cuenta['observacion'];
+        $listas[$c]['cargo']=0;
+        $listas[$c]['abono']=$fila_cuenta['abono'];
+        $total_abono+=$fila_cuenta['abono'];
+        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
+        $c+=1;
       }
+      //var_dump($lmov);
+    }
+    $consulta2=$cuenta->sacar_cargo($lmov,$_GET['usuario_id'],$clave);
+    if ($consulta2->num_rows > 0) {
+      while ($fila2 = mysqli_fetch_array($consulta2))
+      {
+        $listas[$c]['fecha']=date('Y-m-d H:i', $fila2['fecha']);
+        $listas[$c]['folio_casa']=$fila2['mov'];
+        $listas[$c]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($ticket->obtener_hab_folio_casa($fila2['mov']));
+        $listas[$c]['folio']='-';
+        $listas[$c]['observaciones']=$fila2['observacion'];
+        $listas[$c]['cargo']=$fila2['cargo'];
+        $total_cargo+=$fila2['cargo'];
+        $listas[$c]['abono']=0;
+        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
+        $c+=1;
+      }
+    }
+    if (count($listas) > 0) {
+
       echo '<h3>'.$valor.'</h3>';
       //var_dump($listas);
       echo '

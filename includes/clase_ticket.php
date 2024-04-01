@@ -147,6 +147,13 @@
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
+      function obtener_hab_folio_casa($folio_casa){
+        $sentencia="SELECT id_hab FROM `ticket` WHERE `mov`=$folio_casa LIMIT 1";
+        $comentario="Consulta de tickets en un rango de fechas";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $fila = mysqli_fetch_array($consulta);
+        return $fila['id_hab'];
+      }
       function reporte_tickets_en_rango_fechas_sin_facturar($inicio,$fin){
         $sentencia="SELECT *, ticket.id AS id_ticket, ticket.tiempo AS ticket_fecha FROM ticket
         LEFT JOIN facturas ON ticket.id_factura = facturas.folio
