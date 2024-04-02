@@ -232,7 +232,7 @@
           {
             //echo '<tr>';
             echo '<td>'.$this->saber_nombre($fila['usuario']).'</td>';
-            echo '<td>'.date("d-m-y",$fila['hora']).'</td>';
+            echo '<td>'.date("Y-m-d H:i:s",$fila['hora']).'</td>';
             echo '<td>'.$fila['ip'].'</td>';
             echo '<td>'.$fila['actividad'].'</td>';
             echo '</tr>';
@@ -298,7 +298,7 @@
           {
             //echo '<tr>';
             echo '<td>'.$this->saber_nombre($fila['usuario']).'</td>';
-            echo '<td>'.date("d-m-y",$fila['hora']).'</td>';
+            echo '<td>'.date("Y-m-d H:i:s",$fila['hora']).'</td>';
             echo '<td>'.$fila['ip'].'</td>';
             echo '<td>'.$fila['actividad'].'</td>';
             echo '</tr>';
