@@ -7,12 +7,14 @@
   include_once("clase_hab.php");
   include_once("clase_cuenta.php");
   include_once("clase_usuario.php");
+  include_once("clase_movimiento.php");
   $usuario=NEW Usuario(0);
   $cuenta=NEW Cuenta(0);
   $hab= NEW Hab(0);
   $ticket= NEW Ticket(0);
   $tipo= NEW Tipo(0);
   $forma_pago= NEW Forma_pago(0);
+  $cmov=NEW Movimiento(0);
   /*$ticket_inicial= $ticket->ticket_ini();
   $ticket_final= $ticket->ticket_fin();
   $inf= NEW Corte_info($ticket_inicial,$ticket_final);*/
@@ -245,22 +247,7 @@
       }
       //var_dump($lmov);
     }
-    $consulta2=$cuenta->sacar_cargo($lmov,$_GET['usuario_id'],$clave);
-    if ($consulta2->num_rows > 0) {
-      while ($fila2 = mysqli_fetch_array($consulta2))
-      {
-        $listas[$c]['fecha']=date('Y-m-d H:i', $fila2['fecha']);
-        $listas[$c]['folio_casa']=$fila2['mov'];
-        $listas[$c]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($ticket->obtener_hab_folio_casa($fila2['mov']));
-        $listas[$c]['folio']='-';
-        $listas[$c]['observaciones']=$fila2['observacion'];
-        $listas[$c]['cargo']=$fila2['cargo'];
-        $total_cargo+=$fila2['cargo'];
-        $listas[$c]['abono']=0;
-        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
-        $c+=1;
-      }
-    }
+    
     if (count($listas) > 0) {
 
       echo '<h3>'.$valor.'</h3>';
@@ -314,6 +301,76 @@
     }
     echo '';
   }
+  $listas=array();
+  $total_cargo=0;
+    $total_abono=0;
+  $consulta2=$cuenta->sacar_cargo($lmov,$_GET['usuario_id'],13);
+    if ($consulta2->num_rows > 0) {
+      while ($fila2 = mysqli_fetch_array($consulta2))
+      {
+        $listas[$c]['fecha']=date('Y-m-d H:i', $fila2['fecha']);
+        $listas[$c]['folio_casa']=$fila2['mov'];
+        $listas[$c]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($cmov->obtener_hab_folio_casa($fila2['mov']));
+        $listas[$c]['folio']='-';
+        $listas[$c]['observaciones']=$fila2['observacion'];
+        $listas[$c]['cargo']=$fila2['cargo'];
+        $total_cargo+=$fila2['cargo'];
+        $listas[$c]['abono']=0;
+        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
+        $c+=1;
+      }
+    }
+    if (count($listas) > 0) {
+
+      echo '<h3>Cargos</h3>';
+      //var_dump($listas);
+      echo '
+        <div class="col">
+          <div class="table-responsive" id="tabla_tipo">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="table-primary-encabezado text-center">
+                <th>Fecha</th>
+                <th>Folio casa</th>
+                <th>Cuarto</th>
+                <th>FPosteo</th>
+                <th>Obsevaciones</th>
+                <th>Usuario</th>
+                <th>Cargo</th>
+                <th>Abono</th>
+                </tr>
+              </thead>
+              <tbody>';
+                foreach ($listas as $item) {
+                  if ($item['cargo']>0 || $item['abono']>0){
+                    echo'
+                    <tr class="text-center">
+                      <td>'.$item['fecha'].'</td>
+                      <td>'.$item['folio_casa'].'</td>
+                      <td>'.$item['cuarto'].'</td>
+                      <td>'.$item['folio'].'</td>
+                      <td>'.$item['observaciones'].'</td>
+                      <td>'.$item['usuario'].'</td>
+                      <td>$'.number_format($item['cargo'],2).'</td>
+                      <td>$'.number_format($item['abono'],2).'</td>
+                    </tr>';
+                  }
+                }
+              echo'
+                <tr class="text-center">
+                  <td colspan="5"></td>
+                  <th>Total:</th>
+                  <th class="total_corte">$'.number_format($total_cargo,2).'</th>
+                  <th class="total_corte">$'.number_format($total_abono,2).'</th>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ';
+      $bandera = $bandera + 1;
+    }
   if($bandera <= 0) {
     echo '
     <div class="alert alert-warning" role="alert">

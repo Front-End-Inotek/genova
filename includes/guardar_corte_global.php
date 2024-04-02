@@ -11,6 +11,7 @@
   include_once("clase_tipo.php");
   include_once("clase_usuario.php");
   include_once("clase_hab.php");
+  include_once("clase_movimiento.php");
   $labels= NEW Labels(0);
   $forma_pago= NEW Forma_pago(0);
   $corte= NEW Corte(0);
@@ -22,6 +23,7 @@
   $tipo= NEW Tipo(0);
   $hab= NEW Hab(0);
   $usuario= NEW Usuario(0);
+  $cmov= NEW Movimiento(0);
   // Guardar corte
   $cantidad_habitaciones= $inf->total_hab;
   $total_habitaciones= $inf->total_hab;
@@ -334,7 +336,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         if(!in_array($fila['mov'],$lmov)){
           array_push($lmov, $fila['mov']);
         }
-        $listas[$c]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']);
+        $listas[$c]['cuarto']=$hab->mostrar_nombre_hab($fila['id_hab']);
         $listas[$c]['folio']=$fila['id'];
         $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
         $listas[$c]['observaciones']=$fila_cuenta['observacion'];
@@ -346,23 +348,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       }
       //var_dump($lmov);
     }
-    $consulta2=$cuenta->sacar_cargo($lmov,$_POST['usuario_id'],$clave);
-    if ($consulta2->num_rows > 0) {
-      while ($fila2 = mysqli_fetch_array($consulta2))
-      {
-        $listas[$c]['fecha']=date('Y-m-d H:i', $fila2['fecha']);
-        $listas[$c]['folio_casa']=$fila2['mov'];
-        $listas[$c]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($ticket->obtener_hab_folio_casa($fila2['mov']));
-        $listas[$c]['folio']='-';
-        $listas[$c]['observaciones']=$fila2['observacion'];
-        $listas[$c]['cargo']=$fila2['cargo'];
-        $total_cargo+=$fila2['cargo'];
-        $listas[$c]['abono']=0;
-        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_POST['usuario_id']);
-        $c+=1;
-      }
-      $cuenta->cambiar_cargo($fila2['mov'],$_POST['usuario_id'],$clave);
-    }
+    
     
     if (count($listas) > 0) {
 
@@ -403,6 +389,57 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->ln();
       }
     }
+    $listas=array();
+    $total_cargo=0;
+    $total_abono=0;
+    $consulta2=$cuenta->sacar_cargo($lmov,$_POST['usuario_id'],13);
+    if ($consulta2->num_rows > 0) {
+      while ($fila2 = mysqli_fetch_array($consulta2))
+      {
+        $listas[$c]['fecha']=date('Y-m-d H:i', $fila2['fecha']);
+        $listas[$c]['folio_casa']=$fila2['mov'];
+        $listas[$c]['cuarto']=$hab->mostrar_nombre_hab($cmov->obtener_hab_folio_casa($fila2['mov']));
+        $listas[$c]['folio']='-';
+        $listas[$c]['observaciones']=$fila2['observacion'];
+        $listas[$c]['cargo']=$fila2['cargo'];
+        $total_cargo+=$fila2['cargo'];
+        $listas[$c]['abono']=0;
+        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_POST['usuario_id']);
+        $c+=1;
+      }
+      $cuenta->cambiar_cargo($fila2['mov'],$_POST['usuario_id'],13);
+    }
+    $pdf->Cell( 278 , 5, "Cargos", 0, 0,'C');
+        $pdf->ln();
+        $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Folio casa', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
+        $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Usuario', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
+        $pdf->ln();
+        // La consulta no está vacía, realiza alguna acción
+        foreach ($listas as $item) {
+          if ($item['cargo']>0 || $item['abono']>0){
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['folio_casa'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['folio'], 1, 0, 'C');
+            $pdf->Cell( 68 , 5, $item['observaciones'],1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['usuario'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
+            $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
+            $pdf->ln();
+          }
+        }
+        $pdf->Cell( 188 , 5, "", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
+        $pdf->ln();
   
   
   $nueva_etiqueta= $labels->obtener_corte();

@@ -293,6 +293,13 @@
         }
         return $id_huesped;
       }
+      function obtener_hab_folio_casa($folio_casa){
+        $sentencia="SELECT id_hab FROM `movimiento` WHERE `id`=$folio_casa LIMIT 1";
+        $comentario="Consulta hab en movimiento";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $fila = mysqli_fetch_array($consulta);
+        return $fila['id_hab'];
+      }
       // Obtener el id de reservacion de un movimiento
       function saber_id_reservacion($id){
         $id_reservacion= 0;
