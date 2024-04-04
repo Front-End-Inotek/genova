@@ -430,7 +430,7 @@
         }
       }
       // Nos permite seleccionar una habitacion ocupada para cambiar las cuentas
-      function cambiar_cuentas_hab_ocupada($hab_id,$estado,$mov){
+      function cambiar_cuentas_hab_ocupada($hab_id,$estado,$mov,$fa){
         $sentencia = "SELECT * FROM hab WHERE id != $hab_id AND estado = 1";
         $comentario="Nos permite seleccionar una habitacion ocupada para cambiar las cuentas";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -442,6 +442,11 @@
               echo $fila['nombre'];
           echo '</div>';
         }
+        echo '<div class="btn_modal_herramientas btn_editar" onclick="unificar_con_folio_casa('.$hab_id.','.$fa.')" >';
+              echo '<img class="btn_modal_img" src="./assets/iconos_btn/list.svg">';
+              echo "Unificar por folio casa";
+          echo '</div>';
+          
       }
       // Mostramos el movimiento de la habitacion
       function mostrar_mov_hab($id){
@@ -732,7 +737,7 @@
       function habitaciones_reservadas($id){
         $checkin="checkin";
         $web="web";
-        $sentencia = "SELECT * FROM `reservacion` WHERE `tipo_hab`='$id' AND `nombre_reserva`!='$checkin' AND `canal_reserva`!='$web' ";
+        $sentencia = "SELECT * FROM `reservacion` WHERE `tipo_hab`='$id' AND `nombre_reserva`!='$checkin' AND `canal_reserva`!='$web' AND estado =1";
         //echo $sentencia;
         $comentario="Consultar checkin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -741,21 +746,21 @@
       function habitaciones_reservadas_web($id){
         $checkin="checkin";
         $web="web";
-        $sentencia = "SELECT * FROM `reservacion` WHERE `tipo_hab`='$id' AND `nombre_reserva`!='$checkin' AND `canal_reserva`='$web' ";
+        $sentencia = "SELECT * FROM `reservacion` WHERE `tipo_hab`='$id' AND `nombre_reserva`!='$checkin' AND `canal_reserva`='$web' AND estado =1";
         //echo $sentencia;
         $comentario="Consultar checkin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
       function llegadas_huespedes_dia($entrada){
-        $sentencia = "SELECT * FROM `reservacion` WHERE `fecha_entrada`='$entrada' ";
+        $sentencia = "SELECT * FROM `reservacion` WHERE `fecha_entrada`='$entrada' AND estado =1";
         //echo $sentencia;
         $comentario="Consultar checkin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         return $consulta;
       }
       function salidas_huespedes_dia($salida){
-        $sentencia = "SELECT * FROM `reservacion` WHERE `fecha_salida`='$salida' ";
+        $sentencia = "SELECT * FROM `reservacion` WHERE `fecha_salida`='$salida' AND estado =1";
         //echo $sentencia;
         $comentario="Consultar checkin";
         $consulta= $this->realizaConsulta($sentencia,$comentario);

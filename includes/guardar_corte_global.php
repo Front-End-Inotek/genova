@@ -11,6 +11,7 @@
   include_once("clase_tipo.php");
   include_once("clase_usuario.php");
   include_once("clase_hab.php");
+  include_once("clase_movimiento.php");
   $labels= NEW Labels(0);
   $forma_pago= NEW Forma_pago(0);
   $corte= NEW Corte(0);
@@ -22,6 +23,7 @@
   $tipo= NEW Tipo(0);
   $hab= NEW Hab(0);
   $usuario= NEW Usuario(0);
+  $cmov= NEW Movimiento(0);
   // Guardar corte
   $cantidad_habitaciones= $inf->total_hab;
   $total_habitaciones= $inf->total_hab;
@@ -321,51 +323,39 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   foreach ($abonos as $clave => $valor){
     $listas=array();
     $consulta=$ticket->sacar_tickets_corte($_POST['usuario_id'],$clave);
-    //echo $_GET['usuario_id'].$clave;
     $total_cargo=0;
     $total_abono=0;
+    $c=0;
+    $lmov=[];
     if ($consulta->num_rows > 0) {
+      
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $listas[$fila['mov']]['fecha']=$fila['fecha'];
-        $listas[$fila['mov']]['folio_casa']=$fila['mov'];
-        $listas[$fila['mov']]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']);
-        if (isset($listas[$fila['mov']]['folio'])){
-          $listas[$fila['mov']]['folio']=$listas[$fila['mov']]['folio'].", ".$fila['id'];
-        }else{
-          $listas[$fila['mov']]['folio']=$fila['id'];
+        $listas[$c]['fecha']=$fila['fecha'];
+        $listas[$c]['folio_casa']=$fila['mov'];
+        if(!in_array($fila['mov'],$lmov)){
+          array_push($lmov, $fila['mov']);
         }
+        $listas[$c]['cuarto']=$hab->mostrar_nombre_hab($fila['id_hab']);
+        $listas[$c]['folio']=$fila['id'];
         $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
-        if (isset($listas[$fila['mov']]['observaciones'])){
-          if ($fila_cuenta['observacion']){
-            $listas[$fila['mov']]['observaciones']=$listas[$fila['mov']]['observaciones']."|".$fila_cuenta['observacion'];
-          }
-        }else{
-          $listas[$fila['mov']]['observaciones']=$fila_cuenta['observacion'];
-        }
-        if (!isset($listas[$fila['mov']]['cargo'])){
-          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_POST['usuario_id'],$clave);
-          //cambiar estado de cargos
-          $cuenta->cambiar_cargo($fila['mov'],$_POST['usuario_id'],$clave);
-          $listas[$fila['mov']]['cargo']=$fila_cargo;
-          $total_cargo+=$fila_cargo;
-        }
-        if (isset($listas[$fila['mov']]['abono'])){
-          $listas[$fila['mov']]['abono']=$listas[$fila['mov']]['abono']+$fila_cuenta['abono'];
-          $total_abono+=$fila_cuenta['abono'];
-        }else{
-          $listas[$fila['mov']]['abono']=$fila_cuenta['abono'];
-          $total_abono+=$fila_cuenta['abono'];
-        }
-        
-        $listas[$fila['mov']]['usuario']=$usuario->obtengo_nombre_completo($_POST['usuario_id']);
+        $listas[$c]['observaciones']=$fila_cuenta['observacion'];
+        $listas[$c]['cargo']=0;
+        $listas[$c]['abono']=$fila_cuenta['abono'];
+        $total_abono+=$fila_cuenta['abono'];
+        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_POST['usuario_id']);
+        $c+=1;
       }
+      //var_dump($lmov);
+    }
+    
+    
+    if (count($listas) > 0) {
 
       
       $total=0;
       
-      $consulta=$ticket->sacar_tickets_corte($_POST['usuario_id'],$clave);
-      if ($consulta->num_rows > 0) {
+      
         $pdf->Cell( 278 , 5, $valor, 0, 0,'C');
         $pdf->ln();
         $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
@@ -379,29 +369,18 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->ln();
         // La consulta no está vacía, realiza alguna acción
         foreach ($listas as $item) {
-            $listaObservaciones=explode("|",$item['observaciones']);
+          if ($item['cargo']>0 || $item['abono']>0){
             $pdf->SetFont('Arial', '', 10);
             $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['folio_casa'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['folio'], 1, 0, 'C');
-            $pdf->Cell( 68 , 5, $listaObservaciones[0],1, 0, 'C');
+            $pdf->Cell( 68 , 5, $item['observaciones'],1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['usuario'], 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
             $pdf->ln();
-            for ($i=1; $i<count($listaObservaciones); $i++){
-              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
-              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
-              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
-              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
-              $pdf->Cell( 68 , 5, $listaObservaciones[$i],1, 0, 'C');
-              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
-              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
-              $pdf->Cell( 30 , 5, '', 1, 0, 'C');
-              $pdf->ln();
-            }
-          
+          }
         }
         $pdf->Cell( 188 , 5, "", 0, 0, 'C');
         $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
@@ -410,7 +389,58 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->ln();
       }
     }
-  }
+    $listas=array();
+    $total_cargo=0;
+    $total_abono=0;
+    $consulta2=$cuenta->sacar_cargo($lmov,$_POST['usuario_id'],13);
+    if ($consulta2->num_rows > 0) {
+      while ($fila2 = mysqli_fetch_array($consulta2))
+      {
+        $listas[$c]['fecha']=date('Y-m-d H:i', $fila2['fecha']);
+        $listas[$c]['folio_casa']=$fila2['mov'];
+        $listas[$c]['cuarto']=$hab->mostrar_nombre_hab($cmov->obtener_hab_folio_casa($fila2['mov']));
+        $listas[$c]['folio']='-';
+        $listas[$c]['observaciones']=$fila2['observacion'];
+        $listas[$c]['cargo']=$fila2['cargo'];
+        $total_cargo+=$fila2['cargo'];
+        $listas[$c]['abono']=0;
+        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_POST['usuario_id']);
+        $c+=1;
+      }
+      $cuenta->cambiar_cargo($fila2['mov'],$_POST['usuario_id'],13);
+    }
+    $pdf->Cell( 278 , 5, "Cargos", 0, 0,'C');
+        $pdf->ln();
+        $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Folio casa', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
+        $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Usuario', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
+        $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
+        $pdf->ln();
+        // La consulta no está vacía, realiza alguna acción
+        foreach ($listas as $item) {
+          if ($item['cargo']>0 || $item['abono']>0){
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['folio_casa'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['folio'], 1, 0, 'C');
+            $pdf->Cell( 68 , 5, $item['observaciones'],1, 0, 'C');
+            $pdf->Cell( 30 , 5, $item['usuario'], 1, 0, 'C');
+            $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
+            $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
+            $pdf->ln();
+          }
+        }
+        $pdf->Cell( 188 , 5, "", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
+        $pdf->ln();
+  
   
   $nueva_etiqueta= $labels->obtener_corte();
   //$nueva_etiqueta= $nueva_etiqueta - 1;
@@ -428,7 +458,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $ticket->editar_estadoGlobal($_POST['usuario_id'],$corte_id,2);
   $labels->actualizar_etiqueta_corte();
   $cuenta->editar_estadoGlobal($_POST['usuario_id']);
-  $logs->guardar_log($_POST['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta.' del '.$dia.' de '.$mes.' de '.$anio);
+  $logs->guardar_log($_POST['usuario_id'],"Reporte corte con etiqueta: ".$nueva_etiqueta);
   
   //$pdf->Output("reporte_corte.pdf","I");// I muestra y F descarga con directorio y D descarga en descargas
   $pdf->Output("../reportes/corte/reporte_corte_".$nueva_etiqueta.".pdf","F");

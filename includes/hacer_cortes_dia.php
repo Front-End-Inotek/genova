@@ -7,12 +7,14 @@
   include_once("clase_hab.php");
   include_once("clase_cuenta.php");
   include_once("clase_usuario.php");
+  include_once("clase_movimiento.php");
   $usuario=NEW Usuario(0);
   $cuenta=NEW Cuenta(0);
   $hab= NEW Hab(0);
   $ticket= NEW Ticket(0);
   $tipo= NEW Tipo(0);
   $forma_pago= NEW Forma_pago(0);
+  $cmov=NEW Movimiento(0);
   /*$ticket_inicial= $ticket->ticket_ini();
   $ticket_final= $ticket->ticket_fin();
   $inf= NEW Corte_info($ticket_inicial,$ticket_final);*/
@@ -222,40 +224,32 @@
     $consulta=$ticket->sacar_tickets_corte($_GET['usuario_id'],$clave);
     $total_cargo=0;
     $total_abono=0;
+    $c=0;
+    $lmov=[];
     if ($consulta->num_rows > 0) {
+      
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $listas[$fila['mov']]['fecha']=$fila['fecha'];
-        $listas[$fila['mov']]['folio_casa']=$fila['mov'];
-        $listas[$fila['mov']]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']);
-        if (isset($listas[$fila['mov']]['folio'])){
-          $listas[$fila['mov']]['folio']=$listas[$fila['mov']]['folio'].", ".$fila['id'];
-        }else{
-          $listas[$fila['mov']]['folio']=$fila['id'];
+        $listas[$c]['fecha']=$fila['fecha'];
+        $listas[$c]['folio_casa']=$fila['mov'];
+        if(!in_array($fila['mov'],$lmov)){
+          array_push($lmov, $fila['mov']);
         }
+        $listas[$c]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($fila['id_hab']);
+        $listas[$c]['folio']=$fila['id'];
         $fila_cuenta=$cuenta->sacar_cargo_abono($fila['id']);
-        if (isset($listas[$fila['mov']]['observaciones'])){
-          if ($fila_cuenta['observacion']){
-            $listas[$fila['mov']]['observaciones']=$listas[$fila['mov']]['observaciones']."<br>".$fila_cuenta['observacion'];
-          }
-        }else{
-          $listas[$fila['mov']]['observaciones']=$fila_cuenta['observacion'];
-        }
-        if (!isset($listas[$fila['mov']]['cargo'])){
-          $fila_cargo=$cuenta->sacar_cargo($fila['mov'],$_GET['usuario_id'],$clave);
-          $listas[$fila['mov']]['cargo']=$fila_cargo;
-          $total_cargo+=$fila_cargo;
-        }
-        if (isset($listas[$fila['mov']]['abono'])){
-          $listas[$fila['mov']]['abono']=$listas[$fila['mov']]['abono']+$fila_cuenta['abono'];
-          $total_abono+=$fila_cuenta['abono'];
-        }else{
-          $listas[$fila['mov']]['abono']=$fila_cuenta['abono'];
-          $total_abono+=$fila_cuenta['abono'];
-        }
-        
-        $listas[$fila['mov']]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
+        $listas[$c]['observaciones']=$fila_cuenta['observacion'];
+        $listas[$c]['cargo']=0;
+        $listas[$c]['abono']=$fila_cuenta['abono'];
+        $total_abono+=$fila_cuenta['abono'];
+        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
+        $c+=1;
       }
+      //var_dump($lmov);
+    }
+    
+    if (count($listas) > 0) {
+
       echo '<h3>'.$valor.'</h3>';
       //var_dump($listas);
       echo '
@@ -307,6 +301,76 @@
     }
     echo '';
   }
+  $listas=array();
+  $total_cargo=0;
+    $total_abono=0;
+  $consulta2=$cuenta->sacar_cargo($lmov,$_GET['usuario_id'],13);
+    if ($consulta2->num_rows > 0) {
+      while ($fila2 = mysqli_fetch_array($consulta2))
+      {
+        $listas[$c]['fecha']=date('Y-m-d H:i', $fila2['fecha']);
+        $listas[$c]['folio_casa']=$fila2['mov'];
+        $listas[$c]['cuarto']='Habitacion '.$hab->mostrar_nombre_hab($cmov->obtener_hab_folio_casa($fila2['mov']));
+        $listas[$c]['folio']='-';
+        $listas[$c]['observaciones']=$fila2['observacion'];
+        $listas[$c]['cargo']=$fila2['cargo'];
+        $total_cargo+=$fila2['cargo'];
+        $listas[$c]['abono']=0;
+        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_GET['usuario_id']);
+        $c+=1;
+      }
+    }
+    if (count($listas) > 0) {
+
+      echo '<h3>Cargos</h3>';
+      //var_dump($listas);
+      echo '
+        <div class="col">
+          <div class="table-responsive" id="tabla_tipo">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="table-primary-encabezado text-center">
+                <th>Fecha</th>
+                <th>Folio casa</th>
+                <th>Cuarto</th>
+                <th>FPosteo</th>
+                <th>Obsevaciones</th>
+                <th>Usuario</th>
+                <th>Cargo</th>
+                <th>Abono</th>
+                </tr>
+              </thead>
+              <tbody>';
+                foreach ($listas as $item) {
+                  if ($item['cargo']>0 || $item['abono']>0){
+                    echo'
+                    <tr class="text-center">
+                      <td>'.$item['fecha'].'</td>
+                      <td>'.$item['folio_casa'].'</td>
+                      <td>'.$item['cuarto'].'</td>
+                      <td>'.$item['folio'].'</td>
+                      <td>'.$item['observaciones'].'</td>
+                      <td>'.$item['usuario'].'</td>
+                      <td>$'.number_format($item['cargo'],2).'</td>
+                      <td>$'.number_format($item['abono'],2).'</td>
+                    </tr>';
+                  }
+                }
+              echo'
+                <tr class="text-center">
+                  <td colspan="5"></td>
+                  <th>Total:</th>
+                  <th class="total_corte">$'.number_format($total_cargo,2).'</th>
+                  <th class="total_corte">$'.number_format($total_abono,2).'</th>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ';
+      $bandera = $bandera + 1;
+    }
   if($bandera <= 0) {
     echo '
     <div class="alert alert-warning" role="alert">
