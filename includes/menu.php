@@ -190,10 +190,23 @@
 							<img class="aside_nav_link aside_nav_link_text arrow-link" src="./assets/icons-nav/arrow.svg" onclick="showMenu(4)"/>
 						</div>
 						<div class="aside_nav_link_containerInfo_links" id="4">
-							<ul class="aside_nav_links_list">
-							<li class="aside_ruta" onclick="ver_cortes(); handleSiceTable();">Historial cortes usuario</li>
-							<!-- <li class="aside_ruta" onclick="hacer_cortes_dia(); handleSiceTable();">Corte diario usuario</li> -->
-							<li class="aside_ruta" onclick="hacer_cortes(0); handleSiceTable();">Resumen transacciones</li>
+							<ul class="aside_nav_links_list">';
+							if ( $usuario->historial_cortes_u == 1 ) {
+								echo '
+									<li class="aside_ruta" onclick="ver_cortes(); handleSiceTable();">Historial cortes usuario</li>
+								';
+							}
+							if ( $usuario->corte_diario_u == 1 ) {
+								echo '
+									<li class="aside_ruta" onclick="hacer_cortes_dia(); handleSiceTable();">Corte diario usuario</li>
+								';
+							}
+							if ( $usuario->resumen_transacciones == 1 ) {
+								echo '
+									<li class="aside_ruta" onclick="hacer_cortes(0); handleSiceTable();">Resumen transacciones</li>
+								';
+							}
+							echo '
 							</ul>
 						</div>
 					</div>';
