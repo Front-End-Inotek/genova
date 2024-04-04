@@ -4856,7 +4856,6 @@ function modificar_usuario(id){
     var auditoria_ver= document.getElementById("auditoria_ver").checked;
     var auditoria_editar= document.getElementById("auditoria_editar").checked;
     var llegadas_salidas_ver= document.getElementById("llegadas_salidas_ver").checked;
-
     var ver_facturas = document.getElementById("facturas_ver").checked;
     var ver_cancelar = document.getElementById("facturas_cancelar").checked;
 
@@ -4865,6 +4864,84 @@ function modificar_usuario(id){
     var cortes_y_transacciones = document.getElementById("cortes_y_transacciones").checked;
 
     var ver_graficas = document.getElementById("ver_graficas").checked;
+
+    var check_in = document.getElementById("check_in").checked
+
+    var cuenta_maestra = document.getElementById("cuenta_maestra").checked
+
+    var reporte_diario = document.getElementById("reporte_diario").checked
+
+    var reporte_llegada = document.getElementById("reporte_llegada").checked
+
+    var reporte_salidas = document.getElementById("reporte_salidas").checked
+
+    var saldo_huspedes = document.getElementById("saldo_huspedes").checked
+
+    var edo_centa_fc = document.getElementById("edo_centa_fc").checked
+
+    var ver_reservaciones = document.getElementById("ver_reservaciones").checked
+
+    var agregar_reservaciones = document.getElementById("agregar_reservaciones").checked
+
+    var info_huespedes = document.getElementById("info_huespedes").checked
+
+    var reporte_cancelaciones = document.getElementById("reporte_cancelaciones").checked
+
+    var reporte_cortes = document.getElementById("reporte_cortes").checked
+
+    var cargos_noche = document.getElementById("cargos_noche").checked
+
+    var surtir = document.getElementById("surtir").checked
+
+    var corte_diario = document.getElementById("corte_diario").checked
+
+    var pronosticos = document.getElementById("pronosticos").checked
+
+    var historial_cuentas = document.getElementById("historial_cuentas").checked
+
+    var historial_cortes_u = document.getElementById("historial_cortes_u").checked;
+    
+    var ama_de_llaves = document.getElementById("ama_de_llaves").checked
+
+    var corte_diario_u = document.getElementById("corte_diario_u").checked
+
+    var resumen_transacciones = document.getElementById("resumen_transacciones").checked
+
+    var factura_individual = document.getElementById("factura_individual").checked
+
+    var factura_global = document.getElementById("factura_global").checked
+
+    var buscar_fc = document.getElementById("buscar_fc").checked
+
+    var cancelar_fac = document.getElementById("cancelar_fac").checked
+
+    var bus_fac_fecha = document.getElementById("bus_fac_fecha").checked
+
+    var bus_fac_folio = document.getElementById("bus_fac_folio").checked
+
+    var bus_fac_folio_casa = document.getElementById("bus_fac_folio_casa").checked
+
+    var resumen_fac = document.getElementById("resumen_fac").checked
+
+    var restaurante = document.getElementById("restaurante").checked
+
+    var agregar_res = document.getElementById("agregar_res").checked
+
+    var cat_res = document.getElementById("cat_res").checked
+
+    var invet_res = document.getElementById("invet_res").checked
+
+    var surtir_res = document.getElementById("surtir_res").checked
+
+    var mesas_res = document.getElementById("mesas_res").checked
+
+    var agregar_mesas_res = document.getElementById("agregar_mesas_res").checked
+
+    var tipo_hab = document.getElementById("tipo_hab").checked
+
+    var tarifas_hab = document.getElementById("tarifas_hab").checked
+
+    var ver_hab = document.getElementById("ver_hab").checked
     // console.log(reservacion_preasignar)
     // return
     // Convertir usuario permisos
@@ -5147,7 +5224,239 @@ function modificar_usuario(id){
     } else {
         ver_graficas = 0;
     }
+    if ( check_in ) {
+        check_in = 1;
+    } else {
+        check_in = 0
+    }
 
+    if ( cuenta_maestra ) {
+        cuenta_maestra = 1;
+    } else {
+        cuenta_maestra = 0;
+    }
+
+    if ( reporte_diario ) {
+        reporte_diario = 1;
+    } else {
+        reporte_diario = 0;
+    }
+
+    if ( reporte_llegada ) {
+        reporte_llegada = 1;
+    } else {
+        reporte_llegada = 0;
+    }
+
+    if ( reporte_salidas ) {
+        reporte_salidas = 1;
+    } else {
+        reporte_salidas = 0;
+    }
+
+    if ( saldo_huspedes ) {
+        saldo_huspedes = 1;
+    } else {
+        saldo_huspedes = 0;
+    }
+
+    if ( edo_centa_fc ) {
+        edo_centa_fc = 1;
+    } else {
+        edo_centa_fc = 0;
+    }
+
+    if ( ver_reservaciones ) {
+        ver_reservaciones = 1;
+    } else {
+        ver_reservaciones = 0;
+    }
+
+    if ( agregar_reservaciones ) {
+        agregar_reservaciones = 1;
+    } else {
+        agregar_reservaciones = 0;
+    }
+
+    if ( info_huespedes ) {
+        info_huespedes = 1;
+    } else {
+        info_huespedes = 0;
+    }
+
+    if ( reporte_cancelaciones ) {
+        reporte_cancelaciones = 1;
+    } else {
+        reporte_cancelaciones = 0;
+    }
+
+    if ( reporte_cortes ) {
+        reporte_cortes = 1;
+    } else {
+        reporte_cortes = 0;
+    }
+
+    if ( cargos_noche ) {
+        cargos_noche = 1;
+    } else {
+        cargos_noche = 0;
+    }
+
+    if ( surtir ) {
+        surtir = 1;
+    } else {
+        surtir = 0;
+    }
+
+    if ( corte_diario ) {
+        corte_diario = 1;
+    } else {
+        corte_diario = 0;
+    }
+
+    if ( pronosticos ) {
+        pronosticos = 1;
+    } else {
+        pronosticos = 0;
+    }
+
+    if ( historial_cuentas ) {
+        historial_cuentas = 1;
+    } else {
+        historial_cuentas = 0;
+    }
+
+    if ( ama_de_llaves ) {
+        ama_de_llaves = 1;
+    } else {
+        ama_de_llaves = 0;
+    }
+
+    if ( historial_cortes_u ) {
+        historial_cortes_u = 1;
+    } else {
+        historial_cortes_u = 0;
+    }
+
+    if ( corte_diario_u ) {
+        corte_diario_u = 1;
+    } else {
+        corte_diario_u = 0;
+    }
+
+    if ( resumen_transacciones ) {
+        resumen_transacciones = 1;
+    } else {
+        resumen_transacciones = 0;
+    }
+
+    if ( factura_individual ) {
+        factura_individual = 1;
+    } else {
+        factura_individual = 0;
+    }
+
+    if ( factura_global ) {
+        factura_global = 1;
+    } else {
+        factura_global = 0;
+    }
+
+    if ( buscar_fc ) {
+        buscar_fc = 1;
+    } else {
+        buscar_fc = 0;
+    }
+
+    if ( cancelar_fac ) {
+        cancelar_fac = 1;
+    } else {
+        cancelar_fac = 0;
+    }
+
+    if ( bus_fac_fecha ) {
+        bus_fac_fecha = 1;
+    } else {
+        bus_fac_fecha = 0;
+    }
+
+    if ( bus_fac_folio ) {
+        bus_fac_folio = 1;
+    } else {
+        bus_fac_folio = 0;
+    }
+
+    if ( bus_fac_folio_casa ) {
+        bus_fac_folio_casa = 1;
+    } else {
+        bus_fac_folio_casa = 0;
+    }
+
+    if ( resumen_fac ) {
+        resumen_fac = 1;
+    } else {
+        resumen_fac = 0;
+    }
+
+    if ( restaurante ) {
+        restaurante = 1;
+    } else {
+        restaurante = 0;
+    }
+
+    if ( agregar_res ) {
+        agregar_res = 1;
+    } else {
+        agregar_res = 0;
+    }
+
+    if ( cat_res ) {
+        cat_res = 1;
+    } else {
+        cat_res = 0;
+    }
+
+    if ( invet_res ) {
+        invet_res = 1;
+    } else {
+        invet_res = 0;
+    }
+
+    if ( surtir_res ) {
+        surtir_res = 1;
+    } else {
+        surtir_res = 0;
+    }
+
+    if ( mesas_res ) {
+        mesas_res = 1;
+    } else {
+        mesas_res = 0;
+    }
+
+    if ( agregar_mesas_res ) {
+        agregar_mesas_res = 1;
+    } else {
+        agregar_mesas_res = 0;
+    }
+
+    if ( tipo_hab ) {
+        tipo_hab = 1;
+    } else {
+        tipo_hab = 0;
+    }
+
+    if ( tarifas_hab ) {
+        tarifas_hab = 1;
+    } else {
+        tarifas_hab = 0;
+    }
+
+    if ( ver_hab ) {
+        ver_hab = 1;
+    } else {
+        ver_hab = 0;
+    }
 	if(usuario.length >0 && nivel.length >0){
         //if(contrasena == recontrasena){
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
@@ -5219,7 +5528,46 @@ function modificar_usuario(id){
                     "factura_cancelar" : ver_cancelar,
                     "combinar_cuentas" : combinar_cuentas,
                     "cortes_y_transacciones" : cortes_y_transacciones,
-                    "ver_graficas" : ver_graficas
+                    "ver_graficas" : ver_graficas,
+                    "check_in" : check_in,
+                    "cuenta_maestra" : cuenta_maestra,
+                    "reporte_diario" : reporte_diario,
+                    "reporte_llegada" : reporte_llegada,
+                    "reporte_salidas" : reporte_salidas,
+                    "saldo_huspedes" : saldo_huspedes,
+                    "edo_centa_fc" : edo_centa_fc,
+                    "ver_reservaciones" : ver_reservaciones,
+                    "agregar_reservaciones" : agregar_reservaciones,
+                    "info_huespedes" : info_huespedes,
+                    "reporte_cancelaciones" : reporte_cancelaciones,
+                    "reporte_cortes" : reporte_cortes,
+                    "cargos_noche" : cargos_noche,
+                    "surtir" : surtir,
+                    "corte_diario" : corte_diario,
+                    "pronosticos" : pronosticos,
+                    "historial_cuentas" : historial_cuentas,
+                    "ama_de_llaves" : ama_de_llaves,
+                    "historial_cortes_u" : historial_cortes_u,
+                    "corte_diario_u" : corte_diario_u,
+                    "resumen_transacciones" : resumen_transacciones,
+                    "factura_individual" : factura_individual,
+                    "factura_global" : factura_global,
+                    "buscar_fc" : buscar_fc,
+                    "cancelar_fac" : cancelar_fac,
+                    "bus_fac_fecha" : bus_fac_fecha,
+                    "bus_fac_folio" : bus_fac_folio,
+                    "bus_fac_folio_casa" : bus_fac_folio_casa,
+                    "resumen_fac" : resumen_fac,
+                    "restaurante" : restaurante,
+                    "agregar_res" : agregar_res,
+                    "cat_res" : cat_res,
+                    "invet_res" : invet_res,
+                    "surtir_res" : surtir_res,
+                    "mesas_res" : mesas_res,
+                    "agregar_mesas_res" : agregar_mesas_res,
+                    "tipo_hab" : tipo_hab,
+                    "tarifas_hab" : tarifas_hab,
+                    "ver_hab" : ver_hab
 			};
             //console.log(datos)
 		$.ajax({

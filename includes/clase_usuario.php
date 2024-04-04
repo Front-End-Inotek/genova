@@ -86,8 +86,84 @@
 
       //Graficas
       public $ver_graficas;
-      
 
+      public $check_in;
+
+      public $cuenta_maestra;
+
+      public $reporte_diario;
+      
+      public $reporte_llegada;
+
+      public $reporte_salidas;
+
+      public $saldo_huspedes;
+
+      public $edo_centa_fc;
+
+      public $ver_reservaciones;
+
+      public $agregar_reservaciones;
+
+      public $info_huespedes;
+
+      public $reporte_cancelaciones;
+
+      public $reporte_cortes;
+
+      public $cargos_noche;
+
+      public $surtir;
+
+      public $corte_diario;
+
+      public $pronosticos;
+
+      public $historial_cuentas;
+
+      public $ama_de_llaves;
+
+      public $historial_cortes_u;
+
+      public $corte_diario_u;
+
+      public $resumen_transacciones;
+
+      public $factura_individual;
+
+      public $factura_global;
+
+      public $buscar_fc;
+
+      public $cancelar_fac;
+
+      public $bus_fac_fecha;
+
+      public $bus_fac_folio;
+
+      public $bus_fac_folio_casa;
+
+      public $resumen_fac;
+
+      public $restaurante;
+
+      public $agregar_res;
+
+      public $cat_res;
+
+      public $invet_res;
+
+      public $surtir_res;
+
+      public $mesas_res;
+
+      public $agregar_mesas_res;
+
+      public $tipo_hab;
+
+      public $tarifas_hab;
+
+      public $ver_hab;
       /*function __construct(){
       }*/
       // Constructor
@@ -167,7 +243,85 @@
           $this->cortes_y_transacciones = -1;
 
           $this->ver_graficas = -1;
+
+          $this->check_in = -1;
+
+          $this->cuenta_maestra = -1;
+
+          $this->reporte_diario = -1;
+
+          $this->reporte_llegada = -1;
+
+          $this->reporte_salidas = -1;
+
+          $this->saldo_huspedes = -1;
+
+          $this->edo_centa_fc = -1;
+
+          $this->ver_reservaciones = -1;
+
+          $this->agregar_reservaciones = -1;
+
+          $this->info_huespedes = -1;
           
+          $this->reporte_cancelaciones = -1;
+
+          $this->reporte_cortes = -1;
+
+          $this->cargos_noche = -1;
+
+          $this->surtir = -1;
+
+          $this->corte_diario = -1;
+
+          $this->pronosticos = -1;
+
+          $this->historial_cuentas = -1;
+
+          $this->ama_de_llaves = -1;
+
+          $this->historial_cortes_u = -1;
+
+          $this->corte_diario_u = -1;
+
+          $this->resumen_transacciones = -1;
+
+          $this->factura_individual = -1;
+
+          $this->factura_global = -1;
+
+          $this->buscar_fc = -1;
+
+          $this->cancelar_fac = -1;
+
+          $this->bus_fac_fecha = -1;
+
+          $this->bus_fac_folio = -1;
+
+          $this->bus_fac_folio_casa = -1;
+
+          $this->resumen_fac = -1;
+
+          $this->restaurante = -1;
+
+          $this->agregar_res = -1;
+
+          $this->cat_res = -1;
+
+          $this->invet_res = -1;
+
+          $this->surtir_res = -1;
+
+          $this->mesas_res = -1;
+
+          $this->agregar_mesas_res = -1;
+
+          $this->tipo_hab = -1;
+
+          $this->tarifas_hab = -1;
+
+          $this->ver_hab = -1;
+
         }else{
           $sentencia = "SELECT * FROM usuario WHERE id = $id_usuario LIMIT 1";
          // echo $sentencia ;
@@ -284,6 +438,45 @@
               $this->combinar_cuentas= $fila['combinar_cuentas'];
               $this->cortes_y_transacciones = $fila['cortes_y_transacciones'];
               $this->ver_graficas = $fila['ver_graficas'];
+              $this->check_in = $fila['check_in'];
+              $this->cuenta_maestra = $fila['cuenta_maestra'];
+              $this->reporte_diario = $fila['reporte_diario'];
+              $this->reporte_llegada = $fila['reporte_llegada'];
+              $this->reporte_salidas = $fila['reporte_salidas'];
+              $this->saldo_huspedes = $fila['saldo_huspedes'];
+              $this->edo_centa_fc = $fila['edo_centa_fc'];
+              $this->ver_reservaciones = $fila['ver_reservaciones'];
+              $this->agregar_reservaciones = $fila['agregar_reservaciones'];
+              $this->info_huespedes = $fila['info_huespedes'];
+              $this->reporte_cancelaciones = $fila['reporte_cancelaciones'];
+              $this->reporte_cortes = $fila['reporte_cortes'];
+              $this->cargos_noche = $fila['cargos_noche'];
+              $this->surtir = $fila['surtir'];
+              $this->corte_diario = $fila['corte_diario'];
+              $this->pronosticos = $fila["pronosticos"];
+              $this->historial_cuentas = $fila["historial_cuentas"];
+              $this->ama_de_llaves = $fila["ama_de_llaves"];
+              $this->historial_cortes_u = $fila["historial_cortes_u"];
+              $this->corte_diario_u = $fila["corte_diario_u"];
+              $this->resumen_transacciones = $fila["resumen_transacciones"];
+              $this->factura_individual = $fila["factura_individual"];
+              $this->factura_global = $fila["factura_global"];
+              $this->buscar_fc = $fila["buscar_fc"];
+              $this->cancelar_fac = $fila["cancelar_fac"];
+              $this->bus_fac_fecha = $fila["bus_fac_fecha"];
+              $this->bus_fac_folio = $fila["bus_fac_folio"];
+              $this->bus_fac_folio_casa = $fila["bus_fac_folio_casa"];
+              $this->resumen_fac = $fila["resumen_fac"];
+              $this->restaurante = $fila["restaurante"];
+              $this->agregar_res = $fila["agregar_res"];
+              $this->cat_res = $fila["cat_res"];
+              $this->invet_res = $fila["invet_res"];
+              $this->surtir_res = $fila["surtir_res"];
+              $this->mesas_res = $fila["mesas_res"];
+              $this->agregar_mesas_res = $fila["agregar_mesas_res"];
+              $this->tipo_hab = $fila["tipo_hab"];
+              $this->tarifas_hab = $fila["tarifas_hab"];
+              $this->ver_hab = $fila["ver_hab"];
           }
           $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->huesped_ver+$this->huesped_agregar+$this->huesped_editar+$this->huesped_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_ver+$this->tarifa_agregar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar+$this->reservacion_ver+$this->reservacion_agregar+$this->reservacion_editar+$this->reservacion_borrar+$this->reporte_ver+$this->reporte_agregar+$this->forma_pago_ver+$this->forma_pago_agregar+$this->forma_pago_editar+$this->forma_pago_borrar+$this->inventario_ver+$this->inventario_agregar+$this->inventario_editar+$this->inventario_borrar+$this->inventario_surtir+$this->categoria_ver+$this->categoria_agregar+$this->categoria_editar+$this->categoria_borrar+$this->restaurante_ver+$this->restaurante_agregar+$this->restaurante_editar+$this->restaurante_borrar+$this->cupon_ver+$this->cupon_agregar+$this->cupon_editar+$this->cupon_borrar+$this->logs_ver;
         }  
@@ -625,7 +818,7 @@
           return $cat_paginas;
       }
       // Editar un usuario
-      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reservacion_preasignar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver,$auditoria_ver,$auditoria_editar,$llegadas_salidas_ver,$facturas_ver,$facturas_cancelar,$combinar_cuentas,$cortes_y_transacciones,$ver_graficas){
+      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reservacion_preasignar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver,$auditoria_ver,$auditoria_editar,$llegadas_salidas_ver,$facturas_ver,$facturas_cancelar,$combinar_cuentas,$cortes_y_transacciones,$ver_graficas,$check_in,$cuenta_maestra,$reporte_diario,$reporte_llegada,$reporte_salidas,$saldo_huspedes,$edo_centa_fc,$ver_reservaciones,$agregar_reservaciones,$info_huespedes , $reporte_cancelaciones,$reporte_cortes,$cargos_noche,$surtir,$corte_diario,$pronosticos,$historial_cuentas,$ama_de_llaves,$historial_cortes_u,$corte_diario_u,$resumen_transacciones,$factura_individual,$factura_global,$buscar_fc,$cancelar_fac, $bus_fac_fecha, $bus_fac_folio, $bus_fac_folio_casa, $resumen_fac, $restaurante, $agregar_res, $cat_res, $invet_res, $surtir_res, $mesas_res, $agregar_mesas_res, $tipo_hab, $tarifas_hab, $ver_hab){
         //function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tipo_ver,$tipo_agregar,$tipo_editar,$tipo_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$hab_ver,$hab_agregar,$hab_editar,$hab_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver){
         //$pass=md5($pass);
        
@@ -687,7 +880,46 @@
         `factura_cancelar` = $facturas_cancelar,
         `combinar_cuentas` = $combinar_cuentas,
         `cortes_y_transacciones` = $cortes_y_transacciones,
-        `ver_graficas` = $ver_graficas
+        `ver_graficas` = $ver_graficas,
+        `check_in` = $check_in,
+        `cuenta_maestra` = $cuenta_maestra,
+        `reporte_diario` = $reporte_diario,
+        `reporte_llegada` = $reporte_llegada,
+        `reporte_salidas` = $reporte_salidas,
+        `saldo_huspedes` = $saldo_huspedes,
+        `edo_centa_fc` = $edo_centa_fc,
+        `ver_reservaciones` = $ver_reservaciones,
+        `agregar_reservaciones` = $agregar_reservaciones,
+        `info_huespedes` = $info_huespedes,
+        `reporte_cancelaciones` = $reporte_cancelaciones,
+        `reporte_cortes` = $reporte_cortes,
+        `cargos_noche` = $cargos_noche,
+        `surtir` = $surtir,
+        `corte_diario` = $corte_diario,
+        `pronosticos` = $pronosticos,
+        `historial_cuentas` = $historial_cuentas,
+        `ama_de_llaves` = $ama_de_llaves,
+        `historial_cortes_u` = $historial_cortes_u,
+        `corte_diario_u` = $corte_diario_u,
+        `resumen_transacciones` = $resumen_transacciones,
+        `factura_individual` = $factura_individual,
+        `factura_global` = $factura_global,
+         `buscar_fc` = $buscar_fc,
+         `cancelar_fac` = $cancelar_fac,
+         `bus_fac_fecha` = $bus_fac_fecha,
+         `bus_fac_folio` = $bus_fac_folio,
+         `bus_fac_folio_casa` = $bus_fac_folio_casa,
+         `resumen_fac` = $resumen_fac,
+         `restaurante` = $restaurante,
+         `agregar_res` = $agregar_res,
+         `cat_res` = $cat_res,
+         `invet_res` = $invet_res,
+         `surtir_res` = $surtir_res,
+         `mesas_res` = $mesas_res,
+         `agregar_mesas_res` = $agregar_mesas_res,
+         `tipo_hab` = $tipo_hab,
+         `tarifas_hab` = $tarifas_hab,
+         `ver_hab` = $ver_hab
         WHERE `id` = '$id'";
         //echo $sentencia ;
          // die();
