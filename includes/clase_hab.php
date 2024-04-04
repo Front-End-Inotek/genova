@@ -430,7 +430,7 @@
         }
       }
       // Nos permite seleccionar una habitacion ocupada para cambiar las cuentas
-      function cambiar_cuentas_hab_ocupada($hab_id,$estado,$mov){
+      function cambiar_cuentas_hab_ocupada($hab_id,$estado,$mov,$fa){
         $sentencia = "SELECT * FROM hab WHERE id != $hab_id AND estado = 1";
         $comentario="Nos permite seleccionar una habitacion ocupada para cambiar las cuentas";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
@@ -442,6 +442,11 @@
               echo $fila['nombre'];
           echo '</div>';
         }
+        echo '<div class="btn_modal_herramientas btn_editar" onclick="unificar_con_folio_casa('.$hab_id.','.$fa.')" >';
+              echo '<img class="btn_modal_img" src="./assets/iconos_btn/list.svg">';
+              echo "Unificar por folio casa";
+          echo '</div>';
+          
       }
       // Mostramos el movimiento de la habitacion
       function mostrar_mov_hab($id){

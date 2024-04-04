@@ -5896,8 +5896,8 @@ function seleccionar_cuentas(hab_id,estado,mov){
 }
 
 // Modal para unificar cuentas en una habitacion seleccionada
-function unificar_cuentas(hab_id,estado,mov){
-    $("#mostrar_herramientas").load("includes/modal_unificar_cuentas.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov);
+function unificar_cuentas(hab_id,estado,mov,fa){
+    $("#mostrar_herramientas").load("includes/modal_unificar_cuentas.php?hab_id="+hab_id+"&estado="+estado+"&mov="+mov+"&fa="+fa);
 }
 
 // Funcion para cambiar de habitacion las cuentas en estado de cuenta a otra habitacion
@@ -8972,7 +8972,10 @@ function hab_sucia_hospedaje(hab_id,estado){
 function hab_sucia_vacia(hab_id,estado){
 	$("#mostrar_herramientas").load("includes/hab_modal_disponible_hospedaje.php?hab_id="+hab_id+"&estado="+estado); 
 }
-
+// Modal para combinar con folio casa
+function unificar_con_folio_casa(hab_id, f_actual) {
+    $("#mostrar_herramientas").load("includes/hab_modal_unificar_con_folio_casa.php?hab_id="+hab_id+"&fa="+f_actual)
+}
 // !**************************************************************
 // Mandar al estado interno sucia una habitacion disponible
 function hab_disponible_sucia(hab_id,estado){
@@ -8998,6 +9001,54 @@ function hab_disponible_sucia(hab_id,estado){
             error:problemas_sistema
 		});
 	return false;
+}
+// !**************************************************************************
+// Unificar por folio casa
+function aceptar_unificacion( hab_id, estado = 1) {
+    const folio_casa = document.getElementById("folio_casa").value
+    const cuenta = cargos_seleccionados()
+    //console.log(cuenta)
+    let cargos = cuenta[0]
+    let abonos = cuenta[1]
+    cargos = cargos.length == 0 ? 0 : cargos
+    abonos = abonos.length == 0 ? 0 : abonos
+    if(cargos==0 && abonos==0){
+        alert("No ha seleccionado nada para unificar")
+        return
+    }
+
+    if (!folio_casa) {
+        swal({
+            title: "Falta agregar folio casa",
+            text: "Agrega el folio casa",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+    }
+
+    const datos = {
+        "cargos" : cargos,
+        "abonos" : abonos,
+        "folio_c" : folio_casa
+    }
+    $.ajax({
+        async: true,
+        type: "POST",
+        dataType: "html",
+        contentType: "application/x-www-form-urlencoded",
+        url: "includes/unificacion_hab_folio_casa.php",
+        data: datos,
+        success: function (response) {
+            console.log(response)
+            if ( hab_id == 0 ) {
+                estado_cuenta_por_fcasa(folio_casa)
+            } else {
+                estado_cuenta( hab_id , estado)
+            }
+            //principal()
+        }
+    })
 }
 //! ***************************************************************************
 // Mandar al estado interno sucia una habitacion ocupada
