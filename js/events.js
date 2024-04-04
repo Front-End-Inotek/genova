@@ -9004,7 +9004,7 @@ function hab_disponible_sucia(hab_id,estado){
 }
 // !**************************************************************************
 // Unificar por folio casa
-function aceptar_unificacion( hab_id, estado = 1) {
+function aceptar_unificacion( hab_id , fa , estado = 1) {
     const folio_casa = document.getElementById("folio_casa").value
     const cuenta = cargos_seleccionados()
     //console.log(cuenta)
@@ -9042,7 +9042,7 @@ function aceptar_unificacion( hab_id, estado = 1) {
         success: function (response) {
             console.log(response)
             if ( hab_id == 0 ) {
-                estado_cuenta_por_fcasa(folio_casa)
+                estado_cuenta_por_fcasa(fa)
             } else {
                 estado_cuenta( hab_id , estado)
             }

@@ -2,6 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_hab.php");
   $hab= $_GET['hab_id'];
+  $fa = $_GET["fa"];
   echo '
   <!-- Modal content-->
   <div class="modal-content">
@@ -28,7 +29,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-      <button type="button" class="btn btn-primary" onclick="aceptar_unificacion('.$_GET['hab_id'].')"> Aceptar</button>
+      <button type="button" class="btn btn-primary" onclick="aceptar_unificacion('.$_GET['hab_id'].', '.$fa.' )"> Aceptar</button>
     </div>
   </div>';
 ?>
