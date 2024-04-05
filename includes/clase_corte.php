@@ -90,13 +90,31 @@
       // Mostramos los reportes de cortes
       function mostrar(){
         date_default_timezone_set('America/Mexico_City');
+        $registrosPorPagina = 10;
+        
         $inicio_dia= date("d-m-Y");
         $inicio_dia= strtotime($inicio_dia);
         $inicio_dia= $inicio_dia + 86399;
         $fin_dia= $inicio_dia - 863989;// 7 - 604799
-        $sentencia = "SELECT *,corte.etiqueta AS ID
+
+        $resultado=$sentencia = "SELECT COUNT(*) as total ,corte.etiqueta AS ID
         FROM corte
         INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE (corte.fecha >= $fin_dia && corte.fecha <= $inicio_dia) ORDER BY corte.etiqueta DESC";
+        $comentario="numero de cortes";
+        $consulta= $this->realizaConsulta($resultado,$comentario);
+        $fila = $consulta->fetch_assoc();
+        $totalRegistros = $fila['total'];
+        // Calcular el número total de páginas
+        $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+        // Obtener el número de página actual
+        $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+
+        // Calcular el índice inicial del primer registro en la página actual
+        $indiceInicial = ($paginaActual - 1) * $registrosPorPagina;
+        
+        $sentencia = "SELECT *,corte.etiqueta AS ID
+        FROM corte
+        INNER JOIN usuario ON corte.id_usuario = usuario.id WHERE (corte.fecha >= $fin_dia && corte.fecha <= $inicio_dia) ORDER BY corte.etiqueta DESC LIMIT $indiceInicial, $registrosPorPagina";
         $comentario="Mostrar los reportes de cortes";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
         //se recibe la consulta y se convierte a arreglo
@@ -130,7 +148,12 @@
             }
             echo '
           </tbody>
-        </table>
+        </table>';
+        echo "<div class='paginacion'>";
+        for ($i = 1; $i <= $totalPaginas; $i++) {
+            echo "<a href='includes/clase_corte.php?pagina=$i'>$i</a> ";
+        }
+        echo '</div>
         </div>';
       }
       // Busqueda por fecha en ver reportes de cortes
