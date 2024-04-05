@@ -151,13 +151,47 @@
         </table>';
         echo '<nav aria-label="Page navigation" >';
           echo "<ul class='pagination'>";
-          for ($i = 1; $i <= $totalPaginas; $i++) {
-            echo "
-              <li class='page-item'>
-                <a class='page-link' onclick='ver_cortes_paginacion(".$i.")'>$i</a> 
-              </li>
-            ";
-          }
+
+            if ( $totalPaginas > 0 ) {
+              if ( $paginaActual > 1 ) {
+                echo '
+                  <li class="page-item">
+                    <a class="page-link" onclick="ver_cortes_paginacion('.($paginaActual - 1).')">Anterior</a>
+                  </li>
+                ';
+              }
+
+              for ($i = 1; $i <= $totalPaginas; $i++) {
+                if ($i == 1) {
+                  echo "
+                    <li class='page-item active'>
+                      <a class='page-link' onclick='ver_cortes_paginacion(".$i.")'>$i</a> 
+                    </li>
+                  ";
+                } else {
+                  echo "
+                  <li class='page-item'>
+                    <a class='page-link' onclick='ver_cortes_paginacion(".$i.")'>$i</a> 
+                  </li>
+                  ";
+                }
+              }
+              if ( $paginaActual < $totalPaginas ) {
+                echo '
+                  <li class="page-item">
+                    <a class="page-link" onclick="ver_cortes_paginacion('.($paginaActual + 1).')">Siguiente</a>
+                  </li>
+                ';
+              }
+
+            } else {
+              echo '<li class="page-item disabled">
+                      <span class="page-link">No hay resultados</span>
+                    </li>
+              ';
+            }
+
+          
           echo '</ul>';
         echo '</nav>
         </div>';
@@ -224,21 +258,45 @@
           echo '
           <nav aria-label="Page navigation">
             <ul class="pagination" >';
-            for ( $i = 1; $i <= $totalPaginas ; $i++ ) {
-              if ($i == $posicion ) {
-                echo '
-                  <li class="page-item active">
-                    <a class="page-link" onclick="ver_cortes_paginacion('.$i.')">'.$i.'</a>
-                  </li>
-                ';
-              }else {
+
+            if ( $totalPaginas > 0 ) {
+              if ( $paginaActual > 1 ) {
                 echo '
                   <li class="page-item">
-                    <a class="page-link" onclick="ver_cortes_paginacion('.$i.')">'.$i.'</a>
+                    <a class="page-link" onclick="ver_cortes_paginacion('.($paginaActual - 1).')">Anterior</a>
                   </li>
                 ';
               }
+              for ( $i = 1; $i <= $totalPaginas ; $i++ ) {
+                if ($i == $posicion ) {
+                  echo '
+                    <li class="page-item active">
+                      <a class="page-link" onclick="ver_cortes_paginacion('.$i.')">'.$i.'</a>
+                    </li>
+                  ';
+                }else {
+                  echo '
+                    <li class="page-item">
+                      <a class="page-link" onclick="ver_cortes_paginacion('.$i.')">'.$i.'</a>
+                    </li>
+                  ';
+                }
+              }
+              if ( $paginaActual < $totalPaginas ) {
+                echo '
+                  <li class="page-item">
+                    <a class="page-link" onclick="ver_cortes_paginacion('.($paginaActual + 1).')">Siguiente</a>
+                  </li>
+                ';
+              }
+            } else {
+              echo '<li class="page-item disabled">
+                      <span class="page-link">No hay resultados</span>
+                    </li>
+              ';
             }
+
+            
           echo'
             </ul>
           </nav>
