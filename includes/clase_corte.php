@@ -159,6 +159,12 @@
                     <a class="page-link" onclick="ver_cortes_paginacion('.($paginaActual - 1).')">Anterior</a>
                   </li>
                 ';
+              } else {
+                echo '
+                  <li class="page-item disabled">
+                    <a class="page-link">Anterior</a>
+                  </li>
+                ';
               }
 
               for ($i = 1; $i <= $totalPaginas; $i++) {
@@ -180,6 +186,12 @@
                 echo '
                   <li class="page-item">
                     <a class="page-link" onclick="ver_cortes_paginacion('.($paginaActual + 1).')">Siguiente</a>
+                  </li>
+                ';
+              } else {
+                echo '
+                  <li class="page-item disabled">
+                    <a class="page-link" >Siguiente</a>
                   </li>
                 ';
               }
@@ -266,6 +278,12 @@
                     <a class="page-link" onclick="ver_cortes_paginacion('.($paginaActual - 1).')">Anterior</a>
                   </li>
                 ';
+              } else {
+                echo '
+                  <li class="page-item disabled">
+                    <a class="page-link">Anterior</a>
+                  </li>
+                ';
               }
               for ( $i = 1; $i <= $totalPaginas ; $i++ ) {
                 if ($i == $posicion ) {
@@ -286,6 +304,12 @@
                 echo '
                   <li class="page-item">
                     <a class="page-link" onclick="ver_cortes_paginacion('.($paginaActual + 1).')">Siguiente</a>
+                  </li>
+                ';
+              } else {
+                echo '
+                  <li class="page-item disabled">
+                    <a class="page-link" >Siguiente</a>
                   </li>
                 ';
               }
