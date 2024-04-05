@@ -3191,6 +3191,16 @@ function ver_reservaciones_paginacion(buton,posicion,caso=0){
     });
 }
 
+function ver_cortes_paginacion ( posicion ) {
+    var usuario_id = localStorage.getItem("id");
+    /* inicial = $('#inicial').value
+    final =$('#final').value */
+    $("#tabla_corte").load("includes/ver_cortes_paginacion.php?posicion="+posicion,
+    function(res){
+
+    });
+}
+
 // Barra de diferentes busquedas en ver llegadas
 function buscar_llegadas_salidas(e,opcion){
     setTimeout(() => {
