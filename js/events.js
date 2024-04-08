@@ -8231,12 +8231,12 @@ function factura_cancelar(){
     //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
     closeNav();
 }
-function factura_cancelarbtn(folio){
+function factura_cancelarbtn(folio,id){
     //usuario_id=localStorage.getItem("id");
     $('#area_trabajo').hide();
     $('#pie').hide();
     $('#area_trabajo_menu').show();
-    $("#area_trabajo_menu").load("includes/factura_cancelar.php?folio="+folio);
+    $("#area_trabajo_menu").load("includes/factura_cancelar.php?folio="+folio+"&id_factura="+id);
     //$("#area_trabajo_menu").load("includes/formulario_cancelar.php");
     closeNav();
 }
@@ -10067,7 +10067,7 @@ function login_super_admin() {
 
     const hashedPassword = "A1B2C3";
 
-    if(username === "super_admin" && password === hashedPassword) {
+    if(username === "" && password === hashedPassword) {
         swal({
             title: "Credenciales correctas",
             text: "Acceso ortorgado",
