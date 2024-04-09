@@ -2,7 +2,9 @@
 
 include 'datos_servidor.php'; //conexion con la base de datos
 include("clase_factura.php");
+include("clase_ticket.php");
 $fact = NEW factura ();
+$ticket= NEW Ticket(0);
 
 $resultado=$fact->obtener_primer_rfc();
 $row=mysqli_fetch_array($resultado);
@@ -10,6 +12,7 @@ $row=mysqli_fetch_array($resultado);
 $motivo = $_POST["motivo"];
 $uuid=$_GET["uuid"];
 $folio=$_GET["folio"];
+$id_factura=$_GET["id_factura"];
 //$file = $_FILES['file']['tmp_name'];
 
 error_reporting(E_ERROR);                        
@@ -36,6 +39,7 @@ echo $respuesta;
 
 if($respuesta == 'OK'){
         $fact->estado_cancelar_factura($folio);
+        $ticket->cambiar_estado_cancelar_factura($id_factura);
 }
 
 /*NOTA: PARA REALIZAR LA CANCELACION SE REQUIERE EL UUID DE LA FACTURA A CANCELAR. 

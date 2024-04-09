@@ -4,6 +4,7 @@ $fact = NEW factura ();
 $folio="";
 if($_GET['folio']){
     $folio=$_GET['folio'];
+    $id_factura=$_GET['id_factura'];
     $uuid= $fact->obtener_uuid($folio);
 };
 
@@ -23,6 +24,7 @@ echo '
 
                 <div class="form-floating input_container">
                     <input type="number" class="d-none" id="folio" value="'.$folio.'" disabled>
+                    <input type="number" class="d-none" id="id_factura" value="'.$id_factura.'" disabled>
                     <input type="text" class="form-control custom_input" id="uuid" placeholder="UUID" min-length="1" maxlength="36" value="'.$uuid.'" required >
                     <label for="uuid">UUID</label>
                 </div>

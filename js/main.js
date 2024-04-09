@@ -471,6 +471,7 @@ function enviarcorreo(){
     function cancelar_factura (){
         const folio = document.querySelector("#folio").value;
         const uuid = document.querySelector("#uuid").value;
+        const id_factura = document.querySelector("#id_factura").value;
         document.getElementById("animacion_cancelar").style.display='block';
         document.getElementById("cancelar").style.display='none';
 
@@ -479,7 +480,7 @@ function enviarcorreo(){
         //Declaramos una constante que contendra XMLHttpRequest(); intercambia datos detras de escena
         const xhr = new XMLHttpRequest();
         //open recive informacion son 3 parametro
-        xhr.open('POST', 'includes/cancelar_factura.php?uuid='+uuid+'&folio='+folio, true);
+        xhr.open('POST', 'includes/cancelar_factura.php?uuid='+uuid+'&folio='+folio+'&id_factura='+id_factura, true);
         //FormData interpretara los datos del formulario
         var formData = new FormData(form);
         //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor

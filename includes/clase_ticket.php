@@ -126,6 +126,13 @@
         $comentario="Cambiar estado de impreso del ticket";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      function cambiar_estado_cancelar_factura($folio){
+        $sentencia = "UPDATE `ticket` SET
+        `facturado` = '0'
+        WHERE `id_factura` = '$folio';";
+        $comentario="Cambiar estado de impreso del ticket";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       /* function tickets_por_fecha($inicio,$fin){
         $sentencia="SELECT * FROM `ticket` WHERE `tiempo`>=$inicio AND `tiempo`<=$fin";
         $comentario="Consulta de tickets en un rango de fechas";
