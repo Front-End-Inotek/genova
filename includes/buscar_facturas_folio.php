@@ -5,7 +5,7 @@
     echo ' <div class="container-fluid">
             <br>
             <h2>Busqueda de facturas por folio</h2>';
-            $facturacion->busqueda(0,$_GET['inicial'],$_GET['final']);
+            $facturacion->busqueda(0,$_GET['inicial'],$_GET['final'],$_GET['estado_factura']);
     echo  '</div>';
   //echo "Folio ". $_GET['inicial']."</br>".$_GET['final'];
 ?>

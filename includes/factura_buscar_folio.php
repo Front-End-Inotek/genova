@@ -17,6 +17,16 @@ echo '
                 <input type="number" class="form-control custom_input" id="final" placeholder="Factura final">
                 <label for="final"  >Folio final de la factura</label>
             </div>
+            <form>
+                <input type="radio" id="todas" name="estado_facturas" value="todas" checked>
+                <label for="todas">Todas</label><br>
+
+                <input type="radio" id="activas" name="estado_facturas" value="activas">
+                <label for="activas">Activas</label><br>
+
+                <input type="radio" id="canceladas" name="estado_facturas" value="canceladas">
+                <label for="canceladas">Canceladas</label><br>
+            </form>
 
             <div class="form-floating input_container_date">
                 <button class="btn btn-primary btn-block btn-default" onclick="buscar_factura_folio()" >
