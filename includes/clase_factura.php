@@ -371,8 +371,14 @@
       }
     }
 
-    function busqueda_folio_casa($folio){
-      $sentencia = "SELECT * FROM facturas WHERE folio_casa= $folio";
+    function busqueda_folio_casa($folio,$estado_factura){
+      if($estado_factura=="todas"){
+        $sentencia = "SELECT * FROM facturas WHERE folio_casa= $folio";
+      }elseif ($estado_factura=="activas") {
+        $sentencia = "SELECT * FROM facturas WHERE folio_casa= $folio AND estado=0";
+      }elseif ($estado_factura=="canceladas") {
+        $sentencia = "SELECT * FROM facturas WHERE folio_casa= $folio AND estado=1";
+      }
       $comentario="obtener las facturas registradas ";
       $contador=0;
       $iva=0;

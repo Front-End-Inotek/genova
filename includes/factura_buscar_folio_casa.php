@@ -11,6 +11,16 @@ echo '
                 <input type="number" class="form-control custom_input" id="folio" placeholder="Folio casa" />
                 <label for="folio">Folio casa</label>
             </div>
+            <form>
+                <input type="radio" id="todas" name="estado_facturas" value="todas" checked>
+                <label for="todas">Todas</label><br>
+
+                <input type="radio" id="activas" name="estado_facturas" value="activas">
+                <label for="activas">Activas</label><br>
+
+                <input type="radio" id="canceladas" name="estado_facturas" value="canceladas">
+                <label for="canceladas">Canceladas</label><br>
+            </form>
 
             <div class="form-floating input_container">
                 <button class="btn btn-primary btn-block " onclick="buscar_factura_folio_casa()">

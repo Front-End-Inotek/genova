@@ -711,13 +711,20 @@ function enviarcorreo(){
 
     function buscar_factura_folio_casa() {
         let folio = document.getElementById("folio").value;
-
+        var radioButtons = document.querySelectorAll('input[name="estado_facturas"]');
+        var estado_factura;
+        radioButtons.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                estado_factura = radioButton.value;
+            }
+        });
         if(folio == null || folio === ""){
             swal("Folio casa vacio!", "Verifica los datos correctamente por favor!", "error");
             return false;
         } else {
             var datos = {
-                "folio" : folio
+                "folio" : folio,
+                "estado_factura":estado_factura
             }
 
             $.ajax({
