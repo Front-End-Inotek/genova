@@ -1983,15 +1983,20 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
     fecha_salida_value = fecha_salida.value
     selectedDate = new Date(fecha_entrada_value)
     auxSelectedDate = selectedDate.toISOString().split('T')[0];
-    min_salida = selectedDate.setDate(selectedDate.getDate()+1)
+    //min_salida = selectedDate.setDate(selectedDate.getDate()+1)
+    min_salida = selectedDate.setDate(selectedDate.getDate())
     min_salida = selectedDate.toISOString().split('T')[0];
     fecha_salida.setAttribute('min', min_salida)
     const dateSalida = new Date(fecha_salida_value);
 	var noches= calculo_noches(fecha_entrada_value,fecha_salida_value)
+    if ( fecha_entrada_value > fecha_salida_value ) {
+        alert("Fecha de salida invalida")
+        return
+    }
     if(isNaN(noches)){
-        document.getElementById("noches").value = 0
+        document.getElementById("noches").value = 1
     }else{
-        document.getElementById("noches").value = noches
+        document.getElementById("noches").value = (noches !== 0 ? noches : 1 )
     }
     var elemento = document.getElementById("tarifa");
     elemento_opcion = elemento.options[elemento.selectedIndex]
@@ -2009,8 +2014,8 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
     //Si cambia el numero de noches y ya existen tarifas se calcula el total de la instancia.
     tarifa_base = $("#tarifa_base").val()
     if(fecha_entrada_value!="" && fecha_salida_value!=""){
-    if( fecha_entrada_value >= fecha_salida_value ){
-    fecha_salida.value=""
+    if( fecha_entrada_value > fecha_salida_value ){
+    console.log("hola")
     }else{
         fechas = (getDatesInRange(auxSelectedDate,dateSalida))
         ultima_fecha = fechas[fechas.length-1]

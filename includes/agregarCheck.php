@@ -67,7 +67,7 @@ echo '
                     <label for="llegada">Llegada</label>
                 </div>
                 <div class="form-floating input_container">
-                    <input required class="form-control custom_input" type="date"  id="fecha_salida" min='.$dia_actual.' placeholder="Ingresa la fecha de salida" onchange="calcular_nochesChek();">
+                    <input required class="form-control custom_input" type="date"  id="fecha_salida" placeholder="Ingresa la fecha de salida" onchange="calcular_nochesChek();">
                     <label class="asterisco" for="salida">Salida</label>
                 </div>
                 <div class="form-floating input_container">
