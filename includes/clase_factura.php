@@ -1,12 +1,8 @@
 <?php
-  /**
-   *
-   */
    date_default_timezone_set('America/Mexico_City');
    include_once('consulta.php');
    include_once('clase_usuario.php');
-
-
+   
   class factura extends ConexionMYSql
   {
 
@@ -218,11 +214,8 @@
       {
         if($contador==0){
           echo'
-          <br>
-          <br>
           <div class="table-responsive table-hover" style="max-height:560px; overflow-y: scroll;">
           <table class="table table_expansion" >
-            
             <thead>
               <tr>
               <th>Folio</th>
@@ -347,7 +340,6 @@
             </tbody>
           </table>
           </div>
-          <br>
           <br>';
 
           echo'

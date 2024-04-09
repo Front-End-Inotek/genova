@@ -622,11 +622,11 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
     <table class="table table-bordered table-hover">
       <thead>
         <tr class="table-primary-encabezado text-center">
-        <th></th>
-        <th>Descripción</th>
-        <th>Fecha</th>
-        <th>Abono</th>
-        <th>Forma Pago</th>
+          <th></th>
+          <th>Descripción</th>
+          <th>Fecha</th>
+          <th>Abono</th>
+          <th>Forma Pago</th>
         </tr>
       </thead>
       <tbody>';

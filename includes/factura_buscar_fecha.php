@@ -1,5 +1,5 @@
 <?php
-
+$hoy = date("Y-m-d");
 echo '
     <div class="main_container">
         <header class="main_container_title">
@@ -9,12 +9,12 @@ echo '
         <div class="inputs_form_container justify-content-start">
 
             <div class="form-floating input_container_date">
-                <input class="form-control custom_input" type="date" placeholder="Fecha inicial de la factura" id="inicial"/>
+                <input class="form-control custom_input" type="date" placeholder="Fecha inicial de la factura" id="inicial" value="' . $hoy . '" />
                 <label for="inicial">Fecha inicial</label>
             </div>
 
             <div class="form-floating input_container_date">
-                <input class="form-control custom_input" type="date" placeholder="Fecha final de la factura" id="final"/>
+                <input class="form-control custom_input" type="date" placeholder="Fecha final de la factura" id="final" value="' . $hoy . '" />
                 <label for="final" >Fecha final</label>
             </div>
 
@@ -29,7 +29,7 @@ echo '
 
         </div>
 
-        <div class="row" id="contenedor-facturas">
+        <div id="contenedor-facturas" class="contenedor-facturas">
         </div>
     </div>
 ';
