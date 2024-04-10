@@ -369,6 +369,7 @@ class Reservacion extends ConexionMYSql
         SET movimiento.id_hab = '$preasignada', movimiento.motivo ='preasignar'
 	    WHERE reservacion.id = '$id' ";
         $comentario="Preasignar una habitacion a una reservacion";
+        //echo $sentencia;
         $consulta= $this->realizaConsulta($sentencia, $comentario);
         if($consulta) {
             return "BIEN";
@@ -1841,7 +1842,7 @@ class Reservacion extends ConexionMYSql
                     echo '<td></td>';
                 }
                 if($fila['id_hab']==0 && $preasignar==1) {
-                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab'].','.$fila['numero_hab'].')"> Preasignar</button></td>';
+                    echo '<td><button class="btn btn-secondary" href="#caja_herramientas" data-toggle="modal" onclick="preasignar_reservacion('.$fila['ID'].',0,'.$fila['tipo_hab_numero'].','.$fila['numero_hab'].')"> Preasignar</button></td>';
                 } elseif($fila['id_hab']!=0) {
                     echo '<td>Hab. '.$preasignada.'</td>';
                 } else {
@@ -2308,7 +2309,7 @@ class Reservacion extends ConexionMYSql
         $final = $posicion+20;
         $ultimoid=0;
         $ruta="ver_reservaciones()";
-        $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva, hab.nombre as nombre_hab, huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+        $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,reservacion.tipo_hab as tipo_hab_numero, hab.nombre as nombre_hab, huesped.correo as correo_huesped,huesped.id as huesped_id, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
 		FROM reservacion
         LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
         INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
