@@ -1990,9 +1990,11 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
     fecha_salida.setAttribute('min', min_salida)
     const dateSalida = new Date(fecha_salida_value);
 	var noches= calculo_noches(fecha_entrada_value,fecha_salida_value)
-    if ( fecha_entrada_value > fecha_salida_value ) {
-        alert("Fecha de salida invalida")
-        return
+    if(fecha_entrada_value!="" && fecha_salida_value!=""){
+        if ( fecha_entrada_value > fecha_salida_value ) {
+            alert("Fecha de salida invalida")
+            return
+        }
     }
     if(isNaN(noches)){
         document.getElementById("noches").value = 1
