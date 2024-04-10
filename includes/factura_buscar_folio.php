@@ -8,12 +8,12 @@ echo '
 
         <div class="inputs_form_container justify-content-start">
 
-            <div class="form-floating input_container">
+            <div class="form-floating input_container2">
                 <input type="number" class="form-control custom_input" id="inicial" placeholder="Factura inicial">
                 <label for="inicial" >Folio inicial de la Factura</label>
             </div>
 
-            <div class="form-floating input_container">
+            <div class="form-floating input_container2">
                 <input type="number" class="form-control custom_input" id="final" placeholder="Factura final">
                 <label for="final"  >Folio final de la factura</label>
             </div>

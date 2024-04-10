@@ -7,7 +7,7 @@ echo '
 
         <div class="inputs_form_container justify-content-start">
 
-            <div class="form-floating input_container">
+            <div class="form-floating input_container2">
                 <input type="number" class="form-control custom_input" id="folio" placeholder="Folio casa" />
                 <label for="folio">Folio casa</label>
             </div>
