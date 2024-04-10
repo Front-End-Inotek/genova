@@ -642,7 +642,14 @@ function enviarcorreo(){
         theObject.send();
     }
     function reporte_facturacio(modo,inicio,fin){
-        window.open("includes/facturas_a_excel.php?modo="+modo+"&inicio="+inicio+"&fin="+fin, "Diseño Web", "width=300, height=200")
+        var radioButtons = document.querySelectorAll('input[name="estado_facturas"]');
+        var estado_factura;
+        radioButtons.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                estado_factura = radioButton.value;
+            }
+        });
+        window.open("includes/facturas_a_excel.php?modo="+modo+"&inicio="+inicio+"&fin="+fin+"&estado_factura="+estado_factura, "Diseño Web", "width=300, height=200")
     }
 
 

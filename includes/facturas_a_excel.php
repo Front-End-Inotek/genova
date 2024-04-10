@@ -6,7 +6,7 @@ header('Content-type: application/vnd.ms-excel;charset=iso-8859-15');
   include ('clase_factura.php');
   $facturacion = NEW factura();
   //$reporte= NEW Reporte();
-  $consulta = $facturacion->busqueda_reporte($_GET['modo'],$_GET['inicio'],$_GET['fin']);
+  $consulta = $facturacion->busqueda_reporte($_GET['modo'],$_GET['inicio'],$_GET['fin'],$_GET['estado_factura']);
   $total =0;
   $producto_nombre="";
   $producto_sumatoria=0;
