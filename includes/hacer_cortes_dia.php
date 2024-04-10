@@ -214,6 +214,8 @@
         //<div class="text-dark margen-1"></div> */
   $consulta_abono=$ticket->tipo_abonos();
   $bandera = 0;
+  $totales_cargo=0;
+  $totales_abono=0;
   while ($fila = mysqli_fetch_array($consulta_abono))
   {
       $abonos[$fila['id']]=$fila['descripcion'];
@@ -289,7 +291,12 @@
                   <td colspan="5"></td>
                   <th>Total:</th>
                   <th class="total_corte">$'.number_format($total_cargo,2).'</th>
-                  <th class="total_corte">$'.number_format($total_abono,2).'</th>
+                  <th class="total_corte">$'.number_format($total_abono,2).'</th>';
+                  
+                  $totales_cargo+=$total_cargo;
+                  $totales_abono+=$total_abono;
+
+                  echo '
                   <td></td>
                 </tr>
               </tbody>
@@ -361,8 +368,27 @@
                   <td colspan="5"></td>
                   <th>Total:</th>
                   <th class="total_corte">$'.number_format($total_cargo,2).'</th>
-                  <th class="total_corte">$'.number_format($total_abono,2).'</th>
+                  <th class="total_corte">$'.number_format($total_abono,2).'</th>';
+                  
+                  $totales_cargo+=$total_cargo;
+                  $totales_abono+=$total_abono;
+
+                  echo '
                   <td></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="table-primary-encabezado text-center">
+                <th>Total Cargos:</th>
+                <th>Total Abonos:</th>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>'.$totales_cargo.'</td>
+                  <td>'.$totales_abono.'</td>
                 </tr>
               </tbody>
             </table>

@@ -309,6 +309,8 @@ $pdf = new FPDF('P', 'mm', 'Letter');
   $pdf->AddPage('L');
   $total_cargo=0;
   $total_abono=0;
+  $totales_cargo=0;
+  $totales_abono=0;
   $pdf->SetFont('Arial', 'B', 10);
   /* $pdf->Cell( 278 , 5, "Tickets", 0, 0,'C');
   $pdf->ln(); */
@@ -387,6 +389,8 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
         $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
         $pdf->ln();
+        $totales_cargo+=$total_cargo;
+        $totales_abono+=$total_abono;
       }
     }
     $listas=array();
@@ -433,12 +437,23 @@ $pdf = new FPDF('P', 'mm', 'Letter');
             $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
             $pdf->ln();
+            $totales_cargo+=$total_cargo;
+            $totales_abono+=$total_abono;
           }
         }
         $pdf->Cell( 188 , 5, "", 0, 0, 'C');
         $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
         $pdf->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
         $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
+        $pdf->ln();
+        $pdf->ln();
+      
+
+        $pdf->Cell( 158 , 5, "", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "Total Cargos:", 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($totales_cargo,2), 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "Total Abonos:", 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($totales_abono,2), 1, 0, 'C');
         $pdf->ln();
   
   
