@@ -194,13 +194,27 @@
       //$fila = mysqli_fetch_array($consulta);
       return $consulta;
     }
-    function busqueda($metodo, $inicial, $final){
+    function busqueda($metodo, $inicial, $final, $estado_factura="todas"){
       if($metodo==0){
-        $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final";
+        
+        if($estado_factura=="todas"){
+          $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final";
+        }elseif ($estado_factura=="activas") {
+          $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final AND estado=0";
+        }elseif ($estado_factura=="canceladas") {
+          $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final AND estado=1";
+        }
       }else{
         $inicial=strtotime($inicial);
         $final=strtotime($final)+86400;
-        $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final";
+        if($estado_factura=="todas"){
+          $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final";
+        }elseif ($estado_factura=="activas") {
+          $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final AND estado=0";
+        }elseif ($estado_factura=="canceladas") {
+          $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final AND estado=1";
+        }
+        
 
       }
       $comentario="obtener las facturas registradas ";
@@ -357,8 +371,14 @@
       }
     }
 
-    function busqueda_folio_casa($folio){
-      $sentencia = "SELECT * FROM facturas WHERE folio_casa= $folio";
+    function busqueda_folio_casa($folio,$estado_factura){
+      if($estado_factura=="todas"){
+        $sentencia = "SELECT * FROM facturas WHERE folio_casa= $folio";
+      }elseif ($estado_factura=="activas") {
+        $sentencia = "SELECT * FROM facturas WHERE folio_casa= $folio AND estado=0";
+      }elseif ($estado_factura=="canceladas") {
+        $sentencia = "SELECT * FROM facturas WHERE folio_casa= $folio AND estado=1";
+      }
       $comentario="obtener las facturas registradas ";
       $contador=0;
       $iva=0;

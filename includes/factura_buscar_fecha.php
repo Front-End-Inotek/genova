@@ -17,6 +17,16 @@ echo '
                 <input class="form-control custom_input" type="date" placeholder="Fecha final de la factura" id="final" value="' . $hoy . '" />
                 <label for="final" >Fecha final</label>
             </div>
+            <form>
+                <input type="radio" id="todas" name="estado_facturas" value="todas" checked>
+                <label for="todas">Todas</label><br>
+
+                <input type="radio" id="activas" name="estado_facturas" value="activas">
+                <label for="activas">Activas</label><br>
+
+                <input type="radio" id="canceladas" name="estado_facturas" value="canceladas">
+                <label for="canceladas">Canceladas</label><br>
+            </form>
 
             <div class="form-floating input_container_date">
                 <button class="btn btn-primary btn-block btn-default" onclick="buscar_factura_fecha()" >
@@ -26,7 +36,7 @@ echo '
                     Buscar
                 </button>
             </div>
-
+            
         </div>
 
         <div id="contenedor-facturas" class="contenedor-facturas">

@@ -561,6 +561,7 @@ function enviarcorreo(){
     function buscar_factura_folio(){
         var inicial = document.getElementById("inicial");
         var final = document.getElementById("final");
+        
             if(inicial.value === null || inicial.value === ''){
                 swal("Campo folio inicial vacio!", "Verifique los datos correctamente por favor!", "error");
                 return false;
@@ -576,14 +577,21 @@ function enviarcorreo(){
     function buscar_por_folio(){
         var inicial = encodeURI(document.getElementById("inicial").value);
         var final = encodeURI(document.getElementById("final").value);
-
+        var radioButtons = document.querySelectorAll('input[name="estado_facturas"]');
+        var estado_factura;
+        radioButtons.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                estado_factura = radioButton.value;
+            }
+        });
         var datos = {
             "inicial": inicial,
-            "final": final
+            "final": final,
+            "estado_factura":estado_factura
         }
         //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor
         var theObject = new XMLHttpRequest();
-        theObject.open("GET",  "includes/buscar_facturas_folio.php?inicial="+ inicial + "&final="+final ,true);
+        theObject.open("GET",  "includes/buscar_facturas_folio.php?inicial="+ inicial + "&final="+final+"&estado_factura="+estado_factura ,true);
         theObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         theObject.onreadystatechange = function() {
             document.getElementById('contenedor-facturas').innerHTML = theObject.responseText;
@@ -609,14 +617,21 @@ function enviarcorreo(){
     function buscar_por_fecha(){
         var inicial = encodeURI(document.getElementById("inicial").value);
         var final = encodeURI(document.getElementById("final").value);
-
+        var radioButtons = document.querySelectorAll('input[name="estado_facturas"]');
+        var estado_factura;
+        radioButtons.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                estado_factura = radioButton.value;
+            }
+        });
         var datos = {
             "inicial": inicial,
-            "final": final
+            "final": final,
+            "estado_factura":estado_factura
         }
         //Con el evento de escuchar al recargar entrara la condicion que nos da la respuesta del servidor
         var theObject = new XMLHttpRequest();
-        theObject.open("GET",  "includes/buscar_facturas_fecha.php?inicial="+ inicial + "&final="+final ,true);
+        theObject.open("GET",  "includes/buscar_facturas_fecha.php?inicial="+ inicial + "&final="+final+"&estado_factura="+estado_factura ,true);
         theObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         /* theObject.onreadystatechange = function() {
             document.getElementById('contenedor-formulario').innerHTML = theObject.responseText;
@@ -696,13 +711,20 @@ function enviarcorreo(){
 
     function buscar_factura_folio_casa() {
         let folio = document.getElementById("folio").value;
-
+        var radioButtons = document.querySelectorAll('input[name="estado_facturas"]');
+        var estado_factura;
+        radioButtons.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                estado_factura = radioButton.value;
+            }
+        });
         if(folio == null || folio === ""){
             swal("Folio casa vacio!", "Verifica los datos correctamente por favor!", "error");
             return false;
         } else {
             var datos = {
-                "folio" : folio
+                "folio" : folio,
+                "estado_factura":estado_factura
             }
 
             $.ajax({
