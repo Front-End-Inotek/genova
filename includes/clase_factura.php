@@ -10,12 +10,24 @@
     {
       // code...
     }
-    function busqueda_reporte($metodo, $inicial, $final){
+    function busqueda_reporte($metodo, $inicial, $final, $estado_factura){
       if($metodo==0){
-        $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final";
+        
+        if($estado_factura=="todas"){
+          $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final";
+        }elseif ($estado_factura=="activas") {
+          $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final AND estado=0";
+        }elseif ($estado_factura=="canceladas") {
+          $sentencia = "SELECT * FROM facturas WHERE folio >= $inicial AND folio <= $final AND estado=1";
+        }
       }else{
-        $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final";
-
+        if($estado_factura=="todas"){
+          $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final";
+        }elseif ($estado_factura=="activas") {
+          $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final AND estado=0";
+        }elseif ($estado_factura=="canceladas") {
+          $sentencia = "SELECT * FROM facturas WHERE fecha >= $inicial AND fecha <= $final AND estado=1";
+        }
       }
       $comentario="obtener las facturas registradas ";
       $consulta= $this->realizaConsulta($sentencia,$comentario);
