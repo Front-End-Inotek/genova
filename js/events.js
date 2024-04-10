@@ -182,7 +182,8 @@ function cargar_area_trabajo(){
     obtener_datos_hab();
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
-    /* if(vista==0){
+    var vista = localStorage.getItem("vista");
+    if(vista==0){
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
@@ -192,7 +193,7 @@ function cargar_area_trabajo(){
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
-    }*/
+    }
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
     setTimeout('cargar_area_trabajo()',3000);//5500
