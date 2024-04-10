@@ -59,7 +59,9 @@ function recibir(datos){
         if(res[2]==0){
             localStorage.setItem('vista',3);
         }else{
-            localStorage.setItem('vista',0);
+            //! AQIO SE PONE EN 1 PARA DESHABILITAR EL RACK
+            /* localStorage.setItem('vista',0); */
+            localStorage.setItem('vista',1);
         }
 		document.location.href='inicio.php';
 	}else{
@@ -178,11 +180,11 @@ function obtener_datos_hab_inicial () {
 }
 // Se carga el area de trabajo
 function cargar_area_trabajo(){
-    // console.log(vista);
     obtener_datos_hab();
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
-    /* var vista = localStorage.getItem("vista"); */
+    var vista = localStorage.getItem("vista");
+    console.log(vista);
     if(vista==0){
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
@@ -1983,6 +1985,13 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
     fecha_entrada_value = fecha_entrada.value
     fecha_salida_value = fecha_salida.value
     selectedDate = new Date(fecha_entrada_value)
+    if(fecha_entrada_value!="" && fecha_salida_value!=""){
+        if ( fecha_entrada_value > fecha_salida_value ) {
+            fecha_salida = "";
+            alert("Fecha de salida invalida")
+            return
+        }
+    }
     auxSelectedDate = selectedDate.toISOString().split('T')[0];
     //min_salida = selectedDate.setDate(selectedDate.getDate()+1)
     min_salida = selectedDate.setDate(selectedDate.getDate())
@@ -1990,12 +1999,7 @@ function calcular_noches(hab_id=0,preasignada=0, uso_casa=0){
     fecha_salida.setAttribute('min', min_salida)
     const dateSalida = new Date(fecha_salida_value);
 	var noches= calculo_noches(fecha_entrada_value,fecha_salida_value)
-    if(fecha_entrada_value!="" && fecha_salida_value!=""){
-        if ( fecha_entrada_value > fecha_salida_value ) {
-            alert("Fecha de salida invalida")
-            return
-        }
-    }
+    
     if(isNaN(noches)){
         document.getElementById("noches").value = 1
     }else{
@@ -6622,15 +6626,17 @@ function ver_inventario(){
 
 function switch_rack(){
     if(siguiente_vista==0){
-        localStorage.setItem('vista',0)
+        // AQUI SE PONE EN 1 PARA DESHABILITAR EL OTRO RACK
+        /* localStorage.setItem('vista',0) */
+        localStorage.setItem('vista',1)
         localStorage.setItem('txt_vista',"Rack Habitacional")
     }else{
         localStorage.setItem('vista',1)
         localStorage.setItem('txt_vista',"Rack Operaciones")
     }
     vista = localStorage.getItem('vista')
-    //if(vista==3 || vista==0){
-    if(false){
+    if(vista==3 || vista==0){
+    /* if(false){ */
         //console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $('#area_trabajo').hide();
