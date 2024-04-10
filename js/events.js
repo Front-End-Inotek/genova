@@ -96,7 +96,7 @@ function sabernosession(){
                     //console.log("rack de operaciones "+vista);
                     var usuario_id=localStorage.getItem("id");
                     //$("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-                    $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+                    $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token);
                     siguiente_vista=1
                 }
                 if(vista==1){
@@ -105,7 +105,7 @@ function sabernosession(){
                     //console.log("rack de operaciones "+vista);
                     var id=localStorage.getItem("id");
                     var token=localStorage.getItem("tocken");
-                    $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+                    $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token);
                 }
             });
             cargar_area_trabajo();
@@ -184,21 +184,21 @@ function cargar_area_trabajo(){
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
     var vista = localStorage.getItem("vista");
-    console.log(vista);
+    //console.log(vista);
     if(vista==0){
-        console.log("rack de habitaciones "+vista);
+        //console.log("actualizando rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         //closeNav();
     }else{
-        console.log("rack de operaciones "+vista);
+        //console.log("actualizando rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     }
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
-    setTimeout('cargar_area_trabajo()',3000);//5500
+    setTimeout('cargar_area_trabajo()',5500);//5500
 }
 
     function pregunta_salir(){
@@ -9999,6 +9999,18 @@ function activarBtnFacturaEstadoCuenta_cargos() {
     const btn = document.getElementById("btn_generador_factura_cargos");
     let checkboxes = "";
     checkboxes = document.querySelectorAll(".input_fact_cargos")
+
+    const algunoMarcado = Array.from(checkboxes).some(function(cb) {
+        return cb.checked
+    })
+
+    btn.disabled = !algunoMarcado
+}
+function activarBtnUnificar() {
+    console.log("activando btn alv we")
+    const btn = document.getElementById("btn_unificar_cuentas");
+    let checkboxes = "";
+    checkboxes = document.querySelectorAll(".input_unificar")
 
     const algunoMarcado = Array.from(checkboxes).some(function(cb) {
         return cb.checked
