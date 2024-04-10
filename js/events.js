@@ -182,7 +182,7 @@ function cargar_area_trabajo(){
     obtener_datos_hab();
 	var id=localStorage.getItem("id");
 	var token=localStorage.getItem("tocken");
-    var vista = localStorage.getItem("vista");
+    /* var vista = localStorage.getItem("vista"); */
     if(vista==0){
         console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
