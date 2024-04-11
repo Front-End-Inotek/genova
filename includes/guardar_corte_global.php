@@ -437,8 +437,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
             $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
             $pdf->ln();
-            $totales_cargo+=$total_cargo;
-            $totales_abono+=$total_abono;
+            
           }
         }
         $pdf->Cell( 188 , 5, "", 0, 0, 'C');
@@ -447,14 +446,24 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
         $pdf->ln();
         $pdf->ln();
-      
+        $totales_cargo+=$total_cargo;
+        $totales_abono+=$total_abono;
+
+        if($totales_cargo>=$totales_abono){
+          $direfencia=$totales_cargo-$totales_abono;
+        }else{
+          $direfencia=$totales_abono-$totales_cargo;
+        }
 
         $pdf->Cell( 158 , 5, "", 0, 0, 'C');
-        $pdf->Cell( 30 , 5, "Total Cargos:", 1, 0, 'C');
-        $pdf->Cell( 30 , 5, "$".number_format($totales_cargo,2), 1, 0, 'C');
-        $pdf->Cell( 30 , 5, "Total Abonos:", 1, 0, 'C');
-        $pdf->Cell( 30 , 5, "$".number_format($totales_abono,2), 1, 0, 'C');
+        $pdf->Cell( 30 , 5, "Total Cargos:", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($totales_cargo,2), 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "Total Abonos:", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($totales_abono,2), 0, 0, 'C');
         $pdf->ln();
+        $pdf->Cell( 218 , 5, "", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "DIferencia", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "$".number_format($direfencia,2), 0, 0, 'C');
   
   
   $nueva_etiqueta= $labels->obtener_corte();

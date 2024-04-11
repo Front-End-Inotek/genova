@@ -389,6 +389,17 @@
                 <tr class="text-center">
                   <td>'.$totales_cargo.'</td>
                   <td>'.$totales_abono.'</td>
+                </tr>';
+                if($totales_cargo>=$totales_abono){
+                  $direfencia=$totales_cargo-$totales_abono;
+                }else{
+                  $direfencia=$totales_abono-$totales_cargo;
+                }
+                
+                echo'
+                <tr class="text-center">
+                  <th>Diferencia:</th>
+                  <td>'.$direfencia.'</td>
                 </tr>
               </tbody>
             </table>
