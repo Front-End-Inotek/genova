@@ -209,6 +209,12 @@
               }
               echo '   
               <label class="form-check-label" for="ver_graficas">Ver</label>
+              <span onclick="mostrar_info_permisos(0)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             </div>
         </section>
@@ -229,6 +235,12 @@
               }
               echo '   
               <label class="form-check-label" for="check_in">Check In</label>
+              <span onclick="mostrar_info_permisos(1)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             <div class="form-check form-check-inline">';
               if($usuario->cuenta_maestra==0){
@@ -238,6 +250,12 @@
               }
               echo '   
               <label class="form-check-label" for="cuenta_maestra">Cuenta maestra</label>
+              <span onclick="mostrar_info_permisos(2)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             <div class="form-check form-check-inline">';
               if($usuario->reporte_diario==0){
@@ -247,6 +265,12 @@
               }
               echo '   
               <label class="form-check-label" for="reporte_diario">Reporte diarios</label>
+              <span onclick="mostrar_info_permisos(3)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             <div class="form-check form-check-inline">';
               if($usuario->reporte_llegada==0){
@@ -256,6 +280,12 @@
               }
               echo '   
               <label class="form-check-label" for="reporte_llegada">Reporte llegada</label>
+              <span onclick="mostrar_info_permisos(4)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             <div class="form-check form-check-inline">';
               if($usuario->reporte_salidas==0){
@@ -265,6 +295,12 @@
               }
               echo '   
               <label class="form-check-label" for="reporte_salidas">Reporte salidas</label>
+              <span onclick="mostrar_info_permisos(5)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             <div class="form-check form-check-inline">';
               if($usuario->saldo_huspedes==0){
@@ -274,6 +310,12 @@
               }
               echo '   
               <label class="form-check-label" for="saldo_huspedes">Saldo huspedes</label>
+              <span onclick="mostrar_info_permisos(6)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             <div class="form-check form-check-inline">';
               if($usuario->edo_centa_fc==0){
@@ -283,6 +325,12 @@
               }
               echo '   
               <label class="form-check-label" for="edo_centa_fc">Edo. cuenta folio casa</label>
+              <span onclick="mostrar_info_permisos(7)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
           </div>
         </section>
@@ -301,6 +349,12 @@
               }
               echo '   
               <label class="form-check-label" for="ver_reservaciones">Ver reservaciones</label>
+              <span onclick="mostrar_info_permisos(8)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             <div class="form-check form-check-inline">';
               if($usuario->agregar_reservaciones==0){
@@ -310,6 +364,12 @@
               }
               echo '   
               <label class="form-check-label" for="agregar_reservaciones">Agregar reservaciones</label>
+              <span onclick="mostrar_info_permisos(9)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div> 
             <div class="form-check form-check-inline">';
               if($usuario->info_huespedes==0){
@@ -319,6 +379,12 @@
               }
               echo '   
               <label class="form-check-label" for="info_huespedes">Info huespedes</label>
+              <span onclick="mostrar_info_permisos(10)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div> 
             <div class="form-check form-check-inline">';
               if($usuario->reporte_cancelaciones==0){
@@ -328,6 +394,12 @@
               }
               echo '   
               <label class="form-check-label" for="reporte_cancelaciones">Reporte de cancelaciones</label>
+              <span onclick="mostrar_info_permisos(11)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div> 
           </div>
         </section>
@@ -347,6 +419,12 @@
               }
               echo '   
               <label class="form-check-label" for="reporte_cortes">Reporte cortes</label>
+              <span onclick="mostrar_info_permisos(12)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->cargos_noche == 0 ){
@@ -356,6 +434,12 @@
               }
               echo '   
               <label class="form-check-label" for="cargos_noche">Cargos por noche</label>
+              <span onclick="mostrar_info_permisos(13)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->surtir == 0 ){
@@ -365,6 +449,12 @@
               }
               echo '   
               <label class="form-check-label" for="surtir">Surtir</label>
+              <span onclick="mostrar_info_permisos(14)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->corte_diario == 0 ){
@@ -374,6 +464,12 @@
               }
               echo '   
               <label class="form-check-label" for="corte_diario">Corte diario</label>
+              <span onclick="mostrar_info_permisos(15)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->pronosticos == 0 ){
@@ -383,6 +479,12 @@
               }
               echo '   
               <label class="form-check-label" for="pronosticos">Pronosticos de ocupación</label>
+              <span onclick="mostrar_info_permisos(16)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->historial_cuentas == 0 ){
@@ -392,6 +494,12 @@
               }
               echo '   
               <label class="form-check-label" for="historial_cuentas">Historial de cuentas</label>
+              <span onclick="mostrar_info_permisos(17)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->ama_de_llaves == 0 ){
@@ -401,6 +509,12 @@
               }
               echo '   
               <label class="form-check-label" for="ama_de_llaves">Reporte ama de llaves</label>
+              <span onclick="mostrar_info_permisos(18)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
           </div>
         </section>
@@ -420,6 +534,12 @@
               }
               echo '   
               <label class="form-check-label" for="historial_cortes_u">Historial cortes usuario</label>
+              <span onclick="mostrar_info_permisos(19)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->corte_diario_u == 0 ){
@@ -429,6 +549,12 @@
               }
               echo '   
               <label class="form-check-label" for="corte_diario_u">Corte diario usuario</label>
+              <span onclick="mostrar_info_permisos(20)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->resumen_transacciones == 0 ){
@@ -438,6 +564,12 @@
               }
               echo '   
               <label class="form-check-label" for="resumen_transacciones">Resumen transacciones</label>
+              <span onclick="mostrar_info_permisos(21)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
           </div>
         </section>
@@ -456,6 +588,12 @@
               }
               echo '   
               <label class="form-check-label" for="factura_individual">Factura individual</label>
+              <span onclick="mostrar_info_permisos(22)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->factura_global == 0 ){
@@ -464,7 +602,13 @@
                 echo '<input class="form-check-input" type="checkbox" id="factura_global" checked >';
               }
               echo '   
-              <label class="form-check-label" for="factura_global">Factura individual</label>
+              <label class="form-check-label" for="factura_global">Factura global</label>
+              <span onclick="mostrar_info_permisos(23)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->buscar_fc == 0 ){
@@ -474,6 +618,12 @@
               }
               echo '   
               <label class="form-check-label" for="buscar_fc">Buscar conceptos por folio casa</label>
+              <span onclick="mostrar_info_permisos(24)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->cancelar_fac == 0 ){
@@ -483,6 +633,12 @@
               }
               echo '   
               <label class="form-check-label" for="cancelar_fac">Cancelar factura</label>
+              <span onclick="mostrar_info_permisos(25)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->bus_fac_fecha == 0 ){
@@ -492,6 +648,12 @@
               }
               echo '   
               <label class="form-check-label" for="bus_fac_fecha">Buscar factura por fecha</label>
+              <span onclick="mostrar_info_permisos(26)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->bus_fac_folio == 0 ){
@@ -501,6 +663,12 @@
               }
               echo '   
               <label class="form-check-label" for="bus_fac_folio">Buscar factura por folio</label>
+              <span onclick="mostrar_info_permisos(27)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->bus_fac_folio_casa == 0 ){
@@ -510,6 +678,12 @@
               }
               echo '   
               <label class="form-check-label" for="bus_fac_folio_casa">Buscar factura por folio casa</label>
+              <span onclick="mostrar_info_permisos(28)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->resumen_fac == 0 ){
@@ -519,6 +693,12 @@
               }
               echo '   
               <label class="form-check-label" for="resumen_fac">Resumen facturas</label>
+              <span onclick="mostrar_info_permisos(29)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
           </div>
         </section>
@@ -538,6 +718,12 @@
               }
               echo '   
               <label class="form-check-label" for="restaurante">Restaurante</label>
+              <span onclick="mostrar_info_permisos(30)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->agregar_res == 0 ){
@@ -547,6 +733,12 @@
               }
               echo '   
               <label class="form-check-label" for="agregar_res">Agregar</label>
+              <span onclick="mostrar_info_permisos(31)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->cat_res == 0 ){
@@ -556,6 +748,12 @@
               }
               echo '   
               <label class="form-check-label" for="cat_res">Categoías</label>
+              <span onclick="mostrar_info_permisos(32)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->invet_res == 0 ){
@@ -565,6 +763,12 @@
               }
               echo '   
               <label class="form-check-label" for="invet_res">Inventario</label>
+              <span onclick="mostrar_info_permisos(33)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->surtir_res == 0 ){
@@ -574,6 +778,12 @@
               }
               echo '   
               <label class="form-check-label" for="surtir_res">Surtir</label>
+              <span onclick="mostrar_info_permisos(34)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->mesas_res == 0 ){
@@ -583,6 +793,12 @@
               }
               echo '   
               <label class="form-check-label" for="mesas_res">Mesas</label>
+              <span onclick="mostrar_info_permisos(35)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->agregar_mesas_res == 0 ){
@@ -592,6 +808,12 @@
               }
               echo '   
               <label class="form-check-label" for="agregar_mesas_res">Agregar mesa</label>
+              <span onclick="mostrar_info_permisos(36)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
           </div>
         </section>
@@ -611,6 +833,12 @@
               }
               echo '   
               <label class="form-check-label" for="tipo_hab">Ver tipo de habitación</label>
+              <span onclick="mostrar_info_permisos(37)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->tarifas_hab == 0 ){
@@ -620,6 +848,12 @@
               }
               echo '   
               <label class="form-check-label" for="tarifas_hab">Ver tipos de tarifa</label>
+              <span onclick="mostrar_info_permisos(38)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
             <div class="form-check form-check-inline">';
               if( $usuario->ver_hab == 0 ){
@@ -629,6 +863,12 @@
               }
               echo '   
               <label class="form-check-label" for="ver_hab">Ver habitaciones</label>
+              <span onclick="mostrar_info_permisos(39)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>   
           </div>
         </section>
@@ -649,6 +889,12 @@
             }
             echo '
             <label class="form-check-label" for="combinar_cuentas" >Ver</label>
+              <span onclick="mostrar_info_permisos(40)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
           </div>
 
           </div>
@@ -657,11 +903,60 @@
 
 
         <hr>
-        <div class="alert alert-danger" role="alert">
-          Estas opciones se retirarán  en futuras versiones.
-        </div>
-        <hr>
+        <section class="form_checks_container">
+            <div class="form_checks_title">
+              <p>Editar cargos y abonos</p>
+            </div>
+            <div class="form_checks_container">
 
+            <div class="form-check form-check-inline">';
+            if($usuario->editar_abonos==0){
+            echo '<input class="form-check-input" type="checkbox" id="editar_abonos">';
+            }else{
+            echo '<input class="form-check-input" type="checkbox" id="editar_abonos" checked>';
+            }
+            echo '
+            <label class="form-check-label" for="editar_abonos" >Editar abonos</label>
+            <span onclick="mostrar_info_permisos(41)" data-toggle="modal" href="#caja_herramientas" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+              </svg>
+            </span>
+          </div>
+            <div class="form-check form-check-inline">';
+            if($usuario->editar_cargos==0){
+            echo '<input class="form-check-input" type="checkbox" id="editar_cargos">';
+            }else{
+            echo '<input class="form-check-input" type="checkbox" id="editar_cargos" checked>';
+            }
+            echo '
+            <label class="form-check-label" for="editar_cargos" >Editar cargos</label>
+            <span onclick="mostrar_info_permisos(42)" data-toggle="modal" href="#caja_herramientas" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+              </svg>
+            </span>
+          </div>
+
+          </div>
+
+        </section>
+
+
+        <hr>
+        
+
+            
+        <!---
+          <div class="alert alert-danger" role="alert">
+            Estas opciones se retirarán  en futuras versiones.
+          </div>
+        <hr>
+            MENUS ANTIGUOS
+        -->
+        <!-- 
         <section class="form_checks_container">
           <div class="form_checks_title">
             <p>Usuario</p>
@@ -1392,6 +1687,8 @@
             </section>
 
             <hr>
+
+            -->
 
             
 

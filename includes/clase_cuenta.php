@@ -572,8 +572,13 @@ function mostrar_cargos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
         <th></th>
         <th>Fecha</th>
         <th>Cargo</th>
-        <th></th>
-        <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
+        <th></th>';
+        if ( $usuario->nivel <= 1 || $usuario->editar_cargos == 1 ) {
+          echo '
+          <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
+          ';
+        }
+        echo '
         </tr>
       </thead>
       <tbody>';
@@ -681,7 +686,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
               <th>Fecha</th>
               <th>Cargo</th>
               <th>Observaciones</th>';
-              if ( $usuario->nivel <= 1 ) {
+              if ( $usuario->nivel <= 1 || $usuario->editar_cargos == 1 ) {
                 echo '
                   <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
                 ';
@@ -721,7 +726,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'
                     <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>';
-                    if ($usuario->nivel <= 1 ){
+                    if ($usuario->nivel <= 1 || $usuario->editar_cargos == 1 ){
                       echo '
                         <td>
                           <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> 
@@ -750,7 +755,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <td>$'.number_format($fila['cargo'], 2).'
                       <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>
                       <td>'.$fila["observacion"].'</td>';
-                      if ( $usuario->nivel <= 1 ) {
+                      if ( $usuario->nivel <= 1 || $usuario->editar_cargos == 1 ) {
                         echo '
                           <td>
                             <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;">
@@ -779,7 +784,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <td>$'.number_format($fila['cargo'], 2).'
                       <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>
                       <td>'.$fila["observacion"].'</td>';
-                      if ($usuario->nivel <= 1) {
+                      if ($usuario->nivel <= 1 || $usuario->editar_cargos == 1) {
                         echo'
                         <td>
                           <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> 
@@ -826,7 +831,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' >
                     </td>
                     <td>'.$fila["observacion"].'</td>';
-                    if ( $usuario->nivel <= 1 ) {
+                    if ( $usuario->nivel <= 1 || $usuario->editar_cargos == 1) {
                       echo '
                       <td>
                         <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_cargos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['cargo'].','.$id_maestra.','.$mov.')" style="font-size: 12px;"> 
@@ -899,7 +904,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
               <th>Abono</th>
               <th>Forma Pago</th>
               <th>Observaciones</th>';
-              if ( $usuario->nivel <= 1 ) {
+              if ( $usuario->nivel <= 1 || $usuario->editar_abonos == 1 ) {
                 echo'
                   <th><span class=" glyphicon glyphicon-cog"></span> Herramientas</th>
                 ';
@@ -934,7 +939,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     <td>$'.number_format($fila['abono'], 2).'</td>
                     <td>'.$fila['descripcion'].'</td>';
 
-                    if( $usuario->nivel <= 1 ) {
+                    if( $usuario->nivel <= 1 || $usuario->editar_abonos == 1 ) {
                       echo '
                       <td>
                         <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.','.$fila['id_ticket'].')" style="font-size: 12px;"> 
@@ -969,7 +974,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       </td>
                       <td>'.$fila['descripcion'].'</td>
                       <td>'.$fila['observacion'].'</td>';
-                      if ( $usuario->nivel <= 1 ) {
+                      if ( $usuario->nivel <= 1 || $usuario->editar_abonos == 1) {
                         echo'
                         <td>
                           <button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.','.$fila['id_ticket'].')" style="font-size: 12px;"> 
@@ -996,7 +1001,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       </td>
                       <td>'.$fila['descripcion'].'</td>
                       <td>'.$fila['observacion'].'</td>';
-                      if ( $usuario->nivel <= 1 ) {
+                      if ( $usuario->nivel <= 1 || $usuario->editar_abonos == 1) {
                         echo '
                           <td><button class="btn btn-primary" href="#caja_herramientas" data-toggle="modal" onclick="herramientas_abonos('.$fila['ID'].','.$hab_id.','.$estado.','.$fila['id_usuario'].','.$fila['abono'].','.$id_maestra.','.$mov.','.$fila['id_ticket'].')" style="font-size: 12px;"> 
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

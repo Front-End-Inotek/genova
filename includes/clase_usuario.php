@@ -164,6 +164,10 @@
       public $tarifas_hab;
 
       public $ver_hab;
+
+      public $editar_abonos;
+
+      public $editar_cargos;
       /*function __construct(){
       }*/
       // Constructor
@@ -322,6 +326,10 @@
 
           $this->ver_hab = -1;
 
+          $this->editar_abonos =-1;
+
+          $this->editar_cargos =-1;
+
         }else{
           $sentencia = "SELECT * FROM usuario WHERE id = $id_usuario LIMIT 1";
          // echo $sentencia ;
@@ -477,6 +485,8 @@
               $this->tipo_hab = $fila["tipo_hab"];
               $this->tarifas_hab = $fila["tarifas_hab"];
               $this->ver_hab = $fila["ver_hab"];
+              $this->editar_abonos = $fila["editar_abonos"];
+              $this->editar_cargos = $fila["editar_cargos"];
           }
           $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->huesped_ver+$this->huesped_agregar+$this->huesped_editar+$this->huesped_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_ver+$this->tarifa_agregar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar+$this->reservacion_ver+$this->reservacion_agregar+$this->reservacion_editar+$this->reservacion_borrar+$this->reporte_ver+$this->reporte_agregar+$this->forma_pago_ver+$this->forma_pago_agregar+$this->forma_pago_editar+$this->forma_pago_borrar+$this->inventario_ver+$this->inventario_agregar+$this->inventario_editar+$this->inventario_borrar+$this->inventario_surtir+$this->categoria_ver+$this->categoria_agregar+$this->categoria_editar+$this->categoria_borrar+$this->restaurante_ver+$this->restaurante_agregar+$this->restaurante_editar+$this->restaurante_borrar+$this->cupon_ver+$this->cupon_agregar+$this->cupon_editar+$this->cupon_borrar+$this->logs_ver;
         }  
@@ -818,7 +828,7 @@
           return $cat_paginas;
       }
       // Editar un usuario
-      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reservacion_preasignar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver,$auditoria_ver,$auditoria_editar,$llegadas_salidas_ver,$facturas_ver,$facturas_cancelar,$combinar_cuentas,$cortes_y_transacciones,$ver_graficas,$check_in,$cuenta_maestra,$reporte_diario,$reporte_llegada,$reporte_salidas,$saldo_huspedes,$edo_centa_fc,$ver_reservaciones,$agregar_reservaciones,$info_huespedes , $reporte_cancelaciones,$reporte_cortes,$cargos_noche,$surtir,$corte_diario,$pronosticos,$historial_cuentas,$ama_de_llaves,$historial_cortes_u,$corte_diario_u,$resumen_transacciones,$factura_individual,$factura_global,$buscar_fc,$cancelar_fac, $bus_fac_fecha, $bus_fac_folio, $bus_fac_folio_casa, $resumen_fac, $restaurante, $agregar_res, $cat_res, $invet_res, $surtir_res, $mesas_res, $agregar_mesas_res, $tipo_hab, $tarifas_hab, $ver_hab){
+      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reservacion_preasignar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver,$auditoria_ver,$auditoria_editar,$llegadas_salidas_ver,$facturas_ver,$facturas_cancelar,$combinar_cuentas,$cortes_y_transacciones,$ver_graficas,$check_in,$cuenta_maestra,$reporte_diario,$reporte_llegada,$reporte_salidas,$saldo_huspedes,$edo_centa_fc,$ver_reservaciones,$agregar_reservaciones,$info_huespedes , $reporte_cancelaciones,$reporte_cortes,$cargos_noche,$surtir,$corte_diario,$pronosticos,$historial_cuentas,$ama_de_llaves,$historial_cortes_u,$corte_diario_u,$resumen_transacciones,$factura_individual,$factura_global,$buscar_fc,$cancelar_fac, $bus_fac_fecha, $bus_fac_folio, $bus_fac_folio_casa, $resumen_fac, $restaurante, $agregar_res, $cat_res, $invet_res, $surtir_res, $mesas_res, $agregar_mesas_res, $tipo_hab, $tarifas_hab, $ver_hab, $editar_abonos, $editar_cargos){
         //function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tipo_ver,$tipo_agregar,$tipo_editar,$tipo_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$hab_ver,$hab_agregar,$hab_editar,$hab_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver){
         //$pass=md5($pass);
        
@@ -919,7 +929,9 @@
          `agregar_mesas_res` = $agregar_mesas_res,
          `tipo_hab` = $tipo_hab,
          `tarifas_hab` = $tarifas_hab,
-         `ver_hab` = $ver_hab
+         `ver_hab` = $ver_hab,
+         `editar_abonos` = $editar_abonos,
+         `editar_cargos` = $editar_cargos
         WHERE `id` = '$id'";
         //echo $sentencia ;
          // die();

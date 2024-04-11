@@ -96,7 +96,7 @@ function sabernosession(){
                     //console.log("rack de operaciones "+vista);
                     var usuario_id=localStorage.getItem("id");
                     //$("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
-                    $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token);
+                    $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
                     siguiente_vista=1
                 }
                 if(vista==1){
@@ -105,7 +105,7 @@ function sabernosession(){
                     //console.log("rack de operaciones "+vista);
                     var id=localStorage.getItem("id");
                     var token=localStorage.getItem("tocken");
-                    $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token);
+                    $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
                 }
             });
             cargar_area_trabajo();
@@ -190,15 +190,19 @@ function cargar_area_trabajo(){
         var usuario_id=localStorage.getItem("id");
         $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         //closeNav();
-    }else{
-        //console.log("actualizando rack de operaciones "+vista);
+    }if (vista == 1) {
+        console.log("actualizando rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
+    } if ( vista == 3 ) {
+        $("#pie").load("includes/pie.php?id="+id);
+        graficas();
+        return;
     }
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
-    setTimeout('cargar_area_trabajo()',5500);//5500
+    setTimeout('cargar_area_trabajo()', 1000);//5500
 }
 
     function pregunta_salir(){
@@ -1767,8 +1771,8 @@ function graficas(){
     var usuario_id=localStorage.getItem("id");
     localStorage.setItem('vista',3)
     $('#area_trabajo').hide();
-    $('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/graficas.php?usuario_id="+usuario_id);
+    $('#area_trabajo').show();
+	$("#area_trabajo").load("includes/graficas.php?usuario_id="+usuario_id);
     $('#pie').show();
     closeModal();
     closeNav();
@@ -3837,9 +3841,9 @@ function seleccionar_vista(){
     if(vista==3 || vista==0){
         var usuario_id=localStorage.getItem("id");
         $('#area_trabajo').hide();
-        $('#area_trabajo_menu').show();
+        $('#area_trabajo').show();
         $('#pie').show();
-        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         closeModal();
         closeNav();
     }else{
@@ -3849,8 +3853,8 @@ function seleccionar_vista(){
         estatus_hab=""
         $('#area_trabajo').hide();
         $('#pie').show();
-        $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab,function(){
+        $('#area_trabajo').show();
+        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab,function(){
         });
         closeModal();
         closeNav();
@@ -4964,6 +4968,10 @@ function modificar_usuario(id){
     var tarifas_hab = document.getElementById("tarifas_hab").checked
 
     var ver_hab = document.getElementById("ver_hab").checked
+
+    var editar_abonos = document.getElementById("editar_abonos").checked
+
+    var editar_cargos = document.getElementById("editar_cargos").checked
     // console.log(reservacion_preasignar)
     // return
     // Convertir usuario permisos
@@ -5479,6 +5487,19 @@ function modificar_usuario(id){
     } else {
         ver_hab = 0;
     }
+
+    if ( editar_abonos ) {
+        editar_abonos = 1;
+    } else {
+        editar_abonos = 0;
+    }
+
+    if ( editar_cargos ) {
+        editar_cargos = 1;
+    } else {
+        editar_cargos = 0;
+    }
+
 	if(usuario.length >0 && nivel.length >0){
         //if(contrasena == recontrasena){
             $("#boton_usuario").html('<div class="spinner-border text-primary"></div>');
@@ -5589,7 +5610,9 @@ function modificar_usuario(id){
                     "agregar_mesas_res" : agregar_mesas_res,
                     "tipo_hab" : tipo_hab,
                     "tarifas_hab" : tarifas_hab,
-                    "ver_hab" : ver_hab
+                    "ver_hab" : ver_hab,
+                    "editar_abonos" : editar_abonos,
+                    "editar_cargos" : editar_cargos
 			};
             //console.log(datos)
 		$.ajax({
@@ -6625,6 +6648,7 @@ function ver_inventario(){
 }
 
 function switch_rack(){
+	$('#area_trabajo_menu').hide();
     if(siguiente_vista==0){
         // AQUI SE PONE EN 1 PARA DESHABILITAR EL OTRO RACK
         /* localStorage.setItem('vista',0) */
@@ -6640,9 +6664,9 @@ function switch_rack(){
         //console.log("rack de habitaciones "+vista);
         var usuario_id=localStorage.getItem("id");
         $('#area_trabajo').hide();
-        $('#area_trabajo_menu').show();
+        $('#area_trabajo').show();
         $('#pie').show();
-        $("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+        $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         closeModal();
         closeNav();
         siguiente_vista=1;
@@ -6654,8 +6678,8 @@ function switch_rack(){
         estatus_hab=""
         $('#area_trabajo').hide();
         $('#pie').show();
-        $('#area_trabajo_menu').show();
-        $("#area_trabajo_menu").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
+        $('#area_trabajo').show();
+        $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token+"&estatus_hab="+estatus_hab);
         closeModal();
         closeNav();
         siguiente_vista=0;
@@ -6666,8 +6690,8 @@ function ver_rack_habitacional(){
     var usuario_id=localStorage.getItem("id");
 	$('#area_trabajo').hide();
     $('#pie').hide();
-	$('#area_trabajo_menu').show();
-	$("#area_trabajo_menu").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
+	$('#area_trabajo').show();
+	$("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
 	closeNav();
 }
 
@@ -10510,6 +10534,196 @@ function cambiarNoFac2(id_ticket) {
             manejo_facturas_folio_casa();
         }
     })
+}
+
+function mostrar_info_permisos( id_permiso ) {
+    let titulo = "";
+    let texto = "";
+
+
+    switch (id_permiso) {
+        case 0:
+            titulo = "Estadisticas"
+            texto = "permiso para ver las graficas sobre las operaciones realizadas en el sistema"
+            break;
+        
+        case 1:
+            titulo = "Check In"
+            texto = "Permiso para realizar un check in"
+            break;
+        case 2:
+            titulo = "Cuenta maestra"
+            texto = "Permiso para ver y agregar cuentas maestras"
+            break;
+        case 3:
+            titulo = "Reporte diarios"
+            texto = ""
+            break;
+        case 4:
+            titulo = "Reporte llegada"
+            texto = ""
+            break;
+        case 5:
+            titulo = "Reporte salidas"
+            texto = ""
+            break;
+        case 6:
+            titulo = "Saldo huspedes"
+            texto = "Permiso para ver reporte de cargos y abonos de cada una de las habitaciones activas en el momento"
+            break;
+        case 7:
+            titulo = "Edo. cuenta folio casa"
+            texto = "Permiso para ver un estado de cuenta buscandolo con por su folio casa"
+            break;
+        case 8:
+            titulo = "Ver reservaciones"
+            texto = "Permiso para ver las reservaciones que se tienen pendientes"
+            break;
+        case 9:
+            titulo = "Agregar reservaciones"
+            texto = "Permiso para agregar una nueva reservaciones"
+            break;
+        case 10:
+            titulo = "Info huespedes"
+            texto = "Permiso para ver la informacion de los huespedes registrados"
+            break;
+        case 11:
+            titulo = "Reporte de cancelaciones"
+            texto = "Permiso para ver el reporte de reservaciones canceladas"
+            break;
+        case 12:
+            titulo = "Reporte cortes"
+            texto = "Permiso para generar un reporte de cortes en un rango de fechas"
+            break;
+        case 13:
+            titulo = "Cargos por noche "
+            texto = ""
+            break;
+        case 14:
+            titulo = "Surtir"
+            texto = ""
+            break;
+        case 15:
+            titulo = "Corte diario"
+            texto = ""
+            break;
+        case 16:
+            titulo = "Pronosticos de ocupación"
+            texto = "Permiso para generar el reporte de pronostico de ocupacion"
+            break;
+        case 17:
+            titulo = "Historial de cuentas"
+            texto = "Permiso para ver el historial de todas las cuentas y generar su reporte"
+            break;
+        case 18:
+            titulo = "Reporte ama de llaves"
+            texto = "Permiso para ver el reporte de ama de llaves"
+            break;
+        case 19:
+            titulo = "Historial cortes usuario"
+            texto = "Permiso para ver el historial de cortes diarios"
+            break;
+        case 20:
+            titulo = "Corte diario usuario"
+            texto = "Permiso para realizar corte diario por usuario"
+            break;
+        case 21:
+            titulo = "Resumen transacciones"
+            texto = "Permiso para ver el resumen de transacciones"
+            break;
+        case 22:
+            titulo = "Factura individual"
+            texto = "Permiso para generar una factura individual"
+            break;
+        case 23:
+            titulo = "Factura global"
+            texto = "Permiso para realizar una factura global"
+            break;
+        case 24:
+            titulo = "Buscar conceptos por folio casa"
+            texto = "Permiso para buscar conseptos por un folio casa y facturarlos"
+            break;
+        case 25:
+            titulo = "Cancelar factura"
+            texto = "Permiso para cancelar una factura"
+            break;
+        case 26:
+            titulo = "Buscar factura por fecha"
+            texto = "Permiso para realizar una busqueda de facturas por un rango de fechas"
+            break;
+        case 27:
+            titulo = "Buscar factura por folio"
+            texto = "Permiso para buscar una factura por un rango de folios"
+            break;
+        case 28:
+            titulo = "Buscar factura por folio casa"
+            texto = "Permiso para buscar facturas realizadas a un folio casa en especifico"
+            break;
+        case 29:
+            titulo = "Resumen facturas"
+            texto = "Permiso para ver un reporte de fecturas realizadas y conceptos sin facturar"
+            break;
+        case 30:
+            titulo = "Restaurante"
+            texto = "Permiso para asignar una mesa, tomar pedidos, y cobrar"
+            break;
+        case 31:
+            titulo = "Agregar"
+            texto = "Permiso para agregar productos al inventario"
+            break;
+        case 32:
+            titulo = "Categoías"
+            texto = "Permiso para agregar, eliminar o modificar una categoria"
+            break;
+        case 33:
+            titulo = "Inventario"
+            texto = "Permiso para  ver, eliminas o editar el inventario"
+            break;
+        case 34:
+            titulo = "Surtir"
+            texto = "Permiso para surtir el inventario"
+            break;
+        case 35:
+            titulo = "Mesas"
+            texto = "Permiso para ver mesas"
+            break;
+        case 36:
+            titulo = "Agregar mesa"
+            texto = "Permiso para agregar mesa"
+            break;
+        case 37:
+            titulo = "Ver tipo de habitación"
+            texto = "Permiso para agregar tipos de habitacion"
+            break;
+        case 38:
+            titulo = "Ver tipos de tarifa"
+            texto = "Permiso para agregar tipos de tarifas"
+            break;
+        case 39:
+            titulo = "Ver habitaciones"
+            texto = "Permiso para  agregar, editar o eliminar una habitacion"
+            break;
+        case 40:
+            titulo = "Combinar cuentas"
+            texto = "Permiso para combinar cuentas"
+            break;
+        case 41:
+            titulo = "Editar abonos"
+            texto = "Permiso para editar abonos en estado de cuenta"
+            break;
+        case 42:
+            titulo = "Editar cargos"
+            texto = "Permiso para editar cargos en estado de cuenta"
+            break;
+        
+        default:
+            titulo = "Permiso no definido"
+            texto = "Sin definir"
+            break;
+    }
+
+    $("#mostrar_herramientas").load("includes/modal_info_permisos.php?titulo="+ encodeURIComponent(titulo) +"&texto="+ encodeURIComponent(texto) )
+    console.log( titulo , texto )
 }
 //Evaluamos el inicio de sesion
 function inicio(){

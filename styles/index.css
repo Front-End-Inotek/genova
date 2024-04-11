@@ -2,27 +2,22 @@
   /* Firefox */
   * {
     scrollbar-width: auto;
-    scrollbar-color: #34343436 #e2e2e2;
-    text-decoration: none;
-  }
-  a {
-    text-decoration: none !important;
+    scrollbar-color: #79848c #f5f5f7;
   }
 
   /* Chrome, Edge, and Safari */
   *::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 16px;
   }
 
   *::-webkit-scrollbar-track {
-    background: #e2e2e2;
+    background: #f5f5f7;
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: #34343436;
-    border-radius: 0px;
-    border: 0px solid #e2e2e2;
+    background-color: #79848c;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
   }
 
 body {
