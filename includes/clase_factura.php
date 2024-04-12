@@ -342,8 +342,24 @@
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Ver mas
                       </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#" onclick="reenviar_factura(' . htmlspecialchars($fila['folio']) . ', \'' . htmlspecialchars($fila['nombre']) . '\')">Reenviar</a>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+                      if (strpos($fila['nombre'], "'") !== false) {
+                        $lista = explode("'", $fila['nombre']);
+                        $cadena="";
+                        for ($i=0; $i<count($lista); $i++){
+                          if ($i==0){
+                            $cadena=$lista[$i];
+                          }else{
+                            $cadena=$cadena." ".$lista[$i];
+                          }
+                          
+                        }
+                        //echo $cadena;
+                    } else{
+                      $cadena=$fila['nombre'];
+                    }
+                      echo'
+                        <a class="dropdown-item" href="#" onclick="reenviar_factura(' . htmlspecialchars($fila['folio']) . ', \'' . htmlspecialchars($cadena) . '\')">Reenviar</a>
                         <a class="dropdown-item" href="#" onclicK="agregar_comprobante('.$fila['folio'].')" >Agregar comprobante</a>
                         <a class="dropdown-item" href="#" onclick="factura_cancelarbtn('.$fila['folio'].','.$fila['id'].')">Cancelar</a>
                       </div>
