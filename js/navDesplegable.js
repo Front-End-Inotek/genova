@@ -120,6 +120,7 @@ function handleSiceTable () {
   const contenedor = document.getElementsByClassName("aside_nav_link_container");
   const contenedor2 = document.getElementsByClassName("aside_nav_link_containerMore");
   const contenedor3 = document.getElementsByClassName("aside_nav_link_containerInfo");
+  const imgBurger = document.getElementById("img-hamburger")
 
   nombre.classList.toggle("d-none");
 
@@ -139,5 +140,13 @@ function handleSiceTable () {
   }
   for ( let i = 0; i < contenedor3.length; i++) {
     contenedor3[i].classList.toggle("space_around")
+  }
+
+  if ( nav.classList.contains("aside_nav_container_open")) {
+    imgBurger.src = "./assets/icons-nav/close.svg"
+    console.log("cambiando imagen a cerrar xd")
+  } else {
+    imgBurger.src = "./assets/icons-nav/burger.svg"
+    console.log("cambiando imagen para abrir")
   }
 }

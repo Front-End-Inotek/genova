@@ -78,10 +78,14 @@
 .aside_menu_hamburger {
     width: 2.15rem;
     cursor: pointer;
+    transition: all 0.1s ease;
+}
+.aside_menu_hamburger:hover {
+    scale: 1.1;
 }
 .aside_menu_hamburger:active {
-    scale: 0.8;
-    transition: all 0.1s ease-in-out;
+    scale: 0.9;
+    opacity: 0.9;
 }
 .aside_nav_logo_link{
     font-weight: bold;

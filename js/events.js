@@ -191,7 +191,7 @@ function cargar_area_trabajo(){
         $("#area_trabajo").load("includes/rack_habitacional.php?usuario_id="+usuario_id);
         //closeNav();
     }if (vista == 1) {
-        console.log("actualizando rack de operaciones "+vista);
+        //console.log("actualizando rack de operaciones "+vista);
         var id=localStorage.getItem("id");
         var token=localStorage.getItem("tocken");
         $("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
@@ -6647,6 +6647,8 @@ function ver_inventario(){
 	closeNav();
 }
 
+let contador_rack = 0;
+
 function switch_rack(){
 	$('#area_trabajo_menu').hide();
     if(siguiente_vista==0){
@@ -6670,6 +6672,7 @@ function switch_rack(){
         closeModal();
         closeNav();
         siguiente_vista=1;
+        contador_rack++
     }else{
         //console.log("rack de operaciones "+vista);
         var id=localStorage.getItem("id");
@@ -6683,6 +6686,10 @@ function switch_rack(){
         closeModal();
         closeNav();
         siguiente_vista=0;
+        contador_rack++
+    }
+    if (contador_rack == 1 ) {
+        cargar_area_trabajo();
     }
 }
 
