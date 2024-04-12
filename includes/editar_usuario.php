@@ -956,8 +956,8 @@
         <hr>
             MENUS ANTIGUOS
         -->
-        <!-- 
-        <section class="form_checks_container">
+
+        <section class="form_checks_container d-none">
           <div class="form_checks_title">
             <p>Usuario</p>
           </div>
@@ -1004,9 +1004,8 @@
               </div>
             </div>
           </section>
-          <hr>
 
-          <section class="form_checks_container">
+          <section class="form_checks_container d-none">
             <div class="form_checks_title">
                 <p>Huésped</p>
             </div>
@@ -1052,8 +1051,7 @@
               <label class="form-check-label">Borrar</label>
             </div>
             </div>
-          </section>
-          <hr>';
+          </section>';
             /*<div class="form-group row">
             <div class="col-sm-3">Tipo habitacion:</div>
             <div class="col-sm-1">
@@ -1106,7 +1104,7 @@
             </div>
             </div><br><hr>*/  
             echo '
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Usuario</p>
               </div>
@@ -1152,9 +1150,7 @@
                 <label class="form-check-label" for="tarifa_borrar">Borrar</label>
               </div>
               </div>
-            </section>
-
-            <hr>';
+            </section>';
 
             /*<div class="form-group row">
             <div class="col-sm-3">Habitacion:</div>
@@ -1208,7 +1204,7 @@
             </div>
             </div><br><hr>*/  
             echo '
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Reservación</p>
               </div>
@@ -1266,9 +1262,7 @@
             </div>
           </section>
 
-          <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Llegadas y salidas</p>
               </div>
@@ -1286,9 +1280,7 @@
                 </div>
             </section>
 
-          <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Reportes</p>
               </div>
@@ -1317,9 +1309,7 @@
               </div>
             </section>
 
-          <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Cortes y transacciones</p>
               </div>
@@ -1338,9 +1328,7 @@
               </div>
             </section>
 
-            <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Forma Pago</p>
               </div>
@@ -1389,9 +1377,7 @@
               </div>
             </section>
 
-            <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Inventario</p>
               </div>
@@ -1450,9 +1436,7 @@
               </div>
             </section>
 
-            <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Categoría</p>
               </div>
@@ -1500,9 +1484,7 @@
               </div>
             </section>
 
-            <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Restaurante</p>
               </div>
@@ -1551,9 +1533,7 @@
               </div>
             </section>
 
-            <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Cupón</p>
               </div>
@@ -1602,9 +1582,7 @@
               </div>
             </section>
 
-            <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
               <div class="form_checks_title">
                 <p>Logs</p>
               </div>
@@ -1622,9 +1600,7 @@
               </div>
             </section>
 
-            <hr>
-
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
                 <div class="form_checks_title">
                   <p>Auditoria</p>
                 </div>
@@ -1654,9 +1630,9 @@
 
             </section>
 
-            <hr>
+      
 
-            <section class="form_checks_container">
+            <section class="form_checks_container d-none">
                 <div class="form_checks_title">
                   <p>Facturas</p>
                 </div>
@@ -1686,11 +1662,7 @@
 
             </section>
 
-            <hr>
-
-            -->
-
-            
+     
 
             <div class="container_btn">
               <div id="boton_usuario">
