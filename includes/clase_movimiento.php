@@ -620,6 +620,11 @@
         $fecha= $fila['inicio_hospedaje'];
         return $fecha;
       }
+      function actualizar_hab($mov,$id_hab){
+        $sentencia= "UPDATE `movimiento` SET `id_hab`=$id_hab WHERE `id`=$mov";
+        $comentario="acturalizar habitacion";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+      }
       function saber_fecha_fin($mov){
         $sentencia="SELECT fin_hospedaje FROM movimiento
         WHERE id = $mov";
