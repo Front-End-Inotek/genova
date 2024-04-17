@@ -203,7 +203,6 @@
               $this->celular= $fila['celular'];
               $this->correo= $fila['correo'];
               $this->direccion= $fila['direccion'];
-            
               $this->usuario_ver= $fila['usuario_ver'];
               $this->usuario_agregar= $fila['usuario_agregar'];
               $this->usuario_editar= $fila['usuario_editar'];

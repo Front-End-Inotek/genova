@@ -33,24 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //moveFocus(currentRow, currentCol);
     document.addEventListener("keydown", (e) => {
-      console.log( e.key );
+      //console.log( e.key );
 
      if (e.key === "ArrowDown") {
         currentRow = Math.min(currentRow + 1, inputsBoard.length - 1);
         moveFocus(currentRow, currentCol);
-        console.log(currentRow)
+        //console.log(currentRow)
     } else if (e.key === "ArrowUp") {
         currentRow = Math.max(currentRow - 1, 0);
         moveFocus(currentRow, currentCol);
-        console.log(currentRow)
+        //console.log(currentRow)
     } else if (e.key === "ArrowLeft") {
         currentCol = Math.max(currentCol - 1, 0);
         moveFocus(currentRow, currentCol);
-        console.log(currentCol)
+        //console.log(currentCol)
     } else if (e.key === "ArrowRight") {
         currentCol = Math.min(currentCol + 1, inputsBoard[currentRow].length - 1);
         moveFocus(currentRow, currentCol);
-        console.log(currentCol)
+        //console.log(currentCol)
       }
     });
 

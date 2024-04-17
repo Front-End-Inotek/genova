@@ -144,9 +144,7 @@ function handleSiceTable () {
 
   if ( nav.classList.contains("aside_nav_container_open")) {
     imgBurger.src = "./assets/icons-nav/close.svg"
-    console.log("cambiando imagen a cerrar xd")
   } else {
     imgBurger.src = "./assets/icons-nav/burger.svg"
-    console.log("cambiando imagen para abrir")
   }
 }

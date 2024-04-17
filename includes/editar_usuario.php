@@ -401,8 +401,50 @@
                 </svg>
               </span>
             </div> 
-          </div>
-        </section>
+
+            <p>hola</p>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->reservacion_agregar==0){
+                echo '<input class="form-check-input" type="checkbox" id="reservacion_agregar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="reservacion_agregar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="reservacion_agregar">Agregar</label>
+              </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->reservacion_editar==0){
+                echo '<input class="form-check-input" type="checkbox" id="reservacion_editar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="reservacion_editar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="reservacion_editar">Editar</label>
+              </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->reservacion_borrar==0){
+                echo '<input class="form-check-input" type="checkbox" id="reservacion_borrar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="reservacion_borrar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="reservacion_borrar">Borrar</label>
+              </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->reservacion_preasignar==0){
+                echo '<input class="form-check-input" type="checkbox" id="reservacion_preasignar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="reservacion_preasignar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="reservacion_preasignar">Preasignar</label>
+              </div>
+            </div>
+          </section>
 
         <hr>
 
@@ -814,7 +856,47 @@
                   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
                 </svg>
               </span>
-            </div>   
+            </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->inventario_editar==0){
+                echo '<input class="form-check-input" type="checkbox" id="inventario_editar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="inventario_editar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="inventario_editar">Editar inventario</label>
+              </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->inventario_borrar==0){
+                echo '<input class="form-check-input" type="checkbox" id="inventario_borrar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="inventario_borrar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="inventario_borrar" >Borrar inventario</label>
+              </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->categoria_editar==0){
+                echo '<input class="form-check-input" type="checkbox" id="categoria_editar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="categoria_editar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="categoria_editar" >Editar categoria</label>
+              </div>
+
+              <div class="form-check form-check-inline">';
+                if($usuario->categoria_borrar==0){
+                echo '<input class="form-check-input" type="checkbox" id="categoria_borrar">';
+                }else{
+                echo '<input class="form-check-input" type="checkbox" id="categoria_borrar" checked>';
+                }
+                echo '
+                <label class="form-check-label" for="categoria_borrar" >Borrar categoria</label>
+              </div>
           </div>
         </section>
 
@@ -944,45 +1026,13 @@
 
         </section>
 
-
         <hr>
-        
 
-            
-        <!---
-          <div class="alert alert-danger" role="alert">
-            Estas opciones se retirarán  en futuras versiones.
-          </div>
-        <hr>
-            MENUS ANTIGUOS
-        -->
-
-        <section class="form_checks_container d-none">
+        <section class="form_checks_container">
           <div class="form_checks_title">
-            <p>Usuario</p>
+            <p>Configuracion de usuarios</p>
           </div>
           <div class="form_checks_container">
-
-            <div class="form-check form-check-inline">';
-              if($usuario->usuario_ver==0){
-                echo '<input class="form-check-input" type="checkbox" id="usuario_ver" >';
-              }else{
-                echo '<input class="form-check-input" type="checkbox" id="usuario_ver" checked >';
-              }
-              echo '   
-              <label class="form-check-label" for="usuario_ver">Ver</label>
-            </div>
-
-            <div class="form-check form-check-inline">';
-                if($usuario->usuario_agregar==0){
-                echo '<input class="form-check-input" type="checkbox" id="usuario_agregar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="usuario_agregar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="usuario_agregar">Agregar</label>
-              </div>
-
               <div class="form-check form-check-inline">';
                 if($usuario->usuario_editar==0){
                 echo '<input class="form-check-input" type="checkbox" id="usuario_editar">';
@@ -990,7 +1040,7 @@
                 echo '<input class="form-check-input" type="checkbox" id="usuario_editar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="usuario_editar">Editar</label>
+                <label class="form-check-label" for="usuario_editar">Editar usuario</label>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1000,36 +1050,18 @@
                 echo '<input class="form-check-input" type="checkbox" id="usuario_borrar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="usuario_borrar">Borrar</label>
+                <label class="form-check-label" for="usuario_borrar">Borrar usuario</label>
               </div>
             </div>
           </section>
 
-          <section class="form_checks_container d-none">
+          <hr>
+
+          <section class="form_checks_container">
             <div class="form_checks_title">
                 <p>Huésped</p>
             </div>
             <div class="form_checks_container">
-            
-            <div class="form-check form-check-inline">';
-              if($usuario->huesped_ver==0){
-              echo '<input class="form-check-input" type="checkbox" id="huesped_ver">';
-              }else{
-              echo '<input class="form-check-input" type="checkbox" id="huesped_ver" checked>';
-              }
-              echo '
-              <label class="form-check-label" for="huesped_ver">Ver</label>
-            </div>
-
-            <div class="form-check form-check-inline">';
-              if($usuario->huesped_agregar==0){
-              echo '<input class="form-check-input" type="checkbox" id="huesped_agregar">';
-              }else{
-              echo '<input class="form-check-input" type="checkbox" id="huesped_agregar" checked>';
-              }
-              echo '
-              <label class="form-check-label" for="huesped_agregar">Agregar</label>
-            </div>
 
             <div class="form-check form-check-inline">';
               if($usuario->huesped_editar==0){
@@ -1038,7 +1070,7 @@
               echo '<input class="form-check-input" type="checkbox" id="huesped_editar" checked>';
               }
               echo '
-              <label class="form-check-label" for="huesped_editar">Editar</label>
+              <label class="form-check-label" for="huesped_editar">Editar información de huésped</label>
             </div>
 
             <div class="form-check form-check-inline">';
@@ -1048,10 +1080,14 @@
               echo '<input class="form-check-input" type="checkbox" id="huesped_borrar" checked>';
               }
               echo '
-              <label class="form-check-label">Borrar</label>
+              <label class="form-check-label" for="huesped_borrar" >Borrar huésped</label>
             </div>
             </div>
-          </section>';
+          </section>
+
+          <hr>
+          
+          ';
             /*<div class="form-group row">
             <div class="col-sm-3">Tipo habitacion:</div>
             <div class="col-sm-1">
@@ -1104,31 +1140,11 @@
             </div>
             </div><br><hr>*/  
             echo '
-            <section class="form_checks_container d-none">
+            <section class="form_checks_container">
               <div class="form_checks_title">
-                <p>Usuario</p>
+                <p>Tarifa</p>
               </div>
               <div class="form_checks_container">
-
-              <div class="form-check form-check-inline">';
-                if($usuario->tarifa_ver==0){
-                echo '<input class="form-check-input" type="checkbox" id="tarifa_ver">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="tarifa_ver" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="tarifa_ver">Ver</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->tarifa_agregar==0){
-                echo '<input class="form-check-input" type="checkbox" id="tarifa_agregar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="tarifa_agregar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="tarifa_agregar">Agregar</label>
-              </div>
 
               <div class="form-check form-check-inline">';
                 if($usuario->tarifa_editar==0){
@@ -1137,7 +1153,7 @@
                 echo '<input class="form-check-input" type="checkbox" id="tarifa_editar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="tarifa_editar"> Editar</label>
+                <label class="form-check-label" for="tarifa_editar">Editar tarifa</label>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1147,10 +1163,14 @@
                 echo '<input class="form-check-input" type="checkbox" id="tarifa_borrar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="tarifa_borrar">Borrar</label>
+                <label class="form-check-label" for="tarifa_borrar">Borrar tarifa</label>
               </div>
               </div>
-            </section>';
+            </section>
+
+            <hr>
+            
+            ';
 
             /*<div class="form-group row">
             <div class="col-sm-3">Habitacion:</div>
@@ -1204,131 +1224,9 @@
             </div>
             </div><br><hr>*/  
             echo '
-            <section class="form_checks_container d-none">
-              <div class="form_checks_title">
-                <p>Reservación</p>
-              </div>
-              <div class="form_checks_container">
 
-              <div class="form-check form-check-inline">';
-                if($usuario->reservacion_ver==0){
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_ver">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_ver" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="reservacion_ver" >Ver</label>
-              </div>
 
-              <div class="form-check form-check-inline">';
-                if($usuario->reservacion_agregar==0){
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_agregar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_agregar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="reservacion_agregar">Agregar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->reservacion_editar==0){
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_editar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_editar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="reservacion_editar">Editar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->reservacion_borrar==0){
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_borrar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_borrar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="reservacion_borrar">Borrar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->reservacion_preasignar==0){
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_preasignar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="reservacion_preasignar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="reservacion_preasignar">Preasignar</label>
-              </div>
-            </div>
-          </section>
-
-            <section class="form_checks_container d-none">
-              <div class="form_checks_title">
-                <p>Llegadas y salidas</p>
-              </div>
-              <div class="form_checks_container">
-
-                  <div class="form-check form-check-inline">';
-                  if($usuario->llegadas_salidas_ver==0){
-                  echo '<input class="form-check-input" type="checkbox" id="llegadas_salidas_ver">';
-                  }else{
-                  echo '<input class="form-check-input" type="checkbox" id="llegadas_salidas_ver" checked>';
-                  }
-                  echo '
-                  <label class="form-check-label" for="llegadas_salidas_ver">Ver</label>
-                  </div>
-                </div>
-            </section>
-
-            <section class="form_checks_container d-none">
-              <div class="form_checks_title">
-                <p>Reportes</p>
-              </div>
-              <div class="form_checks_container">
-
-              <div class="form-check form-check-inline">';
-                if($usuario->reporte_ver==0){
-                echo '<input class="form-check-input" type="checkbox" id="reporte_ver">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="reporte_ver" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="reporte_ver">Ver</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->reporte_agregar==0){
-                echo '<input class="form-check-input" type="checkbox" id="reporte_agregar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="reporte_agregar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="reporte_agregar" >Agregar</label>
-              </div>
-
-              </div>
-            </section>
-
-            <section class="form_checks_container d-none">
-              <div class="form_checks_title">
-                <p>Cortes y transacciones</p>
-              </div>
-              <div class="form_checks_container">
-
-                <div class="form-check form-check-inline">';
-                  if($usuario->cortes_y_transacciones==0){
-                  echo '<input class="form-check-input" type="checkbox" id="cortes_y_transacciones">';
-                  }else{
-                  echo '<input class="form-check-input" type="checkbox" id="cortes_y_transacciones" checked>';
-                  }
-                  echo '
-                  <label class="form-check-label" for="cortes_y_transacciones">Ver</label>
-                </div>
-
-              </div>
-            </section>
-
-            <section class="form_checks_container d-none">
+            <section class="form_checks_container">
               <div class="form_checks_title">
                 <p>Forma Pago</p>
               </div>
@@ -1341,7 +1239,7 @@
                 echo '<input class="form-check-input" type="checkbox" id="forma_pago_ver" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="forma_pago_ver">Ver</label>
+                <label class="form-check-label" for="forma_pago_ver">Ver formas de pago</label>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1351,7 +1249,7 @@
                 echo '<input class="form-check-input" type="checkbox" id="forma_pago_agregar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="forma_pago_agregar">Agregar</label>
+                <label class="form-check-label" for="forma_pago_agregar">Agregar formas de pago</label>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1361,7 +1259,7 @@
                 echo '<input class="form-check-input" type="checkbox" id="forma_pago_editar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="forma_pago_editar" >Editar</label>
+                <label class="form-check-label" for="forma_pago_editar" >Editar formas de pago</label>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1371,171 +1269,17 @@
                 echo '<input class="form-check-input" type="checkbox" id="forma_pago_borrar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="forma_pago_borrar" >Borrar</label>
+                <label class="form-check-label" for="forma_pago_borrar" >Borrar formas de pago</label>
               </div>
 
               </div>
             </section>
 
-            <section class="form_checks_container d-none">
+            <hr>
+
+            <section class="form_checks_container">
               <div class="form_checks_title">
-                <p>Inventario</p>
-              </div>
-              <div class="form_checks_container">
-
-              <div class="form-check form-check-inline">';
-                if($usuario->inventario_ver==0){
-                echo '<input class="form-check-input" type="checkbox" id="inventario_ver">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="inventario_ver" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="inventario_ver">Ver</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->inventario_agregar==0){
-                echo '<input class="form-check-input" type="checkbox" id="inventario_agregar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="inventario_agregar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="inventario_agregar" >Agregar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->inventario_editar==0){
-                echo '<input class="form-check-input" type="checkbox" id="inventario_editar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="inventario_editar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="inventario_editar">Editar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->inventario_borrar==0){
-                echo '<input class="form-check-input" type="checkbox" id="inventario_borrar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="inventario_borrar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="inventario_borrar" >Borrar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->inventario_surtir==0){
-                echo '<input class="form-check-input" type="checkbox" id="inventario_surtir">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="inventario_surtir" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="inventario_surtir" >Surtir</label>
-              </div>
-
-              </div>
-            </section>
-
-            <section class="form_checks_container d-none">
-              <div class="form_checks_title">
-                <p>Categoría</p>
-              </div>
-              <div class="form_checks_container">
-
-              <div class="form-check form-check-inline">';
-                if($usuario->categoria_ver==0){
-                echo '<input class="form-check-input" type="checkbox" id="categoria_ver">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="categoria_ver" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="categoria_ver">Ver</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->categoria_agregar==0){
-                echo '<input class="form-check-input" type="checkbox" id="categoria_agregar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="categoria_agregar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="categoria_agregar" >Agregar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->categoria_editar==0){
-                echo '<input class="form-check-input" type="checkbox" id="categoria_editar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="categoria_editar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="categoria_editar" >Editar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->categoria_borrar==0){
-                echo '<input class="form-check-input" type="checkbox" id="categoria_borrar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="categoria_borrar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="categoria_borrar" >Borrar</label>
-              </div>
-              </div>
-            </section>
-
-            <section class="form_checks_container d-none">
-              <div class="form_checks_title">
-                <p>Restaurante</p>
-              </div>
-              <div class="form_checks_container">
-
-              <div class="form-check form-check-inline">';
-                if($usuario->restaurante_ver==0){
-                echo '<input class="form-check-input" type="checkbox" id="restaurante_ver">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="restaurante_ver" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="restaurante_ver" >Ver</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->restaurante_agregar==0){
-                echo '<input class="form-check-input" type="checkbox" id="restaurante_agregar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="restaurante_agregar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="restaurante_agregar" >Agregar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->restaurante_editar==0){
-                echo '<input class="form-check-input" type="checkbox" id="restaurante_editar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="restaurante_editar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="restaurante_editar" >Editar</label>
-              </div>
-
-              <div class="form-check form-check-inline">';
-                if($usuario->restaurante_borrar==0){
-                echo '<input class="form-check-input" type="checkbox" id="restaurante_borrar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="restaurante_borrar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="restaurante_borrar" >Borrar</label>
-              </div>
-
-              </div>
-            </section>
-
-            <section class="form_checks_container d-none">
-              <div class="form_checks_title">
-                <p>Cupón</p>
+                <p>Cupones</p>
               </div>
               <div class="form_checks_container">
 
@@ -1546,7 +1290,7 @@
                 echo '<input class="form-check-input" type="checkbox" id="cupon_ver" checked>';
                 }
                 echo '
-                <label class="form-check-label">Ver</label>
+                <label class="form-check-label" for="cupon_ver">Ver cupones</label>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1556,7 +1300,7 @@
                 echo '<input class="form-check-input" type="checkbox" id="cupon_agregar" checked>';
                 }
                 echo '
-                <label class="form-check-label">Agregar</label>
+                <label class="form-check-label" for="cupon_agregar" >Agregar cupones</label>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1566,7 +1310,7 @@
                 echo '<input class="form-check-input" type="checkbox" id="cupon_editar" checked>';
                 }
                 echo '
-                <label class="form-check-label">Editar</label>
+                <label class="form-check-label" for="cupon_editar" >Editar cupones</label>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1576,13 +1320,15 @@
                 echo '<input class="form-check-input" type="checkbox" id="cupon_borrar" checked>';
                 }
                 echo '
-                <label class="form-check-label">Borrar</label>
+                <label class="form-check-label" for="cupon_borrar" >Borrar cupones</label>
               </div>
 
               </div>
             </section>
 
-            <section class="form_checks_container d-none">
+            <hr>
+
+            <section class="form_checks_container">
               <div class="form_checks_title">
                 <p>Logs</p>
               </div>
@@ -1595,12 +1341,14 @@
                 echo '<input class="form-check-input" type="checkbox" id="logs_ver" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="logs_ver">Ver</label>
+                <label class="form-check-label" for="logs_ver">Ver logs</label>
                 </div>
               </div>
             </section>
 
-            <section class="form_checks_container d-none">
+            <hr>
+
+            <section class="form_checks_container">
                 <div class="form_checks_title">
                   <p>Auditoria</p>
                 </div>
@@ -1630,39 +1378,7 @@
 
             </section>
 
-      
-
-            <section class="form_checks_container d-none">
-                <div class="form_checks_title">
-                  <p>Facturas</p>
-                </div>
-                <div class="form_checks_container">
-
-                <div class="form-check form-check-inline">';
-                  if($usuario->facturas_ver==0){
-                  echo '<input class="form-check-input" type="checkbox" id="facturas_ver">';
-                  }else{
-                  echo '<input class="form-check-input" type="checkbox" id="facturas_ver" checked>';
-                  }
-                  echo '
-                  <label class="form-check-label" for="facturas_ver" >Ver</label>
-                </div>
-
-                <div class="form-check form-check-inline">';
-                if($usuario->facturas_cancelar==0){
-                echo '<input class="form-check-input" type="checkbox" id="facturas_cancelar">';
-                }else{
-                echo '<input class="form-check-input" type="checkbox" id="facturas_cancelar" checked>';
-                }
-                echo '
-                <label class="form-check-label" for="facturas_cancelar" >Cancelar</label>
-              </div>
-
-              </div>
-
-            </section>
-
-     
+            <hr>
 
             <div class="container_btn">
               <div id="boton_usuario">

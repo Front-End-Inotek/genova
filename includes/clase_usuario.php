@@ -20,69 +20,43 @@
       public $fecha_vencimiento;
       public $activo;
       public $usuario_privilegio;
-      public $usuario_ver;
-      public $usuario_agregar;
       public $usuario_editar;
       public $usuario_borrar;
-      public $huesped_ver;
-      public $huesped_agregar;
       public $huesped_editar;
       public $huesped_borrar;
       public $tipo_ver;
       public $tipo_agregar;
       public $tipo_editar;
       public $tipo_borrar;
-      public $tarifa_ver;
-      public $tarifa_agregar;
       public $tarifa_editar;
       public $tarifa_borrar;
       public $hab_ver;
       public $hab_agregar;
       public $hab_editar;
       public $hab_borrar;
-      public $reservacion_ver;
       public $reservacion_agregar;
       public $reservacion_editar;
       public $reservacion_borrar;
       public $reservacion_preasignar;
-      public $reporte_ver;
-      public $reporte_agregar;
       public $forma_pago_ver;
       public $forma_pago_agregar;
       public $forma_pago_editar;
       public $forma_pago_borrar;
-      public $inventario_ver;
-      public $inventario_agregar;
       public $inventario_editar;
       public $inventario_borrar;
-      public $inventario_surtir;
-      public $categoria_ver;
-      public $categoria_agregar;
       public $categoria_editar;
       public $categoria_borrar;
-      public $restaurante_ver;
-      public $restaurante_agregar;
-      public $restaurante_editar;
-      public $restaurante_borrar;
       public $cupon_ver;
       public $cupon_agregar;
       public $cupon_editar;
       public $cupon_borrar;
       public $logs_ver;
-
       public $auditoria_ver;
       public $auditoria_editar;
-      public $llegadas_salidas_ver;
-
       //Facturacon
-      public $facturas_ver;
-      public $facturas_cancelar;
 
       //Combinar cuentas
       public $combinar_cuentas;
-
-      //Cortes y transacciones
-      public $cortes_y_transacciones;
 
       //Graficas
       public $ver_graficas;
@@ -186,50 +160,32 @@
           $this->correo= -1;
           $this->direccion= -1;
           $this->usuario_privilegio= -1;
-          $this->usuario_ver= -1;
-          $this->usuario_agregar= -1;
           $this->usuario_editar= -1;
           $this->usuario_borrar= -1;
-          $this->huesped_ver= -1;
-          $this->huesped_agregar= -1;
           $this->huesped_editar= -1;
           $this->huesped_borrar= -1;
           $this->tipo_ver= -1;
           $this->tipo_agregar= -1;
           $this->tipo_editar= -1;
           $this->tipo_borrar= -1;
-          $this->tarifa_ver= -1;
-          $this->tarifa_agregar= -1;
           $this->tarifa_editar= -1;
           $this->tarifa_borrar= -1;
           $this->hab_ver= -1;
           $this->hab_agregar= -1;
           $this->hab_editar= -1;
           $this->hab_borrar= -1;
-          $this->reservacion_ver= -1;
           $this->reservacion_agregar= -1;
           $this->reservacion_editar= -1;
           $this->reservacion_borrar= -1;
           $this->reservacion_preasignar= -1;
-          $this->reporte_ver= -1;
-          $this->reporte_agregar= -1;
           $this->forma_pago_ver= -1;
           $this->forma_pago_agregar= -1;
           $this->forma_pago_editar= -1;
           $this->forma_pago_borrar= -1;
-          $this->inventario_ver= -1;
-          $this->inventario_agregar= -1;
           $this->inventario_editar= -1;
           $this->inventario_borrar= -1;
-          $this->inventario_surtir= -1;
-          $this->categoria_ver= -1;
-          $this->categoria_agregar= -1;
           $this->categoria_editar= -1;
           $this->categoria_borrar= -1;
-          $this->restaurante_ver= -1;
-          $this->restaurante_agregar= -1;
-          $this->restaurante_editar= -1;
-          $this->restaurante_borrar= -1;
           $this->cupon_ver= -1;
           $this->cupon_agregar= -1;
           $this->cupon_editar= -1;
@@ -238,13 +194,7 @@
 
           $this->auditoria_ver= -1;
           $this->auditoria_editar=-1;
-          $this->llegadas_salidas_ver= -1;
-
-          $this->facturas_ver= -1;
-          $this->facturas_cancelar= -1;
           $this->combinar_cuentas= -1;
-
-          $this->cortes_y_transacciones = -1;
 
           $this->ver_graficas = -1;
 
@@ -385,52 +335,32 @@
               $this->celular= $fila['celular'];
               $this->correo= $fila['correo'];
               $this->direccion= $fila['direccion'];
-            
-              $this->usuario_ver= $fila['usuario_ver'];
-              $this->usuario_agregar= $fila['usuario_agregar'];
               $this->usuario_editar= $fila['usuario_editar'];
               $this->usuario_borrar= $fila['usuario_borrar'];
-              $this->huesped_ver= $fila['huesped_ver'];
-              $this->huesped_agregar= $fila['huesped_agregar'];
               $this->huesped_editar= $fila['huesped_editar'];
               $this->huesped_borrar= $fila['huesped_borrar'];
               $this->tipo_ver= $fila['tipo_ver'];
               $this->tipo_agregar= $fila['tipo_agregar'];
               $this->tipo_editar= $fila['tipo_editar'];
               $this->tipo_borrar= $fila['tipo_borrar'];
-              $this->tarifa_ver=  $fila['tarifa_ver'];
-              $this->tarifa_agregar= $fila['tarifa_agregar'];
               $this->tarifa_editar= $fila['tarifa_editar'];
               $this->tarifa_borrar= $fila['tarifa_borrar'];
               $this->hab_ver= $fila['hab_ver'];
               $this->hab_agregar= $fila['hab_agregar'];
               $this->hab_editar= $fila['hab_editar'];
               $this->hab_borrar= $fila['hab_borrar'];
-              $this->reservacion_ver= $fila['reservacion_ver'];
               $this->reservacion_agregar= $fila['reservacion_agregar'];
               $this->reservacion_editar= $fila['reservacion_editar'];
               $this->reservacion_borrar= $fila['reservacion_borrar'];
               $this->reservacion_preasignar= $fila['reservacion_preasignar'];
-
-              $this->reporte_ver= $fila['reporte_ver'];
-              $this->reporte_agregar= $fila['reporte_agregar'];
               $this->forma_pago_ver= $fila['forma_pago_ver'];
               $this->forma_pago_agregar= $fila['forma_pago_agregar'];
               $this->forma_pago_editar= $fila['forma_pago_editar'];
               $this->forma_pago_borrar= $fila['forma_pago_borrar'];
-              $this->inventario_ver= $fila['inventario_ver'];
-              $this->inventario_agregar= $fila['inventario_agregar'];
               $this->inventario_editar= $fila['inventario_editar'];
               $this->inventario_borrar= $fila['inventario_borrar'];
-              $this->inventario_surtir= $fila['inventario_surtir'];
-              $this->categoria_ver= $fila['categoria_ver'];
-              $this->categoria_agregar= $fila['categoria_agregar'];
               $this->categoria_editar= $fila['categoria_editar'];
               $this->categoria_borrar= $fila['categoria_borrar'];
-              $this->restaurante_ver= $fila['restaurante_ver'];
-              $this->restaurante_agregar= $fila['restaurante_agregar'];
-              $this->restaurante_editar= $fila['restaurante_editar'];
-              $this->restaurante_borrar= $fila['restaurante_borrar'];
               $this->cupon_ver= $fila['cupon_ver'];
               $this->cupon_agregar= $fila['cupon_agregar'];
               $this->cupon_editar= $fila['cupon_editar'];
@@ -439,12 +369,7 @@
               
               $this->auditoria_editar= $fila['auditoria_editar'];
               $this->auditoria_ver= $fila['auditoria_ver'];
-              $this->llegadas_salidas_ver = $fila['llegadas_salidas_ver'];
-
-              $this->facturas_ver= $fila['factura_ver'];
-              $this->facturas_cancelar= $fila['factura_cancelar'];
               $this->combinar_cuentas= $fila['combinar_cuentas'];
-              $this->cortes_y_transacciones = $fila['cortes_y_transacciones'];
               $this->ver_graficas = $fila['ver_graficas'];
               $this->check_in = $fila['check_in'];
               $this->cuenta_maestra = $fila['cuenta_maestra'];
@@ -488,7 +413,7 @@
               $this->editar_abonos = $fila["editar_abonos"];
               $this->editar_cargos = $fila["editar_cargos"];
           }
-          $this->usuario_privilegio=$this->usuario_ver+$this->usuario_editar+$this->usuario_borrar+$this->usuario_agregar+$this->huesped_ver+$this->huesped_agregar+$this->huesped_editar+$this->huesped_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_ver+$this->tarifa_agregar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar+$this->reservacion_ver+$this->reservacion_agregar+$this->reservacion_editar+$this->reservacion_borrar+$this->reporte_ver+$this->reporte_agregar+$this->forma_pago_ver+$this->forma_pago_agregar+$this->forma_pago_editar+$this->forma_pago_borrar+$this->inventario_ver+$this->inventario_agregar+$this->inventario_editar+$this->inventario_borrar+$this->inventario_surtir+$this->categoria_ver+$this->categoria_agregar+$this->categoria_editar+$this->categoria_borrar+$this->restaurante_ver+$this->restaurante_agregar+$this->restaurante_editar+$this->restaurante_borrar+$this->cupon_ver+$this->cupon_agregar+$this->cupon_editar+$this->cupon_borrar+$this->logs_ver;
+          $this->usuario_privilegio=$this->usuario_editar+$this->usuario_borrar+$this->huesped_editar+$this->huesped_borrar+$this->tipo_ver+$this->tipo_agregar+$this->tipo_editar+$this->tipo_borrar+$this->tarifa_editar+$this->tarifa_borrar+$this->hab_ver+$this->hab_agregar+$this->hab_editar+$this->hab_borrar+$this->reservacion_agregar+$this->reservacion_editar+$this->reservacion_borrar+$this->forma_pago_ver+$this->forma_pago_agregar+$this->forma_pago_editar+$this->forma_pago_borrar+$this->inventario_editar+$this->inventario_borrar+$this->categoria_editar+$this->categoria_borrar+$this->cupon_ver+$this->cupon_agregar+$this->cupon_editar+$this->cupon_borrar+$this->logs_ver;
         }  
       }
 
@@ -611,72 +536,161 @@
 
           case 1:// guarda nivel administrador
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
+              $sentencia = "INSERT INTO `usuario` (
+              `usuario`, 
+              `pass`, 
+              `nivel`, 
+              `estado`, 
+              `activo`, 
+              `nombre_completo`, 
+              `puesto`, 
+              `celular`, 
+              `correo`, 
+              `direccion`,
+              `usuario_editar`, 
+              `usuario_borrar`,
+              `huesped_editar`, 
+              `huesped_borrar`, 
+              `tipo_ver`, 
+              `tipo_agregar`, 
+              `tipo_editar`, 
+              `tipo_borrar`,
+              `tarifa_editar`, 
+              `tarifa_borrar`, 
+              `hab_ver`, 
+              `hab_agregar`, 
+              `hab_editar`, 
+              `hab_borrar`, 
+              `reservacion_agregar`, 
+              `reservacion_editar`, 
+              `reservacion_borrar`,
+              `forma_pago_ver`, 
+              `forma_pago_agregar`, 
+              `forma_pago_editar`, 
+              `forma_pago_borrar`, 
+              `inventario_editar`, 
+              `inventario_borrar`, 
+              `categoria_editar`, 
+              `categoria_borrar`, 
+              `cupon_ver`, 
+              `cupon_agregar`, 
+              `cupon_editar`, 
+              `cupon_borrar`, 
+              `logs_ver`)
+              VALUES (
+              '$usuario', 
+              '$pass', 
+              '$nivel', 
+              '1', 
+              '1',
+              '$nombre_completo', 
+              '$puesto', 
+              '$celular', 
+              '$correo', 
+              '$direccion', 
+              '1', 
+              '1',
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '0', 
+              '0', 
+              '0', 
+              '0', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '0', 
+              '0', 
+              '0', 
+              '0', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1', 
+              '1');";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario);
               break;
 
           case 2:// guarda nivel cajera
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '0', '0', '1', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0');";
+              $sentencia = "";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario);
               break; 
                 
           case 3:// guarda nivel recamarera
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0');";
+              $sentencia = "";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario); 
               break; 
                 
           case 4:// guarda nivel mantenimiento
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0');";
+              $sentencia = "";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario);
               break;
               
           case 5:// guarda nivel supervision
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
+              $sentencia = "";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario);
               break;
 
           case 6:// guarda nivel restaurante
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '1', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0');";
+              $sentencia = "";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario);
               break; 
                 
           case 7:// guarda nivel reservaciones
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '0', '0', '1', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0');";
+              $sentencia = "";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario); 
               break; 
                 
           case 8:// guarda nivel ama llaves
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '0', '0', '0', '0',  '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
+              $sentencia = "";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario);
               break; 
 
           case 9:// guarda nivel indefinido
               $pass=md5($pass);
-              $sentencia = "INSERT INTO `usuario` (`usuario`, `pass`, `nivel`, `estado`, `activo`, `nombre_completo`, `puesto`, `celular`, `correo`, `direccion`, `usuario_ver`, `usuario_editar`, `usuario_borrar`, `usuario_agregar`, `huesped_ver`, `huesped_agregar`, `huesped_editar`, `huesped_borrar`, `tipo_ver`, `tipo_agregar`, `tipo_editar`, `tipo_borrar`, `tarifa_ver`, `tarifa_agregar`, `tarifa_editar`, `tarifa_borrar`, `hab_ver`, `hab_agregar`, `hab_editar`, `hab_borrar`, `reservacion_ver`, `reservacion_agregar`, `reservacion_editar`, `reservacion_borrar`, `reporte_ver`, `reporte_agregar`, `forma_pago_ver`, `forma_pago_agregar`, `forma_pago_editar`, `forma_pago_borrar`, `inventario_ver`, `inventario_agregar`, `inventario_editar`, `inventario_borrar`, `inventario_surtir`, `categoria_ver`, `categoria_agregar`, `categoria_editar`, `categoria_borrar`, `restaurante_ver`, `restaurante_agregar`, `restaurante_editar`, `restaurante_borrar`, `cupon_ver`, `cupon_agregar`, `cupon_editar`, `cupon_borrar`, `logs_ver`)
-              VALUES ('$usuario', '$pass', '$nivel', '1', '1','$nombre_completo', '$puesto', '$celular', '$correo', '$direccion', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0');";
+              $sentencia = "";
               $comentario="Guardamos el usuario en la base de datos";
               $consulta= $this->realizaConsulta($sentencia,$comentario); 
               break;    
@@ -828,9 +842,7 @@
           return $cat_paginas;
       }
       // Editar un usuario
-      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reservacion_preasignar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver,$auditoria_ver,$auditoria_editar,$llegadas_salidas_ver,$facturas_ver,$facturas_cancelar,$combinar_cuentas,$cortes_y_transacciones,$ver_graficas,$check_in,$cuenta_maestra,$reporte_diario,$reporte_llegada,$reporte_salidas,$saldo_huspedes,$edo_centa_fc,$ver_reservaciones,$agregar_reservaciones,$info_huespedes , $reporte_cancelaciones,$reporte_cortes,$cargos_noche,$surtir,$corte_diario,$pronosticos,$historial_cuentas,$ama_de_llaves,$historial_cortes_u,$corte_diario_u,$resumen_transacciones,$factura_individual,$factura_global,$buscar_fc,$cancelar_fac, $bus_fac_fecha, $bus_fac_folio, $bus_fac_folio_casa, $resumen_fac, $restaurante, $agregar_res, $cat_res, $invet_res, $surtir_res, $mesas_res, $agregar_mesas_res, $tipo_hab, $tarifas_hab, $ver_hab, $editar_abonos, $editar_cargos){
-        //function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_ver,$usuario_agregar,$usuario_editar,$usuario_borrar,$huesped_ver,$huesped_agregar,$huesped_editar,$huesped_borrar,$tipo_ver,$tipo_agregar,$tipo_editar,$tipo_borrar,$tarifa_ver,$tarifa_agregar,$tarifa_editar,$tarifa_borrar,$hab_ver,$hab_agregar,$hab_editar,$hab_borrar,$reservacion_ver,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reporte_ver,$reporte_agregar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_ver,$inventario_agregar,$inventario_editar,$inventario_borrar,$inventario_surtir,$categoria_ver,$categoria_agregar,$categoria_editar,$categoria_borrar,$restaurante_ver,$restaurante_agregar,$restaurante_editar,$restaurante_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver){
-        //$pass=md5($pass);
+      function editar_usuario($id,$usuario,$nivel,$nombre_completo,$puesto,$celular,$correo,$direccion,$usuario_editar,$usuario_borrar,$huesped_editar,$huesped_borrar,$tarifa_editar,$tarifa_borrar,$reservacion_agregar,$reservacion_editar,$reservacion_borrar,$reservacion_preasignar,$forma_pago_ver,$forma_pago_agregar,$forma_pago_editar,$forma_pago_borrar,$inventario_editar,$inventario_borrar,$categoria_editar,$categoria_borrar,$cupon_ver,$cupon_agregar,$cupon_editar,$cupon_borrar,$logs_ver,$auditoria_ver,$auditoria_editar,$combinar_cuentas,$ver_graficas,$check_in,$cuenta_maestra,$reporte_diario,$reporte_llegada,$reporte_salidas,$saldo_huspedes,$edo_centa_fc,$ver_reservaciones,$agregar_reservaciones,$info_huespedes , $reporte_cancelaciones,$reporte_cortes,$cargos_noche,$surtir,$corte_diario,$pronosticos,$historial_cuentas,$ama_de_llaves,$historial_cortes_u,$corte_diario_u,$resumen_transacciones,$factura_individual,$factura_global,$buscar_fc,$cancelar_fac, $bus_fac_fecha, $bus_fac_folio, $bus_fac_folio_casa, $resumen_fac, $restaurante, $agregar_res, $cat_res, $invet_res, $surtir_res, $mesas_res, $agregar_mesas_res, $tipo_hab, $tarifas_hab, $ver_hab, $editar_abonos, $editar_cargos){
        
         $sentencia = "UPDATE `usuario` SET
         `usuario` = '$usuario',
@@ -840,44 +852,24 @@
         `celular` = '$celular',
         `correo` = '$correo',
         `direccion` = '$direccion',
-        `usuario_ver` = '$usuario_ver',
-        `usuario_agregar` = '$usuario_agregar',
         `usuario_editar` = '$usuario_editar',
         `usuario_borrar` = '$usuario_borrar',
-        `huesped_ver` = '$huesped_ver',
-        `huesped_agregar` = '$huesped_agregar',
         `huesped_editar` = '$huesped_editar',
         `huesped_borrar` = '$huesped_borrar',
-      
-        `tarifa_ver` = '$tarifa_ver',
-        `tarifa_agregar` = '$tarifa_agregar',
         `tarifa_editar` = '$tarifa_editar',
         `tarifa_borrar` = '$tarifa_borrar',
-      
-        `reservacion_ver` = '$reservacion_ver',
         `reservacion_agregar` = '$reservacion_agregar',
         `reservacion_editar` = '$reservacion_editar',
         `reservacion_borrar` = '$reservacion_borrar',
         `reservacion_preasignar` = $reservacion_preasignar,
-        `reporte_ver` = '$reporte_ver',
-        `reporte_agregar` = '$reporte_agregar',
         `forma_pago_ver` = '$forma_pago_ver',
         `forma_pago_agregar` = '$forma_pago_agregar',
         `forma_pago_editar` = '$forma_pago_editar',
         `forma_pago_borrar` = '$forma_pago_borrar',
-        `inventario_ver` = '$inventario_ver',
-        `inventario_agregar` = '$inventario_agregar',
         `inventario_editar` = '$inventario_editar',
         `inventario_borrar` = '$inventario_borrar',
-        `inventario_surtir` = '$inventario_surtir',
-        `categoria_ver` = '$categoria_ver',
-        `categoria_agregar` = '$categoria_agregar',
         `categoria_editar` = '$categoria_editar',
         `categoria_borrar` = '$categoria_borrar',
-        `restaurante_ver` = '$restaurante_ver',
-        `restaurante_agregar` = '$restaurante_agregar',
-        `restaurante_editar` = '$restaurante_editar',
-        `restaurante_borrar` = '$restaurante_borrar',
         `cupon_ver` = '$cupon_ver',
         `cupon_agregar` = '$cupon_agregar',
         `cupon_editar` = '$cupon_editar',
@@ -885,11 +877,7 @@
         `logs_ver` = '$logs_ver',
         `auditoria_ver` = $auditoria_ver,
         `auditoria_editar` = $auditoria_editar,
-        `llegadas_salidas_ver` = $llegadas_salidas_ver,
-        `factura_ver` = $facturas_ver,
-        `factura_cancelar` = $facturas_cancelar,
         `combinar_cuentas` = $combinar_cuentas,
-        `cortes_y_transacciones` = $cortes_y_transacciones,
         `ver_graficas` = $ver_graficas,
         `check_in` = $check_in,
         `cuenta_maestra` = $cuenta_maestra,

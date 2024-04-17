@@ -212,7 +212,6 @@
 					</div>';
 				}
 				//Menu Facturacion
-				$permiso_ver_facturacion = $usuario->facturas_ver;
 				$permiso_ver_facturacion2 = $usuario->factura_individual + $usuario->factura_global + $usuario->buscar_fc + $usuario->cancelar_fac + $usuario->bus_fac_fecha + $usuario->bus_fac_folio + $usuario->bus_fac_folio_casa + $usuario->resumen_fac;
 				if($permiso_ver_facturacion2  > 0 || $usuario->nivel == 2 ){
 					echo '
@@ -269,7 +268,6 @@
 						</div>
 					</div>';
 				}
-				$permisos_restaurantes=$usuario->inventario_ver+$usuario->inventario_agregar+$usuario->restaurante_ver+$usuario->restaurante_agregar;
 				$permisos_restaurante2 = $usuario->restaurante + $usuario->agregar_res + $usuario->cat_res + $usuario->invet_res + $usuario->surtir_res + $usuario->mesas_res + $usuario->agregar_mesas_res;
 				if($permisos_restaurante2 > 0 ){
 					echo '
@@ -322,7 +320,6 @@
 					</div>';
 				}
 				// configuracion habitacion
-				$permisos_habitaciones=$usuario->tipo_ver+$usuario->tipo_agregar+$usuario->tarifa_ver+$usuario->tarifa_agregar+$usuario->hab_ver+$usuario->hab_agregar;
 				$permisos_habitaciones2 = $usuario->tipo_hab + $usuario->tarifas_hab + $usuario->ver_hab;
 				if($permisos_habitaciones2 > 0 ){
 					echo '
@@ -356,7 +353,7 @@
 				}
 
 				//Opciones Herramientas
-				$permisos_herramientas=$usuario->usuario_ver+$usuario->usuario_agregar+$usuario->logs_ver+$usuario->forma_pago_ver+$usuario->forma_pago_agregar+$usuario->cupon_ver+$usuario->cupon_agregar;
+				$permisos_herramientas=$usuario->logs_ver+$usuario->forma_pago_ver+$usuario->forma_pago_agregar+$usuario->cupon_ver+$usuario->cupon_agregar;
 				if($permisos_herramientas > 0 ){
 					echo '
 					<div class="aside_nav_link_containerMore" >
@@ -368,19 +365,9 @@
 						<div class="aside_nav_link_containerInfo_links" id="8">
 							<ul class="aside_nav_links_list">
 							<li class="aside_ruta" onclick="ver_reactivar_tickets(); handleSiceTable();">Reactivar tickets</li>
-							';
-						$permisos_usuario=$usuario->usuario_ver;
-						if($permisos_usuario > 0 ){
-							echo '
 							<li class="aside_ruta" onclick="ver_usuarios(); handleSiceTable();">Ver usuario</li>
-							';
-						};
-						$permisos_usuario=$usuario->usuario_agregar;
-						if($permisos_usuario > 0 ){
-							echo '
 							<li class="aside_ruta" onclick="agregar_usuarios('.$_GET['id'].'); handleSiceTable();">Agregar Usuario</li>
 							';
-						};
 						$permisos_logs=$usuario->logs_ver;
 						if($permisos_logs > 0 ){
 							echo '

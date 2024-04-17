@@ -4830,50 +4830,32 @@ function modificar_usuario(id){
     var celular= encodeURI(document.getElementById("celular").value);
     var correo= encodeURI(document.getElementById("correo").value);
 	var direccion= encodeURI(document.getElementById("direccion").value);
-    var usuario_ver= document.getElementById("usuario_ver").checked;
-    var usuario_agregar= document.getElementById("usuario_agregar").checked;
     var usuario_editar= document.getElementById("usuario_editar").checked;
     var usuario_borrar= document.getElementById("usuario_borrar").checked;
-    var huesped_ver= document.getElementById("huesped_ver").checked;
-    var huesped_agregar= document.getElementById("huesped_agregar").checked;
     var huesped_editar= document.getElementById("huesped_editar").checked;
     var huesped_borrar= document.getElementById("huesped_borrar").checked;
     /*var tipo_ver= document.getElementById("tipo_ver").checked;
     var tipo_agregar= document.getElementById("tipo_agregar").checked;
     var tipo_editar= document.getElementById("tipo_editar").checked;
     var tipo_borrar= document.getElementById("tipo_borrar").checked;*/
-    var tarifa_ver= document.getElementById("tarifa_ver").checked;
-    var tarifa_agregar= document.getElementById("tarifa_agregar").checked;
     var tarifa_editar= document.getElementById("tarifa_editar").checked;
     var tarifa_borrar= document.getElementById("tarifa_borrar").checked;
     /*var hab_ver= document.getElementById("hab_ver").checked;
     var hab_agregar= document.getElementById("hab_agregar").checked;
     var hab_editar= document.getElementById("hab_editar").checked;
     var hab_borrar= document.getElementById("hab_borrar").checked;*/
-    var reservacion_ver= document.getElementById("reservacion_ver").checked;
     var reservacion_agregar= document.getElementById("reservacion_agregar").checked;
     var reservacion_editar= document.getElementById("reservacion_editar").checked;
     var reservacion_borrar= document.getElementById("reservacion_borrar").checked;
     var reservacion_preasignar= document.getElementById("reservacion_preasignar").checked;
-    var reporte_ver= document.getElementById("reporte_ver").checked;
-    var reporte_agregar= document.getElementById("reporte_agregar").checked;
     var forma_pago_ver= document.getElementById("forma_pago_ver").checked;
     var forma_pago_agregar= document.getElementById("forma_pago_agregar").checked;
     var forma_pago_editar= document.getElementById("forma_pago_editar").checked;
     var forma_pago_borrar= document.getElementById("forma_pago_borrar").checked;
-    var inventario_ver= document.getElementById("inventario_ver").checked;
-    var inventario_agregar= document.getElementById("inventario_agregar").checked;
     var inventario_editar= document.getElementById("inventario_editar").checked;
     var inventario_borrar= document.getElementById("inventario_borrar").checked;
-    var inventario_surtir= document.getElementById("inventario_surtir").checked;
-    var categoria_ver= document.getElementById("categoria_ver").checked;
-    var categoria_agregar= document.getElementById("categoria_agregar").checked;
     var categoria_editar= document.getElementById("categoria_editar").checked;
     var categoria_borrar= document.getElementById("categoria_borrar").checked;
-    var restaurante_ver= document.getElementById("restaurante_ver").checked;
-    var restaurante_agregar= document.getElementById("restaurante_agregar").checked;
-    var restaurante_editar= document.getElementById("restaurante_editar").checked;
-    var restaurante_borrar= document.getElementById("restaurante_borrar").checked;
     var cupon_ver= document.getElementById("cupon_ver").checked;
     var cupon_agregar= document.getElementById("cupon_agregar").checked;
     var cupon_editar= document.getElementById("cupon_editar").checked;
@@ -4881,13 +4863,8 @@ function modificar_usuario(id){
     var logs_ver= document.getElementById("logs_ver").checked;
     var auditoria_ver= document.getElementById("auditoria_ver").checked;
     var auditoria_editar= document.getElementById("auditoria_editar").checked;
-    var llegadas_salidas_ver= document.getElementById("llegadas_salidas_ver").checked;
-    var ver_facturas = document.getElementById("facturas_ver").checked;
-    var ver_cancelar = document.getElementById("facturas_cancelar").checked;
 
     var combinar_cuentas = document.getElementById("combinar_cuentas").checked;
-
-    var cortes_y_transacciones = document.getElementById("cortes_y_transacciones").checked;
 
     var ver_graficas = document.getElementById("ver_graficas").checked;
 
@@ -4975,17 +4952,6 @@ function modificar_usuario(id){
     // console.log(reservacion_preasignar)
     // return
     // Convertir usuario permisos
-    if(usuario_ver){
-        usuario_ver=1;
-    }else{
-        usuario_ver=0;
-    }
-    //alert(usuario_ver);
-    if(usuario_agregar){
-        usuario_agregar = 1;
-    }else{
-        usuario_agregar = 0;
-    }
     if(usuario_editar){
         usuario_editar = 1;
     }else{
@@ -4997,16 +4963,6 @@ function modificar_usuario(id){
         usuario_borrar = 0;
     }
     // Convertir huesped permisos
-    if(huesped_ver){
-        huesped_ver = 1;
-    }else{
-        huesped_ver = 0;
-    }
-    if(huesped_agregar){
-        huesped_agregar = 1;
-    }else{
-        huesped_agregar = 0;
-    }
     if(huesped_editar){
         huesped_editar = 1;
     }else{
@@ -5039,16 +4995,6 @@ function modificar_usuario(id){
         tipo_borrar = 0;
     }*/
     // Convertir tarifa permisos
-    if(tarifa_ver){
-        tarifa_ver = 1;
-    }else{
-        tarifa_ver = 0;
-    }
-    if(tarifa_agregar){
-        tarifa_agregar = 1;
-    }else{
-        tarifa_agregar = 0;
-    }
     if(tarifa_editar){
         tarifa_editar = 1;
     }else{
@@ -5081,11 +5027,6 @@ function modificar_usuario(id){
         hab_borrar = 0;
     }*/
     // Convertir reservacion permisos
-    if(reservacion_ver){
-        reservacion_ver = 1;
-    }else{
-        reservacion_ver = 0;
-    }
     if(reservacion_agregar){
         reservacion_agregar = 1;
     }else{
@@ -5102,16 +5043,6 @@ function modificar_usuario(id){
         reservacion_borrar = 0;
     }
     // Convertir reporte permisos
-    if(reporte_ver){
-        reporte_ver = 1;
-    }else{
-        reporte_ver = 0;
-    }
-    if(reporte_agregar){
-        reporte_agregar = 1;
-    }else{
-        reporte_agregar = 0;
-    }
     // Convertir forma_pago permisos
     if(forma_pago_ver){
         forma_pago_ver = 1;
@@ -5134,16 +5065,6 @@ function modificar_usuario(id){
         forma_pago_borrar = 0;
     }
     // Convertir inventario permisos
-    if(inventario_ver){
-        inventario_ver = 1;
-    }else{
-        inventario_ver = 0;
-    }
-    if(inventario_agregar){
-        inventario_agregar = 1;
-    }else{
-        inventario_agregar = 0;
-    }
     if(inventario_editar ){
         inventario_editar = 1;
     }else{
@@ -5154,22 +5075,7 @@ function modificar_usuario(id){
     }else{
         inventario_borrar = 0;
     }
-    if(inventario_surtir){
-        inventario_surtir = 1;
-    }else{
-        inventario_surtir = 0;
-    }
     // Convertir categoria permisos
-    if(categoria_ver){
-        categoria_ver = 1;
-    }else{
-        categoria_ver = 0;
-    }
-    if(categoria_agregar){
-        categoria_agregar = 1;
-    }else{
-        categoria_agregar = 0;
-    }
     if(categoria_editar ){
         categoria_editar = 1;
     }else{
@@ -5181,26 +5087,6 @@ function modificar_usuario(id){
         categoria_borrar = 0;
     }
     // Convertir restaurante permisos
-    if(restaurante_ver){
-        restaurante_ver = 1;
-    }else{
-        restaurante_ver = 0;
-    }
-    if(restaurante_agregar){
-        restaurante_agregar = 1;
-    }else{
-        restaurante_agregar = 0;
-    }
-    if(restaurante_editar ){
-        restaurante_editar = 1;
-    }else{
-        restaurante_editar = 0;
-    }
-    if(restaurante_borrar){
-        restaurante_borrar = 1;
-    }else{
-        restaurante_borrar = 0;
-    }
     // Convertir cupon permisos
     if(cupon_ver){
         cupon_ver = 1;
@@ -5228,27 +5114,12 @@ function modificar_usuario(id){
     }else{
         logs_ver = 0;
     }
-    if(ver_facturas) {
-        ver_facturas = 1;
-    }else {
-        ver_facturas = 0;
-    }
-    if(ver_cancelar) {
-        ver_cancelar = 1;
-    } else {
-        ver_cancelar = 0
-    }
     if(combinar_cuentas) {
         combinar_cuentas = 1;
     } else {
         combinar_cuentas = 0;
     }
 
-    if(cortes_y_transacciones) {
-        cortes_y_transacciones = 1;
-    } else {
-        cortes_y_transacciones = 0;
-    }
     if ( ver_graficas ) {
         ver_graficas = 1;
     } else {
@@ -5514,50 +5385,32 @@ function modificar_usuario(id){
                     "celular": celular,
                     "correo": correo,
                     "direccion": direccion,
-                    "usuario_ver": usuario_ver,
-                    "usuario_agregar": usuario_agregar,
                     "usuario_editar": usuario_editar,
                     "usuario_borrar": usuario_borrar,
-                    "huesped_ver": huesped_ver,
-                    "huesped_agregar": huesped_agregar,
                     "huesped_editar": huesped_editar,
                     "huesped_borrar": huesped_borrar,
                     /*"tipo_ver": tipo_ver,
                     "tipo_agregar": tipo_agregar,
                     "tipo_editar": tipo_editar,
                     "tipo_borrar": tipo_borrar,*/
-                    "tarifa_ver": tarifa_ver,
-                    "tarifa_agregar": tarifa_agregar,
                     "tarifa_editar": tarifa_editar,
                     "tarifa_borrar": tarifa_borrar,
                     /*"hab_ver": hab_ver,
                     "hab_agregar": hab_agregar,
                     "hab_editar": hab_editar,
                     "hab_borrar": hab_borrar,*/
-                    "reservacion_ver": reservacion_ver,
                     "reservacion_agregar": reservacion_agregar,
                     "reservacion_editar": reservacion_editar,
                     "reservacion_borrar": reservacion_borrar,
                     "reservacion_preasignar":reservacion_preasignar,
-                    "reporte_ver": reporte_ver,
-                    "reporte_agregar": reporte_agregar,
                     "forma_pago_ver": forma_pago_ver,
                     "forma_pago_agregar": forma_pago_agregar,
                     "forma_pago_editar": forma_pago_editar,
                     "forma_pago_borrar": forma_pago_borrar,
-                    "inventario_ver": inventario_ver,
-                    "inventario_agregar": inventario_agregar,
                     "inventario_editar": inventario_editar,
                     "inventario_borrar": inventario_borrar,
-                    "inventario_surtir": inventario_surtir,
-                    "categoria_ver": categoria_ver,
-                    "categoria_agregar": categoria_agregar,
                     "categoria_editar": categoria_editar,
                     "categoria_borrar": categoria_borrar,
-                    "restaurante_ver": restaurante_ver,
-                    "restaurante_agregar": restaurante_agregar,
-                    "restaurante_editar": restaurante_editar,
-                    "restaurante_borrar": restaurante_borrar,
                     "cupon_ver": cupon_ver,
                     "cupon_agregar": cupon_agregar,
                     "cupon_editar": cupon_editar,
@@ -5565,12 +5418,8 @@ function modificar_usuario(id){
                     "logs_ver": logs_ver,
                     "auditoria_ver":auditoria_ver,
                     "auditoria_editar":auditoria_editar,
-                    "llegadas_salidas_ver":llegadas_salidas_ver,
                     "usuario_id": usuario_id,
-                    "factura_ver" : ver_facturas,
-                    "factura_cancelar" : ver_cancelar,
                     "combinar_cuentas" : combinar_cuentas,
-                    "cortes_y_transacciones" : cortes_y_transacciones,
                     "ver_graficas" : ver_graficas,
                     "check_in" : check_in,
                     "cuenta_maestra" : cuenta_maestra,
@@ -5614,7 +5463,7 @@ function modificar_usuario(id){
                     "editar_abonos" : editar_abonos,
                     "editar_cargos" : editar_cargos
 			};
-            //console.log(datos)
+            console.log(datos)
 		$.ajax({
                 async:true,
                 type: "POST",
