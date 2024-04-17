@@ -202,7 +202,7 @@ function cargar_area_trabajo(){
     }
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
-    setTimeout('cargar_area_trabajo()', 3500);//5500
+    setTimeout('cargar_area_trabajo()', 5500);//5500
 }
 
     function pregunta_salir(){

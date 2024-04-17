@@ -14,5 +14,6 @@
 //La antigua habitacion se pone como vacia sucia; su movimiento como 0, el estado 2.
   $hab_vieja->cambiohab($_POST['hab_id'],0,2);
   $hab_nueva->cambiohab($_POST['nueva_hab_id'],$movimiento_vieja,1);
+  $movimiento->actualizar_hab($movimiento_vieja,$_POST['nueva_hab_id']);
   $logs->guardar_log($_POST['usuario_id'],"Cambio de habitacion: ". $hab_vieja->nombre. "a habitacion: ".$hab_nueva->nombre );
 ?>

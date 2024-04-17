@@ -2693,7 +2693,7 @@ class Reservacion extends ConexionMYSql
         } else {
             // CUANDO SOLO VIENE EL INPUT LLENO PERO NO VIENE FECHA DE FIN NI DE FINAL
             if($a_buscar != ' ' && $noexiste_inicio && $noexiste_fin) {
-                $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, hab.nombre as nombre_hab, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,huesped.correo as correo_huesped, reservacion.tipo_hab as tipo_hab_numero, hab.nombre as nombre_hab, movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
                 LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
@@ -2705,7 +2705,7 @@ class Reservacion extends ConexionMYSql
                 //echo 0;
                 // CUANDO VIENE EL INPUT Y LAS FECHAS
             } elseif($a_buscar != ' ' && strlen($fecha_ini) > 0 && strlen($fecha_fin) > 0 && $combinada == 1) {
-                $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                $sentencia = "SELECT *,reservacion.precio_hospedaje as precio_hospedaje_reserva,reservacion.tipo_hab as tipo_hab_numero, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
                 LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
@@ -2719,7 +2719,7 @@ class Reservacion extends ConexionMYSql
             }elseif($a_buscar == ' ' && strlen($fecha_ini) > 0  && empty($fecha_fin_tiempo)) {
                 //$final_dia_unix = $fecha_ini + 86500;
                 $final_dia_unix = $fecha_ini + 86400 - 1;
-                $sentencia = "SELECT *, reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                $sentencia = "SELECT *, reservacion.precio_hospedaje as precio_hospedaje_reserva,reservacion.tipo_hab as tipo_hab_numero, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
                 LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion
@@ -2737,7 +2737,7 @@ class Reservacion extends ConexionMYSql
                 // INNER JOIN usuario ON reservacion.id_usuario = usuario.id
                 // INNER JOIN huesped ON reservacion.id_huesped = huesped.id
                 // INNER JOIN forma_pago ON reservacion.forma_pago = forma_pago.id WHERE reservacion.fecha_entrada >= $fecha_ini && reservacion.fecha_entrada <= $fecha_fin && reservacion.fecha_entrada > 0 AND (reservacion.estado = 1 || reservacion.estado = 2) ORDER BY reservacion.fecha_entrada DESC;";
-                $sentencia = "SELECT *, reservacion.precio_hospedaje as precio_hospedaje_reserva, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
+                $sentencia = "SELECT *, reservacion.precio_hospedaje as precio_hospedaje_reserva,reservacion.tipo_hab as tipo_hab_numero, huesped.correo as correo_huesped,hab.nombre as nombre_hab,huesped.id as huesped_id,movimiento.id as mov,movimiento.id_hab,reservacion.id AS ID,tipo_hab.nombre AS habitacion,huesped.nombre AS persona,huesped.apellido,usuario.usuario AS usuario,reservacion.estado AS edo,huesped.telefono AS tel
                 FROM reservacion
                 LEFT JOIN tarifa_hospedaje  ON reservacion.tarifa = tarifa_hospedaje.id
                 INNER JOIN movimiento ON reservacion.id = movimiento.id_reservacion

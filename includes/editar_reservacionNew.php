@@ -291,6 +291,7 @@ echo '
                 <div class="inputs_form_container">
                     <div class="form-floating input_container">
                         <input type="text" class="form-control custom_input" id="nombre" value="'.$huesped->nombre.'" required placeholder="Nombre">
+                        <input type="text" class="d-none" id="leer_nombre_sin_editar" value="'.$huesped->nombre.'"readonly/>
                         <label class="asterisco" for="nombre">Nombre</label>
                     </div>
 
