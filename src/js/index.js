@@ -1,3 +1,6 @@
+
+
+
 const calender_container = document.querySelector("#calender");
 const btnCalender = document.querySelector("#btnCalender");
 
@@ -56,8 +59,14 @@ const moveToLeft = () => {
     slider.style.transition = "all ease-in-out .6s"
 }
 
-const btnReserva = document.querySelector("#btn_crear_reserva");
 const calendarRange = document.querySelector("calendar-range");
+
+// Calcular la fecha de ayer
+const yesterday = new Date();
+yesterday.setDate(yesterday.getDate() - 1);
+const formattedYesterday = yesterday.toISOString().split('T')[0];
+calendarRange.setAttribute("min", formattedYesterday);
+
 
 const initialDateHTML = document.querySelector("#initialDate")
 const endDateHTML = document.querySelector("#endDate")
@@ -73,3 +82,12 @@ calendarRange.addEventListener("change", (e) => {
     /* console.log(datesArray)
     console.log(e.target.value) */
 })
+
+const reservar = () => {
+    console.log("Creando reserva...")
+}
+
+const btnReserva = document.querySelector("#btn_crear_reserva");
+
+
+btnReserva.addEventListener('click' , e => reservar())

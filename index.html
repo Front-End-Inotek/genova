@@ -21,7 +21,7 @@
                     <img src="./src/assets/img/logo_genova_color.png" />
                 </div>
                 <button class="btn_reservar">
-                    Reservar
+                    Ver mas
                 </button>
             </section>
 
@@ -56,7 +56,13 @@
                 </div>
             </section>
             <section class="calender_container" id="calender" style="display: none;">
-                <calendar-range  months="2" id="calendar-range">
+                <calendar-range  
+                    months="2" 
+                    id="calendar-range"
+                    value=""
+                    min="2024-01-01"
+                    max="2024-12-31"
+                >
                     <svg
                         aria-label="Previous"
                         slot="previous"
