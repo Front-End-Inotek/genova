@@ -10,7 +10,7 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #505050;
-    font-family: "Alata", sans-serif;
+    font-family: "Alata";
     font-weight: 400;
     font-style: normal;
 }
@@ -114,6 +114,17 @@ body {
     align-items: center;
     background-color: #fff;
     height: 60px;
+}
+.main_home_tools_div_date{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#initialDate,
+#endDate {
+    font-size: 15px;
+    color: #929292;
 }
 .calender_container {
     width: 100%;
