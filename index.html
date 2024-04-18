@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/styles/index.css">
+    <title>Hotel Plaza Genova</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container-carousel">
+        <article class="main_home">
+            <section class="main_home_header">
+                <div>
+                    <a>+52 3338 824 500</a>
+                </div>
+                <div class="main_home_header_logo">
+                    <img src="./src/assets/img/logo_genova_color.png" />
+                </div>
+                <button class="btn_reservar">
+                    Reservar
+                </button>
+            </section>
+
+            <section class="main_home_tools">
+                <div class="main_home_tools_date">
+                    <!-- Fecha inicial -->
+                    <p id="initialDate">Fecha inicio</p>
+                    <p>  -  </p>
+                    <!-- Fecha final -->
+                    <p id="endDate">Fecha final</p>
+                    <img id="btnCalender" src="./src/assets/svg/calender.svg" />
+                </div>
+                <div class="main_home_tools_persons">
+                    <select name="persons">
+                        <option value="1" selected >1 HUESPED</option>
+                        <option value="2">2 HUESPED</option>
+                        <option value="3">3 HUESPED</option>
+                        <option value="4">4 HUESPED</option>
+                        <option value="5">5 HUESPED</option>
+                        <option value="6">6 HUESPED</option>
+                      </select>
+                </div>
+                <div>
+                    <button class="btn_crear_reserva" id="btn_crear_reserva">
+                        Reservar
+                    </button>
+                </div>
+            </section>
+            <section class="calender_container" id="calender" style="display: none;">
+                <calendar-range  months="2" id="calendar-range">
+                    <svg
+                        aria-label="Previous"
+                        slot="previous"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                    >
+                        <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+                    </svg>
+                    <svg
+                        aria-label="Next"
+                        slot="next"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                    >
+                        <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+                    </svg>
+                    <div class="calenders">
+                        <calendar-month></calendar-month>
+                        <calendar-month offset="1"></calendar-month>
+                    </div>
+                </calendar-range>
+            </section>
+        </article>
+
+        <div class="carrouseles" id="slider">
+            <section class="slider-section">
+                <img src="./src/assets/img/1.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/2.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/3.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/4.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/5.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/6.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/7.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/8.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/9.jpg" loading="lazy" alt="">
+            </section>
+            <section class="slider-section">
+                <img src="./src/assets/img/10.jpg" loading="lazy" alt="">
+            </section>
+        </div>
+        <div class="btn-left">
+            <img src="./src/assets/svg/arrow.svg" />
+        </div>
+        <div class="btn-right">
+            <img src="./src/assets/svg/arrow-right.svg" />
+        </div>
+    </div>
+
+    <script src="./src/js/index.js"></script>
+    <script type="module" src="https://unpkg.com/cally"></script>
+</body>
+</html>
