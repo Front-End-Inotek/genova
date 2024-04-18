@@ -154,6 +154,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    flex: 2 !important;
+    text-align: center;
 }
 .main_home_tools_date img {
     width: 25px;
@@ -169,6 +171,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 2 !important;
 }
 .main_home_tools_persons select {
     width: 90%;
