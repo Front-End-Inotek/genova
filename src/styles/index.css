@@ -63,7 +63,7 @@ body {
 }
 .btn-left:hover,
 .btn-right:hover {
-    background-color: #37B7FF;
+    background-color: #38B6FF;
     opacity: 1;
 }
 
@@ -152,7 +152,7 @@ body {
     cursor: pointer;
 }
 .main_home_tools_date img:hover {
-    background-color: #37B7FF;
+    background-color: #38B6FF;
 }
 .main_home_tools_persons {
     display: flex;
@@ -162,13 +162,13 @@ body {
 .main_home_tools_persons select {
     width: 90%;
     height: 50%;
-    border: 1px solid #37B7FF;
+    border: 1px solid #38B6FF;
     border-radius: 5px;
 }
 .btn_reservar {
     border: none;
-    background-color: #37B7FF;
-    color: #004AAE;
+    background-color: #38B6FF;
+    color: #004AAD;
     box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, .1);
     padding: 1rem 1.5rem;
     cursor: pointer;
@@ -179,13 +179,13 @@ body {
     line-height: 1.29;
 }
 .btn_reservar:hover {
-    background-color: #004AAE;
+    background-color: #004AAD;
     color: #fff;
 }
 .btn_crear_reserva {
     border: none;
-    background-color: #37B7FF;
-    color: #004AAE;
+    background-color: #38B6FF;
+    color: #004AAD;
     box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, .1);
     cursor: pointer;
     font-weight: 700;
@@ -198,7 +198,7 @@ body {
     flex: 1;
 }
 .btn_crear_reserva:hover {
-    background-color: #004AAE;
+    background-color: #004AAD;
     color: #fff;
 }
 .calenders {
@@ -217,8 +217,8 @@ calendar-range {
       stroke: currentColor;
       stroke-width: 1.5;
       border: none;
-      background-color: #37b7ff;
-      color: #004AAE;
+      background-color: #38B6FF;
+      color: #004AAD;
     }
 
     path {
@@ -228,7 +228,7 @@ calendar-range {
     
 }
 calendar-month {
-    --color-accent: #004AAE;
+    --color-accent: #004AAD;
     --color-text-on-accent: #ffffff;
 
     &::part(button) {
@@ -237,7 +237,7 @@ calendar-month {
 
     &::part(range-inner) {
       border-radius: 0;
-      background-color: #37b7ff;
+      background-color: #38B6FF;
         --color-text-on-accent: (0, 0, 0)ffff;
     }
 
