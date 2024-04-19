@@ -85,6 +85,7 @@ body {
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .main_home_header {
@@ -267,5 +268,36 @@ calendar-month {
 
     &::part(range-start range-end) {
       border-radius: 3px;
+    }
+}
+
+@media only screen and ( max-width: 767px ) {
+    .main_home_tools {
+        flex-direction: column;
+        height: fit-content;
+        gap: 5px;
+    }
+    .main_home_tools div{
+        padding: 2px 0;
+    }
+    .main_home_tools_persons select{
+        height: 50px;
+        width: 95%;
+        padding: 0.5rem 0;
+    }
+    .main_home_tools_button {
+        height: 50px;
+        padding: 0 !important;
+    }
+    .btn_crear_reserva{
+        height: 50px;
+        padding-top: 10px;
+    }
+    .btn-left,
+    .btn-right {
+        display: none;
+    }
+    .btn_reservar {
+        display: none;
     }
 }
