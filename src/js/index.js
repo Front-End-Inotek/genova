@@ -92,7 +92,7 @@ const reservar = () => {
 
     xhr.onload = function () {
         if( xhr.status >= 200 && xhr.status < 300 ) {
-            console.log("Reserva creada correctamente.")
+            console.log(xhr.responseText);
         } else {
             console.log("Hubo un error al crear la reserva")
         }

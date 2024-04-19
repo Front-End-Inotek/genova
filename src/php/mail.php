@@ -18,7 +18,3 @@ if($mail_sent) {
 }
 
 ?>
-
-<script>
-    console.log("hello")
-</script>
