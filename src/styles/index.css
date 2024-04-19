@@ -50,8 +50,8 @@ body {
     transform: translate(0, -50%);
     transition: .5s ease;
     user-select: none;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     opacity: 0.3;
 }
 .btn-left img,
@@ -122,6 +122,10 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all ease-in-out 0.1s;
+}
+.main_home_tools_div_date:hover {
+    background-color: #92929233;
 }
 .main_home_tools_name,
 .main_home_tools_tel {

@@ -16,7 +16,7 @@
         <article class="main_home">
             <section class="main_home_header">
                 <div>
-                    <a>+52 3338 824 500</a>
+                    <a href="tel:">+52 3338 824 500</a>
                 </div>
                 <div class="main_home_header_logo">
                     <img src="./src/assets/img/logo_genova_color.png" />
@@ -37,11 +37,11 @@
             <section class="main_home_tools">
                 <div class="main_home_tools_date">
                     <!-- Fecha inicial -->
-                    <div class="main_home_tools_div_date">
+                    <div class="main_home_tools_div_date" id="handleInicio">
                         <p>Fecha inicio</p>
                         <p id="initialDate">Selecciona una fecha</p>
                     </div>
-                    <div class="main_home_tools_div_date">
+                    <div class="main_home_tools_div_date" id="handleFinal">
                         <p>Fecha final</p>
                         <p id="endDate">Selecciona una fecha</p>
                     </div>
@@ -137,5 +137,6 @@
 
     <script src="./src/js/index.js"></script>
     <script type="module" src="https://unpkg.com/cally"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

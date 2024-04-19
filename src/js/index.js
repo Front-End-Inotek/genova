@@ -4,7 +4,12 @@
 const calender_container = document.querySelector("#calender");
 const btnCalender = document.querySelector("#btnCalender");
 
+const btn_inicialFecha = document.querySelector("#handleInicio");
+const btn_finalFecha = document.querySelector("#handleFinal");
+
 btnCalender.addEventListener("click" , e => handleCalender());
+btn_inicialFecha.addEventListener("click" , e => handleCalender());
+btn_finalFecha.addEventListener("click" , e => handleCalender());
 
 const handleCalender = () => {
     if ( calender_container.style.display === "flex" ) {
@@ -100,23 +105,23 @@ const reservar = () => {
     }
 
     if (!name) {
-        alert("Agrega el nombre")
+        swal("Sin nombre!", "Agrega un nombre valido!", "warning");
         return
     }
     if (!phone) {
-        alert("Agrega un telefono")
+        swal("Sin numero de telefono!", "Agrega un numero de telefono valido!", "warning");
         return
     }
     if (!guests) {
-        alert("Agrega una cantidad de huespedes")
+        swal("Sin cantidad de huespedes!", "Agrega un numero de huespedes valido!", "warning");
         return
     }
     if (!arrive) {
-        alert("Agrega fecha inicial")
+        swal("Sin fecha inicial de la reserva!", "Agrega una fecha inicial!", "warning");
         return
     }
     if (!leave) {
-        alert("Agrega fecha de salida")
+        swal("Sin fecha de salida en la reserva!", "Agrega una fecha salida!", "warning");
         return
     }
 
@@ -131,6 +136,7 @@ const reservar = () => {
     xhr.onload = function () {
         if( xhr.status >= 200 && xhr.status < 300 ) {
             console.log(xhr.responseText);
+            swal("Reservacin solicitada con exito!", "Hemos recibido tu solicitud!", "success");
         } else {
             console.log("Hubo un error al crear la reserva")
         }
