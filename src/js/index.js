@@ -66,7 +66,8 @@ const yesterday = new Date();
 yesterday.setDate(yesterday.getDate() - 1);
 const formattedYesterday = yesterday.toISOString().split('T')[0];
 calendarRange.setAttribute("min", formattedYesterday);
-
+let arrive;
+let leave;
 
 const initialDateHTML = document.querySelector("#initialDate")
 const endDateHTML = document.querySelector("#endDate")
@@ -76,6 +77,8 @@ calendarRange.addEventListener("change", (e) => {
     const datesArray = dates.split("/")
     const initialDate = datesArray[0];
     const endDate = datesArray[1];
+    arrive = initialDate;
+    leave = endDate;
 
     initialDateHTML.innerText = initialDate;
     endDateHTML.innerText = endDate;
@@ -84,11 +87,46 @@ calendarRange.addEventListener("change", (e) => {
 })
 
 const reservar = () => {
+
+    const name = document.getElementById("name").value
+    const phone = document.getElementById("tel").value
+    const guestsSelect = document.querySelector('select[name="persons"]');
+    const guests = guestsSelect.value;
+
+    if (guests !== "") {
+        console.log("Número de huéspedes seleccionado:", guests);
+    } else {
+        console.log("Ningún número de huéspedes seleccionado.");
+    }
+
+    if (!name) {
+        alert("Agrega el nombre")
+        return
+    }
+    if (!phone) {
+        alert("Agrega un telefono")
+        return
+    }
+    if (!guests) {
+        alert("Agrega una cantidad de huespedes")
+        return
+    }
+    if (!arrive) {
+        alert("Agrega fecha inicial")
+        return
+    }
+    if (!leave) {
+        alert("Agrega fecha de salida")
+        return
+    }
+
     console.log("Creando reserva...")
+
+    const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}`
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open("GET", "src/php/mail.php", true);
+    xhr.open("GET", `src/php/mail.php?${quersyString}`, true);
 
     xhr.onload = function () {
         if( xhr.status >= 200 && xhr.status < 300 ) {

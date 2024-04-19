@@ -1,5 +1,19 @@
 <?php
+// Vars
+$name = $_GET["name"];
+$phone = $_GET["phone"];
+$guests = $_GET["guests"];
+$initialDate = $_GET["initial"];
+$endDate = $_GET["end"];
 
+
+/* echo $name;
+echo $phone;
+echo $guests;
+echo $initialDate;
+echo $endDate; */
+
+// Email headers
 $to = "dave_u@outlook.com";
 $subject = "Subject ";
 $message = "Hello there";
