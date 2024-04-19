@@ -1,4 +1,7 @@
 <?php
+require_once('../PHPMailer/class.phpmailer.php');
+
+
 // Vars
 $name = $_GET["name"];
 $phone = $_GET["phone"];
@@ -6,25 +9,13 @@ $guests = $_GET["guests"];
 $initialDate = $_GET["initial"];
 $endDate = $_GET["end"];
 
-
-require_once('../PHPMailer/class.phpmailer.php');
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-
-
-//Load Composer's autoloader
-
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 $nombreHotel = "Plaza Genova";
-$imagenEncabezado = "";
-$imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
-$correo="pinedoerick76@gmail.com";
-$nombre="Erick";
-//$resultado2=$facturacion->obtener_folio();
-//$row2=mysqli_fetch_array($resultado2);
+$imagenEncabezado = "../assets/img/logo_genova_color.png";
+$imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'logo_genova_color', "logo_genova_color.png");
+$correo="dev_e@inotek.mx";
 
-$folio = "0";
 try {
     //Server settings                   //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
@@ -44,38 +35,93 @@ try {
     /*$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
     $mail->addAttachment('/tmp/image.jpg', 'new.jpg');  */  //Optional name
 
-    $fecha = date("d-m-Y");
-    $f_h = date('d-m-Y');
-    $dia = substr($fecha, 0, 2);
-    $mes = substr($fecha, 3, 2);
-    $anio = substr($fecha, 6, 4);
-
-    $fecha_actual = $dia . " de " . $mes . " de " . $anio;
-
-    //Pie de pagina
-    $contenido_pie="
-      <div style='background-color: #2D3F54; text-align: center; padding: 8px; color: #fff; ' >
-        <div style='text-align:center'>
-          <p>Le invitamos a visitar nuestra página web: <a style='color: #A0C3FF !important;'>dbdbd</a>. </p>
-          <p> donde encontrará mayor información acerca de nuestras instalaciones y servicios.</p>
-        </div>
-      </div>";
-    
+   
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->CharSet = "UTF-8";
     $mail->Encoding = "base64";
-    $mail->Subject = ('Envio de factura');
-    $mail->MsgHTML('
-    <div style="background-color: #2D3F54; text-align: center; padding: 8px; " >
-    <h2 style="font-weight: bold; font-size: 24px; color: #ffffff;"> Factura </h2>
-    <img style="background-color: #F7F7F7; border-radius: 15px; height: 7rem;"  src="cid:imagen_encabezado" alt="Encabezado" />
-    </div>
-    <p>Estimado(A) Sr (Srita) <span style="color: #2D3F54; font-weight: 700;"> '.$nombre.' </span> </p>
-    <p>Su factura ha sido procesado con éxito con fecha '.$fecha_actual.'</p>
-    '.$contenido_pie.'
-    ');
-    $mail->AltBody = 'Factura procesada con éxito';
+    $mail->Subject = ('Reserva');
+    $mail->Body = '
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Confirmación de Reserva</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    background-color: #f4f4f4;
+                    margin: 0;
+                    padding: 0;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 20px auto;
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                h1, h2, p {
+                    margin: 0;
+                }
+                .header {
+                    text-align: center;
+                    padding-bottom: 20px;
+                    border-bottom: 1px solid #ccc;
+                }
+                .content {
+                    padding: 20px 0;
+                }
+                .reservation-details {
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    padding: 15px;
+                    margin-bottom: 20px;
+                }
+                .footer {
+                    text-align: center;
+                    padding-top: 20px;
+                    border-top: 1px solid #ccc;
+                }
+                .logo {
+                    display: block;
+                    margin: 0 auto;
+                    max-width: 100%;
+                    height: auto;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <img src="cid:logo_genova_color" alt="Logo" class="logo">
+                    <h1>Confirmación de Reserva</h1>
+                </div>
+                <div class="content">
+                    <p>Estimado/a '.$name.',</p>
+                    <p>Nos complace confirmar tu reserva en '.$nombreHotel.' para las siguientes fechas:</p>
+                    <div class="reservation-details">
+                        <p><strong>Fecha de Llegada:</strong> '.$initialDate.'</p>
+                        <p><strong>Fecha de Salida:</strong> '.$endDate.'</p>
+                        <p><strong>Número de Personas:</strong> '.$guests.'</p>
+                        <p><strong>Número de telefono:</strong> '.$phone.'</p>
+                    </div>
+                    <p>Por favor, no dudes en ponerte en contacto con nosotros si necesitas realizar alguna modificación o tienes alguna pregunta sobre tu reserva.</p>
+                    <p>Esperamos con ansias tu llegada y te deseamos una estancia agradable en nuestro hotel.</p>
+                </div>
+                <div class="footer">
+                    <p>Atentamente,</p>
+                    <img src="cid:logo_genova_color" alt="Logo" class="logo">
+                    <p>El Equipo de '.$nombreHotel.'</p>
+                </div>
+            </div>
+        </body>
+        </html>
+    ';
+    $mail->AltBody = 'Reservacion';
 
     $mail->send();
     echo 'Messagehasbeensent';
