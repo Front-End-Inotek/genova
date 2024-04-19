@@ -85,6 +85,24 @@ calendarRange.addEventListener("change", (e) => {
 
 const reservar = () => {
     console.log("Creando reserva...")
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "src/php/mail.php", true);
+
+    xhr.onload = function () {
+        if( xhr.status >= 200 && xhr.status < 300 ) {
+            console.log("Reserva creada correctamente.")
+        } else {
+            console.log("Hubo un error al crear la reserva")
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error("Error de red al intentar crear la reserva.");
+    };
+
+    xhr.send();
 }
 
 const btnReserva = document.querySelector("#btn_crear_reserva");
