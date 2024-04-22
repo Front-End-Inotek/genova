@@ -15,9 +15,10 @@
     <div class="container-carousel">
         <article class="main_home">
             <section class="main_home_header">
-                <div>
+                <!-- <div>
                     <a href="tel:">+52 3338 824 500</a>
                 </div>
+                -->
                 <div class="main_home_header_logo">
                     <img src="./src/assets/img/logo_genova_color.png" />
                 </div>
@@ -59,6 +60,7 @@
                         <option value="4">4 HUESPED</option>
                         <option value="5">5 HUESPED</option>
                         <option value="6">6 HUESPED</option>
+                        <option value="7">7 HUESPED</option>
                     </select>
                 </div>
                 <div class="main_home_tools_button">
@@ -68,6 +70,7 @@
                 </div>
             </section>
             <section class="calender_container" id="calender" style="display: none;">
+                <img class="calender_container_img" onclick="handleCalender();" src="./src/assets/svg/close.svg" />
                 <calendar-range  
                     months="2" 
                     id="calendar-range"
