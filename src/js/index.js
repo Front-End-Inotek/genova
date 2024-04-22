@@ -93,17 +93,26 @@ calendarRange.addEventListener("change", (e) => {
 
 const reservar = () => {
 
+    const email = document.getElementById("email").value
     const name = document.getElementById("name").value
     const phone = document.getElementById("tel").value
     const guestsSelect = document.querySelector('select[name="persons"]');
     const guests = guestsSelect.value;
 
+    
     if (guests !== "") {
         console.log("Número de huéspedes seleccionado:", guests);
     } else {
         console.log("Ningún número de huéspedes seleccionado.");
     }
-
+    if (!email) {
+        swal("Sin correo electrónico!", "Agrega un email valido valido!", "warning");
+        return
+    }
+    if ( !email.includes("@") || email.includes(" ") || !email.includes(".")) {
+        swal("Email no valido", "Agrega un email valido valido!", "warning");
+        return
+    }
     if (!name) {
         swal("Sin nombre!", "Agrega un nombre valido!", "warning");
         return
@@ -127,7 +136,7 @@ const reservar = () => {
 
     console.log("Creando reserva...")
 
-    const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}`
+    const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}&email=${encodeURIComponent(email)}`
 
     let xhr = new XMLHttpRequest();
 
@@ -136,7 +145,7 @@ const reservar = () => {
     xhr.onload = function () {
         if( xhr.status >= 200 && xhr.status < 300 ) {
             console.log(xhr.responseText);
-            swal("Reservacin solicitada con exito!", "Hemos recibido tu solicitud!", "success");
+            swal("Reservación solicitada con exito!", "Hemos recibido tu solicitud!", "success");
         } else {
             console.log("Hubo un error al crear la reserva")
         }
