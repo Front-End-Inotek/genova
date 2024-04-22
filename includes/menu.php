@@ -91,7 +91,7 @@
 					</div>';
 				//Opciones para las reservaciones
 		
-				$permisos_reservaciones2 = $usuario->ver_reservaciones + $usuario->agregar_reservaciones + $usuario->info_huespedes + $usuario->reporte_cancelaciones ;
+				$permisos_reservaciones2 = $usuario->ver_reservaciones + $usuario->reservacion_agregar + $usuario->info_huespedes + $usuario->reporte_cancelaciones ;
 				if($permisos_reservaciones2 > 0 ){
 					echo '
 					<div class="aside_nav_link_containerMore" >
@@ -107,7 +107,7 @@
 								<li class="aside_ruta" onclick="ver_reservaciones(); handleSiceTable();">Ver reservaciones</li>
 							';
 						}
-						if ( $usuario->agregar_reservaciones == 1 ) {
+						if ( $usuario->reservacion_agregar == 1 ) {
 							echo '
 								<li class="aside_ruta" onclick="agregar_reservaciones(); handleSiceTable();">Agregar reservaciones</li>
 							';

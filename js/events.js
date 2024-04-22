@@ -202,7 +202,7 @@ function cargar_area_trabajo(){
     }
 	//$("#area_trabajo").load("includes/area_trabajo.php?id="+id+"&token="+token);
     $("#pie").load("includes/pie.php?id="+id);
-    setTimeout('cargar_area_trabajo()', 5500);//5500
+    setTimeout('cargar_area_trabajo()', 50500);//5500
 }
 
     function pregunta_salir(){
@@ -4763,7 +4763,7 @@ function guardar_usuario(){
                     data:datos,
                     beforeSend:loaderbar,
                 success:function(res){
-                    //console.log(res)
+                    console.log(res)
                     if(res.includes("Duplicate entry")){
                         alert("El nombre de usuario ya se encuentra ocupado")
                         //<input type="submit" class="btn btn-success btn-block" value="Guardar" onclick="guardar_usuario()">
@@ -4883,8 +4883,6 @@ function modificar_usuario(id){
     var edo_centa_fc = document.getElementById("edo_centa_fc").checked
 
     var ver_reservaciones = document.getElementById("ver_reservaciones").checked
-
-    var agregar_reservaciones = document.getElementById("agregar_reservaciones").checked
 
     var info_huespedes = document.getElementById("info_huespedes").checked
 
@@ -5173,12 +5171,6 @@ function modificar_usuario(id){
         ver_reservaciones = 0;
     }
 
-    if ( agregar_reservaciones ) {
-        agregar_reservaciones = 1;
-    } else {
-        agregar_reservaciones = 0;
-    }
-
     if ( info_huespedes ) {
         info_huespedes = 1;
     } else {
@@ -5429,7 +5421,6 @@ function modificar_usuario(id){
                     "saldo_huspedes" : saldo_huspedes,
                     "edo_centa_fc" : edo_centa_fc,
                     "ver_reservaciones" : ver_reservaciones,
-                    "agregar_reservaciones" : agregar_reservaciones,
                     "info_huespedes" : info_huespedes,
                     "reporte_cancelaciones" : reporte_cancelaciones,
                     "reporte_cortes" : reporte_cortes,
@@ -10570,6 +10561,98 @@ function mostrar_info_permisos( id_permiso ) {
         case 42:
             titulo = "Editar cargos"
             texto = "Permiso para editar cargos en estado de cuenta"
+            break;
+        case 43:
+            titulo = "Editar reservación"
+            texto = "Permiso para editar las reservas"
+            break;
+        case 44:
+            titulo = "Borrar reservación"
+            texto = "Permiso para editar las reservas"
+            break;
+        case 45:
+            titulo = "Preasignar reservaciones"
+            texto = "Permiso para preasignar reservaciones"
+            break;
+        case 46:
+            titulo = "Preasignar reservaciones"
+            texto = "Permiso para preasignar reservaciones"
+            break;
+        case 47:
+            titulo = "Borrar inventario"
+            texto = "Permiso para borrar inventario"
+            break;
+        case 48:
+            titulo = "Editar categoria"
+            texto = "Permiso para editar la categoria"
+            break;
+        case 49:
+            titulo = "Borrar categoria"
+            texto = "Permiso para borrar categoria"
+            break;
+        case 50:
+            titulo = "Editar usuario"
+            texto = "Permiso para editar los usuarios del sistema"
+            break;
+        case 51:
+            titulo = "Borrar usuario"
+            texto = "Permiso para borrar los usuarios del sistema"
+            break;
+        case 52:
+            titulo = "Editar huésped"
+            texto = "Permiso para editar informacion del huésped"
+            break;
+        case 53:
+            titulo = "Borrar huésped"
+            texto = "Permiso para borrar huésped"
+            break;
+        case 54:
+            titulo = "Editar tarifa"
+            texto = "Permiso para editar las tarifas"
+            break;
+        case 55:
+            titulo = "Ver formas de pago"
+            texto = "Permiso para ver las formas de pago"
+            break;
+        case 56:
+            titulo = "Agregar formas de pago"
+            texto = "Permiso agregar las formas de pago"
+            break;
+        case 57:
+            titulo = "Editar formas de pago"
+            texto = "Permiso para editar las formas de pago"
+            break;
+        case 58:
+            titulo = "Borrar formas de pago"
+            texto = "Permiso para borrar las formas de pago"
+            break;
+        case 59:
+            titulo = "Ver cupones"
+            texto = "Permiso para ver cupones"
+            break;
+        case 60:
+            titulo = "Agregar cupones"
+            texto = "Permiso para agregar cupones"
+            break;
+        case 61:
+            titulo = "Editar cupones"
+            texto = "Permiso para editar cupones"
+            break;
+        case 62:
+            titulo = "Borrar cupones"
+            texto = "Permiso para borrar cupones"
+            break;
+        case 63:
+            titulo = "Ver logs"
+            texto = "Permiso para ver los logs"
+            break;
+        case 64:
+            titulo = "Ver auditoria"
+            texto = "Permiso para ver la auditoria"
+            break;
+        case 65:
+            titulo = "Editar auditoria"
+            texto = "Permiso para editar auditoria"
             break;
         
         default:

@@ -355,21 +355,6 @@
                   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
                 </svg>
               </span>
-            </div>
-            <div class="form-check form-check-inline">';
-              if($usuario->agregar_reservaciones==0){
-                echo '<input class="form-check-input" type="checkbox" id="agregar_reservaciones" >';
-              }else{
-                echo '<input class="form-check-input" type="checkbox" id="agregar_reservaciones" checked >';
-              }
-              echo '   
-              <label class="form-check-label" for="agregar_reservaciones">Agregar reservaciones</label>
-              <span onclick="mostrar_info_permisos(9)" data-toggle="modal" href="#caja_herramientas" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                </svg>
-              </span>
             </div> 
             <div class="form-check form-check-inline">';
               if($usuario->info_huespedes==0){
@@ -402,8 +387,6 @@
               </span>
             </div> 
 
-            <p>hola</p>
-
               <div class="form-check form-check-inline">';
                 if($usuario->reservacion_agregar==0){
                 echo '<input class="form-check-input" type="checkbox" id="reservacion_agregar">';
@@ -411,7 +394,13 @@
                 echo '<input class="form-check-input" type="checkbox" id="reservacion_agregar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="reservacion_agregar">Agregar</label>
+                <label class="form-check-label" for="reservacion_agregar">Agregar reservacion</label>
+                <span onclick="mostrar_info_permisos(9)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -421,7 +410,13 @@
                 echo '<input class="form-check-input" type="checkbox" id="reservacion_editar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="reservacion_editar">Editar</label>
+                <label class="form-check-label" for="reservacion_editar">Editar reserva</label>
+                <span onclick="mostrar_info_permisos(43)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -431,7 +426,13 @@
                 echo '<input class="form-check-input" type="checkbox" id="reservacion_borrar" checked>';
                 }
                 echo '
-                <label class="form-check-label" for="reservacion_borrar">Borrar</label>
+                <label class="form-check-label" for="reservacion_borrar">Borrar reservación</label>
+                <span onclick="mostrar_info_permisos(44)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -442,6 +443,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="reservacion_preasignar">Preasignar</label>
+                <span onclick="mostrar_info_permisos(45)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
             </div>
           </section>
@@ -866,6 +873,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="inventario_editar">Editar inventario</label>
+                <span onclick="mostrar_info_permisos(46)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -876,6 +889,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="inventario_borrar" >Borrar inventario</label>
+                <span onclick="mostrar_info_permisos(47)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -886,6 +905,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="categoria_editar" >Editar categoria</label>
+                <span onclick="mostrar_info_permisos(48)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -896,6 +921,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="categoria_borrar" >Borrar categoria</label>
+                <span onclick="mostrar_info_permisos(49)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
           </div>
         </section>
@@ -1041,6 +1072,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="usuario_editar">Editar usuario</label>
+                <span onclick="mostrar_info_permisos(50)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1051,6 +1088,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="usuario_borrar">Borrar usuario</label>
+                <span onclick="mostrar_info_permisos(51)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
             </div>
           </section>
@@ -1071,6 +1114,12 @@
               }
               echo '
               <label class="form-check-label" for="huesped_editar">Editar información de huésped</label>
+              <span onclick="mostrar_info_permisos(52)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
 
             <div class="form-check form-check-inline">';
@@ -1081,6 +1130,12 @@
               }
               echo '
               <label class="form-check-label" for="huesped_borrar" >Borrar huésped</label>
+              <span onclick="mostrar_info_permisos(53)" data-toggle="modal" href="#caja_herramientas" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+              </span>
             </div>
             </div>
           </section>
@@ -1154,6 +1209,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="tarifa_editar">Editar tarifa</label>
+                <span onclick="mostrar_info_permisos(54)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1164,6 +1225,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="tarifa_borrar">Borrar tarifa</label>
+                <span onclick="mostrar_info_permisos(54)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
               </div>
             </section>
@@ -1240,6 +1307,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="forma_pago_ver">Ver formas de pago</label>
+                <span onclick="mostrar_info_permisos(55)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1250,6 +1323,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="forma_pago_agregar">Agregar formas de pago</label>
+                <span onclick="mostrar_info_permisos(56)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1260,6 +1339,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="forma_pago_editar" >Editar formas de pago</label>
+                <span onclick="mostrar_info_permisos(57)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1270,6 +1355,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="forma_pago_borrar" >Borrar formas de pago</label>
+                <span onclick="mostrar_info_permisos(58)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               </div>
@@ -1291,6 +1382,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="cupon_ver">Ver cupones</label>
+                <span onclick="mostrar_info_permisos(59)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1301,6 +1398,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="cupon_agregar" >Agregar cupones</label>
+                <span onclick="mostrar_info_permisos(60)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1311,6 +1414,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="cupon_editar" >Editar cupones</label>
+                <span onclick="mostrar_info_permisos(61)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               <div class="form-check form-check-inline">';
@@ -1321,6 +1430,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="cupon_borrar" >Borrar cupones</label>
+                <span onclick="mostrar_info_permisos(62)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
               </div>
 
               </div>
@@ -1342,6 +1457,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="logs_ver">Ver logs</label>
+                <span onclick="mostrar_info_permisos(63)" data-toggle="modal" href="#caja_herramientas" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </span>
                 </div>
               </div>
             </section>
@@ -1361,7 +1482,13 @@
                   echo '<input class="form-check-input" type="checkbox" id="auditoria_ver" checked>';
                   }
                   echo '
-                  <label class="form-check-label" for="auditoria_ver" >Ver</label>
+                  <label class="form-check-label" for="auditoria_ver" >Ver auditoria</label>
+                  <span onclick="mostrar_info_permisos(64)" data-toggle="modal" href="#caja_herramientas" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                    </svg>
+                  </span>
                 </div>
 
                 <div class="form-check form-check-inline">';
@@ -1372,6 +1499,12 @@
                 }
                 echo '
                 <label class="form-check-label" for="auditoria_editar" >Editar</label>
+                <span onclick="mostrar_info_permisos(65)" data-toggle="modal" href="#caja_herramientas" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                    </svg>
+                  </span>
               </div>
 
               </div>
