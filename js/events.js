@@ -9964,7 +9964,7 @@ function login_super_admin() {
 
     const hashedPassword = "A1B2C3";
 
-    if(username === "" && password === hashedPassword) {
+    if(username === "super_admin" && password === hashedPassword) {
         swal({
             title: "Credenciales correctas",
             text: "Acceso ortorgado",

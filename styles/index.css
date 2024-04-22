@@ -639,10 +639,10 @@ body {
   width: 100%;
   display: flex;
   gap: 2px;
-  font-size: 13px;
+  font-size: 14px;
   align-items: center;
   /* color: #333131; */
-  filter: brightness(0.5);
+  filter: brightness(0.3);
 }
 .habitacion_text_text {
   white-space: nowrap;

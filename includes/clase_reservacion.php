@@ -1866,6 +1866,7 @@ class Reservacion extends ConexionMYSql
                     echo '<a class="dropdown-item" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'RESERVACIÓN\',\''.$fila['correo_huesped'].'\')">Ver reporte</a>';
                     echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
                     echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada</a>';
+                    echo '<a class="dropdown-item" onclick="agregar_comprobante('.$fila['ID'].')">Agregar comprobante</a>';
                     echo '<a class="dropdown-item" onclick="editar_reservacionNew('.$fila['ID'].', \''.$ruta.'\')">Editar</a>';
                     if($borrar == 1 && $fila['edo'] != 0) {
                         echo '<a class="dropdown-item" href="#caja_herramientas" data-toggle="modal" onclick="aceptar_cancelar_reservacion('.$fila['ID'].','.$fila['id_hab'].',\''.$fila['correo_huesped'].'\')">Cancelar</a>';
@@ -1964,6 +1965,7 @@ class Reservacion extends ConexionMYSql
                         echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
                     }
                     echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada</a>';
+                    echo '<a class="dropdown-item" onclick="agregar_comprobante('.$fila['ID'].')">Agregar comprobante</a>';
                     if($fila['facturado']==0){
                         echo '<a class="dropdown-item" onclick="generar_facturas_reserva('.$fila['total_pago'].','.$fila['ID'].',0,'.$fila['total_pago'].',1,0,2)">Facturar</a>';
                     }else{
@@ -2059,6 +2061,7 @@ class Reservacion extends ConexionMYSql
             echo '<a class="dropdown-item" onclick="ver_reporte_reservacion('.$fila['ID'].', \''.$ruta.'\',\'CHECK-IN\',\''.$fila['correo_huesped'].'\')"> Reporte</a>';
             echo '<a class="dropdown-item" onclick="confirmar_duplicar_reservacion('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Duplicar</a>';
             echo '<a class="dropdown-item" onclick="confirmar_cancelar_preasignada('.$fila['ID'].','.$fila['mov'].', \''.$ruta.'\',)">Cancelar preasignada</a>';
+            echo '<a class="dropdown-item" onclick="agregar_comprobante('.$fila['ID'].')">Agregar comprobante</a>';
             if($editar==1 && $fila['edo'] = 1) {
                 echo '<a class="dropdown-item" href="#" onclick="editar_checkin('.$fila['ID'].','.$fila['id_hab'].', \''.$ruta.'\')" >Editar</a>';
             }

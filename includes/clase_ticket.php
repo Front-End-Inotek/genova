@@ -200,8 +200,17 @@
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
       }
+      function saber_hab_ticket($id){
+        $sentencia = "SELECT id_hab FROM movimiento WHERE id=$id LIMIT 1 ";
+        //echo $sentencia;
+        $comentario="Poner estado de concepto como inactivo";
+        $consulta= $this->realizaConsulta($sentencia,$comentario);
+        $fila = mysqli_fetch_array($consulta);
+        return $fila['id_hab'];
+      }
+
       function tickets_intervalo($inicio,$fin,$metodo){
-        $sentencia = "SELECT * FROM ticket WHERE forma_pago=$metodo and tiempo BETWEEN $inicio AND $fin;";
+        $sentencia = "SELECT * FROM ticket WHERE forma_pago=$metodo and tiempo BETWEEN $inicio AND $fin AND total>0; ";
         //echo $sentencia;
         $comentario="Poner estado de concepto como inactivo";
         $consulta= $this->realizaConsulta($sentencia,$comentario);
