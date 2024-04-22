@@ -15,7 +15,7 @@ $mail = new PHPMailer(true);
 $nombreHotel = "Plaza Genova";
 $imagenEncabezado = "../assets/img/logo_genova_color.png";
 $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'logo_genova_color', "logo_genova_color.png");
-$correo="dev_e@inotek.mx";
+$correo="reservaciones@plazagenova.mx";
 
 try {
     //Server settings                   //Enable verbose debug output
