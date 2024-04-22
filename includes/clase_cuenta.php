@@ -723,7 +723,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     }else{
                       echo '<td>Total suplementos</td>';
                     }
-                    echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    echo '<td>'.date("Y-m-d H:i",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'
                     <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>';
                     if ($usuario->nivel <= 1 || $usuario->editar_cargos == 1 ){
@@ -751,7 +751,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
                       </td>
                       <td>'.$fila['concepto'].'</td>
-                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>'.date("Y-m-d H:i",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'
                       <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>
                       <td>'.$fila["observacion"].'</td>';
@@ -780,7 +780,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
                       </td>
                       <td>'.$fila['concepto'].'</td>
-                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>'.date("Y-m-d H:i",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'
                       <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' ></td>
                       <td>'.$fila["observacion"].'</td>';
@@ -809,7 +809,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                         <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
                       </td>
                       <td>'.$fila['concepto'].'</td>
-                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>'.date("Y-m-d H:i",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['cargo'], 2).'
                       <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' >
                       </td>
@@ -826,7 +826,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                       <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
                     </td>
                     <td>'.$fila['concepto'].'</td>
-                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>'.date("Y-m-d H:i",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'
                       <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' >
                     </td>
@@ -855,7 +855,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_c_'.+$c.'" value="1"/></p>
                     </td>
                     <td>'.$fila['concepto'].'</td>
-                    <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    <td>'.date("Y-m-d H:i",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['cargo'], 2).'
                     <input class="d-none" type="number" id="leer_total_c_'.+$c.'" value='.$fila['cargo'].' >
                     </td>
@@ -863,7 +863,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     </tr>';
                   }
                 }
-                $fecha_atras = date('Y-m-d',$fila['fecha']);
+                $fecha_atras = date('Y-m-d H:i',$fila['fecha']);
                 $c++;
               }
               echo '
@@ -935,7 +935,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     }else{
                       echo '<td>Pago al reservar</td>';
                     }
-                    echo '<td>'.date("d-m-Y",$fila['fecha']).'</td>
+                    echo '<td>'.date("Y-m-d H:i ",$fila['fecha']).'</td>
                     <td>$'.number_format($fila['abono'], 2).'</td>
                     <td>'.$fila['descripcion'].'</td>';
 
@@ -968,7 +968,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                           <p class="ticket_info_p ticket_info_n"><input class="d-none" type="number" id="leer_tipo_'.+$c.'" value="1"/></p>
                       </td>
                       <td>'.$fila['concepto'].'</td>
-                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>'.date("Y-m-d H:i",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['abono'], 2).'
                           <input class="d-none" type="number" id="leer_total_'.+$c.'" value='.$fila['abono'].' >
                       </td>
@@ -995,7 +995,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                           <input class="d-none" type="number" id="leer_id_'.+$c.'" value='.$fila['id_ticket'].'>
                       </td>
                       <td>'.$fila['concepto'].'</td>
-                      <td>'.date("d-m-Y",$fila['fecha']).'</td>
+                      <td>'.date("Y-m-d H:i",$fila['fecha']).'</td>
                       <td>$'.number_format($fila['abono'], 2).'
                           <input class="d-none" type="number" id="leer_total_'.+$c.'" value='.$fila['abono'].' >
                       </td>
@@ -1018,7 +1018,7 @@ function mostrar_abonos_seleccion($mov,$id_reservacion,$hab_id,$estado,$id_maest
                     }
                   }
                 
-                $fecha_atras = date('Y-m-d',$fila['fecha']);
+                $fecha_atras = date('Y-m-d H:i',$fila['fecha']);
                 $c++;
               }
               echo '
