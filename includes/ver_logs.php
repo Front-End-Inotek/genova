@@ -2,6 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   include_once("clase_forma_pago.php");
   $forma_pago= NEW Forma_pago(0);
+  $fecha_actual = date("Y-m-d");
   
   echo ' <div class="main_container"> 
                 <header class="main_container_title">
@@ -10,11 +11,11 @@
           
           <div class="inputs_form_container justify-content-start">
                 <div class="form-floating input_container_date">
-                        <input class="form-control custom_input" type="date"  id="inicial"  placeholder="Log inicial" autofocus="autofocus" placeholder="Fecha inicial"/>
+                        <input class="form-control custom_input" type="date"  id="inicial"  placeholder="Log inicial" autofocus="autofocus" placeholder="Fecha inicial" value="' . $fecha_actual . '" />
                         <label for="inicial" >Fecha inicial</label>
                 </div>
                 <div class="form-floating input_container_date">
-                        <input class="form-control custom_input" type="date" id="final" placeholder="Log final" autofocus="autofocus" placeholder="Fecha final" />
+                        <input class="form-control custom_input" type="date" id="final" placeholder="Log final" autofocus="autofocus" placeholder="Fecha final" value="' . $fecha_actual . '"   />
                         <label for="final">Fecha final</label>
                 </div>
                 <div id="form-floating input_container_date">
