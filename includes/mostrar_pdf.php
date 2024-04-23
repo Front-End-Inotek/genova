@@ -91,7 +91,10 @@ function Header()
           // Salto de línea
       $this->Ln(3);
       }
-   $this->Image('../images/hotelexpoabastos.png',10,1,40);
+      include_once("clase_configuracion.php");
+      $conf = NEW Configuracion(0);
+      $imagenHotel = '../images/'.$conf->imagen.'';
+   $this->Image($imagenHotel,10,1,40);
 }
 
 // Pie de página

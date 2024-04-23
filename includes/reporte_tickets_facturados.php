@@ -5,6 +5,7 @@ include_once ('clase_hab.php');
 include_once ('clase_movimiento.php');
 include_once ('clase_factura.php');
 require('../fpdf/fpdf.php');
+include_once("clase_configuracion.php");
 
 // variables obtenidas por GET
 
@@ -16,10 +17,12 @@ class PDF extends FPDF
     {
         $inicial = $_GET["inicial"];
         $final = $_GET["final"];
+        $conf = NEW Configuracion(0);
         $this->Image("../images/encabezado_pdf_2.jpg"  , 0   , -8  , 300 );
         $this->Image("../images/rectangulo_pdf.png"    , 260 , 2   , 20  , 20);
         $this->Image("../images/rectangulo_pdf_2.png"  , 10  , 10  , 85  , 12);
-        $this->Image("../images/hotelexpoabastos.png"  , 260 , 1   , 20  , 20);
+        $imagenHotel = '../images/'.$conf->imagen.'';
+        $this->Image($imagenHotel  , 260 , 1   , 20  , 20);
         $this->SetFont('Arial', 'B', 12);
         $this->SetTextColor( 255 , 255 , 255 );
         $this->Cell(85, 8, iconv("UTF-8", "ISO-8859-1" ,"REPORTE FACTURADOS"), 0, 0, 'C');

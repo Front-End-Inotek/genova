@@ -12,12 +12,12 @@
     $logs = NEW Log(0);
     $correo=NEW Email();
     $mail = new PHPMailer(true); // Declaramos un nuevo correo, el parametro true significa que mostrara excepciones y errores.
-    //Nombre del hotel
-    $nombreHotel = $conf->nombre;
-    $imagenEncabezado = "../images/hotelexpoabastos.png";
 
-    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
-    //Consulta datos de la reserva
+    $nombreHotel = $conf->nombre;
+    $imagenHotel = '../images/'.$conf->imagen.'';
+    $nombre_imagen = explode('.', $conf->imagen);
+    $imagenID = $mail->AddEmbeddedImage( $imagenHotel , 'imagen_encabezado', $nombre_imagen[0]);
+    
 
     $consulta= $reservacion->datos_cancelacion($_POST['info']);
 

@@ -12,8 +12,9 @@ $conf = NEW Configuracion(0);
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 $nombreHotel = $conf->obtener_nombre();
-$imagenEncabezado = "../images/hotelexpoabastos.png";
-$imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
+$imagenHotel = '../images/'.$conf->imagen.'';
+$nombre_imagen = explode('.', $conf->imagen);
+$imagenID = $mail->AddEmbeddedImage( $imagenHotel , 'imagen_encabezado', $nombre_imagen[0]); 
 $correo=$_GET["correo"];
 $nombre=$_GET["nombre"];
 $resultado2=$facturacion->obtener_folio();

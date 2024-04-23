@@ -34,9 +34,10 @@
     $mes_procesado = $meses_en_espanol[date("F")];
 
     $anio_procesado = date("Y");
-    $imagenEncabezado = "../images/hotelexpoabastos.png";
-
-    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
+    $imagenHotel = '../images/'.$conf->imagen.'';
+    $nombre_imagen = explode('.', $conf->imagen);
+    $imagenID = $mail->AddEmbeddedImage( $imagenHotel , 'imagen_encabezado', $nombre_imagen[0]);
+    
     //Consulta datos de la reserva
 
     $consulta= $reservacion->datos_reservacion($_POST['info']);

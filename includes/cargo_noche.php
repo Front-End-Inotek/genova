@@ -60,6 +60,7 @@
           $anio = substr($fecha, 6, 4);
           $nombre= $conf->obtener_nombre();
           $realizo_usuario= $usuario->obtengo_nombre_completo($_POST['usuario_id']);
+          $imagenHotel = $conf->imagen;
           // Marco primera pagina
           //$this->Image("../images/hoja_margen.png",1.5,-2,211,295);
           // Arial bold 15
@@ -75,7 +76,7 @@
           $this->SetTextColor(0,0,0);
           $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
+          $this->Image( ''.$imagenHotel.'' ,10,18,25,25);
           // Salto de línea
           $this->Ln(14);
           // Movernos a la derecha

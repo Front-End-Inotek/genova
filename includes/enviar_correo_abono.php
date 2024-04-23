@@ -17,8 +17,9 @@
       // Datos de reservacion
     $huesped= NEW Huesped($id_huesped);
     $nombre_huesped =$huesped->nombre ." ".$huesped->apellido;
-    $imagenEncabezado = "../images/hotelexpoabastos.png";
-    $imagenID = $mail->AddEmbeddedImage($imagenEncabezado, 'imagen_encabezado', "hotelexpoabastos.png");
+    $imagenHotel = '../images/'.$conf->imagen.'';
+    $nombre_imagen = explode('.', $conf->imagen);
+    $imagenID = $mail->AddEmbeddedImage( $imagenHotel , 'imagen_encabezado', $nombre_imagen[0]);
     $correo = $huesped->correo;
     $nombreHotel = $conf->nombre;
 

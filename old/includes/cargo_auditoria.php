@@ -79,7 +79,8 @@
           $this->SetTextColor(0,0,0);
           $this->Cell(172,9,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio),0,1,'R');
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",10,18,25,25);
+          $imagenHotel = '../images/'.$conf->imagen.'';
+          $this->Image($imagenHotel,10,18,25,25);
           // Salto de línea
           $this->Ln(14);
           // Movernos a la derecha

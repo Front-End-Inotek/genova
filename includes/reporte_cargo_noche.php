@@ -44,7 +44,8 @@
           // Nombre del Hotel
           //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
           // Datos y fecha
-          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
+          $imagenHotel = '../images/'.$conf->imagen.'';
+          $this->Image($imagenHotel,160,1,27,27);
 
           $this->SetFont('Arial','',10);
           $this->SetTextColor(0,0,0);

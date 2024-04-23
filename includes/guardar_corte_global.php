@@ -106,7 +106,8 @@
           $this->Cell(25,-11,iconv("UTF-8", "ISO-8859-1",'REPORTE CORTE: '.$nueva_etiqueta),0,0,'C');
           $this->SetTextColor( 0 , 0 ,0 );
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",240,1,27,27);
+          $imagenHotel = '../images/'.$conf->imagen.'';
+          $this->Image( $imagenHotel , 240 , 1 , 27 , 27 );
           // Salto de línea
           $this->Ln(10);
           // Movernos a la derecha

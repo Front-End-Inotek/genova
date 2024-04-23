@@ -71,7 +71,8 @@
           $this->SetTextColor(0,0,100);
 
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
+          $imagenHotel = '../images/'.$conf->imagen.'';
+          $this->Image($imagenHotel,160,1,27,27);
           $this->Ln(22);
           $this->Cell(22);
           // Titulo

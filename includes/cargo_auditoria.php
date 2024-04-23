@@ -14,7 +14,6 @@
   $tarifa= NEW Tarifa(0);
   $logs = NEW Log(0);
   $cargo_noche = NEW Cargo_noche(0);
-  
   $total_final= 0;
   $descripcion= "Cargo por noche";
   $consulta = $hab->datos_auditoria();
@@ -59,6 +58,7 @@
           $mes = substr($fecha, 3, 2);
           $mes= $logs->formato_fecha($mes);
           $anio = substr($fecha, 6, 4);
+          $imagenHotel = $conf->imagen;
           $nombre= $conf->obtener_nombre();
           // $realizo_usuario= $usuario->obtengo_nombre_completo($_POST['usuario_id']);
           $realizo_usuario="";
@@ -79,7 +79,7 @@
           //$this->Cell(20,9,iconv("UTF-8", "ISO-8859-1",$nombre),0,0,'C');
           // Datos y fecha
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
+          $this->Image( ''.$imagenHotel.'' ,160,1,27,27);
           // Salto de línea
           $this->Ln(12);
           $this->Cell(70,10,iconv("UTF-8", "ISO-8859-1",'REPORTE CARGO POR NOCHE'),0,0,'C');

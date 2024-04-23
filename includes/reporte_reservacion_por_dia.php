@@ -47,8 +47,9 @@
           // Datos y fecha
           $this->SetFont('Arial','',8);
           $this->SetTextColor(0,0,0);
-          // Logo
-          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
+          // Logo}
+          $imagenHotel = '../images/'.$conf->imagen.'';
+          $this->Image($imagenHotel,160,1,27,27);
           // Salto de línea
           $this->Ln(22);
           // Movernos a la derecha

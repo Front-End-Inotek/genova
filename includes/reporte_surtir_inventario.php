@@ -48,7 +48,8 @@
           //$this->SetFont('Arial','',10);
           //$this->SetTextColor(0,0,0);
           // Logo
-          $this->Image("../images/hotelexpoabastos.png",160,1,27,27);
+          $imagenHotel = '../images/'.$conf->imagen.'';
+          $this->Image($imagenHotel,160,1,27,27);
           // Salto de línea
           $this->Ln(12);
           // Movernos a la derecha

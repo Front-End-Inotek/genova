@@ -34,7 +34,8 @@ class PDF extends FPDF{
         // Nombre del Hotel
         //$this->Cell(20, 9, iconv("UTF-8", "ISO-8859-1", $nombre), 0, 0, 'C');
         // Logo
-        $this->Image("../images/hotelexpoabastos.png", 160, 1, 27, 27);
+        $imagenHotel = '../images/'.$conf->imagen.'';
+        $this->Image($imagenHotel, 160, 1, 27, 27);
         // Salto de línea
         $this->Ln(22);
         // Movernos a la derecha

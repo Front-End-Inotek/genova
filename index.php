@@ -4,7 +4,7 @@
   $config = NEW Configuracion();
   $timepo = time();
   $activo= $config->activacion- $timepo;
-
+  $imagenHotel = './images/'.$config->imagen.'';
   echo '
     <!DOCTYPE html>
       <html lang="es">
@@ -44,7 +44,7 @@
                 <img  class="formulario_login_logo_img" src="./images/nuve.png"  alt="logo visit"/>
               </div>
               <picture>
-                <img class="formulario_login_logo_hotel" src="./images/hotelexpoabastos.png" />
+                <img class="formulario_login_logo_hotel" src="'.$imagenHotel.'" />
               </picture>
             </header>
 
@@ -92,7 +92,7 @@
             <img  class="formulario_login_logo_img" src="./images/nuve.png"  alt="logo visit"/>
           </div>
           <picture>
-            <img class="formulario_login_logo_hotel" src="./images/hotelexpoabastos.png" />
+            <img class="formulario_login_logo_hotel" src="'.$imagenHotel.'" />
           </picture>
         </header>
 
