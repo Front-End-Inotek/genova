@@ -113,7 +113,7 @@
           $this->Cell(21);
           // Título
           $this->SetFont('Arial','',10);
-          $this->Cell(250,-20,iconv("UTF-8", "ISO-8859-1",'Realizó '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
+          $this->Cell(250,-20,iconv("UTF-8", "ISO-8859-1",'Realizó: '.$realizo_usuario.' el '.$dia.' de '.$mes.' de '.$anio_hora),0,1,'R');
           // Salto de línea
           $this->Ln(20);
           
@@ -329,7 +329,6 @@ $pdf = new FPDF('P', 'mm', 'Letter');
     $c=0;
     $lmov=[];
     if ($consulta->num_rows > 0) {
-      
       while ($fila = mysqli_fetch_array($consulta))
       {
         $listas[$c]['fecha']=$fila['fecha'];
@@ -344,7 +343,12 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $listas[$c]['cargo']=0;
         $listas[$c]['abono']=$fila_cuenta['abono'];
         $total_abono+=$fila_cuenta['abono'];
-        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_POST['usuario_id']);
+        $rawName = $usuario->obtengo_nombre_completo($_POST['usuario_id']);
+        if ( strlen($rawName) > 20 ) {
+          $listas[$c]['usuario'] =  substr( $rawName , 0 , 10 ) . '...';
+        } else {
+          $listas[$c]['usuario'] = $rawName;
+        }
         $c+=1;
       }
       //var_dump($lmov);
@@ -402,7 +406,12 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $listas[$c]['cargo']=$fila2['cargo'];
         $total_cargo+=$fila2['cargo'];
         $listas[$c]['abono']=0;
-        $listas[$c]['usuario']=$usuario->obtengo_nombre_completo($_POST['usuario_id']);
+        $rawName = $usuario->obtengo_nombre_completo($_POST['usuario_id']);
+        if ( strlen($rawName) > 20 ) {
+          $listas[$c]['usuario'] =  substr( $rawName , 0 , 10 ) . '...';
+        } else {
+          $listas[$c]['usuario'] = $rawName;
+        }
         $c+=1;
       }
       $cuenta->cambiar_cargo($fila2['mov'],$_POST['usuario_id'],13);
