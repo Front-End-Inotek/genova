@@ -45,7 +45,7 @@ class PDF extends FPDF
         $fechaHoraActual = date('Y-m-d H:i:s');
         // Pie de página
         $this->SetY(-15);
-        $this->SetFont('Arial', 'I', 6);
+        $this->SetFont('Arial', '', 6);
         $this->Cell(30, 10, utf8_decode($fechaHoraActual) , 0, 0, 'C');
         $this->Cell(217, 10, utf8_decode('') , 0, 0, 'C');
         $this->Cell(30, 10, utf8_decode('Página ') . $this->PageNo(), 0, 0, 'C');
@@ -123,7 +123,7 @@ class PDF extends FPDF
                     $this->Cell( 30 , 5, 'Cargo', 1, 0, 'C', true);
                     $this->Cell( 30 , 5, 'Abono', 1, 0, 'C', true);
                     $this->ln();
-                    $this->SetFont('Arial', 'I', 6);
+                    $this->SetFont('Arial', '', 6);
                     while ($fila = mysqli_fetch_array($consulta))
                         {
                             if ($fila['total']>0){
@@ -143,7 +143,7 @@ class PDF extends FPDF
                         $this->SetFont('Arial', 'B', 6);
                         $this->Cell( 188 , 5, '', 0, 0, 'C');
                         $this->Cell( 30 , 5, 'Total:', 1, 0, 'C');
-                        $this->SetFont('Arial', 'I', 6);
+                        $this->SetFont('Arial', '', 6);
                         $this->Cell( 30 , 5, '$'.number_format('0',2), 1, 0, 'C');
                         $this->Cell( 30 , 5, '$'.number_format($total_abono,2), 1, 0, 'C');
                         $this->ln();
@@ -168,7 +168,7 @@ class PDF extends FPDF
                 $this->Cell( 30 , 5, 'Cargo', 1, 0, 'C', true);
                 $this->Cell( 30 , 5, 'Abono', 1, 0, 'C', true);
                 $this->ln();
-                $this->SetFont('Arial', 'I', 6);
+                $this->SetFont('Arial', '', 6);
                 while ($fila = mysqli_fetch_array($consulta2))
                 {
                     $this->Cell( 30 , 5, date("Y-m-d H:i", $fila['fecha']), 1, 0, 'C');
@@ -186,7 +186,7 @@ class PDF extends FPDF
                 $this->SetFont('Arial', 'B', 6);
                 $this->Cell( 188 , 5, '', 0, 0, 'C');
                 $this->Cell( 30 , 5, 'Total:', 1, 0, 'C');
-                $this->SetFont('Arial', 'I', 6);
+                $this->SetFont('Arial', '', 6);
                 $this->Cell( 30 , 5, '$'.number_format($total_cargo,2), 1, 0, 'C');
                 $this->Cell( 30 , 5, '$'.number_format($total_abono,2), 1, 0, 'C');
                 $this->ln();
@@ -194,7 +194,7 @@ class PDF extends FPDF
             $totalescargo+=$total_cargo;
             if($totalesabono>0 or $totalescargo>0){
                 $difencia=0;
-                $this->SetFont('Arial', 'I', 7);
+                $this->SetFont('Arial', '', 7);
                 $this->Cell( 145 , 5, '', 0, 0, 'C');
                 $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
                 $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
@@ -256,7 +256,7 @@ class PDF extends FPDF
                     $this->Cell( 30 , 5, 'Cargo', 1, 0, 'C', true);
                     $this->Cell( 30 , 5, 'Abono', 1, 0, 'C', true);
                     $this->ln();
-                    $this->SetFont('Arial', 'I', 6);
+                    $this->SetFont('Arial', '', 6);
                     while ($fila = mysqli_fetch_array($consulta))
                         {
                             if ($fila['total']>0){
@@ -276,7 +276,7 @@ class PDF extends FPDF
                         $this->SetFont('Arial', 'B', 6);
                         $this->Cell( 188 , 5, '', 0, 0, 'C');
                         $this->Cell( 30 , 5, 'Total:', 1, 0, 'C');
-                        $this->SetFont('Arial', 'I', 6);
+                        $this->SetFont('Arial', '', 6);
                         $this->Cell( 30 , 5, '$'.number_format('0',2), 1, 0, 'C');
                         $this->Cell( 30 , 5, '$'.number_format($total_abono,2), 1, 0, 'C');
                         $this->ln();
@@ -301,7 +301,7 @@ class PDF extends FPDF
                 $this->Cell( 30 , 5, 'Cargo', 1, 0, 'C', true);
                 $this->Cell( 30 , 5, 'Abono', 1, 0, 'C', true);
                 $this->ln();
-                $this->SetFont('Arial', 'I', 6);
+                $this->SetFont('Arial', '', 6);
                 while ($fila = mysqli_fetch_array($consulta2))
                 {
                     $this->Cell( 30 , 5, date("Y-m-d H:i", $fila['fecha']), 1, 0, 'C');
@@ -319,7 +319,7 @@ class PDF extends FPDF
                 $this->SetFont('Arial', 'B', 6);
                 $this->Cell( 188 , 5, '', 0, 0, 'C');
                 $this->Cell( 30 , 5, 'Total:', 1, 0, 'C');
-                $this->SetFont('Arial', 'I', 6);
+                $this->SetFont('Arial', '', 6);
                 $this->Cell( 30 , 5, '$'.number_format($total_cargo,2), 1, 0, 'C');
                 $this->Cell( 30 , 5, '$'.number_format($total_abono,2), 1, 0, 'C');
                 $this->ln();
@@ -327,7 +327,7 @@ class PDF extends FPDF
             $totalescargo+=$total_cargo;
             if($totalesabono>0 or $totalescargo>0){
                 $difencia=0;
-                $this->SetFont('Arial', 'I', 7);
+                $this->SetFont('Arial', '', 7);
                 $this->Cell( 145 , 5, '', 0, 0, 'C');
                 $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
                 $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
@@ -389,7 +389,7 @@ class PDF extends FPDF
                     $this->Cell( 30 , 5, 'Cargo', 1, 0, 'C', true);
                     $this->Cell( 30 , 5, 'Abono', 1, 0, 'C', true);
                     $this->ln();
-                    $this->SetFont('Arial', 'I', 6);
+                    $this->SetFont('Arial', '', 6);
                     while ($fila = mysqli_fetch_array($consulta))
                         {
                             if ($fila['total']>0){
@@ -409,7 +409,7 @@ class PDF extends FPDF
                         $this->SetFont('Arial', 'B', 6);
                         $this->Cell( 188 , 5, '', 0, 0, 'C');
                         $this->Cell( 30 , 5, 'Total:', 1, 0, 'C');
-                        $this->SetFont('Arial', 'I', 6);
+                        $this->SetFont('Arial', '', 6);
                         $this->Cell( 30 , 5, '$'.number_format('0',2), 1, 0, 'C');
                         $this->Cell( 30 , 5, '$'.number_format($total_abono,2), 1, 0, 'C');
                         $this->ln();
@@ -434,7 +434,7 @@ class PDF extends FPDF
                 $this->Cell( 30 , 5, 'Cargo', 1, 0, 'C', true);
                 $this->Cell( 30 , 5, 'Abono', 1, 0, 'C', true);
                 $this->ln();
-                $this->SetFont('Arial', 'I', 6);
+                $this->SetFont('Arial', '', 6);
                 while ($fila = mysqli_fetch_array($consulta2))
                 {
                     $this->Cell( 30 , 5, date("Y-m-d H:i", $fila['fecha']), 1, 0, 'C');
@@ -452,7 +452,7 @@ class PDF extends FPDF
                 $this->SetFont('Arial', 'B', 6);
                 $this->Cell( 188 , 5, '', 0, 0, 'C');
                 $this->Cell( 30 , 5, 'Total:', 1, 0, 'C');
-                $this->SetFont('Arial', 'I', 6);
+                $this->SetFont('Arial', '', 6);
                 $this->Cell( 30 , 5, '$'.number_format($total_cargo,2), 1, 0, 'C');
                 $this->Cell( 30 , 5, '$'.number_format($total_abono,2), 1, 0, 'C');
                 $this->ln();
@@ -460,7 +460,7 @@ class PDF extends FPDF
             $totalescargo+=$total_cargo;
             if($totalesabono>0 or $totalescargo>0){
                 $difencia=0;
-                $this->SetFont('Arial', 'I', 7);
+                $this->SetFont('Arial', '', 7);
                 $this->Cell( 145 , 5, '', 0, 0, 'C');
                 $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
                 $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
@@ -485,7 +485,7 @@ class PDF extends FPDF
         }
         if($total_global_abono>0 or $total_global_cargos>0){
             $difencia=0;
-            $this->SetFont('Arial', 'I', 7);
+            $this->SetFont('Arial', '', 7);
             $this->Cell( 145 , 5, '', 0, 0, 'C');
             $this->Cell( 15 , 5, 'Total de todos los cargos:', 0, 0, 'C');
             $this->Cell( 30 , 5, '$'.number_format($total_global_cargos,2), 0, 0, 'C');
