@@ -65,7 +65,6 @@
       function Header()
       {
         
-          
           $conf = NEW Configuracion(0);
           $ticket= NEW Ticket(0);
           $labels= NEW Labels(0);
@@ -351,21 +350,16 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       //var_dump($lmov);
     }
     
-    
     if (count($listas) > 0) {
-
-      
-      $total=0;
-      
-      
+        $total=0;
         $pdf->Cell( 278 , 5, $valor, 0, 0,'C');
         $pdf->ln();
         $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Folio casa', 1, 0, 'C');
+        $pdf->Cell( 20 , 5, 'Folio casa', 1, 0, 'C');
         $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
         $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
         $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Usuario', 1, 0, 'C');
+        $pdf->Cell( 40 , 5, 'Usuario', 1, 0, 'C');
         $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
         $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
         $pdf->ln();
@@ -374,18 +368,18 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           if ($item['cargo']>0 || $item['abono']>0){
             $pdf->SetFont('Arial', '', 10);
             $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
-            $pdf->Cell( 30 , 5, $item['folio_casa'], 1, 0, 'C');
+            $pdf->Cell( 20 , 5, $item['folio_casa'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['folio'], 1, 0, 'C');
             $pdf->Cell( 68 , 5, $item['observaciones'],1, 0, 'C');
-            $pdf->Cell( 30 , 5, $item['usuario'], 1, 0, 'C');
+            $pdf->Cell( 40 , 5, $item['usuario'], 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
             $pdf->ln();
           }
         }
-        $pdf->Cell( 188 , 5, "", 0, 0, 'C');
-        $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
+        $pdf->Cell( 178 , 5, "", 0, 0, 'C');
+        $pdf->Cell( 40 , 5, "Total:", 1, 0, 'C');
         $pdf->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
         $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
         $pdf->ln();
@@ -416,11 +410,11 @@ $pdf = new FPDF('P', 'mm', 'Letter');
     $pdf->Cell( 278 , 5, "Cargos", 0, 0,'C');
         $pdf->ln();
         $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Folio casa', 1, 0, 'C');
+        $pdf->Cell( 20 , 5, 'Folio casa', 1, 0, 'C');
         $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
         $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
         $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Usuario', 1, 0, 'C');
+        $pdf->Cell( 40 , 5, 'Usuario', 1, 0, 'C');
         $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
         $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
         $pdf->ln();
@@ -429,19 +423,19 @@ $pdf = new FPDF('P', 'mm', 'Letter');
           if ($item['cargo']>0 || $item['abono']>0){
             $pdf->SetFont('Arial', '', 10);
             $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
-            $pdf->Cell( 30 , 5, $item['folio_casa'], 1, 0, 'C');
+            $pdf->Cell( 20 , 5, $item['folio_casa'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['folio'], 1, 0, 'C');
             $pdf->Cell( 68 , 5, $item['observaciones'],1, 0, 'C');
-            $pdf->Cell( 30 , 5, $item['usuario'], 1, 0, 'C');
+            $pdf->Cell( 40 , 5, $item['usuario'], 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['cargo'],2), 1, 0, 'C');
             $pdf->Cell( 30 , 5,"$". number_format($item['abono'],2), 1, 0, 'C');
             $pdf->ln();
             
           }
         }
-        $pdf->Cell( 188 , 5, "", 0, 0, 'C');
-        $pdf->Cell( 30 , 5, "Total:", 1, 0, 'C');
+        $pdf->Cell( 178 , 5, "", 0, 0, 'C');
+        $pdf->Cell( 40 , 5, "Total:", 1, 0, 'C');
         $pdf->Cell( 30 , 5, "$".number_format($total_cargo,2), 1, 0, 'C');
         $pdf->Cell( 30 , 5, "$".number_format($total_abono,2), 1, 0, 'C');
         $pdf->ln();
@@ -462,15 +456,13 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->Cell( 30 , 5, "$".number_format($totales_abono,2), 0, 0, 'C');
         $pdf->ln();
         $pdf->Cell( 218 , 5, "", 0, 0, 'C');
-        $pdf->Cell( 30 , 5, "DIferencia", 0, 0, 'C');
+        $pdf->Cell( 30 , 5, "Diferencia", 0, 0, 'C');
         $pdf->Cell( 30 , 5, "$".number_format($direfencia,2), 0, 0, 'C');
   
   
   $nueva_etiqueta= $labels->obtener_corte();
   //$nueva_etiqueta= $nueva_etiqueta - 1;
   $corte_id= $corte->ultima_insercion();
-
-
 
   $hoy = date('Y-m-d');
   // Cambiar concepto a inactivo
