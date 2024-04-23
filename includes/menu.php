@@ -40,6 +40,8 @@
 					</div>
 					';
 				}
+				$permisos_check_in = $usuario->check_in + $usuario->cuenta_maestra + $usuario->reporte_diario + $usuario->reporte_llegada + $usuario->reporte_salidas + $usuario->saldo_huspedes + $usuario->combinar_cuentas + $usuario->edo_centa_fc;
+				if($permisos_check_in > 0 ){
 				echo '
 					<div class="aside_nav_link_containerMore" >
 						<div class="aside_nav_link_containerInfo">
@@ -88,7 +90,9 @@
 								echo '
 							</ul>
 						</div>
-					</div>';
+					</div>
+					';
+				}
 				//Opciones para las reservaciones
 		
 				$permisos_reservaciones2 = $usuario->ver_reservaciones + $usuario->reservacion_agregar + $usuario->info_huespedes + $usuario->reporte_cancelaciones ;

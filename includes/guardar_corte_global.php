@@ -369,7 +369,7 @@ $pdf = new FPDF('P', 'mm', 'Letter');
         $pdf->ln();
         // La consulta no está vacía, realiza alguna acción
         foreach ($listas as $item) {
-          if ($item['cargo']>0 || $item['abono']>0){
+          if ($item['cargo'] > 0 || $item['abono']>0){
             $pdf->SetFont('Arial', '', 10);
             $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
             $pdf->Cell( 20 , 5, $item['folio_casa'], 1, 0, 'C');
