@@ -75,6 +75,8 @@ class PDF extends FPDF
         $usuario= NEW Usuario(0);
         $cuenta= NEW Cuenta(0);
         $hab= NEW Hab(0);
+        $total_global_abono=0;
+        $total_global_cargos=0;
         $abonos=array();
         $consulta_abono=$ticket->tipo_abonos();
         while ($fila = mysqli_fetch_array($consulta_abono))
@@ -188,22 +190,31 @@ class PDF extends FPDF
                 $this->ln();
             }
             $totalescargo+=$total_cargo;
-            $difencia=0;
-            $this->SetFont('Arial', 'I', 7);
-            $this->Cell( 145 , 5, '', 0, 0, 'C');
-            $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
-            $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
-            $this->Cell( 15 , 5, 'Total abonos:', 0, 0, 'C');
-            $this->Cell( 30 , 5, '$'.number_format($totalesabono,2), 0, 0, 'C');
-            $this->Cell( 15 , 5, 'Diferencia:', 0, 0, 'C');
-            if ($totalesabono>$totalescargo){
-                $difencia=$totalesabono-$totalescargo;
-            }else{
-                $difencia=$totalescargo-$totalesabono;
+            if($totalesabono>0 or $totalescargo>0){
+                $difencia=0;
+                $this->SetFont('Arial', 'I', 7);
+                $this->Cell( 145 , 5, '', 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
+                $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Total abonos:', 0, 0, 'C');
+                $this->Cell( 30 , 5, '$'.number_format($totalesabono,2), 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Diferencia:', 0, 0, 'C');
+                $total_global_cargos+=$totalescargo;
+                $total_global_abono+=$totalesabono;
+                if ($totalesabono>$totalescargo){
+                    $difencia=$totalesabono-$totalescargo;
+                }else{
+                    $difencia=$totalescargo-$totalesabono;
+                }
+                $this->Cell( 30 , 5, '$'.number_format($difencia,2), 0, 0, 'C');
+                $this->ln();
+                $this->Cell( 278 , 0.1, '', 1, 0, 'C');
+                
+                $this->ln();
+                $this->Cell( 278 , 5, '',0, 0, 'C');
+                $this->ln();
             }
-            $this->Cell( 30 , 5, '$'.number_format($difencia,2), 0, 0, 'C');
-            $this->ln();
-            $this->ln();
+            
 
 
             $totalescargo=0;
@@ -312,22 +323,31 @@ class PDF extends FPDF
                 $this->ln();
             }
             $totalescargo+=$total_cargo;
-            $difencia=0;
-            $this->SetFont('Arial', 'I', 7);
-            $this->Cell( 145 , 5, '', 0, 0, 'C');
-            $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
-            $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
-            $this->Cell( 15 , 5, 'Total abonos:', 0, 0, 'C');
-            $this->Cell( 30 , 5, '$'.number_format($totalesabono,2), 0, 0, 'C');
-            $this->Cell( 15 , 5, 'Diferencia:', 0, 0, 'C');
-            if ($totalesabono>$totalescargo){
-                $difencia=$totalesabono-$totalescargo;
-            }else{
-                $difencia=$totalescargo-$totalesabono;
+            if($totalesabono>0 or $totalescargo>0){
+                $difencia=0;
+                $this->SetFont('Arial', 'I', 7);
+                $this->Cell( 145 , 5, '', 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
+                $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Total abonos:', 0, 0, 'C');
+                $this->Cell( 30 , 5, '$'.number_format($totalesabono,2), 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Diferencia:', 0, 0, 'C');
+                $total_global_cargos+=$totalescargo;
+                $total_global_abono+=$totalesabono;
+                if ($totalesabono>$totalescargo){
+                    $difencia=$totalesabono-$totalescargo;
+                }else{
+                    $difencia=$totalescargo-$totalesabono;
+                }
+                $this->Cell( 30 , 5, '$'.number_format($difencia,2), 0, 0, 'C');
+                $this->ln();
+                $this->Cell( 278 , 0.1, '', 1, 0, 'C');
+                
+                $this->ln();
+                $this->Cell( 278 , 5, '',0, 0, 'C');
+                $this->ln();
             }
-            $this->Cell( 30 , 5, '$'.number_format($difencia,2), 0, 0, 'C');
-            $this->ln();
-            $this->ln();
+            
 
 
             $totalescargo=0;
@@ -436,21 +456,51 @@ class PDF extends FPDF
                 $this->ln();
             }
             $totalescargo+=$total_cargo;
+            if($totalesabono>0 or $totalescargo>0){
+                $difencia=0;
+                $this->SetFont('Arial', 'I', 7);
+                $this->Cell( 145 , 5, '', 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
+                $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Total abonos:', 0, 0, 'C');
+                $this->Cell( 30 , 5, '$'.number_format($totalesabono,2), 0, 0, 'C');
+                $this->Cell( 15 , 5, 'Diferencia:', 0, 0, 'C');
+                $total_global_cargos+=$totalescargo;
+                $total_global_abono+=$totalesabono;
+                if ($totalesabono>$totalescargo){
+                    $difencia=$totalesabono-$totalescargo;
+                }else{
+                    $difencia=$totalescargo-$totalesabono;
+                }
+                $this->Cell( 30 , 5, '$'.number_format($difencia,2), 0, 0, 'C');
+                $this->ln();
+                $this->Cell( 278 , 0.1, '', 1, 0, 'C');
+                
+                $this->ln();
+                $this->Cell( 278 , 5, '',0, 0, 'C');
+                $this->ln();
+            }
+        }
+        if($total_global_abono>0 or $total_global_cargos>0){
             $difencia=0;
             $this->SetFont('Arial', 'I', 7);
             $this->Cell( 145 , 5, '', 0, 0, 'C');
-            $this->Cell( 15 , 5, 'Total cargos:', 0, 0, 'C');
-            $this->Cell( 30 , 5, '$'.number_format($totalescargo,2), 0, 0, 'C');
-            $this->Cell( 15 , 5, 'Total abonos:', 0, 0, 'C');
-            $this->Cell( 30 , 5, '$'.number_format($totalesabono,2), 0, 0, 'C');
+            $this->Cell( 15 , 5, 'Total de todos los cargos:', 0, 0, 'C');
+            $this->Cell( 30 , 5, '$'.number_format($total_global_cargos,2), 0, 0, 'C');
+            $this->Cell( 15 , 5, 'Total de todos lo abonos:', 0, 0, 'C');
+            $this->Cell( 30 , 5, '$'.number_format($total_global_abono,2), 0, 0, 'C');
             $this->Cell( 15 , 5, 'Diferencia:', 0, 0, 'C');
-            if ($totalesabono>$totalescargo){
-                $difencia=$totalesabono-$totalescargo;
+            if ($total_global_abono>$total_global_cargos){
+                $difencia=$total_global_abono-$total_global_cargos;
             }else{
-                $difencia=$totalescargo-$totalesabono;
+                $difencia=$total_global_cargos-$total_global_abono;
             }
             $this->Cell( 30 , 5, '$'.number_format($difencia,2), 0, 0, 'C');
             $this->ln();
+            $this->Cell( 278 , 0.1, '', 1, 0, 'C');
+            
+            $this->ln();
+            $this->Cell( 278 , 5, '',0, 0, 'C');
             $this->ln();
         }
     }
