@@ -356,21 +356,27 @@ $pdf = new FPDF('P', 'mm', 'Letter');
     
     if (count($listas) > 0) {
         $total=0;
-        $pdf->Cell( 278 , 5, $valor, 0, 0,'C');
+        $pdf->SetFillColor(52, 73, 94); // Rojo
+        $pdf->SetFont('Arial', 'B', 9);
+        $pdf->SetTextColor(255, 255, 255);
+        $pdf->Cell( 278 , 5, $valor, 1, 0,'C', true);
         $pdf->ln();
-        $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
-        $pdf->Cell( 20 , 5, 'Folio casa', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
-        $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
-        $pdf->Cell( 40 , 5, 'Usuario', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
+        $pdf->SetFillColor(128, 139, 150);
+        $pdf->SetFont('Arial', 'B', 9);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C', true);
+        $pdf->Cell( 20 , 5, 'Folio casa', 1, 0, 'C', true);
+        $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C', true);
+        $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C', true);
+        $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C', true);
+        $pdf->Cell( 40 , 5, 'Usuario', 1, 0, 'C', true);
+        $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C', true);
+        $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C', true);
         $pdf->ln();
         // La consulta no está vacía, realiza alguna acción
         foreach ($listas as $item) {
           if ($item['cargo'] > 0 || $item['abono']>0){
-            $pdf->SetFont('Arial', '', 10);
+            $pdf->SetFont('Arial', '', 9);
             $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
             $pdf->Cell( 20 , 5, $item['folio_casa'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
@@ -416,21 +422,27 @@ $pdf = new FPDF('P', 'mm', 'Letter');
       }
       $cuenta->cambiar_cargo($fila2['mov'],$_POST['usuario_id'],13);
     }
-    $pdf->Cell( 278 , 5, "Cargos", 0, 0,'C');
+    $pdf->SetFillColor(52, 73, 94); // Rojo
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->SetTextColor(255, 255, 255);
+    $pdf->Cell( 278 , 5, "Cargos", 0, 0,'C',true);
         $pdf->ln();
-        $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C');
-        $pdf->Cell( 20 , 5, 'Folio casa', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C');
-        $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C');
-        $pdf->Cell( 40 , 5, 'Usuario', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C');
-        $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C');
+        $pdf->SetFillColor(128, 139, 150);
+        $pdf->SetFont('Arial', 'B', 9);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell( 30 , 5, 'Fecha', 1, 0, 'C',true);
+        $pdf->Cell( 20 , 5, 'Folio casa', 1, 0, 'C',true);
+        $pdf->Cell( 30 , 5, 'Cuarto', 1, 0, 'C',true);
+        $pdf->Cell( 30 , 5, 'FPosteo', 1, 0, 'C',true);
+        $pdf->Cell( 68 , 5, 'Observaciones', 1, 0, 'C',true);
+        $pdf->Cell( 40 , 5, 'Usuario', 1, 0, 'C',true);
+        $pdf->Cell( 30 , 5, 'Cargo', 1, 0, 'C',true);
+        $pdf->Cell( 30 , 5, 'Abono', 1, 0, 'C',true);
         $pdf->ln();
         // La consulta no está vacía, realiza alguna acción
         foreach ($listas as $item) {
           if ($item['cargo']>0 || $item['abono']>0){
-            $pdf->SetFont('Arial', '', 10);
+            $pdf->SetFont('Arial', '', 9);
             $pdf->Cell( 30 , 5, $item['fecha'], 1, 0, 'C');
             $pdf->Cell( 20 , 5, $item['folio_casa'], 1, 0, 'C');
             $pdf->Cell( 30 , 5, $item['cuarto'], 1, 0, 'C');
