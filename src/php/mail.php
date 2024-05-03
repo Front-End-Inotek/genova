@@ -103,7 +103,7 @@ try {
                 </div>
                 <div class="content">
                     <p>Estimado/a</p>
-                    <p>Nos complace confirmar la reserva en '.$nombreHotel.' para las siguientes fechas:</p>
+                    <p>Solicitud para reservacion en '.$nombreHotel.' para las siguientes fechas:</p>
                     <div class="reservation-details">
                         <p><strong>Fecha de Llegada:</strong> '.$initialDate.'</p>
                         <p><strong>Fecha de Salida:</strong> '.$endDate.'</p>
@@ -112,7 +112,7 @@ try {
                         <p><strong>Correo electronico:</strong> '.$email.'</p>
                         <p><strong>Nombre:</strong> '.$name.'</p>
                     </div>
-                    <p>Por favor, no dudes en ponerte en contacto con nosotros si necesitas realizar alguna modificación o tienes alguna pregunta sobre la reserva.</p>
+                    <!-- <p>Por favor, no dudes en ponerte en contacto con nosotros si necesitas realizar alguna modificación o tienes alguna pregunta sobre la reserva.</p> -->
                     <!-- <p>Esperamos con ansias tu llegada y te deseamos una estancia agradable en nuestro hotel.</p> -->
                 </div>
                 <div class="footer">

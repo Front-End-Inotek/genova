@@ -68,7 +68,7 @@ const calendarRange = document.querySelector("calendar-range");
 
 // Calcular la fecha de ayer
 const yesterday = new Date();
-yesterday.setDate(yesterday.getDate() - 1);
+yesterday.setDate(yesterday.getDate());
 const formattedYesterday = yesterday.toISOString().split('T')[0];
 calendarRange.setAttribute("min", formattedYesterday);
 let arrive;
