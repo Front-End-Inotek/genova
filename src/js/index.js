@@ -140,8 +140,7 @@ const reservar = () => {
 
     let xhr = new XMLHttpRequest();
 
-    //xhr.open("GET", `src/includes/mail.php?${quersyString}`, true);
-    xhr.open("GET", `src/includes/consultar_disponibilidad.php?${quersyString}`, true)
+    xhr.open("GET", `src/includes/mail.php?${quersyString}`, true);
     
     xhr.onload = function () {
         if( xhr.status >= 200 && xhr.status < 300 ) {
@@ -161,5 +160,70 @@ const reservar = () => {
 
 const btnReserva = document.querySelector("#btn_crear_reserva");
 
+const consultar_reserva = () => {
+
+    const email = document.getElementById("email").value
+    const name = document.getElementById("name").value
+    const phone = document.getElementById("tel").value
+    const guestsSelect = document.querySelector('select[name="persons"]');
+    const guests = guestsSelect.value;
+    const contenedor = document.getElementById("contenedor_hab");
+    
+    if (guests !== "") {
+        console.log("Número de huéspedes seleccionado:", guests);
+    } else {
+        console.log("Ningún número de huéspedes seleccionado.");
+    }
+    if (!email) {
+        swal("Sin correo electrónico!", "Agrega un email valido valido!", "warning");
+        return
+    }
+    if ( !email.includes("@") || email.includes(" ") || !email.includes(".")) {
+        swal("Email no valido", "Agrega un email valido valido!", "warning");
+        return
+    }
+    if (!name) {
+        swal("Sin nombre!", "Agrega un nombre valido!", "warning");
+        return
+    }
+    if (!phone) {
+        swal("Sin numero de telefono!", "Agrega un numero de telefono valido!", "warning");
+        return
+    }
+    if (!guests) {
+        swal("Sin cantidad de huespedes!", "Agrega un numero de huespedes valido!", "warning");
+        return
+    }
+    if (!arrive) {
+        swal("Sin fecha inicial de la reserva!", "Agrega una fecha inicial!", "warning");
+        return
+    }
+    if (!leave) {
+        swal("Sin fecha de salida en la reserva!", "Agrega una fecha salida!", "warning");
+        return
+    }
+
+    console.log("consultando")
+    const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}&email=${encodeURIComponent(email)}`
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", `src/includes/consultar_disponibilidad.php?${quersyString}`, true)
+    xhr.onload = function () {
+        if( xhr.status >= 200 && xhr.status < 300 ) {
+            console.log(xhr.responseText);
+            contenedor.innerHTML = xhr.responseText
+            //swal("Reservación solicitada con exito!", "Hemos recibido tu solicitud!", "success");
+        } else {
+            console.log("Hubo un error al crear la reserva")
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error("Error de red al intentar crear la reserva.");
+    };
+
+    xhr.send();
+
+}
+
 //Submit button
-btnReserva.addEventListener('click' , e => reservar())
+btnReserva.addEventListener('click' , e => consultar_reserva())
