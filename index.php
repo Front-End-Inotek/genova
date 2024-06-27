@@ -22,9 +22,9 @@
                 <div class="main_home_header_logo">
                     <img src="./src/assets/img/logo_genova_color.png" />
                 </div>
-                <button class="btn_reservar">
-                    Ver mas
-                </button>
+                <a href="tel:+52 33 3613 7500" class="btn_reservar">
+                    Telefono
+                </a>
             </section>
 
             <section class="main_home_tools">
@@ -139,10 +139,10 @@
                 <img src="./src/assets/img/10.webp" loading="lazy" alt="">
             </section>
         </div>
-        <div class="btn-left">
+        <div class="btn-left" style="display: none;" >
             <img src="./src/assets/svg/arrow.svg" />
         </div>
-        <div class="btn-right">
+        <div class="btn-right" style="display: none;" >
             <img src="./src/assets/svg/arrow-right.svg" />
         </div>
     </div>
