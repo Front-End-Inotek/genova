@@ -140,8 +140,9 @@ const reservar = () => {
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open("GET", `src/php/mail.php?${quersyString}`, true);
-
+    //xhr.open("GET", `src/includes/mail.php?${quersyString}`, true);
+    xhr.open("GET", `src/includes/consultar_disponibilidad.php?${quersyString}`, true)
+    
     xhr.onload = function () {
         if( xhr.status >= 200 && xhr.status < 300 ) {
             console.log(xhr.responseText);
@@ -160,5 +161,5 @@ const reservar = () => {
 
 const btnReserva = document.querySelector("#btn_crear_reserva");
 
-
+//Submit button
 btnReserva.addEventListener('click' , e => reservar())

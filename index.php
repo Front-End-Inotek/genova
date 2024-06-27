@@ -65,7 +65,7 @@
                 </div>
                 <div class="main_home_tools_button">
                     <button class="btn_crear_reserva" id="btn_crear_reserva">
-                        Reservar
+                        Ver Disponibilidad
                     </button>
                 </div>
             </section>
