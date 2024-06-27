@@ -242,6 +242,7 @@ a:hover {
     letter-spacing: .15em;
     text-transform: uppercase;
     line-height: 1.29;
+    border-radius: 15px;
 }
 .btn_reservar:hover {
     background-color: #004AAD;

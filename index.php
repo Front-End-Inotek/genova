@@ -99,6 +99,13 @@
                     </div>
                 </calendar-range>
             </section>
+
+            <section>
+                <?php
+                    
+                    echo 'sexo';
+                ?>
+            </section>
         </article>
 
         <div class="carrouseles" id="slider">
