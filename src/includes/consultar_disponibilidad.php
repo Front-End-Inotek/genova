@@ -6,19 +6,26 @@
     $cantidadPersonas = $_GET['guests']; 
 
 //Agregar filtros de busqueda
-$sentencia = "SELECT th.id AS tipo_hab, COALESCE(COUNT(r.tipo_hab), 0) AS cantidad, th.nombre AS tipo_habitacion
+$sentencia = "SELECT th.id AS tipo_hab, COALESCE(COUNT(r.tipo_hab), 0) AS cantidad, 
+    th.nombre AS tipo_habitacion,
+    thp.cantidad_maxima
 FROM tipo_hab th
 LEFT JOIN reservacion r ON th.id = r.tipo_hab
-    AND (r.fecha_entrada BETWEEN $initialDate AND $endDate
-    OR r.fecha_salida BETWEEN $initialDate AND $endDate)
-GROUP BY th.id, th.nombre
+        AND (r.fecha_entrada BETWEEN $initialDate AND $endDate
+        OR r.fecha_salida BETWEEN $initialDate AND $endDate)
+LEFT JOIN tarifa_hospedaje thp ON th.id = thp.id
+WHERE thp.cantidad_maxima >= $cantidadPersonas
+GROUP BY th.id, th.nombre, thp.cantidad_maxima
 ORDER BY th.id;
 "; 
 
-$sentencia2 = "SELECT tipo, COUNT(*) AS cantidad
-FROM hab 
-WHERE estado = 0 OR estado = 2 OR estado = 3
-GROUP BY tipo
+
+$sentencia2 = "SELECT h.tipo, COUNT(*) AS cantidad
+FROM hab h
+LEFT JOIN tarifa_hospedaje th ON h.tipo = th.id
+WHERE h.estado IN (0, 2, 3)
+  AND th.cantidad_maxima >= $cantidadPersonas
+GROUP BY h.tipo;
 "; 
 
 $resultado = $conexion->realizaConsulta($sentencia, "");
