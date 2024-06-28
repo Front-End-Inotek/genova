@@ -10,14 +10,15 @@ $sentencia = "SELECT th.id AS tipo_hab, COALESCE(COUNT(r.tipo_hab), 0) AS cantid
     th.nombre AS tipo_habitacion,
     th.descripcion,
     th.img as imagen,
-    thp.cantidad_maxima
+    thp.cantidad_maxima,
+    thp.precio_hospedaje as precio
 FROM tipo_hab th
 LEFT JOIN reservacion r ON th.id = r.tipo_hab
         AND (r.fecha_entrada BETWEEN $initialDate AND $endDate
         OR r.fecha_salida BETWEEN $initialDate AND $endDate)
 LEFT JOIN tarifa_hospedaje thp ON th.id = thp.id
 WHERE thp.cantidad_maxima >= $cantidadPersonas
-GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion, th.img
+GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion, th.img, thp.precio_hospedaje
 ORDER BY th.id;
 "; 
 
@@ -38,6 +39,7 @@ $totalCantidad = [];
 $totalID = [];
 $descripcion = [];
 $imagenes = [];
+$precios = [];
 
 
 while ($fila = mysqli_fetch_array($resultado)) {
@@ -45,6 +47,8 @@ while ($fila = mysqli_fetch_array($resultado)) {
     array_push($disponibleNombre, $fila['tipo_habitacion']);
     array_push($descripcion, $fila['descripcion']);
     array_push($imagenes, $fila['imagen']);
+    array_push($precios, $fila['precio']);
+    
 }
 
 while ($fila2 = mysqli_fetch_array($resultado2)) {
@@ -62,7 +66,7 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                 </div>
                 <div class="card_body">
                     <h5>' .$disponibleNombre[$i].'</h5>
-                    <h6> '.$descripcion[$i] .' </h6>
+                    <h6> '.$descripcion[$i]." <br> Noche: ".$precios[$i].' </h6>
                     <div class="card_body_info">
                         <img src="./src/assets/svg/available.svg" />
                         <p>Disponible '.$totalCantidad[$i].'</p>
