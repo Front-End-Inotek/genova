@@ -101,9 +101,6 @@
             </section>
 
             <section class="contenedor_hab" id="contenedor_hab">
-                <?php
-                    include_once("src/includes/agregar_reservacion.php");
-                ?>
             </section>
         </article>
 
