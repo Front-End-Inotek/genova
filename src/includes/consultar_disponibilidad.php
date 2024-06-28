@@ -84,9 +84,10 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                         <img src="./src/assets/svg/wifi.svg" />
                         <p>Wifi gratis</p>
                     </div>
-                    <button class="btn_select" onclick="reservar('. $totalID[$i] .')" >
+                    <label  class="btn_select" >
+                        <input type="radio" name="hab" value="'. $totalID[$i] .'" onclick="selectCard(this)" />
                         Seleccionar
-                    </button>
+                    </label>
                 </div>
             </div>
             ';

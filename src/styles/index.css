@@ -30,7 +30,12 @@ a:hover {
     height: 100%;
     overflow: hidden;
 }
-
+.fab {
+    position: absolute;
+    background-color: red;
+    right: 1rem;
+    bottom: 1rem;
+}
 .carrouseles {
     width: 1000%;
     height: 100%;
@@ -425,6 +430,14 @@ calendar-month {
     margin-top: auto;
     cursor: pointer;
 }
+.btn_select input{
+/*     display: none;
+ */}
+.card_hab.selected {
+    animation: all ease-in-out 1.5s;
+    box-shadow: 0px 0px 0px 10px #004AAE;
+}
+
 .card_body_info {
     display: flex;
     flex-direction: row;

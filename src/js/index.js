@@ -241,3 +241,18 @@ const consultar_reserva = (  ) => {
 
 //Submit button
 btnReserva.addEventListener('click' , e => consultar_reserva())
+
+function selectCard(radio) {
+    // Obtén el contenedor .card_hab más cercano al radio seleccionado
+    var cardHab = radio.closest('.card_hab');
+    
+    // Remueve la clase 'selected' de todos los .card_hab
+    document.querySelectorAll('.card_hab').forEach(function(card) {
+        card.classList.remove('selected');
+    });
+    
+    // Si el radio está seleccionado, agrega la clase 'selected' al contenedor .card_hab
+    if (radio.checked) {
+        cardHab.classList.add('selected');
+    }
+}

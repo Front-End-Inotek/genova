@@ -29,13 +29,13 @@
 
             <section class="main_home_tools">
                 <div class="main_home_tools_name border_tool_left">
-                    <input id="email" type="email" placeholder="Correo electronico" min="0" max="80"/>
+                    <input id="email" type="email" placeholder="Correo electronico" min="0" max="80" value="dave@gmail.com" />
                 </div>
                 <div class="main_home_tools_name">
-                    <input id="name" type="text" placeholder="Nombre" min="0" max="80"/>
+                    <input id="name" type="text" placeholder="Nombre" min="0" max="80" value="hola" />
                 </div>
                 <div class="main_home_tools_tel border_tool_right">
-                    <input id="tel" type="tel" placeholder="Telefono" min="0" step="5" max="100" />
+                    <input id="tel" type="tel" placeholder="Telefono" min="0" step="5" max="100" value="123123"/>
                 </div>
             </section>
             <section class="main_home_tools ">
@@ -148,6 +148,10 @@
         <div class="btn-right" style="display: none;" >
             <img src="./src/assets/svg/arrow-right.svg" />
         </div>
+    </div>
+
+    <div class="fab">
+        Crear reserva
     </div>
 
     <script src="./src/js/index.js"></script>
