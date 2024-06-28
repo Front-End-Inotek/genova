@@ -9,6 +9,7 @@
 $sentencia = "SELECT th.id AS tipo_hab, COALESCE(COUNT(r.tipo_hab), 0) AS cantidad, 
     th.nombre AS tipo_habitacion,
     th.descripcion,
+    th.img as imagen,
     thp.cantidad_maxima
 FROM tipo_hab th
 LEFT JOIN reservacion r ON th.id = r.tipo_hab
@@ -16,7 +17,7 @@ LEFT JOIN reservacion r ON th.id = r.tipo_hab
         OR r.fecha_salida BETWEEN $initialDate AND $endDate)
 LEFT JOIN tarifa_hospedaje thp ON th.id = thp.id
 WHERE thp.cantidad_maxima >= $cantidadPersonas
-GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion
+GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion, th.img
 ORDER BY th.id;
 "; 
 
@@ -36,12 +37,14 @@ $disponibleNombre= [];
 $totalCantidad = [];
 $totalID = [];
 $descripcion = [];
+$imagenes = [];
 
 
 while ($fila = mysqli_fetch_array($resultado)) {
     array_push($noDisponibleCantidad, $fila['cantidad']);
     array_push($disponibleNombre, $fila['tipo_habitacion']);
     array_push($descripcion, $fila['descripcion']);
+    array_push($imagenes, $fila['imagen']);
 }
 
 while ($fila2 = mysqli_fetch_array($resultado2)) {
@@ -55,7 +58,7 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
         echo '
             <div class="card_hab">
                 <div class="card_hab_header">
-                    <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                    <img src="'.$imagenes[$i].'" />
                 </div>
                 <div class="card_body">
                     <h5>' .$disponibleNombre[$i].'</h5>
