@@ -98,15 +98,15 @@
                     </div>
                 </calendar-range>
             </section>
-
+            <div class="loaderRectangle" id="loader" style="display: none;">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <section class="contenedor_hab" id="contenedor_hab">
-                <div class="loaderRectangle" id="loader" style="display: none;">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                
             </section>
         </article>
 

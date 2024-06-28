@@ -172,6 +172,7 @@ const consultar_reserva = () => {
     const guestsSelect = document.querySelector('select[name="persons"]');
     const guests = guestsSelect.value;
     const contenedor = document.getElementById("contenedor_hab");
+    contenedor.innerHTML = "";
     
     if (guests !== "") {
         console.log("Número de huéspedes seleccionado:", guests);
@@ -220,9 +221,9 @@ const consultar_reserva = () => {
     xhr.open("GET", `src/includes/consultar_disponibilidad.php?${quersyString}`, true)
     xhr.onload = function () {
         if( xhr.status >= 200 && xhr.status < 300 ) {
-            console.log(xhr.responseText);
-            contenedor.innerHTML = xhr.responseText
+            //console.log(xhr.responseText);
             loader.style = "display: none;"
+            contenedor.innerHTML = xhr.responseText
         } else {
             console.log("Hubo un error al crear la reserva")
         }

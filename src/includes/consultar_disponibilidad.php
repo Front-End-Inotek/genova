@@ -48,7 +48,11 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                     <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
                 </div>
                 <div class="card_body">
-                    <h5>' .$disponibleNombre[$i].'. Disponible: '.$totalCantidad[$i].'</h5>
+                    <h5>' .$disponibleNombre[$i].'</h5>
+                    <div class="card_body_info">
+                        <img src="./src/assets/svg/air.svg" />
+                        <p>Disponible '.$totalCantidad[$i].'</p>
+                    </div>
                     <div class="card_body_info">
                         <img src="./src/assets/svg/air.svg" />
                         <p>Aire acondionado</p>
