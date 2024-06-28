@@ -359,7 +359,7 @@ calendar-month {
 .card_hab {
     background-color: white;
     width: 340px;
-    height: 350px;
+    height: 370px;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     border-radius: 0.75rem;
     position: relative;
@@ -387,7 +387,7 @@ calendar-month {
 .card_body {
     margin-top: 135px;
     padding: 0 1rem;
-    height: 200px;
+    height: 226px;
     display: flex;
     flex-direction: column;
 }
@@ -402,8 +402,12 @@ calendar-month {
     line-height: 1.375;
     font-weight: 400;
     font-size: 1.00rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.1rem;
     color: #485364;
+}
+.card_money{
+    color: #278664;
+    font-weight: 600;
 }
 .btn_select {
     transition: all ease-in-out 150ms;

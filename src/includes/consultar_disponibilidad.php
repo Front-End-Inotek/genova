@@ -66,7 +66,8 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                 </div>
                 <div class="card_body">
                     <h5>' .$disponibleNombre[$i].'</h5>
-                    <h6> '.$descripcion[$i]." <br> Noche: ".$precios[$i].' </h6>
+                    <h6> '.$descripcion[$i].' </h6> 
+                    <h6>Noche <span class="card_money" >$'.$precios[$i].'</span> </h6>
                     <div class="card_body_info">
                         <img src="./src/assets/svg/available.svg" />
                         <p>Disponible '.$totalCantidad[$i].'</p>
