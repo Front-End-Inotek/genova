@@ -347,10 +347,11 @@ calendar-month {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 3.5rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    padding: 4rem 0;
+    max-width: 1300px;
+    padding: 4rem 1rem;
     flex-wrap: wrap;
 }
 
@@ -424,7 +425,7 @@ calendar-month {
     display: flex;
     flex-direction: row;
     width: 100%;
-    gap: 8px;
+    gap: 10px;
     align-items: center;
     font-size: 15px;
 }
@@ -589,5 +590,9 @@ animation-delay: 1.4s;
         border-radius: 0.75rem;
         position: relative;
         margin-top: 40px;
+    }
+
+    .contenedor_hab {
+        gap: 5rem;
     }
 }
