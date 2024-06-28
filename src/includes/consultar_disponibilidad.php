@@ -84,7 +84,9 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                         <img src="./src/assets/svg/wifi.svg" />
                         <p>Wifi gratis</p>
                     </div>
-                    <button class="btn_select" value="'. $totalID[$i] . '">Seleccionar</button>
+                    <button class="btn_select" onclick="reservar('. $totalID[$i] .')" >
+                        Seleccionar
+                    </button>
                 </div>
             </div>
             ';

@@ -91,8 +91,10 @@ calendarRange.addEventListener("change", (e) => {
     console.log(e.target.value) */
 })
 
-const reservar = () => {
+const reservar = ( id_tipo_hab ) => {
 
+    console.log( id_tipo_hab )
+    return
     const email = document.getElementById("email").value
     const name = document.getElementById("name").value
     const phone = document.getElementById("tel").value
@@ -160,7 +162,7 @@ const reservar = () => {
 
 const btnReserva = document.querySelector("#btn_crear_reserva");
 
-const consultar_reserva = () => {
+const consultar_reserva = (  ) => {
 
     const loader = document.getElementById("loader")
 
@@ -215,7 +217,7 @@ const consultar_reserva = () => {
         return
     }
 
-    console.log("consultando")
+    //console.log("consultando")
     const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}&email=${encodeURIComponent(email)}`
     let xhr = new XMLHttpRequest();
     xhr.open("GET", `src/includes/consultar_disponibilidad.php?${quersyString}`, true)
