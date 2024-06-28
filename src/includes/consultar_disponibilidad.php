@@ -59,7 +59,7 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                 </div>
                 <div class="card_body">
                     <h5>' .$disponibleNombre[$i].'</h5>
-                    <h6> Que onda cachorros como estan? </h6>
+                    <h6> '.$descripcion[$i] .' </h6>
                     <div class="card_body_info">
                         <img src="./src/assets/svg/available.svg" />
                         <p>Disponible '.$totalCantidad[$i].'</p>
@@ -75,9 +75,7 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                     <div class="card_body_info">
                         <img src="./src/assets/svg/wifi.svg" />
                         <p>Wifi gratis</p>
-                        <p>'.$descripcion[$i] .'</p>
                     </div>
-
                     <button class="btn_select" value="'. $totalID[$i] . '">Seleccionar</button>
                 </div>
             </div>
