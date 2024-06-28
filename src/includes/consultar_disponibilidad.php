@@ -60,7 +60,7 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
     $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
     if($totalCantidad[$i]>= 1){
         echo '
-            <div class="card_hab">
+            <label for="'. $totalID[$i] .'" class="card_hab">
                 <div class="card_hab_header">
                     <img src="'.$imagenes[$i].'" />
                 </div>
@@ -85,11 +85,11 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                         <p>Wifi gratis</p>
                     </div>
                     <label  class="btn_select" >
-                        <input type="radio" name="hab" value="'. $totalID[$i] .'" onclick="selectCard(this)" />
+                        <input type="radio" name="hab" id="'. $totalID[$i] .'" value="'. $totalID[$i] .'" onclick="selectCard(this)" />
                         Seleccionar
                     </label>
                 </div>
-            </div>
+            </label>
             ';
         }
 } 

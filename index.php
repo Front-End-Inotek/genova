@@ -108,7 +108,13 @@
             <section class="contenedor_hab" id="contenedor_hab">
                 
             </section>
+
+            <button class="btn_submit"  >
+                Crear reserva
+            </button>
         </article>
+
+        
 
         <div class="carrouseles" id="slider">
             <section class="slider-section">
@@ -150,9 +156,7 @@
         </div>
     </div>
 
-    <div class="fab">
-        Crear reserva
-    </div>
+    
 
     <script src="./src/js/index.js"></script>
     <script type="module" src="https://unpkg.com/cally"></script>

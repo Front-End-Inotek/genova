@@ -30,11 +30,8 @@ a:hover {
     height: 100%;
     overflow: hidden;
 }
-.fab {
-    position: absolute;
+.btn_reservar {
     background-color: red;
-    right: 1rem;
-    bottom: 1rem;
 }
 .carrouseles {
     width: 1000%;
@@ -369,6 +366,12 @@ calendar-month {
     border-radius: 0.75rem;
     position: relative;
     margin-top: 40px;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+}
+.card_hab:hover {
+    box-shadow: 0px 0px 14px 8px #436ca3;
+    scale: 1.075;
 }
 
 .card_hab_header {
@@ -431,11 +434,33 @@ calendar-month {
     cursor: pointer;
 }
 .btn_select input{
-/*     display: none;
- */}
+    display: none;
+}
 .card_hab.selected {
     animation: all ease-in-out 1.5s;
     box-shadow: 0px 0px 0px 10px #004AAE;
+}
+.btn_submit {
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #004AAE;
+    width: 30%;
+    padding: 1.5rem 1rem;
+    color: white;
+    max-width: 1300px;
+    cursor: pointer;
+}
+
+.btn_submit:disabled {
+    cursor: not-allowed;
+    background-color: #53647a;
+    color: #c9c9c9
 }
 
 .card_body_info {
