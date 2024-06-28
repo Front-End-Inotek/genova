@@ -7,6 +7,8 @@ const btnCalender = document.querySelector("#btnCalender");
 const btn_inicialFecha = document.querySelector("#handleInicio");
 const btn_finalFecha = document.querySelector("#handleFinal");
 
+const btn_submit = document.getElementById("btn_submit");
+
 btnCalender.addEventListener("click" , e => handleCalender());
 btn_inicialFecha.addEventListener("click" , e => handleCalender());
 btn_finalFecha.addEventListener("click" , e => handleCalender());
@@ -91,10 +93,8 @@ calendarRange.addEventListener("change", (e) => {
     console.log(e.target.value) */
 })
 
-const reservar = ( id_tipo_hab ) => {
+const reservar = () => {
 
-    console.log( id_tipo_hab )
-    return
     const email = document.getElementById("email").value
     const name = document.getElementById("name").value
     const phone = document.getElementById("tel").value
@@ -226,6 +226,9 @@ const consultar_reserva = (  ) => {
             //console.log(xhr.responseText);
             loader.style = "display: none;"
             contenedor.innerHTML = xhr.responseText
+            btn_submit.style = "display:block;";
+            btn_submit.setAttribute("disabled", true);
+
         } else {
             console.log("Hubo un error al crear la reserva")
         }
@@ -241,10 +244,11 @@ const consultar_reserva = (  ) => {
 
 //Submit button
 btnReserva.addEventListener('click' , e => consultar_reserva())
+btn_submit.addEventListener('click', )
 
 function selectCard(radio) {
     // Obtén el contenedor .card_hab más cercano al radio seleccionado
-    var cardHab = radio.closest('.card_hab');
+    const cardHab = radio.closest('.card_hab');
     
     // Remueve la clase 'selected' de todos los .card_hab
     document.querySelectorAll('.card_hab').forEach(function(card) {
@@ -255,4 +259,6 @@ function selectCard(radio) {
     if (radio.checked) {
         cardHab.classList.add('selected');
     }
+
+    btn_submit.removeAttribute("disabled");
 }

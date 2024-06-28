@@ -109,7 +109,7 @@
                 
             </section>
 
-            <button class="btn_submit"  >
+            <button class="btn_submit " disabled style="display:none;" id= 'btn_submit'>
                 Crear reserva
             </button>
         </article>
