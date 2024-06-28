@@ -60,7 +60,6 @@
                         <option value="4">4 HUESPED</option>
                         <option value="5">5 HUESPED</option>
                         <option value="6">6 HUESPED</option>
-                        <option value="7">7 HUESPED</option>
                     </select>
                 </div>
                 <div class="main_home_tools_button border_tool_right">
@@ -101,6 +100,13 @@
             </section>
 
             <section class="contenedor_hab" id="contenedor_hab">
+                <div class="loaderRectangle" id="loader" style="display: none;">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
             </section>
         </article>
 
