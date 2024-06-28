@@ -38,8 +38,8 @@ while ($fila = mysqli_fetch_array($resultado)) {
                 <p>Wifi gratis</p>
             </div>
 
-//     //         <button class="btn_select" >Seleccionar</button>
-//     //     </div>
-//     // </div>
-//     // ';
-
+             <button class="btn_select" >Seleccionar</button>
+         </div>
+     </div>
+     ';
+}

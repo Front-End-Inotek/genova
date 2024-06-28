@@ -395,6 +395,7 @@ calendar-month {
     background-color: #004AAE;
     color: white;
     margin-top: auto;
+    cursor: pointer;
 }
 .card_body_info {
     display: flex;
