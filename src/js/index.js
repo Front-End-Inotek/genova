@@ -162,6 +162,10 @@ const btnReserva = document.querySelector("#btn_crear_reserva");
 
 const consultar_reserva = () => {
 
+    const loader = document.getElementById("loader")
+
+    loader.style = "display: flex;"
+
     const email = document.getElementById("email").value
     const name = document.getElementById("name").value
     const phone = document.getElementById("tel").value
@@ -176,30 +180,37 @@ const consultar_reserva = () => {
     }
     if (!email) {
         swal("Sin correo electrónico!", "Agrega un email valido valido!", "warning");
+        loader.style = "display: none;"
         return
     }
     if ( !email.includes("@") || email.includes(" ") || !email.includes(".")) {
         swal("Email no valido", "Agrega un email valido valido!", "warning");
+        loader.style = "display: none;"
         return
     }
     if (!name) {
         swal("Sin nombre!", "Agrega un nombre valido!", "warning");
+        loader.style = "display: none;"
         return
     }
     if (!phone) {
         swal("Sin numero de telefono!", "Agrega un numero de telefono valido!", "warning");
+        loader.style = "display: none;"
         return
     }
     if (!guests) {
         swal("Sin cantidad de huespedes!", "Agrega un numero de huespedes valido!", "warning");
+        loader.style = "display: none;"
         return
     }
     if (!arrive) {
         swal("Sin fecha inicial de la reserva!", "Agrega una fecha inicial!", "warning");
+        loader.style = "display: none;"
         return
     }
     if (!leave) {
         swal("Sin fecha de salida en la reserva!", "Agrega una fecha salida!", "warning");
+        loader.style = "display: none;"
         return
     }
 
@@ -211,7 +222,7 @@ const consultar_reserva = () => {
         if( xhr.status >= 200 && xhr.status < 300 ) {
             console.log(xhr.responseText);
             contenedor.innerHTML = xhr.responseText
-            //swal("Reservación solicitada con exito!", "Hemos recibido tu solicitud!", "success");
+            loader.style = "display: none;"
         } else {
             console.log("Hubo un error al crear la reserva")
         }
