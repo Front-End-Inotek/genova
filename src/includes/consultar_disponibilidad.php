@@ -8,6 +8,7 @@
 //Agregar filtros de busqueda
 $sentencia = "SELECT th.id AS tipo_hab, COALESCE(COUNT(r.tipo_hab), 0) AS cantidad, 
     th.nombre AS tipo_habitacion,
+    th.descripcion,
     thp.cantidad_maxima
 FROM tipo_hab th
 LEFT JOIN reservacion r ON th.id = r.tipo_hab
@@ -15,7 +16,7 @@ LEFT JOIN reservacion r ON th.id = r.tipo_hab
         OR r.fecha_salida BETWEEN $initialDate AND $endDate)
 LEFT JOIN tarifa_hospedaje thp ON th.id = thp.id
 WHERE thp.cantidad_maxima >= $cantidadPersonas
-GROUP BY th.id, th.nombre, thp.cantidad_maxima
+GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion
 ORDER BY th.id;
 "; 
 
@@ -34,16 +35,18 @@ $noDisponibleCantidad = [];
 $disponibleNombre= [];
 $totalCantidad = [];
 $totalID = [];
+$descripcion = [];
 
 
 while ($fila = mysqli_fetch_array($resultado)) {
     array_push($noDisponibleCantidad, $fila['cantidad']);
     array_push($disponibleNombre, $fila['tipo_habitacion']);
+    array_push($descripcion, $fila['descripcion']);
 }
 
 while ($fila2 = mysqli_fetch_array($resultado2)) {
     array_push($totalCantidad, $fila2['cantidad']);
-    array_push($totalID, $fila2['tipo']);
+        array_push($totalID, $fila2['tipo']);
 }
 
 for ($i = 0; $i < sizeof($disponibleNombre); $i++){
@@ -71,6 +74,7 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                     <div class="card_body_info">
                         <img src="./src/assets/svg/wifi.svg" />
                         <p>Wifi gratis</p>
+                        <p>'.$descripcion[$i] .'</p>
                     </div>
 
                     <button class="btn_select" value="'. $totalID[$i] . '">Seleccionar</button>
