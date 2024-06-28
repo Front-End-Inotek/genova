@@ -1,23 +1,24 @@
-<div class="card_hab">
-    <div class="card_hab_header">
-        <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-    </div>
-    <div class="card_body">
-        <h5>Hab continental</h5>
-        <div class="card_body_info">
-            <img src="./src/assets/svg/air.svg" />
-            <p>Aire acondionado</p>
-        </div>
-        <div class="card_body_info">
-            <img src="./src/assets/svg/tv.svg" />
-            <p>TV</p>
-        </div>
-        <div class="card_body_info">
-            <img src="./src/assets/svg/wifi.svg" />
-            <p>Wifi gratis</p>
-        </div>
+<?php   
+    $initialDate = strtotime($_GET['initial']);
+    $endDate = strtotime($_GET['end']);       
+    $cantidadPersonas = $_GET['guests']; 
+    $name = $_GET['name'];
+    $hab_id = $_GET['hab_id'];
+?>
 
-        <button class="btn_select" >Seleccionar</button>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 
+    <?php
+    echo $name;
+    echo $hab_id;
+    ?>
+
+</body>
+</html>

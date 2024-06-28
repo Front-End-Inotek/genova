@@ -101,6 +101,10 @@ const reservar = () => {
     const guestsSelect = document.querySelector('select[name="persons"]');
     const guests = guestsSelect.value;
 
+    const hab_id = document.querySelector('input[name="hab"]:checked').value;
+
+
+    
     
     if (guests !== "") {
         console.log("Número de huéspedes seleccionado:", guests);
@@ -138,16 +142,15 @@ const reservar = () => {
 
     console.log("Creando reserva...")
 
-    const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}&email=${encodeURIComponent(email)}`
+    const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}&email=${encodeURIComponent(email)}&hab_id=${encodeURIComponent(hab_id)}`
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open("GET", `src/includes/mail.php?${quersyString}`, true);
+    xhr.open("GET", `src/includes/agregar_reservacion.php?${quersyString}`, true);
     
     xhr.onload = function () {
         if( xhr.status >= 200 && xhr.status < 300 ) {
-            console.log(xhr.responseText);
-            swal("Reservación solicitada con exito!", "Hemos recibido tu solicitud!", "success");
+            window.location.href = `src/includes/agregar_reservacion.php?${quersyString}`;
         } else {
             console.log("Hubo un error al crear la reserva")
         }
@@ -244,7 +247,7 @@ const consultar_reserva = (  ) => {
 
 //Submit button
 btnReserva.addEventListener('click' , e => consultar_reserva())
-btn_submit.addEventListener('click', )
+btn_submit.addEventListener('click', e=> reservar())
 
 function selectCard(radio) {
     // Obtén el contenedor .card_hab más cercano al radio seleccionado
