@@ -28,20 +28,20 @@
             </section>
 
             <section class="main_home_tools">
-                <div class="main_home_tools_name">
+                <div class="main_home_tools_name border_tool_left">
                     <input id="email" type="email" placeholder="Correo electronico" min="0" max="80"/>
                 </div>
                 <div class="main_home_tools_name">
                     <input id="name" type="text" placeholder="Nombre" min="0" max="80"/>
                 </div>
-                <div class="main_home_tools_tel">
+                <div class="main_home_tools_tel border_tool_right">
                     <input id="tel" type="tel" placeholder="Telefono" min="0" step="5" max="100" />
                 </div>
             </section>
-            <section class="main_home_tools">
-                <div class="main_home_tools_date">
+            <section class="main_home_tools ">
+                <div class="main_home_tools_date border_tool_left">
                     <!-- Fecha inicial -->
-                    <div class="main_home_tools_div_date" id="handleInicio">
+                    <div class="main_home_tools_div_date  border_tool_left" id="handleInicio">
                         <p>Fecha inicio</p>
                         <p id="initialDate">Selecciona una fecha</p>
                     </div>
@@ -63,8 +63,8 @@
                         <option value="7">7 HUESPED</option>
                     </select>
                 </div>
-                <div class="main_home_tools_button">
-                    <button class="btn_crear_reserva" id="btn_crear_reserva">
+                <div class="main_home_tools_button border_tool_right">
+                    <button class="btn_crear_reserva border_tool_right" id="btn_crear_reserva">
                         Ver Disponibilidad
                     </button>
                 </div>

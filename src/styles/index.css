@@ -115,6 +115,9 @@ a:hover {
     width: 100%;
     object-fit: contain;
     max-width: 180px;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 10px;
 }
 .main_home_tools {
     display: flex;
@@ -147,6 +150,15 @@ a:hover {
     align-items: center;
     justify-content: center;
 }
+.border_tool_left {
+    border-radius: 0.5rem 0 0 0.5rem !important;
+}
+.border_tool_right {
+    border-radius: 0 0.5rem 0.5rem 0  !important;
+}
+.border_full {
+    border-radius: 0.5rem;
+}
 .main_home_tools_name input,
 .main_home_tools_tel input{
     width: 90%;
@@ -177,19 +189,21 @@ a:hover {
     margin-top: 1rem;
     animation: fadeInOut 0.1s ease-in-out;
     position: relative;
+    max-width: 1300px;
+    padding: 1 1rem;
+    border-radius: 0.5rem;
 }
 .calender_container_img {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 2px;
+    right: 2px;
     z-index: 100000;
-    background-color: #38B6FF;
+    background-color: #004AAD;
+    color: white;
     width: 30px;
     height: 30px;
     cursor: pointer;
-}
-.calender_container_img:hover {
-    background-color: #004AAD;
+    border-radius: 0.5rem;
 }
 @keyframes fadeInOut {
     0% { 
@@ -280,14 +294,16 @@ a:hover {
 }
 calendar-range {
     svg {
-      height: 16px;
-      width: 16px;
+      height: 20px;
+      width: 20px;
       fill: none;
       stroke: currentColor;
       stroke-width: 1.5;
       border: none;
-      background-color: #38B6FF;
-      color: #004AAD;
+      background-color: #004AAD;
+      color: white;
+      border: none;
+      padding: 2px;
     }
 
     path {
@@ -411,6 +427,15 @@ calendar-month {
 
 
 @media only screen and ( max-width: 767px ) {
+    .border_tool_left {
+        border-radius: none;
+    }
+    .border_tool_right {
+        border-radius: none;
+    }
+    .border_full {
+        border-radius: none;
+    }
     .main_home_tools {
         flex-direction: column;
         height: fit-content;
@@ -418,7 +443,7 @@ calendar-month {
     }
     .main_home_tools div{
         padding: 2px 0;
-        border-radius: 0.75rem;
+        border-radius: 0.5rem !important;
     }
     .main_home_tools_persons select{
         height: 50px;
