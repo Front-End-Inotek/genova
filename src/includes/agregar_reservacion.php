@@ -9,7 +9,6 @@ $guests = $_POST["guests"];
 $initial = new DateTime($_POST["initial"]);
 $end =  new DateTime($_POST["end"]);
 $roomType = $_POST['hab_id'];
-
 $allowanceDays = $initial->diff($end)->days;
 
 
@@ -29,11 +28,15 @@ while($fila = mysqli_fetch_array($resultado)){
     array_push($allExtraGuestsFee, $fila['precio_adulto']);
     array_push($allIncludedGuests, $fila['cantidad_hospedaje']);
 }
+foreach($allRoomFee as $room){
+    echo $room.', ';
+}
+
 $extraGuests = 0;
 if($guests > 2){
-    $extraGuests = $guests - $allIncludedGuests[$roomType];
+    $extraGuests = $guests - $allIncludedGuests[$roomType-1];
 }
-$grandTotal = ($allRoomFee[$roomType] + (($allExtraGuestsFee[$roomType])*($extraGuests))) * $allowanceDays;
+$grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($extraGuests))) * $allowanceDays;
 //echo $grandTotal;
 ?>
 
