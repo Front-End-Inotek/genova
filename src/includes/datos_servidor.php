@@ -6,7 +6,7 @@
   $usuario_servidor="root";
   //$password="ORWare1986";
   //$password="";
-  $password="123";
+  $password="";
 
   $base_datos="plaza_genova";
   //.gitignore
