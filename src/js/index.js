@@ -139,28 +139,38 @@ const reservar = () => {
         swal("Sin fecha de salida en la reserva!", "Agrega una fecha salida!", "warning");
         return
     }
+    console.log("Creando reserva...");
 
-    console.log("Creando reserva...")
-
-    const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}&email=${encodeURIComponent(email)}&hab_id=${encodeURIComponent(hab_id)}`
-
-    let xhr = new XMLHttpRequest();
-
-    xhr.open("GET", `src/includes/agregar_reservacion.php?${quersyString}`, true);
+    const data = {
+        "name": name,
+        "phone": phone,
+        "guests": guests,
+        "initial": arrive,
+        "end": leave,
+        "email": email,
+        "hab_id": hab_id
+    };
     
-    xhr.onload = function () {
-        if( xhr.status >= 200 && xhr.status < 300 ) {
-            window.location.href = `src/includes/agregar_reservacion.php?${quersyString}`;
-        } else {
-            console.log("Hubo un error al crear la reserva")
+    // Crear un formulario oculto
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "src/includes/agregar_reservacion.php";
+    
+    // Agregar los datos al formulario
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
         }
-    };
+    }
+    
+    // Agregar el formulario al cuerpo del documento y enviarlo
+    document.body.appendChild(form);
+    form.submit();
 
-    xhr.onerror = function () {
-        console.error("Error de red al intentar crear la reserva.");
-    };
-
-    xhr.send();
 }
 
 const btnReserva = document.querySelector("#btn_crear_reserva");

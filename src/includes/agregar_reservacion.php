@@ -2,13 +2,13 @@
 include_once("consulta.php");
 $conexion = new ConexionMYSql();
 
-$name = $_GET["name"];
-$email = $_GET["email"];
-$phone = $_GET["phone"];
-$guests = $_GET["guests"];
-$initial = new DateTime($_GET["initial"]);
-$end =  new DateTime($_GET["end"]);
-$roomType = $_GET['hab_id'];
+$name = $_POST["name"];
+$email = $_POST["email"];
+$phone = $_POST["phone"];
+$guests = $_POST["guests"];
+$initial = new DateTime($_POST["initial"]);
+$end =  new DateTime($_POST["end"]);
+$roomType = $_POST['hab_id'];
 
 $allowanceDays = $initial->diff($end)->days;
 
@@ -31,10 +31,10 @@ while($fila = mysqli_fetch_array($resultado)){
 }
 $extraGuests = 0;
 if($guests > 2){
-    $extraGuests = $guests - $allIncludedGuests;
+    $extraGuests = $guests - $allIncludedGuests[$roomType];
 }
 $grandTotal = ($allRoomFee[$roomType] + (($allExtraGuestsFee[$roomType])*($extraGuests))) * $allowanceDays;
-echo $grandTotal;
+//echo $grandTotal;
 ?>
 
 <!doctype html>
@@ -153,14 +153,12 @@ echo $grandTotal;
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="text-secundary">Total:   <span class="text-primary" >$<?php echo $grandTotal ?></span> </span>
         </h4>
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">
-                        atoaksdsa              </h6>
+              <h6 class="my-0">atoaksdsa</h6>
               <small class="text-body-secondary">Brief description</small>
             </div>
             <span class="text-body-secondary">$12</span>
@@ -228,7 +226,7 @@ echo $grandTotal;
             </button>
         </div>
 
-        <h4 class="mb-3">Detalles de la rervacion</h4>
+        <h4 class="mb-3 mt-3">Detalles de la rervación</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
             <div class="col-sm-12">
@@ -265,7 +263,7 @@ echo $grandTotal;
 
             <div class="col-md-6">
               <label for="country" class="form-label">Fecha de inicio</label>
-              <input type="text" class="form-control" disabled value="<?php echo htmlspecialchars($initial) ?>" required/>
+              <input type="text" class="form-control" disabled value="<?php echo htmlspecialchars($_POST["initial"]) ?>" required/>
               <div class="invalid-feedback">
                 Please select a valid country.
               </div>
@@ -273,7 +271,7 @@ echo $grandTotal;
 
             <div class="col-md-6">
               <label for="state" class="form-label">Fecha de fin</label>
-              <input type="text" class="form-control" disabled value="<?php echo htmlspecialchars($initial) ?>" required/>
+              <input type="text" class="form-control" disabled value="<?php echo htmlspecialchars($_POST["end"]) ?>" required/>
               <div class="invalid-feedback">
                 Please provide a valid state.
               </div>
