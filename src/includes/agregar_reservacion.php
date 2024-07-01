@@ -1,12 +1,40 @@
 <?php
+include_once("consulta.php");
+$conexion = new ConexionMYSql();
 
 $name = $_GET["name"];
 $email = $_GET["email"];
 $phone = $_GET["phone"];
 $guests = $_GET["guests"];
-$initial = $_GET["initial"];
-$end = $_GET["end"];
+$initial = new DateTime($_GET["initial"]);
+$end =  new DateTime($_GET["end"]);
+$roomType = $_GET['hab_id'];
 
+$allowanceDays = $initial->diff($end)->days;
+
+
+$sentencia = "SELECT th.nombre, th.id, thh.precio_hospedaje, thh.precio_adulto, thh.cantidad_hospedaje
+              FROM tipo_hab th
+              JOIN tarifa_hospedaje thh ON th.id = thh.id;";
+
+$resultado = $conexion->realizaConsulta($sentencia, "");
+$allRoomNames = [];
+$allRoomFee = [];
+$allExtraGuestsFee = [];
+$allIncludedGuests = [];
+
+while($fila = mysqli_fetch_array($resultado)){
+    array_push($allRoomNames, $fila['nombre']);
+    array_push($allRoomFee, $fila['precio_hospedaje']);
+    array_push($allExtraGuestsFee, $fila['precio_adulto']);
+    array_push($allIncludedGuests, $fila['cantidad_hospedaje']);
+}
+$extraGuests = 0;
+if($guests > 2){
+    $extraGuests = $guests - $allIncludedGuests;
+}
+$grandTotal = ($allRoomFee[$roomType] + (($allExtraGuestsFee[$roomType])*($extraGuests))) * $allowanceDays;
+echo $grandTotal;
 ?>
 
 <!doctype html>
@@ -20,7 +48,6 @@ $end = $_GET["end"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="../assets_bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="../assets/img/logo_genova_color.png" type="image/x-icon">
-
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -123,7 +150,6 @@ $end = $_GET["end"];
       <img class="d-block mx-auto mb-4" src="../assets/img/logo_genova_color.png" alt="" width="150" >
       <h2>Resumen de reservacion</h2>
     </div>
-
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -133,7 +159,8 @@ $end = $_GET["end"];
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Product name</h6>
+              <h6 class="my-0">
+                        atoaksdsa              </h6>
               <small class="text-body-secondary">Brief description</small>
             </div>
             <span class="text-body-secondary">$12</span>
