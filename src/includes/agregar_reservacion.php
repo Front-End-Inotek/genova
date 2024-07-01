@@ -286,11 +286,14 @@ $grandTotal = ($allRoomFee[$roomType] + (($allExtraGuestsFee[$roomType])*($extra
     </div>
   </main>
 
+  <div id="paypal-button-container"></div>
+
   <footer class="my-5 pt-5 text-body-secondary text-center text-small">
     <p class="mb-1">&copy; 2024–2024 Plaza Genova</p>
   </footer>
 </div>
 <script src="../assets_bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://www.paypal.com/sdk/js?client-id=AbNIMl1p1ehS_e_Tv7Ozvw_oQjAFAC-JuPiK-foXIlwLXlgmHE13atymtvQybJrmlYiey77AJMJ_44ob&currency=MXN"></script>
     <script src="../js/checkout.js"></script></body>
 </html>

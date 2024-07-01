@@ -1,4 +1,3 @@
-// Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
   'use strict'
 
@@ -16,4 +15,28 @@
       form.classList.add('was-validated')
     }, false)
   })
+
+ 
+  const amount = "50.50";
+
+  window.paypal
+  paypal.Buttons({
+      createOrder: function(data,actions){
+          return actions.order.create({
+              purchase_units:[{
+                  amount:{
+                      value:amount
+                  }
+              }]
+          });
+      },
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details){
+              alert("gracias "+details.payer.name.given_name+" tu transaccion fue compleatada con exito ");
+          });
+          
+      }
+          
+  }).render("#paypal-button-container")
+
 })()
