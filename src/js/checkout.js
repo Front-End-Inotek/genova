@@ -17,15 +17,14 @@
   })
 
  
-  const amount = "50.50";
-
+  //let amount;
   window.paypal
   paypal.Buttons({
       createOrder: function(data,actions){
           return actions.order.create({
               purchase_units:[{
                   amount:{
-                      value:amount
+                      value: grandTotal
                   }
               }]
           });
@@ -38,5 +37,6 @@
       }
           
   }).render("#paypal-button-container")
+
 
 })()

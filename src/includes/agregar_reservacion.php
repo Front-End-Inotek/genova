@@ -28,9 +28,6 @@ while($fila = mysqli_fetch_array($resultado)){
     array_push($allExtraGuestsFee, $fila['precio_adulto']);
     array_push($allIncludedGuests, $fila['cantidad_hospedaje']);
 }
-foreach($allRoomFee as $room){
-    echo $room.', ';
-}
 
 $extraGuests = 0;
 if($guests > 2){
@@ -156,49 +153,45 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-secundary">Total:   <span class="text-primary" >$<?php echo $grandTotal ?></span> </span>
+          <span class="text-secundary">Su orden  <span class="text-primary" ></span> </span>
         </h4>
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">atoaksdsa</h6>
-              <small class="text-body-secondary">Brief description</small>
+              <h6 class="my-0"><?php echo $allRoomNames[$roomType-1];?></h6>
+              <small class="text-body-secondary">Precio por noche</small>
             </div>
-            <span class="text-body-secondary">$12</span>
+            <span class="text-body-secondary">$<?php echo $allRoomFee[$roomType-1];?></span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Second product</h6>
-              <small class="text-body-secondary">Brief description</small>
+              <h6 class="my-0">Huespedes</h6>
+              <small class="text-body-secondary">Huespedes incluidos: <?php echo $allIncludedGuests[$roomType-1];?></small>
+
             </div>
-            <span class="text-body-secondary">$8</span>
+            <span class="text-body-secondary"><?php echo $guests;?></span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Third item</h6>
-              <small class="text-body-secondary">Brief description</small>
+              <h6 class="my-0">Huespedes extra</h6>
+              <small class="text-body-secondary">Precio huesped extra: <?php echo $allExtraGuestsFee[$roomType-1];?></small>
             </div>
-            <span class="text-body-secondary">$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-            <div class="text-success">
-              <h6 class="my-0">Promo code</h6>
-              <small>EXAMPLECODE</small>
-            </div>
-            <span class="text-success">−$5</span>
+            <span class="text-body-secondary">$<?php echo ($allExtraGuestsFee[$roomType-1] * $extraGuests);?></span>
           </li>
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
+            <span>Total (MXN)</span>
+            <strong>$<?php echo $grandTotal ?></strong>
           </li>
         </ul>
 
-        <form class="card p-2">
+        <div id="paypal-button-container"></div>
+
+        <!-- <form class="card p-2">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Promo code">
             <button type="submit" class="btn btn-secondary">Redeem</button>
           </div>
-        </form>
+        </form> -->
       </div>
       <div class="col-md-7 col-lg-8">
 
@@ -289,14 +282,13 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
     </div>
   </main>
 
-  <div id="paypal-button-container"></div>
-
   <footer class="my-5 pt-5 text-body-secondary text-center text-small">
     <p class="mb-1">&copy; 2024–2024 Plaza Genova</p>
   </footer>
 </div>
 <script src="../assets_bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script> var grandTotal = <?php echo $grandTotal;?>; </script>
     <script src="https://www.paypal.com/sdk/js?client-id=AbNIMl1p1ehS_e_Tv7Ozvw_oQjAFAC-JuPiK-foXIlwLXlgmHE13atymtvQybJrmlYiey77AJMJ_44ob&currency=MXN"></script>
-    <script src="../js/checkout.js"></script></body>
+    <script src="../js/checkout.js"></script>
+</body>
 </html>
