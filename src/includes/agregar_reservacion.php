@@ -38,7 +38,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
 ?>
 
 <!doctype html>
-<html lang="esp" data-bs-theme="auto">
+<html lang="esp" >
   <head><script src="../assets_bootstrap/js/color-modes.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -161,7 +161,10 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
               <h6 class="my-0"><?php echo $allRoomNames[$roomType-1];?></h6>
               <small class="text-body-secondary">Precio por noche</small>
             </div>
-            <span class="text-body-secondary">$<?php echo $allRoomFee[$roomType-1];?></span>
+            <div>
+              <h6 class="my-0">$<?php echo $allRoomFee[$roomType-1];?> </h6>
+              <small class="text-body-secondary"><?php echo  'x '. $allowanceDays. ' dias' ?></small>
+            </div>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
@@ -290,5 +293,6 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
     <script> var grandTotal = <?php echo $grandTotal;?>; </script>
     <script src="https://www.paypal.com/sdk/js?client-id=AbNIMl1p1ehS_e_Tv7Ozvw_oQjAFAC-JuPiK-foXIlwLXlgmHE13atymtvQybJrmlYiey77AJMJ_44ob&currency=MXN"></script>
     <script src="../js/checkout.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

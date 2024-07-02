@@ -20,7 +20,7 @@
   //let amount;
   window.paypal
   paypal.Buttons({
-      createOrder: function(data,actions){
+      createOrder: function( data , actions ){
           return actions.order.create({
               purchase_units:[{
                   amount:{
@@ -31,9 +31,31 @@
       },
       onApprove: function(data, actions) {
           return actions.order.capture().then(function(details){
-              alert("gracias "+details.payer.name.given_name+" tu transaccion fue compleatada con exito ");
-          });
-          
+              //alert("gracias "+details.payer.name.given_name+" tu transaccion fue compleatada con exito ");
+              swal(
+                "Muchas gracias",
+                `${ details.payer.name.given_name } tu transacción fue completada con éxito`,
+                `success`
+              );
+          }).catch(function(error) {
+            console.error("Error capturing order: ", error );
+            swal(
+              "Error",
+              "There was an issue capturing your order. Please try again.",
+              "error"
+            )
+          });   
+      },
+      onCancel: function(data) {
+        swal(
+          "Transacción cancelada",
+          "Has cancelado la transacción",
+          "info"
+        )
+      },
+      onError: function(err) {
+        console.error("Error with PayPal transaction:", err);
+        swal("Error", "There was an issue with your PayPal transaction. Please try again.", "error");
       }
           
   }).render("#paypal-button-container")

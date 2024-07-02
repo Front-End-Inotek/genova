@@ -29,13 +29,13 @@
 
             <section class="main_home_tools">
                 <div class="main_home_tools_name border_tool_left">
-                    <input id="email" type="email" placeholder="Correo electronico" min="0" max="80" value="dave@gmail.com" />
+                    <input id="email" type="email" placeholder="Correo electronico" min="0" max="80" />
                 </div>
                 <div class="main_home_tools_name">
-                    <input id="name" type="text" placeholder="Nombre" min="0" max="80" value="hola" />
+                    <input id="name" type="text" placeholder="Nombre" min="0" max="80" />
                 </div>
                 <div class="main_home_tools_tel border_tool_right">
-                    <input id="tel" type="tel" placeholder="Telefono" min="0" step="5" max="100" value="123123"/>
+                    <input id="tel" type="tel" placeholder="Telefono" min="0" step="5" max="100" />
                 </div>
             </section>
             <section class="main_home_tools ">
