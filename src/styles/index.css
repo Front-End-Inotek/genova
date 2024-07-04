@@ -391,6 +391,7 @@ calendar-month {
     height: 100%;
     object-fit: cover;
     margin: 0 auto;
+    background-color: white;
 }
 .card_body {
     margin-top: 135px;

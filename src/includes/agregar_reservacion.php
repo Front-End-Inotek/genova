@@ -244,7 +244,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
 
             <div class="col-sm-12">
               <label for="firstName" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="lastaname" placeholder="" disabled value="<?php echo htmlspecialchars($lastaname) ?>" required>
+              <input type="text" class="form-control" id="lastaname" placeholder="" disabled value="<?php echo htmlspecialchars($lastname) ?>" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>

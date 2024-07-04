@@ -62,7 +62,7 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
         echo '
             <label for="'. $totalID[$i] .'" class="card_hab">
                 <div class="card_hab_header">
-                    <img src="'.$imagenes[$i].'" />
+                    <img src="./public/roomDescription/'.$imagenes[$i].'" />
                 </div>
                 <div class="card_body">
                     <h5>' .$disponibleNombre[$i].'</h5>

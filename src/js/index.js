@@ -148,14 +148,16 @@ const reservar = () => {
 
     const data = {
         "name": name,
+        "lastname" : lastname,
         "phone": phone,
         "guests": guests,
         "initial": arrive,
         "end": leave,
         "email": email,
         "hab_id": hab_id,
-        "lastname" : lastname
     };
+
+    console.log(data)
     
     // Crear un formulario oculto
     const form = document.createElement("form");
