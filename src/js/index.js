@@ -97,6 +97,7 @@ const reservar = () => {
 
     const email = document.getElementById("email").value
     const name = document.getElementById("name").value
+    const lastname = document.getElementById("lastname").value
     const phone = document.getElementById("tel").value
     const guestsSelect = document.querySelector('select[name="persons"]');
     const guests = guestsSelect.value;
@@ -121,6 +122,10 @@ const reservar = () => {
     }
     if (!name) {
         swal("Sin nombre!", "Agrega un nombre valido!", "warning");
+        return
+    }
+    if (!lastname) {
+        swal("Sin apellido!", "Agrega un apellido valido!", "warning");
         return
     }
     if (!phone) {
@@ -148,7 +153,8 @@ const reservar = () => {
         "initial": arrive,
         "end": leave,
         "email": email,
-        "hab_id": hab_id
+        "hab_id": hab_id,
+        "lastname" : lastname
     };
     
     // Crear un formulario oculto

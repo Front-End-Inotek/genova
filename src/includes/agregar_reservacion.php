@@ -3,6 +3,7 @@ include_once("consulta.php");
 $conexion = new ConexionMYSql();
 
 $name = $_POST["name"];
+$lastname = $_POST["lastname"];
 $email = $_POST["email"];
 $phone = $_POST["phone"];
 $guests = $_POST["guests"];
@@ -203,16 +204,20 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="https://images.pexels.com/photos/26781807/pexels-photo-26781807/free-photo-of-llama.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100 img-fluid" alt="...">
+                <img src="../../public/hotel2.webp" class="d-block w-100 img-fluid" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="https://images.pexels.com/photos/26741435/pexels-photo-26741435/free-photo-of-mar-playa-gente-arena.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100 img-fluid" alt="...">
+                <img src="../../public/hotel1.webp" class="d-block w-100 img-fluid" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="https://images.pexels.com/photos/26741435/pexels-photo-26741435/free-photo-of-mar-playa-gente-arena.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100 img-fluid" alt="...">
+                <img src="../../public/hotel3.webp" class="d-block w-100 img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                <img src="../../public/hotel4.webp" class="d-block w-100 img-fluid" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -228,9 +233,18 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
         <h4 class="mb-3 mt-3">Detalles de la rervación</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
+
             <div class="col-sm-12">
               <label for="firstName" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="firstName" placeholder="" disabled value="<?php echo htmlspecialchars($name) ?>" required>
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-12">
+              <label for="firstName" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="lastaname" placeholder="" disabled value="<?php echo htmlspecialchars($lastaname) ?>" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
