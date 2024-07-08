@@ -252,6 +252,7 @@ const consultar_reserva = (  ) => {
 
         } else {
             console.log("Hubo un error al crear la reserva")
+            xhr.close();
         }
     };
 

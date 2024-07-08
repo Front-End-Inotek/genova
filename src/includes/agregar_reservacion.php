@@ -1,4 +1,9 @@
 <?php
+if($_SERVER['REQUEST_METHOD'] != "POST"){
+  header("Location: ../../index.php");
+  die();
+}
+
 include_once("consulta.php");
 $conexion = new ConexionMYSql();
 
@@ -16,7 +21,7 @@ $allowanceDays = $initial->diff($end)->days;
 $sentencia = "SELECT th.nombre, th.id, thh.precio_hospedaje, thh.precio_adulto, thh.cantidad_hospedaje
               FROM tipo_hab th
               JOIN tarifa_hospedaje thh ON th.id = thh.id;";
-
+ 
 $resultado = $conexion->realizaConsulta($sentencia, "");
 $allRoomNames = [];
 $allRoomFee = [];
@@ -260,7 +265,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
 
             <div class="col-12">
               <label for="address" class="form-label">Telefono</label>
-              <input type="text" class="form-control" id="address" disabled value="<?php echo htmlspecialchars($phone) ?>" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" id="phone" disabled value="<?php echo htmlspecialchars($phone) ?>" placeholder="1234 Main St" required>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -268,7 +273,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
 
             <div class="col-12">
               <label for="address" class="form-label">Cantidad de huespedes</label>
-              <input type="text" class="form-control" id="address" disabled value="<?php echo htmlspecialchars($guests) ?>" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" id="guests" disabled value="<?php echo htmlspecialchars($guests) ?>" placeholder="1234 Main St" required>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -276,7 +281,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
 
             <div class="col-md-6">
               <label for="country" class="form-label">Fecha de inicio</label>
-              <input type="text" class="form-control" disabled value="<?php echo htmlspecialchars($_POST["initial"]) ?>" required/>
+              <input type="text" id = "checkinDate" class="form-control" disabled value="<?php echo htmlspecialchars($_POST["initial"]) ?>" required/>
               <div class="invalid-feedback">
                 Please select a valid country.
               </div>
@@ -284,7 +289,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
 
             <div class="col-md-6">
               <label for="state" class="form-label">Fecha de fin</label>
-              <input type="text" class="form-control" disabled value="<?php echo htmlspecialchars($_POST["end"]) ?>" required/>
+              <input type="text" class="form-control" id = "checkoutDate"  disabled value="<?php echo htmlspecialchars($_POST["end"]) ?>" required/>
               <div class="invalid-feedback">
                 Please provide a valid state.
               </div>
@@ -304,9 +309,10 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
   </footer>
 </div>
 <script src="../assets_bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script> var grandTotal = <?php echo $grandTotal;?>; </script>
+    <script> var grandTotal = <?php echo $grandTotal;?> </script>
+    <script> var  habType = <?php echo $roomType;?> </script>
     <script src="https://www.paypal.com/sdk/js?client-id=AbNIMl1p1ehS_e_Tv7Ozvw_oQjAFAC-JuPiK-foXIlwLXlgmHE13atymtvQybJrmlYiey77AJMJ_44ob&currency=MXN"></script>
-    <script src="../js/checkout.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../js/checkout.js"></script>
 </body>
 </html>
