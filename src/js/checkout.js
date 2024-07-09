@@ -49,7 +49,8 @@
                 "telefono" : document.getElementById('phone').value,
                 "llegada" : document.getElementById('checkinDate').value,
                 "salida" : document.getElementById('checkoutDate').value,
-                "huespedes" : document.getElementById('guests').value
+                "huespedes" : document.getElementById('guests').value,
+                "cargo" : grandTotal
               }
 
               let xhr = new XMLHttpRequest();
@@ -70,7 +71,9 @@
                 "Muchas gracias",
                 `${ details.payer.name.given_name } tu transacción fue completada con éxito`,
                 `success`
-              );
+              ).then((value) => {
+                window.location.href = "../../index.php";
+              });
           }).catch(function(error) {
             console.error("Error capturing order: ", error );
             swal(
@@ -123,8 +126,8 @@ function startPurchaseTimer() {
           button: "OK"
       }).then(() => {
           document.getElementById('paypal-button-container').style.display = 'none';
-          document.getElementById('timeout-message').style.display = 'block';
           window.location.href = "../../index.php"; 
       });
   }, 300000);
 }
+

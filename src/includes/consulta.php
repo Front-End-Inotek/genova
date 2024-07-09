@@ -20,5 +20,24 @@
       mysqli_close ($con);
       return $query;
     }
-  }
+
+    function RetrieveLast($statement){
+      include('datos_servidor.php');
+      $conn = @mysqli_connect($servidor,$usuario_servidor, $password, $base_datos);
+
+      if (!$conn) {
+        echo "Error: " . mysqli_connect_error() . $comentario;
+        exit();
+        }
+    
+      if (!($query = mysqli_query($conn, $statement))) {
+        printf("Mensaje de Error: %s\n", mysqli_error($conn));
+       }
+    
+      $last_insert_id = mysqli_insert_id($conn);
+      mysqli_close($conn);
+      return $last_insert_id;
+      }
+    }
+  
 ?>

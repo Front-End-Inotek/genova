@@ -144,7 +144,7 @@ const reservar = () => {
         swal("Sin fecha de salida en la reserva!", "Agrega una fecha salida!", "warning");
         return
     }
-    console.log("Creando reserva...");
+    //console.log("Creando reserva...");
 
     const data = {
         "name": name,
@@ -157,7 +157,7 @@ const reservar = () => {
         "hab_id": hab_id,
     };
 
-    console.log(data)
+    //console.log(data)
     
     // Crear un formulario oculto
     const form = document.createElement("form");
