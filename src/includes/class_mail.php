@@ -22,7 +22,7 @@ class EmailSender {
         $this->mailer->Encoding = "base64";
     }
 
-    public function sendEmail($recipent, $subject, $recipientName, $reservation_id, $check_in, $check_out, $roomType, $total , $user = false) {
+    public function sendEmail($recipent, $subject, $recipientName, $tel ,$reservation_id, $check_in, $check_out, $roomType, $total , $user = false) {
         
         $checkinDate = date('Y-m-d', $check_in);
         $checkoutDate = date('Y-m-d', $check_out);
@@ -164,6 +164,8 @@ class EmailSender {
                                 <p>Hola,</p>
                                 <p>Se ha recibido una nueva reserva en Hotel Plaza Genova. Los detalles son los siguientes:</p>
                                 <ul>
+                                    <li><strong>Nombre:</strong> ' . htmlspecialchars($recipientName). '</li>
+                                    <li><strong>Número de telefono:</strong> ' . htmlspecialchars($tel) . '</li>
                                     <li><strong>Número de reserva:</strong> ' . $reservation_id . '</li>
                                     <li><strong>Check in:</strong> ' . $checkinDate . '</li>
                                     <li><strong>Check out :</strong> ' . $checkoutDate . '</li>

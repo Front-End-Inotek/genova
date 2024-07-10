@@ -28,6 +28,8 @@
     $tarifa = $datos['tarifa'];
     $totalCargo = $datos['cargo'];
 
+    echo $telefono;
+
 #endregion
 
 
@@ -56,8 +58,8 @@
     $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id);
 
     //Send mail to Guest & Hotel
-    $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, $reservation_id, $llegada, $salida, $tarifa, $totalCargo, true);
-    $emailSender->sendEmail("soporte@inotek.mx", "Nueva reserva en Plaza Genova", $nombre, $reservation_id, $llegada, $salida, $tarifa, $totalCargo);
+    $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, $llegada, $salida, $tarifa, $totalCargo, true);
+    $emailSender->sendEmail("soporte@inotek.mx", "Nueva reserva en Plaza Genova", $nombre, $telefono , $reservation_id, $llegada, $salida, $tarifa, $totalCargo);
 
 
 #endregion
