@@ -87,6 +87,12 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++){
                 </div>
             </label>
             ';
+        } else {
+            echo '
+                <div class="card" style="width: 18rem;">
+                    <h1>Sin habitaciones disponibles</h1>
+                </div>
+            ';
         }
 } 
 
