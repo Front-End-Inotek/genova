@@ -170,7 +170,7 @@
         //Continue with insertion
         $query = "INSERT INTO reservacion (id_reserva, id_usuario, id_huesped, id_cuenta, tipo_hab, fecha_entrada, fecha_salida, noches, numero_hab,
                                     precio_hospedaje, cantidad_hospedaje, nombre_reserva, total_hab, estado, canal_reserva, tipo_reservacion,
-                                    estado_interno, adultos, total) VALUES (
+                                    estado_interno, adultos, total, tarifa, suplementos, forma_pago) VALUES (
                         '$reserve_id', 
                         5, 
                         '$guest_id',
@@ -189,7 +189,10 @@
                         'individual', 
                         'garantizada',
                         $guestCount,
-                        '$totalPayment'
+                        '$totalPayment',
+                        '$room_type',
+                        0,
+                        10
                     );
                 ";
         $response = $conexion->RetrieveLast($query);

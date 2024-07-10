@@ -3,7 +3,6 @@
 (() => {
   'use strict'
 
-
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
 
@@ -108,26 +107,41 @@
 })()
 
 function startPurchaseTimer() {
-  // Show an initial alert that will disappear automatically
-  swal({
-      title: "Tiempo limitado para la compra",
-      text: "Debes completar tu compra en 5 minutos.",
-      icon: "warning",
-      timer: 5000,
-      button: false
-  });
 
-  // Set a timeout to redirect the user after 5 minutes
-  setTimeout(function() {
+  const tiempoLimite = 5 * 60 * 1000;
+  let tiempoRestante = tiempoLimite;
+
+  const intervalo = setInterval(function() {
+    tiempoRestante -= 1000;
+    if ( tiempoRestante <= 0) {
+      clearInterval(intervalo);
       swal({
-          title: "Tiempo agotado",
-          text: "El tiempo para completar tu compra ha terminado.",
-          icon: "error",
-          button: "OK"
+        title: "Tiempo agotado",
+        text: "El tiempo para completar tu compra ha terminado.",
+        icon: "error",
+        button: "OK"
       }).then(() => {
-          document.getElementById('paypal-button-container').style.display = 'none';
-          window.location.href = "../../index.php"; 
+        // Acciones adicionales al terminar el tiempo
+        document.getElementById('paypal-button-container').style.display = 'none';
+        window.location.href = "../../index.php";
       });
-  }, 300000);
+    } else {
+      // Calcular minutos y segundos restantes
+      const minutos = Math.floor(tiempoRestante / 60000);
+      const segundos = Math.floor((tiempoRestante % 60000) / 1000); 
+
+      // Formatear en texto con dos dígitos para los segundos
+      const tiempoTexto = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+      
+      actualizarContador(tiempoTexto);
+    }
+  }, 1000);
+
+  function actualizarContador(tiempoSegundos) {
+    const contador = document.getElementById("contador");
+    if (contador) {
+      contador.innerText = tiempoSegundos;
+    }
+  }
 }
 

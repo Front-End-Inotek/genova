@@ -204,6 +204,11 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
       </div>
       <div class="col-md-7 col-lg-8">
 
+      <div class="alert alert-danger mb-2" role="alert">
+        <h4 class="alert-heading">Tiempo limitado para la compra</h4>
+        <p>Debes completar tu compra en <span id="contador" class="font-weight-bold" >5:00</span></p>
+      </div>
+
       <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
