@@ -134,6 +134,7 @@
 
     function CreateTicket($conexion, $movement_id, $label_no){
         $date = date("Y-m-d H:i");
+        $time= time();
         $query = " INSERT INTO ticket (etiqueta, mov, fecha, tiempo, id_usuario, estado) VALUES (
                     '$label_no', 
                     '$movement_id', 
