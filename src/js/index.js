@@ -35,7 +35,7 @@ btnRight.addEventListener( "click", e => moveToRight() );
 
 setInterval(() => {
     moveToRight();
-}, 5000);
+}, 10000);
 
 let operation = 0;
 let counter = 0;
@@ -51,7 +51,7 @@ const moveToRight = () => {
     counter++;
     operation = operation + widthImg
     slider.style.transform = `translate(-${operation}%)`
-    slider.style.transition = "all ease-in-out .6s"
+    slider.style.transition = "all ease-in-out .2s"
 }
 const moveToLeft = () => {
     counter--;
@@ -63,7 +63,7 @@ const moveToLeft = () => {
     }
     operation = operation - widthImg
     slider.style.transform = `translate(-${operation}%)`
-    slider.style.transition = "all ease-in-out .6s"
+    slider.style.transition = "all ease-in-out .2s"
 }
 
 const calendarRange = document.querySelector("calendar-range");
@@ -91,6 +91,7 @@ calendarRange.addEventListener("change", (e) => {
     endDateHTML.innerText = endDate;
     /* console.log(datesArray)
     console.log(e.target.value) */
+    calender_container.style.display = "none";
 })
 
 const reservar = () => {
@@ -104,9 +105,6 @@ const reservar = () => {
 
     const hab_id = document.querySelector('input[name="hab"]:checked').value;
 
-
-    
-    
     if (guests !== "") {
         console.log("Número de huéspedes seleccionado:", guests);
     } else {

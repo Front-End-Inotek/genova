@@ -72,7 +72,7 @@ if ($hayDisponibles) {
             echo '
                 <label for="'. $totalID[$i] .'" class="card_hab">
                     <div class="card_hab_header">
-                        <img src="./public/roomDescription/'.$imagenes[$i].'" />
+                        <img src="./public/roomDescription/'.$imagenes[$i].'" loading="lazy" />
                     </div>
                     <div class="card_body">
                         <h5>' .$disponibleNombre[$i].'</h5>
