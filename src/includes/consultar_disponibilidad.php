@@ -56,44 +56,56 @@ while ($fila2 = mysqli_fetch_array($resultado2)) {
         array_push($totalID, $fila2['tipo']);
 }
 
-for ($i = 0; $i < sizeof($disponibleNombre); $i++){
+$hayDisponibles = false;
+for ($i = 0; $i < sizeof($disponibleNombre); $i++) {
     $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
-    if($totalCantidad[$i]>= 1){
-        echo '
-            <label for="'. $totalID[$i] .'" class="card_hab">
-                <div class="card_hab_header">
-                    <img src="./public/roomDescription/'.$imagenes[$i].'" />
-                </div>
-                <div class="card_body">
-                    <h5>' .$disponibleNombre[$i].'</h5>
-                    <h6> '.$descripcion[$i].' </h6> 
-                    <h6>Noche <span class="card_money" >$'.$precios[$i].'</span> </h6>
-                    <div class="card_body_info">
-                        <img src="./src/assets/svg/air.svg" />
-                        <p>Aire acondionado</p>
-                    </div>
-                    <div class="card_body_info">
-                        <img src="./src/assets/svg/tv.svg" />
-                        <p>TV</p>
-                    </div>
-                    <div class="card_body_info">
-                        <img src="./src/assets/svg/wifi.svg" />
-                        <p>Wifi gratis</p>
-                    </div>
-                    <label  class="btn_select" >
-                        <input type="radio" name="hab" id="'. $totalID[$i] .'" value="'. $totalID[$i] .'" onclick="selectCard(this)" />
-                        Seleccionar
-                    </label>
-                </div>
-            </label>
-            ';
-        } else {
+    if ($totalCantidad[$i] >= 1) {
+        $hayDisponibles = true;
+        break;
+    }
+}
+
+if ($hayDisponibles) {
+    for ($i = 0; $i < sizeof($disponibleNombre); $i++){
+        $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
+        if($totalCantidad[$i]>= 1){
             echo '
-                <div class="card" style="width: 18rem;">
-                    <h1>Sin habitaciones disponibles</h1>
-                </div>
-            ';
-        }
-} 
+                <label for="'. $totalID[$i] .'" class="card_hab">
+                    <div class="card_hab_header">
+                        <img src="./public/roomDescription/'.$imagenes[$i].'" />
+                    </div>
+                    <div class="card_body">
+                        <h5>' .$disponibleNombre[$i].'</h5>
+                        <h6> '.$descripcion[$i].' </h6> 
+                        <h6>Noche <span class="card_money" >$'.$precios[$i].'</span> </h6>
+                        <div class="card_body_info">
+                            <img src="./src/assets/svg/air.svg" />
+                            <p>Aire acondionado</p>
+                        </div>
+                        <div class="card_body_info">
+                            <img src="./src/assets/svg/tv.svg" />
+                            <p>TV</p>
+                        </div>
+                        <div class="card_body_info">
+                            <img src="./src/assets/svg/wifi.svg" />
+                            <p>Wifi gratis</p>
+                        </div>
+                        <label  class="btn_select" >
+                            <input type="radio" name="hab" id="'. $totalID[$i] .'" value="'. $totalID[$i] .'" onclick="selectCard(this)" />
+                            Seleccionar
+                        </label>
+                    </div>
+                </label>
+                ';
+            } 
+    }
+} else {
+    echo '
+        <div class="card" style="width: 18rem;">
+            <h1>Sin habitaciones disponibles</h1>
+    </div>
+    ';
+}
+
 
 
