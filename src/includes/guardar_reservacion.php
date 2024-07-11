@@ -103,14 +103,17 @@
     }
 
     function CreateMovement($conexion, $guest_id, $checkinDate, $checkoutDate, $tarifa){
-        $query = "INSERT INTO movimiento (id_hab, id_huesped, inicio_hospedaje, fin_hospedaje, tarifa, motivo, detalle_manda) VALUES (
+        $time = time();
+        $query = "INSERT INTO movimiento (id_hab, id_huesped, inicio_hospedaje, fin_hospedaje, tarifa, motivo, detalle_manda, detalle_inicio) VALUES (
                             0, 
                             '$guest_id',
                             '$checkinDate',
                             '$checkoutDate',
                             '$tarifa',
                             'reservar',
-                            5
+                            5,
+                            $time
+
                         );
         ";
         $response = $conexion->RetrieveLast($query);
@@ -131,7 +134,6 @@
 
     function CreateTicket($conexion, $movement_id, $label_no){
         $date = date("Y-m-d H:i");
-        $time = time();
         $query = " INSERT INTO ticket (etiqueta, mov, fecha, tiempo, id_usuario, estado) VALUES (
                     '$label_no', 
                     '$movement_id', 
@@ -173,7 +175,7 @@
         //Continue with insertion
         $query = "INSERT INTO reservacion (id_reserva, id_usuario, id_huesped, id_cuenta, tipo_hab, fecha_entrada, fecha_salida, noches, numero_hab,
                                     precio_hospedaje, cantidad_hospedaje, nombre_reserva, total_hab, estado, canal_reserva, tipo_reservacion,
-                                    estado_interno, adultos, total, tarifa, suplementos, forma_pago, detalle_inicio ) VALUES (
+                                    estado_interno, adultos, total, tarifa, suplementos, forma_pago ) VALUES (
                         '$reserve_id', 
                         5, 
                         '$guest_id',
@@ -196,7 +198,6 @@
                         '$room_type',
                         0,
                         10,
-                        $time
 
                     );
                 ";
