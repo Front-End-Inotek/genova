@@ -160,7 +160,7 @@
     }
 
     function CreateAccount($conexion, $ticket_id, $movement_id, $checkinDate, $totalPayment){
-        $query = "INSERT INTO cuenta (id_usuario, id_ticket, mov, descripcion, fecha, cargo, abono, estado) VALUES (
+        $query = "INSERT INTO cuenta (id_usuario, id_ticket, mov, descripcion, fecha, cargo, abono, estado, forma_pago) VALUES (
                         5,
                         '$ticket_id',
                         '$movement_id',
@@ -168,7 +168,8 @@
                         '$checkinDate',
                         '$totalPayment', 
                         '$totalPayment', 
-                        1
+                        1,
+                        19
                     );
                 ";
         $response = $conexion->RetrieveLast($query);
