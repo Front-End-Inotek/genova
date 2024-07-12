@@ -166,7 +166,7 @@
                         '$movement_id',
                         'Cuenta reserva', 
                         '$checkinDate',
-                        '$totalPayment', 
+                        0, 
                         '$totalPayment', 
                         1,
                         19
