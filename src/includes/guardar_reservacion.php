@@ -55,7 +55,7 @@
     $account_id = CreateAccount($conexion, $ticket_id, $movement_id, $llegada, $totalCargo);
 
     //Create reservation
-    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id);
+    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $tarifa);
 
     //Send mail to Guest & Hotel
     $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, $llegada, $salida, $tarifa, $totalCargo, true);
@@ -165,7 +165,7 @@
         return $response;
     }
 
-    function CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $room_type, $checkinDate, $checkoutDate, $totalPayment, $guestCount, $movement_id){
+    function CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $room_type, $checkinDate, $checkoutDate, $totalPayment, $guestCount, $movement_id, $tarifa){
         //Check how many days based off check in date & check out date
         $date1 = (new DateTime())->setTimestamp($checkinDate);
         $date2 = (new DateTime())->setTimestamp($checkoutDate);
@@ -186,7 +186,7 @@
                         $checkoutDate,
                         $days, 
                         1, 
-                        $totalPayment, 
+                        $tarifa, 
                         0,
                         'RESERVA SISTEMA',
                         $totalPayment, 
