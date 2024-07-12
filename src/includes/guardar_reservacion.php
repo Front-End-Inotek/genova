@@ -34,6 +34,16 @@
 
 
 
+#region Check for pricing
+    $query = "SELECT precio_hospedaje FROM tarifa_hospedaje WHERE id = $tarifa";
+    $response = $conexion->realizaConsulta($query, '');
+    if ($results = mysqli_fetch_array($response)){
+        $daily_charge= $results[0];
+    } 
+    
+#endregion
+
+
 #region Main logic 
 
     //Check if guest's email exists and return their ID, if not create a new guest and return ID;
@@ -55,7 +65,7 @@
     $account_id = CreateAccount($conexion, $ticket_id, $movement_id, $llegada, $totalCargo);
 
     //Create reservation
-    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $tarifa);
+    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $daily_charge);
 
     //Send mail to Guest & Hotel
     $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, $llegada, $salida, $tarifa, $totalCargo, true);
@@ -165,7 +175,7 @@
         return $response;
     }
 
-    function CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $room_type, $checkinDate, $checkoutDate, $totalPayment, $guestCount, $movement_id, $tarifa){
+    function CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $room_type, $checkinDate, $checkoutDate, $totalPayment, $guestCount, $movement_id, $daily_charge){
         //Check how many days based off check in date & check out date
         $date1 = (new DateTime())->setTimestamp($checkinDate);
         $date2 = (new DateTime())->setTimestamp($checkoutDate);
@@ -185,7 +195,7 @@
                         $checkoutDate,
                         $days, 
                         1, 
-                        $tarifa, 
+                        $daily_charge, 
                         0,
                         'RESERVA SISTEMA',
                         $totalPayment, 
