@@ -171,7 +171,6 @@
         $date2 = (new DateTime())->setTimestamp($checkoutDate);
         $interval = $date1->diff($date2);
         $days = $interval->days;
-        $time = time();
 
         //Continue with insertion
         $query = "INSERT INTO reservacion (id_reserva, id_usuario, id_huesped, id_cuenta, tipo_hab, fecha_entrada, fecha_salida, noches, numero_hab,
@@ -198,8 +197,7 @@
                         '$totalPayment',
                         '$room_type',
                         0,
-                        10,
-
+                        19
                     );
                 ";
         $response = $conexion->RetrieveLast($query);
