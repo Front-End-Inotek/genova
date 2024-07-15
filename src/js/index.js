@@ -96,12 +96,12 @@ calendarRange.addEventListener("change", (e) => {
 
 const reservar = () => {
 
-    const email = document.getElementById("email").value
-    const name = document.getElementById("name").value
-    const lastname = document.getElementById("lastname").value
-    const phone = document.getElementById("tel").value
+    const email = document.getElementById("email").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const lastname = document.getElementById("lastname").value.trim();
+    const phone = document.getElementById("tel").value.trim();
     const guestsSelect = document.querySelector('select[name="persons"]');
-    const guests = guestsSelect.value;
+    const guests = guestsSelect.value.trim();;
 
     const hab_id = document.querySelector('input[name="hab"]:checked').value;
 
@@ -141,6 +141,16 @@ const reservar = () => {
     if (!leave) {
         swal("Sin fecha de salida en la reserva!", "Agrega una fecha salida!", "warning");
         return
+    }
+    const nameSurnameRegex  = /^[a-zA-Z\s'-]+$/;
+    
+    if (!nameSurnameRegex .test(name)) {
+        swal("El nombre no es válido. Por favor, ingrese un nombre real.")
+        return;
+    }
+    if (!nameSurnameRegex.test(lastname)) {
+        swal("El apellido no es válido. Por favor, ingrese un apellido real.");
+        return;
     }
     //console.log("Creando reserva...");
 
@@ -187,11 +197,11 @@ const consultar_reserva = (  ) => {
 
     loader.style = "display: flex;"
 
-    const email = document.getElementById("email").value
-    const name = document.getElementById("name").value
-    const phone = document.getElementById("tel").value
+    const email = document.getElementById("email").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("tel").value.trim();
     const guestsSelect = document.querySelector('select[name="persons"]');
-    const guests = guestsSelect.value;
+    const guests = guestsSelect.value.trim();;
     const contenedor = document.getElementById("contenedor_hab");
     contenedor.innerHTML = "";
     
@@ -235,6 +245,13 @@ const consultar_reserva = (  ) => {
         loader.style = "display: none;"
         return
     }
+    const nameSurnameRegex  = /^[a-zA-Z\s'-]+$/;
+    if (!nameSurnameRegex .test(name)) {
+        swal("El nombre no es válido. Por favor, ingrese un nombre real.");
+        loader.style = "display: none;"
+        return;
+    }
+
 
     //console.log("consultando")
     const quersyString = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&guests=${encodeURIComponent(guests)}&initial=${arrive}&end=${leave}&email=${encodeURIComponent(email)}`
