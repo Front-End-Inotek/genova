@@ -22,14 +22,13 @@ GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion, th.img, thp.prec
 ORDER BY th.id;
 "; 
 
-
 $sentencia2 = "SELECT h.tipo, COUNT(*) AS cantidad
 FROM hab h
 LEFT JOIN tarifa_hospedaje th ON h.tipo = th.id
-WHERE h.estado IN (0, 2, 3)
-  AND th.cantidad_maxima >= $cantidadPersonas
+WHERE th.cantidad_maxima >= $cantidadPersonas
 GROUP BY h.tipo;
 "; 
+
 
 $resultado = $conexion->realizaConsulta($sentencia, "");
 $resultado2 = $conexion->realizaConsulta($sentencia2, "");
@@ -67,7 +66,7 @@ for ($i = 0; $i < sizeof($disponibleNombre); $i++) {
 
 if ($hayDisponibles) {
     for ($i = 0; $i < sizeof($disponibleNombre); $i++){
-        $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
+        $totalCantidad[$i] -= $noDisponibleCantidad[$i];
         if($totalCantidad[$i]>= 1){
             echo '
                 <label for="'. $totalID[$i] .'" class="card_hab">
