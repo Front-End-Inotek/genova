@@ -67,9 +67,8 @@
                         <select name ="kids">
                             <option value ="0" selected > SIN NIÑOS </option>
                             <option value ="1" > 1 NIÑO </option>
-                            <option value ="1" > 2 NIÑOS </option>
-                            <option value ="1" > 3 NIÑOS </option>
-                            <option value ="1" > 4 NIÑOS </option>
+                            <option value ="2" > 2 NIÑOS </option>
+                            <option value ="3" > 3 NIÑOS </option>
                         </select>
                     </div>
                 </div>

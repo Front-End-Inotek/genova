@@ -199,7 +199,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
             <strong>$<?php echo $grandTotal ?></strong>
           </li>
         </ul>
-
+        <input type="number" id="kids" hidden value="<?php echo $kids ?>" placeholder="0">
         <div id="paypal-button-container"></div>
 
         <!-- <form class="card p-2">
@@ -323,6 +323,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
 <script src="../assets_bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script> var grandTotal = <?php echo $grandTotal;?> </script>
     <script> var  habType = <?php echo $roomType;?> </script>
+    <script> var  ninos = <?php echo $kids;?> </script>
     <script src="https://www.paypal.com/sdk/js?client-id=AbNIMl1p1ehS_e_Tv7Ozvw_oQjAFAC-JuPiK-foXIlwLXlgmHE13atymtvQybJrmlYiey77AJMJ_44ob&currency=MXN"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/checkout.js"></script>

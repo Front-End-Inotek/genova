@@ -2,7 +2,6 @@
 
 (() => {
   'use strict'
-
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
 
@@ -23,6 +22,8 @@
   window.paypal
   paypal.Buttons({
       createOrder: function( data , actions ){
+        console.log()
+
           return actions.order.create({
               purchase_units:[{
                   amount:{
@@ -41,6 +42,7 @@
 
               const data = {
                 id, 
+                "kids" : ninos,
                 "nombre" : document.getElementById('firstName').value,
                 "apellido" : document.getElementById('lastaname').value,
                 "correo" : document.getElementById('email').value,
@@ -49,9 +51,9 @@
                 "llegada" : document.getElementById('checkinDate').value,
                 "salida" : document.getElementById('checkoutDate').value,
                 "huespedes" : document.getElementById('guests').value,
-                "cargo" : grandTotal
+                "cargo" : grandTotal,
               }
-
+              
               let xhr = new XMLHttpRequest();
               xhr.open("POST", `guardar_reservacion.php`, true)
               xhr.setRequestHeader("Content-Type", "application/json");

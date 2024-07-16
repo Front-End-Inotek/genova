@@ -21,7 +21,7 @@
 
 
 #region Variables
-    $datosJSON = file_get_contents('php://input');
+    $datosJSON = file_get_contents('php://input');  
     $datos = json_decode($datosJSON, true);
     $id = $datos['id'];
     $nombre = $datos['nombre'];
@@ -33,7 +33,7 @@
     $huespedes = $datos['huespedes'];
     $tarifa = $datos['tarifa'];
     $totalCargo = $datos['cargo'];
-    
+    $ninos = $datos['kids'];
 #endregion
 
 
@@ -69,7 +69,7 @@
     $account_id = CreateAccount($conexion, $ticket_id, $movement_id, $llegada, $totalCargo);
 
     //Create reservation
-    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $daily_charge);
+    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $daily_charge,$ninos);
 
     //Send mail to Guest & Hotel
     $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, $llegada, $salida, $tarifa, $totalCargo, true);
@@ -181,21 +181,25 @@
         return $response;
     }
 
-    function CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $room_type, $checkinDate, $checkoutDate, $totalPayment, $guestCount, $movement_id, $daily_charge){
+    function CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $room_type,
+     $checkinDate, $checkoutDate, $totalPayment, $guestCount, $movement_id, $daily_charge, $kids){
         //Check how many days based off check in date & check out date
         $date1 = (new DateTime())->setTimestamp($checkinDate);
         $date2 = (new DateTime())->setTimestamp($checkoutDate);
         $interval = $date1->diff($date2);
         $days = $interval->days;
-
+        $extraAdults = 0;
+        if($guestCount>2){
+            $extraAdults = $guestCount-2;
+        }
         //Continue with insertion
         $query = "INSERT INTO reservacion (id_reserva, id_usuario, id_huesped, id_cuenta, tipo_hab, fecha_entrada, fecha_salida, noches, numero_hab,
                                     precio_hospedaje, cantidad_hospedaje, nombre_reserva, total_hab, estado, canal_reserva, tipo_reservacion,
-                                    estado_interno, adultos, total, tarifa, suplementos, forma_pago ) VALUES (
+                                    estado_interno, adultos, total, tarifa, suplementos, forma_pago, infantiles, extra_adulto, extra_menor, plan_alimentos) VALUES (
                         '$reserve_id', 
                         5, 
                         '$guest_id',
-                        '$account_id', 
+                        '$account_id',
                         $room_type, 
                         $checkinDate, 
                         $checkoutDate,
@@ -213,7 +217,11 @@
                         '$totalPayment',
                         '$room_type',
                         0,
-                        20
+                        20, 
+                        $kids,
+                        $extraAdults,
+                        $kids, 
+                        0   
                     );
                 ";
         $response = $conexion->RetrieveLast($query);
