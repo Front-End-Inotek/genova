@@ -12,6 +12,7 @@ $lastname = $_POST["lastname"];
 $email = $_POST["email"];
 $phone = $_POST["phone"];
 $guests = $_POST["guests"];
+$kids = $_POST["kids"];
 $initial = new DateTime($_POST["initial"]);
 $end =  new DateTime($_POST["end"]);
 $roomType = $_POST['hab_id'];
@@ -174,15 +175,21 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Huespedes</h6>
-              <small class="text-body-secondary">Huespedes incluidos: <?php echo $allIncludedGuests[$roomType-1];?></small>
-
+              <h6 class="my-0">Adultos</h6>
+              <small class="text-body-secondary">Adultos incluidos: <?php echo $allIncludedGuests[$roomType-1];?></small>
             </div>
             <span class="text-body-secondary"><?php echo $guests;?></span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Huespedes extra</h6>
+              <h6 class="my-0">Niños</h6>
+              <small class="text-body-secondary">Niños no pagan estancia</small>
+            </div>
+            <span class="text-body-secondary"><?php echo $kids;?></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Adultos extra</h6>
               <small class="text-body-secondary">Precio huesped extra: <?php echo $allExtraGuestsFee[$roomType-1];?></small>
             </div>
             <span class="text-body-secondary">$<?php echo ($allExtraGuestsFee[$roomType-1] * $extraGuests);?></span>

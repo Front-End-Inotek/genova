@@ -33,9 +33,7 @@
     $huespedes = $datos['huespedes'];
     $tarifa = $datos['tarifa'];
     $totalCargo = $datos['cargo'];
-
-    echo $telefono;
-
+    
 #endregion
 
 

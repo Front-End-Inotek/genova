@@ -65,7 +65,7 @@
 
                     <div class="main_home_tools_persons">
                         <select name ="kids">
-                            <option value ="1" selected > SIN NIÑOS </option>
+                            <option value ="0" selected > SIN NIÑOS </option>
                             <option value ="1" > 1 NIÑO </option>
                             <option value ="1" > 2 NIÑOS </option>
                             <option value ="1" > 3 NIÑOS </option>
