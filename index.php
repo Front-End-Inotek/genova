@@ -57,11 +57,21 @@
                 </div>
                 <div class="main_home_tools_persons">
                     <select name="persons">
-                        <option value="1" selected >1 HUESPED</option>
-                        <option value="2">2 HUESPED</option>
-                        <option value="3">3 HUESPED</option>
-                        <option value="4">4 HUESPED</option>
+                        <option value="1" selected >1 ADULTOS</option>
+                        <option value="2">2 ADULTOS</option>
+                        <option value="3">3 ADULTOS</option>
+                        <option value="4">4 ADULTOS</option>
                     </select>
+
+                    <div class="main_home_tools_persons">
+                        <select name ="kids">
+                            <option value ="1" selected > SIN NIÑOS </option>
+                            <option value ="1" > 1 NIÑO </option>
+                            <option value ="1" > 2 NIÑOS </option>
+                            <option value ="1" > 3 NIÑOS </option>
+                            <option value ="1" > 4 NIÑOS </option>
+                        </select>
+                    </div>
                 </div>
                 <div class="main_home_tools_button border_tool_right">
                     <button class="btn_crear_reserva border_tool_right" id="btn_crear_reserva">

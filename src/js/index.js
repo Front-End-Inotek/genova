@@ -102,6 +102,9 @@ const reservar = () => {
     const phone = document.getElementById("tel").value.trim();
     const guestsSelect = document.querySelector('select[name="persons"]');
     const guests = guestsSelect.value.trim();;
+    const kidsSelect = document.querySelector('select[name="kids"]');
+    const kids = kidsSelect.value.trim();;
+
 
     const hab_id = document.querySelector('input[name="hab"]:checked').value;
 
@@ -109,6 +112,10 @@ const reservar = () => {
         console.log("Número de huéspedes seleccionado:", guests);
     } else {
         console.log("Ningún número de huéspedes seleccionado.");
+    }
+    if(guests + kids > 4){
+        swal("Solo 4 huespedes por habitacion! (Contando adultos y niños)")
+        return
     }
     if (!email) {
         swal("Sin correo electrónico!", "Agrega un email valido valido!", "warning");

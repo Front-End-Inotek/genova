@@ -245,7 +245,7 @@ a:hover {
     flex: 2 !important;
 }
 .main_home_tools_persons select {
-    width: 90%;
+    width: 70%;
     height: 50%;
     border: 2px solid #004AAD;
     border-radius: 5px;
@@ -608,7 +608,7 @@ animation-delay: 1.4s;
     }
     .main_home_tools_persons select{
         height: 50px;
-        width: 95%;
+        width: 55%;
         padding: 0.5rem 0;
     }
     .main_home_tools_button {
