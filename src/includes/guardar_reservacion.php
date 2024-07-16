@@ -2,6 +2,12 @@
 //Copyright Inotek 2024, by Rafael Flores Galvan;
 //For a more indepth understanding of the following pipeline please refer to: plaza_genova/includes/guardar_reservas_externas.php
 
+#region Migrations
+    //ALTER TABLE tarifa_hospedaje ADD COLUMN precio_paypal INT(11) DEFAULT 0 AFTER precio_hospedaje;
+    //ALTER TABLE tarifa_hospedaje ADD COLUMN precio_booking INT(11) DEFAULT 0 AFTER precio_paypal;
+    //ALTER TABLE tarifa_hospedaje ADD COLUMN precio_expedia INT(11) DEFAULT 0 AFTER precio_booking;
+
+#endregion
 
 
 #region Headers / object declaration
@@ -35,7 +41,7 @@
 
 
 #region Check for pricing
-    $query = "SELECT precio_hospedaje FROM tarifa_hospedaje WHERE id = $tarifa";
+    $query = "SELECT precio_paypal FROM tarifa_hospedaje WHERE id = $tarifa";
     $response = $conexion->realizaConsulta($query, '');
     if ($results = mysqli_fetch_array($response)){
         $daily_charge= $results[0];

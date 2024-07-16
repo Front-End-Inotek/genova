@@ -18,7 +18,7 @@ $roomType = $_POST['hab_id'];
 $allowanceDays = $initial->diff($end)->days;
 
 
-$sentencia = "SELECT th.nombre, th.id, thh.precio_hospedaje, thh.precio_adulto, thh.cantidad_hospedaje
+$sentencia = "SELECT th.nombre, th.id, thh.precio_paypal, thh.precio_adulto, thh.cantidad_hospedaje
               FROM tipo_hab th
               JOIN tarifa_hospedaje thh ON th.id = thh.id;";
  
@@ -30,7 +30,7 @@ $allIncludedGuests = [];
 
 while($fila = mysqli_fetch_array($resultado)){
     array_push($allRoomNames, $fila['nombre']);
-    array_push($allRoomFee, $fila['precio_hospedaje']);
+    array_push($allRoomFee, $fila['precio_paypal']);
     array_push($allExtraGuestsFee, $fila['precio_adulto']);
     array_push($allIncludedGuests, $fila['cantidad_hospedaje']);
 }

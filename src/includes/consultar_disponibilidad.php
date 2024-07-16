@@ -11,14 +11,14 @@ $sentencia = "SELECT th.id AS tipo_hab, COALESCE(COUNT(r.tipo_hab), 0) AS cantid
     th.descripcion,
     th.img as imagen,
     thp.cantidad_maxima,
-    thp.precio_hospedaje as precio
+    thp.precio_paypal as precio
 FROM tipo_hab th
 LEFT JOIN reservacion r ON th.id = r.tipo_hab
         AND (r.fecha_entrada BETWEEN $initialDate AND $endDate
         OR r.fecha_salida BETWEEN $initialDate AND $endDate)
 LEFT JOIN tarifa_hospedaje thp ON th.id = thp.id
-WHERE thp.cantidad_maxima >= $cantidadPersonas
-GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion, th.img, thp.precio_hospedaje
+WHERE thp.cantidad_maxima >= $cantidadPersonas AND th.id < 3
+GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion, th.img, thp.precio_paypal
 ORDER BY th.id;
 "; 
 

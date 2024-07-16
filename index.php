@@ -61,8 +61,6 @@
                         <option value="2">2 HUESPED</option>
                         <option value="3">3 HUESPED</option>
                         <option value="4">4 HUESPED</option>
-                        <option value="5">5 HUESPED</option>
-                        <option value="6">6 HUESPED</option>
                     </select>
                 </div>
                 <div class="main_home_tools_button border_tool_right">
