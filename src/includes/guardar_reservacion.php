@@ -39,7 +39,7 @@
 
 
 #region Check for pricing
-    $query = "SELECT precio_paypal FROM tarifa_hospedaje WHERE id = $tarifa";
+    $query = "SELECT tarifa_paypal FROM tarifa_hospedaje WHERE id = $tarifa";
     $response = $conexion->realizaConsulta($query, '');
     if ($results = mysqli_fetch_array($response)){
         $daily_charge= $results[0];
