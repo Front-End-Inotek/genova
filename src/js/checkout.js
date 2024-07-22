@@ -41,6 +41,7 @@
               } = details
 
               const data = {
+                //details.purchase_units[0].payments.captures[0].id)
                 id, 
                 "kids" : ninos,
                 "nombre" : document.getElementById('firstName').value,
