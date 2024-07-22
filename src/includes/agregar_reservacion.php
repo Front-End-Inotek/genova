@@ -324,6 +324,8 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
     <script> var grandTotal = <?php echo $grandTotal;?> </script>
     <script> var  habType = <?php echo $roomType;?> </script>
     <script> var  ninos = <?php echo $kids;?> </script>
+    <script> var  item = '<?php echo $allRoomNames[$roomType];?>' </script>
+
     <script src="https://www.paypal.com/sdk/js?client-id=AbNIMl1p1ehS_e_Tv7Ozvw_oQjAFAC-JuPiK-foXIlwLXlgmHE13atymtvQybJrmlYiey77AJMJ_44ob&currency=MXN"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/checkout.js"></script>

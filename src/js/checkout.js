@@ -26,8 +26,9 @@
 
           return actions.order.create({
               purchase_units:[{
+                  description: "Reserva de : "+item ,
                   amount:{
-                      value: grandTotal
+                      value: grandTotal,
                   }
               }]
           });
