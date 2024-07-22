@@ -9,37 +9,35 @@
     $endDate = strtotime($_GET['end']);       
     $cantidadPersonas = $_GET['guests']; 
 
-//Agregar filtros de busqueda
-$sentencia = "SELECT th.id AS tipo_hab, COALESCE(COUNT(r.tipo_hab), 0) AS cantidad, 
-    th.nombre AS tipo_habitacion,
-    th.descripcion,
-    th.img as imagen,
-    thp.cantidad_maxima,
-    thp.tarifa_paypal as precio
-FROM tipo_hab th
-LEFT JOIN reservacion r ON th.id = r.tipo_hab
-        AND (r.fecha_entrada BETWEEN $initialDate AND $endDate
-        OR r.fecha_salida BETWEEN $initialDate AND $endDate)
-LEFT JOIN tarifa_hospedaje thp ON th.id = thp.id
-WHERE thp.cantidad_maxima >= $cantidadPersonas AND th.id < 3
-GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion, th.img, thp.tarifa_paypal
-ORDER BY th.id;
-"; 
-
-$sentencia2 = "SELECT h.tipo, COUNT(*) AS cantidad
-FROM hab h
-LEFT JOIN tarifa_hospedaje th ON h.tipo = th.id
-WHERE th.cantidad_maxima >= $cantidadPersonas
-GROUP BY h.tipo;
-"; 
-
-
 $sentencia3 = "SELECT motor_reservas_activado FROM configuracion";
-
-
 $puedeReservar = mysqli_fetch_array($conexion->realizaConsulta($sentencia3, ""))['motor_reservas_activado'];
 $hayDisponibles = false;
+
 if($puedeReservar == 1){
+
+//Agregar filtros de busqueda
+    $sentencia = "SELECT th.id AS tipo_hab, COALESCE(COUNT(r.tipo_hab), 0) AS cantidad, 
+        th.nombre AS tipo_habitacion,
+        th.descripcion,
+        th.img as imagen,
+        thp.cantidad_maxima,
+        thp.tarifa_paypal as precio
+    FROM tipo_hab th
+    LEFT JOIN reservacion r ON th.id = r.tipo_hab
+            AND (r.fecha_entrada BETWEEN $initialDate AND $endDate
+            OR r.fecha_salida BETWEEN $initialDate AND $endDate)
+    LEFT JOIN tarifa_hospedaje thp ON th.id = thp.id
+    WHERE thp.cantidad_maxima >= $cantidadPersonas AND th.id < 3
+    GROUP BY th.id, th.nombre, thp.cantidad_maxima, th.descripcion, th.img, thp.tarifa_paypal
+    ORDER BY th.id;
+    "; 
+
+    $sentencia2 = "SELECT h.tipo, COUNT(*) AS cantidad
+    FROM hab h
+    LEFT JOIN tarifa_hospedaje th ON h.tipo = th.id
+    WHERE th.cantidad_maxima >= $cantidadPersonas
+    GROUP BY h.tipo;
+    "; 
 
     $resultado = $conexion->realizaConsulta($sentencia, "");
     $resultado2 = $conexion->realizaConsulta($sentencia2, "");
