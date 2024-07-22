@@ -1,4 +1,8 @@
 <?php
+#region Migrations
+    //ALTER TABLE configuracion ADD COLUMN motor_reservas_activado INT(11) DEFAULT 1;
+#endregion
+
     include_once("consulta.php");
     $conexion = new ConexionMYSql();
     $initialDate = strtotime($_GET['initial']);
@@ -30,39 +34,47 @@ GROUP BY h.tipo;
 "; 
 
 
-$resultado = $conexion->realizaConsulta($sentencia, "");
-$resultado2 = $conexion->realizaConsulta($sentencia2, "");
-$noDisponibleCantidad = [];
-$disponibleNombre= [];
-$totalCantidad = [];
-$totalID = [];
-$descripcion = [];
-$imagenes = [];
-$precios = [];
+$sentencia3 = "SELECT motor_reservas_activado FROM configuracion";
 
 
-while ($fila = mysqli_fetch_array($resultado)) {
-    array_push($noDisponibleCantidad, $fila['cantidad']);
-    array_push($disponibleNombre, $fila['tipo_habitacion']);
-    array_push($descripcion, $fila['descripcion']);
-    array_push($imagenes, $fila['imagen']);
-    array_push($precios, $fila['precio']);
-    
-}
-
-while ($fila2 = mysqli_fetch_array($resultado2)) {
-    array_push($totalCantidad, $fila2['cantidad']);
-        array_push($totalID, $fila2['tipo']);
-}
-
+$puedeReservar = mysqli_fetch_array($conexion->realizaConsulta($sentencia3, ""))['motor_reservas_activado'];
 $hayDisponibles = false;
-for ($i = 0; $i < sizeof($disponibleNombre); $i++) {
-    $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
-    if ($totalCantidad[$i] >= 1) {
-        $hayDisponibles = true;
-        break;
+if($puedeReservar == 1){
+
+    $resultado = $conexion->realizaConsulta($sentencia, "");
+    $resultado2 = $conexion->realizaConsulta($sentencia2, "");
+    $noDisponibleCantidad = [];
+    $disponibleNombre= [];
+    $totalCantidad = [];
+    $totalID = [];
+    $descripcion = [];
+    $imagenes = [];
+    $precios = [];
+    
+    
+    while ($fila = mysqli_fetch_array($resultado)) {
+        array_push($noDisponibleCantidad, $fila['cantidad']);
+        array_push($disponibleNombre, $fila['tipo_habitacion']);
+        array_push($descripcion, $fila['descripcion']);
+        array_push($imagenes, $fila['imagen']);
+        array_push($precios, $fila['precio']);
+        
+    }
+    
+    while ($fila2 = mysqli_fetch_array($resultado2)) {
+        array_push($totalCantidad, $fila2['cantidad']);
+            array_push($totalID, $fila2['tipo']);
+    }
+    
+    for ($i = 0; $i < sizeof($disponibleNombre); $i++) {
+        $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
+        if ($totalCantidad[$i] >= 1) {
+            $hayDisponibles = true;
+            break;
+        }
     }
 }
+
 
 if ($hayDisponibles) {
     for ($i = 0; $i < sizeof($disponibleNombre); $i++){
