@@ -35,14 +35,9 @@
       onApprove: function(data, actions) {
           return actions.order.capture().then(function(details){
               //alert("gracias "+details.payer.name.given_name+" tu transaccion fue compleatada con exito ");
-              const { 
-                id,
-
-              } = details
 
               const data = {
-                //details.purchase_units[0].payments.captures[0].id)
-                id, 
+                "id" :  details.purchase_units[0].payments.captures[0].id,
                 "kids" : ninos,
                 "nombre" : document.getElementById('firstName').value,
                 "apellido" : document.getElementById('lastaname').value,

@@ -3,9 +3,13 @@
 //For a more indepth understanding of the following pipeline please refer to: plaza_genova/includes/guardar_reservas_externas.php
 
 #region Migrations
-    //ALTER TABLE tarifa_hospedaje ADD COLUMN precio_paypal INT(11) DEFAULT 0 AFTER precio_hospedaje;
+    //
+    
+    ;
     //ALTER TABLE tarifa_hospedaje ADD COLUMN precio_booking INT(11) DEFAULT 0 AFTER precio_paypal;
     //ALTER TABLE tarifa_hospedaje ADD COLUMN precio_expedia INT(11) DEFAULT 0 AFTER precio_booking;
+    //ALTER TABLE reservacion ADD COLUMN paypal_id VARCHAR(255) DEFAULT NULL AFTER id_reserva;
+
 
 #endregion
 
@@ -23,7 +27,7 @@
 #region Variables
     $datosJSON = file_get_contents('php://input');  
     $datos = json_decode($datosJSON, true);
-    $id = $datos['id'];
+    $paypal_id = $datos['id'];
     $nombre = $datos['nombre'];
     $apellido = $datos['apellido'];
     $correo = $datos['correo'];
@@ -69,12 +73,15 @@
     $account_id = CreateAccount($conexion, $ticket_id, $movement_id, $llegada, $totalCargo);
 
     //Create reservation
-    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $daily_charge,$ninos);
+    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, 
+    $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $daily_charge, $ninos, $paypal_id);
 
     //Send mail to Guest & Hotel
-    $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, $llegada, $salida, $tarifa, $totalCargo, true);
+    $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, 
+    $llegada, $salida, $tarifa, $totalCargo, true);
     // Correo de genova: reservaciones@plazagenova.mx
-    $emailSender->sendEmail("reservaciones@plazagenova.mx", "Nueva reserva en Plaza Genova", $nombre, $telefono , $reservation_id, $llegada, $salida, $tarifa, $totalCargo);
+    $emailSender->sendEmail("reservaciones@plazagenova.mx", "Nueva reserva en Plaza Genova", $nombre, $telefono, 
+    $reservation_id, $llegada, $salida, $tarifa, $totalCargo);
 
 
 #endregion
@@ -182,7 +189,7 @@
     }
 
     function CreateReservation($conexion, $reserve_id, $guest_id, $account_id, $room_type,
-     $checkinDate, $checkoutDate, $totalPayment, $guestCount, $movement_id, $daily_charge, $kids){
+     $checkinDate, $checkoutDate, $totalPayment, $guestCount, $movement_id, $daily_charge, $kids, $paypal_id){
         //Check how many days based off check in date & check out date
         $date1 = (new DateTime())->setTimestamp($checkinDate);
         $date2 = (new DateTime())->setTimestamp($checkoutDate);
@@ -195,7 +202,8 @@
         //Continue with insertion
         $query = "INSERT INTO reservacion (id_reserva, id_usuario, id_huesped, id_cuenta, tipo_hab, fecha_entrada, fecha_salida, noches, numero_hab,
                                     precio_hospedaje, cantidad_hospedaje, nombre_reserva, total_hab, estado, canal_reserva, tipo_reservacion,
-                                    estado_interno, adultos, total, tarifa, suplementos, forma_pago, infantiles, extra_adulto, extra_menor, plan_alimentos) VALUES (
+                                    estado_interno, adultos, total, tarifa, suplementos, forma_pago, infantiles, extra_adulto, extra_menor, plan_alimentos,
+                                    paypal_id) VALUES (
                         '$reserve_id', 
                         5, 
                         '$guest_id',
@@ -221,7 +229,8 @@
                         $kids,
                         $extraAdults,
                         $kids, 
-                        0   
+                        0, 
+                        '$paypal_id '
                     );
                 ";
         $response = $conexion->RetrieveLast($query);
