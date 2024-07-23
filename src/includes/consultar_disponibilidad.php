@@ -66,6 +66,7 @@ if($puedeReservar == 1){
     
     for ($i = 0; $i < sizeof($disponibleNombre); $i++) {
         $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
+        //echo $totalCantidad[$i];
         if ($totalCantidad[$i] >= 1) {
             $hayDisponibles = true;
             break;

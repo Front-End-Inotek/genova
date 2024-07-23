@@ -42,6 +42,20 @@ if($guests > 2){
 }
 $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($extraGuests))) * $allowanceDays;
 //echo $grandTotal;
+
+$sentencia2 = "SELECT paypal_client_id
+              FROM configuracion
+              ";
+$resultado2 = $conexion->realizaConsulta($sentencia2 , "");
+if ($resultado2) {
+  while($row = $resultado2->fetch_assoc()) {
+    $paypal_client_id = $row["paypal_client_id"];
+  }
+} else {
+  echo "<h1>NO SE ENCONTRARON LAS CLAVES PARA PAYPAL</<h1>";
+  die();
+}
+
 ?>
 
 <!doctype html>
@@ -326,7 +340,7 @@ $grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($e
     <script> var  ninos = <?php echo $kids;?> </script>
     <script> var  item = '<?php echo $allRoomNames[$roomType];?>' </script>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=AbNIMl1p1ehS_e_Tv7Ozvw_oQjAFAC-JuPiK-foXIlwLXlgmHE13atymtvQybJrmlYiey77AJMJ_44ob&currency=MXN"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo htmlspecialchars($paypal_client_id); ?>&currency=MXN"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/checkout.js"></script>
 </body>
