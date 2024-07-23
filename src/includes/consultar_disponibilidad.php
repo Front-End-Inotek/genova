@@ -1,6 +1,8 @@
 <?php
 #region Migrations
+    //CREATE TABLE plaza_genova.motor_reservas_bloqueos ( id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, fecha TIMESTAMP NOT NULL, cantidad INT NOT NULL, tipo INT NOT NULL );
     //ALTER TABLE configuracion ADD COLUMN motor_reservas_activado INT(11) DEFAULT 1;
+
 #endregion
 
     include_once("consulta.php");
@@ -39,6 +41,15 @@ if($puedeReservar == 1){
     GROUP BY h.tipo;
     "; 
 
+    $sentencia3 = "SELECT *  from motor_reservas_bloqueos WHERE fecha BETWEEN $initialDate AND $endDate";
+    $resultadoDisponibilidad = $conexion->realizaConsulta($sentencia3,"");  
+    $alaVenta = [];
+
+    while ($fila3 = mysqli_fetch_array($resultadoDisponibilidad)) {
+            array_push($alaVenta, $fila3['cantidad']);
+    }
+
+
     $resultado = $conexion->realizaConsulta($sentencia, "");
     $resultado2 = $conexion->realizaConsulta($sentencia2, "");
     $noDisponibleCantidad = [];
@@ -65,7 +76,12 @@ if($puedeReservar == 1){
     }
     
     for ($i = 0; $i < sizeof($disponibleNombre); $i++) {
-        $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
+        if($alaVenta){
+            $totalCantidad[$i] = $alaVenta[$i] - $noDisponibleCantidad[$i];
+        }
+        else {
+            $totalCantidad[$i] = $totalCantidad[$i] - $noDisponibleCantidad[$i];
+        }
         if ($totalCantidad[$i] >= 1) {
             $hayDisponibles = true;
             break;
