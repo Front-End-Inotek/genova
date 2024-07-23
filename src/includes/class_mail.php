@@ -103,6 +103,7 @@ class EmailSender {
                             </div>
                             <div class="footer">
                                 <p>Atentamente,<br> Hotel Plaza Genova<br></p>
+                                <p> Teléfono: <a href="tel:+52 33 3613 7500">+52 33 3613 7500</a></p>
                             </div>
                         </div>
                     </body>
