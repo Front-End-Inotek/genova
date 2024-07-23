@@ -76,7 +76,6 @@ if($puedeReservar == 1){
 
 if ($hayDisponibles) {
     for ($i = 0; $i < sizeof($disponibleNombre); $i++){
-        $totalCantidad[$i] -= $noDisponibleCantidad[$i];
         if($totalCantidad[$i]>= 1){
             echo '
                 <label for="'. $totalID[$i] .'" class="card_hab">
