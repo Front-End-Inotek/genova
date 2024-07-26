@@ -49,6 +49,8 @@
                 "salida" : document.getElementById('checkoutDate').value,
                 "huespedes" : document.getElementById('guests').value,
                 "cargo" : grandTotal,
+                "tarifa" : tarifa, 
+                'tarifaPromedio' : tarifaPromedio,
               }
               
               let xhr = new XMLHttpRequest();

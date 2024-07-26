@@ -101,32 +101,6 @@ calendarRange.addEventListener("change", (e) => {
         return; 
     }
 
-    //ESTO SE VA A ELIMINAR ES TEMPROAL
-    // Definir el rango de fechas
-
-    const formateInitialDate = new Date(initialDate);
-    const formateEndlDate = new Date(endDate);
-
-    const rangeStart = new Date('2024-07-26');
-    const rangeEnd = new Date('2024-08-03');
-
-    // Verificar si el rango seleccionado se superpone con el rango definido
-    if (formateInitialDate <= rangeEnd && formateEndlDate >= rangeStart) {
-        swal({
-            title: '¡Alerta!',
-            text: 'Sin habitaciones disponibles para ese rango de fechas.',
-            type: 'warning',
-            confirmButtonText: 'Aceptar'
-        });
-        arrive = null;
-        leave = null;
-        initialDateHTML.innerText = "Selecciona una fecha";
-        endDateHTML.innerText = "Selecciona una fecha";
-        return; // Salir de la función para evitar modificaciones innecesarias
-    }
-
-    //HASTA AQUI YA ES LO QUE SE VA A ELIMINAR
-
     initialDateHTML.innerText = initialDate;
     endDateHTML.innerText = endDate;
     calender_container.style.display = "none";
