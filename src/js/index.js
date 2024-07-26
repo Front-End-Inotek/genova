@@ -87,6 +87,20 @@ calendarRange.addEventListener("change", (e) => {
     arrive = initialDate;
     leave = endDate;
 
+    if ( arrive === leave ) {
+        swal({
+            title: '¡Alerta!',
+            text: 'La fecha de entrada y salida deben de ser diferentes.',
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+        })
+        arrive = null;
+        leave = null;
+        initialDateHTML.innerText = "Selecciona una fecha";
+        endDateHTML.innerText = "Selecciona una fecha";
+        return; 
+    }
+
     //ESTO SE VA A ELIMINAR ES TEMPROAL
     // Definir el rango de fechas
 
@@ -113,7 +127,6 @@ calendarRange.addEventListener("change", (e) => {
 
     //HASTA AQUI YA ES LO QUE SE VA A ELIMINAR
 
-    
     initialDateHTML.innerText = initialDate;
     endDateHTML.innerText = endDate;
     calender_container.style.display = "none";
