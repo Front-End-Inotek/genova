@@ -11,37 +11,22 @@ $name = $_POST["name"];
 $lastname = $_POST["lastname"];
 $email = $_POST["email"];
 $phone = $_POST["phone"];
-$guests = $_POST["guests"];
+$cantidadPersonas = $_POST["guests"];
 $kids = $_POST["kids"];
 $initial = new DateTime($_POST["initial"]);
 $end =  new DateTime($_POST["end"]);
-$roomType = $_POST['hab_id'];
+$roomType = intval($_POST['hab_id']);
 $allowanceDays = $initial->diff($end)->days;
 
 
-$sentencia = "SELECT th.nombre, th.id, thh.tarifa_paypal, thh.precio_adulto, thh.cantidad_hospedaje
-              FROM tipo_hab th
-              JOIN tarifa_hospedaje thh ON th.id = thh.id;";
- 
-$resultado = $conexion->realizaConsulta($sentencia, "");
-$allRoomNames = [];
-$allRoomFee = [];
-$allExtraGuestsFee = [];
-$allIncludedGuests = [];
+//Check pricing
+$initialDateUnix = strtotime($_POST['initial']);
+$endDateUnix = strtotime($_POST['end']);       
+$initialDate = $_POST['initial'];
+$endDate = $_POST['end'];
+include_once("consultar_precios.php");
 
-while($fila = mysqli_fetch_array($resultado)){
-    array_push($allRoomNames, $fila['nombre']);
-    array_push($allRoomFee, $fila['tarifa_paypal']);
-    array_push($allExtraGuestsFee, $fila['precio_adulto']);
-    array_push($allIncludedGuests, $fila['cantidad_hospedaje']);
-}
 
-$extraGuests = 0;
-if($guests > 2){
-    $extraGuests = $guests - $allIncludedGuests[$roomType-1];
-}
-$grandTotal = ($allRoomFee[$roomType-1] + (($allExtraGuestsFee[$roomType-1])*($extraGuests))) * $allowanceDays;
-//echo $grandTotal;
 
 $sentencia2 = "SELECT paypal_client_id
               FROM configuracion
@@ -179,20 +164,20 @@ if ($resultado2) {
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0"><?php echo $allRoomNames[$roomType-1];?></h6>
-              <small class="text-body-secondary">Precio por noche</small>
+              <h6 class="my-0"><?php echo $roomData[$roomType]['name'];?></h6>
+              <small class="text-body-secondary">Precio promedio</small>
             </div>
             <div>
-              <h6 class="my-0">$<?php echo $allRoomFee[$roomType-1];?> </h6>
-              <small class="text-body-secondary"><?php echo  'x '. $allowanceDays. ' dias' ?></small>
+              <h6 class="my-0">$<?php echo $roomData[$roomType]['averagePrice'];?> </h6>
+              <small class="text-body-secondary"><?php echo  'x '. $allowanceDays. ' noches' ?></small>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">Adultos</h6>
-              <small class="text-body-secondary">Adultos incluidos: <?php echo $allIncludedGuests[$roomType-1];?></small>
+              <small class="text-body-secondary">Adultos incluidos: 2</small>
             </div>
-            <span class="text-body-secondary"><?php echo $guests;?></span>
+            <span class="text-body-secondary"><?php echo $cantidadPersonas;?></span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
@@ -204,13 +189,13 @@ if ($resultado2) {
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">Adultos extra</h6>
-              <small class="text-body-secondary">Precio huesped extra: <?php echo $allExtraGuestsFee[$roomType-1];?></small>
+              <small class="text-body-secondary">Precio por noche: <?php echo $roomData[$roomType]['additional'];?></small>
             </div>
-            <span class="text-body-secondary">$<?php echo ($allExtraGuestsFee[$roomType-1] * $extraGuests);?></span>
+            <span class="text-body-secondary">$<?php echo ($roomData[$roomType]['additional']) * $allowanceDays;?></span>
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>Total (MXN)</span>
-            <strong>$<?php echo $grandTotal ?></strong>
+            <strong>$<?php echo $roomData[$roomType]['price'];?></strong>
           </li>
         </ul>
         <input type="number" id="kids" hidden value="<?php echo $kids ?>" placeholder="0">
@@ -299,7 +284,7 @@ if ($resultado2) {
 
             <div class="col-12">
               <label for="address" class="form-label">Cantidad de huespedes</label>
-              <input type="text" class="form-control" id="guests" disabled value="<?php echo htmlspecialchars($guests) ?>" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" id="guests" disabled value="<?php echo htmlspecialchars($cantidadPersonas) ?>" placeholder="1234 Main St" required>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -335,10 +320,13 @@ if ($resultado2) {
   </footer>
 </div>
 <script src="../assets_bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script> var grandTotal = <?php echo $grandTotal;?> </script>
+    <script> var grandTotal = <?php echo $roomData[$roomId]['price'];?> </script>
     <script> var  habType = <?php echo $roomType;?> </script>
     <script> var  ninos = <?php echo $kids;?> </script>
-    <script> var  item = '<?php echo $allRoomNames[$roomType];?>' </script>
+    <script> var  item = '<?php echo $roomData[$roomId]['name'];?>' </script>
+    <script> var  tarifa = <?php echo $roomData[$roomId]['highestPrice'];?> </script>
+    <script> var  tarifaPromedio = <?php echo $roomData[$roomId]['averagePrice'];?> </script>
+
 
     <script src="https://www.paypal.com/sdk/js?client-id=<?php echo htmlspecialchars($paypal_client_id); ?>&currency=MXN"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

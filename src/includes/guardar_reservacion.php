@@ -38,17 +38,16 @@
     $tarifa = $datos['tarifa'];
     $totalCargo = $datos['cargo'];
     $ninos = $datos['kids'];
+    $tarifaPromedio = $datos['tarifaPromedio'];
+    $tarifaAlta = $datos['tarifa'];
+
 #endregion
 
 
 
 #region Check for pricing
-    $query = "SELECT tarifa_paypal FROM tarifa_hospedaje WHERE id = $tarifa";
-    $response = $conexion->realizaConsulta($query, '');
-    if ($results = mysqli_fetch_array($response)){
-        $daily_charge= $results[0];
-    } 
-    
+    $daily_charge = $tarifaPromedio;
+
 #endregion
 
 
