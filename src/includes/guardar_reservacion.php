@@ -40,6 +40,7 @@
     $ninos = $datos['kids'];
     $tarifaPromedio = $datos['tarifaPromedio'];
     $tarifaAlta = $datos['tarifa'];
+    $ruleIds = $datos['ruleIds'];
 
 #endregion
 
@@ -75,11 +76,14 @@
     $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, 
     $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $daily_charge, $ninos, $paypal_id);
 
+    //Update availability
+    UpdateAvailavility($conexion, $ruleIds);
+
     //Send mail to Guest & Hotel
     $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, 
     $llegada, $salida, $tarifa, $totalCargo, true);
     // Correo de genova: reservaciones@plazagenova.mx
-    $emailSender->sendEmail("reservaciones@plazagenova.mx", "Nueva reserva en Plaza Genova", $nombre, $telefono, 
+    $emailSender->sendEmail("it@inotek.mx", "Nueva reserva en Plaza Genova", $nombre, $telefono, 
     $reservation_id, $llegada, $salida, $tarifa, $totalCargo);
 
 
@@ -236,6 +240,13 @@
         $query = "UPDATE movimiento SET id_reservacion = $response WHERE id = $movement_id";
         $conexion->realizaConsulta($query, '');
         return $response;
+    }
+
+    function UpdateAvailavility($conexion, $ruleIds) {
+        foreach($ruleIds as $ruleId){
+            $query = "UPDATE reservas_bloqueos SET disponibles = disponibles - 1  WHERE id = $ruleId";
+            $conexion->realizaConsulta($query, '');
+        }
     }
 
 #endregion

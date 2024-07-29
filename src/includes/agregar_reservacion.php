@@ -18,14 +18,13 @@ $end =  new DateTime($_POST["end"]);
 $roomType = intval($_POST['hab_id']);
 $allowanceDays = $initial->diff($end)->days;
 
-
 //Check pricing
 $initialDateUnix = strtotime($_POST['initial']);
 $endDateUnix = strtotime($_POST['end']);       
 $initialDate = $_POST['initial'];
 $endDate = $_POST['end'];
 include_once("consultar_precios.php");
-
+$ruleIdsArray = $roomData[$roomType]['ruleId'];
 
 
 $sentencia2 = "SELECT paypal_client_id
@@ -320,12 +319,13 @@ if ($resultado2) {
   </footer>
 </div>
 <script src="../assets_bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script> var grandTotal = <?php echo $roomData[$roomId]['price'];?> </script>
+    <script> var grandTotal = <?php echo $roomData[$roomType]['price'];?> </script>
     <script> var  habType = <?php echo $roomType;?> </script>
     <script> var  ninos = <?php echo $kids;?> </script>
-    <script> var  item = '<?php echo $roomData[$roomId]['name'];?>' </script>
-    <script> var  tarifa = <?php echo $roomData[$roomId]['highestPrice'];?> </script>
-    <script> var  tarifaPromedio = <?php echo $roomData[$roomId]['averagePrice'];?> </script>
+    <script> var  item = '<?php echo $roomData[$roomType]['name'];?>' </script>
+    <script> var  tarifa = <?php echo $roomData[$roomType]['highestPrice'];?> </script>
+    <script> var  ruleIds = <?php echo json_encode($ruleIdsArray);?> </script>
+    <script> var  tarifaPromedio = <?php echo $roomData[$roomType]['averagePrice'];?> </script>
 
 
     <script src="https://www.paypal.com/sdk/js?client-id=<?php echo htmlspecialchars($paypal_client_id); ?>&currency=MXN"></script>

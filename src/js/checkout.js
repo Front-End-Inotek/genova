@@ -51,8 +51,8 @@
                 "cargo" : grandTotal,
                 "tarifa" : tarifa, 
                 'tarifaPromedio' : tarifaPromedio,
+                'ruleIds' : ruleIds,
               }
-              
               let xhr = new XMLHttpRequest();
               xhr.open("POST", `guardar_reservacion.php`, true)
               xhr.setRequestHeader("Content-Type", "application/json");

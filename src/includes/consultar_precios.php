@@ -3,12 +3,13 @@
     //Check if there's any special rules for pricing / availability
     $query_CheckForSpecialPricing = "SELECT th.id, th.nombre, rb.precio, rb.fecha, rb.disponibles,
     rb.extra_adulto_tipo_1,
-    rb.extra_adulto_tipo_2
+    rb.extra_adulto_tipo_2,
+    rb.id as ruleId
     FROM tarifa_hospedaje th
     LEFT JOIN reservas_bloqueos rb ON th.id = rb.tipo_hab
     WHERE rb.fecha BETWEEN '$initialDate' AND '$endDate'
     AND th.id < 3
-    AND rb.canal = 1;
+    AND rb.canal = 3;
     ";
     //Iterate over the results and create an object with the averaged pricing for the selected allowance period
     $roomData = [];
@@ -20,6 +21,7 @@
     $price = $row["precio"];
     $extra = $row["extra_adulto_tipo_1"];
     $extra2 = $row["extra_adulto_tipo_2"];
+    $ruleId= $row['ruleId'];
 
 
     if (!isset($roomData[$roomId])) {
@@ -35,11 +37,13 @@
         'additional' => 0,
         'extraPrice' => 0,
         'highestPrice' => 0,
+        'ruleId' => [],
 
     ];
 
     }
     array_push($roomData[$roomId]['price'], $price);
+    array_push($roomData[$roomId]['ruleId'], $ruleId);
 
     if ($roomData[$roomId]['available'] != 0){
     $roomData[$roomId]['available'] = $row['disponibles'];
@@ -100,6 +104,8 @@
         'additional' => 0,
         'extraPrice' => 0,
         'highestPrice' => 0,
+        'ruleId' => [],
+
     ];
 
     }

@@ -48,6 +48,7 @@
     }    
     //Execute price query logic (see consultar_precio.php)
     include_once("consultar_precios.php");
+
     //Check if there's rooms availables 
     foreach ($roomData as $roomId => $data) {
         if($data['available'] > 0){
