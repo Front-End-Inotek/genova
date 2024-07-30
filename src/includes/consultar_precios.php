@@ -119,12 +119,13 @@
     if($cantidadPersonas >= 3 && $roomData[$roomId]['additional'] == null){
             $roomData[$roomId]['additional'] =  $extra;
             $roomData[$roomId]['extraPrice'] =  $extra;
-
+            if($cantidadPersonas == 4){
+                $roomData[$roomId]['additional'] = $roomData[$roomId]['additional'] +  $extra;
+                echo $roomData[$roomId]['additional'] . ', ';
+            }
         } 
         
-    if($cantidadPersonas == 4 && $roomData[$roomId]['additional'] == null){
-            $roomData[$roomId]['additional'] = $roomData[$roomId]['additional'] +  $extra;
-        }
+
 
     if($roomData[$roomId]['highestPrice'] < $price){
             $roomData[$roomId]['highestPrice'] = $price;
