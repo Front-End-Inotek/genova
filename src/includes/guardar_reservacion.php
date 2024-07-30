@@ -83,7 +83,7 @@
     $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, 
     $llegada, $salida, $tarifa, $totalCargo, true);
     // Correo de genova: reservaciones@plazagenova.mx
-    $emailSender->sendEmail("it@inotek.mx", "Nueva reserva en Plaza Genova", $nombre, $telefono, 
+    $emailSender->sendEmail("reservaciones@plazagenova.mx", "Nueva reserva en Plaza Genova", $nombre, $telefono, 
     $reservation_id, $llegada, $salida, $tarifa, $totalCargo);
 
 
