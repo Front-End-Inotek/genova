@@ -1,15 +1,18 @@
 <?php
+//Copyright Inotek 2024, by Rafael Flores Galvan;
+
 #region Migrations
     //ALTER TABLE configuracion ADD COLUMN motor_reservas_activado INT(11) DEFAULT 1;
-/* CREATE TABLE `reservas_bloqueos` (
-    `tipo_hab` int(11) NOT NULL,
-    `fecha` date DEFAULT NULL,
-    `precio` int(11) NOT NULL,
-    `disponibles` int(11) DEFAULT NULL,
-    `canal` int(11) DEFAULT NULL,
-    `extra_adulto_tipo_1` int(11) DEFAULT NULL,
-    `extra_adulto_tipo_2` int(11) DEFAULT NULL
-  ) */
+    /* CREATE TABLE `reservas_bloqueos` (
+        `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+        `tipo_hab` int(11) NOT NULL,
+        `fecha` date DEFAULT NULL,
+        `precio` int(11) NOT NULL,
+        `disponibles` int(11) DEFAULT NULL,
+        `canal` int(11) DEFAULT NULL,
+        `extra_adulto_tipo_1` int(11) DEFAULT NULL,
+        `extra_adulto_tipo_2` int(11) DEFAULT NULL
+    ) */
 #endregion
 
 
@@ -55,7 +58,6 @@
             $hayDisponibles = true;
         }
     }
-
 
 #endregion
 
@@ -111,7 +113,5 @@ if ($hayDisponibles) {
         $puedeReservar = mysqli_fetch_array($conexion->realizaConsulta($sentencia3, ""))['motor_reservas_activado'];
         return $puedeReservar;
     }
-
-
 
 #endregion

@@ -1,4 +1,6 @@
 <?php
+//Copyright Inotek 2024, by Rafael Flores Galvan;
+
 
     //Check if there's any special rules for pricing / availability
     $query_CheckForSpecialPricing = "SELECT th.id, th.nombre, rb.precio, rb.fecha, rb.disponibles,

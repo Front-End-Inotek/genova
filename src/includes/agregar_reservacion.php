@@ -199,13 +199,6 @@ if ($resultado2) {
         </ul>
         <input type="number" id="kids" hidden value="<?php echo $kids ?>" placeholder="0">
         <div id="paypal-button-container"></div>
-
-        <!-- <form class="card p-2">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Promo code">
-            <button type="submit" class="btn btn-secondary">Redeem</button>
-          </div>
-        </form> -->
       </div>
       <div class="col-md-7 col-lg-8">
 

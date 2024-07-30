@@ -1,6 +1,5 @@
 <?php
 //Copyright Inotek 2024, by Rafael Flores Galvan;
-//For a more indepth understanding of the following pipeline please refer to: plaza_genova/includes/guardar_reservas_externas.php
 
 #region Migrations
     //
@@ -82,6 +81,7 @@
     //Send mail to Guest & Hotel
     $emailSender->sendEmail($correo, "Detalles de tu Reserva en Plaza Genova", $nombre, "" , $reservation_id, 
     $llegada, $salida, $tarifa, $totalCargo, true);
+
     // Correo de genova: reservaciones@plazagenova.mx
     $emailSender->sendEmail("reservaciones@plazagenova.mx", "Nueva reserva en Plaza Genova", $nombre, $telefono, 
     $reservation_id, $llegada, $salida, $tarifa, $totalCargo);
