@@ -155,6 +155,12 @@ const reservar = () => {
         swal("Sin numero de telefono!", "Agrega un numero de telefono valido!", "warning");
         return
     }
+    const phoneRegex = /^\+?[1-9]\d{7,14}$/;
+    if (!phoneRegex.test(phone)) {
+        swal("El número de teléfono no es válido. Por favor, ingrese un número de teléfono real.");
+        loader.style = "display: none;"
+        return;
+    }
     if (!guests) {
         swal("Sin cantidad de huespedes!", "Agrega un numero de huespedes valido!", "warning");
         return
@@ -167,7 +173,7 @@ const reservar = () => {
         swal("Sin fecha de salida en la reserva!", "Agrega una fecha salida!", "warning");
         return
     }
-    const nameSurnameRegex  = /^[a-zA-Z\s'-]+$/;
+    const nameSurnameRegex  = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]+$/;
     
     if (!nameSurnameRegex .test(name)) {
         swal("El nombre no es válido. Por favor, ingrese un nombre real.")
@@ -225,6 +231,7 @@ const consultar_reserva = (  ) => {
 
     const email = document.getElementById("email").value.trim();
     const name = document.getElementById("name").value.trim();
+    const lastname = document.getElementById("lastname").value.trim();
     const phone = document.getElementById("tel").value.trim();
     const guestsSelect = document.querySelector('select[name="persons"]');
     const guests = guestsSelect.value.trim();;
@@ -256,6 +263,12 @@ const consultar_reserva = (  ) => {
         loader.style = "display: none;"
         return
     }
+    const phoneRegex = /^\+?[1-9]\d{7,14}$/;
+    if (!phoneRegex.test(phone)) {
+        swal("El número de teléfono no es válido. Por favor, ingrese un número de teléfono real.");
+        loader.style = "display: none;"
+        return;
+    }
     if (!guests) {
         swal("Sin cantidad de huespedes!", "Agrega un numero de huespedes valido!", "warning");
         loader.style = "display: none;"
@@ -271,9 +284,15 @@ const consultar_reserva = (  ) => {
         loader.style = "display: none;"
         return
     }
-    const nameSurnameRegex  = /^[a-zA-Z\s'-]+$/;
-    if (!nameSurnameRegex .test(name)) {
+    const nameSurnameRegex  = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]+$/;
+    if (!nameSurnameRegex.test(name)) {
         swal("El nombre no es válido. Por favor, ingrese un nombre real.");
+        loader.style = "display: none;"
+        return;
+    }
+
+    if (!nameSurnameRegex.test(lastname)) {
+        swal("awdwdEl apellido no es válido. Por favor, ingresa un nombre real.");
         loader.style = "display: none;"
         return;
     }
