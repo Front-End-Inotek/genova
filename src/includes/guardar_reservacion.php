@@ -96,6 +96,8 @@
         $query = "SELECT id from huesped where correo = '$correo';";
         $response = $conexion->realizaConsulta($query, "");
         if ($results = mysqli_fetch_array($response)){
+            $query = "UPDATE huesped SET comentarios = 'Pagado via PayPal' WHERE id = $results[0];";
+            $response = $conexion->RetrieveLast($query);
             return $results[0];
              
         } 
@@ -103,12 +105,13 @@
     }
 
     function CreateGuest($conexion, $nombre, $apellido, $correo, $telefono){
-        $query = "INSERT INTO huesped (nombre, apellido, correo, telefono, estado_huesped) VALUES (
+        $query = "INSERT INTO huesped (nombre, apellido, correo, telefono, estado_huesped, comentarios) VALUES (
                         '$nombre', 
                         '$apellido', 
                         '$correo', 
                         '$telefono',
-                        1 
+                        1, 
+                        'Pagado via PayPal'
                         );
                     ";
         $response = $conexion->RetrieveLast($query);
