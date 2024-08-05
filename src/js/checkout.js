@@ -49,7 +49,7 @@
                 "salida" : document.getElementById('checkoutDate').value,
                 "huespedes" : document.getElementById('guests').value,
                 "cargo" : grandTotal,
-                "tarifa" : tarifa, 
+                "tarifaTotal" : tarifa, 
                 'tarifaPromedio' : tarifaPromedio,
                 'ruleIds' : ruleIds,
               }

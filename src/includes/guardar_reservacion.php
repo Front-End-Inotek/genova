@@ -38,7 +38,7 @@
     $totalCargo = $datos['cargo'];
     $ninos = $datos['kids'];
     $tarifaPromedio = $datos['tarifaPromedio'];
-    $tarifaAlta = $datos['tarifa'];
+    $tarifaAlta = $datos['tarifaTotal'];
     $ruleIds = $datos['ruleIds'];
 
 #endregion
@@ -47,7 +47,6 @@
 
 #region Check for pricing
     $daily_charge = $tarifaPromedio;
-
 #endregion
 
 
@@ -72,7 +71,7 @@
     $account_id = CreateAccount($conexion, $ticket_id, $movement_id, $llegada, $totalCargo);
 
     //Create reservation
-    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id, 
+    $reservation_id = CreateReservation($conexion, $reserve_id, $guest_id, $account_id,
     $tarifa, $llegada, $salida, $totalCargo, $huespedes, $movement_id, $daily_charge, $ninos, $paypal_id);
 
     //Update availability
